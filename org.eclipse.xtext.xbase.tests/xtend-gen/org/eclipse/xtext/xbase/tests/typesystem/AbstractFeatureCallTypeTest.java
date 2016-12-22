@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterators;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -43,8 +42,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   
   @BeforeClass
   public static void createSeenExpressionsSet() {
-    HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
-    AbstractFeatureCallTypeTest.seenExpressions = _newHashSet;
+    AbstractFeatureCallTypeTest.seenExpressions = CollectionLiterals.<String>newHashSet();
   }
   
   @AfterClass

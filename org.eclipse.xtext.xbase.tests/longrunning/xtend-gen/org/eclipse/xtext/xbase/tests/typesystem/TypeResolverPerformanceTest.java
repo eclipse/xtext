@@ -30,13 +30,11 @@ public class TypeResolverPerformanceTest extends BatchTypeResolverTest {
   @Override
   public LightweightTypeReference resolvesTo(final String expression, final String type) {
     try {
-      String _replace = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
-      final XExpression xExpression = this.expression(_replace, false);
+      final XExpression xExpression = this.expression(expression.replace("$$", "org::eclipse::xtext::xbase::lib::"), false);
       IBatchTypeResolver _typeResolver = this.getTypeResolver();
       final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
       final LightweightTypeReference lightweight = resolvedTypes.getActualType(xExpression);
-      String _simpleName = lightweight.getSimpleName();
-      Assert.assertEquals(type, _simpleName);
+      Assert.assertEquals(type, lightweight.getSimpleName());
       return lightweight;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

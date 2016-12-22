@@ -152,8 +152,7 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
                   return null;
                 }
               }
-              InputStream _inputStream = jarFile.getInputStream(jarEntry);
-              inputStream = _inputStream;
+              inputStream = jarFile.getInputStream(jarEntry);
               final ClassReader classReader = new ClassReader(inputStream);
               final int accessFlags = classReader.getAccess();
               _xblockexpression_1 = new ClasspathTypeDescriptor(name, accessFlags);

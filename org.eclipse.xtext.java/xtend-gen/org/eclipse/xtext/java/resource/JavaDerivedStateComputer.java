@@ -145,15 +145,13 @@ public class JavaDerivedStateComputer {
     }
     final JvmDeclaredType jvmType = _switchResult;
     jvmType.setPackageName(packageName);
-    String _valueOf = String.valueOf(type.name);
-    jvmType.setSimpleName(_valueOf);
+    jvmType.setSimpleName(String.valueOf(type.name));
     if ((jvmType instanceof JvmGenericType)) {
       if ((type.typeParameters != null)) {
         for (final TypeParameter typeParam : type.typeParameters) {
           {
             final JvmTypeParameter jvmTypeParam = TypesFactory.eINSTANCE.createJvmTypeParameter();
-            String _valueOf_1 = String.valueOf(typeParam.name);
-            jvmTypeParam.setName(_valueOf_1);
+            jvmTypeParam.setName(String.valueOf(typeParam.name));
             EList<JvmTypeParameter> _typeParameters = ((JvmGenericType)jvmType).getTypeParameters();
             _typeParameters.add(jvmTypeParam);
           }

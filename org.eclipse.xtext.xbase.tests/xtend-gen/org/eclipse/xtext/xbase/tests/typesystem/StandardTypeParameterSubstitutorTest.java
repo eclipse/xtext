@@ -40,22 +40,19 @@ public class StandardTypeParameterSubstitutorTest extends AbstractXbaseTestCase 
   @Test
   public void testArrayOfWildcard() {
     final LightweightTypeReference substituted = this.substituteInArrayContext("?");
-    String _simpleName = substituted.getSimpleName();
-    Assert.assertEquals("Object[]", _simpleName);
+    Assert.assertEquals("Object[]", substituted.getSimpleName());
   }
   
   @Test
   public void testArrayOfWildcardString() {
     final LightweightTypeReference substituted = this.substituteInArrayContext("? extends String");
-    String _simpleName = substituted.getSimpleName();
-    Assert.assertEquals("String[]", _simpleName);
+    Assert.assertEquals("String[]", substituted.getSimpleName());
   }
   
   @Test
   public void testArrayOfWildcardSuperString() {
     final LightweightTypeReference substituted = this.substituteInArrayContext("? super String");
-    String _simpleName = substituted.getSimpleName();
-    Assert.assertEquals("Object[]", _simpleName);
+    Assert.assertEquals("Object[]", substituted.getSimpleName());
   }
   
   protected LightweightTypeReference substituteInArrayContext(final String componentType) {
@@ -63,22 +60,19 @@ public class StandardTypeParameterSubstitutorTest extends AbstractXbaseTestCase 
     _builder.append("Iterable<");
     _builder.append(componentType);
     _builder.append(">");
-    final LightweightTypeReference typeReference = this.toTypeReference(_builder);
+    LightweightTypeReference _typeReference = this.toTypeReference(_builder);
+    final LightweightTypeReference typeReference = _typeReference;
     final DeclaratorTypeArgumentCollector collector = new DeclaratorTypeArgumentCollector();
     final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = collector.getTypeParameterMapping(typeReference);
-    int _size = mapping.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, mapping.size());
     Set<JvmTypeParameter> _keySet = mapping.keySet();
     final JvmTypeParameter typeParameter = IterableExtensions.<JvmTypeParameter>head(_keySet);
     final LightweightMergedBoundTypeArgument boundArgument = mapping.get(typeParameter);
-    LightweightTypeReference _typeReference = boundArgument.getTypeReference();
-    String _simpleName = _typeReference.getSimpleName();
-    Assert.assertEquals(componentType, _simpleName);
+    Assert.assertEquals(componentType, boundArgument.getTypeReference().getSimpleName());
     final ITypeReferenceOwner owner = typeReference.getOwner();
     ParameterizedTypeReference _newParameterizedTypeReference = owner.newParameterizedTypeReference(typeParameter);
     final ArrayTypeReference originalArray = owner.newArrayTypeReference(_newParameterizedTypeReference);
-    String _simpleName_1 = originalArray.getSimpleName();
-    Assert.assertEquals("T[]", _simpleName_1);
+    Assert.assertEquals("T[]", originalArray.getSimpleName());
     ITypeReferenceOwner _owner = typeReference.getOwner();
     StandardTypeParameterSubstitutor _standardTypeParameterSubstitutor = new StandardTypeParameterSubstitutor(mapping, _owner);
     final LightweightTypeReference substitutedArray = _standardTypeParameterSubstitutor.substitute(originalArray);

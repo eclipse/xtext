@@ -222,8 +222,7 @@ public class AntlrGrammarComparator {
     while ((continue_ || continueReference)) {
       {
         if (continue_) {
-          boolean _nextToken = this.nextToken(compoundMatcher, this.errorContext.testedGrammar, errorHandler);
-          continue_ = _nextToken;
+          continue_ = this.nextToken(compoundMatcher, this.errorContext.testedGrammar, errorHandler);
         }
         String _xifexpression = null;
         if (continue_) {
@@ -233,8 +232,7 @@ public class AntlrGrammarComparator {
         }
         final String match = _xifexpression;
         if (continueReference) {
-          boolean _nextToken_1 = this.nextToken(compoundMatcherReference, this.errorContext.referenceGrammar, errorHandler);
-          continueReference = _nextToken_1;
+          continueReference = this.nextToken(compoundMatcherReference, this.errorContext.referenceGrammar, errorHandler);
         }
         String _xifexpression_1 = null;
         if (continueReference) {
@@ -260,8 +258,7 @@ public class AntlrGrammarComparator {
   private boolean nextToken(final Matcher matcher, final AntlrGrammarComparator.MatchState state, final AntlrGrammarComparator.IErrorHandler errorHandler) {
     while (matcher.find()) {
       {
-        String _group = matcher.group();
-        state.currentToken = _group;
+        state.currentToken = matcher.group();
         int _start = matcher.start();
         boolean _notEquals = (_start != state.position);
         if (_notEquals) {
@@ -269,8 +266,7 @@ public class AntlrGrammarComparator {
         }
         final String match = matcher.group();
         state.previousToken = match;
-        int _end = matcher.end();
-        state.position = _end;
+        state.position = matcher.end();
         Matcher _matcher = this.p_newline.matcher(match);
         boolean _matches = _matcher.matches();
         if (_matches) {

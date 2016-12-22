@@ -148,8 +148,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     String _simpleName = this._naming.toSimpleName(_abstractValidatorName_2);
     _builder.append(_simpleName);
     _builder.append(" extends ");
-    boolean _isInheritImplementation = this.isInheritImplementation();
-    String _validatorSuperClassName = this._validatorNaming.getValidatorSuperClassName(_isInheritImplementation);
+    String _validatorSuperClassName = this._validatorNaming.getValidatorSuperClassName(this.isInheritImplementation());
     _builder.append(_validatorSuperClassName);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
@@ -296,9 +295,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
   
   @Override
   public List<String> getExportedPackagesRtList(final Grammar grammar) {
-    String _validatorName = this._validatorNaming.getValidatorName(grammar);
-    String _packageName = this._naming.packageName(_validatorName);
-    return CollectionLiterals.<String>newArrayList(_packageName);
+    return CollectionLiterals.<String>newArrayList(this._naming.packageName(this._validatorNaming.getValidatorName(grammar)));
   }
   
   @Override

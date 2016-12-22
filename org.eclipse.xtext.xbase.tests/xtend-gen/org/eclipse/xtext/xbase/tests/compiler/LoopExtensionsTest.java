@@ -179,8 +179,7 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
       app.append(it);
     };
     this.loopExtensions.<String>forEach(app, elements, params, _function);
-    String _string = app.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, app.toString());
   }
   
   protected void assertForEachWithSkip(final Iterable<String> elements, final Function1<? super String, ? extends Boolean> append, final String expectedResult) {
@@ -198,8 +197,7 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
       }
     };
     this.loopExtensions.<String>forEach(app, elements, _function, _function_1);
-    String _string = app.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, app.toString());
   }
   
   protected void assertForEachWithShortcut(final Iterable<String> elements, final String expectedResult) {
@@ -208,7 +206,6 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
       app.append(it);
     };
     this.loopExtensions.<String>forEachWithShortcut(app, elements, _function);
-    String _string = app.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, app.toString());
   }
 }

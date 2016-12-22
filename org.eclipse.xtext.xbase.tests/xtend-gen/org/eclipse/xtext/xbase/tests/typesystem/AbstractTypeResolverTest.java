@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -39,8 +38,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @BeforeClass
   public static void createSeenExpressionsSet() {
-    HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
-    AbstractTypeResolverTest.seenExpressions = _newHashSet;
+    AbstractTypeResolverTest.seenExpressions = CollectionLiterals.<String>newHashSet();
   }
   
   @AfterClass

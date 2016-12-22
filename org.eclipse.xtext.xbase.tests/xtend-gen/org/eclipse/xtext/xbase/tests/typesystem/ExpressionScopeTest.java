@@ -53,17 +53,12 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
   protected void assertContains(final IScope scope, final QualifiedName name) {
     final Iterable<IEObjectDescription> elements = scope.getAllElements();
     final String toString = elements.toString();
-    IEObjectDescription _singleElement = scope.getSingleElement(name);
-    Assert.assertNotNull(toString, _singleElement);
-    Iterable<IEObjectDescription> _elements = scope.getElements(name);
-    boolean _isEmpty = IterableExtensions.isEmpty(_elements);
-    Assert.assertFalse(toString, _isEmpty);
-    final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
+    Assert.assertNotNull(toString, scope.getSingleElement(name));
+    Assert.assertFalse(toString, IterableExtensions.isEmpty(scope.getElements(name)));
+    Assert.assertTrue(toString, IterableExtensions.<IEObjectDescription>exists(elements, ((Function1<IEObjectDescription, Boolean>) (IEObjectDescription it) -> {
       QualifiedName _name = it.getName();
       return Boolean.valueOf(Objects.equal(_name, name));
-    };
-    boolean _exists = IterableExtensions.<IEObjectDescription>exists(elements, _function);
-    Assert.assertTrue(toString, _exists);
+    })));
   }
   
   protected void containsNot(final IExpressionScope scope, final String name) {
@@ -75,17 +70,12 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
   protected void assertContainsNot(final IScope scope, final QualifiedName name) {
     final Iterable<IEObjectDescription> elements = scope.getAllElements();
     final String toString = elements.toString();
-    IEObjectDescription _singleElement = scope.getSingleElement(name);
-    Assert.assertNull(toString, _singleElement);
-    Iterable<IEObjectDescription> _elements = scope.getElements(name);
-    boolean _isEmpty = IterableExtensions.isEmpty(_elements);
-    Assert.assertTrue(toString, _isEmpty);
-    final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
+    Assert.assertNull(toString, scope.getSingleElement(name));
+    Assert.assertTrue(toString, IterableExtensions.isEmpty(scope.getElements(name)));
+    Assert.assertFalse(toString, IterableExtensions.<IEObjectDescription>exists(elements, ((Function1<IEObjectDescription, Boolean>) (IEObjectDescription it) -> {
       QualifiedName _name = it.getName();
       return Boolean.valueOf(Objects.equal(_name, name));
-    };
-    boolean _exists = IterableExtensions.<IEObjectDescription>exists(elements, _function);
-    Assert.assertFalse(toString, _exists);
+    })));
   }
   
   @Test

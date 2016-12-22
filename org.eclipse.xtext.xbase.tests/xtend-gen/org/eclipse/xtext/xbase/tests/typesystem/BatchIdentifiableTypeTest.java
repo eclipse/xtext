@@ -42,20 +42,15 @@ public class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
       IBatchTypeResolver _typeResolver = this.getTypeResolver();
       final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
       final List<JvmIdentifiableElement> identifiables = this.findIdentifiables(xExpression);
-      boolean _isEmpty = identifiables.isEmpty();
-      Assert.assertFalse(_isEmpty);
-      int _size = ((List<String>)Conversions.doWrapArray(types)).size();
-      int _size_1 = identifiables.size();
-      Assert.assertEquals(_size, _size_1);
+      Assert.assertFalse(identifiables.isEmpty());
+      Assert.assertEquals(((List<String>)Conversions.doWrapArray(types)).size(), identifiables.size());
       final Procedure2<JvmIdentifiableElement, Integer> _function = (JvmIdentifiableElement identifiable, Integer index) -> {
         final LightweightTypeReference type = resolvedTypes.getActualType(identifiable);
         Assert.assertNotNull(type);
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("failed for identifiable at ");
         _builder.append(index);
-        Object _get = types[(index).intValue()];
-        String _simpleName = type.getSimpleName();
-        Assert.assertEquals(_builder.toString(), _get, _simpleName);
+        Assert.assertEquals(_builder.toString(), types[(index).intValue()], type.getSimpleName());
       };
       IterableExtensions.<JvmIdentifiableElement>forEach(identifiables, _function);
     } catch (Throwable _e) {

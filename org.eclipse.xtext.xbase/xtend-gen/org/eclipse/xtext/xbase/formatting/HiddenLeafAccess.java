@@ -157,9 +157,7 @@ public class HiddenLeafAccess {
       final ILeafNode start = this.findPreviousLeaf(node, _function);
       HiddenLeafs _xifexpression = null;
       if ((start != null)) {
-        int _endOffset = start.getEndOffset();
-        List<ILeafNode> _findNextHiddenLeafs = this.findNextHiddenLeafs(start);
-        _xifexpression = this.newHiddenLeafs(_endOffset, _findNextHiddenLeafs);
+        _xifexpression = this.newHiddenLeafs(start.getEndOffset(), this.findNextHiddenLeafs(start));
       } else {
         int _offset = 0;
         if (node!=null) {
@@ -198,8 +196,7 @@ public class HiddenLeafAccess {
   protected ILeafNode findPreviousLeaf(final INode node, final Function1<? super ILeafNode, ? extends Boolean> matches) {
     INode current = node;
     while ((current instanceof ICompositeNode)) {
-      INode _lastChild = ((ICompositeNode)current).getLastChild();
-      current = _lastChild;
+      current = ((ICompositeNode)current).getLastChild();
     }
     if (((current instanceof ILeafNode) && (matches.apply(((ILeafNode) current))).booleanValue())) {
       return ((ILeafNode) current);
@@ -223,8 +220,7 @@ public class HiddenLeafAccess {
     {
       INode current = node;
       while ((current instanceof ICompositeNode)) {
-        INode _lastChild = ((ICompositeNode)current).getLastChild();
-        current = _lastChild;
+        current = ((ICompositeNode)current).getLastChild();
       }
       final ArrayList<ILeafNode> result = CollectionLiterals.<ILeafNode>newArrayList();
       if ((current != null)) {

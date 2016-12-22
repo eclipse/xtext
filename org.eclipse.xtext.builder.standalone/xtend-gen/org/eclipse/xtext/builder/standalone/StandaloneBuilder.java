@@ -156,8 +156,7 @@ public class StandaloneBuilder {
     };
     final boolean needsJava = IterableExtensions.<LanguageAccess>exists(_values, _function);
     if ((this.baseDir == null)) {
-      String _property = System.getProperty("user.dir");
-      this.baseDir = _property;
+      this.baseDir = System.getProperty("user.dir");
       StandaloneBuilder.LOG.warn((("Property baseDir not set. Using \'" + this.baseDir) + "\'"));
     }
     if (needsJava) {
@@ -166,8 +165,7 @@ public class StandaloneBuilder {
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
     if ((this.encoding != null)) {
       this.forceDebugLog("Setting encoding.");
-      Collection<LanguageAccess> _values_1 = this.languages.values();
-      this.fileEncodingSetup(_values_1, this.encoding);
+      this.fileEncodingSetup(this.languages.values(), this.encoding);
     }
     StandaloneBuilder.LOG.info("Collecting source models.");
     final long startedAt = System.currentTimeMillis();
@@ -175,12 +173,10 @@ public class StandaloneBuilder {
     if ((this.classPathLookUpFilter != null)) {
       StandaloneBuilder.LOG.info("Class path look up filter is active.");
       final Pattern cpLookUpFilter = Pattern.compile(this.classPathLookUpFilter);
-      final Function1<String, Boolean> _function_1 = (String root) -> {
+      rootsToTravers = IterableExtensions.<String>filter(this.classPathEntries, ((Function1<String, Boolean>) (String root) -> {
         Matcher _matcher = cpLookUpFilter.matcher(root);
         return Boolean.valueOf(_matcher.matches());
-      };
-      Iterable<String> _filter = IterableExtensions.<String>filter(this.classPathEntries, _function_1);
-      rootsToTravers = _filter;
+      }));
       final Iterable<String> _converted_rootsToTravers = (Iterable<String>)rootsToTravers;
       int _length = ((Object[])Conversions.unwrapArray(_converted_rootsToTravers, Object.class)).length;
       String _plus = ("Investigating " + Integer.valueOf(_length));
@@ -209,17 +205,15 @@ public class StandaloneBuilder {
       {
         StandaloneBuilder.LOG.info("Clustering configured.");
         DynamicResourceClusteringPolicy _dynamicResourceClusteringPolicy = new DynamicResourceClusteringPolicy();
-        final Procedure1<DynamicResourceClusteringPolicy> _function_2 = (DynamicResourceClusteringPolicy it) -> {
+        final Procedure1<DynamicResourceClusteringPolicy> _function_1 = (DynamicResourceClusteringPolicy it) -> {
           long _minimumFreeMemory = this.clusteringConfig.getMinimumFreeMemory();
           long _multiply = (_minimumFreeMemory * 1024);
           long _multiply_1 = (_multiply * 1024);
           it.setMinimumFreeMemory(_multiply_1);
-          int _minimumClusterSize = this.clusteringConfig.getMinimumClusterSize();
-          it.setMinimumClusterSize(_minimumClusterSize);
-          long _minimumPercentFreeMemory = this.clusteringConfig.getMinimumPercentFreeMemory();
-          it.setMinimumPercentFreeMemory(_minimumPercentFreeMemory);
+          it.setMinimumClusterSize(this.clusteringConfig.getMinimumClusterSize());
+          it.setMinimumPercentFreeMemory(this.clusteringConfig.getMinimumPercentFreeMemory());
         };
-        _xblockexpression = ObjectExtensions.<DynamicResourceClusteringPolicy>operator_doubleArrow(_dynamicResourceClusteringPolicy, _function_2);
+        _xblockexpression = ObjectExtensions.<DynamicResourceClusteringPolicy>operator_doubleArrow(_dynamicResourceClusteringPolicy, _function_1);
       }
       _xifexpression = _xblockexpression;
     } else {
@@ -255,8 +249,7 @@ public class StandaloneBuilder {
     }
     this.installIndex(resourceSet, index);
     if (needsJava) {
-      File _generateStubs = this.generateStubs(index, sourceResourceURIs);
-      final String stubsClasses = this.compileStubs(_generateStubs);
+      final String stubsClasses = this.compileStubs(this.generateStubs(index, sourceResourceURIs));
       StandaloneBuilder.LOG.info("Installing type provider for stubs.");
       ArrayList<String> _newArrayList_1 = CollectionLiterals.<String>newArrayList(stubsClasses);
       Iterable<String> _plus_6 = Iterables.<String>concat(allClassPathEntries, _newArrayList_1);
@@ -332,8 +325,7 @@ public class StandaloneBuilder {
     String _plus = ("Compiling stubs located in " + _absolutePath);
     StandaloneBuilder.LOG.info(_plus);
     Iterable<String> _plus_1 = Iterables.<String>concat(this.javaSourceDirs, this.sourceDirs);
-    String _absolutePath_1 = stubsDir.getAbsolutePath();
-    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_absolutePath_1);
+    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(stubsDir.getAbsolutePath());
     Iterable<String> _plus_2 = Iterables.<String>concat(_plus_1, _newArrayList);
     final Set<String> sourcesToCompile = this.uniqueEntries(_plus_2);
     String _join = IterableExtensions.join(sourcesToCompile, ",");
@@ -398,8 +390,7 @@ public class StandaloneBuilder {
     String _plus = ("Starting validation for input: \'" + _lastSegment);
     String _plus_1 = (_plus + "\'");
     StandaloneBuilder.LOG.info(_plus_1);
-    URI _uRI_1 = resource.getURI();
-    LanguageAccess _languageAccess = this.languageAccess(_uRI_1);
+    LanguageAccess _languageAccess = this.languageAccess(resource.getURI());
     final IResourceValidator resourceValidator = _languageAccess.getResourceValidator();
     final List<Issue> validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
     return this.issueHandler.handleIssue(validationResult);
@@ -415,10 +406,9 @@ public class StandaloneBuilder {
         String _plus = ("Starting generator for input: \'" + _lastSegment);
         String _plus_1 = (_plus + "\'");
         StandaloneBuilder.LOG.info(_plus_1);
+        this.registerCurrentSource(it.getURI());
         URI _uRI_1 = it.getURI();
-        this.registerCurrentSource(_uRI_1);
-        URI _uRI_2 = it.getURI();
-        final LanguageAccess access = this.languageAccess(_uRI_2);
+        final LanguageAccess access = this.languageAccess(_uRI_1);
         final JavaIoFileSystemAccess fileSystemAccess = this.getFileSystemAccess(access);
         boolean _isWriteStorageResources = this.isWriteStorageResources();
         if (_isWriteStorageResources) {
@@ -471,8 +461,7 @@ public class StandaloneBuilder {
           URI sourceFolderURI = URI.createURI((sourceFolder + "/"));
           boolean _isRelative = sourceFolderURI.isRelative();
           if (_isRelative) {
-            URI _resolve = sourceFolderURI.resolve(projectBaseURI);
-            sourceFolderURI = _resolve;
+            sourceFolderURI = sourceFolderURI.resolve(projectBaseURI);
           }
           boolean _equals = Objects.equal(absoluteSource, sourceFolderURI);
           if (_equals) {
@@ -488,11 +477,8 @@ public class StandaloneBuilder {
   private JavaIoFileSystemAccess getFileSystemAccess(final LanguageAccess language) {
     JavaIoFileSystemAccess fsa = this.configuredFsas.get(language);
     if ((fsa == null)) {
-      File _file = new File(this.baseDir);
-      JavaIoFileSystemAccess _createFileSystemAccess = language.createFileSystemAccess(_file);
-      fsa = _createFileSystemAccess;
-      JavaIoFileSystemAccess _configureFileSystemAccess = this.configureFileSystemAccess(fsa, language);
-      fsa = _configureFileSystemAccess;
+      fsa = language.createFileSystemAccess(new File(this.baseDir));
+      fsa = this.configureFileSystemAccess(fsa, language);
       this.configuredFsas.put(language, fsa);
     }
     return fsa;
@@ -584,8 +570,7 @@ public class StandaloneBuilder {
       if ((name != null)) {
         final int indexOf = name.indexOf(";");
         if ((indexOf > 0)) {
-          String _substring = name.substring(0, indexOf);
-          name = _substring;
+          name = name.substring(0, indexOf);
         }
         Map<String, URI> _platformResourceMap = EcorePlugin.getPlatformResourceMap();
         boolean _containsKey = _platformResourceMap.containsKey(name);

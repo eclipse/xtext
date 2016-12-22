@@ -90,10 +90,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
   protected JvmType _getType(final XFunctionTypeRefImplCustom it) {
     JvmType _xblockexpression = null;
     {
-      boolean _isProcedure = this.isProcedure(it);
-      EList<JvmTypeReference> _paramTypes = it.getParamTypes();
-      int _size = _paramTypes.size();
-      final URI uri = XFunctionTypeRefs.computeTypeUri(_isProcedure, _size);
+      final URI uri = XFunctionTypeRefs.computeTypeUri(this.isProcedure(it), it.getParamTypes().size());
       Resource _eResource = it.eResource();
       ResourceSet _resourceSet = _eResource.getResourceSet();
       EObject _eObject = _resourceSet.getEObject(uri, true);
@@ -154,8 +151,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
     EList<JvmTypeReference> _paramTypes = reference.getParamTypes();
     for (final JvmTypeReference parameter : _paramTypes) {
       {
-        JvmTypeReference _wrapIfNecessary = this.wrapIfNecessary(parameter);
-        final LightweightTypeReference parameterType = this.visit(_wrapIfNecessary);
+        final LightweightTypeReference parameterType = this.visit(this.wrapIfNecessary(parameter));
         result.addParameterType(parameterType);
         ITypeReferenceOwner _owner_1 = this.getOwner();
         final WildcardTypeReference typeArgument = _owner_1.newWildcardTypeReference();
@@ -168,9 +164,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
     JvmTypeReference _returnType = reference.getReturnType();
     boolean _tripleNotEquals = (_returnType != null);
     if (_tripleNotEquals) {
-      JvmTypeReference _returnType_1 = reference.getReturnType();
-      JvmTypeReference _wrapIfNecessary = this.wrapIfNecessary(_returnType_1);
-      final LightweightTypeReference returnType = this.visit(_wrapIfNecessary);
+      final LightweightTypeReference returnType = this.visit(this.wrapIfNecessary(reference.getReturnType()));
       result.setReturnType(returnType);
       if ((reference instanceof XFunctionTypeRefImplCustom)) {
         boolean _isProcedure = this.isProcedure(((XFunctionTypeRefImplCustom)reference));

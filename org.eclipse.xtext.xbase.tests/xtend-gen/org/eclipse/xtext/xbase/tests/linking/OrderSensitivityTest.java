@@ -94,15 +94,13 @@ public class OrderSensitivityTest extends AbstractXbaseTestCase {
       final XAbstractFeatureCall featureCall = ((XAbstractFeatureCall) _last);
       final JvmIdentifiableElement feature = featureCall.getFeature();
       Assert.assertNotNull("feature is not null", feature);
-      boolean _eIsProxy = feature.eIsProxy();
-      Assert.assertFalse("feature is resolved", _eIsProxy);
+      Assert.assertFalse("feature is resolved", feature.eIsProxy());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append(declarator);
       _builder_1.append(".");
       _builder_1.append(expectation);
       String _string = _builder_1.toString();
-      String _identifier = feature.getIdentifier();
-      Assert.assertEquals(_string, _identifier);
+      Assert.assertEquals(_string, feature.getIdentifier());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -120,8 +118,7 @@ public class OrderSensitivityTest extends AbstractXbaseTestCase {
       final XMemberFeatureCall featureCall = ((XMemberFeatureCall) _expression);
       final JvmIdentifiableElement feature = featureCall.getFeature();
       Assert.assertNotNull("feature is not null", feature);
-      boolean _eIsProxy = feature.eIsProxy();
-      Assert.assertFalse("feature is resolved", _eIsProxy);
+      Assert.assertFalse("feature is resolved", feature.eIsProxy());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append(declarator);
       _builder_1.append(".run(");
@@ -130,8 +127,7 @@ public class OrderSensitivityTest extends AbstractXbaseTestCase {
       _builder_1.append(expectation);
       _builder_1.append(")");
       String _string = _builder_1.toString();
-      String _identifier = feature.getIdentifier();
-      Assert.assertEquals(_string, _identifier);
+      Assert.assertEquals(_string, feature.getIdentifier());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

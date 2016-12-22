@@ -103,8 +103,7 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
         final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_emptyMap, it);
         String _name = projectDesc.getName();
         index.setContainer(_name, part);
-        ClassLoader _classLoader = ReusedTypeProviderTest.class.getClassLoader();
-        it.setClasspathURIContext(_classLoader);
+        it.setClasspathURIContext(ReusedTypeProviderTest.class.getClassLoader());
       };
       final XtextResourceSet resourceSet = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
       this.typeProviderFactory.createTypeProvider(resourceSet);
@@ -131,8 +130,7 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
         return this.resourceServiceProviderRegistry.getResourceServiceProvider(it);
       };
       this.builder.build(buildRequest, _function_2);
-      IJvmTypeProvider _findTypeProvider = this.typeProviderFactory.findTypeProvider(resourceSet);
-      ReusedTypeProviderTest.typeProvider = _findTypeProvider;
+      ReusedTypeProviderTest.typeProvider = this.typeProviderFactory.findTypeProvider(resourceSet);
     }
   }
   
@@ -159,18 +157,12 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
     Assert.assertNotNull(containsValue);
     EList<JvmFormalParameter> _parameters = containsValue.getParameters();
     JvmFormalParameter firstParam = _parameters.get(0);
+    Assert.assertEquals(1, firstParam.getAnnotations().size());
     EList<JvmAnnotationReference> _annotations = firstParam.getAnnotations();
-    int _size = _annotations.size();
-    Assert.assertEquals(1, _size);
-    EList<JvmAnnotationReference> _annotations_1 = firstParam.getAnnotations();
-    JvmAnnotationReference annotationReference = _annotations_1.get(0);
+    JvmAnnotationReference annotationReference = _annotations.get(0);
     JvmAnnotationType annotationType = annotationReference.getAnnotation();
-    boolean _eIsProxy = annotationType.eIsProxy();
-    Assert.assertTrue(_eIsProxy);
-    URI _uRI = EcoreUtil.getURI(annotationType);
-    URI _trimFragment = _uRI.trimFragment();
-    String _string = _trimFragment.toString();
-    Assert.assertEquals("java:/Objects/javax.annotation.Nullable", _string);
+    Assert.assertTrue(annotationType.eIsProxy());
+    Assert.assertEquals("java:/Objects/javax.annotation.Nullable", EcoreUtil.getURI(annotationType).trimFragment().toString());
   }
   
   @Test

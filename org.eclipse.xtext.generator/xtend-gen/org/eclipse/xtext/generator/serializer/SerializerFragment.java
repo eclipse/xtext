@@ -152,15 +152,13 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   @Override
   public void generate(final Xtend2ExecutionContext ctx) {
     final SerializerFragment2 delegate = new SerializerFragment2();
-    boolean _isGenerateStub = this.isGenerateStub();
-    delegate.setGenerateStub(_isGenerateStub);
+    delegate.setGenerateStub(this.isGenerateStub());
     delegate.setDetectSyntheticTerminals(this.detectSyntheticTerminals);
     delegate.setGenerateDebugData(this.generateDebugData);
     delegate.setGenerateSupportForDeprecatedContextEObject(this.generateSupportForDeprecatedContextEObject);
     Injector _injector = this.adapterSetup.getInjector();
     CodeConfig _instance = _injector.<CodeConfig>getInstance(CodeConfig.class);
-    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
-    _instance.setPreferXtendStubs(_isGenerateXtendStub);
+    _instance.setPreferXtendStubs(this.isGenerateXtendStub());
     Injector _injector_1 = this.adapterSetup.getInjector();
     delegate.initialize(_injector_1);
     delegate.generate();
@@ -168,9 +166,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   
   @Override
   public List<String> getExportedPackagesRtList(final Grammar grammar) {
-    SerializerGenFileNames.GenFileName _semanticSequencer = this.names.getSemanticSequencer();
-    String _packageName = _semanticSequencer.getPackageName();
-    return CollectionLiterals.<String>newArrayList(_packageName);
+    return CollectionLiterals.<String>newArrayList(this.names.getSemanticSequencer().getPackageName());
   }
   
   @Override

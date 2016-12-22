@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -93,8 +92,7 @@ public class AbstractConstantExpressionsInterpreter {
   }
   
   protected Object _internalEvaluate(final XCastedExpression expression, final Context ctx) {
-    XExpression _target = expression.getTarget();
-    return this.evaluate(_target, ctx);
+    return this.evaluate(expression.getTarget(), ctx);
   }
   
   protected Object _internalEvaluate(final XStringLiteral it, final Context ctx) {
@@ -110,10 +108,7 @@ public class AbstractConstantExpressionsInterpreter {
   }
   
   protected Object _internalEvaluate(final XTypeLiteral it, final Context ctx) {
-    JvmType _type = it.getType();
-    EList<String> _arrayDimensions = it.getArrayDimensions();
-    int _size = _arrayDimensions.size();
-    return this.toTypeReference(_type, _size);
+    return this.toTypeReference(it.getType(), it.getArrayDimensions().size());
   }
   
   protected JvmTypeReference toTypeReference(final JvmType type, final int arrayDimensions) {

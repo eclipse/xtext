@@ -12,10 +12,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
-import java.util.List;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.Output;
@@ -70,8 +66,7 @@ public class Generator2AdapterSetup {
     Injector _xblockexpression = null;
     {
       if ((this.injector == null)) {
-        Injector _createInjector = this.createInjector();
-        this.injector = _createInjector;
+        this.injector = this.createInjector();
       }
       _xblockexpression = this.injector;
     }
@@ -80,10 +75,8 @@ public class Generator2AdapterSetup {
   
   private Injector createInjector() {
     final Procedure1<DefaultGeneratorModule> _function = (DefaultGeneratorModule it) -> {
-      XtextProjectConfig _createProjectConfig = this.createProjectConfig();
-      it.setProject(_createProjectConfig);
-      CodeConfig _createCodeConfig = this.createCodeConfig();
-      it.setCode(_createCodeConfig);
+      it.setProject(this.createProjectConfig());
+      it.setCode(this.createCodeConfig());
     };
     final DefaultGeneratorModule generatorModule = ObjectExtensions.<DefaultGeneratorModule>operator_doubleArrow(new DefaultGeneratorModule() {
       @Override
@@ -117,79 +110,47 @@ public class Generator2AdapterSetup {
     StandardProjectConfig _standardProjectConfig = new StandardProjectConfig();
     final Procedure1<StandardProjectConfig> _function = (StandardProjectConfig it) -> {
       it.setCreateEclipseMetaData(true);
-      String _projectNameRt = this.naming.getProjectNameRt();
-      it.setBaseName(_projectNameRt);
+      it.setBaseName(this.naming.getProjectNameRt());
       Output _output = this.xpandContext.getOutput();
       Outlet _outlet = _output.getOutlet(Generator.PLUGIN_RT);
       final String runtimeRoot = _outlet.getPath();
       String _baseName = it.getBaseName();
       final int projectNameIndex = runtimeRoot.lastIndexOf(_baseName);
       if ((projectNameIndex >= 0)) {
-        String _substring = runtimeRoot.substring(0, projectNameIndex);
-        it.setRootPath(_substring);
+        it.setRootPath(runtimeRoot.substring(0, projectNameIndex));
       } else {
         it.setRootPath(runtimeRoot);
       }
       RuntimeProjectConfig _runtime = it.getRuntime();
-      String _baseName_1 = it.getBaseName();
-      _runtime.setName(_baseName_1);
+      _runtime.setName(it.getBaseName());
       RuntimeProjectConfig _runtime_1 = it.getRuntime();
       _runtime_1.setRoot(runtimeRoot);
       RuntimeProjectConfig _runtime_2 = it.getRuntime();
-      Output _output_1 = this.xpandContext.getOutput();
-      Outlet _outlet_1 = _output_1.getOutlet(Generator.SRC);
-      String _path = _outlet_1.getPath();
-      _runtime_2.setSrc(_path);
+      _runtime_2.setSrc(this.xpandContext.getOutput().getOutlet(Generator.SRC).getPath());
       RuntimeProjectConfig _runtime_3 = it.getRuntime();
-      Output _output_2 = this.xpandContext.getOutput();
-      Outlet _outlet_2 = _output_2.getOutlet(Generator.SRC_GEN);
-      String _path_1 = _outlet_2.getPath();
-      _runtime_3.setSrcGen(_path_1);
+      _runtime_3.setSrcGen(this.xpandContext.getOutput().getOutlet(Generator.SRC_GEN).getPath());
       RuntimeProjectConfig _runtime_4 = it.getRuntime();
-      Output _output_3 = this.xpandContext.getOutput();
-      Outlet _outlet_3 = _output_3.getOutlet(Generator.MODEL);
-      String _path_2 = _outlet_3.getPath();
-      _runtime_4.setEcoreModel(_path_2);
+      _runtime_4.setEcoreModel(this.xpandContext.getOutput().getOutlet(Generator.MODEL).getPath());
       BundleProjectConfig _eclipsePlugin = it.getEclipsePlugin();
       _eclipsePlugin.setEnabled(true);
       BundleProjectConfig _eclipsePlugin_1 = it.getEclipsePlugin();
-      String _projectNameUi = this.naming.getProjectNameUi();
-      _eclipsePlugin_1.setName(_projectNameUi);
+      _eclipsePlugin_1.setName(this.naming.getProjectNameUi());
       BundleProjectConfig _eclipsePlugin_2 = it.getEclipsePlugin();
-      Output _output_4 = this.xpandContext.getOutput();
-      Outlet _outlet_4 = _output_4.getOutlet(Generator.PLUGIN_UI);
-      String _path_3 = _outlet_4.getPath();
-      _eclipsePlugin_2.setRoot(_path_3);
+      _eclipsePlugin_2.setRoot(this.xpandContext.getOutput().getOutlet(Generator.PLUGIN_UI).getPath());
       BundleProjectConfig _eclipsePlugin_3 = it.getEclipsePlugin();
-      Output _output_5 = this.xpandContext.getOutput();
-      Outlet _outlet_5 = _output_5.getOutlet(Generator.SRC_UI);
-      String _path_4 = _outlet_5.getPath();
-      _eclipsePlugin_3.setSrc(_path_4);
+      _eclipsePlugin_3.setSrc(this.xpandContext.getOutput().getOutlet(Generator.SRC_UI).getPath());
       BundleProjectConfig _eclipsePlugin_4 = it.getEclipsePlugin();
-      Output _output_6 = this.xpandContext.getOutput();
-      Outlet _outlet_6 = _output_6.getOutlet(Generator.SRC_GEN_UI);
-      String _path_5 = _outlet_6.getPath();
-      _eclipsePlugin_4.setSrcGen(_path_5);
+      _eclipsePlugin_4.setSrcGen(this.xpandContext.getOutput().getOutlet(Generator.SRC_GEN_UI).getPath());
       BundleProjectConfig _genericIde = it.getGenericIde();
       _genericIde.setEnabled(true);
       BundleProjectConfig _genericIde_1 = it.getGenericIde();
-      String _projectNameIde = this.naming.getProjectNameIde();
-      _genericIde_1.setName(_projectNameIde);
+      _genericIde_1.setName(this.naming.getProjectNameIde());
       BundleProjectConfig _genericIde_2 = it.getGenericIde();
-      Output _output_7 = this.xpandContext.getOutput();
-      Outlet _outlet_7 = _output_7.getOutlet(Generator.PLUGIN_IDE);
-      String _path_6 = _outlet_7.getPath();
-      _genericIde_2.setRoot(_path_6);
+      _genericIde_2.setRoot(this.xpandContext.getOutput().getOutlet(Generator.PLUGIN_IDE).getPath());
       BundleProjectConfig _genericIde_3 = it.getGenericIde();
-      Output _output_8 = this.xpandContext.getOutput();
-      Outlet _outlet_8 = _output_8.getOutlet(Generator.SRC_IDE);
-      String _path_7 = _outlet_8.getPath();
-      _genericIde_3.setSrc(_path_7);
+      _genericIde_3.setSrc(this.xpandContext.getOutput().getOutlet(Generator.SRC_IDE).getPath());
       BundleProjectConfig _genericIde_4 = it.getGenericIde();
-      Output _output_9 = this.xpandContext.getOutput();
-      Outlet _outlet_9 = _output_9.getOutlet(Generator.SRC_GEN_IDE);
-      String _path_8 = _outlet_9.getPath();
-      _genericIde_4.setSrcGen(_path_8);
+      _genericIde_4.setSrcGen(this.xpandContext.getOutput().getOutlet(Generator.SRC_GEN_IDE).getPath());
     };
     return ObjectExtensions.<StandardProjectConfig>operator_doubleArrow(_standardProjectConfig, _function);
   }
@@ -197,10 +158,8 @@ public class Generator2AdapterSetup {
   private CodeConfig createCodeConfig() {
     CodeConfig _codeConfig = new CodeConfig();
     final Procedure1<CodeConfig> _function = (CodeConfig it) -> {
-      String _lineDelimiter = this.naming.getLineDelimiter();
-      it.setLineDelimiter(_lineDelimiter);
-      String _fileHeader = this.naming.fileHeader();
-      it.setFileHeader(_fileHeader);
+      it.setLineDelimiter(this.naming.getLineDelimiter());
+      it.setFileHeader(this.naming.fileHeader());
     };
     return ObjectExtensions.<CodeConfig>operator_doubleArrow(_codeConfig, _function);
   }
@@ -208,22 +167,11 @@ public class Generator2AdapterSetup {
   private IXtextGeneratorLanguage createLanguage(final Injector generatorInjector) {
     XtextGeneratorLanguage _xtextGeneratorLanguage = new XtextGeneratorLanguage();
     final Procedure1<XtextGeneratorLanguage> _function = (XtextGeneratorLanguage it) -> {
-      Grammar _grammar = this.languageConfig.getGrammar();
-      Resource _eResource = _grammar.eResource();
-      URI _uRI = _eResource.getURI();
-      String _string = _uRI.toString();
-      it.setGrammarUri(_string);
-      Grammar _grammar_1 = this.languageConfig.getGrammar();
-      Resource _eResource_1 = _grammar_1.eResource();
-      ResourceSet _resourceSet = _eResource_1.getResourceSet();
-      it.setResourceSet(_resourceSet);
-      Grammar _grammar_2 = this.languageConfig.getGrammar();
-      List<String> _fileExtensions = this.languageConfig.getFileExtensions(_grammar_2);
-      String _join = IterableExtensions.join(_fileExtensions, ",");
-      it.setFileExtensions(_join);
+      it.setGrammarUri(this.languageConfig.getGrammar().eResource().getURI().toString());
+      it.setResourceSet(this.languageConfig.getGrammar().eResource().getResourceSet());
+      it.setFileExtensions(IterableExtensions.join(this.languageConfig.getFileExtensions(this.languageConfig.getGrammar()), ","));
       generatorInjector.injectMembers(it);
-      Grammar _grammar_3 = this.languageConfig.getGrammar();
-      it.initialize(_grammar_3);
+      it.initialize(this.languageConfig.getGrammar());
     };
     return ObjectExtensions.<XtextGeneratorLanguage>operator_doubleArrow(_xtextGeneratorLanguage, _function);
   }

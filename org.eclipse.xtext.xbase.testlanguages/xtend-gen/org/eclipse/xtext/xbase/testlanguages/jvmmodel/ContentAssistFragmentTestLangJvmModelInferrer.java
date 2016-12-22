@@ -8,7 +8,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -62,8 +61,7 @@ public class ContentAssistFragmentTestLangJvmModelInferrer extends AbstractModel
       EList<JvmMember> _members = it.getMembers();
       JvmTypeReference _typeRef = this._typeReferenceBuilder.typeRef(Void.class);
       final Procedure1<JvmOperation> _function_1 = (JvmOperation it_1) -> {
-        XExpression _expression = element.getExpression();
-        this._jvmTypesBuilder.setBody(it_1, _expression);
+        this._jvmTypesBuilder.setBody(it_1, element.getExpression());
       };
       JvmOperation _method = this._jvmTypesBuilder.toMethod(element, "hello", _typeRef, _function_1);
       this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);

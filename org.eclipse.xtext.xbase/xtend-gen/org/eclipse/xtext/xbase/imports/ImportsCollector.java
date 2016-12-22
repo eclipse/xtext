@@ -3,9 +3,7 @@ package org.eclipse.xtext.xbase.imports;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -62,8 +60,7 @@ public class ImportsCollector {
         if (_contains) {
           final EObject semanticElement = node.getSemanticElement();
           if ((semanticElement != null)) {
-            ICompositeNode _findActualNodeFor_1 = NodeModelUtils.findActualNodeFor(semanticElement);
-            this.visit(semanticElement, _findActualNodeFor_1, acceptor);
+            this.visit(semanticElement, NodeModelUtils.findActualNodeFor(semanticElement), acceptor);
           }
         }
         if ((node.isHidden() && this.grammarAccess.getML_COMMENTRule().equals(node.getGrammarElement()))) {
@@ -82,8 +79,7 @@ public class ImportsCollector {
     int _length = textRegion.getLength();
     final int endOffset = (_offset_1 + _length);
     while (((actualOffsetNode.getParent() != null) && (actualOffsetNode.getTotalEndOffset() < endOffset))) {
-      ICompositeNode _parent = actualOffsetNode.getParent();
-      actualOffsetNode = _parent;
+      actualOffsetNode = actualOffsetNode.getParent();
     }
     final EObject actualSemanticObj = actualOffsetNode.getSemanticElement();
     return actualSemanticObj;
@@ -93,8 +89,7 @@ public class ImportsCollector {
   }
   
   protected void _visit(final JvmTypeReference semanticElement, final INode originNode, final ImportsAcceptor acceptor) {
-    JvmType _type = semanticElement.getType();
-    this.visit(_type, originNode, acceptor);
+    this.visit(semanticElement.getType(), originNode, acceptor);
   }
   
   protected void _visit(final XAbstractFeatureCall semanticObj, final INode originNode, final ImportsAcceptor acceptor) {
@@ -132,10 +127,7 @@ public class ImportsCollector {
   protected void _visit(final JvmGenericType jvmType, final INode originNode, final ImportsAcceptor acceptor) {
     boolean _isAnonymous = jvmType.isAnonymous();
     if (_isAnonymous) {
-      EList<JvmTypeReference> _superTypes = jvmType.getSuperTypes();
-      JvmTypeReference _last = IterableExtensions.<JvmTypeReference>last(_superTypes);
-      JvmType _type = _last.getType();
-      this.visit(_type, originNode, acceptor);
+      this.visit(IterableExtensions.<JvmTypeReference>last(jvmType.getSuperTypes()).getType(), originNode, acceptor);
     } else {
       this._visit(((JvmDeclaredType) jvmType), originNode, acceptor);
     }
@@ -160,26 +152,20 @@ public class ImportsCollector {
     if (((referencedType.getDeclaringType() == null) || outerSegment.equals(referencedType.getSimpleName()))) {
       return referencedType;
     }
-    JvmDeclaredType _declaringType = referencedType.getDeclaringType();
-    return this.findDeclaringTypeBySimpleName(_declaringType, outerSegment);
+    return this.findDeclaringTypeBySimpleName(referencedType.getDeclaringType(), outerSegment);
   }
   
   protected void _visit(final XConstructorCall semanticElement, final INode originNode, final ImportsAcceptor acceptor) {
-    JvmConstructor _constructor = semanticElement.getConstructor();
-    JvmDeclaredType _declaringType = _constructor.getDeclaringType();
-    this.visit(_declaringType, originNode, acceptor);
+    this.visit(semanticElement.getConstructor().getDeclaringType(), originNode, acceptor);
   }
   
   protected void _visit(final XAnnotation semanticElement, final INode originNode, final ImportsAcceptor acceptor) {
-    JvmType _annotationType = semanticElement.getAnnotationType();
-    this.visit(_annotationType, originNode, acceptor);
+    this.visit(semanticElement.getAnnotationType(), originNode, acceptor);
   }
   
   protected void _visit(final XTypeLiteral semanticElement, final INode originNode, final ImportsAcceptor acceptor) {
     final List<INode> elementNode = NodeModelUtils.findNodesForFeature(semanticElement, XbasePackage.Literals.XTYPE_LITERAL__TYPE);
-    JvmType _type = semanticElement.getType();
-    INode _head = IterableExtensions.<INode>head(elementNode);
-    this.visit(_type, _head, acceptor);
+    this.visit(semanticElement.getType(), IterableExtensions.<INode>head(elementNode), acceptor);
   }
   
   protected void _visit(final Void nullCase, final INode originNode, final ImportsAcceptor acceptor) {
@@ -207,32 +193,25 @@ public class ImportsCollector {
     char _charValue = _valueOf.charValue();
     int firstDelimiter = text.indexOf(_charValue);
     if ((firstDelimiter == (-1))) {
+      firstDelimiter = text.indexOf(Character.valueOf('$').charValue());
+    } else {
       Character _valueOf_1 = Character.valueOf('$');
       char _charValue_1 = _valueOf_1.charValue();
-      int _indexOf = text.indexOf(_charValue_1);
-      firstDelimiter = _indexOf;
-    } else {
-      Character _valueOf_2 = Character.valueOf('$');
-      char _charValue_2 = _valueOf_2.charValue();
-      int dollar = text.indexOf(_charValue_2);
+      int dollar = text.indexOf(_charValue_1);
       if ((dollar != (-1))) {
-        int _min = Math.min(firstDelimiter, dollar);
-        firstDelimiter = _min;
+        firstDelimiter = Math.min(firstDelimiter, dollar);
       }
     }
     if ((firstDelimiter == (-1))) {
-      int _indexOf_1 = text.indexOf("::");
-      firstDelimiter = _indexOf_1;
+      firstDelimiter = text.indexOf("::");
       if (((firstDelimiter == (text.length() - 2)) && (firstDelimiter >= 0))) {
-        String _substring = text.substring(0, firstDelimiter);
-        text = _substring;
+        text = text.substring(0, firstDelimiter);
         firstDelimiter = (-1);
       }
     } else {
       int colon = text.indexOf("::");
       if (((colon != (text.length() - 2)) && (colon != (-1)))) {
-        int _min_1 = Math.min(firstDelimiter, colon);
-        firstDelimiter = _min_1;
+        firstDelimiter = Math.min(firstDelimiter, colon);
       }
     }
     if ((firstDelimiter != (-1))) {

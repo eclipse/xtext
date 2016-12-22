@@ -13,7 +13,6 @@ import foo.TestAnnotation;
 import foo.TestAnnotation2;
 import foo.TestAnnotations;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.AbstractList;
@@ -35,7 +34,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
@@ -109,19 +107,16 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         EList<JvmMember> _members_1 = it.getMembers();
         this.builder.<JvmGenericType>operator_add(_members_1, innerClassString);
         EList<JvmMember> _members_2 = it.getMembers();
-        JvmTypeReference _typeForName = this.references.getTypeForName(String.class, expression);
         final Procedure1<JvmOperation> _function_1 = (JvmOperation fooMethod) -> {
           EList<JvmFormalParameter> _parameters = fooMethod.getParameters();
-          JvmParameterizedTypeReference _createTypeRef = this.references.createTypeRef(innerClass);
-          JvmFormalParameter _parameter = this.builder.toParameter(it, "p1", _createTypeRef);
+          JvmFormalParameter _parameter = this.builder.toParameter(it, "p1", this.references.createTypeRef(innerClass));
           this.builder.<JvmFormalParameter>operator_add(_parameters, _parameter);
           EList<JvmFormalParameter> _parameters_1 = fooMethod.getParameters();
-          JvmParameterizedTypeReference _createTypeRef_1 = this.references.createTypeRef(innerClassString);
-          JvmFormalParameter _parameter_1 = this.builder.toParameter(it, "p2", _createTypeRef_1);
+          JvmFormalParameter _parameter_1 = this.builder.toParameter(it, "p2", this.references.createTypeRef(innerClassString));
           this.builder.<JvmFormalParameter>operator_add(_parameters_1, _parameter_1);
           this.builder.setBody(fooMethod, expression);
         };
-        JvmOperation _method = this.builder.toMethod(it, "foo", _typeForName, _function_1);
+        JvmOperation _method = this.builder.toMethod(it, "foo", this.references.getTypeForName(String.class, expression), _function_1);
         this.builder.<JvmOperation>operator_add(_members_2, _method);
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Outer", _function);
@@ -142,25 +137,16 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       String _plus_1 = (_plus + ".java");
       CharSequence _get = _files.get(_plus_1);
       final String code = _get.toString();
-      boolean _contains = code.contains("import");
-      Assert.assertFalse(_contains);
-      boolean _contains_1 = code.contains("java.lang.String foo");
-      Assert.assertTrue(code, _contains_1);
+      Assert.assertFalse(code.contains("import"));
+      Assert.assertTrue(code, code.contains("java.lang.String foo"));
       String _identifier_1 = clazz.getIdentifier();
       final Class<?> compiledClass = this.javaCompiler.compileToClass(_identifier_1, code);
       Resource _eResource_4 = expression.eResource();
       EList<EObject> _contents_1 = _eResource_4.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents_1);
       this.helper.assertNoErrors(_head);
-      Class<?>[] _declaredClasses = compiledClass.getDeclaredClasses();
-      int _size = ((List<Class<?>>)Conversions.doWrapArray(_declaredClasses)).size();
-      Assert.assertEquals(2, _size);
-      Class<?>[] _declaredClasses_1 = compiledClass.getDeclaredClasses();
-      Class<?> _head_1 = IterableExtensions.<Class<?>>head(((Iterable<Class<?>>)Conversions.doWrapArray(_declaredClasses_1)));
-      Class<?>[] _declaredClasses_2 = compiledClass.getDeclaredClasses();
-      Class<?> _last = IterableExtensions.<Class<?>>last(((Iterable<Class<?>>)Conversions.doWrapArray(_declaredClasses_2)));
-      Method _method = compiledClass.getMethod("foo", _head_1, _last);
-      Assert.assertNotNull(_method);
+      Assert.assertEquals(2, ((List<Class<?>>)Conversions.doWrapArray(compiledClass.getDeclaredClasses())).size());
+      Assert.assertNotNull(compiledClass.getMethod("foo", IterableExtensions.<Class<?>>head(((Iterable<Class<?>>)Conversions.doWrapArray(compiledClass.getDeclaredClasses()))), IterableExtensions.<Class<?>>last(((Iterable<Class<?>>)Conversions.doWrapArray(compiledClass.getDeclaredClasses())))));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -184,12 +170,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmOperation>operator_add(_members, _method);
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiledClass = this.compile(_eResource, clazz);
+      final Class<?> compiledClass = this.compile(expression.eResource(), clazz);
       final Object instance = compiledClass.newInstance();
-      Method _method = compiledClass.getMethod("doStuff", String.class);
-      Object _invoke = _method.invoke(instance, "foo");
-      Assert.assertEquals("FOO", _invoke);
+      Assert.assertEquals("FOO", compiledClass.getMethod("doStuff", String.class).invoke(instance, "foo"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -209,16 +192,12 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmOperation>operator_add(_members, _method);
       };
       final JvmAnnotationType clazz = this.builder.toAnnotationType(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiledClass = this.compile(_eResource, clazz);
-      boolean _isAnnotation = compiledClass.isAnnotation();
-      Assert.assertTrue(_isAnnotation);
+      final Class<?> compiledClass = this.compile(expression.eResource(), clazz);
+      Assert.assertTrue(compiledClass.isAnnotation());
       Method[] _methods = compiledClass.getMethods();
       final Method method = IterableExtensions.<Method>head(((Iterable<Method>)Conversions.doWrapArray(_methods)));
-      String _name = method.getName();
-      Assert.assertEquals("theTruth", _name);
-      Object _defaultValue = method.getDefaultValue();
-      Assert.assertEquals(Integer.valueOf(42), _defaultValue);
+      Assert.assertEquals("theTruth", method.getName());
+      Assert.assertEquals(Integer.valueOf(42), method.getDefaultValue());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -245,26 +224,16 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmOperation>operator_add(_members_1, _method_1);
       };
       final JvmAnnotationType clazz = this.builder.toAnnotationType(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiledClass = this.compile(_eResource, clazz);
-      boolean _isAnnotation = compiledClass.isAnnotation();
-      Assert.assertTrue(_isAnnotation);
-      Method[] _methods = compiledClass.getMethods();
-      final Function1<Method, Boolean> _function_1 = (Method it) -> {
+      final Class<?> compiledClass = this.compile(expression.eResource(), clazz);
+      Assert.assertTrue(compiledClass.isAnnotation());
+      Assert.assertEquals(String.class, IterableExtensions.<Method>findFirst(((Iterable<Method>)Conversions.doWrapArray(compiledClass.getMethods())), ((Function1<Method, Boolean>) (Method it) -> {
         String _name = it.getName();
         return Boolean.valueOf(Objects.equal(_name, "value"));
-      };
-      Method _findFirst = IterableExtensions.<Method>findFirst(((Iterable<Method>)Conversions.doWrapArray(_methods)), _function_1);
-      Object _defaultValue = _findFirst.getDefaultValue();
-      Assert.assertEquals(String.class, _defaultValue);
-      Method[] _methods_1 = compiledClass.getMethods();
-      final Function1<Method, Boolean> _function_2 = (Method it) -> {
+      })).getDefaultValue());
+      Assert.assertNull(IterableExtensions.<Method>findFirst(((Iterable<Method>)Conversions.doWrapArray(compiledClass.getMethods())), ((Function1<Method, Boolean>) (Method it) -> {
         String _name = it.getName();
         return Boolean.valueOf(Objects.equal(_name, "otherValue"));
-      };
-      Method _findFirst_1 = IterableExtensions.<Method>findFirst(((Iterable<Method>)Conversions.doWrapArray(_methods_1)), _function_2);
-      Object _defaultValue_1 = _findFirst_1.getDefaultValue();
-      Assert.assertNull(_defaultValue_1);
+      })).getDefaultValue());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -281,10 +250,8 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmTypeReference>operator_add(_superTypes, _typeRef);
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiled = this.compile(_eResource, clazz);
-      boolean _isAssignableFrom = Iterable.class.isAssignableFrom(compiled);
-      Assert.assertTrue(_isAssignableFrom);
+      final Class<?> compiled = this.compile(expression.eResource(), clazz);
+      Assert.assertTrue(Iterable.class.isAssignableFrom(compiled));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -301,12 +268,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmTypeReference>operator_add(_superTypes, _typeRef);
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiled = this.compile(_eResource, clazz);
-      boolean _isAssignableFrom = Iterable.class.isAssignableFrom(compiled);
-      Assert.assertTrue(_isAssignableFrom);
-      boolean _isAssignableFrom_1 = AbstractList.class.isAssignableFrom(compiled);
-      Assert.assertTrue(_isAssignableFrom_1);
+      final Class<?> compiled = this.compile(expression.eResource(), clazz);
+      Assert.assertTrue(Iterable.class.isAssignableFrom(compiled));
+      Assert.assertTrue(AbstractList.class.isAssignableFrom(compiled));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -331,14 +295,12 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmOperation>operator_add(_members_2, _setter);
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiled = this.compile(_eResource, clazz);
+      final Class<?> compiled = this.compile(expression.eResource(), clazz);
       final Object inst = compiled.newInstance();
       final Method getter = compiled.getMethod("getX");
       final Method setter = compiled.getMethod("setX", String.class);
       setter.invoke(inst, "FOO");
-      Object _invoke = getter.invoke(inst);
-      Assert.assertEquals("FOO", _invoke);
+      Assert.assertEquals("FOO", getter.invoke(inst));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -351,31 +313,24 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Procedure1<JvmEnumerationType> _function = (JvmEnumerationType it) -> {
         EList<JvmMember> _members = it.getMembers();
         final Procedure1<JvmEnumerationLiteral> _function_1 = (JvmEnumerationLiteral literal) -> {
-          JvmParameterizedTypeReference _createTypeRef = this.references.createTypeRef(it);
-          literal.setType(_createTypeRef);
+          literal.setType(this.references.createTypeRef(it));
         };
         JvmEnumerationLiteral _enumerationLiteral = this.builder.toEnumerationLiteral(expression, "BAR", _function_1);
         this.builder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
         EList<JvmMember> _members_1 = it.getMembers();
         final Procedure1<JvmEnumerationLiteral> _function_2 = (JvmEnumerationLiteral literal) -> {
-          JvmParameterizedTypeReference _createTypeRef = this.references.createTypeRef(it);
-          literal.setType(_createTypeRef);
+          literal.setType(this.references.createTypeRef(it));
         };
         JvmEnumerationLiteral _enumerationLiteral_1 = this.builder.toEnumerationLiteral(expression, "BAZ", _function_2);
         this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
       };
       final JvmEnumerationType enumeration = this.builder.toEnumerationType(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiled = this.compile(_eResource, enumeration);
+      final Class<?> compiled = this.compile(expression.eResource(), enumeration);
       final Method valuesMethod = compiled.getMethod("values");
       Object _invoke = valuesMethod.invoke(null);
       final Object[] values = ((Object[]) _invoke);
-      Object _get = values[0];
-      String _string = _get.toString();
-      Assert.assertEquals("BAR", _string);
-      Object _get_1 = values[1];
-      String _string_1 = _get_1.toString();
-      Assert.assertEquals("BAZ", _string_1);
+      Assert.assertEquals("BAR", values[0].toString());
+      Assert.assertEquals("BAZ", values[1].toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -389,31 +344,24 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Procedure1<JvmEnumerationType> _function = (JvmEnumerationType it) -> {
         EList<JvmMember> _members = it.getMembers();
         final Procedure1<JvmEnumerationLiteral> _function_1 = (JvmEnumerationLiteral literal) -> {
-          JvmParameterizedTypeReference _createTypeRef = this.references.createTypeRef(it);
-          literal.setType(_createTypeRef);
+          literal.setType(this.references.createTypeRef(it));
         };
         JvmEnumerationLiteral _enumerationLiteral = this.builder.toEnumerationLiteral(expression, "BAR", _function_1);
         this.builder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
         EList<JvmMember> _members_1 = it.getMembers();
         final Procedure1<JvmEnumerationLiteral> _function_2 = (JvmEnumerationLiteral literal) -> {
-          JvmParameterizedTypeReference _createTypeRef = this.references.createTypeRef(it);
-          literal.setType(_createTypeRef);
+          literal.setType(this.references.createTypeRef(it));
         };
         JvmEnumerationLiteral _enumerationLiteral_1 = this.builder.toEnumerationLiteral(expression, "BAZ", _function_2);
         this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
       };
       final JvmEnumerationType enumeration = ObjectExtensions.<JvmEnumerationType>operator_doubleArrow(_enumerationType, _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiled = this.compile(_eResource, enumeration);
+      final Class<?> compiled = this.compile(expression.eResource(), enumeration);
       final Method valuesMethod = compiled.getMethod("values");
       Object _invoke = valuesMethod.invoke(null);
       final Object[] values = ((Object[]) _invoke);
-      Object _get = values[0];
-      String _string = _get.toString();
-      Assert.assertEquals("BAR", _string);
-      Object _get_1 = values[1];
-      String _string_1 = _get_1.toString();
-      Assert.assertEquals("BAZ", _string_1);
+      Assert.assertEquals("BAR", values[0].toString());
+      Assert.assertEquals("BAZ", values[1].toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -436,17 +384,12 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       EList<EObject> _contents = _eResource.getContents();
       _contents.add(enumeration);
       this.completer.complete(enumeration);
-      Resource _eResource_1 = expression.eResource();
-      final Class<?> compiled = this.compile(_eResource_1, enumeration);
+      final Class<?> compiled = this.compile(expression.eResource(), enumeration);
       final Method valuesMethod = compiled.getMethod("values");
       Object _invoke = valuesMethod.invoke(null);
       final Object[] values = ((Object[]) _invoke);
-      Object _get = values[0];
-      String _string = _get.toString();
-      Assert.assertEquals("BAR", _string);
-      Object _get_1 = values[1];
-      String _string_1 = _get_1.toString();
-      Assert.assertEquals("BAZ", _string_1);
+      Assert.assertEquals("BAR", values[0].toString());
+      Assert.assertEquals("BAZ", values[1].toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -466,8 +409,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmOperation>operator_add(_members, _method);
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      this.compile(_eResource, clazz);
+      this.compile(expression.eResource(), clazz);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -502,8 +444,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmOperation>operator_add(_members, _method);
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      this.compile(_eResource, clazz);
+      this.compile(expression.eResource(), clazz);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -533,8 +474,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmOperation>operator_add(_members, _method);
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      this.compile(_eResource, clazz);
+      this.compile(expression.eResource(), clazz);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -571,15 +511,12 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
       final String code = this.generate(_eResource, clazz);
-      boolean _contains = code.contains("@TestAnnotations({ @TestAnnotation, @TestAnnotation, @TestAnnotation })");
-      Assert.assertTrue(code, _contains);
+      Assert.assertTrue(code, code.contains("@TestAnnotations({ @TestAnnotation, @TestAnnotation, @TestAnnotation })"));
       Resource _eResource_1 = expression.eResource();
       final Class<?> compiledClazz = this.compileToClass(_eResource_1, clazz, code);
       final Method method = compiledClazz.getMethod("doStuff");
       final TestAnnotations methodAnnotation = method.<TestAnnotations>getAnnotation(TestAnnotations.class);
-      TestAnnotation[] _value = methodAnnotation.value();
-      int _size = ((List<TestAnnotation>)Conversions.doWrapArray(_value)).size();
-      Assert.assertEquals(3, _size);
+      Assert.assertEquals(3, ((List<TestAnnotation>)Conversions.doWrapArray(methodAnnotation.value())).size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -592,22 +529,19 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Procedure1<JvmEnumerationType> _function = (JvmEnumerationType it) -> {
         EList<JvmMember> _members = it.getMembers();
         final Procedure1<JvmEnumerationLiteral> _function_1 = (JvmEnumerationLiteral literal) -> {
-          JvmParameterizedTypeReference _createTypeRef = this.references.createTypeRef(it);
-          literal.setType(_createTypeRef);
+          literal.setType(this.references.createTypeRef(it));
         };
         JvmEnumerationLiteral _enumerationLiteral = this.builder.toEnumerationLiteral(expression, "WARN", _function_1);
         this.builder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
         EList<JvmMember> _members_1 = it.getMembers();
         final Procedure1<JvmEnumerationLiteral> _function_2 = (JvmEnumerationLiteral literal) -> {
-          JvmParameterizedTypeReference _createTypeRef = this.references.createTypeRef(it);
-          literal.setType(_createTypeRef);
+          literal.setType(this.references.createTypeRef(it));
         };
         JvmEnumerationLiteral _enumerationLiteral_1 = this.builder.toEnumerationLiteral(expression, "ERROR", _function_2);
         this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
         EList<JvmMember> _members_2 = it.getMembers();
         final Procedure1<JvmEnumerationLiteral> _function_3 = (JvmEnumerationLiteral literal) -> {
-          JvmParameterizedTypeReference _createTypeRef = this.references.createTypeRef(it);
-          literal.setType(_createTypeRef);
+          literal.setType(this.references.createTypeRef(it));
         };
         JvmEnumerationLiteral _enumerationLiteral_2 = this.builder.toEnumerationLiteral(expression, "DEBUG", _function_3);
         this.builder.<JvmEnumerationLiteral>operator_add(_members_2, _enumerationLiteral_2);
@@ -620,16 +554,11 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmOperation>operator_add(_members_3, _method);
       };
       final JvmEnumerationType clazz = this.builder.toEnumerationType(expression, "my.test.Level", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiled = this.compile(_eResource, clazz);
-      Field _field = compiled.getField("WARN");
-      Assert.assertNotNull(_field);
-      Field _field_1 = compiled.getField("ERROR");
-      Assert.assertNotNull(_field_1);
-      Field _field_2 = compiled.getField("DEBUG");
-      Assert.assertNotNull(_field_2);
-      Method _method = compiled.getMethod("doStuff");
-      Assert.assertNotNull(_method);
+      final Class<?> compiled = this.compile(expression.eResource(), clazz);
+      Assert.assertNotNull(compiled.getField("WARN"));
+      Assert.assertNotNull(compiled.getField("ERROR"));
+      Assert.assertNotNull(compiled.getField("DEBUG"));
+      Assert.assertNotNull(compiled.getMethod("doStuff"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -668,8 +597,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmGenericType>operator_add(_members_1, _class);
       };
       final JvmGenericType enclosingClass = this.builder.toClass(expression, "my.test.EnclosingClass", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiledEnclosingClass = this.compile(_eResource, enclosingClass);
+      final Class<?> compiledEnclosingClass = this.compile(expression.eResource(), enclosingClass);
       Assert.assertNotNull(compiledEnclosingClass);
       Class<?>[] _declaredClasses = compiledEnclosingClass.getDeclaredClasses();
       final Function1<Class<?>, Boolean> _function_1 = (Class<?> it) -> {
@@ -727,8 +655,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmGenericType>operator_add(_members, _class);
       };
       final JvmGenericType enclosingClass = this.builder.toClass(expression, "my.test.EnclosingClass", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiledEnclosingClass = this.compile(_eResource, enclosingClass);
+      final Class<?> compiledEnclosingClass = this.compile(expression.eResource(), enclosingClass);
       Assert.assertNotNull(compiledEnclosingClass);
       Class<?>[] _declaredClasses = compiledEnclosingClass.getDeclaredClasses();
       final Function1<Class<?>, Boolean> _function_1 = (Class<?> it) -> {
@@ -787,8 +714,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmGenericType>operator_add(_members, _class);
       };
       final JvmGenericType enclosingClass = this.builder.toClass(expression, "my.test.EnclosingClass", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiledEnclosingClass = this.compile(_eResource, enclosingClass);
+      final Class<?> compiledEnclosingClass = this.compile(expression.eResource(), enclosingClass);
       Assert.assertNotNull(compiledEnclosingClass);
       Class<?>[] _declaredClasses = compiledEnclosingClass.getDeclaredClasses();
       final Function1<Class<?>, Boolean> _function_1 = (Class<?> it) -> {
@@ -826,16 +752,11 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       JvmAnnotationType _annotationType = this.builder.toAnnotationType(expression, "MyAnnotation", _function);
       this.builder.<JvmAnnotationType>operator_add(_members, _annotationType);
-      Resource _eResource = expression.eResource();
-      Class<?> _compile = this.compile(_eResource, outerClass);
+      Class<?> _compile = this.compile(expression.eResource(), outerClass);
       Class<?>[] _declaredClasses = _compile.getDeclaredClasses();
       final Class<?> compiled = IterableExtensions.<Class<?>>head(((Iterable<Class<?>>)Conversions.doWrapArray(_declaredClasses)));
-      String _canonicalName = compiled.getCanonicalName();
-      Assert.assertEquals("my.outer.Clazz.MyAnnotation", _canonicalName);
-      Method[] _declaredMethods = compiled.getDeclaredMethods();
-      Method _head = IterableExtensions.<Method>head(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)));
-      Object _defaultValue = _head.getDefaultValue();
-      Assert.assertEquals(Integer.valueOf(42), _defaultValue);
+      Assert.assertEquals("my.outer.Clazz.MyAnnotation", compiled.getCanonicalName());
+      Assert.assertEquals(Integer.valueOf(42), IterableExtensions.<Method>head(((Iterable<Method>)Conversions.doWrapArray(compiled.getDeclaredMethods()))).getDefaultValue());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -850,22 +771,19 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Procedure1<JvmEnumerationType> _function = (JvmEnumerationType it) -> {
         EList<JvmMember> _members_1 = it.getMembers();
         final Procedure1<JvmEnumerationLiteral> _function_1 = (JvmEnumerationLiteral literal) -> {
-          JvmParameterizedTypeReference _createTypeRef = this.references.createTypeRef(it);
-          literal.setType(_createTypeRef);
+          literal.setType(this.references.createTypeRef(it));
         };
         JvmEnumerationLiteral _enumerationLiteral = this.builder.toEnumerationLiteral(expression, "WARN", _function_1);
         this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral);
         EList<JvmMember> _members_2 = it.getMembers();
         final Procedure1<JvmEnumerationLiteral> _function_2 = (JvmEnumerationLiteral literal) -> {
-          JvmParameterizedTypeReference _createTypeRef = this.references.createTypeRef(it);
-          literal.setType(_createTypeRef);
+          literal.setType(this.references.createTypeRef(it));
         };
         JvmEnumerationLiteral _enumerationLiteral_1 = this.builder.toEnumerationLiteral(expression, "ERROR", _function_2);
         this.builder.<JvmEnumerationLiteral>operator_add(_members_2, _enumerationLiteral_1);
         EList<JvmMember> _members_3 = it.getMembers();
         final Procedure1<JvmEnumerationLiteral> _function_3 = (JvmEnumerationLiteral literal) -> {
-          JvmParameterizedTypeReference _createTypeRef = this.references.createTypeRef(it);
-          literal.setType(_createTypeRef);
+          literal.setType(this.references.createTypeRef(it));
         };
         JvmEnumerationLiteral _enumerationLiteral_2 = this.builder.toEnumerationLiteral(expression, "DEBUG", _function_3);
         this.builder.<JvmEnumerationLiteral>operator_add(_members_3, _enumerationLiteral_2);
@@ -879,18 +797,13 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       JvmEnumerationType _enumerationType = this.builder.toEnumerationType(expression, "Level", _function);
       this.builder.<JvmEnumerationType>operator_add(_members, _enumerationType);
-      Resource _eResource = expression.eResource();
-      Class<?> _compile = this.compile(_eResource, outerClass);
+      Class<?> _compile = this.compile(expression.eResource(), outerClass);
       Class<?>[] _declaredClasses = _compile.getDeclaredClasses();
       final Class<?> compiled = IterableExtensions.<Class<?>>head(((Iterable<Class<?>>)Conversions.doWrapArray(_declaredClasses)));
-      Field _field = compiled.getField("WARN");
-      Assert.assertNotNull(_field);
-      Field _field_1 = compiled.getField("ERROR");
-      Assert.assertNotNull(_field_1);
-      Field _field_2 = compiled.getField("DEBUG");
-      Assert.assertNotNull(_field_2);
-      Method _method = compiled.getMethod("doStuff");
-      Assert.assertNotNull(_method);
+      Assert.assertNotNull(compiled.getField("WARN"));
+      Assert.assertNotNull(compiled.getField("ERROR"));
+      Assert.assertNotNull(compiled.getField("DEBUG"));
+      Assert.assertNotNull(compiled.getMethod("doStuff"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -927,33 +840,20 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmGenericType>operator_add(_members_3, _class_3);
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiled = this.compile(_eResource, clazz);
+      final Class<?> compiled = this.compile(expression.eResource(), clazz);
       final Class<?>[] classes = compiled.getClasses();
-      final Function1<Class<?>, Boolean> _function_1 = (Class<?> it) -> {
+      Assert.assertTrue(Modifier.isAbstract(IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(classes)), ((Function1<Class<?>, Boolean>) (Class<?> it) -> {
         String _name = it.getName();
         return Boolean.valueOf(_name.endsWith("AbstractClass"));
-      };
-      Class<?> _findFirst = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(classes)), _function_1);
-      int _modifiers = _findFirst.getModifiers();
-      boolean _isAbstract = Modifier.isAbstract(_modifiers);
-      Assert.assertTrue(_isAbstract);
-      final Function1<Class<?>, Boolean> _function_2 = (Class<?> it) -> {
+      })).getModifiers()));
+      Assert.assertTrue(Modifier.isStatic(IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(classes)), ((Function1<Class<?>, Boolean>) (Class<?> it) -> {
         String _name = it.getName();
         return Boolean.valueOf(_name.endsWith("StaticClass"));
-      };
-      Class<?> _findFirst_1 = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(classes)), _function_2);
-      int _modifiers_1 = _findFirst_1.getModifiers();
-      boolean _isStatic = Modifier.isStatic(_modifiers_1);
-      Assert.assertTrue(_isStatic);
-      final Function1<Class<?>, Boolean> _function_3 = (Class<?> it) -> {
+      })).getModifiers()));
+      Assert.assertTrue(Modifier.isFinal(IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(classes)), ((Function1<Class<?>, Boolean>) (Class<?> it) -> {
         String _name = it.getName();
         return Boolean.valueOf(_name.endsWith("FinalClass"));
-      };
-      Class<?> _findFirst_2 = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(classes)), _function_3);
-      int _modifiers_2 = _findFirst_2.getModifiers();
-      boolean _isFinal = Modifier.isFinal(_modifiers_2);
-      Assert.assertTrue(_isFinal);
+      })).getModifiers()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1002,24 +902,11 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         this.builder.<JvmField>operator_add(_members_3, _field_3);
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiled = this.compile(_eResource, clazz);
-      Field _field = compiled.getField("staticField");
-      int _modifiers = _field.getModifiers();
-      boolean _isStatic = Modifier.isStatic(_modifiers);
-      Assert.assertTrue(_isStatic);
-      Field _field_1 = compiled.getField("finalField");
-      int _modifiers_1 = _field_1.getModifiers();
-      boolean _isFinal = Modifier.isFinal(_modifiers_1);
-      Assert.assertTrue(_isFinal);
-      Field _field_2 = compiled.getField("volatileField");
-      int _modifiers_2 = _field_2.getModifiers();
-      boolean _isVolatile = Modifier.isVolatile(_modifiers_2);
-      Assert.assertTrue(_isVolatile);
-      Field _field_3 = compiled.getField("transientField");
-      int _modifiers_3 = _field_3.getModifiers();
-      boolean _isTransient = Modifier.isTransient(_modifiers_3);
-      Assert.assertTrue(_isTransient);
+      final Class<?> compiled = this.compile(expression.eResource(), clazz);
+      Assert.assertTrue(Modifier.isStatic(compiled.getField("staticField").getModifiers()));
+      Assert.assertTrue(Modifier.isFinal(compiled.getField("finalField").getModifiers()));
+      Assert.assertTrue(Modifier.isVolatile(compiled.getField("volatileField").getModifiers()));
+      Assert.assertTrue(Modifier.isTransient(compiled.getField("transientField").getModifiers()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1091,32 +978,13 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         it.setAbstract(true);
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
-      Resource _eResource = expression.eResource();
-      final Class<?> compiled = this.compile(_eResource, clazz);
-      Method _method = compiled.getMethod("staticMethod");
-      int _modifiers = _method.getModifiers();
-      boolean _isStatic = Modifier.isStatic(_modifiers);
-      Assert.assertTrue(_isStatic);
-      Method _method_1 = compiled.getMethod("finalMethod");
-      int _modifiers_1 = _method_1.getModifiers();
-      boolean _isFinal = Modifier.isFinal(_modifiers_1);
-      Assert.assertTrue(_isFinal);
-      Method _method_2 = compiled.getMethod("abstractMethod");
-      int _modifiers_2 = _method_2.getModifiers();
-      boolean _isAbstract = Modifier.isAbstract(_modifiers_2);
-      Assert.assertTrue(_isAbstract);
-      Method _method_3 = compiled.getMethod("synchronizedMethod");
-      int _modifiers_3 = _method_3.getModifiers();
-      boolean _isSynchronized = Modifier.isSynchronized(_modifiers_3);
-      Assert.assertTrue(_isSynchronized);
-      Method _method_4 = compiled.getMethod("strictFpMethod");
-      int _modifiers_4 = _method_4.getModifiers();
-      boolean _isStrict = Modifier.isStrict(_modifiers_4);
-      Assert.assertTrue(_isStrict);
-      Method _method_5 = compiled.getMethod("nativeMethod");
-      int _modifiers_5 = _method_5.getModifiers();
-      boolean _isNative = Modifier.isNative(_modifiers_5);
-      Assert.assertTrue(_isNative);
+      final Class<?> compiled = this.compile(expression.eResource(), clazz);
+      Assert.assertTrue(Modifier.isStatic(compiled.getMethod("staticMethod").getModifiers()));
+      Assert.assertTrue(Modifier.isFinal(compiled.getMethod("finalMethod").getModifiers()));
+      Assert.assertTrue(Modifier.isAbstract(compiled.getMethod("abstractMethod").getModifiers()));
+      Assert.assertTrue(Modifier.isSynchronized(compiled.getMethod("synchronizedMethod").getModifiers()));
+      Assert.assertTrue(Modifier.isStrict(compiled.getMethod("strictFpMethod").getModifiers()));
+      Assert.assertTrue(Modifier.isNative(compiled.getMethod("nativeMethod").getModifiers()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

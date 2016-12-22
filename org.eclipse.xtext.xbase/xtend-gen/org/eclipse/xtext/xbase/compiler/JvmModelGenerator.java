@@ -382,8 +382,7 @@ public class JvmModelGenerator implements IGenerator {
         it_1.setSuffix(";");
       };
       final Procedure1<JvmEnumerationLiteral> _function_1 = (JvmEnumerationLiteral it_1) -> {
-        ITreeAppendable _trace = childAppendable.trace(it_1);
-        this.generateEnumLiteral(it_1, _trace, config);
+        this.generateEnumLiteral(it_1, childAppendable.trace(it_1), config);
       };
       this._loopExtensions.<JvmEnumerationLiteral>forEach(childAppendable, _literals, _function, _function_1);
       Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
@@ -398,8 +397,7 @@ public class JvmModelGenerator implements IGenerator {
         it_1.setSeparator(_function_4);
       };
       final Procedure1<JvmMember> _function_4 = (JvmMember it_1) -> {
-        ITreeAppendable _trace = childAppendable.trace(it_1);
-        this.generateMember(it_1, _trace, config);
+        this.generateMember(it_1, childAppendable.trace(it_1), config);
       };
       this._loopExtensions.<JvmMember>forEach(childAppendable, _filter, _function_3, _function_4);
       ITreeAppendable _decreaseIndentation = childAppendable.decreaseIndentation();
@@ -716,7 +714,8 @@ public class JvmModelGenerator implements IGenerator {
         String _identifier = ((JvmEnumerationType)it).getIdentifier();
         _builder.append(_identifier);
         _builder.append(">");
-        _switchResult = _builder.toString();
+        String _string = _builder.toString();
+        _switchResult = _string;
       }
     }
     if (!_matched) {
@@ -1058,8 +1057,7 @@ public class JvmModelGenerator implements IGenerator {
       this._errorSafeExtensions.serializeSafely(_parameterType_2, "Object", tracedAppendable);
     }
     tracedAppendable.append(" ");
-    String _simpleName = it.getSimpleName();
-    String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
+    String _makeJavaIdentifier = this.makeJavaIdentifier(it.getSimpleName());
     final String name = tracedAppendable.declareVariable(it, _makeJavaIdentifier);
     ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
     _traceSignificant.append(name);
@@ -1080,8 +1078,7 @@ public class JvmModelGenerator implements IGenerator {
     if (_isEmpty) {
       final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
       if ((expression != null)) {
-        Iterable<Issue> _errors = this._errorSafeExtensions.getErrors(expression);
-        errors = _errors;
+        errors = this._errorSafeExtensions.getErrors(expression);
       }
     }
     return errors;
@@ -1281,8 +1278,7 @@ public class JvmModelGenerator implements IGenerator {
       final Consumer<Issue> _function = (Issue it) -> {
         ITreeAppendable _newLine_1 = appendable.newLine();
         ITreeAppendable _append_1 = _newLine_1.append("+ \"\\n");
-        String _message = it.getMessage();
-        String _doConvertToJavaString = this.doConvertToJavaString(_message);
+        String _doConvertToJavaString = this.doConvertToJavaString(it.getMessage());
         ITreeAppendable _append_2 = _append_1.append(_doConvertToJavaString);
         _append_2.append("\"");
       };
@@ -1315,10 +1311,7 @@ public class JvmModelGenerator implements IGenerator {
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_headerText);
     boolean _not = (!_isNullOrEmpty);
     if (_not) {
-      String _headerText_1 = fileHeaderAdapter.getHeaderText();
-      Resource _eResource = it.eResource();
-      List<INode> _fileHeaderNodes = this.fileHeaderProvider.getFileHeaderNodes(_eResource);
-      this.generateDocumentation(_headerText_1, _fileHeaderNodes, appendable, config);
+      this.generateDocumentation(fileHeaderAdapter.getHeaderText(), this.fileHeaderProvider.getFileHeaderNodes(it.eResource()), appendable, config);
     }
   }
   
@@ -1338,12 +1331,9 @@ public class JvmModelGenerator implements IGenerator {
         EObject _head = IterableExtensions.<EObject>head(sourceElements);
         final List<INode> documentationNodes = ((IEObjectDocumentationProviderExtension) this.documentationProvider).getDocumentationNodes(_head);
         this.addJavaDocImports(it, appendable, documentationNodes);
-        String _documentation_1 = adapter.getDocumentation();
-        this.generateDocumentation(_documentation_1, documentationNodes, appendable, config);
+        this.generateDocumentation(adapter.getDocumentation(), documentationNodes, appendable, config);
       } else {
-        String _documentation_2 = adapter.getDocumentation();
-        List<INode> _emptyList = CollectionLiterals.<INode>emptyList();
-        this.generateDocumentation(_documentation_2, _emptyList, appendable, config);
+        this.generateDocumentation(adapter.getDocumentation(), CollectionLiterals.<INode>emptyList(), appendable, config);
       }
     }
   }
@@ -1429,9 +1419,7 @@ public class JvmModelGenerator implements IGenerator {
         {
           ITextRegionWithLineInformation documentationTrace = ITextRegionWithLineInformation.EMPTY_REGION;
           for (final INode node : documentationNodes) {
-            ITextRegionWithLineInformation _textRegionWithLineInformation = node.getTextRegionWithLineInformation();
-            ITextRegionWithLineInformation _merge = documentationTrace.merge(_textRegionWithLineInformation);
-            documentationTrace = _merge;
+            documentationTrace = documentationTrace.merge(node.getTextRegionWithLineInformation());
           }
           LocationData _locationData = new LocationData(documentationTrace, null);
           ITreeAppendable _trace = appendable.trace(_locationData);
@@ -1622,8 +1610,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmCharAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<Character> _values = it.getValues();
     final Procedure1<Character> _function = (Character it_1) -> {
-      String _string = it_1.toString();
-      String _doConvertToJavaString = this.doConvertToJavaString(_string);
+      String _doConvertToJavaString = this.doConvertToJavaString(it_1.toString());
       String _plus = ("\'" + _doConvertToJavaString);
       String _plus_1 = (_plus + "\'");
       appendable.append(_plus_1);
@@ -1634,8 +1621,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmStringAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<String> _values = it.getValues();
     final Procedure1<String> _function = (String it_1) -> {
-      String _string = it_1.toString();
-      String _doConvertToJavaString = this.doConvertToJavaString(_string);
+      String _doConvertToJavaString = this.doConvertToJavaString(it_1.toString());
       String _plus = ("\"" + _doConvertToJavaString);
       String _plus_1 = (_plus + "\"");
       appendable.append(_plus_1);
@@ -1742,8 +1728,7 @@ public class JvmModelGenerator implements IGenerator {
       if ((context instanceof JvmGenericType)) {
         _xifexpression_1 = ((JvmGenericType)context);
       } else {
-        EObject _eContainer = context.eContainer();
-        _xifexpression_1 = this.containerType(_eContainer);
+        _xifexpression_1 = this.containerType(context.eContainer());
       }
       _xifexpression = _xifexpression_1;
     }

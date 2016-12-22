@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.typesystem.util;
 
-import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -26,13 +25,11 @@ public class ConstraintVisitingInfo {
   private int idx;
   
   public ConstraintVisitingInfo() {
-    HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();
-    this.visiting = _newHashSet;
+    this.visiting = CollectionLiterals.<JvmTypeParameter>newHashSet();
   }
   
   public ConstraintVisitingInfo(final JvmTypeParameter initial) {
-    HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet(initial);
-    this.visiting = _newHashSet;
+    this.visiting = CollectionLiterals.<JvmTypeParameter>newHashSet(initial);
   }
   
   public boolean tryVisit(final JvmTypeParameter parameter) {

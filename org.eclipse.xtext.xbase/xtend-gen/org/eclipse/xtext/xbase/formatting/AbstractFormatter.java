@@ -3,7 +3,6 @@ package org.eclipse.xtext.xbase.formatting;
 import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
@@ -40,19 +39,14 @@ public abstract class AbstractFormatter implements IBasicFormatter {
       ICompositeNode _rootNode = _parseResult.getRootNode();
       final String doc = _rootNode.getText();
       final FormattableDocument format = new FormattableDocument(cfg, doc);
-      EList<EObject> _contents = res.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
-      this.format(_head, format);
+      this.format(IterableExtensions.<EObject>head(res.getContents()), format);
       if ((this.diagnoseConflicts && format.isConflictOccurred())) {
         final FormattableDocument debug = new FormattableDocument(cfg, doc);
         RuntimeException _runtimeException = new RuntimeException();
         debug.setRootTrace(_runtimeException);
-        EList<EObject> _contents_1 = res.getContents();
-        EObject _head_1 = IterableExtensions.<EObject>head(_contents_1);
-        this.format(_head_1, debug);
+        this.format(IterableExtensions.<EObject>head(res.getContents()), debug);
       }
-      boolean _isConflictOccurred = format.isConflictOccurred();
-      this.conflictOccurred = _isConflictOccurred;
+      this.conflictOccurred = format.isConflictOccurred();
       final List<TextReplacement> edits = format.renderToEdits(offset, length);
       List<TextReplacement> _xifexpression = null;
       if (this.allowIdentityEdits) {

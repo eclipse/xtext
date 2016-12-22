@@ -123,9 +123,7 @@ public class TypeResourceDescription extends AbstractResourceDescription {
   private URI uri;
   
   public TypeResourceDescription(final QualifiedName typeName) {
-    String _string = typeName.toString(".");
-    URI _appendSegment = URIHelperConstants.OBJECTS_URI.appendSegment(_string);
-    this.uri = _appendSegment;
+    this.uri = URIHelperConstants.OBJECTS_URI.appendSegment(typeName.toString("."));
     TypeResourceDescription.ClassDescription _classDescription = new TypeResourceDescription.ClassDescription(typeName);
     this.exportedObjects = Collections.<IEObjectDescription>unmodifiableList(CollectionLiterals.<IEObjectDescription>newArrayList(_classDescription));
   }

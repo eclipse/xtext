@@ -81,8 +81,7 @@ public class ConstantConditionsInterpreter {
   
   public BooleanResult getBooleanConstantOrNull(final XExpression it) {
     try {
-      EvaluationContext _newEvaluationContext = this.newEvaluationContext();
-      final EvaluationResult evaluationResult = this.doEvaluate(it, _newEvaluationContext);
+      final EvaluationResult evaluationResult = this.doEvaluate(it, this.newEvaluationContext());
       Object _rawValue = evaluationResult.getRawValue();
       if ((_rawValue instanceof Boolean)) {
         Object _rawValue_1 = evaluationResult.getRawValue();
@@ -133,8 +132,7 @@ public class ConstantConditionsInterpreter {
   }
   
   protected EvaluationResult _internalEvaluate(final XNumberLiteral it, final EvaluationContext context) {
-    Class<? extends Number> _javaType = this.numberLiterals.getJavaType(it);
-    final Number value = this.numberLiterals.numberValue(it, _javaType);
+    final Number value = this.numberLiterals.numberValue(it, this.numberLiterals.getJavaType(it));
     IResolvedTypes _resolvedTypes = context.getResolvedTypes();
     LightweightTypeReference _actualType = _resolvedTypes.getActualType(it);
     boolean _isPrimitive = _actualType.isPrimitive();
@@ -185,8 +183,7 @@ public class ConstantConditionsInterpreter {
             XExpression _actualReceiver = it.getActualReceiver();
             boolean _tripleNotEquals = (_actualReceiver != null);
             if (_tripleNotEquals) {
-              XExpression _actualReceiver_1 = it.getActualReceiver();
-              final EvaluationResult receiver = this.doEvaluate(_actualReceiver_1, context);
+              final EvaluationResult receiver = this.doEvaluate(it.getActualReceiver(), context);
               boolean _isNotAConstant = receiver.isNotAConstant();
               if (_isNotAConstant) {
                 return receiver;
@@ -275,9 +272,7 @@ public class ConstantConditionsInterpreter {
     Object _eGet = call.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
     JvmIdentifiableElement feature = ((JvmIdentifiableElement) _eGet);
     if (((feature == null) || feature.eIsProxy())) {
-      IResolvedTypes _resolvedTypes = context.getResolvedTypes();
-      JvmIdentifiableElement _linkedFeature = _resolvedTypes.getLinkedFeature(call);
-      feature = _linkedFeature;
+      feature = context.getResolvedTypes().getLinkedFeature(call);
     }
     return feature;
   }
@@ -468,13 +463,9 @@ public class ConstantConditionsInterpreter {
               _switchResult = Boolean.valueOf(this.constantOperators.greaterEquals(_rawValue_22, _rawValue_23));
               break;
             case "&&":
-              Object _rawValue_24 = left.getRawValue();
-              Object _rawValue_25 = right.getRawValue();
-              return this.internalLogicalAnd(_rawValue_24, _rawValue_25, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
+              return this.internalLogicalAnd(left.getRawValue(), right.getRawValue(), (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
             case "||":
-              Object _rawValue_26 = left.getRawValue();
-              Object _rawValue_27 = right.getRawValue();
-              return this.internalLogicalOr(_rawValue_26, _rawValue_27, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
+              return this.internalLogicalOr(left.getRawValue(), right.getRawValue(), (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
             case "==":
             case "===":
               if ((left.isNotAConstant() || right.isNotAConstant())) {
@@ -582,8 +573,7 @@ public class ConstantConditionsInterpreter {
   }
   
   protected EvaluationResult _internalEvaluate(final XCastedExpression expression, final EvaluationContext context) {
-    XExpression _target = expression.getTarget();
-    return this.doEvaluate(_target, context);
+    return this.doEvaluate(expression.getTarget(), context);
   }
   
   protected EvaluationResult _internalEvaluate(final XStringLiteral it, final EvaluationContext context) {

@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterables;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -45,8 +44,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   
   @BeforeClass
   public static void createSeenExpressionsSet() {
-    HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
-    AbstractIdentifiableTypeTest.seenExpressions = _newHashSet;
+    AbstractIdentifiableTypeTest.seenExpressions = CollectionLiterals.<String>newHashSet();
   }
   
   @AfterClass

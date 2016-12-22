@@ -126,8 +126,7 @@ public class XbaseFormatter extends XtypeFormatter {
       _elvis_1 = _keyword_4;
     }
     final ISemanticRegion close = _elvis_1;
-    EList<XExpression> _elements = literal.getElements();
-    this.formatCommaSeparatedList(_elements, open, close, document);
+    this.formatCommaSeparatedList(literal.getElements(), open, close, document);
   }
   
   protected void formatCommaSeparatedList(final Collection<? extends EObject> elements, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
@@ -200,18 +199,14 @@ public class XbaseFormatter extends XtypeFormatter {
                 if ((sep == null)) {
                   final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
                     it.noSpace();
-                    ITextSegment _region = ele_1.getRegion();
-                    int _length = _region.getLength();
-                    it.autowrap(_length);
+                    it.autowrap(ele_1.getRegion().getLength());
                     it.setOnAutowrap(indent);
                   };
                   format.append(open, _function_4);
                 } else {
                   final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
                     it.oneSpace();
-                    ITextSegment _region = ele_1.getRegion();
-                    int _length = _region.getLength();
-                    it.autowrap(_length);
+                    it.autowrap(ele_1.getRegion().getLength());
                     it.setOnAutowrap(indent);
                   };
                   format.append(sep, _function_5);
@@ -318,8 +313,7 @@ public class XbaseFormatter extends XtypeFormatter {
   protected void formatFeatureCallParams(final List<XExpression> params, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
     final XClosure builder = this.builder(params);
     final Iterable<XExpression> explicitParams = this.explicitParams(params);
-    List<XExpression> _list = IterableExtensions.<XExpression>toList(explicitParams);
-    this.formatCommaSeparatedList(_list, open, close, format);
+    this.formatCommaSeparatedList(IterableExtensions.<XExpression>toList(explicitParams), open, close, format);
     this.formatBuilderWithLeadingGap(builder, format);
   }
   
@@ -438,8 +432,7 @@ public class XbaseFormatter extends XtypeFormatter {
       it.noSpace();
     };
     format.prepend(open, _function_3);
-    EList<XExpression> _arguments = expr.getArguments();
-    this.formatFeatureCallParams(_arguments, open, close, format);
+    this.formatFeatureCallParams(expr.getArguments(), open, close, format);
   }
   
   protected void formatFeatureCallTypeParameters(final XAbstractFeatureCall expr, @Extension final IFormattableDocument format) {
@@ -490,11 +483,10 @@ public class XbaseFormatter extends XtypeFormatter {
       final ISemanticRegion open = format.prepend(_keyword, _function);
       ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
       final ISemanticRegion close = _regionFor_1.keyword(")");
-      EList<XExpression> _featureCallArguments = expr.getFeatureCallArguments();
-      this.formatFeatureCallParams(_featureCallArguments, open, close, format);
+      this.formatFeatureCallParams(expr.getFeatureCallArguments(), open, close, format);
     } else {
-      EList<XExpression> _featureCallArguments_1 = expr.getFeatureCallArguments();
-      for (final XExpression arg : _featureCallArguments_1) {
+      EList<XExpression> _featureCallArguments = expr.getFeatureCallArguments();
+      for (final XExpression arg : _featureCallArguments) {
         this.format(arg, format);
       }
     }
@@ -528,8 +520,7 @@ public class XbaseFormatter extends XtypeFormatter {
         ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(top);
         final ISemanticRegion separator = _regionFor.keyword(op);
         calls.prependWithLeadingSeparator(((XMemberFeatureCall)top), separator);
-        XExpression _memberCallTarget = ((XMemberFeatureCall)top).getMemberCallTarget();
-        top = _memberCallTarget;
+        top = ((XMemberFeatureCall)top).getMemberCallTarget();
       }
     }
     format.<EObject>format(top);
@@ -569,16 +560,13 @@ public class XbaseFormatter extends XtypeFormatter {
             final ISemanticRegion open = format.prepend(_keyword, _function_2);
             ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(call);
             final ISemanticRegion close = _regionFor_2.keyword(")");
-            EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
-            this.formatFeatureCallParams(_memberCallArguments, open, close, format);
+            this.formatFeatureCallParams(call.getMemberCallArguments(), open, close, format);
           } else {
-            EList<XExpression> _memberCallArguments_1 = call.getMemberCallArguments();
-            boolean _isEmpty = _memberCallArguments_1.isEmpty();
+            EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
+            boolean _isEmpty = _memberCallArguments.isEmpty();
             boolean _not = (!_isEmpty);
             if (_not) {
-              EList<XExpression> _memberCallArguments_2 = call.getMemberCallArguments();
-              XClosure _builder = this.builder(_memberCallArguments_2);
-              this.formatBuilderWithLeadingGap(_builder, format);
+              this.formatBuilderWithLeadingGap(this.builder(call.getMemberCallArguments()), format);
             }
           }
         }
@@ -606,8 +594,7 @@ public class XbaseFormatter extends XtypeFormatter {
         ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(top);
         ISemanticRegion _feature = _regionFor.feature(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
         calls.prependWithLeadingSeparator(((XBinaryOperation) top), _feature);
-        XExpression _leftOperand = ((XBinaryOperation) top).getLeftOperand();
-        top = _leftOperand;
+        top = ((XBinaryOperation) top).getLeftOperand();
       }
     }
     this.format(top, format);
@@ -626,9 +613,7 @@ public class XbaseFormatter extends XtypeFormatter {
         if (_prependNewLineIfMultiline) {
           final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
             it.oneSpace();
-            ITextSegment _region = ele.getRegion();
-            int _length = _region.getLength();
-            it.autowrap(_length);
+            it.autowrap(ele.getRegion().getLength());
             it.setOnAutowrap(indent);
           };
           format.append(sep, _function);
@@ -909,18 +894,14 @@ public class XbaseFormatter extends XtypeFormatter {
       boolean _isSingleLineBlock = this.isSingleLineBlock(expr);
       if (_isSingleLineBlock) {
         final ISubFormatter _function_1 = (IFormattableSubDocument f) -> {
-          EList<XExpression> _expressions = expr.getExpressions();
-          IFormattableSubDocument _requireFitsInLine = f.requireFitsInLine();
-          this.formatExpressionsSingleline(_expressions, open, close, _requireFitsInLine);
+          this.formatExpressionsSingleline(expr.getExpressions(), open, close, f.requireFitsInLine());
         };
         final ISubFormatter _function_2 = (IFormattableSubDocument f) -> {
-          EList<XExpression> _expressions = expr.getExpressions();
-          this.formatExpressionsMultiline(_expressions, open, close, f);
+          this.formatExpressionsMultiline(expr.getExpressions(), open, close, f);
         };
         format.formatConditionally(expr, _function_1, _function_2);
       } else {
-        EList<XExpression> _expressions = expr.getExpressions();
-        this.formatExpressionsMultiline(_expressions, open, close, format);
+        this.formatExpressionsMultiline(expr.getExpressions(), open, close, format);
       }
     }
   }

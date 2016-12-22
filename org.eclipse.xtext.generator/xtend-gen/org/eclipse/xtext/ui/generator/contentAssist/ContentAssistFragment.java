@@ -102,9 +102,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   
   @Override
   public String[] getExportedPackagesUi(final Grammar grammar) {
-    String _proposalProviderName = this.getProposalProviderName(grammar);
-    String _packageName = this._naming.packageName(_proposalProviderName);
-    return ((String[])Conversions.unwrapArray(Collections.<String>singletonList(_packageName), String.class));
+    return ((String[])Conversions.unwrapArray(Collections.<String>singletonList(this._naming.packageName(this.getProposalProviderName(grammar))), String.class));
   }
   
   public String getSuperClassName() {
@@ -171,8 +169,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     }
     XpandExecutionContext _xpandExecutionContext = ctx.getXpandExecutionContext();
     XpandFacade _create = XpandFacade.create(_xpandExecutionContext);
-    String _superClassName = this.getSuperClassName();
-    List<Object> _singletonList = Collections.<Object>singletonList(_superClassName);
+    List<Object> _singletonList = Collections.<Object>singletonList(this.getSuperClassName());
     _create.evaluate2(
       "org::eclipse::xtext::ui::generator::contentAssist::JavaBasedContentAssistFragment::GenProposalProvider", 
       this.grammar, _singletonList);

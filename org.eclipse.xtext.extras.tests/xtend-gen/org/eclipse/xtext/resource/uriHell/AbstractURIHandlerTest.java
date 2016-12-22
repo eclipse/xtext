@@ -78,17 +78,11 @@ public abstract class AbstractURIHandlerTest extends Assert {
   
   @Before
   public void setUp() {
-    GlobalRegistries.GlobalStateMemento _makeCopyOfGlobalState = GlobalRegistries.makeCopyOfGlobalState();
-    this.globalState = _makeCopyOfGlobalState;
+    this.globalState = GlobalRegistries.makeCopyOfGlobalState();
     EPackage.Registry.INSTANCE.put(XMLTypePackage.eNS_URI, XMLTypePackage.eINSTANCE);
-    XtextResourceSet _newResourceSet = this.getNewResourceSet();
-    this.resourceSet = _newResourceSet;
-    URI _resourceURI = this.getResourceURI();
-    Resource _createResource = this.resourceSet.createResource(_resourceURI);
-    this.primaryResource = _createResource;
-    URI _referencedURI = this.getReferencedURI();
-    Resource _createResource_1 = this.resourceSet.createResource(_referencedURI);
-    this.referencedResource = _createResource_1;
+    this.resourceSet = this.getNewResourceSet();
+    this.primaryResource = this.resourceSet.createResource(this.getResourceURI());
+    this.referencedResource = this.resourceSet.createResource(this.getReferencedURI());
   }
   
   public XtextResourceSet getNewResourceSet() {
@@ -153,17 +147,11 @@ public abstract class AbstractURIHandlerTest extends Assert {
   
   @Test
   public void testLoadResourceWithPrimaryURIs() {
-    URI _resourceURI = this.getResourceURI();
-    URI _referencedURI = this.getReferencedURI();
-    URI _referencedURI_1 = this.getReferencedURI();
-    this.doTest(_resourceURI, _referencedURI, _referencedURI_1);
+    this.doTest(this.getResourceURI(), this.getReferencedURI(), this.getReferencedURI());
   }
   
   @Test
   public void testLoadResourceWithPackagedURIs() {
-    URI _packagedResourceURI = this.getPackagedResourceURI();
-    URI _referencedURI = this.getReferencedURI();
-    URI _packagedReferencedURI = this.getPackagedReferencedURI();
-    this.doTest(_packagedResourceURI, _referencedURI, _packagedReferencedURI);
+    this.doTest(this.getPackagedResourceURI(), this.getReferencedURI(), this.getPackagedReferencedURI());
   }
 }

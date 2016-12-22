@@ -73,8 +73,7 @@ public class NodeModelAccess {
     {
       INode current = node;
       while ((current instanceof ICompositeNode)) {
-        INode _lastChild = ((ICompositeNode)current).getLastChild();
-        current = _lastChild;
+        current = ((ICompositeNode)current).getLastChild();
       }
       final INode current1 = current;
       final Function1<ILeafNode, Boolean> _function = (ILeafNode it) -> {

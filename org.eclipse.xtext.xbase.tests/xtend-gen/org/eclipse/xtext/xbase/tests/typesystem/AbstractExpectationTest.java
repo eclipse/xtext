@@ -9,10 +9,8 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -64,13 +62,10 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   
   public AbstractExpectationTest expects(final String input) {
     try {
-      XExpression _expression = this.expression(input, false);
-      this.rootExpression = _expression;
+      this.rootExpression = this.expression(input, false);
       PublicReentrantTypeResolver _resolver = this.getResolver();
       _resolver.initializeFrom(this.rootExpression);
-      PublicReentrantTypeResolver _resolver_1 = this.getResolver();
-      IResolvedTypes _reentrantResolve = _resolver_1.reentrantResolve(CancelIndicator.NullImpl);
-      this.resolvedTypes = _reentrantResolve;
+      this.resolvedTypes = this.getResolver().reentrantResolve(CancelIndicator.NullImpl);
       this.pendingAssert = true;
       return this;
     } catch (Throwable _e) {
@@ -80,54 +75,37 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   
   public void clearData() {
     this.resolvedTypes = null;
-    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-    this.expectations = _newArrayList;
-    ArrayList<ITypeExpectation> _newArrayList_1 = CollectionLiterals.<ITypeExpectation>newArrayList();
-    this.finalExpectations = _newArrayList_1;
-    ArrayList<XExpression> _newArrayList_2 = CollectionLiterals.<XExpression>newArrayList();
-    this.expressions = _newArrayList_2;
+    this.expectations = CollectionLiterals.<String>newArrayList();
+    this.finalExpectations = CollectionLiterals.<ITypeExpectation>newArrayList();
+    this.expressions = CollectionLiterals.<XExpression>newArrayList();
   }
   
   public AbstractExpectationTest types(final String... names) {
     Assert.assertTrue(this.pendingAssert);
     this.pendingAssert = false;
-    String _string = this.expectations.toString();
-    int _size = ((List<String>)Conversions.doWrapArray(names)).size();
-    int _size_1 = this.expectations.size();
-    Assert.assertEquals(_string, _size, _size_1);
-    Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names)));
-    Set<String> _set_1 = IterableExtensions.<String>toSet(this.expectations);
-    Assert.assertEquals(_set, _set_1);
+    Assert.assertEquals(this.expectations.toString(), ((List<String>)Conversions.doWrapArray(names)).size(), this.expectations.size());
+    Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names))), IterableExtensions.<String>toSet(this.expectations));
     return this;
   }
   
   public AbstractExpectationTest finalizedAs(final String... names) {
     Assert.assertFalse(this.pendingAssert);
-    final Function1<ITypeExpectation, String> _function = (ITypeExpectation it) -> {
+    Assert.assertEquals(ListExtensions.<ITypeExpectation, String>map(this.finalExpectations, ((Function1<ITypeExpectation, String>) (ITypeExpectation it) -> {
       LightweightTypeReference _expectedType = it.getExpectedType();
       String _simpleName = null;
       if (_expectedType!=null) {
         _simpleName=_expectedType.getSimpleName();
       }
       return _simpleName;
-    };
-    List<String> _map = ListExtensions.<ITypeExpectation, String>map(this.finalExpectations, _function);
-    String _string = _map.toString();
-    int _size = ((List<String>)Conversions.doWrapArray(names)).size();
-    int _size_1 = this.expectations.size();
-    Assert.assertEquals(_string, _size, _size_1);
-    Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names)));
-    final Function1<ITypeExpectation, String> _function_1 = (ITypeExpectation it) -> {
+    })).toString(), ((List<String>)Conversions.doWrapArray(names)).size(), this.expectations.size());
+    Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names))), IterableExtensions.<String>toSet(ListExtensions.<ITypeExpectation, String>map(this.finalExpectations, ((Function1<ITypeExpectation, String>) (ITypeExpectation it) -> {
       LightweightTypeReference _expectedType = it.getExpectedType();
       String _simpleName = null;
       if (_expectedType!=null) {
         _simpleName=_expectedType.getSimpleName();
       }
       return _simpleName;
-    };
-    List<String> _map_1 = ListExtensions.<ITypeExpectation, String>map(this.finalExpectations, _function_1);
-    Set<String> _set_1 = IterableExtensions.<String>toSet(_map_1);
-    Assert.assertEquals(_set, _set_1);
+    }))));
     return this;
   }
   
@@ -137,51 +115,34 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
       return this.resolvedTypes.getExpectedType(it);
     };
     final List<LightweightTypeReference> expectedTypes = ListExtensions.<XExpression, LightweightTypeReference>map(this.expressions, _function);
-    final Function1<LightweightTypeReference, String> _function_1 = (LightweightTypeReference it) -> {
+    Assert.assertEquals(ListExtensions.<LightweightTypeReference, String>map(expectedTypes, ((Function1<LightweightTypeReference, String>) (LightweightTypeReference it) -> {
       return it.getSimpleName();
-    };
-    List<String> _map = ListExtensions.<LightweightTypeReference, String>map(expectedTypes, _function_1);
-    String _string = _map.toString();
-    int _size = ((List<String>)Conversions.doWrapArray(names)).size();
-    int _size_1 = expectedTypes.size();
-    Assert.assertEquals(_string, _size, _size_1);
-    Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names)));
-    final Function1<LightweightTypeReference, String> _function_2 = (LightweightTypeReference it) -> {
+    })).toString(), ((List<String>)Conversions.doWrapArray(names)).size(), expectedTypes.size());
+    Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names))), IterableExtensions.<String>toSet(ListExtensions.<LightweightTypeReference, String>map(expectedTypes, ((Function1<LightweightTypeReference, String>) (LightweightTypeReference it) -> {
       return it.getSimpleName();
-    };
-    List<String> _map_1 = ListExtensions.<LightweightTypeReference, String>map(expectedTypes, _function_2);
-    Set<String> _set_1 = IterableExtensions.<String>toSet(_map_1);
-    Assert.assertEquals(_set, _set_1);
+    }))));
     return this;
   }
   
   public AbstractExpectationTest nothing() {
     Assert.assertTrue(this.pendingAssert);
     this.pendingAssert = false;
-    int _size = this.finalExpectations.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, this.finalExpectations.size());
     final ITypeExpectation expectation = IterableExtensions.<ITypeExpectation>head(this.finalExpectations);
-    boolean _isNoTypeExpectation = expectation.isNoTypeExpectation();
-    Assert.assertTrue(_isNoTypeExpectation);
-    boolean _isVoidTypeAllowed = expectation.isVoidTypeAllowed();
-    Assert.assertTrue(_isVoidTypeAllowed);
-    LightweightTypeReference _expectedType = expectation.getExpectedType();
-    Assert.assertNull(_expectedType);
+    Assert.assertTrue(expectation.isNoTypeExpectation());
+    Assert.assertTrue(expectation.isVoidTypeAllowed());
+    Assert.assertNull(expectation.getExpectedType());
     return this;
   }
   
   public AbstractExpectationTest notVoid() {
     Assert.assertTrue(this.pendingAssert);
     this.pendingAssert = false;
-    int _size = this.finalExpectations.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, this.finalExpectations.size());
     final ITypeExpectation expectation = IterableExtensions.<ITypeExpectation>head(this.finalExpectations);
-    boolean _isNoTypeExpectation = expectation.isNoTypeExpectation();
-    Assert.assertFalse(_isNoTypeExpectation);
-    boolean _isVoidTypeAllowed = expectation.isVoidTypeAllowed();
-    Assert.assertFalse(_isVoidTypeAllowed);
-    LightweightTypeReference _expectedType = expectation.getExpectedType();
-    Assert.assertNull(_expectedType);
+    Assert.assertFalse(expectation.isNoTypeExpectation());
+    Assert.assertFalse(expectation.isVoidTypeAllowed());
+    Assert.assertNull(expectation.getExpectedType());
     return this;
   }
   
@@ -191,8 +152,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     _typeComputer.setTest(this);
     this.pendingAssert = false;
     PublicReentrantTypeResolver _resolver = this.getResolver();
-    ExpectationTestingTypeComputer _typeComputer_1 = this.getTypeComputer();
-    _resolver.setTypeComputer(_typeComputer_1);
+    _resolver.setTypeComputer(this.getTypeComputer());
     this.clearData();
   }
   

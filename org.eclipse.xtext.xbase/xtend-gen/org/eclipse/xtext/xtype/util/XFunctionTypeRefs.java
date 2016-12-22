@@ -95,8 +95,7 @@ public class XFunctionTypeRefs {
           _matched=true;
           JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
           final Procedure1<JvmParameterizedTypeReference> _function = (JvmParameterizedTypeReference it) -> {
-            JvmType _type = XFunctionTypeRefs.getType(Void.class, type);
-            it.setType(_type);
+            it.setType(XFunctionTypeRefs.getType(Void.class, type));
           };
           _switchResult = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
         }

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.annotations.validation;
 
 import com.google.inject.Inject;
-import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -115,16 +114,11 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
       XExpression _syntacticReceiver = this._featureLinkHelper.getSyntacticReceiver(featureCall);
       boolean _tripleNotEquals = (_syntacticReceiver != null);
       if (_tripleNotEquals) {
-        XExpression _syntacticReceiver_1 = this._featureLinkHelper.getSyntacticReceiver(featureCall);
-        LightweightTypeReference _actualType = types.getActualType(_syntacticReceiver_1);
-        recieverType = _actualType;
+        recieverType = types.getActualType(this._featureLinkHelper.getSyntacticReceiver(featureCall));
       }
-      List<XExpression> _syntacticArguments = this._featureLinkHelper.getSyntacticArguments(featureCall);
-      final Function1<XExpression, LightweightTypeReference> _function = (XExpression it) -> {
+      args = IterableExtensions.<LightweightTypeReference>join(ListExtensions.<XExpression, LightweightTypeReference>map(this._featureLinkHelper.getSyntacticArguments(featureCall), ((Function1<XExpression, LightweightTypeReference>) (XExpression it) -> {
         return types.getActualType(it);
-      };
-      List<LightweightTypeReference> _map = ListExtensions.<XExpression, LightweightTypeReference>map(_syntacticArguments, _function);
-      final Function1<LightweightTypeReference, CharSequence> _function_1 = (LightweightTypeReference it) -> {
+      })), ", ", ((Function1<LightweightTypeReference, CharSequence>) (LightweightTypeReference it) -> {
         String _xifexpression = null;
         if (((it == null) || it.isAny())) {
           _xifexpression = "Object";
@@ -132,9 +126,7 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
           _xifexpression = it.getHumanReadableName();
         }
         return _xifexpression;
-      };
-      String _join = IterableExtensions.<LightweightTypeReference>join(_map, ", ", _function_1);
-      args = _join;
+      }));
     }
     boolean _isExplicitOperationCallOrBuilderSyntax = featureCall.isExplicitOperationCallOrBuilderSyntax();
     final boolean orField = (!_isExplicitOperationCallOrBuilderSyntax);

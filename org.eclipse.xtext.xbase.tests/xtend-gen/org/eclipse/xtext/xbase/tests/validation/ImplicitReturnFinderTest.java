@@ -391,8 +391,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     _builder.append(expression);
     _builder.append(" to have no implicit returns, but it had ");
     _builder.append(returns);
-    boolean _isEmpty = returns.isEmpty();
-    Assert.assertTrue(_builder.toString(), _isEmpty);
+    Assert.assertTrue(_builder.toString(), returns.isEmpty());
   }
   
   public void hasImplicitReturns(final XExpression expression, final XExpression... expectedReturns) {

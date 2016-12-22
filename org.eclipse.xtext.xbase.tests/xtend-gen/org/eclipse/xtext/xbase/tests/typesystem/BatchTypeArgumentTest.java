@@ -41,9 +41,7 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
   
   @Override
   protected void resolveTypes(final XExpression expression) {
-    IBatchTypeResolver _typeResolver = this.getTypeResolver();
-    IResolvedTypes _resolveTypes = _typeResolver.resolveTypes(expression);
-    this.resolvedTypes = _resolveTypes;
+    this.resolvedTypes = this.getTypeResolver().resolveTypes(expression);
   }
   
   @After
@@ -54,9 +52,7 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
   @Override
   protected void hasTypeArguments(final XExpression expression, final String... typeArguments) {
     final List<LightweightTypeReference> actualTypeArguments = this.resolvedTypes.getActualTypeArguments(expression);
-    int _size = ((List<String>)Conversions.doWrapArray(typeArguments)).size();
-    int _size_1 = actualTypeArguments.size();
-    Assert.assertEquals(_size, _size_1);
+    Assert.assertEquals(((List<String>)Conversions.doWrapArray(typeArguments)).size(), actualTypeArguments.size());
     final Procedure2<String, Integer> _function = (String typeArgument, Integer i) -> {
       StringConcatenation _builder = new StringConcatenation();
       String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(typeArguments)), ", ");
@@ -68,9 +64,7 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
       List<String> _map = ListExtensions.<LightweightTypeReference, String>map(actualTypeArguments, _function_1);
       String _join_1 = IterableExtensions.join(_map, ", ");
       _builder.append(_join_1);
-      LightweightTypeReference _get = actualTypeArguments.get((i).intValue());
-      String _simpleName = _get.getSimpleName();
-      Assert.assertEquals(_builder.toString(), typeArgument, _simpleName);
+      Assert.assertEquals(_builder.toString(), typeArgument, actualTypeArguments.get((i).intValue()).getSimpleName());
     };
     IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(typeArguments)), _function);
   }

@@ -120,15 +120,11 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
     int _size = resourceURIs.size();
     boolean _greaterThan = (_size > 1);
     if (_greaterThan) {
-      final Function1<URI, Boolean> _function_1 = (URI it) -> {
+      this.addIssue(type, IterableExtensions.<URI>head(IterableExtensions.<URI>filter(resourceURIs, ((Function1<URI, Boolean>) (URI it) -> {
         Resource _eResource = type.eResource();
         URI _uRI = _eResource.getURI();
         return Boolean.valueOf((!Objects.equal(it, _uRI)));
-      };
-      Iterable<URI> _filter = IterableExtensions.<URI>filter(resourceURIs, _function_1);
-      URI _head = IterableExtensions.<URI>head(_filter);
-      String _lastSegment = _head.lastSegment();
-      this.addIssue(type, _lastSegment);
+      }))).lastSegment());
       return false;
     }
     return true;

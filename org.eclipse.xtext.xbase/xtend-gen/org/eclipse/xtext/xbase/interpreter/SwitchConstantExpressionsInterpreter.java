@@ -81,8 +81,7 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
   }
   
   protected Object _internalEvaluate(final XNumberLiteral it, final Context ctx) {
-    Class<? extends Number> _javaType = this.numberLiterals.getJavaType(it);
-    return this.numberLiterals.numberValue(it, _javaType);
+    return this.numberLiterals.numberValue(it, this.numberLiterals.getJavaType(it));
   }
   
   protected Object _internalEvaluate(final XAbstractFeatureCall it, final Context ctx) {

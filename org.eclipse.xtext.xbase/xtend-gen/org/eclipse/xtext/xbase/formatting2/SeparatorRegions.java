@@ -37,10 +37,9 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
     if ((this.first == null)) {
       this.first = newObject;
     } else {
+      newObject.next = this.first.getLeadingSeparator();
       SeparatorEntry<T, R> _leadingSeparator = this.first.getLeadingSeparator();
-      newObject.next = _leadingSeparator;
-      SeparatorEntry<T, R> _leadingSeparator_1 = this.first.getLeadingSeparator();
-      _leadingSeparator_1.next = newObject;
+      _leadingSeparator.next = newObject;
       this.first = newObject;
     }
   }
@@ -55,10 +54,9 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
     if ((this.first == null)) {
       this.first = newObject;
     } else {
+      newObject.next = this.first.getLeadingSeparator();
       SeparatorEntry<T, R> _leadingSeparator = this.first.getLeadingSeparator();
-      newObject.next = _leadingSeparator;
-      SeparatorEntry<T, R> _leadingSeparator_1 = this.first.getLeadingSeparator();
-      _leadingSeparator_1.previous = newObject;
+      _leadingSeparator.previous = newObject;
       this.first = newObject;
     }
   }
@@ -100,8 +98,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
             return this.endOfData();
           }
           final ObjectEntry<T, R> current = this.next;
-          ObjectEntry<T, R> _trailingObject = this.next.getTrailingObject();
-          this.next = _trailingObject;
+          this.next = this.next.getTrailingObject();
           _xblockexpression = current;
         }
         return _xblockexpression;
@@ -129,8 +126,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
                 return this.endOfData();
               }
               final SeparatorEntry<T, R> current = this.next;
-              SeparatorEntry<T, R> _trailingSeparator = this.next.getTrailingSeparator();
-              this.next = _trailingSeparator;
+              this.next = this.next.getTrailingSeparator();
               _xblockexpression = current;
             }
             return _xblockexpression;

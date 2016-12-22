@@ -11,7 +11,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
@@ -168,8 +167,7 @@ public class FormatterStubGenerator {
     final LinkedHashMultimap<EClass, EReference> type2ref = LinkedHashMultimap.<EClass, EReference>create();
     this.getLocallyAssignedContainmentReferences(this.grammar, type2ref);
     final LinkedHashMultimap<EClass, EReference> inheritedTypes = LinkedHashMultimap.<EClass, EReference>create();
-    HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet();
-    this.getInheritedContainmentReferences(this.grammar, inheritedTypes, _newHashSet);
+    this.getInheritedContainmentReferences(this.grammar, inheritedTypes, CollectionLiterals.<Grammar>newHashSet());
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     String _stubSimpleName = this.getStubSimpleName();

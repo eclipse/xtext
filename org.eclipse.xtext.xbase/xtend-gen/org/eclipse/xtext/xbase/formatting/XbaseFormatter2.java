@@ -122,8 +122,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _elvis_1 = _nodeForKeyword_4;
     }
     final ILeafNode close = _elvis_1;
-    EList<XExpression> _elements = literal.getElements();
-    this.formatCommaSeparatedList(_elements, open, close, document);
+    this.formatCommaSeparatedList(literal.getElements(), open, close, document);
   }
   
   protected void formatCommaSeparatedList(final Collection<? extends EObject> elements, final INode open, final INode close, final FormattableDocument format) {
@@ -178,9 +177,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
               format.operator_add(_append_3);
             }
             this.format(elem, format);
-            INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(elem);
-            ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(_nodeForEObject_1, ",");
-            comma = _immediatelyFollowingKeyword;
+            comma = this._nodeModelAccess.immediatelyFollowingKeyword(this._nodeModelAccess.nodeForEObject(elem), ",");
             final Procedure1<FormattingDataInit> _function_4 = (FormattingDataInit it) -> {
               it.noSpace();
             };
@@ -232,9 +229,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
             indented = true;
           }
           this.format(elem_1, format);
-          INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(elem_1);
-          ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(_nodeForEObject, ",");
-          comma_1 = _immediatelyFollowingKeyword;
+          comma_1 = this._nodeModelAccess.immediatelyFollowingKeyword(this._nodeModelAccess.nodeForEObject(elem_1), ",");
           final Procedure1<FormattingDataInit> _function_5 = (FormattingDataInit it) -> {
             it.noSpace();
           };
@@ -701,9 +696,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
             format.operator_add(_append_4);
           }
           this.format(arg, format);
-          INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(arg);
-          ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(_nodeForEObject_1, ",");
-          node = _immediatelyFollowingKeyword;
+          node = this._nodeModelAccess.immediatelyFollowingKeyword(this._nodeModelAccess.nodeForEObject(arg), ",");
           final Procedure1<FormattingDataInit> _function_8 = (FormattingDataInit it) -> {
             it.noSpace();
           };
@@ -824,9 +817,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
             format.operator_add(_append_2);
           }
           this.format(arg, format);
-          INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(arg);
-          ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(_nodeForEObject_1, ",");
-          node = _immediatelyFollowingKeyword;
+          node = this._nodeModelAccess.immediatelyFollowingKeyword(this._nodeModelAccess.nodeForEObject(arg), ",");
           final Procedure1<FormattingDataInit> _function_4 = (FormattingDataInit it) -> {
             it.noSpace();
           };
@@ -891,8 +882,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         if (_equals) {
           return false;
         }
-        int _endLine = node.getEndLine();
-        lastLine = _endLine;
+        lastLine = node.getEndLine();
       }
     }
     return true;
@@ -945,11 +935,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
     format.operator_add(_prepend_2);
     boolean _isMultiParamInOwnLine = this.isMultiParamInOwnLine(expr, format);
     if (_isMultiParamInOwnLine) {
-      EList<XExpression> _arguments = expr.getArguments();
-      this.formatFeatureCallParamsMultiline(open, _arguments, format);
+      this.formatFeatureCallParamsMultiline(open, expr.getArguments(), format);
     } else {
-      EList<XExpression> _arguments_1 = expr.getArguments();
-      this.formatFeatureCallParamsWrapIfNeeded(open, _arguments_1, format);
+      this.formatFeatureCallParamsWrapIfNeeded(open, expr.getArguments(), format);
     }
   }
   
@@ -1000,15 +988,13 @@ public class XbaseFormatter2 extends AbstractFormatter {
       format.operator_add(_prepend);
       boolean _isMultiParamInOwnLine = this.isMultiParamInOwnLine(expr, format);
       if (_isMultiParamInOwnLine) {
-        EList<XExpression> _featureCallArguments = expr.getFeatureCallArguments();
-        this.formatFeatureCallParamsMultiline(open, _featureCallArguments, format);
+        this.formatFeatureCallParamsMultiline(open, expr.getFeatureCallArguments(), format);
       } else {
-        EList<XExpression> _featureCallArguments_1 = expr.getFeatureCallArguments();
-        this.formatFeatureCallParamsWrapIfNeeded(open, _featureCallArguments_1, format);
+        this.formatFeatureCallParamsWrapIfNeeded(open, expr.getFeatureCallArguments(), format);
       }
     } else {
-      EList<XExpression> _featureCallArguments_2 = expr.getFeatureCallArguments();
-      for (final XExpression arg : _featureCallArguments_2) {
+      EList<XExpression> _featureCallArguments = expr.getFeatureCallArguments();
+      for (final XExpression arg : _featureCallArguments) {
         this.format(arg, format);
       }
     }
@@ -1071,8 +1057,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     while ((top instanceof XMemberFeatureCall)) {
       {
         calls.add(((XMemberFeatureCall)top));
-        XExpression _memberCallTarget = ((XMemberFeatureCall)top).getMemberCallTarget();
-        top = _memberCallTarget;
+        top = ((XMemberFeatureCall)top).getMemberCallTarget();
       }
     }
     this.format(top, format);
@@ -1142,8 +1127,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
                 Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(op, _function_3);
                 format.operator_add(_append_2);
               }
-              EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
-              this.formatFeatureCallParamsMultiline(open, _memberCallArguments, format);
+              this.formatFeatureCallParamsMultiline(open, call.getMemberCallArguments(), format);
             } else {
               if ((((lineLength + (featureNode.getLength() * 2)) < format.getCfg().get(BasicFormatterPreferenceKeys.maxLineWidth)) || format.fitsIntoLine(callOffset, callLength, 
                 ((Procedure1<FormattableDocument>) (FormattableDocument f) -> {
@@ -1152,8 +1136,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
                   };
                   Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(op, _function_4);
                   f.operator_add(_append_3);
-                  EList<XExpression> _memberCallArguments_1 = call.getMemberCallArguments();
-                  this.formatFeatureCallParamsWrapIfNeeded(open, _memberCallArguments_1, f);
+                  this.formatFeatureCallParamsWrapIfNeeded(open, call.getMemberCallArguments(), f);
                 })))) {
                 final Procedure1<FormattingDataInit> _function_4 = (FormattingDataInit it_1) -> {
                   it_1.noSpace();
@@ -1175,8 +1158,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
                   format.operator_add(_append_5);
                 }
               }
-              EList<XExpression> _memberCallArguments_1 = call.getMemberCallArguments();
-              this.formatFeatureCallParamsWrapIfNeeded(open, _memberCallArguments_1, format);
+              this.formatFeatureCallParamsWrapIfNeeded(open, call.getMemberCallArguments(), format);
             }
           } else {
             int _lineLengthBefore = format.lineLengthBefore(callOffset);
@@ -1206,12 +1188,12 @@ public class XbaseFormatter2 extends AbstractFormatter {
                 format.operator_add(_append_8);
               }
             }
-            EList<XExpression> _memberCallArguments_2 = call.getMemberCallArguments();
-            boolean _isEmpty = _memberCallArguments_2.isEmpty();
+            EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
+            boolean _isEmpty = _memberCallArguments.isEmpty();
             boolean _not = (!_isEmpty);
             if (_not) {
-              EList<XExpression> _memberCallArguments_3 = call.getMemberCallArguments();
-              final XClosure builder = this.builder(_memberCallArguments_3);
+              EList<XExpression> _memberCallArguments_1 = call.getMemberCallArguments();
+              final XClosure builder = this.builder(_memberCallArguments_1);
               INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(builder);
               final Procedure1<FormattingDataInit> _function_10 = (FormattingDataInit it_1) -> {
                 boolean _isMultilineLambda = this.isMultilineLambda(builder);
@@ -1277,8 +1259,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     while (Objects.equal(this.binaryOperationPrecedence(top), precendece)) {
       {
         calls.add(((XBinaryOperation) top));
-        XExpression _leftOperand = ((XBinaryOperation) top).getLeftOperand();
-        top = _leftOperand;
+        top = ((XBinaryOperation) top).getLeftOperand();
       }
     }
     this.format(top, format);
@@ -1313,8 +1294,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
             format.operator_add(_append_2);
           }
         }
-        XExpression _rightOperand = call.getRightOperand();
-        this.format(_rightOperand, format);
+        this.format(call.getRightOperand(), format);
       }
     }
     if (indented) {
@@ -2074,16 +2054,14 @@ public class XbaseFormatter2 extends AbstractFormatter {
     INode node = typeNode;
     while ((node != null)) {
       {
-        ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(node, "[");
-        node = _immediatelyFollowingKeyword;
+        node = this._nodeModelAccess.immediatelyFollowingKeyword(node, "[");
         if ((node != null)) {
           final Procedure1<FormattingDataInit> _function_3 = (FormattingDataInit it) -> {
             it.noSpace();
           };
           Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(node, _function_3);
           format.operator_add(_append_2);
-          ILeafNode _immediatelyFollowingKeyword_1 = this._nodeModelAccess.immediatelyFollowingKeyword(node, "]");
-          node = _immediatelyFollowingKeyword_1;
+          node = this._nodeModelAccess.immediatelyFollowingKeyword(node, "]");
           if ((node != null)) {
             final Procedure1<FormattingDataInit> _function_4 = (FormattingDataInit it) -> {
               it.noSpace();
@@ -2784,8 +2762,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       };
       Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(open, _function);
       format.operator_add(_append);
-      INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, XbasePackage.Literals.XCLOSURE__EXPLICIT_SYNTAX);
-      last = _nodeForFeature;
+      last = this._nodeModelAccess.nodeForFeature(expr, XbasePackage.Literals.XCLOSURE__EXPLICIT_SYNTAX);
       EList<JvmFormalParameter> _declaredFormalParameters = expr.getDeclaredFormalParameters();
       boolean _isEmpty = _declaredFormalParameters.isEmpty();
       boolean _not = (!_isEmpty);
@@ -2829,8 +2806,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           format.operator_add(_append_3);
         }
         this.format(c, format);
-        INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(c);
-        last = _nodeForEObject;
+        last = this._nodeModelAccess.nodeForEObject(c);
         final ILeafNode semicolon = this._nodeModelAccess.immediatelyFollowingKeyword(last, ";");
         if ((semicolon != null)) {
           final Procedure1<FormattingDataInit> _function_5 = (FormattingDataInit it) -> {

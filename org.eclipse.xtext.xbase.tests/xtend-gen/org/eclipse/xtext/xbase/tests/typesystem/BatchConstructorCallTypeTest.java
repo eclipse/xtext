@@ -36,11 +36,8 @@ public class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTes
   public void resolvesConstructorCallsTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<XConstructorCall> featureCalls = this.findConstructorCalls(expressionWithQualifiedNames);
-    boolean _isEmpty = featureCalls.isEmpty();
-    Assert.assertFalse(_isEmpty);
-    int _size = ((List<String>)Conversions.doWrapArray(types)).size();
-    int _size_1 = featureCalls.size();
-    Assert.assertEquals(_size, _size_1);
+    Assert.assertFalse(featureCalls.isEmpty());
+    Assert.assertEquals(((List<String>)Conversions.doWrapArray(types)).size(), featureCalls.size());
     IBatchTypeResolver _typeResolver = this.getTypeResolver();
     XConstructorCall _head = IterableExtensions.<XConstructorCall>head(featureCalls);
     final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
@@ -49,9 +46,7 @@ public class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTes
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("failed for constructor call at ");
       _builder.append(index);
-      Object _get = types[(index).intValue()];
-      String _simpleName = type.getSimpleName();
-      Assert.assertEquals(_builder.toString(), _get, _simpleName);
+      Assert.assertEquals(_builder.toString(), types[(index).intValue()], type.getSimpleName());
     };
     IterableExtensions.<XConstructorCall>forEach(featureCalls, _function);
   }

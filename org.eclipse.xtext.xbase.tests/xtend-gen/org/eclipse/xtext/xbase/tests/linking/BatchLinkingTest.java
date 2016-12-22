@@ -55,8 +55,7 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
         XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
         boolean _tripleNotEquals = (_implicitReceiver != null);
         if (_tripleNotEquals) {
-          XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
-          this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
+          this.assertExpressionTypeIsResolved(((XAbstractFeatureCall)content).getImplicitReceiver(), resolvedTypes);
         }
       }
       if (!_matched) {
@@ -81,22 +80,16 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
           _matched_1=true;
           Object _eGet = ((XConstructorCall)content_1).eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
           final InternalEObject constructor = ((InternalEObject) _eGet);
-          String _string = ((XConstructorCall)content_1).toString();
-          Assert.assertNotNull(_string, constructor);
-          String _string_1 = ((XConstructorCall)content_1).toString();
-          boolean _eIsProxy = constructor.eIsProxy();
-          Assert.assertFalse(_string_1, _eIsProxy);
+          Assert.assertNotNull(((XConstructorCall)content_1).toString(), constructor);
+          Assert.assertFalse(((XConstructorCall)content_1).toString(), constructor.eIsProxy());
         }
         if (!_matched_1) {
           if (content_1 instanceof XAbstractFeatureCall) {
             _matched_1=true;
             Object _eGet = ((XAbstractFeatureCall)content_1).eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
             final InternalEObject feature = ((InternalEObject) _eGet);
-            String _string = ((XAbstractFeatureCall)content_1).toString();
-            Assert.assertNotNull(_string, feature);
-            String _string_1 = ((XAbstractFeatureCall)content_1).toString();
-            boolean _eIsProxy = feature.eIsProxy();
-            Assert.assertFalse(_string_1, _eIsProxy);
+            Assert.assertNotNull(((XAbstractFeatureCall)content_1).toString(), feature);
+            Assert.assertFalse(((XAbstractFeatureCall)content_1).toString(), feature.eIsProxy());
           }
         }
       }
@@ -106,24 +99,20 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
   
   public void assertExpressionTypeIsResolved(final XExpression expression, final IResolvedTypes types) {
     final LightweightTypeReference type = types.getActualType(expression);
+    Assert.assertNotNull(expression.toString(), type);
     String _string = expression.toString();
-    Assert.assertNotNull(_string, type);
-    String _string_1 = expression.toString();
-    String _plus = (_string_1 + " / ");
+    String _plus = (_string + " / ");
     String _plus_1 = (_plus + type);
-    String _identifier = type.getIdentifier();
-    Assert.assertNotNull(_plus_1, _identifier);
+    Assert.assertNotNull(_plus_1, type.getIdentifier());
   }
   
   public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable, final IResolvedTypes types) {
     final LightweightTypeReference type = types.getActualType(identifiable);
+    Assert.assertNotNull(identifiable.toString(), type);
     String _string = identifiable.toString();
-    Assert.assertNotNull(_string, type);
-    String _string_1 = identifiable.toString();
-    String _plus = (_string_1 + " / ");
+    String _plus = (_string + " / ");
     String _plus_1 = (_plus + type);
-    String _identifier = type.getIdentifier();
-    Assert.assertNotNull(_plus_1, _identifier);
+    Assert.assertNotNull(_plus_1, type.getIdentifier());
   }
   
   @Test

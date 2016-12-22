@@ -78,8 +78,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         _xifexpression = 0;
       }
       final int insignificantParameters = _xifexpression;
-      XtextResource _resource = context.getResource();
-      final LightweightTypeReferenceFactory converter = this.getTypeConverter(_resource);
+      final LightweightTypeReferenceFactory converter = this.getTypeConverter(context.getResource());
       final EObject objectOrProxy = candidate.getEObjectOrProxy();
       IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
       final Procedure1<ContentAssistEntry> _function = (ContentAssistEntry result) -> {
@@ -95,19 +94,13 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
           } else {
             boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(bracketInfo.brackets);
             boolean _not = (!_isNullOrEmpty);
-            IQualifiedNameConverter _qualifiedNameConverter_2 = this.getQualifiedNameConverter();
-            QualifiedName _name_2 = candidate.getName();
-            String _string_2 = _qualifiedNameConverter_2.toString(_name_2);
-            this.addNameAndDescription(result, ((JvmFeature)objectOrProxy), _not, insignificantParameters, _string_2, converter);
+            this.addNameAndDescription(result, ((JvmFeature)objectOrProxy), _not, insignificantParameters, 
+              this.getQualifiedNameConverter().toString(candidate.getName()), converter);
           }
         } else {
-          IQualifiedNameConverter _qualifiedNameConverter_3 = this.getQualifiedNameConverter();
-          QualifiedName _qualifiedName = candidate.getQualifiedName();
-          String _string_3 = _qualifiedNameConverter_3.toString(_qualifiedName);
-          IQualifiedNameConverter _qualifiedNameConverter_4 = this.getQualifiedNameConverter();
-          QualifiedName _name_3 = candidate.getName();
-          String _string_4 = _qualifiedNameConverter_4.toString(_name_3);
-          this.addNameAndDescription(result, objectOrProxy, _string_3, _string_4);
+          this.addNameAndDescription(result, objectOrProxy, 
+            this.getQualifiedNameConverter().toString(candidate.getQualifiedName()), 
+            this.getQualifiedNameConverter().toString(candidate.getName()));
         }
         int _offset = context.getOffset();
         String _prefix = context.getPrefix();
@@ -158,14 +151,12 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
             int _length = "value".length();
             int _minus = (-_length);
             info.selectionOffset = _minus;
-            int _length_1 = "value".length();
-            info.selectionLength = _length_1;
+            info.selectionLength = "value".length();
             return info;
           }
           JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(parameters);
           final JvmTypeReference parameterType = _last.getParameterType();
-          XtextResource _resource = contentAssistContext.getResource();
-          LightweightTypeReferenceFactory _typeConverter = this.getTypeConverter(_resource);
+          LightweightTypeReferenceFactory _typeConverter = this.getTypeConverter(contentAssistContext.getResource());
           final LightweightTypeReference light = _typeConverter.toLightweightReference(parameterType);
           boolean _isFunctionType = light.isFunctionType();
           if (_isFunctionType) {
@@ -196,12 +187,11 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
                 String _plus_1 = (_plus + "|]");
                 info.brackets = _plus_1;
                 info.caretOffset = (-1);
-                int _length_2 = b.length();
-                int _minus_1 = (-_length_2);
+                int _length_1 = b.length();
+                int _minus_1 = (-_length_1);
                 int _minus_2 = (_minus_1 - 2);
                 info.selectionOffset = _minus_2;
-                int _length_3 = b.length();
-                info.selectionLength = _length_3;
+                info.selectionLength = b.length();
                 return info;
               }
             }
@@ -285,10 +275,8 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         }
       }
     }
-    String _string = labelBuilder.toString();
-    entry.setLabel(_string);
-    String _string_1 = descriptionBuilder.toString();
-    entry.setDescription(_string_1);
+    entry.setLabel(labelBuilder.toString());
+    entry.setDescription(descriptionBuilder.toString());
   }
   
   protected void addNameAndDescription(final ContentAssistEntry entry, final EObject element, final String qualifiedNameAsString, final String shortName) {
@@ -297,8 +285,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
     int _segmentCount = qualifiedName.getSegmentCount();
     boolean _greaterThan = (_segmentCount > 1);
     if (_greaterThan) {
-      String _lastSegment = qualifiedName.getLastSegment();
-      entry.setLabel(_lastSegment);
+      entry.setLabel(qualifiedName.getLastSegment());
       entry.setDescription(qualifiedNameAsString);
     } else {
       entry.setLabel(qualifiedNameAsString);

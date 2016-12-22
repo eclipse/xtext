@@ -65,13 +65,12 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   
   @Override
   protected void doLoad(final InputStream inputStream, final Map<?, ?> options) throws IOException {
-    URI _uRI = this.getURI();
-    final String encoding = this.getEncoding(_uRI, options);
+    final String encoding = this.getEncoding(this.getURI(), options);
     InputStreamReader _inputStreamReader = new InputStreamReader(inputStream, encoding);
     final String contentsAsString = CharStreams.toString(_inputStreamReader);
     char[] _charArray = contentsAsString.toCharArray();
-    URI _uRI_1 = this.getURI();
-    String _lastSegment = _uRI_1.lastSegment();
+    URI _uRI = this.getURI();
+    String _lastSegment = _uRI.lastSegment();
     CompilationUnit _compilationUnit = new CompilationUnit(_charArray, _lastSegment, encoding);
     this.compilationUnit = _compilationUnit;
   }
@@ -181,8 +180,7 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
       Map<String, Object> _protocolToFactoryMap = _resourceFactoryRegistry.getProtocolToFactoryMap();
       final Object provider = _protocolToFactoryMap.get(URIHelperConstants.PROTOCOL);
       if ((provider instanceof AbstractJvmTypeProvider)) {
-        IndexedJvmTypeAccess _indexedJvmTypeAccess = ((AbstractJvmTypeProvider)provider).getIndexedJvmTypeAccess();
-        this._access = _indexedJvmTypeAccess;
+        this._access = ((AbstractJvmTypeProvider)provider).getIndexedJvmTypeAccess();
       }
     }
     return this._access;

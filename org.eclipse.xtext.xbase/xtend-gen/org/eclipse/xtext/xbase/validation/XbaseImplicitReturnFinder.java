@@ -88,30 +88,23 @@ public class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
   }
   
   protected void _findImplicitReturns(final XBlockExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
-    EList<XExpression> _expressions = expression.getExpressions();
-    XExpression _last = IterableExtensions.<XExpression>last(_expressions);
-    this.findImplicitReturns(_last, acceptor);
+    this.findImplicitReturns(IterableExtensions.<XExpression>last(expression.getExpressions()), acceptor);
   }
   
   protected void _findImplicitReturns(final XSynchronizedExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
-    XExpression _expression = expression.getExpression();
-    this.findImplicitReturns(_expression, acceptor);
+    this.findImplicitReturns(expression.getExpression(), acceptor);
   }
   
   protected void _findImplicitReturns(final XIfExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
-    XExpression _then = expression.getThen();
-    this.findImplicitReturns(_then, acceptor);
-    XExpression _else = expression.getElse();
-    this.findImplicitReturns(_else, acceptor);
+    this.findImplicitReturns(expression.getThen(), acceptor);
+    this.findImplicitReturns(expression.getElse(), acceptor);
   }
   
   protected void _findImplicitReturns(final XTryCatchFinallyExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
-    XExpression _expression = expression.getExpression();
-    this.findImplicitReturns(_expression, acceptor);
+    this.findImplicitReturns(expression.getExpression(), acceptor);
     EList<XCatchClause> _catchClauses = expression.getCatchClauses();
     final Consumer<XCatchClause> _function = (XCatchClause it) -> {
-      XExpression _expression_1 = it.getExpression();
-      this.findImplicitReturns(_expression_1, acceptor);
+      this.findImplicitReturns(it.getExpression(), acceptor);
     };
     _catchClauses.forEach(_function);
   }
@@ -119,12 +112,10 @@ public class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
   protected void _findImplicitReturns(final XSwitchExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
     EList<XCasePart> _cases = expression.getCases();
     final Consumer<XCasePart> _function = (XCasePart it) -> {
-      XExpression _then = it.getThen();
-      this.findImplicitReturns(_then, acceptor);
+      this.findImplicitReturns(it.getThen(), acceptor);
     };
     _cases.forEach(_function);
-    XExpression _default = expression.getDefault();
-    this.findImplicitReturns(_default, acceptor);
+    this.findImplicitReturns(expression.getDefault(), acceptor);
   }
   
   public void findImplicitReturns(final XExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {

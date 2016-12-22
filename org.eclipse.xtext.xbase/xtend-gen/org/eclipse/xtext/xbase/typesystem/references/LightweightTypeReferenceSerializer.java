@@ -53,8 +53,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
       this.doVisitParameterizedTypeReference(reference);
     } else {
       this.appender.append("(");
-      List<LightweightTypeReference> _parameterTypes = reference.getParameterTypes();
-      this.appendCommaSeparated(_parameterTypes);
+      this.appendCommaSeparated(reference.getParameterTypes());
       this.appender.append(")=>");
       LightweightTypeReference _returnType = reference.getReturnType();
       boolean _tripleEquals = (_returnType == null);
@@ -82,14 +81,12 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
       boolean _not = (!_isEmpty);
       if (_not) {
         this.appender.append("<");
-        List<LightweightTypeReference> _typeArguments_1 = reference.getTypeArguments();
-        this.appendCommaSeparated(_typeArguments_1);
+        this.appendCommaSeparated(reference.getTypeArguments());
         this.appender.append(">");
       }
     } else {
       this.appender.append("(");
-      List<LightweightTypeReference> _parameterTypes = reference.getParameterTypes();
-      this.appendCommaSeparated(_parameterTypes);
+      this.appendCommaSeparated(reference.getParameterTypes());
       this.appender.append(")=>");
       LightweightTypeReference _returnType = reference.getReturnType();
       boolean _tripleEquals = (_returnType == null);
@@ -116,8 +113,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
       boolean _not = (!_isEmpty);
       if (_not) {
         this.appender.append("<");
-        List<LightweightTypeReference> _typeArguments_1 = reference.getTypeArguments();
-        this.appendCommaSeparated(_typeArguments_1);
+        this.appendCommaSeparated(reference.getTypeArguments());
         this.appender.append(">");
       }
     }
@@ -136,8 +132,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     boolean _not = (!_isEmpty);
     if (_not) {
       this.appender.append("<");
-      List<LightweightTypeReference> _typeArguments_1 = reference.getTypeArguments();
-      this.appendCommaSeparated(_typeArguments_1);
+      this.appendCommaSeparated(reference.getTypeArguments());
       this.appender.append(">");
     }
   }

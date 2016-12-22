@@ -32,88 +32,77 @@ public class ArrayTypesTest extends AbstractXbaseTestCase {
   public void testTryConvertToArray_01() {
     final LightweightTypeReference typeReference = this.toTypeReference("Iterable<?>");
     final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
-    String _simpleName = arrayType.getSimpleName();
-    Assert.assertEquals("Object[]", _simpleName);
+    Assert.assertEquals("Object[]", arrayType.getSimpleName());
   }
   
   @Test
   public void testTryConvertToArray_02() {
     final LightweightTypeReference typeReference = this.toTypeReference("Iterable<? extends String>");
     final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
-    String _simpleName = arrayType.getSimpleName();
-    Assert.assertEquals("String[]", _simpleName);
+    Assert.assertEquals("String[]", arrayType.getSimpleName());
   }
   
   @Test
   public void testTryConvertToArray_03() {
     final LightweightTypeReference typeReference = this.toTypeReference("java.util.Collection");
     final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
-    String _simpleName = arrayType.getSimpleName();
-    Assert.assertEquals("Object[]", _simpleName);
+    Assert.assertEquals("Object[]", arrayType.getSimpleName());
   }
   
   @Test
   public void testTryConvertToArray_04() {
     final LightweightTypeReference typeReference = this.toTypeReference("org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.StringIterable");
     final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
-    String _simpleName = arrayType.getSimpleName();
-    Assert.assertEquals("String[]", _simpleName);
+    Assert.assertEquals("String[]", arrayType.getSimpleName());
   }
   
   @Test
   public void testTryConvertToArray_05() {
     final LightweightTypeReference typeReference = this.toTypeReference("org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.CharSequenceIterable");
     final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
-    String _simpleName = arrayType.getSimpleName();
-    Assert.assertEquals("Object[]", _simpleName);
+    Assert.assertEquals("Object[]", arrayType.getSimpleName());
   }
   
   @Test
   public void testTryConvertToArray_06() {
     final LightweightTypeReference typeReference = this.toTypeReference("org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.CharSequenceIterable<StringBuffer>");
     final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
-    String _simpleName = arrayType.getSimpleName();
-    Assert.assertEquals("StringBuffer[]", _simpleName);
+    Assert.assertEquals("StringBuffer[]", arrayType.getSimpleName());
   }
   
   @Test
   public void testTryConvertToArray_07() {
     final LightweightTypeReference typeReference = this.toTypeReference("org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.StrangeIterable");
     final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
-    String _simpleName = arrayType.getSimpleName();
-    Assert.assertEquals("Object[]", _simpleName);
+    Assert.assertEquals("Object[]", arrayType.getSimpleName());
   }
   
   @Test
   public void testTryConvertToArray_08() {
     final LightweightTypeReference typeReference = this.toTypeReference("org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.StrangeIterable<String>");
     final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
-    String _simpleName = arrayType.getSimpleName();
-    Assert.assertEquals("Object[]", _simpleName);
+    Assert.assertEquals("Object[]", arrayType.getSimpleName());
   }
   
   @Test
   public void testTryConvertToArray_09() {
     final LightweightTypeReference typeReference = this.toTypeReference("org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.StrangeStringIterable");
     final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
-    String _simpleName = arrayType.getSimpleName();
-    Assert.assertEquals("Object[]", _simpleName);
+    Assert.assertEquals("Object[]", arrayType.getSimpleName());
   }
   
   @Test
   public void testTryConvertToArray_10() {
     final LightweightTypeReference typeReference = this.toTypeReference("org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.StrangeStringIterable<Integer>");
     final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
-    String _simpleName = arrayType.getSimpleName();
-    Assert.assertEquals("String[]", _simpleName);
+    Assert.assertEquals("String[]", arrayType.getSimpleName());
   }
   
   @Test
   public void testTryConvertToArray_11() {
     final LightweightTypeReference typeReference = this.toTypeReference("org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.IterableContainer<String>.Iter");
     final ArrayTypeReference arrayType = typeReference.tryConvertToArray();
-    String _simpleName = arrayType.getSimpleName();
-    Assert.assertEquals("String[]", _simpleName);
+    Assert.assertEquals("String[]", arrayType.getSimpleName());
   }
   
   protected LightweightTypeReference toTypeReference(final String reference) {

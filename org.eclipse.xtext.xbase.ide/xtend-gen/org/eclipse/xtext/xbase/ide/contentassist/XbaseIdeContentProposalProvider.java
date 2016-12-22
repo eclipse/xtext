@@ -134,8 +134,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     if (Objects.equal(_rule, _xExpressionRule)) {
       _matched=true;
       if (((ruleCall.eContainer() instanceof Group) && Objects.equal(GrammarUtil.containingRule(ruleCall).getName(), "XParenthesizedExpression"))) {
-        EObject _currentModel = context.getCurrentModel();
-        this.createLocalVariableAndImplicitProposals(_currentModel, IExpressionScope.Anchor.WITHIN, context, acceptor);
+        this.createLocalVariableAndImplicitProposals(context.getCurrentModel(), IExpressionScope.Anchor.WITHIN, context, acceptor);
       }
     }
     if (!_matched) {
@@ -450,8 +449,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   }
   
   protected void completeJavaTypes(final EReference reference, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
-    Predicate<ITypeDescriptor> _alwaysTrue = Predicates.<ITypeDescriptor>alwaysTrue();
-    this.completeJavaTypes(reference, context, _alwaysTrue, acceptor);
+    this.completeJavaTypes(reference, context, Predicates.<ITypeDescriptor>alwaysTrue(), acceptor);
   }
   
   protected void completeJavaTypes(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IIdeContentProposalAcceptor acceptor) {
@@ -468,8 +466,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     }
     if ((model instanceof XMemberFeatureCall)) {
       final ICompositeNode node = NodeModelUtils.getNode(model);
-      int _endOffset = node.getEndOffset();
-      boolean _isInMemberFeatureCall = this.isInMemberFeatureCall(model, _endOffset, context);
+      boolean _isInMemberFeatureCall = this.isInMemberFeatureCall(model, node.getEndOffset(), context);
       if (_isInMemberFeatureCall) {
         return;
       }
@@ -572,9 +569,8 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
         AbstractElement _terminal = assignment.getTerminal();
         this.createReceiverProposals(((XExpression) model), ((CrossReference) _terminal), context, acceptor);
       } else {
-        XExpression _leftOperand = ((XBinaryOperation)model).getLeftOperand();
         AbstractElement _terminal_1 = assignment.getTerminal();
-        this.createReceiverProposals(_leftOperand, 
+        this.createReceiverProposals(((XBinaryOperation)model).getLeftOperand(), 
           ((CrossReference) _terminal_1), context, acceptor);
       }
     } else {
@@ -620,15 +616,13 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   
   protected void completeXMemberFeatureCall(final EObject model, final Assignment assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     if ((model instanceof XMemberFeatureCall)) {
-      XExpression _memberCallTarget = ((XMemberFeatureCall)model).getMemberCallTarget();
       AbstractElement _terminal = assignment.getTerminal();
-      this.createReceiverProposals(_memberCallTarget, 
+      this.createReceiverProposals(((XMemberFeatureCall)model).getMemberCallTarget(), 
         ((CrossReference) _terminal), context, acceptor);
     } else {
       if ((model instanceof XAssignment)) {
-        XExpression _assignable = ((XAssignment)model).getAssignable();
         AbstractElement _terminal_1 = assignment.getTerminal();
-        this.createReceiverProposals(_assignable, 
+        this.createReceiverProposals(((XAssignment)model).getAssignable(), 
           ((CrossReference) _terminal_1), context, acceptor);
       }
     }
@@ -667,34 +661,26 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     if ((currentModel != receiver)) {
       if (((currentModel instanceof XMemberFeatureCall) && 
         (((XMemberFeatureCall) currentModel).getMemberCallTarget() == receiver))) {
-        IScope _featureScope = expressionScope.getFeatureScope(((XAbstractFeatureCall) currentModel));
-        IScope _create = this.syntaxFilteredScopes.create(_featureScope, crossReference);
-        scope = _create;
+        scope = this.syntaxFilteredScopes.create(expressionScope.getFeatureScope(((XAbstractFeatureCall) currentModel)), crossReference);
       } else {
-        IScope _featureScope_1 = expressionScope.getFeatureScope();
-        IScope _create_1 = this.syntaxFilteredScopes.create(_featureScope_1, crossReference);
-        scope = _create_1;
+        scope = this.syntaxFilteredScopes.create(expressionScope.getFeatureScope(), crossReference);
       }
     } else {
-      IScope _featureScope_2 = expressionScope.getFeatureScope();
-      IScope _create_2 = this.syntaxFilteredScopes.create(_featureScope_2, crossReference);
-      scope = _create_2;
+      scope = this.syntaxFilteredScopes.create(expressionScope.getFeatureScope(), crossReference);
     }
     IdeCrossrefProposalProvider _crossrefProposalProvider = this.getCrossrefProposalProvider();
     _crossrefProposalProvider.lookupCrossReference(scope, crossReference, context, acceptor, this.featureDescriptionPredicate);
   }
   
   protected String _getConcreteSyntaxRuleName(final Assignment assignment) {
-    AbstractElement _terminal = assignment.getTerminal();
-    return this.getConcreteSyntaxRuleName(_terminal);
+    return this.getConcreteSyntaxRuleName(assignment.getTerminal());
   }
   
   protected String _getConcreteSyntaxRuleName(final CrossReference crossReference) {
     String _xifexpression = null;
     AbstractElement _terminal = crossReference.getTerminal();
     if ((_terminal instanceof RuleCall)) {
-      AbstractElement _terminal_1 = crossReference.getTerminal();
-      _xifexpression = this.getConcreteSyntaxRuleName(_terminal_1);
+      _xifexpression = this.getConcreteSyntaxRuleName(crossReference.getTerminal());
     }
     return _xifexpression;
   }
