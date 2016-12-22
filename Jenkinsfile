@@ -8,7 +8,7 @@ node {
 		try {
 			sh "./gradlew clean build createLocalMavenRepo --refresh-dependencies --continue"
 		} finally {
-			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
+			junit '**/build/test-results/test/*.xml'
 		}
 		
 		stage 'Maven Build'
@@ -24,5 +24,7 @@ node {
 	} catch (e) {
 		slackSend color: 'danger', message: "Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 		throw e
+	} finally {
+		properties [[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']]]
 	}
 }
