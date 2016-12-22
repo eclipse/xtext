@@ -31,8 +31,7 @@ public class Formatter2Fragment extends Xtend2GeneratorFragment {
   
   @Inject
   public void init(final FormatterStubGenerator.Service stubGeneratorService, final Grammar grammar) {
-    FormatterStubGenerator _createGenerator = stubGeneratorService.createGenerator(grammar);
-    this.stubGenerator = _createGenerator;
+    this.stubGenerator = stubGeneratorService.createGenerator(grammar);
   }
   
   public String cls(final Class<?> clazz) {

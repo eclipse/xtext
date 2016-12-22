@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -56,11 +55,8 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
   
   public List<Object> resolvesClosuresTo(final CharSequence expression, final String... types) {
     final List<XClosure> closures = this.findClosures(expression);
-    boolean _isEmpty = closures.isEmpty();
-    Assert.assertFalse(_isEmpty);
-    int _size = ((List<String>)Conversions.doWrapArray(types)).size();
-    int _size_1 = closures.size();
-    Assert.assertEquals(_size, _size_1);
+    Assert.assertFalse(closures.isEmpty());
+    Assert.assertEquals(((List<String>)Conversions.doWrapArray(types)).size(), closures.size());
     XClosure _head = IterableExtensions.<XClosure>head(closures);
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(_head);
     final ArrayList<Object> result = CollectionLiterals.<Object>newArrayList();
@@ -80,9 +76,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("failed for closure at ");
         _builder.append(index);
-        Object _get = types[(index).intValue()];
-        String _simpleName = closureType.getSimpleName();
-        Assert.assertEquals(_builder.toString(), _get, _simpleName);
+        Assert.assertEquals(_builder.toString(), types[(index).intValue()], closureType.getSimpleName());
         return null;
       };
       this.collector.<Object>checkSucceeds(_function_2);
@@ -100,9 +94,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
       };
       this.collector.<Object>checkSucceeds(_function_1);
       final Callable<Object> _function_2 = () -> {
-        Object _get = types[(index).intValue()];
-        String _equivalent = this.getEquivalent(((FunctionTypeReference) reference));
-        Assert.assertEquals(_get, _equivalent);
+        Assert.assertEquals(types[(index).intValue()], this.getEquivalent(((FunctionTypeReference) reference)));
         return null;
       };
       this.collector.<Object>checkSucceeds(_function_2);
@@ -136,8 +128,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
   
   @BeforeClass
   public static void createSeenExpressionsSet() {
-    HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
-    AbstractClosureTypeTest2.seenExpressions = _newHashSet;
+    AbstractClosureTypeTest2.seenExpressions = CollectionLiterals.<String>newHashSet();
   }
   
   @AfterClass

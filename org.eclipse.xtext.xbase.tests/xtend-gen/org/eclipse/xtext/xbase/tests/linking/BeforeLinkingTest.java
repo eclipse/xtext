@@ -12,8 +12,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
@@ -68,12 +66,9 @@ public class BeforeLinkingTest extends AbstractXbaseTestCase {
       final XClosure lambda = ((XClosure) _right);
       EList<JvmFormalParameter> _implicitFormalParameters = lambda.getImplicitFormalParameters();
       final JvmFormalParameter implicitParameter = IterableExtensions.<JvmFormalParameter>head(_implicitFormalParameters);
-      JvmTypeReference _parameterType = implicitParameter.getParameterType();
-      String _simpleName = _parameterType.getSimpleName();
-      Assert.assertEquals("String", _simpleName);
+      Assert.assertEquals("String", implicitParameter.getParameterType().getSimpleName());
       resource.update(0, 0, "");
-      Resource _eResource_1 = implicitParameter.eResource();
-      Assert.assertNull(_eResource_1);
+      Assert.assertNull(implicitParameter.eResource());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -102,14 +97,10 @@ public class BeforeLinkingTest extends AbstractXbaseTestCase {
       final XFeatureCall toString = ((XFeatureCall) _last);
       XExpression _implicitReceiver = toString.getImplicitReceiver();
       final XFeatureCall implicitReceiver = ((XFeatureCall) _implicitReceiver);
-      JvmIdentifiableElement _feature = implicitReceiver.getFeature();
-      String _simpleName = _feature.getSimpleName();
-      Assert.assertEquals("it", _simpleName);
+      Assert.assertEquals("it", implicitReceiver.getFeature().getSimpleName());
       resource.update(0, 0, "");
-      Object _get = this._reflectExtensions.<Object>get(toString, "implicitReceiver");
-      Assert.assertNull(_get);
-      XExpression _implicitReceiver_1 = toString.getImplicitReceiver();
-      Assert.assertNotNull(_implicitReceiver_1);
+      Assert.assertNull(this._reflectExtensions.<Object>get(toString, "implicitReceiver"));
+      Assert.assertNotNull(toString.getImplicitReceiver());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -138,14 +129,10 @@ public class BeforeLinkingTest extends AbstractXbaseTestCase {
       final XFeatureCall unmodifiableView = ((XFeatureCall) _last);
       XExpression _implicitFirstArgument = unmodifiableView.getImplicitFirstArgument();
       final XFeatureCall implicitFirstArgument = ((XFeatureCall) _implicitFirstArgument);
-      JvmIdentifiableElement _feature = implicitFirstArgument.getFeature();
-      String _simpleName = _feature.getSimpleName();
-      Assert.assertEquals("it", _simpleName);
+      Assert.assertEquals("it", implicitFirstArgument.getFeature().getSimpleName());
       resource.update(0, 0, "");
-      Object _get = this._reflectExtensions.<Object>get(unmodifiableView, "implicitFirstArgument");
-      Assert.assertNull(_get);
-      XExpression _implicitFirstArgument_1 = unmodifiableView.getImplicitFirstArgument();
-      Assert.assertNotNull(_implicitFirstArgument_1);
+      Assert.assertNull(this._reflectExtensions.<Object>get(unmodifiableView, "implicitFirstArgument"));
+      Assert.assertNotNull(unmodifiableView.getImplicitFirstArgument());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

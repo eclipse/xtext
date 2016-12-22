@@ -42,19 +42,14 @@ public class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
     XAbstractFeatureCall _head = IterableExtensions.<XAbstractFeatureCall>head(featureCalls);
     final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
     final Iterable<XAbstractFeatureCall> actualFeatureCalls = this.filterTypeLiteralsAndPackageFragments(featureCalls);
-    boolean _isEmpty = IterableExtensions.isEmpty(actualFeatureCalls);
-    Assert.assertFalse(_isEmpty);
-    int _size = ((List<String>)Conversions.doWrapArray(types)).size();
-    int _size_1 = IterableExtensions.size(actualFeatureCalls);
-    Assert.assertEquals(("" + actualFeatureCalls), _size, _size_1);
+    Assert.assertFalse(IterableExtensions.isEmpty(actualFeatureCalls));
+    Assert.assertEquals(("" + actualFeatureCalls), ((List<String>)Conversions.doWrapArray(types)).size(), IterableExtensions.size(actualFeatureCalls));
     final Procedure2<XAbstractFeatureCall, Integer> _function = (XAbstractFeatureCall featureCall, Integer index) -> {
       final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("failed for feature call at ");
       _builder.append(index);
-      Object _get = types[(index).intValue()];
-      String _simpleName = type.getSimpleName();
-      Assert.assertEquals(_builder.toString(), _get, _simpleName);
+      Assert.assertEquals(_builder.toString(), types[(index).intValue()], type.getSimpleName());
     };
     IterableExtensions.<XAbstractFeatureCall>forEach(actualFeatureCalls, _function);
   }

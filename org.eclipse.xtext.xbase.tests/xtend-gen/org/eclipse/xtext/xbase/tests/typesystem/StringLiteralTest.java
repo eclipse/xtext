@@ -44,11 +44,8 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
   public void resolvesStringLiteralsTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<XStringLiteral> featureCalls = this.findLiterals(expressionWithQualifiedNames);
-    boolean _isEmpty = featureCalls.isEmpty();
-    Assert.assertFalse(_isEmpty);
-    int _size = ((List<String>)Conversions.doWrapArray(types)).size();
-    int _size_1 = featureCalls.size();
-    Assert.assertEquals(_size, _size_1);
+    Assert.assertFalse(featureCalls.isEmpty());
+    Assert.assertEquals(((List<String>)Conversions.doWrapArray(types)).size(), featureCalls.size());
     XStringLiteral _head = IterableExtensions.<XStringLiteral>head(featureCalls);
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(_head);
     final Procedure2<XStringLiteral, Integer> _function = (XStringLiteral featureCall, Integer index) -> {
@@ -56,9 +53,7 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("failed for literal at ");
       _builder.append(index);
-      Object _get = types[(index).intValue()];
-      String _simpleName = type.getSimpleName();
-      Assert.assertEquals(_builder.toString(), _get, _simpleName);
+      Assert.assertEquals(_builder.toString(), types[(index).intValue()], type.getSimpleName());
     };
     IterableExtensions.<XStringLiteral>forEach(featureCalls, _function);
   }

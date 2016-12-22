@@ -17,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionStrategy;
 import org.eclipse.xtext.java.tests.JavaInjectorProvider;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -59,19 +58,9 @@ public class ResourceDescriptionProviderTest {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<IResourceDescription> _function = (IResourceDescription it) -> {
-      Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
-      IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
-      QualifiedName _qualifiedName = _head.getQualifiedName();
-      String _string = _qualifiedName.toString();
-      Assert.assertEquals("MyTest", _string);
-      Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
-      IEObjectDescription _head_1 = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
-      EObject _eObjectOrProxy = _head_1.getEObjectOrProxy();
-      boolean _isInterface = ((JvmGenericType) _eObjectOrProxy).isInterface();
-      Assert.assertFalse(_isInterface);
-      Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
-      int _size = IterableExtensions.size(_exportedObjects_2);
-      Assert.assertEquals(1, _size);
+      Assert.assertEquals("MyTest", IterableExtensions.<IEObjectDescription>head(it.getExportedObjects()).getQualifiedName().toString());
+      Assert.assertFalse(((JvmGenericType) IterableExtensions.<IEObjectDescription>head(it.getExportedObjects()).getEObjectOrProxy()).isInterface());
+      Assert.assertEquals(1, IterableExtensions.size(it.getExportedObjects()));
     };
     this.resultsIn(_builder, _function);
   }
@@ -87,19 +76,9 @@ public class ResourceDescriptionProviderTest {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<IResourceDescription> _function = (IResourceDescription it) -> {
-      Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
-      IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
-      QualifiedName _qualifiedName = _head.getQualifiedName();
-      String _string = _qualifiedName.toString();
-      Assert.assertEquals("MyTest", _string);
-      Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
-      IEObjectDescription _head_1 = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
-      EObject _eObjectOrProxy = _head_1.getEObjectOrProxy();
-      boolean _isInterface = ((JvmGenericType) _eObjectOrProxy).isInterface();
-      Assert.assertTrue(_isInterface);
-      Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
-      int _size = IterableExtensions.size(_exportedObjects_2);
-      Assert.assertEquals(1, _size);
+      Assert.assertEquals("MyTest", IterableExtensions.<IEObjectDescription>head(it.getExportedObjects()).getQualifiedName().toString());
+      Assert.assertTrue(((JvmGenericType) IterableExtensions.<IEObjectDescription>head(it.getExportedObjects()).getEObjectOrProxy()).isInterface());
+      Assert.assertEquals(1, IterableExtensions.size(it.getExportedObjects()));
     };
     this.resultsIn(_builder, _function);
   }
@@ -115,18 +94,12 @@ public class ResourceDescriptionProviderTest {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<IResourceDescription> _function = (IResourceDescription it) -> {
+      Assert.assertEquals("MyTest", IterableExtensions.<IEObjectDescription>head(it.getExportedObjects()).getQualifiedName().toString());
       Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
       IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
-      QualifiedName _qualifiedName = _head.getQualifiedName();
-      String _string = _qualifiedName.toString();
-      Assert.assertEquals("MyTest", _string);
-      Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
-      IEObjectDescription _head_1 = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
-      EObject _eObjectOrProxy = _head_1.getEObjectOrProxy();
+      EObject _eObjectOrProxy = _head.getEObjectOrProxy();
       Assert.assertTrue((_eObjectOrProxy instanceof JvmEnumerationType));
-      Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
-      int _size = IterableExtensions.size(_exportedObjects_2);
-      Assert.assertEquals(1, _size);
+      Assert.assertEquals(1, IterableExtensions.size(it.getExportedObjects()));
     };
     this.resultsIn(_builder, _function);
   }
@@ -142,18 +115,12 @@ public class ResourceDescriptionProviderTest {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<IResourceDescription> _function = (IResourceDescription it) -> {
+      Assert.assertEquals("MyTest", IterableExtensions.<IEObjectDescription>head(it.getExportedObjects()).getQualifiedName().toString());
       Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
       IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
-      QualifiedName _qualifiedName = _head.getQualifiedName();
-      String _string = _qualifiedName.toString();
-      Assert.assertEquals("MyTest", _string);
-      Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
-      IEObjectDescription _head_1 = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
-      EObject _eObjectOrProxy = _head_1.getEObjectOrProxy();
+      EObject _eObjectOrProxy = _head.getEObjectOrProxy();
       Assert.assertTrue((_eObjectOrProxy instanceof JvmAnnotationType));
-      Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
-      int _size = IterableExtensions.size(_exportedObjects_2);
-      Assert.assertEquals(1, _size);
+      Assert.assertEquals(1, IterableExtensions.size(it.getExportedObjects()));
     };
     this.resultsIn(_builder, _function);
   }
@@ -172,14 +139,8 @@ public class ResourceDescriptionProviderTest {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<IResourceDescription> _function = (IResourceDescription it) -> {
-      Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
-      IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
-      QualifiedName _qualifiedName = _head.getQualifiedName();
-      String _string = _qualifiedName.toString();
-      Assert.assertEquals("my.pack.MyTest", _string);
-      Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
-      int _size = IterableExtensions.size(_exportedObjects_1);
-      Assert.assertEquals(1, _size);
+      Assert.assertEquals("my.pack.MyTest", IterableExtensions.<IEObjectDescription>head(it.getExportedObjects()).getQualifiedName().toString());
+      Assert.assertEquals(1, IterableExtensions.size(it.getExportedObjects()));
     };
     this.resultsIn(_builder, _function);
   }
@@ -207,50 +168,36 @@ public class ResourceDescriptionProviderTest {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<IResourceDescription> _function = (IResourceDescription it) -> {
+      Assert.assertEquals("my.pack.MyTest", IterableExtensions.<IEObjectDescription>head(it.getExportedObjects()).getQualifiedName().toString());
+      Assert.assertEquals(5, IterableExtensions.size(it.getExportedObjects()));
       Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
-      IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
-      QualifiedName _qualifiedName = _head.getQualifiedName();
-      String _string = _qualifiedName.toString();
-      Assert.assertEquals("my.pack.MyTest", _string);
-      Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
-      int _size = IterableExtensions.size(_exportedObjects_1);
-      Assert.assertEquals(5, _size);
-      Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
-      IEObjectDescription _get = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_2, IEObjectDescription.class))[1];
+      IEObjectDescription _get = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects, IEObjectDescription.class))[1];
       final Procedure1<IEObjectDescription> _function_1 = (IEObjectDescription it_1) -> {
-        QualifiedName _qualifiedName_1 = it_1.getQualifiedName();
-        String _string_1 = _qualifiedName_1.toString();
-        Assert.assertEquals("my.pack.MyTest.InnerClass", _string_1);
+        Assert.assertEquals("my.pack.MyTest.InnerClass", it_1.getQualifiedName().toString());
         EObject _eObjectOrProxy = it_1.getEObjectOrProxy();
         Assert.assertTrue((_eObjectOrProxy instanceof JvmGenericType));
       };
       ObjectExtensions.<IEObjectDescription>operator_doubleArrow(_get, _function_1);
-      Iterable<IEObjectDescription> _exportedObjects_3 = it.getExportedObjects();
-      IEObjectDescription _get_1 = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_3, IEObjectDescription.class))[2];
+      Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
+      IEObjectDescription _get_1 = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_1, IEObjectDescription.class))[2];
       final Procedure1<IEObjectDescription> _function_2 = (IEObjectDescription it_1) -> {
-        QualifiedName _qualifiedName_1 = it_1.getQualifiedName();
-        String _string_1 = _qualifiedName_1.toString();
-        Assert.assertEquals("my.pack.MyTest.InnerInterface", _string_1);
+        Assert.assertEquals("my.pack.MyTest.InnerInterface", it_1.getQualifiedName().toString());
         EObject _eObjectOrProxy = it_1.getEObjectOrProxy();
         Assert.assertTrue((_eObjectOrProxy instanceof JvmGenericType));
       };
       ObjectExtensions.<IEObjectDescription>operator_doubleArrow(_get_1, _function_2);
-      Iterable<IEObjectDescription> _exportedObjects_4 = it.getExportedObjects();
-      IEObjectDescription _get_2 = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_4, IEObjectDescription.class))[3];
+      Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
+      IEObjectDescription _get_2 = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_2, IEObjectDescription.class))[3];
       final Procedure1<IEObjectDescription> _function_3 = (IEObjectDescription it_1) -> {
-        QualifiedName _qualifiedName_1 = it_1.getQualifiedName();
-        String _string_1 = _qualifiedName_1.toString();
-        Assert.assertEquals("my.pack.MyTest.InnerEnum", _string_1);
+        Assert.assertEquals("my.pack.MyTest.InnerEnum", it_1.getQualifiedName().toString());
         EObject _eObjectOrProxy = it_1.getEObjectOrProxy();
         Assert.assertTrue((_eObjectOrProxy instanceof JvmEnumerationType));
       };
       ObjectExtensions.<IEObjectDescription>operator_doubleArrow(_get_2, _function_3);
-      Iterable<IEObjectDescription> _exportedObjects_5 = it.getExportedObjects();
-      IEObjectDescription _get_3 = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_5, IEObjectDescription.class))[4];
+      Iterable<IEObjectDescription> _exportedObjects_3 = it.getExportedObjects();
+      IEObjectDescription _get_3 = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_3, IEObjectDescription.class))[4];
       final Procedure1<IEObjectDescription> _function_4 = (IEObjectDescription it_1) -> {
-        QualifiedName _qualifiedName_1 = it_1.getQualifiedName();
-        String _string_1 = _qualifiedName_1.toString();
-        Assert.assertEquals("my.pack.MyTest.InnerAnnotation", _string_1);
+        Assert.assertEquals("my.pack.MyTest.InnerAnnotation", it_1.getQualifiedName().toString());
         EObject _eObjectOrProxy = it_1.getEObjectOrProxy();
         Assert.assertTrue((_eObjectOrProxy instanceof JvmAnnotationType));
       };
@@ -281,28 +228,17 @@ public class ResourceDescriptionProviderTest {
     final Procedure1<IResourceDescription> _function = (IResourceDescription it) -> {
       Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
       final IEObjectDescription mytest = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
-      QualifiedName _qualifiedName = mytest.getQualifiedName();
-      String _string = _qualifiedName.toString();
-      Assert.assertEquals("my.pack.MyTest", _string);
-      String _userData = mytest.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS);
-      Assert.assertEquals("<T>", _userData);
+      Assert.assertEquals("my.pack.MyTest", mytest.getQualifiedName().toString());
+      Assert.assertEquals("<T>", mytest.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS));
       Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
       final IEObjectDescription innerinterface = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_1, IEObjectDescription.class))[1];
-      QualifiedName _qualifiedName_1 = innerinterface.getQualifiedName();
-      String _string_1 = _qualifiedName_1.toString();
-      Assert.assertEquals("my.pack.MyTest.InnerInterface", _string_1);
-      String _userData_1 = innerinterface.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS);
-      Assert.assertEquals("<A,B>", _userData_1);
-      String _string_2 = Boolean.TRUE.toString();
-      String _userData_2 = innerinterface.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE);
-      Assert.assertEquals(_string_2, _userData_2);
+      Assert.assertEquals("my.pack.MyTest.InnerInterface", innerinterface.getQualifiedName().toString());
+      Assert.assertEquals("<A,B>", innerinterface.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS));
+      Assert.assertEquals(Boolean.TRUE.toString(), innerinterface.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE));
       Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
       final IEObjectDescription deepNested = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_2, IEObjectDescription.class))[2];
-      QualifiedName _qualifiedName_2 = deepNested.getQualifiedName();
-      String _string_3 = _qualifiedName_2.toString();
-      Assert.assertEquals("my.pack.MyTest.InnerInterface.DeepNested", _string_3);
-      String _userData_3 = deepNested.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS);
-      Assert.assertEquals("<X>", _userData_3);
+      Assert.assertEquals("my.pack.MyTest.InnerInterface.DeepNested", deepNested.getQualifiedName().toString());
+      Assert.assertEquals("<X>", deepNested.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS));
     };
     this.resultsIn(_builder, _function);
   }
@@ -313,9 +249,7 @@ public class ResourceDescriptionProviderTest {
     _builder.append("//package my.pack;");
     _builder.newLine();
     final Procedure1<IResourceDescription> _function = (IResourceDescription it) -> {
-      Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
-      boolean _isEmpty = IterableExtensions.isEmpty(_exportedObjects);
-      Assert.assertTrue(_isEmpty);
+      Assert.assertTrue(IterableExtensions.isEmpty(it.getExportedObjects()));
     };
     this.resultsIn(_builder, _function);
   }

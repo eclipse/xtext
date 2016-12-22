@@ -12,7 +12,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -44,39 +43,14 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     try {
       final String replacedExpressionText = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
       final XExpression xExpression = this.expression(replacedExpressionText, false);
-      Resource _eResource = xExpression.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _string = _errors.toString();
-      Resource _eResource_1 = xExpression.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_string, _isEmpty);
-      Resource _eResource_2 = xExpression.eResource();
-      EList<Resource.Diagnostic> _warnings = _eResource_2.getWarnings();
-      String _string_1 = _warnings.toString();
-      Resource _eResource_3 = xExpression.eResource();
-      EList<Resource.Diagnostic> _warnings_1 = _eResource_3.getWarnings();
-      boolean _isEmpty_1 = _warnings_1.isEmpty();
-      Assert.assertTrue(_string_1, _isEmpty_1);
+      Assert.assertTrue(xExpression.eResource().getErrors().toString(), xExpression.eResource().getErrors().isEmpty());
+      Assert.assertTrue(xExpression.eResource().getWarnings().toString(), xExpression.eResource().getWarnings().isEmpty());
       IBatchTypeResolver _typeResolver = this.getTypeResolver();
       final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
       final LightweightTypeReference resolvedType = resolvedTypes.getReturnType(xExpression);
-      String _simpleName = resolvedType.getSimpleName();
-      Assert.assertEquals(replacedExpressionText, type, _simpleName);
-      Resource _eResource_4 = xExpression.eResource();
-      Iterable<Resource.Diagnostic> _linkingAndSyntaxErrors = this.getLinkingAndSyntaxErrors(_eResource_4);
-      String _string_2 = _linkingAndSyntaxErrors.toString();
-      Resource _eResource_5 = xExpression.eResource();
-      Iterable<Resource.Diagnostic> _linkingAndSyntaxErrors_1 = this.getLinkingAndSyntaxErrors(_eResource_5);
-      boolean _isEmpty_2 = IterableExtensions.isEmpty(_linkingAndSyntaxErrors_1);
-      Assert.assertTrue(_string_2, _isEmpty_2);
-      Resource _eResource_6 = xExpression.eResource();
-      EList<Resource.Diagnostic> _warnings_2 = _eResource_6.getWarnings();
-      String _string_3 = _warnings_2.toString();
-      Resource _eResource_7 = xExpression.eResource();
-      EList<Resource.Diagnostic> _warnings_3 = _eResource_7.getWarnings();
-      boolean _isEmpty_3 = _warnings_3.isEmpty();
-      Assert.assertTrue(_string_3, _isEmpty_3);
+      Assert.assertEquals(replacedExpressionText, type, resolvedType.getSimpleName());
+      Assert.assertTrue(this.getLinkingAndSyntaxErrors(xExpression.eResource()).toString(), IterableExtensions.isEmpty(this.getLinkingAndSyntaxErrors(xExpression.eResource())));
+      Assert.assertTrue(xExpression.eResource().getWarnings().toString(), xExpression.eResource().getWarnings().isEmpty());
       return resolvedType;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -89,8 +63,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
       IBatchTypeResolver _typeResolver = this.getTypeResolver();
       final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(parsedExpression);
       final LightweightTypeReference resolvedType = resolvedTypes.getReturnType(parsedExpression);
-      String _simpleName = resolvedType.getSimpleName();
-      Assert.assertEquals(expression, type, _simpleName);
+      Assert.assertEquals(expression, type, resolvedType.getSimpleName());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -137,8 +110,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
   @Override
   public void isFunctionAndEquivalentTo(final LightweightTypeReference reference, final String type) {
     Assert.assertTrue((reference instanceof FunctionTypeReference));
-    String _equivalent = this.getEquivalent(((FunctionTypeReference) reference));
-    Assert.assertEquals(type, _equivalent);
+    Assert.assertEquals(type, this.getEquivalent(((FunctionTypeReference) reference)));
   }
   
   public String getEquivalent(final ParameterizedTypeReference type) {
@@ -163,19 +135,16 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     String _string_1 = expression.toString();
     String _plus_1 = (_string_1 + " / ");
     String _plus_2 = (_plus_1 + type);
-    String _identifier = type.getIdentifier();
-    Assert.assertNotNull(_plus_2, _identifier);
+    Assert.assertNotNull(_plus_2, type.getIdentifier());
   }
   
   public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable, final IResolvedTypes types) {
     final LightweightTypeReference type = types.getActualType(identifiable);
+    Assert.assertNotNull(identifiable.toString(), type);
     String _string = identifiable.toString();
-    Assert.assertNotNull(_string, type);
-    String _string_1 = identifiable.toString();
-    String _plus = (_string_1 + " / ");
+    String _plus = (_string + " / ");
     String _plus_1 = (_plus + type);
-    String _identifier = type.getIdentifier();
-    Assert.assertNotNull(_plus_1, _identifier);
+    Assert.assertNotNull(_plus_1, type.getIdentifier());
   }
   
   public abstract IBatchTypeResolver getTypeResolver();

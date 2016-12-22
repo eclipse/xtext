@@ -60,8 +60,7 @@ public class ContentAssistFragmentExtensions {
       final Set<String> superGrammarsFqFeatureNames = ContentAssistFragmentExtensions.computeFqFeatureNamesFromSuperGrammars(grammar);
       Iterable<String> _computeFqFeatureNames = ContentAssistFragmentExtensions.computeFqFeatureNames(grammar);
       final Set<String> thisGrammarFqFeatureNames = IterableExtensions.<String>toSet(_computeFqFeatureNames);
-      Sets.SetView<String> _intersection = Sets.<String>intersection(thisGrammarFqFeatureNames, superGrammarsFqFeatureNames);
-      toExclude = _intersection;
+      toExclude = Sets.<String>intersection(thisGrammarFqFeatureNames, superGrammarsFqFeatureNames);
     }
     return toExclude;
   }

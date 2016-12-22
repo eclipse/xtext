@@ -191,57 +191,27 @@ public class ResourceStorageTest extends AbstractXbaseTestCase {
         {
           final INode rest = restoredNodes.next();
           final INode orig = originalNodes.next();
-          int _startLine = orig.getStartLine();
-          int _startLine_1 = rest.getStartLine();
-          Assert.assertEquals(_startLine, _startLine_1);
-          int _endLine = orig.getEndLine();
-          int _endLine_1 = rest.getEndLine();
-          Assert.assertEquals(_endLine, _endLine_1);
-          int _offset = orig.getOffset();
-          int _offset_1 = rest.getOffset();
-          Assert.assertEquals(_offset, _offset_1);
-          int _endOffset = orig.getEndOffset();
-          int _endOffset_1 = rest.getEndOffset();
-          Assert.assertEquals(_endOffset, _endOffset_1);
-          int _length = orig.getLength();
-          int _length_1 = rest.getLength();
-          Assert.assertEquals(_length, _length_1);
-          int _totalStartLine = orig.getTotalStartLine();
-          int _totalStartLine_1 = rest.getTotalStartLine();
-          Assert.assertEquals(_totalStartLine, _totalStartLine_1);
-          int _totalEndLine = orig.getTotalEndLine();
-          int _totalEndLine_1 = rest.getTotalEndLine();
-          Assert.assertEquals(_totalEndLine, _totalEndLine_1);
-          int _totalOffset = orig.getTotalOffset();
-          int _totalOffset_1 = rest.getTotalOffset();
-          Assert.assertEquals(_totalOffset, _totalOffset_1);
-          int _totalEndOffset = orig.getTotalEndOffset();
-          int _totalEndOffset_1 = rest.getTotalEndOffset();
-          Assert.assertEquals(_totalEndOffset, _totalEndOffset_1);
-          int _totalLength = orig.getTotalLength();
-          int _totalLength_1 = rest.getTotalLength();
-          Assert.assertEquals(_totalLength, _totalLength_1);
-          EObject _grammarElement = orig.getGrammarElement();
-          EObject _grammarElement_1 = rest.getGrammarElement();
-          Assert.assertSame(_grammarElement, _grammarElement_1);
+          Assert.assertEquals(orig.getStartLine(), rest.getStartLine());
+          Assert.assertEquals(orig.getEndLine(), rest.getEndLine());
+          Assert.assertEquals(orig.getOffset(), rest.getOffset());
+          Assert.assertEquals(orig.getEndOffset(), rest.getEndOffset());
+          Assert.assertEquals(orig.getLength(), rest.getLength());
+          Assert.assertEquals(orig.getTotalStartLine(), rest.getTotalStartLine());
+          Assert.assertEquals(orig.getTotalEndLine(), rest.getTotalEndLine());
+          Assert.assertEquals(orig.getTotalOffset(), rest.getTotalOffset());
+          Assert.assertEquals(orig.getTotalEndOffset(), rest.getTotalEndOffset());
+          Assert.assertEquals(orig.getTotalLength(), rest.getTotalLength());
+          Assert.assertSame(orig.getGrammarElement(), rest.getGrammarElement());
           Assert.assertTrue((((orig.getSemanticElement() != null) && (rest.getSemanticElement() != null)) || ((orig.getSemanticElement() == null) && (rest.getSemanticElement() == null))));
           EObject _semanticElement = orig.getSemanticElement();
           boolean _tripleNotEquals = (_semanticElement != null);
           if (_tripleNotEquals) {
-            Resource _eResource_3 = file.eResource();
-            EObject _semanticElement_1 = orig.getSemanticElement();
-            String _uRIFragment = _eResource_3.getURIFragment(_semanticElement_1);
-            EObject _semanticElement_2 = rest.getSemanticElement();
-            String _uRIFragment_1 = resource.getURIFragment(_semanticElement_2);
-            Assert.assertEquals(_uRIFragment, _uRIFragment_1);
+            Assert.assertEquals(file.eResource().getURIFragment(orig.getSemanticElement()), resource.getURIFragment(rest.getSemanticElement()));
           }
-          String _text = orig.getText();
-          String _text_1 = rest.getText();
-          Assert.assertEquals(_text, _text_1);
+          Assert.assertEquals(orig.getText(), rest.getText());
         }
       }
-      boolean _hasNext = originalNodes.hasNext();
-      Assert.assertFalse(_hasNext);
+      Assert.assertFalse(originalNodes.hasNext());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

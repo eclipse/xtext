@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterators;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -49,13 +48,11 @@ import org.junit.Test;
 public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   public Iterator<XExpression> bindTypeArgumentsTo(final String expression, final String... typeArguments) {
     final List<XExpression> expressions = this.findExpressionWithTypeArguments(expression);
-    Iterator<XExpression> _iterator = expressions.iterator();
-    return this.and(_iterator, typeArguments);
+    return this.and(expressions.iterator(), typeArguments);
   }
   
   public Iterator<XExpression> and(final Iterator<XExpression> expressions, final String... typeArguments) {
-    boolean _hasNext = expressions.hasNext();
-    Assert.assertTrue(_hasNext);
+    Assert.assertTrue(expressions.hasNext());
     final XExpression expression = expressions.next();
     this.hasTypeArguments(expression, typeArguments);
     return expressions;
@@ -63,8 +60,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   public void done(final Iterator<XExpression> exhaustedIterator) {
     Assert.assertFalse(this.doneCalled);
-    boolean _hasNext = exhaustedIterator.hasNext();
-    Assert.assertFalse(_hasNext);
+    Assert.assertFalse(exhaustedIterator.hasNext());
     this.doneCalled = true;
   }
   
@@ -85,8 +81,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @BeforeClass
   public static void createSeenExpressionsSet() {
-    HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
-    AbstractTypeArgumentTest.seenExpressions = _newHashSet;
+    AbstractTypeArgumentTest.seenExpressions = CollectionLiterals.<String>newHashSet();
   }
   
   @AfterClass

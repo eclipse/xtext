@@ -228,12 +228,8 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
       XConstructorCall _constructorCall = left.getConstructorCall();
       XConstructorCall _constructorCall_1 = right.getConstructorCall();
       Assert.assertEquals("constructorCall", _constructorCall, _constructorCall_1);
-      List<LightweightTypeReference> _typeArguments = left.getTypeArguments();
-      List<LightweightTypeReference> _typeArguments_1 = right.getTypeArguments();
-      this.assertEqualReferences("typeArguments", _typeArguments, _typeArguments_1);
-      List<LightweightTypeReference> _invokeAndCast = this.<List<LightweightTypeReference>>invokeAndCast(left, "getSyntacticTypeArguments");
-      List<LightweightTypeReference> _invokeAndCast_1 = this.<List<LightweightTypeReference>>invokeAndCast(right, "getSyntacticTypeArguments");
-      this.assertEqualReferences("syntacticTypeArguments", _invokeAndCast, _invokeAndCast_1);
+      this.assertEqualReferences("typeArguments", left.getTypeArguments(), right.getTypeArguments());
+      this.assertEqualReferences("syntacticTypeArguments", this.<List<LightweightTypeReference>>invokeAndCast(left, "getSyntacticTypeArguments"), this.<List<LightweightTypeReference>>invokeAndCast(right, "getSyntacticTypeArguments"));
       Object _invoke = this._reflectExtensions.invoke(left, "getArguments");
       Object _invoke_1 = this._reflectExtensions.invoke(right, "getArguments");
       Assert.assertEquals("arguments", _invoke, _invoke_1);
@@ -265,9 +261,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     XAbstractFeatureCall _featureCall = left.getFeatureCall();
     XAbstractFeatureCall _featureCall_1 = right.getFeatureCall();
     Assert.assertEquals("featureCall", _featureCall, _featureCall_1);
-    List<LightweightTypeReference> _typeArguments = left.getTypeArguments();
-    List<LightweightTypeReference> _typeArguments_1 = right.getTypeArguments();
-    this.assertEqualReferences("typeArguments", _typeArguments, _typeArguments_1);
+    this.assertEqualReferences("typeArguments", left.getTypeArguments(), right.getTypeArguments());
   }
   
   protected void _assertEqualLinkingData(final ImplicitFirstArgument left, final ImplicitFirstArgument right) {
@@ -277,9 +271,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     XAbstractFeatureCall _featureCall = left.getFeatureCall();
     XAbstractFeatureCall _featureCall_1 = right.getFeatureCall();
     Assert.assertEquals("featureCall", _featureCall, _featureCall_1);
-    List<LightweightTypeReference> _typeArguments = left.getTypeArguments();
-    List<LightweightTypeReference> _typeArguments_1 = right.getTypeArguments();
-    this.assertEqualReferences("typeArguments", _typeArguments, _typeArguments_1);
+    this.assertEqualReferences("typeArguments", left.getTypeArguments(), right.getTypeArguments());
   }
   
   protected void _assertEqualLinkingData(final IFeatureLinkingCandidate left, final IFeatureLinkingCandidate right) {
@@ -294,27 +286,19 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
       Object _invoke = this._reflectExtensions.invoke(left, "getReceiver");
       Object _invoke_1 = this._reflectExtensions.invoke(right, "getReceiver");
       Assert.assertEquals("receiver", _invoke, _invoke_1);
-      LightweightTypeReference _invokeAndCast = this.<LightweightTypeReference>invokeAndCast(left, "getReceiverType");
-      LightweightTypeReference _invokeAndCast_1 = this.<LightweightTypeReference>invokeAndCast(left, "getReceiverType");
-      this.assertEqualTypes("receiverType", _invokeAndCast, _invokeAndCast_1);
+      this.assertEqualTypes("receiverType", this.<LightweightTypeReference>invokeAndCast(left, "getReceiverType"), this.<LightweightTypeReference>invokeAndCast(left, "getReceiverType"));
       Object _invoke_2 = this._reflectExtensions.invoke(left, "getImplicitReceiver");
       Object _invoke_3 = this._reflectExtensions.invoke(right, "getImplicitReceiver");
       Assert.assertEquals("implicitReceiver", _invoke_2, _invoke_3);
-      LightweightTypeReference _invokeAndCast_2 = this.<LightweightTypeReference>invokeAndCast(left, "getImplicitReceiverType");
-      LightweightTypeReference _invokeAndCast_3 = this.<LightweightTypeReference>invokeAndCast(left, "getImplicitReceiverType");
-      this.assertEqualTypes("implicitReceiverType", _invokeAndCast_2, _invokeAndCast_3);
+      this.assertEqualTypes("implicitReceiverType", this.<LightweightTypeReference>invokeAndCast(left, "getImplicitReceiverType"), this.<LightweightTypeReference>invokeAndCast(left, "getImplicitReceiverType"));
       Object _invoke_4 = this._reflectExtensions.invoke(left, "getImplicitFirstArgument");
       Object _invoke_5 = this._reflectExtensions.invoke(right, "getImplicitFirstArgument");
       Assert.assertEquals("implicitFirstArgument", _invoke_4, _invoke_5);
-      LightweightTypeReference _invokeAndCast_4 = this.<LightweightTypeReference>invokeAndCast(left, "getImplicitFirstArgumentType");
-      LightweightTypeReference _invokeAndCast_5 = this.<LightweightTypeReference>invokeAndCast(left, "getImplicitFirstArgumentType");
-      this.assertEqualTypes("implicitFirstArgumentType", _invokeAndCast_4, _invokeAndCast_5);
+      this.assertEqualTypes("implicitFirstArgumentType", this.<LightweightTypeReference>invokeAndCast(left, "getImplicitFirstArgumentType"), this.<LightweightTypeReference>invokeAndCast(left, "getImplicitFirstArgumentType"));
       Object _invoke_6 = this._reflectExtensions.invoke(left, "getSyntacticReceiver");
       Object _invoke_7 = this._reflectExtensions.invoke(right, "getSyntacticReceiver");
       Assert.assertEquals("syntacticReceiver", _invoke_6, _invoke_7);
-      LightweightTypeReference _invokeAndCast_6 = this.<LightweightTypeReference>invokeAndCast(left, "getSyntacticReceiverType");
-      LightweightTypeReference _invokeAndCast_7 = this.<LightweightTypeReference>invokeAndCast(left, "getSyntacticReceiverType");
-      this.assertEqualTypes("syntacticReceiverType", _invokeAndCast_6, _invokeAndCast_7);
+      this.assertEqualTypes("syntacticReceiverType", this.<LightweightTypeReference>invokeAndCast(left, "getSyntacticReceiverType"), this.<LightweightTypeReference>invokeAndCast(left, "getSyntacticReceiverType"));
       boolean _isStatic = left.isStatic();
       boolean _isStatic_1 = right.isStatic();
       Assert.assertEquals("isStatic", Boolean.valueOf(_isStatic), Boolean.valueOf(_isStatic_1));
@@ -337,24 +321,16 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   
   public void doAssertEqualLinkingData(final ILinkingCandidate left, final ILinkingCandidate right) {
     try {
-      List<LightweightTypeReference> _typeArguments = left.getTypeArguments();
-      List<LightweightTypeReference> _typeArguments_1 = right.getTypeArguments();
-      this.assertEqualReferences("typeArguments", _typeArguments, _typeArguments_1);
-      List<LightweightTypeReference> _invokeAndCast = this.<List<LightweightTypeReference>>invokeAndCast(left, "getSyntacticTypeArguments");
-      List<LightweightTypeReference> _invokeAndCast_1 = this.<List<LightweightTypeReference>>invokeAndCast(right, "getSyntacticTypeArguments");
-      this.assertEqualReferences("syntacticTypeArguments", _invokeAndCast, _invokeAndCast_1);
+      this.assertEqualReferences("typeArguments", left.getTypeArguments(), right.getTypeArguments());
+      this.assertEqualReferences("syntacticTypeArguments", this.<List<LightweightTypeReference>>invokeAndCast(left, "getSyntacticTypeArguments"), this.<List<LightweightTypeReference>>invokeAndCast(right, "getSyntacticTypeArguments"));
       Object _invoke = this._reflectExtensions.invoke(left, "getArguments");
       Object _invoke_1 = this._reflectExtensions.invoke(right, "getArguments");
       Assert.assertEquals("arguments", _invoke, _invoke_1);
       Object _invoke_2 = this._reflectExtensions.invoke(left, "getDeclaredTypeParameters");
       Object _invoke_3 = this._reflectExtensions.invoke(right, "getDeclaredTypeParameters");
       Assert.assertEquals("declaredTypeParameters", _invoke_2, _invoke_3);
-      Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _invokeAndCast_2 = this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(left, "getTypeParameterMapping");
-      Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _invokeAndCast_3 = this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(right, "getTypeParameterMapping");
-      this.assertEqualMapping("typeParameterMapping", _invokeAndCast_2, _invokeAndCast_3);
-      Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _invokeAndCast_4 = this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(left, "getDeclaratorParameterMapping");
-      Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _invokeAndCast_5 = this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(right, "getDeclaratorParameterMapping");
-      this.assertEqualMapping("declaratorParameterMapping", _invokeAndCast_4, _invokeAndCast_5);
+      this.assertEqualMapping("typeParameterMapping", this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(left, "getTypeParameterMapping"), this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(right, "getTypeParameterMapping"));
+      this.assertEqualMapping("declaratorParameterMapping", this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(left, "getDeclaratorParameterMapping"), this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(right, "getDeclaratorParameterMapping"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -76,14 +76,12 @@ public class Oven extends Assert {
             XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
             boolean _tripleNotEquals = (_implicitReceiver != null);
             if (_tripleNotEquals) {
-              XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
-              this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
+              this.assertExpressionTypeIsResolved(((XAbstractFeatureCall)content).getImplicitReceiver(), resolvedTypes);
             }
             XExpression _implicitFirstArgument = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
             boolean _tripleNotEquals_1 = (_implicitFirstArgument != null);
             if (_tripleNotEquals_1) {
-              XExpression _implicitFirstArgument_1 = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
-              this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
+              this.assertExpressionTypeIsResolved(((XAbstractFeatureCall)content).getImplicitFirstArgument(), resolvedTypes);
             }
           }
           if (!_matched) {
@@ -116,8 +114,7 @@ public class Oven extends Assert {
         final Throwable e = (Throwable)_t;
         String _message = e.getMessage();
         final ComparisonFailure error = new ComparisonFailure(_message, input, "");
-        StackTraceElement[] _stackTrace = e.getStackTrace();
-        error.setStackTrace(_stackTrace);
+        error.setStackTrace(e.getStackTrace());
         throw error;
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -172,12 +169,10 @@ public class Oven extends Assert {
       return;
     }
     final LightweightTypeReference type = types.getActualType(identifiable);
+    Assert.assertNotNull(identifiable.toString(), type);
     String _string = identifiable.toString();
-    Assert.assertNotNull(_string, type);
-    String _string_1 = identifiable.toString();
-    String _plus = (_string_1 + " / ");
+    String _plus = (_string + " / ");
     String _plus_1 = (_plus + type);
-    String _identifier = type.getIdentifier();
-    Assert.assertNotNull(_plus_1, _identifier);
+    Assert.assertNotNull(_plus_1, type.getIdentifier());
   }
 }

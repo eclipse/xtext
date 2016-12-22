@@ -296,12 +296,8 @@ public class Bug480686Test {
   private void assertEqual(final IParseResult parsedFromScratch, final IParseResult reparsed) {
     EObject rootFromScratch = parsedFromScratch.getRootASTElement();
     EObject rootReparsed = reparsed.getRootASTElement();
-    String _objToStr = EmfFormatter.objToStr(rootFromScratch);
-    String _objToStr_1 = EmfFormatter.objToStr(rootReparsed);
-    this.assertEqual(_objToStr, _objToStr_1);
-    ICompositeNode _rootNode = parsedFromScratch.getRootNode();
-    ICompositeNode _rootNode_1 = reparsed.getRootNode();
-    this.assertEqual(_rootNode, _rootNode_1);
+    this.assertEqual(EmfFormatter.objToStr(rootFromScratch), EmfFormatter.objToStr(rootReparsed));
+    this.assertEqual(parsedFromScratch.getRootNode(), reparsed.getRootNode());
   }
   
   private void assertEqual(final ICompositeNode fromScratch, final ICompositeNode reparsed) {
@@ -313,9 +309,7 @@ public class Bug480686Test {
       {
         boolean _hasNext = reparsedIterator.hasNext();
         Assert.assertTrue(_hasNext);
-        INode _next = scratchIterator.next();
-        INode _next_1 = reparsedIterator.next();
-        this.assertEqualNodes(_next, _next_1);
+        this.assertEqualNodes(scratchIterator.next(), reparsedIterator.next());
       }
     }
     boolean _hasNext = scratchIterator.hasNext();

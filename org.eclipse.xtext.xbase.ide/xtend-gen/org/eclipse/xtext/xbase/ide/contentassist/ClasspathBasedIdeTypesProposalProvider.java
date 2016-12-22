@@ -73,12 +73,8 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
     boolean _isImportDeclaration = this.isImportDeclaration(reference, context);
     boolean _not = (!_isImportDeclaration);
     if (_not) {
-      XtextResource _resource = context.getResource();
-      XImportSection _importSection = this.importsConfiguration.getImportSection(_resource);
-      importSection = _importSection;
-      XtextResource _resource_1 = context.getResource();
-      ITextRegion _computeRegion = this.importSectionRegionUtil.computeRegion(_resource_1);
-      importSectionRegion = _computeRegion;
+      importSection = this.importsConfiguration.getImportSection(context.getResource());
+      importSectionRegion = this.importSectionRegionUtil.computeRegion(context.getResource());
     }
     Iterable<ITypeDescriptor> _typeDescriptors = this.getTypeDescriptors(context);
     for (final ITypeDescriptor typeDesc : _typeDescriptors) {
@@ -150,8 +146,7 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
       final String proposal = _xifexpression;
       final Procedure1<ContentAssistEntry> _function = (ContentAssistEntry it) -> {
         if (importDecl) {
-          String _simpleName = typeDesc.getSimpleName();
-          it.setLabel(_simpleName);
+          it.setLabel(typeDesc.getSimpleName());
           it.setDescription(proposal);
         } else {
           it.setDescription(qualifiedName);

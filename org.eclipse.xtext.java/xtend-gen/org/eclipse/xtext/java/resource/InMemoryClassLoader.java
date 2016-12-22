@@ -24,8 +24,7 @@ public class InMemoryClassLoader extends ClassLoader {
     if ((bytes == null)) {
       return super.findClass(name);
     } else {
-      int _length = bytes.length;
-      return this.defineClass(name, bytes, 0, _length);
+      return this.defineClass(name, bytes, 0, bytes.length);
     }
   }
   

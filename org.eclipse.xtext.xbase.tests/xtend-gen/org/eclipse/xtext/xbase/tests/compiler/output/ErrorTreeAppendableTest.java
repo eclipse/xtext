@@ -10,7 +10,6 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable;
-import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -34,12 +33,9 @@ public class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
     try {
       final XExpression e = this.expression("42");
       final ErrorTreeAppendable app = this.createErrorTreeAppendable(e);
-      TreeAppendable _trace = app.trace(e);
-      Assert.assertEquals(app, _trace);
-      TreeAppendable _trace_1 = app.trace(e, true);
-      Assert.assertEquals(app, _trace_1);
-      ITreeAppendable _trace_2 = app.trace(e, XbasePackage.Literals.XNUMBER_LITERAL__VALUE, (-1));
-      Assert.assertEquals(app, _trace_2);
+      Assert.assertEquals(app, app.trace(e));
+      Assert.assertEquals(app, app.trace(e, true));
+      Assert.assertEquals(app, app.trace(e, XbasePackage.Literals.XNUMBER_LITERAL__VALUE, (-1)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -53,8 +49,7 @@ public class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
       final ErrorTreeAppendable app = this.createErrorTreeAppendable(e);
       JvmType _type = e.getType();
       app.append(_type);
-      String _content = app.getContent();
-      Assert.assertEquals("Unresolved", _content);
+      Assert.assertEquals("Unresolved", app.getContent());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

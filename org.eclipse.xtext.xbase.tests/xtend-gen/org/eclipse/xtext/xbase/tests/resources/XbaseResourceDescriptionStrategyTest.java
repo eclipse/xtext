@@ -50,12 +50,10 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
       list.add(it);
     };
     this.descriptionStrategy.createEObjectDescriptions(interfaceType, _function);
-    final Function1<IEObjectDescription, Boolean> _function_1 = (IEObjectDescription it) -> {
+    Assert.assertTrue(IterableExtensions.<IEObjectDescription>exists(list, ((Function1<IEObjectDescription, Boolean>) (IEObjectDescription it) -> {
       String _userData = it.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE);
       return Boolean.valueOf(Objects.equal("true", _userData));
-    };
-    boolean _exists = IterableExtensions.<IEObjectDescription>exists(list, _function_1);
-    Assert.assertTrue(_exists);
+    })));
   }
   
   @Test
@@ -69,12 +67,10 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
       list.add(it);
     };
     this.descriptionStrategy.createEObjectDescriptions(interfaceType, _function);
-    final Function1<IEObjectDescription, Boolean> _function_1 = (IEObjectDescription it) -> {
+    Assert.assertFalse(IterableExtensions.<IEObjectDescription>exists(list, ((Function1<IEObjectDescription, Boolean>) (IEObjectDescription it) -> {
       String _userData = it.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE);
       return Boolean.valueOf(Objects.equal("true", _userData));
-    };
-    boolean _exists = IterableExtensions.<IEObjectDescription>exists(list, _function_1);
-    Assert.assertFalse(_exists);
+    })));
   }
   
   @Test
@@ -90,8 +86,7 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
       };
       Iterable<String> _map = IterableExtensions.<IReferenceDescription, String>map(_referenceDescriptions, _function);
       final Set<String> referenceDescriptions = IterableExtensions.<String>toSet(_map);
-      int _size = referenceDescriptions.size();
-      Assert.assertEquals(2, _size);
+      Assert.assertEquals(2, referenceDescriptions.size());
       final Set<String> expectation = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("java:/Objects/java.lang.String#java.lang.String", "java:/Objects/java.lang.String#java.lang.String.valueOf(java.lang.Object)"));
       Assert.assertEquals(expectation, referenceDescriptions);
     } catch (Throwable _e) {

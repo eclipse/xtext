@@ -337,14 +337,12 @@ public class FormattableDocument {
   
   public void operator_add(final Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> data) {
     if ((data != null)) {
-      Iterable<FormattingData> _apply = data.apply(this);
-      this.operator_add(_apply);
+      this.operator_add(data.apply(this));
     }
   }
   
   public List<TextReplacement> renderToEdits() {
-    int _length = this.document.length();
-    return this.renderToEdits(0, _length);
+    return this.renderToEdits(0, this.document.length());
   }
   
   public List<TextReplacement> renderToEdits(final int offset, final int length) {
@@ -390,8 +388,7 @@ public class FormattableDocument {
                   _xifexpression = indentation;
                 }
                 final int computedIndentation = _xifexpression;
-                Integer _newLines = ((NewLineData)f).getNewLines();
-                String _wrap = this.getWrap((_newLines).intValue());
+                String _wrap = this.getWrap((((NewLineData)f).getNewLines()).intValue());
                 String _indentation = this.getIndentation(computedIndentation);
                 final String replacement = (_wrap + _indentation);
                 int _offset_1 = ((NewLineData)f).getOffset();
@@ -412,8 +409,7 @@ public class FormattableDocument {
   }
   
   public String renderToString() {
-    int _length = this.document.length();
-    return this.renderToString(0, _length);
+    return this.renderToString(0, this.document.length());
   }
   
   public String renderToString(final int offset, final int length) {

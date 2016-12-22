@@ -109,9 +109,7 @@ public class JavaSourceLanguageTest {
   protected XtextResourceSet resourceSet(final Pair<String, String>... files) {
     final XtextResourceSet result = this.resourceSetProvider.get();
     this.typeProviderFactory.createTypeProvider(result);
-    Class<? extends JavaSourceLanguageTest> _class = this.getClass();
-    ClassLoader _classLoader = _class.getClassLoader();
-    result.setClasspathURIContext(_classLoader);
+    result.setClasspathURIContext(this.getClass().getClassLoader());
     URIConverter _uRIConverter = result.getURIConverter();
     EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
     _uRIHandlers.clear();

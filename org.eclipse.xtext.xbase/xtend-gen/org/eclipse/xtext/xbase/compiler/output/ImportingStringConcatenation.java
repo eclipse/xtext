@@ -37,8 +37,7 @@ public class ImportingStringConcatenation extends StringConcatenation {
   
   public ImportingStringConcatenation(final SharedAppendableState state, final ITypeReferenceOwner typeReferenceOwner) {
     super(state.getLineSeparator());
-    ImportManager _importManager = state.getImportManager();
-    this.importManager = _importManager;
+    this.importManager = state.getImportManager();
     this.typeReferenceOwner = typeReferenceOwner;
   }
   

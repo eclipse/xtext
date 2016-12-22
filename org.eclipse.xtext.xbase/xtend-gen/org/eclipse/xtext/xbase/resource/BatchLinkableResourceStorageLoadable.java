@@ -70,8 +70,7 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
         JvmIdentifiableMetaData _jvmIdentifiableMetaData = new JvmIdentifiableMetaData();
         final Procedure1<JvmIdentifiableMetaData> _function_1 = (JvmIdentifiableMetaData it) -> {
           try {
-            boolean _readBoolean_2 = input.readBoolean();
-            it.setSynthetic(_readBoolean_2);
+            it.setSynthetic(input.readBoolean());
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }

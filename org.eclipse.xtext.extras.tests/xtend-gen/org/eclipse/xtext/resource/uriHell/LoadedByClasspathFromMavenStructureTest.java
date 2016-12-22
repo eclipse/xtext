@@ -37,8 +37,7 @@ public class LoadedByClasspathFromMavenStructureTest extends AbstractURIHandlerW
   public URI getPackagedReferencedURI() {
     URL url = this.classLoader.getResource("org/eclipse/xtext/resource/mydsl.ecore");
     if ((url == null)) {
-      URL _resource = this.classLoader.getResource("/org/eclipse/xtext/resource/mydsl.ecore");
-      url = _resource;
+      url = this.classLoader.getResource("/org/eclipse/xtext/resource/mydsl.ecore");
     }
     final String urlAsString = url.toString();
     return URI.createURI(urlAsString);

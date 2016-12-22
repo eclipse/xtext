@@ -45,35 +45,27 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
   
   @Before
   public void setUp() {
-    XtextResourceSet _get = this.resourceSetProvider.get();
-    JvmTypeReferenceBuilder _create = this.typeReferenceBuilderFactory.create(_get);
-    this.typeReferenceBuilder = _create;
+    this.typeReferenceBuilder = this.typeReferenceBuilderFactory.create(this.resourceSetProvider.get());
   }
   
   @Test
   public void testTypeRef_01() {
     final JvmTypeReference stringType = this.typeReferenceBuilder.typeRef(String.class);
-    String _identifier = stringType.getIdentifier();
-    Assert.assertEquals("java.lang.String", _identifier);
+    Assert.assertEquals("java.lang.String", stringType.getIdentifier());
   }
   
   @Test
   public void testTypeRef_02() {
     JvmTypeReference _typeRef = this.typeReferenceBuilder.typeRef(List.class);
     final JvmParameterizedTypeReference type = ((JvmParameterizedTypeReference) _typeRef);
-    String _identifier = type.getIdentifier();
-    Assert.assertEquals("java.util.List", _identifier);
-    EList<JvmTypeReference> _arguments = type.getArguments();
-    boolean _isEmpty = _arguments.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertEquals("java.util.List", type.getIdentifier());
+    Assert.assertTrue(type.getArguments().isEmpty());
   }
   
   @Test
   public void testTypeRef_03() {
     try {
-      JvmTypeReference _typeRef = this.typeReferenceBuilder.typeRef(String.class);
-      JvmTypeReference _typeRef_1 = this.typeReferenceBuilder.typeRef(String.class);
-      this.typeReferenceBuilder.typeRef(List.class, _typeRef, _typeRef_1);
+      this.typeReferenceBuilder.typeRef(List.class, this.typeReferenceBuilder.typeRef(String.class), this.typeReferenceBuilder.typeRef(String.class));
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
@@ -87,8 +79,7 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
   @Test
   public void testTypeRef_04() {
     try {
-      JvmTypeReference _typeRef = this.typeReferenceBuilder.typeRef(String.class);
-      this.typeReferenceBuilder.typeRef(List[].class, _typeRef);
+      this.typeReferenceBuilder.typeRef(List[].class, this.typeReferenceBuilder.typeRef(String.class));
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
@@ -101,48 +92,29 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
   
   @Test
   public void testTypeRef_05() {
-    JvmTypeReference _typeRef = this.typeReferenceBuilder.typeRef(String.class);
-    final JvmTypeReference typeRef = this.typeReferenceBuilder.typeRef("hubble.Fubble", _typeRef);
+    final JvmTypeReference typeRef = this.typeReferenceBuilder.typeRef("hubble.Fubble", this.typeReferenceBuilder.typeRef(String.class));
     Assert.assertTrue((typeRef instanceof JvmUnknownTypeReference));
-    String _qualifiedName = typeRef.getQualifiedName();
-    Assert.assertEquals("hubble.Fubble", _qualifiedName);
+    Assert.assertEquals("hubble.Fubble", typeRef.getQualifiedName());
   }
   
   @Test
   public void testWildcard_01() {
-    JvmTypeReference _wildcard = this.typeReferenceBuilder.wildcard();
-    EList<JvmTypeConstraint> _constraints = ((JvmWildcardTypeReference) _wildcard).getConstraints();
-    JvmTypeConstraint _head = IterableExtensions.<JvmTypeConstraint>head(_constraints);
-    JvmTypeReference _typeReference = _head.getTypeReference();
-    String _identifier = _typeReference.getIdentifier();
-    Assert.assertEquals("java.lang.Object", _identifier);
+    Assert.assertEquals("java.lang.Object", IterableExtensions.<JvmTypeConstraint>head(((JvmWildcardTypeReference) this.typeReferenceBuilder.wildcard()).getConstraints()).getTypeReference().getIdentifier());
   }
   
   @Test
   public void testWildcard_02() {
-    JvmTypeReference _typeRef = this.typeReferenceBuilder.typeRef(CharSequence.class);
-    JvmTypeReference _wildcardExtends = this.typeReferenceBuilder.wildcardExtends(_typeRef);
+    JvmTypeReference _wildcardExtends = this.typeReferenceBuilder.wildcardExtends(this.typeReferenceBuilder.typeRef(CharSequence.class));
     final EList<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) _wildcardExtends).getConstraints();
-    int _size = constraints.size();
-    Assert.assertEquals(1, _size);
-    Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(constraints, JvmUpperBound.class);
-    JvmUpperBound _head = IterableExtensions.<JvmUpperBound>head(_filter);
-    JvmTypeReference _typeReference = _head.getTypeReference();
-    String _identifier = _typeReference.getIdentifier();
-    Assert.assertEquals("java.lang.CharSequence", _identifier);
+    Assert.assertEquals(1, constraints.size());
+    Assert.assertEquals("java.lang.CharSequence", IterableExtensions.<JvmUpperBound>head(Iterables.<JvmUpperBound>filter(constraints, JvmUpperBound.class)).getTypeReference().getIdentifier());
   }
   
   @Test
   public void testWildcard_03() {
-    JvmTypeReference _typeRef = this.typeReferenceBuilder.typeRef(CharSequence.class);
-    JvmTypeReference _wildcardSuper = this.typeReferenceBuilder.wildcardSuper(_typeRef);
+    JvmTypeReference _wildcardSuper = this.typeReferenceBuilder.wildcardSuper(this.typeReferenceBuilder.typeRef(CharSequence.class));
     final EList<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) _wildcardSuper).getConstraints();
-    int _size = constraints.size();
-    Assert.assertEquals(2, _size);
-    Iterable<JvmLowerBound> _filter = Iterables.<JvmLowerBound>filter(constraints, JvmLowerBound.class);
-    JvmLowerBound _head = IterableExtensions.<JvmLowerBound>head(_filter);
-    JvmTypeReference _typeReference = _head.getTypeReference();
-    String _identifier = _typeReference.getIdentifier();
-    Assert.assertEquals("java.lang.CharSequence", _identifier);
+    Assert.assertEquals(2, constraints.size());
+    Assert.assertEquals("java.lang.CharSequence", IterableExtensions.<JvmLowerBound>head(Iterables.<JvmLowerBound>filter(constraints, JvmLowerBound.class)).getTypeReference().getIdentifier());
   }
 }

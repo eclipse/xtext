@@ -50,23 +50,16 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     XExpression _validatedExpression = this.validatedExpression("{ val x=42 val y=42 }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
+    Assert.assertFalse(this._errorSafeExtensions.hasErrors(e.getExpressions().get(0)));
+    Assert.assertFalse(this._errorSafeExtensions.hasErrors(e.getExpressions().get(1)));
     EList<XExpression> _expressions = e.getExpressions();
-    XExpression _get = _expressions.get(0);
-    boolean _hasErrors = this._errorSafeExtensions.hasErrors(_get);
-    Assert.assertFalse(_hasErrors);
-    EList<XExpression> _expressions_1 = e.getExpressions();
-    XExpression _get_1 = _expressions_1.get(1);
-    boolean _hasErrors_1 = this._errorSafeExtensions.hasErrors(_get_1);
-    Assert.assertFalse(_hasErrors_1);
-    EList<XExpression> _expressions_2 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = (XExpression it, ITreeAppendable app2) -> {
       String _text = this.getText(it);
       app2.append(_text);
     };
-    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions_2, _loopInitializer, _function);
-    String _content = app.getContent();
-    Assert.assertEquals("(val x=42:val y=42)", _content);
+    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions, _loopInitializer, _function);
+    Assert.assertEquals("(val x=42:val y=42)", app.getContent());
   }
   
   @Test
@@ -74,27 +67,17 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     XExpression _validatedExpression = this.validatedExpression("{ error val x=42 val y=42 }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
+    Assert.assertTrue(this._errorSafeExtensions.hasErrors(e.getExpressions().get(0)));
+    Assert.assertFalse(this._errorSafeExtensions.hasErrors(e.getExpressions().get(1)));
+    Assert.assertFalse(this._errorSafeExtensions.hasErrors(e.getExpressions().get(2)));
     EList<XExpression> _expressions = e.getExpressions();
-    XExpression _get = _expressions.get(0);
-    boolean _hasErrors = this._errorSafeExtensions.hasErrors(_get);
-    Assert.assertTrue(_hasErrors);
-    EList<XExpression> _expressions_1 = e.getExpressions();
-    XExpression _get_1 = _expressions_1.get(1);
-    boolean _hasErrors_1 = this._errorSafeExtensions.hasErrors(_get_1);
-    Assert.assertFalse(_hasErrors_1);
-    EList<XExpression> _expressions_2 = e.getExpressions();
-    XExpression _get_2 = _expressions_2.get(2);
-    boolean _hasErrors_2 = this._errorSafeExtensions.hasErrors(_get_2);
-    Assert.assertFalse(_hasErrors_2);
-    EList<XExpression> _expressions_3 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = (XExpression it, ITreeAppendable app2) -> {
       String _text = this.getText(it);
       app2.append(_text);
     };
-    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions_3, _loopInitializer, _function);
-    String _content = app.getContent();
-    Assert.assertEquals("(/* error */val x=42:val y=42)", _content);
+    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions, _loopInitializer, _function);
+    Assert.assertEquals("(/* error */val x=42:val y=42)", app.getContent());
   }
   
   @Test
@@ -102,27 +85,17 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     XExpression _validatedExpression = this.validatedExpression("{ val x=42 error val y=42 }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
+    Assert.assertFalse(this._errorSafeExtensions.hasErrors(e.getExpressions().get(0)));
+    Assert.assertTrue(this._errorSafeExtensions.hasErrors(e.getExpressions().get(1)));
+    Assert.assertFalse(this._errorSafeExtensions.hasErrors(e.getExpressions().get(2)));
     EList<XExpression> _expressions = e.getExpressions();
-    XExpression _get = _expressions.get(0);
-    boolean _hasErrors = this._errorSafeExtensions.hasErrors(_get);
-    Assert.assertFalse(_hasErrors);
-    EList<XExpression> _expressions_1 = e.getExpressions();
-    XExpression _get_1 = _expressions_1.get(1);
-    boolean _hasErrors_1 = this._errorSafeExtensions.hasErrors(_get_1);
-    Assert.assertTrue(_hasErrors_1);
-    EList<XExpression> _expressions_2 = e.getExpressions();
-    XExpression _get_2 = _expressions_2.get(2);
-    boolean _hasErrors_2 = this._errorSafeExtensions.hasErrors(_get_2);
-    Assert.assertFalse(_hasErrors_2);
-    EList<XExpression> _expressions_3 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = (XExpression it, ITreeAppendable app2) -> {
       String _text = this.getText(it);
       app2.append(_text);
     };
-    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions_3, _loopInitializer, _function);
-    String _content = app.getContent();
-    Assert.assertEquals("(val x=42/* :error */:val y=42)", _content);
+    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions, _loopInitializer, _function);
+    Assert.assertEquals("(val x=42/* :error */:val y=42)", app.getContent());
   }
   
   @Test
@@ -130,27 +103,17 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     XExpression _validatedExpression = this.validatedExpression("{ val x=42 val y=42 error }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
+    Assert.assertFalse(this._errorSafeExtensions.hasErrors(e.getExpressions().get(0)));
+    Assert.assertFalse(this._errorSafeExtensions.hasErrors(e.getExpressions().get(1)));
+    Assert.assertTrue(this._errorSafeExtensions.hasErrors(e.getExpressions().get(2)));
     EList<XExpression> _expressions = e.getExpressions();
-    XExpression _get = _expressions.get(0);
-    boolean _hasErrors = this._errorSafeExtensions.hasErrors(_get);
-    Assert.assertFalse(_hasErrors);
-    EList<XExpression> _expressions_1 = e.getExpressions();
-    XExpression _get_1 = _expressions_1.get(1);
-    boolean _hasErrors_1 = this._errorSafeExtensions.hasErrors(_get_1);
-    Assert.assertFalse(_hasErrors_1);
-    EList<XExpression> _expressions_2 = e.getExpressions();
-    XExpression _get_2 = _expressions_2.get(2);
-    boolean _hasErrors_2 = this._errorSafeExtensions.hasErrors(_get_2);
-    Assert.assertTrue(_hasErrors_2);
-    EList<XExpression> _expressions_3 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = (XExpression it, ITreeAppendable app2) -> {
       String _text = this.getText(it);
       app2.append(_text);
     };
-    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions_3, _loopInitializer, _function);
-    String _content = app.getContent();
-    Assert.assertEquals("(val x=42:val y=42/* :error */)", _content);
+    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions, _loopInitializer, _function);
+    Assert.assertEquals("(val x=42:val y=42/* :error */)", app.getContent());
   }
   
   @Test
@@ -158,19 +121,15 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     XExpression _validatedExpression = this.validatedExpression("{ error }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
+    Assert.assertTrue(this._errorSafeExtensions.hasErrors(e.getExpressions().get(0)));
     EList<XExpression> _expressions = e.getExpressions();
-    XExpression _get = _expressions.get(0);
-    boolean _hasErrors = this._errorSafeExtensions.hasErrors(_get);
-    Assert.assertTrue(_hasErrors);
-    EList<XExpression> _expressions_1 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = (XExpression it, ITreeAppendable app2) -> {
       String _text = this.getText(it);
       app2.append(_text);
     };
-    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions_1, _loopInitializer, _function);
-    String _content = app.getContent();
-    Assert.assertEquals("/* (error) */", _content);
+    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions, _loopInitializer, _function);
+    Assert.assertEquals("/* (error) */", app.getContent());
   }
   
   @Test
@@ -178,23 +137,16 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     XExpression _validatedExpression = this.validatedExpression("{ error1 error2 }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
+    Assert.assertTrue(this._errorSafeExtensions.hasErrors(e.getExpressions().get(0)));
+    Assert.assertTrue(this._errorSafeExtensions.hasErrors(e.getExpressions().get(1)));
     EList<XExpression> _expressions = e.getExpressions();
-    XExpression _get = _expressions.get(0);
-    boolean _hasErrors = this._errorSafeExtensions.hasErrors(_get);
-    Assert.assertTrue(_hasErrors);
-    EList<XExpression> _expressions_1 = e.getExpressions();
-    XExpression _get_1 = _expressions_1.get(1);
-    boolean _hasErrors_1 = this._errorSafeExtensions.hasErrors(_get_1);
-    Assert.assertTrue(_hasErrors_1);
-    EList<XExpression> _expressions_2 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = (XExpression it, ITreeAppendable app2) -> {
       String _text = this.getText(it);
       app2.append(_text);
     };
-    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions_2, _loopInitializer, _function);
-    String _content = app.getContent();
-    Assert.assertEquals("/* (error1:error2) */", _content);
+    this._errorSafeExtensions.<XExpression>forEachSafely(app, _expressions, _loopInitializer, _function);
+    Assert.assertEquals("/* (error1:error2) */", app.getContent());
   }
   
   @Test
@@ -202,12 +154,10 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     XExpression _validatedExpression = this.validatedExpression("null as Unresolved");
     final XCastedExpression e = ((XCastedExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
-    boolean _hasErrors = this._errorSafeExtensions.hasErrors(e);
-    Assert.assertTrue(_hasErrors);
+    Assert.assertTrue(this._errorSafeExtensions.hasErrors(e));
     JvmTypeReference _type = e.getType();
     this._errorSafeExtensions.serializeSafely(_type, app);
-    String _content = app.getContent();
-    Assert.assertEquals("/* Unresolved */", _content);
+    Assert.assertEquals("/* Unresolved */", app.getContent());
   }
   
   @Test
@@ -215,12 +165,10 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     XExpression _validatedExpression = this.validatedExpression("null as Unresolved");
     final XCastedExpression e = ((XCastedExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
-    boolean _hasErrors = this._errorSafeExtensions.hasErrors(e);
-    Assert.assertTrue(_hasErrors);
+    Assert.assertTrue(this._errorSafeExtensions.hasErrors(e));
     JvmTypeReference _type = e.getType();
     this._errorSafeExtensions.serializeSafely(_type, "Object", app);
-    String _content = app.getContent();
-    Assert.assertEquals("/* Unresolved */Object", _content);
+    Assert.assertEquals("/* Unresolved */Object", app.getContent());
   }
   
   @Test
@@ -228,12 +176,10 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     XExpression _validatedExpression = this.validatedExpression("null as String");
     final XCastedExpression e = ((XCastedExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
-    boolean _hasErrors = this._errorSafeExtensions.hasErrors(e);
-    Assert.assertFalse(_hasErrors);
+    Assert.assertFalse(this._errorSafeExtensions.hasErrors(e));
     JvmTypeReference _type = e.getType();
     this._errorSafeExtensions.serializeSafely(_type, app);
-    String _content = app.getContent();
-    Assert.assertEquals("String", _content);
+    Assert.assertEquals("String", app.getContent());
   }
   
   protected XExpression validatedExpression(final CharSequence model) {

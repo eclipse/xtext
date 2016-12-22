@@ -35,8 +35,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
   
   @Inject
   public MapBasedPreferenceValues setPreferences(final IPreferenceValuesProvider.SingletonPreferenceValuesProvider prefProvider) {
-    MapBasedPreferenceValues _preferenceValues = prefProvider.getPreferenceValues(null);
-    return this.preferences = _preferenceValues;
+    return this.preferences = prefProvider.getPreferenceValues(null);
   }
   
   @Before

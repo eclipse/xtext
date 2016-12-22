@@ -8,14 +8,11 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterators;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -44,8 +41,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
   
   @BeforeClass
   public static void createSeenExpressionsSet() {
-    HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
-    AbstractConstructorCallTypeTest.seenExpressions = _newHashSet;
+    AbstractConstructorCallTypeTest.seenExpressions = CollectionLiterals.<String>newHashSet();
   }
   
   @AfterClass
@@ -56,10 +52,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
   protected List<XConstructorCall> findConstructorCalls(final CharSequence expression) {
     try {
       final XExpression xExpression = this.expression(expression, false);
-      Resource _eResource = xExpression.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      boolean _isEmpty = _errors.isEmpty();
-      Assert.assertTrue(_isEmpty);
+      Assert.assertTrue(xExpression.eResource().getErrors().isEmpty());
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
       Iterator<XConstructorCall> _filter = Iterators.<XConstructorCall>filter(_eAll, XConstructorCall.class);
       final List<XConstructorCall> closures = IteratorExtensions.<XConstructorCall>toList(_filter);

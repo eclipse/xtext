@@ -49,8 +49,7 @@ public class EvaluationContext {
     final Resource resource = expression.eResource();
     IResolvedTypes resolvedTypes = this.resolvedTypesPerResource.get(resource);
     if ((resolvedTypes == null)) {
-      IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(expression);
-      resolvedTypes = _resolveTypes;
+      resolvedTypes = this.typeResolver.resolveTypes(expression);
       this.resolvedTypesPerResource.put(resource, resolvedTypes);
     }
     this.resolvedTypesStack.push(resolvedTypes);

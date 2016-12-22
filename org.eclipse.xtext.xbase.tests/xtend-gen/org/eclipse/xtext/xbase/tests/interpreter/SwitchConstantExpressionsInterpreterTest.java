@@ -87,8 +87,7 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
   @Test
   public void testJvmEnumerationLiteral() {
     final Procedure1<Object> _function = (Object it) -> {
-      String _simpleName = ((JvmEnumerationLiteral) it).getSimpleName();
-      Assert.assertEquals("NEW", _simpleName);
+      Assert.assertEquals("NEW", ((JvmEnumerationLiteral) it).getSimpleName());
     };
     this.evaluatesTo("Thread.State.NEW", _function);
   }

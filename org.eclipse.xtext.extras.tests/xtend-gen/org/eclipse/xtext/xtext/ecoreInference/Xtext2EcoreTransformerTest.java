@@ -134,8 +134,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   
   private EPackage getEPackageFromGrammar(final String xtextGrammar, final int expectedErrors) throws Exception {
     final List<EPackage> metamodels = this.getEPackagesFromGrammar(xtextGrammar, expectedErrors);
-    int _size = metamodels.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, metamodels.size());
     final EPackage result = IterableExtensions.<EPackage>head(metamodels);
     Assert.assertNotNull(result);
     return result;
@@ -233,41 +232,28 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   private EAttribute assertAttributeConfiguration(final EClass eClass, final int attributeIndex, final String featureName, final String featureTypeName) {
     EList<EAttribute> _eAttributes = eClass.getEAttributes();
     final EAttribute feature = _eAttributes.get(attributeIndex);
-    String _name = feature.getName();
-    Assert.assertEquals(featureName, _name);
-    EClassifier _eType = feature.getEType();
-    Assert.assertNotNull(_eType);
-    EClassifier _eType_1 = feature.getEType();
-    String _name_1 = _eType_1.getName();
-    Assert.assertEquals(featureTypeName, _name_1);
+    Assert.assertEquals(featureName, feature.getName());
+    Assert.assertNotNull(feature.getEType());
+    Assert.assertEquals(featureTypeName, feature.getEType().getName());
     return feature;
   }
   
   private EAttribute assertAttributeConfiguration(final EClass eClass, final int attributeIndex, final String featureName, final String featureTypeName, final int lowerBound, final int upperBound) {
     final EAttribute feature = this.assertAttributeConfiguration(eClass, attributeIndex, featureName, featureTypeName);
-    int _lowerBound = feature.getLowerBound();
-    Assert.assertEquals(lowerBound, _lowerBound);
-    int _upperBound = feature.getUpperBound();
-    Assert.assertEquals(upperBound, _upperBound);
+    Assert.assertEquals(lowerBound, feature.getLowerBound());
+    Assert.assertEquals(upperBound, feature.getUpperBound());
     return feature;
   }
   
   private EReference assertReferenceConfiguration(final EClass eClass, final int referenceIndex, final String featureName, final String featureTypeName, final boolean isContainment, final int lowerBound, final int upperBound) {
     EList<EReference> _eReferences = eClass.getEReferences();
     final EReference reference = _eReferences.get(referenceIndex);
-    String _name = reference.getName();
-    Assert.assertEquals(featureName, _name);
-    EClassifier _eType = reference.getEType();
-    Assert.assertNotNull(_eType);
-    EClassifier _eType_1 = reference.getEType();
-    String _name_1 = _eType_1.getName();
-    Assert.assertEquals(featureTypeName, _name_1);
-    boolean _isContainment = reference.isContainment();
-    Assert.assertEquals(Boolean.valueOf(isContainment), Boolean.valueOf(_isContainment));
-    int _lowerBound = reference.getLowerBound();
-    Assert.assertEquals(lowerBound, _lowerBound);
-    int _upperBound = reference.getUpperBound();
-    Assert.assertEquals(upperBound, _upperBound);
+    Assert.assertEquals(featureName, reference.getName());
+    Assert.assertNotNull(reference.getEType());
+    Assert.assertEquals(featureTypeName, reference.getEType().getName());
+    Assert.assertEquals(Boolean.valueOf(isContainment), Boolean.valueOf(reference.isContainment()));
+    Assert.assertEquals(lowerBound, reference.getLowerBound());
+    Assert.assertEquals(upperBound, reference.getUpperBound());
     return reference;
   }
   
@@ -296,10 +282,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     TypeRef _type = _head_1.getType();
     EClassifier _classifier = _type.getClassifier();
     EClass array = ((EClass) _classifier);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(array, "componentType");
-    EClassifier _eType = _feature.getEType();
-    String _name = _eType.getName();
-    Assert.assertEquals("JvmComponentType", _name);
+    Assert.assertEquals("JvmComponentType", this.<EStructuralFeature>feature(array, "componentType").getEType().getName());
   }
   
   @Test
@@ -327,10 +310,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     TypeRef _type = _head_1.getType();
     EClassifier _classifier = _type.getClassifier();
     EClass array = ((EClass) _classifier);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(array, "componentType");
-    EClassifier _eType = _feature.getEType();
-    String _name = _eType.getName();
-    Assert.assertEquals("JvmComponentType", _name);
+    Assert.assertEquals("JvmComponentType", this.<EStructuralFeature>feature(array, "componentType").getEType().getName());
   }
   
   @Test
@@ -343,11 +323,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("DeclaredType returns types::JvmDeclaredType: superTypes+=DeclaredType;");
     final String grammarAsString = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammarAsString, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(_errors);
-    String _message = _head.getMessage();
-    boolean _contains = _message.contains("JvmTypeReference");
-    Assert.assertTrue(_contains);
+    Assert.assertTrue(IterableExtensions.<Resource.Diagnostic>head(resource.getErrors()).getMessage().contains("JvmTypeReference"));
   }
   
   @Test
@@ -360,11 +336,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("Array returns types::JvmGenericArrayTypeReference: componentType=STRING;");
     final String grammarAsString = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammarAsString, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(_errors);
-    String _message = _head.getMessage();
-    boolean _contains = _message.contains("JvmTypeReference");
-    Assert.assertTrue(_contains);
+    Assert.assertTrue(IterableExtensions.<Resource.Diagnostic>head(resource.getErrors()).getMessage().contains("JvmTypeReference"));
   }
   
   @Test
@@ -377,12 +349,9 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("DeclaredType returns types::JvmDeclaredType: superTypes=[types::JvmTypeReference];");
     final String grammarAsString = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammarAsString, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(_errors);
-    String _message = _head.getMessage();
-    boolean _contains = _message.contains(
-      "cardinality");
-    Assert.assertTrue(_contains);
+    Assert.assertTrue(
+      IterableExtensions.<Resource.Diagnostic>head(resource.getErrors()).getMessage().contains(
+        "cardinality"));
   }
   
   @Test
@@ -396,11 +365,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammarAsString = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammarAsString, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(_errors);
-    String _message = _head.getMessage();
-    boolean _contains = _message.contains("containment");
-    Assert.assertTrue(_contains);
+    Assert.assertTrue(IterableExtensions.<Resource.Diagnostic>head(resource.getErrors()).getMessage().contains("containment"));
   }
   
   @Test
@@ -479,42 +444,28 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     URI _createURI_10 = URI.createURI(
       "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore");
     _uRIMap_9.put(_createURI_9, _createURI_10);
-    URI _createURI_11 = URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore");
-    Resource _resource = resourceSet.getResource(_createURI_11, true);
-    EList<EObject> _contents = _resource.getContents();
-    boolean _isEmpty = _contents.isEmpty();
-    Assert.assertFalse(_isEmpty);
-    URI _createURI_12 = URI.createURI(
-      "platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerNsURI.ecore");
-    Resource _resource_1 = resourceSet.getResource(_createURI_12, 
-      true);
-    EList<EObject> _contents_1 = _resource_1.getContents();
-    boolean _isEmpty_1 = _contents_1.isEmpty();
-    Assert.assertFalse(_isEmpty_1);
-    URI _createURI_13 = URI.createURI(
-      "platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformResource.ecore");
-    Resource _resource_2 = resourceSet.getResource(_createURI_13, 
-      true);
-    EList<EObject> _contents_2 = _resource_2.getContents();
-    boolean _isEmpty_2 = _contents_2.isEmpty();
-    Assert.assertFalse(_isEmpty_2);
-    URI _createURI_14 = URI.createURI(
-      "platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformPlugin.ecore");
-    Resource _resource_3 = resourceSet.getResource(_createURI_14, 
-      true);
-    EList<EObject> _contents_3 = _resource_3.getContents();
-    boolean _isEmpty_3 = _contents_3.isEmpty();
-    Assert.assertFalse(_isEmpty_3);
-    URI _createURI_15 = URI.createURI(
+    Assert.assertFalse(
+      resourceSet.getResource(URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"), true).getContents().isEmpty());
+    Assert.assertFalse(
+      resourceSet.getResource(
+        URI.createURI(
+          "platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerNsURI.ecore"), 
+        true).getContents().isEmpty());
+    Assert.assertFalse(
+      resourceSet.getResource(
+        URI.createURI(
+          "platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformResource.ecore"), 
+        true).getContents().isEmpty());
+    Assert.assertFalse(
+      resourceSet.getResource(
+        URI.createURI(
+          "platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformPlugin.ecore"), 
+        true).getContents().isEmpty());
+    URI _createURI_11 = URI.createURI(
       "classpath:/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferenceTestLanguage.xtext");
-    Resource _resource_4 = resourceSet.getResource(_createURI_15, 
+    Resource _resource = resourceSet.getResource(_createURI_11, 
       true);
-    final XtextResource resource = ((XtextResource) _resource_4);
-    Joiner _on = Joiner.on("\n");
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _join = _on.join(_errors);
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    boolean _isEmpty_4 = _errors_1.isEmpty();
-    Assert.assertTrue(_join, _isEmpty_4);
+    final XtextResource resource = ((XtextResource) _resource);
+    Assert.assertTrue(Joiner.on("\n").join(resource.getErrors()), resource.getErrors().isEmpty());
   }
 }

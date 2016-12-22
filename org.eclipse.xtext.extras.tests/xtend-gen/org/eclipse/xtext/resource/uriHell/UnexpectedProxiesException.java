@@ -38,8 +38,7 @@ public class UnexpectedProxiesException extends RuntimeException {
     boolean _matched = false;
     if (it instanceof EObject) {
       _matched=true;
-      URI _uRI = EcoreUtil.getURI(((EObject)it));
-      _switchResult = CollectionLiterals.<URI>newImmutableList(_uRI);
+      _switchResult = CollectionLiterals.<URI>newImmutableList(EcoreUtil.getURI(((EObject)it)));
     }
     if (!_matched) {
       if (it instanceof List) {

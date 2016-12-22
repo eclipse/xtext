@@ -70,8 +70,7 @@ public class ClasspathScanner {
     try {
       synchronized (this) {
         if ((this.classLoaderDescriptors == null)) {
-          Cache<Pair<ClassLoader, Collection<String>>, Iterable<ITypeDescriptor>> _createClassLoaderCache = this.createClassLoaderCache();
-          this.classLoaderDescriptors = _createClassLoaderCache;
+          this.classLoaderDescriptors = this.createClassLoaderCache();
         }
       }
       Pair<ClassLoader, Collection<String>> _mappedTo = Pair.<ClassLoader, Collection<String>>of(classLoader, packagePrefixes);
@@ -88,8 +87,7 @@ public class ClasspathScanner {
     try {
       synchronized (this) {
         if ((this.uriDescriptors == null)) {
-          Cache<Pair<URI, Collection<String>>, Iterable<ITypeDescriptor>> _createUriCache = this.createUriCache();
-          this.uriDescriptors = _createUriCache;
+          this.uriDescriptors = this.createUriCache();
         }
       }
       Pair<URI, Collection<String>> _mappedTo = Pair.<URI, Collection<String>>of(uri, packagePrefixes);
@@ -111,9 +109,7 @@ public class ClasspathScanner {
       }
       Iterable<String> _split = ClasspathScanner.PROPERTY_CLASSPATH_SPLITTER.split(classpath);
       final Function1<String, Iterable<ITypeDescriptor>> _function = (String path) -> {
-        File _file = new File(path);
-        URI _uRI = _file.toURI();
-        return this.getDescriptors(_uRI, packagePrefixes);
+        return this.getDescriptors(new File(path).toURI(), packagePrefixes);
       };
       Iterable<Iterable<ITypeDescriptor>> _map = IterableExtensions.<String, Iterable<ITypeDescriptor>>map(_split, _function);
       _xblockexpression = Iterables.<ITypeDescriptor>concat(_map);
@@ -130,15 +126,13 @@ public class ClasspathScanner {
         while ((cl != null)) {
           {
             classLoaderHierarchy.push(cl);
-            ClassLoader _parent = cl.getParent();
-            cl = _parent;
+            cl = cl.getParent();
           }
         }
         final LinkedHashSet<URI> uris = new LinkedHashSet<URI>();
         while ((!classLoaderHierarchy.isEmpty())) {
           {
-            ClassLoader _pop = classLoaderHierarchy.pop();
-            cl = _pop;
+            cl = classLoaderHierarchy.pop();
             if ((cl instanceof URLClassLoader)) {
               URL[] _uRLs = ((URLClassLoader)cl).getURLs();
               for (final URL url : _uRLs) {
@@ -228,11 +222,7 @@ public class ClasspathScanner {
                 boolean _isAbsolute = uri.isAbsolute();
                 boolean _not = (!_isAbsolute);
                 if (_not) {
-                  File _parentFile = file.getParentFile();
-                  String _replace = path.replace("/", File.separator);
-                  File _file = new File(_parentFile, _replace);
-                  URI _uRI = _file.toURI();
-                  uri = _uRI;
+                  uri = new File(file.getParentFile(), path.replace("/", File.separator)).toURI();
                 }
                 Iterable<ITypeDescriptor> _descriptors = this.getDescriptors(uri, packagePrefixes);
                 descriptorCollections.add(_descriptors);

@@ -97,8 +97,7 @@ public class ResourceURICollector {
       if ((name != null)) {
         final int indexOf = name.indexOf(";");
         if ((indexOf > 0)) {
-          String _substring = name.substring(0, indexOf);
-          name = _substring;
+          name = name.substring(0, indexOf);
         }
         Map<String, URI> _platformResourceMap = EcorePlugin.getPlatformResourceMap();
         boolean _containsKey = _platformResourceMap.containsKey(name);

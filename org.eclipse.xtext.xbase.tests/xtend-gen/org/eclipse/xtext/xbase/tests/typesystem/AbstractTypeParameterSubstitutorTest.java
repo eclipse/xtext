@@ -32,8 +32,7 @@ public abstract class AbstractTypeParameterSubstitutorTest extends AbstractXbase
   
   @Before
   public void createResourceSet() {
-    XtextResourceSet _get = this.<XtextResourceSet>get(XtextResourceSet.class);
-    this.resourceSet = _get;
+    this.resourceSet = this.<XtextResourceSet>get(XtextResourceSet.class);
   }
   
   @After

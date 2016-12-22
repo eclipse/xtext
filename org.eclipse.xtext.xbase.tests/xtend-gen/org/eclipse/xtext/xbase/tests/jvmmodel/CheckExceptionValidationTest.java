@@ -22,8 +22,7 @@ public class CheckExceptionValidationTest extends AbstractJvmModelTest {
   
   @Inject
   public void setPreferences(final IPreferenceValuesProvider.SingletonPreferenceValuesProvider prefProvider) {
-    MapBasedPreferenceValues _preferenceValues = prefProvider.getPreferenceValues(null);
-    this.preferences = _preferenceValues;
+    this.preferences = prefProvider.getPreferenceValues(null);
   }
   
   @Before

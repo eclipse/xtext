@@ -167,8 +167,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
   @Override
   public LightweightTypeReference getMergedType(final List<LightweightTypeReference> types) {
     final Consumer<LightweightTypeReference> _function = (LightweightTypeReference it) -> {
-      ITypeReferenceOwner _owner = it.getOwner();
-      boolean _isOwnedBy = it.isOwnedBy(_owner);
+      boolean _isOwnedBy = it.isOwnedBy(it.getOwner());
       boolean _not = (!_isOwnedBy);
       if (_not) {
         throw new IllegalArgumentException("result is not owned by this resolved types");
@@ -188,8 +187,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
   @Override
   public TypeData mergeTypeData(final XExpression expression, final List<TypeData> allValues, final boolean returnType, final boolean nullIfEmpty) {
     final Consumer<TypeData> _function = (TypeData it) -> {
-      ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-      boolean _isOwnedBy = it.isOwnedBy(_referenceOwner);
+      boolean _isOwnedBy = it.isOwnedBy(this.getReferenceOwner());
       boolean _not = (!_isOwnedBy);
       if (_not) {
         throw new IllegalArgumentException("result is not owned by this resolved types");
@@ -233,8 +231,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
     final List<TypeData> result = super.doGetTypeData(expression);
     if (result!=null) {
       final Consumer<TypeData> _function = (TypeData it) -> {
-        ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-        boolean _isOwnedBy = it.isOwnedBy(_referenceOwner);
+        boolean _isOwnedBy = it.isOwnedBy(this.getReferenceOwner());
         boolean _not = (!_isOwnedBy);
         if (_not) {
           throw new IllegalArgumentException("result is not owned by this resolved types");

@@ -67,7 +67,6 @@ public class XbaseIdeContentProposalPriorities extends IdeContentProposalPriorit
   }
   
   public int getTypeRefPriority(final ITypeDescriptor typeDesc, final ContentAssistEntry entry) {
-    int _crossRefPriority = this.getCrossRefPriority();
-    return this.adjustPriority(entry, _crossRefPriority);
+    return this.adjustPriority(entry, this.getCrossRefPriority());
   }
 }

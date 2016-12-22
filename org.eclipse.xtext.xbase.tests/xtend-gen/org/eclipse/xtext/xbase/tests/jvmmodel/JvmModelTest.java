@@ -4,9 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.IOException;
 import java.util.ArrayList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -43,13 +41,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
   public void testSimple() {
     try {
       final XExpression expression = this.expression("return s.toUpperCase", false);
-      Resource _eResource = expression.eResource();
-      EList<EObject> _contents = _eResource.getContents();
-      String _string = _contents.toString();
-      Resource _eResource_1 = expression.eResource();
-      EList<EObject> _contents_1 = _eResource_1.getContents();
-      int _size = _contents_1.size();
-      Assert.assertEquals(_string, 2, _size);
+      Assert.assertEquals(expression.eResource().getContents().toString(), 2, expression.eResource().getContents().size());
       this.helper.assertNoErrors(expression);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -63,12 +55,9 @@ public class JvmModelTest extends AbstractJvmModelTest {
       final boolean initialized = (this._reflectExtensions.<Boolean>get(resource, "fullyInitialized")).booleanValue();
       Assert.assertFalse(initialized);
       final IResourceDescription desc = this.manager.getResourceDescription(resource);
-      Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
-      final ArrayList<Iterable<IEObjectDescription>> list = CollectionLiterals.<Iterable<IEObjectDescription>>newArrayList(_exportedObjects);
-      int _size = list.size();
-      Assert.assertEquals(1, _size);
-      Boolean _get = this._reflectExtensions.<Boolean>get(resource, "fullyInitialized");
-      Assert.assertFalse((_get).booleanValue());
+      final ArrayList<Iterable<IEObjectDescription>> list = CollectionLiterals.<Iterable<IEObjectDescription>>newArrayList(desc.getExportedObjects());
+      Assert.assertEquals(1, list.size());
+      Assert.assertFalse((this._reflectExtensions.<Boolean>get(resource, "fullyInitialized")).booleanValue());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

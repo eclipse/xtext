@@ -47,11 +47,8 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
   @Override
   public List<Object> resolvesClosuresTo(final String expression, final String... types) {
     final List<XClosure> closures = this.findClosures(expression);
-    boolean _isEmpty = closures.isEmpty();
-    Assert.assertFalse(_isEmpty);
-    int _size = ((List<String>)Conversions.doWrapArray(types)).size();
-    int _size_1 = closures.size();
-    Assert.assertEquals(_size, _size_1);
+    Assert.assertFalse(closures.isEmpty());
+    Assert.assertEquals(((List<String>)Conversions.doWrapArray(types)).size(), closures.size());
     IBatchTypeResolver _typeResolver = this.getTypeResolver();
     XClosure _head = IterableExtensions.<XClosure>head(closures);
     final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
@@ -72,9 +69,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("failed for closure at ");
         _builder.append(index);
-        Object _get = types[(index).intValue()];
-        String _simpleName = closureType.getSimpleName();
-        Assert.assertEquals(_builder.toString(), _get, _simpleName);
+        Assert.assertEquals(_builder.toString(), types[(index).intValue()], closureType.getSimpleName());
         return null;
       };
       this.collector.<Object>checkSucceeds(_function_2);
@@ -93,9 +88,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
       };
       this.collector.<Object>checkSucceeds(_function_1);
       final Callable<Object> _function_2 = () -> {
-        Object _get = types[(index).intValue()];
-        String _equivalent = this.getEquivalent(((FunctionTypeReference) reference));
-        Assert.assertEquals(_get, _equivalent);
+        Assert.assertEquals(types[(index).intValue()], this.getEquivalent(((FunctionTypeReference) reference)));
         return null;
       };
       this.collector.<Object>checkSucceeds(_function_2);
