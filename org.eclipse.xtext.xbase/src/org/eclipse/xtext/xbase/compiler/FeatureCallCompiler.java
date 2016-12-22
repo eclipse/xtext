@@ -507,7 +507,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				XVariableDeclaration variableDeclaration = (XVariableDeclaration) featureCall.getFeature();
 				if (!variableDeclaration.isWriteable()) {
 					internalToJavaStatement(arg, b, true);
-					return;
 				} else {
 					LightweightTypeReference expectedType = getLightweightExpectedType(arg);
 					LightweightTypeReference type = getLightweightType(arg);
@@ -521,29 +520,30 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 						b.append(")").append(varName).append(";");
 					}
 				}
+				return;
 			} else if (featureCall.getFeature() instanceof JvmFormalParameter) {
 				// always final
 				internalToJavaStatement(arg, b, true);
 				return;
 			}
-		} else {
-			internalToJavaStatement(arg, b, true);
-			if (b.hasName(arg)) {
-				// TODO investigate to generate all synthetic vars as final
-				// but we'd have to revise the strategy for branch expressions, than.
-				LightweightTypeReference type = getTypeForVariableDeclaration(arg);
-				LightweightTypeReference expectation = getLightweightExpectedType(arg);
-				if (expectation != null && type.isFunctionType() && !isJavaConformant(expectation, type)) {
-					String mutableName = b.removeName(arg);
-					String finalNameProposal = "_final" + mutableName;
-					String finalName = b.declareSyntheticVariable(arg, finalNameProposal);
-					b.newLine();
-					b.append("final ");
-					b.append(type);
-					b.append(" ").append(finalName).append(" = ");
-					b.append(mutableName);
-					b.append(";");
-				}
+		}
+		
+		internalToJavaStatement(arg, b, true);
+		if (b.hasName(arg)) {
+			// TODO investigate to generate all synthetic vars as final
+			// but we'd have to revise the strategy for branch expressions, than.
+			LightweightTypeReference type = getTypeForVariableDeclaration(arg);
+			LightweightTypeReference expectation = getLightweightExpectedType(arg);
+			if (expectation != null && type.isFunctionType() && !isJavaConformant(expectation, type)) {
+				String mutableName = b.removeName(arg);
+				String finalNameProposal = "_final" + mutableName;
+				String finalName = b.declareSyntheticVariable(arg, finalNameProposal);
+				b.newLine();
+				b.append("final ");
+				b.append(type);
+				b.append(" ").append(finalName).append(" = ");
+				b.append(mutableName);
+				b.append(";");
 			}
 		}
 	}
