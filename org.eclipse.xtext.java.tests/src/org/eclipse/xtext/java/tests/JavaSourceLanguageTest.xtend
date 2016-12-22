@@ -16,6 +16,7 @@ import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import java.util.List
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 
 @RunWith(XtextRunner)
 @InjectWith(JavaInjectorProvider)
@@ -39,6 +40,24 @@ class JavaSourceLanguageTest {
         val clazz = resource.contents.head as JvmGenericType
         val referenced = clazz.declaredOperations.head.returnType.type
         Assert.assertSame(nestedType, referenced)
+    }
+    
+    @Test def void testOverridenInterfaceMethod() {
+        val rs = resourceSet('MySuperClass.java' -> '''
+            public interface MySuperClass {
+                public java.util.Collection<? extends CharSequence> getThem();
+            }
+        ''', 'MySubClass.java' -> '''
+            public interface MySubClass extends MySuperClass {
+                @Override
+                public java.util.List<? extends String> getThem();
+            }
+        ''')
+        val superResource = rs.resources.findFirst[URI.toString.endsWith('MySuperClass.java')]
+        val resource = rs.resources.findFirst[URI.toString.endsWith('MySubClass.java')]
+        val clazz = resource.contents.head as JvmGenericType
+        val referenced = clazz.declaredOperations.head.returnType
+        Assert.assertNotNull((referenced as JvmParameterizedTypeReference).arguments.head)
     }
 
     @Inject Provider<XtextResourceSet> resourceSetProvider

@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.JavaVersion;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -54,6 +56,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+@Log
 @SuppressWarnings("all")
 public class JavaDerivedStateComputer {
   @Inject
@@ -275,7 +278,7 @@ public class JavaDerivedStateComputer {
       if (_javaSourceLevel != null) {
         _elvis = _javaSourceLevel;
       } else {
-        _elvis = JavaVersion.JAVA7;
+        _elvis = JavaVersion.JAVA8;
       }
       final JavaVersion sourceVersion = _elvis;
       JavaVersion _elvis_1 = null;
@@ -286,15 +289,21 @@ public class JavaDerivedStateComputer {
       if (_javaTargetLevel != null) {
         _elvis_1 = _javaTargetLevel;
       } else {
-        _elvis_1 = JavaVersion.JAVA7;
+        _elvis_1 = JavaVersion.JAVA8;
       }
       final JavaVersion targetVersion = _elvis_1;
+      boolean _equals = Objects.equal(sourceVersion, JavaVersion.JAVA7);
+      if (_equals) {
+        JavaDerivedStateComputer.LOG.warn("The java source language has been configured with Java 7. JDT will not produce signature information for generic @Override methods in this version, which might lead to follow up issues.");
+      }
       final long sourceLevel = this.toJdtVersion(sourceVersion);
       final long targetLevel = this.toJdtVersion(targetVersion);
       final CompilerOptions compilerOptions = new CompilerOptions();
       compilerOptions.targetJDK = targetLevel;
       compilerOptions.inlineJsrBytecode = true;
       compilerOptions.sourceLevel = sourceLevel;
+      compilerOptions.produceMethodParameters = true;
+      compilerOptions.produceReferenceInfo = true;
       try {
         Field _field = CompilerOptions.class.getField("originalSourceLevel");
         _field.setLong(compilerOptions, targetLevel);
@@ -366,4 +375,6 @@ public class JavaDerivedStateComputer {
     Object _classpathURIContext = ((XtextResourceSet) _resourceSet).getClasspathURIContext();
     return ((ClassLoader) _classpathURIContext);
   }
+  
+  private final static Logger LOG = Logger.getLogger(JavaDerivedStateComputer.class);
 }

@@ -16,6 +16,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
@@ -95,6 +96,55 @@ public class JavaSourceLanguageTest {
     JvmTypeReference _returnType = _head_2.getReturnType();
     final JvmType referenced = _returnType.getType();
     Assert.assertSame(nestedType, referenced);
+  }
+  
+  @Test
+  public void testOverridenInterfaceMethod() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public interface MySuperClass {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public java.util.Collection<? extends CharSequence> getThem();");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("MySuperClass.java", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("public interface MySubClass extends MySuperClass {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public java.util.List<? extends String> getThem();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("MySubClass.java", _builder_1.toString());
+    final XtextResourceSet rs = this.resourceSet(_mappedTo, _mappedTo_1);
+    EList<Resource> _resources = rs.getResources();
+    final Function1<Resource, Boolean> _function = (Resource it) -> {
+      URI _uRI = it.getURI();
+      String _string = _uRI.toString();
+      return Boolean.valueOf(_string.endsWith("MySuperClass.java"));
+    };
+    final Resource superResource = IterableExtensions.<Resource>findFirst(_resources, _function);
+    EList<Resource> _resources_1 = rs.getResources();
+    final Function1<Resource, Boolean> _function_1 = (Resource it) -> {
+      URI _uRI = it.getURI();
+      String _string = _uRI.toString();
+      return Boolean.valueOf(_string.endsWith("MySubClass.java"));
+    };
+    final Resource resource = IterableExtensions.<Resource>findFirst(_resources_1, _function_1);
+    EList<EObject> _contents = resource.getContents();
+    EObject _head = IterableExtensions.<EObject>head(_contents);
+    final JvmGenericType clazz = ((JvmGenericType) _head);
+    Iterable<JvmOperation> _declaredOperations = clazz.getDeclaredOperations();
+    JvmOperation _head_1 = IterableExtensions.<JvmOperation>head(_declaredOperations);
+    final JvmTypeReference referenced = _head_1.getReturnType();
+    EList<JvmTypeReference> _arguments = ((JvmParameterizedTypeReference) referenced).getArguments();
+    JvmTypeReference _head_2 = IterableExtensions.<JvmTypeReference>head(_arguments);
+    Assert.assertNotNull(_head_2);
   }
   
   @Inject

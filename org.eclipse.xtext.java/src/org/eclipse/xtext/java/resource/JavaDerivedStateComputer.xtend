@@ -27,7 +27,9 @@ import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.JavaVersion
+import org.eclipse.xtext.util.internal.Log
 
+@Log
 class JavaDerivedStateComputer {
 	
 	@Inject IReferableElementsUnloader unloader;
@@ -156,15 +158,19 @@ class JavaDerivedStateComputer {
     }
 
     protected def CompilerOptions getCompilerOptions(JavaConfig javaConfig) {
-        val sourceVersion = javaConfig?.javaSourceLevel ?: JavaVersion.JAVA7
-        val targetVersion = javaConfig?.javaTargetLevel ?: JavaVersion.JAVA7
-
+        val sourceVersion = javaConfig?.javaSourceLevel ?: JavaVersion.JAVA8
+        val targetVersion = javaConfig?.javaTargetLevel ?: JavaVersion.JAVA8
+        if (sourceVersion == JavaVersion.JAVA7) {
+            LOG.warn("The java source language has been configured with Java 7. JDT will not produce signature information for generic @Override methods in this version, which might lead to follow up issues.")
+        }
         val sourceLevel = sourceVersion.toJdtVersion
         val targetLevel = targetVersion.toJdtVersion
         val compilerOptions = new CompilerOptions
         compilerOptions.targetJDK = targetLevel
         compilerOptions.inlineJsrBytecode = true
         compilerOptions.sourceLevel = sourceLevel
+        compilerOptions.produceMethodParameters = true
+        compilerOptions.produceReferenceInfo = true
         // these fields have been introduces in JDT 3.7
         try {
             CompilerOptions.getField("originalSourceLevel").setLong(compilerOptions, targetLevel)
