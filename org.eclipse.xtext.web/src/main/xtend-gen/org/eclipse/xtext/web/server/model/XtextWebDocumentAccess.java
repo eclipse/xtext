@@ -137,10 +137,8 @@ public class XtextWebDocumentAccess {
   
   @Inject
   protected void setExecutorServiceProvider(final ExecutorServiceProvider executorServiceProvider) {
-    ExecutorService _get = executorServiceProvider.get(XtextWebDocumentAccess.DOCUMENT_LOCK_EXECUTOR);
-    this.executorService1 = _get;
-    ExecutorService _get_1 = executorServiceProvider.get();
-    this.executorService2 = _get_1;
+    this.executorService1 = executorServiceProvider.get(XtextWebDocumentAccess.DOCUMENT_LOCK_EXECUTOR);
+    this.executorService2 = executorServiceProvider.get();
   }
   
   protected void init(final XtextWebDocument document, final String requiredStateId, final boolean skipAsyncWork) {
@@ -209,10 +207,8 @@ public class XtextWebDocumentAccess {
         synchronizer.acquireLock(priority);
         this.checkStateId();
         synchronousWork.setCancelIndicator(synchronizer);
-        T _exec = synchronousWork.exec(documentAccess);
-        result = _exec;
-        String _stateId = this.document.getStateId();
-        this.requiredStateId = _stateId;
+        result = synchronousWork.exec(documentAccess);
+        this.requiredStateId = this.document.getStateId();
         if ((((((!this.skipAsyncWork) && priority) && (documentAccess != null)) && (!synchronizer.isCanceled())) && (!Thread.currentThread().isInterrupted()))) {
           final Procedure1<Object> _function = (Object it) -> {
             try {

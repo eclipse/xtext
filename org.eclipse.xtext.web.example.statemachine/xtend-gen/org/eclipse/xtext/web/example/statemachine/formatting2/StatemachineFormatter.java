@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
@@ -85,50 +84,42 @@ public class StatemachineFormatter extends AbstractFormatter2 {
       it.oneSpace();
     };
     document.append(_keyword, _function);
-    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(state);
-    StatemachineGrammarAccess.StateElements _stateAccess_1 = this._statemachineGrammarAccess.getStateAccess();
-    Assignment _nameAssignment_1 = _stateAccess_1.getNameAssignment_1();
-    ISemanticRegion _assignment = _regionFor_1.assignment(_nameAssignment_1);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    ISemanticRegion _append = document.append(_assignment, _function_1);
-    ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(state);
-    StatemachineGrammarAccess.StateElements _stateAccess_2 = this._statemachineGrammarAccess.getStateAccess();
-    Keyword _endKeyword_5 = _stateAccess_2.getEndKeyword_5();
-    ISemanticRegion _keyword_1 = _regionFor_2.keyword(_endKeyword_5);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.indent();
     };
-    document.<ISemanticRegion, ISemanticRegion>interior(_append, _keyword_1, _function_2);
+    document.<ISemanticRegion, ISemanticRegion>interior(
+      document.append(this.textRegionExtensions.regionFor(state).assignment(this._statemachineGrammarAccess.getStateAccess().getNameAssignment_1()), ((Procedure1<IHiddenRegionFormatter>) (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      })), 
+      this.textRegionExtensions.regionFor(state).keyword(this._statemachineGrammarAccess.getStateAccess().getEndKeyword_5()), _function_1);
     EList<Command> _commands = state.getCommands();
     for (final Command command : _commands) {
       {
         this.format(command, document);
-        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
-        document.<Command>append(command, _function_3);
+        document.<Command>append(command, _function_2);
       }
     }
     EList<Transition> _transitions = state.getTransitions();
     for (final Transition transition : _transitions) {
       {
         this.format(transition, document);
-        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
-        document.<Transition>append(transition, _function_3);
+        document.<Transition>append(transition, _function_2);
       }
     }
     EList<State> _nestedStates = state.getNestedStates();
     for (final State nestedState : _nestedStates) {
       {
         this.format(nestedState, document);
-        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
-        document.<State>append(nestedState, _function_3);
+        document.<State>append(nestedState, _function_2);
       }
     }
   }
@@ -180,8 +171,7 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     Condition _condition = transition.getCondition();
     boolean _tripleNotEquals = (_condition != null);
     if (_tripleNotEquals) {
-      Condition _condition_1 = transition.getCondition();
-      this.format(_condition_1, document);
+      this.format(transition.getCondition(), document);
     }
   }
   

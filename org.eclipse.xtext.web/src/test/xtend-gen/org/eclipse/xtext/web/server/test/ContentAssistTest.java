@@ -18,7 +18,6 @@ import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.hamcrest.Matcher;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Assert;
 import org.junit.Test;
@@ -47,14 +46,11 @@ public class ContentAssistTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("caretOffset", _string_1);
     final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
-    boolean _isHasSideEffects = contentAssist.isHasSideEffects();
-    Assert.assertFalse(_isHasSideEffects);
+    Assert.assertFalse(contentAssist.isHasSideEffects());
     Function0<? extends IServiceResult> _service = contentAssist.getService();
     IServiceResult _apply = _service.apply();
     final ContentAssistResult result = ((ContentAssistResult) _apply);
-    String _string_2 = expectedResult.toString();
-    String _string_3 = result.toString();
-    Assert.assertEquals(_string_2, _string_3);
+    Assert.assertEquals(expectedResult.toString(), result.toString());
   }
   
   @Test
@@ -1166,13 +1162,10 @@ public class ContentAssistTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_3 = Pair.<String, String>of("requiredStateId", "totalerquatsch");
     final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
-    boolean _isHasConflict = contentAssist.isHasConflict();
-    Assert.assertTrue(_isHasConflict);
+    Assert.assertTrue(contentAssist.isHasConflict());
     Function0<? extends IServiceResult> _service = contentAssist.getService();
     final IServiceResult result = _service.apply();
-    Matcher<IServiceResult> _instanceOf = IsInstanceOf.<IServiceResult>instanceOf(ServiceConflictResult.class);
-    Assert.<IServiceResult>assertThat(result, _instanceOf);
-    String _conflict = ((ServiceConflictResult) result).getConflict();
-    Assert.assertEquals(_conflict, "invalidStateId");
+    Assert.<IServiceResult>assertThat(result, IsInstanceOf.<IServiceResult>instanceOf(ServiceConflictResult.class));
+    Assert.assertEquals(((ServiceConflictResult) result).getConflict(), "invalidStateId");
   }
 }

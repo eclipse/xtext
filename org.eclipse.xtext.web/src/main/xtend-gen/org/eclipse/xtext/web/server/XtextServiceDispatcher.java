@@ -424,8 +424,7 @@ public class XtextServiceDispatcher {
       if ((fullText == null)) {
         throw new InvalidRequestException.ResourceNotFoundException("The requested resource was not found.");
       }
-      XtextWebDocument _fullTextDocument = this.getFullTextDocument(fullText, resourceId, context);
-      document = _fullTextDocument;
+      document = this.getFullTextDocument(fullText, resourceId, context);
     }
     String _parameter = context.getParameter("requiredStateId");
     final XtextWebDocumentAccess documentAccess = this.documentAccessFactory.create(document, _parameter, false);
@@ -785,10 +784,8 @@ public class XtextServiceDispatcher {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
       final XtextWebDocumentAccess document = this.getDocumentAccess(context);
-      Optional<Boolean> _of = Optional.<Boolean>of(Boolean.valueOf(false));
-      final boolean allArtifacts = this.getBoolean(context, "allArtifacts", _of);
-      Optional<Boolean> _of_1 = Optional.<Boolean>of(Boolean.valueOf(true));
-      final boolean includeContent = this.getBoolean(context, "includeContent", _of_1);
+      final boolean allArtifacts = this.getBoolean(context, "allArtifacts", Optional.<Boolean>of(Boolean.valueOf(false)));
+      final boolean includeContent = this.getBoolean(context, "includeContent", Optional.<Boolean>of(Boolean.valueOf(true)));
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = (XtextServiceDispatcher.ServiceDescriptor it) -> {
         if (allArtifacts) {
@@ -842,18 +839,13 @@ public class XtextServiceDispatcher {
     Set<String> _parameterKeys = context.getParameterKeys();
     boolean _contains = _parameterKeys.contains("fullText");
     if (_contains) {
-      String _parameter = context.getParameter("fullText");
-      String _resourceID = this.getResourceID(context);
-      XtextWebDocument _fullTextDocument = this.getFullTextDocument(_parameter, _resourceID, context);
-      document = _fullTextDocument;
+      document = this.getFullTextDocument(context.getParameter("fullText"), this.getResourceID(context), context);
       initializedFromFullText = true;
     } else {
       Set<String> _parameterKeys_1 = context.getParameterKeys();
       boolean _contains_1 = _parameterKeys_1.contains("resource");
       if (_contains_1) {
-        String _resourceID_1 = this.getResourceID(context);
-        XtextWebDocument _resourceDocument = this.getResourceDocument(_resourceID_1, context);
-        document = _resourceDocument;
+        document = this.getResourceDocument(this.getResourceID(context), context);
         if ((document == null)) {
           throw new InvalidRequestException.ResourceNotFoundException("The requested resource was not found.");
         }
@@ -861,8 +853,8 @@ public class XtextServiceDispatcher {
         throw new InvalidRequestException.InvalidParametersException("At least one of the parameters \'resource\' and \'fullText\' must be specified.");
       }
     }
-    String _parameter_1 = context.getParameter("requiredStateId");
-    return this.documentAccessFactory.create(document, _parameter_1, initializedFromFullText);
+    String _parameter = context.getParameter("requiredStateId");
+    return this.documentAccessFactory.create(document, _parameter, initializedFromFullText);
   }
   
   /**

@@ -18,7 +18,6 @@ import org.eclipse.xtext.web.server.validation.ValidationResult;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.hamcrest.Matcher;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,13 +28,11 @@ public class ValidationTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "validate");
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", resourceContent);
     final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
-    boolean _isHasSideEffects = validate.isHasSideEffects();
-    Assert.assertFalse(_isHasSideEffects);
+    Assert.assertFalse(validate.isHasSideEffects());
     Function0<? extends IServiceResult> _service = validate.getService();
     IServiceResult _apply = _service.apply();
     final ValidationResult result = ((ValidationResult) _apply);
-    String _string = result.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, result.toString());
   }
   
   @Test
@@ -162,8 +159,7 @@ public class ValidationTest extends AbstractWebServerTest {
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
-    boolean _isHasSideEffects = validate.isHasSideEffects();
-    Assert.assertFalse(_isHasSideEffects);
+    Assert.assertFalse(validate.isHasSideEffects());
     Function0<? extends IServiceResult> _service = validate.getService();
     IServiceResult _apply = _service.apply();
     final ValidationResult result = ((ValidationResult) _apply);
@@ -202,8 +198,7 @@ public class ValidationTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("]");
     final String expectedResult = _builder.toString();
-    String _string = result.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, result.toString());
   }
   
   @Test
@@ -215,13 +210,10 @@ public class ValidationTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("requiredStateId", "totalerquatsch");
     final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
-    boolean _isHasConflict = validate.isHasConflict();
-    Assert.assertTrue(_isHasConflict);
+    Assert.assertTrue(validate.isHasConflict());
     Function0<? extends IServiceResult> _service = validate.getService();
     final IServiceResult result = _service.apply();
-    Matcher<IServiceResult> _instanceOf = IsInstanceOf.<IServiceResult>instanceOf(ServiceConflictResult.class);
-    Assert.<IServiceResult>assertThat(result, _instanceOf);
-    String _conflict = ((ServiceConflictResult) result).getConflict();
-    Assert.assertEquals(_conflict, "invalidStateId");
+    Assert.<IServiceResult>assertThat(result, IsInstanceOf.<IServiceResult>instanceOf(ServiceConflictResult.class));
+    Assert.assertEquals(((ServiceConflictResult) result).getConflict(), "invalidStateId");
   }
 }

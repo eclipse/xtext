@@ -65,9 +65,7 @@ public class FormattingService {
         @Override
         public FormattingResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
           if ((FormattingService.this.formatter2Provider != null)) {
-            XtextResource _resource = it.getResource();
-            String _format2 = FormattingService.this.format2(_resource, selection, preferences);
-            textWrapper.set(_format2);
+            textWrapper.set(FormattingService.this.format2(it.getResource(), selection, preferences));
             if ((selection != null)) {
               int _offset = selection.getOffset();
               int _length = selection.getLength();
@@ -76,10 +74,8 @@ public class FormattingService {
             }
           } else {
             if ((FormattingService.this.formatter1 != null)) {
-              XtextResource _resource_1 = it.getResource();
-              final INodeModelFormatter.IFormattedRegion formattedRegion = FormattingService.this.format1(_resource_1, selection);
-              String _formattedText = formattedRegion.getFormattedText();
-              textWrapper.set(_formattedText);
+              final INodeModelFormatter.IFormattedRegion formattedRegion = FormattingService.this.format1(it.getResource(), selection);
+              textWrapper.set(formattedRegion.getFormattedText());
               int _offset_1 = formattedRegion.getOffset();
               int _length_1 = formattedRegion.getLength();
               TextRegion _textRegion_1 = new TextRegion(_offset_1, _length_1);
@@ -101,15 +97,9 @@ public class FormattingService {
         public Object exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
           boolean _isEmpty = regionWrapper.isEmpty();
           if (_isEmpty) {
-            String _get = textWrapper.get();
-            it.setText(_get);
+            it.setText(textWrapper.get());
           } else {
-            String _get_1 = textWrapper.get();
-            TextRegion _get_2 = regionWrapper.get();
-            int _offset = _get_2.getOffset();
-            TextRegion _get_3 = regionWrapper.get();
-            int _length = _get_3.getLength();
-            it.updateText(_get_1, _offset, _length);
+            it.updateText(textWrapper.get(), regionWrapper.get().getOffset(), regionWrapper.get().getLength());
           }
           return null;
         }

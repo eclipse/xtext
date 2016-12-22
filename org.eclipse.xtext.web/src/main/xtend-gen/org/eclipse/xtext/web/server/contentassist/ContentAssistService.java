@@ -76,8 +76,7 @@ public class ContentAssistService {
       }
     };
     final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function);
-    String _get = stateIdWrapper[0];
-    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get, proposalsLimit);
+    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), stateIdWrapper[0], proposalsLimit);
   }
   
   /**
@@ -103,8 +102,7 @@ public class ContentAssistService {
       }
     };
     final ContentAssistContext[] contexts = document.<ContentAssistContext[]>modify(_function);
-    String _get = stateIdWrapper[0];
-    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get, proposalsLimit);
+    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), stateIdWrapper[0], proposalsLimit);
   }
   
   public ContentAssistContext[] getContexts(final IXtextWebDocument document, final ITextRegion selection, final int caretOffset) {

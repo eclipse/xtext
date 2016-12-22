@@ -8,9 +8,7 @@
 package org.eclipse.xtext.web.server.test;
 
 import java.util.Collections;
-import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.occurrences.OccurrencesResult;
@@ -43,23 +41,14 @@ public class OccurrenceTest extends AbstractWebServerTest {
   }
   
   protected void assertOccurrences(final CharSequence resourceContent, final CharSequence expectation) {
-    String _string = expectation.toString();
-    String _trim = _string.trim();
-    OccurrencesResult _occurrences = this.getOccurrences(resourceContent);
-    String _string_1 = _occurrences.toString();
-    String _trim_1 = _string_1.trim();
-    Assert.assertEquals(_trim, _trim_1);
+    Assert.assertEquals(expectation.toString().trim(), this.getOccurrences(resourceContent).toString().trim());
   }
   
   @Test
   public void testNoOccurrenceOnEmptyFile() {
     final OccurrencesResult result = this.getOccurrences("#");
-    List<TextRegion> _readRegions = result.getReadRegions();
-    boolean _isEmpty = _readRegions.isEmpty();
-    Assert.assertTrue(_isEmpty);
-    List<TextRegion> _writeRegions = result.getWriteRegions();
-    boolean _isEmpty_1 = _writeRegions.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
+    Assert.assertTrue(result.getReadRegions().isEmpty());
+    Assert.assertTrue(result.getWriteRegions().isEmpty());
   }
   
   @Test
@@ -67,13 +56,10 @@ public class OccurrenceTest extends AbstractWebServerTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("#state foo");
     _builder.newLine();
-    final OccurrencesResult result = this.getOccurrences(_builder);
-    List<TextRegion> _readRegions = result.getReadRegions();
-    boolean _isEmpty = _readRegions.isEmpty();
-    Assert.assertTrue(_isEmpty);
-    List<TextRegion> _writeRegions = result.getWriteRegions();
-    boolean _isEmpty_1 = _writeRegions.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
+    OccurrencesResult _occurrences = this.getOccurrences(_builder);
+    final OccurrencesResult result = _occurrences;
+    Assert.assertTrue(result.getReadRegions().isEmpty());
+    Assert.assertTrue(result.getWriteRegions().isEmpty());
   }
   
   @Test

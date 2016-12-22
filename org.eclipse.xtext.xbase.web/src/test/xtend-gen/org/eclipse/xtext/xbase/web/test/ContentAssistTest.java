@@ -46,9 +46,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     Function0<? extends IServiceResult> _service = contentAssist.getService();
     IServiceResult _apply = _service.apply();
     final ContentAssistResult result = ((ContentAssistResult) _apply);
-    String _string_2 = expectedResult.toString();
-    String _string_3 = result.toString();
-    Assert.assertEquals(_string_2, _string_3);
+    Assert.assertEquals(expectedResult.toString(), result.toString());
   }
   
   @Test

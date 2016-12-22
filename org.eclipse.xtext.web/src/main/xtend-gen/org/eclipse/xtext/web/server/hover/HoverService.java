@@ -89,8 +89,7 @@ public class HoverService {
         {
           XtextResource _resource = it.getResource();
           final EObject element = HoverService.this._elementAtOffsetUtil.getElementAt(_resource, offset);
-          String _stateId = it.getStateId();
-          _xblockexpression = HoverService.this.createHover(element, _stateId, cancelIndicator);
+          _xblockexpression = HoverService.this.createHover(element, it.getStateId(), cancelIndicator);
         }
         return _xblockexpression;
       }
@@ -126,9 +125,7 @@ public class HoverService {
               return (_get == null);
             }
           });
-          Object _get = proposedElement.get();
-          String _stateId = it.getStateId();
-          _xblockexpression = HoverService.this.createHover(_get, _stateId, cancelIndicator);
+          _xblockexpression = HoverService.this.createHover(proposedElement.get(), it.getStateId(), cancelIndicator);
         }
         return _xblockexpression;
       }
@@ -169,8 +166,7 @@ public class HoverService {
       if (((eobject != null) && (!eobject.eIsProxy()))) {
         final String documentation = this._iEObjectDocumentationProvider.getDocumentation(eobject);
         if ((documentation != null)) {
-          String _surroundWithDiv_1 = this.surroundWithDiv(documentation, "xtext-hover");
-          bodyHtml = _surroundWithDiv_1;
+          bodyHtml = this.surroundWithDiv(documentation, "xtext-hover");
         }
       }
       return new HoverResult(stateId, titleHtml, bodyHtml);
