@@ -11,12 +11,12 @@ sourceSets {
 		java {
 			srcDirs = sourceDirs
 			include '**/*.java', '**/*.xtend'
-			xtendOutputDir = 'xtend-gen'
 		}
 		resources {
 			srcDirs = sourceDirs
 			exclude '**/*.java', '**/*.xtend'
 		}
+		xtendOutputDir = 'xtend-gen'
 	}
 	configure(isTestProject? main : test) {
 		java.srcDirs = []
@@ -35,6 +35,15 @@ jar {
 sourcesJar {
 	from ('.') {
 		include 'about*.*'
+	}
+	if (isTestProject) {
+		from (sourceSets.test.xtendOutputDir) {
+			include '**/*._trace'
+		}
+	} else {
+		from (sourceSets.main.xtendOutputDir) {
+			include '**/*._trace'
+		}
 	}
 }
 

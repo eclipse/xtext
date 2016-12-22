@@ -5,10 +5,8 @@
 import java.time.format.DateTimeFormatter
 import java.time.LocalDateTime
 
-apply from: "${rootDir}/gradle/versions.gradle"
-apply from: "${rootDir}/gradle/bootstrap-setup.gradle"
-
 buildscript {
+	apply from: "${rootDir}/gradle/versions.gradle"
 	repositories {
 		jcenter()
 		maven {
@@ -16,12 +14,13 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath 'org.xtext:xtext-gradle-plugin:1.0.14'
+		classpath "org.xtext:xtext-gradle-plugin:$versions.xtend_plugin"
 		classpath 'io.typefox.gradle:io.typefox.gradle.p2gen:0.1.0'
 	}
 }
 
 apply from: "${rootDir}/gradle/versions.gradle"
+apply from: "${rootDir}/gradle/bootstrap-setup.gradle"
 apply from: "${rootDir}/gradle/p2-deployment.gradle"
 
 ext.buildTime = DateTimeFormatter.ofPattern('yyyyMMdd-HHmm').format(LocalDateTime.now())
