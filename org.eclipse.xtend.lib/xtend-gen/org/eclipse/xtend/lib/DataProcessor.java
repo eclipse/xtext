@@ -7,14 +7,11 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructorProcessor;
 import org.eclipse.xtend.lib.annotations.ToStringProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -65,14 +62,10 @@ public class DataProcessor extends AbstractClassProcessor {
     
     public void addDataToString(final MutableClassDeclaration cls) {
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(cls);
-        this.context.setPrimarySourceElement(it, _primarySourceElement);
-        TypeReference _string = this.context.getString();
-        it.setReturnType(_string);
-        AnnotationReference _newAnnotationReference = this.context.newAnnotationReference(Override.class);
-        it.addAnnotation(_newAnnotationReference);
-        AnnotationReference _newAnnotationReference_1 = this.context.newAnnotationReference(Pure.class);
-        it.addAnnotation(_newAnnotationReference_1);
+        this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
+        it.setReturnType(this.context.getString());
+        it.addAnnotation(this.context.newAnnotationReference(Override.class));
+        it.addAnnotation(this.context.newAnnotationReference(Pure.class));
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -114,23 +107,19 @@ public class DataProcessor extends AbstractClassProcessor {
     boolean _hasHashCode = ehUtil.hasHashCode(it);
     boolean _not = (!_hasHashCode);
     if (_not) {
-      Iterable<? extends MutableFieldDeclaration> _dataFields_1 = util.getDataFields(it);
-      boolean _hasSuperHashCode = ehUtil.hasSuperHashCode(it);
-      ehUtil.addHashCode(it, _dataFields_1, _hasSuperHashCode);
+      ehUtil.addHashCode(it, util.getDataFields(it), ehUtil.hasSuperHashCode(it));
     }
     boolean _hasEquals = ehUtil.hasEquals(it);
     boolean _not_1 = (!_hasEquals);
     if (_not_1) {
-      Iterable<? extends MutableFieldDeclaration> _dataFields_2 = util.getDataFields(it);
-      boolean _hasSuperEquals = ehUtil.hasSuperEquals(it);
-      ehUtil.addEquals(it, _dataFields_2, _hasSuperEquals);
+      ehUtil.addEquals(it, util.getDataFields(it), ehUtil.hasSuperEquals(it));
     }
     boolean _hasToString = toStringUtil.hasToString(it);
     boolean _not_2 = (!_hasToString);
     if (_not_2) {
       util.addDataToString(it);
     }
-    Iterable<? extends MutableFieldDeclaration> _dataFields_3 = util.getDataFields(it);
+    Iterable<? extends MutableFieldDeclaration> _dataFields_1 = util.getDataFields(it);
     final Consumer<MutableFieldDeclaration> _function_1 = (MutableFieldDeclaration it_1) -> {
       boolean _shouldAddGetter = getterUtil.shouldAddGetter(it_1);
       if (_shouldAddGetter) {
@@ -141,6 +130,6 @@ public class DataProcessor extends AbstractClassProcessor {
       String _plus = ("_" + _firstLower);
       it_1.setSimpleName(_plus);
     };
-    _dataFields_3.forEach(_function_1);
+    _dataFields_1.forEach(_function_1);
   }
 }

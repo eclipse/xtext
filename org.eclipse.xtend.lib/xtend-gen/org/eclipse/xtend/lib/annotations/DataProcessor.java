@@ -83,16 +83,12 @@ public class DataProcessor extends AbstractClassProcessor {
     boolean _hasHashCode = ehUtil.hasHashCode(it);
     boolean _not = (!_hasHashCode);
     if (_not) {
-      Iterable<? extends MutableFieldDeclaration> _dataFields_1 = util.getDataFields(it);
-      boolean _hasSuperHashCode = ehUtil.hasSuperHashCode(it);
-      ehUtil.addHashCode(it, _dataFields_1, _hasSuperHashCode);
+      ehUtil.addHashCode(it, util.getDataFields(it), ehUtil.hasSuperHashCode(it));
     }
     boolean _hasEquals = ehUtil.hasEquals(it);
     boolean _not_1 = (!_hasEquals);
     if (_not_1) {
-      Iterable<? extends MutableFieldDeclaration> _dataFields_2 = util.getDataFields(it);
-      boolean _hasSuperEquals = ehUtil.hasSuperEquals(it);
-      ehUtil.addEquals(it, _dataFields_2, _hasSuperEquals);
+      ehUtil.addEquals(it, util.getDataFields(it), ehUtil.hasSuperEquals(it));
     }
     boolean _hasToString = toStringUtil.hasToString(it);
     boolean _not_2 = (!_hasToString);
@@ -100,7 +96,7 @@ public class DataProcessor extends AbstractClassProcessor {
       ResolvedConstructor _superConstructor = requiredArgsUtil.getSuperConstructor(it);
       boolean _tripleEquals = (_superConstructor == null);
       if (_tripleEquals) {
-        Iterable<? extends MutableFieldDeclaration> _dataFields_3 = util.getDataFields(it);
+        Iterable<? extends MutableFieldDeclaration> _dataFields_1 = util.getDataFields(it);
         ToStringConfiguration _elvis = null;
         ToStringConfiguration _toStringConfig = toStringUtil.getToStringConfig(it);
         if (_toStringConfig != null) {
@@ -109,7 +105,7 @@ public class DataProcessor extends AbstractClassProcessor {
           ToStringConfiguration _toStringConfiguration = new ToStringConfiguration();
           _elvis = _toStringConfiguration;
         }
-        toStringUtil.addToString(it, _dataFields_3, _elvis);
+        toStringUtil.addToString(it, _dataFields_1, _elvis);
       } else {
         ToStringConfiguration _elvis_1 = null;
         ToStringConfiguration _toStringConfig_1 = toStringUtil.getToStringConfig(it);
@@ -122,7 +118,7 @@ public class DataProcessor extends AbstractClassProcessor {
         toStringUtil.addReflectiveToString(it, _elvis_1);
       }
     }
-    Iterable<? extends MutableFieldDeclaration> _dataFields_4 = util.getDataFields(it);
+    Iterable<? extends MutableFieldDeclaration> _dataFields_2 = util.getDataFields(it);
     final Consumer<MutableFieldDeclaration> _function_1 = (MutableFieldDeclaration it_1) -> {
       boolean _shouldAddGetter = getterUtil.shouldAddGetter(it_1);
       if (_shouldAddGetter) {
@@ -140,6 +136,6 @@ public class DataProcessor extends AbstractClassProcessor {
         getterUtil.addGetter(it_1, _elvis_2);
       }
     };
-    _dataFields_4.forEach(_function_1);
+    _dataFields_2.forEach(_function_1);
   }
 }
