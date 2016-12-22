@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.resource;
 
-import java.util.HashMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -22,8 +21,7 @@ public class ResourceSetTest extends AbstractResourceSetTest {
   protected ResourceSetImpl createEmptyResourceSet() {
     ResourceSetImpl _resourceSetImpl = new ResourceSetImpl();
     final Procedure1<ResourceSetImpl> _function = (ResourceSetImpl it) -> {
-      HashMap<URI, Resource> _newHashMap = CollectionLiterals.<URI, Resource>newHashMap();
-      it.setURIResourceMap(_newHashMap);
+      it.setURIResourceMap(CollectionLiterals.<URI, Resource>newHashMap());
     };
     return ObjectExtensions.<ResourceSetImpl>operator_doubleArrow(_resourceSetImpl, _function);
   }

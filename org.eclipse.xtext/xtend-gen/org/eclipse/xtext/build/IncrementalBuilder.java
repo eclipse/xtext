@@ -252,21 +252,20 @@ public class IncrementalBuilder {
     }
     
     protected boolean validate(final Resource resource) {
-      URI _uRI = resource.getURI();
-      IResourceServiceProvider _resourceServiceProvider = this.context.getResourceServiceProvider(_uRI);
+      IResourceServiceProvider _resourceServiceProvider = this.context.getResourceServiceProvider(resource.getURI());
       final IResourceValidator resourceValidator = _resourceServiceProvider.getResourceValidator();
       if ((resourceValidator == null)) {
         return true;
       }
-      URI _uRI_1 = resource.getURI();
-      String _lastSegment = _uRI_1.lastSegment();
+      URI _uRI = resource.getURI();
+      String _lastSegment = _uRI.lastSegment();
       String _plus = ("Starting validation for input: \'" + _lastSegment);
       String _plus_1 = (_plus + "\'");
       IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(_plus_1);
       final List<Issue> validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
       BuildRequest.IPostValidationCallback _afterValidate = this.request.getAfterValidate();
-      URI _uRI_2 = resource.getURI();
-      return _afterValidate.afterValidate(_uRI_2, validationResult);
+      URI _uRI_1 = resource.getURI();
+      return _afterValidate.afterValidate(_uRI_1, validationResult);
     }
     
     protected void generate(final Resource resource, final BuildRequest request, final Source2GeneratedMapping newMappings) {
@@ -314,8 +313,7 @@ public class IncrementalBuilder {
         }
       }
       final GeneratorContext generatorContext = new GeneratorContext();
-      CancelIndicator _cancelIndicator = request.getCancelIndicator();
-      generatorContext.setCancelIndicator(_cancelIndicator);
+      generatorContext.setCancelIndicator(request.getCancelIndicator());
       generator.generate(resource, fileSystemAccess, generatorContext);
       final Consumer<URI> _function_1 = (URI it) -> {
         try {
@@ -352,33 +350,24 @@ public class IncrementalBuilder {
         URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();
         final Procedure1<URIBasedFileSystemAccess> _function = (URIBasedFileSystemAccess it) -> {
           final IContextualOutputConfigurationProvider outputConfigProvider = serviceProvider.<IContextualOutputConfigurationProvider>get(IContextualOutputConfigurationProvider.class);
-          Set<OutputConfiguration> _outputConfigurations = outputConfigProvider.getOutputConfigurations(resource);
-          final Function1<OutputConfiguration, String> _function_1 = (OutputConfiguration it_1) -> {
+          it.setOutputConfigurations(IterableExtensions.<String, OutputConfiguration>toMap(outputConfigProvider.getOutputConfigurations(resource), ((Function1<OutputConfiguration, String>) (OutputConfiguration it_1) -> {
             return it_1.getName();
-          };
-          Map<String, OutputConfiguration> _map = IterableExtensions.<String, OutputConfiguration>toMap(_outputConfigurations, _function_1);
-          it.setOutputConfigurations(_map);
-          IFilePostProcessor _get = serviceProvider.<IFilePostProcessor>get(IFilePostProcessor.class);
-          it.setPostProcessor(_get);
+          })));
+          it.setPostProcessor(serviceProvider.<IFilePostProcessor>get(IFilePostProcessor.class));
           final IEncodingProvider newEncodingProvider = serviceProvider.<IEncodingProvider>get(IEncodingProvider.class);
           if ((newEncodingProvider != null)) {
             it.setEncodingProvider(newEncodingProvider);
           }
-          TraceFileNameProvider _get_1 = serviceProvider.<TraceFileNameProvider>get(TraceFileNameProvider.class);
-          it.setTraceFileNameProvider(_get_1);
-          TraceRegionSerializer _get_2 = serviceProvider.<TraceRegionSerializer>get(TraceRegionSerializer.class);
-          it.setTraceRegionSerializer(_get_2);
+          it.setTraceFileNameProvider(serviceProvider.<TraceFileNameProvider>get(TraceFileNameProvider.class));
+          it.setTraceRegionSerializer(serviceProvider.<TraceRegionSerializer>get(TraceRegionSerializer.class));
           it.setGenerateTraces(true);
-          URI _baseDir = this.request.getBaseDir();
-          it.setBaseDir(_baseDir);
+          it.setBaseDir(this.request.getBaseDir());
           String _name = null;
           if (sourceFolder!=null) {
             _name=sourceFolder.getName();
           }
           it.setCurrentSource(_name);
-          ResourceSet _resourceSet_1 = resource.getResourceSet();
-          URIConverter _uRIConverter = _resourceSet_1.getURIConverter();
-          it.setConverter(_uRIConverter);
+          it.setConverter(resource.getResourceSet().getURIConverter());
         };
         _xblockexpression = ObjectExtensions.<URIBasedFileSystemAccess>operator_doubleArrow(_uRIBasedFileSystemAccess, _function);
       }

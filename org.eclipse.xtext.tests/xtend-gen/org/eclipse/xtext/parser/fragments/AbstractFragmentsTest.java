@@ -55,73 +55,47 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
   public void testSimpleModel() {
     final ParserRuleFragments fragments = this.parseAndValidate("#1 myName");
     Assert.assertNotNull(fragments);
-    PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("myName", _name);
+    Assert.assertEquals("myName", fragments.getElement().getName());
   }
   
   @Test
   public void testReference() {
     final ParserRuleFragments fragments = this.parseAndValidate("#2 myName -> myName");
     Assert.assertNotNull(fragments);
-    PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("myName", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    PRFNamed _ref = fragments.getRef();
-    Assert.assertEquals(_element_1, _ref);
+    Assert.assertEquals("myName", fragments.getElement().getName());
+    Assert.assertEquals(fragments.getElement(), fragments.getRef());
   }
   
   @Test
   public void testReference_02() {
     final ParserRuleFragments fragments = this.parseAndValidate("#1 myName : myName");
     Assert.assertNotNull(fragments);
-    PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("myName", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    PRFNamed _element_2 = fragments.getElement();
-    PRFNamed _ref = _element_2.getRef();
-    Assert.assertEquals(_element_1, _ref);
+    Assert.assertEquals("myName", fragments.getElement().getName());
+    Assert.assertEquals(fragments.getElement(), fragments.getElement().getRef());
   }
   
   @Test
   public void testReferenceInFragment() {
     final ParserRuleFragments fragments = this.parseAndValidate("#1 myName - myName");
     Assert.assertNotNull(fragments);
-    PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("myName", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    PRFNamed _element_2 = fragments.getElement();
-    PRFNamed _ref = _element_2.getRef();
-    Assert.assertEquals(_element_1, _ref);
+    Assert.assertEquals("myName", fragments.getElement().getName());
+    Assert.assertEquals(fragments.getElement(), fragments.getElement().getRef());
   }
   
   @Test
   public void testReferenceBeforeFragment() {
     final ParserRuleFragments fragments = this.parseAndValidate("#3 myName <- myName");
     Assert.assertNotNull(fragments);
-    PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("myName", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    PRFNamed _element_2 = fragments.getElement();
-    PRFNamed _ref = _element_2.getRef();
-    Assert.assertEquals(_element_1, _ref);
+    Assert.assertEquals("myName", fragments.getElement().getName());
+    Assert.assertEquals(fragments.getElement(), fragments.getElement().getRef());
   }
   
   @Test
   public void testAction() {
     final ParserRuleFragments fragments = this.parseAndValidate("#4 prev current");
     Assert.assertNotNull(fragments);
-    PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("current", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    PRFNamed _prev = ((PRFNamedWithAction) _element_1).getPrev();
-    String _name_1 = _prev.getName();
-    Assert.assertEquals("prev", _name_1);
+    Assert.assertEquals("current", fragments.getElement().getName());
+    Assert.assertEquals("prev", ((PRFNamedWithAction) fragments.getElement()).getPrev().getName());
   }
   
   @Test
@@ -129,15 +103,11 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ParserRuleFragments fragments = this.parseAndValidate("#4 prev current prev current");
     Assert.assertNotNull(fragments);
     final PRFNamed element = fragments.getElement();
-    String _name = element.getName();
-    Assert.assertEquals("current", _name);
+    Assert.assertEquals("current", element.getName());
     final PRFNamed prev = ((PRFNamedWithAction) element).getPrev();
-    String _name_1 = prev.getName();
-    Assert.assertEquals("prev", _name_1);
-    PRFNamed _ref = element.getRef();
-    Assert.assertEquals(prev, _ref);
-    PRFNamed _ref2 = ((PRFNamedWithAction) element).getRef2();
-    Assert.assertEquals(element, _ref2);
+    Assert.assertEquals("prev", prev.getName());
+    Assert.assertEquals(prev, element.getRef());
+    Assert.assertEquals(element, ((PRFNamedWithAction) element).getRef2());
   }
   
   @Test
@@ -145,13 +115,8 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
   public void testActionInFragment_01() {
     final ParserRuleFragments fragments = this.parseAndValidate("#5 prev current");
     Assert.assertNotNull(fragments);
-    PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("current", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    PRFNamed _prev = ((PRFNamedWithAction) _element_1).getPrev();
-    String _name_1 = _prev.getName();
-    Assert.assertEquals("prev", _name_1);
+    Assert.assertEquals("current", fragments.getElement().getName());
+    Assert.assertEquals("prev", ((PRFNamedWithAction) fragments.getElement()).getPrev().getName());
   }
   
   @Test
@@ -159,13 +124,8 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
   public void testActionInFragment_02() {
     final ParserRuleFragments fragments = this.parseAndValidate("#6 prev current");
     Assert.assertNotNull(fragments);
-    PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("current", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    PRFNamed _prev = ((PRFNamedWithAction) _element_1).getPrev();
-    String _name_1 = _prev.getName();
-    Assert.assertEquals("prev", _name_1);
+    Assert.assertEquals("current", fragments.getElement().getName());
+    Assert.assertEquals("prev", ((PRFNamedWithAction) fragments.getElement()).getPrev().getName());
   }
   
   @Test
@@ -174,15 +134,11 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ParserRuleFragments fragments = this.parseAndValidate("#5 prev current current - prev");
     Assert.assertNotNull(fragments);
     final PRFNamed element = fragments.getElement();
-    String _name = element.getName();
-    Assert.assertEquals("current", _name);
+    Assert.assertEquals("current", element.getName());
     final PRFNamed prev = ((PRFNamedWithAction) element).getPrev();
-    String _name_1 = prev.getName();
-    Assert.assertEquals("prev", _name_1);
-    PRFNamed _ref = element.getRef();
-    Assert.assertEquals(prev, _ref);
-    PRFNamed _ref2 = ((PRFNamedWithAction) element).getRef2();
-    Assert.assertEquals(element, _ref2);
+    Assert.assertEquals("prev", prev.getName());
+    Assert.assertEquals(prev, element.getRef());
+    Assert.assertEquals(element, ((PRFNamedWithAction) element).getRef2());
   }
   
   @Test
@@ -191,15 +147,11 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ParserRuleFragments fragments = this.parseAndValidate("#6 prev current current - prev");
     Assert.assertNotNull(fragments);
     final PRFNamed element = fragments.getElement();
-    String _name = element.getName();
-    Assert.assertEquals("current", _name);
+    Assert.assertEquals("current", element.getName());
     final PRFNamed prev = ((PRFNamedWithAction) element).getPrev();
-    String _name_1 = prev.getName();
-    Assert.assertEquals("prev", _name_1);
-    PRFNamed _ref = element.getRef();
-    Assert.assertEquals(prev, _ref);
-    PRFNamed _ref2 = ((PRFNamedWithAction) element).getRef2();
-    Assert.assertEquals(element, _ref2);
+    Assert.assertEquals("prev", prev.getName());
+    Assert.assertEquals(prev, element.getRef());
+    Assert.assertEquals(element, ((PRFNamedWithAction) element).getRef2());
   }
   
   @Test
@@ -210,14 +162,11 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     PRFNamed element = fragments.getElement();
     while ((element instanceof PRFNamedWithAction)) {
       {
-        PRFNamed _ref2 = ((PRFNamedWithAction)element).getRef2();
-        Assert.assertEquals(element, _ref2);
-        PRFNamed _prev = ((PRFNamedWithAction)element).getPrev();
-        element = _prev;
+        Assert.assertEquals(element, ((PRFNamedWithAction)element).getRef2());
+        element = ((PRFNamedWithAction)element).getPrev();
       }
     }
-    PRFNamed _ref = element.getRef();
-    Assert.assertEquals(element, _ref);
+    Assert.assertEquals(element, element.getRef());
   }
   
   @Test
@@ -225,8 +174,7 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ParserRuleFragments fragments = this.parseAndValidate("#8 a - a");
     Assert.assertNotNull(fragments);
     PRFNamed element = fragments.getElement();
-    PRFNamed _ref = element.getRef();
-    Assert.assertEquals(element, _ref);
+    Assert.assertEquals(element, element.getRef());
   }
   
   @Test
@@ -234,8 +182,7 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ParserRuleFragments fragments = this.parseAndValidate("#8 a.b.c.d");
     Assert.assertNotNull(fragments);
     PRFNamed element = fragments.getElement();
-    String _name = element.getName();
-    Assert.assertEquals("a.b.c.d", _name);
+    Assert.assertEquals("a.b.c.d", element.getName());
   }
   
   @Test
@@ -243,37 +190,27 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ParserRuleFragments fragments = this.parseAndValidate("#8 a.b.c.d - a.b.c.d");
     Assert.assertNotNull(fragments);
     PRFNamed element = fragments.getElement();
-    PRFNamed _ref = element.getRef();
-    Assert.assertEquals(element, _ref);
+    Assert.assertEquals(element, element.getRef());
   }
   
   @Test
   public void testFragmentWithPredicate() {
     final ParserRuleFragments fragments = this.parseAndValidate("#9 myName - myName");
     Assert.assertNotNull(fragments);
-    PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("myName", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    PRFNamed _element_2 = fragments.getElement();
-    PRFNamed _ref = _element_2.getRef();
-    Assert.assertEquals(_element_1, _ref);
+    Assert.assertEquals("myName", fragments.getElement().getName());
+    Assert.assertEquals(fragments.getElement(), fragments.getElement().getRef());
   }
   
   @Test
   public void testFragmentRecursive_01() {
     final ParserRuleFragments fragments = this.parseAndValidate("#10 myName myPrev");
     Assert.assertNotNull(fragments);
+    Assert.assertEquals("myName", fragments.getElement().getName());
     PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("myName", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    final PRFNamed prev = ((PRFNamedWithAction) _element_1).getPrev();
-    String _name_1 = prev.getName();
-    Assert.assertEquals("myPrev", _name_1);
+    final PRFNamed prev = ((PRFNamedWithAction) _element).getPrev();
+    Assert.assertEquals("myPrev", prev.getName());
     final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
-    String _text = node.getText();
-    Assert.assertEquals(" myPrev", _text);
+    Assert.assertEquals(" myPrev", node.getText());
     final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
     Assert.assertSame(prev, lookup);
   }
@@ -282,16 +219,12 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
   public void testFragmentRecursive_02() {
     final ParserRuleFragments fragments = this.parseAndValidate("#10 myName ((myPrev))");
     Assert.assertNotNull(fragments);
+    Assert.assertEquals("myName", fragments.getElement().getName());
     PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("myName", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    final PRFNamed prev = ((PRFNamedWithAction) _element_1).getPrev();
-    String _name_1 = prev.getName();
-    Assert.assertEquals("myPrev", _name_1);
+    final PRFNamed prev = ((PRFNamedWithAction) _element).getPrev();
+    Assert.assertEquals("myPrev", prev.getName());
     final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
-    String _text = node.getText();
-    Assert.assertEquals(" ((myPrev))", _text);
+    Assert.assertEquals(" ((myPrev))", node.getText());
     final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
     Assert.assertSame(prev, lookup);
   }
@@ -300,16 +233,12 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
   public void testFragmentRecursive_03() {
     final ParserRuleFragments fragments = this.parseAndValidate("#11 myName myPrev");
     Assert.assertNotNull(fragments);
+    Assert.assertEquals("myName", fragments.getElement().getName());
     PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("myName", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    final PRFNamed prev = ((PRFNamedWithAction) _element_1).getPrev();
-    String _name_1 = prev.getName();
-    Assert.assertEquals("myPrev", _name_1);
+    final PRFNamed prev = ((PRFNamedWithAction) _element).getPrev();
+    Assert.assertEquals("myPrev", prev.getName());
     final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
-    String _text = node.getText();
-    Assert.assertEquals(" myPrev", _text);
+    Assert.assertEquals(" myPrev", node.getText());
     final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
     Assert.assertSame(prev, lookup);
   }
@@ -318,16 +247,12 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
   public void testFragmentRecursive_04() {
     final ParserRuleFragments fragments = this.parseAndValidate("#11 myName ((myPrev))");
     Assert.assertNotNull(fragments);
+    Assert.assertEquals("myName", fragments.getElement().getName());
     PRFNamed _element = fragments.getElement();
-    String _name = _element.getName();
-    Assert.assertEquals("myName", _name);
-    PRFNamed _element_1 = fragments.getElement();
-    final PRFNamed prev = ((PRFNamedWithAction) _element_1).getPrev();
-    String _name_1 = prev.getName();
-    Assert.assertEquals("myPrev", _name_1);
+    final PRFNamed prev = ((PRFNamedWithAction) _element).getPrev();
+    Assert.assertEquals("myPrev", prev.getName());
     final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
-    String _text = node.getText();
-    Assert.assertEquals("myPrev", _text);
+    Assert.assertEquals("myPrev", node.getText());
     final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
     Assert.assertSame(prev, lookup);
   }

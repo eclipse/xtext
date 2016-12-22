@@ -52,22 +52,15 @@ public class DefaultTaskParser implements ITaskParser {
       while (matcher.find()) {
         {
           final Task task = new Task();
-          String _group = matcher.group(2);
-          String _lowerCase = _group.toLowerCase();
-          TaskTag _get = taskTagsByName.get(_lowerCase);
-          task.setTag(_get);
-          String _group_1 = matcher.group(3);
-          task.setDescription(_group_1);
-          int _start = matcher.start(2);
-          task.setOffset(_start);
+          task.setTag(taskTagsByName.get(matcher.group(2).toLowerCase()));
+          task.setDescription(matcher.group(3));
+          task.setOffset(matcher.start(2));
           int _offset = task.getOffset();
           int _countLineBreaks = Strings.countLineBreaks(source, prevOffset, _offset);
           int _plus = (_countLineBreaks + prevLine);
           task.setLineNumber(_plus);
-          int _lineNumber = task.getLineNumber();
-          prevLine = _lineNumber;
-          int _offset_1 = task.getOffset();
-          prevOffset = _offset_1;
+          prevLine = task.getLineNumber();
+          prevOffset = task.getOffset();
           tasks.add(task);
         }
       }

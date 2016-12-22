@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.serializer;
 
 import com.google.inject.Inject;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -19,18 +18,15 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.resource.IClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
@@ -81,8 +77,7 @@ public class SemanticSequencerExtensions {
         if (_tripleEquals) {
           List<ISerializationContext> contexts = result.get(constraint);
           if ((contexts == null)) {
-            ArrayList<ISerializationContext> _newArrayList = CollectionLiterals.<ISerializationContext>newArrayList();
-            contexts = _newArrayList;
+            contexts = CollectionLiterals.<ISerializationContext>newArrayList();
             result.put(constraint, contexts);
           }
           List<ISerializationContext> _contexts = e.getContexts(clazz);
@@ -95,17 +90,12 @@ public class SemanticSequencerExtensions {
   
   protected ResourceSet cloneResourceSet(final ResourceSet rs) {
     final XtextResourceSet result = new XtextResourceSet();
-    EPackage.Registry _packageRegistry = rs.getPackageRegistry();
-    result.setPackageRegistry(_packageRegistry);
-    Resource.Factory.Registry _resourceFactoryRegistry = rs.getResourceFactoryRegistry();
-    result.setResourceFactoryRegistry(_resourceFactoryRegistry);
-    URIConverter _uRIConverter = rs.getURIConverter();
-    result.setURIConverter(_uRIConverter);
+    result.setPackageRegistry(rs.getPackageRegistry());
+    result.setResourceFactoryRegistry(rs.getResourceFactoryRegistry());
+    result.setURIConverter(rs.getURIConverter());
     if ((rs instanceof XtextResourceSet)) {
-      Object _classpathURIContext = ((XtextResourceSet)rs).getClasspathURIContext();
-      result.setClasspathURIContext(_classpathURIContext);
-      IClasspathUriResolver _classpathUriResolver = ((XtextResourceSet)rs).getClasspathUriResolver();
-      result.setClasspathUriResolver(_classpathUriResolver);
+      result.setClasspathURIContext(((XtextResourceSet)rs).getClasspathURIContext());
+      result.setClasspathUriResolver(((XtextResourceSet)rs).getClasspathUriResolver());
     }
     return result;
   }
@@ -125,9 +115,7 @@ public class SemanticSequencerExtensions {
     Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars_1);
     Resource _eResource = _head.eResource();
     final URI uri = _eResource.getURI();
-    Resource _eResource_1 = grammar.eResource();
-    ResourceSet _resourceSet = _eResource_1.getResourceSet();
-    ResourceSet _cloneResourceSet = this.cloneResourceSet(_resourceSet);
+    ResourceSet _cloneResourceSet = this.cloneResourceSet(grammar.eResource().getResourceSet());
     final Resource resource = _cloneResourceSet.getResource(uri, true);
     EList<EObject> _contents = resource.getContents();
     EObject _head_1 = IterableExtensions.<EObject>head(_contents);
@@ -184,9 +172,7 @@ public class SemanticSequencerExtensions {
           }
           result.add(state);
         }
-        List<ISemanticSequencerNfaProvider.ISemState> _followers_1 = state.getFollowers();
-        ISemanticSequencerNfaProvider.ISemState _head = IterableExtensions.<ISemanticSequencerNfaProvider.ISemState>head(_followers_1);
-        state = _head;
+        state = IterableExtensions.<ISemanticSequencerNfaProvider.ISemState>head(state.getFollowers());
       }
     }
     return null;

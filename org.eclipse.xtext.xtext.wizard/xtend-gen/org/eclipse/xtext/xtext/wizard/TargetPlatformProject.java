@@ -68,8 +68,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
       Iterables.<AbstractFile>addAll(files, _files);
       String _name = this.getName();
       String _plus = (_name + ".target");
-      CharSequence _target = this.target();
-      PlainTextFile _file = this.file(Outlet.ROOT, _plus, _target);
+      PlainTextFile _file = this.file(Outlet.ROOT, _plus, this.target());
       files.add(_file);
       _xblockexpression = files;
     }

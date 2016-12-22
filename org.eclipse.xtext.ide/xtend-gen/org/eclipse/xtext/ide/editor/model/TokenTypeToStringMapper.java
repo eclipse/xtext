@@ -27,14 +27,11 @@ public abstract class TokenTypeToStringMapper {
   
   @Inject
   public void setTokenDefProvider(@Named(LexerIdeBindings.HIGHLIGHTING) final ITokenDefProvider tokenDefProvider) {
-    Map<Integer, String> _tokenDefMap = tokenDefProvider.getTokenDefMap();
-    this.initIds(_tokenDefMap);
+    this.initIds(tokenDefProvider.getTokenDefMap());
   }
   
   protected void initIds(final Map<Integer, String> tokenDefMap) {
-    int _size = tokenDefMap.size();
-    String[] _newArrayOfSize = new String[_size];
-    this.mappedValues = _newArrayOfSize;
+    this.mappedValues = new String[tokenDefMap.size()];
     Set<Map.Entry<Integer, String>> _entrySet = tokenDefMap.entrySet();
     for (final Map.Entry<Integer, String> entry : _entrySet) {
       Integer _key = entry.getKey();
@@ -42,9 +39,7 @@ public abstract class TokenTypeToStringMapper {
       if (_greaterEqualsThan) {
         Integer _key_1 = entry.getKey();
         int _minus = ((_key_1).intValue() - Token.MIN_TOKEN_TYPE);
-        String _value = entry.getValue();
-        Integer _key_2 = entry.getKey();
-        String _calculateId = this.calculateId(_value, (_key_2).intValue());
+        String _calculateId = this.calculateId(entry.getValue(), (entry.getKey()).intValue());
         this.mappedValues[_minus] = _calculateId;
       }
     }

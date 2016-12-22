@@ -90,20 +90,14 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
     if (hierarchyType != null) {
       switch (hierarchyType) {
         case CALLEE:
-          IEObjectDescription _element = parent.getElement();
-          URI _eObjectURI = _element.getEObjectURI();
-          this.findTargetDeclarations(_eObjectURI, monitor, acceptor);
+          this.findTargetDeclarations(parent.getElement().getEObjectURI(), monitor, acceptor);
           break;
         default:
-          IEObjectDescription _element_1 = parent.getElement();
-          URI _eObjectURI_1 = _element_1.getEObjectURI();
-          this.findSourceDeclarations(_eObjectURI_1, monitor, acceptor);
+          this.findSourceDeclarations(parent.getElement().getEObjectURI(), monitor, acceptor);
           break;
       }
     } else {
-      IEObjectDescription _element_1 = parent.getElement();
-      URI _eObjectURI_1 = _element_1.getEObjectURI();
-      this.findSourceDeclarations(_eObjectURI_1, monitor, acceptor);
+      this.findSourceDeclarations(parent.getElement().getEObjectURI(), monitor, acceptor);
     }
   }
   
@@ -219,8 +213,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
     URI _eObjectURI = declaration.getEObjectURI();
     IHierarchyNode childNode = children.get(_eObjectURI);
     if ((childNode == null)) {
-      IHierarchyNode _createChild = this.createChild(declaration, parent);
-      childNode = _createChild;
+      childNode = this.createChild(declaration, parent);
       URI _eObjectURI_1 = declaration.getEObjectURI();
       children.put(_eObjectURI_1, childNode);
     }
@@ -239,7 +232,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
       final String text = this.getText(sourceObject, textRegion);
       return new DefaultHierarchyNodeReference(text, textRegion, reference);
     };
-    return this.<DefaultHierarchyNodeReference>readOnly(_sourceEObjectUri, _function);
+    return this.<DefaultHierarchyNodeReference>readOnly(reference.getSourceEObjectUri(), _function);
   }
   
   protected ITextRegionWithLineInformation getTextRegion(final EObject obj, final EReference reference, final int indexInList) {

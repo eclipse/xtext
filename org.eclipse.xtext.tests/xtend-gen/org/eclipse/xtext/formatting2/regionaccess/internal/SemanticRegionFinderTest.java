@@ -492,13 +492,9 @@ public class SemanticRegionFinderTest {
   }
   
   private void assertEquals(final String expected, final ITextSegment single, final Collection<? extends ITextSegment> regions) {
-    String _text = single.getText();
-    Assert.assertEquals(expected, _text);
-    int _size = regions.size();
-    Assert.assertEquals(1, _size);
-    ITextSegment _head = IterableExtensions.head(regions);
-    String _text_1 = _head.getText();
-    Assert.assertEquals(expected, _text_1);
+    Assert.assertEquals(expected, single.getText());
+    Assert.assertEquals(1, regions.size());
+    Assert.assertEquals(expected, IterableExtensions.head(regions).getText());
     Assert.assertTrue((regions instanceof ImmutableList<?>));
   }
 }

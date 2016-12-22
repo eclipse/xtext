@@ -11,7 +11,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -89,8 +88,7 @@ public class ContentAssistContextTestHelper {
     Preconditions.checkArgument((offset >= 0), "you forgot to provide a cursor");
     final String doc = this.document.replace(this.cursor, "");
     final XtextResource res = this.parse(doc);
-    ExecutorService _newCachedThreadPool = Executors.newCachedThreadPool();
-    factory.setPool(_newCachedThreadPool);
+    factory.setPool(Executors.newCachedThreadPool());
     TextRegion _textRegion = new TextRegion(0, 0);
     final ContentAssistContext[] ctxs = factory.create(doc, _textRegion, offset, res);
     GrammarElementTitleSwitch _grammarElementTitleSwitch = new GrammarElementTitleSwitch();

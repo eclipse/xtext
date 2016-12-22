@@ -119,8 +119,7 @@ public class WorkspaceManagerTest {
       FileWriter _fileWriter = new FileWriter(file);
       final Procedure1<FileWriter> _function = (FileWriter it) -> {
         try {
-          String _string = contents.toString();
-          it.write(_string);
+          it.write(contents.toString());
           it.close();
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);

@@ -30,12 +30,9 @@ public class ExternalDependency {
       String _xblockexpression = null;
       {
         final String[] parts = shortNotation.split(":");
-        String _get = parts[0];
-        this.groupId = _get;
-        String _get_1 = parts[1];
-        this.artifactId = _get_1;
-        String _get_2 = parts[2];
-        _xblockexpression = this.version = _get_2;
+        this.groupId = parts[0];
+        this.artifactId = parts[1];
+        _xblockexpression = this.version = parts[2];
       }
       return _xblockexpression;
     }

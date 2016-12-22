@@ -59,22 +59,17 @@ public class TopologicalSorter {
             cyclicAcceptor.apply(t);
           }
       };
-      final Function1<ProjectDescription, TopologicalSorter.Entry> _function = (ProjectDescription it) -> {
+      this.name2entry = IterableExtensions.<String, TopologicalSorter.Entry>toMap(IterableExtensions.<ProjectDescription, TopologicalSorter.Entry>map(descriptions, ((Function1<ProjectDescription, TopologicalSorter.Entry>) (ProjectDescription it) -> {
         return new TopologicalSorter.Entry(it);
-      };
-      Iterable<TopologicalSorter.Entry> _map = IterableExtensions.<ProjectDescription, TopologicalSorter.Entry>map(descriptions, _function);
-      final Function1<TopologicalSorter.Entry, String> _function_1 = (TopologicalSorter.Entry it) -> {
+      })), ((Function1<TopologicalSorter.Entry, String>) (TopologicalSorter.Entry it) -> {
         return it.description.getName();
-      };
-      Map<String, TopologicalSorter.Entry> _map_1 = IterableExtensions.<String, TopologicalSorter.Entry>toMap(_map, _function_1);
-      this.name2entry = _map_1;
-      LinkedHashSet<ProjectDescription> _newLinkedHashSet = CollectionLiterals.<ProjectDescription>newLinkedHashSet();
-      this.result = _newLinkedHashSet;
+      }));
+      this.result = CollectionLiterals.<ProjectDescription>newLinkedHashSet();
       Collection<TopologicalSorter.Entry> _values = this.name2entry.values();
-      final Consumer<TopologicalSorter.Entry> _function_2 = (TopologicalSorter.Entry it) -> {
+      final Consumer<TopologicalSorter.Entry> _function = (TopologicalSorter.Entry it) -> {
         this.visit(it);
       };
-      _values.forEach(_function_2);
+      _values.forEach(_function);
       _xblockexpression = IterableExtensions.<ProjectDescription>toList(this.result);
     }
     return _xblockexpression;

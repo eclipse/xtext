@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext;
 
-import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -50,15 +49,11 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "Named");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    String _string_1 = this.warnings.toString();
-    int _size_1 = this.warnings.size();
-    Assert.assertEquals(_string_1, 0, _size_1);
+    Assert.assertEquals(this.warnings.toString(), 0, this.warnings.size());
   }
   
   @Test
@@ -77,15 +72,11 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(this.warnings.toString(), 0, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "Named");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    String _string_1 = this.warnings.toString();
-    int _size_1 = this.warnings.size();
-    Assert.assertEquals(_string_1, 1, _size_1);
+    Assert.assertEquals(this.warnings.toString(), 1, this.warnings.size());
   }
   
   @Test
@@ -104,23 +95,15 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function = (Triple<String, EObject, EStructuralFeature> it) -> {
+    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, ((Function1<Triple<String, EObject, EStructuralFeature>, String>) (Triple<String, EObject, EStructuralFeature> it) -> {
       return it.getFirst();
-    };
-    List<String> _map = ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function);
-    String _string = _map.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 0, _size);
+    })).toString(), 0, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "Named");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_1 = (Triple<String, EObject, EStructuralFeature> it) -> {
+    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, ((Function1<Triple<String, EObject, EStructuralFeature>, String>) (Triple<String, EObject, EStructuralFeature> it) -> {
       return it.getFirst();
-    };
-    List<String> _map_1 = ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function_1);
-    String _string_1 = _map_1.toString();
-    int _size_1 = this.warnings.size();
-    Assert.assertEquals(_string_1, 2, _size_1);
+    })).toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -141,33 +124,21 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function = (Triple<String, EObject, EStructuralFeature> it) -> {
+    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, ((Function1<Triple<String, EObject, EStructuralFeature>, String>) (Triple<String, EObject, EStructuralFeature> it) -> {
       return it.getFirst();
-    };
-    List<String> _map = ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function);
-    String _string = _map.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 0, _size);
+    })).toString(), 0, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "Named");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_1 = (Triple<String, EObject, EStructuralFeature> it) -> {
+    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, ((Function1<Triple<String, EObject, EStructuralFeature>, String>) (Triple<String, EObject, EStructuralFeature> it) -> {
       return it.getFirst();
-    };
-    List<String> _map_1 = ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function_1);
-    String _string_1 = _map_1.toString();
-    int _size_1 = this.warnings.size();
-    Assert.assertEquals(_string_1, 2, _size_1);
+    })).toString(), 2, this.warnings.size());
     AbstractRule _findRuleForName_2 = GrammarUtil.findRuleForName(grammar, "NamedAgain");
     final ParserRule otherFragment = ((ParserRule) _findRuleForName_2);
     this.validateRule(otherFragment);
-    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_2 = (Triple<String, EObject, EStructuralFeature> it) -> {
+    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, ((Function1<Triple<String, EObject, EStructuralFeature>, String>) (Triple<String, EObject, EStructuralFeature> it) -> {
       return it.getFirst();
-    };
-    List<String> _map_2 = ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function_2);
-    String _string_2 = _map_2.toString();
-    int _size_2 = this.warnings.size();
-    Assert.assertEquals(_string_2, 0, _size_2);
+    })).toString(), 0, this.warnings.size());
   }
   
   @Test
@@ -186,15 +157,11 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 1, _size);
+    Assert.assertEquals(this.warnings.toString(), 1, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "Named");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    String _string_1 = this.warnings.toString();
-    int _size_1 = this.warnings.size();
-    Assert.assertEquals(_string_1, 0, _size_1);
+    Assert.assertEquals(this.warnings.toString(), 0, this.warnings.size());
   }
   
   @Test
@@ -213,15 +180,11 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "Named");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    String _string_1 = this.warnings.toString();
-    int _size_1 = this.warnings.size();
-    Assert.assertEquals(_string_1, 0, _size_1);
+    Assert.assertEquals(this.warnings.toString(), 0, this.warnings.size());
   }
   
   @Test
@@ -250,15 +213,11 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "EntryRule");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(this.warnings.toString(), 0, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "FragmentWithAction");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    String _string_1 = this.warnings.toString();
-    int _size_1 = this.warnings.size();
-    Assert.assertEquals(_string_1, 0, _size_1);
+    Assert.assertEquals(this.warnings.toString(), 0, this.warnings.size());
   }
   
   @Test
@@ -287,15 +246,11 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "EntryRule");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "FragmentWithAction");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    String _string_1 = this.warnings.toString();
-    int _size_1 = this.warnings.size();
-    Assert.assertEquals(_string_1, 0, _size_1);
+    Assert.assertEquals(this.warnings.toString(), 0, this.warnings.size());
   }
   
   @Test
@@ -324,15 +279,11 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "EntryRule");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "FragmentWithAction");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    String _string_1 = this.warnings.toString();
-    int _size_1 = this.warnings.size();
-    Assert.assertEquals(_string_1, 0, _size_1);
+    Assert.assertEquals(this.warnings.toString(), 0, this.warnings.size());
   }
   
   @Test
@@ -361,15 +312,11 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "EntryRule");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(this.warnings.toString(), 0, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "FragmentWithAction");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    String _string_1 = this.warnings.toString();
-    int _size_1 = this.warnings.size();
-    Assert.assertEquals(_string_1, 0, _size_1);
+    Assert.assertEquals(this.warnings.toString(), 0, this.warnings.size());
   }
   
   @Test
@@ -386,9 +333,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Q");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -405,9 +350,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Q");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -424,9 +367,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Q");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -443,9 +384,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Q");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 1, _size);
+    Assert.assertEquals(this.warnings.toString(), 1, this.warnings.size());
   }
   
   @Test
@@ -464,9 +403,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -485,9 +422,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -506,9 +441,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -527,9 +460,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -548,9 +479,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -569,9 +498,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -590,9 +517,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -611,9 +536,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 4, _size);
+    Assert.assertEquals(this.warnings.toString(), 4, this.warnings.size());
   }
   
   @Test
@@ -632,9 +555,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -653,9 +574,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -674,9 +593,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 3, _size);
+    Assert.assertEquals(this.warnings.toString(), 3, this.warnings.size());
   }
   
   @Test
@@ -695,9 +612,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -716,9 +631,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -737,9 +650,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -758,9 +669,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -779,9 +688,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -802,9 +709,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -823,15 +728,11 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(this.warnings.toString(), 0, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "Second");
     rule = ((ParserRule) _findRuleForName_1);
     this.validateRule(rule);
-    String _string_1 = this.warnings.toString();
-    int _size_1 = this.warnings.size();
-    Assert.assertEquals(_string_1, 2, _size_1);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -848,9 +749,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -867,9 +766,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -886,9 +783,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -905,9 +800,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -924,9 +817,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -943,9 +834,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -962,9 +851,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -981,9 +868,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -1000,9 +885,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -1019,9 +902,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -1038,9 +919,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -1057,9 +936,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -1076,9 +953,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -1095,9 +970,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -1113,9 +986,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    int _size = this.warnings.size();
-    Assert.assertEquals(_string, 2, _size);
+    Assert.assertEquals(this.warnings.toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -1132,9 +1003,7 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
   
   @Test
@@ -1153,8 +1022,6 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Model");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    String _string = this.warnings.toString();
-    boolean _isEmpty = this.warnings.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(this.warnings.toString(), this.warnings.isEmpty());
   }
 }

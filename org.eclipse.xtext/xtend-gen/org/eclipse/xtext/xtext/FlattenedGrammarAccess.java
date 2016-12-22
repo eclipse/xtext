@@ -27,7 +27,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -91,14 +90,11 @@ public class FlattenedGrammarAccess {
   public FlattenedGrammarAccess(final RuleNames names, final RuleFilter filter) {
     final Grammar grammar = names.getContextGrammar();
     Grammar flattenedGrammar = this.<Grammar>copy(grammar);
-    String _name = grammar.getName();
-    flattenedGrammar.setName(_name);
+    flattenedGrammar.setName(grammar.getName());
     LinkedHashMap<RuleWithParameterValues, AbstractRule> origToCopy = Maps.<RuleWithParameterValues, AbstractRule>newLinkedHashMap();
-    List<AbstractRule> _rules = filter.getRules(grammar);
-    boolean _isDiscardRuleTypeRef = filter.isDiscardRuleTypeRef();
-    final ArrayList<AbstractRule> copies = this.copyRuleStubs(names, origToCopy, _rules, _isDiscardRuleTypeRef);
-    EList<AbstractRule> _rules_1 = flattenedGrammar.getRules();
-    Iterables.<AbstractRule>addAll(_rules_1, copies);
+    final ArrayList<AbstractRule> copies = this.copyRuleStubs(names, origToCopy, filter.getRules(grammar), filter.isDiscardRuleTypeRef());
+    EList<AbstractRule> _rules = flattenedGrammar.getRules();
+    Iterables.<AbstractRule>addAll(_rules, copies);
     Multimap<TerminalRule, AbstractRule> calledFrom = this.copyRuleBodies(copies, origToCopy);
     this.setHiddenTokens(flattenedGrammar, grammar, origToCopy);
     this.markAsFragment(calledFrom);
@@ -113,8 +109,8 @@ public class FlattenedGrammarAccess {
       }
       UsedRulesFinder finder = new UsedRulesFinder(usedRules);
       finder.compute(flattenedGrammar);
-      EList<AbstractRule> _rules_2 = flattenedGrammar.getRules();
-      _rules_2.retainAll(usedRules);
+      EList<AbstractRule> _rules_1 = flattenedGrammar.getRules();
+      _rules_1.retainAll(usedRules);
     }
     this.flattenedGrammar = flattenedGrammar;
     OriginalGrammar _originalGrammar = new OriginalGrammar(grammar);
@@ -153,8 +149,7 @@ public class FlattenedGrammarAccess {
     };
     Iterable<TerminalRule> _filter = IterableExtensions.<TerminalRule>filter(_keySet, _function);
     final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
-      Collection<AbstractRule> _get = calledFrom.get(it);
-      return Boolean.valueOf(this.allAreTerminalRules(_get));
+      return Boolean.valueOf(this.allAreTerminalRules(calledFrom.get(it)));
     };
     Iterable<TerminalRule> _filter_1 = IterableExtensions.<TerminalRule>filter(_filter, _function_1);
     final Function1<TerminalRule, Boolean> _function_2 = (TerminalRule it) -> {
@@ -251,8 +246,7 @@ public class FlattenedGrammarAccess {
               Condition _guardCondition = group.getGuardCondition();
               boolean _tripleNotEquals = (_guardCondition != null);
               if (_tripleNotEquals) {
-                Condition _guardCondition_1 = group.getGuardCondition();
-                boolean _evaluate = this.evaluate(_guardCondition_1);
+                boolean _evaluate = this.evaluate(group.getGuardCondition());
                 boolean _not = (!_evaluate);
                 if (_not) {
                   return null;
@@ -382,8 +376,7 @@ public class FlattenedGrammarAccess {
       return null;
     }
     final TypeRef copy = this.<TypeRef>copy(ref);
-    EClassifier _classifier = ref.getClassifier();
-    copy.setClassifier(_classifier);
+    copy.setClassifier(ref.getClassifier());
     return copy;
   }
   
@@ -400,14 +393,10 @@ public class FlattenedGrammarAccess {
           if (_isEmpty) {
             ParserRule copy = this.<ParserRule>copy(((ParserRule)rule));
             copy.setName(ruleName);
-            boolean _isFragment = ((ParserRule)rule).isFragment();
-            copy.setFragment(_isFragment);
-            boolean _isWildcard = ((ParserRule)rule).isWildcard();
-            copy.setWildcard(_isWildcard);
+            copy.setFragment(((ParserRule)rule).isFragment());
+            copy.setWildcard(((ParserRule)rule).isWildcard());
             if ((!discardTypeRef)) {
-              TypeRef _type = ((ParserRule)rule).getType();
-              TypeRef _copyTypeRef = this.copyTypeRef(_type);
-              copy.setType(_copyTypeRef);
+              copy.setType(this.copyTypeRef(((ParserRule)rule).getType()));
             }
             this.attachTo(copy, rule, origToCopy);
             result.add(copy);
@@ -417,16 +406,11 @@ public class FlattenedGrammarAccess {
             final Procedure2<Set<Parameter>, Integer> _function = (Set<Parameter> parameterConfig, Integer i) -> {
               RuleWithParameterValues parameterValues = new RuleWithParameterValues(rule, parameterConfig);
               ParserRule copy_1 = this.<ParserRule>copy(((ParserRule)rule));
-              String _antlrRuleName = names.getAntlrRuleName(rule, (i).intValue());
-              copy_1.setName(_antlrRuleName);
-              boolean _isFragment_1 = ((ParserRule)rule).isFragment();
-              copy_1.setFragment(_isFragment_1);
-              boolean _isWildcard_1 = ((ParserRule)rule).isWildcard();
-              copy_1.setWildcard(_isWildcard_1);
+              copy_1.setName(names.getAntlrRuleName(rule, (i).intValue()));
+              copy_1.setFragment(((ParserRule)rule).isFragment());
+              copy_1.setWildcard(((ParserRule)rule).isWildcard());
               if ((!discardTypeRef)) {
-                TypeRef _type_1 = ((ParserRule)rule).getType();
-                TypeRef _copyTypeRef_1 = this.copyTypeRef(_type_1);
-                copy_1.setType(_copyTypeRef_1);
+                copy_1.setType(this.copyTypeRef(((ParserRule)rule).getType()));
               }
               origToCopy.put(parameterValues, copy_1);
               parameterValues.attachToEmfObject(copy_1);
@@ -441,8 +425,7 @@ public class FlattenedGrammarAccess {
             TerminalRule orig = ((TerminalRule)rule);
             TerminalRule copy = this.<TerminalRule>copy(orig);
             copy.setName(ruleName);
-            boolean _isFragment = orig.isFragment();
-            copy.setFragment(_isFragment);
+            copy.setFragment(orig.isFragment());
             this.attachTo(copy, orig, origToCopy);
             result.add(copy);
           }

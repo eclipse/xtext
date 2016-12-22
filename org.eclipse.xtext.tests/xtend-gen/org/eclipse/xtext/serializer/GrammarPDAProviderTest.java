@@ -943,8 +943,7 @@ public class GrammarPDAProviderTest {
       final SerializationContextMap<Pda<ISerState, RuleCall>> pdas = this.pdaProvider.getGrammarPDAs(grammar);
       List<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>> _values = pdas.values();
       final Consumer<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>> _function = (SerializationContextMap.Entry<Pda<ISerState, RuleCall>> it) -> {
-        Pda<ISerState, RuleCall> _value = it.getValue();
-        this.assertNoLeakedGrammarElements(grammar, _value);
+        this.assertNoLeakedGrammarElements(grammar, it.getValue());
       };
       _values.forEach(_function);
       List<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>> _values_1 = pdas.values();

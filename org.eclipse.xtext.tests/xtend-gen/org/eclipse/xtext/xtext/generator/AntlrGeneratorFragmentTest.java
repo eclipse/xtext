@@ -9,8 +9,6 @@ package org.eclipse.xtext.xtext.generator;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import java.util.Collection;
-import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
@@ -257,11 +255,7 @@ public class AntlrGeneratorFragmentTest extends AbstractXtextTests {
       final AntlrOptions options = new AntlrOptions();
       AntlrDebugGrammarGenerator _instance = injector.<AntlrDebugGrammarGenerator>getInstance(AntlrDebugGrammarGenerator.class);
       _instance.generate(grammar, options, inMem);
-      Map<String, Object> _allFiles = inMem.getAllFiles();
-      Collection<Object> _values = _allFiles.values();
-      Object _head = IterableExtensions.<Object>head(_values);
-      String _string_1 = _head.toString();
-      Assert.assertEquals(expectedDebugGrammar, _string_1);
+      Assert.assertEquals(expectedDebugGrammar, IterableExtensions.<Object>head(inMem.getAllFiles().values()).toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

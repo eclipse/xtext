@@ -38,8 +38,7 @@ public class Ecore2XtextExtensions {
     if (_tripleEquals) {
       Set<EPackageInfo> _ePackageInfos = it.getEPackageInfos();
       final Function1<EPackageInfo, Set<EClassifier>> _function = (EPackageInfo it_1) -> {
-        EPackage _ePackage = it_1.getEPackage();
-        return Ecore2XtextExtensions.allReferencedClassifiers(_ePackage, false);
+        return Ecore2XtextExtensions.allReferencedClassifiers(it_1.getEPackage(), false);
       };
       Iterable<Set<EClassifier>> _map = IterableExtensions.<EPackageInfo, Set<EClassifier>>map(_ePackageInfos, _function);
       Iterable<EClassifier> _flatten = Iterables.<EClassifier>concat(_map);
@@ -51,11 +50,8 @@ public class Ecore2XtextExtensions {
     } else {
       Set<EClassifier> _xblockexpression = null;
       {
-        EClass _rootElementClass_1 = it.getRootElementClass();
-        EClassifier _cast = EClassifier.class.cast(_rootElementClass_1);
-        final ArrayList<EClassifier> c = CollectionLiterals.<EClassifier>newArrayList(_cast);
-        EClass _rootElementClass_2 = it.getRootElementClass();
-        Ecore2XtextExtensions.allAssignedClassifiers(_rootElementClass_2, c);
+        final ArrayList<EClassifier> c = CollectionLiterals.<EClassifier>newArrayList(EClassifier.class.cast(it.getRootElementClass()));
+        Ecore2XtextExtensions.allAssignedClassifiers(it.getRootElementClass(), c);
         final Function1<EClassifier, Boolean> _function_2 = (EClassifier cl) -> {
           return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(cl));
         };
@@ -74,8 +70,7 @@ public class Ecore2XtextExtensions {
     if (_tripleEquals) {
       Set<EPackageInfo> _ePackageInfos = it.getEPackageInfos();
       final Function1<EPackageInfo, Set<EClassifier>> _function = (EPackageInfo it_1) -> {
-        EPackage _ePackage = it_1.getEPackage();
-        return Ecore2XtextExtensions.allReferencedClassifiers(_ePackage, false);
+        return Ecore2XtextExtensions.allReferencedClassifiers(it_1.getEPackage(), false);
       };
       Iterable<Set<EClassifier>> _map = IterableExtensions.<EPackageInfo, Set<EClassifier>>map(_ePackageInfos, _function);
       Iterable<EClassifier> _flatten = Iterables.<EClassifier>concat(_map);
@@ -111,8 +106,7 @@ public class Ecore2XtextExtensions {
   public static Collection<EPackage> allReferencedEPackages(final Ecore2XtextConfiguration prjInfo) {
     Set<EPackageInfo> _ePackageInfos = prjInfo.getEPackageInfos();
     final Function1<EPackageInfo, Set<EPackage>> _function = (EPackageInfo it) -> {
-      EPackage _ePackage = it.getEPackage();
-      return Ecore2XtextExtensions.allReferencedEPackages(_ePackage, true);
+      return Ecore2XtextExtensions.allReferencedEPackages(it.getEPackage(), true);
     };
     Iterable<Set<EPackage>> _map = IterableExtensions.<EPackageInfo, Set<EPackage>>map(_ePackageInfos, _function);
     Iterable<EPackage> _flatten = Iterables.<EPackage>concat(_map);
@@ -190,14 +184,12 @@ public class Ecore2XtextExtensions {
     }
     boolean _tripleEquals = (_uniqueName == null);
     if (_tripleEquals) {
-      String _name = it.getName();
-      _xifexpression = Ecore2XtextExtensions.quoteIfNeccesary(_name);
+      _xifexpression = Ecore2XtextExtensions.quoteIfNeccesary(it.getName());
     } else {
       EPackage _ePackage_1 = it.getEPackage();
       String _uniqueName_1 = UniqueNameUtil.uniqueName(_ePackage_1);
       String _plus = (_uniqueName_1 + "::");
-      String _name_1 = it.getName();
-      String _quoteIfNeccesary = Ecore2XtextExtensions.quoteIfNeccesary(_name_1);
+      String _quoteIfNeccesary = Ecore2XtextExtensions.quoteIfNeccesary(it.getName());
       _xifexpression = (_plus + _quoteIfNeccesary);
     }
     return _xifexpression;

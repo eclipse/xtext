@@ -15,9 +15,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
-import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -45,11 +43,7 @@ public class IntellijProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {
-    WizardConfiguration _config = this.getConfig();
-    RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
-    WizardConfiguration _config_1 = this.getConfig();
-    IdeProjectDescriptor _ideProject = _config_1.getIdeProject();
-    return CollectionLiterals.<ProjectDescriptor>newLinkedHashSet(_runtimeProject, _ideProject);
+    return CollectionLiterals.<ProjectDescriptor>newLinkedHashSet(this.getConfig().getRuntimeProject(), this.getConfig().getIdeProject());
   }
   
   @Override

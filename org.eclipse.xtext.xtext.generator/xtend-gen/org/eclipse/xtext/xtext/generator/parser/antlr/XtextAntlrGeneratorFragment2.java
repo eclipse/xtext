@@ -208,8 +208,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   }
   
   public void setLookaheadThreshold(final String lookaheadThreshold) {
-    int _parseInt = Integer.parseInt(lookaheadThreshold);
-    this.lookaheadThreshold = _parseInt;
+    this.lookaheadThreshold = Integer.parseInt(lookaheadThreshold);
   }
   
   protected void generateProductionGrammar() {
@@ -221,34 +220,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
     this.productionGenerator.generate(_grammar, _options, fsa);
-    Grammar _grammar_1 = this.getGrammar();
-    AntlrGrammar _parserGrammar = naming.getParserGrammar(_grammar_1);
-    Grammar _grammar_2 = this.getGrammar();
-    AntlrGrammar _lexerGrammar = naming.getLexerGrammar(_grammar_2);
-    this.runAntlr(_parserGrammar, _lexerGrammar, fsa);
-    Grammar _grammar_3 = this.getGrammar();
-    Grammar _grammar_4 = this.getGrammar();
-    TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_4);
-    this.simplifyUnorderedGroupPredicatesIfRequired(_grammar_3, fsa, _internalParserClass);
-    Grammar _grammar_5 = this.getGrammar();
-    TypeReference _internalParserClass_1 = naming.getInternalParserClass(_grammar_5);
-    Grammar _grammar_6 = this.getGrammar();
-    TypeReference _lexerClass = naming.getLexerClass(_grammar_6);
-    this.splitParserAndLexerIfEnabled(fsa, _internalParserClass_1, _lexerClass);
-    Grammar _grammar_7 = this.getGrammar();
-    AntlrGrammar _lexerGrammar_1 = naming.getLexerGrammar(_grammar_7);
-    String _tokensFileName = _lexerGrammar_1.getTokensFileName();
-    this.normalizeTokens(fsa, _tokensFileName);
-    Grammar _grammar_8 = this.getGrammar();
-    TypeReference _internalParserClass_2 = naming.getInternalParserClass(_grammar_8);
-    Grammar _grammar_9 = this.getGrammar();
-    TypeReference _lexerClass_1 = naming.getLexerClass(_grammar_9);
-    this.suppressWarnings(fsa, _internalParserClass_2, _lexerClass_1);
-    Grammar _grammar_10 = this.getGrammar();
-    TypeReference _internalParserClass_3 = naming.getInternalParserClass(_grammar_10);
-    Grammar _grammar_11 = this.getGrammar();
-    TypeReference _lexerClass_2 = naming.getLexerClass(_grammar_11);
-    this.normalizeLineDelimiters(fsa, _internalParserClass_3, _lexerClass_2);
+    this.runAntlr(naming.getParserGrammar(this.getGrammar()), naming.getLexerGrammar(this.getGrammar()), fsa);
+    this.simplifyUnorderedGroupPredicatesIfRequired(this.getGrammar(), fsa, naming.getInternalParserClass(this.getGrammar()));
+    this.splitParserAndLexerIfEnabled(fsa, naming.getInternalParserClass(this.getGrammar()), naming.getLexerClass(this.getGrammar()));
+    this.normalizeTokens(fsa, naming.getLexerGrammar(this.getGrammar()).getTokensFileName());
+    this.suppressWarnings(fsa, naming.getInternalParserClass(this.getGrammar()), naming.getLexerClass(this.getGrammar()));
+    this.normalizeLineDelimiters(fsa, naming.getInternalParserClass(this.getGrammar()), naming.getLexerClass(this.getGrammar()));
   }
   
   protected void generateContentAssistGrammar() {
@@ -260,38 +237,14 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
     this.contentAssistGenerator.generate(_grammar, _options, fsa);
-    Grammar _grammar_1 = this.getGrammar();
-    AntlrGrammar _parserGrammar = naming.getParserGrammar(_grammar_1);
-    Grammar _grammar_2 = this.getGrammar();
-    AntlrGrammar _lexerGrammar = naming.getLexerGrammar(_grammar_2);
-    this.runAntlr(_parserGrammar, _lexerGrammar, fsa);
-    Grammar _grammar_3 = this.getGrammar();
-    Grammar _grammar_4 = this.getGrammar();
-    TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_4);
-    this.simplifyUnorderedGroupPredicatesIfRequired(_grammar_3, fsa, _internalParserClass);
-    Grammar _grammar_5 = this.getGrammar();
-    TypeReference _internalParserClass_1 = naming.getInternalParserClass(_grammar_5);
-    Grammar _grammar_6 = this.getGrammar();
-    TypeReference _lexerClass = naming.getLexerClass(_grammar_6);
-    this.splitParserAndLexerIfEnabled(fsa, _internalParserClass_1, _lexerClass);
-    Grammar _grammar_7 = this.getGrammar();
-    AntlrGrammar _lexerGrammar_1 = naming.getLexerGrammar(_grammar_7);
-    String _tokensFileName = _lexerGrammar_1.getTokensFileName();
-    this.normalizeTokens(fsa, _tokensFileName);
-    Grammar _grammar_8 = this.getGrammar();
-    TypeReference _internalParserClass_2 = naming.getInternalParserClass(_grammar_8);
-    Grammar _grammar_9 = this.getGrammar();
-    TypeReference _lexerClass_1 = naming.getLexerClass(_grammar_9);
-    this.suppressWarnings(fsa, _internalParserClass_2, _lexerClass_1);
-    Grammar _grammar_10 = this.getGrammar();
-    TypeReference _lexerClass_2 = naming.getLexerClass(_grammar_10);
-    Grammar _grammar_11 = this.getGrammar();
-    TypeReference _internalParserClass_3 = naming.getInternalParserClass(_grammar_11);
-    this.normalizeLineDelimiters(fsa, _lexerClass_2, _internalParserClass_3);
+    this.runAntlr(naming.getParserGrammar(this.getGrammar()), naming.getLexerGrammar(this.getGrammar()), fsa);
+    this.simplifyUnorderedGroupPredicatesIfRequired(this.getGrammar(), fsa, naming.getInternalParserClass(this.getGrammar()));
+    this.splitParserAndLexerIfEnabled(fsa, naming.getInternalParserClass(this.getGrammar()), naming.getLexerClass(this.getGrammar()));
+    this.normalizeTokens(fsa, naming.getLexerGrammar(this.getGrammar()).getTokensFileName());
+    this.suppressWarnings(fsa, naming.getInternalParserClass(this.getGrammar()), naming.getLexerClass(this.getGrammar()));
+    this.normalizeLineDelimiters(fsa, naming.getLexerClass(this.getGrammar()), naming.getInternalParserClass(this.getGrammar()));
     if (this.removeBacktrackingGuards) {
-      Grammar _grammar_12 = this.getGrammar();
-      TypeReference _internalParserClass_4 = naming.getInternalParserClass(_grammar_12);
-      this.removeBackTrackingGuards(fsa, _internalParserClass_4, this.lookaheadThreshold);
+      this.removeBackTrackingGuards(fsa, naming.getInternalParserClass(this.getGrammar()), this.lookaheadThreshold);
     }
   }
   
@@ -305,8 +258,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     String _grammarFileName = lexerGrammar.getGrammarFileName();
     _builder.append(_grammarFileName);
     final String lexerGrammarFile = _builder.toString();
-    String[] _antlrParams = this.getAntlrParams();
-    final ArrayList<String> lexerAntlrParams = CollectionLiterals.<String>newArrayList(_antlrParams);
+    final ArrayList<String> lexerAntlrParams = CollectionLiterals.<String>newArrayList(this.getAntlrParams());
     lexerAntlrParams.add("-fo");
     int _lastIndexOf = lexerGrammarFile.lastIndexOf("/");
     final String lexerOutputDir = lexerGrammarFile.substring(0, _lastIndexOf);
@@ -316,9 +268,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     if (_not) {
       AntlrToolFacade _antlrTool = this.getAntlrTool();
       _antlrTool.runWithEncodingAndParams(lexerGrammarFile, encoding, ((String[])Conversions.unwrapArray(lexerAntlrParams, String.class)));
-      Grammar _grammar = this.getGrammar();
-      KeywordHelper _helper = KeywordHelper.getHelper(_grammar);
-      this.cleanupLexerTokensFile(lexerGrammar, _helper, fsa);
+      this.cleanupLexerTokensFile(lexerGrammar, KeywordHelper.getHelper(this.getGrammar()), fsa);
     }
     StringConcatenation _builder_1 = new StringConcatenation();
     String _path_1 = fsa.getPath();
@@ -327,8 +277,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     String _grammarFileName_1 = parserGrammar.getGrammarFileName();
     _builder_1.append(_grammarFileName_1);
     final String parserGrammarFile = _builder_1.toString();
-    String[] _antlrParams_1 = this.getAntlrParams();
-    final ArrayList<String> parserAntlrParams = CollectionLiterals.<String>newArrayList(_antlrParams_1);
+    final ArrayList<String> parserAntlrParams = CollectionLiterals.<String>newArrayList(this.getAntlrParams());
     parserAntlrParams.add("-fo");
     int _lastIndexOf_1 = parserGrammarFile.lastIndexOf("/");
     String _substring = parserGrammarFile.substring(0, _lastIndexOf_1);
@@ -344,9 +293,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     boolean _isCombinedGrammar_2 = this.isCombinedGrammar();
     boolean _not_2 = (!_isCombinedGrammar_2);
     if (_not_2) {
-      Grammar _grammar_1 = this.getGrammar();
-      KeywordHelper _helper_1 = KeywordHelper.getHelper(_grammar_1);
-      this.cleanupParserTokensFile(lexerGrammar, parserGrammar, _helper_1, fsa);
+      this.cleanupParserTokensFile(lexerGrammar, parserGrammar, KeywordHelper.getHelper(this.getGrammar()), fsa);
     }
   }
   
@@ -1345,8 +1292,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       }
     };
     final GuiceModuleAccess.BindingFactory rtBindings = _addTypeToProviderInstance.addConfiguredBinding("RuntimeLexer", _client_1);
-    Grammar _grammar_5 = this.getGrammar();
-    boolean _containsUnorderedGroup = this.containsUnorderedGroup(_grammar_5);
+    boolean _containsUnorderedGroup = this.containsUnorderedGroup(this.getGrammar());
     if (_containsUnorderedGroup) {
       TypeReference _typeRef_6 = TypeReference.typeRef(IUnorderedGroupHelper.class);
       TypeReference _typeRef_7 = TypeReference.typeRef(UnorderedGroupHelper.class);

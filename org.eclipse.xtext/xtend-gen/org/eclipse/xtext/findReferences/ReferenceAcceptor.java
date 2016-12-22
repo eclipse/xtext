@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.findReferences;
 
-import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -44,12 +43,9 @@ public class ReferenceAcceptor implements IReferenceFinder.Acceptor {
   public void accept(final EObject source, final URI sourceURI, final EReference eReference, final int index, final EObject targetOrProxy, final URI targetURI) {
     if (((this.currentResource == null) || (source.eResource() != this.currentResource))) {
       this.computeExportedObjectsMap(source);
-      Resource _eResource = source.eResource();
-      this.currentResource = _eResource;
+      this.currentResource = source.eResource();
     }
-    URI _findExportedContainer = this.findExportedContainer(source);
-    IReferenceDescription _createReferenceDescription = this.createReferenceDescription(sourceURI, targetURI, eReference, index, _findExportedContainer);
-    this.accept(_createReferenceDescription);
+    this.accept(this.createReferenceDescription(sourceURI, targetURI, eReference, index, this.findExportedContainer(source)));
   }
   
   protected void computeExportedObjectsMap(final EObject source) {
@@ -59,26 +55,21 @@ public class ReferenceAcceptor implements IReferenceFinder.Acceptor {
     if ((resourceServiceProvider != null)) {
       IResourceDescription.Manager _resourceDescriptionManager = resourceServiceProvider.getResourceDescriptionManager();
       final IResourceDescription resourceDescription = _resourceDescriptionManager.getResourceDescription(resource);
-      HashMap<EObject, URI> _newHashMap = CollectionLiterals.<EObject, URI>newHashMap();
-      this.exportedContainersInCurrentResource = _newHashMap;
+      this.exportedContainersInCurrentResource = CollectionLiterals.<EObject, URI>newHashMap();
       Iterable<IEObjectDescription> _exportedObjects = resourceDescription.getExportedObjects();
       for (final IEObjectDescription description : _exportedObjects) {
         {
           EObject instance = description.getEObjectOrProxy();
           boolean _eIsProxy = instance.eIsProxy();
           if (_eIsProxy) {
-            URI _eObjectURI = description.getEObjectURI();
-            String _fragment = _eObjectURI.fragment();
-            EObject _eObject = resource.getEObject(_fragment);
-            instance = _eObject;
+            instance = resource.getEObject(description.getEObjectURI().fragment());
           }
-          URI _eObjectURI_1 = description.getEObjectURI();
-          this.exportedContainersInCurrentResource.put(instance, _eObjectURI_1);
+          URI _eObjectURI = description.getEObjectURI();
+          this.exportedContainersInCurrentResource.put(instance, _eObjectURI);
         }
       }
     } else {
-      Map<EObject, URI> _emptyMap = CollectionLiterals.<EObject, URI>emptyMap();
-      this.exportedContainersInCurrentResource = _emptyMap;
+      this.exportedContainersInCurrentResource = CollectionLiterals.<EObject, URI>emptyMap();
     }
   }
   
@@ -95,13 +86,11 @@ public class ReferenceAcceptor implements IReferenceFinder.Acceptor {
         if (_containsKey) {
           return result;
         }
-        EObject _eContainer = source.eContainer();
-        source = _eContainer;
+        source = source.eContainer();
         if ((source == null)) {
           return null;
         }
-        URI _get = this.exportedContainersInCurrentResource.get(source);
-        result = _get;
+        result = this.exportedContainersInCurrentResource.get(source);
       }
     }
     this.exportedContainersInCurrentResource.put(source, result);

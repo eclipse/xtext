@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.parser;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -46,8 +45,7 @@ public class Bug410560Test extends AbstractXtextTests {
       EObject _model = this.getModel(_builder.toString());
       final Model model = ((Model) _model);
       Assert.assertNotNull(model);
-      org.eclipse.xtext.parsetree.reconstr.serializationerror.Test _test = model.getTest();
-      Assert.assertNull(_test);
+      Assert.assertNull(model.getTest());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -62,8 +60,7 @@ public class Bug410560Test extends AbstractXtextTests {
       EObject _model = this.getModel(_builder.toString());
       final Model model = ((Model) _model);
       Assert.assertNotNull(model);
-      org.eclipse.xtext.parsetree.reconstr.serializationerror.Test _test = model.getTest();
-      Assert.assertNull(_test);
+      Assert.assertNull(model.getTest());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -78,8 +75,7 @@ public class Bug410560Test extends AbstractXtextTests {
       EObject _model = this.getModel(_builder.toString());
       final Model model = ((Model) _model);
       Assert.assertNotNull(model);
-      org.eclipse.xtext.parsetree.reconstr.serializationerror.Test _test = model.getTest();
-      Assert.assertNotNull(_test);
+      Assert.assertNotNull(model.getTest());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -94,8 +90,7 @@ public class Bug410560Test extends AbstractXtextTests {
       EObject _model = this.getModel(_builder.toString());
       final Model model = ((Model) _model);
       Assert.assertNotNull(model);
-      org.eclipse.xtext.parsetree.reconstr.serializationerror.Test _test = model.getTest();
-      Assert.assertNotNull(_test);
+      Assert.assertNotNull(model.getTest());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -111,9 +106,7 @@ public class Bug410560Test extends AbstractXtextTests {
       final XtextResource res = ((XtextResource) _eResource);
       int _indexOf = modelAsString.indexOf("a");
       res.update(_indexOf, 1, "b");
-      EList<EObject> _contents = res.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
-      Assert.assertSame(model, _head);
+      Assert.assertSame(model, IterableExtensions.<EObject>head(res.getContents()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -130,9 +123,7 @@ public class Bug410560Test extends AbstractXtextTests {
       int _indexOf = modelAsString.indexOf("t");
       int _length = "tworequired a b".length();
       res.update(_indexOf, _length, " ");
-      EList<EObject> _contents = res.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
-      Assert.assertSame(model, _head);
+      Assert.assertSame(model, IterableExtensions.<EObject>head(res.getContents()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -149,9 +140,7 @@ public class Bug410560Test extends AbstractXtextTests {
       int _indexOf = modelAsString.indexOf("t");
       int _length = "tworequired a b".length();
       res.update(_indexOf, _length, " ");
-      EList<EObject> _contents = res.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
-      Assert.assertSame(model, _head);
+      Assert.assertSame(model, IterableExtensions.<EObject>head(res.getContents()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

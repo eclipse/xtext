@@ -131,8 +131,7 @@ public class PredicatedElementTest extends AbstractXtextTests {
       AbstractRule _head = IterableExtensions.<AbstractRule>head(_rules);
       final AbstractElement body = _head.getAlternatives();
       final AbstractElement predicate = AntlrGrammarGenUtil.getPredicatedElement(body);
-      String _xtext = this.toXtext(predicate);
-      Assert.assertEquals(expectation, _xtext);
+      Assert.assertEquals(expectation, this.toXtext(predicate));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

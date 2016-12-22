@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ReferencedMetamodel;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
@@ -72,8 +70,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
     final AbstractElement fragmentCall = rule.getAlternatives();
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
-    String _name = currentType.getName();
-    Assert.assertEquals("Rule", _name);
+    Assert.assertEquals("Rule", currentType.getName());
   }
   
   @Test
@@ -100,8 +97,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
     final AbstractElement fragmentCall = rule.getAlternatives();
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
-    String _name = currentType.getName();
-    Assert.assertEquals("SubRule", _name);
+    Assert.assertEquals("SubRule", currentType.getName());
   }
   
   @Test
@@ -130,8 +126,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
     final AbstractElement fragmentCall = rule.getAlternatives();
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
-    String _name = currentType.getName();
-    Assert.assertEquals("SubRule", _name);
+    Assert.assertEquals("SubRule", currentType.getName());
   }
   
   @Test
@@ -160,8 +155,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
     final AbstractElement fragmentCall = rule.getAlternatives();
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
-    String _name = currentType.getName();
-    Assert.assertEquals("Rule", _name);
+    Assert.assertEquals("Rule", currentType.getName());
   }
   
   @Test
@@ -193,8 +187,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
     final AbstractElement fragmentCall = rule.getAlternatives();
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
-    String _name = currentType.getName();
-    Assert.assertEquals("Rule", _name);
+    Assert.assertEquals("Rule", currentType.getName());
   }
   
   @Test
@@ -228,8 +221,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     EList<AbstractElement> _elements = ((Group) _alternatives).getElements();
     final AbstractElement fragmentCall = IterableExtensions.<AbstractElement>last(_elements);
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
-    String _name = currentType.getName();
-    Assert.assertEquals("Rule", _name);
+    Assert.assertEquals("Rule", currentType.getName());
   }
   
   @Test
@@ -253,13 +245,11 @@ public class GrammarUtilTest extends AbstractXtextTests {
     EObject _get = _contents.get(0);
     final Grammar grammar = ((Grammar) _get);
     final List<AbstractRule> allRules = GrammarUtil.allRules(grammar);
-    String _string = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Rule", "STRING", "ID", "INT", "STRING", "ML_COMMENT", "SL_COMMENT", "WS", "ANY_OTHER")).toString();
-    final Function1<AbstractRule, String> _function = (AbstractRule it) -> {
-      return it.getName();
-    };
-    List<String> _map = ListExtensions.<AbstractRule, String>map(allRules, _function);
-    String _string_1 = _map.toString();
-    Assert.assertEquals(_string, _string_1);
+    Assert.assertEquals(
+      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Rule", "STRING", "ID", "INT", "STRING", "ML_COMMENT", "SL_COMMENT", "WS", "ANY_OTHER")).toString(), 
+      ListExtensions.<AbstractRule, String>map(allRules, ((Function1<AbstractRule, String>) (AbstractRule it) -> {
+        return it.getName();
+      })).toString());
   }
   
   @Test
@@ -282,24 +272,11 @@ public class GrammarUtilTest extends AbstractXtextTests {
     EList<EObject> _contents = r.getContents();
     EObject _get = _contents.get(0);
     Grammar grammar = ((Grammar) _get);
-    AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "Rule");
-    EObject _eContainer = _findRuleForName.eContainer();
-    Assert.assertEquals(grammar, _eContainer);
-    AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "org.eclipse.xtext.common.Terminals.Rule");
-    Assert.assertNull(_findRuleForName_1);
-    EList<Grammar> _usedGrammars = grammar.getUsedGrammars();
-    Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
-    AbstractRule _findRuleForName_2 = GrammarUtil.findRuleForName(grammar, "ID");
-    EObject _eContainer_1 = _findRuleForName_2.eContainer();
-    Assert.assertEquals(_head, _eContainer_1);
-    AbstractRule _findRuleForName_3 = GrammarUtil.findRuleForName(grammar, "STRING");
-    EObject _eContainer_2 = _findRuleForName_3.eContainer();
-    Assert.assertEquals(grammar, _eContainer_2);
-    EList<Grammar> _usedGrammars_1 = grammar.getUsedGrammars();
-    Grammar _head_1 = IterableExtensions.<Grammar>head(_usedGrammars_1);
-    AbstractRule _findRuleForName_4 = GrammarUtil.findRuleForName(grammar, "org.eclipse.xtext.common.Terminals.STRING");
-    EObject _eContainer_3 = _findRuleForName_4.eContainer();
-    Assert.assertEquals(_head_1, _eContainer_3);
+    Assert.assertEquals(grammar, GrammarUtil.findRuleForName(grammar, "Rule").eContainer());
+    Assert.assertNull(GrammarUtil.findRuleForName(grammar, "org.eclipse.xtext.common.Terminals.Rule"));
+    Assert.assertEquals(IterableExtensions.<Grammar>head(grammar.getUsedGrammars()), GrammarUtil.findRuleForName(grammar, "ID").eContainer());
+    Assert.assertEquals(grammar, GrammarUtil.findRuleForName(grammar, "STRING").eContainer());
+    Assert.assertEquals(IterableExtensions.<Grammar>head(grammar.getUsedGrammars()), GrammarUtil.findRuleForName(grammar, "org.eclipse.xtext.common.Terminals.STRING").eContainer());
   }
   
   @Test
@@ -320,26 +297,16 @@ public class GrammarUtilTest extends AbstractXtextTests {
     EObject _get = _contents.get(0);
     Grammar g = ((Grammar) _get);
     List<AbstractMetamodelDeclaration> decls = GrammarUtil.allMetamodelDeclarations(g);
-    int _size = decls.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, decls.size());
     AbstractMetamodelDeclaration decl = decls.get(0);
     Assert.assertTrue((decl instanceof ReferencedMetamodel));
-    EPackage _ePackage = decl.getEPackage();
-    Assert.assertNotNull(_ePackage);
-    EPackage _ePackage_1 = decl.getEPackage();
-    String _nsURI = _ePackage_1.getNsURI();
-    Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", _nsURI);
-    String _alias = decl.getAlias();
-    Assert.assertEquals("ecore", _alias);
-    AbstractMetamodelDeclaration _get_1 = decls.get(1);
-    decl = _get_1;
-    String _alias_1 = decl.getAlias();
-    Assert.assertEquals("ecore", _alias_1);
-    EPackage _ePackage_2 = decl.getEPackage();
-    Assert.assertNotNull(_ePackage_2);
-    EPackage _ePackage_3 = decl.getEPackage();
-    String _nsURI_1 = _ePackage_3.getNsURI();
-    Assert.assertEquals("http://3", _nsURI_1);
+    Assert.assertNotNull(decl.getEPackage());
+    Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
+    Assert.assertEquals("ecore", decl.getAlias());
+    decl = decls.get(1);
+    Assert.assertEquals("ecore", decl.getAlias());
+    Assert.assertNotNull(decl.getEPackage());
+    Assert.assertEquals("http://3", decl.getEPackage().getNsURI());
   }
   
   @Test
@@ -360,42 +327,24 @@ public class GrammarUtilTest extends AbstractXtextTests {
     EObject _get = _contents.get(0);
     Grammar g = ((Grammar) _get);
     List<AbstractMetamodelDeclaration> decls = GrammarUtil.allMetamodelDeclarations(g);
-    int _size = decls.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, decls.size());
     AbstractMetamodelDeclaration decl = decls.get(0);
     Assert.assertTrue((decl instanceof ReferencedMetamodel));
-    EPackage _ePackage = decl.getEPackage();
-    Assert.assertNotNull(_ePackage);
-    EPackage _ePackage_1 = decl.getEPackage();
-    String _nsURI = _ePackage_1.getNsURI();
-    Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", _nsURI);
-    String _alias = decl.getAlias();
-    Assert.assertEquals("bar", _alias);
-    AbstractMetamodelDeclaration _get_1 = decls.get(1);
-    decl = _get_1;
-    String _alias_1 = decl.getAlias();
-    Assert.assertEquals("bar", _alias_1);
-    EPackage _ePackage_2 = decl.getEPackage();
-    Assert.assertNotNull(_ePackage_2);
-    EPackage _ePackage_3 = decl.getEPackage();
-    String _nsURI_1 = _ePackage_3.getNsURI();
-    Assert.assertEquals("http://3", _nsURI_1);
-    AbstractMetamodelDeclaration _get_2 = decls.get(2);
-    decl = _get_2;
+    Assert.assertNotNull(decl.getEPackage());
+    Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
+    Assert.assertEquals("bar", decl.getAlias());
+    decl = decls.get(1);
+    Assert.assertEquals("bar", decl.getAlias());
+    Assert.assertNotNull(decl.getEPackage());
+    Assert.assertEquals("http://3", decl.getEPackage().getNsURI());
+    decl = decls.get(2);
     Assert.assertTrue((decl instanceof ReferencedMetamodel));
-    EPackage _ePackage_4 = decl.getEPackage();
-    Assert.assertNotNull(_ePackage_4);
-    EPackage _ePackage_5 = decl.getEPackage();
-    String _nsURI_2 = _ePackage_5.getNsURI();
-    Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", _nsURI_2);
-    String _alias_2 = decl.getAlias();
-    Assert.assertEquals("ecore", _alias_2);
+    Assert.assertNotNull(decl.getEPackage());
+    Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
+    Assert.assertEquals("ecore", decl.getAlias());
     EList<AbstractRule> _rules = g.getRules();
     AbstractRule abstractRule = _rules.get(0);
-    AbstractMetamodelDeclaration _get_3 = decls.get(1);
-    TypeRef _type = abstractRule.getType();
-    AbstractMetamodelDeclaration _metamodel = _type.getMetamodel();
-    Assert.assertSame(_get_3, _metamodel);
+    Assert.assertSame(decls.get(1), abstractRule.getType().getMetamodel());
   }
   
   @Test
@@ -416,43 +365,25 @@ public class GrammarUtilTest extends AbstractXtextTests {
     EObject _get = _contents.get(0);
     Grammar g = ((Grammar) _get);
     List<AbstractMetamodelDeclaration> decls = GrammarUtil.allMetamodelDeclarations(g);
-    int _size = decls.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, decls.size());
     AbstractMetamodelDeclaration decl = decls.get(0);
     Assert.assertTrue((decl instanceof GeneratedMetamodel));
-    String _alias = decl.getAlias();
-    Assert.assertEquals("bar", _alias);
-    EPackage _ePackage = decl.getEPackage();
-    Assert.assertNotNull(_ePackage);
-    EPackage _ePackage_1 = decl.getEPackage();
-    String _nsURI = _ePackage_1.getNsURI();
-    Assert.assertEquals("http://3", _nsURI);
-    AbstractMetamodelDeclaration _get_1 = decls.get(1);
-    decl = _get_1;
+    Assert.assertEquals("bar", decl.getAlias());
+    Assert.assertNotNull(decl.getEPackage());
+    Assert.assertEquals("http://3", decl.getEPackage().getNsURI());
+    decl = decls.get(1);
     Assert.assertTrue((decl instanceof ReferencedMetamodel));
-    EPackage _ePackage_2 = decl.getEPackage();
-    Assert.assertNotNull(_ePackage_2);
-    EPackage _ePackage_3 = decl.getEPackage();
-    String _nsURI_1 = _ePackage_3.getNsURI();
-    Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", _nsURI_1);
-    String _alias_1 = decl.getAlias();
-    Assert.assertEquals("bar", _alias_1);
-    AbstractMetamodelDeclaration _get_2 = decls.get(2);
-    decl = _get_2;
+    Assert.assertNotNull(decl.getEPackage());
+    Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
+    Assert.assertEquals("bar", decl.getAlias());
+    decl = decls.get(2);
     Assert.assertTrue((decl instanceof ReferencedMetamodel));
-    EPackage _ePackage_4 = decl.getEPackage();
-    Assert.assertNotNull(_ePackage_4);
-    EPackage _ePackage_5 = decl.getEPackage();
-    String _nsURI_2 = _ePackage_5.getNsURI();
-    Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", _nsURI_2);
-    String _alias_2 = decl.getAlias();
-    Assert.assertEquals("ecore", _alias_2);
+    Assert.assertNotNull(decl.getEPackage());
+    Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
+    Assert.assertEquals("ecore", decl.getAlias());
     EList<AbstractRule> _rules = g.getRules();
     AbstractRule abstractRule = _rules.get(0);
-    AbstractMetamodelDeclaration _get_3 = decls.get(0);
-    TypeRef _type = abstractRule.getType();
-    AbstractMetamodelDeclaration _metamodel = _type.getMetamodel();
-    Assert.assertSame(_get_3, _metamodel);
+    Assert.assertSame(decls.get(0), abstractRule.getType().getMetamodel());
   }
   
   @Test
@@ -471,12 +402,8 @@ public class GrammarUtilTest extends AbstractXtextTests {
     EClass _eClass = typeA.eClass();
     EReference ref = GrammarUtil.getReference(xref, _eClass);
     Assert.assertNotNull(ref);
-    String _name = ref.getName();
-    Assert.assertEquals("extends", _name);
-    boolean _isMany = ref.isMany();
-    Assert.assertFalse(_isMany);
-    EClass _eClass_1 = typeA.eClass();
-    EClass _eReferenceType = ref.getEReferenceType();
-    Assert.assertEquals(_eClass_1, _eReferenceType);
+    Assert.assertEquals("extends", ref.getName());
+    Assert.assertFalse(ref.isMany());
+    Assert.assertEquals(typeA.eClass(), ref.getEReferenceType());
   }
 }

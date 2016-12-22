@@ -66,8 +66,7 @@ public class DefaultGeneratorModule extends AbstractGenericModule {
     AnnotatedBindingBuilder<IEncodingProvider> _bind = binder.<IEncodingProvider>bind(IEncodingProvider.class);
     IEncodingProvider.Runtime _runtime = new IEncodingProvider.Runtime();
     final Procedure1<IEncodingProvider.Runtime> _function = (IEncodingProvider.Runtime it) -> {
-      String _encoding = this.code.getEncoding();
-      it.setDefaultEncoding(_encoding);
+      it.setDefaultEncoding(this.code.getEncoding());
     };
     IEncodingProvider.Runtime _doubleArrow = ObjectExtensions.<IEncodingProvider.Runtime>operator_doubleArrow(_runtime, _function);
     _bind.toInstance(_doubleArrow);

@@ -267,8 +267,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
       if ((it instanceof ParserRule)) {
         boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
         boolean _not = (!_isPassCurrentIntoFragment);
-        String _currentType = this.getCurrentType();
-        String _parameterList = AntlrGrammarGenUtil.getParameterList(((ParserRule)it), Boolean.valueOf(_not), _currentType);
+        String _parameterList = AntlrGrammarGenUtil.getParameterList(((ParserRule)it), Boolean.valueOf(_not), this.getCurrentType());
         _builder.append(_parameterList);
       }
     }
@@ -416,8 +415,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder_1.append("{");
           _builder_1.newLine();
           _builder_1.append("\t");
-          String _localVar_1 = this._grammarAccessExtensions.localVar(it);
-          CharSequence _doneLeaf = this.doneLeaf(it, _localVar_1);
+          CharSequence _doneLeaf = this.doneLeaf(it, this._grammarAccessExtensions.localVar(it));
           _builder_1.append(_doneLeaf, "\t");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("}");
@@ -503,9 +501,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
         _builder.append("{");
         _builder.newLine();
         _builder.append("\t");
-        Assignment _containingAssignment_1 = GrammarUtil.containingAssignment(it);
-        String _localVar_1 = this._grammarAccessExtensions.localVar(_containingAssignment_1, it);
-        CharSequence _doneLeaf = this.doneLeaf(it, _localVar_1);
+        CharSequence _doneLeaf = this.doneLeaf(it, this._grammarAccessExtensions.localVar(GrammarUtil.containingAssignment(it), it));
         _builder.append(_doneLeaf, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -521,8 +517,8 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
         _builder_1.newLineIfNotEmpty();
         _builder_1.append("}");
         _builder_1.newLine();
-        String _localVar_2 = this._grammarAccessExtensions.localVar(it);
-        _builder_1.append(_localVar_2);
+        String _localVar_1 = this._grammarAccessExtensions.localVar(it);
+        _builder_1.append(_localVar_1);
         _builder_1.append("=");
         String __ebnf2_1 = super._ebnf2(it, options, supportActions);
         _builder_1.append(__ebnf2_1);
@@ -530,8 +526,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
         _builder_1.append("{");
         _builder_1.newLine();
         _builder_1.append("\t");
-        String _localVar_3 = this._grammarAccessExtensions.localVar(it);
-        CharSequence _doneLeaf_1 = this.doneLeaf(it, _localVar_3);
+        CharSequence _doneLeaf_1 = this.doneLeaf(it, this._grammarAccessExtensions.localVar(it));
         _builder_1.append(_doneLeaf_1, "\t");
         _builder_1.newLineIfNotEmpty();
         _builder_1.append("}");
@@ -567,8 +562,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      String _localVar_1 = this._grammarAccessExtensions.localVar(it);
-      CharSequence _doneLeaf = this.doneLeaf(it, _localVar_1);
+      CharSequence _doneLeaf = this.doneLeaf(it, this._grammarAccessExtensions.localVar(it));
       _builder.append(_doneLeaf, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("}");
@@ -740,8 +734,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder_1.append("{");
           _builder_1.newLine();
           _builder_1.append("\t");
-          String _localVar_1 = this._grammarAccessExtensions.localVar(it);
-          CharSequence _doneLeaf = this.doneLeaf(it, _localVar_1);
+          CharSequence _doneLeaf = this.doneLeaf(it, this._grammarAccessExtensions.localVar(it));
           _builder_1.append(_doneLeaf, "\t");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("}");
@@ -1005,8 +998,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder_1.append("{");
           _builder_1.newLine();
           _builder_1.append("\t");
-          String _localVar_2 = this._grammarAccessExtensions.localVar(assignment, it);
-          CharSequence _doneLeaf = this.doneLeaf(it, _localVar_2);
+          CharSequence _doneLeaf = this.doneLeaf(it, this._grammarAccessExtensions.localVar(assignment, it));
           _builder_1.append(_doneLeaf, "\t");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("}");

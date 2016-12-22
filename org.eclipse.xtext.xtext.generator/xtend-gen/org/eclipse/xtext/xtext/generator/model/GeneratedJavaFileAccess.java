@@ -55,8 +55,7 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
     {
       Iterable<IClassAnnotation> _classAnnotations = this.getClassAnnotations();
       final Consumer<IClassAnnotation> _function = (IClassAnnotation it) -> {
-        TypeReference _annotationImport = it.getAnnotationImport();
-        this.importType(_annotationImport);
+        this.importType(it.getAnnotationImport());
       };
       _classAnnotations.forEach(_function);
       _xblockexpression = super.getContent();

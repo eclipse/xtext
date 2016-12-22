@@ -47,9 +47,7 @@ public class MultiProjectWorkspaceConfigFactory implements IWorkspaceConfigFacto
       };
       Iterable<File> _filter = IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(_listFiles)), _function_1);
       final Consumer<File> _function_2 = (File it) -> {
-        String _absolutePath = it.getAbsolutePath();
-        URI _createFileURI = URI.createFileURI(_absolutePath);
-        this.addProjectConfigs(_createFileURI, result, acceptor);
+        this.addProjectConfigs(URI.createFileURI(it.getAbsolutePath()), result, acceptor);
       };
       _filter.forEach(_function_2);
       return result;

@@ -55,9 +55,7 @@ public class DefaultHierarchyNode implements IHierarchyNode {
   @Override
   public boolean isRecursive() {
     if ((this.recursive == null)) {
-      boolean _internalIsRecursive = this.internalIsRecursive();
-      Wrapper<Boolean> _wrap = Wrapper.<Boolean>wrap(Boolean.valueOf(_internalIsRecursive));
-      this.recursive = _wrap;
+      this.recursive = Wrapper.<Boolean>wrap(Boolean.valueOf(this.internalIsRecursive()));
     }
     return (this.recursive.get()).booleanValue();
   }
@@ -73,8 +71,7 @@ public class DefaultHierarchyNode implements IHierarchyNode {
         if (_equals) {
           return true;
         }
-        IHierarchyNode _parent = node.getParent();
-        node = _parent;
+        node = node.getParent();
       }
     }
     return false;

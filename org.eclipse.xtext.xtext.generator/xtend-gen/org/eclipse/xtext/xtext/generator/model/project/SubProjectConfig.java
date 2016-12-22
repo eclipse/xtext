@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
@@ -86,29 +85,25 @@ public class SubProjectConfig implements ISubProjectConfig {
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.rootPath);
     boolean _not = (!_isNullOrEmpty);
     if (_not) {
-      XtextGeneratorFileSystemAccess _newFileSystemAccess = this.owner.newFileSystemAccess(this.rootPath, true);
-      this.root = _newFileSystemAccess;
+      this.root = this.owner.newFileSystemAccess(this.rootPath, true);
       this.root.initialize(injector);
     }
     boolean _isNullOrEmpty_1 = StringExtensions.isNullOrEmpty(this.metaInfPath);
     boolean _not_1 = (!_isNullOrEmpty_1);
     if (_not_1) {
-      XtextGeneratorFileSystemAccess _newFileSystemAccess_1 = this.owner.newFileSystemAccess(this.metaInfPath, true);
-      this.metaInf = _newFileSystemAccess_1;
+      this.metaInf = this.owner.newFileSystemAccess(this.metaInfPath, true);
       this.metaInf.initialize(injector);
     }
     boolean _isNullOrEmpty_2 = StringExtensions.isNullOrEmpty(this.srcPath);
     boolean _not_2 = (!_isNullOrEmpty_2);
     if (_not_2) {
-      XtextGeneratorFileSystemAccess _newFileSystemAccess_2 = this.owner.newFileSystemAccess(this.srcPath, this.overwriteSrc);
-      this.src = _newFileSystemAccess_2;
+      this.src = this.owner.newFileSystemAccess(this.srcPath, this.overwriteSrc);
       this.src.initialize(injector);
     }
     boolean _isNullOrEmpty_3 = StringExtensions.isNullOrEmpty(this.srcGenPath);
     boolean _not_3 = (!_isNullOrEmpty_3);
     if (_not_3) {
-      XtextGeneratorFileSystemAccess _newFileSystemAccess_3 = this.owner.newFileSystemAccess(this.srcGenPath, true);
-      this.srcGen = _newFileSystemAccess_3;
+      this.srcGen = this.owner.newFileSystemAccess(this.srcGenPath, true);
       this.srcGen.initialize(injector);
     }
   }

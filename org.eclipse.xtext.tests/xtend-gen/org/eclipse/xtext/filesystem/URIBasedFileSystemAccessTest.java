@@ -73,8 +73,7 @@ public class URIBasedFileSystemAccessTest {
       _file_1.deleteOnExit();
       Set<OutputConfiguration> _outputConfigurations = this.configProvider.getOutputConfigurations();
       final OutputConfiguration config = IterableExtensions.<OutputConfiguration>head(_outputConfigurations);
-      String _string = output.toString();
-      config.setOutputDirectory(_string);
+      config.setOutputDirectory(output.toString());
       Pair<String, OutputConfiguration> _mappedTo = Pair.<String, OutputConfiguration>of(IFileSystemAccess.DEFAULT_OUTPUT, config);
       this.fsa.setOutputConfigurations(Collections.<String, OutputConfiguration>unmodifiableMap(CollectionLiterals.<String, OutputConfiguration>newHashMap(_mappedTo)));
       this.fsa.setConverter(this.uriConverter);
@@ -85,13 +84,11 @@ public class URIBasedFileSystemAccessTest {
   
   @Test
   public void testFalseOnAbsent() {
-    boolean _isFile = this.fsa.isFile(URIBasedFileSystemAccessTest.MISSING_RESOURCE_NAME);
-    Assert.assertFalse(_isFile);
+    Assert.assertFalse(this.fsa.isFile(URIBasedFileSystemAccessTest.MISSING_RESOURCE_NAME));
   }
   
   @Test
   public void testTrueOnPresent() {
-    boolean _isFile = this.fsa.isFile(URIBasedFileSystemAccessTest.EXISTING_RESOURCE_NAME);
-    Assert.assertTrue(_isFile);
+    Assert.assertTrue(this.fsa.isFile(URIBasedFileSystemAccessTest.EXISTING_RESOURCE_NAME));
   }
 }

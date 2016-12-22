@@ -12,7 +12,6 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -24,8 +23,7 @@ public class LogProcessor extends AbstractClassProcessor {
     final Procedure1<MutableFieldDeclaration> _function = (MutableFieldDeclaration it) -> {
       it.setStatic(true);
       it.setFinal(true);
-      TypeReference _newTypeReference = context.newTypeReference(Logger.class);
-      it.setType(_newTypeReference);
+      it.setType(context.newTypeReference(Logger.class));
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {

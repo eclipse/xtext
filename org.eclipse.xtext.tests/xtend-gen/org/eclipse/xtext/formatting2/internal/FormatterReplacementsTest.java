@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
 import java.util.function.Consumer;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.formatting2.FormatterRequest;
@@ -23,7 +22,6 @@ import org.eclipse.xtext.formatting2.internal.services.FormatterTestLanguageGram
 import org.eclipse.xtext.formatting2.internal.tests.FormatterTestLanguageInjectorProvider;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
-import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
@@ -84,10 +82,7 @@ public class FormatterReplacementsTest {
       final IDList parsed = this.parseHelper.parse("idlist  aaa bbb");
       final FormatterRequest request = this.requestProvider.get();
       request.setAllowIdentityEdits(false);
-      Resource _eResource = parsed.eResource();
-      TextRegionAccessBuilder _forNodeModel = this.regionBuilder.forNodeModel(((XtextResource) _eResource));
-      ITextRegionAccess _create = _forNodeModel.create();
-      request.setTextRegionAccess(_create);
+      request.setTextRegionAccess(this.regionBuilder.forNodeModel(((XtextResource) parsed.eResource())).create());
       final List<ITextReplacement> replacements = formatter.format(request);
       final Function1<ITextReplacement, String> _function_1 = (ITextReplacement it) -> {
         StringConcatenation _builder = new StringConcatenation();

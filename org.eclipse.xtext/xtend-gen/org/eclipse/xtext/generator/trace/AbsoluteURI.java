@@ -52,8 +52,7 @@ public class AbsoluteURI extends AbstractURIWrapper {
   }
   
   public SourceRelativeURI deresolve(final ISourceFolder sourceFolder) {
-    URI _path = sourceFolder.getPath();
-    return this.deresolve(_path);
+    return this.deresolve(sourceFolder.getPath());
   }
   
   public SourceRelativeURI deresolve(final IProjectConfig projectConfig) {

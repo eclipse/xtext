@@ -542,8 +542,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
   @Override
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
     String __ebnf2 = super._ebnf2(it, options, supportActions);
-    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, this.isPassCurrentIntoFragment(), (!supportActions));
     return (__ebnf2 + _argumentList);
   }
   
@@ -564,8 +563,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
   @Override
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
     String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
-    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, this.isPassCurrentIntoFragment(), (!supportActions));
     return (__dataTypeEbnf2 + _argumentList);
   }
   

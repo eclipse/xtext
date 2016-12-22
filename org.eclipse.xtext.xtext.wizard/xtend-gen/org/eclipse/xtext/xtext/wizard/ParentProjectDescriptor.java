@@ -96,31 +96,22 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     WizardConfiguration _config = this.getConfig();
     boolean _needsGradleBuild = _config.needsGradleBuild();
     if (_needsGradleBuild) {
-      CharSequence _settingsGradle = this.settingsGradle();
-      PlainTextFile _file = this.file(Outlet.ROOT, "settings.gradle", _settingsGradle);
+      PlainTextFile _file = this.file(Outlet.ROOT, "settings.gradle", this.settingsGradle());
       files.add(_file);
-      CharSequence _sourceLayoutGradle = this.sourceLayoutGradle();
-      PlainTextFile _file_1 = this.file(Outlet.ROOT, "gradle/source-layout.gradle", _sourceLayoutGradle);
+      PlainTextFile _file_1 = this.file(Outlet.ROOT, "gradle/source-layout.gradle", this.sourceLayoutGradle());
       files.add(_file_1);
-      CharSequence _mavenDeploymentGradle = this.mavenDeploymentGradle();
-      PlainTextFile _file_2 = this.file(Outlet.ROOT, "gradle/maven-deployment.gradle", _mavenDeploymentGradle);
+      PlainTextFile _file_2 = this.file(Outlet.ROOT, "gradle/maven-deployment.gradle", this.mavenDeploymentGradle());
       files.add(_file_2);
       WizardConfiguration _config_1 = this.getConfig();
       boolean _isNeedsGradleWrapper = _config_1.isNeedsGradleWrapper();
       if (_isNeedsGradleWrapper) {
-        CharSequence _loadResource = this.loadResource("gradlew/gradlew");
-        PlainTextFile _file_3 = this.file(Outlet.ROOT, "gradlew", _loadResource, true);
+        PlainTextFile _file_3 = this.file(Outlet.ROOT, "gradlew", this.loadResource("gradlew/gradlew"), true);
         files.add(_file_3);
-        CharSequence _loadResource_1 = this.loadResource("gradlew/gradlew.bat");
-        PlainTextFile _file_4 = this.file(Outlet.ROOT, "gradlew.bat", _loadResource_1);
+        PlainTextFile _file_4 = this.file(Outlet.ROOT, "gradlew.bat", this.loadResource("gradlew/gradlew.bat"));
         files.add(_file_4);
-        CharSequence _loadResource_2 = this.loadResource("gradlew/gradle-wrapper.properties");
-        PlainTextFile _file_5 = this.file(Outlet.ROOT, "gradle/wrapper/gradle-wrapper.properties", _loadResource_2);
+        PlainTextFile _file_5 = this.file(Outlet.ROOT, "gradle/wrapper/gradle-wrapper.properties", this.loadResource("gradlew/gradle-wrapper.properties"));
         files.add(_file_5);
-        Class<? extends ParentProjectDescriptor> _class = this.getClass();
-        ClassLoader _classLoader = _class.getClassLoader();
-        URL _resource = _classLoader.getResource("gradlew/gradle-wrapper.jar");
-        BinaryFile _binaryFile = this.binaryFile(Outlet.ROOT, "gradle/wrapper/gradle-wrapper.jar", _resource);
+        BinaryFile _binaryFile = this.binaryFile(Outlet.ROOT, "gradle/wrapper/gradle-wrapper.jar", this.getClass().getClassLoader().getResource("gradlew/gradle-wrapper.jar"));
         files.add(_binaryFile);
       }
     }

@@ -20,8 +20,7 @@ public class AlternativeImageDescription implements IImageDescription {
   private final List<String> imageIDs;
   
   public AlternativeImageDescription(final Iterable<String> imageIDs) {
-    ImmutableList<String> _copyOf = ImmutableList.<String>copyOf(imageIDs);
-    this.imageIDs = _copyOf;
+    this.imageIDs = ImmutableList.<String>copyOf(imageIDs);
   }
   
   @Override

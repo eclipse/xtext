@@ -118,8 +118,7 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef = TypeReference.typeRef(IAllContainersState.class);
     final GuiceModuleAccess.BindingFactory bindingFactory = _bindingFactory.addTypeToProviderInstance(_typeRef, expression);
-    Grammar _grammar_1 = this.getGrammar();
-    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar_1);
+    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
     if (_inheritsXbase) {
       TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.XtextEditor");
       TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.editor.XbaseEditor");

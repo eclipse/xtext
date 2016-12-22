@@ -14,7 +14,6 @@ import java.io.InputStream;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -80,16 +79,9 @@ public class PortableURIsTest extends AbstractXtextTests {
       final URI uri = EcoreUtil.getURI(extended);
       PortableURIs _portableURIs = resourceA.getPortableURIs();
       final URI portableURI = _portableURIs.toPortableURI(resourceA, uri);
-      URI _uRI = resourceA.getURI();
-      URI _trimFragment = portableURI.trimFragment();
-      Assert.assertEquals(_uRI, _trimFragment);
-      PortableURIs _portableURIs_1 = resourceA.getPortableURIs();
-      String _fragment = portableURI.fragment();
-      boolean _isPortableURIFragment = _portableURIs_1.isPortableURIFragment(_fragment);
-      Assert.assertTrue(_isPortableURIFragment);
-      String _fragment_1 = portableURI.fragment();
-      EObject _eObject = resourceA.getEObject(_fragment_1);
-      Assert.assertSame(extended, _eObject);
+      Assert.assertEquals(resourceA.getURI(), portableURI.trimFragment());
+      Assert.assertTrue(resourceA.getPortableURIs().isPortableURIFragment(portableURI.fragment()));
+      Assert.assertSame(extended, resourceA.getEObject(portableURI.fragment()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -133,20 +125,8 @@ public class PortableURIsTest extends AbstractXtextTests {
       IResourceDescription _resourceDescription = resourceC.getResourceDescription();
       Iterable<IReferenceDescription> _referenceDescriptions = _resourceDescription.getReferenceDescriptions();
       final IReferenceDescription refDesc = IterableExtensions.<IReferenceDescription>head(_referenceDescriptions);
-      EList<EObject> _contents = resourceB.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
-      EList<Type> _types = ((Main) _head).getTypes();
-      Type _head_1 = IterableExtensions.<Type>head(_types);
-      URI _targetEObjectUri = refDesc.getTargetEObjectUri();
-      EObject _eObject = resourceSet.getEObject(_targetEObjectUri, false);
-      Assert.assertSame(_head_1, _eObject);
-      EList<EObject> _contents_1 = resourceC.getContents();
-      EObject _head_2 = IterableExtensions.<EObject>head(_contents_1);
-      EList<Type> _types_1 = ((Main) _head_2).getTypes();
-      Type _head_3 = IterableExtensions.<Type>head(_types_1);
-      URI _sourceEObjectUri = refDesc.getSourceEObjectUri();
-      EObject _eObject_1 = resourceSet.getEObject(_sourceEObjectUri, false);
-      Assert.assertSame(_head_3, _eObject_1);
+      Assert.assertSame(IterableExtensions.<Type>head(((Main) IterableExtensions.<EObject>head(resourceB.getContents())).getTypes()), resourceSet.getEObject(refDesc.getTargetEObjectUri(), false));
+      Assert.assertSame(IterableExtensions.<Type>head(((Main) IterableExtensions.<EObject>head(resourceC.getContents())).getTypes()), resourceSet.getEObject(refDesc.getSourceEObjectUri(), false));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -154,15 +134,10 @@ public class PortableURIsTest extends AbstractXtextTests {
   
   @Test
   public void testEObjectRelativeFragments() {
-    EReference _eAnnotation_Details = EcorePackage.eINSTANCE.getEAnnotation_Details();
-    this.checkFragmentBothDirections(EcorePackage.eINSTANCE, _eAnnotation_Details);
-    EReference _eAttribute_EAttributeType = EcorePackage.eINSTANCE.getEAttribute_EAttributeType();
-    EReference _eAttribute_EAttributeType_1 = EcorePackage.eINSTANCE.getEAttribute_EAttributeType();
-    this.checkFragmentBothDirections(_eAttribute_EAttributeType, _eAttribute_EAttributeType_1);
+    this.checkFragmentBothDirections(EcorePackage.eINSTANCE, EcorePackage.eINSTANCE.getEAnnotation_Details());
+    this.checkFragmentBothDirections(EcorePackage.eINSTANCE.getEAttribute_EAttributeType(), EcorePackage.eINSTANCE.getEAttribute_EAttributeType());
     try {
-      EReference _eAnnotation_EModelElement = EcorePackage.eINSTANCE.getEAnnotation_EModelElement();
-      EReference _eAttribute_EAttributeType_2 = EcorePackage.eINSTANCE.getEAttribute_EAttributeType();
-      this.checkFragmentBothDirections(_eAnnotation_EModelElement, _eAttribute_EAttributeType_2);
+      this.checkFragmentBothDirections(EcorePackage.eINSTANCE.getEAnnotation_EModelElement(), EcorePackage.eINSTANCE.getEAttribute_EAttributeType());
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalStateException) {

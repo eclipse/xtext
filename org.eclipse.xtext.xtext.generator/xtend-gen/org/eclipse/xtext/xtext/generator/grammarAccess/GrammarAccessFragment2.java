@@ -236,8 +236,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
           if ((packResourceSet != null)) {
             EPackage topMost = pack;
             while (((topMost.getESuperPackage() != null) && (topMost.getESuperPackage().eResource() == topMost.eResource()))) {
-              EPackage _eSuperPackage = topMost.getESuperPackage();
-              topMost = _eSuperPackage;
+              topMost = topMost.getESuperPackage();
             }
             if ((packResource.getContents().contains(topMost) && (packResource.getContents().size() == 1))) {
               EList<EClassifier> _eClassifiers = topMost.getEClassifiers();
@@ -248,8 +247,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
                 URI _createURI = URI.createURI(_nsURI_1);
                 packResource.setURI(_createURI);
               } else {
-                ResourceSet _resourceSet = resource.getResourceSet();
-                this.moveSubpackagesToNewResource(topMost, _resourceSet);
+                this.moveSubpackagesToNewResource(topMost, resource.getResourceSet());
               }
             }
             Resource _eResource = topMost.eResource();
@@ -259,8 +257,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
             boolean _equals = _string_1.equals(_nsURI_2);
             boolean _not_2 = (!_equals);
             if (_not_2) {
-              ResourceSet _resourceSet_1 = resource.getResourceSet();
-              this.movePackageToNewResource(topMost, _resourceSet_1);
+              this.movePackageToNewResource(topMost, resource.getResourceSet());
             }
           }
         }
@@ -574,9 +571,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
             _builder.append("\t");
             _builder.newLine();
             _builder.append("\t");
-            IXtextGeneratorLanguage _language_12 = GrammarAccessFragment2.this.getLanguage();
-            Grammar _grammar_12 = _language_12.getGrammar();
-            StringConcatenationClient _ter = GrammarAccessFragment2.this.getter(r_4, _grammar_12);
+            StringConcatenationClient _ter = GrammarAccessFragment2.this.getter(r_4, GrammarAccessFragment2.this.getLanguage().getGrammar());
             _builder.append(_ter, "\t");
             _builder.newLineIfNotEmpty();
           }

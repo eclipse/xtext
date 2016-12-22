@@ -23,8 +23,7 @@ public class DecoratedImageDescription implements IImageDescription {
   
   public DecoratedImageDescription(final IImageDescription baseImage, final IImageDescription... decorators) {
     this.baseImage = baseImage;
-    ImmutableList<IImageDescription> _copyOf = ImmutableList.<IImageDescription>copyOf(decorators);
-    this.decorators = _copyOf;
+    this.decorators = ImmutableList.<IImageDescription>copyOf(decorators);
   }
   
   @Override

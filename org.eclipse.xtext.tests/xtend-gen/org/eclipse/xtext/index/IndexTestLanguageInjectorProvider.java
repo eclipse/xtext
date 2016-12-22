@@ -31,12 +31,9 @@ public class IndexTestLanguageInjectorProvider implements IInjectorProvider, IRe
   @Override
   public Injector getInjector() {
     if ((this.injector == null)) {
-      GlobalRegistries.GlobalStateMemento _makeCopyOfGlobalState = GlobalRegistries.makeCopyOfGlobalState();
-      this.stateBeforeInjectorCreation = _makeCopyOfGlobalState;
-      Injector _internalCreateInjector = this.internalCreateInjector();
-      this.injector = _internalCreateInjector;
-      GlobalRegistries.GlobalStateMemento _makeCopyOfGlobalState_1 = GlobalRegistries.makeCopyOfGlobalState();
-      this.stateAfterInjectorCreation = _makeCopyOfGlobalState_1;
+      this.stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
+      this.injector = this.internalCreateInjector();
+      this.stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
     }
     return this.injector;
   }

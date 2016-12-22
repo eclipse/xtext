@@ -88,8 +88,7 @@ public class ProjectManager {
   public void initialize(final ProjectDescription description, final IProjectConfig projectConfig, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor, final IExternalContentSupport.IExternalContentProvider openedDocumentsContentProvider, final Provider<Map<String, ResourceDescriptionsData>> indexProvider, final CancelIndicator cancelIndicator) {
     this.projectDescription = description;
     this.projectConfig = projectConfig;
-    URI _path = projectConfig.getPath();
-    this.baseDir = _path;
+    this.baseDir = projectConfig.getPath();
     this.issueAcceptor = acceptor;
     this.openedDocumentsContentProvider = openedDocumentsContentProvider;
     this.indexProvider = indexProvider;
@@ -106,8 +105,7 @@ public class ProjectManager {
       this.fileSystemScanner.scan(_path, _function_1);
     };
     _sourceFolders.forEach(_function);
-    List<URI> _emptyList = CollectionLiterals.<URI>emptyList();
-    return this.doBuild(uris, _emptyList, cancelIndicator);
+    return this.doBuild(uris, CollectionLiterals.<URI>emptyList(), cancelIndicator);
   }
   
   public IncrementalBuilder.Result doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
@@ -116,10 +114,8 @@ public class ProjectManager {
       return this.languagesRegistry.getResourceServiceProvider(it);
     };
     final IncrementalBuilder.Result result = this.incrementalBuilder.build(request, _function);
-    IndexState _indexState = result.getIndexState();
-    this.indexState = _indexState;
-    XtextResourceSet _resourceSet = request.getResourceSet();
-    this.resourceSet = _resourceSet;
+    this.indexState = result.getIndexState();
+    this.resourceSet = request.getResourceSet();
     Map<String, ResourceDescriptionsData> _get = this.indexProvider.get();
     String _name = this.projectDescription.getName();
     ResourceDescriptionsData _resourceDescriptions = this.indexState.getResourceDescriptions();
@@ -137,10 +133,7 @@ public class ProjectManager {
       Source2GeneratedMapping _copy_1 = _fileMappings.copy();
       IndexState _indexState = new IndexState(_copy, _copy_1);
       it.setState(_indexState);
-      IndexState _state = it.getState();
-      ResourceDescriptionsData _resourceDescriptions_1 = _state.getResourceDescriptions();
-      XtextResourceSet _createFreshResourceSet = this.createFreshResourceSet(_resourceDescriptions_1);
-      it.setResourceSet(_createFreshResourceSet);
+      it.setResourceSet(this.createFreshResourceSet(it.getState().getResourceDescriptions()));
       it.setDirtyFiles(changedFiles);
       it.setDeletedFiles(deletedFiles);
       final BuildRequest.IPostValidationCallback _function_1 = (URI uri, Iterable<Issue> issues) -> {

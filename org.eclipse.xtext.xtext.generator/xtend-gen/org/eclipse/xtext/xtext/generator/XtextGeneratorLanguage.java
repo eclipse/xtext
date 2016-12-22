@@ -151,10 +151,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   public void setFileExtensions(final String fileExtensions) {
-    String _trim = fileExtensions.trim();
-    String[] _split = _trim.split("\\s*,\\s*");
-    List<String> _list = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(_split)));
-    this.fileExtensions = _list;
+    this.fileExtensions = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(fileExtensions.trim().split("\\s*,\\s*"))));
   }
   
   public void addReferencedResource(final String referencedResource) {
@@ -164,9 +161,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   @Override
   public List<String> getFileExtensions() {
     if (((this.fileExtensions == null) || this.fileExtensions.isEmpty())) {
-      String _simpleName = GrammarUtil.getSimpleName(this.grammar);
-      String _lowerCase = _simpleName.toLowerCase();
-      this.setFileExtensions(_lowerCase);
+      this.setFileExtensions(GrammarUtil.getSimpleName(this.grammar).toLowerCase());
       XtextGeneratorLanguage.LOG.info((("No explicit fileExtensions configured. Using \'*." + this.fileExtensions) + "\'."));
     }
     return this.fileExtensions;
@@ -190,8 +185,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
     _fragments.addAll(0, _implicitFragments);
     injector.injectMembers(XtextGeneratorLanguage.class);
     if ((this.resourceSet == null)) {
-      ResourceSet _get = this.resourceSetProvider.get();
-      this.resourceSet = _get;
+      this.resourceSet = this.resourceSetProvider.get();
     }
     this.resourceSetInitializer.initialize(this.resourceSet, this.referencedResources);
     EList<Resource> _resources = this.resourceSet.getResources();
@@ -270,8 +264,8 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
       throw new IllegalStateException(_plus_4);
     }
     EList<EObject> _contents_1 = resource.getContents();
-    EObject _get_1 = _contents_1.get(0);
-    final Grammar grammar = ((Grammar) _get_1);
+    EObject _get = _contents_1.get(0);
+    final Grammar grammar = ((Grammar) _get);
     this.validateGrammar(grammar);
     this.initialize(grammar);
     super.initialize(injector);
@@ -290,8 +284,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   
   public void initialize(final Grammar grammar) {
     this.grammar = grammar;
-    RuleNames _ruleNames = RuleNames.getRuleNames(grammar, true);
-    this.ruleNames = _ruleNames;
+    this.ruleNames = RuleNames.getRuleNames(grammar, true);
   }
   
   private void installIndex() {
@@ -300,8 +293,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
     EList<Resource> _resources = this.resourceSet.getResources();
     final ArrayList<Resource> resources = Lists.<Resource>newArrayList(_resources);
     for (final Resource resource : resources) {
-      org.eclipse.emf.common.util.URI _uRI = resource.getURI();
-      this.index(resource, _uRI, index);
+      this.index(resource, resource.getURI(), index);
     }
     ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(this.resourceSet, index);
   }

@@ -409,10 +409,8 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   }
   
   protected Collection<EPackage> getRegistryPackagesToValidate() {
-    Grammar _grammar = this.getGrammar();
-    final Collection<EPackage> packages = GrammarUtil.allEPackagesToValidate(_grammar);
-    Grammar _grammar_1 = this.getGrammar();
-    List<AbstractMetamodelDeclaration> _allMetamodelDeclarations = GrammarUtil.allMetamodelDeclarations(_grammar_1);
+    final Collection<EPackage> packages = GrammarUtil.allEPackagesToValidate(this.getGrammar());
+    List<AbstractMetamodelDeclaration> _allMetamodelDeclarations = GrammarUtil.allMetamodelDeclarations(this.getGrammar());
     Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(_allMetamodelDeclarations, GeneratedMetamodel.class);
     final Function1<GeneratedMetamodel, EPackage> _function = (GeneratedMetamodel it) -> {
       return it.getEPackage();
@@ -442,16 +440,15 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   protected boolean contributeEclipsePluginExtensions() {
     boolean _xblockexpression = false;
     {
-      Grammar _grammar = this.getGrammar();
-      final String simpleName = GrammarUtil.getSimpleName(_grammar);
+      final String simpleName = GrammarUtil.getSimpleName(this.getGrammar());
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
       PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
       List<CharSequence> _entries = _pluginXml.getEntries();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<!-- marker definitions for ");
-      Grammar _grammar_1 = this.getGrammar();
-      String _name = _grammar_1.getName();
+      Grammar _grammar = this.getGrammar();
+      String _name = _grammar.getName();
       _builder.append(_name);
       _builder.append(" -->");
       _builder.newLineIfNotEmpty();

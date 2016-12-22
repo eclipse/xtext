@@ -547,8 +547,6 @@ public class SerializationAfterModelChangeTest {
   }
   
   private void assertSerializesTo(final Model model, final CharSequence expectation) {
-    String _string = expectation.toString();
-    String _serialize = this._iSerializer.serialize(model);
-    Assert.assertEquals(_string, _serialize);
+    Assert.assertEquals(expectation.toString(), this._iSerializer.serialize(model));
   }
 }

@@ -14,10 +14,8 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
 /**
  * @noextend
@@ -76,9 +74,7 @@ public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntim
   public void initialize(final Injector injector) {
     super.initialize(injector);
     if ((this.ecoreModelPath != null)) {
-      XtextProjectConfig _owner = this.getOwner();
-      XtextGeneratorFileSystemAccess _newFileSystemAccess = _owner.newFileSystemAccess(this.ecoreModelPath, true);
-      this.ecoreModel = _newFileSystemAccess;
+      this.ecoreModel = this.getOwner().newFileSystemAccess(this.ecoreModelPath, true);
       this.ecoreModel.initialize(injector);
     }
   }

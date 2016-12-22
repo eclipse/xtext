@@ -115,8 +115,7 @@ public class Bug456789Test extends AbstractXtextTests {
       EObject _get = _contents.get(0);
       final Diagnostic diag = Diagnostician.INSTANCE.validate(_get);
       Assert.assertNotNull("diag", diag);
-      int _severity = diag.getSeverity();
-      Assert.assertEquals("diag.isError", _severity, Diagnostic.ERROR);
+      Assert.assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -396,8 +395,7 @@ public class Bug456789Test extends AbstractXtextTests {
       EObject _get = _contents.get(0);
       final Diagnostic diag = Diagnostician.INSTANCE.validate(_get);
       Assert.assertNotNull("diag", diag);
-      int _severity = diag.getSeverity();
-      Assert.assertEquals("diag.isError", _severity, Diagnostic.ERROR);
+      Assert.assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -143,8 +143,7 @@ public class IdeContentProposalProvider {
               _editPositions_1.add(_textRegion_1);
               it.setKind(ContentAssistEntry.KIND_VALUE);
             }
-            String _name_2 = rule.getName();
-            it.setDescription(_name_2);
+            it.setDescription(rule.getName());
           };
           final ContentAssistEntry entry = this.proposalCreator.createProposal(proposal, context, _function);
           int _defaultPriority = this.proposalPriorities.getDefaultPriority(entry);

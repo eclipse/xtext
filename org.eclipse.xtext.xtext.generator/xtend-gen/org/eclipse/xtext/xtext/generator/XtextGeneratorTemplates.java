@@ -1876,8 +1876,7 @@ public class XtextGeneratorTemplates {
             _builder.append("\t\t");
             _builder.append("\t");
             _builder.append("return new ");
-            Grammar _grammar_3 = lang_1.getGrammar();
-            TypeReference _runtimeModule = XtextGeneratorTemplates.this.naming.getRuntimeModule(_grammar_3);
+            TypeReference _runtimeModule = XtextGeneratorTemplates.this.naming.getRuntimeModule(lang_1.getGrammar());
             _builder.append(_runtimeModule, "\t\t\t");
             _builder.append("();");
             _builder.newLineIfNotEmpty();
@@ -1903,8 +1902,8 @@ public class XtextGeneratorTemplates {
           for(final IXtextGeneratorLanguage lang_2 : langConfigs) {
             _builder.append("\t\t");
             _builder.append("if (");
-            Grammar _grammar_4 = lang_2.getGrammar();
-            String _name_3 = _grammar_4.getName();
+            Grammar _grammar_3 = lang_2.getGrammar();
+            String _name_3 = _grammar_3.getName();
             String _upperCase_2 = _name_3.toUpperCase();
             String _replaceAll_2 = _upperCase_2.replaceAll("\\.", "_");
             _builder.append(_replaceAll_2, "\t\t");
@@ -1913,8 +1912,7 @@ public class XtextGeneratorTemplates {
             _builder.append("\t\t");
             _builder.append("\t");
             _builder.append("return new ");
-            Grammar _grammar_5 = lang_2.getGrammar();
-            TypeReference _eclipsePluginModule = XtextGeneratorTemplates.this.naming.getEclipsePluginModule(_grammar_5);
+            TypeReference _eclipsePluginModule = XtextGeneratorTemplates.this.naming.getEclipsePluginModule(lang_2.getGrammar());
             _builder.append(_eclipsePluginModule, "\t\t\t");
             _builder.append("(this);");
             _builder.newLineIfNotEmpty();

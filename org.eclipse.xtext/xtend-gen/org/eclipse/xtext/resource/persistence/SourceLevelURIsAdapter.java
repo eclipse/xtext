@@ -59,8 +59,7 @@ public class SourceLevelURIsAdapter extends AdapterImpl {
       _elvis = _doubleArrow;
     }
     final SourceLevelURIsAdapter adapter = _elvis;
-    ImmutableSet<URI> _copyOf = ImmutableSet.<URI>copyOf(uris);
-    adapter.sourceLevelURIs = _copyOf;
+    adapter.sourceLevelURIs = ImmutableSet.<URI>copyOf(uris);
   }
   
   public static SourceLevelURIsAdapter findInstalledAdapter(final ResourceSet resourceSet) {

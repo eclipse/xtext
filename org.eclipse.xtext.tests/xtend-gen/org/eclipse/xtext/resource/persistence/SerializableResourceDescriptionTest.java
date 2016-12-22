@@ -12,11 +12,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.persistence.SerializableEObjectDescription;
@@ -45,42 +42,29 @@ public class SerializableResourceDescriptionTest {
         it.setURI(uri);
         SerializableReferenceDescription _serializableReferenceDescription = new SerializableReferenceDescription();
         final Procedure1<SerializableReferenceDescription> _function_1 = (SerializableReferenceDescription it_1) -> {
-          URI _appendFragment = uri.appendFragment("foo");
-          it_1.setSourceEObjectUri(_appendFragment);
-          URI _appendFragment_1 = uri.appendFragment("hubble");
-          it_1.setTargetEObjectUri(_appendFragment_1);
-          URI _appendFragment_2 = uri.appendFragment("baz");
-          it_1.setContainerEObjectURI(_appendFragment_2);
-          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setSourceEObjectUri(uri.appendFragment("foo"));
+          it_1.setTargetEObjectUri(uri.appendFragment("hubble"));
+          it_1.setContainerEObjectURI(uri.appendFragment("baz"));
+          it_1.setEReference(EcorePackage.eINSTANCE.getEAnnotation_Contents());
           it_1.setIndexInList(1);
         };
         SerializableReferenceDescription _doubleArrow = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription, _function_1);
         SerializableReferenceDescription _serializableReferenceDescription_1 = new SerializableReferenceDescription();
         final Procedure1<SerializableReferenceDescription> _function_2 = (SerializableReferenceDescription it_1) -> {
-          URI _appendFragment = uri.appendFragment("foo2");
-          it_1.setSourceEObjectUri(_appendFragment);
-          URI _appendFragment_1 = uri.appendFragment("hubble2");
-          it_1.setTargetEObjectUri(_appendFragment_1);
-          URI _appendFragment_2 = uri.appendFragment("baz2");
-          it_1.setContainerEObjectURI(_appendFragment_2);
-          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setSourceEObjectUri(uri.appendFragment("foo2"));
+          it_1.setTargetEObjectUri(uri.appendFragment("hubble2"));
+          it_1.setContainerEObjectURI(uri.appendFragment("baz2"));
+          it_1.setEReference(EcorePackage.eINSTANCE.getEAnnotation_Contents());
           it_1.setIndexInList(2);
         };
         SerializableReferenceDescription _doubleArrow_1 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_1, _function_2);
         it.setReferences(Collections.<SerializableReferenceDescription>unmodifiableList(CollectionLiterals.<SerializableReferenceDescription>newArrayList(_doubleArrow, _doubleArrow_1)));
         SerializableEObjectDescription _serializableEObjectDescription = new SerializableEObjectDescription();
         final Procedure1<SerializableEObjectDescription> _function_3 = (SerializableEObjectDescription it_1) -> {
-          URI _appendFragment = uri.appendFragment("baz");
-          it_1.setEObjectURI(_appendFragment);
-          QualifiedName _create = QualifiedName.create("foo", "baz");
-          it_1.qualifiedName = _create;
-          EClass _eAttribute = EcorePackage.eINSTANCE.getEAttribute();
-          it_1.setEClass(_eAttribute);
-          Pair<String, String> _mappedTo = Pair.<String, String>of("myKey", "myValue");
-          HashMap<String, String> _newHashMap = CollectionLiterals.<String, String>newHashMap(_mappedTo);
-          it_1.userData = _newHashMap;
+          it_1.setEObjectURI(uri.appendFragment("baz"));
+          it_1.qualifiedName = QualifiedName.create("foo", "baz");
+          it_1.setEClass(EcorePackage.eINSTANCE.getEAttribute());
+          it_1.userData = CollectionLiterals.<String, String>newHashMap(Pair.<String, String>of("myKey", "myValue"));
         };
         SerializableEObjectDescription _doubleArrow_2 = ObjectExtensions.<SerializableEObjectDescription>operator_doubleArrow(_serializableEObjectDescription, _function_3);
         it.setDescriptions(Collections.<SerializableEObjectDescription>unmodifiableList(CollectionLiterals.<SerializableEObjectDescription>newArrayList(_doubleArrow_2)));
@@ -104,68 +88,40 @@ public class SerializableResourceDescriptionTest {
   }
   
   public void assertDescriptionsEqual(final SerializableResourceDescription before, final SerializableResourceDescription after) {
-    URI _uRI = before.getURI();
-    URI _uRI_1 = after.getURI();
-    Assert.assertEquals(_uRI, _uRI_1);
-    Iterable<QualifiedName> _importedNames = before.getImportedNames();
-    Iterable<QualifiedName> _importedNames_1 = after.getImportedNames();
-    Assert.assertEquals(_importedNames, _importedNames_1);
+    Assert.assertEquals(before.getURI(), after.getURI());
+    Assert.assertEquals(before.getImportedNames(), after.getImportedNames());
+    Assert.assertEquals(before.getReferences().size(), after.getReferences().size());
     List<SerializableReferenceDescription> _references = before.getReferences();
     int _size = _references.size();
-    List<SerializableReferenceDescription> _references_1 = after.getReferences();
-    int _size_1 = _references_1.size();
-    Assert.assertEquals(_size, _size_1);
-    List<SerializableReferenceDescription> _references_2 = before.getReferences();
-    int _size_2 = _references_2.size();
-    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size_2, true);
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
     for (final int i : _doubleDotLessThan) {
       {
-        List<SerializableReferenceDescription> _references_3 = before.getReferences();
-        final SerializableReferenceDescription beforeRef = _references_3.get(i);
-        List<SerializableReferenceDescription> _references_4 = after.getReferences();
-        final SerializableReferenceDescription afterRef = _references_4.get(i);
-        URI _containerEObjectURI = beforeRef.getContainerEObjectURI();
-        URI _containerEObjectURI_1 = afterRef.getContainerEObjectURI();
-        Assert.assertEquals(_containerEObjectURI, _containerEObjectURI_1);
-        URI _sourceEObjectUri = beforeRef.getSourceEObjectUri();
-        URI _sourceEObjectUri_1 = afterRef.getSourceEObjectUri();
-        Assert.assertEquals(_sourceEObjectUri, _sourceEObjectUri_1);
-        URI _targetEObjectUri = beforeRef.getTargetEObjectUri();
-        URI _targetEObjectUri_1 = afterRef.getTargetEObjectUri();
-        Assert.assertEquals(_targetEObjectUri, _targetEObjectUri_1);
-        EReference _eReference = beforeRef.getEReference();
-        EReference _eReference_1 = afterRef.getEReference();
-        Assert.assertEquals(_eReference, _eReference_1);
-        int _indexInList = beforeRef.getIndexInList();
-        int _indexInList_1 = afterRef.getIndexInList();
-        Assert.assertEquals(_indexInList, _indexInList_1);
+        List<SerializableReferenceDescription> _references_1 = before.getReferences();
+        final SerializableReferenceDescription beforeRef = _references_1.get(i);
+        List<SerializableReferenceDescription> _references_2 = after.getReferences();
+        final SerializableReferenceDescription afterRef = _references_2.get(i);
+        Assert.assertEquals(beforeRef.getContainerEObjectURI(), afterRef.getContainerEObjectURI());
+        Assert.assertEquals(beforeRef.getSourceEObjectUri(), afterRef.getSourceEObjectUri());
+        Assert.assertEquals(beforeRef.getTargetEObjectUri(), afterRef.getTargetEObjectUri());
+        Assert.assertEquals(beforeRef.getEReference(), afterRef.getEReference());
+        Assert.assertEquals(beforeRef.getIndexInList(), afterRef.getIndexInList());
       }
     }
+    Assert.assertEquals(before.getDescriptions().size(), after.getDescriptions().size());
     List<SerializableEObjectDescription> _descriptions = before.getDescriptions();
-    int _size_3 = _descriptions.size();
-    List<SerializableEObjectDescription> _descriptions_1 = after.getDescriptions();
-    int _size_4 = _descriptions_1.size();
-    Assert.assertEquals(_size_3, _size_4);
-    List<SerializableEObjectDescription> _descriptions_2 = before.getDescriptions();
-    int _size_5 = _descriptions_2.size();
-    ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, _size_5, true);
+    int _size_1 = _descriptions.size();
+    ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, _size_1, true);
     for (final int i_1 : _doubleDotLessThan_1) {
       {
-        List<SerializableEObjectDescription> _descriptions_3 = before.getDescriptions();
-        final SerializableEObjectDescription beforeDesc = _descriptions_3.get(i_1);
-        List<SerializableEObjectDescription> _descriptions_4 = after.getDescriptions();
-        final SerializableEObjectDescription afterDesc = _descriptions_4.get(i_1);
-        EClass _eClass = beforeDesc.getEClass();
-        EClass _eClass_1 = afterDesc.getEClass();
-        Assert.assertEquals(_eClass, _eClass_1);
-        QualifiedName _name = beforeDesc.getName();
-        QualifiedName _name_1 = afterDesc.getName();
-        Assert.assertEquals(_name, _name_1);
+        List<SerializableEObjectDescription> _descriptions_1 = before.getDescriptions();
+        final SerializableEObjectDescription beforeDesc = _descriptions_1.get(i_1);
+        List<SerializableEObjectDescription> _descriptions_2 = after.getDescriptions();
+        final SerializableEObjectDescription afterDesc = _descriptions_2.get(i_1);
+        Assert.assertEquals(beforeDesc.getEClass(), afterDesc.getEClass());
+        Assert.assertEquals(beforeDesc.getName(), afterDesc.getName());
         Assert.assertEquals(beforeDesc.qualifiedName, afterDesc.qualifiedName);
         Assert.assertEquals(beforeDesc.userData, afterDesc.userData);
-        URI _eObjectURI = beforeDesc.getEObjectURI();
-        URI _eObjectURI_1 = afterDesc.getEObjectURI();
-        Assert.assertEquals(_eObjectURI, _eObjectURI_1);
+        Assert.assertEquals(beforeDesc.getEObjectURI(), afterDesc.getEObjectURI());
       }
     }
   }
@@ -179,48 +135,37 @@ public class SerializableResourceDescriptionTest {
         it.setURI(uri);
         SerializableReferenceDescription _serializableReferenceDescription = new SerializableReferenceDescription();
         final Procedure1<SerializableReferenceDescription> _function_1 = (SerializableReferenceDescription it_1) -> {
-          URI _appendFragment = uri.appendFragment("foo");
-          it_1.setSourceEObjectUri(_appendFragment);
+          it_1.setSourceEObjectUri(uri.appendFragment("foo"));
           it_1.setTargetEObjectUri(null);
-          URI _appendFragment_1 = uri.appendFragment("baz");
-          it_1.setContainerEObjectURI(_appendFragment_1);
-          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setContainerEObjectURI(uri.appendFragment("baz"));
+          it_1.setEReference(EcorePackage.eINSTANCE.getEAnnotation_Contents());
           it_1.setIndexInList(1);
         };
         SerializableReferenceDescription _doubleArrow = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription, _function_1);
         SerializableReferenceDescription _serializableReferenceDescription_1 = new SerializableReferenceDescription();
         final Procedure1<SerializableReferenceDescription> _function_2 = (SerializableReferenceDescription it_1) -> {
           it_1.setSourceEObjectUri(null);
-          URI _appendFragment = uri.appendFragment("hubble2");
-          it_1.setTargetEObjectUri(_appendFragment);
-          URI _appendFragment_1 = uri.appendFragment("baz2");
-          it_1.setContainerEObjectURI(_appendFragment_1);
-          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setTargetEObjectUri(uri.appendFragment("hubble2"));
+          it_1.setContainerEObjectURI(uri.appendFragment("baz2"));
+          it_1.setEReference(EcorePackage.eINSTANCE.getEAnnotation_Contents());
           it_1.setIndexInList(2);
         };
         SerializableReferenceDescription _doubleArrow_1 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_1, _function_2);
         SerializableReferenceDescription _serializableReferenceDescription_2 = new SerializableReferenceDescription();
         final Procedure1<SerializableReferenceDescription> _function_3 = (SerializableReferenceDescription it_1) -> {
-          URI _appendFragment = uri.appendFragment("foo");
-          it_1.setSourceEObjectUri(_appendFragment);
-          URI _appendFragment_1 = uri.appendFragment("hubble2");
-          it_1.setTargetEObjectUri(_appendFragment_1);
+          it_1.setSourceEObjectUri(uri.appendFragment("foo"));
+          it_1.setTargetEObjectUri(uri.appendFragment("hubble2"));
           it_1.setContainerEObjectURI(null);
-          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setEReference(EcorePackage.eINSTANCE.getEAnnotation_Contents());
           it_1.setIndexInList(2);
         };
         SerializableReferenceDescription _doubleArrow_2 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_2, _function_3);
         SerializableReferenceDescription _serializableReferenceDescription_3 = new SerializableReferenceDescription();
         final Procedure1<SerializableReferenceDescription> _function_4 = (SerializableReferenceDescription it_1) -> {
-          URI _appendFragment = uri.appendFragment("foo");
-          it_1.setSourceEObjectUri(_appendFragment);
+          it_1.setSourceEObjectUri(uri.appendFragment("foo"));
           it_1.setTargetEObjectUri(null);
           it_1.setContainerEObjectURI(null);
-          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setEReference(EcorePackage.eINSTANCE.getEAnnotation_Contents());
           it_1.setIndexInList(2);
         };
         SerializableReferenceDescription _doubleArrow_3 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_3, _function_4);
@@ -229,23 +174,17 @@ public class SerializableResourceDescriptionTest {
           it_1.setSourceEObjectUri(null);
           it_1.setTargetEObjectUri(null);
           it_1.setContainerEObjectURI(null);
-          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setEReference(EcorePackage.eINSTANCE.getEAnnotation_Contents());
           it_1.setIndexInList(2);
         };
         SerializableReferenceDescription _doubleArrow_4 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_4, _function_5);
         it.setReferences(Collections.<SerializableReferenceDescription>unmodifiableList(CollectionLiterals.<SerializableReferenceDescription>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2, _doubleArrow_3, _doubleArrow_4)));
         SerializableEObjectDescription _serializableEObjectDescription = new SerializableEObjectDescription();
         final Procedure1<SerializableEObjectDescription> _function_6 = (SerializableEObjectDescription it_1) -> {
-          URI _appendFragment = uri.appendFragment("baz");
-          it_1.setEObjectURI(_appendFragment);
-          QualifiedName _create = QualifiedName.create("foo", "baz");
-          it_1.qualifiedName = _create;
-          EClass _eAttribute = EcorePackage.eINSTANCE.getEAttribute();
-          it_1.setEClass(_eAttribute);
-          Pair<String, String> _mappedTo = Pair.<String, String>of("myKey", "myValue");
-          HashMap<String, String> _newHashMap = CollectionLiterals.<String, String>newHashMap(_mappedTo);
-          it_1.userData = _newHashMap;
+          it_1.setEObjectURI(uri.appendFragment("baz"));
+          it_1.qualifiedName = QualifiedName.create("foo", "baz");
+          it_1.setEClass(EcorePackage.eINSTANCE.getEAttribute());
+          it_1.userData = CollectionLiterals.<String, String>newHashMap(Pair.<String, String>of("myKey", "myValue"));
         };
         SerializableEObjectDescription _doubleArrow_5 = ObjectExtensions.<SerializableEObjectDescription>operator_doubleArrow(_serializableEObjectDescription, _function_6);
         it.setDescriptions(Collections.<SerializableEObjectDescription>unmodifiableList(CollectionLiterals.<SerializableEObjectDescription>newArrayList(_doubleArrow_5)));

@@ -367,8 +367,7 @@ public class PortableURIs {
     while (((lastContainer != null) && (!Objects.equal(fromContainer, lastContainer)))) {
       {
         lastChild = lastContainer;
-        InternalEObject _eInternalContainer = lastContainer.eInternalContainer();
-        lastContainer = _eInternalContainer;
+        lastContainer = lastContainer.eInternalContainer();
         if ((lastContainer == null)) {
           throw new IllegalStateException(("No more containers for element " + lastChild));
         }

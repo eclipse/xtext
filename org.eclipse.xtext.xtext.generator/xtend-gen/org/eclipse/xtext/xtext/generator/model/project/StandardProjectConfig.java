@@ -68,46 +68,39 @@ public class StandardProjectConfig extends XtextProjectConfig {
       String _name = it.getName();
       boolean _tripleEquals = (_name == null);
       if (_tripleEquals) {
-        String _computeName = this.computeName(it);
-        it.setName(_computeName);
+        it.setName(this.computeName(it));
       }
       String _rootPath = it.getRootPath();
       boolean _tripleEquals_1 = (_rootPath == null);
       if (_tripleEquals_1) {
-        String _computeRoot = this.computeRoot(it);
-        it.setRoot(_computeRoot);
+        it.setRoot(this.computeRoot(it));
       }
       String _metaInfPath = it.getMetaInfPath();
       boolean _tripleEquals_2 = (_metaInfPath == null);
       if (_tripleEquals_2) {
-        String _computeMetaInf = this.computeMetaInf(it);
-        it.setMetaInf(_computeMetaInf);
+        it.setMetaInf(this.computeMetaInf(it));
       }
       String _srcPath = it.getSrcPath();
       boolean _tripleEquals_3 = (_srcPath == null);
       if (_tripleEquals_3) {
-        String _computeSrc = this.computeSrc(it);
-        it.setSrc(_computeSrc);
+        it.setSrc(this.computeSrc(it));
       }
       String _srcGenPath = it.getSrcGenPath();
       boolean _tripleEquals_4 = (_srcGenPath == null);
       if (_tripleEquals_4) {
-        String _computeSrcGen = this.computeSrcGen(it);
-        it.setSrcGen(_computeSrcGen);
+        it.setSrcGen(this.computeSrcGen(it));
       }
       if ((it instanceof BundleProjectConfig)) {
         if (this.createEclipseMetaData) {
           ManifestAccess _manifest = ((BundleProjectConfig)it).getManifest();
           boolean _tripleEquals_5 = (_manifest == null);
           if (_tripleEquals_5) {
-            ManifestAccess _newManifestAccess = this.newManifestAccess();
-            ((BundleProjectConfig)it).setManifest(_newManifestAccess);
+            ((BundleProjectConfig)it).setManifest(this.newManifestAccess());
           }
           PluginXmlAccess _pluginXml = ((BundleProjectConfig)it).getPluginXml();
           boolean _tripleEquals_6 = (_pluginXml == null);
           if (_tripleEquals_6) {
-            PluginXmlAccess _newPluginXmlAccess = this.newPluginXmlAccess();
-            ((BundleProjectConfig)it).setPluginXml(_newPluginXmlAccess);
+            ((BundleProjectConfig)it).setPluginXml(this.newPluginXmlAccess());
           }
         }
       }
@@ -115,16 +108,14 @@ public class StandardProjectConfig extends XtextProjectConfig {
         String _ecoreModelPath = ((RuntimeProjectConfig)it).getEcoreModelPath();
         boolean _tripleEquals_7 = (_ecoreModelPath == null);
         if (_tripleEquals_7) {
-          String _computeEcoreModel = this.computeEcoreModel(((RuntimeProjectConfig)it));
-          ((RuntimeProjectConfig)it).setEcoreModel(_computeEcoreModel);
+          ((RuntimeProjectConfig)it).setEcoreModel(this.computeEcoreModel(((RuntimeProjectConfig)it)));
         }
       }
       if ((it instanceof WebProjectConfig)) {
         String _assetsPath = ((WebProjectConfig)it).getAssetsPath();
         boolean _tripleEquals_8 = (_assetsPath == null);
         if (_tripleEquals_8) {
-          String _computeAssets = this.computeAssets(((WebProjectConfig)it));
-          ((WebProjectConfig)it).setAssets(_computeAssets);
+          ((WebProjectConfig)it).setAssets(this.computeAssets(((WebProjectConfig)it)));
         }
       }
     };
