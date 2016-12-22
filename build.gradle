@@ -16,7 +16,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath 'org.xtext:xtext-gradle-plugin:1.0.12'
+		classpath 'org.xtext:xtext-gradle-plugin:1.0.14'
 		classpath 'io.typefox.gradle:io.typefox.gradle.p2gen:0.1.0'
 	}
 }

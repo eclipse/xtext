@@ -1,17 +1,9 @@
-// Re-configure the 'main' and 'mwe2' sourceSets as the content of this project's
-// source folders need to be compiled before the generator execution.
-sourceSets {
-	main.java.srcDirs = []
-	main.resources.srcDirs = []
-	mwe2.java.srcDirs = [ 'src' ]
-}
-
 dependencies {
 	// We cannot use the projects within the workspace, as we would have
 	// to compile them before generating the code, so we need to stick to the bootstrapping version.
 	// Buildship, however, links the workspace projects anyway (as yet).
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext_bootstrap"
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext_bootstrap"
+	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext_bootstrap"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext_bootstrap"
 	
 	// Dependencies required for successfully executing the Xtext generation workflow
 	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
