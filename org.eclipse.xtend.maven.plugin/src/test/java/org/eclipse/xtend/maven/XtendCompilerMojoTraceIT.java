@@ -80,10 +80,6 @@ public class XtendCompilerMojoTraceIT {
 	}
 
 	private Verifier newVerifier(String pathToTestProject, boolean debugMode) throws IOException, VerificationException {
-		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
-		Verifier verifier = new Verifier(testDir.getAbsolutePath(), debugMode);
-		String localRepo = Paths.get("../.m2/repository/").toAbsolutePath().normalize().toString();
-		verifier.setLocalRepo(localRepo);
-		return verifier;
+		return MavenVerifierUtil.newVerifier(pathToTestProject);
 	}
 }

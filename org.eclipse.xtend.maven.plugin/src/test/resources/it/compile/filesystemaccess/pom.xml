@@ -4,6 +4,12 @@
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>filesystemaccess</artifactId>
 	<version>IT-SNAPSHOT</version>
+	<parent>
+		<relativePath>../pom.xml</relativePath>
+		<groupId>org.eclipse.xtend</groupId>
+		<artifactId>it-tests-parent</artifactId>
+		<version>IT-SNAPSHOT</version>
+	</parent>
 
 	<build>
 		<plugins>
@@ -18,6 +24,13 @@
 						</goals>
 					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.xtend</groupId>
+						<artifactId>org.eclipse.xtend.lib</artifactId>
+						<version>[2.4.9,)</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
