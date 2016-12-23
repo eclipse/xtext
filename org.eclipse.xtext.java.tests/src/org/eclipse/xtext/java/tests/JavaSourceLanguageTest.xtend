@@ -17,6 +17,7 @@ import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 
 @RunWith(XtextRunner)
 @InjectWith(JavaInjectorProvider)
@@ -63,9 +64,13 @@ class JavaSourceLanguageTest {
     @Test def void testAnnotation() {
         val rs = resourceSet('MyAnnotation.java' -> '''
             public @interface MyAnnotation {
+                String value();
+                Class<?>[] imported() default {};
+                boolean statementExpression() default false;
+                boolean constantExpression() default false;
             }
         ''', 'MyClass.java' -> '''
-            @MyAnnotation
+            @MyAnnotation(value="foo", constantExpression = true)
             public interface MyClass {
             }
         ''')
@@ -73,6 +78,10 @@ class JavaSourceLanguageTest {
         val resource = rs.resources.findFirst[URI.toString.endsWith('MyClass.java')]
         val clazz = resource.contents.head as JvmGenericType
         val annotationRef = clazz.annotations.head
+        val value = annotationRef.values.findFirst[operation.simpleName == 'constantExpression']
+        Assert.assertTrue((value as JvmBooleanAnnotationValue).values.head)
+        val value2 = annotationRef.values.findFirst[it.operation.simpleName == 'statementExpression']
+        Assert.assertFalse((value2 as JvmBooleanAnnotationValue).values.head)
         Assert.assertSame(annotation, annotationRef.annotation)
     }
 

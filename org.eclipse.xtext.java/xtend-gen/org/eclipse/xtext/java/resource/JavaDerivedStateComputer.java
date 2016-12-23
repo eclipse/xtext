@@ -145,13 +145,15 @@ public class JavaDerivedStateComputer {
     }
     final JvmDeclaredType jvmType = _switchResult;
     jvmType.setPackageName(packageName);
-    jvmType.setSimpleName(String.valueOf(type.name));
+    String _valueOf = String.valueOf(type.name);
+    jvmType.setSimpleName(_valueOf);
     if ((jvmType instanceof JvmGenericType)) {
       if ((type.typeParameters != null)) {
         for (final TypeParameter typeParam : type.typeParameters) {
           {
             final JvmTypeParameter jvmTypeParam = TypesFactory.eINSTANCE.createJvmTypeParameter();
-            jvmTypeParam.setName(String.valueOf(typeParam.name));
+            String _valueOf_1 = String.valueOf(typeParam.name);
+            jvmTypeParam.setName(_valueOf_1);
             EList<JvmTypeParameter> _typeParameters = ((JvmGenericType)jvmType).getTypeParameters();
             _typeParameters.add(jvmTypeParam);
           }
@@ -186,7 +188,7 @@ public class JavaDerivedStateComputer {
     if ((data == null)) {
       throw new IllegalStateException("no index installed");
     }
-    final IndexAwareNameEnvironment nameEnv = new IndexAwareNameEnvironment(classLoader, data, this.stubGenerator);
+    final IndexAwareNameEnvironment nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, this.stubGenerator);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
     CompilerOptions _compilerOptions = this.getCompilerOptions(resource);
     final ICompilerRequestor _function = (CompilationResult it) -> {

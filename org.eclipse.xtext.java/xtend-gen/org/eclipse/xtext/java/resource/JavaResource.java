@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJavaSchemeUriResolver;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -50,6 +51,28 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
         it.setURI(uri);
       };
       return ObjectExtensions.<JavaResource>operator_doubleArrow(_get, _function);
+    }
+  }
+  
+  public static class JavaFragmentProvider extends AbstractClassMirror {
+    @Override
+    protected String getTypeName() {
+      throw new UnsupportedOperationException("not supported");
+    }
+    
+    @Override
+    protected String getTypeName(final JvmType type) {
+      return type.getQualifiedName('$');
+    }
+    
+    @Override
+    public void initialize(final TypeResource typeResource) {
+      throw new UnsupportedOperationException("not supported");
+    }
+    
+    @Override
+    public boolean isSealed() {
+      return true;
     }
   }
   
@@ -161,10 +184,29 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
         if ((access != null)) {
           try {
             URI _eProxyURI = proxy.eProxyURI();
+            URI _trimFragment = _eProxyURI.trimFragment();
             ResourceSet _resourceSet = this.getResourceSet();
-            final EObject result = access.getIndexedJvmType(_eProxyURI, _resourceSet);
-            if ((result != null)) {
-              return result;
+            EObject result = access.getIndexedJvmType(_trimFragment, _resourceSet);
+            if ((result instanceof JvmDeclaredType)) {
+              JavaResource.JavaFragmentProvider _javaFragmentProvider = new JavaResource.JavaFragmentProvider();
+              Resource _eResource = ((JvmDeclaredType)result).eResource();
+              URI _eProxyURI_1 = proxy.eProxyURI();
+              String _fragment = _eProxyURI_1.fragment();
+              EObject _eObject = _javaFragmentProvider.getEObject(_eResource, _fragment, new IFragmentProvider.Fallback() {
+                @Override
+                public EObject getEObject(final String fragment) {
+                  return null;
+                }
+                
+                @Override
+                public String getFragment(final EObject obj) {
+                  return null;
+                }
+              });
+              result = _eObject;
+              if ((result != null)) {
+                return result;
+              }
             }
           } catch (final Throwable _t) {
             if (_t instanceof IndexedJvmTypeAccess.UnknownNestedTypeException) {
@@ -258,6 +300,10 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   @Override
   public String getURIFragment(final EObject eObject) {
     return this.m.getFragment(eObject, this.fallback);
+  }
+  
+  public String getOriginalSource() {
+    return String.copyValueOf(this.compilationUnit.contents);
   }
   
   @Pure
