@@ -441,7 +441,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (feature instanceof JvmField || feature instanceof JvmFormalParameter)
 				return false;
 			if (eContainingFeature == XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS
-					|| eContainingFeature == XbasePackage.Literals.XASSIGNMENT__VALUE) {
+					|| eContainingFeature == XbasePackage.Literals.XASSIGNMENT__VALUE
+					|| eContainingFeature == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS) {
 				return false;
 			}
 			return !b.hasName(feature);

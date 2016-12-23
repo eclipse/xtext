@@ -1669,13 +1669,7 @@ public class CompilerTest {
       _builder_1.append("public int compare(final String a, final String b) {");
       _builder_1.newLine();
       _builder_1.append("        ");
-      _builder_1.append("int _length = a.length();");
-      _builder_1.newLine();
-      _builder_1.append("        ");
-      _builder_1.append("int _length_1 = b.length();");
-      _builder_1.newLine();
-      _builder_1.append("        ");
-      _builder_1.append("return Integer.valueOf(_length).compareTo(Integer.valueOf(_length_1));");
+      _builder_1.append("return Integer.valueOf(a.length()).compareTo(Integer.valueOf(b.length()));");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("}");
