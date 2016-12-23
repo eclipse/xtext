@@ -7,11 +7,14 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructorProcessor;
 import org.eclipse.xtend.lib.annotations.ToStringProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -46,38 +49,51 @@ public class DataProcessor extends AbstractClassProcessor {
     
     public Iterable<? extends FieldDeclaration> getDataFields(final ClassDeclaration it) {
       Iterable<? extends FieldDeclaration> _declaredFields = it.getDeclaredFields();
-      final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration it_1) -> {
-        return Boolean.valueOf(((!it_1.isStatic()) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
+      final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
+        @Override
+        public Boolean apply(final FieldDeclaration it) {
+          return Boolean.valueOf(((!it.isStatic()) && Util.this.context.isThePrimaryGeneratedJavaElement(it)));
+        }
       };
       return IterableExtensions.filter(_declaredFields, _function);
     }
     
     public Iterable<? extends MutableFieldDeclaration> getDataFields(final MutableClassDeclaration it) {
       Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
-      final Function1<MutableFieldDeclaration, Boolean> _function = (MutableFieldDeclaration it_1) -> {
-        return Boolean.valueOf(((!it_1.isStatic()) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
+      final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
+        @Override
+        public Boolean apply(final MutableFieldDeclaration it) {
+          return Boolean.valueOf(((!it.isStatic()) && Util.this.context.isThePrimaryGeneratedJavaElement(it)));
+        }
       };
       return IterableExtensions.filter(_declaredFields, _function);
     }
     
     public void addDataToString(final MutableClassDeclaration cls) {
-      final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
-        it.setReturnType(this.context.getString());
-        it.addAnnotation(this.context.newAnnotationReference(Override.class));
-        it.addAnnotation(this.context.newAnnotationReference(Pure.class));
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("String result = new ");
-            _builder.append(ToStringHelper.class);
-            _builder.append("().toString(this);");
-            _builder.newLineIfNotEmpty();
-            _builder.append("return result;");
-            _builder.newLine();
-          }
-        };
-        it.setBody(_client);
+      final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
+        public void apply(final MutableMethodDeclaration it) {
+          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
+          Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
+          TypeReference _string = Util.this.context.getString();
+          it.setReturnType(_string);
+          AnnotationReference _newAnnotationReference = Util.this.context.newAnnotationReference(Override.class);
+          it.addAnnotation(_newAnnotationReference);
+          AnnotationReference _newAnnotationReference_1 = Util.this.context.newAnnotationReference(Pure.class);
+          it.addAnnotation(_newAnnotationReference_1);
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("String result = new ");
+              _builder.append(ToStringHelper.class, "");
+              _builder.append("().toString(this);");
+              _builder.newLineIfNotEmpty();
+              _builder.append("return result;");
+              _builder.newLine();
+            }
+          };
+          it.setBody(_client);
+        }
       };
       cls.addMethod("toString", _function);
     }
@@ -96,8 +112,11 @@ public class DataProcessor extends AbstractClassProcessor {
     @Extension
     final FinalFieldsConstructorProcessor.Util requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context);
     Iterable<? extends MutableFieldDeclaration> _dataFields = util.getDataFields(it);
-    final Consumer<MutableFieldDeclaration> _function = (MutableFieldDeclaration it_1) -> {
-      it_1.setFinal(true);
+    final Consumer<MutableFieldDeclaration> _function = new Consumer<MutableFieldDeclaration>() {
+      @Override
+      public void accept(final MutableFieldDeclaration it) {
+        it.setFinal(true);
+      }
     };
     _dataFields.forEach(_function);
     boolean _needsFinalFieldConstructor = requiredArgsUtil.needsFinalFieldConstructor(it);
@@ -107,29 +126,36 @@ public class DataProcessor extends AbstractClassProcessor {
     boolean _hasHashCode = ehUtil.hasHashCode(it);
     boolean _not = (!_hasHashCode);
     if (_not) {
-      ehUtil.addHashCode(it, util.getDataFields(it), ehUtil.hasSuperHashCode(it));
+      Iterable<? extends MutableFieldDeclaration> _dataFields_1 = util.getDataFields(it);
+      boolean _hasSuperHashCode = ehUtil.hasSuperHashCode(it);
+      ehUtil.addHashCode(it, _dataFields_1, _hasSuperHashCode);
     }
     boolean _hasEquals = ehUtil.hasEquals(it);
     boolean _not_1 = (!_hasEquals);
     if (_not_1) {
-      ehUtil.addEquals(it, util.getDataFields(it), ehUtil.hasSuperEquals(it));
+      Iterable<? extends MutableFieldDeclaration> _dataFields_2 = util.getDataFields(it);
+      boolean _hasSuperEquals = ehUtil.hasSuperEquals(it);
+      ehUtil.addEquals(it, _dataFields_2, _hasSuperEquals);
     }
     boolean _hasToString = toStringUtil.hasToString(it);
     boolean _not_2 = (!_hasToString);
     if (_not_2) {
       util.addDataToString(it);
     }
-    Iterable<? extends MutableFieldDeclaration> _dataFields_1 = util.getDataFields(it);
-    final Consumer<MutableFieldDeclaration> _function_1 = (MutableFieldDeclaration it_1) -> {
-      boolean _shouldAddGetter = getterUtil.shouldAddGetter(it_1);
-      if (_shouldAddGetter) {
-        getterUtil.addGetter(it_1, Visibility.PUBLIC);
+    Iterable<? extends MutableFieldDeclaration> _dataFields_3 = util.getDataFields(it);
+    final Consumer<MutableFieldDeclaration> _function_1 = new Consumer<MutableFieldDeclaration>() {
+      @Override
+      public void accept(final MutableFieldDeclaration it) {
+        boolean _shouldAddGetter = getterUtil.shouldAddGetter(it);
+        if (_shouldAddGetter) {
+          getterUtil.addGetter(it, Visibility.PUBLIC);
+        }
+        String _simpleName = it.getSimpleName();
+        String _firstLower = StringExtensions.toFirstLower(_simpleName);
+        String _plus = ("_" + _firstLower);
+        it.setSimpleName(_plus);
       }
-      String _simpleName = it_1.getSimpleName();
-      String _firstLower = StringExtensions.toFirstLower(_simpleName);
-      String _plus = ("_" + _firstLower);
-      it_1.setSimpleName(_plus);
     };
-    _dataFields_1.forEach(_function_1);
+    _dataFields_3.forEach(_function_1);
   }
 }
