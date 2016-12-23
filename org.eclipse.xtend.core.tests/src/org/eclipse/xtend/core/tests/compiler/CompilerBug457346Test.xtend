@@ -44,8 +44,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
-			    Ordering<String> _onResultOf = Ordering.<Integer>natural().<String>onResultOf(_function).<String>onResultOf(_function_1);
-			    return IterableExtensions.<String>sortWith(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "aa", "aaa")), _onResultOf);
+			    return IterableExtensions.<String>sortWith(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "aa", "aaa")), Ordering.<Integer>natural().<String>onResultOf(_function).<String>onResultOf(_function_1));
 			  }
 			}
 		''')
@@ -86,8 +85,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
-			    Ordering<String> _onResultOf = Ordering.<Integer>natural().<String>onResultOf(_function).<String>onResultOf(_function_1);
-			    sortMe.sort(_onResultOf);
+			    sortMe.sort(Ordering.<Integer>natural().<String>onResultOf(_function).<String>onResultOf(_function_1));
 			  }
 			}
 		''')
@@ -148,8 +146,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return s;
 			      }
 			    };
-			    C.MyComparator<String> _thenComparing2 = C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1);
-			    sortMe.sort(_thenComparing2);
+			    sortMe.sort(C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1));
 			  }
 			}
 		''')
@@ -210,8 +207,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return it.toUpperCase();
 			      }
 			    };
-			    C.MyComparator<String> _thenComparing2 = C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1);
-			    sortMe.sort(_thenComparing2);
+			    sortMe.sort(C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1));
 			  }
 			}
 		''')
@@ -272,8 +268,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return it;
 			      }
 			    };
-			    C.MyComparator<String> _thenComparing2 = C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1);
-			    sortMe.sort(_thenComparing2);
+			    sortMe.sort(C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1));
 			  }
 			}
 		''')

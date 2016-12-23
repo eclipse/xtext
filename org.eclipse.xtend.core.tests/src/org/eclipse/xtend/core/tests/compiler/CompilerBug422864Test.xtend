@@ -43,8 +43,7 @@ class CompilerBug422864Test extends AbstractXtendCompilerTest {
 			        return it.getKey().getValue();
 			      }
 			    };
-			    O<Pair<Pair<Integer, Double>, String>> _c = O.doubleO().<Pair<Pair<Integer, Double>, String>>c(_function);
-			    return l.maximum(_c);
+			    return l.maximum(O.doubleO().<Pair<Pair<Integer, Double>, String>>c(_function));
 			  }
 			}
 		''')

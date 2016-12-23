@@ -3503,13 +3503,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("if ((!applied)) {");
     _builder_1.newLine();
     _builder_1.append("              ");
-    _builder_1.append("int _newLines = leafs.getNewLines();");
-    _builder_1.newLine();
-    _builder_1.append("              ");
-    _builder_1.append("int _max = Math.max(_newLines, minNewLines);");
-    _builder_1.newLine();
-    _builder_1.append("              ");
-    _builder_1.append("int newLines = Math.min(_max, maxNewLines);");
+    _builder_1.append("int newLines = Math.min(Math.max(leafs.getNewLines(), minNewLines), maxNewLines);");
     _builder_1.newLine();
     _builder_1.append("              ");
     _builder_1.append("boolean _and_1 = false;");

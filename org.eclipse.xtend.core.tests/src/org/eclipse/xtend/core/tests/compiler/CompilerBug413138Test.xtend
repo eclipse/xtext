@@ -95,7 +95,6 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			    def <U extends T> Iterable<U> save(Iterable<U> entities);
 			}
 		''', '''
-			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
@@ -103,8 +102,7 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			  private CharSeqRepository repository;
 			  
 			  public Iterable<String> m() {
-			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-			    return this.repository.<String>save(_newArrayList);
+			    return this.repository.<String>save(CollectionLiterals.<String>newArrayList());
 			  }
 			}
 		''')

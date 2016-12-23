@@ -82,10 +82,7 @@ public class CompilerBug422864Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("O<Pair<Pair<Integer, Double>, String>> _c = O.doubleO().<Pair<Pair<Integer, Double>, String>>c(_function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return l.maximum(_c);");
+    _builder_1.append("return l.maximum(O.doubleO().<Pair<Pair<Integer, Double>, String>>c(_function));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

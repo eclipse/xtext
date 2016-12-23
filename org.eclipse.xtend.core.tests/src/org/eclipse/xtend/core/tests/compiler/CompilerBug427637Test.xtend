@@ -1414,9 +1414,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			            result.add(_whitespaceData);
 			          } else {
 			            if ((!applied)) {
-			              int _newLines = leafs.getNewLines();
-			              int _max = Math.max(_newLines, minNewLines);
-			              int newLines = Math.min(_max, maxNewLines);
+			              int newLines = Math.min(Math.max(leafs.getNewLines(), minNewLines), maxNewLines);
 			              boolean _and_1 = false;
 			              if (!((newLines < 1) && (((WhitespaceInfo)leaf).getOffset() > 0))) {
 			                _and_1 = false;

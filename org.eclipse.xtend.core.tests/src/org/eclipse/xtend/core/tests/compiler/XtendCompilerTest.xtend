@@ -241,7 +241,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.HashSet;
 			import java.util.Set;
 			import org.eclipse.xtext.common.types.JvmTypeParameter;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -256,8 +255,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public LightweightTypeReference substitute(final LightweightTypeReference original) {
-			    HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();
-			    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);
+			    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, CollectionLiterals.<JvmTypeParameter>newHashSet());
 			  }
 			  
 			  protected Set<JvmTypeParameter> createVisiting() {
@@ -4270,8 +4268,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				  public void test() {
 				    StringConcatenation _builder = new StringConcatenation();
 				    _builder.append("SomeString");
-				    String _println = InputOutput.<String>println(_builder.toString());
-				    System.out.println(_println);
+				    System.out.println(InputOutput.<String>println(_builder.toString()));
 				  }
 				}
 			''')

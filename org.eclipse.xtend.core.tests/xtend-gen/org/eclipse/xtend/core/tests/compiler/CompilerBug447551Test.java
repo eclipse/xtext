@@ -201,8 +201,6 @@ public class CompilerBug447551Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.IOException;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Exceptions;");
@@ -258,10 +256,7 @@ public class CompilerBug447551Test extends AbstractXtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("C.E<Object> _copy = C.E.<Object>copy(_newArrayList);");
+    _builder_1.append("C.E<Object> _copy = C.E.<Object>copy(CollectionLiterals.<Object>newArrayList());");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("return _copy;");

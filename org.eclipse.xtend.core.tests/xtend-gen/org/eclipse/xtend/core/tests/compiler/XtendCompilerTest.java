@@ -501,8 +501,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.util.HashSet;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Set;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.common.types.JvmTypeParameter;");
@@ -535,10 +533,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public LightweightTypeReference substitute(final LightweightTypeReference original) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);");
+    _builder_1.append("return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, CollectionLiterals.<JvmTypeParameter>newHashSet());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -9475,10 +9470,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("_builder.append(\"SomeString\");");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("String _println = InputOutput.<String>println(_builder.toString());");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("System.out.println(_println);");
+    _builder.append("System.out.println(InputOutput.<String>println(_builder.toString()));");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");

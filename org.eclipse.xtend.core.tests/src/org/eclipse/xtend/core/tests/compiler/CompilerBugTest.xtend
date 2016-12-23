@@ -923,7 +923,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import org.eclipse.xtext.common.types.JvmType;
 			import org.eclipse.xtext.common.types.JvmTypeReference;
 			import org.eclipse.xtext.xbase.compiler.ErrorSafeExtensions;
 			import org.eclipse.xtext.xbase.compiler.LoopParams;
@@ -944,9 +943,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    };
 			    final Procedure2<JvmTypeReference, ITreeAppendable> _function_1 = new Procedure2<JvmTypeReference, ITreeAppendable>() {
 			      public void apply(final JvmTypeReference it, final ITreeAppendable app) {
-			        ITreeAppendable _trace = app.trace(it);
-			        JvmType _type = it.getType();
-			        _trace.append(_type);
+			        app.trace(it).append(it.getType());
 			      }
 			    };
 			    this._errorSafeExtensions.<JvmTypeReference>forEachSafely(it, refs, _function, _function_1);
@@ -1725,9 +1722,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public void putAll(final Map<? extends K, ? extends V> t) {
 			    final Consumer<Map.Entry<? extends K, ? extends V>> _function = new Consumer<Map.Entry<? extends K, ? extends V>>() {
 			      public void accept(final Map.Entry<? extends K, ? extends V> it) {
-			        K _key = it.getKey();
-			        V _value = it.getValue();
-			        MyMap.this.put(_key, _value);
+			        MyMap.this.put(it.getKey(), it.getValue());
 			      }
 			    };
 			    t.entrySet().forEach(_function);
@@ -1775,8 +1770,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private final T _weight;
 			  
 			  public int compareTo(final Weight w) {
-			    Comparable _weight = w.getWeight();
-			    return this.getWeight().compareTo(_weight);
+			    return this.getWeight().compareTo(w.getWeight());
 			  }
 			  
 			  public Weight(final T weight) {
@@ -1847,8 +1841,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private final T _weight;
 			  
 			  public int compareTo(final Weight<T> w) {
-			    T _weight = w.getWeight();
-			    return this.getWeight().compareTo(_weight);
+			    return this.getWeight().compareTo(w.getWeight());
 			  }
 			  
 			  public Weight(final T weight) {
@@ -1919,8 +1912,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private final T _weight;
 			  
 			  public int compareTo(final Weight<T> w) {
-			    T _weight = w.getWeight();
-			    return this.getWeight().compareTo(_weight);
+			    return this.getWeight().compareTo(w.getWeight());
 			  }
 			  
 			  public Weight(final T weight) {
@@ -1991,8 +1983,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private final T _weight;
 			  
 			  public int compareTo(final Weight w) {
-			    Comparable _weight = w.getWeight();
-			    return this.getWeight().compareTo(_weight);
+			    return this.getWeight().compareTo(w.getWeight());
 			  }
 			  
 			  public Weight(final T weight) {
