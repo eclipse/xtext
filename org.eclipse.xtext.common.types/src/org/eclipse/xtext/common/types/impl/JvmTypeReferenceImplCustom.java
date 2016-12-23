@@ -24,15 +24,11 @@ public class JvmTypeReferenceImplCustom extends JvmTypeReferenceImpl {
 
 	@Override
 	public EObject eResolveProxy(InternalEObject proxy) {
-		URI proxyURI = proxy.eProxyURI();
-		if (proxyURI != null && URIHelperConstants.PROTOCOL.equals(proxyURI.scheme())) {
-			if ("Objects".equals(proxyURI.segment(0))) {
-				Resource resource = eResource();
-				if (resource instanceof IJavaSchemeUriResolver) {
-					EObject result = ((IJavaSchemeUriResolver) resource).resolveJavaObjectURIProxy(proxy, this);
-					return result;
-				}
-			}
+		Resource resource = eResource();
+		if (resource instanceof IJavaSchemeUriResolver) {
+			EObject result = ((IJavaSchemeUriResolver) resource).resolveJavaObjectURIProxy(proxy, this);
+			if (result != null)
+				return result;
 		}
 		return super.eResolveProxy(proxy);
 	}

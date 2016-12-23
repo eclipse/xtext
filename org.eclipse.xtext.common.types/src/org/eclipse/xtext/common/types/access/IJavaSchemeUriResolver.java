@@ -9,12 +9,16 @@ package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * Capable of resolving java:/Object uris.
  */
 public interface IJavaSchemeUriResolver {
 	
-	public EObject resolveJavaObjectURIProxy(InternalEObject proxy, JvmTypeReference sender);
+	/**
+	 * tries to resolve the given proxy.
+	 * @return null if the proxy doesn't use a java scheme.
+	 */
+	public EObject resolveJavaObjectURIProxy(InternalEObject proxy, EObject sender);
+	
 }
