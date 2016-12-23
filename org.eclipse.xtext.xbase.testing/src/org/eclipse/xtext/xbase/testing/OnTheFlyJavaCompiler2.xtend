@@ -54,21 +54,21 @@ class OnTheFlyJavaCompiler2 {
 			if (result.compilationProblems.exists[error]) {
 				throw new IllegalArgumentException('''
 					Java code compiled with errors:
-					Â«result.compilationProblems.filter[error].join('\n')Â»
+					«result.compilationProblems.filter[error].join('\n')»
 					
 					Code was:
-					Â«codeÂ»
+					«code»
 				''')
 			}
 			return result.getClassLoader().loadClass(classname)
 		} catch (ClassNotFoundException e) {
 			throw new IllegalStateException('''
-				Couldn't load 'Â«Â»Â«classnameÂ»' 
+				Couldn't load '«»«classname»' 
 				source :
-					Â«codeÂ»
+					«code»
 				
 				PROBLEMS : 
-					Â«result.getCompilationProblems().join('\n')Â»
+					«result.getCompilationProblems().join('\n')»
 			''', e)
 		}
 
@@ -84,11 +84,11 @@ class OnTheFlyJavaCompiler2 {
 			if (result.compilationProblems.exists[error]) {
 				throw new IllegalArgumentException('''
 					Java code compiled with errors:
-					Â«result.compilationProblems.filter[error].join('\n')Â»
+					«result.compilationProblems.filter[error].join('\n')»
 					
 					Code was:
 					=========
-					Â«sources.values.join('\n=========\n')Â»
+					«sources.values.join('\n=========\n')»
 					=========
 				''')
 			}
@@ -96,21 +96,21 @@ class OnTheFlyJavaCompiler2 {
 			return sources.keySet.map[ classLoader.loadClass(it)].toMap[name]
 		} catch (ClassNotFoundException e) {
 			throw new IllegalStateException('''
-				Â«e.messageÂ» 
+				«e.message» 
 				source :
-					Â«sourcesÂ»
+					«sources»
 				
 				PROBLEMS : 
-					Â«result.getCompilationProblems().join('\n')Â»
+					«result.getCompilationProblems().join('\n')»
 			''', e)
 		}
 	}
 
 	@SuppressWarnings("unchecked") def <RT> Functions.Function0<RT> createFunction(String expression, Class<RT> returnType) {
 		val clazz = compileToClass("__Generated", '''
-			public class __Generated implements org.eclipse.xtext.xbase.lib.Functions.Function0<Â«returnType.nameÂ»> {
-				public Â«returnType.nameÂ» apply() {
-					Â«expressionÂ»
+			public class __Generated implements org.eclipse.xtext.xbase.lib.Functions.Function0<«returnType.name»> {
+				public «returnType.name» apply() {
+					«expression»
 				}
 			}
 		''')

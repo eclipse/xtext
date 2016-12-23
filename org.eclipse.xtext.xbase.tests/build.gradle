@@ -12,7 +12,6 @@ dependencies {
 
 sourceSets.test.java {
 	srcDir 'longrunning/src'
-	srcDir 'longrunning/xtend-gen'
 	srcDir 'suites'
 	srcDir 'smoke-suites'
 }
