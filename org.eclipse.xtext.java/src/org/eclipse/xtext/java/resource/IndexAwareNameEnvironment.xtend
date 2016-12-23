@@ -11,15 +11,17 @@ import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.emf.ecore.resource.Resource
 
 @FinalFieldsConstructor class IndexAwareNameEnvironment implements INameEnvironment {
 
+    val Resource resource
 	val ClassLoader classLoader
 	val IResourceDescriptions resourceDescriptions
 	val EObjectDescriptionBasedStubGenerator stubGenerator
 
 	Map<QualifiedName, NameEnvironmentAnswer> cache = newHashMap()
-	
+    
 	override cleanup() {
 		cache.clear
 	}
@@ -37,7 +39,12 @@ import org.eclipse.xtext.resource.IResourceDescriptions
 		var NameEnvironmentAnswer result = null 
 		if (candidate !== null) {
 			val resourceDescription = resourceDescriptions.getResourceDescription(candidate.EObjectURI.trimFragment)
-			val source = stubGenerator.getJavaStubSource(candidate, resourceDescription)
+			val res = resource.resourceSet.getResource(resourceDescription.URI, false)
+			val source = if (res instanceof JavaResource) {
+			    (res as JavaResource).originalSource
+			} else {
+			    stubGenerator.getJavaStubSource(candidate, resourceDescription)
+			}
 			result = new NameEnvironmentAnswer(new CompilationUnit(source.toCharArray, className.toString('/')+'.java', null), null)
 		} else {
 			val fileName = className.toString('/') + ".class"
