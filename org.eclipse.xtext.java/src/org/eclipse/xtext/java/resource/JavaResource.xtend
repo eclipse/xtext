@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.access.IJavaSchemeUriResolver
 import org.eclipse.xtext.common.types.access.TypeResource
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror
@@ -28,7 +28,6 @@ import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.IFragmentProvider
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.util.concurrent.IUnitOfWork
-import org.eclipse.xtext.common.types.JvmType
 
 class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISynchronizable<JavaResource> {
 	
@@ -120,19 +119,25 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 		]
 	}
 	
-	override resolveJavaObjectURIProxy(InternalEObject proxy, JvmTypeReference sender) {
-		val access = getIndexJvmTypeAccess();
-		if (access !== null) {
-			try {
-				val result = access.getIndexedJvmType(proxy.eProxyURI(), getResourceSet());
-				if (result !== null) {
-					return result;
-				}
-			} catch(UnknownNestedTypeException e) {
-				return proxy;
-			}
-		}
-		return EcoreUtil.resolve(proxy, sender)
+	override resolveJavaObjectURIProxy(InternalEObject proxy, EObject sender) {
+	    val URI proxyURI = proxy.eProxyURI();
+        if (proxyURI !== null && URIHelperConstants.PROTOCOL == proxyURI.scheme()) {
+            if ("Objects".equals(proxyURI.segment(0))) {
+        		val access = getIndexJvmTypeAccess();
+        		if (access !== null) {
+        			try {
+        				val result = access.getIndexedJvmType(proxy.eProxyURI(), getResourceSet());
+        				if (result !== null) {
+        					return result;
+        				}
+        			} catch(UnknownNestedTypeException e) {
+        				return proxy;
+        			}
+        		}
+        		return EcoreUtil.resolve(proxy, sender)
+            }
+        }
+        return null;
 	}
 	
 	IndexedJvmTypeAccess _access

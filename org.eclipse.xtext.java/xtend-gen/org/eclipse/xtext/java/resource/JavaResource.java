@@ -1,5 +1,6 @@
 package org.eclipse.xtext.java.resource;
 
+import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -19,7 +20,6 @@ import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.IJavaSchemeUriResolver;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
@@ -65,12 +65,13 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   
   @Override
   protected void doLoad(final InputStream inputStream, final Map<?, ?> options) throws IOException {
-    final String encoding = this.getEncoding(this.getURI(), options);
+    URI _uRI = this.getURI();
+    final String encoding = this.getEncoding(_uRI, options);
     InputStreamReader _inputStreamReader = new InputStreamReader(inputStream, encoding);
     final String contentsAsString = CharStreams.toString(_inputStreamReader);
     char[] _charArray = contentsAsString.toCharArray();
-    URI _uRI = this.getURI();
-    String _lastSegment = _uRI.lastSegment();
+    URI _uRI_1 = this.getURI();
+    String _lastSegment = _uRI_1.lastSegment();
     CompilationUnit _compilationUnit = new CompilationUnit(_charArray, _lastSegment, encoding);
     this.compilationUnit = _compilationUnit;
   }
@@ -150,26 +151,34 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   }
   
   @Override
-  public EObject resolveJavaObjectURIProxy(final InternalEObject proxy, final JvmTypeReference sender) {
-    final IndexedJvmTypeAccess access = this.getIndexJvmTypeAccess();
-    if ((access != null)) {
-      try {
-        URI _eProxyURI = proxy.eProxyURI();
-        ResourceSet _resourceSet = this.getResourceSet();
-        final EObject result = access.getIndexedJvmType(_eProxyURI, _resourceSet);
-        if ((result != null)) {
-          return result;
+  public EObject resolveJavaObjectURIProxy(final InternalEObject proxy, final EObject sender) {
+    final URI proxyURI = proxy.eProxyURI();
+    if (((proxyURI != null) && Objects.equal(URIHelperConstants.PROTOCOL, proxyURI.scheme()))) {
+      String _segment = proxyURI.segment(0);
+      boolean _equals = "Objects".equals(_segment);
+      if (_equals) {
+        final IndexedJvmTypeAccess access = this.getIndexJvmTypeAccess();
+        if ((access != null)) {
+          try {
+            URI _eProxyURI = proxy.eProxyURI();
+            ResourceSet _resourceSet = this.getResourceSet();
+            final EObject result = access.getIndexedJvmType(_eProxyURI, _resourceSet);
+            if ((result != null)) {
+              return result;
+            }
+          } catch (final Throwable _t) {
+            if (_t instanceof IndexedJvmTypeAccess.UnknownNestedTypeException) {
+              final IndexedJvmTypeAccess.UnknownNestedTypeException e = (IndexedJvmTypeAccess.UnknownNestedTypeException)_t;
+              return proxy;
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
+          }
         }
-      } catch (final Throwable _t) {
-        if (_t instanceof IndexedJvmTypeAccess.UnknownNestedTypeException) {
-          final IndexedJvmTypeAccess.UnknownNestedTypeException e = (IndexedJvmTypeAccess.UnknownNestedTypeException)_t;
-          return proxy;
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
+        return EcoreUtil.resolve(proxy, sender);
       }
     }
-    return EcoreUtil.resolve(proxy, sender);
+    return null;
   }
   
   private IndexedJvmTypeAccess _access;
@@ -180,7 +189,8 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
       Map<String, Object> _protocolToFactoryMap = _resourceFactoryRegistry.getProtocolToFactoryMap();
       final Object provider = _protocolToFactoryMap.get(URIHelperConstants.PROTOCOL);
       if ((provider instanceof AbstractJvmTypeProvider)) {
-        this._access = ((AbstractJvmTypeProvider)provider).getIndexedJvmTypeAccess();
+        IndexedJvmTypeAccess _indexedJvmTypeAccess = ((AbstractJvmTypeProvider)provider).getIndexedJvmTypeAccess();
+        this._access = _indexedJvmTypeAccess;
       }
     }
     return this._access;

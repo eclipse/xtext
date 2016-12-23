@@ -2,21 +2,21 @@ package org.eclipse.xtext.java.tests
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider
+import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.resource.IResourceDescription
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
-import java.util.List
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 
 @RunWith(XtextRunner)
 @InjectWith(JavaInjectorProvider)
@@ -38,7 +38,8 @@ class JavaSourceLanguageTest {
         val nestedType = (superResource.contents.head as JvmGenericType).allNestedTypes.head
         val resource = rs.resources.findFirst[URI.toString.endsWith('MySubClass.java')]
         val clazz = resource.contents.head as JvmGenericType
-        val referenced = clazz.declaredOperations.head.returnType.type
+        val returnType = clazz.declaredOperations.head.returnType
+        val referenced = returnType.type
         Assert.assertSame(nestedType, referenced)
     }
     
@@ -57,6 +58,22 @@ class JavaSourceLanguageTest {
         val clazz = resource.contents.head as JvmGenericType
         val referenced = clazz.declaredOperations.head.returnType
         Assert.assertNotNull((referenced as JvmParameterizedTypeReference).arguments.head)
+    }
+    
+    @Test def void testAnnotation() {
+        val rs = resourceSet('MyAnnotation.java' -> '''
+            public @interface MyAnnotation {
+            }
+        ''', 'MyClass.java' -> '''
+            @MyAnnotation
+            public interface MyClass {
+            }
+        ''')
+        val annotation = rs.resources.findFirst[URI.toString.endsWith('MyAnnotation.java')].contents.head
+        val resource = rs.resources.findFirst[URI.toString.endsWith('MyClass.java')]
+        val clazz = resource.contents.head as JvmGenericType
+        val annotationRef = clazz.annotations.head
+        Assert.assertSame(annotation, annotationRef.annotation)
     }
 
     @Inject Provider<XtextResourceSet> resourceSetProvider

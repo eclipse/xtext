@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -93,8 +95,8 @@ public class JavaSourceLanguageTest {
     final JvmGenericType clazz = ((JvmGenericType) _head_1);
     Iterable<JvmOperation> _declaredOperations = clazz.getDeclaredOperations();
     JvmOperation _head_2 = IterableExtensions.<JvmOperation>head(_declaredOperations);
-    JvmTypeReference _returnType = _head_2.getReturnType();
-    final JvmType referenced = _returnType.getType();
+    final JvmTypeReference returnType = _head_2.getReturnType();
+    final JvmType referenced = returnType.getType();
     Assert.assertSame(nestedType, referenced);
   }
   
@@ -140,6 +142,48 @@ public class JavaSourceLanguageTest {
     Assert.assertNotNull(_head_2);
   }
   
+  @Test
+  public void testAnnotation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public @interface MyAnnotation {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("MyAnnotation.java", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@MyAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("public interface MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("MyClass.java", _builder_1.toString());
+    final XtextResourceSet rs = this.resourceSet(_mappedTo, _mappedTo_1);
+    EList<Resource> _resources = rs.getResources();
+    final Function1<Resource, Boolean> _function = (Resource it) -> {
+      URI _uRI = it.getURI();
+      String _string = _uRI.toString();
+      return Boolean.valueOf(_string.endsWith("MyAnnotation.java"));
+    };
+    Resource _findFirst = IterableExtensions.<Resource>findFirst(_resources, _function);
+    EList<EObject> _contents = _findFirst.getContents();
+    final EObject annotation = IterableExtensions.<EObject>head(_contents);
+    EList<Resource> _resources_1 = rs.getResources();
+    final Function1<Resource, Boolean> _function_1 = (Resource it) -> {
+      URI _uRI = it.getURI();
+      String _string = _uRI.toString();
+      return Boolean.valueOf(_string.endsWith("MyClass.java"));
+    };
+    final Resource resource = IterableExtensions.<Resource>findFirst(_resources_1, _function_1);
+    EList<EObject> _contents_1 = resource.getContents();
+    EObject _head = IterableExtensions.<EObject>head(_contents_1);
+    final JvmGenericType clazz = ((JvmGenericType) _head);
+    EList<JvmAnnotationReference> _annotations = clazz.getAnnotations();
+    final JvmAnnotationReference annotationRef = IterableExtensions.<JvmAnnotationReference>head(_annotations);
+    JvmAnnotationType _annotation = annotationRef.getAnnotation();
+    Assert.assertSame(annotation, _annotation);
+  }
+  
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
   
@@ -152,7 +196,9 @@ public class JavaSourceLanguageTest {
   protected XtextResourceSet resourceSet(final Pair<String, String>... files) {
     final XtextResourceSet result = this.resourceSetProvider.get();
     this.typeProviderFactory.createTypeProvider(result);
-    result.setClasspathURIContext(this.getClass().getClassLoader());
+    Class<? extends JavaSourceLanguageTest> _class = this.getClass();
+    ClassLoader _classLoader = _class.getClassLoader();
+    result.setClasspathURIContext(_classLoader);
     URIConverter _uRIConverter = result.getURIConverter();
     EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
     _uRIHandlers.clear();

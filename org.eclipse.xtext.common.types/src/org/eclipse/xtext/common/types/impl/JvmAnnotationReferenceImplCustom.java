@@ -13,8 +13,12 @@ import java.util.Set;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.access.IJavaSchemeUriResolver;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -24,6 +28,17 @@ import com.google.common.collect.Sets;
  */
 public class JvmAnnotationReferenceImplCustom extends JvmAnnotationReferenceImpl {
 
+	@Override
+	public EObject eResolveProxy(InternalEObject proxy) {
+		Resource resource = eResource();
+		if (resource instanceof IJavaSchemeUriResolver) {
+			EObject result = ((IJavaSchemeUriResolver) resource).resolveJavaObjectURIProxy(proxy, this);
+			if (result != null)
+				return result;
+		}
+		return super.eResolveProxy(proxy);
+	}
+	
 	@Override
 	public EList<JvmAnnotationValue> getValues() {
 		EList<JvmAnnotationValue> explicitValues = getExplicitValues();
