@@ -118,7 +118,9 @@ public final class ToStringBuilder {
    */
   public ToStringBuilder(final Object instance) {
     this.instance = instance;
-    this.typeName = instance.getClass().getSimpleName();
+    Class<?> _class = instance.getClass();
+    String _simpleName = _class.getSimpleName();
+    this.typeName = _simpleName;
   }
   
   /**
@@ -167,8 +169,11 @@ public final class ToStringBuilder {
   public ToStringBuilder addDeclaredFields() {
     Class<?> _class = this.instance.getClass();
     Field[] _declaredFields = _class.getDeclaredFields();
-    final Consumer<Field> _function = (Field it) -> {
-      this.addField(it);
+    final Consumer<Field> _function = new Consumer<Field>() {
+      @Override
+      public void accept(final Field it) {
+        ToStringBuilder.this.addField(it);
+      }
     };
     ((List<Field>)Conversions.doWrapArray(_declaredFields)).forEach(_function);
     return this;
@@ -182,8 +187,11 @@ public final class ToStringBuilder {
   public ToStringBuilder addAllFields() {
     Class<?> _class = this.instance.getClass();
     ArrayList<Field> _allDeclaredFields = this.getAllDeclaredFields(_class);
-    final Consumer<Field> _function = (Field it) -> {
-      this.addField(it);
+    final Consumer<Field> _function = new Consumer<Field>() {
+      @Override
+      public void accept(final Field it) {
+        ToStringBuilder.this.addField(it);
+      }
     };
     _allDeclaredFields.forEach(_function);
     return this;
@@ -197,9 +205,12 @@ public final class ToStringBuilder {
   public ToStringBuilder addField(final String fieldName) {
     Class<?> _class = this.instance.getClass();
     ArrayList<Field> _allDeclaredFields = this.getAllDeclaredFields(_class);
-    final Function1<Field, Boolean> _function = (Field it) -> {
-      String _name = it.getName();
-      return Boolean.valueOf(Objects.equal(_name, fieldName));
+    final Function1<Field, Boolean> _function = new Function1<Field, Boolean>() {
+      @Override
+      public Boolean apply(final Field it) {
+        String _name = it.getName();
+        return Boolean.valueOf(Objects.equal(_name, fieldName));
+      }
     };
     Field _findFirst = IterableExtensions.<Field>findFirst(_allDeclaredFields, _function);
     return this.addField(_findFirst);
@@ -216,7 +227,9 @@ public final class ToStringBuilder {
         ToStringBuilder _xblockexpression = null;
         {
           field.setAccessible(true);
-          _xblockexpression = this.add(field.getName(), field.get(this.instance));
+          String _name = field.getName();
+          Object _get = field.get(this.instance);
+          _xblockexpression = this.add(_name, _get);
         }
         _xifexpression = _xblockexpression;
       }
@@ -391,7 +404,8 @@ public final class ToStringBuilder {
         if (this.multiLine) {
           sb.newLine();
         }
-        this.internalToString(iterator.next(), sb);
+        Object _next = iterator.next();
+        this.internalToString(_next, sb);
         boolean _hasNext = iterator.hasNext();
         if (_hasNext) {
           sb.append(",");
@@ -423,7 +437,8 @@ public final class ToStringBuilder {
       {
         Field[] _declaredFields = current.getDeclaredFields();
         Iterables.<Field>addAll(result, ((Iterable<? extends Field>)Conversions.doWrapArray(_declaredFields)));
-        current = current.getSuperclass();
+        Class<?> _superclass = current.getSuperclass();
+        current = _superclass;
       }
     } while((current != null));
     return result;

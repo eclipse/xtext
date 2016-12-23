@@ -70,7 +70,7 @@ public class StringConcatenation implements CharSequence {
 	 * string representation that can be obtained by {@link #toString()}. Insignificant parts will not be considered by
 	 * {@link #length()}, {@link #charAt(int)} or {@link #subSequence(int, int)}.
 	 */
-	private final ArrayList<String> segments = new ArrayList<>(SEGMENTS_INITIAL_SIZE);
+	private final ArrayList<String> segments = new ArrayList<String>(SEGMENTS_INITIAL_SIZE);
 
 	/**
 	 * Internal hint for the size of segments. We cache this value so we do not have to perform costly calculations. 
@@ -608,7 +608,7 @@ public class StringConcatenation implements CharSequence {
 		final int length = text.length();
 		int nextLineOffset = 0;
 
-		final List<String> result = new ArrayList<>(5);
+		final List<String> result = new ArrayList<String>(5);
 		while (idx < length) {
 			char currentChar = text.charAt(idx);
 			// check for \r or \r\n

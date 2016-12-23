@@ -6,7 +6,6 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
@@ -91,56 +90,54 @@ public class ToStringHelperTest {
   @Test
   public void testToString() {
     final ToStringHelper helper = new ToStringHelper();
-    Assert.assertEquals(
-      ToStringHelperTest.toUnix(
-        new Function0<String>() {
-          public String apply() {
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("MyEntity [");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("boolProp = true");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("intProp = 42");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("myList = ArrayList (");
-            _builder.newLine();
-            _builder.append("    ");
-            _builder.append("\"foo\",");
-            _builder.newLine();
-            _builder.append("    ");
-            _builder.append("\"bar\",");
-            _builder.newLine();
-            _builder.append("    ");
-            _builder.append("\"baz\"");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append(")");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("friend = true");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("42");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("[foo, bar, baz]");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("null");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("CLASS");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("policy = CLASS");
-            _builder.newLine();
-            _builder.append("]");
-            return _builder.toString();
-          }
-        }.apply()), helper.toString(new ToStringHelperTest.MyEntity(new ToStringHelperTest.MyEntity())));
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("MyEntity [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("boolProp = true");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("intProp = 42");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("myList = ArrayList (");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"foo\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"bar\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"baz\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("friend = true");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("42");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("[foo, bar, baz]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("null");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("CLASS");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("policy = CLASS");
+    _builder.newLine();
+    _builder.append("]");
+    String _unix = ToStringHelperTest.toUnix(_builder.toString());
+    ToStringHelperTest.MyEntity _myEntity = new ToStringHelperTest.MyEntity();
+    ToStringHelperTest.MyEntity _myEntity_1 = new ToStringHelperTest.MyEntity(_myEntity);
+    String _string = helper.toString(_myEntity_1);
+    Assert.assertEquals(_unix, _string);
   }
   
   @Test
@@ -149,9 +146,9 @@ public class ToStringHelperTest {
     ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity);
     ToStringBuilder _singleLine = _toStringBuilder.singleLine();
     final ToStringBuilder helper = _singleLine.addAllFields();
+    String _string = helper.toString();
     Assert.assertEquals(
-      "MyEntity [boolProp = true, intProp = 42, myList = ArrayList (\"foo\",\"bar\",\"baz\"), friend = null, policy = CLASS]", 
-      helper.toString());
+      "MyEntity [boolProp = true, intProp = 42, myList = ArrayList (\"foo\",\"bar\",\"baz\"), friend = null, policy = CLASS]", _string);
   }
   
   @Test
@@ -161,7 +158,8 @@ public class ToStringHelperTest {
     ToStringBuilder _singleLine = _toStringBuilder.singleLine();
     ToStringBuilder _hideFieldNames = _singleLine.hideFieldNames();
     final ToStringBuilder helper = _hideFieldNames.addAllFields();
-    Assert.assertEquals("MyEntity [true, 42, ArrayList (\"foo\",\"bar\",\"baz\"), null, CLASS]", helper.toString());
+    String _string = helper.toString();
+    Assert.assertEquals("MyEntity [true, 42, ArrayList (\"foo\",\"bar\",\"baz\"), null, CLASS]", _string);
   }
   
   @Test
@@ -170,41 +168,37 @@ public class ToStringHelperTest {
     ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity);
     ToStringBuilder _skipNulls = _toStringBuilder.skipNulls();
     final ToStringBuilder helper = _skipNulls.addAllFields();
-    Assert.assertEquals(
-      ToStringHelperTest.toUnix(
-        new Function0<String>() {
-          public String apply() {
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("MyEntity [");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("boolProp = true");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("intProp = 42");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("myList = ArrayList (");
-            _builder.newLine();
-            _builder.append("    ");
-            _builder.append("\"foo\",");
-            _builder.newLine();
-            _builder.append("    ");
-            _builder.append("\"bar\",");
-            _builder.newLine();
-            _builder.append("    ");
-            _builder.append("\"baz\"");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append(")");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("policy = CLASS");
-            _builder.newLine();
-            _builder.append("]");
-            return _builder.toString();
-          }
-        }.apply()), helper.toString());
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("MyEntity [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("boolProp = true");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("intProp = 42");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("myList = ArrayList (");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"foo\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"bar\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"baz\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("policy = CLASS");
+    _builder.newLine();
+    _builder.append("]");
+    String _unix = ToStringHelperTest.toUnix(_builder.toString());
+    String _string = helper.toString();
+    Assert.assertEquals(_unix, _string);
   }
   
   @Test
@@ -213,23 +207,19 @@ public class ToStringHelperTest {
     ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity);
     ToStringBuilder _add = _toStringBuilder.add("boolProp", Boolean.valueOf(false));
     final ToStringBuilder helper = _add.addField("intProp");
-    Assert.assertEquals(
-      ToStringHelperTest.toUnix(
-        new Function0<String>() {
-          public String apply() {
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("MyEntity [");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("boolProp = false");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("intProp = 42");
-            _builder.newLine();
-            _builder.append("]");
-            return _builder.toString();
-          }
-        }.apply()), helper.toString());
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("MyEntity [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("boolProp = false");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("intProp = 42");
+    _builder.newLine();
+    _builder.append("]");
+    String _unix = ToStringHelperTest.toUnix(_builder.toString());
+    String _string = helper.toString();
+    Assert.assertEquals(_unix, _string);
   }
   
   @Test
@@ -238,25 +228,21 @@ public class ToStringHelperTest {
     final ToStringHelperTest.OtherClass obj = new ToStringHelperTest.OtherClass();
     obj.name = "foo";
     obj.other = obj;
-    Assert.assertEquals(
-      ToStringHelperTest.toUnix(
-        new Function0<String>() {
-          public String apply() {
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("OtherClass [");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("other = ");
-            String _string = obj.toString();
-            _builder.append(_string, "  ");
-            _builder.newLineIfNotEmpty();
-            _builder.append("  ");
-            _builder.append("name = \"foo\"");
-            _builder.newLine();
-            _builder.append("]");
-            return _builder.toString();
-          }
-        }.apply()), helper.toString(obj));
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("OtherClass [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("other = ");
+    String _string = obj.toString();
+    _builder.append(_string, "  ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("name = \"foo\"");
+    _builder.newLine();
+    _builder.append("]");
+    String _unix = ToStringHelperTest.toUnix(_builder.toString());
+    String _string_1 = helper.toString(obj);
+    Assert.assertEquals(_unix, _string_1);
   }
   
   @Test
@@ -265,25 +251,21 @@ public class ToStringHelperTest {
     final ToStringHelperTest.DataClass obj = new ToStringHelperTest.DataClass();
     obj.other = obj;
     obj.name = "test";
-    Assert.assertEquals(
-      ToStringHelperTest.toUnix(
-        new Function0<String>() {
-          public String apply() {
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("DataClass [");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("other = DataClass@");
-            int _identityHashCode = System.identityHashCode(obj);
-            _builder.append(_identityHashCode, "  ");
-            _builder.newLineIfNotEmpty();
-            _builder.append("  ");
-            _builder.append("name = \"test\"");
-            _builder.newLine();
-            _builder.append("]");
-            return _builder.toString();
-          }
-        }.apply()), helper.toString(obj));
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("DataClass [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("other = DataClass@");
+    int _identityHashCode = System.identityHashCode(obj);
+    _builder.append(_identityHashCode, "  ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("name = \"test\"");
+    _builder.newLine();
+    _builder.append("]");
+    String _unix = ToStringHelperTest.toUnix(_builder.toString());
+    String _string = helper.toString(obj);
+    Assert.assertEquals(_unix, _string);
   }
   
   public static String toUnix(final String s) {
