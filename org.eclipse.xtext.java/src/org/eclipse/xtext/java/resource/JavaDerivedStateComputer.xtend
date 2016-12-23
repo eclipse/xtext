@@ -112,7 +112,7 @@ class JavaDerivedStateComputer {
 		if (data === null)
 			throw new IllegalStateException("no index installed")
 		// TODO use container manager
-		val nameEnv = new IndexAwareNameEnvironment(classLoader, data, stubGenerator)
+		val nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, stubGenerator)
 		val compiler = new Compiler(nameEnv, DefaultErrorHandlingPolicies.proceedWithAllProblems(), resource.compilerOptions, [
 			if (Arrays.equals(it.fileName, compilationUnit.fileName)) {
 				val map = newHashMap

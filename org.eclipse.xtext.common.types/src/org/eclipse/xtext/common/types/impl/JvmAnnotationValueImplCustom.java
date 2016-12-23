@@ -7,9 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.access.IJavaSchemeUriResolver;
 
 public abstract class JvmAnnotationValueImplCustom extends JvmAnnotationValueImpl {
+	
+	@Override
+	public EObject eResolveProxy(InternalEObject proxy) {
+		Resource resource = eResource();
+		if (resource instanceof IJavaSchemeUriResolver) {
+			EObject result = ((IJavaSchemeUriResolver) resource).resolveJavaObjectURIProxy(proxy, this);
+			if (result != null)
+				return result;
+		}
+		return super.eResolveProxy(proxy);
+	}
 	
 	@Override
 	public String getValueName() {

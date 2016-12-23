@@ -28,6 +28,9 @@ import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.IFragmentProvider
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.util.concurrent.IUnitOfWork
+import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.resource.IFragmentProvider.Fallback
 
 class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISynchronizable<JavaResource> {
 	
@@ -126,9 +129,19 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
         		val access = getIndexJvmTypeAccess();
         		if (access !== null) {
         			try {
-        				val result = access.getIndexedJvmType(proxy.eProxyURI(), getResourceSet());
-        				if (result !== null) {
-        					return result;
+        				var result = access.getIndexedJvmType(proxy.eProxyURI().trimFragment, getResourceSet());
+        				if (result instanceof JvmDeclaredType) {
+        				    result = new JavaFragmentProvider().getEObject(result.eResource, proxy.eProxyURI.fragment, new Fallback() {
+                                override getEObject(String fragment) {
+                                    return null;
+                                }
+                                
+                                override getFragment(EObject obj) {
+                                    return null;
+                                }
+                            });
+                            if (result !== null)
+        					   return result;
         				}
         			} catch(UnknownNestedTypeException e) {
         				return proxy;
@@ -138,6 +151,26 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
             }
         }
         return null;
+	}
+	
+	static class JavaFragmentProvider extends AbstractClassMirror {
+	    
+        override protected getTypeName() {
+            throw new UnsupportedOperationException("not supported")
+        }
+        
+        override protected getTypeName(JvmType type) {
+            return type.getQualifiedName("$")
+        }
+        
+        override initialize(TypeResource typeResource) {
+            throw new UnsupportedOperationException("not supported")
+        }
+        
+        override isSealed() {
+            return true
+        }
+	    
 	}
 	
 	IndexedJvmTypeAccess _access
@@ -208,5 +241,9 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 	override getURIFragment(EObject eObject) {
 		m.getFragment(eObject, fallback)
 	}
+    
+    def getOriginalSource() {
+        String.copyValueOf(this.compilationUnit.contents)
+    }
 	
 }

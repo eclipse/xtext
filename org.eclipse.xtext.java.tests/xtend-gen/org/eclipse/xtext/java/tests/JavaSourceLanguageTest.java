@@ -1,5 +1,6 @@
 package org.eclipse.xtext.java.tests;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.OutputStream;
@@ -15,6 +16,8 @@ import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -147,11 +150,23 @@ public class JavaSourceLanguageTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public @interface MyAnnotation {");
     _builder.newLine();
+    _builder.append("    ");
+    _builder.append("String value();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Class<?>[] imported() default {};");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("boolean statementExpression() default false;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("boolean constantExpression() default false;");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     Pair<String, String> _mappedTo = Pair.<String, String>of("MyAnnotation.java", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("@MyAnnotation");
+    _builder_1.append("@MyAnnotation(value=\"foo\", constantExpression = true)");
     _builder_1.newLine();
     _builder_1.append("public interface MyClass {");
     _builder_1.newLine();
@@ -180,6 +195,26 @@ public class JavaSourceLanguageTest {
     final JvmGenericType clazz = ((JvmGenericType) _head);
     EList<JvmAnnotationReference> _annotations = clazz.getAnnotations();
     final JvmAnnotationReference annotationRef = IterableExtensions.<JvmAnnotationReference>head(_annotations);
+    EList<JvmAnnotationValue> _values = annotationRef.getValues();
+    final Function1<JvmAnnotationValue, Boolean> _function_2 = (JvmAnnotationValue it) -> {
+      JvmOperation _operation = it.getOperation();
+      String _simpleName = _operation.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, "constantExpression"));
+    };
+    final JvmAnnotationValue value = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function_2);
+    EList<Boolean> _values_1 = ((JvmBooleanAnnotationValue) value).getValues();
+    Boolean _head_1 = IterableExtensions.<Boolean>head(_values_1);
+    Assert.assertTrue((_head_1).booleanValue());
+    EList<JvmAnnotationValue> _values_2 = annotationRef.getValues();
+    final Function1<JvmAnnotationValue, Boolean> _function_3 = (JvmAnnotationValue it) -> {
+      JvmOperation _operation = it.getOperation();
+      String _simpleName = _operation.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, "statementExpression"));
+    };
+    final JvmAnnotationValue value2 = IterableExtensions.<JvmAnnotationValue>findFirst(_values_2, _function_3);
+    EList<Boolean> _values_3 = ((JvmBooleanAnnotationValue) value2).getValues();
+    Boolean _head_2 = IterableExtensions.<Boolean>head(_values_3);
+    Assert.assertFalse((_head_2).booleanValue());
     JvmAnnotationType _annotation = annotationRef.getAnnotation();
     Assert.assertSame(annotation, _annotation);
   }
