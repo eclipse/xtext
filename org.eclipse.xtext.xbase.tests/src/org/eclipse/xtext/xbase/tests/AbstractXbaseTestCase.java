@@ -11,11 +11,11 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
 import org.junit.Assert;
@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge
@@ -50,6 +51,8 @@ public abstract class AbstractXbaseTestCase extends Assert {
 	private ParseHelper<XExpression> parseHelper;
 	@Inject
 	private ValidationTestHelper validationHelper;
+	@Inject
+	private Provider<XtextResourceSet> resourceSetProvider;
 
 	protected XExpression expression(CharSequence string, boolean resolve) throws Exception {
 		XExpression parse = parseHelper.parse(string);
@@ -59,10 +62,14 @@ public abstract class AbstractXbaseTestCase extends Assert {
 	}
 
 	protected Resource newResource(CharSequence input) throws IOException {
-		XtextResourceSet set = get(XtextResourceSet.class);
+		XtextResourceSet set = newXtextResourceSet();
 		Resource resource = set.createResource(URI.createURI("Test.___xbase"));
 		resource.load(new StringInputStream(input.toString()), null);
 		return resource;
+	}
+
+	private XtextResourceSet newXtextResourceSet() {
+		return resourceSetProvider.get();
 	}
 
 }
