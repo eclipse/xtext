@@ -31,6 +31,8 @@ configurations {
 	suitesRuntime.extendsFrom testRuntime
 }
 
+generateLongrunningXtext.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
+
 jar {
 	from (sourceSets.longrunning.output)
 	from (sourceSets.suites.output)
