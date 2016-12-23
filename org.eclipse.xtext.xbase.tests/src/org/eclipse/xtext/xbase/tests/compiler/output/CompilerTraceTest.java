@@ -459,9 +459,8 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testMemberFeatureCall_01() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"String _string = \"\".toString();\n" + 
-				"String _string_1 = _string.#toString#();\n" + 
-				"return _string_1;", 
+				"String _string = \"\".toString().#toString#();\n" + 
+				"return _string;", 
 				"''.toString.#toString#()");
 	}
 
@@ -469,9 +468,8 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testMemberFeatureCall_02() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"String _string = \"\".toS#tr#ing();\n" + 
-				"String _string_1 = _string.toString();\n" + 
-				"return _string_1;", 
+				"String _string = \"\".toS#tr#ing().toString();\n" + 
+				"return _string;", 
 				"''.#toString#().toString");
 	}
 	
@@ -479,9 +477,8 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testMemberFeatureCall_03() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"String _string = \"\".toString();\n" + 
-				"String _string_1 = _stri#ng.to#String();\n" + 
-				"return _string_1;", 
+				"String _string = \"\".toStri#ng().to#String();\n" + 
+				"return _string;", 
 				"#''.toString.toString#");
 	}
 	
@@ -489,9 +486,8 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testMemberFeatureCall_04() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"St#ri#ng _string = \"\".toString();\n" + 
-				"String _string_1 = _string.toString();\n" + 
-				"return _string_1;", 
+				"String _string = #\"\".toString()#.toString();\n" + 
+				"return _string;", 
 				"#''.toString()#.toString");
 	}
 	
