@@ -2,6 +2,18 @@
  * Configuration of Xtend compiler.
  */
 
-xtext.version = versions.xtext_bootstrap
-
 generateXtext.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
+
+def isTestProject = name.endsWith('tests')
+
+sourcesJar {
+	if (isTestProject) {
+		from (sourceSets.test.xtendOutputDir) {
+			include '**/*._trace'
+		}
+	} else {
+		from (sourceSets.main.xtendOutputDir) {
+			include '**/*._trace'
+		}
+	}
+}
