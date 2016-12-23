@@ -125,10 +125,7 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("} else {");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("ResourceSet _resourceSet = param.getResourceSet();");
-    _builder_1.newLine();
-    _builder_1.append("            ");
-    _builder_1.append("_xifexpression = this.newCancelIndiciator(_resourceSet);");
+    _builder_1.append("_xifexpression = this.newCancelIndiciator(param.getResourceSet());");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("}");

@@ -58,8 +58,7 @@ class CompilerBug459920Test extends AbstractXtendCompilerTest {
 			            };
 			            _xifexpression = _function;
 			          } else {
-			            ResourceSet _resourceSet = param.getResourceSet();
-			            _xifexpression = this.newCancelIndiciator(_resourceSet);
+			            _xifexpression = this.newCancelIndiciator(param.getResourceSet());
 			          }
 			          ((CancelableUnitOfWork<?, ?>)work).setCancelIndicator(_xifexpression);
 			        }

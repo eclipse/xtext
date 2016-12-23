@@ -57,10 +57,7 @@ public class CompilerBug440902Test extends AbstractXtendCompilerTest {
     _builder_1.append("public String m2(final Object o) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("String _m = this.m();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _m.toString();");
+    _builder_1.append("return this.m().toString();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -5646,8 +5646,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.io.IOException;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
     _builder_1.newLine();
     _builder_1.append("import java.util.List;");
@@ -5675,9 +5673,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(\"file1.ext\");");
-    _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.append("final Function1<String, File> _function = new Function1<String, File>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
@@ -5687,10 +5682,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("File _file = new File(f);");
-    _builder_1.newLine();
-    _builder_1.append("            ");
-    _builder_1.append("return _file.getCanonicalFile();");
+    _builder_1.append("return new File(f).getCanonicalFile();");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("} catch (Throwable _e) {");
@@ -5708,7 +5700,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xtrycatchfinallyexpression = ListExtensions.<String, File>map(_newArrayList, _function);");
+    _builder_1.append("_xtrycatchfinallyexpression = ListExtensions.<String, File>map(CollectionLiterals.<String>newArrayList(\"file1.ext\"), _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("} catch (final Throwable _t) {");
@@ -5765,8 +5757,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Map;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
@@ -5789,9 +5779,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Map<Object, String> bar() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function1<String, Object> _function = new Function1<String, Object>() {");
@@ -5821,7 +5808,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.<Object, String>toMap(_newArrayList, _function);");
+    _builder_1.append("return IterableExtensions.<Object, String>toMap(CollectionLiterals.<String>newArrayList(), _function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -8744,10 +8731,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void test(final String x, final String y, final int integer) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Foo _foo = new Foo();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("_foo.test(this.foo, Foo.FOO, Integer.MAX_VALUE);");
+    _builder_1.append("new Foo().test(this.foo, Foo.FOO, Integer.MAX_VALUE);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -9619,10 +9603,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("_builder.append(\"Hello World\");");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("String _string = _builder.toString();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("this.setX(_string.trim());");
+    _builder_1.append("this.setX(_builder.toString().trim());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -10402,10 +10383,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public Object bar() throws Throwable {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("String _string = new String();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Object _get = this._reflectExtensions.<Object>get(_string, \"toString\");");
+    _builder_1.append("Object _get = this._reflectExtensions.<Object>get(new String(), \"toString\");");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("Object _get_1 = null;");
@@ -10466,10 +10444,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("String _elvis = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Foo _foo = new Foo();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("String _field = _foo.field;");
+    _builder_1.append("String _field = new Foo().field;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("String _string = null;");

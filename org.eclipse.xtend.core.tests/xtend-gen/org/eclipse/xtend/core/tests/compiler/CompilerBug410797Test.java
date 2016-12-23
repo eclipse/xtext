@@ -81,8 +81,6 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.ArrayList;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.List;");
-    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
@@ -127,12 +125,6 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("List<ArrayList<F>> _map = ListExtensions.<E, ArrayList<F>>map(list, _function);");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("Iterable<F> _flatten = Iterables.<F>concat(_map);");
-    _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.append("final Function1<F, D> _function_1 = new Function1<F, D>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
@@ -148,7 +140,7 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = IterableExtensions.<F, D>map(_flatten, _function_1);");
+    _builder_1.append("_xblockexpression = IterableExtensions.<F, D>map(Iterables.<F>concat(ListExtensions.<E, ArrayList<F>>map(list, _function)), _function_1);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -236,8 +228,6 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.ArrayList;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.List;");
-    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
@@ -264,9 +254,6 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("final G g = new G();");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("ArrayList<E> _newArrayList = CollectionLiterals.<E>newArrayList();");
-    _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.append("final Function1<E, ArrayList<F>> _function = new Function1<E, ArrayList<F>>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
@@ -280,12 +267,6 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("};");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("List<ArrayList<F>> _map = ListExtensions.<E, ArrayList<F>>map(_newArrayList, _function);");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("Iterable<F> _flatten = Iterables.<F>concat(_map);");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("final Function1<F, D> _function_1 = new Function1<F, D>() {");
@@ -303,7 +284,7 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = IterableExtensions.<F, D>map(_flatten, _function_1);");
+    _builder_1.append("_xblockexpression = IterableExtensions.<F, D>map(Iterables.<F>concat(ListExtensions.<E, ArrayList<F>>map(CollectionLiterals.<E>newArrayList(), _function)), _function_1);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -388,8 +369,6 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.ArrayList;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.List;");
-    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
@@ -407,9 +386,6 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Iterable<D> m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("ArrayList<E> _newArrayList = CollectionLiterals.<E>newArrayList();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function1<E, ArrayList<F>> _function = new Function1<E, ArrayList<F>>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -423,12 +399,6 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("List<ArrayList<F>> _map = ListExtensions.<E, ArrayList<F>>map(_newArrayList, _function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Iterable<F> _flatten = Iterables.<F>concat(_map);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function1<F, D> _function_1 = new Function1<F, D>() {");
@@ -449,7 +419,7 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.<F, D>map(_flatten, _function_1);");
+    _builder_1.append("return IterableExtensions.<F, D>map(Iterables.<F>concat(ListExtensions.<E, ArrayList<F>>map(CollectionLiterals.<E>newArrayList(), _function)), _function_1);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -613,9 +583,6 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("public int getLenght() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("List<LeafInfo> _leafs = this.getLeafs();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function2<Integer, LeafInfo, Integer> _function = new Function2<Integer, LeafInfo, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -646,7 +613,7 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return (int) IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);");
+    _builder_1.append("return (int) IterableExtensions.<LeafInfo, Integer>fold(this.getLeafs(), Integer.valueOf(0), _function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -655,9 +622,6 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int getNewLines() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("List<LeafInfo> _leafs = this.getLeafs();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function2<Integer, LeafInfo, Integer> _function = new Function2<Integer, LeafInfo, Integer>() {");
@@ -678,7 +642,7 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return (int) IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);");
+    _builder_1.append("return (int) IterableExtensions.<LeafInfo, Integer>fold(this.getLeafs(), Integer.valueOf(0), _function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -687,12 +651,6 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int getNewLinesInComments() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("List<LeafInfo> _leafs = this.getLeafs();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(_leafs, CommentInfo.class);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function2<Integer, CommentInfo, Integer> _function = new Function2<Integer, CommentInfo, Integer>() {");
@@ -713,7 +671,7 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return (int) IterableExtensions.<CommentInfo, Integer>fold(_filter, Integer.valueOf(0), _function);");
+    _builder_1.append("return (int) IterableExtensions.<CommentInfo, Integer>fold(Iterables.<CommentInfo>filter(this.getLeafs(), CommentInfo.class), Integer.valueOf(0), _function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -724,13 +682,7 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("public boolean containsComment() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("List<LeafInfo> _leafs = this.getLeafs();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(_leafs, CommentInfo.class);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("int _size = IterableExtensions.size(_filter);");
+    _builder_1.append("int _size = IterableExtensions.size(Iterables.<CommentInfo>filter(this.getLeafs(), CommentInfo.class));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return (_size > 0);");

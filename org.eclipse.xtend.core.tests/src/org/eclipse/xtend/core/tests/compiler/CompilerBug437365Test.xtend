@@ -39,11 +39,9 @@ class CompilerBug437365Test extends AbstractXtendCompilerTest {
 			    final List<String>[] arrayOfList = new List[4];
 			    LinkedList<String> _linkedList = new LinkedList<String>();
 			    arrayOfList[0] = _linkedList;
-			    List<String> _get = arrayOfList[0];
 			    String _string = new String();
-			    _get.add(_string);
-			    List<String> _get_1 = arrayOfList[0];
-			    final String a = _get_1.get(0);
+			    arrayOfList[0].add(_string);
+			    final String a = arrayOfList[0].get(0);
 			    InputOutput.<String>println(a);
 			  }
 			}
@@ -72,11 +70,9 @@ class CompilerBug437365Test extends AbstractXtendCompilerTest {
 			    final LinkedList<String>[] arrayOfList = new LinkedList[4];
 			    LinkedList<String> _linkedList = new LinkedList<String>();
 			    arrayOfList[0] = _linkedList;
-			    LinkedList<String> _get = arrayOfList[0];
 			    String _string = new String();
-			    _get.add(_string);
-			    LinkedList<String> _get_1 = arrayOfList[0];
-			    final String a = _get_1.get(0);
+			    arrayOfList[0].add(_string);
+			    final String a = arrayOfList[0].get(0);
 			    InputOutput.<String>println(a);
 			  }
 			}

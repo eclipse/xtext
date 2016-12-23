@@ -41,8 +41,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			      }
 			    };
 			    Iterable<? extends T> _filter = IterableExtensions.filter(list, _function);
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(_filter);
-			    return _addAll.build();
+			    return _builder.addAll(_filter).build();
 			  }
 			}
 		''')
@@ -75,8 +74,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			      }
 			    };
 			    Iterable<T> _filter = IterableExtensions.<T>filter(list, _function);
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(_filter);
-			    return _addAll.build();
+			    return _builder.addAll(_filter).build();
 			  }
 			}
 		''')
@@ -109,8 +107,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			      }
 			    };
 			    Iterable<? super T> _filter = IterableExtensions.filter(list, _function);
-			    ImmutableList.Builder<Object> _addAll = _builder.addAll(_filter);
-			    return _addAll.build();
+			    return _builder.addAll(_filter).build();
 			  }
 			}
 		''')
@@ -133,10 +130,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public static <T extends Object> ImmutableList<T> m(final List<? extends T> list) {
-			    ImmutableList.Builder<T> _builder = ImmutableList.<T>builder();
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(list);
-			    ImmutableList.Builder<T> _addAll_1 = _addAll.addAll(list);
-			    return _addAll_1.build();
+			    return ImmutableList.<T>builder().addAll(list).addAll(list).build();
 			  }
 			}
 		''')
@@ -168,9 +162,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			      }
 			    };
 			    Iterable<? extends T> _filter = IterableExtensions.filter(list, _function);
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(_filter);
-			    ImmutableList.Builder<T> _addAll_1 = _addAll.addAll(list);
-			    return _addAll_1.build();
+			    return _builder.addAll(_filter).addAll(list).build();
 			  }
 			}
 		''')
@@ -195,16 +187,14 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public static <T extends Object> ImmutableList<T> m(final List<? extends T> list) {
-			    ImmutableList.Builder<T> _builder = ImmutableList.<T>builder();
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(list);
+			    ImmutableList.Builder<T> _addAll = ImmutableList.<T>builder().addAll(list);
 			    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 			      public Boolean apply(final T it) {
 			        return Boolean.valueOf(false);
 			      }
 			    };
 			    Iterable<? extends T> _filter = IterableExtensions.filter(list, _function);
-			    ImmutableList.Builder<T> _addAll_1 = _addAll.addAll(_filter);
-			    return _addAll_1.build();
+			    return _addAll.addAll(_filter).build();
 			  }
 			}
 		''')
@@ -243,8 +233,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			      }
 			    };
 			    Iterable<? extends T> _filter_1 = IterableExtensions.filter(list, _function_1);
-			    ImmutableList.Builder<T> _addAll_1 = _addAll.addAll(_filter_1);
-			    return _addAll_1.build();
+			    return _addAll.addAll(_filter_1).build();
 			  }
 			}
 		''')
@@ -277,8 +266,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			      }
 			    };
 			    Iterable<T> _filter = IterableExtensions.<T>filter(((Iterable<T>)Conversions.doWrapArray(arr)), _function);
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(_filter);
-			    return _addAll.build();
+			    return _builder.addAll(_filter).build();
 			  }
 			}
 		''')

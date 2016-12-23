@@ -49,8 +49,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  protected List<SOE.A> _getList(final SOE.A it) {
-			    SOE.CustomItr _customItr = new SOE.CustomItr();
-			    return IterableExtensions.<SOE.A>toList(_customItr);
+			    return IterableExtensions.<SOE.A>toList(new SOE.CustomItr());
 			  }
 			  
 			  protected List<SOE.A> _getList(final Object it) {
@@ -102,8 +101,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  protected List<C> _getList(final C it) {
-			    C.CustomItr _customItr = new C.CustomItr();
-			    return IterableExtensions.<C>toList(_customItr);
+			    return IterableExtensions.<C>toList(new C.CustomItr());
 			  }
 			  
 			  protected List<C> _getList(final Object it) {
@@ -164,8 +162,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  protected List<SOE.A> _getList(final SOE.A it) {
-			    SOE.CustomItr _customItr = new SOE.CustomItr();
-			    return IterableExtensions.<SOE.A>toList(_customItr);
+			    return IterableExtensions.<SOE.A>toList(new SOE.CustomItr());
 			  }
 			  
 			  public List<SOE.A> getList(final Object it) {
@@ -217,8 +214,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  protected List<SOE.A> _getList(final SOE.A it) {
-			    SOE.CustomItr _customItr = new SOE.CustomItr();
-			    return IterableExtensions.<SOE.A>toList(_customItr);
+			    return IterableExtensions.<SOE.A>toList(new SOE.CustomItr());
 			  }
 			  
 			  protected List<SOE.A> _getList(final Object it) {

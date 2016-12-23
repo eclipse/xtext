@@ -80,10 +80,7 @@ public class CompilerBug436302Test extends AbstractXtendCompilerTest {
     _builder_1.append("public A methodA() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("B _b = new B();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _b.methodB(this);");
+    _builder_1.append("return new B().methodB(this);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -34,20 +34,18 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m() {
-			    Ordering<Integer> _natural = Ordering.<Integer>natural();
 			    final Function<String, Integer> _function = new Function<String, Integer>() {
 			      public Integer apply(final String s) {
 			        return Integer.valueOf(s.length());
 			      }
 			    };
-			    Ordering<String> _onResultOf = _natural.<String>onResultOf(_function);
 			    final Function<String, String> _function_1 = new Function<String, String>() {
 			      public String apply(final String it) {
 			        return null;
 			      }
 			    };
-			    Ordering<String> _onResultOf_1 = _onResultOf.<String>onResultOf(_function_1);
-			    return IterableExtensions.<String>sortWith(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "aa", "aaa")), _onResultOf_1);
+			    Ordering<String> _onResultOf = Ordering.<Integer>natural().<String>onResultOf(_function).<String>onResultOf(_function_1);
+			    return IterableExtensions.<String>sortWith(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "aa", "aaa")), _onResultOf);
 			  }
 			}
 		''')
@@ -78,20 +76,18 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public void m(final C.Sortable<String> sortMe) {
-			    Ordering<Integer> _natural = Ordering.<Integer>natural();
 			    final Function<String, Integer> _function = new Function<String, Integer>() {
 			      public Integer apply(final String s) {
 			        return Integer.valueOf(s.length());
 			      }
 			    };
-			    Ordering<String> _onResultOf = _natural.<String>onResultOf(_function);
 			    final Function<String, String> _function_1 = new Function<String, String>() {
 			      public String apply(final String it) {
 			        return null;
 			      }
 			    };
-			    Ordering<String> _onResultOf_1 = _onResultOf.<String>onResultOf(_function_1);
-			    sortMe.sort(_onResultOf_1);
+			    Ordering<String> _onResultOf = Ordering.<Integer>natural().<String>onResultOf(_function).<String>onResultOf(_function_1);
+			    sortMe.sort(_onResultOf);
 			  }
 			}
 		''')
@@ -147,13 +143,12 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return s.length();
 			      }
 			    };
-			    C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);
 			    final Function1<String, String> _function_1 = new Function1<String, String>() {
 			      public String apply(final String s) {
 			        return s;
 			      }
 			    };
-			    C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);
+			    C.MyComparator<String> _thenComparing2 = C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1);
 			    sortMe.sort(_thenComparing2);
 			  }
 			}
@@ -210,13 +205,12 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return s.length();
 			      }
 			    };
-			    C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);
 			    final Function1<String, String> _function_1 = new Function1<String, String>() {
 			      public String apply(final String it) {
 			        return it.toUpperCase();
 			      }
 			    };
-			    C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);
+			    C.MyComparator<String> _thenComparing2 = C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1);
 			    sortMe.sort(_thenComparing2);
 			  }
 			}
@@ -273,13 +267,12 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return s.length();
 			      }
 			    };
-			    C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);
 			    final Function1<String, String> _function_1 = new Function1<String, String>() {
 			      public String apply(final String it) {
 			        return it;
 			      }
 			    };
-			    C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);
+			    C.MyComparator<String> _thenComparing2 = C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1);
 			    sortMe.sort(_thenComparing2);
 			  }
 			}
@@ -339,13 +332,12 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return s.length();
 			      }
 			    };
-			    C.MyComparator<String> _comparingInt = C.MyComparator.<String>comparingInt(_function);
 			    final C.Function<String, String> _function_1 = new C.Function<String, String>() {
 			      public String apply(final String it) {
 			        return it;
 			      }
 			    };
-			    return _comparingInt.<String>thenComparing(_function_1);
+			    return C.MyComparator.<String>comparingInt(_function).<String>thenComparing(_function_1);
 			  }
 			}
 		''')

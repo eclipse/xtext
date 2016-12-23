@@ -384,9 +384,7 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			  private final ArrayList<Node> _contents = CollectionLiterals.<Node>newArrayList();
 			  
 			  public String tagName() {
-			    Class<? extends Node> _class = this.getClass();
-			    String _simpleName = _class.getSimpleName();
-			    return _simpleName.toLowerCase();
+			    return this.getClass().getSimpleName().toLowerCase();
 			  }
 			  
 			  @Override

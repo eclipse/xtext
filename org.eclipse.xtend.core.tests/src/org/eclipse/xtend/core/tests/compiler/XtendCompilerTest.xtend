@@ -2418,7 +2418,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''','''
 			import java.io.File;
 			import java.io.IOException;
-			import java.util.ArrayList;
 			import java.util.Collections;
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -2431,18 +2430,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public List<File> bar() {
 			    List<File> _xtrycatchfinallyexpression = null;
 			    try {
-			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("file1.ext");
 			      final Function1<String, File> _function = new Function1<String, File>() {
 			        public File apply(final String f) {
 			          try {
-			            File _file = new File(f);
-			            return _file.getCanonicalFile();
+			            return new File(f).getCanonicalFile();
 			          } catch (Throwable _e) {
 			            throw Exceptions.sneakyThrow(_e);
 			          }
 			        }
 			      };
-			      _xtrycatchfinallyexpression = ListExtensions.<String, File>map(_newArrayList, _function);
+			      _xtrycatchfinallyexpression = ListExtensions.<String, File>map(CollectionLiterals.<String>newArrayList("file1.ext"), _function);
 			    } catch (final Throwable _t) {
 			      if (_t instanceof IOException) {
 			        final IOException o = (IOException)_t;
@@ -2467,7 +2464,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			 }
 			}
 		'''.assertCompilesTo('''
-			import java.util.ArrayList;
 			import java.util.Map;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -2479,7 +2475,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public abstract Object getFoo(final String x) throws Exception;
 			  
 			  public Map<Object, String> bar() {
-			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
 			    final Function1<String, Object> _function = new Function1<String, Object>() {
 			      public Object apply(final String it) {
 			        try {
@@ -2489,7 +2484,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        }
 			      }
 			    };
-			    return IterableExtensions.<Object, String>toMap(_newArrayList, _function);
+			    return IterableExtensions.<Object, String>toMap(CollectionLiterals.<String>newArrayList(), _function);
 			  }
 			}
 		''')
@@ -3893,8 +3888,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  private String foo = "Holla";
 			  
 			  public void test(final String x, final String y, final int integer) {
-			    Foo _foo = new Foo();
-			    _foo.test(this.foo, Foo.FOO, Integer.MAX_VALUE);
+			    new Foo().test(this.foo, Foo.FOO, Integer.MAX_VALUE);
 			  }
 			}
 		''')
@@ -4332,8 +4326,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public void bar() {
 			    StringConcatenation _builder = new StringConcatenation();
 			    _builder.append("Hello World");
-			    String _string = _builder.toString();
-			    this.setX(_string.trim());
+			    this.setX(_builder.toString().trim());
 			  }
 			  
 			  public void setX(final String s) {
@@ -4747,8 +4740,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					  private ReflectExtensions _reflectExtensions;
 					  
 					  public Object bar() throws Throwable {
-					    String _string = new String();
-					    Object _get = this._reflectExtensions.<Object>get(_string, "toString");
+					    Object _get = this._reflectExtensions.<Object>get(new String(), "toString");
 					    Object _get_1 = null;
 					    if (_get!=null) {
 					      _get_1=this._reflectExtensions.<Object>get(_get, "substring");
@@ -4775,8 +4767,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					  
 					  public String bar(final String str) {
 					    String _elvis = null;
-					    Foo _foo = new Foo();
-					    String _field = _foo.field;
+					    String _field = new Foo().field;
 					    String _string = null;
 					    if (_field!=null) {
 					      _string=_field.toString();

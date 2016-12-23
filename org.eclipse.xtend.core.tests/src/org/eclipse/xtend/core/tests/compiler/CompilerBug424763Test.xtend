@@ -327,16 +327,12 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			  private final Function0<T> constructor;
 			  
 			  public C(final C<T> theConstructor) {
-			    this.constructor = theConstructor.doGetConstructor(new Function0<String>() {
-			      public String apply() {
-			        String _xtrycatchfinallyexpression = null;
-			        try {
-			          _xtrycatchfinallyexpression = "";
-			        } finally {
-			        }
-			        return _xtrycatchfinallyexpression;
-			      }
-			    }.apply());
+			    String _xtrycatchfinallyexpression = null;
+			    try {
+			      _xtrycatchfinallyexpression = "";
+			    } finally {
+			    }
+			    this.constructor = theConstructor.doGetConstructor(_xtrycatchfinallyexpression);
 			  }
 			  
 			  public Function0<T> doGetConstructor(final String s) {
