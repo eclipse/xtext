@@ -9,7 +9,7 @@ node {
 		checkout scm
 		
 		stage 'Build'
-		sh "./gradlew -PuseJenkinsSnapshots=true cleanLocalMavenRepo clean build createLocalMavenRepo --refresh-dependencies --continue"
+		sh "./gradlew -PuseJenkinsSnapshots=true clean build createLocalMavenRepo --refresh-dependencies --continue"
 		archive 'build/maven-repository/**/*.*'
 						
 		slackSend "Build Succeeded - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"

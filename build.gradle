@@ -2,24 +2,40 @@
  * Root project for xtext-web.
  */
 
-ext.buildTime = new java.text.SimpleDateFormat('yyyyMMdd-HHmm').format(new Date())
+import java.time.format.DateTimeFormatter
+import java.time.LocalDateTime
+
+buildscript {
+	apply from: "${rootDir}/gradle/versions.gradle"
+	repositories.jcenter()
+	dependencies {
+		classpath "org.xtext:xtext-gradle-plugin:$versions.xtend_plugin"
+	}
+}
+
+apply from: "${rootDir}/gradle/versions.gradle"
+apply from: "${rootDir}/gradle/bootstrap-setup.gradle"
+
+ext.buildTime = DateTimeFormatter.ofPattern('yyyyMMdd-HHmm').format(LocalDateTime.now())
 
 subprojects {
+	group = 'org.eclipse.xtext'
+	version = rootProject.version
+	
 	apply plugin: 'java'
+	apply plugin: 'org.xtext.xtend'
 	apply plugin: 'eclipse'
 	apply plugin: 'maven'
 	
 	apply from: "${rootDir}/gradle/upstream-repositories.gradle"
-	apply from: "${rootDir}/gradle/versions.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
+	apply from: "${rootDir}/gradle/xtend-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 	apply from: "${rootDir}/gradle/manifest-gen.gradle"
-	
-	group = 'org.eclipse.xtext'
 }
 
-task cleanLocalMavenRepo(type: Delete) {
-	group = 'Upload'
-	description = 'Delete the local Maven repository'
-	delete 'build/maven-repository'
+task clean(type: Delete) {
+	group 'Build'
+	description 'Deletes the local repositories'
+	delete 'build'
 }
