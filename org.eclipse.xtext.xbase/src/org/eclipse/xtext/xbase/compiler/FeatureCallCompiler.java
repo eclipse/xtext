@@ -385,6 +385,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					return !b.hasName(feature);
 				}
 				return !b.hasName(expr);
+			} else {
+				return false;
 			}
 		}
 		if (eContainingFeature == XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND) {
