@@ -1,20 +1,6 @@
 /*
- * Configuration of artifacts to be deployed in Maven repositories.
+ * Configuration of deployment to Maven repositories.
  */
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = 'sources'
-	from sourceSets.main.allSource
-	from ('.') {
-		include 'schema/**', 'model/**'
-	}
-}
-artifacts.archives sourcesJar
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-	classifier = 'javadoc'
-	from javadoc.destinationDir
-}
 
 // Configuration function for generated POMs
 def configurePom = { pom ->
@@ -49,7 +35,7 @@ afterEvaluate {
 		description = 'Create or update the local Maven repository'
 		configuration = configurations.archives
 		repositories.mavenDeployer {
-			repository(url: "file:" + file("../build/maven-repository"))
+			repository(url: "file:" + file("${rootDir}/build/maven-repository"))
 			configurePom(pom)
 		}
 	}

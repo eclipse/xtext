@@ -1,0 +1,14 @@
+/*
+ * Configuration of Xtend compiler.
+ */
+
+sourcesJar {
+	from (sourceSets.main.xtendOutputDir) {
+		include '**/*._trace'
+	}
+	if (name.endsWith('tests')) {
+		from (sourceSets.test.xtendOutputDir) {
+			include '**/*._trace'
+		}
+	}
+}
