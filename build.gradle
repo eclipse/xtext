@@ -14,6 +14,7 @@ buildscript {
 }
 
 apply from: "${rootDir}/gradle/versions.gradle"
+apply from: "${rootDir}/gradle/bootstrap-setup.gradle"
 
 ext.buildTime = DateTimeFormatter.ofPattern('yyyyMMdd-HHmm').format(LocalDateTime.now())
 

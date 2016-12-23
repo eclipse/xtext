@@ -2,6 +2,10 @@
  * Configuration of Xtend compiler.
  */
 
+[generateXtext, generateTestXtext].each { gen ->
+	gen.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
+}
+
 sourcesJar {
 	from (sourceSets.main.xtendOutputDir) {
 		include '**/*._trace'
