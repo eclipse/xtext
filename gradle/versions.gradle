@@ -5,6 +5,8 @@
 version = '2.11.0-SNAPSHOT'
 
 ext.versions = [
+	'xtend_plugin': '1.0.14',
 	'guava': '[14.0,19)',
+	'guice': '3.0',
 	'gwt': '2.7.0'
 ]
