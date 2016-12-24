@@ -48,7 +48,6 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			import com.google.common.collect.Iterables;
 			import java.util.ArrayList;
-			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -64,12 +63,10 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			      final Function1<E, ArrayList<F>> _function = (E e) -> {
 			        return e.m();
 			      };
-			      List<ArrayList<F>> _map = ListExtensions.<E, ArrayList<F>>map(list, _function);
-			      Iterable<F> _flatten = Iterables.<F>concat(_map);
 			      final Function1<F, D> _function_1 = (F it) -> {
 			        return this.d(it, g);
 			      };
-			      _xblockexpression = IterableExtensions.<F, D>map(_flatten, _function_1);
+			      _xblockexpression = IterableExtensions.<F, D>map(Iterables.<F>concat(ListExtensions.<E, ArrayList<F>>map(list, _function)), _function_1);
 			    }
 			    return _xblockexpression;
 			  }
@@ -108,7 +105,6 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			import com.google.common.collect.Iterables;
 			import java.util.ArrayList;
-			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -120,16 +116,13 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			    Iterable<D> _xblockexpression = null;
 			    {
 			      final G g = new G();
-			      ArrayList<E> _newArrayList = CollectionLiterals.<E>newArrayList();
 			      final Function1<E, ArrayList<F>> _function = (E e) -> {
 			        return e.m();
 			      };
-			      List<ArrayList<F>> _map = ListExtensions.<E, ArrayList<F>>map(_newArrayList, _function);
-			      Iterable<F> _flatten = Iterables.<F>concat(_map);
 			      final Function1<F, D> _function_1 = (F it) -> {
 			        return this.d(it, g);
 			      };
-			      _xblockexpression = IterableExtensions.<F, D>map(_flatten, _function_1);
+			      _xblockexpression = IterableExtensions.<F, D>map(Iterables.<F>concat(ListExtensions.<E, ArrayList<F>>map(CollectionLiterals.<E>newArrayList(), _function)), _function_1);
 			    }
 			    return _xblockexpression;
 			  }
@@ -167,7 +160,6 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			import com.google.common.collect.Iterables;
 			import java.util.ArrayList;
-			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -176,17 +168,14 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Iterable<D> m() {
-			    ArrayList<E> _newArrayList = CollectionLiterals.<E>newArrayList();
 			    final Function1<E, ArrayList<F>> _function = (E e) -> {
 			      return e.m();
 			    };
-			    List<ArrayList<F>> _map = ListExtensions.<E, ArrayList<F>>map(_newArrayList, _function);
-			    Iterable<F> _flatten = Iterables.<F>concat(_map);
 			    final Function1<F, D> _function_1 = (F it) -> {
 			      G _g = new G();
 			      return this.d(it, _g);
 			    };
-			    return IterableExtensions.<F, D>map(_flatten, _function_1);
+			    return IterableExtensions.<F, D>map(Iterables.<F>concat(ListExtensions.<E, ArrayList<F>>map(CollectionLiterals.<E>newArrayList(), _function)), _function_1);
 			  }
 			  
 			  public D d(final F f, final G g) {
@@ -259,7 +248,6 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public int getLenght() {
-			    List<LeafInfo> _leafs = this.getLeafs();
 			    final Function2<Integer, LeafInfo, Integer> _function = (Integer x, LeafInfo i) -> {
 			      ILeafNode _node = i.getNode();
 			      int _length = 0;
@@ -268,32 +256,27 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			      }
 			      return Integer.valueOf(((x).intValue() + _length));
 			    };
-			    return (int) IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);
+			    return (int) IterableExtensions.<LeafInfo, Integer>fold(this.getLeafs(), Integer.valueOf(0), _function);
 			  }
 			  
 			  public int getNewLines() {
-			    List<LeafInfo> _leafs = this.getLeafs();
 			    final Function2<Integer, LeafInfo, Integer> _function = (Integer x, LeafInfo i) -> {
 			      int _newLines = i.getNewLines();
 			      return Integer.valueOf(((x).intValue() + _newLines));
 			    };
-			    return (int) IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);
+			    return (int) IterableExtensions.<LeafInfo, Integer>fold(this.getLeafs(), Integer.valueOf(0), _function);
 			  }
 			  
 			  public int getNewLinesInComments() {
-			    List<LeafInfo> _leafs = this.getLeafs();
-			    Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(_leafs, CommentInfo.class);
 			    final Function2<Integer, CommentInfo, Integer> _function = (Integer x, CommentInfo i) -> {
 			      int _newLines = i.getNewLines();
 			      return Integer.valueOf(((x).intValue() + _newLines));
 			    };
-			    return (int) IterableExtensions.<CommentInfo, Integer>fold(_filter, Integer.valueOf(0), _function);
+			    return (int) IterableExtensions.<CommentInfo, Integer>fold(Iterables.<CommentInfo>filter(this.getLeafs(), CommentInfo.class), Integer.valueOf(0), _function);
 			  }
 			  
 			  public boolean containsComment() {
-			    List<LeafInfo> _leafs = this.getLeafs();
-			    Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(_leafs, CommentInfo.class);
-			    int _size = IterableExtensions.size(_filter);
+			    int _size = IterableExtensions.size(Iterables.<CommentInfo>filter(this.getLeafs(), CommentInfo.class));
 			    return (_size > 0);
 			  }
 			  

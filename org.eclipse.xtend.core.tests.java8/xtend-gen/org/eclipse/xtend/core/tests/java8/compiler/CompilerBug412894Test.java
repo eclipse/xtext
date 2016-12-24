@@ -271,10 +271,7 @@ public class CompilerBug412894Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("_matched=true;");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("String _string = ((Number)it).toString();");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("list.add(_string);");
+    _builder_1.append("list.add(((Number)it).toString());");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

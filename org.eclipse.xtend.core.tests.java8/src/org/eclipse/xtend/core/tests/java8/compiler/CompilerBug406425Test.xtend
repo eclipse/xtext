@@ -223,7 +223,6 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			}
 		'''.assertCompilesTo('''
 			import java.io.Serializable;
-			import java.util.ArrayList;
 			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -236,13 +235,12 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  
 			  public void m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
-			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
 			    final Consumer<StringBuilder> _function = (StringBuilder it) -> {
 			      Long _long = new Long(0);
 			      this.<Serializable>m(it, _long);
 			      InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			    };
-			    _newArrayList.forEach(_function);
+			    CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder).forEach(_function);
 			  }
 			}
 		''')
@@ -336,7 +334,6 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			}
 		'''.assertCompilesTo('''
 			import java.io.Serializable;
-			import java.util.ArrayList;
 			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -349,14 +346,13 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  
 			  public static void m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
-			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
 			    final Consumer<StringBuilder> _function = (StringBuilder it) -> {
 			      Test _test = new Test();
 			      Long _long = new Long(0);
 			      _test.<Serializable>m(it, _long);
 			      InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			    };
-			    _newArrayList.forEach(_function);
+			    CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder).forEach(_function);
 			  }
 			}
 		''')
@@ -376,7 +372,6 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			}
 		'''.assertCompilesTo('''
 			import java.io.Serializable;
-			import java.util.ArrayList;
 			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -389,14 +384,13 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  
 			  public static void m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
-			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
 			    final Consumer<StringBuilder> _function = (StringBuilder it) -> {
 			      Test<Serializable> _test = new Test<Serializable>();
 			      Long _long = new Long(0);
 			      _test.m(it, _long);
 			      InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			    };
-			    _newArrayList.forEach(_function);
+			    CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder).forEach(_function);
 			  }
 			}
 		''')
@@ -416,7 +410,6 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			}
 		'''.assertCompilesTo('''
 			import java.io.Serializable;
-			import java.util.ArrayList;
 			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -429,13 +422,12 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  
 			  public static void m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
-			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
 			    final Consumer<StringBuilder> _function = (StringBuilder it) -> {
 			      Long _long = new Long(0);
 			      Test.<Serializable>m(it, _long);
 			      InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			    };
-			    _newArrayList.forEach(_function);
+			    CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder).forEach(_function);
 			  }
 			}
 		''')
