@@ -10,36 +10,13 @@ dependencies {
 	compile "junit:junit:$versions.junit"
 }
 
-sourceSets {
-	longrunning {
-		java.srcDirs = ['longrunning/src']
-		xtendOutputDir = 'longrunning/xtend-gen'
-		compileClasspath += sourceSets.test.output
-		runtimeClasspath += sourceSets.test.output
-	}
-	suites {
-		java.srcDirs =  ['suites', 'smoke-suites']
-		compileClasspath += sourceSets.test.output + sourceSets.longrunning.output
-		runtimeClasspath += sourceSets.test.output + sourceSets.longrunning.output
-	}
+sourceSets.test.java {
+	srcDir 'longrunning/src'
+	srcDir 'longrunning/xtend-gen'
+	srcDir 'suites'
+	srcDir 'smoke-suites'
 }
 
-configurations {
-	longrunningCompile.extendsFrom testCompile
-	longrunningRuntime.extendsFrom testRuntime
-	suitesCompile.extendsFrom testCompile
-	suitesRuntime.extendsFrom testRuntime
+test {
+	exclude '**/*Suite.class'
 }
-
-generateLongrunningXtext.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
-
-jar {
-	from (sourceSets.longrunning.output)
-	from (sourceSets.suites.output)
-}
-
-task longrunningTest(type: Test) {
-	testClassesDir = sourceSets.longrunning.output.classesDir
-	classpath = sourceSets.longrunning.runtimeClasspath
-}
-check.dependsOn longrunningTest

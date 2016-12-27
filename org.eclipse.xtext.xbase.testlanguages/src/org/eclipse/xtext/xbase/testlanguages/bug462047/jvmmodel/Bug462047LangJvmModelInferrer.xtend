@@ -17,7 +17,7 @@ class Bug462047LangJvmModelInferrer extends AbstractModelInferrer {
     @Inject extension JvmTypesBuilder
    	def dispatch void infer(Bug462047Element element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
    		acceptor.accept(element.toClass("CORE."+element.name)) [
-   			documentation = '''«element.ref?.qualifiedName»'''
+   			documentation = '''Â«element.ref?.qualifiedNameÂ»'''
    		]
    	}
 }

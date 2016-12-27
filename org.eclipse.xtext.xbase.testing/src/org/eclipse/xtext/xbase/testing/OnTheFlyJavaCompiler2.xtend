@@ -54,21 +54,21 @@ class OnTheFlyJavaCompiler2 {
 			if (result.compilationProblems.exists[error]) {
 				throw new IllegalArgumentException('''
 					Java code compiled with errors:
-					«result.compilationProblems.filter[error].join('\n')»
+					Â«result.compilationProblems.filter[error].join('\n')Â»
 					
 					Code was:
-					«code»
+					Â«codeÂ»
 				''')
 			}
 			return result.getClassLoader().loadClass(classname)
 		} catch (ClassNotFoundException e) {
 			throw new IllegalStateException('''
-				Couldn't load '«»«classname»' 
+				Couldn't load 'Â«Â»Â«classnameÂ»' 
 				source :
-					«code»
+					Â«codeÂ»
 				
 				PROBLEMS : 
-					«result.getCompilationProblems().join('\n')»
+					Â«result.getCompilationProblems().join('\n')Â»
 			''', e)
 		}
 
@@ -84,11 +84,11 @@ class OnTheFlyJavaCompiler2 {
 			if (result.compilationProblems.exists[error]) {
 				throw new IllegalArgumentException('''
 					Java code compiled with errors:
-					«result.compilationProblems.filter[error].join('\n')»
+					Â«result.compilationProblems.filter[error].join('\n')Â»
 					
 					Code was:
 					=========
-					«sources.values.join('\n=========\n')»
+					Â«sources.values.join('\n=========\n')Â»
 					=========
 				''')
 			}
@@ -96,21 +96,21 @@ class OnTheFlyJavaCompiler2 {
 			return sources.keySet.map[ classLoader.loadClass(it)].toMap[name]
 		} catch (ClassNotFoundException e) {
 			throw new IllegalStateException('''
-				«e.message» 
+				Â«e.messageÂ» 
 				source :
-					«sources»
+					Â«sourcesÂ»
 				
 				PROBLEMS : 
-					«result.getCompilationProblems().join('\n')»
+					Â«result.getCompilationProblems().join('\n')Â»
 			''', e)
 		}
 	}
 
 	@SuppressWarnings("unchecked") def <RT> Functions.Function0<RT> createFunction(String expression, Class<RT> returnType) {
 		val clazz = compileToClass("__Generated", '''
-			public class __Generated implements org.eclipse.xtext.xbase.lib.Functions.Function0<«returnType.name»> {
-				public «returnType.name» apply() {
-					«expression»
+			public class __Generated implements org.eclipse.xtext.xbase.lib.Functions.Function0<Â«returnType.nameÂ»> {
+				public Â«returnType.nameÂ» apply() {
+					Â«expressionÂ»
 				}
 			}
 		''')

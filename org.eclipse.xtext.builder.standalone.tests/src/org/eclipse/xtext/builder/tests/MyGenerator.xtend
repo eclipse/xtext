@@ -11,11 +11,11 @@ class MyGenerator implements IGenerator {
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
 		for (ele : input.allContents.toIterable.filter(Element)) {
 			if (fsa instanceof IFileSystemAccess2) {
-				if (fsa.isFile('''«ele.getName()».txt''')) {
-					fsa.readTextFile('''«ele.getName()».txt''')
+				if (fsa.isFile('''Â«ele.getName()Â».txt''')) {
+					fsa.readTextFile('''Â«ele.getName()Â».txt''')
 				}
 			}
-			fsa.generateFile('''«ele.getName()».txt''', '''object «ele.getName()»''')
+			fsa.generateFile('''Â«ele.getName()Â».txt''', '''object Â«ele.getName()Â»''')
 		}
 	}
 
