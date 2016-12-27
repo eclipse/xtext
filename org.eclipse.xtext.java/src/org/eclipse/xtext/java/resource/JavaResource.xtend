@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.access.IJavaSchemeUriResolver
 import org.eclipse.xtext.common.types.access.TypeResource
@@ -26,11 +27,10 @@ import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNe
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.IFragmentProvider
+import org.eclipse.xtext.resource.IFragmentProvider.Fallback
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.util.concurrent.IUnitOfWork
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.resource.IFragmentProvider.Fallback
+import org.eclipse.xtend.lib.annotations.Data
 
 class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISynchronizable<JavaResource> {
 	
@@ -129,8 +129,9 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
         		val access = getIndexJvmTypeAccess();
         		if (access !== null) {
         			try {
-        				var result = access.getIndexedJvmType(proxy.eProxyURI().trimFragment, getResourceSet());
-        				if (result instanceof JvmDeclaredType) {
+        			    val frag = new JavaElementFragment(proxy.eProxyURI)
+        				var result = access.getIndexedJvmType(frag.typeURI, getResourceSet());
+        				if (result instanceof JvmDeclaredType && frag.isMethodFragment) {
         				    result = new JavaFragmentProvider().getEObject(result.eResource, proxy.eProxyURI.fragment, new Fallback() {
                                 override getEObject(String fragment) {
                                     return null;
@@ -140,9 +141,9 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
                                     return null;
                                 }
                             });
-                            if (result !== null)
-        					   return result;
         				}
+                        if (result !== null)
+    					   return result;
         			} catch(UnknownNestedTypeException e) {
         				return proxy;
         			}
@@ -152,6 +153,40 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
         }
         return null;
 	}
+	
+	static class JavaElementFragment {
+	    URI uri
+	    int idx 
+	    
+	    new (URI uri) {
+	        this.uri = uri
+	        idx = getMethodPartOffset(uri.fragment)
+	    }
+	    
+	    /**
+	     * @return URI pointing to a type, which is the conatiner type in case of a fragment pointing to a method.
+	     */
+	    def URI getTypeURI() {
+	        if (idx === -1) {
+	            return uri 
+	        } else {
+	            val f = uri.fragment
+	            return uri.appendFragment(f.substring(0, idx))
+	        }
+	    }
+	    
+	    def boolean isMethodFragment() {
+	        return idx !== -1
+	    }
+	    	    
+        protected def int getMethodPartOffset(String string) {
+            if (string.endsWith("()")) {
+                return string.lastIndexOf('.')
+            }
+            return -1
+        }
+	}
+    
 	
 	static class JavaFragmentProvider extends AbstractClassMirror {
 	    
