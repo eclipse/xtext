@@ -42,8 +42,7 @@ public class ArithmeticsParsingTest {
       _builder.newLine();
       _builder.append("fun(2, fun(3,4));");
       _builder.newLine();
-      Module _parse = this.parseHelper.parse(_builder);
-      this.validationTestHelper.assertNoErrors(_parse);
+      this.validationTestHelper.assertNoErrors(this.parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

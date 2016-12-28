@@ -8,7 +8,6 @@ import java.lang.reflect.Method;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
@@ -27,8 +26,7 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
   @Test
   public void testValidationIsDisabled_01() {
     try {
-      IWorkspaceRoot _root = this.workspace.getRoot();
-      final IProject project = _root.getProject("simpleProject");
+      final IProject project = this.workspace.getRoot().getProject("simpleProject");
       project.create(null);
       project.open(null);
       final IFile file = project.getFile("Hello.xtext");
@@ -39,8 +37,7 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
         }
       };
       file.create(_function, true, null);
-      boolean _isValidationDisabled = this.isValidationDisabled(file);
-      Assert.assertTrue(_isValidationDisabled);
+      Assert.assertTrue(this.isValidationDisabled(file));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -58,8 +55,7 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
         }
       };
       file.create(_function, true, null);
-      boolean _isValidationDisabled = this.isValidationDisabled(file);
-      Assert.assertFalse(_isValidationDisabled);
+      Assert.assertFalse(this.isValidationDisabled(file));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -75,12 +71,10 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
       for (final IPackageFragmentRoot pfr : _allPackageFragmentRoots) {
         boolean _isArchive = pfr.isArchive();
         if (_isArchive) {
-          Object[] _nonJavaResources = pfr.getNonJavaResources();
-          Iterable<IStorage> _filter = Iterables.<IStorage>filter(((Iterable<?>)Conversions.doWrapArray(_nonJavaResources)), IStorage.class);
+          Iterable<IStorage> _filter = Iterables.<IStorage>filter(((Iterable<?>)Conversions.doWrapArray(pfr.getNonJavaResources())), IStorage.class);
           for (final IStorage r : _filter) {
             {
-              boolean _isValidationDisabled = this.isValidationDisabled(r);
-              Assert.assertTrue(_isValidationDisabled);
+              Assert.assertTrue(this.isValidationDisabled(r));
               wasTested = true;
             }
           }
@@ -94,8 +88,7 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
   
   public boolean isValidationDisabled(final IStorage storage) {
     try {
-      Class<? extends XbaseResourceForEditorInputFactory> _class = this.editorInputFactory.getClass();
-      final Method method = _class.getDeclaredMethod("isValidationDisabled", IStorage.class);
+      final Method method = this.editorInputFactory.getClass().getDeclaredMethod("isValidationDisabled", IStorage.class);
       method.setAccessible(true);
       Object _invoke = method.invoke(this.editorInputFactory, storage);
       return (((Boolean) _invoke)).booleanValue();

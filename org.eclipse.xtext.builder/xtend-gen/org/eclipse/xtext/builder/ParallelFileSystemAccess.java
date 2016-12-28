@@ -42,7 +42,6 @@ public class ParallelFileSystemAccess implements IFileSystemAccess2 {
   }
   
   protected void sendAsync(final Procedure1<? super IFileSystemAccess2> procedure) {
-    URI _uri = this.delta.getUri();
     final Runnable _function = () -> {
       if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
         ((EclipseResourceFileSystemAccess2)this.delegate).setPostProcessor(this.fileCallback);
@@ -54,7 +53,7 @@ public class ParallelFileSystemAccess implements IFileSystemAccess2 {
       }
       procedure.apply(this.delegate);
     };
-    this.fileSystemAccessQueue.sendAsync(_uri, _function);
+    this.fileSystemAccessQueue.sendAsync(this.delta.getUri(), _function);
   }
   
   @Override

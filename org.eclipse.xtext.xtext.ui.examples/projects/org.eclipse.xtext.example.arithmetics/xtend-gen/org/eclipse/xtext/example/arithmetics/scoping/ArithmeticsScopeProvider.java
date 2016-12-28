@@ -11,16 +11,12 @@ import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
-import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
 import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
@@ -38,40 +34,31 @@ public class ArithmeticsScopeProvider extends AbstractGlobalScopeDelegatingScope
   @Override
   public IScope getScope(final EObject context, final EReference reference) {
     if ((reference == ArithmeticsPackage.Literals.IMPORT__MODULE)) {
-      Resource _eResource = context.eResource();
-      return super.getGlobalScope(_eResource, reference);
+      return super.getGlobalScope(context.eResource(), reference);
     }
     final Module module = EcoreUtil2.<Module>getContainerOfType(context, Module.class);
     IScope result = IScope.NULLSCOPE;
     EList<Import> _imports = module.getImports();
     for (final Import import_ : _imports) {
-      Module _module = import_.getModule();
-      boolean _eIsProxy = _module.eIsProxy();
+      boolean _eIsProxy = import_.getModule().eIsProxy();
       boolean _not = (!_eIsProxy);
       if (_not) {
-        Module _module_1 = import_.getModule();
-        IScope _moduleScope = this.getModuleScope(context, reference, _module_1, result);
-        result = _moduleScope;
+        result = this.getModuleScope(context, reference, import_.getModule(), result);
       }
     }
-    IScope _moduleScope_1 = this.getModuleScope(context, reference, module, result);
-    result = _moduleScope_1;
+    result = this.getModuleScope(context, reference, module, result);
     return this.getDefinitionScope(context, reference, result);
   }
   
   public IScope getModuleScope(final EObject context, final EReference reference, final Module module, final IScope parent) {
-    EList<Statement> _statements = module.getStatements();
-    final Iterable<Definition> allDefinitions = Iterables.<Definition>filter(_statements, Definition.class);
+    final Iterable<Definition> allDefinitions = Iterables.<Definition>filter(module.getStatements(), Definition.class);
     if ((context instanceof FunctionCall)) {
       final Function1<Definition, Boolean> _function = (Definition it) -> {
-        EList<Expression> _args = ((FunctionCall)context).getArgs();
-        int _size = _args.size();
-        EList<DeclaredParameter> _args_1 = it.getArgs();
-        int _size_1 = _args_1.size();
+        int _size = ((FunctionCall)context).getArgs().size();
+        int _size_1 = it.getArgs().size();
         return Boolean.valueOf((_size == _size_1));
       };
-      Iterable<Definition> _filter = IterableExtensions.<Definition>filter(allDefinitions, _function);
-      return Scopes.scopeFor(_filter, parent);
+      return Scopes.scopeFor(IterableExtensions.<Definition>filter(allDefinitions, _function), parent);
     } else {
       return Scopes.scopeFor(allDefinitions, parent);
     }
@@ -82,7 +69,6 @@ public class ArithmeticsScopeProvider extends AbstractGlobalScopeDelegatingScope
     if ((containingDef == null)) {
       return parent;
     }
-    EList<DeclaredParameter> _args = containingDef.getArgs();
-    return Scopes.scopeFor(_args, parent);
+    return Scopes.scopeFor(containingDef.getArgs(), parent);
   }
 }

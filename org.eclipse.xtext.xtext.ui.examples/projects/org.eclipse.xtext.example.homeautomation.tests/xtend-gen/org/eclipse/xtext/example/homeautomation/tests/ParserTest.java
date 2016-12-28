@@ -21,8 +21,7 @@ public class ParserTest extends AbstractTest {
   @Override
   protected void test(final CharSequence document) {
     try {
-      Model _parse = this._parseHelper.parse(document);
-      this._validationTestHelper.assertNoErrors(_parse);
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(document));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -12,8 +12,6 @@ import com.google.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -72,17 +70,12 @@ public class DefaultAntlrGrammarGenerator {
   
   public void generate(final Grammar it, final AntlrOptions options, final Xtend2ExecutionContext ctx) {
     final RuleFilter filter = new RuleFilter();
-    Grammar _grammar = GrammarUtil.getGrammar(it);
-    final RuleNames ruleNames = RuleNames.getRuleNames(_grammar, true);
-    FlattenedGrammarAccess _flattenedGrammarAccess = new FlattenedGrammarAccess(ruleNames, filter);
-    final Grammar flattened = _flattenedGrammarAccess.getFlattenedGrammar();
-    Outlet _srcGenOutlet = this._xtextIDEAGeneratorExtensions.getSrcGenOutlet(ctx);
-    String _name = _srcGenOutlet.getName();
-    String _grammarFileName = this.getGrammarFileName(it);
-    String _asPath = this._naming.asPath(_grammarFileName);
+    final RuleNames ruleNames = RuleNames.getRuleNames(GrammarUtil.getGrammar(it), true);
+    final Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
+    String _name = this._xtextIDEAGeneratorExtensions.getSrcGenOutlet(ctx).getName();
+    String _asPath = this._naming.asPath(this.getGrammarFileName(it));
     String _plus = (_asPath + ".g");
-    CharSequence _compile = this.compile(flattened, options);
-    ctx.writeFile(_name, _plus, _compile);
+    ctx.writeFile(_name, _plus, this.compile(flattened, options));
   }
   
   protected String getGrammarFileName(final Grammar it) {
@@ -95,8 +88,7 @@ public class DefaultAntlrGrammarGenerator {
     _builder.append(_fileHeader);
     _builder.newLineIfNotEmpty();
     _builder.append("grammar ");
-    String _grammarFileName = this.getGrammarFileName(it);
-    String _simpleName = this._naming.toSimpleName(_grammarFileName);
+    String _simpleName = this._naming.toSimpleName(this.getGrammarFileName(it));
     _builder.append(_simpleName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -138,8 +130,7 @@ public class DefaultAntlrGrammarGenerator {
     _builder.append("@lexer::header {");
     _builder.newLine();
     _builder.append("package ");
-    String _grammarFileName = this.getGrammarFileName(it);
-    String _packageName = this._naming.toPackageName(_grammarFileName);
+    String _packageName = this._naming.toPackageName(this.getGrammarFileName(it));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -169,8 +160,7 @@ public class DefaultAntlrGrammarGenerator {
     _builder.append("@parser::header {");
     _builder.newLine();
     _builder.append("package ");
-    String _grammarFileName = this.getGrammarFileName(it);
-    String _packageName = this._naming.toPackageName(_grammarFileName);
+    String _packageName = this._naming.toPackageName(this.getGrammarFileName(it));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -197,11 +187,10 @@ public class DefaultAntlrGrammarGenerator {
   protected CharSequence compileRules(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
       final Function1<ParserRule, Boolean> _function = (ParserRule rule) -> {
         return Boolean.valueOf(this._grammarAccessExtensions.isCalled(rule, it));
       };
-      Iterable<ParserRule> _filter = IterableExtensions.<ParserRule>filter(_allParserRules, _function);
+      Iterable<ParserRule> _filter = IterableExtensions.<ParserRule>filter(GrammarUtil.allParserRules(it), _function);
       for(final ParserRule rule : _filter) {
         _builder.newLine();
         String _compileRule = this.compileRule(rule, it, options);
@@ -210,11 +199,10 @@ public class DefaultAntlrGrammarGenerator {
       }
     }
     {
-      List<EnumRule> _allEnumRules = GrammarUtil.allEnumRules(it);
       final Function1<EnumRule, Boolean> _function_1 = (EnumRule rule_1) -> {
         return Boolean.valueOf(this._grammarAccessExtensions.isCalled(rule_1, it));
       };
-      Iterable<EnumRule> _filter_1 = IterableExtensions.<EnumRule>filter(_allEnumRules, _function_1);
+      Iterable<EnumRule> _filter_1 = IterableExtensions.<EnumRule>filter(GrammarUtil.allEnumRules(it), _function_1);
       for(final EnumRule rule_1 : _filter_1) {
         _builder.newLine();
         String _compileRule_1 = this.compileRule(rule_1, it, options);
@@ -266,16 +254,13 @@ public class DefaultAntlrGrammarGenerator {
   }
   
   protected boolean shouldBeSkipped(final TerminalRule it, final Grammar grammar) {
-    List<String> _initialHiddenTokens = this._grammarAccessExtensions.initialHiddenTokens(grammar);
-    String _ruleName = this._grammarAccessExtensions.ruleName(it);
-    return _initialHiddenTokens.contains(_ruleName);
+    return this._grammarAccessExtensions.initialHiddenTokens(grammar).contains(this._grammarAccessExtensions.ruleName(it));
   }
   
   protected String compileEBNF(final AbstractRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("// Rule ");
-    AbstractRule _originalElement = AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it);
-    String _name = _originalElement.getName();
+    String _name = AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it).getName();
     _builder.append(_name);
     _builder.newLineIfNotEmpty();
     String _ruleName = this._grammarAccessExtensions.ruleName(it);
@@ -287,14 +272,12 @@ public class DefaultAntlrGrammarGenerator {
     {
       if (((it instanceof ParserRule) && GrammarUtil.isDatatypeRule(AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it)))) {
         _builder.append("\t");
-        AbstractElement _alternatives = it.getAlternatives();
-        String _dataTypeEbnf = this.dataTypeEbnf(_alternatives, true);
+        String _dataTypeEbnf = this.dataTypeEbnf(it.getAlternatives(), true);
         _builder.append(_dataTypeEbnf, "\t");
         _builder.newLineIfNotEmpty();
       } else {
         _builder.append("\t");
-        AbstractElement _alternatives_1 = it.getAlternatives();
-        String _ebnf = this.ebnf(_alternatives_1, options, true);
+        String _ebnf = this.ebnf(it.getAlternatives(), options, true);
         _builder.append(_ebnf, "\t");
         _builder.newLineIfNotEmpty();
       }
@@ -348,8 +331,7 @@ public class DefaultAntlrGrammarGenerator {
         {
           boolean _predicated = this._grammarAccessExtensions.predicated(it);
           if (_predicated) {
-            AbstractElement _predicatedElement = this._grammarAccessExtensions.predicatedElement(it);
-            String _ebnf2 = this.ebnf2(_predicatedElement, options, false);
+            String _ebnf2 = this.ebnf2(this._grammarAccessExtensions.predicatedElement(it), options, false);
             _builder.append(_ebnf2);
           } else {
             {
@@ -407,8 +389,7 @@ public class DefaultAntlrGrammarGenerator {
         {
           boolean _predicated = this._grammarAccessExtensions.predicated(it);
           if (_predicated) {
-            AbstractElement _predicatedElement = this._grammarAccessExtensions.predicatedElement(it);
-            String _dataTypeEbnf2 = this.dataTypeEbnf2(_predicatedElement, false);
+            String _dataTypeEbnf2 = this.dataTypeEbnf2(this._grammarAccessExtensions.predicatedElement(it), false);
             _builder.append(_dataTypeEbnf2);
           } else {
             {
@@ -436,8 +417,7 @@ public class DefaultAntlrGrammarGenerator {
   protected String _dataTypeEbnf2(final AbstractElement it, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ERROR ");
-    EClass _eClass = it.eClass();
-    String _name = _eClass.getName();
+    String _name = it.eClass().getName();
     _builder.append(_name);
     _builder.append(" not matched");
     return _builder.toString();
@@ -497,22 +477,19 @@ public class DefaultAntlrGrammarGenerator {
   }
   
   protected String _dataTypeEbnf2(final Keyword it, final boolean supportActions) {
-    String _value = it.getValue();
-    String _antlrString = AntlrGrammarGenUtil.toAntlrString(_value);
+    String _antlrString = AntlrGrammarGenUtil.toAntlrString(it.getValue());
     String _plus = ("\'" + _antlrString);
     return (_plus + "\'");
   }
   
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
-    AbstractRule _rule = it.getRule();
-    return this._grammarAccessExtensions.ruleName(_rule);
+    return this._grammarAccessExtensions.ruleName(it.getRule());
   }
   
   protected String _ebnf2(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ERROR ");
-    EClass _eClass = it.eClass();
-    String _name = _eClass.getName();
+    String _name = it.eClass().getName();
     _builder.append(_name);
     _builder.append(" not matched");
     return _builder.toString();
@@ -576,8 +553,7 @@ public class DefaultAntlrGrammarGenerator {
     _builder.append("(");
     _builder.newLine();
     _builder.append("\t");
-    AbstractElement _terminal = it.getTerminal();
-    String _assignmentEbnf = this.assignmentEbnf(_terminal, it, options, supportActions);
+    String _assignmentEbnf = this.assignmentEbnf(it.getTerminal(), it, options, supportActions);
     _builder.append(_assignmentEbnf, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append(")");
@@ -590,21 +566,17 @@ public class DefaultAntlrGrammarGenerator {
   }
   
   protected String _ebnf2(final Keyword it, final AntlrOptions options, final boolean supportActions) {
-    String _value = it.getValue();
-    String _antlrString = AntlrGrammarGenUtil.toAntlrString(_value);
+    String _antlrString = AntlrGrammarGenUtil.toAntlrString(it.getValue());
     String _plus = ("\'" + _antlrString);
     return (_plus + "\'");
   }
   
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
-    AbstractRule _rule = it.getRule();
-    return this._grammarAccessExtensions.ruleName(_rule);
+    return this._grammarAccessExtensions.ruleName(it.getRule());
   }
   
   protected String _ebnf2(final EnumLiteralDeclaration it, final AntlrOptions options, final boolean supportActions) {
-    Keyword _literal = it.getLiteral();
-    String _value = _literal.getValue();
-    String _antlrString = AntlrGrammarGenUtil.toAntlrString(_value);
+    String _antlrString = AntlrGrammarGenUtil.toAntlrString(it.getLiteral().getValue());
     String _plus = ("\'" + _antlrString);
     return (_plus + "\'");
   }
@@ -637,8 +609,7 @@ public class DefaultAntlrGrammarGenerator {
     {
       final AbstractRule rule = it.getRule();
       if ((rule instanceof ParserRule)) {
-        ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)rule));
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(_originalElement);
+        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)rule)));
         boolean _not = (!_isDatatypeRule);
         if (_not) {
           throw new IllegalStateException("crossrefEbnf is not supported for ParserRule that is not a datatype rule");
@@ -738,8 +709,7 @@ public class DefaultAntlrGrammarGenerator {
   }
   
   protected String _assignmentEbnf(final CrossReference it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
-    AbstractElement _terminal = it.getTerminal();
-    return this.crossrefEbnf(_terminal, it, supportActions);
+    return this.crossrefEbnf(it.getTerminal(), it, supportActions);
   }
   
   protected String _assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {

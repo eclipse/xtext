@@ -41,8 +41,7 @@ public class OpenAssociationHierarchyHandler extends AbstractOpenHierarchyHandle
   protected IHierarchyBuilder createHierarchyBuilder(final EObject target) {
     final AssociationHierarchyBuilder xtextCallHierarchyBuilder = this._iGlobalServiceProvider.<AssociationHierarchyBuilder>findService(target, AssociationHierarchyBuilder.class);
     xtextCallHierarchyBuilder.setResourceAccess(this.resourceAccess);
-    IResourceDescriptions _findService = this._iGlobalServiceProvider.<IResourceDescriptions>findService(target, IResourceDescriptions.class);
-    xtextCallHierarchyBuilder.setIndexData(_findService);
+    xtextCallHierarchyBuilder.setIndexData(this._iGlobalServiceProvider.<IResourceDescriptions>findService(target, IResourceDescriptions.class));
     final DeferredHierarchyBuilder deferredHierarchyBuilder = this._iGlobalServiceProvider.<DeferredHierarchyBuilder>findService(target, DeferredHierarchyBuilder.class);
     deferredHierarchyBuilder.setHierarchyBuilder(xtextCallHierarchyBuilder);
     return deferredHierarchyBuilder;

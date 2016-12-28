@@ -22,39 +22,31 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 public class DomainmodelValidator extends AbstractDomainmodelValidator {
   @Check
   public void checkTypeNameStartsWithCapital(final Entity entity) {
-    String _name = entity.getName();
-    char _charAt = _name.charAt(0);
-    boolean _isUpperCase = Character.isUpperCase(_charAt);
+    boolean _isUpperCase = Character.isUpperCase(entity.getName().charAt(0));
     boolean _not = (!_isUpperCase);
     if (_not) {
-      String _name_1 = entity.getName();
       this.warning("Name should start with a capital", DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME, 
-        ValidationMessageAcceptor.INSIGNIFICANT_INDEX, IssueCodes.INVALID_TYPE_NAME, _name_1);
+        ValidationMessageAcceptor.INSIGNIFICANT_INDEX, IssueCodes.INVALID_TYPE_NAME, entity.getName());
     }
   }
   
   @Check
   public void checkFeatureNameStartsWithLowercase(final Feature feature) {
-    String _name = feature.getName();
-    char _charAt = _name.charAt(0);
-    boolean _isLowerCase = Character.isLowerCase(_charAt);
+    boolean _isLowerCase = Character.isLowerCase(feature.getName().charAt(0));
     boolean _not = (!_isLowerCase);
     if (_not) {
-      String _name_1 = feature.getName();
       this.warning("Name should start with a lowercase", DomainmodelPackage.Literals.FEATURE__NAME, 
-        ValidationMessageAcceptor.INSIGNIFICANT_INDEX, IssueCodes.INVALID_FEATURE_NAME, _name_1);
+        ValidationMessageAcceptor.INSIGNIFICANT_INDEX, IssueCodes.INVALID_FEATURE_NAME, feature.getName());
     }
   }
   
   @Check
   public void checkPackage(final PackageDeclaration packages) {
-    String _name = packages.getName();
-    boolean _isEmpty = Strings.isEmpty(_name);
+    boolean _isEmpty = Strings.isEmpty(packages.getName());
     if (_isEmpty) {
       this.error("Name cannot be empty", DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
     }
-    String _name_1 = packages.getName();
-    boolean _equals = _name_1.equals("java");
+    boolean _equals = packages.getName().equals("java");
     if (_equals) {
       this.error("Invalid package name", DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
     }

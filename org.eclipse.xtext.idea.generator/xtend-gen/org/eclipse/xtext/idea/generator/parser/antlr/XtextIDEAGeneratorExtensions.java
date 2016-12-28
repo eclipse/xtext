@@ -8,9 +8,7 @@
 package org.eclipse.xtext.idea.generator.parser.antlr;
 
 import com.google.inject.Singleton;
-import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.output.Outlet;
-import org.eclipse.xpand2.output.Output;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
@@ -23,9 +21,7 @@ public class XtextIDEAGeneratorExtensions {
   private final String IDEA_SRC_GEN = "IDEA_SRC_GEN";
   
   public Outlet getOutlet(final Xtend2ExecutionContext it, final String outletName) {
-    XpandExecutionContext _xpandExecutionContext = it.getXpandExecutionContext();
-    Output _output = _xpandExecutionContext.getOutput();
-    return _output.getOutlet(outletName);
+    return it.getXpandExecutionContext().getOutput().getOutlet(outletName);
   }
   
   public Outlet getSrcOutlet(final Xtend2ExecutionContext it) {
@@ -49,23 +45,19 @@ public class XtextIDEAGeneratorExtensions {
     if ((encoding != null)) {
       _xifexpression = encoding;
     } else {
-      Outlet _outlet_1 = this.getOutlet(it, defaultOutletName);
-      _xifexpression = _outlet_1.getFileEncoding();
+      _xifexpression = this.getOutlet(it, defaultOutletName).getFileEncoding();
     }
     outlet.setFileEncoding(_xifexpression);
     String _xifexpression_1 = null;
     if ((pathIdeaPluginProject != null)) {
       _xifexpression_1 = (pathIdeaPluginProject + projectPath);
     } else {
-      Outlet _outlet_2 = this.getOutlet(it, defaultOutletName);
-      _xifexpression_1 = _outlet_2.getPath();
+      _xifexpression_1 = this.getOutlet(it, defaultOutletName).getPath();
     }
     outlet.setPath(_xifexpression_1);
     NewlineNormalizer _newlineNormalizer = new NewlineNormalizer(lineDelimiter);
     outlet.addPostprocessor(_newlineNormalizer);
-    XpandExecutionContext _xpandExecutionContext = it.getXpandExecutionContext();
-    Output _output = _xpandExecutionContext.getOutput();
-    _output.addOutlet(outlet);
+    it.getXpandExecutionContext().getOutput().addOutlet(outlet);
   }
   
   public void installOutlets(final Xtend2ExecutionContext it, final String pathIdeaPluginProject, final String encoding, final String lineDelimiter) {

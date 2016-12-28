@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ui.editor.hierarchy;
 
-import java.util.Collection;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
@@ -48,8 +47,7 @@ public class HierarchyTreeContentProvider implements ITreeContentProvider {
   @Override
   public Object[] getElements(final Object inputElement) {
     if ((inputElement instanceof IHierarchyRoot)) {
-      Collection<IHierarchyNode> _roots = ((IHierarchyRoot)inputElement).getRoots();
-      return ((Object[])Conversions.unwrapArray(IterableExtensions.<IHierarchyNode>filterNull(_roots), Object.class));
+      return ((Object[])Conversions.unwrapArray(IterableExtensions.<IHierarchyNode>filterNull(((IHierarchyRoot)inputElement).getRoots()), Object.class));
     }
     return HierarchyTreeContentProvider.EMPTY_ARRAY;
   }

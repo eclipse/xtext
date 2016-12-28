@@ -38,9 +38,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
   @BeforeClass
   public static void createTestProject() throws Exception {
     TargetPlatformUtil.setTargetPlatform();
-    String _name = AbstractXbaseContentAssistBugTest.class.getName();
-    IProject _createPluginProject = AbstractXbaseUITestCase.createPluginProject(_name);
-    AbstractXbaseContentAssistBugTest.staticProject = _createPluginProject;
+    AbstractXbaseContentAssistBugTest.staticProject = AbstractXbaseUITestCase.createPluginProject(AbstractXbaseContentAssistBugTest.class.getName());
   }
   
   @AfterClass
@@ -67,10 +65,8 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
     if (((javaProject == null) || (!javaProject.exists()))) {
       try {
-        IProject _createPluginProject = AbstractXbaseUITestCase.createPluginProject(projectName);
-        this.demandCreateProject = _createPluginProject;
-        IJavaProject _findJavaProject = JavaProjectSetupUtil.findJavaProject(projectName);
-        javaProject = _findJavaProject;
+        this.demandCreateProject = AbstractXbaseUITestCase.createPluginProject(projectName);
+        javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
       } catch (final Throwable _t) {
         if (_t instanceof CoreException) {
           final CoreException e = (CoreException)_t;
@@ -88,8 +84,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
   }
   
   protected String getProjectName() {
-    Class<? extends AbstractXbaseContentAssistBugTest> _class = this.getClass();
-    String _simpleName = _class.getSimpleName();
+    String _simpleName = this.getClass().getSimpleName();
     return (_simpleName + "Project");
   }
   
@@ -105,8 +100,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
     final XtextResourceSet resourceSet = ((XtextResourceSet) _resourceSet);
     final JdtTypeProviderFactory typeProviderFactory = new JdtTypeProviderFactory(this);
     typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-    IJavaProject _javaProject = this.getJavaProject(resourceSet);
-    resourceSet.setClasspathURIContext(_javaProject);
+    resourceSet.setClasspathURIContext(this.getJavaProject(resourceSet));
   }
   
   protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {

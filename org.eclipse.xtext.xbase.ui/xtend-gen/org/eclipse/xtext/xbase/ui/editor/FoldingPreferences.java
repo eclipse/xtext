@@ -39,7 +39,6 @@ public class FoldingPreferences {
   }
   
   protected Boolean getBoolean(final String string) {
-    String _preference = PreferenceConstants.getPreference(string, null);
-    return Boolean.valueOf(_preference);
+    return Boolean.valueOf(PreferenceConstants.getPreference(string, null));
   }
 }

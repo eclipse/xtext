@@ -24,8 +24,7 @@ public class ContentAssistForTest5 extends ContentAssistTest {
   
   @Override
   protected String[] getKeywordsAndStatics() {
-    String[] _keywordsAndStatics = super.getKeywordsAndStatics();
-    final ArrayList<String> result = CollectionLiterals.<String>newArrayList(_keywordsAndStatics);
+    final ArrayList<String> result = CollectionLiterals.<String>newArrayList(super.getKeywordsAndStatics());
     result.add("x");
     return ((String[])Conversions.unwrapArray(result, String.class));
   }

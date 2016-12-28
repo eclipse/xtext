@@ -9,15 +9,12 @@ package org.eclipse.xtext.ui.generator;
 
 import com.google.common.base.Objects;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.generator.IShouldGenerate;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.workspace.IProjectConfig;
@@ -36,21 +33,18 @@ public class EclipseBasedShouldGenerate implements IShouldGenerate {
       if (((uri == null) || (!uri.isPlatformResource()))) {
         return false;
       }
-      IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-      IWorkspaceRoot _root = _workspace.getRoot();
+      IWorkspaceRoot _root = ResourcesPlugin.getWorkspace().getRoot();
       String _platformString = uri.toPlatformString(true);
       Path _path = new Path(_platformString);
       final IResource member = _root.findMember(_path);
       if (((member != null) && (member.getType() == IResource.FILE))) {
-        ResourceSet _resourceSet = resource.getResourceSet();
-        ProjectConfigAdapter _findInEmfObject = ProjectConfigAdapter.findInEmfObject(_resourceSet);
+        ProjectConfigAdapter _findInEmfObject = ProjectConfigAdapter.findInEmfObject(resource.getResourceSet());
         IProjectConfig _projectConfig = null;
         if (_findInEmfObject!=null) {
           _projectConfig=_findInEmfObject.getProjectConfig();
         }
         final IProjectConfig projectConfig = _projectConfig;
-        IProject _project = member.getProject();
-        String _name = _project.getName();
+        String _name = member.getProject().getName();
         String _name_1 = null;
         if (projectConfig!=null) {
           _name_1=projectConfig.getName();

@@ -27,17 +27,13 @@ public class DomainmodelQuickfixProvider extends XbaseQuickfixProvider {
   public void fixTypeName(final Issue issue, final IssueResolutionAcceptor acceptor) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Capitalize name  of \'");
-    String[] _data = issue.getData();
-    String _get = _data[0];
+    String _get = issue.getData()[0];
     _builder.append(_get);
     _builder.append("\'");
     final IModification _function = (IModificationContext context) -> {
       IXtextDocument xtextDocument = context.getXtextDocument();
-      Integer _offset = issue.getOffset();
-      String firstLetter = xtextDocument.get((_offset).intValue(), 1);
-      Integer _offset_1 = issue.getOffset();
-      String _firstUpper = Strings.toFirstUpper(firstLetter);
-      xtextDocument.replace((_offset_1).intValue(), 1, _firstUpper);
+      String firstLetter = xtextDocument.get((issue.getOffset()).intValue(), 1);
+      xtextDocument.replace((issue.getOffset()).intValue(), 1, Strings.toFirstUpper(firstLetter));
     };
     acceptor.accept(issue, "Capitalize name", _builder.toString(), 
       "upcase.png", _function);
@@ -47,15 +43,11 @@ public class DomainmodelQuickfixProvider extends XbaseQuickfixProvider {
   public void fixFeatureName(final Issue issue, final IssueResolutionAcceptor acceptor) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Uncapitalize name of \'");
-    String[] _data = issue.getData();
-    String _get = _data[0];
+    String _get = issue.getData()[0];
     _builder.append(_get);
     _builder.append("\'");
     final ISemanticModification _function = (EObject element, IModificationContext context) -> {
-      String[] _data_1 = issue.getData();
-      String _get_1 = _data_1[0];
-      String _firstLower = Strings.toFirstLower(_get_1);
-      ((Feature) element).setName(_firstLower);
+      ((Feature) element).setName(Strings.toFirstLower(issue.getData()[0]));
     };
     acceptor.accept(issue, "Uncapitalize name", _builder.toString(), 
       "upcase.png", _function);

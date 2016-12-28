@@ -11,7 +11,6 @@ import org.eclipse.xtext.example.homeautomation.RuleEngineStandaloneSetupGenerat
 @SuppressWarnings("all")
 public class RuleEngineStandaloneSetup extends RuleEngineStandaloneSetupGenerated {
   public static void doSetup() {
-    RuleEngineStandaloneSetup _ruleEngineStandaloneSetup = new RuleEngineStandaloneSetup();
-    _ruleEngineStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new RuleEngineStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

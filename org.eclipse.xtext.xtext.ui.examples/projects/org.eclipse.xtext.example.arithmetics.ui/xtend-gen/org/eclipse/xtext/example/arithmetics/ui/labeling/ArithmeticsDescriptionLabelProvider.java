@@ -8,7 +8,6 @@
 package org.eclipse.xtext.example.arithmetics.ui.labeling;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -28,8 +27,7 @@ public class ArithmeticsDescriptionLabelProvider extends DefaultDescriptionLabel
   public Image getImage(final Object element) {
     Image _xifexpression = null;
     if ((element instanceof IEObjectDescription)) {
-      EObject _eObjectOrProxy = ((IEObjectDescription)element).getEObjectOrProxy();
-      _xifexpression = this.labelProvider.getImage(_eObjectOrProxy);
+      _xifexpression = this.labelProvider.getImage(((IEObjectDescription)element).getEObjectOrProxy());
     } else {
       _xifexpression = super.getImage(element);
     }

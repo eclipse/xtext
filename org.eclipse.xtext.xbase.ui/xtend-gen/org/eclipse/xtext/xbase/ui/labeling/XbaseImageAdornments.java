@@ -22,47 +22,19 @@ public class XbaseImageAdornments {
   private OverrideHelper _overrideHelper;
   
   protected int _get(final JvmDeclaredType it) {
-    boolean _isAbstract = it.isAbstract();
-    int _or = this.or(0, _isAbstract, JavaElementImageDescriptor.ABSTRACT);
-    boolean _isFinal = it.isFinal();
-    int _or_1 = this.or(_or, _isFinal, JavaElementImageDescriptor.FINAL);
-    boolean _isStatic = it.isStatic();
-    int _or_2 = this.or(_or_1, _isStatic, JavaElementImageDescriptor.STATIC);
-    boolean _isDeprecatedMember = DeprecationUtil.isDeprecatedMember(it);
-    return this.or(_or_2, _isDeprecatedMember, JavaElementImageDescriptor.DEPRECATED);
+    return this.or(this.or(this.or(this.or(0, it.isAbstract(), JavaElementImageDescriptor.ABSTRACT), it.isFinal(), JavaElementImageDescriptor.FINAL), it.isStatic(), JavaElementImageDescriptor.STATIC), DeprecationUtil.isDeprecatedMember(it), JavaElementImageDescriptor.DEPRECATED);
   }
   
   protected int _get(final JvmField it) {
-    boolean _isFinal = it.isFinal();
-    int _or = this.or(0, _isFinal, JavaElementImageDescriptor.FINAL);
-    boolean _isStatic = it.isStatic();
-    int _or_1 = this.or(_or, _isStatic, JavaElementImageDescriptor.STATIC);
-    boolean _isDeprecatedMember = DeprecationUtil.isDeprecatedMember(it);
-    int _or_2 = this.or(_or_1, _isDeprecatedMember, JavaElementImageDescriptor.DEPRECATED);
-    boolean _isVolatile = it.isVolatile();
-    int _or_3 = this.or(_or_2, _isVolatile, JavaElementImageDescriptor.VOLATILE);
-    boolean _isTransient = it.isTransient();
-    return this.or(_or_3, _isTransient, JavaElementImageDescriptor.TRANSIENT);
+    return this.or(this.or(this.or(this.or(this.or(0, it.isFinal(), JavaElementImageDescriptor.FINAL), it.isStatic(), JavaElementImageDescriptor.STATIC), DeprecationUtil.isDeprecatedMember(it), JavaElementImageDescriptor.DEPRECATED), it.isVolatile(), JavaElementImageDescriptor.VOLATILE), it.isTransient(), JavaElementImageDescriptor.TRANSIENT);
   }
   
   protected int _get(final JvmConstructor it) {
-    boolean _isDeprecatedMember = DeprecationUtil.isDeprecatedMember(it);
-    return this.or(JavaElementImageDescriptor.CONSTRUCTOR, _isDeprecatedMember, JavaElementImageDescriptor.DEPRECATED);
+    return this.or(JavaElementImageDescriptor.CONSTRUCTOR, DeprecationUtil.isDeprecatedMember(it), JavaElementImageDescriptor.DEPRECATED);
   }
   
   protected int _get(final JvmOperation it) {
-    boolean _isAbstract = it.isAbstract();
-    int _or = this.or(0, _isAbstract, JavaElementImageDescriptor.ABSTRACT);
-    boolean _isFinal = it.isFinal();
-    int _or_1 = this.or(_or, _isFinal, JavaElementImageDescriptor.FINAL);
-    boolean _isSynchronized = it.isSynchronized();
-    int _or_2 = this.or(_or_1, _isSynchronized, JavaElementImageDescriptor.SYNCHRONIZED);
-    boolean _isStatic = it.isStatic();
-    int _or_3 = this.or(_or_2, _isStatic, JavaElementImageDescriptor.STATIC);
-    boolean _isDeprecatedMember = DeprecationUtil.isDeprecatedMember(it);
-    int _or_4 = this.or(_or_3, _isDeprecatedMember, JavaElementImageDescriptor.DEPRECATED);
-    boolean _isNative = it.isNative();
-    final int adornment = this.or(_or_4, _isNative, 0x4000);
+    final int adornment = this.or(this.or(this.or(this.or(this.or(this.or(0, it.isAbstract(), JavaElementImageDescriptor.ABSTRACT), it.isFinal(), JavaElementImageDescriptor.FINAL), it.isSynchronized(), JavaElementImageDescriptor.SYNCHRONIZED), it.isStatic(), JavaElementImageDescriptor.STATIC), DeprecationUtil.isDeprecatedMember(it), JavaElementImageDescriptor.DEPRECATED), it.isNative(), 0x4000);
     Resource _eResource = it.eResource();
     ResourceSet _resourceSet = null;
     if (_eResource!=null) {
@@ -72,8 +44,7 @@ public class XbaseImageAdornments {
     if (_tripleNotEquals) {
       final JvmOperation overriddenOperation = this._overrideHelper.findOverriddenOperation(it);
       if ((overriddenOperation != null)) {
-        int _overrideAdornment = this.getOverrideAdornment(overriddenOperation);
-        return (adornment | _overrideAdornment);
+        return (adornment | this.getOverrideAdornment(overriddenOperation));
       }
     }
     return adornment;

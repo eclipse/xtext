@@ -44,10 +44,8 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
     if (((javaProject == null) || (!javaProject.exists()))) {
       try {
-        IProject _createPluginProject = AbstractXbaseUITestCase.createPluginProject(projectName);
-        this.demandCreateProject = _createPluginProject;
-        IJavaProject _findJavaProject = JavaProjectSetupUtil.findJavaProject(projectName);
-        javaProject = _findJavaProject;
+        this.demandCreateProject = AbstractXbaseUITestCase.createPluginProject(projectName);
+        javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
       } catch (final Throwable _t) {
         if (_t instanceof CoreException) {
           final CoreException e = (CoreException)_t;
@@ -65,17 +63,14 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
   }
   
   protected String getProjectName() {
-    Class<? extends AbstractXbaseQuickfixTest> _class = this.getClass();
-    String _simpleName = _class.getSimpleName();
+    String _simpleName = this.getClass().getSimpleName();
     return (_simpleName + "Project");
   }
   
   @Override
   public XtextResource getResourceFor(final InputStream stream) {
     try {
-      XtextResourceSet _resourceSet = this.getResourceSet();
-      URI _createURI = URI.createURI(("Test." + this.fileExtension));
-      Resource _createResource = _resourceSet.createResource(_createURI);
+      Resource _createResource = this.getResourceSet().createResource(URI.createURI(("Test." + this.fileExtension)));
       final XtextResource result = ((XtextResource) _createResource);
       result.load(stream, null);
       return result;
@@ -93,8 +88,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
     XtextResourceSet _xblockexpression = null;
     {
       final XtextResourceSet set = this.<XtextResourceSet>get(XtextResourceSet.class);
-      IJavaProject _javaProject = this.getJavaProject(set);
-      set.setClasspathURIContext(_javaProject);
+      set.setClasspathURIContext(this.getJavaProject(set));
       _xblockexpression = set;
     }
     return _xblockexpression;

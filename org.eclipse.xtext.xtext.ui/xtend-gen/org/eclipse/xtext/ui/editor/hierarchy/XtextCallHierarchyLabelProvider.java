@@ -14,7 +14,6 @@ import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.hierarchy.DeferredHierarchyBuilder;
@@ -42,8 +41,7 @@ public class XtextCallHierarchyLabelProvider extends LabelProvider implements De
   }
   
   protected String _getText(final DeferredHierarchyBuilder.DeferredHierarchyNode it) {
-    IHierarchyNode _delegate = it.getDelegate();
-    return this.getText(_delegate);
+    return this.getText(it.getDelegate());
   }
   
   protected String _getText(final XtextCallHierarchyNode it) {
@@ -52,15 +50,13 @@ public class XtextCallHierarchyLabelProvider extends LabelProvider implements De
     if (_tripleEquals) {
       return this.hierarchyLabelProvider.getText(it);
     }
-    IEObjectDescription _element_1 = it.getElement();
-    QualifiedName _qualifiedName = _element_1.getQualifiedName();
+    QualifiedName _qualifiedName = it.getElement().getQualifiedName();
     IEObjectDescription _grammarDescription = it.getGrammarDescription();
     QualifiedName _qualifiedName_1 = null;
     if (_grammarDescription!=null) {
       _qualifiedName_1=_grammarDescription.getQualifiedName();
     }
-    Iterable<QualifiedName> _filterNull = IterableExtensions.<QualifiedName>filterNull(Collections.<QualifiedName>unmodifiableList(CollectionLiterals.<QualifiedName>newArrayList(_qualifiedName, _qualifiedName_1)));
-    return IterableExtensions.join(_filterNull, " - ");
+    return IterableExtensions.join(IterableExtensions.<QualifiedName>filterNull(Collections.<QualifiedName>unmodifiableList(CollectionLiterals.<QualifiedName>newArrayList(_qualifiedName, _qualifiedName_1))), " - ");
   }
   
   protected StyledString _getStyledText(final Object element) {
@@ -68,8 +64,7 @@ public class XtextCallHierarchyLabelProvider extends LabelProvider implements De
   }
   
   protected StyledString _getStyledText(final DeferredHierarchyBuilder.DeferredHierarchyNode it) {
-    IHierarchyNode _delegate = it.getDelegate();
-    return this.getStyledText(_delegate);
+    return this.getStyledText(it.getDelegate());
   }
   
   protected StyledString _getStyledText(final XtextCallHierarchyNode it) {
@@ -78,8 +73,7 @@ public class XtextCallHierarchyLabelProvider extends LabelProvider implements De
     if (_tripleEquals) {
       return this.hierarchyLabelProvider.getStyledText(it);
     }
-    IEObjectDescription _element_1 = it.getElement();
-    QualifiedName _qualifiedName = _element_1.getQualifiedName();
+    QualifiedName _qualifiedName = it.getElement().getQualifiedName();
     String _plus = ("" + _qualifiedName);
     final StyledString styledString = new StyledString(_plus);
     IEObjectDescription _grammarDescription = it.getGrammarDescription();
@@ -87,8 +81,7 @@ public class XtextCallHierarchyLabelProvider extends LabelProvider implements De
     if (_tripleEquals_1) {
       return styledString;
     }
-    IEObjectDescription _grammarDescription_1 = it.getGrammarDescription();
-    QualifiedName _qualifiedName_1 = _grammarDescription_1.getQualifiedName();
+    QualifiedName _qualifiedName_1 = it.getGrammarDescription().getQualifiedName();
     String _plus_1 = (" - " + _qualifiedName_1);
     StyledString _styledString = new StyledString(_plus_1, StyledString.QUALIFIER_STYLER);
     return styledString.append(_styledString);

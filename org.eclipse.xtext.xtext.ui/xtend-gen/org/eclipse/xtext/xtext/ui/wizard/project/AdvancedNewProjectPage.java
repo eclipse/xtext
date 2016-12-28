@@ -16,7 +16,6 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -24,10 +23,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -44,7 +40,6 @@ import org.eclipse.xtext.xtext.ui.wizard.project.StatusWidget;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.BundleContext;
 
 @SuppressWarnings("all")
 public class AdvancedNewProjectPage extends WizardPage {
@@ -89,75 +84,61 @@ public class AdvancedNewProjectPage extends WizardPage {
         final Procedure1<Button> _function_2 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projEclipse);
         };
-        Button _CheckBox = this.CheckBox(it_1, _function_2);
-        this.createUiProject = _CheckBox;
+        this.createUiProject = this.CheckBox(it_1, _function_2);
         final Procedure1<Group> _function_3 = (Group it_2) -> {
           final Procedure1<Button> _function_4 = (Button it_3) -> {
             it_3.setText(Messages.AdvancedNewProjectPage_projEclipseSDKFeature);
           };
-          Button _CheckBox_1 = this.CheckBox(it_2, _function_4);
-          this.createSDKProject = _CheckBox_1;
+          this.createSDKProject = this.CheckBox(it_2, _function_4);
           final Procedure1<Button> _function_5 = (Button it_3) -> {
             it_3.setText(Messages.AdvancedNewProjectPage_projEclipseP2);
           };
-          Button _CheckBox_2 = this.CheckBox(it_2, _function_5);
-          this.createP2Project = _CheckBox_2;
+          this.createP2Project = this.CheckBox(it_2, _function_5);
         };
-        Group _Group = this.Group(it_1, _function_3);
-        this.createUiProjectSubGroup = _Group;
+        this.createUiProjectSubGroup = this.Group(it_1, _function_3);
         final Procedure1<Button> _function_4 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projIdea);
           it_2.setEnabled(true);
         };
-        Button _CheckBox_1 = this.CheckBox(it_1, _function_4);
-        this.createIdeaProject = _CheckBox_1;
+        this.createIdeaProject = this.CheckBox(it_1, _function_4);
         final Procedure1<Button> _function_5 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projWeb);
           it_2.setEnabled(true);
         };
-        Button _CheckBox_2 = this.CheckBox(it_1, _function_5);
-        this.createWebProject = _CheckBox_2;
+        this.createWebProject = this.CheckBox(it_1, _function_5);
         final Procedure1<Button> _function_6 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projIde);
           it_2.setEnabled(true);
         };
-        Button _CheckBox_3 = this.CheckBox(it_1, _function_6);
-        this.createIdeProject = _CheckBox_3;
+        this.createIdeProject = this.CheckBox(it_1, _function_6);
         final Procedure1<Button> _function_7 = (Button it_2) -> {
           it_2.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
         };
-        Button _CheckBox_4 = this.CheckBox(it_1, _function_7);
-        this.createTestProject = _CheckBox_4;
+        this.createTestProject = this.CheckBox(it_1, _function_7);
       };
       this.Group(it, _function_1);
       final Procedure1<Group> _function_2 = (Group it_1) -> {
         it_1.setText(Messages.AdvancedNewProjectPage_prefBuildSys);
         final Procedure1<Combo> _function_3 = (Combo it_2) -> {
           it_2.setEnabled(true);
-          BuildSystem[] _values = BuildSystem.values();
           final Function1<BuildSystem, String> _function_4 = (BuildSystem it_3) -> {
             return it_3.toString();
           };
-          List<String> _map = ListExtensions.<BuildSystem, String>map(((List<BuildSystem>)Conversions.doWrapArray(_values)), _function_4);
-          it_2.setItems(((String[])Conversions.unwrapArray(_map, String.class)));
+          it_2.setItems(((String[])Conversions.unwrapArray(ListExtensions.<BuildSystem, String>map(((List<BuildSystem>)Conversions.doWrapArray(BuildSystem.values())), _function_4), String.class)));
         };
-        Combo _DropDown = this.DropDown(it_1, _function_3);
-        this.preferredBuildSystem = _DropDown;
+        this.preferredBuildSystem = this.DropDown(it_1, _function_3);
       };
       this.Group(it, _function_2);
       final Procedure1<Group> _function_3 = (Group it_1) -> {
         it_1.setText(Messages.AdvancedNewProjectPage_srcLayout);
         final Procedure1<Combo> _function_4 = (Combo it_2) -> {
           it_2.setEnabled(true);
-          SourceLayout[] _values = SourceLayout.values();
           final Function1<SourceLayout, String> _function_5 = (SourceLayout it_3) -> {
             return it_3.toString();
           };
-          List<String> _map = ListExtensions.<SourceLayout, String>map(((List<SourceLayout>)Conversions.doWrapArray(_values)), _function_5);
-          it_2.setItems(((String[])Conversions.unwrapArray(_map, String.class)));
+          it_2.setItems(((String[])Conversions.unwrapArray(ListExtensions.<SourceLayout, String>map(((List<SourceLayout>)Conversions.doWrapArray(SourceLayout.values())), _function_5), String.class)));
         };
-        Combo _DropDown = this.DropDown(it_1, _function_4);
-        this.sourceLayout = _DropDown;
+        this.sourceLayout = this.DropDown(it_1, _function_4);
       };
       this.Group(it, _function_3);
       StatusWidget _statusWidget = new StatusWidget(it, SWT.NONE);
@@ -196,10 +177,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createSDKProject.addSelectionListener(selectionControl);
     this.createP2Project.addSelectionListener(selectionControl);
     this.setDefaults();
-    IWorkbench _workbench = PlatformUI.getWorkbench();
-    IWorkbenchHelpSystem _helpSystem = _workbench.getHelpSystem();
-    Shell _shell = this.getShell();
-    _helpSystem.setHelp(_shell, "org.eclipse.xtext.xtext.ui.newProject_Advanced");
+    PlatformUI.getWorkbench().getHelpSystem().setHelp(this.getShell(), "org.eclipse.xtext.xtext.ui.newProject_Advanced");
   }
   
   public void validate(final SelectionEvent e) {
@@ -340,11 +318,10 @@ public class AdvancedNewProjectPage extends WizardPage {
           final Function1<Button, Boolean> _function_6 = (Button it) -> {
             return Boolean.valueOf(it.getSelection());
           };
-          Iterable<Button> _filter = IterableExtensions.<Button>filter(dependend, _function_6);
           final Function1<Button, CharSequence> _function_7 = (Button it) -> {
             return it.getText();
           };
-          final String affectedProjects = IterableExtensions.<Button>join(_filter, ", ", _function_7);
+          final String affectedProjects = IterableExtensions.<Button>join(IterableExtensions.<Button>filter(dependend, _function_6), ", ", _function_7);
           Procedure0 _xifexpression_1 = null;
           if ((this.createIdeProject == source)) {
             StringConcatenation _builder_6 = new StringConcatenation();
@@ -391,16 +368,12 @@ public class AdvancedNewProjectPage extends WizardPage {
   }
   
   protected void select(final Combo combo, final Enum<?> enu) {
-    String[] _items = combo.getItems();
-    Iterable<Pair<Integer, String>> _indexed = IterableExtensions.<String>indexed(((Iterable<? extends String>)Conversions.doWrapArray(_items)));
     final Function1<Pair<Integer, String>, Boolean> _function = (Pair<Integer, String> it) -> {
       String _value = it.getValue();
       String _string = enu.toString();
       return Boolean.valueOf(Objects.equal(_value, _string));
     };
-    Pair<Integer, String> _findFirst = IterableExtensions.<Pair<Integer, String>>findFirst(_indexed, _function);
-    Integer _key = _findFirst.getKey();
-    combo.select((_key).intValue());
+    combo.select((IterableExtensions.<Pair<Integer, String>>findFirst(IterableExtensions.<String>indexed(((Iterable<? extends String>)Conversions.doWrapArray(combo.getItems()))), _function).getKey()).intValue());
   }
   
   protected boolean isSelected(final Combo combo, final Enum<?> enu) {
@@ -427,23 +400,18 @@ public class AdvancedNewProjectPage extends WizardPage {
   }
   
   protected boolean isBundleResolved(final String bundleId) {
-    Activator _instance = Activator.getInstance();
-    Bundle _bundle = _instance.getBundle();
-    BundleContext _bundleContext = _bundle.getBundleContext();
-    Bundle[] _bundles = _bundleContext.getBundles();
     final Function1<Bundle, Boolean> _function = (Bundle it) -> {
       String _symbolicName = it.getSymbolicName();
       return Boolean.valueOf(Objects.equal(bundleId, _symbolicName));
     };
-    final Bundle bundle = IterableExtensions.<Bundle>findFirst(((Iterable<Bundle>)Conversions.doWrapArray(_bundles)), _function);
+    final Bundle bundle = IterableExtensions.<Bundle>findFirst(((Iterable<Bundle>)Conversions.doWrapArray(Activator.getInstance().getBundle().getBundleContext().getBundles())), _function);
     return ((bundle != null) && ((bundle.getState() & ((Bundle.RESOLVED | Bundle.STARTING) | Bundle.ACTIVE)) != 0));
   }
   
   protected Group Group(final Composite parent, final Procedure1<? super Group> config) {
     Group _group = new Group(parent, SWT.NONE);
     final Procedure1<Group> _function = (Group it) -> {
-      Font _font = parent.getFont();
-      it.setFont(_font);
+      it.setFont(parent.getFont());
       GridData _gridData = new GridData(SWT.FILL, SWT.TOP, true, false);
       it.setLayoutData(_gridData);
       GridLayout _gridLayout = new GridLayout(1, false);
@@ -456,9 +424,7 @@ public class AdvancedNewProjectPage extends WizardPage {
   protected Button CheckBox(final Composite composite, final Procedure1<? super Button> config) {
     Button _button = new Button(composite, SWT.CHECK);
     final Procedure1<Button> _function = (Button it) -> {
-      Composite _parent = it.getParent();
-      Font _font = _parent.getFont();
-      it.setFont(_font);
+      it.setFont(it.getParent().getFont());
       GridData _gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
       it.setLayoutData(_gridData);
       config.apply(it);
@@ -469,8 +435,7 @@ public class AdvancedNewProjectPage extends WizardPage {
   protected Combo DropDown(final Composite parent, final Procedure1<? super Combo> config) {
     Combo _combo = new Combo(parent, SWT.READ_ONLY);
     final Procedure1<Combo> _function = (Combo it) -> {
-      Font _font = parent.getFont();
-      it.setFont(_font);
+      it.setFont(parent.getFont());
       GridData _gridData = new GridData(GridData.FILL_HORIZONTAL);
       it.setLayoutData(_gridData);
       config.apply(it);
@@ -486,12 +451,8 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createWebProject.setSelection(false);
     this.createSDKProject.setSelection(false);
     this.createP2Project.setSelection(false);
-    BuildSystem[] _values = BuildSystem.values();
-    Enum<?> _head = IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(_values)));
-    this.select(this.preferredBuildSystem, _head);
-    SourceLayout[] _values_1 = SourceLayout.values();
-    Enum<?> _head_1 = IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(_values_1)));
-    this.select(this.sourceLayout, _head_1);
+    this.select(this.preferredBuildSystem, IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(BuildSystem.values()))));
+    this.select(this.sourceLayout, IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(SourceLayout.values()))));
   }
   
   public boolean isCreateUiProject() {
@@ -523,14 +484,10 @@ public class AdvancedNewProjectPage extends WizardPage {
   }
   
   public BuildSystem getPreferredBuildSystem() {
-    BuildSystem[] _values = BuildSystem.values();
-    int _selectionIndex = this.preferredBuildSystem.getSelectionIndex();
-    return _values[_selectionIndex];
+    return BuildSystem.values()[this.preferredBuildSystem.getSelectionIndex()];
   }
   
   public SourceLayout getSourceLayout() {
-    SourceLayout[] _values = SourceLayout.values();
-    int _selectionIndex = this.sourceLayout.getSelectionIndex();
-    return _values[_selectionIndex];
+    return SourceLayout.values()[this.sourceLayout.getSelectionIndex()];
   }
 }

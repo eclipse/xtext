@@ -9,13 +9,11 @@ package org.eclipse.xtext.common.types.ui.notification;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
@@ -73,16 +71,14 @@ public class JavaBuilderState {
       if ((javaProject == null)) {
         return null;
       }
-      IProject _project = javaProject.getProject();
-      _xblockexpression = JavaBuilderState.getLastBuiltState(_project);
+      _xblockexpression = JavaBuilderState.getLastBuiltState(javaProject.getProject());
     }
     return _xblockexpression;
   }
   
   public static JavaBuilderState getLastBuiltState(final IProject it) {
     State _switchResult = null;
-    JavaModelManager _javaModelManager = JavaModelManager.getJavaModelManager();
-    Object _lastBuiltState = _javaModelManager.getLastBuiltState(it, null);
+    Object _lastBuiltState = JavaModelManager.getJavaModelManager().getLastBuiltState(it, null);
     final Object state = _lastBuiltState;
     boolean _matched = false;
     if (state instanceof State) {
@@ -131,8 +127,7 @@ public class JavaBuilderState {
       if ((this.structurallyChangedTypes != null)) {
         return this.structurallyChangedTypes;
       }
-      HashSet<QualifiedName> _newHashSet = CollectionLiterals.<QualifiedName>newHashSet();
-      this.structurallyChangedTypes = _newHashSet;
+      this.structurallyChangedTypes = CollectionLiterals.<QualifiedName>newHashSet();
       Object _readField = null;
       if (this.state!=null) {
         _readField=this.readField(this.state, "structurallyChangedTypes", null);
@@ -143,8 +138,7 @@ public class JavaBuilderState {
         _matched=true;
         for (final String name : ((StringSet)types).values) {
           if ((name != null)) {
-            String[] _split = name.split("/");
-            QualifiedName _create = QualifiedName.create(_split);
+            QualifiedName _create = QualifiedName.create(name.split("/"));
             this.structurallyChangedTypes.add(_create);
           }
         }
@@ -174,33 +168,21 @@ public class JavaBuilderState {
         return qualifiedTypeNames;
       }
       final IPath packagePath = resource.getProjectRelativePath();
-      IPackageFragmentRoot _packageFragmentRoot = this.getPackageFragmentRoot(it);
-      IResource _resource = _packageFragmentRoot.getResource();
-      IPath _projectRelativePath = _resource.getProjectRelativePath();
-      final int srcPathSegmentCount = _projectRelativePath.segmentCount();
+      final int srcPathSegmentCount = this.getPackageFragmentRoot(it).getResource().getProjectRelativePath().segmentCount();
       for (final Object key : references.keyTable) {
         final Object typeLocator = key;
         boolean _matched = false;
         if (typeLocator instanceof String) {
           _matched=true;
-          IJavaProject _javaProject_1 = it.getJavaProject();
-          IProject _project = _javaProject_1.getProject();
-          IFile _file = _project.getFile(((String)typeLocator));
-          final IPath typeLocatorPath = _file.getProjectRelativePath();
+          final IPath typeLocatorPath = it.getJavaProject().getProject().getFile(((String)typeLocator)).getProjectRelativePath();
           boolean _isPrefixOf = packagePath.isPrefixOf(typeLocatorPath);
           if (_isPrefixOf) {
-            IPath _removeFirstSegments = typeLocatorPath.removeFirstSegments(srcPathSegmentCount);
-            final IPath qualifiedPath = _removeFirstSegments.removeFileExtension();
-            IPath _removeLastSegments = qualifiedPath.removeLastSegments(1);
-            String _string = _removeLastSegments.toString();
-            final String typePackageName = _string.replace("/", ".");
+            final IPath qualifiedPath = typeLocatorPath.removeFirstSegments(srcPathSegmentCount).removeFileExtension();
+            final String typePackageName = qualifiedPath.removeLastSegments(1).toString().replace("/", ".");
             boolean _equals = packageName.equals(typePackageName);
             if (_equals) {
-              String _lastSegment = qualifiedPath.lastSegment();
-              final String simpleTypeName = _lastSegment.toString();
-              IJavaProject _javaProject_2 = it.getJavaProject();
-              TypeNames _qualifiedTypeNames = this.getQualifiedTypeNames(((String)typeLocator), packageName, simpleTypeName, _javaProject_2);
-              qualifiedTypeNames.addAll(_qualifiedTypeNames);
+              final String simpleTypeName = qualifiedPath.lastSegment().toString();
+              qualifiedTypeNames.addAll(this.getQualifiedTypeNames(((String)typeLocator), packageName, simpleTypeName, it.getJavaProject()));
             }
           }
         }
@@ -216,11 +198,7 @@ public class JavaBuilderState {
    * </p>
    */
   protected TypeNames _getQualifiedTypeNames(final ICompilationUnit it) {
-    String _typeLocator = this.getTypeLocator(it);
-    String _packageName = this.getPackageName(it);
-    String _simplePrimaryTypeName = this.getSimplePrimaryTypeName(it);
-    IJavaProject _javaProject = it.getJavaProject();
-    return this.getQualifiedTypeNames(_typeLocator, _packageName, _simplePrimaryTypeName, _javaProject);
+    return this.getQualifiedTypeNames(this.getTypeLocator(it), this.getPackageName(it), this.getSimplePrimaryTypeName(it), it.getJavaProject());
   }
   
   private IPackageFragmentRoot getPackageFragmentRoot(final IJavaElement it) {
@@ -317,8 +295,7 @@ public class JavaBuilderState {
     String _xblockexpression = null;
     {
       final String elementName = it.getElementName();
-      int _lastIndexOf = elementName.lastIndexOf(".");
-      _xblockexpression = elementName.substring(0, _lastIndexOf);
+      _xblockexpression = elementName.substring(0, elementName.lastIndexOf("."));
     }
     return _xblockexpression;
   }
@@ -350,8 +327,7 @@ public class JavaBuilderState {
   
   private Object readField(final Object instance, final String fieldName, final Object defaultValue) {
     try {
-      Class<?> _class = instance.getClass();
-      final Field field = _class.getDeclaredField(fieldName);
+      final Field field = instance.getClass().getDeclaredField(fieldName);
       field.setAccessible(true);
       final Object value = field.get(instance);
       if ((value != null)) {
@@ -363,8 +339,7 @@ public class JavaBuilderState {
         final Exception e = (Exception)_t;
         boolean _isEnabledFor = JavaBuilderState.LOG.isEnabledFor(Level.ERROR);
         if (_isEnabledFor) {
-          String _message = e.getMessage();
-          JavaBuilderState.LOG.error(_message, e);
+          JavaBuilderState.LOG.error(e.getMessage(), e);
         }
         return defaultValue;
       } else {

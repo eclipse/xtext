@@ -10,17 +10,13 @@ public class Xbase11_TypeCoercion {
       "string".length();
       final Integer i = Integer.valueOf("string".length());
       /* i; */
-      int _length = "string".length();
-      Integer.valueOf(_length).toString();
+      Integer.valueOf("string".length()).toString();
       "string".toCharArray();
-      char[] _charArray = "string".toCharArray();
-      /* _charArray[3]; */
+      /* "string".toCharArray()[3]; */
       final List<Character> l = (List<Character>)Conversions.doWrapArray("string".toCharArray());
       /* l; */
       final Comparator<String> _function = (String a, String b) -> {
-        int _length_1 = a.length();
-        int _length_2 = b.length();
-        return Integer.valueOf(_length_1).compareTo(Integer.valueOf(_length_2));
+        return Integer.valueOf(a.length()).compareTo(Integer.valueOf(b.length()));
       };
       final Comparator<String> comparator = _function;
       _xblockexpression = comparator.compare("1", " 2");

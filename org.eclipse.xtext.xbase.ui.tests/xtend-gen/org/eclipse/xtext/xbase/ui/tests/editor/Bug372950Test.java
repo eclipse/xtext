@@ -60,12 +60,8 @@ public class Bug372950Test extends AbstractXbaseContentAssistBugTest {
   
   protected void shouldPropose(final String input, final Class<?> proposedType) throws Exception {
     final ContentAssistProcessorTestBuilder tester = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = tester.append(input);
-    final ICompletionProposal[] proposals = _append.computeCompletionProposals();
+    final ICompletionProposal[] proposals = tester.append(input).computeCompletionProposals();
     final List<String> proposalStrings = tester.toString(proposals);
-    String _string = proposalStrings.toString();
-    String _simpleName = proposedType.getSimpleName();
-    boolean _contains = proposalStrings.contains(_simpleName);
-    Assert.assertTrue(_string, _contains);
+    Assert.assertTrue(proposalStrings.toString(), proposalStrings.contains(proposedType.getSimpleName()));
   }
 }

@@ -32,49 +32,31 @@ public class HighlightingPresenterPositionIndexTest extends HighlightingPresente
   
   @Test
   public void testIndexAtOffset() {
-    int _computeIndexAtOffset = this.computeIndexAtOffset(this.positions, (-1));
-    Assert.assertEquals(0, _computeIndexAtOffset);
-    int _computeIndexAtOffset_1 = this.computeIndexAtOffset(this.positions, 0);
-    Assert.assertEquals(0, _computeIndexAtOffset_1);
-    int _computeIndexAtOffset_2 = this.computeIndexAtOffset(this.positions, 1);
-    Assert.assertEquals(1, _computeIndexAtOffset_2);
-    int _computeIndexAtOffset_3 = this.computeIndexAtOffset(this.positions, 2);
-    Assert.assertEquals(1, _computeIndexAtOffset_3);
-    int _computeIndexAtOffset_4 = this.computeIndexAtOffset(this.positions, 3);
-    Assert.assertEquals(2, _computeIndexAtOffset_4);
-    int _computeIndexAtOffset_5 = this.computeIndexAtOffset(this.positions, 4);
-    Assert.assertEquals(2, _computeIndexAtOffset_5);
+    Assert.assertEquals(0, this.computeIndexAtOffset(this.positions, (-1)));
+    Assert.assertEquals(0, this.computeIndexAtOffset(this.positions, 0));
+    Assert.assertEquals(1, this.computeIndexAtOffset(this.positions, 1));
+    Assert.assertEquals(1, this.computeIndexAtOffset(this.positions, 2));
+    Assert.assertEquals(2, this.computeIndexAtOffset(this.positions, 3));
+    Assert.assertEquals(2, this.computeIndexAtOffset(this.positions, 4));
   }
   
   @Test
   public void testIndexAfterOffset() {
-    int _computeIndexAfterOffset = this.computeIndexAfterOffset(this.positions, (-1));
-    Assert.assertEquals(0, _computeIndexAfterOffset);
-    int _computeIndexAfterOffset_1 = this.computeIndexAfterOffset(this.positions, 0);
-    Assert.assertEquals(1, _computeIndexAfterOffset_1);
-    int _computeIndexAfterOffset_2 = this.computeIndexAfterOffset(this.positions, 1);
-    Assert.assertEquals(1, _computeIndexAfterOffset_2);
-    int _computeIndexAfterOffset_3 = this.computeIndexAfterOffset(this.positions, 2);
-    Assert.assertEquals(2, _computeIndexAfterOffset_3);
-    int _computeIndexAfterOffset_4 = this.computeIndexAfterOffset(this.positions, 3);
-    Assert.assertEquals(2, _computeIndexAfterOffset_4);
-    int _computeIndexAfterOffset_5 = this.computeIndexAfterOffset(this.positions, 4);
-    Assert.assertEquals(2, _computeIndexAfterOffset_5);
+    Assert.assertEquals(0, this.computeIndexAfterOffset(this.positions, (-1)));
+    Assert.assertEquals(1, this.computeIndexAfterOffset(this.positions, 0));
+    Assert.assertEquals(1, this.computeIndexAfterOffset(this.positions, 1));
+    Assert.assertEquals(2, this.computeIndexAfterOffset(this.positions, 2));
+    Assert.assertEquals(2, this.computeIndexAfterOffset(this.positions, 3));
+    Assert.assertEquals(2, this.computeIndexAfterOffset(this.positions, 4));
   }
   
   @Test
   public void testIndexEndingAtOrEnclosingOffset() {
-    int _computeIndexEndingAtOrEnclosingOffset = this.computeIndexEndingAtOrEnclosingOffset(this.positions, (-1));
-    Assert.assertEquals(0, _computeIndexEndingAtOrEnclosingOffset);
-    int _computeIndexEndingAtOrEnclosingOffset_1 = this.computeIndexEndingAtOrEnclosingOffset(this.positions, 0);
-    Assert.assertEquals(0, _computeIndexEndingAtOrEnclosingOffset_1);
-    int _computeIndexEndingAtOrEnclosingOffset_2 = this.computeIndexEndingAtOrEnclosingOffset(this.positions, 1);
-    Assert.assertEquals(0, _computeIndexEndingAtOrEnclosingOffset_2);
-    int _computeIndexEndingAtOrEnclosingOffset_3 = this.computeIndexEndingAtOrEnclosingOffset(this.positions, 2);
-    Assert.assertEquals(1, _computeIndexEndingAtOrEnclosingOffset_3);
-    int _computeIndexEndingAtOrEnclosingOffset_4 = this.computeIndexEndingAtOrEnclosingOffset(this.positions, 3);
-    Assert.assertEquals(1, _computeIndexEndingAtOrEnclosingOffset_4);
-    int _computeIndexEndingAtOrEnclosingOffset_5 = this.computeIndexEndingAtOrEnclosingOffset(this.positions, 4);
-    Assert.assertEquals(2, _computeIndexEndingAtOrEnclosingOffset_5);
+    Assert.assertEquals(0, this.computeIndexEndingAtOrEnclosingOffset(this.positions, (-1)));
+    Assert.assertEquals(0, this.computeIndexEndingAtOrEnclosingOffset(this.positions, 0));
+    Assert.assertEquals(0, this.computeIndexEndingAtOrEnclosingOffset(this.positions, 1));
+    Assert.assertEquals(1, this.computeIndexEndingAtOrEnclosingOffset(this.positions, 2));
+    Assert.assertEquals(1, this.computeIndexEndingAtOrEnclosingOffset(this.positions, 3));
+    Assert.assertEquals(2, this.computeIndexEndingAtOrEnclosingOffset(this.positions, 4));
   }
 }

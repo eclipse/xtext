@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.text.AbstractInformationControlManager;
-import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.JFaceTextUtil;
 import org.eclipse.jface.text.Region;
@@ -75,18 +74,14 @@ public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
           String _typeLabel = singleHyperlink.getTypeLabel();
           boolean _equals_1 = Objects.equal(SingleHoverShowingHyperlinkPresenter.SHOW_ALWAYS, _typeLabel);
           if (_equals_1) {
-            IRegion _hyperlinkRegion = singleHyperlink.getHyperlinkRegion();
-            final int start = _hyperlinkRegion.getOffset();
-            IRegion _hyperlinkRegion_1 = singleHyperlink.getHyperlinkRegion();
-            int _length_2 = _hyperlinkRegion_1.getLength();
+            final int start = singleHyperlink.getHyperlinkRegion().getOffset();
+            int _length_2 = singleHyperlink.getHyperlinkRegion().getLength();
             final int end = (start + _length_2);
             Region _region = new Region(start, (end - start));
             this.reflect.set(this.delegate, "fSubjectRegion", _region);
-            ITextViewer _get_1 = this.reflect.<ITextViewer>get(this.delegate, "fTextViewer");
-            int _offsetForCursorLocation = JFaceTextUtil.getOffsetForCursorLocation(_get_1);
-            this.reflect.set(this.delegate, "fCursorOffset", Integer.valueOf(_offsetForCursorLocation));
-            Object _get_2 = this.reflect.<Object>get(this.delegate, "fManager");
-            ((AbstractInformationControlManager) _get_2).showInformation();
+            this.reflect.set(this.delegate, "fCursorOffset", Integer.valueOf(JFaceTextUtil.getOffsetForCursorLocation(this.reflect.<ITextViewer>get(this.delegate, "fTextViewer"))));
+            Object _get_1 = this.reflect.<Object>get(this.delegate, "fManager");
+            ((AbstractInformationControlManager) _get_1).showInformation();
           }
         }
         return result;
@@ -110,16 +105,13 @@ public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
         if (((it != null) && (it.getHyperlinkRegion() != null))) {
           list.add(it);
         } else {
-          Class<? extends IHyperlink> _class = it.getClass();
-          String _name = _class.getName();
+          String _name = it.getClass().getName();
           String _plus = ("Filtered invalid hyperlink: " + _name);
           SingleHoverShowingHyperlinkPresenter.log.warn(_plus);
         }
       };
       ((List<IHyperlink>)Conversions.doWrapArray(arr)).forEach(_function_1);
-      int _size = list.size();
-      IHyperlink[] _newArrayOfSize = new IHyperlink[_size];
-      return list.<IHyperlink>toArray(_newArrayOfSize);
+      return list.<IHyperlink>toArray(new IHyperlink[list.size()]);
     }
     return arr;
   }

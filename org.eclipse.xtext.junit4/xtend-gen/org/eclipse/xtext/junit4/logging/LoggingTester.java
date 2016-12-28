@@ -12,7 +12,6 @@ import com.google.common.primitives.Longs;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -362,8 +361,7 @@ public class LoggingTester {
       logger.addAppender(appender);
       logger.setLevel(level);
       action.run();
-      List<LoggingTester.LogEntry> _list = IterableExtensions.<LoggingTester.LogEntry>toList(appender.events);
-      final List<LoggingTester.LogEntry> events = IterableExtensions.<LoggingTester.LogEntry>sortWith(_list, LoggingTester.TEMPORAL_ORDER);
+      final List<LoggingTester.LogEntry> events = IterableExtensions.<LoggingTester.LogEntry>sortWith(IterableExtensions.<LoggingTester.LogEntry>toList(appender.events), LoggingTester.TEMPORAL_ORDER);
       return new LoggingTester.LogCapture(events);
     } finally {
       logger.removeAppender(appender);
@@ -380,9 +378,7 @@ public class LoggingTester {
     {
       final ArrayList<Appender> appenders = CollectionLiterals.<Appender>newArrayList();
       for (Category current = logger; (current != null); current = current.getParent()) {
-        Enumeration _allAppenders = current.getAllAppenders();
-        ArrayList<Appender> _list = Collections.<Appender>list(_allAppenders);
-        appenders.addAll(_list);
+        appenders.addAll(Collections.<Appender>list(current.getAllAppenders()));
       }
       _xblockexpression = appenders;
     }
@@ -394,15 +390,13 @@ public class LoggingTester {
     boolean _equals = Objects.equal(_filter, filter);
     if (_equals) {
       appender.clearFilters();
-      Filter _next = filter.getNext();
-      appender.addFilter(_next);
+      appender.addFilter(filter.getNext());
     } else {
       for (Filter current = appender.getFilter(); (current != null); current = current.getNext()) {
-        Filter _next_1 = current.getNext();
-        boolean _equals_1 = Objects.equal(_next_1, filter);
+        Filter _next = current.getNext();
+        boolean _equals_1 = Objects.equal(_next, filter);
         if (_equals_1) {
-          Filter _next_2 = filter.getNext();
-          current.setNext(_next_2);
+          current.setNext(filter.getNext());
           return;
         }
       }

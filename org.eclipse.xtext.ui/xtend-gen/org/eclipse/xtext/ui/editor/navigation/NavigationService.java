@@ -10,9 +10,6 @@ package org.eclipse.xtext.ui.editor.navigation;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import java.util.Iterator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.util.OpenStrategy;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -45,9 +42,7 @@ public class NavigationService {
   public void open(final OpenEvent openEvent, final boolean select) {
     final ISelection selection = openEvent.getSelection();
     if ((selection instanceof IStructuredSelection)) {
-      Iterator _iterator = ((IStructuredSelection)selection).iterator();
-      Iterable<Object> _iterable = IteratorExtensions.<Object>toIterable(_iterator);
-      Iterable<INavigatable> _filter = Iterables.<INavigatable>filter(_iterable, INavigatable.class);
+      Iterable<INavigatable> _filter = Iterables.<INavigatable>filter(IteratorExtensions.<Object>toIterable(((IStructuredSelection)selection).iterator()), INavigatable.class);
       for (final INavigatable navigatable : _filter) {
         this.open(navigatable, select);
       }
@@ -67,23 +62,21 @@ public class NavigationService {
     boolean _matched = false;
     if (navigatableElement instanceof IReferenceDescription) {
       _matched=true;
-      URI _sourceEObjectUri = ((IReferenceDescription)navigatableElement).getSourceEObjectUri();
-      EReference _eReference = ((IReferenceDescription)navigatableElement).getEReference();
-      int _indexInList = ((IReferenceDescription)navigatableElement).getIndexInList();
-      this.uriEditorOpener.open(_sourceEObjectUri, _eReference, _indexInList, select);
+      this.uriEditorOpener.open(
+        ((IReferenceDescription)navigatableElement).getSourceEObjectUri(), 
+        ((IReferenceDescription)navigatableElement).getEReference(), 
+        ((IReferenceDescription)navigatableElement).getIndexInList(), select);
     }
     if (!_matched) {
       if (navigatableElement instanceof IEObjectDescription) {
         _matched=true;
-        URI _eObjectURI = ((IEObjectDescription)navigatableElement).getEObjectURI();
-        this.uriEditorOpener.open(_eObjectURI, select);
+        this.uriEditorOpener.open(((IEObjectDescription)navigatableElement).getEObjectURI(), select);
       }
     }
     if (!_matched) {
       if (navigatableElement instanceof IResourceDescription) {
         _matched=true;
-        URI _uRI = ((IResourceDescription)navigatableElement).getURI();
-        this.uriEditorOpener.open(_uRI, select);
+        this.uriEditorOpener.open(((IResourceDescription)navigatableElement).getURI(), select);
       }
     }
     if (!_matched) {

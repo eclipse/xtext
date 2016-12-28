@@ -18,7 +18,6 @@ import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.parser.antlr.AbstractAntlrXtendGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
-import org.eclipse.xtext.generator.parser.antlr.AntlrToolFacade;
 import org.eclipse.xtext.idea.generator.parser.antlr.PsiAntlrGrammarGenerator;
 import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtensions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -51,9 +50,7 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGenerator
   
   @Override
   protected void generate(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
-    Naming _naming = this.getNaming();
-    String _lineDelimiter = _naming.getLineDelimiter();
-    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.ideaProjectPath, this.encoding, _lineDelimiter);
+    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.ideaProjectPath, this.encoding, this.getNaming().getLineDelimiter());
     final Object options = IterableExtensions.<Object>head(parameters);
     if ((options instanceof AntlrOptions)) {
       this._psiAntlrGrammarGenerator.generate(grammar, ((AntlrOptions)options), ctx);
@@ -63,18 +60,13 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGenerator
       StringConcatenation _builder = new StringConcatenation();
       _builder.append(srcGenPath);
       _builder.append("/");
-      String _grammarFileName = this._psiAntlrGrammarGenerator.getGrammarFileName(grammar);
-      String _asPath = this._naming.asPath(_grammarFileName);
+      String _asPath = this._naming.asPath(this._psiAntlrGrammarGenerator.getGrammarFileName(grammar));
       _builder.append(_asPath);
       _builder.append(".g");
       final String absoluteGrammarFileName = _builder.toString();
       this.addAntlrParam("-fo");
-      int _lastIndexOf = absoluteGrammarFileName.lastIndexOf("/");
-      String _substring = absoluteGrammarFileName.substring(0, _lastIndexOf);
-      this.addAntlrParam(_substring);
-      AntlrToolFacade _antlrTool = this.getAntlrTool();
-      String[] _antlrParams = this.getAntlrParams();
-      _antlrTool.runWithEncodingAndParams(absoluteGrammarFileName, encoding, _antlrParams);
+      this.addAntlrParam(absoluteGrammarFileName.substring(0, absoluteGrammarFileName.lastIndexOf("/")));
+      this.getAntlrTool().runWithEncodingAndParams(absoluteGrammarFileName, encoding, this.getAntlrParams());
       final Charset charset = Charset.forName(encoding);
       this.simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteGrammarFileName, charset);
       this.splitParserAndLexerIfEnabled(absoluteGrammarFileName, charset);

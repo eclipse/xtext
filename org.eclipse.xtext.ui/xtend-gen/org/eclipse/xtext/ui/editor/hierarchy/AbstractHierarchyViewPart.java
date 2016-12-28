@@ -36,8 +36,7 @@ public abstract class AbstractHierarchyViewPart extends ViewPart {
   private URI rootURI;
   
   public void refresh(final IProgressMonitor monitor) {
-    IHierarchyRoot _createRoot = this.createRoot(monitor);
-    this.setRoot(_createRoot);
+    this.setRoot(this.createRoot(monitor));
   }
   
   protected IHierarchyRoot createRoot(final IProgressMonitor monitor) {

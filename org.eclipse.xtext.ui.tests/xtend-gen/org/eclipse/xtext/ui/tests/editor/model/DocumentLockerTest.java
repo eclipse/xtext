@@ -52,23 +52,18 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     };
     XtextResource _xtextResource = new XtextResource();
     final Procedure1<XtextResource> _function = (XtextResource it) -> {
-      XtextResourceSet _xtextResourceSet = new XtextResourceSet();
-      EList<Resource> _resources = _xtextResourceSet.getResources();
+      EList<Resource> _resources = new XtextResourceSet().getResources();
       _resources.add(it);
     };
     XtextResource _doubleArrow = ObjectExtensions.<XtextResource>operator_doubleArrow(_xtextResource, _function);
     document.setInput(_doubleArrow);
-    int _size = s.size();
-    Assert.assertEquals(0, _size);
+    Assert.assertEquals(0, s.size());
     final IUnitOfWork<Object, XtextResource> _function_1 = (XtextResource it) -> {
-      int _size_1 = s.size();
-      Assert.assertEquals(1, _size_1);
+      Assert.assertEquals(1, s.size());
       final IUnitOfWork<Object, XtextResource> _function_2 = (XtextResource it_1) -> {
-        int _size_2 = s.size();
-        Assert.assertEquals(1, _size_2);
+        Assert.assertEquals(1, s.size());
         final IUnitOfWork<Object, XtextResource> _function_3 = (XtextResource it_2) -> {
-          int _size_3 = s.size();
-          Assert.assertEquals(1, _size_3);
+          Assert.assertEquals(1, s.size());
           return null;
         };
         document.<Object>readOnly(_function_3);
@@ -78,8 +73,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
       return null;
     };
     document.<Object>readOnly(_function_1);
-    int _size_1 = s.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertEquals(1, s.size());
   }
   
   @Test
@@ -89,8 +83,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     final XtextDocument document = new XtextDocument(_createTokenSource, _createTextEditComposer, this.outdatedStateManager, this.operationCanceledManager);
     XtextResource _xtextResource = new XtextResource();
     final Procedure1<XtextResource> _function = (XtextResource it) -> {
-      XtextResourceSet _xtextResourceSet = new XtextResourceSet();
-      EList<Resource> _resources = _xtextResourceSet.getResources();
+      EList<Resource> _resources = new XtextResourceSet().getResources();
       _resources.add(it);
     };
     final XtextResource resource = ObjectExtensions.<XtextResource>operator_doubleArrow(_xtextResource, _function);
@@ -98,26 +91,20 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     final IUnitOfWork<Object, XtextResource> _function_1 = (XtextResource it) -> {
       Object _xblockexpression = null;
       {
-        CancelIndicator _cancelIndicator = document.getCancelIndicator();
-        boolean _isCanceled = _cancelIndicator.isCanceled();
-        Assert.assertFalse(_isCanceled);
+        Assert.assertFalse(document.getCancelIndicator().isCanceled());
         _xblockexpression = null;
       }
       return _xblockexpression;
     };
     document.<Object>internalModify(_function_1);
     final CancelIndicator indicator = document.getCancelIndicator();
-    boolean _isCanceled = indicator.isCanceled();
-    Assert.assertFalse(_isCanceled);
+    Assert.assertFalse(indicator.isCanceled());
     document.set("fupp");
-    boolean _isCanceled_1 = indicator.isCanceled();
-    Assert.assertTrue(_isCanceled_1);
+    Assert.assertTrue(indicator.isCanceled());
     final IUnitOfWork<Object, XtextResource> _function_2 = (XtextResource it) -> {
       Object _xblockexpression = null;
       {
-        CancelIndicator _cancelIndicator = document.getCancelIndicator();
-        boolean _isCanceled_2 = _cancelIndicator.isCanceled();
-        Assert.assertFalse(_isCanceled_2);
+        Assert.assertFalse(document.getCancelIndicator().isCanceled());
         _xblockexpression = null;
       }
       return _xblockexpression;
@@ -132,8 +119,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
       final XtextDocument document = new XtextDocument(_createTokenSource, null, this.outdatedStateManager, this.operationCanceledManager);
       XtextResource _xtextResource = new XtextResource();
       final Procedure1<XtextResource> _function = (XtextResource it) -> {
-        XtextResourceSet _xtextResourceSet = new XtextResourceSet();
-        EList<Resource> _resources = _xtextResourceSet.getResources();
+        EList<Resource> _resources = new XtextResourceSet().getResources();
         _resources.add(it);
       };
       XtextResource _doubleArrow = ObjectExtensions.<XtextResource>operator_doubleArrow(_xtextResource, _function);
@@ -168,8 +154,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
         return null;
       };
       document.<Object>priorityReadOnly(_function_2);
-      boolean _isInterrupted = thread.isInterrupted();
-      Assert.assertFalse(_isInterrupted);
+      Assert.assertFalse(thread.isInterrupted());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -181,28 +166,24 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     final XtextDocument document = new XtextDocument(_createTokenSource, null, this.outdatedStateManager, this.operationCanceledManager);
     XtextResource _xtextResource = new XtextResource();
     final Procedure1<XtextResource> _function = (XtextResource it) -> {
-      XtextResourceSet _xtextResourceSet = new XtextResourceSet();
-      EList<Resource> _resources = _xtextResourceSet.getResources();
+      EList<Resource> _resources = new XtextResourceSet().getResources();
       _resources.add(it);
     };
     XtextResource _doubleArrow = ObjectExtensions.<XtextResource>operator_doubleArrow(_xtextResource, _function);
     document.setInput(_doubleArrow);
     final ArrayList<CancelIndicator> cancelIndicators = CollectionLiterals.<CancelIndicator>newArrayList();
     this.addReaderCancelationListener(document, cancelIndicators);
-    boolean _isEmpty = cancelIndicators.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(cancelIndicators.isEmpty());
     final IUnitOfWork<Object, XtextResource> _function_1 = (XtextResource it) -> {
       return null;
     };
     document.<Object>readOnly(_function_1);
-    boolean _isEmpty_1 = cancelIndicators.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
+    Assert.assertTrue(cancelIndicators.isEmpty());
     final IUnitOfWork<Object, XtextResource> _function_2 = (XtextResource it) -> {
       return null;
     };
     document.<Object>readOnly(_function_2);
-    boolean _isEmpty_2 = cancelIndicators.isEmpty();
-    Assert.assertTrue(_isEmpty_2);
+    Assert.assertTrue(cancelIndicators.isEmpty());
   }
   
   private DocumentTokenSource createTokenSource() {
@@ -245,8 +226,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
         public Boolean exec(final XtextResource state, final CancelIndicator cancelIndicator) throws Exception {
           boolean _xblockexpression = false;
           {
-            boolean _isCanceled = cancelIndicator.isCanceled();
-            Assert.assertFalse(_isCanceled);
+            Assert.assertFalse(cancelIndicator.isCanceled());
             _xblockexpression = cancelIndicators.add(cancelIndicator);
           }
           return Boolean.valueOf(_xblockexpression);

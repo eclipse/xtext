@@ -2,9 +2,7 @@ package org.eclipse.xtext.idea.generator.parser.antlr;
 
 import com.google.common.collect.Iterables;
 import java.util.Arrays;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -32,8 +30,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
     boolean _matched = false;
     if (it instanceof ParserRule) {
       _matched=true;
-      CharSequence _compileEntryInit = this.compileEntryInit(((ParserRule)it), options);
-      _switchResult = _compileEntryInit.toString();
+      _switchResult = this.compileEntryInit(((ParserRule)it), options).toString();
     }
     if (!_matched) {
       _switchResult = super.compileInit(it, options);
@@ -105,8 +102,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
         _builder.append("UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(");
         _builder.newLine();
         {
-          List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(it);
-          Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_eAllContentsAsList, UnorderedGroup.class);
+          Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(EcoreUtil2.eAllContentsAsList(it), UnorderedGroup.class);
           boolean _hasElements = false;
           for(final UnorderedGroup group : _filter) {
             if (!_hasElements) {
@@ -115,8 +111,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
               _builder.appendImmediate(", ", "");
             }
             _builder.append("grammarAccess.");
-            UnorderedGroup _originalElement = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(group);
-            String _gaRuleElementAccessor = this._grammarAccess.gaRuleElementAccessor(_originalElement);
+            String _gaRuleElementAccessor = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(group));
             _builder.append(_gaRuleElementAccessor);
             _builder.newLineIfNotEmpty();
           }
@@ -133,8 +128,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
     boolean _matched = false;
     if (it instanceof ParserRule) {
       _matched=true;
-      CharSequence _compileEntryFinally = this.compileEntryFinally(((ParserRule)it), options);
-      _switchResult = _compileEntryFinally.toString();
+      _switchResult = this.compileEntryFinally(((ParserRule)it), options).toString();
     }
     if (!_matched) {
       _switchResult = super.compileFinally(it, options);
@@ -215,13 +209,11 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
     if (supportActions) {
       String _xblockexpression = null;
       {
-        EList<AbstractElement> _elements = it.getElements();
         final Function1<AbstractElement, Boolean> _function = (AbstractElement it_1) -> {
           boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it_1);
           return Boolean.valueOf((!_isOptionalCardinality));
         };
-        Iterable<AbstractElement> _filter = IterableExtensions.<AbstractElement>filter(_elements, _function);
-        final int mandatoryContent = IterableExtensions.size(_filter);
+        final int mandatoryContent = IterableExtensions.size(IterableExtensions.<AbstractElement>filter(it.getElements(), _function));
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("(");
         _builder.newLine();
@@ -230,8 +222,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().enter(grammarAccess.");
-        UnorderedGroup _originalElement = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-        String _gaRuleElementAccessor = this._grammarAccess.gaRuleElementAccessor(_originalElement);
+        String _gaRuleElementAccessor = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
         _builder.append(_gaRuleElementAccessor, "\t  ");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
@@ -245,8 +236,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
         _builder.append("(");
         _builder.newLine();
         {
-          EList<AbstractElement> _elements_1 = it.getElements();
-          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(_elements_1);
+          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(it.getElements());
           boolean _hasElements = false;
           for(final Pair<Integer, AbstractElement> element : _indexed) {
             if (!_hasElements) {
@@ -258,8 +248,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
             _builder.newLine();
             _builder.append("\t");
             _builder.append("{getUnorderedGroupHelper().canSelect(grammarAccess.");
-            UnorderedGroup _originalElement_1 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-            String _gaRuleElementAccessor_1 = this._grammarAccess.gaRuleElementAccessor(_originalElement_1);
+            String _gaRuleElementAccessor_1 = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
             _builder.append(_gaRuleElementAccessor_1, "\t");
             _builder.append(", ");
             Integer _key = element.getKey();
@@ -271,8 +260,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().select(grammarAccess.");
-            UnorderedGroup _originalElement_2 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-            String _gaRuleElementAccessor_2 = this._grammarAccess.gaRuleElementAccessor(_originalElement_2);
+            String _gaRuleElementAccessor_2 = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
             _builder.append(_gaRuleElementAccessor_2, "\t\t\t");
             _builder.append(", ");
             Integer _key_1 = element.getKey();
@@ -284,13 +272,11 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
             _builder.newLine();
             _builder.append("\t\t\t\t\t");
             _builder.append("({true}?=>(");
-            AbstractElement _value = element.getValue();
-            String _dataTypeEbnf2 = this.dataTypeEbnf2(_value, supportActions);
+            String _dataTypeEbnf2 = this.dataTypeEbnf2(element.getValue(), supportActions);
             _builder.append(_dataTypeEbnf2, "\t\t\t\t\t");
             _builder.append("))");
             {
-              AbstractElement _value_1 = element.getValue();
-              boolean _isMultipleCardinality = GrammarUtil.isMultipleCardinality(_value_1);
+              boolean _isMultipleCardinality = GrammarUtil.isMultipleCardinality(element.getValue());
               if (_isMultipleCardinality) {
                 _builder.append("+");
               }
@@ -301,8 +287,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().returnFromSelection(grammarAccess.");
-            UnorderedGroup _originalElement_3 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-            String _gaRuleElementAccessor_3 = this._grammarAccess.gaRuleElementAccessor(_originalElement_3);
+            String _gaRuleElementAccessor_3 = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
             _builder.append(_gaRuleElementAccessor_3, "\t\t\t");
             _builder.append(");");
             _builder.newLineIfNotEmpty();
@@ -324,8 +309,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("{getUnorderedGroupHelper().canLeave(grammarAccess.");
-            UnorderedGroup _originalElement_4 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-            String _gaRuleElementAccessor_4 = this._grammarAccess.gaRuleElementAccessor(_originalElement_4);
+            String _gaRuleElementAccessor_4 = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
             _builder.append(_gaRuleElementAccessor_4, "\t\t");
             _builder.append(")}?");
           } else {
@@ -343,8 +327,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().leave(grammarAccess.");
-        UnorderedGroup _originalElement_5 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-        String _gaRuleElementAccessor_5 = this._grammarAccess.gaRuleElementAccessor(_originalElement_5);
+        String _gaRuleElementAccessor_5 = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
         _builder.append(_gaRuleElementAccessor_5, "\t  ");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
@@ -383,13 +366,11 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
     if (supportActions) {
       String _xblockexpression = null;
       {
-        EList<AbstractElement> _elements = it.getElements();
         final Function1<AbstractElement, Boolean> _function = (AbstractElement it_1) -> {
           boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it_1);
           return Boolean.valueOf((!_isOptionalCardinality));
         };
-        Iterable<AbstractElement> _filter = IterableExtensions.<AbstractElement>filter(_elements, _function);
-        final int mandatoryContent = IterableExtensions.size(_filter);
+        final int mandatoryContent = IterableExtensions.size(IterableExtensions.<AbstractElement>filter(it.getElements(), _function));
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("(");
         _builder.newLine();
@@ -398,8 +379,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().enter(grammarAccess.");
-        UnorderedGroup _originalElement = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-        String _gaRuleElementAccessor = this._grammarAccess.gaRuleElementAccessor(_originalElement);
+        String _gaRuleElementAccessor = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
         _builder.append(_gaRuleElementAccessor, "\t  ");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
@@ -413,8 +393,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
         _builder.append("(");
         _builder.newLine();
         {
-          EList<AbstractElement> _elements_1 = it.getElements();
-          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(_elements_1);
+          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(it.getElements());
           boolean _hasElements = false;
           for(final Pair<Integer, AbstractElement> element : _indexed) {
             if (!_hasElements) {
@@ -426,8 +405,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
             _builder.newLine();
             _builder.append("\t");
             _builder.append("{getUnorderedGroupHelper().canSelect(grammarAccess.");
-            UnorderedGroup _originalElement_1 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-            String _gaRuleElementAccessor_1 = this._grammarAccess.gaRuleElementAccessor(_originalElement_1);
+            String _gaRuleElementAccessor_1 = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
             _builder.append(_gaRuleElementAccessor_1, "\t");
             _builder.append(", ");
             Integer _key = element.getKey();
@@ -439,8 +417,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().select(grammarAccess.");
-            UnorderedGroup _originalElement_2 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-            String _gaRuleElementAccessor_2 = this._grammarAccess.gaRuleElementAccessor(_originalElement_2);
+            String _gaRuleElementAccessor_2 = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
             _builder.append(_gaRuleElementAccessor_2, "\t\t\t");
             _builder.append(", ");
             Integer _key_1 = element.getKey();
@@ -452,13 +429,11 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
             _builder.newLine();
             _builder.append("\t\t\t\t\t");
             _builder.append("({true}?=>(");
-            AbstractElement _value = element.getValue();
-            String _ebnf2 = this.ebnf2(_value, options, supportActions);
+            String _ebnf2 = this.ebnf2(element.getValue(), options, supportActions);
             _builder.append(_ebnf2, "\t\t\t\t\t");
             _builder.append("))");
             {
-              AbstractElement _value_1 = element.getValue();
-              boolean _isMultipleCardinality = GrammarUtil.isMultipleCardinality(_value_1);
+              boolean _isMultipleCardinality = GrammarUtil.isMultipleCardinality(element.getValue());
               if (_isMultipleCardinality) {
                 _builder.append("+");
               }
@@ -469,8 +444,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().returnFromSelection(grammarAccess.");
-            UnorderedGroup _originalElement_3 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-            String _gaRuleElementAccessor_3 = this._grammarAccess.gaRuleElementAccessor(_originalElement_3);
+            String _gaRuleElementAccessor_3 = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
             _builder.append(_gaRuleElementAccessor_3, "\t\t\t");
             _builder.append(");");
             _builder.newLineIfNotEmpty();
@@ -492,8 +466,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("{getUnorderedGroupHelper().canLeave(grammarAccess.");
-            UnorderedGroup _originalElement_4 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-            String _gaRuleElementAccessor_4 = this._grammarAccess.gaRuleElementAccessor(_originalElement_4);
+            String _gaRuleElementAccessor_4 = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
             _builder.append(_gaRuleElementAccessor_4, "\t\t");
             _builder.append(")}?");
           } else {
@@ -511,8 +484,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().leave(grammarAccess.");
-        UnorderedGroup _originalElement_5 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-        String _gaRuleElementAccessor_5 = this._grammarAccess.gaRuleElementAccessor(_originalElement_5);
+        String _gaRuleElementAccessor_5 = this._grammarAccess.gaRuleElementAccessor(AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it));
         _builder.append(_gaRuleElementAccessor_5, "\t  ");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
@@ -531,32 +503,28 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
   @Override
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
     String __ebnf2 = super._ebnf2(it, options, supportActions);
-    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, this.isPassCurrentIntoFragment(), (!supportActions));
     return (__ebnf2 + _argumentList);
   }
   
   @Override
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
     String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
-    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, this.isPassCurrentIntoFragment(), (!supportActions));
     return (__dataTypeEbnf2 + _argumentList);
   }
   
   @Override
   protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     String _crossrefEbnf = super.crossrefEbnf(it, call, ref, supportActions);
-    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, _isPassCurrentIntoFragment, (!supportActions));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, this.isPassCurrentIntoFragment(), (!supportActions));
     return (_crossrefEbnf + _argumentList);
   }
   
   @Override
   protected String _assignmentEbnf(final RuleCall it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
-    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, this.isPassCurrentIntoFragment(), (!supportActions));
     return (__assignmentEbnf + _argumentList);
   }
   

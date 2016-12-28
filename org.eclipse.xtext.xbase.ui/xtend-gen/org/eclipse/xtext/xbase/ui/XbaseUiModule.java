@@ -4,8 +4,6 @@
 package org.eclipse.xtext.xbase.ui;
 
 import com.google.inject.Binder;
-import com.google.inject.binder.AnnotatedBindingBuilder;
-import com.google.inject.binder.LinkedBindingBuilder;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
@@ -53,9 +51,7 @@ public class XbaseUiModule extends AbstractXbaseUiModule {
   
   @Override
   public void configureResourceUIServiceLabelProvider(final Binder binder) {
-    AnnotatedBindingBuilder<ILabelProvider> _bind = binder.<ILabelProvider>bind(ILabelProvider.class);
-    LinkedBindingBuilder<ILabelProvider> _annotatedWith = _bind.annotatedWith(ResourceServiceDescriptionLabelProvider.class);
-    _annotatedWith.to(XbaseDescriptionLabelProvider.class);
+    binder.<ILabelProvider>bind(ILabelProvider.class).annotatedWith(ResourceServiceDescriptionLabelProvider.class).to(XbaseDescriptionLabelProvider.class);
   }
   
   @Override

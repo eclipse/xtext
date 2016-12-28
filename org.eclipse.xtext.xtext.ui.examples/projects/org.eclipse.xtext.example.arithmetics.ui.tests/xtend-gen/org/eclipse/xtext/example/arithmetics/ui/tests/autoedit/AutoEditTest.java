@@ -9,7 +9,6 @@ package org.eclipse.xtext.example.arithmetics.ui.tests.autoedit;
 
 import com.google.inject.Inject;
 import java.util.Collections;
-import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -98,8 +97,7 @@ public class AutoEditTest extends AbstractAutoEditTest {
   protected IProject createPluginProject(final String name) throws CoreException {
     this.projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
     this.projectFactory.setProjectName(name);
-    List<String> _singletonList = Collections.<String>singletonList("src");
-    this.projectFactory.addFolders(_singletonList);
+    this.projectFactory.addFolders(Collections.<String>singletonList("src"));
     this.projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID);
     this.projectFactory.addProjectNatures(XtextProjectHelper.NATURE_ID);
     NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();

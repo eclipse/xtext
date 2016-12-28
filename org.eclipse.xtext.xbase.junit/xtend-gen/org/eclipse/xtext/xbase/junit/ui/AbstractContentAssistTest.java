@@ -48,8 +48,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
   @BeforeClass
   public static void setUp() {
     try {
-      IJavaProject _createJavaProject = JavaProjectSetupUtil.createJavaProject("contentAssistTest");
-      AbstractContentAssistTest.javaProject = _createJavaProject;
+      AbstractContentAssistTest.javaProject = JavaProjectSetupUtil.createJavaProject("contentAssistTest");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -88,8 +87,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
         this.initializeTypeProvider(set);
         String _primaryFileExtension = this.fileExtensionProvider.getPrimaryFileExtension();
         String _plus = ("Test." + _primaryFileExtension);
-        URI _createURI = URI.createURI(_plus);
-        final Resource result = set.createResource(_createURI);
+        final Resource result = set.createResource(URI.createURI(_plus));
         result.load(stream, null);
         _xblockexpression = ((XtextResource) result);
       }
@@ -102,8 +100,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
   protected void initializeTypeProvider(final XtextResourceSet set) {
     final JdtTypeProviderFactory typeProviderFactory = new JdtTypeProviderFactory(this);
     typeProviderFactory.findOrCreateTypeProvider(set);
-    IJavaProject _javaProject = this.getJavaProject(set);
-    set.setClasspathURIContext(_javaProject);
+    set.setClasspathURIContext(this.getJavaProject(set));
   }
   
   @Override

@@ -70,15 +70,12 @@ public class FeatureProjectFactory extends ProjectFactory {
   @Override
   protected void enhanceProject(final IProject project, final SubMonitor subMonitor, final Shell shell) throws CoreException {
     super.enhanceProject(project, subMonitor, shell);
-    SubMonitor _newChild = subMonitor.newChild(1);
-    this.createManifest(project, _newChild);
-    SubMonitor _newChild_1 = subMonitor.newChild(1);
-    this.createBuildProperties(project, _newChild_1);
+    this.createManifest(project, subMonitor.newChild(1));
+    this.createBuildProperties(project, subMonitor.newChild(1));
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.mainCategoryName);
     boolean _not = (!_isNullOrEmpty);
     if (_not) {
-      SubMonitor _newChild_2 = subMonitor.newChild(1);
-      this.createCategoryFile(project, this.mainCategoryName, _newChild_2);
+      this.createCategoryFile(project, this.mainCategoryName, subMonitor.newChild(1));
     }
   }
   

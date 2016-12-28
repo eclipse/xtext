@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.workspace;
 
 import java.util.Set;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -32,8 +31,7 @@ public class JdtProjectConfig extends EclipseProjectConfig {
   @Override
   public Set<? extends ISourceFolder> getSourceFolders() {
     try {
-      IProject _project = this.getProject();
-      final IJavaProject javaProject = JavaCore.create(_project);
+      final IJavaProject javaProject = JavaCore.create(this.getProject());
       boolean _exists = javaProject.exists();
       boolean _not = (!_exists);
       if (_not) {
@@ -46,17 +44,14 @@ public class JdtProjectConfig extends EclipseProjectConfig {
       };
       final Iterable<IClasspathEntry> sourceEntries = IterableExtensions.<IClasspathEntry>filter(((Iterable<IClasspathEntry>)Conversions.doWrapArray(classpath)), _function);
       final Function1<IClasspathEntry, String> _function_1 = (IClasspathEntry it) -> {
-        IPath _path = it.getPath();
-        IPath _removeFirstSegments = _path.removeFirstSegments(1);
-        return _removeFirstSegments.toString();
+        return it.getPath().removeFirstSegments(1).toString();
       };
       final Iterable<String> sourceFolders = IterableExtensions.<IClasspathEntry, String>map(sourceEntries, _function_1);
       final Function1<String, EclipseSourceFolder> _function_2 = (String it) -> {
-        IProject _project_1 = this.getProject();
-        return new EclipseSourceFolder(_project_1, it);
+        IProject _project = this.getProject();
+        return new EclipseSourceFolder(_project, it);
       };
-      Iterable<EclipseSourceFolder> _map = IterableExtensions.<String, EclipseSourceFolder>map(sourceFolders, _function_2);
-      return IterableExtensions.<EclipseSourceFolder>toSet(_map);
+      return IterableExtensions.<EclipseSourceFolder>toSet(IterableExtensions.<String, EclipseSourceFolder>map(sourceFolders, _function_2));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

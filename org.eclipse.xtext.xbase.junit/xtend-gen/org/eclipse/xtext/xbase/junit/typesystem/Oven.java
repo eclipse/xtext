@@ -12,8 +12,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.lang.reflect.Method;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -56,8 +54,7 @@ public class Oven extends Assert {
   private ParseHelper<EObject> _parseHelper;
   
   public void fireproof(final CharSequence input) throws Exception {
-    String _string = input.toString();
-    this.fireproof(_string);
+    this.fireproof(input.toString());
   }
   
   public void fireproof(final String input) throws Exception {
@@ -66,8 +63,7 @@ public class Oven extends Assert {
       final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
       Assert.assertNotNull(resolvedTypes);
       if ((file != null)) {
-        TreeIterator<EObject> _eAllContents = file.eAllContents();
-        Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
+        Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(file.eAllContents());
         for (final EObject content : _iterable) {
           boolean _matched = false;
           if (content instanceof XAbstractFeatureCall) {
@@ -76,25 +72,22 @@ public class Oven extends Assert {
             XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
             boolean _tripleNotEquals = (_implicitReceiver != null);
             if (_tripleNotEquals) {
-              XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
-              this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
+              this.assertExpressionTypeIsResolved(((XAbstractFeatureCall)content).getImplicitReceiver(), resolvedTypes);
             }
             XExpression _implicitFirstArgument = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
             boolean _tripleNotEquals_1 = (_implicitFirstArgument != null);
             if (_tripleNotEquals_1) {
-              XExpression _implicitFirstArgument_1 = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
-              this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
+              this.assertExpressionTypeIsResolved(((XAbstractFeatureCall)content).getImplicitFirstArgument(), resolvedTypes);
             }
           }
           if (!_matched) {
             if (content instanceof XClosure) {
               _matched=true;
               this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-              EList<JvmFormalParameter> _implicitFormalParameters = ((XClosure)content).getImplicitFormalParameters();
               final Consumer<JvmFormalParameter> _function = (JvmFormalParameter it) -> {
                 this.assertIdentifiableTypeIsResolved(it, resolvedTypes);
               };
-              _implicitFormalParameters.forEach(_function);
+              ((XClosure)content).getImplicitFormalParameters().forEach(_function);
             }
           }
           if (!_matched) {
@@ -116,8 +109,7 @@ public class Oven extends Assert {
         final Throwable e = (Throwable)_t;
         String _message = e.getMessage();
         final ComparisonFailure error = new ComparisonFailure(_message, input, "");
-        StackTraceElement[] _stackTrace = e.getStackTrace();
-        error.setStackTrace(_stackTrace);
+        error.setStackTrace(e.getStackTrace());
         throw error;
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -172,12 +164,10 @@ public class Oven extends Assert {
       return;
     }
     final LightweightTypeReference type = types.getActualType(identifiable);
+    Assert.assertNotNull(identifiable.toString(), type);
     String _string = identifiable.toString();
-    Assert.assertNotNull(_string, type);
-    String _string_1 = identifiable.toString();
-    String _plus = (_string_1 + " / ");
+    String _plus = (_string + " / ");
     String _plus_1 = (_plus + type);
-    String _identifier = type.getIdentifier();
-    Assert.assertNotNull(_plus_1, _identifier);
+    Assert.assertNotNull(_plus_1, type.getIdentifier());
   }
 }

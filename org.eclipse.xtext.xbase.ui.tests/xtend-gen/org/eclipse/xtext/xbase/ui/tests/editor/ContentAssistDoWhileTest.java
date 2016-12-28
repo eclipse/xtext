@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistTest;
 import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
 import org.junit.AfterClass;
@@ -35,32 +34,21 @@ public class ContentAssistDoWhileTest extends ContentAssistTest {
   
   @Override
   public void testOnStringLiteral_33() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("(\'\'.toString )");
-    String[] _expect = this.expect(AbstractXbaseContentAssistTest.STRING_OPERATORS, new String[] { "as", "instanceof" });
-    _append.assertTextAtCursorPosition(")", _expect);
+    this.newBuilder().append("(\'\'.toString )").assertTextAtCursorPosition(")", this.expect(AbstractXbaseContentAssistTest.STRING_OPERATORS, new String[] { "as", "instanceof" }));
   }
   
   @Override
   public void testAfterBinaryOperation_06() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("((\'\'+\'\'))");
-    String[] _expect = this.expect(AbstractXbaseContentAssistTest.STRING_OPERATORS, new String[] { "as", "instanceof" });
-    _append.assertTextAtCursorPosition("))", 1, _expect);
+    this.newBuilder().append("((\'\'+\'\'))").assertTextAtCursorPosition("))", 1, this.expect(AbstractXbaseContentAssistTest.STRING_OPERATORS, new String[] { "as", "instanceof" }));
   }
   
   @Override
   public void testAfterBinaryOperation_07() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("((\'\'+\'\'))");
-    String[] _expect = this.expect(AbstractXbaseContentAssistTest.STRING_OPERATORS, new String[] { "as", "instanceof" });
-    _append.assertTextAtCursorPosition("))", _expect);
+    this.newBuilder().append("((\'\'+\'\'))").assertTextAtCursorPosition("))", this.expect(AbstractXbaseContentAssistTest.STRING_OPERATORS, new String[] { "as", "instanceof" }));
   }
   
   @Override
   public void testOnVoidMethod_01() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("(null as java.util.List).clear ");
-    _append.assertText("while");
+    this.newBuilder().append("(null as java.util.List).clear ").assertText("while");
   }
 }

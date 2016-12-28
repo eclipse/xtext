@@ -50,8 +50,7 @@ public class DefaultImportsConfigurationTest {
       _builder.newLine();
       final Model model = this.parser.parse(_builder);
       Resource _eResource = model.eResource();
-      int _importSectionOffset = this.defaultImportsConfiguration.getImportSectionOffset(((XtextResource) _eResource));
-      Assert.assertEquals(0, _importSectionOffset);
+      Assert.assertEquals(0, this.defaultImportsConfiguration.getImportSectionOffset(((XtextResource) _eResource)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

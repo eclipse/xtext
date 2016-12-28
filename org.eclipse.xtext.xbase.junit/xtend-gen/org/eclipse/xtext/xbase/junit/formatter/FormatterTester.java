@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -20,7 +19,6 @@ import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.formatting.AbstractFormatter;
-import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.formatting.TextReplacement;
 import org.eclipse.xtext.xbase.junit.formatter.AssertingFormatterData;
@@ -68,16 +66,10 @@ public class FormatterTester {
       boolean _isAllowErrors = it.isAllowErrors();
       boolean _not = (!_isAllowErrors);
       if (_not) {
-        Resource _eResource = parsed.eResource();
-        EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-        String _join = IterableExtensions.join(_errors, "\n");
-        Resource _eResource_1 = parsed.eResource();
-        EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-        int _size = _errors_1.size();
-        Assert.assertEquals(_join, 0, _size);
+        Assert.assertEquals(IterableExtensions.join(parsed.eResource().getErrors(), "\n"), 0, parsed.eResource().getErrors().size());
       }
-      Resource _eResource_2 = parsed.eResource();
-      IParseResult _parseResult = ((XtextResource) _eResource_2).getParseResult();
+      Resource _eResource = parsed.eResource();
+      IParseResult _parseResult = ((XtextResource) _eResource).getParseResult();
       ICompositeNode _rootNode = null;
       if (_parseResult!=null) {
         _rootNode=_parseResult.getRootNode();
@@ -93,14 +85,11 @@ public class FormatterTester {
         _matched=true;
         ((AbstractFormatter)this.formatter).setAllowIdentityEdits(true);
       }
-      String _prefix_1 = it.getPrefix();
-      final int start = _prefix_1.length();
-      CharSequence _toBeFormatted_1 = it.getToBeFormatted();
-      final int length = _toBeFormatted_1.length();
+      final int start = it.getPrefix().length();
+      final int length = it.getToBeFormatted().length();
       final LinkedHashSet<TextReplacement> edits = CollectionLiterals.<TextReplacement>newLinkedHashSet();
-      Resource _eResource_3 = parsed.eResource();
-      FormattingPreferenceValues _cfg = it.getCfg();
-      List<TextReplacement> _format = this.formatter.format(((XtextResource) _eResource_3), start, length, _cfg);
+      Resource _eResource_1 = parsed.eResource();
+      List<TextReplacement> _format = this.formatter.format(((XtextResource) _eResource_1), start, length, it.getCfg());
       Iterables.<TextReplacement>addAll(edits, _format);
       final IBasicFormatter formatter_1 = this.formatter;
       boolean _matched_1 = false;
@@ -114,58 +103,45 @@ public class FormatterTester {
       boolean _isAllowErrors_1 = it.isAllowErrors();
       boolean _not_1 = (!_isAllowErrors_1);
       if (_not_1) {
-        Resource _eResource_4 = parsed.eResource();
-        ArrayList<TextReplacement> _createMissingEditReplacements = this.createMissingEditReplacements(((XtextResource) _eResource_4), edits, start, length);
+        Resource _eResource_2 = parsed.eResource();
+        ArrayList<TextReplacement> _createMissingEditReplacements = this.createMissingEditReplacements(((XtextResource) _eResource_2), edits, start, length);
         Iterables.<TextReplacement>addAll(edits, _createMissingEditReplacements);
       }
       final String newDocument = this.applyEdits(oldDocument, edits);
       try {
-        String _prefix_2 = it.getPrefix();
+        String _prefix_1 = it.getPrefix();
         CharSequence _expectation = it.getExpectation();
-        String _plus_1 = (_prefix_2 + _expectation);
+        String _plus_1 = (_prefix_1 + _expectation);
         String _postfix_1 = it.getPostfix();
-        String _plus_2 = (_plus_1 + _postfix_1);
-        String _string = _plus_2.toString();
-        String _string_1 = newDocument.toString();
-        Assert.assertEquals(_string, _string_1);
+        Assert.assertEquals((_plus_1 + _postfix_1).toString(), newDocument.toString());
       } catch (final Throwable _t) {
         if (_t instanceof AssertionError) {
           final AssertionError e = (AssertionError)_t;
-          String _applyDebugEdits = this.applyDebugEdits(oldDocument, edits);
-          InputOutput.<String>println(_applyDebugEdits);
+          InputOutput.<String>println(this.applyDebugEdits(oldDocument, edits));
           InputOutput.println();
           throw e;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      Resource _eResource_5 = parsed.eResource();
-      int _length = fullToBeParsed.length();
-      FormattingPreferenceValues _cfg_1 = it.getCfg();
-      List<TextReplacement> _format_1 = this.formatter.format(((XtextResource) _eResource_5), 0, _length, _cfg_1);
-      final String parsed2Doc = this.applyEdits(fullToBeParsed, _format_1);
+      Resource _eResource_3 = parsed.eResource();
+      final String parsed2Doc = this.applyEdits(fullToBeParsed, 
+        this.formatter.format(((XtextResource) _eResource_3), 0, fullToBeParsed.length(), it.getCfg()));
       final EObject parsed2 = this._parseHelper.parse(parsed2Doc);
       boolean _isAllowErrors_2 = it.isAllowErrors();
       boolean _not_2 = (!_isAllowErrors_2);
       if (_not_2) {
-        Resource _eResource_6 = parsed2.eResource();
-        EList<Resource.Diagnostic> _errors_2 = _eResource_6.getErrors();
-        int _size_1 = _errors_2.size();
-        Assert.assertEquals(0, _size_1);
+        Assert.assertEquals(0, parsed2.eResource().getErrors().size());
       }
-      Resource _eResource_7 = parsed2.eResource();
-      int _length_1 = parsed2Doc.length();
-      FormattingPreferenceValues _cfg_2 = it.getCfg();
-      final List<TextReplacement> edits2 = this.formatter.format(((XtextResource) _eResource_7), 0, _length_1, _cfg_2);
+      Resource _eResource_4 = parsed2.eResource();
+      final List<TextReplacement> edits2 = this.formatter.format(((XtextResource) _eResource_4), 0, parsed2Doc.length(), it.getCfg());
       final String newDocument2 = this.applyEdits(parsed2Doc, edits2);
       try {
-        String _string_2 = newDocument2.toString();
-        Assert.assertEquals(parsed2Doc, _string_2);
+        Assert.assertEquals(parsed2Doc, newDocument2.toString());
       } catch (final Throwable _t_1) {
         if (_t_1 instanceof AssertionError) {
           final AssertionError e_1 = (AssertionError)_t_1;
-          String _applyDebugEdits_1 = this.applyDebugEdits(newDocument, edits2);
-          InputOutput.<String>println(_applyDebugEdits_1);
+          InputOutput.<String>println(this.applyDebugEdits(newDocument, edits2));
           InputOutput.println();
           throw e_1;
         } else {
@@ -188,20 +164,15 @@ public class FormatterTester {
       List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
       for (final TextReplacement edit : _sortBy) {
         {
+          newDocument.append(oldDocument.substring(lastOffset, edit.getOffset()));
+          newDocument.append(edit.getText());
           int _offset = edit.getOffset();
-          String _substring = oldDocument.substring(lastOffset, _offset);
-          newDocument.append(_substring);
-          String _text = edit.getText();
-          newDocument.append(_text);
-          int _offset_1 = edit.getOffset();
           int _length = edit.getLength();
-          int _plus = (_offset_1 + _length);
+          int _plus = (_offset + _length);
           lastOffset = _plus;
         }
       }
-      int _length = oldDocument.length();
-      String _substring = oldDocument.substring(lastOffset, _length);
-      newDocument.append(_substring);
+      newDocument.append(oldDocument.substring(lastOffset, oldDocument.length()));
       _xblockexpression = newDocument.toString();
     }
     return _xblockexpression;
@@ -218,31 +189,26 @@ public class FormatterTester {
       List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
       for (final TextReplacement edit : _sortBy) {
         {
-          int _offset = edit.getOffset();
-          String _substring = oldDocument.substring(lastOffset, _offset);
-          debugTrace.append(_substring);
+          debugTrace.append(oldDocument.substring(lastOffset, edit.getOffset()));
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("[");
-          int _offset_1 = edit.getOffset();
-          int _offset_2 = edit.getOffset();
+          int _offset = edit.getOffset();
           int _length = edit.getLength();
-          int _plus = (_offset_2 + _length);
-          String _substring_1 = oldDocument.substring(_offset_1, _plus);
-          _builder.append(_substring_1);
+          int _plus = (_offset + _length);
+          String _substring = oldDocument.substring(edit.getOffset(), _plus);
+          _builder.append(_substring);
           _builder.append("|");
           String _text = edit.getText();
           _builder.append(_text);
           _builder.append("]");
           debugTrace.append(_builder);
-          int _offset_3 = edit.getOffset();
+          int _offset_1 = edit.getOffset();
           int _length_1 = edit.getLength();
-          int _plus_1 = (_offset_3 + _length_1);
+          int _plus_1 = (_offset_1 + _length_1);
           lastOffset = _plus_1;
         }
       }
-      int _length = oldDocument.length();
-      String _substring = oldDocument.substring(lastOffset, _length);
-      debugTrace.append(_substring);
+      debugTrace.append(oldDocument.substring(lastOffset, oldDocument.length()));
       _xblockexpression = debugTrace.toString();
     }
     return _xblockexpression;
@@ -254,8 +220,7 @@ public class FormatterTester {
       final Function1<TextReplacement, Integer> _function = (TextReplacement it) -> {
         return Integer.valueOf(it.getOffset());
       };
-      Iterable<Integer> _map = IterableExtensions.<TextReplacement, Integer>map(edits, _function);
-      final Set<Integer> offsets = IterableExtensions.<Integer>toSet(_map);
+      final Set<Integer> offsets = IterableExtensions.<Integer>toSet(IterableExtensions.<TextReplacement, Integer>map(edits, _function));
       final ArrayList<TextReplacement> result = CollectionLiterals.<TextReplacement>newArrayList();
       int lastOffset = 0;
       Iterable<ILeafNode> _elvis = null;

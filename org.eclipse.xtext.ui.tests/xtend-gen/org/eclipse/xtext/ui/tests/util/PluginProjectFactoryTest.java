@@ -24,21 +24,17 @@ public class PluginProjectFactoryTest {
     final TestablePluginProjectFactory factory = new TestablePluginProjectFactory();
     StringBuilder content = new StringBuilder();
     factory.addToBuildProperties(content, null, "key");
-    String _string = content.toString();
-    Assert.assertEquals("", _string);
+    Assert.assertEquals("", content.toString());
     StringBuilder _stringBuilder = new StringBuilder();
     content = _stringBuilder;
     factory.addToBuildProperties(content, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), "key");
-    String _string_1 = content.toString();
-    Assert.assertEquals("", _string_1);
+    Assert.assertEquals("", content.toString());
     StringBuilder _stringBuilder_1 = new StringBuilder();
     content = _stringBuilder_1;
     factory.addToBuildProperties(content, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("entry1")), "key");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("key = entry1");
-    String _string_2 = _builder.toString();
-    String _string_3 = content.toString();
-    Assert.assertEquals(_string_2, _string_3);
+    Assert.assertEquals(_builder.toString(), content.toString());
     StringBuilder _stringBuilder_2 = new StringBuilder();
     content = _stringBuilder_2;
     factory.addToBuildProperties(content, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("entry1", "entry2", "entry3")), "key");
@@ -50,8 +46,6 @@ public class PluginProjectFactoryTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("entry3");
-    String _string_4 = _builder_1.toString();
-    String _string_5 = content.toString();
-    Assert.assertEquals(_string_4, _string_5);
+    Assert.assertEquals(_builder_1.toString(), content.toString());
   }
 }

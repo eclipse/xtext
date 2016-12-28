@@ -37,8 +37,7 @@ public class ArithmeticsCallHierarchyBuilder extends DefaultCallHierarchyBuilder
       return description;
     }
     final IUnitOfWork<IEObjectDescription, EObject> _function = (EObject object) -> {
-      AbstractDefinition _containerOfType = EcoreUtil2.<AbstractDefinition>getContainerOfType(object, AbstractDefinition.class);
-      return this.getDescription(_containerOfType);
+      return this.getDescription(EcoreUtil2.<AbstractDefinition>getContainerOfType(object, AbstractDefinition.class));
     };
     return this.<IEObjectDescription>readOnly(objectURI, _function);
   }

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.example.arithmetics.ui.quickfix;
 
 import org.eclipse.xtext.example.arithmetics.validation.ArithmeticsValidator;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
@@ -25,13 +24,9 @@ import org.eclipse.xtext.validation.Issue;
 public class ArithmeticsQuickfixProvider extends DefaultQuickfixProvider {
   @Fix(ArithmeticsValidator.NORMALIZABLE)
   public void normalize(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    String[] _data = issue.getData();
-    final String string = _data[0];
+    final String string = issue.getData()[0];
     final IModification _function = (IModificationContext it) -> {
-      IXtextDocument _xtextDocument = it.getXtextDocument();
-      Integer _offset = issue.getOffset();
-      Integer _length = issue.getLength();
-      _xtextDocument.replace((_offset).intValue(), (_length).intValue(), string);
+      it.getXtextDocument().replace((issue.getOffset()).intValue(), (issue.getLength()).intValue(), string);
     };
     acceptor.accept(issue, ("Replace with " + string), (("Replace expression with \'" + string) + "\'"), "upcase.png", _function);
   }

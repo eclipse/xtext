@@ -10,7 +10,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.example.homeautomation.jvmmodel.RuleEngineJvmModelInferrer;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Declaration;
@@ -48,8 +47,7 @@ public class RuleEngineValidator extends AbstractRuleEngineValidator {
     EList<Declaration> _declarations = model.getDeclarations();
     for (final Declaration decl : _declarations) {
       if ((decl instanceof Device)) {
-        String _name = ((Device)decl).getName();
-        boolean _add = deviceNames.add(_name);
+        boolean _add = deviceNames.add(((Device)decl).getName());
         boolean _not = (!_add);
         if (_not) {
           this.error("Device names must be unique.", decl, RuleEnginePackage.Literals.DEVICE__NAME);
@@ -69,8 +67,7 @@ public class RuleEngineValidator extends AbstractRuleEngineValidator {
   
   @Check
   public void checkStatesNotEmpty(final Device device) {
-    EList<org.eclipse.xtext.example.homeautomation.ruleEngine.State> _states = device.getStates();
-    boolean _isEmpty = _states.isEmpty();
+    boolean _isEmpty = device.getStates().isEmpty();
     if (_isEmpty) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("The device \"");
@@ -86,8 +83,7 @@ public class RuleEngineValidator extends AbstractRuleEngineValidator {
     final HashSet<String> stateNames = CollectionLiterals.<String>newHashSet();
     EList<org.eclipse.xtext.example.homeautomation.ruleEngine.State> _states = device.getStates();
     for (final org.eclipse.xtext.example.homeautomation.ruleEngine.State state : _states) {
-      String _name = state.getName();
-      boolean _add = stateNames.add(_name);
+      boolean _add = stateNames.add(state.getName());
       boolean _not = (!_add);
       if (_not) {
         this.error("State names must be unique.", state, RuleEnginePackage.Literals.STATE__NAME);
@@ -97,8 +93,7 @@ public class RuleEngineValidator extends AbstractRuleEngineValidator {
   
   @Check
   public void checkRuleDescriptionNotEmpty(final Rule rule) {
-    String _description = rule.getDescription();
-    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_description);
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(rule.getDescription());
     if (_isNullOrEmpty) {
       this.error("A rule description must not be empty.", rule, RuleEnginePackage.Literals.RULE__DESCRIPTION);
     }
@@ -108,11 +103,9 @@ public class RuleEngineValidator extends AbstractRuleEngineValidator {
   public void checkRuleRecursion(final XFeatureCall featureCall) {
     final Rule containingRule = EcoreUtil2.<Rule>getContainerOfType(featureCall, Rule.class);
     if (((((containingRule != null) && (featureCall.getFeature() instanceof JvmOperation)) && Objects.equal(featureCall.getConcreteSyntaxFeatureName(), "fire")) && (featureCall.getFeatureCallArguments().size() == 1))) {
-      EList<XExpression> _featureCallArguments = featureCall.getFeatureCallArguments();
-      final XExpression argument = IterableExtensions.<XExpression>head(_featureCallArguments);
+      final XExpression argument = IterableExtensions.<XExpression>head(featureCall.getFeatureCallArguments());
       if ((argument instanceof XAbstractFeatureCall)) {
-        JvmIdentifiableElement _feature = ((XAbstractFeatureCall)argument).getFeature();
-        final EObject sourceElem = this._iJvmModelAssociations.getPrimarySourceElement(_feature);
+        final EObject sourceElem = this._iJvmModelAssociations.getPrimarySourceElement(((XAbstractFeatureCall)argument).getFeature());
         org.eclipse.xtext.example.homeautomation.ruleEngine.State _deviceState = containingRule.getDeviceState();
         boolean _equals = Objects.equal(sourceElem, _deviceState);
         if (_equals) {

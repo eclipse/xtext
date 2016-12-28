@@ -12,18 +12,12 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Module;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.output.Outlet;
@@ -32,7 +26,6 @@ import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.EcoreUtil2;
@@ -44,11 +37,8 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.generator.BindFactory;
-import org.eclipse.xtext.generator.BindKey;
-import org.eclipse.xtext.generator.BindValue;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.LanguageConfig;
-import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
@@ -122,56 +112,39 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   
   @Override
   public void generate(final LanguageConfig config, final XpandExecutionContext ctx) {
+    this.fileExtension = IterableExtensions.<String>head(config.getFileExtensions(config.getGrammar()));
+    Guice.createInjector(this.createModule(config.getGrammar())).injectMembers(this);
     Grammar _grammar = config.getGrammar();
-    List<String> _fileExtensions = config.getFileExtensions(_grammar);
-    String _head = IterableExtensions.<String>head(_fileExtensions);
-    this.fileExtension = _head;
-    Grammar _grammar_1 = config.getGrammar();
-    Module _createModule = this.createModule(_grammar_1);
-    Injector _createInjector = Guice.createInjector(_createModule);
-    _createInjector.injectMembers(this);
-    Grammar _grammar_2 = config.getGrammar();
     Xtend2ExecutionContext _xtend2ExecutionContext = new Xtend2ExecutionContext(ctx);
-    this.generate(_grammar_2, _xtend2ExecutionContext);
+    this.generate(_grammar, _xtend2ExecutionContext);
   }
   
   @Override
   public void generate(final Grammar grammar, final Xtend2ExecutionContext ctx) {
-    Naming _naming = this.getNaming();
-    String _lineDelimiter = _naming.getLineDelimiter();
-    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.ideaProjectPath, this.encoding, _lineDelimiter);
-    Outlet _srcGenOutlet = this._xtextIDEAGeneratorExtensions.getSrcGenOutlet(ctx);
-    String outlet_src_gen = _srcGenOutlet.getName();
+    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.ideaProjectPath, this.encoding, this.getNaming().getLineDelimiter());
+    String outlet_src_gen = this._xtextIDEAGeneratorExtensions.getSrcGenOutlet(ctx).getName();
     String _xifexpression = null;
     if (this.srcGenOnly) {
       _xifexpression = outlet_src_gen;
     } else {
-      Outlet _srcOutlet = this._xtextIDEAGeneratorExtensions.getSrcOutlet(ctx);
-      _xifexpression = _srcOutlet.getName();
+      _xifexpression = this._xtextIDEAGeneratorExtensions.getSrcOutlet(ctx).getName();
     }
     String outlet_src = _xifexpression;
     final BindFactory bindFactory = new BindFactory();
-    String _antlrTokenFileProvider = this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
-    bindFactory.addTypeToType("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider", _antlrTokenFileProvider);
+    bindFactory.addTypeToType("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider", this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar));
+    bindFactory.addTypeToType("org.eclipse.xtext.parser.antlr.Lexer", this._ideaPluginClassNames.getPsiInternalLexerName(grammar));
     String _psiInternalLexerName = this._ideaPluginClassNames.getPsiInternalLexerName(grammar);
-    bindFactory.addTypeToType("org.eclipse.xtext.parser.antlr.Lexer", _psiInternalLexerName);
-    String _psiInternalLexerName_1 = this._ideaPluginClassNames.getPsiInternalLexerName(grammar);
     String _plus = (((("binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)" + 
       ".annotatedWith(com.google.inject.name.Names.named(") + 
       "org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME") + 
-      ")).to(") + _psiInternalLexerName_1);
+      ")).to(") + _psiInternalLexerName);
     String _plus_1 = (_plus + ".class)");
     bindFactory.addConfiguredBinding("RuntimeLexer", _plus_1);
-    String _psiParserName = this._ideaPluginClassNames.getPsiParserName(grammar);
-    bindFactory.addTypeToType("com.intellij.lang.PsiParser", _psiParserName);
-    String _tokenTypeProviderName = this._ideaPluginClassNames.getTokenTypeProviderName(grammar);
-    bindFactory.addTypeToType("org.eclipse.xtext.idea.parser.TokenTypeProvider", _tokenTypeProviderName);
-    String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
-    bindFactory.addTypeToType("com.intellij.lang.ParserDefinition", _parserDefinitionName);
-    String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
-    bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.idea.lang.IElementTypeProvider", _elementTypeProviderName);
-    String _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    bindFactory.addTypeToType("org.eclipse.xtext.idea.facet.AbstractFacetConfiguration", _facetConfiguration);
+    bindFactory.addTypeToType("com.intellij.lang.PsiParser", this._ideaPluginClassNames.getPsiParserName(grammar));
+    bindFactory.addTypeToType("org.eclipse.xtext.idea.parser.TokenTypeProvider", this._ideaPluginClassNames.getTokenTypeProviderName(grammar));
+    bindFactory.addTypeToType("com.intellij.lang.ParserDefinition", this._ideaPluginClassNames.getParserDefinitionName(grammar));
+    bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.idea.lang.IElementTypeProvider", this._ideaPluginClassNames.getElementTypeProviderName(grammar));
+    bindFactory.addTypeToType("org.eclipse.xtext.idea.facet.AbstractFacetConfiguration", this._ideaPluginClassNames.getFacetConfiguration(grammar));
     String _facetTypeName = this._ideaPluginClassNames.getFacetTypeName(grammar);
     String _plus_2 = (_facetTypeName + ".TYPEID");
     bindFactory.addTypeToInstance("com.intellij.facet.FacetTypeId", _plus_2);
@@ -192,136 +165,56 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       bindFactory.addTypeToType("org.eclipse.xtext.idea.findusages.WordsScannerProvider", "org.eclipse.xtext.xbase.idea.findusages.XbaseWordsScanner.XbaseWordsScannerProvider");
     }
     final Set<Binding> bindings = bindFactory.getBindings();
-    String _standaloneSetupIdea = this._ideaPluginClassNames.getStandaloneSetupIdea(grammar);
-    String _javaPath = this._ideaPluginClassNames.toJavaPath(_standaloneSetupIdea);
-    CharSequence _compileStandaloneSetup = this.compileStandaloneSetup(grammar);
-    ctx.writeFile(outlet_src, _javaPath, _compileStandaloneSetup);
-    String _ideaSetup = this._ideaPluginClassNames.getIdeaSetup(grammar);
-    String _xtendPath = this._ideaPluginClassNames.toXtendPath(_ideaSetup);
-    CharSequence _compileIdeaSetup = this.compileIdeaSetup(grammar);
-    ctx.writeFile(outlet_src, _xtendPath, _compileIdeaSetup);
-    String _ideaModuleName = this._ideaPluginClassNames.getIdeaModuleName(grammar);
-    String _javaPath_1 = this._ideaPluginClassNames.toJavaPath(_ideaModuleName);
-    CharSequence _compileIdeaModule = this.compileIdeaModule(grammar);
-    ctx.writeFile(outlet_src, _javaPath_1, _compileIdeaModule);
-    String _completionContributor = this._ideaPluginClassNames.getCompletionContributor(grammar);
-    String _xtendPath_1 = this._ideaPluginClassNames.toXtendPath(_completionContributor);
-    CharSequence _compileCompletionContributor = this.compileCompletionContributor(grammar);
-    ctx.writeFile(outlet_src, _xtendPath_1, _compileCompletionContributor);
+    ctx.writeFile(outlet_src, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getStandaloneSetupIdea(grammar)), this.compileStandaloneSetup(grammar));
+    ctx.writeFile(outlet_src, this._ideaPluginClassNames.toXtendPath(this._ideaPluginClassNames.getIdeaSetup(grammar)), this.compileIdeaSetup(grammar));
+    ctx.writeFile(outlet_src, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getIdeaModuleName(grammar)), this.compileIdeaModule(grammar));
+    ctx.writeFile(outlet_src, this._ideaPluginClassNames.toXtendPath(this._ideaPluginClassNames.getCompletionContributor(grammar)), this.compileCompletionContributor(grammar));
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("META-INF/services/");
     String _name = ISetup.class.getName();
     _builder.append(_name);
-    CharSequence _compileServicesISetup = this.compileServicesISetup(grammar);
-    ctx.writeFile(outlet_src_gen, _builder.toString(), _compileServicesISetup);
-    String _abstractCompletionContributor = this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
-    String _javaPath_2 = this._ideaPluginClassNames.toJavaPath(_abstractCompletionContributor);
-    CharSequence _compileAbstractCompletionContributor = this.compileAbstractCompletionContributor(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_2, _compileAbstractCompletionContributor);
-    String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _javaPath_3 = this._ideaPluginClassNames.toJavaPath(_languageName);
-    CharSequence _compileLanguage = this.compileLanguage(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_3, _compileLanguage);
-    String _fileTypeName = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _xtendPath_2 = this._ideaPluginClassNames.toXtendPath(_fileTypeName);
-    CharSequence _compileFileType = this.compileFileType(grammar);
-    ctx.writeFile(outlet_src, _xtendPath_2, _compileFileType);
-    String _abstractFileTypeName = this._ideaPluginClassNames.getAbstractFileTypeName(grammar);
-    String _javaPath_4 = this._ideaPluginClassNames.toJavaPath(_abstractFileTypeName);
-    CharSequence _compileAbstractFileType = this.compileAbstractFileType(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_4, _compileAbstractFileType);
-    String _fileTypeFactoryName = this._ideaPluginClassNames.getFileTypeFactoryName(grammar);
-    String _javaPath_5 = this._ideaPluginClassNames.toJavaPath(_fileTypeFactoryName);
-    CharSequence _compileFileTypeFactory = this.compileFileTypeFactory(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_5, _compileFileTypeFactory);
-    String _fileImplName = this._ideaPluginClassNames.getFileImplName(grammar);
-    String _javaPath_6 = this._ideaPluginClassNames.toJavaPath(_fileImplName);
-    CharSequence _compileFileImpl = this.compileFileImpl(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_6, _compileFileImpl);
-    String _tokenTypeProviderName_1 = this._ideaPluginClassNames.getTokenTypeProviderName(grammar);
-    String _javaPath_7 = this._ideaPluginClassNames.toJavaPath(_tokenTypeProviderName_1);
-    CharSequence _compileTokenTypeProvider = this.compileTokenTypeProvider(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_7, _compileTokenTypeProvider);
-    String _elementTypeProviderName_1 = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
-    String _javaPath_8 = this._ideaPluginClassNames.toJavaPath(_elementTypeProviderName_1);
-    CharSequence _compileElementTypeProvider = this.compileElementTypeProvider(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_8, _compileElementTypeProvider);
-    String _parserDefinitionName_1 = this._ideaPluginClassNames.getParserDefinitionName(grammar);
-    String _javaPath_9 = this._ideaPluginClassNames.toJavaPath(_parserDefinitionName_1);
-    CharSequence _compileParserDefinition = this.compileParserDefinition(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_9, _compileParserDefinition);
-    String _syntaxHighlighterFactoryName = this._ideaPluginClassNames.getSyntaxHighlighterFactoryName(grammar);
-    String _javaPath_10 = this._ideaPluginClassNames.toJavaPath(_syntaxHighlighterFactoryName);
-    CharSequence _compileSyntaxHighlighterFactory = this.compileSyntaxHighlighterFactory(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_10, _compileSyntaxHighlighterFactory);
-    String _semanticHighlightVisitorName = this._ideaPluginClassNames.getSemanticHighlightVisitorName(grammar);
-    String _javaPath_11 = this._ideaPluginClassNames.toJavaPath(_semanticHighlightVisitorName);
-    CharSequence _compileSemanticHighlightVisitor = this.compileSemanticHighlightVisitor(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_11, _compileSemanticHighlightVisitor);
-    String _abstractIdeaModuleName = this._ideaPluginClassNames.getAbstractIdeaModuleName(grammar);
-    String _javaPath_12 = this._ideaPluginClassNames.toJavaPath(_abstractIdeaModuleName);
-    CharSequence _compileGuiceModuleIdeaGenerated = this.compileGuiceModuleIdeaGenerated(grammar, bindings);
-    ctx.writeFile(outlet_src_gen, _javaPath_12, _compileGuiceModuleIdeaGenerated);
-    String _extensionFactoryName = this._ideaPluginClassNames.getExtensionFactoryName(grammar);
-    String _javaPath_13 = this._ideaPluginClassNames.toJavaPath(_extensionFactoryName);
-    CharSequence _compileExtensionFactory = this.compileExtensionFactory(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_13, _compileExtensionFactory);
-    String _codeBlockModificationListenerName = this._ideaPluginClassNames.getCodeBlockModificationListenerName(grammar);
-    String _javaPath_14 = this._ideaPluginClassNames.toJavaPath(_codeBlockModificationListenerName);
-    CharSequence _compileCodeBlockModificationListener = this.compileCodeBlockModificationListener(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_14, _compileCodeBlockModificationListener);
-    String _psiParserName_1 = this._ideaPluginClassNames.getPsiParserName(grammar);
-    String _javaPath_15 = this._ideaPluginClassNames.toJavaPath(_psiParserName_1);
-    CharSequence _compilePsiParser = this.compilePsiParser(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_15, _compilePsiParser);
-    String _antlrTokenFileProvider_1 = this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
-    String _javaPath_16 = this._ideaPluginClassNames.toJavaPath(_antlrTokenFileProvider_1);
-    CharSequence _compileAntlrTokenFileProvider = this.compileAntlrTokenFileProvider(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_16, _compileAntlrTokenFileProvider);
-    String _pomDeclarationSearcherName = this._ideaPluginClassNames.getPomDeclarationSearcherName(grammar);
-    String _javaPath_17 = this._ideaPluginClassNames.toJavaPath(_pomDeclarationSearcherName);
-    CharSequence _compilePomDeclarationSearcher = this.compilePomDeclarationSearcher(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_17, _compilePomDeclarationSearcher);
-    String _facetTypeName_1 = this._ideaPluginClassNames.getFacetTypeName(grammar);
-    String _javaPath_18 = this._ideaPluginClassNames.toJavaPath(_facetTypeName_1);
-    CharSequence _compileFacetType = this.compileFacetType(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_18, _compileFacetType);
-    String _facetConfiguration_1 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    String _javaPath_19 = this._ideaPluginClassNames.toJavaPath(_facetConfiguration_1);
-    CharSequence _compileFacetConfiguration = this.compileFacetConfiguration(grammar);
-    ctx.writeFile(outlet_src, _javaPath_19, _compileFacetConfiguration);
-    String _baseColorSettingsPage = this._ideaPluginClassNames.baseColorSettingsPage(grammar);
-    String _javaPath_20 = this._ideaPluginClassNames.toJavaPath(_baseColorSettingsPage);
-    CharSequence _compileBaseColorSettingsPage = this.compileBaseColorSettingsPage(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_20, _compileBaseColorSettingsPage);
-    String _colorSettingsPage = this._ideaPluginClassNames.colorSettingsPage(grammar);
-    String _xtendPath_3 = this._ideaPluginClassNames.toXtendPath(_colorSettingsPage);
-    CharSequence _compileColorSettingsPage = this.compileColorSettingsPage(grammar);
-    ctx.writeFile(outlet_src, _xtendPath_3, _compileColorSettingsPage);
+    ctx.writeFile(outlet_src_gen, _builder.toString(), this.compileServicesISetup(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getAbstractCompletionContributor(grammar)), this.compileAbstractCompletionContributor(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getLanguageName(grammar)), this.compileLanguage(grammar));
+    ctx.writeFile(outlet_src, this._ideaPluginClassNames.toXtendPath(this._ideaPluginClassNames.getFileTypeName(grammar)), this.compileFileType(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getAbstractFileTypeName(grammar)), this.compileAbstractFileType(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getFileTypeFactoryName(grammar)), this.compileFileTypeFactory(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getFileImplName(grammar)), this.compileFileImpl(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getTokenTypeProviderName(grammar)), this.compileTokenTypeProvider(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getElementTypeProviderName(grammar)), this.compileElementTypeProvider(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getParserDefinitionName(grammar)), this.compileParserDefinition(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getSyntaxHighlighterFactoryName(grammar)), this.compileSyntaxHighlighterFactory(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getSemanticHighlightVisitorName(grammar)), this.compileSemanticHighlightVisitor(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getAbstractIdeaModuleName(grammar)), this.compileGuiceModuleIdeaGenerated(grammar, bindings));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getExtensionFactoryName(grammar)), this.compileExtensionFactory(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getCodeBlockModificationListenerName(grammar)), this.compileCodeBlockModificationListener(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getPsiParserName(grammar)), this.compilePsiParser(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar)), this.compileAntlrTokenFileProvider(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getPomDeclarationSearcherName(grammar)), this.compilePomDeclarationSearcher(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getFacetTypeName(grammar)), this.compileFacetType(grammar));
+    ctx.writeFile(outlet_src, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.getFacetConfiguration(grammar)), this.compileFacetConfiguration(grammar));
+    ctx.writeFile(outlet_src_gen, this._ideaPluginClassNames.toJavaPath(this._ideaPluginClassNames.baseColorSettingsPage(grammar)), this.compileBaseColorSettingsPage(grammar));
+    ctx.writeFile(outlet_src, this._ideaPluginClassNames.toXtendPath(this._ideaPluginClassNames.colorSettingsPage(grammar)), this.compileColorSettingsPage(grammar));
     OutputImpl output = new OutputImpl();
     this.addOutlet(output, IdeaPluginGenerator.PLUGIN, false, this.ideaProjectPath);
     this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, false, (this.ideaProjectPath + "/META-INF"));
     this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN_GEN, true, (this.ideaProjectPath + "/META-INF"));
     if (this.deployable) {
-      CharSequence _compilePluginXml = this.compilePluginXml(grammar);
-      this.writeFile(output, IdeaPluginGenerator.META_INF_PLUGIN, "plugin.xml", _compilePluginXml);
-      CharSequence _compilePluginGenXml = this.compilePluginGenXml(grammar);
-      this.writeFile(output, IdeaPluginGenerator.META_INF_PLUGIN_GEN, "plugin_gen.xml", _compilePluginGenXml);
+      this.writeFile(output, IdeaPluginGenerator.META_INF_PLUGIN, "plugin.xml", this.compilePluginXml(grammar));
+      this.writeFile(output, IdeaPluginGenerator.META_INF_PLUGIN_GEN, "plugin_gen.xml", this.compilePluginGenXml(grammar));
     }
   }
   
   public CharSequence compileGuiceModuleIdeaGenerated(final Grammar grammar, final Set<Binding> bindings) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _abstractIdeaModuleName = this._ideaPluginClassNames.getAbstractIdeaModuleName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_abstractIdeaModuleName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getAbstractIdeaModuleName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
-    String _abstractIdeaModuleName_1 = this._ideaPluginClassNames.getAbstractIdeaModuleName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_abstractIdeaModuleName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getAbstractIdeaModuleName(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends org.eclipse.xtext.idea.DefaultIdeaModule {");
     _builder.newLineIfNotEmpty();
@@ -338,13 +231,11 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             {
-              BindKey _key = it.getKey();
-              boolean _isSingleton = _key.isSingleton();
+              boolean _isSingleton = it.getKey().isSingleton();
               if (_isSingleton) {
                 _builder.append("@org.eclipse.xtext.service.SingletonBinding");
                 {
-                  BindKey _key_1 = it.getKey();
-                  boolean _isEagerSingleton = _key_1.isEagerSingleton();
+                  boolean _isEagerSingleton = it.getKey().isEagerSingleton();
                   if (_isEagerSingleton) {
                     _builder.append("(eager=true)");
                   }
@@ -355,18 +246,15 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
             _builder.append("\t");
             _builder.append("public ");
             {
-              BindValue _value = it.getValue();
-              String _expression = _value.getExpression();
+              String _expression = it.getValue().getExpression();
               boolean _equals = Objects.equal(_expression, null);
               if (_equals) {
                 _builder.append("Class<? extends ");
-                BindKey _key_2 = it.getKey();
-                String _type = _key_2.getType();
+                String _type = it.getKey().getType();
                 _builder.append(_type, "\t");
                 _builder.append(">");
               } else {
-                BindKey _key_3 = it.getKey();
-                String _type_1 = _key_3.getType();
+                String _type_1 = it.getKey().getType();
                 _builder.append(_type_1, "\t");
               }
             }
@@ -379,16 +267,13 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
             _builder.append("\t");
             _builder.append("return ");
             {
-              BindValue _value_1 = it.getValue();
-              String _expression_1 = _value_1.getExpression();
+              String _expression_1 = it.getValue().getExpression();
               boolean _notEquals = (!Objects.equal(_expression_1, null));
               if (_notEquals) {
-                BindValue _value_2 = it.getValue();
-                String _expression_2 = _value_2.getExpression();
+                String _expression_2 = it.getValue().getExpression();
                 _builder.append(_expression_2, "\t\t");
               } else {
-                BindValue _value_3 = it.getValue();
-                String _typeName = _value_3.getTypeName();
+                String _typeName = it.getValue().getTypeName();
                 _builder.append(_typeName, "\t\t");
                 _builder.append(".class");
               }
@@ -399,9 +284,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
             _builder.append("}");
             _builder.newLine();
           } else {
-            BindValue _value_4 = it.getValue();
-            String[] _statements = _value_4.getStatements();
-            boolean _isEmpty = ((List<String>)Conversions.doWrapArray(_statements)).isEmpty();
+            boolean _isEmpty = ((List<String>)Conversions.doWrapArray(it.getValue().getStatements())).isEmpty();
             if (_isEmpty) {
               _builder.append("\t");
               _builder.append("// contributed by ");
@@ -410,13 +293,11 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               {
-                BindKey _key_4 = it.getKey();
-                boolean _isSingleton_1 = _key_4.isSingleton();
+                boolean _isSingleton_1 = it.getKey().isSingleton();
                 if (_isSingleton_1) {
                   _builder.append("@org.eclipse.xtext.service.SingletonBinding");
                   {
-                    BindKey _key_5 = it.getKey();
-                    boolean _isEagerSingleton_1 = _key_5.isEagerSingleton();
+                    boolean _isEagerSingleton_1 = it.getKey().isEagerSingleton();
                     if (_isEagerSingleton_1) {
                       _builder.append("(eager=true)");
                     }
@@ -427,19 +308,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               _builder.append("\t");
               _builder.append("public ");
               {
-                BindValue _value_5 = it.getValue();
-                String _expression_3 = _value_5.getExpression();
+                String _expression_3 = it.getValue().getExpression();
                 boolean _equals_1 = Objects.equal(_expression_3, null);
                 if (_equals_1) {
                   _builder.append("Class<? extends com.google.inject.Provider<");
-                  BindKey _key_6 = it.getKey();
-                  String _type_2 = _key_6.getType();
+                  String _type_2 = it.getKey().getType();
                   _builder.append(_type_2, "\t");
                   _builder.append(">>");
                 } else {
                   _builder.append("com.google.inject.Provider<");
-                  BindKey _key_7 = it.getKey();
-                  String _type_3 = _key_7.getType();
+                  String _type_3 = it.getKey().getType();
                   _builder.append(_type_3, "\t");
                   _builder.append(">");
                 }
@@ -453,16 +331,13 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               _builder.append("\t");
               _builder.append("return ");
               {
-                BindValue _value_6 = it.getValue();
-                String _expression_4 = _value_6.getExpression();
+                String _expression_4 = it.getValue().getExpression();
                 boolean _notEquals_1 = (!Objects.equal(_expression_4, null));
                 if (_notEquals_1) {
-                  BindValue _value_7 = it.getValue();
-                  String _expression_5 = _value_7.getExpression();
+                  String _expression_5 = it.getValue().getExpression();
                   _builder.append(_expression_5, "\t\t");
                 } else {
-                  BindValue _value_8 = it.getValue();
-                  String _typeName_1 = _value_8.getTypeName();
+                  String _typeName_1 = it.getValue().getTypeName();
                   _builder.append(_typeName_1, "\t\t");
                   _builder.append(".class");
                 }
@@ -485,9 +360,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               _builder.append("(com.google.inject.Binder binder) {");
               _builder.newLineIfNotEmpty();
               {
-                BindValue _value_9 = it.getValue();
-                String[] _statements_1 = _value_9.getStatements();
-                for(final String statement : _statements_1) {
+                String[] _statements = it.getValue().getStatements();
+                for(final String statement : _statements) {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append(statement, "\t\t");
@@ -524,9 +398,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _xifexpression = "bind";
     } else {
       String _xifexpression_1 = null;
-      BindValue _value = it.getValue();
-      String[] _statements = _value.getStatements();
-      boolean _isEmpty = ((List<String>)Conversions.doWrapArray(_statements)).isEmpty();
+      boolean _isEmpty = ((List<String>)Conversions.doWrapArray(it.getValue().getStatements())).isEmpty();
       if (_isEmpty) {
         _xifexpression_1 = "provide";
       } else {
@@ -542,29 +414,22 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _xifexpression_2 = "";
     }
     final String suffix = _xifexpression_2;
-    BindKey _key = it.getKey();
-    String _type = _key.getType();
-    String _simpleMethodName = this.simpleMethodName(_type);
+    String _simpleMethodName = this.simpleMethodName(it.getKey().getType());
     String _plus = (prefix + _simpleMethodName);
     return (_plus + suffix);
   }
   
   private String simpleMethodName(final String qn) {
-    String _replaceAll = qn.replaceAll("<", "\\.");
-    String _replaceAll_1 = _replaceAll.replaceAll(">", "\\.");
-    String[] _split = _replaceAll_1.split("\\.");
     final Function1<String, Boolean> _function = (String e) -> {
       return Boolean.valueOf(e.matches("[A-Z].*"));
     };
-    Iterable<String> _filter = IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(_split)), _function);
-    return IterableExtensions.join(_filter, "$");
+    return IterableExtensions.join(IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(qn.replaceAll("<", "\\.").replaceAll(">", "\\.").split("\\."))), _function), "$");
   }
   
   public CharSequence compileExtensionFactory(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _extensionFactoryName = this._ideaPluginClassNames.getExtensionFactoryName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_extensionFactoryName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getExtensionFactoryName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -579,8 +444,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _extensionFactoryName_1 = this._ideaPluginClassNames.getExtensionFactoryName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_extensionFactoryName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getExtensionFactoryName(grammar));
     _builder.append(_simpleName);
     _builder.append(" implements ExtensionFactory {");
     _builder.newLineIfNotEmpty();
@@ -611,8 +475,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return ");
-    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_1, "\t\t");
     _builder.append(".INSTANCE.<Object> getInstance(clazz);");
     _builder.newLineIfNotEmpty();
@@ -628,8 +491,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileCodeBlockModificationListener(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _codeBlockModificationListenerName = this._ideaPluginClassNames.getCodeBlockModificationListenerName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_codeBlockModificationListenerName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getCodeBlockModificationListenerName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -652,23 +514,20 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
-    String _codeBlockModificationListenerName_1 = this._ideaPluginClassNames.getCodeBlockModificationListenerName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_codeBlockModificationListenerName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getCodeBlockModificationListenerName(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends BaseXtextCodeBlockModificationListener {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public ");
-    String _codeBlockModificationListenerName_2 = this._ideaPluginClassNames.getCodeBlockModificationListenerName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_codeBlockModificationListenerName_2);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getCodeBlockModificationListenerName(grammar));
     _builder.append(_simpleName_1, "\t");
     _builder.append("(PsiModificationTracker psiModificationTracker) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("super(");
-    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_2, "\t\t");
     _builder.append(".INSTANCE, psiModificationTracker);");
     _builder.newLineIfNotEmpty();
@@ -700,8 +559,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compilePomDeclarationSearcher(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _pomDeclarationSearcherName = this._ideaPluginClassNames.getPomDeclarationSearcherName(it);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_pomDeclarationSearcherName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getPomDeclarationSearcherName(it));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -715,23 +573,20 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
-    String _pomDeclarationSearcherName_1 = this._ideaPluginClassNames.getPomDeclarationSearcherName(it);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_pomDeclarationSearcherName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getPomDeclarationSearcherName(it));
     _builder.append(_simpleName);
     _builder.append(" extends AbstractXtextPomDeclarationSearcher {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public ");
-    String _pomDeclarationSearcherName_2 = this._ideaPluginClassNames.getPomDeclarationSearcherName(it);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_pomDeclarationSearcherName_2);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getPomDeclarationSearcherName(it));
     _builder.append(_simpleName_1, "\t");
     _builder.append("() {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("super(");
-    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(it);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(it));
     _builder.append(_simpleName_2, "\t\t");
     _builder.append(".INSTANCE);");
     _builder.newLineIfNotEmpty();
@@ -747,15 +602,13 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compilePsiParser(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _psiParserName = this._ideaPluginClassNames.getPsiParserName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_psiParserName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getPsiParserName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      List<String> _initialHiddenTokens = this._grammarAccessExtensions.initialHiddenTokens(grammar);
-      boolean _isEmpty = _initialHiddenTokens.isEmpty();
+      boolean _isEmpty = this._grammarAccessExtensions.initialHiddenTokens(grammar).isEmpty();
       if (_isEmpty) {
         _builder.append("import static java.util.Collections.emptySet;");
         _builder.newLine();
@@ -798,23 +651,21 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _psiParserName_1 = this._ideaPluginClassNames.getPsiParserName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_psiParserName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getPsiParserName(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends AbstractXtextPsiParser {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      List<String> _initialHiddenTokens_1 = this._grammarAccessExtensions.initialHiddenTokens(grammar);
-      boolean _isEmpty_1 = _initialHiddenTokens_1.isEmpty();
+      boolean _isEmpty_1 = this._grammarAccessExtensions.initialHiddenTokens(grammar).isEmpty();
       boolean _not = (!_isEmpty_1);
       if (_not) {
         _builder.append("\t");
         _builder.append("private static final Set<String> INITIAL_HIDDEN_TOKENS = new HashSet<String>(Arrays.asList(");
         {
-          List<String> _initialHiddenTokens_2 = this._grammarAccessExtensions.initialHiddenTokens(grammar);
+          List<String> _initialHiddenTokens = this._grammarAccessExtensions.initialHiddenTokens(grammar);
           boolean _hasElements = false;
-          for(final String hidden : _initialHiddenTokens_2) {
+          for(final String hidden : _initialHiddenTokens) {
             if (!_hasElements) {
               _hasElements = true;
             } else {
@@ -849,8 +700,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private ");
-    String _elementTypeProviderName_1 = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_elementTypeProviderName_1);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getElementTypeProviderName(grammar));
     _builder.append(_simpleName_1, "\t");
     _builder.append(" elementTypeProvider;");
     _builder.newLineIfNotEmpty();
@@ -863,8 +713,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return new ");
-    String _psiInternalParserName_1 = this._ideaPluginClassNames.getPsiInternalParserName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_psiInternalParserName_1);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getPsiInternalParserName(grammar));
     _builder.append(_simpleName_2, "\t\t");
     _builder.append("(builder, tokenStream, elementTypeProvider, grammarAccess);");
     _builder.newLineIfNotEmpty();
@@ -893,8 +742,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileAntlrTokenFileProvider(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _antlrTokenFileProvider = this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_antlrTokenFileProvider);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -905,8 +753,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _antlrTokenFileProvider_1 = this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_antlrTokenFileProvider_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar));
     _builder.append(_simpleName);
     _builder.append(" implements IAntlrTokenFileProvider {");
     _builder.newLineIfNotEmpty();
@@ -942,8 +789,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public void addOutlet(final Output output, final String outletName, final boolean overwrite, final String path) {
     String _encoding = this.getEncoding();
     final Outlet outlet = new Outlet(false, _encoding, outletName, overwrite, path);
-    Naming _naming = this.getNaming();
-    String _lineDelimiter = _naming.getLineDelimiter();
+    String _lineDelimiter = this.getNaming().getLineDelimiter();
     NewlineNormalizer _newlineNormalizer = new NewlineNormalizer(_lineDelimiter);
     outlet.addPostprocessor(_newlineNormalizer);
     output.addOutlet(outlet);
@@ -951,8 +797,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   
   public void writeFile(final Output output, final String outletName, final String filename, final CharSequence contents) {
     output.openFile(filename, outletName);
-    String _string = contents.toString();
-    output.write(_string);
+    output.write(contents.toString());
     output.closeFile();
   }
   
@@ -1028,13 +873,11 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("<extensions defaultExtensionNs=\"org.eclipse.xtext.idea\">");
     _builder.newLine();
     {
-      EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
-      Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(_metamodelDeclarations, GeneratedMetamodel.class);
+      Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
       for(final GeneratedMetamodel generatedMetamodel : _filter) {
         _builder.append("\t\t");
         _builder.append("<package uri=\"");
-        EPackage _ePackage = generatedMetamodel.getEPackage();
-        String _nsURI = _ePackage.getNsURI();
+        String _nsURI = generatedMetamodel.getEPackage().getNsURI();
         _builder.append(_nsURI, "\t\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
@@ -1047,8 +890,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         String _name = generatedMetamodel.getName();
         _builder.append(_name, "\t\t\t\t ");
         _builder.append(".");
-        String _name_1 = generatedMetamodel.getName();
-        String _firstUpper = StringExtensions.toFirstUpper(_name_1);
+        String _firstUpper = StringExtensions.toFirstUpper(generatedMetamodel.getName());
         _builder.append(_firstUpper, "\t\t\t\t ");
         _builder.append("Package\"/>");
         _builder.newLineIfNotEmpty();
@@ -1126,8 +968,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_compileExtension, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
-    CharSequence _compileExtension_1 = this.compileExtension(grammar, "lang.parserDefinition", _parserDefinitionName);
+    CharSequence _compileExtension_1 = this.compileExtension(grammar, "lang.parserDefinition", this._ideaPluginClassNames.getParserDefinitionName(grammar));
     _builder.append(_compileExtension_1, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -1268,23 +1109,20 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public final class ");
-    String _fileImplName = this._ideaPluginClassNames.getFileImplName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_fileImplName);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFileImplName(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends BaseXtextFile {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public ");
-    String _fileImplName_1 = this._ideaPluginClassNames.getFileImplName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_fileImplName_1);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFileImplName(grammar));
     _builder.append(_simpleName_1, "\t");
     _builder.append("(FileViewProvider viewProvider) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("super(viewProvider, ");
-    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_2, "\t\t");
     _builder.append(".INSTANCE);");
     _builder.newLineIfNotEmpty();
@@ -1300,8 +1138,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return ");
-    String _fileTypeName_1 = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_fileTypeName_1);
+    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFileTypeName(grammar));
     _builder.append(_simpleName_3, "\t\t");
     _builder.append(".INSTANCE;");
     _builder.newLineIfNotEmpty();
@@ -1317,8 +1154,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileFileTypeFactory(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _fileTypeFactoryName = this._ideaPluginClassNames.getFileTypeFactoryName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_fileTypeFactoryName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getFileTypeFactoryName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -1331,8 +1167,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _fileTypeFactoryName_1 = this._ideaPluginClassNames.getFileTypeFactoryName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_fileTypeFactoryName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFileTypeFactoryName(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends FileTypeFactory {");
     _builder.newLineIfNotEmpty();
@@ -1364,8 +1199,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileAbstractFileType(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _abstractFileTypeName = this._ideaPluginClassNames.getAbstractFileTypeName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_abstractFileTypeName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getAbstractFileTypeName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -1384,8 +1218,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _abstractFileTypeName_1 = this._ideaPluginClassNames.getAbstractFileTypeName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_abstractFileTypeName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getAbstractFileTypeName(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends LanguageFileType {");
     _builder.newLineIfNotEmpty();
@@ -1401,8 +1234,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("protected ");
-    String _abstractFileTypeName_2 = this._ideaPluginClassNames.getAbstractFileTypeName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_abstractFileTypeName_2);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getAbstractFileTypeName(grammar));
     _builder.append(_simpleName_1, "\t");
     _builder.append("(final Language language) {");
     _builder.newLineIfNotEmpty();
@@ -1479,31 +1311,26 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileFileType(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _fileTypeName = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_fileTypeName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getFileTypeName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("class ");
-    String _fileTypeName_1 = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_fileTypeName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFileTypeName(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends ");
-    String _abstractFileTypeName = this._ideaPluginClassNames.getAbstractFileTypeName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_abstractFileTypeName);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getAbstractFileTypeName(grammar));
     _builder.append(_simpleName_1);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public static final ");
-    String _fileTypeName_2 = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_fileTypeName_2);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFileTypeName(grammar));
     _builder.append(_simpleName_2, "\t");
     _builder.append(" INSTANCE = new ");
-    String _fileTypeName_3 = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_fileTypeName_3);
+    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFileTypeName(grammar));
     _builder.append(_simpleName_3, "\t");
     _builder.append("()");
     _builder.newLineIfNotEmpty();
@@ -1514,8 +1341,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("super(");
-    String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_4 = this._ideaPluginClassNames.toSimpleName(_languageName);
+    String _simpleName_4 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_4, "\t\t");
     _builder.append(".INSTANCE)");
     _builder.newLineIfNotEmpty();
@@ -1531,8 +1357,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileLanguage(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_languageName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -1541,28 +1366,24 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public final class ");
-    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends AbstractXtextLanguage {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public static final ");
-    String _languageName_2 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_languageName_2);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_1, "\t");
     _builder.append(" INSTANCE = new ");
-    String _languageName_3 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_languageName_3);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_2, "\t");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private ");
-    String _languageName_4 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_languageName_4);
+    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_3, "\t");
     _builder.append("() {");
     _builder.newLineIfNotEmpty();
@@ -1584,8 +1405,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileStandaloneSetup(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _standaloneSetupIdea = this._ideaPluginClassNames.getStandaloneSetupIdea(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_standaloneSetupIdea);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getStandaloneSetupIdea(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -1593,8 +1413,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("import org.eclipse.xtext.util.Modules2;");
     _builder.newLine();
     _builder.append("import ");
-    Naming _naming = this.getNaming();
-    String _setupImpl = _naming.setupImpl(grammar);
+    String _setupImpl = this.getNaming().setupImpl(grammar);
     _builder.append(_setupImpl);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -1607,14 +1426,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _standaloneSetupIdea_1 = this._ideaPluginClassNames.getStandaloneSetupIdea(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_standaloneSetupIdea_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getStandaloneSetupIdea(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends ");
-    Naming _naming_1 = this.getNaming();
-    Naming _naming_2 = this.getNaming();
-    String _setupImpl_1 = _naming_2.setupImpl(grammar);
-    String _simpleName_1 = _naming_1.toSimpleName(_setupImpl_1);
+    String _simpleName_1 = this.getNaming().toSimpleName(this.getNaming().setupImpl(grammar));
     _builder.append(_simpleName_1);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
@@ -1627,8 +1442,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("Module runtimeModule = new ");
-    Naming _naming_3 = this.getNaming();
-    String _guiceModuleRt = _naming_3.guiceModuleRt(grammar);
+    String _guiceModuleRt = this.getNaming().guiceModuleRt(grammar);
     _builder.append(_guiceModuleRt, "        ");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
@@ -1656,8 +1470,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileIdeaSetup(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _ideaSetup = this._ideaPluginClassNames.getIdeaSetup(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_ideaSetup);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getIdeaSetup(grammar));
     _builder.append(_packageName);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -1667,8 +1480,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("class ");
-    String _ideaSetup_1 = this._ideaPluginClassNames.getIdeaSetup(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_ideaSetup_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getIdeaSetup(grammar));
     _builder.append(_simpleName);
     _builder.append(" implements ISetup {");
     _builder.newLineIfNotEmpty();
@@ -1681,8 +1493,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("new ");
-    String _standaloneSetupIdea = this._ideaPluginClassNames.getStandaloneSetupIdea(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_standaloneSetupIdea);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getStandaloneSetupIdea(grammar));
     _builder.append(_simpleName_1, "\t\t");
     _builder.append("().createInjector");
     _builder.newLineIfNotEmpty();
@@ -1698,19 +1509,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileIdeaModule(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _ideaModuleName = this._ideaPluginClassNames.getIdeaModuleName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_ideaModuleName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getIdeaModuleName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
-    String _ideaModuleName_1 = this._ideaPluginClassNames.getIdeaModuleName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_ideaModuleName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getIdeaModuleName(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends ");
-    String _abstractIdeaModuleName = this._ideaPluginClassNames.getAbstractIdeaModuleName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_abstractIdeaModuleName);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getAbstractIdeaModuleName(grammar));
     _builder.append(_simpleName_1);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
@@ -1723,8 +1531,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileElementTypeProvider(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_elementTypeProviderName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getElementTypeProviderName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -1759,20 +1566,17 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _elementTypeProviderName_1 = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_elementTypeProviderName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getElementTypeProviderName(grammar));
     _builder.append(_simpleName);
     _builder.append(" implements IElementTypeProvider {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<");
-    String _fileImplName_1 = this._ideaPluginClassNames.getFileImplName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_fileImplName_1);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFileImplName(grammar));
     _builder.append(_simpleName_1, "\t");
     _builder.append(">>(");
-    String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_languageName);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_2, "\t");
     _builder.append(".INSTANCE);");
     _builder.newLineIfNotEmpty();
@@ -1796,16 +1600,13 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private static final ");
-    String _grammarAccessName_1 = this._ideaPluginClassNames.getGrammarAccessName(grammar);
-    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_grammarAccessName_1);
+    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getGrammarAccessName(grammar));
     _builder.append(_simpleName_3, "\t");
     _builder.append(" GRAMMAR_ACCESS = ");
-    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_4 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    String _simpleName_4 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_4, "\t");
     _builder.append(".INSTANCE.getInstance(");
-    String _grammarAccessName_2 = this._ideaPluginClassNames.getGrammarAccessName(grammar);
-    String _simpleName_5 = this._ideaPluginClassNames.toSimpleName(_grammarAccessName_2);
+    String _simpleName_5 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getGrammarAccessName(grammar));
     _builder.append(_simpleName_5, "\t");
     _builder.append(".class);");
     _builder.newLineIfNotEmpty();
@@ -1832,8 +1633,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         String _grammarElementIdentifier_2 = this._grammarAccessExtensions.grammarElementIdentifier(rule);
         _builder.append(_grammarElementIdentifier_2, "\t\t\t");
         _builder.append("_ELEMENT_TYPE\", ");
-        String _languageName_2 = this._ideaPluginClassNames.getLanguageName(grammar);
-        String _simpleName_6 = this._ideaPluginClassNames.toSimpleName(_languageName_2);
+        String _simpleName_6 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
         _builder.append(_simpleName_6, "\t\t\t");
         _builder.append(".INSTANCE, GRAMMAR_ACCESS.");
         String _gaRuleAccessor = this._grammarAccess.gaRuleAccessor(rule);
@@ -1845,9 +1645,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         _builder.append("}");
         _builder.newLine();
         {
-          TreeIterator<EObject> _eAllContents = rule.eAllContents();
-          Iterator<AbstractElement> _filter = Iterators.<AbstractElement>filter(_eAllContents, AbstractElement.class);
-          Iterable<AbstractElement> _iterable = IteratorExtensions.<AbstractElement>toIterable(_filter);
+          Iterable<AbstractElement> _iterable = IteratorExtensions.<AbstractElement>toIterable(Iterators.<AbstractElement>filter(rule.eAllContents(), AbstractElement.class));
           for(final AbstractElement element : _iterable) {
             _builder.append("\t");
             _builder.append("\t");
@@ -1863,8 +1661,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
             String _grammarElementIdentifier_4 = this._grammarAccessExtensions.grammarElementIdentifier(element);
             _builder.append(_grammarElementIdentifier_4, "\t\t\t");
             _builder.append("_ELEMENT_TYPE\", ");
-            String _languageName_3 = this._ideaPluginClassNames.getLanguageName(grammar);
-            String _simpleName_7 = this._ideaPluginClassNames.toSimpleName(_languageName_3);
+            String _simpleName_7 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
             _builder.append(_simpleName_7, "\t\t\t");
             _builder.append(".INSTANCE, GRAMMAR_ACCESS.");
             String _gaElementsAccessor = this._grammarAccess.gaElementsAccessor(rule);
@@ -1897,9 +1694,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         _builder.append("ElementType());");
         _builder.newLineIfNotEmpty();
         {
-          TreeIterator<EObject> _eAllContents_1 = rule.eAllContents();
-          Iterator<AbstractElement> _filter_1 = Iterators.<AbstractElement>filter(_eAllContents_1, AbstractElement.class);
-          Iterable<AbstractElement> _iterable_1 = IteratorExtensions.<AbstractElement>toIterable(_filter_1);
+          Iterable<AbstractElement> _iterable_1 = IteratorExtensions.<AbstractElement>toIterable(Iterators.<AbstractElement>filter(rule.eAllContents(), AbstractElement.class));
           for(final AbstractElement element_1 : _iterable_1) {
             _builder.newLine();
             _builder.append("\t");
@@ -1965,9 +1760,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         _builder.append("}");
         _builder.newLine();
         {
-          TreeIterator<EObject> _eAllContents_2 = rule_1.eAllContents();
-          Iterator<AbstractElement> _filter_2 = Iterators.<AbstractElement>filter(_eAllContents_2, AbstractElement.class);
-          Iterable<AbstractElement> _iterable_2 = IteratorExtensions.<AbstractElement>toIterable(_filter_2);
+          Iterable<AbstractElement> _iterable_2 = IteratorExtensions.<AbstractElement>toIterable(Iterators.<AbstractElement>filter(rule_1.eAllContents(), AbstractElement.class));
           for(final AbstractElement element_2 : _iterable_2) {
             _builder.newLine();
             _builder.append("\t");
@@ -1999,8 +1792,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileTokenTypeProvider(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _tokenTypeProviderName = this._ideaPluginClassNames.getTokenTypeProviderName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_tokenTypeProviderName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getTokenTypeProviderName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -2032,16 +1824,14 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("@Singleton public class ");
-    String _tokenTypeProviderName_1 = this._ideaPluginClassNames.getTokenTypeProviderName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_tokenTypeProviderName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getTokenTypeProviderName(grammar));
     _builder.append(_simpleName);
     _builder.append(" implements TokenTypeProvider {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private static final String[] TOKEN_NAMES = new ");
-    String _psiInternalParserName_2 = this._ideaPluginClassNames.getPsiInternalParserName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_psiInternalParserName_2);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getPsiInternalParserName(grammar));
     _builder.append(_simpleName_1, "\t");
     _builder.append("(null).getTokenNames();");
     _builder.newLineIfNotEmpty();
@@ -2059,8 +1849,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("tokenTypes[i] = new IndexedElementType(TOKEN_NAMES[i], i, ");
-    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_2, "\t\t\t");
     _builder.append(".INSTANCE);");
     _builder.newLineIfNotEmpty();
@@ -2072,12 +1861,11 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     {
-      List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(grammar);
       final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
         String _name = it.getName();
         return Boolean.valueOf(Objects.equal(_name, "WS"));
       };
-      boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
+      boolean _exists = IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), _function);
       if (_exists) {
         _builder.append("\t");
         _builder.append("private static final TokenSet WHITESPACE_TOKENS = TokenSet.create(tokenTypes[RULE_WS]);");
@@ -2100,23 +1888,21 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT], tokenTypes[RULE_ML_COMMENT]);");
         _builder.newLine();
       } else {
-        List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(grammar);
         final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
           String _name = it.getName();
           return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
         };
-        boolean _exists_1 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_1, _function_1);
+        boolean _exists_1 = IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), _function_1);
         if (_exists_1) {
           _builder.append("\t");
           _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT]);");
           _builder.newLine();
         } else {
-          List<TerminalRule> _allTerminalRules_2 = GrammarUtil.allTerminalRules(grammar);
           final Function1<TerminalRule, Boolean> _function_2 = (TerminalRule it) -> {
             String _name = it.getName();
             return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
           };
-          boolean _exists_2 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_2, _function_2);
+          boolean _exists_2 = IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), _function_2);
           if (_exists_2) {
             _builder.append("\t");
             _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_ML_COMMENT]);");
@@ -2130,12 +1916,11 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       }
     }
     {
-      List<TerminalRule> _allTerminalRules_3 = GrammarUtil.allTerminalRules(grammar);
       final Function1<TerminalRule, Boolean> _function_3 = (TerminalRule it) -> {
         String _name = it.getName();
         return Boolean.valueOf(Objects.equal(_name, "STRING"));
       };
-      boolean _exists_3 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_3, _function_3);
+      boolean _exists_3 = IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), _function_3);
       if (_exists_3) {
         _builder.append("\t");
         _builder.append("private static final TokenSet STRING_TOKENS = TokenSet.create(tokenTypes[RULE_STRING]);");
@@ -2224,8 +2009,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileSyntaxHighlighterFactory(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _syntaxHighlighterFactoryName = this._ideaPluginClassNames.getSyntaxHighlighterFactoryName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_syntaxHighlighterFactoryName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getSyntaxHighlighterFactoryName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -2244,8 +2028,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
-    String _syntaxHighlighterFactoryName_1 = this._ideaPluginClassNames.getSyntaxHighlighterFactoryName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_syntaxHighlighterFactoryName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getSyntaxHighlighterFactoryName(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends SingleLazyInstanceSyntaxHighlighterFactory {");
     _builder.newLineIfNotEmpty();
@@ -2262,8 +2045,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("return ");
-    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_1, "        ");
     _builder.append(".INSTANCE.getInstance(SyntaxHighlighter.class);");
     _builder.newLineIfNotEmpty();
@@ -2279,8 +2061,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileSemanticHighlightVisitor(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _semanticHighlightVisitorName = this._ideaPluginClassNames.getSemanticHighlightVisitorName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_semanticHighlightVisitorName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getSemanticHighlightVisitorName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -2294,21 +2075,18 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
-    String _semanticHighlightVisitorName_1 = this._ideaPluginClassNames.getSemanticHighlightVisitorName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_semanticHighlightVisitorName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getSemanticHighlightVisitorName(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends SemanticHighlightVisitor {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("public ");
-    String _semanticHighlightVisitorName_2 = this._ideaPluginClassNames.getSemanticHighlightVisitorName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_semanticHighlightVisitorName_2);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getSemanticHighlightVisitorName(grammar));
     _builder.append(_simpleName_1, "\t");
     _builder.append("() {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_2, "\t\t");
     _builder.append(".INSTANCE.injectMembers(this);");
     _builder.newLineIfNotEmpty();
@@ -2323,11 +2101,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileParserDefinition(final Grammar grammar) {
     CharSequence _xblockexpression = null;
     {
-      List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
       final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
         return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
       };
-      final Iterable<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
+      final Iterable<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>filter(GrammarUtil.allRules(grammar), _function);
       final Function1<AbstractRule, Boolean> _function_1 = (AbstractRule it) -> {
         return Boolean.valueOf((this.isNamed(it) || IterableExtensions.<AbstractElement>exists(this.getEObjectElements(it), ((Function1<AbstractElement, Boolean>) (AbstractElement it_1) -> {
           return Boolean.valueOf(this.isNamed(it_1));
@@ -2343,8 +2120,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       final boolean hasNotNamed = IterableExtensions.<AbstractRule>exists(EObjectRules, _function_2);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
-      String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
-      String _packageName = this._ideaPluginClassNames.toPackageName(_parserDefinitionName);
+      String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getParserDefinitionName(grammar));
       _builder.append(_packageName);
       _builder.append(";");
       _builder.newLineIfNotEmpty();
@@ -2402,12 +2178,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.newLine();
       _builder.newLine();
       _builder.append("public class ");
-      String _parserDefinitionName_1 = this._ideaPluginClassNames.getParserDefinitionName(grammar);
-      String _simpleName = this._ideaPluginClassNames.toSimpleName(_parserDefinitionName_1);
+      String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getParserDefinitionName(grammar));
       _builder.append(_simpleName);
       _builder.append(" extends ");
-      String _superParserDefinitionName_1 = this._ideaPluginClassNames.getSuperParserDefinitionName(grammar);
-      String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_superParserDefinitionName_1);
+      String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getSuperParserDefinitionName(grammar));
       _builder.append(_simpleName_1);
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
@@ -2421,8 +2195,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("private ");
-          String _elementTypeProviderName_1 = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
-          String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_elementTypeProviderName_1);
+          String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getElementTypeProviderName(grammar));
           _builder.append(_simpleName_2, "\t");
           _builder.append(" elementTypeProvider;");
           _builder.newLineIfNotEmpty();
@@ -2437,8 +2210,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("return new ");
-      String _fileImplName_1 = this._ideaPluginClassNames.getFileImplName(grammar);
-      String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_fileImplName_1);
+      String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFileImplName(grammar));
       _builder.append(_simpleName_3, "\t\t");
       _builder.append("(viewProvider);");
       _builder.newLineIfNotEmpty();
@@ -2560,7 +2332,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   }
   
   protected Iterable<AbstractElement> getEObjectElements(final AbstractRule rule) {
-    List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
     final Function1<AbstractElement, Boolean> _function = (AbstractElement element) -> {
       boolean _switchResult = false;
       boolean _matched = false;
@@ -2583,7 +2354,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       }
       return Boolean.valueOf(_switchResult);
     };
-    return IterableExtensions.<AbstractElement>filter(_eAllOfType, _function);
+    return IterableExtensions.<AbstractElement>filter(EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class), _function);
   }
   
   protected boolean isNamed(final EObject element) {
@@ -2631,8 +2402,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileAbstractCompletionContributor(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _completionContributor = this._ideaPluginClassNames.getCompletionContributor(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_completionContributor);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getCompletionContributor(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -2646,19 +2416,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
-    String _abstractCompletionContributor = this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_abstractCompletionContributor);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getAbstractCompletionContributor(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends ");
-    String _completionContributorSuperClass_1 = this._ideaPluginClassNames.getCompletionContributorSuperClass(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_completionContributorSuperClass_1);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getCompletionContributorSuperClass(grammar));
     _builder.append(_simpleName_1);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("public ");
-    String _abstractCompletionContributor_1 = this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_abstractCompletionContributor_1);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getAbstractCompletionContributor(grammar));
     _builder.append(_simpleName_2, "\t");
     _builder.append("(AbstractXtextLanguage lang) {");
     _builder.newLineIfNotEmpty();
@@ -2676,8 +2443,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileCompletionContributor(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _completionContributor = this._ideaPluginClassNames.getCompletionContributor(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_completionContributor);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getCompletionContributor(grammar));
     _builder.append(_packageName);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -2690,12 +2456,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("class ");
-    String _completionContributor_1 = this._ideaPluginClassNames.getCompletionContributor(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_completionContributor_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getCompletionContributor(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends ");
-    String _abstractCompletionContributor = this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_abstractCompletionContributor);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getAbstractCompletionContributor(grammar));
     _builder.append(_simpleName_1);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
@@ -2704,8 +2468,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("this(");
-    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_2, "\t\t");
     _builder.append(".INSTANCE)");
     _builder.newLineIfNotEmpty();
@@ -2742,8 +2505,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileFacetConfiguration(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_facetConfiguration);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getFacetConfiguration(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -2786,14 +2548,12 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("+ \"/");
-    String _name_1 = grammar.getName();
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_name_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(grammar.getName());
     _builder.append(_simpleName, "\t\t\t\t");
     _builder.append("GeneratorConfig.xml\", scheme = StorageScheme.DIRECTORY_BASED)})");
     _builder.newLineIfNotEmpty();
     _builder.append("public class ");
-    String _facetConfiguration_1 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_facetConfiguration_1);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFacetConfiguration(grammar));
     _builder.append(_simpleName_1);
     _builder.append(" extends ");
     {
@@ -2815,8 +2575,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileFacetType(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _facetTypeName = this._ideaPluginClassNames.getFacetTypeName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_facetTypeName);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.getFacetTypeName(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -2829,24 +2588,20 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _facetTypeName_1 = this._ideaPluginClassNames.getFacetTypeName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_facetTypeName_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFacetTypeName(grammar));
     _builder.append(_simpleName);
     _builder.append("  extends AbstractFacetType<");
-    String _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_facetConfiguration);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFacetConfiguration(grammar));
     _builder.append(_simpleName_1);
     _builder.append("> {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public static final FacetTypeId<Facet<");
-    String _facetConfiguration_1 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_facetConfiguration_1);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFacetConfiguration(grammar));
     _builder.append(_simpleName_2, "\t");
     _builder.append(">> TYPEID = new FacetTypeId<Facet<");
-    String _facetConfiguration_2 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_facetConfiguration_2);
+    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFacetConfiguration(grammar));
     _builder.append(_simpleName_3, "\t");
     _builder.append(">>(\"");
     String _name = grammar.getName();
@@ -2856,8 +2611,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public ");
-    String _facetTypeName_2 = this._ideaPluginClassNames.getFacetTypeName(grammar);
-    String _simpleName_4 = this._ideaPluginClassNames.toSimpleName(_facetTypeName_2);
+    String _simpleName_4 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getFacetTypeName(grammar));
     _builder.append(_simpleName_4, "\t");
     _builder.append("() {");
     _builder.newLineIfNotEmpty();
@@ -2866,8 +2620,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _name_1 = grammar.getName();
     _builder.append(_name_1, "\t\t");
     _builder.append("\", \"");
-    String _name_2 = grammar.getName();
-    String _simpleName_5 = this._ideaPluginClassNames.toSimpleName(_name_2);
+    String _simpleName_5 = this._ideaPluginClassNames.toSimpleName(grammar.getName());
     _builder.append(_simpleName_5, "\t\t");
     _builder.append("\");");
     _builder.newLineIfNotEmpty();
@@ -2888,8 +2641,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileBaseColorSettingsPage(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _baseColorSettingsPage = this._ideaPluginClassNames.baseColorSettingsPage(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_baseColorSettingsPage);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.baseColorSettingsPage(grammar));
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -2904,8 +2656,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _baseColorSettingsPage_1 = this._ideaPluginClassNames.baseColorSettingsPage(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_baseColorSettingsPage_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.baseColorSettingsPage(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends AbstractColorSettingsPage {");
     _builder.newLineIfNotEmpty();
@@ -2913,14 +2664,12 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public ");
-    String _baseColorSettingsPage_2 = this._ideaPluginClassNames.baseColorSettingsPage(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_baseColorSettingsPage_2);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.baseColorSettingsPage(grammar));
     _builder.append(_simpleName_1, "\t");
     _builder.append("() {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_2, "\t\t");
     _builder.append(".INSTANCE.injectMembers(this);");
     _builder.newLineIfNotEmpty();
@@ -2936,8 +2685,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return ");
-    String _languageName_2 = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_languageName_2);
+    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.getLanguageName(grammar));
     _builder.append(_simpleName_3, "\t\t");
     _builder.append(".INSTANCE.getDisplayName();");
     _builder.newLineIfNotEmpty();
@@ -2952,18 +2700,15 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileColorSettingsPage(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _colorSettingsPage = this._ideaPluginClassNames.colorSettingsPage(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_colorSettingsPage);
+    String _packageName = this._ideaPluginClassNames.toPackageName(this._ideaPluginClassNames.colorSettingsPage(grammar));
     _builder.append(_packageName);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("class ");
-    String _colorSettingsPage_1 = this._ideaPluginClassNames.colorSettingsPage(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_colorSettingsPage_1);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.colorSettingsPage(grammar));
     _builder.append(_simpleName);
     _builder.append(" extends ");
-    String _baseColorSettingsPage = this._ideaPluginClassNames.baseColorSettingsPage(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_baseColorSettingsPage);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(this._ideaPluginClassNames.baseColorSettingsPage(grammar));
     _builder.append(_simpleName_1);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();

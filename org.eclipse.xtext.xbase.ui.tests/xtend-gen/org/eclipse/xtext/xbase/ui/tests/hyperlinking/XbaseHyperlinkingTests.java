@@ -22,10 +22,7 @@ public class XbaseHyperlinkingTests extends AbstractHyperlinkingTest {
   @Test
   public void testBug_454791() throws Exception {
     final IHyperlink[] hyperlinks = this.getHyperLinks("{ val Str|ing value = \'foo\' }");
-    int _length = hyperlinks.length;
-    Assert.assertEquals(1, _length);
-    IHyperlink _head = IterableExtensions.<IHyperlink>head(((Iterable<IHyperlink>)Conversions.doWrapArray(hyperlinks)));
-    String _hyperlinkText = _head.getHyperlinkText();
-    Assert.assertEquals("String", _hyperlinkText);
+    Assert.assertEquals(1, hyperlinks.length);
+    Assert.assertEquals("String", IterableExtensions.<IHyperlink>head(((Iterable<IHyperlink>)Conversions.doWrapArray(hyperlinks))).getHyperlinkText());
   }
 }

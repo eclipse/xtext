@@ -9,18 +9,15 @@ package org.eclipse.xtext.xbase.ui.hover;
 
 import com.google.common.base.Objects;
 import java.util.Arrays;
-import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
@@ -58,8 +55,7 @@ public class JvmAnnotationReferencePrinter {
     } catch (final Throwable _t) {
       if (_t instanceof RuntimeException) {
         final RuntimeException e = (RuntimeException)_t;
-        String _message = e.getMessage();
-        JvmAnnotationReferencePrinter.LOG.error(_message, e);
+        JvmAnnotationReferencePrinter.LOG.error(e.getMessage(), e);
         JvmAnnotationType _annotation = null;
         if (reference!=null) {
           _annotation=reference.getAnnotation();
@@ -79,22 +75,16 @@ public class JvmAnnotationReferencePrinter {
   protected String _internalToString(final JvmAnnotationReference reference) {
     final StringBuilder buffer = new StringBuilder();
     buffer.append("@");
-    JvmAnnotationType _annotation = reference.getAnnotation();
-    final URI uri = EcoreUtil.getURI(_annotation);
-    JvmAnnotationType _annotation_1 = reference.getAnnotation();
-    String _simpleName = _annotation_1.getSimpleName();
-    String _createLinkWithLabel = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, _simpleName);
-    buffer.append(_createLinkWithLabel);
+    final URI uri = EcoreUtil.getURI(reference.getAnnotation());
+    buffer.append(this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, reference.getAnnotation().getSimpleName()));
     boolean _or = false;
-    EList<JvmAnnotationValue> _explicitValues = reference.getExplicitValues();
-    int _size = _explicitValues.size();
+    int _size = reference.getExplicitValues().size();
     boolean _greaterThan = (_size > 1);
     if (_greaterThan) {
       _or = true;
     } else {
       boolean _and = false;
-      EList<JvmAnnotationValue> _explicitValues_1 = reference.getExplicitValues();
-      JvmAnnotationValue _head = IterableExtensions.<JvmAnnotationValue>head(_explicitValues_1);
+      JvmAnnotationValue _head = IterableExtensions.<JvmAnnotationValue>head(reference.getExplicitValues());
       JvmOperation _operation = null;
       if (_head!=null) {
         _operation=_head.getOperation();
@@ -103,53 +93,42 @@ public class JvmAnnotationReferencePrinter {
       if (!_tripleNotEquals) {
         _and = false;
       } else {
-        EList<JvmAnnotationValue> _explicitValues_2 = reference.getExplicitValues();
-        JvmAnnotationValue _head_1 = IterableExtensions.<JvmAnnotationValue>head(_explicitValues_2);
-        JvmOperation _operation_1 = _head_1.getOperation();
-        String _simpleName_1 = _operation_1.getSimpleName();
-        boolean _notEquals = (!Objects.equal(_simpleName_1, "value"));
+        String _simpleName = IterableExtensions.<JvmAnnotationValue>head(reference.getExplicitValues()).getOperation().getSimpleName();
+        boolean _notEquals = (!Objects.equal(_simpleName, "value"));
         _and = _notEquals;
       }
       _or = _and;
     }
     final boolean needsExplicitProperties = _or;
-    EList<JvmAnnotationValue> _explicitValues_3 = reference.getExplicitValues();
-    int _size_1 = _explicitValues_3.size();
+    int _size_1 = reference.getExplicitValues().size();
     boolean _greaterThan_1 = (_size_1 > 0);
     if (_greaterThan_1) {
       buffer.append("(");
-      EList<JvmAnnotationValue> _explicitValues_4 = reference.getExplicitValues();
       final Function1<JvmAnnotationValue, String> _function = (JvmAnnotationValue it) -> {
         final StringBuilder builder = new StringBuilder();
         if (needsExplicitProperties) {
           JvmOperation _elvis = null;
-          JvmOperation _operation_2 = it.getOperation();
-          if (_operation_2 != null) {
-            _elvis = _operation_2;
+          JvmOperation _operation_1 = it.getOperation();
+          if (_operation_1 != null) {
+            _elvis = _operation_1;
           } else {
-            JvmAnnotationType _annotation_2 = reference.getAnnotation();
-            Iterable<JvmOperation> _declaredOperations = _annotation_2.getDeclaredOperations();
             final Function1<JvmOperation, Boolean> _function_1 = (JvmOperation it_1) -> {
-              String _simpleName_2 = it_1.getSimpleName();
-              return Boolean.valueOf(Objects.equal(_simpleName_2, "value"));
+              String _simpleName_1 = it_1.getSimpleName();
+              return Boolean.valueOf(Objects.equal(_simpleName_1, "value"));
             };
-            JvmOperation _findFirst = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function_1);
+            JvmOperation _findFirst = IterableExtensions.<JvmOperation>findFirst(reference.getAnnotation().getDeclaredOperations(), _function_1);
             _elvis = _findFirst;
           }
           final JvmOperation operation = _elvis;
           final URI operationUri = EcoreUtil.getURI(operation);
-          String _simpleName_2 = operation.getSimpleName();
-          String _createLinkWithLabel_1 = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, operationUri, _simpleName_2);
-          builder.append(_createLinkWithLabel_1);
+          builder.append(this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, operationUri, operation.getSimpleName()));
           builder.append("=");
         }
-        String _internalToString = this.internalToString(it);
-        builder.append(_internalToString);
+        builder.append(this.internalToString(it));
         return builder.toString();
       };
-      List<String> _map = ListExtensions.<JvmAnnotationValue, String>map(_explicitValues_4, _function);
-      String _join = IterableExtensions.join(_map, ", ");
-      buffer.append(_join);
+      buffer.append(
+        IterableExtensions.join(ListExtensions.<JvmAnnotationValue, String>map(reference.getExplicitValues(), _function), ", "));
       buffer.append(")");
     }
     return buffer.toString();
@@ -158,26 +137,19 @@ public class JvmAnnotationReferencePrinter {
   protected String _internalToString(final XAnnotation reference) {
     final StringBuilder buffer = new StringBuilder();
     buffer.append("@");
-    JvmType _annotationType = reference.getAnnotationType();
-    final URI uri = EcoreUtil.getURI(_annotationType);
-    JvmType _annotationType_1 = reference.getAnnotationType();
-    String _simpleName = _annotationType_1.getSimpleName();
-    String _createLinkWithLabel = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, _simpleName);
-    buffer.append(_createLinkWithLabel);
+    final URI uri = EcoreUtil.getURI(reference.getAnnotationType());
+    buffer.append(this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, reference.getAnnotationType().getSimpleName()));
     XExpression _value = reference.getValue();
     boolean _tripleNotEquals = (_value != null);
     if (_tripleNotEquals) {
       buffer.append("(");
-      XExpression _value_1 = reference.getValue();
-      buffer.append(_value_1);
+      buffer.append(reference.getValue());
       buffer.append(")");
     } else {
-      EList<XAnnotationElementValuePair> _elementValuePairs = reference.getElementValuePairs();
-      boolean _isEmpty = _elementValuePairs.isEmpty();
+      boolean _isEmpty = reference.getElementValuePairs().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
         buffer.append("(");
-        EList<XAnnotationElementValuePair> _elementValuePairs_1 = reference.getElementValuePairs();
         final Function1<XAnnotationElementValuePair, String> _function = (XAnnotationElementValuePair it) -> {
           final StringBuilder builder = new StringBuilder();
           JvmOperation _elvis = null;
@@ -185,29 +157,23 @@ public class JvmAnnotationReferencePrinter {
           if (_element != null) {
             _elvis = _element;
           } else {
-            JvmType _annotationType_2 = reference.getAnnotationType();
-            Iterable<JvmOperation> _declaredOperations = ((JvmAnnotationType) _annotationType_2).getDeclaredOperations();
+            JvmType _annotationType = reference.getAnnotationType();
             final Function1<JvmOperation, Boolean> _function_1 = (JvmOperation it_1) -> {
-              String _simpleName_1 = it_1.getSimpleName();
-              return Boolean.valueOf(Objects.equal(_simpleName_1, "value"));
+              String _simpleName = it_1.getSimpleName();
+              return Boolean.valueOf(Objects.equal(_simpleName, "value"));
             };
-            JvmOperation _findFirst = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function_1);
+            JvmOperation _findFirst = IterableExtensions.<JvmOperation>findFirst(((JvmAnnotationType) _annotationType).getDeclaredOperations(), _function_1);
             _elvis = _findFirst;
           }
           final JvmOperation operation = _elvis;
           final URI operationUri = EcoreUtil.getURI(operation);
-          String _simpleName_1 = operation.getSimpleName();
-          String _createLinkWithLabel_1 = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, operationUri, _simpleName_1);
-          builder.append(_createLinkWithLabel_1);
+          builder.append(this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, operationUri, operation.getSimpleName()));
           builder.append("=");
-          XExpression _value_2 = it.getValue();
-          String _internalToString = this.internalToString(_value_2);
-          builder.append(_internalToString);
+          builder.append(this.internalToString(it.getValue()));
           return builder.toString();
         };
-        List<String> _map = ListExtensions.<XAnnotationElementValuePair, String>map(_elementValuePairs_1, _function);
-        String _join = IterableExtensions.join(_map, ", ");
-        buffer.append(_join);
+        buffer.append(
+          IterableExtensions.join(ListExtensions.<XAnnotationElementValuePair, String>map(reference.getElementValuePairs(), _function), ", "));
         buffer.append(")");
       }
     }
@@ -215,8 +181,7 @@ public class JvmAnnotationReferencePrinter {
   }
   
   protected String _internalToString(final JvmAnnotationValue it) {
-    EClass _eClass = it.eClass();
-    final EStructuralFeature ref = _eClass.getEStructuralFeature("values");
+    final EStructuralFeature ref = it.eClass().getEStructuralFeature("values");
     if ((ref == null)) {
       throw new IllegalStateException(("Cannot handle " + it));
     }
@@ -230,14 +195,12 @@ public class JvmAnnotationReferencePrinter {
       final Function1<Object, String> _function = (Object it_1) -> {
         return this.internalToString(it_1);
       };
-      List<String> _map = ListExtensions.map(values, _function);
-      String _join = IterableExtensions.join(_map, ", ");
+      String _join = IterableExtensions.join(ListExtensions.map(values, _function), ", ");
       _builder.append(_join);
       _builder.append("]");
       return _builder.toString();
     } else {
-      Object _head = IterableExtensions.head(values);
-      return this.internalToString(_head);
+      return this.internalToString(IterableExtensions.head(values));
     }
   }
   
@@ -246,36 +209,28 @@ public class JvmAnnotationReferencePrinter {
   }
   
   protected String _internalToString(final XTypeLiteral o) {
-    JvmType _type = o.getType();
-    final URI uri = EcoreUtil.getURI(_type);
-    JvmType _type_1 = o.getType();
-    String _simpleName = _type_1.getSimpleName();
-    final String text = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, _simpleName);
-    EList<String> _arrayDimensions = o.getArrayDimensions();
-    String _join = IterableExtensions.join(_arrayDimensions);
+    final URI uri = EcoreUtil.getURI(o.getType());
+    final String text = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, o.getType().getSimpleName());
+    String _join = IterableExtensions.join(o.getArrayDimensions());
     return (text + _join);
   }
   
   protected String _internalToString(final XListLiteral o) {
-    EList<XExpression> _elements = o.getElements();
     final Function1<XExpression, String> _function = (XExpression it) -> {
       return this.internalToString(it);
     };
-    List<String> _map = ListExtensions.<XExpression, String>map(_elements, _function);
-    String _join = IterableExtensions.join(_map, ", ");
+    String _join = IterableExtensions.join(ListExtensions.<XExpression, String>map(o.getElements(), _function), ", ");
     String _plus = ("#[" + _join);
     return (_plus + "]");
   }
   
   protected String _internalToString(final XBinaryOperation o) {
-    XExpression _leftOperand = o.getLeftOperand();
-    String _internalToString = this.internalToString(_leftOperand);
+    String _internalToString = this.internalToString(o.getLeftOperand());
     String _plus = (_internalToString + " ");
     String _concreteSyntaxFeatureName = o.getConcreteSyntaxFeatureName();
     String _plus_1 = (_plus + _concreteSyntaxFeatureName);
     String _plus_2 = (_plus_1 + " ");
-    XExpression _rightOperand = o.getRightOperand();
-    String _internalToString_1 = this.internalToString(_rightOperand);
+    String _internalToString_1 = this.internalToString(o.getRightOperand());
     return (_plus_2 + _internalToString_1);
   }
   
@@ -290,8 +245,7 @@ public class JvmAnnotationReferencePrinter {
   }
   
   protected String _internalToString(final XBooleanLiteral o) {
-    boolean _isIsTrue = o.isIsTrue();
-    return Boolean.valueOf(_isIsTrue).toString();
+    return Boolean.valueOf(o.isIsTrue()).toString();
   }
   
   protected String _internalToString(final XMemberFeatureCall o) {
@@ -299,8 +253,7 @@ public class JvmAnnotationReferencePrinter {
     if (_isPackageFragment) {
       return null;
     }
-    XExpression _memberCallTarget = o.getMemberCallTarget();
-    final String prefix = this.internalToString(_memberCallTarget);
+    final String prefix = this.internalToString(o.getMemberCallTarget());
     return this.internalHandleAbstractFeatureCall(prefix, o);
   }
   
@@ -317,10 +270,8 @@ public class JvmAnnotationReferencePrinter {
     if (((o.getFeature() != null) && (!o.getFeature().eIsProxy()))) {
       String _xblockexpression = null;
       {
-        JvmIdentifiableElement _feature = o.getFeature();
-        final URI uri = EcoreUtil.getURI(_feature);
-        String _concreteSyntaxFeatureName = o.getConcreteSyntaxFeatureName();
-        _xblockexpression = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, _concreteSyntaxFeatureName);
+        final URI uri = EcoreUtil.getURI(o.getFeature());
+        _xblockexpression = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, o.getConcreteSyntaxFeatureName());
       }
       _xifexpression = _xblockexpression;
     } else {

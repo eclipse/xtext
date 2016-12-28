@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
 import java.util.ArrayList;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
@@ -30,16 +29,12 @@ public class ContentAssistForTest2 extends ContentAssistTest {
   
   @Override
   public void testEmptyInput() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    String[] _keywordsAndStatics = this.getKeywordsAndStatics();
-    String[] _expect = this.expect(_keywordsAndStatics, new String[] { "var", "val" });
-    _newBuilder.assertText(_expect);
+    this.newBuilder().assertText(this.expect(this.getKeywordsAndStatics(), new String[] { "var", "val" }));
   }
   
   @Override
   protected String[] getKeywordsAndStatics() {
-    String[] _keywordsAndStatics = super.getKeywordsAndStatics();
-    final ArrayList<String> result = CollectionLiterals.<String>newArrayList(_keywordsAndStatics);
+    final ArrayList<String> result = CollectionLiterals.<String>newArrayList(super.getKeywordsAndStatics());
     result.add("x");
     return ((String[])Conversions.unwrapArray(result, String.class));
   }

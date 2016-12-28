@@ -5,7 +5,6 @@ import com.google.inject.Provider;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.ltk.core.refactoring.RefactoringStatusEntry;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
@@ -135,12 +134,9 @@ public class NewFeatureNameUtilTest extends AbstractXbaseTestCase {
     final RefactoringStatus status = new RefactoringStatus();
     final NewFeatureNameUtil nameUtil = this.nameUtilProvider.get();
     nameUtil.checkNewFeatureName(name, false, status);
-    int _severity = status.getSeverity();
-    Assert.assertEquals(severity, _severity);
-    RefactoringStatusEntry _entryWithHighestSeverity = status.getEntryWithHighestSeverity();
-    final String message = _entryWithHighestSeverity.getMessage();
-    boolean _contains = message.contains(messageFragment);
-    Assert.assertTrue(message, _contains);
+    Assert.assertEquals(severity, status.getSeverity());
+    final String message = status.getEntryWithHighestSeverity().getMessage();
+    Assert.assertTrue(message, message.contains(messageFragment));
   }
   
   protected XExpression parse(final CharSequence string) {

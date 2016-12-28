@@ -104,8 +104,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.append("import org.eclipse.emf.ecore.EObject;");
     _builder.newLine();
     {
-      List<EnumRule> _allEnumRules = GrammarUtil.allEnumRules(it);
-      boolean _isEmpty = _allEnumRules.isEmpty();
+      boolean _isEmpty = GrammarUtil.allEnumRules(it).isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
         _builder.append("import org.eclipse.emf.common.util.Enumerator;");
@@ -169,8 +168,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public ");
-    String _internalParserClassName = this._namingExtensions.getInternalParserClassName(it);
-    String _simpleName = this._naming.toSimpleName(_internalParserClassName);
+    String _simpleName = this._naming.toSimpleName(this._namingExtensions.getInternalParserClassName(it));
     _builder.append(_simpleName, "    ");
     _builder.append("(TokenStream input, ");
     String _gaSimpleName_1 = this._grammarAccess.gaSimpleName(it);
@@ -198,9 +196,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.newLine();
     _builder.append("    \t");
     _builder.append("return \"");
-    List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
-    ParserRule _head = IterableExtensions.<ParserRule>head(_allParserRules);
-    String _name = _head.getName();
+    String _name = IterableExtensions.<ParserRule>head(GrammarUtil.allParserRules(it)).getName();
     _builder.append(_name, "    \t");
     _builder.append("\";");
     _builder.newLineIfNotEmpty();
@@ -352,8 +348,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
       if ((it instanceof ParserRule)) {
         boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
         boolean _not = (!_isPassCurrentIntoFragment);
-        String _currentType = this.getCurrentType();
-        String _parameterList = AntlrGrammarGenUtil.getParameterList(((ParserRule)it), Boolean.valueOf(_not), _currentType);
+        String _parameterList = AntlrGrammarGenUtil.getParameterList(((ParserRule)it), Boolean.valueOf(_not), this.getCurrentType());
         _builder.append(_parameterList);
       }
     }
@@ -394,8 +389,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     if (!_matched) {
       if (it instanceof ParserRule) {
-        ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it));
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(_originalElement);
+        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it)));
         if (_isDatatypeRule) {
           _matched=true;
           _switchResult = "[AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]";
@@ -404,8 +398,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     if (!_matched) {
       if (it instanceof ParserRule) {
-        ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it));
-        boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(_originalElement);
+        boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it)));
         if (_isEObjectFragmentRule) {
           _matched=true;
           StringConcatenation _builder = new StringConcatenation();
@@ -509,8 +502,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
           _builder.append("=");
           String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
           _builder.append(__dataTypeEbnf2);
-          boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-          String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
+          String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, this.isPassCurrentIntoFragment(), (!supportActions));
           _builder.append(_argumentList);
           _builder.newLineIfNotEmpty();
           _builder.append("{");
@@ -556,8 +548,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
           _builder_1.append("{");
           _builder_1.newLine();
           _builder_1.append("\t");
-          String _localVar_4 = this._grammarAccessExtensions.localVar(it);
-          CharSequence _newLeafNode = this.newLeafNode(it, _localVar_4);
+          CharSequence _newLeafNode = this.newLeafNode(it, this._grammarAccessExtensions.localVar(it));
           _builder_1.append(_newLeafNode, "\t");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("}");
@@ -601,8 +592,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
         boolean _tripleNotEquals = (_feature != null);
         if (_tripleNotEquals) {
           _builder.append("And");
-          String _setOrAdd = this._grammarAccessExtensions.setOrAdd(it);
-          String _firstUpper = StringExtensions.toFirstUpper(_setOrAdd);
+          String _firstUpper = StringExtensions.toFirstUpper(this._grammarAccessExtensions.setOrAdd(it));
           _builder.append(_firstUpper, "\t");
         }
       }
@@ -642,9 +632,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
         _builder.append("{");
         _builder.newLine();
         _builder.append("\t");
-        Assignment _containingAssignment = GrammarUtil.containingAssignment(it);
-        String _localVar = this._grammarAccessExtensions.localVar(_containingAssignment, it);
-        CharSequence _newLeafNode = this.newLeafNode(it, _localVar);
+        CharSequence _newLeafNode = this.newLeafNode(it, this._grammarAccessExtensions.localVar(GrammarUtil.containingAssignment(it), it));
         _builder.append(_newLeafNode, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -652,8 +640,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
         _xifexpression_1 = _builder.toString();
       } else {
         StringConcatenation _builder_1 = new StringConcatenation();
-        String _localVar_1 = this._grammarAccessExtensions.localVar(it);
-        _builder_1.append(_localVar_1);
+        String _localVar = this._grammarAccessExtensions.localVar(it);
+        _builder_1.append(_localVar);
         _builder_1.append("=");
         String __ebnf2_1 = super._ebnf2(it, options, supportActions);
         _builder_1.append(__ebnf2_1);
@@ -661,8 +649,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
         _builder_1.append("{");
         _builder_1.newLine();
         _builder_1.append("\t");
-        String _localVar_2 = this._grammarAccessExtensions.localVar(it);
-        CharSequence _newLeafNode_1 = this.newLeafNode(it, _localVar_2);
+        CharSequence _newLeafNode_1 = this.newLeafNode(it, this._grammarAccessExtensions.localVar(it));
         _builder_1.append(_newLeafNode_1, "\t");
         _builder_1.newLineIfNotEmpty();
         _builder_1.append("}");
@@ -690,8 +677,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      String _localVar_1 = this._grammarAccessExtensions.localVar(it);
-      CharSequence _newLeafNode = this.newLeafNode(it, _localVar_1);
+      CharSequence _newLeafNode = this.newLeafNode(it, this._grammarAccessExtensions.localVar(it));
       _builder.append(_newLeafNode, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("}");
@@ -734,8 +720,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
         }
         if (!_matched) {
           if (rule instanceof ParserRule) {
-            ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)rule));
-            boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(_originalElement);
+            boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)rule)));
             if (_isDatatypeRule) {
               _matched=true;
             }
@@ -853,8 +838,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
           _builder_1.append("{");
           _builder_1.newLine();
           _builder_1.append("\t");
-          String _localVar_1 = this._grammarAccessExtensions.localVar(it);
-          CharSequence _newLeafNode = this.newLeafNode(it, _localVar_1);
+          CharSequence _newLeafNode = this.newLeafNode(it, this._grammarAccessExtensions.localVar(it));
           _builder_1.append(_newLeafNode, "\t");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("}");
@@ -896,8 +880,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
         _builder.newLine();
         String _ruleName = this._grammarAccessExtensions.ruleName(it);
         _builder.append(_ruleName);
-        boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-        String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, _isPassCurrentIntoFragment, (!supportActions));
+        String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, this.isPassCurrentIntoFragment(), (!supportActions));
         _builder.append(_argumentList);
         _builder.newLineIfNotEmpty();
         _builder.append("{");
@@ -913,8 +896,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
         if (it instanceof TerminalRule) {
           _matched=true;
           StringConcatenation _builder_1 = new StringConcatenation();
-          Assignment _containingAssignment = GrammarUtil.containingAssignment(ref);
-          String _localVar = this._grammarAccessExtensions.localVar(_containingAssignment);
+          String _localVar = this._grammarAccessExtensions.localVar(GrammarUtil.containingAssignment(ref));
           _builder_1.append(_localVar);
           _builder_1.append("=");
           String _ruleName_1 = this._grammarAccessExtensions.ruleName(it);
@@ -923,9 +905,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
           _builder_1.append("{");
           _builder_1.newLine();
           _builder_1.append("\t");
-          Assignment _containingAssignment_1 = GrammarUtil.containingAssignment(ref);
-          String _localVar_1 = this._grammarAccessExtensions.localVar(_containingAssignment_1);
-          CharSequence _newLeafNode = this.newLeafNode(ref, _localVar_1);
+          CharSequence _newLeafNode = this.newLeafNode(ref, this._grammarAccessExtensions.localVar(GrammarUtil.containingAssignment(ref)));
           _builder_1.append(_newLeafNode, "\t");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("}");
@@ -1027,8 +1007,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
         }
       }
       _builder.append(", ");
-      AbstractElement _terminal = assignment.getTerminal();
-      CharSequence _stringLiteral = this._grammarAccessExtensions.toStringLiteral(_terminal);
+      CharSequence _stringLiteral = this._grammarAccessExtensions.toStringLiteral(assignment.getTerminal());
       _builder.append(_stringLiteral, "\t");
       _builder.append(");");
       _builder.newLineIfNotEmpty();
@@ -1137,8 +1116,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
           _builder_1.append("{");
           _builder_1.newLine();
           _builder_1.append("\t");
-          String _localVar_3 = this._grammarAccessExtensions.localVar(assignment, it);
-          CharSequence _newLeafNode = this.newLeafNode(it, _localVar_3);
+          CharSequence _newLeafNode = this.newLeafNode(it, this._grammarAccessExtensions.localVar(assignment, it));
           _builder_1.append(_newLeafNode, "\t");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("}");
@@ -1177,8 +1155,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
             if (_isBooleanAssignment_1) {
               _builder_1.append("true");
             } else {
-              String _localVar_4 = this._grammarAccessExtensions.localVar(assignment, it);
-              _builder_1.append(_localVar_4, "\t\t");
+              String _localVar_3 = this._grammarAccessExtensions.localVar(assignment, it);
+              _builder_1.append(_localVar_3, "\t\t");
             }
           }
           _builder_1.append(",");
@@ -1211,8 +1189,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
   protected CharSequence createModelElement(final EObject grammarElement) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("createModelElement(grammarAccess.");
-    ParserRule _containingParserRule = GrammarUtil.containingParserRule(grammarElement);
-    String _grammarElementAccess = this._grammarAccessExtensions.grammarElementAccess(_containingParserRule);
+    String _grammarElementAccess = this._grammarAccessExtensions.grammarElementAccess(GrammarUtil.containingParserRule(grammarElement));
     _builder.append(_grammarElementAccess);
     _builder.append(")");
     return _builder;
@@ -1221,8 +1198,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
   protected CharSequence createModelElementForParent(final EObject grammarElement) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("createModelElementForParent(grammarAccess.");
-    ParserRule _containingParserRule = GrammarUtil.containingParserRule(grammarElement);
-    String _grammarElementAccess = this._grammarAccessExtensions.grammarElementAccess(_containingParserRule);
+    String _grammarElementAccess = this._grammarAccessExtensions.grammarElementAccess(GrammarUtil.containingParserRule(grammarElement));
     _builder.append(_grammarElementAccess);
     _builder.append(")");
     return _builder;

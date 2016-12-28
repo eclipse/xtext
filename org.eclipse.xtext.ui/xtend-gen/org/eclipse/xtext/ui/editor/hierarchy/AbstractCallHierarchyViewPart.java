@@ -20,7 +20,6 @@ import org.eclipse.jface.viewers.ColumnLayoutData;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.IContentProvider;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -34,8 +33,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IViewSite;
 import org.eclipse.xtext.ide.editor.hierarchy.ICallHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
 import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference;
@@ -105,17 +102,12 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
   @Override
   public void createPartControl(final Composite parent) {
     final Composite layout = this.createLayout(parent);
-    TreeViewer _createCallHierarchyViewer = this.createCallHierarchyViewer(layout);
-    this.callHierarchyViewer = _createCallHierarchyViewer;
-    TableViewer _createLocationViewer = this.createLocationViewer(layout);
-    this.locationViewer = _createLocationViewer;
+    this.callHierarchyViewer = this.createCallHierarchyViewer(layout);
+    this.locationViewer = this.createLocationViewer(layout);
     this.navigationService.installNavigationSupport(this.locationViewer);
     this.navigationService.installNavigationSupport(this.callHierarchyViewer);
     this.callHierarchyViewer.addSelectionChangedListener(this);
-    IViewSite _viewSite = this.getViewSite();
-    IActionBars _actionBars = _viewSite.getActionBars();
-    IToolBarManager _toolBarManager = _actionBars.getToolBarManager();
-    this.addActions(_toolBarManager);
+    this.addActions(this.getViewSite().getActionBars().getToolBarManager());
   }
   
   protected void addActions(final IToolBarManager toolBarManager) {
@@ -136,10 +128,8 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
     _control.setLayoutData(_gridData);
     treeViewer.setUseHashlookup(true);
     treeViewer.setAutoExpandLevel(2);
-    IBaseLabelProvider _createHierarchyLabelProvider = this.createHierarchyLabelProvider();
-    treeViewer.setLabelProvider(_createHierarchyLabelProvider);
-    IContentProvider _createHierarchyContentProvider = this.createHierarchyContentProvider();
-    treeViewer.setContentProvider(_createHierarchyContentProvider);
+    treeViewer.setLabelProvider(this.createHierarchyLabelProvider());
+    treeViewer.setContentProvider(this.createHierarchyContentProvider());
     return treeViewer;
   }
   
@@ -153,25 +143,17 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
     final TableViewer locationViewer = new TableViewer(parent);
     ArrayContentProvider _arrayContentProvider = new ArrayContentProvider();
     locationViewer.setContentProvider(_arrayContentProvider);
-    IBaseLabelProvider _createLocationLabelProvider = this.createLocationLabelProvider();
-    locationViewer.setLabelProvider(_createLocationLabelProvider);
+    locationViewer.setLabelProvider(this.createLocationLabelProvider());
     final TableLayout layout = new TableLayout();
     Table _table = locationViewer.getTable();
     _table.setLayout(layout);
     Table _table_1 = locationViewer.getTable();
     _table_1.setHeaderVisible(true);
-    Pair<String, ColumnLayoutData>[] _locationColumnDescriptions = this.getLocationColumnDescriptions();
-    Iterable<Pair<Integer, Pair<String, ColumnLayoutData>>> _indexed = IterableExtensions.<Pair<String, ColumnLayoutData>>indexed(((Iterable<? extends Pair<String, ColumnLayoutData>>)Conversions.doWrapArray(_locationColumnDescriptions)));
     final Consumer<Pair<Integer, Pair<String, ColumnLayoutData>>> _function = (Pair<Integer, Pair<String, ColumnLayoutData>> it) -> {
-      Pair<String, ColumnLayoutData> _value = it.getValue();
-      ColumnLayoutData _value_1 = _value.getValue();
-      layout.addColumnData(_value_1);
-      Table _table_2 = locationViewer.getTable();
-      Pair<String, ColumnLayoutData> _value_2 = it.getValue();
-      Integer _key = it.getKey();
-      this.createColumn(_table_2, _value_2, (_key).intValue());
+      layout.addColumnData(it.getValue().getValue());
+      this.createColumn(locationViewer.getTable(), it.getValue(), (it.getKey()).intValue());
     };
-    _indexed.forEach(_function);
+    IterableExtensions.<Pair<String, ColumnLayoutData>>indexed(((Iterable<? extends Pair<String, ColumnLayoutData>>)Conversions.doWrapArray(this.getLocationColumnDescriptions()))).forEach(_function);
     return locationViewer;
   }
   
@@ -185,18 +167,15 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
   
   protected void createColumn(final Table table, final Pair<String, ColumnLayoutData> columnDescription, final int index) {
     final TableColumn column = new TableColumn(table, SWT.NONE, index);
-    ColumnLayoutData _value = columnDescription.getValue();
-    column.setResizable(_value.resizable);
-    String _key = columnDescription.getKey();
-    column.setText(_key);
+    column.setResizable(columnDescription.getValue().resizable);
+    column.setText(columnDescription.getKey());
   }
   
   protected abstract IBaseLabelProvider createLocationLabelProvider();
   
   @Override
   public void setFocus() {
-    Control _control = this.callHierarchyViewer.getControl();
-    _control.setFocus();
+    this.callHierarchyViewer.getControl().setFocus();
   }
   
   @Override
@@ -204,8 +183,7 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
     ISelectionProvider _selectionProvider = event.getSelectionProvider();
     boolean _tripleEquals = (_selectionProvider == this.callHierarchyViewer);
     if (_tripleEquals) {
-      ISelection _selection = event.getSelection();
-      final IHierarchyNode callHierarchyNode = this.getSelectedNode(_selection);
+      final IHierarchyNode callHierarchyNode = this.getSelectedNode(event.getSelection());
       this.onCallHierarchyNodeChanged(callHierarchyNode);
     }
   }

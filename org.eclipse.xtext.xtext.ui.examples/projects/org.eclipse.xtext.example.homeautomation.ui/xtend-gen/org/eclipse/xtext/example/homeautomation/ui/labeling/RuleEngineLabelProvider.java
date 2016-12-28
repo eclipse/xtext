@@ -26,16 +26,14 @@ public class RuleEngineLabelProvider extends XbaseLabelProvider {
   public String text(final Rule rule) {
     String _xblockexpression = null;
     {
-      State _deviceState = rule.getDeviceState();
-      EObject _eContainer = _deviceState.eContainer();
+      EObject _eContainer = rule.getDeviceState().eContainer();
       final Device device = ((Device) _eContainer);
       String _description = rule.getDescription();
       String _plus = (_description + " when ");
       String _name = device.getName();
       String _plus_1 = (_plus + _name);
       String _plus_2 = (_plus_1 + ".");
-      State _deviceState_1 = rule.getDeviceState();
-      String _name_1 = _deviceState_1.getName();
+      String _name_1 = rule.getDeviceState().getName();
       _xblockexpression = (_plus_2 + _name_1);
     }
     return _xblockexpression;

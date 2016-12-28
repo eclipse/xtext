@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
 
 /**
@@ -27,9 +26,6 @@ public class ContentAssistForTest extends ContentAssistTest {
   
   @Override
   public void testEmptyInput() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    String[] _keywordsAndStatics = this.getKeywordsAndStatics();
-    String[] _expect = this.expect(_keywordsAndStatics, new String[] { "var", "val" });
-    _newBuilder.assertText(_expect);
+    this.newBuilder().assertText(this.expect(this.getKeywordsAndStatics(), new String[] { "var", "val" }));
   }
 }

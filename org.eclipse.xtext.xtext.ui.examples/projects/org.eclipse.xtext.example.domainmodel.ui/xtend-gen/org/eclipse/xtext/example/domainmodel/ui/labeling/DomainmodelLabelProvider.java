@@ -6,12 +6,10 @@ package org.eclipse.xtext.example.domainmodel.ui.labeling;
 import com.google.inject.Inject;
 import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmArrayType;
-import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -41,8 +39,7 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
   protected Object doGetImage(final Object element) {
     if (((element instanceof EObject) && (!(element instanceof JvmIdentifiableElement)))) {
       StringConcatenation _builder = new StringConcatenation();
-      EClass _eClass = ((EObject) element).eClass();
-      String _name = _eClass.getName();
+      String _name = ((EObject) element).eClass().getName();
       _builder.append(_name);
       _builder.append(".gif");
       return _builder;
@@ -52,20 +49,15 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
   
   public String text(final Property property) {
     StringBuilder builder = new StringBuilder();
-    String _name = property.getName();
-    String _notNull = Strings.notNull(_name);
-    builder.append(_notNull);
+    builder.append(Strings.notNull(property.getName()));
     builder.append(" : ");
-    JvmTypeReference _type = property.getType();
-    this.append(builder, _type);
+    this.append(builder, property.getType());
     return builder.toString();
   }
   
   public String text(final Operation operation) {
     StringBuilder builder = new StringBuilder();
-    String _name = operation.getName();
-    String _notNull = Strings.notNull(_name);
-    builder.append(_notNull);
+    builder.append(Strings.notNull(operation.getName()));
     builder.append("(");
     boolean isFirst = true;
     EList<JvmFormalParameter> _params = operation.getParams();
@@ -75,13 +67,11 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
           builder.append(", ");
         }
         isFirst = false;
-        JvmTypeReference _parameterType = param.getParameterType();
-        this.append(builder, _parameterType);
+        this.append(builder, param.getParameterType());
       }
     }
     builder.append(") : ");
-    JvmTypeReference _type = operation.getType();
-    this.append(builder, _type);
+    this.append(builder, operation.getType());
     return builder.toString();
   }
   
@@ -110,8 +100,7 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
     } else {
       if ((typeRef instanceof JvmWildcardTypeReference)) {
         builder.append("?");
-        EList<JvmTypeConstraint> _constraints = ((JvmWildcardTypeReference)typeRef).getConstraints();
-        Iterator<JvmTypeConstraint> iterator_1 = _constraints.iterator();
+        Iterator<JvmTypeConstraint> iterator_1 = ((JvmWildcardTypeReference)typeRef).getConstraints().iterator();
         while (iterator_1.hasNext()) {
           {
             JvmTypeConstraint constraint = iterator_1.next();
@@ -120,8 +109,7 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
             } else {
               builder.append(" super ");
             }
-            JvmTypeReference _typeReference = constraint.getTypeReference();
-            this.append(builder, _typeReference);
+            this.append(builder, constraint.getTypeReference());
             boolean _hasNext = iterator_1.hasNext();
             if (_hasNext) {
               builder.append(" & ");
@@ -130,8 +118,7 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
         }
       } else {
         if ((typeRef instanceof JvmGenericArrayTypeReference)) {
-          JvmArrayType _type = ((JvmGenericArrayTypeReference)typeRef).getType();
-          this.append(builder, _type);
+          this.append(builder, ((JvmGenericArrayTypeReference)typeRef).getType());
         }
       }
     }
@@ -139,13 +126,10 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
   
   protected void append(final StringBuilder builder, final JvmType type) {
     if ((type instanceof JvmArrayType)) {
-      JvmComponentType _componentType = ((JvmArrayType)type).getComponentType();
-      this.append(builder, _componentType);
+      this.append(builder, ((JvmArrayType)type).getComponentType());
       builder.append("[]");
     } else {
-      String _simpleName = type.getSimpleName();
-      String _notNull = Strings.notNull(_simpleName);
-      builder.append(_notNull);
+      builder.append(Strings.notNull(type.getSimpleName()));
     }
   }
 }
