@@ -25,9 +25,7 @@ public class JavaInjectorProvider implements IInjectorProvider, IRegistryConfigu
   
   @Override
   public void setupRegistry() {
-    Injector _injector = this.getInjector();
-    this.setup.register(_injector, "txt");
-    Injector _injector_1 = this.getInjector();
-    this.setup.register(_injector_1, "java");
+    this.setup.register(this.getInjector(), "txt");
+    this.setup.register(this.getInjector(), "java");
   }
 }

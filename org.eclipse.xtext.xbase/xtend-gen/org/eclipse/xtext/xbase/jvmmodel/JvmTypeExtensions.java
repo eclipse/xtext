@@ -39,9 +39,7 @@ public class JvmTypeExtensions {
   private ILogicalContainerProvider _iLogicalContainerProvider;
   
   public Procedure1<? super ITreeAppendable> getCompilationStrategy(final JvmIdentifiableElement it) {
-    EList<Adapter> _eAdapters = it.eAdapters();
-    Iterable<CompilationStrategyAdapter> _filter = Iterables.<CompilationStrategyAdapter>filter(_eAdapters, CompilationStrategyAdapter.class);
-    final CompilationStrategyAdapter adapter = IterableExtensions.<CompilationStrategyAdapter>head(_filter);
+    final CompilationStrategyAdapter adapter = IterableExtensions.<CompilationStrategyAdapter>head(Iterables.<CompilationStrategyAdapter>filter(it.eAdapters(), CompilationStrategyAdapter.class));
     Procedure1<ITreeAppendable> _compilationStrategy = null;
     if (adapter!=null) {
       _compilationStrategy=adapter.getCompilationStrategy();
@@ -50,9 +48,7 @@ public class JvmTypeExtensions {
   }
   
   public StringConcatenationClient getCompilationTemplate(final JvmIdentifiableElement it) {
-    EList<Adapter> _eAdapters = it.eAdapters();
-    Iterable<CompilationTemplateAdapter> _filter = Iterables.<CompilationTemplateAdapter>filter(_eAdapters, CompilationTemplateAdapter.class);
-    final CompilationTemplateAdapter adapter = IterableExtensions.<CompilationTemplateAdapter>head(_filter);
+    final CompilationTemplateAdapter adapter = IterableExtensions.<CompilationTemplateAdapter>head(Iterables.<CompilationTemplateAdapter>filter(it.eAdapters(), CompilationTemplateAdapter.class));
     StringConcatenationClient _compilationTemplate = null;
     if (adapter!=null) {
       _compilationTemplate=adapter.getCompilationTemplate();
@@ -69,16 +65,14 @@ public class JvmTypeExtensions {
   }
   
   public boolean isSynthetic(final JvmIdentifiableElement element) {
-    JvmIdentifiableMetaData _metaData = this.getMetaData(element);
-    return _metaData.isSynthetic();
+    return this.getMetaData(element).isSynthetic();
   }
   
   /**
    * @since 2.8
    */
   public boolean isSynthetic(final JvmAnnotationReference element) {
-    JvmIdentifiableMetaData _metaData = this.getMetaData(element);
-    return _metaData.isSynthetic();
+    return this.getMetaData(element).isSynthetic();
   }
   
   public void setSynthetic(final JvmIdentifiableElement element, final boolean isSynthetic) {
@@ -98,14 +92,13 @@ public class JvmTypeExtensions {
    * @since 2.8
    */
   protected JvmIdentifiableMetaData getMetaData(final EObject element) {
-    EList<Adapter> _eAdapters = element.eAdapters();
-    Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, JvmIdentifiableMetaData.class);
+    Adapter _adapter = EcoreUtil.getAdapter(element.eAdapters(), JvmIdentifiableMetaData.class);
     JvmIdentifiableMetaData metaData = ((JvmIdentifiableMetaData) _adapter);
     if ((metaData == null)) {
       JvmIdentifiableMetaData _jvmIdentifiableMetaData = new JvmIdentifiableMetaData();
       metaData = _jvmIdentifiableMetaData;
-      EList<Adapter> _eAdapters_1 = element.eAdapters();
-      _eAdapters_1.add(metaData);
+      EList<Adapter> _eAdapters = element.eAdapters();
+      _eAdapters.add(metaData);
     }
     return metaData;
   }

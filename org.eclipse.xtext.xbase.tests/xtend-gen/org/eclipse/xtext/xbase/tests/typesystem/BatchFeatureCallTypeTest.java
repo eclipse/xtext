@@ -38,9 +38,7 @@ public class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
   public void resolvesFeatureCallsTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<XAbstractFeatureCall> featureCalls = this.findFeatureCalls(expressionWithQualifiedNames);
-    IBatchTypeResolver _typeResolver = this.getTypeResolver();
-    XAbstractFeatureCall _head = IterableExtensions.<XAbstractFeatureCall>head(featureCalls);
-    final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
+    final IResolvedTypes resolvedTypes = this.getTypeResolver().resolveTypes(IterableExtensions.<XAbstractFeatureCall>head(featureCalls));
     final Iterable<XAbstractFeatureCall> actualFeatureCalls = this.filterTypeLiteralsAndPackageFragments(featureCalls);
     Assert.assertFalse(IterableExtensions.isEmpty(actualFeatureCalls));
     Assert.assertEquals(("" + actualFeatureCalls), ((List<String>)Conversions.doWrapArray(types)).size(), IterableExtensions.size(actualFeatureCalls));

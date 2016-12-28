@@ -40,13 +40,11 @@ public class DisableCodeGenerationAdapter extends AdapterImpl {
   public static void enableCodeGeneration(final JvmDeclaredType declaredType) {
     final Adapter adapter = DisableCodeGenerationAdapter.getAdapter(declaredType);
     if ((adapter != null)) {
-      EList<Adapter> _eAdapters = declaredType.eAdapters();
-      _eAdapters.remove(adapter);
+      declaredType.eAdapters().remove(adapter);
     }
   }
   
   private static Adapter getAdapter(final JvmDeclaredType declaredType) {
-    EList<Adapter> _eAdapters = declaredType.eAdapters();
-    return EcoreUtil.getAdapter(_eAdapters, DisableCodeGenerationAdapter.class);
+    return EcoreUtil.getAdapter(declaredType.eAdapters(), DisableCodeGenerationAdapter.class);
   }
 }

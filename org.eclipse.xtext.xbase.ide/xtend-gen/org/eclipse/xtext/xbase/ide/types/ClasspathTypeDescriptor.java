@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -43,14 +42,12 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
   
   @Override
   public String getSimpleName() {
-    QualifiedName _qualifiedName = this.getQualifiedName();
-    return _qualifiedName.getLastSegment();
+    return this.getQualifiedName().getLastSegment();
   }
   
   @Override
   public QualifiedName getQualifiedName() {
-    Iterable<String> _split = ClasspathTypeDescriptor.PACKAGE_AND_NESTED_CLASS_SPLITTER.split(this.name);
-    return QualifiedName.create(((String[])Conversions.unwrapArray(_split, String.class)));
+    return QualifiedName.create(((String[])Conversions.unwrapArray(ClasspathTypeDescriptor.PACKAGE_AND_NESTED_CLASS_SPLITTER.split(this.name), String.class)));
   }
   
   public static ClasspathTypeDescriptor forFile(final File file, final String packageName, final Collection<String> packagePrefixes) {
@@ -76,8 +73,7 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
               final String simpleNames = fileName.substring(0, _minus);
               Iterable<String> _split = ClasspathTypeDescriptor.NESTED_CLASS_SPLITTER.split(simpleNames);
               for (final String s : _split) {
-                Matcher _matcher = ClasspathTypeDescriptor.ANONYMOUS_CLASS_PATTERN.matcher(s);
-                boolean _matches = _matcher.matches();
+                boolean _matches = ClasspathTypeDescriptor.ANONYMOUS_CLASS_PATTERN.matcher(s).matches();
                 if (_matches) {
                   return null;
                 }
@@ -134,8 +130,7 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
             {
               int _length = filePath.length();
               int _minus = (_length - 6);
-              String _substring = filePath.substring(0, _minus);
-              final String name = _substring.replace("/", ".");
+              final String name = filePath.substring(0, _minus).replace("/", ".");
               if (((!packagePrefixes.isEmpty()) && (!IterableExtensions.<String>exists(packagePrefixes, ((Function1<String, Boolean>) (String it) -> {
                 return Boolean.valueOf(name.startsWith(it));
               }))))) {
@@ -146,8 +141,7 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
               final String simpleNames = name.substring(_plus);
               Iterable<String> _split = ClasspathTypeDescriptor.NESTED_CLASS_SPLITTER.split(simpleNames);
               for (final String s : _split) {
-                Matcher _matcher = ClasspathTypeDescriptor.ANONYMOUS_CLASS_PATTERN.matcher(s);
-                boolean _matches = _matcher.matches();
+                boolean _matches = ClasspathTypeDescriptor.ANONYMOUS_CLASS_PATTERN.matcher(s).matches();
                 if (_matches) {
                   return null;
                 }

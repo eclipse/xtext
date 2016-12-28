@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.formatting2;
 
-import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.preferences.BooleanKey;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
@@ -25,8 +24,7 @@ public class NewLineOrPreserveKey extends BooleanKey implements Procedure1<IHidd
   
   @Override
   public void apply(final IHiddenRegionFormatter it) {
-    FormatterRequest _request = it.getRequest();
-    final ITypedPreferenceValues preferences = _request.getPreferences();
+    final ITypedPreferenceValues preferences = it.getRequest().getPreferences();
     final Boolean newLine = preferences.<Boolean>getPreference(this);
     final Boolean preserve = preferences.<Boolean>getPreference(XbaseFormatterPreferenceKeys.preserveNewLines);
     int _xifexpression = (int) 0;

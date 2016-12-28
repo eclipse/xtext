@@ -24,15 +24,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
-import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -60,8 +57,7 @@ public class ResourceStorageTest extends AbstractXbaseTestCase {
   public static class XbaseWithResourceStorageFacadeInjectorProvider extends XbaseInjectorProvider {
     @Override
     protected Injector internalCreateInjector() {
-      ResourceStorageTest.XbaseTestWithResourceStorageFacadeStandaloneSetup _xbaseTestWithResourceStorageFacadeStandaloneSetup = new ResourceStorageTest.XbaseTestWithResourceStorageFacadeStandaloneSetup();
-      return _xbaseTestWithResourceStorageFacadeStandaloneSetup.createInjectorAndDoEMFRegistration();
+      return new ResourceStorageTest.XbaseTestWithResourceStorageFacadeStandaloneSetup().createInjectorAndDoEMFRegistration();
     }
   }
   
@@ -94,9 +90,7 @@ public class ResourceStorageTest extends AbstractXbaseTestCase {
       if ((!result)) {
         Set<URI> _keySet = this.models.keySet();
         for (final URI knownUri : _keySet) {
-          String _string = uri.toString();
-          String _string_1 = knownUri.toString();
-          boolean _endsWith = _string.endsWith(_string_1);
+          boolean _endsWith = uri.toString().endsWith(knownUri.toString());
           if (_endsWith) {
             return true;
           }
@@ -153,40 +147,25 @@ public class ResourceStorageTest extends AbstractXbaseTestCase {
       final XExpression file = this.expression(contents);
       final ByteArrayOutputStream bout = new ByteArrayOutputStream();
       ((ResourceStorageFacade) this.resourceStorageFacade).setStoreNodeModel(true);
-      ResourceStorageWritable _createResourceStorageWritable = this.resourceStorageFacade.createResourceStorageWritable(bout);
       Resource _eResource = file.eResource();
-      _createResourceStorageWritable.writeResource(((StorageAwareResource) _eResource));
+      this.resourceStorageFacade.createResourceStorageWritable(bout).writeResource(((StorageAwareResource) _eResource));
       byte[] _byteArray = bout.toByteArray();
       ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
       final ResourceStorageLoadable in = this.resourceStorageFacade.createResourceStorageLoadable(_byteArrayInputStream);
-      Resource _eResource_1 = file.eResource();
-      ResourceSet _resourceSet = _eResource_1.getResourceSet();
-      URI _createURI = URI.createURI("synthetic:/Test.___xbase");
-      Resource _createResource = _resourceSet.createResource(_createURI);
+      Resource _createResource = file.eResource().getResourceSet().createResource(URI.createURI("synthetic:/Test.___xbase"));
       final StorageAwareResource resource = ((StorageAwareResource) _createResource);
       final ResourceStorageTest.InMemoryURIConverter converter = new ResourceStorageTest.InMemoryURIConverter();
-      URI _uRI = resource.getURI();
-      String _string = _uRI.toString();
-      converter.addModel(_string, contents);
-      ResourceSet _resourceSet_1 = resource.getResourceSet();
-      _resourceSet_1.setURIConverter(converter);
-      Resource _eResource_2 = file.eResource();
-      ResourceSet _resourceSet_2 = _eResource_2.getResourceSet();
-      EList<Resource> _resources = _resourceSet_2.getResources();
+      converter.addModel(resource.getURI().toString(), contents);
+      ResourceSet _resourceSet = resource.getResourceSet();
+      _resourceSet.setURIConverter(converter);
+      EList<Resource> _resources = file.eResource().getResourceSet().getResources();
       _resources.add(resource);
       resource.loadFromStorage(in);
-      EList<EObject> _contents = resource.getContents();
-      EObject _get = _contents.get(0);
+      EObject _get = resource.getContents().get(0);
       final XExpression root = ((XExpression) _get);
       Assert.assertTrue((root instanceof XBlockExpression));
-      EList<EObject> _contents_1 = resource.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents_1);
-      ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(_head);
-      BidiTreeIterable<INode> _asTreeIterable = _findActualNodeFor.getAsTreeIterable();
-      final BidiTreeIterator<INode> restoredNodes = _asTreeIterable.iterator();
-      ICompositeNode _findActualNodeFor_1 = NodeModelUtils.findActualNodeFor(file);
-      BidiTreeIterable<INode> _asTreeIterable_1 = _findActualNodeFor_1.getAsTreeIterable();
-      final BidiTreeIterator<INode> originalNodes = _asTreeIterable_1.iterator();
+      final BidiTreeIterator<INode> restoredNodes = NodeModelUtils.findActualNodeFor(IterableExtensions.<EObject>head(resource.getContents())).getAsTreeIterable().iterator();
+      final BidiTreeIterator<INode> originalNodes = NodeModelUtils.findActualNodeFor(file).getAsTreeIterable().iterator();
       while (restoredNodes.hasNext()) {
         {
           final INode rest = restoredNodes.next();

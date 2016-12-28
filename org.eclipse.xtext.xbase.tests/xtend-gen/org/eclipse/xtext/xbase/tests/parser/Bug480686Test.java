@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.tests.parser;
 
 import com.google.inject.Inject;
 import java.util.HashSet;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.nodemodel.BidiTreeIterable;
@@ -18,7 +16,6 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
@@ -52,23 +49,13 @@ public class Bug480686Test {
       final ContentAssistFragmentTestLanguageRoot result = this.parseHelper.parse("");
       Resource _eResource = result.eResource();
       final XtextResource res = ((XtextResource) _eResource);
-      InvariantChecker _invariantChecker = new InvariantChecker();
-      IParseResult _parseResult = res.getParseResult();
-      ICompositeNode _rootNode = _parseResult.getRootNode();
-      _invariantChecker.checkInvariant(_rootNode);
+      new InvariantChecker().checkInvariant(res.getParseResult().getRootNode());
       res.update(0, 0, "newArrayList()");
-      EList<EObject> _contents = res.getContents();
-      final EObject first = IterableExtensions.<EObject>head(_contents);
-      EClass _eClass = first.eClass();
-      String _name = _eClass.getName();
-      Assert.assertTrue(_name, (first instanceof ContentAssistFragmentTestLanguageRoot));
-      int _length = "newArrayList(".length();
-      res.update(_length, 0, "1");
-      EList<EObject> _contents_1 = res.getContents();
-      final EObject second = IterableExtensions.<EObject>head(_contents_1);
-      EClass _eClass_1 = second.eClass();
-      String _name_1 = _eClass_1.getName();
-      Assert.assertTrue(_name_1, (second instanceof ContentAssistFragmentTestLanguageRoot));
+      final EObject first = IterableExtensions.<EObject>head(res.getContents());
+      Assert.assertTrue(first.eClass().getName(), (first instanceof ContentAssistFragmentTestLanguageRoot));
+      res.update("newArrayList(".length(), 0, "1");
+      final EObject second = IterableExtensions.<EObject>head(res.getContents());
+      Assert.assertTrue(second.eClass().getName(), (second instanceof ContentAssistFragmentTestLanguageRoot));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -81,28 +68,15 @@ public class Bug480686Test {
       Resource _eResource = result.eResource();
       final XtextResource res = ((XtextResource) _eResource);
       final InvariantChecker invariantChecker = new InvariantChecker();
-      IParseResult _parseResult = res.getParseResult();
-      ICompositeNode _rootNode = _parseResult.getRootNode();
-      invariantChecker.checkInvariant(_rootNode);
+      invariantChecker.checkInvariant(res.getParseResult().getRootNode());
       res.update(0, 0, "newArrayList()");
-      IParseResult _parseResult_1 = res.getParseResult();
-      ICompositeNode _rootNode_1 = _parseResult_1.getRootNode();
-      invariantChecker.checkInvariant(_rootNode_1);
-      EList<EObject> _contents = res.getContents();
-      final EObject first = IterableExtensions.<EObject>head(_contents);
-      EClass _eClass = first.eClass();
-      String _name = _eClass.getName();
-      Assert.assertTrue(_name, (first instanceof ContentAssistFragmentTestLanguageRoot));
-      int _length = "newArrayList(".length();
-      res.update(_length, 0, "1");
-      IParseResult _parseResult_2 = res.getParseResult();
-      ICompositeNode _rootNode_2 = _parseResult_2.getRootNode();
-      invariantChecker.checkInvariant(_rootNode_2);
-      EList<EObject> _contents_1 = res.getContents();
-      final EObject second = IterableExtensions.<EObject>head(_contents_1);
-      EClass _eClass_1 = second.eClass();
-      String _name_1 = _eClass_1.getName();
-      Assert.assertTrue(_name_1, (second instanceof ContentAssistFragmentTestLanguageRoot));
+      invariantChecker.checkInvariant(res.getParseResult().getRootNode());
+      final EObject first = IterableExtensions.<EObject>head(res.getContents());
+      Assert.assertTrue(first.eClass().getName(), (first instanceof ContentAssistFragmentTestLanguageRoot));
+      res.update("newArrayList(".length(), 0, "1");
+      invariantChecker.checkInvariant(res.getParseResult().getRootNode());
+      final EObject second = IterableExtensions.<EObject>head(res.getContents());
+      Assert.assertTrue(second.eClass().getName(), (second instanceof ContentAssistFragmentTestLanguageRoot));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -115,28 +89,15 @@ public class Bug480686Test {
       Resource _eResource = result.eResource();
       final XtextResource res = ((XtextResource) _eResource);
       final InvariantChecker invariantChecker = new InvariantChecker();
-      IParseResult _parseResult = res.getParseResult();
-      ICompositeNode _rootNode = _parseResult.getRootNode();
-      invariantChecker.checkInvariant(_rootNode);
+      invariantChecker.checkInvariant(res.getParseResult().getRootNode());
       res.update(0, 0, "newArrayList()");
-      IParseResult _parseResult_1 = res.getParseResult();
-      ICompositeNode _rootNode_1 = _parseResult_1.getRootNode();
-      invariantChecker.checkInvariant(_rootNode_1);
-      EList<EObject> _contents = res.getContents();
-      final EObject first = IterableExtensions.<EObject>head(_contents);
-      EClass _eClass = first.eClass();
-      String _name = _eClass.getName();
-      Assert.assertTrue(_name, (first instanceof ContentAssistFragmentTestLanguageRoot));
-      int _length = "newArrayList(".length();
-      res.update(_length, 0, "1");
-      IParseResult _parseResult_2 = res.getParseResult();
-      ICompositeNode _rootNode_2 = _parseResult_2.getRootNode();
-      invariantChecker.checkInvariant(_rootNode_2);
-      EList<EObject> _contents_1 = res.getContents();
-      final EObject second = IterableExtensions.<EObject>head(_contents_1);
-      EClass _eClass_1 = second.eClass();
-      String _name_1 = _eClass_1.getName();
-      Assert.assertTrue(_name_1, (second instanceof ContentAssistFragmentTestLanguageRoot));
+      invariantChecker.checkInvariant(res.getParseResult().getRootNode());
+      final EObject first = IterableExtensions.<EObject>head(res.getContents());
+      Assert.assertTrue(first.eClass().getName(), (first instanceof ContentAssistFragmentTestLanguageRoot));
+      res.update("newArrayList(".length(), 0, "1");
+      invariantChecker.checkInvariant(res.getParseResult().getRootNode());
+      final EObject second = IterableExtensions.<EObject>head(res.getContents());
+      Assert.assertTrue(second.eClass().getName(), (second instanceof ContentAssistFragmentTestLanguageRoot));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -148,10 +109,8 @@ public class Bug480686Test {
       final ContentAssistFragmentTestLanguageRoot result = this.parseHelper.parse("newArrayList()");
       Resource _eResource = result.eResource();
       final XtextResource res = ((XtextResource) _eResource);
-      IParseResult _parseResult = res.getParseResult();
-      final ICompositeNode root = _parseResult.getRootNode();
-      InvariantChecker _invariantChecker = new InvariantChecker();
-      _invariantChecker.checkInvariant(root);
+      final ICompositeNode root = res.getParseResult().getRootNode();
+      new InvariantChecker().checkInvariant(root);
       final HashSet<EObject> set = CollectionLiterals.<EObject>newHashSet();
       BidiTreeIterable<INode> _asTreeIterable = root.getAsTreeIterable();
       for (final INode node : _asTreeIterable) {
@@ -159,11 +118,7 @@ public class Bug480686Test {
           EObject _grammarElement = ((ICompositeNode)node).getGrammarElement();
           boolean _tripleNotEquals = (_grammarElement != null);
           if (_tripleNotEquals) {
-            EObject _grammarElement_1 = ((ICompositeNode)node).getGrammarElement();
-            String _string = _grammarElement_1.toString();
-            EObject _grammarElement_2 = ((ICompositeNode)node).getGrammarElement();
-            boolean _add = set.add(_grammarElement_2);
-            Assert.assertTrue(_string, _add);
+            Assert.assertTrue(((ICompositeNode)node).getGrammarElement().toString(), set.add(((ICompositeNode)node).getGrammarElement()));
           } else {
             Assert.fail("node without grammar element");
           }
@@ -181,8 +136,7 @@ public class Bug480686Test {
       Resource _eResource = result.eResource();
       final XtextResource res = ((XtextResource) _eResource);
       res.update(0, 0, "newArrayList()");
-      IParseResult _parseResult = res.getParseResult();
-      final ICompositeNode root = _parseResult.getRootNode();
+      final ICompositeNode root = res.getParseResult().getRootNode();
       final HashSet<EObject> set = CollectionLiterals.<EObject>newHashSet();
       BidiTreeIterable<INode> _asTreeIterable = root.getAsTreeIterable();
       for (final INode node : _asTreeIterable) {
@@ -190,11 +144,7 @@ public class Bug480686Test {
           EObject _grammarElement = ((ICompositeNode)node).getGrammarElement();
           boolean _tripleNotEquals = (_grammarElement != null);
           if (_tripleNotEquals) {
-            EObject _grammarElement_1 = ((ICompositeNode)node).getGrammarElement();
-            String _string = _grammarElement_1.toString();
-            EObject _grammarElement_2 = ((ICompositeNode)node).getGrammarElement();
-            boolean _add = set.add(_grammarElement_2);
-            Assert.assertTrue(_string, _add);
+            Assert.assertTrue(((ICompositeNode)node).getGrammarElement().toString(), set.add(((ICompositeNode)node).getGrammarElement()));
           } else {
             Assert.fail("node without grammar element");
           }
@@ -213,10 +163,8 @@ public class Bug480686Test {
       final XtextResource res = ((XtextResource) _eResource);
       res.update(0, 0, "newArrayList()");
       final ContentAssistFragmentTestLanguageRoot fresh = this.parseHelper.parse("newArrayList()");
-      IParseResult _parseResult = res.getParseResult();
       Resource _eResource_1 = fresh.eResource();
-      IParseResult _parseResult_1 = ((XtextResource) _eResource_1).getParseResult();
-      this.assertEqual(_parseResult, _parseResult_1);
+      this.assertEqual(res.getParseResult(), ((XtextResource) _eResource_1).getParseResult());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -230,10 +178,8 @@ public class Bug480686Test {
       final XtextResource res = ((XtextResource) _eResource);
       res.update(2, 1, "a");
       final ContentAssistFragmentTestLanguageRoot fresh = this.parseHelper.parse("{ajava.beans.VetoableChangeListener x = []}");
-      IParseResult _parseResult = res.getParseResult();
       Resource _eResource_1 = fresh.eResource();
-      IParseResult _parseResult_1 = ((XtextResource) _eResource_1).getParseResult();
-      this.assertEqual(_parseResult, _parseResult_1);
+      this.assertEqual(res.getParseResult(), ((XtextResource) _eResource_1).getParseResult());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -257,10 +203,8 @@ public class Bug480686Test {
         "    switch(o) {\n") + 
         "        String: \"\"\n") + 
         "    }}"));
-      IParseResult _parseResult = res.getParseResult();
       Resource _eResource_1 = fresh.eResource();
-      IParseResult _parseResult_1 = ((XtextResource) _eResource_1).getParseResult();
-      this.assertEqual(_parseResult, _parseResult_1);
+      this.assertEqual(res.getParseResult(), ((XtextResource) _eResource_1).getParseResult());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -284,10 +228,8 @@ public class Bug480686Test {
         "    switch(o) {\n") + 
         "        String: \"\"\n") + 
         "    }}"));
-      IParseResult _parseResult = res.getParseResult();
       Resource _eResource_1 = fresh.eResource();
-      IParseResult _parseResult_1 = ((XtextResource) _eResource_1).getParseResult();
-      this.assertEqual(_parseResult, _parseResult_1);
+      this.assertEqual(res.getParseResult(), ((XtextResource) _eResource_1).getParseResult());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -301,49 +243,29 @@ public class Bug480686Test {
   }
   
   private void assertEqual(final ICompositeNode fromScratch, final ICompositeNode reparsed) {
-    BidiTreeIterable<INode> _asTreeIterable = fromScratch.getAsTreeIterable();
-    BidiTreeIterator<INode> scratchIterator = _asTreeIterable.iterator();
-    BidiTreeIterable<INode> _asTreeIterable_1 = reparsed.getAsTreeIterable();
-    BidiTreeIterator<INode> reparsedIterator = _asTreeIterable_1.iterator();
+    BidiTreeIterator<INode> scratchIterator = fromScratch.getAsTreeIterable().iterator();
+    BidiTreeIterator<INode> reparsedIterator = reparsed.getAsTreeIterable().iterator();
     while (scratchIterator.hasNext()) {
       {
-        boolean _hasNext = reparsedIterator.hasNext();
-        Assert.assertTrue(_hasNext);
+        Assert.assertTrue(reparsedIterator.hasNext());
         this.assertEqualNodes(scratchIterator.next(), reparsedIterator.next());
       }
     }
-    boolean _hasNext = scratchIterator.hasNext();
-    Assert.assertFalse(_hasNext);
-    boolean _hasNext_1 = reparsedIterator.hasNext();
-    Assert.assertFalse(_hasNext_1);
+    Assert.assertFalse(scratchIterator.hasNext());
+    Assert.assertFalse(reparsedIterator.hasNext());
   }
   
   private void assertEqualNodes(final INode node, final INode other) {
-    Class<? extends INode> _class = node.getClass();
-    Class<? extends INode> _class_1 = other.getClass();
-    Assert.assertEquals(_class, _class_1);
+    Assert.assertEquals(node.getClass(), other.getClass());
     if ((node instanceof ILeafNode)) {
-      int _totalOffset = ((ILeafNode)node).getTotalOffset();
-      int _totalOffset_1 = other.getTotalOffset();
-      Assert.assertEquals(_totalOffset, _totalOffset_1);
-      int _totalLength = ((ILeafNode)node).getTotalLength();
-      int _totalLength_1 = other.getTotalLength();
-      Assert.assertEquals(_totalLength, _totalLength_1);
+      Assert.assertEquals(((ILeafNode)node).getTotalOffset(), other.getTotalOffset());
+      Assert.assertEquals(((ILeafNode)node).getTotalLength(), other.getTotalLength());
     }
-    EObject _grammarElement = node.getGrammarElement();
-    EObject _grammarElement_1 = other.getGrammarElement();
-    Assert.assertEquals(_grammarElement, _grammarElement_1);
-    boolean _hasDirectSemanticElement = node.hasDirectSemanticElement();
-    boolean _hasDirectSemanticElement_1 = other.hasDirectSemanticElement();
-    Assert.assertEquals(Boolean.valueOf(_hasDirectSemanticElement), Boolean.valueOf(_hasDirectSemanticElement_1));
-    SyntaxErrorMessage _syntaxErrorMessage = node.getSyntaxErrorMessage();
-    SyntaxErrorMessage _syntaxErrorMessage_1 = other.getSyntaxErrorMessage();
-    Assert.assertEquals(_syntaxErrorMessage, _syntaxErrorMessage_1);
+    Assert.assertEquals(node.getGrammarElement(), other.getGrammarElement());
+    Assert.assertEquals(Boolean.valueOf(node.hasDirectSemanticElement()), Boolean.valueOf(other.hasDirectSemanticElement()));
+    Assert.assertEquals(node.getSyntaxErrorMessage(), other.getSyntaxErrorMessage());
     if ((node instanceof ICompositeNode)) {
-      String _text = ((ICompositeNode)node).getText();
-      int _lookAhead = ((ICompositeNode)node).getLookAhead();
-      int _lookAhead_1 = ((ICompositeNode) other).getLookAhead();
-      Assert.assertEquals(_text, _lookAhead, _lookAhead_1);
+      Assert.assertEquals(((ICompositeNode)node).getText(), ((ICompositeNode)node).getLookAhead(), ((ICompositeNode) other).getLookAhead());
     }
   }
   
@@ -362,8 +284,7 @@ public class Bug480686Test {
       Resource _eResource = result.eResource();
       final XtextResource res = ((XtextResource) _eResource);
       res.reparse(" newArrayList(2) ");
-      EList<EObject> _contents = res.getContents();
-      final EObject first = IterableExtensions.<EObject>head(_contents);
+      final EObject first = IterableExtensions.<EObject>head(res.getContents());
       Assert.assertTrue((first instanceof ContentAssistFragmentTestLanguageRoot));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -377,8 +298,7 @@ public class Bug480686Test {
       Resource _eResource = result.eResource();
       final XtextResource res = ((XtextResource) _eResource);
       res.update(0, 0, " /* abc */ ");
-      EList<EObject> _contents = res.getContents();
-      final EObject first = IterableExtensions.<EObject>head(_contents);
+      final EObject first = IterableExtensions.<EObject>head(res.getContents());
       Assert.assertTrue((first instanceof ContentAssistFragmentTestLanguageRoot));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -392,8 +312,7 @@ public class Bug480686Test {
       Resource _eResource = result.eResource();
       final XtextResource res = ((XtextResource) _eResource);
       res.update(0, 1, "");
-      EList<EObject> _contents = res.getContents();
-      final EObject first = IterableExtensions.<EObject>head(_contents);
+      final EObject first = IterableExtensions.<EObject>head(res.getContents());
       Assert.assertTrue((first instanceof ContentAssistFragmentTestLanguageRoot));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

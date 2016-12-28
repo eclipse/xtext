@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.formatting.CommentInfo;
 import org.eclipse.xtext.xbase.formatting.FormattableDocument;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.formatting.FormattingDataInit;
-import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.formatting.LeafInfo;
@@ -73,10 +72,8 @@ public class FormattingDataFactory {
     final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
       Iterable<FormattingData> _xblockexpression = null;
       {
-        FormattingPreferenceValues _cfg = doc.getCfg();
-        final int blankline = _cfg.get(key);
-        FormattingPreferenceValues _cfg_1 = doc.getCfg();
-        final int preserve = _cfg_1.get(XbaseFormatterPreferenceKeys.preserveBlankLines);
+        final int blankline = doc.getCfg().get(key);
+        final int preserve = doc.getCfg().get(XbaseFormatterPreferenceKeys.preserveBlankLines);
         final int min = (blankline + 1);
         final int max = Math.max((preserve + 1), min);
         _xblockexpression = this.newNewLineData(leafs, min, max, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
@@ -90,10 +87,8 @@ public class FormattingDataFactory {
     final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
       Iterable<FormattingData> _xblockexpression = null;
       {
-        FormattingPreferenceValues _cfg = doc.getCfg();
-        final boolean newLine = _cfg.get(key);
-        FormattingPreferenceValues _cfg_1 = doc.getCfg();
-        final boolean preserve = _cfg_1.get(XbaseFormatterPreferenceKeys.preserveNewLines);
+        final boolean newLine = doc.getCfg().get(key);
+        final boolean preserve = doc.getCfg().get(XbaseFormatterPreferenceKeys.preserveNewLines);
         int _xifexpression = (int) 0;
         if (newLine) {
           _xifexpression = 1;
@@ -118,8 +113,7 @@ public class FormattingDataFactory {
     final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
       Iterable<FormattingData> _xblockexpression = null;
       {
-        FormattingPreferenceValues _cfg = doc.getCfg();
-        final boolean newLine = _cfg.get(key);
+        final boolean newLine = doc.getCfg().get(key);
         int _xifexpression = (int) 0;
         if (newLine) {
           _xifexpression = 1;
@@ -144,8 +138,7 @@ public class FormattingDataFactory {
     final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
       Iterable<FormattingData> _xblockexpression = null;
       {
-        FormattingPreferenceValues _cfg = doc.getCfg();
-        final boolean space = _cfg.get(key);
+        final boolean space = doc.getCfg().get(key);
         String _xifexpression = null;
         if (space) {
           _xifexpression = " ";
@@ -256,9 +249,7 @@ public class FormattingDataFactory {
             result.add(_whitespaceData);
           } else {
             if ((!applied)) {
-              int _newLines = leafs.getNewLines();
-              int _max = Math.max(_newLines, minNewLines);
-              int newLines = Math.min(_max, maxNewLines);
+              int newLines = Math.min(Math.max(leafs.getNewLines(), minNewLines), maxNewLines);
               boolean _and_1 = false;
               if (!((newLines < 1) && (((WhitespaceInfo)leaf).getOffset() > 0))) {
                 _and_1 = false;
@@ -408,8 +399,7 @@ public class FormattingDataFactory {
   public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> append(final INode node, final Procedure1<? super FormattingDataInit> init) {
     Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xifexpression = null;
     if ((node != null)) {
-      HiddenLeafs _hiddenLeafsAfter = this._hiddenLeafAccess.getHiddenLeafsAfter(node);
-      _xifexpression = this.newFormattingData(_hiddenLeafsAfter, init);
+      _xifexpression = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsAfter(node), init);
     }
     return _xifexpression;
   }
@@ -417,8 +407,7 @@ public class FormattingDataFactory {
   public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> prepend(final INode node, final Procedure1<? super FormattingDataInit> init) {
     Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xifexpression = null;
     if ((node != null)) {
-      HiddenLeafs _hiddenLeafsBefore = this._hiddenLeafAccess.getHiddenLeafsBefore(node);
-      _xifexpression = this.newFormattingData(_hiddenLeafsBefore, init);
+      _xifexpression = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsBefore(node), init);
     }
     return _xifexpression;
   }
@@ -430,8 +419,7 @@ public class FormattingDataFactory {
         final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
         if ((node != null)) {
           Iterable<FormattingData> _elvis = null;
-          HiddenLeafs _hiddenLeafsBefore = this._hiddenLeafAccess.getHiddenLeafsBefore(node);
-          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(_hiddenLeafsBefore, init);
+          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsBefore(node), init);
           Iterable<FormattingData> _apply = null;
           if (_newFormattingData!=null) {
             _apply=_newFormattingData.apply(doc);
@@ -444,8 +432,7 @@ public class FormattingDataFactory {
           }
           Iterables.<FormattingData>addAll(result, _elvis);
           Iterable<FormattingData> _elvis_1 = null;
-          HiddenLeafs _hiddenLeafsAfter = this._hiddenLeafAccess.getHiddenLeafsAfter(node);
-          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData_1 = this.newFormattingData(_hiddenLeafsAfter, init);
+          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData_1 = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsAfter(node), init);
           Iterable<FormattingData> _apply_1 = null;
           if (_newFormattingData_1!=null) {
             _apply_1=_newFormattingData_1.apply(doc);
@@ -472,8 +459,7 @@ public class FormattingDataFactory {
         final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
         if ((node != null)) {
           Iterable<FormattingData> _elvis = null;
-          HiddenLeafs _hiddenLeafsBefore = this._hiddenLeafAccess.getHiddenLeafsBefore(node);
-          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(_hiddenLeafsBefore, before);
+          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsBefore(node), before);
           Iterable<FormattingData> _apply = null;
           if (_newFormattingData!=null) {
             _apply=_newFormattingData.apply(doc);
@@ -486,8 +472,7 @@ public class FormattingDataFactory {
           }
           Iterables.<FormattingData>addAll(result, _elvis);
           Iterable<FormattingData> _elvis_1 = null;
-          HiddenLeafs _hiddenLeafsAfter = this._hiddenLeafAccess.getHiddenLeafsAfter(node);
-          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData_1 = this.newFormattingData(_hiddenLeafsAfter, after);
+          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData_1 = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsAfter(node), after);
           Iterable<FormattingData> _apply_1 = null;
           if (_newFormattingData_1!=null) {
             _apply_1=_newFormattingData_1.apply(doc);

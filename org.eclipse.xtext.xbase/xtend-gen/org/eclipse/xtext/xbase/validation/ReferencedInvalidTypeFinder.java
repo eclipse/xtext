@@ -55,8 +55,7 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
   }
   
   protected LightweightTypeReference _internalFindReferencedInvalidType(final JvmField field) {
-    JvmTypeReference _type = field.getType();
-    final LightweightTypeReference type = this.toLightweightTypeReference(_type);
+    final LightweightTypeReference type = this.toLightweightTypeReference(field.getType());
     boolean _isPrimitiveVoid = type.isPrimitiveVoid();
     if (_isPrimitiveVoid) {
       return type;
@@ -65,8 +64,7 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
   }
   
   protected LightweightTypeReference _internalFindReferencedInvalidType(final JvmOperation operation) {
-    JvmTypeReference _returnType = operation.getReturnType();
-    final LightweightTypeReference unknownType = this.findUnknownType(_returnType);
+    final LightweightTypeReference unknownType = this.findUnknownType(operation.getReturnType());
     if ((unknownType != null)) {
       return unknownType;
     }
@@ -74,17 +72,14 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
   }
   
   protected LightweightTypeReference _internalFindReferencedInvalidType(final JvmExecutable executable) {
-    EList<JvmTypeParameter> _typeParameters = executable.getTypeParameters();
     final Function1<JvmTypeParameter, EList<JvmTypeConstraint>> _function = (JvmTypeParameter it) -> {
       return it.getConstraints();
     };
-    List<EList<JvmTypeConstraint>> _map = ListExtensions.<JvmTypeParameter, EList<JvmTypeConstraint>>map(_typeParameters, _function);
-    Iterable<JvmTypeConstraint> _flatten = Iterables.<JvmTypeConstraint>concat(_map);
     final Function1<JvmTypeConstraint, JvmTypeReference> _function_1 = (JvmTypeConstraint it) -> {
       return it.getTypeReference();
     };
-    Iterable<JvmTypeReference> _map_1 = IterableExtensions.<JvmTypeConstraint, JvmTypeReference>map(_flatten, _function_1);
-    for (final JvmTypeReference typeReference : _map_1) {
+    Iterable<JvmTypeReference> _map = IterableExtensions.<JvmTypeConstraint, JvmTypeReference>map(Iterables.<JvmTypeConstraint>concat(ListExtensions.<JvmTypeParameter, EList<JvmTypeConstraint>>map(executable.getTypeParameters(), _function)), _function_1);
+    for (final JvmTypeReference typeReference : _map) {
       {
         final LightweightTypeReference unknownType = this.findUnknownType(typeReference);
         if ((unknownType != null)) {
@@ -92,13 +87,11 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
         }
       }
     }
-    EList<JvmFormalParameter> _parameters = executable.getParameters();
     final Function1<JvmFormalParameter, LightweightTypeReference> _function_2 = (JvmFormalParameter it) -> {
-      JvmTypeReference _parameterType = it.getParameterType();
-      return this.toLightweightTypeReference(_parameterType);
+      return this.toLightweightTypeReference(it.getParameterType());
     };
-    List<LightweightTypeReference> _map_2 = ListExtensions.<JvmFormalParameter, LightweightTypeReference>map(_parameters, _function_2);
-    for (final LightweightTypeReference parameterType : _map_2) {
+    List<LightweightTypeReference> _map_1 = ListExtensions.<JvmFormalParameter, LightweightTypeReference>map(executable.getParameters(), _function_2);
+    for (final LightweightTypeReference parameterType : _map_1) {
       {
         boolean _isPrimitiveVoid = parameterType.isPrimitiveVoid();
         if (_isPrimitiveVoid) {
@@ -123,8 +116,7 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
   }
   
   protected LightweightTypeReference findUnknownType(final JvmTypeReference reference) {
-    LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(reference);
-    return this.findUnknownType(_lightweightTypeReference);
+    return this.findUnknownType(this.toLightweightTypeReference(reference));
   }
   
   protected LightweightTypeReference findUnknownType(final LightweightTypeReference type) {
@@ -142,14 +134,12 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
   
   @Override
   protected LightweightTypeReference doVisitArrayTypeReference(final ArrayTypeReference reference) {
-    LightweightTypeReference _componentType = reference.getComponentType();
-    return _componentType.<LightweightTypeReference>accept(this);
+    return reference.getComponentType().<LightweightTypeReference>accept(this);
   }
   
   @Override
   protected LightweightTypeReference doVisitWildcardTypeReference(final WildcardTypeReference reference) {
-    List<LightweightTypeReference> _upperBounds = reference.getUpperBounds();
-    final LightweightTypeReference unknownType = this.visit(_upperBounds);
+    final LightweightTypeReference unknownType = this.visit(reference.getUpperBounds());
     if ((unknownType != null)) {
       return unknownType;
     }
@@ -162,28 +152,23 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
   
   @Override
   protected LightweightTypeReference doVisitParameterizedTypeReference(final ParameterizedTypeReference reference) {
-    List<LightweightTypeReference> _typeArguments = reference.getTypeArguments();
-    return this.visit(_typeArguments);
+    return this.visit(reference.getTypeArguments());
   }
   
   @Override
   protected LightweightTypeReference doVisitCompoundTypeReference(final CompoundTypeReference reference) {
-    List<LightweightTypeReference> _multiTypeComponents = reference.getMultiTypeComponents();
-    return this.visit(_multiTypeComponents);
+    return this.visit(reference.getMultiTypeComponents());
   }
   
   protected LightweightTypeReference visit(final List<LightweightTypeReference> references) {
     final Function1<LightweightTypeReference, LightweightTypeReference> _function = (LightweightTypeReference it) -> {
       return it.<LightweightTypeReference>accept(this);
     };
-    List<LightweightTypeReference> _map = ListExtensions.<LightweightTypeReference, LightweightTypeReference>map(references, _function);
-    Iterable<LightweightTypeReference> _filterNull = IterableExtensions.<LightweightTypeReference>filterNull(_map);
-    return IterableExtensions.<LightweightTypeReference>head(_filterNull);
+    return IterableExtensions.<LightweightTypeReference>head(IterableExtensions.<LightweightTypeReference>filterNull(ListExtensions.<LightweightTypeReference, LightweightTypeReference>map(references, _function)));
   }
   
   protected LightweightTypeReference toLightweightTypeReference(final JvmTypeReference typeRef) {
-    StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, typeRef);
-    return _standardTypeReferenceOwner.toLightweightTypeReference(typeRef);
+    return new StandardTypeReferenceOwner(this.services, typeRef).toLightweightTypeReference(typeRef);
   }
   
   protected LightweightTypeReference internalFindReferencedInvalidType(final JvmIdentifiableElement operation) {

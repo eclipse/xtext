@@ -31,22 +31,17 @@ public interface ImportsAcceptor {
     
     @Override
     public void acceptTypeImport(final JvmType typeImport) {
-      String _qualifiedNameWithout$ = this.qualifiedNameWithout$(typeImport);
-      this.types.add(_qualifiedNameWithout$);
+      this.types.add(this.qualifiedNameWithout$(typeImport));
     }
     
     @Override
     public void acceptStaticImport(final XAbstractFeatureCall statImport) {
-      JvmIdentifiableElement _feature = statImport.getFeature();
-      String _qualifiedNameWithout$ = this.qualifiedNameWithout$(_feature);
-      this.staticImport.add(_qualifiedNameWithout$);
+      this.staticImport.add(this.qualifiedNameWithout$(statImport.getFeature()));
     }
     
     @Override
     public void acceptStaticExtensionImport(final XAbstractFeatureCall extImport) {
-      JvmIdentifiableElement _feature = extImport.getFeature();
-      String _qualifiedNameWithout$ = this.qualifiedNameWithout$(_feature);
-      this.extensions.add(_qualifiedNameWithout$);
+      this.extensions.add(this.qualifiedNameWithout$(extImport.getFeature()));
     }
     
     private String qualifiedNameWithout$(final JvmIdentifiableElement ele) {

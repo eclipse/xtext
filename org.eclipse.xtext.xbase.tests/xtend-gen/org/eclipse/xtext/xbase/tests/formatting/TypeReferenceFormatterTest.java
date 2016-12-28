@@ -32,9 +32,7 @@ public class TypeReferenceFormatterTest {
       _builder.newLineIfNotEmpty();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      String _trim = _string.trim();
-      it.setToBeFormatted(_trim);
+      it.setToBeFormatted(_builder.toString().trim());
     };
     this.tester.assertFormatted(_function);
   }

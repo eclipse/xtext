@@ -13,22 +13,17 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.Output;
 import org.eclipse.xpand2.output.PostProcessor;
 import org.eclipse.xtend.expression.ExecutionContext;
-import org.eclipse.xtend.expression.ResourceManager;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.generator.BindKey;
-import org.eclipse.xtext.generator.BindValue;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
@@ -47,7 +42,6 @@ import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -65,11 +59,7 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
-import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
  * @since 2.9
@@ -113,8 +103,7 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
     if ((this.fragment == null)) {
       issues.addError("The property \'fragment\' must be set.", this);
     } else {
-      org.eclipse.emf.mwe.core.issues.Issues _delegate = ((MweIssues) issues).getDelegate();
-      this.fragment.checkConfiguration(_delegate);
+      this.fragment.checkConfiguration(((MweIssues) issues).getDelegate());
     }
   }
   
@@ -128,8 +117,7 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
     if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
       ((IGeneratorFragmentExtension2)this.fragment).generate(config1, ctx);
     } else {
-      Grammar _grammar = config1.getGrammar();
-      this.fragment.generate(_grammar, ctx);
+      this.fragment.generate(config1.getGrammar(), ctx);
     }
     this.generateStandaloneSetup(config1, ctx);
     this.generateGuiceModuleRt(config1, ctx);
@@ -143,85 +131,69 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
   }
   
   private void generateStandaloneSetup(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    Output _output = ctx.getOutput();
-    _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
+    ctx.getOutput().openFile(null, StringConcatOutputImpl.STRING_OUTLET);
     try {
       final IXtextGeneratorLanguage config2 = this.getLanguage();
       if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
         ((IGeneratorFragmentExtension2)this.fragment).addToStandaloneSetup(config1, ctx);
       } else {
-        Grammar _grammar = config1.getGrammar();
-        this.fragment.addToStandaloneSetup(_grammar, ctx);
+        this.fragment.addToStandaloneSetup(config1.getGrammar(), ctx);
       }
-      Output _output_1 = ctx.getOutput();
-      final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
-      StandaloneSetupAccess _runtimeGenSetup = config2.getRuntimeGenSetup();
-      List<StringConcatenationClient> _registrations = _runtimeGenSetup.getRegistrations();
+      Output _output = ctx.getOutput();
+      final StringConcatenation result = ((StringConcatOutputImpl) _output).getStringOutlet();
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          String _string = result.toString();
-          StringBuilder _decreaseIndentation = FragmentAdapter.this.decreaseIndentation(_string, 2);
+          StringBuilder _decreaseIndentation = FragmentAdapter.this.decreaseIndentation(result.toString(), 2);
           _builder.append(_decreaseIndentation);
         }
       };
-      _registrations.add(_client);
-      StandaloneSetupAccess _runtimeGenSetup_1 = config2.getRuntimeGenSetup();
-      Set<TypeReference> _imports = _runtimeGenSetup_1.getImports();
+      config2.getRuntimeGenSetup().getRegistrations().add(_client);
+      Set<TypeReference> _imports = config2.getRuntimeGenSetup().getImports();
       TypeReference _typeReference = new TypeReference("org.eclipse.emf.ecore.EPackage");
       _imports.add(_typeReference);
-      StandaloneSetupAccess _runtimeGenSetup_2 = config2.getRuntimeGenSetup();
-      Set<TypeReference> _imports_1 = _runtimeGenSetup_2.getImports();
+      Set<TypeReference> _imports_1 = config2.getRuntimeGenSetup().getImports();
       TypeReference _typeReference_1 = new TypeReference("org.eclipse.emf.ecore.resource.Resource");
       _imports_1.add(_typeReference_1);
     } finally {
-      Output _output_2 = ctx.getOutput();
-      _output_2.closeFile();
+      ctx.getOutput().closeFile();
     }
   }
   
   private void generateGuiceModuleRt(final LanguageConfig config1, final XpandExecutionContext ctx) {
     final IXtextGeneratorLanguage config2 = this.getLanguage();
-    Grammar _grammar = config1.getGrammar();
-    final Set<Binding> bindings = this.fragment.getGuiceBindingsRt(_grammar);
+    final Set<Binding> bindings = this.fragment.getGuiceBindingsRt(config1.getGrammar());
     if ((bindings != null)) {
-      GuiceModuleAccess _runtimeGenModule = config2.getRuntimeGenModule();
       final Function1<Binding, GuiceModuleAccess.Binding> _function = (Binding it) -> {
         return this.translateBinding(it);
       };
-      Iterable<GuiceModuleAccess.Binding> _map = IterableExtensions.<Binding, GuiceModuleAccess.Binding>map(bindings, _function);
-      _runtimeGenModule.addAll(_map);
+      config2.getRuntimeGenModule().addAll(IterableExtensions.<Binding, GuiceModuleAccess.Binding>map(bindings, _function));
     }
     if ((this.fragment instanceof IGeneratorFragmentExtension4)) {
-      Grammar _grammar_1 = config1.getGrammar();
-      final String superClass = ((IGeneratorFragmentExtension4)this.fragment).getDefaultRuntimeModuleClassName(_grammar_1);
+      final String superClass = ((IGeneratorFragmentExtension4)this.fragment).getDefaultRuntimeModuleClassName(config1.getGrammar());
       if ((superClass != null)) {
-        GuiceModuleAccess _runtimeGenModule_1 = config2.getRuntimeGenModule();
+        GuiceModuleAccess _runtimeGenModule = config2.getRuntimeGenModule();
         TypeReference _typeReference = new TypeReference(superClass);
-        _runtimeGenModule_1.setSuperClass(_typeReference);
+        _runtimeGenModule.setSuperClass(_typeReference);
       }
     }
   }
   
   private void generateGuiceModuleUi(final LanguageConfig config1, final XpandExecutionContext ctx) {
     final IXtextGeneratorLanguage config2 = this.getLanguage();
-    Grammar _grammar = config1.getGrammar();
-    final Set<Binding> bindings = this.fragment.getGuiceBindingsUi(_grammar);
+    final Set<Binding> bindings = this.fragment.getGuiceBindingsUi(config1.getGrammar());
     if ((bindings != null)) {
-      GuiceModuleAccess _eclipsePluginGenModule = config2.getEclipsePluginGenModule();
       final Function1<Binding, GuiceModuleAccess.Binding> _function = (Binding it) -> {
         return this.translateBinding(it);
       };
-      Iterable<GuiceModuleAccess.Binding> _map = IterableExtensions.<Binding, GuiceModuleAccess.Binding>map(bindings, _function);
-      _eclipsePluginGenModule.addAll(_map);
+      config2.getEclipsePluginGenModule().addAll(IterableExtensions.<Binding, GuiceModuleAccess.Binding>map(bindings, _function));
     }
     if ((this.fragment instanceof IGeneratorFragmentExtension4)) {
-      Grammar _grammar_1 = config1.getGrammar();
-      final String superClass = ((IGeneratorFragmentExtension4)this.fragment).getDefaultUiModuleClassName(_grammar_1);
+      final String superClass = ((IGeneratorFragmentExtension4)this.fragment).getDefaultUiModuleClassName(config1.getGrammar());
       if ((superClass != null)) {
-        GuiceModuleAccess _eclipsePluginGenModule_1 = config2.getEclipsePluginGenModule();
+        GuiceModuleAccess _eclipsePluginGenModule = config2.getEclipsePluginGenModule();
         TypeReference _typeReference = new TypeReference(superClass);
-        _eclipsePluginGenModule_1.setSuperClass(_typeReference);
+        _eclipsePluginGenModule.setSuperClass(_typeReference);
       }
     }
   }
@@ -231,40 +203,28 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
     {
       GuiceModuleAccess.BindKey _xifexpression = null;
       if (((it.getValue().getStatements() == null) || ((List<String>)Conversions.doWrapArray(it.getValue().getStatements())).isEmpty())) {
-        BindKey _key = it.getKey();
-        String _type = _key.getType();
+        String _type = it.getKey().getType();
         TypeReference _guessTypeRef = null;
         if (_type!=null) {
           _guessTypeRef=TypeReference.guessTypeRef(_type);
         }
-        BindKey _key_1 = it.getKey();
-        boolean _isSingleton = _key_1.isSingleton();
-        BindKey _key_2 = it.getKey();
-        boolean _isEagerSingleton = _key_2.isEagerSingleton();
+        boolean _isSingleton = it.getKey().isSingleton();
+        boolean _isEagerSingleton = it.getKey().isEagerSingleton();
         _xifexpression = new GuiceModuleAccess.BindKey(null, _guessTypeRef, _isSingleton, _isEagerSingleton);
       } else {
-        BindKey _key_3 = it.getKey();
-        String _type_1 = _key_3.getType();
-        String _className = this.getClassName(_type_1);
-        BindKey _key_4 = it.getKey();
-        boolean _isSingleton_1 = _key_4.isSingleton();
-        BindKey _key_5 = it.getKey();
-        boolean _isEagerSingleton_1 = _key_5.isEagerSingleton();
+        String _className = this.getClassName(it.getKey().getType());
+        boolean _isSingleton_1 = it.getKey().isSingleton();
+        boolean _isEagerSingleton_1 = it.getKey().isEagerSingleton();
         _xifexpression = new GuiceModuleAccess.BindKey(_className, null, _isSingleton_1, _isEagerSingleton_1);
       }
       final GuiceModuleAccess.BindKey newKey = _xifexpression;
-      BindValue _value = it.getValue();
-      String _expression = _value.getExpression();
-      BindValue _value_1 = it.getValue();
-      String _typeName = _value_1.getTypeName();
+      String _expression = it.getValue().getExpression();
+      String _typeName = it.getValue().getTypeName();
       TypeReference _guessTypeRef_1 = null;
       if (_typeName!=null) {
         _guessTypeRef_1=TypeReference.guessTypeRef(_typeName);
       }
-      BindValue _value_2 = it.getValue();
-      boolean _isProvider = _value_2.isProvider();
-      BindValue _value_3 = it.getValue();
-      String[] _statements = _value_3.getStatements();
+      boolean _isProvider = it.getValue().isProvider();
       final Function1<String, Object> _function = (String s) -> {
         String _xifexpression_1 = null;
         boolean _endsWith = s.endsWith(";");
@@ -275,7 +235,7 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
         }
         return _xifexpression_1;
       };
-      List<Object> _map = ListExtensions.<String, Object>map(((List<String>)Conversions.doWrapArray(_statements)), _function);
+      List<Object> _map = ListExtensions.<String, Object>map(((List<String>)Conversions.doWrapArray(it.getValue().getStatements())), _function);
       final GuiceModuleAccess.BindValue newValue = new GuiceModuleAccess.BindValue(_expression, _guessTypeRef_1, _isProvider, _map);
       boolean _isFinal = it.isFinal();
       String _contributedBy = it.getContributedBy();
@@ -287,11 +247,9 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
   private String getClassName(final String qualifiedName) {
     int classStart = qualifiedName.length();
     for (int i = (qualifiedName.length() - 1); (i >= 0); i--) {
-      char _charAt = qualifiedName.charAt(i);
-      boolean _matches = this.matches(_charAt, '.');
+      boolean _matches = this.matches(qualifiedName.charAt(i), '.');
       if (_matches) {
-        char _charAt_1 = qualifiedName.charAt((i + 1));
-        boolean _isLowerCase = Character.isLowerCase(_charAt_1);
+        boolean _isLowerCase = Character.isLowerCase(qualifiedName.charAt((i + 1)));
         if (_isLowerCase) {
           return qualifiedName.substring(classStart);
         } else {
@@ -303,147 +261,91 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
   }
   
   private void generatePluginXmlRt(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    PluginXmlAccess _pluginXml = _runtime.getPluginXml();
+    PluginXmlAccess _pluginXml = this.getProjectConfig().getRuntime().getPluginXml();
     boolean _tripleNotEquals = (_pluginXml != null);
     if (_tripleNotEquals) {
-      Output _output = ctx.getOutput();
-      _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
+      ctx.getOutput().openFile(null, StringConcatOutputImpl.STRING_OUTLET);
       try {
         if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
           ((IGeneratorFragmentExtension2)this.fragment).addToPluginXmlRt(config1, ctx);
         } else {
-          Grammar _grammar = config1.getGrammar();
-          this.fragment.addToPluginXmlRt(_grammar, ctx);
+          this.fragment.addToPluginXmlRt(config1.getGrammar(), ctx);
         }
-        Output _output_1 = ctx.getOutput();
-        final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
-        String _string = result.toString();
-        final StringBuilder entry = this.decreaseIndentation(_string, 1);
-        String _string_1 = entry.toString();
-        String _trim = _string_1.trim();
-        boolean _isEmpty = _trim.isEmpty();
+        Output _output = ctx.getOutput();
+        final StringConcatenation result = ((StringConcatOutputImpl) _output).getStringOutlet();
+        final StringBuilder entry = this.decreaseIndentation(result.toString(), 1);
+        boolean _isEmpty = entry.toString().trim().isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
-          IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-          IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
-          PluginXmlAccess _pluginXml_1 = _runtime_1.getPluginXml();
-          List<CharSequence> _entries = _pluginXml_1.getEntries();
+          List<CharSequence> _entries = this.getProjectConfig().getRuntime().getPluginXml().getEntries();
           _entries.add(entry);
         }
       } finally {
-        Output _output_2 = ctx.getOutput();
-        _output_2.closeFile();
+        ctx.getOutput().closeFile();
       }
     }
   }
   
   private void generatePluginXmlUi(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
+    PluginXmlAccess _pluginXml = this.getProjectConfig().getEclipsePlugin().getPluginXml();
     boolean _tripleNotEquals = (_pluginXml != null);
     if (_tripleNotEquals) {
-      Output _output = ctx.getOutput();
-      _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
+      ctx.getOutput().openFile(null, StringConcatOutputImpl.STRING_OUTLET);
       try {
         if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
           ((IGeneratorFragmentExtension2)this.fragment).addToPluginXmlUi(config1, ctx);
         } else {
-          Grammar _grammar = config1.getGrammar();
-          this.fragment.addToPluginXmlUi(_grammar, ctx);
+          this.fragment.addToPluginXmlUi(config1.getGrammar(), ctx);
         }
-        Output _output_1 = ctx.getOutput();
-        final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
-        String _string = result.toString();
-        final StringBuilder entry = this.decreaseIndentation(_string, 1);
-        String _string_1 = entry.toString();
-        String _trim = _string_1.trim();
-        boolean _isEmpty = _trim.isEmpty();
+        Output _output = ctx.getOutput();
+        final StringConcatenation result = ((StringConcatOutputImpl) _output).getStringOutlet();
+        final StringBuilder entry = this.decreaseIndentation(result.toString(), 1);
+        boolean _isEmpty = entry.toString().trim().isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
-          IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-          IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
-          PluginXmlAccess _pluginXml_1 = _eclipsePlugin_1.getPluginXml();
-          List<CharSequence> _entries = _pluginXml_1.getEntries();
+          List<CharSequence> _entries = this.getProjectConfig().getEclipsePlugin().getPluginXml().getEntries();
           _entries.add(entry);
         }
       } finally {
-        Output _output_2 = ctx.getOutput();
-        _output_2.closeFile();
+        ctx.getOutput().closeFile();
       }
     }
   }
   
   private void generateManifestRt(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    ManifestAccess _manifest = _runtime.getManifest();
+    ManifestAccess _manifest = this.getProjectConfig().getRuntime().getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      Grammar _grammar = config1.getGrammar();
-      final String[] exported = this.fragment.getExportedPackagesRt(_grammar);
+      final String[] exported = this.fragment.getExportedPackagesRt(config1.getGrammar());
       if ((exported != null)) {
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
-        ManifestAccess _manifest_1 = _runtime_1.getManifest();
-        Set<String> _exportedPackages = _manifest_1.getExportedPackages();
-        CollectionExtensions.<String>addAll(_exportedPackages, exported);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getRuntime().getManifest().getExportedPackages(), exported);
       }
-      Grammar _grammar_1 = config1.getGrammar();
-      final String[] required = this.fragment.getRequiredBundlesRt(_grammar_1);
+      final String[] required = this.fragment.getRequiredBundlesRt(config1.getGrammar());
       if ((required != null)) {
-        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
-        ManifestAccess _manifest_2 = _runtime_2.getManifest();
-        Set<String> _requiredBundles = _manifest_2.getRequiredBundles();
-        CollectionExtensions.<String>addAll(_requiredBundles, required);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getRuntime().getManifest().getRequiredBundles(), required);
       }
-      Grammar _grammar_2 = config1.getGrammar();
-      final String[] imported = this.fragment.getImportedPackagesRt(_grammar_2);
+      final String[] imported = this.fragment.getImportedPackagesRt(config1.getGrammar());
       if ((imported != null)) {
-        IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime_3 = _projectConfig_3.getRuntime();
-        ManifestAccess _manifest_3 = _runtime_3.getManifest();
-        Set<String> _importedPackages = _manifest_3.getImportedPackages();
-        CollectionExtensions.<String>addAll(_importedPackages, imported);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getRuntime().getManifest().getImportedPackages(), imported);
       }
     }
   }
   
   private void generateManifestUi(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    ManifestAccess _manifest = _eclipsePlugin.getManifest();
+    ManifestAccess _manifest = this.getProjectConfig().getEclipsePlugin().getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      Grammar _grammar = config1.getGrammar();
-      final String[] exported = this.fragment.getExportedPackagesUi(_grammar);
+      final String[] exported = this.fragment.getExportedPackagesUi(config1.getGrammar());
       if ((exported != null)) {
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
-        ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
-        Set<String> _exportedPackages = _manifest_1.getExportedPackages();
-        CollectionExtensions.<String>addAll(_exportedPackages, exported);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getEclipsePlugin().getManifest().getExportedPackages(), exported);
       }
-      Grammar _grammar_1 = config1.getGrammar();
-      final String[] required = this.fragment.getRequiredBundlesUi(_grammar_1);
+      final String[] required = this.fragment.getRequiredBundlesUi(config1.getGrammar());
       if ((required != null)) {
-        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-        IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
-        ManifestAccess _manifest_2 = _eclipsePlugin_2.getManifest();
-        Set<String> _requiredBundles = _manifest_2.getRequiredBundles();
-        CollectionExtensions.<String>addAll(_requiredBundles, required);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles(), required);
       }
-      Grammar _grammar_2 = config1.getGrammar();
-      final String[] imported = this.fragment.getImportedPackagesUi(_grammar_2);
+      final String[] imported = this.fragment.getImportedPackagesUi(config1.getGrammar());
       if ((imported != null)) {
-        IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-        IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
-        ManifestAccess _manifest_3 = _eclipsePlugin_3.getManifest();
-        Set<String> _importedPackages = _manifest_3.getImportedPackages();
-        CollectionExtensions.<String>addAll(_importedPackages, imported);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getEclipsePlugin().getManifest().getImportedPackages(), imported);
       }
     }
   }
@@ -451,32 +353,17 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
   private void generateManifestIde(final LanguageConfig config1, final XpandExecutionContext ctx) {
     if (((this.fragment instanceof IGeneratorFragmentExtension3) && (this.getProjectConfig().getGenericIde().getManifest() != null))) {
       final IGeneratorFragmentExtension3 fr = ((IGeneratorFragmentExtension3) this.fragment);
-      Grammar _grammar = config1.getGrammar();
-      final String[] exported = fr.getExportedPackagesIde(_grammar);
+      final String[] exported = fr.getExportedPackagesIde(config1.getGrammar());
       if ((exported != null)) {
-        IXtextProjectConfig _projectConfig = this.getProjectConfig();
-        IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
-        ManifestAccess _manifest = _genericIde.getManifest();
-        Set<String> _exportedPackages = _manifest.getExportedPackages();
-        CollectionExtensions.<String>addAll(_exportedPackages, exported);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getGenericIde().getManifest().getExportedPackages(), exported);
       }
-      Grammar _grammar_1 = config1.getGrammar();
-      final String[] required = fr.getRequiredBundlesIde(_grammar_1);
+      final String[] required = fr.getRequiredBundlesIde(config1.getGrammar());
       if ((required != null)) {
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        IBundleProjectConfig _genericIde_1 = _projectConfig_1.getGenericIde();
-        ManifestAccess _manifest_1 = _genericIde_1.getManifest();
-        Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
-        CollectionExtensions.<String>addAll(_requiredBundles, required);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getGenericIde().getManifest().getRequiredBundles(), required);
       }
-      Grammar _grammar_2 = config1.getGrammar();
-      final String[] imported = fr.getImportedPackagesIde(_grammar_2);
+      final String[] imported = fr.getImportedPackagesIde(config1.getGrammar());
       if ((imported != null)) {
-        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-        IBundleProjectConfig _genericIde_2 = _projectConfig_2.getGenericIde();
-        ManifestAccess _manifest_2 = _genericIde_2.getManifest();
-        Set<String> _importedPackages = _manifest_2.getImportedPackages();
-        CollectionExtensions.<String>addAll(_importedPackages, imported);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getGenericIde().getManifest().getImportedPackages(), imported);
       }
     }
   }
@@ -484,32 +371,17 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
   private void generateManifestTests(final LanguageConfig config1, final XpandExecutionContext ctx) {
     if (((this.fragment instanceof IGeneratorFragmentExtension) && (this.getProjectConfig().getRuntimeTest().getManifest() != null))) {
       final IGeneratorFragmentExtension fr = ((IGeneratorFragmentExtension) this.fragment);
-      Grammar _grammar = config1.getGrammar();
-      final String[] exported = fr.getExportedPackagesTests(_grammar);
+      final String[] exported = fr.getExportedPackagesTests(config1.getGrammar());
       if ((exported != null)) {
-        IXtextProjectConfig _projectConfig = this.getProjectConfig();
-        IBundleProjectConfig _runtimeTest = _projectConfig.getRuntimeTest();
-        ManifestAccess _manifest = _runtimeTest.getManifest();
-        Set<String> _exportedPackages = _manifest.getExportedPackages();
-        CollectionExtensions.<String>addAll(_exportedPackages, exported);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getRuntimeTest().getManifest().getExportedPackages(), exported);
       }
-      Grammar _grammar_1 = config1.getGrammar();
-      final String[] required = fr.getRequiredBundlesTests(_grammar_1);
+      final String[] required = fr.getRequiredBundlesTests(config1.getGrammar());
       if ((required != null)) {
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        IBundleProjectConfig _runtimeTest_1 = _projectConfig_1.getRuntimeTest();
-        ManifestAccess _manifest_1 = _runtimeTest_1.getManifest();
-        Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
-        CollectionExtensions.<String>addAll(_requiredBundles, required);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getRuntimeTest().getManifest().getRequiredBundles(), required);
       }
-      Grammar _grammar_2 = config1.getGrammar();
-      final String[] imported = fr.getImportedPackagesTests(_grammar_2);
+      final String[] imported = fr.getImportedPackagesTests(config1.getGrammar());
       if ((imported != null)) {
-        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-        IBundleProjectConfig _runtimeTest_2 = _projectConfig_2.getRuntimeTest();
-        ManifestAccess _manifest_2 = _runtimeTest_2.getManifest();
-        Set<String> _importedPackages = _manifest_2.getImportedPackages();
-        CollectionExtensions.<String>addAll(_importedPackages, imported);
+        CollectionExtensions.<String>addAll(this.getProjectConfig().getRuntimeTest().getManifest().getImportedPackages(), imported);
       }
     }
   }
@@ -518,42 +390,24 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
     final IXtextGeneratorLanguage config2 = this.getLanguage();
     Naming _naming = new Naming();
     final Procedure1<Naming> _function = (Naming it) -> {
-      it.setProjectNameRt(this.getLastSegment(new Function0<String>() {
-        public String apply() {
-          IXtextProjectConfig _projectConfig = FragmentAdapter.this.getProjectConfig();
-          IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-          IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
-          String _path = null;
-          if (_root!=null) {
-            _path=_root.getPath();
-          }
-          return _path;
-        }
-      }.apply()));
-      it.setProjectNameIde(this.getLastSegment(new Function0<String>() {
-        public String apply() {
-          IXtextProjectConfig _projectConfig = FragmentAdapter.this.getProjectConfig();
-          IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
-          IXtextGeneratorFileSystemAccess _root = _genericIde.getRoot();
-          String _path = null;
-          if (_root!=null) {
-            _path=_root.getPath();
-          }
-          return _path;
-        }
-      }.apply()));
-      it.setProjectNameUi(this.getLastSegment(new Function0<String>() {
-        public String apply() {
-          IXtextProjectConfig _projectConfig = FragmentAdapter.this.getProjectConfig();
-          IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-          IXtextGeneratorFileSystemAccess _root = _eclipsePlugin.getRoot();
-          String _path = null;
-          if (_root!=null) {
-            _path=_root.getPath();
-          }
-          return _path;
-        }
-      }.apply()));
+      IXtextGeneratorFileSystemAccess _root = this.getProjectConfig().getRuntime().getRoot();
+      String _path = null;
+      if (_root!=null) {
+        _path=_root.getPath();
+      }
+      it.setProjectNameRt(this.getLastSegment(_path));
+      IXtextGeneratorFileSystemAccess _root_1 = this.getProjectConfig().getGenericIde().getRoot();
+      String _path_1 = null;
+      if (_root_1!=null) {
+        _path_1=_root_1.getPath();
+      }
+      it.setProjectNameIde(this.getLastSegment(_path_1));
+      IXtextGeneratorFileSystemAccess _root_2 = this.getProjectConfig().getEclipsePlugin().getRoot();
+      String _path_2 = null;
+      if (_root_2!=null) {
+        _path_2=_root_2.getPath();
+      }
+      it.setProjectNameUi(this.getLastSegment(_path_2));
       it.setIdeBasePackage(this._xtextGeneratorNaming.getGenericIdeBasePackage(config2.getGrammar()));
       it.setUiBasePackage(this._xtextGeneratorNaming.getEclipsePluginBasePackage(config2.getGrammar()));
       TypeReference _eclipsePluginActivator = this._xtextGeneratorNaming.getEclipsePluginActivator();
@@ -562,14 +416,12 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
         _name=_eclipsePluginActivator.getName();
       }
       it.setActivatorName(_name);
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IBundleProjectConfig _runtimeTest = _projectConfig.getRuntimeTest();
-      IXtextGeneratorFileSystemAccess _root = _runtimeTest.getRoot();
-      String _path = null;
-      if (_root!=null) {
-        _path=_root.getPath();
+      IXtextGeneratorFileSystemAccess _root_3 = this.getProjectConfig().getRuntimeTest().getRoot();
+      String _path_3 = null;
+      if (_root_3!=null) {
+        _path_3=_root_3.getPath();
       }
-      it.setPathTestProject(_path);
+      it.setPathTestProject(_path_3);
       it.setLineDelimiter(this.codeConfig.getLineDelimiter());
       it.setFileHeader(this.codeConfig.getFileHeader());
       it.setClassAnnotations(this.codeConfig.getClassAnnotationsAsString());
@@ -603,229 +455,150 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
   protected XpandExecutionContext createExecutionContext() {
     final String encoding = this.encodingProvider.getEncoding(null);
     final StringConcatOutputImpl output = new StringConcatOutputImpl();
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
+    IXtextGeneratorFileSystemAccess _root = this.getProjectConfig().getRuntime().getRoot();
     boolean _tripleNotEquals = (_root != null);
     if (_tripleNotEquals) {
-      Outlet _createOutlet = this.createOutlet(false, encoding, Generator.PLUGIN_RT, false, this.getProjectConfig().getRuntime().getRoot().getPath());
-      output.addOutlet(_createOutlet);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.PLUGIN_RT, false, this.getProjectConfig().getRuntime().getRoot().getPath()));
     }
-    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
-    IXtextGeneratorFileSystemAccess _src = _runtime_1.getSrc();
+    IXtextGeneratorFileSystemAccess _src = this.getProjectConfig().getRuntime().getSrc();
     boolean _tripleNotEquals_1 = (_src != null);
     if (_tripleNotEquals_1) {
-      Outlet _createOutlet_1 = this.createOutlet(false, encoding, Generator.SRC, false, this.getProjectConfig().getRuntime().getSrc().getPath());
-      output.addOutlet(_createOutlet_1);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.SRC, false, this.getProjectConfig().getRuntime().getSrc().getPath()));
     }
-    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
-    IXtextGeneratorFileSystemAccess _srcGen = _runtime_2.getSrcGen();
+    IXtextGeneratorFileSystemAccess _srcGen = this.getProjectConfig().getRuntime().getSrcGen();
     boolean _tripleNotEquals_2 = (_srcGen != null);
     if (_tripleNotEquals_2) {
-      Outlet _createOutlet_2 = this.createOutlet(false, encoding, Generator.SRC_GEN, true, this.getProjectConfig().getRuntime().getSrcGen().getPath());
-      output.addOutlet(_createOutlet_2);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_GEN, true, this.getProjectConfig().getRuntime().getSrcGen().getPath()));
     }
-    IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime_3 = _projectConfig_3.getRuntime();
-    IXtextGeneratorFileSystemAccess _root_1 = _runtime_3.getRoot();
+    IXtextGeneratorFileSystemAccess _root_1 = this.getProjectConfig().getRuntime().getRoot();
     boolean _tripleNotEquals_3 = (_root_1 != null);
     if (_tripleNotEquals_3) {
-      IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_4 = _projectConfig_4.getRuntime();
-      IXtextGeneratorFileSystemAccess _root_2 = _runtime_4.getRoot();
-      String _path = _root_2.getPath();
+      String _path = this.getProjectConfig().getRuntime().getRoot().getPath();
       String _plus = (_path + "/model");
-      Outlet _createOutlet_3 = this.createOutlet(false, encoding, Generator.MODEL, false, _plus);
-      output.addOutlet(_createOutlet_3);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.MODEL, false, _plus));
     }
-    IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig_5.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _root_3 = _eclipsePlugin.getRoot();
-    boolean _tripleNotEquals_4 = (_root_3 != null);
+    IXtextGeneratorFileSystemAccess _root_2 = this.getProjectConfig().getEclipsePlugin().getRoot();
+    boolean _tripleNotEquals_4 = (_root_2 != null);
     if (_tripleNotEquals_4) {
-      Outlet _createOutlet_4 = this.createOutlet(false, encoding, Generator.PLUGIN_UI, false, this.getProjectConfig().getEclipsePlugin().getRoot().getPath());
-      output.addOutlet(_createOutlet_4);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.PLUGIN_UI, false, this.getProjectConfig().getEclipsePlugin().getRoot().getPath()));
     } else {
-      IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_5 = _projectConfig_6.getRuntime();
-      IXtextGeneratorFileSystemAccess _root_4 = _runtime_5.getRoot();
-      boolean _tripleNotEquals_5 = (_root_4 != null);
+      IXtextGeneratorFileSystemAccess _root_3 = this.getProjectConfig().getRuntime().getRoot();
+      boolean _tripleNotEquals_5 = (_root_3 != null);
       if (_tripleNotEquals_5) {
-        Outlet _createOutlet_5 = this.createOutlet(false, encoding, Generator.PLUGIN_UI, false, this.getProjectConfig().getRuntime().getRoot().getPath());
-        output.addOutlet(_createOutlet_5);
+        output.addOutlet(this.createOutlet(false, encoding, Generator.PLUGIN_UI, false, this.getProjectConfig().getRuntime().getRoot().getPath()));
       }
     }
-    IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_7.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _src_1 = _eclipsePlugin_1.getSrc();
+    IXtextGeneratorFileSystemAccess _src_1 = this.getProjectConfig().getEclipsePlugin().getSrc();
     boolean _tripleNotEquals_6 = (_src_1 != null);
     if (_tripleNotEquals_6) {
-      Outlet _createOutlet_6 = this.createOutlet(false, encoding, Generator.SRC_UI, false, this.getProjectConfig().getEclipsePlugin().getSrc().getPath());
-      output.addOutlet(_createOutlet_6);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_UI, false, this.getProjectConfig().getEclipsePlugin().getSrc().getPath()));
     } else {
-      IXtextProjectConfig _projectConfig_8 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_6 = _projectConfig_8.getRuntime();
-      IXtextGeneratorFileSystemAccess _src_2 = _runtime_6.getSrc();
+      IXtextGeneratorFileSystemAccess _src_2 = this.getProjectConfig().getRuntime().getSrc();
       boolean _tripleNotEquals_7 = (_src_2 != null);
       if (_tripleNotEquals_7) {
-        Outlet _createOutlet_7 = this.createOutlet(false, encoding, Generator.SRC_UI, false, this.getProjectConfig().getRuntime().getSrc().getPath());
-        output.addOutlet(_createOutlet_7);
+        output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_UI, false, this.getProjectConfig().getRuntime().getSrc().getPath()));
       }
     }
-    IXtextProjectConfig _projectConfig_9 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_9.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePlugin_2.getSrcGen();
+    IXtextGeneratorFileSystemAccess _srcGen_1 = this.getProjectConfig().getEclipsePlugin().getSrcGen();
     boolean _tripleNotEquals_8 = (_srcGen_1 != null);
     if (_tripleNotEquals_8) {
-      Outlet _createOutlet_8 = this.createOutlet(false, encoding, Generator.SRC_GEN_UI, true, this.getProjectConfig().getEclipsePlugin().getSrcGen().getPath());
-      output.addOutlet(_createOutlet_8);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_GEN_UI, true, this.getProjectConfig().getEclipsePlugin().getSrcGen().getPath()));
     } else {
-      IXtextProjectConfig _projectConfig_10 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_7 = _projectConfig_10.getRuntime();
-      IXtextGeneratorFileSystemAccess _srcGen_2 = _runtime_7.getSrcGen();
+      IXtextGeneratorFileSystemAccess _srcGen_2 = this.getProjectConfig().getRuntime().getSrcGen();
       boolean _tripleNotEquals_9 = (_srcGen_2 != null);
       if (_tripleNotEquals_9) {
-        Outlet _createOutlet_9 = this.createOutlet(false, encoding, Generator.SRC_GEN_UI, true, this.getProjectConfig().getRuntime().getSrcGen().getPath());
-        output.addOutlet(_createOutlet_9);
+        output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_GEN_UI, true, this.getProjectConfig().getRuntime().getSrcGen().getPath()));
       }
     }
-    IXtextProjectConfig _projectConfig_11 = this.getProjectConfig();
-    IBundleProjectConfig _genericIde = _projectConfig_11.getGenericIde();
-    IXtextGeneratorFileSystemAccess _root_5 = _genericIde.getRoot();
-    boolean _tripleNotEquals_10 = (_root_5 != null);
+    IXtextGeneratorFileSystemAccess _root_4 = this.getProjectConfig().getGenericIde().getRoot();
+    boolean _tripleNotEquals_10 = (_root_4 != null);
     if (_tripleNotEquals_10) {
-      Outlet _createOutlet_10 = this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, this.getProjectConfig().getGenericIde().getRoot().getPath());
-      output.addOutlet(_createOutlet_10);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, this.getProjectConfig().getGenericIde().getRoot().getPath()));
     } else {
-      IXtextProjectConfig _projectConfig_12 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_12.getEclipsePlugin();
-      IXtextGeneratorFileSystemAccess _root_6 = _eclipsePlugin_3.getRoot();
-      boolean _tripleNotEquals_11 = (_root_6 != null);
+      IXtextGeneratorFileSystemAccess _root_5 = this.getProjectConfig().getEclipsePlugin().getRoot();
+      boolean _tripleNotEquals_11 = (_root_5 != null);
       if (_tripleNotEquals_11) {
-        Outlet _createOutlet_11 = this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, this.getProjectConfig().getEclipsePlugin().getRoot().getPath());
-        output.addOutlet(_createOutlet_11);
+        output.addOutlet(this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, this.getProjectConfig().getEclipsePlugin().getRoot().getPath()));
       } else {
-        IXtextProjectConfig _projectConfig_13 = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime_8 = _projectConfig_13.getRuntime();
-        IXtextGeneratorFileSystemAccess _root_7 = _runtime_8.getRoot();
-        boolean _tripleNotEquals_12 = (_root_7 != null);
+        IXtextGeneratorFileSystemAccess _root_6 = this.getProjectConfig().getRuntime().getRoot();
+        boolean _tripleNotEquals_12 = (_root_6 != null);
         if (_tripleNotEquals_12) {
-          Outlet _createOutlet_12 = this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, this.getProjectConfig().getRuntime().getRoot().getPath());
-          output.addOutlet(_createOutlet_12);
+          output.addOutlet(this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, this.getProjectConfig().getRuntime().getRoot().getPath()));
         }
       }
     }
-    IXtextProjectConfig _projectConfig_14 = this.getProjectConfig();
-    IBundleProjectConfig _genericIde_1 = _projectConfig_14.getGenericIde();
-    IXtextGeneratorFileSystemAccess _src_3 = _genericIde_1.getSrc();
+    IXtextGeneratorFileSystemAccess _src_3 = this.getProjectConfig().getGenericIde().getSrc();
     boolean _tripleNotEquals_13 = (_src_3 != null);
     if (_tripleNotEquals_13) {
-      Outlet _createOutlet_13 = this.createOutlet(false, encoding, Generator.SRC_IDE, false, this.getProjectConfig().getGenericIde().getSrc().getPath());
-      output.addOutlet(_createOutlet_13);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_IDE, false, this.getProjectConfig().getGenericIde().getSrc().getPath()));
     } else {
-      IXtextProjectConfig _projectConfig_15 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_4 = _projectConfig_15.getEclipsePlugin();
-      IXtextGeneratorFileSystemAccess _src_4 = _eclipsePlugin_4.getSrc();
+      IXtextGeneratorFileSystemAccess _src_4 = this.getProjectConfig().getEclipsePlugin().getSrc();
       boolean _tripleNotEquals_14 = (_src_4 != null);
       if (_tripleNotEquals_14) {
-        Outlet _createOutlet_14 = this.createOutlet(false, encoding, Generator.SRC_IDE, false, this.getProjectConfig().getEclipsePlugin().getSrc().getPath());
-        output.addOutlet(_createOutlet_14);
+        output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_IDE, false, this.getProjectConfig().getEclipsePlugin().getSrc().getPath()));
       } else {
-        IXtextProjectConfig _projectConfig_16 = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime_9 = _projectConfig_16.getRuntime();
-        IXtextGeneratorFileSystemAccess _src_5 = _runtime_9.getSrc();
+        IXtextGeneratorFileSystemAccess _src_5 = this.getProjectConfig().getRuntime().getSrc();
         boolean _tripleNotEquals_15 = (_src_5 != null);
         if (_tripleNotEquals_15) {
-          Outlet _createOutlet_15 = this.createOutlet(false, encoding, Generator.SRC_IDE, false, this.getProjectConfig().getRuntime().getSrc().getPath());
-          output.addOutlet(_createOutlet_15);
+          output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_IDE, false, this.getProjectConfig().getRuntime().getSrc().getPath()));
         }
       }
     }
-    IXtextProjectConfig _projectConfig_17 = this.getProjectConfig();
-    IBundleProjectConfig _genericIde_2 = _projectConfig_17.getGenericIde();
-    IXtextGeneratorFileSystemAccess _srcGen_3 = _genericIde_2.getSrcGen();
+    IXtextGeneratorFileSystemAccess _srcGen_3 = this.getProjectConfig().getGenericIde().getSrcGen();
     boolean _tripleNotEquals_16 = (_srcGen_3 != null);
     if (_tripleNotEquals_16) {
-      Outlet _createOutlet_16 = this.createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, this.getProjectConfig().getGenericIde().getSrcGen().getPath());
-      output.addOutlet(_createOutlet_16);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, this.getProjectConfig().getGenericIde().getSrcGen().getPath()));
     } else {
-      IXtextProjectConfig _projectConfig_18 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_5 = _projectConfig_18.getEclipsePlugin();
-      IXtextGeneratorFileSystemAccess _srcGen_4 = _eclipsePlugin_5.getSrcGen();
+      IXtextGeneratorFileSystemAccess _srcGen_4 = this.getProjectConfig().getEclipsePlugin().getSrcGen();
       boolean _tripleNotEquals_17 = (_srcGen_4 != null);
       if (_tripleNotEquals_17) {
-        Outlet _createOutlet_17 = this.createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, this.getProjectConfig().getEclipsePlugin().getSrcGen().getPath());
-        output.addOutlet(_createOutlet_17);
+        output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, this.getProjectConfig().getEclipsePlugin().getSrcGen().getPath()));
       } else {
-        IXtextProjectConfig _projectConfig_19 = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime_10 = _projectConfig_19.getRuntime();
-        IXtextGeneratorFileSystemAccess _srcGen_5 = _runtime_10.getSrcGen();
+        IXtextGeneratorFileSystemAccess _srcGen_5 = this.getProjectConfig().getRuntime().getSrcGen();
         boolean _tripleNotEquals_18 = (_srcGen_5 != null);
         if (_tripleNotEquals_18) {
-          Outlet _createOutlet_18 = this.createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, this.getProjectConfig().getRuntime().getSrcGen().getPath());
-          output.addOutlet(_createOutlet_18);
+          output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, this.getProjectConfig().getRuntime().getSrcGen().getPath()));
         }
       }
     }
-    IXtextProjectConfig _projectConfig_20 = this.getProjectConfig();
-    IBundleProjectConfig _runtimeTest = _projectConfig_20.getRuntimeTest();
-    IXtextGeneratorFileSystemAccess _root_8 = _runtimeTest.getRoot();
-    boolean _tripleNotEquals_19 = (_root_8 != null);
+    IXtextGeneratorFileSystemAccess _root_7 = this.getProjectConfig().getRuntimeTest().getRoot();
+    boolean _tripleNotEquals_19 = (_root_7 != null);
     if (_tripleNotEquals_19) {
-      Outlet _createOutlet_19 = this.createOutlet(false, encoding, Generator.PLUGIN_TEST, false, this.getProjectConfig().getRuntimeTest().getRoot().getPath());
-      output.addOutlet(_createOutlet_19);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.PLUGIN_TEST, false, this.getProjectConfig().getRuntimeTest().getRoot().getPath()));
     } else {
-      IXtextProjectConfig _projectConfig_21 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_11 = _projectConfig_21.getRuntime();
-      IXtextGeneratorFileSystemAccess _root_9 = _runtime_11.getRoot();
-      boolean _tripleNotEquals_20 = (_root_9 != null);
+      IXtextGeneratorFileSystemAccess _root_8 = this.getProjectConfig().getRuntime().getRoot();
+      boolean _tripleNotEquals_20 = (_root_8 != null);
       if (_tripleNotEquals_20) {
-        Outlet _createOutlet_20 = this.createOutlet(false, encoding, Generator.PLUGIN_TEST, false, this.getProjectConfig().getRuntime().getRoot().getPath());
-        output.addOutlet(_createOutlet_20);
+        output.addOutlet(this.createOutlet(false, encoding, Generator.PLUGIN_TEST, false, this.getProjectConfig().getRuntime().getRoot().getPath()));
       }
     }
-    IXtextProjectConfig _projectConfig_22 = this.getProjectConfig();
-    IBundleProjectConfig _runtimeTest_1 = _projectConfig_22.getRuntimeTest();
-    IXtextGeneratorFileSystemAccess _src_6 = _runtimeTest_1.getSrc();
+    IXtextGeneratorFileSystemAccess _src_6 = this.getProjectConfig().getRuntimeTest().getSrc();
     boolean _tripleNotEquals_21 = (_src_6 != null);
     if (_tripleNotEquals_21) {
-      Outlet _createOutlet_21 = this.createOutlet(false, encoding, Generator.SRC_TEST, false, this.getProjectConfig().getRuntimeTest().getSrc().getPath());
-      output.addOutlet(_createOutlet_21);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_TEST, false, this.getProjectConfig().getRuntimeTest().getSrc().getPath()));
     } else {
-      IXtextProjectConfig _projectConfig_23 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_12 = _projectConfig_23.getRuntime();
-      IXtextGeneratorFileSystemAccess _src_7 = _runtime_12.getSrc();
+      IXtextGeneratorFileSystemAccess _src_7 = this.getProjectConfig().getRuntime().getSrc();
       boolean _tripleNotEquals_22 = (_src_7 != null);
       if (_tripleNotEquals_22) {
-        Outlet _createOutlet_22 = this.createOutlet(false, encoding, Generator.SRC_TEST, false, this.getProjectConfig().getRuntime().getSrc().getPath());
-        output.addOutlet(_createOutlet_22);
+        output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_TEST, false, this.getProjectConfig().getRuntime().getSrc().getPath()));
       }
     }
-    IXtextProjectConfig _projectConfig_24 = this.getProjectConfig();
-    IBundleProjectConfig _runtimeTest_2 = _projectConfig_24.getRuntimeTest();
-    IXtextGeneratorFileSystemAccess _srcGen_6 = _runtimeTest_2.getSrcGen();
+    IXtextGeneratorFileSystemAccess _srcGen_6 = this.getProjectConfig().getRuntimeTest().getSrcGen();
     boolean _tripleNotEquals_23 = (_srcGen_6 != null);
     if (_tripleNotEquals_23) {
-      Outlet _createOutlet_23 = this.createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, this.getProjectConfig().getRuntimeTest().getSrcGen().getPath());
-      output.addOutlet(_createOutlet_23);
+      output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, this.getProjectConfig().getRuntimeTest().getSrcGen().getPath()));
     } else {
-      IXtextProjectConfig _projectConfig_25 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_13 = _projectConfig_25.getRuntime();
-      IXtextGeneratorFileSystemAccess _srcGen_7 = _runtime_13.getSrcGen();
+      IXtextGeneratorFileSystemAccess _srcGen_7 = this.getProjectConfig().getRuntime().getSrcGen();
       boolean _tripleNotEquals_24 = (_srcGen_7 != null);
       if (_tripleNotEquals_24) {
-        Outlet _createOutlet_24 = this.createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, this.getProjectConfig().getRuntime().getSrcGen().getPath());
-        output.addOutlet(_createOutlet_24);
+        output.addOutlet(this.createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, this.getProjectConfig().getRuntime().getSrcGen().getPath()));
       }
     }
     final Map<String, Variable> globalVars = Maps.<String, Variable>newHashMap();
     Variable _variable = new Variable(Naming.GLOBAL_VAR_NAME, this.naming);
     globalVars.put(Naming.GLOBAL_VAR_NAME, _variable);
     XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null, globalVars, null, null);
-    ResourceManager _resourceManager = execCtx.getResourceManager();
-    _resourceManager.setFileEncoding("ISO-8859-1");
+    execCtx.getResourceManager().setFileEncoding("ISO-8859-1");
     JavaBeansMetaModel _javaBeansMetaModel = new JavaBeansMetaModel();
     execCtx.registerMetaModel(_javaBeansMetaModel);
     String _projectNameRt = this.naming.getProjectNameRt();
@@ -847,8 +620,7 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
   }
   
   protected String getPath(final IFileSystemAccess2 fsa) {
-    URI _uRI = fsa.getURI("");
-    final String path = _uRI.toFileString();
+    final String path = fsa.getURI("").toFileString();
     boolean _endsWith = path.endsWith(File.separator);
     if (_endsWith) {
       int _length = path.length();

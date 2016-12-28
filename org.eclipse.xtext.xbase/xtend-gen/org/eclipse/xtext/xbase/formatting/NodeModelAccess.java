@@ -2,12 +2,10 @@ package org.eclipse.xtext.xbase.formatting;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -30,11 +28,10 @@ public class NodeModelAccess {
     ILeafNode _xblockexpression = null;
     {
       final ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
-      BidiTreeIterable<INode> _asTreeIterable = node.getAsTreeIterable();
       final Function1<INode, Boolean> _function = (INode it) -> {
         return Boolean.valueOf(((Objects.equal(it.getSemanticElement(), obj) && (it.getGrammarElement() instanceof Keyword)) && Objects.equal(it.getText(), kw)));
       };
-      INode _findFirst = IterableExtensions.<INode>findFirst(_asTreeIterable, _function);
+      INode _findFirst = IterableExtensions.<INode>findFirst(node.getAsTreeIterable(), _function);
       _xblockexpression = ((ILeafNode) _findFirst);
     }
     return _xblockexpression;
@@ -44,19 +41,16 @@ public class NodeModelAccess {
     Iterable<ILeafNode> _xblockexpression = null;
     {
       final ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
-      BidiTreeIterable<INode> _asTreeIterable = node.getAsTreeIterable();
-      Iterable<ILeafNode> _filter = Iterables.<ILeafNode>filter(_asTreeIterable, ILeafNode.class);
       final Function1<ILeafNode, Boolean> _function = (ILeafNode it) -> {
         return Boolean.valueOf(((Objects.equal(it.getSemanticElement(), obj) && (it.getGrammarElement() instanceof Keyword)) && Objects.equal(it.getText(), kw)));
       };
-      _xblockexpression = IterableExtensions.<ILeafNode>filter(_filter, _function);
+      _xblockexpression = IterableExtensions.<ILeafNode>filter(Iterables.<ILeafNode>filter(node.getAsTreeIterable(), ILeafNode.class), _function);
     }
     return _xblockexpression;
   }
   
   public INode nodeForFeature(final EObject obj, final EStructuralFeature feature) {
-    List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(obj, feature);
-    return IterableExtensions.<INode>head(_findNodesForFeature);
+    return IterableExtensions.<INode>head(NodeModelUtils.findNodesForFeature(obj, feature));
   }
   
   public Iterable<INode> nodesForFeature(final EObject obj, final EStructuralFeature feature) {
@@ -64,8 +58,7 @@ public class NodeModelAccess {
   }
   
   public ILeafNode immediatelyFollowingKeyword(final EObject obj, final String kw) {
-    INode _nodeForEObject = this.nodeForEObject(obj);
-    return this.immediatelyFollowingKeyword(_nodeForEObject, kw);
+    return this.immediatelyFollowingKeyword(this.nodeForEObject(obj), kw);
   }
   
   public ILeafNode immediatelyFollowingKeyword(final INode node, final String kw) {

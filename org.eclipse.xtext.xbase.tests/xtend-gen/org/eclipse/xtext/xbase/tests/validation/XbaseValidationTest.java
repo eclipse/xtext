@@ -37,8 +37,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ val (int)=>int fun = [ fun.apply(it) ] }");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.ILLEGAL_FORWARD_REFERENCE, "The local variable fun may not have been initialized");
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.ILLEGAL_FORWARD_REFERENCE, "The local variable fun may not have been initialized");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -58,8 +57,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -104,8 +102,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XTYPE_LITERAL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XTYPE_LITERAL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -125,8 +122,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -146,8 +142,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -167,8 +162,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -188,8 +182,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -209,8 +202,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -230,8 +222,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -251,8 +242,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -296,8 +286,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -341,8 +330,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -368,8 +356,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -398,8 +385,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -428,8 +414,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -455,8 +440,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -482,8 +466,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -509,8 +492,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -539,8 +521,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -566,8 +547,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -587,8 +567,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -608,8 +587,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -629,8 +607,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -656,8 +633,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -677,8 +653,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -698,8 +673,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.DUPLICATE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.DUPLICATE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -722,8 +696,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -746,8 +719,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -770,8 +742,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -794,8 +765,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -818,8 +788,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -847,8 +816,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK);
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -876,8 +844,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK);
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -904,8 +871,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK);
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -932,8 +898,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -971,8 +936,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1010,8 +974,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1049,8 +1012,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1088,8 +1050,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1127,8 +1088,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1160,8 +1120,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1196,8 +1155,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1244,8 +1202,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1274,8 +1231,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1322,8 +1278,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1364,8 +1319,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1403,8 +1357,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1424,8 +1377,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1454,8 +1406,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1475,8 +1426,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1496,8 +1446,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1517,8 +1466,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssue(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
+      this._validationTestHelper.assertNoIssue(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1538,8 +1486,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssue(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
+      this._validationTestHelper.assertNoIssue(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1568,8 +1515,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1589,8 +1535,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      final XExpression block = _expression;
+      final XExpression block = this.expression(_builder);
       this._validationTestHelper.assertNoIssues(block);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1611,8 +1556,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      final XExpression block = _expression;
+      final XExpression block = this.expression(_builder);
       this._validationTestHelper.assertNoErrors(block);
       this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
@@ -1634,8 +1578,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      final XExpression block = _expression;
+      final XExpression block = this.expression(_builder);
       this._validationTestHelper.assertNoErrors(block);
       this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
@@ -1657,8 +1600,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      final XExpression block = _expression;
+      final XExpression block = this.expression(_builder);
       this._validationTestHelper.assertError(block, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
       this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
@@ -1680,8 +1622,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      final XExpression block = _expression;
+      final XExpression block = this.expression(_builder);
       this._validationTestHelper.assertNoErrors(block);
       this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
@@ -1703,8 +1644,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      final XExpression block = _expression;
+      final XExpression block = this.expression(_builder);
       this._validationTestHelper.assertNoErrors(block);
       this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
@@ -1726,8 +1666,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      final XExpression block = _expression;
+      final XExpression block = this.expression(_builder);
       this._validationTestHelper.assertError(block, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
       this._validationTestHelper.assertWarning(block, TypesPackage.Literals.JVM_FORMAL_PARAMETER, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
@@ -1749,8 +1688,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1770,8 +1708,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XVARIABLE_DECLARATION, IssueCodes.UNUSED_LOCAL_VARIABLE);
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XVARIABLE_DECLARATION, IssueCodes.UNUSED_LOCAL_VARIABLE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1791,8 +1728,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1812,8 +1748,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XNULL_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XNULL_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1836,8 +1771,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1860,8 +1794,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1884,8 +1817,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1908,8 +1840,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1932,8 +1863,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1953,8 +1883,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XCONSTRUCTOR_CALL, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XCONSTRUCTOR_CALL, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1974,8 +1903,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1995,8 +1923,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2022,8 +1949,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2046,8 +1972,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2070,8 +1995,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2094,8 +2018,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2118,8 +2041,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2139,8 +2061,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2160,8 +2081,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2184,8 +2104,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2208,8 +2127,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2229,8 +2147,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2253,8 +2170,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2277,8 +2193,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2301,8 +2216,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2319,8 +2233,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, "hashCode", "0");
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, "hashCode", "0");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2337,8 +2250,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, "equals", "false");
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, "equals", "false");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2370,8 +2282,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XSWITCH_EXPRESSION, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XSWITCH_EXPRESSION, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2406,8 +2317,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2430,8 +2340,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssues(_expression);
+      this._validationTestHelper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2451,8 +2360,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, 
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, 
         IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, 
         "Null-safe call of primitive-valued feature");
     } catch (Throwable _e) {
@@ -2477,8 +2385,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, 
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, 
         IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, 
         "Null-safe call of primitive-valued feature");
     } catch (Throwable _e) {
@@ -2497,8 +2404,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2518,8 +2424,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2539,8 +2444,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2563,8 +2467,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
+      this._validationTestHelper.assertWarning(this.expression(_builder), XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2584,8 +2487,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoIssue(_expression, XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
+      this._validationTestHelper.assertNoIssue(this.expression(_builder), XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2602,8 +2504,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XLIST_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2620,8 +2521,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2638,8 +2538,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2656,8 +2555,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2853,8 +2751,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2874,8 +2771,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2895,8 +2791,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2916,8 +2811,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2931,8 +2825,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2946,8 +2839,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2961,8 +2853,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2976,8 +2867,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2991,8 +2881,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -3006,8 +2895,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -3021,8 +2909,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -3036,8 +2923,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -3051,8 +2937,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -3066,8 +2951,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+      this._validationTestHelper.assertError(this.expression(_builder), XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -3081,8 +2965,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -3096,8 +2979,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -3111,8 +2993,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -3126,8 +3007,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -3135,8 +3015,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   
   private void assertNestedReturn(final CharSequence input, final EClass objectType) {
     try {
-      XExpression _expression = this.expression(input);
-      this._validationTestHelper.assertError(_expression, objectType, 
+      this._validationTestHelper.assertError(this.expression(input), objectType, 
         IssueCodes.INVALID_RETURN, 
         "Return cannot be nested.");
     } catch (Throwable _e) {
@@ -3146,8 +3025,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   
   private void assertInvalidReturnInsideThrow(final CharSequence input) {
     try {
-      XExpression _expression = this.expression(input);
-      this._validationTestHelper.assertError(_expression, 
+      this._validationTestHelper.assertError(this.expression(input), 
         XbasePackage.Literals.XRETURN_EXPRESSION, 
         IssueCodes.INVALID_RETURN, 
         "Invalid return inside throw.");
@@ -3158,8 +3036,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   
   private void assertInvalidReturnExpression(final CharSequence input, final EClass objectType) {
     try {
-      XExpression _expression = this.expression(input);
-      this._validationTestHelper.assertError(_expression, objectType, 
+      this._validationTestHelper.assertError(this.expression(input), objectType, 
         IssueCodes.INVALID_RETURN, 
         "Invalid return\'s expression.");
     } catch (Throwable _e) {

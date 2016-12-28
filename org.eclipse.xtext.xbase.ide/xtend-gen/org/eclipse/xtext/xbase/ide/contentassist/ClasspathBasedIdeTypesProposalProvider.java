@@ -13,7 +13,6 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -23,8 +22,6 @@ import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -96,15 +93,12 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
   
   protected Iterable<ITypeDescriptor> getTypeDescriptors(final ContentAssistContext context) {
     final Iterable<ITypeDescriptor> bootClasspath = this.classpathScanner.getBootClasspathDescriptors(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java")));
-    ClassLoader _classLoader = this.getClassLoader(context);
-    List<String> _emptyList = Collections.<String>emptyList();
-    final Iterable<ITypeDescriptor> appClasspath = this.classpathScanner.getDescriptors(_classLoader, _emptyList);
+    final Iterable<ITypeDescriptor> appClasspath = this.classpathScanner.getDescriptors(this.getClassLoader(context), Collections.<String>emptyList());
     return Iterables.<ITypeDescriptor>concat(bootClasspath, appClasspath);
   }
   
   protected ClassLoader getClassLoader(final ContentAssistContext context) {
-    XtextResource _resource = context.getResource();
-    final ResourceSet resourceSet = _resource.getResourceSet();
+    final ResourceSet resourceSet = context.getResource().getResourceSet();
     if ((resourceSet instanceof XtextResourceSet)) {
       final Object ctx = ((XtextResourceSet)resourceSet).getClasspathURIContext();
       if ((ctx != null)) {
@@ -114,8 +108,7 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
         if ((ctx instanceof ClassLoader)) {
           return ((ClassLoader)ctx);
         }
-        Class<?> _class = ctx.getClass();
-        return _class.getClassLoader();
+        return ctx.getClass().getClassLoader();
       }
     }
     return this.classLoader;
@@ -126,17 +119,14 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
   }
   
   protected boolean isVisible(final ITypeDescriptor typeDesc, final ContentAssistContext context) {
-    int _accessFlags = typeDesc.getAccessFlags();
-    int _bitwiseAnd = (_accessFlags & Opcodes.ACC_PUBLIC);
-    return (_bitwiseAnd != 0);
+    return ((typeDesc.getAccessFlags() & Opcodes.ACC_PUBLIC) != 0);
   }
   
   protected ContentAssistEntry createProposal(final EReference reference, final ITypeDescriptor typeDesc, final ContentAssistContext context, final XImportSection importSection, final ITextRegion importSectionRegion) {
     ContentAssistEntry _xblockexpression = null;
     {
       final boolean importDecl = this.isImportDeclaration(reference, context);
-      QualifiedName _qualifiedName = typeDesc.getQualifiedName();
-      final String qualifiedName = this.qualifiedNameConverter.toString(_qualifiedName);
+      final String qualifiedName = this.qualifiedNameConverter.toString(typeDesc.getQualifiedName());
       String _xifexpression = null;
       if (importDecl) {
         _xifexpression = qualifiedName;

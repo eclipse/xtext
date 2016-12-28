@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.tests.imports;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.InjectWith;
@@ -46,9 +47,9 @@ public class DefaultImportsConfigurationTest {
       _builder.newLine();
       _builder.append("import java.util.Set");
       _builder.newLine();
-      ImportSectionTestLanguageRoot _parse = this._parseHelper.parse(_builder);
-      final ImportSectionTestLanguageRoot root = _parse;
-      Assert.assertEquals(19, this.importsConfiguration.getImportSectionOffset(((XtextResource) root.eResource())));
+      final ImportSectionTestLanguageRoot root = this._parseHelper.parse(_builder);
+      Resource _eResource = root.eResource();
+      Assert.assertEquals(19, this.importsConfiguration.getImportSectionOffset(((XtextResource) _eResource)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

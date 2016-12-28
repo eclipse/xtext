@@ -9,13 +9,9 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
-import java.util.Iterator;
 import java.util.List;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
@@ -46,8 +42,7 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
     final List<XStringLiteral> featureCalls = this.findLiterals(expressionWithQualifiedNames);
     Assert.assertFalse(featureCalls.isEmpty());
     Assert.assertEquals(((List<String>)Conversions.doWrapArray(types)).size(), featureCalls.size());
-    XStringLiteral _head = IterableExtensions.<XStringLiteral>head(featureCalls);
-    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(_head);
+    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(IterableExtensions.<XStringLiteral>head(featureCalls));
     final Procedure2<XStringLiteral, Integer> _function = (XStringLiteral featureCall, Integer index) -> {
       final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
       StringConcatenation _builder = new StringConcatenation();
@@ -61,12 +56,9 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
   protected List<XStringLiteral> findLiterals(final CharSequence expression) {
     try {
       final XExpression xExpression = this.expression(expression, false);
-      TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
-      Iterator<XStringLiteral> _filter = Iterators.<XStringLiteral>filter(_eAll, XStringLiteral.class);
-      final List<XStringLiteral> featureCalls = IteratorExtensions.<XStringLiteral>toList(_filter);
+      final List<XStringLiteral> featureCalls = IteratorExtensions.<XStringLiteral>toList(Iterators.<XStringLiteral>filter(EcoreUtil2.eAll(xExpression), XStringLiteral.class));
       final Function1<XStringLiteral, Integer> _function = (XStringLiteral it) -> {
-        ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
-        return Integer.valueOf(_findActualNodeFor.getOffset());
+        return Integer.valueOf(NodeModelUtils.findActualNodeFor(it).getOffset());
       };
       return IterableExtensions.<XStringLiteral, Integer>sortBy(featureCalls, _function);
     } catch (Throwable _e) {

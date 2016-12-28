@@ -10,9 +10,7 @@ package org.eclipse.xtext.xbase.compiler;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
@@ -47,14 +45,12 @@ public class ErrorSafeExtensions {
   public Iterable<Issue> getErrors(final EObject element) {
     Iterable<Issue> _xblockexpression = null;
     {
-      Resource _eResource = element.eResource();
-      final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
-      Iterable<Issue> _issues = issueProvider.getIssues(element);
+      final IElementIssueProvider issueProvider = this.issueProviderFactory.get(element.eResource());
       final Function1<Issue, Boolean> _function = (Issue it) -> {
         Severity _severity = it.getSeverity();
         return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
       };
-      _xblockexpression = IterableExtensions.<Issue>filter(_issues, _function);
+      _xblockexpression = IterableExtensions.<Issue>filter(issueProvider.getIssues(element), _function);
     }
     return _xblockexpression;
   }
@@ -62,14 +58,12 @@ public class ErrorSafeExtensions {
   public boolean hasErrors(final EObject element) {
     boolean _xblockexpression = false;
     {
-      Resource _eResource = element.eResource();
-      final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
-      Iterable<Issue> _issues = issueProvider.getIssues(element);
+      final IElementIssueProvider issueProvider = this.issueProviderFactory.get(element.eResource());
       final Function1<Issue, Boolean> _function = (Issue it) -> {
         Severity _severity = it.getSeverity();
         return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
       };
-      _xblockexpression = IterableExtensions.<Issue>exists(_issues, _function);
+      _xblockexpression = IterableExtensions.<Issue>exists(issueProvider.getIssues(element), _function);
     }
     return _xblockexpression;
   }
@@ -84,8 +78,7 @@ public class ErrorSafeExtensions {
     final Function1<T, Boolean> _function = (T it) -> {
       return Boolean.valueOf(this.hasErrors(it));
     };
-    Iterable<T> _filter = IterableExtensions.<T>filter(elements, _function);
-    int _size = IterableExtensions.size(_filter);
+    int _size = IterableExtensions.size(IterableExtensions.<T>filter(elements, _function));
     int _size_1 = IterableExtensions.size(elements);
     final boolean allElementsBroken = (_size == _size_1);
     ITreeAppendable _xifexpression = null;
@@ -141,8 +134,7 @@ public class ErrorSafeExtensions {
   protected ITreeAppendable openErrorAppendable(final ITreeAppendable parent, final ITreeAppendable child) {
     ITreeAppendable _xifexpression = null;
     if ((!(child instanceof ErrorTreeAppendable))) {
-      ErrorTreeAppendable _errorChild = parent.errorChild();
-      _xifexpression = _errorChild.append("/* ");
+      _xifexpression = parent.errorChild().append("/* ");
     } else {
       _xifexpression = child;
     }
@@ -169,14 +161,12 @@ public class ErrorSafeExtensions {
       boolean _matched = false;
       if (typeRef instanceof JvmSpecializedTypeReference) {
         _matched=true;
-        JvmTypeReference _equivalent = ((JvmSpecializedTypeReference)typeRef).getEquivalent();
-        this.serializeSafely(_equivalent, surrogateType, appendable);
+        this.serializeSafely(((JvmSpecializedTypeReference)typeRef).getEquivalent(), surrogateType, appendable);
       }
       if (!_matched) {
         if (typeRef instanceof JvmUnknownTypeReference) {
           _matched=true;
-          String _qualifiedName = ((JvmUnknownTypeReference)typeRef).getQualifiedName();
-          appendable.append(_qualifiedName);
+          appendable.append(((JvmUnknownTypeReference)typeRef).getQualifiedName());
         }
       }
       if (!_matched) {
@@ -217,18 +207,15 @@ public class ErrorSafeExtensions {
       errorChild.append("annotation is \'null\'");
       this.closeErrorAppendable(appendable, errorChild);
     } else {
-      JvmAnnotationType _annotation = annotationRef.getAnnotation();
-      boolean _eIsProxy = _annotation.eIsProxy();
+      boolean _eIsProxy = annotationRef.getAnnotation().eIsProxy();
       if (_eIsProxy) {
         final ITreeAppendable errorChild_1 = this.openErrorAppendable(appendable, appendable);
         appendable.append("@");
-        JvmAnnotationType _annotation_1 = annotationRef.getAnnotation();
-        appendable.append(_annotation_1);
+        appendable.append(annotationRef.getAnnotation());
         this.closeErrorAppendable(appendable, errorChild_1);
       } else {
         appendable.append("@");
-        JvmAnnotationType _annotation_2 = annotationRef.getAnnotation();
-        appendable.append(_annotation_2);
+        appendable.append(annotationRef.getAnnotation());
         onSuccess.apply(appendable);
       }
     }

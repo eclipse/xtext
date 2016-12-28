@@ -267,23 +267,20 @@ public class AntlrGrammarComparator {
         final String match = matcher.group();
         state.previousToken = match;
         state.position = matcher.end();
-        Matcher _matcher = this.p_newline.matcher(match);
-        boolean _matches = _matcher.matches();
+        boolean _matches = this.p_newline.matcher(match).matches();
         if (_matches) {
           state.lineNumber++;
         } else {
           if ((this.p_slComment.matcher(match).matches() || this.p_ws.matcher(match).matches())) {
           } else {
-            Matcher _matcher_1 = this.p_mlComment.matcher(match);
-            boolean _matches_1 = _matcher_1.matches();
+            boolean _matches_1 = this.p_mlComment.matcher(match).matches();
             if (_matches_1) {
               final Matcher newlines = this.p_newline.matcher(match);
               while (newlines.find()) {
                 state.lineNumber++;
               }
             } else {
-              Matcher _matcher_2 = this.p_token.matcher(match);
-              boolean _matches_2 = _matcher_2.matches();
+              boolean _matches_2 = this.p_token.matcher(match).matches();
               if (_matches_2) {
                 return true;
               }

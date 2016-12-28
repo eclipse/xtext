@@ -32,8 +32,7 @@ public class ArrayExtensionsGenerator {
   private final ArrayList<String> primitiveTypes = CollectionLiterals.<String>newArrayList("boolean", "double", "float", "long", "int", "char", "short", "byte");
   
   public static void main(final String[] args) {
-    ArrayExtensionsGenerator _arrayExtensionsGenerator = new ArrayExtensionsGenerator();
-    _arrayExtensionsGenerator.generateFile();
+    new ArrayExtensionsGenerator().generateFile();
   }
   
   public String generateFile() {
@@ -46,19 +45,15 @@ public class ArrayExtensionsGenerator {
         if (_not) {
           throw new IllegalStateException((("file " + file) + " doesn\'t exist."));
         }
-        String _absolutePath = file.getAbsolutePath();
-        final String content = Files.readFileIntoString(_absolutePath);
-        String _startMarker = this.startMarker();
-        int _indexOf = content.indexOf(_startMarker);
+        final String content = Files.readFileIntoString(file.getAbsolutePath());
+        int _indexOf = content.indexOf(this.startMarker());
         boolean _equals = (_indexOf == (-1));
         if (_equals) {
           throw new IllegalStateException((("File " + file) + " doesn\'t contain \'// BEGIN generated code\' marker."));
         }
         StringConcatenation _builder = new StringConcatenation();
-        String _startMarker_1 = this.startMarker();
-        int _indexOf_1 = content.indexOf(_startMarker_1);
-        String _startMarker_2 = this.startMarker();
-        int _length = _startMarker_2.length();
+        int _indexOf_1 = content.indexOf(this.startMarker());
+        int _length = this.startMarker().length();
         int _plus = (_indexOf_1 + _length);
         String _substring = content.substring(0, _plus);
         _builder.append(_substring);
@@ -69,9 +64,7 @@ public class ArrayExtensionsGenerator {
         CharSequence _generateAllOperations = this.generateAllOperations();
         _builder.append(_generateAllOperations, "\t");
         _builder.newLineIfNotEmpty();
-        String _endMarker = this.endMarker();
-        int _indexOf_2 = content.indexOf(_endMarker);
-        String _substring_1 = content.substring(_indexOf_2);
+        String _substring_1 = content.substring(content.indexOf(this.endMarker()));
         _builder.append(_substring_1);
         _builder.newLineIfNotEmpty();
         final String newContent = _builder.toString();

@@ -13,13 +13,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Collection;
 import java.util.Map;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -113,9 +111,7 @@ public abstract class AbstractURIHandlerTest extends Assert {
   protected void load(final Resource resource, final byte[] bytes) {
     try {
       final ByteArrayInputStream in = new ByteArrayInputStream(bytes);
-      ResourceSet _resourceSet = resource.getResourceSet();
-      Map<Object, Object> _loadOptions = _resourceSet.getLoadOptions();
-      resource.load(in, _loadOptions);
+      resource.load(in, resource.getResourceSet().getLoadOptions());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -131,8 +127,7 @@ public abstract class AbstractURIHandlerTest extends Assert {
     final Resource newReferencedResource = otherResourceSet.createResource(usedReferencedURI);
     this.load(newReferencedResource, referencedBytes);
     EcoreUtil.resolveAll(otherResourceSet);
-    EList<Resource> _resources = otherResourceSet.getResources();
-    int _size = _resources.size();
+    int _size = otherResourceSet.getResources().size();
     boolean _notEquals = (_size != 2);
     if (_notEquals) {
       throw new UnexpectedResourcesException(otherResourceSet);

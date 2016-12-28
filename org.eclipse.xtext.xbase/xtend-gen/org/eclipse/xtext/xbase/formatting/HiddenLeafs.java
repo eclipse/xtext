@@ -46,17 +46,15 @@ public class HiddenLeafs {
   }
   
   public int getNewLinesInComments() {
-    Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(this.leafs, CommentInfo.class);
     final Function2<Integer, CommentInfo, Integer> _function = (Integer x, CommentInfo i) -> {
       int _newLines = i.getNewLines();
       return Integer.valueOf(((x).intValue() + _newLines));
     };
-    return (int) IterableExtensions.<CommentInfo, Integer>fold(_filter, Integer.valueOf(0), _function);
+    return (int) IterableExtensions.<CommentInfo, Integer>fold(Iterables.<CommentInfo>filter(this.leafs, CommentInfo.class), Integer.valueOf(0), _function);
   }
   
   public boolean containsComment() {
-    Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(this.leafs, CommentInfo.class);
-    int _size = IterableExtensions.size(_filter);
+    int _size = IterableExtensions.size(Iterables.<CommentInfo>filter(this.leafs, CommentInfo.class));
     return (_size > 0);
   }
   

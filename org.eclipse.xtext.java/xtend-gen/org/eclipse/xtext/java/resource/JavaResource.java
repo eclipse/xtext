@@ -61,9 +61,7 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
     
     public JavaElementFragment(final URI uri) {
       this.uri = uri;
-      String _fragment = uri.fragment();
-      int _methodPartOffset = this.getMethodPartOffset(_fragment);
-      this.idx = _methodPartOffset;
+      this.idx = this.getMethodPartOffset(uri.fragment());
     }
     
     /**
@@ -74,8 +72,7 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
         return this.uri;
       } else {
         final String f = this.uri.fragment();
-        String _substring = f.substring(0, this.idx);
-        return this.uri.appendFragment(_substring);
+        return this.uri.appendFragment(f.substring(0, this.idx));
       }
     }
     
@@ -126,13 +123,11 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   
   @Override
   protected void doLoad(final InputStream inputStream, final Map<?, ?> options) throws IOException {
-    URI _uRI = this.getURI();
-    final String encoding = this.getEncoding(_uRI, options);
+    final String encoding = this.getEncoding(this.getURI(), options);
     InputStreamReader _inputStreamReader = new InputStreamReader(inputStream, encoding);
     final String contentsAsString = CharStreams.toString(_inputStreamReader);
     char[] _charArray = contentsAsString.toCharArray();
-    URI _uRI_1 = this.getURI();
-    String _lastSegment = _uRI_1.lastSegment();
+    String _lastSegment = this.getURI().lastSegment();
     CompilationUnit _compilationUnit = new CompilationUnit(_charArray, _lastSegment, encoding);
     this.compilationUnit = _compilationUnit;
   }
@@ -215,23 +210,19 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   public EObject resolveJavaObjectURIProxy(final InternalEObject proxy, final EObject sender) {
     final URI proxyURI = proxy.eProxyURI();
     if (((proxyURI != null) && Objects.equal(URIHelperConstants.PROTOCOL, proxyURI.scheme()))) {
-      String _segment = proxyURI.segment(0);
-      boolean _equals = "Objects".equals(_segment);
+      boolean _equals = "Objects".equals(proxyURI.segment(0));
       if (_equals) {
         final IndexedJvmTypeAccess access = this.getIndexJvmTypeAccess();
         if ((access != null)) {
           try {
             URI _eProxyURI = proxy.eProxyURI();
             final JavaResource.JavaElementFragment frag = new JavaResource.JavaElementFragment(_eProxyURI);
-            URI _typeURI = frag.getTypeURI();
-            ResourceSet _resourceSet = this.getResourceSet();
-            EObject result = access.getIndexedJvmType(_typeURI, _resourceSet);
+            EObject result = access.getIndexedJvmType(frag.getTypeURI(), this.getResourceSet());
             if (((result instanceof JvmDeclaredType) && frag.isMethodFragment())) {
               JavaResource.JavaFragmentProvider _javaFragmentProvider = new JavaResource.JavaFragmentProvider();
               Resource _eResource = result.eResource();
-              URI _eProxyURI_1 = proxy.eProxyURI();
-              String _fragment = _eProxyURI_1.fragment();
-              EObject _eObject = _javaFragmentProvider.getEObject(_eResource, _fragment, new IFragmentProvider.Fallback() {
+              String _fragment = proxy.eProxyURI().fragment();
+              result = _javaFragmentProvider.getEObject(_eResource, _fragment, new IFragmentProvider.Fallback() {
                 @Override
                 public EObject getEObject(final String fragment) {
                   return null;
@@ -242,7 +233,6 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
                   return null;
                 }
               });
-              result = _eObject;
             }
             if ((result != null)) {
               return result;
@@ -266,12 +256,9 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   
   public IndexedJvmTypeAccess getIndexJvmTypeAccess() {
     if ((this._access == null)) {
-      Resource.Factory.Registry _resourceFactoryRegistry = this.resourceSet.getResourceFactoryRegistry();
-      Map<String, Object> _protocolToFactoryMap = _resourceFactoryRegistry.getProtocolToFactoryMap();
-      final Object provider = _protocolToFactoryMap.get(URIHelperConstants.PROTOCOL);
+      final Object provider = this.resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get(URIHelperConstants.PROTOCOL);
       if ((provider instanceof AbstractJvmTypeProvider)) {
-        IndexedJvmTypeAccess _indexedJvmTypeAccess = ((AbstractJvmTypeProvider)provider).getIndexedJvmTypeAccess();
-        this._access = _indexedJvmTypeAccess;
+        this._access = ((AbstractJvmTypeProvider)provider).getIndexedJvmTypeAccess();
       }
     }
     return this._access;

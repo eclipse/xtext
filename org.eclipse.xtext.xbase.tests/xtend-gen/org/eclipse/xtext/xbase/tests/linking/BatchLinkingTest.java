@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.linking;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -45,8 +44,7 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
     this.failOnUnresolvedProxy = resolve;
     final XExpression result = super.expression(string, false);
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(result);
-    TreeIterator<EObject> _eAllContents = result.eAllContents();
-    Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
+    Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(result.eAllContents());
     for (final EObject content : _iterable) {
       boolean _matched = false;
       if (content instanceof XAbstractFeatureCall) {
@@ -72,8 +70,7 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
       }
     }
     if (this.failOnUnresolvedProxy) {
-      TreeIterator<EObject> _eAllContents_1 = result.eAllContents();
-      Iterable<EObject> _iterable_1 = IteratorExtensions.<EObject>toIterable(_eAllContents_1);
+      Iterable<EObject> _iterable_1 = IteratorExtensions.<EObject>toIterable(result.eAllContents());
       for (final EObject content_1 : _iterable_1) {
         boolean _matched_1 = false;
         if (content_1 instanceof XConstructorCall) {

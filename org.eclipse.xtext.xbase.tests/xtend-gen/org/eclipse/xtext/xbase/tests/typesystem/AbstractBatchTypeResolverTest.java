@@ -7,14 +7,11 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import java.util.List;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -45,12 +42,10 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
       final XExpression xExpression = this.expression(expression, false);
       Assert.assertTrue(xExpression.eResource().getErrors().toString(), xExpression.eResource().getErrors().isEmpty());
       Assert.assertTrue(xExpression.eResource().getWarnings().toString(), xExpression.eResource().getWarnings().isEmpty());
-      IBatchTypeResolver _typeResolver = this.getTypeResolver();
-      final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
+      final IResolvedTypes resolvedTypes = this.getTypeResolver().resolveTypes(xExpression);
       final LightweightTypeReference resolvedType = resolvedTypes.getActualType(xExpression);
       Assert.assertEquals(type, resolvedType.getSimpleName());
-      TreeIterator<EObject> _eAllContents = xExpression.eAllContents();
-      Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
+      Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(xExpression.eAllContents());
       for (final EObject content : _iterable) {
         boolean _matched = false;
         if (content instanceof XAbstractFeatureCall) {
@@ -75,8 +70,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
           }
         }
       }
-      TreeIterator<EObject> _eAllContents_1 = xExpression.eAllContents();
-      Iterable<EObject> _iterable_1 = IteratorExtensions.<EObject>toIterable(_eAllContents_1);
+      Iterable<EObject> _iterable_1 = IteratorExtensions.<EObject>toIterable(xExpression.eAllContents());
       for (final EObject content_1 : _iterable_1) {
         boolean _matched_1 = false;
         if (content_1 instanceof XConstructorCall) {
@@ -96,8 +90,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
             XExpression _implicitReceiver = ((XAbstractFeatureCall)content_1).getImplicitReceiver();
             boolean _tripleNotEquals = (_implicitReceiver != null);
             if (_tripleNotEquals) {
-              XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content_1).getImplicitReceiver();
-              Object _eGet_1 = _implicitReceiver_1.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+              Object _eGet_1 = ((XAbstractFeatureCall)content_1).getImplicitReceiver().eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
               final InternalEObject implicitFeature = ((InternalEObject) _eGet_1);
               Assert.assertNotNull(implicitFeature.toString(), feature);
               Assert.assertFalse(implicitFeature.toString(), feature.eIsProxy());
@@ -121,14 +114,12 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
   
   public String getEquivalent(final ParameterizedTypeReference type) {
     StringConcatenation _builder = new StringConcatenation();
-    JvmType _type = type.getType();
-    String _simpleName = _type.getSimpleName();
+    String _simpleName = type.getType().getSimpleName();
     _builder.append(_simpleName);
-    List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
     final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
       return it.getSimpleName();
     };
-    String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments, "<", ", ", ">", _function);
+    String _join = IterableExtensions.<LightweightTypeReference>join(type.getTypeArguments(), "<", ", ", ">", _function);
     _builder.append(_join);
     return _builder.toString();
   }
@@ -159,8 +150,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
   
   @Test
   public void testNull() throws Exception {
-    IBatchTypeResolver _typeResolver = this.getTypeResolver();
-    final IResolvedTypes typeResolution = _typeResolver.resolveTypes(((EObject) null));
+    final IResolvedTypes typeResolution = this.getTypeResolver().resolveTypes(((EObject) null));
     Assert.assertNotNull(typeResolution);
     Assert.assertEquals(IResolvedTypes.NULL, typeResolution);
   }
@@ -168,10 +158,8 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
   @Test
   public void testProxy() throws Exception {
     final XFeatureCall proxy = XbaseFactory.eINSTANCE.createXFeatureCall();
-    URI _createURI = URI.createURI("path#fragment");
-    ((InternalEObject) proxy).eSetProxyURI(_createURI);
-    IBatchTypeResolver _typeResolver = this.getTypeResolver();
-    final IResolvedTypes typeResolution = _typeResolver.resolveTypes(proxy);
+    ((InternalEObject) proxy).eSetProxyURI(URI.createURI("path#fragment"));
+    final IResolvedTypes typeResolution = this.getTypeResolver().resolveTypes(proxy);
     Assert.assertNotNull(typeResolution);
     Assert.assertEquals(IResolvedTypes.NULL, typeResolution);
   }

@@ -20,14 +20,12 @@ import org.eclipse.xtext.xbase.XbaseStandaloneSetupGenerated;
 @SuppressWarnings("all")
 public class XbaseStandaloneSetup extends XbaseStandaloneSetupGenerated {
   public static void doSetup() {
-    XbaseStandaloneSetup _xbaseStandaloneSetup = new XbaseStandaloneSetup();
-    _xbaseStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new XbaseStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
   
   @Override
   public Injector createInjectorAndDoEMFRegistration() {
-    String _nsURI = XbasePackage.eINSTANCE.getNsURI();
-    EPackage.Registry.INSTANCE.put(_nsURI, XbasePackage.eINSTANCE);
+    EPackage.Registry.INSTANCE.put(XbasePackage.eINSTANCE.getNsURI(), XbasePackage.eINSTANCE);
     return super.createInjectorAndDoEMFRegistration();
   }
 }

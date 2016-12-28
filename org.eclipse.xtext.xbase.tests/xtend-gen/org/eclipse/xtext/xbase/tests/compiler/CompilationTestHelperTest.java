@@ -132,9 +132,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
         _builder_1.newLine();
         _builder_1.append("}");
         _builder_1.newLine();
-        String _string = _builder_1.toString();
-        String _singleGeneratedCode = it.getSingleGeneratedCode();
-        Assert.assertEquals(_string, _singleGeneratedCode);
+        Assert.assertEquals(_builder_1.toString(), it.getSingleGeneratedCode());
         it.getCompiledClass();
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -238,9 +236,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
         _builder_1.newLine();
         _builder_1.append("}");
         _builder_1.newLine();
-        String _string = _builder_1.toString();
-        String _singleGeneratedCode = it.getSingleGeneratedCode();
-        Assert.assertEquals(_string, _singleGeneratedCode);
+        Assert.assertEquals(_builder_1.toString(), it.getSingleGeneratedCode());
         it.getCompiledClass();
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -302,9 +298,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
         _builder_1.newLine();
         _builder_1.append("}");
         _builder_1.newLine();
-        String _string = _builder_1.toString();
-        String _singleGeneratedCode = it.getSingleGeneratedCode();
-        Assert.assertEquals(_string, _singleGeneratedCode);
+        Assert.assertEquals(_builder_1.toString(), it.getSingleGeneratedCode());
         it.getCompiledClass();
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -357,9 +351,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
         _builder_1.newLine();
         _builder_1.append("}");
         _builder_1.newLine();
-        String _string = _builder_1.toString();
-        String _singleGeneratedCode = it.getSingleGeneratedCode();
-        Assert.assertEquals(_string, _singleGeneratedCode);
+        Assert.assertEquals(_builder_1.toString(), it.getSingleGeneratedCode());
         it.getCompiledClass();
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -421,9 +413,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
         _builder_1.newLine();
         _builder_1.append("}");
         _builder_1.newLine();
-        String _string = _builder_1.toString();
-        String _singleGeneratedCode = it.getSingleGeneratedCode();
-        Assert.assertEquals(_string, _singleGeneratedCode);
+        Assert.assertEquals(_builder_1.toString(), it.getSingleGeneratedCode());
       };
       this.compilationTestHelper.compile(resourceSet, _function_1);
     } catch (Throwable _e) {

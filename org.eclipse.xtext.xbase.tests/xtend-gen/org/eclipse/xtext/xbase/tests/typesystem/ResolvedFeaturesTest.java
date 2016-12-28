@@ -16,14 +16,9 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
@@ -85,8 +80,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     try {
       XExpression _expression = this.expression(castExpression);
       final XCastedExpression cast = ((XCastedExpression) _expression);
-      JvmTypeReference _type = cast.getType();
-      final ResolvedFeatures result = this.overrideHelper.getResolvedFeatures(_type);
+      final ResolvedFeatures result = this.overrideHelper.getResolvedFeatures(cast.getType());
       return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -159,11 +153,9 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     Assert.assertFalse(all.isEmpty());
     final Function1<IResolvedOperation, Boolean> _function = (IResolvedOperation it) -> {
-      JvmOperation _declaration = it.getDeclaration();
-      return Boolean.valueOf(_declaration.isAbstract());
+      return Boolean.valueOf(it.getDeclaration().isAbstract());
     };
-    Iterable<IResolvedOperation> _filter = IterableExtensions.<IResolvedOperation>filter(all, _function);
-    final IResolvedOperation iterator = Iterables.<IResolvedOperation>getOnlyElement(_filter);
+    final IResolvedOperation iterator = Iterables.<IResolvedOperation>getOnlyElement(IterableExtensions.<IResolvedOperation>filter(all, _function));
     Assert.assertEquals("java.lang.Iterable.iterator()", iterator.getDeclaration().getIdentifier());
   }
   
@@ -172,14 +164,14 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     final ResolvedFeatures resolvedOperations = this.toResolvedOperations(UnmodifiableIterator.class);
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     Assert.assertFalse(all.isEmpty());
-    Assert.assertEquals(all.toString(), 2, IterableExtensions.size(IterableExtensions.<IResolvedOperation>filter(all, ((Function1<IResolvedOperation, Boolean>) (IResolvedOperation it) -> {
-      JvmOperation _declaration = it.getDeclaration();
-      return Boolean.valueOf(_declaration.isAbstract());
-    }))));
-    Assert.assertEquals(all.toString(), (1 + 6), IterableExtensions.size(IterableExtensions.<IResolvedOperation>filter(all, ((Function1<IResolvedOperation, Boolean>) (IResolvedOperation it) -> {
-      JvmOperation _declaration = it.getDeclaration();
-      return Boolean.valueOf(_declaration.isFinal());
-    }))));
+    final Function1<IResolvedOperation, Boolean> _function = (IResolvedOperation it) -> {
+      return Boolean.valueOf(it.getDeclaration().isAbstract());
+    };
+    Assert.assertEquals(all.toString(), 2, IterableExtensions.size(IterableExtensions.<IResolvedOperation>filter(all, _function)));
+    final Function1<IResolvedOperation, Boolean> _function_1 = (IResolvedOperation it) -> {
+      return Boolean.valueOf(it.getDeclaration().isFinal());
+    };
+    Assert.assertEquals(all.toString(), (1 + 6), IterableExtensions.size(IterableExtensions.<IResolvedOperation>filter(all, _function_1)));
     final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
     Assert.assertEquals(1, declared.size());
   }
@@ -189,15 +181,15 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     final ResolvedFeatures resolvedOperations = this.toResolvedOperations(AbstractList.class);
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     Assert.assertFalse(all.isEmpty());
-    Assert.assertEquals(all.toString(), (1 + 1), IterableExtensions.size(IterableExtensions.<IResolvedOperation>filter(all, ((Function1<IResolvedOperation, Boolean>) (IResolvedOperation it) -> {
-      JvmOperation _declaration = it.getDeclaration();
-      return Boolean.valueOf(_declaration.isAbstract());
-    }))));
+    final Function1<IResolvedOperation, Boolean> _function = (IResolvedOperation it) -> {
+      return Boolean.valueOf(it.getDeclaration().isAbstract());
+    };
+    Assert.assertEquals(all.toString(), (1 + 1), IterableExtensions.size(IterableExtensions.<IResolvedOperation>filter(all, _function)));
     final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
-    Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<IResolvedOperation>filter(declared, ((Function1<IResolvedOperation, Boolean>) (IResolvedOperation it) -> {
-      JvmOperation _declaration = it.getDeclaration();
-      return Boolean.valueOf(_declaration.isAbstract());
-    }))));
+    final Function1<IResolvedOperation, Boolean> _function_1 = (IResolvedOperation it) -> {
+      return Boolean.valueOf(it.getDeclaration().isAbstract());
+    };
+    Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<IResolvedOperation>filter(declared, _function_1)));
   }
   
   @Test
@@ -205,11 +197,8 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     final ResolvedFeatures resolvedOperations = this.toResolvedOperations(SoftReference.class);
     Assert.assertEquals(1, resolvedOperations.getDeclaredOperations().size());
     Assert.assertEquals(2, resolvedOperations.getDeclaredConstructors().size());
-    List<IResolvedConstructor> _declaredConstructors = resolvedOperations.getDeclaredConstructors();
     final Consumer<IResolvedConstructor> _function = (IResolvedConstructor it) -> {
-      JvmConstructor _declaration = it.getDeclaration();
-      EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-      int _size = _parameters.size();
+      int _size = it.getDeclaration().getParameters().size();
       switch (_size) {
         case 1:
           Assert.assertEquals("SoftReference(T)", it.getResolvedSignature());
@@ -224,7 +213,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
           break;
       }
     };
-    _declaredConstructors.forEach(_function);
+    resolvedOperations.getDeclaredConstructors().forEach(_function);
   }
   
   @Test
@@ -232,11 +221,8 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     final ResolvedFeatures resolvedOperations = this.toResolvedOperations("null as java.lang.ref.SoftReference<String>");
     Assert.assertEquals(1, resolvedOperations.getDeclaredOperations().size());
     Assert.assertEquals(2, resolvedOperations.getDeclaredConstructors().size());
-    List<IResolvedConstructor> _declaredConstructors = resolvedOperations.getDeclaredConstructors();
     final Consumer<IResolvedConstructor> _function = (IResolvedConstructor it) -> {
-      JvmConstructor _declaration = it.getDeclaration();
-      EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-      int _size = _parameters.size();
+      int _size = it.getDeclaration().getParameters().size();
       switch (_size) {
         case 1:
           Assert.assertEquals("SoftReference(java.lang.String)", it.getResolvedSignature());
@@ -251,21 +237,22 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
           break;
       }
     };
-    _declaredConstructors.forEach(_function);
+    resolvedOperations.getDeclaredConstructors().forEach(_function);
   }
   
   @Test
   public void testReferenceOfString() {
     final ResolvedFeatures resolvedFeatures = this.toResolvedOperations("null as java.lang.ref.Reference<String>");
-    List<IResolvedField> _declaredFields = resolvedFeatures.getDeclaredFields();
-    final List<IResolvedField> fields = IterableExtensions.<IResolvedField>toList(_declaredFields);
-    Assert.assertEquals("String", IterableExtensions.<IResolvedField>findFirst(fields, ((Function1<IResolvedField, Boolean>) (IResolvedField it) -> {
+    final List<IResolvedField> fields = IterableExtensions.<IResolvedField>toList(resolvedFeatures.getDeclaredFields());
+    final Function1<IResolvedField, Boolean> _function = (IResolvedField it) -> {
       String _simpleSignature = it.getSimpleSignature();
       return Boolean.valueOf(Objects.equal(_simpleSignature, "referent"));
-    })).getResolvedType().getHumanReadableName());
-    Assert.assertEquals("ReferenceQueue<? super String>", IterableExtensions.<IResolvedField>findFirst(fields, ((Function1<IResolvedField, Boolean>) (IResolvedField it) -> {
+    };
+    Assert.assertEquals("String", IterableExtensions.<IResolvedField>findFirst(fields, _function).getResolvedType().getHumanReadableName());
+    final Function1<IResolvedField, Boolean> _function_1 = (IResolvedField it) -> {
       String _simpleSignature = it.getSimpleSignature();
       return Boolean.valueOf(Objects.equal(_simpleSignature, "queue"));
-    })).getResolvedType().getHumanReadableName());
+    };
+    Assert.assertEquals("ReferenceQueue<? super String>", IterableExtensions.<IResolvedField>findFirst(fields, _function_1).getResolvedType().getHumanReadableName());
   }
 }

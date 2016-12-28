@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.annotations;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -39,18 +38,15 @@ public class ErrorTest extends AbstractXbaseWithAnnotationsTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("estdata.Annotation2(value = \'foo\')");
     _builder.newLine();
-    XAnnotation _processWithoutException = this.processWithoutException(_builder);
-    final XAnnotation annotation = _processWithoutException;
-    EList<XAnnotationElementValuePair> _elementValuePairs = annotation.getElementValuePairs();
-    final XAnnotationElementValuePair singleValuePair = IterableExtensions.<XAnnotationElementValuePair>head(_elementValuePairs);
+    final XAnnotation annotation = this.processWithoutException(_builder);
+    final XAnnotationElementValuePair singleValuePair = IterableExtensions.<XAnnotationElementValuePair>head(annotation.getElementValuePairs());
     Assert.assertNotNull(this.batchTypeResolver.resolveTypes(annotation).getActualType(singleValuePair.getValue()));
   }
   
   public XAnnotation processWithoutException(final CharSequence input) throws Exception {
     final Resource resource = this.newResource(input.toString());
     this.resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     return ((XAnnotation) _head);
   }
 }

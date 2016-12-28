@@ -11,8 +11,6 @@ import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -73,11 +71,11 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     {
       final BindFactory bindFactory = new BindFactory();
       if (this.generateStub) {
-        String _proposalProviderName = this.getProposalProviderName(grammar);
-        bindFactory.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider", _proposalProviderName);
+        bindFactory.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider", 
+          this.getProposalProviderName(grammar));
       } else {
-        String _genProposalProviderName = this.getGenProposalProviderName();
-        bindFactory.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider", _genProposalProviderName);
+        bindFactory.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider", 
+          this.getGenProposalProviderName());
       }
       _xblockexpression = bindFactory.getBindings();
     }
@@ -108,8 +106,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   public String getSuperClassName() {
     String _xblockexpression = null;
     {
-      EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
-      final Grammar superGrammar = IterableExtensions.<Grammar>head(_usedGrammars);
+      final Grammar superGrammar = IterableExtensions.<Grammar>head(this.grammar.getUsedGrammars());
       String _xifexpression = null;
       if ((this.inheritImplementation && (superGrammar != null))) {
         _xifexpression = this.getProposalProviderName(superGrammar);
@@ -124,16 +121,14 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   @Override
   public void generate(final Xtend2ExecutionContext ctx) {
     if (this.generateStub) {
-      String _proposalProviderName = this.getProposalProviderName(this.grammar);
-      String _asPath = this._naming.asPath(_proposalProviderName);
+      String _asPath = this._naming.asPath(this.getProposalProviderName(this.grammar));
       String _plus = (_asPath + ".xtend");
       StringConcatenation _builder = new StringConcatenation();
       String _fileHeader = this._naming.fileHeader();
       _builder.append(_fileHeader);
       _builder.newLineIfNotEmpty();
       _builder.append("package ");
-      String _proposalProviderName_1 = this.getProposalProviderName(this.grammar);
-      String _packageName = this._naming.packageName(_proposalProviderName_1);
+      String _packageName = this._naming.packageName(this.getProposalProviderName(this.grammar));
       _builder.append(_packageName);
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -154,12 +149,10 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       _builder.append("*/");
       _builder.newLine();
       _builder.append("class ");
-      String _proposalProviderName_2 = this.getProposalProviderName(this.grammar);
-      String _simpleName = this._naming.toSimpleName(_proposalProviderName_2);
+      String _simpleName = this._naming.toSimpleName(this.getProposalProviderName(this.grammar));
       _builder.append(_simpleName);
       _builder.append(" extends ");
-      String _genProposalProviderName_1 = this.getGenProposalProviderName();
-      String _simpleName_1 = this._naming.toSimpleName(_genProposalProviderName_1);
+      String _simpleName_1 = this._naming.toSimpleName(this.getGenProposalProviderName());
       _builder.append(_simpleName_1);
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
@@ -167,12 +160,10 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       _builder.newLine();
       ctx.writeFile(Generator.SRC_UI, _plus, _builder);
     }
-    XpandExecutionContext _xpandExecutionContext = ctx.getXpandExecutionContext();
-    XpandFacade _create = XpandFacade.create(_xpandExecutionContext);
-    List<Object> _singletonList = Collections.<Object>singletonList(this.getSuperClassName());
-    _create.evaluate2(
+    XpandFacade.create(ctx.getXpandExecutionContext()).evaluate2(
       "org::eclipse::xtext::ui::generator::contentAssist::JavaBasedContentAssistFragment::GenProposalProvider", 
-      this.grammar, _singletonList);
+      this.grammar, 
+      Collections.<Object>singletonList(this.getSuperClassName()));
   }
   
   @Pure

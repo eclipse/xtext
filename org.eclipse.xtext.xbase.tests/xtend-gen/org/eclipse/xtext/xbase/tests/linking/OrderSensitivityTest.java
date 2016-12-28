@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.linking;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -89,8 +88,7 @@ public class OrderSensitivityTest extends AbstractXbaseTestCase {
       _builder.newLine();
       XExpression _expression = this.expression(_builder);
       final XBlockExpression block = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = block.getExpressions();
-      XExpression _last = IterableExtensions.<XExpression>last(_expressions);
+      XExpression _last = IterableExtensions.<XExpression>last(block.getExpressions());
       final XAbstractFeatureCall featureCall = ((XAbstractFeatureCall) _last);
       final JvmIdentifiableElement feature = featureCall.getFeature();
       Assert.assertNotNull("feature is not null", feature);
@@ -99,8 +97,7 @@ public class OrderSensitivityTest extends AbstractXbaseTestCase {
       _builder_1.append(declarator);
       _builder_1.append(".");
       _builder_1.append(expectation);
-      String _string = _builder_1.toString();
-      Assert.assertEquals(_string, feature.getIdentifier());
+      Assert.assertEquals(_builder_1.toString(), feature.getIdentifier());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -126,8 +123,7 @@ public class OrderSensitivityTest extends AbstractXbaseTestCase {
       _builder_1.append("$");
       _builder_1.append(expectation);
       _builder_1.append(")");
-      String _string = _builder_1.toString();
-      Assert.assertEquals(_string, feature.getIdentifier());
+      Assert.assertEquals(_builder_1.toString(), feature.getIdentifier());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

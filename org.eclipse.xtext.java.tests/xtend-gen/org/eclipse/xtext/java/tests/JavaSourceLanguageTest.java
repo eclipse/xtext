@@ -6,16 +6,11 @@ import com.google.inject.Provider;
 import java.io.OutputStream;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -75,30 +70,19 @@ public class JavaSourceLanguageTest {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("MySubClass.java", _builder_1.toString());
     final XtextResourceSet rs = this.resourceSet(_mappedTo, _mappedTo_1);
-    EList<Resource> _resources = rs.getResources();
     final Function1<Resource, Boolean> _function = (Resource it) -> {
-      URI _uRI = it.getURI();
-      String _string = _uRI.toString();
-      return Boolean.valueOf(_string.endsWith("MySuperClass.java"));
+      return Boolean.valueOf(it.getURI().toString().endsWith("MySuperClass.java"));
     };
-    final Resource superResource = IterableExtensions.<Resource>findFirst(_resources, _function);
-    EList<EObject> _contents = superResource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
-    Iterable<JvmDeclaredType> _allNestedTypes = ((JvmGenericType) _head).getAllNestedTypes();
-    final JvmDeclaredType nestedType = IterableExtensions.<JvmDeclaredType>head(_allNestedTypes);
-    EList<Resource> _resources_1 = rs.getResources();
+    final Resource superResource = IterableExtensions.<Resource>findFirst(rs.getResources(), _function);
+    EObject _head = IterableExtensions.<EObject>head(superResource.getContents());
+    final JvmDeclaredType nestedType = IterableExtensions.<JvmDeclaredType>head(((JvmGenericType) _head).getAllNestedTypes());
     final Function1<Resource, Boolean> _function_1 = (Resource it) -> {
-      URI _uRI = it.getURI();
-      String _string = _uRI.toString();
-      return Boolean.valueOf(_string.endsWith("MySubClass.java"));
+      return Boolean.valueOf(it.getURI().toString().endsWith("MySubClass.java"));
     };
-    final Resource resource = IterableExtensions.<Resource>findFirst(_resources_1, _function_1);
-    EList<EObject> _contents_1 = resource.getContents();
-    EObject _head_1 = IterableExtensions.<EObject>head(_contents_1);
+    final Resource resource = IterableExtensions.<Resource>findFirst(rs.getResources(), _function_1);
+    EObject _head_1 = IterableExtensions.<EObject>head(resource.getContents());
     final JvmGenericType clazz = ((JvmGenericType) _head_1);
-    Iterable<JvmOperation> _declaredOperations = clazz.getDeclaredOperations();
-    JvmOperation _head_2 = IterableExtensions.<JvmOperation>head(_declaredOperations);
-    final JvmTypeReference returnType = _head_2.getReturnType();
+    final JvmTypeReference returnType = IterableExtensions.<JvmOperation>head(clazz.getDeclaredOperations()).getReturnType();
     final JvmType referenced = returnType.getType();
     Assert.assertSame(nestedType, referenced);
   }
@@ -127,22 +111,14 @@ public class JavaSourceLanguageTest {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("MySubClass.java", _builder_1.toString());
     final XtextResourceSet rs = this.resourceSet(_mappedTo, _mappedTo_1);
-    EList<Resource> _resources = rs.getResources();
     final Function1<Resource, Boolean> _function = (Resource it) -> {
-      URI _uRI = it.getURI();
-      String _string = _uRI.toString();
-      return Boolean.valueOf(_string.endsWith("MySubClass.java"));
+      return Boolean.valueOf(it.getURI().toString().endsWith("MySubClass.java"));
     };
-    final Resource resource = IterableExtensions.<Resource>findFirst(_resources, _function);
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    final Resource resource = IterableExtensions.<Resource>findFirst(rs.getResources(), _function);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final JvmGenericType clazz = ((JvmGenericType) _head);
-    Iterable<JvmOperation> _declaredOperations = clazz.getDeclaredOperations();
-    JvmOperation _head_1 = IterableExtensions.<JvmOperation>head(_declaredOperations);
-    final JvmTypeReference referenced = _head_1.getReturnType();
-    EList<JvmTypeReference> _arguments = ((JvmParameterizedTypeReference) referenced).getArguments();
-    JvmTypeReference _head_2 = IterableExtensions.<JvmTypeReference>head(_arguments);
-    Assert.assertNotNull(_head_2);
+    final JvmTypeReference referenced = IterableExtensions.<JvmOperation>head(clazz.getDeclaredOperations()).getReturnType();
+    Assert.assertNotNull(IterableExtensions.<JvmTypeReference>head(((JvmParameterizedTypeReference) referenced).getArguments()));
   }
   
   @Test
@@ -174,49 +150,30 @@ public class JavaSourceLanguageTest {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("MyClass.java", _builder_1.toString());
     final XtextResourceSet rs = this.resourceSet(_mappedTo, _mappedTo_1);
-    EList<Resource> _resources = rs.getResources();
     final Function1<Resource, Boolean> _function = (Resource it) -> {
-      URI _uRI = it.getURI();
-      String _string = _uRI.toString();
-      return Boolean.valueOf(_string.endsWith("MyAnnotation.java"));
+      return Boolean.valueOf(it.getURI().toString().endsWith("MyAnnotation.java"));
     };
-    Resource _findFirst = IterableExtensions.<Resource>findFirst(_resources, _function);
-    EList<EObject> _contents = _findFirst.getContents();
-    final EObject annotation = IterableExtensions.<EObject>head(_contents);
-    EList<Resource> _resources_1 = rs.getResources();
+    final EObject annotation = IterableExtensions.<EObject>head(IterableExtensions.<Resource>findFirst(rs.getResources(), _function).getContents());
     final Function1<Resource, Boolean> _function_1 = (Resource it) -> {
-      URI _uRI = it.getURI();
-      String _string = _uRI.toString();
-      return Boolean.valueOf(_string.endsWith("MyClass.java"));
+      return Boolean.valueOf(it.getURI().toString().endsWith("MyClass.java"));
     };
-    final Resource resource = IterableExtensions.<Resource>findFirst(_resources_1, _function_1);
-    EList<EObject> _contents_1 = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents_1);
+    final Resource resource = IterableExtensions.<Resource>findFirst(rs.getResources(), _function_1);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final JvmGenericType clazz = ((JvmGenericType) _head);
-    EList<JvmAnnotationReference> _annotations = clazz.getAnnotations();
-    final JvmAnnotationReference annotationRef = IterableExtensions.<JvmAnnotationReference>head(_annotations);
-    EList<JvmAnnotationValue> _values = annotationRef.getValues();
+    final JvmAnnotationReference annotationRef = IterableExtensions.<JvmAnnotationReference>head(clazz.getAnnotations());
     final Function1<JvmAnnotationValue, Boolean> _function_2 = (JvmAnnotationValue it) -> {
-      JvmOperation _operation = it.getOperation();
-      String _simpleName = _operation.getSimpleName();
+      String _simpleName = it.getOperation().getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, "constantExpression"));
     };
-    final JvmAnnotationValue value = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function_2);
-    EList<Boolean> _values_1 = ((JvmBooleanAnnotationValue) value).getValues();
-    Boolean _head_1 = IterableExtensions.<Boolean>head(_values_1);
-    Assert.assertTrue((_head_1).booleanValue());
-    EList<JvmAnnotationValue> _values_2 = annotationRef.getValues();
+    final JvmAnnotationValue value = IterableExtensions.<JvmAnnotationValue>findFirst(annotationRef.getValues(), _function_2);
+    Assert.assertTrue((IterableExtensions.<Boolean>head(((JvmBooleanAnnotationValue) value).getValues())).booleanValue());
     final Function1<JvmAnnotationValue, Boolean> _function_3 = (JvmAnnotationValue it) -> {
-      JvmOperation _operation = it.getOperation();
-      String _simpleName = _operation.getSimpleName();
+      String _simpleName = it.getOperation().getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, "statementExpression"));
     };
-    final JvmAnnotationValue value2 = IterableExtensions.<JvmAnnotationValue>findFirst(_values_2, _function_3);
-    EList<Boolean> _values_3 = ((JvmBooleanAnnotationValue) value2).getValues();
-    Boolean _head_2 = IterableExtensions.<Boolean>head(_values_3);
-    Assert.assertFalse((_head_2).booleanValue());
-    JvmAnnotationType _annotation = annotationRef.getAnnotation();
-    Assert.assertSame(annotation, _annotation);
+    final JvmAnnotationValue value2 = IterableExtensions.<JvmAnnotationValue>findFirst(annotationRef.getValues(), _function_3);
+    Assert.assertFalse((IterableExtensions.<Boolean>head(((JvmBooleanAnnotationValue) value2).getValues())).booleanValue());
+    Assert.assertSame(annotation, annotationRef.getAnnotation());
   }
   
   @Inject
@@ -231,23 +188,16 @@ public class JavaSourceLanguageTest {
   protected XtextResourceSet resourceSet(final Pair<String, String>... files) {
     final XtextResourceSet result = this.resourceSetProvider.get();
     this.typeProviderFactory.createTypeProvider(result);
-    Class<? extends JavaSourceLanguageTest> _class = this.getClass();
-    ClassLoader _classLoader = _class.getClassLoader();
-    result.setClasspathURIContext(_classLoader);
-    URIConverter _uRIConverter = result.getURIConverter();
-    EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
-    _uRIHandlers.clear();
+    result.setClasspathURIContext(this.getClass().getClassLoader());
+    result.getURIConverter().getURIHandlers().clear();
     final InMemoryURIHandler uriHandler = new InMemoryURIHandler();
     final Function1<Pair<String, String>, URI> _function = (Pair<String, String> it) -> {
       try {
         String _key = it.getKey();
         String _plus = ((InMemoryURIHandler.SCHEME + ":/") + _key);
         final URI uri = URI.createURI(_plus);
-        Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-        final OutputStream out = uriHandler.createOutputStream(uri, _emptyMap);
-        String _value = it.getValue();
-        byte[] _bytes = _value.getBytes();
-        out.write(_bytes);
+        final OutputStream out = uriHandler.createOutputStream(uri, CollectionLiterals.<Object, Object>emptyMap());
+        out.write(it.getValue().getBytes());
         out.close();
         return uri;
       } catch (Throwable _e) {
@@ -255,9 +205,7 @@ public class JavaSourceLanguageTest {
       }
     };
     final List<URI> uris = ListExtensions.<Pair<String, String>, URI>map(((List<Pair<String, String>>)Conversions.doWrapArray(files)), _function);
-    URIConverter _uRIConverter_1 = result.getURIConverter();
-    EList<URIHandler> _uRIHandlers_1 = _uRIConverter_1.getURIHandlers();
-    _uRIHandlers_1.add(uriHandler);
+    result.getURIConverter().getURIHandlers().add(uriHandler);
     final List<IResourceDescription> descriptions = CollectionLiterals.<IResourceDescription>newArrayList();
     for (final URI uri : uris) {
       {

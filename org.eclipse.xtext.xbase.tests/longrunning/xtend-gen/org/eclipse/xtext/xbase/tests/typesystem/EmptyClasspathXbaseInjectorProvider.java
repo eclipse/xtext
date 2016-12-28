@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.tests.typesystem.EmptyClasspathXbaseTestStandalon
 public class EmptyClasspathXbaseInjectorProvider extends XbaseInjectorProvider {
   @Override
   public Injector internalCreateInjector() {
-    EmptyClasspathXbaseTestStandaloneSetup _emptyClasspathXbaseTestStandaloneSetup = new EmptyClasspathXbaseTestStandaloneSetup();
-    return _emptyClasspathXbaseTestStandaloneSetup.createInjectorAndDoEMFRegistration();
+    return new EmptyClasspathXbaseTestStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

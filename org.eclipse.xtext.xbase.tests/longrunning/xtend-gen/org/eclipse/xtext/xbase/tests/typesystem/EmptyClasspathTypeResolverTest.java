@@ -38,8 +38,7 @@ public class EmptyClasspathTypeResolverTest extends AbstractTypeResolverTest<Lig
   @Override
   public LightweightTypeReference resolvesTo(final String expression, final String type) {
     try {
-      EObject _parse = this._parseHelper.parse(expression);
-      this._iBatchTypeResolver.resolveTypes(_parse);
+      this._iBatchTypeResolver.resolveTypes(this._parseHelper.parse(expression));
       return null;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

@@ -9,10 +9,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import java.util.Iterator;
 import java.util.List;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -63,8 +60,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public AbstractExpectationTest expects(final String input) {
     try {
       this.rootExpression = this.expression(input, false);
-      PublicReentrantTypeResolver _resolver = this.getResolver();
-      _resolver.initializeFrom(this.rootExpression);
+      this.getResolver().initializeFrom(this.rootExpression);
       this.resolvedTypes = this.getResolver().reentrantResolve(CancelIndicator.NullImpl);
       this.pendingAssert = true;
       return this;
@@ -90,22 +86,24 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   
   public AbstractExpectationTest finalizedAs(final String... names) {
     Assert.assertFalse(this.pendingAssert);
-    Assert.assertEquals(ListExtensions.<ITypeExpectation, String>map(this.finalExpectations, ((Function1<ITypeExpectation, String>) (ITypeExpectation it) -> {
+    final Function1<ITypeExpectation, String> _function = (ITypeExpectation it) -> {
       LightweightTypeReference _expectedType = it.getExpectedType();
       String _simpleName = null;
       if (_expectedType!=null) {
         _simpleName=_expectedType.getSimpleName();
       }
       return _simpleName;
-    })).toString(), ((List<String>)Conversions.doWrapArray(names)).size(), this.expectations.size());
-    Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names))), IterableExtensions.<String>toSet(ListExtensions.<ITypeExpectation, String>map(this.finalExpectations, ((Function1<ITypeExpectation, String>) (ITypeExpectation it) -> {
+    };
+    Assert.assertEquals(ListExtensions.<ITypeExpectation, String>map(this.finalExpectations, _function).toString(), ((List<String>)Conversions.doWrapArray(names)).size(), this.expectations.size());
+    final Function1<ITypeExpectation, String> _function_1 = (ITypeExpectation it) -> {
       LightweightTypeReference _expectedType = it.getExpectedType();
       String _simpleName = null;
       if (_expectedType!=null) {
         _simpleName=_expectedType.getSimpleName();
       }
       return _simpleName;
-    }))));
+    };
+    Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names))), IterableExtensions.<String>toSet(ListExtensions.<ITypeExpectation, String>map(this.finalExpectations, _function_1)));
     return this;
   }
   
@@ -115,12 +113,14 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
       return this.resolvedTypes.getExpectedType(it);
     };
     final List<LightweightTypeReference> expectedTypes = ListExtensions.<XExpression, LightweightTypeReference>map(this.expressions, _function);
-    Assert.assertEquals(ListExtensions.<LightweightTypeReference, String>map(expectedTypes, ((Function1<LightweightTypeReference, String>) (LightweightTypeReference it) -> {
+    final Function1<LightweightTypeReference, String> _function_1 = (LightweightTypeReference it) -> {
       return it.getSimpleName();
-    })).toString(), ((List<String>)Conversions.doWrapArray(names)).size(), expectedTypes.size());
-    Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names))), IterableExtensions.<String>toSet(ListExtensions.<LightweightTypeReference, String>map(expectedTypes, ((Function1<LightweightTypeReference, String>) (LightweightTypeReference it) -> {
+    };
+    Assert.assertEquals(ListExtensions.<LightweightTypeReference, String>map(expectedTypes, _function_1).toString(), ((List<String>)Conversions.doWrapArray(names)).size(), expectedTypes.size());
+    final Function1<LightweightTypeReference, String> _function_2 = (LightweightTypeReference it) -> {
       return it.getSimpleName();
-    }))));
+    };
+    Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names))), IterableExtensions.<String>toSet(ListExtensions.<LightweightTypeReference, String>map(expectedTypes, _function_2)));
     return this;
   }
   
@@ -174,7 +174,6 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public void recordExpectation(final XExpression expression, final ITypeComputationState state) {
     List<? extends ITypeExpectation> _expectations = state.getExpectations();
     Iterables.<ITypeExpectation>addAll(this.finalExpectations, _expectations);
-    List<? extends ITypeExpectation> _expectations_1 = state.getExpectations();
     final Function1<ITypeExpectation, String> _function = (ITypeExpectation it) -> {
       LightweightTypeReference _expectedType = it.getExpectedType();
       String _simpleName = null;
@@ -183,114 +182,90 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
       }
       return _simpleName;
     };
-    List<String> _map = ListExtensions.map(_expectations_1, _function);
+    List<String> _map = ListExtensions.map(state.getExpectations(), _function);
     Iterables.<String>addAll(this.expectations, _map);
     this.expressions.add(expression);
   }
   
   @Test
   public void testIfCondition() {
-    AbstractExpectationTest _expects = this.expects("if (null) true");
-    _expects.types("boolean");
+    this.expects("if (null) true").types("boolean");
   }
   
   @Test
   public void testNotLastExpressionInBlock() {
-    AbstractExpectationTest _expects = this.expects("{ null true }");
-    _expects.nothing();
+    this.expects("{ null true }").nothing();
   }
   
   @Test
   public void testSwitchValue() {
-    AbstractExpectationTest _expects = this.expects("switch null case true: true");
-    _expects.notVoid();
+    this.expects("switch null case true: true").notVoid();
   }
   
   @Test
   public void testAssignment_01() {
-    AbstractExpectationTest _expects = this.expects("{ val String s = null }");
-    _expects.types("String");
+    this.expects("{ val String s = null }").types("String");
   }
   
   @Test
   public void testAssignment_02() {
-    AbstractExpectationTest _expects = this.expects("{ val String s; s = null }");
-    _expects.types("String");
+    this.expects("{ val String s; s = null }").types("String");
   }
   
   @Test
   public void testTransitiveAssignment() {
-    AbstractExpectationTest _expects = this.expects("{ val StringBuilder s = if (true) null }");
-    _expects.types("StringBuilder");
+    this.expects("{ val StringBuilder s = if (true) null }").types("StringBuilder");
   }
   
   @Test
   public void testFeatureCallArgument_01() {
-    AbstractExpectationTest _expects = this.expects("\'\'.substring(null)");
-    _expects.types("int");
+    this.expects("\'\'.substring(null)").types("int");
   }
   
   @Test
   public void testFeatureCallArgument_02() {
-    AbstractExpectationTest _expects = this.expects("newArrayList.<String>findFirst(null)");
-    AbstractExpectationTest _types = _expects.types("Function1<? super String, Boolean>");
-    _types.finalizedAs("Function1<? super String, Boolean>");
+    this.expects("newArrayList.<String>findFirst(null)").types("Function1<? super String, Boolean>").finalizedAs("Function1<? super String, Boolean>");
   }
   
   @Test
   public void testFeatureCallArgument_03() {
-    AbstractExpectationTest _expects = this.expects("newArrayList.findFirst(null)");
-    AbstractExpectationTest _types = _expects.types("Function1<? super Unbound[T], Boolean>");
-    _types.finalizedAs("Function1<? super Object, Boolean>");
+    this.expects("newArrayList.findFirst(null)").types("Function1<? super Unbound[T], Boolean>").finalizedAs("Function1<? super Object, Boolean>");
   }
   
   @Test
   public void testFeatureCallArgument_04() {
-    AbstractExpectationTest _expects = this.expects("<String>newArrayList.findFirst(null)");
-    AbstractExpectationTest _types = _expects.types("Function1<? super Unbound[T], Boolean>");
-    _types.finalizedAs("Function1<? super String, Boolean>");
+    this.expects("<String>newArrayList.findFirst(null)").types("Function1<? super Unbound[T], Boolean>").finalizedAs("Function1<? super String, Boolean>");
   }
   
   @Test
   public void testFeatureCallArgument_05() {
-    AbstractExpectationTest _expects = this.expects("newArrayList(\'\').findFirst(null)");
-    AbstractExpectationTest _types = _expects.types("Function1<? super Unbound[T], Boolean>");
-    _types.finalizedAs("Function1<? super String, Boolean>");
+    this.expects("newArrayList(\'\').findFirst(null)").types("Function1<? super Unbound[T], Boolean>").finalizedAs("Function1<? super String, Boolean>");
   }
   
   @Test
   public void testFeatureCallArgument_06() {
-    AbstractExpectationTest _expects = this.expects("{\n\t\t\tval (Iterable<CharSequence>)=>void f\n\t\t\tf.apply(null)\n\t\t}");
-    AbstractExpectationTest _types = _expects.types("Iterable<CharSequence>");
-    _types.finalizedAs("Iterable<CharSequence>");
+    this.expects("{\n\t\t\tval (Iterable<CharSequence>)=>void f\n\t\t\tf.apply(null)\n\t\t}").types("Iterable<CharSequence>").finalizedAs("Iterable<CharSequence>");
   }
   
   @Test
   @Ignore("TODO null type is bound differently")
   public void testExtensionReceiver_01() {
-    AbstractExpectationTest _expects = this.expects("null.isNullOrEmpty()");
-    _expects.types("String", "Iterable<Unbound[T]>");
+    this.expects("null.isNullOrEmpty()").types("String", "Iterable<Unbound[T]>");
   }
   
   @Test
   public void testFeatureCallVarArgument_01() {
-    AbstractExpectationTest _expects = this.expects("newArrayList(null)");
-    AbstractExpectationTest _types = _expects.types("Unbound[T]", "Unbound[T][]");
-    _types.finalizedAs("Object", "Object[]");
+    this.expects("newArrayList(null)").types("Unbound[T]", "Unbound[T][]").finalizedAs("Object", "Object[]");
   }
   
   @Test
   public void testFeatureCallVarArgument_02() {
-    AbstractExpectationTest _expects = this.expects("newArrayList(null, \'\')");
-    AbstractExpectationTest _types = _expects.types("Unbound[T]");
-    _types.finalizedAs("String");
+    this.expects("newArrayList(null, \'\')").types("Unbound[T]").finalizedAs("String");
   }
   
   @Test
   public void testFeatureCallVarArgument_03() {
-    AbstractExpectationTest _expects = this.expects("{ val Iterable<String> iterable = newArrayList(null) }");
-    AbstractExpectationTest _types = _expects.types("Unbound[T][]", "Unbound[T]");
-    _types.finalizedAs("String[]", "String");
+    this.expects("{ val Iterable<String> iterable = newArrayList(null) }").types("Unbound[T][]", "Unbound[T]").finalizedAs("String[]", "String");
   }
   
   @Test
@@ -300,74 +275,57 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
       return Boolean.valueOf((it instanceof XReturnExpression));
     };
     _typeComputer.setPredicate(_function);
-    AbstractExpectationTest _expects = this.expects("new foo.ClassWithGenericMethod().genericMethod(return null)");
-    AbstractExpectationTest _types = _expects.types("Unbound[T]");
-    _types.finalizedAs("Object");
+    this.expects("new foo.ClassWithGenericMethod().genericMethod(return null)").types("Unbound[T]").finalizedAs("Object");
   }
   
   @Test
   public void testForLoop_01() {
-    AbstractExpectationTest _expects = this.expects("for(int x: null) {}");
-    AbstractExpectationTest _types = _expects.types("int[] | Iterable<? extends Integer> | Integer[]");
-    _types.finalizedAs("int[] | Iterable<? extends Integer> | Integer[]");
+    this.expects("for(int x: null) {}").types("int[] | Iterable<? extends Integer> | Integer[]").finalizedAs("int[] | Iterable<? extends Integer> | Integer[]");
   }
   
   @Test
   public void testForLoop_02() {
-    AbstractExpectationTest _expects = this.expects("for(String x: null) {}");
-    AbstractExpectationTest _types = _expects.types("Iterable<? extends String> | String[]");
-    _types.finalizedAs("Iterable<? extends String> | String[]");
+    this.expects("for(String x: null) {}").types("Iterable<? extends String> | String[]").finalizedAs("Iterable<? extends String> | String[]");
   }
   
   @Test
   public void testForLoop_03() {
-    AbstractExpectationTest _expects = this.expects("for(Integer x: null) {}");
-    AbstractExpectationTest _types = _expects.types("Iterable<? extends Integer> | int[] | Integer[]");
-    _types.finalizedAs("Iterable<? extends Integer> | int[] | Integer[]");
+    this.expects("for(Integer x: null) {}").types("Iterable<? extends Integer> | int[] | Integer[]").finalizedAs("Iterable<? extends Integer> | int[] | Integer[]");
   }
   
   @Test
   public void testUpperBound_01() {
-    AbstractExpectationTest _expects = this.expects("(1 as Comparable<?>).compareTo(null)");
-    AbstractExpectationTest _types = _expects.types("null");
-    _types.finalizedAs("null");
+    this.expects("(1 as Comparable<?>).compareTo(null)").types("null").finalizedAs("null");
   }
   
   @Test
   public void testLowerBound_01() {
-    AbstractExpectationTest _expects = this.expects("(1 as Comparable<? super CharSequence>).compareTo(null)");
-    AbstractExpectationTest _types = _expects.types("CharSequence");
-    _types.finalizedAs("CharSequence");
+    this.expects("(1 as Comparable<? super CharSequence>).compareTo(null)").types("CharSequence").finalizedAs("CharSequence");
   }
   
   @Test
   public void testReturn_01() {
-    AbstractExpectationTest _expects = this.expects("return null");
-    _expects.notVoid();
+    this.expects("return null").notVoid();
   }
   
   @Test
   public void testReturn_02() {
-    AbstractExpectationTest _expects = this.expects("return { { null } }");
-    _expects.notVoid();
+    this.expects("return { { null } }").notVoid();
   }
   
   @Test
   public void testReturn_03() {
-    AbstractExpectationTest _expects = this.expects("return if (true) { { null } }");
-    _expects.notVoid();
+    this.expects("return if (true) { { null } }").notVoid();
   }
   
   @Test
   public void testReturn_04() {
-    AbstractExpectationTest _expects = this.expects("return if (true) { null \'\' }");
-    _expects.nothing();
+    this.expects("return if (true) { null \'\' }").nothing();
   }
   
   @Test
   public void testRawType_01() {
-    AbstractExpectationTest _expects = this.expects("(\'\' as Comparable).compareTo(null)");
-    _expects.types("Object");
+    this.expects("(\'\' as Comparable).compareTo(null)").types("Object");
   }
   
   @Test
@@ -377,10 +335,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
       return Boolean.valueOf((it instanceof XNumberLiteral));
     };
     _typeComputer.setPredicate(_function);
-    AbstractExpectationTest _expects = this.expects("1L.intValue");
-    AbstractExpectationTest _types = _expects.types(((String) null));
-    AbstractExpectationTest _finalizedAs = _types.finalizedAs(((String) null));
-    _finalizedAs.queriedAs("Long");
+    this.expects("1L.intValue").types(((String) null)).finalizedAs(((String) null)).queriedAs("Long");
   }
   
   @Test
@@ -391,9 +346,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     };
     _typeComputer.setPredicate(_function);
     this.expects("{val it = 1L intValue}");
-    TreeIterator<EObject> _eAllContents = this.rootExpression.eAllContents();
-    Iterator<XFeatureCall> _filter = Iterators.<XFeatureCall>filter(_eAllContents, XFeatureCall.class);
-    final XFeatureCall intValue = IteratorExtensions.<XFeatureCall>head(_filter);
+    final XFeatureCall intValue = IteratorExtensions.<XFeatureCall>head(Iterators.<XFeatureCall>filter(this.rootExpression.eAllContents(), XFeatureCall.class));
     XExpression _implicitReceiver = intValue.getImplicitReceiver();
     this.expressions.add(_implicitReceiver);
     this.queriedAs("Long");
@@ -406,10 +359,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
       return Boolean.valueOf((it instanceof XCastedExpression));
     };
     _typeComputer.setPredicate(_function);
-    AbstractExpectationTest _expects = this.expects("(null as String[]).size");
-    AbstractExpectationTest _types = _expects.types(((String) null));
-    AbstractExpectationTest _finalizedAs = _types.finalizedAs(((String) null));
-    _finalizedAs.queriedAs("List<String>");
+    this.expects("(null as String[]).size").types(((String) null)).finalizedAs(((String) null)).queriedAs("List<String>");
   }
   
   @Test
@@ -420,9 +370,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     };
     _typeComputer.setPredicate(_function);
     this.expects("{val it = null as String[] head}");
-    TreeIterator<EObject> _eAllContents = this.rootExpression.eAllContents();
-    Iterator<XFeatureCall> _filter = Iterators.<XFeatureCall>filter(_eAllContents, XFeatureCall.class);
-    final XFeatureCall size = IteratorExtensions.<XFeatureCall>head(_filter);
+    final XFeatureCall size = IteratorExtensions.<XFeatureCall>head(Iterators.<XFeatureCall>filter(this.rootExpression.eAllContents(), XFeatureCall.class));
     XExpression _implicitFirstArgument = size.getImplicitFirstArgument();
     this.expressions.add(_implicitFirstArgument);
     this.queriedAs("Iterable<String>");
@@ -435,9 +383,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
       return Boolean.valueOf((it instanceof XCastedExpression));
     };
     _typeComputer.setPredicate(_function);
-    AbstractExpectationTest _expects = this.expects("newArrayList(\'\', \'\', null as String)");
-    AbstractExpectationTest _types = _expects.types("Unbound[T]");
-    _types.finalizedAs("String");
+    this.expects("newArrayList(\'\', \'\', null as String)").types("Unbound[T]").finalizedAs("String");
   }
   
   @Test
@@ -447,30 +393,22 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
       return Boolean.valueOf((it instanceof XCastedExpression));
     };
     _typeComputer.setPredicate(_function);
-    AbstractExpectationTest _expects = this.expects("newArrayList(\'\', \'\', null as CharSequence)");
-    AbstractExpectationTest _types = _expects.types("Unbound[T]");
-    _types.finalizedAs("CharSequence");
+    this.expects("newArrayList(\'\', \'\', null as CharSequence)").types("Unbound[T]").finalizedAs("CharSequence");
   }
   
   @Test
   public void testBug379531_03() {
-    AbstractExpectationTest _expects = this.expects("newArrayList(\'\', \'\', null)");
-    AbstractExpectationTest _types = _expects.types("Unbound[T]");
-    _types.finalizedAs("String");
+    this.expects("newArrayList(\'\', \'\', null)").types("Unbound[T]").finalizedAs("String");
   }
   
   @Test
   public void testExpectationFromTypeParameter_01() {
-    AbstractExpectationTest _expects = this.expects("{ val Iterable<Number> iterable = newArrayList(null) }");
-    AbstractExpectationTest _types = _expects.types("Unbound[T]", "Unbound[T][]");
-    _types.finalizedAs("Number", "Number[]");
+    this.expects("{ val Iterable<Number> iterable = newArrayList(null) }").types("Unbound[T]", "Unbound[T][]").finalizedAs("Number", "Number[]");
   }
   
   @Test
   public void testExpectationFromTypeParameter_02() {
-    AbstractExpectationTest _expects = this.expects("{ val Iterable<Iterable<Number>> iterable = newArrayList(newArrayList(null)) }");
-    AbstractExpectationTest _types = _expects.types(
-      "Unbound[T]", "Unbound[T][]", "Unbound[T]", "Unbound[T][]");
-    _types.finalizedAs("Number", "Number[]", "Iterable<Number>", "Iterable<Number>[]");
+    this.expects("{ val Iterable<Iterable<Number>> iterable = newArrayList(newArrayList(null)) }").types(
+      "Unbound[T]", "Unbound[T][]", "Unbound[T]", "Unbound[T][]").finalizedAs("Number", "Number[]", "Iterable<Number>", "Iterable<Number>[]");
   }
 }

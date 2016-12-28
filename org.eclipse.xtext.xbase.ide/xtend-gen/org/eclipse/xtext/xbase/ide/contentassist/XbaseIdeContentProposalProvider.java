@@ -29,13 +29,11 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
-import org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -56,7 +54,6 @@ import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
-import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -75,12 +72,9 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
         if (((!((IIdentifiableElementDescription)input).isVisible()) || (!((IIdentifiableElementDescription)input).isValidStaticState()))) {
           return false;
         }
-        QualifiedName _name = ((IIdentifiableElementDescription)input).getName();
-        String _firstSegment = _name.getFirstSegment();
-        boolean _startsWith = _firstSegment.startsWith("operator_");
+        boolean _startsWith = ((IIdentifiableElementDescription)input).getName().getFirstSegment().startsWith("operator_");
         if (_startsWith) {
-          QualifiedName _name_1 = ((IIdentifiableElementDescription)input).getName();
-          QualifiedName _operator = this.operatorMapping.getOperator(_name_1);
+          QualifiedName _operator = this.operatorMapping.getOperator(((IIdentifiableElementDescription)input).getName());
           return (_operator == null);
         }
       }
@@ -114,8 +108,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
           if (((context.getPrefix().length() == 0) && (NodeModelUtils.getNode(previousModel).getEndOffset() > context.getOffset()))) {
             return false;
           }
-          IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(previousModel);
-          final LightweightTypeReference type = _resolveTypes.getActualType(((XExpression)previousModel));
+          final LightweightTypeReference type = this.typeResolver.resolveTypes(previousModel).getActualType(((XExpression)previousModel));
           if (((type == null) || type.isPrimitiveVoid())) {
             return false;
           }
@@ -146,21 +139,18 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     final EObject model = context.getCurrentModel();
     boolean _matched = false;
-    XbaseGrammarAccess.XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
-    Assignment _featureAssignment_2 = _xFeatureCallAccess.getFeatureAssignment_2();
+    Assignment _featureAssignment_2 = this._xbaseGrammarAccess.getXFeatureCallAccess().getFeatureAssignment_2();
     if (Objects.equal(assignment, _featureAssignment_2)) {
       _matched=true;
       this.completeXFeatureCall(model, context, acceptor);
     }
     if (!_matched) {
-      XbaseGrammarAccess.XMemberFeatureCallElements _xMemberFeatureCallAccess = this._xbaseGrammarAccess.getXMemberFeatureCallAccess();
-      Assignment _featureAssignment_1_0_0_0_2 = _xMemberFeatureCallAccess.getFeatureAssignment_1_0_0_0_2();
+      Assignment _featureAssignment_1_0_0_0_2 = this._xbaseGrammarAccess.getXMemberFeatureCallAccess().getFeatureAssignment_1_0_0_0_2();
       if (Objects.equal(assignment, _featureAssignment_1_0_0_0_2)) {
         _matched=true;
       }
       if (!_matched) {
-        XbaseGrammarAccess.XMemberFeatureCallElements _xMemberFeatureCallAccess_1 = this._xbaseGrammarAccess.getXMemberFeatureCallAccess();
-        Assignment _featureAssignment_1_1_2 = _xMemberFeatureCallAccess_1.getFeatureAssignment_1_1_2();
+        Assignment _featureAssignment_1_1_2 = this._xbaseGrammarAccess.getXMemberFeatureCallAccess().getFeatureAssignment_1_1_2();
         if (Objects.equal(assignment, _featureAssignment_1_1_2)) {
           _matched=true;
         }
@@ -170,14 +160,12 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       }
     }
     if (!_matched) {
-      XbaseGrammarAccess.XBlockExpressionElements _xBlockExpressionAccess = this._xbaseGrammarAccess.getXBlockExpressionAccess();
-      Assignment _expressionsAssignment_2_0 = _xBlockExpressionAccess.getExpressionsAssignment_2_0();
+      Assignment _expressionsAssignment_2_0 = this._xbaseGrammarAccess.getXBlockExpressionAccess().getExpressionsAssignment_2_0();
       if (Objects.equal(assignment, _expressionsAssignment_2_0)) {
         _matched=true;
       }
       if (!_matched) {
-        XbaseGrammarAccess.XExpressionInClosureElements _xExpressionInClosureAccess = this._xbaseGrammarAccess.getXExpressionInClosureAccess();
-        Assignment _expressionsAssignment_1_0 = _xExpressionInClosureAccess.getExpressionsAssignment_1_0();
+        Assignment _expressionsAssignment_1_0 = this._xbaseGrammarAccess.getXExpressionInClosureAccess().getExpressionsAssignment_1_0();
         if (Objects.equal(assignment, _expressionsAssignment_1_0)) {
           _matched=true;
         }
@@ -187,14 +175,12 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       }
     }
     if (!_matched) {
-      XbaseGrammarAccess.XAssignmentElements _xAssignmentAccess = this._xbaseGrammarAccess.getXAssignmentAccess();
-      Assignment _featureAssignment_0_1 = _xAssignmentAccess.getFeatureAssignment_0_1();
+      Assignment _featureAssignment_0_1 = this._xbaseGrammarAccess.getXAssignmentAccess().getFeatureAssignment_0_1();
       if (Objects.equal(assignment, _featureAssignment_0_1)) {
         _matched=true;
       }
       if (!_matched) {
-        XbaseGrammarAccess.XAssignmentElements _xAssignmentAccess_1 = this._xbaseGrammarAccess.getXAssignmentAccess();
-        Assignment _featureAssignment_1_1_0_0_1 = _xAssignmentAccess_1.getFeatureAssignment_1_1_0_0_1();
+        Assignment _featureAssignment_1_1_0_0_1 = this._xbaseGrammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1();
         if (Objects.equal(assignment, _featureAssignment_1_1_0_0_1)) {
           _matched=true;
         }
@@ -204,14 +190,12 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       }
     }
     if (!_matched) {
-      XtypeGrammarAccess.JvmParameterizedTypeReferenceElements _jvmParameterizedTypeReferenceAccess = this._xbaseGrammarAccess.getJvmParameterizedTypeReferenceAccess();
-      Assignment _typeAssignment_0 = _jvmParameterizedTypeReferenceAccess.getTypeAssignment_0();
+      Assignment _typeAssignment_0 = this._xbaseGrammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeAssignment_0();
       if (Objects.equal(assignment, _typeAssignment_0)) {
         _matched=true;
       }
       if (!_matched) {
-        XtypeGrammarAccess.JvmParameterizedTypeReferenceElements _jvmParameterizedTypeReferenceAccess_1 = this._xbaseGrammarAccess.getJvmParameterizedTypeReferenceAccess();
-        Assignment _typeAssignment_1_4_1 = _jvmParameterizedTypeReferenceAccess_1.getTypeAssignment_1_4_1();
+        Assignment _typeAssignment_1_4_1 = this._xbaseGrammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeAssignment_1_4_1();
         if (Objects.equal(assignment, _typeAssignment_1_4_1)) {
           _matched=true;
         }
@@ -221,22 +205,19 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       }
     }
     if (!_matched) {
-      XbaseGrammarAccess.XRelationalExpressionElements _xRelationalExpressionAccess = this._xbaseGrammarAccess.getXRelationalExpressionAccess();
-      Assignment _typeAssignment_1_0_1 = _xRelationalExpressionAccess.getTypeAssignment_1_0_1();
+      Assignment _typeAssignment_1_0_1 = this._xbaseGrammarAccess.getXRelationalExpressionAccess().getTypeAssignment_1_0_1();
       if (Objects.equal(assignment, _typeAssignment_1_0_1)) {
         _matched=true;
         this.completeJavaTypes(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, context, acceptor);
       }
     }
     if (!_matched) {
-      XtypeGrammarAccess.XImportDeclarationElements _xImportDeclarationAccess = this._xbaseGrammarAccess.getXImportDeclarationAccess();
-      Assignment _importedTypeAssignment_1_0_2 = _xImportDeclarationAccess.getImportedTypeAssignment_1_0_2();
+      Assignment _importedTypeAssignment_1_0_2 = this._xbaseGrammarAccess.getXImportDeclarationAccess().getImportedTypeAssignment_1_0_2();
       if (Objects.equal(assignment, _importedTypeAssignment_1_0_2)) {
         _matched=true;
       }
       if (!_matched) {
-        XtypeGrammarAccess.XImportDeclarationElements _xImportDeclarationAccess_1 = this._xbaseGrammarAccess.getXImportDeclarationAccess();
-        Assignment _importedTypeAssignment_1_1 = _xImportDeclarationAccess_1.getImportedTypeAssignment_1_1();
+        Assignment _importedTypeAssignment_1_1 = this._xbaseGrammarAccess.getXImportDeclarationAccess().getImportedTypeAssignment_1_1();
         if (Objects.equal(assignment, _importedTypeAssignment_1_1)) {
           _matched=true;
         }
@@ -246,16 +227,14 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       }
     }
     if (!_matched) {
-      XbaseGrammarAccess.XTypeLiteralElements _xTypeLiteralAccess = this._xbaseGrammarAccess.getXTypeLiteralAccess();
-      Assignment _typeAssignment_3 = _xTypeLiteralAccess.getTypeAssignment_3();
+      Assignment _typeAssignment_3 = this._xbaseGrammarAccess.getXTypeLiteralAccess().getTypeAssignment_3();
       if (Objects.equal(assignment, _typeAssignment_3)) {
         _matched=true;
         this.completeJavaTypes(XbasePackage.Literals.XTYPE_LITERAL__TYPE, context, acceptor);
       }
     }
     if (!_matched) {
-      XbaseGrammarAccess.XConstructorCallElements _xConstructorCallAccess = this._xbaseGrammarAccess.getXConstructorCallAccess();
-      Assignment _constructorAssignment_2 = _xConstructorCallAccess.getConstructorAssignment_2();
+      Assignment _constructorAssignment_2 = this._xbaseGrammarAccess.getXConstructorCallAccess().getConstructorAssignment_2();
       if (Objects.equal(assignment, _constructorAssignment_2)) {
         _matched=true;
         this.completeJavaTypes(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, context, 
@@ -263,70 +242,60 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       }
     }
     if (!_matched) {
-      XbaseGrammarAccess.XForLoopExpressionElements _xForLoopExpressionAccess = this._xbaseGrammarAccess.getXForLoopExpressionAccess();
-      Assignment _eachExpressionAssignment_3 = _xForLoopExpressionAccess.getEachExpressionAssignment_3();
+      Assignment _eachExpressionAssignment_3 = this._xbaseGrammarAccess.getXForLoopExpressionAccess().getEachExpressionAssignment_3();
       if (Objects.equal(assignment, _eachExpressionAssignment_3)) {
         _matched=true;
       }
       if (!_matched) {
-        XbaseGrammarAccess.XSwitchExpressionElements _xSwitchExpressionAccess = this._xbaseGrammarAccess.getXSwitchExpressionAccess();
-        Assignment _defaultAssignment_5_2 = _xSwitchExpressionAccess.getDefaultAssignment_5_2();
+        Assignment _defaultAssignment_5_2 = this._xbaseGrammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_5_2();
         if (Objects.equal(assignment, _defaultAssignment_5_2)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XCasePartElements _xCasePartAccess = this._xbaseGrammarAccess.getXCasePartAccess();
-        Assignment _caseAssignment_2_1 = _xCasePartAccess.getCaseAssignment_2_1();
+        Assignment _caseAssignment_2_1 = this._xbaseGrammarAccess.getXCasePartAccess().getCaseAssignment_2_1();
         if (Objects.equal(assignment, _caseAssignment_2_1)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XCatchClauseElements _xCatchClauseAccess = this._xbaseGrammarAccess.getXCatchClauseAccess();
-        Assignment _expressionAssignment_4 = _xCatchClauseAccess.getExpressionAssignment_4();
+        Assignment _expressionAssignment_4 = this._xbaseGrammarAccess.getXCatchClauseAccess().getExpressionAssignment_4();
         if (Objects.equal(assignment, _expressionAssignment_4)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
-        Assignment _updateExpressionsAssignment_7_0 = _xBasicForLoopExpressionAccess.getUpdateExpressionsAssignment_7_0();
+        Assignment _updateExpressionsAssignment_7_0 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess().getUpdateExpressionsAssignment_7_0();
         if (Objects.equal(assignment, _updateExpressionsAssignment_7_0)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess_1 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
-        Assignment _updateExpressionsAssignment_7_1_1 = _xBasicForLoopExpressionAccess_1.getUpdateExpressionsAssignment_7_1_1();
+        Assignment _updateExpressionsAssignment_7_1_1 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess().getUpdateExpressionsAssignment_7_1_1();
         if (Objects.equal(assignment, _updateExpressionsAssignment_7_1_1)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess_2 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
-        Assignment _expressionAssignment_5 = _xBasicForLoopExpressionAccess_2.getExpressionAssignment_5();
+        Assignment _expressionAssignment_5 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess().getExpressionAssignment_5();
         if (Objects.equal(assignment, _expressionAssignment_5)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess_3 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
-        Assignment _eachExpressionAssignment_9 = _xBasicForLoopExpressionAccess_3.getEachExpressionAssignment_9();
+        Assignment _eachExpressionAssignment_9 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess().getEachExpressionAssignment_9();
         if (Objects.equal(assignment, _eachExpressionAssignment_9)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XClosureElements _xClosureAccess = this._xbaseGrammarAccess.getXClosureAccess();
-        Assignment _expressionAssignment_2 = _xClosureAccess.getExpressionAssignment_2();
+        Assignment _expressionAssignment_2 = this._xbaseGrammarAccess.getXClosureAccess().getExpressionAssignment_2();
         if (Objects.equal(assignment, _expressionAssignment_2)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XShortClosureElements _xShortClosureAccess = this._xbaseGrammarAccess.getXShortClosureAccess();
-        Assignment _expressionAssignment_1 = _xShortClosureAccess.getExpressionAssignment_1();
+        Assignment _expressionAssignment_1 = this._xbaseGrammarAccess.getXShortClosureAccess().getExpressionAssignment_1();
         if (Objects.equal(assignment, _expressionAssignment_1)) {
           _matched=true;
         }
@@ -336,14 +305,12 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       }
     }
     if (!_matched) {
-      XbaseGrammarAccess.XForLoopExpressionElements _xForLoopExpressionAccess_1 = this._xbaseGrammarAccess.getXForLoopExpressionAccess();
-      Assignment _forExpressionAssignment_1 = _xForLoopExpressionAccess_1.getForExpressionAssignment_1();
+      Assignment _forExpressionAssignment_1 = this._xbaseGrammarAccess.getXForLoopExpressionAccess().getForExpressionAssignment_1();
       if (Objects.equal(assignment, _forExpressionAssignment_1)) {
         _matched=true;
       }
       if (!_matched) {
-        XbaseGrammarAccess.XVariableDeclarationElements _xVariableDeclarationAccess = this._xbaseGrammarAccess.getXVariableDeclarationAccess();
-        Assignment _rightAssignment_3_1 = _xVariableDeclarationAccess.getRightAssignment_3_1();
+        Assignment _rightAssignment_3_1 = this._xbaseGrammarAccess.getXVariableDeclarationAccess().getRightAssignment_3_1();
         if (Objects.equal(assignment, _rightAssignment_3_1)) {
           _matched=true;
         }
@@ -353,64 +320,55 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       }
     }
     if (!_matched) {
-      XbaseGrammarAccess.XCasePartElements _xCasePartAccess_1 = this._xbaseGrammarAccess.getXCasePartAccess();
-      Assignment _thenAssignment_3_0_1 = _xCasePartAccess_1.getThenAssignment_3_0_1();
+      Assignment _thenAssignment_3_0_1 = this._xbaseGrammarAccess.getXCasePartAccess().getThenAssignment_3_0_1();
       if (Objects.equal(assignment, _thenAssignment_3_0_1)) {
         _matched=true;
         this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
       }
     }
     if (!_matched) {
-      XbaseGrammarAccess.XOrExpressionElements _xOrExpressionAccess = this._xbaseGrammarAccess.getXOrExpressionAccess();
-      Assignment _featureAssignment_1_0_0_1 = _xOrExpressionAccess.getFeatureAssignment_1_0_0_1();
+      Assignment _featureAssignment_1_0_0_1 = this._xbaseGrammarAccess.getXOrExpressionAccess().getFeatureAssignment_1_0_0_1();
       if (Objects.equal(assignment, _featureAssignment_1_0_0_1)) {
         _matched=true;
       }
       if (!_matched) {
-        XbaseGrammarAccess.XAndExpressionElements _xAndExpressionAccess = this._xbaseGrammarAccess.getXAndExpressionAccess();
-        Assignment _featureAssignment_1_0_0_1_1 = _xAndExpressionAccess.getFeatureAssignment_1_0_0_1();
+        Assignment _featureAssignment_1_0_0_1_1 = this._xbaseGrammarAccess.getXAndExpressionAccess().getFeatureAssignment_1_0_0_1();
         if (Objects.equal(assignment, _featureAssignment_1_0_0_1_1)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XEqualityExpressionElements _xEqualityExpressionAccess = this._xbaseGrammarAccess.getXEqualityExpressionAccess();
-        Assignment _featureAssignment_1_0_0_1_2 = _xEqualityExpressionAccess.getFeatureAssignment_1_0_0_1();
+        Assignment _featureAssignment_1_0_0_1_2 = this._xbaseGrammarAccess.getXEqualityExpressionAccess().getFeatureAssignment_1_0_0_1();
         if (Objects.equal(assignment, _featureAssignment_1_0_0_1_2)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XRelationalExpressionElements _xRelationalExpressionAccess_1 = this._xbaseGrammarAccess.getXRelationalExpressionAccess();
-        Assignment _featureAssignment_1_1_0_0_1_1 = _xRelationalExpressionAccess_1.getFeatureAssignment_1_1_0_0_1();
+        Assignment _featureAssignment_1_1_0_0_1_1 = this._xbaseGrammarAccess.getXRelationalExpressionAccess().getFeatureAssignment_1_1_0_0_1();
         if (Objects.equal(assignment, _featureAssignment_1_1_0_0_1_1)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XOtherOperatorExpressionElements _xOtherOperatorExpressionAccess = this._xbaseGrammarAccess.getXOtherOperatorExpressionAccess();
-        Assignment _featureAssignment_1_0_0_1_3 = _xOtherOperatorExpressionAccess.getFeatureAssignment_1_0_0_1();
+        Assignment _featureAssignment_1_0_0_1_3 = this._xbaseGrammarAccess.getXOtherOperatorExpressionAccess().getFeatureAssignment_1_0_0_1();
         if (Objects.equal(assignment, _featureAssignment_1_0_0_1_3)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XAdditiveExpressionElements _xAdditiveExpressionAccess = this._xbaseGrammarAccess.getXAdditiveExpressionAccess();
-        Assignment _featureAssignment_1_0_0_1_4 = _xAdditiveExpressionAccess.getFeatureAssignment_1_0_0_1();
+        Assignment _featureAssignment_1_0_0_1_4 = this._xbaseGrammarAccess.getXAdditiveExpressionAccess().getFeatureAssignment_1_0_0_1();
         if (Objects.equal(assignment, _featureAssignment_1_0_0_1_4)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XMultiplicativeExpressionElements _xMultiplicativeExpressionAccess = this._xbaseGrammarAccess.getXMultiplicativeExpressionAccess();
-        Assignment _featureAssignment_1_0_0_1_5 = _xMultiplicativeExpressionAccess.getFeatureAssignment_1_0_0_1();
+        Assignment _featureAssignment_1_0_0_1_5 = this._xbaseGrammarAccess.getXMultiplicativeExpressionAccess().getFeatureAssignment_1_0_0_1();
         if (Objects.equal(assignment, _featureAssignment_1_0_0_1_5)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        XbaseGrammarAccess.XPostfixOperationElements _xPostfixOperationAccess = this._xbaseGrammarAccess.getXPostfixOperationAccess();
-        Assignment _featureAssignment_1_0_1 = _xPostfixOperationAccess.getFeatureAssignment_1_0_1();
+        Assignment _featureAssignment_1_0_1 = this._xbaseGrammarAccess.getXPostfixOperationAccess().getFeatureAssignment_1_0_1();
         if (Objects.equal(assignment, _featureAssignment_1_0_1)) {
           _matched=true;
         }
@@ -420,14 +378,12 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       }
     }
     if (!_matched) {
-      XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess_4 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
-      Assignment _initExpressionsAssignment_3_0 = _xBasicForLoopExpressionAccess_4.getInitExpressionsAssignment_3_0();
+      Assignment _initExpressionsAssignment_3_0 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess().getInitExpressionsAssignment_3_0();
       if (Objects.equal(assignment, _initExpressionsAssignment_3_0)) {
         _matched=true;
       }
       if (!_matched) {
-        XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess_5 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
-        Assignment _initExpressionsAssignment_3_1_1 = _xBasicForLoopExpressionAccess_5.getInitExpressionsAssignment_3_1_1();
+        Assignment _initExpressionsAssignment_3_1_1 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess().getInitExpressionsAssignment_3_1_1();
         if (Objects.equal(assignment, _initExpressionsAssignment_3_1_1)) {
           _matched=true;
         }
@@ -437,8 +393,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       }
     }
     if (!_matched) {
-      XbaseGrammarAccess.XUnaryOperationElements _xUnaryOperationAccess = this._xbaseGrammarAccess.getXUnaryOperationAccess();
-      Assignment _featureAssignment_0_1_1 = _xUnaryOperationAccess.getFeatureAssignment_0_1();
+      Assignment _featureAssignment_0_1_1 = this._xbaseGrammarAccess.getXUnaryOperationAccess().getFeatureAssignment_0_1();
       if (Objects.equal(assignment, _featureAssignment_0_1_1)) {
         _matched=true;
       }
@@ -458,8 +413,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   
   protected void completeXFeatureCall(final EObject model, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     if ((model != null)) {
-      IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(model);
-      boolean _hasExpressionScope = _resolveTypes.hasExpressionScope(model, IExpressionScope.Anchor.WITHIN);
+      boolean _hasExpressionScope = this.typeResolver.resolveTypes(model).hasExpressionScope(model, IExpressionScope.Anchor.WITHIN);
       if (_hasExpressionScope) {
         return;
       }
@@ -550,8 +504,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   
   protected void completeBinaryOperation(final EObject model, final Assignment assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     if ((model instanceof XBinaryOperation)) {
-      String _prefix = context.getPrefix();
-      int _length = _prefix.length();
+      int _length = context.getPrefix().length();
       boolean _tripleEquals = (_length == 0);
       if (_tripleEquals) {
         final INode currentNode = context.getCurrentNode();
@@ -561,8 +514,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
           return;
         }
       }
-      ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(model);
-      int _endOffset = _findActualNodeFor.getEndOffset();
+      int _endOffset = NodeModelUtils.findActualNodeFor(model).getEndOffset();
       int _offset = context.getOffset();
       boolean _lessEqualsThan = (_endOffset <= _offset);
       if (_lessEqualsThan) {
@@ -637,16 +589,12 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     if ((model != null)) {
       _xifexpression = this.typeResolver.resolveTypes(model);
     } else {
-      XtextResource _resource = context.getResource();
-      _xifexpression = this.typeResolver.resolveTypes(_resource);
+      _xifexpression = this.typeResolver.resolveTypes(context.getResource());
     }
     final IResolvedTypes resolvedTypes = _xifexpression;
     final IExpressionScope expressionScope = resolvedTypes.getExpressionScope(model, anchor);
     final IScope scope = expressionScope.getFeatureScope();
-    IdeCrossrefProposalProvider _crossrefProposalProvider = this.getCrossrefProposalProvider();
-    XbaseGrammarAccess.XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
-    CrossReference _featureJvmIdentifiableElementCrossReference_2_0 = _xFeatureCallAccess.getFeatureJvmIdentifiableElementCrossReference_2_0();
-    _crossrefProposalProvider.lookupCrossReference(scope, _featureJvmIdentifiableElementCrossReference_2_0, context, acceptor, this.featureDescriptionPredicate);
+    this.getCrossrefProposalProvider().lookupCrossReference(scope, this._xbaseGrammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_2_0(), context, acceptor, this.featureDescriptionPredicate);
   }
   
   protected void createReceiverProposals(final XExpression receiver, final CrossReference crossReference, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
@@ -668,8 +616,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     } else {
       scope = this.syntaxFilteredScopes.create(expressionScope.getFeatureScope(), crossReference);
     }
-    IdeCrossrefProposalProvider _crossrefProposalProvider = this.getCrossrefProposalProvider();
-    _crossrefProposalProvider.lookupCrossReference(scope, crossReference, context, acceptor, this.featureDescriptionPredicate);
+    this.getCrossrefProposalProvider().lookupCrossReference(scope, crossReference, context, acceptor, this.featureDescriptionPredicate);
   }
   
   protected String _getConcreteSyntaxRuleName(final Assignment assignment) {
@@ -686,8 +633,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   }
   
   protected String _getConcreteSyntaxRuleName(final RuleCall ruleCall) {
-    AbstractRule _rule = ruleCall.getRule();
-    return _rule.getName();
+    return ruleCall.getRule().getName();
   }
   
   public void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {

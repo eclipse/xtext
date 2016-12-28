@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.generator.IInheriting;
@@ -66,8 +64,7 @@ public class FormatterStubGenerator {
   
   public String getStubSimpleName() {
     StringConcatenation _builder = new StringConcatenation();
-    String _name = this.grammar.getName();
-    String _simpleName = this.service.naming.toSimpleName(_name);
+    String _simpleName = this.service.naming.toSimpleName(this.grammar.getName());
     _builder.append(_simpleName);
     _builder.append("Formatter");
     return _builder.toString();
@@ -75,8 +72,7 @@ public class FormatterStubGenerator {
   
   public String getStubPackageName() {
     StringConcatenation _builder = new StringConcatenation();
-    String _name = this.grammar.getName();
-    String _packageName = this.service.naming.toPackageName(_name);
+    String _packageName = this.service.naming.toPackageName(this.grammar.getName());
     _builder.append(_packageName);
     _builder.append(".formatting2");
     return _builder.toString();
@@ -94,8 +90,7 @@ public class FormatterStubGenerator {
   
   public String getStubFileName() {
     StringConcatenation _builder = new StringConcatenation();
-    String _stubQualifiedName = this.getStubQualifiedName();
-    String _asPath = this.service.naming.asPath(_stubQualifiedName);
+    String _asPath = this.service.naming.asPath(this.getStubQualifiedName());
     _builder.append(_asPath);
     _builder.append(".xtend");
     return _builder.toString();
@@ -104,8 +99,7 @@ public class FormatterStubGenerator {
   public String getStubSuperClassName() {
     final Grammar superGrammar = IInheriting.Util.getNonTerminalsSuperGrammar(this.grammar);
     if ((superGrammar != null)) {
-      FormatterStubGenerator _createGenerator = this.service.createGenerator(superGrammar);
-      return _createGenerator.getStubQualifiedName();
+      return this.service.createGenerator(superGrammar).getStubQualifiedName();
     } else {
       return AbstractFormatter2.class.getName();
     }
@@ -117,8 +111,7 @@ public class FormatterStubGenerator {
       {
         final EClassifier type = GrammarUtil.findCurrentType(assignment);
         if ((type instanceof EClass)) {
-          String _feature = assignment.getFeature();
-          final EStructuralFeature feature = ((EClass)type).getEStructuralFeature(_feature);
+          final EStructuralFeature feature = ((EClass)type).getEStructuralFeature(assignment.getFeature());
           if (((feature instanceof EReference) && ((EReference) feature).isContainment())) {
             type2ref.put(((EClass)type), ((EReference) feature));
           }
@@ -130,8 +123,7 @@ public class FormatterStubGenerator {
       {
         final String featureName = action.getFeature();
         if ((featureName != null)) {
-          TypeRef _type = action.getType();
-          final EClassifier type = _type.getClassifier();
+          final EClassifier type = action.getType().getClassifier();
           if ((type instanceof EClass)) {
             final EStructuralFeature feature = ((EClass)type).getEStructuralFeature(featureName);
             if (((feature instanceof EReference) && ((EReference) feature).isContainment())) {
@@ -157,8 +149,7 @@ public class FormatterStubGenerator {
   }
   
   public String generateStubFileContents() {
-    Resource _eResource = this.grammar.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
+    ResourceSet _resourceSet = this.grammar.eResource().getResourceSet();
     String _stubPackageName = this.getStubPackageName();
     String _fileHeader = this.service.naming.fileHeader();
     @Extension
@@ -173,8 +164,7 @@ public class FormatterStubGenerator {
     String _stubSimpleName = this.getStubSimpleName();
     _builder.append(_stubSimpleName);
     _builder.append(" extends ");
-    String _stubSuperClassName = this.getStubSuperClassName();
-    String _imported = file.imported(_stubSuperClassName);
+    String _imported = file.imported(this.getStubSuperClassName());
     _builder.append(_imported);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
@@ -185,8 +175,7 @@ public class FormatterStubGenerator {
     String _imported_1 = file.imported(Inject.class);
     _builder.append(_imported_1, "\t");
     _builder.append(" extension ");
-    String _grammarAccessFQName = GrammarAccessUtil.getGrammarAccessFQName(this.grammar, this.service.naming);
-    String _imported_2 = file.imported(_grammarAccessFQName);
+    String _imported_2 = file.imported(GrammarAccessUtil.getGrammarAccessFQName(this.grammar, this.service.naming));
     _builder.append(_imported_2, "\t");
     _builder.newLineIfNotEmpty();
     {
@@ -194,9 +183,7 @@ public class FormatterStubGenerator {
       for(final EClass type : _keySet) {
         _builder.newLine();
         _builder.append("\t");
-        Set<EReference> _get = type2ref.get(type);
-        boolean _containsKey = inheritedTypes.containsKey(type);
-        CharSequence _generateFormatMethod = this.generateFormatMethod(type, file, _get, _containsKey);
+        CharSequence _generateFormatMethod = this.generateFormatMethod(type, file, type2ref.get(type), inheritedTypes.containsKey(type));
         _builder.append(_generateFormatMethod, "\t");
         _builder.newLineIfNotEmpty();
       }
@@ -208,8 +195,7 @@ public class FormatterStubGenerator {
   }
   
   protected String toName(final EClass clazz) {
-    String _name = clazz.getName();
-    return _name.toLowerCase();
+    return clazz.getName().toLowerCase();
   }
   
   protected CharSequence generateFormatMethod(final EClass clazz, @Extension final JavaEMFFile file, final Collection<EReference> containmentRefs, final boolean isOverriding) {
@@ -239,8 +225,7 @@ public class FormatterStubGenerator {
           if (_isMany) {
             _builder.append("\t");
             _builder.append("for (");
-            EClass _eReferenceType = ref.getEReferenceType();
-            String _importedGenTypeName_1 = file.importedGenTypeName(_eReferenceType);
+            String _importedGenTypeName_1 = file.importedGenTypeName(ref.getEReferenceType());
             _builder.append(_importedGenTypeName_1, "\t");
             _builder.append(" ");
             String _name_1 = ref.getName();

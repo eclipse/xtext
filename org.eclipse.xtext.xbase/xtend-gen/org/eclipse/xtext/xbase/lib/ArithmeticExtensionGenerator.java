@@ -3,7 +3,6 @@ package org.eclipse.xtext.xbase.lib;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import java.io.File;
 import java.util.HashSet;
 import java.util.List;
@@ -19,10 +18,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 @SuppressWarnings("all")
 public class ArithmeticExtensionGenerator {
   public static void main(final String[] args) {
-    XbaseStandaloneSetup _xbaseStandaloneSetup = new XbaseStandaloneSetup();
-    Injector _createInjectorAndDoEMFRegistration = _xbaseStandaloneSetup.createInjectorAndDoEMFRegistration();
-    ArithmeticExtensionGenerator _instance = _createInjectorAndDoEMFRegistration.<ArithmeticExtensionGenerator>getInstance(ArithmeticExtensionGenerator.class);
-    _instance.generate();
+    new XbaseStandaloneSetup().createInjectorAndDoEMFRegistration().<ArithmeticExtensionGenerator>getInstance(ArithmeticExtensionGenerator.class).generate();
   }
   
   private static String since = "2.3";
@@ -57,8 +53,7 @@ public class ArithmeticExtensionGenerator {
   public void generate() {
     try {
       final String path = "../org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/";
-      File _file = new File(path);
-      _file.mkdirs();
+      new File(path).mkdirs();
       for (final String type : this.types) {
         {
           String _className = this.className(type);
@@ -72,20 +67,16 @@ public class ArithmeticExtensionGenerator {
             {
               final String content = Files.toString(file, Charsets.ISO_8859_1);
               StringConcatenation _builder = new StringConcatenation();
-              String _startMarker = this.startMarker();
-              int _indexOf = content.indexOf(_startMarker);
-              String _substring = content.substring(0, _indexOf);
+              String _substring = content.substring(0, content.indexOf(this.startMarker()));
               _builder.append(_substring);
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               CharSequence _generateAllOperations = this.generateAllOperations(type);
               _builder.append(_generateAllOperations, "\t");
               _builder.newLineIfNotEmpty();
-              String _endMarker = this.endMarker();
-              int _indexOf_1 = content.indexOf(_endMarker);
-              String _endMarker_1 = this.endMarker();
-              int _length = _endMarker_1.length();
-              int _plus_2 = (_indexOf_1 + _length);
+              int _indexOf = content.indexOf(this.endMarker());
+              int _length = this.endMarker().length();
+              int _plus_2 = (_indexOf + _length);
               String _substring_1 = content.substring(_plus_2);
               _builder.append(_substring_1);
               _xblockexpression = _builder.toString();
@@ -186,8 +177,7 @@ public class ArithmeticExtensionGenerator {
     String _article = this.article(type);
     _builder.append(_article, " ");
     _builder.append(" ");
-    String _wrapperType = this.wrapperType(type);
-    String _firstLower = StringExtensions.toFirstLower(_wrapperType);
+    String _firstLower = StringExtensions.toFirstLower(this.wrapperType(type));
     _builder.append(_firstLower, " ");
     _builder.append(".");
     _builder.newLineIfNotEmpty();
@@ -246,8 +236,7 @@ public class ArithmeticExtensionGenerator {
     String _article_1 = this.article(type);
     _builder.append(_article_1, " ");
     _builder.append(" ");
-    String _wrapperType_1 = this.wrapperType(type);
-    String _firstLower_1 = StringExtensions.toFirstLower(_wrapperType_1);
+    String _firstLower_1 = StringExtensions.toFirstLower(this.wrapperType(type));
     _builder.append(_firstLower_1, " ");
     _builder.append(".");
     _builder.newLineIfNotEmpty();
@@ -299,8 +288,7 @@ public class ArithmeticExtensionGenerator {
     String _article_2 = this.article(type);
     _builder.append(_article_2, " ");
     _builder.append(" ");
-    String _wrapperType_2 = this.wrapperType(type);
-    String _firstLower_2 = StringExtensions.toFirstLower(_wrapperType_2);
+    String _firstLower_2 = StringExtensions.toFirstLower(this.wrapperType(type));
     _builder.append(_firstLower_2, " ");
     _builder.append(".");
     _builder.newLineIfNotEmpty();
@@ -319,14 +307,14 @@ public class ArithmeticExtensionGenerator {
     _builder.append("@Inline(value=\"$1--\")");
     _builder.newLine();
     _builder.append("public static ");
-    String _wrapperType_3 = this.wrapperType(type);
-    _builder.append(_wrapperType_3);
+    String _wrapperType = this.wrapperType(type);
+    _builder.append(_wrapperType);
     _builder.append(" ");
     QualifiedName _methodName_2 = this._operatorMapping.getMethodName(OperatorMapping.MINUS_MINUS);
     _builder.append(_methodName_2);
     _builder.append("(");
-    String _wrapperType_4 = this.wrapperType(type);
-    _builder.append(_wrapperType_4);
+    String _wrapperType_1 = this.wrapperType(type);
+    _builder.append(_wrapperType_1);
     _builder.append(" ");
     char _charAt_9 = type.charAt(0);
     _builder.append(_charAt_9);
@@ -354,8 +342,7 @@ public class ArithmeticExtensionGenerator {
     String _article_3 = this.article(type);
     _builder.append(_article_3, " ");
     _builder.append(" ");
-    String _wrapperType_5 = this.wrapperType(type);
-    String _firstLower_3 = StringExtensions.toFirstLower(_wrapperType_5);
+    String _firstLower_3 = StringExtensions.toFirstLower(this.wrapperType(type));
     _builder.append(_firstLower_3, " ");
     _builder.append(".");
     _builder.newLineIfNotEmpty();
@@ -407,8 +394,7 @@ public class ArithmeticExtensionGenerator {
     String _article_4 = this.article(type);
     _builder.append(_article_4, " ");
     _builder.append(" ");
-    String _wrapperType_6 = this.wrapperType(type);
-    String _firstLower_4 = StringExtensions.toFirstLower(_wrapperType_6);
+    String _firstLower_4 = StringExtensions.toFirstLower(this.wrapperType(type));
     _builder.append(_firstLower_4, " ");
     _builder.append(".");
     _builder.newLineIfNotEmpty();
@@ -427,14 +413,14 @@ public class ArithmeticExtensionGenerator {
     _builder.append("@Inline(value=\"$1++\")");
     _builder.newLine();
     _builder.append("public static ");
-    String _wrapperType_7 = this.wrapperType(type);
-    _builder.append(_wrapperType_7);
+    String _wrapperType_2 = this.wrapperType(type);
+    _builder.append(_wrapperType_2);
     _builder.append(" ");
     QualifiedName _methodName_4 = this._operatorMapping.getMethodName(OperatorMapping.PLUS_PLUS);
     _builder.append(_methodName_4);
     _builder.append("(");
-    String _wrapperType_8 = this.wrapperType(type);
-    _builder.append(_wrapperType_8);
+    String _wrapperType_3 = this.wrapperType(type);
+    _builder.append(_wrapperType_3);
     _builder.append(" ");
     char _charAt_15 = type.charAt(0);
     _builder.append(_charAt_15);
@@ -466,9 +452,7 @@ public class ArithmeticExtensionGenerator {
         _builder.newLine();
         _builder.append(" ");
         _builder.append("* The binary <code>");
-        QualifiedName _methodName = this._operatorMapping.getMethodName(operator);
-        String _string = _methodName.toString();
-        String _replace = _string.replace("operator_", "");
+        String _replace = this._operatorMapping.getMethodName(operator).toString().replace("operator_", "");
         _builder.append(_replace, " ");
         _builder.append("</code> operator. This is the equivalent to the Java <code>");
         String _html = this.toHtml(operator);
@@ -483,8 +467,7 @@ public class ArithmeticExtensionGenerator {
         String _article = this.article(op1);
         _builder.append(_article, " ");
         _builder.append(" ");
-        String _wrapperType = this.wrapperType(op1);
-        String _firstLower = StringExtensions.toFirstLower(_wrapperType);
+        String _firstLower = StringExtensions.toFirstLower(this.wrapperType(op1));
         _builder.append(_firstLower, " ");
         _builder.append(".");
         _builder.newLineIfNotEmpty();
@@ -493,8 +476,7 @@ public class ArithmeticExtensionGenerator {
         String _article_1 = this.article(op2);
         _builder.append(_article_1, " ");
         _builder.append(" ");
-        String _wrapperType_1 = this.wrapperType(op2);
-        String _firstLower_1 = StringExtensions.toFirstLower(_wrapperType_1);
+        String _firstLower_1 = StringExtensions.toFirstLower(this.wrapperType(op2));
         _builder.append(_firstLower_1, " ");
         _builder.append(".");
         _builder.newLineIfNotEmpty();
@@ -521,8 +503,8 @@ public class ArithmeticExtensionGenerator {
         String _returnType = this.returnType(op1, operator, op2);
         _builder.append(_returnType);
         _builder.append(" ");
-        QualifiedName _methodName_1 = this._operatorMapping.getMethodName(operator);
-        _builder.append(_methodName_1);
+        QualifiedName _methodName = this._operatorMapping.getMethodName(operator);
+        _builder.append(_methodName);
         _builder.append("(");
         _builder.append(op1);
         _builder.append(" a, ");
@@ -552,8 +534,7 @@ public class ArithmeticExtensionGenerator {
     String _article_2 = this.article(op1);
     _builder.append(_article_2, " ");
     _builder.append(" ");
-    String _wrapperType_2 = this.wrapperType(op1);
-    String _firstLower_2 = StringExtensions.toFirstLower(_wrapperType_2);
+    String _firstLower_2 = StringExtensions.toFirstLower(this.wrapperType(op1));
     _builder.append(_firstLower_2, " ");
     _builder.append(".");
     _builder.newLineIfNotEmpty();
@@ -562,8 +543,7 @@ public class ArithmeticExtensionGenerator {
     String _article_3 = this.article(op2);
     _builder.append(_article_3, " ");
     _builder.append(" ");
-    String _wrapperType_3 = this.wrapperType(op2);
-    String _firstLower_3 = StringExtensions.toFirstLower(_wrapperType_3);
+    String _firstLower_3 = StringExtensions.toFirstLower(this.wrapperType(op2));
     _builder.append(_firstLower_3, " ");
     _builder.append(".");
     _builder.newLineIfNotEmpty();
@@ -582,8 +562,8 @@ public class ArithmeticExtensionGenerator {
     _builder.append("@Inline(value=\"$3.pow($1, $2)\", imported=Math.class)");
     _builder.newLine();
     _builder.append("public static double ");
-    QualifiedName _methodName_2 = this._operatorMapping.getMethodName(OperatorMapping.POWER);
-    _builder.append(_methodName_2);
+    QualifiedName _methodName_1 = this._operatorMapping.getMethodName(OperatorMapping.POWER);
+    _builder.append(_methodName_1);
     _builder.append("(");
     _builder.append(op1);
     _builder.append(" a, ");
@@ -612,8 +592,7 @@ public class ArithmeticExtensionGenerator {
     String _article_4 = this.article(op1);
     _builder.append(_article_4, " ");
     _builder.append(" ");
-    String _wrapperType_4 = this.wrapperType(op1);
-    String _firstLower_4 = StringExtensions.toFirstLower(_wrapperType_4);
+    String _firstLower_4 = StringExtensions.toFirstLower(this.wrapperType(op1));
     _builder.append(_firstLower_4, " ");
     _builder.append(".");
     _builder.newLineIfNotEmpty();
@@ -622,8 +601,7 @@ public class ArithmeticExtensionGenerator {
     String _article_5 = this.article(op2);
     _builder.append(_article_5, " ");
     _builder.append(" ");
-    String _wrapperType_5 = this.wrapperType(op2);
-    String _firstLower_5 = StringExtensions.toFirstLower(_wrapperType_5);
+    String _firstLower_5 = StringExtensions.toFirstLower(this.wrapperType(op2));
     _builder.append(_firstLower_5, " ");
     _builder.append(".");
     _builder.newLineIfNotEmpty();
@@ -641,8 +619,8 @@ public class ArithmeticExtensionGenerator {
     _builder.append("@Inline(value=\"($1 == $2)\", constantExpression=true)");
     _builder.newLine();
     _builder.append("public static boolean ");
-    QualifiedName _methodName_3 = this._operatorMapping.getMethodName(OperatorMapping.TRIPLE_EQUALS);
-    _builder.append(_methodName_3);
+    QualifiedName _methodName_2 = this._operatorMapping.getMethodName(OperatorMapping.TRIPLE_EQUALS);
+    _builder.append(_methodName_2);
     _builder.append("(");
     _builder.append(op1);
     _builder.append(" a, ");
@@ -671,8 +649,7 @@ public class ArithmeticExtensionGenerator {
     String _article_6 = this.article(op1);
     _builder.append(_article_6, " ");
     _builder.append(" ");
-    String _wrapperType_6 = this.wrapperType(op1);
-    String _firstLower_6 = StringExtensions.toFirstLower(_wrapperType_6);
+    String _firstLower_6 = StringExtensions.toFirstLower(this.wrapperType(op1));
     _builder.append(_firstLower_6, " ");
     _builder.append(".");
     _builder.newLineIfNotEmpty();
@@ -681,8 +658,7 @@ public class ArithmeticExtensionGenerator {
     String _article_7 = this.article(op2);
     _builder.append(_article_7, " ");
     _builder.append(" ");
-    String _wrapperType_7 = this.wrapperType(op2);
-    String _firstLower_7 = StringExtensions.toFirstLower(_wrapperType_7);
+    String _firstLower_7 = StringExtensions.toFirstLower(this.wrapperType(op2));
     _builder.append(_firstLower_7, " ");
     _builder.append(".");
     _builder.newLineIfNotEmpty();
@@ -700,8 +676,8 @@ public class ArithmeticExtensionGenerator {
     _builder.append("@Inline(value=\"($1 != $2)\", constantExpression=true)");
     _builder.newLine();
     _builder.append("public static boolean ");
-    QualifiedName _methodName_4 = this._operatorMapping.getMethodName(OperatorMapping.TRIPLE_NOT_EQUALS);
-    _builder.append(_methodName_4);
+    QualifiedName _methodName_3 = this._operatorMapping.getMethodName(OperatorMapping.TRIPLE_NOT_EQUALS);
+    _builder.append(_methodName_3);
     _builder.append("(");
     _builder.append(op1);
     _builder.append(" a, ");
@@ -759,8 +735,7 @@ public class ArithmeticExtensionGenerator {
   
   public String article(final String it) {
     String _switchResult = null;
-    String _lowerCase = it.toLowerCase();
-    String _substring = _lowerCase.substring(0, 1);
+    String _substring = it.toLowerCase().substring(0, 1);
     if (_substring != null) {
       switch (_substring) {
         case "a":
@@ -806,9 +781,7 @@ public class ArithmeticExtensionGenerator {
   }
   
   public String toHtml(final QualifiedName it) {
-    String _string = it.toString();
-    String _replace = _string.replace("<", "&lt;");
-    return _replace.replace(">", "&gt;");
+    return it.toString().replace("<", "&lt;").replace(">", "&gt;");
   }
   
   public String startMarker() {

@@ -27,10 +27,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
-import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.jar.Manifest;
 import org.eclipse.xtext.xbase.ide.types.ClasspathTypeDescriptor;
 import org.eclipse.xtext.xbase.ide.types.ITypeDescriptor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -49,21 +47,11 @@ public class ClasspathScanner {
   private Cache<Pair<URI, Collection<String>>, Iterable<ITypeDescriptor>> uriDescriptors;
   
   protected Cache<Pair<ClassLoader, Collection<String>>, Iterable<ITypeDescriptor>> createClassLoaderCache() {
-    CacheBuilder<Object, Object> _newBuilder = CacheBuilder.newBuilder();
-    CacheBuilder<Object, Object> _initialCapacity = _newBuilder.initialCapacity(8);
-    CacheBuilder<Object, Object> _concurrencyLevel = _initialCapacity.concurrencyLevel(2);
-    CacheBuilder<Object, Object> _maximumSize = _concurrencyLevel.maximumSize(32);
-    CacheBuilder<Object, Object> _expireAfterAccess = _maximumSize.expireAfterAccess(5, TimeUnit.MINUTES);
-    return _expireAfterAccess.<Pair<ClassLoader, Collection<String>>, Iterable<ITypeDescriptor>>build();
+    return CacheBuilder.newBuilder().initialCapacity(8).concurrencyLevel(2).maximumSize(32).expireAfterAccess(5, TimeUnit.MINUTES).<Pair<ClassLoader, Collection<String>>, Iterable<ITypeDescriptor>>build();
   }
   
   protected Cache<Pair<URI, Collection<String>>, Iterable<ITypeDescriptor>> createUriCache() {
-    CacheBuilder<Object, Object> _newBuilder = CacheBuilder.newBuilder();
-    CacheBuilder<Object, Object> _initialCapacity = _newBuilder.initialCapacity(64);
-    CacheBuilder<Object, Object> _concurrencyLevel = _initialCapacity.concurrencyLevel(2);
-    CacheBuilder<Object, Object> _maximumSize = _concurrencyLevel.maximumSize(256);
-    CacheBuilder<Object, Object> _expireAfterAccess = _maximumSize.expireAfterAccess(30, TimeUnit.MINUTES);
-    return _expireAfterAccess.<Pair<URI, Collection<String>>, Iterable<ITypeDescriptor>>build();
+    return CacheBuilder.newBuilder().initialCapacity(64).concurrencyLevel(2).maximumSize(256).expireAfterAccess(30, TimeUnit.MINUTES).<Pair<URI, Collection<String>>, Iterable<ITypeDescriptor>>build();
   }
   
   public Iterable<ITypeDescriptor> getDescriptors(final ClassLoader classLoader, final Collection<String> packagePrefixes) {
@@ -107,12 +95,10 @@ public class ClasspathScanner {
       if ((classpath == null)) {
         return Collections.<ITypeDescriptor>emptyList();
       }
-      Iterable<String> _split = ClasspathScanner.PROPERTY_CLASSPATH_SPLITTER.split(classpath);
       final Function1<String, Iterable<ITypeDescriptor>> _function = (String path) -> {
         return this.getDescriptors(new File(path).toURI(), packagePrefixes);
       };
-      Iterable<Iterable<ITypeDescriptor>> _map = IterableExtensions.<String, Iterable<ITypeDescriptor>>map(_split, _function);
-      _xblockexpression = Iterables.<ITypeDescriptor>concat(_map);
+      _xblockexpression = Iterables.<ITypeDescriptor>concat(IterableExtensions.<String, Iterable<ITypeDescriptor>>map(ClasspathScanner.PROPERTY_CLASSPATH_SPLITTER.split(classpath), _function));
     }
     return _xblockexpression;
   }
@@ -136,8 +122,7 @@ public class ClasspathScanner {
             if ((cl instanceof URLClassLoader)) {
               URL[] _uRLs = ((URLClassLoader)cl).getURLs();
               for (final URL url : _uRLs) {
-                URI _uRI = url.toURI();
-                uris.add(_uRI);
+                uris.add(url.toURI());
               }
             }
           }
@@ -145,8 +130,7 @@ public class ClasspathScanner {
         final Function1<URI, Iterable<ITypeDescriptor>> _function = (URI it) -> {
           return this.getDescriptors(it, packagePrefixes);
         };
-        Iterable<Iterable<ITypeDescriptor>> _map = IterableExtensions.<URI, Iterable<ITypeDescriptor>>map(uris, _function);
-        _xblockexpression = Iterables.<ITypeDescriptor>concat(_map);
+        _xblockexpression = Iterables.<ITypeDescriptor>concat(IterableExtensions.<URI, Iterable<ITypeDescriptor>>map(uris, _function));
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -209,9 +193,7 @@ public class ClasspathScanner {
         jarFile = _jarFile;
         List<Iterable<ITypeDescriptor>> descriptorCollections = null;
         if ((includeManifestEntries && (jarFile.getManifest() != null))) {
-          Manifest _manifest = jarFile.getManifest();
-          Attributes _mainAttributes = _manifest.getMainAttributes();
-          final String classpath = _mainAttributes.getValue("Class-Path");
+          final String classpath = jarFile.getManifest().getMainAttributes().getValue("Class-Path");
           if ((classpath != null)) {
             ArrayList<Iterable<ITypeDescriptor>> _arrayList = new ArrayList<Iterable<ITypeDescriptor>>();
             descriptorCollections = _arrayList;
@@ -222,7 +204,9 @@ public class ClasspathScanner {
                 boolean _isAbsolute = uri.isAbsolute();
                 boolean _not = (!_isAbsolute);
                 if (_not) {
-                  uri = new File(file.getParentFile(), path.replace("/", File.separator)).toURI();
+                  File _parentFile = file.getParentFile();
+                  String _replace = path.replace("/", File.separator);
+                  uri = new File(_parentFile, _replace).toURI();
                 }
                 Iterable<ITypeDescriptor> _descriptors = this.getDescriptors(uri, packagePrefixes);
                 descriptorCollections.add(_descriptors);

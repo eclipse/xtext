@@ -17,7 +17,6 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -34,12 +33,9 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class ContentAssistFragmentExtensions {
   public static String getFqFeatureName(final Assignment it) {
-    ParserRule _containingParserRule = GrammarUtil.containingParserRule(it);
-    String _name = _containingParserRule.getName();
-    String _firstUpper = StringExtensions.toFirstUpper(_name);
+    String _firstUpper = StringExtensions.toFirstUpper(GrammarUtil.containingParserRule(it).getName());
     String _plus = (_firstUpper + "_");
-    String _feature = it.getFeature();
-    String _firstUpper_1 = StringExtensions.toFirstUpper(_feature);
+    String _firstUpper_1 = StringExtensions.toFirstUpper(it.getFeature());
     return (_plus + _firstUpper_1);
   }
   
@@ -49,8 +45,7 @@ public class ContentAssistFragmentExtensions {
   }
   
   public static Grammar getSuperGrammar(final Grammar grammar) {
-    EList<Grammar> _usedGrammars = grammar.getUsedGrammars();
-    return IterableExtensions.<Grammar>head(_usedGrammars);
+    return IterableExtensions.<Grammar>head(grammar.getUsedGrammars());
   }
   
   public static Set<String> getFqFeatureNamesToExclude(final Grammar grammar) {
@@ -58,8 +53,7 @@ public class ContentAssistFragmentExtensions {
     final Grammar superGrammar = ContentAssistFragmentExtensions.getSuperGrammar(grammar);
     if ((superGrammar != null)) {
       final Set<String> superGrammarsFqFeatureNames = ContentAssistFragmentExtensions.computeFqFeatureNamesFromSuperGrammars(grammar);
-      Iterable<String> _computeFqFeatureNames = ContentAssistFragmentExtensions.computeFqFeatureNames(grammar);
-      final Set<String> thisGrammarFqFeatureNames = IterableExtensions.<String>toSet(_computeFqFeatureNames);
+      final Set<String> thisGrammarFqFeatureNames = IterableExtensions.<String>toSet(ContentAssistFragmentExtensions.computeFqFeatureNames(grammar));
       toExclude = Sets.<String>intersection(thisGrammarFqFeatureNames, superGrammarsFqFeatureNames);
     }
     return toExclude;
@@ -73,24 +67,20 @@ public class ContentAssistFragmentExtensions {
       final Function1<Grammar, Iterable<String>> _function = (Grammar it) -> {
         return ContentAssistFragmentExtensions.computeFqFeatureNames(it);
       };
-      Iterable<Iterable<String>> _map = IterableExtensions.<Grammar, Iterable<String>>map(superGrammars, _function);
-      Iterable<String> _flatten = Iterables.<String>concat(_map);
-      _xblockexpression = IterableExtensions.<String>toSet(_flatten);
+      _xblockexpression = IterableExtensions.<String>toSet(Iterables.<String>concat(IterableExtensions.<Grammar, Iterable<String>>map(superGrammars, _function)));
     }
     return _xblockexpression;
   }
   
   private static Iterable<String> computeFqFeatureNames(final Grammar grammar) {
-    List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(grammar);
     final Function1<Assignment, String> _function = (Assignment it) -> {
       return ContentAssistFragmentExtensions.getFqFeatureName(it);
     };
-    List<String> _map = ListExtensions.<Assignment, String>map(_containedAssignments, _function);
-    EList<AbstractRule> _rules = grammar.getRules();
+    List<String> _map = ListExtensions.<Assignment, String>map(GrammarUtil.containedAssignments(grammar), _function);
     final Function1<AbstractRule, String> _function_1 = (AbstractRule it) -> {
       return ContentAssistFragmentExtensions.getFqFeatureName(it);
     };
-    List<String> _map_1 = ListExtensions.<AbstractRule, String>map(_rules, _function_1);
+    List<String> _map_1 = ListExtensions.<AbstractRule, String>map(grammar.getRules(), _function_1);
     return Iterables.<String>concat(_map, _map_1);
   }
   

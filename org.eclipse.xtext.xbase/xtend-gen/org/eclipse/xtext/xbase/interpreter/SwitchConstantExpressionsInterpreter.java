@@ -121,8 +121,7 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
       if (feature instanceof XVariableDeclaration) {
         if (((!((XVariableDeclaration)feature).isWriteable()) && (((XVariableDeclaration)feature).getRight() != null))) {
           _matched=true;
-          XExpression _right = ((XVariableDeclaration)feature).getRight();
-          return this.evaluateAssociatedExpression(_right, ctx);
+          return this.evaluateAssociatedExpression(((XVariableDeclaration)feature).getRight(), ctx);
         }
       }
     }
@@ -137,14 +136,12 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
           boolean _tripleNotEquals = (_switch != null);
           if (_tripleNotEquals) {
             _matched_1=true;
-            XExpression _switch_1 = ((XSwitchExpression)container).getSwitch();
-            return this.evaluate(_switch_1, ctx);
+            return this.evaluate(((XSwitchExpression)container).getSwitch(), ctx);
           }
         }
       }
     }
-    JvmIdentifiableElement _feature_1 = it.getFeature();
-    String _simpleName = _feature_1.getSimpleName();
+    String _simpleName = it.getFeature().getSimpleName();
     String _plus = ("Couldn\'t resolve feature " + _simpleName);
     throw new UnresolvableFeatureException(_plus, it);
   }

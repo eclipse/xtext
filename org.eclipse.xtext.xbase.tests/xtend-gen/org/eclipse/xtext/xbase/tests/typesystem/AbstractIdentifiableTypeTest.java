@@ -9,10 +9,8 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterables;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -53,7 +51,6 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   }
   
   protected List<JvmIdentifiableElement> findIdentifiables(final XExpression expression) {
-    TreeIterator<EObject> _eAll = EcoreUtil2.eAll(expression);
     final Function1<EObject, List<? extends EObject>> _function = (EObject it) -> {
       List<? extends EObject> _switchResult = null;
       boolean _matched = false;
@@ -66,10 +63,6 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       }
       return _switchResult;
     };
-    Iterator<List<? extends EObject>> _map = IteratorExtensions.<EObject, List<? extends EObject>>map(_eAll, _function);
-    Iterable<List<? extends EObject>> _iterable = IteratorExtensions.<List<? extends EObject>>toIterable(_map);
-    Iterable<EObject> _flatten = Iterables.<EObject>concat(_iterable);
-    Set<EObject> _set = IterableExtensions.<EObject>toSet(_flatten);
     final Function1<EObject, Boolean> _function_1 = (EObject it) -> {
       boolean _and = false;
       if (!(it != null)) {
@@ -94,9 +87,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       }
       return Boolean.valueOf(_and);
     };
-    Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_set, _function_1);
-    Iterable<JvmIdentifiableElement> _filter_1 = Iterables.<JvmIdentifiableElement>filter(_filter, JvmIdentifiableElement.class);
-    final List<JvmIdentifiableElement> identifiables = IterableExtensions.<JvmIdentifiableElement>toList(_filter_1);
+    final List<JvmIdentifiableElement> identifiables = IterableExtensions.<JvmIdentifiableElement>toList(Iterables.<JvmIdentifiableElement>filter(IterableExtensions.<EObject>filter(IterableExtensions.<EObject>toSet(Iterables.<EObject>concat(IteratorExtensions.<List<? extends EObject>>toIterable(IteratorExtensions.<EObject, List<? extends EObject>>map(EcoreUtil2.eAll(expression), _function)))), _function_1), JvmIdentifiableElement.class));
     final Function1<JvmIdentifiableElement, Integer> _function_2 = (JvmIdentifiableElement it) -> {
       int _xblockexpression = (int) 0;
       {
@@ -105,9 +96,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
         if ((node != null)) {
           _xifexpression = node.getOffset();
         } else {
-          EObject _eContainer = it.eContainer();
-          ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(_eContainer);
-          _xifexpression = _findActualNodeFor.getOffset();
+          _xifexpression = NodeModelUtils.findActualNodeFor(it.eContainer()).getOffset();
         }
         _xblockexpression = _xifexpression;
       }

@@ -89,20 +89,18 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
     EClass _createEClass = EcoreFactory.eINSTANCE.createEClass();
     this._jvmTypesBuilder.<EClass>operator_add(_contents, _createEClass);
     this.assoc.installDerivedState(this.resource, true);
-    Assert.assertFalse(((JvmDeclaredType) this.resource.getContents().get(1)).isAbstract());
+    EObject _get = this.resource.getContents().get(1);
+    Assert.assertFalse(((JvmDeclaredType) _get).isAbstract());
+    this.resource.getContents().clear();
     EList<EObject> _contents_1 = this.resource.getContents();
-    _contents_1.clear();
-    EList<EObject> _contents_2 = this.resource.getContents();
     EClass _createEClass_1 = EcoreFactory.eINSTANCE.createEClass();
-    this._jvmTypesBuilder.<EClass>operator_add(_contents_2, _createEClass_1);
+    this._jvmTypesBuilder.<EClass>operator_add(_contents_1, _createEClass_1);
     this.assoc.installDerivedState(this.resource, false);
-    EList<EObject> _contents_3 = this.resource.getContents();
-    EObject _get = _contents_3.get(1);
-    final JvmGenericType type = ((JvmGenericType) _get);
+    EObject _get_1 = this.resource.getContents().get(1);
+    final JvmGenericType type = ((JvmGenericType) _get_1);
     Assert.assertTrue(type.isAbstract());
     Assert.assertEquals(1, IterableExtensions.size(Iterables.<JvmConstructor>filter(type.getMembers(), JvmConstructor.class)));
-    EList<JvmTypeReference> _superTypes = type.getSuperTypes();
-    JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_superTypes);
+    JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(type.getSuperTypes());
     String _qualifiedName = null;
     if (_head!=null) {
       _qualifiedName=_head.getQualifiedName();

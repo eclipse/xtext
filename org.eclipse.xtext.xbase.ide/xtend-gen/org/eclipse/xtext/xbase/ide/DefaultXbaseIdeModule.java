@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.ide;
 
 import com.google.inject.Binder;
-import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xtext.ide.DefaultIdeModule;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
@@ -32,8 +31,7 @@ public class DefaultXbaseIdeModule extends DefaultIdeModule {
   protected final static ClasspathScanner classpathScanner = new ClasspathScanner();
   
   public void configureClasspathScanner(final Binder binder) {
-    AnnotatedBindingBuilder<ClasspathScanner> _bind = binder.<ClasspathScanner>bind(ClasspathScanner.class);
-    _bind.toInstance(DefaultXbaseIdeModule.classpathScanner);
+    binder.<ClasspathScanner>bind(ClasspathScanner.class).toInstance(DefaultXbaseIdeModule.classpathScanner);
   }
   
   public Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTrackerProvider() {

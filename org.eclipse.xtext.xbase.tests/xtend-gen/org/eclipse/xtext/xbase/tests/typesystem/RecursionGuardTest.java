@@ -30,11 +30,9 @@ public class RecursionGuardTest {
     final Procedure1<RecursionGuard<String>> _function = (RecursionGuard<String> it) -> {
       try {
         final String s = "literal";
-        boolean _tryNext = it.tryNext(s);
-        Assert.assertTrue(_tryNext);
+        Assert.assertTrue(it.tryNext(s));
         it.done(s);
-        Object _get = this._reflectExtensions.<Object>get(it, "head");
-        Assert.assertNull(_get);
+        Assert.assertNull(this._reflectExtensions.<Object>get(it, "head"));
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
@@ -47,10 +45,8 @@ public class RecursionGuardTest {
     RecursionGuard<String> _recursionGuard = new RecursionGuard<String>();
     final Procedure1<RecursionGuard<String>> _function = (RecursionGuard<String> it) -> {
       final String s = "literal";
-      boolean _tryNext = it.tryNext(s);
-      Assert.assertTrue(_tryNext);
-      boolean _tryNext_1 = it.tryNext(s);
-      Assert.assertFalse(_tryNext_1);
+      Assert.assertTrue(it.tryNext(s));
+      Assert.assertFalse(it.tryNext(s));
     };
     ObjectExtensions.<RecursionGuard<String>>operator_doubleArrow(_recursionGuard, _function);
   }
@@ -59,10 +55,8 @@ public class RecursionGuardTest {
   public void tryNextWithDifferentValuesYieldsTrue() {
     RecursionGuard<String> _recursionGuard = new RecursionGuard<String>();
     final Procedure1<RecursionGuard<String>> _function = (RecursionGuard<String> it) -> {
-      boolean _tryNext = it.tryNext("first");
-      Assert.assertTrue(_tryNext);
-      boolean _tryNext_1 = it.tryNext("second");
-      Assert.assertTrue(_tryNext_1);
+      Assert.assertTrue(it.tryNext("first"));
+      Assert.assertTrue(it.tryNext("second"));
     };
     ObjectExtensions.<RecursionGuard<String>>operator_doubleArrow(_recursionGuard, _function);
   }
@@ -72,11 +66,9 @@ public class RecursionGuardTest {
     RecursionGuard<String> _recursionGuard = new RecursionGuard<String>();
     final Procedure1<RecursionGuard<String>> _function = (RecursionGuard<String> it) -> {
       try {
-        boolean _tryNext = it.tryNext("dummy");
-        Assert.assertTrue(_tryNext);
+        Assert.assertTrue(it.tryNext("dummy"));
         it.clear();
-        Object _get = this._reflectExtensions.<Object>get(it, "head");
-        Assert.assertNull(_get);
+        Assert.assertNull(this._reflectExtensions.<Object>get(it, "head"));
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
@@ -89,8 +81,7 @@ public class RecursionGuardTest {
     RecursionGuard<String> _recursionGuard = new RecursionGuard<String>();
     final Procedure1<RecursionGuard<String>> _function = (RecursionGuard<String> it) -> {
       final String s = "literal";
-      boolean _tryNext = it.tryNext(s);
-      Assert.assertTrue(_tryNext);
+      Assert.assertTrue(it.tryNext(s));
       it.done(s);
       it.done(s);
     };

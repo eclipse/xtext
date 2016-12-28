@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -49,9 +48,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
     final List<XClosure> closures = this.findClosures(expression);
     Assert.assertFalse(closures.isEmpty());
     Assert.assertEquals(((List<String>)Conversions.doWrapArray(types)).size(), closures.size());
-    IBatchTypeResolver _typeResolver = this.getTypeResolver();
-    XClosure _head = IterableExtensions.<XClosure>head(closures);
-    final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
+    final IResolvedTypes resolvedTypes = this.getTypeResolver().resolveTypes(IterableExtensions.<XClosure>head(closures));
     final ArrayList<Object> result = CollectionLiterals.<Object>newArrayList();
     final Procedure2<XClosure, Integer> _function = (XClosure closure, Integer index) -> {
       final LightweightTypeReference closureType = resolvedTypes.getActualType(closure);
@@ -97,22 +94,18 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
   }
   
   public String getEquivalent(final ParameterizedTypeReference type) {
-    List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
-    boolean _isEmpty = _typeArguments.isEmpty();
+    boolean _isEmpty = type.getTypeArguments().isEmpty();
     if (_isEmpty) {
-      JvmType _type = type.getType();
-      return _type.getSimpleName();
+      return type.getType().getSimpleName();
     }
     StringConcatenation _builder = new StringConcatenation();
-    JvmType _type_1 = type.getType();
-    String _simpleName = _type_1.getSimpleName();
+    String _simpleName = type.getType().getSimpleName();
     _builder.append(_simpleName);
     _builder.append("<");
-    List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
     final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
       return it.getSimpleName();
     };
-    String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments_1, ", ", _function);
+    String _join = IterableExtensions.<LightweightTypeReference>join(type.getTypeArguments(), ", ", _function);
     _builder.append(_join);
     _builder.append(">");
     return _builder.toString();

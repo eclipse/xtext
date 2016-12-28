@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -56,17 +55,15 @@ public class ContentAssistFragmentTestLangJvmModelInferrer extends AbstractModel
    *            <code>true</code>.
    */
   protected void _infer(final ContentAssistFragmentTestLanguageRoot element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
-    JvmGenericType _class = this._jvmTypesBuilder.toClass(element, "my.test.MyClass");
     final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
       EList<JvmMember> _members = it.getMembers();
-      JvmTypeReference _typeRef = this._typeReferenceBuilder.typeRef(Void.class);
       final Procedure1<JvmOperation> _function_1 = (JvmOperation it_1) -> {
         this._jvmTypesBuilder.setBody(it_1, element.getExpression());
       };
-      JvmOperation _method = this._jvmTypesBuilder.toMethod(element, "hello", _typeRef, _function_1);
+      JvmOperation _method = this._jvmTypesBuilder.toMethod(element, "hello", this._typeReferenceBuilder.typeRef(Void.class), _function_1);
       this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
     };
-    acceptor.<JvmGenericType>accept(_class, _function);
+    acceptor.<JvmGenericType>accept(this._jvmTypesBuilder.toClass(element, "my.test.MyClass"), _function);
   }
   
   public void infer(final EObject element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {

@@ -73,9 +73,7 @@ public class XbaseFormatterTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      String _trim = _string.trim();
-      it.setExpectation(_trim);
+      it.setExpectation(_builder.toString().trim());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("  ");
       _builder_1.append("{  ");
