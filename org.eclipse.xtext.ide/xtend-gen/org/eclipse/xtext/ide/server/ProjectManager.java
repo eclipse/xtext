@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -96,15 +95,13 @@ public class ProjectManager {
   
   public IncrementalBuilder.Result doInitialBuild(final CancelIndicator cancelIndicator) {
     final ArrayList<URI> uris = CollectionLiterals.<URI>newArrayList();
-    Set<? extends ISourceFolder> _sourceFolders = this.projectConfig.getSourceFolders();
     final Consumer<ISourceFolder> _function = (ISourceFolder it) -> {
-      URI _path = it.getPath();
       final IAcceptor<URI> _function_1 = (URI it_1) -> {
         uris.add(it_1);
       };
-      this.fileSystemScanner.scan(_path, _function_1);
+      this.fileSystemScanner.scan(it.getPath(), _function_1);
     };
-    _sourceFolders.forEach(_function);
+    this.projectConfig.getSourceFolders().forEach(_function);
     return this.doBuild(uris, CollectionLiterals.<URI>emptyList(), cancelIndicator);
   }
   
@@ -116,10 +113,7 @@ public class ProjectManager {
     final IncrementalBuilder.Result result = this.incrementalBuilder.build(request, _function);
     this.indexState = result.getIndexState();
     this.resourceSet = request.getResourceSet();
-    Map<String, ResourceDescriptionsData> _get = this.indexProvider.get();
-    String _name = this.projectDescription.getName();
-    ResourceDescriptionsData _resourceDescriptions = this.indexState.getResourceDescriptions();
-    _get.put(_name, _resourceDescriptions);
+    this.indexProvider.get().put(this.projectDescription.getName(), this.indexState.getResourceDescriptions());
     return result;
   }
   
@@ -127,10 +121,8 @@ public class ProjectManager {
     BuildRequest _buildRequest = new BuildRequest();
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
       it.setBaseDir(this.baseDir);
-      ResourceDescriptionsData _resourceDescriptions = this.indexState.getResourceDescriptions();
-      ResourceDescriptionsData _copy = _resourceDescriptions.copy();
-      Source2GeneratedMapping _fileMappings = this.indexState.getFileMappings();
-      Source2GeneratedMapping _copy_1 = _fileMappings.copy();
+      ResourceDescriptionsData _copy = this.indexState.getResourceDescriptions().copy();
+      Source2GeneratedMapping _copy_1 = this.indexState.getFileMappings().copy();
       IndexState _indexState = new IndexState(_copy, _copy_1);
       it.setState(_indexState);
       it.setResourceSet(this.createFreshResourceSet(it.getState().getResourceDescriptions()));
@@ -153,8 +145,7 @@ public class ProjectManager {
       ProjectConfigAdapter.install(it, this.projectConfig);
       Map<String, ResourceDescriptionsData> _get_1 = this.indexProvider.get();
       final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_get_1, it);
-      String _name = this.projectDescription.getName();
-      index.setContainer(_name, newIndex);
+      index.setContainer(this.projectDescription.getName(), newIndex);
       this.externalContentSupport.configureResourceSet(it, this.openedDocumentsContentProvider);
     };
     return ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);

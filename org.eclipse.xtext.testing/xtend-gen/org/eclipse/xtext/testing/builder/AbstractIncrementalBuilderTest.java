@@ -15,7 +15,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,6 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.build.BuildRequest;
@@ -94,12 +92,9 @@ public abstract class AbstractIncrementalBuilderTest {
   protected List<Issue> clean() {
     List<Issue> _xblockexpression = null;
     {
-      ArrayListMultimap<URI, URI> _create = ArrayListMultimap.<URI, URI>create();
-      this.generated = _create;
-      ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
-      this.deleted = _newArrayList;
-      ArrayList<Issue> _newArrayList_1 = CollectionLiterals.<Issue>newArrayList();
-      _xblockexpression = this.issues = _newArrayList_1;
+      this.generated = ArrayListMultimap.<URI, URI>create();
+      this.deleted = CollectionLiterals.<URI>newArrayList();
+      _xblockexpression = this.issues = CollectionLiterals.<Issue>newArrayList();
     }
     return _xblockexpression;
   }
@@ -107,23 +102,18 @@ public abstract class AbstractIncrementalBuilderTest {
   protected IndexState build(final BuildRequest buildRequest) {
     this.clean();
     final Function1<URI, IResourceServiceProvider> _function = (URI it) -> {
-      IResourceServiceProvider.Registry _languages = this.getLanguages();
-      return _languages.getResourceServiceProvider(it);
+      return this.getLanguages().getResourceServiceProvider(it);
     };
-    IncrementalBuilder.Result _build = this.incrementalBuilder.build(buildRequest, _function);
-    IndexState _indexState = _build.getIndexState();
-    this.indexState = _indexState;
+    this.indexState = this.incrementalBuilder.build(buildRequest, _function).getIndexState();
     return this.indexState;
   }
   
   protected void withOutputConfig(final BuildRequest it, final Procedure1<? super OutputConfiguration> init) {
-    Set<OutputConfiguration> _outputConfigurations = this.configurationProvider.getOutputConfigurations();
-    final OutputConfiguration config = IterableExtensions.<OutputConfiguration>head(_outputConfigurations);
+    final OutputConfiguration config = IterableExtensions.<OutputConfiguration>head(this.configurationProvider.getOutputConfigurations());
     init.apply(config);
     Pair<String, Set<OutputConfiguration>> _mappedTo = Pair.<String, Set<OutputConfiguration>>of(this.languageName, Collections.<OutputConfiguration>unmodifiableSet(CollectionLiterals.<OutputConfiguration>newHashSet(config)));
     final OutputConfigurationAdapter adapter = new OutputConfigurationAdapter(Collections.<String, Set<OutputConfiguration>>unmodifiableMap(CollectionLiterals.<String, Set<OutputConfiguration>>newHashMap(_mappedTo)));
-    XtextResourceSet _resourceSet = it.getResourceSet();
-    EList<Adapter> _eAdapters = _resourceSet.eAdapters();
+    EList<Adapter> _eAdapters = it.getResourceSet().eAdapters();
     _eAdapters.add(adapter);
   }
   
@@ -132,20 +122,14 @@ public abstract class AbstractIncrementalBuilderTest {
   protected BuildRequest newBuildRequest(final Procedure1<? super BuildRequest> init) {
     BuildRequest _buildRequest = new BuildRequest();
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
-      ResourceDescriptionsData _resourceDescriptions = this.indexState.getResourceDescriptions();
-      final ResourceDescriptionsData newIndex = _resourceDescriptions.copy();
-      URI _uri = this.uri("");
-      it.setBaseDir(_uri);
+      final ResourceDescriptionsData newIndex = this.indexState.getResourceDescriptions().copy();
+      it.setBaseDir(this.uri(""));
       XtextResourceSet _get = this.resourceSetProvider.get();
       final Procedure1<XtextResourceSet> _function_1 = (XtextResourceSet it_1) -> {
-        URIConverter _uRIConverter = it_1.getURIConverter();
-        EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
-        _uRIHandlers.clear();
-        URIConverter _uRIConverter_1 = it_1.getURIConverter();
-        EList<URIHandler> _uRIHandlers_1 = _uRIConverter_1.getURIHandlers();
-        _uRIHandlers_1.add(this.inMemoryURIHandler);
-        ClassLoader _classLoader = AbstractIncrementalBuilderTest.class.getClassLoader();
-        it_1.setClasspathURIContext(_classLoader);
+        it_1.getURIConverter().getURIHandlers().clear();
+        EList<URIHandler> _uRIHandlers = it_1.getURIConverter().getURIHandlers();
+        _uRIHandlers.add(this.inMemoryURIHandler);
+        it_1.setClasspathURIContext(AbstractIncrementalBuilderTest.class.getClassLoader());
         ProjectDescription _projectDescription = new ProjectDescription();
         final Procedure1<ProjectDescription> _function_2 = (ProjectDescription it_2) -> {
           it_2.setName("test-project");
@@ -154,8 +138,7 @@ public abstract class AbstractIncrementalBuilderTest {
         projectDescription.attachToEmfObject(it_1);
         Map<String, ResourceDescriptionsData> _emptyMap = CollectionLiterals.<String, ResourceDescriptionsData>emptyMap();
         final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_emptyMap, it_1);
-        String _name = projectDescription.getName();
-        index.setContainer(_name, newIndex);
+        index.setContainer(projectDescription.getName(), newIndex);
       };
       XtextResourceSet _doubleArrow = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function_1);
       it.setResourceSet(_doubleArrow);
@@ -174,8 +157,7 @@ public abstract class AbstractIncrementalBuilderTest {
         this.generated.put(source, target);
       };
       it.setAfterGenerateFile(_function_4);
-      Source2GeneratedMapping _fileMappings = this.indexState.getFileMappings();
-      Source2GeneratedMapping _copy = _fileMappings.copy();
+      Source2GeneratedMapping _copy = this.indexState.getFileMappings().copy();
       IndexState _indexState = new IndexState(newIndex, _copy);
       it.setState(_indexState);
     };
@@ -186,8 +168,7 @@ public abstract class AbstractIncrementalBuilderTest {
   
   protected URI delete(final URI uri) {
     try {
-      Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-      this.inMemoryURIHandler.delete(uri, _emptyMap);
+      this.inMemoryURIHandler.delete(uri, CollectionLiterals.<Object, Object>emptyMap());
       return uri;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -201,12 +182,10 @@ public abstract class AbstractIncrementalBuilderTest {
   protected URI operator_minus(final String path, final String content) {
     try {
       final URI uri = this.uri(path);
-      Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-      OutputStream _createOutputStream = this.inMemoryURIHandler.createOutputStream(uri, _emptyMap);
+      OutputStream _createOutputStream = this.inMemoryURIHandler.createOutputStream(uri, CollectionLiterals.<Object, Object>emptyMap());
       final Procedure1<OutputStream> _function = (OutputStream it) -> {
         try {
-          byte[] _bytes = content.getBytes();
-          it.write(_bytes);
+          it.write(content.getBytes());
           it.close();
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
@@ -222,8 +201,7 @@ public abstract class AbstractIncrementalBuilderTest {
   protected boolean containsSuffix(final Iterable<? extends URI> uris, final String... suffixes) {
     final Function1<String, Boolean> _function = (String suffix) -> {
       final Function1<URI, Boolean> _function_1 = (URI uri) -> {
-        String _string = uri.toString();
-        return Boolean.valueOf(_string.endsWith(suffix));
+        return Boolean.valueOf(uri.toString().endsWith(suffix));
       };
       return Boolean.valueOf(IterableExtensions.exists(uris, _function_1));
     };

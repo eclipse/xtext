@@ -21,7 +21,6 @@ import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.Scope;
 import org.eclipse.xtext.xtext.wizard.TextFile;
-import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @SuppressWarnings("all")
 public class PomFile extends TextFile {
@@ -51,9 +50,7 @@ public class PomFile extends TextFile {
     _builder.newLine();
     {
       ProjectDescriptor _project = this.getProject();
-      ProjectDescriptor _project_1 = this.getProject();
-      WizardConfiguration _config = _project_1.getConfig();
-      ParentProjectDescriptor _parentProject = _config.getParentProject();
+      ParentProjectDescriptor _parentProject = this.getProject().getConfig().getParentProject();
       boolean _notEquals = (!Objects.equal(_project, _parentProject));
       if (_notEquals) {
         _builder.append("\t");
@@ -62,19 +59,14 @@ public class PomFile extends TextFile {
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("<groupId>");
-        ProjectDescriptor _project_2 = this.getProject();
-        WizardConfiguration _config_1 = _project_2.getConfig();
-        String _baseName = _config_1.getBaseName();
+        String _baseName = this.getProject().getConfig().getBaseName();
         _builder.append(_baseName, "\t\t");
         _builder.append("</groupId>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("<artifactId>");
-        ProjectDescriptor _project_3 = this.getProject();
-        WizardConfiguration _config_2 = _project_3.getConfig();
-        ParentProjectDescriptor _parentProject_1 = _config_2.getParentProject();
-        String _name = _parentProject_1.getName();
+        String _name = this.getProject().getConfig().getParentProject().getName();
         _builder.append(_name, "\t\t");
         _builder.append("</artifactId>");
         _builder.newLineIfNotEmpty();
@@ -83,18 +75,13 @@ public class PomFile extends TextFile {
         _builder.append("<version>1.0.0-SNAPSHOT</version>");
         _builder.newLine();
         {
-          ProjectDescriptor _project_4 = this.getProject();
-          WizardConfiguration _config_3 = _project_4.getConfig();
-          ProjectLayout _projectLayout = _config_3.getProjectLayout();
+          ProjectLayout _projectLayout = this.getProject().getConfig().getProjectLayout();
           boolean _equals = Objects.equal(_projectLayout, ProjectLayout.FLAT);
           if (_equals) {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("<relativePath>../");
-            ProjectDescriptor _project_5 = this.getProject();
-            WizardConfiguration _config_4 = _project_5.getConfig();
-            ParentProjectDescriptor _parentProject_2 = _config_4.getParentProject();
-            String _name_1 = _parentProject_2.getName();
+            String _name_1 = this.getProject().getConfig().getParentProject().getName();
             _builder.append(_name_1, "\t\t");
             _builder.append("/pom.xml</relativePath>");
             _builder.newLineIfNotEmpty();
@@ -106,9 +93,7 @@ public class PomFile extends TextFile {
       } else {
         _builder.append("\t");
         _builder.append("<groupId>");
-        ProjectDescriptor _project_6 = this.getProject();
-        WizardConfiguration _config_5 = _project_6.getConfig();
-        String _baseName_1 = _config_5.getBaseName();
+        String _baseName_1 = this.getProject().getConfig().getBaseName();
         _builder.append(_baseName_1, "\t");
         _builder.append("</groupId>");
         _builder.newLineIfNotEmpty();
@@ -119,8 +104,7 @@ public class PomFile extends TextFile {
     }
     _builder.append("\t");
     _builder.append("<artifactId>");
-    ProjectDescriptor _project_7 = this.getProject();
-    String _name_2 = _project_7.getName();
+    String _name_2 = this.getProject().getName();
     _builder.append(_name_2, "\t");
     _builder.append("</artifactId>");
     _builder.newLineIfNotEmpty();
@@ -135,16 +119,14 @@ public class PomFile extends TextFile {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      ProjectDescriptor _project_8 = this.getProject();
-      boolean _isEclipsePluginProject = _project_8.isEclipsePluginProject();
+      boolean _isEclipsePluginProject = this.getProject().isEclipsePluginProject();
       boolean _not = (!_isEclipsePluginProject);
       if (_not) {
         _builder.append("\t");
         _builder.append("<dependencies>");
         _builder.newLine();
         {
-          ProjectDescriptor _project_9 = this.getProject();
-          Set<? extends ProjectDescriptor> _upstreamProjects = _project_9.getUpstreamProjects();
+          Set<? extends ProjectDescriptor> _upstreamProjects = this.getProject().getUpstreamProjects();
           for(final ProjectDescriptor p : _upstreamProjects) {
             _builder.append("\t");
             _builder.append("\t");
@@ -175,17 +157,14 @@ public class PomFile extends TextFile {
           }
         }
         {
-          ProjectDescriptor _project_10 = this.getProject();
-          Set<ExternalDependency> _externalDependencies = _project_10.getExternalDependencies();
           final Function1<ExternalDependency, ExternalDependency.MavenCoordinates> _function = (ExternalDependency it) -> {
             return it.getMaven();
           };
-          Iterable<ExternalDependency.MavenCoordinates> _map = IterableExtensions.<ExternalDependency, ExternalDependency.MavenCoordinates>map(_externalDependencies, _function);
           final Function1<ExternalDependency.MavenCoordinates, Boolean> _function_1 = (ExternalDependency.MavenCoordinates it) -> {
             String _artifactId = it.getArtifactId();
             return Boolean.valueOf((_artifactId != null));
           };
-          Iterable<ExternalDependency.MavenCoordinates> _filter = IterableExtensions.<ExternalDependency.MavenCoordinates>filter(_map, _function_1);
+          Iterable<ExternalDependency.MavenCoordinates> _filter = IterableExtensions.<ExternalDependency.MavenCoordinates>filter(IterableExtensions.<ExternalDependency, ExternalDependency.MavenCoordinates>map(this.getProject().getExternalDependencies(), _function), _function_1);
           for(final ExternalDependency.MavenCoordinates dep : _filter) {
             _builder.append("\t");
             _builder.append("\t");
@@ -223,8 +202,7 @@ public class PomFile extends TextFile {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("<scope>");
-                Scope _scope_1 = dep.getScope();
-                String _mavenNotation = _scope_1.getMavenNotation();
+                String _mavenNotation = dep.getScope().getMavenNotation();
                 _builder.append(_mavenNotation, "\t\t\t");
                 _builder.append("</scope>");
                 _builder.newLineIfNotEmpty();

@@ -34,7 +34,6 @@ public class SingletonClassAnnotation implements IClassAnnotation {
   
   @Override
   public String toString() {
-    CharSequence _generate = this.generate();
-    return _generate.toString();
+    return this.generate().toString();
   }
 }

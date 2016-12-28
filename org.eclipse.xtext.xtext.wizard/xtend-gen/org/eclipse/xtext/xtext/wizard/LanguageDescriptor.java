@@ -25,10 +25,7 @@ public class LanguageDescriptor {
     public static LanguageDescriptor.FileExtensions fromString(final String fileExtensions) {
       LanguageDescriptor.FileExtensions _xblockexpression = null;
       {
-        Splitter _on = Splitter.on(",");
-        Splitter _trimResults = _on.trimResults();
-        Splitter _omitEmptyStrings = _trimResults.omitEmptyStrings();
-        final Iterable<String> splitFileExtensions = _omitEmptyStrings.split(fileExtensions);
+        final Iterable<String> splitFileExtensions = Splitter.on(",").trimResults().omitEmptyStrings().split(fileExtensions);
         _xblockexpression = new LanguageDescriptor.FileExtensions(splitFileExtensions);
       }
       return _xblockexpression;
@@ -72,14 +69,12 @@ public class LanguageDescriptor {
   }
   
   public String getBasePackagePath() {
-    String _basePackage = this.getBasePackage();
-    return _basePackage.replaceAll("\\.", "/");
+    return this.getBasePackage().replaceAll("\\.", "/");
   }
   
   public String getSimpleName() {
     final String[] segments = this.name.split("\\.");
-    String _last = IterableExtensions.<String>last(((Iterable<String>)Conversions.doWrapArray(segments)));
-    return StringExtensions.toFirstUpper(_last);
+    return StringExtensions.toFirstUpper(IterableExtensions.<String>last(((Iterable<String>)Conversions.doWrapArray(segments))));
   }
   
   public String getNsURI() {

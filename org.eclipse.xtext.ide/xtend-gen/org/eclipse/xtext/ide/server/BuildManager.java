@@ -135,11 +135,8 @@ public class BuildManager {
     final ArrayList<IResourceDescription.Delta> result = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     for (final ProjectDescription description : sortedDescriptions) {
       {
-        String _name = description.getName();
-        ProjectManager _projectManager = this.workspaceManager.getProjectManager(_name);
-        final IncrementalBuilder.Result partialresult = _projectManager.doInitialBuild(indicator);
-        List<IResourceDescription.Delta> _affectedResources = partialresult.getAffectedResources();
-        result.addAll(_affectedResources);
+        final IncrementalBuilder.Result partialresult = this.workspaceManager.getProjectManager(description.getName()).doInitialBuild(indicator);
+        result.addAll(partialresult.getAffectedResources());
       }
     }
     return result;
@@ -150,16 +147,14 @@ public class BuildManager {
     final HashMultimap<ProjectDescription, URI> project2dirty = HashMultimap.<ProjectDescription, URI>create();
     for (final URI dirty : allDirty) {
       {
-        ProjectManager _projectManager = this.workspaceManager.getProjectManager(dirty);
-        final ProjectDescription projectManager = _projectManager.getProjectDescription();
+        final ProjectDescription projectManager = this.workspaceManager.getProjectManager(dirty).getProjectDescription();
         project2dirty.put(projectManager, dirty);
       }
     }
     final HashMultimap<ProjectDescription, URI> project2deleted = HashMultimap.<ProjectDescription, URI>create();
     for (final URI deleted : this.deletedFiles) {
       {
-        ProjectManager _projectManager = this.workspaceManager.getProjectManager(deleted);
-        final ProjectDescription projectManager = _projectManager.getProjectDescription();
+        final ProjectDescription projectManager = this.workspaceManager.getProjectManager(deleted).getProjectDescription();
         project2deleted.put(projectManager, deleted);
       }
     }
@@ -170,37 +165,25 @@ public class BuildManager {
     final ArrayList<IResourceDescription.Delta> result = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     for (final ProjectDescription it : sortedDescriptions) {
       {
-        String _name = it.getName();
-        final ProjectManager projectManager = this.workspaceManager.getProjectManager(_name);
-        Set<URI> _get = project2dirty.get(it);
-        List<URI> _list = IterableExtensions.<URI>toList(_get);
-        Set<URI> _get_1 = project2deleted.get(it);
-        List<URI> _list_1 = IterableExtensions.<URI>toList(_get_1);
-        final IncrementalBuilder.Result partialResult = projectManager.doBuild(_list, _list_1, cancelIndicator);
-        List<IResourceDescription.Delta> _affectedResources = partialResult.getAffectedResources();
+        final ProjectManager projectManager = this.workspaceManager.getProjectManager(it.getName());
+        final IncrementalBuilder.Result partialResult = projectManager.doBuild(IterableExtensions.<URI>toList(project2dirty.get(it)), IterableExtensions.<URI>toList(project2deleted.get(it)), cancelIndicator);
         final Function1<IResourceDescription.Delta, URI> _function = (IResourceDescription.Delta it_1) -> {
           return it_1.getUri();
         };
-        List<URI> _map = ListExtensions.<IResourceDescription.Delta, URI>map(_affectedResources, _function);
-        allDirty.addAll(_map);
+        allDirty.addAll(ListExtensions.<IResourceDescription.Delta, URI>map(partialResult.getAffectedResources(), _function));
         Iterables.removeAll(this.dirtyFiles, this.dirtyFiles);
         Iterables.removeAll(this.deletedFiles, this.deletedFiles);
-        List<IResourceDescription.Delta> _affectedResources_1 = partialResult.getAffectedResources();
-        result.addAll(_affectedResources_1);
+        result.addAll(partialResult.getAffectedResources());
       }
     }
     return result;
   }
   
   protected List<ProjectDescription> sortByDependencies(final Iterable<ProjectDescription> projectDescriptions) {
-    TopologicalSorter _get = this.sorterProvider.get();
-    List<ProjectDescription> _list = IterableExtensions.<ProjectDescription>toList(projectDescriptions);
     final Procedure1<ProjectDescription> _function = (ProjectDescription it) -> {
-      String _name = it.getName();
-      ProjectManager _projectManager = this.workspaceManager.getProjectManager(_name);
-      this.reportDependencyCycle(_projectManager);
+      this.reportDependencyCycle(this.workspaceManager.getProjectManager(it.getName()));
     };
-    return _get.sortByDependencies(_list, _function);
+    return this.sorterProvider.get().sortByDependencies(IterableExtensions.<ProjectDescription>toList(projectDescriptions), _function);
   }
   
   protected void reportDependencyCycle(final ProjectManager manager) {

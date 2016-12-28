@@ -44,15 +44,12 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
   
   @Override
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {
-    WizardConfiguration _config = this.getConfig();
-    RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
-    WizardConfiguration _config_1 = this.getConfig();
-    IdeProjectDescriptor _ideProject = _config_1.getIdeProject();
+    RuntimeProjectDescriptor _runtimeProject = this.getConfig().getRuntimeProject();
+    IdeProjectDescriptor _ideProject = this.getConfig().getIdeProject();
     final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
       return Boolean.valueOf(it.isEnabled());
     };
-    Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(_runtimeProject, _ideProject)), _function);
-    return IterableExtensions.toSet(_filter);
+    return IterableExtensions.toSet(IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(_runtimeProject, _ideProject)), _function));
   }
   
   @Override
@@ -108,14 +105,10 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
       };
       ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_1, _function_1);
       deps.add(_doubleArrow_1);
-      WizardConfiguration _config = this.getConfig();
-      IdeProjectDescriptor _ideProject = _config.getIdeProject();
-      boolean _isEnabled = _ideProject.isEnabled();
+      boolean _isEnabled = this.getConfig().getIdeProject().isEnabled();
       boolean _not = (!_isEnabled);
       if (_not) {
-        WizardConfiguration _config_1 = this.getConfig();
-        IdeProjectDescriptor _ideProject_1 = _config_1.getIdeProject();
-        Set<ExternalDependency> _externalDependencies_1 = _ideProject_1.getExternalDependencies();
+        Set<ExternalDependency> _externalDependencies_1 = this.getConfig().getIdeProject().getExternalDependencies();
         Iterables.<ExternalDependency>addAll(deps, _externalDependencies_1);
       }
       _xblockexpression = deps;

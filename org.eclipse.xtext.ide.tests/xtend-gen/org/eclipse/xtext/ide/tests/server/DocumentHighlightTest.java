@@ -53,8 +53,7 @@ public class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
       it.setModel(_builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("type A { op");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedDocumentHighlight("");
     };
     this.testDocumentHighlight(_function);
@@ -68,8 +67,7 @@ public class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
       it.setModel(_builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("type A { op foo(");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedDocumentHighlight("");
     };
     this.testDocumentHighlight(_function);
@@ -83,8 +81,7 @@ public class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
       it.setModel(_builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("type A { op fo");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedDocumentHighlight("W [[0, 12] .. [0, 15]]");
     };
     this.testDocumentHighlight(_function);
@@ -98,8 +95,7 @@ public class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
       it.setModel(_builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("type A { int fo");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedDocumentHighlight("W [[0, 13] .. [0, 16]]");
     };
     this.testDocumentHighlight(_function);
@@ -113,8 +109,7 @@ public class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
       it.setModel(_builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("type A { op fo");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedDocumentHighlight("W [[0, 12] .. [0, 15]]");
     };
     this.testDocumentHighlight(_function);
@@ -129,8 +124,7 @@ public class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
       it.setLine(0);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("type A { op foo() { } op bar() { fo");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedDocumentHighlight("W [[0, 12] .. [0, 15]] | R [[0, 33] .. [0, 36]]");
     };
     this.testDocumentHighlight(_function);
@@ -145,8 +139,7 @@ public class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
       it.setLine(0);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("type A { op fo");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedDocumentHighlight("W [[0, 12] .. [0, 15]] | R [[0, 33] .. [0, 36]]");
     };
     this.testDocumentHighlight(_function);
@@ -176,8 +169,7 @@ public class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("\t");
       _builder_1.append("op fo");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedDocumentHighlight("W [[1, 4] .. [1, 7]] | R [[3, 2] .. [3, 5]]");
     };
     this.testDocumentHighlight(_function);
@@ -207,8 +199,7 @@ public class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("    ");
       _builder_1.append("op fo");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedDocumentHighlight("W [[1, 7] .. [1, 10]] | R [[3, 8] .. [3, 11]]");
     };
     this.testDocumentHighlight(_function);

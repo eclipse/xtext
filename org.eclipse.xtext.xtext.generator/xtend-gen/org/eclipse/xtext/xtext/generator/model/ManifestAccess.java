@@ -114,8 +114,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
       this.exportedPackages.addAll(other.exportedPackages);
       this.requiredBundles.addAll(other.requiredBundles);
       if ((this.symbolicName != null)) {
-        String _effectiveSymbolicName = this.getEffectiveSymbolicName();
-        this.requiredBundles.remove(_effectiveSymbolicName);
+        this.requiredBundles.remove(this.getEffectiveSymbolicName());
       }
       _xblockexpression = this.importedPackages.addAll(other.importedPackages);
     }
@@ -197,12 +196,11 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
       if (_not_2) {
         _builder.append("Require-Bundle: ");
         {
-          List<String> _sort_1 = IterableExtensions.<String>sort(this.requiredBundles);
           final Function1<String, Boolean> _function = (String it) -> {
             String _effectiveSymbolicName = this.getEffectiveSymbolicName();
             return Boolean.valueOf((!Objects.equal(it, _effectiveSymbolicName)));
           };
-          Iterable<String> _filter = IterableExtensions.<String>filter(_sort_1, _function);
+          Iterable<String> _filter = IterableExtensions.<String>filter(IterableExtensions.<String>sort(this.requiredBundles), _function);
           boolean _hasElements_1 = false;
           for(final String bundle : _filter) {
             if (!_hasElements_1) {
@@ -222,9 +220,9 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
       if (_not_3) {
         _builder.append("Import-Package: ");
         {
-          List<String> _sort_2 = IterableExtensions.<String>sort(this.importedPackages);
+          List<String> _sort_1 = IterableExtensions.<String>sort(this.importedPackages);
           boolean _hasElements_2 = false;
-          for(final String pack_1 : _sort_2) {
+          for(final String pack_1 : _sort_1) {
             if (!_hasElements_2) {
               _hasElements_2 = true;
             } else {
@@ -259,10 +257,9 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
         mergableManifest.setLineDelimiter(this.lineDelimiter);
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
         mergableManifest.write(bout);
-        String _path = this.getPath();
         byte[] _byteArray = bout.toByteArray();
         ByteArrayInputStream _byteArrayInputStream_1 = new ByteArrayInputStream(_byteArray);
-        fileSystemAccess.generateFile(_path, _byteArrayInputStream_1);
+        fileSystemAccess.generateFile(this.getPath(), _byteArrayInputStream_1);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

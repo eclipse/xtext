@@ -33,8 +33,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(0);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("type A { op foo(a: A) { } } type Main { op main() { foo(");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("A.foo(a: A): void | a: A");
     };
     this.testSignatureHelp(_function);
@@ -50,8 +49,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("A.foo(): void | A.foo(a: A): string | B.foo(a: A, b: B): int | C.foo(a: A, b: B, c: C): void | <empty>");
     };
     this.testSignatureHelp(_function);
@@ -67,8 +65,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("A.foo(a: A): string | B.foo(a: A, b: B): int | C.foo(a: A, b: B, c: C): void | a: A");
     };
     this.testSignatureHelp(_function);
@@ -84,8 +81,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, 2");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("B.foo(a: A, b: B): int | C.foo(a: A, b: B, c: C): void | b: B");
     };
     this.testSignatureHelp(_function);
@@ -101,8 +97,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, 2, 3");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("C.foo(a: A, b: B, c: C): void | c: C");
     };
     this.testSignatureHelp(_function);
@@ -118,8 +113,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(     1");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("A.foo(a: A): string | B.foo(a: A, b: B): int | C.foo(a: A, b: B, c: C): void | a: A");
     };
     this.testSignatureHelp(_function);
@@ -135,8 +129,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1    ");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("A.foo(a: A): string | B.foo(a: A, b: B): int | C.foo(a: A, b: B, c: C): void | a: A");
     };
     this.testSignatureHelp(_function);
@@ -152,8 +145,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(    1");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("B.foo(a: A, b: B): int | C.foo(a: A, b: B, c: C): void | a: A");
     };
     this.testSignatureHelp(_function);
@@ -169,8 +161,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(    1   ");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("B.foo(a: A, b: B): int | C.foo(a: A, b: B, c: C): void | a: A");
     };
     this.testSignatureHelp(_function);
@@ -186,8 +177,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(    1   ,");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("B.foo(a: A, b: B): int | C.foo(a: A, b: B, c: C): void | b: B");
     };
     this.testSignatureHelp(_function);
@@ -203,8 +193,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, 2,");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("C.foo(a: A, b: B, c: C): void | c: C");
     };
     this.testSignatureHelp(_function);
@@ -220,8 +209,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, 2,");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("C.foo(a: A, b: B, c: C): void | c: C");
     };
     this.testSignatureHelp(_function);
@@ -237,8 +225,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, /*,*/ 2,");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("C.foo(a: A, b: B, c: C): void | c: C");
     };
     this.testSignatureHelp(_function);
@@ -254,8 +241,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("<empty>");
     };
     this.testSignatureHelp(_function);
@@ -271,8 +257,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, 2)");
-      int _length = _builder_1.length();
-      it.setColumn(_length);
+      it.setColumn(_builder_1.length());
       it.setExpectedSignatureHelp("<empty>");
     };
     this.testSignatureHelp(_function);

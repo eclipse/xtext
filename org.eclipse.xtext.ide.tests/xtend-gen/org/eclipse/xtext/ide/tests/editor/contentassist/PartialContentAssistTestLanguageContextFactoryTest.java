@@ -65,9 +65,7 @@ public class PartialContentAssistTestLanguageContextFactoryTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    String _string = _builder_1.toString();
-    String _firstSetGrammarElementsToString = this._contentAssistContextTestHelper.firstSetGrammarElementsToString(this.factory);
-    Assert.assertEquals(_string, _firstSetGrammarElementsToString);
+    Assert.assertEquals(_builder_1.toString(), this._contentAssistContextTestHelper.firstSetGrammarElementsToString(this.factory));
   }
   
   @Test
@@ -104,9 +102,7 @@ public class PartialContentAssistTestLanguageContextFactoryTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    String _string = _builder_1.toString();
-    String _firstSetGrammarElementsToString = this._contentAssistContextTestHelper.firstSetGrammarElementsToString(this.factory);
-    Assert.assertEquals(_string, _firstSetGrammarElementsToString);
+    Assert.assertEquals(_builder_1.toString(), this._contentAssistContextTestHelper.firstSetGrammarElementsToString(this.factory));
   }
   
   @Test
@@ -131,9 +127,7 @@ public class PartialContentAssistTestLanguageContextFactoryTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    String _string = _builder_1.toString();
-    String _firstSetGrammarElementsToString = this._contentAssistContextTestHelper.firstSetGrammarElementsToString(this.factory);
-    Assert.assertEquals(_string, _firstSetGrammarElementsToString);
+    Assert.assertEquals(_builder_1.toString(), this._contentAssistContextTestHelper.firstSetGrammarElementsToString(this.factory));
   }
   
   @Test
@@ -154,9 +148,7 @@ public class PartialContentAssistTestLanguageContextFactoryTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    String _string = _builder_1.toString();
-    String _firstSetGrammarElementsToString = this._contentAssistContextTestHelper.firstSetGrammarElementsToString(this.factory);
-    Assert.assertEquals(_string, _firstSetGrammarElementsToString);
+    Assert.assertEquals(_builder_1.toString(), this._contentAssistContextTestHelper.firstSetGrammarElementsToString(this.factory));
   }
   
   @Test
@@ -183,8 +175,6 @@ public class PartialContentAssistTestLanguageContextFactoryTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    String _string = _builder_1.toString();
-    String _firstSetGrammarElementsToString = this._contentAssistContextTestHelper.firstSetGrammarElementsToString(this.factory);
-    Assert.assertEquals(_string, _firstSetGrammarElementsToString);
+    Assert.assertEquals(_builder_1.toString(), this._contentAssistContextTestHelper.firstSetGrammarElementsToString(this.factory));
   }
 }

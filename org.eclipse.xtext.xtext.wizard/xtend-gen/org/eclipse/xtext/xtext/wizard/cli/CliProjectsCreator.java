@@ -10,9 +10,6 @@ package org.eclipse.xtext.xtext.wizard.cli;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import java.io.File;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.util.Strings;
@@ -20,10 +17,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
-import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectsCreator;
-import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
@@ -34,46 +29,34 @@ public class CliProjectsCreator implements ProjectsCreator {
   
   @Override
   public void createProjects(final WizardConfiguration config) {
-    Set<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
     final Consumer<ProjectDescriptor> _function = (ProjectDescriptor it) -> {
       this.createProject(it);
     };
-    _enabledProjects.forEach(_function);
+    config.getEnabledProjects().forEach(_function);
   }
   
   public void createProject(final ProjectDescriptor project) {
     String _location = project.getLocation();
     final File projectRoot = new File(_location);
     projectRoot.mkdirs();
-    Iterable<? extends AbstractFile> _files = project.getFiles();
     final Consumer<AbstractFile> _function = (AbstractFile it) -> {
       try {
-        WizardConfiguration _config = project.getConfig();
-        SourceLayout _sourceLayout = _config.getSourceLayout();
-        Outlet _outlet = it.getOutlet();
-        String _pathFor = _sourceLayout.getPathFor(_outlet);
+        String _pathFor = project.getConfig().getSourceLayout().getPathFor(it.getOutlet());
         String _plus = (_pathFor + "/");
         String _relativePath = it.getRelativePath();
         final String projectRelativePath = (_plus + _relativePath);
         final File file = new File(projectRoot, projectRelativePath);
-        File _parentFile = file.getParentFile();
-        _parentFile.mkdirs();
+        file.getParentFile().mkdirs();
         boolean _matched = false;
         if (it instanceof TextFile) {
           _matched=true;
-          String _content = ((TextFile)it).getContent();
-          String _newLine = Strings.newLine();
-          final String normalizedContent = _content.replace(_newLine, this.lineDelimiter);
-          WizardConfiguration _config_1 = project.getConfig();
-          Charset _encoding = _config_1.getEncoding();
-          Files.write(normalizedContent, file, _encoding);
+          final String normalizedContent = ((TextFile)it).getContent().replace(Strings.newLine(), this.lineDelimiter);
+          Files.write(normalizedContent, file, project.getConfig().getEncoding());
         }
         if (!_matched) {
           if (it instanceof BinaryFile) {
             _matched=true;
-            URL _content = ((BinaryFile)it).getContent();
-            byte[] _byteArray = Resources.toByteArray(_content);
-            Files.write(_byteArray, file);
+            Files.write(Resources.toByteArray(((BinaryFile)it).getContent()), file);
           }
         }
         boolean _isExecutable = it.isExecutable();
@@ -84,13 +67,11 @@ public class CliProjectsCreator implements ProjectsCreator {
         throw Exceptions.sneakyThrow(_e);
       }
     };
-    _files.forEach(_function);
-    Set<String> _sourceFolders = project.getSourceFolders();
+    project.getFiles().forEach(_function);
     final Consumer<String> _function_1 = (String it) -> {
-      File _file = new File(projectRoot, it);
-      _file.mkdirs();
+      new File(projectRoot, it).mkdirs();
     };
-    _sourceFolders.forEach(_function_1);
+    project.getSourceFolders().forEach(_function_1);
   }
   
   @Pure

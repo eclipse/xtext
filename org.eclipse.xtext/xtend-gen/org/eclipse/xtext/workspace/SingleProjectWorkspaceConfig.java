@@ -36,8 +36,7 @@ public class SingleProjectWorkspaceConfig implements IWorkspaceConfig {
   
   @Override
   public IProjectConfig findProjectContaining(final URI member) {
-    URI _path = this.projectConfig.getPath();
-    boolean _isPrefixOf = UriUtil.isPrefixOf(_path, member);
+    boolean _isPrefixOf = UriUtil.isPrefixOf(this.projectConfig.getPath(), member);
     if (_isPrefixOf) {
       return this.projectConfig;
     }

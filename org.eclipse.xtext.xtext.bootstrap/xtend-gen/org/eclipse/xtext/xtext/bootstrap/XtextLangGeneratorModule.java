@@ -34,8 +34,7 @@ public class XtextLangGeneratorModule extends DefaultGeneratorModule {
     }
     
     public boolean isXtext(final Grammar grammar) {
-      String _name = grammar.getName();
-      return _name.equals("org.eclipse.xtext.Xtext");
+      return grammar.getName().equals("org.eclipse.xtext.Xtext");
     }
   }
   

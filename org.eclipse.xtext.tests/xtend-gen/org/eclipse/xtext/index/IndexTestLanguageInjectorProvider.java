@@ -39,8 +39,7 @@ public class IndexTestLanguageInjectorProvider implements IInjectorProvider, IRe
   }
   
   protected Injector internalCreateInjector() {
-    IndexTestLanguageStandaloneSetup _indexTestLanguageStandaloneSetup = new IndexTestLanguageStandaloneSetup();
-    return _indexTestLanguageStandaloneSetup.createInjectorAndDoEMFRegistration();
+    return new IndexTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
   
   @Override

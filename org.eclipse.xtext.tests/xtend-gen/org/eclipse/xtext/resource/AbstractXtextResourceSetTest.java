@@ -34,8 +34,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     EList<Resource> _resources = rs.getResources();
     _resources.add(resource);
     Assert.assertEquals(1, rs.getURIResourceMap().size());
-    EList<Resource> _resources_1 = rs.getResources();
-    _resources_1.remove(resource);
+    rs.getResources().remove(resource);
     Assert.assertTrue(resource.eAdapters().isEmpty());
     Assert.assertEquals(0, rs.getURIResourceMap().size());
   }
@@ -50,8 +49,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     ArrayList<Resource> _newArrayList = CollectionLiterals.<Resource>newArrayList(resource);
     Iterables.<Resource>addAll(_resources, _newArrayList);
     Assert.assertEquals(1, rs.getURIResourceMap().size());
-    EList<Resource> _resources_1 = rs.getResources();
-    _resources_1.remove(resource);
+    rs.getResources().remove(resource);
     Assert.assertTrue(resource.eAdapters().isEmpty());
     Assert.assertEquals(0, rs.getURIResourceMap().size());
   }
@@ -78,8 +76,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     resource.setURI(null);
     Assert.assertEquals(1, rs.getURIResourceMap().size());
     Assert.assertEquals(resource, rs.getURIResourceMap().get(null));
-    EList<Resource> _resources_1 = rs.getResources();
-    _resources_1.remove(resource);
+    rs.getResources().remove(resource);
     Assert.assertTrue(resource.eAdapters().isEmpty());
     Assert.assertEquals(0, rs.getURIResourceMap().size());
   }
@@ -94,8 +91,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     ArrayList<Resource> _newArrayList = CollectionLiterals.<Resource>newArrayList(resource);
     Iterables.<Resource>addAll(_resources, _newArrayList);
     Assert.assertEquals(1, rs.getURIResourceMap().size());
-    EList<Resource> _resources_1 = rs.getResources();
-    _resources_1.clear();
+    rs.getResources().clear();
     Assert.assertTrue(resource.eAdapters().isEmpty());
     Assert.assertEquals(0, rs.getURIResourceMap().size());
   }
@@ -111,8 +107,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Iterables.<Resource>addAll(_resources, _newArrayList);
     Assert.assertEquals(1, rs.getURIResourceMap().size());
     rs.eSetDeliver(false);
-    EList<Resource> _resources_1 = rs.getResources();
-    _resources_1.clear();
+    rs.getResources().clear();
     Assert.assertTrue(resource.eAdapters().isEmpty());
     Assert.assertEquals(0, rs.getURIResourceMap().size());
   }
@@ -126,8 +121,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     EList<Resource> _resources = rs.getResources();
     _resources.add(resource);
     Assert.assertEquals(2, rs.getURIResourceMap().size());
-    EList<Resource> _resources_1 = rs.getResources();
-    _resources_1.remove(resource);
+    rs.getResources().remove(resource);
     Assert.assertTrue(resource.eAdapters().isEmpty());
     Assert.assertEquals(0, rs.getURIResourceMap().size());
   }
@@ -142,8 +136,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     ArrayList<Resource> _newArrayList = CollectionLiterals.<Resource>newArrayList(resource);
     Iterables.<Resource>addAll(_resources, _newArrayList);
     Assert.assertEquals(2, rs.getURIResourceMap().size());
-    EList<Resource> _resources_1 = rs.getResources();
-    _resources_1.remove(resource);
+    rs.getResources().remove(resource);
     Assert.assertTrue(resource.eAdapters().isEmpty());
     Assert.assertEquals(0, rs.getURIResourceMap().size());
   }
@@ -176,8 +169,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Assert.assertEquals(1, rs.getURIResourceMap().size());
     Assert.assertEquals(resource, rs.getURIResourceMap().get(null));
     Assert.assertEquals(0, rs.getNormalizationMap().size());
-    EList<Resource> _resources_1 = rs.getResources();
-    _resources_1.remove(resource);
+    rs.getResources().remove(resource);
     Assert.assertTrue(resource.eAdapters().isEmpty());
     Assert.assertEquals(0, rs.getURIResourceMap().size());
     Assert.assertEquals(0, rs.getNormalizationMap().size());
@@ -193,8 +185,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     ArrayList<Resource> _newArrayList = CollectionLiterals.<Resource>newArrayList(resource);
     Iterables.<Resource>addAll(_resources, _newArrayList);
     Assert.assertEquals(2, rs.getURIResourceMap().size());
-    EList<Resource> _resources_1 = rs.getResources();
-    _resources_1.clear();
+    rs.getResources().clear();
     Assert.assertTrue(resource.eAdapters().isEmpty());
     Assert.assertEquals(0, rs.getURIResourceMap().size());
   }
@@ -210,8 +201,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Iterables.<Resource>addAll(_resources, _newArrayList);
     Assert.assertEquals(2, rs.getURIResourceMap().size());
     rs.eSetDeliver(false);
-    EList<Resource> _resources_1 = rs.getResources();
-    _resources_1.clear();
+    rs.getResources().clear();
     Assert.assertTrue(resource.eAdapters().isEmpty());
     Assert.assertEquals(0, rs.getURIResourceMap().size());
   }

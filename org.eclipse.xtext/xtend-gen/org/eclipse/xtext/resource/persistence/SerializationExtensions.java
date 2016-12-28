@@ -29,17 +29,14 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 class SerializationExtensions {
   public static <T extends ENamedElement> T readEcoreElement(final ObjectInput in) throws IOException {
     final URI uri = SerializationExtensions.readURI(in);
-    URI _trimFragment = uri.trimFragment();
-    String _string = _trimFragment.toString();
-    final EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(_string);
+    final EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(uri.trimFragment().toString());
     Resource _eResource = null;
     if (ePackage!=null) {
       _eResource=ePackage.eResource();
     }
     EObject _eObject = null;
     if (_eResource!=null) {
-      String _fragment = uri.fragment();
-      _eObject=_eResource.getEObject(_fragment);
+      _eObject=_eResource.getEObject(uri.fragment());
     }
     return ((T) _eObject);
   }
@@ -71,8 +68,7 @@ class SerializationExtensions {
     if ((uri == null)) {
       out.writeUTF("NULL");
     } else {
-      String _string = uri.toString();
-      out.writeUTF(_string);
+      out.writeUTF(uri.toString());
     }
   }
   

@@ -43,8 +43,6 @@ import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFra
 import org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2;
 import org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
-import org.eclipse.xtext.xtext.generator.util.GeneratorOption;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2;
 import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
@@ -114,9 +112,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   public StandardLanguage() {
     try {
-      Class<? extends StandardLanguage> _class = this.getClass();
-      ClassLoader _classLoader = _class.getClassLoader();
-      _classLoader.loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule");
+      this.getClass().getClassLoader().loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule");
       this.addReferencedResource("platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel");
     } catch (final Throwable _t) {
       if (_t instanceof ClassNotFoundException) {
@@ -130,38 +126,32 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   @Override
   public void initialize(final Injector injector) {
-    BooleanGeneratorOption _generateStub = this.formatter.getGenerateStub();
-    boolean _isSet = _generateStub.isSet();
+    boolean _isSet = this.formatter.getGenerateStub().isSet();
     boolean _not = (!_isSet);
     if (_not) {
       this.formatter.setGenerateStub(false);
     }
-    BooleanGeneratorOption _onlyEnabledIfGrammarIsUsed = this.commonTypesSupport.getOnlyEnabledIfGrammarIsUsed();
-    boolean _isSet_1 = _onlyEnabledIfGrammarIsUsed.isSet();
+    boolean _isSet_1 = this.commonTypesSupport.getOnlyEnabledIfGrammarIsUsed().isSet();
     boolean _not_1 = (!_isSet_1);
     if (_not_1) {
       this.commonTypesSupport.setOnlyEnabledIfGrammarIsUsed(true);
     }
-    GeneratorOption<WebIntegrationFragment.Framework> _framework = this.webSupport.getFramework();
-    boolean _isSet_2 = _framework.isSet();
+    boolean _isSet_2 = this.webSupport.getFramework().isSet();
     boolean _not_2 = (!_isSet_2);
     if (_not_2) {
       this.webSupport.setFramework("Ace");
     }
-    BooleanGeneratorOption _generateServlet = this.webSupport.getGenerateServlet();
-    boolean _isSet_3 = _generateServlet.isSet();
+    boolean _isSet_3 = this.webSupport.getGenerateServlet().isSet();
     boolean _not_3 = (!_isSet_3);
     if (_not_3) {
       this.webSupport.setGenerateServlet(true);
     }
-    BooleanGeneratorOption _generateJettyLauncher = this.webSupport.getGenerateJettyLauncher();
-    boolean _isSet_4 = _generateJettyLauncher.isSet();
+    boolean _isSet_4 = this.webSupport.getGenerateJettyLauncher().isSet();
     boolean _not_4 = (!_isSet_4);
     if (_not_4) {
       this.webSupport.setGenerateJettyLauncher(true);
     }
-    BooleanGeneratorOption _generateHtmlExample = this.webSupport.getGenerateHtmlExample();
-    boolean _isSet_5 = _generateHtmlExample.isSet();
+    boolean _isSet_5 = this.webSupport.getGenerateHtmlExample().isSet();
     boolean _not_5 = (!_isSet_5);
     if (_not_5) {
       this.webSupport.setGenerateHtmlExample(true);

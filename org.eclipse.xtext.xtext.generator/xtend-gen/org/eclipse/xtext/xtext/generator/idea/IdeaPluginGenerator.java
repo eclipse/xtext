@@ -21,25 +21,20 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.antlr.runtime.Token;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.EcoreUtil2;
@@ -63,19 +58,15 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.idea.IdeaPluginClassNames;
 import org.eclipse.xtext.xtext.generator.idea.IdeaPluginExtension;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
@@ -118,25 +109,16 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
   
   @Override
   public void generate() {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    ISubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
-    boolean _isEnabled = _ideaPlugin.isEnabled();
+    boolean _isEnabled = this.getProjectConfig().getIdeaPlugin().isEnabled();
     boolean _not = (!_isEnabled);
     if (_not) {
       return;
     }
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    List<String> _fileExtensions = _language.getFileExtensions();
-    final String fileExtension = IterableExtensions.<String>head(_fileExtensions);
-    IXtextGeneratorLanguage _language_1 = this.getLanguage();
-    final Grammar grammar = _language_1.getGrammar();
+    final String fileExtension = IterableExtensions.<String>head(this.getLanguage().getFileExtensions());
+    final Grammar grammar = this.getLanguage().getGrammar();
     final GuiceModuleAccess.BindingFactory bindFactory = new GuiceModuleAccess.BindingFactory();
-    TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
-    TypeReference _antlrTokenFileProvider = this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
-    bindFactory.addTypeToType(_typeRef, _antlrTokenFileProvider);
-    TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.parser.antlr.Lexer");
-    TypeReference _psiInternalLexer = this._ideaPluginClassNames.getPsiInternalLexer(grammar);
-    bindFactory.addTypeToType(_typeRef_1, _psiInternalLexer);
+    bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider"), this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar));
+    bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.parser.antlr.Lexer"), this._ideaPluginClassNames.getPsiInternalLexer(grammar));
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -160,22 +142,12 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       }
     };
     bindFactory.addConfiguredBinding("RuntimeLexer", _client);
-    TypeReference _typeRef_2 = TypeReference.typeRef("com.intellij.lang.PsiParser");
-    TypeReference _psiParser = this._ideaPluginClassNames.getPsiParser(grammar);
-    bindFactory.addTypeToType(_typeRef_2, _psiParser);
-    TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.idea.parser.TokenTypeProvider");
-    TypeReference _tokenTypeProvider = this._ideaPluginClassNames.getTokenTypeProvider(grammar);
-    bindFactory.addTypeToType(_typeRef_3, _tokenTypeProvider);
-    TypeReference _typeRef_4 = TypeReference.typeRef("com.intellij.lang.ParserDefinition");
-    TypeReference _parserDefinition = this._ideaPluginClassNames.getParserDefinition(grammar);
-    bindFactory.addTypeToType(_typeRef_4, _parserDefinition);
-    TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.idea.lang.IElementTypeProvider");
-    TypeReference _elementTypeProvider = this._ideaPluginClassNames.getElementTypeProvider(grammar);
-    bindFactory.addTypeToTypeSingleton(_typeRef_5, _elementTypeProvider);
-    TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.idea.facet.AbstractFacetConfiguration");
-    TypeReference _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    bindFactory.addTypeToType(_typeRef_6, _facetConfiguration);
-    TypeReference _typeRef_7 = TypeReference.typeRef("com.intellij.facet.FacetTypeId");
+    bindFactory.addTypeToType(TypeReference.typeRef("com.intellij.lang.PsiParser"), this._ideaPluginClassNames.getPsiParser(grammar));
+    bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.idea.parser.TokenTypeProvider"), this._ideaPluginClassNames.getTokenTypeProvider(grammar));
+    bindFactory.addTypeToType(TypeReference.typeRef("com.intellij.lang.ParserDefinition"), this._ideaPluginClassNames.getParserDefinition(grammar));
+    bindFactory.addTypeToTypeSingleton(TypeReference.typeRef("org.eclipse.xtext.idea.lang.IElementTypeProvider"), this._ideaPluginClassNames.getElementTypeProvider(grammar));
+    bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.idea.facet.AbstractFacetConfiguration"), this._ideaPluginClassNames.getFacetConfiguration(grammar));
+    TypeReference _typeRef = TypeReference.typeRef("com.intellij.facet.FacetTypeId");
     StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -184,10 +156,8 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.append(".TYPEID");
       }
     };
-    bindFactory.addTypeToInstance(_typeRef_7, _client_1);
-    TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
-    TypeReference _parserClass = this.caNaming.getParserClass(grammar);
-    bindFactory.addTypeToType(_typeRef_8, _parserClass);
+    bindFactory.addTypeToInstance(_typeRef, _client_1);
+    bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser"), this.caNaming.getParserClass(grammar));
     StringConcatenationClient _client_2 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -208,12 +178,9 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
     bindFactory.addConfiguredBinding("ContentAssistLexer", _client_2);
     boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(grammar);
     if (_inheritsXbase) {
-      TypeReference _typeRef_9 = TypeReference.typeRef("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider");
-      TypeReference _typeRef_10 = TypeReference.typeRef("org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider");
-      bindFactory.addTypeToType(_typeRef_9, _typeRef_10);
+      bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider"), TypeReference.typeRef("org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider"));
       TypeReference _typeReference = new TypeReference("org.eclipse.xtext.xbase.typesystem.internal", "IFeatureScopeTracker.Provider");
-      TypeReference _typeRef_11 = TypeReference.typeRef("org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider");
-      bindFactory.addTypeToType(_typeReference, _typeRef_11);
+      bindFactory.addTypeToType(_typeReference, TypeReference.typeRef("org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider"));
       StringConcatenationClient _client_3 = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -236,31 +203,17 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         }
       };
       bindFactory.addConfiguredBinding("LanguageSpecificPsiModelAssociations", _client_3);
-      TypeReference _typeRef_12 = TypeReference.typeRef("org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration");
-      TypeReference _typeRef_13 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration");
-      bindFactory.addTypeToType(_typeRef_12, _typeRef_13);
-      TypeReference _typeRef_14 = TypeReference.typeRef("org.eclipse.xtext.idea.formatting.BlockFactory");
-      TypeReference _typeRef_15 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory");
-      bindFactory.addTypeToType(_typeRef_14, _typeRef_15);
-      TypeReference _typeRef_16 = TypeReference.typeRef("org.eclipse.xtext.idea.formatting.ChildAttributesProvider");
-      TypeReference _typeRef_17 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider");
-      bindFactory.addTypeToType(_typeRef_16, _typeRef_17);
-      TypeReference _typeRef_18 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider");
-      TypeReference _typeRef_19 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider");
-      bindFactory.addTypeToType(_typeRef_18, _typeRef_19);
-      TypeReference _typeRef_20 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.IReferenceSearcher");
-      TypeReference _typeRef_21 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher");
-      bindFactory.addTypeToType(_typeRef_20, _typeRef_21);
-      TypeReference _typeRef_22 = TypeReference.typeRef("org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider");
-      TypeReference _typeRef_23 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider");
-      bindFactory.addTypeToType(_typeRef_22, _typeRef_23);
-      TypeReference _typeRef_24 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.WordsScannerProvider");
+      bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration"), TypeReference.typeRef("org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration"));
+      bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.idea.formatting.BlockFactory"), TypeReference.typeRef("org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory"));
+      bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.idea.formatting.ChildAttributesProvider"), TypeReference.typeRef("org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider"));
+      bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider"), TypeReference.typeRef("org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider"));
+      bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.idea.findusages.IReferenceSearcher"), TypeReference.typeRef("org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher"));
+      bindFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider"), TypeReference.typeRef("org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider"));
+      TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.WordsScannerProvider");
       TypeReference _typeReference_1 = new TypeReference("org.eclipse.xtext.xbase.idea.findusages", "XbaseWordsScanner.XbaseWordsScannerProvider");
-      bindFactory.addTypeToType(_typeRef_24, _typeReference_1);
+      bindFactory.addTypeToType(_typeRef_1, _typeReference_1);
     }
-    IXtextGeneratorLanguage _language_2 = this.getLanguage();
-    GuiceModuleAccess _ideaGenModule = _language_2.getIdeaGenModule();
-    bindFactory.contributeTo(_ideaGenModule);
+    bindFactory.contributeTo(this.getLanguage().getIdeaGenModule());
     JavaFileAccess _compileStandaloneSetup = this.compileStandaloneSetup(grammar);
     JavaFileAccess _compileIdeaSetup = this.compileIdeaSetup(grammar);
     JavaFileAccess _compileCompletionContributor = this.compileCompletionContributor(grammar);
@@ -295,23 +248,12 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
     Collections.<TextFileAccess>unmodifiableList(CollectionLiterals.<TextFileAccess>newArrayList(_compileServicesISetup, _compileAbstractCompletionContributor, _compileLanguage, _compileAbstractFileType, _compileFileTypeFactory, _compileFileImpl, _compileTokenTypeProvider, _compileElementTypeProvider, _compileParserDefinition, _compileSyntaxHighlighterFactory, _compileSemanticHighlightVisitor, _compileExtensionFactory, _compileCodeBlockModificationListener, _compilePsiParser, _compileAntlrTokenFileProvider, _compilePomDeclarationSearcher, _compileFacetType, _compileBaseColorSettingsPage)).forEach(_function_1);
     if (this.deployable) {
       final TextFileAccess pluginXml = this.compilePluginXml(grammar);
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      ISubProjectConfig _ideaPlugin_1 = _projectConfig_1.getIdeaPlugin();
-      IXtextGeneratorFileSystemAccess _metaInf = _ideaPlugin_1.getMetaInf();
-      String _path = pluginXml.getPath();
-      boolean _isFile = _metaInf.isFile(_path);
+      boolean _isFile = this.getProjectConfig().getIdeaPlugin().getMetaInf().isFile(pluginXml.getPath());
       boolean _not_1 = (!_isFile);
       if (_not_1) {
-        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-        ISubProjectConfig _ideaPlugin_2 = _projectConfig_2.getIdeaPlugin();
-        IXtextGeneratorFileSystemAccess _metaInf_1 = _ideaPlugin_2.getMetaInf();
-        pluginXml.writeTo(_metaInf_1);
+        pluginXml.writeTo(this.getProjectConfig().getIdeaPlugin().getMetaInf());
       }
-      TextFileAccess _compilePluginGenXml = this.compilePluginGenXml(grammar);
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      ISubProjectConfig _ideaPlugin_3 = _projectConfig_3.getIdeaPlugin();
-      IXtextGeneratorFileSystemAccess _metaInf_2 = _ideaPlugin_3.getMetaInf();
-      _compilePluginGenXml.writeTo(_metaInf_2);
+      this.compilePluginGenXml(grammar).writeTo(this.getProjectConfig().getIdeaPlugin().getMetaInf());
     }
   }
   
@@ -325,8 +267,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _extensionFactory = IdeaPluginGenerator.this._ideaPluginClassNames.getExtensionFactory(grammar);
-        String _simpleName = _extensionFactory.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getExtensionFactory(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" implements ");
         TypeReference _typeRef = TypeReference.typeRef("com.intellij.openapi.extensions.ExtensionFactory");
@@ -390,8 +331,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _codeBlockModificationListener = IdeaPluginGenerator.this._ideaPluginClassNames.getCodeBlockModificationListener(grammar);
-        String _simpleName = _codeBlockModificationListener.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getCodeBlockModificationListener(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.psi.BaseXtextCodeBlockModificationListener");
@@ -401,8 +341,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public ");
-        TypeReference _codeBlockModificationListener_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getCodeBlockModificationListener(grammar);
-        String _simpleName_1 = _codeBlockModificationListener_1.getSimpleName();
+        String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getCodeBlockModificationListener(grammar).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append("(");
         TypeReference _typeRef_1 = TypeReference.typeRef("com.intellij.psi.util.PsiModificationTracker");
@@ -450,8 +389,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _pomDeclarationSearcher = IdeaPluginGenerator.this._ideaPluginClassNames.getPomDeclarationSearcher(it);
-        String _simpleName = _pomDeclarationSearcher.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getPomDeclarationSearcher(it).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.pom.AbstractXtextPomDeclarationSearcher");
@@ -461,15 +399,13 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public ");
-        TypeReference _pomDeclarationSearcher_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getPomDeclarationSearcher(it);
-        String _simpleName_1 = _pomDeclarationSearcher_1.getSimpleName();
+        String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getPomDeclarationSearcher(it).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append("() {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("super(");
-        Grammar _grammar = IdeaPluginGenerator.this.getGrammar();
-        TypeReference _ideaLanguage = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(_grammar);
+        TypeReference _ideaLanguage = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(IdeaPluginGenerator.this.getGrammar());
         _builder.append(_ideaLanguage, "\t\t");
         _builder.append(".INSTANCE);");
         _builder.newLineIfNotEmpty();
@@ -489,8 +425,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _psiParser = IdeaPluginGenerator.this._ideaPluginClassNames.getPsiParser(grammar);
-        String _simpleName = _psiParser.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getPsiParser(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.parser.AbstractXtextPsiParser");
@@ -499,8 +434,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         {
-          List<String> _initialHiddenTokens = IdeaPluginGenerator.this._grammarAccessExtensions.initialHiddenTokens(grammar);
-          boolean _isEmpty = _initialHiddenTokens.isEmpty();
+          boolean _isEmpty = IdeaPluginGenerator.this._grammarAccessExtensions.initialHiddenTokens(grammar).isEmpty();
           boolean _not = (!_isEmpty);
           if (_not) {
             _builder.append("\t");
@@ -516,9 +450,9 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.append(Arrays.class, "\t");
             _builder.append(".asList(");
             {
-              List<String> _initialHiddenTokens_1 = IdeaPluginGenerator.this._grammarAccessExtensions.initialHiddenTokens(grammar);
+              List<String> _initialHiddenTokens = IdeaPluginGenerator.this._grammarAccessExtensions.initialHiddenTokens(grammar);
               boolean _hasElements = false;
-              for(final String hidden : _initialHiddenTokens_1) {
+              for(final String hidden : _initialHiddenTokens) {
                 if (!_hasElements) {
                   _hasElements = true;
                 } else {
@@ -624,8 +558,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _antlrTokenFileProvider = IdeaPluginGenerator.this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
-        String _simpleName = _antlrTokenFileProvider.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" implements ");
         _builder.append(IAntlrTokenFileProvider.class);
@@ -724,8 +657,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.append("<extensions defaultExtensionNs=\"org.eclipse.xtext.idea\">");
         _builder.newLine();
         {
-          EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
-          Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(_metamodelDeclarations, GeneratedMetamodel.class);
+          Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
           for(final GeneratedMetamodel generatedMetamodel : _filter) {
             _builder.append("\t\t");
             _builder.append("<package");
@@ -733,8 +665,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.append("\t\t");
             _builder.append("\t");
             _builder.append("uri=\"");
-            EPackage _ePackage = generatedMetamodel.getEPackage();
-            String _nsURI = _ePackage.getNsURI();
+            String _nsURI = generatedMetamodel.getEPackage().getNsURI();
             _builder.append(_nsURI, "\t\t\t");
             _builder.append("\"");
             _builder.newLineIfNotEmpty();
@@ -747,8 +678,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             String _name = generatedMetamodel.getName();
             _builder.append(_name, "\t\t\t");
             _builder.append(".");
-            String _name_1 = generatedMetamodel.getName();
-            String _firstUpper = StringExtensions.toFirstUpper(_name_1);
+            String _firstUpper = StringExtensions.toFirstUpper(generatedMetamodel.getName());
             _builder.append(_firstUpper, "\t\t\t");
             _builder.append("Package\"");
             _builder.newLineIfNotEmpty();
@@ -762,9 +692,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("type=\"");
-        IXtextGeneratorLanguage _language = IdeaPluginGenerator.this.getLanguage();
-        List<String> _fileExtensions = _language.getFileExtensions();
-        String _head = IterableExtensions.<String>head(_fileExtensions);
+        String _head = IterableExtensions.<String>head(IdeaPluginGenerator.this.getLanguage().getFileExtensions());
         _builder.append(_head, "\t\t\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
@@ -785,9 +713,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("uriExtension=\"");
-        IXtextGeneratorLanguage _language_1 = IdeaPluginGenerator.this.getLanguage();
-        List<String> _fileExtensions_1 = _language_1.getFileExtensions();
-        String _head_1 = IterableExtensions.<String>head(_fileExtensions_1);
+        String _head_1 = IterableExtensions.<String>head(IdeaPluginGenerator.this.getLanguage().getFileExtensions());
         _builder.append(_head_1, "\t\t\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
@@ -849,28 +775,23 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.append("\"/>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.BaseXtextASTFactory");
-        CharSequence _compileExtension = IdeaPluginGenerator.this.compileExtension(grammar, "lang.ast.factory", _typeRef);
+        CharSequence _compileExtension = IdeaPluginGenerator.this.compileExtension(grammar, "lang.ast.factory", TypeReference.typeRef("org.eclipse.xtext.idea.lang.BaseXtextASTFactory"));
         _builder.append(_compileExtension, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        TypeReference _parserDefinition = IdeaPluginGenerator.this._ideaPluginClassNames.getParserDefinition(grammar);
-        CharSequence _compileExtension_1 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.parserDefinition", _parserDefinition);
+        CharSequence _compileExtension_1 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.parserDefinition", IdeaPluginGenerator.this._ideaPluginClassNames.getParserDefinition(grammar));
         _builder.append(_compileExtension_1, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider");
-        CharSequence _compileExtension_2 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.findUsagesProvider", _typeRef_1);
+        CharSequence _compileExtension_2 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.findUsagesProvider", TypeReference.typeRef("org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"));
         _builder.append(_compileExtension_2, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider");
-        CharSequence _compileExtension_3 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.refactoringSupport", _typeRef_2);
+        CharSequence _compileExtension_3 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.refactoringSupport", TypeReference.typeRef("org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"));
         _builder.append(_compileExtension_3, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        TypeReference _typeRef_3 = TypeReference.typeRef("com.intellij.lang.refactoring.NamesValidator");
-        CharSequence _compileExtension_4 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.namesValidator", _typeRef_3);
+        CharSequence _compileExtension_4 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.namesValidator", TypeReference.typeRef("com.intellij.lang.refactoring.NamesValidator"));
         _builder.append(_compileExtension_4, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
@@ -883,13 +804,11 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.append("\" />");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        TypeReference _typeRef_4 = TypeReference.typeRef("com.intellij.lang.PairedBraceMatcher");
-        CharSequence _compileExtension_5 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.braceMatcher", _typeRef_4);
+        CharSequence _compileExtension_5 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.braceMatcher", TypeReference.typeRef("com.intellij.lang.PairedBraceMatcher"));
         _builder.append(_compileExtension_5, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.idea.annotation.IssueAnnotator");
-        CharSequence _compileExtension_6 = IdeaPluginGenerator.this.compileExtension(grammar, "annotator", _typeRef_5);
+        CharSequence _compileExtension_6 = IdeaPluginGenerator.this.compileExtension(grammar, "annotator", TypeReference.typeRef("org.eclipse.xtext.idea.annotation.IssueAnnotator"));
         _builder.append(_compileExtension_6, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
@@ -909,8 +828,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t\t");
-        TypeReference _typeRef_6 = TypeReference.typeRef("com.intellij.lang.PsiStructureViewFactory");
-        CharSequence _compileExtension_7 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.psiStructureViewFactory", _typeRef_6);
+        CharSequence _compileExtension_7 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.psiStructureViewFactory", TypeReference.typeRef("com.intellij.lang.PsiStructureViewFactory"));
         _builder.append(_compileExtension_7, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
@@ -920,8 +838,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.append("\"/>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider");
-        CharSequence _compileExtension_8 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.documentationProvider", _typeRef_7);
+        CharSequence _compileExtension_8 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.documentationProvider", TypeReference.typeRef("org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"));
         _builder.append(_compileExtension_8, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
@@ -938,13 +855,11 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t\t");
-        TypeReference _typeRef_8 = TypeReference.typeRef("com.intellij.formatting.FormattingModelBuilder");
-        CharSequence _compileExtension_9 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.formatter", _typeRef_8);
+        CharSequence _compileExtension_9 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.formatter", TypeReference.typeRef("com.intellij.formatting.FormattingModelBuilder"));
         _builder.append(_compileExtension_9, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        TypeReference _typeRef_9 = TypeReference.typeRef("com.intellij.lang.CodeDocumentationAwareCommenter");
-        CharSequence _compileExtension_10 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.commenter", _typeRef_9);
+        CharSequence _compileExtension_10 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.commenter", TypeReference.typeRef("com.intellij.lang.CodeDocumentationAwareCommenter"));
         _builder.append(_compileExtension_10, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -991,8 +906,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public final class ");
-        TypeReference _fileImpl = IdeaPluginGenerator.this._ideaPluginClassNames.getFileImpl(grammar);
-        String _simpleName = _fileImpl.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getFileImpl(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.psi.impl.BaseXtextFile");
@@ -1002,8 +916,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public ");
-        TypeReference _fileImpl_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileImpl(grammar);
-        String _simpleName_1 = _fileImpl_1.getSimpleName();
+        String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileImpl(grammar).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append("(");
         TypeReference _typeRef_1 = TypeReference.typeRef("com.intellij.psi.FileViewProvider");
@@ -1051,8 +964,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _fileTypeFactory = IdeaPluginGenerator.this._ideaPluginClassNames.getFileTypeFactory(grammar);
-        String _simpleName = _fileTypeFactory.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getFileTypeFactory(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("com.intellij.openapi.fileTypes.FileTypeFactory");
@@ -1098,8 +1010,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _abstractFileType = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractFileType(grammar);
-        String _simpleName = _abstractFileType.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractFileType(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("com.intellij.openapi.fileTypes.LanguageFileType");
@@ -1121,8 +1032,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("protected ");
-        TypeReference _abstractFileType_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractFileType(grammar);
-        String _simpleName_1 = _abstractFileType_1.getSimpleName();
+        String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractFileType(grammar).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append("(final ");
         TypeReference _typeRef_2 = TypeReference.typeRef("com.intellij.lang.Language");
@@ -1216,8 +1126,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("class ");
-          TypeReference _fileType = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
-          String _simpleName = _fileType.getSimpleName();
+          String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar).getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _abstractFileType = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractFileType(grammar);
@@ -1226,12 +1135,10 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("public static final ");
-          TypeReference _fileType_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
-          String _simpleName_1 = _fileType_1.getSimpleName();
+          String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar).getSimpleName();
           _builder.append(_simpleName_1, "\t");
           _builder.append(" INSTANCE = new ");
-          TypeReference _fileType_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
-          String _simpleName_2 = _fileType_2.getSimpleName();
+          String _simpleName_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar).getSimpleName();
           _builder.append(_simpleName_2, "\t");
           _builder.append("()");
           _builder.newLineIfNotEmpty();
@@ -1260,8 +1167,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("public class ");
-          TypeReference _fileType = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
-          String _simpleName = _fileType.getSimpleName();
+          String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar).getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _abstractFileType = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractFileType(grammar);
@@ -1270,12 +1176,10 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("public static final ");
-          TypeReference _fileType_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
-          String _simpleName_1 = _fileType_1.getSimpleName();
+          String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar).getSimpleName();
           _builder.append(_simpleName_1, "\t");
           _builder.append(" INSTANCE = new ");
-          TypeReference _fileType_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
-          String _simpleName_2 = _fileType_2.getSimpleName();
+          String _simpleName_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar).getSimpleName();
           _builder.append(_simpleName_2, "\t");
           _builder.append("();");
           _builder.newLineIfNotEmpty();
@@ -1283,8 +1187,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public ");
-          TypeReference _fileType_3 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
-          String _simpleName_3 = _fileType_3.getSimpleName();
+          String _simpleName_3 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar).getSimpleName();
           _builder.append(_simpleName_3, "\t");
           _builder.append("() {");
           _builder.newLineIfNotEmpty();
@@ -1312,8 +1215,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public final class ");
-        TypeReference _ideaLanguage = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
-        String _simpleName = _ideaLanguage.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.AbstractXtextLanguage");
@@ -1323,20 +1225,17 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public static final ");
-        TypeReference _ideaLanguage_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
-        String _simpleName_1 = _ideaLanguage_1.getSimpleName();
+        String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append(" INSTANCE = new ");
-        TypeReference _ideaLanguage_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
-        String _simpleName_2 = _ideaLanguage_2.getSimpleName();
+        String _simpleName_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar).getSimpleName();
         _builder.append(_simpleName_2, "\t");
         _builder.append("();");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t");
         _builder.append("private ");
-        TypeReference _ideaLanguage_3 = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
-        String _simpleName_3 = _ideaLanguage_3.getSimpleName();
+        String _simpleName_3 = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar).getSimpleName();
         _builder.append(_simpleName_3, "\t");
         _builder.append("() {");
         _builder.newLineIfNotEmpty();
@@ -1366,8 +1265,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("class ");
-          TypeReference _ideaStandaloneSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
-          String _simpleName = _ideaStandaloneSetup.getSimpleName();
+          String _simpleName = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar).getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _runtimeGenSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeGenSetup(grammar);
@@ -1413,8 +1311,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("public class ");
-          TypeReference _ideaStandaloneSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
-          String _simpleName = _ideaStandaloneSetup.getSimpleName();
+          String _simpleName = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar).getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _runtimeGenSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeGenSetup(grammar);
@@ -1477,8 +1374,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("class ");
-          TypeReference _ideaSetup = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaSetup(grammar);
-          String _simpleName = _ideaSetup.getSimpleName();
+          String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaSetup(grammar).getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" implements ");
           _builder.append(ISetup.class);
@@ -1514,8 +1410,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("public class ");
-          TypeReference _ideaSetup = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaSetup(grammar);
-          String _simpleName = _ideaSetup.getSimpleName();
+          String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaSetup(grammar).getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" implements ");
           _builder.append(ISetup.class);
@@ -1555,24 +1450,17 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
   }
   
   public JavaFileAccess compileElementTypeProvider(final Grammar grammar) {
-    TypeReference _elementTypeProvider = this._ideaPluginClassNames.getElementTypeProvider(grammar);
-    final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_elementTypeProvider);
-    TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.IElementTypeProvider");
-    file.importType(_typeRef);
-    TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.psi.stubs.XtextFileElementType");
-    file.importType(_typeRef_1);
-    TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.psi.stubs.XtextFileStub");
-    file.importType(_typeRef_2);
-    TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.psi.tree.IGrammarAwareElementType");
-    file.importType(_typeRef_3);
-    TypeReference _typeRef_4 = TypeReference.typeRef("com.intellij.psi.tree.IFileElementType");
-    file.importType(_typeRef_4);
+    final JavaFileAccess file = this.fileAccessFactory.createJavaFile(this._ideaPluginClassNames.getElementTypeProvider(grammar));
+    file.importType(TypeReference.typeRef("org.eclipse.xtext.idea.lang.IElementTypeProvider"));
+    file.importType(TypeReference.typeRef("org.eclipse.xtext.psi.stubs.XtextFileElementType"));
+    file.importType(TypeReference.typeRef("org.eclipse.xtext.psi.stubs.XtextFileStub"));
+    file.importType(TypeReference.typeRef("org.eclipse.xtext.psi.tree.IGrammarAwareElementType"));
+    file.importType(TypeReference.typeRef("com.intellij.psi.tree.IFileElementType"));
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _elementTypeProvider = IdeaPluginGenerator.this._ideaPluginClassNames.getElementTypeProvider(grammar);
-        String _simpleName = _elementTypeProvider.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getElementTypeProvider(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" implements IElementTypeProvider {");
         _builder.newLineIfNotEmpty();
@@ -1659,9 +1547,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.append("}");
             _builder.newLine();
             {
-              TreeIterator<EObject> _eAllContents = rule.eAllContents();
-              Iterator<AbstractElement> _filter = Iterators.<AbstractElement>filter(_eAllContents, AbstractElement.class);
-              Iterable<AbstractElement> _iterable = IteratorExtensions.<AbstractElement>toIterable(_filter);
+              Iterable<AbstractElement> _iterable = IteratorExtensions.<AbstractElement>toIterable(Iterators.<AbstractElement>filter(rule.eAllContents(), AbstractElement.class));
               for(final AbstractElement element : _iterable) {
                 _builder.append("\t");
                 _builder.append("\t");
@@ -1710,9 +1596,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.append("ElementType());");
             _builder.newLineIfNotEmpty();
             {
-              TreeIterator<EObject> _eAllContents_1 = rule.eAllContents();
-              Iterator<AbstractElement> _filter_1 = Iterators.<AbstractElement>filter(_eAllContents_1, AbstractElement.class);
-              Iterable<AbstractElement> _iterable_1 = IteratorExtensions.<AbstractElement>toIterable(_filter_1);
+              Iterable<AbstractElement> _iterable_1 = IteratorExtensions.<AbstractElement>toIterable(Iterators.<AbstractElement>filter(rule.eAllContents(), AbstractElement.class));
               for(final AbstractElement element_1 : _iterable_1) {
                 _builder.newLine();
                 _builder.append("\t");
@@ -1781,9 +1665,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.append("}");
             _builder.newLine();
             {
-              TreeIterator<EObject> _eAllContents_2 = rule_1.eAllContents();
-              Iterator<AbstractElement> _filter_2 = Iterators.<AbstractElement>filter(_eAllContents_2, AbstractElement.class);
-              Iterable<AbstractElement> _iterable_2 = IteratorExtensions.<AbstractElement>toIterable(_filter_2);
+              Iterable<AbstractElement> _iterable_2 = IteratorExtensions.<AbstractElement>toIterable(Iterators.<AbstractElement>filter(rule_1.eAllContents(), AbstractElement.class));
               for(final AbstractElement element_2 : _iterable_2) {
                 _builder.append("\t");
                 _builder.newLine();
@@ -1828,8 +1710,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.append(Singleton.class);
         _builder.newLineIfNotEmpty();
         _builder.append("public class ");
-        TypeReference _tokenTypeProvider = IdeaPluginGenerator.this._ideaPluginClassNames.getTokenTypeProvider(grammar);
-        String _simpleName = _tokenTypeProvider.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getTokenTypeProvider(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" implements ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.parser.TokenTypeProvider");
@@ -1875,12 +1756,11 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.newLine();
         {
-          List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(grammar);
           final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
             String _name = it.getName();
             return Boolean.valueOf(Objects.equal(_name, "WS"));
           };
-          boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
+          boolean _exists = IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), _function);
           if (_exists) {
             _builder.append("\t");
             _builder.append("private static final ");
@@ -1924,12 +1804,11 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.append(".RULE_ML_COMMENT]);");
             _builder.newLineIfNotEmpty();
           } else {
-            List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(grammar);
             final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
             };
-            boolean _exists_1 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_1, _function_1);
+            boolean _exists_1 = IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), _function_1);
             if (_exists_1) {
               _builder.append("\t");
               _builder.append("private static final ");
@@ -1942,12 +1821,11 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
               _builder.append(".RULE_SL_COMMENT]);");
               _builder.newLineIfNotEmpty();
             } else {
-              List<TerminalRule> _allTerminalRules_2 = GrammarUtil.allTerminalRules(grammar);
               final Function1<TerminalRule, Boolean> _function_2 = (TerminalRule it) -> {
                 String _name = it.getName();
                 return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
               };
-              boolean _exists_2 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_2, _function_2);
+              boolean _exists_2 = IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), _function_2);
               if (_exists_2) {
                 _builder.append("\t");
                 _builder.append("private static final ");
@@ -1972,12 +1850,11 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           }
         }
         {
-          List<TerminalRule> _allTerminalRules_3 = GrammarUtil.allTerminalRules(grammar);
           final Function1<TerminalRule, Boolean> _function_3 = (TerminalRule it) -> {
             String _name = it.getName();
             return Boolean.valueOf(Objects.equal(_name, "STRING"));
           };
-          boolean _exists_3 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_3, _function_3);
+          boolean _exists_3 = IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), _function_3);
           if (_exists_3) {
             _builder.append("\t");
             _builder.append("private static final ");
@@ -2096,8 +1973,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _syntaxHighlighterFactory = IdeaPluginGenerator.this._ideaPluginClassNames.getSyntaxHighlighterFactory(grammar);
-        String _simpleName = _syntaxHighlighterFactory.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getSyntaxHighlighterFactory(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         _builder.append(lazySyntaxHighlighter);
@@ -2142,8 +2018,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _semanticHighlightVisitor = IdeaPluginGenerator.this._ideaPluginClassNames.getSemanticHighlightVisitor(grammar);
-        String _simpleName = _semanticHighlightVisitor.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getSemanticHighlightVisitor(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.highlighting.SemanticHighlightVisitor");
@@ -2152,8 +2027,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("public ");
-        TypeReference _semanticHighlightVisitor_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getSemanticHighlightVisitor(grammar);
-        String _simpleName_1 = _semanticHighlightVisitor_1.getSimpleName();
+        String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getSemanticHighlightVisitor(grammar).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append("() {");
         _builder.newLineIfNotEmpty();
@@ -2173,18 +2047,16 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
   }
   
   public JavaFileAccess compileParserDefinition(final Grammar grammar) {
-    List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
     final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
       return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
     };
-    final Iterable<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
+    final Iterable<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>filter(GrammarUtil.allRules(grammar), _function);
     TypeReference _parserDefinition = this._ideaPluginClassNames.getParserDefinition(grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _parserDefinition = IdeaPluginGenerator.this._ideaPluginClassNames.getParserDefinition(grammar);
-        String _simpleName = _parserDefinition.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getParserDefinition(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _superParserDefinition = IdeaPluginGenerator.this._ideaPluginClassNames.getSuperParserDefinition(grammar);
@@ -2373,7 +2245,6 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
   }
   
   protected Iterable<AbstractElement> getEObjectElements(final AbstractRule rule) {
-    List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
     final Function1<AbstractElement, Boolean> _function = (AbstractElement element) -> {
       boolean _switchResult = false;
       boolean _matched = false;
@@ -2396,7 +2267,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       }
       return Boolean.valueOf(_switchResult);
     };
-    return IterableExtensions.<AbstractElement>filter(_eAllOfType, _function);
+    return IterableExtensions.<AbstractElement>filter(EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class), _function);
   }
   
   protected boolean isNamed(final EObject element) {
@@ -2455,9 +2326,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       if (!_and_1) {
         _and = false;
       } else {
-        EClassifier _eType_1 = feature.getEType();
-        Class<?> _instanceClass_1 = _eType_1.getInstanceClass();
-        boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass_1);
+        boolean _isAssignableFrom = String.class.isAssignableFrom(feature.getEType().getInstanceClass());
         _and = _isAssignableFrom;
       }
       _xblockexpression = _and;
@@ -2471,8 +2340,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _abstractCompletionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
-        String _simpleName = _abstractCompletionContributor.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractCompletionContributor(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _completionContributorSuperClass = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributorSuperClass(grammar);
@@ -2481,8 +2349,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("public ");
-        TypeReference _abstractCompletionContributor_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
-        String _simpleName_1 = _abstractCompletionContributor_1.getSimpleName();
+        String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractCompletionContributor(grammar).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append("(");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.AbstractXtextLanguage");
@@ -2511,8 +2378,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("class ");
-          TypeReference _completionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar);
-          String _simpleName = _completionContributor.getSimpleName();
+          String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar).getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _abstractCompletionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
@@ -2559,8 +2425,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("public class ");
-          TypeReference _completionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar);
-          String _simpleName = _completionContributor.getSimpleName();
+          String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar).getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _abstractCompletionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
@@ -2569,8 +2434,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("public ");
-          TypeReference _completionContributor_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar);
-          String _simpleName_1 = _completionContributor_1.getSimpleName();
+          String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar).getSimpleName();
           _builder.append(_simpleName_1, "\t");
           _builder.append("() {");
           _builder.newLineIfNotEmpty();
@@ -2587,8 +2451,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public ");
-          TypeReference _completionContributor_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar);
-          String _simpleName_2 = _completionContributor_2.getSimpleName();
+          String _simpleName_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar).getSimpleName();
           _builder.append(_simpleName_2, "\t");
           _builder.append("(");
           TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.AbstractXtextLanguage");
@@ -2633,34 +2496,23 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
     JavaFileAccess _xifexpression = null;
     boolean _isGenerateXtendStub = this.isGenerateXtendStub();
     if (_isGenerateXtendStub) {
-      TypeReference _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-      _xifexpression = this.fileAccessFactory.createXtendFile(_facetConfiguration);
+      _xifexpression = this.fileAccessFactory.createXtendFile(this._ideaPluginClassNames.getFacetConfiguration(grammar));
     } else {
-      TypeReference _facetConfiguration_1 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-      _xifexpression = this.fileAccessFactory.createJavaFile(_facetConfiguration_1);
+      _xifexpression = this.fileAccessFactory.createJavaFile(this._ideaPluginClassNames.getFacetConfiguration(grammar));
     }
     final JavaFileAccess file = _xifexpression;
-    TypeReference _typeRef = TypeReference.typeRef("com.intellij.openapi.components.PersistentStateComponent");
-    file.importType(_typeRef);
-    TypeReference _typeRef_1 = TypeReference.typeRef("com.intellij.openapi.components.State");
-    file.importType(_typeRef_1);
-    TypeReference _typeRef_2 = TypeReference.typeRef("com.intellij.openapi.components.Storage");
-    file.importType(_typeRef_2);
-    TypeReference _typeRef_3 = TypeReference.typeRef("com.intellij.openapi.components.StoragePathMacros");
-    file.importType(_typeRef_3);
-    TypeReference _typeRef_4 = TypeReference.typeRef("com.intellij.openapi.components.StorageScheme");
-    file.importType(_typeRef_4);
+    file.importType(TypeReference.typeRef("com.intellij.openapi.components.PersistentStateComponent"));
+    file.importType(TypeReference.typeRef("com.intellij.openapi.components.State"));
+    file.importType(TypeReference.typeRef("com.intellij.openapi.components.Storage"));
+    file.importType(TypeReference.typeRef("com.intellij.openapi.components.StoragePathMacros"));
+    file.importType(TypeReference.typeRef("com.intellij.openapi.components.StorageScheme"));
     boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(grammar);
     if (_inheritsXbase) {
-      TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.facet.XbaseFacetConfiguration");
-      file.importType(_typeRef_5);
-      TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState");
-      file.importType(_typeRef_6);
+      file.importType(TypeReference.typeRef("org.eclipse.xtext.xbase.idea.facet.XbaseFacetConfiguration"));
+      file.importType(TypeReference.typeRef("org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState"));
     } else {
-      TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.idea.facet.AbstractFacetConfiguration");
-      file.importType(_typeRef_7);
-      TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.idea.facet.GeneratorConfigurationState");
-      file.importType(_typeRef_8);
+      file.importType(TypeReference.typeRef("org.eclipse.xtext.idea.facet.AbstractFacetConfiguration"));
+      file.importType(TypeReference.typeRef("org.eclipse.xtext.idea.facet.GeneratorConfigurationState"));
     }
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -2713,8 +2565,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           }
         }
         _builder.append(" class ");
-        TypeReference _facetConfiguration = IdeaPluginGenerator.this._ideaPluginClassNames.getFacetConfiguration(grammar);
-        String _simpleName_2 = _facetConfiguration.getSimpleName();
+        String _simpleName_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getFacetConfiguration(grammar).getSimpleName();
         _builder.append(_simpleName_2);
         _builder.append(" extends ");
         {
@@ -2737,20 +2588,16 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
   }
   
   public JavaFileAccess compileFacetType(final Grammar grammar) {
-    TypeReference _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    TypeReference _typeRef = TypeReference.typeRef("com.intellij.facet.Facet", _facetConfiguration);
-    final TypeReference faceTypeId = TypeReference.typeRef("com.intellij.facet.FacetTypeId", _typeRef);
+    final TypeReference faceTypeId = TypeReference.typeRef("com.intellij.facet.FacetTypeId", TypeReference.typeRef("com.intellij.facet.Facet", this._ideaPluginClassNames.getFacetConfiguration(grammar)));
     TypeReference _facetType = this._ideaPluginClassNames.getFacetType(grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _facetType = IdeaPluginGenerator.this._ideaPluginClassNames.getFacetType(grammar);
-        String _simpleName = _facetType.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.getFacetType(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        TypeReference _facetConfiguration = IdeaPluginGenerator.this._ideaPluginClassNames.getFacetConfiguration(grammar);
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.facet.AbstractFacetType", _facetConfiguration);
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.facet.AbstractFacetType", IdeaPluginGenerator.this._ideaPluginClassNames.getFacetConfiguration(grammar));
         _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -2768,8 +2615,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public ");
-        TypeReference _facetType_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getFacetType(grammar);
-        String _simpleName_1 = _facetType_1.getSimpleName();
+        String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getFacetType(grammar).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append("() {");
         _builder.newLineIfNotEmpty();
@@ -2803,8 +2649,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _baseColorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.baseColorSettingsPage(grammar);
-        String _simpleName = _baseColorSettingsPage.getSimpleName();
+        String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.baseColorSettingsPage(grammar).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage");
@@ -2815,8 +2660,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public ");
-        TypeReference _baseColorSettingsPage_1 = IdeaPluginGenerator.this._ideaPluginClassNames.baseColorSettingsPage(grammar);
-        String _simpleName_1 = _baseColorSettingsPage_1.getSimpleName();
+        String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginClassNames.baseColorSettingsPage(grammar).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append("() {");
         _builder.newLineIfNotEmpty();
@@ -2860,8 +2704,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("class ");
-          TypeReference _colorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.colorSettingsPage(grammar);
-          String _simpleName = _colorSettingsPage.getSimpleName();
+          String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.colorSettingsPage(grammar).getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _baseColorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.baseColorSettingsPage(grammar);
@@ -2879,8 +2722,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("public class ");
-          TypeReference _colorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.colorSettingsPage(grammar);
-          String _simpleName = _colorSettingsPage.getSimpleName();
+          String _simpleName = IdeaPluginGenerator.this._ideaPluginClassNames.colorSettingsPage(grammar).getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _baseColorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.baseColorSettingsPage(grammar);

@@ -32,8 +32,7 @@ public class AbstractAntlrParserBasedTokenSourceProvider extends AbstractTokenSo
       return ((AbstractAntlrParser)this.parser).createLexer(stream);
     }
     StringConcatenation _builder = new StringConcatenation();
-    Class<? extends IParser> _class = this.parser.getClass();
-    String _name = _class.getName();
+    String _name = this.parser.getClass().getName();
     _builder.append(_name);
     _builder.append(" should be a subclass of ");
     String _name_1 = AbstractAntlrParser.class.getName();

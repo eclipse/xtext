@@ -53,22 +53,20 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
   public CharSequence getContent() {
     CharSequence _xblockexpression = null;
     {
-      Iterable<IClassAnnotation> _classAnnotations = this.getClassAnnotations();
       final Consumer<IClassAnnotation> _function = (IClassAnnotation it) -> {
         this.importType(it.getAnnotationImport());
       };
-      _classAnnotations.forEach(_function);
+      this.getClassAnnotations().forEach(_function);
       _xblockexpression = super.getContent();
     }
     return _xblockexpression;
   }
   
   private Iterable<IClassAnnotation> getClassAnnotations() {
-    List<IClassAnnotation> _classAnnotations = this.codeConfig.getClassAnnotations();
     final Function1<IClassAnnotation, Boolean> _function = (IClassAnnotation it) -> {
       return Boolean.valueOf(it.appliesTo(this));
     };
-    Iterable<IClassAnnotation> _filter = IterableExtensions.<IClassAnnotation>filter(_classAnnotations, _function);
+    Iterable<IClassAnnotation> _filter = IterableExtensions.<IClassAnnotation>filter(this.codeConfig.getClassAnnotations(), _function);
     return Iterables.<IClassAnnotation>concat(this.annotations, _filter);
   }
   

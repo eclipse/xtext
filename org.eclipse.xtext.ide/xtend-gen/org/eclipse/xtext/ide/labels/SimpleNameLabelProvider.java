@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.labels;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ide.labels.INameLabelProvider;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 
@@ -26,8 +25,7 @@ public class SimpleNameLabelProvider implements INameLabelProvider {
     if (!_matched) {
       if (element instanceof IEObjectDescription) {
         _matched=true;
-        QualifiedName _name = ((IEObjectDescription)element).getName();
-        _switchResult = _name.getLastSegment();
+        _switchResult = ((IEObjectDescription)element).getName().getLastSegment();
       }
     }
     if (!_matched) {

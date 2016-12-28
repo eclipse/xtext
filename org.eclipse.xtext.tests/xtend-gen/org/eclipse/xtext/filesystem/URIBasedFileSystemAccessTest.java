@@ -9,12 +9,10 @@ package org.eclipse.xtext.filesystem;
 
 import com.google.common.base.StandardSystemProperty;
 import com.google.inject.Inject;
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
-import java.util.Set;
 import java.util.UUID;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -58,21 +56,16 @@ public class URIBasedFileSystemAccessTest {
   @Before
   public void before() {
     try {
-      String _value = StandardSystemProperty.JAVA_IO_TMPDIR.value();
-      final Path tmpPath = Paths.get(_value);
+      final Path tmpPath = Paths.get(StandardSystemProperty.JAVA_IO_TMPDIR.value());
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("tempFolder_");
       UUID _randomUUID = UUID.randomUUID();
       _builder.append(_randomUUID);
       final Path output = Files.createTempDirectory(tmpPath, _builder.toString());
-      Path _resolve = output.resolve(URIBasedFileSystemAccessTest.EXISTING_RESOURCE_NAME);
-      final Path resource = Files.createFile(_resolve);
-      File _file = resource.toFile();
-      _file.deleteOnExit();
-      File _file_1 = output.toFile();
-      _file_1.deleteOnExit();
-      Set<OutputConfiguration> _outputConfigurations = this.configProvider.getOutputConfigurations();
-      final OutputConfiguration config = IterableExtensions.<OutputConfiguration>head(_outputConfigurations);
+      final Path resource = Files.createFile(output.resolve(URIBasedFileSystemAccessTest.EXISTING_RESOURCE_NAME));
+      resource.toFile().deleteOnExit();
+      output.toFile().deleteOnExit();
+      final OutputConfiguration config = IterableExtensions.<OutputConfiguration>head(this.configProvider.getOutputConfigurations());
       config.setOutputDirectory(output.toString());
       Pair<String, OutputConfiguration> _mappedTo = Pair.<String, OutputConfiguration>of(IFileSystemAccess.DEFAULT_OUTPUT, config);
       this.fsa.setOutputConfigurations(Collections.<String, OutputConfiguration>unmodifiableMap(CollectionLiterals.<String, OutputConfiguration>newHashMap(_mappedTo)));

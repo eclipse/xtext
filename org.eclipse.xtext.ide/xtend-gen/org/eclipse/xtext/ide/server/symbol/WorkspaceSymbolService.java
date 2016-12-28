@@ -12,7 +12,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.LinkedList;
 import java.util.List;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
@@ -44,8 +43,7 @@ public class WorkspaceSymbolService {
     for (final IResourceDescription resourceDescription : _allResourceDescriptions) {
       {
         this.operationCanceledManager.checkCanceled(cancelIndicator);
-        URI _uRI = resourceDescription.getURI();
-        final IResourceServiceProvider resourceServiceProvider = this._registry.getResourceServiceProvider(_uRI);
+        final IResourceServiceProvider resourceServiceProvider = this._registry.getResourceServiceProvider(resourceDescription.getURI());
         DocumentSymbolService _get = null;
         if (resourceServiceProvider!=null) {
           _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);

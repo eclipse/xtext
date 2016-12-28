@@ -12,7 +12,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
@@ -143,16 +142,14 @@ public class XtextGeneratorNaming {
   public TypeReference getEclipsePluginActivator() {
     TypeReference _xblockexpression = null;
     {
-      IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
-      final String pluginName = _eclipsePlugin.getName();
+      final String pluginName = this.projectConfig.getEclipsePlugin().getName();
       if ((pluginName == null)) {
         return null;
       }
       String activatorName = pluginName.replaceAll("\\.ui$", "");
       int _lastIndexOf = activatorName.lastIndexOf(".");
       int _plus = (_lastIndexOf + 1);
-      String _substring = activatorName.substring(_plus);
-      String _firstUpper = StringExtensions.toFirstUpper(_substring);
+      String _firstUpper = StringExtensions.toFirstUpper(activatorName.substring(_plus));
       String _plus_1 = (_firstUpper + "Activator");
       activatorName = _plus_1;
       _xblockexpression = new TypeReference((pluginName + ".internal"), activatorName);

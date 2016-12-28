@@ -15,7 +15,6 @@ import org.eclipse.xtext.ide.tests.testlanguage.PartialContentAssistTestLanguage
 @SuppressWarnings("all")
 public class PartialContentAssistTestLanguageStandaloneSetup extends PartialContentAssistTestLanguageStandaloneSetupGenerated {
   public static void doSetup() {
-    PartialContentAssistTestLanguageStandaloneSetup _partialContentAssistTestLanguageStandaloneSetup = new PartialContentAssistTestLanguageStandaloneSetup();
-    _partialContentAssistTestLanguageStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new PartialContentAssistTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

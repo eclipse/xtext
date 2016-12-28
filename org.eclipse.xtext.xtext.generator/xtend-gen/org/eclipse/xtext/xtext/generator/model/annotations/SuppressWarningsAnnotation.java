@@ -36,8 +36,7 @@ public class SuppressWarningsAnnotation implements IClassAnnotation {
     final Function1<String, CharSequence> _function = (String it) -> {
       return it;
     };
-    String _join = IterableExtensions.<String>join(((Iterable<String>)Conversions.doWrapArray(suppressedWarnings)), "\"", "\", \"", "\"", _function);
-    stringBuilder.append(_join);
+    stringBuilder.append(IterableExtensions.<String>join(((Iterable<String>)Conversions.doWrapArray(suppressedWarnings)), "\"", "\", \"", "\"", _function));
     int _length_1 = suppressedWarnings.length;
     boolean _notEquals_1 = (_length_1 != 1);
     if (_notEquals_1) {
@@ -59,8 +58,7 @@ public class SuppressWarningsAnnotation implements IClassAnnotation {
   
   @Override
   public String toString() {
-    CharSequence _generate = this.generate();
-    return _generate.toString();
+    return this.generate().toString();
   }
   
   @Pure

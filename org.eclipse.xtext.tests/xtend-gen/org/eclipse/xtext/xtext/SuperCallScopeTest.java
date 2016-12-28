@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext;
 
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractRule;
@@ -54,8 +53,7 @@ public class SuperCallScopeTest extends AbstractXtextTests {
     EObject _model = this.getModel(grammarAsString);
     final Grammar grammar = ((Grammar) _model);
     final SuperCallScope scope = new SuperCallScope(grammar);
-    Iterable<IEObjectDescription> _allElements = scope.getAllElements();
-    this.assertElementNames(_allElements, 
+    this.assertElementNames(scope.getAllElements(), 
       "Lang.Rule", "test.Lang.Rule", 
       "Lang.ID", "test.Lang.ID", 
       "super.ID", "Terminals.ID", "org.eclipse.xtext.common.Terminals.ID", 
@@ -81,11 +79,9 @@ public class SuperCallScopeTest extends AbstractXtextTests {
     final String grammarAsString = _builder.toString();
     EObject _model = this.getModel(grammarAsString);
     final Grammar grammar = ((Grammar) _model);
-    EList<AbstractRule> _rules = grammar.getRules();
-    AbstractRule _last = IterableExtensions.<AbstractRule>last(_rules);
+    AbstractRule _last = IterableExtensions.<AbstractRule>last(grammar.getRules());
     final SuperCallScope scope = new SuperCallScope(_last);
-    Iterable<IEObjectDescription> _allElements = scope.getAllElements();
-    this.assertElementNames(_allElements, 
+    this.assertElementNames(scope.getAllElements(), 
       "Lang.Rule", "test.Lang.Rule", 
       "Lang.ID", "test.Lang.ID", 
       "super", 
@@ -113,9 +109,7 @@ public class SuperCallScopeTest extends AbstractXtextTests {
     EObject _model = this.getModel(grammarAsString);
     final Grammar grammar = ((Grammar) _model);
     final SuperCallScope scope = new SuperCallScope(grammar);
-    QualifiedName _create = QualifiedName.create("ID");
-    Iterable<IEObjectDescription> _elements = scope.getElements(_create);
-    this.assertElements(_elements);
+    this.assertElements(scope.getElements(QualifiedName.create("ID")));
   }
   
   @Test
@@ -133,9 +127,7 @@ public class SuperCallScopeTest extends AbstractXtextTests {
     EObject _model = this.getModel(grammarAsString);
     final Grammar grammar = ((Grammar) _model);
     final SuperCallScope scope = new SuperCallScope(grammar);
-    QualifiedName _create = QualifiedName.create("super");
-    Iterable<IEObjectDescription> _elements = scope.getElements(_create);
-    this.assertElements(_elements);
+    this.assertElements(scope.getElements(QualifiedName.create("super")));
   }
   
   @Test
@@ -152,12 +144,9 @@ public class SuperCallScopeTest extends AbstractXtextTests {
     final String grammarAsString = _builder.toString();
     EObject _model = this.getModel(grammarAsString);
     final Grammar grammar = ((Grammar) _model);
-    EList<AbstractRule> _rules = grammar.getRules();
-    AbstractRule _head = IterableExtensions.<AbstractRule>head(_rules);
+    AbstractRule _head = IterableExtensions.<AbstractRule>head(grammar.getRules());
     final SuperCallScope scope = new SuperCallScope(_head);
-    QualifiedName _create = QualifiedName.create("super");
-    Iterable<IEObjectDescription> _elements = scope.getElements(_create);
-    this.assertElements(_elements);
+    this.assertElements(scope.getElements(QualifiedName.create("super")));
   }
   
   @Test
@@ -174,11 +163,9 @@ public class SuperCallScopeTest extends AbstractXtextTests {
     final String grammarAsString = _builder.toString();
     EObject _model = this.getModel(grammarAsString);
     final Grammar grammar = ((Grammar) _model);
-    EList<AbstractRule> _rules = grammar.getRules();
-    AbstractRule _last = IterableExtensions.<AbstractRule>last(_rules);
+    AbstractRule _last = IterableExtensions.<AbstractRule>last(grammar.getRules());
     final SuperCallScope scope = new SuperCallScope(_last);
-    QualifiedName _create = QualifiedName.create("super");
-    Iterable<IEObjectDescription> _elements = scope.getElements(_create);
+    Iterable<IEObjectDescription> _elements = scope.getElements(QualifiedName.create("super"));
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "org.eclipse.xtext.common.Terminals.ID");
     Pair<String, AbstractRule> _mappedTo = Pair.<String, AbstractRule>of("super", _findRuleForName);
     this.assertElements(_elements, _mappedTo);
@@ -199,8 +186,7 @@ public class SuperCallScopeTest extends AbstractXtextTests {
     EObject _model = this.getModel(grammarAsString);
     final Grammar grammar = ((Grammar) _model);
     final SuperCallScope scope = new SuperCallScope(grammar);
-    QualifiedName _create = QualifiedName.create("super", "ID");
-    Iterable<IEObjectDescription> _elements = scope.getElements(_create);
+    Iterable<IEObjectDescription> _elements = scope.getElements(QualifiedName.create("super", "ID"));
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "org.eclipse.xtext.common.Terminals.ID");
     Pair<String, AbstractRule> _mappedTo = Pair.<String, AbstractRule>of("super.ID", _findRuleForName);
     this.assertElements(_elements, _mappedTo);
@@ -221,8 +207,7 @@ public class SuperCallScopeTest extends AbstractXtextTests {
     EObject _model = this.getModel(grammarAsString);
     final Grammar grammar = ((Grammar) _model);
     final SuperCallScope scope = new SuperCallScope(grammar);
-    QualifiedName _create = QualifiedName.create("Lang", "ID");
-    Iterable<IEObjectDescription> _elements = scope.getElements(_create);
+    Iterable<IEObjectDescription> _elements = scope.getElements(QualifiedName.create("Lang", "ID"));
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "test.Lang.ID");
     Pair<String, AbstractRule> _mappedTo = Pair.<String, AbstractRule>of("Lang.ID", _findRuleForName);
     this.assertElements(_elements, _mappedTo);
@@ -243,8 +228,7 @@ public class SuperCallScopeTest extends AbstractXtextTests {
     EObject _model = this.getModel(grammarAsString);
     final Grammar grammar = ((Grammar) _model);
     final SuperCallScope scope = new SuperCallScope(grammar);
-    QualifiedName _create = QualifiedName.create("test", "Lang", "ID");
-    Iterable<IEObjectDescription> _elements = scope.getElements(_create);
+    Iterable<IEObjectDescription> _elements = scope.getElements(QualifiedName.create("test", "Lang", "ID"));
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "test.Lang.ID");
     Pair<String, AbstractRule> _mappedTo = Pair.<String, AbstractRule>of("test.Lang.ID", _findRuleForName);
     this.assertElements(_elements, _mappedTo);
@@ -288,8 +272,7 @@ public class SuperCallScopeTest extends AbstractXtextTests {
     final String grammarAsString = _builder.toString();
     EObject _model = this.getModel(grammarAsString);
     final Grammar grammar = ((Grammar) _model);
-    EList<AbstractRule> _rules = grammar.getRules();
-    AbstractRule _head = IterableExtensions.<AbstractRule>head(_rules);
+    AbstractRule _head = IterableExtensions.<AbstractRule>head(grammar.getRules());
     final SuperCallScope scope = new SuperCallScope(_head);
     final AbstractRule id = GrammarUtil.findRuleForName(grammar, "org.eclipse.xtext.common.Terminals.ID");
     Iterable<IEObjectDescription> _elements = scope.getElements(id);
@@ -316,8 +299,7 @@ public class SuperCallScopeTest extends AbstractXtextTests {
     final String grammarAsString = _builder.toString();
     EObject _model = this.getModel(grammarAsString);
     final Grammar grammar = ((Grammar) _model);
-    EList<AbstractRule> _rules = grammar.getRules();
-    AbstractRule _last = IterableExtensions.<AbstractRule>last(_rules);
+    AbstractRule _last = IterableExtensions.<AbstractRule>last(grammar.getRules());
     final SuperCallScope scope = new SuperCallScope(_last);
     final AbstractRule id = GrammarUtil.findRuleForName(grammar, "org.eclipse.xtext.common.Terminals.ID");
     Iterable<IEObjectDescription> _elements = scope.getElements(id);
@@ -333,46 +315,34 @@ public class SuperCallScopeTest extends AbstractXtextTests {
   }
   
   public void assertElementNames(final Iterable<IEObjectDescription> descriptions, final String... expectedNames) {
-    String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(expectedNames)), "\n");
     final Function1<IEObjectDescription, String> _function = (IEObjectDescription it) -> {
-      QualifiedName _name = it.getName();
-      return _name.toString();
+      return it.getName().toString();
     };
-    Iterable<String> _map = IterableExtensions.<IEObjectDescription, String>map(descriptions, _function);
-    String _join_1 = IterableExtensions.join(_map, "\n");
-    Assert.assertEquals(_join, _join_1);
+    Assert.assertEquals(IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(expectedNames)), "\n"), IterableExtensions.join(IterableExtensions.<IEObjectDescription, String>map(descriptions, _function), "\n"));
   }
   
   public void assertElements(final Iterable<IEObjectDescription> descriptions, final Pair<String, AbstractRule>... expected) {
     final Function1<Pair<String, AbstractRule>, String> _function = (Pair<String, AbstractRule> it) -> {
       String _key = it.getKey();
       String _plus = (_key + "->");
-      AbstractRule _value = it.getValue();
-      Grammar _grammar = GrammarUtil.getGrammar(_value);
-      String _name = _grammar.getName();
+      String _name = GrammarUtil.getGrammar(it.getValue()).getName();
       String _plus_1 = (_plus + _name);
       String _plus_2 = (_plus_1 + ".");
-      AbstractRule _value_1 = it.getValue();
-      String _name_1 = _value_1.getName();
+      String _name_1 = it.getValue().getName();
       return (_plus_2 + _name_1);
     };
-    List<String> _map = ListExtensions.<Pair<String, AbstractRule>, String>map(((List<Pair<String, AbstractRule>>)Conversions.doWrapArray(expected)), _function);
-    String _join = IterableExtensions.join(_map, "\n");
     final Function1<IEObjectDescription, String> _function_1 = (IEObjectDescription it) -> {
-      QualifiedName _name = it.getName();
-      String _string = _name.toString();
+      String _string = it.getName().toString();
       String _plus = (_string + "->");
-      EObject _eObjectOrProxy = it.getEObjectOrProxy();
-      Grammar _grammar = GrammarUtil.getGrammar(_eObjectOrProxy);
-      String _name_1 = _grammar.getName();
-      String _plus_1 = (_plus + _name_1);
+      String _name = GrammarUtil.getGrammar(it.getEObjectOrProxy()).getName();
+      String _plus_1 = (_plus + _name);
       String _plus_2 = (_plus_1 + ".");
-      EObject _eObjectOrProxy_1 = it.getEObjectOrProxy();
-      String _name_2 = ((AbstractRule) _eObjectOrProxy_1).getName();
-      return (_plus_2 + _name_2);
+      EObject _eObjectOrProxy = it.getEObjectOrProxy();
+      String _name_1 = ((AbstractRule) _eObjectOrProxy).getName();
+      return (_plus_2 + _name_1);
     };
-    Iterable<String> _map_1 = IterableExtensions.<IEObjectDescription, String>map(descriptions, _function_1);
-    String _join_1 = IterableExtensions.join(_map_1, "\n");
-    Assert.assertEquals(_join, _join_1);
+    Assert.assertEquals(
+      IterableExtensions.join(ListExtensions.<Pair<String, AbstractRule>, String>map(((List<Pair<String, AbstractRule>>)Conversions.doWrapArray(expected)), _function), "\n"), 
+      IterableExtensions.join(IterableExtensions.<IEObjectDescription, String>map(descriptions, _function_1), "\n"));
   }
 }

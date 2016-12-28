@@ -11,14 +11,12 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.io.Resources;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -29,15 +27,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
-import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.Outlet;
-import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
-import org.eclipse.xtext.xtext.wizard.TargetPlatformProject;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -66,8 +61,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public String getLocation() {
-    WizardConfiguration _config = this.getConfig();
-    String _rootLocation = _config.getRootLocation();
+    String _rootLocation = this.getConfig().getRootLocation();
     String _plus = (_rootLocation + "/");
     String _name = this.getName();
     return (_plus + _name);
@@ -93,8 +87,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
     Iterable<? extends AbstractFile> _files = super.getFiles();
     Iterables.<AbstractFile>addAll(files, _files);
-    WizardConfiguration _config = this.getConfig();
-    boolean _needsGradleBuild = _config.needsGradleBuild();
+    boolean _needsGradleBuild = this.getConfig().needsGradleBuild();
     if (_needsGradleBuild) {
       PlainTextFile _file = this.file(Outlet.ROOT, "settings.gradle", this.settingsGradle());
       files.add(_file);
@@ -102,8 +95,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       files.add(_file_1);
       PlainTextFile _file_2 = this.file(Outlet.ROOT, "gradle/maven-deployment.gradle", this.mavenDeploymentGradle());
       files.add(_file_2);
-      WizardConfiguration _config_1 = this.getConfig();
-      boolean _isNeedsGradleWrapper = _config_1.isNeedsGradleWrapper();
+      boolean _isNeedsGradleWrapper = this.getConfig().isNeedsGradleWrapper();
       if (_isNeedsGradleWrapper) {
         PlainTextFile _file_3 = this.file(Outlet.ROOT, "gradlew", this.loadResource("gradlew/gradlew"), true);
         files.add(_file_3);
@@ -119,17 +111,12 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
   
   public String getJavaVersion() {
-    WizardConfiguration _config = this.getConfig();
-    JavaVersion _javaVersion = _config.getJavaVersion();
-    return _javaVersion.getQualifier();
+    return this.getConfig().getJavaVersion().getQualifier();
   }
   
   private CharSequence loadResource(final String resourcePath) {
     try {
-      Class<? extends ParentProjectDescriptor> _class = this.getClass();
-      ClassLoader _classLoader = _class.getClassLoader();
-      URL _resource = _classLoader.getResource(resourcePath);
-      return Resources.toString(_resource, Charsets.ISO_8859_1);
+      return Resources.toString(this.getClass().getClassLoader().getResource(resourcePath), Charsets.ISO_8859_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -156,22 +143,16 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("classpath \'org.xtext:xtext-gradle-plugin:");
-      WizardConfiguration _config = this.getConfig();
-      XtextVersion _xtextVersion = _config.getXtextVersion();
-      String _xtextGradlePluginVersion = _xtextVersion.getXtextGradlePluginVersion();
+      String _xtextGradlePluginVersion = this.getConfig().getXtextVersion().getXtextGradlePluginVersion();
       _builder.append(_xtextGradlePluginVersion, "\t\t");
       _builder.append("\'");
       _builder.newLineIfNotEmpty();
       {
-        WizardConfiguration _config_1 = this.getConfig();
-        IntellijProjectDescriptor _intellijProject = _config_1.getIntellijProject();
-        boolean _isEnabled = _intellijProject.isEnabled();
+        boolean _isEnabled = this.getConfig().getIntellijProject().isEnabled();
         if (_isEnabled) {
           _builder.append("\t\t");
           _builder.append("classpath \'org.xtext:xtext-idea-gradle-plugin:");
-          WizardConfiguration _config_2 = this.getConfig();
-          XtextVersion _xtextVersion_1 = _config_2.getXtextVersion();
-          String _xtextGradlePluginVersion_1 = _xtextVersion_1.getXtextGradlePluginVersion();
+          String _xtextGradlePluginVersion_1 = this.getConfig().getXtextVersion().getXtextGradlePluginVersion();
           _builder.append(_xtextGradlePluginVersion_1, "\t\t");
           _builder.append("\'");
           _builder.newLineIfNotEmpty();
@@ -187,9 +168,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ext.xtextVersion = \'");
-      WizardConfiguration _config_3 = this.getConfig();
-      XtextVersion _xtextVersion_2 = _config_3.getXtextVersion();
-      _builder.append(_xtextVersion_2, "\t");
+      XtextVersion _xtextVersion = this.getConfig().getXtextVersion();
+      _builder.append(_xtextVersion, "\t");
       _builder.append("\'");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -199,9 +179,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("jcenter()");
       _builder.newLine();
       {
-        WizardConfiguration _config_4 = this.getConfig();
-        XtextVersion _xtextVersion_3 = _config_4.getXtextVersion();
-        boolean _isSnapshot = _xtextVersion_3.isSnapshot();
+        boolean _isSnapshot = this.getConfig().getXtextVersion().isSnapshot();
         if (_isSnapshot) {
           _builder.append("\t\t");
           _builder.append("maven {");
@@ -242,8 +220,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("group = \'");
-      WizardConfiguration _config_5 = this.getConfig();
-      String _baseName = _config_5.getBaseName();
+      String _baseName = this.getConfig().getBaseName();
       _builder.append(_baseName, "\t");
       _builder.append("\'");
       _builder.newLineIfNotEmpty();
@@ -285,16 +262,13 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   public CharSequence settingsGradle() {
     StringConcatenation _builder = new StringConcatenation();
     {
-      WizardConfiguration _config = this.getConfig();
-      Set<ProjectDescriptor> _enabledProjects = _config.getEnabledProjects();
       final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
         return Boolean.valueOf(((!Objects.equal(it, this)) && it.isPartOfGradleBuild()));
       };
-      Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function);
+      Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(this.getConfig().getEnabledProjects(), _function);
       for(final ProjectDescriptor p : _filter) {
         {
-          WizardConfiguration _config_1 = this.getConfig();
-          ProjectLayout _projectLayout = _config_1.getProjectLayout();
+          ProjectLayout _projectLayout = this.getConfig().getProjectLayout();
           boolean _equals = Objects.equal(_projectLayout, ProjectLayout.FLAT);
           if (_equals) {
             _builder.append("includeFlat");
@@ -315,8 +289,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   public CharSequence sourceLayoutGradle() {
     StringConcatenation _builder = new StringConcatenation();
     {
-      WizardConfiguration _config = this.getConfig();
-      SourceLayout _sourceLayout = _config.getSourceLayout();
+      SourceLayout _sourceLayout = this.getConfig().getSourceLayout();
       boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
       if (_equals) {
         _builder.append("if (name.endsWith(\".tests\")) {");
@@ -585,8 +558,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("<properties>");
       _builder.newLine();
       {
-        WizardConfiguration _config = this.getConfig();
-        boolean _needsTychoBuild = _config.needsTychoBuild();
+        boolean _needsTychoBuild = this.getConfig().needsTychoBuild();
         if (_needsTychoBuild) {
           _builder.append("\t");
           _builder.append("<tycho-version>0.25.0</tycho-version>");
@@ -595,15 +567,13 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       }
       _builder.append("\t");
       _builder.append("<xtextVersion>");
-      WizardConfiguration _config_1 = this.getConfig();
-      XtextVersion _xtextVersion = _config_1.getXtextVersion();
+      XtextVersion _xtextVersion = this.getConfig().getXtextVersion();
       _builder.append(_xtextVersion, "\t");
       _builder.append("</xtextVersion>");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("<project.build.sourceEncoding>");
-      WizardConfiguration _config_2 = this.getConfig();
-      Charset _encoding = _config_2.getEncoding();
+      Charset _encoding = this.getConfig().getEncoding();
       _builder.append(_encoding, "\t");
       _builder.append("</project.build.sourceEncoding>");
       _builder.newLineIfNotEmpty();
@@ -624,18 +594,15 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("<modules>");
       _builder.newLine();
       {
-        WizardConfiguration _config_3 = this.getConfig();
-        Set<ProjectDescriptor> _enabledProjects = _config_3.getEnabledProjects();
         final Function1<ProjectDescriptor, Boolean> _function_1 = (ProjectDescriptor it_1) -> {
           return Boolean.valueOf(((!Objects.equal(it_1, this)) && it_1.isPartOfMavenBuild()));
         };
-        Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function_1);
+        Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(this.getConfig().getEnabledProjects(), _function_1);
         for(final ProjectDescriptor p : _filter) {
           _builder.append("\t");
           _builder.append("<module>");
           {
-            WizardConfiguration _config_4 = this.getConfig();
-            ProjectLayout _projectLayout = _config_4.getProjectLayout();
+            ProjectLayout _projectLayout = this.getConfig().getProjectLayout();
             boolean _equals = Objects.equal(_projectLayout, ProjectLayout.FLAT);
             if (_equals) {
               _builder.append("../");
@@ -652,8 +619,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("<build>");
       _builder.newLine();
       {
-        WizardConfiguration _config_5 = this.getConfig();
-        boolean _needsTychoBuild_1 = _config_5.needsTychoBuild();
+        boolean _needsTychoBuild_1 = this.getConfig().needsTychoBuild();
         if (_needsTychoBuild_1) {
           _builder.append("\t");
           _builder.append("<plugins>");
@@ -683,9 +649,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("</plugin>");
           _builder.newLine();
           {
-            WizardConfiguration _config_6 = this.getConfig();
-            P2RepositoryProject _p2Project = _config_6.getP2Project();
-            boolean _isEnabled = _p2Project.isEnabled();
+            boolean _isEnabled = this.getConfig().getP2Project().isEnabled();
             if (_isEnabled) {
               _builder.append("\t");
               _builder.append("\t");
@@ -919,17 +883,14 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("\t");
           _builder.append("\t\t\t\t\t");
           _builder.append("<groupId>");
-          WizardConfiguration _config_7 = this.getConfig();
-          String _baseName = _config_7.getBaseName();
+          String _baseName = this.getConfig().getBaseName();
           _builder.append(_baseName, "\t\t\t\t\t\t");
           _builder.append("</groupId>");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("\t\t\t\t\t");
           _builder.append("<artifactId>");
-          WizardConfiguration _config_8 = this.getConfig();
-          TargetPlatformProject _targetPlatformProject = _config_8.getTargetPlatformProject();
-          String _name_1 = _targetPlatformProject.getName();
+          String _name_1 = this.getConfig().getTargetPlatformProject().getName();
           _builder.append(_name_1, "\t\t\t\t\t\t");
           _builder.append("</artifactId>");
           _builder.newLineIfNotEmpty();
@@ -1111,11 +1072,10 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("<fileset>");
       _builder.newLine();
       {
-        Set<Outlet> _set = IterableExtensions.<Outlet>toSet(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN)));
         final Function1<Outlet, String> _function_2 = (Outlet it_1) -> {
           return this.sourceFolder(it_1);
         };
-        Iterable<String> _map = IterableExtensions.<Outlet, String>map(_set, _function_2);
+        Iterable<String> _map = IterableExtensions.<Outlet, String>map(IterableExtensions.<Outlet>toSet(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN))), _function_2);
         for(final String dir : _map) {
           _builder.append("\t\t\t\t\t\t\t");
           _builder.append("<directory>${basedir}/");
@@ -1294,8 +1254,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</pluginExecution>");
       _builder.newLine();
       {
-        WizardConfiguration _config_9 = this.getConfig();
-        boolean _needsTychoBuild_2 = _config_9.needsTychoBuild();
+        boolean _needsTychoBuild_2 = this.getConfig().needsTychoBuild();
         if (_needsTychoBuild_2) {
           _builder.append("\t\t\t\t\t\t\t");
           _builder.append("<pluginExecution>");
@@ -1472,8 +1431,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</plugin>");
       _builder.newLine();
       {
-        WizardConfiguration _config_10 = this.getConfig();
-        boolean _needsTychoBuild_3 = _config_10.needsTychoBuild();
+        boolean _needsTychoBuild_3 = this.getConfig().needsTychoBuild();
         if (_needsTychoBuild_3) {
           _builder.append("\t\t\t");
           _builder.append("<plugin>");
@@ -1567,9 +1525,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</repository>");
       _builder.newLine();
       {
-        WizardConfiguration _config_11 = this.getConfig();
-        XtextVersion _xtextVersion_1 = _config_11.getXtextVersion();
-        boolean _isSnapshot = _xtextVersion_1.isSnapshot();
+        boolean _isSnapshot = this.getConfig().getXtextVersion().isSnapshot();
         if (_isSnapshot) {
           _builder.append("\t");
           _builder.append("<repository>");
@@ -1633,9 +1589,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</pluginRepository>");
       _builder.newLine();
       {
-        WizardConfiguration _config_12 = this.getConfig();
-        XtextVersion _xtextVersion_2 = _config_12.getXtextVersion();
-        boolean _isSnapshot_1 = _xtextVersion_2.isSnapshot();
+        boolean _isSnapshot_1 = this.getConfig().getXtextVersion().isSnapshot();
         if (_isSnapshot_1) {
           _builder.append("\t");
           _builder.append("<pluginRepository>");

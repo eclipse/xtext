@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.generator.grammarAccess;
 
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -48,13 +47,11 @@ public class FragmentFakingEcoreResource extends XMIResourceImpl {
     super(uri);
     this.isSaving = isSaving;
     this.encoding = "UTF-8";
+    this.getDefaultSaveOptions().put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.valueOf(true));
+    this.getDefaultSaveOptions().put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(80));
     Map<Object, Object> _defaultSaveOptions = this.getDefaultSaveOptions();
-    _defaultSaveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.valueOf(true));
-    Map<Object, Object> _defaultSaveOptions_1 = this.getDefaultSaveOptions();
-    _defaultSaveOptions_1.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(80));
-    Map<Object, Object> _defaultSaveOptions_2 = this.getDefaultSaveOptions();
     URIHandlerImpl.PlatformSchemeAware _platformSchemeAware = new URIHandlerImpl.PlatformSchemeAware();
-    _defaultSaveOptions_2.put(XMLResource.OPTION_URI_HANDLER, _platformSchemeAware);
+    _defaultSaveOptions.put(XMLResource.OPTION_URI_HANDLER, _platformSchemeAware);
   }
   
   @Override
@@ -77,14 +74,12 @@ public class FragmentFakingEcoreResource extends XMIResourceImpl {
   }
   
   public String getURIFragment(final EClassifier classifier) {
-    EPackage _ePackage = classifier.getEPackage();
-    EPackage _eSuperPackage = _ePackage.getESuperPackage();
+    EPackage _eSuperPackage = classifier.getEPackage().getESuperPackage();
     boolean _tripleNotEquals = (_eSuperPackage != null);
     if (_tripleNotEquals) {
       final StringBuilder result = new StringBuilder(60);
       this.calculateURIFragment(classifier.getEPackage(), result, CollectionLiterals.<EPackage>newHashSet());
-      String _name = classifier.getName();
-      result.append(_name);
+      result.append(classifier.getName());
       return result.toString();
     }
     return null;
@@ -100,21 +95,17 @@ public class FragmentFakingEcoreResource extends XMIResourceImpl {
     boolean _tripleNotEquals = (_eSuperPackage != null);
     if (_tripleNotEquals) {
       Resource _eResource = ePackage.eResource();
-      EPackage _eSuperPackage_1 = ePackage.getESuperPackage();
-      Resource _eResource_1 = _eSuperPackage_1.eResource();
+      Resource _eResource_1 = ePackage.getESuperPackage().eResource();
       boolean _tripleEquals = (_eResource == _eResource_1);
       if (_tripleEquals) {
         this.calculateURIFragment(ePackage.getESuperPackage(), result, visited);
-        EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-        boolean _isEmpty = _eClassifiers.isEmpty();
+        boolean _isEmpty = ePackage.getEClassifiers().isEmpty();
         boolean _not_1 = (!_isEmpty);
         if (_not_1) {
           int _length = result.length();
           boolean _tripleNotEquals_1 = (_length != 0);
           if (_tripleNotEquals_1) {
-            String _name = ePackage.getName();
-            StringBuilder _append = result.append(_name);
-            _append.append("/");
+            result.append(ePackage.getName()).append("/");
           } else {
             result.append("//");
           }

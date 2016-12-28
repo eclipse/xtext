@@ -36,8 +36,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {
-    WizardConfiguration _config = this.getConfig();
-    RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
+    RuntimeProjectDescriptor _runtimeProject = this.getConfig().getRuntimeProject();
     return Collections.<ProjectDescriptor>unmodifiableSet(CollectionLiterals.<ProjectDescriptor>newHashSet(_runtimeProject));
   }
   

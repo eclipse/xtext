@@ -7,10 +7,7 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
 import org.junit.Assert;
@@ -32,29 +29,21 @@ public class Formatter2Fragment2Test {
   
   @Test
   public void testVarNameWithEClass() {
-    EClass _eClass = EcorePackage.eINSTANCE.getEClass();
-    String _varName = this.fragment.toVarName(_eClass);
-    Assert.assertEquals("eClass", _varName);
+    Assert.assertEquals("eClass", this.fragment.toVarName(EcorePackage.eINSTANCE.getEClass()));
   }
   
   @Test
   public void testVarNameWithMultiReference() {
-    EReference _eClass_EAllOperations = EcorePackage.eINSTANCE.getEClass_EAllOperations();
-    String _varName = this.fragment.toVarName(_eClass_EAllOperations);
-    Assert.assertEquals("eOperation", _varName);
+    Assert.assertEquals("eOperation", this.fragment.toVarName(EcorePackage.eINSTANCE.getEClass_EAllOperations()));
   }
   
   @Test
   public void testVarNameWithSingleReference() {
-    EAttribute _eNamedElement_Name = EcorePackage.eINSTANCE.getENamedElement_Name();
-    String _varName = this.fragment.toVarName(_eNamedElement_Name);
-    Assert.assertEquals("name", _varName);
+    Assert.assertEquals("name", this.fragment.toVarName(EcorePackage.eINSTANCE.getENamedElement_Name()));
   }
   
   @Test
   public void testVarNameConflictingWithXtendKeyword() {
-    EAttribute _eClass_Abstract = EcorePackage.eINSTANCE.getEClass_Abstract();
-    String _varName = this.fragment.toVarName(_eClass_Abstract);
-    Assert.assertEquals("_abstract", _varName);
+    Assert.assertEquals("_abstract", this.fragment.toVarName(EcorePackage.eINSTANCE.getEClass_Abstract()));
   }
 }

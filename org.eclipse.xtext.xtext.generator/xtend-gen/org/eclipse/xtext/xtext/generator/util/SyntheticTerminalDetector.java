@@ -32,8 +32,7 @@ public class SyntheticTerminalDetector {
     if ((_alternatives instanceof Keyword)) {
       AbstractElement _alternatives_1 = rule.getAlternatives();
       String value = ((Keyword) _alternatives_1).getValue();
-      TerminalRule _originalElement = AntlrGrammarGenUtil.<TerminalRule>getOriginalElement(rule);
-      String _name = _originalElement.getName();
+      String _name = AntlrGrammarGenUtil.<TerminalRule>getOriginalElement(rule).getName();
       String _plus = ("synthetic:" + _name);
       return Objects.equal(_plus, value);
     }

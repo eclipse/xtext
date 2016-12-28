@@ -8,7 +8,6 @@
 package org.eclipse.xtext.generator;
 
 import java.util.Collections;
-import java.util.List;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -25,51 +24,37 @@ public class TypeReferenceTest {
   @Test
   public void testDefaultPackage() {
     final TypeReference ref = TypeReference.typeRef("EString");
-    String _packageName = ref.getPackageName();
-    Assert.assertEquals("", _packageName);
-    String _simpleName = ref.getSimpleName();
-    Assert.assertEquals("EString", _simpleName);
+    Assert.assertEquals("", ref.getPackageName());
+    Assert.assertEquals("EString", ref.getSimpleName());
   }
   
   @Test
   public void testUnderscopresAnd$() {
     final TypeReference ref = TypeReference.typeRef("E_$tring");
-    String _packageName = ref.getPackageName();
-    Assert.assertEquals("", _packageName);
-    String _simpleName = ref.getSimpleName();
-    Assert.assertEquals("E_$tring", _simpleName);
+    Assert.assertEquals("", ref.getPackageName());
+    Assert.assertEquals("E_$tring", ref.getSimpleName());
   }
   
   @Test
   public void testUnderscopresAnd$02() {
     final TypeReference ref = TypeReference.typeRef("$.$._$.E_$tring");
-    String _packageName = ref.getPackageName();
-    Assert.assertEquals("$.$._$", _packageName);
-    String _simpleName = ref.getSimpleName();
-    Assert.assertEquals("E_$tring", _simpleName);
+    Assert.assertEquals("$.$._$", ref.getPackageName());
+    Assert.assertEquals("E_$tring", ref.getSimpleName());
   }
   
   @Test
   public void testPackageName() {
     final TypeReference ref = TypeReference.typeRef("org.example.MyType");
-    String _simpleName = ref.getSimpleName();
-    Assert.assertEquals("MyType", _simpleName);
-    String _packageName = ref.getPackageName();
-    Assert.assertEquals("org.example", _packageName);
+    Assert.assertEquals("MyType", ref.getSimpleName());
+    Assert.assertEquals("org.example", ref.getPackageName());
   }
   
   @Test
   public void testParametrizedType() {
-    TypeReference _typeRef = TypeReference.typeRef("String");
-    final TypeReference ref = TypeReference.typeRef("java.util.List", _typeRef);
-    String _simpleName = ref.getSimpleName();
-    Assert.assertEquals("List", _simpleName);
-    String _packageName = ref.getPackageName();
-    Assert.assertEquals("java.util", _packageName);
-    List<TypeReference> _typeArguments = ref.getTypeArguments();
-    TypeReference _head = IterableExtensions.<TypeReference>head(_typeArguments);
-    String _simpleName_1 = _head.getSimpleName();
-    Assert.assertEquals("String", _simpleName_1);
+    final TypeReference ref = TypeReference.typeRef("java.util.List", TypeReference.typeRef("String"));
+    Assert.assertEquals("List", ref.getSimpleName());
+    Assert.assertEquals("java.util", ref.getPackageName());
+    Assert.assertEquals("String", IterableExtensions.<TypeReference>head(ref.getTypeArguments()).getSimpleName());
   }
   
   @Test(expected = IllegalArgumentException.class)
@@ -80,34 +65,25 @@ public class TypeReferenceTest {
   @Test
   public void testNestedType() {
     final TypeReference ref = new TypeReference("java.util", "Map.Entry");
-    String _packageName = ref.getPackageName();
-    Assert.assertEquals("java.util", _packageName);
-    String _simpleName = ref.getSimpleName();
-    Assert.assertEquals("Entry", _simpleName);
-    List<String> _simpleNames = ref.getSimpleNames();
-    Assert.assertEquals(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Map", "Entry")), _simpleNames);
+    Assert.assertEquals("java.util", ref.getPackageName());
+    Assert.assertEquals("Entry", ref.getSimpleName());
+    Assert.assertEquals(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Map", "Entry")), ref.getSimpleNames());
   }
   
   @Test
   public void testLowerCaseNestedType() {
     final TypeReference ref = new TypeReference("java.util", "Map.entry");
-    String _packageName = ref.getPackageName();
-    Assert.assertEquals("java.util", _packageName);
-    String _simpleName = ref.getSimpleName();
-    Assert.assertEquals("entry", _simpleName);
-    List<String> _simpleNames = ref.getSimpleNames();
-    Assert.assertEquals(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Map", "entry")), _simpleNames);
+    Assert.assertEquals("java.util", ref.getPackageName());
+    Assert.assertEquals("entry", ref.getSimpleName());
+    Assert.assertEquals(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Map", "entry")), ref.getSimpleNames());
   }
   
   @Test
   public void testGuessTypeRef() {
     final TypeReference ref = TypeReference.guessTypeRef("java.util.Map.Entry");
-    String _packageName = ref.getPackageName();
-    Assert.assertEquals("java.util", _packageName);
-    String _simpleName = ref.getSimpleName();
-    Assert.assertEquals("Entry", _simpleName);
-    List<String> _simpleNames = ref.getSimpleNames();
-    Assert.assertEquals(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Map", "Entry")), _simpleNames);
+    Assert.assertEquals("java.util", ref.getPackageName());
+    Assert.assertEquals("Entry", ref.getSimpleName());
+    Assert.assertEquals(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Map", "Entry")), ref.getSimpleNames());
   }
   
   @Test(expected = IllegalArgumentException.class)
@@ -118,22 +94,19 @@ public class TypeReferenceTest {
   @Test
   public void testJavaPath() {
     final TypeReference ref = TypeReference.typeRef("org.example.MyType");
-    String _javaPath = ref.getJavaPath();
-    Assert.assertEquals("org/example/MyType.java", _javaPath);
+    Assert.assertEquals("org/example/MyType.java", ref.getJavaPath());
   }
   
   @Test
   public void testXtendPath() {
     final TypeReference ref = TypeReference.typeRef("org.example.MyType");
-    String _xtendPath = ref.getXtendPath();
-    Assert.assertEquals("org/example/MyType.xtend", _xtendPath);
+    Assert.assertEquals("org/example/MyType.xtend", ref.getXtendPath());
   }
   
   @Test
   public void testEObject() {
     final ResourceSetImpl rs = new ResourceSetImpl();
     final TypeReference ref = new TypeReference(EcorePackage.Literals.EOBJECT, rs);
-    String _name = ref.getName();
-    Assert.assertEquals("org.eclipse.emf.ecore.EObject", _name);
+    Assert.assertEquals("org.eclipse.emf.ecore.EObject", ref.getName());
   }
 }

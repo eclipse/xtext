@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -99,8 +98,7 @@ public class JavaFileAccess extends TextFileAccess {
   private ResourceSet resourceSet;
   
   protected JavaFileAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
-    List<String> _simpleNames = typeRef.getSimpleNames();
-    int _length = ((Object[])Conversions.unwrapArray(_simpleNames, Object.class)).length;
+    int _length = ((Object[])Conversions.unwrapArray(typeRef.getSimpleNames(), Object.class)).length;
     boolean _greaterThan = (_length > 1);
     if (_greaterThan) {
       throw new IllegalArgumentException(("Nested type cannot be serialized: " + typeRef));
@@ -136,8 +134,7 @@ public class JavaFileAccess extends TextFileAccess {
           if (((!CodeGenUtil2.isJavaDefaultType(simpleName)) && (!((i > 0) && (simpleName.length() <= this.importNestedTypeThreshold))))) {
             String _packageName = typeRef.getPackageName();
             String _plus = (_packageName + ".");
-            List<String> _subList = simpleNames.subList(0, (i + 1));
-            String _join = IterableExtensions.join(_subList, ".");
+            String _join = IterableExtensions.join(simpleNames.subList(0, (i + 1)), ".");
             final String importable = (_plus + _join);
             final String imported = this.imports.get(usableName);
             if ((imported == null)) {
@@ -156,11 +153,10 @@ public class JavaFileAccess extends TextFileAccess {
         usableName = typeRef.getName();
       }
     }
-    List<TypeReference> _typeArguments = typeRef.getTypeArguments();
     final Function1<TypeReference, CharSequence> _function = (TypeReference it) -> {
       return this.importType(it);
     };
-    String _join = IterableExtensions.<TypeReference>join(_typeArguments, "<", ", ", ">", _function);
+    String _join = IterableExtensions.<TypeReference>join(typeRef.getTypeArguments(), "<", ", ", ">", _function);
     return (usableName + _join);
   }
   
@@ -193,9 +189,7 @@ public class JavaFileAccess extends TextFileAccess {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      Collection<String> _values = this.imports.values();
-      Set<String> _set = IterableExtensions.<String>toSet(_values);
-      List<String> _sort = IterableExtensions.<String>sort(_set);
+      List<String> _sort = IterableExtensions.<String>sort(IterableExtensions.<String>toSet(this.imports.values()));
       for(final String importName : _sort) {
         _builder.append("import ");
         _builder.append(importName);

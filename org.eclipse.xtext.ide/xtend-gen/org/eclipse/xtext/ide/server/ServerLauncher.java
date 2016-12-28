@@ -10,7 +10,6 @@ package org.eclipse.xtext.ide.server;
 import com.google.common.base.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -38,15 +37,15 @@ public class ServerLauncher {
   private static boolean IS_DEBUG = false;
   
   public static void main(final String[] args) {
-    ServerLauncher.IS_DEBUG = IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), ((Function1<String, Boolean>) (String it) -> {
+    final Function1<String, Boolean> _function = (String it) -> {
       return Boolean.valueOf(Objects.equal(it, "debug"));
-    }));
+    };
+    ServerLauncher.IS_DEBUG = IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), _function);
     final InputStream stdin = System.in;
     final PrintStream stdout = System.out;
     ServerLauncher.redirectStandardStreams();
     ServerModule _serverModule = new ServerModule();
-    Injector _createInjector = Guice.createInjector(_serverModule);
-    final ServerLauncher launcher = _createInjector.<ServerLauncher>getInstance(ServerLauncher.class);
+    final ServerLauncher launcher = Guice.createInjector(_serverModule).<ServerLauncher>getInstance(ServerLauncher.class);
     launcher.start(stdin, stdout);
   }
   
@@ -58,8 +57,7 @@ public class ServerLauncher {
       System.err.println("Starting Xtext Language Server.");
       PrintWriter _printWriter = new PrintWriter(System.out);
       final Launcher<LanguageClient> launcher = Launcher.<LanguageClient>createLauncher(this.languageServer, LanguageClient.class, in, out, true, _printWriter);
-      LanguageClient _remoteProxy = launcher.getRemoteProxy();
-      this.languageServer.connect(_remoteProxy);
+      this.languageServer.connect(launcher.getRemoteProxy());
       final Future<?> future = launcher.startListening();
       System.err.println("started.");
       while ((!future.isDone())) {

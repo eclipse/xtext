@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.formatting2.internal;
 
-import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -61,9 +60,7 @@ public class TestableTextSegmentSet {
       _builder_1.append("]");
       return _builder_1.toString();
     };
-    Iterable<String> _map = IterableExtensions.<ITextSegment, String>map(this.set, _function);
-    String _string = _map.toString();
-    String _replace = _string.replace("\n", ", ");
+    String _replace = IterableExtensions.<ITextSegment, String>map(this.set, _function).toString().replace("\n", ", ");
     _builder.append(_replace);
     _builder.newLineIfNotEmpty();
     return _builder.toString();
@@ -75,18 +72,16 @@ public class TestableTextSegmentSet {
     } catch (final Throwable _t) {
       if (_t instanceof ConflictingRegionsException) {
         final ConflictingRegionsException e = (ConflictingRegionsException)_t;
-        Collection<RegionTrace> _traces = e.getTraces();
         final Function1<RegionTrace, ITextSegment> _function = (RegionTrace it) -> {
           return it.getRegion();
         };
-        final Iterable<ITextSegment> conflicting = IterableExtensions.<RegionTrace, ITextSegment>map(_traces, _function);
+        final Iterable<ITextSegment> conflicting = IterableExtensions.<RegionTrace, ITextSegment>map(e.getTraces(), _function);
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("mergeConflict:");
         final Function1<ITextSegment, String> _function_1 = (ITextSegment it) -> {
           return this.fmt(it);
         };
-        Iterable<String> _map = IterableExtensions.<ITextSegment, String>map(conflicting, _function_1);
-        String _join = IterableExtensions.join(_map, "<>");
+        String _join = IterableExtensions.join(IterableExtensions.<ITextSegment, String>map(conflicting, _function_1), "<>");
         _builder.append(_join);
         this.issues.add(_builder.toString());
       } else {

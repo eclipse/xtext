@@ -11,15 +11,12 @@ import com.google.inject.Inject;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
  * Contributes the 'Quick Outline' entry to the language editor's context menu.
@@ -34,26 +31,16 @@ public class QuickOutlineFragment2 extends AbstractXtextGeneratorFragment {
   
   @Override
   public void generate() {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    ManifestAccess _manifest = _eclipsePlugin.getManifest();
+    ManifestAccess _manifest = this.getProjectConfig().getEclipsePlugin().getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
-      ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
-      Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
+      Set<String> _requiredBundles = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
       _requiredBundles.add("org.eclipse.xtext.ui");
     }
-    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
-    PluginXmlAccess _pluginXml = _eclipsePlugin_2.getPluginXml();
+    PluginXmlAccess _pluginXml = this.getProjectConfig().getEclipsePlugin().getPluginXml();
     boolean _tripleNotEquals_1 = (_pluginXml != null);
     if (_tripleNotEquals_1) {
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
-      PluginXmlAccess _pluginXml_1 = _eclipsePlugin_3.getPluginXml();
-      List<CharSequence> _entries = _pluginXml_1.getEntries();
+      List<CharSequence> _entries = this.getProjectConfig().getEclipsePlugin().getPluginXml().getEntries();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<!-- Quick Outline -->");
       _builder.newLine();
@@ -67,8 +54,7 @@ public class QuickOutlineFragment2 extends AbstractXtextGeneratorFragment {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("class=\"");
-      Grammar _grammar = this.getGrammar();
-      TypeReference _eclipsePluginExecutableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(_grammar);
+      TypeReference _eclipsePluginExecutableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(this.getGrammar());
       _builder.append(_eclipsePluginExecutableExtensionFactory, "\t\t");
       _builder.append(":org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler\"");
       _builder.newLineIfNotEmpty();
@@ -83,8 +69,7 @@ public class QuickOutlineFragment2 extends AbstractXtextGeneratorFragment {
       _builder.newLine();
       _builder.append("\t\t\t\t");
       _builder.append("definitionId=\"");
-      Grammar _grammar_1 = this.getGrammar();
-      String _name = _grammar_1.getName();
+      String _name = this.getGrammar().getName();
       _builder.append(_name, "\t\t\t\t");
       _builder.append(".Editor.opened\">");
       _builder.newLineIfNotEmpty();
@@ -143,8 +128,7 @@ public class QuickOutlineFragment2 extends AbstractXtextGeneratorFragment {
       _builder.newLine();
       _builder.append("\t\t\t\t");
       _builder.append("<reference definitionId=\"");
-      Grammar _grammar_2 = this.getGrammar();
-      String _name_1 = _grammar_2.getName();
+      String _name_1 = this.getGrammar().getName();
       _builder.append(_name_1, "\t\t\t\t");
       _builder.append(".Editor.opened\"/>");
       _builder.newLineIfNotEmpty();

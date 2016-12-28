@@ -8,8 +8,6 @@
 package org.eclipse.xtext.ide.tests.server;
 
 import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.DidChangeTextDocumentParams;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
@@ -46,11 +44,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     _builder.newLine();
     final String firstFile = this.writeFile("MyType1.testlang", _builder);
     this.initialize();
-    Map<String, List<Diagnostic>> _diagnostics = this.getDiagnostics();
-    List<Diagnostic> _get = _diagnostics.get(firstFile);
-    Diagnostic _head = IterableExtensions.<Diagnostic>head(_get);
-    String _message = _head.getMessage();
-    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", IterableExtensions.<Diagnostic>head(this.getDiagnostics().get(firstFile)).getMessage());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("type Foo {");
     _builder_1.newLine();
@@ -62,27 +56,16 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     DidChangeWatchedFilesParams _didChangeWatchedFilesParams = new DidChangeWatchedFilesParams(
       Collections.<FileEvent>unmodifiableList(CollectionLiterals.<FileEvent>newArrayList(_fileEvent)));
     _workspaceService.didChangeWatchedFiles(_didChangeWatchedFilesParams);
-    Map<String, List<Diagnostic>> _diagnostics_1 = this.getDiagnostics();
-    List<Diagnostic> _get_1 = _diagnostics_1.get(firstFile);
-    Diagnostic _head_1 = IterableExtensions.<Diagnostic>head(_get_1);
-    String _message_1 = _head_1.getMessage();
-    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_1);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", IterableExtensions.<Diagnostic>head(this.getDiagnostics().get(firstFile)).getMessage());
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("type NonExisting {");
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
     this.open(path, _builder_2.toString());
-    Map<String, List<Diagnostic>> _diagnostics_2 = this.getDiagnostics();
-    List<Diagnostic> _get_2 = _diagnostics_2.get(firstFile);
-    Diagnostic _head_2 = IterableExtensions.<Diagnostic>head(_get_2);
-    Assert.assertNull(_head_2);
+    Assert.assertNull(IterableExtensions.<Diagnostic>head(this.getDiagnostics().get(firstFile)));
     this.close(path);
-    Map<String, List<Diagnostic>> _diagnostics_3 = this.getDiagnostics();
-    List<Diagnostic> _get_3 = _diagnostics_3.get(firstFile);
-    Diagnostic _head_3 = IterableExtensions.<Diagnostic>head(_get_3);
-    String _message_2 = _head_3.getMessage();
-    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_2);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", IterableExtensions.<Diagnostic>head(this.getDiagnostics().get(firstFile)).getMessage());
   }
   
   @Test
@@ -97,11 +80,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     _builder.newLine();
     final String firstFile = this.writeFile("MyType1.testlang", _builder);
     this.initialize();
-    Map<String, List<Diagnostic>> _diagnostics = this.getDiagnostics();
-    List<Diagnostic> _get = _diagnostics.get(firstFile);
-    Diagnostic _head = IterableExtensions.<Diagnostic>head(_get);
-    String _message = _head.getMessage();
-    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", IterableExtensions.<Diagnostic>head(this.getDiagnostics().get(firstFile)).getMessage());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("type Test {");
     _builder_1.newLine();
@@ -111,11 +90,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     this.open(firstFile, _builder_1.toString());
-    Map<String, List<Diagnostic>> _diagnostics_1 = this.getDiagnostics();
-    List<Diagnostic> _get_1 = _diagnostics_1.get(firstFile);
-    Diagnostic _head_1 = IterableExtensions.<Diagnostic>head(_get_1);
-    String _message_1 = _head_1.getMessage();
-    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_1);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", IterableExtensions.<Diagnostic>head(this.getDiagnostics().get(firstFile)).getMessage());
     DidChangeTextDocumentParams _didChangeTextDocumentParams = new DidChangeTextDocumentParams();
     final Procedure1<DidChangeTextDocumentParams> _function = (DidChangeTextDocumentParams it) -> {
       VersionedTextDocumentIdentifier _versionedTextDocumentIdentifier = new VersionedTextDocumentIdentifier();
@@ -138,10 +113,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     };
     DidChangeTextDocumentParams _doubleArrow = ObjectExtensions.<DidChangeTextDocumentParams>operator_doubleArrow(_didChangeTextDocumentParams, _function);
     this.languageServer.didChange(_doubleArrow);
-    Map<String, List<Diagnostic>> _diagnostics_2 = this.getDiagnostics();
-    List<Diagnostic> _get_2 = _diagnostics_2.get(firstFile);
-    Diagnostic _head_2 = IterableExtensions.<Diagnostic>head(_get_2);
-    Assert.assertNull(_head_2);
+    Assert.assertNull(IterableExtensions.<Diagnostic>head(this.getDiagnostics().get(firstFile)));
   }
   
   @Test
@@ -158,20 +130,11 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     _builder.append("}");
     _builder.newLine();
     this.open(referencingFileURI, _builder.toString());
-    Map<String, List<Diagnostic>> _diagnostics = this.getDiagnostics();
-    List<Diagnostic> _get = _diagnostics.get(referencingFileURI);
-    boolean _isEmpty = _get.isEmpty();
-    Assert.assertFalse(_isEmpty);
+    Assert.assertFalse(this.getDiagnostics().get(referencingFileURI).isEmpty());
     this.open(fileURI, "type Foo {}");
-    Map<String, List<Diagnostic>> _diagnostics_1 = this.getDiagnostics();
-    List<Diagnostic> _get_1 = _diagnostics_1.get(referencingFileURI);
-    boolean _isEmpty_1 = _get_1.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
+    Assert.assertTrue(this.getDiagnostics().get(referencingFileURI).isEmpty());
     this.close(fileURI);
-    Map<String, List<Diagnostic>> _diagnostics_2 = this.getDiagnostics();
-    List<Diagnostic> _get_2 = _diagnostics_2.get(referencingFileURI);
-    boolean _isEmpty_2 = _get_2.isEmpty();
-    Assert.assertFalse(_isEmpty_2);
+    Assert.assertFalse(this.getDiagnostics().get(referencingFileURI).isEmpty());
   }
   
   @Test
@@ -189,14 +152,8 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     _builder.append("}");
     _builder.newLine();
     this.open(referencingFileURI, _builder.toString());
-    Map<String, List<Diagnostic>> _diagnostics = this.getDiagnostics();
-    List<Diagnostic> _get = _diagnostics.get(referencingFileURI);
-    boolean _isEmpty = _get.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.getDiagnostics().get(referencingFileURI).isEmpty());
     this.close(fileURI);
-    Map<String, List<Diagnostic>> _diagnostics_1 = this.getDiagnostics();
-    List<Diagnostic> _get_1 = _diagnostics_1.get(referencingFileURI);
-    boolean _isEmpty_1 = _get_1.isEmpty();
-    Assert.assertFalse(_isEmpty_1);
+    Assert.assertFalse(this.getDiagnostics().get(referencingFileURI).isEmpty());
   }
 }

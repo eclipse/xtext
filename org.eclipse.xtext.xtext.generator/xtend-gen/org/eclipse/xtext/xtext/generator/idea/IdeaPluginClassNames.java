@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.idea;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -179,8 +178,7 @@ public class IdeaPluginClassNames {
     String _ideaBasePackage = this._xtextGeneratorNaming.getIdeaBasePackage(it);
     String _plus = (_ideaBasePackage + ".parser.antlr.internal.PsiInternal");
     String _simpleName = GrammarUtil.getSimpleName(it);
-    String _plus_1 = (_plus + _simpleName);
-    String _path = this.toPath(_plus_1);
+    String _path = this.toPath((_plus + _simpleName));
     return (_path + ".tokens");
   }
   
@@ -221,8 +219,7 @@ public class IdeaPluginClassNames {
   
   public TypeReference getCompletionContributorSuperClass(final Grammar it) {
     TypeReference _elvis = null;
-    EList<Grammar> _usedGrammars = it.getUsedGrammars();
-    Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
+    Grammar _head = IterableExtensions.<Grammar>head(it.getUsedGrammars());
     TypeReference _completionContributor = null;
     if (_head!=null) {
       _completionContributor=this.getCompletionContributor(_head);
@@ -278,8 +275,7 @@ public class IdeaPluginClassNames {
   }
   
   public TypeReference colorSettingsPage(final Grammar it) {
-    TypeReference _baseColorSettingsPage = this.baseColorSettingsPage(it);
-    String _packageName = _baseColorSettingsPage.getPackageName();
+    String _packageName = this.baseColorSettingsPage(it).getPackageName();
     String _simpleName = GrammarUtil.getSimpleName(it);
     String _plus = (_simpleName + "ColorSettingsPage");
     return new TypeReference(_packageName, _plus);

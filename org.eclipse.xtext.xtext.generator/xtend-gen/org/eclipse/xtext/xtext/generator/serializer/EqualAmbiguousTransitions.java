@@ -42,11 +42,8 @@ public class EqualAmbiguousTransitions implements Comparable<EqualAmbiguousTrans
   
   public String ambiguityInsideTransition(final ISyntacticSequencerPDAProvider.ISynTransition trans) {
     try {
-      GrammarElementTitleSwitch _grammarElementTitleSwitch = new GrammarElementTitleSwitch();
-      GrammarElementTitleSwitch _showAssignments = _grammarElementTitleSwitch.showAssignments();
-      GrammarElementTitleSwitch _hideCardinality = _showAssignments.hideCardinality();
-      final GrammarElementTitleSwitch tokenToString = _hideCardinality.setValueForNull("");
-      ProductionFormatter<GrammarAlias.AbstractElementAlias, AbstractElement> _setTokenToString = new ProductionFormatter<GrammarAlias.AbstractElementAlias, AbstractElement>() {
+      final GrammarElementTitleSwitch tokenToString = new GrammarElementTitleSwitch().showAssignments().hideCardinality().setValueForNull("");
+      final ProductionFormatter<GrammarAlias.AbstractElementAlias, AbstractElement> formatter = new ProductionFormatter<GrammarAlias.AbstractElementAlias, AbstractElement>() {
         @Override
         public String format(final Production<GrammarAlias.AbstractElementAlias, AbstractElement> adapter, final GrammarAlias.AbstractElementAlias grammarElement, final boolean needParenthesis) {
           String _switchResult = null;
@@ -79,13 +76,10 @@ public class EqualAmbiguousTransitions implements Comparable<EqualAmbiguousTrans
           }
           return _switchResult;
         }
-      }.setTokenToString(tokenToString);
-      ProductionFormatter<GrammarAlias.AbstractElementAlias, AbstractElement> _setAutoWrapChars = _setTokenToString.setAutoWrapChars(200);
-      final ProductionFormatter<GrammarAlias.AbstractElementAlias, AbstractElement> formatter = _setAutoWrapChars.setAutoWrapChildren(20);
+      }.setTokenToString(tokenToString).setAutoWrapChars(200).setAutoWrapChildren(20);
       GrammarAlias.AbstractElementAlias _ambiguousSyntax = trans.getAmbiguousSyntax();
       final GrammarAlias.GrammarAliasAdapter adapter = new GrammarAlias.GrammarAliasAdapter(_ambiguousSyntax);
-      GrammarAlias.AbstractElementAlias _root = adapter.getRoot();
-      return formatter.format(adapter, _root, false);
+      return formatter.format(adapter, adapter.getRoot(), false);
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;

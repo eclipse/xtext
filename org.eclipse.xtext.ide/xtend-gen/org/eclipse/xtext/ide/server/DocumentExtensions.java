@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.server;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -19,7 +18,6 @@ import org.eclipse.lsp4j.Range;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
@@ -42,8 +40,7 @@ public class DocumentExtensions {
   
   public Position newPosition(final Resource resource, final int offset) {
     if ((resource instanceof XtextResource)) {
-      IParseResult _parseResult = ((XtextResource)resource).getParseResult();
-      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final ICompositeNode rootNode = ((XtextResource)resource).getParseResult().getRootNode();
       final LineAndColumn lineAndColumn = NodeModelUtils.getLineAndColumn(rootNode, offset);
       int _line = lineAndColumn.getLine();
       int _minus = (_line - 1);
@@ -73,11 +70,8 @@ public class DocumentExtensions {
   
   public Location newLocation(final Resource resource, final ITextRegion textRegion) {
     final Location location = new Location();
-    URI _uRI = resource.getURI();
-    String _path = this._uriExtensions.toPath(_uRI);
-    location.setUri(_path);
-    Range _newRange = this.newRange(resource, textRegion);
-    location.setRange(_newRange);
+    location.setUri(this._uriExtensions.toPath(resource.getURI()));
+    location.setRange(this.newRange(resource, textRegion));
     return location;
   }
   

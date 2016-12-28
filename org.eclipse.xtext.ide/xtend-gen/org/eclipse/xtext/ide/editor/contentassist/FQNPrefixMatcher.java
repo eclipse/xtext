@@ -60,9 +60,7 @@ public class FQNPrefixMatcher implements IPrefixMatcher {
           return false;
         }
         for (int i = 0; (i < splitPrefix.size()); i++) {
-          String _get = splitName.get(i);
-          String _get_1 = splitPrefix.get(i);
-          boolean _isCandidateMatchingPrefix_1 = this.delegate.isCandidateMatchingPrefix(_get, _get_1);
+          boolean _isCandidateMatchingPrefix_1 = this.delegate.isCandidateMatchingPrefix(splitName.get(i), splitPrefix.get(i));
           boolean _not = (!_isCandidateMatchingPrefix_1);
           if (_not) {
             return false;

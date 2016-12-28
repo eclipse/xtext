@@ -10,11 +10,9 @@ package org.eclipse.xtext.ide.tests.editor.contentassist;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
-import java.util.Map;
 import java.util.concurrent.Executors;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -67,15 +65,13 @@ public class ContentAssistContextTestHelper {
       final URI uri = URI.createURI(_plus);
       Resource _createResource = this.resFactory.createResource(uri);
       final XtextResource res = ((XtextResource) _createResource);
-      XtextResourceSet _xtextResourceSet = new XtextResourceSet();
-      EList<Resource> _resources = _xtextResourceSet.getResources();
+      EList<Resource> _resources = new XtextResourceSet().getResources();
       _resources.add(res);
       if ((this.entryPoint != null)) {
         res.setEntryPoint(this.entryPoint);
       }
       StringInputStream _stringInputStream = new StringInputStream(doc);
-      Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-      res.load(_stringInputStream, _emptyMap);
+      res.load(_stringInputStream, CollectionLiterals.<Object, Object>emptyMap());
       this.validator.assertNoErrors(res);
       return res;
     } catch (Throwable _e) {
@@ -91,10 +87,7 @@ public class ContentAssistContextTestHelper {
     factory.setPool(Executors.newCachedThreadPool());
     TextRegion _textRegion = new TextRegion(0, 0);
     final ContentAssistContext[] ctxs = factory.create(doc, _textRegion, offset, res);
-    GrammarElementTitleSwitch _grammarElementTitleSwitch = new GrammarElementTitleSwitch();
-    GrammarElementTitleSwitch _showAssignments = _grammarElementTitleSwitch.showAssignments();
-    GrammarElementTitleSwitch _showQualified = _showAssignments.showQualified();
-    final GrammarElementTitleSwitch f = _showQualified.showRule();
+    final GrammarElementTitleSwitch f = new GrammarElementTitleSwitch().showAssignments().showQualified().showRule();
     StringConcatenation _builder = new StringConcatenation();
     {
       Iterable<Pair<Integer, ContentAssistContext>> _indexed = IterableExtensions.<ContentAssistContext>indexed(((Iterable<? extends ContentAssistContext>)Conversions.doWrapArray(ctxs)));
@@ -105,12 +98,10 @@ public class ContentAssistContextTestHelper {
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         {
-          ContentAssistContext _value = ctx.getValue();
-          ImmutableList<AbstractElement> _firstSetGrammarElements = _value.getFirstSetGrammarElements();
+          ImmutableList<AbstractElement> _firstSetGrammarElements = ctx.getValue().getFirstSetGrammarElements();
           for(final AbstractElement ele : _firstSetGrammarElements) {
             _builder.append("\t");
-            EClass _eClass = ele.eClass();
-            String _name = _eClass.getName();
+            String _name = ele.eClass().getName();
             _builder.append(_name, "\t");
             _builder.append(": ");
             String _apply = f.apply(ele);

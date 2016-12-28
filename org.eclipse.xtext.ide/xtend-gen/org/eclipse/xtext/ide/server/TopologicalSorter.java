@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ide.server;
 
-import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -59,17 +58,18 @@ public class TopologicalSorter {
             cyclicAcceptor.apply(t);
           }
       };
-      this.name2entry = IterableExtensions.<String, TopologicalSorter.Entry>toMap(IterableExtensions.<ProjectDescription, TopologicalSorter.Entry>map(descriptions, ((Function1<ProjectDescription, TopologicalSorter.Entry>) (ProjectDescription it) -> {
+      final Function1<ProjectDescription, TopologicalSorter.Entry> _function = (ProjectDescription it) -> {
         return new TopologicalSorter.Entry(it);
-      })), ((Function1<TopologicalSorter.Entry, String>) (TopologicalSorter.Entry it) -> {
+      };
+      final Function1<TopologicalSorter.Entry, String> _function_1 = (TopologicalSorter.Entry it) -> {
         return it.description.getName();
-      }));
+      };
+      this.name2entry = IterableExtensions.<String, TopologicalSorter.Entry>toMap(IterableExtensions.<ProjectDescription, TopologicalSorter.Entry>map(descriptions, _function), _function_1);
       this.result = CollectionLiterals.<ProjectDescription>newLinkedHashSet();
-      Collection<TopologicalSorter.Entry> _values = this.name2entry.values();
-      final Consumer<TopologicalSorter.Entry> _function = (TopologicalSorter.Entry it) -> {
+      final Consumer<TopologicalSorter.Entry> _function_2 = (TopologicalSorter.Entry it) -> {
         this.visit(it);
       };
-      _values.forEach(_function);
+      this.name2entry.values().forEach(_function_2);
       _xblockexpression = IterableExtensions.<ProjectDescription>toList(this.result);
     }
     return _xblockexpression;

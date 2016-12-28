@@ -95,15 +95,17 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, ((Function1<Triple<String, EObject, EStructuralFeature>, String>) (Triple<String, EObject, EStructuralFeature> it) -> {
+    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function = (Triple<String, EObject, EStructuralFeature> it) -> {
       return it.getFirst();
-    })).toString(), 0, this.warnings.size());
+    };
+    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function).toString(), 0, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "Named");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, ((Function1<Triple<String, EObject, EStructuralFeature>, String>) (Triple<String, EObject, EStructuralFeature> it) -> {
+    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_1 = (Triple<String, EObject, EStructuralFeature> it) -> {
       return it.getFirst();
-    })).toString(), 2, this.warnings.size());
+    };
+    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function_1).toString(), 2, this.warnings.size());
   }
   
   @Test
@@ -124,21 +126,24 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, ((Function1<Triple<String, EObject, EStructuralFeature>, String>) (Triple<String, EObject, EStructuralFeature> it) -> {
+    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function = (Triple<String, EObject, EStructuralFeature> it) -> {
       return it.getFirst();
-    })).toString(), 0, this.warnings.size());
+    };
+    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function).toString(), 0, this.warnings.size());
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "Named");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, ((Function1<Triple<String, EObject, EStructuralFeature>, String>) (Triple<String, EObject, EStructuralFeature> it) -> {
+    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_1 = (Triple<String, EObject, EStructuralFeature> it) -> {
       return it.getFirst();
-    })).toString(), 2, this.warnings.size());
+    };
+    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function_1).toString(), 2, this.warnings.size());
     AbstractRule _findRuleForName_2 = GrammarUtil.findRuleForName(grammar, "NamedAgain");
     final ParserRule otherFragment = ((ParserRule) _findRuleForName_2);
     this.validateRule(otherFragment);
-    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, ((Function1<Triple<String, EObject, EStructuralFeature>, String>) (Triple<String, EObject, EStructuralFeature> it) -> {
+    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_2 = (Triple<String, EObject, EStructuralFeature> it) -> {
       return it.getFirst();
-    })).toString(), 0, this.warnings.size());
+    };
+    Assert.assertEquals(ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function_2).toString(), 0, this.warnings.size());
   }
   
   @Test

@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree;
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.TreeNode;
 import org.eclipse.xtext.parser.indentation.tests.IndentationAwareTestLanguageInjectorProvider;
@@ -109,9 +108,7 @@ public class IndentationAwareLanguageTest {
       _builder_1.append("\t");
       _builder_1.append("child");
       _builder_1.newLine();
-      String _string = _builder_1.toString();
-      String _asText = this.asText(tree);
-      Assert.assertEquals(_string, _asText);
+      Assert.assertEquals(_builder_1.toString(), this.asText(tree));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -139,9 +136,7 @@ public class IndentationAwareLanguageTest {
       _builder_1.append("\t");
       _builder_1.append("child");
       _builder_1.newLine();
-      String _string = _builder_1.toString();
-      String _asText = this.asText(tree);
-      Assert.assertEquals(_string, _asText);
+      Assert.assertEquals(_builder_1.toString(), this.asText(tree));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -174,9 +169,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.append("\t");
     _builder_1.append("d");
     _builder_1.newLine();
-    String _string = _builder_1.toString();
-    String _asText = this.asText(tree);
-    Assert.assertEquals(_string, _asText);
+    Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
   
   @Test
@@ -228,9 +221,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     _builder_1.append("h");
     _builder_1.newLine();
-    String _string = _builder_1.toString();
-    String _asText = this.asText(tree);
-    Assert.assertEquals(_string, _asText);
+    Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
   
   @Test
@@ -258,9 +249,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     _builder_1.append("d");
     _builder_1.newLine();
-    String _string = _builder_1.toString();
-    String _asText = this.asText(tree);
-    Assert.assertEquals(_string, _asText);
+    Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
   
   @Test
@@ -372,9 +361,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.append("\t\t\t\t");
     _builder_1.append("level4_9");
     _builder_1.newLine();
-    String _string = _builder_1.toString();
-    String _asText = this.asText(tree);
-    Assert.assertEquals(_string, _asText);
+    Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
   
   @Test
@@ -410,9 +397,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.append("\t");
     _builder_1.append("y");
     _builder_1.newLine();
-    String _string = _builder_1.toString();
-    String _asText = this.asText(tree);
-    Assert.assertEquals(_string, _asText);
+    Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
   
   private Tree parseAndValidate(final CharSequence s) {
@@ -421,8 +406,7 @@ public class IndentationAwareLanguageTest {
       this.validationTestHelper.assertNoIssues(result);
       Resource _eResource = result.eResource();
       final XtextResource resource = ((XtextResource) _eResource);
-      IParseResult _parseResult = resource.getParseResult();
-      final ICompositeNode node = _parseResult.getRootNode();
+      final ICompositeNode node = resource.getParseResult().getRootNode();
       this.invariantChecker.checkInvariant(node);
       return result;
     } catch (Throwable _e) {

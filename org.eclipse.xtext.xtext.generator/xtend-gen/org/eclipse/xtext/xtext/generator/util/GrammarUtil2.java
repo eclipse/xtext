@@ -35,11 +35,10 @@ public class GrammarUtil2 extends GrammarUtil {
   }
   
   public static Grammar getNonTerminalsSuperGrammar(final Grammar grammar) {
-    EList<Grammar> _usedGrammars = grammar.getUsedGrammars();
     final Function1<Grammar, Boolean> _function = (Grammar it) -> {
       String _name = it.getName();
       return Boolean.valueOf((!Objects.equal(_name, GrammarUtil2.TERMINALS)));
     };
-    return IterableExtensions.<Grammar>findFirst(_usedGrammars, _function);
+    return IterableExtensions.<Grammar>findFirst(grammar.getUsedGrammars(), _function);
   }
 }

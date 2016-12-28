@@ -8,16 +8,11 @@
 package org.eclipse.xtext.xtext.generator.serializer;
 
 import com.google.inject.Inject;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias;
@@ -51,13 +46,10 @@ public class SyntacticSequencerExtensions {
   private List<EqualAmbiguousTransitions> ambiguousTransitions;
   
   protected List<ISyntacticSequencerPDAProvider.ISynAbsorberState> getAllPDAs() {
-    SerializationContextMap<ISyntacticSequencerPDAProvider.ISynAbsorberState> _syntacticSequencerPDAs = this.pdaProvider.getSyntacticSequencerPDAs(this.grammar);
-    List<SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState>> _values = _syntacticSequencerPDAs.values();
     final Function1<SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState>, ISyntacticSequencerPDAProvider.ISynAbsorberState> _function = (SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState> it) -> {
       return it.getValue();
     };
-    List<ISyntacticSequencerPDAProvider.ISynAbsorberState> _map = ListExtensions.<SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState>, ISyntacticSequencerPDAProvider.ISynAbsorberState>map(_values, _function);
-    return CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynAbsorberState>newArrayList(((ISyntacticSequencerPDAProvider.ISynAbsorberState[])Conversions.unwrapArray(_map, ISyntacticSequencerPDAProvider.ISynAbsorberState.class)));
+    return CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynAbsorberState>newArrayList(((ISyntacticSequencerPDAProvider.ISynAbsorberState[])Conversions.unwrapArray(ListExtensions.<SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState>, ISyntacticSequencerPDAProvider.ISynAbsorberState>map(this.pdaProvider.getSyntacticSequencerPDAs(this.grammar).values(), _function), ISyntacticSequencerPDAProvider.ISynAbsorberState.class)));
   }
   
   protected void collectAllAmbiguousTransitions(final ISyntacticSequencerPDAProvider.ISynFollowerOwner state, final Set<ISyntacticSequencerPDAProvider.ISynTransition> result, final Set<Object> visited) {
@@ -86,8 +78,7 @@ public class SyntacticSequencerExtensions {
     final Set<ISyntacticSequencerPDAProvider.ISynTransition> result = CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynTransition>newLinkedHashSet();
     List<ISyntacticSequencerPDAProvider.ISynAbsorberState> _allPDAs = this.getAllPDAs();
     for (final ISyntacticSequencerPDAProvider.ISynAbsorberState start : _allPDAs) {
-      HashSet<Object> _newHashSet = CollectionLiterals.<Object>newHashSet();
-      this.collectAllAmbiguousTransitions(start, result, _newHashSet);
+      this.collectAllAmbiguousTransitions(start, result, CollectionLiterals.<Object>newHashSet());
     }
     return result;
   }
@@ -109,14 +100,11 @@ public class SyntacticSequencerExtensions {
             list = _equalAmbiguousTransitions;
             result.put(syntax, list);
           }
-          List<ISyntacticSequencerPDAProvider.ISynTransition> _transitions = list.getTransitions();
-          _transitions.add(transition);
+          list.getTransitions().add(transition);
         }
       }
     }
-    Collection<EqualAmbiguousTransitions> _values = result.values();
-    ArrayList<EqualAmbiguousTransitions> _newArrayList = CollectionLiterals.<EqualAmbiguousTransitions>newArrayList(((EqualAmbiguousTransitions[])Conversions.unwrapArray(_values, EqualAmbiguousTransitions.class)));
-    this.ambiguousTransitions = _newArrayList;
+    this.ambiguousTransitions = CollectionLiterals.<EqualAmbiguousTransitions>newArrayList(((EqualAmbiguousTransitions[])Conversions.unwrapArray(result.values(), EqualAmbiguousTransitions.class)));
     ListExtensions.<EqualAmbiguousTransitions>sortInplace(this.ambiguousTransitions);
     return this.ambiguousTransitions;
   }
@@ -142,10 +130,7 @@ public class SyntacticSequencerExtensions {
     }
     String card = _xifexpression;
     if ((alias instanceof GrammarAlias.TokenAlias)) {
-      AbstractElement _token = ((GrammarAlias.TokenAlias)alias).getToken();
-      AbstractRule _containingRule = GrammarUtil.containingRule(_token);
-      String _uniqueRuleName = this.ruleNames.getUniqueRuleName(_containingRule);
-      rules.add(_uniqueRuleName);
+      rules.add(this.ruleNames.getUniqueRuleName(GrammarUtil.containingRule(((GrammarAlias.TokenAlias)alias).getToken())));
       String _xifexpression_3 = null;
       if ((card == null)) {
         _xifexpression_3 = "";
@@ -153,16 +138,14 @@ public class SyntacticSequencerExtensions {
         _xifexpression_3 = ("_" + card);
       }
       card = _xifexpression_3;
-      AbstractElement _token_1 = ((GrammarAlias.TokenAlias)alias).getToken();
-      String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(_token_1);
+      String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(((GrammarAlias.TokenAlias)alias).getToken());
       return (_gaElementIdentifier + card);
     } else {
       if ((alias instanceof GrammarAlias.GroupAlias)) {
         final List<String> children = CollectionLiterals.<String>newArrayList();
         List<GrammarAlias.AbstractElementAlias> _children = ((GrammarAlias.GroupAlias)alias).getChildren();
         for (final GrammarAlias.AbstractElementAlias child : _children) {
-          String _elementAliasToIdentifier = this.elementAliasToIdentifier(child, rules, true);
-          children.add(_elementAliasToIdentifier);
+          children.add(this.elementAliasToIdentifier(child, rules, true));
         }
         final String body = IterableExtensions.join(children, "_");
         if ((isNested || (card != null))) {
@@ -182,8 +165,7 @@ public class SyntacticSequencerExtensions {
           final List<String> children_1 = CollectionLiterals.<String>newArrayList();
           Set<GrammarAlias.AbstractElementAlias> _children_1 = ((GrammarAlias.AlternativeAlias)alias).getChildren();
           for (final GrammarAlias.AbstractElementAlias child_1 : _children_1) {
-            String _elementAliasToIdentifier_1 = this.elementAliasToIdentifier(child_1, rules, true);
-            children_1.add(_elementAliasToIdentifier_1);
+            children_1.add(this.elementAliasToIdentifier(child_1, rules, true));
           }
           ListExtensions.<String>sortInplace(children_1);
           final String body_1 = IterableExtensions.join(children_1, "_or_");
@@ -206,10 +188,8 @@ public class SyntacticSequencerExtensions {
   }
   
   public StringConcatenationClient elementAliasToConstructor(final GrammarAlias.AbstractElementAlias alias) {
-    boolean _isMany = alias.isMany();
-    final String many = String.valueOf(_isMany);
-    boolean _isOptional = alias.isOptional();
-    final String optional = String.valueOf(_isOptional);
+    final String many = String.valueOf(alias.isMany());
+    final String optional = String.valueOf(alias.isOptional());
     if ((alias instanceof GrammarAlias.TokenAlias)) {
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -221,8 +201,7 @@ public class SyntacticSequencerExtensions {
           _builder.append(", ");
           _builder.append(optional);
           _builder.append(", grammarAccess.");
-          AbstractElement _token = ((GrammarAlias.TokenAlias)alias).getToken();
-          String _gaAccessor = SyntacticSequencerExtensions.this._grammarAccessExtensions.gaAccessor(_token);
+          String _gaAccessor = SyntacticSequencerExtensions.this._grammarAccessExtensions.gaAccessor(((GrammarAlias.TokenAlias)alias).getToken());
           _builder.append(_gaAccessor);
           _builder.append(")");
         }
@@ -233,8 +212,7 @@ public class SyntacticSequencerExtensions {
         final List<StringConcatenationClient> children = CollectionLiterals.<StringConcatenationClient>newArrayList();
         List<GrammarAlias.AbstractElementAlias> _children = ((GrammarAlias.GroupAlias)alias).getChildren();
         for (final GrammarAlias.AbstractElementAlias child : _children) {
-          StringConcatenationClient _elementAliasToConstructor = this.elementAliasToConstructor(child);
-          children.add(_elementAliasToConstructor);
+          children.add(this.elementAliasToConstructor(child));
         }
         StringConcatenationClient _client_1 = new StringConcatenationClient() {
           @Override
@@ -266,8 +244,7 @@ public class SyntacticSequencerExtensions {
           final List<StringConcatenationClient> children_1 = CollectionLiterals.<StringConcatenationClient>newArrayList();
           Set<GrammarAlias.AbstractElementAlias> _children_1 = ((GrammarAlias.AlternativeAlias)alias).getChildren();
           for (final GrammarAlias.AbstractElementAlias child_1 : _children_1) {
-            StringConcatenationClient _elementAliasToConstructor_1 = this.elementAliasToConstructor(child_1);
-            children_1.add(_elementAliasToConstructor_1);
+            children_1.add(this.elementAliasToConstructor(child_1));
           }
           final Function1<StringConcatenationClient, String> _function = (StringConcatenationClient it) -> {
             StringConcatenation _builder = new StringConcatenation();

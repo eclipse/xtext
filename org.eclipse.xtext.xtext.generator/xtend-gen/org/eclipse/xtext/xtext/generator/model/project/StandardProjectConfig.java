@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.model.project;
 
 import com.google.common.base.Objects;
-import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -63,7 +62,6 @@ public class StandardProjectConfig extends XtextProjectConfig {
   @Override
   public void setDefaults() {
     super.setDefaults();
-    List<? extends SubProjectConfig> _enabledProjects = this.getEnabledProjects();
     final Consumer<SubProjectConfig> _function = (SubProjectConfig it) -> {
       String _name = it.getName();
       boolean _tripleEquals = (_name == null);
@@ -119,7 +117,7 @@ public class StandardProjectConfig extends XtextProjectConfig {
         }
       }
     };
-    _enabledProjects.forEach(_function);
+    this.getEnabledProjects().forEach(_function);
   }
   
   protected String computeName(final SubProjectConfig project) {
@@ -265,8 +263,7 @@ public class StandardProjectConfig extends XtextProjectConfig {
   
   protected String computeSourceSet(final SubProjectConfig project) {
     String _xifexpression = null;
-    List<? extends SubProjectConfig> _testProjects = this.getTestProjects();
-    boolean _contains = _testProjects.contains(project);
+    boolean _contains = this.getTestProjects().contains(project);
     if (_contains) {
       _xifexpression = "test";
     } else {

@@ -9,9 +9,7 @@ package org.eclipse.xtext.xtext.generator.parser.antlr;
 
 import com.google.common.collect.Iterables;
 import java.util.Arrays;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -43,8 +41,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     boolean _matched = false;
     if (it instanceof ParserRule) {
       _matched=true;
-      CharSequence _compileEntryInit = this.compileEntryInit(((ParserRule)it), options);
-      _switchResult = _compileEntryInit.toString();
+      _switchResult = this.compileEntryInit(((ParserRule)it), options).toString();
     }
     if (!_matched) {
       _switchResult = super.compileInit(it, options);
@@ -116,8 +113,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         _builder.append("UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(");
         _builder.newLine();
         {
-          List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(it);
-          Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_eAllContentsAsList, UnorderedGroup.class);
+          Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(EcoreUtil2.eAllContentsAsList(it), UnorderedGroup.class);
           boolean _hasElements = false;
           for(final UnorderedGroup group : _filter) {
             if (!_hasElements) {
@@ -144,8 +140,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     boolean _matched = false;
     if (it instanceof ParserRule) {
       _matched=true;
-      CharSequence _compileEntryFinally = this.compileEntryFinally(((ParserRule)it), options);
-      _switchResult = _compileEntryFinally.toString();
+      _switchResult = this.compileEntryFinally(((ParserRule)it), options).toString();
     }
     if (!_matched) {
       _switchResult = super.compileFinally(it, options);
@@ -226,13 +221,11 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     if (supportActions) {
       String _xblockexpression = null;
       {
-        EList<AbstractElement> _elements = it.getElements();
         final Function1<AbstractElement, Boolean> _function = (AbstractElement it_1) -> {
           boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it_1);
           return Boolean.valueOf((!_isOptionalCardinality));
         };
-        Iterable<AbstractElement> _filter = IterableExtensions.<AbstractElement>filter(_elements, _function);
-        final int mandatoryContent = IterableExtensions.size(_filter);
+        final int mandatoryContent = IterableExtensions.size(IterableExtensions.<AbstractElement>filter(it.getElements(), _function));
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("(");
         _builder.newLine();
@@ -256,8 +249,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         _builder.append("(");
         _builder.newLine();
         {
-          EList<AbstractElement> _elements_1 = it.getElements();
-          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(_elements_1);
+          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(it.getElements());
           boolean _hasElements = false;
           for(final Pair<Integer, AbstractElement> element : _indexed) {
             if (!_hasElements) {
@@ -295,13 +287,11 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t\t\t\t\t");
             _builder.append("({true}?=>(");
-            AbstractElement _value = element.getValue();
-            String _dataTypeEbnf2 = this.dataTypeEbnf2(_value, supportActions);
+            String _dataTypeEbnf2 = this.dataTypeEbnf2(element.getValue(), supportActions);
             _builder.append(_dataTypeEbnf2, "\t\t\t\t\t");
             _builder.append("))");
             {
-              AbstractElement _value_1 = element.getValue();
-              boolean _isMultipleCardinality = GrammarUtil.isMultipleCardinality(_value_1);
+              boolean _isMultipleCardinality = GrammarUtil.isMultipleCardinality(element.getValue());
               if (_isMultipleCardinality) {
                 _builder.append("+");
               }
@@ -394,13 +384,11 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     if (supportActions) {
       String _xblockexpression = null;
       {
-        EList<AbstractElement> _elements = it.getElements();
         final Function1<AbstractElement, Boolean> _function = (AbstractElement it_1) -> {
           boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it_1);
           return Boolean.valueOf((!_isOptionalCardinality));
         };
-        Iterable<AbstractElement> _filter = IterableExtensions.<AbstractElement>filter(_elements, _function);
-        final int mandatoryContent = IterableExtensions.size(_filter);
+        final int mandatoryContent = IterableExtensions.size(IterableExtensions.<AbstractElement>filter(it.getElements(), _function));
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("(");
         _builder.newLine();
@@ -424,8 +412,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         _builder.append("(");
         _builder.newLine();
         {
-          EList<AbstractElement> _elements_1 = it.getElements();
-          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(_elements_1);
+          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(it.getElements());
           boolean _hasElements = false;
           for(final Pair<Integer, AbstractElement> element : _indexed) {
             if (!_hasElements) {
@@ -463,13 +450,11 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t\t\t\t\t");
             _builder.append("({true}?=>(");
-            AbstractElement _value = element.getValue();
-            String _ebnf2 = this.ebnf2(_value, options, supportActions);
+            String _ebnf2 = this.ebnf2(element.getValue(), options, supportActions);
             _builder.append(_ebnf2, "\t\t\t\t\t");
             _builder.append("))");
             {
-              AbstractElement _value_1 = element.getValue();
-              boolean _isMultipleCardinality = GrammarUtil.isMultipleCardinality(_value_1);
+              boolean _isMultipleCardinality = GrammarUtil.isMultipleCardinality(element.getValue());
               if (_isMultipleCardinality) {
                 _builder.append("+");
               }
@@ -570,16 +555,14 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
   @Override
   protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     String _crossrefEbnf = super.crossrefEbnf(it, call, ref, supportActions);
-    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, _isPassCurrentIntoFragment, (!supportActions));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, this.isPassCurrentIntoFragment(), (!supportActions));
     return (_crossrefEbnf + _argumentList);
   }
   
   @Override
   protected String _assignmentEbnf(final RuleCall it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
-    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, this.isPassCurrentIntoFragment(), (!supportActions));
     return (__assignmentEbnf + _argumentList);
   }
   

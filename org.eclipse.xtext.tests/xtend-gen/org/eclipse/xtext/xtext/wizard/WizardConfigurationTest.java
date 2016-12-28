@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
@@ -24,12 +23,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
-import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
-import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
@@ -72,14 +69,14 @@ public class WizardConfigurationTest {
     Assert.assertFalse(this.config.getRuntimeProject().isEclipsePluginProject());
     Assert.assertFalse(this.config.getRuntimeProject().pom().getContent().contains("eclipse-plugin"));
     Assert.assertFalse(this.config.getParentProject().pom().getContent().contains("tycho"));
-    Assert.assertFalse(IterableExtensions.exists(IterableExtensions.filter(this.allJavaProjects(), ((Function1<ProjectDescriptor, Boolean>) (ProjectDescriptor it) -> {
+    final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
       boolean _isEclipsePluginProject = it.isEclipsePluginProject();
       return Boolean.valueOf((!_isEclipsePluginProject));
-    })), ((Function1<ProjectDescriptor, Boolean>) (ProjectDescriptor it) -> {
-      PomFile _pom = it.pom();
-      String _content = _pom.getContent();
-      return Boolean.valueOf(_content.contains("tycho"));
-    })));
+    };
+    final Function1<ProjectDescriptor, Boolean> _function_1 = (ProjectDescriptor it) -> {
+      return Boolean.valueOf(it.pom().getContent().contains("tycho"));
+    };
+    Assert.assertFalse(IterableExtensions.exists(IterableExtensions.filter(this.allJavaProjects(), _function), _function_1));
   }
   
   @Test
@@ -128,9 +125,7 @@ public class WizardConfigurationTest {
     _p2Project.setEnabled(true);
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     Assert.assertTrue(this.config.needsTychoBuild());
-    ParentProjectDescriptor _parentProject = this.config.getParentProject();
-    PomFile _pom = _parentProject.pom();
-    String _content = _pom.getContent();
+    String _content = this.config.getParentProject().pom().getContent();
     final Procedure1<String> _function = (String it) -> {
       Assert.assertTrue(it.contains("tycho-source-plugin"));
       Assert.assertTrue(it.contains("tycho-source-feature-plugin"));
@@ -148,8 +143,7 @@ public class WizardConfigurationTest {
   
   @Test
   public void testProjectIsPluginProjectWhenRuntimeProjectIsPluginProject() {
-    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    TestProjectDescriptor _testProject = this.config.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     Assert.assertTrue(this.config.getRuntimeProject().getTestProject().isEclipsePluginProject());
   }
@@ -200,119 +194,107 @@ public class WizardConfigurationTest {
   
   @Test
   public void inlinedTestProjectsDontOverrideMainSources() {
-    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    TestProjectDescriptor _testProject = this.config.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     this.config.setSourceLayout(SourceLayout.MAVEN);
-    RuntimeProjectDescriptor _runtimeProject_1 = this.config.getRuntimeProject();
-    Iterable<? extends AbstractFile> _files = _runtimeProject_1.getFiles();
     final Function1<AbstractFile, Boolean> _function = (AbstractFile it) -> {
       String _relativePath = it.getRelativePath();
       return Boolean.valueOf(Objects.equal(_relativePath, "pom.xml"));
     };
-    final AbstractFile pom = IterableExtensions.findFirst(_files, _function);
+    final AbstractFile pom = IterableExtensions.findFirst(this.config.getRuntimeProject().getFiles(), _function);
     Assert.assertTrue((pom instanceof PomFile));
     Assert.assertTrue(((PomFile) pom).getContent().toString().contains("<artifactId>org.example.mydsl</artifactId>"));
   }
   
   @Test
   public void inlinedTestProjectsAddTheirDependenciesToTheMainProject() {
-    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    TestProjectDescriptor _testProject = this.config.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     this.config.setSourceLayout(SourceLayout.MAVEN);
-    RuntimeProjectDescriptor _runtimeProject_1 = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject_1 = _runtimeProject_1.getTestProject();
-    Set<ExternalDependency> _externalDependencies = _testProject_1.getExternalDependencies();
     final Consumer<ExternalDependency> _function = (ExternalDependency testDependency) -> {
+      final Function1<ExternalDependency, Boolean> _function_1 = (ExternalDependency it) -> {
+        return Boolean.valueOf(((Objects.equal(it.getMaven().getArtifactId(), testDependency.getMaven().getArtifactId()) && Objects.equal(it.getP2().getBundleId(), testDependency.getP2().getBundleId())) && Objects.equal(it.getP2().getPackages(), testDependency.getP2().getPackages())));
+      };
       Assert.assertTrue(
-        IterableExtensions.<ExternalDependency>exists(this.config.getRuntimeProject().getExternalDependencies(), 
-          ((Function1<ExternalDependency, Boolean>) (ExternalDependency it) -> {
-            return Boolean.valueOf(((Objects.equal(it.getMaven().getArtifactId(), testDependency.getMaven().getArtifactId()) && Objects.equal(it.getP2().getBundleId(), testDependency.getP2().getBundleId())) && Objects.equal(it.getP2().getPackages(), testDependency.getP2().getPackages())));
-          })));
+        IterableExtensions.<ExternalDependency>exists(this.config.getRuntimeProject().getExternalDependencies(), _function_1));
     };
-    _externalDependencies.forEach(_function);
+    this.config.getRuntimeProject().getTestProject().getExternalDependencies().forEach(_function);
   }
   
   @Test
   public void inlinedTestProjectsAddTheirSourceFoldersToTheMainProject() {
-    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    TestProjectDescriptor _testProject = this.config.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     this.config.setSourceLayout(SourceLayout.MAVEN);
-    RuntimeProjectDescriptor _runtimeProject_1 = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject_1 = _runtimeProject_1.getTestProject();
-    Set<String> _sourceFolders = _testProject_1.getSourceFolders();
     final Consumer<String> _function = (String testFolder) -> {
       Assert.assertTrue(this.config.getRuntimeProject().getSourceFolders().contains(testFolder));
     };
-    _sourceFolders.forEach(_function);
+    this.config.getRuntimeProject().getTestProject().getSourceFolders().forEach(_function);
   }
   
   @Test
   public void mavenProjectsHaveAPom() {
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
-    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
     final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
       return Boolean.valueOf(it.isPartOfMavenBuild());
     };
-    Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(_allJavaProjects, _function);
     final Consumer<ProjectDescriptor> _function_1 = (ProjectDescriptor it) -> {
       it.setEnabled(true);
-      Assert.assertTrue(IterableExtensions.exists(it.getFiles(), ((Function1<AbstractFile, Boolean>) (AbstractFile it_1) -> {
+      final Function1<AbstractFile, Boolean> _function_2 = (AbstractFile it_1) -> {
         String _relativePath = it_1.getRelativePath();
         return Boolean.valueOf(Objects.equal(_relativePath, "pom.xml"));
-      })));
+      };
+      Assert.assertTrue(IterableExtensions.exists(it.getFiles(), _function_2));
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.filter(this.allJavaProjects(), _function).forEach(_function_1);
   }
   
   @Test
   public void gradleProjectsHaveABuildFile() {
     this.config.setPreferredBuildSystem(BuildSystem.GRADLE);
-    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
     final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
       return Boolean.valueOf(it.isPartOfGradleBuild());
     };
-    Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(_allJavaProjects, _function);
     final Consumer<ProjectDescriptor> _function_1 = (ProjectDescriptor it) -> {
       it.setEnabled(true);
-      Assert.assertTrue(IterableExtensions.exists(it.getFiles(), ((Function1<AbstractFile, Boolean>) (AbstractFile it_1) -> {
+      final Function1<AbstractFile, Boolean> _function_2 = (AbstractFile it_1) -> {
         String _relativePath = it_1.getRelativePath();
         return Boolean.valueOf(Objects.equal(_relativePath, "build.gradle"));
-      })));
+      };
+      Assert.assertTrue(IterableExtensions.exists(it.getFiles(), _function_2));
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.filter(this.allJavaProjects(), _function).forEach(_function_1);
   }
   
   @Test
   public void pluginProjectsHaveEclipseMetaData() {
-    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
     final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
       return Boolean.valueOf(it.isEclipsePluginProject());
     };
-    Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(_allJavaProjects, _function);
     final Consumer<ProjectDescriptor> _function_1 = (ProjectDescriptor it) -> {
       it.setEnabled(true);
-      Assert.assertTrue(IterableExtensions.exists(it.getFiles(), ((Function1<AbstractFile, Boolean>) (AbstractFile it_1) -> {
+      final Function1<AbstractFile, Boolean> _function_2 = (AbstractFile it_1) -> {
         String _relativePath = it_1.getRelativePath();
         return Boolean.valueOf(Objects.equal(_relativePath, "MANIFEST.MF"));
-      })));
-      Assert.assertTrue(IterableExtensions.exists(it.getFiles(), ((Function1<AbstractFile, Boolean>) (AbstractFile it_1) -> {
+      };
+      Assert.assertTrue(IterableExtensions.exists(it.getFiles(), _function_2));
+      final Function1<AbstractFile, Boolean> _function_3 = (AbstractFile it_1) -> {
         String _relativePath = it_1.getRelativePath();
         return Boolean.valueOf(Objects.equal(_relativePath, "build.properties"));
-      })));
+      };
+      Assert.assertTrue(IterableExtensions.exists(it.getFiles(), _function_3));
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.filter(this.allJavaProjects(), _function).forEach(_function_1);
   }
   
   @Test
   public void featureProjectsHaveEclipseBuildProperties() {
-    Assert.assertTrue(IterableExtensions.exists(this.config.getSdkProject().getFiles(), ((Function1<AbstractFile, Boolean>) (AbstractFile it) -> {
+    final Function1<AbstractFile, Boolean> _function = (AbstractFile it) -> {
       String _relativePath = it.getRelativePath();
       return Boolean.valueOf(Objects.equal(_relativePath, "build.properties"));
-    })));
+    };
+    Assert.assertTrue(IterableExtensions.exists(this.config.getSdkProject().getFiles(), _function));
   }
   
   @Test
@@ -358,36 +340,35 @@ public class WizardConfigurationTest {
     _uiProject.setEnabled(true);
     IdeProjectDescriptor _ideProject = this.config.getIdeProject();
     _ideProject.setEnabled(true);
-    Set<ProjectDescriptor> _enabledProjects = this.config.getEnabledProjects();
     final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
       return Boolean.valueOf(it.isEclipsePluginProject());
     };
-    Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function);
     final Consumer<ProjectDescriptor> _function_1 = (ProjectDescriptor it) -> {
       Assert.assertTrue(it.buildGradle().getContent().contains("eclipseClasspath.enabled=false"));
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.<ProjectDescriptor>filter(this.config.getEnabledProjects(), _function).forEach(_function_1);
   }
   
   @Test
   public void parentContainsOtherProjectsInHierarchicallayout() {
     this.config.setProjectLayout(ProjectLayout.HIERARCHICAL);
-    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
     final Consumer<ProjectDescriptor> _function = (ProjectDescriptor it) -> {
-      Assert.assertTrue(it.getLocation().startsWith((this.config.getParentProject().getLocation() + "/")));
+      String _location = it.getLocation();
+      String _location_1 = this.config.getParentProject().getLocation();
+      String _plus = (_location_1 + "/");
+      Assert.assertTrue(_location.startsWith(_plus));
     };
-    _allJavaProjects.forEach(_function);
+    this.allJavaProjects().forEach(_function);
   }
   
   @Test
   public void plainMavenProjectsCanBeBuiltWithEclipseLayout() {
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     this.config.setSourceLayout(SourceLayout.PLAIN);
-    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
     final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
       return Boolean.valueOf(((!it.isEclipsePluginProject()) && it.isPartOfMavenBuild()));
     };
-    final Iterable<? extends ProjectDescriptor> plainMavenProjects = IterableExtensions.filter(_allJavaProjects, _function);
+    final Iterable<? extends ProjectDescriptor> plainMavenProjects = IterableExtensions.filter(this.allJavaProjects(), _function);
     final Consumer<ProjectDescriptor> _function_1 = (ProjectDescriptor it) -> {
       Assert.assertTrue(it.pom().getContent().contains("<directory>src</directory>"));
       Assert.assertTrue(it.pom().getContent().contains("<source>src-gen</source>"));
@@ -397,7 +378,6 @@ public class WizardConfigurationTest {
     final Function1<ProjectDescriptor, Boolean> _function_2 = (ProjectDescriptor it) -> {
       return Boolean.valueOf((!(it instanceof TestProjectDescriptor)));
     };
-    Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(plainMavenProjects, _function_2);
     final Consumer<ProjectDescriptor> _function_3 = (ProjectDescriptor it) -> {
       Assert.assertTrue(it.pom().getContent().contains("<sourceDirectory>src</sourceDirectory>"));
       Assert.assertTrue(it.pom().getContent().contains("add-source"));
@@ -405,8 +385,7 @@ public class WizardConfigurationTest {
       Assert.assertFalse(it.pom().getContent().contains("add-test-source"));
       Assert.assertFalse(it.pom().getContent().contains("add-test-resource"));
     };
-    _filter.forEach(_function_3);
-    Iterable<TestProjectDescriptor> _filter_1 = Iterables.<TestProjectDescriptor>filter(plainMavenProjects, TestProjectDescriptor.class);
+    IterableExtensions.filter(plainMavenProjects, _function_2).forEach(_function_3);
     final Consumer<TestProjectDescriptor> _function_4 = (TestProjectDescriptor it) -> {
       Assert.assertTrue(it.pom().getContent().contains("<testSourceDirectory>src</testSourceDirectory>"));
       Assert.assertTrue(it.pom().getContent().contains("add-test-source"));
@@ -414,18 +393,17 @@ public class WizardConfigurationTest {
       Assert.assertFalse(it.pom().getContent().contains("add-source"));
       Assert.assertFalse(it.pom().getContent().contains("add-resource"));
     };
-    _filter_1.forEach(_function_4);
+    Iterables.<TestProjectDescriptor>filter(plainMavenProjects, TestProjectDescriptor.class).forEach(_function_4);
   }
   
   @Test
   public void plainMavenProjectsCanBeBuiltWithMavenLayout() {
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     this.config.setSourceLayout(SourceLayout.MAVEN);
-    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
     final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
       return Boolean.valueOf(((!it.isEclipsePluginProject()) && it.isPartOfMavenBuild()));
     };
-    final Iterable<? extends ProjectDescriptor> plainMavenProjects = IterableExtensions.filter(_allJavaProjects, _function);
+    final Iterable<? extends ProjectDescriptor> plainMavenProjects = IterableExtensions.filter(this.allJavaProjects(), _function);
     final Function1<ProjectDescriptor, Boolean> _function_1 = (ProjectDescriptor it) -> {
       return Boolean.valueOf((!(it instanceof TestProjectDescriptor)));
     };
@@ -434,35 +412,34 @@ public class WizardConfigurationTest {
       it.setEnabled(true);
     };
     plainMavenProjects.forEach(_function_2);
-    Assert.assertTrue(IterableExtensions.<TestProjectDescriptor>forall(Iterables.<TestProjectDescriptor>filter(plainMavenProjects, TestProjectDescriptor.class), ((Function1<TestProjectDescriptor, Boolean>) (TestProjectDescriptor it) -> {
+    final Function1<TestProjectDescriptor, Boolean> _function_3 = (TestProjectDescriptor it) -> {
       return Boolean.valueOf(it.isInlined());
-    })));
-    final Consumer<ProjectDescriptor> _function_3 = (ProjectDescriptor it) -> {
+    };
+    Assert.assertTrue(IterableExtensions.<TestProjectDescriptor>forall(Iterables.<TestProjectDescriptor>filter(plainMavenProjects, TestProjectDescriptor.class), _function_3));
+    final Consumer<ProjectDescriptor> _function_4 = (ProjectDescriptor it) -> {
       Assert.assertTrue(it.pom().getContent().contains("add-source"));
       Assert.assertTrue(it.pom().getContent().contains("add-resource"));
       Assert.assertTrue(it.pom().getContent().contains("<source>src/main/xtext-gen</source>"));
       Assert.assertTrue(it.pom().getContent().contains("<directory>src/main/xtext-gen</directory>"));
     };
-    mainProjects.forEach(_function_3);
-    Iterable<TestedProjectDescriptor> _filter = Iterables.<TestedProjectDescriptor>filter(mainProjects, TestedProjectDescriptor.class);
-    final Consumer<TestedProjectDescriptor> _function_4 = (TestedProjectDescriptor it) -> {
+    mainProjects.forEach(_function_4);
+    final Consumer<TestedProjectDescriptor> _function_5 = (TestedProjectDescriptor it) -> {
       Assert.assertTrue(it.pom().getContent().contains("add-test-source"));
       Assert.assertTrue(it.pom().getContent().contains("add-test-resource"));
       Assert.assertTrue(it.pom().getContent().contains("<source>src/test/xtext-gen</source>"));
       Assert.assertTrue(it.pom().getContent().contains("<directory>src/test/xtext-gen</directory>"));
     };
-    _filter.forEach(_function_4);
+    Iterables.<TestedProjectDescriptor>filter(mainProjects, TestedProjectDescriptor.class).forEach(_function_5);
   }
   
   @Test
   public void pomFileDontDuplicateMavenDefaults() {
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     this.config.setSourceLayout(SourceLayout.MAVEN);
-    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
     final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
       return Boolean.valueOf(((!it.isEclipsePluginProject()) && it.isPartOfMavenBuild()));
     };
-    final Iterable<? extends ProjectDescriptor> plainMavenProjects = IterableExtensions.filter(_allJavaProjects, _function);
+    final Iterable<? extends ProjectDescriptor> plainMavenProjects = IterableExtensions.filter(this.allJavaProjects(), _function);
     final Function1<ProjectDescriptor, Boolean> _function_1 = (ProjectDescriptor it) -> {
       return Boolean.valueOf((!(it instanceof TestProjectDescriptor)));
     };
@@ -485,10 +462,7 @@ public class WizardConfigurationTest {
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     UiProjectDescriptor _uiProject = this.config.getUiProject();
     _uiProject.setEnabled(true);
-    UiProjectDescriptor _uiProject_1 = this.config.getUiProject();
-    TestProjectDescriptor _testProject = _uiProject_1.getTestProject();
-    PomFile _pom = _testProject.pom();
-    final String pom = _pom.getContent();
+    final String pom = this.config.getUiProject().getTestProject().pom().getContent();
     Assert.assertTrue(pom.contains("useUIHarness"));
   }
   
@@ -497,10 +471,7 @@ public class WizardConfigurationTest {
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     UiProjectDescriptor _uiProject = this.config.getUiProject();
     _uiProject.setEnabled(true);
-    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
-    PomFile _pom = _testProject.pom();
-    final String pom = _pom.getContent();
+    final String pom = this.config.getRuntimeProject().getTestProject().pom().getContent();
     Assert.assertFalse(pom.contains("useUIHarness"));
   }
   
@@ -509,16 +480,13 @@ public class WizardConfigurationTest {
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     UiProjectDescriptor _uiProject = this.config.getUiProject();
     _uiProject.setEnabled(true);
-    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
-    Iterable<TestProjectDescriptor> _filter = Iterables.<TestProjectDescriptor>filter(_allJavaProjects, TestProjectDescriptor.class);
     final Function1<TestProjectDescriptor, Boolean> _function = (TestProjectDescriptor it) -> {
       return Boolean.valueOf(it.isEclipsePluginProject());
     };
-    Iterable<TestProjectDescriptor> _filter_1 = IterableExtensions.<TestProjectDescriptor>filter(_filter, _function);
     final Function1<TestProjectDescriptor, PomFile> _function_1 = (TestProjectDescriptor it) -> {
       return it.pom();
     };
-    final Iterable<PomFile> poms = IterableExtensions.<TestProjectDescriptor, PomFile>map(_filter_1, _function_1);
+    final Iterable<PomFile> poms = IterableExtensions.<TestProjectDescriptor, PomFile>map(IterableExtensions.<TestProjectDescriptor>filter(Iterables.<TestProjectDescriptor>filter(this.allJavaProjects(), TestProjectDescriptor.class), _function), _function_1);
     final Consumer<PomFile> _function_2 = (PomFile it) -> {
       Assert.assertTrue(it.getContent().contains("failIfNoTests"));
     };
@@ -527,58 +495,44 @@ public class WizardConfigurationTest {
   
   @Test
   public void allBuildSystemsUseJava8() {
-    ParentProjectDescriptor _parentProject = this.config.getParentProject();
-    PomFile _pom = _parentProject.pom();
-    final String parentPom = _pom.getContent();
+    final String parentPom = this.config.getParentProject().pom().getContent();
     Assert.assertTrue(parentPom.contains("<maven.compiler.source>1.8</maven.compiler.source>"));
     Assert.assertTrue(parentPom.contains("<maven.compiler.target>1.8</maven.compiler.target>"));
-    ParentProjectDescriptor _parentProject_1 = this.config.getParentProject();
-    GradleBuildFile _buildGradle = _parentProject_1.buildGradle();
-    final String parentGradle = _buildGradle.getContent();
+    final String parentGradle = this.config.getParentProject().buildGradle().getContent();
     Assert.assertTrue(parentGradle.contains("sourceCompatibility = \'1.8\'"));
     Assert.assertTrue(parentGradle.contains("targetCompatibility = \'1.8\'"));
-    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
     final Function1<ProjectDescriptor, String> _function = (ProjectDescriptor it) -> {
       return it.manifest();
     };
-    List<String> _map = ListExtensions.map(_allJavaProjects, _function);
     final Consumer<String> _function_1 = (String it) -> {
       Assert.assertTrue(it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.8"));
     };
-    _map.forEach(_function_1);
+    ListExtensions.map(this.allJavaProjects(), _function).forEach(_function_1);
   }
   
   @Test
   public void allBuildSystemsUseOtherJava() {
     this.config.setJavaVersion(JavaVersion.JAVA7);
-    ParentProjectDescriptor _parentProject = this.config.getParentProject();
-    PomFile _pom = _parentProject.pom();
-    final String parentPom = _pom.getContent();
+    final String parentPom = this.config.getParentProject().pom().getContent();
     Assert.assertTrue(parentPom.contains("<maven.compiler.source>1.7</maven.compiler.source>"));
     Assert.assertTrue(parentPom.contains("<maven.compiler.target>1.7</maven.compiler.target>"));
-    ParentProjectDescriptor _parentProject_1 = this.config.getParentProject();
-    GradleBuildFile _buildGradle = _parentProject_1.buildGradle();
-    final String parentGradle = _buildGradle.getContent();
+    final String parentGradle = this.config.getParentProject().buildGradle().getContent();
     Assert.assertTrue(parentGradle.contains("sourceCompatibility = \'1.7\'"));
     Assert.assertTrue(parentGradle.contains("targetCompatibility = \'1.7\'"));
-    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
     final Function1<ProjectDescriptor, String> _function = (ProjectDescriptor it) -> {
       return it.manifest();
     };
-    List<String> _map = ListExtensions.map(_allJavaProjects, _function);
     final Consumer<String> _function_1 = (String it) -> {
       Assert.assertTrue(it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.7"));
     };
-    _map.forEach(_function_1);
+    ListExtensions.map(this.allJavaProjects(), _function).forEach(_function_1);
   }
   
   public List<? extends ProjectDescriptor> allJavaProjects() {
     RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
-    RuntimeProjectDescriptor _runtimeProject_1 = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject_1.getTestProject();
+    TestProjectDescriptor _testProject = this.config.getRuntimeProject().getTestProject();
     UiProjectDescriptor _uiProject = this.config.getUiProject();
-    UiProjectDescriptor _uiProject_1 = this.config.getUiProject();
-    TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+    TestProjectDescriptor _testProject_1 = this.config.getUiProject().getTestProject();
     IdeProjectDescriptor _ideProject = this.config.getIdeProject();
     IntellijProjectDescriptor _intellijProject = this.config.getIntellijProject();
     WebProjectDescriptor _webProject = this.config.getWebProject();

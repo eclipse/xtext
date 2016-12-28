@@ -9,8 +9,6 @@ package org.eclipse.xtext;
 
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -29,7 +27,6 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
-import org.eclipse.xtext.linking.langATestLanguage.Type;
 import org.eclipse.xtext.linking.services.LangATestLanguageGrammarAccess;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractXtextTests;
@@ -63,11 +60,9 @@ public class GrammarUtilTest extends AbstractXtextTests {
     _builder.newLine();
     String model = _builder.toString();
     final XtextResource r = this.getResourceFromString(model);
-    EList<EObject> _contents = r.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = r.getContents().get(0);
     final Grammar grammar = ((Grammar) _get);
-    EList<AbstractRule> _rules = grammar.getRules();
-    final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
+    final AbstractRule rule = IterableExtensions.<AbstractRule>head(grammar.getRules());
     final AbstractElement fragmentCall = rule.getAlternatives();
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
     Assert.assertEquals("Rule", currentType.getName());
@@ -90,11 +85,9 @@ public class GrammarUtilTest extends AbstractXtextTests {
     _builder.newLine();
     String model = _builder.toString();
     final XtextResource r = this.getResourceFromString(model);
-    EList<EObject> _contents = r.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = r.getContents().get(0);
     final Grammar grammar = ((Grammar) _get);
-    EList<AbstractRule> _rules = grammar.getRules();
-    final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
+    final AbstractRule rule = IterableExtensions.<AbstractRule>head(grammar.getRules());
     final AbstractElement fragmentCall = rule.getAlternatives();
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
     Assert.assertEquals("SubRule", currentType.getName());
@@ -119,11 +112,9 @@ public class GrammarUtilTest extends AbstractXtextTests {
     _builder.newLine();
     String model = _builder.toString();
     final XtextResource r = this.getResourceFromString(model);
-    EList<EObject> _contents = r.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = r.getContents().get(0);
     final Grammar grammar = ((Grammar) _get);
-    EList<AbstractRule> _rules = grammar.getRules();
-    final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
+    final AbstractRule rule = IterableExtensions.<AbstractRule>head(grammar.getRules());
     final AbstractElement fragmentCall = rule.getAlternatives();
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
     Assert.assertEquals("SubRule", currentType.getName());
@@ -148,11 +139,9 @@ public class GrammarUtilTest extends AbstractXtextTests {
     _builder.newLine();
     String model = _builder.toString();
     final XtextResource r = this.getResourceFromString(model);
-    EList<EObject> _contents = r.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = r.getContents().get(0);
     final Grammar grammar = ((Grammar) _get);
-    EList<AbstractRule> _rules = grammar.getRules();
-    final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
+    final AbstractRule rule = IterableExtensions.<AbstractRule>head(grammar.getRules());
     final AbstractElement fragmentCall = rule.getAlternatives();
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
     Assert.assertEquals("Rule", currentType.getName());
@@ -180,11 +169,9 @@ public class GrammarUtilTest extends AbstractXtextTests {
     _builder.newLine();
     String model = _builder.toString();
     final XtextResource r = this.getResourceFromString(model);
-    EList<EObject> _contents = r.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = r.getContents().get(0);
     final Grammar grammar = ((Grammar) _get);
-    EList<AbstractRule> _rules = grammar.getRules();
-    final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
+    final AbstractRule rule = IterableExtensions.<AbstractRule>head(grammar.getRules());
     final AbstractElement fragmentCall = rule.getAlternatives();
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
     Assert.assertEquals("Rule", currentType.getName());
@@ -212,14 +199,11 @@ public class GrammarUtilTest extends AbstractXtextTests {
     _builder.newLine();
     String model = _builder.toString();
     final XtextResource r = this.getResourceFromString(model);
-    EList<EObject> _contents = r.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = r.getContents().get(0);
     final Grammar grammar = ((Grammar) _get);
-    EList<AbstractRule> _rules = grammar.getRules();
-    final AbstractRule rule = IterableExtensions.<AbstractRule>last(_rules);
+    final AbstractRule rule = IterableExtensions.<AbstractRule>last(grammar.getRules());
     AbstractElement _alternatives = rule.getAlternatives();
-    EList<AbstractElement> _elements = ((Group) _alternatives).getElements();
-    final AbstractElement fragmentCall = IterableExtensions.<AbstractElement>last(_elements);
+    final AbstractElement fragmentCall = IterableExtensions.<AbstractElement>last(((Group) _alternatives).getElements());
     final EClassifier currentType = GrammarUtil.findCurrentType(fragmentCall);
     Assert.assertEquals("Rule", currentType.getName());
   }
@@ -241,15 +225,15 @@ public class GrammarUtilTest extends AbstractXtextTests {
     _builder.newLine();
     String model = _builder.toString();
     final XtextResource r = this.getResourceFromString(model);
-    EList<EObject> _contents = r.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = r.getContents().get(0);
     final Grammar grammar = ((Grammar) _get);
     final List<AbstractRule> allRules = GrammarUtil.allRules(grammar);
+    final Function1<AbstractRule, String> _function = (AbstractRule it) -> {
+      return it.getName();
+    };
     Assert.assertEquals(
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Rule", "STRING", "ID", "INT", "STRING", "ML_COMMENT", "SL_COMMENT", "WS", "ANY_OTHER")).toString(), 
-      ListExtensions.<AbstractRule, String>map(allRules, ((Function1<AbstractRule, String>) (AbstractRule it) -> {
-        return it.getName();
-      })).toString());
+      ListExtensions.<AbstractRule, String>map(allRules, _function).toString());
   }
   
   @Test
@@ -269,8 +253,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     _builder.newLine();
     String model = _builder.toString();
     XtextResource r = this.getResourceFromString(model);
-    EList<EObject> _contents = r.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = r.getContents().get(0);
     Grammar grammar = ((Grammar) _get);
     Assert.assertEquals(grammar, GrammarUtil.findRuleForName(grammar, "Rule").eContainer());
     Assert.assertNull(GrammarUtil.findRuleForName(grammar, "org.eclipse.xtext.common.Terminals.Rule"));
@@ -293,8 +276,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     _builder.newLine();
     String model = _builder.toString();
     Resource r = this.getResourceFromString(model);
-    EList<EObject> _contents = r.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = r.getContents().get(0);
     Grammar g = ((Grammar) _get);
     List<AbstractMetamodelDeclaration> decls = GrammarUtil.allMetamodelDeclarations(g);
     Assert.assertEquals(2, decls.size());
@@ -323,8 +305,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     _builder.newLine();
     String model = _builder.toString();
     Resource r = this.getResourceFromString(model);
-    EList<EObject> _contents = r.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = r.getContents().get(0);
     Grammar g = ((Grammar) _get);
     List<AbstractMetamodelDeclaration> decls = GrammarUtil.allMetamodelDeclarations(g);
     Assert.assertEquals(3, decls.size());
@@ -342,8 +323,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     Assert.assertNotNull(decl.getEPackage());
     Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
     Assert.assertEquals("ecore", decl.getAlias());
-    EList<AbstractRule> _rules = g.getRules();
-    AbstractRule abstractRule = _rules.get(0);
+    AbstractRule abstractRule = g.getRules().get(0);
     Assert.assertSame(decls.get(1), abstractRule.getType().getMetamodel());
   }
   
@@ -361,8 +341,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     _builder.newLine();
     String model = _builder.toString();
     Resource r = this.getResourceFromString(model);
-    EList<EObject> _contents = r.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = r.getContents().get(0);
     Grammar g = ((Grammar) _get);
     List<AbstractMetamodelDeclaration> decls = GrammarUtil.allMetamodelDeclarations(g);
     Assert.assertEquals(3, decls.size());
@@ -381,8 +360,7 @@ public class GrammarUtilTest extends AbstractXtextTests {
     Assert.assertNotNull(decl.getEPackage());
     Assert.assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
     Assert.assertEquals("ecore", decl.getAlias());
-    EList<AbstractRule> _rules = g.getRules();
-    AbstractRule abstractRule = _rules.get(0);
+    AbstractRule abstractRule = g.getRules().get(0);
     Assert.assertSame(decls.get(0), abstractRule.getType().getMetamodel());
   }
   
@@ -390,17 +368,13 @@ public class GrammarUtilTest extends AbstractXtextTests {
   public void testGetReference() throws Exception {
     this.with(LangATestLanguageStandaloneSetup.class);
     XtextResource resource = this.getResourceFromStringAndExpect("type A extends B", 1);
-    LangATestLanguageGrammarAccess _get = this.<LangATestLanguageGrammarAccess>get(LangATestLanguageGrammarAccess.class);
-    LangATestLanguageGrammarAccess.TypeElements _typeAccess = _get.getTypeAccess();
-    Assignment asExtends = _typeAccess.getExtendsAssignment_2_1();
+    Assignment asExtends = this.<LangATestLanguageGrammarAccess>get(LangATestLanguageGrammarAccess.class).getTypeAccess().getExtendsAssignment_2_1();
     AbstractElement _terminal = asExtends.getTerminal();
     CrossReference xref = ((CrossReference) _terminal);
     EObject _model = this.getModel(resource);
     Main model = ((Main) _model);
-    EList<Type> _types = model.getTypes();
-    EObject typeA = _types.get(0);
-    EClass _eClass = typeA.eClass();
-    EReference ref = GrammarUtil.getReference(xref, _eClass);
+    EObject typeA = model.getTypes().get(0);
+    EReference ref = GrammarUtil.getReference(xref, typeA.eClass());
     Assert.assertNotNull(ref);
     Assert.assertEquals("extends", ref.getName());
     Assert.assertFalse(ref.isMany());

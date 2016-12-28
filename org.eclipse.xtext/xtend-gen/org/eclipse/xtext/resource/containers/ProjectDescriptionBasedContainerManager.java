@@ -31,8 +31,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 public class ProjectDescriptionBasedContainerManager implements IContainer.Manager {
   public boolean shouldUseProjectDescriptionBasedContainers(final IResourceDescriptions resourceDescriptions) {
     if ((resourceDescriptions instanceof ChunkedResourceDescriptions)) {
-      ResourceSet _resourceSet = ((ChunkedResourceDescriptions)resourceDescriptions).getResourceSet();
-      ProjectDescription _findInEmfObject = ProjectDescription.findInEmfObject(_resourceSet);
+      ProjectDescription _findInEmfObject = ProjectDescription.findInEmfObject(((ChunkedResourceDescriptions)resourceDescriptions).getResourceSet());
       boolean _tripleNotEquals = (_findInEmfObject != null);
       if (_tripleNotEquals) {
         return true;
@@ -46,12 +45,11 @@ public class ProjectDescriptionBasedContainerManager implements IContainer.Manag
     if ((resourceDescriptions instanceof ChunkedResourceDescriptions)) {
       final ResourceSet resourceSet = ((ChunkedResourceDescriptions)resourceDescriptions).getResourceSet();
       final ProjectDescription projectDescription = ProjectDescription.findInEmfObject(resourceSet);
-      String _name = projectDescription.getName();
-      final ResourceDescriptionsData container = ((ChunkedResourceDescriptions)resourceDescriptions).getContainer(_name);
+      final ResourceDescriptionsData container = ((ChunkedResourceDescriptions)resourceDescriptions).getContainer(projectDescription.getName());
       return new ResourceDescriptionsBasedContainer(container);
     }
-    String _name_1 = ChunkedResourceDescriptions.class.getName();
-    String _plus = ("expected " + _name_1);
+    String _name = ChunkedResourceDescriptions.class.getName();
+    String _plus = ("expected " + _name);
     throw new IllegalArgumentException(_plus);
   }
   
@@ -62,8 +60,7 @@ public class ProjectDescriptionBasedContainerManager implements IContainer.Manag
       final ProjectDescription projectDescription = ProjectDescription.findInEmfObject(resourceSet);
       final ArrayList<IContainer> allContainers = CollectionLiterals.<IContainer>newArrayList();
       ResourceDescriptionsData _elvis = null;
-      String _name = projectDescription.getName();
-      ResourceDescriptionsData _container = ((ChunkedResourceDescriptions)resourceDescriptions).getContainer(_name);
+      ResourceDescriptionsData _container = ((ChunkedResourceDescriptions)resourceDescriptions).getContainer(projectDescription.getName());
       if (_container != null) {
         _elvis = _container;
       } else {
@@ -93,8 +90,8 @@ public class ProjectDescriptionBasedContainerManager implements IContainer.Manag
       }
       return allContainers;
     }
-    String _name_1 = ChunkedResourceDescriptions.class.getName();
-    String _plus = ("expected " + _name_1);
+    String _name = ChunkedResourceDescriptions.class.getName();
+    String _plus = ("expected " + _name);
     throw new IllegalArgumentException(_plus);
   }
 }

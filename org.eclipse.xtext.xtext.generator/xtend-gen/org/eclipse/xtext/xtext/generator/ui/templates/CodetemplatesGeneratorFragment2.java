@@ -21,7 +21,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
@@ -30,7 +29,6 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 
 /**
@@ -63,8 +61,7 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
   
   @Override
   public void generate() {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IBundleProjectConfig _eclipsePlugin = this.getProjectConfig().getEclipsePlugin();
     ManifestAccess _manifest = null;
     if (_eclipsePlugin!=null) {
       _manifest=_eclipsePlugin.getManifest();
@@ -97,34 +94,23 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
         _builder.append(".getLanguageRegistry()");
       }
     };
-    GuiceModuleAccess.BindingFactory _addTypeToProviderInstance_1 = _addTypeToProviderInstance.addTypeToProviderInstance(_typeRef_1, _client_1);
-    TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar");
-    TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar");
-    GuiceModuleAccess.BindingFactory _addTypeToTypeEagerSingleton = _addTypeToProviderInstance_1.addTypeToTypeEagerSingleton(_typeRef_2, _typeRef_3);
-    TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage");
-    TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.preferences.AdvancedTemplatesPreferencePage");
-    GuiceModuleAccess.BindingFactory _addTypeToType = _addTypeToTypeEagerSingleton.addTypeToType(_typeRef_4, _typeRef_5);
-    TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser");
-    Grammar _grammar = this.getGrammar();
-    TypeReference _partialContentAssistParserClass = this.getPartialContentAssistParserClass(_grammar);
-    GuiceModuleAccess.BindingFactory _addTypeToType_1 = _addTypeToType.addTypeToType(_typeRef_6, _partialContentAssistParserClass);
-    TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory");
-    TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialEditingContentAssistContextFactory");
-    GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeRef_7, _typeRef_8);
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
-    _addTypeToType_2.contributeTo(_eclipsePluginGenModule);
-    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    IBundleProjectConfig _genericIde = _projectConfig_1.getGenericIde();
+    _addTypeToProviderInstance.addTypeToProviderInstance(_typeRef_1, _client_1).addTypeToTypeEagerSingleton(
+      TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar"), 
+      TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar")).addTypeToType(
+      TypeReference.typeRef("org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"), 
+      TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.preferences.AdvancedTemplatesPreferencePage")).addTypeToType(
+      TypeReference.typeRef("org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser"), 
+      this.getPartialContentAssistParserClass(this.getGrammar())).addTypeToType(
+      TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory"), 
+      TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialEditingContentAssistContextFactory")).contributeTo(this.getLanguage().getEclipsePluginGenModule());
+    IBundleProjectConfig _genericIde = this.getProjectConfig().getGenericIde();
     IXtextGeneratorFileSystemAccess _srcGen = null;
     if (_genericIde!=null) {
       _srcGen=_genericIde.getSrcGen();
     }
     boolean _tripleNotEquals = (_srcGen != null);
     if (_tripleNotEquals) {
-      Grammar _grammar_1 = this.getGrammar();
-      TypeReference _partialContentAssistParserClass_1 = this.getPartialContentAssistParserClass(_grammar_1);
-      GeneratedJavaFileAccess _createGeneratedJavaFile = this.fileAccessFactory.createGeneratedJavaFile(_partialContentAssistParserClass_1);
+      GeneratedJavaFileAccess _createGeneratedJavaFile = this.fileAccessFactory.createGeneratedJavaFile(this.getPartialContentAssistParserClass(this.getGrammar()));
       final Procedure1<GeneratedJavaFileAccess> _function = (GeneratedJavaFileAccess it) -> {
         it.setContent(this.getGenPartialContentAssistParser());
         it.writeTo(this.getProjectConfig().getGenericIde().getSrcGen());
@@ -138,13 +124,10 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        Grammar _grammar = CodetemplatesGeneratorFragment2.this.getGrammar();
-        TypeReference _partialContentAssistParserClass = CodetemplatesGeneratorFragment2.this.getPartialContentAssistParserClass(_grammar);
-        String _simpleName = _partialContentAssistParserClass.getSimpleName();
+        String _simpleName = CodetemplatesGeneratorFragment2.this.getPartialContentAssistParserClass(CodetemplatesGeneratorFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar_1 = CodetemplatesGeneratorFragment2.this.getGrammar();
-        TypeReference _parserClass = CodetemplatesGeneratorFragment2.this.caNaming.getParserClass(_grammar_1);
+        TypeReference _parserClass = CodetemplatesGeneratorFragment2.this.caNaming.getParserClass(CodetemplatesGeneratorFragment2.this.getGrammar());
         _builder.append(_parserClass);
         _builder.append(" implements ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser");

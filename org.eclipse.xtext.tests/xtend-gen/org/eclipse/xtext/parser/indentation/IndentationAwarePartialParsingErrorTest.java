@@ -8,7 +8,6 @@
 package org.eclipse.xtext.parser.indentation;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -56,8 +55,7 @@ public class IndentationAwarePartialParsingErrorTest {
       final XtextResource resource = ((XtextResource) _eResource);
       final int idx = model.indexOf(" // 8");
       resource.update(idx, 0, "c");
-      EList<EObject> _contents = resource.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
+      EObject _head = IterableExtensions.<EObject>head(resource.getContents());
       final Tree reparsed = ((Tree) _head);
       Assert.assertNotSame(tree, reparsed);
     } catch (Throwable _e) {
@@ -89,8 +87,7 @@ public class IndentationAwarePartialParsingErrorTest {
       final XtextResource resource = ((XtextResource) _eResource);
       final int idx = model.indexOf(" // tab");
       resource.update(idx, 0, "c");
-      EList<EObject> _contents = resource.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
+      EObject _head = IterableExtensions.<EObject>head(resource.getContents());
       final Tree reparsed = ((Tree) _head);
       Assert.assertNotSame(tree, reparsed);
     } catch (Throwable _e) {

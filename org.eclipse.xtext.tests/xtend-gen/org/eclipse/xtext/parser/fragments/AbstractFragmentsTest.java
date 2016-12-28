@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.PRFNamed;
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.PRFNamedWithAction;
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.ParserRuleFragments;
@@ -95,7 +94,8 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ParserRuleFragments fragments = this.parseAndValidate("#4 prev current");
     Assert.assertNotNull(fragments);
     Assert.assertEquals("current", fragments.getElement().getName());
-    Assert.assertEquals("prev", ((PRFNamedWithAction) fragments.getElement()).getPrev().getName());
+    PRFNamed _element = fragments.getElement();
+    Assert.assertEquals("prev", ((PRFNamedWithAction) _element).getPrev().getName());
   }
   
   @Test
@@ -116,7 +116,8 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ParserRuleFragments fragments = this.parseAndValidate("#5 prev current");
     Assert.assertNotNull(fragments);
     Assert.assertEquals("current", fragments.getElement().getName());
-    Assert.assertEquals("prev", ((PRFNamedWithAction) fragments.getElement()).getPrev().getName());
+    PRFNamed _element = fragments.getElement();
+    Assert.assertEquals("prev", ((PRFNamedWithAction) _element).getPrev().getName());
   }
   
   @Test
@@ -125,7 +126,8 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ParserRuleFragments fragments = this.parseAndValidate("#6 prev current");
     Assert.assertNotNull(fragments);
     Assert.assertEquals("current", fragments.getElement().getName());
-    Assert.assertEquals("prev", ((PRFNamedWithAction) fragments.getElement()).getPrev().getName());
+    PRFNamed _element = fragments.getElement();
+    Assert.assertEquals("prev", ((PRFNamedWithAction) _element).getPrev().getName());
   }
   
   @Test
@@ -263,8 +265,7 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
       this.validationTestHelper.assertNoIssues(result);
       Resource _eResource = result.eResource();
       final XtextResource resource = ((XtextResource) _eResource);
-      IParseResult _parseResult = resource.getParseResult();
-      final ICompositeNode node = _parseResult.getRootNode();
+      final ICompositeNode node = resource.getParseResult().getRootNode();
       this.invariantChecker.checkInvariant(node);
       return result;
     } catch (Throwable _e) {

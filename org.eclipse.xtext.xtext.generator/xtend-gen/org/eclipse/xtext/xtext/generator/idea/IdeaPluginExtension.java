@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.idea;
 
-import java.util.List;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -18,11 +17,10 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class IdeaPluginExtension {
   public Iterable<AbstractRule> getAllNonTerminalRules(final Grammar grammar) {
-    List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
     final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
       return Boolean.valueOf((!(it instanceof TerminalRule)));
     };
-    return IterableExtensions.<AbstractRule>filter(_allRules, _function);
+    return IterableExtensions.<AbstractRule>filter(GrammarUtil.allRules(grammar), _function);
   }
   
   public String getSimpleName(final Grammar grammar) {

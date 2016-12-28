@@ -52,8 +52,7 @@ public class BuildContext {
     final Function1<URI, Boolean> _function = (URI it) -> {
       return Boolean.valueOf(this.canHandle(it));
     };
-    Iterable<URI> _filter = IterableExtensions.<URI>filter(uri, _function);
-    return this.loader.<T>executeClustered(_filter, operation);
+    return this.loader.<T>executeClustered(IterableExtensions.<URI>filter(uri, _function), operation);
   }
   
   protected boolean canHandle(final URI uri) {

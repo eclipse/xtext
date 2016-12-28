@@ -64,8 +64,7 @@ public class DefaultHierarchyNode implements IHierarchyNode {
     IHierarchyNode node = this.parent;
     while ((node != null)) {
       {
-        IEObjectDescription _element = node.getElement();
-        URI _eObjectURI = _element.getEObjectURI();
+        URI _eObjectURI = node.getElement().getEObjectURI();
         URI _eObjectURI_1 = this.element.getEObjectURI();
         boolean _equals = Objects.equal(_eObjectURI, _eObjectURI_1);
         if (_equals) {

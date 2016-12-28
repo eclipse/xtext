@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.tests.testlanguage.ide;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageRuntimeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageStandaloneSetup;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLanguageIdeModule;
@@ -24,7 +23,6 @@ public class TestLanguageIdeSetup extends TestLanguageStandaloneSetup {
   public Injector createInjector() {
     TestLanguageRuntimeModule _testLanguageRuntimeModule = new TestLanguageRuntimeModule();
     TestLanguageIdeModule _testLanguageIdeModule = new TestLanguageIdeModule();
-    Module _mixin = Modules2.mixin(_testLanguageRuntimeModule, _testLanguageIdeModule);
-    return Guice.createInjector(_mixin);
+    return Guice.createInjector(Modules2.mixin(_testLanguageRuntimeModule, _testLanguageIdeModule));
   }
 }

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ide.editor.contentassist;
 
 import com.google.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -19,7 +18,6 @@ import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -115,19 +113,16 @@ public abstract class AbstractIdeTemplateProposalProvider {
     protected String getStringRepresentation(final Object object) {
       if ((object instanceof AbstractIdeTemplateProposalProvider.Variable)) {
         final String varName = ((AbstractIdeTemplateProposalProvider.Variable)object).name;
-        ITextRegion _replaceRegion = this.context.getReplaceRegion();
-        int _offset = _replaceRegion.getOffset();
+        int _offset = this.context.getReplaceRegion().getOffset();
         int _currentOffset = this.getCurrentOffset();
         final int offset = (_offset + _currentOffset);
-        ArrayList<TextRegion> _editPositions = this.entry.getEditPositions();
         int _length = varName.length();
         TextRegion _textRegion = new TextRegion(offset, _length);
-        _editPositions.add(_textRegion);
+        this.entry.getEditPositions().add(_textRegion);
         return varName;
       } else {
         if ((object instanceof AbstractIdeTemplateProposalProvider.Cursor)) {
-          ITextRegion _replaceRegion_1 = this.context.getReplaceRegion();
-          int _offset_1 = _replaceRegion_1.getOffset();
+          int _offset_1 = this.context.getReplaceRegion().getOffset();
           int _currentOffset_1 = this.getCurrentOffset();
           final int offset_1 = (_offset_1 + _currentOffset_1);
           this.entry.setEscapePosition(Integer.valueOf(offset_1));
@@ -179,15 +174,12 @@ public abstract class AbstractIdeTemplateProposalProvider {
     if (_canAcceptProposal) {
       entry.setLabel(name);
       entry.setDescription(description);
-      int _defaultPriority = this.proposalPriorities.getDefaultPriority(entry);
-      acceptor.accept(entry, _defaultPriority);
+      acceptor.accept(entry, this.proposalPriorities.getDefaultPriority(entry));
     }
   }
   
   protected boolean canAcceptProposal(final ContentAssistEntry entry, final ContentAssistContext context) {
-    String _proposal = entry.getProposal();
-    String _prefix = entry.getPrefix();
-    return this.proposalCreator.isValidProposal(_proposal, _prefix, context);
+    return this.proposalCreator.isValidProposal(entry.getProposal(), entry.getPrefix(), context);
   }
   
   protected ContentAssistEntry createProposal(final StringConcatenationClient template, final ContentAssistContext context, final boolean adaptIndentation) {
@@ -223,14 +215,12 @@ public abstract class AbstractIdeTemplateProposalProvider {
     }
     final String text = _text;
     if (((text != null) && (text.length() >= context.getOffset()))) {
-      ITextRegion _replaceRegion = context.getReplaceRegion();
-      int lineStart = _replaceRegion.getOffset();
+      int lineStart = context.getReplaceRegion().getOffset();
       int indentEnd = lineStart;
       while (((lineStart > 0) && (text.charAt((lineStart - 1)) != "\n".charAt(0)))) {
         {
           lineStart--;
-          char _charAt = text.charAt(lineStart);
-          boolean _isWhitespace = Character.isWhitespace(_charAt);
+          boolean _isWhitespace = Character.isWhitespace(text.charAt(lineStart));
           boolean _not = (!_isWhitespace);
           if (_not) {
             indentEnd = lineStart;

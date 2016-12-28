@@ -45,31 +45,25 @@ public class IdeContentProposalAcceptor implements IIdeContentProposalAcceptor, 
   
   @Override
   public int compare(final Pair<Integer, ContentAssistEntry> p1, final Pair<Integer, ContentAssistEntry> p2) {
-    Integer _key = p2.getKey();
-    Integer _key_1 = p1.getKey();
-    final int prioResult = _key.compareTo(_key_1);
+    final int prioResult = p2.getKey().compareTo(p1.getKey());
     if ((prioResult != 0)) {
       return prioResult;
     }
     String _elvis = null;
-    ContentAssistEntry _value = p1.getValue();
-    String _label = _value.getLabel();
+    String _label = p1.getValue().getLabel();
     if (_label != null) {
       _elvis = _label;
     } else {
-      ContentAssistEntry _value_1 = p1.getValue();
-      String _proposal = _value_1.getProposal();
+      String _proposal = p1.getValue().getProposal();
       _elvis = _proposal;
     }
     final String s1 = _elvis;
     String _elvis_1 = null;
-    ContentAssistEntry _value_2 = p2.getValue();
-    String _label_1 = _value_2.getLabel();
+    String _label_1 = p2.getValue().getLabel();
     if (_label_1 != null) {
       _elvis_1 = _label_1;
     } else {
-      ContentAssistEntry _value_3 = p2.getValue();
-      String _proposal_1 = _value_3.getProposal();
+      String _proposal_1 = p2.getValue().getProposal();
       _elvis_1 = _proposal_1;
     }
     final String s2 = _elvis_1;

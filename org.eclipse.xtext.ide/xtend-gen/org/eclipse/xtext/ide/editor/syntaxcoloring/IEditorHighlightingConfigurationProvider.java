@@ -10,10 +10,7 @@ package org.eclipse.xtext.ide.editor.syntaxcoloring;
 import com.google.common.base.Objects;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
-import java.util.List;
-import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
@@ -50,8 +47,7 @@ public interface IEditorHighlightingConfigurationProvider {
         _builder.newLine();
         _builder.append("    ");
         _builder.append("match: \"\\\\b(?:");
-        Iterable<String> _keywords = this.getKeywords();
-        String _join = IterableExtensions.join(_keywords, "|");
+        String _join = IterableExtensions.join(this.getKeywords(), "|");
         _builder.append(_join, "    ");
         _builder.append(")\\\\b\", ");
         _builder.newLineIfNotEmpty();
@@ -107,20 +103,13 @@ public interface IEditorHighlightingConfigurationProvider {
     }
     
     public Iterable<String> getKeywords() {
-      Grammar _grammar = this.grammarAccess.getGrammar();
-      List<Keyword> _containedKeywords = GrammarUtil.containedKeywords(_grammar);
       final Function1<Keyword, Boolean> _function = (Keyword it) -> {
-        String _value = it.getValue();
-        char _charAt = _value.charAt(0);
-        return Boolean.valueOf(Character.isLetter(_charAt));
+        return Boolean.valueOf(Character.isLetter(it.getValue().charAt(0)));
       };
-      Iterable<Keyword> _filter = IterableExtensions.<Keyword>filter(_containedKeywords, _function);
       final Function1<Keyword, String> _function_1 = (Keyword it) -> {
         return it.getValue();
       };
-      Iterable<String> _map = IterableExtensions.<Keyword, String>map(_filter, _function_1);
-      Set<String> _set = IterableExtensions.<String>toSet(_map);
-      return IterableExtensions.<String>sort(_set);
+      return IterableExtensions.<String>sort(IterableExtensions.<String>toSet(IterableExtensions.<Keyword, String>map(IterableExtensions.<Keyword>filter(GrammarUtil.containedKeywords(this.grammarAccess.getGrammar()), _function), _function_1)));
     }
   }
   

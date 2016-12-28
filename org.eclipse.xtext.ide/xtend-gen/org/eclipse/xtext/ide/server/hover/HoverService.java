@@ -16,7 +16,6 @@ import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
@@ -82,8 +81,7 @@ public class HoverService {
       final Function1<String, String> _function_1 = (String it) -> {
         return it;
       };
-      List<String> _map = ListExtensions.map(contents, _function_1);
-      b.setContents(_map);
+      b.setContents(ListExtensions.map(contents, _function_1));
     };
     return ObjectExtensions.<Hover>operator_doubleArrow(_hover, _function);
   }
@@ -111,12 +109,9 @@ public class HoverService {
       if (_not) {
         final IParseResult parseResult = resource.getParseResult();
         if ((parseResult != null)) {
-          ICompositeNode _rootNode = parseResult.getRootNode();
-          ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(_rootNode, offset);
+          ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
           if ((((leafNode != null) && leafNode.isHidden()) && (leafNode.getOffset() == offset))) {
-            ICompositeNode _rootNode_1 = parseResult.getRootNode();
-            ILeafNode _findLeafNodeAtOffset = NodeModelUtils.findLeafNodeAtOffset(_rootNode_1, (offset - 1));
-            leafNode = _findLeafNodeAtOffset;
+            leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), (offset - 1));
           }
           if ((leafNode != null)) {
             final ITextRegion leafRegion = leafNode.getTextRegion();

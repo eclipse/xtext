@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xtext;
 
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -111,9 +109,7 @@ public class Bug456789Test extends AbstractXtextTests {
       _builder.append("(test (comp_for | (\',\' test)* (\',\')?)) );");
       _builder.newLine();
       final XtextResource resource = this.getResourceFromStringAndExpect(_builder.toString(), AbstractXtextTests.UNKNOWN_EXPECTATION);
-      EList<EObject> _contents = resource.getContents();
-      EObject _get = _contents.get(0);
-      final Diagnostic diag = Diagnostician.INSTANCE.validate(_get);
+      final Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
       Assert.assertNotNull("diag", diag);
       Assert.assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
     } catch (Throwable _e) {
@@ -391,9 +387,7 @@ public class Bug456789Test extends AbstractXtextTests {
       _builder.append("*/");
       _builder.newLine();
       final XtextResource resource = this.getResourceFromStringAndExpect(_builder.toString(), AbstractXtextTests.UNKNOWN_EXPECTATION);
-      EList<EObject> _contents = resource.getContents();
-      EObject _get = _contents.get(0);
-      final Diagnostic diag = Diagnostician.INSTANCE.validate(_get);
+      final Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
       Assert.assertNotNull("diag", diag);
       Assert.assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
     } catch (Throwable _e) {

@@ -27,8 +27,7 @@ public class XbaseUsageDetector {
   
   public boolean usesXImportSection(final Grammar grammar) {
     final Set<AbstractRule> usedRules = CollectionLiterals.<AbstractRule>newHashSet();
-    UsedRulesFinder _usedRulesFinder = new UsedRulesFinder(usedRules);
-    _usedRulesFinder.compute(grammar);
+    new UsedRulesFinder(usedRules).compute(grammar);
     final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
       return Boolean.valueOf((Objects.equal(it.getName(), "XImportSection") && Objects.equal(GrammarUtil.getGrammar(it).getName(), "org.eclipse.xtext.xbase.Xtype")));
     };

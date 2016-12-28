@@ -36,14 +36,13 @@ public class AbsoluteURI extends AbstractURIWrapper {
   
   public SourceRelativeURI deresolve(final URI sourceFolderURI) {
     try {
-      URI _uRI = this.getURI();
-      URI _deresolve = _uRI.deresolve(sourceFolderURI);
+      URI _deresolve = this.getURI().deresolve(sourceFolderURI);
       return new SourceRelativeURI(_deresolve);
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
         final IllegalArgumentException e = (IllegalArgumentException)_t;
-        URI _uRI_1 = this.getURI();
-        String _plus = ("Base URI was " + _uRI_1);
+        URI _uRI = this.getURI();
+        String _plus = ("Base URI was " + _uRI);
         throw new IllegalArgumentException(_plus, e);
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -56,8 +55,7 @@ public class AbsoluteURI extends AbstractURIWrapper {
   }
   
   public SourceRelativeURI deresolve(final IProjectConfig projectConfig) {
-    URI _uRI = this.getURI();
-    final ISourceFolder sourceFolder = projectConfig.findSourceFolderContaining(_uRI);
+    final ISourceFolder sourceFolder = projectConfig.findSourceFolderContaining(this.getURI());
     SourceRelativeURI _deresolve = null;
     if (sourceFolder!=null) {
       _deresolve=this.deresolve(sourceFolder);

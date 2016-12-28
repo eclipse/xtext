@@ -43,16 +43,14 @@ public class TraceRegionMergerTest {
       TraceRegionMergerTest.TestBuilder _xblockexpression = null;
       {
         final TraceRegionMergerTest.TraceBuilder traceBuilder = new TraceRegionMergerTest.TraceBuilder(this, uri);
-        AbstractTraceRegion _apply = init.apply(traceBuilder);
-        this.roots.add(_apply);
+        this.roots.add(init.apply(traceBuilder));
         _xblockexpression = this;
       }
       return _xblockexpression;
     }
     
     public void assertMerged(final Procedure1<? super TraceRegionMergerTest.AssertBuilder> init) {
-      TraceRegionMerger _traceRegionMerger = new TraceRegionMerger();
-      final AbstractTraceRegion mergedRoot = _traceRegionMerger.mergeTraceRegions(this.roots);
+      final AbstractTraceRegion mergedRoot = new TraceRegionMerger().mergeTraceRegions(this.roots);
       Assert.assertNotNull(mergedRoot);
       LinkedList<AbstractTraceRegion> _newLinkedList = CollectionLiterals.<AbstractTraceRegion>newLinkedList(mergedRoot);
       final TraceRegionMergerTest.AssertBuilder assertBuilder = new TraceRegionMergerTest.AssertBuilder(this, _newLinkedList);
@@ -133,15 +131,15 @@ public class TraceRegionMergerTest {
         Assert.assertEquals(head.toString(), length, head.getMyLength());
         Assert.assertEquals(head.toString(), startLine, head.getMyLineNumber());
         Assert.assertEquals(head.toString(), endLine, head.getMyEndLineNumber());
-        List<ILocationData> _associatedLocations = head.getAssociatedLocations();
         final Function1<ILocationData, SourceRelativeURI> _function = (ILocationData it) -> {
           return it.getSrcRelativePath();
         };
-        List<SourceRelativeURI> _map = ListExtensions.<ILocationData, SourceRelativeURI>map(_associatedLocations, _function);
-        final Set<SourceRelativeURI> associatedLocations = IterableExtensions.<SourceRelativeURI>toSet(_map);
+        final Set<SourceRelativeURI> associatedLocations = IterableExtensions.<SourceRelativeURI>toSet(ListExtensions.<ILocationData, SourceRelativeURI>map(head.getAssociatedLocations(), _function));
         Assert.assertEquals(head.toString(), ((Object[])Conversions.unwrapArray(uris, Object.class)).length, ((Object[])Conversions.unwrapArray(associatedLocations, Object.class)).length);
         for (final String uri : uris) {
-          Assert.assertTrue(("Missing " + uri), associatedLocations.contains(new SourceRelativeURI(URI.createURI(uri))));
+          URI _createURI = URI.createURI(uri);
+          SourceRelativeURI _sourceRelativeURI = new SourceRelativeURI(_createURI);
+          Assert.assertTrue(("Missing " + uri), associatedLocations.contains(_sourceRelativeURI));
         }
         if ((init == null)) {
           Assert.assertTrue(head.getNestedRegions().isEmpty());
@@ -176,7 +174,6 @@ public class TraceRegionMergerTest {
       };
       return it.region(2, 6, 1, 3, _function_1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_1 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_2 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(2, 2, 1, 2, "foo");
@@ -185,7 +182,7 @@ public class TraceRegionMergerTest {
       };
       it.region(2, 6, 1, 3, _function_2);
     };
-    _traceTo.assertMerged(_function_1);
+    this.traceTo("foo", _function).assertMerged(_function_1);
   }
   
   @Test
@@ -197,7 +194,6 @@ public class TraceRegionMergerTest {
       };
       return it.region(0, 4, 0, 2, _function_1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_1 = (TraceRegionMergerTest.TraceBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.TraceBuilder> _function_2 = (TraceRegionMergerTest.TraceBuilder it_1) -> {
         it_1.region(0, 2, 0, 1);
@@ -205,7 +201,6 @@ public class TraceRegionMergerTest {
       };
       return it.region(0, 4, 0, 2, _function_2);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_1 = _traceTo.traceTo("bar", _function_1);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_2 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_3 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(0, 2, 0, 1, "foo", "bar");
@@ -213,7 +208,7 @@ public class TraceRegionMergerTest {
       };
       it.region(0, 4, 0, 2, _function_3);
     };
-    _traceTo_1.assertMerged(_function_2);
+    this.traceTo("foo", _function).traceTo("bar", _function_1).assertMerged(_function_2);
   }
   
   @Test
@@ -224,14 +219,12 @@ public class TraceRegionMergerTest {
       };
       return it.region(0, 2, 0, 1, _function_1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_1 = (TraceRegionMergerTest.TraceBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.TraceBuilder> _function_2 = (TraceRegionMergerTest.TraceBuilder it_1) -> {
         it_1.region(2, 2, 1, 2);
       };
       return it.region(2, 2, 1, 2, _function_2);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_1 = _traceTo.traceTo("bar", _function_1);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_2 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_3 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(0, 2, 0, 1, "foo");
@@ -239,7 +232,7 @@ public class TraceRegionMergerTest {
       };
       it.region(0, 4, 0, 2, _function_3);
     };
-    _traceTo_1.assertMerged(_function_2);
+    this.traceTo("foo", _function).traceTo("bar", _function_1).assertMerged(_function_2);
   }
   
   @Test
@@ -251,14 +244,12 @@ public class TraceRegionMergerTest {
       };
       return it.region(0, 4, 0, 2, _function_1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_1 = (TraceRegionMergerTest.TraceBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.TraceBuilder> _function_2 = (TraceRegionMergerTest.TraceBuilder it_1) -> {
         it_1.region(2, 2, 1, 2);
       };
       return it.region(2, 2, 1, 2, _function_2);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_1 = _traceTo.traceTo("bar", _function_1);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_2 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_3 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(0, 2, 0, 1, "foo");
@@ -266,7 +257,7 @@ public class TraceRegionMergerTest {
       };
       it.region(0, 4, 0, 2, _function_3);
     };
-    _traceTo_1.assertMerged(_function_2);
+    this.traceTo("foo", _function).traceTo("bar", _function_1).assertMerged(_function_2);
   }
   
   @Test
@@ -278,11 +269,9 @@ public class TraceRegionMergerTest {
       };
       return it.region(2, 6, 1, 3, _function_1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_1 = (TraceRegionMergerTest.TraceBuilder it) -> {
       return it.region(0, 3, 0, 1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_1 = _traceTo.traceTo("bar", _function_1);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_2 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_3 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(0, 2, 0, 1, "bar");
@@ -293,7 +282,7 @@ public class TraceRegionMergerTest {
       };
       it.region(0, 8, 0, 3, _function_3);
     };
-    _traceTo_1.assertMerged(_function_2);
+    this.traceTo("foo", _function).traceTo("bar", _function_1).assertMerged(_function_2);
   }
   
   @Test
@@ -301,11 +290,9 @@ public class TraceRegionMergerTest {
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function = (TraceRegionMergerTest.TraceBuilder it) -> {
       return it.region(0, 6, 0, 2);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_1 = (TraceRegionMergerTest.TraceBuilder it) -> {
       return it.region(2, 2, 0, 1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_1 = _traceTo.traceTo("bar", _function_1);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_2 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_3 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(0, 2, 0, 0, "foo");
@@ -314,7 +301,7 @@ public class TraceRegionMergerTest {
       };
       it.region(0, 6, 0, 2, _function_3);
     };
-    _traceTo_1.assertMerged(_function_2);
+    this.traceTo("foo", _function).traceTo("bar", _function_1).assertMerged(_function_2);
   }
   
   @Test
@@ -322,11 +309,9 @@ public class TraceRegionMergerTest {
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function = (TraceRegionMergerTest.TraceBuilder it) -> {
       return it.region(0, 6, 0, 2);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_1 = (TraceRegionMergerTest.TraceBuilder it) -> {
       return it.region(3, 2, 1, 1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_1 = _traceTo.traceTo("bar", _function_1);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_2 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_3 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(0, 3, 0, 1, "foo");
@@ -335,7 +320,7 @@ public class TraceRegionMergerTest {
       };
       it.region(0, 6, 0, 2, _function_3);
     };
-    _traceTo_1.assertMerged(_function_2);
+    this.traceTo("foo", _function).traceTo("bar", _function_1).assertMerged(_function_2);
   }
   
   @Test
@@ -343,11 +328,9 @@ public class TraceRegionMergerTest {
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function = (TraceRegionMergerTest.TraceBuilder it) -> {
       return it.region(0, 4, 0, 1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_1 = (TraceRegionMergerTest.TraceBuilder it) -> {
       return it.region(2, 4, 0, 2);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_1 = _traceTo.traceTo("bar", _function_1);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_2 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_3 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(0, 2, 0, 0, "foo");
@@ -356,7 +339,7 @@ public class TraceRegionMergerTest {
       };
       it.region(0, 6, 0, 2, _function_3);
     };
-    _traceTo_1.assertMerged(_function_2);
+    this.traceTo("foo", _function).traceTo("bar", _function_1).assertMerged(_function_2);
   }
   
   @Test
@@ -364,11 +347,9 @@ public class TraceRegionMergerTest {
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function = (TraceRegionMergerTest.TraceBuilder it) -> {
       return it.region(0, 4, 0, 1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_1 = (TraceRegionMergerTest.TraceBuilder it) -> {
       return it.region(3, 3, 1, 2);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_1 = _traceTo.traceTo("bar", _function_1);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_2 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_3 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(0, 3, 0, 1, "foo");
@@ -377,7 +358,7 @@ public class TraceRegionMergerTest {
       };
       it.region(0, 6, 0, 2, _function_3);
     };
-    _traceTo_1.assertMerged(_function_2);
+    this.traceTo("foo", _function).traceTo("bar", _function_1).assertMerged(_function_2);
   }
   
   @Test
@@ -390,7 +371,6 @@ public class TraceRegionMergerTest {
       };
       return it.region(0, 9, 0, 3, _function_1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_1 = (TraceRegionMergerTest.TraceBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.TraceBuilder> _function_2 = (TraceRegionMergerTest.TraceBuilder it_1) -> {
         it_1.region(1, 3, 0, 1);
@@ -398,7 +378,6 @@ public class TraceRegionMergerTest {
       };
       return it.region(1, 6, 0, 2, _function_2);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_1 = _traceTo.traceTo("bar", _function_1);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_2 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_3 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(0, 1, 0, 0, "foo");
@@ -410,7 +389,7 @@ public class TraceRegionMergerTest {
       };
       it.region(0, 9, 0, 3, _function_3);
     };
-    _traceTo_1.assertMerged(_function_2);
+    this.traceTo("foo", _function).traceTo("bar", _function_1).assertMerged(_function_2);
   }
   
   @Test
@@ -423,7 +402,6 @@ public class TraceRegionMergerTest {
       };
       return it.region(0, 9, 0, 3, _function_1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_1 = (TraceRegionMergerTest.TraceBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.TraceBuilder> _function_2 = (TraceRegionMergerTest.TraceBuilder it_1) -> {
         it_1.region(2, 3, 0, 1);
@@ -431,7 +409,6 @@ public class TraceRegionMergerTest {
       };
       return it.region(2, 6, 0, 2, _function_2);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_1 = _traceTo.traceTo("bar", _function_1);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_2 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_3 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(0, 2, 0, 0, "foo");
@@ -443,7 +420,7 @@ public class TraceRegionMergerTest {
       };
       it.region(0, 9, 0, 3, _function_3);
     };
-    _traceTo_1.assertMerged(_function_2);
+    this.traceTo("foo", _function).traceTo("bar", _function_1).assertMerged(_function_2);
   }
   
   @Test
@@ -456,7 +433,6 @@ public class TraceRegionMergerTest {
       };
       return it.region(0, 9, 0, 3, _function_1);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo = this.traceTo("foo", _function);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_1 = (TraceRegionMergerTest.TraceBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.TraceBuilder> _function_2 = (TraceRegionMergerTest.TraceBuilder it_1) -> {
         it_1.region(1, 3, 0, 1);
@@ -464,7 +440,6 @@ public class TraceRegionMergerTest {
       };
       return it.region(1, 6, 0, 2, _function_2);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_1 = _traceTo.traceTo("bar", _function_1);
     final Function1<TraceRegionMergerTest.TraceBuilder, AbstractTraceRegion> _function_2 = (TraceRegionMergerTest.TraceBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.TraceBuilder> _function_3 = (TraceRegionMergerTest.TraceBuilder it_1) -> {
         it_1.region(2, 3, 0, 1);
@@ -472,7 +447,6 @@ public class TraceRegionMergerTest {
       };
       return it.region(2, 6, 0, 2, _function_3);
     };
-    TraceRegionMergerTest.TestBuilder _traceTo_2 = _traceTo_1.traceTo("baz", _function_2);
     final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_3 = (TraceRegionMergerTest.AssertBuilder it) -> {
       final Procedure1<TraceRegionMergerTest.AssertBuilder> _function_4 = (TraceRegionMergerTest.AssertBuilder it_1) -> {
         it_1.region(0, 1, 0, 0, "foo");
@@ -487,11 +461,10 @@ public class TraceRegionMergerTest {
       };
       it.region(0, 9, 0, 3, _function_4);
     };
-    _traceTo_2.assertMerged(_function_3);
+    this.traceTo("foo", _function).traceTo("bar", _function_1).traceTo("baz", _function_2).assertMerged(_function_3);
   }
   
   public TraceRegionMergerTest.TestBuilder traceTo(final String uri, final Function1<? super TraceRegionMergerTest.TraceBuilder, ? extends AbstractTraceRegion> init) {
-    TraceRegionMergerTest.TestBuilder _testBuilder = new TraceRegionMergerTest.TestBuilder();
-    return _testBuilder.traceTo(uri, init);
+    return new TraceRegionMergerTest.TestBuilder().traceTo(uri, init);
   }
 }

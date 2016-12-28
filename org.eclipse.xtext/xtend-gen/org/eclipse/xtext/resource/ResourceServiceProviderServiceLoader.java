@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.Set;
 import org.eclipse.xtext.ISetup;
@@ -39,18 +38,15 @@ public class ResourceServiceProviderServiceLoader implements Provider<IResourceS
         final FileExtensionProvider extensionProvider = injector.<FileExtensionProvider>getInstance(FileExtensionProvider.class);
         Set<String> _fileExtensions = extensionProvider.getFileExtensions();
         for (final String ext : _fileExtensions) {
-          Map<String, Object> _extensionToFactoryMap = registry.getExtensionToFactoryMap();
-          boolean _containsKey = _extensionToFactoryMap.containsKey(ext);
+          boolean _containsKey = registry.getExtensionToFactoryMap().containsKey(ext);
           if (_containsKey) {
             String _primaryFileExtension = extensionProvider.getPrimaryFileExtension();
             boolean _equals = Objects.equal(_primaryFileExtension, ext);
             if (_equals) {
-              Map<String, Object> _extensionToFactoryMap_1 = registry.getExtensionToFactoryMap();
-              _extensionToFactoryMap_1.put(ext, resourceServiceProvider);
+              registry.getExtensionToFactoryMap().put(ext, resourceServiceProvider);
             }
           } else {
-            Map<String, Object> _extensionToFactoryMap_2 = registry.getExtensionToFactoryMap();
-            _extensionToFactoryMap_2.put(ext, resourceServiceProvider);
+            registry.getExtensionToFactoryMap().put(ext, resourceServiceProvider);
           }
         }
       }

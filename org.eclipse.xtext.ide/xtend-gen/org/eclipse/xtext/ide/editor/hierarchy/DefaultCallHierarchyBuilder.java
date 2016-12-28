@@ -11,29 +11,24 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import javax.inject.Provider;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.ReferenceAcceptor;
-import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.findReferences.TargetURIs;
 import org.eclipse.xtext.ide.editor.hierarchy.AbstractHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultHierarchyNode;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultHierarchyNodeReference;
 import org.eclipse.xtext.ide.editor.hierarchy.ICallHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeLocationProvider;
 import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
@@ -105,7 +100,6 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
     final IUnitOfWork<Object, EObject> _function = (EObject sourceDeclaration) -> {
       Object _xblockexpression = null;
       {
-        IReferenceFinder _referenceFinder = this.getReferenceFinder();
         IResourceServiceProvider.Registry _resourceServiceProviderRegistry = this.getResourceServiceProviderRegistry();
         final IAcceptor<IReferenceDescription> _function_1 = (IReferenceDescription reference) -> {
           boolean _filterReference = this.filterReference(reference);
@@ -119,7 +113,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
           }
         };
         ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(_resourceServiceProviderRegistry, _function_1);
-        _referenceFinder.findAllReferences(sourceDeclaration, _referenceAcceptor, monitor);
+        this.getReferenceFinder().findAllReferences(sourceDeclaration, _referenceAcceptor, monitor);
         _xblockexpression = null;
       }
       return _xblockexpression;
@@ -129,9 +123,6 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   
   protected void findSourceDeclarations(final URI targetDeclarationURI, final IProgressMonitor monitor, final Procedure2<? super IEObjectDescription, ? super IReferenceDescription> acceptor) {
     final TargetURIs targetURIs = this.collectTargetURIs(targetDeclarationURI);
-    IReferenceFinder _referenceFinder = this.getReferenceFinder();
-    IReferenceFinder.IResourceAccess _resourceAccess = this.getResourceAccess();
-    IResourceDescriptions _indexData = this.getIndexData();
     IResourceServiceProvider.Registry _resourceServiceProviderRegistry = this.getResourceServiceProviderRegistry();
     final IAcceptor<IReferenceDescription> _function = (IReferenceDescription reference) -> {
       boolean _filterReference = this.filterReference(reference);
@@ -145,12 +136,13 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
       }
     };
     ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(_resourceServiceProviderRegistry, _function);
-    _referenceFinder.findAllReferences(targetURIs, _resourceAccess, _indexData, _referenceAcceptor, monitor);
+    this.getReferenceFinder().findAllReferences(targetURIs, 
+      this.getResourceAccess(), 
+      this.getIndexData(), _referenceAcceptor, monitor);
   }
   
   protected TargetURIs collectTargetURIs(final URI targetURI) {
-    Provider<TargetURIs> _targetURIProvider = this.getTargetURIProvider();
-    final TargetURIs targetURIs = _targetURIProvider.get();
+    final TargetURIs targetURIs = this.getTargetURIProvider().get();
     if ((targetURI == null)) {
       return targetURIs;
     }
@@ -158,8 +150,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
       if ((targetObject == null)) {
         return targetURIs;
       }
-      TargetURICollector _targetURICollector = this.getTargetURICollector();
-      _targetURICollector.add(targetObject, targetURIs);
+      this.getTargetURICollector().add(targetObject, targetURIs);
       return targetURIs;
     };
     return this.<TargetURIs>readOnly(targetURI, _function);
@@ -174,13 +165,11 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   }
   
   protected IEObjectDescription findTargetDeclaration(final IReferenceDescription reference) {
-    URI _targetEObjectUri = reference.getTargetEObjectUri();
-    return this.findDeclaration(_targetEObjectUri);
+    return this.findDeclaration(reference.getTargetEObjectUri());
   }
   
   protected IEObjectDescription findSourceDeclaration(final IReferenceDescription reference) {
-    URI _containerEObjectURI = reference.getContainerEObjectURI();
-    return this.findDeclaration(_containerEObjectURI);
+    return this.findDeclaration(reference.getContainerEObjectURI());
   }
   
   /**
@@ -210,12 +199,10 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
     if ((declaration == null)) {
       return null;
     }
-    URI _eObjectURI = declaration.getEObjectURI();
-    IHierarchyNode childNode = children.get(_eObjectURI);
+    IHierarchyNode childNode = children.get(declaration.getEObjectURI());
     if ((childNode == null)) {
       childNode = this.createChild(declaration, parent);
-      URI _eObjectURI_1 = declaration.getEObjectURI();
-      children.put(_eObjectURI_1, childNode);
+      children.put(declaration.getEObjectURI(), childNode);
     }
     return childNode;
   }
@@ -224,11 +211,8 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
    * @return a hierarchy node reference for the given reference; cannot be <code>null</code>
    */
   protected IHierarchyNodeReference createNodeReference(final IReferenceDescription reference) {
-    URI _sourceEObjectUri = reference.getSourceEObjectUri();
     final IUnitOfWork<DefaultHierarchyNodeReference, EObject> _function = (EObject sourceObject) -> {
-      EReference _eReference = reference.getEReference();
-      int _indexInList = reference.getIndexInList();
-      final ITextRegionWithLineInformation textRegion = this.getTextRegion(sourceObject, _eReference, _indexInList);
+      final ITextRegionWithLineInformation textRegion = this.getTextRegion(sourceObject, reference.getEReference(), reference.getIndexInList());
       final String text = this.getText(sourceObject, textRegion);
       return new DefaultHierarchyNodeReference(text, textRegion, reference);
     };
@@ -236,26 +220,21 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   }
   
   protected ITextRegionWithLineInformation getTextRegion(final EObject obj, final EReference reference, final int indexInList) {
-    IHierarchyNodeLocationProvider _hierarchyNodeLocationProvider = this.getHierarchyNodeLocationProvider();
-    return _hierarchyNodeLocationProvider.getTextRegion(obj, reference, indexInList);
+    return this.getHierarchyNodeLocationProvider().getTextRegion(obj, reference, indexInList);
   }
   
   protected String getText(final EObject obj, final ITextRegionWithLineInformation textRegion) {
     if (((obj == null) || (textRegion == ITextRegionWithLineInformation.EMPTY_REGION))) {
       return "";
     }
-    EObject _rootContainer = EcoreUtil.getRootContainer(obj);
-    final ICompositeNode node = NodeModelUtils.getNode(_rootContainer);
+    final ICompositeNode node = NodeModelUtils.getNode(EcoreUtil.getRootContainer(obj));
     if ((node == null)) {
       return "";
     }
     int _offset = textRegion.getOffset();
     int _length = textRegion.getLength();
     final int endOffset = (_offset + _length);
-    ICompositeNode _rootNode = node.getRootNode();
-    String _text = _rootNode.getText();
-    int _offset_1 = textRegion.getOffset();
-    return _text.substring(_offset_1, endOffset);
+    return node.getRootNode().getText().substring(textRegion.getOffset(), endOffset);
   }
   
   @Pure

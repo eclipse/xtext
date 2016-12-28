@@ -18,14 +18,12 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
@@ -63,30 +61,22 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
   
   @Override
   public void generate() {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IBundleProjectConfig _eclipsePlugin = this.getProjectConfig().getEclipsePlugin();
     ManifestAccess _manifest = null;
     if (_eclipsePlugin!=null) {
       _manifest=_eclipsePlugin.getManifest();
     }
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
-      ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
-      Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
+      Set<String> _requiredBundles = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
       _requiredBundles.add("org.eclipse.xtext.ui");
     }
-    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
-    TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IRenameStrategy");
-    TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy");
-    GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeRef, _typeRef_1);
-    TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IReferenceUpdater");
-    TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater");
-    GuiceModuleAccess.BindingFactory _addTypeToType_1 = _addTypeToType.addTypeToType(_typeRef_2, _typeRef_3);
-    TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer");
-    List<String> _simpleNames = _typeRef_4.getSimpleNames();
-    String _join = IterableExtensions.join(_simpleNames, ".");
+    GuiceModuleAccess.BindingFactory _addTypeToType = new GuiceModuleAccess.BindingFactory().addTypeToType(
+      TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IRenameStrategy"), 
+      TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy")).addTypeToType(
+      TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IReferenceUpdater"), 
+      TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater"));
+    String _join = IterableExtensions.join(TypeReference.typeRef("org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer").getSimpleNames(), ".");
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -108,22 +98,20 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
         _builder.newLineIfNotEmpty();
       }
     };
-    final GuiceModuleAccess.BindingFactory bindings = _addTypeToType_1.addConfiguredBinding(_join, _client);
-    Grammar _grammar = this.getGrammar();
-    boolean _isUseJdtRefactoring = this.isUseJdtRefactoring(_grammar);
+    final GuiceModuleAccess.BindingFactory bindings = _addTypeToType.addConfiguredBinding(_join, _client);
+    boolean _isUseJdtRefactoring = this.isUseJdtRefactoring(this.getGrammar());
     if (_isUseJdtRefactoring) {
-      TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory");
-      TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.refactoring.JdtRefactoringContextFactory");
-      GuiceModuleAccess.BindingFactory _addTypeToType_2 = bindings.addTypeToType(_typeRef_5, _typeRef_6);
-      TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider");
-      TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.refactoring.JvmRenameRefactoringProvider");
-      GuiceModuleAccess.BindingFactory _addTypeToType_3 = _addTypeToType_2.addTypeToType(_typeRef_7, _typeRef_8);
+      GuiceModuleAccess.BindingFactory _addTypeToType_1 = bindings.addTypeToType(
+        TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory"), 
+        TypeReference.typeRef("org.eclipse.xtext.common.types.ui.refactoring.JdtRefactoringContextFactory")).addTypeToType(
+        TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider"), 
+        TypeReference.typeRef("org.eclipse.xtext.common.types.ui.refactoring.JvmRenameRefactoringProvider"));
       TypeReference _typeReference = new TypeReference("org.eclipse.xtext.ui.refactoring.ui", "IRenameSupport.Factory");
       TypeReference _typeReference_1 = new TypeReference("org.eclipse.xtext.common.types.ui.refactoring", "JdtRenameSupport.Factory");
-      GuiceModuleAccess.BindingFactory _addTypeToType_4 = _addTypeToType_3.addTypeToType(_typeReference, _typeReference_1);
+      GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeReference, _typeReference_1);
       TypeReference _typeReference_2 = new TypeReference("org.eclipse.xtext.ui.refactoring", "IRenameStrategy.Provider");
       TypeReference _typeReference_3 = new TypeReference("org.eclipse.xtext.common.types.ui.refactoring.participant", "JvmMemberRenameStrategy.Provider");
-      GuiceModuleAccess.BindingFactory _addTypeToType_5 = _addTypeToType_4.addTypeToType(_typeReference_2, _typeReference_3);
+      GuiceModuleAccess.BindingFactory _addTypeToType_3 = _addTypeToType_2.addTypeToType(_typeReference_2, _typeReference_3);
       StringConcatenationClient _client_1 = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -140,31 +128,25 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
           _builder.newLineIfNotEmpty();
         }
       };
-      _addTypeToType_5.addConfiguredBinding(
+      _addTypeToType_3.addConfiguredBinding(
         "JvmMemberRenameStrategy.Provider.Delegate", _client_1);
     } else {
-      TypeReference _typeRef_9 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider");
-      TypeReference _typeRef_10 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider");
-      GuiceModuleAccess.BindingFactory _addTypeToType_6 = bindings.addTypeToType(_typeRef_9, _typeRef_10);
+      GuiceModuleAccess.BindingFactory _addTypeToType_4 = bindings.addTypeToType(
+        TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider"), 
+        TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider"));
       TypeReference _typeReference_4 = new TypeReference("org.eclipse.xtext.ui.refactoring.ui", "IRenameSupport.Factory");
       TypeReference _typeReference_5 = new TypeReference("org.eclipse.xtext.ui.refactoring.ui", "DefaultRenameSupport.Factory");
-      _addTypeToType_6.addTypeToType(_typeReference_4, _typeReference_5);
+      _addTypeToType_4.addTypeToType(_typeReference_4, _typeReference_5);
     }
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
-    bindings.contributeTo(_eclipsePluginGenModule);
-    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
+    bindings.contributeTo(this.getLanguage().getEclipsePluginGenModule());
+    IBundleProjectConfig _eclipsePlugin_1 = this.getProjectConfig().getEclipsePlugin();
     PluginXmlAccess _pluginXml = null;
-    if (_eclipsePlugin_2!=null) {
-      _pluginXml=_eclipsePlugin_2.getPluginXml();
+    if (_eclipsePlugin_1!=null) {
+      _pluginXml=_eclipsePlugin_1.getPluginXml();
     }
     boolean _tripleNotEquals_1 = (_pluginXml != null);
     if (_tripleNotEquals_1) {
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
-      PluginXmlAccess _pluginXml_1 = _eclipsePlugin_3.getPluginXml();
-      List<CharSequence> _entries = _pluginXml_1.getEntries();
+      List<CharSequence> _entries = this.getProjectConfig().getEclipsePlugin().getPluginXml().getEntries();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<!-- Rename Refactoring -->");
       _builder.newLine();
@@ -175,8 +157,7 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("class=\"");
-      Grammar _grammar_1 = this.getGrammar();
-      TypeReference _eclipsePluginExecutableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(_grammar_1);
+      TypeReference _eclipsePluginExecutableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(this.getGrammar());
       _builder.append(_eclipsePluginExecutableExtensionFactory, "\t\t");
       _builder.append(":org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler\"");
       _builder.newLineIfNotEmpty();
@@ -191,8 +172,7 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
       _builder.newLine();
       _builder.append("\t\t\t\t");
       _builder.append("definitionId=\"");
-      Grammar _grammar_2 = this.getGrammar();
-      String _name = _grammar_2.getName();
+      String _name = this.getGrammar().getName();
       _builder.append(_name, "\t\t\t\t");
       _builder.append(".Editor.opened\">");
       _builder.newLineIfNotEmpty();
@@ -229,8 +209,7 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
       _builder.newLine();
       _builder.append("\t\t\t\t\t");
       _builder.append("definitionId=\"");
-      Grammar _grammar_3 = this.getGrammar();
-      String _name_1 = _grammar_3.getName();
+      String _name_1 = this.getGrammar().getName();
       _builder.append(_name_1, "\t\t\t\t\t");
       _builder.append(".Editor.opened\">");
       _builder.newLineIfNotEmpty();
@@ -255,22 +234,19 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("category=\"");
-      Grammar _grammar_4 = this.getGrammar();
-      String _name_2 = _grammar_4.getName();
+      String _name_2 = this.getGrammar().getName();
       _builder.append(_name_2, "\t\t");
       _builder.append("\"");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("class=\"");
-      Grammar _grammar_5 = this.getGrammar();
-      TypeReference _eclipsePluginExecutableExtensionFactory_1 = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(_grammar_5);
+      TypeReference _eclipsePluginExecutableExtensionFactory_1 = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(this.getGrammar());
       _builder.append(_eclipsePluginExecutableExtensionFactory_1, "\t\t");
       _builder.append(":org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage\"");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("id=\"");
-      Grammar _grammar_6 = this.getGrammar();
-      String _name_3 = _grammar_6.getName();
+      String _name_3 = this.getGrammar().getName();
       _builder.append(_name_3, "\t\t");
       _builder.append(".refactoring\"");
       _builder.newLineIfNotEmpty();
@@ -279,11 +255,9 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("<keywordReference id=\"");
-      Grammar _grammar_7 = this.getGrammar();
-      String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(_grammar_7);
+      String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(this.getGrammar());
       String _plus = (_runtimeBasePackage + ".ui.keyword_");
-      Grammar _grammar_8 = this.getGrammar();
-      String _simpleName = GrammarUtil.getSimpleName(_grammar_8);
+      String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
       String _plus_1 = (_plus + _simpleName);
       _builder.append(_plus_1, "\t\t");
       _builder.append("\"/>");

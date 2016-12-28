@@ -11,15 +11,12 @@ import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.build.BuildContext;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -47,10 +44,7 @@ public class ClusteringStorageAwareResourceLoader {
       while (iter.hasNext()) {
         {
           final URI uri = iter.next();
-          IResourceClusteringPolicy _clusteringPolicy = this.context.getClusteringPolicy();
-          XtextResourceSet _resourceSet = this.context.getResourceSet();
-          int _size = loadedURIs.size();
-          boolean _continueProcessing = _clusteringPolicy.continueProcessing(_resourceSet, uri, _size);
+          boolean _continueProcessing = this.context.getClusteringPolicy().continueProcessing(this.context.getResourceSet(), uri, loadedURIs.size());
           boolean _not = (!_continueProcessing);
           if (_not) {
             final Function1<Resource, T> _function = (Resource it) -> {
@@ -66,19 +60,16 @@ public class ClusteringStorageAwareResourceLoader {
           boolean _isSource = this.isSource(uri);
           if (_isSource) {
             sourceLevelURIs.add(uri);
-            XtextResourceSet _resourceSet_1 = this.context.getResourceSet();
-            final Resource existingResource = _resourceSet_1.getResource(uri, false);
+            final Resource existingResource = this.context.getResourceSet().getResource(uri, false);
             if ((existingResource instanceof StorageAwareResource)) {
               boolean _isLoadedFromStorage = ((StorageAwareResource)existingResource).isLoadedFromStorage();
               if (_isLoadedFromStorage) {
                 ((StorageAwareResource)existingResource).unload();
               }
             }
-            XtextResourceSet _resourceSet_2 = this.context.getResourceSet();
-            SourceLevelURIsAdapter.setSourceLevelUris(_resourceSet_2, sourceLevelURIs);
+            SourceLevelURIsAdapter.setSourceLevelUris(this.context.getResourceSet(), sourceLevelURIs);
           }
-          XtextResourceSet _resourceSet_3 = this.context.getResourceSet();
-          Resource _resource = _resourceSet_3.getResource(uri, true);
+          Resource _resource = this.context.getResourceSet().getResource(uri, true);
           resources.add(_resource);
         }
       }
@@ -99,17 +90,12 @@ public class ClusteringStorageAwareResourceLoader {
   }
   
   protected void clearResourceSet() {
-    XtextResourceSet _resourceSet = this.context.getResourceSet();
-    final boolean wasDeliver = _resourceSet.eDeliver();
+    final boolean wasDeliver = this.context.getResourceSet().eDeliver();
     try {
-      XtextResourceSet _resourceSet_1 = this.context.getResourceSet();
-      _resourceSet_1.eSetDeliver(false);
-      XtextResourceSet _resourceSet_2 = this.context.getResourceSet();
-      EList<Resource> _resources = _resourceSet_2.getResources();
-      _resources.clear();
+      this.context.getResourceSet().eSetDeliver(false);
+      this.context.getResourceSet().getResources().clear();
     } finally {
-      XtextResourceSet _resourceSet_3 = this.context.getResourceSet();
-      _resourceSet_3.eSetDeliver(wasDeliver);
+      this.context.getResourceSet().eSetDeliver(wasDeliver);
     }
   }
   

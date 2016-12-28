@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -45,7 +44,6 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.CombinedGrammarMarker;
@@ -81,30 +79,19 @@ public abstract class AbstractAntlrGrammarGenerator {
     final RuleFilter filter = new RuleFilter();
     filter.setDiscardUnreachableRules(options.isSkipUnusedRules());
     final RuleNames ruleNames = RuleNames.getRuleNames(it, true);
-    FlattenedGrammarAccess _flattenedGrammarAccess = new FlattenedGrammarAccess(ruleNames, filter);
-    final Grammar flattened = _flattenedGrammarAccess.getFlattenedGrammar();
+    final Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
     boolean _isCombinedGrammar = this.isCombinedGrammar();
-    CombinedGrammarMarker _combinedGrammarMarker = new CombinedGrammarMarker(_isCombinedGrammar);
-    _combinedGrammarMarker.attachToEmfObject(flattened);
-    GrammarNaming _grammarNaming = this.getGrammarNaming();
-    AntlrGrammar _parserGrammar = _grammarNaming.getParserGrammar(it);
-    String _grammarFileName = _parserGrammar.getGrammarFileName();
-    CharSequence _compileParser = this.compileParser(flattened, options);
-    fsa.generateFile(_grammarFileName, _compileParser);
+    new CombinedGrammarMarker(_isCombinedGrammar).attachToEmfObject(flattened);
+    fsa.generateFile(this.getGrammarNaming().getParserGrammar(it).getGrammarFileName(), this.compileParser(flattened, options));
     boolean _isCombinedGrammar_1 = this.isCombinedGrammar();
     boolean _not = (!_isCombinedGrammar_1);
     if (_not) {
-      GrammarNaming _grammarNaming_1 = this.getGrammarNaming();
-      AntlrGrammar _lexerGrammar = _grammarNaming_1.getLexerGrammar(it);
-      String _grammarFileName_1 = _lexerGrammar.getGrammarFileName();
-      CharSequence _compileLexer = this.compileLexer(flattened, options);
-      fsa.generateFile(_grammarFileName_1, _compileLexer);
+      fsa.generateFile(this.getGrammarNaming().getLexerGrammar(it).getGrammarFileName(), this.compileLexer(flattened, options));
     }
   }
   
   protected boolean isCombinedGrammar() {
-    GrammarNaming _grammarNaming = this.getGrammarNaming();
-    return _grammarNaming.isCombinedGrammar(this.originalGrammar);
+    return this.getGrammarNaming().isCombinedGrammar(this.originalGrammar);
   }
   
   protected abstract GrammarNaming getGrammarNaming();
@@ -122,9 +109,7 @@ public abstract class AbstractAntlrGrammarGenerator {
       }
     }
     _builder.append("grammar ");
-    GrammarNaming _grammarNaming = this.getGrammarNaming();
-    AntlrGrammar _parserGrammar = _grammarNaming.getParserGrammar(it);
-    String _simpleName = _parserGrammar.getSimpleName();
+    String _simpleName = this.getGrammarNaming().getParserGrammar(it).getSimpleName();
     _builder.append(_simpleName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -163,9 +148,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.append(_fileHeader);
     _builder.newLineIfNotEmpty();
     _builder.append("lexer grammar ");
-    GrammarNaming _grammarNaming = this.getGrammarNaming();
-    AntlrGrammar _lexerGrammar = _grammarNaming.getLexerGrammar(it);
-    String _simpleName = _lexerGrammar.getSimpleName();
+    String _simpleName = this.getGrammarNaming().getLexerGrammar(it).getSimpleName();
     _builder.append(_simpleName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -198,24 +181,19 @@ public abstract class AbstractAntlrGrammarGenerator {
       if (_not) {
         _builder.append("\t");
         _builder.append("tokenVocab=");
-        GrammarNaming _grammarNaming = this.getGrammarNaming();
-        AntlrGrammar _lexerGrammar = _grammarNaming.getLexerGrammar(it);
-        String _simpleName = _lexerGrammar.getSimpleName();
+        String _simpleName = this.getGrammarNaming().getLexerGrammar(it).getSimpleName();
         _builder.append(_simpleName, "\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      GrammarNaming _grammarNaming_1 = this.getGrammarNaming();
-      TypeReference _internalParserSuperClass = _grammarNaming_1.getInternalParserSuperClass(it);
+      TypeReference _internalParserSuperClass = this.getGrammarNaming().getInternalParserSuperClass(it);
       boolean _tripleNotEquals = (_internalParserSuperClass != null);
       if (_tripleNotEquals) {
         _builder.append("\t");
         _builder.append("superClass=");
-        GrammarNaming _grammarNaming_2 = this.getGrammarNaming();
-        TypeReference _internalParserSuperClass_1 = _grammarNaming_2.getInternalParserSuperClass(it);
-        String _simpleName_1 = _internalParserSuperClass_1.getSimpleName();
+        String _simpleName_1 = this.getGrammarNaming().getInternalParserSuperClass(it).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
@@ -330,9 +308,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.append("header {");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    GrammarNaming _grammarNaming = this.getGrammarNaming();
-    AntlrGrammar _lexerGrammar = _grammarNaming.getLexerGrammar(it);
-    String _packageName = _lexerGrammar.getPackageName();
+    String _packageName = this.getGrammarNaming().getLexerGrammar(it).getPackageName();
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -352,8 +328,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.append("// Currently there is no other way to specify the superclass for the lexer.");
     _builder.newLine();
     _builder.append("import ");
-    GrammarNaming _grammarNaming = this.getGrammarNaming();
-    TypeReference _lexerSuperClass = _grammarNaming.getLexerSuperClass(it);
+    TypeReference _lexerSuperClass = this.getGrammarNaming().getLexerSuperClass(it);
     _builder.append(_lexerSuperClass);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -373,9 +348,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.append("header {");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    GrammarNaming _grammarNaming = this.getGrammarNaming();
-    AntlrGrammar _parserGrammar = _grammarNaming.getParserGrammar(it);
-    String _packageName = _parserGrammar.getPackageName();
+    String _packageName = this.getGrammarNaming().getParserGrammar(it).getPackageName();
     _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -404,11 +377,10 @@ public abstract class AbstractAntlrGrammarGenerator {
     {
       List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
       List<EnumRule> _allEnumRules = GrammarUtil.allEnumRules(it);
-      Iterable<AbstractRule> _plus = Iterables.<AbstractRule>concat(_allParserRules, _allEnumRules);
       final Function1<AbstractRule, Boolean> _function = (AbstractRule rule) -> {
         return Boolean.valueOf(this._grammarAccessExtensions.isCalled(rule, it));
       };
-      Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(_plus, _function);
+      Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(Iterables.<AbstractRule>concat(_allParserRules, _allEnumRules), _function);
       for(final AbstractRule rule : _filter) {
         _builder.newLine();
         CharSequence _compileRule = this.compileRule(rule, it, options);
@@ -433,10 +405,8 @@ public abstract class AbstractAntlrGrammarGenerator {
       final Set<String> allKeywords = this.keywordHelper.getAllKeywords();
       final List<TerminalRule> allTerminalRules = GrammarUtil.allTerminalRules(it);
       final ArrayList<String> synthetic_kw_alternatives = CollectionLiterals.<String>newArrayList();
-      Iterable<Pair<Integer, String>> _indexed = IterableExtensions.<String>indexed(allKeywords);
       final Function1<Pair<Integer, String>, String> _function = (Pair<Integer, String> it_1) -> {
-        String _value = it_1.getValue();
-        final String ruleName = this.keywordHelper.getRuleName(_value);
+        final String ruleName = this.keywordHelper.getRuleName(it_1.getValue());
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("(FRAGMENT_");
         _builder.append(ruleName);
@@ -447,33 +417,27 @@ public abstract class AbstractAntlrGrammarGenerator {
         _builder.append("; }");
         return _builder.toString();
       };
-      Iterable<String> _map = IterableExtensions.<Pair<Integer, String>, String>map(_indexed, _function);
-      Iterables.<String>addAll(synthetic_kw_alternatives, _map);
-      Iterable<Pair<Integer, TerminalRule>> _indexed_1 = IterableExtensions.<TerminalRule>indexed(allTerminalRules);
+      Iterables.<String>addAll(synthetic_kw_alternatives, 
+        IterableExtensions.<Pair<Integer, String>, String>map(IterableExtensions.<String>indexed(allKeywords), _function));
       final Function1<Pair<Integer, TerminalRule>, String> _function_1 = (Pair<Integer, TerminalRule> it_1) -> {
         if (((!this._syntheticTerminalDetector.isSyntheticTerminalRule(it_1.getValue())) && (!it_1.getValue().isFragment()))) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("(FRAGMENT_");
-          TerminalRule _value = it_1.getValue();
-          String _ruleName = this._grammarAccessExtensions.ruleName(_value);
+          String _ruleName = this._grammarAccessExtensions.ruleName(it_1.getValue());
           _builder.append(_ruleName);
           _builder.append(")=> FRAGMENT_");
-          TerminalRule _value_1 = it_1.getValue();
-          String _ruleName_1 = this._grammarAccessExtensions.ruleName(_value_1);
+          String _ruleName_1 = this._grammarAccessExtensions.ruleName(it_1.getValue());
           _builder.append(_ruleName_1);
           _builder.append(" {$type = ");
-          TerminalRule _value_2 = it_1.getValue();
-          String _ruleName_2 = this._grammarAccessExtensions.ruleName(_value_2);
+          String _ruleName_2 = this._grammarAccessExtensions.ruleName(it_1.getValue());
           _builder.append(_ruleName_2);
           _builder.append("; }");
           return _builder.toString();
         }
         return null;
       };
-      Iterable<String> _map_1 = IterableExtensions.<Pair<Integer, TerminalRule>, String>map(_indexed_1, _function_1);
-      Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map_1);
-      List<String> _list = IterableExtensions.<String>toList(_filterNull);
-      synthetic_kw_alternatives.addAll(_list);
+      synthetic_kw_alternatives.addAll(
+        IterableExtensions.<String>toList(IterableExtensions.<String>filterNull(IterableExtensions.<Pair<Integer, TerminalRule>, String>map(IterableExtensions.<TerminalRule>indexed(allTerminalRules), _function_1))));
       StringConcatenation _builder = new StringConcatenation();
       {
         boolean _isBacktrackLexer = options.isBacktrackLexer();
@@ -662,8 +626,7 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected String compileEBNF(final AbstractRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("// Rule ");
-    AbstractRule _originalElement = AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it);
-    String _name = _originalElement.getName();
+    String _name = AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it).getName();
     _builder.append(_name);
     _builder.newLineIfNotEmpty();
     String _ruleName = this._grammarAccessExtensions.ruleName(it);
@@ -734,8 +697,7 @@ public abstract class AbstractAntlrGrammarGenerator {
         {
           boolean _predicated = this._grammarAccessExtensions.predicated(it);
           if (_predicated) {
-            AbstractElement _predicatedElement = this._grammarAccessExtensions.predicatedElement(it);
-            String _ebnf2 = this.ebnf2(_predicatedElement, options, false);
+            String _ebnf2 = this.ebnf2(this._grammarAccessExtensions.predicatedElement(it), options, false);
             _builder.append(_ebnf2);
           } else {
             {
@@ -793,8 +755,7 @@ public abstract class AbstractAntlrGrammarGenerator {
         {
           boolean _predicated = this._grammarAccessExtensions.predicated(it);
           if (_predicated) {
-            AbstractElement _predicatedElement = this._grammarAccessExtensions.predicatedElement(it);
-            String _dataTypeEbnf2 = this.dataTypeEbnf2(_predicatedElement, false);
+            String _dataTypeEbnf2 = this.dataTypeEbnf2(this._grammarAccessExtensions.predicatedElement(it), false);
             _builder.append(_dataTypeEbnf2);
           } else {
             {
@@ -822,8 +783,7 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected String _dataTypeEbnf2(final AbstractElement it, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ERROR ");
-    EClass _eClass = it.eClass();
-    String _name = _eClass.getName();
+    String _name = it.eClass().getName();
     _builder.append(_name);
     _builder.append(" not matched");
     return _builder.toString();
@@ -886,27 +846,23 @@ public abstract class AbstractAntlrGrammarGenerator {
     String _xifexpression = null;
     boolean _isCombinedGrammar = this.isCombinedGrammar();
     if (_isCombinedGrammar) {
-      String _value = it.getValue();
-      String _antlrString = AntlrGrammarGenUtil.toAntlrString(_value);
+      String _antlrString = AntlrGrammarGenUtil.toAntlrString(it.getValue());
       String _plus = ("\'" + _antlrString);
       _xifexpression = (_plus + "\'");
     } else {
-      String _value_1 = it.getValue();
-      _xifexpression = this.keywordHelper.getRuleName(_value_1);
+      _xifexpression = this.keywordHelper.getRuleName(it.getValue());
     }
     return _xifexpression;
   }
   
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
-    AbstractRule _rule = it.getRule();
-    return this._grammarAccessExtensions.ruleName(_rule);
+    return this._grammarAccessExtensions.ruleName(it.getRule());
   }
   
   protected String _ebnf2(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ERROR ");
-    EClass _eClass = it.eClass();
-    String _name = _eClass.getName();
+    String _name = it.eClass().getName();
     _builder.append(_name);
     _builder.append(" not matched");
     return _builder.toString();
@@ -967,8 +923,7 @@ public abstract class AbstractAntlrGrammarGenerator {
   
   protected String _ebnf2(final Assignment it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
-    AbstractElement _terminal = it.getTerminal();
-    String _assignmentEbnf = this.assignmentEbnf(_terminal, it, options, supportActions);
+    String _assignmentEbnf = this.assignmentEbnf(it.getTerminal(), it, options, supportActions);
     _builder.append(_assignmentEbnf);
     _builder.newLineIfNotEmpty();
     return _builder.toString();
@@ -982,35 +937,28 @@ public abstract class AbstractAntlrGrammarGenerator {
     String _xifexpression = null;
     boolean _isCombinedGrammar = this.isCombinedGrammar();
     if (_isCombinedGrammar) {
-      String _value = it.getValue();
-      String _antlrString = AntlrGrammarGenUtil.toAntlrString(_value);
+      String _antlrString = AntlrGrammarGenUtil.toAntlrString(it.getValue());
       String _plus = ("\'" + _antlrString);
       _xifexpression = (_plus + "\'");
     } else {
-      String _value_1 = it.getValue();
-      _xifexpression = this.keywordHelper.getRuleName(_value_1);
+      _xifexpression = this.keywordHelper.getRuleName(it.getValue());
     }
     return _xifexpression;
   }
   
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
-    AbstractRule _rule = it.getRule();
-    return this._grammarAccessExtensions.ruleName(_rule);
+    return this._grammarAccessExtensions.ruleName(it.getRule());
   }
   
   protected String _ebnf2(final EnumLiteralDeclaration it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     boolean _isCombinedGrammar = this.isCombinedGrammar();
     if (_isCombinedGrammar) {
-      Keyword _literal = it.getLiteral();
-      String _value = _literal.getValue();
-      String _antlrString = AntlrGrammarGenUtil.toAntlrString(_value);
+      String _antlrString = AntlrGrammarGenUtil.toAntlrString(it.getLiteral().getValue());
       String _plus = ("\'" + _antlrString);
       _xifexpression = (_plus + "\'");
     } else {
-      Keyword _literal_1 = it.getLiteral();
-      String _value_1 = _literal_1.getValue();
-      _xifexpression = this.keywordHelper.getRuleName(_value_1);
+      _xifexpression = this.keywordHelper.getRuleName(it.getLiteral().getValue());
     }
     return _xifexpression;
   }
@@ -1139,8 +1087,7 @@ public abstract class AbstractAntlrGrammarGenerator {
   }
   
   protected String _assignmentEbnf(final CrossReference it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
-    AbstractElement _terminal = it.getTerminal();
-    return this.crossrefEbnf(_terminal, it, supportActions);
+    return this.crossrefEbnf(it.getTerminal(), it, supportActions);
   }
   
   protected String _assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {

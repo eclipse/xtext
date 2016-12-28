@@ -146,8 +146,7 @@ public class IdeContentProposalProvider {
             it.setDescription(rule.getName());
           };
           final ContentAssistEntry entry = this.proposalCreator.createProposal(proposal, context, _function);
-          int _defaultPriority = this.proposalPriorities.getDefaultPriority(entry);
-          acceptor.accept(entry, _defaultPriority);
+          acceptor.accept(entry, this.proposalPriorities.getDefaultPriority(entry));
         }
       }
     }
@@ -156,13 +155,10 @@ public class IdeContentProposalProvider {
   protected void _createProposals(final Keyword keyword, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     boolean _filterKeyword = this.filterKeyword(keyword, context);
     if (_filterKeyword) {
-      String _value = keyword.getValue();
-      final ContentAssistEntry entry = this.proposalCreator.createProposal(_value, context);
+      final ContentAssistEntry entry = this.proposalCreator.createProposal(keyword.getValue(), context);
       if ((entry != null)) {
         entry.setKind(ContentAssistEntry.KIND_KEYWORD);
-        String _value_1 = keyword.getValue();
-        int _keywordPriority = this.proposalPriorities.getKeywordPriority(_value_1, entry);
-        acceptor.accept(entry, _keywordPriority);
+        acceptor.accept(entry, this.proposalPriorities.getKeywordPriority(keyword.getValue(), entry));
       }
     }
   }
@@ -181,8 +177,8 @@ public class IdeContentProposalProvider {
       final EObject currentModel = context.getCurrentModel();
       if (((ereference != null) && (currentModel != null))) {
         final IScope scope = this.scopeProvider.getScope(currentModel, ereference);
-        Predicate<IEObjectDescription> _crossrefFilter = this.getCrossrefFilter(reference, context);
-        this.crossrefProposalProvider.lookupCrossReference(scope, reference, context, acceptor, _crossrefFilter);
+        this.crossrefProposalProvider.lookupCrossReference(scope, reference, context, acceptor, 
+          this.getCrossrefFilter(reference, context));
       }
     }
   }

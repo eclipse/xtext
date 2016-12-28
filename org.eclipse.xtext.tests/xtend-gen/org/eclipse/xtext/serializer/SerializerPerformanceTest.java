@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguageInjectorProvider;
 import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.serializer.hiddentokensequencertest.DomainModel;
 import org.eclipse.xtext.serializer.hiddentokensequencertest.Entity;
 import org.eclipse.xtext.serializer.hiddentokensequencertest.Model;
 import org.eclipse.xtext.testing.InjectWith;
@@ -74,19 +73,15 @@ public class SerializerPerformanceTest {
       }
       _builder.append("end");
       _builder.newLine();
-      Model _parse = this._parseHelper.parse(_builder);
-      this.model = _parse;
-      DomainModel _domainModel = this.model.getDomainModel();
-      final EList<Entity> entities = _domainModel.getEntities();
-      ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, SerializerPerformanceTest.numberOfElements, true);
+      this.model = this._parseHelper.parse(_builder);
+      final EList<Entity> entities = this.model.getDomainModel().getEntities();
       final Function1<Integer, Boolean> _function = (Integer it) -> {
         return Boolean.valueOf((((it).intValue() % SerializerPerformanceTest.editEvery) == 0));
       };
-      Iterable<Integer> _filter = IterableExtensions.<Integer>filter(_doubleDotLessThan_1, _function);
       final Function1<Integer, Entity> _function_1 = (Integer it) -> {
         return entities.get((it).intValue());
       };
-      final Iterable<Entity> removeUs = IterableExtensions.<Integer, Entity>map(_filter, _function_1);
+      final Iterable<Entity> removeUs = IterableExtensions.<Integer, Entity>map(IterableExtensions.<Integer>filter(new ExclusiveRange(0, SerializerPerformanceTest.numberOfElements, true), _function), _function_1);
       CollectionExtensions.<Entity>removeAll(entities, removeUs);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

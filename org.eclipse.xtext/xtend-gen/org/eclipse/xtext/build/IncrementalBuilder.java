@@ -14,14 +14,11 @@ import com.google.inject.Provider;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
@@ -67,7 +64,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -160,11 +156,8 @@ public class IncrementalBuilder {
     private OperationCanceledManager _operationCanceledManager;
     
     public IncrementalBuilder.Result launch() {
-      IndexState _state = this.request.getState();
-      final Source2GeneratedMapping newSource2GeneratedMapping = _state.getFileMappings();
-      List<URI> _deletedFiles = this.request.getDeletedFiles();
+      final Source2GeneratedMapping newSource2GeneratedMapping = this.request.getState().getFileMappings();
       final Consumer<URI> _function = (URI source) -> {
-        Set<URI> _deleteSource = newSource2GeneratedMapping.deleteSource(source);
         final Consumer<URI> _function_1 = (URI generated) -> {
           try {
             boolean _isInfoEnabled = IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.isInfoEnabled();
@@ -172,9 +165,7 @@ public class IncrementalBuilder {
               IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(("Deleting " + generated));
             }
             final IResourceServiceProvider serviceProvider = this.context.getResourceServiceProvider(source);
-            IContextualOutputConfigurationProvider2 _get = serviceProvider.<IContextualOutputConfigurationProvider2>get(IContextualOutputConfigurationProvider2.class);
-            XtextResourceSet _resourceSet = this.request.getResourceSet();
-            final Set<OutputConfiguration> configs = _get.getOutputConfigurations(_resourceSet);
+            final Set<OutputConfiguration> configs = serviceProvider.<IContextualOutputConfigurationProvider2>get(IContextualOutputConfigurationProvider2.class).getOutputConfigurations(this.request.getResourceSet());
             final String configName = newSource2GeneratedMapping.getOutputConfigName(generated);
             final Function1<OutputConfiguration, Boolean> _function_2 = (OutputConfiguration it) -> {
               String _name = it.getName();
@@ -182,117 +173,88 @@ public class IncrementalBuilder {
             };
             final OutputConfiguration config = IterableExtensions.<OutputConfiguration>findFirst(configs, _function_2);
             if (((config != null) && config.isCleanUpDerivedResources())) {
-              XtextResourceSet _resourceSet_1 = this.context.getResourceSet();
-              URIConverter _uRIConverter = _resourceSet_1.getURIConverter();
-              Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-              _uRIConverter.delete(generated, _emptyMap);
-              Procedure1<? super URI> _afterDeleteFile = this.request.getAfterDeleteFile();
-              _afterDeleteFile.apply(generated);
+              this.context.getResourceSet().getURIConverter().delete(generated, CollectionLiterals.<Object, Object>emptyMap());
+              this.request.getAfterDeleteFile().apply(generated);
             }
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
         };
-        _deleteSource.forEach(_function_1);
+        newSource2GeneratedMapping.deleteSource(source).forEach(_function_1);
       };
-      _deletedFiles.forEach(_function);
+      this.request.getDeletedFiles().forEach(_function);
       final Indexer.IndexResult result = this.indexer.computeAndIndexAffected(this.request, this.context);
-      CancelIndicator _cancelIndicator = this.request.getCancelIndicator();
-      this._operationCanceledManager.checkCanceled(_cancelIndicator);
+      this._operationCanceledManager.checkCanceled(this.request.getCancelIndicator());
       final ArrayList<IResourceDescription.Delta> resolvedDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
-      List<IResourceDescription.Delta> _resourceDeltas = result.getResourceDeltas();
       final Function1<IResourceDescription.Delta, Boolean> _function_1 = (IResourceDescription.Delta it) -> {
         IResourceDescription _new = it.getNew();
         return Boolean.valueOf((_new == null));
       };
-      Iterable<IResourceDescription.Delta> _filter = IterableExtensions.<IResourceDescription.Delta>filter(_resourceDeltas, _function_1);
+      Iterable<IResourceDescription.Delta> _filter = IterableExtensions.<IResourceDescription.Delta>filter(result.getResourceDeltas(), _function_1);
       Iterables.<IResourceDescription.Delta>addAll(resolvedDeltas, _filter);
-      List<IResourceDescription.Delta> _resourceDeltas_1 = result.getResourceDeltas();
       final Function1<IResourceDescription.Delta, Boolean> _function_2 = (IResourceDescription.Delta it) -> {
         IResourceDescription _new = it.getNew();
         return Boolean.valueOf((_new != null));
       };
-      Iterable<IResourceDescription.Delta> _filter_1 = IterableExtensions.<IResourceDescription.Delta>filter(_resourceDeltas_1, _function_2);
       final Function1<IResourceDescription.Delta, URI> _function_3 = (IResourceDescription.Delta it) -> {
         return it.getUri();
       };
-      Iterable<URI> _map = IterableExtensions.<IResourceDescription.Delta, URI>map(_filter_1, _function_3);
       final Function1<Resource, IResourceDescription.Delta> _function_4 = (Resource resource) -> {
-        CancelIndicator _cancelIndicator_1 = this.request.getCancelIndicator();
-        this._operationCanceledManager.checkCanceled(_cancelIndicator_1);
+        this._operationCanceledManager.checkCanceled(this.request.getCancelIndicator());
         resource.getContents();
         EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
-        CancelIndicator _cancelIndicator_2 = this.request.getCancelIndicator();
-        this._operationCanceledManager.checkCanceled(_cancelIndicator_2);
-        URI _uRI = resource.getURI();
-        final IResourceServiceProvider serviceProvider = this.context.getResourceServiceProvider(_uRI);
+        this._operationCanceledManager.checkCanceled(this.request.getCancelIndicator());
+        final IResourceServiceProvider serviceProvider = this.context.getResourceServiceProvider(resource.getURI());
         final IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();
         final IResourceDescription description = manager.getResourceDescription(resource);
         final SerializableResourceDescription copiedDescription = SerializableResourceDescription.createCopy(description);
-        ResourceDescriptionsData _newIndex = result.getNewIndex();
-        URI _uRI_1 = resource.getURI();
-        _newIndex.addDescription(_uRI_1, copiedDescription);
-        CancelIndicator _cancelIndicator_3 = this.request.getCancelIndicator();
-        this._operationCanceledManager.checkCanceled(_cancelIndicator_3);
+        result.getNewIndex().addDescription(resource.getURI(), copiedDescription);
+        this._operationCanceledManager.checkCanceled(this.request.getCancelIndicator());
         if ((((!this.request.isIndexOnly()) && this.validate(resource)) && serviceProvider.<IShouldGenerate>get(IShouldGenerate.class).shouldGenerate(resource, CancelIndicator.NullImpl))) {
-          CancelIndicator _cancelIndicator_4 = this.request.getCancelIndicator();
-          this._operationCanceledManager.checkCanceled(_cancelIndicator_4);
+          this._operationCanceledManager.checkCanceled(this.request.getCancelIndicator());
           this.generate(resource, this.request, newSource2GeneratedMapping);
         }
-        IndexState _oldState = this.context.getOldState();
-        ResourceDescriptionsData _resourceDescriptions = _oldState.getResourceDescriptions();
-        URI _uRI_2 = resource.getURI();
-        final IResourceDescription old = _resourceDescriptions.getResourceDescription(_uRI_2);
+        final IResourceDescription old = this.context.getOldState().getResourceDescriptions().getResourceDescription(resource.getURI());
         return manager.createDelta(old, copiedDescription);
       };
-      Iterable<IResourceDescription.Delta> _executeClustered = this.context.<IResourceDescription.Delta>executeClustered(_map, _function_4);
+      Iterable<IResourceDescription.Delta> _executeClustered = this.context.<IResourceDescription.Delta>executeClustered(IterableExtensions.<IResourceDescription.Delta, URI>map(IterableExtensions.<IResourceDescription.Delta>filter(result.getResourceDeltas(), _function_2), _function_3), _function_4);
       Iterables.<IResourceDescription.Delta>addAll(resolvedDeltas, _executeClustered);
-      IndexState _state_1 = this.request.getState();
-      return new IncrementalBuilder.Result(_state_1, resolvedDeltas);
+      IndexState _state = this.request.getState();
+      return new IncrementalBuilder.Result(_state, resolvedDeltas);
     }
     
     protected boolean validate(final Resource resource) {
-      IResourceServiceProvider _resourceServiceProvider = this.context.getResourceServiceProvider(resource.getURI());
-      final IResourceValidator resourceValidator = _resourceServiceProvider.getResourceValidator();
+      final IResourceValidator resourceValidator = this.context.getResourceServiceProvider(resource.getURI()).getResourceValidator();
       if ((resourceValidator == null)) {
         return true;
       }
-      URI _uRI = resource.getURI();
-      String _lastSegment = _uRI.lastSegment();
+      String _lastSegment = resource.getURI().lastSegment();
       String _plus = ("Starting validation for input: \'" + _lastSegment);
       String _plus_1 = (_plus + "\'");
       IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(_plus_1);
       final List<Issue> validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
-      BuildRequest.IPostValidationCallback _afterValidate = this.request.getAfterValidate();
-      URI _uRI_1 = resource.getURI();
-      return _afterValidate.afterValidate(_uRI_1, validationResult);
+      return this.request.getAfterValidate().afterValidate(resource.getURI(), validationResult);
     }
     
     protected void generate(final Resource resource, final BuildRequest request, final Source2GeneratedMapping newMappings) {
-      URI _uRI = resource.getURI();
-      final IResourceServiceProvider serviceProvider = this.context.getResourceServiceProvider(_uRI);
+      final IResourceServiceProvider serviceProvider = this.context.getResourceServiceProvider(resource.getURI());
       final GeneratorDelegate generator = serviceProvider.<GeneratorDelegate>get(GeneratorDelegate.class);
       if ((generator == null)) {
         return;
       }
-      URI _uRI_1 = resource.getURI();
-      final Set<URI> previous = newMappings.deleteSource(_uRI_1);
+      final Set<URI> previous = newMappings.deleteSource(resource.getURI());
       URIBasedFileSystemAccess _createFileSystemAccess = this.createFileSystemAccess(serviceProvider, resource);
       final Procedure1<URIBasedFileSystemAccess> _function = (URIBasedFileSystemAccess it) -> {
         final URIBasedFileSystemAccess.BeforeWrite _function_1 = (URI uri, String outputCfgName, InputStream contents) -> {
-          URI _uRI_2 = resource.getURI();
-          newMappings.addSource2Generated(_uRI_2, uri, outputCfgName);
+          newMappings.addSource2Generated(resource.getURI(), uri, outputCfgName);
           previous.remove(uri);
-          Procedure2<? super URI, ? super URI> _afterGenerateFile = request.getAfterGenerateFile();
-          URI _uRI_3 = resource.getURI();
-          _afterGenerateFile.apply(_uRI_3, uri);
+          request.getAfterGenerateFile().apply(resource.getURI(), uri);
           return contents;
         };
         it.setBeforeWrite(_function_1);
         final URIBasedFileSystemAccess.BeforeDelete _function_2 = (URI uri) -> {
           newMappings.deleteGenerated(uri);
-          Procedure1<? super URI> _afterDeleteFile = request.getAfterDeleteFile();
-          _afterDeleteFile.apply(uri);
+          request.getAfterDeleteFile().apply(uri);
           return true;
         };
         it.setBeforeDelete(_function_2);
@@ -307,8 +269,7 @@ public class IncrementalBuilder {
           boolean _tripleNotEquals = (_resourceStorageFacade != null);
           if (_tripleNotEquals) {
             _matched=true;
-            IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)resource).getResourceStorageFacade();
-            _resourceStorageFacade_1.saveResource(((StorageAwareResource)resource), fileSystemAccess);
+            ((StorageAwareResource)resource).getResourceStorageFacade().saveResource(((StorageAwareResource)resource), fileSystemAccess);
           }
         }
       }
@@ -318,12 +279,8 @@ public class IncrementalBuilder {
       final Consumer<URI> _function_1 = (URI it) -> {
         try {
           IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(("Deleting stale generated file " + it));
-          XtextResourceSet _resourceSet = this.context.getResourceSet();
-          URIConverter _uRIConverter = _resourceSet.getURIConverter();
-          Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-          _uRIConverter.delete(it, _emptyMap);
-          Procedure1<? super URI> _afterDeleteFile = request.getAfterDeleteFile();
-          _afterDeleteFile.apply(it);
+          this.context.getResourceSet().getURIConverter().delete(it, CollectionLiterals.<Object, Object>emptyMap());
+          request.getAfterDeleteFile().apply(it);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -337,22 +294,21 @@ public class IncrementalBuilder {
         final IProjectConfigProvider projectConfigProvider = serviceProvider.<IProjectConfigProvider>get(IProjectConfigProvider.class);
         IProjectConfig _projectConfig = null;
         if (projectConfigProvider!=null) {
-          ResourceSet _resourceSet = resource.getResourceSet();
-          _projectConfig=projectConfigProvider.getProjectConfig(_resourceSet);
+          _projectConfig=projectConfigProvider.getProjectConfig(resource.getResourceSet());
         }
         final IProjectConfig projectConfig = _projectConfig;
         ISourceFolder _findSourceFolderContaining = null;
         if (projectConfig!=null) {
-          URI _uRI = resource.getURI();
-          _findSourceFolderContaining=projectConfig.findSourceFolderContaining(_uRI);
+          _findSourceFolderContaining=projectConfig.findSourceFolderContaining(resource.getURI());
         }
         final ISourceFolder sourceFolder = _findSourceFolderContaining;
         URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();
         final Procedure1<URIBasedFileSystemAccess> _function = (URIBasedFileSystemAccess it) -> {
           final IContextualOutputConfigurationProvider outputConfigProvider = serviceProvider.<IContextualOutputConfigurationProvider>get(IContextualOutputConfigurationProvider.class);
-          it.setOutputConfigurations(IterableExtensions.<String, OutputConfiguration>toMap(outputConfigProvider.getOutputConfigurations(resource), ((Function1<OutputConfiguration, String>) (OutputConfiguration it_1) -> {
+          final Function1<OutputConfiguration, String> _function_1 = (OutputConfiguration it_1) -> {
             return it_1.getName();
-          })));
+          };
+          it.setOutputConfigurations(IterableExtensions.<String, OutputConfiguration>toMap(outputConfigProvider.getOutputConfigurations(resource), _function_1));
           it.setPostProcessor(serviceProvider.<IFilePostProcessor>get(IFilePostProcessor.class));
           final IEncodingProvider newEncodingProvider = serviceProvider.<IEncodingProvider>get(IEncodingProvider.class);
           if ((newEncodingProvider != null)) {
@@ -400,12 +356,8 @@ public class IncrementalBuilder {
   public IncrementalBuilder.Result build(final BuildRequest request, final Function1<? super URI, ? extends IResourceServiceProvider> languages, final IResourceClusteringPolicy clusteringPolicy) {
     try {
       final XtextResourceSet resourceSet = request.getResourceSet();
-      IndexState _state = request.getState();
-      ResourceDescriptionsData _resourceDescriptions = _state.getResourceDescriptions();
-      ResourceDescriptionsData _copy = _resourceDescriptions.copy();
-      IndexState _state_1 = request.getState();
-      Source2GeneratedMapping _fileMappings = _state_1.getFileMappings();
-      Source2GeneratedMapping _copy_1 = _fileMappings.copy();
+      ResourceDescriptionsData _copy = request.getState().getResourceDescriptions().copy();
+      Source2GeneratedMapping _copy_1 = request.getState().getFileMappings().copy();
       final IndexState oldState = new IndexState(_copy, _copy_1);
       CancelIndicator _cancelIndicator = request.getCancelIndicator();
       final BuildContext context = new BuildContext(languages, resourceSet, oldState, clusteringPolicy, _cancelIndicator);

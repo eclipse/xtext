@@ -39,11 +39,7 @@ public class TestsEMFGeneratorFragment extends EMFGeneratorFragment2 {
     } else {
       String _javaModelDirectory = this.getJavaModelDirectory();
       String _plus = (_javaModelDirectory + "/");
-      String _name = grammar.getName();
-      String _name_1 = grammar.getName();
-      int _lastIndexOf = _name_1.lastIndexOf(".");
-      String _substring = _name.substring(0, _lastIndexOf);
-      String _replace = _substring.replace(".", "/");
+      String _replace = grammar.getName().substring(0, grammar.getName().lastIndexOf(".")).replace(".", "/");
       String _plus_1 = (_plus + _replace);
       String _plus_2 = (_plus_1 + "/");
       String _modelName = this.getModelName(grammar);
@@ -63,11 +59,7 @@ public class TestsEMFGeneratorFragment extends EMFGeneratorFragment2 {
     } else {
       String _javaModelDirectory = this.getJavaModelDirectory();
       String _plus = (_javaModelDirectory + "/");
-      String _name = grammar.getName();
-      String _name_1 = grammar.getName();
-      int _lastIndexOf = _name_1.lastIndexOf(".");
-      String _substring = _name.substring(0, _lastIndexOf);
-      String _replace = _substring.replace(".", "/");
+      String _replace = grammar.getName().substring(0, grammar.getName().lastIndexOf(".")).replace(".", "/");
       String _plus_1 = (_plus + _replace);
       String _plus_2 = (_plus_1 + "/");
       String _modelName = this.getModelName(grammar);

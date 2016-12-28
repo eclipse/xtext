@@ -104,8 +104,7 @@ public class Bug410560Test extends AbstractXtextTests {
       final Model model = ((Model) _model);
       Resource _eResource = model.eResource();
       final XtextResource res = ((XtextResource) _eResource);
-      int _indexOf = modelAsString.indexOf("a");
-      res.update(_indexOf, 1, "b");
+      res.update(modelAsString.indexOf("a"), 1, "b");
       Assert.assertSame(model, IterableExtensions.<EObject>head(res.getContents()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -120,9 +119,7 @@ public class Bug410560Test extends AbstractXtextTests {
       final Model model = ((Model) _model);
       Resource _eResource = model.eResource();
       final XtextResource res = ((XtextResource) _eResource);
-      int _indexOf = modelAsString.indexOf("t");
-      int _length = "tworequired a b".length();
-      res.update(_indexOf, _length, " ");
+      res.update(modelAsString.indexOf("t"), "tworequired a b".length(), " ");
       Assert.assertSame(model, IterableExtensions.<EObject>head(res.getContents()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -137,9 +134,7 @@ public class Bug410560Test extends AbstractXtextTests {
       final Model model = ((Model) _model);
       Resource _eResource = model.eResource();
       final XtextResource res = ((XtextResource) _eResource);
-      int _indexOf = modelAsString.indexOf("t");
-      int _length = "tworequired a b".length();
-      res.update(_indexOf, _length, " ");
+      res.update(modelAsString.indexOf("t"), "tworequired a b".length(), " ");
       Assert.assertSame(model, IterableExtensions.<EObject>head(res.getContents()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -150,10 +145,7 @@ public class Bug410560Test extends AbstractXtextTests {
   public void testPartialParsingRemoveNestedIndent_01() {
     try {
       final String modelAsString = "({{ tworequired a b }})";
-      PartialParsingProcessor _get = this.<PartialParsingProcessor>get(PartialParsingProcessor.class);
-      int _indexOf = modelAsString.indexOf("t");
-      int _length = "tworequired a b".length();
-      _get.processFile(modelAsString, modelAsString, _indexOf, _length, " ");
+      this.<PartialParsingProcessor>get(PartialParsingProcessor.class).processFile(modelAsString, modelAsString, modelAsString.indexOf("t"), "tworequired a b".length(), " ");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

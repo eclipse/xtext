@@ -20,7 +20,6 @@ import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtext.ide.server.BuildManager;
 import org.eclipse.xtext.ide.server.Document;
@@ -28,13 +27,10 @@ import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.IProjectDescriptionFactory;
 import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.ProjectManager;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
@@ -118,18 +114,13 @@ public class WorkspaceManager {
   }
   
   protected void refreshWorkspaceConfig(final CancelIndicator cancelIndicator) {
-    IWorkspaceConfig _workspaceConfig = this.workspaceConfigFactory.getWorkspaceConfig(this.baseDir);
-    this.workspaceConfig = _workspaceConfig;
+    this.workspaceConfig = this.workspaceConfigFactory.getWorkspaceConfig(this.baseDir);
     final ArrayList<ProjectDescription> newProjects = CollectionLiterals.<ProjectDescription>newArrayList();
-    Set<String> _keySet = this.projectName2ProjectManager.keySet();
-    final HashSet<Set<String>> remainingProjectNames = CollectionLiterals.<Set<String>>newHashSet(_keySet);
-    Set<? extends IProjectConfig> _projects = this.workspaceConfig.getProjects();
+    final HashSet<Set<String>> remainingProjectNames = CollectionLiterals.<Set<String>>newHashSet(this.projectName2ProjectManager.keySet());
     final Consumer<IProjectConfig> _function = (IProjectConfig projectConfig) -> {
-      String _name = projectConfig.getName();
-      boolean _containsKey = this.projectName2ProjectManager.containsKey(_name);
+      boolean _containsKey = this.projectName2ProjectManager.containsKey(projectConfig.getName());
       if (_containsKey) {
-        String _name_1 = projectConfig.getName();
-        remainingProjectNames.remove(_name_1);
+        remainingProjectNames.remove(projectConfig.getName());
       } else {
         final ProjectManager projectManager = this.projectManagerProvider.get();
         final ProjectDescription projectDescription = this.projectDescriptionFactory.getProjectDescription(projectConfig);
@@ -137,12 +128,11 @@ public class WorkspaceManager {
           return this.fullIndex;
         };
         projectManager.initialize(projectDescription, projectConfig, this.issueAcceptor, this.openedDocumentsContentProvider, _function_1, cancelIndicator);
-        String _name_2 = projectDescription.getName();
-        this.projectName2ProjectManager.put(_name_2, projectManager);
+        this.projectName2ProjectManager.put(projectDescription.getName(), projectManager);
         newProjects.add(projectDescription);
       }
     };
-    _projects.forEach(_function);
+    this.workspaceConfig.getProjects().forEach(_function);
     for (final Set<String> deletedProject : remainingProjectNames) {
       {
         this.projectName2ProjectManager.remove(deletedProject);
@@ -180,8 +170,7 @@ public class WorkspaceManager {
   
   public ProjectManager getProjectManager(final URI uri) {
     final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(uri);
-    String _name = projectConfig.getName();
-    return this.projectName2ProjectManager.get(_name);
+    return this.projectName2ProjectManager.get(projectConfig.getName());
   }
   
   public ProjectManager getProjectManager(final String projectName) {
@@ -201,10 +190,8 @@ public class WorkspaceManager {
       return;
     }
     final Document contents = this.openDocuments.get(uri);
-    Document _applyChanges = contents.applyChanges(changes);
-    this.openDocuments.put(uri, _applyChanges);
-    ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
-    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
+    this.openDocuments.put(uri, contents.applyChanges(changes));
+    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList(), cancelIndicator);
   }
   
   public List<IResourceDescription.Delta> didOpen(final URI uri, final int version, final String contents, final CancelIndicator cancelIndicator) {
@@ -212,8 +199,7 @@ public class WorkspaceManager {
     {
       Document _document = new Document(version, contents);
       this.openDocuments.put(uri, _document);
-      ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
-      _xblockexpression = this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
+      _xblockexpression = this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList(), cancelIndicator);
     }
     return _xblockexpression;
   }
@@ -225,11 +211,9 @@ public class WorkspaceManager {
       List<IResourceDescription.Delta> _xifexpression = null;
       boolean _exists = this.exists(uri);
       if (_exists) {
-        ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
-        _xifexpression = this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
+        _xifexpression = this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList(), cancelIndicator);
       } else {
-        ArrayList<URI> _newArrayList_1 = CollectionLiterals.<URI>newArrayList();
-        _xifexpression = this.doBuild(_newArrayList_1, Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), cancelIndicator);
+        _xifexpression = this.doBuild(CollectionLiterals.<URI>newArrayList(), Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), cancelIndicator);
       }
       _xblockexpression = _xifexpression;
     }
@@ -237,10 +221,7 @@ public class WorkspaceManager {
   }
   
   protected boolean exists(final URI uri) {
-    ProjectManager _projectManager = this.getProjectManager(uri);
-    XtextResourceSet _resourceSet = _projectManager.getResourceSet();
-    URIConverter _uRIConverter = _resourceSet.getURIConverter();
-    return _uRIConverter.exists(uri, null);
+    return this.getProjectManager(uri).getResourceSet().getURIConverter().exists(uri, null);
   }
   
   public <T extends Object> T doRead(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
@@ -255,14 +236,11 @@ public class WorkspaceManager {
   
   protected Document getDocument(final XtextResource resource) {
     Document _elvis = null;
-    URI _uRI = resource.getURI();
-    Document _get = this.openDocuments.get(_uRI);
+    Document _get = this.openDocuments.get(resource.getURI());
     if (_get != null) {
       _elvis = _get;
     } else {
-      IParseResult _parseResult = resource.getParseResult();
-      ICompositeNode _rootNode = _parseResult.getRootNode();
-      String _text = _rootNode.getText();
+      String _text = resource.getParseResult().getRootNode().getText();
       Document _document = new Document(1, _text);
       _elvis = _document;
     }

@@ -40,26 +40,22 @@ public class DefaultGeneratorModule extends AbstractGenericModule {
   }
   
   public void configureXtextProjectConfig(final Binder binder) {
-    AnnotatedBindingBuilder<IXtextProjectConfig> _bind = binder.<IXtextProjectConfig>bind(IXtextProjectConfig.class);
-    _bind.toInstance(this.project);
+    binder.<IXtextProjectConfig>bind(IXtextProjectConfig.class).toInstance(this.project);
   }
   
   public void configureCodeConfig(final Binder binder) {
-    AnnotatedBindingBuilder<CodeConfig> _bind = binder.<CodeConfig>bind(CodeConfig.class);
-    _bind.toInstance(this.code);
+    binder.<CodeConfig>bind(CodeConfig.class).toInstance(this.code);
   }
   
   public void configureResourceSet(final Binder binder) {
-    AnnotatedBindingBuilder<ResourceSet> _bind = binder.<ResourceSet>bind(ResourceSet.class);
-    _bind.to(XtextResourceSet.class);
+    binder.<ResourceSet>bind(ResourceSet.class).to(XtextResourceSet.class);
   }
   
   public void configureLineSeparatorInformation(final Binder binder) {
-    AnnotatedBindingBuilder<ILineSeparatorInformation> _bind = binder.<ILineSeparatorInformation>bind(ILineSeparatorInformation.class);
     final ILineSeparatorInformation _function = () -> {
       return this.code.getLineDelimiter();
     };
-    _bind.toInstance(_function);
+    binder.<ILineSeparatorInformation>bind(ILineSeparatorInformation.class).toInstance(_function);
   }
   
   public void configureIEncodingProvider(final Binder binder) {

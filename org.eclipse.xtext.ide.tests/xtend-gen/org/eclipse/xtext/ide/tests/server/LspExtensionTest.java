@@ -8,8 +8,6 @@
 package org.eclipse.xtext.ide.tests.server;
 
 import com.google.common.collect.Iterables;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import org.eclipse.lsp4j.DidOpenTextDocumentParams;
 import org.eclipse.lsp4j.TextDocumentItem;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
@@ -63,16 +61,12 @@ public class LspExtensionTest extends AbstractTestLangLanguageServerTest {
         it.line = 1;
       };
       TestLangLSPExtension.TextOfLineParam _doubleArrow_1 = ObjectExtensions.<TestLangLSPExtension.TextOfLineParam>operator_doubleArrow(_textOfLineParam, _function_1);
-      CompletableFuture<TestLangLSPExtension.TextOfLineResult> _textOfLine = ext.getTextOfLine(_doubleArrow_1);
-      final TestLangLSPExtension.TextOfLineResult result = _textOfLine.get();
+      final TestLangLSPExtension.TextOfLineResult result = ext.getTextOfLine(_doubleArrow_1).get();
       Assert.assertEquals("baz test", result.text);
       final Function1<Pair<String, Object>, Object> _function_2 = (Pair<String, Object> it) -> {
         return it.getValue();
       };
-      List<Object> _map = ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function_2);
-      Iterable<TestLangLSPExtension.BuildNotification> _filter = Iterables.<TestLangLSPExtension.BuildNotification>filter(_map, TestLangLSPExtension.BuildNotification.class);
-      int _size = IterableExtensions.size(_filter);
-      Assert.assertEquals(2, _size);
+      Assert.assertEquals(2, IterableExtensions.size(Iterables.<TestLangLSPExtension.BuildNotification>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function_2), TestLangLSPExtension.BuildNotification.class)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

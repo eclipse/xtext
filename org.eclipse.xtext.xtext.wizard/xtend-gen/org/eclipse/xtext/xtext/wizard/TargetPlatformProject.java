@@ -50,8 +50,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
   
   @Override
   public boolean isEnabled() {
-    WizardConfiguration _config = this.getConfig();
-    return _config.needsTychoBuild();
+    return this.getConfig().needsTychoBuild();
   }
   
   @Override
@@ -128,24 +127,19 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"org.eclipse.xtext.sdk.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
     {
-      WizardConfiguration _config = this.getConfig();
-      XtextVersion _xtextVersion = _config.getXtextVersion();
-      boolean _isSnapshot = _xtextVersion.isSnapshot();
+      boolean _isSnapshot = this.getConfig().getXtextVersion().isSnapshot();
       if (_isSnapshot) {
         _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/nightly/\"/>");
         _builder.newLine();
       } else {
-        WizardConfiguration _config_1 = this.getConfig();
-        XtextVersion _xtextVersion_1 = _config_1.getXtextVersion();
-        boolean _isStable = _xtextVersion_1.isStable();
+        boolean _isStable = this.getConfig().getXtextVersion().isStable();
         if (_isStable) {
           _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/milestones/\"/>");
           _builder.newLine();
         } else {
           _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/releases/");
-          WizardConfiguration _config_2 = this.getConfig();
-          XtextVersion _xtextVersion_2 = _config_2.getXtextVersion();
-          _builder.append(_xtextVersion_2);
+          XtextVersion _xtextVersion = this.getConfig().getXtextVersion();
+          _builder.append(_xtextVersion);
           _builder.append("/\"/>");
           _builder.newLineIfNotEmpty();
         }

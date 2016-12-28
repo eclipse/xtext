@@ -22,14 +22,12 @@ public class AntlrGrammar {
   }
   
   public String getGrammarFileName() {
-    String _name = this.getName();
-    String _replace = _name.replace(".", "/");
+    String _replace = this.getName().replace(".", "/");
     return (_replace + ".g");
   }
   
   public String getTokensFileName() {
-    String _name = this.getName();
-    String _replace = _name.replace(".", "/");
+    String _replace = this.getName().replace(".", "/");
     return (_replace + ".tokens");
   }
   

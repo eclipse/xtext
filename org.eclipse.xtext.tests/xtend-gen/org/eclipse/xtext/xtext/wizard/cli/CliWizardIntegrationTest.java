@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.wizard.cli;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Sets;
 import java.io.File;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -41,7 +40,6 @@ import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
-import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
@@ -132,8 +130,7 @@ public class CliWizardIntegrationTest {
         final File targetLocation = new File("testdata/wizard-expectations", _baseName);
         targetLocation.mkdirs();
         Files.sweepFolder(targetLocation);
-        String _path = targetLocation.getPath();
-        config.setRootLocation(_path);
+        config.setRootLocation(targetLocation.getPath());
         creator.createProjects(config);
         String _baseName_1 = config.getBaseName();
         String _plus = ("Updating expectations for " + _baseName_1);
@@ -151,8 +148,7 @@ public class CliWizardIntegrationTest {
     it.setPreferredBuildSystem(BuildSystem.MAVEN);
     it.setSourceLayout(SourceLayout.MAVEN);
     it.setProjectLayout(ProjectLayout.HIERARCHICAL);
-    RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     IdeProjectDescriptor _ideProject = it.getIdeProject();
     _ideProject.setEnabled(true);
@@ -164,13 +160,11 @@ public class CliWizardIntegrationTest {
     it.setPreferredBuildSystem(BuildSystem.MAVEN);
     it.setSourceLayout(SourceLayout.PLAIN);
     it.setProjectLayout(ProjectLayout.HIERARCHICAL);
-    RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     UiProjectDescriptor _uiProject = it.getUiProject();
     _uiProject.setEnabled(true);
-    UiProjectDescriptor _uiProject_1 = it.getUiProject();
-    TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
     _testProject_1.setEnabled(true);
     IdeProjectDescriptor _ideProject = it.getIdeProject();
     _ideProject.setEnabled(true);
@@ -182,8 +176,7 @@ public class CliWizardIntegrationTest {
     it.setPreferredBuildSystem(BuildSystem.GRADLE);
     it.setSourceLayout(SourceLayout.MAVEN);
     it.setProjectLayout(ProjectLayout.HIERARCHICAL);
-    RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     IdeProjectDescriptor _ideProject = it.getIdeProject();
     _ideProject.setEnabled(true);
@@ -197,15 +190,13 @@ public class CliWizardIntegrationTest {
     it.setPreferredBuildSystem(BuildSystem.NONE);
     it.setSourceLayout(SourceLayout.PLAIN);
     it.setProjectLayout(ProjectLayout.FLAT);
-    RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     IdeProjectDescriptor _ideProject = it.getIdeProject();
     _ideProject.setEnabled(true);
     UiProjectDescriptor _uiProject = it.getUiProject();
     _uiProject.setEnabled(true);
-    UiProjectDescriptor _uiProject_1 = it.getUiProject();
-    TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
     _testProject_1.setEnabled(true);
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
@@ -213,15 +204,13 @@ public class CliWizardIntegrationTest {
     it.setPreferredBuildSystem(BuildSystem.NONE);
     it.setSourceLayout(SourceLayout.PLAIN);
     it.setProjectLayout(ProjectLayout.FLAT);
-    RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     IdeProjectDescriptor _ideProject = it.getIdeProject();
     _ideProject.setEnabled(true);
     UiProjectDescriptor _uiProject = it.getUiProject();
     _uiProject.setEnabled(true);
-    UiProjectDescriptor _uiProject_1 = it.getUiProject();
-    TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
     _testProject_1.setEnabled(true);
     P2RepositoryProject _p2Project = it.getP2Project();
     _p2Project.setEnabled(true);
@@ -231,13 +220,11 @@ public class CliWizardIntegrationTest {
     it.setPreferredBuildSystem(BuildSystem.MAVEN);
     it.setSourceLayout(SourceLayout.PLAIN);
     it.setProjectLayout(ProjectLayout.HIERARCHICAL);
-    RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     UiProjectDescriptor _uiProject = it.getUiProject();
     _uiProject.setEnabled(true);
-    UiProjectDescriptor _uiProject_1 = it.getUiProject();
-    TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
     _testProject_1.setEnabled(true);
     IdeProjectDescriptor _ideProject = it.getIdeProject();
     _ideProject.setEnabled(true);
@@ -251,13 +238,11 @@ public class CliWizardIntegrationTest {
     it.setPreferredBuildSystem(BuildSystem.GRADLE);
     it.setSourceLayout(SourceLayout.PLAIN);
     it.setProjectLayout(ProjectLayout.HIERARCHICAL);
-    RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     UiProjectDescriptor _uiProject = it.getUiProject();
     _uiProject.setEnabled(true);
-    UiProjectDescriptor _uiProject_1 = it.getUiProject();
-    TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
     _testProject_1.setEnabled(true);
     IdeProjectDescriptor _ideProject = it.getIdeProject();
     _ideProject.setEnabled(true);
@@ -278,8 +263,7 @@ public class CliWizardIntegrationTest {
       LanguageDescriptor _language = it.getLanguage();
       final Procedure1<LanguageDescriptor> _function_1 = (LanguageDescriptor it_1) -> {
         it_1.setName("org.xtext.example.mydsl.MyDsl");
-        LanguageDescriptor.FileExtensions _fromString = LanguageDescriptor.FileExtensions.fromString("mydsl");
-        it_1.setFileExtensions(_fromString);
+        it_1.setFileExtensions(LanguageDescriptor.FileExtensions.fromString("mydsl"));
       };
       ObjectExtensions.<LanguageDescriptor>operator_doubleArrow(_language, _function_1);
     };
@@ -303,8 +287,7 @@ public class CliWizardIntegrationTest {
   
   @Test
   public void testProjectCreation() {
-    CliProjectsCreator _newProjectCreator = CliWizardIntegrationTest.newProjectCreator();
-    this.creator = _newProjectCreator;
+    this.creator = CliWizardIntegrationTest.newProjectCreator();
     final Consumer<WizardConfiguration> _function = (WizardConfiguration config) -> {
       this.config = config;
       this.validateCreatedProjects();
@@ -316,8 +299,7 @@ public class CliWizardIntegrationTest {
     File _root = this.temp.getRoot();
     String _baseName = this.config.getBaseName();
     final File targetLocation = new File(_root, _baseName);
-    String _path = targetLocation.getPath();
-    this.config.setRootLocation(_path);
+    this.config.setRootLocation(targetLocation.getPath());
     this.creator.createProjects(this.config);
     String _baseName_1 = this.config.getBaseName();
     final File expectationLocation = new File("testdata/wizard-expectations", _baseName_1);
@@ -334,9 +316,7 @@ public class CliWizardIntegrationTest {
       final Function1<File, CliWizardIntegrationTest.GeneratedFile> _function = (File it) -> {
         CliWizardIntegrationTest.GeneratedFile _xblockexpression_1 = null;
         {
-          String _path = it.getPath();
-          String _path_1 = root.getPath();
-          final String relativePath = _path.replace(_path_1, "");
+          final String relativePath = it.getPath().replace(root.getPath(), "");
           _xblockexpression_1 = this.toGeneratedFile(it, relativePath);
         }
         return _xblockexpression_1;
@@ -354,11 +334,10 @@ public class CliWizardIntegrationTest {
   private void collectAllFiles(final File root, final List<File> children) {
     boolean _isDirectory = root.isDirectory();
     if (_isDirectory) {
-      File[] _listFiles = root.listFiles();
       final Consumer<File> _function = (File it) -> {
         this.collectAllFiles(it, children);
       };
-      ((List<File>)Conversions.doWrapArray(_listFiles)).forEach(_function);
+      ((List<File>)Conversions.doWrapArray(root.listFiles())).forEach(_function);
     } else {
       children.add(root);
     }
@@ -371,8 +350,7 @@ public class CliWizardIntegrationTest {
       if (_isDirectory) {
         _xifexpression = "";
       } else {
-        Charset _encoding = this.config.getEncoding();
-        _xifexpression = com.google.common.io.Files.toString(file, _encoding);
+        _xifexpression = com.google.common.io.Files.toString(file, this.config.getEncoding());
       }
       return new CliWizardIntegrationTest.GeneratedFile(relativePath, _xifexpression);
     } catch (Throwable _e) {
@@ -407,10 +385,8 @@ public class CliWizardIntegrationTest {
     };
     unexpectedFiles.forEach(_function_3);
     final Consumer<CliWizardIntegrationTest.GeneratedFile> _function_4 = (CliWizardIntegrationTest.GeneratedFile it) -> {
-      CliWizardIntegrationTest.GeneratedFile _get = expectedFilesByPath.get(it.relativePath);
-      final String expectedContent = LineDelimiters.toUnix(_get.content);
-      CliWizardIntegrationTest.GeneratedFile _get_1 = actualFilesByPath.get(it.relativePath);
-      final String actualContent = LineDelimiters.toUnix(_get_1.content);
+      final String expectedContent = LineDelimiters.toUnix(expectedFilesByPath.get(it.relativePath).content);
+      final String actualContent = LineDelimiters.toUnix(actualFilesByPath.get(it.relativePath).content);
       Assert.assertEquals(it.relativePath, expectedContent, actualContent);
     };
     comparableFiles.forEach(_function_4);

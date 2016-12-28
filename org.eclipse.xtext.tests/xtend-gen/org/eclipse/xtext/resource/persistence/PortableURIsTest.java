@@ -10,8 +10,6 @@ package org.eclipse.xtext.resource.persistence;
 import com.google.common.collect.Iterables;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -22,9 +20,7 @@ import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
 import org.eclipse.xtext.linking.langATestLanguage.Type;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.PortableURIs;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
@@ -51,34 +47,24 @@ public class PortableURIsTest extends AbstractXtextTests {
   public void testPortableUris() {
     try {
       final XtextResourceSet resourceSet = this.<XtextResourceSet>get(XtextResourceSet.class);
-      URI _createURI = URI.createURI("hubba:/bubba.langatestlanguage");
-      Resource _createResource = resourceSet.createResource(_createURI);
+      Resource _createResource = resourceSet.createResource(URI.createURI("hubba:/bubba.langatestlanguage"));
       final StorageAwareResource resourceA = ((StorageAwareResource) _createResource);
-      URI _createURI_1 = URI.createURI("hubba:/bubba2.langatestlanguage");
-      Resource _createResource_1 = resourceSet.createResource(_createURI_1);
+      Resource _createResource_1 = resourceSet.createResource(URI.createURI("hubba:/bubba2.langatestlanguage"));
       final StorageAwareResource resourceB = ((StorageAwareResource) _createResource_1);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type B");
       _builder.newLine();
-      InputStream _asStream = this.getAsStream(_builder.toString());
-      resourceB.load(_asStream, null);
+      resourceB.load(this.getAsStream(_builder.toString()), null);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("import \'hubba:/bubba2.langatestlanguage\'");
       _builder_1.newLine();
       _builder_1.newLine();
       _builder_1.append("type A extends B");
       _builder_1.newLine();
-      InputStream _asStream_1 = this.getAsStream(_builder_1.toString());
-      resourceA.load(_asStream_1, null);
-      EList<EObject> _contents = resourceA.getContents();
-      Iterable<Main> _filter = Iterables.<Main>filter(_contents, Main.class);
-      Main _head = IterableExtensions.<Main>head(_filter);
-      EList<Type> _types = _head.getTypes();
-      Type _head_1 = IterableExtensions.<Type>head(_types);
-      final Type extended = _head_1.getExtends();
+      resourceA.load(this.getAsStream(_builder_1.toString()), null);
+      final Type extended = IterableExtensions.<Type>head(IterableExtensions.<Main>head(Iterables.<Main>filter(resourceA.getContents(), Main.class)).getTypes()).getExtends();
       final URI uri = EcoreUtil.getURI(extended);
-      PortableURIs _portableURIs = resourceA.getPortableURIs();
-      final URI portableURI = _portableURIs.toPortableURI(resourceA, uri);
+      final URI portableURI = resourceA.getPortableURIs().toPortableURI(resourceA, uri);
       Assert.assertEquals(resourceA.getURI(), portableURI.trimFragment());
       Assert.assertTrue(resourceA.getPortableURIs().isPortableURIFragment(portableURI.fragment()));
       Assert.assertSame(extended, resourceA.getEObject(portableURI.fragment()));
@@ -91,42 +77,35 @@ public class PortableURIsTest extends AbstractXtextTests {
   public void testPortableReferenceDescriptions() {
     try {
       final XtextResourceSet resourceSet = this.<XtextResourceSet>get(XtextResourceSet.class);
-      URI _createURI = URI.createURI("hubba:/bubba.langatestlanguage");
-      Resource _createResource = resourceSet.createResource(_createURI);
+      Resource _createResource = resourceSet.createResource(URI.createURI("hubba:/bubba.langatestlanguage"));
       final StorageAwareResource resourceA = ((StorageAwareResource) _createResource);
-      URI _createURI_1 = URI.createURI("hubba:/bubba2.langatestlanguage");
-      Resource _createResource_1 = resourceSet.createResource(_createURI_1);
+      Resource _createResource_1 = resourceSet.createResource(URI.createURI("hubba:/bubba2.langatestlanguage"));
       final StorageAwareResource resourceB = ((StorageAwareResource) _createResource_1);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type B");
       _builder.newLine();
-      InputStream _asStream = this.getAsStream(_builder.toString());
-      resourceB.load(_asStream, null);
+      resourceB.load(this.getAsStream(_builder.toString()), null);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("import \'hubba:/bubba2.langatestlanguage\'");
       _builder_1.newLine();
       _builder_1.newLine();
       _builder_1.append("type A extends B");
       _builder_1.newLine();
-      InputStream _asStream_1 = this.getAsStream(_builder_1.toString());
-      resourceA.load(_asStream_1, null);
+      resourceA.load(this.getAsStream(_builder_1.toString()), null);
       final ByteArrayOutputStream bout = new ByteArrayOutputStream();
-      IResourceStorageFacade _resourceStorageFacade = resourceA.getResourceStorageFacade();
-      final ResourceStorageWritable writable = _resourceStorageFacade.createResourceStorageWritable(bout);
+      final ResourceStorageWritable writable = resourceA.getResourceStorageFacade().createResourceStorageWritable(bout);
       writable.writeResource(resourceA);
-      IResourceStorageFacade _resourceStorageFacade_1 = resourceA.getResourceStorageFacade();
       byte[] _byteArray = bout.toByteArray();
       ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
-      final ResourceStorageLoadable loadable = _resourceStorageFacade_1.createResourceStorageLoadable(_byteArrayInputStream);
-      URI _createURI_2 = URI.createURI("hubba:/bubba3.langatestlanguage");
-      Resource _createResource_2 = resourceSet.createResource(_createURI_2);
+      final ResourceStorageLoadable loadable = resourceA.getResourceStorageFacade().createResourceStorageLoadable(_byteArrayInputStream);
+      Resource _createResource_2 = resourceSet.createResource(URI.createURI("hubba:/bubba3.langatestlanguage"));
       final StorageAwareResource resourceC = ((StorageAwareResource) _createResource_2);
       resourceC.loadFromStorage(loadable);
-      IResourceDescription _resourceDescription = resourceC.getResourceDescription();
-      Iterable<IReferenceDescription> _referenceDescriptions = _resourceDescription.getReferenceDescriptions();
-      final IReferenceDescription refDesc = IterableExtensions.<IReferenceDescription>head(_referenceDescriptions);
-      Assert.assertSame(IterableExtensions.<Type>head(((Main) IterableExtensions.<EObject>head(resourceB.getContents())).getTypes()), resourceSet.getEObject(refDesc.getTargetEObjectUri(), false));
-      Assert.assertSame(IterableExtensions.<Type>head(((Main) IterableExtensions.<EObject>head(resourceC.getContents())).getTypes()), resourceSet.getEObject(refDesc.getSourceEObjectUri(), false));
+      final IReferenceDescription refDesc = IterableExtensions.<IReferenceDescription>head(resourceC.getResourceDescription().getReferenceDescriptions());
+      EObject _head = IterableExtensions.<EObject>head(resourceB.getContents());
+      Assert.assertSame(IterableExtensions.<Type>head(((Main) _head).getTypes()), resourceSet.getEObject(refDesc.getTargetEObjectUri(), false));
+      EObject _head_1 = IterableExtensions.<EObject>head(resourceC.getContents());
+      Assert.assertSame(IterableExtensions.<Type>head(((Main) _head_1).getTypes()), resourceSet.getEObject(refDesc.getSourceEObjectUri(), false));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -151,7 +130,6 @@ public class PortableURIsTest extends AbstractXtextTests {
   public void checkFragmentBothDirections(final EObject container, final EObject child) {
     final PortableURIs portableURIs = new PortableURIs();
     final String fragment = portableURIs.getFragment(container, child);
-    EObject _eObject = portableURIs.getEObject(container, fragment);
-    Assert.assertSame(child, _eObject);
+    Assert.assertSame(child, portableURIs.getEObject(container, fragment));
   }
 }

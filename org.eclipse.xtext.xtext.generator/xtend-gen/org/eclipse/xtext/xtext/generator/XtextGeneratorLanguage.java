@@ -15,7 +15,6 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Provider;
 import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,8 +22,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
@@ -57,9 +56,7 @@ import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.ImplicitFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorResourceSetInitializer;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
-import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
@@ -133,14 +130,10 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
     if (this.grammarUri != null) {
       _elvis = this.grammarUri;
     } else {
-      IRuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
-      IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
-      String _path = _src.getPath();
+      String _path = this.projectConfig.getRuntime().getSrc().getPath();
       String _replace = this.name.replace(".", "/");
       String _plus = (_replace + ".xtext");
-      File _file = new File(_path, _plus);
-      URI _uRI = _file.toURI();
-      String _string = _uRI.toString();
+      String _string = new File(_path, _plus).toURI().toString();
       _elvis = _string;
     }
     return _elvis;
@@ -180,46 +173,37 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   
   @Override
   public void initialize(final Injector injector) {
-    List<IXtextGeneratorFragment> _fragments = this.getFragments();
-    List<? extends IXtextGeneratorFragment> _implicitFragments = this.getImplicitFragments();
-    _fragments.addAll(0, _implicitFragments);
+    this.getFragments().addAll(0, this.getImplicitFragments());
     injector.injectMembers(XtextGeneratorLanguage.class);
     if ((this.resourceSet == null)) {
       this.resourceSet = this.resourceSetProvider.get();
     }
     this.resourceSetInitializer.initialize(this.resourceSet, this.referencedResources);
-    EList<Resource> _resources = this.resourceSet.getResources();
-    boolean _isEmpty = _resources.isEmpty();
+    boolean _isEmpty = this.resourceSet.getResources().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
       this.installIndex();
       {
         int i = 0;
-        EList<Resource> _resources_1 = this.resourceSet.getResources();
-        int size = _resources_1.size();
+        int size = this.resourceSet.getResources().size();
         boolean _while = (i < size);
         while (_while) {
           {
-            EList<Resource> _resources_2 = this.resourceSet.getResources();
-            final Resource res = _resources_2.get(i);
-            EList<EObject> _contents = res.getContents();
-            boolean _isEmpty_1 = _contents.isEmpty();
+            final Resource res = this.resourceSet.getResources().get(i);
+            boolean _isEmpty_1 = res.getContents().isEmpty();
             if (_isEmpty_1) {
-              org.eclipse.emf.common.util.URI _uRI = res.getURI();
+              URI _uRI = res.getURI();
               String _plus = ("Error loading \'" + _uRI);
               String _plus_1 = (_plus + "\'");
               XtextGeneratorLanguage.LOG.error(_plus_1);
             } else {
-              EList<Resource.Diagnostic> _errors = res.getErrors();
-              boolean _isEmpty_2 = _errors.isEmpty();
+              boolean _isEmpty_2 = res.getErrors().isEmpty();
               boolean _not_1 = (!_isEmpty_2);
               if (_not_1) {
-                org.eclipse.emf.common.util.URI _uRI_1 = res.getURI();
+                URI _uRI_1 = res.getURI();
                 String _plus_2 = ("Error loading \'" + _uRI_1);
                 String _plus_3 = (_plus_2 + "\':\n");
-                Joiner _on = Joiner.on("\n");
-                EList<Resource.Diagnostic> _errors_1 = res.getErrors();
-                String _join = _on.join(_errors_1);
+                String _join = Joiner.on("\n").join(res.getErrors());
                 String _plus_4 = (_plus_3 + _join);
                 XtextGeneratorLanguage.LOG.error(_plus_4);
               }
@@ -236,35 +220,27 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
     if (_tripleEquals) {
       throw new IllegalStateException("No grammarUri or language name given");
     }
-    String _grammarUri_1 = this.getGrammarUri();
-    org.eclipse.emf.common.util.URI _createURI = org.eclipse.emf.common.util.URI.createURI(_grammarUri_1);
-    Resource _resource = this.resourceSet.getResource(_createURI, true);
+    Resource _resource = this.resourceSet.getResource(URI.createURI(this.getGrammarUri()), true);
     final XtextResource resource = ((XtextResource) _resource);
-    EList<EObject> _contents = resource.getContents();
-    boolean _isEmpty_1 = _contents.isEmpty();
+    boolean _isEmpty_1 = resource.getContents().isEmpty();
     if (_isEmpty_1) {
-      String _grammarUri_2 = this.getGrammarUri();
-      String _plus = ("Couldn\'t load grammar for \'" + _grammarUri_2);
+      String _grammarUri_1 = this.getGrammarUri();
+      String _plus = ("Couldn\'t load grammar for \'" + _grammarUri_1);
       String _plus_1 = (_plus + "\'.");
       throw new IllegalArgumentException(_plus_1);
     }
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    boolean _isEmpty_2 = _errors.isEmpty();
+    boolean _isEmpty_2 = resource.getErrors().isEmpty();
     boolean _not_1 = (!_isEmpty_2);
     if (_not_1) {
-      EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-      XtextGeneratorLanguage.LOG.error(_errors_1);
-      String _grammarUri_3 = this.getGrammarUri();
-      String _plus_2 = ("Problem parsing \'" + _grammarUri_3);
+      XtextGeneratorLanguage.LOG.error(resource.getErrors());
+      String _grammarUri_2 = this.getGrammarUri();
+      String _plus_2 = ("Problem parsing \'" + _grammarUri_2);
       String _plus_3 = (_plus_2 + "\':\n");
-      Joiner _on = Joiner.on("\n");
-      EList<Resource.Diagnostic> _errors_2 = resource.getErrors();
-      String _join = _on.join(_errors_2);
+      String _join = Joiner.on("\n").join(resource.getErrors());
       String _plus_4 = (_plus_3 + _join);
       throw new IllegalStateException(_plus_4);
     }
-    EList<EObject> _contents_1 = resource.getContents();
-    EObject _get = _contents_1.get(0);
+    EObject _get = resource.getContents().get(0);
     final Grammar grammar = ((Grammar) _get);
     this.validateGrammar(grammar);
     this.initialize(grammar);
@@ -290,19 +266,17 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   private void installIndex() {
     List<IResourceDescription> _emptyList = Collections.<IResourceDescription>emptyList();
     final ResourceDescriptionsData index = new ResourceDescriptionsData(_emptyList);
-    EList<Resource> _resources = this.resourceSet.getResources();
-    final ArrayList<Resource> resources = Lists.<Resource>newArrayList(_resources);
+    final ArrayList<Resource> resources = Lists.<Resource>newArrayList(this.resourceSet.getResources());
     for (final Resource resource : resources) {
       this.index(resource, resource.getURI(), index);
     }
     ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(this.resourceSet, index);
   }
   
-  private void index(final Resource resource, final org.eclipse.emf.common.util.URI uri, final ResourceDescriptionsData index) {
+  private void index(final Resource resource, final URI uri, final ResourceDescriptionsData index) {
     final IResourceServiceProvider serviceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri);
     if ((serviceProvider != null)) {
-      IResourceDescription.Manager _resourceDescriptionManager = serviceProvider.getResourceDescriptionManager();
-      final IResourceDescription resourceDescription = _resourceDescriptionManager.getResourceDescription(resource);
+      final IResourceDescription resourceDescription = serviceProvider.getResourceDescriptionManager().getResourceDescription(resource);
       if ((resourceDescription != null)) {
         index.addDescription(uri, resourceDescription);
       }
@@ -377,12 +351,10 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
     if (_isEmpty) {
       _xifexpression = "(unknown)";
     } else {
-      INode _get = nodes.get(0);
-      _xifexpression = NodeModelUtils.getTokenText(_get);
+      _xifexpression = NodeModelUtils.getTokenText(nodes.get(0));
     }
     final String refName = _xifexpression;
-    Grammar _grammar = GrammarUtil.getGrammar(ref);
-    final String grammarName = _grammar.getName();
+    final String grammarName = GrammarUtil.getGrammar(ref).getName();
     final String msg = ((((("The EPackage " + refName) + " in grammar ") + grammarName) + " could not be found. ") + "You might want to register that EPackage in your workflow file.");
     throw new IllegalStateException(msg);
   }

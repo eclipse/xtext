@@ -127,8 +127,7 @@ public class SerializerValidationDiagnosticsTest {
       final Model model = this._parseHelper.parse(_builder);
       EObject _x11 = model.getX11();
       final MultiKeywordsOrID mt = ((MultiKeywordsOrID) _x11);
-      EList<String> _val = mt.getVal();
-      _val.clear();
+      mt.getVal().clear();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("Could not serialize MultiKeywordsOrID:");
       _builder_1.newLine();
@@ -181,10 +180,7 @@ public class SerializerValidationDiagnosticsTest {
     } catch (final Throwable _t) {
       if (_t instanceof Throwable) {
         final Throwable t = (Throwable)_t;
-        String _string = expected.toString();
-        String _trim = _string.trim();
-        String _message = t.getMessage();
-        Assert.assertEquals(_trim, _message);
+        Assert.assertEquals(expected.toString().trim(), t.getMessage());
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

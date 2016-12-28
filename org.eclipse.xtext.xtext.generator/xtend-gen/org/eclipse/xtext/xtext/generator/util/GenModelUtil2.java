@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.util;
 
 import com.google.common.base.Objects;
-import java.util.Map;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
 import org.eclipse.emf.codegen.ecore.genmodel.GenDataType;
@@ -45,8 +44,7 @@ public class GenModelUtil2 {
     EList<GenClassifier> _genClassifiers = genPackage.getGenClassifiers();
     for (final GenClassifier genCls : _genClassifiers) {
       String _name = cls.getName();
-      EClassifier _ecoreClassifier = genCls.getEcoreClassifier();
-      String _name_1 = _ecoreClassifier.getName();
+      String _name_1 = genCls.getEcoreClassifier().getName();
       boolean _equals = Objects.equal(_name, _name_1);
       if (_equals) {
         return genCls;
@@ -57,8 +55,7 @@ public class GenModelUtil2 {
     String _name_2 = cls.getName();
     _builder.append(_name_2);
     _builder.append("\' found in GenModel ");
-    Resource _eResource = genPackage.eResource();
-    URI _uRI = _eResource.getURI();
+    URI _uRI = genPackage.eResource().getURI();
     _builder.append(_uRI);
     throw new RuntimeException(_builder.toString());
   }
@@ -79,8 +76,7 @@ public class GenModelUtil2 {
     EList<GenFeature> _genFeatures = genCls.getGenFeatures();
     for (final GenFeature genFeat : _genFeatures) {
       String _name = feature.getName();
-      EStructuralFeature _ecoreFeature = genFeat.getEcoreFeature();
-      String _name_1 = _ecoreFeature.getName();
+      String _name_1 = genFeat.getEcoreFeature().getName();
       boolean _equals = Objects.equal(_name, _name_1);
       if (_equals) {
         return genFeat;
@@ -93,8 +89,7 @@ public class GenModelUtil2 {
     _builder.append("\' found in GenClass \'");
     _builder.append(genCls);
     _builder.append("\' from GenModel");
-    Resource _eResource = genCls.eResource();
-    URI _uRI = _eResource.getURI();
+    URI _uRI = genCls.eResource().getURI();
     _builder.append(_uRI);
     throw new RuntimeException(_builder.toString());
   }
@@ -118,8 +113,7 @@ public class GenModelUtil2 {
         if ((model instanceof GenModel)) {
           final GenPackage genPkg = ((GenModel)model).findGenPackage(pkg);
           if ((genPkg != null)) {
-            EPackage _ecorePackage = genPkg.getEcorePackage();
-            _ecorePackage.getEClassifiers();
+            genPkg.getEcorePackage().getEClassifiers();
             return genPkg;
           }
         }
@@ -140,8 +134,7 @@ public class GenModelUtil2 {
   }
   
   public static Resource getGenModelResource(final String locationInfo, final String nsURI, final ResourceSet resourceSet) {
-    Map<String, URI> _ePackageNsURIToGenModelLocationMap = EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
-    final URI genModelURI = _ePackageNsURIToGenModelLocationMap.get(nsURI);
+    final URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap(false).get(nsURI);
     if ((genModelURI == null)) {
       boolean _equals = Objects.equal(EcorePackage.eNS_URI, nsURI);
       if (_equals) {
@@ -214,20 +207,16 @@ public class GenModelUtil2 {
   }
   
   public static String getIntLiteral(final EClass clazz, final EStructuralFeature feature, final ResourceSet resourceSet) {
-    GenClass _genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
-    GenFeature _genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
-    return _genClass.getFeatureID(_genFeature);
+    return GenModelUtil2.getGenClass(clazz, resourceSet).getFeatureID(GenModelUtil2.getGenFeature(feature, resourceSet));
   }
   
   public static String getIntLiteral(final EClassifier classifier, final ResourceSet resourceSet) {
-    GenClassifier _genClassifier = GenModelUtil2.getGenClassifier(classifier, resourceSet);
-    return _genClassifier.getClassifierID();
+    return GenModelUtil2.getGenClassifier(classifier, resourceSet).getClassifierID();
   }
   
   public static String getTypeLiteral(final EClassifier classifier, final ResourceSet resourceSet) {
     final GenClassifier genClassifier = GenModelUtil2.getGenClassifier(classifier, resourceSet);
-    GenPackage _genPackage = genClassifier.getGenPackage();
-    boolean _isLiteralsInterface = _genPackage.isLiteralsInterface();
+    boolean _isLiteralsInterface = genClassifier.getGenPackage().isLiteralsInterface();
     if (_isLiteralsInterface) {
       String _classifierID = genClassifier.getClassifierID();
       return ("Literals." + _classifierID);
@@ -243,11 +232,9 @@ public class GenModelUtil2 {
   }
   
   public static String getFeatureLiteral(final GenFeature genFeature, final ResourceSet resourceSet) {
-    GenPackage _genPackage = genFeature.getGenPackage();
-    boolean _isLiteralsInterface = _genPackage.isLiteralsInterface();
+    boolean _isLiteralsInterface = genFeature.getGenPackage().isLiteralsInterface();
     if (_isLiteralsInterface) {
-      GenClass _genClass = genFeature.getGenClass();
-      String _featureID = _genClass.getFeatureID(genFeature);
+      String _featureID = genFeature.getGenClass().getFeatureID(genFeature);
       return ("Literals." + _featureID);
     } else {
       String _featureAccessorName = genFeature.getFeatureAccessorName();

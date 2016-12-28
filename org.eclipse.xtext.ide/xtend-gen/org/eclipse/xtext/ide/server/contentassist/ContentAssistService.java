@@ -66,13 +66,11 @@ public class ContentAssistService {
       final CompletionList result = new CompletionList();
       result.setIsIncomplete(true);
       final IdeContentProposalAcceptor acceptor = this.proposalAcceptorProvider.get();
-      Position _position = params.getPosition();
-      final int caretOffset = document.getOffSet(_position);
+      final int caretOffset = document.getOffSet(params.getPosition());
       final Position caretPosition = params.getPosition();
       final TextRegion position = new TextRegion(caretOffset, 0);
       try {
-        String _contents = document.getContents();
-        this.createProposals(_contents, position, caretOffset, resource, acceptor);
+        this.createProposals(document.getContents(), position, caretOffset, resource, acceptor);
       } catch (final Throwable _t) {
         if (_t instanceof Throwable) {
           final Throwable t = (Throwable)_t;
@@ -85,16 +83,13 @@ public class ContentAssistService {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      Iterable<ContentAssistEntry> _entries = acceptor.getEntries();
       final Procedure2<ContentAssistEntry, Integer> _function = (ContentAssistEntry it, Integer idx) -> {
         final CompletionItem item = this.toCompletionItem(it, caretOffset, caretPosition, document);
-        String _string = Integer.toString((idx).intValue());
-        String _padStart = Strings.padStart(_string, 5, '0');
-        item.setSortText(_padStart);
+        item.setSortText(Strings.padStart(Integer.toString((idx).intValue()), 5, '0'));
         List<CompletionItem> _items = result.getItems();
         _items.add(item);
       };
-      IterableExtensions.<ContentAssistEntry>forEach(_entries, _function);
+      IterableExtensions.<ContentAssistEntry>forEach(acceptor.getEntries(), _function);
       return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -124,10 +119,8 @@ public class ContentAssistService {
       _elvis = _proposal;
     }
     completionItem.setLabel(_elvis);
-    String _description = entry.getDescription();
-    completionItem.setDetail(_description);
-    String _documentation = entry.getDocumentation();
-    completionItem.setDocumentation(_documentation);
+    completionItem.setDetail(entry.getDescription());
+    completionItem.setDocumentation(entry.getDocumentation());
     String _elvis_1 = null;
     String _prefix = entry.getPrefix();
     if (_prefix != null) {
@@ -142,8 +135,7 @@ public class ContentAssistService {
     String _proposal_1 = entry.getProposal();
     TextEdit _textEdit = new TextEdit(_range, _proposal_1);
     completionItem.setTextEdit(_textEdit);
-    CompletionItemKind _translateKind = this.translateKind(entry);
-    completionItem.setKind(_translateKind);
+    completionItem.setKind(this.translateKind(entry));
     return completionItem;
   }
   

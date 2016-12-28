@@ -10,17 +10,12 @@ package org.eclipse.xtext.ide.tests.testlanguage.generator;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
-import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PrimitiveType;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Type;
@@ -41,9 +36,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class TestLanguageGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
-    TreeIterator<EObject> _allContents = resource.getAllContents();
-    Iterator<TypeDeclaration> _filter = Iterators.<TypeDeclaration>filter(_allContents, TypeDeclaration.class);
-    List<TypeDeclaration> _list = IteratorExtensions.<TypeDeclaration>toList(_filter);
+    List<TypeDeclaration> _list = IteratorExtensions.<TypeDeclaration>toList(Iterators.<TypeDeclaration>filter(resource.getAllContents(), TypeDeclaration.class));
     for (final TypeDeclaration type : _list) {
       String _name = type.getName();
       String _plus = (_name + ".java");
@@ -54,13 +47,11 @@ public class TestLanguageGenerator extends AbstractGenerator {
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
       {
-        EList<Member> _members = type.getMembers();
-        Iterable<Property> _filter_1 = Iterables.<Property>filter(_members, Property.class);
-        for(final Property p : _filter_1) {
+        Iterable<Property> _filter = Iterables.<Property>filter(type.getMembers(), Property.class);
+        for(final Property p : _filter) {
           _builder.append("\t");
           _builder.append("private ");
-          Type _type = p.getType();
-          String _java = this.toJava(_type);
+          String _java = this.toJava(p.getType());
           _builder.append(_java, "\t");
           _builder.append(" ");
           String _name_2 = p.getName();
@@ -71,26 +62,24 @@ public class TestLanguageGenerator extends AbstractGenerator {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public void set");
-          String _name_3 = p.getName();
-          String _firstUpper = StringExtensions.toFirstUpper(_name_3);
+          String _firstUpper = StringExtensions.toFirstUpper(p.getName());
           _builder.append(_firstUpper, "\t");
           _builder.append("(");
-          Type _type_1 = p.getType();
-          String _java_1 = this.toJava(_type_1);
+          String _java_1 = this.toJava(p.getType());
           _builder.append(_java_1, "\t");
           _builder.append(" ");
-          String _name_4 = p.getName();
-          _builder.append(_name_4, "\t");
+          String _name_3 = p.getName();
+          _builder.append(_name_3, "\t");
           _builder.append(") {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("\t");
           _builder.append("this.");
+          String _name_4 = p.getName();
+          _builder.append(_name_4, "\t\t");
+          _builder.append(" = ");
           String _name_5 = p.getName();
           _builder.append(_name_5, "\t\t");
-          _builder.append(" = ");
-          String _name_6 = p.getName();
-          _builder.append(_name_6, "\t\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -100,20 +89,18 @@ public class TestLanguageGenerator extends AbstractGenerator {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public ");
-          Type _type_2 = p.getType();
-          String _java_2 = this.toJava(_type_2);
+          String _java_2 = this.toJava(p.getType());
           _builder.append(_java_2, "\t");
           _builder.append(" get");
-          String _name_7 = p.getName();
-          String _firstUpper_1 = StringExtensions.toFirstUpper(_name_7);
+          String _firstUpper_1 = StringExtensions.toFirstUpper(p.getName());
           _builder.append(_firstUpper_1, "\t");
           _builder.append("() {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("\t");
           _builder.append("return this.");
-          String _name_8 = p.getName();
-          _builder.append(_name_8, "\t\t");
+          String _name_6 = p.getName();
+          _builder.append(_name_6, "\t\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -128,25 +115,20 @@ public class TestLanguageGenerator extends AbstractGenerator {
   }
   
   protected String _toJava(final TypeReference type) {
-    TypeDeclaration _typeRef = type.getTypeRef();
-    String _name = _typeRef.getName();
-    EList<String> _arrayDiemensions = type.getArrayDiemensions();
+    String _name = type.getTypeRef().getName();
     final Function1<String, String> _function = (String it) -> {
       return "[]";
     };
-    List<String> _map = ListExtensions.<String, String>map(_arrayDiemensions, _function);
-    String _join = IterableExtensions.join(_map, "");
+    String _join = IterableExtensions.join(ListExtensions.<String, String>map(type.getArrayDiemensions(), _function), "");
     return (_name + _join);
   }
   
   protected String _toJava(final PrimitiveType type) {
     String _name = type.getName();
-    EList<String> _arrayDiemensions = type.getArrayDiemensions();
     final Function1<String, String> _function = (String it) -> {
       return "[]";
     };
-    List<String> _map = ListExtensions.<String, String>map(_arrayDiemensions, _function);
-    String _join = IterableExtensions.join(_map, "");
+    String _join = IterableExtensions.join(ListExtensions.<String, String>map(type.getArrayDiemensions(), _function), "");
     return (_name + _join);
   }
   

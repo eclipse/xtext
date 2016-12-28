@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.resource.persistence;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -16,14 +15,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Map;
-import java.util.Set;
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
@@ -74,14 +67,11 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
    */
   @Override
   public boolean shouldLoadFromStorage(final StorageAwareResource resource) {
-    ResourceSet _resourceSet = resource.getResourceSet();
-    final SourceLevelURIsAdapter adapter = SourceLevelURIsAdapter.findInstalledAdapter(_resourceSet);
+    final SourceLevelURIsAdapter adapter = SourceLevelURIsAdapter.findInstalledAdapter(resource.getResourceSet());
     if ((adapter == null)) {
       return false;
     } else {
-      ImmutableSet<URI> _sourceLevelURIs = adapter.getSourceLevelURIs();
-      URI _uRI = resource.getURI();
-      boolean _contains = _sourceLevelURIs.contains(_uRI);
+      boolean _contains = adapter.getSourceLevelURIs().contains(resource.getURI());
       if (_contains) {
         return false;
       }
@@ -99,10 +89,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
   @Override
   public ResourceStorageLoadable getOrCreateResourceStorageLoadable(final StorageAwareResource resource) {
     try {
-      ResourceSet _resourceSet = resource.getResourceSet();
-      EList<Adapter> _eAdapters = _resourceSet.eAdapters();
-      Iterable<ResourceStorageProviderAdapter> _filter = Iterables.<ResourceStorageProviderAdapter>filter(_eAdapters, ResourceStorageProviderAdapter.class);
-      final ResourceStorageProviderAdapter stateProvider = IterableExtensions.<ResourceStorageProviderAdapter>head(_filter);
+      final ResourceStorageProviderAdapter stateProvider = IterableExtensions.<ResourceStorageProviderAdapter>head(Iterables.<ResourceStorageProviderAdapter>filter(resource.getResourceSet().eAdapters(), ResourceStorageProviderAdapter.class));
       if ((stateProvider != null)) {
         final ResourceStorageLoadable inputStream = stateProvider.getResourceStorageLoadable(resource);
         if ((inputStream != null)) {
@@ -110,18 +97,9 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
         }
       }
       InputStream _xifexpression = null;
-      ResourceSet _resourceSet_1 = resource.getResourceSet();
-      URIConverter _uRIConverter = _resourceSet_1.getURIConverter();
-      URI _uRI = resource.getURI();
-      URI _binaryStorageURI = this.getBinaryStorageURI(_uRI);
-      Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-      boolean _exists = _uRIConverter.exists(_binaryStorageURI, _emptyMap);
+      boolean _exists = resource.getResourceSet().getURIConverter().exists(this.getBinaryStorageURI(resource.getURI()), CollectionLiterals.<Object, Object>emptyMap());
       if (_exists) {
-        ResourceSet _resourceSet_2 = resource.getResourceSet();
-        URIConverter _uRIConverter_1 = _resourceSet_2.getURIConverter();
-        URI _uRI_1 = resource.getURI();
-        URI _binaryStorageURI_1 = this.getBinaryStorageURI(_uRI_1);
-        _xifexpression = _uRIConverter_1.createInputStream(_binaryStorageURI_1);
+        _xifexpression = resource.getResourceSet().getURIConverter().createInputStream(this.getBinaryStorageURI(resource.getURI()));
       } else {
         InputStream _xblockexpression = null;
         {
@@ -178,24 +156,15 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
    * @return whether a stored resource state exists for the given resource
    */
   protected boolean doesStorageExist(final StorageAwareResource resource) {
-    ResourceSet _resourceSet = resource.getResourceSet();
-    EList<Adapter> _eAdapters = _resourceSet.eAdapters();
-    Iterable<ResourceStorageProviderAdapter> _filter = Iterables.<ResourceStorageProviderAdapter>filter(_eAdapters, ResourceStorageProviderAdapter.class);
-    final ResourceStorageProviderAdapter stateProvider = IterableExtensions.<ResourceStorageProviderAdapter>head(_filter);
+    final ResourceStorageProviderAdapter stateProvider = IterableExtensions.<ResourceStorageProviderAdapter>head(Iterables.<ResourceStorageProviderAdapter>filter(resource.getResourceSet().eAdapters(), ResourceStorageProviderAdapter.class));
     if (((stateProvider != null) && (stateProvider.getResourceStorageLoadable(resource) != null))) {
       return true;
     }
-    ResourceSet _resourceSet_1 = resource.getResourceSet();
-    URIConverter _uRIConverter = _resourceSet_1.getURIConverter();
-    URI _uRI = resource.getURI();
-    URI _binaryStorageURI = this.getBinaryStorageURI(_uRI);
-    Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-    boolean _exists = _uRIConverter.exists(_binaryStorageURI, _emptyMap);
+    boolean _exists = resource.getResourceSet().getURIConverter().exists(this.getBinaryStorageURI(resource.getURI()), CollectionLiterals.<Object, Object>emptyMap());
     if (_exists) {
       return true;
     }
-    URI _uRI_1 = resource.getURI();
-    boolean _isArchive = _uRI_1.isArchive();
+    boolean _isArchive = resource.getURI().isArchive();
     if (_isArchive) {
       return false;
     }
@@ -208,36 +177,27 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
   protected AbstractFileSystemAccess2 getFileSystemAccess(final StorageAwareResource resource) {
     final AbstractFileSystemAccess2 fsa = this.fileSystemAccessProvider.get();
     fsa.setContext(resource);
-    Set<OutputConfiguration> _outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(resource);
     final Function1<OutputConfiguration, String> _function = (OutputConfiguration it) -> {
       return it.getName();
     };
-    Map<String, OutputConfiguration> _map = IterableExtensions.<String, OutputConfiguration>toMap(_outputConfigurations, _function);
-    fsa.setOutputConfigurations(_map);
+    fsa.setOutputConfigurations(IterableExtensions.<String, OutputConfiguration>toMap(this.outputConfigurationProvider.getOutputConfigurations(resource), _function));
     return fsa;
   }
   
   protected String computeOutputPath(final StorageAwareResource resource) {
     final URI srcContainerURI = this.getSourceContainerURI(resource);
-    URI _uRI = resource.getURI();
-    final URI uri = this.getBinaryStorageURI(_uRI);
-    URI _deresolve = uri.deresolve(srcContainerURI, false, false, true);
-    final String outputRelativePath = _deresolve.path();
+    final URI uri = this.getBinaryStorageURI(resource.getURI());
+    final String outputRelativePath = uri.deresolve(srcContainerURI, false, false, true).path();
     return outputRelativePath;
   }
   
   protected URI getSourceContainerURI(final StorageAwareResource resource) {
-    URI _uRI = resource.getURI();
-    URI _trimSegments = _uRI.trimSegments(1);
-    return _trimSegments.appendSegment("");
+    return resource.getURI().trimSegments(1).appendSegment("");
   }
   
   @Override
   public boolean hasStorageFor(final URI uri) {
-    ExtensibleURIConverterImpl _extensibleURIConverterImpl = new ExtensibleURIConverterImpl();
-    URI _binaryStorageURI = this.getBinaryStorageURI(uri);
-    Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-    return _extensibleURIConverterImpl.exists(_binaryStorageURI, _emptyMap);
+    return new ExtensibleURIConverterImpl().exists(this.getBinaryStorageURI(uri), CollectionLiterals.<Object, Object>emptyMap());
   }
   
   protected URI getBinaryStorageURI(final URI sourceURI) {

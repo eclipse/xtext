@@ -246,15 +246,13 @@ public class AntlrGeneratorFragmentTest extends AbstractXtextTests {
   
   protected void asserTranslatesToDebugGrammar(final CharSequence xtextGrammar, final String expectedDebugGrammar) {
     try {
-      String _string = xtextGrammar.toString();
-      EObject _model = super.getModel(_string);
+      EObject _model = super.getModel(xtextGrammar.toString());
       final Grammar grammar = ((Grammar) _model);
       DefaultGeneratorModule _defaultGeneratorModule = new DefaultGeneratorModule();
       final Injector injector = Guice.createInjector(_defaultGeneratorModule);
       final AntlrGeneratorFragmentTest.InMemFSA inMem = new AntlrGeneratorFragmentTest.InMemFSA();
       final AntlrOptions options = new AntlrOptions();
-      AntlrDebugGrammarGenerator _instance = injector.<AntlrDebugGrammarGenerator>getInstance(AntlrDebugGrammarGenerator.class);
-      _instance.generate(grammar, options, inMem);
+      injector.<AntlrDebugGrammarGenerator>getInstance(AntlrDebugGrammarGenerator.class).generate(grammar, options, inMem);
       Assert.assertEquals(expectedDebugGrammar, IterableExtensions.<Object>head(inMem.getAllFiles().values()).toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

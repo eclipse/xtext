@@ -24,8 +24,7 @@ public class SourceRelativeURI extends AbstractURIWrapper {
       String _string = uri.toString();
       throw new IllegalArgumentException(_string);
     }
-    String _path = uri.path();
-    String _substring = _path.substring(1);
+    String _substring = uri.path().substring(1);
     return new SourceRelativeURI(_substring);
   }
   

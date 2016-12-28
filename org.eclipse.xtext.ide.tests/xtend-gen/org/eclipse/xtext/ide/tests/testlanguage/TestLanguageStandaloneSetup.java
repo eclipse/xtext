@@ -15,7 +15,6 @@ import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageStandaloneSetupGener
 @SuppressWarnings("all")
 public class TestLanguageStandaloneSetup extends TestLanguageStandaloneSetupGenerated {
   public static void doSetup() {
-    TestLanguageStandaloneSetup _testLanguageStandaloneSetup = new TestLanguageStandaloneSetup();
-    _testLanguageStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new TestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

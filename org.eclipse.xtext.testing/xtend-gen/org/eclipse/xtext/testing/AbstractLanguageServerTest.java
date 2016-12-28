@@ -20,12 +20,10 @@ import java.io.FileWriter;
 import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import org.eclipse.lsp4j.ColoringInformation;
@@ -47,7 +45,6 @@ import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Location;
-import org.eclipse.lsp4j.ParameterInformation;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
@@ -56,7 +53,6 @@ import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureInformation;
 import org.eclipse.lsp4j.SymbolInformation;
-import org.eclipse.lsp4j.SymbolKind;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.TextDocumentItem;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
@@ -128,8 +124,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
               final CancelIndicator _function = () -> {
                 return false;
               };
-              V _apply = writeRequest.apply(_function);
-              return CompletableFuture.<V>completedFuture(_apply);
+              return CompletableFuture.<V>completedFuture(writeRequest.apply(_function));
             }
             
             @Override
@@ -137,27 +132,22 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
               final CancelIndicator _function = () -> {
                 return false;
               };
-              V _apply = readRequest.apply(_function);
-              return CompletableFuture.<V>completedFuture(_apply);
+              return CompletableFuture.<V>completedFuture(readRequest.apply(_function));
             }
           });
         }
       });
       final Injector injector = Guice.createInjector(module);
       injector.injectMembers(this);
-      Map<String, Object> _extensionToFactoryMap = this.resourceServerProviderRegistry.getExtensionToFactoryMap();
-      final Object resourceServiceProvider = _extensionToFactoryMap.get(this.fileExtension);
+      final Object resourceServiceProvider = this.resourceServerProviderRegistry.getExtensionToFactoryMap().get(this.fileExtension);
       if ((resourceServiceProvider instanceof IResourceServiceProvider)) {
-        LanguageInfo _get = ((IResourceServiceProvider)resourceServiceProvider).<LanguageInfo>get(LanguageInfo.class);
-        this.languageInfo = _get;
+        this.languageInfo = ((IResourceServiceProvider)resourceServiceProvider).<LanguageInfo>get(LanguageInfo.class);
       }
-      LanguageClientExtensions _serviceObject = ServiceEndpoints.<LanguageClientExtensions>toServiceObject(this, LanguageClientExtensions.class);
-      this.languageServer.connect(_serviceObject);
+      this.languageServer.connect(ServiceEndpoints.<LanguageClientExtensions>toServiceObject(this, LanguageClientExtensions.class));
       this.languageServer.supportedMethods();
-      File _file = new File("");
-      File _absoluteFile = _file.getAbsoluteFile();
-      File _file_1 = new File(_absoluteFile, "/test-data/test-project");
-      this.root = _file_1;
+      File _absoluteFile = new File("").getAbsoluteFile();
+      File _file = new File(_absoluteFile, "/test-data/test-project");
+      this.root = _file;
       boolean _mkdirs = this.root.mkdirs();
       boolean _not = (!_mkdirs);
       if (_not) {
@@ -186,9 +176,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   protected LanguageInfo languageInfo;
   
   protected Path getTestRootPath() {
-    Path _path = this.root.toPath();
-    Path _absolutePath = _path.toAbsolutePath();
-    return _absolutePath.normalize();
+    return this.root.toPath().toAbsolutePath().normalize();
   }
   
   protected Path relativize(final String uri) {
@@ -197,8 +185,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       {
         URI _uRI = new URI(uri);
         final Path path = Paths.get(_uRI);
-        Path _testRootPath = this.getTestRootPath();
-        _xblockexpression = _testRootPath.relativize(path);
+        _xblockexpression = this.getTestRootPath().relativize(path);
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -215,24 +202,20 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       InitializeParams _initializeParams = new InitializeParams();
       final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
         it.setProcessId(Integer.valueOf(1));
-        Path _testRootPath = this.getTestRootPath();
-        String _string = _testRootPath.toString();
-        it.setRootPath(_string);
+        it.setRootPath(this.getTestRootPath().toString());
       };
       final InitializeParams params = ObjectExtensions.<InitializeParams>operator_doubleArrow(_initializeParams, _function);
       if (initializer!=null) {
         initializer.apply(((InitializeParams) params));
       }
-      CompletableFuture<InitializeResult> _initialize = this.languageServer.initialize(params);
-      return _initialize.get();
+      return this.languageServer.initialize(params).get();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
   protected void open(final String fileUri, final String model) {
-    String _languageName = this.languageInfo.getLanguageName();
-    this.open(fileUri, _languageName, model);
+    this.open(fileUri, this.languageInfo.getLanguageName(), model);
   }
   
   protected void open(final String fileUri, final String langaugeId, final String model) {
@@ -284,16 +267,12 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   public String writeFile(final String path, final CharSequence contents) {
     try {
       final File file = new File(this.root, path);
-      File _parentFile = file.getParentFile();
-      _parentFile.mkdirs();
+      file.getParentFile().mkdirs();
       file.createNewFile();
       final FileWriter writer = new FileWriter(file);
-      String _string = contents.toString();
-      writer.write(_string);
+      writer.write(contents.toString());
       writer.close();
-      URI _uRI = file.toURI();
-      URI _normalize = _uRI.normalize();
-      return this._uriExtensions.toPath(_normalize);
+      return this._uriExtensions.toPath(file.toURI().normalize());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -301,9 +280,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   
   public String getVirtualFile(final String path) {
     final File file = new File(this.root, path);
-    URI _uRI = file.toURI();
-    URI _normalize = _uRI.normalize();
-    return this._uriExtensions.toPath(_normalize);
+    return this._uriExtensions.toPath(file.toURI().normalize());
   }
   
   protected String _toExpectation(final List<?> elements) {
@@ -334,12 +311,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   
   protected String _toExpectation(final Location it) {
     StringConcatenation _builder = new StringConcatenation();
-    String _uri = it.getUri();
-    Path _relativize = this.relativize(_uri);
+    Path _relativize = this.relativize(it.getUri());
     _builder.append(_relativize);
     _builder.append(" ");
-    Range _range = it.getRange();
-    String _expectation = this.toExpectation(_range);
+    String _expectation = this.toExpectation(it.getRange());
     _builder.append(_expectation);
     return _builder.toString();
   }
@@ -347,12 +322,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   protected String _toExpectation(final Range it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("[");
-    Position _start = it.getStart();
-    String _expectation = this.toExpectation(_start);
+    String _expectation = this.toExpectation(it.getStart());
     _builder.append(_expectation);
     _builder.append(" .. ");
-    Position _end = it.getEnd();
-    String _expectation_1 = this.toExpectation(_end);
+    String _expectation_1 = this.toExpectation(it.getEnd());
     _builder.append(_expectation_1);
     _builder.append("]");
     return _builder.toString();
@@ -379,25 +352,22 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
     _builder.append("kind: ");
-    SymbolKind _kind = it.getKind();
-    int _value = _kind.getValue();
+    int _value = it.getKind().getValue();
     _builder.append(_value, "    ");
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
     _builder.append("location: ");
-    Location _location = it.getLocation();
-    String _expectation = this.toExpectation(_location);
+    String _expectation = this.toExpectation(it.getLocation());
     _builder.append(_expectation, "    ");
     _builder.newLineIfNotEmpty();
     {
-      String _containerName = it.getContainerName();
-      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_containerName);
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it.getContainerName());
       boolean _not = (!_isNullOrEmpty);
       if (_not) {
         _builder.append("    ");
         _builder.append("container: \"");
-        String _containerName_1 = it.getContainerName();
-        _builder.append(_containerName_1, "    ");
+        String _containerName = it.getContainerName();
+        _builder.append(_containerName, "    ");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
       }
@@ -412,13 +382,12 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     String _label = it.getLabel();
     _builder.append(_label);
     {
-      String _detail = it.getDetail();
-      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_detail);
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it.getDetail());
       boolean _not = (!_isNullOrEmpty);
       if (_not) {
         _builder.append(" (");
-        String _detail_1 = it.getDetail();
-        _builder.append(_detail_1);
+        String _detail = it.getDetail();
+        _builder.append(_detail);
         _builder.append(")");
       }
     }
@@ -427,8 +396,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       boolean _tripleNotEquals = (_textEdit != null);
       if (_tripleNotEquals) {
         _builder.append(" -> ");
-        TextEdit _textEdit_1 = it.getTextEdit();
-        String _expectation = this.toExpectation(_textEdit_1);
+        String _expectation = this.toExpectation(it.getTextEdit());
         _builder.append(_expectation);
       } else {
         if (((it.getInsertText() != null) && (!Objects.equal(it.getInsertText(), it.getLabel())))) {
@@ -447,8 +415,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     String _newText = it.getNewText();
     _builder.append(_newText);
     _builder.append(" ");
-    Range _range = it.getRange();
-    String _expectation = this.toExpectation(_range);
+    String _expectation = this.toExpectation(it.getRange());
     _builder.append(_expectation);
     _builder.newLineIfNotEmpty();
     return _builder.toString();
@@ -456,8 +423,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   
   protected String _toExpectation(final Hover it) {
     StringConcatenation _builder = new StringConcatenation();
-    Range _range = it.getRange();
-    String _expectation = this.toExpectation(_range);
+    String _expectation = this.toExpectation(it.getRange());
     _builder.append(_expectation);
     _builder.newLineIfNotEmpty();
     {
@@ -474,8 +440,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   protected String _toExpectation(final SignatureHelp it) {
     String _xblockexpression = null;
     {
-      List<SignatureInformation> _signatures = it.getSignatures();
-      int _size = _signatures.size();
+      int _size = it.getSignatures().size();
       boolean _tripleEquals = (_size == 0);
       if (_tripleEquals) {
         StringConcatenation _builder = new StringConcatenation();
@@ -483,34 +448,26 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         Integer _activeSignature = it.getActiveSignature();
         _builder.append(_activeSignature);
         _builder.append(".");
-        Integer _activeSignature_1 = it.getActiveSignature();
-        Assert.assertNull(_builder.toString(), _activeSignature_1);
+        Assert.assertNull(_builder.toString(), 
+          it.getActiveSignature());
         return "<empty>";
       }
-      Integer _activeSignature_2 = it.getActiveSignature();
-      Assert.assertNotNull("Active signature index must not be null when signatures are available.", _activeSignature_2);
+      Assert.assertNotNull("Active signature index must not be null when signatures are available.", it.getActiveSignature());
       String _xifexpression = null;
       Integer _activeParameter = it.getActiveParameter();
       boolean _tripleEquals_1 = (_activeParameter == null);
       if (_tripleEquals_1) {
         _xifexpression = "<empty>";
       } else {
-        List<SignatureInformation> _signatures_1 = it.getSignatures();
-        Integer _activeSignature_3 = it.getActiveSignature();
-        SignatureInformation _get = _signatures_1.get((_activeSignature_3).intValue());
-        List<ParameterInformation> _parameters = _get.getParameters();
-        Integer _activeParameter_1 = it.getActiveParameter();
-        ParameterInformation _get_1 = _parameters.get((_activeParameter_1).intValue());
-        _xifexpression = _get_1.getLabel();
+        _xifexpression = it.getSignatures().get((it.getActiveSignature()).intValue()).getParameters().get(
+          (it.getActiveParameter()).intValue()).getLabel();
       }
       final String param = _xifexpression;
       StringConcatenation _builder_1 = new StringConcatenation();
-      List<SignatureInformation> _signatures_2 = it.getSignatures();
       final Function1<SignatureInformation, String> _function = (SignatureInformation it_1) -> {
         return it_1.getLabel();
       };
-      List<String> _map = ListExtensions.<SignatureInformation, String>map(_signatures_2, _function);
-      String _join = IterableExtensions.join(_map, " | ");
+      String _join = IterableExtensions.join(ListExtensions.<SignatureInformation, String>map(it.getSignatures(), _function), " | ");
       _builder_1.append(_join);
       _builder_1.append(" | ");
       _builder_1.append(param);
@@ -529,8 +486,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         if (_tripleEquals) {
           _builder.append("[NaN, NaN]:[NaN, NaN]");
         } else {
-          Range _range_1 = it.getRange();
-          String _expectation = this.toExpectation(_range_1);
+          String _expectation = this.toExpectation(it.getRange());
           _builder.append(_expectation);
         }
       }
@@ -542,8 +498,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         if (_tripleEquals_1) {
           _builder_1.append("NaN");
         } else {
-          DocumentHighlightKind _kind_1 = it.getKind();
-          String _expectation_1 = this.toExpectation(_kind_1);
+          String _expectation_1 = this.toExpectation(it.getKind());
           _builder_1.append(_expectation_1);
         }
       }
@@ -555,52 +510,42 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   }
   
   protected String _toExpectation(final DocumentHighlightKind kind) {
-    String _string = kind.toString();
-    String _substring = _string.substring(0, 1);
-    return _substring.toUpperCase();
+    return kind.toString().substring(0, 1).toUpperCase();
   }
   
   protected String _toExpectation(final Map<Object, Object> it) {
     final StringBuilder sb = new StringBuilder();
-    Set<Map.Entry<Object, Object>> _entrySet = it.entrySet();
     final Consumer<Map.Entry<Object, Object>> _function = (Map.Entry<Object, Object> it_1) -> {
       int _length = sb.length();
       boolean _greaterThan = (_length > 0);
       if (_greaterThan) {
         sb.append("\n");
       }
-      Object _key = it_1.getKey();
-      String _expectation = this.toExpectation(_key);
-      sb.append(_expectation);
+      sb.append(this.toExpectation(it_1.getKey()));
       sb.append(" ->");
       Object _value = it_1.getValue();
       if ((_value instanceof Iterable<?>)) {
         Object _value_1 = it_1.getValue();
         final Consumer<Object> _function_1 = (Object it_2) -> {
           sb.append("\n * ");
-          String _expectation_1 = this.toExpectation(it_2);
-          sb.append(_expectation_1);
+          sb.append(this.toExpectation(it_2));
         };
         ((Iterable<?>) _value_1).forEach(_function_1);
       } else {
         sb.append(" ");
-        Object _value_2 = it_1.getValue();
-        String _expectation_1 = this.toExpectation(_value_2);
-        sb.append(_expectation_1);
+        sb.append(this.toExpectation(it_1.getValue()));
       }
     };
-    _entrySet.forEach(_function);
+    it.entrySet().forEach(_function);
     return sb.toString();
   }
   
   protected String _toExpectation(final ColoringInformation it) {
     StringConcatenation _builder = new StringConcatenation();
-    Range _range = it.getRange();
-    String _expectation = this.toExpectation(_range);
+    String _expectation = this.toExpectation(it.getRange());
     _builder.append(_expectation);
     _builder.append(" -> [");
-    List<Integer> _styles = it.getStyles();
-    String _join = IterableExtensions.join(_styles, ", ");
+    String _join = IterableExtensions.join(it.getStyles(), ", ");
     _builder.append(_join);
     _builder.append("]");
     return _builder.toString();
@@ -612,8 +557,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final TestCompletionConfiguration configuration = new TestCompletionConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      FileInfo _initializeContext = this.initializeContext(configuration);
-      final String filePath = _initializeContext.getUri();
+      final String filePath = this.initializeContext(configuration).getUri();
       TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
       final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(filePath);
@@ -626,24 +570,17 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
       final CompletableFuture<CompletionList> completionItems = this.languageServer.completion(_doubleArrow);
       final CompletionList list = completionItems.get();
-      List<CompletionItem> _items = list.getItems();
-      List<CompletionItem> _items_1 = list.getItems();
       final Function1<CompletionItem, String> _function_1 = (CompletionItem it) -> {
         return it.getSortText();
       };
-      List<CompletionItem> _sortBy = IterableExtensions.<CompletionItem, String>sortBy(_items_1, _function_1);
-      List<CompletionItem> _list = IterableExtensions.<CompletionItem>toList(_sortBy);
-      Assert.assertEquals(_items, _list);
+      Assert.assertEquals(list.getItems(), IterableExtensions.<CompletionItem>toList(IterableExtensions.<CompletionItem, String>sortBy(list.getItems(), _function_1)));
       Procedure1<? super CompletionList> _assertCompletionList = configuration.getAssertCompletionList();
       boolean _tripleNotEquals = (_assertCompletionList != null);
       if (_tripleNotEquals) {
-        Procedure1<? super CompletionList> _assertCompletionList_1 = configuration.getAssertCompletionList();
-        _assertCompletionList_1.apply(list);
+        configuration.getAssertCompletionList().apply(list);
       } else {
-        List<CompletionItem> _items_2 = list.getItems();
-        final String actualCompletionItems = this.toExpectation(_items_2);
-        String _expectedCompletionItems = configuration.getExpectedCompletionItems();
-        this.assertEquals(_expectedCompletionItems, actualCompletionItems);
+        final String actualCompletionItems = this.toExpectation(list.getItems());
+        this.assertEquals(configuration.getExpectedCompletionItems(), actualCompletionItems);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -652,41 +589,27 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   
   protected FileInfo initializeContext(final TextDocumentConfiguration configuration) {
     this.initialize();
-    Map<String, CharSequence> _filesInScope = configuration.getFilesInScope();
-    boolean _isEmpty = _filesInScope.isEmpty();
+    boolean _isEmpty = configuration.getFilesInScope().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      Map<String, CharSequence> _filesInScope_1 = configuration.getFilesInScope();
-      Set<Map.Entry<String, CharSequence>> _entrySet = _filesInScope_1.entrySet();
       final Function1<Map.Entry<String, CharSequence>, String> _function = (Map.Entry<String, CharSequence> it) -> {
-        String _key = it.getKey();
-        CharSequence _value = it.getValue();
-        String _string = _value.toString();
-        return this.writeFile(_key, _string);
+        return this.writeFile(it.getKey(), it.getValue().toString());
       };
-      final Iterable<String> createdFiles = IterableExtensions.<Map.Entry<String, CharSequence>, String>map(_entrySet, _function);
+      final Iterable<String> createdFiles = IterableExtensions.<Map.Entry<String, CharSequence>, String>map(configuration.getFilesInScope().entrySet(), _function);
       this.didCreateWatchedFiles(((String[])Conversions.unwrapArray(createdFiles, String.class)));
       String _model = configuration.getModel();
       boolean _tripleEquals = (_model == null);
       if (_tripleEquals) {
         String _head = IterableExtensions.<String>head(createdFiles);
-        Map<String, CharSequence> _filesInScope_2 = configuration.getFilesInScope();
-        Set<Map.Entry<String, CharSequence>> _entrySet_1 = _filesInScope_2.entrySet();
-        Map.Entry<String, CharSequence> _head_1 = IterableExtensions.<Map.Entry<String, CharSequence>>head(_entrySet_1);
-        CharSequence _value = _head_1.getValue();
-        String _string = _value.toString();
+        String _string = IterableExtensions.<Map.Entry<String, CharSequence>>head(configuration.getFilesInScope().entrySet()).getValue().toString();
         return new FileInfo(_head, _string);
       }
     }
+    Assert.assertNotNull(configuration.getModel());
+    final String filePath = this.writeFile(configuration.getFilePath(), configuration.getModel());
+    this.open(filePath, configuration.getModel());
     String _model_1 = configuration.getModel();
-    Assert.assertNotNull(_model_1);
-    String _filePath = configuration.getFilePath();
-    String _model_2 = configuration.getModel();
-    final String filePath = this.writeFile(_filePath, _model_2);
-    String _model_3 = configuration.getModel();
-    this.open(filePath, _model_3);
-    String _model_4 = configuration.getModel();
-    return new FileInfo(filePath, _model_4);
+    return new FileInfo(filePath, _model_1);
   }
   
   protected void testDefinition(final Procedure1<? super DefinitionTestConfiguration> configurator) {
@@ -695,8 +618,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final DefinitionTestConfiguration configuration = new DefinitionTestConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      FileInfo _initializeContext = this.initializeContext(configuration);
-      final String fileUri = _initializeContext.getUri();
+      final String fileUri = this.initializeContext(configuration).getUri();
       TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
       final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
@@ -712,12 +634,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       Procedure1<? super List<? extends Location>> _assertDefinitions = configuration.getAssertDefinitions();
       boolean _tripleNotEquals = (_assertDefinitions != null);
       if (_tripleNotEquals) {
-        Procedure1<? super List<? extends Location>> _assertDefinitions_1 = configuration.getAssertDefinitions();
-        _assertDefinitions_1.apply(definitions);
+        configuration.getAssertDefinitions().apply(definitions);
       } else {
         final String actualDefinitions = this.toExpectation(definitions);
-        String _expectedDefinitions = configuration.getExpectedDefinitions();
-        this.assertEquals(_expectedDefinitions, actualDefinitions);
+        this.assertEquals(configuration.getExpectedDefinitions(), actualDefinitions);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -730,8 +650,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final HoverTestConfiguration configuration = new HoverTestConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      FileInfo _initializeContext = this.initializeContext(configuration);
-      final String fileUri = _initializeContext.getUri();
+      final String fileUri = this.initializeContext(configuration).getUri();
       TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
       final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
@@ -747,12 +666,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       Procedure1<? super Hover> _assertHover = configuration.getAssertHover();
       boolean _tripleNotEquals = (_assertHover != null);
       if (_tripleNotEquals) {
-        Procedure1<? super Hover> _assertHover_1 = configuration.getAssertHover();
-        _assertHover_1.apply(hover);
+        configuration.getAssertHover().apply(hover);
       } else {
         final String actualHover = this.toExpectation(hover);
-        String _expectedHover = configuration.getExpectedHover();
-        this.assertEquals(_expectedHover, actualHover);
+        this.assertEquals(configuration.getExpectedHover(), actualHover);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -765,8 +682,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final SignatureHelpConfiguration configuration = new SignatureHelpConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      FileInfo _initializeContext = this.initializeContext(configuration);
-      final String fileUri = _initializeContext.getUri();
+      final String fileUri = this.initializeContext(configuration).getUri();
       TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
       final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
@@ -782,14 +698,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       Procedure1<? super SignatureHelp> _assertSignatureHelp = configuration.getAssertSignatureHelp();
       boolean _tripleNotEquals = (_assertSignatureHelp != null);
       if (_tripleNotEquals) {
-        Procedure1<? super SignatureHelp> _assertSignatureHelp_1 = configuration.getAssertSignatureHelp();
-        _assertSignatureHelp_1.apply(signatureHelp);
+        configuration.getAssertSignatureHelp().apply(signatureHelp);
       } else {
         final String actualSignatureHelp = this.toExpectation(signatureHelp);
-        String _expectedSignatureHelp = configuration.getExpectedSignatureHelp();
-        String _trim = _expectedSignatureHelp.trim();
-        String _trim_1 = actualSignatureHelp.trim();
-        this.assertEquals(_trim, _trim_1);
+        this.assertEquals(configuration.getExpectedSignatureHelp().trim(), actualSignatureHelp.trim());
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -808,8 +720,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       @Extension
       final DocumentHighlightConfiguration configuration = ObjectExtensions.<DocumentHighlightConfiguration>operator_doubleArrow(_documentHighlightConfiguration, _function);
       configurator.apply(configuration);
-      FileInfo _initializeContext = this.initializeContext(configuration);
-      final String fileUri = _initializeContext.getUri();
+      final String fileUri = this.initializeContext(configuration).getUri();
       TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
       final Procedure1<TextDocumentPositionParams> _function_1 = (TextDocumentPositionParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
@@ -821,14 +732,11 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       };
       TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function_1);
       final CompletableFuture<List<? extends DocumentHighlight>> highlights = this.languageServer.documentHighlight(_doubleArrow);
-      List<? extends DocumentHighlight> _get = highlights.get();
       final Function1<DocumentHighlight, String> _function_2 = (DocumentHighlight it) -> {
         return this.toExpectation(it);
       };
-      List<String> _map = ListExtensions.map(_get, _function_2);
-      final String actualDocumentHighlight = IterableExtensions.join(_map, " | ");
-      String _expectedDocumentHighlight = configuration.getExpectedDocumentHighlight();
-      this.assertEquals(_expectedDocumentHighlight, actualDocumentHighlight);
+      final String actualDocumentHighlight = IterableExtensions.join(ListExtensions.map(highlights.get(), _function_2), " | ");
+      this.assertEquals(configuration.getExpectedDocumentHighlight(), actualDocumentHighlight);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -840,8 +748,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final DocumentSymbolConfiguraiton configuration = new DocumentSymbolConfiguraiton();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      FileInfo _initializeContext = this.initializeContext(configuration);
-      final String fileUri = _initializeContext.getUri();
+      final String fileUri = this.initializeContext(configuration).getUri();
       TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
       DocumentSymbolParams _documentSymbolParams = new DocumentSymbolParams(_textDocumentIdentifier);
       final CompletableFuture<List<? extends SymbolInformation>> symbolsFuture = this.languageServer.documentSymbol(_documentSymbolParams);
@@ -849,12 +756,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       Procedure1<? super List<? extends SymbolInformation>> _assertSymbols = configuration.getAssertSymbols();
       boolean _tripleNotEquals = (_assertSymbols != null);
       if (_tripleNotEquals) {
-        Procedure1<? super List<? extends SymbolInformation>> _assertSymbols_1 = configuration.getAssertSymbols();
-        _assertSymbols_1.apply(symbols);
+        configuration.getAssertSymbols().apply(symbols);
       } else {
         final String actualSymbols = this.toExpectation(symbols);
-        String _expectedSymbols = configuration.getExpectedSymbols();
-        this.assertEquals(_expectedSymbols, actualSymbols);
+        this.assertEquals(configuration.getExpectedSymbols(), actualSymbols);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -870,17 +775,14 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       this.initializeContext(configuration);
       String _query = configuration.getQuery();
       WorkspaceSymbolParams _workspaceSymbolParams = new WorkspaceSymbolParams(_query);
-      CompletableFuture<List<? extends SymbolInformation>> _symbol = this.languageServer.symbol(_workspaceSymbolParams);
-      final List<? extends SymbolInformation> symbols = _symbol.get();
+      final List<? extends SymbolInformation> symbols = this.languageServer.symbol(_workspaceSymbolParams).get();
       Procedure1<? super List<? extends SymbolInformation>> _assertSymbols = configuration.getAssertSymbols();
       boolean _tripleNotEquals = (_assertSymbols != null);
       if (_tripleNotEquals) {
-        Procedure1<? super List<? extends SymbolInformation>> _assertSymbols_1 = configuration.getAssertSymbols();
-        _assertSymbols_1.apply(symbols);
+        configuration.getAssertSymbols().apply(symbols);
       } else {
         final String actualSymbols = this.toExpectation(symbols);
-        String _expectedSymbols = configuration.getExpectedSymbols();
-        this.assertEquals(_expectedSymbols, actualSymbols);
+        this.assertEquals(configuration.getExpectedSymbols(), actualSymbols);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -893,8 +795,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final ReferenceTestConfiguration configuration = new ReferenceTestConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      FileInfo _initializeContext = this.initializeContext(configuration);
-      final String fileUri = _initializeContext.getUri();
+      final String fileUri = this.initializeContext(configuration).getUri();
       ReferenceParams _referenceParams = new ReferenceParams();
       final Procedure1<ReferenceParams> _function = (ReferenceParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
@@ -913,12 +814,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       Procedure1<? super List<? extends Location>> _assertReferences = configuration.getAssertReferences();
       boolean _tripleNotEquals = (_assertReferences != null);
       if (_tripleNotEquals) {
-        Procedure1<? super List<? extends Location>> _assertReferences_1 = configuration.getAssertReferences();
-        _assertReferences_1.apply(references);
+        configuration.getAssertReferences().apply(references);
       } else {
         final String actualReferences = this.toExpectation(references);
-        String _expectedReferences = configuration.getExpectedReferences();
-        this.assertEquals(_expectedReferences, actualReferences);
+        this.assertEquals(configuration.getExpectedReferences(), actualReferences);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -926,9 +825,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   }
   
   public void assertEquals(final String expected, final String actual) {
-    String _replace = expected.replace("\t", "    ");
-    String _replace_1 = actual.replace("\t", "    ");
-    Assert.assertEquals(_replace, _replace_1);
+    Assert.assertEquals(expected.replace("\t", "    "), actual.replace("\t", "    "));
   }
   
   protected void testFormatting(final Procedure1<? super FormattingConfiguration> configurator) {
@@ -947,14 +844,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       DocumentFormattingParams _doubleArrow = ObjectExtensions.<DocumentFormattingParams>operator_doubleArrow(_documentFormattingParams, _function);
       final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.formatting(_doubleArrow);
       String _contents = fileInfo.getContents();
-      Document _document = new Document(1, _contents);
-      List<? extends TextEdit> _get = changes.get();
-      ArrayList<TextEdit> _newArrayList = CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(_get, TextEdit.class)));
-      List<TextEdit> _reverse = ListExtensions.<TextEdit>reverse(_newArrayList);
-      final Document result = _document.applyChanges(_reverse);
-      String _expectedText = configuration.getExpectedText();
-      String _contents_1 = result.getContents();
-      this.assertEquals(_expectedText, _contents_1);
+      final Document result = new Document(1, _contents).applyChanges(ListExtensions.<TextEdit>reverse(CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(changes.get(), TextEdit.class)))));
+      this.assertEquals(configuration.getExpectedText(), result.getContents());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -972,20 +863,13 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         String _uri = fileInfo.getUri();
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(_uri);
         it.setTextDocument(_textDocumentIdentifier);
-        Range _range = configuration.getRange();
-        it.setRange(_range);
+        it.setRange(configuration.getRange());
       };
       DocumentRangeFormattingParams _doubleArrow = ObjectExtensions.<DocumentRangeFormattingParams>operator_doubleArrow(_documentRangeFormattingParams, _function);
       final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.rangeFormatting(_doubleArrow);
       String _contents = fileInfo.getContents();
-      Document _document = new Document(1, _contents);
-      List<? extends TextEdit> _get = changes.get();
-      ArrayList<TextEdit> _newArrayList = CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(_get, TextEdit.class)));
-      List<TextEdit> _reverse = ListExtensions.<TextEdit>reverse(_newArrayList);
-      final Document result = _document.applyChanges(_reverse);
-      String _expectedText = configuration.getExpectedText();
-      String _contents_1 = result.getContents();
-      this.assertEquals(_expectedText, _contents_1);
+      final Document result = new Document(1, _contents).applyChanges(ListExtensions.<TextEdit>reverse(CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(changes.get(), TextEdit.class)))));
+      this.assertEquals(configuration.getExpectedText(), result.getContents());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1007,12 +891,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     final Function1<Pair<String, Object>, Object> _function = (Pair<String, Object> it) -> {
       return it.getValue();
     };
-    List<Object> _map = ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function);
-    Iterable<PublishDiagnosticsParams> _filter = Iterables.<PublishDiagnosticsParams>filter(_map, PublishDiagnosticsParams.class);
+    Iterable<PublishDiagnosticsParams> _filter = Iterables.<PublishDiagnosticsParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function), PublishDiagnosticsParams.class);
     for (final PublishDiagnosticsParams diagnostic : _filter) {
-      String _uri = diagnostic.getUri();
-      List<Diagnostic> _diagnostics = diagnostic.getDiagnostics();
-      result.put(_uri, _diagnostics);
+      result.put(diagnostic.getUri(), diagnostic.getDiagnostics());
     }
     return result;
   }
@@ -1021,15 +902,13 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     final Function1<Pair<String, Object>, Object> _function = (Pair<String, Object> it) -> {
       return it.getValue();
     };
-    List<Object> _map = ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function);
-    Iterable<ColoringParams> _filter = Iterables.<ColoringParams>filter(_map, ColoringParams.class);
     final Function1<ColoringParams, String> _function_1 = (ColoringParams it) -> {
       return it.getUri();
     };
     final Function1<ColoringParams, List<? extends ColoringInformation>> _function_2 = (ColoringParams it) -> {
       return it.getInfos();
     };
-    return IterableExtensions.<ColoringParams, String, List<? extends ColoringInformation>>toMap(_filter, _function_1, _function_2);
+    return IterableExtensions.<ColoringParams, String, List<? extends ColoringInformation>>toMap(Iterables.<ColoringParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function), ColoringParams.class), _function_1, _function_2);
   }
   
   protected String toExpectation(final Object it) {

@@ -52,8 +52,7 @@ public class WorkspaceManagerTest {
     _builder.append("}");
     _builder.newLine();
     final URI path = this.operator_mappedTo("MyType1.testlang", _builder);
-    List<URI> _emptyList = CollectionLiterals.<URI>emptyList();
-    this.workspaceManger.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(path)), _emptyList, null);
+    this.workspaceManger.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(path)), CollectionLiterals.<URI>emptyList(), null);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("type Test {");
     _builder_1.newLine();
@@ -67,8 +66,7 @@ public class WorkspaceManagerTest {
     final Function2<Document, XtextResource, String> _function = (Document $0, XtextResource $1) -> {
       return $0.getContents();
     };
-    String _doRead = this.workspaceManger.<String>doRead(path, _function);
-    Assert.assertEquals(inMemContents, _doRead);
+    Assert.assertEquals(inMemContents, this.workspaceManger.<String>doRead(path, _function));
   }
   
   @Inject
@@ -92,15 +90,10 @@ public class WorkspaceManagerTest {
         Files.cleanFolder(this.root, null, true, false);
       }
       this.root.deleteOnExit();
-      String _absolutePath = this.root.getAbsolutePath();
-      URI _createFileURI = URI.createFileURI(_absolutePath);
-      String _path = this.uriExtensions.toPath(_createFileURI);
-      URI _uri = this.uriExtensions.toUri(_path);
       final Procedure2<URI, Iterable<Issue>> _function = (URI $0, Iterable<Issue> $1) -> {
-        List<Issue> _list = IterableExtensions.<Issue>toList($1);
-        this.diagnostics.put($0, _list);
+        this.diagnostics.put($0, IterableExtensions.<Issue>toList($1));
       };
-      this.workspaceManger.initialize(_uri, _function, null);
+      this.workspaceManger.initialize(this.uriExtensions.toUri(this.uriExtensions.toPath(URI.createFileURI(this.root.getAbsolutePath()))), _function, null);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -113,8 +106,7 @@ public class WorkspaceManagerTest {
   public URI operator_mappedTo(final String path, final CharSequence contents) {
     try {
       final File file = new File(this.root, path);
-      File _parentFile = file.getParentFile();
-      _parentFile.mkdirs();
+      file.getParentFile().mkdirs();
       file.createNewFile();
       FileWriter _fileWriter = new FileWriter(file);
       final Procedure1<FileWriter> _function = (FileWriter it) -> {
@@ -126,8 +118,7 @@ public class WorkspaceManagerTest {
         }
       };
       ObjectExtensions.<FileWriter>operator_doubleArrow(_fileWriter, _function);
-      String _absolutePath = file.getAbsolutePath();
-      return URI.createFileURI(_absolutePath);
+      return URI.createFileURI(file.getAbsolutePath());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

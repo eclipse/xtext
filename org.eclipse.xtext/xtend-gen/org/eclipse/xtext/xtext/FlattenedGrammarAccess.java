@@ -104,17 +104,14 @@ public class FlattenedGrammarAccess {
       boolean _isDiscardTerminalRules = filter.isDiscardTerminalRules();
       boolean _not = (!_isDiscardTerminalRules);
       if (_not) {
-        List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(flattenedGrammar);
-        usedRules.addAll(_allTerminalRules);
+        usedRules.addAll(GrammarUtil.allTerminalRules(flattenedGrammar));
       }
       UsedRulesFinder finder = new UsedRulesFinder(usedRules);
       finder.compute(flattenedGrammar);
-      EList<AbstractRule> _rules_1 = flattenedGrammar.getRules();
-      _rules_1.retainAll(usedRules);
+      flattenedGrammar.getRules().retainAll(usedRules);
     }
     this.flattenedGrammar = flattenedGrammar;
-    OriginalGrammar _originalGrammar = new OriginalGrammar(grammar);
-    _originalGrammar.attachToEmfObject(flattenedGrammar);
+    new OriginalGrammar(grammar).attachToEmfObject(flattenedGrammar);
   }
   
   private void setHiddenTokens(final Grammar copy, final Grammar orig, final Map<RuleWithParameterValues, AbstractRule> origToCopy) {
@@ -124,45 +121,37 @@ public class FlattenedGrammarAccess {
       boolean _isDefinesHiddenTokens = orig.isDefinesHiddenTokens();
       boolean _not = (!_isDefinesHiddenTokens);
       if (_not) {
-        EList<Grammar> _usedGrammars = orig.getUsedGrammars();
-        Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
-        this.setHiddenTokens(copy, _head, origToCopy);
+        this.setHiddenTokens(copy, IterableExtensions.<Grammar>head(orig.getUsedGrammars()), origToCopy);
       } else {
         copy.setDefinesHiddenTokens(true);
         EList<AbstractRule> _hiddenTokens = copy.getHiddenTokens();
-        EList<AbstractRule> _hiddenTokens_1 = orig.getHiddenTokens();
         final Function1<AbstractRule, AbstractRule> _function = (AbstractRule hidden) -> {
           RuleWithParameterValues _ruleWithParameterValues = new RuleWithParameterValues(hidden);
           return origToCopy.get(_ruleWithParameterValues);
         };
-        List<AbstractRule> _map = ListExtensions.<AbstractRule, AbstractRule>map(_hiddenTokens_1, _function);
+        List<AbstractRule> _map = ListExtensions.<AbstractRule, AbstractRule>map(orig.getHiddenTokens(), _function);
         Iterables.<AbstractRule>addAll(_hiddenTokens, _map);
       }
     }
   }
   
   private void markAsFragment(final Multimap<TerminalRule, AbstractRule> calledFrom) {
-    Set<TerminalRule> _keySet = calledFrom.keySet();
     final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
       boolean _isFragment = it.isFragment();
       return Boolean.valueOf((!_isFragment));
     };
-    Iterable<TerminalRule> _filter = IterableExtensions.<TerminalRule>filter(_keySet, _function);
     final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
       return Boolean.valueOf(this.allAreTerminalRules(calledFrom.get(it)));
     };
-    Iterable<TerminalRule> _filter_1 = IterableExtensions.<TerminalRule>filter(_filter, _function_1);
     final Function1<TerminalRule, Boolean> _function_2 = (TerminalRule it) -> {
       EObject _eContainer = it.eContainer();
-      EList<AbstractRule> _hiddenTokens = ((Grammar) _eContainer).getHiddenTokens();
-      boolean _contains = _hiddenTokens.contains(it);
+      boolean _contains = ((Grammar) _eContainer).getHiddenTokens().contains(it);
       return Boolean.valueOf((!_contains));
     };
-    Iterable<TerminalRule> _filter_2 = IterableExtensions.<TerminalRule>filter(_filter_1, _function_2);
     final Consumer<TerminalRule> _function_3 = (TerminalRule it) -> {
       it.setFragment(true);
     };
-    _filter_2.forEach(_function_3);
+    IterableExtensions.<TerminalRule>filter(IterableExtensions.<TerminalRule>filter(IterableExtensions.<TerminalRule>filter(calledFrom.keySet(), _function), _function_1), _function_2).forEach(_function_3);
   }
   
   private Multimap<TerminalRule, AbstractRule> copyRuleBodies(final List<AbstractRule> copies, final Map<RuleWithParameterValues, AbstractRule> origToCopy) {
@@ -203,22 +192,17 @@ public class FlattenedGrammarAccess {
           }
           
           Set<Parameter> getParameterConfig(final RuleCall origRuleCall, final RuleCall copyRuleCall) {
-            EList<NamedArgument> _arguments = origRuleCall.getArguments();
-            boolean _isEmpty = _arguments.isEmpty();
+            boolean _isEmpty = origRuleCall.getArguments().isEmpty();
             if (_isEmpty) {
               return Collections.<Parameter>emptySet();
             }
-            EList<NamedArgument> _arguments_1 = origRuleCall.getArguments();
             final Function1<NamedArgument, Boolean> _function = (NamedArgument it) -> {
-              Condition _value = it.getValue();
-              return Boolean.valueOf(this.evaluate(_value));
+              return Boolean.valueOf(this.evaluate(it.getValue()));
             };
-            Iterable<NamedArgument> _filter = IterableExtensions.<NamedArgument>filter(_arguments_1, _function);
             final Function1<NamedArgument, Parameter> _function_1 = (NamedArgument it) -> {
               return it.getParameter();
             };
-            Iterable<Parameter> _map = IterableExtensions.<NamedArgument, Parameter>map(_filter, _function_1);
-            Set<Parameter> result = IterableExtensions.<Parameter>toSet(_map);
+            Set<Parameter> result = IterableExtensions.<Parameter>toSet(IterableExtensions.<NamedArgument, Parameter>map(IterableExtensions.<NamedArgument>filter(origRuleCall.getArguments(), _function), _function_1));
             return result;
           }
           
@@ -278,12 +262,10 @@ public class FlattenedGrammarAccess {
               EClass _eClass_1 = result.eClass();
               boolean _notEquals = (!Objects.equal(_eClass, _eClass_1));
               if (_notEquals) {
-                EClass _eClass_2 = result.eClass();
-                String _name = _eClass_2.getName();
+                String _name = result.eClass().getName();
                 String _plus = ("copy is: \'" + _name);
                 String _plus_1 = (_plus + "\' but original was: \'");
-                EClass _eClass_3 = ((AbstractElement)eObject).eClass();
-                String _name_1 = _eClass_3.getName();
+                String _name_1 = ((AbstractElement)eObject).eClass().getName();
                 String _plus_2 = (_plus_1 + _name_1);
                 String _plus_3 = (_plus_2 + "\'");
                 throw new IllegalStateException(_plus_3);
@@ -339,13 +321,11 @@ public class FlattenedGrammarAccess {
           }
           
           boolean evaluate(final Condition condition) {
-            ConditionEvaluator _conditionEvaluator = new ConditionEvaluator(paramValues);
-            boolean result = _conditionEvaluator.evaluate(condition);
+            boolean result = new ConditionEvaluator(paramValues).evaluate(condition);
             return result;
           }
         };
-        AbstractElement _alternatives = orig.getAlternatives();
-        EObject _copy = copier.copy(_alternatives);
+        EObject _copy = copier.copy(orig.getAlternatives());
         AbstractElement copiedBody = ((AbstractElement) _copy);
         copier.copyReferences();
         copy.setAlternatives(copiedBody);
@@ -401,8 +381,6 @@ public class FlattenedGrammarAccess {
             this.attachTo(copy, rule, origToCopy);
             result.add(copy);
           } else {
-            ImmutableSet<Parameter> _copyOf = ImmutableSet.<Parameter>copyOf(params);
-            Set<Set<Parameter>> _powerSet = Sets.<Parameter>powerSet(_copyOf);
             final Procedure2<Set<Parameter>, Integer> _function = (Set<Parameter> parameterConfig, Integer i) -> {
               RuleWithParameterValues parameterValues = new RuleWithParameterValues(rule, parameterConfig);
               ParserRule copy_1 = this.<ParserRule>copy(((ParserRule)rule));
@@ -416,7 +394,7 @@ public class FlattenedGrammarAccess {
               parameterValues.attachToEmfObject(copy_1);
               result.add(copy_1);
             };
-            IterableExtensions.<Set<Parameter>>forEach(_powerSet, _function);
+            IterableExtensions.<Set<Parameter>>forEach(Sets.<Parameter>powerSet(ImmutableSet.<Parameter>copyOf(params)), _function);
           }
         }
         if (!_matched) {
@@ -462,8 +440,7 @@ public class FlattenedGrammarAccess {
   }
   
   private <T extends EObject> T copy(final T t) {
-    EClass _eClass = t.eClass();
-    EObject _create = EcoreUtil.create(_eClass);
+    EObject _create = EcoreUtil.create(t.eClass());
     T result = ((T) _create);
     return result;
   }

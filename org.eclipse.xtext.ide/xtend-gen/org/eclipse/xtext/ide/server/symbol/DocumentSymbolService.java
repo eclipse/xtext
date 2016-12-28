@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +18,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.lsp4j.Location;
@@ -111,14 +109,11 @@ public class DocumentSymbolService {
     final ArrayList<Location> locations = CollectionLiterals.<Location>newArrayList();
     final TargetURIs targetURIs = this.collectTargetURIs(element);
     final IAcceptor<IReferenceDescription> _function = (IReferenceDescription reference) -> {
-      URI _sourceEObjectUri = reference.getSourceEObjectUri();
       final Procedure1<EObject> _function_1 = (EObject obj) -> {
-        EReference _eReference = reference.getEReference();
-        int _indexInList = reference.getIndexInList();
-        Location _newLocation = this._documentExtensions.newLocation(obj, _eReference, _indexInList);
+        Location _newLocation = this._documentExtensions.newLocation(obj, reference.getEReference(), reference.getIndexInList());
         locations.add(_newLocation);
       };
-      this.doRead(resourceAccess, _sourceEObjectUri, _function_1);
+      this.doRead(resourceAccess, reference.getSourceEObjectUri(), _function_1);
     };
     ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(this.resourceServiceProviderRegistry, _function);
     CancelIndicatorProgressMonitor _cancelIndicatorProgressMonitor = new CancelIndicatorProgressMonitor(cancelIndicator);
@@ -153,8 +148,7 @@ public class DocumentSymbolService {
         }
       }
     }
-    Collection<SymbolInformation> _values = symbols.values();
-    return IterableExtensions.<SymbolInformation>toList(_values);
+    return IterableExtensions.<SymbolInformation>toList(symbols.values());
   }
   
   protected EObject getContainer(final EObject obj) {
@@ -168,21 +162,17 @@ public class DocumentSymbolService {
     }
     final SymbolInformation symbol = new SymbolInformation();
     symbol.setName(symbolName);
-    SymbolKind _symbolKind = this.getSymbolKind(object);
-    symbol.setKind(_symbolKind);
-    Location _newLocation = this._documentExtensions.newLocation(object);
-    symbol.setLocation(_newLocation);
+    symbol.setKind(this.getSymbolKind(object));
+    symbol.setLocation(this._documentExtensions.newLocation(object));
     return symbol;
   }
   
   protected String getSymbolName(final EObject object) {
-    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(object);
-    return this.getSymbolName(_fullyQualifiedName);
+    return this.getSymbolName(this._iQualifiedNameProvider.getFullyQualifiedName(object));
   }
   
   protected SymbolKind getSymbolKind(final EObject object) {
-    EClass _eClass = object.eClass();
-    return this.getSymbolKind(_eClass);
+    return this.getSymbolKind(object.eClass());
   }
   
   public List<? extends SymbolInformation> getSymbols(final IResourceDescription resourceDescription, final String query, final IReferenceFinder.IResourceAccess resourceAccess, final CancelIndicator cancelIndicator) {
@@ -196,12 +186,10 @@ public class DocumentSymbolService {
           final SymbolInformation symbol = this.createSymbol(description);
           if ((symbol != null)) {
             symbols.add(symbol);
-            URI _eObjectURI = description.getEObjectURI();
             final Procedure1<EObject> _function = (EObject obj) -> {
-              Location _newLocation = this._documentExtensions.newLocation(obj);
-              symbol.setLocation(_newLocation);
+              symbol.setLocation(this._documentExtensions.newLocation(obj));
             };
-            this.doRead(resourceAccess, _eObjectURI, _function);
+            this.doRead(resourceAccess, description.getEObjectURI(), _function);
           }
         }
       }
@@ -210,11 +198,7 @@ public class DocumentSymbolService {
   }
   
   protected boolean filter(final IEObjectDescription description, final String query) {
-    QualifiedName _qualifiedName = description.getQualifiedName();
-    QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-    String _string = _lowerCase.toString();
-    String _lowerCase_1 = query.toLowerCase();
-    return _string.contains(_lowerCase_1);
+    return description.getQualifiedName().toLowerCase().toString().contains(query.toLowerCase());
   }
   
   protected SymbolInformation createSymbol(final IEObjectDescription description) {
@@ -224,19 +208,16 @@ public class DocumentSymbolService {
     }
     final SymbolInformation symbol = new SymbolInformation();
     symbol.setName(symbolName);
-    SymbolKind _symbolKind = this.getSymbolKind(description);
-    symbol.setKind(_symbolKind);
+    symbol.setKind(this.getSymbolKind(description));
     return symbol;
   }
   
   protected String getSymbolName(final IEObjectDescription description) {
-    QualifiedName _qualifiedName = description.getQualifiedName();
-    return this.getSymbolName(_qualifiedName);
+    return this.getSymbolName(description.getQualifiedName());
   }
   
   protected SymbolKind getSymbolKind(final IEObjectDescription description) {
-    EClass _eClass = description.getEClass();
-    return this.getSymbolKind(_eClass);
+    return this.getSymbolKind(description.getEClass());
   }
   
   protected String getSymbolName(final QualifiedName qualifiedName) {

@@ -68,7 +68,6 @@ public class EMFGeneratorFragment2Test {
   }
   
   public void assertTrim(final String expected, final String original) {
-    String _trimMultiLineComment = EMFGeneratorFragment2.trimMultiLineComment(original);
-    Assert.assertEquals(expected, _trimMultiLineComment);
+    Assert.assertEquals(expected, EMFGeneratorFragment2.trimMultiLineComment(original));
   }
 }

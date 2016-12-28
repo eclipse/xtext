@@ -17,14 +17,11 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.serializer.ISerializationContext;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias;
 import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
 import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
-import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
 import org.eclipse.xtext.util.GraphvizDotBuilder;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaToDot;
@@ -84,82 +81,70 @@ public class DebugGraphGenerator {
     final String dir_context_type = this.directory("context_type");
     final String dir_syntactic_sequencer = this.directory("syntactic_sequencer");
     final String dir_semantic_sequencer = this.directory("semantic_sequencer");
-    SerializationContextMap<Pda<ISerState, RuleCall>> _contextPDAs = this.contextPDAProvider.getContextPDAs(this.grammar);
-    List<NamedSerializationContexts<Pda<ISerState, RuleCall>>> _namedContexts = names.<Pda<ISerState, RuleCall>>getNamedContexts(_contextPDAs);
+    List<NamedSerializationContexts<Pda<ISerState, RuleCall>>> _namedContexts = names.<Pda<ISerState, RuleCall>>getNamedContexts(this.contextPDAProvider.getContextPDAs(this.grammar));
     for (final NamedSerializationContexts<Pda<ISerState, RuleCall>> e : _namedContexts) {
       {
         String _name = e.getName();
         String _plus = (dir_context + _name);
         String _plus_1 = (_plus + ".dot");
-        Pda<ISerState, RuleCall> _value = e.getValue();
-        String _drawSafe = this.drawSafe(this.pdaToDot, _value);
+        String _drawSafe = this.drawSafe(this.pdaToDot, e.getValue());
         Pair<String, String> _mappedTo = Pair.<String, String>of(_plus_1, _drawSafe);
         result.add(_mappedTo);
         String _name_1 = e.getName();
         String _plus_2 = (dir_context + _name_1);
         String _plus_3 = (_plus_2 + ".txt");
-        List<ISerializationContext> _contexts = e.getContexts();
-        String _join = IterableExtensions.join(_contexts, "\n");
+        String _join = IterableExtensions.join(e.getContexts(), "\n");
         Pair<String, String> _mappedTo_1 = Pair.<String, String>of(_plus_3, _join);
         result.add(_mappedTo_1);
       }
     }
-    SerializationContextMap<Pda<ISerState, RuleCall>> _contextTypePDAs = this.contextTypePDAProvider.getContextTypePDAs(this.grammar);
-    List<NamedSerializationContexts<Pda<ISerState, RuleCall>>> _namedContexts_1 = names.<Pda<ISerState, RuleCall>>getNamedContexts(_contextTypePDAs);
+    List<NamedSerializationContexts<Pda<ISerState, RuleCall>>> _namedContexts_1 = names.<Pda<ISerState, RuleCall>>getNamedContexts(this.contextTypePDAProvider.getContextTypePDAs(this.grammar));
     for (final NamedSerializationContexts<Pda<ISerState, RuleCall>> e_1 : _namedContexts_1) {
       {
         String _name = e_1.getName();
         String _plus = (dir_context_type + _name);
         String _plus_1 = (_plus + ".dot");
-        Pda<ISerState, RuleCall> _value = e_1.getValue();
-        String _drawSafe = this.drawSafe(this.pdaToDot, _value);
+        String _drawSafe = this.drawSafe(this.pdaToDot, e_1.getValue());
         Pair<String, String> _mappedTo = Pair.<String, String>of(_plus_1, _drawSafe);
         result.add(_mappedTo);
         String _name_1 = e_1.getName();
         String _plus_2 = (dir_context_type + _name_1);
         String _plus_3 = (_plus_2 + ".txt");
-        List<ISerializationContext> _contexts = e_1.getContexts();
-        String _join = IterableExtensions.join(_contexts, "\n");
+        String _join = IterableExtensions.join(e_1.getContexts(), "\n");
         Pair<String, String> _mappedTo_1 = Pair.<String, String>of(_plus_3, _join);
         result.add(_mappedTo_1);
       }
     }
-    SerializationContextMap<ISyntacticSequencerPDAProvider.ISynAbsorberState> _syntacticSequencerPDAs = this.syntacticSequencerPDAProvider.getSyntacticSequencerPDAs(this.grammar);
-    List<NamedSerializationContexts<ISyntacticSequencerPDAProvider.ISynAbsorberState>> _namedContexts_2 = names.<ISyntacticSequencerPDAProvider.ISynAbsorberState>getNamedContexts(_syntacticSequencerPDAs);
+    List<NamedSerializationContexts<ISyntacticSequencerPDAProvider.ISynAbsorberState>> _namedContexts_2 = names.<ISyntacticSequencerPDAProvider.ISynAbsorberState>getNamedContexts(this.syntacticSequencerPDAProvider.getSyntacticSequencerPDAs(this.grammar));
     for (final NamedSerializationContexts<ISyntacticSequencerPDAProvider.ISynAbsorberState> e_2 : _namedContexts_2) {
       {
         String _name = e_2.getName();
         String _plus = (dir_syntactic_sequencer + _name);
         String _plus_1 = (_plus + ".dot");
-        ISyntacticSequencerPDAProvider.ISynAbsorberState _value = e_2.getValue();
-        String _drawSafe = this.drawSafe(this.syntacticSequencerPDA2Dot, _value);
+        String _drawSafe = this.drawSafe(this.syntacticSequencerPDA2Dot, e_2.getValue());
         Pair<String, String> _mappedTo = Pair.<String, String>of(_plus_1, _drawSafe);
         result.add(_mappedTo);
         String _name_1 = e_2.getName();
         String _plus_2 = (dir_syntactic_sequencer + _name_1);
         String _plus_3 = (_plus_2 + ".txt");
-        List<ISerializationContext> _contexts = e_2.getContexts();
-        String _join = IterableExtensions.join(_contexts, "\n");
+        String _join = IterableExtensions.join(e_2.getContexts(), "\n");
         Pair<String, String> _mappedTo_1 = Pair.<String, String>of(_plus_3, _join);
         result.add(_mappedTo_1);
       }
     }
-    SerializationContextMap<Nfa<ISemanticSequencerNfaProvider.ISemState>> _semanticSequencerNFAs = this.semanticSequencerNFAProvider.getSemanticSequencerNFAs(this.grammar);
-    List<NamedSerializationContexts<Nfa<ISemanticSequencerNfaProvider.ISemState>>> _namedContexts_3 = names.<Nfa<ISemanticSequencerNfaProvider.ISemState>>getNamedContexts(_semanticSequencerNFAs);
+    List<NamedSerializationContexts<Nfa<ISemanticSequencerNfaProvider.ISemState>>> _namedContexts_3 = names.<Nfa<ISemanticSequencerNfaProvider.ISemState>>getNamedContexts(this.semanticSequencerNFAProvider.getSemanticSequencerNFAs(this.grammar));
     for (final NamedSerializationContexts<Nfa<ISemanticSequencerNfaProvider.ISemState>> e_3 : _namedContexts_3) {
       {
         String _name = e_3.getName();
         String _plus = (dir_semantic_sequencer + _name);
         String _plus_1 = (_plus + ".dot");
-        Nfa<ISemanticSequencerNfaProvider.ISemState> _value = e_3.getValue();
-        String _drawSafe = this.drawSafe(this.nfaToDot, _value);
+        String _drawSafe = this.drawSafe(this.nfaToDot, e_3.getValue());
         Pair<String, String> _mappedTo = Pair.<String, String>of(_plus_1, _drawSafe);
         result.add(_mappedTo);
         String _name_1 = e_3.getName();
         String _plus_2 = (dir_semantic_sequencer + _name_1);
         String _plus_3 = (_plus_2 + ".txt");
-        List<ISerializationContext> _contexts = e_3.getContexts();
-        String _join = IterableExtensions.join(_contexts, "\n");
+        String _join = IterableExtensions.join(e_3.getContexts(), "\n");
         Pair<String, String> _mappedTo_1 = Pair.<String, String>of(_plus_3, _join);
         result.add(_mappedTo_1);
       }
@@ -174,8 +159,7 @@ public class DebugGraphGenerator {
           String _directory = this.directory("syntactic_sequencer");
           String _plus = (_directory + name);
           String _plus_1 = (_plus + ".dot");
-          Nfa<ISyntacticSequencerPDAProvider.ISynState> _ambiguousNfa = transition.getAmbiguousNfa();
-          String _draw = this.nfaToDot.draw(_ambiguousNfa);
+          String _draw = this.nfaToDot.draw(transition.getAmbiguousNfa());
           Pair<String, String> _mappedTo = Pair.<String, String>of(_plus_1, _draw);
           result.add(_mappedTo);
           trans2id.put(transition, name);
@@ -194,9 +178,7 @@ public class DebugGraphGenerator {
         _builder.append("Ambiguous syntax:»:");
         _builder.newLine();
         _builder.append("        ");
-        GrammarAlias.AbstractElementAlias _elementAlias = group.getElementAlias();
-        String _string = _elementAlias.toString();
-        String _replace = _string.replace("\n", "\n        ");
+        String _replace = group.getElementAlias().toString().replace("\n", "\n        ");
         _builder.append(_replace, "        ");
         _builder.newLineIfNotEmpty();
         _builder.append("    ");
@@ -212,8 +194,7 @@ public class DebugGraphGenerator {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("    ");
-            String _ambiguityInsideTransition = group.ambiguityInsideTransition(trans);
-            String _replace_1 = _ambiguityInsideTransition.replace("\n", "\n        ");
+            String _replace_1 = group.ambiguityInsideTransition(trans).replace("\n", "\n        ");
             _builder.append(_replace_1, "\t    ");
             _builder.newLineIfNotEmpty();
           }
@@ -225,8 +206,8 @@ public class DebugGraphGenerator {
       }
       String _directory = this.directory("syntactic_sequencer");
       String _plus = (_directory + "ambiguities.txt");
-      String _string_1 = ambiguities.toString();
-      Pair<String, String> _mappedTo = Pair.<String, String>of(_plus, _string_1);
+      String _string = ambiguities.toString();
+      Pair<String, String> _mappedTo = Pair.<String, String>of(_plus, _string);
       result.add(_mappedTo);
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
@@ -257,11 +238,9 @@ public class DebugGraphGenerator {
   }
   
   private String directory(final String name) {
-    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(this.grammar);
-    String _replace = _runtimeBasePackage.replace(".", "/");
+    String _replace = this._xtextGeneratorNaming.getRuntimeBasePackage(this.grammar).replace(".", "/");
     String _plus = (_replace + "/serializer/");
-    String _simpleName = GrammarUtil.getSimpleName(this.grammar);
-    String _lowerCase = _simpleName.toLowerCase();
+    String _lowerCase = GrammarUtil.getSimpleName(this.grammar).toLowerCase();
     String _plus_1 = (_plus + _lowerCase);
     String _plus_2 = (_plus_1 + 
       "_");

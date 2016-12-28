@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -45,8 +44,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
     final Function1<Outlet, String> _function = (Outlet it) -> {
       return this.sourceFolder(it);
     };
-    List<String> _map = ListExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.TEST_JAVA, Outlet.TEST_RESOURCES, Outlet.TEST_SRC_GEN, Outlet.TEST_XTEND_GEN)), _function);
-    return IterableExtensions.<String>toSet(_map);
+    return IterableExtensions.<String>toSet(ListExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.TEST_JAVA, Outlet.TEST_RESOURCES, Outlet.TEST_SRC_GEN, Outlet.TEST_XTEND_GEN)), _function));
   }
   
   public boolean isInlined() {

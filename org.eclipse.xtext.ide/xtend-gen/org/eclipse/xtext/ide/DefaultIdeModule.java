@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ide;
 
 import com.google.inject.Binder;
-import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.util.concurrent.ExecutorService;
 import org.eclipse.xtext.ide.ExecutorServiceProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
@@ -19,7 +18,6 @@ import org.eclipse.xtext.service.AbstractGenericModule;
 @SuppressWarnings("all")
 public class DefaultIdeModule extends AbstractGenericModule {
   public void configureExecutorService(final Binder binder) {
-    AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
-    _bind.toProvider(ExecutorServiceProvider.class);
+    binder.<ExecutorService>bind(ExecutorService.class).toProvider(ExecutorServiceProvider.class);
   }
 }

@@ -34,11 +34,9 @@ public abstract class TestedProjectDescriptor extends ProjectDescriptor {
       final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
       Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
       Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
-      TestProjectDescriptor _testProject = this.getTestProject();
-      boolean _isInlined = _testProject.isInlined();
+      boolean _isInlined = this.getTestProject().isInlined();
       if (_isInlined) {
-        TestProjectDescriptor _testProject_1 = this.getTestProject();
-        Set<ExternalDependency> _externalDependencies_1 = _testProject_1.getExternalDependencies();
+        Set<ExternalDependency> _externalDependencies_1 = this.getTestProject().getExternalDependencies();
         Iterables.<ExternalDependency>addAll(deps, _externalDependencies_1);
       }
       _xblockexpression = deps;
@@ -53,11 +51,9 @@ public abstract class TestedProjectDescriptor extends ProjectDescriptor {
       final LinkedHashSet<String> sourceFolders = CollectionLiterals.<String>newLinkedHashSet();
       Set<String> _sourceFolders = super.getSourceFolders();
       Iterables.<String>addAll(sourceFolders, _sourceFolders);
-      TestProjectDescriptor _testProject = this.getTestProject();
-      boolean _isInlined = _testProject.isInlined();
+      boolean _isInlined = this.getTestProject().isInlined();
       if (_isInlined) {
-        TestProjectDescriptor _testProject_1 = this.getTestProject();
-        Set<String> _sourceFolders_1 = _testProject_1.getSourceFolders();
+        Set<String> _sourceFolders_1 = this.getTestProject().getSourceFolders();
         Iterables.<String>addAll(sourceFolders, _sourceFolders_1);
       }
       _xblockexpression = sourceFolders;
@@ -72,11 +68,8 @@ public abstract class TestedProjectDescriptor extends ProjectDescriptor {
       final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
       Iterable<? extends AbstractFile> _files = super.getFiles();
       Iterables.<AbstractFile>addAll(files, _files);
-      TestProjectDescriptor _testProject = this.getTestProject();
-      boolean _isInlined = _testProject.isInlined();
+      boolean _isInlined = this.getTestProject().isInlined();
       if (_isInlined) {
-        TestProjectDescriptor _testProject_1 = this.getTestProject();
-        Iterable<? extends AbstractFile> _files_1 = _testProject_1.getFiles();
         final Function1<AbstractFile, Boolean> _function = (AbstractFile fileFromTestProject) -> {
           final Function1<AbstractFile, Boolean> _function_1 = (AbstractFile it) -> {
             String _relativePath = it.getRelativePath();
@@ -86,7 +79,7 @@ public abstract class TestedProjectDescriptor extends ProjectDescriptor {
           boolean _exists = IterableExtensions.<AbstractFile>exists(files, _function_1);
           return Boolean.valueOf((!_exists));
         };
-        Iterable<? extends AbstractFile> _filter = IterableExtensions.filter(_files_1, _function);
+        Iterable<? extends AbstractFile> _filter = IterableExtensions.filter(this.getTestProject().getFiles(), _function);
         Iterables.<AbstractFile>addAll(files, _filter);
       }
       _xblockexpression = files;

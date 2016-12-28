@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -40,18 +38,13 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
-import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
 /**
@@ -90,8 +83,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
   protected TypeReference getGenProposalProviderSuperClass(final Grammar g) {
     TypeReference _xblockexpression = null;
     {
-      EList<Grammar> _usedGrammars = g.getUsedGrammars();
-      final Grammar superGrammar = IterableExtensions.<Grammar>head(_usedGrammars);
+      final Grammar superGrammar = IterableExtensions.<Grammar>head(g.getUsedGrammars());
       TypeReference _xifexpression = null;
       if ((this.isInheritImplementation() && (superGrammar != null))) {
         _xifexpression = this.getProposalProviderClass(superGrammar);
@@ -112,28 +104,17 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
   
   @Override
   public void generate() {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    ManifestAccess _manifest = _eclipsePlugin.getManifest();
+    ManifestAccess _manifest = this.getProjectConfig().getEclipsePlugin().getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
-      ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
-      Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
+      Set<String> _requiredBundles = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
       _requiredBundles.add("org.eclipse.xtext.ui");
     }
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeReference = new TypeReference("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider");
-    Grammar _grammar = this.getGrammar();
-    TypeReference _proposalProviderClass = this.getProposalProviderClass(_grammar);
-    GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeReference, _proposalProviderClass);
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
-    _addTypeToType.contributeTo(_eclipsePluginGenModule);
-    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin_2.getSrcGen();
+    _bindingFactory.addTypeToType(_typeReference, 
+      this.getProposalProviderClass(this.getGrammar())).contributeTo(this.getLanguage().getEclipsePluginGenModule());
+    IXtextGeneratorFileSystemAccess _srcGen = this.getProjectConfig().getEclipsePlugin().getSrcGen();
     boolean _tripleNotEquals_1 = (_srcGen != null);
     if (_tripleNotEquals_1) {
       this.generateGenJavaProposalProvider();
@@ -142,45 +123,29 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
       if (_isGenerateXtendStub) {
         this.generateXtendProposalProviderStub();
-        IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-        IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
-        ManifestAccess _manifest_2 = _eclipsePlugin_3.getManifest();
-        boolean _tripleNotEquals_2 = (_manifest_2 != null);
+        ManifestAccess _manifest_1 = this.getProjectConfig().getEclipsePlugin().getManifest();
+        boolean _tripleNotEquals_2 = (_manifest_1 != null);
         if (_tripleNotEquals_2) {
-          IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-          IBundleProjectConfig _eclipsePlugin_4 = _projectConfig_4.getEclipsePlugin();
-          ManifestAccess _manifest_3 = _eclipsePlugin_4.getManifest();
-          Set<String> _requiredBundles_1 = _manifest_3.getRequiredBundles();
+          Set<String> _requiredBundles_1 = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
           _requiredBundles_1.add("org.eclipse.xtext.xbase.lib");
-          IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-          IBundleProjectConfig _eclipsePlugin_5 = _projectConfig_5.getEclipsePlugin();
-          ManifestAccess _manifest_4 = _eclipsePlugin_5.getManifest();
-          Set<String> _requiredBundles_2 = _manifest_4.getRequiredBundles();
+          Set<String> _requiredBundles_2 = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
           _requiredBundles_2.add("org.eclipse.xtend.lib;resolution:=optional");
         }
       } else {
         this.generateJavaProposalProviderStub();
       }
     }
-    IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin_6 = _projectConfig_6.getEclipsePlugin();
-    ManifestAccess _manifest_5 = _eclipsePlugin_6.getManifest();
-    boolean _tripleNotEquals_3 = (_manifest_5 != null);
+    ManifestAccess _manifest_2 = this.getProjectConfig().getEclipsePlugin().getManifest();
+    boolean _tripleNotEquals_3 = (_manifest_2 != null);
     if (_tripleNotEquals_3) {
-      IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_7 = _projectConfig_7.getEclipsePlugin();
-      ManifestAccess _manifest_6 = _eclipsePlugin_7.getManifest();
-      Set<String> _exportedPackages = _manifest_6.getExportedPackages();
-      Grammar _grammar_1 = this.getGrammar();
-      TypeReference _proposalProviderClass_1 = this.getProposalProviderClass(_grammar_1);
-      String _packageName = _proposalProviderClass_1.getPackageName();
+      Set<String> _exportedPackages = this.getProjectConfig().getEclipsePlugin().getManifest().getExportedPackages();
+      String _packageName = this.getProposalProviderClass(this.getGrammar()).getPackageName();
       _exportedPackages.add(_packageName);
     }
   }
   
   public void generateXtendProposalProviderStub() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _proposalProviderClass = this.getProposalProviderClass(_grammar);
+    TypeReference _proposalProviderClass = this.getProposalProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -196,13 +161,10 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         _builder.append("*/");
         _builder.newLine();
         _builder.append("class ");
-        Grammar _grammar = ContentAssistFragment2.this.getGrammar();
-        TypeReference _proposalProviderClass = ContentAssistFragment2.this.getProposalProviderClass(_grammar);
-        String _simpleName = _proposalProviderClass.getSimpleName();
+        String _simpleName = ContentAssistFragment2.this.getProposalProviderClass(ContentAssistFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar_1 = ContentAssistFragment2.this.getGrammar();
-        TypeReference _genProposalProviderClass = ContentAssistFragment2.this.getGenProposalProviderClass(_grammar_1);
+        TypeReference _genProposalProviderClass = ContentAssistFragment2.this.getGenProposalProviderClass(ContentAssistFragment2.this.getGrammar());
         _builder.append(_genProposalProviderClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -210,16 +172,11 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         _builder.newLine();
       }
     };
-    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_proposalProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
-    _createXtendFile.writeTo(_src);
+    this.fileAccessFactory.createXtendFile(_proposalProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
   
   protected void generateJavaProposalProviderStub() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _proposalProviderClass = this.getProposalProviderClass(_grammar);
+    TypeReference _proposalProviderClass = this.getProposalProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -235,13 +192,10 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         _builder.append("*/");
         _builder.newLine();
         _builder.append("public class ");
-        Grammar _grammar = ContentAssistFragment2.this.getGrammar();
-        TypeReference _proposalProviderClass = ContentAssistFragment2.this.getProposalProviderClass(_grammar);
-        String _simpleName = _proposalProviderClass.getSimpleName();
+        String _simpleName = ContentAssistFragment2.this.getProposalProviderClass(ContentAssistFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar_1 = ContentAssistFragment2.this.getGrammar();
-        TypeReference _genProposalProviderClass = ContentAssistFragment2.this.getGenProposalProviderClass(_grammar_1);
+        TypeReference _genProposalProviderClass = ContentAssistFragment2.this.getGenProposalProviderClass(ContentAssistFragment2.this.getGrammar());
         _builder.append(_genProposalProviderClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -249,22 +203,14 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         _builder.newLine();
       }
     };
-    JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_proposalProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
-    _createJavaFile.writeTo(_src);
+    this.fileAccessFactory.createJavaFile(_proposalProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
   
   protected GeneratedJavaFileAccess generateGenJavaProposalProvider() {
     GeneratedJavaFileAccess _xblockexpression = null;
     {
-      Grammar _grammar = this.getGrammar();
-      final Set<String> excludedFqnFeatureNames = this.getFQFeatureNamesToExclude(_grammar);
+      final Set<String> excludedFqnFeatureNames = this.getFQFeatureNamesToExclude(this.getGrammar());
       final HashSet<String> processedNames = CollectionLiterals.<String>newHashSet();
-      Grammar _grammar_1 = this.getGrammar();
-      List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(_grammar_1);
-      ArrayList<Assignment> _newArrayList = CollectionLiterals.<Assignment>newArrayList();
       final Function2<ArrayList<Assignment>, Assignment, ArrayList<Assignment>> _function = (ArrayList<Assignment> candidates, Assignment assignment) -> {
         ArrayList<Assignment> _xblockexpression_1 = null;
         {
@@ -277,10 +223,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         }
         return _xblockexpression_1;
       };
-      final ArrayList<Assignment> assignments = IterableExtensions.<Assignment, ArrayList<Assignment>>fold(_containedAssignments, _newArrayList, _function);
-      Grammar _grammar_2 = this.getGrammar();
-      EList<AbstractRule> _rules = _grammar_2.getRules();
-      ArrayList<AbstractRule> _newArrayList_1 = CollectionLiterals.<AbstractRule>newArrayList();
+      final ArrayList<Assignment> assignments = IterableExtensions.<Assignment, ArrayList<Assignment>>fold(GrammarUtil.containedAssignments(this.getGrammar()), CollectionLiterals.<Assignment>newArrayList(), _function);
       final Function2<ArrayList<AbstractRule>, AbstractRule, ArrayList<AbstractRule>> _function_1 = (ArrayList<AbstractRule> candidates, AbstractRule rule) -> {
         ArrayList<AbstractRule> _xblockexpression_1 = null;
         {
@@ -293,21 +236,18 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         }
         return _xblockexpression_1;
       };
-      final ArrayList<AbstractRule> remainingRules = IterableExtensions.<AbstractRule, ArrayList<AbstractRule>>fold(_rules, _newArrayList_1, _function_1);
+      final ArrayList<AbstractRule> remainingRules = IterableExtensions.<AbstractRule, ArrayList<AbstractRule>>fold(this.getGrammar().getRules(), CollectionLiterals.<AbstractRule>newArrayList(), _function_1);
       TypeReference _xifexpression = null;
       boolean _isGenerateStub = this.isGenerateStub();
       if (_isGenerateStub) {
-        Grammar _grammar_3 = this.getGrammar();
-        _xifexpression = this.getGenProposalProviderClass(_grammar_3);
+        _xifexpression = this.getGenProposalProviderClass(this.getGrammar());
       } else {
-        Grammar _grammar_4 = this.getGrammar();
-        _xifexpression = this.getProposalProviderClass(_grammar_4);
+        _xifexpression = this.getProposalProviderClass(this.getGrammar());
       }
       final TypeReference genClass = _xifexpression;
       GeneratedJavaFileAccess _createGeneratedJavaFile = this.fileAccessFactory.createGeneratedJavaFile(genClass);
       final Procedure1<GeneratedJavaFileAccess> _function_2 = (GeneratedJavaFileAccess it) -> {
-        Grammar _grammar_5 = this.getGrammar();
-        final TypeReference superClass = this.getGenProposalProviderSuperClass(_grammar_5);
+        final TypeReference superClass = this.getGenProposalProviderSuperClass(this.getGrammar());
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -405,24 +345,19 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
   private StringConcatenationClient handleAssignment(final Assignment assignment) {
     StringConcatenationClient _xblockexpression = null;
     {
-      ParserRule _containingParserRule = GrammarUtil.containingParserRule(assignment);
-      List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(_containingParserRule);
       final Function1<Assignment, Boolean> _function = (Assignment it) -> {
         String _feature = it.getFeature();
         String _feature_1 = assignment.getFeature();
         return Boolean.valueOf(Objects.equal(_feature, _feature_1));
       };
-      Iterable<Assignment> _filter = IterableExtensions.<Assignment>filter(_containedAssignments, _function);
       final Function1<Assignment, AbstractElement> _function_1 = (Assignment it) -> {
         return it.getTerminal();
       };
-      Iterable<AbstractElement> _map = IterableExtensions.<Assignment, AbstractElement>map(_filter, _function_1);
-      final List<AbstractElement> terminals = IterableExtensions.<AbstractElement>toList(_map);
+      final List<AbstractElement> terminals = IterableExtensions.<AbstractElement>toList(IterableExtensions.<Assignment, AbstractElement>map(IterableExtensions.<Assignment>filter(GrammarUtil.containedAssignments(GrammarUtil.containingParserRule(assignment)), _function), _function_1));
       final Function1<AbstractElement, EClass> _function_2 = (AbstractElement it) -> {
         return it.eClass();
       };
-      List<EClass> _map_1 = ListExtensions.<AbstractElement, EClass>map(terminals, _function_2);
-      final Set<EClass> terminalTypes = IterableExtensions.<EClass>toSet(_map_1);
+      final Set<EClass> terminalTypes = IterableExtensions.<EClass>toSet(ListExtensions.<AbstractElement, EClass>map(terminals, _function_2));
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -476,31 +411,28 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     StringConcatenationClient _xblockexpression = null;
     {
       final HashSet<EClass> processedTerminals = CollectionLiterals.<EClass>newHashSet();
-      ArrayList<AbstractElement> _newArrayList = CollectionLiterals.<AbstractElement>newArrayList();
       final Function2<ArrayList<AbstractElement>, AbstractElement, ArrayList<AbstractElement>> _function = (ArrayList<AbstractElement> candidates, AbstractElement terminal) -> {
         ArrayList<AbstractElement> _xblockexpression_1 = null;
         {
-          EClass _eClass = terminal.eClass();
-          boolean _contains = processedTerminals.contains(_eClass);
+          boolean _contains = processedTerminals.contains(terminal.eClass());
           boolean _not = (!_contains);
           if (_not) {
-            EClass _eClass_1 = terminal.eClass();
-            processedTerminals.add(_eClass_1);
+            EClass _eClass = terminal.eClass();
+            processedTerminals.add(_eClass);
             candidates.add(terminal);
           }
           _xblockexpression_1 = candidates;
         }
         return _xblockexpression_1;
       };
-      final ArrayList<AbstractElement> candidates = IterableExtensions.<AbstractElement, ArrayList<AbstractElement>>fold(terminals, _newArrayList, _function);
+      final ArrayList<AbstractElement> candidates = IterableExtensions.<AbstractElement, ArrayList<AbstractElement>>fold(terminals, CollectionLiterals.<AbstractElement>newArrayList(), _function);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           {
             for(final AbstractElement terminal : candidates) {
               _builder.append("if (assignment.getTerminal() instanceof ");
-              EClass _eClass = terminal.eClass();
-              Class<?> _instanceClass = _eClass.getInstanceClass();
+              Class<?> _instanceClass = terminal.eClass().getInstanceClass();
               _builder.append(_instanceClass);
               _builder.append(") {");
               _builder.newLineIfNotEmpty();
@@ -571,10 +503,8 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         {
-          EList<AbstractElement> _elements = alternatives.getElements();
-          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(_elements);
+          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(alternatives.getElements());
           for(final Pair<Integer, AbstractElement> pair : _indexed) {
-            AbstractElement _value = pair.getValue();
             StringConcatenationClient _client = new StringConcatenationClient() {
               @Override
               protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -588,7 +518,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
                 _builder.append(")");
               }
             };
-            StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(_value, _client);
+            StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(pair.getValue(), _client);
             _builder.append(_assignmentTerminal);
             _builder.newLineIfNotEmpty();
           }
@@ -612,26 +542,21 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
   }
   
   private String getFQFeatureName(final Assignment a) {
-    ParserRule _containingParserRule = GrammarUtil.containingParserRule(a);
-    String _name = _containingParserRule.getName();
-    String _firstUpper = StringExtensions.toFirstUpper(_name);
+    String _firstUpper = StringExtensions.toFirstUpper(GrammarUtil.containingParserRule(a).getName());
     String _plus = (_firstUpper + "_");
-    String _feature = a.getFeature();
-    String _firstUpper_1 = StringExtensions.toFirstUpper(_feature);
+    String _firstUpper_1 = StringExtensions.toFirstUpper(a.getFeature());
     return (_plus + _firstUpper_1);
   }
   
   private Iterable<String> computeFQFeatureNames(final Grammar g) {
-    List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(g);
     final Function1<Assignment, String> _function = (Assignment it) -> {
       return this.getFQFeatureName(it);
     };
-    List<String> _map = ListExtensions.<Assignment, String>map(_containedAssignments, _function);
-    EList<AbstractRule> _rules = g.getRules();
+    List<String> _map = ListExtensions.<Assignment, String>map(GrammarUtil.containedAssignments(g), _function);
     final Function1<AbstractRule, String> _function_1 = (AbstractRule it) -> {
       return this.getFQFeatureName(it);
     };
-    List<String> _map_1 = ListExtensions.<AbstractRule, String>map(_rules, _function_1);
+    List<String> _map_1 = ListExtensions.<AbstractRule, String>map(g.getRules(), _function_1);
     return Iterables.<String>concat(_map, _map_1);
   }
   
@@ -642,15 +567,11 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     if (_tripleNotEquals) {
       Sets.SetView<String> _xblockexpression = null;
       {
-        Iterable<String> _computeFQFeatureNames = this.computeFQFeatureNames(g);
-        final Set<String> thisGrammarFqFeatureNames = IterableExtensions.<String>toSet(_computeFQFeatureNames);
-        List<Grammar> _allUsedGrammars = GrammarUtil.allUsedGrammars(g);
+        final Set<String> thisGrammarFqFeatureNames = IterableExtensions.<String>toSet(this.computeFQFeatureNames(g));
         final Function1<Grammar, Iterable<String>> _function = (Grammar it) -> {
           return this.computeFQFeatureNames(it);
         };
-        List<Iterable<String>> _map = ListExtensions.<Grammar, Iterable<String>>map(_allUsedGrammars, _function);
-        Iterable<String> _flatten = Iterables.<String>concat(_map);
-        final Set<String> superGrammarsFqFeatureNames = IterableExtensions.<String>toSet(_flatten);
+        final Set<String> superGrammarsFqFeatureNames = IterableExtensions.<String>toSet(Iterables.<String>concat(ListExtensions.<Grammar, Iterable<String>>map(GrammarUtil.allUsedGrammars(g), _function)));
         _xblockexpression = Sets.<String>intersection(thisGrammarFqFeatureNames, superGrammarsFqFeatureNames);
       }
       _xifexpression = _xblockexpression;

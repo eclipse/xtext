@@ -292,8 +292,6 @@ public class TraceRegionToStringTest {
   
   public void operator_tripleEquals(final TraceRegionToStringTester actual, final CharSequence expectation) {
     final String rendered = actual.toString();
-    String _string = expectation.toString();
-    String _trim = _string.trim();
-    Assert.assertEquals(_trim, rendered);
+    Assert.assertEquals(expectation.toString().trim(), rendered);
   }
 }

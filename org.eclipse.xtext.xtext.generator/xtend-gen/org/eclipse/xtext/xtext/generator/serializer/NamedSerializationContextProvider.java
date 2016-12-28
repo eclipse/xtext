@@ -34,16 +34,12 @@ public class NamedSerializationContextProvider {
   private final Map<ParserRule, Integer> rules;
   
   public NamedSerializationContextProvider(final Grammar grammar) {
-    List<ParserRule> _allParserRules = GrammarUtil.allParserRules(grammar);
-    Iterable<Pair<Integer, ParserRule>> _indexed = IterableExtensions.<ParserRule>indexed(_allParserRules);
     final Function1<Pair<Integer, ParserRule>, Pair<ParserRule, Integer>> _function = (Pair<Integer, ParserRule> it) -> {
       ParserRule _value = it.getValue();
       Integer _key = it.getKey();
       return Pair.<ParserRule, Integer>of(_value, _key);
     };
-    Iterable<Pair<ParserRule, Integer>> _map = IterableExtensions.<Pair<Integer, ParserRule>, Pair<ParserRule, Integer>>map(_indexed, _function);
-    HashMap<ParserRule, Integer> _newHashMap = CollectionLiterals.<ParserRule, Integer>newHashMap(((Pair<? extends ParserRule, ? extends Integer>[])Conversions.unwrapArray(_map, Pair.class)));
-    this.rules = _newHashMap;
+    this.rules = CollectionLiterals.<ParserRule, Integer>newHashMap(((Pair<? extends ParserRule, ? extends Integer>[])Conversions.unwrapArray(IterableExtensions.<Pair<Integer, ParserRule>, Pair<ParserRule, Integer>>map(IterableExtensions.<ParserRule>indexed(GrammarUtil.allParserRules(grammar)), _function), Pair.class)));
   }
   
   public <T extends Object> List<NamedSerializationContexts<T>> getNamedContexts(final SerializationContextMap<T> map) {
@@ -100,8 +96,7 @@ public class NamedSerializationContextProvider {
         if ((pr == null)) {
           final Action action = ctx.getAssignedAction();
           if ((action != null)) {
-            ParserRule _containingParserRule = GrammarUtil.containingParserRule(action);
-            pr = _containingParserRule;
+            pr = GrammarUtil.containingParserRule(action);
           }
         }
         if ((pr != null)) {

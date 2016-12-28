@@ -20,20 +20,15 @@ import org.eclipse.emf.common.util.URI;
 @SuppressWarnings("all")
 public class UriExtensions {
   public URI toUri(final String pathWithScheme) {
-    java.net.URI _create = java.net.URI.create(pathWithScheme);
-    String _path = this.toPath(_create);
-    return URI.createURI(_path);
+    return URI.createURI(this.toPath(java.net.URI.create(pathWithScheme)));
   }
   
   public String toPath(final URI uri) {
-    String _string = uri.toString();
-    java.net.URI _create = java.net.URI.create(_string);
-    return this.toPath(_create);
+    return this.toPath(java.net.URI.create(uri.toString()));
   }
   
   public String toPath(final java.net.URI uri) {
     final Path path = Paths.get(uri);
-    java.net.URI _uri = path.toUri();
-    return _uri.toString();
+    return path.toUri().toString();
   }
 }

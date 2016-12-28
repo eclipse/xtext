@@ -63,8 +63,7 @@ public class RuleWithParameterValues {
   }
   
   public static AbstractRule getOriginalRule(final AbstractRule copy) {
-    RuleWithParameterValues _findInEmfObject = RuleWithParameterValues.findInEmfObject(copy);
-    return _findInEmfObject.getOriginal();
+    return RuleWithParameterValues.findInEmfObject(copy).getOriginal();
   }
   
   public static AbstractRule tryGetOriginalRule(final AbstractRule copy) {
@@ -77,8 +76,7 @@ public class RuleWithParameterValues {
   }
   
   public static Set<Parameter> getParamValues(final AbstractRule copy) {
-    RuleWithParameterValues _findInEmfObject = RuleWithParameterValues.findInEmfObject(copy);
-    return _findInEmfObject.getParamValues();
+    return RuleWithParameterValues.findInEmfObject(copy).getParamValues();
   }
   
   public static int getParamConfig(final AbstractRule copy) {
