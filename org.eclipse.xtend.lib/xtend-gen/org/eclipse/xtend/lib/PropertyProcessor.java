@@ -28,8 +28,7 @@ public class PropertyProcessor extends AbstractFieldProcessor {
     if (((!it.isFinal()) && (!util.hasSetter(it)))) {
       util.addSetter(it, Visibility.PUBLIC);
     }
-    String _simpleName = it.getSimpleName();
-    String _firstLower = StringExtensions.toFirstLower(_simpleName);
+    String _firstLower = StringExtensions.toFirstLower(it.getSimpleName());
     String _plus = ("_" + _firstLower);
     it.setSimpleName(_plus);
   }

@@ -5,26 +5,22 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
-import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
@@ -32,7 +28,6 @@ import org.eclipse.xtend.lib.macro.declaration.ResolvedParameter;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedTypeParameter;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -100,15 +95,13 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     
     public boolean hasValidSignature(final MethodDeclaration it) {
       boolean _switchResult = false;
-      Iterable<? extends ParameterDeclaration> _parameters = it.getParameters();
       final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
         @Override
         public TypeReference apply(final ParameterDeclaration it) {
           return it.getType();
         }
       };
-      Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
-      List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
+      List<TypeReference> _list = IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getParameters(), _function));
       boolean _matched = false;
       if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
         _matched=true;
@@ -121,11 +114,8 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       if (!_matched) {
         TypeReference _string_1 = this.context.getString();
-        TypeReference _newWildcardTypeReference = this.context.newWildcardTypeReference();
-        TypeReference _newTypeReference = this.context.newTypeReference(Class.class, _newWildcardTypeReference);
-        TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
-        TypeReference _object = this.context.getObject();
-        TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);
+        TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(this.context.newTypeReference(Class.class, this.context.newWildcardTypeReference()));
+        TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(this.context.getObject());
         if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
           _matched=true;
         }
@@ -160,10 +150,10 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("The interface ");
                 String _simpleName = iface.getSimpleName();
-                _builder.append(_simpleName, "");
+                _builder.append(_simpleName);
                 _builder.append(" is also implemented by the delegate ");
                 String _simpleName_1 = other.getSimpleName();
-                _builder.append(_simpleName_1, "");
+                _builder.append(_simpleName_1);
                 this.context.addError(delegate, _builder.toString());
               }
             }
@@ -175,25 +165,21 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     }
     
     public Iterable<? extends MemberDeclaration> otherDelegates(final MemberDeclaration delegate) {
-      TypeDeclaration _declaringType = delegate.getDeclaringType();
-      Iterable<? extends MemberDeclaration> _delegates = this.getDelegates(_declaringType);
       final Function1<MemberDeclaration, Boolean> _function = new Function1<MemberDeclaration, Boolean>() {
         @Override
         public Boolean apply(final MemberDeclaration it) {
           return Boolean.valueOf((!Objects.equal(it, delegate)));
         }
       };
-      return IterableExtensions.filter(_delegates, _function);
+      return IterableExtensions.filter(this.getDelegates(delegate.getDeclaringType()), _function);
     }
     
     public boolean areListedInterfacesValid(final MemberDeclaration delegate) {
       boolean _xblockexpression = false;
       {
-        TypeDeclaration _declaringType = delegate.getDeclaringType();
-        final TypeReference declaringType = this.context.newSelfTypeReference(_declaringType);
+        final TypeReference declaringType = this.context.newSelfTypeReference(delegate.getDeclaringType());
         final Set<TypeReference> interfacesOfDeclaringType = this.getImplementedInterfaces(declaringType);
-        TypeReference _type = this.getType(delegate);
-        final Set<TypeReference> availableInterfaces = this.getImplementedInterfaces(_type);
+        final Set<TypeReference> availableInterfaces = this.getImplementedInterfaces(this.getType(delegate));
         final Set<TypeReference> listedInterfaces = this.listedInterfaces(delegate);
         boolean valid = true;
         for (final TypeReference iface : listedInterfaces) {
@@ -210,12 +196,11 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             boolean _not = (!_exists);
             if (_not) {
               StringConcatenation _builder = new StringConcatenation();
-              TypeReference _type_1 = this.getType(delegate);
-              String _simpleName = _type_1.getSimpleName();
-              _builder.append(_simpleName, "");
+              String _simpleName = this.getType(delegate).getSimpleName();
+              _builder.append(_simpleName);
               _builder.append(" does not implement ");
               String _simpleName_1 = iface.getSimpleName();
-              _builder.append(_simpleName_1, "");
+              _builder.append(_simpleName_1);
               this.context.addError(delegate, _builder.toString());
               valid = false;
             }
@@ -232,10 +217,10 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             if (_not_1) {
               StringConcatenation _builder_1 = new StringConcatenation();
               String _simpleName_2 = declaringType.getSimpleName();
-              _builder_1.append(_simpleName_2, "");
+              _builder_1.append(_simpleName_2);
               _builder_1.append(" does not implement ");
               String _simpleName_3 = iface.getSimpleName();
-              _builder_1.append(_simpleName_3, "");
+              _builder_1.append(_simpleName_3);
               this.context.addError(delegate, _builder_1.toString());
               valid = false;
             }
@@ -243,12 +228,11 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         }
         if ((listedInterfaces.isEmpty() && Sets.<TypeReference>intersection(interfacesOfDeclaringType, availableInterfaces).isEmpty())) {
           StringConcatenation _builder = new StringConcatenation();
-          TypeReference _type_1 = this.getType(delegate);
-          String _simpleName = _type_1.getSimpleName();
-          _builder.append(_simpleName, "");
+          String _simpleName = this.getType(delegate).getSimpleName();
+          _builder.append(_simpleName);
           _builder.append(" and ");
           String _simpleName_1 = declaringType.getSimpleName();
-          _builder.append(_simpleName_1, "");
+          _builder.append(_simpleName_1);
           _builder.append(" have no interfaces in common");
           this.context.addError(delegate, _builder.toString());
           valid = false;
@@ -259,23 +243,18 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     }
     
     public Iterable<? extends MemberDeclaration> getDelegates(final TypeDeclaration it) {
-      Iterable<? extends MemberDeclaration> _declaredMembers = it.getDeclaredMembers();
       final Function1<MemberDeclaration, Boolean> _function = new Function1<MemberDeclaration, Boolean>() {
         @Override
         public Boolean apply(final MemberDeclaration it) {
-          Type _findTypeGlobally = Util.this.context.findTypeGlobally(Delegate.class);
-          AnnotationReference _findAnnotation = it.findAnnotation(_findTypeGlobally);
+          AnnotationReference _findAnnotation = it.findAnnotation(Util.this.context.findTypeGlobally(Delegate.class));
           return Boolean.valueOf((_findAnnotation != null));
         }
       };
-      return IterableExtensions.filter(_declaredMembers, _function);
+      return IterableExtensions.filter(it.getDeclaredMembers(), _function);
     }
     
     public Set<TypeReference> listedInterfaces(final MemberDeclaration it) {
-      Type _findTypeGlobally = this.context.findTypeGlobally(Delegate.class);
-      AnnotationReference _findAnnotation = it.findAnnotation(_findTypeGlobally);
-      TypeReference[] _classArrayValue = _findAnnotation.getClassArrayValue("value");
-      return IterableExtensions.<TypeReference>toSet(((Iterable<TypeReference>)Conversions.doWrapArray(_classArrayValue)));
+      return IterableExtensions.<TypeReference>toSet(((Iterable<TypeReference>)Conversions.doWrapArray(it.findAnnotation(this.context.findTypeGlobally(Delegate.class)).getClassArrayValue("value"))));
     }
     
     public Set<TypeReference> getImplementedInterfaces(final TypeReference it) {
@@ -290,8 +269,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             return Boolean.valueOf((_type instanceof InterfaceDeclaration));
           }
         };
-        Iterable<TypeReference> _filter = IterableExtensions.<TypeReference>filter(seen, _function);
-        _xblockexpression = IterableExtensions.<TypeReference>toSet(_filter);
+        _xblockexpression = IterableExtensions.<TypeReference>toSet(IterableExtensions.<TypeReference>filter(seen, _function));
       }
       return _xblockexpression;
     }
@@ -302,25 +280,21 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       if (cycle) {
         return;
       }
-      Iterable<? extends TypeReference> _declaredSuperTypes = it.getDeclaredSuperTypes();
-      final Consumer<TypeReference> _function = new Consumer<TypeReference>() {
+      final Procedure1<TypeReference> _function = new Procedure1<TypeReference>() {
         @Override
-        public void accept(final TypeReference it) {
+        public void apply(final TypeReference it) {
           Util.this.collectAllSuperTypes(it, seen);
         }
       };
-      _declaredSuperTypes.forEach(_function);
+      IterableExtensions.forEach(it.getDeclaredSuperTypes(), _function);
     }
     
     public Set<TypeReference> getDelegatedInterfaces(final MemberDeclaration delegate) {
       Set<TypeReference> _xblockexpression = null;
       {
-        TypeDeclaration _declaringType = delegate.getDeclaringType();
-        TypeReference _newSelfTypeReference = this.context.newSelfTypeReference(_declaringType);
-        final Set<TypeReference> interfacesOfDeclaringType = this.getImplementedInterfaces(_newSelfTypeReference);
+        final Set<TypeReference> interfacesOfDeclaringType = this.getImplementedInterfaces(this.context.newSelfTypeReference(delegate.getDeclaringType()));
         final Set<TypeReference> listedInterfaces = this.listedInterfaces(delegate);
-        TypeReference _type = this.getType(delegate);
-        final Set<TypeReference> availableInterfaces = this.getImplementedInterfaces(_type);
+        final Set<TypeReference> availableInterfaces = this.getImplementedInterfaces(this.getType(delegate));
         final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
           @Override
           public Boolean apply(final TypeReference iface) {
@@ -332,41 +306,31 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             }))));
           }
         };
-        Iterable<TypeReference> _filter = IterableExtensions.<TypeReference>filter(availableInterfaces, _function);
-        _xblockexpression = IterableExtensions.<TypeReference>toSet(_filter);
+        _xblockexpression = IterableExtensions.<TypeReference>toSet(IterableExtensions.<TypeReference>filter(availableInterfaces, _function));
       }
       return _xblockexpression;
     }
     
     public Set<ResolvedMethod> getMethodsToImplement(final MemberDeclaration delegate) {
-      Set<TypeReference> _delegatedInterfaces = this.getDelegatedInterfaces(delegate);
       final Function1<TypeReference, Iterable<? extends ResolvedMethod>> _function = new Function1<TypeReference, Iterable<? extends ResolvedMethod>>() {
         @Override
         public Iterable<? extends ResolvedMethod> apply(final TypeReference it) {
           return it.getDeclaredResolvedMethods();
         }
       };
-      Iterable<Iterable<? extends ResolvedMethod>> _map = IterableExtensions.<TypeReference, Iterable<? extends ResolvedMethod>>map(_delegatedInterfaces, _function);
-      Iterable<ResolvedMethod> _flatten = Iterables.<ResolvedMethod>concat(_map);
       final Function1<ResolvedMethod, Boolean> _function_1 = new Function1<ResolvedMethod, Boolean>() {
         @Override
         public Boolean apply(final ResolvedMethod it) {
-          TypeDeclaration _declaringType = delegate.getDeclaringType();
-          MethodDeclaration _declaration = it.getDeclaration();
-          String _simpleName = _declaration.getSimpleName();
-          Iterable<? extends ResolvedParameter> _resolvedParameters = it.getResolvedParameters();
           final Function1<ResolvedParameter, TypeReference> _function = new Function1<ResolvedParameter, TypeReference>() {
             @Override
             public TypeReference apply(final ResolvedParameter it) {
               return it.getResolvedType();
             }
           };
-          Iterable<TypeReference> _map = IterableExtensions.map(_resolvedParameters, _function);
-          MethodDeclaration _findDeclaredMethod = _declaringType.findDeclaredMethod(_simpleName, ((TypeReference[])Conversions.unwrapArray(_map, TypeReference.class)));
+          MethodDeclaration _findDeclaredMethod = delegate.getDeclaringType().findDeclaredMethod(it.getDeclaration().getSimpleName(), ((TypeReference[])Conversions.unwrapArray(IterableExtensions.map(it.getResolvedParameters(), _function), TypeReference.class)));
           return Boolean.valueOf((_findDeclaredMethod == null));
         }
       };
-      Iterable<ResolvedMethod> _filter = IterableExtensions.<ResolvedMethod>filter(_flatten, _function_1);
       final Function1<ResolvedMethod, Boolean> _function_2 = new Function1<ResolvedMethod, Boolean>() {
         @Override
         public Boolean apply(final ResolvedMethod it) {
@@ -374,39 +338,32 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           return Boolean.valueOf((!_isObjectMethod));
         }
       };
-      Iterable<ResolvedMethod> _filter_1 = IterableExtensions.<ResolvedMethod>filter(_filter, _function_2);
       final Function1<ResolvedMethod, String> _function_3 = new Function1<ResolvedMethod, String>() {
         @Override
         public String apply(final ResolvedMethod it) {
           return it.getSimpleSignature();
         }
       };
-      Map<String, List<ResolvedMethod>> _groupBy = IterableExtensions.<String, ResolvedMethod>groupBy(_filter_1, _function_3);
-      Collection<List<ResolvedMethod>> _values = _groupBy.values();
       final Function1<List<ResolvedMethod>, ResolvedMethod> _function_4 = new Function1<List<ResolvedMethod>, ResolvedMethod>() {
         @Override
         public ResolvedMethod apply(final List<ResolvedMethod> it) {
           return IterableExtensions.<ResolvedMethod>head(it);
         }
       };
-      Iterable<ResolvedMethod> _map_1 = IterableExtensions.<List<ResolvedMethod>, ResolvedMethod>map(_values, _function_4);
-      return IterableExtensions.<ResolvedMethod>toSet(_map_1);
+      return IterableExtensions.<ResolvedMethod>toSet(IterableExtensions.<List<ResolvedMethod>, ResolvedMethod>map(IterableExtensions.<String, ResolvedMethod>groupBy(IterableExtensions.<ResolvedMethod>filter(IterableExtensions.<ResolvedMethod>filter(Iterables.<ResolvedMethod>concat(IterableExtensions.<TypeReference, Iterable<? extends ResolvedMethod>>map(this.getDelegatedInterfaces(delegate), _function)), _function_1), _function_2), _function_3).values(), _function_4));
     }
     
     public boolean isObjectMethod(final ResolvedMethod it) {
       boolean _xblockexpression = false;
       {
-        MethodDeclaration _declaration = it.getDeclaration();
-        final String name = _declaration.getSimpleName();
-        Iterable<? extends ResolvedParameter> _resolvedParameters = it.getResolvedParameters();
+        final String name = it.getDeclaration().getSimpleName();
         final Function1<ResolvedParameter, TypeReference> _function = new Function1<ResolvedParameter, TypeReference>() {
           @Override
           public TypeReference apply(final ResolvedParameter it) {
             return it.getResolvedType();
           }
         };
-        Iterable<TypeReference> _map = IterableExtensions.map(_resolvedParameters, _function);
-        final List<TypeReference> parameterTypes = IterableExtensions.<TypeReference>toList(_map);
+        final List<TypeReference> parameterTypes = IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getResolvedParameters(), _function));
         _xblockexpression = (((((Objects.equal(name, "hashCode") && parameterTypes.isEmpty()) || (Objects.equal(name, "toString") && parameterTypes.isEmpty())) || (Objects.equal(name, "equals") && Objects.equal(parameterTypes, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(this.context.getObject()))))) || (Objects.equal(name, "finalize") && parameterTypes.isEmpty())) || (Objects.equal(name, "clone") && parameterTypes.isEmpty()));
       }
       return _xblockexpression;
@@ -417,84 +374,61 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       {
         delegate.markAsRead();
         final MethodDeclaration declaration = resolvedMethod.getDeclaration();
-        MutableTypeDeclaration _declaringType = delegate.getDeclaringType();
-        String _simpleName = declaration.getSimpleName();
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
           @Override
           public void apply(final MutableMethodDeclaration impl) {
-            Element _primarySourceElement = Util.this.context.getPrimarySourceElement(delegate);
-            Util.this.context.setPrimarySourceElement(impl, _primarySourceElement);
+            Util.this.context.setPrimarySourceElement(impl, Util.this.context.getPrimarySourceElement(delegate));
             final HashMap<TypeReference, TypeReference> typeParameterMappings = CollectionLiterals.<TypeReference, TypeReference>newHashMap();
-            Iterable<? extends ResolvedTypeParameter> _resolvedTypeParameters = resolvedMethod.getResolvedTypeParameters();
-            final Consumer<ResolvedTypeParameter> _function = new Consumer<ResolvedTypeParameter>() {
+            final Procedure1<ResolvedTypeParameter> _function = new Procedure1<ResolvedTypeParameter>() {
               @Override
-              public void accept(final ResolvedTypeParameter param) {
-                TypeParameterDeclaration _declaration = param.getDeclaration();
-                String _simpleName = _declaration.getSimpleName();
-                Iterable<? extends TypeReference> _resolvedUpperBounds = param.getResolvedUpperBounds();
-                final MutableTypeParameterDeclaration copy = impl.addTypeParameter(_simpleName, ((TypeReference[])Conversions.unwrapArray(_resolvedUpperBounds, TypeReference.class)));
-                TypeParameterDeclaration _declaration_1 = param.getDeclaration();
-                TypeReference _newTypeReference = Util.this.context.newTypeReference(_declaration_1);
-                TypeReference _newTypeReference_1 = Util.this.context.newTypeReference(copy);
-                typeParameterMappings.put(_newTypeReference, _newTypeReference_1);
-                Iterable<? extends TypeReference> _upperBounds = copy.getUpperBounds();
+              public void apply(final ResolvedTypeParameter param) {
+                final MutableTypeParameterDeclaration copy = impl.addTypeParameter(param.getDeclaration().getSimpleName(), ((TypeReference[])Conversions.unwrapArray(param.getResolvedUpperBounds(), TypeReference.class)));
+                typeParameterMappings.put(Util.this.context.newTypeReference(param.getDeclaration()), Util.this.context.newTypeReference(copy));
                 final Function1<TypeReference, TypeReference> _function = new Function1<TypeReference, TypeReference>() {
                   @Override
                   public TypeReference apply(final TypeReference it) {
                     return Util.this.replace(it, typeParameterMappings);
                   }
                 };
-                Iterable<TypeReference> _map = IterableExtensions.map(_upperBounds, _function);
-                copy.setUpperBounds(_map);
+                copy.setUpperBounds(IterableExtensions.map(copy.getUpperBounds(), _function));
               }
             };
-            _resolvedTypeParameters.forEach(_function);
-            Iterable<? extends TypeReference> _resolvedExceptionTypes = resolvedMethod.getResolvedExceptionTypes();
+            IterableExtensions.forEach(resolvedMethod.getResolvedTypeParameters(), _function);
             final Function1<TypeReference, TypeReference> _function_1 = new Function1<TypeReference, TypeReference>() {
               @Override
               public TypeReference apply(final TypeReference it) {
                 return Util.this.replace(it, typeParameterMappings);
               }
             };
-            Iterable<TypeReference> _map = IterableExtensions.map(_resolvedExceptionTypes, _function_1);
-            impl.setExceptions(((TypeReference[])Conversions.unwrapArray(_map, TypeReference.class)));
-            boolean _isVarArgs = declaration.isVarArgs();
-            impl.setVarArgs(_isVarArgs);
-            TypeReference _resolvedReturnType = resolvedMethod.getResolvedReturnType();
-            TypeReference _replace = Util.this.replace(_resolvedReturnType, typeParameterMappings);
-            impl.setReturnType(_replace);
-            Iterable<? extends ResolvedParameter> _resolvedParameters = resolvedMethod.getResolvedParameters();
-            final Consumer<ResolvedParameter> _function_2 = new Consumer<ResolvedParameter>() {
+            impl.setExceptions(((TypeReference[])Conversions.unwrapArray(IterableExtensions.map(resolvedMethod.getResolvedExceptionTypes(), _function_1), TypeReference.class)));
+            impl.setVarArgs(declaration.isVarArgs());
+            impl.setReturnType(Util.this.replace(resolvedMethod.getResolvedReturnType(), typeParameterMappings));
+            final Procedure1<ResolvedParameter> _function_2 = new Procedure1<ResolvedParameter>() {
               @Override
-              public void accept(final ResolvedParameter p) {
-                ParameterDeclaration _declaration = p.getDeclaration();
-                String _simpleName = _declaration.getSimpleName();
-                TypeReference _resolvedType = p.getResolvedType();
-                TypeReference _replace = Util.this.replace(_resolvedType, typeParameterMappings);
-                impl.addParameter(_simpleName, _replace);
+              public void apply(final ResolvedParameter p) {
+                impl.addParameter(p.getDeclaration().getSimpleName(), Util.this.replace(p.getResolvedType(), typeParameterMappings));
               }
             };
-            _resolvedParameters.forEach(_function_2);
+            IterableExtensions.forEach(resolvedMethod.getResolvedParameters(), _function_2);
             StringConcatenationClient _client = new StringConcatenationClient() {
               @Override
               protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
                 String _returnIfNeeded = Util.this.returnIfNeeded(resolvedMethod);
-                _builder.append(_returnIfNeeded, "");
+                _builder.append(_returnIfNeeded);
                 CharSequence _delegateAccess = Util.this.delegateAccess(delegate, declaration);
-                _builder.append(_delegateAccess, "");
+                _builder.append(_delegateAccess);
                 _builder.append(".");
                 String _simpleName = declaration.getSimpleName();
-                _builder.append(_simpleName, "");
+                _builder.append(_simpleName);
                 _builder.append("(");
-                Iterable<? extends ParameterDeclaration> _parameters = declaration.getParameters();
                 final Function1<ParameterDeclaration, CharSequence> _function = new Function1<ParameterDeclaration, CharSequence>() {
                   @Override
                   public CharSequence apply(final ParameterDeclaration it) {
                     return it.getSimpleName();
                   }
                 };
-                String _join = IterableExtensions.join(_parameters, ", ", _function);
-                _builder.append(_join, "");
+                String _join = IterableExtensions.join(declaration.getParameters(), ", ", _function);
+                _builder.append(_join);
                 _builder.append(");");
                 _builder.newLineIfNotEmpty();
               }
@@ -502,22 +436,19 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             impl.setBody(_client);
           }
         };
-        _xblockexpression = _declaringType.addMethod(_simpleName, _function);
+        _xblockexpression = delegate.getDeclaringType().addMethod(declaration.getSimpleName(), _function);
       }
       return _xblockexpression;
     }
     
     public TypeReference replace(final TypeReference target, final Map<? extends TypeReference, ? extends TypeReference> mappings) {
-      Set<? extends Map.Entry<? extends TypeReference, ? extends TypeReference>> _entrySet = mappings.entrySet();
       final Function2<TypeReference, Map.Entry<? extends TypeReference, ? extends TypeReference>, TypeReference> _function = new Function2<TypeReference, Map.Entry<? extends TypeReference, ? extends TypeReference>, TypeReference>() {
         @Override
         public TypeReference apply(final TypeReference result, final Map.Entry<? extends TypeReference, ? extends TypeReference> mapping) {
-          TypeReference _key = mapping.getKey();
-          TypeReference _value = mapping.getValue();
-          return Util.this.replace(result, _key, _value);
+          return Util.this.replace(result, mapping.getKey(), mapping.getValue());
         }
       };
-      return IterableExtensions.fold(_entrySet, target, _function);
+      return IterableExtensions.fold(mappings.entrySet(), target, _function);
     }
     
     public TypeReference replace(final TypeReference target, final TypeReference oldType, final TypeReference newType) {
@@ -525,20 +456,16 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       if (_equals) {
         return newType;
       }
-      List<TypeReference> _actualTypeArguments = target.getActualTypeArguments();
-      boolean _isEmpty = _actualTypeArguments.isEmpty();
+      boolean _isEmpty = target.getActualTypeArguments().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        Type _type = target.getType();
-        List<TypeReference> _actualTypeArguments_1 = target.getActualTypeArguments();
         final Function1<TypeReference, TypeReference> _function = new Function1<TypeReference, TypeReference>() {
           @Override
           public TypeReference apply(final TypeReference it) {
             return Util.this.replace(it, oldType, newType);
           }
         };
-        List<TypeReference> _map = ListExtensions.<TypeReference, TypeReference>map(_actualTypeArguments_1, _function);
-        return this.context.newTypeReference(_type, ((TypeReference[])Conversions.unwrapArray(_map, TypeReference.class)));
+        return this.context.newTypeReference(target.getType(), ((TypeReference[])Conversions.unwrapArray(ListExtensions.<TypeReference, TypeReference>map(target.getActualTypeArguments(), _function), TypeReference.class)));
       }
       boolean _isWildCard = target.isWildCard();
       if (_isWildCard) {
@@ -546,25 +473,18 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         TypeReference _object = this.context.getObject();
         boolean _notEquals = (!Objects.equal(_upperBound, _object));
         if (_notEquals) {
-          TypeReference _upperBound_1 = target.getUpperBound();
-          TypeReference _replace = this.replace(_upperBound_1, oldType, newType);
-          return this.context.newWildcardTypeReference(_replace);
+          return this.context.newWildcardTypeReference(this.replace(target.getUpperBound(), oldType, newType));
         } else {
-          TypeReference _lowerBound = target.getLowerBound();
-          boolean _isAnyType = _lowerBound.isAnyType();
+          boolean _isAnyType = target.getLowerBound().isAnyType();
           boolean _not_1 = (!_isAnyType);
           if (_not_1) {
-            TypeReference _lowerBound_1 = target.getLowerBound();
-            TypeReference _replace_1 = this.replace(_lowerBound_1, oldType, newType);
-            return this.context.newWildcardTypeReferenceWithLowerBound(_replace_1);
+            return this.context.newWildcardTypeReferenceWithLowerBound(this.replace(target.getLowerBound(), oldType, newType));
           }
         }
       }
       boolean _isArray = target.isArray();
       if (_isArray) {
-        TypeReference _arrayComponentType = target.getArrayComponentType();
-        TypeReference _replace_2 = this.replace(_arrayComponentType, oldType, newType);
-        return this.context.newArrayTypeReference(_replace_2);
+        return this.context.newArrayTypeReference(this.replace(target.getArrayComponentType(), oldType, newType));
       }
       return target;
     }
@@ -573,28 +493,26 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("this.");
       String _simpleName = it.getSimpleName();
-      _builder.append(_simpleName, "");
+      _builder.append(_simpleName);
       return _builder;
     }
     
     protected CharSequence _delegateAccess(final MethodDeclaration it, final MethodDeclaration method) {
       CharSequence _switchResult = null;
-      Iterable<? extends ParameterDeclaration> _parameters = it.getParameters();
       final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
         @Override
         public TypeReference apply(final ParameterDeclaration it) {
           return it.getType();
         }
       };
-      Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
-      List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
+      List<TypeReference> _list = IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getParameters(), _function));
       boolean _matched = false;
       if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("this.");
         String _simpleName = it.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append("()");
         _switchResult = _builder;
       }
@@ -605,53 +523,46 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("this.");
           String _simpleName_1 = it.getSimpleName();
-          _builder_1.append(_simpleName_1, "");
+          _builder_1.append(_simpleName_1);
           _builder_1.append("(\"");
           String _simpleName_2 = method.getSimpleName();
-          _builder_1.append(_simpleName_2, "");
+          _builder_1.append(_simpleName_2);
           _builder_1.append("\")");
           _switchResult = _builder_1;
         }
       }
       if (!_matched) {
         TypeReference _string_1 = this.context.getString();
-        TypeReference _newWildcardTypeReference = this.context.newWildcardTypeReference();
-        TypeReference _newTypeReference = this.context.newTypeReference(Class.class, _newWildcardTypeReference);
-        TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
-        TypeReference _object = this.context.getObject();
-        TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);
+        TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(this.context.newTypeReference(Class.class, this.context.newWildcardTypeReference()));
+        TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(this.context.getObject());
         if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
           _matched=true;
           StringConcatenation _builder_2 = new StringConcatenation();
           _builder_2.append("this.");
           String _simpleName_3 = it.getSimpleName();
-          _builder_2.append(_simpleName_3, "");
+          _builder_2.append(_simpleName_3);
           _builder_2.append("(\"");
           String _simpleName_4 = method.getSimpleName();
-          _builder_2.append(_simpleName_4, "");
+          _builder_2.append(_simpleName_4);
           _builder_2.append("\", new Class[]{");
-          Iterable<? extends ParameterDeclaration> _parameters_1 = method.getParameters();
           final Function1<ParameterDeclaration, CharSequence> _function_1 = new Function1<ParameterDeclaration, CharSequence>() {
             @Override
             public CharSequence apply(final ParameterDeclaration it) {
-              TypeReference _type = it.getType();
-              Type _type_1 = _type.getType();
-              String _simpleName = _type_1.getSimpleName();
+              String _simpleName = it.getType().getType().getSimpleName();
               return (_simpleName + ".class");
             }
           };
-          String _join = IterableExtensions.join(_parameters_1, ", ", _function_1);
-          _builder_2.append(_join, "");
+          String _join = IterableExtensions.join(method.getParameters(), ", ", _function_1);
+          _builder_2.append(_join);
           _builder_2.append("}, new Object[]{");
-          Iterable<? extends ParameterDeclaration> _parameters_2 = method.getParameters();
           final Function1<ParameterDeclaration, CharSequence> _function_2 = new Function1<ParameterDeclaration, CharSequence>() {
             @Override
             public CharSequence apply(final ParameterDeclaration it) {
               return it.getSimpleName();
             }
           };
-          String _join_1 = IterableExtensions.join(_parameters_2, ", ", _function_2);
-          _builder_2.append(_join_1, "");
+          String _join_1 = IterableExtensions.join(method.getParameters(), ", ", _function_2);
+          _builder_2.append(_join_1);
           _builder_2.append("})");
           _switchResult = _builder_2;
         }
@@ -664,8 +575,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     
     public String returnIfNeeded(final ResolvedMethod it) {
       String _xifexpression = null;
-      TypeReference _resolvedReturnType = it.getResolvedReturnType();
-      boolean _isVoid = _resolvedReturnType.isVoid();
+      boolean _isVoid = it.getResolvedReturnType().isVoid();
       if (_isVoid) {
         _xifexpression = "";
       } else {
@@ -712,22 +622,21 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
   public void doTransform(final List<? extends MutableMemberDeclaration> elements, @Extension final TransformationContext context) {
     @Extension
     final DelegateProcessor.Util util = new DelegateProcessor.Util(context);
-    final Consumer<MutableMemberDeclaration> _function = new Consumer<MutableMemberDeclaration>() {
+    final Procedure1<MutableMemberDeclaration> _function = new Procedure1<MutableMemberDeclaration>() {
       @Override
-      public void accept(final MutableMemberDeclaration it) {
+      public void apply(final MutableMemberDeclaration it) {
         boolean _isValidDelegate = util.isValidDelegate(it);
         if (_isValidDelegate) {
-          Set<ResolvedMethod> _methodsToImplement = util.getMethodsToImplement(it);
-          final Consumer<ResolvedMethod> _function = new Consumer<ResolvedMethod>() {
+          final Procedure1<ResolvedMethod> _function = new Procedure1<ResolvedMethod>() {
             @Override
-            public void accept(final ResolvedMethod method) {
+            public void apply(final ResolvedMethod method) {
               util.implementMethod(it, method);
             }
           };
-          _methodsToImplement.forEach(_function);
+          IterableExtensions.<ResolvedMethod>forEach(util.getMethodsToImplement(it), _function);
         }
       }
     };
-    elements.forEach(_function);
+    IterableExtensions.forEach(elements, _function);
   }
 }

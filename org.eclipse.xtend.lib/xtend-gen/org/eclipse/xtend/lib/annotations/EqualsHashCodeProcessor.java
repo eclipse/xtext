@@ -9,7 +9,6 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
@@ -54,26 +53,22 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     }
     
     public boolean hasEquals(final ClassDeclaration it) {
-      Iterable<? extends MethodDeclaration> _declaredMethods = it.getDeclaredMethods();
       final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
         @Override
         public Boolean apply(final MethodDeclaration it) {
           return Boolean.valueOf(((Objects.equal(it.getSimpleName(), "equals") && (IterableExtensions.size(it.getParameters()) == 1)) && Objects.equal(IterableExtensions.head(it.getParameters()).getType(), Util.this.context.getObject())));
         }
       };
-      return IterableExtensions.exists(_declaredMethods, _function);
+      return IterableExtensions.exists(it.getDeclaredMethods(), _function);
     }
     
     public boolean hasSuperEquals(final ClassDeclaration cls) {
       boolean _xblockexpression = false;
       {
-        TypeReference _extendedClass = cls.getExtendedClass();
-        Type _type = _extendedClass.getType();
+        Type _type = cls.getExtendedClass().getType();
         final ClassDeclaration superClass = ((ClassDeclaration) _type);
         boolean _xifexpression = false;
-        TypeReference _newTypeReference = this.context.newTypeReference(superClass);
-        TypeReference _object = this.context.getObject();
-        boolean _equals = _newTypeReference.equals(_object);
+        boolean _equals = this.context.newTypeReference(superClass).equals(this.context.getObject());
         if (_equals) {
           _xifexpression = false;
         } else {
@@ -94,13 +89,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     public boolean hasSuperHashCode(final ClassDeclaration cls) {
       boolean _xblockexpression = false;
       {
-        TypeReference _extendedClass = cls.getExtendedClass();
-        Type _type = _extendedClass.getType();
+        Type _type = cls.getExtendedClass().getType();
         final ClassDeclaration superClass = ((ClassDeclaration) _type);
         boolean _xifexpression = false;
-        TypeReference _newTypeReference = this.context.newTypeReference(superClass);
-        TypeReference _object = this.context.getObject();
-        boolean _equals = _newTypeReference.equals(_object);
+        boolean _equals = this.context.newTypeReference(superClass).equals(this.context.getObject());
         if (_equals) {
           _xifexpression = false;
         } else {
@@ -122,16 +114,11 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
         @Override
         public void apply(final MutableMethodDeclaration it) {
-          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
-          Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
-          TypeReference _primitiveBoolean = Util.this.context.getPrimitiveBoolean();
-          it.setReturnType(_primitiveBoolean);
-          AnnotationReference _newAnnotationReference = Util.this.context.newAnnotationReference(Override.class);
-          it.addAnnotation(_newAnnotationReference);
-          AnnotationReference _newAnnotationReference_1 = Util.this.context.newAnnotationReference(Pure.class);
-          it.addAnnotation(_newAnnotationReference_1);
-          TypeReference _object = Util.this.context.getObject();
-          it.addParameter("obj", _object);
+          Util.this.context.setPrimarySourceElement(it, Util.this.context.getPrimarySourceElement(cls));
+          it.setReturnType(Util.this.context.getPrimitiveBoolean());
+          it.addAnnotation(Util.this.context.newAnnotationReference(Override.class));
+          it.addAnnotation(Util.this.context.newAnnotationReference(Pure.class));
+          it.addParameter("obj", Util.this.context.getObject());
           StringConcatenationClient _client = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -164,10 +151,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
                 boolean _greaterThan = (_size > 0);
                 if (_greaterThan) {
                   TypeReference _newWildCardSelfTypeReference = Util.this.newWildCardSelfTypeReference(cls);
-                  _builder.append(_newWildCardSelfTypeReference, "");
+                  _builder.append(_newWildCardSelfTypeReference);
                   _builder.append(" other = (");
                   TypeReference _newWildCardSelfTypeReference_1 = Util.this.newWildCardSelfTypeReference(cls);
-                  _builder.append(_newWildCardSelfTypeReference_1, "");
+                  _builder.append(_newWildCardSelfTypeReference_1);
                   _builder.append(") obj;");
                   _builder.newLineIfNotEmpty();
                 }
@@ -175,7 +162,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
               {
                 for(final FieldDeclaration field : includedFields) {
                   StringConcatenationClient _contributeToEquals = Util.this.contributeToEquals(field);
-                  _builder.append(_contributeToEquals, "");
+                  _builder.append(_contributeToEquals);
                   _builder.newLineIfNotEmpty();
                 }
               }
@@ -190,23 +177,18 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     }
     
     private TypeReference newWildCardSelfTypeReference(final ClassDeclaration cls) {
-      Iterable<? extends TypeParameterDeclaration> _typeParameters = cls.getTypeParameters();
       final Function1<TypeParameterDeclaration, TypeReference> _function = new Function1<TypeParameterDeclaration, TypeReference>() {
         @Override
         public TypeReference apply(final TypeParameterDeclaration it) {
-          TypeReference _object = Util.this.context.getObject();
-          return Util.this.context.newWildcardTypeReference(_object);
+          return Util.this.context.newWildcardTypeReference(Util.this.context.getObject());
         }
       };
-      Iterable<TypeReference> _map = IterableExtensions.map(_typeParameters, _function);
-      return this.context.newTypeReference(cls, ((TypeReference[])Conversions.unwrapArray(_map, TypeReference.class)));
+      return this.context.newTypeReference(cls, ((TypeReference[])Conversions.unwrapArray(IterableExtensions.map(cls.getTypeParameters(), _function), TypeReference.class)));
     }
     
     public StringConcatenationClient contributeToEquals(final FieldDeclaration it) {
       StringConcatenationClient _switchResult = null;
-      TypeReference _type = it.getType();
-      TypeReference _orObject = this.orObject(_type);
-      String _name = _orObject.getName();
+      String _name = this.orObject(it.getType()).getName();
       boolean _matched = false;
       String _name_1 = Double.TYPE.getName();
       if (Objects.equal(_name, _name_1)) {
@@ -215,15 +197,15 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("if (");
-            _builder.append(Double.class, "");
+            _builder.append(Double.class);
             _builder.append(".doubleToLongBits(other.");
             String _simpleName = it.getSimpleName();
-            _builder.append(_simpleName, "");
+            _builder.append(_simpleName);
             _builder.append(") != ");
-            _builder.append(Double.class, "");
+            _builder.append(Double.class);
             _builder.append(".doubleToLongBits(this.");
             String _simpleName_1 = it.getSimpleName();
-            _builder.append(_simpleName_1, "");
+            _builder.append(_simpleName_1);
             _builder.append("))");
             _builder.newLineIfNotEmpty();
             _builder.append("  ");
@@ -241,15 +223,15 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               _builder.append("if (");
-              _builder.append(Float.class, "");
+              _builder.append(Float.class);
               _builder.append(".floatToIntBits(other.");
               String _simpleName = it.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append(") != ");
-              _builder.append(Float.class, "");
+              _builder.append(Float.class);
               _builder.append(".floatToIntBits(this.");
               String _simpleName_1 = it.getSimpleName();
-              _builder.append(_simpleName_1, "");
+              _builder.append(_simpleName_1);
               _builder.append("))");
               _builder.newLineIfNotEmpty();
               _builder.append("  ");
@@ -301,10 +283,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               _builder.append("if (other.");
               String _simpleName = it.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append(" != this.");
               String _simpleName_1 = it.getSimpleName();
-              _builder.append(_simpleName_1, "");
+              _builder.append(_simpleName_1);
               _builder.append(")");
               _builder.newLineIfNotEmpty();
               _builder.append("  ");
@@ -321,7 +303,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("if (this.");
             String _simpleName = it.getSimpleName();
-            _builder.append(_simpleName, "");
+            _builder.append(_simpleName);
             _builder.append(" == null) {");
             _builder.newLineIfNotEmpty();
             _builder.append("  ");
@@ -335,7 +317,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
             _builder.newLine();
             _builder.append("} else if (!");
             StringConcatenationClient _deepEquals = Util.this.deepEquals(it);
-            _builder.append(_deepEquals, "");
+            _builder.append(_deepEquals);
             _builder.append(")");
             _builder.newLineIfNotEmpty();
             _builder.append("  ");
@@ -350,24 +332,21 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     
     public StringConcatenationClient deepEquals(final FieldDeclaration it) {
       StringConcatenationClient _xifexpression = null;
-      TypeReference _type = it.getType();
-      boolean _isArray = _type.isArray();
+      boolean _isArray = it.getType().isArray();
       if (_isArray) {
         StringConcatenationClient _xifexpression_1 = null;
-        TypeReference _type_1 = it.getType();
-        TypeReference _arrayComponentType = _type_1.getArrayComponentType();
-        boolean _isPrimitive = _arrayComponentType.isPrimitive();
+        boolean _isPrimitive = it.getType().getArrayComponentType().isPrimitive();
         if (_isPrimitive) {
           StringConcatenationClient _client = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append(Arrays.class, "");
+              _builder.append(Arrays.class);
               _builder.append(".equals(this.");
               String _simpleName = it.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append(", other.");
               String _simpleName_1 = it.getSimpleName();
-              _builder.append(_simpleName_1, "");
+              _builder.append(_simpleName_1);
               _builder.append(")");
             }
           };
@@ -376,13 +355,13 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           StringConcatenationClient _client_1 = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append(Arrays.class, "");
+              _builder.append(Arrays.class);
               _builder.append(".deepEquals(this.");
               String _simpleName = it.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append(", other.");
               String _simpleName_1 = it.getSimpleName();
-              _builder.append(_simpleName_1, "");
+              _builder.append(_simpleName_1);
               _builder.append(")");
             }
           };
@@ -395,10 +374,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("this.");
             String _simpleName = it.getSimpleName();
-            _builder.append(_simpleName, "");
+            _builder.append(_simpleName);
             _builder.append(".equals(other.");
             String _simpleName_1 = it.getSimpleName();
-            _builder.append(_simpleName_1, "");
+            _builder.append(_simpleName_1);
             _builder.append(")");
           }
         };
@@ -411,14 +390,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
         @Override
         public void apply(final MutableMethodDeclaration it) {
-          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
-          Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
-          TypeReference _primitiveInt = Util.this.context.getPrimitiveInt();
-          it.setReturnType(_primitiveInt);
-          AnnotationReference _newAnnotationReference = Util.this.context.newAnnotationReference(Override.class);
-          it.addAnnotation(_newAnnotationReference);
-          AnnotationReference _newAnnotationReference_1 = Util.this.context.newAnnotationReference(Pure.class);
-          it.addAnnotation(_newAnnotationReference_1);
+          Util.this.context.setPrimarySourceElement(it, Util.this.context.getPrimarySourceElement(cls));
+          it.setReturnType(Util.this.context.getPrimitiveInt());
+          it.addAnnotation(Util.this.context.newAnnotationReference(Override.class));
+          it.addAnnotation(Util.this.context.newAnnotationReference(Pure.class));
           StringConcatenationClient _client = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -443,7 +418,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
               {
                 for(final FieldDeclaration field : includedFields) {
                   StringConcatenationClient _contributeToHashCode = Util.this.contributeToHashCode(field);
-                  _builder.append(_contributeToHashCode, "");
+                  _builder.append(_contributeToHashCode);
                   _builder.newLineIfNotEmpty();
                 }
               }
@@ -459,9 +434,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     
     public StringConcatenationClient contributeToHashCode(final FieldDeclaration it) {
       StringConcatenationClient _switchResult = null;
-      TypeReference _type = it.getType();
-      TypeReference _orObject = this.orObject(_type);
-      String _name = _orObject.getName();
+      String _name = this.orObject(it.getType()).getName();
       boolean _matched = false;
       String _name_1 = Double.TYPE.getName();
       if (Objects.equal(_name, _name_1)) {
@@ -470,15 +443,15 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("result = prime * result + (int) (");
-            _builder.append(Double.class, "");
+            _builder.append(Double.class);
             _builder.append(".doubleToLongBits(this.");
             String _simpleName = it.getSimpleName();
-            _builder.append(_simpleName, "");
+            _builder.append(_simpleName);
             _builder.append(") ^ (");
-            _builder.append(Double.class, "");
+            _builder.append(Double.class);
             _builder.append(".doubleToLongBits(this.");
             String _simpleName_1 = it.getSimpleName();
-            _builder.append(_simpleName_1, "");
+            _builder.append(_simpleName_1);
             _builder.append(") >>> 32));");
           }
         };
@@ -492,10 +465,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               _builder.append("result = prime * result + ");
-              _builder.append(Float.class, "");
+              _builder.append(Float.class);
               _builder.append(".floatToIntBits(this.");
               String _simpleName = it.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append(");");
             }
           };
@@ -511,7 +484,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               _builder.append("result = prime * result + (this.");
               String _simpleName = it.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append(" ? 1231 : 1237);");
             }
           };
@@ -547,7 +520,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               _builder.append("result = prime * result + this.");
               String _simpleName = it.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append(";");
             }
           };
@@ -563,10 +536,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               _builder.append("result = prime * result + (int) (this.");
               String _simpleName = it.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append(" ^ (this.");
               String _simpleName_1 = it.getSimpleName();
-              _builder.append(_simpleName_1, "");
+              _builder.append(_simpleName_1);
               _builder.append(" >>> 32));");
             }
           };
@@ -579,10 +552,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("result = prime * result + ((this.");
             String _simpleName = it.getSimpleName();
-            _builder.append(_simpleName, "");
+            _builder.append(_simpleName);
             _builder.append("== null) ? 0 : ");
             StringConcatenationClient _deepHashCode = Util.this.deepHashCode(it);
-            _builder.append(_deepHashCode, "");
+            _builder.append(_deepHashCode);
             _builder.append(");");
           }
         };
@@ -594,22 +567,20 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     public StringConcatenationClient deepHashCode(final FieldDeclaration it) {
       StringConcatenationClient _xblockexpression = null;
       {
-        TypeReference _type = it.getType();
-        final TypeReference type = this.orObject(_type);
+        final TypeReference type = this.orObject(it.getType());
         StringConcatenationClient _xifexpression = null;
         boolean _isArray = type.isArray();
         if (_isArray) {
           StringConcatenationClient _xifexpression_1 = null;
-          TypeReference _arrayComponentType = type.getArrayComponentType();
-          boolean _isPrimitive = _arrayComponentType.isPrimitive();
+          boolean _isPrimitive = type.getArrayComponentType().isPrimitive();
           if (_isPrimitive) {
             StringConcatenationClient _client = new StringConcatenationClient() {
               @Override
               protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-                _builder.append(Arrays.class, "");
+                _builder.append(Arrays.class);
                 _builder.append(".hashCode(this.");
                 String _simpleName = it.getSimpleName();
-                _builder.append(_simpleName, "");
+                _builder.append(_simpleName);
                 _builder.append(")");
               }
             };
@@ -618,10 +589,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
             StringConcatenationClient _client_1 = new StringConcatenationClient() {
               @Override
               protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-                _builder.append(Arrays.class, "");
+                _builder.append(Arrays.class);
                 _builder.append(".deepHashCode(this.");
                 String _simpleName = it.getSimpleName();
-                _builder.append(_simpleName, "");
+                _builder.append(_simpleName);
                 _builder.append(")");
               }
             };
@@ -634,7 +605,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               _builder.append("this.");
               String _simpleName = it.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append(".hashCode()");
             }
           };
@@ -659,8 +630,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
   
   @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
-    Type _findTypeGlobally = context.findTypeGlobally(Data.class);
-    AnnotationReference _findAnnotation = it.findAnnotation(_findTypeGlobally);
+    AnnotationReference _findAnnotation = it.findAnnotation(context.findTypeGlobally(Data.class));
     boolean _tripleNotEquals = (_findAnnotation != null);
     if (_tripleNotEquals) {
       return;
@@ -669,26 +639,22 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     final EqualsHashCodeProcessor.Util util = new EqualsHashCodeProcessor.Util(context);
     boolean _hasEquals = util.hasEquals(it);
     if (_hasEquals) {
-      Type _findTypeGlobally_1 = context.findTypeGlobally(EqualsHashCode.class);
-      final AnnotationReference annotation = it.findAnnotation(_findTypeGlobally_1);
+      final AnnotationReference annotation = it.findAnnotation(context.findTypeGlobally(EqualsHashCode.class));
       context.addWarning(annotation, "equals is already defined, this annotation has no effect");
     } else {
       boolean _hasHashCode = util.hasHashCode(it);
       if (_hasHashCode) {
         context.addWarning(it, "hashCode is already defined, this annotation has no effect");
       } else {
-        Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
         final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
           @Override
           public Boolean apply(final MutableFieldDeclaration it) {
             return Boolean.valueOf((((!it.isStatic()) && (!it.isTransient())) && context.isThePrimaryGeneratedJavaElement(it)));
           }
         };
-        final Iterable<? extends MutableFieldDeclaration> fields = IterableExtensions.filter(_declaredFields, _function);
-        boolean _hasSuperEquals = util.hasSuperEquals(it);
-        util.addEquals(it, fields, _hasSuperEquals);
-        boolean _hasSuperHashCode = util.hasSuperHashCode(it);
-        util.addHashCode(it, fields, _hasSuperHashCode);
+        final Iterable<? extends MutableFieldDeclaration> fields = IterableExtensions.filter(it.getDeclaredFields(), _function);
+        util.addEquals(it, fields, util.hasSuperEquals(it));
+        util.addHashCode(it, fields, util.hasSuperHashCode(it));
       }
     }
   }

@@ -18,14 +18,13 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ToStringContext;
 
 /**
@@ -71,8 +70,7 @@ public final class ToStringBuilder {
       if ((this.indentation > 0)) {
         String _repeat = Strings.repeat(this.indentationString, this.indentation);
         final String replacement = (this.newLineString + _repeat);
-        String _string = string.toString();
-        final String indented = _string.replace(this.newLineString, replacement);
+        final String indented = string.toString().replace(this.newLineString, replacement);
         this.builder.append(indented);
       } else {
         this.builder.append(string);
@@ -81,9 +79,7 @@ public final class ToStringBuilder {
     }
     
     public IndentationAwareStringBuilder newLine() {
-      StringBuilder _append = this.builder.append(this.newLineString);
-      String _repeat = Strings.repeat(this.indentationString, this.indentation);
-      _append.append(_repeat);
+      this.builder.append(this.newLineString).append(Strings.repeat(this.indentationString, this.indentation));
       return this;
     }
     
@@ -118,9 +114,7 @@ public final class ToStringBuilder {
    */
   public ToStringBuilder(final Object instance) {
     this.instance = instance;
-    Class<?> _class = instance.getClass();
-    String _simpleName = _class.getSimpleName();
-    this.typeName = _simpleName;
+    this.typeName = instance.getClass().getSimpleName();
   }
   
   /**
@@ -167,15 +161,13 @@ public final class ToStringBuilder {
    */
   @GwtIncompatible("Class.getDeclaredFields")
   public ToStringBuilder addDeclaredFields() {
-    Class<?> _class = this.instance.getClass();
-    Field[] _declaredFields = _class.getDeclaredFields();
-    final Consumer<Field> _function = new Consumer<Field>() {
+    final Procedure1<Field> _function = new Procedure1<Field>() {
       @Override
-      public void accept(final Field it) {
+      public void apply(final Field it) {
         ToStringBuilder.this.addField(it);
       }
     };
-    ((List<Field>)Conversions.doWrapArray(_declaredFields)).forEach(_function);
+    IterableExtensions.<Field>forEach(((Iterable<Field>)Conversions.doWrapArray(this.instance.getClass().getDeclaredFields())), _function);
     return this;
   }
   
@@ -185,15 +177,13 @@ public final class ToStringBuilder {
    */
   @GwtIncompatible("Class.getDeclaredFields")
   public ToStringBuilder addAllFields() {
-    Class<?> _class = this.instance.getClass();
-    ArrayList<Field> _allDeclaredFields = this.getAllDeclaredFields(_class);
-    final Consumer<Field> _function = new Consumer<Field>() {
+    final Procedure1<Field> _function = new Procedure1<Field>() {
       @Override
-      public void accept(final Field it) {
+      public void apply(final Field it) {
         ToStringBuilder.this.addField(it);
       }
     };
-    _allDeclaredFields.forEach(_function);
+    IterableExtensions.<Field>forEach(this.getAllDeclaredFields(this.instance.getClass()), _function);
     return this;
   }
   
@@ -203,8 +193,6 @@ public final class ToStringBuilder {
    */
   @GwtIncompatible("Class.getDeclaredField(String)")
   public ToStringBuilder addField(final String fieldName) {
-    Class<?> _class = this.instance.getClass();
-    ArrayList<Field> _allDeclaredFields = this.getAllDeclaredFields(_class);
     final Function1<Field, Boolean> _function = new Function1<Field, Boolean>() {
       @Override
       public Boolean apply(final Field it) {
@@ -212,24 +200,20 @@ public final class ToStringBuilder {
         return Boolean.valueOf(Objects.equal(_name, fieldName));
       }
     };
-    Field _findFirst = IterableExtensions.<Field>findFirst(_allDeclaredFields, _function);
-    return this.addField(_findFirst);
+    return this.addField(IterableExtensions.<Field>findFirst(this.getAllDeclaredFields(this.instance.getClass()), _function));
   }
   
   @GwtIncompatible("java.lang.reflect.Field")
   private ToStringBuilder addField(final Field field) {
     try {
       ToStringBuilder _xifexpression = null;
-      int _modifiers = field.getModifiers();
-      boolean _isStatic = Modifier.isStatic(_modifiers);
+      boolean _isStatic = Modifier.isStatic(field.getModifiers());
       boolean _not = (!_isStatic);
       if (_not) {
         ToStringBuilder _xblockexpression = null;
         {
           field.setAccessible(true);
-          String _name = field.getName();
-          Object _get = field.get(this.instance);
-          _xblockexpression = this.add(_name, _get);
+          _xblockexpression = this.add(field.getName(), field.get(this.instance));
         }
         _xifexpression = _xblockexpression;
       }
@@ -287,8 +271,7 @@ public final class ToStringBuilder {
     }
     try {
       final IndentationAwareStringBuilder builder = new IndentationAwareStringBuilder();
-      IndentationAwareStringBuilder _append = builder.append(this.typeName);
-      _append.append(" ");
+      builder.append(this.typeName).append(" ");
       builder.append("[");
       String nextSeparator = "";
       if (this.multiLine) {
@@ -303,15 +286,13 @@ public final class ToStringBuilder {
             nextSeparator = ", ";
           }
           if (((part.fieldName != null) && this.showFieldNames)) {
-            IndentationAwareStringBuilder _append_1 = builder.append(part.fieldName);
-            _append_1.append(" = ");
+            builder.append(part.fieldName).append(" = ");
           }
           this.internalToString(part.value, builder);
         }
       }
       if (this.multiLine) {
-        IndentationAwareStringBuilder _decreaseIndent = builder.decreaseIndent();
-        _decreaseIndent.newLine();
+        builder.decreaseIndent().newLine();
       }
       builder.append("]");
       return builder.toString();
@@ -326,51 +307,36 @@ public final class ToStringBuilder {
         this.serializeIterable(((Iterable<?>)object), sb);
       } else {
         if ((object instanceof Object[])) {
-          String _string = Arrays.toString(((Object[])object));
-          sb.append(_string);
+          sb.append(Arrays.toString(((Object[])object)));
         } else {
           if ((object instanceof byte[])) {
-            String _string_1 = Arrays.toString(((byte[])object));
-            sb.append(_string_1);
+            sb.append(Arrays.toString(((byte[])object)));
           } else {
             if ((object instanceof char[])) {
-              String _string_2 = Arrays.toString(((char[])object));
-              sb.append(_string_2);
+              sb.append(Arrays.toString(((char[])object)));
             } else {
               if ((object instanceof int[])) {
-                String _string_3 = Arrays.toString(((int[])object));
-                sb.append(_string_3);
+                sb.append(Arrays.toString(((int[])object)));
               } else {
                 if ((object instanceof boolean[])) {
-                  String _string_4 = Arrays.toString(((boolean[])object));
-                  sb.append(_string_4);
+                  sb.append(Arrays.toString(((boolean[])object)));
                 } else {
                   if ((object instanceof long[])) {
-                    String _string_5 = Arrays.toString(((long[])object));
-                    sb.append(_string_5);
+                    sb.append(Arrays.toString(((long[])object)));
                   } else {
                     if ((object instanceof float[])) {
-                      String _string_6 = Arrays.toString(((float[])object));
-                      sb.append(_string_6);
+                      sb.append(Arrays.toString(((float[])object)));
                     } else {
                       if ((object instanceof double[])) {
-                        String _string_7 = Arrays.toString(((double[])object));
-                        sb.append(_string_7);
+                        sb.append(Arrays.toString(((double[])object)));
                       } else {
                         if ((object instanceof CharSequence)) {
-                          IndentationAwareStringBuilder _append = sb.append("\"");
-                          String _string_8 = ((CharSequence)object).toString();
-                          String _replace = _string_8.replace("\n", "\\n");
-                          String _replace_1 = _replace.replace("\r", "\\r");
-                          IndentationAwareStringBuilder _append_1 = _append.append(_replace_1);
-                          _append_1.append("\"");
+                          sb.append("\"").append(((CharSequence)object).toString().replace("\n", "\\n").replace("\r", "\\r")).append("\"");
                         } else {
                           if ((object instanceof Enum<?>)) {
-                            String _name = ((Enum<?>)object).name();
-                            sb.append(_name);
+                            sb.append(((Enum<?>)object).name());
                           } else {
-                            String _valueOf = String.valueOf(object);
-                            sb.append(_valueOf);
+                            sb.append(String.valueOf(object));
                           }
                         }
                       }
@@ -383,17 +349,13 @@ public final class ToStringBuilder {
         }
       }
     } else {
-      String _valueOf_1 = String.valueOf(object);
-      sb.append(_valueOf_1);
+      sb.append(String.valueOf(object));
     }
   }
   
   private void serializeIterable(final Iterable<?> object, final IndentationAwareStringBuilder sb) {
     final Iterator<?> iterator = object.iterator();
-    Class<? extends Iterable> _class = object.getClass();
-    String _simpleName = _class.getSimpleName();
-    IndentationAwareStringBuilder _append = sb.append(_simpleName);
-    _append.append(" (");
+    sb.append(object.getClass().getSimpleName()).append(" (");
     if (this.multiLine) {
       sb.increaseIndent();
     }
@@ -404,8 +366,7 @@ public final class ToStringBuilder {
         if (this.multiLine) {
           sb.newLine();
         }
-        Object _next = iterator.next();
-        this.internalToString(_next, sb);
+        this.internalToString(iterator.next(), sb);
         boolean _hasNext = iterator.hasNext();
         if (_hasNext) {
           sb.append(",");
@@ -422,8 +383,7 @@ public final class ToStringBuilder {
   }
   
   private String toSimpleReferenceString(final Object obj) {
-    Class<?> _class = obj.getClass();
-    String _simpleName = _class.getSimpleName();
+    String _simpleName = obj.getClass().getSimpleName();
     String _plus = (_simpleName + "@");
     int _identityHashCode = System.identityHashCode(obj);
     return (_plus + Integer.valueOf(_identityHashCode));
@@ -437,8 +397,7 @@ public final class ToStringBuilder {
       {
         Field[] _declaredFields = current.getDeclaredFields();
         Iterables.<Field>addAll(result, ((Iterable<? extends Field>)Conversions.doWrapArray(_declaredFields)));
-        Class<?> _superclass = current.getSuperclass();
-        current = _superclass;
+        current = current.getSuperclass();
       }
     } while((current != null));
     return result;
