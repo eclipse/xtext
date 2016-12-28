@@ -29,9 +29,7 @@ public class StatemachineResourceSetProvider implements IWebResourceSetProvider 
   @Override
   public ResourceSet get(final String resourceId, final IServiceContext serviceContext) {
     if (((resourceId != null) && resourceId.startsWith(StatemachineResourceSetProvider.MULTI_RESOURCE_PREFIX))) {
-      int _indexOf = resourceId.indexOf("/");
-      int _length = StatemachineResourceSetProvider.MULTI_RESOURCE_PREFIX.length();
-      final int pathEnd = Math.max(_indexOf, _length);
+      final int pathEnd = Math.max(resourceId.indexOf("/"), StatemachineResourceSetProvider.MULTI_RESOURCE_PREFIX.length());
       ISession _session = serviceContext.getSession();
       String _substring = resourceId.substring(0, pathEnd);
       Pair<Class<ResourceSet>, String> _mappedTo = Pair.<Class<ResourceSet>, String>of(ResourceSet.class, _substring);

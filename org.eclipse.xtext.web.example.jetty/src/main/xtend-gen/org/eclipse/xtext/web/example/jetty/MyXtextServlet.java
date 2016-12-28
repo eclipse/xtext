@@ -25,10 +25,8 @@ public class MyXtextServlet extends XtextServlet {
     try {
       super.init();
       final ResourceBaseProviderImpl resourceBaseProvider = new ResourceBaseProviderImpl("./test-files");
-      StatemachineWebSetup _statemachineWebSetup = new StatemachineWebSetup(resourceBaseProvider);
-      _statemachineWebSetup.createInjectorAndDoEMFRegistration();
-      EntitiesWebSetup _entitiesWebSetup = new EntitiesWebSetup(resourceBaseProvider);
-      _entitiesWebSetup.createInjectorAndDoEMFRegistration();
+      new StatemachineWebSetup(resourceBaseProvider).createInjectorAndDoEMFRegistration();
+      new EntitiesWebSetup(resourceBaseProvider).createInjectorAndDoEMFRegistration();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

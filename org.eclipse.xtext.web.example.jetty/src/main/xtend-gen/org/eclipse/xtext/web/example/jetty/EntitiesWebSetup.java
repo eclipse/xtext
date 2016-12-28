@@ -9,7 +9,6 @@ package org.eclipse.xtext.web.example.jetty;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule;
@@ -31,8 +30,7 @@ public class EntitiesWebSetup extends EntitiesStandaloneSetup {
     final EntitiesWebModule webModule = new EntitiesWebModule(this.resourceBaseProvider);
     EntitiesRuntimeModule _entitiesRuntimeModule = new EntitiesRuntimeModule();
     EntitiesIdeModule _entitiesIdeModule = new EntitiesIdeModule();
-    Module _mixin = Modules2.mixin(_entitiesRuntimeModule, _entitiesIdeModule, webModule);
-    return Guice.createInjector(_mixin);
+    return Guice.createInjector(Modules2.mixin(_entitiesRuntimeModule, _entitiesIdeModule, webModule));
   }
   
   public EntitiesWebSetup(final IResourceBaseProvider resourceBaseProvider) {

@@ -9,7 +9,6 @@ package org.eclipse.xtext.web.example.statemachine.ide;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup;
@@ -24,7 +23,6 @@ public class StatemachineIdeSetup extends StatemachineStandaloneSetup {
   public Injector createInjector() {
     StatemachineRuntimeModule _statemachineRuntimeModule = new StatemachineRuntimeModule();
     StatemachineIdeModule _statemachineIdeModule = new StatemachineIdeModule();
-    Module _mixin = Modules2.mixin(_statemachineRuntimeModule, _statemachineIdeModule);
-    return Guice.createInjector(_mixin);
+    return Guice.createInjector(Modules2.mixin(_statemachineRuntimeModule, _statemachineIdeModule));
   }
 }

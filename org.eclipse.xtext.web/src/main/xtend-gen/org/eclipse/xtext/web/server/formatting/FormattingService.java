@@ -122,9 +122,7 @@ public class FormattingService {
       TextRegion _textRegion = new TextRegion(_offset, _length);
       region = _textRegion;
     }
-    int _offset_1 = region.getOffset();
-    int _length_1 = region.getLength();
-    return this.formatter1.format(rootNode, _offset_1, _length_1);
+    return this.formatter1.format(rootNode, region.getOffset(), region.getLength());
   }
   
   protected String format2(final XtextResource resource, final ITextRegion selection, final ITypedPreferenceValues preferences) {
@@ -137,8 +135,7 @@ public class FormattingService {
     if ((preferences != null)) {
       request.setPreferences(preferences);
     }
-    TextRegionAccessBuilder _forNodeModel = this.regionBuilder.forNodeModel(resource);
-    final ITextRegionAccess regionAccess = _forNodeModel.create();
+    final ITextRegionAccess regionAccess = this.regionBuilder.forNodeModel(resource).create();
     request.setTextRegionAccess(regionAccess);
     final IFormatter2 formatter2 = this.formatter2Provider.get();
     final List<ITextReplacement> replacements = formatter2.format(request);
@@ -149,8 +146,7 @@ public class FormattingService {
       TextSegment _textSegment = new TextSegment(regionAccess, _offset, _length);
       return _rewriter.renderToString(_textSegment, replacements);
     } else {
-      ITextRegionRewriter _rewriter_1 = regionAccess.getRewriter();
-      return _rewriter_1.renderToString(replacements);
+      return regionAccess.getRewriter().renderToString(replacements);
     }
   }
 }

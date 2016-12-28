@@ -15,7 +15,6 @@ import org.eclipse.xtext.web.example.entities.EntitiesStandaloneSetupGenerated;
 @SuppressWarnings("all")
 public class EntitiesStandaloneSetup extends EntitiesStandaloneSetupGenerated {
   public static void doSetup() {
-    EntitiesStandaloneSetup _entitiesStandaloneSetup = new EntitiesStandaloneSetup();
-    _entitiesStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new EntitiesStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

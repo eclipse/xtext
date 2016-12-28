@@ -10,9 +10,7 @@ package org.eclipse.xtext.web.servlet;
 import com.google.common.io.ByteStreams;
 import java.io.InputStream;
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,8 +58,7 @@ public class XtextResourcesServlet extends HttpServlet {
           response.setDateHeader("Expires", _plus_1);
           response.addHeader("Cache-Control", ("private, max-age=" + Long.valueOf(XtextResourcesServlet.DEFAULT_EXPIRE_TIME_S)));
         }
-        ServletContext _servletContext = this.getServletContext();
-        final String mimeType = _servletContext.getMimeType(fileName);
+        final String mimeType = this.getServletContext().getMimeType(fileName);
         String _elvis = null;
         if (mimeType != null) {
           _elvis = mimeType;
@@ -69,8 +66,7 @@ public class XtextResourcesServlet extends HttpServlet {
           _elvis = "application/octet-stream";
         }
         response.setContentType(_elvis);
-        ServletOutputStream _outputStream = response.getOutputStream();
-        ByteStreams.copy(inputStream, _outputStream);
+        ByteStreams.copy(inputStream, response.getOutputStream());
       } else {
         response.sendError(HttpServletResponse.SC_NOT_FOUND);
       }
@@ -80,7 +76,6 @@ public class XtextResourcesServlet extends HttpServlet {
   }
   
   protected InputStream getResourceAsStream(final String resourceURI) {
-    ClassLoader _classLoader = XtextServiceDispatcher.class.getClassLoader();
-    return _classLoader.getResourceAsStream(resourceURI);
+    return XtextServiceDispatcher.class.getClassLoader().getResourceAsStream(resourceURI);
   }
 }

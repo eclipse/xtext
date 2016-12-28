@@ -67,8 +67,7 @@ public class UpdateDocumentService {
     final CancelableUnitOfWork<Object, IXtextWebDocument> _function_1 = new CancelableUnitOfWork<Object, IXtextWebDocument>() {
       @Override
       public Object exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        String _text = it.getText();
-        int _length = _text.length();
+        int _length = it.getText().length();
         boolean _lessEqualsThan = (offset <= _length);
         if (_lessEqualsThan) {
           it.updateText(deltaText, offset, replaceLength);

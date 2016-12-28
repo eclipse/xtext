@@ -59,7 +59,6 @@ public class ResourcePersistenceService {
         return _xtrycatchfinallyexpression;
       };
       final XtextWebDocument document = _session.<XtextWebDocument>get(_mappedTo, _function);
-      XtextWebDocumentAccess _create = this.documentAccessFactory.create(document, false);
       final CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument> _function_1 = new CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument>() {
         @Override
         public ResourceContentResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
@@ -69,7 +68,7 @@ public class ResourcePersistenceService {
           return new ResourceContentResult(_text, _stateId, _isDirty);
         }
       };
-      _xblockexpression = _create.<ResourceContentResult>readOnly(_function_1);
+      _xblockexpression = this.documentAccessFactory.create(document, false).<ResourceContentResult>readOnly(_function_1);
     }
     return _xblockexpression;
   }

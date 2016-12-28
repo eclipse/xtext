@@ -15,7 +15,6 @@ import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetupGen
 @SuppressWarnings("all")
 public class StatemachineStandaloneSetup extends StatemachineStandaloneSetupGenerated {
   public static void doSetup() {
-    StatemachineStandaloneSetup _statemachineStandaloneSetup = new StatemachineStandaloneSetup();
-    _statemachineStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new StatemachineStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

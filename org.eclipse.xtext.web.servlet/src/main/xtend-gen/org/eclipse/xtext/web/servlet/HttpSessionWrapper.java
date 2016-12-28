@@ -25,8 +25,7 @@ public class HttpSessionWrapper implements ISession {
   
   @Override
   public <T extends Object> T get(final Object key) {
-    String _string = key.toString();
-    Object _attribute = this.session.getAttribute(_string);
+    Object _attribute = this.session.getAttribute(key.toString());
     return ((T) _attribute);
   }
   
@@ -46,14 +45,12 @@ public class HttpSessionWrapper implements ISession {
   
   @Override
   public void put(final Object key, final Object value) {
-    String _string = key.toString();
-    this.session.setAttribute(_string, value);
+    this.session.setAttribute(key.toString(), value);
   }
   
   @Override
   public void remove(final Object key) {
-    String _string = key.toString();
-    this.session.removeAttribute(_string);
+    this.session.removeAttribute(key.toString());
   }
   
   public HttpSessionWrapper(final HttpSession session) {

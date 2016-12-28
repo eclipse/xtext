@@ -8,7 +8,6 @@
 package org.eclipse.xtext.web.example.jetty;
 
 import com.google.inject.Binder;
-import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.web.example.jetty.AbstractEntitiesWebModule;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
@@ -25,8 +24,7 @@ public class EntitiesWebModule extends AbstractEntitiesWebModule {
   
   public void configureResourceBaseProvider(final Binder binder) {
     if ((this.resourceBaseProvider != null)) {
-      AnnotatedBindingBuilder<IResourceBaseProvider> _bind = binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class);
-      _bind.toInstance(this.resourceBaseProvider);
+      binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class).toInstance(this.resourceBaseProvider);
     }
   }
   

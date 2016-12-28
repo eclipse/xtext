@@ -20,7 +20,6 @@ import org.eclipse.xtext.web.server.formatting.FormattingResult;
 import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
 import org.eclipse.xtext.web.server.test.languages.formatting.StatemachineFormatter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 import org.junit.Test;
@@ -50,8 +49,7 @@ public class Formatting1Test extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor format = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
     Assert.assertTrue(format.isHasSideEffects());
-    Function0<? extends IServiceResult> _service = format.getService();
-    IServiceResult _apply = _service.apply();
+    IServiceResult _apply = format.getService().apply();
     final FormattingResult result = ((FormattingResult) _apply);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("FormattingResult [");
@@ -81,8 +79,7 @@ public class Formatting1Test extends AbstractWebServerTest {
     final XtextServiceDispatcher.ServiceDescriptor format = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
     Assert.assertTrue(format.isHasSideEffects());
-    Function0<? extends IServiceResult> _service = format.getService();
-    IServiceResult _apply = _service.apply();
+    IServiceResult _apply = format.getService().apply();
     final FormattingResult result = ((FormattingResult) _apply);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("FormattingResult [");

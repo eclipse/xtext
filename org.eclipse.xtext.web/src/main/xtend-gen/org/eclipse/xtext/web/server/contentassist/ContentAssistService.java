@@ -21,7 +21,6 @@ import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
@@ -68,8 +67,7 @@ public class ContentAssistService {
       public ContentAssistContext[] exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
         ContentAssistContext[] _xblockexpression = null;
         {
-          String _stateId = it.getStateId();
-          stateIdWrapper[0] = _stateId;
+          stateIdWrapper[0] = it.getStateId();
           _xblockexpression = ContentAssistService.this.getContexts(it, selection, caretOffset);
         }
         return _xblockexpression;
@@ -93,8 +91,7 @@ public class ContentAssistService {
         {
           it.setDirty(true);
           it.createNewStateId();
-          String _stateId = it.getStateId();
-          stateIdWrapper[0] = _stateId;
+          stateIdWrapper[0] = it.getStateId();
           it.updateText(deltaText, deltaOffset, deltaReplaceLength);
           _xblockexpression = ContentAssistService.this.getContexts(it, selection, caretOffset);
         }
@@ -108,8 +105,7 @@ public class ContentAssistService {
   public ContentAssistContext[] getContexts(final IXtextWebDocument document, final ITextRegion selection, final int caretOffset) {
     ContentAssistContext[] _xblockexpression = null;
     {
-      String _text = document.getText();
-      int _length = _text.length();
+      int _length = document.getText().length();
       boolean _greaterThan = (caretOffset > _length);
       if (_greaterThan) {
         return new ContentAssistContext[] {};
@@ -119,9 +115,7 @@ public class ContentAssistService {
         it.setPool(this.executorService);
       };
       final ContentAssistContextFactory contextFactory = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
-      String _text_1 = document.getText();
-      XtextResource _resource = document.getResource();
-      _xblockexpression = contextFactory.create(_text_1, selection, caretOffset, _resource);
+      _xblockexpression = contextFactory.create(document.getText(), selection, caretOffset, document.getResource());
     }
     return _xblockexpression;
   }
@@ -156,44 +150,35 @@ public class ContentAssistService {
         }
       };
       this.proposalProvider.createProposals(contexts, acceptor);
-      List<ContentAssistEntry> _entries = result.getEntries();
       final Comparator<Pair<Integer, ContentAssistEntry>> _function = (Pair<Integer, ContentAssistEntry> p1, Pair<Integer, ContentAssistEntry> p2) -> {
-        Integer _key = p2.getKey();
-        Integer _key_1 = p1.getKey();
-        final int prioResult = _key.compareTo(_key_1);
+        final int prioResult = p2.getKey().compareTo(p1.getKey());
         if ((prioResult != 0)) {
           return prioResult;
         }
         String _elvis = null;
-        ContentAssistEntry _value = p1.getValue();
-        String _label = _value.getLabel();
+        String _label = p1.getValue().getLabel();
         if (_label != null) {
           _elvis = _label;
         } else {
-          ContentAssistEntry _value_1 = p1.getValue();
-          String _proposal = _value_1.getProposal();
+          String _proposal = p1.getValue().getProposal();
           _elvis = _proposal;
         }
         final String s1 = _elvis;
         String _elvis_1 = null;
-        ContentAssistEntry _value_2 = p2.getValue();
-        String _label_1 = _value_2.getLabel();
+        String _label_1 = p2.getValue().getLabel();
         if (_label_1 != null) {
           _elvis_1 = _label_1;
         } else {
-          ContentAssistEntry _value_3 = p2.getValue();
-          String _proposal_1 = _value_3.getProposal();
+          String _proposal_1 = p2.getValue().getProposal();
           _elvis_1 = _proposal_1;
         }
         final String s2 = _elvis_1;
         return s1.compareTo(s2);
       };
-      List<Pair<Integer, ContentAssistEntry>> _sortWith = IterableExtensions.<Pair<Integer, ContentAssistEntry>>sortWith(proposals, _function);
       final Function1<Pair<Integer, ContentAssistEntry>, ContentAssistEntry> _function_1 = (Pair<Integer, ContentAssistEntry> it) -> {
         return it.getValue();
       };
-      List<ContentAssistEntry> _map = ListExtensions.<Pair<Integer, ContentAssistEntry>, ContentAssistEntry>map(_sortWith, _function_1);
-      _entries.addAll(_map);
+      result.getEntries().addAll(ListExtensions.<Pair<Integer, ContentAssistEntry>, ContentAssistEntry>map(IterableExtensions.<Pair<Integer, ContentAssistEntry>>sortWith(proposals, _function), _function_1));
     }
     return result;
   }

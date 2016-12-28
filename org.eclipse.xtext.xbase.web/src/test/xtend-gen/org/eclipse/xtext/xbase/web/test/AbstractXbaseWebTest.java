@@ -52,9 +52,7 @@ public abstract class AbstractXbaseWebTest {
           final EntitiesWebModule webModule = new EntitiesWebModule();
           final EntitiesIdeModule ideModule = new EntitiesIdeModule();
           webModule.setResourceBaseProvider(AbstractXbaseWebTest.this.resourceBaseProvider);
-          Module _runtimeModule = AbstractXbaseWebTest.this.getRuntimeModule();
-          Module _mixin = Modules2.mixin(_runtimeModule, ideModule, webModule);
-          return Guice.createInjector(_mixin);
+          return Guice.createInjector(Modules2.mixin(AbstractXbaseWebTest.this.getRuntimeModule(), ideModule, webModule));
         }
       }.createInjectorAndDoEMFRegistration();
     }
@@ -91,10 +89,7 @@ public abstract class AbstractXbaseWebTest {
   protected File createFile(final String content) {
     try {
       final File file = File.createTempFile("test", ".entities");
-      String _name = file.getName();
-      String _absolutePath = file.getAbsolutePath();
-      URI _createFileURI = URI.createFileURI(_absolutePath);
-      this.resourceBaseProvider.testFiles.put(_name, _createFileURI);
+      this.resourceBaseProvider.testFiles.put(file.getName(), URI.createFileURI(file.getAbsolutePath()));
       final FileWriter writer = new FileWriter(file);
       writer.write(content);
       writer.close();

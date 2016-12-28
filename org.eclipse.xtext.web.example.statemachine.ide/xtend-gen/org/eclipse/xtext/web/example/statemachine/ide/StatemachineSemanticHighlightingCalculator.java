@@ -8,9 +8,7 @@
 package org.eclipse.xtext.web.example.statemachine.ide;
 
 import com.google.inject.Inject;
-import java.util.List;
 import java.util.function.Consumer;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
@@ -55,14 +53,9 @@ public class StatemachineSemanticHighlightingCalculator extends DefaultSemanticH
   
   protected void highlightSignal(final EObject owner, final Signal signal, final EStructuralFeature feature, final IHighlightedPositionAcceptor acceptor, final CancelIndicator cancelIndicator) {
     this._operationCanceledManager.checkCanceled(cancelIndicator);
-    List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(owner, feature);
     final Consumer<INode> _function = (INode it) -> {
-      int _offset = it.getOffset();
-      int _length = it.getLength();
-      EClass _eClass = signal.eClass();
-      String _name = _eClass.getName();
-      acceptor.addPosition(_offset, _length, _name);
+      acceptor.addPosition(it.getOffset(), it.getLength(), signal.eClass().getName());
     };
-    _findNodesForFeature.forEach(_function);
+    NodeModelUtils.findNodesForFeature(owner, feature).forEach(_function);
   }
 }

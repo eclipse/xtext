@@ -13,12 +13,8 @@ import com.google.inject.Singleton;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -240,8 +236,6 @@ public class XtextServiceDispatcher {
     }
     boolean _isTraceEnabled = XtextServiceDispatcher.LOG.isTraceEnabled();
     if (_isTraceEnabled) {
-      Set<String> _parameterKeys = context.getParameterKeys();
-      List<String> _sort = IterableExtensions.<String>sort(_parameterKeys);
       final Function1<String, CharSequence> _function = (String key) -> {
         String _xblockexpression = null;
         {
@@ -267,8 +261,7 @@ public class XtextServiceDispatcher {
         }
         return _xblockexpression;
       };
-      String _join = IterableExtensions.<String>join(_sort, ": ", ", ", "", _function);
-      final String stringParams = _join.replaceAll("(\\n|\\f|\\r)+", " ");
+      final String stringParams = IterableExtensions.<String>join(IterableExtensions.<String>sort(context.getParameterKeys()), ": ", ", ", "", _function).replaceAll("(\\n|\\f|\\r)+", " ");
       XtextServiceDispatcher.LOG.trace((("xtext-service/" + serviceType) + stringParams));
     }
     try {
@@ -426,8 +419,7 @@ public class XtextServiceDispatcher {
       }
       document = this.getFullTextDocument(fullText, resourceId, context);
     }
-    String _parameter = context.getParameter("requiredStateId");
-    final XtextWebDocumentAccess documentAccess = this.documentAccessFactory.create(document, _parameter, false);
+    final XtextWebDocumentAccess documentAccess = this.documentAccessFactory.create(document, context.getParameter("requiredStateId"), false);
     XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
     final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = (XtextServiceDispatcher.ServiceDescriptor it) -> {
       it.hasSideEffects = true;
@@ -438,13 +430,11 @@ public class XtextServiceDispatcher {
       if ((deltaText == null)) {
         throw new InvalidRequestException.InvalidParametersException("One of the parameters \'deltaText\' and \'fullText\' must be specified.");
       }
-      Optional<Integer> _absent = Optional.<Integer>absent();
-      final int deltaOffset = this.getInt(context, "deltaOffset", _absent);
+      final int deltaOffset = this.getInt(context, "deltaOffset", Optional.<Integer>absent());
       if ((deltaOffset < 0)) {
         throw new InvalidRequestException.InvalidParametersException("The parameter \'deltaOffset\' must not be negative.");
       }
-      Optional<Integer> _absent_1 = Optional.<Integer>absent();
-      final int deltaReplaceLength = this.getInt(context, "deltaReplaceLength", _absent_1);
+      final int deltaReplaceLength = this.getInt(context, "deltaReplaceLength", Optional.<Integer>absent());
       if ((deltaReplaceLength < 0)) {
         throw new InvalidRequestException.InvalidParametersException("The parameter \'deltaReplaceLength\' must not be negative.");
       }
@@ -464,8 +454,7 @@ public class XtextServiceDispatcher {
       };
       result.service = _function_1;
     } else {
-      Set<String> _parameterKeys = context.getParameterKeys();
-      boolean _contains = _parameterKeys.contains("deltaText");
+      boolean _contains = context.getParameterKeys().contains("deltaText");
       if (_contains) {
         throw new InvalidRequestException.InvalidParametersException("The parameters \'deltaText\' and \'fullText\' cannot be set in the same request.");
       }
@@ -497,21 +486,17 @@ public class XtextServiceDispatcher {
   protected XtextServiceDispatcher.ServiceDescriptor getContentAssistService(final IServiceContext context) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
-      final int offset = this.getInt(context, "caretOffset", _of);
+      final int offset = this.getInt(context, "caretOffset", Optional.<Integer>of(Integer.valueOf(0)));
       if ((offset < 0)) {
         throw new InvalidRequestException.InvalidParametersException("The parameter \'offset\' must not be negative.");
       }
       final XtextWebDocumentAccess document = this.getDocumentAccess(context);
-      Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(ContentAssistService.DEFAULT_PROPOSALS_LIMIT));
-      final int proposalsLimit = this.getInt(context, "proposalsLimit", _of_1);
+      final int proposalsLimit = this.getInt(context, "proposalsLimit", Optional.<Integer>of(Integer.valueOf(ContentAssistService.DEFAULT_PROPOSALS_LIMIT)));
       if ((proposalsLimit <= 0)) {
         throw new InvalidRequestException.InvalidParametersException("The parameter \'proposalsLimit\' must contain a positive integer.");
       }
-      Optional<Integer> _of_2 = Optional.<Integer>of(Integer.valueOf(offset));
-      final int selectionStart = this.getInt(context, "selectionStart", _of_2);
-      Optional<Integer> _of_3 = Optional.<Integer>of(Integer.valueOf(selectionStart));
-      final int selectionEnd = this.getInt(context, "selectionEnd", _of_3);
+      final int selectionStart = this.getInt(context, "selectionStart", Optional.<Integer>of(Integer.valueOf(offset)));
+      final int selectionEnd = this.getInt(context, "selectionEnd", Optional.<Integer>of(Integer.valueOf(selectionStart)));
       int _max = Math.max((selectionEnd - selectionStart), 0);
       final TextRegion selection = new TextRegion(selectionStart, _max);
       final String deltaText = context.getParameter("deltaText");
@@ -539,18 +524,15 @@ public class XtextServiceDispatcher {
       } else {
         XtextServiceDispatcher.ServiceDescriptor _xblockexpression_1 = null;
         {
-          Set<String> _parameterKeys = context.getParameterKeys();
-          boolean _contains = _parameterKeys.contains("fullText");
+          boolean _contains = context.getParameterKeys().contains("fullText");
           if (_contains) {
             throw new InvalidRequestException.InvalidParametersException("The parameters \'deltaText\' and \'fullText\' cannot be set in the same request.");
           }
-          Optional<Integer> _absent = Optional.<Integer>absent();
-          final int deltaOffset = this.getInt(context, "deltaOffset", _absent);
+          final int deltaOffset = this.getInt(context, "deltaOffset", Optional.<Integer>absent());
           if ((deltaOffset < 0)) {
             throw new InvalidRequestException.InvalidParametersException("The parameter \'deltaOffset\' must not be negative.");
           }
-          Optional<Integer> _absent_1 = Optional.<Integer>absent();
-          final int deltaReplaceLength = this.getInt(context, "deltaReplaceLength", _absent_1);
+          final int deltaReplaceLength = this.getInt(context, "deltaReplaceLength", Optional.<Integer>absent());
           if ((deltaReplaceLength < 0)) {
             throw new InvalidRequestException.InvalidParametersException("The parameter \'deltaReplaceLength\' must not be negative.");
           }
@@ -613,15 +595,12 @@ public class XtextServiceDispatcher {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
       final XtextWebDocumentAccess document = this.getDocumentAccess(context);
-      Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
-      final int offset = this.getInt(context, "caretOffset", _of);
+      final int offset = this.getInt(context, "caretOffset", Optional.<Integer>of(Integer.valueOf(0)));
       if ((offset < 0)) {
         throw new InvalidRequestException.InvalidParametersException("The parameter \'offset\' must not be negative.");
       }
-      Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(offset));
-      final int selectionStart = this.getInt(context, "selectionStart", _of_1);
-      Optional<Integer> _of_2 = Optional.<Integer>of(Integer.valueOf(selectionStart));
-      final int selectionEnd = this.getInt(context, "selectionEnd", _of_2);
+      final int selectionStart = this.getInt(context, "selectionStart", Optional.<Integer>of(Integer.valueOf(offset)));
+      final int selectionEnd = this.getInt(context, "selectionEnd", Optional.<Integer>of(Integer.valueOf(selectionStart)));
       int _max = Math.max((selectionEnd - selectionStart), 0);
       final TextRegion selection = new TextRegion(selectionStart, _max);
       final String proposal = context.getParameter("proposal");
@@ -686,8 +665,7 @@ public class XtextServiceDispatcher {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
       final XtextWebDocumentAccess document = this.getDocumentAccess(context);
-      Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
-      final int offset = this.getInt(context, "caretOffset", _of);
+      final int offset = this.getInt(context, "caretOffset", Optional.<Integer>of(Integer.valueOf(0)));
       if ((offset < 0)) {
         throw new InvalidRequestException.InvalidParametersException("The parameter \'offset\' must not be negative.");
       }
@@ -721,23 +699,18 @@ public class XtextServiceDispatcher {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
       final XtextWebDocumentAccess document = this.getDocumentAccess(context);
-      Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
-      final int selectionStart = this.getInt(context, "selectionStart", _of);
-      Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(selectionStart));
-      final int selectionEnd = this.getInt(context, "selectionEnd", _of_1);
+      final int selectionStart = this.getInt(context, "selectionStart", Optional.<Integer>of(Integer.valueOf(0)));
+      final int selectionEnd = this.getInt(context, "selectionEnd", Optional.<Integer>of(Integer.valueOf(selectionStart)));
       final String lineSeparator = context.getParameter("lineSeparator");
       final String indentation = context.getParameter("indentation");
-      Optional<Integer> _of_2 = Optional.<Integer>of(Integer.valueOf(4));
-      final int indentationLength = this.getInt(context, "indentationLength", _of_2);
-      Optional<Integer> _of_3 = Optional.<Integer>of(Integer.valueOf(120));
-      final int maxLineWidth = this.getInt(context, "maxLineWidth", _of_3);
+      final int indentationLength = this.getInt(context, "indentationLength", Optional.<Integer>of(Integer.valueOf(4)));
+      final int maxLineWidth = this.getInt(context, "maxLineWidth", Optional.<Integer>of(Integer.valueOf(120)));
       final CancelableUnitOfWork<IPreferenceValues, IXtextWebDocument> _function = new CancelableUnitOfWork<IPreferenceValues, IXtextWebDocument>() {
         @Override
         public IPreferenceValues exec(final IXtextWebDocument $0, final CancelIndicator $1) throws Exception {
           IPreferenceValues _preferenceValues = null;
           if (XtextServiceDispatcher.this.formatterPreferencesProvider!=null) {
-            XtextResource _resource = $0.getResource();
-            _preferenceValues=XtextServiceDispatcher.this.formatterPreferencesProvider.getPreferenceValues(_resource);
+            _preferenceValues=XtextServiceDispatcher.this.formatterPreferencesProvider.getPreferenceValues($0.getResource());
           }
           return _preferenceValues;
         }
@@ -836,14 +809,12 @@ public class XtextServiceDispatcher {
   protected XtextWebDocumentAccess getDocumentAccess(final IServiceContext context) throws InvalidRequestException {
     XtextWebDocument document = null;
     boolean initializedFromFullText = false;
-    Set<String> _parameterKeys = context.getParameterKeys();
-    boolean _contains = _parameterKeys.contains("fullText");
+    boolean _contains = context.getParameterKeys().contains("fullText");
     if (_contains) {
       document = this.getFullTextDocument(context.getParameter("fullText"), this.getResourceID(context), context);
       initializedFromFullText = true;
     } else {
-      Set<String> _parameterKeys_1 = context.getParameterKeys();
-      boolean _contains_1 = _parameterKeys_1.contains("resource");
+      boolean _contains_1 = context.getParameterKeys().contains("resource");
       if (_contains_1) {
         document = this.getResourceDocument(this.getResourceID(context), context);
         if ((document == null)) {
@@ -853,8 +824,7 @@ public class XtextServiceDispatcher {
         throw new InvalidRequestException.InvalidParametersException("At least one of the parameters \'resource\' and \'fullText\' must be specified.");
       }
     }
-    String _parameter = context.getParameter("requiredStateId");
-    return this.documentAccessFactory.create(document, _parameter, initializedFromFullText);
+    return this.documentAccessFactory.create(document, context.getParameter("requiredStateId"), initializedFromFullText);
   }
   
   /**
@@ -874,8 +844,7 @@ public class XtextServiceDispatcher {
       if (resourceId != null) {
         _elvis = resourceId;
       } else {
-        int _nextInt = this.randomGenerator.nextInt();
-        String _hexString = Integer.toHexString(_nextInt);
+        String _hexString = Integer.toHexString(this.randomGenerator.nextInt());
         String _plus = (_hexString + ".");
         String _primaryFileExtension = this.fileExtensionProvider.getPrimaryFileExtension();
         String _plus_1 = (_plus + _primaryFileExtension);
@@ -886,14 +855,11 @@ public class XtextServiceDispatcher {
       final XtextResource resource = ((XtextResource) _createResource);
       final Resource existingResource = resourceSet.getResource(uri, false);
       if ((existingResource != null)) {
-        EList<Resource> _resources = resourceSet.getResources();
-        _resources.remove(existingResource);
+        resourceSet.getResources().remove(existingResource);
       }
-      EList<Resource> _resources_1 = resourceSet.getResources();
-      _resources_1.add(resource);
+      resourceSet.getResources().add(resource);
       StringInputStream _stringInputStream = new StringInputStream(fullText);
-      Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-      resource.load(_stringInputStream, _emptyMap);
+      resource.load(_stringInputStream, CollectionLiterals.<Object, Object>emptyMap());
       final XtextWebDocument document = this.documentProvider.get(resourceId, context);
       document.setInput(resource);
       if ((resourceId != null)) {
@@ -970,8 +936,7 @@ public class XtextServiceDispatcher {
       if (_not) {
         throw new InvalidRequestException.InvalidParametersException((("The parameter \'" + key) + "\' must be specified."));
       }
-      Integer _get = defaultValue.get();
-      return _get.intValue();
+      return defaultValue.get().intValue();
     }
     try {
       return Integer.parseInt(stringValue);
@@ -1000,8 +965,7 @@ public class XtextServiceDispatcher {
       if (_not) {
         throw new InvalidRequestException.InvalidParametersException((("The parameter \'" + key) + "\' must be specified."));
       }
-      Boolean _get = defaultValue.get();
-      return _get.booleanValue();
+      return defaultValue.get().booleanValue();
     }
     String _lowerCase = stringValue.toLowerCase();
     if (_lowerCase != null) {

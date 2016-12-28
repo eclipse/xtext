@@ -9,7 +9,6 @@ package org.eclipse.xtext.web.example.jetty;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.jetty.StatemachineWebModule;
@@ -31,8 +30,7 @@ public class StatemachineWebSetup extends StatemachineStandaloneSetup {
     final StatemachineWebModule webModule = new StatemachineWebModule(this.resourceBaseProvider);
     StatemachineRuntimeModule _statemachineRuntimeModule = new StatemachineRuntimeModule();
     StatemachineIdeModule _statemachineIdeModule = new StatemachineIdeModule();
-    Module _mixin = Modules2.mixin(_statemachineRuntimeModule, _statemachineIdeModule, webModule);
-    return Guice.createInjector(_mixin);
+    return Guice.createInjector(Modules2.mixin(_statemachineRuntimeModule, _statemachineIdeModule, webModule));
   }
   
   public StatemachineWebSetup(final IResourceBaseProvider resourceBaseProvider) {

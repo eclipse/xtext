@@ -12,7 +12,6 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.web.server.model.AbstractCachedService;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
@@ -38,8 +37,7 @@ public class HighlightingService extends AbstractCachedService<HighlightingResul
   public HighlightingResult compute(final IXtextWebDocument it, final CancelIndicator cancelIndicator) {
     final HighlightingResult result = new HighlightingResult();
     final IHighlightedPositionAcceptor acceptor = this.createHighlightedPositionAcceptor(result.getRegions());
-    XtextResource _resource = it.getResource();
-    this.highlightingCalculator.provideHighlightingFor(_resource, acceptor, cancelIndicator);
+    this.highlightingCalculator.provideHighlightingFor(it.getResource(), acceptor, cancelIndicator);
     return result;
   }
   

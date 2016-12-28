@@ -62,8 +62,7 @@ public class OccurrencesService {
     final CancelableUnitOfWork<OccurrencesResult, IXtextWebDocument> _function = new CancelableUnitOfWork<OccurrencesResult, IXtextWebDocument>() {
       @Override
       public OccurrencesResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        XtextResource _resource = it.getResource();
-        final EObject element = OccurrencesService.this._elementAtOffsetUtil.getElementAt(_resource, offset);
+        final EObject element = OccurrencesService.this._elementAtOffsetUtil.getElementAt(it.getResource(), offset);
         String _stateId = it.getStateId();
         final OccurrencesResult occurrencesResult = new OccurrencesResult(_stateId);
         if (((element != null) && OccurrencesService.this.filter(element))) {
@@ -85,12 +84,12 @@ public class OccurrencesService {
             public void accept(final IReferenceDescription description) {
             }
           };
-          XtextResource _resource_1 = it.getResource();
+          XtextResource _resource = it.getResource();
           CancelIndicatorProgressMonitor _cancelIndicatorProgressMonitor = new CancelIndicatorProgressMonitor(cancelIndicator);
-          OccurrencesService.this._iReferenceFinder.findReferences(targetURIs, _resource_1, acceptor, _cancelIndicatorProgressMonitor);
+          OccurrencesService.this._iReferenceFinder.findReferences(targetURIs, _resource, acceptor, _cancelIndicatorProgressMonitor);
           Resource _eResource = element.eResource();
-          XtextResource _resource_2 = it.getResource();
-          boolean _equals = Objects.equal(_eResource, _resource_2);
+          XtextResource _resource_1 = it.getResource();
+          boolean _equals = Objects.equal(_eResource, _resource_1);
           if (_equals) {
             final ITextRegion definitionRegion = OccurrencesService.this._iLocationInFileProvider.getSignificantTextRegion(element);
             if (((definitionRegion != null) && (definitionRegion != ITextRegionWithLineInformation.EMPTY_REGION))) {

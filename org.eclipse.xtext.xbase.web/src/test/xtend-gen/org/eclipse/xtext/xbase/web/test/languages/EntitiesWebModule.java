@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.web.test.languages;
 
 import com.google.inject.Binder;
-import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
@@ -27,8 +26,7 @@ public class EntitiesWebModule extends DefaultXbaseWebModule {
   
   public void configureResourceBaseProvider(final Binder binder) {
     if ((this.resourceBaseProvider != null)) {
-      AnnotatedBindingBuilder<IResourceBaseProvider> _bind = binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class);
-      _bind.toInstance(this.resourceBaseProvider);
+      binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class).toInstance(this.resourceBaseProvider);
     }
   }
   

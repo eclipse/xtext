@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.gson.Gson;
 import com.google.inject.Injector;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.servlet.HttpServiceContext;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
@@ -69,38 +67,34 @@ public class XtextServlet extends HttpServlet {
         String _message = exception.getMessage();
         String _plus_2 = (_plus_1 + _message);
         this.LOG.trace(_plus_2);
-        String _message_1 = exception.getMessage();
-        resp.sendError(HttpServletResponse.SC_NOT_FOUND, _message_1);
+        resp.sendError(HttpServletResponse.SC_NOT_FOUND, exception.getMessage());
       } else if (_t instanceof InvalidRequestException.InvalidDocumentStateException) {
         final InvalidRequestException.InvalidDocumentStateException exception_1 = (InvalidRequestException.InvalidDocumentStateException)_t;
         String _requestURI_1 = req.getRequestURI();
         String _plus_3 = ("Invalid request (" + _requestURI_1);
         String _plus_4 = (_plus_3 + "): ");
-        String _message_2 = exception_1.getMessage();
-        String _plus_5 = (_plus_4 + _message_2);
+        String _message_1 = exception_1.getMessage();
+        String _plus_5 = (_plus_4 + _message_1);
         this.LOG.trace(_plus_5);
-        String _message_3 = exception_1.getMessage();
-        resp.sendError(HttpServletResponse.SC_CONFLICT, _message_3);
+        resp.sendError(HttpServletResponse.SC_CONFLICT, exception_1.getMessage());
       } else if (_t instanceof InvalidRequestException.PermissionDeniedException) {
         final InvalidRequestException.PermissionDeniedException exception_2 = (InvalidRequestException.PermissionDeniedException)_t;
         String _requestURI_2 = req.getRequestURI();
         String _plus_6 = ("Invalid request (" + _requestURI_2);
         String _plus_7 = (_plus_6 + "): ");
-        String _message_4 = exception_2.getMessage();
-        String _plus_8 = (_plus_7 + _message_4);
+        String _message_2 = exception_2.getMessage();
+        String _plus_8 = (_plus_7 + _message_2);
         this.LOG.trace(_plus_8);
-        String _message_5 = exception_2.getMessage();
-        resp.sendError(HttpServletResponse.SC_FORBIDDEN, _message_5);
+        resp.sendError(HttpServletResponse.SC_FORBIDDEN, exception_2.getMessage());
       } else if (_t instanceof InvalidRequestException) {
         final InvalidRequestException exception_3 = (InvalidRequestException)_t;
         String _requestURI_3 = req.getRequestURI();
         String _plus_9 = ("Invalid request (" + _requestURI_3);
         String _plus_10 = (_plus_9 + "): ");
-        String _message_6 = exception_3.getMessage();
-        String _plus_11 = (_plus_10 + _message_6);
+        String _message_3 = exception_3.getMessage();
+        String _plus_11 = (_plus_10 + _message_3);
         this.LOG.trace(_plus_11);
-        String _message_7 = exception_3.getMessage();
-        resp.sendError(HttpServletResponse.SC_BAD_REQUEST, _message_7);
+        resp.sendError(HttpServletResponse.SC_BAD_REQUEST, exception_3.getMessage());
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -120,8 +114,7 @@ public class XtextServlet extends HttpServlet {
   @Override
   protected void doPut(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    IServiceContext _context = service.getContext();
-    final String type = _context.getParameter(IServiceContext.SERVICE_TYPE);
+    final String type = service.getContext().getParameter(IServiceContext.SERVICE_TYPE);
     if (((!service.isHasConflict()) && (!Objects.equal(type, "update")))) {
       super.doPut(req, resp);
     } else {
@@ -132,8 +125,7 @@ public class XtextServlet extends HttpServlet {
   @Override
   protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    IServiceContext _context = service.getContext();
-    final String type = _context.getParameter(IServiceContext.SERVICE_TYPE);
+    final String type = service.getContext().getParameter(IServiceContext.SERVICE_TYPE);
     if (((!service.isHasConflict()) && (((!service.isHasSideEffects()) && (!this.hasTextInput(service))) || Objects.equal(type, "update")))) {
       super.doPost(req, resp);
     } else {
@@ -144,8 +136,7 @@ public class XtextServlet extends HttpServlet {
   protected boolean hasTextInput(final XtextServiceDispatcher.ServiceDescriptor service) {
     boolean _xblockexpression = false;
     {
-      IServiceContext _context = service.getContext();
-      final Set<String> parameterKeys = _context.getParameterKeys();
+      final Set<String> parameterKeys = service.getContext().getParameterKeys();
       _xblockexpression = (parameterKeys.contains("fullText") || parameterKeys.contains("deltaText"));
     }
     return _xblockexpression;
@@ -171,8 +162,7 @@ public class XtextServlet extends HttpServlet {
    */
   protected void doService(final XtextServiceDispatcher.ServiceDescriptor service, final HttpServletResponse response) {
     try {
-      Function0<? extends IServiceResult> _service = service.getService();
-      final IServiceResult result = _service.apply();
+      final IServiceResult result = service.getService().apply();
       response.setStatus(HttpServletResponse.SC_OK);
       response.setCharacterEncoding(this.getEncoding(service, result));
       response.setHeader("Cache-Control", "no-cache");
@@ -186,13 +176,10 @@ public class XtextServlet extends HttpServlet {
           _elvis = "text/plain";
         }
         response.setContentType(_elvis);
-        PrintWriter _writer = response.getWriter();
-        String _content = unwrapResult.getContent();
-        _writer.write(_content);
+        response.getWriter().write(unwrapResult.getContent());
       } else {
         response.setContentType("text/x-json");
-        PrintWriter _writer_1 = response.getWriter();
-        this.gson.toJson(result, _writer_1);
+        this.gson.toJson(result, response.getWriter());
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -224,8 +211,7 @@ public class XtextServlet extends HttpServlet {
     if (_isNullOrEmpty) {
       resourceServiceProvider = this.serviceProviderRegistry.getResourceServiceProvider(emfURI);
       if ((resourceServiceProvider == null)) {
-        String _string = emfURI.toString();
-        boolean _isEmpty = _string.isEmpty();
+        boolean _isEmpty = emfURI.toString().isEmpty();
         if (_isEmpty) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Unable to identify the Xtext language: missing parameter \'resource\' or \'contentType\'.");
