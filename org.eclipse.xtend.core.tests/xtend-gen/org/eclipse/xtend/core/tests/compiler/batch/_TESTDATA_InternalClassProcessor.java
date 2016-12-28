@@ -12,10 +12,8 @@ import org.eclipse.xtend.lib.macro.CodeGenerationContext;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -38,8 +36,7 @@ public class _TESTDATA_InternalClassProcessor extends AbstractClassProcessor {
     MutableClassDeclaration _findClass = context.findClass(_plus);
     final Procedure1<MutableClassDeclaration> _function = (MutableClassDeclaration it) -> {
       final Procedure1<MutableFieldDeclaration> _function_1 = (MutableFieldDeclaration it_1) -> {
-        TypeReference _string = context.getString();
-        it_1.setType(_string);
+        it_1.setType(context.getString());
       };
       it.addField("myField", _function_1);
     };
@@ -48,9 +45,7 @@ public class _TESTDATA_InternalClassProcessor extends AbstractClassProcessor {
   
   @Override
   public void doGenerateCode(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
-    CompilationUnit _compilationUnit = annotatedClass.getCompilationUnit();
-    Path _filePath = _compilationUnit.getFilePath();
-    final Path tF = context.getTargetFolder(_filePath);
+    final Path tF = context.getTargetFolder(annotatedClass.getCompilationUnit().getFilePath());
     Path _append = tF.append("/Test.txt");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Hello");

@@ -58,7 +58,6 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _decode = this.decode(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package foo");
     _builder_1.newLine();
@@ -100,8 +99,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    String _decode_1 = this.decode(_builder_1);
-    this.assertFormatted(_decode, _decode_1);
+    this.assertFormatted(this.decode(_builder), this.decode(_builder_1));
   }
   
   @Test

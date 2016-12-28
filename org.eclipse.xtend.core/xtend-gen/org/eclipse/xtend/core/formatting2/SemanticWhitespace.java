@@ -21,8 +21,7 @@ public class SemanticWhitespace extends Chunk {
   
   @Override
   public String toString() {
-    CharSequence _text = this.getText();
-    int _length = _text.length();
+    int _length = this.getText().length();
     return ("S" + Integer.valueOf(_length));
   }
   

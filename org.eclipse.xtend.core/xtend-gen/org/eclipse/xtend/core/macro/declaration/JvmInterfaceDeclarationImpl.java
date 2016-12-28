@@ -9,9 +9,7 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Preconditions;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
@@ -19,9 +17,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -39,38 +35,30 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
   public Iterable<? extends TypeReference> getExtendedInterfaces() {
     List<TypeReference> _xblockexpression = null;
     {
-      JvmGenericType _delegate = this.getDelegate();
-      EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
       final Function1<JvmTypeReference, Boolean> _function = (JvmTypeReference it) -> {
         JvmType _type = it.getType();
         return Boolean.valueOf(((JvmGenericType) _type).isInterface());
       };
-      final Iterable<JvmTypeReference> filtered = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);
+      final Iterable<JvmTypeReference> filtered = IterableExtensions.<JvmTypeReference>filter(this.getDelegate().getSuperTypes(), _function);
       final Function1<JvmTypeReference, TypeReference> _function_1 = (JvmTypeReference it) -> {
-        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        return _compilationUnit.toTypeReference(it);
+        return this.getCompilationUnit().toTypeReference(it);
       };
-      Iterable<TypeReference> _map = IterableExtensions.<JvmTypeReference, TypeReference>map(filtered, _function_1);
-      _xblockexpression = IterableExtensions.<TypeReference>toList(_map);
+      _xblockexpression = IterableExtensions.<TypeReference>toList(IterableExtensions.<JvmTypeReference, TypeReference>map(filtered, _function_1));
     }
     return _xblockexpression;
   }
   
   @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
-    JvmGenericType _delegate = this.getDelegate();
-    EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter, TypeParameterDeclaration> _function = (JvmTypeParameter it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toTypeParameterDeclaration(it);
+      return this.getCompilationUnit().toTypeParameterDeclaration(it);
     };
-    return ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(_typeParameters, _function);
+    return ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(this.getDelegate().getTypeParameters(), _function);
   }
   
   @Override
   public boolean isStrictFloatingPoint() {
-    JvmGenericType _delegate = this.getDelegate();
-    return _delegate.isStrictFloatingPoint();
+    return this.getDelegate().isStrictFloatingPoint();
   }
   
   @Override
@@ -81,18 +69,10 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     final JvmOperation newMethod = TypesFactory.eINSTANCE.createJvmOperation();
     newMethod.setVisibility(JvmVisibility.PUBLIC);
     newMethod.setSimpleName(name);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    TypeReferenceProvider _typeReferenceProvider = _compilationUnit_1.getTypeReferenceProvider();
-    TypeReference _primitiveVoid = _typeReferenceProvider.getPrimitiveVoid();
-    JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(_primitiveVoid);
-    newMethod.setReturnType(_jvmTypeReference);
+    newMethod.setReturnType(this.getCompilationUnit().toJvmTypeReference(this.getCompilationUnit().getTypeReferenceProvider().getPrimitiveVoid()));
     newMethod.setAbstract(true);
-    JvmGenericType _delegate = this.getDelegate();
-    EList<JvmMember> _members = _delegate.getMembers();
-    _members.add(newMethod);
-    CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
-    MemberDeclaration _memberDeclaration = _compilationUnit_2.toMemberDeclaration(newMethod);
+    this.getDelegate().getMembers().add(newMethod);
+    MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(newMethod);
     final MutableMethodDeclaration mutableMethodDeclaration = ((MutableMethodDeclaration) _memberDeclaration);
     initializer.apply(mutableMethodDeclaration);
     return mutableMethodDeclaration;

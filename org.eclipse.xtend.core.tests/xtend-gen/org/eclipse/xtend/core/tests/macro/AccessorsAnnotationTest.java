@@ -4,8 +4,6 @@ import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.IAcceptor;
@@ -34,19 +32,10 @@ public class AccessorsAnnotationTest extends AbstractActiveAnnotationTest {
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = (XtendCompilerTester.CompilationResult it) -> {
       final TransformationContext ctx = it.getTransformationContext();
       final MutableClassDeclaration classA = ctx.findClass("A");
-      MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");
-      Visibility _visibility = _findDeclaredMethod.getVisibility();
-      Assert.assertEquals(Visibility.PUBLIC, _visibility);
-      TypeReference _string = ctx.getString();
-      MutableMethodDeclaration _findDeclaredMethod_1 = classA.findDeclaredMethod("setField", _string);
-      Visibility _visibility_1 = _findDeclaredMethod_1.getVisibility();
-      Assert.assertEquals(Visibility.PUBLIC, _visibility_1);
-      MutableMethodDeclaration _findDeclaredMethod_2 = classA.findDeclaredMethod("getFinalField");
-      Visibility _visibility_2 = _findDeclaredMethod_2.getVisibility();
-      Assert.assertEquals(Visibility.PUBLIC, _visibility_2);
-      TypeReference _string_1 = ctx.getString();
-      MutableMethodDeclaration _findDeclaredMethod_3 = classA.findDeclaredMethod("setFinalField", _string_1);
-      Assert.assertNull(_findDeclaredMethod_3);
+      Assert.assertEquals(Visibility.PUBLIC, classA.findDeclaredMethod("getField").getVisibility());
+      Assert.assertEquals(Visibility.PUBLIC, classA.findDeclaredMethod("setField", ctx.getString()).getVisibility());
+      Assert.assertEquals(Visibility.PUBLIC, classA.findDeclaredMethod("getFinalField").getVisibility());
+      Assert.assertNull(classA.findDeclaredMethod("setFinalField", ctx.getString()));
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }
@@ -76,16 +65,9 @@ public class AccessorsAnnotationTest extends AbstractActiveAnnotationTest {
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = (XtendCompilerTester.CompilationResult it) -> {
       final TransformationContext ctx = it.getTransformationContext();
       final MutableClassDeclaration classA = ctx.findClass("A");
-      MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");
-      Visibility _visibility = _findDeclaredMethod.getVisibility();
-      Assert.assertEquals(Visibility.PRIVATE, _visibility);
-      TypeReference _string = ctx.getString();
-      MutableMethodDeclaration _findDeclaredMethod_1 = classA.findDeclaredMethod("setField", _string);
-      Visibility _visibility_1 = _findDeclaredMethod_1.getVisibility();
-      Assert.assertEquals(Visibility.PUBLIC, _visibility_1);
-      Iterable<? extends MutableMethodDeclaration> _declaredMethods = classA.getDeclaredMethods();
-      int _size = IterableExtensions.size(_declaredMethods);
-      Assert.assertEquals(2, _size);
+      Assert.assertEquals(Visibility.PRIVATE, classA.findDeclaredMethod("getField").getVisibility());
+      Assert.assertEquals(Visibility.PUBLIC, classA.findDeclaredMethod("setField", ctx.getString()).getVisibility());
+      Assert.assertEquals(2, IterableExtensions.size(classA.getDeclaredMethods()));
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }

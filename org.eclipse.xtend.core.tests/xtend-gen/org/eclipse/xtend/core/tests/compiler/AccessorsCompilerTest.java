@@ -14,7 +14,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.validation.IssueCodes;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
@@ -51,12 +50,9 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          final Object instance = _compiledClass.newInstance();
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
-          Object _invoke = getFoo.invoke(instance);
-          Assert.assertEquals(Integer.valueOf(1), _invoke);
+          final Object instance = it.getCompiledClass().newInstance();
+          final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");
+          Assert.assertEquals(Integer.valueOf(1), getFoo.invoke(instance));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -82,15 +78,10 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          String _singleGeneratedCode = it.getSingleGeneratedCode();
-          boolean _contains = _singleGeneratedCode.contains("T getFoo");
-          Assert.assertTrue(_contains);
-          Class<?> _compiledClass = it.getCompiledClass();
-          final Object instance = _compiledClass.newInstance();
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
-          Object _invoke = getFoo.invoke(instance);
-          Assert.assertEquals(null, _invoke);
+          Assert.assertTrue(it.getSingleGeneratedCode().contains("T getFoo"));
+          final Object instance = it.getCompiledClass().newInstance();
+          final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");
+          Assert.assertEquals(null, getFoo.invoke(instance));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -116,10 +107,8 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          final Method getFoo = _compiledClass.getDeclaredMethod("getFoo");
-          Object _invoke = getFoo.invoke(null);
-          Assert.assertEquals(Integer.valueOf(1), _invoke);
+          final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");
+          Assert.assertEquals(Integer.valueOf(1), getFoo.invoke(null));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -151,8 +140,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "final", "getFoo");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "final", "getFoo");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -179,8 +167,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, "incompatible", "getFoo");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, "incompatible", "getFoo");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -207,8 +194,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoErrors(_file);
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -229,19 +215,15 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          final Object instance = _compiledClass.newInstance();
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method setFoo = _compiledClass_1.getDeclaredMethod("setFoo", int.class);
-          Class<?> _compiledClass_2 = it.getCompiledClass();
-          Field _declaredField = _compiledClass_2.getDeclaredField("foo");
+          final Object instance = it.getCompiledClass().newInstance();
+          final Method setFoo = it.getCompiledClass().getDeclaredMethod("setFoo", int.class);
+          Field _declaredField = it.getCompiledClass().getDeclaredField("foo");
           final Procedure1<Field> _function_1 = (Field it_1) -> {
             it_1.setAccessible(true);
           };
           final Field fooField = ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function_1);
           setFoo.invoke(instance, Integer.valueOf(1));
-          Object _get = fooField.get(instance);
-          Assert.assertEquals(Integer.valueOf(1), _get);
+          Assert.assertEquals(Integer.valueOf(1), fooField.get(instance));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -267,22 +249,16 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          String _singleGeneratedCode = it.getSingleGeneratedCode();
-          boolean _contains = _singleGeneratedCode.contains("setFoo(final T foo)");
-          Assert.assertTrue(_contains);
-          Class<?> _compiledClass = it.getCompiledClass();
-          final Object instance = _compiledClass.newInstance();
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method setFoo = _compiledClass_1.getDeclaredMethod("setFoo", CharSequence.class);
-          Class<?> _compiledClass_2 = it.getCompiledClass();
-          Field _declaredField = _compiledClass_2.getDeclaredField("foo");
+          Assert.assertTrue(it.getSingleGeneratedCode().contains("setFoo(final T foo)"));
+          final Object instance = it.getCompiledClass().newInstance();
+          final Method setFoo = it.getCompiledClass().getDeclaredMethod("setFoo", CharSequence.class);
+          Field _declaredField = it.getCompiledClass().getDeclaredField("foo");
           final Procedure1<Field> _function_1 = (Field it_1) -> {
             it_1.setAccessible(true);
           };
           final Field fooField = ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function_1);
           setFoo.invoke(instance, "bar");
-          Object _get = fooField.get(instance);
-          Assert.assertEquals("bar", _get);
+          Assert.assertEquals("bar", fooField.get(instance));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -308,17 +284,14 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          final Method setFoo = _compiledClass.getDeclaredMethod("setFoo", int.class);
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          Field _declaredField = _compiledClass_1.getDeclaredField("foo");
+          final Method setFoo = it.getCompiledClass().getDeclaredMethod("setFoo", int.class);
+          Field _declaredField = it.getCompiledClass().getDeclaredField("foo");
           final Procedure1<Field> _function_1 = (Field it_1) -> {
             it_1.setAccessible(true);
           };
           final Field fooField = ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function_1);
           setFoo.invoke(null, Integer.valueOf(1));
-          Object _get = fooField.get(null);
-          Assert.assertEquals(Integer.valueOf(1), _get);
+          Assert.assertEquals(Integer.valueOf(1), fooField.get(null));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -350,8 +323,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "setFoo(String)", "final");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "setFoo(String)", "final");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -378,8 +350,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, "setFoo(String)", "incompatible");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, "setFoo(String)", "incompatible");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -406,8 +377,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoErrors(_file);
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -440,36 +410,20 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
         Class<?> _compiledClass = it.getCompiledClass();
         final Procedure1<Class<?>> _function_1 = (Class<?> it_1) -> {
           try {
-            Method _declaredMethod = it_1.getDeclaredMethod("getA");
-            int _modifiers = _declaredMethod.getModifiers();
-            boolean _isProtected = Modifier.isProtected(_modifiers);
-            Assert.assertTrue(_isProtected);
-            Method _declaredMethod_1 = it_1.getDeclaredMethod("setA", int.class);
-            int _modifiers_1 = _declaredMethod_1.getModifiers();
-            boolean _isProtected_1 = Modifier.isProtected(_modifiers_1);
-            Assert.assertTrue(_isProtected_1);
-            Method _declaredMethod_2 = it_1.getDeclaredMethod("getB");
-            int _modifiers_2 = _declaredMethod_2.getModifiers();
-            boolean _isPrivate = Modifier.isPrivate(_modifiers_2);
-            Assert.assertTrue(_isPrivate);
-            Method _declaredMethod_3 = it_1.getDeclaredMethod("setB", int.class);
-            int _modifiers_3 = _declaredMethod_3.getModifiers();
-            boolean _isPublic = Modifier.isPublic(_modifiers_3);
-            Assert.assertTrue(_isPublic);
-            Method[] _declaredMethods = it_1.getDeclaredMethods();
+            Assert.assertTrue(Modifier.isProtected(it_1.getDeclaredMethod("getA").getModifiers()));
+            Assert.assertTrue(Modifier.isProtected(it_1.getDeclaredMethod("setA", int.class).getModifiers()));
+            Assert.assertTrue(Modifier.isPrivate(it_1.getDeclaredMethod("getB").getModifiers()));
+            Assert.assertTrue(Modifier.isPublic(it_1.getDeclaredMethod("setB", int.class).getModifiers()));
             final Function1<Method, Boolean> _function_2 = (Method it_2) -> {
               String _name = it_2.getName();
               return Boolean.valueOf(Objects.equal(_name, "getC"));
             };
-            boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_2);
-            Assert.assertFalse(_exists);
-            Method[] _declaredMethods_1 = it_1.getDeclaredMethods();
+            Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_2));
             final Function1<Method, Boolean> _function_3 = (Method it_2) -> {
               String _name = it_2.getName();
               return Boolean.valueOf(Objects.equal(_name, "setC"));
             };
-            boolean _exists_1 = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods_1)), _function_3);
-            Assert.assertFalse(_exists_1);
+            Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_3));
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -507,36 +461,20 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
         Class<?> _compiledClass = it.getCompiledClass();
         final Procedure1<Class<?>> _function_1 = (Class<?> it_1) -> {
           try {
-            Method _declaredMethod = it_1.getDeclaredMethod("getA");
-            int _modifiers = _declaredMethod.getModifiers();
-            boolean _isProtected = Modifier.isProtected(_modifiers);
-            Assert.assertTrue(_isProtected);
-            Method _declaredMethod_1 = it_1.getDeclaredMethod("setA", int.class);
-            int _modifiers_1 = _declaredMethod_1.getModifiers();
-            boolean _isProtected_1 = Modifier.isProtected(_modifiers_1);
-            Assert.assertTrue(_isProtected_1);
-            Method _declaredMethod_2 = it_1.getDeclaredMethod("getB");
-            int _modifiers_2 = _declaredMethod_2.getModifiers();
-            boolean _isPrivate = Modifier.isPrivate(_modifiers_2);
-            Assert.assertTrue(_isPrivate);
-            Method _declaredMethod_3 = it_1.getDeclaredMethod("setB", int.class);
-            int _modifiers_3 = _declaredMethod_3.getModifiers();
-            boolean _isPublic = Modifier.isPublic(_modifiers_3);
-            Assert.assertTrue(_isPublic);
-            Method[] _declaredMethods = it_1.getDeclaredMethods();
+            Assert.assertTrue(Modifier.isProtected(it_1.getDeclaredMethod("getA").getModifiers()));
+            Assert.assertTrue(Modifier.isProtected(it_1.getDeclaredMethod("setA", int.class).getModifiers()));
+            Assert.assertTrue(Modifier.isPrivate(it_1.getDeclaredMethod("getB").getModifiers()));
+            Assert.assertTrue(Modifier.isPublic(it_1.getDeclaredMethod("setB", int.class).getModifiers()));
             final Function1<Method, Boolean> _function_2 = (Method it_2) -> {
               String _name = it_2.getName();
               return Boolean.valueOf(Objects.equal(_name, "getC"));
             };
-            boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_2);
-            Assert.assertFalse(_exists);
-            Method[] _declaredMethods_1 = it_1.getDeclaredMethods();
+            Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_2));
             final Function1<Method, Boolean> _function_3 = (Method it_2) -> {
               String _name = it_2.getName();
               return Boolean.valueOf(Objects.equal(_name, "setC"));
             };
-            boolean _exists_1 = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods_1)), _function_3);
-            Assert.assertFalse(_exists_1);
+            Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_3));
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -574,17 +512,12 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
         Class<?> _compiledClass = it.getCompiledClass();
         final Procedure1<Class<?>> _function_1 = (Class<?> it_1) -> {
           try {
-            Method _declaredMethod = it_1.getDeclaredMethod("getA");
-            int _modifiers = _declaredMethod.getModifiers();
-            boolean _isProtected = Modifier.isProtected(_modifiers);
-            Assert.assertTrue(_isProtected);
-            Method[] _declaredMethods = it_1.getDeclaredMethods();
+            Assert.assertTrue(Modifier.isProtected(it_1.getDeclaredMethod("getA").getModifiers()));
             final Function1<Method, Boolean> _function_2 = (Method it_2) -> {
               String _name = it_2.getName();
               return Boolean.valueOf(Objects.equal(_name, "setA"));
             };
-            boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_2);
-            Assert.assertFalse(_exists);
+            Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_2));
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }

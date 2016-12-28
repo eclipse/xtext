@@ -11,8 +11,6 @@ import com.google.inject.Inject;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.WorkingCopyOwner;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -54,8 +52,7 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
   public void setUp() {
     try {
       super.setUp();
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("unrelated");
-      this.unrelatedProject = _createPluginProject;
+      this.unrelatedProject = WorkbenchTestHelper.createPluginProject("unrelated");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -77,9 +74,7 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       IResourcesSetupUtil.createFile(_fullPath, _builder.toString());
       IResourcesSetupUtil.waitForBuild();
-      WorkingCopyOwner _newWorkingCopyOwner = this.newWorkingCopyOwner();
-      String _findSource = _newWorkingCopyOwner.findSource("MyClass", "foo");
-      Assert.assertNull("no source expected as, xtend file is in unrelated project", _findSource);
+      Assert.assertNull("no source expected as, xtend file is in unrelated project", this.newWorkingCopyOwner().findSource("MyClass", "foo"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -105,19 +100,13 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
       _builder_1.append("public class MyClass{");
       _builder_1.newLine();
       _builder_1.append("}");
-      String _string = _builder_1.toString();
-      WorkingCopyOwner _newWorkingCopyOwner = this.newWorkingCopyOwner();
-      String _findSource = _newWorkingCopyOwner.findSource("MyClass", "foo");
-      Assert.assertEquals(_string, _findSource);
+      Assert.assertEquals(_builder_1.toString(), this.newWorkingCopyOwner().findSource("MyClass", "foo"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
   protected WorkingCopyOwner newWorkingCopyOwner() {
-    IProject _project = this.workbenchTestHelper.getProject();
-    IJavaProject _create = JavaCore.create(_project);
-    ResourceSet _resourceSet = this.workbenchTestHelper.getResourceSet();
-    return this.workingCopyOwnerProvider.getWorkingCopyOwner(_create, _resourceSet);
+    return this.workingCopyOwnerProvider.getWorkingCopyOwner(JavaCore.create(this.workbenchTestHelper.getProject()), this.workbenchTestHelper.getResourceSet());
   }
 }

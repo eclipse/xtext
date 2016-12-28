@@ -21,14 +21,9 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
   @Test
   public void testMemberName() {
     try {
-      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append("import static org.eclipse.xtend.ide.tests.data.contentassist.Foo.");
-      int _length = "Foo.".length();
-      final ContentAssistProcessorTestBuilder builder = _append.assertTextAtCursorPosition("Foo.", _length, "publicStaticMethod", "publicStaticField");
-      ContentAssistProcessorTestBuilder _applyProposal = builder.applyProposal("publicStaticMethod");
-      _applyProposal.expectContent("import static org.eclipse.xtend.ide.tests.data.contentassist.Foo.publicStaticMethod");
-      ContentAssistProcessorTestBuilder _applyProposal_1 = builder.applyProposal("publicStaticField");
-      _applyProposal_1.expectContent("import static org.eclipse.xtend.ide.tests.data.contentassist.Foo.publicStaticField");
+      final ContentAssistProcessorTestBuilder builder = this.newBuilder().append("import static org.eclipse.xtend.ide.tests.data.contentassist.Foo.").assertTextAtCursorPosition("Foo.", "Foo.".length(), "publicStaticMethod", "publicStaticField");
+      builder.applyProposal("publicStaticMethod").expectContent("import static org.eclipse.xtend.ide.tests.data.contentassist.Foo.publicStaticMethod");
+      builder.applyProposal("publicStaticField").expectContent("import static org.eclipse.xtend.ide.tests.data.contentassist.Foo.publicStaticField");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -43,9 +38,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       _builder.newLine();
       _builder.newLine();
       _builder.append("class Bar {}");
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      int _length = "publicStaticM".length();
-      _append.assertTextAtCursorPosition("publicStaticM", _length, "publicStaticMethod");
+      _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("publicStaticM", "publicStaticM".length(), "publicStaticMethod");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -60,8 +53,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       _builder.newLine();
       _builder.newLine();
       _builder.append("import static org.eclipse.xtend.ide.tests.data.contentassist.Foo.");
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      final ContentAssistProcessorTestBuilder builder = _append.assertText("publicStaticMethod", "defaultStaticMethod", "protectedStaticMethod", 
+      final ContentAssistProcessorTestBuilder builder = _newBuilder.append(_builder.toString()).assertText("publicStaticMethod", "defaultStaticMethod", "protectedStaticMethod", 
         "publicStaticField", "defaultStaticField", "protectedStaticField");
       ContentAssistProcessorTestBuilder _applyProposal = builder.applyProposal("publicStaticMethod");
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -122,9 +114,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       _builder.newLine();
       _builder.newLine();
       _builder.append("class Bar {}");
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      int _length = "default".length();
-      _append.assertTextAtCursorPosition("default", _length, "defaultStaticMethod", "defaultStaticField");
+      _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("default", "default".length(), "defaultStaticMethod", "defaultStaticField");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

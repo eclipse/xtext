@@ -11,7 +11,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URI;
-import java.util.List;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.JavaIOFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
@@ -73,8 +72,7 @@ public class JavaIoFileSystemTest {
   }
   
   protected Object createProject(final String name) {
-    Path _path = new Path(name);
-    URI _uRI = this.fs.toURI(_path);
+    URI _uRI = this.fs.toURI(new Path(name));
     final File file = new File(_uRI);
     file.mkdirs();
     return file;
@@ -84,67 +82,47 @@ public class JavaIoFileSystemTest {
   public void testMakeAndDeleteFolder() {
     final Path someFolder = new Path("/foo/bar");
     final Path someFile = someFolder.append("Foo.txt");
-    boolean _exists = this.fs.exists(someFolder);
-    Assert.assertFalse(_exists);
-    boolean _isFile = this.fs.isFile(someFolder);
-    Assert.assertFalse(_isFile);
-    boolean _isFolder = this.fs.isFolder(someFolder);
-    Assert.assertFalse(_isFolder);
+    Assert.assertFalse(this.fs.exists(someFolder));
+    Assert.assertFalse(this.fs.isFile(someFolder));
+    Assert.assertFalse(this.fs.isFolder(someFolder));
     this.fs.setContents(someFile, "Hello Foo");
-    boolean _isFile_1 = this.fs.isFile(someFolder);
-    Assert.assertFalse(_isFile_1);
-    boolean _isFolder_1 = this.fs.isFolder(someFolder);
-    Assert.assertTrue(_isFolder_1);
-    boolean _exists_1 = this.fs.exists(someFolder);
-    Assert.assertTrue(_exists_1);
+    Assert.assertFalse(this.fs.isFile(someFolder));
+    Assert.assertTrue(this.fs.isFolder(someFolder));
+    Assert.assertTrue(this.fs.exists(someFolder));
     this.fs.delete(someFolder);
-    boolean _exists_2 = this.fs.exists(someFolder);
-    Assert.assertTrue(_exists_2);
+    Assert.assertTrue(this.fs.exists(someFolder));
     this.fs.delete(someFile);
     this.fs.delete(someFolder);
-    boolean _exists_3 = this.fs.exists(someFolder);
-    Assert.assertFalse(_exists_3);
+    Assert.assertFalse(this.fs.exists(someFolder));
   }
   
   @Test
   public void testMakeAndDeleteFile() {
     final Path path = new Path("/foo/src/my/pack/Foo.txt");
-    boolean _exists = this.fs.exists(path);
-    Assert.assertFalse(_exists);
+    Assert.assertFalse(this.fs.exists(path));
     this.fs.setContents(path, "Hello Foo");
-    boolean _exists_1 = this.fs.exists(path);
-    Assert.assertTrue(_exists_1);
-    CharSequence _contents = this.fs.getContents(path);
-    Assert.assertEquals("Hello Foo", _contents);
-    boolean _isFile = this.fs.isFile(path);
-    Assert.assertTrue(_isFile);
-    boolean _isFolder = this.fs.isFolder(path);
-    Assert.assertFalse(_isFolder);
+    Assert.assertTrue(this.fs.exists(path));
+    Assert.assertEquals("Hello Foo", this.fs.getContents(path));
+    Assert.assertTrue(this.fs.isFile(path));
+    Assert.assertFalse(this.fs.isFolder(path));
     this.fs.delete(path);
-    boolean _exists_2 = this.fs.exists(path);
-    Assert.assertFalse(_exists_2);
-    boolean _isFile_1 = this.fs.isFile(path);
-    Assert.assertFalse(_isFile_1);
-    boolean _isFolder_1 = this.fs.isFolder(path);
-    Assert.assertFalse(_isFolder_1);
+    Assert.assertFalse(this.fs.exists(path));
+    Assert.assertFalse(this.fs.isFile(path));
+    Assert.assertFalse(this.fs.isFolder(path));
   }
   
   @Test
   public void testModificationStamp_01() {
     try {
       final Path path = new Path("/foo/src/my/pack/Foo.txt");
-      long _lastModification = this.fs.getLastModification(path);
-      Assert.assertEquals(0L, _lastModification);
+      Assert.assertEquals(0L, this.fs.getLastModification(path));
       this.fs.setContents(path, "Hello Foo");
       final long mod = this.fs.getLastModification(path);
-      CharSequence _contents = this.fs.getContents(path);
-      Assert.assertEquals("Hello Foo", _contents);
-      long _lastModification_1 = this.fs.getLastModification(path);
-      Assert.assertEquals(mod, _lastModification_1);
+      Assert.assertEquals("Hello Foo", this.fs.getContents(path));
+      Assert.assertEquals(mod, this.fs.getLastModification(path));
       Thread.sleep(1000);
       this.fs.setContents(path, "Hello Foo");
-      long _lastModification_2 = this.fs.getLastModification(path);
-      Assert.assertEquals(mod, _lastModification_2);
+      Assert.assertEquals(mod, this.fs.getLastModification(path));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -154,18 +132,15 @@ public class JavaIoFileSystemTest {
   public void testModificationStamp_02() {
     try {
       final Path path = new Path("/foo/src/my/pack/Foo.txt");
-      long _lastModification = this.fs.getLastModification(path);
-      Assert.assertEquals(0L, _lastModification);
+      Assert.assertEquals(0L, this.fs.getLastModification(path));
       this.fs.setContents(path, "Hello Foo");
       final long mod = this.fs.getLastModification(path);
-      CharSequence _contents = this.fs.getContents(path);
-      Assert.assertEquals("Hello Foo", _contents);
-      long _lastModification_1 = this.fs.getLastModification(path);
-      Assert.assertEquals(mod, _lastModification_1);
+      Assert.assertEquals("Hello Foo", this.fs.getContents(path));
+      Assert.assertEquals(mod, this.fs.getLastModification(path));
       Thread.sleep(1000);
       this.fs.setContents(path, "Hello Bar");
-      long _lastModification_2 = this.fs.getLastModification(path);
-      boolean _lessThan = (mod < _lastModification_2);
+      long _lastModification = this.fs.getLastModification(path);
+      boolean _lessThan = (mod < _lastModification);
       Assert.assertTrue(_lessThan);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -174,137 +149,102 @@ public class JavaIoFileSystemTest {
   
   @Test
   public void testGetWorkspaceChildren() {
-    Iterable<? extends Path> _children = this.fs.getChildren(Path.ROOT);
     final Function1<Path, CharSequence> _function = (Path it) -> {
-      List<String> _segments = it.getSegments();
-      return IterableExtensions.join(_segments, ".");
+      return IterableExtensions.join(it.getSegments(), ".");
     };
-    String _join = IterableExtensions.join(_children, "[", ", ", "]", _function);
-    Iterable<? extends Path> _children_1 = this.fs.getChildren(Path.ROOT);
-    int _size = IterableExtensions.size(_children_1);
-    Assert.assertEquals(_join, 1, _size);
+    Assert.assertEquals(IterableExtensions.join(this.fs.getChildren(Path.ROOT), "[", ", ", "]", _function), 1, IterableExtensions.size(this.fs.getChildren(Path.ROOT)));
   }
   
   @Test
   public void testGetProjectChildren() {
     final Path projectFolder = new Path("/foo");
-    boolean _exists = this.fs.exists(projectFolder);
-    Assert.assertTrue(_exists);
-    Iterable<? extends Path> _children = this.fs.getChildren(projectFolder);
-    int _size = IterableExtensions.size(_children);
+    Assert.assertTrue(this.fs.exists(projectFolder));
+    int _size = IterableExtensions.size(this.fs.getChildren(projectFolder));
     final int expectedChildrenSize = (_size + 1);
     Path _path = new Path("/foo/Foo.text");
     this.fs.setContents(_path, "Hello Foo");
-    Iterable<? extends Path> _children_1 = this.fs.getChildren(projectFolder);
-    String _plus = ("" + _children_1);
-    Iterable<? extends Path> _children_2 = this.fs.getChildren(projectFolder);
-    int _size_1 = IterableExtensions.size(_children_2);
-    Assert.assertEquals(_plus, expectedChildrenSize, _size_1);
+    Iterable<? extends Path> _children = this.fs.getChildren(projectFolder);
+    String _plus = ("" + _children);
+    Assert.assertEquals(_plus, expectedChildrenSize, 
+      IterableExtensions.size(this.fs.getChildren(projectFolder)));
   }
   
   @Test
   public void testGetFolderChildren() {
     final Path folder = new Path("/foo/bar");
-    boolean _exists = this.fs.exists(folder);
-    Assert.assertFalse(_exists);
+    Assert.assertFalse(this.fs.exists(folder));
     Path _append = folder.append("Bar.txt");
     this.fs.setContents(_append, "Hello Bar");
-    boolean _exists_1 = this.fs.exists(folder);
-    Assert.assertTrue(_exists_1);
-    Iterable<? extends Path> _children = this.fs.getChildren(folder);
-    int _size = IterableExtensions.size(_children);
-    Assert.assertEquals(1, _size);
+    Assert.assertTrue(this.fs.exists(folder));
+    Assert.assertEquals(1, IterableExtensions.size(this.fs.getChildren(folder)));
     Path _path = new Path("/foo/bar/Foo.text");
     this.fs.setContents(_path, "Hello Foo");
-    Iterable<? extends Path> _children_1 = this.fs.getChildren(folder);
-    int _size_1 = IterableExtensions.size(_children_1);
-    Assert.assertEquals(2, _size_1);
+    Assert.assertEquals(2, IterableExtensions.size(this.fs.getChildren(folder)));
   }
   
   @Test
   public void testGetFileChildren() {
     final Path file = new Path("/foo/bar/Foo.text");
-    boolean _exists = this.fs.exists(file);
-    Assert.assertFalse(_exists);
-    Iterable<? extends Path> _children = this.fs.getChildren(file);
-    int _size = IterableExtensions.size(_children);
-    Assert.assertEquals(0, _size);
+    Assert.assertFalse(this.fs.exists(file));
+    Assert.assertEquals(0, IterableExtensions.size(this.fs.getChildren(file)));
     this.fs.setContents(file, "Hello Foo");
-    boolean _exists_1 = this.fs.exists(file);
-    Assert.assertTrue(_exists_1);
-    Iterable<? extends Path> _children_1 = this.fs.getChildren(file);
-    int _size_1 = IterableExtensions.size(_children_1);
-    Assert.assertEquals(0, _size_1);
+    Assert.assertTrue(this.fs.exists(file));
+    Assert.assertEquals(0, IterableExtensions.size(this.fs.getChildren(file)));
   }
   
   @Test
   public void testGetFileURI() {
     final Path file = new Path("/foo/bar/Foo.text");
-    boolean _exists = this.fs.exists(file);
-    Assert.assertFalse(_exists);
-    URI _uRI = this.fs.toURI(file);
-    Assert.assertNotNull(_uRI);
+    Assert.assertFalse(this.fs.exists(file));
+    Assert.assertNotNull(this.fs.toURI(file));
     this.fs.setContents(file, "Hello Foo");
-    boolean _exists_1 = this.fs.exists(file);
-    Assert.assertTrue(_exists_1);
+    Assert.assertTrue(this.fs.exists(file));
     this.assertToURI(file, "Hello Foo");
   }
   
   @Test
   public void testGetFolderURI() {
     final Path path = new Path("/foo/bar");
-    boolean _exists = this.fs.exists(path);
-    Assert.assertFalse(_exists);
-    URI _uRI = this.fs.toURI(path);
-    Assert.assertNotNull(_uRI);
+    Assert.assertFalse(this.fs.exists(path));
+    Assert.assertNotNull(this.fs.toURI(path));
     Path _append = path.append("Foo.txt");
     this.fs.setContents(_append, "Hello Foo");
-    boolean _exists_1 = this.fs.exists(path);
-    Assert.assertTrue(_exists_1);
-    URI _uRI_1 = this.fs.toURI(path);
-    Assert.assertNotNull(_uRI_1);
+    Assert.assertTrue(this.fs.exists(path));
+    Assert.assertNotNull(this.fs.toURI(path));
   }
   
   @Test
   public void testGetProjectURI() {
     final Path path = new Path("/foo");
-    boolean _exists = this.fs.exists(path);
-    Assert.assertTrue(_exists);
-    URI _uRI = this.fs.toURI(path);
-    Assert.assertNotNull(_uRI);
+    Assert.assertTrue(this.fs.exists(path));
+    Assert.assertNotNull(this.fs.toURI(path));
   }
   
   @Test
   public void testGetWorkspaceURI() {
     final Path path = Path.ROOT;
-    boolean _exists = this.fs.exists(path);
-    Assert.assertTrue(_exists);
-    URI _uRI = this.fs.toURI(path);
-    Assert.assertNull(_uRI);
+    Assert.assertTrue(this.fs.exists(path));
+    Assert.assertNull(this.fs.toURI(path));
   }
   
   @Test
   public void testWorkspaceIsFolder() {
-    boolean _isFolder = this.fs.isFolder(Path.ROOT);
-    Assert.assertTrue(_isFolder);
+    Assert.assertTrue(this.fs.isFolder(Path.ROOT));
   }
   
   @Test
   public void testWorkspaceIsFile() {
-    boolean _isFile = this.fs.isFile(Path.ROOT);
-    Assert.assertFalse(_isFile);
+    Assert.assertFalse(this.fs.isFile(Path.ROOT));
   }
   
   @Test
   public void testGetWorkspaceLastModification() {
-    long _lastModification = this.fs.getLastModification(Path.ROOT);
-    Assert.assertEquals(0L, _lastModification);
+    Assert.assertEquals(0L, this.fs.getLastModification(Path.ROOT));
   }
   
   @Test
   public void testGetWorkspaceCharset() {
-    String _charset = this.fs.getCharset(Path.ROOT);
-    Assert.assertNotNull(_charset);
+    Assert.assertNotNull(this.fs.getCharset(Path.ROOT));
   }
   
   @Test
@@ -367,11 +307,9 @@ public class JavaIoFileSystemTest {
   
   @Test
   public void testDeleteWorkspace() {
-    boolean _exists = this.fs.exists(Path.ROOT);
-    Assert.assertTrue(_exists);
+    Assert.assertTrue(this.fs.exists(Path.ROOT));
     this.fs.delete(Path.ROOT);
-    boolean _exists_1 = this.fs.exists(Path.ROOT);
-    Assert.assertTrue(_exists_1);
+    Assert.assertTrue(this.fs.exists(Path.ROOT));
   }
   
   protected void assertToURI(final Path file, final String expectedContent) {
@@ -379,8 +317,7 @@ public class JavaIoFileSystemTest {
     Assert.assertNotNull(uri);
     try {
       final File javaIoFile = new File(uri);
-      boolean _exists = javaIoFile.exists();
-      Assert.assertTrue(_exists);
+      Assert.assertTrue(javaIoFile.exists());
       long _length = javaIoFile.length();
       final byte[] data = new byte[((int) _length)];
       final FileInputStream fis = new FileInputStream(javaIoFile);

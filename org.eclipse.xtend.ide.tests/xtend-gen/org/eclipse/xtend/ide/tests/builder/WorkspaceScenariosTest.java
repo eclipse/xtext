@@ -14,22 +14,16 @@ import com.google.inject.name.Named;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
@@ -37,7 +31,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.testing.InjectWith;
@@ -83,10 +76,7 @@ public class WorkspaceScenariosTest {
       final IProject project = this.createProjectWithJarDependency(_function);
       try {
         IResourcesSetupUtil.assertNoErrorsInWorkspace();
-        IResourceDescriptions _get = this.persistedResourceDescriptions.get();
-        Iterable<IResourceDescription> _allResourceDescriptions = _get.getAllResourceDescriptions();
-        int _length = ((Object[])Conversions.unwrapArray(_allResourceDescriptions, Object.class)).length;
-        Assert.assertEquals(1, _length);
+        Assert.assertEquals(1, ((Object[])Conversions.unwrapArray(this.persistedResourceDescriptions.get().getAllResourceDescriptions(), Object.class)).length);
       } finally {
         project.delete(true, true, null);
       }
@@ -106,9 +96,7 @@ public class WorkspaceScenariosTest {
         final ArrayList<IMarker> allXtendMarkers = CollectionLiterals.<IMarker>newArrayList();
         final IResourceVisitor _function_1 = (IResource it) -> {
           if ((it instanceof IFile)) {
-            IPath _fullPath = ((IFile)it).getFullPath();
-            String _lastSegment = _fullPath.lastSegment();
-            boolean _endsWith = _lastSegment.endsWith(".xtend");
+            boolean _endsWith = ((IFile)it).getFullPath().lastSegment().endsWith(".xtend");
             if (_endsWith) {
               final IMarker[] markers = ((IFile)it).findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
               for (final IMarker m : markers) {
@@ -119,12 +107,8 @@ public class WorkspaceScenariosTest {
           return true;
         };
         project.accept(_function_1);
-        int _size = allXtendMarkers.size();
-        Assert.assertEquals(2, _size);
-        IResourceDescriptions _get = this.persistedResourceDescriptions.get();
-        Iterable<IResourceDescription> _allResourceDescriptions = _get.getAllResourceDescriptions();
-        int _length = ((Object[])Conversions.unwrapArray(_allResourceDescriptions, Object.class)).length;
-        Assert.assertEquals(1, _length);
+        Assert.assertEquals(2, allXtendMarkers.size());
+        Assert.assertEquals(1, ((Object[])Conversions.unwrapArray(this.persistedResourceDescriptions.get().getAllResourceDescriptions(), Object.class)).length);
       } finally {
         project.delete(true, true, null);
       }
@@ -179,11 +163,8 @@ public class WorkspaceScenariosTest {
       IResourcesSetupUtil.createFile("my.project/src/mypack/ClassB.xtend", _builder_1.toString());
       IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
-      IProject _project = fileA.getProject();
-      final IFile javaB = _project.getFile("xtend-gen/mypack/ClassB.java");
-      String _contentsAsString = WorkbenchTestHelper.getContentsAsString(javaB);
-      boolean _contains = _contentsAsString.contains("anotherMethod(a);");
-      Assert.assertTrue(_contains);
+      final IFile javaB = fileA.getProject().getFile("xtend-gen/mypack/ClassB.java");
+      Assert.assertTrue(WorkbenchTestHelper.getContentsAsString(javaB).contains("anotherMethod(a);"));
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package mypack");
       _builder_2.newLine();
@@ -212,9 +193,7 @@ public class WorkspaceScenariosTest {
       fileA.setContents(_stringInputStream, true, true, null);
       IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
-      String _contentsAsString_1 = WorkbenchTestHelper.getContentsAsString(javaB);
-      boolean _contains_1 = _contentsAsString_1.contains("a.anotherMethod();");
-      Assert.assertTrue(_contains_1);
+      Assert.assertTrue(WorkbenchTestHelper.getContentsAsString(javaB).contains("a.anotherMethod();"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -284,8 +263,7 @@ public class WorkspaceScenariosTest {
         final IFile jarFile = project.getFile("mydependency.jar");
         ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(jarData);
         jarFile.create(_byteArrayInputStream, true, null);
-        IJavaProject _create = JavaCore.create(project);
-        _xblockexpression = JavaProjectSetupUtil.addJarToClasspath(_create, jarFile);
+        _xblockexpression = JavaProjectSetupUtil.addJarToClasspath(JavaCore.create(project), jarFile);
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -298,50 +276,36 @@ public class WorkspaceScenariosTest {
       final IProject project = WorkbenchTestHelper.createPluginProject("my.temporary.data.project", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib");
       final HashMap<String, InputStream> listOfContents = CollectionLiterals.<String, InputStream>newHashMap();
       try {
-        IJavaProject _create = JavaCore.create(project);
-        JavaProjectSetupUtil.addSourceFolder(_create, "src");
-        IJavaProject _create_1 = JavaCore.create(project);
-        JavaProjectSetupUtil.addSourceFolder(_create_1, "xtend-gen");
+        JavaProjectSetupUtil.addSourceFolder(JavaCore.create(project), "src");
+        JavaProjectSetupUtil.addSourceFolder(JavaCore.create(project), "xtend-gen");
         for (final Pair<? extends String, ? extends String> sourceFile : sourceFiles) {
           String _key = sourceFile.getKey();
-          String _plus = ("my.temporary.data.project/src/" + _key);
-          String _value = sourceFile.getValue();
-          IResourcesSetupUtil.createFile(_plus, _value);
+          IResourcesSetupUtil.createFile(("my.temporary.data.project/src/" + _key), sourceFile.getValue());
         }
         IResourcesSetupUtil.waitForBuild();
         final IResourceVisitor _function = (IResource it) -> {
           if ((it instanceof IFile)) {
-            IPath _projectRelativePath = ((IFile)it).getProjectRelativePath();
-            IPath _removeFirstSegments = _projectRelativePath.removeFirstSegments(1);
-            final String path = _removeFirstSegments.toString();
+            final String path = ((IFile)it).getProjectRelativePath().removeFirstSegments(1).toString();
             Boolean _apply = filter.apply(path);
             boolean _not = (!(_apply).booleanValue());
             if (_not) {
-              InputStream _contents = ((IFile)it).getContents();
-              listOfContents.put(path, _contents);
+              listOfContents.put(path, ((IFile)it).getContents());
             }
           }
           return true;
         };
         final IResourceVisitor visitor = _function;
-        IFolder _folder = project.getFolder("src");
-        _folder.accept(visitor);
-        IFolder _folder_1 = project.getFolder("xtend-gen");
-        _folder_1.accept(visitor);
-        IFolder _folder_2 = project.getFolder("bin");
-        _folder_2.accept(visitor);
-        Set<Map.Entry<String, InputStream>> _entrySet = listOfContents.entrySet();
+        project.getFolder("src").accept(visitor);
+        project.getFolder("xtend-gen").accept(visitor);
+        project.getFolder("bin").accept(visitor);
         final Function1<Map.Entry<String, InputStream>, Pair<String, InputStream>> _function_1 = (Map.Entry<String, InputStream> it) -> {
           String _key_1 = it.getKey();
-          InputStream _value_1 = it.getValue();
-          return Pair.<String, InputStream>of(_key_1, _value_1);
+          InputStream _value = it.getValue();
+          return Pair.<String, InputStream>of(_key_1, _value);
         };
-        Iterable<Pair<String, InputStream>> _map = IterableExtensions.<Map.Entry<String, InputStream>, Pair<String, InputStream>>map(_entrySet, _function_1);
-        List<Pair<String, InputStream>> _list = IterableExtensions.<Pair<String, InputStream>>toList(_map);
-        final InputStream jarin = JavaProjectSetupUtil.jarInputStream(((Pair<String, InputStream>[])Conversions.unwrapArray(_list, Pair.class)));
+        final InputStream jarin = JavaProjectSetupUtil.jarInputStream(((Pair<String, InputStream>[])Conversions.unwrapArray(IterableExtensions.<Pair<String, InputStream>>toList(IterableExtensions.<Map.Entry<String, InputStream>, Pair<String, InputStream>>map(listOfContents.entrySet(), _function_1)), Pair.class)));
         return ByteStreams.toByteArray(jarin);
       } finally {
-        Collection<InputStream> _values = listOfContents.values();
         final Consumer<InputStream> _function_2 = (InputStream it) -> {
           try {
             it.close();
@@ -349,7 +313,7 @@ public class WorkspaceScenariosTest {
             throw Exceptions.sneakyThrow(_e);
           }
         };
-        _values.forEach(_function_2);
+        listOfContents.values().forEach(_function_2);
         project.delete(true, true, null);
       }
     } catch (Throwable _e) {

@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.macro;
 
 import com.google.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.core.filesystem.URIUtil;
 import org.eclipse.core.resources.IContainer;
@@ -45,13 +44,11 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     final IResource resource = this.findMember(uri);
     if ((resource instanceof IContainer)) {
       try {
-        IResource[] _members = ((IContainer)resource).members();
         final Function1<IResource, Path> _function = (IResource it) -> {
-          IPath _fullPath = it.getFullPath();
-          String _string = _fullPath.toString();
+          String _string = it.getFullPath().toString();
           return new Path(_string);
         };
-        return ListExtensions.<IResource, Path>map(((List<IResource>)Conversions.doWrapArray(_members)), _function);
+        return ListExtensions.<IResource, Path>map(((List<IResource>)Conversions.doWrapArray(((IContainer)resource).members())), _function);
       } catch (final Throwable _t) {
         if (_t instanceof CoreException) {
           final CoreException exc = (CoreException)_t;
@@ -67,8 +64,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   
   @Override
   public java.net.URI toURI(final URI uri) {
-    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-    return this.toURI(uri, _newArrayList);
+    return this.toURI(uri, CollectionLiterals.<String>newArrayList());
   }
   
   protected java.net.URI toURI(final URI uri, final List<String> trailingSegments) {
@@ -78,16 +74,12 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
       if ((resource == null)) {
         String _lastSegment = uri.lastSegment();
         trailingSegments.add(_lastSegment);
-        URI _trimSegments = uri.trimSegments(1);
-        return this.toURI(_trimSegments, trailingSegments);
+        return this.toURI(uri.trimSegments(1), trailingSegments);
       }
-      List<String> _reverse = ListExtensions.<String>reverse(trailingSegments);
-      IPath _location = resource.getLocation();
       final Function2<IPath, String, IPath> _function = (IPath $0, String $1) -> {
         return $0.append($1);
       };
-      IPath _fold = IterableExtensions.<String, IPath>fold(_reverse, _location, _function);
-      _xblockexpression = URIUtil.toURI(_fold);
+      _xblockexpression = URIUtil.toURI(IterableExtensions.<String, IPath>fold(ListExtensions.<String>reverse(trailingSegments), resource.getLocation(), _function));
     }
     return _xblockexpression;
   }

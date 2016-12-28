@@ -20,8 +20,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 @SuppressWarnings("all")
 class UnicodeTerminalsGenerator {
   public static void main(final String[] args) {
-    CharSequence _generateUnicodeRules = UnicodeTerminalsGenerator.generateUnicodeRules();
-    InputOutput.<CharSequence>println(_generateUnicodeRules);
+    InputOutput.<CharSequence>println(UnicodeTerminalsGenerator.generateUnicodeRules());
   }
   
   public static CharSequence generateUnicodeRules() {
@@ -83,9 +82,7 @@ class UnicodeTerminalsGenerator {
               printer.print("  ");
               first = false;
             }
-            String _hexString = Integer.toHexString((prev).charValue());
-            String _upperCase = _hexString.toUpperCase();
-            String _padStart = Strings.padStart(_upperCase, 4, '0');
+            String _padStart = Strings.padStart(Integer.toHexString((prev).charValue()).toUpperCase(), 4, '0');
             String _plus = ("\'\\u" + _padStart);
             String _plus_1 = (_plus + "\'");
             printer.print(_plus_1);
@@ -94,9 +91,7 @@ class UnicodeTerminalsGenerator {
             if (_equals) {
               printer.println();
             } else {
-              String _hexString_1 = Integer.toHexString((c - 1));
-              String _upperCase_1 = _hexString_1.toUpperCase();
-              String _padStart_1 = Strings.padStart(_upperCase_1, 4, '0');
+              String _padStart_1 = Strings.padStart(Integer.toHexString((c - 1)).toUpperCase(), 4, '0');
               String _plus_2 = ("..\'\\u" + _padStart_1);
               String _plus_3 = (_plus_2 + "\'");
               printer.println(_plus_3);

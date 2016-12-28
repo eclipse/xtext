@@ -9,7 +9,6 @@ package org.eclipse.xtend.ide.tests.contentassist;
 
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtext.junit4.Flaky;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.junit.Test;
 
 /**
@@ -20,9 +19,7 @@ public class DataContentAssistTest extends AbstractXtendContentAssistBugTest {
   @Flaky
   @Test
   public void testDataAnnotation() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("@Data");
-    _append.assertText(
+    this.newBuilder().append("@Data").assertText(
       "org.eclipse.xtend.lib.annotations.Data", 
       "org.junit.experimental.theories.DataPoint", 
       "org.junit.experimental.theories.DataPoints");

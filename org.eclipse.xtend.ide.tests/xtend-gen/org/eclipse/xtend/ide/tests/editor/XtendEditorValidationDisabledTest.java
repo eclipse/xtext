@@ -50,8 +50,7 @@ public class XtendEditorValidationDisabledTest extends AbstractXtendUITestCase {
       };
       ObjectExtensions.<IJavaProject>operator_doubleArrow(_createJavaProject, _function);
       final IFile file = IResourcesSetupUtil.createFile("testProject/filtered-src/Foo.xtend", "class Foo {}");
-      boolean _isValidationDisabled = this.isValidationDisabled(file);
-      Assert.assertTrue(_isValidationDisabled);
+      Assert.assertTrue(this.isValidationDisabled(file));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -70,8 +69,7 @@ public class XtendEditorValidationDisabledTest extends AbstractXtendUITestCase {
       };
       ObjectExtensions.<IJavaProject>operator_doubleArrow(_createJavaProject, _function);
       final IFile file = IResourcesSetupUtil.createFile("testProject/filtered-src/Foo.xtend", "class Foo {}");
-      boolean _isValidationDisabled = this.isValidationDisabled(file);
-      Assert.assertFalse(_isValidationDisabled);
+      Assert.assertFalse(this.isValidationDisabled(file));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -79,8 +77,7 @@ public class XtendEditorValidationDisabledTest extends AbstractXtendUITestCase {
   
   public boolean isValidationDisabled(final IStorage storage) {
     try {
-      Class<? extends IResourceForEditorInputFactory> _class = this.resourceForEditorInputFactory.getClass();
-      final Method method = _class.getDeclaredMethod("isValidationDisabled", IStorage.class);
+      final Method method = this.resourceForEditorInputFactory.getClass().getDeclaredMethod("isValidationDisabled", IStorage.class);
       method.setAccessible(true);
       Object _invoke = method.invoke(this.resourceForEditorInputFactory, storage);
       return (((Boolean) _invoke)).booleanValue();

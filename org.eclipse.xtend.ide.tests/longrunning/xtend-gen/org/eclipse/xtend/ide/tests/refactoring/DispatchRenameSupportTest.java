@@ -5,14 +5,11 @@ import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.refactoring.DispatchRenameSupport;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -20,8 +17,6 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -805,44 +800,34 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
   public XtendFunction firstMethod(final IFile targetFile) {
     XtendFunction _xblockexpression = null;
     {
-      ResourceSet _resourceSet = this.testHelper.getResourceSet();
-      URI _uri = this.testHelper.uri(targetFile);
-      final Resource resource = _resourceSet.getResource(_uri, true);
-      EList<EObject> _contents = resource.getContents();
-      final EObject createFile = _contents.get(0);
+      final Resource resource = this.testHelper.getResourceSet().getResource(this.testHelper.uri(targetFile), true);
+      final EObject createFile = resource.getContents().get(0);
       Assert.assertTrue((createFile instanceof XtendFile));
-      EList<XtendTypeDeclaration> _xtendTypes = ((XtendFile) createFile).getXtendTypes();
-      XtendTypeDeclaration _get = _xtendTypes.get(0);
+      XtendTypeDeclaration _get = ((XtendFile) createFile).getXtendTypes().get(0);
       final XtendClass xtendClass = ((XtendClass) _get);
-      EList<XtendMember> _members = xtendClass.getMembers();
-      Iterable<XtendFunction> _filter = Iterables.<XtendFunction>filter(_members, XtendFunction.class);
-      _xblockexpression = Iterables.<XtendFunction>get(_filter, 0);
+      _xblockexpression = Iterables.<XtendFunction>get(Iterables.<XtendFunction>filter(xtendClass.getMembers(), XtendFunction.class), 0);
     }
     return _xblockexpression;
   }
   
   public void checkDispatchOperations(final IFile targetFile, final String... signatures) {
     IResourcesSetupUtil.waitForBuild();
-    XtendFunction _firstMethod = this.firstMethod(targetFile);
-    Iterable<JvmOperation> _allDispatchOperations = this.dispatchRenameSupport.getAllDispatchOperations(_firstMethod);
     final Function1<JvmOperation, String> _function = (JvmOperation it) -> {
       return this.signature(it);
     };
-    final Iterable<String> dispatchOperations = IterableExtensions.<JvmOperation, String>map(_allDispatchOperations, _function);
+    final Iterable<String> dispatchOperations = IterableExtensions.<JvmOperation, String>map(this.dispatchRenameSupport.getAllDispatchOperations(this.firstMethod(targetFile)), _function);
     for (final String signature : signatures) {
       String _join = IterableExtensions.join(dispatchOperations, "\n");
       String _plus = ((signature + " not found. Only got ") + _join);
-      boolean _contains = Iterables.contains(dispatchOperations, signature);
-      Assert.assertTrue(_plus, _contains);
+      Assert.assertTrue(_plus, Iterables.contains(dispatchOperations, signature));
     }
     String _join_1 = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(signatures)), "\n");
     String _plus_1 = ("Expected " + _join_1);
     String _plus_2 = (_plus_1 + "but got ");
     String _join_2 = IterableExtensions.join(dispatchOperations, "\n");
     String _plus_3 = (_plus_2 + _join_2);
-    int _size = ((List<String>)Conversions.doWrapArray(signatures)).size();
-    int _size_1 = Iterables.size(dispatchOperations);
-    Assert.assertEquals(_plus_3, _size, _size_1);
+    Assert.assertEquals(_plus_3, 
+      ((List<String>)Conversions.doWrapArray(signatures)).size(), Iterables.size(dispatchOperations));
   }
   
   public String signature(final JvmOperation it) {
@@ -859,9 +844,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         } else {
           _builder.appendImmediate(",", "");
         }
-        JvmTypeReference _parameterType = p.getParameterType();
-        JvmType _type = _parameterType.getType();
-        String _simpleName = _type.getSimpleName();
+        String _simpleName = p.getParameterType().getType().getSimpleName();
         _builder.append(_simpleName);
       }
     }

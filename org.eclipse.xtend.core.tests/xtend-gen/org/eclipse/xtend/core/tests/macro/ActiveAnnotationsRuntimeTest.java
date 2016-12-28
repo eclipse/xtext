@@ -7,10 +7,7 @@ import com.google.inject.Provider;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.Map;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -23,7 +20,6 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testing.InjectWith;
@@ -77,14 +73,12 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   
   @Before
   public void setUp() {
-    ClassLoader _classLoader = ActiveAnnotationsRuntimeTest.class.getClassLoader();
-    this.compiler.setJavaCompilerClassPath(_classLoader);
+    this.compiler.setJavaCompilerClassPath(ActiveAnnotationsRuntimeTest.class.getClassLoader());
     this.configureFreshWorkspace();
   }
   
   protected void configureFreshWorkspace() {
-    File _createFreshTempDir = this.createFreshTempDir();
-    this.workspaceRoot = _createFreshTempDir;
+    this.workspaceRoot = this.createFreshTempDir();
   }
   
   protected File createFreshTempDir() {
@@ -100,13 +94,9 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       String _key = fileRepresentation.getKey();
       String _plus = ((projectName + "/src/") + _key);
       final File file = new File(this.workspaceRoot, _plus);
-      File _parentFile = file.getParentFile();
-      _parentFile.mkdirs();
-      String _value = fileRepresentation.getValue();
-      Charset _defaultCharset = Charset.defaultCharset();
-      Files.write(_value, file, _defaultCharset);
-      String _path = file.getPath();
-      return URI.createFileURI(_path);
+      file.getParentFile().mkdirs();
+      Files.write(fileRepresentation.getValue(), file, Charset.defaultCharset());
+      return URI.createFileURI(file.getPath());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -116,16 +106,12 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   public void assertProcessing(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
     try {
       final XtextResourceSet resourceSet = this.compileMacroResourceSet(macroFile, clientFile);
-      EList<Resource> _resources = resourceSet.getResources();
-      final Resource singleResource = IterableExtensions.<Resource>head(_resources);
-      Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-      singleResource.load(_emptyMap);
+      final Resource singleResource = IterableExtensions.<Resource>head(resourceSet.getResources());
+      singleResource.load(CollectionLiterals.<Object, Object>emptyMap());
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         it.getGeneratedCode();
         final CompilationUnitImpl unit = this.compilationUnitProvider.get();
-        EList<EObject> _contents = singleResource.getContents();
-        Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
-        final XtendFile xtendFile = IterableExtensions.<XtendFile>head(_filter);
+        final XtendFile xtendFile = IterableExtensions.<XtendFile>head(Iterables.<XtendFile>filter(singleResource.getContents(), XtendFile.class));
         unit.setXtendFile(xtendFile);
         expectations.apply(unit);
       };
@@ -138,19 +124,15 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   public void assertIssues(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super List<Issue>> expectations) {
     try {
       final XtextResourceSet resourceSet = this.compileMacroResourceSet(macroFile, clientFile);
-      EList<Resource> _resources = resourceSet.getResources();
-      Resource _head = IterableExtensions.<Resource>head(_resources);
+      Resource _head = IterableExtensions.<Resource>head(resourceSet.getResources());
       final XtextResource singleResource = ((XtextResource) _head);
       boolean _isLoaded = singleResource.isLoaded();
       boolean _not = (!_isLoaded);
       if (_not) {
-        Map<Object, Object> _loadOptions = resourceSet.getLoadOptions();
-        singleResource.load(_loadOptions);
+        singleResource.load(resourceSet.getLoadOptions());
       }
-      IResourceServiceProvider _resourceServiceProvider = singleResource.getResourceServiceProvider();
-      final IResourceValidator validator = _resourceServiceProvider.getResourceValidator();
-      List<Issue> _validate = validator.validate(singleResource, CheckMode.ALL, CancelIndicator.NullImpl);
-      expectations.apply(_validate);
+      final IResourceValidator validator = singleResource.getResourceServiceProvider().getResourceValidator();
+      expectations.apply(validator.validate(singleResource, CheckMode.ALL, CancelIndicator.NullImpl));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -173,17 +155,14 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     final FileProjectConfig clientProjectConfig = ObjectExtensions.<FileProjectConfig>operator_doubleArrow(_fileProjectConfig_1, _function_1);
     final XtextResourceSet macroResourceSet = this.resourceSetProvider.get();
     ProjectConfigAdapter.install(macroResourceSet, macroProjectConfig);
-    Class<? extends ActiveAnnotationsRuntimeTest> _class = this.getClass();
-    ClassLoader _classLoader = _class.getClassLoader();
-    macroResourceSet.setClasspathURIContext(_classLoader);
+    macroResourceSet.setClasspathURIContext(this.getClass().getClassLoader());
     macroResourceSet.createResource(macroURI);
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
     ProjectConfigAdapter.install(resourceSet, clientProjectConfig);
     resourceSet.createResource(clientURI);
     final IAcceptor<CompilationTestHelper.Result> _function_2 = (CompilationTestHelper.Result result) -> {
-      Class<? extends ActiveAnnotationsRuntimeTest> _class_1 = this.getClass();
-      ClassLoader _classLoader_1 = _class_1.getClassLoader();
-      final DelegatingClassloader classLoader = new DelegatingClassloader(_classLoader_1, result);
+      ClassLoader _classLoader = this.getClass().getClassLoader();
+      final DelegatingClassloader classLoader = new DelegatingClassloader(_classLoader, result);
       resourceSet.setClasspathURIContext(classLoader);
       this.compiler.setJavaCompilerClassPath(classLoader);
     };
@@ -242,20 +221,12 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<List<Issue>> _function = (List<Issue> it) -> {
-      int _size = it.size();
-      Assert.assertEquals(1, _size);
+      Assert.assertEquals(1, it.size());
       final Issue error = IterableExtensions.<Issue>head(it);
       Assert.assertNotNull(error);
-      String _code = error.getCode();
-      Assert.assertEquals(IssueCodes.PROCESSING_ERROR, _code);
-      String _message = error.getMessage();
-      String _name = IllegalStateException.class.getName();
-      boolean _contains = _message.contains(_name);
-      Assert.assertTrue(_contains);
-      String _message_1 = error.getMessage();
-      String _name_1 = AnnotationProcessor.class.getName();
-      boolean _contains_1 = _message_1.contains(_name_1);
-      Assert.assertFalse(_contains_1);
+      Assert.assertEquals(IssueCodes.PROCESSING_ERROR, error.getCode());
+      Assert.assertTrue(error.getMessage().contains(IllegalStateException.class.getName()));
+      Assert.assertFalse(error.getMessage().contains(AnnotationProcessor.class.getName()));
     };
     this.assertIssues(_mappedTo, _mappedTo_1, _function);
   }
@@ -368,14 +339,11 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      XtendFile _xtendFile = it.getXtendFile();
-      this.validator.assertIssue(_xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+      this.validator.assertIssue(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
         "The generated field \'myusercode.Foo.foo\' is not associated with a source element.");
-      XtendFile _xtendFile_1 = it.getXtendFile();
-      this.validator.assertIssue(_xtendFile_1, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+      this.validator.assertIssue(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
         "The generated method \'myusercode.Foo.foo(Integer)\' is not associated with a source element.");
-      XtendFile _xtendFile_2 = it.getXtendFile();
-      this.validator.assertIssue(_xtendFile_2, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+      this.validator.assertIssue(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
         "The generated type \'myusercode.Foo.Inner\' is not associated with a source element.");
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
@@ -458,8 +426,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      XtendFile _xtendFile = it.getXtendFile();
-      this.validator.assertNoWarnings(_xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT);
+      this.validator.assertNoWarnings(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT);
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }

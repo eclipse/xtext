@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider;
 import org.eclipse.xtend.core.validation.IssueCodes;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -50,8 +49,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoErrors(_file);
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -72,8 +70,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoErrors(_file);
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -103,8 +100,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoErrors(_file);
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -130,8 +126,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C implements A, B { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The type C inherits multiple implementations of the method foo() from A and B.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -158,8 +153,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("interface C extends A, B { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The type C inherits multiple implementations of the method foo() from A and B.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -186,8 +180,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C implements A, B { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The non-abstract method foo() inherited from A conflicts with the method foo() inherited from B.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -214,8 +207,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("interface C extends A, B { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The non-abstract method foo() inherited from A conflicts with the method foo() inherited from B.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -242,8 +234,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C implements A, B { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The type C inherits multiple implementations of the method foo(List<String>) from A and B.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -270,8 +261,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("interface C extends A, B { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The type C inherits multiple implementations of the method foo(List<String>) from A and B.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -312,8 +302,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class E implements A, B, C, D { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The type E inherits multiple implementations of the method foo() from C and D.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -354,8 +343,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class E implements A, B, D, C { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The type E inherits multiple implementations of the method foo() from D and C.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -396,8 +384,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class E implements A, B, D, C { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The non-abstract method foo() inherited from D conflicts with the method foo() inherited from C.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -438,8 +425,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class E implements B, C, A, D { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The non-abstract method foo() inherited from D conflicts with the method foo() inherited from C.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -468,8 +454,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class E implements I, J1 {}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 
         "The non-abstract method m() inherited from I conflicts with the method m() inherited from J.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -498,8 +483,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C extends B implements I {}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
         "The class C must be defined abstract because it does not implement m()");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -526,8 +510,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C implements J {}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
         "The class C must be defined abstract because it does not implement m()");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -560,8 +543,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C implements I, K, L {}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
         "The class C must be defined abstract because it does not implement m()");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -593,8 +575,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoErrors(_file);
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -627,8 +608,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class D implements A, B, C { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoErrors(_file);
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -661,8 +641,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class D implements A, C, B { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoErrors(_file);
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -695,8 +674,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class D implements C, A, B { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoErrors(_file);
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -728,8 +706,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C implements I, J, L {}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoErrors(_file);
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -757,8 +734,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class D extends C { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoIssues(_file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 106, (-1), Severity.ERROR);
+      this._validationTestHelper.assertNoIssues(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CONFLICTING_DEFAULT_METHODS, 106, (-1), Severity.ERROR);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -786,8 +762,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("interface D extends C { }");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoIssues(_file, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.CONFLICTING_DEFAULT_METHODS, 111, (-1), Severity.ERROR);
+      this._validationTestHelper.assertNoIssues(this.file(_builder.toString()), XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.CONFLICTING_DEFAULT_METHODS, 111, (-1), Severity.ERROR);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -817,8 +792,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ABSTRACT_METHOD_INVOCATION, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ABSTRACT_METHOD_INVOCATION, 
         "Cannot directly invoke the abstract method foo() of the type A");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -842,8 +816,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, 
         "The enclosing type does not extend or implement the interface List");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

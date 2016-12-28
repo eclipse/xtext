@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.tests.macros;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -39,8 +38,7 @@ public class Bug457681Test {
   @Test
   public void testDaBug_1() {
     try {
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");
-      final IJavaProject macroProject = JavaCore.create(_createPluginProject);
+      final IJavaProject macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject("macroProject"));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package annotation");
       _builder.newLine();
@@ -83,12 +81,11 @@ public class Bug457681Test {
       _builder.append("}");
       _builder.newLine();
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder.toString());
-      IProject _project = macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project, "annotation");
+      WorkbenchTestHelper.addExportedPackages(macroProject.getProject(), "annotation");
       IResourcesSetupUtil.waitForBuild();
-      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-        "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
-      final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
+      final IJavaProject userProject = JavaCore.create(
+        WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
+          "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package client");
       _builder_1.newLine();
@@ -134,8 +131,7 @@ public class Bug457681Test {
   @Test
   public void testDaBug_NoAnnotationOnA() {
     try {
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");
-      final IJavaProject macroProject = JavaCore.create(_createPluginProject);
+      final IJavaProject macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject("macroProject"));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package annotation");
       _builder.newLine();
@@ -178,12 +174,11 @@ public class Bug457681Test {
       _builder.append("}");
       _builder.newLine();
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder.toString());
-      IProject _project = macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project, "annotation");
+      WorkbenchTestHelper.addExportedPackages(macroProject.getProject(), "annotation");
       IResourcesSetupUtil.waitForBuild();
-      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-        "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
-      final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
+      final IJavaProject userProject = JavaCore.create(
+        WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
+          "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package client");
       _builder_1.newLine();
@@ -226,8 +221,7 @@ public class Bug457681Test {
   
   public IFile newSource(final IJavaProject it, final String fileName, final String contents) {
     try {
-      IProject _project = it.getProject();
-      final IFile result = _project.getFile(("src/" + fileName));
+      final IFile result = it.getProject().getFile(("src/" + fileName));
       IContainer parent = result.getParent();
       while ((!parent.exists())) {
         ((IFolder) parent).create(true, false, null);

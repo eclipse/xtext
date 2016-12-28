@@ -77,8 +77,7 @@ public class ConditionUtils {
   
   public static void checkTypeName(final String typeName, final String valueType) {
     boolean _equals = Objects.equal(typeName, valueType);
-    String _isNotApplicableMessage = ConditionUtils.isNotApplicableMessage(valueType, typeName);
-    Preconditions.checkArgument(_equals, _isNotApplicableMessage);
+    Preconditions.checkArgument(_equals, ConditionUtils.isNotApplicableMessage(valueType, typeName));
   }
   
   public static String isNotApplicableMessage(final String valueType, final String typeName) {
@@ -115,8 +114,7 @@ public class ConditionUtils {
         return false;
       }
       final char[] charArray = string.toCharArray();
-      Character _head = IterableExtensions.<Character>head(((Iterable<Character>)Conversions.doWrapArray(charArray)));
-      boolean _isJavaIdentifierStart = Character.isJavaIdentifierStart((_head).charValue());
+      boolean _isJavaIdentifierStart = Character.isJavaIdentifierStart((IterableExtensions.<Character>head(((Iterable<Character>)Conversions.doWrapArray(charArray)))).charValue());
       boolean _not = (!_isJavaIdentifierStart);
       if (_not) {
         return false;

@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Preconditions;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMethodDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
@@ -18,19 +17,13 @@ import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implements MutableMethodDeclaration {
   @Override
   public void markAsRead() {
     this.checkMutable();
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
-    JvmOperation _delegate = this.getDelegate();
-    _readAndWriteTracking.markReadAccess(_delegate);
+    this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
   
   @Override
@@ -54,59 +47,49 @@ public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl im
   @Override
   public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
     this.checkMutable();
-    JvmOperation _delegate = this.getDelegate();
-    _delegate.setStrictFloatingPoint(isStrictFloatingPoint);
+    this.getDelegate().setStrictFloatingPoint(isStrictFloatingPoint);
   }
   
   @Override
   public void setNative(final boolean isNative) {
     this.checkMutable();
-    JvmOperation _delegate = this.getDelegate();
-    _delegate.setNative(isNative);
+    this.getDelegate().setNative(isNative);
   }
   
   @Override
   public void setReturnType(final TypeReference type) {
     this.checkMutable();
     Preconditions.checkArgument((type != null), "returnType cannot be null");
-    JvmOperation _delegate = this.getDelegate();
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(type);
-    _delegate.setReturnType(_jvmTypeReference);
+    this.getDelegate().setReturnType(this.getCompilationUnit().toJvmTypeReference(type));
   }
   
   @Override
   public void setAbstract(final boolean isAbstract) {
     this.checkMutable();
-    JvmOperation _delegate = this.getDelegate();
-    _delegate.setAbstract(isAbstract);
+    this.getDelegate().setAbstract(isAbstract);
   }
   
   @Override
   public void setFinal(final boolean isFinal) {
     this.checkMutable();
-    JvmOperation _delegate = this.getDelegate();
-    _delegate.setFinal(isFinal);
+    this.getDelegate().setFinal(isFinal);
   }
   
   @Override
   public void setStatic(final boolean isStatic) {
     this.checkMutable();
-    JvmOperation _delegate = this.getDelegate();
-    _delegate.setStatic(isStatic);
+    this.getDelegate().setStatic(isStatic);
   }
   
   @Override
   public void setSynchronized(final boolean isSynchronized) {
     this.checkMutable();
-    JvmOperation _delegate = this.getDelegate();
-    _delegate.setSynchronized(isSynchronized);
+    this.getDelegate().setSynchronized(isSynchronized);
   }
   
   @Override
   public void setDefault(final boolean isDefault) {
     this.checkMutable();
-    JvmOperation _delegate = this.getDelegate();
-    _delegate.setDefault(isDefault);
+    this.getDelegate().setDefault(isDefault);
   }
 }

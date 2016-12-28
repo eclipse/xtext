@@ -5,7 +5,6 @@ import org.eclipse.xtend.ide.codebuilder.AbstractInterfaceBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.tests.codebuilder.AbstractBuilderTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -20,11 +19,9 @@ public class InterfaceBuilderTest extends AbstractBuilderTest {
   
   @Test
   public void testXtendInterface() {
-    JvmDeclaredType _xtendClass = this.getXtendClass();
-    AbstractInterfaceBuilder _createInterfaceBuilder = this._codeBuilderFactory.createInterfaceBuilder(_xtendClass);
+    AbstractInterfaceBuilder _createInterfaceBuilder = this._codeBuilderFactory.createInterfaceBuilder(this.getXtendClass());
     final Procedure1<AbstractInterfaceBuilder> _function = (AbstractInterfaceBuilder it) -> {
-      JvmDeclaredType _xtendClass_1 = this.getXtendClass();
-      it.setContext(_xtendClass_1);
+      it.setContext(this.getXtendClass());
       it.setInterfaceName("Bar");
       it.setVisibility(JvmVisibility.PUBLIC);
     };
@@ -38,11 +35,9 @@ public class InterfaceBuilderTest extends AbstractBuilderTest {
   
   @Test
   public void testJavaClass() {
-    JvmDeclaredType _javaClass = this.getJavaClass();
-    AbstractInterfaceBuilder _createInterfaceBuilder = this._codeBuilderFactory.createInterfaceBuilder(_javaClass);
+    AbstractInterfaceBuilder _createInterfaceBuilder = this._codeBuilderFactory.createInterfaceBuilder(this.getJavaClass());
     final Procedure1<AbstractInterfaceBuilder> _function = (AbstractInterfaceBuilder it) -> {
-      JvmDeclaredType _javaClass_1 = this.getJavaClass();
-      it.setContext(_javaClass_1);
+      it.setContext(this.getJavaClass());
       it.setInterfaceName("Bar");
       it.setVisibility(JvmVisibility.PUBLIC);
     };

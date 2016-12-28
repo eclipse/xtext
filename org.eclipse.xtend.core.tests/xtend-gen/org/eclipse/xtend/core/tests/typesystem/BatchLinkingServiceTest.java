@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -39,9 +37,7 @@ public class BatchLinkingServiceTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString(), false);
-      Resource _eResource = file.eResource();
-      EObject _eObject = _eResource.getEObject("|0");
-      Assert.assertNull(_eObject);
+      Assert.assertNull(file.eResource().getEObject("|0"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

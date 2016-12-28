@@ -38,8 +38,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("em", 2, "empty");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("em", 2, "empty");
   }
   
   @Flaky
@@ -63,8 +62,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
   }
   
   @Flaky
@@ -88,8 +86,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
   }
   
   @Flaky
@@ -113,7 +110,6 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
   }
 }

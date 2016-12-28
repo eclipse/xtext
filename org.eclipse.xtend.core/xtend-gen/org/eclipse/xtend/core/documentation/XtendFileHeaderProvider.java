@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -20,7 +19,6 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.impl.MultiLineFileHeaderProvider;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
@@ -40,8 +38,7 @@ public class XtendFileHeaderProvider extends MultiLineFileHeaderProvider {
     if ((resource instanceof XtextResource)) {
       final IParseResult parseResult = ((XtextResource)resource).getParseResult();
       if ((parseResult != null)) {
-        ICompositeNode _rootNode = parseResult.getRootNode();
-        Iterable<ILeafNode> _leafNodes = _rootNode.getLeafNodes();
+        Iterable<ILeafNode> _leafNodes = parseResult.getRootNode().getLeafNodes();
         for (final ILeafNode leafNode : _leafNodes) {
           {
             boolean break_ = true;
@@ -73,15 +70,12 @@ public class XtendFileHeaderProvider extends MultiLineFileHeaderProvider {
   }
   
   private boolean isTypeComment(final ILeafNode leafNode, final Resource resource) {
-    EList<EObject> _contents = resource.getContents();
-    final EObject content = IterableExtensions.<EObject>head(_contents);
+    final EObject content = IterableExtensions.<EObject>head(resource.getContents());
     if ((content instanceof XtendFile)) {
-      EList<XtendTypeDeclaration> _xtendTypes = ((XtendFile)content).getXtendTypes();
-      final XtendTypeDeclaration type = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendTypeDeclaration type = IterableExtensions.<XtendTypeDeclaration>head(((XtendFile)content).getXtendTypes());
       if ((type != null)) {
         if ((this.documentationProvider instanceof IEObjectDocumentationProviderExtension)) {
-          List<INode> _documentationNodes = ((IEObjectDocumentationProviderExtension)this.documentationProvider).getDocumentationNodes(type);
-          INode _head = IterableExtensions.<INode>head(_documentationNodes);
+          INode _head = IterableExtensions.<INode>head(((IEObjectDocumentationProviderExtension)this.documentationProvider).getDocumentationNodes(type));
           return Objects.equal(leafNode, _head);
         }
       }

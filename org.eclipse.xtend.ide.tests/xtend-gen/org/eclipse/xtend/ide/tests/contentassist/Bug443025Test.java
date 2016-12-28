@@ -28,8 +28,7 @@ public class Bug443025Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("class C {}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("java.util.ArrayList");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("java.util.ArrayList");
   }
   
   @Test
@@ -43,8 +42,7 @@ public class Bug443025Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("class C {}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("java.util.ArrayList");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("java.util.ArrayList");
   }
   
   @Test
@@ -58,8 +56,7 @@ public class Bug443025Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("class C {}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("java.util.ArrayList");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("java.util.ArrayList");
   }
   
   @Test
@@ -73,7 +70,6 @@ public class Bug443025Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("class C {}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("java.util.ArrayList");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("java.util.ArrayList");
   }
 }

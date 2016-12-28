@@ -7,23 +7,17 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmEnumerationValueDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationValueDeclaration;
-import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
-import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmEnumerationValueDeclarationImpl extends JvmEnumerationValueDeclarationImpl implements MutableEnumerationValueDeclaration {
   @Override
   public void markAsRead() {
     this.checkMutable();
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
-    JvmEnumerationLiteral _delegate = this.getDelegate();
-    _readAndWriteTracking.markReadAccess(_delegate);
+    this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
   
   @Override

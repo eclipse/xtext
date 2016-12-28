@@ -14,8 +14,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -143,8 +141,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       if ((this.exists(uri) && this.isFile(uri))) {
         boolean _markSupported = source.markSupported();
         if (_markSupported) {
-          InputStream _contentsAsStream = this.getContentsAsStream(path);
-          boolean _hasContentsChanged = this.hasContentsChanged(source, _contentsAsStream);
+          boolean _hasContentsChanged = this.hasContentsChanged(source, this.getContentsAsStream(path));
           boolean _not = (!_hasContentsChanged);
           if (_not) {
             return;
@@ -152,8 +149,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
           source.reset();
         }
       }
-      URIConverter _uRIConverter = this.getURIConverter();
-      final OutputStream out = _uRIConverter.createOutputStream(uri);
+      final OutputStream out = this.getURIConverter().createOutputStream(uri);
       try {
         ByteStreams.copy(source, out);
       } finally {
@@ -177,10 +173,8 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       int oldByte = oldContent.read();
       while ((((newByte != (-1)) && (oldByte != (-1))) && (newByte == oldByte))) {
         {
-          int _read = newContent.read();
-          newByte = _read;
-          int _read_1 = oldContent.read();
-          oldByte = _read_1;
+          newByte = newContent.read();
+          oldByte = oldContent.read();
         }
       }
       contentChanged = (newByte != oldByte);
@@ -211,9 +205,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   public Iterable<? extends Path> getChildren(final Path path) {
     boolean _equals = Objects.equal(path, Path.ROOT);
     if (_equals) {
-      IProjectConfig _projectConfig = this.projectConfigProvider.getProjectConfig(this.context);
-      String _name = _projectConfig.getName();
-      Path _absolutePath = path.getAbsolutePath(_name);
+      Path _absolutePath = path.getAbsolutePath(this.projectConfigProvider.getProjectConfig(this.context).getName());
       return Collections.<Path>unmodifiableList(CollectionLiterals.<Path>newArrayList(_absolutePath));
     }
     final URI uri = this.getURI(path);
@@ -236,8 +228,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       throw new IllegalArgumentException(("The file cannot be found: " + path));
     }
     try {
-      URIConverter _uRIConverter = this.getURIConverter();
-      return _uRIConverter.createInputStream(uri);
+      return this.getURIConverter().createInputStream(uri);
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
         final IOException exc = (IOException)_t;
@@ -259,8 +250,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       return;
     }
     try {
-      URIConverter _uRIConverter = this.getURIConverter();
-      _uRIConverter.delete(uri, null);
+      this.getURIConverter().delete(uri, null);
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
         final IOException exc = (IOException)_t;
@@ -280,8 +270,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       if (_equals) {
         return true;
       }
-      URI _uRI = this.getURI(path);
-      _xblockexpression = this.exists(_uRI);
+      _xblockexpression = this.exists(this.getURI(path));
     }
     return _xblockexpression;
   }
@@ -291,16 +280,14 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     if ((uri == null)) {
       _xifexpression = false;
     } else {
-      URIConverter _uRIConverter = this.getURIConverter();
-      _xifexpression = _uRIConverter.exists(uri, null);
+      _xifexpression = this.getURIConverter().exists(uri, null);
     }
     return _xifexpression;
   }
   
   @Override
   public String getCharset(final Path path) {
-    URI _uRI = this.getURI(path);
-    return this.getCharset(_uRI);
+    return this.getCharset(this.getURI(path));
   }
   
   protected String getCharset(final URI uri) {
@@ -309,8 +296,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   
   @Override
   public long getLastModification(final Path path) {
-    URI _uRI = this.getURI(path);
-    return (this.getLastModification(_uRI)).longValue();
+    return (this.getLastModification(this.getURI(path))).longValue();
   }
   
   protected Long getLastModification(final URI uri) {
@@ -330,8 +316,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   
   @Override
   public boolean isFile(final Path path) {
-    URI _uRI = this.getURI(path);
-    return this.isFile(_uRI);
+    return this.isFile(this.getURI(path));
   }
   
   protected boolean isFile(final URI uri) {
@@ -357,8 +342,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       if (_equals) {
         return true;
       }
-      URI _uRI = this.getURI(path);
-      _xblockexpression = this.isFolder(_uRI);
+      _xblockexpression = this.isFolder(this.getURI(path));
     }
     return (_xblockexpression).booleanValue();
   }
@@ -399,8 +383,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     java.net.URI _xtrycatchfinallyexpression = null;
     try {
       String _string = uri.toString();
-      URL _uRL = new URL(_string);
-      _xtrycatchfinallyexpression = _uRL.toURI();
+      _xtrycatchfinallyexpression = new URL(_string).toURI();
     } catch (final Throwable _t) {
       if (_t instanceof MalformedURLException) {
         final MalformedURLException e = (MalformedURLException)_t;
@@ -426,23 +409,18 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       return null;
     }
     final URI projectURI = projectConfig.getPath();
-    List<String> _segments = path.getSegments();
-    final String projectName = IterableExtensions.<String>head(_segments);
+    final String projectName = IterableExtensions.<String>head(path.getSegments());
     String _name = projectConfig.getName();
     boolean _notEquals = (!Objects.equal(projectName, _name));
     if (_notEquals) {
       return null;
     }
-    List<String> _segments_1 = path.getSegments();
-    final Iterable<String> segments = IterableExtensions.<String>tail(_segments_1);
+    final Iterable<String> segments = IterableExtensions.<String>tail(path.getSegments());
     boolean _isEmpty = IterableExtensions.isEmpty(segments);
     if (_isEmpty) {
       return projectURI;
     }
-    String _head = IterableExtensions.<String>head(segments);
-    URI _createURI = URI.createURI(_head);
-    Iterable<String> _tail = IterableExtensions.<String>tail(segments);
-    final URI relativeURI = _createURI.appendSegments(((String[])Conversions.unwrapArray(_tail, String.class)));
+    final URI relativeURI = URI.createURI(IterableExtensions.<String>head(segments)).appendSegments(((String[])Conversions.unwrapArray(IterableExtensions.<String>tail(segments), String.class)));
     final URI uri = relativeURI.resolve(projectURI);
     Boolean _isFolder = this.isFolder(uri);
     if ((_isFolder).booleanValue()) {
@@ -459,9 +437,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       }
       final HashMap<String, Set<String>> options = CollectionLiterals.<String, Set<String>>newHashMap();
       options.put(URIConverter.OPTION_REQUESTED_ATTRIBUTES, Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet(attributeName)));
-      URIConverter _uRIConverter = this.getURIConverter();
-      Map<String, ?> _attributes = _uRIConverter.getAttributes(uri, options);
-      _xblockexpression = _attributes.get(attributeName);
+      _xblockexpression = this.getURIConverter().getAttributes(uri, options).get(attributeName);
     }
     return _xblockexpression;
   }
@@ -471,9 +447,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   }
   
   public Path getPath(final Resource res) {
-    URI _uRI = res.getURI();
-    ResourceSet _resourceSet = res.getResourceSet();
-    return this.getPath(_uRI, _resourceSet);
+    return this.getPath(res.getURI(), res.getResourceSet());
   }
   
   protected Path getPath(final URI uri, final ResourceSet context) {
@@ -481,10 +455,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     if ((projectConfig == null)) {
       return null;
     }
-    URI _path = projectConfig.getPath();
-    String _name = projectConfig.getName();
-    Path _append = Path.ROOT.append(_name);
-    return this.getPath(uri, _path, _append);
+    return this.getPath(uri, projectConfig.getPath(), Path.ROOT.append(projectConfig.getName()));
   }
   
   protected Path getPath(final URI absoluteURI, final URI baseURI, final Path basePath) {
@@ -494,8 +465,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       if ((relativeURI.isEmpty() || Objects.equal(relativeURI, absoluteURI))) {
         return null;
       }
-      String _string = relativeURI.toString();
-      _xblockexpression = basePath.getAbsolutePath(_string);
+      _xblockexpression = basePath.getAbsolutePath(relativeURI.toString());
     }
     return _xblockexpression;
   }

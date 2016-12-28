@@ -10,8 +10,6 @@ package org.eclipse.xtend.core.tests.macro;
 import java.util.List;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
-import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
-import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.IAcceptor;
@@ -36,23 +34,11 @@ public class Bug456264Test extends AbstractActiveAnnotationTest {
       final Function1<Problem, String> _function_1 = (Problem it_1) -> {
         return it_1.getMessage();
       };
-      List<String> _map = ListExtensions.map(problems, _function_1);
-      String _string = _map.toString();
-      int _size = problems.size();
-      Assert.assertEquals(_string, 1, _size);
-      Problem _head = IterableExtensions.head(problems);
-      String _message = _head.getMessage();
-      Assert.assertEquals("My error message", _message);
-      CompilationUnit _compilationUnit = it.getCompilationUnit();
-      Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = _compilationUnit.getSourceTypeDeclarations();
-      TypeDeclaration _head_1 = IterableExtensions.head(_sourceTypeDeclarations);
-      final List<? extends Problem> specificProblems = it.getProblems(_head_1);
-      String _string_1 = specificProblems.toString();
-      int _size_1 = problems.size();
-      Assert.assertEquals(_string_1, 1, _size_1);
-      Problem _head_2 = IterableExtensions.head(specificProblems);
-      String _message_1 = _head_2.getMessage();
-      Assert.assertEquals("My error message", _message_1);
+      Assert.assertEquals(ListExtensions.map(problems, _function_1).toString(), 1, problems.size());
+      Assert.assertEquals("My error message", IterableExtensions.head(problems).getMessage());
+      final List<? extends Problem> specificProblems = it.getProblems(IterableExtensions.head(it.getCompilationUnit().getSourceTypeDeclarations()));
+      Assert.assertEquals(specificProblems.toString(), 1, problems.size());
+      Assert.assertEquals("My error message", IterableExtensions.head(specificProblems).getMessage());
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }

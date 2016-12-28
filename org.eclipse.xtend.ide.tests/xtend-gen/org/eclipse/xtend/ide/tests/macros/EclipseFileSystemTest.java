@@ -9,15 +9,11 @@ package org.eclipse.xtend.ide.tests.macros;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.net.URI;
 import java.util.Set;
 import org.eclipse.core.internal.resources.ProjectDescription;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.tests.macro.JavaIoFileSystemTest;
 import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
@@ -52,17 +48,13 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
   @Before
   @Override
   public void setUp() {
-    IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-    IWorkspaceRoot _root = _workspace.getRoot();
-    IProject[] _projects = _root.getProjects();
+    IProject[] _projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
     for (final IProject p : _projects) {
-      String _name = p.getName();
-      this.knownProjects.add(_name);
+      this.knownProjects.add(p.getName());
     }
     final IProject project = this.createProject("foo");
     final EclipseFileSystemSupportImpl fileSystemSupport = this.fileSystemSupportProvider.get();
-    ResourceSet _get = this.resourceSetProvider.get(project);
-    fileSystemSupport.setContext(_get);
+    fileSystemSupport.setContext(this.resourceSetProvider.get(project));
     this.fs = fileSystemSupport;
   }
   
@@ -71,8 +63,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
     try {
       IProject _xblockexpression = null;
       {
-        IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-        final IWorkspaceRoot root = _workspace.getRoot();
+        final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
         final IProject project = root.getProject(name);
         boolean _exists = project.exists();
         if (_exists) {
@@ -91,19 +82,16 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
   @After
   public void tearDown() {
     try {
-      IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-      final IWorkspaceRoot root = _workspace.getRoot();
+      final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
       IProject[] _projects = root.getProjects();
       for (final IProject p : _projects) {
-        String _name = p.getName();
-        boolean _remove = this.knownProjects.remove(_name);
+        boolean _remove = this.knownProjects.remove(p.getName());
         boolean _not = (!_remove);
         if (_not) {
           p.delete(true, null);
         }
       }
-      boolean _isEmpty = this.knownProjects.isEmpty();
-      Assert.assertTrue(_isEmpty);
+      Assert.assertTrue(this.knownProjects.isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -125,21 +113,16 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
   @Test
   public void testGetURIForImportedProject() {
     try {
-      IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-      final IWorkspaceRoot root = _workspace.getRoot();
+      final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
       final ProjectDescription description = new ProjectDescription();
       description.setName("bar");
-      IPath _location = root.getLocation();
-      IPath _append = _location.append("foo/bar");
-      description.setLocation(_append);
+      description.setLocation(root.getLocation().append("foo/bar"));
       final IProject project = root.getProject("bar");
       project.create(description, null);
       project.open(null);
       final Path file = new Path("/bar/Foo.text");
-      boolean _exists = this.fs.exists(file);
-      Assert.assertFalse(_exists);
-      URI _uRI = this.fs.toURI(file);
-      Assert.assertNull(_uRI);
+      Assert.assertFalse(this.fs.exists(file));
+      Assert.assertNull(this.fs.toURI(file));
       try {
         this.fs.setContents(file, "Hello Foo");
         Assert.fail();
@@ -150,8 +133,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      boolean _exists_1 = this.fs.exists(file);
-      Assert.assertFalse(_exists_1);
+      Assert.assertFalse(this.fs.exists(file));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

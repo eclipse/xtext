@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -84,8 +82,8 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
     final Procedure0 _function = () -> {
       this._xtendLibClasspathAdder.addLibsToClasspath(project, null);
     };
-    IResourceDescription.Event _waitForCoarseGrainedEvent = this.waitForCoarseGrainedEvent(_function);
-    Assert.assertNotNull(_waitForCoarseGrainedEvent);
+    Assert.assertNotNull(
+      this.waitForCoarseGrainedEvent(_function));
   }
   
   public IResourceDescription.Event waitForCoarseGrainedEvent(final Procedure0 producer) {
@@ -161,13 +159,9 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
     try {
       XtextEditor _xblockexpression = null;
       {
-        IDocumentProvider _documentProvider = editor.getDocumentProvider();
-        IEditorInput _editorInput = editor.getEditorInput();
-        final IDocument document = _documentProvider.getDocument(_editorInput);
+        final IDocument document = editor.getDocumentProvider().getDocument(editor.getEditorInput());
         final String model = document.get();
-        int _indexOf = model.indexOf(oldText);
-        int _length = oldText.length();
-        document.replace(_indexOf, _length, newText);
+        document.replace(model.indexOf(oldText), oldText.length(), newText);
         _xblockexpression = editor;
       }
       return _xblockexpression;

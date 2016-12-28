@@ -14,8 +14,7 @@ public class DelegatingClassloader extends ClassLoader {
   
   @Override
   protected URL findResource(final String name) {
-    ClassLoader _classLoader = this.classFinder.getClassLoader();
-    final URL result = _classLoader.getResource(name);
+    final URL result = this.classFinder.getClassLoader().getResource(name);
     URL _elvis = null;
     if (result != null) {
       _elvis = result;

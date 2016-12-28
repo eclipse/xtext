@@ -6,7 +6,6 @@ import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -36,28 +35,21 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = (XtendCompilerTester.CompilationResult it) -> {
       final TransformationContext ctx = it.getTransformationContext();
       final MutableClassDeclaration classA = ctx.findClass("A");
-      MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");
-      Assert.assertNotNull(_findDeclaredMethod);
+      Assert.assertNotNull(classA.findDeclaredMethod("getField"));
       final MutableClassDeclaration classPA = ctx.findClass("PA");
-      Iterable<? extends TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
       final Function1<TypeReference, Boolean> _function_1 = (TypeReference it_1) -> {
         Type _type = it_1.getType();
-        TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
-        Type _type_1 = _newTypeReference.getType();
+        Type _type_1 = ctx.newTypeReference(Serializable.class).getType();
         return Boolean.valueOf(Objects.equal(_type, _type_1));
       };
-      TypeReference _findFirst = IterableExtensions.findFirst(_implementedInterfaces, _function_1);
-      Assert.assertNotNull(_findFirst);
+      Assert.assertNotNull(IterableExtensions.findFirst(classPA.getImplementedInterfaces(), _function_1));
       final MutableClassDeclaration classGA = ctx.findClass("GA");
-      Iterable<? extends TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
       final Function1<TypeReference, Boolean> _function_2 = (TypeReference it_1) -> {
         Type _type = it_1.getType();
-        TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
-        Type _type_1 = _newTypeReference.getType();
+        Type _type_1 = ctx.newTypeReference(Serializable.class).getType();
         return Boolean.valueOf(Objects.equal(_type, _type_1));
       };
-      TypeReference _findFirst_1 = IterableExtensions.findFirst(_implementedInterfaces_1, _function_2);
-      Assert.assertNotNull(_findFirst_1);
+      Assert.assertNotNull(IterableExtensions.findFirst(classGA.getImplementedInterfaces(), _function_2));
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }
@@ -82,28 +74,21 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = (XtendCompilerTester.CompilationResult it) -> {
       final TransformationContext ctx = it.getTransformationContext();
       final MutableClassDeclaration classA = ctx.findClass("my.pack.A");
-      MutableMethodDeclaration _findDeclaredMethod = classA.findDeclaredMethod("getField");
-      Assert.assertNotNull(_findDeclaredMethod);
+      Assert.assertNotNull(classA.findDeclaredMethod("getField"));
       final MutableClassDeclaration classPA = ctx.findClass("my.pack.PA");
-      Iterable<? extends TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
       final Function1<TypeReference, Boolean> _function_1 = (TypeReference it_1) -> {
         Type _type = it_1.getType();
-        TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
-        Type _type_1 = _newTypeReference.getType();
+        Type _type_1 = ctx.newTypeReference(Serializable.class).getType();
         return Boolean.valueOf(Objects.equal(_type, _type_1));
       };
-      TypeReference _findFirst = IterableExtensions.findFirst(_implementedInterfaces, _function_1);
-      Assert.assertNotNull(_findFirst);
+      Assert.assertNotNull(IterableExtensions.findFirst(classPA.getImplementedInterfaces(), _function_1));
       final MutableClassDeclaration classGA = ctx.findClass("my.pack.GA");
-      Iterable<? extends TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
       final Function1<TypeReference, Boolean> _function_2 = (TypeReference it_1) -> {
         Type _type = it_1.getType();
-        TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
-        Type _type_1 = _newTypeReference.getType();
+        Type _type_1 = ctx.newTypeReference(Serializable.class).getType();
         return Boolean.valueOf(Objects.equal(_type, _type_1));
       };
-      TypeReference _findFirst_1 = IterableExtensions.findFirst(_implementedInterfaces_1, _function_2);
-      Assert.assertNotNull(_findFirst_1);
+      Assert.assertNotNull(IterableExtensions.findFirst(classGA.getImplementedInterfaces(), _function_2));
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }

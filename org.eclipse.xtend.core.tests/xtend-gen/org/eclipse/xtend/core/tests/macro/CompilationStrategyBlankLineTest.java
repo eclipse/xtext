@@ -122,9 +122,7 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      String _string = _builder_1.toString();
-      String _generatedCode = it.getGeneratedCode("A");
-      Assert.assertEquals(_string, _generatedCode);
+      Assert.assertEquals(_builder_1.toString(), it.getGeneratedCode("A"));
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }

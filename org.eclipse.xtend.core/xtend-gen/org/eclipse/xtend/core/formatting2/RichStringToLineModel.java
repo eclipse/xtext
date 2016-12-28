@@ -65,9 +65,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   public RichStringToLineModel(final ITextRegionAccess nodeModelAccess, final RichString string) {
     this.nodeModelAccess = nodeModelAccess;
     this.string = string;
-    ITextSegment _regionForDocument = nodeModelAccess.regionForDocument();
-    String _text = _regionForDocument.getText();
-    this.document = _text;
+    this.document = nodeModelAccess.regionForDocument().getText();
   }
   
   public boolean outdentThisLine() {
@@ -191,14 +189,12 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     this.startContent();
     if ((this.contentStartOffset > 0)) {
       final String lastLinesContent = this.document.substring(this.contentStartOffset, this.offset);
-      List<Line> _lines = this.model.getLines();
-      boolean _isEmpty = _lines.isEmpty();
+      boolean _isEmpty = this.model.getLines().isEmpty();
       if (_isEmpty) {
         this.model.setLeadingText(lastLinesContent);
         this.contentStartColumn = 0;
       } else {
-        List<Line> _lines_1 = this.model.getLines();
-        final Line lastLine = IterableExtensions.<Line>last(_lines_1);
+        final Line lastLine = IterableExtensions.<Line>last(this.model.getLines());
         lastLine.setContent(lastLinesContent);
         int _offset = lastLine.getOffset();
         int _newLineCharCount = lastLine.getNewLineCharCount();
@@ -214,8 +210,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
           }
         }
         if ((newContentStartColumn < this.contentStartColumn)) {
-          Iterable<SemanticWhitespace> _filter = Iterables.<SemanticWhitespace>filter(this.indentationStack, SemanticWhitespace.class);
-          List<SemanticWhitespace> _list = IterableExtensions.<SemanticWhitespace>toList(_filter);
+          List<SemanticWhitespace> _list = IterableExtensions.<SemanticWhitespace>toList(Iterables.<SemanticWhitespace>filter(this.indentationStack, SemanticWhitespace.class));
           for (final SemanticWhitespace ws : _list) {
             int _column = ws.getColumn();
             boolean _greaterThan = (_column > newContentStartColumn);
@@ -257,9 +252,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
         if ((newContentStartColumn != 0)) {
           this.contentStartColumn = newContentStartColumn;
         }
-        List<Line> _lines_2 = this.model.getLines();
-        Line _last = IterableExtensions.<Line>last(_lines_2);
-        List<Chunk> _chunks = _last.getChunks();
+        List<Chunk> _chunks = IterableExtensions.<Line>last(this.model.getLines()).getChunks();
         Iterables.<Chunk>addAll(_chunks, this.indentationStack);
       }
     }
@@ -271,9 +264,9 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     this.contentStartOffset = (-1);
     this.content = false;
     if (startNewLine) {
-      List<Line> _lines_3 = this.model.getLines();
+      List<Line> _lines = this.model.getLines();
       Line _line = new Line(this.offset, semantic, charCount);
-      _lines_3.add(_line);
+      _lines.add(_line);
     }
   }
   
@@ -306,14 +299,12 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
       int _rootIndentLenght = this.model.getRootIndentLenght();
       boolean _lessThan = (_rootIndentLenght < 0);
       if (_lessThan) {
-        int _length = text.length();
-        this.model.setRootIndentLenght(_length);
-        int _length_1 = text.length();
-        this.contentStartColumn = _length_1;
+        this.model.setRootIndentLenght(text.length());
+        this.contentStartColumn = text.length();
       }
     }
-    int _length_2 = text.length();
-    int _plus = (this.offset + _length_2);
+    int _length = text.length();
+    int _plus = (this.offset + _length);
     this.offset = _plus;
   }
   

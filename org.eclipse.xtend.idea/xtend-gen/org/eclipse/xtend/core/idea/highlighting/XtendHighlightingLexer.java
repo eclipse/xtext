@@ -12,7 +12,6 @@ import com.intellij.lexer.LexerBase;
 import com.intellij.lexer.LexerPosition;
 import com.intellij.psi.tree.IElementType;
 import java.util.Collections;
-import java.util.Map;
 import java.util.Set;
 import org.antlr.runtime.CommonToken;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
@@ -106,8 +105,7 @@ public class XtendHighlightingLexer extends LexerBase {
       _hasNext=_currentRichTextToken.hasNext();
     }
     if (_hasNext) {
-      XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
-      _currentRichTextToken_1.advance();
+      this.getCurrentRichTextToken().advance();
     } else {
       this._currentRichTextToken = null;
       this.delegate.advance();
@@ -119,19 +117,14 @@ public class XtendHighlightingLexer extends LexerBase {
       CommonToken _currentToken = this.delegate.getCurrentToken();
       boolean _tripleNotEquals = (_currentToken != null);
       if (_tripleNotEquals) {
-        Map<Integer, String> _tokenDefMap = this._antlrTokenDefProvider.getTokenDefMap();
-        CommonToken _currentToken_1 = this.delegate.getCurrentToken();
-        int _type = _currentToken_1.getType();
-        final String tokenID = _tokenDefMap.get(Integer.valueOf(_type));
+        final String tokenID = this._antlrTokenDefProvider.getTokenDefMap().get(Integer.valueOf(this.delegate.getCurrentToken().getType()));
         boolean _contains = XtendHighlightingLexer.TOKEN_TYPE_NAMES_CONTAINING_GUILLEMETS.contains(tokenID);
         if (_contains) {
           int _tokenStart = this.delegate.getTokenStart();
           int _tokenEnd = this.delegate.getTokenEnd();
           int _tokenStart_1 = this.delegate.getTokenStart();
           int _minus = (_tokenEnd - _tokenStart_1);
-          IElementType _tokenType = this.delegate.getTokenType();
-          XtendHighlightingLexer.RichTextToken _createRichTextToken = this.createRichTextToken(tokenID, _tokenStart, _minus, _tokenType);
-          this._currentRichTextToken = _createRichTextToken;
+          this._currentRichTextToken = this.createRichTextToken(tokenID, _tokenStart, _minus, this.delegate.getTokenType());
         }
       }
     }
@@ -155,10 +148,8 @@ public class XtendHighlightingLexer extends LexerBase {
     XtendHighlightingLexer.RichTextToken _currentRichTextToken = this.getCurrentRichTextToken();
     boolean _tripleNotEquals = (_currentRichTextToken != null);
     if (_tripleNotEquals) {
-      XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
-      int _tokenOffset = _currentRichTextToken_1.getTokenOffset();
-      XtendHighlightingLexer.RichTextToken _currentRichTextToken_2 = this.getCurrentRichTextToken();
-      int _tokenLength = _currentRichTextToken_2.getTokenLength();
+      int _tokenOffset = this.getCurrentRichTextToken().getTokenOffset();
+      int _tokenLength = this.getCurrentRichTextToken().getTokenLength();
       _xifexpression = (_tokenOffset + _tokenLength);
     } else {
       _xifexpression = this.delegate.getTokenEnd();
@@ -172,8 +163,7 @@ public class XtendHighlightingLexer extends LexerBase {
     XtendHighlightingLexer.RichTextToken _currentRichTextToken = this.getCurrentRichTextToken();
     boolean _tripleNotEquals = (_currentRichTextToken != null);
     if (_tripleNotEquals) {
-      XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
-      _xifexpression = _currentRichTextToken_1.getTokenOffset();
+      _xifexpression = this.getCurrentRichTextToken().getTokenOffset();
     } else {
       _xifexpression = this.delegate.getTokenStart();
     }
@@ -186,8 +176,7 @@ public class XtendHighlightingLexer extends LexerBase {
     XtendHighlightingLexer.RichTextToken _currentRichTextToken = this.getCurrentRichTextToken();
     boolean _tripleNotEquals = (_currentRichTextToken != null);
     if (_tripleNotEquals) {
-      XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
-      _xifexpression = _currentRichTextToken_1.getTokenType();
+      _xifexpression = this.getCurrentRichTextToken().getTokenType();
     } else {
       _xifexpression = this.delegate.getTokenType();
     }

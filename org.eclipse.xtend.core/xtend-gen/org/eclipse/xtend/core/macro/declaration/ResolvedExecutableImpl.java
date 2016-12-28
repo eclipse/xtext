@@ -7,10 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.AbstractDelegator;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.ResolvedParameterImpl;
 import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
@@ -18,8 +15,6 @@ import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedExecutable;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedParameter;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -36,27 +31,13 @@ public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends Exe
     Iterable<? extends ResolvedParameter> _xblockexpression = null;
     {
       if ((this.resolvedParameters == null)) {
-        T _delegate = this.getDelegate();
-        JvmExecutable _declaration = _delegate.getDeclaration();
-        EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-        int _size = _parameters.size();
-        ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
+        int _size = this.getDelegate().getDeclaration().getParameters().size();
         final Function1<Integer, ResolvedParameterImpl> _function = (Integer i) -> {
-          CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-          T _delegate_1 = this.getDelegate();
-          JvmExecutable _declaration_1 = _delegate_1.getDeclaration();
-          EList<JvmFormalParameter> _parameters_1 = _declaration_1.getParameters();
-          JvmFormalParameter _get = _parameters_1.get((i).intValue());
-          ParameterDeclaration _parameterDeclaration = _compilationUnit.toParameterDeclaration(_get);
-          CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-          T _delegate_2 = this.getDelegate();
-          List<LightweightTypeReference> _resolvedParameterTypes = _delegate_2.getResolvedParameterTypes();
-          LightweightTypeReference _get_1 = _resolvedParameterTypes.get((i).intValue());
-          TypeReference _typeReference = _compilationUnit_1.toTypeReference(_get_1);
+          ParameterDeclaration _parameterDeclaration = this.getCompilationUnit().toParameterDeclaration(this.getDelegate().getDeclaration().getParameters().get((i).intValue()));
+          TypeReference _typeReference = this.getCompilationUnit().toTypeReference(this.getDelegate().getResolvedParameterTypes().get((i).intValue()));
           return new ResolvedParameterImpl(_parameterDeclaration, _typeReference);
         };
-        Iterable<ResolvedParameterImpl> _map = IterableExtensions.<Integer, ResolvedParameterImpl>map(_doubleDotLessThan, _function);
-        this.resolvedParameters = _map;
+        this.resolvedParameters = IterableExtensions.<Integer, ResolvedParameterImpl>map(new ExclusiveRange(0, _size, true), _function);
       }
       _xblockexpression = this.resolvedParameters;
     }
@@ -65,33 +46,25 @@ public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends Exe
   
   @Override
   public Iterable<? extends TypeReference> getResolvedExceptionTypes() {
-    T _delegate = this.getDelegate();
-    List<LightweightTypeReference> _resolvedExceptions = _delegate.getResolvedExceptions();
     final Function1<LightweightTypeReference, TypeReference> _function = (LightweightTypeReference it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toTypeReference(it);
+      return this.getCompilationUnit().toTypeReference(it);
     };
-    return ListExtensions.<LightweightTypeReference, TypeReference>map(_resolvedExceptions, _function);
+    return ListExtensions.<LightweightTypeReference, TypeReference>map(this.getDelegate().getResolvedExceptions(), _function);
   }
   
   @Override
   public D getDeclaration() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    T _delegate = this.getDelegate();
-    JvmExecutable _declaration = _delegate.getDeclaration();
-    MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(_declaration);
+    MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(this.getDelegate().getDeclaration());
     return ((D) _memberDeclaration);
   }
   
   @Override
   public String getSimpleSignature() {
-    T _delegate = this.getDelegate();
-    return _delegate.getSimpleSignature();
+    return this.getDelegate().getSimpleSignature();
   }
   
   @Override
   public String toString() {
-    T _delegate = this.getDelegate();
-    return _delegate.toString();
+    return this.getDelegate().toString();
   }
 }

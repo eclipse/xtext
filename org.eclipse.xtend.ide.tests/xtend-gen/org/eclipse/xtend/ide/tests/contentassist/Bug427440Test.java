@@ -51,42 +51,29 @@ public class Bug427440Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    ICompletionProposal[] _computeCompletionProposals = _append.computeCompletionProposals("|");
-    final Iterator<ICompletionProposal> proposals = ((List<ICompletionProposal>)Conversions.doWrapArray(_computeCompletionProposals)).iterator();
-    ICompletionProposal _next = proposals.next();
-    this.assertContains(_next, "augument");
-    ICompletionProposal _next_1 = proposals.next();
-    this.assertContains(_next_1, "annotatedInterfaces");
-    ICompletionProposal _next_2 = proposals.next();
-    this.assertContains(_next_2, "annotatedSuperclass");
-    ICompletionProposal _next_3 = proposals.next();
-    this.assertContains(_next_3, "annotation");
-    ICompletionProposal _next_4 = proposals.next();
-    this.assertContains(_next_4, "annotations");
-    ICompletionProposal _next_5 = proposals.next();
-    this.assertContains(_next_5, "anonymousClass");
-    ICompletionProposal _next_6 = proposals.next();
-    this.assertContains(_next_6, "array");
-    ICompletionProposal _next_7 = proposals.next();
-    this.assertContains(_next_7, "asSubclass()");
+    final Iterator<ICompletionProposal> proposals = ((List<ICompletionProposal>)Conversions.doWrapArray(_newBuilder.append(_builder.toString()).computeCompletionProposals("|"))).iterator();
+    this.assertContains(proposals.next(), "augument");
+    this.assertContains(proposals.next(), "annotatedInterfaces");
+    this.assertContains(proposals.next(), "annotatedSuperclass");
+    this.assertContains(proposals.next(), "annotation");
+    this.assertContains(proposals.next(), "annotations");
+    this.assertContains(proposals.next(), "anonymousClass");
+    this.assertContains(proposals.next(), "array");
+    this.assertContains(proposals.next(), "asSubclass()");
   }
   
   public void assertContains(final ICompletionProposal proposal, final String text) {
-    String _proposedText = this.getProposedText(proposal);
-    Assert.assertEquals(text, _proposedText);
+    Assert.assertEquals(text, this.getProposedText(proposal));
   }
   
   public String getProposedText(final ICompletionProposal completionProposal) {
     String proposedText = completionProposal.getDisplayString();
     if ((completionProposal instanceof ConfigurableCompletionProposal)) {
-      String _replacementString = ((ConfigurableCompletionProposal)completionProposal).getReplacementString();
-      proposedText = _replacementString;
+      proposedText = ((ConfigurableCompletionProposal)completionProposal).getReplacementString();
       ConfigurableCompletionProposal.IReplacementTextApplier _textApplier = ((ConfigurableCompletionProposal)completionProposal).getTextApplier();
       if ((_textApplier instanceof ReplacementTextApplier)) {
         ConfigurableCompletionProposal.IReplacementTextApplier _textApplier_1 = ((ConfigurableCompletionProposal)completionProposal).getTextApplier();
-        String _actualReplacementString = ((ReplacementTextApplier) _textApplier_1).getActualReplacementString(((ConfigurableCompletionProposal)completionProposal));
-        proposedText = _actualReplacementString;
+        proposedText = ((ReplacementTextApplier) _textApplier_1).getActualReplacementString(((ConfigurableCompletionProposal)completionProposal));
       }
     }
     return proposedText;

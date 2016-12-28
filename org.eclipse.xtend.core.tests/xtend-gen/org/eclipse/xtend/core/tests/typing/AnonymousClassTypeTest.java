@@ -8,8 +8,6 @@
 package org.eclipse.xtend.core.tests.typing;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
@@ -58,13 +56,9 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFunction _function = this.function(_builder.toString());
-      final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(_function);
-      Resource _eResource = operation.eResource();
-      final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(_eResource);
-      LightweightTypeReference _actualType = resolvedTypes.getActualType(operation);
-      String _string = _actualType.toString();
-      Assert.assertEquals("Runnable", _string);
+      final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(this.function(_builder.toString()));
+      final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(operation.eResource());
+      Assert.assertEquals("Runnable", resolvedTypes.getActualType(operation).toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -95,19 +89,13 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
       _builder.newLine();
       final XtendFunction function = this.function(_builder.toString());
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
-      Resource _eResource = operation.eResource();
-      final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(_eResource);
-      LightweightTypeReference _actualType = resolvedTypes.getActualType(operation);
-      String _string = _actualType.toString();
-      Assert.assertEquals("Runnable", _string);
+      final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(operation.eResource());
+      Assert.assertEquals("Runnable", resolvedTypes.getActualType(operation).toString());
       XExpression _expression = function.getExpression();
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      final XExpression variable = IterableExtensions.<XExpression>last(_expressions);
+      final XExpression variable = IterableExtensions.<XExpression>last(((XBlockExpression) _expression).getExpressions());
       final LightweightTypeReference variableType = resolvedTypes.getActualType(variable);
-      String _string_1 = variableType.toString();
-      Assert.assertEquals("__Foo_1", _string_1);
-      boolean _isSubtypeOf = variableType.isSubtypeOf(Runnable.class);
-      Assert.assertTrue(_isSubtypeOf);
+      Assert.assertEquals("__Foo_1", variableType.toString());
+      Assert.assertTrue(variableType.isSubtypeOf(Runnable.class));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -132,21 +120,14 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
       _builder.newLine();
       final XtendFunction function = this.function(_builder.toString());
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
-      Resource _eResource = operation.eResource();
-      final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(_eResource);
-      LightweightTypeReference _actualType = resolvedTypes.getActualType(operation);
-      String _string = _actualType.toString();
-      Assert.assertEquals("Iterable<String>", _string);
+      final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(operation.eResource());
+      Assert.assertEquals("Iterable<String>", resolvedTypes.getActualType(operation).toString());
       XExpression _expression = function.getExpression();
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+      XExpression _head = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
       final AnonymousClass anonymousClass = ((AnonymousClass) _head);
-      EList<XtendMember> _members = anonymousClass.getMembers();
-      XtendMember _last = IterableExtensions.<XtendMember>last(_members);
+      XtendMember _last = IterableExtensions.<XtendMember>last(anonymousClass.getMembers());
       final JvmOperation overriding = this._iXtendJvmAssociations.getDirectlyInferredOperation(((XtendFunction) _last));
-      LightweightTypeReference _actualType_1 = resolvedTypes.getActualType(overriding);
-      String _string_1 = _actualType_1.toString();
-      Assert.assertEquals("Iterator<String>", _string_1);
+      Assert.assertEquals("Iterator<String>", resolvedTypes.getActualType(overriding).toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -171,21 +152,14 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
       _builder.newLine();
       final XtendFunction function = this.function(_builder.toString());
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
-      Resource _eResource = operation.eResource();
-      final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(_eResource);
-      LightweightTypeReference _actualType = resolvedTypes.getActualType(operation);
-      String _string = _actualType.toString();
-      Assert.assertEquals("Iterable<T>", _string);
+      final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(operation.eResource());
+      Assert.assertEquals("Iterable<T>", resolvedTypes.getActualType(operation).toString());
       XExpression _expression = function.getExpression();
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+      XExpression _head = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
       final AnonymousClass anonymousClass = ((AnonymousClass) _head);
-      EList<XtendMember> _members = anonymousClass.getMembers();
-      XtendMember _last = IterableExtensions.<XtendMember>last(_members);
+      XtendMember _last = IterableExtensions.<XtendMember>last(anonymousClass.getMembers());
       final JvmOperation overriding = this._iXtendJvmAssociations.getDirectlyInferredOperation(((XtendFunction) _last));
-      LightweightTypeReference _actualType_1 = resolvedTypes.getActualType(overriding);
-      String _string_1 = _actualType_1.toString();
-      Assert.assertEquals("Iterator<T>", _string_1);
+      Assert.assertEquals("Iterator<T>", resolvedTypes.getActualType(overriding).toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

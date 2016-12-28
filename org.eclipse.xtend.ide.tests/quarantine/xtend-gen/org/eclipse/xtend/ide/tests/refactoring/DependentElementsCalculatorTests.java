@@ -3,8 +3,6 @@ package org.eclipse.xtend.ide.tests.refactoring;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
@@ -21,7 +19,6 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
@@ -66,29 +63,21 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.testHelper.xtendFile("Foo", _builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-      XtendTypeDeclaration _get = _xtendTypes.get(0);
+      XtendTypeDeclaration _get = file.getXtendTypes().get(0);
       final XtendClass fooClass = ((XtendClass) _get);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       final Iterable<URI> dependentElementURIs = this.dependentElementsCalculator.getDependentElementURIs(fooClass, _nullProgressMonitor);
-      int _size = IterableExtensions.size(dependentElementURIs);
-      Assert.assertEquals(3, _size);
-      EList<XtendMember> _members = fooClass.getMembers();
-      XtendMember _get_1 = _members.get(0);
+      Assert.assertEquals(3, IterableExtensions.size(dependentElementURIs));
+      XtendMember _get_1 = fooClass.getMembers().get(0);
       final XtendFunction fooFunction = ((XtendFunction) _get_1);
-      JvmGenericType _inferredType = this.associations.getInferredType(fooClass);
-      JvmConstructor _inferredConstructor = this.associations.getInferredConstructor(fooClass);
-      ArrayList<EObject> _newArrayList = CollectionLiterals.<EObject>newArrayList(fooFunction, _inferredType, _inferredConstructor);
       final Consumer<EObject> _function = (EObject it) -> {
-        String _string = it.toString();
         final Function1<URI, Boolean> _function_1 = (URI element) -> {
           URI _uRI = EcoreUtil.getURI(it);
           return Boolean.valueOf(Objects.equal(element, _uRI));
         };
-        boolean _exists = IterableExtensions.<URI>exists(dependentElementURIs, _function_1);
-        Assert.assertTrue(_string, _exists);
+        Assert.assertTrue(it.toString(), IterableExtensions.<URI>exists(dependentElementURIs, _function_1));
       };
-      _newArrayList.forEach(_function);
+      CollectionLiterals.<EObject>newArrayList(fooFunction, this.associations.getInferredType(fooClass), this.associations.getInferredConstructor(fooClass)).forEach(_function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -116,34 +105,25 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       _builder.newLine();
       final XtendFile fooFile = this.testHelper.xtendFile("Foo", _builder.toString());
       IResourcesSetupUtil.waitForBuild();
-      EList<XtendTypeDeclaration> _xtendTypes = fooFile.getXtendTypes();
-      XtendTypeDeclaration _get = _xtendTypes.get(0);
+      XtendTypeDeclaration _get = fooFile.getXtendTypes().get(0);
       final XtendClass fooClass = ((XtendClass) _get);
-      EList<XtendMember> _members = fooClass.getMembers();
-      final XtendMember fooMethod1 = _members.get(1);
+      final XtendMember fooMethod1 = fooClass.getMembers().get(1);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       final Iterable<URI> dependentElementURIs = this.dependentElementsCalculator.getDependentElementURIs(fooMethod1, _nullProgressMonitor);
-      int _size = IterableExtensions.size(dependentElementURIs);
-      Assert.assertEquals(5, _size);
-      EList<XtendMember> _members_1 = fooClass.getMembers();
-      JvmGenericType _inferredType = this.associations.getInferredType(fooClass);
-      EList<JvmMember> _members_2 = _inferredType.getMembers();
-      Iterable<EObject> _plus = Iterables.<EObject>concat(_members_1, _members_2);
+      Assert.assertEquals(5, IterableExtensions.size(dependentElementURIs));
+      EList<XtendMember> _members = fooClass.getMembers();
+      EList<JvmMember> _members_1 = this.associations.getInferredType(fooClass).getMembers();
       final Function1<EObject, Boolean> _function = (EObject it) -> {
         return Boolean.valueOf((!(it instanceof JvmConstructor)));
       };
-      Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_plus, _function);
-      List<EObject> _list = IterableExtensions.<EObject>toList(_filter);
       final Consumer<EObject> _function_1 = (EObject it) -> {
-        String _string = it.toString();
         final Function1<URI, Boolean> _function_2 = (URI element) -> {
           URI _uRI = EcoreUtil.getURI(it);
           return Boolean.valueOf(Objects.equal(element, _uRI));
         };
-        boolean _exists = IterableExtensions.<URI>exists(dependentElementURIs, _function_2);
-        Assert.assertTrue(_string, _exists);
+        Assert.assertTrue(it.toString(), IterableExtensions.<URI>exists(dependentElementURIs, _function_2));
       };
-      _list.forEach(_function_1);
+      IterableExtensions.<EObject>toList(IterableExtensions.<EObject>filter(Iterables.<EObject>concat(_members, _members_1), _function)).forEach(_function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

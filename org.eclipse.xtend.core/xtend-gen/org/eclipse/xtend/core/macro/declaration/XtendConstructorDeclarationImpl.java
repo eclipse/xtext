@@ -7,21 +7,17 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -32,62 +28,46 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<XtendConstructor> implements ConstructorDeclaration {
   @Override
   public Expression getBody() {
-    XtendConstructor _delegate = this.getDelegate();
-    XExpression _expression = _delegate.getExpression();
+    XExpression _expression = this.getDelegate().getExpression();
     boolean _tripleEquals = (_expression == null);
     if (_tripleEquals) {
       return null;
     }
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    XtendConstructor _delegate_1 = this.getDelegate();
-    XExpression _expression_1 = _delegate_1.getExpression();
-    return _compilationUnit.toExpression(_expression_1);
+    return this.getCompilationUnit().toExpression(this.getDelegate().getExpression());
   }
   
   @Override
   public Visibility getVisibility() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    XtendConstructor _delegate = this.getDelegate();
-    JvmVisibility _visibility = _delegate.getVisibility();
-    return _compilationUnit.toVisibility(_visibility);
+    return this.getCompilationUnit().toVisibility(this.getDelegate().getVisibility());
   }
   
   @Override
   public String getSimpleName() {
-    TypeDeclaration _declaringType = this.getDeclaringType();
-    return _declaringType.getSimpleName();
+    return this.getDeclaringType().getSimpleName();
   }
   
   @Override
   public boolean isVarArgs() {
-    XtendConstructor _delegate = this.getDelegate();
-    EList<XtendParameter> _parameters = _delegate.getParameters();
     final Function1<XtendParameter, Boolean> _function = (XtendParameter it) -> {
       return Boolean.valueOf(this.isVarArgs());
     };
-    return IterableExtensions.<XtendParameter>exists(_parameters, _function);
+    return IterableExtensions.<XtendParameter>exists(this.getDelegate().getParameters(), _function);
   }
   
   @Override
   public Iterable<? extends TypeReference> getExceptions() {
-    XtendConstructor _delegate = this.getDelegate();
-    EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     final Function1<JvmTypeReference, TypeReference> _function = (JvmTypeReference it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toTypeReference(it);
+      return this.getCompilationUnit().toTypeReference(it);
     };
-    return ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
+    return ListExtensions.<JvmTypeReference, TypeReference>map(this.getDelegate().getExceptions(), _function);
   }
   
   @Override
   public Iterable<? extends ParameterDeclaration> getParameters() {
-    XtendConstructor _delegate = this.getDelegate();
-    EList<XtendParameter> _parameters = _delegate.getParameters();
     final Function1<XtendParameter, XtendParameterDeclarationImpl> _function = (XtendParameter it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toXtendParameterDeclaration(it);
+      return this.getCompilationUnit().toXtendParameterDeclaration(it);
     };
-    return ListExtensions.<XtendParameter, XtendParameterDeclarationImpl>map(_parameters, _function);
+    return ListExtensions.<XtendParameter, XtendParameterDeclarationImpl>map(this.getDelegate().getParameters(), _function);
   }
   
   @Override

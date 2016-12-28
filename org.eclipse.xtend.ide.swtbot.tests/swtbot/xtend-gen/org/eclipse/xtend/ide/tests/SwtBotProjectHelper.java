@@ -10,30 +10,20 @@ package org.eclipse.xtend.ide.tests;
 import com.google.common.base.Objects;
 import java.util.List;
 import java.util.function.Consumer;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
-import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotPerspective;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
-import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.ContextMenuHelper;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotList;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotTabItem;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
@@ -63,43 +53,29 @@ public class SwtBotProjectHelper {
     SWTBotShell _xblockexpression = null;
     {
       final SWTBotShell shell = it.activeShell();
-      List<SWTBotView> _views = it.views();
       final Function1<SWTBotView, Boolean> _function = (SWTBotView it_1) -> {
         String _title = it_1.getTitle();
         return Boolean.valueOf(Objects.equal(_title, "Welcome"));
       };
-      SWTBotView _findFirst = IterableExtensions.<SWTBotView>findFirst(_views, _function);
+      SWTBotView _findFirst = IterableExtensions.<SWTBotView>findFirst(it.views(), _function);
       if (_findFirst!=null) {
         _findFirst.close();
       }
-      SWTBotPerspective _perspectiveByLabel = it.perspectiveByLabel("Java");
-      _perspectiveByLabel.activate();
+      it.perspectiveByLabel("Java").activate();
       SwtBotProjectHelper.fileNew(it, "Project...");
-      SWTBotShell _shell = it.shell("New Project");
-      _shell.activate();
-      SWTBotTree _tree = it.tree();
-      SWTBotTreeItem _expandNode = SwtBotProjectHelper.expandNode(_tree, "Java");
-      _expandNode.select("Java Project");
-      SWTBotButton _button = it.button("Next >");
-      _button.click();
+      it.shell("New Project").activate();
+      SwtBotProjectHelper.expandNode(it.tree(), "Java").select("Java Project");
+      it.button("Next >").click();
       SWTBotText _textWithLabel = it.textWithLabel("Project name:");
       _textWithLabel.setText("test");
-      SWTBotButton _button_1 = it.button("Next >");
-      _button_1.click();
-      SWTBotTabItem _tabItem = it.tabItem("Libraries");
-      _tabItem.activate();
-      SWTBotButton _button_2 = it.button("Add Library...");
-      _button_2.click();
-      SWTBotShell _shell_1 = it.shell("Add Library");
-      _shell_1.activate();
-      SWTBotList _list = it.list();
-      _list.select("Xtend Library");
-      SWTBotButton _button_3 = it.button("Next >");
-      _button_3.click();
-      SWTBotButton _button_4 = it.button("Finish");
-      _button_4.click();
-      SWTBotButton _button_5 = it.button("Finish");
-      _button_5.click();
+      it.button("Next >").click();
+      it.tabItem("Libraries").activate();
+      it.button("Add Library...").click();
+      it.shell("Add Library").activate();
+      it.list().select("Xtend Library");
+      it.button("Next >").click();
+      it.button("Finish").click();
+      it.button("Finish").click();
       _xblockexpression = shell.activate();
     }
     return _xblockexpression;
@@ -121,18 +97,15 @@ public class SwtBotProjectHelper {
     SWTBotEclipseEditor _xblockexpression = null;
     {
       SwtBotProjectHelper.fileNew(it, "Class");
-      SWTBotShell _shell = it.shell("New Java Class");
-      _shell.activate();
+      it.shell("New Java Class").activate();
       SWTBotText _textWithLabel = it.textWithLabel("Source folder:");
       _textWithLabel.setText(sourceFolderPath);
       SWTBotText _textWithLabel_1 = it.textWithLabel("Package:");
       _textWithLabel_1.setText(packageName);
       SWTBotText _textWithLabel_2 = it.textWithLabel("Name:");
       _textWithLabel_2.setText(typeName);
-      SWTBotButton _button = it.button("Finish");
-      _button.click();
-      SWTBotEditor _editorByTitle = it.editorByTitle((typeName + ".java"));
-      _xblockexpression = _editorByTitle.toTextEditor();
+      it.button("Finish").click();
+      _xblockexpression = it.editorByTitle((typeName + ".java")).toTextEditor();
     }
     return _xblockexpression;
   }
@@ -153,7 +126,6 @@ public class SwtBotProjectHelper {
       } catch (final Throwable _t) {
         if (_t instanceof WidgetNotFoundException) {
           final WidgetNotFoundException e = (WidgetNotFoundException)_t;
-          SWTBotShell[] _shells = it.shells();
           final Consumer<SWTBotShell> _function = (SWTBotShell it_1) -> {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("Shell: \'");
@@ -164,7 +136,7 @@ public class SwtBotProjectHelper {
             _builder.append(_isActive);
             InputOutput.<String>println(_builder.toString());
           };
-          ((List<SWTBotShell>)Conversions.doWrapArray(_shells)).forEach(_function);
+          ((List<SWTBotShell>)Conversions.doWrapArray(it.shells())).forEach(_function);
           StringConcatenation _builder = new StringConcatenation();
           _builder.append(SWTBotPreferences.SCREENSHOTS_DIR);
           _builder.append("/MenuFileNotFound");
@@ -172,31 +144,25 @@ public class SwtBotProjectHelper {
           _builder.append(_currentTimeMillis);
           _builder.append(".");
           _builder.append(SWTBotPreferences.SCREENSHOT_FORMAT);
-          SWTBotShell[] _shells_1 = it.shells();
           final Function1<SWTBotShell, Boolean> _function_1 = (SWTBotShell it_1) -> {
             return Boolean.valueOf(it_1.isActive());
           };
-          Iterable<SWTBotShell> _filter = IterableExtensions.<SWTBotShell>filter(((Iterable<SWTBotShell>)Conversions.doWrapArray(_shells_1)), _function_1);
-          SWTBotShell _head = IterableExtensions.<SWTBotShell>head(_filter);
           SWTUtils.captureScreenshot(_builder.toString(), 
-            _head.widget);
+            IterableExtensions.<SWTBotShell>head(IterableExtensions.<SWTBotShell>filter(((Iterable<SWTBotShell>)Conversions.doWrapArray(it.shells())), _function_1)).widget);
           throw e;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      SWTBotShell _shell = it.shell("Xtend Class");
-      _shell.activate();
+      it.shell("Xtend Class").activate();
       SWTBotText _textWithLabel = it.textWithLabel("Source folder:");
       _textWithLabel.setText(sourceFolderPath);
       SWTBotText _textWithLabel_1 = it.textWithLabel("Package:");
       _textWithLabel_1.setText(packageName);
       SWTBotText _textWithLabel_2 = it.textWithLabel("Name:");
       _textWithLabel_2.setText(typeName);
-      SWTBotButton _button = it.button("Finish");
-      _button.click();
-      SWTBotEditor _editorByTitle = it.editorByTitle((typeName + ".xtend"));
-      _xblockexpression = _editorByTitle.toTextEditor();
+      it.button("Finish").click();
+      _xblockexpression = it.editorByTitle((typeName + ".xtend")).toTextEditor();
     }
     return _xblockexpression;
   }
@@ -206,10 +172,7 @@ public class SwtBotProjectHelper {
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, retries, true);
     for (final Integer i : _doubleDotLessThan) {
       try {
-        SWTBotMenu _menu = it.menu("File");
-        SWTBotMenu _menu_1 = _menu.menu("New");
-        SWTBotMenu _menu_2 = _menu_1.menu(newWhat);
-        _menu_2.click();
+        it.menu("File").menu("New").menu(newWhat).click();
         return;
       } catch (final Throwable _t) {
         if (_t instanceof WidgetNotFoundException) {
@@ -230,32 +193,27 @@ public class SwtBotProjectHelper {
   }
   
   public static void closeAllEditors(final SWTWorkbenchBot it) {
-    List<? extends SWTBotEditor> _editors = it.editors();
     final Consumer<SWTBotEditor> _function = (SWTBotEditor it_1) -> {
       it_1.close();
     };
-    _editors.forEach(_function);
+    it.editors().forEach(_function);
   }
   
   public static void setContent(final SWTBotEclipseEditor it, final CharSequence content) {
     final String contentString = content.toString();
-    String _replace = contentString.replace("?", "");
-    it.setText(_replace);
+    it.setText(contentString.replace("?", ""));
     final int offset = contentString.indexOf("?");
     if ((offset != (-1))) {
       final Pair<Integer, Integer> lineAndColumn = SwtBotProjectHelper.getLineAndColumn(contentString, offset);
-      Integer _key = lineAndColumn.getKey();
-      Integer _value = lineAndColumn.getValue();
       int _lastIndexOf = contentString.lastIndexOf("?");
       int _minus = (_lastIndexOf - offset);
       int _minus_1 = (_minus - 1);
-      it.selectRange((_key).intValue(), (_value).intValue(), _minus_1);
+      it.selectRange((lineAndColumn.getKey()).intValue(), (lineAndColumn.getValue()).intValue(), _minus_1);
     }
   }
   
   public static SWTBotMenu clickableContextMenu(final SWTBotEclipseEditor editor, final String... text) {
-    SWTBotStyledText _styledText = editor.getStyledText();
-    MenuItem _contextMenu = ContextMenuHelper.contextMenu(_styledText, text);
+    MenuItem _contextMenu = ContextMenuHelper.contextMenu(editor.getStyledText(), text);
     return new SWTBotMenu(_contextMenu);
   }
   
@@ -309,42 +267,27 @@ public class SwtBotProjectHelper {
     try {
       try {
         SWTBotTree packageExplorerTree = it.tree();
-        SWTBotTree _tree = it.tree();
-        boolean _hasItems = _tree.hasItems();
+        boolean _hasItems = it.tree().hasItems();
         boolean _not = (!_hasItems);
         if (_not) {
-          SWTBotView _viewByTitle = it.viewByTitle("Package Explorer");
-          SWTBot _bot = _viewByTitle.bot();
-          SWTBotTree _tree_1 = _bot.tree();
-          packageExplorerTree = _tree_1;
+          packageExplorerTree = it.viewByTitle("Package Explorer").bot().tree();
         }
-        SWTBotTreeItem _expandNode = SwtBotProjectHelper.expandNode(packageExplorerTree, project);
-        final SWTBotTreeItem srcNode = SwtBotProjectHelper.expandNode(_expandNode, "src");
+        final SWTBotTreeItem srcNode = SwtBotProjectHelper.expandNode(SwtBotProjectHelper.expandNode(packageExplorerTree, project), "src");
         SWTBotTreeItem[] _items = srcNode.getItems();
         for (final SWTBotTreeItem source : _items) {
           boolean _isDisposed = source.widget.isDisposed();
           boolean _not_1 = (!_isDisposed);
           if (_not_1) {
-            SWTBotText _text = it.text();
-            InputOutput.<SWTBotText>println(_text);
-            String _text_1 = source.getText();
-            srcNode.select(_text_1);
-            SWTBotMenu _contextMenu = source.contextMenu("Delete");
-            _contextMenu.click();
-            SWTBotShell _shell = it.shell("Delete");
-            _shell.activate();
-            SWTBotButton _button = it.button("OK");
-            _button.click();
+            InputOutput.<SWTBotText>println(it.text());
+            srcNode.select(source.getText());
+            source.contextMenu("Delete").click();
+            it.shell("Delete").activate();
+            it.button("OK").click();
           }
         }
       } catch (final Throwable _t) {
         if (_t instanceof WidgetNotFoundException) {
           final WidgetNotFoundException exc = (WidgetNotFoundException)_t;
-          IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-          IWorkspaceRoot _root = _workspace.getRoot();
-          IProject _project = _root.getProject(project);
-          IFolder _folder = _project.getFolder("src");
-          IResource[] _members = _folder.members();
           final Consumer<IResource> _function = (IResource it_1) -> {
             try {
               it_1.delete(true, null);
@@ -352,7 +295,7 @@ public class SwtBotProjectHelper {
               throw Exceptions.sneakyThrow(_e);
             }
           };
-          ((List<IResource>)Conversions.doWrapArray(_members)).forEach(_function);
+          ((List<IResource>)Conversions.doWrapArray(ResourcesPlugin.getWorkspace().getRoot().getProject(project).getFolder("src").members())).forEach(_function);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -365,12 +308,10 @@ public class SwtBotProjectHelper {
   public static SWTBotTreeItem expandNode(final AbstractSWTBot<?> bot, final String node) {
     SWTBotTreeItem item = null;
     if ((bot instanceof SWTBotTree)) {
-      SWTBotTreeItem _treeItem = ((SWTBotTree)bot).getTreeItem(node);
-      item = _treeItem;
+      item = ((SWTBotTree)bot).getTreeItem(node);
     } else {
       if ((bot instanceof SWTBotTreeItem)) {
-        SWTBotTreeItem _node = ((SWTBotTreeItem)bot).getNode(node);
-        item = _node;
+        item = ((SWTBotTreeItem)bot).getNode(node);
       }
     }
     boolean _isExpanded = item.isExpanded();

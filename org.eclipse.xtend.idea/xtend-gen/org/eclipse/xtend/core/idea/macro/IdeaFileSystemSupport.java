@@ -7,9 +7,7 @@
  */
 package org.eclipse.xtend.core.idea.macro;
 
-import java.util.Set;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.AbstractFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
@@ -21,16 +19,13 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
   @Override
   public Iterable<? extends Path> getChildren(final URI uri, final Path path) {
-    ResourceSet _context = this.getContext();
-    final IdeaResourceSetProvider.VirtualFileBasedUriHandler handler = IdeaResourceSetProvider.VirtualFileBasedUriHandler.find(_context);
+    final IdeaResourceSetProvider.VirtualFileBasedUriHandler handler = IdeaResourceSetProvider.VirtualFileBasedUriHandler.find(this.getContext());
     if ((handler == null)) {
       return CollectionLiterals.<Path>emptyList();
     }
-    Set<URI> _children = handler.getChildren(uri);
     final Function1<URI, Path> _function = (URI it) -> {
       return this.getPath(it, uri, path);
     };
-    Iterable<Path> _map = IterableExtensions.<URI, Path>map(_children, _function);
-    return IterableExtensions.<Path>filterNull(_map);
+    return IterableExtensions.<Path>filterNull(IterableExtensions.<URI, Path>map(handler.getChildren(uri), _function));
   }
 }

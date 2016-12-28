@@ -12,8 +12,7 @@ public class XtendIdeaSetup implements ISetup {
     Injector _xblockexpression = null;
     {
       EcoreGlobalRegistries.ensureInitialized();
-      XtendStandaloneSetupIdea _xtendStandaloneSetupIdea = new XtendStandaloneSetupIdea();
-      _xblockexpression = _xtendStandaloneSetupIdea.createInjector();
+      _xblockexpression = new XtendStandaloneSetupIdea().createInjector();
     }
     return _xblockexpression;
   }

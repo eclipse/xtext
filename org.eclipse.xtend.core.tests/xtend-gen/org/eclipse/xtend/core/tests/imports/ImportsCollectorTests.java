@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.TextRegion;
@@ -107,9 +106,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "com.google.common.base.Strings");
-    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport);
-    this.assertExtensionImport(_assertStaticImport);
+    this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "com.google.common.base.Strings")));
   }
   
   @Test
@@ -170,9 +167,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "java.io.Serializable");
-    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport);
-    this.assertExtensionImport(_assertStaticImport);
+    this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "java.io.Serializable")));
   }
   
   @Test
@@ -206,9 +201,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "java.util.List", "javax.sound.sampled.Line");
-    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport);
-    this.assertExtensionImport(_assertStaticImport);
+    this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "java.util.List", "javax.sound.sampled.Line")));
   }
   
   @Test
@@ -237,9 +230,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder);
-    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport);
-    this.assertExtensionImport(_assertStaticImport);
+    this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder)));
   }
   
   @Test
@@ -270,9 +261,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_builder, "com.google.common.base.Strings.isNullOrEmpty");
-    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_assertStaticImport);
-    this.assertExtensionImport(_assertTypeImport);
+    this.assertExtensionImport(this.assertTypeImport(this.assertStaticImport(_builder, "com.google.common.base.Strings.isNullOrEmpty")));
   }
   
   @Test
@@ -492,10 +481,8 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "javax.annotation.Resource");
-    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport, 
-      "javax.annotation.Resource.AuthenticationType.CONTAINER");
-    this.assertExtensionImport(_assertStaticImport);
+    this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "javax.annotation.Resource"), 
+      "javax.annotation.Resource.AuthenticationType.CONTAINER"));
   }
   
   @Test
@@ -522,9 +509,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "java.util.ArrayList");
-    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport);
-    this.assertExtensionImport(_assertStaticImport);
+    this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "java.util.ArrayList")));
   }
   
   @Test
@@ -557,9 +542,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "java.util.ArrayList");
-    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport, "C.foo");
-    this.assertExtensionImport(_assertStaticImport);
+    this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "java.util.ArrayList"), "C.foo"));
   }
   
   @Test
@@ -581,14 +564,11 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "java.lang.String");
-    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport);
-    this.assertExtensionImport(_assertStaticImport);
+    this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "java.lang.String")));
   }
   
   private ImportsAcceptor.DefaultImportsAcceptor assertTypeImport(final CharSequence xtendFile, final String... typeNames) {
-    ImportsAcceptor.DefaultImportsAcceptor _collect = this.collect(xtendFile);
-    return this.assertTypeImport(_collect, typeNames);
+    return this.assertTypeImport(this.collect(xtendFile), typeNames);
   }
   
   private ImportsAcceptor.DefaultImportsAcceptor assertTypeImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
@@ -599,8 +579,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   }
   
   private ImportsAcceptor.DefaultImportsAcceptor assertExtensionImport(final CharSequence xtendFile, final String... typeNames) {
-    ImportsAcceptor.DefaultImportsAcceptor _collect = this.collect(xtendFile);
-    return this.assertExtensionImport(_collect, typeNames);
+    return this.assertExtensionImport(this.collect(xtendFile), typeNames);
   }
   
   private ImportsAcceptor.DefaultImportsAcceptor assertExtensionImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
@@ -611,8 +590,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   }
   
   private ImportsAcceptor.DefaultImportsAcceptor assertStaticImport(final CharSequence xtendFile, final String... typeNames) {
-    ImportsAcceptor.DefaultImportsAcceptor _collect = this.collect(xtendFile);
-    return this.assertStaticImport(_collect, typeNames);
+    return this.assertStaticImport(this.collect(xtendFile), typeNames);
   }
   
   private ImportsAcceptor.DefaultImportsAcceptor assertStaticImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
@@ -623,9 +601,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   }
   
   private ImportsAcceptor.DefaultImportsAcceptor has(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final Function1<? super ImportsAcceptor.DefaultImportsAcceptor, ? extends Set<String>> getter, final String... typeNames) {
-    Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(typeNames)));
-    Set<String> _apply = getter.apply(acceptor);
-    Assert.assertEquals(_set, _apply);
+    Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(typeNames))), getter.apply(acceptor));
     return acceptor;
   }
   
@@ -637,20 +613,15 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
       int selector = contentAsString.indexOf("|");
       if ((selector != (-1))) {
         start = selector;
-        String _replaceFirst = contentAsString.replaceFirst("\\|", "");
-        contentAsString = _replaceFirst;
-        int _indexOf = contentAsString.indexOf("|");
-        selector = _indexOf;
-        int _length = contentAsString.length();
-        end = _length;
+        contentAsString = contentAsString.replaceFirst("\\|", "");
+        selector = contentAsString.indexOf("|");
+        end = contentAsString.length();
         if ((selector != (-1))) {
           end = selector;
-          String _replaceFirst_1 = contentAsString.replaceFirst("\\|", "");
-          contentAsString = _replaceFirst_1;
+          contentAsString = contentAsString.replaceFirst("\\|", "");
         }
       }
-      XtendFile _file = this.file(contentAsString);
-      final Resource resource = _file.eResource();
+      final Resource resource = this.file(contentAsString).eResource();
       final ImportsAcceptor.DefaultImportsAcceptor acceptor = new ImportsAcceptor.DefaultImportsAcceptor();
       TextRegion _textRegion = new TextRegion(start, (end - start));
       this.importsCollector.collectImports(((XtextResource) resource), _textRegion, acceptor);

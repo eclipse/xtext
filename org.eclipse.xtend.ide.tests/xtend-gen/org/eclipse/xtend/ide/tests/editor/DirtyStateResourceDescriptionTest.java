@@ -15,9 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -51,12 +49,8 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final IResourceDescription d = this.getDirtyResourceDescription(_builder);
-    Iterable<IEObjectDescription> _exportedObjects = d.getExportedObjects();
-    int _size = IterableExtensions.size(_exportedObjects);
-    Assert.assertEquals(1, _size);
-    Iterable<IEObjectDescription> _exportedObjects_1 = d.getExportedObjects();
-    IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
-    final String textHash = _head.getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
+    Assert.assertEquals(1, IterableExtensions.size(d.getExportedObjects()));
+    final String textHash = IterableExtensions.<IEObjectDescription>head(d.getExportedObjects()).getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
     Assert.assertNotNull(textHash);
     boolean _equals = Objects.equal("", textHash);
     Assert.assertFalse(_equals);
@@ -70,12 +64,8 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final IResourceDescription d = this.getDirtyResourceDescription(_builder);
-    Iterable<QualifiedName> _importedNames = d.getImportedNames();
-    boolean _isEmpty = IterableExtensions.isEmpty(_importedNames);
-    Assert.assertTrue(_isEmpty);
-    Iterable<IReferenceDescription> _referenceDescriptions = d.getReferenceDescriptions();
-    boolean _isEmpty_1 = IterableExtensions.isEmpty(_referenceDescriptions);
-    Assert.assertTrue(_isEmpty_1);
+    Assert.assertTrue(IterableExtensions.isEmpty(d.getImportedNames()));
+    Assert.assertTrue(IterableExtensions.isEmpty(d.getReferenceDescriptions()));
   }
   
   @Test
@@ -86,9 +76,7 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final IResourceDescription d = this.getDirtyResourceDescription(_builder);
-    Iterable<IEObjectDescription> _exportedObjects = d.getExportedObjects();
-    IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
-    final String textHash = _head.getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
+    final String textHash = IterableExtensions.<IEObjectDescription>head(d.getExportedObjects()).getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -98,14 +86,11 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     final IResourceDescription d1 = this.getDirtyResourceDescription(_builder_1);
-    Iterable<IEObjectDescription> _exportedObjects_1 = d1.getExportedObjects();
-    IEObjectDescription _head_1 = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
-    final String textHash1 = _head_1.getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
+    final String textHash1 = IterableExtensions.<IEObjectDescription>head(d1.getExportedObjects()).getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
     boolean _equals = Objects.equal(textHash, textHash1);
     Assert.assertFalse(_equals);
     final IResourceDescription.Delta delta = this.dirtyManager.createDelta(d, d1);
-    boolean _haveEObjectDescriptionsChanged = delta.haveEObjectDescriptionsChanged();
-    Assert.assertTrue(_haveEObjectDescriptionsChanged);
+    Assert.assertTrue(delta.haveEObjectDescriptionsChanged());
   }
   
   @Test
@@ -116,22 +101,17 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final IResourceDescription d = this.getDirtyResourceDescription(_builder);
-    Iterable<IEObjectDescription> _exportedObjects = d.getExportedObjects();
-    IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
-    final String textHash = _head.getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
+    final String textHash = IterableExtensions.<IEObjectDescription>head(d.getExportedObjects()).getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
     final IResourceDescription d1 = this.getDirtyResourceDescription(_builder_1);
-    Iterable<IEObjectDescription> _exportedObjects_1 = d1.getExportedObjects();
-    IEObjectDescription _head_1 = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
-    final String textHash1 = _head_1.getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
+    final String textHash1 = IterableExtensions.<IEObjectDescription>head(d1.getExportedObjects()).getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
     Assert.assertEquals(textHash, textHash1);
     final IResourceDescription.Delta delta = this.dirtyManager.createDelta(d, d1);
-    boolean _haveEObjectDescriptionsChanged = delta.haveEObjectDescriptionsChanged();
-    Assert.assertFalse(_haveEObjectDescriptionsChanged);
+    Assert.assertFalse(delta.haveEObjectDescriptionsChanged());
   }
   
   @Test
@@ -141,15 +121,13 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    XtextResource _parse = this.parse("Foo", _builder);
-    final IResourceDescription foo = this.plainManager.getResourceDescription(_parse);
+    final IResourceDescription foo = this.plainManager.getResourceDescription(this.parse("Foo", _builder));
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Bar implements Foo {");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    XtextResource _parse_1 = this.parse("Bar", _builder_1);
-    final IResourceDescription bar = this.plainManager.getResourceDescription(_parse_1);
+    final IResourceDescription bar = this.plainManager.getResourceDescription(this.parse("Bar", _builder_1));
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("interface Foo {");
     _builder_2.newLine();
@@ -158,11 +136,9 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    XtextResource _parse_2 = this.parse("Foo", _builder_2);
-    final IResourceDescription dirtyFoo = this.dirtyManager.getResourceDescription(_parse_2);
+    final IResourceDescription dirtyFoo = this.dirtyManager.getResourceDescription(this.parse("Foo", _builder_2));
     final IResourceDescription.Delta delta = this.plainManager.createDelta(foo, dirtyFoo);
-    boolean _isAffected = this.plainManager.isAffected(delta, bar);
-    Assert.assertTrue(_isAffected);
+    Assert.assertTrue(this.plainManager.isAffected(delta, bar));
   }
   
   @Test
@@ -172,15 +148,13 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    XtextResource _parse = this.parse("Foo", _builder);
-    final IResourceDescription foo = this.plainManager.getResourceDescription(_parse);
+    final IResourceDescription foo = this.plainManager.getResourceDescription(this.parse("Foo", _builder));
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Bar implements Foo {");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    XtextResource _parse_1 = this.parse("Bar", _builder_1);
-    final IResourceDescription bar = this.plainManager.getResourceDescription(_parse_1);
+    final IResourceDescription bar = this.plainManager.getResourceDescription(this.parse("Bar", _builder_1));
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("interface Foo {");
     _builder_2.newLine();
@@ -189,11 +163,9 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    XtextResource _parse_2 = this.parse("Foo", _builder_2);
-    final IResourceDescription dirtyFoo = this.dirtyManager.getResourceDescription(_parse_2);
+    final IResourceDescription dirtyFoo = this.dirtyManager.getResourceDescription(this.parse("Foo", _builder_2));
     final IResourceDescription.Delta delta = this.plainManager.createDelta(foo, dirtyFoo);
-    boolean _isAffected = this.plainManager.isAffected(delta, bar);
-    Assert.assertTrue(_isAffected);
+    Assert.assertTrue(this.plainManager.isAffected(delta, bar));
   }
   
   @Test
@@ -203,15 +175,13 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    XtextResource _parse = this.parse("Foo", _builder);
-    final IResourceDescription foo = this.plainManager.getResourceDescription(_parse);
+    final IResourceDescription foo = this.plainManager.getResourceDescription(this.parse("Foo", _builder));
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Bar {");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    XtextResource _parse_1 = this.parse("Bar", _builder_1);
-    final IResourceDescription bar = this.plainManager.getResourceDescription(_parse_1);
+    final IResourceDescription bar = this.plainManager.getResourceDescription(this.parse("Bar", _builder_1));
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("interface Foo {");
     _builder_2.newLine();
@@ -220,16 +190,13 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    XtextResource _parse_2 = this.parse("Foo", _builder_2);
-    final IResourceDescription dirtyFoo = this.dirtyManager.getResourceDescription(_parse_2);
+    final IResourceDescription dirtyFoo = this.dirtyManager.getResourceDescription(this.parse("Foo", _builder_2));
     final IResourceDescription.Delta delta = this.plainManager.createDelta(foo, dirtyFoo);
-    boolean _isAffected = this.plainManager.isAffected(delta, bar);
-    Assert.assertFalse(_isAffected);
+    Assert.assertFalse(this.plainManager.isAffected(delta, bar));
   }
   
   public IResourceDescription getDirtyResourceDescription(final CharSequence model) {
-    XtextResource _parse = this.parse("Foo", model);
-    return this.dirtyManager.getResourceDescription(_parse);
+    return this.dirtyManager.getResourceDescription(this.parse("Foo", model));
   }
   
   public XtextResource parse(final String fileName, final CharSequence model) {
@@ -237,8 +204,7 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
       XtextResource _xblockexpression = null;
       {
         final XtextResourceSet rs = this.resourceSetProvider.get();
-        URI _createURI = URI.createURI((fileName + ".xtend"));
-        Resource _createResource = rs.createResource(_createURI);
+        Resource _createResource = rs.createResource(URI.createURI((fileName + ".xtend")));
         final XtextResource r = ((XtextResource) _createResource);
         String _string = model.toString();
         StringInputStream _stringInputStream = new StringInputStream(_string);

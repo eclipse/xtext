@@ -4,11 +4,8 @@ import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -25,7 +22,6 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.ui.JavaUI;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRewriteTarget;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -60,8 +56,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   public void setUp() {
     try {
       super.setUp();
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("my.example.project");
-      this.project = _createPluginProject;
+      this.project = WorkbenchTestHelper.createPluginProject("my.example.project");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -190,8 +185,8 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       _builder_1.append("public class Foo {}");
       _builder_1.newLine();
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of("otherPackage/Foo.java", _builder_1.toString());
-      byte[] _createJar = this.createJar(_mappedTo, _mappedTo_1);
-      this.addJarToProject(this.project, _createJar);
+      this.addJarToProject(this.project, 
+        this.createJar(_mappedTo, _mappedTo_1));
       IResourcesSetupUtil.waitForBuild();
       final IType type = jp.findType("otherPackage.Foo");
       Assert.assertNotNull(type);
@@ -227,8 +222,8 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       _builder_1.append("public class Foo {}");
       _builder_1.newLine();
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of("otherPackage/Foo.java", _builder_1.toString());
-      byte[] _createJar = this.createJar(_mappedTo, _mappedTo_1);
-      this.addJarToProject(this.project, _createJar);
+      this.addJarToProject(this.project, 
+        this.createJar(_mappedTo, _mappedTo_1));
       IResourcesSetupUtil.waitForBuild();
       final IType type = jp.findType("myPackage.Foo");
       Assert.assertNotNull(type);
@@ -264,8 +259,8 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       _builder_1.append("public class Foo {}");
       _builder_1.newLine();
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of("otherPackage/Foo.java", _builder_1.toString());
-      byte[] _createJar = this.createJar(_mappedTo, _mappedTo_1);
-      this.addJarToProject(this.project, _createJar);
+      this.addJarToProject(this.project, 
+        this.createJar(_mappedTo, _mappedTo_1));
       IResourcesSetupUtil.waitForBuild();
       final IType type = jp.findType("myPackage.Foo2");
       Assert.assertNotNull(type);
@@ -277,8 +272,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("class Foo2 {}");
       _builder_2.newLine();
-      String _string = _builder_2.toString();
-      this.assertContains(_string, result);
+      this.assertContains(_builder_2.toString(), result);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -319,8 +313,8 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of("otherPackage/Foo.java", _builder_1.toString());
-      byte[] _createJar = this.createJar(_mappedTo, _mappedTo_1);
-      this.addJarToProject(this.project, _createJar);
+      this.addJarToProject(this.project, 
+        this.createJar(_mappedTo, _mappedTo_1));
       IResourcesSetupUtil.waitForBuild();
       final IType type = jp.findType("myPackage.Foo.MyInnerClass");
       Assert.assertNotNull(type);
@@ -341,8 +335,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("}");
       _builder_2.newLine();
-      String _string = _builder_2.toString();
-      Assert.assertEquals(_string, result);
+      Assert.assertEquals(_builder_2.toString(), result);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -383,8 +376,8 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of("otherPackage/Bar.java", _builder_1.toString());
-      byte[] _createJar = this.createJar(_mappedTo, _mappedTo_1);
-      this.addJarToProject(this.project, _createJar);
+      this.addJarToProject(this.project, 
+        this.createJar(_mappedTo, _mappedTo_1));
       IResourcesSetupUtil.waitForBuild();
       final IType type = jp.findType("myPackage.Foo.MyInnerClass");
       Assert.assertNotNull(type);
@@ -414,8 +407,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
         final IFile jarFile = project.getFile("mydependency.jar");
         ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(jarData);
         jarFile.create(_byteArrayInputStream, true, null);
-        IJavaProject _create = JavaCore.create(project);
-        _xblockexpression = JavaProjectSetupUtil.addJarToClasspath(_create, jarFile);
+        _xblockexpression = JavaProjectSetupUtil.addJarToClasspath(JavaCore.create(project), jarFile);
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -428,47 +420,31 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       final IProject project = WorkbenchTestHelper.createPluginProject("my.temporary.data.project", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib");
       final HashMap<String, InputStream> listOfContents = CollectionLiterals.<String, InputStream>newHashMap();
       try {
-        IJavaProject _create = JavaCore.create(project);
-        final IFolder folder = JavaProjectSetupUtil.addSourceFolder(_create, "src");
-        IJavaProject _create_1 = JavaCore.create(project);
-        JavaProjectSetupUtil.addSourceFolder(_create_1, "xtend-gen");
+        final IFolder folder = JavaProjectSetupUtil.addSourceFolder(JavaCore.create(project), "src");
+        JavaProjectSetupUtil.addSourceFolder(JavaCore.create(project), "xtend-gen");
         for (final Pair<? extends String, ? extends String> sourceFile : sourceFiles) {
-          IPath _fullPath = folder.getFullPath();
-          String _key = sourceFile.getKey();
-          IPath _append = _fullPath.append(_key);
-          String _value = sourceFile.getValue();
-          IResourcesSetupUtil.createFile(_append, _value);
+          IResourcesSetupUtil.createFile(folder.getFullPath().append(sourceFile.getKey()), sourceFile.getValue());
         }
         IResourcesSetupUtil.waitForBuild();
         final IResourceVisitor _function = (IResource it) -> {
           if ((it instanceof IFile)) {
-            IPath _projectRelativePath = ((IFile)it).getProjectRelativePath();
-            IPath _removeFirstSegments = _projectRelativePath.removeFirstSegments(1);
-            final String path = _removeFirstSegments.toString();
-            InputStream _contents = ((IFile)it).getContents();
-            listOfContents.put(path, _contents);
+            final String path = ((IFile)it).getProjectRelativePath().removeFirstSegments(1).toString();
+            listOfContents.put(path, ((IFile)it).getContents());
           }
           return true;
         };
         final IResourceVisitor visitor = _function;
-        IFolder _folder = project.getFolder("src");
-        _folder.accept(visitor);
-        IFolder _folder_1 = project.getFolder("xtend-gen");
-        _folder_1.accept(visitor);
-        IFolder _folder_2 = project.getFolder("bin");
-        _folder_2.accept(visitor);
-        Set<Map.Entry<String, InputStream>> _entrySet = listOfContents.entrySet();
+        project.getFolder("src").accept(visitor);
+        project.getFolder("xtend-gen").accept(visitor);
+        project.getFolder("bin").accept(visitor);
         final Function1<Map.Entry<String, InputStream>, Pair<String, InputStream>> _function_1 = (Map.Entry<String, InputStream> it) -> {
-          String _key_1 = it.getKey();
-          InputStream _value_1 = it.getValue();
-          return Pair.<String, InputStream>of(_key_1, _value_1);
+          String _key = it.getKey();
+          InputStream _value = it.getValue();
+          return Pair.<String, InputStream>of(_key, _value);
         };
-        Iterable<Pair<String, InputStream>> _map = IterableExtensions.<Map.Entry<String, InputStream>, Pair<String, InputStream>>map(_entrySet, _function_1);
-        List<Pair<String, InputStream>> _list = IterableExtensions.<Pair<String, InputStream>>toList(_map);
-        final InputStream jarin = JavaProjectSetupUtil.jarInputStream(((Pair<String, InputStream>[])Conversions.unwrapArray(_list, Pair.class)));
+        final InputStream jarin = JavaProjectSetupUtil.jarInputStream(((Pair<String, InputStream>[])Conversions.unwrapArray(IterableExtensions.<Pair<String, InputStream>>toList(IterableExtensions.<Map.Entry<String, InputStream>, Pair<String, InputStream>>map(listOfContents.entrySet(), _function_1)), Pair.class)));
         return ByteStreams.toByteArray(jarin);
       } finally {
-        Collection<InputStream> _values = listOfContents.values();
         final Consumer<InputStream> _function_2 = (InputStream it) -> {
           try {
             it.close();
@@ -476,7 +452,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
             throw Exceptions.sneakyThrow(_e);
           }
         };
-        _values.forEach(_function_2);
+        listOfContents.values().forEach(_function_2);
         project.delete(true, true, null);
       }
     } catch (Throwable _e) {
@@ -508,9 +484,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       IProject _project = jp.getProject();
       Path _path = new Path(fileName);
       final IFile jarFile = _project.getFile(_path);
-      Class<? extends XbaseEditorOpenClassFileTest> _class = this.getClass();
-      InputStream _resourceAsStream = _class.getResourceAsStream(fileName);
-      jarFile.create(_resourceAsStream, true, null);
+      jarFile.create(this.getClass().getResourceAsStream(fileName), true, null);
       IFile _xifexpression = null;
       if ((fileNameOfSource != null)) {
         IFile _xblockexpression = null;
@@ -518,9 +492,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
           IProject _project_1 = jp.getProject();
           Path _path_1 = new Path(fileNameOfSource);
           final IFile source = _project_1.getFile(_path_1);
-          Class<? extends XbaseEditorOpenClassFileTest> _class_1 = this.getClass();
-          InputStream _resourceAsStream_1 = _class_1.getResourceAsStream(fileNameOfSource);
-          source.create(_resourceAsStream_1, true, null);
+          source.create(this.getClass().getResourceAsStream(fileNameOfSource), true, null);
           _xblockexpression = source;
         }
         _xifexpression = _xblockexpression;
@@ -543,8 +515,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
     try {
       final IEditorPart editor = JavaUI.openInEditor(javaElement);
       Object _adapter = editor.getAdapter(IRewriteTarget.class);
-      IDocument _document = ((IRewriteTarget) _adapter).getDocument();
-      final String text = _document.get();
+      final String text = ((IRewriteTarget) _adapter).getDocument().get();
       this.helper.closeEditor(editor, false);
       return text;
     } catch (Throwable _e) {
@@ -566,10 +537,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
         throw Exceptions.sneakyThrow(_t);
       }
     }
-    Thread _currentThread = Thread.currentThread();
-    StackTraceElement[] _stackTrace = _currentThread.getStackTrace();
-    StackTraceElement _get = _stackTrace[1];
-    String _methodName = _get.getMethodName();
+    String _methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
     String _plus = ("Ignoring " + _methodName);
     String _plus_1 = (_plus + " , since editor everride is not supported.");
     XbaseEditorOpenClassFileTest.LOG.warn(_plus_1);

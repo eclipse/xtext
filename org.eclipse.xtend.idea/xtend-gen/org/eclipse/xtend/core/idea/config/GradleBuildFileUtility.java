@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.idea.config;
 import com.google.common.base.Objects;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetManager;
-import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil;
@@ -23,7 +22,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import java.util.List;
-import org.eclipse.xtend.core.idea.config.MavenArtifact;
 import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.util.PlatformUtil;
@@ -52,8 +50,7 @@ public class GradleBuildFileUtility {
   private final static Logger LOG = Logger.getInstance(GradleBuildFileUtility.class.getName());
   
   public boolean isGradleedModule(final Module module) {
-    PlatformUtil _platformUtil = new PlatformUtil();
-    boolean _isGradleInstalled = _platformUtil.isGradleInstalled();
+    boolean _isGradleInstalled = new PlatformUtil().isGradleInstalled();
     if (_isGradleInstalled) {
       return (ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module) || 
         (GradleModuleBuilder.getBuildScriptData(module) != null));
@@ -84,8 +81,7 @@ public class GradleBuildFileUtility {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append(scope);
         _builder.append(" \'");
-        MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
-        String _key = _xtendLibMavenId.getKey();
+        String _key = XtendLibraryConfigurator.xtendLibMavenId().getKey();
         _builder.append(_key);
         _builder.append("\' ");
         GradleBuildFileUtility.this.addDependency(buildFile, _builder.toString());
@@ -98,10 +94,8 @@ public class GradleBuildFileUtility {
       return;
     }
     final boolean android = this.isAndroidGradleModule(module);
-    GrStatement[] _statements = buildFile.getStatements();
     final Function1<GrStatement, Boolean> _function = (GrStatement it) -> {
-      String _text = it.getText();
-      String _trim = _text.trim();
+      String _trim = it.getText().trim();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("apply plugin:.*org\\\\.xtext");
       String _xifexpression = null;
@@ -112,28 +106,25 @@ public class GradleBuildFileUtility {
       _builder.append("\\\\.xtend.*");
       return Boolean.valueOf(_trim.matches(_builder.toString()));
     };
-    GrStatement _findFirst = IterableExtensions.<GrStatement>findFirst(((Iterable<GrStatement>)Conversions.doWrapArray(_statements)), _function);
+    GrStatement _findFirst = IterableExtensions.<GrStatement>findFirst(((Iterable<GrStatement>)Conversions.doWrapArray(buildFile.getStatements())), _function);
     boolean _tripleNotEquals = (_findFirst != null);
     if (_tripleNotEquals) {
       return;
     }
     final GrClosableBlock buildScript = this.createOrGetMethodCall(buildFile, "buildscript");
-    GrClosableBlock _createOrGetMethodCall = this.createOrGetMethodCall(buildScript, "repositories");
-    this.createStatementIfNotExists(_createOrGetMethodCall, "jcenter()");
+    this.createStatementIfNotExists(this.createOrGetMethodCall(buildScript, "repositories"), "jcenter()");
     String _xifexpression = null;
     if (android) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("classpath \'org.xtext:xtext-android-gradle-plugin:");
-      XtextVersion _current = XtextVersion.getCurrent();
-      String _xtendAndroidGradlePluginVersion = _current.getXtendAndroidGradlePluginVersion();
+      String _xtendAndroidGradlePluginVersion = XtextVersion.getCurrent().getXtendAndroidGradlePluginVersion();
       _builder.append(_xtendAndroidGradlePluginVersion);
       _builder.append("\' ");
       _xifexpression = _builder.toString();
     } else {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("classpath \'org.xtext:xtext-gradle-plugin:");
-      XtextVersion _current_1 = XtextVersion.getCurrent();
-      String _xtendGradlePluginVersion = _current_1.getXtendGradlePluginVersion();
+      String _xtendGradlePluginVersion = XtextVersion.getCurrent().getXtendGradlePluginVersion();
       _builder_1.append(_xtendGradlePluginVersion);
       _builder_1.append("\' ");
       _xifexpression = _builder_1.toString();
@@ -158,12 +149,9 @@ public class GradleBuildFileUtility {
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(buildScriptPath);
       boolean _not = (!_isNullOrEmpty);
       if (_not) {
-        LocalFileSystem _instance = LocalFileSystem.getInstance();
-        VirtualFile virtualFile = _instance.refreshAndFindFileByPath(buildScriptPath);
+        VirtualFile virtualFile = LocalFileSystem.getInstance().refreshAndFindFileByPath(buildScriptPath);
         if ((virtualFile != null)) {
-          Project _project = module.getProject();
-          PsiManager _instance_1 = PsiManager.getInstance(_project);
-          final PsiFile psiFile = _instance_1.findFile(virtualFile);
+          final PsiFile psiFile = PsiManager.getInstance(module.getProject()).findFile(virtualFile);
           if (((psiFile instanceof GroovyFile) && psiFile.isValid())) {
             return ((GroovyFile) psiFile);
           }
@@ -174,24 +162,21 @@ public class GradleBuildFileUtility {
   }
   
   public void addDependency(final GrStatementOwner parentElement, final String dependencyEntry) {
-    GrClosableBlock _createOrGetMethodCall = this.createOrGetMethodCall(parentElement, "dependencies");
-    this.createStatementIfNotExists(_createOrGetMethodCall, dependencyEntry);
+    this.createStatementIfNotExists(this.createOrGetMethodCall(parentElement, "dependencies"), dependencyEntry);
   }
   
   private boolean createStatementIfNotExists(final GrStatementOwner statementOwner, final String statement) {
-    GrStatement[] _statements = statementOwner.getStatements();
     final Function1<GrStatement, Boolean> _function = (GrStatement it) -> {
       String _trim = statement.trim();
       String _text = it.getText();
       return Boolean.valueOf(Objects.equal(_trim, _text));
     };
-    GrStatement _findFirst = IterableExtensions.<GrStatement>findFirst(((Iterable<GrStatement>)Conversions.doWrapArray(_statements)), _function);
+    GrStatement _findFirst = IterableExtensions.<GrStatement>findFirst(((Iterable<GrStatement>)Conversions.doWrapArray(statementOwner.getStatements())), _function);
     boolean _tripleNotEquals = (_findFirst != null);
     if (_tripleNotEquals) {
       return false;
     }
-    Project _project = statementOwner.getProject();
-    GroovyPsiElementFactory factory = GroovyPsiElementFactory.getInstance(_project);
+    GroovyPsiElementFactory factory = GroovyPsiElementFactory.getInstance(statementOwner.getProject());
     final GrStatement entry = factory.createStatementFromText(statement);
     statementOwner.addStatementBefore(entry, null);
     return true;
@@ -209,13 +194,11 @@ public class GradleBuildFileUtility {
     };
     GrMethodCall methodCall = IterableExtensions.<GrMethodCall>findFirst(methodCalls, _function);
     if ((methodCall == null)) {
-      Project _project = element.getProject();
-      GroovyPsiElementFactory factory = GroovyPsiElementFactory.getInstance(_project);
+      GroovyPsiElementFactory factory = GroovyPsiElementFactory.getInstance(element.getProject());
       StringConcatenation _builder = new StringConcatenation();
       _builder.append(methodName);
       _builder.append("{}");
-      GrStatement _createStatementFromText = factory.createStatementFromText(_builder);
-      GrStatement _addStatementBefore = element.addStatementBefore(_createStatementFromText, 
+      GrStatement _addStatementBefore = element.addStatementBefore(factory.createStatementFromText(_builder), 
         null);
       methodCall = ((GrMethodCall) _addStatementBefore);
     }
@@ -223,19 +206,16 @@ public class GradleBuildFileUtility {
   }
   
   private GrClosableBlock firstClosureArgument(final GrCall call) {
-    GrClosableBlock[] _closureArguments = call.getClosureArguments();
-    return IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(_closureArguments)));
+    return IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(call.getClosureArguments())));
   }
   
   public boolean isAndroidGradleModule(final Module module) {
     final FacetManager mnr = FacetManager.getInstance(module);
-    Facet[] _allFacets = mnr.getAllFacets();
     final Function1<Facet<?>, Boolean> _function = (Facet<?> it) -> {
-      FacetTypeId _typeId = it.getTypeId();
-      String _string = _typeId.toString();
+      String _string = it.getTypeId().toString();
       return Boolean.valueOf(Objects.equal("android-gradle", _string));
     };
-    final Iterable<Facet<?>> foo = IterableExtensions.<Facet<?>>filter(((Iterable<Facet<?>>)Conversions.doWrapArray(_allFacets)), _function);
+    final Iterable<Facet<?>> foo = IterableExtensions.<Facet<?>>filter(((Iterable<Facet<?>>)Conversions.doWrapArray(mnr.getAllFacets())), _function);
     int _size = IterableExtensions.size(foo);
     return (_size > 0);
   }

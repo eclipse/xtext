@@ -52,11 +52,9 @@ public class XtendSyntaxHighlighter extends SyntaxHighlighterBase {
     if (_equals) {
       _xifexpression = XtendHighlightingStyles.RICH_TEXT_DELIMITER_ID;
     } else {
-      int _antlrType = this._tokenTypeProvider.getAntlrType(tokenType);
-      _xifexpression = this._abstractAntlrTokenToAttributeIdMapper.getId(_antlrType);
+      _xifexpression = this._abstractAntlrTokenToAttributeIdMapper.getId(this._tokenTypeProvider.getAntlrType(tokenType));
     }
     final String attribute = _xifexpression;
-    TextAttributesKey _textAttributesKey = this.textAttributeProvider.getTextAttributesKey(attribute);
-    return SyntaxHighlighterBase.pack(_textAttributesKey);
+    return SyntaxHighlighterBase.pack(this.textAttributeProvider.getTextAttributesKey(attribute));
   }
 }

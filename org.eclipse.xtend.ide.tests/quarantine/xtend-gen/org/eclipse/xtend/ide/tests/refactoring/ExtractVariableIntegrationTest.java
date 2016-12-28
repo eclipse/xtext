@@ -12,7 +12,6 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -762,7 +761,6 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
       final IFile file = this.workbenchTestHelper.createFile("Foo", model);
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       try {
-        IXtextDocument _document = editor.getDocument();
         final IUnitOfWork<Change, XtextResource> _function = (XtextResource it) -> {
           Change _xblockexpression = null;
           {
@@ -777,9 +775,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
             refactoring.initialize(editor, selection);
             NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
             final RefactoringStatus status = refactoring.checkAllConditions(_nullProgressMonitor);
-            String _string = status.toString();
-            boolean _isOK = status.isOK();
-            Assert.assertTrue(_string, _isOK);
+            Assert.assertTrue(status.toString(), status.isOK());
             NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
             Change _createChange = refactoring.createChange(_nullProgressMonitor_1);
             NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
@@ -787,11 +783,8 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
           }
           return _xblockexpression;
         };
-        _document.<Change>readOnly(_function);
-        String _string = expected.toString();
-        IXtextDocument _document_1 = editor.getDocument();
-        String _get = _document_1.get();
-        Assert.assertEquals(_string, _get);
+        editor.getDocument().<Change>readOnly(_function);
+        Assert.assertEquals(expected.toString(), editor.getDocument().get());
       } finally {
         editor.close(false);
       }

@@ -7,21 +7,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.compiler.XtendGenerator;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
-import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
-import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.tests.util.LineDelimiters;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -37,7 +31,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
@@ -47,16 +40,13 @@ import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.services.Problem;
-import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -159,23 +149,12 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("my/client/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      XtendFile _xtendFile = it.getXtendFile();
-      this.validator.assertNoErrors(_xtendFile);
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      MutableClassDeclaration _findClass = _typeLookup.findClass("my.client.TopLevelClass");
-      Assert.assertNotNull(_findClass);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      MutableClassDeclaration _findClass_1 = _typeLookup_1.findClass("my.client.TopLevelClass.NestedType");
-      Assert.assertNotNull(_findClass_1);
-      TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
-      MutableClassDeclaration _findClass_2 = _typeLookup_2.findClass("my.client.TopLevelClass.NestedType.NestedType2");
-      Assert.assertNotNull(_findClass_2);
-      TypeLookupImpl _typeLookup_3 = it.getTypeLookup();
-      MutableClassDeclaration _findClass_3 = _typeLookup_3.findClass("my.client.OtherTopLevelClass");
-      Assert.assertNotNull(_findClass_3);
-      TypeLookupImpl _typeLookup_4 = it.getTypeLookup();
-      MutableClassDeclaration _findClass_4 = _typeLookup_4.findClass("my.client.OtherTopLevelClass.NestedType");
-      Assert.assertNotNull(_findClass_4);
+      this.validator.assertNoErrors(it.getXtendFile());
+      Assert.assertNotNull(it.getTypeLookup().findClass("my.client.TopLevelClass"));
+      Assert.assertNotNull(it.getTypeLookup().findClass("my.client.TopLevelClass.NestedType"));
+      Assert.assertNotNull(it.getTypeLookup().findClass("my.client.TopLevelClass.NestedType.NestedType2"));
+      Assert.assertNotNull(it.getTypeLookup().findClass("my.client.OtherTopLevelClass"));
+      Assert.assertNotNull(it.getTypeLookup().findClass("my.client.OtherTopLevelClass.NestedType"));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -253,17 +232,11 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("Bug441081Client.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration c = _typeLookup.findClass("Bug441081Client");
-      MutableMethodDeclaration _findDeclaredMethod = c.findDeclaredMethod("m");
-      TypeReference _returnType = _findDeclaredMethod.getReturnType();
-      Type _type = _returnType.getType();
+      final MutableClassDeclaration c = it.getTypeLookup().findClass("Bug441081Client");
+      Type _type = c.findDeclaredMethod("m").getReturnType().getType();
       final TypeParameterDeclaration typeParam = ((TypeParameterDeclaration) _type);
-      Iterable<? extends TypeReference> _upperBounds = typeParam.getUpperBounds();
-      boolean _isEmpty = IterableExtensions.isEmpty(_upperBounds);
-      Assert.assertFalse(_isEmpty);
-      XtendFile _xtendFile = it.getXtendFile();
-      this.validator.assertNoIssues(_xtendFile);
+      Assert.assertFalse(IterableExtensions.isEmpty(typeParam.getUpperBounds()));
+      this.validator.assertNoIssues(it.getXtendFile());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -349,24 +322,13 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration foo = _typeLookup.findClass("myusercode.Client");
-      MutableFieldDeclaration _findDeclaredField = foo.findDeclaredField("bar_field");
-      final TypeReference barType = _findDeclaredField.getType();
-      TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
-      TypeReference _primitiveInt = _typeReferenceProvider.getPrimitiveInt();
-      this.assertSameType(barType, _primitiveInt);
-      MutableMethodDeclaration _findDeclaredMethod = foo.findDeclaredMethod("bar");
-      TypeReference _returnType = _findDeclaredMethod.getReturnType();
-      this.assertSameType(barType, _returnType);
-      MutableFieldDeclaration _findDeclaredField_1 = foo.findDeclaredField("foo_field");
-      final TypeReference fooType = _findDeclaredField_1.getType();
-      TypeReferenceProvider _typeReferenceProvider_1 = it.getTypeReferenceProvider();
-      TypeReference _newTypeReference = _typeReferenceProvider_1.newTypeReference(Integer.class);
-      this.assertSameType(fooType, _newTypeReference);
-      MutableMethodDeclaration _findDeclaredMethod_1 = foo.findDeclaredMethod("foo");
-      TypeReference _returnType_1 = _findDeclaredMethod_1.getReturnType();
-      this.assertSameType(fooType, _returnType_1);
+      final MutableClassDeclaration foo = it.getTypeLookup().findClass("myusercode.Client");
+      final TypeReference barType = foo.findDeclaredField("bar_field").getType();
+      this.assertSameType(barType, it.getTypeReferenceProvider().getPrimitiveInt());
+      this.assertSameType(barType, foo.findDeclaredMethod("bar").getReturnType());
+      final TypeReference fooType = foo.findDeclaredField("foo_field").getType();
+      this.assertSameType(fooType, it.getTypeReferenceProvider().newTypeReference(Integer.class));
+      this.assertSameType(fooType, foo.findDeclaredMethod("foo").getReturnType());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -456,32 +418,21 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Client");
+      final MutableClassDeclaration cls = it.getTypeLookup().findClass("myusercode.Client");
       final MutableFieldDeclaration barField = cls.findDeclaredField("bar");
-      Iterable<? extends MutableMethodDeclaration> _declaredMethods = cls.getDeclaredMethods();
       final Function1<MutableMethodDeclaration, Boolean> _function_1 = (MutableMethodDeclaration it_1) -> {
-        String _simpleName = it_1.getSimpleName();
-        return Boolean.valueOf(_simpleName.startsWith("get"));
+        return Boolean.valueOf(it_1.getSimpleName().startsWith("get"));
       };
-      final Iterable<? extends MutableMethodDeclaration> getters = IterableExtensions.filter(_declaredMethods, _function_1);
-      int _size = IterableExtensions.size(getters);
-      Assert.assertEquals(1, _size);
+      final Iterable<? extends MutableMethodDeclaration> getters = IterableExtensions.filter(cls.getDeclaredMethods(), _function_1);
+      Assert.assertEquals(1, IterableExtensions.size(getters));
       final MutableMethodDeclaration getBar = IterableExtensions.head(getters);
-      String _simpleName = getBar.getSimpleName();
-      Assert.assertEquals("getBar", _simpleName);
+      Assert.assertEquals("getBar", getBar.getSimpleName());
       final JvmField barJvmField = ((MutableJvmFieldDeclarationImpl) barField).getDelegate();
       final JvmOperation getBarJvmMethod = ((MutableJvmMethodDeclarationImpl) getBar).getDelegate();
-      IXtendJvmAssociations _jvmModelAssociations = it.getJvmModelAssociations();
-      IXtendJvmAssociations _jvmModelAssociations_1 = it.getJvmModelAssociations();
-      EObject _primarySourceElement = _jvmModelAssociations_1.getPrimarySourceElement(barJvmField);
-      final Set<EObject> elementsAssociatedWithBarField = _jvmModelAssociations.getJvmElements(_primarySourceElement);
-      int _size_1 = elementsAssociatedWithBarField.size();
-      Assert.assertEquals(2, _size_1);
-      Object _get = ((Object[])Conversions.unwrapArray(elementsAssociatedWithBarField, Object.class))[0];
-      Assert.assertEquals(barJvmField, _get);
-      Object _get_1 = ((Object[])Conversions.unwrapArray(elementsAssociatedWithBarField, Object.class))[1];
-      Assert.assertEquals(getBarJvmMethod, _get_1);
+      final Set<EObject> elementsAssociatedWithBarField = it.getJvmModelAssociations().getJvmElements(it.getJvmModelAssociations().getPrimarySourceElement(barJvmField));
+      Assert.assertEquals(2, elementsAssociatedWithBarField.size());
+      Assert.assertEquals(barJvmField, ((Object[])Conversions.unwrapArray(elementsAssociatedWithBarField, Object.class))[0]);
+      Assert.assertEquals(getBarJvmMethod, ((Object[])Conversions.unwrapArray(elementsAssociatedWithBarField, Object.class))[1]);
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -542,16 +493,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Client");
+      final MutableClassDeclaration cls = it.getTypeLookup().findClass("myusercode.Client");
       final MutableMethodDeclaration fooMethod = cls.findDeclaredMethod("foo");
-      TracabilityImpl _tracability = it.getTracability();
-      Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = cls.getTypeParameters();
-      MutableTypeParameterDeclaration _head = IterableExtensions.head(_typeParameters);
-      final Element typeParameter = _tracability.getPrimarySourceElement(_head);
-      TracabilityImpl _tracability_1 = it.getTracability();
-      Element _primarySourceElement = _tracability_1.getPrimarySourceElement(fooMethod);
-      Assert.assertEquals(typeParameter, _primarySourceElement);
+      final Element typeParameter = it.getTracability().getPrimarySourceElement(IterableExtensions.head(cls.getTypeParameters()));
+      Assert.assertEquals(typeParameter, it.getTracability().getPrimarySourceElement(fooMethod));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -612,16 +557,11 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Client");
+      final MutableClassDeclaration cls = it.getTypeLookup().findClass("myusercode.Client");
       final MutableMethodDeclaration fooMethod = cls.findDeclaredMethod("foo");
-      TracabilityImpl _tracability = it.getTracability();
-      TypeReference _extendedClass = cls.getExtendedClass();
-      final Element extendsClause = _tracability.getPrimarySourceElement(_extendedClass);
+      final Element extendsClause = it.getTracability().getPrimarySourceElement(cls.getExtendedClass());
       Assert.assertTrue((extendsClause instanceof TypeReference));
-      TracabilityImpl _tracability_1 = it.getTracability();
-      Element _primarySourceElement = _tracability_1.getPrimarySourceElement(((Element) fooMethod));
-      Assert.assertEquals(extendsClause, _primarySourceElement);
+      Assert.assertEquals(extendsClause, it.getTracability().getPrimarySourceElement(((Element) fooMethod)));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -682,17 +622,11 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Client");
+      final MutableClassDeclaration cls = it.getTypeLookup().findClass("myusercode.Client");
       final MutableMethodDeclaration fooMethod = cls.findDeclaredMethod("foo");
-      TracabilityImpl _tracability = it.getTracability();
-      Iterable<? extends AnnotationReference> _annotations = cls.getAnnotations();
-      AnnotationReference _head = IterableExtensions.head(_annotations);
-      final Element anno = _tracability.getPrimarySourceElement(_head);
+      final Element anno = it.getTracability().getPrimarySourceElement(IterableExtensions.head(cls.getAnnotations()));
       Assert.assertTrue((anno instanceof AnnotationReference));
-      TracabilityImpl _tracability_1 = it.getTracability();
-      Element _primarySourceElement = _tracability_1.getPrimarySourceElement(((Element) fooMethod));
-      Assert.assertEquals(anno, _primarySourceElement);
+      Assert.assertEquals(anno, it.getTracability().getPrimarySourceElement(((Element) fooMethod)));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -773,24 +707,13 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Foo");
-      ProblemSupportImpl _problemSupport = it.getProblemSupport();
-      final List<? extends Problem> problems = _problemSupport.getProblems(cls);
-      int _size = problems.size();
-      Assert.assertEquals(4, _size);
-      Problem _get = problems.get(0);
-      String _message = _get.getMessage();
-      Assert.assertEquals("Foo", _message);
-      Problem _get_1 = problems.get(1);
-      String _message_1 = _get_1.getMessage();
-      Assert.assertEquals("Bar", _message_1);
-      Problem _get_2 = problems.get(2);
-      String _message_2 = _get_2.getMessage();
-      Assert.assertEquals("Baz", _message_2);
-      Problem _get_3 = problems.get(3);
-      String _message_3 = _get_3.getMessage();
-      Assert.assertEquals("There were 3 problems", _message_3);
+      final MutableClassDeclaration cls = it.getTypeLookup().findClass("myusercode.Foo");
+      final List<? extends Problem> problems = it.getProblemSupport().getProblems(cls);
+      Assert.assertEquals(4, problems.size());
+      Assert.assertEquals("Foo", problems.get(0).getMessage());
+      Assert.assertEquals("Bar", problems.get(1).getMessage());
+      Assert.assertEquals("Baz", problems.get(2).getMessage());
+      Assert.assertEquals("There were 3 problems", problems.get(3).getMessage());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -857,17 +780,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Foo");
-      ProblemSupportImpl _problemSupport = it.getProblemSupport();
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = cls.getDeclaredFields();
-      MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
-      final List<? extends Problem> problems = _problemSupport.getProblems(_head);
-      int _size = problems.size();
-      Assert.assertEquals(1, _size);
-      Problem _get = problems.get(0);
-      String _message = _get.getMessage();
-      Assert.assertEquals("The type was inferred and boolean", _message);
+      final MutableClassDeclaration cls = it.getTypeLookup().findClass("myusercode.Foo");
+      final List<? extends Problem> problems = it.getProblemSupport().getProblems(IterableExtensions.head(cls.getDeclaredFields()));
+      Assert.assertEquals(1, problems.size());
+      Assert.assertEquals("The type was inferred and boolean", problems.get(0).getMessage());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -956,14 +872,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      XtendFile _xtendFile = it.getXtendFile();
-      Resource _eResource = _xtendFile.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       final Function1<Resource.Diagnostic, Boolean> _function_1 = (Resource.Diagnostic it_1) -> {
-        String _message = it_1.getMessage();
-        return Boolean.valueOf(_message.contains("cannot be modified"));
+        return Boolean.valueOf(it_1.getMessage().contains("cannot be modified"));
       };
-      IterableExtensions.<Resource.Diagnostic>exists(_errors, _function_1);
+      IterableExtensions.<Resource.Diagnostic>exists(it.getXtendFile().eResource().getErrors(), _function_1);
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -1114,47 +1026,21 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration foo = _typeLookup.findClass("myusercode.Foo");
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      final Type annotationType = _typeLookup_1.findTypeGlobally("myannotation.Values");
+      final MutableClassDeclaration foo = it.getTypeLookup().findClass("myusercode.Foo");
+      final Type annotationType = it.getTypeLookup().findTypeGlobally("myannotation.Values");
       final AnnotationReference values = foo.findAnnotation(annotationType);
-      int[] _intArrayValue = values.getIntArrayValue("intValue");
-      int _size = ((List<Integer>)Conversions.doWrapArray(_intArrayValue)).size();
-      Assert.assertEquals(0, _size);
-      long[] _longArrayValue = values.getLongArrayValue("longValue");
-      int _size_1 = ((List<Long>)Conversions.doWrapArray(_longArrayValue)).size();
-      Assert.assertEquals(0, _size_1);
-      short[] _shortArrayValue = values.getShortArrayValue("shortValue");
-      int _size_2 = ((List<Short>)Conversions.doWrapArray(_shortArrayValue)).size();
-      Assert.assertEquals(0, _size_2);
-      double[] _doubleArrayValue = values.getDoubleArrayValue("doubleValue");
-      int _size_3 = ((List<Double>)Conversions.doWrapArray(_doubleArrayValue)).size();
-      Assert.assertEquals(0, _size_3);
-      float[] _floatArrayValue = values.getFloatArrayValue("floatValue");
-      int _size_4 = ((List<Float>)Conversions.doWrapArray(_floatArrayValue)).size();
-      Assert.assertEquals(0, _size_4);
-      byte[] _byteArrayValue = values.getByteArrayValue("byteValue");
-      int _size_5 = ((List<Byte>)Conversions.doWrapArray(_byteArrayValue)).size();
-      Assert.assertEquals(0, _size_5);
-      boolean[] _booleanArrayValue = values.getBooleanArrayValue("booleanValue");
-      int _size_6 = ((List<Boolean>)Conversions.doWrapArray(_booleanArrayValue)).size();
-      Assert.assertEquals(0, _size_6);
-      char[] _charArrayValue = values.getCharArrayValue("charValue");
-      int _size_7 = ((List<Character>)Conversions.doWrapArray(_charArrayValue)).size();
-      Assert.assertEquals(0, _size_7);
-      String[] _stringArrayValue = values.getStringArrayValue("stringValue");
-      int _size_8 = ((List<String>)Conversions.doWrapArray(_stringArrayValue)).size();
-      Assert.assertEquals(0, _size_8);
-      TypeReference[] _classArrayValue = values.getClassArrayValue("classValue");
-      int _size_9 = ((List<TypeReference>)Conversions.doWrapArray(_classArrayValue)).size();
-      Assert.assertEquals(0, _size_9);
-      EnumerationValueDeclaration[] _enumArrayValue = values.getEnumArrayValue("enumValue");
-      int _size_10 = ((List<EnumerationValueDeclaration>)Conversions.doWrapArray(_enumArrayValue)).size();
-      Assert.assertEquals(0, _size_10);
-      AnnotationReference[] _annotationArrayValue = values.getAnnotationArrayValue("annotationValue");
-      int _size_11 = ((List<AnnotationReference>)Conversions.doWrapArray(_annotationArrayValue)).size();
-      Assert.assertEquals(0, _size_11);
+      Assert.assertEquals(0, ((List<Integer>)Conversions.doWrapArray(values.getIntArrayValue("intValue"))).size());
+      Assert.assertEquals(0, ((List<Long>)Conversions.doWrapArray(values.getLongArrayValue("longValue"))).size());
+      Assert.assertEquals(0, ((List<Short>)Conversions.doWrapArray(values.getShortArrayValue("shortValue"))).size());
+      Assert.assertEquals(0, ((List<Double>)Conversions.doWrapArray(values.getDoubleArrayValue("doubleValue"))).size());
+      Assert.assertEquals(0, ((List<Float>)Conversions.doWrapArray(values.getFloatArrayValue("floatValue"))).size());
+      Assert.assertEquals(0, ((List<Byte>)Conversions.doWrapArray(values.getByteArrayValue("byteValue"))).size());
+      Assert.assertEquals(0, ((List<Boolean>)Conversions.doWrapArray(values.getBooleanArrayValue("booleanValue"))).size());
+      Assert.assertEquals(0, ((List<Character>)Conversions.doWrapArray(values.getCharArrayValue("charValue"))).size());
+      Assert.assertEquals(0, ((List<String>)Conversions.doWrapArray(values.getStringArrayValue("stringValue"))).size());
+      Assert.assertEquals(0, ((List<TypeReference>)Conversions.doWrapArray(values.getClassArrayValue("classValue"))).size());
+      Assert.assertEquals(0, ((List<EnumerationValueDeclaration>)Conversions.doWrapArray(values.getEnumArrayValue("enumValue"))).size());
+      Assert.assertEquals(0, ((List<AnnotationReference>)Conversions.doWrapArray(values.getAnnotationArrayValue("annotationValue"))).size());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -1268,20 +1154,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration foo = _typeLookup.findClass("myusercode.Foo");
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      final MutableClassDeclaration bar = _typeLookup_1.findClass("myusercode.Bar");
-      MutableFieldDeclaration _findDeclaredField = foo.findDeclaredField("y");
-      TypeReference _type = _findDeclaredField.getType();
-      MutableMethodDeclaration _findDeclaredMethod = foo.findDeclaredMethod("y");
-      TypeReference _returnType = _findDeclaredMethod.getReturnType();
-      this.assertSameType(_type, _returnType);
-      MutableFieldDeclaration _findDeclaredField_1 = bar.findDeclaredField("x");
-      TypeReference _type_1 = _findDeclaredField_1.getType();
-      MutableMethodDeclaration _findDeclaredMethod_1 = foo.findDeclaredMethod("x");
-      TypeReference _returnType_1 = _findDeclaredMethod_1.getReturnType();
-      this.assertSameType(_type_1, _returnType_1);
+      final MutableClassDeclaration foo = it.getTypeLookup().findClass("myusercode.Foo");
+      final MutableClassDeclaration bar = it.getTypeLookup().findClass("myusercode.Bar");
+      this.assertSameType(foo.findDeclaredField("y").getType(), foo.findDeclaredMethod("y").getReturnType());
+      this.assertSameType(bar.findDeclaredField("x").getType(), foo.findDeclaredMethod("x").getReturnType());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -1599,55 +1475,32 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      Type _findTypeGlobally = _typeLookup_1.findTypeGlobally("myannotation.BlackOrWhite");
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      Type _findTypeGlobally = it.getTypeLookup().findTypeGlobally("myannotation.BlackOrWhite");
       final EnumerationTypeDeclaration colorEnum = ((EnumerationTypeDeclaration) _findTypeGlobally);
-      TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
-      final Type annotationType = _typeLookup_2.findTypeGlobally("myannotation.ConfigurableAnnotation");
+      final Type annotationType = it.getTypeLookup().findTypeGlobally("myannotation.ConfigurableAnnotation");
       final AnnotationReference annotation = clazz.findAnnotation(annotationType);
-      EnumerationValueDeclaration _findDeclaredValue = colorEnum.findDeclaredValue("BLACK");
-      Object _value = annotation.getValue("color");
-      Assert.assertEquals(_findDeclaredValue, _value);
-      Object _value_1 = annotation.getValue("colors");
-      final Object[] colors = ((Object[]) _value_1);
-      int _length = colors.length;
-      Assert.assertEquals(2, _length);
-      EnumerationValueDeclaration _findDeclaredValue_1 = colorEnum.findDeclaredValue("BLACK");
-      Object _get = colors[0];
-      Assert.assertEquals(_findDeclaredValue_1, _get);
-      EnumerationValueDeclaration _findDeclaredValue_2 = colorEnum.findDeclaredValue("WHITE");
-      Object _get_1 = colors[1];
-      Assert.assertEquals(_findDeclaredValue_2, _get_1);
-      TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
-      TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference(clazz);
-      Object _value_2 = annotation.getValue("type");
-      Assert.assertEquals(_newTypeReference, _value_2);
+      Assert.assertEquals(colorEnum.findDeclaredValue("BLACK"), annotation.getValue("color"));
+      Object _value = annotation.getValue("colors");
+      final Object[] colors = ((Object[]) _value);
+      Assert.assertEquals(2, colors.length);
+      Assert.assertEquals(colorEnum.findDeclaredValue("BLACK"), colors[0]);
+      Assert.assertEquals(colorEnum.findDeclaredValue("WHITE"), colors[1]);
+      Assert.assertEquals(it.getTypeReferenceProvider().newTypeReference(clazz), annotation.getValue("type"));
       final TypeReference[] types = annotation.getClassArrayValue("types");
-      int _length_1 = types.length;
-      Assert.assertEquals(1, _length_1);
-      TypeReferenceProvider _typeReferenceProvider_1 = it.getTypeReferenceProvider();
-      TypeReference _primitiveBoolean = _typeReferenceProvider_1.getPrimitiveBoolean();
-      Object _get_2 = types[0];
-      Assert.assertEquals(_primitiveBoolean, _get_2);
-      TypeLookupImpl _typeLookup_3 = it.getTypeLookup();
-      final Type someAnnotationType = _typeLookup_3.findTypeGlobally("myannotation.SomeAnnotation");
+      Assert.assertEquals(1, types.length);
+      Assert.assertEquals(it.getTypeReferenceProvider().getPrimitiveBoolean(), types[0]);
+      final Type someAnnotationType = it.getTypeLookup().findTypeGlobally("myannotation.SomeAnnotation");
       final AnnotationReference annotationValue = annotation.getAnnotationValue("annotation");
       Assert.assertNotNull(annotationValue);
-      AnnotationTypeDeclaration _annotationTypeDeclaration = annotationValue.getAnnotationTypeDeclaration();
-      Assert.assertEquals(someAnnotationType, _annotationTypeDeclaration);
-      boolean _booleanValue = annotationValue.getBooleanValue("value");
-      Assert.assertFalse(_booleanValue);
+      Assert.assertEquals(someAnnotationType, annotationValue.getAnnotationTypeDeclaration());
+      Assert.assertFalse(annotationValue.getBooleanValue("value"));
       final AnnotationReference[] annotationsValue = annotation.getAnnotationArrayValue("annotations");
       Assert.assertNotNull(annotationsValue);
-      int _size = ((List<AnnotationReference>)Conversions.doWrapArray(annotationsValue)).size();
-      Assert.assertEquals(2, _size);
+      Assert.assertEquals(2, ((List<AnnotationReference>)Conversions.doWrapArray(annotationsValue)).size());
       final Consumer<AnnotationReference> _function_1 = (AnnotationReference it_1) -> {
-        AnnotationTypeDeclaration _annotationTypeDeclaration_1 = annotationValue.getAnnotationTypeDeclaration();
-        Assert.assertEquals(someAnnotationType, _annotationTypeDeclaration_1);
-        boolean _booleanValue_1 = annotationValue.getBooleanValue("value");
-        Assert.assertFalse(_booleanValue_1);
+        Assert.assertEquals(someAnnotationType, annotationValue.getAnnotationTypeDeclaration());
+        Assert.assertFalse(annotationValue.getBooleanValue("value"));
       };
       ((List<AnnotationReference>)Conversions.doWrapArray(annotationsValue)).forEach(_function_1);
     };
@@ -1731,10 +1584,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      String _docComment = clazz.getDocComment();
-      Assert.assertEquals("42", _docComment);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      Assert.assertEquals("42", clazz.getDocComment());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -1901,50 +1752,32 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.UserCode");
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
-      MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
-      Iterable<? extends AnnotationReference> _annotations = _head.getAnnotations();
-      final AnnotationReference annoRef = IterableExtensions.head(_annotations);
-      Object _value = annoRef.getValue("intValue");
-      Assert.assertEquals(Integer.valueOf((((2 / 2) + (2 * 3)) - (4 % 1))), _value);
-      Object _value_1 = annoRef.getValue("longValue");
-      Assert.assertEquals(Long.valueOf(((long) (((42 + 4) + (6 * 42)) - (4 / 45)))), _value_1);
-      Object _value_2 = annoRef.getValue("stringValue");
-      Assert.assertEquals("foobaz", _value_2);
-      Object _value_3 = annoRef.getValue("booleanArrayValue");
-      final boolean[] bools = ((boolean[]) _value_3);
-      boolean _get = bools[0];
-      Assert.assertTrue(_get);
-      boolean _get_1 = bools[1];
-      Assert.assertFalse(_get_1);
-      Object _value_4 = annoRef.getValue("intArrayValue");
-      Assert.assertArrayEquals(new int[] { (-1), (34 + 45), (2 - 6) }, ((int[]) _value_4));
-      Object _value_5 = annoRef.getValue("typeArrayValue");
-      final TypeReference[] type = ((TypeReference[]) _value_5);
-      TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
-      TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference(Integer.class);
-      Object _get_2 = type[1];
-      Assert.assertEquals(_newTypeReference, _get_2);
-      Object _value_6 = annoRef.getValue("annotation2Value");
-      final AnnotationReference anno = ((AnnotationReference) _value_6);
-      Object _value_7 = anno.getValue("value");
-      Assert.assertEquals("foowuppa", _value_7);
-      Object _value_8 = annoRef.getValue("annotation2ArrayValue");
-      final AnnotationReference[] annoArray = ((AnnotationReference[]) _value_8);
-      AnnotationReference _get_3 = annoArray[0];
-      Object _value_9 = _get_3.getValue("value");
-      Assert.assertEquals("HUBBA BUBBA!", _value_9);
-      Object _value_10 = annoRef.getValue("enumValue");
-      final EnumerationValueDeclaration enum1 = ((EnumerationValueDeclaration) _value_10);
-      String _simpleName = enum1.getSimpleName();
-      Assert.assertEquals("YELLOW", _simpleName);
-      Object _value_11 = annoRef.getValue("enumArrayValue");
-      final EnumerationValueDeclaration[] enumArray = ((EnumerationValueDeclaration[]) _value_11);
-      EnumerationValueDeclaration _head_1 = IterableExtensions.<EnumerationValueDeclaration>head(((Iterable<EnumerationValueDeclaration>)Conversions.doWrapArray(enumArray)));
-      String _simpleName_1 = _head_1.getSimpleName();
-      Assert.assertEquals("YELLOW", _simpleName_1);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.UserCode");
+      final AnnotationReference annoRef = IterableExtensions.head(IterableExtensions.head(clazz.getDeclaredFields()).getAnnotations());
+      Assert.assertEquals(Integer.valueOf((((2 / 2) + (2 * 3)) - (4 % 1))), annoRef.getValue("intValue"));
+      Assert.assertEquals(Long.valueOf(((long) (((42 + 4) + (6 * 42)) - (4 / 45)))), annoRef.getValue("longValue"));
+      Assert.assertEquals("foobaz", annoRef.getValue("stringValue"));
+      Object _value = annoRef.getValue("booleanArrayValue");
+      final boolean[] bools = ((boolean[]) _value);
+      Assert.assertTrue(bools[0]);
+      Assert.assertFalse(bools[1]);
+      Object _value_1 = annoRef.getValue("intArrayValue");
+      Assert.assertArrayEquals(new int[] { (-1), (34 + 45), (2 - 6) }, ((int[]) _value_1));
+      Object _value_2 = annoRef.getValue("typeArrayValue");
+      final TypeReference[] type = ((TypeReference[]) _value_2);
+      Assert.assertEquals(it.getTypeReferenceProvider().newTypeReference(Integer.class), type[1]);
+      Object _value_3 = annoRef.getValue("annotation2Value");
+      final AnnotationReference anno = ((AnnotationReference) _value_3);
+      Assert.assertEquals("foowuppa", anno.getValue("value"));
+      Object _value_4 = annoRef.getValue("annotation2ArrayValue");
+      final AnnotationReference[] annoArray = ((AnnotationReference[]) _value_4);
+      Assert.assertEquals("HUBBA BUBBA!", annoArray[0].getValue("value"));
+      Object _value_5 = annoRef.getValue("enumValue");
+      final EnumerationValueDeclaration enum1 = ((EnumerationValueDeclaration) _value_5);
+      Assert.assertEquals("YELLOW", enum1.getSimpleName());
+      Object _value_6 = annoRef.getValue("enumArrayValue");
+      final EnumerationValueDeclaration[] enumArray = ((EnumerationValueDeclaration[]) _value_6);
+      Assert.assertEquals("YELLOW", IterableExtensions.<EnumerationValueDeclaration>head(((Iterable<EnumerationValueDeclaration>)Conversions.doWrapArray(enumArray))).getSimpleName());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -2552,52 +2385,34 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.UserCode");
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
-      MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
-      Iterable<? extends AnnotationReference> _annotations = _head.getAnnotations();
-      final AnnotationReference annoRef = IterableExtensions.head(_annotations);
-      Object _value = annoRef.getValue("intValue");
-      Assert.assertEquals(Integer.valueOf((((2 / 2) + (2 * 3)) - (4 % 1))), _value);
-      Object _value_1 = annoRef.getValue("longValue");
-      Assert.assertEquals(Long.valueOf(((long) (((42 + 4) + (6 * 42)) - (4 / 45)))), _value_1);
-      Object _value_2 = annoRef.getValue("stringValue");
-      Assert.assertEquals("foobaz", _value_2);
-      Object _value_3 = annoRef.getValue("booleanValue");
-      Assert.assertTrue((((Boolean) _value_3)).booleanValue());
-      Object _value_4 = annoRef.getValue("booleanArrayValue");
-      final boolean[] bools = ((boolean[]) _value_4);
-      boolean _get = bools[0];
-      Assert.assertTrue(_get);
-      boolean _get_1 = bools[1];
-      Assert.assertFalse(_get_1);
-      Object _value_5 = annoRef.getValue("intArrayValue");
-      Assert.assertArrayEquals(new int[] { (-1), (34 + 45), (2 - 6) }, ((int[]) _value_5));
-      Object _value_6 = annoRef.getValue("typeArrayValue");
-      final TypeReference[] type = ((TypeReference[]) _value_6);
-      TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
-      TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference(Integer.class);
-      Object _get_2 = type[1];
-      Assert.assertEquals(_newTypeReference, _get_2);
-      Object _value_7 = annoRef.getValue("annotation2Value");
-      final AnnotationReference anno = ((AnnotationReference) _value_7);
-      Object _value_8 = anno.getValue("value");
-      Assert.assertEquals("foowuppa", _value_8);
-      Object _value_9 = annoRef.getValue("annotation2ArrayValue");
-      final AnnotationReference[] annoArray = ((AnnotationReference[]) _value_9);
-      AnnotationReference _get_3 = annoArray[0];
-      Object _value_10 = _get_3.getValue("value");
-      Assert.assertEquals("HUBBA BUBBA!", _value_10);
-      Object _value_11 = annoRef.getValue("enumValue");
-      final EnumerationValueDeclaration enum1 = ((EnumerationValueDeclaration) _value_11);
-      String _simpleName = enum1.getSimpleName();
-      Assert.assertEquals("YELLOW", _simpleName);
-      Object _value_12 = annoRef.getValue("enumArrayValue");
-      final EnumerationValueDeclaration[] enumArray = ((EnumerationValueDeclaration[]) _value_12);
-      EnumerationValueDeclaration _head_1 = IterableExtensions.<EnumerationValueDeclaration>head(((Iterable<EnumerationValueDeclaration>)Conversions.doWrapArray(enumArray)));
-      String _simpleName_1 = _head_1.getSimpleName();
-      Assert.assertEquals("YELLOW", _simpleName_1);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.UserCode");
+      final AnnotationReference annoRef = IterableExtensions.head(IterableExtensions.head(clazz.getDeclaredFields()).getAnnotations());
+      Assert.assertEquals(Integer.valueOf((((2 / 2) + (2 * 3)) - (4 % 1))), annoRef.getValue("intValue"));
+      Assert.assertEquals(Long.valueOf(((long) (((42 + 4) + (6 * 42)) - (4 / 45)))), annoRef.getValue("longValue"));
+      Assert.assertEquals("foobaz", annoRef.getValue("stringValue"));
+      Object _value = annoRef.getValue("booleanValue");
+      Assert.assertTrue((((Boolean) _value)).booleanValue());
+      Object _value_1 = annoRef.getValue("booleanArrayValue");
+      final boolean[] bools = ((boolean[]) _value_1);
+      Assert.assertTrue(bools[0]);
+      Assert.assertFalse(bools[1]);
+      Object _value_2 = annoRef.getValue("intArrayValue");
+      Assert.assertArrayEquals(new int[] { (-1), (34 + 45), (2 - 6) }, ((int[]) _value_2));
+      Object _value_3 = annoRef.getValue("typeArrayValue");
+      final TypeReference[] type = ((TypeReference[]) _value_3);
+      Assert.assertEquals(it.getTypeReferenceProvider().newTypeReference(Integer.class), type[1]);
+      Object _value_4 = annoRef.getValue("annotation2Value");
+      final AnnotationReference anno = ((AnnotationReference) _value_4);
+      Assert.assertEquals("foowuppa", anno.getValue("value"));
+      Object _value_5 = annoRef.getValue("annotation2ArrayValue");
+      final AnnotationReference[] annoArray = ((AnnotationReference[]) _value_5);
+      Assert.assertEquals("HUBBA BUBBA!", annoArray[0].getValue("value"));
+      Object _value_6 = annoRef.getValue("enumValue");
+      final EnumerationValueDeclaration enum1 = ((EnumerationValueDeclaration) _value_6);
+      Assert.assertEquals("YELLOW", enum1.getSimpleName());
+      Object _value_7 = annoRef.getValue("enumArrayValue");
+      final EnumerationValueDeclaration[] enumArray = ((EnumerationValueDeclaration[]) _value_7);
+      Assert.assertEquals("YELLOW", IterableExtensions.<EnumerationValueDeclaration>head(((Iterable<EnumerationValueDeclaration>)Conversions.doWrapArray(enumArray))).getSimpleName());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -2791,30 +2606,18 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableEnumerationTypeDeclaration enumerationType = _typeLookup.findEnumerationType("myusercode.UserCode");
+      final MutableEnumerationTypeDeclaration enumerationType = it.getTypeLookup().findEnumerationType("myusercode.UserCode");
+      Assert.assertEquals(4, IterableExtensions.size(enumerationType.getDeclaredValues()));
+      final Type deprecatedAnnotationType = it.getTypeReferenceProvider().newTypeReference(Deprecated.class).getType();
       Iterable<? extends MutableEnumerationValueDeclaration> _declaredValues = enumerationType.getDeclaredValues();
-      int _size = IterableExtensions.size(_declaredValues);
-      Assert.assertEquals(4, _size);
-      TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
-      TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference(Deprecated.class);
-      final Type deprecatedAnnotationType = _newTypeReference.getType();
-      Iterable<? extends MutableEnumerationValueDeclaration> _declaredValues_1 = enumerationType.getDeclaredValues();
-      for (final MutableEnumerationValueDeclaration value : _declaredValues_1) {
+      for (final MutableEnumerationValueDeclaration value : _declaredValues) {
         {
-          Iterable<? extends AnnotationReference> _annotations = value.getAnnotations();
-          int _size_1 = IterableExtensions.size(_annotations);
-          Assert.assertEquals(1, _size_1);
-          AnnotationReference _findAnnotation = value.findAnnotation(deprecatedAnnotationType);
-          Assert.assertNotNull(_findAnnotation);
+          Assert.assertEquals(1, IterableExtensions.size(value.getAnnotations()));
+          Assert.assertNotNull(value.findAnnotation(deprecatedAnnotationType));
         }
       }
-      Iterable<? extends MutableEnumerationValueDeclaration> _declaredValues_2 = enumerationType.getDeclaredValues();
-      MutableEnumerationValueDeclaration _last = IterableExtensions.last(_declaredValues_2);
-      String _simpleName = _last.getSimpleName();
-      Assert.assertEquals("D", _simpleName);
-      MutableEnumerationValueDeclaration _findDeclaredValue = enumerationType.findDeclaredValue("D");
-      Assert.assertNotNull(_findDeclaredValue);
+      Assert.assertEquals("D", IterableExtensions.last(enumerationType.getDeclaredValues()).getSimpleName());
+      Assert.assertNotNull(enumerationType.findDeclaredValue("D"));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -2950,34 +2753,19 @@ public abstract class AbstractReusableActiveAnnotationTests {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
       final Procedure1<MutableTypeParameterDeclarator> _function_1 = (MutableTypeParameterDeclarator it_1) -> {
-        Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = it_1.getTypeParameters();
-        int _size = IterableExtensions.size(_typeParameters);
-        Assert.assertEquals(1, _size);
-        Iterable<? extends MutableTypeParameterDeclaration> _typeParameters_1 = it_1.getTypeParameters();
-        final MutableTypeParameterDeclaration typeParameter = IterableExtensions.head(_typeParameters_1);
-        String _simpleName = typeParameter.getSimpleName();
-        Assert.assertEquals("T", _simpleName);
-        Iterable<? extends TypeReference> _upperBounds = typeParameter.getUpperBounds();
-        int _size_1 = IterableExtensions.size(_upperBounds);
-        Assert.assertEquals(1, _size_1);
-        Iterable<? extends TypeReference> _upperBounds_1 = typeParameter.getUpperBounds();
-        TypeReference _head = IterableExtensions.head(_upperBounds_1);
-        String _name = _head.getName();
-        Assert.assertEquals("java.lang.String", _name);
+        Assert.assertEquals(1, IterableExtensions.size(it_1.getTypeParameters()));
+        final MutableTypeParameterDeclaration typeParameter = IterableExtensions.head(it_1.getTypeParameters());
+        Assert.assertEquals("T", typeParameter.getSimpleName());
+        Assert.assertEquals(1, IterableExtensions.size(typeParameter.getUpperBounds()));
+        Assert.assertEquals("java.lang.String", IterableExtensions.head(typeParameter.getUpperBounds()).getName());
       };
       final Procedure1<? super MutableTypeParameterDeclarator> assertMyAnnotationChanges = _function_1;
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
       assertMyAnnotationChanges.apply(clazz);
-      Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = clazz.getDeclaredConstructors();
-      MutableConstructorDeclaration _head = IterableExtensions.head(_declaredConstructors);
-      assertMyAnnotationChanges.apply(_head);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      final MutableInterfaceDeclaration myInterface = _typeLookup_1.findInterface("myusercode.MyInterface");
+      assertMyAnnotationChanges.apply(IterableExtensions.head(clazz.getDeclaredConstructors()));
+      final MutableInterfaceDeclaration myInterface = it.getTypeLookup().findInterface("myusercode.MyInterface");
       assertMyAnnotationChanges.apply(myInterface);
-      Iterable<? extends MutableMethodDeclaration> _declaredMethods = myInterface.getDeclaredMethods();
-      MutableMethodDeclaration _head_1 = IterableExtensions.head(_declaredMethods);
-      assertMyAnnotationChanges.apply(_head_1);
+      assertMyAnnotationChanges.apply(IterableExtensions.head(myInterface.getDeclaredMethods()));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -3072,20 +2860,13 @@ public abstract class AbstractReusableActiveAnnotationTests {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
       final Procedure1<MutableTypeParameterDeclarator> _function_1 = (MutableTypeParameterDeclarator it_1) -> {
-        Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = it_1.getTypeParameters();
-        int _size = IterableExtensions.size(_typeParameters);
-        Assert.assertEquals(0, _size);
+        Assert.assertEquals(0, IterableExtensions.size(it_1.getTypeParameters()));
       };
       final Procedure1<? super MutableTypeParameterDeclarator> assertMyAnnotationChanges = _function_1;
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      MutableClassDeclaration _findClass = _typeLookup.findClass("myusercode.MyClass");
-      assertMyAnnotationChanges.apply(_findClass);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      final MutableInterfaceDeclaration myInterface = _typeLookup_1.findInterface("myusercode.MyInterface");
+      assertMyAnnotationChanges.apply(it.getTypeLookup().findClass("myusercode.MyClass"));
+      final MutableInterfaceDeclaration myInterface = it.getTypeLookup().findInterface("myusercode.MyInterface");
       assertMyAnnotationChanges.apply(myInterface);
-      Iterable<? extends MutableMethodDeclaration> _declaredMethods = myInterface.getDeclaredMethods();
-      MutableMethodDeclaration _head = IterableExtensions.head(_declaredMethods);
-      assertMyAnnotationChanges.apply(_head);
+      assertMyAnnotationChanges.apply(IterableExtensions.head(myInterface.getDeclaredMethods()));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -3180,29 +2961,16 @@ public abstract class AbstractReusableActiveAnnotationTests {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
       final Procedure1<MutableTypeParameterDeclarator> _function_1 = (MutableTypeParameterDeclarator it_1) -> {
-        Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = it_1.getTypeParameters();
-        int _size = IterableExtensions.size(_typeParameters);
-        Assert.assertEquals(1, _size);
-        Iterable<? extends MutableTypeParameterDeclaration> _typeParameters_1 = it_1.getTypeParameters();
-        final MutableTypeParameterDeclaration typeParameter = IterableExtensions.head(_typeParameters_1);
-        Iterable<? extends TypeReference> _upperBounds = typeParameter.getUpperBounds();
-        int _size_1 = IterableExtensions.size(_upperBounds);
-        Assert.assertEquals(1, _size_1);
-        Iterable<? extends TypeReference> _upperBounds_1 = typeParameter.getUpperBounds();
-        TypeReference _head = IterableExtensions.head(_upperBounds_1);
-        String _name = _head.getName();
-        Assert.assertEquals("java.lang.String", _name);
+        Assert.assertEquals(1, IterableExtensions.size(it_1.getTypeParameters()));
+        final MutableTypeParameterDeclaration typeParameter = IterableExtensions.head(it_1.getTypeParameters());
+        Assert.assertEquals(1, IterableExtensions.size(typeParameter.getUpperBounds()));
+        Assert.assertEquals("java.lang.String", IterableExtensions.head(typeParameter.getUpperBounds()).getName());
       };
       final Procedure1<? super MutableTypeParameterDeclarator> assertMyAnnotationChanges = _function_1;
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      MutableClassDeclaration _findClass = _typeLookup.findClass("myusercode.MyClass");
-      assertMyAnnotationChanges.apply(_findClass);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      final MutableInterfaceDeclaration myInterface = _typeLookup_1.findInterface("myusercode.MyInterface");
+      assertMyAnnotationChanges.apply(it.getTypeLookup().findClass("myusercode.MyClass"));
+      final MutableInterfaceDeclaration myInterface = it.getTypeLookup().findInterface("myusercode.MyInterface");
       assertMyAnnotationChanges.apply(myInterface);
-      Iterable<? extends MutableMethodDeclaration> _declaredMethods = myInterface.getDeclaredMethods();
-      MutableMethodDeclaration _head = IterableExtensions.head(_declaredMethods);
-      assertMyAnnotationChanges.apply(_head);
+      assertMyAnnotationChanges.apply(IterableExtensions.head(myInterface.getDeclaredMethods()));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -3263,11 +3031,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends AnnotationReference> _annotations = clazz.getAnnotations();
-      int _size = IterableExtensions.size(_annotations);
-      Assert.assertEquals(1, _size);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      Assert.assertEquals(1, IterableExtensions.size(clazz.getAnnotations()));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -3329,10 +3094,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      String _docComment = clazz.getDocComment();
-      Assert.assertEquals("make me lower case!", _docComment);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      Assert.assertEquals("make me lower case!", clazz.getDocComment());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -3948,17 +3711,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = clazz.getDeclaredConstructors();
-      int _size = IterableExtensions.size(_declaredConstructors);
-      Assert.assertEquals(1, _size);
-      Iterable<? extends MutableConstructorDeclaration> _declaredConstructors_1 = clazz.getDeclaredConstructors();
-      MutableConstructorDeclaration _head = IterableExtensions.head(_declaredConstructors_1);
-      Iterable<? extends MutableParameterDeclaration> _parameters = _head.getParameters();
-      MutableParameterDeclaration _head_1 = IterableExtensions.head(_parameters);
-      String _simpleName = _head_1.getSimpleName();
-      Assert.assertEquals("foo", _simpleName);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      Assert.assertEquals(1, IterableExtensions.size(clazz.getDeclaredConstructors()));
+      Assert.assertEquals("foo", IterableExtensions.head(IterableExtensions.head(clazz.getDeclaredConstructors()).getParameters()).getSimpleName());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -4018,16 +3773,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = clazz.getDeclaredConstructors();
-      int _size = IterableExtensions.size(_declaredConstructors);
-      Assert.assertEquals(1, _size);
-      Iterable<? extends MutableConstructorDeclaration> _declaredConstructors_1 = clazz.getDeclaredConstructors();
-      MutableConstructorDeclaration _head = IterableExtensions.head(_declaredConstructors_1);
-      Iterable<? extends MutableParameterDeclaration> _parameters = _head.getParameters();
-      boolean _isEmpty = IterableExtensions.isEmpty(_parameters);
-      Assert.assertTrue(_isEmpty);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      Assert.assertEquals(1, IterableExtensions.size(clazz.getDeclaredConstructors()));
+      Assert.assertTrue(IterableExtensions.isEmpty(IterableExtensions.head(clazz.getDeclaredConstructors()).getParameters()));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -4091,16 +3839,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
       it.getCompilationUnit();
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = clazz.getDeclaredConstructors();
-      int _size = IterableExtensions.size(_declaredConstructors);
-      Assert.assertEquals(1, _size);
-      Iterable<? extends MutableConstructorDeclaration> _declaredConstructors_1 = clazz.getDeclaredConstructors();
-      MutableConstructorDeclaration _head = IterableExtensions.head(_declaredConstructors_1);
-      Iterable<? extends MutableParameterDeclaration> _parameters = _head.getParameters();
-      boolean _isEmpty = IterableExtensions.isEmpty(_parameters);
-      Assert.assertTrue(_isEmpty);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      Assert.assertEquals(1, IterableExtensions.size(clazz.getDeclaredConstructors()));
+      Assert.assertTrue(IterableExtensions.isEmpty(IterableExtensions.head(clazz.getDeclaredConstructors()).getParameters()));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -4312,10 +4053,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      boolean _isAbstract = clazz.isAbstract();
-      Assert.assertTrue(_isAbstract);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      Assert.assertTrue(clazz.isAbstract());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -4381,17 +4120,11 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableMethodDeclaration> _declaredMethods = clazz.getDeclaredMethods();
-      MutableMethodDeclaration _head = IterableExtensions.head(_declaredMethods);
-      Iterable<? extends MutableParameterDeclaration> _parameters = _head.getParameters();
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
       final Function1<MutableParameterDeclaration, Boolean> _function_1 = (MutableParameterDeclaration it_1) -> {
-        String _simpleName = it_1.getSimpleName();
-        return Boolean.valueOf(_simpleName.endsWith("foo"));
+        return Boolean.valueOf(it_1.getSimpleName().endsWith("foo"));
       };
-      boolean _forall = IterableExtensions.forall(_parameters, _function_1);
-      Assert.assertTrue(_forall);
+      Assert.assertTrue(IterableExtensions.forall(IterableExtensions.head(clazz.getDeclaredMethods()).getParameters(), _function_1));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -4510,20 +4243,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("application/MyAnnotation.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("application.MyClient.FOO");
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
-      MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
-      String _simpleName = _head.getSimpleName();
-      Assert.assertEquals("FOO", _simpleName);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      final MutableClassDeclaration clazz2 = _typeLookup_1.findClass("application.MyClient");
-      Iterable<? extends MutableMethodDeclaration> _declaredMethods = clazz2.getDeclaredMethods();
-      MutableMethodDeclaration _head_1 = IterableExtensions.head(_declaredMethods);
-      Iterable<? extends MutableParameterDeclaration> _parameters = _head_1.getParameters();
-      MutableParameterDeclaration _head_2 = IterableExtensions.head(_parameters);
-      String _simpleName_1 = _head_2.getSimpleName();
-      Assert.assertEquals("FOO", _simpleName_1);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("application.MyClient.FOO");
+      Assert.assertEquals("FOO", IterableExtensions.head(clazz.getDeclaredFields()).getSimpleName());
+      final MutableClassDeclaration clazz2 = it.getTypeLookup().findClass("application.MyClient");
+      Assert.assertEquals("FOO", IterableExtensions.head(IterableExtensions.head(clazz2.getDeclaredMethods()).getParameters()).getSimpleName());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -4595,10 +4318,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      String _docComment = clazz.getDocComment();
-      Assert.assertEquals("Hello World", _docComment);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      Assert.assertEquals("Hello World", clazz.getDocComment());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -4673,12 +4394,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
-      final MutableFieldDeclaration field = IterableExtensions.head(_declaredFields);
-      String _simpleName = field.getSimpleName();
-      Assert.assertEquals("wasNull", _simpleName);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      final MutableFieldDeclaration field = IterableExtensions.head(clazz.getDeclaredFields());
+      Assert.assertEquals("wasNull", field.getSimpleName());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -4800,11 +4518,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
-      boolean _isEmpty = IterableExtensions.isEmpty(_declaredFields);
-      Assert.assertTrue(_isEmpty);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      Assert.assertTrue(IterableExtensions.isEmpty(clazz.getDeclaredFields()));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -4943,11 +4658,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
-      boolean _isEmpty = IterableExtensions.isEmpty(_declaredFields);
-      Assert.assertTrue(_isEmpty);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      Assert.assertTrue(IterableExtensions.isEmpty(clazz.getDeclaredFields()));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -5054,26 +4766,19 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
-      TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference("myannotation.MyAnnotation");
-      Type _type = _newTypeReference.getType();
-      final AnnotationReference annotation = clazz.findAnnotation(_type);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      final AnnotationReference annotation = clazz.findAnnotation(
+        it.getTypeReferenceProvider().newTypeReference("myannotation.MyAnnotation").getType());
       Object _value = annotation.getValue("value");
       Assert.assertArrayEquals(((String[]) ((String[])Conversions.unwrapArray(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("foo", "bar", "baz")), String.class))), ((String[]) _value));
-      Object _value_1 = annotation.getValue("singleValue");
-      Assert.assertEquals("foo", _value_1);
-      Object _value_2 = annotation.getValue("booleans");
-      final boolean[] booleans = ((boolean[]) _value_2);
-      boolean _get = booleans[2];
-      Assert.assertTrue(_get);
-      Object _value_3 = annotation.getValue("singleBoolean");
-      Assert.assertEquals(Boolean.valueOf(true), _value_3);
-      Object _value_4 = annotation.getValue("numbers");
-      Assert.assertArrayEquals(new int[] { 1, 2, 3 }, ((int[]) _value_4));
-      Object _value_5 = annotation.getValue("singleNumber");
-      Assert.assertEquals(Integer.valueOf(1), _value_5);
+      Assert.assertEquals("foo", annotation.getValue("singleValue"));
+      Object _value_1 = annotation.getValue("booleans");
+      final boolean[] booleans = ((boolean[]) _value_1);
+      Assert.assertTrue(booleans[2]);
+      Assert.assertEquals(Boolean.valueOf(true), annotation.getValue("singleBoolean"));
+      Object _value_2 = annotation.getValue("numbers");
+      Assert.assertArrayEquals(new int[] { 1, 2, 3 }, ((int[]) _value_2));
+      Assert.assertEquals(Integer.valueOf(1), annotation.getValue("singleNumber"));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -5161,9 +4866,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      MutableClassDeclaration _findClass = _typeLookup.findClass("myusercode.DoesNotExist");
-      String _simpleName = _findClass.getSimpleName();
+      String _simpleName = it.getTypeLookup().findClass("myusercode.DoesNotExist").getSimpleName();
       boolean _equals = Objects.equal(_simpleName, "DoesNotExist");
       Assert.assertTrue(_equals);
     };
@@ -5188,8 +4891,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/MyClass.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      MutableClassDeclaration _findClass = _typeLookup.findClass("myusercode.MyClass");
+      MutableClassDeclaration _findClass = it.getTypeLookup().findClass("myusercode.MyClass");
       final JvmGenericType clazz = ((MutableJvmClassDeclarationImpl) _findClass).getDelegate();
       this.validator.assertNoIssues(clazz);
     };
@@ -5214,14 +4916,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      XtendFile _xtendFile = it.getXtendFile();
-      Resource _eResource = _xtendFile.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       final Function1<Resource.Diagnostic, Boolean> _function_1 = (Resource.Diagnostic it_1) -> {
-        String _message = it_1.getMessage();
-        return Boolean.valueOf(_message.contains("myField may not have been initialized"));
+        return Boolean.valueOf(it_1.getMessage().contains("myField may not have been initialized"));
       };
-      IterableExtensions.<Resource.Diagnostic>exists(_errors, _function_1);
+      IterableExtensions.<Resource.Diagnostic>exists(it.getXtendFile().eResource().getErrors(), _function_1);
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -5244,31 +4942,15 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableMethodDeclaration> _declaredMethods = clazz.getDeclaredMethods();
-      final MutableMethodDeclaration getter = IterableExtensions.head(_declaredMethods);
-      String _simpleName = getter.getSimpleName();
-      Assert.assertEquals("getMyField", _simpleName);
-      TypeReference _returnType = getter.getReturnType();
-      String _string = _returnType.toString();
-      Assert.assertEquals("String", _string);
-      TypeReference _returnType_1 = getter.getReturnType();
-      final MutableMethodDeclaration setter = clazz.findDeclaredMethod("setMyField", _returnType_1);
-      String _simpleName_1 = setter.getSimpleName();
-      Assert.assertEquals("setMyField", _simpleName_1);
-      TypeReference _returnType_2 = setter.getReturnType();
-      String _string_1 = _returnType_2.toString();
-      Assert.assertEquals("void", _string_1);
-      Iterable<? extends MutableParameterDeclaration> _parameters = setter.getParameters();
-      MutableParameterDeclaration _head = IterableExtensions.head(_parameters);
-      String _simpleName_2 = _head.getSimpleName();
-      Assert.assertEquals("myField", _simpleName_2);
-      Iterable<? extends MutableParameterDeclaration> _parameters_1 = setter.getParameters();
-      MutableParameterDeclaration _head_1 = IterableExtensions.head(_parameters_1);
-      TypeReference _type = _head_1.getType();
-      String _string_2 = _type.toString();
-      Assert.assertEquals("String", _string_2);
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClass");
+      final MutableMethodDeclaration getter = IterableExtensions.head(clazz.getDeclaredMethods());
+      Assert.assertEquals("getMyField", getter.getSimpleName());
+      Assert.assertEquals("String", getter.getReturnType().toString());
+      final MutableMethodDeclaration setter = clazz.findDeclaredMethod("setMyField", getter.getReturnType());
+      Assert.assertEquals("setMyField", setter.getSimpleName());
+      Assert.assertEquals("void", setter.getReturnType().toString());
+      Assert.assertEquals("myField", IterableExtensions.head(setter.getParameters()).getSimpleName());
+      Assert.assertEquals("String", IterableExtensions.head(setter.getParameters()).getType().toString());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -5343,28 +5025,12 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableMethodDeclaration> _declaredMethods = type.getDeclaredMethods();
-      final MutableMethodDeclaration method = IterableExtensions.head(_declaredMethods);
-      Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = method.getTypeParameters();
-      MutableTypeParameterDeclaration _head = IterableExtensions.head(_typeParameters);
-      String _simpleName = _head.getSimpleName();
-      Assert.assertEquals("A", _simpleName);
-      Iterable<? extends MutableParameterDeclaration> _parameters = method.getParameters();
-      MutableParameterDeclaration _head_1 = IterableExtensions.head(_parameters);
-      String _simpleName_1 = _head_1.getSimpleName();
-      Assert.assertEquals("myParam", _simpleName_1);
-      Iterable<? extends MutableTypeParameterDeclaration> _typeParameters_1 = method.getTypeParameters();
-      MutableTypeParameterDeclaration _head_2 = IterableExtensions.head(_typeParameters_1);
-      Iterable<? extends MutableParameterDeclaration> _parameters_1 = method.getParameters();
-      MutableParameterDeclaration _head_3 = IterableExtensions.head(_parameters_1);
-      TypeReference _type = _head_3.getType();
-      Type _type_1 = _type.getType();
-      Assert.assertSame(_head_2, _type_1);
-      Iterable<? extends TypeReference> _exceptions = method.getExceptions();
-      int _size = IterableExtensions.size(_exceptions);
-      Assert.assertEquals(1, _size);
+      final MutableClassDeclaration type = it.getTypeLookup().findClass("myusercode.MyClass");
+      final MutableMethodDeclaration method = IterableExtensions.head(type.getDeclaredMethods());
+      Assert.assertEquals("A", IterableExtensions.head(method.getTypeParameters()).getSimpleName());
+      Assert.assertEquals("myParam", IterableExtensions.head(method.getParameters()).getSimpleName());
+      Assert.assertSame(IterableExtensions.head(method.getTypeParameters()), IterableExtensions.head(method.getParameters()).getType().getType());
+      Assert.assertEquals(1, IterableExtensions.size(method.getExceptions()));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -5451,13 +5117,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableMethodDeclaration> _declaredMethods = type.getDeclaredMethods();
-      final MutableMethodDeclaration method = ((MutableMethodDeclaration[])Conversions.unwrapArray(_declaredMethods, MutableMethodDeclaration.class))[1];
-      TypeReference _returnType = method.getReturnType();
-      String _name = _returnType.getName();
-      Assert.assertEquals("java.lang.String", _name);
+      final MutableClassDeclaration type = it.getTypeLookup().findClass("myusercode.MyClass");
+      final MutableMethodDeclaration method = ((MutableMethodDeclaration[])Conversions.unwrapArray(type.getDeclaredMethods(), MutableMethodDeclaration.class))[1];
+      Assert.assertEquals("java.lang.String", method.getReturnType().getName());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -5544,13 +5206,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = type.getDeclaredFields();
-      final MutableFieldDeclaration field = ((MutableFieldDeclaration[])Conversions.unwrapArray(_declaredFields, MutableFieldDeclaration.class))[1];
-      TypeReference _type = field.getType();
-      String _name = _type.getName();
-      Assert.assertEquals("java.lang.String", _name);
+      final MutableClassDeclaration type = it.getTypeLookup().findClass("myusercode.MyClass");
+      final MutableFieldDeclaration field = ((MutableFieldDeclaration[])Conversions.unwrapArray(type.getDeclaredFields(), MutableFieldDeclaration.class))[1];
+      Assert.assertEquals("java.lang.String", field.getType().getName());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -5636,22 +5294,11 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
-      Iterable<? extends MutableMethodDeclaration> _declaredMethods = type.getDeclaredMethods();
-      final MutableMethodDeclaration method = IterableExtensions.head(_declaredMethods);
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = type.getDeclaredFields();
-      final MutableFieldDeclaration field = IterableExtensions.head(_declaredFields);
-      ProblemSupportImpl _problemSupport = it.getProblemSupport();
-      List<? extends Problem> _problems = _problemSupport.getProblems(field);
-      Problem _head = IterableExtensions.head(_problems);
-      String _message = _head.getMessage();
-      Assert.assertEquals("field-warning", _message);
-      ProblemSupportImpl _problemSupport_1 = it.getProblemSupport();
-      List<? extends Problem> _problems_1 = _problemSupport_1.getProblems(method);
-      Problem _head_1 = IterableExtensions.head(_problems_1);
-      String _message_1 = _head_1.getMessage();
-      Assert.assertEquals("warning", _message_1);
+      final MutableClassDeclaration type = it.getTypeLookup().findClass("myusercode.MyClass");
+      final MutableMethodDeclaration method = IterableExtensions.head(type.getDeclaredMethods());
+      final MutableFieldDeclaration field = IterableExtensions.head(type.getDeclaredFields());
+      Assert.assertEquals("field-warning", IterableExtensions.head(it.getProblemSupport().getProblems(field)).getMessage());
+      Assert.assertEquals("warning", IterableExtensions.head(it.getProblemSupport().getProblems(method)).getMessage());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -5720,21 +5367,11 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      MutableClassDeclaration _findClass = _typeLookup.findClass("myusercode.MyClass");
-      Assert.assertNotNull(_findClass);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      MutableClassDeclaration _findClass_1 = _typeLookup_1.findClass("myusercode.MyClass.InnerClass");
-      Assert.assertNotNull(_findClass_1);
-      TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
-      MutableInterfaceDeclaration _findInterface = _typeLookup_2.findInterface("myusercode.MyClassInterface");
-      Assert.assertNotNull(_findInterface);
-      TypeLookupImpl _typeLookup_3 = it.getTypeLookup();
-      MutableEnumerationTypeDeclaration _findEnumerationType = _typeLookup_3.findEnumerationType("myusercode.MyClassEnum");
-      Assert.assertNotNull(_findEnumerationType);
-      TypeLookupImpl _typeLookup_4 = it.getTypeLookup();
-      MutableAnnotationTypeDeclaration _findAnnotationType = _typeLookup_4.findAnnotationType("myusercode.MyClassAnnotation");
-      Assert.assertNotNull(_findAnnotationType);
+      Assert.assertNotNull(it.getTypeLookup().findClass("myusercode.MyClass"));
+      Assert.assertNotNull(it.getTypeLookup().findClass("myusercode.MyClass.InnerClass"));
+      Assert.assertNotNull(it.getTypeLookup().findInterface("myusercode.MyClassInterface"));
+      Assert.assertNotNull(it.getTypeLookup().findEnumerationType("myusercode.MyClassEnum"));
+      Assert.assertNotNull(it.getTypeLookup().findAnnotationType("myusercode.MyClassAnnotation"));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -5910,17 +5547,11 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration declaredClass = _typeLookup.findClass("myusercode.MyClass");
+      final MutableClassDeclaration declaredClass = it.getTypeLookup().findClass("myusercode.MyClass");
       Assert.assertNotNull(declaredClass);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup_1.findClass("myusercode.MyClassDerived");
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.MyClassDerived");
       Assert.assertNotNull(clazz);
-      String _qualifiedName = declaredClass.getQualifiedName();
-      TypeReference _extendedClass = clazz.getExtendedClass();
-      Type _type = _extendedClass.getType();
-      String _qualifiedName_1 = _type.getQualifiedName();
-      Assert.assertEquals(_qualifiedName, _qualifiedName_1);
+      Assert.assertEquals(declaredClass.getQualifiedName(), clazz.getExtendedClass().getType().getQualifiedName());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -6022,12 +5653,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration myClass = _typeLookup.findClass("MyClass");
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = myClass.getDeclaredFields();
-      MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
-      String _simpleName = _head.getSimpleName();
-      Assert.assertEquals("field_A_B_C", _simpleName);
+      final MutableClassDeclaration myClass = it.getTypeLookup().findClass("MyClass");
+      Assert.assertEquals("field_A_B_C", IterableExtensions.head(myClass.getDeclaredFields()).getSimpleName());
     };
     this.assertProcessing(
       this.THREE_ANNOTATIONS, _mappedTo, _function);
@@ -6050,16 +5677,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration myClass = _typeLookup.findClass("MyClass");
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = myClass.getDeclaredFields();
-      MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
-      String _simpleName = _head.getSimpleName();
-      Assert.assertEquals("field1_A_B_C", _simpleName);
-      Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = myClass.getDeclaredFields();
-      MutableFieldDeclaration _get = ((MutableFieldDeclaration[])Conversions.unwrapArray(_declaredFields_1, MutableFieldDeclaration.class))[1];
-      String _simpleName_1 = _get.getSimpleName();
-      Assert.assertEquals("field2_A_B_C", _simpleName_1);
+      final MutableClassDeclaration myClass = it.getTypeLookup().findClass("MyClass");
+      Assert.assertEquals("field1_A_B_C", IterableExtensions.head(myClass.getDeclaredFields()).getSimpleName());
+      Assert.assertEquals("field2_A_B_C", ((MutableFieldDeclaration[])Conversions.unwrapArray(myClass.getDeclaredFields(), MutableFieldDeclaration.class))[1].getSimpleName());
     };
     this.assertProcessing(
       this.THREE_ANNOTATIONS, _mappedTo, _function);
@@ -6072,20 +5692,13 @@ public abstract class AbstractReusableActiveAnnotationTests {
       final Function1<String, String> _function_1 = (String it_1) -> {
         return LineDelimiters.toUnix(it_1);
       };
-      List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(compiledClientFiles)), _function_1);
-      final Set<String> clientFilesAsSet = IterableExtensions.<String>toSet(_map);
-      int _size = clientFilesAsSet.size();
-      int _length = compiledClientFiles.length;
-      Assert.assertEquals(_size, _length);
-      XtendFile _xtendFile = it.getXtendFile();
-      final Resource resource = _xtendFile.eResource();
-      EList<EObject> _contents = resource.getContents();
-      final Iterable<EObject> jvmTypes = IterableExtensions.<EObject>tail(_contents);
+      final Set<String> clientFilesAsSet = IterableExtensions.<String>toSet(ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(compiledClientFiles)), _function_1));
+      Assert.assertEquals(clientFilesAsSet.size(), compiledClientFiles.length);
+      final Resource resource = it.getXtendFile().eResource();
+      final Iterable<EObject> jvmTypes = IterableExtensions.<EObject>tail(resource.getContents());
       final Consumer<EObject> _function_2 = (EObject it_1) -> {
         if ((it_1 instanceof JvmDeclaredType)) {
-          GeneratorConfig _get = this.generatorConfigProvider.get(it_1);
-          CharSequence _generateType = this.generator.generateType(((JvmDeclaredType)it_1), _get);
-          final String generated = String.valueOf(_generateType);
+          final String generated = String.valueOf(this.generator.generateType(((JvmDeclaredType)it_1), this.generatorConfigProvider.get(it_1)));
           boolean _remove = clientFilesAsSet.remove(generated);
           boolean _not = (!_remove);
           if (_not) {
@@ -6125,8 +5738,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration declaredClass = _typeLookup.findClass("myusercode.MyClass");
+      final MutableClassDeclaration declaredClass = it.getTypeLookup().findClass("myusercode.MyClass");
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("Path \'/userProject/src/myusercode/UserCode.xtend\' {");
       _builder_1.newLine();
@@ -6147,9 +5759,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       _builder_1.newLine();
       _builder_1.append("projectFolder: /userProject");
       _builder_1.newLine();
-      String _string = _builder_1.toString();
-      String _docComment = declaredClass.getDocComment();
-      Assert.assertEquals(_string, _docComment);
+      Assert.assertEquals(_builder_1.toString(), declaredClass.getDocComment());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -6469,56 +6079,29 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.UserClass");
+      final MutableClassDeclaration clazz = it.getTypeLookup().findClass("myusercode.UserClass");
       Assert.assertNotNull(clazz);
-      Iterable<? extends MutableMemberDeclaration> _declaredMembers = clazz.getDeclaredMembers();
-      int _size = IterableExtensions.size(_declaredMembers);
-      Assert.assertEquals(5, _size);
-      Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = clazz.getDeclaredConstructors();
-      final MutableConstructorDeclaration constructor = IterableExtensions.head(_declaredConstructors);
+      Assert.assertEquals(5, IterableExtensions.size(clazz.getDeclaredMembers()));
+      final MutableConstructorDeclaration constructor = IterableExtensions.head(clazz.getDeclaredConstructors());
       Assert.assertNotNull(clazz);
-      Iterable<? extends MutableParameterDeclaration> _parameters = constructor.getParameters();
-      int _size_1 = IterableExtensions.size(_parameters);
-      Assert.assertEquals(0, _size_1);
-      Iterable<? extends MutableMemberDeclaration> _declaredMembers_1 = clazz.getDeclaredMembers();
-      Iterable<ClassDeclaration> _filter = Iterables.<ClassDeclaration>filter(_declaredMembers_1, ClassDeclaration.class);
-      int _size_2 = IterableExtensions.size(_filter);
-      Assert.assertEquals(1, _size_2);
-      Iterable<? extends MutableMemberDeclaration> _declaredMembers_2 = clazz.getDeclaredMembers();
-      Iterable<InterfaceDeclaration> _filter_1 = Iterables.<InterfaceDeclaration>filter(_declaredMembers_2, InterfaceDeclaration.class);
-      int _size_3 = IterableExtensions.size(_filter_1);
-      Assert.assertEquals(1, _size_3);
-      Iterable<? extends MutableMemberDeclaration> _declaredMembers_3 = clazz.getDeclaredMembers();
-      Iterable<EnumerationTypeDeclaration> _filter_2 = Iterables.<EnumerationTypeDeclaration>filter(_declaredMembers_3, EnumerationTypeDeclaration.class);
-      int _size_4 = IterableExtensions.size(_filter_2);
-      Assert.assertEquals(1, _size_4);
-      Iterable<? extends MutableMemberDeclaration> _declaredMembers_4 = clazz.getDeclaredMembers();
-      Iterable<AnnotationTypeDeclaration> _filter_3 = Iterables.<AnnotationTypeDeclaration>filter(_declaredMembers_4, AnnotationTypeDeclaration.class);
-      int _size_5 = IterableExtensions.size(_filter_3);
-      Assert.assertEquals(1, _size_5);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      final MutableEnumerationTypeDeclaration enum_ = _typeLookup_1.findEnumerationType("myusercode.UserEnum");
+      Assert.assertEquals(0, IterableExtensions.size(constructor.getParameters()));
+      Assert.assertEquals(1, IterableExtensions.size(Iterables.<ClassDeclaration>filter(clazz.getDeclaredMembers(), ClassDeclaration.class)));
+      Assert.assertEquals(1, IterableExtensions.size(Iterables.<InterfaceDeclaration>filter(clazz.getDeclaredMembers(), InterfaceDeclaration.class)));
+      Assert.assertEquals(1, IterableExtensions.size(Iterables.<EnumerationTypeDeclaration>filter(clazz.getDeclaredMembers(), EnumerationTypeDeclaration.class)));
+      Assert.assertEquals(1, IterableExtensions.size(Iterables.<AnnotationTypeDeclaration>filter(clazz.getDeclaredMembers(), AnnotationTypeDeclaration.class)));
+      final MutableEnumerationTypeDeclaration enum_ = it.getTypeLookup().findEnumerationType("myusercode.UserEnum");
       Assert.assertNotNull(enum_);
-      TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
-      final MutableInterfaceDeclaration interface_ = _typeLookup_2.findInterface("myusercode.UserInterface");
+      final MutableInterfaceDeclaration interface_ = it.getTypeLookup().findInterface("myusercode.UserInterface");
       Assert.assertNotNull(interface_);
-      Iterable<? extends MutableMemberDeclaration> _declaredMembers_5 = interface_.getDeclaredMembers();
-      int _size_6 = IterableExtensions.size(_declaredMembers_5);
-      Assert.assertEquals(0, _size_6);
-      TypeLookupImpl _typeLookup_3 = it.getTypeLookup();
-      final MutableAnnotationTypeDeclaration annotation = _typeLookup_3.findAnnotationType("myusercode.UserAnnotation");
+      Assert.assertEquals(0, IterableExtensions.size(interface_.getDeclaredMembers()));
+      final MutableAnnotationTypeDeclaration annotation = it.getTypeLookup().findAnnotationType("myusercode.UserAnnotation");
       Assert.assertNotNull(annotation);
-      Iterable<? extends MutableMemberDeclaration> _declaredMembers_6 = annotation.getDeclaredMembers();
-      int _size_7 = IterableExtensions.size(_declaredMembers_6);
-      Assert.assertEquals(0, _size_7);
-      TracabilityImpl _tracability = it.getTracability();
-      Element _primarySourceElement = _tracability.getPrimarySourceElement(clazz);
+      Assert.assertEquals(0, IterableExtensions.size(annotation.getDeclaredMembers()));
+      Element _primarySourceElement = it.getTracability().getPrimarySourceElement(clazz);
       final MethodDeclaration removedMethod = ((ClassDeclaration) _primarySourceElement).findDeclaredMethod("methodToRemove");
       Expression _body = removedMethod.getBody();
       final XExpression expression = ((ExpressionImpl) _body).getDelegate();
-      JvmIdentifiableElement _logicalContainer = this.logicalContainerProvider.getLogicalContainer(expression);
-      Assert.assertNull(_logicalContainer);
+      Assert.assertNull(this.logicalContainerProvider.getLogicalContainer(expression));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -6691,8 +6274,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      XtendFile _xtendFile = it.getXtendFile();
-      this.validator.assertNoErrors(_xtendFile);
+      this.validator.assertNoErrors(it.getXtendFile());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }

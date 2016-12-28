@@ -5,7 +5,6 @@ import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.tests.codebuilder.AbstractBuilderTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -20,11 +19,9 @@ public class AnnotationBuilderTest extends AbstractBuilderTest {
   
   @Test
   public void testXtendAnnotation() {
-    JvmDeclaredType _xtendClass = this.getXtendClass();
-    AbstractAnnotationBuilder _createAnnotationBuilder = this._codeBuilderFactory.createAnnotationBuilder(_xtendClass);
+    AbstractAnnotationBuilder _createAnnotationBuilder = this._codeBuilderFactory.createAnnotationBuilder(this.getXtendClass());
     final Procedure1<AbstractAnnotationBuilder> _function = (AbstractAnnotationBuilder it) -> {
-      JvmDeclaredType _xtendClass_1 = this.getXtendClass();
-      it.setContext(_xtendClass_1);
+      it.setContext(this.getXtendClass());
       it.setAnnotationName("Bar");
       it.setVisibility(JvmVisibility.PUBLIC);
     };
@@ -38,11 +35,9 @@ public class AnnotationBuilderTest extends AbstractBuilderTest {
   
   @Test
   public void testJavaAnnotation() {
-    JvmDeclaredType _javaClass = this.getJavaClass();
-    AbstractAnnotationBuilder _createAnnotationBuilder = this._codeBuilderFactory.createAnnotationBuilder(_javaClass);
+    AbstractAnnotationBuilder _createAnnotationBuilder = this._codeBuilderFactory.createAnnotationBuilder(this.getJavaClass());
     final Procedure1<AbstractAnnotationBuilder> _function = (AbstractAnnotationBuilder it) -> {
-      JvmDeclaredType _javaClass_1 = this.getJavaClass();
-      it.setContext(_javaClass_1);
+      it.setContext(this.getJavaClass());
       it.setAnnotationName("Bar");
       it.setVisibility(JvmVisibility.PUBLIC);
     };

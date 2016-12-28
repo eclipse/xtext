@@ -10,11 +10,9 @@ package org.eclipse.xtend.core.tests.validation;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -72,8 +70,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "The import \'java.lang.annotation.RetentionPolicy\' is never used.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -109,8 +106,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -130,8 +126,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "The import \'java.lang.annotation.RetentionPolicy\' is never used.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -151,8 +146,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "The import \'java.lang.annotation.ElementType\' is never used.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -172,8 +166,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -193,8 +186,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "The import \'java.lang.annotation.RetentionPolicy\' is never used.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -214,8 +206,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "The import \'java.lang.annotation.ElementType\' is never used.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -235,8 +226,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -267,8 +257,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
       this._validationTestHelper.assertError(file, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.AMBIGUOUS_FEATURE_CALL);
@@ -301,8 +290,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
     } catch (Throwable _e) {
@@ -334,8 +322,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer.valueOf");
     } catch (Throwable _e) {
@@ -367,8 +354,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
     } catch (Throwable _e) {
@@ -400,8 +386,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
       this._validationTestHelper.assertError(file, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.AMBIGUOUS_FEATURE_CALL);
@@ -434,8 +419,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer.valueOf");
     } catch (Throwable _e) {
@@ -467,8 +451,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
     } catch (Throwable _e) {
@@ -500,8 +483,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
       this._validationTestHelper.assertError(file, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.AMBIGUOUS_FEATURE_CALL);
@@ -534,8 +516,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
     } catch (Throwable _e) {
@@ -567,8 +548,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
       this._validationTestHelper.assertError(file, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.AMBIGUOUS_FEATURE_CALL);
@@ -601,8 +581,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer.valueOf");
       this.assertFeatureCallError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL);
@@ -635,8 +614,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
       this.assertFeatureCallError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL);
@@ -649,11 +627,8 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
     final Resource resource = file.eResource();
     final List<Issue> allIssues = this._validationTestHelper.validate(resource);
     final Function1<Issue, Boolean> _function = (Issue it) -> {
-      ResourceSet _resourceSet = resource.getResourceSet();
-      URI _uriToProblem = it.getUriToProblem();
-      EObject object = _resourceSet.getEObject(_uriToProblem, true);
-      String[] _data = it.getData();
-      final boolean featureCall = ((List<String>)Conversions.doWrapArray(_data)).contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
+      EObject object = resource.getResourceSet().getEObject(it.getUriToProblem(), true);
+      final boolean featureCall = ((List<String>)Conversions.doWrapArray(it.getData())).contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
       return Boolean.valueOf((((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && (it.getSeverity() == Severity.ERROR)) && 
         objectType.isInstance(object)) && featureCall));
     };
@@ -688,8 +663,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
     } catch (Throwable _e) {
@@ -721,8 +695,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
     } catch (Throwable _e) {
@@ -754,8 +727,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
       this.assertFeatureCallError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL);
@@ -788,8 +760,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
     } catch (Throwable _e) {
@@ -821,8 +792,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
     } catch (Throwable _e) {
@@ -854,8 +824,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
       this.assertFeatureCallError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL);
@@ -888,8 +857,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
     } catch (Throwable _e) {
@@ -921,8 +889,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.Integer");
       this._validationTestHelper.assertError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.AMBIGUOUS_FEATURE_CALL);
@@ -940,9 +907,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class Foo {}");
       _builder.newLine();
-      String _string = _builder.toString();
-      XtendFile _file = this.file(_string);
-      this._validationTestHelper.assertError(_file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNRESOLVED, "java.math.BigDecimal.someMethod");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNRESOLVED, "java.math.BigDecimal.someMethod");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -957,9 +922,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class Foo {}");
       _builder.newLine();
-      String _string = _builder.toString();
-      XtendFile _file = this.file(_string);
-      this._validationTestHelper.assertError(_file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNRESOLVED, "java.math.BigDecimal.print");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNRESOLVED, "java.math.BigDecimal.print");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -974,9 +937,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class Foo {}");
       _builder.newLine();
-      String _string = _builder.toString();
-      XtendFile _file = this.file(_string);
-      this._validationTestHelper.assertNoErrors(_file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNRESOLVED, "java.math.BigDecimal.valueOf");
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()), XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNRESOLVED, "java.math.BigDecimal.valueOf");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1006,8 +967,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1038,8 +998,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
     } catch (Throwable _e) {
@@ -1071,8 +1030,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
     } catch (Throwable _e) {
@@ -1104,8 +1062,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1136,8 +1093,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
     } catch (Throwable _e) {
@@ -1169,8 +1125,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1216,8 +1171,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
     } catch (Throwable _e) {
@@ -1260,8 +1214,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1303,8 +1256,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1335,8 +1287,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "\'java.lang.String\'");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "\'java.lang.String.valueOf\'");
     } catch (Throwable _e) {
@@ -1368,8 +1319,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1400,8 +1350,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1432,8 +1381,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
       this.assertFeatureCallError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL);
     } catch (Throwable _e) {
@@ -1465,8 +1413,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this.assertFeatureCallError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL);
@@ -1499,8 +1446,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String.valueOf");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1531,8 +1477,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "\'java.lang.String.valueOf\'");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "\'java.lang.String\'");
     } catch (Throwable _e) {
@@ -1564,8 +1509,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
       this.assertFeatureCallError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL);
     } catch (Throwable _e) {
@@ -1597,8 +1541,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "\'java.lang.String\'");
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "\'java.lang.String.valueOf\'");
     } catch (Throwable _e) {
@@ -1630,8 +1573,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1662,8 +1604,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "java.lang.String");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1692,8 +1633,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1735,8 +1675,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      String _string = _builder.toString();
-      final XtendFile file = this.file(_string);
+      final XtendFile file = this.file(_builder.toString());
       this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "C");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

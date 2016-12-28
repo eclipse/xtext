@@ -39,8 +39,7 @@ public class Bug448483Test extends AbstractXtendContentAssistBugTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      _append.assertProposalDisplayedAtCursor("toString : String - Class.toString()");
+      _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString : String - Class.toString()");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

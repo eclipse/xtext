@@ -13,15 +13,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -38,7 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -52,8 +48,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   public Object isSuperTypeOf(final String superType, final String... types) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of(superType, null);
-    return this.isSuperTypeOf(_mappedTo, types);
+    return this.isSuperTypeOf(Pair.<String, String>of(superType, null), types);
   }
   
   public Object isSuperTypeOf(final Pair<String, String> superTypeAndParam, final String... types) {
@@ -61,13 +56,12 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
       {
-        String _value = superTypeAndParam.getValue();
-        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_value);
+        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(superTypeAndParam.getValue());
         boolean _not = (!_isNullOrEmpty);
         if (_not) {
           _builder.append("<");
-          String _value_1 = superTypeAndParam.getValue();
-          _builder.append(_value_1);
+          String _value = superTypeAndParam.getValue();
+          _builder.append(_value);
           _builder.append("> ");
         }
       }
@@ -87,84 +81,52 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       }
       _builder.append(") {}");
       final String signature = _builder.toString();
-      String _string = signature.toString();
-      final XtendFunction function = this.function(_string);
+      final XtendFunction function = this.function(signature.toString());
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
-      EList<JvmFormalParameter> _parameters = operation.getParameters();
       final Function1<JvmFormalParameter, LightweightTypeReference> _function = (JvmFormalParameter it) -> {
-        JvmTypeReference _parameterType = it.getParameterType();
-        return this.toLightweightTypeReference(_parameterType);
+        return this.toLightweightTypeReference(it.getParameterType());
       };
-      List<LightweightTypeReference> _map = ListExtensions.<JvmFormalParameter, LightweightTypeReference>map(_parameters, _function);
+      List<LightweightTypeReference> _map = ListExtensions.<JvmFormalParameter, LightweightTypeReference>map(operation.getParameters(), _function);
       final ArrayList<LightweightTypeReference> typeReferences = new ArrayList<LightweightTypeReference>(_map);
-      CommonTypeComputationServices _services = this.getServices();
-      final TypeConformanceComputer conformanceComputer = _services.getTypeConformanceComputer();
-      ITypeReferenceOwner _owner = this.getOwner();
-      LightweightTypeReference computedSuperType = conformanceComputer.getCommonSuperType(typeReferences, _owner);
-      String _key = superTypeAndParam.getKey();
+      final TypeConformanceComputer conformanceComputer = this.getServices().getTypeConformanceComputer();
+      LightweightTypeReference computedSuperType = conformanceComputer.getCommonSuperType(typeReferences, this.getOwner());
       String _simpleName = null;
       if (computedSuperType!=null) {
         _simpleName=computedSuperType.getSimpleName();
       }
-      Assert.assertEquals(_key, _simpleName);
-      CommonTypeComputationServices _services_1 = this.getServices();
-      TypeConformanceComputer _typeConformanceComputer = _services_1.getTypeConformanceComputer();
-      Iterable<LightweightTypeReference> _plus = Iterables.<LightweightTypeReference>concat(typeReferences, typeReferences);
-      List<LightweightTypeReference> _list = IterableExtensions.<LightweightTypeReference>toList(_plus);
-      ITypeReferenceOwner _owner_1 = this.getOwner();
-      LightweightTypeReference _commonSuperType = _typeConformanceComputer.getCommonSuperType(_list, _owner_1);
-      computedSuperType = _commonSuperType;
-      String _key_1 = superTypeAndParam.getKey();
+      Assert.assertEquals(superTypeAndParam.getKey(), _simpleName);
+      computedSuperType = this.getServices().getTypeConformanceComputer().getCommonSuperType(IterableExtensions.<LightweightTypeReference>toList(Iterables.<LightweightTypeReference>concat(typeReferences, typeReferences)), this.getOwner());
       String _simpleName_1 = null;
       if (computedSuperType!=null) {
         _simpleName_1=computedSuperType.getSimpleName();
       }
-      Assert.assertEquals(_key_1, _simpleName_1);
-      CommonTypeComputationServices _services_2 = this.getServices();
-      TypeConformanceComputer _typeConformanceComputer_1 = _services_2.getTypeConformanceComputer();
-      List<LightweightTypeReference> _reverseView = ListExtensions.<LightweightTypeReference>reverseView(typeReferences);
-      ITypeReferenceOwner _owner_2 = this.getOwner();
-      LightweightTypeReference _commonSuperType_1 = _typeConformanceComputer_1.getCommonSuperType(_reverseView, _owner_2);
-      computedSuperType = _commonSuperType_1;
-      String _key_2 = superTypeAndParam.getKey();
+      Assert.assertEquals(superTypeAndParam.getKey(), _simpleName_1);
+      computedSuperType = this.getServices().getTypeConformanceComputer().getCommonSuperType(ListExtensions.<LightweightTypeReference>reverseView(typeReferences), this.getOwner());
       String _simpleName_2 = null;
       if (computedSuperType!=null) {
         _simpleName_2=computedSuperType.getSimpleName();
       }
-      Assert.assertEquals(_key_2, _simpleName_2);
+      Assert.assertEquals(superTypeAndParam.getKey(), _simpleName_2);
       boolean _isPrimitiveOrVoid = this.isPrimitiveOrVoid(computedSuperType);
       boolean _not_1 = (!_isPrimitiveOrVoid);
       if (_not_1) {
-        CommonTypeComputationServices _services_3 = this.getServices();
-        TypeConformanceComputer _typeConformanceComputer_2 = _services_3.getTypeConformanceComputer();
-        ITypeReferenceOwner _owner_3 = this.getOwner();
-        AnyTypeReference _newAnyTypeReference = _owner_3.newAnyTypeReference();
-        ITypeReferenceOwner _owner_4 = this.getOwner();
-        AnyTypeReference _newAnyTypeReference_1 = _owner_4.newAnyTypeReference();
-        List<AnyTypeReference> _newImmutableList = CollectionLiterals.<AnyTypeReference>newImmutableList(_newAnyTypeReference, _newAnyTypeReference_1);
-        Iterable<LightweightTypeReference> _plus_1 = Iterables.<LightweightTypeReference>concat(typeReferences, _newImmutableList);
-        List<LightweightTypeReference> _list_1 = IterableExtensions.<LightweightTypeReference>toList(_plus_1);
-        ITypeReferenceOwner _owner_5 = this.getOwner();
-        LightweightTypeReference _commonSuperType_2 = _typeConformanceComputer_2.getCommonSuperType(_list_1, _owner_5);
-        computedSuperType = _commonSuperType_2;
-        String _key_3 = superTypeAndParam.getKey();
+        List<AnyTypeReference> _newImmutableList = CollectionLiterals.<AnyTypeReference>newImmutableList(this.getOwner().newAnyTypeReference(), this.getOwner().newAnyTypeReference());
+        computedSuperType = this.getServices().getTypeConformanceComputer().getCommonSuperType(IterableExtensions.<LightweightTypeReference>toList(Iterables.<LightweightTypeReference>concat(typeReferences, _newImmutableList)), this.getOwner());
         String _simpleName_3 = null;
         if (computedSuperType!=null) {
           _simpleName_3=computedSuperType.getSimpleName();
         }
-        Assert.assertEquals(_key_3, _simpleName_3);
+        Assert.assertEquals(superTypeAndParam.getKey(), _simpleName_3);
       }
       if ((computedSuperType != null)) {
         final Procedure1<LightweightTypeReference> _function_1 = (LightweightTypeReference superType) -> {
           final Consumer<LightweightTypeReference> _function_2 = (LightweightTypeReference it) -> {
-            String _key_4 = superTypeAndParam.getKey();
-            ITypeReferenceOwner _owner_6 = superType.getOwner();
-            LightweightTypeReference _commonSuperType_3 = conformanceComputer.getCommonSuperType(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(it, superType)), _owner_6);
+            LightweightTypeReference _commonSuperType = conformanceComputer.getCommonSuperType(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(it, superType)), superType.getOwner());
             String _simpleName_4 = null;
-            if (_commonSuperType_3!=null) {
-              _simpleName_4=_commonSuperType_3.getSimpleName();
+            if (_commonSuperType!=null) {
+              _simpleName_4=_commonSuperType.getSimpleName();
             }
-            Assert.assertEquals(_key_4, _simpleName_4);
+            Assert.assertEquals(superTypeAndParam.getKey(), _simpleName_4);
           };
           typeReferences.forEach(_function_2);
         };
@@ -172,8 +134,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       }
       if ((computedSuperType != null)) {
         for (final LightweightTypeReference subType : typeReferences) {
-          boolean _isAssignableFrom = computedSuperType.isAssignableFrom(subType);
-          Assert.assertTrue(_isAssignableFrom);
+          Assert.assertTrue(computedSuperType.isAssignableFrom(subType));
         }
       }
       return computedSuperType;
@@ -195,27 +156,22 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   public void isFunctionAndEquivalentTo(final Object reference, final String type) {
     Assert.assertTrue((reference instanceof FunctionTypeReference));
-    String _equivalent = this.getEquivalent(((FunctionTypeReference) reference));
-    Assert.assertEquals(type, _equivalent);
+    Assert.assertEquals(type, this.getEquivalent(((FunctionTypeReference) reference)));
   }
   
   public String getEquivalent(final ParameterizedTypeReference type) {
-    List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
-    boolean _isEmpty = _typeArguments.isEmpty();
+    boolean _isEmpty = type.getTypeArguments().isEmpty();
     if (_isEmpty) {
-      JvmType _type = type.getType();
-      return _type.getSimpleName();
+      return type.getType().getSimpleName();
     }
     StringConcatenation _builder = new StringConcatenation();
-    JvmType _type_1 = type.getType();
-    String _simpleName = _type_1.getSimpleName();
+    String _simpleName = type.getType().getSimpleName();
     _builder.append(_simpleName);
     _builder.append("<");
-    List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
     final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
       return it.getSimpleName();
     };
-    String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments_1, ", ", _function);
+    String _join = IterableExtensions.<LightweightTypeReference>join(type.getTypeArguments(), ", ", _function);
     _builder.append(_join);
     _builder.append(">");
     return _builder.toString();
@@ -322,56 +278,47 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_14() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("Serializable & CharSequence", "T extends CharSequence & java.io.Serializable, V extends CharSequence & java.io.Serializable");
-    this.isSuperTypeOf(_mappedTo, "T", "V");
+    this.isSuperTypeOf(Pair.<String, String>of("Serializable & CharSequence", "T extends CharSequence & java.io.Serializable, V extends CharSequence & java.io.Serializable"), "T", "V");
   }
   
   @Test
   public void testCommonSuperType_15() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("Serializable & CharSequence", "T extends CharSequence & java.io.Serializable, V extends java.io.Serializable & CharSequence");
-    this.isSuperTypeOf(_mappedTo, "T", "V");
+    this.isSuperTypeOf(Pair.<String, String>of("Serializable & CharSequence", "T extends CharSequence & java.io.Serializable, V extends java.io.Serializable & CharSequence"), "T", "V");
   }
   
   @Test
   public void testCommonSuperType_16() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "T extends CharSequence & java.io.Serializable");
-    this.isSuperTypeOf(_mappedTo, "T", "T");
+    this.isSuperTypeOf(Pair.<String, String>of("T", "T extends CharSequence & java.io.Serializable"), "T", "T");
   }
   
   @Test
   public void testCommonSuperType_17() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("Serializable & CharSequence", "T extends CharSequence & java.io.Serializable & Comparable, V extends java.io.Serializable & CharSequence");
-    this.isSuperTypeOf(_mappedTo, "T", "V");
+    this.isSuperTypeOf(Pair.<String, String>of("Serializable & CharSequence", "T extends CharSequence & java.io.Serializable & Comparable, V extends java.io.Serializable & CharSequence"), "T", "V");
   }
   
   @Test
   public void testCommonSuperType_18() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "T, V extends T");
-    this.isSuperTypeOf(_mappedTo, "T", "V");
+    this.isSuperTypeOf(Pair.<String, String>of("T", "T, V extends T"), "T", "V");
   }
   
   @Test
   public void testCommonSuperType_19() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("Collection<String>", "T extends java.util.List<String>, V extends T");
-    this.isSuperTypeOf(_mappedTo, "java.util.Set<String>", "V");
+    this.isSuperTypeOf(Pair.<String, String>of("Collection<String>", "T extends java.util.List<String>, V extends T"), "java.util.Set<String>", "V");
   }
   
   @Test
   public void testCommonSuperType_20() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("Object", "T extends CharSequence & java.io.Serializable, V extends Appendable & Comparable");
-    this.isSuperTypeOf(_mappedTo, "T", "V");
+    this.isSuperTypeOf(Pair.<String, String>of("Object", "T extends CharSequence & java.io.Serializable, V extends Appendable & Comparable"), "T", "V");
   }
   
   @Test
   public void testCommonSuperType_21() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("Object", "T extends CharSequence & java.io.Serializable");
-    this.isSuperTypeOf(_mappedTo, "T", "CharSequence", "java.io.Serializable");
+    this.isSuperTypeOf(Pair.<String, String>of("Object", "T extends CharSequence & java.io.Serializable"), "T", "CharSequence", "java.io.Serializable");
   }
   
   @Test
   public void testCommonSuperType_22() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("CharSequence", "T extends CharSequence & java.io.Serializable");
-    this.isSuperTypeOf(_mappedTo, "T", "CharSequence");
+    this.isSuperTypeOf(Pair.<String, String>of("CharSequence", "T extends CharSequence & java.io.Serializable"), "T", "CharSequence");
   }
   
   @Test
@@ -383,12 +330,8 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       ITypeReferenceOwner _owner_1 = this.getOwner();
       AnyTypeReference _anyTypeReference_1 = new AnyTypeReference(_owner_1);
       final List<LightweightTypeReference> types = CollectionLiterals.<LightweightTypeReference>newImmutableList(_anyTypeReference, _anyTypeReference_1);
-      CommonTypeComputationServices _services = this.getServices();
-      TypeConformanceComputer _typeConformanceComputer = _services.getTypeConformanceComputer();
-      ITypeReferenceOwner _owner_2 = this.getOwner();
-      final LightweightTypeReference superType = _typeConformanceComputer.getCommonSuperType(types, _owner_2);
-      String _simpleName = superType.getSimpleName();
-      Assert.assertEquals("null", _simpleName);
+      final LightweightTypeReference superType = this.getServices().getTypeConformanceComputer().getCommonSuperType(types, this.getOwner());
+      Assert.assertEquals("null", superType.getSimpleName());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -441,14 +384,12 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_33() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("T[]", "T, V extends T");
-    this.isSuperTypeOf(_mappedTo, "V[]", "T[]");
+    this.isSuperTypeOf(Pair.<String, String>of("T[]", "T, V extends T"), "V[]", "T[]");
   }
   
   @Test
   public void testCommonSuperType_34() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("Iterable<? extends CharSequence>", "T extends CharSequence, V extends T");
-    this.isSuperTypeOf(_mappedTo, "Iterable<CharSequence>", "Iterable<V>");
+    this.isSuperTypeOf(Pair.<String, String>of("Iterable<? extends CharSequence>", "T extends CharSequence, V extends T"), "Iterable<CharSequence>", "Iterable<V>");
   }
   
   @Test
@@ -468,8 +409,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_38() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("CharSequence[]", "T extends CharSequence, V extends T");
-    this.isSuperTypeOf(_mappedTo, "V[]", "String[]");
+    this.isSuperTypeOf(Pair.<String, String>of("CharSequence[]", "T extends CharSequence, V extends T"), "V[]", "String[]");
   }
   
   @Test
@@ -524,26 +464,22 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_49() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("()=>void", "()=>void", "()=>void");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Procedure0");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("()=>void", "()=>void", "()=>void"), "Procedure0");
   }
   
   @Test
   public void testCommonSuperType_50() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("()=>long", "()=>long", "()=>long");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function0<? extends Long>");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("()=>long", "()=>long", "()=>long"), "Function0<? extends Long>");
   }
   
   @Test
   public void testCommonSuperType_51() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("()=>Number & Comparable<?>", "()=>int", "()=>long");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function0<? extends Number & Comparable<?>>");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("()=>Number & Comparable<?>", "()=>int", "()=>long"), "Function0<? extends Number & Comparable<?>>");
   }
   
   @Test
   public void testCommonSuperType_52() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("()=>Number & Comparable<?>", "()=>Integer", "()=>Long");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function0<? extends Number & Comparable<?>>");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("()=>Number & Comparable<?>", "()=>Integer", "()=>Long"), "Function0<? extends Number & Comparable<?>>");
   }
   
   @Test
@@ -558,32 +494,27 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_55() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Integer", "(String)=>Integer", "(String)=>Integer");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ? extends Integer>");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("(String)=>Integer", "(String)=>Integer", "(String)=>Integer"), "Function1<? super String, ? extends Integer>");
   }
   
   @Test
   public void testCommonSuperType_56() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("(String, String)=>int", "java.util.Comparator<String>", "(String, String)=>int");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function2<? super String, ? super String, ? extends Integer>");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("(String, String)=>int", "java.util.Comparator<String>", "(String, String)=>int"), "Function2<? super String, ? super String, ? extends Integer>");
   }
   
   @Test
   public void testCommonSuperType_57() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Integer", "(String)=>Integer", "(Object)=>Integer");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ? extends Integer>");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("(String)=>Integer", "(String)=>Integer", "(Object)=>Integer"), "Function1<? super String, ? extends Integer>");
   }
   
   @Test
   public void testCommonSuperType_58() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Object", "(String)=>Appendable", "(CharSequence)=>CharSequence");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ?>");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("(String)=>Object", "(String)=>Appendable", "(CharSequence)=>CharSequence"), "Function1<? super String, ?>");
   }
   
   @Test
   public void testCommonSuperType_59() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("(String, String)=>int", "java.util.Comparator<? super String>", "(String, String)=>int");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function2<? super String, ? super String, ? extends Integer>");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("(String, String)=>int", "java.util.Comparator<? super String>", "(String, String)=>int"), "Function2<? super String, ? super String, ? extends Integer>");
   }
   
   @Test
@@ -608,14 +539,12 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_64() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Object", "(String)=>String", "(Object)=>Object");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ?>");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("(String)=>Object", "(String)=>String", "(Object)=>Object"), "Function1<? super String, ?>");
   }
   
   @Test
   public void testCommonSuperType_65() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Object", "$Function1<? super Object, ? extends Object>", "$Function1<? super String, ? extends String>");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ?>");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("(String)=>Object", "$Function1<? super Object, ? extends Object>", "$Function1<? super String, ? extends String>"), "Function1<? super String, ?>");
   }
   
   @Test
@@ -645,8 +574,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_71() {
-    Object _isSuperTypeOf = this.isSuperTypeOf("(String)=>Object", "$$Function1<? super Object, ? extends Object>", "$$Function1<? super String, ? extends String>");
-    this.isFunctionAndEquivalentTo(_isSuperTypeOf, "Function1<? super String, ?>");
+    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("(String)=>Object", "$$Function1<? super Object, ? extends Object>", "$$Function1<? super String, ? extends String>"), "Function1<? super String, ?>");
   }
   
   @Test

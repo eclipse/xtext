@@ -19,9 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.impl.LeafXtextPsiElement;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -42,28 +40,23 @@ public class XtendSourcePositionProvider extends SourcePositionProvider {
   
   @Override
   protected SourcePosition computeSourcePosition(final NodeDescriptor descriptor, final Project project, final DebuggerContextImpl context, final boolean nearest) {
-    String _name = descriptor.getName();
-    return this.getOriginalIfExists(context, _name);
+    return this.getOriginalIfExists(context, descriptor.getName());
   }
   
   protected SourcePosition getOriginalIfExists(final DebuggerContextImpl context, final String name) {
     final PsiElement ele = context.getContextElement();
     if ((ele instanceof LeafXtextPsiElement)) {
-      INode _iNode = ((LeafXtextPsiElement)ele).getINode();
-      final EObject eobj = _iNode.getSemanticElement();
+      final EObject eobj = ((LeafXtextPsiElement)ele).getINode().getSemanticElement();
       if ((eobj == null)) {
         return null;
       }
       final IScope scope = this.scopeProvider.getScope(eobj, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-      QualifiedName _create = QualifiedName.create(name);
-      final IEObjectDescription element = scope.getSingleElement(_create);
+      final IEObjectDescription element = scope.getSingleElement(QualifiedName.create(name));
       if (((element != null) && Objects.equal(element.getEObjectOrProxy().eResource(), eobj.eResource()))) {
-        EObject _eObjectOrProxy = element.getEObjectOrProxy();
-        final ICompositeNode node = NodeModelUtils.getNode(_eObjectOrProxy);
+        final ICompositeNode node = NodeModelUtils.getNode(element.getEObjectOrProxy());
         if ((node != null)) {
           final int offset = node.getOffset();
-          BaseXtextFile _xtextFile = ((LeafXtextPsiElement)ele).getXtextFile();
-          return SourcePosition.createFromOffset(_xtextFile, offset);
+          return SourcePosition.createFromOffset(((LeafXtextPsiElement)ele).getXtextFile(), offset);
         }
       }
     }

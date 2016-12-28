@@ -9,12 +9,10 @@ package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -105,15 +103,9 @@ public class OverrideHelperTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile xtendFile = this.fileWithErrors(_builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = _head.getMembers();
-      Iterable<XtendFunction> _filter = Iterables.<XtendFunction>filter(_members, XtendFunction.class);
-      XtendFunction _head_1 = IterableExtensions.<XtendFunction>head(_filter);
-      EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(_head_1);
+      EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(IterableExtensions.<XtendFunction>head(Iterables.<XtendFunction>filter(IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes()).getMembers(), XtendFunction.class)));
       final JvmOperation operation = ((JvmOperation) _primaryJvmElement);
-      JvmOperation _findOverriddenOperation = this.overrideHelper.findOverriddenOperation(operation);
-      Assert.assertNull(_findOverriddenOperation);
+      Assert.assertNull(this.overrideHelper.findOverriddenOperation(operation));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -182,15 +174,9 @@ public class OverrideHelperTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile xtendFile = this.file(_builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = _head.getMembers();
-      Iterable<XtendFunction> _filter = Iterables.<XtendFunction>filter(_members, XtendFunction.class);
-      XtendFunction _head_1 = IterableExtensions.<XtendFunction>head(_filter);
-      EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(_head_1);
+      EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(IterableExtensions.<XtendFunction>head(Iterables.<XtendFunction>filter(IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes()).getMembers(), XtendFunction.class)));
       final JvmOperation operation = ((JvmOperation) _primaryJvmElement);
-      JvmOperation _findOverriddenOperation = this.overrideHelper.findOverriddenOperation(operation);
-      Assert.assertNotNull(_findOverriddenOperation);
+      Assert.assertNotNull(this.overrideHelper.findOverriddenOperation(operation));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -224,15 +210,9 @@ public class OverrideHelperTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile xtendFile = this.file(_builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = _head.getMembers();
-      Iterable<XtendFunction> _filter = Iterables.<XtendFunction>filter(_members, XtendFunction.class);
-      XtendFunction _head_1 = IterableExtensions.<XtendFunction>head(_filter);
-      EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(_head_1);
+      EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(IterableExtensions.<XtendFunction>head(Iterables.<XtendFunction>filter(IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes()).getMembers(), XtendFunction.class)));
       final JvmOperation operation = ((JvmOperation) _primaryJvmElement);
-      JvmOperation _findOverriddenOperation = this.overrideHelper.findOverriddenOperation(operation);
-      Assert.assertNotNull(_findOverriddenOperation);
+      Assert.assertNotNull(this.overrideHelper.findOverriddenOperation(operation));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -269,15 +249,9 @@ public class OverrideHelperTest extends AbstractXtendTestCase {
       _builder.append("class T<E extends CharSequence> {}");
       _builder.newLine();
       final XtendFile xtendFile = this.file(_builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = _head.getMembers();
-      Iterable<XtendFunction> _filter = Iterables.<XtendFunction>filter(_members, XtendFunction.class);
-      XtendFunction _head_1 = IterableExtensions.<XtendFunction>head(_filter);
-      EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(_head_1);
+      EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(IterableExtensions.<XtendFunction>head(Iterables.<XtendFunction>filter(IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes()).getMembers(), XtendFunction.class)));
       final JvmOperation operation = ((JvmOperation) _primaryJvmElement);
-      JvmOperation _findOverriddenOperation = this.overrideHelper.findOverriddenOperation(operation);
-      Assert.assertNotNull(_findOverriddenOperation);
+      Assert.assertNotNull(this.overrideHelper.findOverriddenOperation(operation));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

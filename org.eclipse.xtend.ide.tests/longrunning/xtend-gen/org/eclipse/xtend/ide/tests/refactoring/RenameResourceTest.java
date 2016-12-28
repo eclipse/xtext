@@ -37,12 +37,9 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
   public void testRenameClassWithSameName() {
     try {
       try {
-        IFile _createFile = this._workbenchTestHelper.createFile("Foo", "class Foo {}");
-        IFile _renameTo = this.renameTo(_createFile, "Bar.xtend");
-        this._fileAsserts.assertFileContains(_renameTo, "class Bar {}");
+        this._fileAsserts.assertFileContains(this.renameTo(this._workbenchTestHelper.createFile("Foo", "class Foo {}"), "Bar.xtend"), "class Bar {}");
       } finally {
-        IFile _file = this._workbenchTestHelper.getFile("Bar.xtend");
-        _file.delete(true, null);
+        this._workbenchTestHelper.getFile("Bar.xtend").delete(true, null);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -53,12 +50,9 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
   public void testDontRenameClassWithDifferenName() {
     try {
       try {
-        IFile _createFile = this._workbenchTestHelper.createFile("Foo", "class FooBar {}");
-        IFile _renameTo = this.renameTo(_createFile, "Bar.xtend");
-        this._fileAsserts.assertFileContains(_renameTo, "class FooBar {}");
+        this._fileAsserts.assertFileContains(this.renameTo(this._workbenchTestHelper.createFile("Foo", "class FooBar {}"), "Bar.xtend"), "class FooBar {}");
       } finally {
-        IFile _file = this._workbenchTestHelper.getFile("Bar.xtend");
-        _file.delete(true, null);
+        this._workbenchTestHelper.getFile("Bar.xtend").delete(true, null);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -69,12 +63,9 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
   public void testGuardMissingFileExtension() {
     try {
       try {
-        IFile _createFile = this._workbenchTestHelper.createFile("Foo", "class Foo {}");
-        IFile _renameTo = this.renameTo(_createFile, "Bar");
-        this._fileAsserts.assertFileContains(_renameTo, "class Foo {}");
+        this._fileAsserts.assertFileContains(this.renameTo(this._workbenchTestHelper.createFile("Foo", "class Foo {}"), "Bar"), "class Foo {}");
       } finally {
-        IFile _file = this._workbenchTestHelper.getFile("Bar");
-        _file.delete(true, null);
+        this._workbenchTestHelper.getFile("Bar").delete(true, null);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -100,8 +91,7 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
         IProject _project = this._workbenchTestHelper.getProject();
         Path _path = new Path(("src/" + newFileName));
         final IResource newFile = _project.findMember(_path);
-        boolean _exists = newFile.exists();
-        Assert.assertTrue(_exists);
+        Assert.assertTrue(newFile.exists());
         Assert.assertTrue((newFile instanceof IFile));
         _xblockexpression = ((IFile) newFile);
       }

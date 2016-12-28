@@ -29,10 +29,8 @@ import org.junit.Assert;
 public class InferredTypeReferencesCheckProcessor extends AbstractClassProcessor {
   @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
-    MutableFieldDeclaration _findDeclaredField = it.findDeclaredField("foo");
-    final TypeReference type = _findDeclaredField.getType();
-    boolean _isInferred = type.isInferred();
-    Assert.assertTrue(_isInferred);
+    final TypeReference type = it.findDeclaredField("foo").getType();
+    Assert.assertTrue(type.isInferred());
     final Procedure0 _function = () -> {
       it.setExtendedClass(type);
     };

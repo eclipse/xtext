@@ -12,7 +12,7 @@ public class Case_4 {
   
   public CharSequence richStrings_02() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("start", "");
+    _builder.append("start");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t  ");
     _builder.append("first line");

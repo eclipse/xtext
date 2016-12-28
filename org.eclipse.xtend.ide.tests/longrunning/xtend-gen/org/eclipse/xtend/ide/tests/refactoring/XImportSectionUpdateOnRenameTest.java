@@ -9,17 +9,13 @@ package org.eclipse.xtend.ide.tests.refactoring;
 
 import com.google.inject.Inject;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IField;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.ui.refactoring.RenameSupport;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.refactoring.FileAsserts;
@@ -81,8 +77,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("class Bar {}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -94,8 +89,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -126,8 +120,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("class Bar {}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -139,8 +132,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -177,8 +169,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("class Bar {}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -190,8 +181,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -228,8 +218,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("class Bar {}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -241,8 +230,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -279,8 +267,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("class Bar {}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -292,8 +279,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -330,8 +316,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("class Bar {}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -343,8 +328,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -380,9 +364,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
       _builder_1.append("class Bar {}");
       _builder_1.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-      IType _findJavaType = this.findJavaType("foo.Foo");
-      IField _field = _findJavaType.getField("foo");
-      this.renameJavaElement(_field, "newFoo");
+      this.renameJavaElement(this.findJavaType("foo.Foo").getField("foo"), "newFoo");
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package bar");
       _builder_2.newLine();
@@ -425,9 +407,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
       _builder_1.append("class Bar {}");
       _builder_1.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-      IType _findJavaType = this.findJavaType("foo.Foo");
-      IField _field = _findJavaType.getField("foo");
-      this.renameJavaElement(_field, "newFoo");
+      this.renameJavaElement(this.findJavaType("foo.Foo").getField("foo"), "newFoo");
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package bar");
       _builder_2.newLine();
@@ -464,8 +444,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("class Bar extends Foo {}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -477,8 +456,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -516,8 +494,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("class Bar extends Inner {}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -529,8 +506,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -580,8 +556,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -606,8 +581,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -657,8 +631,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -683,8 +656,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -734,8 +706,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -760,8 +731,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -811,8 +781,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_1.append("}");
         _builder_1.newLine();
         final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-        IType _findJavaType = this.findJavaType("foo.Foo");
-        this.renameJavaElement(_findJavaType, "NewFoo");
+        this.renameJavaElement(this.findJavaType("foo.Foo"), "NewFoo");
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("package bar");
         _builder_2.newLine();
@@ -837,8 +806,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/foo/NewFoo.java");
+        IFile _file = this.testHelper.getProject().getFile("src/foo/NewFoo.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -891,8 +859,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.append("}");
         _builder_2.newLine();
         final IFile xtendFile = this.testHelper.createFile("foo/Foo.xtend", _builder_2.toString());
-        IType _findJavaType = this.findJavaType("a.A");
-        this.renameJavaElement(_findJavaType, "B");
+        this.renameJavaElement(this.findJavaType("a.A"), "B");
         StringConcatenation _builder_3 = new StringConcatenation();
         _builder_3.append("package foo");
         _builder_3.newLine();
@@ -917,8 +884,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_3.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/a/B.java");
+        IFile _file = this.testHelper.getProject().getFile("src/a/B.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -971,8 +937,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.append("}");
         _builder_2.newLine();
         final IFile xtendFile = this.testHelper.createFile("foo/Foo.xtend", _builder_2.toString());
-        IType _findJavaType = this.findJavaType("a.A");
-        this.renameJavaElement(_findJavaType, "B");
+        this.renameJavaElement(this.findJavaType("a.A"), "B");
         StringConcatenation _builder_3 = new StringConcatenation();
         _builder_3.append("package foo");
         _builder_3.newLine();
@@ -997,8 +962,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_3.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/a/B.java");
+        IFile _file = this.testHelper.getProject().getFile("src/a/B.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -1051,8 +1015,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.append("}");
         _builder_2.newLine();
         final IFile xtendFile = this.testHelper.createFile("foo/Foo.xtend", _builder_2.toString());
-        IType _findJavaType = this.findJavaType("a.A");
-        this.renameJavaElement(_findJavaType, "B");
+        this.renameJavaElement(this.findJavaType("a.A"), "B");
         StringConcatenation _builder_3 = new StringConcatenation();
         _builder_3.append("package foo");
         _builder_3.newLine();
@@ -1077,8 +1040,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_3.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/a/B.java");
+        IFile _file = this.testHelper.getProject().getFile("src/a/B.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -1131,8 +1093,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_2.append("}");
         _builder_2.newLine();
         final IFile xtendFile = this.testHelper.createFile("foo/Foo.xtend", _builder_2.toString());
-        IType _findJavaType = this.findJavaType("a.A");
-        this.renameJavaElement(_findJavaType, "B");
+        this.renameJavaElement(this.findJavaType("a.A"), "B");
         StringConcatenation _builder_3 = new StringConcatenation();
         _builder_3.append("package foo");
         _builder_3.newLine();
@@ -1157,8 +1118,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
         _builder_3.newLine();
         this._fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
       } finally {
-        IProject _project = this.testHelper.getProject();
-        IFile _file = _project.getFile("src/a/B.java");
+        IFile _file = this.testHelper.getProject().getFile("src/a/B.java");
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
       }
@@ -1207,9 +1167,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-      IType _findJavaType = this.findJavaType("foo.Foo");
-      IField _field = _findJavaType.getField("foo");
-      this.renameJavaElement(_field, "newFoo");
+      this.renameJavaElement(this.findJavaType("foo.Foo").getField("foo"), "newFoo");
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package bar");
       _builder_2.newLine();
@@ -1278,9 +1236,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-      IType _findJavaType = this.findJavaType("foo.Foo");
-      IField _field = _findJavaType.getField("foo");
-      this.renameJavaElement(_field, "newFoo");
+      this.renameJavaElement(this.findJavaType("foo.Foo").getField("foo"), "newFoo");
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package bar");
       _builder_2.newLine();
@@ -1313,9 +1269,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
     IType _xblockexpression = null;
     {
       this.syncUtil.totalSync(false);
-      IProject _project = this.testHelper.getProject();
-      IJavaProject _create = JavaCore.create(_project);
-      _xblockexpression = _create.findType(typeName);
+      _xblockexpression = JavaCore.create(this.testHelper.getProject()).findType(typeName);
     }
     return _xblockexpression;
   }
@@ -1323,36 +1277,24 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
   public void renameJavaElement(final IType javaElement, final String newName) throws Exception {
     this.syncUtil.totalSync(false);
     final RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-    IWorkbenchWindow _activeWorkbenchWindow = this.workbench.getActiveWorkbenchWindow();
-    Shell _shell = _activeWorkbenchWindow.getShell();
-    IWorkbenchWindow _activeWorkbenchWindow_1 = this.workbench.getActiveWorkbenchWindow();
-    renameSupport.perform(_shell, _activeWorkbenchWindow_1);
+    renameSupport.perform(this.workbench.getActiveWorkbenchWindow().getShell(), this.workbench.getActiveWorkbenchWindow());
     this.syncUtil.totalSync(false);
-    boolean _isDisposed = this.compositeRefactoringProcessorAccess.isDisposed();
-    Assert.assertTrue(_isDisposed);
+    Assert.assertTrue(this.compositeRefactoringProcessorAccess.isDisposed());
   }
   
   public void renameJavaElement(final IMethod javaElement, final String newName) throws Exception {
     this.syncUtil.totalSync(false);
     final RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-    IWorkbenchWindow _activeWorkbenchWindow = this.workbench.getActiveWorkbenchWindow();
-    Shell _shell = _activeWorkbenchWindow.getShell();
-    IWorkbenchWindow _activeWorkbenchWindow_1 = this.workbench.getActiveWorkbenchWindow();
-    renameSupport.perform(_shell, _activeWorkbenchWindow_1);
+    renameSupport.perform(this.workbench.getActiveWorkbenchWindow().getShell(), this.workbench.getActiveWorkbenchWindow());
     this.syncUtil.totalSync(false);
-    boolean _isDisposed = this.compositeRefactoringProcessorAccess.isDisposed();
-    Assert.assertTrue(_isDisposed);
+    Assert.assertTrue(this.compositeRefactoringProcessorAccess.isDisposed());
   }
   
   public void renameJavaElement(final IField javaElement, final String newName) throws Exception {
     this.syncUtil.totalSync(false);
     final RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-    IWorkbenchWindow _activeWorkbenchWindow = this.workbench.getActiveWorkbenchWindow();
-    Shell _shell = _activeWorkbenchWindow.getShell();
-    IWorkbenchWindow _activeWorkbenchWindow_1 = this.workbench.getActiveWorkbenchWindow();
-    renameSupport.perform(_shell, _activeWorkbenchWindow_1);
+    renameSupport.perform(this.workbench.getActiveWorkbenchWindow().getShell(), this.workbench.getActiveWorkbenchWindow());
     this.syncUtil.totalSync(false);
-    boolean _isDisposed = this.compositeRefactoringProcessorAccess.isDisposed();
-    Assert.assertTrue(_isDisposed);
+    Assert.assertTrue(this.compositeRefactoringProcessorAccess.isDisposed());
   }
 }

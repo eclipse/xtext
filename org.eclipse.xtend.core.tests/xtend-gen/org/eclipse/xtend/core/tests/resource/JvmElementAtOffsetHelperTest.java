@@ -51,14 +51,12 @@ public class JvmElementAtOffsetHelperTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final String content = _builder.toString();
-      String _replace = content.replace("|", "");
-      final XtendFile file = this.file(_replace);
+      final XtendFile file = this.file(content.replace("|", ""));
       Resource _eResource = file.eResource();
-      int _indexOf = content.indexOf("|");
-      JvmIdentifiableElement jvmIdentifiableElement = this.jvmElementAtOffsetHelper.getJvmIdentifiableElement(((XtextResource) _eResource), _indexOf);
+      JvmIdentifiableElement jvmIdentifiableElement = this.jvmElementAtOffsetHelper.getJvmIdentifiableElement(((XtextResource) _eResource), 
+        content.indexOf("|"));
       Assert.assertTrue((jvmIdentifiableElement instanceof JvmOperation));
-      String _qualifiedName = jvmIdentifiableElement.getQualifiedName();
-      Assert.assertEquals("testPackage.TestCase.foo", _qualifiedName);
+      Assert.assertEquals("testPackage.TestCase.foo", jvmIdentifiableElement.getQualifiedName());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -87,14 +85,12 @@ public class JvmElementAtOffsetHelperTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final String content = _builder.toString();
-      String _replace = content.replace("|", "");
-      final XtendFile file = this.file(_replace);
+      final XtendFile file = this.file(content.replace("|", ""));
       Resource _eResource = file.eResource();
-      int _indexOf = content.indexOf("|");
-      JvmIdentifiableElement jvmIdentifiableElement = this.jvmElementAtOffsetHelper.getJvmIdentifiableElement(((XtextResource) _eResource), _indexOf);
+      JvmIdentifiableElement jvmIdentifiableElement = this.jvmElementAtOffsetHelper.getJvmIdentifiableElement(((XtextResource) _eResource), 
+        content.indexOf("|"));
       Assert.assertTrue((jvmIdentifiableElement instanceof JvmOperation));
-      String _qualifiedName = jvmIdentifiableElement.getQualifiedName();
-      Assert.assertEquals("testPackage.TestCase.bar", _qualifiedName);
+      Assert.assertEquals("testPackage.TestCase.bar", jvmIdentifiableElement.getQualifiedName());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -123,14 +119,12 @@ public class JvmElementAtOffsetHelperTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final String content = _builder.toString();
-      String _replace = content.replace("|", "");
-      final XtendFile file = this.file(_replace);
+      final XtendFile file = this.file(content.replace("|", ""));
       Resource _eResource = file.eResource();
-      int _indexOf = content.indexOf("|");
-      JvmIdentifiableElement jvmIdentifiableElement = this.jvmElementAtOffsetHelper.getJvmIdentifiableElement(((XtextResource) _eResource), _indexOf);
+      JvmIdentifiableElement jvmIdentifiableElement = this.jvmElementAtOffsetHelper.getJvmIdentifiableElement(((XtextResource) _eResource), 
+        content.indexOf("|"));
       Assert.assertTrue((jvmIdentifiableElement instanceof JvmOperation));
-      String _qualifiedName = jvmIdentifiableElement.getQualifiedName();
-      Assert.assertEquals("java.lang.String.toString", _qualifiedName);
+      Assert.assertEquals("java.lang.String.toString", jvmIdentifiableElement.getQualifiedName());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

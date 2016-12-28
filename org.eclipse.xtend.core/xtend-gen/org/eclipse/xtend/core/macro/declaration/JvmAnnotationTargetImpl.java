@@ -10,9 +10,7 @@ package org.eclipse.xtend.core.macro.declaration;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -29,14 +27,10 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends JvmNamedElementImpl<T> {
   public Iterable<? extends AnnotationReference> getAnnotations() {
-    T _delegate = this.getDelegate();
-    EList<JvmAnnotationReference> _annotations = _delegate.getAnnotations();
     final Function1<JvmAnnotationReference, AnnotationReference> _function = (JvmAnnotationReference it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toAnnotationReference(it);
+      return this.getCompilationUnit().toAnnotationReference(it);
     };
-    List<AnnotationReference> _map = ListExtensions.<JvmAnnotationReference, AnnotationReference>map(_annotations, _function);
-    return ImmutableList.<AnnotationReference>copyOf(_map);
+    return ImmutableList.<AnnotationReference>copyOf(ListExtensions.<JvmAnnotationReference, AnnotationReference>map(this.getDelegate().getAnnotations(), _function));
   }
   
   public AnnotationReference addAnnotation(final AnnotationReference annotationReference) {
@@ -48,13 +42,10 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
       if ((annotationReference instanceof JvmAnnotationReferenceImpl)) {
         AnnotationReference _xblockexpression_1 = null;
         {
-          JvmAnnotationReference _delegate = ((JvmAnnotationReferenceImpl)annotationReference).getDelegate();
-          final JvmAnnotationReference jvmAnnotationReference = EcoreUtil2.<JvmAnnotationReference>cloneWithProxies(_delegate);
-          T _delegate_1 = this.getDelegate();
-          EList<JvmAnnotationReference> _annotations = _delegate_1.getAnnotations();
+          final JvmAnnotationReference jvmAnnotationReference = EcoreUtil2.<JvmAnnotationReference>cloneWithProxies(((JvmAnnotationReferenceImpl)annotationReference).getDelegate());
+          EList<JvmAnnotationReference> _annotations = this.getDelegate().getAnnotations();
           _annotations.add(jvmAnnotationReference);
-          CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-          _xblockexpression_1 = _compilationUnit.toAnnotationReference(jvmAnnotationReference);
+          _xblockexpression_1 = this.getCompilationUnit().toAnnotationReference(jvmAnnotationReference);
         }
         _xifexpression = _xblockexpression_1;
       } else {
@@ -71,20 +62,16 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
   public boolean removeAnnotation(final AnnotationReference annotationReference) {
     this.checkMutable();
     if ((annotationReference instanceof JvmAnnotationReferenceImpl)) {
-      T _delegate = this.getDelegate();
-      EList<JvmAnnotationReference> _annotations = _delegate.getAnnotations();
-      JvmAnnotationReference _delegate_1 = ((JvmAnnotationReferenceImpl)annotationReference).getDelegate();
-      return _annotations.remove(_delegate_1);
+      return this.getDelegate().getAnnotations().remove(((JvmAnnotationReferenceImpl)annotationReference).getDelegate());
     }
     return false;
   }
   
   public AnnotationReference findAnnotation(final Type annotationType) {
-    Iterable<? extends AnnotationReference> _annotations = this.getAnnotations();
     final Function1<AnnotationReference, Boolean> _function = (AnnotationReference it) -> {
       AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
       return Boolean.valueOf(Objects.equal(_annotationTypeDeclaration, annotationType));
     };
-    return IterableExtensions.findFirst(_annotations, _function);
+    return IterableExtensions.findFirst(this.getAnnotations(), _function);
   }
 }

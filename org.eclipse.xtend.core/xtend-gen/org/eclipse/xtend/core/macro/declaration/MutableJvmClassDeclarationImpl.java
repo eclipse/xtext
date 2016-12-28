@@ -8,11 +8,8 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.collect.Iterables;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmClassDeclarationImpl;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
@@ -35,27 +32,21 @@ import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements MutableClassDeclaration {
   @Override
   public void markAsRead() {
     this.checkMutable();
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
-    JvmGenericType _delegate = this.getDelegate();
-    _readAndWriteTracking.markReadAccess(_delegate);
+    this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
   
   @Override
@@ -151,29 +142,25 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
   @Override
   public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
     this.checkMutable();
-    JvmGenericType _delegate = this.getDelegate();
-    _delegate.setStrictFloatingPoint(isStrictFloatingPoint);
+    this.getDelegate().setStrictFloatingPoint(isStrictFloatingPoint);
   }
   
   @Override
   public void setAbstract(final boolean isAbstract) {
     this.checkMutable();
-    JvmGenericType _delegate = this.getDelegate();
-    _delegate.setAbstract(isAbstract);
+    this.getDelegate().setAbstract(isAbstract);
   }
   
   @Override
   public void setFinal(final boolean isFinal) {
     this.checkMutable();
-    JvmGenericType _delegate = this.getDelegate();
-    _delegate.setFinal(isFinal);
+    this.getDelegate().setFinal(isFinal);
   }
   
   @Override
   public void setStatic(final boolean isStatic) {
     this.checkMutable();
-    JvmGenericType _delegate = this.getDelegate();
-    _delegate.setStatic(isStatic);
+    this.getDelegate().setStatic(isStatic);
   }
   
   @Override
@@ -182,30 +169,19 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     ConditionUtils.checkInferredTypeReferences("extended class", superclass);
     JvmTypeReference _xifexpression = null;
     if ((superclass != null)) {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      _xifexpression = _compilationUnit.toJvmTypeReference(superclass);
+      _xifexpression = this.getCompilationUnit().toJvmTypeReference(superclass);
     } else {
-      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-      TypeReferences _typeReferences = _compilationUnit_1.getTypeReferences();
-      CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
-      XtendFile _xtendFile = _compilationUnit_2.getXtendFile();
-      _xifexpression = _typeReferences.getTypeForName(Object.class, _xtendFile);
+      _xifexpression = this.getCompilationUnit().getTypeReferences().getTypeForName(Object.class, this.getCompilationUnit().getXtendFile());
     }
     final JvmTypeReference newTypeRef = _xifexpression;
-    JvmGenericType _delegate = this.getDelegate();
-    EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
     final Function1<JvmTypeReference, Boolean> _function = (JvmTypeReference it) -> {
       return Boolean.valueOf(((it.getType() instanceof JvmGenericType) && (!((JvmGenericType) it.getType()).isInterface())));
     };
-    final JvmTypeReference oldType = IterableExtensions.<JvmTypeReference>findFirst(_superTypes, _function);
+    final JvmTypeReference oldType = IterableExtensions.<JvmTypeReference>findFirst(this.getDelegate().getSuperTypes(), _function);
     if ((oldType != null)) {
-      JvmGenericType _delegate_1 = this.getDelegate();
-      EList<JvmTypeReference> _superTypes_1 = _delegate_1.getSuperTypes();
-      _superTypes_1.remove(oldType);
+      this.getDelegate().getSuperTypes().remove(oldType);
     }
-    JvmGenericType _delegate_2 = this.getDelegate();
-    EList<JvmTypeReference> _superTypes_2 = _delegate_2.getSuperTypes();
-    _superTypes_2.add(newTypeRef);
+    this.getDelegate().getSuperTypes().add(newTypeRef);
   }
   
   @Override
@@ -213,23 +189,15 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     this.checkMutable();
     ConditionUtils.checkIterable(superInterfaces, "superIntefaces");
     ConditionUtils.checkInferredTypeReferences("implemented interface", ((TypeReference[])Conversions.unwrapArray(superInterfaces, TypeReference.class)));
-    JvmGenericType _delegate = this.getDelegate();
-    EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
     final Function1<JvmTypeReference, Boolean> _function = (JvmTypeReference it) -> {
       return Boolean.valueOf(((it.getType() instanceof JvmGenericType) && ((JvmGenericType) it.getType()).isInterface()));
     };
-    final Iterable<JvmTypeReference> oldInterfaces = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);
-    JvmGenericType _delegate_1 = this.getDelegate();
-    EList<JvmTypeReference> _superTypes_1 = _delegate_1.getSuperTypes();
-    CollectionExtensions.<JvmTypeReference>removeAll(_superTypes_1, oldInterfaces);
-    JvmGenericType _delegate_2 = this.getDelegate();
-    EList<JvmTypeReference> _superTypes_2 = _delegate_2.getSuperTypes();
+    final Iterable<JvmTypeReference> oldInterfaces = IterableExtensions.<JvmTypeReference>filter(this.getDelegate().getSuperTypes(), _function);
+    CollectionExtensions.<JvmTypeReference>removeAll(this.getDelegate().getSuperTypes(), oldInterfaces);
     final Function1<TypeReference, JvmTypeReference> _function_1 = (TypeReference it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toJvmTypeReference(it);
+      return this.getCompilationUnit().toJvmTypeReference(it);
     };
-    Iterable<JvmTypeReference> _map = IterableExtensions.map(superInterfaces, _function_1);
-    Iterables.<JvmTypeReference>addAll(_superTypes_2, _map);
+    Iterables.<JvmTypeReference>addAll(this.getDelegate().getSuperTypes(), IterableExtensions.map(superInterfaces, _function_1));
   }
   
   @Override
@@ -240,21 +208,16 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     ConditionUtils.checkInferredTypeReferences("parameter type", upperBounds);
     final JvmTypeParameter param = TypesFactory.eINSTANCE.createJvmTypeParameter();
     param.setName(name);
-    JvmGenericType _delegate = this.getDelegate();
-    EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
-    _typeParameters.add(param);
+    this.getDelegate().getTypeParameters().add(param);
     for (final TypeReference upper : upperBounds) {
       {
-        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        final JvmTypeReference typeRef = _compilationUnit.toJvmTypeReference(upper);
+        final JvmTypeReference typeRef = this.getCompilationUnit().toJvmTypeReference(upper);
         final JvmUpperBound jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
         jvmUpperBound.setTypeReference(typeRef);
-        EList<JvmTypeConstraint> _constraints = param.getConstraints();
-        _constraints.add(jvmUpperBound);
+        param.getConstraints().add(jvmUpperBound);
       }
     }
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    TypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(param);
+    TypeParameterDeclaration _typeParameterDeclaration = this.getCompilationUnit().toTypeParameterDeclaration(param);
     return ((MutableTypeParameterDeclaration) _typeParameterDeclaration);
   }
 }

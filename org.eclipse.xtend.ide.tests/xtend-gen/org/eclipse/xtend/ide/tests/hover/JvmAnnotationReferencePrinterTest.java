@@ -9,12 +9,7 @@ package org.eclipse.xtend.ide.tests.hover;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -119,17 +114,9 @@ public class JvmAnnotationReferencePrinterTest extends AbstractXtendUITestCase {
       _builder.append(xtendCode);
       _builder.append(" class Foo {}");
       _builder.newLineIfNotEmpty();
-      IProject _project = this.testHelper.getProject();
-      ResourceSet _get = this.resourceSetProvider.get(_project);
-      final XtendFile file = this.parseHelper.parse(_builder, _get);
-      Resource _eResource = file.eResource();
-      EList<EObject> _contents = _eResource.getContents();
-      Iterable<JvmGenericType> _filter = Iterables.<JvmGenericType>filter(_contents, JvmGenericType.class);
-      JvmGenericType _head = IterableExtensions.<JvmGenericType>head(_filter);
-      EList<JvmAnnotationReference> _annotations = _head.getAnnotations();
-      final JvmAnnotationReference annoVal = IterableExtensions.<JvmAnnotationReference>head(_annotations);
-      String _htmlString = this.printer.toHtmlString(annoVal);
-      Assert.assertEquals(expected, _htmlString);
+      final XtendFile file = this.parseHelper.parse(_builder, this.resourceSetProvider.get(this.testHelper.getProject()));
+      final JvmAnnotationReference annoVal = IterableExtensions.<JvmAnnotationReference>head(IterableExtensions.<JvmGenericType>head(Iterables.<JvmGenericType>filter(file.eResource().getContents(), JvmGenericType.class)).getAnnotations());
+      Assert.assertEquals(expected, this.printer.toHtmlString(annoVal));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

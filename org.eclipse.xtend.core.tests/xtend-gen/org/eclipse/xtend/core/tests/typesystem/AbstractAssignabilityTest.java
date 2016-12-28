@@ -9,8 +9,6 @@ package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.inject.Inject;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -18,19 +16,14 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Assert;
 
 /**
@@ -44,47 +37,37 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   
   public void isAssignableFrom(final Class<?> lhs, final String rhs) {
     String _canonicalName = lhs.getCanonicalName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
-    this.isAssignableFrom(_mappedTo, rhs, true);
+    this.isAssignableFrom(Pair.<String, String>of(_canonicalName, null), rhs, true);
   }
   
   public void isAssignableFrom(final Class<?> lhs, final Class<?> rhs) {
     String _canonicalName = lhs.getCanonicalName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
-    String _canonicalName_1 = rhs.getCanonicalName();
-    this.isAssignableFrom(_mappedTo, _canonicalName_1, true);
+    this.isAssignableFrom(Pair.<String, String>of(_canonicalName, null), rhs.getCanonicalName(), true);
   }
   
   public void isAssignableFrom(final String lhs, final String rhs) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of(lhs, null);
-    this.isAssignableFrom(_mappedTo, rhs, true);
+    this.isAssignableFrom(Pair.<String, String>of(lhs, null), rhs, true);
   }
   
   public void isAssignableFromAny(final String lhs) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of(lhs, null);
-    this.isAssignableFrom(_mappedTo, null, true);
+    this.isAssignableFrom(Pair.<String, String>of(lhs, null), null, true);
   }
   
   public void isAssignableFrom(final String lhs, final Class<?> rhs) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of(lhs, null);
-    String _canonicalName = rhs.getCanonicalName();
-    this.isAssignableFrom(_mappedTo, _canonicalName, true);
+    this.isAssignableFrom(Pair.<String, String>of(lhs, null), rhs.getCanonicalName(), true);
   }
   
   public void isNotAssignableFrom(final Class<?> lhs, final String rhs) {
     String _canonicalName = lhs.getCanonicalName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
-    this.isAssignableFrom(_mappedTo, rhs, false);
+    this.isAssignableFrom(Pair.<String, String>of(_canonicalName, null), rhs, false);
   }
   
   public void isNotAssignableFrom(final String lhs, final String rhs) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of(lhs, null);
-    this.isAssignableFrom(_mappedTo, rhs, false);
+    this.isAssignableFrom(Pair.<String, String>of(lhs, null), rhs, false);
   }
   
   public void isNotAssignableFromAny(final String lhs) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of(lhs, null);
-    this.isAssignableFrom(_mappedTo, null, false);
+    this.isAssignableFrom(Pair.<String, String>of(lhs, null), null, false);
   }
   
   public void isAssignableFrom(final Pair<String, String> lhsAndParams, final String rhs) {
@@ -100,65 +83,51 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
       {
-        String _value = lhsAndParams.getValue();
-        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_value);
+        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(lhsAndParams.getValue());
         boolean _not = (!_isNullOrEmpty);
         if (_not) {
           _builder.append("<");
-          String _value_1 = lhsAndParams.getValue();
-          _builder.append(_value_1);
+          String _value = lhsAndParams.getValue();
+          _builder.append(_value);
           _builder.append("> ");
         }
       }
       _builder.append("void method(");
-      String _key = lhsAndParams.getKey();
-      String _fixup = this.fixup(_key);
+      String _fixup = this.fixup(lhsAndParams.getKey());
       _builder.append(_fixup);
       _builder.append(" lhs, ");
       String _fixup_1 = this.fixup(rhs);
       _builder.append(_fixup_1);
       _builder.append(" rhs) {}");
       final String signature = _builder.toString();
-      String _string = signature.toString();
-      final XtendFunction function = this.function(_string);
+      final XtendFunction function = this.function(signature.toString());
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       LightweightTypeReference _xifexpression = null;
-      String _key_1 = lhsAndParams.getKey();
-      boolean _tripleNotEquals = (_key_1 != null);
+      String _key = lhsAndParams.getKey();
+      boolean _tripleNotEquals = (_key != null);
       if (_tripleNotEquals) {
-        EList<JvmFormalParameter> _parameters = operation.getParameters();
-        JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
-        JvmTypeReference _parameterType = _head.getParameterType();
-        _xifexpression = this.toLightweightTypeReference(_parameterType);
+        _xifexpression = this.toLightweightTypeReference(IterableExtensions.<JvmFormalParameter>head(operation.getParameters()).getParameterType());
       } else {
-        ITypeReferenceOwner _owner = this.getOwner();
-        _xifexpression = _owner.newAnyTypeReference();
+        _xifexpression = this.getOwner().newAnyTypeReference();
       }
       final LightweightTypeReference lhsType = _xifexpression;
       LightweightTypeReference _xifexpression_1 = null;
       if ((rhs != null)) {
-        EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
-        JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
-        JvmTypeReference _parameterType_1 = _last.getParameterType();
-        _xifexpression_1 = this.toLightweightTypeReference(_parameterType_1);
+        _xifexpression_1 = this.toLightweightTypeReference(IterableExtensions.<JvmFormalParameter>last(operation.getParameters()).getParameterType());
       } else {
-        ITypeReferenceOwner _owner_1 = this.getOwner();
-        _xifexpression_1 = _owner_1.newAnyTypeReference();
+        _xifexpression_1 = this.getOwner().newAnyTypeReference();
       }
       final LightweightTypeReference rhsType = _xifexpression_1;
       String _simpleName = lhsType.getSimpleName();
       String _plus = (_simpleName + " := ");
       String _simpleName_1 = rhsType.getSimpleName();
       String _plus_1 = (_plus + _simpleName_1);
-      boolean _testIsAssignable = this.testIsAssignable(lhsType, rhsType);
-      Assert.assertEquals(_plus_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable));
+      Assert.assertEquals(_plus_1, Boolean.valueOf(expectation), Boolean.valueOf(this.testIsAssignable(lhsType, rhsType)));
       if (expectation) {
         List<LightweightTypeReference> _allSuperTypes = lhsType.getAllSuperTypes();
         for (final LightweightTypeReference superType : _allSuperTypes) {
           if (((superType.isArray() == lhsType.isArray()) || (lhsType.isArray() == rhsType.isArray()))) {
-            String _string_1 = superType.toString();
-            boolean _testIsAssignable_1 = this.testIsAssignable(superType, rhsType);
-            Assert.assertEquals(_string_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));
+            Assert.assertEquals(superType.toString(), Boolean.valueOf(expectation), Boolean.valueOf(this.testIsAssignable(superType, rhsType)));
           }
         }
       }
@@ -202,43 +171,24 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   }
   
   public boolean testIsAssignable(final LightweightTypeReference lhs, final LightweightTypeReference rhs) {
-    boolean _doIsAssignable = this.doIsAssignable(lhs, lhs);
-    Assert.assertTrue(_doIsAssignable);
-    JvmTypeReference _typeReference = lhs.toTypeReference();
-    LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(_typeReference);
-    boolean _doIsAssignable_1 = this.doIsAssignable(lhs, _lightweightTypeReference);
-    Assert.assertTrue(_doIsAssignable_1);
-    JvmTypeReference _typeReference_1 = rhs.toTypeReference();
-    LightweightTypeReference _lightweightTypeReference_1 = this.toLightweightTypeReference(_typeReference_1);
-    boolean _doIsAssignable_2 = this.doIsAssignable(rhs, _lightweightTypeReference_1);
-    Assert.assertTrue(_doIsAssignable_2);
+    Assert.assertTrue(this.doIsAssignable(lhs, lhs));
+    Assert.assertTrue(this.doIsAssignable(lhs, this.toLightweightTypeReference(lhs.toTypeReference())));
+    Assert.assertTrue(this.doIsAssignable(rhs, this.toLightweightTypeReference(rhs.toTypeReference())));
     final boolean result = this.doIsAssignable(lhs, rhs);
     boolean _isPrimitiveVoid = rhs.isPrimitiveVoid();
     boolean _not = (!_isPrimitiveVoid);
     if (_not) {
-      ITypeReferenceOwner _owner = this.getOwner();
-      final WildcardTypeReference wcRhs = _owner.newWildcardTypeReference();
-      LightweightTypeReference _wrapperTypeIfPrimitive = rhs.getWrapperTypeIfPrimitive();
-      wcRhs.addUpperBound(_wrapperTypeIfPrimitive);
-      boolean _doIsAssignable_3 = this.doIsAssignable(lhs, wcRhs);
-      Assert.assertEquals(Boolean.valueOf(result), Boolean.valueOf(_doIsAssignable_3));
-      ITypeReferenceOwner _owner_1 = this.getOwner();
-      final CompoundTypeReference compoundRhs = _owner_1.newCompoundTypeReference(true);
+      final WildcardTypeReference wcRhs = this.getOwner().newWildcardTypeReference();
+      wcRhs.addUpperBound(rhs.getWrapperTypeIfPrimitive());
+      Assert.assertEquals(Boolean.valueOf(result), Boolean.valueOf(this.doIsAssignable(lhs, wcRhs)));
+      final CompoundTypeReference compoundRhs = this.getOwner().newCompoundTypeReference(true);
       compoundRhs.addComponent(rhs);
-      ITypeReferenceOwner _owner_2 = rhs.getOwner();
-      CommonTypeComputationServices _services = _owner_2.getServices();
-      TypeReferences _typeReferences = _services.getTypeReferences();
-      ITypeReferenceOwner _owner_3 = rhs.getOwner();
-      ResourceSet _contextResourceSet = _owner_3.getContextResourceSet();
-      final JvmType object = _typeReferences.findDeclaredType(Object.class, _contextResourceSet);
-      ITypeReferenceOwner _owner_4 = rhs.getOwner();
-      ParameterizedTypeReference _newParameterizedTypeReference = _owner_4.newParameterizedTypeReference(object);
-      compoundRhs.addComponent(_newParameterizedTypeReference);
+      final JvmType object = rhs.getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, rhs.getOwner().getContextResourceSet());
+      compoundRhs.addComponent(rhs.getOwner().newParameterizedTypeReference(object));
       String _plus = (lhs + " := ");
       String _string = compoundRhs.toString();
       String _plus_1 = (_plus + _string);
-      boolean _doIsAssignable_4 = this.doIsAssignable(lhs, compoundRhs);
-      Assert.assertEquals(_plus_1, Boolean.valueOf(result), Boolean.valueOf(_doIsAssignable_4));
+      Assert.assertEquals(_plus_1, Boolean.valueOf(result), Boolean.valueOf(this.doIsAssignable(lhs, compoundRhs)));
     }
     return result;
   }

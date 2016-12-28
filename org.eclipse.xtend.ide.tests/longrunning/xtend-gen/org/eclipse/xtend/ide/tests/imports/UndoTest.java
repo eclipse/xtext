@@ -8,7 +8,6 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler;
@@ -40,8 +39,7 @@ public class UndoTest extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       final XtextEditor editor = this._workbenchTestHelper.openEditor("Foo", _builder.toString());
-      IXtextDocument _document = editor.getDocument();
-      this._organizeImportsHandler.doOrganizeImports(_document);
+      this._organizeImportsHandler.doOrganizeImports(editor.getDocument());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("import java.util.ArrayList");
       _builder_1.newLine();
@@ -56,10 +54,7 @@ public class UndoTest extends AbstractXtendUITestCase {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      String _string = _builder_1.toString();
-      IXtextDocument _document_1 = editor.getDocument();
-      String _get = _document_1.get();
-      Assert.assertEquals(_string, _get);
+      Assert.assertEquals(_builder_1.toString(), editor.getDocument().get());
       final ISourceViewer viewer = editor.getInternalSourceViewer();
       Assert.assertTrue((viewer instanceof ITextViewerExtension6));
       final IUndoManager undoManager = ((ITextViewerExtension6) viewer).getUndoManager();
@@ -75,10 +70,7 @@ public class UndoTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("}");
       _builder_2.newLine();
-      String _string_1 = _builder_2.toString();
-      IXtextDocument _document_2 = editor.getDocument();
-      String _get_1 = _document_2.get();
-      Assert.assertEquals(_string_1, _get_1);
+      Assert.assertEquals(_builder_2.toString(), editor.getDocument().get());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

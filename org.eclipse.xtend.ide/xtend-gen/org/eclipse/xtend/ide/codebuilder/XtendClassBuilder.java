@@ -9,7 +9,6 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
@@ -35,20 +34,12 @@ public class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuil
   
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
-    ISourceAppender _append = appendable.append("class ");
-    String _className = this.getClassName();
-    ISourceAppender _append_1 = _append.append(_className);
-    ISourceAppender _append_2 = _append_1.append(" {");
-    ISourceAppender _newLine = _append_2.newLine();
-    return _newLine.append("}");
+    return appendable.append("class ").append(this.getClassName()).append(" {").newLine().append("}");
   }
   
   @Override
   public int getInsertOffset(final XtextResource resource) {
-    EObject _context = this.getContext();
-    XtendTypeDeclaration _xtendType = this.getXtendType();
-    XtendTypeDeclaration _findByFragment = this.<XtendTypeDeclaration>findByFragment(resource, _xtendType);
-    return this._insertionOffsets.getNewTypeInsertOffset(_context, _findByFragment);
+    return this._insertionOffsets.getNewTypeInsertOffset(this.getContext(), this.<XtendTypeDeclaration>findByFragment(resource, this.getXtendType()));
   }
   
   @Override

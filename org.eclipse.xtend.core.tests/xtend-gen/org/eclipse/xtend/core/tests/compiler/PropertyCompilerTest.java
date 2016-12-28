@@ -9,9 +9,7 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.inject.Inject;
 import java.lang.reflect.Method;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -276,10 +274,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendClass _clazz = this.clazz(_builder.toString());
-      EList<XtendMember> _members = _clazz.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
-      this._validationTestHelper.assertError(_head, XtendPackage.Literals.XTEND_FIELD, "user.issue", "inferred");
+      this._validationTestHelper.assertError(IterableExtensions.<XtendMember>head(this.clazz(_builder.toString()).getMembers()), XtendPackage.Literals.XTEND_FIELD, "user.issue", "inferred");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -358,10 +353,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendClass _clazz = this.clazz(_builder.toString());
-      EList<XtendMember> _members = _clazz.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
-      this._validationTestHelper.assertError(_head, XtendPackage.Literals.XTEND_FIELD, "user.issue", "inferred");
+      this._validationTestHelper.assertError(IterableExtensions.<XtendMember>head(this.clazz(_builder.toString()).getMembers()), XtendPackage.Literals.XTEND_FIELD, "user.issue", "inferred");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -493,12 +485,9 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          final Object instance = _compiledClass.newInstance();
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
-          Object _invoke = getFoo.invoke(instance);
-          Assert.assertEquals(Integer.valueOf(5), _invoke);
+          final Object instance = it.getCompiledClass().newInstance();
+          final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");
+          Assert.assertEquals(Integer.valueOf(5), getFoo.invoke(instance));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -531,15 +520,11 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          final Object instance = _compiledClass.newInstance();
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method setFoo = _compiledClass_1.getDeclaredMethod("setFoo", int.class);
+          final Object instance = it.getCompiledClass().newInstance();
+          final Method setFoo = it.getCompiledClass().getDeclaredMethod("setFoo", int.class);
           setFoo.invoke(instance, Integer.valueOf(1));
-          Class<?> _compiledClass_2 = it.getCompiledClass();
-          final Method getFoo = _compiledClass_2.getDeclaredMethod("getFoo");
-          Object _invoke = getFoo.invoke(instance);
-          Assert.assertEquals(Integer.valueOf(5), _invoke);
+          final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");
+          Assert.assertEquals(Integer.valueOf(5), getFoo.invoke(instance));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -563,13 +548,10 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          final Method setFoo = _compiledClass.getDeclaredMethod("setFoo", int.class);
+          final Method setFoo = it.getCompiledClass().getDeclaredMethod("setFoo", int.class);
           setFoo.invoke(null, Integer.valueOf(1));
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
-          Object _invoke = getFoo.invoke(null);
-          Assert.assertEquals(Integer.valueOf(1), _invoke);
+          final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");
+          Assert.assertEquals(Integer.valueOf(1), getFoo.invoke(null));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }

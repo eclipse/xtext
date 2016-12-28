@@ -1097,8 +1097,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = () -> {
         final Function1<ITextEditor, ITextEditor> _function_1 = (ITextEditor it) -> {
-          ITextEditor _changeContent = this._javaEditorExtension.changeContent(it, "public void bar() {}", "");
-          return this._javaEditorExtension.changeContent(_changeContent, "private void bar2() {}", "");
+          return this._javaEditorExtension.changeContent(this._javaEditorExtension.changeContent(it, "public void bar() {}", ""), "private void bar2() {}", "");
         };
         this.save("/mypackage/Bar.java", _function_1);
       };
@@ -1109,29 +1108,25 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
   }
   
   public ITextEditor save(final String fileName, final String oldText, final String newText) {
-    ITextEditor _openJavaEditor = this._javaEditorExtension.openJavaEditor(fileName);
     final Function1<ITextEditor, ITextEditor> _function = (ITextEditor it) -> {
       return this._javaEditorExtension.changeContent(it, oldText, newText);
     };
-    return this.doSave(_openJavaEditor, _function);
+    return this.doSave(this._javaEditorExtension.openJavaEditor(fileName), _function);
   }
   
   public ITextEditor save(final String fileName, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
-    ITextEditor _openJavaEditor = this._javaEditorExtension.openJavaEditor(fileName);
-    return this.doSave(_openJavaEditor, consumer);
+    return this.doSave(this._javaEditorExtension.openJavaEditor(fileName), consumer);
   }
   
   public ITextEditor close(final String fileName, final String oldText, final String newText) {
-    ITextEditor _openJavaEditor = this._javaEditorExtension.openJavaEditor(fileName);
     final Function1<ITextEditor, ITextEditor> _function = (ITextEditor it) -> {
       return this._javaEditorExtension.changeContent(it, oldText, newText);
     };
-    return this.doClose(_openJavaEditor, _function);
+    return this.doClose(this._javaEditorExtension.openJavaEditor(fileName), _function);
   }
   
   public ITextEditor close(final String fileName, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
-    ITextEditor _openJavaEditor = this._javaEditorExtension.openJavaEditor(fileName);
-    return this.doClose(_openJavaEditor, consumer);
+    return this.doClose(this._javaEditorExtension.openJavaEditor(fileName), consumer);
   }
   
   public abstract ITextEditor doSave(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer);

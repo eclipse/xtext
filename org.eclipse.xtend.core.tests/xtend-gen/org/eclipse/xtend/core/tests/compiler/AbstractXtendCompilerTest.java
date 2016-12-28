@@ -10,9 +10,6 @@ package org.eclipse.xtend.core.tests.compiler;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -52,31 +49,23 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   
   @Before
   public void setupCompiler() {
-    Class<? extends AbstractXtendCompilerTest> _class = this.getClass();
-    ClassLoader _classLoader = _class.getClassLoader();
-    this.compilationTestHelper.setJavaCompilerClassPath(_classLoader);
+    this.compilationTestHelper.setJavaCompilerClassPath(this.getClass().getClassLoader());
   }
   
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
-    GeneratorConfig _get = this.generatorConfigProvider.get(null);
-    this.doAssertCompilesTo(input, expected, _get, false);
+    this.doAssertCompilesTo(input, expected, this.generatorConfigProvider.get(null), false);
   }
   
   protected XtendFile doAssertCompilesTo(final CharSequence input, final CharSequence expected, final GeneratorConfig config, final boolean serializeAllTypes) {
     try {
-      String _string = input.toString();
-      final XtendFile file = this.file(_string, true);
+      final XtendFile file = this.file(input.toString(), true);
       final ArrayList<CharSequence> results = CollectionLiterals.<CharSequence>newArrayList();
-      Resource _eResource = file.eResource();
-      EList<EObject> _contents = _eResource.getContents();
-      Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
+      Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(file.eResource().getContents(), JvmDeclaredType.class);
       for (final JvmDeclaredType inferredType : _filter) {
         {
-          boolean _isDisabled = DisableCodeGenerationAdapter.isDisabled(inferredType);
-          Assert.assertFalse(_isDisabled);
+          Assert.assertFalse(DisableCodeGenerationAdapter.isDisabled(inferredType));
           CharSequence javaCode = this.generator.generateType(inferredType, config);
-          CharSequence _postProcess = this.postProcessor.postProcess(null, javaCode);
-          javaCode = _postProcess;
+          javaCode = this.postProcessor.postProcess(null, javaCode);
           results.add(javaCode);
           if (this.useJavaCompiler) {
             final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
@@ -87,14 +76,9 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
         }
       }
       if (serializeAllTypes) {
-        String _string_1 = expected.toString();
-        String _join = IterableExtensions.join(results, "\n");
-        Assert.assertEquals(_string_1, _join);
+        Assert.assertEquals(expected.toString(), IterableExtensions.join(results, "\n"));
       } else {
-        String _string_2 = expected.toString();
-        CharSequence _head = IterableExtensions.<CharSequence>head(results);
-        String _string_3 = _head.toString();
-        Assert.assertEquals(_string_2, _string_3);
+        Assert.assertEquals(expected.toString(), IterableExtensions.<CharSequence>head(results).toString());
       }
       return file;
     } catch (Throwable _e) {

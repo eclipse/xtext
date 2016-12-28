@@ -9,8 +9,6 @@ package org.eclipse.xtend.ide.validator;
 
 import com.google.common.collect.Iterables;
 import java.util.List;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.validation.CachingResourceValidatorImpl;
@@ -32,14 +30,10 @@ public class XtendResourceValidator extends CachingResourceValidatorImpl {
     try {
       _xtrycatchfinallyexpression = super.validate(resource, mode, mon);
     } finally {
-      ResourceSetContext _get = ResourceSetContext.get(resource);
-      boolean _isEditor = _get.isEditor();
+      boolean _isEditor = ResourceSetContext.get(resource).isEditor();
       if (_isEditor) {
-        EList<Adapter> _eAdapters = resource.eAdapters();
-        Iterable<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter> _filter = Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(_eAdapters, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
-        final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(_filter);
-        EList<Adapter> _eAdapters_1 = resource.eAdapters();
-        _eAdapters_1.remove(adapter);
+        final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(resource.eAdapters(), ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class));
+        resource.eAdapters().remove(adapter);
       }
     }
     return _xtrycatchfinallyexpression;

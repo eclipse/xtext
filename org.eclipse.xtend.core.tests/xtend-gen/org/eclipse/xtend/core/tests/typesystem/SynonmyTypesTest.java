@@ -10,14 +10,12 @@ package org.eclipse.xtend.core.tests.typesystem;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -26,7 +24,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 import org.junit.Test;
@@ -45,8 +42,7 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
   private SynonymTypesProvider _synonymTypesProvider;
   
   public void hasSynonyms(final String type, final String... expectedSynonyms) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of(type, null);
-    this.hasSynonyms(_mappedTo, expectedSynonyms);
+    this.hasSynonyms(Pair.<String, String>of(type, null), expectedSynonyms);
   }
   
   public void hasSynonyms(final Pair<String, String> typeAndTypeParams, final String... expectedSynonyms) {
@@ -54,13 +50,12 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
       {
-        String _value = typeAndTypeParams.getValue();
-        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_value);
+        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(typeAndTypeParams.getValue());
         boolean _not = (!_isNullOrEmpty);
         if (_not) {
           _builder.append("<");
-          String _value_1 = typeAndTypeParams.getValue();
-          _builder.append(_value_1);
+          String _value = typeAndTypeParams.getValue();
+          _builder.append(_value);
           _builder.append("> ");
         }
       }
@@ -69,38 +64,27 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
       _builder.append(_key);
       _builder.append(" p) {}");
       final String signature = _builder.toString();
-      String _string = signature.toString();
-      final XtendFunction function = this.function(_string);
+      final XtendFunction function = this.function(signature.toString());
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       LightweightTypeReference _xifexpression = null;
       String _key_1 = typeAndTypeParams.getKey();
       boolean _tripleNotEquals = (_key_1 != null);
       if (_tripleNotEquals) {
-        EList<JvmFormalParameter> _parameters = operation.getParameters();
-        JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
-        JvmTypeReference _parameterType = _head.getParameterType();
-        _xifexpression = this.toLightweightTypeReference(_parameterType);
+        _xifexpression = this.toLightweightTypeReference(IterableExtensions.<JvmFormalParameter>head(operation.getParameters()).getParameterType());
       } else {
-        ITypeReferenceOwner _owner = this.getOwner();
-        _xifexpression = _owner.newAnyTypeReference();
+        _xifexpression = this.getOwner().newAnyTypeReference();
       }
       final LightweightTypeReference primary = _xifexpression;
       final HashSet<String> actualSynonyms = CollectionLiterals.<String>newHashSet();
       final SynonymTypesProvider.Acceptor _function = new SynonymTypesProvider.Acceptor() {
         @Override
         protected boolean accept(final LightweightTypeReference type, final int conformance) {
-          String _simpleName = type.getSimpleName();
-          return actualSynonyms.add(_simpleName);
+          return actualSynonyms.add(type.getSimpleName());
         }
       };
       this._synonymTypesProvider.collectSynonymTypes(primary, _function);
-      String _string_1 = actualSynonyms.toString();
-      int _length = expectedSynonyms.length;
-      int _size = actualSynonyms.size();
-      Assert.assertEquals(_string_1, _length, _size);
-      String _string_2 = actualSynonyms.toString();
-      boolean _containsAll = actualSynonyms.containsAll(((Collection<?>)Conversions.doWrapArray(expectedSynonyms)));
-      Assert.assertTrue(_string_2, _containsAll);
+      Assert.assertEquals(actualSynonyms.toString(), expectedSynonyms.length, actualSynonyms.size());
+      Assert.assertTrue(actualSynonyms.toString(), actualSynonyms.containsAll(((Collection<?>)Conversions.doWrapArray(expectedSynonyms))));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -159,51 +143,40 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testListWithTypeParameter_01() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("java.util.List<T>", "T extends String");
-    this.hasSynonyms(_mappedTo, "T[]");
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("java.util.List<? extends T>", "T extends String");
-    this.hasSynonyms(_mappedTo_1, "T[]");
+    this.hasSynonyms(Pair.<String, String>of("java.util.List<T>", "T extends String"), "T[]");
+    this.hasSynonyms(Pair.<String, String>of("java.util.List<? extends T>", "T extends String"), "T[]");
   }
   
   @Test
   public void testListWithTypeParameter_02() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("java.util.List<T>", "T extends Integer");
-    this.hasSynonyms(_mappedTo, "T[]", "int[]");
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("java.util.List<? extends T>", "T extends Integer");
-    this.hasSynonyms(_mappedTo_1, "T[]", "int[]");
+    this.hasSynonyms(Pair.<String, String>of("java.util.List<T>", "T extends Integer"), "T[]", "int[]");
+    this.hasSynonyms(Pair.<String, String>of("java.util.List<? extends T>", "T extends Integer"), "T[]", "int[]");
   }
   
   @Test
   public void testArrayWithTypeParameter_01() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("T[]", "T extends String");
-    this.hasSynonyms(_mappedTo, "List<T>");
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("T[][]", "T extends String");
-    this.hasSynonyms(_mappedTo_1, "List<T[]>");
+    this.hasSynonyms(Pair.<String, String>of("T[]", "T extends String"), "List<T>");
+    this.hasSynonyms(Pair.<String, String>of("T[][]", "T extends String"), "List<T[]>");
   }
   
   @Test
   public void testArrayWithTypeParameter_02() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("T[]", "T extends Integer");
-    this.hasSynonyms(_mappedTo, "List<T>");
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("T[][]", "T extends Integer");
-    this.hasSynonyms(_mappedTo_1, "List<T[]>");
+    this.hasSynonyms(Pair.<String, String>of("T[]", "T extends Integer"), "List<T>");
+    this.hasSynonyms(Pair.<String, String>of("T[][]", "T extends Integer"), "List<T[]>");
   }
   
   @Test
   public void testTypeParameter_01() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "V, T extends Iterable<V>");
-    this.hasSynonyms(_mappedTo, "V[]");
+    this.hasSynonyms(Pair.<String, String>of("T", "V, T extends Iterable<V>"), "V[]");
   }
   
   @Test
   public void testTypeParameter_02() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "T extends Iterable<Integer>");
-    this.hasSynonyms(_mappedTo, "Integer[]", "int[]");
+    this.hasSynonyms(Pair.<String, String>of("T", "T extends Iterable<Integer>"), "Integer[]", "int[]");
   }
   
   @Test
   public void testTypeParameter_03() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "V extends Integer, T extends Iterable<V>");
-    this.hasSynonyms(_mappedTo, "V[]", "int[]");
+    this.hasSynonyms(Pair.<String, String>of("T", "V extends Integer, T extends Iterable<V>"), "V[]", "int[]");
   }
 }

@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.macro;
 import java.util.function.Consumer;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -21,22 +20,18 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class Bug446364Processor extends AbstractClassProcessor {
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
-    Iterable<? extends AnnotationReference> _annotations = annotatedClass.getAnnotations();
-    AnnotationReference _head = IterableExtensions.head(_annotations);
-    String _stringValue = _head.getStringValue("value");
+    String _stringValue = IterableExtensions.head(annotatedClass.getAnnotations()).getStringValue("value");
     if (_stringValue != null) {
       switch (_stringValue) {
         case "rename":
-          Iterable<? extends MutableMethodDeclaration> _declaredMethods = annotatedClass.getDeclaredMethods();
           final Consumer<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
             String _simpleName = it.getSimpleName();
             String _plus = ("prefix_" + _simpleName);
             it.setSimpleName(_plus);
           };
-          _declaredMethods.forEach(_function);
+          annotatedClass.getDeclaredMethods().forEach(_function);
           break;
         case "changeBody":
-          Iterable<? extends MutableMethodDeclaration> _declaredMethods_1 = annotatedClass.getDeclaredMethods();
           final Consumer<MutableMethodDeclaration> _function_1 = (MutableMethodDeclaration it) -> {
             StringConcatenationClient _client = new StringConcatenationClient() {
               @Override
@@ -46,7 +41,7 @@ public class Bug446364Processor extends AbstractClassProcessor {
             };
             it.setBody(_client);
           };
-          _declaredMethods_1.forEach(_function_1);
+          annotatedClass.getDeclaredMethods().forEach(_function_1);
           break;
       }
     }

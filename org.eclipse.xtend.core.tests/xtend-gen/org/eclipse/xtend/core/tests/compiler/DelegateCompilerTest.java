@@ -66,16 +66,12 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           return Boolean.valueOf(((Objects.equal(it_1.getName(), "m") && ((List<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())).isEmpty()) && Objects.equal(it_1.getReturnType(), void.class)));
         };
-        boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_1);
-        Assert.assertTrue(_exists);
+        Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
       this.compilationTestHelper.compile(text, _function);
     } catch (Throwable _e) {
@@ -111,16 +107,12 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           return Boolean.valueOf(((Objects.equal(it_1.getName(), "m") && ((List<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())).isEmpty()) && Objects.equal(it_1.getReturnType(), int.class)));
         };
-        boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_1);
-        Assert.assertTrue(_exists);
+        Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
       this.compilationTestHelper.compile(text, _function);
     } catch (Throwable _e) {
@@ -156,16 +148,12 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           return Boolean.valueOf(((Objects.equal(it_1.getName(), "m") && Objects.equal(IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes()))), Collections.<Class<?>>unmodifiableList(CollectionLiterals.<Class<?>>newArrayList(String.class, Object.class)))) && Objects.equal(it_1.getReturnType(), void.class)));
         };
-        boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_1);
-        Assert.assertTrue(_exists);
+        Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
       this.compilationTestHelper.compile(text, _function);
     } catch (Throwable _e) {
@@ -201,17 +189,13 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           String _name = it_1.getName();
           return Boolean.valueOf(Objects.equal(_name, "m"));
         };
-        boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_1);
-        Assert.assertTrue(_exists);
+        Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
       this.compilationTestHelper.compile(text, _function);
     } catch (Throwable _e) {
@@ -247,17 +231,13 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           String _name = it_1.getName();
           return Boolean.valueOf(Objects.equal(_name, "m"));
         };
-        boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_1);
-        Assert.assertTrue(_exists);
+        Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
       this.compilationTestHelper.compile(text, _function);
     } catch (Throwable _e) {
@@ -293,17 +273,13 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           String _name = it_1.getName();
           return Boolean.valueOf(Objects.equal(_name, "m"));
         };
-        boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_1);
-        Assert.assertTrue(_exists);
+        Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
       this.compilationTestHelper.compile(text, _function);
     } catch (Throwable _e) {
@@ -338,8 +314,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FUNCTION, "user.issue", "signature");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FUNCTION, "user.issue", "signature");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -382,8 +357,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -449,8 +423,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "interface A", "also implemented");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, "user.issue", "interface A", "also implemented");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -493,8 +466,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoErrors(_file);
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -538,14 +510,11 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           String _name = it_1.getName();
           return Boolean.valueOf(Objects.equal(_name, "f"));
         };
-        boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_1);
-        Assert.assertFalse(_exists);
+        Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
       this.compilationTestHelper.compile(_builder, _function);
     } catch (Throwable _e) {
@@ -580,8 +549,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "inferred");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, "user.issue", "inferred");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -679,8 +647,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -710,8 +677,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "common", "interface");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, "user.issue", "common", "interface");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -748,15 +714,11 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
-          Class<?> _declaringClass = it_1.getDeclaringClass();
-          String _simpleName = _declaringClass.getSimpleName();
+          String _simpleName = it_1.getDeclaringClass().getSimpleName();
           return Boolean.valueOf(Objects.equal(_simpleName, "A"));
         };
-        boolean _forall = IterableExtensions.<Method>forall(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_1);
-        Assert.assertTrue(_forall);
+        Assert.assertTrue(IterableExtensions.<Method>forall(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
       this.compilationTestHelper.compile(_builder, _function);
     } catch (Throwable _e) {
@@ -826,9 +788,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
         _builder_1.newLine();
         _builder_1.append("}");
         _builder_1.newLine();
-        String _string = _builder_1.toString();
-        String _generatedCode = it.getGeneratedCode("C");
-        Assert.assertEquals(_string, _generatedCode);
+        Assert.assertEquals(
+          _builder_1.toString(), it.getGeneratedCode("C"));
       };
       this.compilationTestHelper.compile(_builder, _function);
     } catch (Throwable _e) {
@@ -864,31 +825,17 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          String _generatedCode = it.getGeneratedCode("C");
-          String _generatedCode_1 = it.getGeneratedCode("C");
-          boolean _contains = _generatedCode_1.contains("<V extends CharSequence> CharSequence foo(final String foo, final V bar) throws Exception");
-          Assert.assertTrue(_generatedCode, _contains);
-          Class<?> _compiledClass = it.getCompiledClass("C");
-          final Object instance = _compiledClass.newInstance();
-          Class<?> _compiledClass_1 = it.getCompiledClass("C");
-          final Method method = _compiledClass_1.getDeclaredMethod("foo", String.class, CharSequence.class);
-          Object _invoke = method.invoke(instance, "bar", "bar");
-          Assert.assertEquals("bar", _invoke);
-          Class<?>[] _exceptionTypes = method.getExceptionTypes();
-          Object _head = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(_exceptionTypes)));
-          Assert.assertEquals(Exception.class, _head);
-          Class<?> _returnType = method.getReturnType();
-          Assert.assertEquals(CharSequence.class, _returnType);
-          Class<?>[] _parameterTypes = method.getParameterTypes();
-          Object _head_1 = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(_parameterTypes)));
-          Assert.assertEquals(String.class, _head_1);
-          Class<?>[] _parameterTypes_1 = method.getParameterTypes();
-          Object _get = _parameterTypes_1[1];
-          Assert.assertEquals(CharSequence.class, _get);
+          Assert.assertTrue(it.getGeneratedCode("C"), it.getGeneratedCode("C").contains("<V extends CharSequence> CharSequence foo(final String foo, final V bar) throws Exception"));
+          final Object instance = it.getCompiledClass("C").newInstance();
+          final Method method = it.getCompiledClass("C").getDeclaredMethod("foo", String.class, CharSequence.class);
+          Assert.assertEquals("bar", method.invoke(instance, "bar", "bar"));
+          Assert.assertEquals(Exception.class, IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(method.getExceptionTypes()))));
+          Assert.assertEquals(CharSequence.class, method.getReturnType());
+          Assert.assertEquals(String.class, IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(method.getParameterTypes()))));
+          Assert.assertEquals(CharSequence.class, method.getParameterTypes()[1]);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -927,19 +874,13 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          String _generatedCode = it.getGeneratedCode("C");
-          boolean _contains = _generatedCode.contains("Y foo(final Y foo)");
-          Assert.assertTrue(_contains);
-          Class<?> _compiledClass = it.getCompiledClass("C");
-          final Object instance = _compiledClass.newInstance();
-          Class<?> _compiledClass_1 = it.getCompiledClass("C");
-          final Method method = _compiledClass_1.getDeclaredMethod("foo", CharSequence.class);
-          Object _invoke = method.invoke(instance, "bar");
-          Assert.assertEquals("bar", _invoke);
+          Assert.assertTrue(it.getGeneratedCode("C").contains("Y foo(final Y foo)"));
+          final Object instance = it.getCompiledClass("C").newInstance();
+          final Method method = it.getCompiledClass("C").getDeclaredMethod("foo", CharSequence.class);
+          Assert.assertEquals("bar", method.invoke(instance, "bar"));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -977,8 +918,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "no", "common", "interfaces");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, "user.issue", "no", "common", "interfaces");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1014,8 +954,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertWarning(_file, XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER, "delegate");
+      this._validationTestHelper.assertWarning(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER, "delegate");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1038,8 +977,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(text));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1067,8 +1005,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(text));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1100,8 +1037,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
+      this._validationTestHelper.assertNoIssues(this.file(text));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

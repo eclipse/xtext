@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -12,7 +11,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -470,8 +468,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
   @Test
   public void testRenameRefactoringScenario() {
     final RewritableImportSection section = this.getSection(List.class);
-    List<JvmDeclaredType> _importedTypes = section.getImportedTypes("List");
-    final JvmDeclaredType importedType = IterableExtensions.<JvmDeclaredType>head(_importedTypes);
+    final JvmDeclaredType importedType = IterableExtensions.<JvmDeclaredType>head(section.getImportedTypes("List"));
     Assert.assertNotNull(importedType);
     importedType.setSimpleName("NewList");
     section.removeImport(importedType);
@@ -484,9 +481,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
   
   protected RewritableImportSection getImportSection(final CharSequence model) {
     try {
-      String _string = model.toString();
-      XtendFile _file = this.file(_string);
-      Resource _eResource = _file.eResource();
+      Resource _eResource = this.file(model.toString()).eResource();
       return this._factory.parse(((XtextResource) _eResource));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -494,33 +489,27 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
   }
   
   protected boolean addImport(final RewritableImportSection section, final Class<?> javaClass) {
-    JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    return section.addImport(_jvmType);
+    return section.addImport(this.jvmType(javaClass));
   }
   
   protected boolean removeImport(final RewritableImportSection section, final Class<?> javaClass) {
-    JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    return section.removeImport(_jvmType);
+    return section.removeImport(this.jvmType(javaClass));
   }
   
   protected boolean addStaticImport(final RewritableImportSection section, final Class<?> javaClass) {
-    JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    return section.addStaticImport(_jvmType);
+    return section.addStaticImport(this.jvmType(javaClass));
   }
   
   protected boolean removeStaticImport(final RewritableImportSection section, final Class<?> javaClass) {
-    JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    return section.removeStaticImport(_jvmType, null);
+    return section.removeStaticImport(this.jvmType(javaClass), null);
   }
   
   protected boolean addExtensionImport(final RewritableImportSection section, final Class<?> javaClass) {
-    JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    return section.addStaticExtensionImport(_jvmType);
+    return section.addStaticExtensionImport(this.jvmType(javaClass));
   }
   
   protected boolean removeExtensionImport(final RewritableImportSection section, final Class<?> javaClass) {
-    JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    return section.removeStaticExtensionImport(_jvmType, null);
+    return section.removeStaticExtensionImport(this.jvmType(javaClass), null);
   }
   
   protected JvmDeclaredType jvmType(final Class<?> javaClass) {
@@ -537,11 +526,8 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     try {
       RewritableImportSection _xblockexpression = null;
       {
-        CharSequence _model = this.getModel(false, types);
-        String _string = _model.toString();
-        this.model = _string;
-        XtendFile _file = this.file(this.model);
-        this.xtendFile = _file;
+        this.model = this.getModel(false, types).toString();
+        this.xtendFile = this.file(this.model);
         Resource _eResource = this.xtendFile.eResource();
         _xblockexpression = this._factory.parse(((XtextResource) _eResource));
       }
@@ -555,11 +541,8 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     try {
       RewritableImportSection _xblockexpression = null;
       {
-        CharSequence _model = this.getModel(true, types);
-        String _string = _model.toString();
-        this.model = _string;
-        XtendFile _file = this.file(this.model);
-        this.xtendFile = _file;
+        this.model = this.getModel(true, types).toString();
+        this.xtendFile = this.file(this.model);
         Resource _eResource = this.xtendFile.eResource();
         _xblockexpression = this._factory.parse(((XtextResource) _eResource));
       }
@@ -575,35 +558,25 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     final Function1<ReplaceRegion, Integer> _function = (ReplaceRegion it) -> {
       return Integer.valueOf(it.getOffset());
     };
-    List<ReplaceRegion> _sortBy = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
-    List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(_sortBy);
+    List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function));
     for (final ReplaceRegion it : _reverse) {
       int _offset = it.getOffset();
       int _offset_1 = it.getOffset();
       int _length = it.getLength();
       int _plus = (_offset_1 + _length);
-      String _text = it.getText();
-      builder.replace(_offset, _plus, _text);
+      builder.replace(_offset, _plus, it.getText());
     }
-    String _string = sectionAsString.toString();
-    CharSequence _expectedModel = this.getExpectedModel(_string);
-    String _processLinebreaks = this.processLinebreaks(_expectedModel);
-    String _processLinebreaks_1 = this.processLinebreaks(builder);
-    Assert.assertEquals(_processLinebreaks, _processLinebreaks_1);
+    Assert.assertEquals(this.processLinebreaks(this.getExpectedModel(sectionAsString.toString())), this.processLinebreaks(builder));
   }
   
   protected String processLinebreaks(final CharSequence sequence) {
     String _xblockexpression = null;
     {
-      Resource _eResource = this.xtendFile.eResource();
-      URI _uRI = _eResource.getURI();
-      ILineSeparatorInformation _lineSeparatorInformation = this.whitespaceInformationProvider.getLineSeparatorInformation(_uRI);
-      final String lineSeparator = _lineSeparatorInformation.getLineSeparator();
+      final String lineSeparator = this.whitespaceInformationProvider.getLineSeparatorInformation(this.xtendFile.eResource().getURI()).getLineSeparator();
       String _xifexpression = null;
       boolean _isIgnoreLinebreaks = this.isIgnoreLinebreaks();
       if (_isIgnoreLinebreaks) {
-        String _string = sequence.toString();
-        _xifexpression = _string.replaceAll((("(" + lineSeparator) + ")+"), " ");
+        _xifexpression = sequence.toString().replaceAll((("(" + lineSeparator) + ")+"), " ");
       } else {
         _xifexpression = sequence.toString();
       }

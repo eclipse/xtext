@@ -65,19 +65,14 @@ public class RenameJavaClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    String _text = xtendEditor.getText();
-    this.assertEquals(_builder_2, _text);
-    boolean _isDirty = xtendEditor.isDirty();
-    Assert.assertFalse(_isDirty);
+    this.assertEquals(_builder_2, xtendEditor.getText());
+    Assert.assertFalse(xtendEditor.isDirty());
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("public class NewJavaClass {}");
     _builder_3.newLine();
-    String _text_1 = javaEditor.getText();
-    this.assertEquals(_builder_3, _text_1);
-    boolean _isDirty_1 = javaEditor.isDirty();
-    Assert.assertFalse(_isDirty_1);
-    String _title = javaEditor.getTitle();
-    this.assertEquals("NewJavaClass.java", _title);
+    this.assertEquals(_builder_3, javaEditor.getText());
+    Assert.assertFalse(javaEditor.isDirty());
+    this.assertEquals("NewJavaClass.java", javaEditor.getTitle());
   }
   
   @Test
@@ -100,18 +95,13 @@ public class RenameJavaClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    String _text = xtendEditor.getText();
-    this.assertEquals(_builder_2, _text);
-    boolean _isDirty = xtendEditor.isDirty();
-    Assert.assertFalse(_isDirty);
+    this.assertEquals(_builder_2, xtendEditor.getText());
+    Assert.assertFalse(xtendEditor.isDirty());
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("public class NewJavaClass {}");
     _builder_3.newLine();
-    String _text_1 = javaEditor.getText();
-    this.assertEquals(_builder_3, _text_1);
-    boolean _isDirty_1 = javaEditor.isDirty();
-    Assert.assertFalse(_isDirty_1);
-    String _title = javaEditor.getTitle();
-    this.assertEquals("NewJavaClass.java", _title);
+    this.assertEquals(_builder_3, javaEditor.getText());
+    Assert.assertFalse(javaEditor.isDirty());
+    this.assertEquals("NewJavaClass.java", javaEditor.getTitle());
   }
 }

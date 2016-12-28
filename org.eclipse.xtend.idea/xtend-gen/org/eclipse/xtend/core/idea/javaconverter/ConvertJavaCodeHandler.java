@@ -14,7 +14,6 @@ import com.google.inject.Provider;
 import com.intellij.codeInsight.FileModificationService;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.editor.Editor;
@@ -25,7 +24,6 @@ import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -42,7 +40,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.xtend.core.formatting2.FormatterFacade;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
@@ -75,32 +72,24 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
     private int alreadyDone = 0;
     
     private ConvertJavaSequentialTask(final Map<PsiFile, JavaConverter.ConversionResult> runnables, final SequentialModalProgressTask modalProgressTask) {
-      Set<Map.Entry<PsiFile, JavaConverter.ConversionResult>> _entrySet = runnables.entrySet();
       final Function1<Map.Entry<PsiFile, JavaConverter.ConversionResult>, Runnable> _function = (Map.Entry<PsiFile, JavaConverter.ConversionResult> resultEntry) -> {
         return ((Runnable) new Runnable() {
           @Override
           public void run() {
             try {
               final JavaConverter.ConversionResult result = resultEntry.getValue();
-              String _xtendCode = result.getXtendCode();
-              boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_xtendCode);
+              boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(result.getXtendCode());
               boolean _not = (!_isNullOrEmpty);
               if (_not) {
-                PsiFile _key = resultEntry.getKey();
-                final VirtualFile jvf = _key.getVirtualFile();
+                final VirtualFile jvf = resultEntry.getKey().getVirtualFile();
                 String _nameWithoutExtension = jvf.getNameWithoutExtension();
                 final String xtendFileName = (_nameWithoutExtension + ".xtend");
-                VirtualFile _parent = jvf.getParent();
-                VirtualFile _findChild = _parent.findChild(xtendFileName);
+                VirtualFile _findChild = jvf.getParent().findChild(xtendFileName);
                 boolean _tripleEquals = (_findChild == null);
                 if (_tripleEquals) {
-                  VirtualFile _parent_1 = jvf.getParent();
-                  final VirtualFile xtendFile = _parent_1.createChildData(this, xtendFileName);
-                  String _xtendCode_1 = result.getXtendCode();
-                  byte[] _bytes = _xtendCode_1.getBytes();
-                  xtendFile.setBinaryContent(_bytes);
-                  PsiFile _key_1 = resultEntry.getKey();
-                  final Project project = _key_1.getProject();
+                  final VirtualFile xtendFile = jvf.getParent().createChildData(this, xtendFileName);
+                  xtendFile.setBinaryContent(result.getXtendCode().getBytes());
+                  final Project project = resultEntry.getKey().getProject();
                   final CodeStyleManager formatter = CodeStyleManager.getInstance(project);
                   final PsiFile xtendPsiFile = PsiUtil.getPsiFile(project, xtendFile);
                   formatter.reformat(xtendPsiFile);
@@ -108,12 +97,10 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
                   int _size = runnables.size();
                   boolean _tripleEquals_1 = (_size == 1);
                   if (_tripleEquals_1) {
-                    Application _application = ApplicationManager.getApplication();
                     final Runnable _function = () -> {
-                      FileEditorManager _instance = FileEditorManager.getInstance(project);
-                      _instance.openFile(xtendFile, true);
+                      FileEditorManager.getInstance(project).openFile(xtendFile, true);
                     };
-                    _application.invokeLater(_function);
+                    ApplicationManager.getApplication().invokeLater(_function);
                   }
                 }
               }
@@ -123,12 +110,9 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
           }
         });
       };
-      Iterable<Runnable> _map = IterableExtensions.<Map.Entry<PsiFile, JavaConverter.ConversionResult>, Runnable>map(_entrySet, _function);
-      Iterator<Runnable> _iterator = _map.iterator();
-      this.workUnits = _iterator;
+      this.workUnits = IterableExtensions.<Map.Entry<PsiFile, JavaConverter.ConversionResult>, Runnable>map(runnables.entrySet(), _function).iterator();
       this.progressTask = modalProgressTask;
-      int _size = runnables.size();
-      this.todo = _size;
+      this.todo = runnables.size();
     }
     
     @Override
@@ -146,8 +130,7 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
       if ((indicator != null)) {
         indicator.setFraction((((double) this.alreadyDone) / this.todo));
       }
-      Runnable _next = this.workUnits.next();
-      _next.run();
+      this.workUnits.next().run();
       this.alreadyDone++;
       return true;
     }
@@ -170,16 +153,12 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
   
   @Override
   public void invoke(final Project project, final Editor editor, final PsiFile file, final DataContext dataContext) {
-    List<PsiElement> _newImmutableList = CollectionLiterals.<PsiElement>newImmutableList(file);
-    this.invoke(project, ((PsiElement[])Conversions.unwrapArray(_newImmutableList, PsiElement.class)), dataContext);
+    this.invoke(project, ((PsiElement[])Conversions.unwrapArray(CollectionLiterals.<PsiElement>newImmutableList(file), PsiElement.class)), dataContext);
   }
   
   @Override
   public void invoke(final Project project, final PsiElement[] elements, final DataContext dataContext) {
-    Iterable<PsiJavaFile> _collectJavaFiles = ConvertJavaCodeHandler.collectJavaFiles(elements);
-    List<PsiJavaFile> _list = IterableExtensions.<PsiJavaFile>toList(_collectJavaFiles);
-    Project _data = CommonDataKeys.PROJECT.getData(dataContext);
-    this.runJavaConverter(_list, _data);
+    this.runJavaConverter(IterableExtensions.<PsiJavaFile>toList(ConvertJavaCodeHandler.collectJavaFiles(elements)), CommonDataKeys.PROJECT.getData(dataContext));
   }
   
   public static Iterable<PsiJavaFile> collectJavaFiles(final PsiElement[] elements) {
@@ -196,8 +175,7 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
         } else {
           Iterable<PsiJavaFile> _xifexpression_2 = null;
           if ((it instanceof PsiDirectory)) {
-            PsiElement[] _children = ((PsiDirectory)it).getChildren();
-            _xifexpression_2 = ConvertJavaCodeHandler.collectJavaFiles(_children);
+            _xifexpression_2 = ConvertJavaCodeHandler.collectJavaFiles(((PsiDirectory)it).getChildren());
           }
           _xifexpression_1 = _xifexpression_2;
         }
@@ -206,8 +184,7 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
       return _xifexpression;
     };
     final List<Iterable<PsiJavaFile>> iterables = ListExtensions.<PsiElement, Iterable<PsiJavaFile>>map(((List<PsiElement>)Conversions.doWrapArray(elements)), _function);
-    Iterable<Iterable<PsiJavaFile>> _filterNull = IterableExtensions.<Iterable<PsiJavaFile>>filterNull(iterables);
-    return Iterables.<PsiJavaFile>concat(_filterNull);
+    return Iterables.<PsiJavaFile>concat(IterableExtensions.<Iterable<PsiJavaFile>>filterNull(iterables));
   }
   
   public void runJavaConverter(final Collection<PsiJavaFile> files, final Project project) {
@@ -237,26 +214,18 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
           String _plus = ("Converting " + _name);
           indicator.setText(_plus);
           final JavaConverter jc = ConvertJavaCodeHandler.this.jcProvider.get();
-          Application _application = ApplicationManager.getApplication();
           final Function1<Object, String> _function_1 = (Object it) -> {
             return javaFile.getText();
           };
-          final String javaSrc = _application.<String>runReadAction(((Computable<String>) new Computable<String>() {
+          final String javaSrc = ApplicationManager.getApplication().<String>runReadAction(((Computable<String>) new Computable<String>() {
               public String compute() {
                 return _function_1.apply(null);
               }
           }));
-          Project _project = this.getProject();
-          ProjectRootManager _instance = ProjectRootManager.getInstance(_project);
-          ProjectFileIndex _fileIndex = _instance.getFileIndex();
-          VirtualFile _virtualFile = javaFile.getVirtualFile();
-          final Module context = _fileIndex.getModuleForFile(_virtualFile);
-          VirtualFile _virtualFile_1 = javaFile.getVirtualFile();
-          String _nameWithoutExtension = _virtualFile_1.getNameWithoutExtension();
-          final JavaConverter.ConversionResult result = jc.toXtend(_nameWithoutExtension, javaSrc, context);
-          String _xtendCode = result.getXtendCode();
-          String _format = ConvertJavaCodeHandler.this.formatter.format(_xtendCode);
-          result.setXtendCode(_format);
+          final Module context = ProjectRootManager.getInstance(this.getProject()).getFileIndex().getModuleForFile(
+            javaFile.getVirtualFile());
+          final JavaConverter.ConversionResult result = jc.toXtend(javaFile.getVirtualFile().getNameWithoutExtension(), javaSrc, context);
+          result.setXtendCode(ConvertJavaCodeHandler.this.formatter.format(result.getXtendCode()));
           coversionResult.put(javaFile, result);
           this.done++;
           int _size = files.size();
@@ -271,9 +240,7 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
         boolean _isEmpty = coversionResult.isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
-          FileModificationService _instance = FileModificationService.getInstance();
-          Set<PsiFile> _keySet = coversionResult.keySet();
-          boolean _preparePsiElementsForWrite = _instance.preparePsiElementsForWrite(_keySet);
+          boolean _preparePsiElementsForWrite = FileModificationService.getInstance().preparePsiElementsForWrite(coversionResult.keySet());
           boolean _not_1 = (!_preparePsiElementsForWrite);
           if (_not_1) {
             return;
@@ -283,18 +250,14 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
           progressTask.setMinIterationTime(50);
           ConvertJavaCodeHandler.ConvertJavaSequentialTask _convertJavaSequentialTask = new ConvertJavaCodeHandler.ConvertJavaSequentialTask(coversionResult, progressTask);
           progressTask.setTask(_convertJavaSequentialTask);
-          CommandProcessor _instance_1 = CommandProcessor.getInstance();
+          CommandProcessor _instance = CommandProcessor.getInstance();
           Project _project_1 = this.getProject();
           final Runnable _function = () -> {
-            CommandProcessor _instance_2 = CommandProcessor.getInstance();
-            Project _project_2 = this.getProject();
-            _instance_2.markCurrentCommandAsGlobal(_project_2);
-            Application _application = ApplicationManager.getApplication();
+            CommandProcessor.getInstance().markCurrentCommandAsGlobal(this.getProject());
             final Function1<Object, String> _function_1 = (Object it) -> {
               String _xtrycatchfinallyexpression = null;
               try {
-                ProgressManager _instance_3 = ProgressManager.getInstance();
-                _instance_3.run(progressTask);
+                ProgressManager.getInstance().run(progressTask);
               } catch (final Throwable _t) {
                 if (_t instanceof ProcessCanceledException) {
                   final ProcessCanceledException e = (ProcessCanceledException)_t;
@@ -305,7 +268,7 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
               }
               return _xtrycatchfinallyexpression;
             };
-            _application.runWriteAction(
+            ApplicationManager.getApplication().runWriteAction(
               ((Runnable) new Runnable() {
                   public void run() {
                     _function_1.apply(null);
@@ -314,15 +277,13 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
           };
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Convert ");
-          Set<PsiFile> _keySet_1 = coversionResult.keySet();
-          int _size = _keySet_1.size();
+          int _size = coversionResult.keySet().size();
           _builder.append(_size);
           _builder.append(" Java to Xtend");
-          _instance_1.executeCommand(_project_1, _function, _builder.toString(), null);
+          _instance.executeCommand(_project_1, _function, _builder.toString(), null);
         }
       }
     };
-    ProgressManager _instance = ProgressManager.getInstance();
-    _instance.run(task);
+    ProgressManager.getInstance().run(task);
   }
 }

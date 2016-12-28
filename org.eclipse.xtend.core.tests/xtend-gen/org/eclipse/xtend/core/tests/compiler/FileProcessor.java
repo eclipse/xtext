@@ -11,10 +11,8 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.CodeGenerationContext;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -24,18 +22,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class FileProcessor extends AbstractClassProcessor {
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
-    CompilationUnit _compilationUnit = annotatedClass.getCompilationUnit();
-    final Path path = _compilationUnit.getFilePath();
-    Path _projectFolder = context.getProjectFolder(path);
-    Path _append = _projectFolder.append("res/template.txt");
-    CharSequence _contents = context.getContents(_append);
-    final String contents = _contents.toString();
-    String _trim = contents.trim();
-    final String[] segments = _trim.split(",");
+    final Path path = annotatedClass.getCompilationUnit().getFilePath();
+    final String contents = context.getContents(context.getProjectFolder(path).append("res/template.txt")).toString();
+    final String[] segments = contents.trim().split(",");
     for (final String segment : segments) {
       final Procedure1<MutableFieldDeclaration> _function = (MutableFieldDeclaration it) -> {
-        TypeReference _string = context.getString();
-        it.setType(_string);
+        it.setType(context.getString());
       };
       annotatedClass.addField(segment, _function);
     }
@@ -43,15 +35,9 @@ public class FileProcessor extends AbstractClassProcessor {
   
   @Override
   public void doGenerateCode(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
-    CompilationUnit _compilationUnit = annotatedClass.getCompilationUnit();
-    final Path path = _compilationUnit.getFilePath();
-    Path _targetFolder = context.getTargetFolder(path);
-    final Path result = _targetFolder.append("out.txt");
-    Path _projectFolder = context.getProjectFolder(path);
-    Path _append = _projectFolder.append("res/template.txt");
-    CharSequence _contents = context.getContents(_append);
-    String _string = _contents.toString();
-    final String[] segments = _string.split(",");
+    final Path path = annotatedClass.getCompilationUnit().getFilePath();
+    final Path result = context.getTargetFolder(path).append("out.txt");
+    final String[] segments = context.getContents(context.getProjectFolder(path).append("res/template.txt")).toString().split(",");
     StringConcatenation _builder = new StringConcatenation();
     {
       boolean _hasElements = false;

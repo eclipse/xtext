@@ -12,7 +12,6 @@ import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -28,18 +27,12 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuild
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {
-      JvmVisibility _visibility = this.getVisibility();
-      this.appendVisibility(appendable, _visibility, JvmVisibility.DEFAULT);
+      this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.DEFAULT);
       boolean _isStaticFlag = this.isStaticFlag();
       if (_isStaticFlag) {
         appendable.append("static ");
       }
-      LightweightTypeReference _fieldType = this.getFieldType();
-      ISourceAppender _appendType = this.appendType(appendable, _fieldType, "Object");
-      ISourceAppender _append = _appendType.append(" ");
-      String _fieldName = this.getFieldName();
-      ISourceAppender _append_1 = _append.append(_fieldName);
-      _xblockexpression = _append_1.append(";");
+      _xblockexpression = this.appendType(appendable, this.getFieldType(), "Object").append(" ").append(this.getFieldName()).append(";");
     }
     return _xblockexpression;
   }

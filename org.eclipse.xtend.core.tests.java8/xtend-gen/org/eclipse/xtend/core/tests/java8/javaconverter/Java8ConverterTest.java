@@ -34,7 +34,6 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder.append("return new ArrayList() ");
     _builder.newLine();
     _builder.append("}");
-    String _string = _builder.toString();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("public List<?> foo() {");
     _builder_1.newLine();
@@ -45,8 +44,7 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder_1.append("return new ArrayList<>();");
     _builder_1.newLine();
     _builder_1.append("}");
-    String _xtendClassBodyDeclr = this.toXtendClassBodyDeclr(_builder_1);
-    Assert.assertEquals(_string, _xtendClassBodyDeclr);
+    Assert.assertEquals(_builder.toString(), this.toXtendClassBodyDeclr(_builder_1));
   }
   
   @Test
@@ -116,7 +114,6 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("}");
-    String _string = _builder.toString();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("int thousand = 1_000;");
     _builder_1.newLine();
@@ -169,8 +166,7 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    String _xtendClassBodyDeclr = this.toXtendClassBodyDeclr(_builder_1);
-    Assert.assertEquals(_string, _xtendClassBodyDeclr);
+    Assert.assertEquals(_builder.toString(), this.toXtendClassBodyDeclr(_builder_1));
   }
   
   @Test
@@ -256,7 +252,6 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder.append("return [System.out.println(s)] ");
     _builder.newLine();
     _builder.append("}");
-    String _string = _builder.toString();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("public void javaLambda(){");
     _builder_1.newLine();
@@ -282,7 +277,7 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder_1.append("   ");
     _builder_1.append("}");
     _builder_1.newLine();
-    String _xtendClassBodyDeclr = this.toXtendClassBodyDeclr(_builder_1);
-    Assert.assertEquals(_string, _xtendClassBodyDeclr);
+    Assert.assertEquals(
+      _builder.toString(), this.toXtendClassBodyDeclr(_builder_1));
   }
 }

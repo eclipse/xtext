@@ -30,14 +30,12 @@ public class XtendBlockFactory extends XbaseBlockFactory {
   protected boolean isStructural(final EObject grammarElement) {
     boolean _switchResult = false;
     boolean _matched = false;
-    XtendGrammarAccess.XVariableDeclarationElements _xVariableDeclarationAccess = this._xtendGrammarAccess.getXVariableDeclarationAccess();
-    RuleCall _rightXExpressionParserRuleCall_2_1_0 = _xVariableDeclarationAccess.getRightXExpressionParserRuleCall_2_1_0();
+    RuleCall _rightXExpressionParserRuleCall_2_1_0 = this._xtendGrammarAccess.getXVariableDeclarationAccess().getRightXExpressionParserRuleCall_2_1_0();
     if (Objects.equal(grammarElement, _rightXExpressionParserRuleCall_2_1_0)) {
       _matched=true;
     }
     if (!_matched) {
-      XtendGrammarAccess.XSwitchExpressionElements _xSwitchExpressionAccess = this._xtendGrammarAccess.getXSwitchExpressionAccess();
-      RuleCall _defaultXExpressionParserRuleCall_5_2_0 = _xSwitchExpressionAccess.getDefaultXExpressionParserRuleCall_5_2_0();
+      RuleCall _defaultXExpressionParserRuleCall_5_2_0 = this._xtendGrammarAccess.getXSwitchExpressionAccess().getDefaultXExpressionParserRuleCall_5_2_0();
       if (Objects.equal(grammarElement, _defaultXExpressionParserRuleCall_5_2_0)) {
         _matched=true;
       }

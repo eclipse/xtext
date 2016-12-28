@@ -7,47 +7,34 @@
  */
 package org.eclipse.xtend.idea;
 
-import com.google.common.base.Objects;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.tree.IElementType;
-import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingLexer;
-import org.eclipse.xtend.core.idea.lang.XtendFileType;
-import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles;
-import org.eclipse.xtext.idea.tests.LibraryUtil;
-import org.eclipse.xtext.idea.tests.LightToolingTest;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-
 @SuppressWarnings("all")
-public abstract class LightXtendTest extends LightToolingTest {
+public abstract class LightXtendTest /* implements LightToolingTest  */{
   public LightXtendTest() {
-    super(XtendFileType.INSTANCE);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method super(Object) is undefined"
+      + "\nThe method or field XtendFileType is undefined"
+      + "\nINSTANCE cannot be resolved");
   }
   
   @Override
-  protected void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
-    try {
-      LibraryUtil.addXtendLibrary(model);
-      VirtualFile _file = contentEntry.getFile();
-      final VirtualFile xtendGenFolder = VfsUtil.createDirectoryIfMissing(_file, "xtend-gen");
-      contentEntry.addSourceFolder(xtendGenFolder, false);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  protected Object configureModule(final /* Module */Object module, final /* ModifiableRootModel */Object model, final /* ContentEntry */Object contentEntry) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field VfsUtil is undefined"
+      + "\naddXtendLibrary cannot be resolved"
+      + "\ncreateDirectoryIfMissing cannot be resolved"
+      + "\nfile cannot be resolved"
+      + "\naddSourceFolder cannot be resolved");
   }
   
   @Override
-  protected String getXtextStyle(final IElementType tokenType) {
-    String _xifexpression = null;
-    boolean _equals = Objects.equal(tokenType, XtendHighlightingLexer.GUILLEMET_ELEMENT_TYPE);
-    if (_equals) {
-      _xifexpression = XtendHighlightingStyles.RICH_TEXT_DELIMITER_ID;
-    } else {
-      _xifexpression = super.getXtextStyle(tokenType);
-    }
-    return _xifexpression;
+  protected Object getXtextStyle(final /* IElementType */Object tokenType) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field XtendHighlightingLexer is undefined"
+      + "\nThe method or field XtendHighlightingStyles is undefined"
+      + "\nThe method or field super is undefined"
+      + "\n== cannot be resolved"
+      + "\nGUILLEMET_ELEMENT_TYPE cannot be resolved"
+      + "\nRICH_TEXT_DELIMITER_ID cannot be resolved"
+      + "\ngetXtextStyle cannot be resolved");
   }
 }

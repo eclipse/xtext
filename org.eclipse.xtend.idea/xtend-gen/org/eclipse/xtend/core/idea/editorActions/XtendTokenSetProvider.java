@@ -34,17 +34,15 @@ public class XtendTokenSetProvider extends DefaultTokenSetProvider {
   
   @Inject
   public XtendTokenSetProvider(final TokenTypeProvider tokenTypeProvider) {
-    IElementType _iElementType = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT);
-    IElementType _iElementType_1 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_START);
-    IElementType _iElementType_2 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_END);
-    IElementType _iElementType_3 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_INBETWEEN);
-    TokenSet _create = TokenSet.create(_iElementType, _iElementType_1, _iElementType_2, _iElementType_3, 
+    this.richStringLiteralTokens = TokenSet.create(
+      tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT), 
+      tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_START), 
+      tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_END), 
+      tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_INBETWEEN), 
       XtendHighlightingLexer.GUILLEMET_ELEMENT_TYPE);
-    this.richStringLiteralTokens = _create;
-    IElementType _iElementType_4 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_INBETWEEN);
-    IElementType _iElementType_5 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_END);
-    TokenSet _create_1 = TokenSet.create(_iElementType_4, _iElementType_5);
-    this.richStringCommentTokens = _create_1;
+    this.richStringCommentTokens = TokenSet.create(
+      tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_INBETWEEN), 
+      tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_END));
   }
   
   @Override
@@ -71,8 +69,7 @@ public class XtendTokenSetProvider extends DefaultTokenSetProvider {
     if (_equals) {
       boolean _xblockexpression = false;
       {
-        String _beginningOfLine = this.getBeginningOfLine(editor, offset);
-        final String text = _beginningOfLine.trim();
+        final String text = this.getBeginningOfLine(editor, offset).trim();
         _xblockexpression = (text.isEmpty() || text.equals("\'\'\'"));
       }
       _xifexpression = _xblockexpression;
@@ -89,8 +86,7 @@ public class XtendTokenSetProvider extends DefaultTokenSetProvider {
     if (_equals) {
       boolean _xblockexpression = false;
       {
-        String _endOfLine = this.getEndOfLine(editor, offset);
-        final String text = _endOfLine.trim();
+        final String text = this.getEndOfLine(editor, offset).trim();
         _xblockexpression = (text.isEmpty() || text.equals("\'\'\'"));
       }
       _xifexpression = _xblockexpression;

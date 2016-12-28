@@ -25,14 +25,7 @@ public class JavaInterfaceBuilder extends AbstractInterfaceBuilder implements IC
   
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
-    JvmVisibility _visibility = this.getVisibility();
-    ISourceAppender _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.DEFAULT);
-    ISourceAppender _append = _appendVisibility.append("interface ");
-    String _interfaceName = this.getInterfaceName();
-    ISourceAppender _append_1 = _append.append(_interfaceName);
-    ISourceAppender _append_2 = _append_1.append(" {");
-    ISourceAppender _newLine = _append_2.newLine();
-    return _newLine.append("}");
+    return this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.DEFAULT).append("interface ").append(this.getInterfaceName()).append(" {").newLine().append("}");
   }
   
   @Override

@@ -7,7 +7,6 @@ import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -19,53 +18,45 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
   public void doTransform(final List<? extends MutableFieldDeclaration> javaFields, @Extension final TransformationContext context) {
     for (final MutableFieldDeclaration f : javaFields) {
       {
-        String _simpleName = f.getSimpleName();
-        String _firstUpper = StringExtensions.toFirstUpper(_simpleName);
+        String _firstUpper = StringExtensions.toFirstUpper(f.getSimpleName());
         final String getterName = ("get" + _firstUpper);
-        String _simpleName_1 = f.getSimpleName();
-        String _firstUpper_1 = StringExtensions.toFirstUpper(_simpleName_1);
+        String _firstUpper_1 = StringExtensions.toFirstUpper(f.getSimpleName());
         final String setterName = ("set" + _firstUpper_1);
-        MutableTypeDeclaration _declaringType = f.getDeclaringType();
         final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-          TypeReference _type = f.getType();
-          it.setReturnType(_type);
+          it.setReturnType(f.getType());
           final CompilationStrategy _function_1 = (CompilationStrategy.CompilationContext it_1) -> {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("return ");
-            String _simpleName_2 = f.getSimpleName();
-            _builder.append(_simpleName_2);
+            String _simpleName = f.getSimpleName();
+            _builder.append(_simpleName);
             _builder.append(";");
             _builder.newLineIfNotEmpty();
             return _builder;
           };
           it.setBody(_function_1);
         };
-        this.tryAddMethod(_declaringType, getterName, _function);
+        this.tryAddMethod(f.getDeclaringType(), getterName, _function);
         boolean _isFinal = f.isFinal();
         boolean _not = (!_isFinal);
         if (_not) {
-          MutableTypeDeclaration _declaringType_1 = f.getDeclaringType();
           final Procedure1<MutableMethodDeclaration> _function_1 = (MutableMethodDeclaration it) -> {
-            TypeReference _primitiveVoid = context.getPrimitiveVoid();
-            it.setReturnType(_primitiveVoid);
-            String _simpleName_2 = f.getSimpleName();
-            TypeReference _type = f.getType();
-            it.addParameter(_simpleName_2, _type);
+            it.setReturnType(context.getPrimitiveVoid());
+            it.addParameter(f.getSimpleName(), f.getType());
             final CompilationStrategy _function_2 = (CompilationStrategy.CompilationContext it_1) -> {
               StringConcatenation _builder = new StringConcatenation();
               _builder.append("this.");
-              String _simpleName_3 = f.getSimpleName();
-              _builder.append(_simpleName_3);
+              String _simpleName = f.getSimpleName();
+              _builder.append(_simpleName);
               _builder.append(" = ");
-              String _simpleName_4 = f.getSimpleName();
-              _builder.append(_simpleName_4);
+              String _simpleName_1 = f.getSimpleName();
+              _builder.append(_simpleName_1);
               _builder.append(";");
               _builder.newLineIfNotEmpty();
               return _builder;
             };
             it.setBody(_function_2);
           };
-          this.tryAddMethod(_declaringType_1, setterName, _function_1);
+          this.tryAddMethod(f.getDeclaringType(), setterName, _function_1);
         }
       }
     }

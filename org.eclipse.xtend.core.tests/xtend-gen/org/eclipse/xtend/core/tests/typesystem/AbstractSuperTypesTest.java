@@ -10,15 +10,12 @@ package org.eclipse.xtend.core.tests.typesystem;
 import com.google.inject.Inject;
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -41,13 +38,11 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
   
   public void assertSuperTypes(final Class<?> type, final String... superTypes) {
     String _canonicalName = type.getCanonicalName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
-    this.assertSuperTypes(_mappedTo, superTypes);
+    this.assertSuperTypes(Pair.<String, String>of(_canonicalName, null), superTypes);
   }
   
   public void assertSuperTypes(final String type, final String... superTypes) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of(type, null);
-    this.assertSuperTypes(_mappedTo, superTypes);
+    this.assertSuperTypes(Pair.<String, String>of(type, null), superTypes);
   }
   
   public void assertSuperTypes(final Pair<String, String> type, final String... superTypes) {
@@ -55,13 +50,12 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
       {
-        String _value = type.getValue();
-        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_value);
+        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(type.getValue());
         boolean _not = (!_isNullOrEmpty);
         if (_not) {
           _builder.append("<");
-          String _value_1 = type.getValue();
-          _builder.append(_value_1);
+          String _value = type.getValue();
+          _builder.append(_value);
           _builder.append("> ");
         }
       }
@@ -70,21 +64,13 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
       _builder.append(_key);
       _builder.append(" type) {}");
       final String signature = _builder.toString();
-      String _string = signature.toString();
-      final XtendFunction function = this.function(_string);
+      final XtendFunction function = this.function(signature.toString());
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
-      EList<JvmFormalParameter> _parameters = operation.getParameters();
-      JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
-      JvmTypeReference _parameterType = _head.getParameterType();
-      final LightweightTypeReference subtype = this.toLightweightTypeReference(_parameterType);
-      List<String> _list = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(superTypes)));
-      Iterable<LightweightTypeReference> _collectSuperTypes = this.collectSuperTypes(subtype);
+      final LightweightTypeReference subtype = this.toLightweightTypeReference(IterableExtensions.<JvmFormalParameter>head(operation.getParameters()).getParameterType());
       final Function1<LightweightTypeReference, String> _function = (LightweightTypeReference it) -> {
         return it.getSimpleName();
       };
-      Iterable<String> _map = IterableExtensions.<LightweightTypeReference, String>map(_collectSuperTypes, _function);
-      List<String> _list_1 = IterableExtensions.<String>toList(_map);
-      Assert.assertEquals(_list, _list_1);
+      Assert.assertEquals(IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(superTypes))), IterableExtensions.<String>toList(IterableExtensions.<LightweightTypeReference, String>map(this.collectSuperTypes(subtype), _function)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -148,8 +134,7 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
   
   @Test
   public void testTypeParametersWithoutUpperBound() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "T");
-    this.assertSuperTypes(_mappedTo, "Object");
+    this.assertSuperTypes(Pair.<String, String>of("T", "T"), "Object");
   }
   
   @Test

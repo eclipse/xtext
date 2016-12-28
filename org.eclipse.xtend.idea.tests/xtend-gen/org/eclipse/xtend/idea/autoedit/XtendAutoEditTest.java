@@ -7,593 +7,135 @@
  */
 package org.eclipse.xtend.idea.autoedit;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import org.eclipse.xtend.core.idea.lang.XtendFileType;
-import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.idea.tests.LibraryUtil;
-import org.eclipse.xtext.xbase.idea.formatting.AbstractXbaseAutoEditTest;
-
 @SuppressWarnings("all")
-public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
+public class XtendAutoEditTest /* implements AbstractXbaseAutoEditTest  */{
   public XtendAutoEditTest() {
-    super(XtendFileType.INSTANCE);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method super(Object) is undefined"
+      + "\nThe method or field XtendFileType is undefined"
+      + "\nINSTANCE cannot be resolved");
   }
   
   @Override
-  protected void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
-    LibraryUtil.addXtendLibrary(model);
+  protected Object configureModule(final /* Module */Object module, final /* ModifiableRootModel */Object model, final /* ContentEntry */Object contentEntry) {
+    throw new Error("Unresolved compilation problems:"
+      + "\naddXtendLibrary cannot be resolved");
   }
   
   public void ignoreRichStringComment_01() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() \'");
-    _builder.append("\'\'");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("ллл", "\t\t");
-    _builder.append(" lalala|");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("\'");
-    _builder.append("\'\'");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def foo() \'");
-    _builder_1.append("\'\'");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("ллл", "\t\t");
-    _builder_1.append(" lalala");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t\t");
-    _builder_1.append("|");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("\'");
-    _builder_1.append("\'\'");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method assertAutoIndentOnNewLine(CharSequence, CharSequence) from the type XtendAutoEditTest refers to the missing type Object");
   }
   
   public void ignoreRichStringComment_02() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() \'");
-    _builder.append("\'\'");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("ллл", "\t\t");
-    _builder.append(" lalala|");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def foo() \'");
-    _builder_1.append("\'\'");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("ллл", "\t\t");
-    _builder_1.append(" lalala");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t\t");
-    _builder_1.append("|");
-    _builder_1.newLine();
-    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method assertAutoIndentOnNewLine(CharSequence, CharSequence) from the type XtendAutoEditTest refers to the missing type Object");
   }
   
   public void ignoreRichStringComment_03() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() \'");
-    _builder.append("\'\'");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("л", "\t");
-    _builder.append(" lalala|");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("\'");
-    _builder.append("\'\'");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def foo() \'");
-    _builder_1.append("\'\'");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("л", "\t");
-    _builder_1.append(" lalala");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t");
-    _builder_1.append("|");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("\'");
-    _builder_1.append("\'\'");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method assertAutoIndentOnNewLine(CharSequence, CharSequence) from the type XtendAutoEditTest refers to the missing type Object");
   }
   
   public void ignoreRichStringComment_04() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() \'");
-    _builder.append("\'\'");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("л", "\t");
-    _builder.append(" lalala|");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def foo() \'");
-    _builder_1.append("\'\'");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("л", "\t");
-    _builder_1.append(" lalala");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t");
-    _builder_1.append("|");
-    _builder_1.newLine();
-    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method assertAutoIndentOnNewLine(CharSequence, CharSequence) from the type XtendAutoEditTest refers to the missing type Object");
   }
   
   public void ignoreRichStringComment_05() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() \'");
-    _builder.append("\'\'");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("лл", "\t");
-    _builder.append(" lalala|");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("\'");
-    _builder.append("\'\'");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def foo() \'");
-    _builder_1.append("\'\'");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("лл", "\t");
-    _builder_1.append(" lalala");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t");
-    _builder_1.append("|");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("\'");
-    _builder_1.append("\'\'");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method assertAutoIndentOnNewLine(CharSequence, CharSequence) from the type XtendAutoEditTest refers to the missing type Object");
   }
   
   public void ignoreRichStringComment_06() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() \'");
-    _builder.append("\'\'");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("лл", "\t");
-    _builder.append(" lalala|");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def foo() \'");
-    _builder_1.append("\'\'");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("лл", "\t");
-    _builder_1.append(" lalala");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t");
-    _builder_1.append("|");
-    _builder_1.newLine();
-    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method assertAutoIndentOnNewLine(CharSequence, CharSequence) from the type XtendAutoEditTest refers to the missing type Object");
   }
   
   public void testClassBraces() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {|");
-    this.configureByText(_builder.toString());
-    this.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("|");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    this.assertState(_builder_1.toString());
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field newLine is undefined"
+      + "\nThe method assertState(String) is undefined");
   }
   
   public void testMethodParentheses() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def bar|");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.configureByText(_builder.toString());
-    this.myFixture.type("(");
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def bar(|)");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertState(_builder_1.toString());
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testMethodBraces() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def bar() {|");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.configureByText(_builder.toString());
-    this.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def bar() {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("|");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertState(_builder_1.toString());
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field newLine is undefined"
+      + "\nThe method assertState(String) is undefined");
   }
   
   public void testFeatureCallParentheses() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def bar() {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("toString|");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.configureByText(_builder.toString());
-    this.myFixture.type("(");
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def bar() {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("toString(|)");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertState(_builder_1.toString());
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testArrayBrackets() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def bar(int|)");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.configureByText(_builder.toString());
-    this.myFixture.type("[");
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def bar(int[|])");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertState(_builder_1.toString());
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testGuillemets() {
-    this.configureByText("\n\t\t\tclass Foo {\n\t\t\t\tdef bar() {\n\t\t\t\t\t\'\'\'|\'\'\'\n\t\t\t\t}\n\t\t\t}\n\t\t");
-    this.myFixture.type("л");
-    this.assertState("\n\t\t\tclass Foo {\n\t\t\t\tdef bar() {\n\t\t\t\t\t\'\'\'л|╗\'\'\'\n\t\t\t\t}\n\t\t\t}\n\t\t");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testEnterBetweenMethods_01() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}|");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def bar() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.configureByText(_builder.toString());
-    this.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def foo() {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("|");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def bar() {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertState(_builder_1.toString());
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field newLine is undefined"
+      + "\nThe method assertState(String) is undefined");
   }
   
   public void testEnterBetweenMethods_02() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("|");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def bar() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.configureByText(_builder.toString());
-    this.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def foo() {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("|");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def bar() {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertState(_builder_1.toString());
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field newLine is undefined"
+      + "\nThe method assertState(String) is undefined");
   }
   
   public void testEnterBetweenMethods_03() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("//lalala|");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def bar() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.configureByText(_builder.toString());
-    this.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def foo() {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("//lalala");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("|");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def bar() {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertState(_builder_1.toString());
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field newLine is undefined"
+      + "\nThe method assertState(String) is undefined");
   }
   
   public void testEnterBetweenMethods_04() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("|//lalala");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def bar() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.configureByText(_builder.toString());
-    this.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def foo() {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("|//lalala");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def bar() {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertState(_builder_1.toString());
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field newLine is undefined"
+      + "\nThe method assertState(String) is undefined");
   }
   
   @Override
   public void test_return_01() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("return |");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("return ");
-    _builder_1.newLine();
-    _builder_1.append("|");
-    _builder_1.newLine();
-    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method assertAutoIndentOnNewLine(CharSequence, CharSequence) from the type XtendAutoEditTest refers to the missing type Object");
   }
   
   @Override
-  protected void assertAutoIndentOnNewLine(final CharSequence model, final CharSequence expectedModel) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append(model, "\t\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def foo() {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append(expectedModel, "\t\t");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    super.assertAutoIndentOnNewLine(_builder, _builder_1);
+  protected Object assertAutoIndentOnNewLine(final CharSequence model, final CharSequence expectedModel) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field super is undefined"
+      + "\nassertAutoIndentOnNewLine cannot be resolved");
   }
 }

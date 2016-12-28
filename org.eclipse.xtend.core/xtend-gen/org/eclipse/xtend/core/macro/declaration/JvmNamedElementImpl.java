@@ -13,14 +13,12 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 @SuppressWarnings("all")
 public abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends JvmElementImpl<T> {
   public String getSimpleName() {
-    T _delegate = this.getDelegate();
-    return _delegate.getSimpleName();
+    return this.getDelegate().getSimpleName();
   }
   
   @Override
   public String toString() {
-    Class<? extends JvmNamedElementImpl> _class = this.getClass();
-    String _name = _class.getName();
+    String _name = this.getClass().getName();
     String _plus = (_name + "[");
     String _simpleName = this.getSimpleName();
     String _plus_1 = (_plus + _simpleName);

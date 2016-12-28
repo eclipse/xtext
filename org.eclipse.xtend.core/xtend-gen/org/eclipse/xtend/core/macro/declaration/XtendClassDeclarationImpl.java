@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -24,33 +22,25 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendClass> implements ClassDeclaration {
   @Override
   public Iterable<? extends TypeReference> getImplementedInterfaces() {
-    XtendClass _delegate = this.getDelegate();
-    EList<JvmTypeReference> _implements = _delegate.getImplements();
     final Function1<JvmTypeReference, TypeReference> _function = (JvmTypeReference it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toTypeReference(it);
+      return this.getCompilationUnit().toTypeReference(it);
     };
-    return ListExtensions.<JvmTypeReference, TypeReference>map(_implements, _function);
+    return ListExtensions.<JvmTypeReference, TypeReference>map(this.getDelegate().getImplements(), _function);
   }
   
   @Override
   public TypeReference getExtendedClass() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    XtendClass _delegate = this.getDelegate();
-    JvmTypeReference _extends = _delegate.getExtends();
-    return _compilationUnit.toTypeReference(_extends);
+    return this.getCompilationUnit().toTypeReference(this.getDelegate().getExtends());
   }
   
   @Override
   public boolean isAbstract() {
-    XtendClass _delegate = this.getDelegate();
-    return _delegate.isAbstract();
+    return this.getDelegate().isAbstract();
   }
   
   @Override
   public boolean isFinal() {
-    XtendClass _delegate = this.getDelegate();
-    return _delegate.isFinal();
+    return this.getDelegate().isFinal();
   }
   
   @Override
@@ -65,12 +55,9 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
   
   @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
-    XtendClass _delegate = this.getDelegate();
-    EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = (JvmTypeParameter it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toXtendTypeParameterDeclaration(it);
+      return this.getCompilationUnit().toXtendTypeParameterDeclaration(it);
     };
-    return ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(_typeParameters, _function);
+    return ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(this.getDelegate().getTypeParameters(), _function);
   }
 }

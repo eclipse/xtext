@@ -27,8 +27,7 @@ public class MacroAwareStringConcatenation extends ImportingStringConcatenation 
   }
   
   protected String _getStringRepresentation(final TypeReferenceImpl object) {
-    LightweightTypeReference _delegate = object.getDelegate();
-    return this._getStringRepresentation(_delegate);
+    return this._getStringRepresentation(object.getDelegate());
   }
   
   protected String _getStringRepresentation(final JvmTypeDeclarationImpl<?> object) {

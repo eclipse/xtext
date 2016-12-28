@@ -8,9 +8,6 @@
 package org.eclipse.xtend.core.tests.conversion;
 
 import com.google.common.collect.Iterators;
-import java.util.Iterator;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -22,7 +19,6 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
@@ -39,28 +35,20 @@ public class ValueConverterExceptionProducesErrorTest extends AbstractXtendTestC
   @Test
   public void testUnclosedTerminal_01() throws Exception {
     final Resource resource = this.toResource("class C { def m() \'\'\'");
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    int _size = _errors.size();
-    Assert.assertEquals(1, _size);
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    final Resource.Diagnostic error = IterableExtensions.<Resource.Diagnostic>head(_errors_1);
+    Assert.assertEquals(1, resource.getErrors().size());
+    final Resource.Diagnostic error = IterableExtensions.<Resource.Diagnostic>head(resource.getErrors());
     Assert.assertNotNull(error);
-    String _message = error.getMessage();
-    Assert.assertEquals("String literal is not closed", _message);
+    Assert.assertEquals("String literal is not closed", error.getMessage());
     this.assertLiteral("", resource);
   }
   
   @Test
   public void testUnclosedTerminal_02() throws Exception {
     final Resource resource = this.toResource("class C { def m() \'\'\'abc");
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    int _size = _errors.size();
-    Assert.assertEquals(1, _size);
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    final Resource.Diagnostic error = IterableExtensions.<Resource.Diagnostic>head(_errors_1);
+    Assert.assertEquals(1, resource.getErrors().size());
+    final Resource.Diagnostic error = IterableExtensions.<Resource.Diagnostic>head(resource.getErrors());
     Assert.assertNotNull(error);
-    String _message = error.getMessage();
-    Assert.assertEquals("String literal is not closed", _message);
+    Assert.assertEquals("String literal is not closed", error.getMessage());
     this.assertLiteral("abc", resource);
   }
   
@@ -71,43 +59,29 @@ public class ValueConverterExceptionProducesErrorTest extends AbstractXtendTestC
   public void testInvalidUnicode() throws Exception {
     final Resource resource = this.toResource("class C { def m() {\'\\u\'.toString}}");
     EcoreUtil2.resolveAll(resource);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    int _size = _errors.size();
-    Assert.assertEquals(1, _size);
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    final Resource.Diagnostic error = IterableExtensions.<Resource.Diagnostic>head(_errors_1);
+    Assert.assertEquals(1, resource.getErrors().size());
+    final Resource.Diagnostic error = IterableExtensions.<Resource.Diagnostic>head(resource.getErrors());
     Assert.assertNotNull(error);
-    String _message = error.getMessage();
-    Assert.assertEquals("Invalid unicode", _message);
-    TreeIterator<EObject> _allContents = resource.getAllContents();
-    Iterator<XStringLiteral> _filter = Iterators.<XStringLiteral>filter(_allContents, XStringLiteral.class);
-    final XStringLiteral literal = IteratorExtensions.<XStringLiteral>head(_filter);
-    String _value = literal.getValue();
-    Assert.assertEquals("u", _value);
+    Assert.assertEquals("Invalid unicode", error.getMessage());
+    final XStringLiteral literal = IteratorExtensions.<XStringLiteral>head(Iterators.<XStringLiteral>filter(resource.getAllContents(), XStringLiteral.class));
+    Assert.assertEquals("u", literal.getValue());
   }
   
   private void assertLiteral(final String expectation, final Resource resource) {
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final XtendFile file = ((XtendFile) _head);
-    EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-    final XtendTypeDeclaration type = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-    EList<XtendMember> _members = type.getMembers();
-    XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
+    final XtendTypeDeclaration type = IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes());
+    XtendMember _head_1 = IterableExtensions.<XtendMember>head(type.getMembers());
     final XtendFunction method = ((XtendFunction) _head_1);
     XExpression _expression = method.getExpression();
     final RichString body = ((RichString) _expression);
-    EList<XExpression> _expressions = body.getExpressions();
-    XExpression _head_2 = IterableExtensions.<XExpression>head(_expressions);
+    XExpression _head_2 = IterableExtensions.<XExpression>head(body.getExpressions());
     final RichStringLiteral singleElement = ((RichStringLiteral) _head_2);
-    String _value = singleElement.getValue();
-    Assert.assertEquals(expectation, _value);
+    Assert.assertEquals(expectation, singleElement.getValue());
   }
   
   private Resource toResource(final CharSequence input) throws Exception {
-    XtextResourceSet _resourceSet = this.getResourceSet();
-    URI _createURI = URI.createURI("abcdefg.xtend");
-    final Resource resource = _resourceSet.createResource(_createURI);
+    final Resource resource = this.getResourceSet().createResource(URI.createURI("abcdefg.xtend"));
     String _string = input.toString();
     StringInputStream _stringInputStream = new StringInputStream(_string);
     resource.load(_stringInputStream, null);

@@ -43,8 +43,7 @@ public class AutoEditMultiLineBlockInRichString extends AutoEditMultiLineBlock {
     int _length = result.getLength();
     final int endOffset = (_offset + _length);
     final String textBetween = context.getText(endOffset, offset);
-    String _trim = textBetween.trim();
-    boolean _isEmpty = _trim.isEmpty();
+    boolean _isEmpty = textBetween.trim().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
       return null;

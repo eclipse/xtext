@@ -7,209 +7,75 @@
  */
 package org.eclipse.xtend.idea.debug;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import org.apache.log4j.Logger;
-import org.eclipse.xtend.core.idea.lang.XtendLanguage;
-import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.idea.tests.LibraryUtil;
-import org.eclipse.xtext.idea.tests.LightToolingTest;
-import org.eclipse.xtext.idea.tests.debug.AbstractDebuggerTestCase;
-import org.eclipse.xtext.util.internal.Log;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Pair;
-
 /**
  * @author efftinge - Initial contribution and API
  */
-@Log
-@SuppressWarnings("all")
-public class BreakpointTest extends AbstractDebuggerTestCase {
+/* @Log */@SuppressWarnings("all")
+public class BreakpointTest /* implements AbstractDebuggerTestCase  */{
   @Override
-  public void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry entry) {
-    try {
-      LibraryUtil.addXtendLibrary(model);
-      Project _project = this.getProject();
-      VirtualFile _baseDir = _project.getBaseDir();
-      final VirtualFile srcGenFolder = VfsUtil.createDirectoryIfMissing(_baseDir, "xtend-gen");
-      entry.addSourceFolder(srcGenFolder, false);
-      String _iD = XtendLanguage.INSTANCE.getID();
-      LightToolingTest.addFacetToModule(module, _iD);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public Object configureModule(final /* Module */Object module, final /* ModifiableRootModel */Object model, final /* ContentEntry */Object entry) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field LibraryUtil is undefined"
+      + "\nThe method or field VfsUtil is undefined"
+      + "\nThe method or field project is undefined"
+      + "\nThe method or field LightToolingTest is undefined"
+      + "\nThe method or field XtendLanguage is undefined"
+      + "\naddXtendLibrary cannot be resolved"
+      + "\ncreateDirectoryIfMissing cannot be resolved"
+      + "\nbaseDir cannot be resolved"
+      + "\naddSourceFolder cannot be resolved"
+      + "\naddFacetToModule cannot be resolved"
+      + "\nINSTANCE cannot be resolved"
+      + "\nID cannot be resolved");
   }
   
   public void testLineBreakpoint() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("class MyClass {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("def static void main(String[] args) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("println(\"Hello\")");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("println(\"World\")");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
-      final VirtualFile file = this.addFile(_mappedTo);
-      this.compile();
-      this.addLineBreakpoint(file, 2);
-      this.addLineBreakpoint(file, 3);
-      this.startDebugProcess("MyClass");
-      this.assertCurrentLine(file, "println(\"Hello\")");
-      this.resume();
-      this.assertCurrentLine(file, "println(\"World\")");
-      this.resume();
-      this.assertProcessTerminated();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method addFile(Object) is undefined"
+      + "\n-> cannot be resolved."
+      + "\nThe method or field compile is undefined"
+      + "\nThe method startDebugProcess(String) is undefined"
+      + "\nThe method or field resume is undefined"
+      + "\nThe method or field resume is undefined"
+      + "\nThe method or field assertProcessTerminated is undefined"
+      + "\naddLineBreakpoint cannot be resolved"
+      + "\naddLineBreakpoint cannot be resolved"
+      + "\nassertCurrentLine cannot be resolved"
+      + "\nassertCurrentLine cannot be resolved");
   }
   
   public void testLineBreakpoint_01() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("class MyClass {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("def static void main(String[] args) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("println(\"Hello\")");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("println(\"World\")");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("foo(\'Hello\',\'Woo\')");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("def static void foo(String... woo) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("println(\"Hi\")");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("if (woo.length == 2) {");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("println(woo.get(1))");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
-      final VirtualFile file = this.addFile(_mappedTo);
-      this.compile();
-      this.addLineBreakpoint(file, 4);
-      this.addLineBreakpoint(file, 14);
-      this.addLineBreakpoint(file, 15);
-      this.startDebugProcess("MyClass");
-      this.assertCurrentLine(file, "foo(\'Hello\',\'Woo\')");
-      this.resume();
-      this.assertCurrentLine(file, "if (woo.length == 2) {");
-      this.resume();
-      this.assertCurrentLine(file, "println(woo.get(1))");
-      this.resume();
-      this.assertProcessTerminated();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method addFile(Object) is undefined"
+      + "\n-> cannot be resolved."
+      + "\nThe method or field compile is undefined"
+      + "\nThe method startDebugProcess(String) is undefined"
+      + "\nThe method or field resume is undefined"
+      + "\nThe method or field resume is undefined"
+      + "\nThe method or field resume is undefined"
+      + "\nThe method or field assertProcessTerminated is undefined"
+      + "\naddLineBreakpoint cannot be resolved"
+      + "\naddLineBreakpoint cannot be resolved"
+      + "\naddLineBreakpoint cannot be resolved"
+      + "\nassertCurrentLine cannot be resolved"
+      + "\nassertCurrentLine cannot be resolved"
+      + "\nassertCurrentLine cannot be resolved");
   }
   
   public void testLineBreakpoint_02() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("class MyClass {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("def static void main(String[] args) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("println(\"Hello\")");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("foo [ println(\"World\") ]");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("def static void foo(Runnable runnable) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("println(\"Hi\")");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("runnable.run");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
-      final VirtualFile file = this.addFile(_mappedTo);
-      this.compile();
-      this.addLineBreakpoint(file, 4);
-      this.addLineBreakpoint(file, 12);
-      this.startDebugProcess("MyClass");
-      this.assertCurrentLine(file, "foo [ println(\"World\") ]");
-      this.resume();
-      this.assertCurrentLine(file, "println(\"Hi\")");
-      this.resume();
-      this.assertCurrentLine(file, "foo [ println(\"World\") ]");
-      this.resume();
-      this.assertProcessTerminated();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method addFile(Object) is undefined"
+      + "\n-> cannot be resolved."
+      + "\nThe method or field compile is undefined"
+      + "\nThe method startDebugProcess(String) is undefined"
+      + "\nThe method or field resume is undefined"
+      + "\nThe method or field resume is undefined"
+      + "\nThe method or field resume is undefined"
+      + "\nThe method or field assertProcessTerminated is undefined"
+      + "\naddLineBreakpoint cannot be resolved"
+      + "\naddLineBreakpoint cannot be resolved"
+      + "\nassertCurrentLine cannot be resolved"
+      + "\nassertCurrentLine cannot be resolved"
+      + "\nassertCurrentLine cannot be resolved");
   }
-  
-  private final static Logger LOG = Logger.getLogger(BreakpointTest.class);
 }

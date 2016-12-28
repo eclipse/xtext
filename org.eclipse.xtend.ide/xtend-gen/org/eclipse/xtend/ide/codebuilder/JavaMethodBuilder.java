@@ -7,14 +7,11 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import java.util.List;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -32,11 +29,9 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBui
     {
       boolean _isOverrideFlag = this.isOverrideFlag();
       if (_isOverrideFlag) {
-        ISourceAppender _append = appendable.append("@Override");
-        _append.newLine();
+        appendable.append("@Override").newLine();
       }
-      JvmVisibility _visibility = this.getVisibility();
-      this.appendVisibility(appendable, _visibility, JvmVisibility.DEFAULT);
+      this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.DEFAULT);
       boolean _isAbstractFlag = this.isAbstractFlag();
       if (_isAbstractFlag) {
         appendable.append("abstract ");
@@ -45,15 +40,7 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBui
       if (_isStaticFlag) {
         appendable.append("static ");
       }
-      List<JvmTypeParameter> _typeParameters = this.getTypeParameters();
-      ISourceAppender _appendTypeParameters = this.appendTypeParameters(appendable, _typeParameters);
-      LightweightTypeReference _returnType = this.getReturnType();
-      ISourceAppender _appendType = this.appendType(_appendTypeParameters, _returnType, "void");
-      ISourceAppender _append_1 = _appendType.append(" ");
-      String _methodName = this.getMethodName();
-      ISourceAppender _append_2 = _append_1.append(_methodName);
-      ISourceAppender _appendParameters = this.appendParameters(_append_2);
-      this.appendThrowsClause(_appendParameters);
+      this.appendThrowsClause(this.appendParameters(this.appendType(this.appendTypeParameters(appendable, this.getTypeParameters()), this.getReturnType(), "void").append(" ").append(this.getMethodName())));
       boolean _isAbstractFlag_1 = this.isAbstractFlag();
       if (_isAbstractFlag_1) {
         appendable.append(";");

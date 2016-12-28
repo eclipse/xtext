@@ -16,7 +16,6 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.After;
@@ -40,9 +39,7 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
     try {
       IResource _file = IResourcesSetupUtil.file("testProject/xtend-gen/mypackage/B.java");
       final IFile childFile = ((IFile) _file);
-      XtextEditor _openEditor = this._workbenchTestHelper.openEditor(childFile);
-      XtextEditor _openEditor_1 = this._workbenchTestHelper.openEditor(childFile);
-      Assert.assertEquals(_openEditor, _openEditor_1);
+      Assert.assertEquals(this._workbenchTestHelper.openEditor(childFile), this._workbenchTestHelper.openEditor(childFile));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -55,9 +52,7 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
       final IFile parenFile = ((IFile) _file);
       IResource _file_1 = IResourcesSetupUtil.file("testProject/xtend-gen/mypackage/B.java");
       final IFile childFile = ((IFile) _file_1);
-      XtextEditor _openEditor = this._workbenchTestHelper.openEditor(parenFile);
-      XtextEditor _openEditor_1 = this._workbenchTestHelper.openEditor(childFile);
-      Assert.assertNotSame(_openEditor, _openEditor_1);
+      Assert.assertNotSame(this._workbenchTestHelper.openEditor(parenFile), this._workbenchTestHelper.openEditor(childFile));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -67,8 +62,7 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
-    this.testProject = _createPluginProject;
+    this.testProject = WorkbenchTestHelper.createPluginProject("testProject");
     Path _path = new Path("testProject/src/mypackage/A.xtend");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package mypackage; ");

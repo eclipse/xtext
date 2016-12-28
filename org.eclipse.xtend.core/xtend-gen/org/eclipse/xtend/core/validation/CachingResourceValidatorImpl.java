@@ -6,11 +6,7 @@ import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
@@ -18,7 +14,6 @@ import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -26,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
@@ -92,8 +86,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     }
     try {
       contexts.before(ActiveAnnotationContexts.AnnotationCallback.VALIDATION);
-      Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = contexts.getContexts();
-      Collection<ActiveAnnotationContext> _values = _contexts.values();
+      Collection<ActiveAnnotationContext> _values = contexts.getContexts().values();
       for (final ActiveAnnotationContext ctx : _values) {
         {
           this.operationCanceledManager.checkCanceled(monitor);
@@ -122,18 +115,13 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     if (_equals) {
       return;
     }
-    EList<EObject> _contents = resource.getContents();
-    Iterable<EObject> _tail = IterableExtensions.<EObject>tail(_contents);
-    Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_tail, JvmDeclaredType.class);
+    Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(IterableExtensions.<EObject>tail(resource.getContents()), JvmDeclaredType.class);
     for (final JvmDeclaredType jvmType : _filter) {
-      TreeIterator<EObject> _eAllContents = jvmType.eAllContents();
-      Iterator<JvmMember> _filter_1 = Iterators.<JvmMember>filter(_eAllContents, JvmMember.class);
       final Function1<JvmMember, Boolean> _function = (JvmMember it) -> {
         boolean _isSynthetic = this._jvmTypeExtensions.isSynthetic(it);
         return Boolean.valueOf((!_isSynthetic));
       };
-      Iterator<JvmMember> _filter_2 = IteratorExtensions.<JvmMember>filter(_filter_1, _function);
-      Iterable<JvmMember> _iterable = IteratorExtensions.<JvmMember>toIterable(_filter_2);
+      Iterable<JvmMember> _iterable = IteratorExtensions.<JvmMember>toIterable(IteratorExtensions.<JvmMember>filter(Iterators.<JvmMember>filter(jvmType.eAllContents(), JvmMember.class), _function));
       for (final JvmMember jvmMember : _iterable) {
         {
           this.operationCanceledManager.checkCanceled(monitor);
@@ -152,12 +140,10 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     String _uiString = this.getUiString(jvmElement);
     _builder.append(_uiString);
     _builder.append(" is not associated with a source element. The producing active annotation should use \'setPrimarySourceElement\'.");
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
-    DiagnosticOnFirstKeyword _diagnosticOnFirstKeyword = new DiagnosticOnFirstKeyword(severity, 
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
+    this.issueFromXtextResourceDiagnostic(new DiagnosticOnFirstKeyword(severity, 
       IssueCodes.ORPHAN_ELMENT, _builder.toString(), _head, 
-      null);
-    this.issueFromXtextResourceDiagnostic(_diagnosticOnFirstKeyword, severity, acceptor);
+      null), severity, acceptor);
   }
   
   private String getUiString(final JvmMember member) {
@@ -189,20 +175,13 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
         }
       }
       final String type = _switchResult;
-      StringBuilder _append = uiString.append(type);
-      StringBuilder _append_1 = _append.append(" \'");
-      String _qualifiedName = member.getQualifiedName('.');
-      _append_1.append(_qualifiedName);
+      uiString.append(type).append(" \'").append(member.getQualifiedName('.'));
       if ((member instanceof JvmExecutable)) {
-        EList<JvmFormalParameter> _parameters = ((JvmExecutable)member).getParameters();
         final Function1<JvmFormalParameter, CharSequence> _function = (JvmFormalParameter it) -> {
-          JvmTypeReference _parameterType = it.getParameterType();
-          return _parameterType.getSimpleName();
+          return it.getParameterType().getSimpleName();
         };
-        final String parameterTypes = IterableExtensions.<JvmFormalParameter>join(_parameters, ", ", _function);
-        StringBuilder _append_2 = uiString.append("(");
-        StringBuilder _append_3 = _append_2.append(parameterTypes);
-        _append_3.append(")");
+        final String parameterTypes = IterableExtensions.<JvmFormalParameter>join(((JvmExecutable)member).getParameters(), ", ", _function);
+        uiString.append("(").append(parameterTypes).append(")");
       }
       uiString.append("\'");
       _xblockexpression = uiString.toString();

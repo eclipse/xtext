@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.tests.compiler;
 
 import com.google.inject.Inject;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaProject;
@@ -42,8 +41,7 @@ public class Bug456868Test extends AbstractXtendUITestCase {
   @Override
   public void tearDown() throws Exception {
     super.tearDown();
-    IProject _project = this.project.getProject();
-    _project.delete(true, null);
+    this.project.getProject().delete(true, null);
   }
   
   /**
@@ -52,13 +50,11 @@ public class Bug456868Test extends AbstractXtendUITestCase {
   @Test
   public void testProjectWithWhitespaceInNameWorks() {
     try {
-      IJavaProject _createJavaProject = JavaProjectSetupUtil.createJavaProject("my project");
-      this.project = _createJavaProject;
+      this.project = JavaProjectSetupUtil.createJavaProject("my project");
       JavaProjectSetupUtil.makeJava5Compliant(this.project);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       this.libAdder.addLibsToClasspath(this.project, _nullProgressMonitor);
-      IProject _project = this.project.getProject();
-      this.natureAdder.toggleNature(_project);
+      this.natureAdder.toggleNature(this.project.getProject());
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class MyClass {");
       _builder.newLine();
@@ -70,8 +66,7 @@ public class Bug456868Test extends AbstractXtendUITestCase {
       IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       final IResource generatedJava = IResourcesSetupUtil.file("my project/xtend-gen/MyClass.java");
-      boolean _exists = generatedJava.exists();
-      Assert.assertTrue(_exists);
+      Assert.assertTrue(generatedJava.exists());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -54,13 +54,10 @@ public class SameClassNamesTest extends AbstractXtendUITestCase {
   @Before
   public void createProjects() {
     try {
-      IProject _createPluginProject = this.createPluginProject("first", ((String[])Conversions.unwrapArray(WorkbenchTestHelper.DEFAULT_REQ_BUNDLES, String.class)));
-      this.first = _createPluginProject;
+      this.first = this.createPluginProject("first", ((String[])Conversions.unwrapArray(WorkbenchTestHelper.DEFAULT_REQ_BUNDLES, String.class)));
       Iterable<String> _plus = Iterables.<String>concat(WorkbenchTestHelper.DEFAULT_REQ_BUNDLES, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("first")));
-      IProject _createPluginProject_1 = this.createPluginProject("second", ((String[])Conversions.unwrapArray(_plus, String.class)));
-      this.second = _createPluginProject_1;
-      IProject _createPluginProject_2 = this.createPluginProject("third", ((String[])Conversions.unwrapArray(WorkbenchTestHelper.DEFAULT_REQ_BUNDLES, String.class)));
-      this.third = _createPluginProject_2;
+      this.second = this.createPluginProject("second", ((String[])Conversions.unwrapArray(_plus, String.class)));
+      this.third = this.createPluginProject("third", ((String[])Conversions.unwrapArray(WorkbenchTestHelper.DEFAULT_REQ_BUNDLES, String.class)));
       IResourcesSetupUtil.reallyWaitForAutoBuild();
       this.testHelper.closeWelcomePage();
     } catch (Throwable _e) {
@@ -158,8 +155,7 @@ public class SameClassNamesTest extends AbstractXtendUITestCase {
     final PluginProjectFactory projectFactory = this.projectFactoryProvider.get();
     projectFactory.setProjectName(name);
     projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
-    List<String> _singletonList = Collections.<String>singletonList("src");
-    projectFactory.addFolders(_singletonList);
+    projectFactory.addFolders(Collections.<String>singletonList("src"));
     projectFactory.addBuilderIds(
       XtextProjectHelper.BUILDER_ID, 
       JavaCore.BUILDER_ID, 

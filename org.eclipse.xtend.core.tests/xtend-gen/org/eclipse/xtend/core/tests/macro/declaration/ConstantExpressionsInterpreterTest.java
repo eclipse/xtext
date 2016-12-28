@@ -9,19 +9,15 @@ package org.eclipse.xtend.core.tests.macro.declaration;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -58,20 +54,10 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XAnnotation> _annotations = _head.getAnnotations();
-      XAnnotation _head_1 = IterableExtensions.<XAnnotation>head(_annotations);
-      EList<XAnnotationElementValuePair> _elementValuePairs = _head_1.getElementValuePairs();
-      final XAnnotationElementValuePair pair = IterableExtensions.<XAnnotationElementValuePair>head(_elementValuePairs);
-      XExpression _value = pair.getValue();
-      JvmOperation _element = pair.getElement();
-      JvmTypeReference _returnType = _element.getReturnType();
-      Object _evaluate = this.interpreter.evaluate(_value, _returnType);
+      final XAnnotationElementValuePair pair = IterableExtensions.<XAnnotationElementValuePair>head(IterableExtensions.<XAnnotation>head(IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes()).getAnnotations()).getElementValuePairs());
+      Object _evaluate = this.interpreter.evaluate(pair.getValue(), pair.getElement().getReturnType());
       final XAnnotation anno = ((XAnnotation) _evaluate);
-      JvmType _annotationType = anno.getAnnotationType();
-      String _identifier = _annotationType.getIdentifier();
-      Assert.assertEquals("test.Annotation2", _identifier);
+      Assert.assertEquals("test.Annotation2", anno.getAnnotationType().getIdentifier());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -91,17 +77,10 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = _head.getMembers();
-      Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members, XtendField.class);
-      final XtendField field = IterableExtensions.<XtendField>head(_filter);
-      XExpression _initialValue = field.getInitialValue();
-      JvmTypeReference _type = field.getType();
-      Object _evaluate = this.interpreter.evaluate(_initialValue, _type);
+      final XtendField field = IterableExtensions.<XtendField>head(Iterables.<XtendField>filter(IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes()).getMembers(), XtendField.class));
+      Object _evaluate = this.interpreter.evaluate(field.getInitialValue(), field.getType());
       final JvmEnumerationLiteral blue = ((JvmEnumerationLiteral) _evaluate);
-      String _simpleName = blue.getSimpleName();
-      Assert.assertEquals("RED", _simpleName);
+      Assert.assertEquals("RED", blue.getSimpleName());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -129,15 +108,9 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       final XtendFile file = this.file(_builder.toString());
       Resource _eResource = file.eResource();
       ((BatchLinkableResource) _eResource).resolveLazyCrossReferences(null);
-      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = _head.getMembers();
-      Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members, XtendField.class);
-      final XtendField field = IterableExtensions.<XtendField>head(_filter);
+      final XtendField field = IterableExtensions.<XtendField>head(Iterables.<XtendField>filter(IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes()).getMembers(), XtendField.class));
       try {
-        XExpression _initialValue = field.getInitialValue();
-        JvmTypeReference _type = field.getType();
-        this.interpreter.evaluate(_initialValue, _type);
+        this.interpreter.evaluate(field.getInitialValue(), field.getType());
         Assert.fail("exception expected");
       } catch (final Throwable _t) {
         if (_t instanceof ConstantExpressionEvaluationException) {
@@ -168,22 +141,10 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = _head.getMembers();
-      Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members, XtendField.class);
-      final XtendField stringField = IterableExtensions.<XtendField>head(_filter);
-      EList<XtendTypeDeclaration> _xtendTypes_1 = file.getXtendTypes();
-      XtendTypeDeclaration _head_1 = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes_1);
-      EList<XtendMember> _members_1 = _head_1.getMembers();
-      Iterable<XtendField> _filter_1 = Iterables.<XtendField>filter(_members_1, XtendField.class);
-      final XtendField intField = ((XtendField[])Conversions.unwrapArray(_filter_1, XtendField.class))[1];
-      XExpression _initialValue = stringField.getInitialValue();
-      Object _evaluate = this.interpreter.evaluate(_initialValue, null);
-      Assert.assertEquals(Constants1.STRING_CONSTANT, _evaluate);
-      XExpression _initialValue_1 = intField.getInitialValue();
-      Object _evaluate_1 = this.interpreter.evaluate(_initialValue_1, null);
-      Assert.assertEquals(Integer.valueOf(Constants1.INT_CONSTANT), _evaluate_1);
+      final XtendField stringField = IterableExtensions.<XtendField>head(Iterables.<XtendField>filter(IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes()).getMembers(), XtendField.class));
+      final XtendField intField = ((XtendField[])Conversions.unwrapArray(Iterables.<XtendField>filter(IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes()).getMembers(), XtendField.class), XtendField.class))[1];
+      Assert.assertEquals(Constants1.STRING_CONSTANT, this.interpreter.evaluate(stringField.getInitialValue(), null));
+      Assert.assertEquals(Integer.valueOf(Constants1.INT_CONSTANT), this.interpreter.evaluate(intField.getInitialValue(), null));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -213,14 +174,8 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = _head.getMembers();
-      Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members, XtendField.class);
-      final XtendField stringField = IterableExtensions.<XtendField>head(_filter);
-      XExpression _initialValue = stringField.getInitialValue();
-      Object _evaluate = this.interpreter.evaluate(_initialValue, null);
-      Assert.assertEquals(((Constants1.STRING_CONSTANT + "-") + Constants1.STRING_CONSTANT), _evaluate);
+      final XtendField stringField = IterableExtensions.<XtendField>head(Iterables.<XtendField>filter(IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes()).getMembers(), XtendField.class));
+      Assert.assertEquals(((Constants1.STRING_CONSTANT + "-") + Constants1.STRING_CONSTANT), this.interpreter.evaluate(stringField.getInitialValue(), null));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -251,15 +206,9 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = _head.getMembers();
-      Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members, XtendField.class);
-      final XtendField stringField = IterableExtensions.<XtendField>head(_filter);
+      final XtendField stringField = IterableExtensions.<XtendField>head(Iterables.<XtendField>filter(IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes()).getMembers(), XtendField.class));
       try {
-        XExpression _initialValue = stringField.getInitialValue();
-        Object _evaluate = this.interpreter.evaluate(_initialValue, null);
-        InputOutput.<Object>println(_evaluate);
+        InputOutput.<Object>println(this.interpreter.evaluate(stringField.getInitialValue(), null));
         Assert.fail("Exception expected");
       } catch (final Throwable _t) {
         if (_t instanceof ConstantExpressionEvaluationException) {
@@ -354,32 +303,19 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   
   @Test
   public void testOperatorsWithExpectation() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("boolean", "1 + 1");
-    this.evaluatesTo(_mappedTo, Integer.valueOf(2));
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("boolean", "1 - 1");
-    this.evaluatesTo(_mappedTo_1, Integer.valueOf(0));
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("boolean", "1 * 1");
-    this.evaluatesTo(_mappedTo_2, Integer.valueOf(1));
-    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("boolean", "1 / 1");
-    this.evaluatesTo(_mappedTo_3, Integer.valueOf(1));
-    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("boolean", "1 % 1");
-    this.evaluatesTo(_mappedTo_4, Integer.valueOf(0));
-    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("boolean", "1 < 1");
-    this.evaluatesTo(_mappedTo_5, Boolean.valueOf(false));
-    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("boolean", "1 <= 1");
-    this.evaluatesTo(_mappedTo_6, Boolean.valueOf(true));
-    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("boolean", "1 > 1");
-    this.evaluatesTo(_mappedTo_7, Boolean.valueOf(false));
-    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("boolean", "1 >= 1");
-    this.evaluatesTo(_mappedTo_8, Boolean.valueOf(true));
-    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("boolean", "1 == 1");
-    this.evaluatesTo(_mappedTo_9, Boolean.valueOf(true));
-    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("boolean", "1 != 1");
-    this.evaluatesTo(_mappedTo_10, Boolean.valueOf(false));
-    Pair<String, String> _mappedTo_11 = Pair.<String, String>of("boolean", "1 === 1");
-    this.evaluatesTo(_mappedTo_11, Boolean.valueOf(true));
-    Pair<String, String> _mappedTo_12 = Pair.<String, String>of("boolean", "1 !== 1");
-    this.evaluatesTo(_mappedTo_12, Boolean.valueOf(false));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 + 1"), Integer.valueOf(2));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 - 1"), Integer.valueOf(0));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 * 1"), Integer.valueOf(1));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 / 1"), Integer.valueOf(1));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 % 1"), Integer.valueOf(0));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 < 1"), Boolean.valueOf(false));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 <= 1"), Boolean.valueOf(true));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 > 1"), Boolean.valueOf(false));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 >= 1"), Boolean.valueOf(true));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 == 1"), Boolean.valueOf(true));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 != 1"), Boolean.valueOf(false));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 === 1"), Boolean.valueOf(true));
+    this.evaluatesTo(Pair.<String, String>of("boolean", "1 !== 1"), Boolean.valueOf(false));
   }
   
   protected void assertEvaluatesTo(final Object expectation, final Pair<String, String> left, final Pair<String, String> right, final String op) {
@@ -424,14 +360,8 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = _head.getMembers();
-      Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members, XtendField.class);
-      final XtendField stringField = IterableExtensions.<XtendField>head(_filter);
-      XExpression _initialValue = stringField.getInitialValue();
-      Object _evaluate = this.interpreter.evaluate(_initialValue, null);
-      Assert.assertEquals(expectation, _evaluate);
+      final XtendField stringField = IterableExtensions.<XtendField>head(Iterables.<XtendField>filter(IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes()).getMembers(), XtendField.class));
+      Assert.assertEquals(expectation, this.interpreter.evaluate(stringField.getInitialValue(), null));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -440,14 +370,11 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   @Test
   public void testEnumLiteral() {
     final Procedure1<Object> _function = (Object it) -> {
-      String _simpleName = ((JvmEnumerationLiteral) it).getSimpleName();
-      Assert.assertEquals("YELLOW", _simpleName);
+      Assert.assertEquals("YELLOW", ((JvmEnumerationLiteral) it).getSimpleName());
     };
     this.evaluatesTo("test.Enum1.YELLOW", _function);
     final Procedure1<Object> _function_1 = (Object it) -> {
-      JvmEnumerationLiteral _get = ((JvmEnumerationLiteral[]) it)[0];
-      String _simpleName = _get.getSimpleName();
-      Assert.assertEquals("YELLOW", _simpleName);
+      Assert.assertEquals("YELLOW", ((JvmEnumerationLiteral[]) it)[0].getSimpleName());
     };
     this.evaluatesTo("#[test.Enum1.YELLOW,test.Enum1.RED]", _function_1);
   }
@@ -490,13 +417,11 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   @Test
   public void testStringArrayLiteral() {
     final Procedure1<Object> _function = (Object it) -> {
-      Object _get = ((String[]) it)[1];
-      Assert.assertEquals("bar", _get);
+      Assert.assertEquals("bar", ((String[]) it)[1]);
     };
     this.evaluatesTo("#[\"foo\",\"bar\"]", _function);
     final Procedure1<Object> _function_1 = (Object it) -> {
-      Object _get = ((String[]) it)[1];
-      Assert.assertEquals("bar", _get);
+      Assert.assertEquals("bar", ((String[]) it)[1]);
     };
     this.evaluatesTo("#[\"foo\",\"b\"+\"a\"+\"r\"]", _function_1);
   }
@@ -505,8 +430,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   public void testClassLiteral() {
     final Procedure1<Object> _function = (Object it) -> {
       Assert.assertTrue((it instanceof JvmTypeReference));
-      String _identifier = ((JvmTypeReference) it).getIdentifier();
-      Assert.assertEquals("java.lang.String", _identifier);
+      Assert.assertEquals("java.lang.String", ((JvmTypeReference) it).getIdentifier());
     };
     final Procedure1<Object> assertion = _function;
     this.evaluatesTo("typeof(String)", assertion);
@@ -518,12 +442,8 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   public void testClassLiteralArray() {
     final Procedure1<Object> _function = (Object it) -> {
       Assert.assertTrue((it instanceof JvmTypeReference[]));
-      JvmTypeReference _get = ((JvmTypeReference[]) it)[0];
-      String _identifier = _get.getIdentifier();
-      Assert.assertEquals("java.lang.String", _identifier);
-      JvmTypeReference _get_1 = ((JvmTypeReference[]) it)[1];
-      String _identifier_1 = _get_1.getIdentifier();
-      Assert.assertEquals("java.lang.Class", _identifier_1);
+      Assert.assertEquals("java.lang.String", ((JvmTypeReference[]) it)[0].getIdentifier());
+      Assert.assertEquals("java.lang.Class", ((JvmTypeReference[]) it)[1].getIdentifier());
     };
     final Procedure1<Object> assertion = _function;
     this.evaluatesTo("#[typeof(String), typeof(Class)]", assertion);
@@ -534,12 +454,9 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   
   @Test
   public void testNumberLiteralWithExpectation() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("float", "1");
-    this.evaluatesTo(_mappedTo, Float.valueOf(1f));
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("double", "1");
-    this.evaluatesTo(_mappedTo_1, Double.valueOf(1d));
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("long", "1");
-    this.evaluatesTo(_mappedTo_2, Long.valueOf(1l));
+    this.evaluatesTo(Pair.<String, String>of("float", "1"), Float.valueOf(1f));
+    this.evaluatesTo(Pair.<String, String>of("double", "1"), Double.valueOf(1d));
+    this.evaluatesTo(Pair.<String, String>of("long", "1"), Long.valueOf(1l));
   }
   
   @Test
@@ -562,8 +479,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     try {
       final XtendFunction function = this.function((("def void testFoo() { " + expression) + " }"));
       XExpression _expression = function.getExpression();
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      final XExpression expr = IterableExtensions.<XExpression>head(_expressions);
+      final XExpression expr = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
       try {
         this.interpreter.evaluate(expr, null);
         Assert.fail("exception expected");
@@ -613,8 +529,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       String _plus_3 = (_plus_2 + " }");
       final XtendFunction function = this.function(_plus_3);
       XExpression _expression = function.getExpression();
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      final XExpression expr = IterableExtensions.<XExpression>head(_expressions);
+      final XExpression expr = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
       JvmTypeReference _xifexpression = null;
       if ((type != null)) {
         _xifexpression = function.getReturnType();

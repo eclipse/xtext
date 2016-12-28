@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
@@ -82,31 +81,17 @@ public class ContentAssistPrioritiesTest extends AbstractXtendContentAssistBugTe
       final String text = _builder.toString();
       int _indexOf = text.indexOf("//CURSOR");
       final int idx = (_indexOf - 1);
-      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(text);
-      ContentAssistProcessorTestBuilder _insert = _append.insert("", idx);
-      ICompletionProposal[] _computeCompletionProposals = _insert.computeCompletionProposals();
-      final Iterator<ICompletionProposal> proposals = ((List<ICompletionProposal>)Conversions.doWrapArray(_computeCompletionProposals)).iterator();
-      ICompletionProposal _next = proposals.next();
-      this.assertContains(_next, "aParam");
-      ICompletionProposal _next_1 = proposals.next();
-      this.assertContains(_next_1, "aVar");
-      ICompletionProposal _next_2 = proposals.next();
-      this.assertContains(_next_2, "zParam");
-      ICompletionProposal _next_3 = proposals.next();
-      this.assertContains(_next_3, "zVar");
-      ICompletionProposal _next_4 = proposals.next();
-      this.assertContains(_next_4, "aField");
-      ICompletionProposal _next_5 = proposals.next();
-      this.assertContains(_next_5, "aStaticField");
-      ICompletionProposal _next_6 = proposals.next();
-      this.assertContains(_next_6, "zField");
-      ICompletionProposal _next_7 = proposals.next();
-      this.assertContains(_next_7, "zStaticField");
-      ICompletionProposal _next_8 = proposals.next();
-      this.assertContains(_next_8, "aMethod");
-      ICompletionProposal _next_9 = proposals.next();
-      this.assertContains(_next_9, "aStaticMethod");
+      final Iterator<ICompletionProposal> proposals = ((List<ICompletionProposal>)Conversions.doWrapArray(this.newBuilder().append(text).insert("", idx).computeCompletionProposals())).iterator();
+      this.assertContains(proposals.next(), "aParam");
+      this.assertContains(proposals.next(), "aVar");
+      this.assertContains(proposals.next(), "zParam");
+      this.assertContains(proposals.next(), "zVar");
+      this.assertContains(proposals.next(), "aField");
+      this.assertContains(proposals.next(), "aStaticField");
+      this.assertContains(proposals.next(), "zField");
+      this.assertContains(proposals.next(), "zStaticField");
+      this.assertContains(proposals.next(), "aMethod");
+      this.assertContains(proposals.next(), "aStaticMethod");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -115,8 +100,6 @@ public class ContentAssistPrioritiesTest extends AbstractXtendContentAssistBugTe
   public void assertContains(final ICompletionProposal proposal, final String text) {
     String _displayString = proposal.getDisplayString();
     String _plus = ((text + " in ") + _displayString);
-    String _displayString_1 = proposal.getDisplayString();
-    boolean _contains = _displayString_1.contains(text);
-    Assert.assertTrue(_plus, _contains);
+    Assert.assertTrue(_plus, proposal.getDisplayString().contains(text));
   }
 }

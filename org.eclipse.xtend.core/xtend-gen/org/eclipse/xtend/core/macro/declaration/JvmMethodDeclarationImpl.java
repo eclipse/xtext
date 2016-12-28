@@ -7,62 +7,50 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmExecutableDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 
 @SuppressWarnings("all")
 public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation> implements MethodDeclaration {
   @Override
   public boolean isAbstract() {
-    JvmOperation _delegate = this.getDelegate();
-    return _delegate.isAbstract();
+    return this.getDelegate().isAbstract();
   }
   
   @Override
   public boolean isFinal() {
-    JvmOperation _delegate = this.getDelegate();
-    return _delegate.isFinal();
+    return this.getDelegate().isFinal();
   }
   
   @Override
   public boolean isStatic() {
-    JvmOperation _delegate = this.getDelegate();
-    return _delegate.isStatic();
+    return this.getDelegate().isStatic();
   }
   
   @Override
   public boolean isSynchronized() {
-    JvmOperation _delegate = this.getDelegate();
-    return _delegate.isSynchronized();
+    return this.getDelegate().isSynchronized();
   }
   
   @Override
   public boolean isDefault() {
-    JvmOperation _delegate = this.getDelegate();
-    return _delegate.isDefault();
+    return this.getDelegate().isDefault();
   }
   
   @Override
   public boolean isStrictFloatingPoint() {
-    JvmOperation _delegate = this.getDelegate();
-    return _delegate.isStrictFloatingPoint();
+    return this.getDelegate().isStrictFloatingPoint();
   }
   
   @Override
   public boolean isNative() {
-    JvmOperation _delegate = this.getDelegate();
-    return _delegate.isNative();
+    return this.getDelegate().isNative();
   }
   
   @Override
   public TypeReference getReturnType() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    JvmOperation _delegate = this.getDelegate();
-    JvmTypeReference _returnType = _delegate.getReturnType();
-    return _compilationUnit.toTypeReference(_returnType);
+    return this.getCompilationUnit().toTypeReference(this.getDelegate().getReturnType());
   }
 }

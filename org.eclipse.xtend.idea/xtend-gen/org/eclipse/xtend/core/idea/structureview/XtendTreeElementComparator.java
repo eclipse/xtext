@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.idea.structureview;
 import com.google.common.base.Objects;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.core.idea.structureview.XtendEObjectTreeElement;
 import org.eclipse.xtend.core.idea.structureview.XtendFeatureTreeElement;
@@ -54,8 +53,7 @@ public class XtendTreeElementComparator extends DefaultComparator {
         return _xifexpression;
       }
       if ((element instanceof EObjectTreeElement)) {
-        EObject _object = ((EObjectTreeElement)element).getObject();
-        EClass _eClass = _object.eClass();
+        EClass _eClass = ((EObjectTreeElement)element).getObject().eClass();
         final EClass eClass = _eClass;
         boolean _matched = false;
         boolean _isSuperTypeOf = XtendPackage.Literals.XTEND_TYPE_DECLARATION.isSuperTypeOf(eClass);

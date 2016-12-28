@@ -16,7 +16,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -727,11 +726,9 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = (ExtractMethodRefactoring it) -> {
-      List<ParameterInfo> _parameterInfos = it.getParameterInfos();
-      ParameterInfo _get = _parameterInfos.get(0);
+      ParameterInfo _get = it.getParameterInfos().get(0);
       _get.setNewName("s");
-      List<ParameterInfo> _parameterInfos_1 = it.getParameterInfos();
-      ParameterInfo _get_1 = _parameterInfos_1.get(1);
+      ParameterInfo _get_1 = it.getParameterInfos().get(1);
       _get_1.setNewName("expandMeMore");
     };
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -779,11 +776,9 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = (ExtractMethodRefactoring it) -> {
-      List<ParameterInfo> _parameterInfos = it.getParameterInfos();
-      ParameterInfo _get = _parameterInfos.get(0);
+      ParameterInfo _get = it.getParameterInfos().get(0);
       _get.setNewName("j");
-      List<ParameterInfo> _parameterInfos_1 = it.getParameterInfos();
-      ParameterInfo _get_1 = _parameterInfos_1.get(1);
+      ParameterInfo _get_1 = it.getParameterInfos().get(1);
       _get_1.setNewName("i");
     };
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -1093,8 +1088,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = (ExtractMethodRefactoring it) -> {
-      List<ParameterInfo> _parameterInfos = it.getParameterInfos();
-      ParameterInfo _get = _parameterInfos.get(1);
+      ParameterInfo _get = it.getParameterInfos().get(1);
       _get.setNewName("x");
     };
     this.assertExtractForbidden(_builder, _function, "duplicate");
@@ -2766,11 +2760,9 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
   protected void assertAfterExtract(final CharSequence input, final Procedure1<? super ExtractMethodRefactoring> initializer, final CharSequence expected) {
     try {
       final String inputString = input.toString();
-      String _replace = inputString.replace("$", "");
-      final IFile file = this.workbenchTestHelper.createFile("Foo", _replace);
+      final IFile file = this.workbenchTestHelper.createFile("Foo", inputString.replace("$", ""));
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       try {
-        IXtextDocument _document = editor.getDocument();
         final IUnitOfWork<Change, XtextResource> _function = (XtextResource it) -> {
           Change _xblockexpression = null;
           {
@@ -2788,16 +2780,11 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
             refactoring.setMethodName("bar");
             NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
             RefactoringStatus status = refactoring.checkInitialConditions(_nullProgressMonitor);
-            String _string = status.toString();
-            boolean _isOK = status.isOK();
-            Assert.assertTrue(_string, _isOK);
+            Assert.assertTrue(status.toString(), status.isOK());
             initializer.apply(refactoring);
             NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-            RefactoringStatus _checkFinalConditions = refactoring.checkFinalConditions(_nullProgressMonitor_1);
-            status = _checkFinalConditions;
-            String _string_1 = status.toString();
-            boolean _isOK_1 = status.isOK();
-            Assert.assertTrue(_string_1, _isOK_1);
+            status = refactoring.checkFinalConditions(_nullProgressMonitor_1);
+            Assert.assertTrue(status.toString(), status.isOK());
             NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
             Change _createChange = refactoring.createChange(_nullProgressMonitor_2);
             NullProgressMonitor _nullProgressMonitor_3 = new NullProgressMonitor();
@@ -2805,11 +2792,8 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
           }
           return _xblockexpression;
         };
-        _document.<Change>readOnly(_function);
-        String _string = expected.toString();
-        IXtextDocument _document_1 = editor.getDocument();
-        String _get = _document_1.get();
-        Assert.assertEquals(_string, _get);
+        editor.getDocument().<Change>readOnly(_function);
+        Assert.assertEquals(expected.toString(), editor.getDocument().get());
       } finally {
         editor.close(false);
       }
@@ -2821,11 +2805,9 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
   protected void assertExtractForbidden(final CharSequence input, final Procedure1<? super ExtractMethodRefactoring> initializer, final String messageFragment) {
     try {
       final String inputString = input.toString();
-      String _replace = inputString.replace("$", "");
-      final IFile file = this.workbenchTestHelper.createFile("Foo", _replace);
+      final IFile file = this.workbenchTestHelper.createFile("Foo", inputString.replace("$", ""));
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       try {
-        IXtextDocument _document = editor.getDocument();
         final IUnitOfWork<String, XtextResource> _function = (XtextResource it) -> {
           String _xblockexpression = null;
           {
@@ -2843,21 +2825,15 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
             final RefactoringStatus status = refactoring.checkInitialConditions(_nullProgressMonitor);
             initializer.apply(refactoring);
             NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-            RefactoringStatus _checkFinalConditions = refactoring.checkFinalConditions(_nullProgressMonitor_1);
-            status.merge(_checkFinalConditions);
-            String _string = status.toString();
-            boolean _hasError = status.hasError();
-            Assert.assertTrue(_string, _hasError);
+            status.merge(refactoring.checkFinalConditions(_nullProgressMonitor_1));
+            Assert.assertTrue(status.toString(), status.hasError());
             final String message = status.getMessageMatchingSeverity(RefactoringStatus.ERROR);
-            String _lowerCase = message.toLowerCase();
-            String _lowerCase_1 = messageFragment.toLowerCase();
-            boolean _contains = _lowerCase.contains(_lowerCase_1);
-            Assert.assertTrue(message, _contains);
+            Assert.assertTrue(message, message.toLowerCase().contains(messageFragment.toLowerCase()));
             _xblockexpression = "";
           }
           return _xblockexpression;
         };
-        _document.<String>readOnly(_function);
+        editor.getDocument().<String>readOnly(_function);
       } finally {
         editor.close(false);
       }

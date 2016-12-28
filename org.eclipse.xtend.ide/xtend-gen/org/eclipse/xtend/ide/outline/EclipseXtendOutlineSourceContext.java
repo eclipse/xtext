@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
@@ -54,18 +53,15 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
       CreateExtensionInfo _createExtensionInfo = ((XtendFunction)function).getCreateExtensionInfo();
       boolean _tripleNotEquals = (_createExtensionInfo != null);
       if (_tripleNotEquals) {
-        Set<EObject> _jvmElements = this._iXtendJvmAssociations.getJvmElements(function);
-        Iterable<JvmFeature> _filter = Iterables.<JvmFeature>filter(_jvmElements, JvmFeature.class);
         final Function1<JvmFeature, Boolean> _function = (JvmFeature it) -> {
           return Boolean.valueOf((!Objects.equal(it, member)));
         };
-        Iterable<JvmFeature> _filter_1 = IterableExtensions.<JvmFeature>filter(_filter, _function);
         final Function1<JvmFeature, Boolean> _function_1 = (JvmFeature it) -> {
           return Boolean.valueOf((it.getSimpleName().startsWith(XtendJvmModelInferrer.CREATE_CHACHE_VARIABLE_PREFIX) || 
             it.getSimpleName().startsWith(XtendJvmModelInferrer.CREATE_INITIALIZER_PREFIX)));
         };
-        Iterable<JvmFeature> _filter_2 = IterableExtensions.<JvmFeature>filter(_filter_1, _function_1);
-        for (final JvmFeature jvmFeature : _filter_2) {
+        Iterable<JvmFeature> _filter = IterableExtensions.<JvmFeature>filter(IterableExtensions.<JvmFeature>filter(Iterables.<JvmFeature>filter(this._iXtendJvmAssociations.getJvmElements(function), JvmFeature.class), _function), _function_1);
+        for (final JvmFeature jvmFeature : _filter) {
           super.markAsProcessed(jvmFeature);
         }
       }
@@ -74,7 +70,6 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
   
   @Override
   protected EclipseXtendOutlineContext cloneContext() {
-    EclipseXtendOutlineSourceContext _get = this.xtendOutlineContextProvider.get();
-    return this.cloneContext(_get);
+    return this.cloneContext(this.xtendOutlineContextProvider.get());
   }
 }

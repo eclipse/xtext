@@ -7,39 +7,30 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 
 @SuppressWarnings("all")
 public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> implements AnnotationTypeElementDeclaration {
   @Override
   public String getSimpleName() {
-    XtendField _delegate = this.getDelegate();
-    return _delegate.getName();
+    return this.getDelegate().getName();
   }
   
   @Override
   public Object getDefaultValue() {
     Object _xblockexpression = null;
     {
-      XtendField _delegate = this.getDelegate();
-      XExpression _initialValue = _delegate.getInitialValue();
+      XExpression _initialValue = this.getDelegate().getInitialValue();
       boolean _tripleEquals = (_initialValue == null);
       if (_tripleEquals) {
         return null;
       }
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      XtendField _delegate_1 = this.getDelegate();
-      XExpression _initialValue_1 = _delegate_1.getInitialValue();
-      XtendField _delegate_2 = this.getDelegate();
-      JvmTypeReference _type = _delegate_2.getType();
-      _xblockexpression = _compilationUnit.evaluate(_initialValue_1, _type);
+      _xblockexpression = this.getCompilationUnit().evaluate(this.getDelegate().getInitialValue(), this.getDelegate().getType());
     }
     return _xblockexpression;
   }
@@ -48,25 +39,18 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
   public Expression getDefaultValueExpression() {
     Expression _xblockexpression = null;
     {
-      XtendField _delegate = this.getDelegate();
-      XExpression _initialValue = _delegate.getInitialValue();
+      XExpression _initialValue = this.getDelegate().getInitialValue();
       boolean _tripleEquals = (_initialValue == null);
       if (_tripleEquals) {
         return null;
       }
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      XtendField _delegate_1 = this.getDelegate();
-      XExpression _initialValue_1 = _delegate_1.getInitialValue();
-      _xblockexpression = _compilationUnit.toExpression(_initialValue_1);
+      _xblockexpression = this.getCompilationUnit().toExpression(this.getDelegate().getInitialValue());
     }
     return _xblockexpression;
   }
   
   @Override
   public TypeReference getType() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    XtendField _delegate = this.getDelegate();
-    JvmTypeReference _type = _delegate.getType();
-    return _compilationUnit.toTypeReference(_type);
+    return this.getCompilationUnit().toTypeReference(this.getDelegate().getType());
   }
 }

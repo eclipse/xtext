@@ -2,15 +2,11 @@ package org.eclipse.xtend.ide.tests.hover;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -61,18 +57,13 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final Iterable<XtendClass> clazz = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-      XtendClass _head = IterableExtensions.<XtendClass>head(clazz);
-      EList<XtendMember> _members = _head.getMembers();
-      XtendMember _get = _members.get(0);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final Iterable<XtendClass> clazz = Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class);
+      XtendMember _get = IterableExtensions.<XtendClass>head(clazz).getMembers().get(0);
       final XtendFunction function = ((XtendFunction) _get);
       XExpression _expression = function.getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get_1 = _expressions.get(0);
+      XExpression _get_1 = expression.getExpressions().get(0);
       final XAbstractFeatureCall call = ((XAbstractFeatureCall) _get_1);
       final String resolvedSignature = this.signatureProvider.getSignature(call);
       Assert.assertEquals("<String> String Foo.something(Iterable<String> iterable)", resolvedSignature);
@@ -105,18 +96,13 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final Iterable<XtendClass> clazz = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-      XtendClass _head = IterableExtensions.<XtendClass>head(clazz);
-      EList<XtendMember> _members = _head.getMembers();
-      XtendMember _get = _members.get(0);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final Iterable<XtendClass> clazz = Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class);
+      XtendMember _get = IterableExtensions.<XtendClass>head(clazz).getMembers().get(0);
       final XtendFunction function = ((XtendFunction) _get);
       XExpression _expression = function.getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get_1 = _expressions.get(0);
+      XExpression _get_1 = expression.getExpressions().get(0);
       final XAbstractFeatureCall call = ((XAbstractFeatureCall) _get_1);
       final String resolvedSignature = this.signatureProvider.getSignature(call);
       Assert.assertEquals("<String, Foo, RuntimeException> Foo Foo.something(Iterable<String> iterable, Foo type1, String type2) throws RuntimeException", resolvedSignature);
@@ -126,10 +112,7 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
   }
   
   public ResourceSet getResourceSet() {
-    Injector _injector = this.getInjector();
-    IResourceSetProvider _instance = _injector.<IResourceSetProvider>getInstance(IResourceSetProvider.class);
-    IProject _project = this.testHelper.getProject();
-    return _instance.get(_project);
+    return this.getInjector().<IResourceSetProvider>getInstance(IResourceSetProvider.class).get(this.testHelper.getProject());
   }
   
   @After

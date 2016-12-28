@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.inject.Inject;
 import org.apache.log4j.Level;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -20,7 +19,6 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -67,16 +65,11 @@ public class Bug464760Test {
       _builder.newLine();
       Resource _resource = this.resourceHelper.resource(_builder);
       final XtextResource resource = ((XtextResource) _resource);
-      IParseResult _parseResult = resource.getParseResult();
-      EObject _rootASTElement = _parseResult.getRootASTElement();
+      EObject _rootASTElement = resource.getParseResult().getRootASTElement();
       final XtendFile xtendFile = ((XtendFile) _rootASTElement);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = _head.getMembers();
-      XtendMember _get = _members.get(1);
-      EList<XtendParameter> _parameters = ((XtendFunction) _get).getParameters();
-      XtendParameter _head_1 = IterableExtensions.<XtendParameter>head(_parameters);
-      _head_1.setParameterType(null);
+      XtendMember _get = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes()).getMembers().get(1);
+      XtendParameter _head = IterableExtensions.<XtendParameter>head(((XtendFunction) _get).getParameters());
+      _head.setParameterType(null);
       final Runnable _function = () -> {
         EcoreUtil.resolveAll(resource);
       };

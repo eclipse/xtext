@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.validation;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -51,8 +50,7 @@ public class ValidationBug378818Test extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this.helper.assertError(_file, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.ABSTRACT_METHOD_INVOCATION, 
+      this.helper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.ABSTRACT_METHOD_INVOCATION, 
         "Cannot directly invoke the abstract method foo() of the type AbstractTest");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -83,8 +81,7 @@ public class ValidationBug378818Test extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this.helper.assertError(_file, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.ABSTRACT_METHOD_INVOCATION, 
+      this.helper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.ABSTRACT_METHOD_INVOCATION, 
         "Cannot directly invoke the abstract method foo() of the type AbstractTest");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

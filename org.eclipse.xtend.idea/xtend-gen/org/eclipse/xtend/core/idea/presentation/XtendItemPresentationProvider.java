@@ -11,12 +11,8 @@ import com.google.inject.Inject;
 import com.intellij.psi.PsiElement;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Set;
 import javax.swing.Icon;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.idea.presentation.XtendJvmItemPresentationProvider;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
@@ -30,13 +26,11 @@ import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -65,47 +59,37 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
   private OperatorMapping operatorMapping;
   
   protected Icon _image(final XtendTypeDeclaration element) {
-    JvmDeclaredType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
-    return this.image(_inferredType);
+    return this.image(this._iXtendJvmAssociations.getInferredType(element));
   }
   
   protected Icon _image(final XtendFunction element) {
-    JvmOperation _directlyInferredOperation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
-    return this.image(_directlyInferredOperation);
+    return this.image(this._iXtendJvmAssociations.getDirectlyInferredOperation(element));
   }
   
   protected Icon _image(final XtendConstructor element) {
-    JvmConstructor _inferredConstructor = this._iXtendJvmAssociations.getInferredConstructor(element);
-    return this.image(_inferredConstructor);
+    return this.image(this._iXtendJvmAssociations.getInferredConstructor(element));
   }
   
   protected Icon _image(final XtendField element) {
-    JvmField _jvmField = this._iXtendJvmAssociations.getJvmField(element);
-    return this.image(_jvmField);
+    return this.image(this._iXtendJvmAssociations.getJvmField(element));
   }
   
   protected Icon _image(final XtendEnumLiteral element) {
-    JvmField _jvmField = this._iXtendJvmAssociations.getJvmField(element);
-    return this.image(_jvmField);
+    return this.image(this._iXtendJvmAssociations.getJvmField(element));
   }
   
   protected String _text(final XtendFile element) {
-    Resource _eResource = element.eResource();
-    URI _uRI = _eResource.getURI();
-    URI _trimFileExtension = _uRI.trimFileExtension();
-    return _trimFileExtension.lastSegment();
+    return element.eResource().getURI().trimFileExtension().lastSegment();
   }
   
   protected String _text(final XtendClass element) {
     String _name = element.getName();
     String _xifexpression = null;
-    EList<JvmTypeParameter> _typeParameters = element.getTypeParameters();
-    boolean _isEmpty = _typeParameters.isEmpty();
+    boolean _isEmpty = element.getTypeParameters().isEmpty();
     if (_isEmpty) {
       _xifexpression = "";
     } else {
-      EList<JvmTypeParameter> _typeParameters_1 = element.getTypeParameters();
-      _xifexpression = this.uiStrings.typeParameters(_typeParameters_1);
+      _xifexpression = this.uiStrings.typeParameters(element.getTypeParameters());
     }
     return (_name + _xifexpression);
   }
@@ -113,25 +97,21 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
   protected String _text(final XtendInterface element) {
     String _name = element.getName();
     String _xifexpression = null;
-    EList<JvmTypeParameter> _typeParameters = element.getTypeParameters();
-    boolean _isEmpty = _typeParameters.isEmpty();
+    boolean _isEmpty = element.getTypeParameters().isEmpty();
     if (_isEmpty) {
       _xifexpression = "";
     } else {
-      EList<JvmTypeParameter> _typeParameters_1 = element.getTypeParameters();
-      _xifexpression = this.uiStrings.typeParameters(_typeParameters_1);
+      _xifexpression = this.uiStrings.typeParameters(element.getTypeParameters());
     }
     return (_name + _xifexpression);
   }
   
   protected String _text(final AnonymousClass element) {
-    JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
-    return this.text(_inferredType);
+    return this.text(this._iXtendJvmAssociations.getInferredType(element));
   }
   
   protected String _text(final XtendConstructor element) {
-    JvmConstructor _inferredConstructor = this._iXtendJvmAssociations.getInferredConstructor(element);
-    String _parameters = this.uiStrings.parameters(_inferredConstructor);
+    String _parameters = this.uiStrings.parameters(this._iXtendJvmAssociations.getInferredConstructor(element));
     return ("new" + _parameters);
   }
   
@@ -141,25 +121,20 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
       final QualifiedName qnName = QualifiedName.create(simpleName);
       final QualifiedName operator = this.operatorMapping.getOperator(qnName);
       if ((operator != null)) {
-        String _firstSegment = operator.getFirstSegment();
-        JvmOperation _directlyInferredOperation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
-        String _signature = this.signature(_firstSegment, _directlyInferredOperation);
+        String _signature = this.signature(operator.getFirstSegment(), this._iXtendJvmAssociations.getDirectlyInferredOperation(element));
         String _plus = (_signature + " (");
         String _plus_1 = (_plus + simpleName);
         return (_plus_1 + ")");
       }
     }
-    String _name = element.getName();
-    JvmOperation _directlyInferredOperation_1 = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
-    return this.signature(_name, _directlyInferredOperation_1);
+    return this.signature(element.getName(), this._iXtendJvmAssociations.getDirectlyInferredOperation(element));
   }
   
   protected String _text(final XtendField element) {
     String _xblockexpression = null;
     {
       if (((element.getName() == null) && element.isExtension())) {
-        JvmTypeReference _type = element.getType();
-        return this.uiStrings.referenceToString(_type, "extension");
+        return this.uiStrings.referenceToString(element.getType(), "extension");
       }
       final JvmTypeReference fieldType = this.getDisplayedType(element);
       if ((fieldType != null)) {
@@ -182,8 +157,7 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
   }
   
   protected String _text(final XtendParameter element) {
-    JvmTypeReference _parameterType = element.getParameterType();
-    String _simpleName = _parameterType.getSimpleName();
+    String _simpleName = element.getParameterType().getSimpleName();
     String _plus = (_simpleName + " ");
     String _name = element.getName();
     return (_plus + _name);
@@ -196,8 +170,7 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
       if ((jvmField != null)) {
         return jvmField.getType();
       } else {
-        Set<EObject> _jvmElements = this._iXtendJvmAssociations.getJvmElements(field);
-        final Iterator<EObject> i = _jvmElements.iterator();
+        final Iterator<EObject> i = this._iXtendJvmAssociations.getJvmElements(field).iterator();
         boolean _hasNext = i.hasNext();
         if (_hasNext) {
           final EObject next = i.next();

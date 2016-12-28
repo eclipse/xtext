@@ -9,7 +9,6 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -34,8 +33,7 @@ public class InsertionOffsets {
   }
   
   public int getNewFieldInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
-    EList<XtendMember> _members = ownerType.getMembers();
-    boolean _isEmpty = _members.isEmpty();
+    boolean _isEmpty = ownerType.getMembers().isEmpty();
     if (_isEmpty) {
       return this.inEmpty(ownerType);
     }
@@ -43,13 +41,9 @@ public class InsertionOffsets {
     if (((callingMember != null) && ownerType.getMembers().contains(callingMember))) {
       return this.before(callingMember);
     }
-    EList<XtendMember> _members_1 = ownerType.getMembers();
-    Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members_1, XtendField.class);
-    final XtendField lastDefinedField = IterableExtensions.<XtendField>last(_filter);
+    final XtendField lastDefinedField = IterableExtensions.<XtendField>last(Iterables.<XtendField>filter(ownerType.getMembers(), XtendField.class));
     if ((lastDefinedField == null)) {
-      EList<XtendMember> _members_2 = ownerType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members_2);
-      return this.before(_head);
+      return this.before(IterableExtensions.<XtendMember>head(ownerType.getMembers()));
     } else {
       return this.after(lastDefinedField);
     }
@@ -60,22 +54,17 @@ public class InsertionOffsets {
     if (((callingMember != null) && ownerType.getMembers().contains(callingMember))) {
       return this.after(callingMember);
     } else {
-      EList<XtendMember> _members = ownerType.getMembers();
-      boolean _isEmpty = _members.isEmpty();
+      boolean _isEmpty = ownerType.getMembers().isEmpty();
       if (_isEmpty) {
         return this.inEmpty(ownerType);
       } else {
-        EList<XtendMember> _members_1 = ownerType.getMembers();
-        XtendMember _last = IterableExtensions.<XtendMember>last(_members_1);
-        return this.after(_last);
+        return this.after(IterableExtensions.<XtendMember>last(ownerType.getMembers()));
       }
     }
   }
   
   public int getNewConstructorInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
-    EList<XtendMember> _members = ownerType.getMembers();
-    Iterable<XtendConstructor> _filter = Iterables.<XtendConstructor>filter(_members, XtendConstructor.class);
-    final XtendConstructor lastDefinedConstructor = IterableExtensions.<XtendConstructor>last(_filter);
+    final XtendConstructor lastDefinedConstructor = IterableExtensions.<XtendConstructor>last(Iterables.<XtendConstructor>filter(ownerType.getMembers(), XtendConstructor.class));
     if ((lastDefinedConstructor == null)) {
       return this.getNewFieldInsertOffset(call, ownerType);
     } else {
@@ -84,8 +73,7 @@ public class InsertionOffsets {
   }
   
   protected int before(final EObject element) {
-    ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(element);
-    return _findActualNodeFor.getOffset();
+    return NodeModelUtils.findActualNodeFor(element).getOffset();
   }
   
   protected int after(final EObject element) {
@@ -101,12 +89,11 @@ public class InsertionOffsets {
     int _xblockexpression = (int) 0;
     {
       final ICompositeNode classNode = NodeModelUtils.findActualNodeFor(ownerType);
-      Iterable<ILeafNode> _leafNodes = classNode.getLeafNodes();
       final Function1<ILeafNode, Boolean> _function = (ILeafNode it) -> {
         String _text = it.getText();
         return Boolean.valueOf(Objects.equal(_text, "{"));
       };
-      final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(_leafNodes, _function);
+      final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(classNode.getLeafNodes(), _function);
       int _xifexpression = (int) 0;
       if ((openingBraceNode != null)) {
         int _offset = openingBraceNode.getOffset();

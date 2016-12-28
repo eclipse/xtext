@@ -9,16 +9,12 @@ package org.eclipse.xtend.ide.tests.refactoring;
 
 import com.google.inject.Inject;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IField;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.ui.refactoring.RenameSupport;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.refactoring.FileAsserts;
@@ -101,9 +97,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_1.append("class Bar {}");
       _builder_1.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-      IType _findJavaType = this.findJavaType("foo.Foo");
-      IMethod _method = _findJavaType.getMethod("foo", new String[] {});
-      this.renameJavaElement(_method, "newFoo");
+      this.renameJavaElement(this.findJavaType("foo.Foo").getMethod("foo", new String[] {}), "newFoo");
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package bar");
       _builder_2.newLine();
@@ -214,9 +208,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-      IType _findJavaType = this.findJavaType("foo.Foo");
-      IMethod _method = _findJavaType.getMethod("foo", new String[] { "I" });
-      this.renameJavaElement(_method, "newFoo");
+      this.renameJavaElement(this.findJavaType("foo.Foo").getMethod("foo", new String[] { "I" }), "newFoo");
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package bar");
       _builder_2.newLine();
@@ -374,9 +366,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-      IType _findJavaType = this.findJavaType("foo.Foo");
-      IMethod _method = _findJavaType.getMethod("foo", new String[] { "I" });
-      this.renameJavaElement(_method, "newFoo");
+      this.renameJavaElement(this.findJavaType("foo.Foo").getMethod("foo", new String[] { "I" }), "newFoo");
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package bar");
       _builder_2.newLine();
@@ -590,9 +580,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_1.toString());
-      IType _findJavaType = this.findJavaType("foo.Foo");
-      IMethod _method = _findJavaType.getMethod("newFoo", new String[] { "I" });
-      this.renameJavaElement(_method, "foo");
+      this.renameJavaElement(this.findJavaType("foo.Foo").getMethod("newFoo", new String[] { "I" }), "foo");
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package bar");
       _builder_2.newLine();
@@ -787,9 +775,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_2.toString());
-      IType _findJavaType = this.findJavaType("b.B");
-      IMethod _method = _findJavaType.getMethod("b", new String[] { "I" });
-      this.renameJavaElement(_method, "a");
+      this.renameJavaElement(this.findJavaType("b.B").getMethod("b", new String[] { "I" }), "a");
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("package bar");
       _builder_3.newLine();
@@ -944,9 +930,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_3.append("}");
       _builder_3.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_3.toString());
-      IType _findJavaType = this.findJavaType("b.B");
-      IMethod _method = _findJavaType.getMethod("b", new String[] { "I" });
-      this.renameJavaElement(_method, "a");
+      this.renameJavaElement(this.findJavaType("b.B").getMethod("b", new String[] { "I" }), "a");
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("package bar");
       _builder_4.newLine();
@@ -1055,9 +1039,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_2.toString());
-      IType _findJavaType = this.findJavaType("b.B");
-      IMethod _method = _findJavaType.getMethod("b", new String[] { "I" });
-      this.renameJavaElement(_method, "a");
+      this.renameJavaElement(this.findJavaType("b.B").getMethod("b", new String[] { "I" }), "a");
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("package bar");
       _builder_3.newLine();
@@ -1182,9 +1164,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_3.append("}");
       _builder_3.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_3.toString());
-      IType _findJavaType = this.findJavaType("b.B.D");
-      IMethod _method = _findJavaType.getMethod("d", new String[] { "I" });
-      this.renameJavaElement(_method, "a");
+      this.renameJavaElement(this.findJavaType("b.B.D").getMethod("d", new String[] { "I" }), "a");
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("package bar");
       _builder_4.newLine();
@@ -1304,9 +1284,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_2.toString());
-      IType _findJavaType = this.findJavaType("b.B.D");
-      IMethod _method = _findJavaType.getMethod("d", new String[] { "I" });
-      this.renameJavaElement(_method, "a");
+      this.renameJavaElement(this.findJavaType("b.B.D").getMethod("d", new String[] { "I" }), "a");
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("package bar");
       _builder_3.newLine();
@@ -1426,9 +1404,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile xtendFile = this.testHelper.createFile("bar/Bar.xtend", _builder_2.toString());
-      IType _findJavaType = this.findJavaType("b.B.D");
-      IMethod _method = _findJavaType.getMethod("d", new String[] { "I" });
-      this.renameJavaElement(_method, "a");
+      this.renameJavaElement(this.findJavaType("b.B.D").getMethod("d", new String[] { "I" }), "a");
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("package bar");
       _builder_3.newLine();
@@ -1473,9 +1449,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
     IType _xblockexpression = null;
     {
       this.syncUtil.totalSync(false);
-      IProject _project = this.testHelper.getProject();
-      IJavaProject _create = JavaCore.create(_project);
-      _xblockexpression = _create.findType(typeName);
+      _xblockexpression = JavaCore.create(this.testHelper.getProject()).findType(typeName);
     }
     return _xblockexpression;
   }
@@ -1483,36 +1457,24 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
   public void renameJavaElement(final IType javaElement, final String newName) throws Exception {
     this.syncUtil.totalSync(false);
     final RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-    IWorkbenchWindow _activeWorkbenchWindow = this.workbench.getActiveWorkbenchWindow();
-    Shell _shell = _activeWorkbenchWindow.getShell();
-    IWorkbenchWindow _activeWorkbenchWindow_1 = this.workbench.getActiveWorkbenchWindow();
-    renameSupport.perform(_shell, _activeWorkbenchWindow_1);
+    renameSupport.perform(this.workbench.getActiveWorkbenchWindow().getShell(), this.workbench.getActiveWorkbenchWindow());
     this.syncUtil.totalSync(false);
-    boolean _isDisposed = this.compositeRefactoringProcessorAccess.isDisposed();
-    Assert.assertTrue(_isDisposed);
+    Assert.assertTrue(this.compositeRefactoringProcessorAccess.isDisposed());
   }
   
   public void renameJavaElement(final IMethod javaElement, final String newName) throws Exception {
     this.syncUtil.totalSync(false);
     final RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-    IWorkbenchWindow _activeWorkbenchWindow = this.workbench.getActiveWorkbenchWindow();
-    Shell _shell = _activeWorkbenchWindow.getShell();
-    IWorkbenchWindow _activeWorkbenchWindow_1 = this.workbench.getActiveWorkbenchWindow();
-    renameSupport.perform(_shell, _activeWorkbenchWindow_1);
+    renameSupport.perform(this.workbench.getActiveWorkbenchWindow().getShell(), this.workbench.getActiveWorkbenchWindow());
     this.syncUtil.totalSync(false);
-    boolean _isDisposed = this.compositeRefactoringProcessorAccess.isDisposed();
-    Assert.assertTrue(_isDisposed);
+    Assert.assertTrue(this.compositeRefactoringProcessorAccess.isDisposed());
   }
   
   public void renameJavaElement(final IField javaElement, final String newName) throws Exception {
     this.syncUtil.totalSync(false);
     final RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-    IWorkbenchWindow _activeWorkbenchWindow = this.workbench.getActiveWorkbenchWindow();
-    Shell _shell = _activeWorkbenchWindow.getShell();
-    IWorkbenchWindow _activeWorkbenchWindow_1 = this.workbench.getActiveWorkbenchWindow();
-    renameSupport.perform(_shell, _activeWorkbenchWindow_1);
+    renameSupport.perform(this.workbench.getActiveWorkbenchWindow().getShell(), this.workbench.getActiveWorkbenchWindow());
     this.syncUtil.totalSync(false);
-    boolean _isDisposed = this.compositeRefactoringProcessorAccess.isDisposed();
-    Assert.assertTrue(_isDisposed);
+    Assert.assertTrue(this.compositeRefactoringProcessorAccess.isDisposed());
   }
 }

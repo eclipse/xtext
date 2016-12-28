@@ -40,22 +40,18 @@ public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
         boolean _not = (!_isEmpty);
         if (_not) {
           final Function1<IOutlineNode, Integer> _function = (IOutlineNode it) -> {
-            ITextRegion _fullTextRegion = it.getFullTextRegion();
-            return Integer.valueOf(_fullTextRegion.getLength());
+            return Integer.valueOf(it.getFullTextRegion().getLength());
           };
-          List<Integer> _map = ListExtensions.<IOutlineNode, Integer>map(matchingNodes, _function);
-          final Integer smallestMatch = IterableExtensions.<Integer>min(_map);
+          final Integer smallestMatch = IterableExtensions.<Integer>min(ListExtensions.<IOutlineNode, Integer>map(matchingNodes, _function));
           final Function1<IOutlineNode, Boolean> _function_1 = (IOutlineNode it) -> {
-            ITextRegion _fullTextRegion = it.getFullTextRegion();
-            int _length_1 = _fullTextRegion.getLength();
+            int _length_1 = it.getFullTextRegion().getLength();
             return Boolean.valueOf((_length_1 == (smallestMatch).intValue()));
           };
           final Iterable<IOutlineNode> nodesToBeSelected = IterableExtensions.<IOutlineNode>filter(matchingNodes, _function_1);
           boolean _isEmpty_1 = IterableExtensions.isEmpty(nodesToBeSelected);
           boolean _not_1 = (!_isEmpty_1);
           if (_not_1) {
-            List<IOutlineNode> _list = IterableExtensions.<IOutlineNode>toList(nodesToBeSelected);
-            Object[] _array = _list.toArray();
+            Object[] _array = IterableExtensions.<IOutlineNode>toList(nodesToBeSelected).toArray();
             StructuredSelection _structuredSelection = new StructuredSelection(_array);
             this.treeViewer.setSelection(_structuredSelection);
           }

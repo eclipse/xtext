@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -28,7 +26,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -78,8 +75,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
       _builder.append(actualType);
       _builder.append(" actual) {}");
       final String signature = _builder.toString();
-      String _string = signature.toString();
-      final XtendFunction function = this.function(_string);
+      final XtendFunction function = this.function(signature.toString());
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       return operation;
     } catch (Throwable _e) {
@@ -92,20 +88,12 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     ITypeReferenceOwner _owner = this.getOwner();
     final DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(_owner);
     final DefaultReentrantTypeResolver resolver = this.resolverProvider.get();
-    EObject _rootContainer = EcoreUtil.getRootContainer(operation);
-    resolver.initializeFrom(_rootContainer);
+    resolver.initializeFrom(EcoreUtil.getRootContainer(operation));
     ITypeReferenceOwner _owner_1 = this.getOwner();
     PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(resolver);
     final MockTypeParameterSubstitutor substitutor = new MockTypeParameterSubstitutor(_owner_1, _publicResolvedTypes);
-    EList<JvmFormalParameter> _parameters = operation.getParameters();
-    JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
-    JvmTypeReference _parameterType = _head.getParameterType();
-    LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(_parameterType);
-    final LightweightTypeReference hasUnbounds = substitutor.substitute(_lightweightTypeReference);
-    EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
-    JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
-    JvmTypeReference _parameterType_1 = _last.getParameterType();
-    final LightweightTypeReference isActual = this.toLightweightTypeReference(_parameterType_1);
+    final LightweightTypeReference hasUnbounds = substitutor.substitute(this.toLightweightTypeReference(IterableExtensions.<JvmFormalParameter>head(operation.getParameters()).getParameterType()));
+    final LightweightTypeReference isActual = this.toLightweightTypeReference(IterableExtensions.<JvmFormalParameter>last(operation.getParameters()).getParameterType());
     collector.processPairedReferences(hasUnbounds, isActual);
     return substitutor.getTypeParameterMapping();
   }
@@ -116,15 +104,12 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
       String _simpleName = key.getSimpleName();
       boolean _equals = Objects.equal(_simpleName, typeParamName);
       if (_equals) {
-        LightweightMergedBoundTypeArgument _get = mapping.get(key);
-        LightweightTypeReference _typeReference = _get.getTypeReference();
+        LightweightTypeReference _typeReference = mapping.get(key).getTypeReference();
         final UnboundTypeReference unbound = ((UnboundTypeReference) _typeReference);
-        List<LightweightBoundTypeArgument> _allHints = unbound.getAllHints();
         final Consumer<LightweightBoundTypeArgument> _function = (LightweightBoundTypeArgument it) -> {
-          BoundTypeArgumentSource _source = it.getSource();
-          Assert.assertEquals(BoundTypeArgumentSource.INFERRED_LATER, _source);
+          Assert.assertEquals(BoundTypeArgumentSource.INFERRED_LATER, it.getSource());
         };
-        _allHints.forEach(_function);
+        unbound.getAllHints().forEach(_function);
         return unbound.getAllHints();
       }
     }
@@ -132,14 +117,12 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     _builder.append("No mapping for ");
     _builder.append(typeParamName);
     _builder.append(" in ");
-    Set<JvmTypeParameter> _keySet = mapping.keySet();
     final Function1<JvmTypeParameter, String> _function_1 = (JvmTypeParameter it) -> {
       return it.getSimpleName();
     };
-    Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function_1);
+    Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(mapping.keySet(), _function_1);
     _builder.append(_map);
-    String _string = _builder.toString();
-    Assert.fail(_string);
+    Assert.fail(_builder.toString());
     return null;
   }
   
@@ -149,25 +132,21 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
       String _simpleName = key.getSimpleName();
       boolean _equals = Objects.equal(_simpleName, typeParamName);
       if (_equals) {
-        LightweightMergedBoundTypeArgument _get = mapping.get(key);
-        LightweightTypeReference _typeReference = _get.getTypeReference();
+        LightweightTypeReference _typeReference = mapping.get(key).getTypeReference();
         final UnboundTypeReference unbound = ((UnboundTypeReference) _typeReference);
-        List<LightweightBoundTypeArgument> _allHints = unbound.getAllHints();
-        boolean _isEmpty = _allHints.isEmpty();
+        boolean _isEmpty = unbound.getAllHints().isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Unexpected mapping for ");
           _builder.append(typeParamName);
           _builder.append(" in ");
-          Set<JvmTypeParameter> _keySet = mapping.keySet();
           final Function1<JvmTypeParameter, String> _function = (JvmTypeParameter it) -> {
             return it.getSimpleName();
           };
-          Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function);
+          Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(mapping.keySet(), _function);
           _builder.append(_map);
-          String _string = _builder.toString();
-          Assert.fail(_string);
+          Assert.fail(_builder.toString());
         }
       }
     }
@@ -176,8 +155,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   public List<LightweightBoundTypeArgument> like(final List<LightweightBoundTypeArgument> mappingData, final Triple<String, VarianceInfo, VarianceInfo>... mappedTypes) {
     final Function1<LightweightBoundTypeArgument, String> _function = (LightweightBoundTypeArgument it) -> {
       StringConcatenation _builder = new StringConcatenation();
-      LightweightTypeReference _typeReference = it.getTypeReference();
-      String _string = _typeReference.toString();
+      String _string = it.getTypeReference().toString();
       _builder.append(_string);
       _builder.append("(");
       VarianceInfo _declaredVariance = it.getDeclaredVariance();
@@ -188,22 +166,12 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
       _builder.append(")");
       return _builder.toString();
     };
-    List<String> _map = ListExtensions.<LightweightBoundTypeArgument, String>map(mappingData, _function);
-    String _string = _map.toString();
-    int _size = ((List<Triple<String, VarianceInfo, VarianceInfo>>)Conversions.doWrapArray(mappedTypes)).size();
-    int _size_1 = mappingData.size();
-    Assert.assertEquals(_string, _size, _size_1);
+    Assert.assertEquals(ListExtensions.<LightweightBoundTypeArgument, String>map(mappingData, _function).toString(), ((List<Triple<String, VarianceInfo, VarianceInfo>>)Conversions.doWrapArray(mappedTypes)).size(), mappingData.size());
     List<Triple<String, VarianceInfo, VarianceInfo>> _list = IterableExtensions.<Triple<String, VarianceInfo, VarianceInfo>>toList(((Iterable<Triple<String, VarianceInfo, VarianceInfo>>)Conversions.doWrapArray(mappedTypes)));
     final Function1<LightweightBoundTypeArgument, Triple<String, VarianceInfo, VarianceInfo>> _function_1 = (LightweightBoundTypeArgument it) -> {
-      LightweightTypeReference _typeReference = it.getTypeReference();
-      String _string_1 = _typeReference.toString();
-      VarianceInfo _declaredVariance = it.getDeclaredVariance();
-      VarianceInfo _actualVariance = it.getActualVariance();
-      return Tuples.<String, VarianceInfo, VarianceInfo>create(_string_1, _declaredVariance, _actualVariance);
+      return Tuples.<String, VarianceInfo, VarianceInfo>create(it.getTypeReference().toString(), it.getDeclaredVariance(), it.getActualVariance());
     };
-    List<Triple<String, VarianceInfo, VarianceInfo>> _map_1 = ListExtensions.<LightweightBoundTypeArgument, Triple<String, VarianceInfo, VarianceInfo>>map(mappingData, _function_1);
-    List<Triple<String, VarianceInfo, VarianceInfo>> _list_1 = IterableExtensions.<Triple<String, VarianceInfo, VarianceInfo>>toList(_map_1);
-    Assert.assertEquals(((Object) _list), _list_1);
+    Assert.assertEquals(((Object) _list), IterableExtensions.<Triple<String, VarianceInfo, VarianceInfo>>toList(ListExtensions.<LightweightBoundTypeArgument, Triple<String, VarianceInfo, VarianceInfo>>map(mappingData, _function_1)));
     return mappingData;
   }
   
@@ -230,15 +198,12 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   }
   
   public Triple<String, VarianceInfo, VarianceInfo> operator_mappedTo(final Pair<String, VarianceInfo> pair, final VarianceInfo third) {
-    String _key = pair.getKey();
-    VarianceInfo _value = pair.getValue();
-    return Tuples.<String, VarianceInfo, VarianceInfo>create(_key, _value, third);
+    return Tuples.<String, VarianceInfo, VarianceInfo>create(pair.getKey(), pair.getValue(), third);
   }
   
   @Test
   public void testDirectUnboundExpectation() {
-    Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _in = this.in("T", "T", "String");
-    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(_in, "T");
+    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(this.in("T", "T", "String"), "T");
     Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     this.like(_hasHintsFor, _mappedTo_1);
@@ -246,8 +211,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   
   @Test
   public void testNestedUnboundExpectation_01() {
-    Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _in = this.in("T", "Iterable<T>", "java.util.List<String>");
-    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(_in, "T");
+    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(this.in("T", "Iterable<T>", "java.util.List<String>"), "T");
     Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     this.like(_hasHintsFor, _mappedTo_1);
@@ -255,8 +219,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   
   @Test
   public void testNestedUnboundExpectation_02() {
-    Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _in = this.in("T", "Iterable<? extends T>", "java.util.List<String>");
-    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(_in, "T");
+    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(this.in("T", "Iterable<? extends T>", "java.util.List<String>"), "T");
     Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     this.like(_hasHintsFor, _mappedTo_1);
@@ -264,8 +227,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   
   @Test
   public void testNestedUnboundExpectation_03() {
-    Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _in = this.in("T", "Iterable<? super T>", "java.util.List<String>");
-    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(_in, "T");
+    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(this.in("T", "Iterable<? super T>", "java.util.List<String>"), "T");
     Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     this.like(_hasHintsFor, _mappedTo_1);
@@ -273,8 +235,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   
   @Test
   public void testUsedTwice() {
-    Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _in = this.in("T", "java.util.Map<T, T>", "com.google.common.collect.BiMap<CharSequence, Integer>");
-    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(_in, "T");
+    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(this.in("T", "java.util.Map<T, T>", "com.google.common.collect.BiMap<CharSequence, Integer>"), "T");
     Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("CharSequence", VarianceInfo.INVARIANT);
     Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String, VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("Integer", VarianceInfo.INVARIANT);
@@ -284,8 +245,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   
   @Test
   public void testDependsOnOther() {
-    Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _in = this.in("T, V", "java.util.Map<T, String>", "java.util.Map<V, Integer>");
-    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(_in, "T");
+    List<LightweightBoundTypeArgument> _hasHintsFor = this.hasHintsFor(this.in("T, V", "java.util.Map<T, String>", "java.util.Map<V, Integer>"), "T");
     Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("V", VarianceInfo.INVARIANT);
     Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     this.like(_hasHintsFor, _mappedTo_1);
@@ -293,13 +253,11 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   
   @Test
   public void testUnusedExpectation_01() {
-    Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _in = this.in("T", "Iterable<T>", "String");
-    this.hasNoHintsFor(_in, "T");
+    this.hasNoHintsFor(this.in("T", "Iterable<T>", "String"), "T");
   }
   
   @Test
   public void testUnusedExpectation_02() {
-    Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _in = this.in("T", "String", "Iterable<T>");
-    this.hasNoHintsFor(_in, "T");
+    this.hasNoHintsFor(this.in("T", "String", "Iterable<T>"), "T");
   }
 }

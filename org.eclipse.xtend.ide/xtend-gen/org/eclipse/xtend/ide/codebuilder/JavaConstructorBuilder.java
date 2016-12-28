@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.codebuilder;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 
@@ -21,14 +20,7 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 public class JavaConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Java {
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
-    JvmVisibility _visibility = this.getVisibility();
-    ISourceAppender _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PUBLIC);
-    JvmDeclaredType _owner = this.getOwner();
-    String _simpleName = _owner.getSimpleName();
-    ISourceAppender _append = _appendVisibility.append(_simpleName);
-    ISourceAppender _appendParameters = this.appendParameters(_append);
-    ISourceAppender _appendThrowsClause = this.appendThrowsClause(_appendParameters);
-    return this.appendBody(_appendThrowsClause, ";");
+    return this.appendBody(this.appendThrowsClause(this.appendParameters(this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.PUBLIC).append(this.getOwner().getSimpleName()))), ";");
   }
   
   @Override

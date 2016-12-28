@@ -8,18 +8,14 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.inject.Inject;
-import java.util.List;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -46,25 +42,17 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBu
       } else {
         _xifexpression = "def ";
       }
-      ISourceAppender _append = appendable.append(_xifexpression);
-      JvmVisibility _visibility = this.getVisibility();
-      this.appendVisibility(_append, _visibility, JvmVisibility.PUBLIC);
+      this.appendVisibility(appendable.append(_xifexpression), this.getVisibility(), JvmVisibility.PUBLIC);
       boolean _isStaticFlag = this.isStaticFlag();
       if (_isStaticFlag) {
         appendable.append("static ");
       }
-      List<JvmTypeParameter> _typeParameters = this.getTypeParameters();
-      this.appendTypeParameters(appendable, _typeParameters);
+      this.appendTypeParameters(appendable, this.getTypeParameters());
       boolean _isAbstractFlag = this.isAbstractFlag();
       if (_isAbstractFlag) {
-        LightweightTypeReference _returnType = this.getReturnType();
-        ISourceAppender _appendType = this.appendType(appendable, _returnType, "void");
-        _appendType.append(" ");
+        this.appendType(appendable, this.getReturnType(), "void").append(" ");
       }
-      String _methodName = this.getMethodName();
-      ISourceAppender _append_1 = appendable.append(_methodName);
-      ISourceAppender _appendParameters = this.appendParameters(_append_1);
-      this.appendThrowsClause(_appendParameters);
+      this.appendThrowsClause(this.appendParameters(appendable.append(this.getMethodName())));
       boolean _isAbstractFlag_1 = this.isAbstractFlag();
       boolean _not = (!_isAbstractFlag_1);
       if (_not) {
@@ -77,10 +65,7 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBu
   
   @Override
   public int getInsertOffset(final XtextResource resource) {
-    EObject _context = this.getContext();
-    XtendTypeDeclaration _xtendType = this.getXtendType();
-    XtendTypeDeclaration _findByFragment = this.<XtendTypeDeclaration>findByFragment(resource, _xtendType);
-    return this._insertionOffsets.getNewMethodInsertOffset(_context, _findByFragment);
+    return this._insertionOffsets.getNewMethodInsertOffset(this.getContext(), this.<XtendTypeDeclaration>findByFragment(resource, this.getXtendType()));
   }
   
   @Override

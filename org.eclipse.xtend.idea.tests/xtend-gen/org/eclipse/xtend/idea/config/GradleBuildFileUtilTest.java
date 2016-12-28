@@ -7,268 +7,196 @@
  */
 package org.eclipse.xtend.idea.config;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
-import com.intellij.openapi.command.WriteCommandAction;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import junit.framework.TestCase;
-import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility;
-import org.eclipse.xtend.core.idea.config.MavenArtifact;
-import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend.idea.LightXtendTest;
-import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.idea.util.PlatformUtil;
-import org.eclipse.xtext.util.XtextVersion;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.jetbrains.plugins.groovy.lang.psi.GroovyFile;
-import org.jetbrains.plugins.groovy.lang.psi.api.statements.GrStatement;
-import org.jetbrains.plugins.groovy.lang.psi.api.statements.blocks.GrClosableBlock;
-import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrApplicationStatement;
-import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrCommandArgumentList;
-import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrExpression;
-import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.path.GrMethodCallExpression;
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class GradleBuildFileUtilTest extends LightXtendTest {
-  private final GradleBuildFileUtility util = new GradleBuildFileUtility();
+  private final Object util /* Skipped initializer because of errors */;
   
   public void testSetupGradleBuildEmptyFile() {
-    PsiFile _addFileToProject = this.myFixture.addFileToProject("build.gradle", "");
-    final GroovyFile buildFile = ((GroovyFile) _addFileToProject);
-    TestCase.assertNotNull(buildFile);
-    Project _project = this.myFixture.getProject();
-    final Runnable _function = () -> {
-      this.util.setupGradleBuild(this.myModule, buildFile);
-    };
-    WriteCommandAction.runWriteCommandAction(_project, _function);
-    Project _project_1 = this.myFixture.getProject();
-    final Runnable _function_1 = () -> {
-      this.util.setupGradleBuild(this.myModule, buildFile);
-    };
-    WriteCommandAction.runWriteCommandAction(_project_1, _function_1);
-    this.assertTree(buildFile);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("buildscript {");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("repositories {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("jcenter()");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("dependencies {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("classpath \'org.xtext:xtext-gradle-plugin:");
-    XtextVersion _current = XtextVersion.getCurrent();
-    String _xtendGradlePluginVersion = _current.getXtendGradlePluginVersion();
-    _builder.append(_xtendGradlePluginVersion, "        ");
-    _builder.append("\'");
-    _builder.newLineIfNotEmpty();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("apply plugin: \'org.xtext.xtend\' ");
-    String _string = _builder.toString();
-    String _trim = _string.trim();
-    String _text = buildFile.getText();
-    TestCase.assertEquals(_trim, _text);
+    throw new Error("Unresolved compilation problems:"
+      + "\nGroovyFile cannot be resolved to a type."
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertNotNull(GroovyFile) is undefined"
+      + "\nThe method or field WriteCommandAction is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method or field myModule is undefined"
+      + "\nThe method or field WriteCommandAction is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method or field myModule is undefined"
+      + "\nThe method assertEquals(String, Object) is undefined"
+      + "\nThe method or field XtextVersion is undefined"
+      + "\nThe field GradleBuildFileUtilTest.util refers to the missing type Object"
+      + "\nThe field GradleBuildFileUtilTest.util refers to the missing type Object"
+      + "\nThe method assertTree(GroovyFile) from the type GradleBuildFileUtilTest refers to the missing type Object"
+      + "\naddFileToProject cannot be resolved"
+      + "\nrunWriteCommandAction cannot be resolved"
+      + "\nproject cannot be resolved"
+      + "\nsetupGradleBuild cannot be resolved"
+      + "\nrunWriteCommandAction cannot be resolved"
+      + "\nproject cannot be resolved"
+      + "\nsetupGradleBuild cannot be resolved"
+      + "\ncurrent cannot be resolved"
+      + "\nxtendGradlePluginVersion cannot be resolved"
+      + "\ntext cannot be resolved");
   }
   
   public void testSetupGradleBuildFileWithContent() {
-    PsiFile _addFileToProject = this.myFixture.addFileToProject("build.gradle", "buildscript{dependencies{}}");
-    final GroovyFile buildFile = ((GroovyFile) _addFileToProject);
-    TestCase.assertNotNull(buildFile);
-    Project _project = this.myFixture.getProject();
-    final Runnable _function = () -> {
-      this.util.setupGradleBuild(this.myModule, buildFile);
-    };
-    WriteCommandAction.runWriteCommandAction(_project, _function);
-    Project _project_1 = this.myFixture.getProject();
-    final Runnable _function_1 = () -> {
-      this.util.setupGradleBuild(this.myModule, buildFile);
-    };
-    WriteCommandAction.runWriteCommandAction(_project_1, _function_1);
-    this.assertTree(buildFile);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("buildscript{dependencies{");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("classpath \'org.xtext:xtext-gradle-plugin:");
-    XtextVersion _current = XtextVersion.getCurrent();
-    String _xtendGradlePluginVersion = _current.getXtendGradlePluginVersion();
-    _builder.append(_xtendGradlePluginVersion, "    ");
-    _builder.append("\'");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("repositories {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("jcenter()");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("apply plugin: \'org.xtext.xtend\' ");
-    String _string = _builder.toString();
-    String _trim = _string.trim();
-    String _text = buildFile.getText();
-    TestCase.assertEquals(_trim, _text);
+    throw new Error("Unresolved compilation problems:"
+      + "\nGroovyFile cannot be resolved to a type."
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertNotNull(GroovyFile) is undefined"
+      + "\nThe method or field WriteCommandAction is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method or field myModule is undefined"
+      + "\nThe method or field WriteCommandAction is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method or field myModule is undefined"
+      + "\nThe method assertEquals(String, Object) is undefined"
+      + "\nThe method or field XtextVersion is undefined"
+      + "\nThe field GradleBuildFileUtilTest.util refers to the missing type Object"
+      + "\nThe field GradleBuildFileUtilTest.util refers to the missing type Object"
+      + "\nThe method assertTree(GroovyFile) from the type GradleBuildFileUtilTest refers to the missing type Object"
+      + "\naddFileToProject cannot be resolved"
+      + "\nrunWriteCommandAction cannot be resolved"
+      + "\nproject cannot be resolved"
+      + "\nsetupGradleBuild cannot be resolved"
+      + "\nrunWriteCommandAction cannot be resolved"
+      + "\nproject cannot be resolved"
+      + "\nsetupGradleBuild cannot be resolved"
+      + "\ncurrent cannot be resolved"
+      + "\nxtendGradlePluginVersion cannot be resolved"
+      + "\ntext cannot be resolved");
   }
   
   public void testAddDependencyEmptyFile() {
-    PsiFile _addFileToProject = this.myFixture.addFileToProject("build.gradle", "");
-    final GroovyFile buildFile = ((GroovyFile) _addFileToProject);
-    TestCase.assertNotNull(buildFile);
-    Project _project = this.myFixture.getProject();
-    final Runnable _function = () -> {
-      MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
-      String _string = _xtendLibMavenId.toString();
-      String _plus = ("compile \'" + _string);
-      String _plus_1 = (_plus + "\'");
-      this.util.addDependency(buildFile, _plus_1);
-    };
-    WriteCommandAction.runWriteCommandAction(_project, _function);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("dependencies {");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("compile \'");
-    MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
-    String _string = _xtendLibMavenId.toString();
-    _builder.append(_string, "    ");
-    _builder.append("\'");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    String _string_1 = _builder.toString();
-    String _text = buildFile.getText();
-    TestCase.assertEquals(_string_1, _text);
+    throw new Error("Unresolved compilation problems:"
+      + "\nGroovyFile cannot be resolved to a type."
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertNotNull(GroovyFile) is undefined"
+      + "\nThe method or field WriteCommandAction is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\n+ cannot be resolved."
+      + "\nThe method or field XtendLibraryConfigurator is undefined"
+      + "\nThe method assertEquals(String, Object) is undefined"
+      + "\nThe method or field XtendLibraryConfigurator is undefined"
+      + "\nThe field GradleBuildFileUtilTest.util refers to the missing type Object"
+      + "\naddFileToProject cannot be resolved"
+      + "\nrunWriteCommandAction cannot be resolved"
+      + "\nproject cannot be resolved"
+      + "\naddDependency cannot be resolved"
+      + "\nxtendLibMavenId cannot be resolved"
+      + "\ntoString cannot be resolved"
+      + "\n+ cannot be resolved"
+      + "\nxtendLibMavenId cannot be resolved"
+      + "\ntoString cannot be resolved"
+      + "\ntext cannot be resolved");
   }
   
   public void testAddDependencyFileWithContent() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("dependencies {}");
-    PsiFile _addFileToProject = this.myFixture.addFileToProject("build.gradle", _builder.toString());
-    final GroovyFile buildFile = ((GroovyFile) _addFileToProject);
-    TestCase.assertNotNull(buildFile);
-    Project _project = this.myFixture.getProject();
-    final Runnable _function = () -> {
-      MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
-      String _string = _xtendLibMavenId.toString();
-      String _plus = ("compile \'" + _string);
-      String _plus_1 = (_plus + "\'");
-      this.util.addDependency(buildFile, _plus_1);
-    };
-    WriteCommandAction.runWriteCommandAction(_project, _function);
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("dependencies {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("compile \'");
-    MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
-    String _string = _xtendLibMavenId.toString();
-    _builder_1.append(_string, "    ");
-    _builder_1.append("\'");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("}");
-    String _string_1 = _builder_1.toString();
-    String _text = buildFile.getText();
-    TestCase.assertEquals(_string_1, _text);
+    throw new Error("Unresolved compilation problems:"
+      + "\nGroovyFile cannot be resolved to a type."
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertNotNull(GroovyFile) is undefined"
+      + "\nThe method or field WriteCommandAction is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\n+ cannot be resolved."
+      + "\nThe method or field XtendLibraryConfigurator is undefined"
+      + "\nThe method assertEquals(String, Object) is undefined"
+      + "\nThe method or field XtendLibraryConfigurator is undefined"
+      + "\nThe field GradleBuildFileUtilTest.util refers to the missing type Object"
+      + "\naddFileToProject cannot be resolved"
+      + "\nrunWriteCommandAction cannot be resolved"
+      + "\nproject cannot be resolved"
+      + "\naddDependency cannot be resolved"
+      + "\nxtendLibMavenId cannot be resolved"
+      + "\ntoString cannot be resolved"
+      + "\n+ cannot be resolved"
+      + "\nxtendLibMavenId cannot be resolved"
+      + "\ntoString cannot be resolved"
+      + "\ntext cannot be resolved");
   }
   
   public void testIsGradleModule() {
-    PlatformUtil _platformUtil = new PlatformUtil();
-    boolean _isGradleInstalled = _platformUtil.isGradleInstalled();
-    TestCase.assertTrue(_isGradleInstalled);
-    Module _module = this.myFixture.getModule();
-    boolean _isGradleedModule = this.util.isGradleedModule(_module);
-    TestCase.assertFalse(_isGradleedModule);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method assertTrue(Object) is undefined"
+      + "\nPlatformUtil cannot be resolved."
+      + "\nThe method assertFalse(Object) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe field GradleBuildFileUtilTest.util refers to the missing type Object"
+      + "\nisGradleInstalled cannot be resolved"
+      + "\nisGradleedModule cannot be resolved"
+      + "\nmodule cannot be resolved");
   }
   
-  public void assertTree(final GroovyFile buildFile) {
-    GrStatement[] _statements = buildFile.getStatements();
-    int _length = _statements.length;
-    TestCase.assertEquals(2, _length);
-    GrStatement[] _statements_1 = buildFile.getStatements();
-    Iterable<GrMethodCallExpression> _filter = Iterables.<GrMethodCallExpression>filter(((Iterable<?>)Conversions.doWrapArray(_statements_1)), GrMethodCallExpression.class);
-    final Function1<GrMethodCallExpression, Boolean> _function = (GrMethodCallExpression it) -> {
-      GrExpression _invokedExpression = it.getInvokedExpression();
-      String _text = _invokedExpression.getText();
-      return Boolean.valueOf(Objects.equal(_text, "buildscript"));
-    };
-    final Iterable<GrMethodCallExpression> bsCol = IterableExtensions.<GrMethodCallExpression>filter(_filter, _function);
-    int _size = IterableExtensions.size(bsCol);
-    TestCase.assertEquals(1, _size);
-    final GrMethodCallExpression bs = IterableExtensions.<GrMethodCallExpression>head(bsCol);
-    GrExpression _invokedExpression = bs.getInvokedExpression();
-    String _text = _invokedExpression.getText();
-    TestCase.assertEquals("buildscript", _text);
-    GrClosableBlock[] _closureArguments = bs.getClosureArguments();
-    GrClosableBlock _head = IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(_closureArguments)));
-    PsiElement[] _children = _head.getChildren();
-    final Iterable<GrMethodCallExpression> children = Iterables.<GrMethodCallExpression>filter(((Iterable<?>)Conversions.doWrapArray(_children)), GrMethodCallExpression.class);
-    int _size_1 = IterableExtensions.size(children);
-    TestCase.assertEquals(2, _size_1);
-    final Function1<GrMethodCallExpression, Boolean> _function_1 = (GrMethodCallExpression it) -> {
-      GrExpression _invokedExpression_1 = it.getInvokedExpression();
-      String _text_1 = _invokedExpression_1.getText();
-      return Boolean.valueOf(Objects.equal(_text_1, "dependencies"));
-    };
-    Iterable<GrMethodCallExpression> _filter_1 = IterableExtensions.<GrMethodCallExpression>filter(children, _function_1);
-    final GrMethodCallExpression dps = IterableExtensions.<GrMethodCallExpression>head(_filter_1);
-    TestCase.assertNotNull(dps);
-    PsiElement[] _children_1 = dps.getChildren();
-    int _length_1 = _children_1.length;
-    TestCase.assertEquals(3, _length_1);
-    GrClosableBlock[] _closureArguments_1 = dps.getClosureArguments();
-    final GrClosableBlock closureBlock = IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(_closureArguments_1)));
-    GrStatement[] _statements_2 = closureBlock.getStatements();
-    int _length_2 = _statements_2.length;
-    TestCase.assertEquals(1, _length_2);
-    GrStatement[] _statements_3 = closureBlock.getStatements();
-    Iterable<GrApplicationStatement> _filter_2 = Iterables.<GrApplicationStatement>filter(((Iterable<?>)Conversions.doWrapArray(_statements_3)), GrApplicationStatement.class);
-    final GrApplicationStatement clEntry = IterableExtensions.<GrApplicationStatement>head(_filter_2);
-    TestCase.assertNotNull(clEntry);
-    GrExpression _invokedExpression_1 = clEntry.getInvokedExpression();
-    String _text_1 = _invokedExpression_1.getText();
-    TestCase.assertEquals("classpath", _text_1);
-    GrCommandArgumentList _argumentList = clEntry.getArgumentList();
-    String _text_2 = _argumentList.getText();
-    boolean _startsWith = _text_2.startsWith("\'org.xtext:xtext-gradle-plugin:");
-    TestCase.assertTrue(_startsWith);
-    final Function1<GrMethodCallExpression, Boolean> _function_2 = (GrMethodCallExpression it) -> {
-      GrExpression _invokedExpression_2 = it.getInvokedExpression();
-      String _text_3 = _invokedExpression_2.getText();
-      return Boolean.valueOf(Objects.equal(_text_3, "repositories"));
-    };
-    Iterable<GrMethodCallExpression> _filter_3 = IterableExtensions.<GrMethodCallExpression>filter(children, _function_2);
-    final GrMethodCallExpression repos = IterableExtensions.<GrMethodCallExpression>head(_filter_3);
-    TestCase.assertNotNull(repos);
-    GrClosableBlock[] _closureArguments_2 = repos.getClosureArguments();
-    GrClosableBlock _head_1 = IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(_closureArguments_2)));
-    GrStatement[] _statements_4 = _head_1.getStatements();
-    Iterable<GrMethodCallExpression> _filter_4 = Iterables.<GrMethodCallExpression>filter(((Iterable<?>)Conversions.doWrapArray(_statements_4)), GrMethodCallExpression.class);
-    final GrMethodCallExpression jcenterEntry = IterableExtensions.<GrMethodCallExpression>head(_filter_4);
-    GrExpression _invokedExpression_2 = jcenterEntry.getInvokedExpression();
-    String _text_3 = _invokedExpression_2.getText();
-    TestCase.assertEquals("jcenter", _text_3);
+  public Object assertTree(final /* GroovyFile */Object buildFile) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method assertEquals(int, Object) is undefined"
+      + "\nThe method or field GrMethodCallExpression is undefined"
+      + "\nThe method or field invokedExpression is undefined"
+      + "\nThe method assertEquals(int, Object) is undefined"
+      + "\nThe method assertEquals(String, Object) is undefined"
+      + "\nThe method or field GrMethodCallExpression is undefined"
+      + "\nThe method assertEquals(int, Object) is undefined"
+      + "\nThe method or field invokedExpression is undefined"
+      + "\nThe method assertNotNull(Object) is undefined"
+      + "\nThe method assertEquals(int, Object) is undefined"
+      + "\nThe method assertEquals(int, Object) is undefined"
+      + "\nThe method or field GrApplicationStatement is undefined"
+      + "\nThe method assertNotNull(Object) is undefined"
+      + "\nThe method assertEquals(String, Object) is undefined"
+      + "\nThe method assertTrue(Object) is undefined"
+      + "\nThe method or field invokedExpression is undefined"
+      + "\nThe method assertNotNull(Object) is undefined"
+      + "\nThe method or field GrMethodCallExpression is undefined"
+      + "\nThe method assertEquals(String, Object) is undefined"
+      + "\ngetStatements cannot be resolved"
+      + "\nlength cannot be resolved"
+      + "\nstatements cannot be resolved"
+      + "\nfilter cannot be resolved"
+      + "\nfilter cannot be resolved"
+      + "\ntext cannot be resolved"
+      + "\n== cannot be resolved"
+      + "\nsize cannot be resolved"
+      + "\nhead cannot be resolved"
+      + "\ninvokedExpression cannot be resolved"
+      + "\ntext cannot be resolved"
+      + "\nclosureArguments cannot be resolved"
+      + "\nhead cannot be resolved"
+      + "\nchildren cannot be resolved"
+      + "\nfilter cannot be resolved"
+      + "\nsize cannot be resolved"
+      + "\nfilter cannot be resolved"
+      + "\ntext cannot be resolved"
+      + "\n== cannot be resolved"
+      + "\nhead cannot be resolved"
+      + "\nchildren cannot be resolved"
+      + "\nlength cannot be resolved"
+      + "\nclosureArguments cannot be resolved"
+      + "\nhead cannot be resolved"
+      + "\nstatements cannot be resolved"
+      + "\nlength cannot be resolved"
+      + "\nstatements cannot be resolved"
+      + "\nfilter cannot be resolved"
+      + "\nhead cannot be resolved"
+      + "\ninvokedExpression cannot be resolved"
+      + "\ntext cannot be resolved"
+      + "\nargumentList cannot be resolved"
+      + "\ntext cannot be resolved"
+      + "\nstartsWith cannot be resolved"
+      + "\nfilter cannot be resolved"
+      + "\ntext cannot be resolved"
+      + "\n== cannot be resolved"
+      + "\nhead cannot be resolved"
+      + "\nclosureArguments cannot be resolved"
+      + "\nhead cannot be resolved"
+      + "\nstatements cannot be resolved"
+      + "\nfilter cannot be resolved"
+      + "\nhead cannot be resolved"
+      + "\ninvokedExpression cannot be resolved"
+      + "\ntext cannot be resolved");
   }
 }

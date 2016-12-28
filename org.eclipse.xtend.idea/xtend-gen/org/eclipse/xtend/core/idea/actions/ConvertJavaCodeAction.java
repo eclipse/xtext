@@ -36,11 +36,10 @@ public class ConvertJavaCodeAction extends BaseRefactoringAction {
   
   @Override
   protected boolean isEnabledOnElements(final PsiElement[] elements) {
-    Iterable<PsiJavaFile> _collectJavaFiles = ConvertJavaCodeHandler.collectJavaFiles(elements);
     final Function1<PsiJavaFile, Boolean> _function = (PsiJavaFile it) -> {
       final Module module = ModuleUtil.findModuleForPsiElement(it);
       return Boolean.valueOf(((module != null) && (ModuleRootManager.getInstance(module).getSdk() != null)));
     };
-    return IterableExtensions.<PsiJavaFile>exists(_collectJavaFiles, _function);
+    return IterableExtensions.<PsiJavaFile>exists(ConvertJavaCodeHandler.collectJavaFiles(elements), _function);
   }
 }

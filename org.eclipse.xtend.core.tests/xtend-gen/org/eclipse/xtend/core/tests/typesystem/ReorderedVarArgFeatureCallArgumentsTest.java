@@ -18,7 +18,6 @@ import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner
 import org.eclipse.xtend.core.tests.typesystem.TestableExpressionArgumentFactory;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -33,7 +32,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.arguments.ReorderedVarArgFeatureCallArguments;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 import org.junit.Test;
@@ -53,89 +51,56 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
   @Test
   public void test_01() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i", "[], 1");
-    int _argumentCount = arguments.getArgumentCount();
-    Assert.assertEquals(2, _argumentCount);
-    boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
-    Assert.assertTrue(_hasUnprocessedArguments);
+    Assert.assertEquals(2, arguments.getArgumentCount());
+    Assert.assertTrue(arguments.hasUnprocessedArguments());
     final IFeatureCallArgumentSlot firstSlot = arguments.getNextUnprocessedArgumentSlot();
-    boolean _isVarArg = firstSlot.isVarArg();
-    Assert.assertTrue(_isVarArg);
-    boolean _isSuperfluous = firstSlot.isSuperfluous();
-    Assert.assertFalse(_isSuperfluous);
+    Assert.assertTrue(firstSlot.isVarArg());
+    Assert.assertFalse(firstSlot.isSuperfluous());
     XExpression _argumentExpression = firstSlot.getArgumentExpression();
     Assert.assertTrue((_argumentExpression instanceof XNumberLiteral));
-    LightweightTypeReference _declaredType = firstSlot.getDeclaredType();
-    String _simpleName = _declaredType.getSimpleName();
-    Assert.assertEquals("int", _simpleName);
-    boolean _isProcessed = arguments.isProcessed(0);
-    Assert.assertFalse(_isProcessed);
+    Assert.assertEquals("int", firstSlot.getDeclaredType().getSimpleName());
+    Assert.assertFalse(arguments.isProcessed(0));
     firstSlot.markProcessed();
-    boolean _isProcessed_1 = arguments.isProcessed(0);
-    Assert.assertTrue(_isProcessed_1);
-    boolean _hasUnprocessedArguments_1 = arguments.hasUnprocessedArguments();
-    Assert.assertTrue(_hasUnprocessedArguments_1);
+    Assert.assertTrue(arguments.isProcessed(0));
+    Assert.assertTrue(arguments.hasUnprocessedArguments());
     final IFeatureCallArgumentSlot secondSlot = arguments.getNextUnprocessedArgumentSlot();
-    boolean _isVarArg_1 = secondSlot.isVarArg();
-    Assert.assertFalse(_isVarArg_1);
-    boolean _isSuperfluous_1 = secondSlot.isSuperfluous();
-    Assert.assertFalse(_isSuperfluous_1);
+    Assert.assertFalse(secondSlot.isVarArg());
+    Assert.assertFalse(secondSlot.isSuperfluous());
     XExpression _argumentExpression_1 = secondSlot.getArgumentExpression();
     Assert.assertTrue((_argumentExpression_1 instanceof XClosure));
-    LightweightTypeReference _declaredType_1 = secondSlot.getDeclaredType();
-    String _simpleName_1 = _declaredType_1.getSimpleName();
-    Assert.assertEquals("String", _simpleName_1);
-    boolean _isProcessed_2 = arguments.isProcessed(1);
-    Assert.assertFalse(_isProcessed_2);
+    Assert.assertEquals("String", secondSlot.getDeclaredType().getSimpleName());
+    Assert.assertFalse(arguments.isProcessed(1));
     secondSlot.markProcessed();
-    boolean _isProcessed_3 = arguments.isProcessed(1);
-    Assert.assertTrue(_isProcessed_3);
-    boolean _hasUnprocessedArguments_2 = arguments.hasUnprocessedArguments();
-    Assert.assertFalse(_hasUnprocessedArguments_2);
+    Assert.assertTrue(arguments.isProcessed(1));
+    Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
   
   @Test
   public void test_02() {
     final IFeatureCallArguments arguments = this.toArgumentsWithReceiver("String s, int i", "[], 1");
-    int _argumentCount = arguments.getArgumentCount();
-    Assert.assertEquals(3, _argumentCount);
-    boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
-    Assert.assertTrue(_hasUnprocessedArguments);
+    Assert.assertEquals(3, arguments.getArgumentCount());
+    Assert.assertTrue(arguments.hasUnprocessedArguments());
     final IFeatureCallArgumentSlot firstSlot = arguments.getNextUnprocessedArgumentSlot();
-    boolean _isVarArg = firstSlot.isVarArg();
-    Assert.assertTrue(_isVarArg);
-    boolean _isSuperfluous = firstSlot.isSuperfluous();
-    Assert.assertFalse(_isSuperfluous);
+    Assert.assertTrue(firstSlot.isVarArg());
+    Assert.assertFalse(firstSlot.isSuperfluous());
     XExpression _argumentExpression = firstSlot.getArgumentExpression();
     Assert.assertTrue((_argumentExpression instanceof XNumberLiteral));
-    LightweightTypeReference _declaredType = firstSlot.getDeclaredType();
-    String _simpleName = _declaredType.getSimpleName();
-    Assert.assertEquals("int", _simpleName);
-    boolean _isProcessed = arguments.isProcessed(0);
-    Assert.assertTrue(_isProcessed);
-    boolean _isProcessed_1 = arguments.isProcessed(1);
-    Assert.assertFalse(_isProcessed_1);
+    Assert.assertEquals("int", firstSlot.getDeclaredType().getSimpleName());
+    Assert.assertTrue(arguments.isProcessed(0));
+    Assert.assertFalse(arguments.isProcessed(1));
     firstSlot.markProcessed();
-    boolean _isProcessed_2 = arguments.isProcessed(1);
-    Assert.assertTrue(_isProcessed_2);
-    boolean _hasUnprocessedArguments_1 = arguments.hasUnprocessedArguments();
-    Assert.assertTrue(_hasUnprocessedArguments_1);
+    Assert.assertTrue(arguments.isProcessed(1));
+    Assert.assertTrue(arguments.hasUnprocessedArguments());
     final IFeatureCallArgumentSlot secondSlot = arguments.getNextUnprocessedArgumentSlot();
-    boolean _isVarArg_1 = secondSlot.isVarArg();
-    Assert.assertFalse(_isVarArg_1);
-    boolean _isSuperfluous_1 = secondSlot.isSuperfluous();
-    Assert.assertFalse(_isSuperfluous_1);
+    Assert.assertFalse(secondSlot.isVarArg());
+    Assert.assertFalse(secondSlot.isSuperfluous());
     XExpression _argumentExpression_1 = secondSlot.getArgumentExpression();
     Assert.assertTrue((_argumentExpression_1 instanceof XClosure));
-    LightweightTypeReference _declaredType_1 = secondSlot.getDeclaredType();
-    String _simpleName_1 = _declaredType_1.getSimpleName();
-    Assert.assertEquals("String", _simpleName_1);
-    boolean _isProcessed_3 = arguments.isProcessed(2);
-    Assert.assertFalse(_isProcessed_3);
+    Assert.assertEquals("String", secondSlot.getDeclaredType().getSimpleName());
+    Assert.assertFalse(arguments.isProcessed(2));
     secondSlot.markProcessed();
-    boolean _isProcessed_4 = arguments.isProcessed(2);
-    Assert.assertTrue(_isProcessed_4);
-    boolean _hasUnprocessedArguments_2 = arguments.hasUnprocessedArguments();
-    Assert.assertFalse(_hasUnprocessedArguments_2);
+    Assert.assertTrue(arguments.isProcessed(2));
+    Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
   
   @Test
@@ -196,31 +161,23 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
     final XExpression second = arguments.getArgument(1);
     Assert.assertTrue((second instanceof XNumberLiteral));
     final LightweightTypeReference secondType = arguments.getDeclaredTypeForLambda(1);
-    String _simpleName = secondType.getSimpleName();
-    Assert.assertEquals("boolean", _simpleName);
+    Assert.assertEquals("boolean", secondType.getSimpleName());
     final XExpression third = arguments.getArgument(2);
     Assert.assertTrue((third instanceof XClosure));
     XExpression _expression = ((XClosure) third).getExpression();
-    EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-    boolean _isEmpty = _expressions.isEmpty();
-    Assert.assertFalse(_isEmpty);
+    Assert.assertFalse(((XBlockExpression) _expression).getExpressions().isEmpty());
     final LightweightTypeReference thirdType = arguments.getDeclaredTypeForLambda(2);
-    String _simpleName_1 = thirdType.getSimpleName();
-    Assert.assertEquals("int", _simpleName_1);
+    Assert.assertEquals("int", thirdType.getSimpleName());
     final XExpression fourth = arguments.getArgument(3);
     Assert.assertTrue((fourth instanceof XBooleanLiteral));
     final LightweightTypeReference fourthType = arguments.getDeclaredTypeForLambda(3);
-    String _simpleName_2 = fourthType.getSimpleName();
-    Assert.assertEquals("int", _simpleName_2);
+    Assert.assertEquals("int", fourthType.getSimpleName());
     final XExpression fifth = arguments.getArgument(4);
     Assert.assertTrue((fifth instanceof XClosure));
     XExpression _expression_1 = ((XClosure) fifth).getExpression();
-    EList<XExpression> _expressions_1 = ((XBlockExpression) _expression_1).getExpressions();
-    boolean _isEmpty_1 = _expressions_1.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
+    Assert.assertTrue(((XBlockExpression) _expression_1).getExpressions().isEmpty());
     final LightweightTypeReference fifthType = arguments.getDeclaredTypeForLambda(4);
-    String _simpleName_3 = fifthType.getSimpleName();
-    Assert.assertEquals("String", _simpleName_3);
+    Assert.assertEquals("String", fifthType.getSimpleName());
     try {
       arguments.getArgument(5);
       Assert.fail("Expected exception");
@@ -253,17 +210,13 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
     final XExpression second = arguments.getArgument(1);
     Assert.assertTrue((second instanceof XNumberLiteral));
     final LightweightTypeReference secondType = arguments.getDeclaredTypeForLambda(1);
-    String _simpleName = secondType.getSimpleName();
-    Assert.assertEquals("boolean", _simpleName);
+    Assert.assertEquals("boolean", secondType.getSimpleName());
     final XExpression third = arguments.getArgument(2);
     Assert.assertTrue((third instanceof XClosure));
     XExpression _expression = ((XClosure) third).getExpression();
-    EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-    boolean _isEmpty = _expressions.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(((XBlockExpression) _expression).getExpressions().isEmpty());
     final LightweightTypeReference thirdType = arguments.getDeclaredTypeForLambda(2);
-    String _simpleName_1 = thirdType.getSimpleName();
-    Assert.assertEquals("String", _simpleName_1);
+    Assert.assertEquals("String", thirdType.getSimpleName());
     try {
       arguments.getArgument(3);
       Assert.fail("Expected exception");
@@ -288,40 +241,30 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
   
   protected void withIndizes(final IFeatureCallArguments arguments, final int... indexes) {
     final Consumer<Integer> _function = (Integer it) -> {
-      boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
-      Assert.assertTrue(_hasUnprocessedArguments);
+      Assert.assertTrue(arguments.hasUnprocessedArguments());
       final IFeatureCallArgumentSlot slot = arguments.getNextUnprocessedArgumentSlot();
-      List<XExpression> _argumentExpressions = slot.getArgumentExpressions();
-      final XExpression expression = IterableExtensions.<XExpression>head(_argumentExpressions);
+      final XExpression expression = IterableExtensions.<XExpression>head(slot.getArgumentExpressions());
       EObject _eContainer = expression.eContainer();
       final XFeatureCall featureCall = ((XFeatureCall) _eContainer);
-      EList<XExpression> _featureCallArguments = featureCall.getFeatureCallArguments();
-      int _indexOf = _featureCallArguments.indexOf(expression);
-      Assert.assertEquals((it).intValue(), _indexOf);
+      Assert.assertEquals((it).intValue(), featureCall.getFeatureCallArguments().indexOf(expression));
       slot.markProcessed();
     };
     ((List<Integer>)Conversions.doWrapArray(indexes)).forEach(_function);
-    boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
-    Assert.assertFalse(_hasUnprocessedArguments);
+    Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
   
   protected void withTypes(final IFeatureCallArguments arguments, final String... types) {
     final Consumer<String> _function = (String it) -> {
-      boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
-      Assert.assertTrue(_hasUnprocessedArguments);
+      Assert.assertTrue(arguments.hasUnprocessedArguments());
       final IFeatureCallArgumentSlot slot = arguments.getNextUnprocessedArgumentSlot();
-      boolean _isSuperfluous = slot.isSuperfluous();
-      Assert.assertEquals(Boolean.valueOf((it == null)), Boolean.valueOf(_isSuperfluous));
+      Assert.assertEquals(Boolean.valueOf((it == null)), Boolean.valueOf(slot.isSuperfluous()));
       if ((it != null)) {
-        LightweightTypeReference _declaredType = slot.getDeclaredType();
-        String _simpleName = _declaredType.getSimpleName();
-        Assert.assertEquals(it, _simpleName);
+        Assert.assertEquals(it, slot.getDeclaredType().getSimpleName());
       }
       slot.markProcessed();
     };
     ((List<String>)Conversions.doWrapArray(types)).forEach(_function);
-    boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
-    Assert.assertFalse(_hasUnprocessedArguments);
+    Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
   
   protected IFeatureCallArguments toArgumentsWithoutReceiver(final String signature, final String invocation) {
@@ -350,14 +293,11 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
       final XtendFunction function = this.function(functionString);
       XExpression _expression = function.getExpression();
       final XBlockExpression body = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = body.getExpressions();
-      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+      XExpression _head = IterableExtensions.<XExpression>head(body.getExpressions());
       final XFeatureCall featureCall = ((XFeatureCall) _head);
       final EList<XExpression> arguments = featureCall.getFeatureCallArguments();
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
-      EList<JvmFormalParameter> _parameters = operation.getParameters();
-      ITypeReferenceOwner _owner = this.getOwner();
-      final IFeatureCallArguments result = this.factory.createVarArgArguments(arguments, _parameters, receiver, _owner);
+      final IFeatureCallArguments result = this.factory.createVarArgArguments(arguments, operation.getParameters(), receiver, this.getOwner());
       Class<? extends IFeatureCallArguments> _class = result.getClass();
       boolean _equals = Objects.equal(_class, ReorderedVarArgFeatureCallArguments.class);
       Assert.assertTrue(_equals);

@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -27,7 +26,6 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
@@ -65,11 +63,10 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
   }
   
   protected void _build(final EObject modelElement, final IXtendOutlineContext context) {
-    EList<EObject> _eContents = modelElement.eContents();
     final Consumer<EObject> _function = (EObject it) -> {
       this.xtendOutlineNodeBuilder.buildEObjectNode(it, context);
     };
-    _eContents.forEach(_function);
+    modelElement.eContents().forEach(_function);
   }
   
   protected void buildPackageAndImportSection(final XtendFile xtendFile, final IXtendOutlineContext context) {
@@ -84,21 +81,18 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
   }
   
   protected void buildInheritedMembers(final JvmDeclaredType inferredType, final IXtendOutlineContext context) {
-    Resource _eResource = inferredType.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
+    ResourceSet _resourceSet = inferredType.eResource().getResourceSet();
     final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, _resourceSet);
     final LightweightTypeReference typeReference = owner.toLightweightTypeReference(inferredType);
     final List<LightweightTypeReference> superTypes = typeReference.getAllSuperTypes();
     IXtendOutlineContext superTypeContext = context;
     for (final LightweightTypeReference superTypeRef : superTypes) {
       {
-        IXtendOutlineContext _increaseInheritanceDepth = superTypeContext.increaseInheritanceDepth();
-        superTypeContext = _increaseInheritanceDepth;
+        superTypeContext = superTypeContext.increaseInheritanceDepth();
         final ResolvedFeatures resolvedFeatures = new ResolvedFeatures(superTypeRef);
         List<IResolvedField> _declaredFields = resolvedFeatures.getDeclaredFields();
         for (final IResolvedField jvmField : _declaredFields) {
-          JvmField _declaration = jvmField.getDeclaration();
-          boolean _skipFeature = this.skipFeature(_declaration);
+          boolean _skipFeature = this.skipFeature(jvmField.getDeclaration());
           boolean _not = (!_skipFeature);
           if (_not) {
             this.xtendOutlineNodeBuilder.buildResolvedFeatureNode(inferredType, jvmField, superTypeContext);
@@ -106,8 +100,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
         }
         List<IResolvedConstructor> _declaredConstructors = resolvedFeatures.getDeclaredConstructors();
         for (final IResolvedConstructor constructor : _declaredConstructors) {
-          JvmConstructor _declaration_1 = constructor.getDeclaration();
-          boolean _skipFeature_1 = this.skipFeature(_declaration_1);
+          boolean _skipFeature_1 = this.skipFeature(constructor.getDeclaration());
           boolean _not_1 = (!_skipFeature_1);
           if (_not_1) {
             this.xtendOutlineNodeBuilder.buildResolvedFeatureNode(inferredType, constructor, superTypeContext);
@@ -122,12 +115,10 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
         final JvmType declaredType = superTypeRef.getType();
         if ((declaredType instanceof JvmDeclaredType)) {
           final IXtendOutlineContext nestedTypeContext = superTypeContext.hideInherited();
-          EList<JvmMember> _members = ((JvmDeclaredType)declaredType).getMembers();
-          Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
           final Consumer<JvmDeclaredType> _function = (JvmDeclaredType it) -> {
             this.buildJvmType(it, nestedTypeContext);
           };
-          _filter.forEach(_function);
+          Iterables.<JvmDeclaredType>filter(((JvmDeclaredType)declaredType).getMembers(), JvmDeclaredType.class).forEach(_function);
         }
       }
     }
@@ -176,12 +167,10 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
             boolean _not_1 = (!_skipFeature);
             if (_not_1) {
               final IXtendOutlineContext featureContext = this.buildFeature(baseType, ((JvmFeature)member), member, context);
-              EList<JvmGenericType> _localClasses = ((JvmFeature)member).getLocalClasses();
               final Consumer<JvmGenericType> _function = (JvmGenericType it) -> {
-                IXtendOutlineContext _newContext = featureContext.newContext();
-                this.buildJvmType(it, _newContext);
+                this.buildJvmType(it, featureContext.newContext());
               };
-              _localClasses.forEach(_function);
+              ((JvmFeature)member).getLocalClasses().forEach(_function);
             }
           }
         }

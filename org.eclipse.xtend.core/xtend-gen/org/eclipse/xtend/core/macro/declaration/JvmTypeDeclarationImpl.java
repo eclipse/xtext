@@ -12,10 +12,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.ConditionUtils;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -32,16 +30,13 @@ import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -51,64 +46,45 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemberDeclarationImpl<T> {
   public Iterable<? extends MemberDeclaration> getDeclaredMembers() {
-    T _delegate = this.getDelegate();
-    EList<JvmMember> _members = _delegate.getMembers();
     final Function1<JvmMember, MemberDeclaration> _function = (JvmMember it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toMemberDeclaration(it);
+      return this.getCompilationUnit().toMemberDeclaration(it);
     };
-    List<MemberDeclaration> _map = ListExtensions.<JvmMember, MemberDeclaration>map(_members, _function);
-    return ImmutableList.<MemberDeclaration>copyOf(_map);
+    return ImmutableList.<MemberDeclaration>copyOf(ListExtensions.<JvmMember, MemberDeclaration>map(this.getDelegate().getMembers(), _function));
   }
   
   @Override
   public String getSimpleName() {
-    T _delegate = this.getDelegate();
-    return _delegate.getSimpleName();
+    return this.getDelegate().getSimpleName();
   }
   
   public String getQualifiedName() {
-    T _delegate = this.getDelegate();
-    return _delegate.getQualifiedName('.');
+    return this.getDelegate().getQualifiedName('.');
   }
   
   public boolean isAssignableFrom(final Type otherType) {
     if ((otherType == null)) {
       return false;
     }
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    TypeReferenceProvider _typeReferenceProvider = _compilationUnit.getTypeReferenceProvider();
-    final TypeReference thisTypeRef = _typeReferenceProvider.newTypeReference(((Type) this));
-    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    TypeReferenceProvider _typeReferenceProvider_1 = _compilationUnit_1.getTypeReferenceProvider();
-    final TypeReference thatTypeRef = _typeReferenceProvider_1.newTypeReference(otherType);
+    final TypeReference thisTypeRef = this.getCompilationUnit().getTypeReferenceProvider().newTypeReference(((Type) this));
+    final TypeReference thatTypeRef = this.getCompilationUnit().getTypeReferenceProvider().newTypeReference(otherType);
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
   
   public MutableConstructorDeclaration addConstructor(final Procedure1<MutableConstructorDeclaration> initializer) {
     this.checkMutable();
     Preconditions.checkArgument((initializer != null), "initializer cannot be null");
-    T _delegate = this.getDelegate();
-    EList<JvmMember> _members = _delegate.getMembers();
-    Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
     final Function1<JvmConstructor, Boolean> _function = (JvmConstructor it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      JvmTypeExtensions _typeExtensions = _compilationUnit.getTypeExtensions();
-      return Boolean.valueOf(_typeExtensions.isSingleSyntheticDefaultConstructor(it));
+      return Boolean.valueOf(this.getCompilationUnit().getTypeExtensions().isSingleSyntheticDefaultConstructor(it));
     };
-    final JvmConstructor constructor = IterableExtensions.<JvmConstructor>findFirst(_filter, _function);
+    final JvmConstructor constructor = IterableExtensions.<JvmConstructor>findFirst(Iterables.<JvmConstructor>filter(this.getDelegate().getMembers(), JvmConstructor.class), _function);
     if ((constructor != null)) {
       EcoreUtil.remove(constructor);
     }
     final JvmConstructor newConstructor = TypesFactory.eINSTANCE.createJvmConstructor();
     newConstructor.setVisibility(JvmVisibility.PUBLIC);
-    String _simpleName = this.getSimpleName();
-    newConstructor.setSimpleName(_simpleName);
-    T _delegate_1 = this.getDelegate();
-    EList<JvmMember> _members_1 = _delegate_1.getMembers();
-    _members_1.add(newConstructor);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(newConstructor);
+    newConstructor.setSimpleName(this.getSimpleName());
+    this.getDelegate().getMembers().add(newConstructor);
+    MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(newConstructor);
     final MutableConstructorDeclaration mutableConstructorDeclaration = ((MutableConstructorDeclaration) _memberDeclaration);
     initializer.apply(mutableConstructorDeclaration);
     return mutableConstructorDeclaration;
@@ -121,11 +97,8 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     final JvmField newField = TypesFactory.eINSTANCE.createJvmField();
     newField.setSimpleName(name);
     newField.setVisibility(JvmVisibility.PRIVATE);
-    T _delegate = this.getDelegate();
-    EList<JvmMember> _members = _delegate.getMembers();
-    _members.add(newField);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(newField);
+    this.getDelegate().getMembers().add(newField);
+    MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(newField);
     final MutableFieldDeclaration mutableFieldDeclaration = ((MutableFieldDeclaration) _memberDeclaration);
     initializer.apply(mutableFieldDeclaration);
     return mutableFieldDeclaration;
@@ -138,17 +111,9 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     final JvmOperation newMethod = TypesFactory.eINSTANCE.createJvmOperation();
     newMethod.setVisibility(JvmVisibility.PUBLIC);
     newMethod.setSimpleName(name);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    TypeReferenceProvider _typeReferenceProvider = _compilationUnit_1.getTypeReferenceProvider();
-    TypeReference _primitiveVoid = _typeReferenceProvider.getPrimitiveVoid();
-    JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(_primitiveVoid);
-    newMethod.setReturnType(_jvmTypeReference);
-    T _delegate = this.getDelegate();
-    EList<JvmMember> _members = _delegate.getMembers();
-    _members.add(newMethod);
-    CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
-    MemberDeclaration _memberDeclaration = _compilationUnit_2.toMemberDeclaration(newMethod);
+    newMethod.setReturnType(this.getCompilationUnit().toJvmTypeReference(this.getCompilationUnit().getTypeReferenceProvider().getPrimitiveVoid()));
+    this.getDelegate().getMembers().add(newMethod);
+    MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(newMethod);
     final MutableMethodDeclaration mutableMethodDeclaration = ((MutableMethodDeclaration) _memberDeclaration);
     initializer.apply(mutableMethodDeclaration);
     return mutableMethodDeclaration;
@@ -158,93 +123,79 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     ConstructorDeclaration _xblockexpression = null;
     {
       ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
-      Iterable<? extends ConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
       final Function1<ConstructorDeclaration, Boolean> _function = (ConstructorDeclaration constructor) -> {
-        Iterable<? extends ParameterDeclaration> _parameters = constructor.getParameters();
         final Function1<ParameterDeclaration, TypeReference> _function_1 = (ParameterDeclaration it) -> {
           return it.getType();
         };
-        Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function_1);
-        List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
+        List<TypeReference> _list = IterableExtensions.<TypeReference>toList(IterableExtensions.map(constructor.getParameters(), _function_1));
         List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
         return Boolean.valueOf(Objects.equal(_list, _list_1));
       };
-      _xblockexpression = IterableExtensions.findFirst(_declaredConstructors, _function);
+      _xblockexpression = IterableExtensions.findFirst(this.getDeclaredConstructors(), _function);
     }
     return _xblockexpression;
   }
   
   public FieldDeclaration findDeclaredField(final String name) {
-    Iterable<? extends FieldDeclaration> _declaredFields = this.getDeclaredFields();
     final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration field) -> {
       String _simpleName = field.getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
-    return IterableExtensions.findFirst(_declaredFields, _function);
+    return IterableExtensions.findFirst(this.getDeclaredFields(), _function);
   }
   
   public TypeDeclaration findDeclaredType(final String name) {
-    Iterable<? extends TypeDeclaration> _declaredTypes = this.getDeclaredTypes();
     final Function1<TypeDeclaration, Boolean> _function = (TypeDeclaration type) -> {
       String _simpleName = type.getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
-    return IterableExtensions.findFirst(_declaredTypes, _function);
+    return IterableExtensions.findFirst(this.getDeclaredTypes(), _function);
   }
   
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _xblockexpression = null;
     {
       ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
-      Iterable<? extends MethodDeclaration> _declaredMethods = this.getDeclaredMethods();
       final Function1<MethodDeclaration, Boolean> _function = (MethodDeclaration method) -> {
         return Boolean.valueOf((Objects.equal(method.getSimpleName(), name) && Objects.equal(IterableExtensions.<TypeReference>toList(IterableExtensions.map(method.getParameters(), ((Function1<ParameterDeclaration, TypeReference>) (ParameterDeclaration it) -> {
           return it.getType();
         }))), IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes))))));
       };
-      _xblockexpression = IterableExtensions.findFirst(_declaredMethods, _function);
+      _xblockexpression = IterableExtensions.findFirst(this.getDeclaredMethods(), _function);
     }
     return _xblockexpression;
   }
   
   public Iterable<? extends MethodDeclaration> getDeclaredMethods() {
-    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    return Iterables.<MethodDeclaration>filter(_declaredMembers, MethodDeclaration.class);
+    return Iterables.<MethodDeclaration>filter(this.getDeclaredMembers(), MethodDeclaration.class);
   }
   
   public Iterable<? extends FieldDeclaration> getDeclaredFields() {
-    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    return Iterables.<FieldDeclaration>filter(_declaredMembers, FieldDeclaration.class);
+    return Iterables.<FieldDeclaration>filter(this.getDeclaredMembers(), FieldDeclaration.class);
   }
   
   public Iterable<? extends ClassDeclaration> getDeclaredClasses() {
-    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    return Iterables.<ClassDeclaration>filter(_declaredMembers, ClassDeclaration.class);
+    return Iterables.<ClassDeclaration>filter(this.getDeclaredMembers(), ClassDeclaration.class);
   }
   
   public Iterable<? extends ConstructorDeclaration> getDeclaredConstructors() {
-    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    return Iterables.<ConstructorDeclaration>filter(_declaredMembers, ConstructorDeclaration.class);
+    return Iterables.<ConstructorDeclaration>filter(this.getDeclaredMembers(), ConstructorDeclaration.class);
   }
   
   public Iterable<? extends InterfaceDeclaration> getDeclaredInterfaces() {
-    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    return Iterables.<InterfaceDeclaration>filter(_declaredMembers, InterfaceDeclaration.class);
+    return Iterables.<InterfaceDeclaration>filter(this.getDeclaredMembers(), InterfaceDeclaration.class);
   }
   
   public Iterable<? extends TypeDeclaration> getDeclaredTypes() {
-    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    return Iterables.<TypeDeclaration>filter(_declaredMembers, TypeDeclaration.class);
+    return Iterables.<TypeDeclaration>filter(this.getDeclaredMembers(), TypeDeclaration.class);
   }
   
   public Iterable<? extends AnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
-    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    return Iterables.<AnnotationTypeDeclaration>filter(_declaredMembers, AnnotationTypeDeclaration.class);
+    return Iterables.<AnnotationTypeDeclaration>filter(this.getDeclaredMembers(), AnnotationTypeDeclaration.class);
   }
   
   public Iterable<? extends EnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
-    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    return Iterables.<EnumerationTypeDeclaration>filter(_declaredMembers, EnumerationTypeDeclaration.class);
+    return Iterables.<EnumerationTypeDeclaration>filter(this.getDeclaredMembers(), EnumerationTypeDeclaration.class);
   }
   
   @Override

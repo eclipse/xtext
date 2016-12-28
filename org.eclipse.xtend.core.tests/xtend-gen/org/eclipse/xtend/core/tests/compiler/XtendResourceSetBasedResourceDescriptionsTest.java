@@ -51,9 +51,7 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
       for (final Resource res : _arrayList) {
         {
           final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, CancelIndicator.NullImpl);
-          String _string = issues.toString();
-          boolean _isEmpty = issues.isEmpty();
-          Assert.assertTrue(_string, _isEmpty);
+          Assert.assertTrue(issues.toString(), issues.isEmpty());
         }
       }
     } catch (Throwable _e) {
@@ -76,9 +74,7 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
       for (final Resource res : _arrayList) {
         {
           final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, CancelIndicator.NullImpl);
-          String _string = issues.toString();
-          boolean _isEmpty = issues.isEmpty();
-          Assert.assertTrue(_string, _isEmpty);
+          Assert.assertTrue(issues.toString(), issues.isEmpty());
         }
       }
     } catch (Throwable _e) {
@@ -100,8 +96,7 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
       ArrayList<Resource> _arrayList = new ArrayList<Resource>(resources);
       for (final Resource res : _arrayList) {
         {
-          boolean _isLoaded = res.isLoaded();
-          Assert.assertFalse(_isLoaded);
+          Assert.assertFalse(res.isLoaded());
           try {
             ((DerivedStateAwareResource) res).installDerivedState(true);
             Assert.fail("expected exception");

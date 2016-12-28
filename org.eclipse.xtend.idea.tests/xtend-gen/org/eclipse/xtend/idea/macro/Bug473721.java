@@ -7,11 +7,7 @@
  */
 package org.eclipse.xtend.idea.macro;
 
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
-import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
-import org.eclipse.xtend2.lib.StringConcatenation;
 
 /**
  * @author efftinge - Initial contribution and API
@@ -19,35 +15,17 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 @SuppressWarnings("all")
 public class Bug473721 extends LightXtendTest {
   public void testBug473721() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package somePackage;");
-    _builder.newLine();
-    _builder.append("public class Foo {");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    this.myFixture.addFileToProject("somePackage/Foo.java", _builder.toString());
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package otherPackage");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("import somePackage.Foo");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.lib.annotations.Data");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("@Data class Bar {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("Foo myFoo");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    final PsiFile file = this.myFixture.addFileToProject("otherPackage/Bar.xtend", _builder_1.toString());
-    VirtualFile _findFileInTempDir = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Bar.java");
-    boolean _exists = _findFileInTempDir.exists();
-    TestCase.assertTrue(_exists);
-    VirtualFile _virtualFile = file.getVirtualFile();
-    this.myFixture.testHighlighting(true, true, true, _virtualFile);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertTrue(Object) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\naddFileToProject cannot be resolved"
+      + "\naddFileToProject cannot be resolved"
+      + "\nfindFileInTempDir cannot be resolved"
+      + "\nexists cannot be resolved"
+      + "\ntestHighlighting cannot be resolved"
+      + "\nvirtualFile cannot be resolved");
   }
 }

@@ -8,13 +8,11 @@
 package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -41,42 +39,30 @@ public class AssignmentFeatureCallArgumentsTest extends AbstractTestingTypeRefer
   @Test
   public void test_01() {
     final AssignmentFeatureCallArguments arguments = this.toArguments("", "null");
-    boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
-    Assert.assertTrue(_hasUnprocessedArguments);
+    Assert.assertTrue(arguments.hasUnprocessedArguments());
     final IFeatureCallArgumentSlot singleSlot = arguments.getNextUnprocessedArgumentSlot();
-    LightweightTypeReference _declaredType = singleSlot.getDeclaredType();
-    Assert.assertNull(_declaredType);
-    boolean _isVarArg = singleSlot.isVarArg();
-    Assert.assertFalse(_isVarArg);
-    boolean _isSuperfluous = singleSlot.isSuperfluous();
-    Assert.assertFalse(_isSuperfluous);
+    Assert.assertNull(singleSlot.getDeclaredType());
+    Assert.assertFalse(singleSlot.isVarArg());
+    Assert.assertFalse(singleSlot.isSuperfluous());
     XExpression _argumentExpression = singleSlot.getArgumentExpression();
     Assert.assertTrue((_argumentExpression instanceof XNullLiteral));
     singleSlot.markProcessed();
-    boolean _hasUnprocessedArguments_1 = arguments.hasUnprocessedArguments();
-    Assert.assertFalse(_hasUnprocessedArguments_1);
+    Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
   
   @Test
   public void test_02() {
     final AssignmentFeatureCallArguments arguments = this.toArguments("String s", "\"\"");
-    boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
-    Assert.assertTrue(_hasUnprocessedArguments);
-    int _argumentCount = arguments.getArgumentCount();
-    Assert.assertEquals(1, _argumentCount);
+    Assert.assertTrue(arguments.hasUnprocessedArguments());
+    Assert.assertEquals(1, arguments.getArgumentCount());
     final IFeatureCallArgumentSlot singleSlot = arguments.getNextUnprocessedArgumentSlot();
-    LightweightTypeReference _declaredType = singleSlot.getDeclaredType();
-    String _simpleName = _declaredType.getSimpleName();
-    Assert.assertEquals("String", _simpleName);
-    boolean _isVarArg = singleSlot.isVarArg();
-    Assert.assertFalse(_isVarArg);
-    boolean _isSuperfluous = singleSlot.isSuperfluous();
-    Assert.assertFalse(_isSuperfluous);
+    Assert.assertEquals("String", singleSlot.getDeclaredType().getSimpleName());
+    Assert.assertFalse(singleSlot.isVarArg());
+    Assert.assertFalse(singleSlot.isSuperfluous());
     XExpression _argumentExpression = singleSlot.getArgumentExpression();
     Assert.assertTrue((_argumentExpression instanceof XStringLiteral));
     singleSlot.markProcessed();
-    boolean _hasUnprocessedArguments_1 = arguments.hasUnprocessedArguments();
-    Assert.assertFalse(_hasUnprocessedArguments_1);
+    Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
   
   protected AssignmentFeatureCallArguments toArguments(final String type, final String expression) {
@@ -95,11 +81,8 @@ public class AssignmentFeatureCallArgumentsTest extends AbstractTestingTypeRefer
       final XtendFunction function = this.function(functionString);
       XExpression _expression = function.getExpression();
       final XBlockExpression body = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = body.getExpressions();
-      final XExpression value = IterableExtensions.<XExpression>head(_expressions);
-      JvmOperation _directlyInferredOperation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
-      EList<JvmFormalParameter> _parameters = _directlyInferredOperation.getParameters();
-      JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
+      final XExpression value = IterableExtensions.<XExpression>head(body.getExpressions());
+      JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(this._iXtendJvmAssociations.getDirectlyInferredOperation(function).getParameters());
       JvmTypeReference _parameterType = null;
       if (_head!=null) {
         _parameterType=_head.getParameterType();

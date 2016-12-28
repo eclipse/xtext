@@ -4,8 +4,6 @@ import com.google.inject.Inject;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -232,15 +230,9 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       _builder_2.newLine();
       final IFile file3 = this.workbenchTestHelper.createFile("test/FooUser.xtend", _builder_2.toString());
       IResourcesSetupUtil.waitForBuild();
-      IMarker[] _findMarkers = file1.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      int _length = _findMarkers.length;
-      Assert.assertEquals(0, _length);
-      IMarker[] _findMarkers_1 = file2.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      int _length_1 = _findMarkers_1.length;
-      Assert.assertEquals(0, _length_1);
-      IMarker[] _findMarkers_2 = file3.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      int _length_2 = _findMarkers_2.length;
-      Assert.assertEquals(0, _length_2);
+      Assert.assertEquals(0, file1.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length);
+      Assert.assertEquals(0, file2.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length);
+      Assert.assertEquals(0, file3.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -248,9 +240,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
   
   public void assertNoErrorsInWorkspace() {
     try {
-      IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-      IWorkspaceRoot _root = _workspace.getRoot();
-      final IMarker[] findMarkers = _root.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      final IMarker[] findMarkers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       for (final IMarker iMarker : findMarkers) {
         String _message = MarkerUtilities.getMessage(iMarker);
         int _severity = MarkerUtilities.getSeverity(iMarker);

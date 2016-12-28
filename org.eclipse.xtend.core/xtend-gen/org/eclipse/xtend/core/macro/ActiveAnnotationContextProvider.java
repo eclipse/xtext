@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.macro;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -74,21 +73,17 @@ public class ActiveAnnotationContextProvider {
     final Stopwatches.StoppedTask task = Stopwatches.forTask("[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)");
     task.start();
     try {
-      Resource _eResource = file.eResource();
-      final ActiveAnnotationContexts result = ActiveAnnotationContexts.installNew(_eResource);
+      final ActiveAnnotationContexts result = ActiveAnnotationContexts.installNew(file.eResource());
       final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
       compilationUnit.setXtendFile(file);
       result.compilationUnit = compilationUnit;
       final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> _function = (Pair<JvmAnnotationType, XAnnotation> it) -> {
-        Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = result.getContexts();
-        JvmAnnotationType _key = it.getKey();
-        boolean _containsKey = _contexts.containsKey(_key);
+        boolean _containsKey = result.getContexts().containsKey(it.getKey());
         boolean _not = (!_containsKey);
         if (_not) {
           final ActiveAnnotationContext fa = new ActiveAnnotationContext();
           fa.setCompilationUnit(compilationUnit);
-          JvmAnnotationType _key_1 = it.getKey();
-          final JvmType processorType = this._xAnnotationExtensions.getProcessorType(_key_1);
+          final JvmType processorType = this._xAnnotationExtensions.getProcessorType(it.getKey());
           try {
             final Object processorInstance = this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
             if ((processorInstance == null)) {
@@ -109,15 +104,13 @@ public class ActiveAnnotationContextProvider {
               boolean _matched = false;
               if (e_1 instanceof ExceptionInInitializerError) {
                 _matched=true;
-                Throwable _exception = ((ExceptionInInitializerError)e_1).getException();
-                _switchResult = _exception.getMessage();
+                _switchResult = ((ExceptionInInitializerError)e_1).getException().getMessage();
               }
               if (!_matched) {
                 _switchResult = e_1.getMessage();
               }
               final String msg = _switchResult;
-              Resource _eResource_1 = file.eResource();
-              EList<Resource.Diagnostic> _errors = _eResource_1.getErrors();
+              EList<Resource.Diagnostic> _errors = file.eResource().getErrors();
               StringConcatenation _builder = new StringConcatenation();
               _builder.append("Problem while loading annotation processor: ");
               _builder.append(msg);
@@ -130,16 +123,10 @@ public class ActiveAnnotationContextProvider {
               throw Exceptions.sneakyThrow(_t);
             }
           }
-          Map<JvmAnnotationType, ActiveAnnotationContext> _contexts_1 = result.getContexts();
-          JvmAnnotationType _key_2 = it.getKey();
-          _contexts_1.put(_key_2, fa);
+          result.getContexts().put(it.getKey(), fa);
         }
-        Map<JvmAnnotationType, ActiveAnnotationContext> _contexts_2 = result.getContexts();
-        JvmAnnotationType _key_3 = it.getKey();
-        ActiveAnnotationContext _get = _contexts_2.get(_key_3);
-        List<XtendAnnotationTarget> _annotatedSourceElements = _get.getAnnotatedSourceElements();
-        XAnnotation _value_1 = it.getValue();
-        XtendAnnotationTarget _annotatedTarget = this._xAnnotationExtensions.getAnnotatedTarget(_value_1);
+        List<XtendAnnotationTarget> _annotatedSourceElements = result.getContexts().get(it.getKey()).getAnnotatedSourceElements();
+        XtendAnnotationTarget _annotatedTarget = this._xAnnotationExtensions.getAnnotatedTarget(it.getValue());
         _annotatedSourceElements.add(_annotatedTarget);
       };
       this.searchAnnotatedElements(file, _function);
@@ -160,8 +147,7 @@ public class ActiveAnnotationContextProvider {
           }
         }
         ActiveAnnotationContextProvider.logger.warn("Error finding the elements to be processed by active annotations", e);
-        Resource _eResource_1 = file.eResource();
-        return ActiveAnnotationContexts.installNew(_eResource_1);
+        return ActiveAnnotationContexts.installNew(file.eResource());
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -177,76 +163,69 @@ public class ActiveAnnotationContextProvider {
     boolean _matched = false;
     if (element instanceof XtendFile) {
       _matched=true;
-      EList<XtendTypeDeclaration> _xtendTypes = ((XtendFile)element).getXtendTypes();
       final Consumer<XtendTypeDeclaration> _function = (XtendTypeDeclaration it) -> {
         this.searchAnnotatedElements(it, acceptor);
       };
-      _xtendTypes.forEach(_function);
+      ((XtendFile)element).getXtendTypes().forEach(_function);
     }
     if (!_matched) {
       if (element instanceof XtendClass) {
         _matched=true;
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
-        EList<XtendMember> _members = ((XtendClass)element).getMembers();
         final Consumer<XtendMember> _function = (XtendMember it) -> {
           this.searchAnnotatedElements(it, acceptor);
         };
-        _members.forEach(_function);
+        ((XtendClass)element).getMembers().forEach(_function);
       }
     }
     if (!_matched) {
       if (element instanceof XtendInterface) {
         _matched=true;
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
-        EList<XtendMember> _members = ((XtendInterface)element).getMembers();
         final Consumer<XtendMember> _function = (XtendMember it) -> {
           this.searchAnnotatedElements(it, acceptor);
         };
-        _members.forEach(_function);
+        ((XtendInterface)element).getMembers().forEach(_function);
       }
     }
     if (!_matched) {
       if (element instanceof XtendEnum) {
         _matched=true;
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
-        EList<XtendMember> _members = ((XtendEnum)element).getMembers();
         final Consumer<XtendMember> _function = (XtendMember it) -> {
           this.searchAnnotatedElements(it, acceptor);
         };
-        _members.forEach(_function);
+        ((XtendEnum)element).getMembers().forEach(_function);
       }
     }
     if (!_matched) {
       if (element instanceof XtendAnnotationType) {
         _matched=true;
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
-        EList<XtendMember> _members = ((XtendAnnotationType)element).getMembers();
         final Consumer<XtendMember> _function = (XtendMember it) -> {
           this.searchAnnotatedElements(it, acceptor);
         };
-        _members.forEach(_function);
+        ((XtendAnnotationType)element).getMembers().forEach(_function);
       }
     }
     if (!_matched) {
       if (element instanceof XtendFunction) {
         _matched=true;
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
-        EList<XtendParameter> _parameters = ((XtendFunction)element).getParameters();
         final Consumer<XtendParameter> _function = (XtendParameter it) -> {
           this.searchAnnotatedElements(it, acceptor);
         };
-        _parameters.forEach(_function);
+        ((XtendFunction)element).getParameters().forEach(_function);
       }
     }
     if (!_matched) {
       if (element instanceof XtendConstructor) {
         _matched=true;
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
-        EList<XtendParameter> _parameters = ((XtendConstructor)element).getParameters();
         final Consumer<XtendParameter> _function = (XtendParameter it) -> {
           this.searchAnnotatedElements(it, acceptor);
         };
-        _parameters.forEach(_function);
+        ((XtendConstructor)element).getParameters().forEach(_function);
       }
     }
     if (!_matched) {
@@ -258,11 +237,10 @@ public class ActiveAnnotationContextProvider {
   }
   
   private void registerMacroAnnotations(final XtendAnnotationTarget candidate, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
-    EList<XAnnotation> _annotations = candidate.getAnnotations();
     final Function1<XAnnotation, Boolean> _function = (XAnnotation it) -> {
       return Boolean.valueOf(this._xAnnotationExtensions.isProcessed(it));
     };
-    Iterable<XAnnotation> _filter = IterableExtensions.<XAnnotation>filter(_annotations, _function);
+    Iterable<XAnnotation> _filter = IterableExtensions.<XAnnotation>filter(candidate.getAnnotations(), _function);
     for (final XAnnotation annotation : _filter) {
       {
         final JvmAnnotationType activeAnnotationDeclaration = this._xAnnotationExtensions.tryFindAnnotationType(annotation);

@@ -46,8 +46,7 @@ public class XtendTaskTagProvider implements ITaskTagProvider {
       final Procedure1<TaskTags> _function = (TaskTags it) -> {
         List<TaskTag> _taskTags_1 = it.getTaskTags();
         Iterables.<TaskTag>addAll(_taskTags_1, tags);
-        boolean _equals = caseSensitivePref.equals(JavaCore.ENABLED);
-        it.setCaseSensitive(_equals);
+        it.setCaseSensitive(caseSensitivePref.equals(JavaCore.ENABLED));
       };
       _xblockexpression = ObjectExtensions.<TaskTags>operator_doubleArrow(_taskTags, _function);
     }

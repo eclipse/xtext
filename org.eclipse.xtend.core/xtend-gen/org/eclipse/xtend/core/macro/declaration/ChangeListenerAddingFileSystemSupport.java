@@ -26,41 +26,31 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   
   @Override
   public void delete(final Path path) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerCreateOrModify(_string, _uRI);
+    this.resourceChangeRegistry.registerCreateOrModify(path.toString(), this.getURI());
     this.delegate.delete(path);
   }
   
   @Override
   public void mkdir(final Path path) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerCreateOrModify(_string, _uRI);
+    this.resourceChangeRegistry.registerCreateOrModify(path.toString(), this.getURI());
     this.delegate.mkdir(path);
   }
   
   @Override
   public void setContents(final Path path, final CharSequence contents) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerCreateOrModify(_string, _uRI);
+    this.resourceChangeRegistry.registerCreateOrModify(path.toString(), this.getURI());
     this.delegate.setContents(path, contents);
   }
   
   @Override
   public void setContentsAsStream(final Path path, final InputStream source) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerCreateOrModify(_string, _uRI);
+    this.resourceChangeRegistry.registerCreateOrModify(path.toString(), this.getURI());
     this.delegate.setContentsAsStream(path, source);
   }
   
   @Override
   public boolean exists(final Path path) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerExists(_string, _uRI);
+    this.resourceChangeRegistry.registerExists(path.toString(), this.getURI());
     return this.delegate.exists(path);
   }
   
@@ -70,57 +60,43 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   
   @Override
   public String getCharset(final Path path) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerGetCharset(_string, _uRI);
+    this.resourceChangeRegistry.registerGetCharset(path.toString(), this.getURI());
     return this.delegate.getCharset(path);
   }
   
   @Override
   public Iterable<? extends Path> getChildren(final Path path) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerGetChildren(_string, _uRI);
+    this.resourceChangeRegistry.registerGetChildren(path.toString(), this.getURI());
     return this.delegate.getChildren(path);
   }
   
   @Override
   public CharSequence getContents(final Path path) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerGetContents(_string, _uRI);
+    this.resourceChangeRegistry.registerGetContents(path.toString(), this.getURI());
     return this.delegate.getContents(path);
   }
   
   @Override
   public InputStream getContentsAsStream(final Path path) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerGetContents(_string, _uRI);
+    this.resourceChangeRegistry.registerGetContents(path.toString(), this.getURI());
     return this.delegate.getContentsAsStream(path);
   }
   
   @Override
   public long getLastModification(final Path path) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerGetContents(_string, _uRI);
+    this.resourceChangeRegistry.registerGetContents(path.toString(), this.getURI());
     return this.delegate.getLastModification(path);
   }
   
   @Override
   public boolean isFile(final Path path) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerExists(_string, _uRI);
+    this.resourceChangeRegistry.registerExists(path.toString(), this.getURI());
     return this.delegate.isFile(path);
   }
   
   @Override
   public boolean isFolder(final Path path) {
-    String _string = path.toString();
-    URI _uRI = this.getURI();
-    this.resourceChangeRegistry.registerExists(_string, _uRI);
+    this.resourceChangeRegistry.registerExists(path.toString(), this.getURI());
     return this.delegate.isFolder(path);
   }
   

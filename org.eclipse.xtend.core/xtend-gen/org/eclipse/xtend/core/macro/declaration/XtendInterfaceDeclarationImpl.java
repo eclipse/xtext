@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendInterface;
@@ -24,24 +22,18 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<XtendInterface> implements InterfaceDeclaration {
   @Override
   public Iterable<? extends TypeReference> getExtendedInterfaces() {
-    XtendInterface _delegate = this.getDelegate();
-    EList<JvmTypeReference> _extends = _delegate.getExtends();
     final Function1<JvmTypeReference, TypeReference> _function = (JvmTypeReference it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toTypeReference(it);
+      return this.getCompilationUnit().toTypeReference(it);
     };
-    return ListExtensions.<JvmTypeReference, TypeReference>map(_extends, _function);
+    return ListExtensions.<JvmTypeReference, TypeReference>map(this.getDelegate().getExtends(), _function);
   }
   
   @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
-    XtendInterface _delegate = this.getDelegate();
-    EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = (JvmTypeParameter it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toXtendTypeParameterDeclaration(it);
+      return this.getCompilationUnit().toXtendTypeParameterDeclaration(it);
     };
-    return ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(_typeParameters, _function);
+    return ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(this.getDelegate().getTypeParameters(), _function);
   }
   
   @Override

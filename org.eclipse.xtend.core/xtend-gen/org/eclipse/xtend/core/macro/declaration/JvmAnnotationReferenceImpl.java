@@ -8,13 +8,10 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.ConditionUtils;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmElementImpl;
-import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
@@ -36,31 +33,24 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> implements AnnotationReference {
   @Override
   public AnnotationTypeDeclaration getAnnotationTypeDeclaration() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    JvmAnnotationReference _delegate = this.getDelegate();
-    JvmAnnotationType _annotation = _delegate.getAnnotation();
-    TypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_annotation);
+    TypeDeclaration _typeDeclaration = this.getCompilationUnit().toTypeDeclaration(this.getDelegate().getAnnotation());
     return ((AnnotationTypeDeclaration) _typeDeclaration);
   }
   
   @Override
   public Expression getExpression(final String property) {
     final JvmOperation op = this.findOperation(property);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _values = _delegate.getValues();
     final Function1<JvmAnnotationValue, Boolean> _function = (JvmAnnotationValue it) -> {
       return Boolean.valueOf((Objects.equal(it.getOperation(), op) || ((it.getOperation() == null) && Objects.equal(op.getSimpleName(), "value"))));
     };
-    final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
+    final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(this.getDelegate().getValues(), _function);
     boolean _matched = false;
     if (annotationValue instanceof JvmCustomAnnotationValue) {
       _matched=true;
-      EList<EObject> _values_1 = ((JvmCustomAnnotationValue)annotationValue).getValues();
-      EObject _head = IterableExtensions.<EObject>head(_values_1);
+      EObject _head = IterableExtensions.<EObject>head(((JvmCustomAnnotationValue)annotationValue).getValues());
       final XExpression expression = ((XExpression) _head);
       if (((expression != null) && this.getCompilationUnit().isBelongedToCompilationUnit(expression))) {
-        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        return _compilationUnit.toExpression(expression);
+        return this.getCompilationUnit().toExpression(expression);
       }
     }
     return null;
@@ -70,24 +60,18 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   public Object getValue(final String property) {
     try {
       final JvmOperation op = this.findOperation(property);
-      JvmAnnotationReference _delegate = this.getDelegate();
-      EList<JvmAnnotationValue> _values = _delegate.getValues();
       final Function1<JvmAnnotationValue, Boolean> _function = (JvmAnnotationValue it) -> {
         return Boolean.valueOf((Objects.equal(it.getOperation(), op) || ((it.getOperation() == null) && Objects.equal(op.getSimpleName(), "value"))));
       };
-      final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
+      final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(this.getDelegate().getValues(), _function);
       final boolean isArrayType = ((op != null) && this.getCompilationUnit().getTypeReferences().isArray(op.getReturnType()));
       if ((annotationValue != null)) {
-        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        return _compilationUnit.translateAnnotationValue(annotationValue, isArrayType);
+        return this.getCompilationUnit().translateAnnotationValue(annotationValue, isArrayType);
       }
     } catch (final Throwable _t) {
       if (_t instanceof ConstantExpressionEvaluationException) {
         final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
-        CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-        ProblemSupportImpl _problemSupport = _compilationUnit_1.getProblemSupport();
-        String _message = e.getMessage();
-        _problemSupport.addError(this, _message);
+        this.getCompilationUnit().getProblemSupport().addError(this, e.getMessage());
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -99,12 +83,11 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     ConditionUtils.checkJavaIdentifier(name, "name");
     AnnotationTypeDeclaration _annotationTypeDeclaration = this.getAnnotationTypeDeclaration();
     final JvmAnnotationType jvmAnnoType = ((JvmAnnotationTypeDeclarationImpl) _annotationTypeDeclaration).getDelegate();
-    Iterable<JvmOperation> _declaredOperations = jvmAnnoType.getDeclaredOperations();
     final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
       String _simpleName = it.getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
-    final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function);
+    final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(jvmAnnoType.getDeclaredOperations(), _function);
     if ((jvmOperation == null)) {
       String _identifier = jvmAnnoType.getIdentifier();
       String _plus = ((("The annotation property \'" + name) + "\' is not declared on the annotation type \'") + _identifier);

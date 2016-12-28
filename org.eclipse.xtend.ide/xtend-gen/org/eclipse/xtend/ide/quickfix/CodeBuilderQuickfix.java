@@ -8,10 +8,8 @@
 package org.eclipse.xtend.ide.quickfix;
 
 import com.google.inject.Inject;
-import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IMember;
@@ -73,9 +71,7 @@ public class CodeBuilderQuickfix {
         }
       }
       final IModification modification = _switchResult;
-      String _preview = builder.getPreview();
-      String _image = builder.getImage();
-      acceptor.accept(issue, label, _preview, _image, modification);
+      acceptor.accept(issue, label, builder.getPreview(), builder.getImage(), modification);
     }
   }
   
@@ -111,8 +107,7 @@ public class CodeBuilderQuickfix {
   protected IModification getXtendModification(final ICodeBuilder.Xtend builder) {
     final IModification _function = (IModificationContext it) -> {
       final XtendTypeDeclaration xtendClass = builder.getXtendType();
-      URI _uRI = EcoreUtil.getURI(xtendClass);
-      final IEditorPart editor = this.editorOpener.open(_uRI, false);
+      final IEditorPart editor = this.editorOpener.open(EcoreUtil.getURI(xtendClass), false);
       if ((!(editor instanceof XtextEditor))) {
         return;
       }
@@ -126,8 +121,7 @@ public class CodeBuilderQuickfix {
           wrapper.set(Integer.valueOf(offset));
           DocumentSourceAppender.Factory.OptionalParameters _optionalParameters = new DocumentSourceAppender.Factory.OptionalParameters();
           final Procedure1<DocumentSourceAppender.Factory.OptionalParameters> _function_2 = (DocumentSourceAppender.Factory.OptionalParameters it_1) -> {
-            int _indentationLevel = builder.getIndentationLevel();
-            it_1.baseIndentationLevel = _indentationLevel;
+            it_1.baseIndentationLevel = builder.getIndentationLevel();
             it_1.ensureEmptyLinesAround = true;
           };
           DocumentSourceAppender.Factory.OptionalParameters _doubleArrow = ObjectExtensions.<DocumentSourceAppender.Factory.OptionalParameters>operator_doubleArrow(_optionalParameters, _function_2);
@@ -139,8 +133,7 @@ public class CodeBuilderQuickfix {
       Integer offset = wrapper.get();
       builder.build(appendable);
       appendable.commitChanges();
-      int _length = appendable.length();
-      xtextEditor.setHighlightRange(((offset).intValue() + 1), _length, true);
+      xtextEditor.setHighlightRange(((offset).intValue() + 1), appendable.length(), true);
     };
     return _function;
   }
@@ -152,7 +145,6 @@ public class CodeBuilderQuickfix {
       final ImportManager importManager = new ImportManager(true, _charAt);
       final StringBuilderBasedAppendable content = new StringBuilderBasedAppendable(importManager);
       builder.build(content);
-      List<String> _imports = importManager.getImports();
       final Consumer<String> _function_1 = (String it_1) -> {
         try {
           ICompilationUnit _compilationUnit = type.getCompilationUnit();
@@ -162,7 +154,7 @@ public class CodeBuilderQuickfix {
           throw Exceptions.sneakyThrow(_e);
         }
       };
-      _imports.forEach(_function_1);
+      importManager.getImports().forEach(_function_1);
       Object _switchResult = null;
       boolean _matched = false;
       if (builder instanceof JavaFieldBuilder) {

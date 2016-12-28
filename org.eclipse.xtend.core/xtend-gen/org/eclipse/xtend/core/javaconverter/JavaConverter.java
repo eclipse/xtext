@@ -44,13 +44,11 @@ public class JavaConverter {
     
     public static JavaConverter.ConversionResult create(final JavaASTFlattener flattener) {
       final JavaConverter.ConversionResult result = new JavaConverter.ConversionResult();
-      String _result = flattener.getResult();
-      result.xtendCode = _result;
+      result.xtendCode = flattener.getResult();
       List<String> _problems = flattener.getProblems();
       boolean _tripleNotEquals = (_problems != null);
       if (_tripleNotEquals) {
-        List<String> _problems_1 = flattener.getProblems();
-        result.problems = _problems_1;
+        result.problems = flattener.getProblems();
       }
       return result;
     }
@@ -89,9 +87,7 @@ public class JavaConverter {
     try {
       final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(cu);
       final ASTNode root = parser.createAST();
-      String _source = cu.getSource();
-      String _targetLevel = parser.getTargetLevel();
-      return this.executeAstFlattener(_source, root, _targetLevel, false);
+      return this.executeAstFlattener(cu.getSource(), root, parser.getTargetLevel(), false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -109,8 +105,7 @@ public class JavaConverter {
       if ((unitName == null)) {
         throw new IllegalArgumentException();
       }
-      ASTParserFactory.ASTParserWrapper _createJavaParser = this.astParserFactory.createJavaParser(null);
-      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, _createJavaParser);
+      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, this.astParserFactory.createJavaParser(null));
     }
     return _xblockexpression;
   }
@@ -128,8 +123,7 @@ public class JavaConverter {
       if ((unitName == null)) {
         throw new IllegalArgumentException();
       }
-      ASTParserFactory.ASTParserWrapper _createJavaParser = this.astParserFactory.createJavaParser(classPathContext);
-      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, _createJavaParser);
+      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, this.astParserFactory.createJavaParser(classPathContext));
     }
     return _xblockexpression;
   }
@@ -151,11 +145,9 @@ public class JavaConverter {
       int _type = parseResult.getType();
       boolean _tripleEquals = (_type == ASTParser.K_EXPRESSION);
       if (_tripleEquals) {
-        JavaConverter.ConversionResult _expressionToXtend = this.expressionToXtend(javaSrc, classPathContext);
-        conversionResult = _expressionToXtend;
+        conversionResult = this.expressionToXtend(javaSrc, classPathContext);
       } else {
-        JavaConverter.ConversionResult _statementToXtend = this.statementToXtend(javaSrc, classPathContext);
-        conversionResult = _statementToXtend;
+        conversionResult = this.statementToXtend(javaSrc, classPathContext);
       }
     } else {
       String[] _xifexpression = null;
@@ -164,8 +156,7 @@ public class JavaConverter {
       } else {
         _xifexpression = null;
       }
-      JavaConverter.ConversionResult _bodyDeclarationToXtend = this.bodyDeclarationToXtend(javaSrc, _xifexpression, classPathContext);
-      conversionResult = _bodyDeclarationToXtend;
+      conversionResult = this.bodyDeclarationToXtend(javaSrc, _xifexpression, classPathContext);
     }
     return conversionResult.getXtendCode();
   }
@@ -176,8 +167,7 @@ public class JavaConverter {
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
    */
   public JavaConverter.ConversionResult bodyDeclarationToXtend(final String javaSrc, final String[] imports, final Object classPathContext) {
-    ASTParserFactory.ASTParserWrapper _createJavaParser = this.astParserFactory.createJavaParser(classPathContext);
-    return this.internalToXtend(null, javaSrc, imports, _createJavaParser);
+    return this.internalToXtend(null, javaSrc, imports, this.astParserFactory.createJavaParser(classPathContext));
   }
   
   /**
@@ -186,16 +176,13 @@ public class JavaConverter {
    */
   public JavaConverter.ConversionResult statementToXtend(final String javaSrc, final Object classPathContext) {
     final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(classPathContext);
-    char[] _charArray = javaSrc.toCharArray();
-    parser.setSource(_charArray);
+    parser.setSource(javaSrc.toCharArray());
     parser.setKind(ASTParser.K_STATEMENTS);
     final ASTNode root = parser.createAST();
     if ((root instanceof Block)) {
-      String _targetLevel = parser.getTargetLevel();
-      return this.executeAstFlattener(javaSrc, root, _targetLevel, true);
+      return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), true);
     }
-    String _targetLevel_1 = parser.getTargetLevel();
-    return this.executeAstFlattener(javaSrc, root, _targetLevel_1, false);
+    return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), false);
   }
   
   /**
@@ -204,12 +191,10 @@ public class JavaConverter {
    */
   public JavaConverter.ConversionResult expressionToXtend(final String javaSrc, final Object classPathContext) {
     final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(classPathContext);
-    char[] _charArray = javaSrc.toCharArray();
-    parser.setSource(_charArray);
+    parser.setSource(javaSrc.toCharArray());
     parser.setKind(ASTParser.K_EXPRESSION);
     final ASTNode root = parser.createAST();
-    String _targetLevel = parser.getTargetLevel();
-    return this.executeAstFlattener(javaSrc, root, _targetLevel, false);
+    return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), false);
   }
   
   /**
@@ -240,11 +225,9 @@ public class JavaConverter {
     }
     parser.setKind(ASTParser.K_COMPILATION_UNIT);
     final String preparedJavaSrc = javaSrcBuilder.toString();
-    char[] _charArray = preparedJavaSrc.toCharArray();
-    parser.setSource(_charArray);
+    parser.setSource(preparedJavaSrc.toCharArray());
     final ASTNode result = parser.createAST();
-    String _targetLevel = parser.getTargetLevel();
-    return this.executeAstFlattener(preparedJavaSrc, result, _targetLevel, false);
+    return this.executeAstFlattener(preparedJavaSrc, result, parser.getTargetLevel(), false);
   }
   
   /**

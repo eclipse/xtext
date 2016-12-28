@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -20,19 +19,16 @@ public class FileAsserts {
   public IFile assertFileExists(final String fileName) throws Exception {
     IFile _xblockexpression = null;
     {
-      IProject _project = this._workbenchTestHelper.getProject();
-      final IResource file = _project.findMember(fileName);
+      final IResource file = this._workbenchTestHelper.getProject().findMember(fileName);
       Assert.assertTrue((fileName + " is not an IFile"), (file instanceof IFile));
-      boolean _exists = file.exists();
-      Assert.assertTrue((("File " + fileName) + " doesn\'t exist"), _exists);
+      Assert.assertTrue((("File " + fileName) + " doesn\'t exist"), file.exists());
       _xblockexpression = ((IFile) file);
     }
     return _xblockexpression;
   }
   
   public void assertFileDoesntExists(final String fileName) throws Exception {
-    IProject _project = this._workbenchTestHelper.getProject();
-    final IResource file = _project.findMember(fileName);
+    final IResource file = this._workbenchTestHelper.getProject().findMember(fileName);
     Assert.assertNull(file);
   }
   

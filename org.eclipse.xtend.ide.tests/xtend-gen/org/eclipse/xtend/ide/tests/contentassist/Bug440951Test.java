@@ -31,14 +31,12 @@ public class Bug440951Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("AssertionError");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("AssertionError");
   }
   
   @Test
   public void test_02() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _withDirtyState = _newBuilder.withDirtyState();
+    ContentAssistProcessorTestBuilder _withDirtyState = this.newBuilder().withDirtyState();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -52,8 +50,7 @@ public class Bug440951Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("class MyDirtyThrowable extends Throwable {}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _withDirtyState.append(_builder.toString());
-    _append.assertProposalAtCursor("MyDirtyThrowable");
+    _withDirtyState.append(_builder.toString()).assertProposalAtCursor("MyDirtyThrowable");
   }
   
   @Test
@@ -70,7 +67,6 @@ public class Bug440951Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("java.lang.annotation.RetentionPolicy");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("java.lang.annotation.RetentionPolicy");
   }
 }

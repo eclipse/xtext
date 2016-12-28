@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.common.outline;
 
-import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -32,16 +31,14 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
   public DefaultXtendOutlineContext() {
     this.inheritanceDepth = 0;
     this.showInherited = false;
-    HashSet<JvmMember> _newHashSet = CollectionLiterals.<JvmMember>newHashSet();
-    this.processedMembers = _newHashSet;
+    this.processedMembers = CollectionLiterals.<JvmMember>newHashSet();
   }
   
   @Override
   public IXtendOutlineContext newContext() {
     DefaultXtendOutlineContext _cloneContext = this.cloneContext();
     final Procedure1<DefaultXtendOutlineContext> _function = (DefaultXtendOutlineContext it) -> {
-      HashSet<JvmMember> _newHashSet = CollectionLiterals.<JvmMember>newHashSet();
-      it.processedMembers = _newHashSet;
+      it.processedMembers = CollectionLiterals.<JvmMember>newHashSet();
     };
     return ObjectExtensions.<DefaultXtendOutlineContext>operator_doubleArrow(_cloneContext, _function);
   }

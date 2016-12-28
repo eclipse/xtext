@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.validation;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -45,8 +44,7 @@ public class ValidationBug450834Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile c = this.parser.parse(_builder);
-      Resource _eResource = c.eResource();
-      final ResourceSet resourceSet = _eResource.getResourceSet();
+      final ResourceSet resourceSet = c.eResource().getResourceSet();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("class D {");
       _builder_1.newLine();

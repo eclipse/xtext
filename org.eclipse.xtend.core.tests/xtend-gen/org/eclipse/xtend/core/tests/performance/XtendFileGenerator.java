@@ -961,13 +961,7 @@ public class XtendFileGenerator {
   }
   
   public Map<String, ? extends CharSequence> getDependencies() {
-    Pair<String, String> _amount = this.getAmount();
-    Pair<String, String> _circle = this.getCircle();
-    Pair<String, String> _netNode = this.getNetNode();
-    Pair<String, String> _person = this.getPerson();
-    Pair<String, String> _rectangle = this.getRectangle();
-    Pair<String, String> _shape = this.getShape();
-    return CollectionLiterals.<String, String>newHashMap(_amount, _circle, _netNode, _person, _rectangle, _shape);
+    return CollectionLiterals.<String, String>newHashMap(this.getAmount(), this.getCircle(), this.getNetNode(), this.getPerson(), this.getRectangle(), this.getShape());
   }
   
   public Pair<String, String> getAmount() {

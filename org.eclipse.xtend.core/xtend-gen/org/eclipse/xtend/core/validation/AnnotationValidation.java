@@ -11,12 +11,10 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendField;
-import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -48,18 +46,15 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
   
   @Check
   public void checkAnnotation(final XtendAnnotationType it) {
-    EList<XtendMember> _members = it.getMembers();
-    Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members, XtendField.class);
+    Iterable<XtendField> _filter = Iterables.<XtendField>filter(it.getMembers(), XtendField.class);
     for (final XtendField it_1 : _filter) {
       {
-        JvmTypeReference _type = it_1.getType();
-        boolean _isValidAnnotationValueType = this.isValidAnnotationValueType(_type);
+        boolean _isValidAnnotationValueType = this.isValidAnnotationValueType(it_1.getType());
         boolean _not = (!_isValidAnnotationValueType);
         if (_not) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Invalid type ");
-          JvmTypeReference _type_1 = it_1.getType();
-          String _simpleName = _type_1.getSimpleName();
+          String _simpleName = it_1.getType().getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" for the annotation attribute ");
           String _name = it_1.getName();
@@ -72,8 +67,7 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
         XExpression _initialValue = it_1.getInitialValue();
         boolean _tripleNotEquals = (_initialValue != null);
         if (_tripleNotEquals) {
-          XExpression _initialValue_1 = it_1.getInitialValue();
-          this.annotationValueValidator.validateAnnotationValue(_initialValue_1, this);
+          this.annotationValueValidator.validateAnnotationValue(it_1.getInitialValue(), this);
         }
       }
     }

@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.javaconverter;
 
 import com.google.inject.Inject;
-import java.util.List;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer;
@@ -75,8 +74,7 @@ public class JavaCodeAnalyzerTest {
     _builder.newLine();
     _builder.append("return i;");
     _builder.newLine();
-    JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> _assertJavaTypeIs = this.assertJavaTypeIs(_builder, ASTParser.K_STATEMENTS);
-    this.assertNodesCount(_assertJavaTypeIs, 2);
+    this.assertNodesCount(this.assertJavaTypeIs(_builder, ASTParser.K_STATEMENTS), 2);
   }
   
   @Test
@@ -90,14 +88,11 @@ public class JavaCodeAnalyzerTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> _assertJavaTypeIs = this.assertJavaTypeIs(_builder, ASTParser.K_STATEMENTS);
-    this.assertNodesCount(_assertJavaTypeIs, 1);
+    this.assertNodesCount(this.assertJavaTypeIs(_builder, ASTParser.K_STATEMENTS), 1);
   }
   
   public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> assertNodesCount(final JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> result, final int i) {
-    List<? extends ASTNode> _nodes = result.getNodes();
-    int _size = _nodes.size();
-    Assert.assertEquals(i, _size);
+    Assert.assertEquals(i, result.getNodes().size());
     return result;
   }
   
@@ -110,10 +105,8 @@ public class JavaCodeAnalyzerTest {
   }
   
   public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> assertJavaTypeIs(final CharSequence sequence, final int type) {
-    String _string = sequence.toString();
-    final JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> javaParseResult = this.analyzer.determinateJavaType(_string);
-    int _type = javaParseResult.getType();
-    Assert.assertEquals(type, _type);
+    final JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> javaParseResult = this.analyzer.determinateJavaType(sequence.toString());
+    Assert.assertEquals(type, javaParseResult.getType());
     return javaParseResult;
   }
 }

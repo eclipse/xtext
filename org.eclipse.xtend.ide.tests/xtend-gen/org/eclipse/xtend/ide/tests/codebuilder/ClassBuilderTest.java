@@ -5,7 +5,6 @@ import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.tests.codebuilder.AbstractBuilderTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -20,11 +19,9 @@ public class ClassBuilderTest extends AbstractBuilderTest {
   
   @Test
   public void testXtendClass() {
-    JvmDeclaredType _xtendClass = this.getXtendClass();
-    AbstractClassBuilder _createClassBuilder = this._codeBuilderFactory.createClassBuilder(_xtendClass);
+    AbstractClassBuilder _createClassBuilder = this._codeBuilderFactory.createClassBuilder(this.getXtendClass());
     final Procedure1<AbstractClassBuilder> _function = (AbstractClassBuilder it) -> {
-      JvmDeclaredType _xtendClass_1 = this.getXtendClass();
-      it.setContext(_xtendClass_1);
+      it.setContext(this.getXtendClass());
       it.setClassName("Bar");
       it.setVisibility(JvmVisibility.PUBLIC);
     };
@@ -38,11 +35,9 @@ public class ClassBuilderTest extends AbstractBuilderTest {
   
   @Test
   public void testJavaClass() {
-    JvmDeclaredType _javaClass = this.getJavaClass();
-    AbstractClassBuilder _createClassBuilder = this._codeBuilderFactory.createClassBuilder(_javaClass);
+    AbstractClassBuilder _createClassBuilder = this._codeBuilderFactory.createClassBuilder(this.getJavaClass());
     final Procedure1<AbstractClassBuilder> _function = (AbstractClassBuilder it) -> {
-      JvmDeclaredType _javaClass_1 = this.getJavaClass();
-      it.setContext(_javaClass_1);
+      it.setContext(this.getJavaClass());
       it.setClassName("Bar");
       it.setVisibility(JvmVisibility.PUBLIC);
     };

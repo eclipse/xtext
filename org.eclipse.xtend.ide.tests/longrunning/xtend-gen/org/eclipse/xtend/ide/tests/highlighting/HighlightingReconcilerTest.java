@@ -78,28 +78,23 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       final XtextEditor editor = this.helper.openEditor("Foo.xtend", model);
       final IXtextDocument document = editor.getDocument();
       int _indexOf = model.indexOf("  ");
-      ReplaceEdit _replaceEdit = new ReplaceEdit(_indexOf, 2, "  static val foo = 3");
-      _replaceEdit.apply(document);
+      new ReplaceEdit(_indexOf, 2, "  static val foo = 3").apply(document);
       final IUnitOfWork<Object, XtextResource> _function = (XtextResource it) -> {
         return null;
       };
       document.<Object>readOnly(_function);
       int _indexOf_1 = model.indexOf("  ");
-      ReplaceEdit _replaceEdit_1 = new ReplaceEdit(_indexOf_1, 0, "  ");
-      _replaceEdit_1.apply(document);
+      new ReplaceEdit(_indexOf_1, 0, "  ").apply(document);
       final IUnitOfWork<Object, XtextResource> _function_1 = (XtextResource it) -> {
         return null;
       };
       document.<Object>readOnly(_function_1);
       while (Display.getDefault().readAndDispatch()) {
       }
-      String[] _positionCategories = document.getPositionCategories();
       final Function1<String, Boolean> _function_2 = (String it) -> {
-        String _canonicalName = HighlightingPresenter.class.getCanonicalName();
-        return Boolean.valueOf(it.startsWith(_canonicalName));
+        return Boolean.valueOf(it.startsWith(HighlightingPresenter.class.getCanonicalName()));
       };
-      final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function_2);
-      Position[] _positions = document.getPositions(highlighterCategory);
+      final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(document.getPositionCategories())), _function_2);
       final Function1<Position, String> _function_3 = (Position it) -> {
         try {
           return document.get(it.offset, it.length);
@@ -107,16 +102,11 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
           throw Exceptions.sneakyThrow(_e);
         }
       };
-      final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_3);
-      int _size = semanticSnippets.size();
-      Assert.assertEquals("Highlighting regions broken", 3, _size);
-      String _head = IterableExtensions.<String>head(semanticSnippets);
-      Assert.assertEquals("Foo", _head);
-      Iterable<String> _tail = IterableExtensions.<String>tail(semanticSnippets);
-      String _head_1 = IterableExtensions.<String>head(_tail);
-      Assert.assertEquals("foo", _head_1);
-      String _last = IterableExtensions.<String>last(semanticSnippets);
-      Assert.assertEquals("3", _last);
+      final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(document.getPositions(highlighterCategory))), _function_3);
+      Assert.assertEquals("Highlighting regions broken", 3, semanticSnippets.size());
+      Assert.assertEquals("Foo", IterableExtensions.<String>head(semanticSnippets));
+      Assert.assertEquals("foo", IterableExtensions.<String>head(IterableExtensions.<String>tail(semanticSnippets)));
+      Assert.assertEquals("3", IterableExtensions.<String>last(semanticSnippets));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -140,13 +130,10 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
         try {
           boolean _xblockexpression = false;
           {
-            String[] _positionCategories = document.getPositionCategories();
             final Function1<String, Boolean> _function_1 = (String it) -> {
-              String _canonicalName = HighlightingPresenter.class.getCanonicalName();
-              return Boolean.valueOf(it.startsWith(_canonicalName));
+              return Boolean.valueOf(it.startsWith(HighlightingPresenter.class.getCanonicalName()));
             };
-            final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function_1);
-            Position[] _positions = document.getPositions(highlighterCategory);
+            final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(document.getPositionCategories())), _function_1);
             final Function1<Position, String> _function_2 = (Position it) -> {
               try {
                 return document.get(it.offset, it.length);
@@ -154,7 +141,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
                 throw Exceptions.sneakyThrow(_e);
               }
             };
-            final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_2);
+            final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(document.getPositions(highlighterCategory))), _function_2);
             int _size = semanticSnippets.size();
             _xblockexpression = (_size > 0);
           }
@@ -164,13 +151,10 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
         }
       };
       this.helper.awaitUIUpdate(_function, HighlightingReconcilerTest.VALIDATION_TIMEOUT);
-      String[] _positionCategories = document.getPositionCategories();
       final Function1<String, Boolean> _function_1 = (String it) -> {
-        String _canonicalName = HighlightingPresenter.class.getCanonicalName();
-        return Boolean.valueOf(it.startsWith(_canonicalName));
+        return Boolean.valueOf(it.startsWith(HighlightingPresenter.class.getCanonicalName()));
       };
-      final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function_1);
-      Position[] _positions = document.getPositions(highlighterCategory);
+      final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(document.getPositionCategories())), _function_1);
       final Function1<Position, String> _function_2 = (Position it) -> {
         try {
           return document.get(it.offset, it.length);
@@ -178,15 +162,12 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
           throw Exceptions.sneakyThrow(_e);
         }
       };
-      final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_2);
+      final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(document.getPositions(highlighterCategory))), _function_2);
       String _join = IterableExtensions.join(semanticSnippets, ",");
       String _plus = ("Highlighting regions broken " + _join);
-      int _size = semanticSnippets.size();
-      Assert.assertEquals(_plus, 2, _size);
-      String _head = IterableExtensions.<String>head(semanticSnippets);
-      Assert.assertEquals("Foo", _head);
-      String _last = IterableExtensions.<String>last(semanticSnippets);
-      Assert.assertEquals("foo", _last);
+      Assert.assertEquals(_plus, 2, semanticSnippets.size());
+      Assert.assertEquals("Foo", IterableExtensions.<String>head(semanticSnippets));
+      Assert.assertEquals("foo", IterableExtensions.<String>last(semanticSnippets));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

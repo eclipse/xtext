@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.findReferences;
 
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -93,36 +92,30 @@ public class Declarators {
       return result;
     }
     final HashSet<QualifiedName> declaratorNames = CollectionLiterals.<QualifiedName>newHashSet();
-    Collection<URI> _targetResourceURIs = targetURIs.getTargetResourceURIs();
     final Consumer<URI> _function = (URI uri) -> {
       final IUnitOfWork<Object, ResourceSet> _function_1 = (ResourceSet it) -> {
         Object _xblockexpression = null;
         {
-          Collection<URI> _eObjectURIs = targetURIs.getEObjectURIs(uri);
           final Consumer<URI> _function_2 = (URI objectURI) -> {
             final EObject object = it.getEObject(objectURI, true);
             if ((object != null)) {
               final JvmType type = EcoreUtil2.<JvmType>getContainerOfType(object, JvmType.class);
               if ((type != null)) {
-                String _identifier = type.getIdentifier();
-                QualifiedName _qualifiedName = this.nameConverter.toQualifiedName(_identifier);
-                QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+                QualifiedName _lowerCase = this.nameConverter.toQualifiedName(type.getIdentifier()).toLowerCase();
                 declaratorNames.add(_lowerCase);
-                String _qualifiedName_1 = type.getQualifiedName('.');
-                QualifiedName _qualifiedName_2 = this.nameConverter.toQualifiedName(_qualifiedName_1);
-                QualifiedName _lowerCase_1 = _qualifiedName_2.toLowerCase();
+                QualifiedName _lowerCase_1 = this.nameConverter.toQualifiedName(type.getQualifiedName('.')).toLowerCase();
                 declaratorNames.add(_lowerCase_1);
               }
             }
           };
-          _eObjectURIs.forEach(_function_2);
+          targetURIs.getEObjectURIs(uri).forEach(_function_2);
           _xblockexpression = null;
         }
         return _xblockexpression;
       };
       resourceAccess.<Object>readOnly(uri, _function_1);
     };
-    _targetResourceURIs.forEach(_function);
+    targetURIs.getTargetResourceURIs().forEach(_function);
     Declarators.DeclaratorsData _declaratorsData = new Declarators.DeclaratorsData(declaratorNames);
     result = _declaratorsData;
     targetURIs.<Declarators.DeclaratorsData>putUserData(Declarators.KEY, result);

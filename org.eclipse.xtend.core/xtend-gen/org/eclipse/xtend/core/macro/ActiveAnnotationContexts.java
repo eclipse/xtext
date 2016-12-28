@@ -52,16 +52,14 @@ public class ActiveAnnotationContexts extends AdapterImpl {
   }
   
   public static ActiveAnnotationContexts installNew(final Resource resource) {
-    EList<Adapter> _eAdapters = resource.eAdapters();
-    Iterable<ActiveAnnotationContexts> _filter = Iterables.<ActiveAnnotationContexts>filter(_eAdapters, ActiveAnnotationContexts.class);
-    ActiveAnnotationContexts result = IterableExtensions.<ActiveAnnotationContexts>head(_filter);
+    ActiveAnnotationContexts result = IterableExtensions.<ActiveAnnotationContexts>head(Iterables.<ActiveAnnotationContexts>filter(resource.eAdapters(), ActiveAnnotationContexts.class));
     if ((result != null)) {
       result.contexts.clear();
     } else {
       ActiveAnnotationContexts _activeAnnotationContexts = new ActiveAnnotationContexts();
       result = _activeAnnotationContexts;
-      EList<Adapter> _eAdapters_1 = resource.eAdapters();
-      _eAdapters_1.add(result);
+      EList<Adapter> _eAdapters = resource.eAdapters();
+      _eAdapters.add(result);
     }
     return result;
   }
@@ -71,17 +69,14 @@ public class ActiveAnnotationContexts extends AdapterImpl {
     if ((((!this.running) && (!msg.isTouch())) && (Resource.RESOURCE__CONTENTS == msg.getFeatureID(Resource.class)))) {
       Object _notifier = msg.getNotifier();
       final Resource resource = ((Resource) _notifier);
-      EList<Adapter> _eAdapters = resource.eAdapters();
-      _eAdapters.remove(this);
+      resource.eAdapters().remove(this);
       this.contexts.clear();
       this.compilationUnit = null;
     }
   }
   
   public static ActiveAnnotationContexts find(final Resource resource) {
-    EList<Adapter> _eAdapters = resource.eAdapters();
-    Iterable<ActiveAnnotationContexts> _filter = Iterables.<ActiveAnnotationContexts>filter(_eAdapters, ActiveAnnotationContexts.class);
-    return IterableExtensions.<ActiveAnnotationContexts>head(_filter);
+    return IterableExtensions.<ActiveAnnotationContexts>head(Iterables.<ActiveAnnotationContexts>filter(resource.eAdapters(), ActiveAnnotationContexts.class));
   }
   
   @Pure

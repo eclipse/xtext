@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.editor.copyqualifiedname;
 
 import java.util.Arrays;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -16,7 +15,6 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -41,12 +39,10 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
     String _fullyQualifiedName = this.toFullyQualifiedName(it);
     _builder.append(_fullyQualifiedName);
     _builder.append("(");
-    EList<XtendParameter> _parameters = it.getParameters();
     final Function1<XtendParameter, String> _function = (XtendParameter it_1) -> {
-      JvmTypeReference _parameterType = it_1.getParameterType();
-      return _parameterType.getSimpleName();
+      return it_1.getParameterType().getSimpleName();
     };
-    CharSequence _qualifiedNames = this.<XtendParameter>toQualifiedNames(_parameters, _function);
+    CharSequence _qualifiedNames = this.<XtendParameter>toQualifiedNames(it.getParameters(), _function);
     _builder.append(_qualifiedNames);
     _builder.append(")");
     return _builder.toString();
@@ -65,12 +61,10 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
     String _fullyQualifiedName = this.toFullyQualifiedName(it);
     _builder.append(_fullyQualifiedName);
     _builder.append("(");
-    EList<XtendParameter> _parameters = it.getParameters();
     final Function1<XtendParameter, String> _function = (XtendParameter it_1) -> {
-      JvmTypeReference _parameterType = it_1.getParameterType();
-      return _parameterType.getSimpleName();
+      return it_1.getParameterType().getSimpleName();
     };
-    CharSequence _qualifiedNames = this.<XtendParameter>toQualifiedNames(_parameters, _function);
+    CharSequence _qualifiedNames = this.<XtendParameter>toQualifiedNames(it.getParameters(), _function);
     _builder.append(_qualifiedNames);
     _builder.append(")");
     return _builder.toString();

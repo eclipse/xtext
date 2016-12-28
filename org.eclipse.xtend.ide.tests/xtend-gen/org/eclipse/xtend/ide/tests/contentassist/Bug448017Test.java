@@ -50,8 +50,7 @@ public class Bug448017Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("getMyField2 : String - MyBean.getMyField2()");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("getMyField2 : String - MyBean.getMyField2()");
   }
   
   @Test
@@ -84,8 +83,7 @@ public class Bug448017Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("getMyField : String - MyBean.getMyField()");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("getMyField : String - MyBean.getMyField()");
   }
   
   @Test
@@ -118,8 +116,7 @@ public class Bug448017Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("myField2 : String - MyBean");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("myField2 : String - MyBean");
   }
   
   @Test
@@ -152,7 +149,6 @@ public class Bug448017Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("myField : String - MyBean");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("myField : String - MyBean");
   }
 }
