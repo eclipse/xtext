@@ -932,7 +932,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -941,18 +940,14 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      public abstract void m();
 			    }
 			    
-			    return CollectionLiterals.<ArrayList<__C_1>>newArrayList(CollectionLiterals.<__C_1>newArrayList(new Function0<__C_1>() {
-			      public __C_1 apply() {
-			        __C_1 ___C_1 = new __C_1() {
-			          public void run() {
-			          }
-			          
-			          public void m() {
-			          }
-			        };
-			        return ___C_1;
+			    __C_1 ___C_1 = new __C_1() {
+			      public void run() {
 			      }
-			    }.apply()));
+			      
+			      public void m() {
+			      }
+			    };
+			    return CollectionLiterals.<ArrayList<__C_1>>newArrayList(CollectionLiterals.<__C_1>newArrayList(___C_1));
 			  }
 			}
 		''')
@@ -1961,8 +1956,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			            public Integer apply() {
 			              int _xtrycatchfinallyexpression = (int) 0;
 			              try {
-			                String _substring = s.substring(1);
-			                _xtrycatchfinallyexpression = _substring.length();
+			                _xtrycatchfinallyexpression = s.substring(1).length();
 			              } catch (final Throwable _t) {
 			                if (_t instanceof Exception) {
 			                  final Exception e = (Exception)_t;

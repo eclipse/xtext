@@ -193,8 +193,6 @@ public class CompilerBug413138Test extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.newLine();
@@ -211,10 +209,7 @@ public class CompilerBug413138Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Iterable<String> m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return this.repository.<String>save(_newArrayList);");
+    _builder_1.append("return this.repository.<String>save(CollectionLiterals.<String>newArrayList());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -221,8 +221,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			  
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
-			    CharSequence _get = list.get();
-			    _get.toString();
+			    list.get().toString();
 			    list.add("");
 			    final Procedure1<CharSequence> _function = new Procedure1<CharSequence>() {
 			      public void apply(final CharSequence it) {
@@ -270,8 +269,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			  
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
-			    CharSequence _get = list.get();
-			    _get.toString();
+			    list.get().toString();
 			    final Procedure1<CharSequence> _function = new Procedure1<CharSequence>() {
 			      public void apply(final CharSequence it) {
 			        if ((it instanceof String)) {
@@ -413,7 +411,6 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			  
 			  public void m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
-			    C.MyIterable<StringBuilder> _newIterable = C.<StringBuilder>newIterable(_stringBuilder);
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
 			      public void apply(final StringBuilder it) {
 			        Long _long = new Long(0);
@@ -421,7 +418,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
-			    _newIterable.forEach2(_function);
+			    C.<StringBuilder>newIterable(_stringBuilder).forEach2(_function);
 			  }
 			  
 			  public <T extends Object> Object m(final T a, final T b) {

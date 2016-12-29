@@ -522,8 +522,6 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.Serializable;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.function.Consumer;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
@@ -553,9 +551,6 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilder _stringBuilder = new StringBuilder();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Consumer<StringBuilder> _function = new Consumer<StringBuilder>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -577,7 +572,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("_newArrayList.forEach(_function);");
+    _builder_1.append("CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder).forEach(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -803,8 +798,6 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.Serializable;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.function.Consumer;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
@@ -834,9 +827,6 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilder _stringBuilder = new StringBuilder();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Consumer<StringBuilder> _function = new Consumer<StringBuilder>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -861,7 +851,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("_newArrayList.forEach(_function);");
+    _builder_1.append("CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder).forEach(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -903,8 +893,6 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.Serializable;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.function.Consumer;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
@@ -934,9 +922,6 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilder _stringBuilder = new StringBuilder();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Consumer<StringBuilder> _function = new Consumer<StringBuilder>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -961,7 +946,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("_newArrayList.forEach(_function);");
+    _builder_1.append("CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder).forEach(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1003,8 +988,6 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.Serializable;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.function.Consumer;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
@@ -1034,9 +1017,6 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilder _stringBuilder = new StringBuilder();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Consumer<StringBuilder> _function = new Consumer<StringBuilder>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -1058,7 +1038,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("_newArrayList.forEach(_function);");
+    _builder_1.append("CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder).forEach(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

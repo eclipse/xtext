@@ -80,12 +80,10 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			    final ToIntFunction<String> _function = (String s) -> {
 			      return s.length();
 			    };
-			    Comparator<String> _comparingInt = Comparator.<String>comparingInt(_function);
 			    final Function<String, Integer> _function_1 = (String s) -> {
 			      return Integer.valueOf(s.length());
 			    };
-			    Comparator<String> _thenComparing = _comparingInt.<Integer>thenComparing(_function_1);
-			    list.sort(_thenComparing);
+			    list.sort(Comparator.<String>comparingInt(_function).<Integer>thenComparing(_function_1));
 			  }
 			}
 		''')
@@ -127,16 +125,14 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			import java.util.List;
 			import java.util.Optional;
 			import java.util.function.BinaryOperator;
-			import java.util.stream.Stream;
 			
 			@SuppressWarnings("all")
 			public class Test {
 			  public Optional<Boolean> test(final List<Boolean> list) {
-			    Stream<Boolean> _stream = list.stream();
 			    final BinaryOperator<Boolean> _function = (Boolean a, Boolean b) -> {
 			      return Boolean.valueOf(((a).booleanValue() && (b).booleanValue()));
 			    };
-			    return _stream.reduce(_function);
+			    return list.stream().reduce(_function);
 			  }
 			}
 		''')
@@ -153,17 +149,15 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 		'''.assertCompilesTo('''
 			import java.util.List;
 			import java.util.function.Consumer;
-			import java.util.stream.Stream;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
 			
 			@SuppressWarnings("all")
 			public class Test {
 			  public void test(final List<String> list) {
-			    Stream<String> _stream = list.stream();
 			    final Consumer<String> _function = (String it) -> {
 			      InputOutput.<String>println(it);
 			    };
-			    _stream.forEach(_function);
+			    list.stream().forEach(_function);
 			  }
 			}
 		''')
@@ -254,8 +248,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			public class Test implements Consumer, java.util.function.Consumer<String> {
 			  @Override
 			  public void accept(final String element) {
-			    java.util.function.Consumer<String> _andThen = java.util.function.Consumer.super.andThen(this);
-			    _andThen.accept("foo");
+			    java.util.function.Consumer.super.andThen(this).accept("foo");
 			  }
 			}
 		''')
@@ -647,7 +640,6 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 		'''.assertCompilesTo('''
 			import java.io.File;
 			import java.io.IOException;
-			import java.util.ArrayList;
 			import java.util.Collections;
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -660,16 +652,14 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  public List<File> bar() {
 			    List<File> _xtrycatchfinallyexpression = null;
 			    try {
-			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("file1.ext");
 			      final Function1<String, File> _function = (String f) -> {
 			        try {
-			          File _file = new File(f);
-			          return _file.getCanonicalFile();
+			          return new File(f).getCanonicalFile();
 			        } catch (Throwable _e) {
 			          throw Exceptions.sneakyThrow(_e);
 			        }
 			      };
-			      _xtrycatchfinallyexpression = ListExtensions.<String, File>map(_newArrayList, _function);
+			      _xtrycatchfinallyexpression = ListExtensions.<String, File>map(CollectionLiterals.<String>newArrayList("file1.ext"), _function);
 			    } catch (final Throwable _t) {
 			      if (_t instanceof IOException) {
 			        final IOException o = (IOException)_t;
@@ -693,7 +683,6 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			 }
 			}
 		'''.assertCompilesTo('''
-			import java.util.ArrayList;
 			import java.util.Map;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -705,7 +694,6 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  public abstract Object getFoo(final String x) throws Exception;
 			  
 			  public Map<Object, String> bar() {
-			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
 			    final Function1<String, Object> _function = (String it) -> {
 			      try {
 			        return this.getFoo(it);
@@ -713,7 +701,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			        throw Exceptions.sneakyThrow(_e);
 			      }
 			    };
-			    return IterableExtensions.<Object, String>toMap(_newArrayList, _function);
+			    return IterableExtensions.<Object, String>toMap(CollectionLiterals.<String>newArrayList(), _function);
 			  }
 			}
 		''')
@@ -1350,7 +1338,6 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-			import java.util.HashSet;
 			import java.util.Set;
 			import org.eclipse.xtext.common.types.JvmTypeParameter;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -1366,8 +1353,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  
 			  @Override
 			  public LightweightTypeReference substitute(final LightweightTypeReference original) {
-			    HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();
-			    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);
+			    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, CollectionLiterals.<JvmTypeParameter>newHashSet());
 			  }
 			  
 			  @Override

@@ -40,8 +40,7 @@ class CompilerBug436302Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public A methodA() {
-			    B _b = new B();
-			    return _b.methodB(this);
+			    return new B().methodB(this);
 			  }
 			}
 		''')

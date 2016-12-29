@@ -124,8 +124,7 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 			        boolean _matched = false;
 			        if (it instanceof Number) {
 			          _matched=true;
-			          String _string = ((Number)it).toString();
-			          list.add(_string);
+			          list.add(((Number)it).toString());
 			        }
 			      }
 			    };

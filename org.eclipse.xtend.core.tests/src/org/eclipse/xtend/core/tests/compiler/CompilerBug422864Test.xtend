@@ -38,15 +38,12 @@ class CompilerBug422864Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Pair<Pair<Integer, Double>, String> test(final L<Pair<Pair<Integer, Double>, String>> l) {
-			    O<Double> _doubleO = O.doubleO();
 			    final Function1<Pair<Pair<Integer, Double>, String>, Double> _function = new Function1<Pair<Pair<Integer, Double>, String>, Double>() {
 			      public Double apply(final Pair<Pair<Integer, Double>, String> it) {
-			        Pair<Integer, Double> _key = it.getKey();
-			        return _key.getValue();
+			        return it.getKey().getValue();
 			      }
 			    };
-			    O<Pair<Pair<Integer, Double>, String>> _c = _doubleO.<Pair<Pair<Integer, Double>, String>>c(_function);
-			    return l.maximum(_c);
+			    return l.maximum(O.doubleO().<Pair<Pair<Integer, Double>, String>>c(_function));
 			  }
 			}
 		''')

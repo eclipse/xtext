@@ -73,9 +73,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<? super Object> _flatMap = this.<String, Object>flatMap(iterable, _function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function1<Object, Integer> _function_1 = new Function1<Object, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -91,7 +88,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.sortBy(_flatMap, _function_1);");
+    _builder_1.append("return IterableExtensions.sortBy(this.<String, Object>flatMap(iterable, _function), _function_1);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -168,9 +165,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<? super Number> _flatMap = this.<String, Number>flatMap(iterable, _function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function1<Object, Integer> _function_1 = new Function1<Object, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -186,7 +180,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.sortBy(_flatMap, _function_1);");
+    _builder_1.append("return IterableExtensions.sortBy(this.<String, Number>flatMap(iterable, _function), _function_1);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -263,9 +257,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<? extends Number> _flatMap = this.<String, Number>flatMap(iterable, _function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function1<Number, Integer> _function_1 = new Function1<Number, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -281,7 +272,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.sortBy(_flatMap, _function_1);");
+    _builder_1.append("return IterableExtensions.sortBy(this.<String, Number>flatMap(iterable, _function), _function_1);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -362,9 +353,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<? extends Integer> _flatMap = this.<String, Integer>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function1<Integer, Integer> _function_1 = new Function1<Integer, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -380,7 +368,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.sortBy(_flatMap, _function_1);");
+    _builder_1.append("return IterableExtensions.sortBy(this.<String, Integer>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function), _function_1);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -461,9 +449,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<? extends Number> _flatMap = this.<String, Number>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function1<Number, Integer> _function_1 = new Function1<Number, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -479,7 +464,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.sortBy(_flatMap, _function_1);");
+    _builder_1.append("return IterableExtensions.sortBy(this.<String, Number>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function), _function_1);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -556,9 +541,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<? extends String> _flatMap = this.<String, String>flatMap(iterable, _function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -574,7 +556,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.sortBy(_flatMap, _function_1);");
+    _builder_1.append("return IterableExtensions.sortBy(this.<String, String>flatMap(iterable, _function), _function_1);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

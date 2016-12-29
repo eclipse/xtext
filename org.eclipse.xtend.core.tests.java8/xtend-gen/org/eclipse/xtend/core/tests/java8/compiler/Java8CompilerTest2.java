@@ -153,9 +153,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Comparator<String> _comparingInt = Comparator.<String>comparingInt(_function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function<String, Integer> _function_1 = (String s) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -165,10 +162,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Comparator<String> _thenComparing = _comparingInt.<Integer>thenComparing(_function_1);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("list.sort(_thenComparing);");
+    _builder_1.append("list.sort(Comparator.<String>comparingInt(_function).<Integer>thenComparing(_function_1));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -254,8 +248,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.function.BinaryOperator;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.stream.Stream;");
-    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -263,9 +255,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Optional<Boolean> test(final List<Boolean> list) {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Stream<Boolean> _stream = list.stream();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final BinaryOperator<Boolean> _function = (Boolean a, Boolean b) -> {");
@@ -277,7 +266,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return _stream.reduce(_function);");
+    _builder_1.append("return list.stream().reduce(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -310,8 +299,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.function.Consumer;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.stream.Stream;");
-    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder_1.newLine();
     _builder_1.newLine();
@@ -323,9 +310,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("public void test(final List<String> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Stream<String> _stream = list.stream();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Consumer<String> _function = (String it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -335,7 +319,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("_stream.forEach(_function);");
+    _builder_1.append("list.stream().forEach(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -529,10 +513,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("public void accept(final String element) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("java.util.function.Consumer<String> _andThen = java.util.function.Consumer.super.andThen(this);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("_andThen.accept(\"foo\");");
+    _builder_1.append("java.util.function.Consumer.super.andThen(this).accept(\"foo\");");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1448,8 +1429,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.io.IOException;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
     _builder_1.newLine();
     _builder_1.append("import java.util.List;");
@@ -1477,19 +1456,13 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(\"file1.ext\");");
-    _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.append("final Function1<String, File> _function = (String f) -> {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("File _file = new File(f);");
-    _builder_1.newLine();
-    _builder_1.append("          ");
-    _builder_1.append("return _file.getCanonicalFile();");
+    _builder_1.append("return new File(f).getCanonicalFile();");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("} catch (Throwable _e) {");
@@ -1504,7 +1477,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xtrycatchfinallyexpression = ListExtensions.<String, File>map(_newArrayList, _function);");
+    _builder_1.append("_xtrycatchfinallyexpression = ListExtensions.<String, File>map(CollectionLiterals.<String>newArrayList(\"file1.ext\"), _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("} catch (final Throwable _t) {");
@@ -1562,8 +1535,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Map;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
@@ -1588,9 +1559,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("public Map<Object, String> bar() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function1<String, Object> _function = (String it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -1612,7 +1580,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.<Object, String>toMap(_newArrayList, _function);");
+    _builder_1.append("return IterableExtensions.<Object, String>toMap(CollectionLiterals.<String>newArrayList(), _function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -3022,8 +2990,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.util.HashSet;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Set;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.common.types.JvmTypeParameter;");
@@ -3059,10 +3025,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("public LightweightTypeReference substitute(final LightweightTypeReference original) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);");
+    _builder_1.append("return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, CollectionLiterals.<JvmTypeParameter>newHashSet());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -56,9 +56,6 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<String> m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Ordering<Integer> _natural = Ordering.<Integer>natural();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function<String, Integer> _function = new Function<String, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -72,9 +69,6 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Ordering<String> _onResultOf = _natural.<String>onResultOf(_function);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function<String, String> _function_1 = new Function<String, String>() {");
@@ -92,10 +86,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Ordering<String> _onResultOf_1 = _onResultOf.<String>onResultOf(_function_1);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.<String>sortWith(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"a\", \"aa\", \"aaa\")), _onResultOf_1);");
+    _builder_1.append("return IterableExtensions.<String>sortWith(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"a\", \"aa\", \"aaa\")), Ordering.<Integer>natural().<String>onResultOf(_function).<String>onResultOf(_function_1));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -161,9 +152,6 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void m(final C.Sortable<String> sortMe) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Ordering<Integer> _natural = Ordering.<Integer>natural();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function<String, Integer> _function = new Function<String, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -177,9 +165,6 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Ordering<String> _onResultOf = _natural.<String>onResultOf(_function);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function<String, String> _function_1 = new Function<String, String>() {");
@@ -197,10 +182,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Ordering<String> _onResultOf_1 = _onResultOf.<String>onResultOf(_function_1);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("sortMe.sort(_onResultOf_1);");
+    _builder_1.append("sortMe.sort(Ordering.<Integer>natural().<String>onResultOf(_function).<String>onResultOf(_function_1));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -339,9 +321,6 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function1<String, String> _function_1 = new Function1<String, String>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -357,10 +336,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("sortMe.sort(_thenComparing2);");
+    _builder_1.append("sortMe.sort(C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -499,9 +475,6 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function1<String, String> _function_1 = new Function1<String, String>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -517,10 +490,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("sortMe.sort(_thenComparing2);");
+    _builder_1.append("sortMe.sort(C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -659,9 +629,6 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Function1<String, String> _function_1 = new Function1<String, String>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -677,10 +644,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("sortMe.sort(_thenComparing2);");
+    _builder_1.append("sortMe.sort(C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -831,9 +795,6 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _comparingInt = C.MyComparator.<String>comparingInt(_function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final C.Function<String, String> _function_1 = new C.Function<String, String>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -849,7 +810,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return _comparingInt.<String>thenComparing(_function_1);");
+    _builder_1.append("return C.MyComparator.<String>comparingInt(_function).<String>thenComparing(_function_1);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -112,7 +112,6 @@ class CompilerBug447551Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.io.IOException;
-			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
 			import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -134,8 +133,7 @@ class CompilerBug447551Test extends AbstractXtendCompilerTest {
 			  public final C.E<Object> e = new Function0<C.E<Object>>() {
 			    public C.E<Object> apply() {
 			      try {
-			        ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-			        C.E<Object> _copy = C.E.<Object>copy(_newArrayList);
+			        C.E<Object> _copy = C.E.<Object>copy(CollectionLiterals.<Object>newArrayList());
 			        return _copy;
 			      } catch (Throwable _e) {
 			        throw Exceptions.sneakyThrow(_e);

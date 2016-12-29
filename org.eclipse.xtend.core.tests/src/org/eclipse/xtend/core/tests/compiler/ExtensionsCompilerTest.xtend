@@ -789,21 +789,19 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 					}
 				}
 			''', '''
-				import java.util.ArrayList;
 				import java.util.function.Consumer;
 				import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 				import org.eclipse.xtext.xbase.lib.Extension;
-
+				
 				@SuppressWarnings("all")
 				public class C {
 				  public void m(final int it) {
-				    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
 				    final Consumer<String> _function = new Consumer<String>() {
 				      public void accept(@Extension final String s) {
 				        s.substring(it);
 				      }
 				    };
-				    _newArrayList.forEach(_function);
+				    CollectionLiterals.<String>newArrayList().forEach(_function);
 				  }
 				}
 			''')
@@ -908,8 +906,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public String m2() {
-			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar");
-			    return this.<String>at(((String[])Conversions.unwrapArray(_newArrayList, String.class)), 2);
+			    return this.<String>at(((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("foo", "bar"), String.class)), 2);
 			  }
 			  
 			  public ArrayList<String> m3() {
@@ -943,8 +940,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public String m(final Pair<String, String> in) {
-			    Pair<String, String> _mappedTo = Pair.<String, String>of("", "");
-			    return this.m(_mappedTo);
+			    return this.m(Pair.<String, String>of("", ""));
 			  }
 			}
 		''')
@@ -964,8 +960,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public String m(final Pair<String, String> in) {
-			    Pair<String, String> _mappedTo = Pair.<String, String>of(null, null);
-			    return this.m(_mappedTo);
+			    return this.m(Pair.<String, String>of(null, null));
 			  }
 			}
 		''')
@@ -1025,8 +1020,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public <T extends Object> T m(final Pair<T, T> in) {
-			    Pair<T, T> _mappedTo = Pair.<T, T>of(null, null);
-			    return this.<T>m(_mappedTo);
+			    return this.<T>m(Pair.<T, T>of(null, null));
 			  }
 			}
 		''')
@@ -1046,8 +1040,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public <T extends Object> String m(final Pair<T, T> in) {
-			    Pair<String, String> _mappedTo = Pair.<String, String>of("", "");
-			    return this.<String>m(_mappedTo);
+			    return this.<String>m(Pair.<String, String>of("", ""));
 			  }
 			}
 		''')
@@ -1087,8 +1080,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public <T extends CharSequence> T m(final Pair<T, T> in) {
-			    Pair<T, T> _mappedTo = Pair.<T, T>of(null, null);
-			    return this.<T>m(_mappedTo);
+			    return this.<T>m(Pair.<T, T>of(null, null));
 			  }
 			}
 		''')
@@ -1110,8 +1102,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public String m(final Pair<String, String> in) {
 			    StringConcatenation _builder = new StringConcatenation();
-			    Pair<String, String> _mappedTo = Pair.<String, String>of("", _builder.toString());
-			    return this.m(_mappedTo);
+			    return this.m(Pair.<String, String>of("", _builder.toString()));
 			  }
 			}
 		''')
@@ -1153,8 +1144,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			  public <T extends Object> String m(final Pair<T, T> it) {
 			    T _key = it.getKey();
 			    T _value = it.getValue();
-			    Pair<T, T> _mappedTo = Pair.<T, T>of(_key, _value);
-			    return this.<T>m(_mappedTo);
+			    return this.<T>m(Pair.<T, T>of(_key, _value));
 			  }
 			}
 		''')

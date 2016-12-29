@@ -184,9 +184,7 @@ class CompilerBug465649Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static int m() {
-			    Object[] _newArray = C.<Object>newArray(Integer.valueOf(1), "1");
-			    Object _get = _newArray[0];
-			    return ((Comparable<?>)_get).compareTo(null);
+			    return ((Comparable<?>)C.<Object>newArray(Integer.valueOf(1), "1")[0]).compareTo(null);
 			  }
 			}
 		''')

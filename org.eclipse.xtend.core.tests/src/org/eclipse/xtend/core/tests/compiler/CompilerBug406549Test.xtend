@@ -31,8 +31,7 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public void n() {
-			    Test<Object> _test = new Test<Object>();
-			    _test.m(Long.valueOf(1L));
+			    new Test<Object>().m(Long.valueOf(1L));
 			  }
 			}
 		''')
@@ -62,8 +61,7 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			  public void m(final T a, final T b) {
 			    final Procedure1<Test<T>> _function = new Procedure1<Test<T>>() {
 			      public void apply(final Test<T> it) {
-			        Test<T> _test = new Test<T>();
-			        _test.m(a, b);
+			        new Test<T>().m(a, b);
 			      }
 			    };
 			    ObjectExtensions.<Test<T>>operator_doubleArrow(this, _function);

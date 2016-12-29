@@ -28,12 +28,12 @@ public class XtendInstallDebugInfoMojoIT {
 				"// test {\n" + 
 				"  package test; // XtendA$1.class\n" + 
 				"  class XtendA$1 {\n" + 
-				"    void <init>() { // XtendA.java:13\n" + 
-				"      // XtendA.java:13 -> XtendA.xtend:6\n" + 
+				"    void <init>() { // XtendA.java:16\n" + 
+				"      // XtendA.java:16 -> XtendA.xtend:6\n" + 
 				"      void this;\n" + 
 				"    }\n" + 
-				"    void apply() { // XtendA.java:15\n" + 
-				"      // XtendA.java:15 -> XtendA.xtend:6\n" + 
+				"    void apply() { // XtendA.java:18\n" + 
+				"      // XtendA.java:18 -> XtendA.xtend:6\n" + 
 				"      void this;\n" + 
 				"      void it;\n" + 
 				"    }\n" + 
@@ -41,10 +41,13 @@ public class XtendInstallDebugInfoMojoIT {
 				"  \n" + 
 				"  package test; // XtendA.class\n" + 
 				"  class XtendA {\n" + 
-				"    void <init>() { // XtendA.java:11\n" + 
-				"      // XtendA.java:12 -> XtendA.xtend:5\n" + 
-				"      // XtendA.java:13:17 -> XtendA.xtend:6\n" + 
+				"    void <init>() { // XtendA.java:13\n" + 
+				"      // XtendA.java:14 -> XtendA.xtend:5\n" + 
+				"      // XtendA.java:15:22 -> XtendA.xtend:6\n" + 
 				"      void this;\n" + 
+				"      void _newArrayList;\n" + 
+				"      void _function;\n" + 
+				"      void _map;\n" + 
 				"    }\n" + 
 				"  }\n" + 
 				"  \n" + 

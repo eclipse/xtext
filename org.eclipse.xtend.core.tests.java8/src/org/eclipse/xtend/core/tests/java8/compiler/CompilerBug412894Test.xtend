@@ -120,8 +120,7 @@ class CompilerBug412894Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			      boolean _matched = false;
 			      if (it instanceof Number) {
 			        _matched=true;
-			        String _string = ((Number)it).toString();
-			        list.add(_string);
+			        list.add(((Number)it).toString());
 			      }
 			    };
 			    list.forEach(_function);

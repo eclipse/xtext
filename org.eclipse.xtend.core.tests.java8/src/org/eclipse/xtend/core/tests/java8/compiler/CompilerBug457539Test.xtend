@@ -181,8 +181,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
-			    CharSequence _get = list.get();
-			    _get.toString();
+			    list.get().toString();
 			    list.add("");
 			    final Consumer<CharSequence> _function = (CharSequence it) -> {
 			    };
@@ -225,8 +224,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
-			    CharSequence _get = list.get();
-			    _get.toString();
+			    list.get().toString();
 			    final Consumer<CharSequence> _function = (CharSequence it) -> {
 			      if ((it instanceof String)) {
 			        list.add(it);
@@ -356,13 +354,12 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  
 			  public void m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
-			    C.MyIterable<StringBuilder> _newIterable = C.<StringBuilder>newIterable(_stringBuilder);
 			    final Procedure1<StringBuilder> _function = (StringBuilder it) -> {
 			      Long _long = new Long(0);
 			      this.<Serializable>m(it, _long);
 			      InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			    };
-			    _newIterable.forEach2(_function);
+			    C.<StringBuilder>newIterable(_stringBuilder).forEach2(_function);
 			  }
 			  
 			  public <T extends Object> Object m(final T a, final T b) {

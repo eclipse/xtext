@@ -32,8 +32,7 @@ class CompilerBug440902Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C implements I {
 			  public String m2(final Object o) {
-			    String _m = this.m();
-			    return _m.toString();
+			    return this.m().toString();
 			  }
 			  
 			  public String m() {

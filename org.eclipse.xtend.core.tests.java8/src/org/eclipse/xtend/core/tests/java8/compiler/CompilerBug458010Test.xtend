@@ -92,9 +92,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -193,7 +191,6 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.util.function.Consumer;
 			import java.util.function.Function;
 			import java.util.function.Predicate;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -218,9 +215,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -262,19 +257,16 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
-			    Stream<Demo.Person> _stream = roster.stream();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
 			      return ((Objects.equal(it.gender, Demo.Person.Sex.MALE) && (it.getAge() >= 18)) && (it.getAge() <= 25));
 			    };
-			    Stream<Demo.Person> _filter = _stream.filter(_function);
 			    final Function<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.emailAddress;
 			    };
-			    Stream<String> _map = _filter.<String>map(_function_1);
 			    final Consumer<String> _function_2 = (String it) -> {
 			      InputOutput.<String>println(it);
 			    };
-			    _map.forEach(_function_2);
+			    roster.stream().filter(_function).<String>map(_function_1).forEach(_function_2);
 			  }
 			}
 		''')
@@ -343,9 +335,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -390,15 +380,13 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    final Function1<Demo.Person, Boolean> _function = (Demo.Person it) -> {
 			      return Boolean.valueOf(((Objects.equal(it.gender, Demo.Person.Sex.MALE) && (it.getAge() >= 18)) && (it.getAge() <= 25)));
 			    };
-			    Iterable<Demo.Person> _filter = IterableExtensions.<Demo.Person>filter(roster, _function);
 			    final Function1<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.emailAddress;
 			    };
-			    Iterable<String> _map = IterableExtensions.<Demo.Person, String>map(_filter, _function_1);
 			    final Consumer<String> _function_2 = (String it) -> {
 			      InputOutput.<String>println(it);
 			    };
-			    _map.forEach(_function_2);
+			    IterableExtensions.<Demo.Person, String>map(IterableExtensions.<Demo.Person>filter(roster, _function), _function_1).forEach(_function_2);
 			  }
 			}
 		''')
@@ -442,11 +430,8 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.ArrayList;
-			import java.util.OptionalDouble;
 			import java.util.function.Predicate;
 			import java.util.function.ToIntFunction;
-			import java.util.stream.IntStream;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -470,9 +455,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -514,17 +497,13 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
-			    Stream<Demo.Person> _stream = roster.stream();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
 			      return Objects.equal(it.gender, Demo.Person.Sex.MALE);
 			    };
-			    Stream<Demo.Person> _filter = _stream.filter(_function);
 			    final ToIntFunction<Demo.Person> _function_1 = (Demo.Person it) -> {
 			      return it.getAge();
 			    };
-			    IntStream _mapToInt = _filter.mapToInt(_function_1);
-			    OptionalDouble _average = _mapToInt.average();
-			    _average.getAsDouble();
+			    roster.stream().filter(_function).mapToInt(_function_1).average().getAsDouble();
 			  }
 			}
 		''')
@@ -568,7 +547,6 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.util.ArrayList;
 			import java.util.function.BinaryOperator;
 			import java.util.function.Function;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -592,9 +570,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -636,15 +612,13 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
-			    Stream<Demo.Person> _stream = roster.stream();
 			    final Function<Demo.Person, Integer> _function = (Demo.Person it) -> {
 			      return Integer.valueOf(it.getAge());
 			    };
-			    Stream<Integer> _map = _stream.<Integer>map(_function);
 			    final BinaryOperator<Integer> _function_1 = (Integer $0, Integer $1) -> {
 			      return Integer.valueOf((($0).intValue() + ($1).intValue()));
 			    };
-			    _map.reduce(Integer.valueOf(0), _function_1);
+			    roster.stream().<Integer>map(_function).reduce(Integer.valueOf(0), _function_1);
 			  }
 			}
 		''')
@@ -711,7 +685,6 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.util.function.IntConsumer;
 			import java.util.function.Predicate;
 			import java.util.function.Supplier;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -769,9 +742,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -813,15 +784,12 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
-			    Stream<Demo.Person> _stream = roster.stream();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
 			      return Objects.equal(it.gender, Demo.Person.Sex.MALE);
 			    };
-			    Stream<Demo.Person> _filter = _stream.filter(_function);
 			    final Function<Demo.Person, Integer> _function_1 = (Demo.Person it) -> {
 			      return Integer.valueOf(it.getAge());
 			    };
-			    Stream<Integer> _map = _filter.<Integer>map(_function_1);
 			    final Supplier<Demo.Averager> _function_2 = () -> {
 			      return new Demo.Averager();
 			    };
@@ -831,7 +799,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    final BiConsumer<Demo.Averager, Demo.Averager> _function_4 = (Demo.Averager avg1, Demo.Averager avg2) -> {
 			      avg1.combine(avg2);
 			    };
-			    _map.<Demo.Averager>collect(_function_2, _function_3, _function_4);
+			    roster.stream().filter(_function).<Integer>map(_function_1).<Demo.Averager>collect(_function_2, _function_3, _function_4);
 			  }
 			}
 		''')
@@ -897,7 +865,6 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.util.function.IntConsumer;
 			import java.util.function.Predicate;
 			import java.util.function.Supplier;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -955,9 +922,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -998,15 +963,12 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final Demo.Person[] roster) {
-			    Stream<Demo.Person> _stream = ((List<Demo.Person>)Conversions.doWrapArray(roster)).stream();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
 			      return Objects.equal(it.gender, Demo.Person.Sex.MALE);
 			    };
-			    Stream<Demo.Person> _filter = _stream.filter(_function);
 			    final Function<Demo.Person, Integer> _function_1 = (Demo.Person it) -> {
 			      return Integer.valueOf(it.getAge());
 			    };
-			    Stream<Integer> _map = _filter.<Integer>map(_function_1);
 			    final Supplier<Demo.Averager> _function_2 = () -> {
 			      return new Demo.Averager();
 			    };
@@ -1016,7 +978,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    final BiConsumer<Demo.Averager, Demo.Averager> _function_4 = (Demo.Averager $0, Demo.Averager $1) -> {
 			      $0.combine($1);
 			    };
-			    _map.<Demo.Averager>collect(_function_2, _function_3, _function_4);
+			    ((List<Demo.Person>)Conversions.doWrapArray(roster)).stream().filter(_function).<Integer>map(_function_1).<Demo.Averager>collect(_function_2, _function_3, _function_4);
 			  }
 			}
 		''')
@@ -1060,12 +1022,9 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.ArrayList;
-			import java.util.List;
 			import java.util.function.Function;
 			import java.util.function.Predicate;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -1089,9 +1048,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -1133,17 +1090,13 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
-			    Stream<Demo.Person> _stream = roster.stream();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
 			      return Objects.equal(it.gender, Demo.Person.Sex.MALE);
 			    };
-			    Stream<Demo.Person> _filter = _stream.filter(_function);
 			    final Function<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.name;
 			    };
-			    Stream<String> _map = _filter.<String>map(_function_1);
-			    Collector<String, ?, List<String>> _list = Collectors.<String>toList();
-			    _map.collect(_list);
+			    roster.stream().filter(_function).<String>map(_function_1).collect(Collectors.<String>toList());
 			  }
 			}
 		''')
@@ -1192,9 +1145,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.util.List;
 			import java.util.Map;
 			import java.util.function.Function;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -1218,9 +1169,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -1262,17 +1211,16 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
-			    Stream<Demo.Person> _stream = roster.stream();
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
 			    final Function<Demo.Person, String> _function_1 = (Demo.Person p) -> {
 			      return p.name;
 			    };
-			    Collector<String, ?, List<String>> _list = Collectors.<String>toList();
-			    Collector<Demo.Person, ?, List<String>> _mapping = Collectors.mapping(_function_1, _list);
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, List<String>>> _groupingBy = Collectors.groupingBy(_function, _mapping);
-			    final Map<Demo.Person.Sex, List<String>> namesByGender = _stream.collect(_groupingBy);
+			    final Map<Demo.Person.Sex, List<String>> namesByGender = roster.stream().collect(
+			      Collectors.groupingBy(_function, 
+			        Collectors.mapping(_function_1, 
+			          Collectors.<String>toList())));
 			  }
 			}
 		''')
@@ -1321,9 +1269,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.util.List;
 			import java.util.Map;
 			import java.util.function.Function;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -1347,9 +1293,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -1391,17 +1335,16 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
-			    Stream<Demo.Person> _stream = roster.stream();
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
 			    final Function<Demo.Person, String> _function_1 = (Demo.Person p) -> {
 			      return p.name;
 			    };
-			    Collector<String, ?, List<String>> _list = Collectors.<String>toList();
-			    Collector<Demo.Person, ?, List<String>> _mapping = Collectors.mapping(_function_1, _list);
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, List<String>>> _groupingBy = Collectors.groupingBy(_function, _mapping);
-			    final Map<Demo.Person.Sex, List<String>> namesByGender = _stream.collect(_groupingBy);
+			    final Map<Demo.Person.Sex, List<String>> namesByGender = roster.stream().collect(
+			      Collectors.groupingBy(_function, 
+			        Collectors.mapping(_function_1, 
+			          Collectors.<String>toList())));
 			  }
 			}
 		''')
@@ -1448,12 +1391,9 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.ArrayList;
-			import java.util.Map;
 			import java.util.function.BinaryOperator;
 			import java.util.function.Function;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -1477,9 +1417,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -1521,7 +1459,6 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
-			    Stream<Demo.Person> _stream = roster.stream();
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
@@ -1531,10 +1468,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    final BinaryOperator<Integer> _function_2 = (Integer $0, Integer $1) -> {
 			      return Integer.valueOf((($0).intValue() + ($1).intValue()));
 			    };
-			    Collector<Demo.Person, ?, Integer> _reducing = Collectors.<Demo.Person, Integer>reducing(
-			      Integer.valueOf(0), _function_1, _function_2);
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Integer>> _groupingBy = Collectors.groupingBy(_function, _reducing);
-			    _stream.collect(_groupingBy);
+			    roster.stream().collect(
+			      Collectors.groupingBy(_function, 
+			        Collectors.<Demo.Person, Integer>reducing(
+			          Integer.valueOf(0), _function_1, _function_2)));
 			  }
 			}
 		''')
@@ -1581,12 +1518,9 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.ArrayList;
-			import java.util.Map;
 			import java.util.function.BinaryOperator;
 			import java.util.function.Function;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -1610,9 +1544,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -1654,7 +1586,6 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
-			    Stream<Demo.Person> _stream = roster.stream();
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
@@ -1664,10 +1595,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    final BinaryOperator<Integer> _function_2 = (Integer $0, Integer $1) -> {
 			      return Integer.valueOf((($0).intValue() + ($1).intValue()));
 			    };
-			    Collector<Demo.Person, ?, Integer> _reducing = Collectors.<Demo.Person, Integer>reducing(
-			      Integer.valueOf(0), _function_1, _function_2);
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Integer>> _groupingBy = Collectors.groupingBy(_function, _reducing);
-			    _stream.collect(_groupingBy);
+			    roster.stream().collect(
+			      Collectors.groupingBy(_function, 
+			        Collectors.<Demo.Person, Integer>reducing(
+			          Integer.valueOf(0), _function_1, _function_2)));
 			  }
 			}
 		''')
@@ -1714,9 +1645,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.util.Map;
 			import java.util.function.Function;
 			import java.util.function.ToIntFunction;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -1740,9 +1669,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -1784,16 +1711,15 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
-			    Stream<Demo.Person> _stream = roster.stream();
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
 			    final ToIntFunction<Demo.Person> _function_1 = (Demo.Person it) -> {
 			      return it.getAge();
 			    };
-			    Collector<Demo.Person, ?, Double> _averagingInt = Collectors.<Demo.Person>averagingInt(_function_1);
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Double>> _groupingBy = Collectors.groupingBy(_function, _averagingInt);
-			    final Map<Demo.Person.Sex, Double> averageAgeByGender = _stream.collect(_groupingBy);
+			    final Map<Demo.Person.Sex, Double> averageAgeByGender = roster.stream().collect(
+			      Collectors.groupingBy(_function, 
+			        Collectors.<Demo.Person>averagingInt(_function_1)));
 			  }
 			}
 		''')
@@ -1828,12 +1754,9 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.ArrayList;
-			import java.util.Map;
 			import java.util.function.Function;
 			import java.util.function.ToIntFunction;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -1866,15 +1789,15 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
-			    Stream<Demo.Person> _stream = roster.stream();
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Double>> _groupingBy = Collectors.groupingBy(_function, 
-			      Collectors.<Demo.Person>averagingInt(((ToIntFunction<Demo.Person>) (Demo.Person it) -> {
-			        return it.getAge();
-			      })));
-			    _stream.collect(_groupingBy);
+			    final ToIntFunction<Demo.Person> _function_1 = (Demo.Person it) -> {
+			      return it.getAge();
+			    };
+			    roster.stream().collect(
+			      Collectors.groupingBy(_function, 
+			        Collectors.<Demo.Person>averagingInt(_function_1)));
 			  }
 			}
 		''')
@@ -1917,12 +1840,9 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.List;
-			import java.util.Map;
 			import java.util.function.Function;
 			import java.util.function.ToIntFunction;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -1946,9 +1866,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -1989,15 +1907,15 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final Demo.Person[] roster) {
-			    Stream<Demo.Person> _stream = ((List<Demo.Person>)Conversions.doWrapArray(roster)).stream();
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Double>> _groupingBy = Collectors.groupingBy(_function, 
-			      Collectors.<Demo.Person>averagingInt(((ToIntFunction<Demo.Person>) (Demo.Person it) -> {
-			        return it.getAge();
-			      })));
-			    _stream.collect(_groupingBy);
+			    final ToIntFunction<Demo.Person> _function_1 = (Demo.Person it) -> {
+			      return it.getAge();
+			    };
+			    ((List<Demo.Person>)Conversions.doWrapArray(roster)).stream().collect(
+			      Collectors.groupingBy(_function, 
+			        Collectors.<Demo.Person>averagingInt(_function_1)));
 			  }
 			}
 		''')
@@ -2042,12 +1960,9 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.Arrays;
-			import java.util.Map;
 			import java.util.function.Function;
 			import java.util.function.ToIntFunction;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.Pure;
 			
@@ -2070,9 +1985,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -2113,15 +2026,15 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final Demo.Person[] roster) {
-			    Stream<Demo.Person> _stream = Arrays.<Demo.Person>stream(roster);
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Double>> _groupingBy = Collectors.groupingBy(_function, 
-			      Collectors.<Demo.Person>averagingInt(((ToIntFunction<Demo.Person>) (Demo.Person it) -> {
-			        return it.getAge();
-			      })));
-			    _stream.collect(_groupingBy);
+			    final ToIntFunction<Demo.Person> _function_1 = (Demo.Person it) -> {
+			      return it.getAge();
+			    };
+			    Arrays.<Demo.Person>stream(roster).collect(
+			      Collectors.groupingBy(_function, 
+			        Collectors.<Demo.Person>averagingInt(_function_1)));
 			  }
 			}
 		''')
@@ -2166,12 +2079,9 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.Arrays;
-			import java.util.Map;
 			import java.util.function.Function;
 			import java.util.function.ToIntFunction;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.Pure;
 			
@@ -2194,9 +2104,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    private String emailAddress;
 			    
 			    public int getAge() {
-			      LocalDate _now = LocalDate.now();
-			      Period _between = Period.between(this.birthday, _now);
-			      return _between.getYears();
+			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
 			    
 			    @Pure
@@ -2237,16 +2145,15 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final Demo.Person[] roster) {
-			    Stream<Demo.Person> _stream = Arrays.<Demo.Person>stream(roster);
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
 			    final ToIntFunction<Demo.Person> _function_1 = (Demo.Person it) -> {
 			      return it.getAge();
 			    };
-			    Collector<Demo.Person, ?, Double> _averagingInt = Collectors.<Demo.Person>averagingInt(_function_1);
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Double>> _groupingBy = Collectors.groupingBy(_function, _averagingInt);
-			    _stream.collect(_groupingBy);
+			    Arrays.<Demo.Person>stream(roster).collect(
+			      Collectors.groupingBy(_function, 
+			        Collectors.<Demo.Person>averagingInt(_function_1)));
 			  }
 			}
 		''')
@@ -2336,12 +2243,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    final Function1<Demo.Person, Boolean> _function = (Demo.Person it) -> {
 			      return Boolean.valueOf(Objects.equal(it.gender, Demo.Person.Sex.MALE));
 			    };
-			    Iterable<Demo.Person> _filter = IterableExtensions.<Demo.Person>filter(roster, _function);
 			    final Function1<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.name;
 			    };
-			    Iterable<String> _map = IterableExtensions.<Demo.Person, String>map(_filter, _function_1);
-			    final List<String> namesOfMaleMembersXtend = IterableExtensions.<String>toList(_map);
+			    final List<String> namesOfMaleMembersXtend = IterableExtensions.<String>toList(IterableExtensions.<Demo.Person, String>map(IterableExtensions.<Demo.Person>filter(roster, _function), _function_1));
 			  }
 			}
 		''')
@@ -2427,12 +2332,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    final Function1<Demo.Person, Boolean> _function = (Demo.Person it) -> {
 			      return Boolean.valueOf(Objects.equal(it.gender, Demo.Person.Sex.MALE));
 			    };
-			    Iterable<Demo.Person> _filter = IterableExtensions.<Demo.Person>filter(((Iterable<Demo.Person>)Conversions.doWrapArray(roster)), _function);
 			    final Function1<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.name;
 			    };
-			    Iterable<String> _map = IterableExtensions.<Demo.Person, String>map(_filter, _function_1);
-			    IterableExtensions.<String>toList(_map);
+			    IterableExtensions.<String>toList(IterableExtensions.<Demo.Person, String>map(IterableExtensions.<Demo.Person>filter(((Iterable<Demo.Person>)Conversions.doWrapArray(roster)), _function), _function_1));
 			  }
 			}
 		''')
@@ -2471,9 +2374,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.util.List;
 			import java.util.function.Function;
 			import java.util.function.Predicate;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -2521,22 +2422,16 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Album> albums = CollectionLiterals.<Demo.Album>newArrayList();
-			    Stream<Demo.Album> _stream = albums.stream();
 			    final Predicate<Demo.Album> _function = (Demo.Album it) -> {
-			      Stream<Demo.Track> _stream_1 = it.tracks.stream();
 			      final Predicate<Demo.Track> _function_1 = (Demo.Track it_1) -> {
 			        return (it_1.rating >= 4);
 			      };
-			      return _stream_1.anyMatch(_function_1);
+			      return it.tracks.stream().anyMatch(_function_1);
 			    };
-			    Stream<Demo.Album> _filter = _stream.filter(_function);
 			    final Function<Demo.Album, String> _function_1 = (Demo.Album it) -> {
 			      return it.name;
 			    };
-			    Comparator<Demo.Album> _comparing = Comparator.<Demo.Album, String>comparing(_function_1);
-			    Stream<Demo.Album> _sorted = _filter.sorted(_comparing);
-			    Collector<Demo.Album, ?, List<Demo.Album>> _list = Collectors.<Demo.Album>toList();
-			    final List<Demo.Album> sortedFavs = _sorted.collect(_list);
+			    final List<Demo.Album> sortedFavs = albums.stream().filter(_function).sorted(Comparator.<Demo.Album, String>comparing(_function_1)).collect(Collectors.<Demo.Album>toList());
 			  }
 			}
 		''')
@@ -2573,9 +2468,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.util.List;
 			import java.util.function.Function;
 			import java.util.function.Predicate;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -2622,22 +2515,16 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final Demo.Album[] albums) {
-			    Stream<Demo.Album> _stream = ((List<Demo.Album>)Conversions.doWrapArray(albums)).stream();
 			    final Predicate<Demo.Album> _function = (Demo.Album it) -> {
-			      Stream<Demo.Track> _stream_1 = it.tracks.stream();
 			      final Predicate<Demo.Track> _function_1 = (Demo.Track it_1) -> {
 			        return (it_1.rating >= 4);
 			      };
-			      return _stream_1.anyMatch(_function_1);
+			      return it.tracks.stream().anyMatch(_function_1);
 			    };
-			    Stream<Demo.Album> _filter = _stream.filter(_function);
 			    final Function<Demo.Album, String> _function_1 = (Demo.Album it) -> {
 			      return it.name;
 			    };
-			    Comparator<Demo.Album> _comparing = Comparator.<Demo.Album, String>comparing(_function_1);
-			    Stream<Demo.Album> _sorted = _filter.sorted(_comparing);
-			    Collector<Demo.Album, ?, List<Demo.Album>> _list = Collectors.<Demo.Album>toList();
-			    _sorted.collect(_list);
+			    ((List<Demo.Album>)Conversions.doWrapArray(albums)).stream().filter(_function).sorted(Comparator.<Demo.Album, String>comparing(_function_1)).collect(Collectors.<Demo.Album>toList());
 			  }
 			}
 		''')
@@ -2676,9 +2563,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.util.List;
 			import java.util.function.Function;
 			import java.util.function.Predicate;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -2726,22 +2611,16 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Album> albums = CollectionLiterals.<Demo.Album>newArrayList();
-			    Stream<Demo.Album> _stream = albums.stream();
 			    final Predicate<Demo.Album> _function = (Demo.Album it) -> {
-			      Stream<Demo.Track> _stream_1 = it.tracks.stream();
 			      final Predicate<Demo.Track> _function_1 = (Demo.Track it_1) -> {
 			        return (it_1.rating >= 4);
 			      };
-			      return _stream_1.anyMatch(_function_1);
+			      return it.tracks.stream().anyMatch(_function_1);
 			    };
-			    Stream<Demo.Album> _filter = _stream.filter(_function);
 			    final Function<Demo.Album, String> _function_1 = (Demo.Album it) -> {
 			      return it.name;
 			    };
-			    Comparator<Demo.Album> _comparing = Comparator.<Demo.Album, String>comparing(_function_1);
-			    Stream<Demo.Album> _sorted = _filter.sorted(_comparing);
-			    Collector<Demo.Album, ?, List<Demo.Album>> _list = Collectors.<Demo.Album>toList();
-			    final List<Demo.Album> sortedFavs = _sorted.collect(_list);
+			    final List<Demo.Album> sortedFavs = albums.stream().filter(_function).sorted(Comparator.<Demo.Album, String>comparing(_function_1)).collect(Collectors.<Demo.Album>toList());
 			  }
 			}
 		''')
@@ -2780,9 +2659,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			import java.util.List;
 			import java.util.function.Function;
 			import java.util.function.Predicate;
-			import java.util.stream.Collector;
 			import java.util.stream.Collectors;
-			import java.util.stream.Stream;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			import org.eclipse.xtext.xbase.lib.Pure;
@@ -2829,22 +2706,16 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final Demo.Album[] albums) {
-			    Stream<Demo.Album> _stream = ((List<Demo.Album>)Conversions.doWrapArray(albums)).stream();
 			    final Predicate<Demo.Album> _function = (Demo.Album it) -> {
-			      Stream<Demo.Track> _stream_1 = it.tracks.stream();
 			      final Predicate<Demo.Track> _function_1 = (Demo.Track it_1) -> {
 			        return (it_1.rating >= 4);
 			      };
-			      return _stream_1.anyMatch(_function_1);
+			      return it.tracks.stream().anyMatch(_function_1);
 			    };
-			    Stream<Demo.Album> _filter = _stream.filter(_function);
 			    final Function<Demo.Album, String> _function_1 = (Demo.Album it) -> {
 			      return it.name;
 			    };
-			    Comparator<Demo.Album> _comparing = Comparator.<Demo.Album, String>comparing(_function_1);
-			    Stream<Demo.Album> _sorted = _filter.sorted(_comparing);
-			    Collector<Demo.Album, ?, List<Demo.Album>> _list = Collectors.<Demo.Album>toList();
-			    _sorted.collect(_list);
+			    ((List<Demo.Album>)Conversions.doWrapArray(albums)).stream().filter(_function).sorted(Comparator.<Demo.Album, String>comparing(_function_1)).collect(Collectors.<Demo.Album>toList());
 			  }
 			}
 		''')
@@ -2929,11 +2800,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			      };
 			      return Boolean.valueOf(IterableExtensions.<Demo.Track>exists(it.tracks, _function_1));
 			    };
-			    Iterable<Demo.Album> _filter = IterableExtensions.<Demo.Album>filter(albums, _function);
 			    final Function1<Demo.Album, String> _function_1 = (Demo.Album it) -> {
 			      return it.name;
 			    };
-			    IterableExtensions.<Demo.Album, String>sortBy(_filter, _function_1);
+			    IterableExtensions.<Demo.Album, String>sortBy(IterableExtensions.<Demo.Album>filter(albums, _function), _function_1);
 			  }
 			}
 		''')
@@ -3015,11 +2885,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			      };
 			      return Boolean.valueOf(IterableExtensions.<Demo.Track>exists(it.tracks, _function_1));
 			    };
-			    Iterable<Demo.Album> _filter = IterableExtensions.<Demo.Album>filter(((Iterable<Demo.Album>)Conversions.doWrapArray(albums)), _function);
 			    final Function1<Demo.Album, String> _function_1 = (Demo.Album it) -> {
 			      return it.name;
 			    };
-			    IterableExtensions.<Demo.Album, String>sortBy(_filter, _function_1);
+			    IterableExtensions.<Demo.Album, String>sortBy(IterableExtensions.<Demo.Album>filter(((Iterable<Demo.Album>)Conversions.doWrapArray(albums)), _function), _function_1);
 			  }
 			}
 		''')

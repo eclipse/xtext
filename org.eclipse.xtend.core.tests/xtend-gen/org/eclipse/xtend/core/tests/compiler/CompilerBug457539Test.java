@@ -531,10 +531,7 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("CharSequence _get = list.get();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("_get.toString();");
+    _builder_1.append("list.get().toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("list.add(\"\");");
@@ -655,10 +652,7 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("CharSequence _get = list.get();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("_get.toString();");
+    _builder_1.append("list.get().toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Procedure1<CharSequence> _function = new Procedure1<CharSequence>() {");
@@ -1015,9 +1009,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilder _stringBuilder = new StringBuilder();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyIterable<StringBuilder> _newIterable = C.<StringBuilder>newIterable(_stringBuilder);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.append("final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -1039,7 +1030,7 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("_newIterable.forEach2(_function);");
+    _builder_1.append("C.<StringBuilder>newIterable(_stringBuilder).forEach2(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

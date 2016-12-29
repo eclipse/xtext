@@ -63,8 +63,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void m2(final A a) {
-			    B _super = a.getSuper();
-			    _super.m();
+			    a.getSuper().m();
 			  }
 			}
 		''')

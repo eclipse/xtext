@@ -55,10 +55,7 @@ public class CompilerBug406549Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void n() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Test<Object> _test = new Test<Object>();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("_test.m(Long.valueOf(1L));");
+    _builder_1.append("new Test<Object>().m(Long.valueOf(1L));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -124,10 +121,7 @@ public class CompilerBug406549Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void apply(final Test<T> it) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("Test<T> _test = new Test<T>();");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("_test.m(a, b);");
+    _builder_1.append("new Test<T>().m(a, b);");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

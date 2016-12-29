@@ -34,15 +34,12 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public static <T extends Object> ImmutableList<T> m(final List<? extends T> list, final T value) {
-			    ImmutableList.Builder<T> _builder = ImmutableList.<T>builder();
 			    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 			      public Boolean apply(final T it) {
 			        return Boolean.valueOf((!Objects.equal(it, value)));
 			      }
 			    };
-			    Iterable<? extends T> _filter = IterableExtensions.filter(list, _function);
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(_filter);
-			    return _addAll.build();
+			    return ImmutableList.<T>builder().addAll(IterableExtensions.filter(list, _function)).build();
 			  }
 			}
 		''')
@@ -68,15 +65,12 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public static <T extends Object> ImmutableList<T> m(final List<T> list, final T value) {
-			    ImmutableList.Builder<T> _builder = ImmutableList.<T>builder();
 			    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 			      public Boolean apply(final T it) {
 			        return Boolean.valueOf((!Objects.equal(it, value)));
 			      }
 			    };
-			    Iterable<T> _filter = IterableExtensions.<T>filter(list, _function);
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(_filter);
-			    return _addAll.build();
+			    return ImmutableList.<T>builder().addAll(IterableExtensions.<T>filter(list, _function)).build();
 			  }
 			}
 		''')
@@ -102,15 +96,12 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public static <T extends Object> ImmutableList<Object> m(final List<? super T> list, final T value) {
-			    ImmutableList.Builder<Object> _builder = ImmutableList.<Object>builder();
 			    final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
 			      public Boolean apply(final Object it) {
 			        return Boolean.valueOf((!Objects.equal(it, value)));
 			      }
 			    };
-			    Iterable<? super T> _filter = IterableExtensions.filter(list, _function);
-			    ImmutableList.Builder<Object> _addAll = _builder.addAll(_filter);
-			    return _addAll.build();
+			    return ImmutableList.<Object>builder().addAll(IterableExtensions.filter(list, _function)).build();
 			  }
 			}
 		''')
@@ -133,10 +124,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public static <T extends Object> ImmutableList<T> m(final List<? extends T> list) {
-			    ImmutableList.Builder<T> _builder = ImmutableList.<T>builder();
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(list);
-			    ImmutableList.Builder<T> _addAll_1 = _addAll.addAll(list);
-			    return _addAll_1.build();
+			    return ImmutableList.<T>builder().addAll(list).addAll(list).build();
 			  }
 			}
 		''')
@@ -161,16 +149,12 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public static <T extends Object> ImmutableList<T> m(final List<? extends T> list) {
-			    ImmutableList.Builder<T> _builder = ImmutableList.<T>builder();
 			    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 			      public Boolean apply(final T it) {
 			        return Boolean.valueOf(true);
 			      }
 			    };
-			    Iterable<? extends T> _filter = IterableExtensions.filter(list, _function);
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(_filter);
-			    ImmutableList.Builder<T> _addAll_1 = _addAll.addAll(list);
-			    return _addAll_1.build();
+			    return ImmutableList.<T>builder().addAll(IterableExtensions.filter(list, _function)).addAll(list).build();
 			  }
 			}
 		''')
@@ -195,16 +179,12 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public static <T extends Object> ImmutableList<T> m(final List<? extends T> list) {
-			    ImmutableList.Builder<T> _builder = ImmutableList.<T>builder();
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(list);
 			    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 			      public Boolean apply(final T it) {
 			        return Boolean.valueOf(false);
 			      }
 			    };
-			    Iterable<? extends T> _filter = IterableExtensions.filter(list, _function);
-			    ImmutableList.Builder<T> _addAll_1 = _addAll.addAll(_filter);
-			    return _addAll_1.build();
+			    return ImmutableList.<T>builder().addAll(list).addAll(IterableExtensions.filter(list, _function)).build();
 			  }
 			}
 		''')
@@ -229,22 +209,17 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public static <T extends Object> ImmutableList<T> m(final List<? extends T> list) {
-			    ImmutableList.Builder<T> _builder = ImmutableList.<T>builder();
 			    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 			      public Boolean apply(final T it) {
 			        return Boolean.valueOf(true);
 			      }
 			    };
-			    Iterable<? extends T> _filter = IterableExtensions.filter(list, _function);
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(_filter);
 			    final Function1<T, Boolean> _function_1 = new Function1<T, Boolean>() {
 			      public Boolean apply(final T it) {
 			        return Boolean.valueOf(false);
 			      }
 			    };
-			    Iterable<? extends T> _filter_1 = IterableExtensions.filter(list, _function_1);
-			    ImmutableList.Builder<T> _addAll_1 = _addAll.addAll(_filter_1);
-			    return _addAll_1.build();
+			    return ImmutableList.<T>builder().addAll(IterableExtensions.filter(list, _function)).addAll(IterableExtensions.filter(list, _function_1)).build();
 			  }
 			}
 		''')
@@ -270,15 +245,12 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public static <T extends Object> ImmutableList<T> m(final T[] arr, final T value) {
-			    ImmutableList.Builder<T> _builder = ImmutableList.<T>builder();
 			    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 			      public Boolean apply(final T it) {
 			        return Boolean.valueOf((!Objects.equal(it, value)));
 			      }
 			    };
-			    Iterable<T> _filter = IterableExtensions.<T>filter(((Iterable<T>)Conversions.doWrapArray(arr)), _function);
-			    ImmutableList.Builder<T> _addAll = _builder.addAll(_filter);
-			    return _addAll.build();
+			    return ImmutableList.<T>builder().addAll(IterableExtensions.<T>filter(((Iterable<T>)Conversions.doWrapArray(arr)), _function)).build();
 			  }
 			}
 		''')

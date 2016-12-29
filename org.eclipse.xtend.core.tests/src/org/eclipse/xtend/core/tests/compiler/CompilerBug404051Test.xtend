@@ -39,13 +39,12 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
-			    Iterable<? super Object> _flatMap = this.<String, Object>flatMap(iterable, _function);
 			    final Function1<Object, Integer> _function_1 = new Function1<Object, Integer>() {
 			      public Integer apply(final Object it) {
 			        return Integer.valueOf(it.hashCode());
 			      }
 			    };
-			    return IterableExtensions.sortBy(_flatMap, _function_1);
+			    return IterableExtensions.sortBy(this.<String, Object>flatMap(iterable, _function), _function_1);
 			  }
 			  
 			  public <A extends Object, B extends Object> Iterable<? super B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {
@@ -79,13 +78,12 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
-			    Iterable<? super Number> _flatMap = this.<String, Number>flatMap(iterable, _function);
 			    final Function1<Object, Integer> _function_1 = new Function1<Object, Integer>() {
 			      public Integer apply(final Object it) {
 			        return Integer.valueOf(it.hashCode());
 			      }
 			    };
-			    return IterableExtensions.sortBy(_flatMap, _function_1);
+			    return IterableExtensions.sortBy(this.<String, Number>flatMap(iterable, _function), _function_1);
 			  }
 			  
 			  public <A extends Object, B extends Number> Iterable<? super B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {
@@ -119,13 +117,12 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
-			    Iterable<? extends Number> _flatMap = this.<String, Number>flatMap(iterable, _function);
 			    final Function1<Number, Integer> _function_1 = new Function1<Number, Integer>() {
 			      public Integer apply(final Number it) {
 			        return Integer.valueOf(it.intValue());
 			      }
 			    };
-			    return IterableExtensions.sortBy(_flatMap, _function_1);
+			    return IterableExtensions.sortBy(this.<String, Number>flatMap(iterable, _function), _function_1);
 			  }
 			  
 			  public <A extends Object, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {
@@ -161,13 +158,12 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			        return Integer.valueOf(it.length());
 			      }
 			    };
-			    Iterable<? extends Integer> _flatMap = this.<String, Integer>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function);
 			    final Function1<Integer, Integer> _function_1 = new Function1<Integer, Integer>() {
 			      public Integer apply(final Integer it) {
 			        return Integer.valueOf(it.intValue());
 			      }
 			    };
-			    return IterableExtensions.sortBy(_flatMap, _function_1);
+			    return IterableExtensions.sortBy(this.<String, Integer>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function), _function_1);
 			  }
 			  
 			  public <A extends String, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {
@@ -203,13 +199,12 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
-			    Iterable<? extends Number> _flatMap = this.<String, Number>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function);
 			    final Function1<Number, Integer> _function_1 = new Function1<Number, Integer>() {
 			      public Integer apply(final Number it) {
 			        return Integer.valueOf(it.intValue());
 			      }
 			    };
-			    return IterableExtensions.sortBy(_flatMap, _function_1);
+			    return IterableExtensions.sortBy(this.<String, Number>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function), _function_1);
 			  }
 			  
 			  public <A extends String, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {
@@ -243,13 +238,12 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
-			    Iterable<? extends String> _flatMap = this.<String, String>flatMap(iterable, _function);
 			    final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {
 			      public Integer apply(final String it) {
 			        return Integer.valueOf(it.length());
 			      }
 			    };
-			    return IterableExtensions.sortBy(_flatMap, _function_1);
+			    return IterableExtensions.sortBy(this.<String, String>flatMap(iterable, _function), _function_1);
 			  }
 			  
 			  public <A extends Object, B extends A> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {

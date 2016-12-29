@@ -104,10 +104,7 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("protected List<SOE.A> _getList(final SOE.A it) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("SOE.CustomItr _customItr = new SOE.CustomItr();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.<SOE.A>toList(_customItr);");
+    _builder_1.append("return IterableExtensions.<SOE.A>toList(new SOE.CustomItr());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -237,10 +234,7 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("protected List<C> _getList(final C it) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.CustomItr _customItr = new C.CustomItr();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.<C>toList(_customItr);");
+    _builder_1.append("return IterableExtensions.<C>toList(new C.CustomItr());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -394,10 +388,7 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("protected List<SOE.A> _getList(final SOE.A it) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("SOE.CustomItr _customItr = new SOE.CustomItr();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.<SOE.A>toList(_customItr);");
+    _builder_1.append("return IterableExtensions.<SOE.A>toList(new SOE.CustomItr());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -527,10 +518,7 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("protected List<SOE.A> _getList(final SOE.A it) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("SOE.CustomItr _customItr = new SOE.CustomItr();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.<SOE.A>toList(_customItr);");
+    _builder_1.append("return IterableExtensions.<SOE.A>toList(new SOE.CustomItr());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

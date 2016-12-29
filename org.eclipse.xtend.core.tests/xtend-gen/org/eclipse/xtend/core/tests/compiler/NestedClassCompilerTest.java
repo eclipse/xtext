@@ -118,10 +118,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void m2(final A a) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("B _super = a.getSuper();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("_super.m();");
+    _builder_1.append("a.getSuper().m();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

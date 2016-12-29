@@ -33,8 +33,7 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			  private Either<Integer, Boolean> either;
 			  
 			  public Boolean m() {
-			    Either<Integer, Boolean>.RightProjection _right = this.either.right();
-			    return _right.get();
+			    return this.either.right().get();
 			  }
 			}
 		''')
@@ -59,8 +58,7 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			  private Either<Integer, Boolean> either;
 			  
 			  public Integer m() {
-			    Either<Integer, Boolean>.LeftProjection _left = this.either.left();
-			    return _left.get();
+			    return this.either.left().get();
 			  }
 			}
 		''')
@@ -82,14 +80,13 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class EitherTest {
 			  public Boolean m(final Either<Integer, Boolean> it) {
-			    Either<Integer, Boolean>.RightProjection _right = it.right();
 			    final Function<Integer, Boolean> _function = new Function<Integer, Boolean>() {
 			      public Boolean apply(final Integer it) {
 			        int _intValue = it.intValue();
 			        return Boolean.valueOf((_intValue == 0));
 			      }
 			    };
-			    return _right.on(_function);
+			    return it.right().on(_function);
 			  }
 			}
 		''')
@@ -110,9 +107,7 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class EitherTest {
 			  public Either<Integer, Boolean>.RightProjection m(final Either<Integer, Boolean> it) {
-			    Either<Integer, Boolean>.LeftProjection _left = it.left();
-			    Either<Integer, Boolean> _either = _left.either();
-			    return _either.right();
+			    return it.left().either().right();
 			  }
 			}
 		''')
@@ -129,14 +124,11 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import bug417675.Either;
-			import java.util.Iterator;
 			
 			@SuppressWarnings("all")
 			public class EitherTest {
 			  public Integer m(final Either<Integer, Boolean> it) {
-			    Either<Integer, Boolean>.LeftProjection _left = it.left();
-			    Iterator<Integer> _iterator = _left.iterator();
-			    return _iterator.next();
+			    return it.left().iterator().next();
 			  }
 			}
 		''')
@@ -163,8 +155,7 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			        return it.toString();
 			      }
 			    };
-			    Either<Integer, String> _map = it.<String>map(_function);
-			    return _map.swap();
+			    return it.<String>map(_function).swap();
 			  }
 			}
 		''')
@@ -188,8 +179,7 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			public class EitherTest {
 			  public Either<String, String> m() {
 			    final Either<String, String> either = Either.<String, String>left("");
-			    Either<String, String>.RightProjection _right = either.right();
-			    final String s = _right.get();
+			    final String s = either.right().get();
 			    return either;
 			  }
 			}
@@ -209,16 +199,12 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import bug417675.Either;
-			import java.util.Iterator;
 			
 			@SuppressWarnings("all")
 			public class EitherTest {
 			  public Either<String, Integer> m() {
 			    final Either<String, Integer> either = Either.<String, Integer>left("");
-			    Either<Integer, String> _swap = either.swap();
-			    Either<Integer, String>.LeftProjection _left = _swap.left();
-			    Iterator<Integer> _iterator = _left.iterator();
-			    final int i = (_iterator.next()).intValue();
+			    final int i = (either.swap().left().iterator().next()).intValue();
 			    return either;
 			  }
 			}
