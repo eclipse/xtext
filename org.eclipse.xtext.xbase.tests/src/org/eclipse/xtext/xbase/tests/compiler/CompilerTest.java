@@ -124,13 +124,12 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				// TODO AbstractStringBuilder is package private and should not be part of the resolved type
 				"Iterable<AbstractStringBuilder> _plus = com.google.common.collect.Iterables.<AbstractStringBuilder>concat(((Iterable<StringBuilder>) null), ((Iterable<StringBuffer>) null));\n" + 
-				"Iterable<Object> _plus_1 = com.google.common.collect.Iterables.<Object>concat(_plus, ((Iterable<String>) null));\n" + 
 				"final java.util.function.Consumer<Object> _function = new java.util.function.Consumer<Object>() {\n" + 
 				"  public void accept(final Object it) {\n" + 
 				"    ((CharSequence)it).length();\n" + 
 				"  }\n" + 
 				"};\n" + 
-				"_plus_1.forEach(_function);", 
+				"com.google.common.collect.Iterables.<Object>concat(_plus, ((Iterable<String>) null)).forEach(_function);", 
 				"((null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)).forEach[ length ]");
 	}
 	
@@ -231,8 +230,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testFieldAccessDontGetAVariableDeclaration() throws Exception {
 		assertCompilesTo(
-				"\ntestdata.Properties1 _properties1 = new testdata.Properties1();" + 
-				"\nreturn _properties1.prop1;", 
+				"return new testdata.Properties1().prop1;", 
 				"new testdata.Properties1().prop1");
 	}
 
@@ -325,8 +323,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"\n" + 
 				"Object it = new Object();\n" + 
-				"Object _object = new Object();\n" + 
-				"_object.notify();\n" + 
+				"new Object().notify();\n" + 
 				"it.notify();",
 				"{ var it = new Object() { new Object().notify() } notify }");
 	}
@@ -422,8 +419,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	@Test public void testNullSafeFeatureCall_02() throws Exception {
 		assertCompilesTo(
 				"\n" + 
-				"Object _object = new Object();\n" +
-				"String _string = _object.toString();\n" +
+				"String _string = new Object().toString();\n" +
 				"if (_string!=null) {\n" +
 				"  _string.notify();\n" +
 				"}",

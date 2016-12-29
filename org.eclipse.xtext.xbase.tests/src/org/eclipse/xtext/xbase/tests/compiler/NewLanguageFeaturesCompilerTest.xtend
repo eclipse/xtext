@@ -131,11 +131,10 @@ class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingCompilerTes
 		'''
 			((null as Iterable<java.util.List<Object>>) + (null as Iterable<java.util.Set<Object>>)).forEach[ size ]
 		'''.compilesTo('''
-			Iterable<java.util.Collection<Object>> _plus = com.google.common.collect.Iterables.<java.util.Collection<Object>>concat(((Iterable<java.util.List<Object>>) null), ((Iterable<java.util.Set<Object>>) null));
 			final java.util.function.Consumer<java.util.Collection<Object>> _function = (java.util.Collection<Object> it) -> {
 			  it.size();
 			};
-			_plus.forEach(_function);
+			com.google.common.collect.Iterables.<java.util.Collection<Object>>concat(((Iterable<java.util.List<Object>>) null), ((Iterable<java.util.Set<Object>>) null)).forEach(_function);
 		''', JAVA8)
 	}
 	

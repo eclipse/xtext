@@ -59,9 +59,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("java.util.ArrayList<CharSequence> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<CharSequence>newArrayList();");
-    _builder_1.newLine();
-    _builder_1.append("final java.util.Iterator<CharSequence> treeIt = _newArrayList.iterator();");
+    _builder_1.append("final java.util.Iterator<CharSequence> treeIt = org.eclipse.xtext.xbase.lib.CollectionLiterals.<CharSequence>newArrayList().iterator();");
     _builder_1.newLine();
     _builder_1.append("while (treeIt.hasNext()) {");
     _builder_1.newLine();

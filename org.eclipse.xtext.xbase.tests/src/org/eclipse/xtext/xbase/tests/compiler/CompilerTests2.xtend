@@ -31,8 +31,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 				return null;
 			}
 		'''.compilesTo('''
-			java.util.ArrayList<CharSequence> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<CharSequence>newArrayList();
-			final java.util.Iterator<CharSequence> treeIt = _newArrayList.iterator();
+			final java.util.Iterator<CharSequence> treeIt = org.eclipse.xtext.xbase.lib.CollectionLiterals.<CharSequence>newArrayList().iterator();
 			while (treeIt.hasNext()) {
 			  {
 			    final CharSequence o = treeIt.next();

@@ -698,18 +698,14 @@ class CompilerTest {
 			    "string".length();
 			    final Integer i = Integer.valueOf("string".length());
 			    /* i; */
-			    int _length = "string".length();
-			    Integer.valueOf(_length).toString();
+			    Integer.valueOf("string".length()).toString();
 			    "string".toCharArray();
 			    final List<Character> l = (List<Character>)Conversions.doWrapArray("string".toCharArray());
-			    char[] _charArray = "string".toCharArray();
-			    /* _charArray[3]; */
+			    /* "string".toCharArray()[3]; */
 			    final Comparator<String> _function = new Comparator<String>() {
 			      @Override
 			      public int compare(final String a, final String b) {
-			        int _length = a.length();
-			        int _length_1 = b.length();
-			        return Integer.valueOf(_length).compareTo(Integer.valueOf(_length_1));
+			        return Integer.valueOf(a.length()).compareTo(Integer.valueOf(b.length()));
 			      }
 			    };
 			    final Comparator<String> comparator = _function;

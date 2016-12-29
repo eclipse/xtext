@@ -1648,10 +1648,7 @@ public class CompilerTest {
       _builder_1.append("/* i; */");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("int _length = \"string\".length();");
-      _builder_1.newLine();
-      _builder_1.append("    ");
-      _builder_1.append("Integer.valueOf(_length).toString();");
+      _builder_1.append("Integer.valueOf(\"string\".length()).toString();");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("\"string\".toCharArray();");
@@ -1660,10 +1657,7 @@ public class CompilerTest {
       _builder_1.append("final List<Character> l = (List<Character>)Conversions.doWrapArray(\"string\".toCharArray());");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("char[] _charArray = \"string\".toCharArray();");
-      _builder_1.newLine();
-      _builder_1.append("    ");
-      _builder_1.append("/* _charArray[3]; */");
+      _builder_1.append("/* \"string\".toCharArray()[3]; */");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("final Comparator<String> _function = new Comparator<String>() {");
@@ -1675,13 +1669,7 @@ public class CompilerTest {
       _builder_1.append("public int compare(final String a, final String b) {");
       _builder_1.newLine();
       _builder_1.append("        ");
-      _builder_1.append("int _length = a.length();");
-      _builder_1.newLine();
-      _builder_1.append("        ");
-      _builder_1.append("int _length_1 = b.length();");
-      _builder_1.newLine();
-      _builder_1.append("        ");
-      _builder_1.append("return Integer.valueOf(_length).compareTo(Integer.valueOf(_length_1));");
+      _builder_1.append("return Integer.valueOf(a.length()).compareTo(Integer.valueOf(b.length()));");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("}");
