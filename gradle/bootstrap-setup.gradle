@@ -5,7 +5,10 @@
 // The repositories to query when constructing the Xtend compiler classpath
 repositories {
 	jcenter()
-	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+	maven {
+		name 'xtend-bootstrap'
+		url 'http://services.typefox.io/open-source/jenkins/job/xtend-bootstrap/lastStableBuild/artifact/build-result/maven-repository/'
+	}
 }
 
 // The Xtend compiler version to use
@@ -28,5 +31,6 @@ configurations {
 
 dependencies {
 	xtendCompiler "org.eclipse.xtend:org.eclipse.xtend.core:$bootstrapXtendVersion"
+	xtendCompiler "org.eclipse.xtext:org.eclipse.xtext.smap:$bootstrapXtendVersion"
 	xtendCompiler "org.xtext:xtext-gradle-builder:$versions.xtend_plugin"
 }
