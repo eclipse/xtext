@@ -32,14 +32,10 @@ public class ToStringConfiguration {
   }
   
   public ToStringConfiguration(final AnnotationReference annotation) {
-    boolean _booleanValue = annotation.getBooleanValue("skipNulls");
-    this.skipNulls = _booleanValue;
-    boolean _booleanValue_1 = annotation.getBooleanValue("singleLine");
-    this.singleLine = _booleanValue_1;
-    boolean _booleanValue_2 = annotation.getBooleanValue("hideFieldNames");
-    this.hideFieldNames = _booleanValue_2;
-    boolean _booleanValue_3 = annotation.getBooleanValue("verbatimValues");
-    this.verbatimValues = _booleanValue_3;
+    this.skipNulls = annotation.getBooleanValue("skipNulls");
+    this.singleLine = annotation.getBooleanValue("singleLine");
+    this.hideFieldNames = annotation.getBooleanValue("hideFieldNames");
+    this.verbatimValues = annotation.getBooleanValue("verbatimValues");
   }
   
   public boolean isSkipNulls() {

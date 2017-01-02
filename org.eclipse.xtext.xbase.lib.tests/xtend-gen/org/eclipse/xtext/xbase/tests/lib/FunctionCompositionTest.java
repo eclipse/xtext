@@ -43,23 +43,17 @@ public class FunctionCompositionTest {
   
   @Test
   public void testCompose() {
-    Function1<Integer, Integer> _compose = FunctionExtensions.<Integer, Integer, Integer>compose(this.times2, this.squared);
-    Integer _apply = _compose.apply(Integer.valueOf(4));
-    Assert.assertEquals(32, (_apply).intValue());
+    Assert.assertEquals(32, (FunctionExtensions.<Integer, Integer, Integer>compose(this.times2, this.squared).apply(Integer.valueOf(4))).intValue());
   }
   
   @Test
   public void testAndThen() {
-    Function1<Integer, Integer> _andThen = FunctionExtensions.<Integer, Integer, Integer>andThen(this.times2, this.squared);
-    Integer _apply = _andThen.apply(Integer.valueOf(4));
-    Assert.assertEquals(64, (_apply).intValue());
+    Assert.assertEquals(64, (FunctionExtensions.<Integer, Integer, Integer>andThen(this.times2, this.squared).apply(Integer.valueOf(4))).intValue());
   }
   
   @Test
   public void testAndThen2() {
-    Function2<Integer, Integer, Integer> _andThen = FunctionExtensions.<Integer, Integer, Integer, Integer>andThen(this.binaryFun, this.squared);
-    Integer _apply = _andThen.apply(Integer.valueOf(2), Integer.valueOf(1));
-    Assert.assertEquals(4, (_apply).intValue());
+    Assert.assertEquals(4, (FunctionExtensions.<Integer, Integer, Integer, Integer>andThen(this.binaryFun, this.squared).apply(Integer.valueOf(2), Integer.valueOf(1))).intValue());
   }
   
   @Test
@@ -75,13 +69,10 @@ public class FunctionCompositionTest {
     final Procedure1<AtomicInteger> _function_1 = new Procedure1<AtomicInteger>() {
       @Override
       public void apply(final AtomicInteger it) {
-        int _incrementAndGet = it.incrementAndGet();
-        Assert.assertEquals(2, _incrementAndGet);
+        Assert.assertEquals(2, it.incrementAndGet());
       }
     };
-    Procedure1<AtomicInteger> _andThen = FunctionExtensions.<AtomicInteger>andThen(incrementer, _function_1);
-    _andThen.apply(counter);
-    int _incrementAndGet = counter.incrementAndGet();
-    Assert.assertEquals(3, _incrementAndGet);
+    FunctionExtensions.<AtomicInteger>andThen(incrementer, _function_1).apply(counter);
+    Assert.assertEquals(3, counter.incrementAndGet());
   }
 }

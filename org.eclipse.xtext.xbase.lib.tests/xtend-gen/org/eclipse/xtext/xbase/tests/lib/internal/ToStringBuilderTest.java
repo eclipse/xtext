@@ -100,8 +100,7 @@ public class ToStringBuilderTest {
   public void testToString() {
     ToStringBuilderTest.MyEntity _myEntity = new ToStringBuilderTest.MyEntity();
     ToStringBuilderTest.MyEntity _myEntity_1 = new ToStringBuilderTest.MyEntity(_myEntity);
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity_1);
-    final ToStringBuilder builder = _toStringBuilder.addAllFields();
+    final ToStringBuilder builder = new ToStringBuilder(_myEntity_1).addAllFields();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("MyEntity [");
     _builder.newLine();
@@ -145,39 +144,30 @@ public class ToStringBuilderTest {
     _builder.append("policy = CLASS");
     _builder.newLine();
     _builder.append("]");
-    String _unix = ToStringBuilderTest.toUnix(_builder.toString());
-    String _string = builder.toString();
-    Assert.assertEquals(_unix, _string);
+    Assert.assertEquals(
+      ToStringBuilderTest.toUnix(_builder.toString()), builder.toString());
   }
   
   @Test
   public void testSingleLine() {
     ToStringBuilderTest.MyEntity _myEntity = new ToStringBuilderTest.MyEntity();
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity);
-    ToStringBuilder _singleLine = _toStringBuilder.singleLine();
-    final ToStringBuilder builder = _singleLine.addAllFields();
-    String _string = builder.toString();
+    final ToStringBuilder builder = new ToStringBuilder(_myEntity).singleLine().addAllFields();
     Assert.assertEquals(
-      "MyEntity [boolProp = true, intProp = 42, myList = ArrayList (\"foo\",\"bar\",\"baz\"), friend = null, policy = CLASS]", _string);
+      "MyEntity [boolProp = true, intProp = 42, myList = ArrayList (\"foo\",\"bar\",\"baz\"), friend = null, policy = CLASS]", 
+      builder.toString());
   }
   
   @Test
   public void testHideFieldNames() {
     ToStringBuilderTest.MyEntity _myEntity = new ToStringBuilderTest.MyEntity();
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity);
-    ToStringBuilder _singleLine = _toStringBuilder.singleLine();
-    ToStringBuilder _hideFieldNames = _singleLine.hideFieldNames();
-    final ToStringBuilder builder = _hideFieldNames.addAllFields();
-    String _string = builder.toString();
-    Assert.assertEquals("MyEntity [true, 42, ArrayList (\"foo\",\"bar\",\"baz\"), null, CLASS]", _string);
+    final ToStringBuilder builder = new ToStringBuilder(_myEntity).singleLine().hideFieldNames().addAllFields();
+    Assert.assertEquals("MyEntity [true, 42, ArrayList (\"foo\",\"bar\",\"baz\"), null, CLASS]", builder.toString());
   }
   
   @Test
   public void testSkipNulls() {
     ToStringBuilderTest.MyEntity _myEntity = new ToStringBuilderTest.MyEntity();
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity);
-    ToStringBuilder _skipNulls = _toStringBuilder.skipNulls();
-    final ToStringBuilder builder = _skipNulls.addAllFields();
+    final ToStringBuilder builder = new ToStringBuilder(_myEntity).skipNulls().addAllFields();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("MyEntity [");
     _builder.newLine();
@@ -206,17 +196,14 @@ public class ToStringBuilderTest {
     _builder.append("policy = CLASS");
     _builder.newLine();
     _builder.append("]");
-    String _unix = ToStringBuilderTest.toUnix(_builder.toString());
-    String _string = builder.toString();
-    Assert.assertEquals(_unix, _string);
+    Assert.assertEquals(
+      ToStringBuilderTest.toUnix(_builder.toString()), builder.toString());
   }
   
   @Test
   public void testExplicitFieldListing() {
     ToStringBuilderTest.MyEntity _myEntity = new ToStringBuilderTest.MyEntity();
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity);
-    ToStringBuilder _add = _toStringBuilder.add("boolProp", Boolean.valueOf(false));
-    final ToStringBuilder builder = _add.addField("intProp");
+    final ToStringBuilder builder = new ToStringBuilder(_myEntity).add("boolProp", Boolean.valueOf(false)).addField("intProp");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("MyEntity [");
     _builder.newLine();
@@ -227,9 +214,8 @@ public class ToStringBuilderTest {
     _builder.append("intProp = 42");
     _builder.newLine();
     _builder.append("]");
-    String _unix = ToStringBuilderTest.toUnix(_builder.toString());
-    String _string = builder.toString();
-    Assert.assertEquals(_unix, _string);
+    Assert.assertEquals(
+      ToStringBuilderTest.toUnix(_builder.toString()), builder.toString());
   }
   
   @Test
@@ -237,8 +223,7 @@ public class ToStringBuilderTest {
     final ToStringBuilderTest.OtherClass obj = new ToStringBuilderTest.OtherClass();
     obj.name = "foo";
     obj.other = obj;
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(obj);
-    final ToStringBuilder builder = _toStringBuilder.addDeclaredFields();
+    final ToStringBuilder builder = new ToStringBuilder(obj).addDeclaredFields();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("OtherClass [");
     _builder.newLine();
@@ -251,9 +236,8 @@ public class ToStringBuilderTest {
     _builder.append("name = \"foo\"");
     _builder.newLine();
     _builder.append("]");
-    String _unix = ToStringBuilderTest.toUnix(_builder.toString());
-    String _string_1 = builder.toString();
-    Assert.assertEquals(_unix, _string_1);
+    Assert.assertEquals(
+      ToStringBuilderTest.toUnix(_builder.toString()), builder.toString());
   }
   
   @Test
@@ -261,8 +245,7 @@ public class ToStringBuilderTest {
     final ToStringBuilderTest.DataClass obj = new ToStringBuilderTest.DataClass();
     obj.other = obj;
     obj.name = "test";
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(obj);
-    final ToStringBuilder builder = _toStringBuilder.addDeclaredFields();
+    final ToStringBuilder builder = new ToStringBuilder(obj).addDeclaredFields();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("DataClass [");
     _builder.newLine();
@@ -275,9 +258,8 @@ public class ToStringBuilderTest {
     _builder.append("name = \"test\"");
     _builder.newLine();
     _builder.append("]");
-    String _unix = ToStringBuilderTest.toUnix(_builder.toString());
-    String _string = builder.toString();
-    Assert.assertEquals(_unix, _string);
+    Assert.assertEquals(
+      ToStringBuilderTest.toUnix(_builder.toString()), builder.toString());
   }
   
   public static String toUnix(final String s) {

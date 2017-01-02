@@ -18,8 +18,7 @@ public class ReflectExtensionsTest {
   public void testInvoke_01() {
     try {
       final String x = "foo";
-      Object _invoke = this.ext.invoke(x, "length");
-      Assert.assertEquals(Integer.valueOf(3), _invoke);
+      Assert.assertEquals(Integer.valueOf(3), this.ext.invoke(x, "length"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -92,10 +91,8 @@ public class ReflectExtensionsTest {
         }
       };
       final Function1<String, String> x = _function;
-      Object _invoke = this.ext.invoke(x, "apply", null);
-      Assert.assertNull(_invoke);
-      Object _invoke_1 = this.ext.invoke(x, "apply", "foo");
-      Assert.assertEquals("foo", _invoke_1);
+      Assert.assertNull(this.ext.invoke(x, "apply", null));
+      Assert.assertEquals("foo", this.ext.invoke(x, "apply", "foo"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -105,8 +102,7 @@ public class ReflectExtensionsTest {
   public void testInvokeWithPrimitives() {
     try {
       final String x = "foo";
-      Object _invoke = this.ext.invoke(x, "substring", Integer.valueOf(1), Integer.valueOf(2));
-      Assert.assertEquals("o", _invoke);
+      Assert.assertEquals("o", this.ext.invoke(x, "substring", Integer.valueOf(1), Integer.valueOf(2)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -116,8 +112,7 @@ public class ReflectExtensionsTest {
   public void testGet_01() {
     try {
       final ReflectExtensionsTest x = new ReflectExtensionsTest();
-      Object _get = this.ext.<Object>get(x, "ext");
-      Assert.assertNotNull(_get);
+      Assert.assertNotNull(this.ext.<Object>get(x, "ext"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -128,8 +123,7 @@ public class ReflectExtensionsTest {
     try {
       final ReflectExtensionsTest x = new ReflectExtensionsTest();
       try {
-        Object _get = this.ext.<Object>get(x, "foo");
-        Assert.assertNotNull(_get);
+        Assert.assertNotNull(this.ext.<Object>get(x, "foo"));
         Assert.fail();
       } catch (final Throwable _t) {
         if (_t instanceof NoSuchFieldException) {
@@ -147,8 +141,7 @@ public class ReflectExtensionsTest {
   public void testGet_03() {
     try {
       final ReflectExtensionsTest x = new ReflectExtensionsTest();
-      Object _get = this.ext.<Object>get(x, "privateExt");
-      Assert.assertSame(x.privateExt, _get);
+      Assert.assertSame(x.privateExt, this.ext.<Object>get(x, "privateExt"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

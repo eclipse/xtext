@@ -133,41 +133,32 @@ public class ToStringHelperTest {
     _builder.append("policy = CLASS");
     _builder.newLine();
     _builder.append("]");
-    String _unix = ToStringHelperTest.toUnix(_builder.toString());
     ToStringHelperTest.MyEntity _myEntity = new ToStringHelperTest.MyEntity();
     ToStringHelperTest.MyEntity _myEntity_1 = new ToStringHelperTest.MyEntity(_myEntity);
-    String _string = helper.toString(_myEntity_1);
-    Assert.assertEquals(_unix, _string);
+    Assert.assertEquals(
+      ToStringHelperTest.toUnix(_builder.toString()), helper.toString(_myEntity_1));
   }
   
   @Test
   public void testSingleLine() {
     ToStringHelperTest.MyEntity _myEntity = new ToStringHelperTest.MyEntity();
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity);
-    ToStringBuilder _singleLine = _toStringBuilder.singleLine();
-    final ToStringBuilder helper = _singleLine.addAllFields();
-    String _string = helper.toString();
+    final ToStringBuilder helper = new ToStringBuilder(_myEntity).singleLine().addAllFields();
     Assert.assertEquals(
-      "MyEntity [boolProp = true, intProp = 42, myList = ArrayList (\"foo\",\"bar\",\"baz\"), friend = null, policy = CLASS]", _string);
+      "MyEntity [boolProp = true, intProp = 42, myList = ArrayList (\"foo\",\"bar\",\"baz\"), friend = null, policy = CLASS]", 
+      helper.toString());
   }
   
   @Test
   public void testHideFieldNames() {
     ToStringHelperTest.MyEntity _myEntity = new ToStringHelperTest.MyEntity();
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity);
-    ToStringBuilder _singleLine = _toStringBuilder.singleLine();
-    ToStringBuilder _hideFieldNames = _singleLine.hideFieldNames();
-    final ToStringBuilder helper = _hideFieldNames.addAllFields();
-    String _string = helper.toString();
-    Assert.assertEquals("MyEntity [true, 42, ArrayList (\"foo\",\"bar\",\"baz\"), null, CLASS]", _string);
+    final ToStringBuilder helper = new ToStringBuilder(_myEntity).singleLine().hideFieldNames().addAllFields();
+    Assert.assertEquals("MyEntity [true, 42, ArrayList (\"foo\",\"bar\",\"baz\"), null, CLASS]", helper.toString());
   }
   
   @Test
   public void testSkipNulls() {
     ToStringHelperTest.MyEntity _myEntity = new ToStringHelperTest.MyEntity();
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity);
-    ToStringBuilder _skipNulls = _toStringBuilder.skipNulls();
-    final ToStringBuilder helper = _skipNulls.addAllFields();
+    final ToStringBuilder helper = new ToStringBuilder(_myEntity).skipNulls().addAllFields();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("MyEntity [");
     _builder.newLine();
@@ -196,17 +187,14 @@ public class ToStringHelperTest {
     _builder.append("policy = CLASS");
     _builder.newLine();
     _builder.append("]");
-    String _unix = ToStringHelperTest.toUnix(_builder.toString());
-    String _string = helper.toString();
-    Assert.assertEquals(_unix, _string);
+    Assert.assertEquals(
+      ToStringHelperTest.toUnix(_builder.toString()), helper.toString());
   }
   
   @Test
   public void testExplicitFieldListing() {
     ToStringHelperTest.MyEntity _myEntity = new ToStringHelperTest.MyEntity();
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(_myEntity);
-    ToStringBuilder _add = _toStringBuilder.add("boolProp", Boolean.valueOf(false));
-    final ToStringBuilder helper = _add.addField("intProp");
+    final ToStringBuilder helper = new ToStringBuilder(_myEntity).add("boolProp", Boolean.valueOf(false)).addField("intProp");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("MyEntity [");
     _builder.newLine();
@@ -217,9 +205,8 @@ public class ToStringHelperTest {
     _builder.append("intProp = 42");
     _builder.newLine();
     _builder.append("]");
-    String _unix = ToStringHelperTest.toUnix(_builder.toString());
-    String _string = helper.toString();
-    Assert.assertEquals(_unix, _string);
+    Assert.assertEquals(
+      ToStringHelperTest.toUnix(_builder.toString()), helper.toString());
   }
   
   @Test
@@ -240,9 +227,8 @@ public class ToStringHelperTest {
     _builder.append("name = \"foo\"");
     _builder.newLine();
     _builder.append("]");
-    String _unix = ToStringHelperTest.toUnix(_builder.toString());
-    String _string_1 = helper.toString(obj);
-    Assert.assertEquals(_unix, _string_1);
+    Assert.assertEquals(
+      ToStringHelperTest.toUnix(_builder.toString()), helper.toString(obj));
   }
   
   @Test
@@ -263,9 +249,8 @@ public class ToStringHelperTest {
     _builder.append("name = \"test\"");
     _builder.newLine();
     _builder.append("]");
-    String _unix = ToStringHelperTest.toUnix(_builder.toString());
-    String _string = helper.toString(obj);
-    Assert.assertEquals(_unix, _string);
+    Assert.assertEquals(
+      ToStringHelperTest.toUnix(_builder.toString()), helper.toString(obj));
   }
   
   public static String toUnix(final String s) {

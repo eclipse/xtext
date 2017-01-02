@@ -82,9 +82,6 @@ public class DataTest {
     _builder.append("foo = false");
     _builder.newLine();
     _builder.append("]");
-    String _string = _builder.toString();
-    DataTest.MyDataClass _myDataClass = new DataTest.MyDataClass("foo");
-    String _string_1 = _myDataClass.toString();
-    Assert.assertEquals(_string, _string_1);
+    Assert.assertEquals(_builder.toString(), new DataTest.MyDataClass("foo").toString());
   }
 }

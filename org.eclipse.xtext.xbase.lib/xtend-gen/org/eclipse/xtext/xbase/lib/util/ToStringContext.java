@@ -26,13 +26,11 @@ class ToStringContext {
   };
   
   public boolean startProcessing(final Object obj) {
-    IdentityHashMap<Object, Boolean> _get = ToStringContext.currentlyProcessed.get();
-    Boolean _put = _get.put(obj, Boolean.TRUE);
+    Boolean _put = ToStringContext.currentlyProcessed.get().put(obj, Boolean.TRUE);
     return (_put == null);
   }
   
   public void endProcessing(final Object obj) {
-    IdentityHashMap<Object, Boolean> _get = ToStringContext.currentlyProcessed.get();
-    _get.remove(obj);
+    ToStringContext.currentlyProcessed.get().remove(obj);
   }
 }
