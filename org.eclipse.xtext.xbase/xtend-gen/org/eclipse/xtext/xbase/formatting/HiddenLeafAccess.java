@@ -48,8 +48,7 @@ public class HiddenLeafAccess {
         if (_isEmpty) {
           _xifexpression_1 = start.getOffset();
         } else {
-          ILeafNode _head = IterableExtensions.<ILeafNode>head(nodes);
-          _xifexpression_1 = _head.getOffset();
+          _xifexpression_1 = IterableExtensions.<ILeafNode>head(nodes).getOffset();
         }
         _xifexpression = this.newHiddenLeafs(_xifexpression_1, nodes);
       } else {
@@ -73,18 +72,15 @@ public class HiddenLeafAccess {
         {
           boolean comment = false;
           int newLines = 0;
-          String _text = node.getText();
-          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_text);
+          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(node.getText());
           boolean _not = (!_isNullOrEmpty);
           if (_not) {
-            String _text_1 = node.getText();
-            int _length = _text_1.length();
+            int _length = node.getText().length();
             int _minus = (_length - 1);
             IntegerRange _upTo = new IntegerRange(0, _minus);
             for (final Integer i : _upTo) {
               {
-                String _text_2 = node.getText();
-                final char c = _text_2.charAt((i).intValue());
+                final char c = node.getText().charAt((i).intValue());
                 String _string = Character.valueOf(c).toString();
                 boolean _equals = Objects.equal(_string, "\n");
                 if (_equals) {
@@ -100,47 +96,41 @@ public class HiddenLeafAccess {
             }
           }
           if (comment) {
-            List<LeafInfo> _leafs = result.getLeafs();
-            LeafInfo _last = IterableExtensions.<LeafInfo>last(_leafs);
+            LeafInfo _last = IterableExtensions.<LeafInfo>last(result.getLeafs());
             boolean _not_1 = (!(_last instanceof WhitespaceInfo));
             if (_not_1) {
-              List<LeafInfo> _leafs_1 = result.getLeafs();
+              List<LeafInfo> _leafs = result.getLeafs();
               int _offset = node.getOffset();
               WhitespaceInfo _whitespaceInfo = new WhitespaceInfo(result, null, 0, _offset);
-              _leafs_1.add(_whitespaceInfo);
+              _leafs.add(_whitespaceInfo);
             }
-            List<LeafInfo> _leafs_2 = result.getLeafs();
+            List<LeafInfo> _leafs_1 = result.getLeafs();
             CommentInfo _commentInfo = new CommentInfo(result, node, newLines, trailing);
-            _leafs_2.add(_commentInfo);
+            _leafs_1.add(_commentInfo);
           } else {
-            List<LeafInfo> _leafs_3 = result.getLeafs();
+            List<LeafInfo> _leafs_2 = result.getLeafs();
             int _offset_1 = node.getOffset();
             WhitespaceInfo _whitespaceInfo_1 = new WhitespaceInfo(result, node, newLines, _offset_1);
-            _leafs_3.add(_whitespaceInfo_1);
+            _leafs_2.add(_whitespaceInfo_1);
           }
           if ((newLines > 0)) {
             trailing = false;
           }
         }
       }
-      List<LeafInfo> _leafs = result.getLeafs();
-      LeafInfo _last = IterableExtensions.<LeafInfo>last(_leafs);
+      LeafInfo _last = IterableExtensions.<LeafInfo>last(result.getLeafs());
       boolean _not = (!(_last instanceof WhitespaceInfo));
       if (_not) {
-        List<LeafInfo> _leafs_1 = result.getLeafs();
+        List<LeafInfo> _leafs = result.getLeafs();
         int _xifexpression = (int) 0;
-        List<LeafInfo> _leafs_2 = result.getLeafs();
-        boolean _isEmpty = _leafs_2.isEmpty();
+        boolean _isEmpty = result.getLeafs().isEmpty();
         if (_isEmpty) {
           _xifexpression = offset;
         } else {
-          List<LeafInfo> _leafs_3 = result.getLeafs();
-          LeafInfo _last_1 = IterableExtensions.<LeafInfo>last(_leafs_3);
-          ILeafNode _node = _last_1.getNode();
-          _xifexpression = _node.getEndOffset();
+          _xifexpression = IterableExtensions.<LeafInfo>last(result.getLeafs()).getNode().getEndOffset();
         }
         WhitespaceInfo _whitespaceInfo = new WhitespaceInfo(result, null, 0, _xifexpression);
-        _leafs_1.add(_whitespaceInfo);
+        _leafs.add(_whitespaceInfo);
       }
       _xblockexpression = result;
     }

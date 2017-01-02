@@ -11,11 +11,9 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Arrays;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmField;
@@ -108,8 +106,7 @@ public class ConstantExpressionValidator {
           if ((_eResource instanceof TypeResource)) {
             return true;
           } else {
-            XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
-            return this.isConstantExpression(_associatedExpression);
+            return this.isConstantExpression(this._iLogicalContainerProvider.getAssociatedExpression(feature));
           }
         }
         return false;
@@ -122,12 +119,10 @@ public class ConstantExpressionValidator {
         if ((annotationReference == null)) {
           return false;
         }
-        EList<JvmAnnotationValue> _values = annotationReference.getValues();
-        Iterable<JvmBooleanAnnotationValue> _filter = Iterables.<JvmBooleanAnnotationValue>filter(_values, JvmBooleanAnnotationValue.class);
         final Function1<JvmBooleanAnnotationValue, Boolean> _function = (JvmBooleanAnnotationValue it) -> {
           return Boolean.valueOf((Objects.equal(it.getValueName(), "constantExpression") && IterableExtensions.<Boolean>head(it.getValues()).booleanValue()));
         };
-        boolean _exists = IterableExtensions.<JvmBooleanAnnotationValue>exists(_filter, _function);
+        boolean _exists = IterableExtensions.<JvmBooleanAnnotationValue>exists(Iterables.<JvmBooleanAnnotationValue>filter(annotationReference.getValues(), JvmBooleanAnnotationValue.class), _function);
         if (_exists) {
           boolean _xifexpression = false;
           XExpression _actualReceiver = expression.getActualReceiver();
@@ -135,8 +130,7 @@ public class ConstantExpressionValidator {
           if (_tripleEquals) {
             _xifexpression = true;
           } else {
-            XExpression _actualReceiver_1 = expression.getActualReceiver();
-            _xifexpression = this.isConstant(_actualReceiver_1);
+            _xifexpression = this.isConstant(expression.getActualReceiver());
           }
           final boolean receiverConstant = _xifexpression;
           return (receiverConstant && IterableExtensions.<XExpression>forall(expression.getActualArguments(), ((Function1<XExpression, Boolean>) (XExpression it) -> {
@@ -154,8 +148,7 @@ public class ConstantExpressionValidator {
     if (!_matched) {
       if (feature instanceof XSwitchExpression) {
         _matched=true;
-        XExpression _switch = ((XSwitchExpression)feature).getSwitch();
-        return this.isConstantExpression(_switch);
+        return this.isConstantExpression(((XSwitchExpression)feature).getSwitch());
       }
     }
     if (!_matched) {

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.formatting2;
 
-import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.preferences.IntegerKey;
@@ -25,8 +24,7 @@ public class BlankLineKey extends IntegerKey implements Procedure1<IHiddenRegion
   
   @Override
   public void apply(final IHiddenRegionFormatter it) {
-    FormatterRequest _request = it.getRequest();
-    final ITypedPreferenceValues preferences = _request.getPreferences();
+    final ITypedPreferenceValues preferences = it.getRequest().getPreferences();
     final Integer blankline = preferences.<Integer>getPreference(this);
     final Integer preserve = preferences.<Integer>getPreference(XbaseFormatterPreferenceKeys.preserveBlankLines);
     final int min = ((blankline).intValue() + 1);

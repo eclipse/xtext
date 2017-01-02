@@ -19,14 +19,12 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 @SuppressWarnings("all")
 public class XbaseWithAnnotationsStandaloneSetup extends XbaseWithAnnotationsStandaloneSetupGenerated {
   public static void doSetup() {
-    XbaseWithAnnotationsStandaloneSetup _xbaseWithAnnotationsStandaloneSetup = new XbaseWithAnnotationsStandaloneSetup();
-    _xbaseWithAnnotationsStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new XbaseWithAnnotationsStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
   
   @Override
   public Injector createInjectorAndDoEMFRegistration() {
-    String _nsURI = XAnnotationsPackage.eINSTANCE.getNsURI();
-    EPackage.Registry.INSTANCE.put(_nsURI, XAnnotationsPackage.eINSTANCE);
+    EPackage.Registry.INSTANCE.put(XAnnotationsPackage.eINSTANCE.getNsURI(), XAnnotationsPackage.eINSTANCE);
     return super.createInjectorAndDoEMFRegistration();
   }
 }

@@ -12,20 +12,14 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Set;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -61,14 +55,9 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
   
   @Inject
   protected void register(final EValidatorRegistrar registrar, final IGrammarAccess grammarAccess) {
-    Grammar _grammar = grammarAccess.getGrammar();
-    EList<AbstractRule> _rules = _grammar.getRules();
-    final AbstractRule entryRule = IterableExtensions.<AbstractRule>head(_rules);
+    final AbstractRule entryRule = IterableExtensions.<AbstractRule>head(grammarAccess.getGrammar().getRules());
     if ((entryRule instanceof ParserRule)) {
-      TypeRef _type = ((ParserRule)entryRule).getType();
-      EClassifier _classifier = _type.getClassifier();
-      EPackage _ePackage = _classifier.getEPackage();
-      registrar.register(_ePackage, this);
+      registrar.register(((ParserRule)entryRule).getType().getClassifier().getEPackage(), this);
     }
   }
   
@@ -78,16 +67,13 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
     boolean _tripleEquals = (_eContainer == null);
     if (_tripleEquals) {
       final Resource resource = root.eResource();
-      EList<EObject> _contents = resource.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
+      EObject _head = IterableExtensions.<EObject>head(resource.getContents());
       boolean _equals = Objects.equal(_head, root);
       if (_equals) {
-        EList<EObject> _contents_1 = resource.getContents();
-        Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents_1, JvmDeclaredType.class);
         final Consumer<JvmDeclaredType> _function = (JvmDeclaredType it) -> {
           this.doCheckUniqueName(it);
         };
-        _filter.forEach(_function);
+        Iterables.<JvmDeclaredType>filter(resource.getContents(), JvmDeclaredType.class).forEach(_function);
       }
     }
   }
@@ -104,27 +90,24 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
   }
   
   protected boolean doCheckUniqueName(final QualifiedName name, final JvmDeclaredType type) {
-    Resource _eResource = type.eResource();
-    final IResourceDescriptions index = this.resourceDescriptionsProvider.getResourceDescriptions(_eResource);
+    final IResourceDescriptions index = this.resourceDescriptionsProvider.getResourceDescriptions(type.eResource());
     final Iterable<IEObjectDescription> others = index.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, name, false);
     return this.checkUniqueInIndex(type, others);
   }
   
   protected boolean checkUniqueInIndex(final JvmDeclaredType type, final Iterable<IEObjectDescription> descriptions) {
     final Function1<IEObjectDescription, URI> _function = (IEObjectDescription it) -> {
-      URI _eObjectURI = it.getEObjectURI();
-      return _eObjectURI.trimFragment();
+      return it.getEObjectURI().trimFragment();
     };
-    Iterable<URI> _map = IterableExtensions.<IEObjectDescription, URI>map(descriptions, _function);
-    final Set<URI> resourceURIs = IterableExtensions.<URI>toSet(_map);
+    final Set<URI> resourceURIs = IterableExtensions.<URI>toSet(IterableExtensions.<IEObjectDescription, URI>map(descriptions, _function));
     int _size = resourceURIs.size();
     boolean _greaterThan = (_size > 1);
     if (_greaterThan) {
-      this.addIssue(type, IterableExtensions.<URI>head(IterableExtensions.<URI>filter(resourceURIs, ((Function1<URI, Boolean>) (URI it) -> {
-        Resource _eResource = type.eResource();
-        URI _uRI = _eResource.getURI();
+      final Function1<URI, Boolean> _function_1 = (URI it) -> {
+        URI _uRI = type.eResource().getURI();
         return Boolean.valueOf((!Objects.equal(it, _uRI)));
-      }))).lastSegment());
+      };
+      this.addIssue(type, IterableExtensions.<URI>head(IterableExtensions.<URI>filter(resourceURIs, _function_1)).lastSegment());
       return false;
     }
     return true;
@@ -142,8 +125,7 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
       _builder.append(".");
       this.addIssue(_builder.toString(), type, IssueCodes.DUPLICATE_TYPE);
     } else {
-      EClass _eClass = sourceElement.eClass();
-      final EStructuralFeature feature = _eClass.getEStructuralFeature("name");
+      final EStructuralFeature feature = sourceElement.eClass().getEStructuralFeature("name");
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("The type ");
       String _simpleName_1 = type.getSimpleName();

@@ -61,12 +61,8 @@ public class Formatter2Fragment extends Xtend2GeneratorFragment {
     _builder_2.append(".class);");
     cfg.append(_builder_2);
     final BindFactory bf = new BindFactory();
-    String _name_3 = IFormatter2.class.getName();
-    String _stubQualifiedName = this.stubGenerator.getStubQualifiedName();
-    bf.addTypeToType(_name_3, _stubQualifiedName);
-    String _name_4 = FormatterPreferences.class.getName();
-    String _string = cfg.toString();
-    bf.addConfiguredBinding(_name_4, _string);
+    bf.addTypeToType(IFormatter2.class.getName(), this.stubGenerator.getStubQualifiedName());
+    bf.addConfiguredBinding(FormatterPreferences.class.getName(), cfg.toString());
     return bf.getBindings();
   }
   
@@ -81,8 +77,6 @@ public class Formatter2Fragment extends Xtend2GeneratorFragment {
   
   @Override
   public void generate(final Xtend2ExecutionContext ctx) {
-    String _stubFileName = this.stubGenerator.getStubFileName();
-    String _generateStubFileContents = this.stubGenerator.generateStubFileContents();
-    ctx.writeFile(Generator.SRC, _stubFileName, _generateStubFileContents);
+    ctx.writeFile(Generator.SRC, this.stubGenerator.getStubFileName(), this.stubGenerator.generateStubFileContents());
   }
 }

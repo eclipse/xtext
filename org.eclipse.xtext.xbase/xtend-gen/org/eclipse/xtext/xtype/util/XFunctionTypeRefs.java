@@ -30,8 +30,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class XFunctionTypeRefs {
   public static URI computeTypeUri(final boolean procedure, final int functionParamCount) {
-    String _buildUri = XFunctionTypeRefs.buildUri(procedure, functionParamCount);
-    return URI.createURI(_buildUri);
+    return URI.createURI(XFunctionTypeRefs.buildUri(procedure, functionParamCount));
   }
   
   public static String buildUri(final boolean procedure, final int functionParamCount) {
@@ -61,8 +60,7 @@ public class XFunctionTypeRefs {
   }
   
   public static URI computeTypeUri(final Class<?> topLevelClass) {
-    ClassURIHelper _classURIHelper = new ClassURIHelper();
-    return _classURIHelper.getFullURI(topLevelClass);
+    return new ClassURIHelper().getFullURI(topLevelClass);
   }
   
   public static JvmTypeReference wrapIfNecessary(final JvmTypeReference reference, final JvmType type) {
@@ -180,8 +178,7 @@ public class XFunctionTypeRefs {
     {
       JvmVoid _createJvmVoid = TypesFactory.eINSTANCE.createJvmVoid();
       final InternalEObject proxy = ((InternalEObject) _createJvmVoid);
-      URI _computeTypeUri = XFunctionTypeRefs.computeTypeUri(clazz);
-      proxy.eSetProxyURI(_computeTypeUri);
+      proxy.eSetProxyURI(XFunctionTypeRefs.computeTypeUri(clazz));
       EObject _resolve = EcoreUtil.resolve(proxy, context);
       _xblockexpression = ((JvmType) _resolve);
     }

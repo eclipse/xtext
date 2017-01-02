@@ -14,9 +14,7 @@ public class CommentInfo extends LeafInfo {
   private final boolean trailing;
   
   public boolean endsWithNewLine() {
-    ILeafNode _node = this.getNode();
-    String _text = _node.getText();
-    return _text.endsWith("\n");
+    return this.getNode().getText().endsWith("\n");
   }
   
   public boolean isMultiline() {
@@ -27,8 +25,7 @@ public class CommentInfo extends LeafInfo {
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Comment: \"");
-    ILeafNode _node = this.getNode();
-    String _text = _node.getText();
+    String _text = this.getNode().getText();
     _builder.append(_text);
     _builder.append("\"");
     _builder.newLineIfNotEmpty();

@@ -52,9 +52,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * Interpreter for expressions at development time that uses the static linking
@@ -133,9 +131,7 @@ public class ConstantConditionsInterpreter {
   
   protected EvaluationResult _internalEvaluate(final XNumberLiteral it, final EvaluationContext context) {
     final Number value = this.numberLiterals.numberValue(it, this.numberLiterals.getJavaType(it));
-    IResolvedTypes _resolvedTypes = context.getResolvedTypes();
-    LightweightTypeReference _actualType = _resolvedTypes.getActualType(it);
-    boolean _isPrimitive = _actualType.isPrimitive();
+    boolean _isPrimitive = context.getResolvedTypes().getActualType(it).isPrimitive();
     return new EvaluationResult(value, _isPrimitive);
   }
   
@@ -242,8 +238,7 @@ public class ConstantConditionsInterpreter {
       if (feature instanceof XVariableDeclaration) {
         if (((!((XVariableDeclaration)feature).isWriteable()) && (((XVariableDeclaration)feature).getRight() != null))) {
           _matched=true;
-          XExpression _right = ((XVariableDeclaration)feature).getRight();
-          return this.evaluateAssociatedExpression(_right, context);
+          return this.evaluateAssociatedExpression(((XVariableDeclaration)feature).getRight(), context);
         }
       }
     }
@@ -258,8 +253,7 @@ public class ConstantConditionsInterpreter {
           boolean _tripleNotEquals = (_switch != null);
           if (_tripleNotEquals) {
             _matched_1=true;
-            XExpression _switch_1 = ((XSwitchExpression)container).getSwitch();
-            return this.doEvaluate(_switch_1, context);
+            return this.doEvaluate(((XSwitchExpression)container).getSwitch(), context);
           }
         }
         return new EvaluationResult(feature, false);
@@ -343,16 +337,14 @@ public class ConstantConditionsInterpreter {
     if (_isFromXbaseLibrary) {
       EvaluationResult _xblockexpression = null;
       {
-        XExpression _operand = it.getOperand();
-        final EvaluationResult arg = this.doEvaluate(_operand, context);
+        final EvaluationResult arg = this.doEvaluate(it.getOperand(), context);
         final String op = it.getConcreteSyntaxFeatureName();
         EvaluationResult _switchResult = null;
         boolean _matched = false;
         if (Objects.equal(op, "-")) {
           _matched=true;
           try {
-            Object _rawValue = arg.getRawValue();
-            final Object result = this.constantOperators.minus(_rawValue);
+            final Object result = this.constantOperators.minus(arg.getRawValue());
             boolean _isCompileTimeConstant = arg.isCompileTimeConstant();
             return new EvaluationResult(result, _isCompileTimeConstant);
           } catch (final Throwable _t) {
@@ -367,8 +359,8 @@ public class ConstantConditionsInterpreter {
         if (!_matched) {
           if ((Objects.equal(op, "!") && (arg.getRawValue() instanceof Boolean))) {
             _matched=true;
-            Object _rawValue_1 = arg.getRawValue();
-            boolean _not = (!(((Boolean) _rawValue_1)).booleanValue());
+            Object _rawValue = arg.getRawValue();
+            boolean _not = (!(((Boolean) _rawValue)).booleanValue());
             boolean _isCompileTimeConstant_1 = arg.isCompileTimeConstant();
             _switchResult = new EvaluationResult(Boolean.valueOf(_not), _isCompileTimeConstant_1);
           }
@@ -393,74 +385,48 @@ public class ConstantConditionsInterpreter {
   
   protected EvaluationResult _internalEvaluate(final XBinaryOperation it, final EvaluationContext context) {
     if ((this.isFromXbaseLibrary(it, context) && (it.getRightOperand() != null))) {
-      XExpression _leftOperand = it.getLeftOperand();
-      final EvaluationResult left = this.doEvaluate(_leftOperand, context);
-      XExpression _rightOperand = it.getRightOperand();
-      final EvaluationResult right = this.doEvaluate(_rightOperand, context);
+      final EvaluationResult left = this.doEvaluate(it.getLeftOperand(), context);
+      final EvaluationResult right = this.doEvaluate(it.getRightOperand(), context);
       try {
         final String op = it.getConcreteSyntaxFeatureName();
         Object _switchResult = null;
         if (op != null) {
           switch (op) {
             case "+":
-              Object _rawValue = left.getRawValue();
-              Object _rawValue_1 = right.getRawValue();
-              _switchResult = this.constantOperators.plus(_rawValue, _rawValue_1);
+              _switchResult = this.constantOperators.plus(left.getRawValue(), right.getRawValue());
               break;
             case "-":
-              Object _rawValue_2 = left.getRawValue();
-              Object _rawValue_3 = right.getRawValue();
-              _switchResult = this.constantOperators.minus(_rawValue_2, _rawValue_3);
+              _switchResult = this.constantOperators.minus(left.getRawValue(), right.getRawValue());
               break;
             case "*":
-              Object _rawValue_4 = left.getRawValue();
-              Object _rawValue_5 = right.getRawValue();
-              _switchResult = this.constantOperators.multiply(_rawValue_4, _rawValue_5);
+              _switchResult = this.constantOperators.multiply(left.getRawValue(), right.getRawValue());
               break;
             case "/":
-              Object _rawValue_6 = left.getRawValue();
-              Object _rawValue_7 = right.getRawValue();
-              _switchResult = this.constantOperators.divide(_rawValue_6, _rawValue_7);
+              _switchResult = this.constantOperators.divide(left.getRawValue(), right.getRawValue());
               break;
             case "%":
-              Object _rawValue_8 = left.getRawValue();
-              Object _rawValue_9 = right.getRawValue();
-              _switchResult = this.constantOperators.modulo(_rawValue_8, _rawValue_9);
+              _switchResult = this.constantOperators.modulo(left.getRawValue(), right.getRawValue());
               break;
             case "<<":
-              Object _rawValue_10 = left.getRawValue();
-              Object _rawValue_11 = right.getRawValue();
-              _switchResult = this.constantOperators.shiftLeft(_rawValue_10, _rawValue_11);
+              _switchResult = this.constantOperators.shiftLeft(left.getRawValue(), right.getRawValue());
               break;
             case ">>":
-              Object _rawValue_12 = left.getRawValue();
-              Object _rawValue_13 = right.getRawValue();
-              _switchResult = this.constantOperators.shiftRight(_rawValue_12, _rawValue_13);
+              _switchResult = this.constantOperators.shiftRight(left.getRawValue(), right.getRawValue());
               break;
             case ">>>":
-              Object _rawValue_14 = left.getRawValue();
-              Object _rawValue_15 = right.getRawValue();
-              _switchResult = this.constantOperators.shiftRightUnsigned(_rawValue_14, _rawValue_15);
+              _switchResult = this.constantOperators.shiftRightUnsigned(left.getRawValue(), right.getRawValue());
               break;
             case "<":
-              Object _rawValue_16 = left.getRawValue();
-              Object _rawValue_17 = right.getRawValue();
-              _switchResult = Boolean.valueOf(this.constantOperators.lessThan(_rawValue_16, _rawValue_17));
+              _switchResult = Boolean.valueOf(this.constantOperators.lessThan(left.getRawValue(), right.getRawValue()));
               break;
             case ">":
-              Object _rawValue_18 = left.getRawValue();
-              Object _rawValue_19 = right.getRawValue();
-              _switchResult = Boolean.valueOf(this.constantOperators.greaterThan(_rawValue_18, _rawValue_19));
+              _switchResult = Boolean.valueOf(this.constantOperators.greaterThan(left.getRawValue(), right.getRawValue()));
               break;
             case "<=":
-              Object _rawValue_20 = left.getRawValue();
-              Object _rawValue_21 = right.getRawValue();
-              _switchResult = Boolean.valueOf(this.constantOperators.lessEquals(_rawValue_20, _rawValue_21));
+              _switchResult = Boolean.valueOf(this.constantOperators.lessEquals(left.getRawValue(), right.getRawValue()));
               break;
             case ">=":
-              Object _rawValue_22 = left.getRawValue();
-              Object _rawValue_23 = right.getRawValue();
-              _switchResult = Boolean.valueOf(this.constantOperators.greaterEquals(_rawValue_22, _rawValue_23));
+              _switchResult = Boolean.valueOf(this.constantOperators.greaterEquals(left.getRawValue(), right.getRawValue()));
               break;
             case "&&":
               return this.internalLogicalAnd(left.getRawValue(), right.getRawValue(), (left.isCompileTimeConstant() && right.isCompileTimeConstant()));

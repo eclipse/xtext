@@ -1,6 +1,7 @@
 package org.eclipse.xtext.purexbase.test;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.purexbase.PureXbaseInjectorProvider;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
@@ -47,9 +48,9 @@ public class DefaultImportsConfigurationTest {
       _builder.newLine();
       _builder.append("println(\"Hello World\")");
       _builder.newLine();
-      Model _parse = this.parser.parse(_builder);
-      final Model model = _parse;
-      Assert.assertEquals(0, this.defaultImportsConfiguration.getImportSectionOffset(((XtextResource) model.eResource())));
+      final Model model = this.parser.parse(_builder);
+      Resource _eResource = model.eResource();
+      Assert.assertEquals(0, this.defaultImportsConfiguration.getImportSectionOffset(((XtextResource) _eResource)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

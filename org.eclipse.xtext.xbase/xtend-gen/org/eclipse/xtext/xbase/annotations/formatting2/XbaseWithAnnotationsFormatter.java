@@ -18,9 +18,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -61,63 +58,47 @@ import org.eclipse.xtext.xtype.XImportSection;
 @SuppressWarnings("all")
 public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
   protected void _format(final XAnnotation ann, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(ann);
-    ISemanticRegion _keyword = _regionFor.keyword("@");
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    document.append(_keyword, _function);
-    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(ann);
-    ISemanticRegion _keyword_1 = _regionFor_1.keyword("(");
+    document.append(this.textRegionExtensions.regionFor(ann).keyword("@"), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    document.surround(_keyword_1, _function_1);
+    document.surround(this.textRegionExtensions.regionFor(ann).keyword("("), _function_1);
     XExpression _value = ann.getValue();
     boolean _tripleNotEquals = (_value != null);
     if (_tripleNotEquals) {
-      XExpression _value_1 = ann.getValue();
-      document.<XExpression>format(_value_1);
-      ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(ann);
-      ISemanticRegion _keyword_2 = _regionFor_2.keyword(")");
+      document.<XExpression>format(ann.getValue());
       final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
         it.noSpace();
       };
-      document.prepend(_keyword_2, _function_2);
+      document.prepend(this.textRegionExtensions.regionFor(ann).keyword(")"), _function_2);
     } else {
-      EList<XAnnotationElementValuePair> _elementValuePairs = ann.getElementValuePairs();
-      boolean _isEmpty = _elementValuePairs.isEmpty();
+      boolean _isEmpty = ann.getElementValuePairs().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        EList<XAnnotationElementValuePair> _elementValuePairs_1 = ann.getElementValuePairs();
-        for (final XAnnotationElementValuePair pair : _elementValuePairs_1) {
+        EList<XAnnotationElementValuePair> _elementValuePairs = ann.getElementValuePairs();
+        for (final XAnnotationElementValuePair pair : _elementValuePairs) {
           {
-            ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(pair);
-            ISemanticRegion _keyword_3 = _regionFor_3.keyword("=");
             final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
               it.noSpace();
             };
-            document.surround(_keyword_3, _function_3);
-            XExpression _value_2 = pair.getValue();
-            document.<XExpression>format(_value_2);
-            ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(pair);
-            ISemanticRegion _keyword_4 = _immediatelyFollowing.keyword(",");
+            document.surround(this.textRegionExtensions.regionFor(pair).keyword("="), _function_3);
+            document.<XExpression>format(pair.getValue());
             final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
               it.noSpace();
             };
-            ISemanticRegion _prepend = document.prepend(_keyword_4, _function_4);
             final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
               it.oneSpace();
             };
-            document.append(_prepend, _function_5);
+            document.append(document.prepend(this.textRegionExtensions.immediatelyFollowing(pair).keyword(","), _function_4), _function_5);
           }
         }
-        ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(ann);
-        ISemanticRegion _keyword_3 = _regionFor_3.keyword(")");
         final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
           it.noSpace();
         };
-        document.prepend(_keyword_3, _function_3);
+        document.prepend(this.textRegionExtensions.regionFor(ann).keyword(")"), _function_3);
       }
     }
   }

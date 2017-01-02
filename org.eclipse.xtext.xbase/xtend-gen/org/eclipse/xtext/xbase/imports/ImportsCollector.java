@@ -16,7 +16,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
@@ -48,11 +47,9 @@ public class ImportsCollector {
    * Collects import declarations in XtextResource for the given range (selectedRegion)
    */
   public void collectImports(final XtextResource state, final ITextRegion selectedRegion, final ImportsAcceptor acceptor) {
-    IParseResult _parseResult = state.getParseResult();
-    ICompositeNode rootNode = _parseResult.getRootNode();
+    ICompositeNode rootNode = state.getParseResult().getRootNode();
     final EObject selectedSemanticObj = this.findActualSemanticObjectFor(rootNode, selectedRegion);
-    ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(selectedSemanticObj);
-    final Iterable<ILeafNode> contentsIterator = _findActualNodeFor.getLeafNodes();
+    final Iterable<ILeafNode> contentsIterator = NodeModelUtils.findActualNodeFor(selectedSemanticObj).getLeafNodes();
     for (final ILeafNode node : contentsIterator) {
       {
         final ITextRegion nodeRegion = node.getTotalTextRegion();
@@ -71,13 +68,12 @@ public class ImportsCollector {
   }
   
   public EObject findActualSemanticObjectFor(final ICompositeNode rootNode, final ITextRegion textRegion) {
-    int _offset = textRegion.getOffset();
-    ILeafNode leafNodeAtOffset = NodeModelUtils.findLeafNodeAtOffset(rootNode, _offset);
+    ILeafNode leafNodeAtOffset = NodeModelUtils.findLeafNodeAtOffset(rootNode, textRegion.getOffset());
     EObject semanticElementOffset = leafNodeAtOffset.getSemanticElement();
     ICompositeNode actualOffsetNode = NodeModelUtils.findActualNodeFor(semanticElementOffset);
-    int _offset_1 = textRegion.getOffset();
+    int _offset = textRegion.getOffset();
     int _length = textRegion.getLength();
-    final int endOffset = (_offset_1 + _length);
+    final int endOffset = (_offset + _length);
     while (((actualOffsetNode.getParent() != null) && (actualOffsetNode.getTotalEndOffset() < endOffset))) {
       actualOffsetNode = actualOffsetNode.getParent();
     }
@@ -189,15 +185,11 @@ public class ImportsCollector {
   
   protected String getFirstNameSegment(final String text_finalParam_) {
     String text = text_finalParam_;
-    Character _valueOf = Character.valueOf('.');
-    char _charValue = _valueOf.charValue();
-    int firstDelimiter = text.indexOf(_charValue);
+    int firstDelimiter = text.indexOf(Character.valueOf('.').charValue());
     if ((firstDelimiter == (-1))) {
       firstDelimiter = text.indexOf(Character.valueOf('$').charValue());
     } else {
-      Character _valueOf_1 = Character.valueOf('$');
-      char _charValue_1 = _valueOf_1.charValue();
-      int dollar = text.indexOf(_charValue_1);
+      int dollar = text.indexOf(Character.valueOf('$').charValue());
       if ((dollar != (-1))) {
         firstDelimiter = Math.min(firstDelimiter, dollar);
       }
@@ -239,8 +231,7 @@ public class ImportsCollector {
           final EObject element = NodeModelUtils.findActualSemanticObjectFor(documentationNode);
           IScope scope = this.scopeProvider.getScope(element, 
             TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-          QualifiedName _create = QualifiedName.create(docTypeText);
-          IEObjectDescription singleElement = scope.getSingleElement(_create);
+          IEObjectDescription singleElement = scope.getSingleElement(QualifiedName.create(docTypeText));
           JvmType referencedType = null;
           if ((singleElement != null)) {
             EObject _eObjectOrProxy = singleElement.getEObjectOrProxy();
@@ -248,8 +239,7 @@ public class ImportsCollector {
           }
           if (((referencedType instanceof JvmDeclaredType) && (!referencedType.eIsProxy()))) {
             JvmDeclaredType casted = ((JvmDeclaredType) referencedType);
-            String _qualifiedName = casted.getQualifiedName();
-            boolean _equals = _qualifiedName.equals(docTypeText);
+            boolean _equals = casted.getQualifiedName().equals(docTypeText);
             boolean _not = (!_equals);
             if (_not) {
               acceptor.acceptTypeImport(casted);

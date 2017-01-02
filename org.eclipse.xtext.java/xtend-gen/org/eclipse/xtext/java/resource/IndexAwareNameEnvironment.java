@@ -1,13 +1,10 @@
 package org.eclipse.xtext.java.resource;
 
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
 import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
@@ -50,8 +47,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
     final Function1<char[], String> _function = (char[] it) -> {
       return String.valueOf(it);
     };
-    List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(compoundTypeName)), _function);
-    final QualifiedName className = QualifiedName.create(_map);
+    final QualifiedName className = QualifiedName.create(ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(compoundTypeName)), _function));
     return this.findType(className);
   }
   
@@ -61,16 +57,11 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
       if (_containsKey) {
         return this.cache.get(className);
       }
-      Iterable<IEObjectDescription> _exportedObjects = this.resourceDescriptions.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false);
-      final IEObjectDescription candidate = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
+      final IEObjectDescription candidate = IterableExtensions.<IEObjectDescription>head(this.resourceDescriptions.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false));
       NameEnvironmentAnswer result = null;
       if ((candidate != null)) {
-        URI _eObjectURI = candidate.getEObjectURI();
-        URI _trimFragment = _eObjectURI.trimFragment();
-        final IResourceDescription resourceDescription = this.resourceDescriptions.getResourceDescription(_trimFragment);
-        ResourceSet _resourceSet = this.resource.getResourceSet();
-        URI _uRI = resourceDescription.getURI();
-        final Resource res = _resourceSet.getResource(_uRI, false);
+        final IResourceDescription resourceDescription = this.resourceDescriptions.getResourceDescription(candidate.getEObjectURI().trimFragment());
+        final Resource res = this.resource.getResourceSet().getResource(resourceDescription.getURI(), false);
         String _xifexpression = null;
         if ((res instanceof JavaResource)) {
           _xifexpression = ((JavaResource) res).getOriginalSource();
@@ -92,8 +83,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
           this.cache.put(className, null);
           return null;
         }
-        InputStream _openStream = url.openStream();
-        final ClassFileReader reader = ClassFileReader.read(_openStream, fileName);
+        final ClassFileReader reader = ClassFileReader.read(url.openStream(), fileName);
         NameEnvironmentAnswer _nameEnvironmentAnswer_1 = new NameEnvironmentAnswer(reader, null);
         result = _nameEnvironmentAnswer_1;
       }
@@ -122,8 +112,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
     if (((packageName == null) || (packageName.length == 0))) {
       return false;
     }
-    Character _head = IterableExtensions.<Character>head(((Iterable<Character>)Conversions.doWrapArray(packageName)));
-    return Character.isLowerCase((_head).charValue());
+    return Character.isLowerCase((IterableExtensions.<Character>head(((Iterable<Character>)Conversions.doWrapArray(packageName)))).charValue());
   }
   
   public IndexAwareNameEnvironment(final Resource resource, final ClassLoader classLoader, final IResourceDescriptions resourceDescriptions, final EObjectDescriptionBasedStubGenerator stubGenerator) {

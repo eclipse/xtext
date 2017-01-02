@@ -12,7 +12,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -62,8 +61,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.helper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.OPERATION_WITHOUT_PARENTHESES);
+      this.helper.assertWarning(this.expression(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.OPERATION_WITHOUT_PARENTHESES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -83,8 +81,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.helper.assertWarning(_expression, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.OPERATION_WITHOUT_PARENTHESES);
+      this.helper.assertWarning(this.expression(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.OPERATION_WITHOUT_PARENTHESES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -104,8 +101,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.helper.assertNoIssues(_expression);
+      this.helper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -125,8 +121,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.helper.assertNoIssues(_expression);
+      this.helper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -146,8 +141,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.helper.assertNoIssues(_expression);
+      this.helper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -167,8 +161,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.helper.assertNoIssues(_expression);
+      this.helper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -188,8 +181,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.helper.assertNoIssues(_expression);
+      this.helper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -209,8 +201,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.helper.assertNoIssues(_expression);
+      this.helper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -227,8 +218,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.helper.assertWarning(_expression, XbasePackage.Literals.XCONSTRUCTOR_CALL, IssueCodes.OPERATION_WITHOUT_PARENTHESES);
+      this.helper.assertWarning(this.expression(_builder), XbasePackage.Literals.XCONSTRUCTOR_CALL, IssueCodes.OPERATION_WITHOUT_PARENTHESES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -245,8 +235,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.helper.assertNoIssues(_expression);
+      this.helper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -263,8 +252,7 @@ public class CodeStyleValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.helper.assertNoIssues(_expression);
+      this.helper.assertNoIssues(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

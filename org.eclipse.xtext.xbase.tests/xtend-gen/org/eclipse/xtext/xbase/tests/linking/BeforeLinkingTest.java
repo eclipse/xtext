@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.linking;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -59,13 +58,11 @@ public class BeforeLinkingTest extends AbstractXbaseTestCase {
       Resource _eResource = block.eResource();
       final BatchLinkableResource resource = ((BatchLinkableResource) _eResource);
       resource.resolveLazyCrossReferences(null);
-      EList<XExpression> _expressions = block.getExpressions();
-      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+      XExpression _head = IterableExtensions.<XExpression>head(block.getExpressions());
       final XVariableDeclaration assignment = ((XVariableDeclaration) _head);
       XExpression _right = assignment.getRight();
       final XClosure lambda = ((XClosure) _right);
-      EList<JvmFormalParameter> _implicitFormalParameters = lambda.getImplicitFormalParameters();
-      final JvmFormalParameter implicitParameter = IterableExtensions.<JvmFormalParameter>head(_implicitFormalParameters);
+      final JvmFormalParameter implicitParameter = IterableExtensions.<JvmFormalParameter>head(lambda.getImplicitFormalParameters());
       Assert.assertEquals("String", implicitParameter.getParameterType().getSimpleName());
       resource.update(0, 0, "");
       Assert.assertNull(implicitParameter.eResource());
@@ -92,8 +89,7 @@ public class BeforeLinkingTest extends AbstractXbaseTestCase {
       final XBlockExpression block = ((XBlockExpression) _parse);
       Resource _eResource = block.eResource();
       final BatchLinkableResource resource = ((BatchLinkableResource) _eResource);
-      EList<XExpression> _expressions = block.getExpressions();
-      XExpression _last = IterableExtensions.<XExpression>last(_expressions);
+      XExpression _last = IterableExtensions.<XExpression>last(block.getExpressions());
       final XFeatureCall toString = ((XFeatureCall) _last);
       XExpression _implicitReceiver = toString.getImplicitReceiver();
       final XFeatureCall implicitReceiver = ((XFeatureCall) _implicitReceiver);
@@ -124,8 +120,7 @@ public class BeforeLinkingTest extends AbstractXbaseTestCase {
       final XBlockExpression block = ((XBlockExpression) _parse);
       Resource _eResource = block.eResource();
       final BatchLinkableResource resource = ((BatchLinkableResource) _eResource);
-      EList<XExpression> _expressions = block.getExpressions();
-      XExpression _last = IterableExtensions.<XExpression>last(_expressions);
+      XExpression _last = IterableExtensions.<XExpression>last(block.getExpressions());
       final XFeatureCall unmodifiableView = ((XFeatureCall) _last);
       XExpression _implicitFirstArgument = unmodifiableView.getImplicitFirstArgument();
       final XFeatureCall implicitFirstArgument = ((XFeatureCall) _implicitFirstArgument);

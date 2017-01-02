@@ -46,8 +46,6 @@ public class FormattingDataInit {
   
   @Override
   public String toString() {
-    ToStringBuilder _toStringBuilder = new ToStringBuilder(this);
-    ToStringBuilder _addAllFields = _toStringBuilder.addAllFields();
-    return _addAllFields.toString();
+    return new ToStringBuilder(this).addAllFields().toString();
   }
 }

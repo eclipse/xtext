@@ -14,11 +14,9 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
@@ -30,9 +28,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
-import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
@@ -41,7 +37,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
-import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
@@ -67,9 +62,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
     boolean _hasIdRule = this.hasIdRule(crossRef);
     if (_hasIdRule) {
       final XbaseIdeCrossrefProposalProvider.ProposalBracketInfo bracketInfo = this.getProposalBracketInfo(candidate, context);
-      IQualifiedNameConverter _qualifiedNameConverter = this.getQualifiedNameConverter();
-      QualifiedName _name = candidate.getName();
-      String _string = _qualifiedNameConverter.toString(_name);
+      String _string = this.getQualifiedNameConverter().toString(candidate.getName());
       final String proposalString = (_string + bracketInfo.brackets);
       int _xifexpression = (int) 0;
       if ((candidate instanceof IIdentifiableElementDescription)) {
@@ -80,14 +73,11 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
       final int insignificantParameters = _xifexpression;
       final LightweightTypeReferenceFactory converter = this.getTypeConverter(context.getResource());
       final EObject objectOrProxy = candidate.getEObjectOrProxy();
-      IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
       final Procedure1<ContentAssistEntry> _function = (ContentAssistEntry result) -> {
         if ((objectOrProxy instanceof JvmFeature)) {
           boolean _startsWith = bracketInfo.brackets.startsWith(" =");
           if (_startsWith) {
-            IQualifiedNameConverter _qualifiedNameConverter_1 = this.getQualifiedNameConverter();
-            QualifiedName _name_1 = candidate.getName();
-            String _string_1 = _qualifiedNameConverter_1.toString(_name_1);
+            String _string_1 = this.getQualifiedNameConverter().toString(candidate.getName());
             String _plus = (_string_1 + bracketInfo.brackets);
             this.addNameAndDescription(result, ((JvmFeature)objectOrProxy), 
               false, insignificantParameters, _plus, converter);
@@ -103,8 +93,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
             this.getQualifiedNameConverter().toString(candidate.getName()));
         }
         int _offset = context.getOffset();
-        String _prefix = context.getPrefix();
-        int _length = _prefix.length();
+        int _length = context.getPrefix().length();
         int _minus = (_offset - _length);
         int _length_1 = proposalString.length();
         int offset = (_minus + _length_1);
@@ -121,7 +110,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
           this.appendParameters(parameterList, ((JvmExecutable)objectOrProxy), insignificantParameters, converter);
         }
       };
-      return _proposalCreator.createProposal(proposalString, context, _function);
+      return this.getProposalCreator().createProposal(proposalString, context, _function);
     }
     return super.createProposal(candidate, crossRef, context);
   }
@@ -130,8 +119,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
     AbstractElement _terminal = crossRef.getTerminal();
     if ((_terminal instanceof RuleCall)) {
       AbstractElement _terminal_1 = crossRef.getTerminal();
-      AbstractRule _rule = ((RuleCall) _terminal_1).getRule();
-      final String ruleName = _rule.getName();
+      final String ruleName = ((RuleCall) _terminal_1).getRule().getName();
       return ((Objects.equal(ruleName, "IdOrSuper") || Objects.equal(ruleName, "ValidID")) || Objects.equal(ruleName, "FeatureCallID"));
     }
     return false;
@@ -154,15 +142,11 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
             info.selectionLength = "value".length();
             return info;
           }
-          JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(parameters);
-          final JvmTypeReference parameterType = _last.getParameterType();
-          LightweightTypeReferenceFactory _typeConverter = this.getTypeConverter(contentAssistContext.getResource());
-          final LightweightTypeReference light = _typeConverter.toLightweightReference(parameterType);
+          final JvmTypeReference parameterType = IterableExtensions.<JvmFormalParameter>last(parameters).getParameterType();
+          final LightweightTypeReference light = this.getTypeConverter(contentAssistContext.getResource()).toLightweightReference(parameterType);
           boolean _isFunctionType = light.isFunctionType();
           if (_isFunctionType) {
-            FunctionTypeReference _asFunctionTypeReference = light.getAsFunctionTypeReference();
-            List<LightweightTypeReference> _parameterTypes = _asFunctionTypeReference.getParameterTypes();
-            final int numParameters = _parameterTypes.size();
+            final int numParameters = light.getAsFunctionTypeReference().getParameterTypes().size();
             if ((numParameters == 1)) {
               info.brackets = "[]";
               info.caretOffset = (-1);
@@ -234,18 +218,12 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
       final JvmTypeReference returnType = ((JvmOperation)feature).getReturnType();
       if (((returnType != null) && (returnType.getSimpleName() != null))) {
         labelBuilder.append(" : ");
-        LightweightTypeReference _lightweightReference = converter.toLightweightReference(returnType);
-        String _humanReadableName = _lightweightReference.getHumanReadableName();
-        labelBuilder.append(_humanReadableName);
+        labelBuilder.append(converter.toLightweightReference(returnType).getHumanReadableName());
       }
-      JvmDeclaredType _declaringType = ((JvmOperation)feature).getDeclaringType();
-      LightweightTypeReference _plainTypeReference = converter.toPlainTypeReference(_declaringType);
-      String _humanReadableName_1 = _plainTypeReference.getHumanReadableName();
-      descriptionBuilder.append(_humanReadableName_1);
+      descriptionBuilder.append(converter.toPlainTypeReference(((JvmOperation)feature).getDeclaringType()).getHumanReadableName());
       if ((!withParents)) {
         descriptionBuilder.append(".");
-        String _simpleName = ((JvmOperation)feature).getSimpleName();
-        descriptionBuilder.append(_simpleName);
+        descriptionBuilder.append(((JvmOperation)feature).getSimpleName());
         descriptionBuilder.append("()");
       }
     } else {
@@ -254,17 +232,12 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         JvmTypeReference _type = ((JvmField)feature).getType();
         boolean _tripleNotEquals = (_type != null);
         if (_tripleNotEquals) {
-          JvmTypeReference _type_1 = ((JvmField)feature).getType();
-          LightweightTypeReference _lightweightReference_1 = converter.toLightweightReference(_type_1);
-          final String fieldType = _lightweightReference_1.getHumanReadableName();
+          final String fieldType = converter.toLightweightReference(((JvmField)feature).getType()).getHumanReadableName();
           if ((fieldType != null)) {
             labelBuilder.append(fieldType);
           }
         }
-        JvmDeclaredType _declaringType_1 = ((JvmField)feature).getDeclaringType();
-        LightweightTypeReference _plainTypeReference_1 = converter.toPlainTypeReference(_declaringType_1);
-        String _humanReadableName_2 = _plainTypeReference_1.getHumanReadableName();
-        descriptionBuilder.append(_humanReadableName_2);
+        descriptionBuilder.append(converter.toPlainTypeReference(((JvmField)feature).getDeclaringType()).getHumanReadableName());
       } else {
         if ((feature instanceof JvmConstructor)) {
           if (withParents) {
@@ -280,8 +253,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
   }
   
   protected void addNameAndDescription(final ContentAssistEntry entry, final EObject element, final String qualifiedNameAsString, final String shortName) {
-    IQualifiedNameConverter _qualifiedNameConverter = this.getQualifiedNameConverter();
-    final QualifiedName qualifiedName = _qualifiedNameConverter.toQualifiedName(qualifiedNameAsString);
+    final QualifiedName qualifiedName = this.getQualifiedNameConverter().toQualifiedName(qualifiedNameAsString);
     int _segmentCount = qualifiedName.getSegmentCount();
     boolean _greaterThan = (_segmentCount > 1);
     if (_greaterThan) {
@@ -294,10 +266,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
   
   protected void appendParameters(final StringBuilder result, final JvmExecutable executable, final int insignificantParameters, final LightweightTypeReferenceFactory ownedConverter) {
     final EList<JvmFormalParameter> declaredParameters = executable.getParameters();
-    int _size = declaredParameters.size();
-    int _min = Math.min(insignificantParameters, _size);
-    int _size_1 = declaredParameters.size();
-    final List<JvmFormalParameter> relevantParameters = declaredParameters.subList(_min, _size_1);
+    final List<JvmFormalParameter> relevantParameters = declaredParameters.subList(Math.min(insignificantParameters, declaredParameters.size()), declaredParameters.size());
     for (int i = 0; (i < relevantParameters.size()); i++) {
       {
         final JvmFormalParameter parameter = relevantParameters.get(i);
@@ -307,27 +276,20 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         if ((((i == (relevantParameters.size() - 1)) && executable.isVarArgs()) && (parameter.getParameterType() instanceof JvmGenericArrayTypeReference))) {
           JvmTypeReference _parameterType = parameter.getParameterType();
           final JvmGenericArrayTypeReference parameterType = ((JvmGenericArrayTypeReference) _parameterType);
-          JvmTypeReference _componentType = parameterType.getComponentType();
-          LightweightTypeReference _lightweightReference = ownedConverter.toLightweightReference(_componentType);
-          String _humanReadableName = _lightweightReference.getHumanReadableName();
-          result.append(_humanReadableName);
+          result.append(ownedConverter.toLightweightReference(parameterType.getComponentType()).getHumanReadableName());
           result.append("...");
         } else {
           JvmTypeReference _parameterType_1 = parameter.getParameterType();
           boolean _tripleNotEquals = (_parameterType_1 != null);
           if (_tripleNotEquals) {
-            JvmTypeReference _parameterType_2 = parameter.getParameterType();
-            LightweightTypeReference _lightweightReference_1 = ownedConverter.toLightweightReference(_parameterType_2);
-            final String simpleName = _lightweightReference_1.getHumanReadableName();
+            final String simpleName = ownedConverter.toLightweightReference(parameter.getParameterType()).getHumanReadableName();
             if ((simpleName != null)) {
               result.append(simpleName);
             }
           }
         }
         result.append(" ");
-        String _name = parameter.getName();
-        String _valueOf = String.valueOf(_name);
-        result.append(_valueOf);
+        result.append(String.valueOf(parameter.getName()));
       }
     }
   }

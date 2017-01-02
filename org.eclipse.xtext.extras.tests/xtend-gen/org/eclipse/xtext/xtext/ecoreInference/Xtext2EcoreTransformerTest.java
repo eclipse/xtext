@@ -10,8 +10,6 @@ package org.eclipse.xtext.xtext.ecoreInference;
 import com.google.common.base.Joiner;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -21,26 +19,20 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
 import org.eclipse.xtext.linking.ILinker;
-import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
-import org.eclipse.xtext.linking.impl.LinkingHelper;
-import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.tests.TestErrorAcceptor;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
@@ -147,48 +139,17 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   @Override
   public XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
     XtextResourceSet rs = this.<XtextResourceSet>get(XtextResourceSet.class);
-    URIConverter _uRIConverter = rs.getURIConverter();
-    Map<URI, URI> _uRIMap = _uRIConverter.getURIMap();
-    URI _createPlatformPluginURI = URI.createPlatformPluginURI("org.eclipse.xtext/", false);
-    URI _createURI = URI.createURI("classpath:/");
-    _uRIMap.put(_createPlatformPluginURI, _createURI);
-    URIConverter _uRIConverter_1 = rs.getURIConverter();
-    Map<URI, URI> _uRIMap_1 = _uRIConverter_1.getURIMap();
-    URI _createPlatformPluginURI_1 = URI.createPlatformPluginURI("org.eclipse.xtext.xbase/", false);
-    URI _createURI_1 = URI.createURI("classpath:/");
-    _uRIMap_1.put(_createPlatformPluginURI_1, _createURI_1);
-    URIConverter _uRIConverter_2 = rs.getURIConverter();
-    Map<URI, URI> _uRIMap_2 = _uRIConverter_2.getURIMap();
-    URI _createPlatformPluginURI_2 = URI.createPlatformPluginURI("org.eclipse.xtext.common.types/", false);
-    URI _createURI_2 = URI.createURI("classpath:/");
-    _uRIMap_2.put(_createPlatformPluginURI_2, _createURI_2);
-    URIConverter _uRIConverter_3 = rs.getURIConverter();
-    Map<URI, URI> _uRIMap_3 = _uRIConverter_3.getURIMap();
-    URI _createPlatformPluginURI_3 = URI.createPlatformPluginURI("org.eclipse.emf.ecore/", false);
-    URI _createURI_3 = URI.createURI("classpath:/");
-    _uRIMap_3.put(_createPlatformPluginURI_3, _createURI_3);
-    URIConverter _uRIConverter_4 = rs.getURIConverter();
-    Map<URI, URI> _uRIMap_4 = _uRIConverter_4.getURIMap();
-    URI _createPlatformResourceURI = URI.createPlatformResourceURI("org.eclipse.xtext.xbase/", false);
-    URI _createURI_4 = URI.createURI("classpath:/");
-    _uRIMap_4.put(_createPlatformResourceURI, _createURI_4);
-    URIConverter _uRIConverter_5 = rs.getURIConverter();
-    Map<URI, URI> _uRIMap_5 = _uRIConverter_5.getURIMap();
-    URI _createPlatformResourceURI_1 = URI.createPlatformResourceURI("org.eclipse.emf.ecore/", false);
-    URI _createURI_5 = URI.createURI("classpath:/");
-    _uRIMap_5.put(_createPlatformResourceURI_1, _createURI_5);
-    URIConverter _uRIConverter_6 = rs.getURIConverter();
-    Map<URI, URI> _uRIMap_6 = _uRIConverter_6.getURIMap();
-    URI _createPlatformResourceURI_2 = URI.createPlatformResourceURI("org.eclipse.xtext.common.types/", false);
-    URI _createURI_6 = URI.createURI("classpath:/");
-    _uRIMap_6.put(_createPlatformResourceURI_2, _createURI_6);
-    Class<? extends Xtext2EcoreTransformerTest> _class = this.getClass();
-    rs.setClasspathURIContext(_class);
-    IResourceFactory _resourceFactory = this.getResourceFactory();
-    Resource _createResource = _resourceFactory.createResource(uri);
+    rs.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext/", false), URI.createURI("classpath:/"));
+    rs.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.xbase/", false), URI.createURI("classpath:/"));
+    rs.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.common.types/", false), URI.createURI("classpath:/"));
+    rs.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.emf.ecore/", false), URI.createURI("classpath:/"));
+    rs.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.xbase/", false), URI.createURI("classpath:/"));
+    rs.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.emf.ecore/", false), URI.createURI("classpath:/"));
+    rs.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.common.types/", false), URI.createURI("classpath:/"));
+    rs.setClasspathURIContext(this.getClass());
+    Resource _createResource = this.getResourceFactory().createResource(uri);
     final XtextResource resource = ((XtextResource) _createResource);
-    EList<Resource> _resources = rs.getResources();
-    _resources.add(resource);
+    rs.getResources().add(resource);
     XtextLinker linker = new XtextLinker() {
       @Override
       protected Xtext2EcoreTransformer createTransformer(final Grammar grammar, final IDiagnosticConsumer consumer) {
@@ -200,14 +161,11 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
       }
     };
     ILinker _linker = resource.getLinker();
-    IScopeProvider _scopeProvider = ((XtextLinker) _linker).getScopeProvider();
-    linker.setScopeProvider(_scopeProvider);
+    linker.setScopeProvider(((XtextLinker) _linker).getScopeProvider());
     ILinker _linker_1 = resource.getLinker();
-    ILinkingService _linkingService = ((Linker) _linker_1).getLinkingService();
-    linker.setLinkingService(_linkingService);
+    linker.setLinkingService(((Linker) _linker_1).getLinkingService());
     ILinker _linker_2 = resource.getLinker();
-    LinkingHelper _linkingHelper = ((Linker) _linker_2).getLinkingHelper();
-    linker.setLinkingHelper(_linkingHelper);
+    linker.setLinkingHelper(((Linker) _linker_2).getLinkingHelper());
     XtextLinker.PackageRemover _packageRemover = new XtextLinker.PackageRemover();
     linker.setPackageRemover(_packageRemover);
     LinkingDiagnosticMessageProvider _linkingDiagnosticMessageProvider = new LinkingDiagnosticMessageProvider();
@@ -230,8 +188,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   }
   
   private EAttribute assertAttributeConfiguration(final EClass eClass, final int attributeIndex, final String featureName, final String featureTypeName) {
-    EList<EAttribute> _eAttributes = eClass.getEAttributes();
-    final EAttribute feature = _eAttributes.get(attributeIndex);
+    final EAttribute feature = eClass.getEAttributes().get(attributeIndex);
     Assert.assertEquals(featureName, feature.getName());
     Assert.assertNotNull(feature.getEType());
     Assert.assertEquals(featureTypeName, feature.getEType().getName());
@@ -246,8 +203,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   }
   
   private EReference assertReferenceConfiguration(final EClass eClass, final int referenceIndex, final String featureName, final String featureTypeName, final boolean isContainment, final int lowerBound, final int upperBound) {
-    EList<EReference> _eReferences = eClass.getEReferences();
-    final EReference reference = _eReferences.get(referenceIndex);
+    final EReference reference = eClass.getEReferences().get(referenceIndex);
     Assert.assertEquals(featureName, reference.getName());
     Assert.assertNotNull(reference.getEType());
     Assert.assertEquals(featureTypeName, reference.getEType().getName());
@@ -274,13 +230,9 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammarAsString = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammarAsString);
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final Grammar grammar = ((Grammar) _head);
-    EList<AbstractRule> _rules = grammar.getRules();
-    AbstractRule _head_1 = IterableExtensions.<AbstractRule>head(_rules);
-    TypeRef _type = _head_1.getType();
-    EClassifier _classifier = _type.getClassifier();
+    EClassifier _classifier = IterableExtensions.<AbstractRule>head(grammar.getRules()).getType().getClassifier();
     EClass array = ((EClass) _classifier);
     Assert.assertEquals("JvmComponentType", this.<EStructuralFeature>feature(array, "componentType").getEType().getName());
   }
@@ -302,13 +254,9 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammarAsString = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammarAsString);
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final Grammar grammar = ((Grammar) _head);
-    EList<AbstractRule> _rules = grammar.getRules();
-    AbstractRule _head_1 = IterableExtensions.<AbstractRule>head(_rules);
-    TypeRef _type = _head_1.getType();
-    EClassifier _classifier = _type.getClassifier();
+    EClassifier _classifier = IterableExtensions.<AbstractRule>head(grammar.getRules()).getType().getClassifier();
     EClass array = ((EClass) _classifier);
     Assert.assertEquals("JvmComponentType", this.<EStructuralFeature>feature(array, "componentType").getEType().getName());
   }
@@ -390,60 +338,20 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   @Test
   public void testEcoreReference_01() throws Exception {
     final XtextResourceSet resourceSet = new XtextResourceSet();
-    URIConverter _uRIConverter = resourceSet.getURIConverter();
-    Map<URI, URI> _uRIMap = _uRIConverter.getURIMap();
-    URI _createPlatformPluginURI = URI.createPlatformPluginURI("org.eclipse.xtext/", false);
-    URI _createURI = URI.createURI("classpath:/");
-    _uRIMap.put(_createPlatformPluginURI, _createURI);
-    URIConverter _uRIConverter_1 = resourceSet.getURIConverter();
-    Map<URI, URI> _uRIMap_1 = _uRIConverter_1.getURIMap();
-    URI _createPlatformPluginURI_1 = URI.createPlatformPluginURI("org.eclipse.xtext.xbase/", false);
-    URI _createURI_1 = URI.createURI("classpath:/");
-    _uRIMap_1.put(_createPlatformPluginURI_1, _createURI_1);
-    URIConverter _uRIConverter_2 = resourceSet.getURIConverter();
-    Map<URI, URI> _uRIMap_2 = _uRIConverter_2.getURIMap();
-    URI _createPlatformPluginURI_2 = URI.createPlatformPluginURI("org.eclipse.xtext.common.types/", false);
-    URI _createURI_2 = URI.createURI("classpath:/");
-    _uRIMap_2.put(_createPlatformPluginURI_2, _createURI_2);
-    URIConverter _uRIConverter_3 = resourceSet.getURIConverter();
-    Map<URI, URI> _uRIMap_3 = _uRIConverter_3.getURIMap();
-    URI _createPlatformPluginURI_3 = URI.createPlatformPluginURI("org.eclipse.emf.ecore/", false);
-    URI _createURI_3 = URI.createURI("classpath:/");
-    _uRIMap_3.put(_createPlatformPluginURI_3, _createURI_3);
-    URIConverter _uRIConverter_4 = resourceSet.getURIConverter();
-    Map<URI, URI> _uRIMap_4 = _uRIConverter_4.getURIMap();
-    URI _createPlatformPluginURI_4 = URI.createPlatformPluginURI("org.eclipse.xtext.tests/src/", false);
-    URI _createURI_4 = URI.createURI("classpath:/");
-    _uRIMap_4.put(_createPlatformPluginURI_4, _createURI_4);
-    URIConverter _uRIConverter_5 = resourceSet.getURIConverter();
-    Map<URI, URI> _uRIMap_5 = _uRIConverter_5.getURIMap();
-    URI _createPlatformResourceURI = URI.createPlatformResourceURI("org.eclipse.xtext.xbase/", false);
-    URI _createURI_5 = URI.createURI("classpath:/");
-    _uRIMap_5.put(_createPlatformResourceURI, _createURI_5);
-    URIConverter _uRIConverter_6 = resourceSet.getURIConverter();
-    Map<URI, URI> _uRIMap_6 = _uRIConverter_6.getURIMap();
-    URI _createPlatformResourceURI_1 = URI.createPlatformResourceURI("org.eclipse.emf.ecore/", false);
-    URI _createURI_6 = URI.createURI("classpath:/");
-    _uRIMap_6.put(_createPlatformResourceURI_1, _createURI_6);
-    URIConverter _uRIConverter_7 = resourceSet.getURIConverter();
-    Map<URI, URI> _uRIMap_7 = _uRIConverter_7.getURIMap();
-    URI _createPlatformResourceURI_2 = URI.createPlatformResourceURI("org.eclipse.xtext.common.types/", false);
-    URI _createURI_7 = URI.createURI("classpath:/");
-    _uRIMap_7.put(_createPlatformResourceURI_2, _createURI_7);
-    URIConverter _uRIConverter_8 = resourceSet.getURIConverter();
-    Map<URI, URI> _uRIMap_8 = _uRIConverter_8.getURIMap();
-    URI _createPlatformResourceURI_3 = URI.createPlatformResourceURI("org.eclipse.xtext.tests/src/", false);
-    URI _createURI_8 = URI.createURI("classpath:/");
-    _uRIMap_8.put(_createPlatformResourceURI_3, _createURI_8);
-    Class<? extends Xtext2EcoreTransformerTest> _class = this.getClass();
-    resourceSet.setClasspathURIContext(_class);
-    URIConverter _uRIConverter_9 = resourceSet.getURIConverter();
-    Map<URI, URI> _uRIMap_9 = _uRIConverter_9.getURIMap();
-    URI _createURI_9 = URI.createURI(
-      "platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore");
-    URI _createURI_10 = URI.createURI(
-      "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore");
-    _uRIMap_9.put(_createURI_9, _createURI_10);
+    resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext/", false), URI.createURI("classpath:/"));
+    resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.xbase/", false), URI.createURI("classpath:/"));
+    resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.common.types/", false), URI.createURI("classpath:/"));
+    resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.emf.ecore/", false), URI.createURI("classpath:/"));
+    resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.tests/src/", false), URI.createURI("classpath:/"));
+    resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.xbase/", false), URI.createURI("classpath:/"));
+    resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.emf.ecore/", false), URI.createURI("classpath:/"));
+    resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.common.types/", false), URI.createURI("classpath:/"));
+    resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.tests/src/", false), URI.createURI("classpath:/"));
+    resourceSet.setClasspathURIContext(this.getClass());
+    resourceSet.getURIConverter().getURIMap().put(
+      URI.createURI(
+        "platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"), URI.createURI(
+      "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"));
     Assert.assertFalse(
       resourceSet.getResource(URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"), true).getContents().isEmpty());
     Assert.assertFalse(
@@ -461,9 +369,9 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
         URI.createURI(
           "platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformPlugin.ecore"), 
         true).getContents().isEmpty());
-    URI _createURI_11 = URI.createURI(
-      "classpath:/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferenceTestLanguage.xtext");
-    Resource _resource = resourceSet.getResource(_createURI_11, 
+    Resource _resource = resourceSet.getResource(
+      URI.createURI(
+        "classpath:/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferenceTestLanguage.xtext"), 
       true);
     final XtextResource resource = ((XtextResource) _resource);
     Assert.assertTrue(Joiner.on("\n").join(resource.getErrors()), resource.getErrors().isEmpty());

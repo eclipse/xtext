@@ -12,7 +12,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.BatchReturnTypeResolverTest;
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
@@ -69,8 +68,7 @@ public class PermutingBatchReturnTypeResolverTest extends BatchReturnTypeResolve
         _builder_5.append("} }");
         this.doResolvesTo(_builder_5.toString(), type);
       }
-      IBatchTypeResolver _typeResolver = this.getTypeResolver();
-      final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
+      final IResolvedTypes resolvedTypes = this.getTypeResolver().resolveTypes(xExpression);
       final LightweightTypeReference resolvedType = resolvedTypes.getReturnType(xExpression);
       Assert.assertEquals(replacedExpressionText, type, resolvedType.getSimpleName());
       Assert.assertTrue(this.getLinkingAndSyntaxErrors(xExpression.eResource()).toString(), IterableExtensions.isEmpty(this.getLinkingAndSyntaxErrors(xExpression.eResource())));

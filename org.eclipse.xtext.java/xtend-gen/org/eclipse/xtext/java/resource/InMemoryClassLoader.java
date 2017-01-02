@@ -65,8 +65,7 @@ public class InMemoryClassLoader extends ClassLoader {
     if (_endsWith) {
       int _length = path.length();
       int _minus = (_length - 6);
-      String _substring = path.substring(0, _minus);
-      return _substring.replace("/", ".");
+      return path.substring(0, _minus).replace("/", ".");
     } else {
       return null;
     }

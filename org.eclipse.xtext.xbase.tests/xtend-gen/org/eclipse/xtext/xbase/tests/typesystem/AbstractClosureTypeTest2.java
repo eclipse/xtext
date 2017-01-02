@@ -10,16 +10,11 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
@@ -57,8 +52,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
     final List<XClosure> closures = this.findClosures(expression);
     Assert.assertFalse(closures.isEmpty());
     Assert.assertEquals(((List<String>)Conversions.doWrapArray(types)).size(), closures.size());
-    XClosure _head = IterableExtensions.<XClosure>head(closures);
-    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(_head);
+    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(IterableExtensions.<XClosure>head(closures));
     final ArrayList<Object> result = CollectionLiterals.<Object>newArrayList();
     final Procedure2<XClosure, Integer> _function = (XClosure closure, Integer index) -> {
       final LightweightTypeReference closureType = resolvedTypes.getActualType(closure);
@@ -103,22 +97,18 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
   }
   
   public String getEquivalent(final ParameterizedTypeReference type) {
-    List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
-    boolean _isEmpty = _typeArguments.isEmpty();
+    boolean _isEmpty = type.getTypeArguments().isEmpty();
     if (_isEmpty) {
-      JvmType _type = type.getType();
-      return _type.getSimpleName();
+      return type.getType().getSimpleName();
     }
     StringConcatenation _builder = new StringConcatenation();
-    JvmType _type_1 = type.getType();
-    String _simpleName = _type_1.getSimpleName();
+    String _simpleName = type.getType().getSimpleName();
     _builder.append(_simpleName);
     _builder.append("<");
-    List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
     final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
       return it.getSimpleName();
     };
-    String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments_1, ", ", _function);
+    String _join = IterableExtensions.<LightweightTypeReference>join(type.getTypeArguments(), ", ", _function);
     _builder.append(_join);
     _builder.append(">");
     return _builder.toString();
@@ -138,16 +128,11 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
   
   protected List<XClosure> findClosures(final CharSequence expression) {
     try {
-      String _string = expression.toString();
-      String _replace = _string.replace("ClosureTypeResolutionTestData", "org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeResolutionTestData");
-      final String expressionAsString = _replace.replace("$$", "org::eclipse::xtext::xbase::lib::");
+      final String expressionAsString = expression.toString().replace("ClosureTypeResolutionTestData", "org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeResolutionTestData").replace("$$", "org::eclipse::xtext::xbase::lib::");
       final XExpression xExpression = this.expression(expressionAsString, false);
-      TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
-      Iterator<XClosure> _filter = Iterators.<XClosure>filter(_eAll, XClosure.class);
-      final List<XClosure> Closures = IteratorExtensions.<XClosure>toList(_filter);
+      final List<XClosure> Closures = IteratorExtensions.<XClosure>toList(Iterators.<XClosure>filter(EcoreUtil2.eAll(xExpression), XClosure.class));
       final Function1<XClosure, Integer> _function = (XClosure it) -> {
-        ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
-        return Integer.valueOf(_findActualNodeFor.getOffset());
+        return Integer.valueOf(NodeModelUtils.findActualNodeFor(it).getOffset());
       };
       return IterableExtensions.<XClosure, Integer>sortBy(Closures, _function);
     } catch (Throwable _e) {

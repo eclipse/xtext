@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.testing;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
@@ -66,8 +65,7 @@ public class InMemoryJavaCompiler {
         final Function1<char[], String> _function = (char[] it) -> {
           return String.valueOf(it);
         };
-        List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(compoundTypeName)), _function);
-        String _join = IterableExtensions.join(_map, "/");
+        String _join = IterableExtensions.join(ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(compoundTypeName)), _function), "/");
         final String fileName = (_join + ".class");
         boolean _containsKey = this.cache.containsKey(fileName);
         if (_containsKey) {
@@ -78,8 +76,7 @@ public class InMemoryJavaCompiler {
           this.cache.put(fileName, null);
           return null;
         }
-        InputStream _openStream = url.openStream();
-        final ClassFileReader reader = ClassFileReader.read(_openStream, fileName);
+        final ClassFileReader reader = ClassFileReader.read(url.openStream(), fileName);
         final NameEnvironmentAnswer result = new NameEnvironmentAnswer(reader, null);
         this.cache.put(fileName, result);
         return result;
@@ -94,8 +91,7 @@ public class InMemoryJavaCompiler {
         final Function1<char[], String> _function = (char[] it) -> {
           return String.valueOf(it);
         };
-        List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(packageName)), _function);
-        String _join = IterableExtensions.join(_map, "/");
+        String _join = IterableExtensions.join(ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(packageName)), _function), "/");
         String _plus = (_join + "/");
         String _valueOf = String.valueOf(typeName);
         String _plus_1 = (_plus + _valueOf);
@@ -109,8 +105,7 @@ public class InMemoryJavaCompiler {
           this.cache.put(fileName, null);
           return null;
         }
-        InputStream _openStream = url.openStream();
-        final ClassFileReader reader = ClassFileReader.read(_openStream, fileName);
+        final ClassFileReader reader = ClassFileReader.read(url.openStream(), fileName);
         final NameEnvironmentAnswer result = new NameEnvironmentAnswer(reader, null);
         this.cache.put(fileName, result);
         return result;
@@ -121,8 +116,7 @@ public class InMemoryJavaCompiler {
     
     @Override
     public boolean isPackage(final char[][] parentPackageName, final char[] packageName) {
-      Character _head = IterableExtensions.<Character>head(((Iterable<Character>)Conversions.doWrapArray(packageName)));
-      return Character.isLowerCase((_head).charValue());
+      return Character.isLowerCase((IterableExtensions.<Character>head(((Iterable<Character>)Conversions.doWrapArray(packageName)))).charValue());
     }
     
     public ClassLoaderBasedNameEnvironment(final ClassLoader classLoader) {
@@ -156,8 +150,7 @@ public class InMemoryJavaCompiler {
         if (_endsWith) {
           int _length = path.length();
           int _minus = (_length - 6);
-          String _substring = path.substring(0, _minus);
-          final String className = _substring.replace("/", ".");
+          final String className = path.substring(0, _minus).replace("/", ".");
           final byte[] bytes = this.classMap.get(className);
           if ((bytes != null)) {
             final URLStreamHandler _function = new URLStreamHandler() {
@@ -274,8 +267,7 @@ public class InMemoryJavaCompiler {
     try {
       this.compilerOptions.sourceLevel = jdkVersion;
       try {
-        Field _field = CompilerOptions.class.getField("originalSourceLevel");
-        _field.setLong(this.compilerOptions, jdkVersion);
+        CompilerOptions.class.getField("originalSourceLevel").setLong(this.compilerOptions, jdkVersion);
       } catch (final Throwable _t) {
         if (_t instanceof NoSuchFieldException) {
           final NoSuchFieldException e = (NoSuchFieldException)_t;
@@ -295,8 +287,7 @@ public class InMemoryJavaCompiler {
     try {
       this.compilerOptions.complianceLevel = jdkVersion;
       try {
-        Field _field = CompilerOptions.class.getField("originalComplianceLevel");
-        _field.setLong(this.compilerOptions, jdkVersion);
+        CompilerOptions.class.getField("originalComplianceLevel").setLong(this.compilerOptions, jdkVersion);
       } catch (final Throwable _t) {
         if (_t instanceof NoSuchFieldException) {
           final NoSuchFieldException e = (NoSuchFieldException)_t;
@@ -315,14 +306,10 @@ public class InMemoryJavaCompiler {
     final ICompilerRequestor _function = (CompilationResult it) -> {
       ClassFile[] _classFiles = it.getClassFiles();
       for (final ClassFile cf : _classFiles) {
-        char[][] _compoundName = cf.getCompoundName();
         final Function1<char[], String> _function_1 = (char[] it_1) -> {
           return String.valueOf(it_1);
         };
-        List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_compoundName)), _function_1);
-        String _join = IterableExtensions.join(_map, ".");
-        byte[] _bytes = cf.getBytes();
-        result.classMap.put(_join, _bytes);
+        result.classMap.put(IterableExtensions.join(ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(cf.getCompoundName())), _function_1), "."), cf.getBytes());
       }
     };
     org.eclipse.jdt.internal.compiler.Compiler compiler = new org.eclipse.jdt.internal.compiler.Compiler(this.nameEnv, _proceedWithAllProblems, 
@@ -342,8 +329,7 @@ public class InMemoryJavaCompiler {
       }
     });
     final Function1<JavaSource, CompilationUnit> _function_1 = (JavaSource it) -> {
-      String _code = it.getCode();
-      char[] _charArray = _code.toCharArray();
+      char[] _charArray = it.getCode().toCharArray();
       String _fileName = it.getFileName();
       return new CompilationUnit(_charArray, _fileName, null);
     };

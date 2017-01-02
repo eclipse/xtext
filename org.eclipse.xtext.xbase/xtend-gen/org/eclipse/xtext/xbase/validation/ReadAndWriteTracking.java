@@ -13,7 +13,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -41,15 +40,13 @@ public class ReadAndWriteTracking {
     boolean _isRead = this.isRead(object);
     boolean _not = (!_isRead);
     if (_not) {
-      EList<Adapter> _eAdapters = object.eAdapters();
-      _xifexpression = _eAdapters.add(ReadAndWriteTracking.READMARKER);
+      _xifexpression = object.eAdapters().add(ReadAndWriteTracking.READMARKER);
     }
     return _xifexpression;
   }
   
   public boolean isRead(final EObject object) {
-    EList<Adapter> _eAdapters = object.eAdapters();
-    return _eAdapters.contains(ReadAndWriteTracking.READMARKER);
+    return object.eAdapters().contains(ReadAndWriteTracking.READMARKER);
   }
   
   private final static Adapter READMARKER = new Adapter() {
@@ -102,16 +99,13 @@ public class ReadAndWriteTracking {
     ReadAndWriteTracking.InitializedMarker _xblockexpression = null;
     {
       final ReadAndWriteTracking.InitializedMarker initializedMarker = new ReadAndWriteTracking.InitializedMarker();
-      EList<Adapter> _eAdapters = it.eAdapters();
-      _eAdapters.add(initializedMarker);
+      it.eAdapters().add(initializedMarker);
       _xblockexpression = initializedMarker;
     }
     return _xblockexpression;
   }
   
   protected ReadAndWriteTracking.InitializedMarker getInitializedMarker(final EObject object) {
-    EList<Adapter> _eAdapters = object.eAdapters();
-    Iterable<ReadAndWriteTracking.InitializedMarker> _filter = Iterables.<ReadAndWriteTracking.InitializedMarker>filter(_eAdapters, ReadAndWriteTracking.InitializedMarker.class);
-    return IterableExtensions.<ReadAndWriteTracking.InitializedMarker>head(_filter);
+    return IterableExtensions.<ReadAndWriteTracking.InitializedMarker>head(Iterables.<ReadAndWriteTracking.InitializedMarker>filter(object.eAdapters(), ReadAndWriteTracking.InitializedMarker.class));
   }
 }

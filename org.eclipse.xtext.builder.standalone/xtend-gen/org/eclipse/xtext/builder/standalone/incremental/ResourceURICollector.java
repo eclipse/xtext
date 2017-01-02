@@ -14,11 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.zip.ZipException;
@@ -58,29 +55,22 @@ public class ResourceURICollector {
   }
   
   protected Set<URI> collectResources(final Iterable<URI> roots, final Set<String> fileExtensions) {
-    Iterable<String> _plus = Iterables.<String>concat(fileExtensions, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java")));
-    final Set<String> extensions = IterableExtensions.<String>toSet(_plus);
-    PathTraverser _pathTraverser = new PathTraverser();
+    final Set<String> extensions = IterableExtensions.<String>toSet(Iterables.<String>concat(fileExtensions, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java"))));
     final Function1<URI, String> _function = (URI it) -> {
       return it.toFileString();
     };
-    Iterable<String> _map = IterableExtensions.<URI, String>map(roots, _function);
-    List<String> _list = IterableExtensions.<String>toList(_map);
     final Predicate<URI> _function_1 = (URI it) -> {
-      String _fileExtension = it.fileExtension();
-      return extensions.contains(_fileExtension);
+      return extensions.contains(it.fileExtension());
     };
-    final Multimap<String, URI> modelsFound = _pathTraverser.resolvePathes(_list, _function_1);
-    Map<String, Collection<URI>> _asMap = modelsFound.asMap();
+    final Multimap<String, URI> modelsFound = new PathTraverser().resolvePathes(IterableExtensions.<String>toList(IterableExtensions.<URI, String>map(roots, _function)), _function_1);
     final BiConsumer<String, Collection<URI>> _function_2 = (String path, Collection<URI> resource) -> {
       final File file = new File(path);
       if ((((resource != null) && (!file.isDirectory())) && file.getName().endsWith(".jar"))) {
         this.registerBundle(file);
       }
     };
-    _asMap.forEach(_function_2);
-    Collection<URI> _values = modelsFound.values();
-    return IterableExtensions.<URI>toSet(_values);
+    modelsFound.asMap().forEach(_function_2);
+    return IterableExtensions.<URI>toSet(modelsFound.values());
   }
   
   protected void registerBundle(final File file) {
@@ -92,37 +82,31 @@ public class ResourceURICollector {
       if ((manifest == null)) {
         return;
       }
-      Attributes _mainAttributes = manifest.getMainAttributes();
-      String name = _mainAttributes.getValue("Bundle-SymbolicName");
+      String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
       if ((name != null)) {
         final int indexOf = name.indexOf(";");
         if ((indexOf > 0)) {
           name = name.substring(0, indexOf);
         }
-        Map<String, URI> _platformResourceMap = EcorePlugin.getPlatformResourceMap();
-        boolean _containsKey = _platformResourceMap.containsKey(name);
+        boolean _containsKey = EcorePlugin.getPlatformResourceMap().containsKey(name);
         if (_containsKey) {
           return;
         }
-        String _absolutePath = file.getAbsolutePath();
-        URI _createFileURI = URI.createFileURI(_absolutePath);
+        URI _createFileURI = URI.createFileURI(file.getAbsolutePath());
         String _plus = ("archive:" + _createFileURI);
         final String path = (_plus + "!/");
-        Map<String, URI> _platformResourceMap_1 = EcorePlugin.getPlatformResourceMap();
-        URI _createURI = URI.createURI(path);
-        _platformResourceMap_1.put(name, _createURI);
+        EcorePlugin.getPlatformResourceMap().put(name, URI.createURI(path));
       }
     } catch (final Throwable _t) {
       if (_t instanceof ZipException) {
         final ZipException e = (ZipException)_t;
-        String _absolutePath_1 = file.getAbsolutePath();
-        String _plus_1 = ("Could not open Jar file " + _absolutePath_1);
+        String _absolutePath = file.getAbsolutePath();
+        String _plus_1 = ("Could not open Jar file " + _absolutePath);
         String _plus_2 = (_plus_1 + ".");
         ResourceURICollector.LOG.info(_plus_2);
       } else if (_t instanceof Exception) {
         final Exception e_1 = (Exception)_t;
-        String _absolutePath_2 = file.getAbsolutePath();
-        ResourceURICollector.LOG.error(_absolutePath_2, e_1);
+        ResourceURICollector.LOG.error(file.getAbsolutePath(), e_1);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

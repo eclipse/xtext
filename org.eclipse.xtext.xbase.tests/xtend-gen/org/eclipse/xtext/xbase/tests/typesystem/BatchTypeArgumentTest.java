@@ -61,8 +61,7 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
       final Function1<LightweightTypeReference, String> _function_1 = (LightweightTypeReference it) -> {
         return it.getSimpleName();
       };
-      List<String> _map = ListExtensions.<LightweightTypeReference, String>map(actualTypeArguments, _function_1);
-      String _join_1 = IterableExtensions.join(_map, ", ");
+      String _join_1 = IterableExtensions.join(ListExtensions.<LightweightTypeReference, String>map(actualTypeArguments, _function_1), ", ");
       _builder.append(_join_1);
       Assert.assertEquals(_builder.toString(), typeArgument, actualTypeArguments.get((i).intValue()).getSimpleName());
     };

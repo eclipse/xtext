@@ -8,11 +8,8 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterators;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -53,13 +50,9 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
     try {
       final XExpression xExpression = this.expression(expression, false);
       Assert.assertTrue(xExpression.eResource().getErrors().isEmpty());
-      TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
-      Iterator<XConstructorCall> _filter = Iterators.<XConstructorCall>filter(_eAll, XConstructorCall.class);
-      final List<XConstructorCall> closures = IteratorExtensions.<XConstructorCall>toList(_filter);
+      final List<XConstructorCall> closures = IteratorExtensions.<XConstructorCall>toList(Iterators.<XConstructorCall>filter(EcoreUtil2.eAll(xExpression), XConstructorCall.class));
       final Function1<XConstructorCall, Integer> _function = (XConstructorCall it) -> {
-        List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
-        INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
-        return Integer.valueOf(_head.getOffset());
+        return Integer.valueOf(IterableExtensions.<INode>head(NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR)).getOffset());
       };
       return IterableExtensions.<XConstructorCall, Integer>sortBy(closures, _function);
     } catch (Throwable _e) {

@@ -19,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.util.JavaVersion;
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
@@ -46,8 +45,7 @@ public class OverrideProposalUtil {
     if (((type == null) || (!(type instanceof JvmGenericType)))) {
       return Collections.<IResolvedExecutable>emptyList();
     }
-    GeneratorConfig _get = this.generatorConfigProvider.get(type);
-    JavaVersion sourceVersion = _get.getJavaSourceVersion();
+    JavaVersion sourceVersion = this.generatorConfigProvider.get(type).getJavaSourceVersion();
     ResolvedFeatures resolvedFeatures = this.overrideHelper.getResolvedFeatures(type, sourceVersion);
     List<IResolvedExecutable> result = Lists.<IResolvedExecutable>newArrayList();
     LightweightTypeReference _type = resolvedFeatures.getType();
@@ -80,8 +78,7 @@ public class OverrideProposalUtil {
         List<IResolvedConstructor> declaredConstructors = resolvedFeatures.getDeclaredConstructors();
         Set<String> erasedSignatures = Sets.<String>newHashSet();
         for (final IResolvedConstructor constructor : declaredConstructors) {
-          String _resolvedErasureSignature = constructor.getResolvedErasureSignature();
-          erasedSignatures.add(_resolvedErasureSignature);
+          erasedSignatures.add(constructor.getResolvedErasureSignature());
         }
         ResolvedFeatures superClass = this.overrideHelper.getResolvedFeatures(superType);
         List<IResolvedConstructor> constructors = superClass.getDeclaredConstructors();
@@ -91,8 +88,7 @@ public class OverrideProposalUtil {
             IResolvedConstructor overriddenConstructor = new ResolvedConstructor(_declaration, typeReference);
             boolean _isCandidate = this.isCandidate(typeReference, overriddenConstructor, visibilityHelper);
             if (_isCandidate) {
-              String _resolvedErasureSignature_1 = constructor_1.getResolvedErasureSignature();
-              boolean _add = erasedSignatures.add(_resolvedErasureSignature_1);
+              boolean _add = erasedSignatures.add(constructor_1.getResolvedErasureSignature());
               if (_add) {
                 result.add(overriddenConstructor);
               }
@@ -105,8 +101,7 @@ public class OverrideProposalUtil {
   }
   
   protected boolean isCandidate(final LightweightTypeReference type, final IResolvedExecutable executable, final IVisibilityHelper visibilityHelper) {
-    JvmExecutable _declaration = executable.getDeclaration();
-    JvmDeclaredType declaringType = _declaration.getDeclaringType();
+    JvmDeclaredType declaringType = executable.getDeclaration().getDeclaringType();
     if (((type.getType() != declaringType) && this.isVisible(executable, visibilityHelper))) {
       JvmExecutable rawExecutable = executable.getDeclaration();
       if ((rawExecutable instanceof JvmOperation)) {
@@ -128,7 +123,6 @@ public class OverrideProposalUtil {
   }
   
   protected boolean isVisible(final IResolvedExecutable executable, final IVisibilityHelper visibilityHelper) {
-    JvmExecutable _declaration = executable.getDeclaration();
-    return visibilityHelper.isVisible(_declaration);
+    return visibilityHelper.isVisible(executable.getDeclaration());
   }
 }

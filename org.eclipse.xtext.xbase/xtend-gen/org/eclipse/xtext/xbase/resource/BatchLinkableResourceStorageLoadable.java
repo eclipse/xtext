@@ -12,7 +12,6 @@ import com.google.common.collect.Sets;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -85,17 +84,15 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
   
   protected void readAssociationsAdapter(final BatchLinkableResource resource, final ZipInputStream stream) throws IOException {
     try {
-      EList<Adapter> _eAdapters = resource.eAdapters();
-      Iterable<JvmModelAssociator.Adapter> _filter = Iterables.<JvmModelAssociator.Adapter>filter(_eAdapters, JvmModelAssociator.Adapter.class);
-      final JvmModelAssociator.Adapter existing = IterableExtensions.<JvmModelAssociator.Adapter>head(_filter);
+      final JvmModelAssociator.Adapter existing = IterableExtensions.<JvmModelAssociator.Adapter>head(Iterables.<JvmModelAssociator.Adapter>filter(resource.eAdapters(), JvmModelAssociator.Adapter.class));
       JvmModelAssociator.Adapter _elvis = null;
       if (existing != null) {
         _elvis = existing;
       } else {
         JvmModelAssociator.Adapter _adapter = new JvmModelAssociator.Adapter();
         final Procedure1<JvmModelAssociator.Adapter> _function = (JvmModelAssociator.Adapter it) -> {
-          EList<Adapter> _eAdapters_1 = resource.eAdapters();
-          _eAdapters_1.add(it);
+          EList<Adapter> _eAdapters = resource.eAdapters();
+          _eAdapters.add(it);
         };
         JvmModelAssociator.Adapter _doubleArrow = ObjectExtensions.<JvmModelAssociator.Adapter>operator_doubleArrow(_adapter, _function);
         _elvis = _doubleArrow;
@@ -105,45 +102,29 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
       final ObjectInputStream objIn = new ObjectInputStream(stream);
       Object _readObject = objIn.readObject();
       final Map<String, String> logicalMap = ((Map<String, String>) _readObject);
-      Set<Map.Entry<String, String>> _entrySet = logicalMap.entrySet();
       final Consumer<Map.Entry<String, String>> _function_1 = (Map.Entry<String, String> it) -> {
-        String _key = it.getKey();
-        EObject _eObject = resource.getEObject(_key);
-        String _value = it.getValue();
-        EObject _eObject_1 = resource.getEObject(_value);
-        adapter.logicalContainerMap.put(_eObject, ((JvmIdentifiableElement) _eObject_1));
+        EObject _eObject = resource.getEObject(it.getValue());
+        adapter.logicalContainerMap.put(resource.getEObject(it.getKey()), ((JvmIdentifiableElement) _eObject));
       };
-      _entrySet.forEach(_function_1);
+      logicalMap.entrySet().forEach(_function_1);
       Object _readObject_1 = objIn.readObject();
       final Map<String, Set<String>> sourceToTargetMap = ((Map<String, Set<String>>) _readObject_1);
-      Set<Map.Entry<String, Set<String>>> _entrySet_1 = sourceToTargetMap.entrySet();
       final Consumer<Map.Entry<String, Set<String>>> _function_2 = (Map.Entry<String, Set<String>> it) -> {
-        String _key = it.getKey();
-        EObject _eObject = resource.getEObject(_key);
-        Set<String> _value = it.getValue();
         final Function1<String, EObject> _function_3 = (String it_1) -> {
           return resource.getEObject(it_1);
         };
-        Iterable<EObject> _map = IterableExtensions.<String, EObject>map(_value, _function_3);
-        LinkedHashSet<EObject> _newLinkedHashSet = Sets.<EObject>newLinkedHashSet(_map);
-        adapter.sourceToTargetMap.put(_eObject, _newLinkedHashSet);
+        adapter.sourceToTargetMap.put(resource.getEObject(it.getKey()), Sets.<EObject>newLinkedHashSet(IterableExtensions.<String, EObject>map(it.getValue(), _function_3)));
       };
-      _entrySet_1.forEach(_function_2);
+      sourceToTargetMap.entrySet().forEach(_function_2);
       Object _readObject_2 = objIn.readObject();
       final Map<String, Set<String>> targetToSourceMap = ((Map<String, Set<String>>) _readObject_2);
-      Set<Map.Entry<String, Set<String>>> _entrySet_2 = targetToSourceMap.entrySet();
       final Consumer<Map.Entry<String, Set<String>>> _function_3 = (Map.Entry<String, Set<String>> it) -> {
-        String _key = it.getKey();
-        EObject _eObject = resource.getEObject(_key);
-        Set<String> _value = it.getValue();
         final Function1<String, EObject> _function_4 = (String it_1) -> {
           return resource.getEObject(it_1);
         };
-        Iterable<EObject> _map = IterableExtensions.<String, EObject>map(_value, _function_4);
-        LinkedHashSet<EObject> _newLinkedHashSet = Sets.<EObject>newLinkedHashSet(_map);
-        adapter.targetToSourceMap.put(_eObject, _newLinkedHashSet);
+        adapter.targetToSourceMap.put(resource.getEObject(it.getKey()), Sets.<EObject>newLinkedHashSet(IterableExtensions.<String, EObject>map(it.getValue(), _function_4)));
       };
-      _entrySet_2.forEach(_function_3);
+      targetToSourceMap.entrySet().forEach(_function_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

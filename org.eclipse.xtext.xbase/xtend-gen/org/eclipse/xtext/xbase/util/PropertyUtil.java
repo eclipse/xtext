@@ -20,11 +20,9 @@ public class PropertyUtil {
     String _xifexpression = null;
     boolean _isStatic = feature.isStatic();
     if (_isStatic) {
-      String _simpleName = feature.getSimpleName();
-      _xifexpression = PropertyUtil.getPropertyName(feature, _simpleName, 1, 2);
+      _xifexpression = PropertyUtil.getPropertyName(feature, feature.getSimpleName(), 1, 2);
     } else {
-      String _simpleName_1 = feature.getSimpleName();
-      _xifexpression = PropertyUtil.getPropertyName(feature, _simpleName_1, 0, 1);
+      _xifexpression = PropertyUtil.getPropertyName(feature, feature.getSimpleName(), 0, 1);
     }
     return _xifexpression;
   }
@@ -58,8 +56,7 @@ public class PropertyUtil {
       final int prefixLength = prefix.length();
       String _xifexpression = null;
       if ((PropertyUtil.startsWithPrefix(methodName, prefix, prefixLength) && (operation.getParameters().size() == params))) {
-        String _substring = methodName.substring(prefixLength);
-        _xifexpression = Introspector.decapitalize(_substring);
+        _xifexpression = Introspector.decapitalize(methodName.substring(prefixLength));
       }
       _xblockexpression = _xifexpression;
     }

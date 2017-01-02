@@ -11,7 +11,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.build.BuildRequest;
@@ -101,8 +100,7 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
         projectDesc.attachToEmfObject(it);
         Map<String, ResourceDescriptionsData> _emptyMap = CollectionLiterals.<String, ResourceDescriptionsData>emptyMap();
         final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_emptyMap, it);
-        String _name = projectDesc.getName();
-        index.setContainer(_name, part);
+        index.setContainer(projectDesc.getName(), part);
         it.setClasspathURIContext(ReusedTypeProviderTest.class.getClassLoader());
       };
       final XtextResourceSet resourceSet = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
@@ -115,8 +113,7 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
             final String fullPath = ((pathToSources + "/") + file);
             final URL url = ReusedTypeProviderTest.class.getResource(fullPath);
             List<URI> _dirtyFiles = it.getDirtyFiles();
-            String _externalForm = url.toExternalForm();
-            URI _createURI = URI.createURI(_externalForm);
+            URI _createURI = URI.createURI(url.toExternalForm());
             _dirtyFiles.add(_createURI);
           }
         }
@@ -148,18 +145,14 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
   @Override
   public void testFindTypeByName_AbstractMultimap_02() {
     String typeName = "com.google.common.collect.AbstractMultimap";
-    IJvmTypeProvider _typeProvider = this.getTypeProvider();
-    JvmType _findTypeByName = _typeProvider.findTypeByName(typeName);
+    JvmType _findTypeByName = this.getTypeProvider().findTypeByName(typeName);
     JvmGenericType type = ((JvmGenericType) _findTypeByName);
-    Iterable<JvmFeature> _findAllFeaturesByName = type.findAllFeaturesByName("containsValue");
-    JvmFeature _onlyElement = Iterables.<JvmFeature>getOnlyElement(_findAllFeaturesByName);
+    JvmFeature _onlyElement = Iterables.<JvmFeature>getOnlyElement(type.findAllFeaturesByName("containsValue"));
     JvmOperation containsValue = ((JvmOperation) _onlyElement);
     Assert.assertNotNull(containsValue);
-    EList<JvmFormalParameter> _parameters = containsValue.getParameters();
-    JvmFormalParameter firstParam = _parameters.get(0);
+    JvmFormalParameter firstParam = containsValue.getParameters().get(0);
     Assert.assertEquals(1, firstParam.getAnnotations().size());
-    EList<JvmAnnotationReference> _annotations = firstParam.getAnnotations();
-    JvmAnnotationReference annotationReference = _annotations.get(0);
+    JvmAnnotationReference annotationReference = firstParam.getAnnotations().get(0);
     JvmAnnotationType annotationType = annotationReference.getAnnotation();
     Assert.assertTrue(annotationType.eIsProxy());
     Assert.assertEquals("java:/Objects/javax.annotation.Nullable", EcoreUtil.getURI(annotationType).trimFragment().toString());

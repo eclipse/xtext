@@ -1,7 +1,6 @@
 package org.eclipse.xtext.generator.grammarAccess;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -29,8 +28,7 @@ public class GrammarAccess {
    * @return The java statement
    */
   public String gaFullAccessor(final AbstractElement ele) {
-    Grammar _grammar = GrammarUtil.getGrammar(ele);
-    String _gaSimpleName = this.gaSimpleName(_grammar);
+    String _gaSimpleName = this.gaSimpleName(GrammarUtil.getGrammar(ele));
     String _plus = (_gaSimpleName + ".INSTANCE.");
     String _gaRuleElementAccessor = this.gaRuleElementAccessor(ele);
     return (_plus + _gaRuleElementAccessor);
@@ -56,8 +54,7 @@ public class GrammarAccess {
    * @return the identifier
    */
   public String gaRuleIdentifyer(final AbstractRule rule) {
-    RuleNames _ruleNames = RuleNames.getRuleNames(rule);
-    final String plainName = _ruleNames.getUniqueRuleName(rule);
+    final String plainName = RuleNames.getRuleNames(rule).getUniqueRuleName(rule);
     return this.toJavaIdentifier(plainName, true);
   }
   
@@ -88,8 +85,7 @@ public class GrammarAccess {
    * @return the GrammarAccess' simple class name
    */
   public String gaSimpleName(final Grammar grammar) {
-    String _gaFQName = this.gaFQName(grammar);
-    return this.naming.toSimpleName(_gaFQName);
+    return this.naming.toSimpleName(this.gaFQName(grammar));
   }
   
   /**
@@ -175,8 +171,7 @@ public class GrammarAccess {
    * @return The java statement
    */
   public String gaRuleElementAccessor(final AbstractElement ele) {
-    AbstractRule _containingRule = GrammarUtil.containingRule(ele);
-    String _gaElementsAccessor = this.gaElementsAccessor(_containingRule);
+    String _gaElementsAccessor = this.gaElementsAccessor(GrammarUtil.containingRule(ele));
     String _plus = (_gaElementsAccessor + ".");
     String _gaElementAccessor = this.gaElementAccessor(ele);
     return (_plus + _gaElementAccessor);
@@ -205,9 +200,7 @@ public class GrammarAccess {
       }
     }
     if (!_matched) {
-      EObject _eContainer_1 = ele.eContainer();
-      EClass _eClass = _eContainer_1.eClass();
-      String _name = _eClass.getName();
+      String _name = ele.eContainer().eClass().getName();
       String _plus = ("<error: unknown type " + _name);
       _switchResult = (_plus + ">");
     }
@@ -233,8 +226,7 @@ public class GrammarAccess {
       }
     }
     if (!_matched) {
-      EClass _eClass = ele.eClass();
-      String _name = _eClass.getName();
+      String _name = ele.eClass().getName();
       String _plus = ("<error: unknown type " + _name);
       _switchResult = (_plus + ">");
     }

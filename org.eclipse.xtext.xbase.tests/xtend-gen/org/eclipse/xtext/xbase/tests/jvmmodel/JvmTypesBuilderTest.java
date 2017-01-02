@@ -7,7 +7,6 @@ import foo.TestAnnotation3;
 import java.util.Collections;
 import java.util.List;
 import org.apache.log4j.Level;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -121,13 +120,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
       this._jvmTypesBuilder.addAnnotation(type, anno);
       Assert.assertEquals(anno.getAnnotationType(), IterableExtensions.<JvmAnnotationReference>head(type.getAnnotations()).getAnnotation());
-      EList<JvmAnnotationReference> _annotations = type.getAnnotations();
-      JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
-      EList<JvmAnnotationValue> _values = _head.getValues();
-      JvmAnnotationValue _head_1 = IterableExtensions.<JvmAnnotationValue>head(_values);
-      EList<EObject> _values_1 = ((JvmCustomAnnotationValue) _head_1).getValues();
-      EObject _head_2 = IterableExtensions.<EObject>head(_values_1);
-      Assert.assertTrue((_head_2 instanceof XStringLiteral));
+      JvmAnnotationValue _head = IterableExtensions.<JvmAnnotationValue>head(IterableExtensions.<JvmAnnotationReference>head(type.getAnnotations()).getValues());
+      EObject _head_1 = IterableExtensions.<EObject>head(((JvmCustomAnnotationValue) _head).getValues());
+      Assert.assertTrue((_head_1 instanceof XStringLiteral));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -145,13 +140,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
       this._jvmTypesBuilder.addAnnotation(type, anno);
       Assert.assertEquals(anno.getAnnotationType(), IterableExtensions.<JvmAnnotationReference>head(type.getAnnotations()).getAnnotation());
-      EList<JvmAnnotationReference> _annotations = type.getAnnotations();
-      JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
-      EList<JvmAnnotationValue> _values = _head.getValues();
-      JvmAnnotationValue _head_1 = IterableExtensions.<JvmAnnotationValue>head(_values);
-      EList<EObject> _values_1 = ((JvmCustomAnnotationValue) _head_1).getValues();
-      EObject _head_2 = IterableExtensions.<EObject>head(_values_1);
-      Assert.assertTrue((_head_2 instanceof XStringLiteral));
+      JvmAnnotationValue _head = IterableExtensions.<JvmAnnotationValue>head(IterableExtensions.<JvmAnnotationReference>head(type.getAnnotations()).getValues());
+      EObject _head_1 = IterableExtensions.<EObject>head(((JvmCustomAnnotationValue) _head).getValues());
+      Assert.assertTrue((_head_1 instanceof XStringLiteral));
       Assert.assertNull(IterableExtensions.<JvmAnnotationValue>head(IterableExtensions.<JvmAnnotationReference>head(type.getAnnotations()).getValues()).getOperation());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -197,14 +188,10 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       this._jvmTypesBuilder.addAnnotation(type, anno);
       Assert.assertEquals(anno.getAnnotationType(), IterableExtensions.<JvmAnnotationReference>head(type.getAnnotations()).getAnnotation());
       Assert.assertEquals(1, IterableExtensions.<JvmAnnotationReference>head(type.getAnnotations()).getValues().size());
-      EList<JvmAnnotationReference> _annotations = type.getAnnotations();
-      JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
-      EList<JvmAnnotationValue> _values = _head.getValues();
-      JvmAnnotationValue _head_1 = IterableExtensions.<JvmAnnotationValue>head(_values);
-      final JvmCustomAnnotationValue value = ((JvmCustomAnnotationValue) _head_1);
-      EList<EObject> _values_1 = value.getValues();
-      EObject _head_2 = IterableExtensions.<EObject>head(_values_1);
-      Assert.assertTrue((_head_2 instanceof XNumberLiteral));
+      JvmAnnotationValue _head = IterableExtensions.<JvmAnnotationValue>head(IterableExtensions.<JvmAnnotationReference>head(type.getAnnotations()).getValues());
+      final JvmCustomAnnotationValue value = ((JvmCustomAnnotationValue) _head);
+      EObject _head_1 = IterableExtensions.<EObject>head(value.getValues());
+      Assert.assertTrue((_head_1 instanceof XNumberLiteral));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -262,9 +249,10 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       Assert.assertNull(myEnum.getPackageName());
       Assert.assertEquals("MyEnum", myEnum.getSimpleName());
       Assert.assertEquals("Foo", this._jvmTypesBuilder.getDocumentation(myEnum));
-      Assert.assertArrayEquals(((Object[])Conversions.unwrapArray(CollectionLiterals.<Object>newArrayList("LITERAL0", "LITERAL1"), Object.class)), ((Object[])Conversions.unwrapArray(ListExtensions.<JvmEnumerationLiteral, String>map(myEnum.getLiterals(), ((Function1<JvmEnumerationLiteral, String>) (JvmEnumerationLiteral it) -> {
+      final Function1<JvmEnumerationLiteral, String> _function_1 = (JvmEnumerationLiteral it) -> {
         return it.getSimpleName();
-      })), Object.class)));
+      };
+      Assert.assertArrayEquals(((Object[])Conversions.unwrapArray(CollectionLiterals.<Object>newArrayList("LITERAL0", "LITERAL1"), Object.class)), ((Object[])Conversions.unwrapArray(ListExtensions.<JvmEnumerationLiteral, String>map(myEnum.getLiterals(), _function_1), Object.class)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -288,9 +276,10 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       Assert.assertNull(myEnum.getPackageName());
       Assert.assertEquals("MyEnum", myEnum.getSimpleName());
       Assert.assertEquals("Foo", this._jvmTypesBuilder.getDocumentation(myEnum));
-      Assert.assertArrayEquals(((Object[])Conversions.unwrapArray(CollectionLiterals.<Object>newArrayList("LITERAL0", "LITERAL1"), Object.class)), ((Object[])Conversions.unwrapArray(ListExtensions.<JvmEnumerationLiteral, String>map(myEnum.getLiterals(), ((Function1<JvmEnumerationLiteral, String>) (JvmEnumerationLiteral it) -> {
+      final Function1<JvmEnumerationLiteral, String> _function_1 = (JvmEnumerationLiteral it) -> {
         return it.getSimpleName();
-      })), Object.class)));
+      };
+      Assert.assertArrayEquals(((Object[])Conversions.unwrapArray(CollectionLiterals.<Object>newArrayList("LITERAL0", "LITERAL1"), Object.class)), ((Object[])Conversions.unwrapArray(ListExtensions.<JvmEnumerationLiteral, String>map(myEnum.getLiterals(), _function_1), Object.class)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -423,12 +412,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
    * Invokes an executable's compilation strategy and check against the expected string
    */
   protected void expectBody(final JvmExecutable executable, final CharSequence expectedBody) {
-    EList<Adapter> _eAdapters = executable.eAdapters();
-    Iterable<CompilationStrategyAdapter> _filter = Iterables.<CompilationStrategyAdapter>filter(_eAdapters, CompilationStrategyAdapter.class);
-    final CompilationStrategyAdapter adapter = IterableExtensions.<CompilationStrategyAdapter>head(_filter);
+    final CompilationStrategyAdapter adapter = IterableExtensions.<CompilationStrategyAdapter>head(Iterables.<CompilationStrategyAdapter>filter(executable.eAdapters(), CompilationStrategyAdapter.class));
     final FakeTreeAppendable appendable = new FakeTreeAppendable();
-    Procedure1<ITreeAppendable> _compilationStrategy = adapter.getCompilationStrategy();
-    _compilationStrategy.apply(appendable);
+    adapter.getCompilationStrategy().apply(appendable);
     Assert.assertEquals(expectedBody.toString(), appendable.toString());
   }
   
@@ -447,8 +433,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testToFieldWithKeywordCollision() {
     try {
       final XExpression e = this.expression("\'\'");
-      JvmTypeReference _typeRef = this._jvmTypeReferenceBuilder.typeRef(String.class);
-      final JvmField field = this._jvmTypesBuilder.toField(e, "package", _typeRef);
+      final JvmField field = this._jvmTypesBuilder.toField(e, "package", this._jvmTypeReferenceBuilder.typeRef(String.class));
       Assert.assertEquals("package", field.getSimpleName());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -459,8 +444,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testToGetterWithKeywordCollision() {
     try {
       final XExpression e = this.expression("\'\'");
-      JvmTypeReference _typeRef = this._jvmTypeReferenceBuilder.typeRef(String.class);
-      final JvmOperation getter = this._jvmTypesBuilder.toGetter(e, "package", _typeRef);
+      final JvmOperation getter = this._jvmTypesBuilder.toGetter(e, "package", this._jvmTypeReferenceBuilder.typeRef(String.class));
       this.expectBody(getter, "return this.package_;");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -471,8 +455,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testToSetterWithKeywordCollision() {
     try {
       final XExpression e = this.expression("\'\'");
-      JvmTypeReference _typeRef = this._jvmTypeReferenceBuilder.typeRef(String.class);
-      final JvmOperation setter = this._jvmTypesBuilder.toSetter(e, "package", _typeRef);
+      final JvmOperation setter = this._jvmTypesBuilder.toSetter(e, "package", this._jvmTypeReferenceBuilder.typeRef(String.class));
       Assert.assertEquals("package", IterableExtensions.<JvmFormalParameter>head(setter.getParameters()).getSimpleName());
       this.expectBody(setter, "this.package_ = package_;");
     } catch (Throwable _e) {

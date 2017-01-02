@@ -36,17 +36,11 @@ public class XbaseFormatterTester extends FormatterTester {
         it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
       };
       it.preferences(_function_1);
-      CharSequence _expectationOrToBeFormatted = it.getExpectationOrToBeFormatted();
-      String _string = _expectationOrToBeFormatted.toString();
-      String _trim = _string.trim();
-      String _indent = this.indent(_trim, "\t");
+      String _indent = this.indent(it.getExpectationOrToBeFormatted().toString().trim(), "\t");
       String _plus = (prefix + _indent);
       String _plus_1 = (_plus + postfix);
       it.setExpectation(_plus_1);
-      CharSequence _toBeFormatted = it.getToBeFormatted();
-      String _string_1 = _toBeFormatted.toString();
-      String _trim_1 = _string_1.trim();
-      String _indent_1 = this.indent(_trim_1, "\t");
+      String _indent_1 = this.indent(it.getToBeFormatted().toString().trim(), "\t");
       String _plus_2 = (prefix + _indent_1);
       String _plus_3 = (_plus_2 + postfix);
       it.setToBeFormatted(_plus_3);
@@ -56,7 +50,6 @@ public class XbaseFormatterTester extends FormatterTester {
   }
   
   protected String indent(final String string, final String indent) {
-    String[] _split = string.split("\\r?\\n");
     final Function1<String, String> _function = (String it) -> {
       String _xifexpression = null;
       boolean _equals = Objects.equal(it, "");
@@ -67,8 +60,6 @@ public class XbaseFormatterTester extends FormatterTester {
       }
       return _xifexpression;
     };
-    List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_split)), _function);
-    String _newLine = Strings.newLine();
-    return IterableExtensions.join(_map, _newLine);
+    return IterableExtensions.join(ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(string.split("\\r?\\n"))), _function), Strings.newLine());
   }
 }

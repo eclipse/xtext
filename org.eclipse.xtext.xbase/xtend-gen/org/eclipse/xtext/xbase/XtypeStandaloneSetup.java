@@ -21,16 +21,13 @@ import org.eclipse.xtext.xtype.XtypePackage;
 @SuppressWarnings("all")
 public class XtypeStandaloneSetup extends XtypeStandaloneSetupGenerated {
   public static void doSetup() {
-    XtypeStandaloneSetup _xtypeStandaloneSetup = new XtypeStandaloneSetup();
-    _xtypeStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new XtypeStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
   
   @Override
   public Injector createInjectorAndDoEMFRegistration() {
-    String _nsURI = TypesPackage.eINSTANCE.getNsURI();
-    EPackage.Registry.INSTANCE.put(_nsURI, TypesPackage.eINSTANCE);
-    String _nsURI_1 = XtypePackage.eINSTANCE.getNsURI();
-    EPackage.Registry.INSTANCE.put(_nsURI_1, XtypePackage.eINSTANCE);
+    EPackage.Registry.INSTANCE.put(TypesPackage.eINSTANCE.getNsURI(), TypesPackage.eINSTANCE);
+    EPackage.Registry.INSTANCE.put(XtypePackage.eINSTANCE.getNsURI(), XtypePackage.eINSTANCE);
     return super.createInjectorAndDoEMFRegistration();
   }
 }

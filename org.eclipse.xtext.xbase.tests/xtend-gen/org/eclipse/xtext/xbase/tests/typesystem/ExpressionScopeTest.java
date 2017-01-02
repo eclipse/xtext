@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProviderWithScopeTracking;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,9 +43,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
   private IBatchTypeResolver _iBatchTypeResolver;
   
   protected void contains(final IExpressionScope scope, final String name) {
-    IScope _featureScope = scope.getFeatureScope();
-    QualifiedName _create = QualifiedName.create(name);
-    this.assertContains(_featureScope, _create);
+    this.assertContains(scope.getFeatureScope(), QualifiedName.create(name));
   }
   
   protected void assertContains(final IScope scope, final QualifiedName name) {
@@ -55,16 +51,15 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
     final String toString = elements.toString();
     Assert.assertNotNull(toString, scope.getSingleElement(name));
     Assert.assertFalse(toString, IterableExtensions.isEmpty(scope.getElements(name)));
-    Assert.assertTrue(toString, IterableExtensions.<IEObjectDescription>exists(elements, ((Function1<IEObjectDescription, Boolean>) (IEObjectDescription it) -> {
+    final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
       QualifiedName _name = it.getName();
       return Boolean.valueOf(Objects.equal(_name, name));
-    })));
+    };
+    Assert.assertTrue(toString, IterableExtensions.<IEObjectDescription>exists(elements, _function));
   }
   
   protected void containsNot(final IExpressionScope scope, final String name) {
-    IScope _featureScope = scope.getFeatureScope();
-    QualifiedName _create = QualifiedName.create(name);
-    this.assertContainsNot(_featureScope, _create);
+    this.assertContainsNot(scope.getFeatureScope(), QualifiedName.create(name));
   }
   
   protected void assertContainsNot(final IScope scope, final QualifiedName name) {
@@ -72,10 +67,11 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
     final String toString = elements.toString();
     Assert.assertNull(toString, scope.getSingleElement(name));
     Assert.assertTrue(toString, IterableExtensions.isEmpty(scope.getElements(name)));
-    Assert.assertFalse(toString, IterableExtensions.<IEObjectDescription>exists(elements, ((Function1<IEObjectDescription, Boolean>) (IEObjectDescription it) -> {
+    final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
       QualifiedName _name = it.getName();
       return Boolean.valueOf(Objects.equal(_name, name));
-    })));
+    };
+    Assert.assertFalse(toString, IterableExtensions.<IEObjectDescription>exists(elements, _function));
   }
   
   @Test
@@ -85,8 +81,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       _builder.append("{ var x = 1 }");
       XExpression _expression = this.expression(_builder, false);
       final XBlockExpression block = ((XBlockExpression) _expression);
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(block);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, IExpressionScope.Anchor.AFTER);
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(block).getExpressionScope(block, IExpressionScope.Anchor.AFTER);
       this.containsNot(expressionScope, "x");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -100,8 +95,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       _builder.append("{ var x = 1 }");
       XExpression _expression = this.expression(_builder, false);
       final XBlockExpression block = ((XBlockExpression) _expression);
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(block);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(block).getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
       this.containsNot(expressionScope, "x");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -114,10 +108,8 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ var x = 1 }");
       XExpression _expression = this.expression(_builder, false);
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      final XExpression varDecl = IterableExtensions.<XExpression>head(_expressions);
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varDecl);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, IExpressionScope.Anchor.AFTER);
+      final XExpression varDecl = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(varDecl).getExpressionScope(varDecl, IExpressionScope.Anchor.AFTER);
       this.contains(expressionScope, "x");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -130,10 +122,8 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ var x = 1 }");
       XExpression _expression = this.expression(_builder, false);
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      final XExpression varDecl = IterableExtensions.<XExpression>head(_expressions);
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varDecl);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, IExpressionScope.Anchor.BEFORE);
+      final XExpression varDecl = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(varDecl).getExpressionScope(varDecl, IExpressionScope.Anchor.BEFORE);
       this.containsNot(expressionScope, "x");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -146,10 +136,8 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ var it = \"\" }");
       XExpression _expression = this.expression(_builder, false);
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      final XExpression varDecl = IterableExtensions.<XExpression>head(_expressions);
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varDecl);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, IExpressionScope.Anchor.AFTER);
+      final XExpression varDecl = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(varDecl).getExpressionScope(varDecl, IExpressionScope.Anchor.AFTER);
       this.contains(expressionScope, "charAt");
       this.contains(expressionScope, "it");
       this.contains(expressionScope, "operator_lessThan");
@@ -164,10 +152,8 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ var it = \"\" }");
       XExpression _expression = this.expression(_builder, false);
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      final XExpression varDecl = IterableExtensions.<XExpression>head(_expressions);
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varDecl);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, IExpressionScope.Anchor.BEFORE);
+      final XExpression varDecl = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(varDecl).getExpressionScope(varDecl, IExpressionScope.Anchor.BEFORE);
       this.containsNot(expressionScope, "charAt");
       this.containsNot(expressionScope, "it");
       this.containsNot(expressionScope, "operator_lessThan");
@@ -182,11 +168,9 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ var (int)=>int it = [] }");
       XExpression _expression = this.expression(_builder, false);
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+      XExpression _head = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
       final XExpression varInit = ((XVariableDeclaration) _head).getRight();
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varInit);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varInit, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(varInit).getExpressionScope(varInit, IExpressionScope.Anchor.BEFORE);
       this.contains(expressionScope, "it");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -199,11 +183,9 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ var it = [] }");
       XExpression _expression = this.expression(_builder, false);
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+      XExpression _head = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
       final XExpression varInit = ((XVariableDeclaration) _head).getRight();
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varInit);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varInit, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(varInit).getExpressionScope(varInit, IExpressionScope.Anchor.BEFORE);
       this.containsNot(expressionScope, "it");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -216,11 +198,9 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ var (int)=>int it = null }");
       XExpression _expression = this.expression(_builder, false);
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+      XExpression _head = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
       final XExpression varInit = ((XVariableDeclaration) _head).getRight();
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varInit);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varInit, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(varInit).getExpressionScope(varInit, IExpressionScope.Anchor.BEFORE);
       this.containsNot(expressionScope, "it");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -233,10 +213,8 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ var it = \"\" }");
       XExpression _expression = this.expression(_builder, false);
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      final XExpression varDecl = IterableExtensions.<XExpression>head(_expressions);
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varDecl);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, IExpressionScope.Anchor.BEFORE);
+      final XExpression varDecl = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(varDecl).getExpressionScope(varDecl, IExpressionScope.Anchor.BEFORE);
       this.contains(expressionScope, "newArrayList");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -249,13 +227,11 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ var it = new Object() if (it instanceof String) {} }");
       XExpression _expression = this.expression(_builder, false);
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      XExpression _last = IterableExtensions.<XExpression>last(_expressions);
+      XExpression _last = IterableExtensions.<XExpression>last(((XBlockExpression) _expression).getExpressions());
       final XIfExpression ifExpr = ((XIfExpression) _last);
       XExpression _then = ifExpr.getThen();
       final XBlockExpression block = ((XBlockExpression) _then);
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(block);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(block).getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
       this.contains(expressionScope, "charAt");
       this.contains(expressionScope, "it");
       this.contains(expressionScope, "operator_lessThan");
@@ -270,13 +246,11 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ var it = new Object() if (it instanceof String) { it = new Object() } }");
       XExpression _expression = this.expression(_builder, false);
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      XExpression _last = IterableExtensions.<XExpression>last(_expressions);
+      XExpression _last = IterableExtensions.<XExpression>last(((XBlockExpression) _expression).getExpressions());
       final XIfExpression ifExpr = ((XIfExpression) _last);
       XExpression _then = ifExpr.getThen();
       final XBlockExpression block = ((XBlockExpression) _then);
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(block);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(block).getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
       this.contains(expressionScope, "charAt");
       this.contains(expressionScope, "it");
       this.contains(expressionScope, "operator_lessThan");
@@ -291,15 +265,12 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{ var it = new Object() if (it instanceof String) { it = new Object() } }");
       XExpression _expression = this.expression(_builder, false);
-      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-      XExpression _last = IterableExtensions.<XExpression>last(_expressions);
+      XExpression _last = IterableExtensions.<XExpression>last(((XBlockExpression) _expression).getExpressions());
       final XIfExpression ifExpr = ((XIfExpression) _last);
       XExpression _then = ifExpr.getThen();
       final XBlockExpression block = ((XBlockExpression) _then);
-      EList<XExpression> _expressions_1 = block.getExpressions();
-      final XExpression assignment = IterableExtensions.<XExpression>head(_expressions_1);
-      IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(assignment);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(assignment, IExpressionScope.Anchor.AFTER);
+      final XExpression assignment = IterableExtensions.<XExpression>head(block.getExpressions());
+      final IExpressionScope expressionScope = this._iBatchTypeResolver.resolveTypes(assignment).getExpressionScope(assignment, IExpressionScope.Anchor.AFTER);
       this.containsNot(expressionScope, "charAt");
       this.contains(expressionScope, "it");
       this.containsNot(expressionScope, "operator_lessThan");

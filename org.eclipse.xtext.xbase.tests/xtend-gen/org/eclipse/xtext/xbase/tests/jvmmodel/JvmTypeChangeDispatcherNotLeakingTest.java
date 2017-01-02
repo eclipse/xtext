@@ -9,10 +9,8 @@ package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.inject.Inject;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
@@ -49,26 +47,18 @@ public class JvmTypeChangeDispatcherNotLeakingTest extends AbstractJvmModelTest 
       Resource _newResource = this.newResource(contents);
       final XtextResource resource = ((XtextResource) _newResource);
       EcoreUtil2.resolveAll(resource);
-      ResourceSet _resourceSet = resource.getResourceSet();
-      final JvmTypeChangeDispatcher dispatcher = JvmTypeChangeDispatcher.findResourceChangeDispatcher(_resourceSet);
+      final JvmTypeChangeDispatcher dispatcher = JvmTypeChangeDispatcher.findResourceChangeDispatcher(resource.getResourceSet());
       List<Runnable> listeners = this._reflectExtensions.<List<Runnable>>get(dispatcher, "listeners");
-      int _size = listeners.size();
-      Assert.assertEquals(2, _size);
+      Assert.assertEquals(2, listeners.size());
       resource.reparse(contents);
       EcoreUtil2.resolveAll(resource);
-      List<Runnable> _get = this._reflectExtensions.<List<Runnable>>get(dispatcher, "listeners");
-      listeners = _get;
-      int _size_1 = listeners.size();
-      Assert.assertEquals(2, _size_1);
-      EList<EObject> _contents = resource.getContents();
-      final EObject jvmType = _contents.get(1);
+      listeners = this._reflectExtensions.<List<Runnable>>get(dispatcher, "listeners");
+      Assert.assertEquals(2, listeners.size());
+      final EObject jvmType = resource.getContents().get(1);
       this.unloader.unloadRoot(jvmType);
-      EList<EObject> _contents_1 = resource.getContents();
-      _contents_1.remove(jvmType);
-      List<Runnable> _get_1 = this._reflectExtensions.<List<Runnable>>get(dispatcher, "listeners");
-      listeners = _get_1;
-      int _size_2 = listeners.size();
-      Assert.assertEquals(0, _size_2);
+      resource.getContents().remove(jvmType);
+      listeners = this._reflectExtensions.<List<Runnable>>get(dispatcher, "listeners");
+      Assert.assertEquals(0, listeners.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

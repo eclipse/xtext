@@ -1,7 +1,6 @@
 package org.eclipse.xtext.builder.tests;
 
 import com.google.common.collect.Iterables;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -15,9 +14,7 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 public class MyGenerator implements IGenerator {
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
-    TreeIterator<EObject> _allContents = input.getAllContents();
-    Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_allContents);
-    Iterable<Element> _filter = Iterables.<Element>filter(_iterable, Element.class);
+    Iterable<Element> _filter = Iterables.<Element>filter(IteratorExtensions.<EObject>toIterable(input.getAllContents()), Element.class);
     for (final Element ele : _filter) {
       {
         if ((fsa instanceof IFileSystemAccess2)) {

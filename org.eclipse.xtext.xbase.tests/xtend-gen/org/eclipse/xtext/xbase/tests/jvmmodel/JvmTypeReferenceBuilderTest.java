@@ -99,7 +99,8 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
   
   @Test
   public void testWildcard_01() {
-    Assert.assertEquals("java.lang.Object", IterableExtensions.<JvmTypeConstraint>head(((JvmWildcardTypeReference) this.typeReferenceBuilder.wildcard()).getConstraints()).getTypeReference().getIdentifier());
+    JvmTypeReference _wildcard = this.typeReferenceBuilder.wildcard();
+    Assert.assertEquals("java.lang.Object", IterableExtensions.<JvmTypeConstraint>head(((JvmWildcardTypeReference) _wildcard).getConstraints()).getTypeReference().getIdentifier());
   }
   
   @Test

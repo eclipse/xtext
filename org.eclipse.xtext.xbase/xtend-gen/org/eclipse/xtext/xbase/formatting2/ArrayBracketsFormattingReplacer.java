@@ -28,8 +28,7 @@ public class ArrayBracketsFormattingReplacer implements ITextReplacer {
     final String t = this.region.getText();
     final int offset = this.region.getOffset();
     for (int i = 0; (i < t.length()); i++) {
-      char _charAt = t.charAt(i);
-      boolean _isWhitespace = Character.isWhitespace(_charAt);
+      boolean _isWhitespace = Character.isWhitespace(t.charAt(i));
       if (_isWhitespace) {
         it.addReplacement(this.region.getTextRegionAccess().getRewriter().createReplacement((offset + i), 1, ""));
       }

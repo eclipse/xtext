@@ -40,11 +40,10 @@ public class JavaResourceDescriptionManager implements IResourceDescription.Mana
         }
         final DefaultResourceDescription result = new DefaultResourceDescription(resource, this.descriptionStrategy, this.cache);
         if ((!initialized)) {
-          Iterable<IEObjectDescription> _exportedObjects = result.getExportedObjects();
           final Consumer<IEObjectDescription> _function = (IEObjectDescription it) -> {
             it.getEObjectURI();
           };
-          _exportedObjects.forEach(_function);
+          result.getExportedObjects().forEach(_function);
         }
         return result;
       } finally {
@@ -64,8 +63,7 @@ public class JavaResourceDescriptionManager implements IResourceDescription.Mana
   
   @Override
   public boolean isAffected(final Collection<IResourceDescription.Delta> deltas, final IResourceDescription candidate, final IResourceDescriptions context) throws IllegalArgumentException {
-    Iterable<QualifiedName> _importedNames = candidate.getImportedNames();
-    Collection<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(_importedNames);
+    Collection<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(candidate.getImportedNames());
     for (final IResourceDescription.Delta delta : deltas) {
       boolean _hasChanges = this.hasChanges(delta, candidate);
       if (_hasChanges) {
@@ -90,9 +88,7 @@ public class JavaResourceDescriptionManager implements IResourceDescription.Mana
     if ((description != null)) {
       Iterable<IEObjectDescription> _exportedObjects = description.getExportedObjects();
       for (final IEObjectDescription desc : _exportedObjects) {
-        QualifiedName _name = desc.getName();
-        QualifiedName _lowerCase = _name.toLowerCase();
-        boolean _contains = importedNames.contains(_lowerCase);
+        boolean _contains = importedNames.contains(desc.getName().toLowerCase());
         if (_contains) {
           return true;
         }

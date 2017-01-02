@@ -10,10 +10,8 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
@@ -67,9 +65,7 @@ public class ResolvedTypesTest extends AbstractXbaseTestCase {
   
   @Test
   public void testCreateAndGetUnboundTypeParameter() {
-    XFeatureCall _createXFeatureCall = this.xbaseFactory.createXFeatureCall();
-    JvmTypeParameter _createJvmTypeParameter = this.typesFactory.createJvmTypeParameter();
-    final UnboundTypeReference unbound = this.testMe.createUnboundTypeReference(_createXFeatureCall, _createJvmTypeParameter);
+    final UnboundTypeReference unbound = this.testMe.createUnboundTypeReference(this.xbaseFactory.createXFeatureCall(), this.typesFactory.createJvmTypeParameter());
     Assert.assertSame(unbound, this.testMe.getUnboundTypeReference(unbound.getHandle()));
   }
   

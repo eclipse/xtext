@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.validation;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -102,19 +101,17 @@ public class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
   
   protected void _findImplicitReturns(final XTryCatchFinallyExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
     this.findImplicitReturns(expression.getExpression(), acceptor);
-    EList<XCatchClause> _catchClauses = expression.getCatchClauses();
     final Consumer<XCatchClause> _function = (XCatchClause it) -> {
       this.findImplicitReturns(it.getExpression(), acceptor);
     };
-    _catchClauses.forEach(_function);
+    expression.getCatchClauses().forEach(_function);
   }
   
   protected void _findImplicitReturns(final XSwitchExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
-    EList<XCasePart> _cases = expression.getCases();
     final Consumer<XCasePart> _function = (XCasePart it) -> {
       this.findImplicitReturns(it.getThen(), acceptor);
     };
-    _cases.forEach(_function);
+    expression.getCases().forEach(_function);
     this.findImplicitReturns(expression.getDefault(), acceptor);
   }
   

@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.descriptions.JvmDeclaredTypeSignatureHashProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -93,7 +94,8 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
   public void testSealedType() {
     try {
       final XExpression e = this.expression("null");
-      Assert.assertEquals("java.lang.String", this._jvmDeclaredTypeSignatureHashProvider.getHash(((JvmDeclaredType) this._typeReferences.findDeclaredType(String.class, e))));
+      JvmType _findDeclaredType = this._typeReferences.findDeclaredType(String.class, e);
+      Assert.assertEquals("java.lang.String", this._jvmDeclaredTypeSignatureHashProvider.getHash(((JvmDeclaredType) _findDeclaredType)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

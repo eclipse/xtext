@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import java.util.List;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -27,15 +26,11 @@ public class WhitespaceInfo extends LeafInfo {
   public CommentInfo leadingComment() {
     CommentInfo _xblockexpression = null;
     {
-      HiddenLeafs _container = this.getContainer();
-      List<LeafInfo> _leafs = _container.getLeafs();
-      int _indexOf = _leafs.indexOf(this);
+      int _indexOf = this.getContainer().getLeafs().indexOf(this);
       final int i = (_indexOf - 1);
       CommentInfo _xifexpression = null;
       if ((i >= 0)) {
-        HiddenLeafs _container_1 = this.getContainer();
-        List<LeafInfo> _leafs_1 = _container_1.getLeafs();
-        LeafInfo _get = _leafs_1.get(i);
+        LeafInfo _get = this.getContainer().getLeafs().get(i);
         _xifexpression = ((CommentInfo) _get);
       }
       _xblockexpression = _xifexpression;
@@ -46,19 +41,13 @@ public class WhitespaceInfo extends LeafInfo {
   public CommentInfo trailingComment() {
     CommentInfo _xblockexpression = null;
     {
-      HiddenLeafs _container = this.getContainer();
-      List<LeafInfo> _leafs = _container.getLeafs();
-      int _indexOf = _leafs.indexOf(this);
+      int _indexOf = this.getContainer().getLeafs().indexOf(this);
       final int i = (_indexOf + 1);
       CommentInfo _xifexpression = null;
-      HiddenLeafs _container_1 = this.getContainer();
-      List<LeafInfo> _leafs_1 = _container_1.getLeafs();
-      int _size = _leafs_1.size();
+      int _size = this.getContainer().getLeafs().size();
       boolean _lessThan = (i < _size);
       if (_lessThan) {
-        HiddenLeafs _container_2 = this.getContainer();
-        List<LeafInfo> _leafs_2 = _container_2.getLeafs();
-        LeafInfo _get = _leafs_2.get(i);
+        LeafInfo _get = this.getContainer().getLeafs().get(i);
         _xifexpression = ((CommentInfo) _get);
       }
       _xblockexpression = _xifexpression;

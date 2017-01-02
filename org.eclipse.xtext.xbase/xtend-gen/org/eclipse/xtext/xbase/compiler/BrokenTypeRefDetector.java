@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -50,11 +49,9 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
   
   @Override
   public Boolean doVisitWildcardTypeReference(final JvmWildcardTypeReference it) {
-    EList<JvmTypeConstraint> _constraints = it.getConstraints();
     final Function1<JvmTypeConstraint, Boolean> _function = (JvmTypeConstraint it_1) -> {
-      JvmTypeReference _typeReference = it_1.getTypeReference();
-      return this.visit(_typeReference);
+      return this.visit(it_1.getTypeReference());
     };
-    return Boolean.valueOf(IterableExtensions.<JvmTypeConstraint>exists(_constraints, _function));
+    return Boolean.valueOf(IterableExtensions.<JvmTypeConstraint>exists(it.getConstraints(), _function));
   }
 }

@@ -144,8 +144,7 @@ public class ConstantOperators {
     for (final Map.Entry<String, String> op : _entrySet) {
       {
         String _xifexpression = null;
-        String _value = op.getValue();
-        boolean _contains = booleanOps.contains(_value);
+        boolean _contains = booleanOps.contains(op.getValue());
         if (_contains) {
           _xifexpression = "boolean ";
         } else {
@@ -162,8 +161,8 @@ public class ConstantOperators {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("throw new ConstantExpressionEvaluationException(\"Unsupported operator \'");
-        String _value_1 = op.getValue();
-        _builder.append(_value_1, "\t");
+        String _value = op.getValue();
+        _builder.append(_value, "\t");
         _builder.append("\' for operands \"+left+\" and \"+right);");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -188,8 +187,8 @@ public class ConstantOperators {
               String _get = types.get(left);
               _builder_1.append(_get);
               _builder_1.append(" ");
-              String _value_2 = op.getValue();
-              _builder_1.append(_value_2);
+              String _value_1 = op.getValue();
+              _builder_1.append(_value_1);
               _builder_1.append(" right.");
               String _get_1 = types.get(right);
               _builder_1.append(_get_1);

@@ -34,24 +34,19 @@ public class ObjectEntry<T extends Object, R extends ITextSegment> extends Entry
     final SeparatorEntry<T, R> trail = this.getTrailingSeparator();
     int _xifexpression = (int) 0;
     if ((prev != null)) {
-      R _separator = prev.getSeparator();
-      _xifexpression = _separator.getEndOffset();
+      _xifexpression = prev.getSeparator().getEndOffset();
     } else {
-      ITextSegment _root = this.list.getRoot();
-      _xifexpression = _root.getOffset();
+      _xifexpression = this.list.getRoot().getOffset();
     }
     final int offset = _xifexpression;
     int _xifexpression_1 = (int) 0;
     if ((trail != null)) {
-      R _separator_1 = trail.getSeparator();
-      _xifexpression_1 = _separator_1.getOffset();
+      _xifexpression_1 = trail.getSeparator().getOffset();
     } else {
-      ITextSegment _root_1 = this.list.getRoot();
-      _xifexpression_1 = _root_1.getEndOffset();
+      _xifexpression_1 = this.list.getRoot().getEndOffset();
     }
     final int endOffset = _xifexpression_1;
-    ITextSegment _root_2 = this.list.getRoot();
-    ITextRegionAccess _textRegionAccess = _root_2.getTextRegionAccess();
+    ITextRegionAccess _textRegionAccess = this.list.getRoot().getTextRegionAccess();
     return new TextSegment(_textRegionAccess, offset, (endOffset - offset));
   }
   
@@ -99,8 +94,7 @@ public class ObjectEntry<T extends Object, R extends ITextSegment> extends Entry
       int _length = reg.getLength();
       _builder.append(_length);
       _builder.append(" (");
-      Class<?> _class = this.object.getClass();
-      String _simpleName = _class.getSimpleName();
+      String _simpleName = this.object.getClass().getSimpleName();
       _builder.append(_simpleName);
       _builder.append(")");
       _xblockexpression = _builder.toString();

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.interpreter;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -34,14 +33,10 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
   
   @Test
   public void testXNumberLiteral() {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("int", "1");
-    this.evaluatesTo(_mappedTo, Integer.valueOf(1));
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("short", "1 as short");
-    this.evaluatesTo(_mappedTo_1, Integer.valueOf(1));
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("byte", "1 as byte");
-    this.evaluatesTo(_mappedTo_2, Integer.valueOf(1));
-    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("char", "1 as char");
-    this.evaluatesTo(_mappedTo_3, Integer.valueOf(1));
+    this.evaluatesTo(Pair.<String, String>of("int", "1"), Integer.valueOf(1));
+    this.evaluatesTo(Pair.<String, String>of("short", "1 as short"), Integer.valueOf(1));
+    this.evaluatesTo(Pair.<String, String>of("byte", "1 as byte"), Integer.valueOf(1));
+    this.evaluatesTo(Pair.<String, String>of("char", "1 as char"), Integer.valueOf(1));
   }
   
   @Test
@@ -60,8 +55,7 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
       _builder.newLine();
       XExpression _expression = this.expression(_builder);
       final XBlockExpression blockExpression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = blockExpression.getExpressions();
-      XExpression _get = _expressions.get(1);
+      XExpression _get = blockExpression.getExpressions().get(1);
       final XVariableDeclaration variableDeclaration = ((XVariableDeclaration) _get);
       this.evaluatesTo(variableDeclaration, Integer.valueOf(1));
     } catch (Throwable _e) {
@@ -142,8 +136,7 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
       final String charSequence = _builder.toString();
       XExpression _expression = this.expression(charSequence, true);
       final XBlockExpression blockExpression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = blockExpression.getExpressions();
-      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+      XExpression _head = IterableExtensions.<XExpression>head(blockExpression.getExpressions());
       final XVariableDeclaration variableDeclaration = ((XVariableDeclaration) _head);
       this.evaluatesTo(variableDeclaration, assertions);
     } catch (Throwable _e) {
@@ -159,8 +152,7 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
   }
   
   protected void evaluatesTo(final XVariableDeclaration it, final Procedure1<? super Object> assertions) {
-    XExpression _right = it.getRight();
-    final Object value = this.interpreter.evaluate(_right);
+    final Object value = this.interpreter.evaluate(it.getRight());
     assertions.apply(value);
   }
 }

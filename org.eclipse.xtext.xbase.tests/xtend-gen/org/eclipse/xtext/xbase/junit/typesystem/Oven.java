@@ -12,8 +12,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.lang.reflect.Method;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -56,8 +54,7 @@ public class Oven extends Assert {
   private ParseHelper<EObject> _parseHelper;
   
   public void fireproof(final CharSequence input) throws Exception {
-    String _string = input.toString();
-    this.fireproof(_string);
+    this.fireproof(input.toString());
   }
   
   public void fireproof(final String input) throws Exception {
@@ -66,8 +63,7 @@ public class Oven extends Assert {
       final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
       Assert.assertNotNull(resolvedTypes);
       if ((file != null)) {
-        TreeIterator<EObject> _eAllContents = file.eAllContents();
-        Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
+        Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(file.eAllContents());
         for (final EObject content : _iterable) {
           boolean _matched = false;
           if (content instanceof XAbstractFeatureCall) {
@@ -88,11 +84,10 @@ public class Oven extends Assert {
             if (content instanceof XClosure) {
               _matched=true;
               this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-              EList<JvmFormalParameter> _implicitFormalParameters = ((XClosure)content).getImplicitFormalParameters();
               final Consumer<JvmFormalParameter> _function = (JvmFormalParameter it) -> {
                 this.assertIdentifiableTypeIsResolved(it, resolvedTypes);
               };
-              _implicitFormalParameters.forEach(_function);
+              ((XClosure)content).getImplicitFormalParameters().forEach(_function);
             }
           }
           if (!_matched) {

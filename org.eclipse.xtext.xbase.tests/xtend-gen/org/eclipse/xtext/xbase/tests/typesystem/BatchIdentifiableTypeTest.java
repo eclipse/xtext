@@ -39,8 +39,7 @@ public class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
     try {
       final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
       final XExpression xExpression = this.expression(expressionWithQualifiedNames, false);
-      IBatchTypeResolver _typeResolver = this.getTypeResolver();
-      final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
+      final IResolvedTypes resolvedTypes = this.getTypeResolver().resolveTypes(xExpression);
       final List<JvmIdentifiableElement> identifiables = this.findIdentifiables(xExpression);
       Assert.assertFalse(identifiables.isEmpty());
       Assert.assertEquals(((List<String>)Conversions.doWrapArray(types)).size(), identifiables.size());

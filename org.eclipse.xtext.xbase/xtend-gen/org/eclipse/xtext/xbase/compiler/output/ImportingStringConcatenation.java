@@ -46,13 +46,11 @@ public class ImportingStringConcatenation extends StringConcatenation {
   }
   
   protected String _getStringRepresentation(final JvmType object) {
-    CharSequence _serialize = this.importManager.serialize(object);
-    return _serialize.toString();
+    return this.importManager.serialize(object).toString();
   }
   
   protected String _getStringRepresentation(final JvmTypeReference object) {
-    LightweightTypeReferenceFactory _lightweightTypeReferenceFactory = new LightweightTypeReferenceFactory(this.typeReferenceOwner, true);
-    final LightweightTypeReference reference = _lightweightTypeReferenceFactory.toLightweightReference(object);
+    final LightweightTypeReference reference = new LightweightTypeReferenceFactory(this.typeReferenceOwner, true).toLightweightReference(object);
     return this._getStringRepresentation(reference);
   }
   
@@ -64,8 +62,7 @@ public class ImportingStringConcatenation extends StringConcatenation {
   }
   
   protected String _getStringRepresentation(final Class<?> object) {
-    CharSequence _serialize = this.importManager.serialize(object);
-    return _serialize.toString();
+    return this.importManager.serialize(object).toString();
   }
   
   /**

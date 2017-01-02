@@ -10,18 +10,15 @@ package org.eclipse.xtext.xbase.interpreter;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
-import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -56,15 +53,13 @@ public class AbstractConstantExpressionsInterpreter {
   
   protected Object evaluate(final XExpression expression, final Context ctx) {
     Object _xifexpression = null;
-    Set<XExpression> _alreadyEvaluating = ctx.getAlreadyEvaluating();
-    boolean _add = _alreadyEvaluating.add(expression);
+    boolean _add = ctx.getAlreadyEvaluating().add(expression);
     if (_add) {
       Object _xtrycatchfinallyexpression = null;
       try {
         _xtrycatchfinallyexpression = this.internalEvaluate(expression, ctx);
       } finally {
-        Set<XExpression> _alreadyEvaluating_1 = ctx.getAlreadyEvaluating();
-        _alreadyEvaluating_1.remove(expression);
+        ctx.getAlreadyEvaluating().remove(expression);
       }
       _xifexpression = _xtrycatchfinallyexpression;
     } else {
@@ -135,10 +130,8 @@ public class AbstractConstantExpressionsInterpreter {
     Object _xblockexpression = null;
     {
       final Context context = ctx.cloneWithExpectation(null);
-      XExpression _leftOperand = it.getLeftOperand();
-      final Object left = this.evaluate(_leftOperand, context);
-      XExpression _rightOperand = it.getRightOperand();
-      final Object right = this.evaluate(_rightOperand, context);
+      final Object left = this.evaluate(it.getLeftOperand(), context);
+      final Object right = this.evaluate(it.getRightOperand(), context);
       _xblockexpression = this.evaluateBinaryOperation(it, left, right);
     }
     return _xblockexpression;
@@ -215,8 +208,7 @@ public class AbstractConstantExpressionsInterpreter {
   protected Object _internalEvaluate(final XUnaryOperation it, final Context ctx) {
     Object _xblockexpression = null;
     {
-      XExpression _operand = it.getOperand();
-      final Object value = this.evaluate(_operand, ctx);
+      final Object value = this.evaluate(it.getOperand(), ctx);
       final String op = this.getOperator(it);
       Object _switchResult = null;
       boolean _matched = false;
@@ -253,10 +245,7 @@ public class AbstractConstantExpressionsInterpreter {
       boolean _isLoadedFromStorage = ((StorageAwareResource)res).isLoadedFromStorage();
       if (_isLoadedFromStorage) {
         _matched=true;
-        JvmIdentifiableElement _feature = call.getFeature();
-        String _simpleName = _feature.getSimpleName();
-        QualifiedName _create = QualifiedName.create(_simpleName);
-        QualifiedName _operator = this.operatorMapping.getOperator(_create);
+        QualifiedName _operator = this.operatorMapping.getOperator(QualifiedName.create(call.getFeature().getSimpleName()));
         String _string = null;
         if (_operator!=null) {
           _string=_operator.toString();
@@ -271,8 +260,7 @@ public class AbstractConstantExpressionsInterpreter {
   }
   
   protected String toText(final XExpression expression) {
-    ICompositeNode _node = NodeModelUtils.getNode(expression);
-    return _node.getText();
+    return NodeModelUtils.getNode(expression).getText();
   }
   
   public Object internalEvaluate(final XExpression it, final Context ctx) {

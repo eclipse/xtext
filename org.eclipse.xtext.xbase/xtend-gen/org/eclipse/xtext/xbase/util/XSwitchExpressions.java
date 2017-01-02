@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.util;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -119,16 +118,14 @@ public class XSwitchExpressions {
     final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(it);
     final JvmFormalParameter declaredParam = it.getDeclaredParam();
     if ((declaredParam == null)) {
-      XExpression _switch = it.getSwitch();
-      return resolvedTypes.getActualType(_switch);
+      return resolvedTypes.getActualType(it.getSwitch());
     }
     final LightweightTypeReference paramType = resolvedTypes.getActualType(declaredParam);
     LightweightTypeReference _elvis = null;
     if (paramType != null) {
       _elvis = paramType;
     } else {
-      XExpression _switch_1 = it.getSwitch();
-      LightweightTypeReference _actualType = resolvedTypes.getActualType(_switch_1);
+      LightweightTypeReference _actualType = resolvedTypes.getActualType(it.getSwitch());
       _elvis = _actualType;
     }
     return _elvis;
@@ -157,20 +154,16 @@ public class XSwitchExpressions {
     if ((then != null)) {
       return then;
     }
-    EList<XCasePart> _cases = switchExpression.getCases();
-    final int casePartIndex = _cases.indexOf(casePart);
+    final int casePartIndex = switchExpression.getCases().indexOf(casePart);
     if ((casePartIndex == (-1))) {
       return null;
     }
-    EList<XCasePart> _cases_1 = switchExpression.getCases();
-    final int count = _cases_1.size();
+    final int count = switchExpression.getCases().size();
     if ((casePartIndex == (count - 1))) {
       return switchExpression.getDefault();
     }
     if (((casePartIndex + 1) < count)) {
-      EList<XCasePart> _cases_2 = switchExpression.getCases();
-      XCasePart _get = _cases_2.get((casePartIndex + 1));
-      return this.getThen(_get, switchExpression);
+      return this.getThen(switchExpression.getCases().get((casePartIndex + 1)), switchExpression);
     }
     return null;
   }

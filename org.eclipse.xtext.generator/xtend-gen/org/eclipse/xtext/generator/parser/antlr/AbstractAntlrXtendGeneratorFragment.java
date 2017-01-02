@@ -9,7 +9,6 @@ package org.eclipse.xtext.generator.parser.antlr;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
-import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.util.List;
@@ -29,14 +28,11 @@ import org.eclipse.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment;
 public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrGeneratorFragment {
   protected Module createModule(final Grammar grammar) {
     final Module _function = (Binder binder) -> {
-      AnnotatedBindingBuilder<Grammar> _bind = binder.<Grammar>bind(Grammar.class);
-      _bind.toInstance(grammar);
-      AnnotatedBindingBuilder<Naming> _bind_1 = binder.<Naming>bind(Naming.class);
-      Naming _naming = this.getNaming();
-      _bind_1.toInstance(_naming);
-      AnnotatedBindingBuilder<IGrammarAccess> _bind_2 = binder.<IGrammarAccess>bind(IGrammarAccess.class);
+      binder.<Grammar>bind(Grammar.class).toInstance(grammar);
+      binder.<Naming>bind(Naming.class).toInstance(this.getNaming());
+      AnnotatedBindingBuilder<IGrammarAccess> _bind = binder.<IGrammarAccess>bind(IGrammarAccess.class);
       Xtend2GeneratorFragment.GenericGrammarAccess _genericGrammarAccess = new Xtend2GeneratorFragment.GenericGrammarAccess(grammar);
-      _bind_2.toInstance(_genericGrammarAccess);
+      _bind.toInstance(_genericGrammarAccess);
       this.addLocalBindings(binder);
     };
     return _function;
@@ -48,9 +44,7 @@ public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrG
   @Override
   public void generate(final Grammar grammar, final XpandExecutionContext ctx) {
     this.checkGrammar(grammar);
-    Module _createModule = this.createModule(grammar);
-    Injector _createInjector = Guice.createInjector(_createModule);
-    _createInjector.injectMembers(this);
+    Guice.createInjector(this.createModule(grammar)).injectMembers(this);
     List<Object> _parameters = this.getParameters(grammar);
     Xtend2ExecutionContext _xtend2ExecutionContext = new Xtend2ExecutionContext(ctx);
     this.generate(grammar, _parameters, _xtend2ExecutionContext);

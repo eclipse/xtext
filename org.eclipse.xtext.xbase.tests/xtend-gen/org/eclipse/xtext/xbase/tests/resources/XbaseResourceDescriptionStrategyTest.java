@@ -12,7 +12,6 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Set;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -50,10 +49,11 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
       list.add(it);
     };
     this.descriptionStrategy.createEObjectDescriptions(interfaceType, _function);
-    Assert.assertTrue(IterableExtensions.<IEObjectDescription>exists(list, ((Function1<IEObjectDescription, Boolean>) (IEObjectDescription it) -> {
+    final Function1<IEObjectDescription, Boolean> _function_1 = (IEObjectDescription it) -> {
       String _userData = it.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE);
       return Boolean.valueOf(Objects.equal("true", _userData));
-    })));
+    };
+    Assert.assertTrue(IterableExtensions.<IEObjectDescription>exists(list, _function_1));
   }
   
   @Test
@@ -67,10 +67,11 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
       list.add(it);
     };
     this.descriptionStrategy.createEObjectDescriptions(interfaceType, _function);
-    Assert.assertFalse(IterableExtensions.<IEObjectDescription>exists(list, ((Function1<IEObjectDescription, Boolean>) (IEObjectDescription it) -> {
+    final Function1<IEObjectDescription, Boolean> _function_1 = (IEObjectDescription it) -> {
       String _userData = it.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE);
       return Boolean.valueOf(Objects.equal("true", _userData));
-    })));
+    };
+    Assert.assertFalse(IterableExtensions.<IEObjectDescription>exists(list, _function_1));
   }
   
   @Test
@@ -79,13 +80,10 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
       final XExpression expression = this.expression("java::lang::String::valueOf(\"\")");
       final Resource resource = expression.eResource();
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(resource);
-      Iterable<IReferenceDescription> _referenceDescriptions = description.getReferenceDescriptions();
       final Function1<IReferenceDescription, String> _function = (IReferenceDescription it) -> {
-        URI _targetEObjectUri = it.getTargetEObjectUri();
-        return _targetEObjectUri.toString();
+        return it.getTargetEObjectUri().toString();
       };
-      Iterable<String> _map = IterableExtensions.<IReferenceDescription, String>map(_referenceDescriptions, _function);
-      final Set<String> referenceDescriptions = IterableExtensions.<String>toSet(_map);
+      final Set<String> referenceDescriptions = IterableExtensions.<String>toSet(IterableExtensions.<IReferenceDescription, String>map(description.getReferenceDescriptions(), _function));
       Assert.assertEquals(2, referenceDescriptions.size());
       final Set<String> expectation = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("java:/Objects/java.lang.String#java.lang.String", "java:/Objects/java.lang.String#java.lang.String.valueOf(java.lang.Object)"));
       Assert.assertEquals(expectation, referenceDescriptions);

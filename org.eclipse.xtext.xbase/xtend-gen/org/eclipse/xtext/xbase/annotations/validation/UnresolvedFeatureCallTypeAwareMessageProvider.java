@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.annotations.validation;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
@@ -21,7 +20,6 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
-import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -67,8 +65,7 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
     } catch (final Throwable _t) {
       if (_t instanceof IllegalNodeException) {
         final IllegalNodeException e = (IllegalNodeException)_t;
-        INode _node = e.getNode();
-        _xtrycatchfinallyexpression = _node.getText();
+        _xtrycatchfinallyexpression = e.getNode().getText();
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -93,13 +90,11 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
         return this.handleUnresolvedFeatureCall(context, ((XAbstractFeatureCall)contextObject), linkText);
       }
     }
-    EReference _reference = context.getReference();
-    EClass referenceType = _reference.getEReferenceType();
+    EClass referenceType = context.getReference().getEReferenceType();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(linkText);
     _builder_1.append(" cannot be resolved");
-    EReference _reference_1 = context.getReference();
-    String _typeName = this.getTypeName(referenceType, _reference_1);
+    String _typeName = this.getTypeName(referenceType, context.getReference());
     _builder_1.append(_typeName);
     _builder_1.append(".");
     final String msg = _builder_1.toString();
@@ -116,9 +111,10 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
       if (_tripleNotEquals) {
         recieverType = types.getActualType(this._featureLinkHelper.getSyntacticReceiver(featureCall));
       }
-      args = IterableExtensions.<LightweightTypeReference>join(ListExtensions.<XExpression, LightweightTypeReference>map(this._featureLinkHelper.getSyntacticArguments(featureCall), ((Function1<XExpression, LightweightTypeReference>) (XExpression it) -> {
+      final Function1<XExpression, LightweightTypeReference> _function = (XExpression it) -> {
         return types.getActualType(it);
-      })), ", ", ((Function1<LightweightTypeReference, CharSequence>) (LightweightTypeReference it) -> {
+      };
+      final Function1<LightweightTypeReference, CharSequence> _function_1 = (LightweightTypeReference it) -> {
         String _xifexpression = null;
         if (((it == null) || it.isAny())) {
           _xifexpression = "Object";
@@ -126,7 +122,8 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
           _xifexpression = it.getHumanReadableName();
         }
         return _xifexpression;
-      }));
+      };
+      args = IterableExtensions.<LightweightTypeReference>join(ListExtensions.<XExpression, LightweightTypeReference>map(this._featureLinkHelper.getSyntacticArguments(featureCall), _function), ", ", _function_1);
     }
     boolean _isExplicitOperationCallOrBuilderSyntax = featureCall.isExplicitOperationCallOrBuilderSyntax();
     final boolean orField = (!_isExplicitOperationCallOrBuilderSyntax);

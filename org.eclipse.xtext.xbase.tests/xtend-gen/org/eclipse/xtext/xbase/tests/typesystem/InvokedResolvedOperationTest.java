@@ -93,12 +93,14 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
   public void testTypeArguments_01() {
     final InvokedResolvedOperation operation = this.toOperation("(null as overrides.AbstractForCharSequence).method");
     Assert.assertEquals("CharSequence", operation.getResolvedReturnType().getSimpleName());
-    Assert.assertEquals("V, K", IterableExtensions.<JvmTypeParameter>join(operation.getResolvedTypeParameters(), ", ", ((Function1<JvmTypeParameter, CharSequence>) (JvmTypeParameter it) -> {
+    final Function1<JvmTypeParameter, CharSequence> _function = (JvmTypeParameter it) -> {
       return it.getSimpleName();
-    })));
-    Assert.assertEquals("CharSequence, CharSequence", IterableExtensions.<LightweightTypeReference>join(operation.getResolvedTypeArguments(), ", ", ((Function1<LightweightTypeReference, CharSequence>) (LightweightTypeReference it) -> {
+    };
+    Assert.assertEquals("V, K", IterableExtensions.<JvmTypeParameter>join(operation.getResolvedTypeParameters(), ", ", _function));
+    final Function1<LightweightTypeReference, CharSequence> _function_1 = (LightweightTypeReference it) -> {
       return it.getSimpleName();
-    })));
+    };
+    Assert.assertEquals("CharSequence, CharSequence", IterableExtensions.<LightweightTypeReference>join(operation.getResolvedTypeArguments(), ", ", _function_1));
     Assert.assertEquals("method(Class<? extends CharSequence>)", operation.getSimpleSignature());
   }
   
@@ -106,9 +108,10 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
   public void testTypeArguments_02() {
     final InvokedResolvedOperation operation = this.toOperation("newArrayList(1, 1d)");
     Assert.assertEquals("ArrayList<Number & Comparable<?>>", operation.getResolvedReturnType().getSimpleName());
-    Assert.assertEquals("Number & Comparable<?>", IterableExtensions.<LightweightTypeReference>join(operation.getResolvedTypeArguments(), ", ", ((Function1<LightweightTypeReference, CharSequence>) (LightweightTypeReference it) -> {
+    final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
       return it.getSimpleName();
-    })));
+    };
+    Assert.assertEquals("Number & Comparable<?>", IterableExtensions.<LightweightTypeReference>join(operation.getResolvedTypeArguments(), ", ", _function));
     Assert.assertEquals("newArrayList(Number & Comparable<?>[])", operation.getSimpleSignature());
   }
   
@@ -116,9 +119,10 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
   public void testTypeArguments_03() {
     final InvokedResolvedOperation operation = this.toOperation("(newArrayList() as Iterable<? extends String>).toList");
     Assert.assertEquals("List<? extends String>", operation.getResolvedReturnType().getSimpleName());
-    Assert.assertEquals("? extends String", IterableExtensions.<LightweightTypeReference>join(operation.getResolvedTypeArguments(), ", ", ((Function1<LightweightTypeReference, CharSequence>) (LightweightTypeReference it) -> {
+    final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
       return it.getSimpleName();
-    })));
+    };
+    Assert.assertEquals("? extends String", IterableExtensions.<LightweightTypeReference>join(operation.getResolvedTypeArguments(), ", ", _function));
     Assert.assertEquals("toList(Iterable<? extends String>)", operation.getSimpleSignature());
   }
   
@@ -126,12 +130,14 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
   public void testExplicitTypeArguments() {
     final InvokedResolvedOperation operation = this.toOperation("(null as overrides.AbstractForCharSequence).<String, StringBuilder>method");
     Assert.assertEquals("String", operation.getResolvedReturnType().getSimpleName());
-    Assert.assertEquals("V, K", IterableExtensions.<JvmTypeParameter>join(operation.getResolvedTypeParameters(), ", ", ((Function1<JvmTypeParameter, CharSequence>) (JvmTypeParameter it) -> {
+    final Function1<JvmTypeParameter, CharSequence> _function = (JvmTypeParameter it) -> {
       return it.getSimpleName();
-    })));
-    Assert.assertEquals("String, StringBuilder", IterableExtensions.<LightweightTypeReference>join(operation.getResolvedTypeArguments(), ", ", ((Function1<LightweightTypeReference, CharSequence>) (LightweightTypeReference it) -> {
+    };
+    Assert.assertEquals("V, K", IterableExtensions.<JvmTypeParameter>join(operation.getResolvedTypeParameters(), ", ", _function));
+    final Function1<LightweightTypeReference, CharSequence> _function_1 = (LightweightTypeReference it) -> {
       return it.getSimpleName();
-    })));
+    };
+    Assert.assertEquals("String, StringBuilder", IterableExtensions.<LightweightTypeReference>join(operation.getResolvedTypeArguments(), ", ", _function_1));
     Assert.assertEquals("method(Class<? extends String>)", operation.getSimpleSignature());
   }
 }

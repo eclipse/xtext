@@ -38,9 +38,7 @@ public class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTes
     final List<XConstructorCall> featureCalls = this.findConstructorCalls(expressionWithQualifiedNames);
     Assert.assertFalse(featureCalls.isEmpty());
     Assert.assertEquals(((List<String>)Conversions.doWrapArray(types)).size(), featureCalls.size());
-    IBatchTypeResolver _typeResolver = this.getTypeResolver();
-    XConstructorCall _head = IterableExtensions.<XConstructorCall>head(featureCalls);
-    final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
+    final IResolvedTypes resolvedTypes = this.getTypeResolver().resolveTypes(IterableExtensions.<XConstructorCall>head(featureCalls));
     final Procedure2<XConstructorCall, Integer> _function = (XConstructorCall featureCall, Integer index) -> {
       final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
       StringConcatenation _builder = new StringConcatenation();

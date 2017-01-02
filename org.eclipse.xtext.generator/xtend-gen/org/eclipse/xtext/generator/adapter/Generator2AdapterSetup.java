@@ -13,8 +13,6 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xpand2.XpandExecutionContext;
-import org.eclipse.xpand2.output.Outlet;
-import org.eclipse.xpand2.output.Output;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.Grammar;
@@ -86,20 +84,15 @@ public class Generator2AdapterSetup {
       }
     }, _function);
     final Injector generatorInjector = Guice.createInjector(generatorModule);
-    XtextProjectConfig _project = generatorModule.getProject();
-    _project.initialize(generatorInjector);
-    CodeConfig _code = generatorModule.getCode();
-    _code.initialize(generatorInjector);
+    generatorModule.getProject().initialize(generatorInjector);
+    generatorModule.getCode().initialize(generatorInjector);
     final IXtextGeneratorLanguage language = this.createLanguage(generatorInjector);
     final Module _function_1 = (Binder it) -> {
-      AnnotatedBindingBuilder<IXtextGeneratorLanguage> _bind = it.<IXtextGeneratorLanguage>bind(IXtextGeneratorLanguage.class);
-      _bind.toInstance(language);
-      AnnotatedBindingBuilder<Grammar> _bind_1 = it.<Grammar>bind(Grammar.class);
-      Grammar _grammar = language.getGrammar();
-      _bind_1.toInstance(_grammar);
-      AnnotatedBindingBuilder<XtextGeneratorNaming> _bind_2 = it.<XtextGeneratorNaming>bind(XtextGeneratorNaming.class);
+      it.<IXtextGeneratorLanguage>bind(IXtextGeneratorLanguage.class).toInstance(language);
+      it.<Grammar>bind(Grammar.class).toInstance(language.getGrammar());
+      AnnotatedBindingBuilder<XtextGeneratorNaming> _bind = it.<XtextGeneratorNaming>bind(XtextGeneratorNaming.class);
       NamingAdapter _namingAdapter = new NamingAdapter(this.naming);
-      _bind_2.toInstance(_namingAdapter);
+      _bind.toInstance(_namingAdapter);
       it.install(this.additionalLanguageBindings);
     };
     final Module languageModule = _function_1;
@@ -111,11 +104,8 @@ public class Generator2AdapterSetup {
     final Procedure1<StandardProjectConfig> _function = (StandardProjectConfig it) -> {
       it.setCreateEclipseMetaData(true);
       it.setBaseName(this.naming.getProjectNameRt());
-      Output _output = this.xpandContext.getOutput();
-      Outlet _outlet = _output.getOutlet(Generator.PLUGIN_RT);
-      final String runtimeRoot = _outlet.getPath();
-      String _baseName = it.getBaseName();
-      final int projectNameIndex = runtimeRoot.lastIndexOf(_baseName);
+      final String runtimeRoot = this.xpandContext.getOutput().getOutlet(Generator.PLUGIN_RT).getPath();
+      final int projectNameIndex = runtimeRoot.lastIndexOf(it.getBaseName());
       if ((projectNameIndex >= 0)) {
         it.setRootPath(runtimeRoot.substring(0, projectNameIndex));
       } else {

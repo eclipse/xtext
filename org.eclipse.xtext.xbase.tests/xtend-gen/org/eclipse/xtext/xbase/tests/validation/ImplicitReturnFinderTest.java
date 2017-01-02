@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.validation;
 
 import com.google.inject.Inject;
 import java.util.ArrayList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -43,8 +42,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("return");
-      XExpression _expression = this.expression(_builder);
-      this.hasNoImplicitReturns(_expression);
+      this.hasNoImplicitReturns(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -55,8 +53,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{val x = \"foo\"}");
-      XExpression _expression = this.expression(_builder);
-      this.hasNoImplicitReturns(_expression);
+      this.hasNoImplicitReturns(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -67,8 +64,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("for (i: 1..10)");
-      XExpression _expression = this.expression(_builder);
-      this.hasNoImplicitReturns(_expression);
+      this.hasNoImplicitReturns(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -79,8 +75,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("while (true)");
-      XExpression _expression = this.expression(_builder);
-      this.hasNoImplicitReturns(_expression);
+      this.hasNoImplicitReturns(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -91,8 +86,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("do while (true)");
-      XExpression _expression = this.expression(_builder);
-      this.hasNoImplicitReturns(_expression);
+      this.hasNoImplicitReturns(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -103,8 +97,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("throw new RuntimeException()");
-      XExpression _expression = this.expression(_builder);
-      this.hasNoImplicitReturns(_expression);
+      this.hasNoImplicitReturns(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -115,8 +108,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("1");
-      XExpression _expression = this.expression(_builder);
-      this.isImplicitReturn(_expression);
+      this.isImplicitReturn(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -127,8 +119,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("null");
-      XExpression _expression = this.expression(_builder);
-      this.isImplicitReturn(_expression);
+      this.isImplicitReturn(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -139,8 +130,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("true");
-      XExpression _expression = this.expression(_builder);
-      this.isImplicitReturn(_expression);
+      this.isImplicitReturn(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -151,8 +141,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\"foo\"");
-      XExpression _expression = this.expression(_builder);
-      this.isImplicitReturn(_expression);
+      this.isImplicitReturn(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -163,8 +152,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\"#[]\"");
-      XExpression _expression = this.expression(_builder);
-      this.isImplicitReturn(_expression);
+      this.isImplicitReturn(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -175,8 +163,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\"#{}\"");
-      XExpression _expression = this.expression(_builder);
-      this.isImplicitReturn(_expression);
+      this.isImplicitReturn(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -187,8 +174,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\"foo.length\"");
-      XExpression _expression = this.expression(_builder);
-      this.isImplicitReturn(_expression);
+      this.isImplicitReturn(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -199,8 +185,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("[]");
-      XExpression _expression = this.expression(_builder);
-      this.isImplicitReturn(_expression);
+      this.isImplicitReturn(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -211,8 +196,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("1 as int");
-      XExpression _expression = this.expression(_builder);
-      this.isImplicitReturn(_expression);
+      this.isImplicitReturn(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -223,8 +207,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("1 instanceof int");
-      XExpression _expression = this.expression(_builder);
-      this.isImplicitReturn(_expression);
+      this.isImplicitReturn(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -235,8 +218,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("new String");
-      XExpression _expression = this.expression(_builder);
-      this.isImplicitReturn(_expression);
+      this.isImplicitReturn(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -249,9 +231,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
       _builder.append("{1}");
       XExpression _expression = this.expression(_builder);
       final XBlockExpression block = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = block.getExpressions();
-      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
-      this.hasImplicitReturns(block, _head);
+      this.hasImplicitReturns(block, IterableExtensions.<XExpression>head(block.getExpressions()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -271,8 +251,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("}");
-      XExpression _expression = this.expression(_builder);
-      this.hasNoImplicitReturns(_expression);
+      this.hasNoImplicitReturns(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -286,9 +265,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
       XExpression _expression = this.expression(_builder);
       final XSynchronizedExpression block = ((XSynchronizedExpression) _expression);
       XExpression _expression_1 = block.getExpression();
-      EList<XExpression> _expressions = ((XBlockExpression) _expression_1).getExpressions();
-      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
-      this.hasImplicitReturns(block, _head);
+      this.hasImplicitReturns(block, IterableExtensions.<XExpression>head(((XBlockExpression) _expression_1).getExpressions()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -301,9 +278,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
       _builder.append("if (true) 1 else 2");
       XExpression _expression = this.expression(_builder);
       final XIfExpression expr = ((XIfExpression) _expression);
-      XExpression _then = expr.getThen();
-      XExpression _else = expr.getElse();
-      this.hasImplicitReturns(expr, _then, _else);
+      this.hasImplicitReturns(expr, expr.getThen(), expr.getElse());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -314,8 +289,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("if (true) return 1 else return 2");
-      XExpression _expression = this.expression(_builder);
-      this.hasNoImplicitReturns(_expression);
+      this.hasNoImplicitReturns(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -328,11 +302,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
       _builder.append("switch (this) case String: 1 default: 2");
       XExpression _expression = this.expression(_builder);
       final XSwitchExpression expr = ((XSwitchExpression) _expression);
-      EList<XCasePart> _cases = expr.getCases();
-      XCasePart _head = IterableExtensions.<XCasePart>head(_cases);
-      XExpression _then = _head.getThen();
-      XExpression _default = expr.getDefault();
-      this.hasImplicitReturns(expr, _then, _default);
+      this.hasImplicitReturns(expr, IterableExtensions.<XCasePart>head(expr.getCases()).getThen(), expr.getDefault());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -358,11 +328,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
       _builder.append("try 1 catch(Exception e) 2");
       XExpression _expression = this.expression(_builder);
       final XTryCatchFinallyExpression expr = ((XTryCatchFinallyExpression) _expression);
-      XExpression _expression_1 = expr.getExpression();
-      EList<XCatchClause> _catchClauses = expr.getCatchClauses();
-      XCatchClause _head = IterableExtensions.<XCatchClause>head(_catchClauses);
-      XExpression _expression_2 = _head.getExpression();
-      this.hasImplicitReturns(expr, _expression_1, _expression_2);
+      this.hasImplicitReturns(expr, expr.getExpression(), IterableExtensions.<XCatchClause>head(expr.getCatchClauses()).getExpression());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -373,8 +339,7 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("try return 1 catch(Exception e) return 2");
-      XExpression _expression = this.expression(_builder);
-      this.hasNoImplicitReturns(_expression);
+      this.hasNoImplicitReturns(this.expression(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

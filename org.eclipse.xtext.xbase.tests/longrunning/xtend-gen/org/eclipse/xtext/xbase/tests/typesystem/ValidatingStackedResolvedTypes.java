@@ -18,7 +18,6 @@ import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareStackedResolve
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.TypeData;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
@@ -46,8 +45,7 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
   
   @Override
   public void setType(final JvmIdentifiableElement identifiable, final LightweightTypeReference reference) {
-    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-    boolean _isOwnedBy = reference.isOwnedBy(_referenceOwner);
+    boolean _isOwnedBy = reference.isOwnedBy(this.getReferenceOwner());
     boolean _not = (!_isOwnedBy);
     if (_not) {
       throw new IllegalArgumentException("reference is not owned by this resolved types");
@@ -87,14 +85,12 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
   public LightweightTypeReference acceptType(final XExpression expression, final AbstractTypeExpectation expectation, final LightweightTypeReference type, final boolean returnType, final int hints) {
     LightweightTypeReference _xblockexpression = null;
     {
-      ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-      boolean _isOwnedBy = expectation.isOwnedBy(_referenceOwner);
+      boolean _isOwnedBy = expectation.isOwnedBy(this.getReferenceOwner());
       boolean _not = (!_isOwnedBy);
       if (_not) {
         throw new IllegalArgumentException("expectation is not owned by this resolved types");
       }
-      ITypeReferenceOwner _referenceOwner_1 = this.getReferenceOwner();
-      boolean _isOwnedBy_1 = type.isOwnedBy(_referenceOwner_1);
+      boolean _isOwnedBy_1 = type.isOwnedBy(this.getReferenceOwner());
       boolean _not_1 = (!_isOwnedBy_1);
       if (_not_1) {
         throw new IllegalArgumentException("type is not owned by this resolved types");
@@ -119,8 +115,7 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
   @Override
   public UnboundTypeReference getUnboundTypeReference(final Object handle) {
     final UnboundTypeReference result = super.getUnboundTypeReference(handle);
-    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-    boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
+    boolean _isOwnedBy = result.isOwnedBy(this.getReferenceOwner());
     boolean _not = (!_isOwnedBy);
     if (_not) {
       throw new IllegalArgumentException("result is not owned by this resolved types");
@@ -131,8 +126,7 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
   @Override
   public LightweightTypeReference getActualType(final JvmIdentifiableElement identifiable) {
     final LightweightTypeReference result = super.getActualType(identifiable);
-    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-    boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
+    boolean _isOwnedBy = result.isOwnedBy(this.getReferenceOwner());
     boolean _not = (!_isOwnedBy);
     if (_not) {
       throw new IllegalArgumentException("result is not owned by this resolved types");
@@ -152,8 +146,7 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
   @Override
   public LightweightTypeReference getExpectedType(final XExpression expression) {
     final LightweightTypeReference result = super.getExpectedType(expression);
-    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-    boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
+    boolean _isOwnedBy = result.isOwnedBy(this.getReferenceOwner());
     boolean _not = (!_isOwnedBy);
     if (_not) {
       throw new IllegalArgumentException("result is not owned by this resolved types");
@@ -172,8 +165,7 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
     };
     types.forEach(_function);
     final LightweightTypeReference result = super.getMergedType(types);
-    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-    boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
+    boolean _isOwnedBy = result.isOwnedBy(this.getReferenceOwner());
     boolean _not = (!_isOwnedBy);
     if (_not) {
       throw new IllegalArgumentException("result is not owned by this resolved types");
@@ -192,8 +184,7 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
     };
     allValues.forEach(_function);
     final TypeData result = super.mergeTypeData(expression, allValues, returnType, nullIfEmpty);
-    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-    boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
+    boolean _isOwnedBy = result.isOwnedBy(this.getReferenceOwner());
     boolean _not = (!_isOwnedBy);
     if (_not) {
       throw new IllegalArgumentException("result is not owned by this resolved types");

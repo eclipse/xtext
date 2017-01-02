@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
@@ -50,8 +49,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
     XExpression _xblockexpression = null;
     {
-      String _string = expression.toString();
-      final String string = _string.replace("$$", "org::eclipse::xtext::xbase::lib::");
+      final String string = expression.toString().replace("$$", "org::eclipse::xtext::xbase::lib::");
       boolean _add = AbstractTypeResolverTest.seenExpressions.add(string);
       boolean _not = (!_add);
       if (_not) {
@@ -64,11 +62,10 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   public Iterable<Resource.Diagnostic> getLinkingAndSyntaxErrors(final Resource resource) {
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
     final Function1<Resource.Diagnostic, Boolean> _function = (Resource.Diagnostic it) -> {
       return Boolean.valueOf(((it instanceof XtextSyntaxDiagnostic) || (it instanceof XtextLinkingDiagnostic)));
     };
-    return IterableExtensions.<Resource.Diagnostic>filter(_errors, _function);
+    return IterableExtensions.<Resource.Diagnostic>filter(resource.getErrors(), _function);
   }
   
   protected void handleDuplicateExpression(final CharSequence expression) {
@@ -1006,56 +1003,47 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testTypeForVoidClosure_02() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[ return ]", "(Object)=>void");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure1<Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[ return ]", "(Object)=>void"), "Procedure1<Object>");
   }
   
   @Test
   public void testTypeForVoidClosure_03() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[| return ]", "()=>void");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure0");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[| return ]", "()=>void"), "Procedure0");
   }
   
   @Test
   public void testTypeForVoidClosure_04() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[a, b| return ]", "(Object, Object)=>void");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure2<Object, Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[a, b| return ]", "(Object, Object)=>void"), "Procedure2<Object, Object>");
   }
   
   @Test
   public void testTypeForVoidClosure_05() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[ System::out.println ]", "(Object)=>void");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure1<Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[ System::out.println ]", "(Object)=>void"), "Procedure1<Object>");
   }
   
   @Test
   public void testTypeForVoidClosure_06() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[| System::out.println ]", "()=>void");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure0");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[| System::out.println ]", "()=>void"), "Procedure0");
   }
   
   @Test
   public void testTypeForVoidClosure_07() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[a, b| System::out.println ]", "(Object, Object)=>void");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure2<Object, Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[a, b| System::out.println ]", "(Object, Object)=>void"), "Procedure2<Object, Object>");
   }
   
   @Test
   public void testTypeForEmptyClosure_01() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[]", "(Object)=>Object");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[]", "(Object)=>Object"), "Function1<Object, Object>");
   }
   
   @Test
   public void testTypeForEmptyClosure_02() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[|]", "()=>Object");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function0<Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[|]", "()=>Object"), "Function0<Object>");
   }
   
   @Test
   public void testTypeForEmptyClosure_03() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[a, b|]", "(Object, Object)=>Object");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function2<Object, Object, Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[a, b|]", "(Object, Object)=>Object"), "Function2<Object, Object, Object>");
   }
   
   @Test
@@ -1155,8 +1143,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testReturnExpression_09() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[| return \'literal\']", "()=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function0<String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[| return \'literal\']", "()=>String"), "Function0<String>");
   }
   
   @Test
@@ -1176,8 +1163,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testClosure_02() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[String x| true]", "(String)=>boolean");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, Boolean>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[String x| true]", "(String)=>boolean"), "Function1<String, Boolean>");
   }
   
   @Test
@@ -1198,50 +1184,42 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testClosure_05() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[x| true]", "(Object)=>boolean");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Boolean>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[x| true]", "(Object)=>boolean"), "Function1<Object, Boolean>");
   }
   
   @Test
   public void testClosure_06() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[x| null]", "(Object)=>Object");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[x| null]", "(Object)=>Object"), "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_07() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[String x, String y| x + y ]", "(String, String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function2<String, String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[String x, String y| x + y ]", "(String, String)=>String"), "Function2<String, String, String>");
   }
   
   @Test
   public void testClosure_08() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[x| x]", "(Object)=>Object");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[x| x]", "(Object)=>Object"), "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_09() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[String x, String y| x.substring(y.length)]", "(String, String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function2<String, String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[String x, String y| x.substring(y.length)]", "(String, String)=>String"), "Function2<String, String, String>");
   }
   
   @Test
   public void testClosure_10() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[ x | x.toString x ]", "(Object)=>Object");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[ x | x.toString x ]", "(Object)=>Object"), "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_11() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[Object x| x]", "(Object)=>Object");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[Object x| x]", "(Object)=>Object"), "Function1<Object, Object>");
   }
   
   @Test
   public void testClosure_12() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[Object x| x.toString x ]", "(Object)=>Object");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[Object x| x.toString x ]", "(Object)=>Object"), "Function1<Object, Object>");
   }
   
   @Test
@@ -1267,80 +1245,67 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testClosure_15() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval String s = fun.apply(null)\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval String s = fun.apply(null)\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testClosure_16() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null))\n\t\t\tfun\n\t\t}", "(String[])=>String[]");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String[], String[]>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null))\n\t\t\tfun\n\t\t}", "(String[])=>String[]"), "Function1<String[], String[]>");
   }
   
   @Test
   public void testClosure_16_02() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null), fun.apply(null))\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null), fun.apply(null))\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testClosure_17() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testClosure_18() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testClosure_19() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testClosure_20() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = newArrayList.map(fun)\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testClosure_21() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = newArrayList.map(fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = newArrayList.map(fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testClosure_22() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testClosure_23() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testClosure_24() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testClosure_25() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testClosure_26() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
@@ -1381,8 +1346,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testClosure_33() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("[ String it | val bytes = new String bytes ]", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("[ String it | val bytes = new String bytes ]", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
@@ -1444,32 +1408,27 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testIfExpression_05() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("if (true) [|\'\'] else [|\'\']", "()=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function0<String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("if (true) [|\'\'] else [|\'\']", "()=>String"), "Function0<String>");
   }
   
   @Test
   public void testIfExpression_06() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("if (true) [|\'\'] else [|null as CharSequence]", "()=>CharSequence");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function0<CharSequence>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("if (true) [|\'\'] else [|null as CharSequence]", "()=>CharSequence"), "Function0<CharSequence>");
   }
   
   @Test
   public void testIfExpression_07() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("if (true) [|null as Appendable] else [|null as CharSequence]", "()=>Object");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function0<?>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("if (true) [|null as Appendable] else [|null as CharSequence]", "()=>Object"), "Function0<?>");
   }
   
   @Test
   public void testIfExpression_08() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("if (true) [ CharSequence c |\'\'] else [ String s |\'\']", "(String)=>String");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("if (true) [ CharSequence c |\'\'] else [ String s |\'\']", "(String)=>String"), "Function1<String, String>");
   }
   
   @Test
   public void testIfExpression_09() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("if (true) [new StringBuilder()] else [new StringBuffer()]", "(Object)=>AbstractStringBuilder & Serializable");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, ? extends AbstractStringBuilder & Serializable>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("if (true) [new StringBuilder()] else [new StringBuffer()]", "(Object)=>AbstractStringBuilder & Serializable"), "Function1<Object, ? extends AbstractStringBuilder & Serializable>");
   }
   
   @Test
@@ -1650,8 +1609,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testSwitchExpression_10() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("switch null {\n            case null : [Object it | it]\n            case null : [Integer it | it]\n        }", "(Integer)=>Object");
-    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<? super Integer, ?>");
+    this.isFunctionAndEquivalentTo(this.resolvesTo("switch null {\n            case null : [Object it | it]\n            case null : [Integer it | it]\n        }", "(Integer)=>Object"), "Function1<? super Integer, ?>");
   }
   
   @Test

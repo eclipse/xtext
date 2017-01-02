@@ -9,11 +9,8 @@ package org.eclipse.xtext.generator.serializer;
 
 import com.google.inject.Binder;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
-import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import java.util.Collections;
 import java.util.List;
@@ -76,9 +73,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   
   @Override
   protected void addLocalBindings(final Binder binder) {
-    AnnotatedBindingBuilder<Boolean> _bind = binder.<Boolean>bind(Boolean.class);
-    Named _named = Names.named("generateXtendStub");
-    LinkedBindingBuilder<Boolean> _annotatedWith = _bind.annotatedWith(_named);
+    LinkedBindingBuilder<Boolean> _annotatedWith = binder.<Boolean>bind(Boolean.class).annotatedWith(Names.named("generateXtendStub"));
     _annotatedWith.toInstance(Boolean.valueOf((this.generateXtendStub && this.isGenerateStub())));
   }
   
@@ -122,17 +117,9 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   @Override
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
     final BindFactory bf = new BindFactory();
-    String _name = ISemanticSequencer.class.getName();
-    SerializerGenFileNames.GenFileName _semanticSequencer = this.names.getSemanticSequencer();
-    String _qualifiedName = _semanticSequencer.getQualifiedName();
-    bf.addTypeToType(_name, _qualifiedName);
-    String _name_1 = ISyntacticSequencer.class.getName();
-    SerializerGenFileNames.GenFileName _syntacticSequencer = this.names.getSyntacticSequencer();
-    String _qualifiedName_1 = _syntacticSequencer.getQualifiedName();
-    bf.addTypeToType(_name_1, _qualifiedName_1);
-    String _name_2 = ISerializer.class.getName();
-    String _name_3 = Serializer.class.getName();
-    bf.addTypeToType(_name_2, _name_3);
+    bf.addTypeToType(ISemanticSequencer.class.getName(), this.names.getSemanticSequencer().getQualifiedName());
+    bf.addTypeToType(ISyntacticSequencer.class.getName(), this.names.getSyntacticSequencer().getQualifiedName());
+    bf.addTypeToType(ISerializer.class.getName(), Serializer.class.getName());
     return bf.getBindings();
   }
   
@@ -142,8 +129,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     Generator2AdapterSetup _generator2AdapterSetup = new Generator2AdapterSetup(config, ctx, _naming);
     this.adapterSetup = _generator2AdapterSetup;
     final Module _function = (Binder it) -> {
-      AnnotatedBindingBuilder<org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector> _bind = it.<org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector>bind(org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector.class);
-      _bind.toInstance(this.syntheticTerminalDetector);
+      it.<org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector>bind(org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector.class).toInstance(this.syntheticTerminalDetector);
     };
     this.adapterSetup.setAdditionalLanguageBindings(_function);
     super.generate(config, ctx);
@@ -156,11 +142,9 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     delegate.setDetectSyntheticTerminals(this.detectSyntheticTerminals);
     delegate.setGenerateDebugData(this.generateDebugData);
     delegate.setGenerateSupportForDeprecatedContextEObject(this.generateSupportForDeprecatedContextEObject);
-    Injector _injector = this.adapterSetup.getInjector();
-    CodeConfig _instance = _injector.<CodeConfig>getInstance(CodeConfig.class);
+    CodeConfig _instance = this.adapterSetup.getInjector().<CodeConfig>getInstance(CodeConfig.class);
     _instance.setPreferXtendStubs(this.isGenerateXtendStub());
-    Injector _injector_1 = this.adapterSetup.getInjector();
-    delegate.initialize(_injector_1);
+    delegate.initialize(this.adapterSetup.getInjector());
     delegate.generate();
   }
   

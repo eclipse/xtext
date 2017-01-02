@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.testing;
 
-import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
@@ -123,8 +122,7 @@ public class RegisteringFileSystemAccess extends InMemoryFileSystemAccess {
     if (_endsWith) {
       int _length = fileName.length();
       int _minus = (_length - 5);
-      String _substring = fileName.substring(0, _minus);
-      _xifexpression = _substring.replace("/", ".");
+      _xifexpression = fileName.substring(0, _minus).replace("/", ".");
     }
     final String javaName = _xifexpression;
     RegisteringFileSystemAccess.GeneratedFile _generatedFile = new RegisteringFileSystemAccess.GeneratedFile(path, javaName, contents);
@@ -132,8 +130,7 @@ public class RegisteringFileSystemAccess extends InMemoryFileSystemAccess {
   }
   
   protected String getPath(final String fileName, final String outputConfigurationName) {
-    Map<String, String> _pathes = this.getPathes();
-    final String path = _pathes.get(outputConfigurationName);
+    final String path = this.getPathes().get(outputConfigurationName);
     return ((((("/" + this.projectName) + "/") + path) + "/") + fileName);
   }
   

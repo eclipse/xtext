@@ -8,11 +8,8 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.collect.Iterators;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.INode;
@@ -53,13 +50,9 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   protected List<XAbstractFeatureCall> findFeatureCalls(final CharSequence expression) {
     try {
       final XExpression xExpression = this.expression(expression, false);
-      TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
-      Iterator<XAbstractFeatureCall> _filter = Iterators.<XAbstractFeatureCall>filter(_eAll, XAbstractFeatureCall.class);
-      final List<XAbstractFeatureCall> featureCalls = IteratorExtensions.<XAbstractFeatureCall>toList(_filter);
+      final List<XAbstractFeatureCall> featureCalls = IteratorExtensions.<XAbstractFeatureCall>toList(Iterators.<XAbstractFeatureCall>filter(EcoreUtil2.eAll(xExpression), XAbstractFeatureCall.class));
       final Function1<XAbstractFeatureCall, Integer> _function = (XAbstractFeatureCall it) -> {
-        List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-        INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
-        return Integer.valueOf(_head.getOffset());
+        return Integer.valueOf(IterableExtensions.<INode>head(NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE)).getOffset());
       };
       return IterableExtensions.<XAbstractFeatureCall, Integer>sortBy(featureCalls, _function);
     } catch (Throwable _e) {
@@ -286,8 +279,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    this.resolvesFeatureCallsTo(_string, "Object", "Object", "Object", "Object", "String", "Object");
+    this.resolvesFeatureCallsTo(_builder.toString(), "Object", "Object", "Object", "Object", "String", "Object");
   }
   
   @Test

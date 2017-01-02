@@ -33,12 +33,11 @@ public class LoopExtensions {
     params.appendPrefix(appendable);
     T _head = IterableExtensions.<T>head(elements);
     ObjectExtensions.<T>operator_doubleArrow(_head, procedure);
-    Iterable<T> _tail = IterableExtensions.<T>tail(elements);
     final Consumer<T> _function = (T it) -> {
       params.appendSeparator(appendable);
       ObjectExtensions.<T>operator_doubleArrow(it, procedure);
     };
-    _tail.forEach(_function);
+    IterableExtensions.<T>tail(elements).forEach(_function);
     params.appendSuffix(appendable);
   }
   

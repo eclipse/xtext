@@ -21,8 +21,6 @@ import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -39,103 +37,80 @@ import org.eclipse.xtext.xtype.XtypePackage;
 @SuppressWarnings("all")
 public class XtypeFormatter extends AbstractFormatter2 {
   protected void _format(final XFunctionTypeRef func, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(func);
-    ISemanticRegion _keyword = _regionFor.keyword("(");
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    document.append(_keyword, _function);
+    document.append(this.textRegionExtensions.regionFor(func).keyword("("), _function);
     EList<JvmTypeReference> _paramTypes = func.getParamTypes();
     for (final JvmTypeReference param : _paramTypes) {
       {
         document.<JvmTypeReference>format(param);
-        ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(param);
-        ISemanticRegion _keyword_1 = _immediatelyFollowing.keyword(",");
         final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
           it.noSpace();
         };
-        ISemanticRegion _prepend = document.prepend(_keyword_1, _function_1);
         final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
           it.oneSpace();
         };
-        document.append(_prepend, _function_2);
+        document.append(document.prepend(this.textRegionExtensions.immediatelyFollowing(param).keyword(","), _function_1), _function_2);
       }
     }
-    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(func);
-    ISemanticRegion _keyword_1 = _regionFor_1.keyword(")");
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      EList<JvmTypeReference> _paramTypes_1 = func.getParamTypes();
-      boolean _isEmpty = _paramTypes_1.isEmpty();
+      boolean _isEmpty = func.getParamTypes().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
         it.noSpace();
       }
     };
-    ISemanticRegion _prepend = document.prepend(_keyword_1, _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    document.append(_prepend, _function_2);
-    ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(func);
-    ISemanticRegion _keyword_2 = _regionFor_2.keyword("=>");
+    document.append(document.prepend(this.textRegionExtensions.regionFor(func).keyword(")"), _function_1), _function_2);
     final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    document.append(_keyword_2, _function_3);
-    JvmTypeReference _returnType = func.getReturnType();
-    document.<JvmTypeReference>format(_returnType);
+    document.append(this.textRegionExtensions.regionFor(func).keyword("=>"), _function_3);
+    document.<JvmTypeReference>format(func.getReturnType());
   }
   
   protected void _format(final JvmParameterizedTypeReference ref, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(ref);
-    ISemanticRegion _keyword = _regionFor.keyword("<");
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    document.surround(_keyword, _function);
+    document.surround(this.textRegionExtensions.regionFor(ref).keyword("<"), _function);
     EList<JvmTypeReference> _arguments = ref.getArguments();
     for (final JvmTypeReference arg : _arguments) {
       {
         document.<JvmTypeReference>format(arg);
-        ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(arg);
-        ISemanticRegion _keyword_1 = _immediatelyFollowing.keyword(",");
         final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
           it.noSpace();
         };
-        ISemanticRegion _prepend = document.prepend(_keyword_1, _function_1);
         final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
           it.oneSpace();
         };
-        document.append(_prepend, _function_2);
+        document.append(document.prepend(this.textRegionExtensions.immediatelyFollowing(arg).keyword(","), _function_1), _function_2);
       }
     }
-    EList<JvmTypeReference> _arguments_1 = ref.getArguments();
-    boolean _isEmpty = _arguments_1.isEmpty();
+    boolean _isEmpty = ref.getArguments().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(ref);
-      ISemanticRegion _keyword_1 = _regionFor_1.keyword(">");
       final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
         it.noSpace();
       };
-      document.prepend(_keyword_1, _function_1);
+      document.prepend(this.textRegionExtensions.regionFor(ref).keyword(">"), _function_1);
     }
   }
   
   protected void _format(final JvmWildcardTypeReference ref, @Extension final IFormattableDocument document) {
-    EList<JvmTypeConstraint> _constraints = ref.getConstraints();
-    boolean _isEmpty = _constraints.isEmpty();
+    boolean _isEmpty = ref.getConstraints().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(ref);
-      ISemanticRegion _keyword = _regionFor.keyword("?");
       final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
         it.oneSpace();
       };
-      document.append(_keyword, _function);
+      document.append(this.textRegionExtensions.regionFor(ref).keyword("?"), _function);
     }
-    EList<JvmTypeConstraint> _constraints_1 = ref.getConstraints();
-    for (final JvmTypeConstraint c : _constraints_1) {
+    EList<JvmTypeConstraint> _constraints = ref.getConstraints();
+    for (final JvmTypeConstraint c : _constraints) {
       document.<JvmTypeConstraint>format(c);
     }
   }
@@ -158,8 +133,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     for (final XImportDeclaration imp : _importDeclarations) {
       {
         format.<XImportDeclaration>format(imp);
-        EList<XImportDeclaration> _importDeclarations_1 = section.getImportDeclarations();
-        XImportDeclaration _last = IterableExtensions.<XImportDeclaration>last(_importDeclarations_1);
+        XImportDeclaration _last = IterableExtensions.<XImportDeclaration>last(section.getImportDeclarations());
         boolean _notEquals = (!Objects.equal(imp, _last));
         if (_notEquals) {
           format.<XImportDeclaration>append(imp, XbaseFormatterPreferenceKeys.blankLinesBetweenImports);
@@ -171,38 +145,29 @@ public class XtypeFormatter extends AbstractFormatter2 {
   }
   
   protected void _format(final XImportDeclaration imp, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(imp);
-    ISemanticRegion _keyword = _regionFor.keyword("import");
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(_keyword, _function);
-    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(imp);
-    ISemanticRegion _feature = _regionFor_1.feature(XtypePackage.Literals.XIMPORT_DECLARATION__STATIC);
+    document.append(this.textRegionExtensions.regionFor(imp).keyword("import"), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(_feature, _function_1);
-    ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(imp);
-    ISemanticRegion _feature_1 = _regionFor_2.feature(XtypePackage.Literals.XIMPORT_DECLARATION__EXTENSION);
+    document.append(this.textRegionExtensions.regionFor(imp).feature(XtypePackage.Literals.XIMPORT_DECLARATION__STATIC), _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(_feature_1, _function_2);
-    ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(imp);
-    List<ISemanticRegion> _keywords = _regionFor_3.keywords(".");
+    document.append(this.textRegionExtensions.regionFor(imp).feature(XtypePackage.Literals.XIMPORT_DECLARATION__EXTENSION), _function_2);
+    List<ISemanticRegion> _keywords = this.textRegionExtensions.regionFor(imp).keywords(".");
     for (final ISemanticRegion node : _keywords) {
       final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
         it.noSpace();
       };
       document.surround(node, _function_3);
     }
-    ISemanticRegionsFinder _regionFor_4 = this.textRegionExtensions.regionFor(imp);
-    ISemanticRegion _keyword_1 = _regionFor_4.keyword(";");
     final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    document.prepend(_keyword_1, _function_4);
+    document.prepend(this.textRegionExtensions.regionFor(imp).keyword(";"), _function_4);
   }
   
   public void format(final Object ref, final IFormattableDocument document) {

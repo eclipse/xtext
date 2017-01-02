@@ -2,13 +2,11 @@ package org.eclipse.xtext.java.resource;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -73,8 +71,7 @@ public class JavaDerivedStateComputer {
     for (final EObject eObject : resourcesContentsList) {
       this.unloader.unloadRoot(eObject);
     }
-    EList<EObject> _contents = resource.getContents();
-    _contents.clear();
+    resource.getContents().clear();
   }
   
   public void installStubs(final Resource resource) {
@@ -111,8 +108,7 @@ public class JavaDerivedStateComputer {
           }
           final String packageName = _join;
           final JvmDeclaredType jvmType = this.createType(type, packageName);
-          EList<EObject> _contents = resource.getContents();
-          _contents.add(jvmType);
+          resource.getContents().add(jvmType);
         }
       }
     }
@@ -145,15 +141,13 @@ public class JavaDerivedStateComputer {
     }
     final JvmDeclaredType jvmType = _switchResult;
     jvmType.setPackageName(packageName);
-    String _valueOf = String.valueOf(type.name);
-    jvmType.setSimpleName(_valueOf);
+    jvmType.setSimpleName(String.valueOf(type.name));
     if ((jvmType instanceof JvmGenericType)) {
       if ((type.typeParameters != null)) {
         for (final TypeParameter typeParam : type.typeParameters) {
           {
             final JvmTypeParameter jvmTypeParam = TypesFactory.eINSTANCE.createJvmTypeParameter();
-            String _valueOf_1 = String.valueOf(typeParam.name);
-            jvmTypeParam.setName(_valueOf_1);
+            jvmTypeParam.setName(String.valueOf(typeParam.name));
             EList<JvmTypeParameter> _typeParameters = ((JvmGenericType)jvmType).getTypeParameters();
             _typeParameters.add(jvmTypeParam);
           }
@@ -183,8 +177,7 @@ public class JavaDerivedStateComputer {
     }
     final CompilationUnit compilationUnit = this.getCompilationUnit(resource);
     final ClassLoader classLoader = this.getClassLoader(resource);
-    ResourceSet _resourceSet = resource.getResourceSet();
-    final IResourceDescriptions data = this.resourceDescriptionsProvider.getResourceDescriptions(_resourceSet);
+    final IResourceDescriptions data = this.resourceDescriptionsProvider.getResourceDescriptions(resource.getResourceSet());
     if ((data == null)) {
       throw new IllegalStateException("no index installed");
     }
@@ -199,14 +192,11 @@ public class JavaDerivedStateComputer {
         ClassFile[] _classFiles = it.getClassFiles();
         for (final ClassFile cf : _classFiles) {
           {
-            char[][] _compoundName = cf.getCompoundName();
             final Function1<char[], String> _function_1 = (char[] it_1) -> {
               return String.valueOf(it_1);
             };
-            List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_compoundName)), _function_1);
-            final String className = IterableExtensions.join(_map, ".");
-            byte[] _bytes = cf.getBytes();
-            map.put(className, _bytes);
+            final String className = IterableExtensions.join(ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(cf.getCompoundName())), _function_1), ".");
+            map.put(className, cf.getBytes());
             if ((!cf.isNestedType)) {
               topLevelTypes.add(className);
             }
@@ -240,9 +230,7 @@ public class JavaDerivedStateComputer {
   protected boolean isInfoFile(final Resource resource) {
     boolean _xblockexpression = false;
     {
-      URI _uRI = resource.getURI();
-      URI _trimFileExtension = _uRI.trimFileExtension();
-      final String name = _trimFileExtension.lastSegment();
+      final String name = resource.getURI().trimFileExtension().lastSegment();
       _xblockexpression = (Objects.equal(name, "package-info") || Objects.equal(name, "module-info"));
     }
     return _xblockexpression;
@@ -305,8 +293,7 @@ public class JavaDerivedStateComputer {
       compilerOptions.produceMethodParameters = true;
       compilerOptions.produceReferenceInfo = true;
       try {
-        Field _field = CompilerOptions.class.getField("originalSourceLevel");
-        _field.setLong(compilerOptions, targetLevel);
+        CompilerOptions.class.getField("originalSourceLevel").setLong(compilerOptions, targetLevel);
       } catch (final Throwable _t) {
         if (_t instanceof NoSuchFieldException) {
           final NoSuchFieldException e = (NoSuchFieldException)_t;
@@ -316,8 +303,7 @@ public class JavaDerivedStateComputer {
       }
       compilerOptions.complianceLevel = sourceLevel;
       try {
-        Field _field_1 = CompilerOptions.class.getField("originalComplianceLevel");
-        _field_1.setLong(compilerOptions, targetLevel);
+        CompilerOptions.class.getField("originalComplianceLevel").setLong(compilerOptions, targetLevel);
       } catch (final Throwable _t_1) {
         if (_t_1 instanceof NoSuchFieldException) {
           final NoSuchFieldException e_1 = (NoSuchFieldException)_t_1;
@@ -348,8 +334,7 @@ public class JavaDerivedStateComputer {
           case JAVA8:
             long _xtrycatchfinallyexpression = (long) 0;
             try {
-              Field _field = ClassFileConstants.class.getField("JDK1_8");
-              _xtrycatchfinallyexpression = _field.getLong(null);
+              _xtrycatchfinallyexpression = ClassFileConstants.class.getField("JDK1_8").getLong(null);
             } catch (final Throwable _t) {
               if (_t instanceof NoSuchFieldException) {
                 final NoSuchFieldException e = (NoSuchFieldException)_t;

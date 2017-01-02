@@ -12,14 +12,12 @@ public class TestAppender extends AbstractStringBuilderBasedAppendable {
   
   @Override
   protected void appendType(final JvmType type, final StringBuilder builder) {
-    String _identifier = type.getIdentifier();
-    builder.append(_identifier);
+    builder.append(type.getIdentifier());
   }
   
   @Override
   protected void appendType(final Class<?> type, final StringBuilder builder) {
-    String _name = type.getName();
-    builder.append(_name);
+    builder.append(type.getName());
   }
   
   @Override

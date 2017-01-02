@@ -6,8 +6,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.formatting.FormattableDocument;
 import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
@@ -35,9 +33,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
   public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final FormattingPreferenceValues cfg) {
     List<TextReplacement> _xblockexpression = null;
     {
-      IParseResult _parseResult = res.getParseResult();
-      ICompositeNode _rootNode = _parseResult.getRootNode();
-      final String doc = _rootNode.getText();
+      final String doc = res.getParseResult().getRootNode().getText();
       final FormattableDocument format = new FormattableDocument(cfg, doc);
       this.format(IterableExtensions.<EObject>head(res.getContents()), format);
       if ((this.diagnoseConflicts && format.isConflictOccurred())) {
@@ -54,15 +50,13 @@ public abstract class AbstractFormatter implements IBasicFormatter {
       } else {
         final Function1<TextReplacement, Boolean> _function = (TextReplacement it) -> {
           int _offset = it.getOffset();
-          int _offset_1 = it.getOffset();
           int _length = it.getLength();
-          int _plus = (_offset_1 + _length);
-          String _substring = doc.substring(_offset, _plus);
+          int _plus = (_offset + _length);
+          String _substring = doc.substring(it.getOffset(), _plus);
           String _text = it.getText();
           return Boolean.valueOf((!Objects.equal(_substring, _text)));
         };
-        Iterable<TextReplacement> _filter = IterableExtensions.<TextReplacement>filter(edits, _function);
-        _xifexpression = IterableExtensions.<TextReplacement>toList(_filter);
+        _xifexpression = IterableExtensions.<TextReplacement>toList(IterableExtensions.<TextReplacement>filter(edits, _function));
       }
       _xblockexpression = _xifexpression;
     }

@@ -13,8 +13,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
@@ -50,8 +48,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
   protected JvmType _getType(final JvmTypeReference it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("It is not possible to get a type for the given jvm type reference: ");
-    Class<? extends JvmTypeReference> _class = it.getClass();
-    String _name = _class.getName();
+    String _name = it.getClass().getName();
     _builder.append(_name);
     throw new UnsupportedOperationException(_builder.toString());
   }
@@ -91,9 +88,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
     JvmType _xblockexpression = null;
     {
       final URI uri = XFunctionTypeRefs.computeTypeUri(this.isProcedure(it), it.getParamTypes().size());
-      Resource _eResource = it.eResource();
-      ResourceSet _resourceSet = _eResource.getResourceSet();
-      EObject _eObject = _resourceSet.getEObject(uri, true);
+      EObject _eObject = it.eResource().getResourceSet().getEObject(uri, true);
       _xblockexpression = ((JvmType) _eObject);
     }
     return _xblockexpression;
@@ -128,9 +123,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
       if (_eIsProxy) {
         _matched=true;
         final URI uri = ((InternalEObject) proxy).eProxyURI();
-        Resource _eResource = it.eResource();
-        ResourceSet _resourceSet = _eResource.getResourceSet();
-        EObject _eObject = _resourceSet.getEObject(uri, true);
+        EObject _eObject = it.eResource().getResourceSet().getEObject(uri, true);
         return ((JvmType) _eObject);
       }
     }
@@ -153,11 +146,9 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
       {
         final LightweightTypeReference parameterType = this.visit(this.wrapIfNecessary(parameter));
         result.addParameterType(parameterType);
-        ITypeReferenceOwner _owner_1 = this.getOwner();
-        final WildcardTypeReference typeArgument = _owner_1.newWildcardTypeReference();
+        final WildcardTypeReference typeArgument = this.getOwner().newWildcardTypeReference();
         typeArgument.setLowerBound(parameterType);
-        LightweightTypeReference _javaLangObjectTypeReference = this.getJavaLangObjectTypeReference();
-        typeArgument.addUpperBound(_javaLangObjectTypeReference);
+        typeArgument.addUpperBound(this.getJavaLangObjectTypeReference());
         result.addTypeArgument(typeArgument);
       }
     }
@@ -172,8 +163,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
           return result;
         }
       }
-      ITypeReferenceOwner _owner_1 = this.getOwner();
-      final WildcardTypeReference typeArgument = _owner_1.newWildcardTypeReference();
+      final WildcardTypeReference typeArgument = this.getOwner().newWildcardTypeReference();
       typeArgument.addUpperBound(returnType);
       result.addTypeArgument(typeArgument);
     }
@@ -193,8 +183,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
   }
   
   protected LightweightTypeReference getJavaLangObjectTypeReference() {
-    ITypeReferenceOwner _owner = this.getOwner();
-    return _owner.newReferenceToObject();
+    return this.getOwner().newReferenceToObject();
   }
   
   public JvmType getType(final JvmTypeReference it) {

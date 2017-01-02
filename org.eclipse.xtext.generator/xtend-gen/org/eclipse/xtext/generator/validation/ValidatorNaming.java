@@ -38,8 +38,7 @@ public class ValidatorNaming {
     String _simpleName = GrammarUtil.getSimpleName(g);
     _builder.append(_simpleName);
     _builder.append("Validator");
-    String _string = _builder.toString();
-    return _string;
+    return _builder.toString();
   }
   
   public String getAbstractValidatorName() {
@@ -50,8 +49,7 @@ public class ValidatorNaming {
     String _simpleName = GrammarUtil.getSimpleName(this.grammar);
     _builder.append(_simpleName);
     _builder.append("Validator");
-    String _string = _builder.toString();
-    return _string;
+    return _builder.toString();
   }
   
   public String getValidatorSuperClassName(final boolean isInheritImplementation) {
@@ -77,8 +75,7 @@ public class ValidatorNaming {
     String _name = pack.getName();
     _builder.append(_name);
     _builder.append(".");
-    String _name_1 = pack.getName();
-    String _firstUpper = StringExtensions.toFirstUpper(_name_1);
+    String _firstUpper = StringExtensions.toFirstUpper(pack.getName());
     _builder.append(_firstUpper);
     _builder.append("Package");
     return _builder.toString();

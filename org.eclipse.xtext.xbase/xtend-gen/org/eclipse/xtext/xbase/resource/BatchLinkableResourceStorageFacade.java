@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import java.io.InputStream;
 import java.io.OutputStream;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
@@ -19,7 +18,6 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IProjectConfigProvider;
 import org.eclipse.xtext.workspace.ISourceFolder;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageLoadable;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageWritable;
 
@@ -46,11 +44,9 @@ public class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
   @Override
   protected URI getSourceContainerURI(final StorageAwareResource resource) {
     final URI uri = resource.getURI();
-    ResourceSet _resourceSet = resource.getResourceSet();
-    final IProjectConfig mainProject = this.projectConfigProvider.getProjectConfig(_resourceSet);
+    final IProjectConfig mainProject = this.projectConfigProvider.getProjectConfig(resource.getResourceSet());
     if ((mainProject != null)) {
-      IWorkspaceConfig _workspaceConfig = mainProject.getWorkspaceConfig();
-      final IProjectConfig project = _workspaceConfig.findProjectContaining(uri);
+      final IProjectConfig project = mainProject.getWorkspaceConfig().findProjectContaining(uri);
       ISourceFolder _findSourceFolderContaining = null;
       if (project!=null) {
         _findSourceFolderContaining=project.findSourceFolderContaining(uri);
