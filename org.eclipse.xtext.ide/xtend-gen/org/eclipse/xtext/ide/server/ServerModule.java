@@ -8,8 +8,6 @@
 package org.eclipse.xtext.ide.server;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Binder;
-import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.util.concurrent.ExecutorService;
 import org.eclipse.lsp4j.services.LanguageServer;
 import org.eclipse.xtext.ide.ExecutorServiceProvider;
@@ -31,18 +29,11 @@ import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerMan
 public class ServerModule extends AbstractModule {
   @Override
   protected void configure() {
-    Binder _binder = this.binder();
-    AnnotatedBindingBuilder<ExecutorService> _bind = _binder.<ExecutorService>bind(ExecutorService.class);
-    _bind.toProvider(ExecutorServiceProvider.class);
-    AnnotatedBindingBuilder<LanguageServer> _bind_1 = this.<LanguageServer>bind(LanguageServer.class);
-    _bind_1.to(LanguageServerImpl.class);
-    AnnotatedBindingBuilder<IResourceServiceProvider.Registry> _bind_2 = this.<IResourceServiceProvider.Registry>bind(IResourceServiceProvider.Registry.class);
-    _bind_2.toProvider(ResourceServiceProviderServiceLoader.class);
-    AnnotatedBindingBuilder<IWorkspaceConfigFactory> _bind_3 = this.<IWorkspaceConfigFactory>bind(IWorkspaceConfigFactory.class);
-    _bind_3.to(ProjectWorkspaceConfigFactory.class);
-    AnnotatedBindingBuilder<IProjectDescriptionFactory> _bind_4 = this.<IProjectDescriptionFactory>bind(IProjectDescriptionFactory.class);
-    _bind_4.to(DefaultProjectDescriptionFactory.class);
-    AnnotatedBindingBuilder<IContainer.Manager> _bind_5 = this.<IContainer.Manager>bind(IContainer.Manager.class);
-    _bind_5.to(ProjectDescriptionBasedContainerManager.class);
+    this.binder().<ExecutorService>bind(ExecutorService.class).toProvider(ExecutorServiceProvider.class);
+    this.<LanguageServer>bind(LanguageServer.class).to(LanguageServerImpl.class);
+    this.<IResourceServiceProvider.Registry>bind(IResourceServiceProvider.Registry.class).toProvider(ResourceServiceProviderServiceLoader.class);
+    this.<IWorkspaceConfigFactory>bind(IWorkspaceConfigFactory.class).to(ProjectWorkspaceConfigFactory.class);
+    this.<IProjectDescriptionFactory>bind(IProjectDescriptionFactory.class).to(DefaultProjectDescriptionFactory.class);
+    this.<IContainer.Manager>bind(IContainer.Manager.class).to(ProjectDescriptionBasedContainerManager.class);
   }
 }

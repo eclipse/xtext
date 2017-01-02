@@ -127,9 +127,7 @@ public class PredicatedElementTest extends AbstractXtextTests {
     try {
       EObject _model = this.getModel(grammar);
       final Grammar parsed = ((Grammar) _model);
-      EList<AbstractRule> _rules = parsed.getRules();
-      AbstractRule _head = IterableExtensions.<AbstractRule>head(_rules);
-      final AbstractElement body = _head.getAlternatives();
+      final AbstractElement body = IterableExtensions.<AbstractRule>head(parsed.getRules()).getAlternatives();
       final AbstractElement predicate = AntlrGrammarGenUtil.getPredicatedElement(body);
       Assert.assertEquals(expectation, this.toXtext(predicate));
     } catch (Throwable _e) {
@@ -142,19 +140,18 @@ public class PredicatedElementTest extends AbstractXtextTests {
     String _cardinality = group.getCardinality();
     boolean _tripleEquals = (_cardinality == null);
     if (_tripleEquals) {
-      EList<AbstractElement> _elements = group.getElements();
       final Function1<AbstractElement, CharSequence> _function = (AbstractElement it) -> {
         return this.toXtext(it);
       };
-      _xifexpression = IterableExtensions.<AbstractElement>join(_elements, " ", _function);
+      _xifexpression = IterableExtensions.<AbstractElement>join(group.getElements(), " ", _function);
     } else {
-      EList<AbstractElement> _elements_1 = group.getElements();
+      EList<AbstractElement> _elements = group.getElements();
       String _cardinality_1 = group.getCardinality();
       String _plus = (")" + _cardinality_1);
       final Function1<AbstractElement, CharSequence> _function_1 = (AbstractElement it) -> {
         return this.toXtext(it);
       };
-      _xifexpression = IterableExtensions.<AbstractElement>join(_elements_1, "(", " ", _plus, _function_1);
+      _xifexpression = IterableExtensions.<AbstractElement>join(_elements, "(", " ", _plus, _function_1);
     }
     return _xifexpression;
   }
@@ -190,8 +187,7 @@ public class PredicatedElementTest extends AbstractXtextTests {
   }
   
   protected String _toXtext(final RuleCall rc) {
-    AbstractRule _rule = rc.getRule();
-    String _name = _rule.getName();
+    String _name = rc.getRule().getName();
     String _elvis = null;
     String _cardinality = rc.getCardinality();
     if (_cardinality != null) {
@@ -203,8 +199,7 @@ public class PredicatedElementTest extends AbstractXtextTests {
   }
   
   protected String _toXtext(final Assignment ass) {
-    AbstractElement _terminal = ass.getTerminal();
-    String _xtext = this.toXtext(_terminal);
+    String _xtext = this.toXtext(ass.getTerminal());
     String _elvis = null;
     String _cardinality = ass.getCardinality();
     if (_cardinality != null) {
@@ -216,8 +211,7 @@ public class PredicatedElementTest extends AbstractXtextTests {
   }
   
   protected String _toXtext(final CrossReference cr) {
-    AbstractElement _terminal = cr.getTerminal();
-    return this.toXtext(_terminal);
+    return this.toXtext(cr.getTerminal());
   }
   
   public String toXtext(final AbstractElement alt) {

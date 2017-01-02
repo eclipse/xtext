@@ -80,8 +80,7 @@ public class SemanticSequencerExtensions {
             contexts = CollectionLiterals.<ISerializationContext>newArrayList();
             result.put(constraint, contexts);
           }
-          List<ISerializationContext> _contexts = e.getContexts(clazz);
-          contexts.addAll(_contexts);
+          contexts.addAll(e.getContexts(clazz));
         }
       }
     }
@@ -101,8 +100,7 @@ public class SemanticSequencerExtensions {
   }
   
   public Grammar getSuperGrammar(final Grammar grammar) {
-    EList<Grammar> _usedGrammars = grammar.getUsedGrammars();
-    boolean _isEmpty = _usedGrammars.isEmpty();
+    boolean _isEmpty = grammar.getUsedGrammars().isEmpty();
     if (_isEmpty) {
       return null;
     }
@@ -111,15 +109,10 @@ public class SemanticSequencerExtensions {
     if ((sg != null)) {
       return sg.grammar;
     }
-    EList<Grammar> _usedGrammars_1 = grammar.getUsedGrammars();
-    Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars_1);
-    Resource _eResource = _head.eResource();
-    final URI uri = _eResource.getURI();
-    ResourceSet _cloneResourceSet = this.cloneResourceSet(grammar.eResource().getResourceSet());
-    final Resource resource = _cloneResourceSet.getResource(uri, true);
-    EList<EObject> _contents = resource.getContents();
-    EObject _head_1 = IterableExtensions.<EObject>head(_contents);
-    final Grammar result = ((Grammar) _head_1);
+    final URI uri = IterableExtensions.<Grammar>head(grammar.getUsedGrammars()).eResource().getURI();
+    final Resource resource = this.cloneResourceSet(grammar.eResource().getResourceSet()).getResource(uri, true);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
+    final Grammar result = ((Grammar) _head);
     EList<Adapter> _eAdapters = grammar.eAdapters();
     SemanticSequencerExtensions.SuperGrammar _superGrammar = new SemanticSequencerExtensions.SuperGrammar(result);
     _eAdapters.add(_superGrammar);
@@ -130,12 +123,10 @@ public class SemanticSequencerExtensions {
     if ((grammar == null)) {
       return CollectionLiterals.<IGrammarConstraintProvider.IConstraint>emptySet();
     }
-    SerializationContextMap<IGrammarConstraintProvider.IConstraint> _constraints = this.gcp.getConstraints(grammar);
-    List<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>> _values = _constraints.values();
     final Function1<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>, IGrammarConstraintProvider.IConstraint> _function = (SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint> it) -> {
       return it.getValue();
     };
-    return ListExtensions.<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>, IGrammarConstraintProvider.IConstraint>map(_values, _function);
+    return ListExtensions.<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>, IGrammarConstraintProvider.IConstraint>map(this.gcp.getConstraints(grammar).values(), _function);
   }
   
   public List<ISemanticSequencerNfaProvider.ISemState> getLinearListOfMandatoryAssignments(final IGrammarConstraintProvider.IConstraint constraint) {
@@ -157,8 +148,7 @@ public class SemanticSequencerExtensions {
           }
           return _xifexpression;
         }
-        List<ISemanticSequencerNfaProvider.ISemState> _followers = state.getFollowers();
-        int _size = _followers.size();
+        int _size = state.getFollowers().size();
         boolean _tripleNotEquals = (_size != 1);
         if (_tripleNotEquals) {
           return null;

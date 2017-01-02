@@ -16,19 +16,15 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
 
@@ -85,16 +81,11 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
   public void generate() {
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeReference = new TypeReference("org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider");
-    Grammar _grammar = this.getGrammar();
-    TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(_grammar);
-    GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeReference, _quickfixProviderClass);
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
-    _addTypeToType.contributeTo(_eclipsePluginGenModule);
+    _bindingFactory.addTypeToType(_typeReference, 
+      this.getQuickfixProviderClass(this.getGrammar())).contributeTo(this.getLanguage().getEclipsePluginGenModule());
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+      IBundleProjectConfig _eclipsePlugin = this.getProjectConfig().getEclipsePlugin();
       IXtextGeneratorFileSystemAccess _src = null;
       if (_eclipsePlugin!=null) {
         _src=_eclipsePlugin.getSrc();
@@ -108,58 +99,40 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
           this.generateJavaQuickfixProvider();
         }
       }
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
-      ManifestAccess _manifest = _eclipsePlugin_1.getManifest();
+      ManifestAccess _manifest = this.getProjectConfig().getEclipsePlugin().getManifest();
       boolean _tripleNotEquals_1 = (_manifest != null);
       if (_tripleNotEquals_1) {
-        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-        IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
-        ManifestAccess _manifest_1 = _eclipsePlugin_2.getManifest();
-        Set<String> _exportedPackages = _manifest_1.getExportedPackages();
-        Grammar _grammar_1 = this.getGrammar();
-        TypeReference _quickfixProviderClass_1 = this.getQuickfixProviderClass(_grammar_1);
-        String _packageName = _quickfixProviderClass_1.getPackageName();
+        Set<String> _exportedPackages = this.getProjectConfig().getEclipsePlugin().getManifest().getExportedPackages();
+        String _packageName = this.getQuickfixProviderClass(this.getGrammar()).getPackageName();
         _exportedPackages.add(_packageName);
       }
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
-      PluginXmlAccess _pluginXml = _eclipsePlugin_3.getPluginXml();
+      PluginXmlAccess _pluginXml = this.getProjectConfig().getEclipsePlugin().getPluginXml();
       boolean _tripleNotEquals_2 = (_pluginXml != null);
       if (_tripleNotEquals_2) {
         this.addRegistrationToPluginXml();
       }
     } else {
-      IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_4 = _projectConfig_4.getEclipsePlugin();
+      IBundleProjectConfig _eclipsePlugin_1 = this.getProjectConfig().getEclipsePlugin();
       IXtextGeneratorFileSystemAccess _srcGen = null;
-      if (_eclipsePlugin_4!=null) {
-        _srcGen=_eclipsePlugin_4.getSrcGen();
+      if (_eclipsePlugin_1!=null) {
+        _srcGen=_eclipsePlugin_1.getSrcGen();
       }
       boolean _tripleNotEquals_3 = (_srcGen != null);
       if (_tripleNotEquals_3) {
         this.generateGenQuickfixProvider();
       }
-      IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_5 = _projectConfig_5.getEclipsePlugin();
-      ManifestAccess _manifest_2 = _eclipsePlugin_5.getManifest();
-      boolean _tripleNotEquals_4 = (_manifest_2 != null);
+      ManifestAccess _manifest_1 = this.getProjectConfig().getEclipsePlugin().getManifest();
+      boolean _tripleNotEquals_4 = (_manifest_1 != null);
       if (_tripleNotEquals_4) {
-        IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
-        IBundleProjectConfig _eclipsePlugin_6 = _projectConfig_6.getEclipsePlugin();
-        ManifestAccess _manifest_3 = _eclipsePlugin_6.getManifest();
-        Set<String> _exportedPackages_1 = _manifest_3.getExportedPackages();
-        Grammar _grammar_2 = this.getGrammar();
-        TypeReference _quickfixProviderClass_2 = this.getQuickfixProviderClass(_grammar_2);
-        String _packageName_1 = _quickfixProviderClass_2.getPackageName();
+        Set<String> _exportedPackages_1 = this.getProjectConfig().getEclipsePlugin().getManifest().getExportedPackages();
+        String _packageName_1 = this.getQuickfixProviderClass(this.getGrammar()).getPackageName();
         _exportedPackages_1.add(_packageName_1);
       }
     }
   }
   
   public void generateGenQuickfixProvider() {
-    Grammar _grammar = this.getGrammar();
-    final TypeReference genClass = this.getQuickfixProviderClass(_grammar);
+    final TypeReference genClass = this.getQuickfixProviderClass(this.getGrammar());
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(genClass);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -168,8 +141,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         String _simpleName = genClass.getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar = QuickfixProviderFragment2.this.getGrammar();
-        TypeReference _quickfixProviderSuperClass = QuickfixProviderFragment2.this.getQuickfixProviderSuperClass(_grammar);
+        TypeReference _quickfixProviderSuperClass = QuickfixProviderFragment2.this.getQuickfixProviderSuperClass(QuickfixProviderFragment2.this.getGrammar());
         _builder.append(_quickfixProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -178,15 +150,11 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       }
     };
     file.setContent(_client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();
-    file.writeTo(_srcGen);
+    file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrcGen());
   }
   
   protected void generateXtendQuickfixProvider() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(_grammar);
+    TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -205,21 +173,16 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         _builder.append("*/");
         _builder.newLine();
         _builder.append("class ");
-        Grammar _grammar = QuickfixProviderFragment2.this.getGrammar();
-        TypeReference _quickfixProviderClass = QuickfixProviderFragment2.this.getQuickfixProviderClass(_grammar);
-        String _simpleName = _quickfixProviderClass.getSimpleName();
+        String _simpleName = QuickfixProviderFragment2.this.getQuickfixProviderClass(QuickfixProviderFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar_1 = QuickfixProviderFragment2.this.getGrammar();
-        TypeReference _quickfixProviderSuperClass = QuickfixProviderFragment2.this.getQuickfixProviderSuperClass(_grammar_1);
+        TypeReference _quickfixProviderSuperClass = QuickfixProviderFragment2.this.getQuickfixProviderSuperClass(QuickfixProviderFragment2.this.getGrammar());
         _builder.append(_quickfixProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("//\t@Fix(");
-        Grammar _grammar_2 = QuickfixProviderFragment2.this.getGrammar();
-        TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(_grammar_2);
-        String _simpleName_1 = _validatorClass.getSimpleName();
+        String _simpleName_1 = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(QuickfixProviderFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName_1);
         _builder.append(".INVALID_NAME)");
         _builder.newLineIfNotEmpty();
@@ -243,16 +206,11 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         _builder.newLine();
       }
     };
-    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_quickfixProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
-    _createXtendFile.writeTo(_src);
+    this.fileAccessFactory.createXtendFile(_quickfixProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
   
   protected void generateJavaQuickfixProvider() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(_grammar);
+    TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -271,21 +229,16 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         _builder.append("*/");
         _builder.newLine();
         _builder.append("public class ");
-        Grammar _grammar = QuickfixProviderFragment2.this.getGrammar();
-        TypeReference _quickfixProviderClass = QuickfixProviderFragment2.this.getQuickfixProviderClass(_grammar);
-        String _simpleName = _quickfixProviderClass.getSimpleName();
+        String _simpleName = QuickfixProviderFragment2.this.getQuickfixProviderClass(QuickfixProviderFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar_1 = QuickfixProviderFragment2.this.getGrammar();
-        TypeReference _quickfixProviderSuperClass = QuickfixProviderFragment2.this.getQuickfixProviderSuperClass(_grammar_1);
+        TypeReference _quickfixProviderSuperClass = QuickfixProviderFragment2.this.getQuickfixProviderSuperClass(QuickfixProviderFragment2.this.getGrammar());
         _builder.append(_quickfixProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("//\t@Fix(");
-        Grammar _grammar_2 = QuickfixProviderFragment2.this.getGrammar();
-        TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(_grammar_2);
-        String _simpleName_1 = _validatorClass.getSimpleName();
+        String _simpleName_1 = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(QuickfixProviderFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName_1);
         _builder.append(".INVALID_NAME)");
         _builder.newLineIfNotEmpty();
@@ -312,34 +265,21 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         _builder.newLine();
       }
     };
-    JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_quickfixProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
-    _createJavaFile.writeTo(_src);
+    this.fileAccessFactory.createJavaFile(_quickfixProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
   
   protected boolean addRegistrationToPluginXml() {
     boolean _xblockexpression = false;
     {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-      String _name = _eclipsePlugin.getName();
+      String _name = this.getProjectConfig().getEclipsePlugin().getName();
       String _plus = (_name + ".");
-      Grammar _grammar = this.getGrammar();
-      String _simpleName = GrammarUtil.getSimpleName(_grammar);
-      String _lowerCase = _simpleName.toLowerCase();
+      String _lowerCase = GrammarUtil.getSimpleName(this.getGrammar()).toLowerCase();
       final String markerTypePrefix = (_plus + _lowerCase);
-      Grammar _grammar_1 = this.getGrammar();
-      final TypeReference executableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(_grammar_1);
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
-      PluginXmlAccess _pluginXml = _eclipsePlugin_1.getPluginXml();
-      List<CharSequence> _entries = _pluginXml.getEntries();
+      final TypeReference executableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(this.getGrammar());
+      List<CharSequence> _entries = this.getProjectConfig().getEclipsePlugin().getPluginXml().getEntries();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<!-- quickfix marker resolution generator for ");
-      Grammar _grammar_2 = this.getGrammar();
-      String _name_1 = _grammar_2.getName();
+      String _name_1 = this.getGrammar().getName();
       _builder.append(_name_1);
       _builder.append(" -->");
       _builder.newLineIfNotEmpty();

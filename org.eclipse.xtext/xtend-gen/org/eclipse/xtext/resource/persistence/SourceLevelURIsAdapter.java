@@ -63,9 +63,7 @@ public class SourceLevelURIsAdapter extends AdapterImpl {
   }
   
   public static SourceLevelURIsAdapter findInstalledAdapter(final ResourceSet resourceSet) {
-    EList<Adapter> _eAdapters = resourceSet.eAdapters();
-    Iterable<SourceLevelURIsAdapter> _filter = Iterables.<SourceLevelURIsAdapter>filter(_eAdapters, SourceLevelURIsAdapter.class);
-    return IterableExtensions.<SourceLevelURIsAdapter>head(_filter);
+    return IterableExtensions.<SourceLevelURIsAdapter>head(Iterables.<SourceLevelURIsAdapter>filter(resourceSet.eAdapters(), SourceLevelURIsAdapter.class));
   }
   
   @Pure

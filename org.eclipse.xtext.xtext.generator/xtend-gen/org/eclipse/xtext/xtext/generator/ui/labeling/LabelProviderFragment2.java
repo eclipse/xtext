@@ -14,17 +14,11 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
-import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 /**
@@ -106,22 +100,16 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
   @Override
   public void generate() {
     if ((this.isGenerateStub() || this._xbaseUsageDetector.inheritsXbase(this.getGrammar()))) {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-      ManifestAccess _manifest = _eclipsePlugin.getManifest();
+      ManifestAccess _manifest = this.getProjectConfig().getEclipsePlugin().getManifest();
       boolean _tripleNotEquals = (_manifest != null);
       if (_tripleNotEquals) {
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
-        ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
-        Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
+        Set<String> _requiredBundles = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
         _requiredBundles.add("org.eclipse.xtext.ui");
       }
       TypeReference _xifexpression = null;
       boolean _isGenerateStub = this.isGenerateStub();
       if (_isGenerateStub) {
-        Grammar _grammar = this.getGrammar();
-        _xifexpression = this.getEObjectLabelProviderClass(_grammar);
+        _xifexpression = this.getEObjectLabelProviderClass(this.getGrammar());
       } else {
         _xifexpression = new TypeReference(LabelProviderFragment2.XBASE_LABEL_PROVIDER);
       }
@@ -129,16 +117,14 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
       TypeReference _xifexpression_1 = null;
       boolean _isGenerateStub_1 = this.isGenerateStub();
       if (_isGenerateStub_1) {
-        Grammar _grammar_1 = this.getGrammar();
-        _xifexpression_1 = this.getDescriptionLabelProviderClass(_grammar_1);
+        _xifexpression_1 = this.getDescriptionLabelProviderClass(this.getGrammar());
       } else {
         _xifexpression_1 = new TypeReference(LabelProviderFragment2.XBASE_DESCRIPTION_LABEL_PROVIDER);
       }
       final TypeReference descriptionLabelProviderClass = _xifexpression_1;
       final TypeReference iLabelProviderClass = new TypeReference("org.eclipse.jface.viewers.ILabelProvider");
       final TypeReference rsdLabelProviderClass = new TypeReference("org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider");
-      GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
-      GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(iLabelProviderClass, labelProviderClass);
+      GuiceModuleAccess.BindingFactory _addTypeToType = new GuiceModuleAccess.BindingFactory().addTypeToType(iLabelProviderClass, labelProviderClass);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -152,10 +138,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
           _builder.newLineIfNotEmpty();
         }
       };
-      GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToType.addConfiguredBinding("ResourceUIServiceLabelProvider", _client);
-      IXtextGeneratorLanguage _language = this.getLanguage();
-      GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
-      _addConfiguredBinding.contributeTo(_eclipsePluginGenModule);
+      _addTypeToType.addConfiguredBinding("ResourceUIServiceLabelProvider", _client).contributeTo(this.getLanguage().getEclipsePluginGenModule());
     }
     if ((this.isGenerateStub() && (this.getProjectConfig().getEclipsePlugin().getSrc() != null))) {
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
@@ -170,8 +153,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
   }
   
   protected void generateXtendEObjectLabelProvider() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _eObjectLabelProviderClass = this.getEObjectLabelProviderClass(_grammar);
+    TypeReference _eObjectLabelProviderClass = this.getEObjectLabelProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -190,13 +172,10 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("*/");
         _builder.newLine();
         _builder.append("class ");
-        Grammar _grammar = LabelProviderFragment2.this.getGrammar();
-        TypeReference _eObjectLabelProviderClass = LabelProviderFragment2.this.getEObjectLabelProviderClass(_grammar);
-        String _simpleName = _eObjectLabelProviderClass.getSimpleName();
+        String _simpleName = LabelProviderFragment2.this.getEObjectLabelProviderClass(LabelProviderFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar_1 = LabelProviderFragment2.this.getGrammar();
-        TypeReference _eObjectLabelProviderSuperClass = LabelProviderFragment2.this.getEObjectLabelProviderSuperClass(_grammar_1);
+        TypeReference _eObjectLabelProviderSuperClass = LabelProviderFragment2.this.getEObjectLabelProviderSuperClass(LabelProviderFragment2.this.getGrammar());
         _builder.append(_eObjectLabelProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -241,16 +220,11 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLine();
       }
     };
-    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_eObjectLabelProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
-    _createXtendFile.writeTo(_src);
+    this.fileAccessFactory.createXtendFile(_eObjectLabelProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
   
   protected void generateXtendDescriptionLabelProvider() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _descriptionLabelProviderClass = this.getDescriptionLabelProviderClass(_grammar);
+    TypeReference _descriptionLabelProviderClass = this.getDescriptionLabelProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -269,13 +243,10 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("*/");
         _builder.newLine();
         _builder.append("class ");
-        Grammar _grammar = LabelProviderFragment2.this.getGrammar();
-        TypeReference _descriptionLabelProviderClass = LabelProviderFragment2.this.getDescriptionLabelProviderClass(_grammar);
-        String _simpleName = _descriptionLabelProviderClass.getSimpleName();
+        String _simpleName = LabelProviderFragment2.this.getDescriptionLabelProviderClass(LabelProviderFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar_1 = LabelProviderFragment2.this.getGrammar();
-        TypeReference _descriptionLabelProviderSuperClass = LabelProviderFragment2.this.getDescriptionLabelProviderSuperClass(_grammar_1);
+        TypeReference _descriptionLabelProviderSuperClass = LabelProviderFragment2.this.getDescriptionLabelProviderSuperClass(LabelProviderFragment2.this.getGrammar());
         _builder.append(_descriptionLabelProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -303,16 +274,11 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLine();
       }
     };
-    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_descriptionLabelProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
-    _createXtendFile.writeTo(_src);
+    this.fileAccessFactory.createXtendFile(_descriptionLabelProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
   
   protected void generateJavaEObjectLabelProvider() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _eObjectLabelProviderClass = this.getEObjectLabelProviderClass(_grammar);
+    TypeReference _eObjectLabelProviderClass = this.getEObjectLabelProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -331,13 +297,10 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("*/");
         _builder.newLine();
         _builder.append("public class ");
-        Grammar _grammar = LabelProviderFragment2.this.getGrammar();
-        TypeReference _eObjectLabelProviderClass = LabelProviderFragment2.this.getEObjectLabelProviderClass(_grammar);
-        String _simpleName = _eObjectLabelProviderClass.getSimpleName();
+        String _simpleName = LabelProviderFragment2.this.getEObjectLabelProviderClass(LabelProviderFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar_1 = LabelProviderFragment2.this.getGrammar();
-        TypeReference _eObjectLabelProviderSuperClass = LabelProviderFragment2.this.getEObjectLabelProviderSuperClass(_grammar_1);
+        TypeReference _eObjectLabelProviderSuperClass = LabelProviderFragment2.this.getEObjectLabelProviderSuperClass(LabelProviderFragment2.this.getGrammar());
         _builder.append(_eObjectLabelProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -348,9 +311,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("public ");
-        Grammar _grammar_2 = LabelProviderFragment2.this.getGrammar();
-        TypeReference _eObjectLabelProviderClass_1 = LabelProviderFragment2.this.getEObjectLabelProviderClass(_grammar_2);
-        String _simpleName_1 = _eObjectLabelProviderClass_1.getSimpleName();
+        String _simpleName_1 = LabelProviderFragment2.this.getEObjectLabelProviderClass(LabelProviderFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append("(");
         TypeReference _typeReference = new TypeReference("org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider");
@@ -387,16 +348,11 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLine();
       }
     };
-    JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_eObjectLabelProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
-    _createJavaFile.writeTo(_src);
+    this.fileAccessFactory.createJavaFile(_eObjectLabelProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
   
   protected void generateJavaDescriptionLabelProvider() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _descriptionLabelProviderClass = this.getDescriptionLabelProviderClass(_grammar);
+    TypeReference _descriptionLabelProviderClass = this.getDescriptionLabelProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -415,13 +371,10 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("*/");
         _builder.newLine();
         _builder.append("public class ");
-        Grammar _grammar = LabelProviderFragment2.this.getGrammar();
-        TypeReference _descriptionLabelProviderClass = LabelProviderFragment2.this.getDescriptionLabelProviderClass(_grammar);
-        String _simpleName = _descriptionLabelProviderClass.getSimpleName();
+        String _simpleName = LabelProviderFragment2.this.getDescriptionLabelProviderClass(LabelProviderFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar_1 = LabelProviderFragment2.this.getGrammar();
-        TypeReference _descriptionLabelProviderSuperClass = LabelProviderFragment2.this.getDescriptionLabelProviderSuperClass(_grammar_1);
+        TypeReference _descriptionLabelProviderSuperClass = LabelProviderFragment2.this.getDescriptionLabelProviderSuperClass(LabelProviderFragment2.this.getGrammar());
         _builder.append(_descriptionLabelProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -449,10 +402,6 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLine();
       }
     };
-    JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_descriptionLabelProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
-    _createJavaFile.writeTo(_src);
+    this.fileAccessFactory.createJavaFile(_descriptionLabelProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
 }

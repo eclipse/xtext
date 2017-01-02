@@ -24,8 +24,6 @@ import org.eclipse.xtext.nodemodel.impl.SerializableNodeModel;
 import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.persistence.PortableURIs;
 import org.eclipse.xtext.resource.persistence.SerializableReferenceDescription;
 import org.eclipse.xtext.resource.persistence.SerializableResourceDescription;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
@@ -97,17 +95,14 @@ public class ResourceStorageWritable {
       public void writeURI(final URI uri, final String fragment) throws IOException {
         final URI fullURI = uri.appendFragment(fragment);
         URI _elvis = null;
-        PortableURIs _portableURIs = storageAwareResource.getPortableURIs();
-        URI _portableURI = _portableURIs.toPortableURI(storageAwareResource, fullURI);
+        URI _portableURI = storageAwareResource.getPortableURIs().toPortableURI(storageAwareResource, fullURI);
         if (_portableURI != null) {
           _elvis = _portableURI;
         } else {
           _elvis = fullURI;
         }
         final URI uriToWrite = _elvis;
-        URI _trimFragment = uriToWrite.trimFragment();
-        String _fragment = uriToWrite.fragment();
-        super.writeURI(_trimFragment, _fragment);
+        super.writeURI(uriToWrite.trimFragment(), uriToWrite.fragment());
       }
       
       @Override
@@ -132,9 +127,7 @@ public class ResourceStorageWritable {
   }
   
   protected void writeResourceDescription(final StorageAwareResource resource, final OutputStream outputStream) throws IOException {
-    IResourceServiceProvider _resourceServiceProvider = resource.getResourceServiceProvider();
-    IResourceDescription.Manager _resourceDescriptionManager = _resourceServiceProvider.getResourceDescriptionManager();
-    final IResourceDescription description = _resourceDescriptionManager.getResourceDescription(resource);
+    final IResourceDescription description = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
     final SerializableResourceDescription serializableDescription = SerializableResourceDescription.createCopy(description);
     this.convertExternalURIsToPortableURIs(serializableDescription, resource);
     final ObjectOutputStream out = new ObjectOutputStream(outputStream);
@@ -148,20 +141,17 @@ public class ResourceStorageWritable {
   protected void convertExternalURIsToPortableURIs(final SerializableResourceDescription description, final StorageAwareResource resource) {
     Iterable<IReferenceDescription> _referenceDescriptions = description.getReferenceDescriptions();
     for (final IReferenceDescription ref : _referenceDescriptions) {
-      URI _targetEObjectUri = ref.getTargetEObjectUri();
-      URI _trimFragment = _targetEObjectUri.trimFragment();
+      URI _trimFragment = ref.getTargetEObjectUri().trimFragment();
       URI _uRI = resource.getURI();
       boolean _notEquals = (!Objects.equal(_trimFragment, _uRI));
       if (_notEquals) {
         URI _elvis = null;
-        PortableURIs _portableURIs = resource.getPortableURIs();
-        URI _targetEObjectUri_1 = ref.getTargetEObjectUri();
-        URI _portableURI = _portableURIs.toPortableURI(resource, _targetEObjectUri_1);
+        URI _portableURI = resource.getPortableURIs().toPortableURI(resource, ref.getTargetEObjectUri());
         if (_portableURI != null) {
           _elvis = _portableURI;
         } else {
-          URI _targetEObjectUri_2 = ref.getTargetEObjectUri();
-          _elvis = _targetEObjectUri_2;
+          URI _targetEObjectUri = ref.getTargetEObjectUri();
+          _elvis = _targetEObjectUri;
         }
         ((SerializableReferenceDescription) ref).setTargetEObjectUri(_elvis);
       }

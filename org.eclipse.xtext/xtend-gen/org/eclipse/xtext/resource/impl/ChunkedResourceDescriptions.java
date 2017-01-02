@@ -19,7 +19,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.notify.Adapter;
@@ -102,16 +101,14 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
   
   protected void setResourceSet(final ResourceSet resourceSet) {
     if ((this.resourceSet != null)) {
-      Class<? extends ChunkedResourceDescriptions> _class = this.getClass();
-      String _name = _class.getName();
+      String _name = this.getClass().getName();
       String _plus = ("This " + _name);
       String _plus_1 = (_plus + " is already associated with a different resource set.");
       throw new IllegalStateException(_plus_1);
     }
     final ChunkedResourceDescriptions index = ChunkedResourceDescriptions.findInEmfObject(resourceSet);
     if ((index != null)) {
-      Class<? extends ChunkedResourceDescriptions> _class_1 = this.getClass();
-      String _name_1 = _class_1.getName();
+      String _name_1 = this.getClass().getName();
       String _plus_2 = ("There is already a different " + _name_1);
       String _plus_3 = (_plus_2 + " installed in the given resource set.");
       throw new IllegalStateException(_plus_3);
@@ -135,12 +132,10 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
   
   @Override
   public Iterable<IResourceDescription> getAllResourceDescriptions() {
-    Collection<ResourceDescriptionsData> _values = this.chunk2resourceDescriptions.values();
     final Function1<ResourceDescriptionsData, Iterable<IResourceDescription>> _function = (ResourceDescriptionsData it) -> {
       return it.getAllResourceDescriptions();
     };
-    Iterable<Iterable<IResourceDescription>> _map = IterableExtensions.<ResourceDescriptionsData, Iterable<IResourceDescription>>map(_values, _function);
-    return Iterables.<IResourceDescription>concat(_map);
+    return Iterables.<IResourceDescription>concat(IterableExtensions.<ResourceDescriptionsData, Iterable<IResourceDescription>>map(this.chunk2resourceDescriptions.values(), _function));
   }
   
   @Override
@@ -197,16 +192,10 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
   @Override
   public void writeExternal(final ObjectOutput out) throws IOException {
     final HashMap<String, ResourceDescriptionsData> copy = new HashMap<String, ResourceDescriptionsData>(this.chunk2resourceDescriptions);
-    Set<Map.Entry<String, ResourceDescriptionsData>> _entrySet = copy.entrySet();
-    int _size = _entrySet.size();
-    out.writeInt(_size);
-    Set<Map.Entry<String, ResourceDescriptionsData>> _entrySet_1 = copy.entrySet();
+    out.writeInt(copy.entrySet().size());
     final Consumer<Map.Entry<String, ResourceDescriptionsData>> _function = (Map.Entry<String, ResourceDescriptionsData> it) -> {
       try {
-        String _key = it.getKey();
-        out.writeUTF(_key);
-        ResourceDescriptionsData _value = it.getValue();
-        Iterable<IResourceDescription> _allResourceDescriptions = _value.getAllResourceDescriptions();
+        out.writeUTF(it.getKey());
         final Function1<IResourceDescription, Object> _function_1 = (IResourceDescription it_1) -> {
           Object _xifexpression = null;
           if ((it_1 instanceof Serializable)) {
@@ -216,9 +205,8 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
           }
           return ((Object)_xifexpression);
         };
-        final Iterable<Object> descriptions = IterableExtensions.<IResourceDescription, Object>map(_allResourceDescriptions, _function_1);
-        int _size_1 = IterableExtensions.size(descriptions);
-        out.writeInt(_size_1);
+        final Iterable<Object> descriptions = IterableExtensions.<IResourceDescription, Object>map(it.getValue().getAllResourceDescriptions(), _function_1);
+        out.writeInt(IterableExtensions.size(descriptions));
         final Consumer<Object> _function_2 = (Object it_1) -> {
           try {
             out.writeObject(it_1);
@@ -231,7 +219,7 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
         throw Exceptions.sneakyThrow(_e);
       }
     };
-    _entrySet_1.forEach(_function);
+    copy.entrySet().forEach(_function);
   }
   
   public static ChunkedResourceDescriptions findInEmfObject(final Notifier emfObject) {

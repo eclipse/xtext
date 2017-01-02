@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.resource;
 
-import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -35,9 +34,7 @@ public abstract class AbstractResourceSetTest {
       return _xblockexpression;
     };
     final Resource.Factory nullFactory = _function;
-    Resource.Factory.Registry _resourceFactoryRegistry = rs.getResourceFactoryRegistry();
-    Map<String, Object> _extensionToFactoryMap = _resourceFactoryRegistry.getExtensionToFactoryMap();
-    _extensionToFactoryMap.put("xmi", nullFactory);
+    rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", nullFactory);
     Assert.assertEquals(0, rs.getURIResourceMap().size());
     final URI uri = URI.createURI("file:/does/not/exist.xmi");
     final Resource demandLoaded = rs.getResource(uri, true);

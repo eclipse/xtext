@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtext.formatting2.FormatterRequest;
@@ -53,13 +52,9 @@ public class FormattingService {
       TextRegion _textRegion = new TextRegion(offset, length);
       final List<ITextReplacement> replacements = this.format2(resource, _textRegion, null);
       final Function1<ITextReplacement, TextEdit> _function = (ITextReplacement r) -> {
-        String _replacementText = r.getReplacementText();
-        int _offset = r.getOffset();
-        int _length = r.getLength();
-        return this.toTextEdit(document, _replacementText, _offset, _length);
+        return this.toTextEdit(document, r.getReplacementText(), r.getOffset(), r.getLength());
       };
-      List<TextEdit> _map = ListExtensions.<ITextReplacement, TextEdit>map(replacements, _function);
-      return IterableExtensions.<TextEdit>toList(_map);
+      return IterableExtensions.<TextEdit>toList(ListExtensions.<ITextReplacement, TextEdit>map(replacements, _function));
     } else {
       return CollectionLiterals.<TextEdit>newArrayList();
     }
@@ -71,10 +66,8 @@ public class FormattingService {
       it.setNewText(formattedText);
       Range _range = new Range();
       final Procedure1<Range> _function_1 = (Range it_1) -> {
-        Position _position = document.getPosition(startOffset);
-        it_1.setStart(_position);
-        Position _position_1 = document.getPosition((startOffset + length));
-        it_1.setEnd(_position_1);
+        it_1.setStart(document.getPosition(startOffset));
+        it_1.setEnd(document.getPosition((startOffset + length)));
       };
       Range _doubleArrow = ObjectExtensions.<Range>operator_doubleArrow(_range, _function_1);
       it.setRange(_doubleArrow);
@@ -92,8 +85,7 @@ public class FormattingService {
     if ((preferences != null)) {
       request.setPreferences(preferences);
     }
-    TextRegionAccessBuilder _forNodeModel = this.regionBuilder.forNodeModel(resource);
-    final ITextRegionAccess regionAccess = _forNodeModel.create();
+    final ITextRegionAccess regionAccess = this.regionBuilder.forNodeModel(resource).create();
     request.setTextRegionAccess(regionAccess);
     final IFormatter2 formatter2 = this.formatter2Provider.get();
     final List<ITextReplacement> replacements = formatter2.format(request);

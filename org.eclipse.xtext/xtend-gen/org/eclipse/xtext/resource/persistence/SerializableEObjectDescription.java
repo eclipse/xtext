@@ -83,8 +83,7 @@ public class SerializableEObjectDescription implements IEObjectDescription, Exte
   @Override
   public void writeExternal(final ObjectOutput out) throws IOException {
     SerializationExtensions.writeURI(out, this.eObjectURI);
-    URI _uRI = EcoreUtil.getURI(this.eClass);
-    SerializationExtensions.writeURI(out, _uRI);
+    SerializationExtensions.writeURI(out, EcoreUtil.getURI(this.eClass));
     SerializationExtensions.writeQualifiedName(out, this.qualifiedName);
     out.writeObject(this.userData);
   }

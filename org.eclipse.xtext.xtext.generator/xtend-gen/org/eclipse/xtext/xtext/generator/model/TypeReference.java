@@ -11,8 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.base.Splitter;
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
-import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -128,8 +126,7 @@ public class TypeReference {
     Class<?> c = clazz;
     do {
       {
-        String _simpleName = c.getSimpleName();
-        this.simpleNames.add(0, _simpleName);
+        this.simpleNames.add(0, c.getSimpleName());
         c = c.getDeclaringClass();
       }
     } while((c != null));
@@ -144,9 +141,7 @@ public class TypeReference {
   }
   
   private static String getPackageName(final String qualifiedName, final boolean strict) {
-    Splitter _on = Splitter.on(".");
-    Iterable<String> _split = _on.split(qualifiedName);
-    final List<String> segments = IterableExtensions.<String>toList(_split);
+    final List<String> segments = IterableExtensions.<String>toList(Splitter.on(".").split(qualifiedName));
     int _size = segments.size();
     boolean _equals = (_size == 1);
     if (_equals) {
@@ -157,11 +152,9 @@ public class TypeReference {
       int _minus = (_length - 1);
       final List<String> packageSegments = segments.subList(0, _minus);
       final Function1<String, Boolean> _function = (String it) -> {
-        char _charAt = it.charAt(0);
-        return Boolean.valueOf(Character.isUpperCase(_charAt));
+        return Boolean.valueOf(Character.isUpperCase(it.charAt(0)));
       };
-      Iterable<String> _filter = IterableExtensions.<String>filter(packageSegments, _function);
-      boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+      boolean _isEmpty = IterableExtensions.isEmpty(IterableExtensions.<String>filter(packageSegments, _function));
       boolean _not = (!_isEmpty);
       if (_not) {
         throw new IllegalArgumentException((("Cannot determine the package name of \'" + qualifiedName) + "\'. Please use the TypeReference(packageName, className) constructor"));
@@ -172,11 +165,12 @@ public class TypeReference {
       int _minus_1 = (_length_1 - 1);
       List<String> packageSegments_1 = segments.subList(0, _minus_1);
       while ((!packageSegments_1.isEmpty())) {
-        String _last = IterableExtensions.<String>last(packageSegments_1);
-        char _charAt = _last.charAt(0);
-        boolean _isUpperCase = Character.isUpperCase(_charAt);
+        boolean _isUpperCase = Character.isUpperCase(IterableExtensions.<String>last(packageSegments_1).charAt(0));
         if (_isUpperCase) {
-          packageSegments_1 = packageSegments_1.subList(0, (((Object[])Conversions.unwrapArray(packageSegments_1, Object.class)).length - 1));
+          final List<String> _converted_packageSegments_1 = (List<String>)packageSegments_1;
+          int _length_2 = ((Object[])Conversions.unwrapArray(_converted_packageSegments_1, Object.class)).length;
+          int _minus_2 = (_length_2 - 1);
+          packageSegments_1 = packageSegments_1.subList(0, _minus_2);
         } else {
           return IterableExtensions.join(packageSegments_1, ".");
         }
@@ -196,8 +190,7 @@ public class TypeReference {
       } else {
         int _length = packageName.length();
         int _plus = (_length + 1);
-        int _length_1 = qualifiedName.length();
-        _xifexpression = qualifiedName.substring(_plus, _length_1);
+        _xifexpression = qualifiedName.substring(_plus, qualifiedName.length());
       }
       _xblockexpression = _xifexpression;
     }
@@ -206,23 +199,20 @@ public class TypeReference {
   
   private static String getQualifiedName(final EClass clazz, final ResourceSet resourceSet) {
     String _xifexpression = null;
-    EPackage _ePackage = clazz.getEPackage();
-    String _nsURI = _ePackage.getNsURI();
+    String _nsURI = clazz.getEPackage().getNsURI();
     boolean _equals = Objects.equal(_nsURI, "http://www.eclipse.org/2008/Xtext");
     if (_equals) {
       String _name = clazz.getName();
       _xifexpression = ("org.eclipse.xtext." + _name);
     } else {
       String _xifexpression_1 = null;
-      EPackage _ePackage_1 = clazz.getEPackage();
-      String _nsURI_1 = _ePackage_1.getNsURI();
+      String _nsURI_1 = clazz.getEPackage().getNsURI();
       boolean _equals_1 = Objects.equal(_nsURI_1, "http://www.eclipse.org/emf/2002/Ecore");
       if (_equals_1) {
         String _name_1 = clazz.getName();
         _xifexpression_1 = ("org.eclipse.emf.ecore." + _name_1);
       } else {
-        GenClass _genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
-        _xifexpression_1 = _genClass.getQualifiedInterfaceName();
+        _xifexpression_1 = GenModelUtil2.getGenClass(clazz, resourceSet).getQualifiedInterfaceName();
       }
       _xifexpression = _xifexpression_1;
     }
@@ -230,8 +220,7 @@ public class TypeReference {
   }
   
   private static String getQualifiedName(final EPackage epackage, final ResourceSet resourceSet) {
-    GenPackage _genPackage = GenModelUtil2.getGenPackage(epackage, resourceSet);
-    return _genPackage.getQualifiedPackageInterfaceName();
+    return GenModelUtil2.getGenPackage(epackage, resourceSet).getQualifiedPackageInterfaceName();
   }
   
   @Override

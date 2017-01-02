@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
-import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
@@ -57,15 +56,13 @@ public class WebProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public boolean isPartOfGradleBuild() {
-    WizardConfiguration _config = this.getConfig();
-    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
+    BuildSystem _preferredBuildSystem = this.getConfig().getPreferredBuildSystem();
     return Objects.equal(_preferredBuildSystem, BuildSystem.GRADLE);
   }
   
   @Override
   public boolean isPartOfMavenBuild() {
-    WizardConfiguration _config = this.getConfig();
-    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
+    BuildSystem _preferredBuildSystem = this.getConfig().getPreferredBuildSystem();
     return Objects.equal(_preferredBuildSystem, BuildSystem.MAVEN);
   }
   
@@ -127,9 +124,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("main = \'");
-      WizardConfiguration _config = this.getConfig();
-      LanguageDescriptor _language = _config.getLanguage();
-      String _basePackage = _language.getBasePackage();
+      String _basePackage = this.getConfig().getLanguage().getBasePackage();
       _builder_1.append(_basePackage, "\t");
       _builder_1.append(".web.ServerLauncher\'");
       _builder_1.newLineIfNotEmpty();
@@ -158,8 +153,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
       _builder.append("<build>");
       _builder.newLine();
       {
-        WizardConfiguration _config = this.getConfig();
-        SourceLayout _sourceLayout = _config.getSourceLayout();
+        SourceLayout _sourceLayout = this.getConfig().getSourceLayout();
         boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
         if (_equals) {
           _builder.append("\t");

@@ -20,15 +20,11 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
@@ -43,67 +39,35 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
   
   @Override
   public void generate() {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    ManifestAccess _manifest = _runtime.getManifest();
+    ManifestAccess _manifest = this.getProjectConfig().getRuntime().getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
-      ManifestAccess _manifest_1 = _runtime_1.getManifest();
-      Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
-      _requiredBundles.addAll(
+      this.getProjectConfig().getRuntime().getManifest().getRequiredBundles().addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext", "org.eclipse.xtext.util")));
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
       if (_isGenerateXtendStub) {
-        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
-        ManifestAccess _manifest_2 = _runtime_2.getManifest();
-        Set<String> _requiredBundles_1 = _manifest_2.getRequiredBundles();
-        _requiredBundles_1.add("org.eclipse.xtend.lib");
+        Set<String> _requiredBundles = this.getProjectConfig().getRuntime().getManifest().getRequiredBundles();
+        _requiredBundles.add("org.eclipse.xtend.lib");
       }
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_3 = _projectConfig_3.getRuntime();
-      ManifestAccess _manifest_3 = _runtime_3.getManifest();
-      Set<String> _importedPackages = _manifest_3.getImportedPackages();
-      _importedPackages.add("org.apache.log4j");
+      this.getProjectConfig().getRuntime().getManifest().getImportedPackages().add("org.apache.log4j");
     }
-    IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig_4.getEclipsePlugin();
-    ManifestAccess _manifest_4 = _eclipsePlugin.getManifest();
-    boolean _tripleNotEquals_1 = (_manifest_4 != null);
+    ManifestAccess _manifest_1 = this.getProjectConfig().getEclipsePlugin().getManifest();
+    boolean _tripleNotEquals_1 = (_manifest_1 != null);
     if (_tripleNotEquals_1) {
-      IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_5.getEclipsePlugin();
-      ManifestAccess _manifest_5 = _eclipsePlugin_1.getManifest();
-      Set<String> _requiredBundles_2 = _manifest_5.getRequiredBundles();
-      _requiredBundles_2.addAll(
+      this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles().addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.ui.shared", "org.eclipse.ui.editors", "org.eclipse.ui")));
       boolean _isGenerateXtendStub_1 = this.isGenerateXtendStub();
       if (_isGenerateXtendStub_1) {
-        IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
-        IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_6.getEclipsePlugin();
-        ManifestAccess _manifest_6 = _eclipsePlugin_2.getManifest();
-        Set<String> _requiredBundles_3 = _manifest_6.getRequiredBundles();
-        _requiredBundles_3.add("org.eclipse.xtend.lib");
+        Set<String> _requiredBundles_1 = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
+        _requiredBundles_1.add("org.eclipse.xtend.lib");
       }
-      IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_7.getEclipsePlugin();
-      ManifestAccess _manifest_7 = _eclipsePlugin_3.getManifest();
-      Set<String> _importedPackages_1 = _manifest_7.getImportedPackages();
-      _importedPackages_1.add("org.apache.log4j");
+      this.getProjectConfig().getEclipsePlugin().getManifest().getImportedPackages().add("org.apache.log4j");
     }
-    IXtextProjectConfig _projectConfig_8 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin_4 = _projectConfig_8.getEclipsePlugin();
-    PluginXmlAccess _pluginXml = _eclipsePlugin_4.getPluginXml();
+    PluginXmlAccess _pluginXml = this.getProjectConfig().getEclipsePlugin().getPluginXml();
     boolean _tripleNotEquals_2 = (_pluginXml != null);
     if (_tripleNotEquals_2) {
-      IXtextProjectConfig _projectConfig_9 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_5 = _projectConfig_9.getEclipsePlugin();
-      PluginXmlAccess _pluginXml_1 = _eclipsePlugin_5.getPluginXml();
-      List<CharSequence> _entries = _pluginXml_1.getEntries();
-      Grammar _grammar = this.getGrammar();
-      CharSequence _implicitPluginXmlEnties = this.getImplicitPluginXmlEnties(_grammar);
+      List<CharSequence> _entries = this.getProjectConfig().getEclipsePlugin().getPluginXml().getEntries();
+      CharSequence _implicitPluginXmlEnties = this.getImplicitPluginXmlEnties(this.getGrammar());
       _entries.add(_implicitPluginXmlEnties);
     }
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -115,24 +79,15 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
       }
     };
     final StringConcatenationClient expression = _client;
-    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
-    TypeReference _typeRef = TypeReference.typeRef(IAllContainersState.class);
-    final GuiceModuleAccess.BindingFactory bindingFactory = _bindingFactory.addTypeToProviderInstance(_typeRef, expression);
+    final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory().addTypeToProviderInstance(TypeReference.typeRef(IAllContainersState.class), expression);
     boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
     if (_inheritsXbase) {
-      TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.XtextEditor");
-      TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.editor.XbaseEditor");
-      GuiceModuleAccess.BindingFactory _addTypeToType = bindingFactory.addTypeToType(_typeRef_1, _typeRef_2);
-      TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.model.XtextDocumentProvider");
-      TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider");
-      GuiceModuleAccess.BindingFactory _addTypeToType_1 = _addTypeToType.addTypeToType(_typeRef_3, _typeRef_4);
-      TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler");
-      TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler");
-      _addTypeToType_1.addTypeToType(_typeRef_5, _typeRef_6);
+      bindingFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ui.editor.XtextEditor"), 
+        TypeReference.typeRef("org.eclipse.xtext.xbase.ui.editor.XbaseEditor")).addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"), 
+        TypeReference.typeRef("org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider")).addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"), 
+        TypeReference.typeRef("org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler"));
     }
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
-    bindingFactory.contributeTo(_eclipsePluginGenModule);
+    bindingFactory.contributeTo(this.getLanguage().getEclipsePluginGenModule());
   }
   
   public CharSequence getImplicitPluginXmlEnties(final Grammar it) {
@@ -159,9 +114,7 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("extensions=\"");
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    List<String> _fileExtensions = _language.getFileExtensions();
-    String _join = IterableExtensions.join(_fileExtensions, ",");
+    String _join = IterableExtensions.join(this.getLanguage().getFileExtensions(), ",");
     _builder.append(_join, "\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
@@ -172,8 +125,7 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     {
-      Grammar _grammar = this.getGrammar();
-      boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
+      boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
       if (_inheritsXbase) {
         _builder.append("\t\t");
         _builder.append("matchingStrategy=\"");

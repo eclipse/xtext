@@ -10,7 +10,6 @@ package org.eclipse.xtext.util.internal;
 import com.google.common.collect.Maps;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
@@ -27,8 +26,7 @@ public class AlternateJdkLoader extends URLClassLoader {
   public AlternateJdkLoader(final Iterable<File> files) {
     super(((URL[])Conversions.unwrapArray(IterableExtensions.<File, URL>map(files, ((Function1<File, URL>) (File it) -> {
       try {
-        URI _uRI = it.toURI();
-        return _uRI.toURL();
+        return it.toURI().toURL();
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }

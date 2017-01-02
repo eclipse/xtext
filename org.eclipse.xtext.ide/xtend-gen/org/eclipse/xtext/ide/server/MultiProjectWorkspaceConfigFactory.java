@@ -37,19 +37,16 @@ public class MultiProjectWorkspaceConfigFactory implements IWorkspaceConfigFacto
       final HashMap<String, IProjectConfig> name2config = CollectionLiterals.<String, IProjectConfig>newHashMap();
       final MultiProjectWorkspaceConfig result = new MultiProjectWorkspaceConfig(name2config);
       final IAcceptor<IProjectConfig> _function = (IProjectConfig it) -> {
-        String _name = it.getName();
-        name2config.put(_name, it);
+        name2config.put(it.getName(), it);
       };
       final IAcceptor<IProjectConfig> acceptor = _function;
-      File[] _listFiles = baseFile.listFiles();
       final Function1<File, Boolean> _function_1 = (File it) -> {
         return Boolean.valueOf(it.isDirectory());
       };
-      Iterable<File> _filter = IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(_listFiles)), _function_1);
       final Consumer<File> _function_2 = (File it) -> {
         this.addProjectConfigs(URI.createFileURI(it.getAbsolutePath()), result, acceptor);
       };
-      _filter.forEach(_function_2);
+      IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(baseFile.listFiles())), _function_1).forEach(_function_2);
       return result;
     }
     return null;

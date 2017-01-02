@@ -55,26 +55,18 @@ public class PreferenceTaskTagProviderTest {
     final String prios = PreferenceTaskTagProvider.serializePriorities(tags);
     final IPreferenceValuesProvider.SingletonPreferenceValuesProvider valueProvider = new IPreferenceValuesProvider.SingletonPreferenceValuesProvider();
     final MapBasedPreferenceValues values = valueProvider.getPreferenceValues(null);
-    String _id = PreferenceTaskTagProvider.TAGS_KEY.getId();
-    values.put(_id, names);
-    String _id_1 = PreferenceTaskTagProvider.PRIORITIES_KEY.getId();
-    values.put(_id_1, prios);
-    String _id_2 = PreferenceTaskTagProvider.CASE_SENSITIVE_KEY.getId();
-    values.put(_id_2, "false");
+    values.put(PreferenceTaskTagProvider.TAGS_KEY.getId(), names);
+    values.put(PreferenceTaskTagProvider.PRIORITIES_KEY.getId(), prios);
+    values.put(PreferenceTaskTagProvider.CASE_SENSITIVE_KEY.getId(), "false");
     final PreferenceTaskTagProvider tagProvider = new PreferenceTaskTagProvider();
     tagProvider.setPreferenceValuesProvider(valueProvider);
     final TaskTags parsedTags = tagProvider.getTaskTags(null);
-    boolean _isCaseSensitive = parsedTags.isCaseSensitive();
-    Assert.assertEquals(Boolean.valueOf(false), Boolean.valueOf(_isCaseSensitive));
+    Assert.assertEquals(Boolean.valueOf(false), Boolean.valueOf(parsedTags.isCaseSensitive()));
+    Assert.assertEquals(tags.size(), IterableExtensions.size(parsedTags));
     int _size = tags.size();
-    int _size_1 = IterableExtensions.size(parsedTags);
-    Assert.assertEquals(_size, _size_1);
-    int _size_2 = tags.size();
-    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size_2, true);
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
     for (final Integer i : _doubleDotLessThan) {
-      TaskTag _get = tags.get((i).intValue());
-      TaskTag _get_1 = ((TaskTag[])Conversions.unwrapArray(parsedTags, TaskTag.class))[(i).intValue()];
-      TaskAssert.assertExactMatch(_get, _get_1);
+      TaskAssert.assertExactMatch(tags.get((i).intValue()), ((TaskTag[])Conversions.unwrapArray(parsedTags, TaskTag.class))[(i).intValue()]);
     }
   }
 }

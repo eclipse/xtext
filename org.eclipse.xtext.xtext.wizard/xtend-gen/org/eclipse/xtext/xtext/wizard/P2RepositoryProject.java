@@ -18,12 +18,10 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
-import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.SdkFeatureProject;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 /**
@@ -84,9 +82,7 @@ public class P2RepositoryProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<feature id=\"");
-    WizardConfiguration _config = this.getConfig();
-    SdkFeatureProject _sdkProject = _config.getSdkProject();
-    String _name = _sdkProject.getName();
+    String _name = this.getConfig().getSdkProject().getName();
     _builder.append(_name, "\t");
     _builder.append("\" version=\"0.0.0\">");
     _builder.newLineIfNotEmpty();
@@ -98,9 +94,7 @@ public class P2RepositoryProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<feature id=\"");
-    WizardConfiguration _config_1 = this.getConfig();
-    SdkFeatureProject _sdkProject_1 = _config_1.getSdkProject();
-    String _name_1 = _sdkProject_1.getName();
+    String _name_1 = this.getConfig().getSdkProject().getName();
     _builder.append(_name_1, "\t");
     _builder.append(".source\" version=\"0.0.0\">");
     _builder.newLineIfNotEmpty();
@@ -112,17 +106,13 @@ public class P2RepositoryProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<category-def name=\"main\" label=\"");
-    WizardConfiguration _config_2 = this.getConfig();
-    LanguageDescriptor _language = _config_2.getLanguage();
-    String _simpleName = _language.getSimpleName();
+    String _simpleName = this.getConfig().getLanguage().getSimpleName();
     _builder.append(_simpleName, "\t");
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("<category-def name=\"main.source\" label=\"");
-    WizardConfiguration _config_3 = this.getConfig();
-    LanguageDescriptor _language_1 = _config_3.getLanguage();
-    String _simpleName_1 = _language_1.getSimpleName();
+    String _simpleName_1 = this.getConfig().getLanguage().getSimpleName();
     _builder.append(_simpleName_1, "\t");
     _builder.append(" (Sources)\"/>");
     _builder.newLineIfNotEmpty();

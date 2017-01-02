@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.inject.Injector;
-import java.util.Collection;
-import java.util.Map;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -37,9 +35,7 @@ public class XtextGeneratorFileSystemAccess extends JavaIoFileSystemAccess imple
   }
   
   private OutputConfiguration getDefaultOutput() {
-    Map<String, OutputConfiguration> _outputConfigurations = this.getOutputConfigurations();
-    Collection<OutputConfiguration> _values = _outputConfigurations.values();
-    return IterableExtensions.<OutputConfiguration>head(_values);
+    return IterableExtensions.<OutputConfiguration>head(this.getOutputConfigurations().values());
   }
   
   @Override
@@ -49,13 +45,11 @@ public class XtextGeneratorFileSystemAccess extends JavaIoFileSystemAccess imple
   
   @Override
   public String getPath() {
-    OutputConfiguration _defaultOutput = this.getDefaultOutput();
-    return _defaultOutput.getOutputDirectory();
+    return this.getDefaultOutput().getOutputDirectory();
   }
   
   @Override
   public boolean isOverwrite() {
-    OutputConfiguration _defaultOutput = this.getDefaultOutput();
-    return _defaultOutput.isOverrideExistingResources();
+    return this.getDefaultOutput().isOverrideExistingResources();
   }
 }

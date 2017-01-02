@@ -59,36 +59,30 @@ public abstract class AbstractHierarchyBuilder implements IHierarchyBuilder {
   private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
   
   protected <R extends Object> R readOnly(final URI objectURI, final IUnitOfWork<R, EObject> work) {
-    IReferenceFinder.IResourceAccess _resourceAccess = this.getResourceAccess();
     final IUnitOfWork<R, ResourceSet> _function = (ResourceSet resourceSet) -> {
       final EObject targetObject = resourceSet.getEObject(objectURI, true);
       return work.exec(targetObject);
     };
-    return _resourceAccess.<R>readOnly(objectURI, _function);
+    return this.getResourceAccess().<R>readOnly(objectURI, _function);
   }
   
   protected IEObjectDescription getDescription(final URI objectURI) {
-    IResourceDescriptions _indexData = this.getIndexData();
-    URI _trimFragment = objectURI.trimFragment();
-    final IResourceDescription resourceDescription = _indexData.getResourceDescription(_trimFragment);
+    final IResourceDescription resourceDescription = this.getIndexData().getResourceDescription(objectURI.trimFragment());
     if ((resourceDescription == null)) {
       return null;
     }
-    Iterable<IEObjectDescription> _exportedObjects = resourceDescription.getExportedObjects();
     final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
       URI _eObjectURI = it.getEObjectURI();
       return Boolean.valueOf(Objects.equal(_eObjectURI, objectURI));
     };
-    return IterableExtensions.<IEObjectDescription>findFirst(_exportedObjects, _function);
+    return IterableExtensions.<IEObjectDescription>findFirst(resourceDescription.getExportedObjects(), _function);
   }
   
   protected IEObjectDescription getDescription(final EObject object) {
     if ((object == null)) {
       return null;
     }
-    IResourceDescriptions _indexData = this.getIndexData();
-    Iterable<IEObjectDescription> _exportedObjectsByObject = _indexData.getExportedObjectsByObject(object);
-    return IterableExtensions.<IEObjectDescription>head(_exportedObjectsByObject);
+    return IterableExtensions.<IEObjectDescription>head(this.getIndexData().getExportedObjectsByObject(object));
   }
   
   protected boolean isAssignable(final EClass superType, final EClassifier type) {

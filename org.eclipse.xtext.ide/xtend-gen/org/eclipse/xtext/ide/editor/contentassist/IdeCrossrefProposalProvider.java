@@ -20,7 +20,6 @@ import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -59,8 +58,7 @@ public class IdeCrossrefProposalProvider {
           boolean _apply = filter.apply(candidate);
           if (_apply) {
             final ContentAssistEntry entry = this.createProposal(candidate, crossReference, context);
-            int _crossRefPriority = this.proposalPriorities.getCrossRefPriority(candidate, entry);
-            acceptor.accept(entry, _crossRefPriority);
+            acceptor.accept(entry, this.proposalPriorities.getCrossRefPriority(candidate, entry));
           }
         }
       }
@@ -79,18 +77,16 @@ public class IdeCrossrefProposalProvider {
   }
   
   protected ContentAssistEntry createProposal(final IEObjectDescription candidate, final CrossReference crossRef, final ContentAssistContext context) {
-    QualifiedName _name = candidate.getName();
-    String _string = this.qualifiedNameConverter.toString(_name);
     final Procedure1<ContentAssistEntry> _function = (ContentAssistEntry it) -> {
       it.setSource(candidate);
       EClass _eClass = candidate.getEClass();
-      String _name_1 = null;
+      String _name = null;
       if (_eClass!=null) {
-        _name_1=_eClass.getName();
+        _name=_eClass.getName();
       }
-      it.setDescription(_name_1);
+      it.setDescription(_name);
     };
-    return this.proposalCreator.createProposal(_string, context, _function);
+    return this.proposalCreator.createProposal(this.qualifiedNameConverter.toString(candidate.getName()), context, _function);
   }
   
   @Pure

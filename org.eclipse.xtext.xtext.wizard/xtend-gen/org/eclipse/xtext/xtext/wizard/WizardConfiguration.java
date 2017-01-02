@@ -91,15 +91,13 @@ public class WizardConfiguration {
         return Boolean.valueOf(it.isEnabled());
       };
       final Iterable<? extends ProjectDescriptor> productionProjects = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this.parentProject, this.runtimeProject, this.ideProject, this.uiProject, this.intellijProject, this.webProject, this.targetPlatformProject, this.sdkProject, this.p2Project)), _function);
-      Iterable<TestedProjectDescriptor> _filter = Iterables.<TestedProjectDescriptor>filter(productionProjects, TestedProjectDescriptor.class);
       final Function1<TestedProjectDescriptor, TestProjectDescriptor> _function_1 = (TestedProjectDescriptor it) -> {
         return it.getTestProject();
       };
-      Iterable<TestProjectDescriptor> _map = IterableExtensions.<TestedProjectDescriptor, TestProjectDescriptor>map(_filter, _function_1);
       final Function1<TestProjectDescriptor, Boolean> _function_2 = (TestProjectDescriptor it) -> {
         return Boolean.valueOf((it.isEnabled() && it.isSeparate()));
       };
-      final Iterable<TestProjectDescriptor> testProjects = IterableExtensions.<TestProjectDescriptor>filter(_map, _function_2);
+      final Iterable<TestProjectDescriptor> testProjects = IterableExtensions.<TestProjectDescriptor>filter(IterableExtensions.<TestedProjectDescriptor, TestProjectDescriptor>map(Iterables.<TestedProjectDescriptor>filter(productionProjects, TestedProjectDescriptor.class), _function_1), _function_2);
       Iterable<ProjectDescriptor> _plus = Iterables.<ProjectDescriptor>concat(productionProjects, testProjects);
       _xblockexpression = ImmutableSet.<ProjectDescriptor>copyOf(_plus);
     }

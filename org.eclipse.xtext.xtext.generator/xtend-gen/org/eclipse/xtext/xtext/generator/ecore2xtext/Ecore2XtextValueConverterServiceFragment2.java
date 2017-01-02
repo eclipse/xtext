@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.ecore2xtext;
 import org.eclipse.xtext.common.services.Ecore2XtextTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
@@ -23,12 +22,6 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 public class Ecore2XtextValueConverterServiceFragment2 extends AbstractXtextGeneratorFragment {
   @Override
   public void generate() {
-    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
-    TypeReference _typeRef = TypeReference.typeRef(IValueConverterService.class);
-    TypeReference _typeRef_1 = TypeReference.typeRef(Ecore2XtextTerminalConverters.class);
-    GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeRef, _typeRef_1);
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
-    _addTypeToType.contributeTo(_runtimeGenModule);
+    new GuiceModuleAccess.BindingFactory().addTypeToType(TypeReference.typeRef(IValueConverterService.class), TypeReference.typeRef(Ecore2XtextTerminalConverters.class)).contributeTo(this.getLanguage().getRuntimeGenModule());
   }
 }

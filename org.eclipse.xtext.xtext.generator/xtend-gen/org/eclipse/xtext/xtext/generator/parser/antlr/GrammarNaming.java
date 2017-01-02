@@ -26,8 +26,7 @@ public class GrammarNaming {
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
   public boolean isCombinedGrammar(final Grammar it) {
-    CombinedGrammarMarker _findInEmfObject = CombinedGrammarMarker.findInEmfObject(it);
-    return _findInEmfObject.isCombinedGrammar();
+    return CombinedGrammarMarker.findInEmfObject(it).isCombinedGrammar();
   }
   
   protected String getParserPackage(final Grammar it) {
@@ -87,11 +86,9 @@ public class GrammarNaming {
   }
   
   public TypeReference getLexerClass(final Grammar it) {
-    AntlrGrammar _lexerGrammar = this.getLexerGrammar(it);
-    String _packageName = _lexerGrammar.getPackageName();
+    String _packageName = this.getLexerGrammar(it).getPackageName();
     StringConcatenation _builder = new StringConcatenation();
-    AntlrGrammar _lexerGrammar_1 = this.getLexerGrammar(it);
-    String _simpleName = _lexerGrammar_1.getSimpleName();
+    String _simpleName = this.getLexerGrammar(it).getSimpleName();
     _builder.append(_simpleName);
     {
       boolean _isCombinedGrammar = this.isCombinedGrammar(it);
@@ -120,11 +117,9 @@ public class GrammarNaming {
   }
   
   public TypeReference getInternalParserClass(final Grammar it) {
-    AntlrGrammar _parserGrammar = this.getParserGrammar(it);
-    String _packageName = _parserGrammar.getPackageName();
+    String _packageName = this.getParserGrammar(it).getPackageName();
     StringConcatenation _builder = new StringConcatenation();
-    AntlrGrammar _parserGrammar_1 = this.getParserGrammar(it);
-    String _simpleName = _parserGrammar_1.getSimpleName();
+    String _simpleName = this.getParserGrammar(it).getSimpleName();
     _builder.append(_simpleName);
     {
       boolean _isCombinedGrammar = this.isCombinedGrammar(it);

@@ -12,14 +12,11 @@ import java.util.Arrays;
 import javax.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.ide.tests.testlanguage.services.TestLanguageGrammarAccess;
-import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
@@ -44,40 +41,24 @@ public class TestLanguageFormatter extends AbstractFormatter2 {
   }
   
   protected void _format(final TypeDeclaration type, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(type);
-    TestLanguageGrammarAccess.TypeDeclarationElements _typeDeclarationAccess = this._testLanguageGrammarAccess.getTypeDeclarationAccess();
-    Keyword _leftCurlyBracketKeyword_3 = _typeDeclarationAccess.getLeftCurlyBracketKeyword_3();
-    ISemanticRegion _keyword = _regionFor.keyword(_leftCurlyBracketKeyword_3);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
-    document.append(_keyword, _function);
-    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(type);
-    TestLanguageGrammarAccess.TypeDeclarationElements _typeDeclarationAccess_1 = this._testLanguageGrammarAccess.getTypeDeclarationAccess();
-    Keyword _rightCurlyBracketKeyword_5 = _typeDeclarationAccess_1.getRightCurlyBracketKeyword_5();
-    ISemanticRegion _keyword_1 = _regionFor_1.keyword(_rightCurlyBracketKeyword_5);
+    document.append(this.textRegionExtensions.regionFor(type).keyword(this._testLanguageGrammarAccess.getTypeDeclarationAccess().getLeftCurlyBracketKeyword_3()), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
-    ISemanticRegion _prepend = document.prepend(_keyword_1, _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
-    document.append(_prepend, _function_2);
-    ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(type);
-    TestLanguageGrammarAccess.TypeDeclarationElements _typeDeclarationAccess_2 = this._testLanguageGrammarAccess.getTypeDeclarationAccess();
-    Keyword _leftCurlyBracketKeyword_3_1 = _typeDeclarationAccess_2.getLeftCurlyBracketKeyword_3();
-    ISemanticRegion _keyword_2 = _regionFor_2.keyword(_leftCurlyBracketKeyword_3_1);
-    ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(type);
-    TestLanguageGrammarAccess.TypeDeclarationElements _typeDeclarationAccess_3 = this._testLanguageGrammarAccess.getTypeDeclarationAccess();
-    Keyword _rightCurlyBracketKeyword_5_1 = _typeDeclarationAccess_3.getRightCurlyBracketKeyword_5();
-    ISemanticRegion _keyword_3 = _regionFor_3.keyword(_rightCurlyBracketKeyword_5_1);
+    document.append(document.prepend(this.textRegionExtensions.regionFor(type).keyword(this._testLanguageGrammarAccess.getTypeDeclarationAccess().getRightCurlyBracketKeyword_5()), _function_1), _function_2);
     final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
       it.indent();
     };
-    document.<ISemanticRegion, ISemanticRegion>interior(_keyword_2, _keyword_3, _function_3);
-    EList<Member> _members = type.getMembers();
-    Iterable<Property> _filter = Iterables.<Property>filter(_members, Property.class);
+    document.<ISemanticRegion, ISemanticRegion>interior(
+      this.textRegionExtensions.regionFor(type).keyword(this._testLanguageGrammarAccess.getTypeDeclarationAccess().getLeftCurlyBracketKeyword_3()), 
+      this.textRegionExtensions.regionFor(type).keyword(this._testLanguageGrammarAccess.getTypeDeclarationAccess().getRightCurlyBracketKeyword_5()), _function_3);
+    Iterable<Property> _filter = Iterables.<Property>filter(type.getMembers(), Property.class);
     for (final Property property : _filter) {
       document.<Property>format(property);
     }

@@ -80,20 +80,16 @@ public class DefaultTaskFinder implements ITaskFinder {
   }
   
   protected List<Task> findTasks(final ICompositeNode it, final TaskTags taskTags) {
-    Iterable<ILeafNode> _leafNodes = it.getLeafNodes();
     final Function1<ILeafNode, List<Task>> _function = (ILeafNode it_1) -> {
       return this.findTasks(it_1, taskTags);
     };
-    Iterable<List<Task>> _map = IterableExtensions.<ILeafNode, List<Task>>map(_leafNodes, _function);
-    Iterable<Task> _flatten = Iterables.<Task>concat(_map);
-    return IterableExtensions.<Task>toList(_flatten);
+    return IterableExtensions.<Task>toList(Iterables.<Task>concat(IterableExtensions.<ILeafNode, List<Task>>map(it.getLeafNodes(), _function)));
   }
   
   protected List<Task> findTasks(final ILeafNode node, final TaskTags taskTags) {
     boolean _canContainTaskTags = this.canContainTaskTags(node);
     if (_canContainTaskTags) {
-      String _text = node.getText();
-      final List<Task> tasks = this.parser.parseTasks(_text, taskTags);
+      final List<Task> tasks = this.parser.parseTasks(node.getText(), taskTags);
       final Consumer<Task> _function = (Task it) -> {
         int _offset = it.getOffset();
         int _offset_1 = node.getOffset();

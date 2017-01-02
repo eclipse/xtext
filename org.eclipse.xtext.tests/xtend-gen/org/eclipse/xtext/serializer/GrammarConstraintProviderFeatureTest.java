@@ -9,7 +9,6 @@ package org.eclipse.xtext.serializer;
 
 import com.google.inject.Inject;
 import java.util.List;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
@@ -297,26 +296,21 @@ public class GrammarConstraintProviderFeatureTest {
       _builder.newLineIfNotEmpty();
       final Grammar grammar = this.parser.parse(_builder);
       this.validator.assertNoErrors(grammar);
-      SerializationContextMap<IGrammarConstraintProvider.IConstraint> _constraints = this.constraintProvider.getConstraints(grammar);
-      List<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>> _values = _constraints.values();
       final Function1<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>, IGrammarConstraintProvider.IConstraint> _function = (SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint> it) -> {
         return it.getValue();
       };
-      final List<IGrammarConstraintProvider.IConstraint> constraints = ListExtensions.<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>, IGrammarConstraintProvider.IConstraint>map(_values, _function);
+      final List<IGrammarConstraintProvider.IConstraint> constraints = ListExtensions.<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>, IGrammarConstraintProvider.IConstraint>map(this.constraintProvider.getConstraints(grammar).values(), _function);
       final Function1<IGrammarConstraintProvider.IConstraint, String> _function_1 = (IGrammarConstraintProvider.IConstraint it) -> {
         String _name = it.getName();
         String _plus = (_name + "{\n  ");
-        IGrammarConstraintProvider.IFeatureInfo[] _features = it.getFeatures();
         final Function1<IGrammarConstraintProvider.IFeatureInfo, String> _function_2 = (IGrammarConstraintProvider.IFeatureInfo it_1) -> {
           return this.asString(it_1);
         };
-        List<String> _map = ListExtensions.<IGrammarConstraintProvider.IFeatureInfo, String>map(((List<IGrammarConstraintProvider.IFeatureInfo>)Conversions.doWrapArray(_features)), _function_2);
-        String _join = IterableExtensions.join(_map, "\n  ");
+        String _join = IterableExtensions.join(ListExtensions.<IGrammarConstraintProvider.IFeatureInfo, String>map(((List<IGrammarConstraintProvider.IFeatureInfo>)Conversions.doWrapArray(it.getFeatures())), _function_2), "\n  ");
         String _plus_1 = (_plus + _join);
         return (_plus_1 + "\n}");
       };
-      List<String> _map = ListExtensions.<IGrammarConstraintProvider.IConstraint, String>map(constraints, _function_1);
-      String _join = IterableExtensions.join(_map, "\n");
+      String _join = IterableExtensions.join(ListExtensions.<IGrammarConstraintProvider.IConstraint, String>map(constraints, _function_1), "\n");
       return (_join + "\n");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -333,8 +327,7 @@ public class GrammarConstraintProviderFeatureTest {
       _xifexpression = Integer.valueOf(it.getUpperBound());
     }
     final Object upper = ((Object)_xifexpression);
-    EStructuralFeature _feature = it.getFeature();
-    String _name = _feature.getName();
+    String _name = it.getFeature().getName();
     String _plus = (_name + "[");
     int _lowerBound = it.getLowerBound();
     String _plus_1 = (_plus + Integer.valueOf(_lowerBound));

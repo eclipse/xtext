@@ -8,11 +8,9 @@
 package org.eclipse.xtext.ide.tests.server;
 
 import java.io.File;
-import java.net.URI;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.eclipse.lsp4j.ColoringInformation;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
@@ -85,25 +83,19 @@ public class ColoringTest extends AbstractTestLangLanguageServerTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("MyModel.");
     _builder.append(this.fileExtension);
-    Path _resolve = _path.resolve(_builder.toString());
-    final File file = _resolve.toFile();
-    URI _uRI = file.toURI();
-    final String uri = _uRI.toString();
+    final File file = _path.resolve(_builder.toString()).toFile();
+    final String uri = file.toURI().toString();
     this.open(uri, ColoringTest.MODEL);
-    Map<String, List<? extends ColoringInformation>> _coloringParams = this.getColoringParams();
-    Set<Map.Entry<String, List<? extends ColoringInformation>>> _entrySet = _coloringParams.entrySet();
     final Function1<Map.Entry<String, List<? extends ColoringInformation>>, String> _function = (Map.Entry<String, List<? extends ColoringInformation>> it) -> {
       String _key = it.getKey();
-      String _key_1 = it.getKey();
-      int _lastIndexOf = _key_1.lastIndexOf("/");
+      int _lastIndexOf = it.getKey().lastIndexOf("/");
       int _plus = (_lastIndexOf + 1);
       return _key.substring(_plus);
     };
     final Function1<Map.Entry<String, List<? extends ColoringInformation>>, List<? extends ColoringInformation>> _function_1 = (Map.Entry<String, List<? extends ColoringInformation>> it) -> {
       return it.getValue();
     };
-    Map<String, List<? extends ColoringInformation>> _map = IterableExtensions.<Map.Entry<String, List<? extends ColoringInformation>>, String, List<? extends ColoringInformation>>toMap(_entrySet, _function, _function_1);
-    final String expectation = this.toExpectation(_map);
+    final String expectation = this.toExpectation(IterableExtensions.<Map.Entry<String, List<? extends ColoringInformation>>, String, List<? extends ColoringInformation>>toMap(this.getColoringParams().entrySet(), _function, _function_1));
     StringConcatenation _builder_1 = new StringConcatenation();
     String _name = file.getName();
     _builder_1.append(_name);

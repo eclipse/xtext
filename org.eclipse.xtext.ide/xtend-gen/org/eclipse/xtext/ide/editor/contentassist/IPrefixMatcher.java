@@ -25,8 +25,7 @@ public interface IPrefixMatcher {
   public static class IgnoreCase implements IPrefixMatcher {
     @Override
     public boolean isCandidateMatchingPrefix(final String name, final String prefix) {
-      int _length = prefix.length();
-      return name.regionMatches(true, 0, prefix, 0, _length);
+      return name.regionMatches(true, 0, prefix, 0, prefix.length());
     }
   }
   

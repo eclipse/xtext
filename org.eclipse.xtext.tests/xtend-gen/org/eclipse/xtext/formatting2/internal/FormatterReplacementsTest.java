@@ -11,8 +11,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
 import java.util.function.Consumer;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
@@ -21,7 +21,6 @@ import org.eclipse.xtext.formatting2.internal.formattertestlanguage.IDList;
 import org.eclipse.xtext.formatting2.internal.services.FormatterTestLanguageGrammarAccess;
 import org.eclipse.xtext.formatting2.internal.tests.FormatterTestLanguageInjectorProvider;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
@@ -65,9 +64,6 @@ public class FormatterReplacementsTest {
       final GenericFormatter<IDList> _function = new GenericFormatter<IDList>() {
         @Override
         protected void format(final IDList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
-          ISemanticRegionsFinder _regionFor = regions.regionFor(model);
-          TerminalRule _iDRule = FormatterReplacementsTest.this._formatterTestLanguageGrammarAccess.getIDRule();
-          List<ISemanticRegion> _ruleCallsTo = _regionFor.ruleCallsTo(_iDRule);
           final Consumer<ISemanticRegion> _function = (ISemanticRegion it) -> {
             final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
               it_1.autowrap();
@@ -75,14 +71,15 @@ public class FormatterReplacementsTest {
             };
             document.prepend(it, _function_1);
           };
-          _ruleCallsTo.forEach(_function);
+          regions.regionFor(model).ruleCallsTo(FormatterReplacementsTest.this._formatterTestLanguageGrammarAccess.getIDRule()).forEach(_function);
         }
       };
       final GenericFormatter<IDList> formatter = _function;
       final IDList parsed = this.parseHelper.parse("idlist  aaa bbb");
       final FormatterRequest request = this.requestProvider.get();
       request.setAllowIdentityEdits(false);
-      request.setTextRegionAccess(this.regionBuilder.forNodeModel(((XtextResource) parsed.eResource())).create());
+      Resource _eResource = parsed.eResource();
+      request.setTextRegionAccess(this.regionBuilder.forNodeModel(((XtextResource) _eResource)).create());
       final List<ITextReplacement> replacements = formatter.format(request);
       final Function1<ITextReplacement, String> _function_1 = (ITextReplacement it) -> {
         StringConcatenation _builder = new StringConcatenation();
@@ -96,8 +93,7 @@ public class FormatterReplacementsTest {
         _builder.append("\n");
         return _builder.toString();
       };
-      List<String> _map = ListExtensions.<ITextReplacement, String>map(replacements, _function_1);
-      final String actual = IterableExtensions.join(_map);
+      final String actual = IterableExtensions.join(ListExtensions.<ITextReplacement, String>map(replacements, _function_1));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\"  \" -> \" \"");
       _builder.newLine();

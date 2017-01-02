@@ -12,7 +12,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collections;
-import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -64,7 +63,8 @@ public class SerializableResourceDescriptionTest {
           it_1.setEObjectURI(uri.appendFragment("baz"));
           it_1.qualifiedName = QualifiedName.create("foo", "baz");
           it_1.setEClass(EcorePackage.eINSTANCE.getEAttribute());
-          it_1.userData = CollectionLiterals.<String, String>newHashMap(Pair.<String, String>of("myKey", "myValue"));
+          Pair<String, String> _mappedTo = Pair.<String, String>of("myKey", "myValue");
+          it_1.userData = CollectionLiterals.<String, String>newHashMap(_mappedTo);
         };
         SerializableEObjectDescription _doubleArrow_2 = ObjectExtensions.<SerializableEObjectDescription>operator_doubleArrow(_serializableEObjectDescription, _function_3);
         it.setDescriptions(Collections.<SerializableEObjectDescription>unmodifiableList(CollectionLiterals.<SerializableEObjectDescription>newArrayList(_doubleArrow_2)));
@@ -91,15 +91,12 @@ public class SerializableResourceDescriptionTest {
     Assert.assertEquals(before.getURI(), after.getURI());
     Assert.assertEquals(before.getImportedNames(), after.getImportedNames());
     Assert.assertEquals(before.getReferences().size(), after.getReferences().size());
-    List<SerializableReferenceDescription> _references = before.getReferences();
-    int _size = _references.size();
+    int _size = before.getReferences().size();
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
     for (final int i : _doubleDotLessThan) {
       {
-        List<SerializableReferenceDescription> _references_1 = before.getReferences();
-        final SerializableReferenceDescription beforeRef = _references_1.get(i);
-        List<SerializableReferenceDescription> _references_2 = after.getReferences();
-        final SerializableReferenceDescription afterRef = _references_2.get(i);
+        final SerializableReferenceDescription beforeRef = before.getReferences().get(i);
+        final SerializableReferenceDescription afterRef = after.getReferences().get(i);
         Assert.assertEquals(beforeRef.getContainerEObjectURI(), afterRef.getContainerEObjectURI());
         Assert.assertEquals(beforeRef.getSourceEObjectUri(), afterRef.getSourceEObjectUri());
         Assert.assertEquals(beforeRef.getTargetEObjectUri(), afterRef.getTargetEObjectUri());
@@ -108,15 +105,12 @@ public class SerializableResourceDescriptionTest {
       }
     }
     Assert.assertEquals(before.getDescriptions().size(), after.getDescriptions().size());
-    List<SerializableEObjectDescription> _descriptions = before.getDescriptions();
-    int _size_1 = _descriptions.size();
+    int _size_1 = before.getDescriptions().size();
     ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, _size_1, true);
     for (final int i_1 : _doubleDotLessThan_1) {
       {
-        List<SerializableEObjectDescription> _descriptions_1 = before.getDescriptions();
-        final SerializableEObjectDescription beforeDesc = _descriptions_1.get(i_1);
-        List<SerializableEObjectDescription> _descriptions_2 = after.getDescriptions();
-        final SerializableEObjectDescription afterDesc = _descriptions_2.get(i_1);
+        final SerializableEObjectDescription beforeDesc = before.getDescriptions().get(i_1);
+        final SerializableEObjectDescription afterDesc = after.getDescriptions().get(i_1);
         Assert.assertEquals(beforeDesc.getEClass(), afterDesc.getEClass());
         Assert.assertEquals(beforeDesc.getName(), afterDesc.getName());
         Assert.assertEquals(beforeDesc.qualifiedName, afterDesc.qualifiedName);
@@ -184,7 +178,8 @@ public class SerializableResourceDescriptionTest {
           it_1.setEObjectURI(uri.appendFragment("baz"));
           it_1.qualifiedName = QualifiedName.create("foo", "baz");
           it_1.setEClass(EcorePackage.eINSTANCE.getEAttribute());
-          it_1.userData = CollectionLiterals.<String, String>newHashMap(Pair.<String, String>of("myKey", "myValue"));
+          Pair<String, String> _mappedTo = Pair.<String, String>of("myKey", "myValue");
+          it_1.userData = CollectionLiterals.<String, String>newHashMap(_mappedTo);
         };
         SerializableEObjectDescription _doubleArrow_5 = ObjectExtensions.<SerializableEObjectDescription>operator_doubleArrow(_serializableEObjectDescription, _function_6);
         it.setDescriptions(Collections.<SerializableEObjectDescription>unmodifiableList(CollectionLiterals.<SerializableEObjectDescription>newArrayList(_doubleArrow_5)));

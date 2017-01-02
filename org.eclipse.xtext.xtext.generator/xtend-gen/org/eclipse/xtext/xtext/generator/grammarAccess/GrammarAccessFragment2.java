@@ -20,8 +20,6 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ContentHandler;
@@ -54,20 +52,16 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.FragmentFakingEcoreResource;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.SingletonClassAnnotation;
-import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 @Log
 @SuppressWarnings("all")
@@ -89,9 +83,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
   @Override
   public void generate() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    Grammar _grammar = _language.getGrammar();
-    String _name = _grammar.getName();
+    String _name = this.getLanguage().getGrammar().getName();
     boolean _notEquals = (!Objects.equal(_name, "org.eclipse.xtext.common.Terminals"));
     if (_notEquals) {
       TypeReference _typeRef = TypeReference.typeRef(ClassLoader.class);
@@ -103,29 +95,14 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       };
       bindingFactory.addTypeToInstance(_typeRef, _client);
     }
-    TypeReference _typeRef_1 = TypeReference.typeRef(IGrammarAccess.class);
-    IXtextGeneratorLanguage _language_1 = this.getLanguage();
-    Grammar _grammar_1 = _language_1.getGrammar();
-    TypeReference _grammarAccess = this._grammarAccessExtensions.getGrammarAccess(_grammar_1);
-    GuiceModuleAccess.BindingFactory _addTypeToType = bindingFactory.addTypeToType(_typeRef_1, _grammarAccess);
-    IXtextGeneratorLanguage _language_2 = this.getLanguage();
-    GuiceModuleAccess _runtimeGenModule = _language_2.getRuntimeGenModule();
-    _addTypeToType.contributeTo(_runtimeGenModule);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    ManifestAccess _manifest = _runtime.getManifest();
+    bindingFactory.addTypeToType(TypeReference.typeRef(IGrammarAccess.class), this._grammarAccessExtensions.getGrammarAccess(this.getLanguage().getGrammar())).contributeTo(this.getLanguage().getRuntimeGenModule());
+    ManifestAccess _manifest = this.getProjectConfig().getRuntime().getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
-      ManifestAccess _manifest_1 = _runtime_1.getManifest();
-      Set<String> _exportedPackages = _manifest_1.getExportedPackages();
-      Grammar _grammar_2 = this.getGrammar();
-      String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(_grammar_2);
-      Grammar _grammar_3 = this.getGrammar();
-      String _runtimeBasePackage_1 = this._xtextGeneratorNaming.getRuntimeBasePackage(_grammar_3);
+      String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(this.getGrammar());
+      String _runtimeBasePackage_1 = this._xtextGeneratorNaming.getRuntimeBasePackage(this.getGrammar());
       String _plus = (_runtimeBasePackage_1 + ".services");
-      _exportedPackages.addAll(
+      this.getProjectConfig().getRuntime().getManifest().getExportedPackages().addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_runtimeBasePackage, _plus)));
     }
     this.doGenerateGrammarAccess();
@@ -133,8 +110,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
   }
   
   protected String getQualifiedName(final AbstractRule rule) {
-    Grammar _grammar = GrammarUtil.getGrammar(rule);
-    String _name = _grammar.getName();
+    String _name = GrammarUtil.getGrammar(rule).getName();
     String _plus = (_name + ".");
     String _name_1 = rule.getName();
     return (_plus + _name_1);
@@ -143,23 +119,12 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
   protected void writeGrammar() {
     final Wrapper<Boolean> isSaving = Wrapper.<Boolean>wrap(Boolean.valueOf(false));
     final ResourceSet cloneInto = new ResourceSetImpl();
-    Resource.Factory.Registry _resourceFactoryRegistry = cloneInto.getResourceFactoryRegistry();
-    Map<String, Object> _extensionToFactoryMap = _resourceFactoryRegistry.getExtensionToFactoryMap();
+    Map<String, Object> _extensionToFactoryMap = cloneInto.getResourceFactoryRegistry().getExtensionToFactoryMap();
     FragmentFakingEcoreResource.FactoryImpl _factoryImpl = new FragmentFakingEcoreResource.FactoryImpl(isSaving);
     _extensionToFactoryMap.put(
       FragmentFakingEcoreResource.FactoryImpl.ECORE_SUFFIX, _factoryImpl);
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    Grammar _grammar = _language.getGrammar();
-    Resource _eResource = _grammar.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
-    final ResourceSet resourceSet = EcoreUtil2.<ResourceSet>clone(cloneInto, _resourceSet);
-    IXtextGeneratorLanguage _language_1 = this.getLanguage();
-    Grammar _grammar_1 = _language_1.getGrammar();
-    Resource _eResource_1 = _grammar_1.eResource();
-    URI _uRI = _eResource_1.getURI();
-    Resource _resource = resourceSet.getResource(_uRI, true);
-    EList<EObject> _contents = _resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    final ResourceSet resourceSet = EcoreUtil2.<ResourceSet>clone(cloneInto, this.getLanguage().getGrammar().eResource().getResourceSet());
+    EObject _head = IterableExtensions.<EObject>head(resourceSet.getResource(this.getLanguage().getGrammar().eResource().getURI(), true).getContents());
     final Grammar copy = ((Grammar) _head);
     String _xifexpression = null;
     if ((this.xmlVersion == null)) {
@@ -176,10 +141,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       _xifexpression = _xblockexpression;
     }
     final String path = _xifexpression;
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
-    final URI uri = _srcGen.getURI(path);
+    final URI uri = this.getProjectConfig().getRuntime().getSrcGen().getURI(path);
     final Resource resource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
     HashSet<Grammar> _hashSet = new HashSet<Grammar>();
     this.addAllGrammarsToResource(resource, copy, _hashSet);
@@ -204,8 +166,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
         final IOException e = (IOException)_t;
-        String _message = e.getMessage();
-        GrammarAccessFragment2.LOG.error(_message, e);
+        GrammarAccessFragment2.LOG.error(e.getMessage(), e);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -220,15 +181,13 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     if (_not) {
       return;
     }
-    EList<EObject> _contents = resource.getContents();
-    _contents.add(grammar);
+    resource.getContents().add(grammar);
     EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
     for (final AbstractMetamodelDeclaration metamodelDecl : _metamodelDeclarations) {
       {
         final EPackage pack = metamodelDecl.getEPackage();
         final Resource packResource = pack.eResource();
-        URI _uRI = packResource.getURI();
-        String _string = _uRI.toString();
+        String _string = packResource.getURI().toString();
         String _nsURI = pack.getNsURI();
         boolean _notEquals = (!Objects.equal(_string, _nsURI));
         if (_notEquals) {
@@ -239,22 +198,15 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
               topMost = topMost.getESuperPackage();
             }
             if ((packResource.getContents().contains(topMost) && (packResource.getContents().size() == 1))) {
-              EList<EClassifier> _eClassifiers = topMost.getEClassifiers();
-              boolean _isEmpty = _eClassifiers.isEmpty();
+              boolean _isEmpty = topMost.getEClassifiers().isEmpty();
               boolean _not_1 = (!_isEmpty);
               if (_not_1) {
-                String _nsURI_1 = topMost.getNsURI();
-                URI _createURI = URI.createURI(_nsURI_1);
-                packResource.setURI(_createURI);
+                packResource.setURI(URI.createURI(topMost.getNsURI()));
               } else {
                 this.moveSubpackagesToNewResource(topMost, resource.getResourceSet());
               }
             }
-            Resource _eResource = topMost.eResource();
-            URI _uRI_1 = _eResource.getURI();
-            String _string_1 = _uRI_1.toString();
-            String _nsURI_2 = topMost.getNsURI();
-            boolean _equals = _string_1.equals(_nsURI_2);
+            boolean _equals = topMost.eResource().getURI().toString().equals(topMost.getNsURI());
             boolean _not_2 = (!_equals);
             if (_not_2) {
               this.movePackageToNewResource(topMost, resource.getResourceSet());
@@ -272,20 +224,17 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
   protected void moveSubpackagesToNewResource(final EPackage pack, final ResourceSet set) {
     for (int i = (pack.getESubpackages().size() - 1); (i >= 0); i--) {
       {
-        EList<EPackage> _eSubpackages = pack.getESubpackages();
-        final EPackage sub = _eSubpackages.get(i);
+        final EPackage sub = pack.getESubpackages().get(i);
         Resource _eResource = sub.eResource();
         Resource _eResource_1 = pack.eResource();
         boolean _tripleEquals = (_eResource == _eResource_1);
         if (_tripleEquals) {
-          EList<EClassifier> _eClassifiers = sub.getEClassifiers();
-          boolean _isEmpty = _eClassifiers.isEmpty();
+          boolean _isEmpty = sub.getEClassifiers().isEmpty();
           if (_isEmpty) {
             this.moveSubpackagesToNewResource(sub, set);
           } else {
             this.movePackageToNewResource(sub, set);
-            EList<EPackage> _eSubpackages_1 = pack.getESubpackages();
-            _eSubpackages_1.remove(i);
+            pack.getESubpackages().remove(i);
           }
         }
       }
@@ -293,20 +242,15 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
   }
   
   protected void movePackageToNewResource(final EPackage pack, final ResourceSet set) {
-    URI _createURI = URI.createURI(("___temp___." + FragmentFakingEcoreResource.FactoryImpl.ECORE_SUFFIX));
-    final Resource resource = set.createResource(_createURI, 
+    final Resource resource = set.createResource(
+      URI.createURI(("___temp___." + FragmentFakingEcoreResource.FactoryImpl.ECORE_SUFFIX)), 
       ContentHandler.UNSPECIFIED_CONTENT_TYPE);
-    String _nsURI = pack.getNsURI();
-    URI _createURI_1 = URI.createURI(_nsURI);
-    resource.setURI(_createURI_1);
-    EList<EObject> _contents = resource.getContents();
-    _contents.add(pack);
+    resource.setURI(URI.createURI(pack.getNsURI()));
+    resource.getContents().add(pack);
   }
   
   protected void doGenerateGrammarAccess() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _grammarAccess = this._grammarAccessExtensions.getGrammarAccess(_grammar);
-    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(_grammarAccess);
+    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(this._grammarAccessExtensions.getGrammarAccess(this.getGrammar()));
     List<IClassAnnotation> _annotations = javaFile.getAnnotations();
     SingletonClassAnnotation _singletonClassAnnotation = new SingletonClassAnnotation();
     _annotations.add(_singletonClassAnnotation);
@@ -314,10 +258,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        IXtextGeneratorLanguage _language = GrammarAccessFragment2.this.getLanguage();
-        Grammar _grammar = _language.getGrammar();
-        TypeReference _grammarAccess = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(_grammar);
-        String _simpleName = _grammarAccess.getSimpleName();
+        String _simpleName = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(GrammarAccessFragment2.this.getLanguage().getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         _builder.append(AbstractElementFinder.AbstractGrammarElementFinder.class);
@@ -326,10 +267,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("\t");
         _builder.newLine();
         {
-          IXtextGeneratorLanguage _language_1 = GrammarAccessFragment2.this.getLanguage();
-          Grammar _grammar_1 = _language_1.getGrammar();
-          EList<AbstractRule> _rules = _grammar_1.getRules();
-          Iterable<ParserRule> _filter = Iterables.<ParserRule>filter(_rules, ParserRule.class);
+          Iterable<ParserRule> _filter = Iterables.<ParserRule>filter(GrammarAccessFragment2.this.getLanguage().getGrammar().getRules(), ParserRule.class);
           for(final ParserRule r : _filter) {
             _builder.append("\t");
             StringConcatenationClient _parserRuleClasses = GrammarAccessFragment2.this.parserRuleClasses(r);
@@ -340,10 +278,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("\t");
         _builder.newLine();
         {
-          IXtextGeneratorLanguage _language_2 = GrammarAccessFragment2.this.getLanguage();
-          Grammar _grammar_2 = _language_2.getGrammar();
-          EList<AbstractRule> _rules_1 = _grammar_2.getRules();
-          Iterable<EnumRule> _filter_1 = Iterables.<EnumRule>filter(_rules_1, EnumRule.class);
+          Iterable<EnumRule> _filter_1 = Iterables.<EnumRule>filter(GrammarAccessFragment2.this.getLanguage().getGrammar().getRules(), EnumRule.class);
           for(final EnumRule r_1 : _filter_1) {
             _builder.append("\t");
             StringConcatenationClient _parserRuleClasses_1 = GrammarAccessFragment2.this.parserRuleClasses(r_1);
@@ -354,10 +289,8 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("\t");
         _builder.newLine();
         {
-          IXtextGeneratorLanguage _language_3 = GrammarAccessFragment2.this.getLanguage();
-          Grammar _grammar_3 = _language_3.getGrammar();
-          EList<AbstractRule> _rules_2 = _grammar_3.getRules();
-          for(final AbstractRule r_2 : _rules_2) {
+          EList<AbstractRule> _rules = GrammarAccessFragment2.this.getLanguage().getGrammar().getRules();
+          for(final AbstractRule r_2 : _rules) {
             _builder.append("\t");
             StringConcatenationClient _cache = GrammarAccessFragment2.this.cache(r_2);
             _builder.append(_cache, "\t");
@@ -372,16 +305,14 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append(" grammar;");
         _builder.newLineIfNotEmpty();
         {
-          IXtextGeneratorLanguage _language_4 = GrammarAccessFragment2.this.getLanguage();
-          Grammar _grammar_4 = _language_4.getGrammar();
-          List<Grammar> _effectivelyUsedGrammars = GrammarAccessFragment2.this.getEffectivelyUsedGrammars(_grammar_4);
+          List<Grammar> _effectivelyUsedGrammars = GrammarAccessFragment2.this.getEffectivelyUsedGrammars(GrammarAccessFragment2.this.getLanguage().getGrammar());
           for(final Grammar g : _effectivelyUsedGrammars) {
             _builder.append("\t");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("private final ");
-            TypeReference _grammarAccess_1 = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(g);
-            _builder.append(_grammarAccess_1, "\t");
+            TypeReference _grammarAccess = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(g);
+            _builder.append(_grammarAccess, "\t");
             _builder.append(" ");
             String _gaGrammarAccessLocalVarName = GrammarAccessFragment2.this.gaGrammarAccessLocalVarName(g);
             _builder.append(_gaGrammarAccessLocalVarName, "\t");
@@ -396,25 +327,20 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("public ");
-        IXtextGeneratorLanguage _language_5 = GrammarAccessFragment2.this.getLanguage();
-        Grammar _grammar_5 = _language_5.getGrammar();
-        TypeReference _grammarAccess_2 = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(_grammar_5);
-        String _simpleName_1 = _grammarAccess_2.getSimpleName();
+        String _simpleName_1 = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(GrammarAccessFragment2.this.getLanguage().getGrammar()).getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append("(");
         _builder.append(GrammarProvider.class, "\t");
         _builder.append(" grammarProvider");
         {
-          IXtextGeneratorLanguage _language_6 = GrammarAccessFragment2.this.getLanguage();
-          Grammar _grammar_6 = _language_6.getGrammar();
-          List<Grammar> _effectivelyUsedGrammars_1 = GrammarAccessFragment2.this.getEffectivelyUsedGrammars(_grammar_6);
+          List<Grammar> _effectivelyUsedGrammars_1 = GrammarAccessFragment2.this.getEffectivelyUsedGrammars(GrammarAccessFragment2.this.getLanguage().getGrammar());
           for(final Grammar g_1 : _effectivelyUsedGrammars_1) {
             _builder.append(",");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t\t");
-            TypeReference _grammarAccess_3 = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(g_1);
-            _builder.append(_grammarAccess_3, "\t\t\t");
+            TypeReference _grammarAccess_1 = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(g_1);
+            _builder.append(_grammarAccess_1, "\t\t\t");
             _builder.append(" ");
             String _gaGrammarAccessLocalVarName_1 = GrammarAccessFragment2.this.gaGrammarAccessLocalVarName(g_1);
             _builder.append(_gaGrammarAccessLocalVarName_1, "\t\t\t");
@@ -426,9 +352,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("this.grammar = internalFindGrammar(grammarProvider);");
         _builder.newLine();
         {
-          IXtextGeneratorLanguage _language_7 = GrammarAccessFragment2.this.getLanguage();
-          Grammar _grammar_7 = _language_7.getGrammar();
-          List<Grammar> _effectivelyUsedGrammars_2 = GrammarAccessFragment2.this.getEffectivelyUsedGrammars(_grammar_7);
+          List<Grammar> _effectivelyUsedGrammars_2 = GrammarAccessFragment2.this.getEffectivelyUsedGrammars(GrammarAccessFragment2.this.getLanguage().getGrammar());
           for(final Grammar g_2 : _effectivelyUsedGrammars_2) {
             _builder.append("\t\t");
             _builder.append("this.");
@@ -442,10 +366,8 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
           }
         }
         {
-          IXtextGeneratorLanguage _language_8 = GrammarAccessFragment2.this.getLanguage();
-          Grammar _grammar_8 = _language_8.getGrammar();
-          EList<AbstractRule> _rules_3 = _grammar_8.getRules();
-          for(final AbstractRule r_3 : _rules_3) {
+          EList<AbstractRule> _rules_1 = GrammarAccessFragment2.this.getLanguage().getGrammar().getRules();
+          for(final AbstractRule r_3 : _rules_1) {
             _builder.append("\t\t");
             StringConcatenationClient _initializer = GrammarAccessFragment2.this.initializer(r_3);
             _builder.append(_initializer, "\t\t");
@@ -473,9 +395,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("if (\"");
-        IXtextGeneratorLanguage _language_9 = GrammarAccessFragment2.this.getLanguage();
-        Grammar _grammar_9 = _language_9.getGrammar();
-        String _name = _grammar_9.getName();
+        String _name = GrammarAccessFragment2.this.getLanguage().getGrammar().getName();
         _builder.append(_name, "\t\t\t");
         _builder.append("\".equals(grammar.getName())) {");
         _builder.newLineIfNotEmpty();
@@ -534,19 +454,16 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("\t");
         _builder.newLine();
         {
-          IXtextGeneratorLanguage _language_10 = GrammarAccessFragment2.this.getLanguage();
-          Grammar _grammar_10 = _language_10.getGrammar();
-          List<Grammar> _effectivelyUsedGrammars_3 = GrammarAccessFragment2.this.getEffectivelyUsedGrammars(_grammar_10);
+          List<Grammar> _effectivelyUsedGrammars_3 = GrammarAccessFragment2.this.getEffectivelyUsedGrammars(GrammarAccessFragment2.this.getLanguage().getGrammar());
           for(final Grammar g_3 : _effectivelyUsedGrammars_3) {
             _builder.append("\t");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("public ");
-            TypeReference _grammarAccess_4 = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(g_3);
-            _builder.append(_grammarAccess_4, "\t");
+            TypeReference _grammarAccess_2 = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(g_3);
+            _builder.append(_grammarAccess_2, "\t");
             _builder.append(" get");
-            TypeReference _grammarAccess_5 = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(g_3);
-            String _simpleName_2 = _grammarAccess_5.getSimpleName();
+            String _simpleName_2 = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(g_3).getSimpleName();
             _builder.append(_simpleName_2, "\t");
             _builder.append("() {");
             _builder.newLineIfNotEmpty();
@@ -564,9 +481,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         }
         _builder.newLine();
         {
-          IXtextGeneratorLanguage _language_11 = GrammarAccessFragment2.this.getLanguage();
-          Grammar _grammar_11 = _language_11.getGrammar();
-          List<AbstractRule> _allRules = GrammarUtil.allRules(_grammar_11);
+          List<AbstractRule> _allRules = GrammarUtil.allRules(GrammarAccessFragment2.this.getLanguage().getGrammar());
           for(final AbstractRule r_4 : _allRules) {
             _builder.append("\t");
             _builder.newLine();
@@ -581,10 +496,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       }
     };
     javaFile.setContent(_client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
-    javaFile.writeTo(_srcGen);
+    javaFile.writeTo(this.getProjectConfig().getRuntime().getSrcGen());
   }
   
   protected StringConcatenationClient parserRuleClasses(final ParserRule it) {
@@ -613,9 +525,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
           for(final AbstractElement e : _containedAbstractElements) {
             _builder.append("\t");
             _builder.append("private final ");
-            EClass _eClass = e.eClass();
-            IXtextGeneratorLanguage _language = GrammarAccessFragment2.this.getLanguage();
-            TypeReference _typeRef = TypeReference.typeRef(_eClass, _language);
+            TypeReference _typeRef = TypeReference.typeRef(e.eClass(), GrammarAccessFragment2.this.getLanguage());
             _builder.append(_typeRef, "\t");
             _builder.append(" ");
             String _gaElementAccessorLocalVarName = GrammarAccessFragment2.this.gaElementAccessorLocalVarName(e);
@@ -649,9 +559,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("public ");
-            EClass _eClass_1 = e_1.eClass();
-            IXtextGeneratorLanguage _language_1 = GrammarAccessFragment2.this.getLanguage();
-            TypeReference _typeRef_1 = TypeReference.typeRef(_eClass_1, _language_1);
+            TypeReference _typeRef_1 = TypeReference.typeRef(e_1.eClass(), GrammarAccessFragment2.this.getLanguage());
             _builder.append(_typeRef_1, "\t");
             _builder.append(" ");
             String _gaElementAccessMethodName = GrammarAccessFragment2.this._grammarAccessExtensions.gaElementAccessMethodName(e_1);
@@ -698,9 +606,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
           for(final AbstractElement e : _containedAbstractElements) {
             _builder.append("\t");
             _builder.append("private final ");
-            EClass _eClass = e.eClass();
-            IXtextGeneratorLanguage _language = GrammarAccessFragment2.this.getLanguage();
-            TypeReference _typeRef = TypeReference.typeRef(_eClass, _language);
+            TypeReference _typeRef = TypeReference.typeRef(e.eClass(), GrammarAccessFragment2.this.getLanguage());
             _builder.append(_typeRef, "\t");
             _builder.append(" ");
             String _gaElementAccessorLocalVarName = GrammarAccessFragment2.this.gaElementAccessorLocalVarName(e);
@@ -732,9 +638,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("public ");
-            EClass _eClass_1 = e_1.eClass();
-            IXtextGeneratorLanguage _language_1 = GrammarAccessFragment2.this.getLanguage();
-            TypeReference _typeRef_1 = TypeReference.typeRef(_eClass_1, _language_1);
+            TypeReference _typeRef_1 = TypeReference.typeRef(e_1.eClass(), GrammarAccessFragment2.this.getLanguage());
             _builder.append(_typeRef_1, "\t");
             _builder.append(" ");
             String _gaElementAccessMethodName = GrammarAccessFragment2.this._grammarAccessExtensions.gaElementAccessMethodName(e_1);
@@ -887,8 +791,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
             _builder.newLine();
           } else {
             _builder.append("public ");
-            Grammar _grammar_1 = GrammarUtil.getGrammar(it);
-            TypeReference _grammarAccess = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(_grammar_1);
+            TypeReference _grammarAccess = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(GrammarUtil.getGrammar(it));
             _builder.append(_grammarAccess);
             _builder.append(".");
             String _gaBaseRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaBaseRuleAccessorClassName(it);
@@ -900,8 +803,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("return ");
-            Grammar _grammar_2 = GrammarUtil.getGrammar(it);
-            String _gaGrammarAccessLocalVarName = GrammarAccessFragment2.this.gaGrammarAccessLocalVarName(_grammar_2);
+            String _gaGrammarAccessLocalVarName = GrammarAccessFragment2.this.gaGrammarAccessLocalVarName(GrammarUtil.getGrammar(it));
             _builder.append(_gaGrammarAccessLocalVarName, "\t");
             _builder.append(".");
             String _gaBaseElementsAccessor = GrammarAccessFragment2.this._grammarAccessExtensions.gaBaseElementsAccessor(it);
@@ -960,8 +862,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
             _builder.newLine();
           } else {
             _builder.append("public ");
-            Grammar _grammar_1 = GrammarUtil.getGrammar(it);
-            TypeReference _grammarAccess = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(_grammar_1);
+            TypeReference _grammarAccess = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(GrammarUtil.getGrammar(it));
             _builder.append(_grammarAccess);
             _builder.append(".");
             String _gaRuleAccessorClassName_1 = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
@@ -973,8 +874,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("return ");
-            Grammar _grammar_2 = GrammarUtil.getGrammar(it);
-            String _gaGrammarAccessLocalVarName = GrammarAccessFragment2.this.gaGrammarAccessLocalVarName(_grammar_2);
+            String _gaGrammarAccessLocalVarName = GrammarAccessFragment2.this.gaGrammarAccessLocalVarName(GrammarUtil.getGrammar(it));
             _builder.append(_gaGrammarAccessLocalVarName, "\t");
             _builder.append(".");
             String _gaElementsAccessor_2 = GrammarAccessFragment2.this._grammarAccessExtensions.gaElementsAccessor(it);
@@ -1033,8 +933,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
           } else {
             _builder.append("\t");
             _builder.append("return ");
-            Grammar _grammar_1 = GrammarUtil.getGrammar(it);
-            String _gaGrammarAccessLocalVarName = GrammarAccessFragment2.this.gaGrammarAccessLocalVarName(_grammar_1);
+            String _gaGrammarAccessLocalVarName = GrammarAccessFragment2.this.gaGrammarAccessLocalVarName(GrammarUtil.getGrammar(it));
             _builder.append(_gaGrammarAccessLocalVarName, "\t");
             _builder.append(".");
             String _gaBaseRuleAccessor = GrammarAccessFragment2.this._grammarAccessExtensions.gaBaseRuleAccessor(it);
@@ -1080,17 +979,13 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("(");
-        EClass _eClass = ele.eClass();
-        IXtextGeneratorLanguage _language = GrammarAccessFragment2.this.getLanguage();
-        TypeReference _typeRef = TypeReference.typeRef(_eClass, _language);
+        TypeReference _typeRef = TypeReference.typeRef(ele.eClass(), GrammarAccessFragment2.this.getLanguage());
         _builder.append(_typeRef);
         _builder.append(")");
         String _loadElementParentStatement = GrammarAccessFragment2.this.loadElementParentStatement(ele);
         _builder.append(_loadElementParentStatement);
         _builder.append(".eContents().get(");
-        EObject _eContainer = ele.eContainer();
-        EList<EObject> _eContents = _eContainer.eContents();
-        int _indexOf = _eContents.indexOf(ele);
+        int _indexOf = ele.eContainer().eContents().indexOf(ele);
         _builder.append(_indexOf);
         _builder.append(")");
       }
@@ -1114,17 +1009,13 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
    * Returns all grammars from the hierarchy that are used from rules of this grammar.
    */
   protected List<Grammar> getEffectivelyUsedGrammars(final Grammar grammar) {
-    List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
     final Function1<AbstractRule, Grammar> _function = (AbstractRule it) -> {
       return GrammarUtil.getGrammar(it);
     };
-    List<Grammar> _map = ListExtensions.<AbstractRule, Grammar>map(_allRules, _function);
     final Function1<Grammar, Boolean> _function_1 = (Grammar it) -> {
       return Boolean.valueOf((it != grammar));
     };
-    Iterable<Grammar> _filter = IterableExtensions.<Grammar>filter(_map, _function_1);
-    Set<Grammar> _set = IterableExtensions.<Grammar>toSet(_filter);
-    return IterableExtensions.<Grammar>toList(_set);
+    return IterableExtensions.<Grammar>toList(IterableExtensions.<Grammar>toSet(IterableExtensions.<Grammar>filter(ListExtensions.<AbstractRule, Grammar>map(GrammarUtil.allRules(grammar), _function), _function_1)));
   }
   
   protected StringConcatenationClient cache(final AbstractRule it) {

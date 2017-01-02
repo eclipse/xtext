@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
@@ -60,24 +59,18 @@ public class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
       return;
     }
     final ArrayList<String> directories = CollectionLiterals.<String>newArrayList();
-    List<? extends ISubProjectConfig> _enabledProjects = this.config.getEnabledProjects();
     final Function1<ISubProjectConfig, IXtextGeneratorFileSystemAccess> _function = (ISubProjectConfig it) -> {
       return it.getSrcGen();
     };
-    List<IXtextGeneratorFileSystemAccess> _map = ListExtensions.map(_enabledProjects, _function);
-    IRuntimeProjectConfig _runtime = this.config.getRuntime();
-    IXtextGeneratorFileSystemAccess _ecoreModel = _runtime.getEcoreModel();
-    Iterable<IXtextGeneratorFileSystemAccess> _plus = Iterables.<IXtextGeneratorFileSystemAccess>concat(_map, Collections.<IXtextGeneratorFileSystemAccess>unmodifiableList(CollectionLiterals.<IXtextGeneratorFileSystemAccess>newArrayList(_ecoreModel)));
-    Iterable<IXtextGeneratorFileSystemAccess> _filterNull = IterableExtensions.<IXtextGeneratorFileSystemAccess>filterNull(_plus);
+    List<IXtextGeneratorFileSystemAccess> _map = ListExtensions.map(this.config.getEnabledProjects(), _function);
+    IXtextGeneratorFileSystemAccess _ecoreModel = this.config.getRuntime().getEcoreModel();
     final Function1<IXtextGeneratorFileSystemAccess, String> _function_1 = (IXtextGeneratorFileSystemAccess it) -> {
       return it.getPath();
     };
-    Iterable<String> _map_1 = IterableExtensions.<IXtextGeneratorFileSystemAccess, String>map(_filterNull, _function_1);
     final Function1<String, Boolean> _function_2 = (String it) -> {
-      File _file = new File(it);
-      return Boolean.valueOf(_file.isDirectory());
+      return Boolean.valueOf(new File(it).isDirectory());
     };
-    Iterable<String> _filter = IterableExtensions.<String>filter(_map_1, _function_2);
+    Iterable<String> _filter = IterableExtensions.<String>filter(IterableExtensions.<IXtextGeneratorFileSystemAccess, String>map(IterableExtensions.<IXtextGeneratorFileSystemAccess>filterNull(Iterables.<IXtextGeneratorFileSystemAccess>concat(_map, Collections.<IXtextGeneratorFileSystemAccess>unmodifiableList(CollectionLiterals.<IXtextGeneratorFileSystemAccess>newArrayList(_ecoreModel)))), _function_1), _function_2);
     Iterables.<String>addAll(directories, _filter);
     Iterables.<String>addAll(directories, this.extraDirectories);
     final DirectoryCleaner delegate = new DirectoryCleaner();

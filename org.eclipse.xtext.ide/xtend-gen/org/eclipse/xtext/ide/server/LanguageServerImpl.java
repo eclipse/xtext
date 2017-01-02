@@ -56,7 +56,6 @@ import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
-import org.eclipse.lsp4j.ReferenceContext;
 import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.RenameParams;
 import org.eclipse.lsp4j.ServerCapabilities;
@@ -64,12 +63,9 @@ import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureHelpOptions;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.TextDocumentContentChangeEvent;
-import org.eclipse.lsp4j.TextDocumentIdentifier;
-import org.eclipse.lsp4j.TextDocumentItem;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.TextDocumentSyncKind;
 import org.eclipse.lsp4j.TextEdit;
-import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
@@ -133,8 +129,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     @Override
     public boolean isCanceled() {
       if (((this.canceledSince == null) && this.delegate.isCanceled())) {
-        long _currentTimeMillis = System.currentTimeMillis();
-        this.canceledSince = Long.valueOf(_currentTimeMillis);
+        this.canceledSince = Long.valueOf(System.currentTimeMillis());
         return false;
       }
       return ((this.canceledSince != null) && (System.currentTimeMillis() > ((this.canceledSince).longValue() + 1000)));
@@ -181,8 +176,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     if (_tripleEquals) {
       throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.");
     }
-    Map<String, Object> _extensionToFactoryMap = this.languagesRegistry.getExtensionToFactoryMap();
-    boolean _isEmpty = _extensionToFactoryMap.isEmpty();
+    boolean _isEmpty = this.languagesRegistry.getExtensionToFactoryMap().isEmpty();
     if (_isEmpty) {
       throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages\'s setup class in \'/META-INF/services/org.eclipse.xtext.ISetup\'");
     }
@@ -212,10 +206,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     ServerCapabilities _doubleArrow = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
     result.setCapabilities(_doubleArrow);
     final Function1<CancelIndicator, Object> _function_1 = (CancelIndicator cancelIndicator) -> {
-      String _rootPath_1 = params.getRootPath();
-      URI _createFileURI = URI.createFileURI(_rootPath_1);
-      String _path = this._uriExtensions.toPath(_createFileURI);
-      final URI rootURI = this._uriExtensions.toUri(_path);
+      final URI rootURI = this._uriExtensions.toUri(this._uriExtensions.toPath(URI.createFileURI(params.getRootPath())));
       final Procedure2<URI, Iterable<Issue>> _function_2 = (URI $0, Iterable<Issue> $1) -> {
         this.publishDiagnostics($0, $1);
       };
@@ -254,14 +245,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public void didOpen(final DidOpenTextDocumentParams params) {
     final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
-      TextDocumentItem _textDocument = params.getTextDocument();
-      String _uri = _textDocument.getUri();
-      URI _uri_1 = this._uriExtensions.toUri(_uri);
-      TextDocumentItem _textDocument_1 = params.getTextDocument();
-      int _version = _textDocument_1.getVersion();
-      TextDocumentItem _textDocument_2 = params.getTextDocument();
-      String _text = _textDocument_2.getText();
-      this.workspaceManager.didOpen(_uri_1, _version, _text, cancelIndicator);
+      this.workspaceManager.didOpen(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), params.getTextDocument().getText(), cancelIndicator);
       return null;
     };
     this.requestManager.<Object>runWrite(_function);
@@ -270,19 +254,12 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public void didChange(final DidChangeTextDocumentParams params) {
     final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
-      VersionedTextDocumentIdentifier _textDocument = params.getTextDocument();
-      String _uri = _textDocument.getUri();
-      URI _uri_1 = this._uriExtensions.toUri(_uri);
-      VersionedTextDocumentIdentifier _textDocument_1 = params.getTextDocument();
-      int _version = _textDocument_1.getVersion();
-      List<TextDocumentContentChangeEvent> _contentChanges = params.getContentChanges();
       final Function1<TextDocumentContentChangeEvent, TextEdit> _function_1 = (TextDocumentContentChangeEvent event) -> {
         Range _range = event.getRange();
         String _text = event.getText();
         return new TextEdit(_range, _text);
       };
-      List<TextEdit> _map = ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(_contentChanges, _function_1);
-      this.workspaceManager.didChange(_uri_1, _version, _map, cancelIndicator);
+      this.workspaceManager.didChange(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(params.getContentChanges(), _function_1), cancelIndicator);
       return null;
     };
     this.requestManager.<Object>runWrite(_function);
@@ -291,10 +268,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public void didClose(final DidCloseTextDocumentParams params) {
     final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
-      TextDocumentIdentifier _textDocument = params.getTextDocument();
-      String _uri = _textDocument.getUri();
-      URI _uri_1 = this._uriExtensions.toUri(_uri);
-      this.workspaceManager.didClose(_uri_1, cancelIndicator);
+      this.workspaceManager.didClose(this._uriExtensions.toUri(params.getTextDocument().getUri()), cancelIndicator);
       return null;
     };
     this.requestManager.<Object>runWrite(_function);
@@ -314,13 +288,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         FileChangeType _type = fileEvent.getType();
         boolean _tripleEquals = (_type == FileChangeType.Deleted);
         if (_tripleEquals) {
-          String _uri = fileEvent.getUri();
-          URI _uri_1 = this._uriExtensions.toUri(_uri);
-          deletedFiles.add(_uri_1);
+          URI _uri = this._uriExtensions.toUri(fileEvent.getUri());
+          deletedFiles.add(_uri);
         } else {
-          String _uri_2 = fileEvent.getUri();
-          URI _uri_3 = this._uriExtensions.toUri(_uri_2);
-          dirtyFiles.add(_uri_3);
+          URI _uri_1 = this._uriExtensions.toUri(fileEvent.getUri());
+          dirtyFiles.add(_uri_1);
         }
       }
       this.workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
@@ -345,14 +317,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   private void publishDiagnostics(final URI uri, final Iterable<? extends Issue> issues) {
     PublishDiagnosticsParams _publishDiagnosticsParams = new PublishDiagnosticsParams();
     final Procedure1<PublishDiagnosticsParams> _function = (PublishDiagnosticsParams it) -> {
-      String _path = this._uriExtensions.toPath(uri);
-      it.setUri(_path);
+      it.setUri(this._uriExtensions.toPath(uri));
       final Function1<Issue, Diagnostic> _function_1 = (Issue it_1) -> {
         return this.toDiagnostic(it_1);
       };
-      Iterable<Diagnostic> _map = IterableExtensions.map(issues, _function_1);
-      List<Diagnostic> _list = IterableExtensions.<Diagnostic>toList(_map);
-      it.setDiagnostics(_list);
+      it.setDiagnostics(IterableExtensions.<Diagnostic>toList(IterableExtensions.map(issues, _function_1)));
     };
     final PublishDiagnosticsParams diagnostics = ObjectExtensions.<PublishDiagnosticsParams>operator_doubleArrow(_publishDiagnosticsParams, _function);
     this.client.publishDiagnostics(diagnostics);
@@ -361,8 +330,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   private Diagnostic toDiagnostic(final Issue issue) {
     Diagnostic _diagnostic = new Diagnostic();
     final Procedure1<Diagnostic> _function = (Diagnostic it) -> {
-      String _code = issue.getCode();
-      it.setCode(_code);
+      it.setCode(issue.getCode());
       DiagnosticSeverity _switchResult = null;
       Severity _severity = issue.getSeverity();
       if (_severity != null) {
@@ -384,8 +352,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         _switchResult = DiagnosticSeverity.Hint;
       }
       it.setSeverity(_switchResult);
-      String _message = issue.getMessage();
-      it.setMessage(_message);
+      it.setMessage(issue.getMessage());
       Integer _elvis = null;
       Integer _lineNumber = issue.getLineNumber();
       if (_lineNumber != null) {
@@ -422,9 +389,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   public CompletableFuture<CompletionList> completion(final TextDocumentPositionParams params) {
     final Function1<CancelIndicator, CompletionList> _function = (CancelIndicator origialCancelIndicator) -> {
       final LanguageServerImpl.BufferedCancelIndicator cancelIndicator = new LanguageServerImpl.BufferedCancelIndicator(origialCancelIndicator);
-      TextDocumentIdentifier _textDocument = params.getTextDocument();
-      String _uri = _textDocument.getUri();
-      final URI uri = this._uriExtensions.toUri(_uri);
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       ContentAssistService _get = null;
       if (resourceServiceProvider!=null) {
@@ -446,9 +411,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public CompletableFuture<List<? extends Location>> definition(final TextDocumentPositionParams params) {
     final Function1<CancelIndicator, List<? extends Location>> _function = (CancelIndicator cancelIndicator) -> {
-      TextDocumentIdentifier _textDocument = params.getTextDocument();
-      String _uri = _textDocument.getUri();
-      final URI uri = this._uriExtensions.toUri(_uri);
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       DocumentSymbolService _get = null;
       if (resourceServiceProvider!=null) {
@@ -459,8 +422,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         return CollectionLiterals.<Location>emptyList();
       }
       final Function2<Document, XtextResource, List<? extends Location>> _function_1 = (Document document, XtextResource resource) -> {
-        Position _position = params.getPosition();
-        final int offset = document.getOffSet(_position);
+        final int offset = document.getOffSet(params.getPosition());
         return documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
       };
       final List<? extends Location> definitions = this.workspaceManager.<List<? extends Location>>doRead(uri, _function_1);
@@ -472,9 +434,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public CompletableFuture<List<? extends Location>> references(final ReferenceParams params) {
     final Function1<CancelIndicator, List<? extends Location>> _function = (CancelIndicator cancelIndicator) -> {
-      TextDocumentIdentifier _textDocument = params.getTextDocument();
-      String _uri = _textDocument.getUri();
-      final URI uri = this._uriExtensions.toUri(_uri);
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       DocumentSymbolService _get = null;
       if (resourceServiceProvider!=null) {
@@ -485,11 +445,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         return CollectionLiterals.<Location>emptyList();
       }
       final Function2<Document, XtextResource, List<Location>> _function_1 = (Document document, XtextResource resource) -> {
-        Position _position = params.getPosition();
-        final int offset = document.getOffSet(_position);
+        final int offset = document.getOffSet(params.getPosition());
         List<? extends Location> _xifexpression = null;
-        ReferenceContext _context = params.getContext();
-        boolean _isIncludeDeclaration = _context.isIncludeDeclaration();
+        boolean _isIncludeDeclaration = params.getContext().isIncludeDeclaration();
         if (_isIncludeDeclaration) {
           _xifexpression = documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
         } else {
@@ -509,9 +467,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public CompletableFuture<List<? extends SymbolInformation>> documentSymbol(final DocumentSymbolParams params) {
     final Function1<CancelIndicator, List<? extends SymbolInformation>> _function = (CancelIndicator cancelIndicator) -> {
-      TextDocumentIdentifier _textDocument = params.getTextDocument();
-      String _uri = _textDocument.getUri();
-      final URI uri = this._uriExtensions.toUri(_uri);
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       DocumentSymbolService _get = null;
       if (resourceServiceProvider!=null) {
@@ -533,8 +489,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   public CompletableFuture<List<? extends SymbolInformation>> symbol(final WorkspaceSymbolParams params) {
     final Function1<CancelIndicator, List<? extends SymbolInformation>> _function = (CancelIndicator cancelIndicator) -> {
       final IResourceDescriptions indexData = this.workspaceManager.getIndex();
-      String _query = params.getQuery();
-      return this.workspaceSymbolService.getSymbols(_query, this.resourceAccess, indexData, cancelIndicator);
+      return this.workspaceSymbolService.getSymbols(params.getQuery(), this.resourceAccess, indexData, cancelIndicator);
     };
     return this.requestManager.<List<? extends SymbolInformation>>runRead(_function);
   }
@@ -542,9 +497,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public CompletableFuture<Hover> hover(final TextDocumentPositionParams params) {
     final Function1<CancelIndicator, Hover> _function = (CancelIndicator cancelIndicator) -> {
-      TextDocumentIdentifier _textDocument = params.getTextDocument();
-      String _uri = _textDocument.getUri();
-      final URI uri = this._uriExtensions.toUri(_uri);
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       HoverService _get = null;
       if (resourceServiceProvider!=null) {
@@ -556,8 +509,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         return new Hover(_emptyList, null);
       }
       final Function2<Document, XtextResource, Hover> _function_1 = (Document document, XtextResource resource) -> {
-        Position _position = params.getPosition();
-        final int offset = document.getOffSet(_position);
+        final int offset = document.getOffSet(params.getPosition());
         return hoverService.hover(resource, offset);
       };
       return this.workspaceManager.<Hover>doRead(uri, _function_1);
@@ -573,9 +525,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public CompletableFuture<SignatureHelp> signatureHelp(final TextDocumentPositionParams position) {
     final Function1<CancelIndicator, SignatureHelp> _function = (CancelIndicator cancelIndicator) -> {
-      TextDocumentIdentifier _textDocument = position.getTextDocument();
-      String _uri = _textDocument.getUri();
-      final URI uri = this._uriExtensions.toUri(_uri);
+      final URI uri = this._uriExtensions.toUri(position.getTextDocument().getUri());
       final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       ISignatureHelpService _get = null;
       if (serviceProvider!=null) {
@@ -586,8 +536,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         return new SignatureHelp();
       }
       final Function2<Document, XtextResource, SignatureHelp> _function_1 = (Document doc, XtextResource resource) -> {
-        Position _position = position.getPosition();
-        final int offset = doc.getOffSet(_position);
+        final int offset = doc.getOffSet(position.getPosition());
         return helper.getSignatureHelp(resource, offset);
       };
       return this.workspaceManager.<SignatureHelp>doRead(uri, _function_1);
@@ -598,9 +547,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public CompletableFuture<List<? extends DocumentHighlight>> documentHighlight(final TextDocumentPositionParams position) {
     final Function1<CancelIndicator, List<? extends DocumentHighlight>> _function = (CancelIndicator cancelIndicator) -> {
-      TextDocumentIdentifier _textDocument = position.getTextDocument();
-      String _uri = _textDocument.getUri();
-      final URI uri = this._uriExtensions.toUri(_uri);
+      final URI uri = this._uriExtensions.toUri(position.getTextDocument().getUri());
       final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       IDocumentHighlightService _get = null;
       if (serviceProvider!=null) {
@@ -611,8 +558,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         return CollectionLiterals.<DocumentHighlight>emptyList();
       }
       final Function2<Document, XtextResource, List<? extends DocumentHighlight>> _function_1 = (Document doc, XtextResource resource) -> {
-        Position _position = position.getPosition();
-        final int offset = doc.getOffSet(_position);
+        final int offset = doc.getOffSet(position.getPosition());
         return service.getDocumentHighlights(resource, offset);
       };
       return this.workspaceManager.<List<? extends DocumentHighlight>>doRead(uri, _function_1);
@@ -638,9 +584,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public CompletableFuture<List<? extends TextEdit>> formatting(final DocumentFormattingParams params) {
     final Function1<CancelIndicator, List<? extends TextEdit>> _function = (CancelIndicator cancelIndicator) -> {
-      TextDocumentIdentifier _textDocument = params.getTextDocument();
-      String _uri = _textDocument.getUri();
-      final URI uri = this._uriExtensions.toUri(_uri);
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       FormattingService _get = null;
       if (resourceServiceProvider!=null) {
@@ -652,8 +596,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       final Function2<Document, XtextResource, List<TextEdit>> _function_1 = (Document document, XtextResource resource) -> {
         final int offset = 0;
-        String _contents = document.getContents();
-        final int length = _contents.length();
+        final int length = document.getContents().length();
         if (((length == 0) || resource.getContents().isEmpty())) {
           return CollectionLiterals.<TextEdit>emptyList();
         }
@@ -667,9 +610,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public CompletableFuture<List<? extends TextEdit>> rangeFormatting(final DocumentRangeFormattingParams params) {
     final Function1<CancelIndicator, List<? extends TextEdit>> _function = (CancelIndicator cancelIndicator) -> {
-      TextDocumentIdentifier _textDocument = params.getTextDocument();
-      String _uri = _textDocument.getUri();
-      final URI uri = this._uriExtensions.toUri(_uri);
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       FormattingService _get = null;
       if (resourceServiceProvider!=null) {
@@ -680,12 +621,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         return Collections.<TextEdit>emptyList();
       }
       final Function2<Document, XtextResource, List<TextEdit>> _function_1 = (Document document, XtextResource resource) -> {
-        Range _range = params.getRange();
-        Position _start = _range.getStart();
-        final int offset = document.getOffSet(_start);
-        Range _range_1 = params.getRange();
-        Position _end = _range_1.getEnd();
-        int _offSet = document.getOffSet(_end);
+        final int offset = document.getOffSet(params.getRange().getStart());
+        int _offSet = document.getOffSet(params.getRange().getEnd());
         final int length = (_offSet - offset);
         return formatterService.format(resource, document, offset, length);
       };
@@ -759,14 +696,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     }
     synchronized (this.extensionProviders) {
       final LinkedHashMap<String, JsonRpcMethod> supportedMethods = CollectionLiterals.<String, JsonRpcMethod>newLinkedHashMap();
-      Class<? extends LanguageServerImpl> _class = this.getClass();
-      Map<String, JsonRpcMethod> _supportedMethods = ServiceEndpoints.getSupportedMethods(_class);
-      supportedMethods.putAll(_supportedMethods);
+      supportedMethods.putAll(ServiceEndpoints.getSupportedMethods(this.getClass()));
       final LinkedHashMap<String, JsonRpcMethod> extensions = CollectionLiterals.<String, JsonRpcMethod>newLinkedHashMap();
-      Map<String, Object> _extensionToFactoryMap = this.languagesRegistry.getExtensionToFactoryMap();
-      Collection<Object> _values = _extensionToFactoryMap.values();
-      Set<Object> _set = IterableExtensions.<Object>toSet(_values);
-      Iterable<IResourceServiceProvider> _filter = Iterables.<IResourceServiceProvider>filter(_set, IResourceServiceProvider.class);
+      Iterable<IResourceServiceProvider> _filter = Iterables.<IResourceServiceProvider>filter(IterableExtensions.<Object>toSet(this.languagesRegistry.getExtensionToFactoryMap().values()), IResourceServiceProvider.class);
       for (final IResourceServiceProvider resourceServiceProvider : _filter) {
         {
           final ILanguageServerExtension ext = resourceServiceProvider.<ILanguageServerExtension>get(ILanguageServerExtension.class);
@@ -776,41 +708,33 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
             if ((ext instanceof JsonRpcMethodProvider)) {
               _xifexpression = ((JsonRpcMethodProvider)ext).supportedMethods();
             } else {
-              Class<? extends ILanguageServerExtension> _class_1 = ext.getClass();
-              _xifexpression = ServiceEndpoints.getSupportedMethods(_class_1);
+              _xifexpression = ServiceEndpoints.getSupportedMethods(ext.getClass());
             }
             final Map<String, JsonRpcMethod> supportedExtensions = _xifexpression;
             Set<Map.Entry<String, JsonRpcMethod>> _entrySet = supportedExtensions.entrySet();
             for (final Map.Entry<String, JsonRpcMethod> entry : _entrySet) {
-              String _key = entry.getKey();
-              boolean _containsKey = supportedMethods.containsKey(_key);
+              boolean _containsKey = supportedMethods.containsKey(entry.getKey());
               if (_containsKey) {
-                String _key_1 = entry.getKey();
-                String _plus = ("The json rpc method \'" + _key_1);
+                String _key = entry.getKey();
+                String _plus = ("The json rpc method \'" + _key);
                 String _plus_1 = (_plus + "\' can not be an extension as it is already defined in the LSP standard.");
                 LanguageServerImpl.LOG.error(_plus_1);
               } else {
-                String _key_2 = entry.getKey();
-                JsonRpcMethod _value = entry.getValue();
-                final JsonRpcMethod existing = extensions.put(_key_2, _value);
+                final JsonRpcMethod existing = extensions.put(entry.getKey(), entry.getValue());
                 if (((existing != null) && (!Objects.equal(existing, entry.getValue())))) {
-                  String _key_3 = entry.getKey();
-                  String _plus_2 = ("An incompatible LSP extension \'" + _key_3);
+                  String _key_1 = entry.getKey();
+                  String _plus_2 = ("An incompatible LSP extension \'" + _key_1);
                   String _plus_3 = (_plus_2 + "\' has already been registered. Using 1 ignoring 2. \n1 : ");
                   String _plus_4 = (_plus_3 + existing);
                   String _plus_5 = (_plus_4 + " \n2 : ");
-                  JsonRpcMethod _value_1 = entry.getValue();
-                  String _plus_6 = (_plus_5 + _value_1);
+                  JsonRpcMethod _value = entry.getValue();
+                  String _plus_6 = (_plus_5 + _value);
                   LanguageServerImpl.LOG.error(_plus_6);
-                  String _key_4 = entry.getKey();
-                  extensions.put(_key_4, existing);
+                  extensions.put(entry.getKey(), existing);
                 } else {
                   final Endpoint endpoint = ServiceEndpoints.toEndpoint(ext);
-                  String _key_5 = entry.getKey();
-                  this.extensionProviders.put(_key_5, endpoint);
-                  String _key_6 = entry.getKey();
-                  JsonRpcMethod _value_2 = entry.getValue();
-                  supportedMethods.put(_key_6, _value_2);
+                  this.extensionProviders.put(entry.getKey(), endpoint);
+                  supportedMethods.put(entry.getKey(), entry.getValue());
                 }
               }
             }
@@ -826,14 +750,12 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     @Override
     public <T extends Object> CompletableFuture<T> doRead(final String uri, final Function<ILanguageServerAccess.Context, T> function) {
       final Function1<CancelIndicator, T> _function = (CancelIndicator cancelIndicator) -> {
-        URI _uri = LanguageServerImpl.this._uriExtensions.toUri(uri);
         final Function2<Document, XtextResource, T> _function_1 = (Document document, XtextResource resource) -> {
-          URI _uRI = resource.getURI();
-          boolean _isDocumentOpen = LanguageServerImpl.this.workspaceManager.isDocumentOpen(_uRI);
+          boolean _isDocumentOpen = LanguageServerImpl.this.workspaceManager.isDocumentOpen(resource.getURI());
           final ILanguageServerAccess.Context ctx = new ILanguageServerAccess.Context(resource, document, _isDocumentOpen, cancelIndicator);
           return function.apply(ctx);
         };
-        return LanguageServerImpl.this.workspaceManager.<T>doRead(_uri, _function_1);
+        return LanguageServerImpl.this.workspaceManager.<T>doRead(LanguageServerImpl.this._uriExtensions.toUri(uri), _function_1);
       };
       return LanguageServerImpl.this.requestManager.<T>runRead(_function);
     }
@@ -856,12 +778,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         IResourceDescription _new = it.getNew();
         return Boolean.valueOf((_new != null));
       };
-      Iterable<IResourceDescription.Delta> _filter = IterableExtensions.<IResourceDescription.Delta>filter(deltas, _function);
       final Function1<IResourceDescription.Delta, String> _function_1 = (IResourceDescription.Delta it) -> {
-        URI _uri = it.getUri();
-        return _uri.toString();
+        return it.getUri().toString();
       };
-      Iterable<String> _map = IterableExtensions.<IResourceDescription.Delta, String>map(_filter, _function_1);
       final Consumer<String> _function_2 = (String it) -> {
         final Function<ILanguageServerAccess.Context, Void> _function_3 = (ILanguageServerAccess.Context ctx) -> {
           boolean _isDocumentOpen = ctx.isDocumentOpen();
@@ -870,8 +789,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
             if ((_resource instanceof XtextResource)) {
               Resource _resource_1 = ctx.getResource();
               final XtextResource resource = ((XtextResource) _resource_1);
-              URI _uRI = resource.getURI();
-              final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(_uRI);
+              final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(resource.getURI());
               IColoringService _get = null;
               if (serviceProvider!=null) {
                 _get=serviceProvider.<IColoringService>get(IColoringService.class);
@@ -883,8 +801,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
                 boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(coloringInfos);
                 boolean _not = (!_isNullOrEmpty);
                 if (_not) {
-                  URI _uRI_1 = resource.getURI();
-                  final String uri = _uRI_1.toString();
+                  final String uri = resource.getURI().toString();
                   ColoringParams _coloringParams = new ColoringParams(uri, coloringInfos);
                   ((LanguageClientExtensions)this.client).updateColoring(_coloringParams);
                 }
@@ -896,7 +813,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         };
         this.access.<Void>doRead(it, _function_3);
       };
-      _map.forEach(_function_2);
+      IterableExtensions.<IResourceDescription.Delta, String>map(IterableExtensions.<IResourceDescription.Delta>filter(deltas, _function), _function_1).forEach(_function_2);
     }
   }
   

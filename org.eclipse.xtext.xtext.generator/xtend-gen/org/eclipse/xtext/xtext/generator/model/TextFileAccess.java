@@ -37,8 +37,7 @@ public class TextFileAccess {
   
   public void writeTo(final IFileSystemAccess2 fileSystemAccess) {
     if ((fileSystemAccess != null)) {
-      CharSequence _content = this.getContent();
-      fileSystemAccess.generateFile(this.path, _content);
+      fileSystemAccess.generateFile(this.path, this.getContent());
     }
   }
   

@@ -82,8 +82,7 @@ public class OutdatedStateManager {
                 };
                 _xifexpression = _function;
               } else {
-                ResourceSet _resourceSet = param.getResourceSet();
-                _xifexpression = this.newCancelIndicator(_resourceSet);
+                _xifexpression = this.newCancelIndicator(param.getResourceSet());
               }
               ((CancelableUnitOfWork<?, ?>)work).setCancelIndicator(_xifexpression);
             } else {

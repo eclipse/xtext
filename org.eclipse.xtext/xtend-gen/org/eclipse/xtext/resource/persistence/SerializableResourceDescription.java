@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -47,25 +45,16 @@ public class SerializableResourceDescription extends AbstractResourceDescription
   public static SerializableResourceDescription createCopy(final IResourceDescription desc) {
     SerializableResourceDescription _serializableResourceDescription = new SerializableResourceDescription();
     final Procedure1<SerializableResourceDescription> _function = (SerializableResourceDescription it) -> {
-      URI _uRI = desc.getURI();
-      it.setURI(_uRI);
-      Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
+      it.setURI(desc.getURI());
       final Function1<IEObjectDescription, SerializableEObjectDescription> _function_1 = (IEObjectDescription it_1) -> {
         return SerializableResourceDescription.createCopy(it_1);
       };
-      Iterable<SerializableEObjectDescription> _map = IterableExtensions.<IEObjectDescription, SerializableEObjectDescription>map(_exportedObjects, _function_1);
-      List<SerializableEObjectDescription> _list = IterableExtensions.<SerializableEObjectDescription>toList(_map);
-      it.descriptions = _list;
-      Iterable<IReferenceDescription> _referenceDescriptions = desc.getReferenceDescriptions();
+      it.descriptions = IterableExtensions.<SerializableEObjectDescription>toList(IterableExtensions.<IEObjectDescription, SerializableEObjectDescription>map(desc.getExportedObjects(), _function_1));
       final Function1<IReferenceDescription, SerializableReferenceDescription> _function_2 = (IReferenceDescription it_1) -> {
         return SerializableResourceDescription.createCopy(it_1);
       };
-      Iterable<SerializableReferenceDescription> _map_1 = IterableExtensions.<IReferenceDescription, SerializableReferenceDescription>map(_referenceDescriptions, _function_2);
-      List<SerializableReferenceDescription> _list_1 = IterableExtensions.<SerializableReferenceDescription>toList(_map_1);
-      it.references = _list_1;
-      Iterable<QualifiedName> _importedNames = desc.getImportedNames();
-      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(((QualifiedName[])Conversions.unwrapArray(_importedNames, QualifiedName.class)));
-      it.importedNames = _newArrayList;
+      it.references = IterableExtensions.<SerializableReferenceDescription>toList(IterableExtensions.<IReferenceDescription, SerializableReferenceDescription>map(desc.getReferenceDescriptions(), _function_2));
+      it.importedNames = CollectionLiterals.<QualifiedName>newArrayList(((QualifiedName[])Conversions.unwrapArray(desc.getImportedNames(), QualifiedName.class)));
     };
     return ObjectExtensions.<SerializableResourceDescription>operator_doubleArrow(_serializableResourceDescription, _function);
   }
@@ -76,20 +65,15 @@ public class SerializableResourceDescription extends AbstractResourceDescription
     }
     SerializableEObjectDescription _serializableEObjectDescription = new SerializableEObjectDescription();
     final Procedure1<SerializableEObjectDescription> _function = (SerializableEObjectDescription it) -> {
-      EClass _eClass = desc.getEClass();
-      it.setEClass(_eClass);
-      URI _eObjectURI = desc.getEObjectURI();
-      it.setEObjectURI(_eObjectURI);
-      QualifiedName _qualifiedName = desc.getQualifiedName();
-      it.qualifiedName = _qualifiedName;
-      String[] _userDataKeys = desc.getUserDataKeys();
-      int _size = ((List<String>)Conversions.doWrapArray(_userDataKeys)).size();
+      it.setEClass(desc.getEClass());
+      it.setEObjectURI(desc.getEObjectURI());
+      it.qualifiedName = desc.getQualifiedName();
+      int _size = ((List<String>)Conversions.doWrapArray(desc.getUserDataKeys())).size();
       HashMap<String, String> _hashMap = new HashMap<String, String>(_size);
       it.userData = _hashMap;
-      String[] _userDataKeys_1 = desc.getUserDataKeys();
-      for (final String key : _userDataKeys_1) {
-        String _userData = desc.getUserData(key);
-        it.userData.put(key, _userData);
+      String[] _userDataKeys = desc.getUserDataKeys();
+      for (final String key : _userDataKeys) {
+        it.userData.put(key, desc.getUserData(key));
       }
     };
     return ObjectExtensions.<SerializableEObjectDescription>operator_doubleArrow(_serializableEObjectDescription, _function);
@@ -98,16 +82,11 @@ public class SerializableResourceDescription extends AbstractResourceDescription
   private static SerializableReferenceDescription createCopy(final IReferenceDescription desc) {
     SerializableReferenceDescription _serializableReferenceDescription = new SerializableReferenceDescription();
     final Procedure1<SerializableReferenceDescription> _function = (SerializableReferenceDescription it) -> {
-      URI _sourceEObjectUri = desc.getSourceEObjectUri();
-      it.setSourceEObjectUri(_sourceEObjectUri);
-      URI _targetEObjectUri = desc.getTargetEObjectUri();
-      it.setTargetEObjectUri(_targetEObjectUri);
-      EReference _eReference = desc.getEReference();
-      it.setEReference(_eReference);
-      int _indexInList = desc.getIndexInList();
-      it.setIndexInList(_indexInList);
-      URI _containerEObjectURI = desc.getContainerEObjectURI();
-      it.setContainerEObjectURI(_containerEObjectURI);
+      it.setSourceEObjectUri(desc.getSourceEObjectUri());
+      it.setTargetEObjectUri(desc.getTargetEObjectUri());
+      it.setEReference(desc.getEReference());
+      it.setIndexInList(desc.getIndexInList());
+      it.setContainerEObjectURI(desc.getContainerEObjectURI());
     };
     return ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription, _function);
   }
@@ -147,49 +126,42 @@ public class SerializableResourceDescription extends AbstractResourceDescription
   
   @Override
   public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
-    URI _readURI = SerializationExtensions.readURI(in);
-    this.setURI(_readURI);
+    this.setURI(SerializationExtensions.readURI(in));
     final int descriptionsSize = in.readInt();
     ArrayList<SerializableEObjectDescription> _arrayList = new ArrayList<SerializableEObjectDescription>(descriptionsSize);
     this.descriptions = _arrayList;
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, descriptionsSize, true);
     for (final Integer i : _doubleDotLessThan) {
-      SerializableEObjectDescription _readCastedObject = SerializationExtensions.<SerializableEObjectDescription>readCastedObject(in);
-      this.descriptions.add(_readCastedObject);
+      this.descriptions.add(SerializationExtensions.<SerializableEObjectDescription>readCastedObject(in));
     }
     final int referencesSize = in.readInt();
     ArrayList<SerializableReferenceDescription> _arrayList_1 = new ArrayList<SerializableReferenceDescription>(referencesSize);
     this.references = _arrayList_1;
     ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, referencesSize, true);
     for (final Integer i_1 : _doubleDotLessThan_1) {
-      SerializableReferenceDescription _readCastedObject_1 = SerializationExtensions.<SerializableReferenceDescription>readCastedObject(in);
-      this.references.add(_readCastedObject_1);
+      this.references.add(SerializationExtensions.<SerializableReferenceDescription>readCastedObject(in));
     }
     final int importedNamesSize = in.readInt();
     ArrayList<QualifiedName> _arrayList_2 = new ArrayList<QualifiedName>(importedNamesSize);
     this.importedNames = _arrayList_2;
     ExclusiveRange _doubleDotLessThan_2 = new ExclusiveRange(0, importedNamesSize, true);
     for (final Integer i_2 : _doubleDotLessThan_2) {
-      QualifiedName _readQualifiedName = SerializationExtensions.readQualifiedName(in);
-      this.importedNames.add(_readQualifiedName);
+      this.importedNames.add(SerializationExtensions.readQualifiedName(in));
     }
   }
   
   @Override
   public void writeExternal(final ObjectOutput out) throws IOException {
     SerializationExtensions.writeURI(out, this.uRI);
-    int _size = this.descriptions.size();
-    out.writeInt(_size);
+    out.writeInt(this.descriptions.size());
     for (final SerializableEObjectDescription desc : this.descriptions) {
       out.writeObject(desc);
     }
-    int _size_1 = this.references.size();
-    out.writeInt(_size_1);
+    out.writeInt(this.references.size());
     for (final SerializableReferenceDescription ref : this.references) {
       out.writeObject(ref);
     }
-    int _size_2 = this.importedNames.size();
-    out.writeInt(_size_2);
+    out.writeInt(this.importedNames.size());
     for (final QualifiedName name : this.importedNames) {
       SerializationExtensions.writeQualifiedName(out, name);
     }

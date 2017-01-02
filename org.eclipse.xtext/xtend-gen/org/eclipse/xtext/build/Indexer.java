@@ -12,7 +12,6 @@ import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +19,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -31,7 +29,6 @@ import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.build.BuildContext;
 import org.eclipse.xtext.build.BuildRequest;
-import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -40,13 +37,11 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.resource.persistence.SerializableEObjectDescriptionProvider;
 import org.eclipse.xtext.service.OperationCanceledManager;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -136,41 +131,32 @@ public class Indexer {
     private ImmutableList<IEObjectDescription> exported;
     
     public ResolvedResourceDescription(final IResourceDescription original) {
-      URI _uRI = original.getURI();
-      this.URI = _uRI;
-      Iterable<IEObjectDescription> _exportedObjects = original.getExportedObjects();
+      this.URI = original.getURI();
       final Function1<IEObjectDescription, IEObjectDescription> _function = (IEObjectDescription from) -> {
         if ((from instanceof SerializableEObjectDescriptionProvider)) {
           return ((SerializableEObjectDescriptionProvider)from).toSerializableEObjectDescription();
         }
-        EObject _eObjectOrProxy = from.getEObjectOrProxy();
-        boolean _eIsProxy = _eObjectOrProxy.eIsProxy();
+        boolean _eIsProxy = from.getEObjectOrProxy().eIsProxy();
         if (_eIsProxy) {
           return from;
         }
-        EClass _eClass = from.getEClass();
-        EObject _create = EcoreUtil.create(_eClass);
+        EObject _create = EcoreUtil.create(from.getEClass());
         InternalEObject result = ((InternalEObject) _create);
-        URI _eObjectURI = from.getEObjectURI();
-        result.eSetProxyURI(_eObjectURI);
+        result.eSetProxyURI(from.getEObjectURI());
         Map<String, String> userData = null;
         String[] _userDataKeys = from.getUserDataKeys();
         for (final String key : _userDataKeys) {
           {
             if ((userData == null)) {
-              HashMap<String, String> _newHashMapWithExpectedSize = Maps.<String, String>newHashMapWithExpectedSize(2);
-              userData = _newHashMapWithExpectedSize;
+              userData = Maps.<String, String>newHashMapWithExpectedSize(2);
             }
-            String _userData = from.getUserData(key);
-            userData.put(key, _userData);
+            userData.put(key, from.getUserData(key));
           }
         }
-        QualifiedName _name = from.getName();
-        return EObjectDescription.create(_name, result, userData);
+        return EObjectDescription.create(from.getName(), result, userData);
       };
-      Iterable<IEObjectDescription> _map = IterableExtensions.<IEObjectDescription, IEObjectDescription>map(_exportedObjects, _function);
-      ImmutableList<IEObjectDescription> _copyOf = ImmutableList.<IEObjectDescription>copyOf(_map);
-      this.exported = _copyOf;
+      this.exported = ImmutableList.<IEObjectDescription>copyOf(
+        IterableExtensions.<IEObjectDescription, IEObjectDescription>map(original.getExportedObjects(), _function));
     }
     
     @Override
@@ -214,81 +200,63 @@ public class Indexer {
   private OperationCanceledManager _operationCanceledManager;
   
   public Indexer.IndexResult computeAndIndexAffected(final BuildRequest request, @Extension final BuildContext context) {
-    IndexState _oldState = context.getOldState();
-    final ResourceDescriptionsData previousIndex = _oldState.getResourceDescriptions();
-    IndexState _state = request.getState();
-    final ResourceDescriptionsData newIndex = _state.getResourceDescriptions();
+    final ResourceDescriptionsData previousIndex = context.getOldState().getResourceDescriptions();
+    final ResourceDescriptionsData newIndex = request.getState().getResourceDescriptions();
     final List<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     boolean _isInfoEnabled = Indexer.LOG.isInfoEnabled();
     if (_isInfoEnabled) {
-      List<URI> _deletedFiles = request.getDeletedFiles();
-      Set<URI> _set = IterableExtensions.<URI>toSet(_deletedFiles);
+      Set<URI> _set = IterableExtensions.<URI>toSet(request.getDeletedFiles());
       String _plus = ("Creating Deltas for changes. Deleted : " + _set);
       String _plus_1 = (_plus + ", Changed : ");
-      List<URI> _dirtyFiles = request.getDirtyFiles();
-      Set<URI> _set_1 = IterableExtensions.<URI>toSet(_dirtyFiles);
+      Set<URI> _set_1 = IterableExtensions.<URI>toSet(request.getDirtyFiles());
       String _plus_2 = (_plus_1 + _set_1);
       String _plus_3 = (_plus_2 + ".");
       Indexer.LOG.info(_plus_3);
     }
-    List<IResourceDescription.Delta> _deltasForDeletedResources = this.getDeltasForDeletedResources(request, previousIndex, context);
-    deltas.addAll(_deltasForDeletedResources);
-    List<URI> _dirtyFiles_1 = request.getDirtyFiles();
-    List<IResourceDescription.Delta> _deltasForChangedResources = this.getDeltasForChangedResources(_dirtyFiles_1, previousIndex, context);
-    deltas.addAll(_deltasForChangedResources);
+    deltas.addAll(this.getDeltasForDeletedResources(request, previousIndex, context));
+    deltas.addAll(this.getDeltasForChangedResources(request.getDirtyFiles(), previousIndex, context));
     for (final IResourceDescription.Delta delta : deltas) {
       newIndex.register(delta);
     }
     final HashSet<IResourceDescription.Delta> allDeltas = new HashSet<IResourceDescription.Delta>(deltas);
-    List<IResourceDescription.Delta> _externalDeltas = request.getExternalDeltas();
-    boolean _isEmpty = _externalDeltas.isEmpty();
+    boolean _isEmpty = request.getExternalDeltas().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      List<IResourceDescription.Delta> _externalDeltas_1 = request.getExternalDeltas();
-      allDeltas.addAll(_externalDeltas_1);
+      allDeltas.addAll(request.getExternalDeltas());
     }
-    Iterable<IResourceDescription> _allResourceDescriptions = previousIndex.getAllResourceDescriptions();
     final Function1<IResourceDescription, URI> _function = (IResourceDescription it) -> {
       return it.getURI();
     };
-    Iterable<URI> _map = IterableExtensions.<IResourceDescription, URI>map(_allResourceDescriptions, _function);
-    final Set<URI> remainingURIs = IterableExtensions.<URI>toSet(_map);
+    final Set<URI> remainingURIs = IterableExtensions.<URI>toSet(IterableExtensions.<IResourceDescription, URI>map(previousIndex.getAllResourceDescriptions(), _function));
     final Function1<IResourceDescription.Delta, URI> _function_1 = (IResourceDescription.Delta it) -> {
       return it.getUri();
     };
-    List<URI> _map_1 = ListExtensions.<IResourceDescription.Delta, URI>map(deltas, _function_1);
-    remainingURIs.removeAll(_map_1);
+    remainingURIs.removeAll(ListExtensions.<IResourceDescription.Delta, URI>map(deltas, _function_1));
     final Function1<URI, Boolean> _function_2 = (URI it) -> {
-      IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
-      final IResourceDescription.Manager manager = _resourceServiceProvider.getResourceDescriptionManager();
+      final IResourceDescription.Manager manager = context.getResourceServiceProvider(it).getResourceDescriptionManager();
       final IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
       final boolean isAffected = this.isAffected(resourceDescription, manager, allDeltas, allDeltas, newIndex);
       return Boolean.valueOf(isAffected);
     };
-    Iterable<URI> _filter = IterableExtensions.<URI>filter(remainingURIs, _function_2);
-    final List<URI> allAffected = IterableExtensions.<URI>toList(_filter);
+    final List<URI> allAffected = IterableExtensions.<URI>toList(IterableExtensions.<URI>filter(remainingURIs, _function_2));
     if ((Indexer.LOG.isInfoEnabled() && (!allAffected.isEmpty()))) {
       Set<URI> _set_2 = IterableExtensions.<URI>toSet(allAffected);
       String _plus_4 = ("Creating Deltas for affected resources : " + _set_2);
       String _plus_5 = (_plus_4 + ".");
       Indexer.LOG.info(_plus_5);
     }
-    List<IResourceDescription.Delta> _deltasForChangedResources_1 = this.getDeltasForChangedResources(allAffected, previousIndex, context);
-    deltas.addAll(_deltasForChangedResources_1);
+    deltas.addAll(this.getDeltasForChangedResources(allAffected, previousIndex, context));
     return new Indexer.IndexResult(deltas, newIndex);
   }
   
   protected List<IResourceDescription.Delta> getDeltasForDeletedResources(final BuildRequest request, final ResourceDescriptionsData oldIndex, @Extension final BuildContext context) {
     final ArrayList<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
-    List<URI> _deletedFiles = request.getDeletedFiles();
     final Function1<URI, Boolean> _function = (URI it) -> {
       IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
       return Boolean.valueOf((_resourceServiceProvider != null));
     };
-    Iterable<URI> _filter = IterableExtensions.<URI>filter(_deletedFiles, _function);
     final Consumer<URI> _function_1 = (URI it) -> {
-      CancelIndicator _cancelIndicator = context.getCancelIndicator();
-      this._operationCanceledManager.checkCanceled(_cancelIndicator);
+      this._operationCanceledManager.checkCanceled(context.getCancelIndicator());
       IResourceDescription _resourceDescription = null;
       if (oldIndex!=null) {
         _resourceDescription=oldIndex.getResourceDescription(it);
@@ -299,28 +267,24 @@ public class Indexer {
         deltas.add(delta);
       }
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.<URI>filter(request.getDeletedFiles(), _function).forEach(_function_1);
     return deltas;
   }
   
   protected List<IResourceDescription.Delta> getDeltasForChangedResources(final Iterable<URI> affectedUris, final ResourceDescriptionsData oldIndex, @Extension final BuildContext context) {
     try {
-      XtextResourceSet _resourceSet = context.getResourceSet();
-      this.compilerPhases.setIndexing(_resourceSet, true);
+      this.compilerPhases.setIndexing(context.getResourceSet(), true);
       final Function1<Resource, IResourceDescription.Delta> _function = (Resource it) -> {
         return this.addToIndex(it, true, oldIndex, context);
       };
-      Iterable<IResourceDescription.Delta> _executeClustered = context.<IResourceDescription.Delta>executeClustered(affectedUris, _function);
-      return IterableExtensions.<IResourceDescription.Delta>toList(_executeClustered);
+      return IterableExtensions.<IResourceDescription.Delta>toList(context.<IResourceDescription.Delta>executeClustered(affectedUris, _function));
     } finally {
-      XtextResourceSet _resourceSet_1 = context.getResourceSet();
-      this.compilerPhases.setIndexing(_resourceSet_1, false);
+      this.compilerPhases.setIndexing(context.getResourceSet(), false);
     }
   }
   
   protected IResourceDescription.Delta addToIndex(final Resource resource, final boolean isPreIndexing, final ResourceDescriptionsData oldIndex, final BuildContext context) {
-    CancelIndicator _cancelIndicator = context.getCancelIndicator();
-    this._operationCanceledManager.checkCanceled(_cancelIndicator);
+    this._operationCanceledManager.checkCanceled(context.getCancelIndicator());
     final URI uri = resource.getURI();
     final IResourceServiceProvider serviceProvider = context.getResourceServiceProvider(uri);
     final IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();

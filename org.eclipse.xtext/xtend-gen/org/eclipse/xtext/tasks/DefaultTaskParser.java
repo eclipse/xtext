@@ -40,12 +40,10 @@ public class DefaultTaskParser implements ITaskParser {
         return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
       }
       final Function<TaskTag, String> _function = (TaskTag it) -> {
-        String _name = it.getName();
-        return _name.toLowerCase();
+        return it.getName().toLowerCase();
       };
       final ImmutableMap<String, TaskTag> taskTagsByName = Maps.<String, TaskTag>uniqueIndex(taskTags, _function);
-      Pattern _pattern = this.toPattern(taskTags);
-      final Matcher matcher = _pattern.matcher(source);
+      final Matcher matcher = this.toPattern(taskTags).matcher(source);
       final ArrayList<Task> tasks = CollectionLiterals.<Task>newArrayList();
       int prevLine = 1;
       int prevOffset = 0;
@@ -55,8 +53,7 @@ public class DefaultTaskParser implements ITaskParser {
           task.setTag(taskTagsByName.get(matcher.group(2).toLowerCase()));
           task.setDescription(matcher.group(3));
           task.setOffset(matcher.start(2));
-          int _offset = task.getOffset();
-          int _countLineBreaks = Strings.countLineBreaks(source, prevOffset, _offset);
+          int _countLineBreaks = Strings.countLineBreaks(source, prevOffset, task.getOffset());
           int _plus = (_countLineBreaks + prevLine);
           task.setLineNumber(_plus);
           prevLine = task.getLineNumber();
@@ -81,11 +78,9 @@ public class DefaultTaskParser implements ITaskParser {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("^.*((");
       final Function1<TaskTag, String> _function = (TaskTag it) -> {
-        String _name = it.getName();
-        return Pattern.quote(_name);
+        return Pattern.quote(it.getName());
       };
-      Iterable<String> _map = IterableExtensions.<TaskTag, String>map(taskTags, _function);
-      String _join = IterableExtensions.join(_map, "|");
+      String _join = IterableExtensions.join(IterableExtensions.<TaskTag, String>map(taskTags, _function), "|");
       _builder.append(_join);
       _builder.append(")(.*)?)$");
       _xblockexpression = Pattern.compile(_builder.toString(), flags);

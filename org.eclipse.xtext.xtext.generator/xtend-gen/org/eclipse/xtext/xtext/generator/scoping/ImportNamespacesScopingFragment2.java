@@ -26,18 +26,12 @@ import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
-import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
@@ -97,9 +91,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   
   protected TypeReference getDefaultScopeProviderSuperClass() {
     TypeReference _xifexpression = null;
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    Grammar _grammar = _language.getGrammar();
-    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
+    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getLanguage().getGrammar());
     if (_inheritsXbase) {
       _xifexpression = TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider");
     } else {
@@ -110,9 +102,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   
   protected TypeReference getDelegateScopeProvider() {
     TypeReference _xifexpression = null;
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    Grammar _grammar = _language.getGrammar();
-    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
+    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getLanguage().getGrammar());
     if (_inheritsXbase) {
       _xifexpression = TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider");
     } else {
@@ -137,25 +127,15 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       } else {
         this.generateJavaScopeProvider();
       }
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-      ManifestAccess _manifest = _runtime.getManifest();
+      ManifestAccess _manifest = this.getProjectConfig().getRuntime().getManifest();
       boolean _tripleNotEquals = (_manifest != null);
       if (_tripleNotEquals) {
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
-        ManifestAccess _manifest_1 = _runtime_1.getManifest();
-        Set<String> _exportedPackages = _manifest_1.getExportedPackages();
-        Grammar _grammar = this.getGrammar();
-        TypeReference _scopeProviderClass = this.getScopeProviderClass(_grammar);
-        String _packageName = _scopeProviderClass.getPackageName();
+        Set<String> _exportedPackages = this.getProjectConfig().getRuntime().getManifest().getExportedPackages();
+        String _packageName = this.getScopeProviderClass(this.getGrammar()).getPackageName();
         _exportedPackages.add(_packageName);
         boolean _isGenerateXtendStub_1 = this.isGenerateXtendStub();
         if (_isGenerateXtendStub_1) {
-          IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-          IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
-          ManifestAccess _manifest_2 = _runtime_2.getManifest();
-          Set<String> _requiredBundles = _manifest_2.getRequiredBundles();
+          Set<String> _requiredBundles = this.getProjectConfig().getRuntime().getManifest().getRequiredBundles();
           _requiredBundles.add("org.eclipse.xtext.xbase.lib");
         }
       }
@@ -165,18 +145,14 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   protected void contributeRuntimeGuiceBindings() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _xifexpression = null;
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    Grammar _grammar = _language.getGrammar();
-    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
+    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getLanguage().getGrammar());
     if (_inheritsXbase) {
       _xifexpression = TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider");
     } else {
       _xifexpression = TypeReference.typeRef(IScopeProvider.class);
     }
     final TypeReference targetType = _xifexpression;
-    Grammar _grammar_1 = this.getGrammar();
-    TypeReference _scopeProviderClass = this.getScopeProviderClass(_grammar_1);
-    bindingFactory.addTypeToType(targetType, _scopeProviderClass);
+    bindingFactory.addTypeToType(targetType, this.getScopeProviderClass(this.getGrammar()));
     String _simpleName = IScopeProvider.class.getSimpleName();
     String _plus = (_simpleName + "Delegate");
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -195,9 +171,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       }
     };
     bindingFactory.addConfiguredBinding(_plus, _client);
-    TypeReference _typeRef = TypeReference.typeRef(IGlobalScopeProvider.class);
-    TypeReference _globalScopeProvider = this.getGlobalScopeProvider();
-    bindingFactory.addTypeToType(_typeRef, _globalScopeProvider);
+    bindingFactory.addTypeToType(TypeReference.typeRef(IGlobalScopeProvider.class), this.getGlobalScopeProvider());
     String _simpleName_1 = IgnoreCaseLinking.class.getSimpleName();
     StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
@@ -210,20 +184,16 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       }
     };
     bindingFactory.addConfiguredBinding(_simpleName_1, _client_1);
-    IXtextGeneratorLanguage _language_1 = this.getLanguage();
-    GuiceModuleAccess _runtimeGenModule = _language_1.getRuntimeGenModule();
-    bindingFactory.contributeTo(_runtimeGenModule);
+    bindingFactory.contributeTo(this.getLanguage().getRuntimeGenModule());
   }
   
   protected void generateGenScopeProvider() {
     TypeReference _xifexpression = null;
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
-      Grammar _grammar = this.getGrammar();
-      _xifexpression = this.getAbstractScopeProviderClass(_grammar);
+      _xifexpression = this.getAbstractScopeProviderClass(this.getGrammar());
     } else {
-      Grammar _grammar_1 = this.getGrammar();
-      _xifexpression = this.getScopeProviderClass(_grammar_1);
+      _xifexpression = this.getScopeProviderClass(this.getGrammar());
     }
     final TypeReference genClass = _xifexpression;
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(genClass);
@@ -241,8 +211,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
         String _simpleName = genClass.getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar = ImportNamespacesScopingFragment2.this.getGrammar();
-        TypeReference _scopeProviderSuperClass = ImportNamespacesScopingFragment2.this.getScopeProviderSuperClass(_grammar);
+        TypeReference _scopeProviderSuperClass = ImportNamespacesScopingFragment2.this.getScopeProviderSuperClass(ImportNamespacesScopingFragment2.this.getGrammar());
         _builder.append(_scopeProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -251,15 +220,11 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       }
     };
     file.setContent(_client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
-    file.writeTo(_srcGen);
+    file.writeTo(this.getProjectConfig().getRuntime().getSrcGen());
   }
   
   protected void generateJavaScopeProvider() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _scopeProviderClass = this.getScopeProviderClass(_grammar);
+    TypeReference _scopeProviderClass = this.getScopeProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -281,13 +246,10 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
         _builder.append("*/");
         _builder.newLine();
         _builder.append("public class ");
-        Grammar _grammar = ImportNamespacesScopingFragment2.this.getGrammar();
-        TypeReference _scopeProviderClass = ImportNamespacesScopingFragment2.this.getScopeProviderClass(_grammar);
-        String _simpleName = _scopeProviderClass.getSimpleName();
+        String _simpleName = ImportNamespacesScopingFragment2.this.getScopeProviderClass(ImportNamespacesScopingFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar_1 = ImportNamespacesScopingFragment2.this.getGrammar();
-        TypeReference _abstractScopeProviderClass = ImportNamespacesScopingFragment2.this.getAbstractScopeProviderClass(_grammar_1);
+        TypeReference _abstractScopeProviderClass = ImportNamespacesScopingFragment2.this.getAbstractScopeProviderClass(ImportNamespacesScopingFragment2.this.getGrammar());
         _builder.append(_abstractScopeProviderClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -296,16 +258,11 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
         _builder.newLine();
       }
     };
-    JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_scopeProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
-    _createJavaFile.writeTo(_src);
+    this.fileAccessFactory.createJavaFile(_scopeProviderClass, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
   
   protected void generateXtendScopeProvider() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _scopeProviderClass = this.getScopeProviderClass(_grammar);
+    TypeReference _scopeProviderClass = this.getScopeProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -327,13 +284,10 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
         _builder.append("*/");
         _builder.newLine();
         _builder.append("class ");
-        Grammar _grammar = ImportNamespacesScopingFragment2.this.getGrammar();
-        TypeReference _scopeProviderClass = ImportNamespacesScopingFragment2.this.getScopeProviderClass(_grammar);
-        String _simpleName = _scopeProviderClass.getSimpleName();
+        String _simpleName = ImportNamespacesScopingFragment2.this.getScopeProviderClass(ImportNamespacesScopingFragment2.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        Grammar _grammar_1 = ImportNamespacesScopingFragment2.this.getGrammar();
-        TypeReference _abstractScopeProviderClass = ImportNamespacesScopingFragment2.this.getAbstractScopeProviderClass(_grammar_1);
+        TypeReference _abstractScopeProviderClass = ImportNamespacesScopingFragment2.this.getAbstractScopeProviderClass(ImportNamespacesScopingFragment2.this.getGrammar());
         _builder.append(_abstractScopeProviderClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -342,11 +296,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
         _builder.newLine();
       }
     };
-    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_scopeProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
-    _createXtendFile.writeTo(_src);
+    this.fileAccessFactory.createXtendFile(_scopeProviderClass, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
   
   @Pure

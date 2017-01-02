@@ -11,7 +11,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
@@ -941,45 +940,35 @@ public class GrammarPDAProviderTest {
       final Grammar grammar = this.parser.parse(_builder);
       this.validator.assertNoErrors(grammar);
       final SerializationContextMap<Pda<ISerState, RuleCall>> pdas = this.pdaProvider.getGrammarPDAs(grammar);
-      List<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>> _values = pdas.values();
       final Consumer<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>> _function = (SerializationContextMap.Entry<Pda<ISerState, RuleCall>> it) -> {
         this.assertNoLeakedGrammarElements(grammar, it.getValue());
       };
-      _values.forEach(_function);
-      List<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>> _values_1 = pdas.values();
+      pdas.values().forEach(_function);
       final Function1<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>, List<ISerializationContext>> _function_1 = (SerializationContextMap.Entry<Pda<ISerState, RuleCall>> it) -> {
         return it.getContexts();
       };
-      List<List<ISerializationContext>> _map = ListExtensions.<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>, List<ISerializationContext>>map(_values_1, _function_1);
-      Iterable<ISerializationContext> _flatten = Iterables.<ISerializationContext>concat(_map);
-      List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(_flatten);
       final Function1<ISerializationContext, String> _function_2 = (ISerializationContext it) -> {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append(it);
         _builder_1.append(":");
         _builder_1.newLineIfNotEmpty();
         _builder_1.append("\t");
-        Pda<ISerState, RuleCall> _get = pdas.get(it);
-        String _listString = this.toListString(_get);
+        String _listString = this.toListString(pdas.get(it));
         _builder_1.append(_listString, "\t");
         _builder_1.newLineIfNotEmpty();
         return _builder_1.toString();
       };
-      List<String> _map_1 = ListExtensions.<ISerializationContext, String>map(_sort, _function_2);
-      return IterableExtensions.join(_map_1);
+      return IterableExtensions.join(ListExtensions.<ISerializationContext, String>map(IterableExtensions.<ISerializationContext>sort(Iterables.<ISerializationContext>concat(ListExtensions.<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>, List<ISerializationContext>>map(pdas.values(), _function_1))), _function_2));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
   private void assertNoLeakedGrammarElements(final Grammar grammar, final Pda<ISerState, RuleCall> pda) {
-    NfaUtil _nfaUtil = new NfaUtil();
-    Set<ISerState> _collect = _nfaUtil.<ISerState>collect(pda);
     final Function1<ISerState, AbstractElement> _function = (ISerState it) -> {
       return it.getGrammarElement();
     };
-    Iterable<AbstractElement> _map = IterableExtensions.<ISerState, AbstractElement>map(_collect, _function);
-    Iterable<AbstractElement> _filterNull = IterableExtensions.<AbstractElement>filterNull(_map);
+    Iterable<AbstractElement> _filterNull = IterableExtensions.<AbstractElement>filterNull(IterableExtensions.<ISerState, AbstractElement>map(new NfaUtil().<ISerState>collect(pda), _function));
     for (final AbstractElement ele : _filterNull) {
       {
         final Grammar actual = GrammarUtil.getGrammar(ele);
@@ -995,22 +984,15 @@ public class GrammarPDAProviderTest {
   
   protected void toDot(final Pda<ISerState, RuleCall> pda, final String name) {
     try {
-      Thread _currentThread = Thread.currentThread();
-      StackTraceElement[] _stackTrace = _currentThread.getStackTrace();
-      StackTraceElement _get = _stackTrace[6];
-      final String test = _get.getMethodName();
-      PdaToDot<Object, Object> _pdaToDot = new PdaToDot<Object, Object>();
-      _pdaToDot.draw(pda, (((("dot2/" + test) + "_") + name) + ".pdf"), "-T pdf");
+      final String test = Thread.currentThread().getStackTrace()[6].getMethodName();
+      new PdaToDot<Object, Object>().draw(pda, (((("dot2/" + test) + "_") + name) + ".pdf"), "-T pdf");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
   private String toListString(final Pda<ISerState, RuleCall> pda) {
-    GrammarElementTitleSwitch _grammarElementTitleSwitch = new GrammarElementTitleSwitch();
-    GrammarElementTitleSwitch _showAssignments = _grammarElementTitleSwitch.showAssignments();
-    GrammarElementTitleSwitch _hideCardinality = _showAssignments.hideCardinality();
-    final GrammarElementTitleSwitch ts = _hideCardinality.showQualified();
+    final GrammarElementTitleSwitch ts = new GrammarElementTitleSwitch().showAssignments().hideCardinality().showQualified();
     final PdaListFormatter<ISerState, RuleCall> formatter = new PdaListFormatter<ISerState, RuleCall>();
     final Function<ISerState, String> _function = (ISerState it) -> {
       String _switchResult = null;
@@ -1024,21 +1006,16 @@ public class GrammarPDAProviderTest {
             _switchResult = "stop";
             break;
           default:
-            AbstractElement _grammarElement = it.getGrammarElement();
-            _switchResult = ts.apply(_grammarElement);
+            _switchResult = ts.apply(it.getGrammarElement());
             break;
         }
       } else {
-        AbstractElement _grammarElement = it.getGrammarElement();
-        _switchResult = ts.apply(_grammarElement);
+        _switchResult = ts.apply(it.getGrammarElement());
       }
       return _switchResult;
     };
     formatter.setStateFormatter(_function);
-    GrammarElementTitleSwitch _grammarElementTitleSwitch_1 = new GrammarElementTitleSwitch();
-    GrammarElementTitleSwitch _showAssignments_1 = _grammarElementTitleSwitch_1.showAssignments();
-    GrammarElementTitleSwitch _hideCardinality_1 = _showAssignments_1.hideCardinality();
-    formatter.setStackitemFormatter(_hideCardinality_1);
+    formatter.setStackitemFormatter(new GrammarElementTitleSwitch().showAssignments().hideCardinality());
     formatter.sortFollowers();
     String _format = formatter.format(pda);
     return (_format + "\n");

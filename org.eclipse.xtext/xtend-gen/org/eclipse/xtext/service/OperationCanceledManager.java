@@ -30,8 +30,7 @@ public class OperationCanceledManager {
     }
     if (!_matched) {
       if (t instanceof RuntimeException) {
-        Class<? extends RuntimeException> _class = ((RuntimeException)t).getClass();
-        String _name = _class.getName();
+        String _name = ((RuntimeException)t).getClass().getName();
         boolean _equals = Objects.equal(_name, "com.intellij.openapi.progress.ProcessCanceledException");
         if (_equals) {
           _matched=true;
@@ -91,8 +90,7 @@ public class OperationCanceledManager {
   }
   
   public void throwOperationCanceledException() {
-    RuntimeException _platformSpecificOperationCanceledException = this.getPlatformSpecificOperationCanceledException();
-    throw this.asWrappingOperationCanceledException(_platformSpecificOperationCanceledException);
+    throw this.asWrappingOperationCanceledException(this.getPlatformSpecificOperationCanceledException());
   }
   
   protected RuntimeException getPlatformSpecificOperationCanceledException() {

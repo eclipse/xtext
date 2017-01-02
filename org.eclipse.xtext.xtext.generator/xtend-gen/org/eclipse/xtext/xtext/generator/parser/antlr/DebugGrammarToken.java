@@ -24,8 +24,7 @@ public class DebugGrammarToken {
     Boolean _get = DebugGrammarToken.store.get();
     boolean _tripleNotEquals = (_get != null);
     if (_tripleNotEquals) {
-      Boolean _get_1 = DebugGrammarToken.store.get();
-      String _valueOf = String.valueOf(_get_1);
+      String _valueOf = String.valueOf(DebugGrammarToken.store.get());
       throw new IllegalStateException(_valueOf);
     }
     return new DebugGrammarToken();

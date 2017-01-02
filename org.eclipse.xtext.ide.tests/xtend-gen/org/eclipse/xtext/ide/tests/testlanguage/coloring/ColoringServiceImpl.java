@@ -11,7 +11,6 @@ import com.google.common.collect.ImmutableList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.lsp4j.ColoringInformation;
@@ -46,7 +45,6 @@ public class ColoringServiceImpl implements IColoringService {
       return CollectionLiterals.<ColoringInformation>emptyList();
     }
     final ImmutableList.Builder<ColoringInformation> builder = ImmutableList.<ColoringInformation>builder();
-    TreeIterator<Object> _allContents = EcoreUtil.<Object>getAllContents(resource, true);
     final Procedure1<Object> _function = (Object it) -> {
       List<INode> _xifexpression = null;
       if ((it instanceof Property)) {
@@ -74,7 +72,7 @@ public class ColoringServiceImpl implements IColoringService {
       };
       nodes.forEach(_function_1);
     };
-    IteratorExtensions.<Object>forEach(_allContents, _function);
+    IteratorExtensions.<Object>forEach(EcoreUtil.<Object>getAllContents(resource, true), _function);
     return builder.build();
   }
 }

@@ -56,11 +56,10 @@ public class XtextProjectConfig implements IXtextProjectConfig {
   private CodeConfig codeConfig;
   
   public void checkConfiguration(final Issues issues) {
-    List<? extends SubProjectConfig> _enabledProjects = this.getEnabledProjects();
     final Consumer<SubProjectConfig> _function = (SubProjectConfig it) -> {
       it.checkConfiguration(issues);
     };
-    _enabledProjects.forEach(_function);
+    this.getEnabledProjects().forEach(_function);
   }
   
   public List<? extends SubProjectConfig> getAllProjects() {
@@ -89,11 +88,10 @@ public class XtextProjectConfig implements IXtextProjectConfig {
     ArrayList<SubProjectConfig> _xblockexpression = null;
     {
       final ArrayList<SubProjectConfig> enabledProjects = CollectionLiterals.<SubProjectConfig>newArrayList();
-      List<? extends SubProjectConfig> _allProjects = this.getAllProjects();
       final Function1<SubProjectConfig, Boolean> _function = (SubProjectConfig it) -> {
         return Boolean.valueOf(it.isEnabled());
       };
-      Iterable<? extends SubProjectConfig> _filter = IterableExtensions.filter(_allProjects, _function);
+      Iterable<? extends SubProjectConfig> _filter = IterableExtensions.filter(this.getAllProjects(), _function);
       Iterables.<SubProjectConfig>addAll(enabledProjects, _filter);
       _xblockexpression = enabledProjects;
     }
@@ -104,11 +102,10 @@ public class XtextProjectConfig implements IXtextProjectConfig {
   public void initialize(final Injector injector) {
     this.setDefaults();
     injector.injectMembers(this);
-    List<? extends SubProjectConfig> _enabledProjects = this.getEnabledProjects();
     final Consumer<SubProjectConfig> _function = (SubProjectConfig it) -> {
       it.initialize(injector);
     };
-    _enabledProjects.forEach(_function);
+    this.getEnabledProjects().forEach(_function);
   }
   
   public void setDefaults() {

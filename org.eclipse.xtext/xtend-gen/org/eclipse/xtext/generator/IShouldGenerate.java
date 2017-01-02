@@ -12,7 +12,6 @@ import com.google.common.base.Objects;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -38,8 +37,7 @@ public interface IShouldGenerate {
     
     @Override
     public boolean shouldGenerate(final Resource resource, final CancelIndicator cancelIndicator) {
-      EList<Resource.Diagnostic> _errors = resource.getErrors();
-      boolean _isEmpty = _errors.isEmpty();
+      boolean _isEmpty = resource.getErrors().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
         return false;

@@ -16,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -93,8 +92,7 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   
   @Override
   public URI getURI(final String path, final String outputConfiguration) {
-    Map<String, String> _pathes = this.getPathes();
-    final String outlet = _pathes.get(outputConfiguration);
+    final String outlet = this.getPathes().get(outputConfiguration);
     if ((outlet == null)) {
       throw new IllegalArgumentException((("A slot with name \'" + outputConfiguration) + "\' has not been configured."));
     }
@@ -121,8 +119,7 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
       final String encoding = this.getEncoding(uri);
       final CharSequence postProcessed = this.postProcess(fileName, outputCfgName, contents, encoding);
       this.generateTrace(fileName, outputCfgName, postProcessed);
-      String _string = postProcessed.toString();
-      byte[] _bytes = _string.getBytes(encoding);
+      byte[] _bytes = postProcessed.toString().getBytes(encoding);
       final ByteArrayInputStream inStream = new ByteArrayInputStream(_bytes);
       this.generateFile(fileName, outputCfgName, inStream);
     } catch (Throwable _e) {

@@ -39,8 +39,7 @@ public abstract class TokenTypeToStringMapper {
       if (_greaterEqualsThan) {
         Integer _key_1 = entry.getKey();
         int _minus = ((_key_1).intValue() - Token.MIN_TOKEN_TYPE);
-        String _calculateId = this.calculateId(entry.getValue(), (entry.getKey()).intValue());
-        this.mappedValues[_minus] = _calculateId;
+        this.mappedValues[_minus] = this.calculateId(entry.getValue(), (entry.getKey()).intValue());
       }
     }
   }

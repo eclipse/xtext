@@ -3,7 +3,6 @@ package org.eclipse.xtext.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -95,8 +94,7 @@ public class XtextVersion {
       final URL url = new URL(_plus);
       is = url.openStream();
       final Manifest manifest = new Manifest(is);
-      Attributes _mainAttributes = manifest.getMainAttributes();
-      return _mainAttributes.getValue("Maven-Version");
+      return manifest.getMainAttributes().getValue("Maven-Version");
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;

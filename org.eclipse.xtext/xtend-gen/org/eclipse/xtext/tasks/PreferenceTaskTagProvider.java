@@ -46,13 +46,9 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
   public final static List<PreferenceKey> KEYS = Collections.<PreferenceKey>unmodifiableList(CollectionLiterals.<PreferenceKey>newArrayList(PreferenceTaskTagProvider.TAGS_KEY, PreferenceTaskTagProvider.PRIORITIES_KEY, PreferenceTaskTagProvider.CASE_SENSITIVE_KEY));
   
   public static List<TaskTag> parseTags(final String names, final String priorities) {
-    Splitter _on = Splitter.on(",");
-    Splitter _omitEmptyStrings = _on.omitEmptyStrings();
-    final Splitter splitter = _omitEmptyStrings.trimResults();
-    Iterable<String> _split = splitter.split(names);
-    final List<String> tags = IterableExtensions.<String>toList(_split);
-    Iterable<String> _split_1 = splitter.split(priorities);
-    final List<String> prios = IterableExtensions.<String>toList(_split_1);
+    final Splitter splitter = Splitter.on(",").omitEmptyStrings().trimResults();
+    final List<String> tags = IterableExtensions.<String>toList(splitter.split(names));
+    final List<String> prios = IterableExtensions.<String>toList(splitter.split(priorities));
     final ArrayList<TaskTag> elements = CollectionLiterals.<TaskTag>newArrayList();
     int _size = tags.size();
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
@@ -66,8 +62,7 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
         if (_greaterEqualsThan) {
           Priority _xtrycatchfinallyexpression = null;
           try {
-            String _get = prios.get((i).intValue());
-            _xtrycatchfinallyexpression = Priority.valueOf(_get);
+            _xtrycatchfinallyexpression = Priority.valueOf(prios.get((i).intValue()));
           } catch (final Throwable _t) {
             if (_t instanceof IllegalArgumentException) {
               final IllegalArgumentException e = (IllegalArgumentException)_t;
@@ -89,21 +84,17 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
   }
   
   public static String serializeTags(final List<TaskTag> tags) {
-    Joiner _on = Joiner.on(",");
     final Function1<TaskTag, String> _function = (TaskTag it) -> {
       return it.getName();
     };
-    List<String> _map = ListExtensions.<TaskTag, String>map(tags, _function);
-    return _on.join(_map);
+    return Joiner.on(",").join(ListExtensions.<TaskTag, String>map(tags, _function));
   }
   
   public static String serializePriorities(final List<TaskTag> tags) {
-    Joiner _on = Joiner.on(",");
     final Function1<TaskTag, Priority> _function = (TaskTag it) -> {
       return it.getPriority();
     };
-    List<Priority> _map = ListExtensions.<TaskTag, Priority>map(tags, _function);
-    return _on.join(_map);
+    return Joiner.on(",").join(ListExtensions.<TaskTag, Priority>map(tags, _function));
   }
   
   private IPreferenceValuesProvider preferenceValuesProvider;

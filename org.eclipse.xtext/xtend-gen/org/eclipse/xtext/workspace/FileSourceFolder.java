@@ -28,9 +28,7 @@ public class FileSourceFolder implements ISourceFolder {
   
   @Override
   public URI getPath() {
-    URI _createFileURI = URI.createFileURI(this.name);
-    URI _path = this.parent.getPath();
-    final URI result = _createFileURI.resolve(_path);
+    final URI result = URI.createFileURI(this.name).resolve(this.parent.getPath());
     boolean _hasTrailingPathSeparator = result.hasTrailingPathSeparator();
     if (_hasTrailingPathSeparator) {
       return result;
@@ -51,8 +49,7 @@ public class FileSourceFolder implements ISourceFolder {
   
   @Override
   public int hashCode() {
-    URI _path = this.getPath();
-    return _path.hashCode();
+    return this.getPath().hashCode();
   }
   
   @Override

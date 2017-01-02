@@ -35,14 +35,10 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.linking.ILinker;
-import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
-import org.eclipse.xtext.linking.impl.LinkingHelper;
-import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.tests.TestErrorAcceptor;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
@@ -142,13 +138,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   @Override
   public XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
     XtextResourceSet rs = this.<XtextResourceSet>get(XtextResourceSet.class);
-    Class<? extends Xtext2EcoreTransformerTest> _class = this.getClass();
-    rs.setClasspathURIContext(_class);
-    IResourceFactory _resourceFactory = this.getResourceFactory();
-    Resource _createResource = _resourceFactory.createResource(uri);
+    rs.setClasspathURIContext(this.getClass());
+    Resource _createResource = this.getResourceFactory().createResource(uri);
     final XtextResource resource = ((XtextResource) _createResource);
-    EList<Resource> _resources = rs.getResources();
-    _resources.add(resource);
+    rs.getResources().add(resource);
     XtextLinker linker = new XtextLinker() {
       @Override
       protected Xtext2EcoreTransformer createTransformer(final Grammar grammar, final IDiagnosticConsumer consumer) {
@@ -160,14 +153,11 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
       }
     };
     ILinker _linker = resource.getLinker();
-    IScopeProvider _scopeProvider = ((XtextLinker) _linker).getScopeProvider();
-    linker.setScopeProvider(_scopeProvider);
+    linker.setScopeProvider(((XtextLinker) _linker).getScopeProvider());
     ILinker _linker_1 = resource.getLinker();
-    ILinkingService _linkingService = ((Linker) _linker_1).getLinkingService();
-    linker.setLinkingService(_linkingService);
+    linker.setLinkingService(((Linker) _linker_1).getLinkingService());
     ILinker _linker_2 = resource.getLinker();
-    LinkingHelper _linkingHelper = ((Linker) _linker_2).getLinkingHelper();
-    linker.setLinkingHelper(_linkingHelper);
+    linker.setLinkingHelper(((Linker) _linker_2).getLinkingHelper());
     XtextLinker.PackageRemover _packageRemover = new XtextLinker.PackageRemover();
     linker.setPackageRemover(_packageRemover);
     LinkingDiagnosticMessageProvider _linkingDiagnosticMessageProvider = new LinkingDiagnosticMessageProvider();
@@ -190,8 +180,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   }
   
   private EAttribute assertAttributeConfiguration(final EClass eClass, final int attributeIndex, final String featureName, final String featureTypeName) {
-    EList<EAttribute> _eAttributes = eClass.getEAttributes();
-    final EAttribute feature = _eAttributes.get(attributeIndex);
+    final EAttribute feature = eClass.getEAttributes().get(attributeIndex);
     Assert.assertEquals(featureName, feature.getName());
     Assert.assertNotNull(feature.getEType());
     Assert.assertEquals(featureTypeName, feature.getEType().getName());
@@ -206,8 +195,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   }
   
   private EReference assertReferenceConfiguration(final EClass eClass, final int referenceIndex, final String featureName, final String featureTypeName, final boolean isContainment, final int lowerBound, final int upperBound) {
-    EList<EReference> _eReferences = eClass.getEReferences();
-    final EReference reference = _eReferences.get(referenceIndex);
+    final EReference reference = eClass.getEReferences().get(referenceIndex);
     Assert.assertEquals(featureName, reference.getName());
     Assert.assertNotNull(reference.getEType());
     Assert.assertEquals(featureTypeName, reference.getEType().getName());
@@ -536,21 +524,17 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar);
     transformer.removeGeneratedPackages();
     transformer.transform();
-    EList<AbstractRule> _rules = grammar.getRules();
-    final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
+    final AbstractRule rule = IterableExtensions.<AbstractRule>head(grammar.getRules());
     TypeRef type = rule.getType();
     Assert.assertNotNull(type);
     Assert.assertNotNull(transformer.getEClassifierInfos().getInfo(type));
-    List<AbstractMetamodelDeclaration> _allMetamodelDeclarations = GrammarUtil.allMetamodelDeclarations(grammar);
-    AbstractMetamodelDeclaration _get = _allMetamodelDeclarations.get(1);
+    AbstractMetamodelDeclaration _get = GrammarUtil.allMetamodelDeclarations(grammar).get(1);
     final ReferencedMetamodel referenced = ((ReferencedMetamodel) _get);
     Assert.assertNotNull(referenced);
     Assert.assertEquals("ecore", referenced.getAlias());
     Assert.assertNull(transformer.getEClassifierInfos().getInfo(referenced, "EString"));
     Assert.assertNull(transformer.getEClassifierInfos().getInfo(referenced, "EInt"));
-    EClassifierInfos _eClassifierInfos = transformer.getEClassifierInfos();
-    List<EClassifierInfos> _parents = _eClassifierInfos.getParents();
-    EClassifierInfos parentInfos = IterableExtensions.<EClassifierInfos>head(_parents);
+    EClassifierInfos parentInfos = IterableExtensions.<EClassifierInfos>head(transformer.getEClassifierInfos().getParents());
     Assert.assertNotNull(parentInfos.getInfo(referenced, "EString"));
     Assert.assertNotNull(parentInfos.getInfo(referenced, "EInt"));
   }
@@ -633,8 +617,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     Assert.assertNotNull(ruleB);
     Assert.assertTrue(ruleA.getESuperTypes().isEmpty());
     Assert.assertEquals(1, ruleB.getESuperTypes().size());
-    EList<EClass> _eSuperTypes = ruleB.getESuperTypes();
-    EClass superClass = IterableExtensions.<EClass>head(_eSuperTypes);
+    EClass superClass = IterableExtensions.<EClass>head(ruleB.getESuperTypes());
     Assert.assertEquals(ruleA, superClass);
   }
   
@@ -1543,14 +1526,12 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
     Assert.assertTrue(resource.getErrors().isEmpty());
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final Grammar parsedGrammar = ((Grammar) _head);
     EList<AbstractRule> _rules = parsedGrammar.getRules();
     for (final AbstractRule rule : _rules) {
       {
-        TypeRef _type = rule.getType();
-        final EClassifier classifier = _type.getClassifier();
+        final EClassifier classifier = rule.getType().getClassifier();
         EPackage pack = classifier.getEPackage();
         Assert.assertEquals("bugreport", pack.getName());
       }
@@ -1560,22 +1541,14 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   @Test
   public void testBug_266807() throws Exception {
     final XtextResourceSet rs = this.<XtextResourceSet>get(XtextResourceSet.class);
-    Class<? extends Xtext2EcoreTransformerTest> _class = this.getClass();
-    rs.setClasspathURIContext(_class);
+    rs.setClasspathURIContext(this.getClass());
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("classpath:/");
-    Class<? extends Xtext2EcoreTransformerTest> _class_1 = this.getClass();
-    Package _package = _class_1.getPackage();
-    String _name = _package.getName();
-    Character _valueOf = Character.valueOf('.');
-    char _charValue = _valueOf.charValue();
-    Character _valueOf_1 = Character.valueOf('/');
-    char _charValue_1 = _valueOf_1.charValue();
-    String _replace = _name.replace(_charValue, _charValue_1);
+    String _replace = this.getClass().getPackage().getName().replace(Character.valueOf('.').charValue(), Character.valueOf('/').charValue());
     _builder.append(_replace);
     _builder.append("/Test.xtext");
-    URI _createURI = URI.createURI(_builder.toString());
-    Resource _createResource = rs.createResource(_createURI, 
+    Resource _createResource = rs.createResource(
+      URI.createURI(_builder.toString()), 
       ContentHandler.UNSPECIFIED_CONTENT_TYPE);
     final XtextResource resource = ((XtextResource) _createResource);
     resource.load(null);
@@ -1717,8 +1690,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EObject _model = this.getModel(xtextGrammar);
     final Grammar grammar = ((Grammar) _model);
     final Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar);
-    EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
-    AbstractMetamodelDeclaration _get = _metamodelDeclarations.get(1);
+    AbstractMetamodelDeclaration _get = grammar.getMetamodelDeclarations().get(1);
     GeneratedMetamodel testMetamodel = ((GeneratedMetamodel) _get);
     final Xtext2EcoreTransformerTest.MockedXtext2EcorePostProcessor postProcessor = new Xtext2EcoreTransformerTest.MockedXtext2EcorePostProcessor(testMetamodel);
     transformer.setPostProcessor(postProcessor);
@@ -1786,8 +1758,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
     Assert.assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    Resource.Diagnostic _get = _errors.get(
+    Resource.Diagnostic _get = resource.getErrors().get(
       0);
     TransformationDiagnostic diagnostic = ((TransformationDiagnostic) _get);
     Assert.assertEquals(grammar.indexOf("mm::Atom"), diagnostic.getOffset());
@@ -2105,15 +2076,12 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammarAsString = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammarAsString, 0);
     Assert.assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final Grammar grammar = ((Grammar) _head);
-    EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
-    AbstractMetamodelDeclaration _get = _metamodelDeclarations.get(1);
+    AbstractMetamodelDeclaration _get = grammar.getMetamodelDeclarations().get(1);
     GeneratedMetamodel generatedMetamodel = ((GeneratedMetamodel) _get);
     Assert.assertEquals("myDsl", generatedMetamodel.getName());
-    EPackage _ePackage = generatedMetamodel.getEPackage();
-    EClassifier _type = this.<EClassifier>type(_ePackage, "CreatedType");
+    EClassifier _type = this.<EClassifier>type(generatedMetamodel.getEPackage(), "CreatedType");
     EClass createdType = ((EClass) _type);
     Assert.assertEquals(this.<EStructuralFeature>feature(createdType, "enumFeature").getEType(), 
       this.<EStructuralFeature>feature(createdType, "otherEnumFeature").getEType());
@@ -2132,16 +2100,13 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammarAsString = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammarAsString);
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final Grammar grammar = ((Grammar) _head);
-    EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
-    AbstractMetamodelDeclaration _head_1 = IterableExtensions.<AbstractMetamodelDeclaration>head(_metamodelDeclarations);
+    AbstractMetamodelDeclaration _head_1 = IterableExtensions.<AbstractMetamodelDeclaration>head(grammar.getMetamodelDeclarations());
     GeneratedMetamodel generatedMetamodel = ((GeneratedMetamodel) _head_1);
     Assert.assertEquals("myDsl", generatedMetamodel.getName());
     Assert.assertEquals(1, generatedMetamodel.getEPackage().getEClassifiers().size());
-    EPackage _ePackage = generatedMetamodel.getEPackage();
-    EClassifier _type = this.<EClassifier>type(_ePackage, "Model");
+    EClassifier _type = this.<EClassifier>type(generatedMetamodel.getEPackage(), "Model");
     EClass createdModel = ((EClass) _type);
     Assert.assertEquals(EcorePackage.Literals.ESTRING, this.<EStructuralFeature>feature(createdModel, "name").getEType());
     EList<AbstractRule> _rules = grammar.getRules();
@@ -2833,10 +2798,8 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   public void testBug413171_01() throws Exception {
     EObject _model = this.getModel(this.readFileIntoString("org/eclipse/xtext/xtext/ecoreInference/Bug413171_01.xtext.txt"));
     final Grammar grammar = ((Grammar) _model);
-    EList<AbstractRule> _rules = grammar.getRules();
-    final AbstractRule parserRule = _rules.get(2);
-    TypeRef _type = parserRule.getType();
-    final EClassifier classifier = _type.getClassifier();
+    final AbstractRule parserRule = grammar.getRules().get(2);
+    final EClassifier classifier = parserRule.getType().getClassifier();
     Assert.assertTrue(parserRule.getName(), (classifier instanceof EDataType));
   }
   
@@ -2844,10 +2807,8 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   public void testBug413171_02() throws Exception {
     EObject _model = this.getModel(this.readFileIntoString("org/eclipse/xtext/xtext/ecoreInference/Bug413171_02.xtext.txt"));
     final Grammar grammar = ((Grammar) _model);
-    EList<AbstractRule> _rules = grammar.getRules();
-    final AbstractRule parserRule = _rules.get(2);
-    TypeRef _type = parserRule.getType();
-    final EClassifier classifier = _type.getClassifier();
+    final AbstractRule parserRule = grammar.getRules().get(2);
+    final EClassifier classifier = parserRule.getType().getClassifier();
     Assert.assertTrue(parserRule.getName(), (classifier instanceof EDataType));
   }
   

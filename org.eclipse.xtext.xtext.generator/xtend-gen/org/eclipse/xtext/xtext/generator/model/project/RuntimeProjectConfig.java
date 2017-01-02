@@ -38,19 +38,10 @@ public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntim
    */
   @Override
   public String getEcoreModelFolder() {
-    String _path = this.ecoreModel.getPath();
-    IXtextGeneratorFileSystemAccess _root = this.getRoot();
-    String _path_1 = _root.getPath();
-    boolean _startsWith = _path.startsWith(_path_1);
+    boolean _startsWith = this.ecoreModel.getPath().startsWith(this.getRoot().getPath());
     if (_startsWith) {
-      String _path_2 = this.ecoreModel.getPath();
-      IXtextGeneratorFileSystemAccess _root_1 = this.getRoot();
-      String _path_3 = _root_1.getPath();
-      int _length = _path_3.length();
-      String _substring = _path_2.substring(_length);
-      final String relativePath = _substring.replace("\\", "/");
-      CharMatcher _is = CharMatcher.is('/');
-      return _is.trimFrom(relativePath);
+      final String relativePath = this.ecoreModel.getPath().substring(this.getRoot().getPath().length()).replace("\\", "/");
+      return CharMatcher.is('/').trimFrom(relativePath);
     }
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Could not derive the Ecore model folder from the project configuration. ");
@@ -58,12 +49,11 @@ public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntim
     _builder.append("Please make sure that \'root\' is a prefix of \'ecoreModel\'.");
     _builder.newLine();
     _builder.append("was (root=\'");
-    IXtextGeneratorFileSystemAccess _root_2 = this.getRoot();
-    String _path_4 = _root_2.getPath();
-    _builder.append(_path_4);
+    String _path = this.getRoot().getPath();
+    _builder.append(_path);
     _builder.append("\', ecoreModel=\'");
-    String _path_5 = this.ecoreModel.getPath();
-    _builder.append(_path_5);
+    String _path_1 = this.ecoreModel.getPath();
+    _builder.append(_path_1);
     _builder.append("\')");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

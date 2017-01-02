@@ -27,7 +27,8 @@ public class WizardConfigTest {
   
   @Before
   public void createInjector() {
-    this.injector = Guice.createInjector(new DefaultGeneratorModule());
+    DefaultGeneratorModule _defaultGeneratorModule = new DefaultGeneratorModule();
+    this.injector = Guice.createInjector(_defaultGeneratorModule);
   }
   
   @Test
@@ -45,12 +46,8 @@ public class WizardConfigTest {
     };
     final StandardProjectConfig cfg = ObjectExtensions.<StandardProjectConfig>operator_doubleArrow(_standardProjectConfig, _function);
     cfg.initialize(this.injector);
-    BundleProjectConfig _runtimeTest = cfg.getRuntimeTest();
-    String _name = _runtimeTest.getName();
-    Assert.assertEquals("com.acme", _name);
-    BundleProjectConfig _eclipsePluginTest = cfg.getEclipsePluginTest();
-    String _name_1 = _eclipsePluginTest.getName();
-    Assert.assertEquals("com.acme.ui", _name_1);
+    Assert.assertEquals("com.acme", cfg.getRuntimeTest().getName());
+    Assert.assertEquals("com.acme.ui", cfg.getEclipsePluginTest().getName());
   }
   
   @Test
@@ -67,11 +64,7 @@ public class WizardConfigTest {
     };
     final StandardProjectConfig cfg = ObjectExtensions.<StandardProjectConfig>operator_doubleArrow(_standardProjectConfig, _function);
     cfg.initialize(this.injector);
-    BundleProjectConfig _runtimeTest = cfg.getRuntimeTest();
-    String _name = _runtimeTest.getName();
-    Assert.assertEquals("com.acme.tests", _name);
-    BundleProjectConfig _eclipsePluginTest = cfg.getEclipsePluginTest();
-    String _name_1 = _eclipsePluginTest.getName();
-    Assert.assertEquals("com.acme.ui.tests", _name_1);
+    Assert.assertEquals("com.acme.tests", cfg.getRuntimeTest().getName());
+    Assert.assertEquals("com.acme.ui.tests", cfg.getEclipsePluginTest().getName());
   }
 }

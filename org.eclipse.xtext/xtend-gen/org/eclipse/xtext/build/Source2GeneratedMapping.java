@@ -77,11 +77,10 @@ public class Source2GeneratedMapping implements Externalizable {
   }
   
   public void deleteGenerated(final URI generated) {
-    Collection<URI> _removeAll = this.generated2source.removeAll(generated);
     final Consumer<URI> _function = (URI it) -> {
       this.source2generated.remove(it, generated);
     };
-    _removeAll.forEach(_function);
+    this.generated2source.removeAll(generated).forEach(_function);
     this.generated2OutputConfigName.remove(generated);
   }
   
@@ -90,18 +89,15 @@ public class Source2GeneratedMapping implements Externalizable {
   }
   
   public List<URI> getGenerated(final URI source) {
-    Collection<URI> _get = this.source2generated.get(source);
-    return Lists.<URI>newArrayList(_get);
+    return Lists.<URI>newArrayList(this.source2generated.get(source));
   }
   
   public List<URI> getSource(final URI generated) {
-    Collection<URI> _get = this.generated2source.get(generated);
-    return Lists.<URI>newArrayList(_get);
+    return Lists.<URI>newArrayList(this.generated2source.get(generated));
   }
   
   public List<URI> getAllGenerated() {
-    Set<URI> _keySet = this.generated2source.keySet();
-    return Lists.<URI>newArrayList(_keySet);
+    return Lists.<URI>newArrayList(this.generated2source.keySet());
   }
   
   @Override
@@ -110,14 +106,12 @@ public class Source2GeneratedMapping implements Externalizable {
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, numEntries, true);
     for (final Integer i : _doubleDotLessThan) {
       {
-        String _readUTF = in.readUTF();
-        final URI source = URI.createURI(_readUTF);
+        final URI source = URI.createURI(in.readUTF());
         final int numGenerated = in.readInt();
         ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, numGenerated, true);
         for (final Integer j : _doubleDotLessThan_1) {
           {
-            String _readUTF_1 = in.readUTF();
-            final URI generated = URI.createURI(_readUTF_1);
+            final URI generated = URI.createURI(in.readUTF());
             final String outputConfig = in.readUTF();
             this.addSource2Generated(source, generated, outputConfig);
           }
@@ -128,23 +122,15 @@ public class Source2GeneratedMapping implements Externalizable {
   
   @Override
   public void writeExternal(final ObjectOutput out) throws IOException {
-    Map<URI, Collection<URI>> _asMap = this.source2generated.asMap();
-    final Set<Map.Entry<URI, Collection<URI>>> entries = _asMap.entrySet();
-    int _size = entries.size();
-    out.writeInt(_size);
+    final Set<Map.Entry<URI, Collection<URI>>> entries = this.source2generated.asMap().entrySet();
+    out.writeInt(entries.size());
     final Consumer<Map.Entry<URI, Collection<URI>>> _function = (Map.Entry<URI, Collection<URI>> it) -> {
       try {
-        URI _key = it.getKey();
-        String _string = _key.toString();
-        out.writeUTF(_string);
-        Collection<URI> _value = it.getValue();
-        int _size_1 = _value.size();
-        out.writeInt(_size_1);
-        Collection<URI> _value_1 = it.getValue();
+        out.writeUTF(it.getKey().toString());
+        out.writeInt(it.getValue().size());
         final Consumer<URI> _function_1 = (URI it_1) -> {
           try {
-            String _string_1 = it_1.toString();
-            out.writeUTF(_string_1);
+            out.writeUTF(it_1.toString());
             String _elvis = null;
             String _get = this.generated2OutputConfigName.get(it_1);
             if (_get != null) {
@@ -157,7 +143,7 @@ public class Source2GeneratedMapping implements Externalizable {
             throw Exceptions.sneakyThrow(_e);
           }
         };
-        _value_1.forEach(_function_1);
+        it.getValue().forEach(_function_1);
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }

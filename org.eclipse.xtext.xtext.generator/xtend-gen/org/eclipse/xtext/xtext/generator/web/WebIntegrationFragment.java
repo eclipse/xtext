@@ -18,7 +18,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -38,16 +37,11 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
-import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
 import org.eclipse.xtext.xtext.generator.util.GeneratorOption;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
@@ -143,9 +137,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
    */
   @Mandatory
   public void setFramework(final String frameworkName) {
-    String _upperCase = frameworkName.toUpperCase();
-    WebIntegrationFragment.Framework _valueOf = WebIntegrationFragment.Framework.valueOf(_upperCase);
-    this.framework.set(_valueOf);
+    this.framework.set(WebIntegrationFragment.Framework.valueOf(frameworkName.toUpperCase()));
   }
   
   /**
@@ -275,11 +267,11 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   @Override
   public void generate() {
     if (((this.highlightingModuleName != null) && this.highlightingModuleName.endsWith(".js"))) {
-      this.highlightingModuleName = this.highlightingModuleName.substring(0, (this.highlightingModuleName.length() - 3));
+      int _length = this.highlightingModuleName.length();
+      int _minus = (_length - 3);
+      this.highlightingModuleName = this.highlightingModuleName.substring(0, _minus);
     }
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    List<String> _fileExtensions = _language.getFileExtensions();
-    final String langId = IterableExtensions.<String>head(_fileExtensions);
+    final String langId = IterableExtensions.<String>head(this.getLanguage().getFileExtensions());
     String _elvis = null;
     if (this.highlightingModuleName != null) {
       _elvis = this.highlightingModuleName;
@@ -333,27 +325,23 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   }.apply();
   
   protected void generateJsHighlighting(final String langId) {
-    Grammar _grammar = this.getGrammar();
-    final Set<String> allKeywords = GrammarUtil.getAllKeywords(_grammar);
+    final Set<String> allKeywords = GrammarUtil.getAllKeywords(this.getGrammar());
     final ArrayList<String> wordKeywords = CollectionLiterals.<String>newArrayList();
     final ArrayList<String> nonWordKeywords = CollectionLiterals.<String>newArrayList();
     final Pattern keywordsFilterPattern = Pattern.compile(this.keywordsFilter);
     final Pattern wordKeywordPattern = Pattern.compile("\\w(.*\\w)?");
     final Function1<String, Boolean> _function = (String it) -> {
-      Matcher _matcher = keywordsFilterPattern.matcher(it);
-      return Boolean.valueOf(_matcher.matches());
+      return Boolean.valueOf(keywordsFilterPattern.matcher(it).matches());
     };
-    Iterable<String> _filter = IterableExtensions.<String>filter(allKeywords, _function);
     final Consumer<String> _function_1 = (String it) -> {
-      Matcher _matcher = wordKeywordPattern.matcher(it);
-      boolean _matches = _matcher.matches();
+      boolean _matches = wordKeywordPattern.matcher(it).matches();
       if (_matches) {
         wordKeywords.add(it);
       } else {
         nonWordKeywords.add(it);
       }
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.<String>filter(allKeywords, _function).forEach(_function_1);
     Collections.<String>sort(wordKeywords);
     Collections.<String>sort(nonWordKeywords);
     final TextFileAccess jsFile = this.fileAccessFactory.createTextFile();
@@ -689,10 +677,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           break;
       }
     }
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IWebProjectConfig _web = _projectConfig.getWeb();
-    IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
-    jsFile.writeTo(_assets);
+    jsFile.writeTo(this.getProjectConfig().getWeb().getAssets());
   }
   
   protected CharSequence generateKeywords(final List<String> wordKeywords, final List<String> nonWordKeywords) {
@@ -775,10 +760,8 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   }
   
   protected Collection<String> createOrionPatterns(final String langId, final Set<String> keywords) {
-    Grammar _grammar = this.getGrammar();
-    final boolean inheritsTerminals = GrammarUtil2.inherits(_grammar, GrammarUtil2.TERMINALS);
-    Grammar _grammar_1 = this.getGrammar();
-    final boolean inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar_1);
+    final boolean inheritsTerminals = GrammarUtil2.inherits(this.getGrammar(), GrammarUtil2.TERMINALS);
+    final boolean inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
     final ArrayList<String> patterns = new ArrayList<String>();
     if ((this.enabledPatterns.contains("comment_singleLine") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("comment_singleLine"))))) {
       patterns.add("{include: \"orion.c-like#comment_singleLine\"}");
@@ -824,10 +807,8 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   }
   
   protected Multimap<String, String> createCodeMirrorPatterns(final String langId, final Set<String> keywords) {
-    Grammar _grammar = this.getGrammar();
-    final boolean inheritsTerminals = GrammarUtil2.inherits(_grammar, GrammarUtil2.TERMINALS);
-    Grammar _grammar_1 = this.getGrammar();
-    final boolean inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar_1);
+    final boolean inheritsTerminals = GrammarUtil2.inherits(this.getGrammar(), GrammarUtil2.TERMINALS);
+    final boolean inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
     final LinkedHashMultimap<String, String> patterns = LinkedHashMultimap.<String, String>create();
     final boolean hasSingleLineComment = (this.enabledPatterns.contains("comment_singleLine") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("comment_singleLine"))));
     if (hasSingleLineComment) {
@@ -928,10 +909,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   }
   
   protected void generateIndexDoc(final String hlModName) {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IWebProjectConfig _web = _projectConfig.getWeb();
-    IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
-    boolean _isFile = _assets.isFile("index.html");
+    boolean _isFile = this.getProjectConfig().getWeb().getAssets().isFile("index.html");
     if (_isFile) {
       return;
     }
@@ -1306,8 +1284,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("<h1>Example ");
-        Grammar _grammar = WebIntegrationFragment.this.getGrammar();
-        String _simpleName = GrammarUtil.getSimpleName(_grammar);
+        String _simpleName = GrammarUtil.getSimpleName(WebIntegrationFragment.this.getGrammar());
         _builder.append(_simpleName, "\t\t");
         _builder.append(" Web Editor</h1>");
         _builder.newLineIfNotEmpty();
@@ -1319,9 +1296,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("<div id=\"xtext-editor\" data-editor-xtext-lang=\"");
-        IXtextGeneratorLanguage _language = WebIntegrationFragment.this.getLanguage();
-        List<String> _fileExtensions = _language.getFileExtensions();
-        String _head = IterableExtensions.<String>head(_fileExtensions);
+        String _head = IterableExtensions.<String>head(WebIntegrationFragment.this.getLanguage().getFileExtensions());
         _builder.append(_head, "\t\t");
         _builder.append("\"></div>");
         _builder.newLineIfNotEmpty();
@@ -1338,17 +1313,11 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       }
     };
     indexFile.setContent(_client);
-    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
-    IXtextGeneratorFileSystemAccess _assets_1 = _web_1.getAssets();
-    indexFile.writeTo(_assets_1);
+    indexFile.writeTo(this.getProjectConfig().getWeb().getAssets());
   }
   
   protected void generateStyleSheet() {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IWebProjectConfig _web = _projectConfig.getWeb();
-    IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
-    boolean _isFile = _assets.isFile("style.css");
+    boolean _isFile = this.getProjectConfig().getWeb().getAssets().isFile("style.css");
     if (_isFile) {
       return;
     }
@@ -1545,15 +1514,11 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       }
     };
     styleFile.setContent(_client);
-    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
-    IXtextGeneratorFileSystemAccess _assets_1 = _web_1.getAssets();
-    styleFile.writeTo(_assets_1);
+    styleFile.writeTo(this.getProjectConfig().getWeb().getAssets());
   }
   
   protected void generateServerLauncher() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _serverLauncherClass = this.getServerLauncherClass(_grammar);
+    TypeReference _serverLauncherClass = this.getServerLauncherClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1569,9 +1534,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.append("*/");
         _builder.newLine();
         _builder.append("class ");
-        Grammar _grammar = WebIntegrationFragment.this.getGrammar();
-        TypeReference _serverLauncherClass = WebIntegrationFragment.this.getServerLauncherClass(_grammar);
-        String _simpleName = _serverLauncherClass.getSimpleName();
+        String _simpleName = WebIntegrationFragment.this.getServerLauncherClass(WebIntegrationFragment.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -1595,14 +1558,8 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
         _builder.append("resourceBase = \'");
-        IXtextProjectConfig _projectConfig = WebIntegrationFragment.this.getProjectConfig();
-        IWebProjectConfig _web = _projectConfig.getWeb();
-        IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
-        String _path = _assets.getPath();
-        IXtextProjectConfig _projectConfig_1 = WebIntegrationFragment.this.getProjectConfig();
-        IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
-        IXtextGeneratorFileSystemAccess _root = _web_1.getRoot();
-        String _path_1 = _root.getPath();
+        String _path = WebIntegrationFragment.this.getProjectConfig().getWeb().getAssets().getPath();
+        String _path_1 = WebIntegrationFragment.this.getProjectConfig().getWeb().getRoot().getPath();
         String _plus = (_path_1 + "/");
         String _replace = _path.replace(_plus, "");
         _builder.append(_replace, "\t\t\t");
@@ -1648,10 +1605,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.jetty.webapp.WebInfConfiguration");
         _builder.append(_typeRef_7, "\t\t\t");
         _builder.append(".CONTAINER_JAR_PATTERN, \'.*/");
-        IXtextProjectConfig _projectConfig_2 = WebIntegrationFragment.this.getProjectConfig();
-        IWebProjectConfig _web_2 = _projectConfig_2.getWeb();
-        String _name = _web_2.getName();
-        String _replace_1 = _name.replace(".", "\\\\.");
+        String _replace_1 = WebIntegrationFragment.this.getProjectConfig().getWeb().getName().replace(".", "\\\\.");
         _builder.append(_replace_1, "\t\t\t");
         _builder.append("/.*,.*\\\\.jar\')");
         _builder.newLineIfNotEmpty();
@@ -1666,9 +1620,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.jetty.util.log.Slf4jLog");
         _builder.append(_typeRef_8, "\t\t");
         _builder.append("(");
-        Grammar _grammar_1 = WebIntegrationFragment.this.getGrammar();
-        TypeReference _serverLauncherClass_1 = WebIntegrationFragment.this.getServerLauncherClass(_grammar_1);
-        String _simpleName_1 = _serverLauncherClass_1.getSimpleName();
+        String _simpleName_1 = WebIntegrationFragment.this.getServerLauncherClass(WebIntegrationFragment.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName_1, "\t\t");
         _builder.append(".name)");
         _builder.newLineIfNotEmpty();
@@ -1730,16 +1682,11 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.newLine();
       }
     };
-    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_serverLauncherClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IWebProjectConfig _web = _projectConfig.getWeb();
-    IXtextGeneratorFileSystemAccess _src = _web.getSrc();
-    _createXtendFile.writeTo(_src);
+    this.fileAccessFactory.createXtendFile(_serverLauncherClass, _client).writeTo(this.getProjectConfig().getWeb().getSrc());
   }
   
   protected void generateServlet() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _servletClass = this.getServletClass(_grammar);
+    TypeReference _servletClass = this.getServletClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1761,9 +1708,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           }
         }
         _builder.append("class ");
-        Grammar _grammar = WebIntegrationFragment.this.getGrammar();
-        TypeReference _servletClass = WebIntegrationFragment.this.getServletClass(_grammar);
-        String _simpleName = _servletClass.getSimpleName();
+        String _simpleName = WebIntegrationFragment.this.getServletClass(WebIntegrationFragment.this.getGrammar()).getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.web.servlet.XtextServlet");
@@ -1786,8 +1731,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("val injector = new ");
-        Grammar _grammar_1 = WebIntegrationFragment.this.getGrammar();
-        TypeReference _webSetup = WebIntegrationFragment.this._xtextGeneratorNaming.getWebSetup(_grammar_1);
+        TypeReference _webSetup = WebIntegrationFragment.this._xtextGeneratorNaming.getWebSetup(WebIntegrationFragment.this.getGrammar());
         _builder.append(_webSetup, "\t\t");
         _builder.append("().createInjectorAndDoEMFRegistration()");
         _builder.newLineIfNotEmpty();
@@ -1828,18 +1772,11 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.newLine();
       }
     };
-    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_servletClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IWebProjectConfig _web = _projectConfig.getWeb();
-    IXtextGeneratorFileSystemAccess _src = _web.getSrc();
-    _createXtendFile.writeTo(_src);
+    this.fileAccessFactory.createXtendFile(_servletClass, _client).writeTo(this.getProjectConfig().getWeb().getSrc());
   }
   
   protected void generateWebXml() {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IWebProjectConfig _web = _projectConfig.getWeb();
-    IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
-    boolean _isFile = _assets.isFile("WEB-INF/web.xml");
+    boolean _isFile = this.getProjectConfig().getWeb().getAssets().isFile("WEB-INF/web.xml");
     if (_isFile) {
       return;
     }
@@ -1899,8 +1836,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("<servlet-class>");
-            Grammar _grammar = WebIntegrationFragment.this.getGrammar();
-            TypeReference _servletClass = WebIntegrationFragment.this.getServletClass(_grammar);
+            TypeReference _servletClass = WebIntegrationFragment.this.getServletClass(WebIntegrationFragment.this.getGrammar());
             _builder.append(_servletClass, "\t\t");
             _builder.append("</servlet-class>");
             _builder.newLineIfNotEmpty();
@@ -2026,10 +1962,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       }
     };
     xmlFile.setContent(_client);
-    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
-    IXtextGeneratorFileSystemAccess _assets_1 = _web_1.getAssets();
-    xmlFile.writeTo(_assets_1);
+    xmlFile.writeTo(this.getProjectConfig().getWeb().getAssets());
   }
   
   @Pure

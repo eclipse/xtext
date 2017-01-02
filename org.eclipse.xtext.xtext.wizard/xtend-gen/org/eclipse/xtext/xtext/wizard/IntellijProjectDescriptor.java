@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.wizard;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -70,9 +69,7 @@ public class IntellijProjectDescriptor extends ProjectDescriptor {
       _builder_1.append("pluginRepositories {");
       _builder_1.newLine();
       {
-        WizardConfiguration _config = this.getConfig();
-        XtextVersion _xtextVersion = _config.getXtextVersion();
-        boolean _isSnapshot = _xtextVersion.isSnapshot();
+        boolean _isSnapshot = this.getConfig().getXtextVersion().isSnapshot();
         if (_isSnapshot) {
           _builder_1.append("\t\t");
           _builder_1.append("url \"https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml\"");

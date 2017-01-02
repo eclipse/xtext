@@ -8,11 +8,9 @@
 package org.eclipse.xtext.tests;
 
 import com.google.inject.Inject;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
@@ -26,9 +24,7 @@ public class ImportURIScopingFragment2 extends ImportNamespacesScopingFragment2 
   @Override
   public TypeReference getDelegateScopeProvider() {
     TypeReference _xifexpression = null;
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    Grammar _grammar = _language.getGrammar();
-    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
+    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getLanguage().getGrammar());
     if (_inheritsXbase) {
       _xifexpression = TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider");
     } else {

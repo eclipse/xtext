@@ -16,12 +16,9 @@ import java.io.ObjectInputStream;
 import java.util.Map;
 import java.util.zip.ZipInputStream;
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.nodemodel.impl.SerializableNodeModel;
@@ -106,8 +103,7 @@ public class ResourceStorageLoadable {
       final ObjectInputStream objectIn = new ObjectInputStream(inputStream);
       Object _readObject = objectIn.readObject();
       final SerializableResourceDescription description = ((SerializableResourceDescription) _readObject);
-      URI _uRI = resource.getURI();
-      description.updateResourceURI(_uRI);
+      description.updateResourceURI(resource.getURI());
       resource.setResourceDescription(description);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -116,31 +112,22 @@ public class ResourceStorageLoadable {
   
   protected void readNodeModel(final StorageAwareResource resource, final InputStream inputStream) throws IOException {
     final SerializableNodeModel serializableNodeModel = new SerializableNodeModel(resource);
-    ResourceSet _resourceSet = resource.getResourceSet();
-    URIConverter _uRIConverter = _resourceSet.getURIConverter();
-    URI _uRI = resource.getURI();
-    ResourceSet _resourceSet_1 = resource.getResourceSet();
-    Map<Object, Object> _loadOptions = _resourceSet_1.getLoadOptions();
-    boolean _exists = _uRIConverter.exists(_uRI, _loadOptions);
+    boolean _exists = resource.getResourceSet().getURIConverter().exists(resource.getURI(), resource.getResourceSet().getLoadOptions());
     boolean _not = (!_exists);
     if (_not) {
-      URI _uRI_1 = resource.getURI();
-      String _plus = ("Skipping loading node model for synthetic resource " + _uRI_1);
+      URI _uRI = resource.getURI();
+      String _plus = ("Skipping loading node model for synthetic resource " + _uRI);
       ResourceStorageLoadable.LOG.info(_plus);
       return;
     }
-    ResourceSet _resourceSet_2 = resource.getResourceSet();
-    URIConverter _uRIConverter_1 = _resourceSet_2.getURIConverter();
-    URI _uRI_2 = resource.getURI();
-    final InputStream stream = _uRIConverter_1.createInputStream(_uRI_2);
+    final InputStream stream = resource.getResourceSet().getURIConverter().createInputStream(resource.getURI());
     String _encoding = resource.getEncoding();
     final InputStreamReader in = new InputStreamReader(stream, _encoding);
     final String completeContent = CharStreams.toString(in);
     final DeserializationConversionContext deserializationContext = new DeserializationConversionContext(resource, completeContent);
     final DataInputStream dataIn = new DataInputStream(inputStream);
     serializableNodeModel.readObjectData(dataIn, deserializationContext);
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     boolean _hasErrors = deserializationContext.hasErrors();
     ParseResult _parseResult = new ParseResult(_head, serializableNodeModel.root, _hasErrors);
     resource.setParseResult(_parseResult);

@@ -14,11 +14,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -29,11 +27,9 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.EPackageInfo;
-import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
@@ -172,15 +168,11 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       "com.ibm.icu");
     boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
     if (_isFromExistingEcoreModels) {
-      WizardConfiguration _config = this.getConfig();
-      Ecore2XtextConfiguration _ecore2Xtext = _config.getEcore2Xtext();
-      Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
       final Function1<EPackageInfo, Boolean> _function = (EPackageInfo it) -> {
-        URI _genmodelURI = it.getGenmodelURI();
-        String _fileExtension = _genmodelURI.fileExtension();
+        String _fileExtension = it.getGenmodelURI().fileExtension();
         return Boolean.valueOf(Objects.equal(_fileExtension, "xcore"));
       };
-      boolean _exists = IterableExtensions.<EPackageInfo>exists(_ePackageInfos, _function);
+      boolean _exists = IterableExtensions.<EPackageInfo>exists(this.getConfig().getEcore2Xtext().getEPackageInfos(), _function);
       if (_exists) {
         result.add("org.eclipse.emf.ecore.xcore");
       }
@@ -211,23 +203,18 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     Iterables.<AbstractFile>addAll(files, _files);
     PlainTextFile _grammarFile = this.getGrammarFile();
     files.add(_grammarFile);
-    String _workflowFilePath = this.getWorkflowFilePath();
-    CharSequence _workflow = this.workflow();
-    PlainTextFile _file = this.file(Outlet.MAIN_JAVA, _workflowFilePath, _workflow);
+    PlainTextFile _file = this.file(Outlet.MAIN_JAVA, this.getWorkflowFilePath(), this.workflow());
     files.add(_file);
     PlainTextFile _workflowLaunchConfigFile = this.getWorkflowLaunchConfigFile();
     files.add(_workflowLaunchConfigFile);
-    WizardConfiguration _config = this.getConfig();
-    RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
-    boolean _isEclipsePluginProject = _runtimeProject.isEclipsePluginProject();
+    boolean _isEclipsePluginProject = this.getConfig().getRuntimeProject().isEclipsePluginProject();
     if (_isEclipsePluginProject) {
       PlainTextFile _launchConfigFile = this.getLaunchConfigFile();
       files.add(_launchConfigFile);
     }
     boolean _isPlainMavenBuild = this.isPlainMavenBuild();
     if (_isPlainMavenBuild) {
-      CharSequence _jarDescriptor = this.jarDescriptor();
-      PlainTextFile _file_1 = this.file(Outlet.ROOT, "jar-with-ecore-model.xml", _jarDescriptor);
+      PlainTextFile _file_1 = this.file(Outlet.ROOT, "jar-with-ecore-model.xml", this.jarDescriptor());
       files.add(_file_1);
     }
     return files;
@@ -238,21 +225,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   }
   
   public PlainTextFile getGrammarFile() {
-    String _grammarFilePath = this.getGrammarFilePath();
-    CharSequence _grammar = this.grammar();
-    return this.file(Outlet.MAIN_JAVA, _grammarFilePath, _grammar);
+    return this.file(Outlet.MAIN_JAVA, this.getGrammarFilePath(), this.grammar());
   }
   
   public String getGrammarFilePath() {
     StringConcatenation _builder = new StringConcatenation();
-    WizardConfiguration _config = this.getConfig();
-    LanguageDescriptor _language = _config.getLanguage();
-    String _basePackagePath = _language.getBasePackagePath();
+    String _basePackagePath = this.getConfig().getLanguage().getBasePackagePath();
     _builder.append(_basePackagePath);
     _builder.append("/");
-    WizardConfiguration _config_1 = this.getConfig();
-    LanguageDescriptor _language_1 = _config_1.getLanguage();
-    String _simpleName = _language_1.getSimpleName();
+    String _simpleName = this.getConfig().getLanguage().getSimpleName();
     _builder.append(_simpleName);
     _builder.append(".xtext");
     return _builder.toString();
@@ -262,8 +243,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     CharSequence _xifexpression = null;
     boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
     if (_isFromExistingEcoreModels) {
-      WizardConfiguration _config = this.getConfig();
-      _xifexpression = this.grammarCreator.grammar(_config);
+      _xifexpression = this.grammarCreator.grammar(this.getConfig());
     } else {
       _xifexpression = this.defaultGrammar();
     }
@@ -273,23 +253,16 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   private CharSequence defaultGrammar() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar ");
-    WizardConfiguration _config = this.getConfig();
-    LanguageDescriptor _language = _config.getLanguage();
-    String _name = _language.getName();
+    String _name = this.getConfig().getLanguage().getName();
     _builder.append(_name);
     _builder.append(" with org.eclipse.xtext.common.Terminals");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("generate ");
-    WizardConfiguration _config_1 = this.getConfig();
-    LanguageDescriptor _language_1 = _config_1.getLanguage();
-    String _simpleName = _language_1.getSimpleName();
-    String _firstLower = StringExtensions.toFirstLower(_simpleName);
+    String _firstLower = StringExtensions.toFirstLower(this.getConfig().getLanguage().getSimpleName());
     _builder.append(_firstLower);
     _builder.append(" \"");
-    WizardConfiguration _config_2 = this.getConfig();
-    LanguageDescriptor _language_2 = _config_2.getLanguage();
-    String _nsURI = _language_2.getNsURI();
+    String _nsURI = this.getConfig().getLanguage().getNsURI();
     _builder.append(_nsURI);
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
@@ -311,14 +284,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   
   public String getWorkflowFilePath() {
     StringConcatenation _builder = new StringConcatenation();
-    WizardConfiguration _config = this.getConfig();
-    LanguageDescriptor _language = _config.getLanguage();
-    String _basePackagePath = _language.getBasePackagePath();
+    String _basePackagePath = this.getConfig().getLanguage().getBasePackagePath();
     _builder.append(_basePackagePath);
     _builder.append("/Generate");
-    WizardConfiguration _config_1 = this.getConfig();
-    LanguageDescriptor _language_1 = _config_1.getLanguage();
-    String _simpleName = _language_1.getSimpleName();
+    String _simpleName = this.getConfig().getLanguage().getSimpleName();
     _builder.append(_simpleName);
     _builder.append(".mwe2");
     return _builder.toString();
@@ -327,15 +296,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   public CharSequence workflow() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("module ");
-    WizardConfiguration _config = this.getConfig();
-    LanguageDescriptor _language = _config.getLanguage();
-    String _basePackagePath = _language.getBasePackagePath();
+    String _basePackagePath = this.getConfig().getLanguage().getBasePackagePath();
     String _plus = (_basePackagePath + "/Generate");
-    WizardConfiguration _config_1 = this.getConfig();
-    LanguageDescriptor _language_1 = _config_1.getLanguage();
-    String _simpleName = _language_1.getSimpleName();
-    String _plus_1 = (_plus + _simpleName);
-    String _replaceAll = _plus_1.replaceAll("/", ".");
+    String _simpleName = this.getConfig().getLanguage().getSimpleName();
+    String _replaceAll = (_plus + _simpleName).replaceAll("/", ".");
     _builder.append(_replaceAll);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -401,9 +365,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_2 = this.getConfig();
-      UiProjectDescriptor _uiProject = _config_2.getUiProject();
-      boolean _isEnabled_1 = _uiProject.isEnabled();
+      boolean _isEnabled_1 = this.getConfig().getUiProject().isEnabled();
       if (_isEnabled_1) {
         _builder.append("\t\t\t\t");
         _builder.append("eclipsePlugin = {");
@@ -418,10 +380,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_3 = this.getConfig();
-      UiProjectDescriptor _uiProject_1 = _config_3.getUiProject();
-      TestProjectDescriptor _testProject = _uiProject_1.getTestProject();
-      boolean _isEnabled_2 = _testProject.isEnabled();
+      boolean _isEnabled_2 = this.getConfig().getUiProject().getTestProject().isEnabled();
       if (_isEnabled_2) {
         _builder.append("\t\t\t\t");
         _builder.append("eclipsePluginTest = {");
@@ -436,9 +395,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_4 = this.getConfig();
-      IntellijProjectDescriptor _intellijProject = _config_4.getIntellijProject();
-      boolean _isEnabled_3 = _intellijProject.isEnabled();
+      boolean _isEnabled_3 = this.getConfig().getIntellijProject().isEnabled();
       if (_isEnabled_3) {
         _builder.append("\t\t\t\t");
         _builder.append("ideaPlugin = {");
@@ -453,9 +410,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_5 = this.getConfig();
-      WebProjectDescriptor _webProject = _config_5.getWebProject();
-      boolean _isEnabled_4 = _webProject.isEnabled();
+      boolean _isEnabled_4 = this.getConfig().getWebProject().isEnabled();
       if (_isEnabled_4) {
         _builder.append("\t\t\t\t");
         _builder.append("web = {");
@@ -470,8 +425,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_6 = this.getConfig();
-      SourceLayout _sourceLayout = _config_6.getSourceLayout();
+      SourceLayout _sourceLayout = this.getConfig().getSourceLayout();
       boolean _equals = Objects.equal(_sourceLayout, SourceLayout.MAVEN);
       if (_equals) {
         _builder.append("\t\t\t\t");
@@ -495,16 +449,13 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("encoding = \"");
-    WizardConfiguration _config_7 = this.getConfig();
-    Charset _encoding = _config_7.getEncoding();
+    Charset _encoding = this.getConfig().getEncoding();
     _builder.append(_encoding, "\t\t\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t");
     _builder.append("lineDelimiter = \"");
-    WizardConfiguration _config_8 = this.getConfig();
-    String _lineDelimiter = _config_8.getLineDelimiter();
-    String _convertToJavaString = Strings.convertToJavaString(_lineDelimiter);
+    String _convertToJavaString = Strings.convertToJavaString(this.getConfig().getLineDelimiter());
     _builder.append(_convertToJavaString, "\t\t\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
@@ -522,37 +473,25 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("name = \"");
-    WizardConfiguration _config_9 = this.getConfig();
-    LanguageDescriptor _language_2 = _config_9.getLanguage();
-    String _name_1 = _language_2.getName();
+    String _name_1 = this.getConfig().getLanguage().getName();
     _builder.append(_name_1, "\t\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     _builder.append("fileExtensions = \"");
-    WizardConfiguration _config_10 = this.getConfig();
-    LanguageDescriptor _language_3 = _config_10.getLanguage();
-    LanguageDescriptor.FileExtensions _fileExtensions = _language_3.getFileExtensions();
+    LanguageDescriptor.FileExtensions _fileExtensions = this.getConfig().getLanguage().getFileExtensions();
     _builder.append(_fileExtensions, "\t\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     {
-      WizardConfiguration _config_11 = this.getConfig();
-      Ecore2XtextConfiguration _ecore2Xtext = _config_11.getEcore2Xtext();
-      Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
-      boolean _isEmpty = _ePackageInfos.isEmpty();
+      boolean _isEmpty = this.getConfig().getEcore2Xtext().getEPackageInfos().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
         {
-          WizardConfiguration _config_12 = this.getConfig();
-          Ecore2XtextConfiguration _ecore2Xtext_1 = _config_12.getEcore2Xtext();
-          Set<EPackageInfo> _ePackageInfos_1 = _ecore2Xtext_1.getEPackageInfos();
           final Function1<EPackageInfo, String> _function = (EPackageInfo it) -> {
-            URI _genmodelURI = it.getGenmodelURI();
-            return _genmodelURI.toString();
+            return it.getGenmodelURI().toString();
           };
-          Iterable<String> _map = IterableExtensions.<EPackageInfo, String>map(_ePackageInfos_1, _function);
-          Set<String> _set = IterableExtensions.<String>toSet(_map);
+          Set<String> _set = IterableExtensions.<String>toSet(IterableExtensions.<EPackageInfo, String>map(this.getConfig().getEcore2Xtext().getEPackageInfos(), _function));
           for(final String genmodelURI : _set) {
             _builder.append("\t\t\t");
             _builder.append("referencedResource = \"");
@@ -615,10 +554,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   }
   
   private boolean isFromExistingEcoreModels() {
-    WizardConfiguration _config = this.getConfig();
-    Ecore2XtextConfiguration _ecore2Xtext = _config.getEcore2Xtext();
-    Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
-    boolean _isEmpty = _ePackageInfos.isEmpty();
+    boolean _isEmpty = this.getConfig().getEcore2Xtext().getEPackageInfos().isEmpty();
     return (!_isEmpty);
   }
   
@@ -645,9 +581,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("mwe2 \"org.eclipse.emf:org.eclipse.emf.mwe2.launch:");
-      WizardConfiguration _config = this.getConfig();
-      XtextVersion _xtextVersion = _config.getXtextVersion();
-      String _mweVersion = _xtextVersion.getMweVersion();
+      String _mweVersion = this.getConfig().getXtextVersion().getMweVersion();
       _builder.append(_mweVersion, "\t");
       _builder.append("\"");
       _builder.newLineIfNotEmpty();
@@ -887,8 +821,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("</configuration>");
       _builder.newLine();
       {
-        WizardConfiguration _config = this.getConfig();
-        boolean _needsTychoBuild = _config.needsTychoBuild();
+        boolean _needsTychoBuild = this.getConfig().needsTychoBuild();
         if (_needsTychoBuild) {
           _builder.append("\t\t\t");
           _builder.append("<dependencies>");
@@ -908,9 +841,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           _builder.append("\t\t\t");
           _builder.append("\t\t");
           _builder.append("<version>");
-          WizardConfiguration _config_1 = this.getConfig();
-          XtextVersion _xtextVersion = _config_1.getXtextVersion();
-          String _mweVersion = _xtextVersion.getMweVersion();
+          String _mweVersion = this.getConfig().getXtextVersion().getMweVersion();
           _builder.append(_mweVersion, "\t\t\t\t\t");
           _builder.append("</version>");
           _builder.newLineIfNotEmpty();
@@ -1015,12 +946,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("<filesets combine.children=\"append\">");
       _builder.newLine();
       {
-        WizardConfiguration _config_2 = this.getConfig();
-        IdeProjectDescriptor _ideProject = _config_2.getIdeProject();
-        WizardConfiguration _config_3 = this.getConfig();
-        UiProjectDescriptor _uiProject = _config_3.getUiProject();
-        WizardConfiguration _config_4 = this.getConfig();
-        WebProjectDescriptor _webProject = _config_4.getWebProject();
+        IdeProjectDescriptor _ideProject = this.getConfig().getIdeProject();
+        UiProjectDescriptor _uiProject = this.getConfig().getUiProject();
+        WebProjectDescriptor _webProject = this.getConfig().getWebProject();
         for(final ProjectDescriptor p : Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this, _ideProject, _uiProject, _webProject))) {
           {
             boolean _isEnabled = p.isEnabled();
@@ -1056,8 +984,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
               {
                 if ((p instanceof TestedProjectDescriptor)) {
                   {
-                    TestProjectDescriptor _testProject = ((TestedProjectDescriptor)p).getTestProject();
-                    boolean _isEnabled_1 = _testProject.isEnabled();
+                    boolean _isEnabled_1 = ((TestedProjectDescriptor)p).getTestProject().isEnabled();
                     if (_isEnabled_1) {
                       _builder.append("\t\t\t\t\t");
                       _builder.append("<fileset>");
@@ -1066,13 +993,11 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
                       _builder.append("\t");
                       _builder.append("<directory>${basedir}/../");
                       String _xifexpression_1 = null;
-                      TestProjectDescriptor _testProject_1 = ((TestedProjectDescriptor)p).getTestProject();
-                      boolean _isInlined = _testProject_1.isInlined();
+                      boolean _isInlined = ((TestedProjectDescriptor)p).getTestProject().isInlined();
                       if (_isInlined) {
                         _xifexpression_1 = ((TestedProjectDescriptor)p).getName();
                       } else {
-                        TestProjectDescriptor _testProject_2 = ((TestedProjectDescriptor)p).getTestProject();
-                        _xifexpression_1 = _testProject_2.getName();
+                        _xifexpression_1 = ((TestedProjectDescriptor)p).getTestProject().getName();
                       }
                       _builder.append(_xifexpression_1, "\t\t\t\t\t\t");
                       _builder.append("/");
@@ -1626,20 +1551,13 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   private PlainTextFile getWorkflowLaunchConfigFile() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(".launch/Generate ");
-    WizardConfiguration _config = this.getConfig();
-    LanguageDescriptor _language = _config.getLanguage();
-    String _simpleName = _language.getSimpleName();
+    String _simpleName = this.getConfig().getLanguage().getSimpleName();
     _builder.append(_simpleName);
     _builder.append(" (");
-    WizardConfiguration _config_1 = this.getConfig();
-    LanguageDescriptor _language_1 = _config_1.getLanguage();
-    LanguageDescriptor.FileExtensions _fileExtensions = _language_1.getFileExtensions();
-    String _head = IterableExtensions.<String>head(_fileExtensions);
+    String _head = IterableExtensions.<String>head(this.getConfig().getLanguage().getFileExtensions());
     _builder.append(_head);
     _builder.append(") Language Infrastructure.launch");
-    String _string = _builder.toString();
-    CharSequence _workflowLaunchConfig = this.workflowLaunchConfig();
-    return this.file(Outlet.ROOT, _string, _workflowLaunchConfig);
+    return this.file(Outlet.ROOT, _builder.toString(), this.workflowLaunchConfig());
   }
   
   /**
@@ -1649,26 +1567,16 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     CharSequence _xblockexpression = null;
     {
       ArrayList<ProjectDescriptor> projectsToRefresh = CollectionLiterals.<ProjectDescriptor>newArrayList();
-      WizardConfiguration _config = this.getConfig();
-      Set<ProjectDescriptor> _enabledProjects = _config.getEnabledProjects();
+      Set<ProjectDescriptor> _enabledProjects = this.getConfig().getEnabledProjects();
       Iterables.<ProjectDescriptor>addAll(projectsToRefresh, _enabledProjects);
-      WizardConfiguration _config_1 = this.getConfig();
-      RuntimeProjectDescriptor _runtimeProject = _config_1.getRuntimeProject();
-      boolean _isEnabled = _runtimeProject.testProject.isEnabled();
+      boolean _isEnabled = this.getConfig().getRuntimeProject().testProject.isEnabled();
       if (_isEnabled) {
-        WizardConfiguration _config_2 = this.getConfig();
-        RuntimeProjectDescriptor _runtimeProject_1 = _config_2.getRuntimeProject();
-        projectsToRefresh.add(_runtimeProject_1.testProject);
+        projectsToRefresh.add(this.getConfig().getRuntimeProject().testProject);
       }
-      WizardConfiguration _config_3 = this.getConfig();
-      UiProjectDescriptor _uiProject = _config_3.getUiProject();
-      TestProjectDescriptor _testProject = _uiProject.getTestProject();
-      boolean _isEnabled_1 = _testProject.isEnabled();
+      boolean _isEnabled_1 = this.getConfig().getUiProject().getTestProject().isEnabled();
       if (_isEnabled_1) {
-        WizardConfiguration _config_4 = this.getConfig();
-        UiProjectDescriptor _uiProject_1 = _config_4.getUiProject();
-        TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
-        projectsToRefresh.add(_testProject_1);
+        TestProjectDescriptor _testProject = this.getConfig().getUiProject().getTestProject();
+        projectsToRefresh.add(_testProject);
       }
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;resources&gt;&#10;");
@@ -1686,18 +1594,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder_1.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
       _builder_1.newLine();
       {
-        WizardConfiguration _config_5 = this.getConfig();
-        RuntimeProjectDescriptor _runtimeProject_2 = _config_5.getRuntimeProject();
-        boolean _isEclipsePluginProject = _runtimeProject_2.isEclipsePluginProject();
+        boolean _isEclipsePluginProject = this.getConfig().getRuntimeProject().isEclipsePluginProject();
         if (_isEclipsePluginProject) {
           _builder_1.append("<launchConfiguration type=\"org.eclipse.emf.mwe2.launch.Mwe2LaunchConfigurationType\">");
           _builder_1.newLine();
           _builder_1.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
           _builder_1.newLine();
           _builder_1.append("<listEntry value=\"/");
-          WizardConfiguration _config_6 = this.getConfig();
-          RuntimeProjectDescriptor _runtimeProject_3 = _config_6.getRuntimeProject();
-          String _name_1 = _runtimeProject_3.getName();
+          String _name_1 = this.getConfig().getRuntimeProject().getName();
           _builder_1.append(_name_1);
           _builder_1.append("\"/>");
           _builder_1.newLineIfNotEmpty();
@@ -1724,22 +1628,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\"org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher\"/>");
           _builder_1.newLine();
           _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROGRAM_ARGUMENTS\" value=\"");
-          WizardConfiguration _config_7 = this.getConfig();
-          LanguageDescriptor _language = _config_7.getLanguage();
-          String _basePackagePath = _language.getBasePackagePath();
+          String _basePackagePath = this.getConfig().getLanguage().getBasePackagePath();
           String _plus = (_basePackagePath + "/Generate");
-          WizardConfiguration _config_8 = this.getConfig();
-          LanguageDescriptor _language_1 = _config_8.getLanguage();
-          String _simpleName = _language_1.getSimpleName();
-          String _plus_1 = (_plus + _simpleName);
-          String _replaceAll = _plus_1.replaceAll("/", ".");
+          String _simpleName = this.getConfig().getLanguage().getSimpleName();
+          String _replaceAll = (_plus + _simpleName).replaceAll("/", ".");
           _builder_1.append(_replaceAll);
           _builder_1.append("\"/>");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\"");
-          WizardConfiguration _config_9 = this.getConfig();
-          RuntimeProjectDescriptor _runtimeProject_4 = _config_9.getRuntimeProject();
-          String _name_2 = _runtimeProject_4.getName();
+          String _name_2 = this.getConfig().getRuntimeProject().getName();
           _builder_1.append(_name_2);
           _builder_1.append("\"/>");
           _builder_1.newLineIfNotEmpty();
@@ -1748,8 +1645,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           _builder_1.append("</launchConfiguration>");
           _builder_1.newLine();
         } else {
-          WizardConfiguration _config_10 = this.getConfig();
-          BuildSystem _preferredBuildSystem = _config_10.getPreferredBuildSystem();
+          BuildSystem _preferredBuildSystem = this.getConfig().getPreferredBuildSystem();
           boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.MAVEN);
           if (_equals) {
             _builder_1.append("<launchConfiguration type=\"org.eclipse.m2e.Maven2LaunchConfigurationType\">");
@@ -1785,17 +1681,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             _builder_1.append("<booleanAttribute key=\"org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD\" value=\"true\"/>");
             _builder_1.newLine();
             _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.WORKING_DIRECTORY\" value=\"${workspace_loc:/");
-            WizardConfiguration _config_11 = this.getConfig();
-            RuntimeProjectDescriptor _runtimeProject_5 = _config_11.getRuntimeProject();
-            String _name_3 = _runtimeProject_5.getName();
+            String _name_3 = this.getConfig().getRuntimeProject().getName();
             _builder_1.append(_name_3);
             _builder_1.append("}\"/>");
             _builder_1.newLineIfNotEmpty();
             _builder_1.append("</launchConfiguration>");
             _builder_1.newLine();
           } else {
-            WizardConfiguration _config_12 = this.getConfig();
-            BuildSystem _preferredBuildSystem_1 = _config_12.getPreferredBuildSystem();
+            BuildSystem _preferredBuildSystem_1 = this.getConfig().getPreferredBuildSystem();
             boolean _equals_1 = Objects.equal(_preferredBuildSystem_1, BuildSystem.GRADLE);
             if (_equals_1) {
               _builder_1.append("<launchConfiguration type=\"org.eclipse.buildship.core.launch.runconfiguration\">");
@@ -1823,9 +1716,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
               _builder_1.append("<booleanAttribute key=\"org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD\" value=\"true\"/>");
               _builder_1.newLine();
               _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.WORKING_DIRECTORY\" value=\"${workspace_loc:/");
-              WizardConfiguration _config_13 = this.getConfig();
-              RuntimeProjectDescriptor _runtimeProject_6 = _config_13.getRuntimeProject();
-              String _name_4 = _runtimeProject_6.getName();
+              String _name_4 = this.getConfig().getRuntimeProject().getName();
               _builder_1.append(_name_4);
               _builder_1.append("}\"/>");
               _builder_1.newLineIfNotEmpty();
@@ -1844,8 +1735,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
    * @since 2.11
    */
   private PlainTextFile getLaunchConfigFile() {
-    CharSequence _launchConfig = this.launchConfig();
-    return this.file(Outlet.ROOT, ".launch/Launch Runtime Eclipse.launch", _launchConfig);
+    return this.file(Outlet.ROOT, ".launch/Launch Runtime Eclipse.launch", this.launchConfig());
   }
   
   /**
@@ -1866,9 +1756,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("<booleanAttribute key=\"automaticValidate\" value=\"false\"/>");
     _builder.newLine();
     _builder.append("<stringAttribute key=\"bad_container_name\" value=\"/");
-    WizardConfiguration _config = this.getConfig();
-    RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
-    String _name = _runtimeProject.getName();
+    String _name = this.getConfig().getRuntimeProject().getName();
     _builder.append(_name);
     _builder.append("/.launch/\"/>");
     _builder.newLineIfNotEmpty();

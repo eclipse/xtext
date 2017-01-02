@@ -35,17 +35,15 @@ public class IdeContentProposalPriorities {
       return priority;
     }
     int adjustedPriority = priority;
-    String _proposal = entry.getProposal();
-    char _charAt = _proposal.charAt(0);
-    boolean _isLetter = Character.isLetter(_charAt);
+    boolean _isLetter = Character.isLetter(entry.getProposal().charAt(0));
     boolean _not = (!_isLetter);
     if (_not) {
       int _adjustedPriority = adjustedPriority;
       adjustedPriority = (_adjustedPriority - 30);
     }
-    String _proposal_1 = entry.getProposal();
+    String _proposal = entry.getProposal();
     String _prefix = entry.getPrefix();
-    boolean _equals = Objects.equal(_proposal_1, _prefix);
+    boolean _equals = Objects.equal(_proposal, _prefix);
     if (_equals) {
       int _adjustedPriority_1 = adjustedPriority;
       adjustedPriority = (_adjustedPriority_1 - 20);

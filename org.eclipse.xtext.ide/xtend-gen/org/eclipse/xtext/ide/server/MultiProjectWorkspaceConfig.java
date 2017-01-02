@@ -37,17 +37,14 @@ public class MultiProjectWorkspaceConfig implements IWorkspaceConfig {
   
   @Override
   public IProjectConfig findProjectContaining(final URI member) {
-    Collection<IProjectConfig> _values = this.name2config.values();
     final Function1<IProjectConfig, Boolean> _function = (IProjectConfig it) -> {
       ISourceFolder _findSourceFolderContaining = it.findSourceFolderContaining(member);
       return Boolean.valueOf((_findSourceFolderContaining != null));
     };
-    Iterable<IProjectConfig> _filter = IterableExtensions.<IProjectConfig>filter(_values, _function);
     final Function1<IProjectConfig, Integer> _function_1 = (IProjectConfig it) -> {
-      URI _path = it.getPath();
-      return Integer.valueOf(_path.segmentCount());
+      return Integer.valueOf(it.getPath().segmentCount());
     };
-    return IterableExtensions.<IProjectConfig, Integer>maxBy(_filter, _function_1);
+    return IterableExtensions.<IProjectConfig, Integer>maxBy(IterableExtensions.<IProjectConfig>filter(this.name2config.values(), _function), _function_1);
   }
   
   public MultiProjectWorkspaceConfig(final Map<String, IProjectConfig> name2config) {

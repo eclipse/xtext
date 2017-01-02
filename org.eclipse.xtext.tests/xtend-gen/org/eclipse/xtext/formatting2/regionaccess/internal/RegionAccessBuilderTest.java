@@ -54,8 +54,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("1 foo");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("0 0 H");
     _builder_1.newLine();
@@ -81,8 +80,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("1 /**/ foo");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -118,8 +116,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("2 foo");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("0 0 H");
     _builder_1.newLine();
@@ -151,8 +148,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("3 foo");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("0 0 H");
     _builder_1.newLine();
@@ -178,8 +174,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("4 prefix foo");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -221,8 +216,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("5 a + b");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("0 0 H");
     _builder_1.newLine();
@@ -268,8 +262,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("5 (a + b) + c");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -356,8 +349,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (unassigned foo)");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0  0 H");
@@ -401,8 +393,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (unassigned datatype foo)");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0  0 H");
@@ -446,8 +437,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (unassigned datatype datatype foo)");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0  0 H");
@@ -491,8 +481,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 ()");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("0 0 H");
     _builder_1.newLine();
@@ -522,8 +511,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (())");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("0 0 H");
     _builder_1.newLine();
@@ -561,8 +549,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 ((()))");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("0 0 H");
     _builder_1.newLine();
@@ -608,8 +595,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (((foo)))");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -673,8 +659,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (child(((foo))))");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -752,8 +737,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (datatype foo)");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0  0 H");
@@ -793,8 +777,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (datatype datatype foo)");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0  0 H");
@@ -834,8 +817,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (foo) action (ref foo) end");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -915,8 +897,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (lit1)");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("0 0 H");
     _builder_1.newLine();
@@ -950,8 +931,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (foo) action");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -1005,8 +985,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (foo) action action");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -1070,8 +1049,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 () action action");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -1129,8 +1107,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (fragment foo)");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -1174,8 +1151,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (fragment recursion foo)");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -1223,8 +1199,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (fragment child ())");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -1282,8 +1257,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (fragment child (foo))");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -1345,8 +1319,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("6 (fragment recursion child ())");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -1408,8 +1381,7 @@ public class RegionAccessBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("7 action (foo)");
     _builder.newLine();
-    String _string = _builder.toString();
-    String _trim = _string.trim();
+    String _trim = _builder.toString().trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -1461,14 +1433,10 @@ public class RegionAccessBuilderTest {
       this.validationTestHelper.assertNoErrors(obj);
       final ITextRegionAccess access1 = this.createFromNodeModel(obj);
       final ITextRegionAccess access2 = this.serializer.serializeToRegions(obj);
-      TextRegionAccessToString _textRegionAccessToString = new TextRegionAccessToString();
-      TextRegionAccessToString _withRegionAccess = _textRegionAccessToString.withRegionAccess(access1);
-      TextRegionAccessToString _cfg = this.cfg(_withRegionAccess);
+      TextRegionAccessToString _cfg = this.cfg(new TextRegionAccessToString().withRegionAccess(access1));
       String _plus = (_cfg + "\n");
       Assert.assertEquals(exp, _plus);
-      TextRegionAccessToString _textRegionAccessToString_1 = new TextRegionAccessToString();
-      TextRegionAccessToString _withRegionAccess_1 = _textRegionAccessToString_1.withRegionAccess(access2);
-      TextRegionAccessToString _cfg_1 = this.cfg(_withRegionAccess_1);
+      TextRegionAccessToString _cfg_1 = this.cfg(new TextRegionAccessToString().withRegionAccess(access2));
       String _plus_1 = (_cfg_1 + "\n");
       Assert.assertEquals(exp, _plus_1);
     } catch (Throwable _e) {
@@ -1477,14 +1445,11 @@ public class RegionAccessBuilderTest {
   }
   
   private TextRegionAccessToString cfg(final TextRegionAccessToString toStr) {
-    TextRegionAccessToString _hideColumnExplanation = toStr.hideColumnExplanation();
-    return _hideColumnExplanation.withTextWidth(10);
+    return toStr.hideColumnExplanation().withTextWidth(10);
   }
   
   private ITextRegionAccess createFromNodeModel(final EObject obj) {
-    TextRegionAccessBuilder _get = this.textRegionAccessBuilder.get();
     Resource _eResource = obj.eResource();
-    TextRegionAccessBuilder _forNodeModel = _get.forNodeModel(((XtextResource) _eResource));
-    return _forNodeModel.create();
+    return this.textRegionAccessBuilder.get().forNodeModel(((XtextResource) _eResource)).create();
   }
 }

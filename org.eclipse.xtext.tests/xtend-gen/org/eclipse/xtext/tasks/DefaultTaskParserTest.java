@@ -172,8 +172,7 @@ public class DefaultTaskParserTest {
     _builder.append("*/");
     _builder.newLine();
     final String source = _builder.toString();
-    String _unix = LineDelimiters.toUnix(source);
-    final List<Task> parsed = this.parser.parseTasks(_unix, this.definitions);
+    final List<Task> parsed = this.parser.parseTasks(LineDelimiters.toUnix(source), this.definitions);
     Assert.assertEquals(expectation, parsed.size());
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, expectation, true);
     for (final Integer i_1 : _doubleDotLessThan) {
@@ -182,9 +181,7 @@ public class DefaultTaskParserTest {
   }
   
   private void assertContainsTasks(final CharSequence source, final List<Task> expectedTasks) {
-    String _string = source.toString();
-    String _unix = LineDelimiters.toUnix(_string);
-    final List<Task> actualTasks = this.parser.parseTasks(_unix, this.definitions);
+    final List<Task> actualTasks = this.parser.parseTasks(LineDelimiters.toUnix(source.toString()), this.definitions);
     Assert.assertEquals(expectedTasks.size(), actualTasks.size());
     int _size = expectedTasks.size();
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);

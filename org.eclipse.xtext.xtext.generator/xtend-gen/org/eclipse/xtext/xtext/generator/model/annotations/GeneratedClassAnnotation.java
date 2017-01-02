@@ -77,8 +77,7 @@ public class GeneratedClassAnnotation implements IClassAnnotation {
   
   @Override
   public String toString() {
-    CharSequence _generate = this.generate();
-    return _generate.toString();
+    return this.generate().toString();
   }
   
   @Pure

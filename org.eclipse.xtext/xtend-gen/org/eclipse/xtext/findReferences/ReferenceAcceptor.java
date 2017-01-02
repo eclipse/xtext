@@ -50,11 +50,9 @@ public class ReferenceAcceptor implements IReferenceFinder.Acceptor {
   
   protected void computeExportedObjectsMap(final EObject source) {
     final Resource resource = source.eResource();
-    URI _uRI = resource.getURI();
-    final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(_uRI);
+    final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI());
     if ((resourceServiceProvider != null)) {
-      IResourceDescription.Manager _resourceDescriptionManager = resourceServiceProvider.getResourceDescriptionManager();
-      final IResourceDescription resourceDescription = _resourceDescriptionManager.getResourceDescription(resource);
+      final IResourceDescription resourceDescription = resourceServiceProvider.getResourceDescriptionManager().getResourceDescription(resource);
       this.exportedContainersInCurrentResource = CollectionLiterals.<EObject, URI>newHashMap();
       Iterable<IEObjectDescription> _exportedObjects = resourceDescription.getExportedObjects();
       for (final IEObjectDescription description : _exportedObjects) {
@@ -64,8 +62,7 @@ public class ReferenceAcceptor implements IReferenceFinder.Acceptor {
           if (_eIsProxy) {
             instance = resource.getEObject(description.getEObjectURI().fragment());
           }
-          URI _eObjectURI = description.getEObjectURI();
-          this.exportedContainersInCurrentResource.put(instance, _eObjectURI);
+          this.exportedContainersInCurrentResource.put(instance, description.getEObjectURI());
         }
       }
     } else {

@@ -14,7 +14,6 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -29,8 +28,6 @@ import org.eclipse.xtext.formatting2.internal.FormatterTestLanguageStandaloneSet
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.FormattertestlanguageFactory;
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.IDList;
 import org.eclipse.xtext.formatting2.internal.tests.FormatterTestLanguageInjectorProvider;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.InjectWith;
@@ -52,8 +49,7 @@ public class FormatterSerializerIntegrationTest {
   public static class InjectorProvider extends FormatterTestLanguageInjectorProvider {
     @Override
     protected Injector internalCreateInjector() {
-      FormatterSerializerIntegrationTest.Setup _setup = new FormatterSerializerIntegrationTest.Setup();
-      return _setup.createInjectorAndDoEMFRegistration();
+      return new FormatterSerializerIntegrationTest.Setup().createInjectorAndDoEMFRegistration();
     }
   }
   
@@ -73,12 +69,10 @@ public class FormatterSerializerIntegrationTest {
   
   public static class Formatter extends AbstractFormatter2 {
     protected void _format(final IDList model, @Extension final IFormattableDocument document) {
-      ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(model);
-      ISemanticRegion _keyword = _regionFor.keyword("idlist");
       final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
         it.setSpace("  ");
       };
-      document.append(_keyword, _function);
+      document.append(this.textRegionExtensions.regionFor(model).keyword("idlist"), _function);
     }
     
     public void format(final Object model, final IFormattableDocument document) {
@@ -110,11 +104,8 @@ public class FormatterSerializerIntegrationTest {
   @Test
   public void testFormatterIntegrationWithSerializer() {
     try {
-      URI _createURI = URI.createURI("dummy.ext");
-      final Resource resource = this.factory.createResource(_createURI);
-      ResourceSetImpl _resourceSetImpl = new ResourceSetImpl();
-      EList<Resource> _resources = _resourceSetImpl.getResources();
-      _resources.add(resource);
+      final Resource resource = this.factory.createResource(URI.createURI("dummy.ext"));
+      new ResourceSetImpl().getResources().add(resource);
       final IDList model = FormattertestlanguageFactory.eINSTANCE.createIDList();
       EList<String> _ids = model.getIds();
       _ids.add("foo");
@@ -122,10 +113,8 @@ public class FormatterSerializerIntegrationTest {
       _contents.add(model);
       final ByteArrayOutputStream out = new ByteArrayOutputStream();
       BufferedOutputStream _bufferedOutputStream = new BufferedOutputStream(out);
-      Map<Object, Object> _emptyMap = Collections.<Object, Object>emptyMap();
-      resource.save(_bufferedOutputStream, _emptyMap);
-      String _string = out.toString();
-      Assert.assertEquals("idlist  foo", _string);
+      resource.save(_bufferedOutputStream, Collections.<Object, Object>emptyMap());
+      Assert.assertEquals("idlist  foo", out.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

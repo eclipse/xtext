@@ -20,7 +20,6 @@ import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.Scope;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -53,15 +52,13 @@ public class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
   
   @Override
   public boolean isPartOfGradleBuild() {
-    WizardConfiguration _config = this.getConfig();
-    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
+    BuildSystem _preferredBuildSystem = this.getConfig().getPreferredBuildSystem();
     return Objects.equal(_preferredBuildSystem, BuildSystem.GRADLE);
   }
   
   @Override
   public boolean isPartOfMavenBuild() {
-    WizardConfiguration _config = this.getConfig();
-    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
+    BuildSystem _preferredBuildSystem = this.getConfig().getPreferredBuildSystem();
     return Objects.equal(_preferredBuildSystem, BuildSystem.MAVEN);
   }
   

@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.tests.server.concurrent;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -38,8 +37,7 @@ public class RequestManagerTest {
     AtomicInteger _atomicInteger = new AtomicInteger();
     this.sharedState = _atomicInteger;
     ServerModule _serverModule = new ServerModule();
-    Injector _createInjector = Guice.createInjector(_serverModule);
-    _createInjector.injectMembers(this);
+    Guice.createInjector(_serverModule).injectMembers(this);
   }
   
   @After
@@ -103,8 +101,7 @@ public class RequestManagerTest {
     final Function1<CancelIndicator, Integer> _function = (CancelIndicator it) -> {
       return Integer.valueOf(this.sharedState.incrementAndGet());
     };
-    CompletableFuture<Integer> _runWrite = this.requestManager.<Integer>runWrite(_function);
-    _runWrite.join();
+    this.requestManager.<Integer>runWrite(_function).join();
     Assert.assertEquals(1, this.sharedState.get());
   }
   
@@ -124,8 +121,7 @@ public class RequestManagerTest {
       }
       return _xifexpression;
     };
-    CompletableFuture<Integer> _runWrite = this.requestManager.<Integer>runWrite(_function_1);
-    _runWrite.join();
+    this.requestManager.<Integer>runWrite(_function_1).join();
     Assert.assertEquals(2, this.sharedState.get());
   }
   
@@ -143,8 +139,7 @@ public class RequestManagerTest {
       }
       return Integer.valueOf(_xblockexpression);
     };
-    CompletableFuture<Integer> _runWrite = this.requestManager.<Integer>runWrite(_function_1);
-    _runWrite.join();
+    this.requestManager.<Integer>runWrite(_function_1).join();
     Assert.assertEquals(2, this.sharedState.get());
   }
   
@@ -177,8 +172,7 @@ public class RequestManagerTest {
       } catch (final Throwable _t) {
         if (_t instanceof CancellationException) {
           final CancellationException e = (CancellationException)_t;
-          int _get = this.sharedState.get();
-          Assert.assertEquals(1, _get);
+          Assert.assertEquals(1, this.sharedState.get());
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -217,8 +211,7 @@ public class RequestManagerTest {
       } catch (final Throwable _t) {
         if (_t instanceof CancellationException) {
           final CancellationException e = (CancellationException)_t;
-          int _get = this.sharedState.get();
-          Assert.assertEquals(1, _get);
+          Assert.assertEquals(1, this.sharedState.get());
         } else {
           throw Exceptions.sneakyThrow(_t);
         }

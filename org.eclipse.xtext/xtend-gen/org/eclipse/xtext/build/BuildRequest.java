@@ -49,21 +49,17 @@ public class BuildRequest {
         if (_severity != null) {
           switch (_severity) {
             case ERROR:
-              String _string = issue.toString();
-              BuildRequest.DefaultValidationCallback.LOG.error(_string);
+              BuildRequest.DefaultValidationCallback.LOG.error(issue.toString());
               errorFree = false;
               break;
             case WARNING:
-              String _string_1 = issue.toString();
-              BuildRequest.DefaultValidationCallback.LOG.warn(_string_1);
+              BuildRequest.DefaultValidationCallback.LOG.warn(issue.toString());
               break;
             case INFO:
-              String _string_2 = issue.toString();
-              BuildRequest.DefaultValidationCallback.LOG.info(_string_2);
+              BuildRequest.DefaultValidationCallback.LOG.info(issue.toString());
               break;
             case IGNORE:
-              String _string_3 = issue.toString();
-              BuildRequest.DefaultValidationCallback.LOG.debug(_string_3);
+              BuildRequest.DefaultValidationCallback.LOG.debug(issue.toString());
               break;
             default:
               break;
@@ -81,7 +77,8 @@ public class BuildRequest {
   public URI getBaseDir() {
     if ((this.baseDir == null)) {
       final String userDir = System.getProperty("user.dir");
-      this.baseDir = UriUtil.createFolderURI(new File(userDir));
+      File _file = new File(userDir);
+      this.baseDir = UriUtil.createFolderURI(_file);
     }
     return this.baseDir;
   }

@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tasks.DefaultTaskFinder;
 import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.tasks.Priority;
@@ -42,8 +41,7 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
   public void setup() {
     try {
       this.with(NoJdtTestLanguageStandaloneSetup.class);
-      DefaultTaskFinder _get = this.<DefaultTaskFinder>get(DefaultTaskFinder.class);
-      this.finder = _get;
+      this.finder = this.<DefaultTaskFinder>get(DefaultTaskFinder.class);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -51,8 +49,7 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
   
   @Test
   public void testNonXtextResource() {
-    ResourceImpl _resourceImpl = new ResourceImpl();
-    this.assertContainsTasks(_resourceImpl, Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList()));
+    this.assertContainsTasks(new ResourceImpl(), Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList()));
   }
   
   @Test
@@ -77,8 +74,6 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("Hello notATODO!");
       _builder.newLine();
-      String _unix = LineDelimiters.toUnix(_builder.toString());
-      XtextResource _resourceFromString = this.getResourceFromString(_unix);
       Task _task = new Task();
       final Procedure1<Task> _function = (Task it) -> {
         TaskTag _taskTag = new TaskTag();
@@ -107,7 +102,8 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
         it.setLineNumber(3);
       };
       Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_1);
-      this.assertContainsTasks(_resourceFromString, 
+      this.assertContainsTasks(this.getResourceFromString(
+        LineDelimiters.toUnix(_builder.toString())), 
         Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow, _doubleArrow_1)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -116,15 +112,11 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
   
   private void assertContainsTasks(final Resource resource, final List<Task> expectedTasks) {
     final List<Task> actualTasks = this.finder.findTasks(resource);
+    Assert.assertEquals(expectedTasks.size(), actualTasks.size());
     int _size = expectedTasks.size();
-    int _size_1 = actualTasks.size();
-    Assert.assertEquals(_size, _size_1);
-    int _size_2 = expectedTasks.size();
-    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size_2, true);
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
     for (final Integer i : _doubleDotLessThan) {
-      Task _get = expectedTasks.get((i).intValue());
-      Task _get_1 = actualTasks.get((i).intValue());
-      TaskAssert.assertExactMatch(_get, _get_1);
+      TaskAssert.assertExactMatch(expectedTasks.get((i).intValue()), actualTasks.get((i).intValue()));
     }
   }
 }

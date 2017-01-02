@@ -39,8 +39,7 @@ public class Bug451668Test extends AbstractXtextTests {
     try {
       this.with(OptionalEmptyTestLanguageStandaloneSetup.class);
       Bug451668Test.TestResource r = this.<Bug451668Test.TestResource>get(Bug451668Test.TestResource.class);
-      URI _createURI = URI.createURI("foo.dummy");
-      r.setURI(_createURI);
+      r.setURI(URI.createURI("foo.dummy"));
       StringInputStream _stringInputStream = new StringInputStream("");
       r.load(_stringInputStream, null);
       Assert.assertTrue(r.isLoaded());

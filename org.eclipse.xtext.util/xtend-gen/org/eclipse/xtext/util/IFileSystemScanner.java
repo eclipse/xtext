@@ -30,12 +30,8 @@ public interface IFileSystemScanner {
     }
     
     public void scanRec(final File file, final IAcceptor<URI> acceptor) {
-      File _absoluteFile = file.getAbsoluteFile();
-      java.net.URI _uRI = _absoluteFile.toURI();
-      final Path path = Paths.get(_uRI);
-      java.net.URI _uri = path.toUri();
-      String _string = _uri.toString();
-      final URI uri = URI.createURI(_string);
+      final Path path = Paths.get(file.getAbsoluteFile().toURI());
+      final URI uri = URI.createURI(path.toUri().toString());
       acceptor.accept(uri);
       boolean _isDirectory = file.isDirectory();
       if (_isDirectory) {

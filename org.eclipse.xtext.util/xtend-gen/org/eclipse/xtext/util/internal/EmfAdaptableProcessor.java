@@ -27,8 +27,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class EmfAdaptableProcessor extends AbstractClassProcessor {
   @Override
   public void doRegisterGlobals(final ClassDeclaration annotatedClass, @Extension final RegisterGlobalsContext context) {
-    String _adapterClassName = this.getAdapterClassName(annotatedClass);
-    context.registerClass(_adapterClassName);
+    context.registerClass(this.getAdapterClassName(annotatedClass));
   }
   
   @Override

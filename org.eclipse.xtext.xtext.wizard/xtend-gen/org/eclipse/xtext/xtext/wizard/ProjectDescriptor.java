@@ -18,7 +18,6 @@ import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -27,15 +26,12 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.EPackageInfo;
-import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
-import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
-import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
@@ -65,8 +61,7 @@ public abstract class ProjectDescriptor {
       String _name = this.getName();
       _xifexpression = (_plus + _name);
     } else {
-      ParentProjectDescriptor _parentProject = this.config.getParentProject();
-      String _location = _parentProject.getLocation();
+      String _location = this.config.getParentProject().getLocation();
       String _plus_1 = (_location + "/");
       String _name_1 = this.getName();
       _xifexpression = (_plus_1 + _name_1);
@@ -82,8 +77,7 @@ public abstract class ProjectDescriptor {
     final Function1<Outlet, String> _function = (Outlet it) -> {
       return this.sourceFolder(it);
     };
-    List<String> _map = ListExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function);
-    return IterableExtensions.<String>toSet(_map);
+    return IterableExtensions.<String>toSet(ListExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function));
   }
   
   public Iterable<? extends AbstractFile> getFiles() {
@@ -123,9 +117,10 @@ public abstract class ProjectDescriptor {
   
   public CharSequence buildProperties() {
     StringConcatenation _builder = new StringConcatenation();
-    String _buildPropertiesEntry = this.buildPropertiesEntry("source..", IterableExtensions.<String, String>map(this.getSourceFolders(), ((Function1<String, String>) (String it) -> {
+    final Function1<String, String> _function = (String it) -> {
       return (it + "/");
-    })));
+    };
+    String _buildPropertiesEntry = this.buildPropertiesEntry("source..", IterableExtensions.<String, String>map(this.getSourceFolders(), _function));
     _builder.append(_buildPropertiesEntry);
     _builder.newLineIfNotEmpty();
     String _buildPropertiesEntry_1 = this.buildPropertiesEntry("bin.includes", this.getBinIncludes());
@@ -167,8 +162,7 @@ public abstract class ProjectDescriptor {
         return "";
       }
       final String assignment = (key + " = ");
-      int _length = assignment.length();
-      final String indent = Strings.repeat(" ", _length);
+      final String indent = Strings.repeat(" ", assignment.length());
       String _join = IterableExtensions.join(value, (",\\\n" + indent));
       _xblockexpression = (assignment + _join);
     }
@@ -220,8 +214,7 @@ public abstract class ProjectDescriptor {
   }
   
   public String getBree() {
-    JavaVersion _javaVersion = this.config.getJavaVersion();
-    return _javaVersion.getBree();
+    return this.config.getJavaVersion().getBree();
   }
   
   private String manifestEntry(final String key, final Iterable<String> value) {
@@ -241,22 +234,18 @@ public abstract class ProjectDescriptor {
     LinkedHashSet<String> _xblockexpression = null;
     {
       final LinkedHashSet<String> bundles = CollectionLiterals.<String>newLinkedHashSet();
-      Set<? extends ProjectDescriptor> _upstreamProjects = this.getUpstreamProjects();
       final Function1<ProjectDescriptor, String> _function = (ProjectDescriptor it) -> {
         return it.getName();
       };
-      Iterable<String> _map = IterableExtensions.map(_upstreamProjects, _function);
+      Iterable<String> _map = IterableExtensions.map(this.getUpstreamProjects(), _function);
       Iterables.<String>addAll(bundles, _map);
-      Set<ExternalDependency> _externalDependencies = this.getExternalDependencies();
       final Function1<ExternalDependency, ExternalDependency.P2Coordinates> _function_1 = (ExternalDependency it) -> {
         return it.getP2();
       };
-      Iterable<ExternalDependency.P2Coordinates> _map_1 = IterableExtensions.<ExternalDependency, ExternalDependency.P2Coordinates>map(_externalDependencies, _function_1);
       final Function1<ExternalDependency.P2Coordinates, Boolean> _function_2 = (ExternalDependency.P2Coordinates it) -> {
         String _bundleId = it.getBundleId();
         return Boolean.valueOf((_bundleId != null));
       };
-      Iterable<ExternalDependency.P2Coordinates> _filter = IterableExtensions.<ExternalDependency.P2Coordinates>filter(_map_1, _function_2);
       final Function1<ExternalDependency.P2Coordinates, String> _function_3 = (ExternalDependency.P2Coordinates it) -> {
         String _bundleId = it.getBundleId();
         String _xifexpression = null;
@@ -271,31 +260,25 @@ public abstract class ProjectDescriptor {
         }
         return (_bundleId + _xifexpression);
       };
-      Iterable<String> _map_2 = IterableExtensions.<ExternalDependency.P2Coordinates, String>map(_filter, _function_3);
-      Iterables.<String>addAll(bundles, _map_2);
+      Iterable<String> _map_1 = IterableExtensions.<ExternalDependency.P2Coordinates, String>map(IterableExtensions.<ExternalDependency.P2Coordinates>filter(IterableExtensions.<ExternalDependency, ExternalDependency.P2Coordinates>map(this.getExternalDependencies(), _function_1), _function_2), _function_3);
+      Iterables.<String>addAll(bundles, _map_1);
       _xblockexpression = bundles;
     }
     return _xblockexpression;
   }
   
   public Set<String> getImportedPackages() {
-    Set<ExternalDependency> _externalDependencies = this.getExternalDependencies();
     final Function1<ExternalDependency, Set<String>> _function = (ExternalDependency it) -> {
-      ExternalDependency.P2Coordinates _p2 = it.getP2();
-      return _p2.getPackages();
+      return it.getP2().getPackages();
     };
-    Iterable<Set<String>> _map = IterableExtensions.<ExternalDependency, Set<String>>map(_externalDependencies, _function);
-    Iterable<String> _flatten = Iterables.<String>concat(_map);
-    return IterableExtensions.<String>toSet(_flatten);
+    return IterableExtensions.<String>toSet(Iterables.<String>concat(IterableExtensions.<ExternalDependency, Set<String>>map(this.getExternalDependencies(), _function)));
   }
   
   public Set<ExternalDependency> getExternalDependencies() {
     final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
-    Ecore2XtextConfiguration _ecore2Xtext = this.config.getEcore2Xtext();
-    Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
+    Set<EPackageInfo> _ePackageInfos = this.config.getEcore2Xtext().getEPackageInfos();
     for (final EPackageInfo ePackage : _ePackageInfos) {
-      String _bundleID = ePackage.getBundleID();
-      ExternalDependency _createBundleDependency = ExternalDependency.createBundleDependency(_bundleID);
+      ExternalDependency _createBundleDependency = ExternalDependency.createBundleDependency(ePackage.getBundleID());
       deps.add(_createBundleDependency);
     }
     return deps;
@@ -314,8 +297,7 @@ public abstract class ProjectDescriptor {
   }
   
   public String sourceFolder(final Outlet outlet) {
-    SourceLayout _sourceLayout = this.config.getSourceLayout();
-    return _sourceLayout.getPathFor(outlet);
+    return this.config.getSourceLayout().getPathFor(outlet);
   }
   
   protected PlainTextFile file(final Outlet outlet, final String relativePath, final CharSequence content) {

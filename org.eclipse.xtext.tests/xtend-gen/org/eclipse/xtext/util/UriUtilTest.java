@@ -48,6 +48,8 @@ public class UriUtilTest {
     final File folder = new File(".");
     final URI uri = UriUtil.createFolderURI(folder);
     Assert.assertTrue(uri.hasTrailingPathSeparator());
-    Assert.assertEquals(".", uri.segment((uri.segmentCount() - 2)));
+    int _segmentCount = uri.segmentCount();
+    int _minus = (_segmentCount - 2);
+    Assert.assertEquals(".", uri.segment(_minus));
   }
 }

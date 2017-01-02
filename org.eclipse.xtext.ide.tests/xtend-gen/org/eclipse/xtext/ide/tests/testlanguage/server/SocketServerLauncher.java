@@ -16,7 +16,6 @@ import java.net.InetSocketAddress;
 import java.nio.channels.Channels;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.util.concurrent.Future;
 import org.eclipse.lsp4j.jsonrpc.Launcher;
 import org.eclipse.lsp4j.launch.LSPLauncher;
 import org.eclipse.lsp4j.services.LanguageClient;
@@ -42,8 +41,7 @@ public class SocketServerLauncher {
       OutputStream _newOutputStream = Channels.newOutputStream(socketChannel);
       PrintWriter _printWriter = new PrintWriter(System.out);
       final Launcher<LanguageClient> launcher = LSPLauncher.createServerLauncher(languageServer, _newInputStream, _newOutputStream, true, _printWriter);
-      Future<?> _startListening = launcher.startListening();
-      _startListening.get();
+      launcher.startListening().get();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

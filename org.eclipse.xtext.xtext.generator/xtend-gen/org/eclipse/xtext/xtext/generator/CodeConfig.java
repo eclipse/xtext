@@ -131,10 +131,7 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
     }
     final StringBuilder stringBuilder = new StringBuilder();
     for (final IClassAnnotation annotation : this.classAnnotations) {
-      String _string = annotation.toString();
-      StringBuilder _append = stringBuilder.append(_string);
-      String _newLine = Strings.newLine();
-      _append.append(_newLine);
+      stringBuilder.append(annotation.toString()).append(Strings.newLine());
     }
     return stringBuilder.toString();
   }
@@ -149,11 +146,7 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
       {
         final TypeReference importString = annotation.getAnnotationImport();
         if ((importString != null)) {
-          StringBuilder _append = stringBuilder.append("import ");
-          StringBuilder _append_1 = _append.append(importString);
-          StringBuilder _append_2 = _append_1.append(";");
-          String _newLine = Strings.newLine();
-          _append_2.append(_newLine);
+          stringBuilder.append("import ").append(importString).append(";").append(Strings.newLine());
         }
       }
     }

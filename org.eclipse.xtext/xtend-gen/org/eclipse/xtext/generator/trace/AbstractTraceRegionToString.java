@@ -10,9 +10,6 @@ package org.eclipse.xtext.generator.trace;
 import com.google.common.base.Function;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableListMultimap;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimaps;
 import com.google.common.io.CharStreams;
@@ -24,13 +21,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -207,8 +202,7 @@ public abstract class AbstractTraceRegionToString {
   }
   
   protected String getRemoteTitle(final SourceRelativeURI uri) {
-    URI _uRI = uri.getURI();
-    return _uRI.toString();
+    return uri.getURI().toString();
   }
   
   protected boolean shouldInclude(final AbstractTraceRegion region) {
@@ -216,8 +210,7 @@ public abstract class AbstractTraceRegionToString {
     if ((frame == null)) {
       return true;
     } else {
-      ITextRegionWithLineInformation _myRegion = region.getMyRegion();
-      return frame.contains(_myRegion);
+      return frame.contains(region.getMyRegion());
     }
   }
   
@@ -268,14 +261,11 @@ public abstract class AbstractTraceRegionToString {
       final AbstractTraceRegionToString.RegionHandle regHandle = new AbstractTraceRegionToString.RegionHandle(_plusPlus, reg);
       result.add(regHandle);
       childResult = regHandle.children;
-      ITextRegionWithLineInformation _myRegion = reg.getMyRegion();
-      this.add(lFile, _myRegion, regHandle, null);
-      List<ILocationData> _associatedLocations = reg.getAssociatedLocations();
+      this.add(lFile, reg.getMyRegion(), regHandle, null);
       final Function1<ILocationData, Boolean> _function = (ILocationData it) -> {
         return Boolean.valueOf(this.shouldInclude(reg, it));
       };
-      Iterable<ILocationData> _filter = IterableExtensions.<ILocationData>filter(_associatedLocations, _function);
-      final List<ILocationData> locs = IterableExtensions.<ILocationData>toList(_filter);
+      final List<ILocationData> locs = IterableExtensions.<ILocationData>toList(IterableExtensions.<ILocationData>filter(reg.getAssociatedLocations(), _function));
       for (int j = 0; (j < locs.size()); j++) {
         {
           final ILocationData loc = locs.get(j);
@@ -336,30 +326,24 @@ public abstract class AbstractTraceRegionToString {
     final Function1<AbstractTraceRegionToString.Insert, Boolean> _function = (AbstractTraceRegionToString.Insert it) -> {
       return Boolean.valueOf(it.open);
     };
-    Iterable<AbstractTraceRegionToString.Insert> _filter = IterableExtensions.<AbstractTraceRegionToString.Insert>filter(inserts, _function);
     final Function1<AbstractTraceRegionToString.Insert, Integer> _function_1 = (AbstractTraceRegionToString.Insert it) -> {
       return Integer.valueOf(this.sortKey(it));
     };
-    List<AbstractTraceRegionToString.Insert> _sortBy = IterableExtensions.<AbstractTraceRegionToString.Insert, Integer>sortBy(_filter, _function_1);
     final Function1<AbstractTraceRegionToString.Insert, String> _function_2 = (AbstractTraceRegionToString.Insert it) -> {
       return this.render(it, width);
     };
-    List<String> _map = ListExtensions.<AbstractTraceRegionToString.Insert, String>map(_sortBy, _function_2);
-    final String opens = IterableExtensions.join(_map, ",");
+    final String opens = IterableExtensions.join(ListExtensions.<AbstractTraceRegionToString.Insert, String>map(IterableExtensions.<AbstractTraceRegionToString.Insert, Integer>sortBy(IterableExtensions.<AbstractTraceRegionToString.Insert>filter(inserts, _function), _function_1), _function_2), ",");
     final Function1<AbstractTraceRegionToString.Insert, Boolean> _function_3 = (AbstractTraceRegionToString.Insert it) -> {
       return Boolean.valueOf((!it.open));
     };
-    Iterable<AbstractTraceRegionToString.Insert> _filter_1 = IterableExtensions.<AbstractTraceRegionToString.Insert>filter(inserts, _function_3);
     final Function1<AbstractTraceRegionToString.Insert, Integer> _function_4 = (AbstractTraceRegionToString.Insert it) -> {
       int _sortKey = this.sortKey(it);
       return Integer.valueOf((-_sortKey));
     };
-    List<AbstractTraceRegionToString.Insert> _sortBy_1 = IterableExtensions.<AbstractTraceRegionToString.Insert, Integer>sortBy(_filter_1, _function_4);
     final Function1<AbstractTraceRegionToString.Insert, String> _function_5 = (AbstractTraceRegionToString.Insert it) -> {
       return this.render(it, width);
     };
-    List<String> _map_1 = ListExtensions.<AbstractTraceRegionToString.Insert, String>map(_sortBy_1, _function_5);
-    final String closes = IterableExtensions.join(_map_1, ",");
+    final String closes = IterableExtensions.join(ListExtensions.<AbstractTraceRegionToString.Insert, String>map(IterableExtensions.<AbstractTraceRegionToString.Insert, Integer>sortBy(IterableExtensions.<AbstractTraceRegionToString.Insert>filter(inserts, _function_3), _function_4), _function_5), ",");
     String _xifexpression = null;
     boolean _isEmpty = opens.isEmpty();
     if (_isEmpty) {
@@ -410,21 +394,16 @@ public abstract class AbstractTraceRegionToString {
       final Function<AbstractTraceRegionToString.Insert, Integer> _function_1 = (AbstractTraceRegionToString.Insert it) -> {
         return Integer.valueOf(it.offset);
       };
-      ImmutableListMultimap<Integer, AbstractTraceRegionToString.Insert> _index = Multimaps.<Integer, AbstractTraceRegionToString.Insert>index(inframe, _function_1);
-      ImmutableMap<Integer, Collection<AbstractTraceRegionToString.Insert>> _asMap = _index.asMap();
-      ImmutableSet<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>> _entrySet = _asMap.entrySet();
-      List<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>> _list = IterableExtensions.<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>>toList(_entrySet);
       final Function1<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>, Integer> _function_2 = (Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>> it) -> {
         return it.getKey();
       };
-      final List<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>> offsets = IterableExtensions.<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>, Integer>sortBy(_list, _function_2);
+      final List<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>> offsets = IterableExtensions.<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>, Integer>sortBy(IterableExtensions.<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>>toList(Multimaps.<Integer, AbstractTraceRegionToString.Insert>index(inframe, _function_1).asMap().entrySet()), _function_2);
       int last = frame.getOffset();
       final StringBuilder result = new StringBuilder();
       for (final Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>> e : offsets) {
         {
           final Integer offset = e.getKey();
-          Collection<AbstractTraceRegionToString.Insert> _value = e.getValue();
-          final String insert = this.render(_value, width);
+          final String insert = this.render(e.getValue(), width);
           final String prefix = text.substring(last, (offset).intValue());
           result.append(prefix);
           result.append(insert);
@@ -435,8 +414,7 @@ public abstract class AbstractTraceRegionToString {
       int _length_1 = frame.getLength();
       final int end = (_offset + _length_1);
       if ((last < end)) {
-        String _substring = text.substring(last, end);
-        result.append(_substring);
+        result.append(text.substring(last, end));
       }
       String _string = result.toString();
       StringReader _stringReader = new StringReader(_string);
@@ -491,8 +469,7 @@ public abstract class AbstractTraceRegionToString {
       _xifexpression = "";
     }
     final String prefix = _xifexpression;
-    Class<? extends ILocationData> _class = loc.location.getClass();
-    final String name = _class.getSimpleName();
+    final String name = loc.location.getClass().getSimpleName();
     String _xifexpression_1 = null;
     SourceRelativeURI _srcRelativePath = loc.location.getSrcRelativePath();
     boolean _tripleNotEquals = (_srcRelativePath != null);
@@ -513,8 +490,7 @@ public abstract class AbstractTraceRegionToString {
   }
   
   protected void render(final AbstractTraceRegionToString.RegionHandle region, final int idW, final int offsetW, final int lengthW, final int indent, final List<String> result) {
-    String _string = Integer.toString(region.id, this.radix);
-    final String id = Strings.padStart(_string, idW, '0');
+    final String id = Strings.padStart(Integer.toString(region.id, this.radix), idW, '0');
     String _xifexpression = null;
     boolean _isUseForDebugging = region.region.isUseForDebugging();
     if (_isUseForDebugging) {
@@ -523,20 +499,14 @@ public abstract class AbstractTraceRegionToString {
       _xifexpression = " ";
     }
     final String debug = _xifexpression;
-    int _myOffset = region.region.getMyOffset();
-    String _string_1 = Integer.toString(_myOffset);
-    final String offset = Strings.padStart(_string_1, offsetW, '0');
-    int _myLength = region.region.getMyLength();
-    String _string_2 = Integer.toString(_myLength);
-    final String length = Strings.padStart(_string_2, lengthW, '0');
+    final String offset = Strings.padStart(Integer.toString(region.region.getMyOffset()), offsetW, '0');
+    final String length = Strings.padStart(Integer.toString(region.region.getMyLength()), lengthW, '0');
     final String space = Strings.repeat(" ", indent);
-    Class<? extends AbstractTraceRegion> _class = region.region.getClass();
-    final String name = _class.getSimpleName();
+    final String name = region.region.getClass().getSimpleName();
     final Function1<AbstractTraceRegionToString.LocationHandle, String> _function = (AbstractTraceRegionToString.LocationHandle it) -> {
       return this.render(it);
     };
-    List<String> _map = ListExtensions.<AbstractTraceRegionToString.LocationHandle, String>map(region.locations, _function);
-    final String locations = IterableExtensions.join(_map, ", ");
+    final String locations = IterableExtensions.join(ListExtensions.<AbstractTraceRegionToString.LocationHandle, String>map(region.locations, _function), ", ");
     final String loc = (((((debug + " ") + offset) + "-") + length) + space);
     final String header = (((((id + ": ") + loc) + name) + " -> ") + locations);
     boolean _isEmpty = region.children.isEmpty();
@@ -558,10 +528,8 @@ public abstract class AbstractTraceRegionToString {
     final AbstractTraceRegionToString.File localFile = new AbstractTraceRegionToString.File(null);
     final LinkedHashMap<SourceRelativeURI, AbstractTraceRegionToString.File> remoteFiles = CollectionLiterals.<SourceRelativeURI, AbstractTraceRegionToString.File>newLinkedHashMap();
     final List<AbstractTraceRegionToString.RegionHandle> roothandles = CollectionLiterals.<AbstractTraceRegionToString.RegionHandle>newArrayList();
-    AbstractTraceRegion _trace = this.getTrace();
-    final int maxid = this.collect(_trace, 1, localFile, remoteFiles, roothandles);
-    String _string = Integer.toString(maxid, this.radix);
-    final int idwidth = _string.length();
+    final int maxid = this.collect(this.getTrace(), 1, localFile, remoteFiles, roothandles);
+    final int idwidth = Integer.toString(maxid, this.radix).length();
     List<String> _render = this.render(localFile, idwidth);
     Iterables.<String>addAll(localFile.lines, _render);
     Collection<AbstractTraceRegionToString.File> _values = remoteFiles.values();
@@ -572,41 +540,30 @@ public abstract class AbstractTraceRegionToString {
     final Function1<String, Integer> _function = (String it) -> {
       return Integer.valueOf(it.length());
     };
-    List<Integer> _map = ListExtensions.<String, Integer>map(localFile.lines, _function);
-    Integer _max = IterableExtensions.<Integer>max(_map);
-    String _localTitle = this.getLocalTitle();
-    int _length = _localTitle.length();
+    Integer _max = IterableExtensions.<Integer>max(ListExtensions.<String, Integer>map(localFile.lines, _function));
+    int _length = this.getLocalTitle().length();
     int _plus = (_length + 2);
     final int localWidth = Math.max((_max).intValue(), _plus);
-    Collection<AbstractTraceRegionToString.File> _values_1 = remoteFiles.values();
     final Function1<AbstractTraceRegionToString.File, Integer> _function_1 = (AbstractTraceRegionToString.File it) -> {
       final Function1<String, Integer> _function_2 = (String it_1) -> {
         return Integer.valueOf(it_1.length());
       };
-      List<Integer> _map_1 = ListExtensions.<String, Integer>map(it.lines, _function_2);
-      Integer _max_1 = IterableExtensions.<Integer>max(_map_1);
-      String _remoteTitle = this.getRemoteTitle(it.uri);
-      int _length_1 = _remoteTitle.length();
+      Integer _max_1 = IterableExtensions.<Integer>max(ListExtensions.<String, Integer>map(it.lines, _function_2));
+      int _length_1 = this.getRemoteTitle(it.uri).length();
       int _plus_1 = (_length_1 + 2);
       return Integer.valueOf(Math.max((_max_1).intValue(), _plus_1));
     };
-    Iterable<Integer> _map_1 = IterableExtensions.<AbstractTraceRegionToString.File, Integer>map(_values_1, _function_1);
-    final Integer remoteWidth = IterableExtensions.<Integer>max(_map_1);
-    String _title = this.title(null, localWidth);
-    localFile.lines.add(0, _title);
-    Collection<AbstractTraceRegionToString.File> _values_2 = remoteFiles.values();
-    for (final AbstractTraceRegionToString.File file_1 : _values_2) {
-      String _title_1 = this.title(file_1.uri, (remoteWidth).intValue());
-      file_1.lines.add(0, _title_1);
+    final Integer remoteWidth = IterableExtensions.<Integer>max(IterableExtensions.<AbstractTraceRegionToString.File, Integer>map(remoteFiles.values(), _function_1));
+    localFile.lines.add(0, this.title(null, localWidth));
+    Collection<AbstractTraceRegionToString.File> _values_1 = remoteFiles.values();
+    for (final AbstractTraceRegionToString.File file_1 : _values_1) {
+      file_1.lines.add(0, this.title(file_1.uri, (remoteWidth).intValue()));
     }
     final List<String> left = localFile.lines;
-    Collection<AbstractTraceRegionToString.File> _values_3 = remoteFiles.values();
     final Function1<AbstractTraceRegionToString.File, List<String>> _function_2 = (AbstractTraceRegionToString.File it) -> {
       return it.lines;
     };
-    Iterable<List<String>> _map_2 = IterableExtensions.<AbstractTraceRegionToString.File, List<String>>map(_values_3, _function_2);
-    Iterable<String> _flatten = Iterables.<String>concat(_map_2);
-    final List<String> right = IterableExtensions.<String>toList(_flatten);
+    final List<String> right = IterableExtensions.<String>toList(Iterables.<String>concat(IterableExtensions.<AbstractTraceRegionToString.File, List<String>>map(remoteFiles.values(), _function_2)));
     final ArrayList<String> result = CollectionLiterals.<String>newArrayList();
     if (this.showLegend) {
       result.add(
@@ -648,28 +605,20 @@ public abstract class AbstractTraceRegionToString {
         };
         return this.<AbstractTraceRegionToString.RegionHandle>collect(it, _function_4);
       };
-      List<Set<AbstractTraceRegionToString.RegionHandle>> _map_3 = ListExtensions.<AbstractTraceRegionToString.RegionHandle, Set<AbstractTraceRegionToString.RegionHandle>>map(roothandles, _function_3);
-      final Iterable<AbstractTraceRegionToString.RegionHandle> allhandles = Iterables.<AbstractTraceRegionToString.RegionHandle>concat(_map_3);
+      final Iterable<AbstractTraceRegionToString.RegionHandle> allhandles = Iterables.<AbstractTraceRegionToString.RegionHandle>concat(ListExtensions.<AbstractTraceRegionToString.RegionHandle, Set<AbstractTraceRegionToString.RegionHandle>>map(roothandles, _function_3));
       final Function1<AbstractTraceRegionToString.RegionHandle, Integer> _function_4 = (AbstractTraceRegionToString.RegionHandle it) -> {
         return Integer.valueOf(it.region.getMyOffset());
       };
-      Iterable<Integer> _map_4 = IterableExtensions.<AbstractTraceRegionToString.RegionHandle, Integer>map(allhandles, _function_4);
-      Integer _max_1 = IterableExtensions.<Integer>max(_map_4);
-      String _valueOf = String.valueOf(_max_1);
-      final int offsetWidth = _valueOf.length();
+      final int offsetWidth = String.valueOf(IterableExtensions.<Integer>max(IterableExtensions.<AbstractTraceRegionToString.RegionHandle, Integer>map(allhandles, _function_4))).length();
       final Function1<AbstractTraceRegionToString.RegionHandle, Integer> _function_5 = (AbstractTraceRegionToString.RegionHandle it) -> {
         return Integer.valueOf(it.region.getMyLength());
       };
-      Iterable<Integer> _map_5 = IterableExtensions.<AbstractTraceRegionToString.RegionHandle, Integer>map(allhandles, _function_5);
-      Integer _max_2 = IterableExtensions.<Integer>max(_map_5);
-      String _valueOf_1 = String.valueOf(_max_2);
-      final int lengthWidth = _valueOf_1.length();
+      final int lengthWidth = String.valueOf(IterableExtensions.<Integer>max(IterableExtensions.<AbstractTraceRegionToString.RegionHandle, Integer>map(allhandles, _function_5))).length();
       for (final AbstractTraceRegionToString.RegionHandle handle : roothandles) {
         this.render(handle, idwidth, offsetWidth, lengthWidth, 1, result);
       }
     }
-    String _newLine = org.eclipse.xtext.util.Strings.newLine();
-    return IterableExtensions.join(result, _newLine);
+    return IterableExtensions.join(result, org.eclipse.xtext.util.Strings.newLine());
   }
   
   @Override

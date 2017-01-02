@@ -37,34 +37,27 @@ public class AntlrGrammarComparatorTestHelper {
   private static class TestErrorHandler implements AntlrGrammarComparator.IErrorHandler {
     @Override
     public void handleMismatch(final String match, final String matchReference, final AntlrGrammarComparator.ErrorContext context) {
-      AntlrGrammarComparator.MatchState _testedGrammar = context.getTestedGrammar();
-      int _lineNumber = _testedGrammar.getLineNumber();
-      AntlrGrammarComparator.MatchState _referenceGrammar = context.getReferenceGrammar();
-      int _lineNumber_1 = _referenceGrammar.getLineNumber();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Inputs differs at token ");
       _builder.append(match);
       _builder.append(" (line ");
-      AntlrGrammarComparator.MatchState _testedGrammar_1 = context.getTestedGrammar();
-      int _lineNumber_2 = _testedGrammar_1.getLineNumber();
-      _builder.append(_lineNumber_2);
+      int _lineNumber = context.getTestedGrammar().getLineNumber();
+      _builder.append(_lineNumber);
       _builder.append("), expected token ");
       _builder.append(matchReference);
       _builder.append(" (line ");
-      AntlrGrammarComparator.MatchState _referenceGrammar_1 = context.getReferenceGrammar();
-      int _lineNumber_3 = _referenceGrammar_1.getLineNumber();
-      _builder.append(_lineNumber_3);
+      int _lineNumber_1 = context.getReferenceGrammar().getLineNumber();
+      _builder.append(_lineNumber_1);
       _builder.append(").");
       _builder.newLineIfNotEmpty();
-      AntlrGrammarComparatorTestHelper.fail(_lineNumber, _lineNumber_1, _builder.toString());
+      AntlrGrammarComparatorTestHelper.fail(context.getTestedGrammar().getLineNumber(), context.getReferenceGrammar().getLineNumber(), _builder.toString());
     }
     
     @Override
     public void handleInvalidGeneratedGrammarFile(final AntlrGrammarComparator.ErrorContext context) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Noticed an unmatched character sequence in \'testee\' in/before line ");
-      AntlrGrammarComparator.MatchState _testedGrammar = context.getTestedGrammar();
-      int _lineNumber = _testedGrammar.getLineNumber();
+      int _lineNumber = context.getTestedGrammar().getLineNumber();
       _builder.append(_lineNumber);
       _builder.append(".");
       _builder.newLineIfNotEmpty();
@@ -75,8 +68,7 @@ public class AntlrGrammarComparatorTestHelper {
     public void handleInvalidReferenceGrammarFile(final AntlrGrammarComparator.ErrorContext context) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Noticed an unmatched character sequence in \'expected\' in/before line ");
-      AntlrGrammarComparator.MatchState _referenceGrammar = context.getReferenceGrammar();
-      int _lineNumber = _referenceGrammar.getLineNumber();
+      int _lineNumber = context.getReferenceGrammar().getLineNumber();
       _builder.append(_lineNumber);
       _builder.append(".");
       _builder.newLineIfNotEmpty();

@@ -18,13 +18,10 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
-import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 /**
@@ -107,9 +104,7 @@ public class SdkFeatureProject extends ProjectDescriptor {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("label=\"");
-    WizardConfiguration _config = this.getConfig();
-    LanguageDescriptor _language = _config.getLanguage();
-    String _simpleName = _language.getSimpleName();
+    String _simpleName = this.getConfig().getLanguage().getSimpleName();
     _builder.append(_simpleName, "\t");
     _builder.append(" Feature \"");
     _builder.newLineIfNotEmpty();
@@ -121,9 +116,7 @@ public class SdkFeatureProject extends ProjectDescriptor {
     _builder.append(_includedPlugin, "\t");
     _builder.newLineIfNotEmpty();
     {
-      WizardConfiguration _config_1 = this.getConfig();
-      IdeProjectDescriptor _ideProject = _config_1.getIdeProject();
-      boolean _isEnabled = _ideProject.isEnabled();
+      boolean _isEnabled = this.getConfig().getIdeProject().isEnabled();
       if (_isEnabled) {
         _builder.append("\t");
         CharSequence _includedPlugin_1 = this.includedPlugin(this.getConfig().getIdeProject().getNameQualifier());
@@ -132,9 +125,7 @@ public class SdkFeatureProject extends ProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_2 = this.getConfig();
-      UiProjectDescriptor _uiProject = _config_2.getUiProject();
-      boolean _isEnabled_1 = _uiProject.isEnabled();
+      boolean _isEnabled_1 = this.getConfig().getUiProject().isEnabled();
       if (_isEnabled_1) {
         _builder.append("\t");
         CharSequence _includedPlugin_2 = this.includedPlugin(this.getConfig().getUiProject().getNameQualifier());
@@ -153,8 +144,7 @@ public class SdkFeatureProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("id=\"");
-    WizardConfiguration _config = this.getConfig();
-    String _baseName = _config.getBaseName();
+    String _baseName = this.getConfig().getBaseName();
     String _plus = (_baseName + qualifier);
     _builder.append(_plus, "\t\t");
     _builder.append("\"");

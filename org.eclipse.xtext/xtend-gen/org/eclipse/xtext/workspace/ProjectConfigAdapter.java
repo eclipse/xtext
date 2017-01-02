@@ -45,8 +45,7 @@ public class ProjectConfigAdapter {
   }
   
   public static void install(final ResourceSet resourceSet, final IProjectConfig config) {
-    ProjectConfigAdapter _projectConfigAdapter = new ProjectConfigAdapter(config);
-    _projectConfigAdapter.attachToEmfObject(resourceSet);
+    new ProjectConfigAdapter(config).attachToEmfObject(resourceSet);
   }
   
   public static ProjectConfigAdapter findInEmfObject(final Notifier emfObject) {

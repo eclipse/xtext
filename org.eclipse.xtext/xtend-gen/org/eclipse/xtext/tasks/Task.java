@@ -32,8 +32,7 @@ public class Task {
   }
   
   public int getTotalLength() {
-    String _fullText = this.getFullText();
-    return _fullText.length();
+    return this.getFullText().length();
   }
   
   public int getTagLength() {
