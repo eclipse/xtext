@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 import com.google.common.base.Objects;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -65,6 +64,8 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   private StatusWidget statusWidget;
   
+  private boolean autoSelectIdeProject;
+  
   public AdvancedNewProjectPage(final String pageName) {
     super(pageName);
     this.setTitle(Messages.AdvancedNewProjectPage_WindowTitle);
@@ -108,7 +109,7 @@ public class AdvancedNewProjectPage extends WizardPage {
         this.createWebProject = this.CheckBox(it_1, _function_5);
         final Procedure1<Button> _function_6 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projIde);
-          it_2.setEnabled(true);
+          it_2.setEnabled(false);
         };
         this.createIdeProject = this.CheckBox(it_1, _function_6);
         final Procedure1<Button> _function_7 = (Button it_2) -> {
@@ -157,6 +158,33 @@ public class AdvancedNewProjectPage extends WizardPage {
         AdvancedNewProjectPage.this.validate(e);
       }
     };
+    final List<Button> uiButtons = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createIdeaProject, this.createWebProject));
+    final SelectionAdapter selectionControlUi = new SelectionAdapter() {
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        Object _source = e.getSource();
+        boolean _selection = ((Button) _source).getSelection();
+        if (_selection) {
+          boolean _selection_1 = AdvancedNewProjectPage.this.createIdeProject.getSelection();
+          boolean _not = (!_selection_1);
+          if (_not) {
+            AdvancedNewProjectPage.this.autoSelectIdeProject = true;
+          }
+          AdvancedNewProjectPage.this.createIdeProject.setSelection(true);
+          AdvancedNewProjectPage.this.createIdeProject.setEnabled(false);
+        } else {
+          final Function1<Button, Boolean> _function = (Button it) -> {
+            boolean _selection_2 = it.getSelection();
+            return Boolean.valueOf((!_selection_2));
+          };
+          boolean _forall = IterableExtensions.<Button>forall(uiButtons, _function);
+          if (_forall) {
+            AdvancedNewProjectPage.this.createIdeProject.setEnabled(true);
+          }
+        }
+        AdvancedNewProjectPage.this.validate(e);
+      }
+    };
     this.createUiProject.addSelectionListener(new SelectionAdapter() {
       @Override
       public void widgetSelected(final SelectionEvent e) {
@@ -170,9 +198,9 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.sourceLayout.addSelectionListener(selectionControl);
     this.createTestProject.addSelectionListener(selectionControl);
     this.preferredBuildSystem.addSelectionListener(selectionControl);
-    this.createUiProject.addSelectionListener(selectionControl);
-    this.createIdeaProject.addSelectionListener(selectionControl);
-    this.createWebProject.addSelectionListener(selectionControl);
+    this.createUiProject.addSelectionListener(selectionControlUi);
+    this.createIdeaProject.addSelectionListener(selectionControlUi);
+    this.createWebProject.addSelectionListener(selectionControlUi);
     this.createIdeProject.addSelectionListener(selectionControl);
     this.createSDKProject.addSelectionListener(selectionControl);
     this.createP2Project.addSelectionListener(selectionControl);
@@ -308,57 +336,21 @@ public class AdvancedNewProjectPage extends WizardPage {
           this.<Control>reportIssue(IMessageProvider.ERROR, _builder_5.toString(), _function_5);
         }
       }
-      final List<Button> dependend = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createIdeaProject, this.createWebProject));
       Procedure0 _xifexpression = null;
-      if (((!this.createIdeProject.getSelection()) && IterableExtensions.<Button>exists(dependend, ((Function1<Button, Boolean>) (Button it) -> {
-        return Boolean.valueOf(it.getSelection());
-      })))) {
+      if (this.autoSelectIdeProject) {
         Procedure0 _xblockexpression_1 = null;
         {
-          final Function1<Button, Boolean> _function_6 = (Button it) -> {
-            return Boolean.valueOf(it.getSelection());
-          };
-          final Function1<Button, CharSequence> _function_7 = (Button it) -> {
-            return it.getText();
-          };
-          final String affectedProjects = IterableExtensions.<Button>join(IterableExtensions.<Button>filter(dependend, _function_6), ", ", _function_7);
-          Procedure0 _xifexpression_1 = null;
-          if ((this.createIdeProject == source)) {
-            StringConcatenation _builder_6 = new StringConcatenation();
-            _builder_6.append("Frontend projects like \'");
-            _builder_6.append(affectedProjects);
-            _builder_6.append("\' depends on \'");
-            String _text_6 = this.createIdeProject.getText();
-            _builder_6.append(_text_6);
-            _builder_6.append("\' project.");
-            _builder_6.newLineIfNotEmpty();
-            _builder_6.append("Please <a>deselect</a> these.");
-            final Procedure0 _function_8 = () -> {
-              final Consumer<Button> _function_9 = (Button it) -> {
-                it.setSelection(false);
-              };
-              dependend.forEach(_function_9);
-            };
-            _xifexpression_1 = this.<Control>reportIssue(IMessageProvider.ERROR, _builder_6.toString(), _function_8);
-          } else {
-            StringConcatenation _builder_7 = new StringConcatenation();
-            _builder_7.append("Projects like \'");
-            _builder_7.append(affectedProjects);
-            _builder_7.append("\' depends on \'");
-            String _text_7 = this.createIdeProject.getText();
-            _builder_7.append(_text_7);
-            _builder_7.append("\' project.");
-            _builder_7.newLineIfNotEmpty();
-            _builder_7.append("Please <a>enable \'");
-            String _text_8 = this.createIdeProject.getText();
-            _builder_7.append(_text_8);
-            _builder_7.append("\'</a> project.");
-            final Procedure0 _function_9 = () -> {
-              this.createIdeProject.setSelection(true);
-            };
-            _xifexpression_1 = this.<Control>reportIssue(IMessageProvider.ERROR, _builder_7.toString(), _function_9);
-          }
-          _xblockexpression_1 = _xifexpression_1;
+          this.autoSelectIdeProject = false;
+          StringConcatenation _builder_6 = new StringConcatenation();
+          _builder_6.append("\'");
+          String _text_6 = this.createIdeProject.getText();
+          _builder_6.append(_text_6);
+          _builder_6.append("\' project was automatically selected as option \'");
+          String _text_7 = ((Button) source).getText();
+          _builder_6.append(_text_7);
+          _builder_6.append("\' requires it.");
+          _builder_6.newLineIfNotEmpty();
+          _xblockexpression_1 = this.<Control>reportIssue(IMessageProvider.INFORMATION, _builder_6.toString());
         }
         _xifexpression = _xblockexpression_1;
       }
