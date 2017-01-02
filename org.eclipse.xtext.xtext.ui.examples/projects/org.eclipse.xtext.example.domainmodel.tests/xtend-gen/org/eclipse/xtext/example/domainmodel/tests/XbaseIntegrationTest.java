@@ -2,10 +2,6 @@ package org.eclipse.xtext.example.domainmodel.tests;
 
 import com.google.inject.Inject;
 import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
 import org.eclipse.xtext.example.domainmodel.tests.DomainmodelInjectorProvider;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
@@ -53,14 +49,9 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
         final DomainModel parse = this.parseHelper.parse((("entity Foo { op doStuff() : Object { " + expression) + " } } "));
         this.validationHelper.assertNoErrors(parse);
         final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
-        Resource _eResource = parse.eResource();
-        this.generator.doGenerate(_eResource, fsa);
-        Map<String, CharSequence> _textFiles = fsa.getTextFiles();
-        Collection<CharSequence> _values = _textFiles.values();
-        Iterator<CharSequence> _iterator = _values.iterator();
-        final CharSequence concatenation = _iterator.next();
-        String _string = concatenation.toString();
-        final Class<?> clazz = this.javaCompiler.compileToClass("Foo", _string);
+        this.generator.doGenerate(parse.eResource(), fsa);
+        final CharSequence concatenation = fsa.getTextFiles().values().iterator().next();
+        final Class<?> clazz = this.javaCompiler.compileToClass("Foo", concatenation.toString());
         final Object foo = clazz.newInstance();
         final Method method = clazz.getDeclaredMethod("doStuff");
         _xblockexpression = method.invoke(foo);

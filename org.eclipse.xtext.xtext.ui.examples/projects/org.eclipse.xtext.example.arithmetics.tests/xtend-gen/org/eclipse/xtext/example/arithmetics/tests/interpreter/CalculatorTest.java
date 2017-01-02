@@ -10,8 +10,6 @@ package org.eclipse.xtext.example.arithmetics.tests.interpreter;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.math.BigDecimal;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
@@ -65,13 +63,7 @@ public class CalculatorTest {
     _builder.append("module test ");
     _builder.append(expression);
     final Module module = this.parseHelper.parse(_builder);
-    EList<Statement> _statements = module.getStatements();
-    Statement _head = IterableExtensions.<Statement>head(_statements);
-    EList<EObject> _eContents = _head.eContents();
-    Iterable<Expression> _filter = Iterables.<Expression>filter(_eContents, Expression.class);
-    Expression _head_1 = IterableExtensions.<Expression>head(_filter);
-    BigDecimal result = this.calculator.evaluate(_head_1);
-    double _doubleValue = result.doubleValue();
-    Assert.assertEquals(expected, _doubleValue, 0.0001);
+    BigDecimal result = this.calculator.evaluate(IterableExtensions.<Expression>head(Iterables.<Expression>filter(IterableExtensions.<Statement>head(module.getStatements()).eContents(), Expression.class)));
+    Assert.assertEquals(expected, result.doubleValue(), 0.0001);
   }
 }

@@ -10,15 +10,11 @@ package org.eclipse.xtext.builder.impl;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
-import org.eclipse.core.internal.localstore.FileSystemResourceManager;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.impl.AbstractBuilderParticipantTest;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
@@ -43,9 +39,7 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    IJavaProject _createJavaProject = JavaProjectSetupUtil.createJavaProject(AbstractFSSynchronizationTest.PROJECT_NAME);
-    IProject _project = _createJavaProject.getProject();
-    this.project = _project;
+    this.project = JavaProjectSetupUtil.createJavaProject(AbstractFSSynchronizationTest.PROJECT_NAME).getProject();
     IResourcesSetupUtil.addNature(this.project, XtextProjectHelper.NATURE_ID);
     IResourcesSetupUtil.reallyWaitForAutoBuild();
   }
@@ -58,8 +52,7 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testUpdateFileContent() {
-    IFolder _folder = this.project.getFolder("src-gen");
-    this.testUpdateFileContent(_folder);
+    this.testUpdateFileContent(this.project.getFolder("src-gen"));
   }
   
   @Test
@@ -76,17 +69,11 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   protected void testUpdateFileContent(final IContainer output) {
     try {
       Path _path = new Path("Foo.txt");
-      IFile _file = output.getFile(_path);
-      IPath _location = _file.getLocation();
-      this.createJavaIoFile(_location, "object Bar");
-      IFile _file_1 = this.project.getFile(("src/Foo" + this.F_EXT));
-      IPath _fullPath = _file_1.getFullPath();
-      IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+      this.createJavaIoFile(output.getFile(_path).getLocation(), "object Bar");
+      IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
       Path _path_1 = new Path("Foo.txt");
-      IFile _file_2 = output.getFile(_path_1);
-      String _fileToString = IResourcesSetupUtil.fileToString(_file_2);
-      Assert.assertEquals("object Foo", _fileToString);
+      Assert.assertEquals("object Foo", IResourcesSetupUtil.fileToString(output.getFile(_path_1)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -94,8 +81,7 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testTouchFile() {
-    IFolder _folder = this.project.getFolder("src-gen");
-    this.testTouchFile(_folder);
+    this.testTouchFile(this.project.getFolder("src-gen"));
   }
   
   @Test
@@ -112,17 +98,11 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   protected void testTouchFile(final IContainer output) {
     try {
       Path _path = new Path("Foo.txt");
-      IFile _file = output.getFile(_path);
-      IPath _location = _file.getLocation();
-      this.createJavaIoFile(_location, "object Foo");
-      IFile _file_1 = this.project.getFile(("src/Foo" + this.F_EXT));
-      IPath _fullPath = _file_1.getFullPath();
-      IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+      this.createJavaIoFile(output.getFile(_path).getLocation(), "object Foo");
+      IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
       Path _path_1 = new Path("Foo.txt");
-      IFile _file_2 = output.getFile(_path_1);
-      String _fileToString = IResourcesSetupUtil.fileToString(_file_2);
-      Assert.assertEquals("object Foo", _fileToString);
+      Assert.assertEquals("object Foo", IResourcesSetupUtil.fileToString(output.getFile(_path_1)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -130,8 +110,7 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testCreateFile() {
-    IFolder _folder = this.project.getFolder("src-gen");
-    this.testCreateFile(_folder);
+    this.testCreateFile(this.project.getFolder("src-gen"));
   }
   
   @Test
@@ -147,28 +126,18 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   protected void testCreateFile(final IContainer output) {
     try {
-      IFile _file = this.project.getFile(("src/Foo" + this.F_EXT));
-      IPath _fullPath = _file.getFullPath();
-      final IFile file = IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+      final IFile file = IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
       Path _path = new Path("Foo.txt");
-      IFile _file_1 = output.getFile(_path);
-      String _fileToString = IResourcesSetupUtil.fileToString(_file_1);
-      Assert.assertEquals("object Foo", _fileToString);
+      Assert.assertEquals("object Foo", IResourcesSetupUtil.fileToString(output.getFile(_path)));
       Path _path_1 = new Path("Foo.txt");
-      IFile _file_2 = output.getFile(_path_1);
-      IPath _location = _file_2.getLocation();
-      final File javaIoFile = _location.toFile();
+      final File javaIoFile = output.getFile(_path_1).getLocation().toFile();
       javaIoFile.delete();
-      File _parentFile = javaIoFile.getParentFile();
-      _parentFile.delete();
-      IProgressMonitor _monitor = IResourcesSetupUtil.monitor();
-      file.touch(_monitor);
+      javaIoFile.getParentFile().delete();
+      file.touch(IResourcesSetupUtil.monitor());
       IResourcesSetupUtil.reallyWaitForAutoBuild();
       Path _path_2 = new Path("Foo.txt");
-      IFile _file_3 = output.getFile(_path_2);
-      String _fileToString_1 = IResourcesSetupUtil.fileToString(_file_3);
-      Assert.assertEquals("object Foo", _fileToString_1);
+      Assert.assertEquals("object Foo", IResourcesSetupUtil.fileToString(output.getFile(_path_2)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -176,8 +145,7 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testDeleteTraceFile() {
-    IFolder _folder = this.project.getFolder("src-gen");
-    this.testDeleteTraceFile(_folder);
+    this.testDeleteTraceFile(this.project.getFolder("src-gen"));
   }
   
   @Test
@@ -194,19 +162,12 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   protected void testDeleteTraceFile(final IContainer output) {
     try {
       Path _path = new Path(".Foo.txt._trace");
-      IFile _file = output.getFile(_path);
-      IPath _location = _file.getLocation();
-      final File javaIoFile = this.createJavaIoFile(_location);
-      IFile _file_1 = this.project.getFile(("src/Foo" + this.F_EXT));
-      IPath _fullPath = _file_1.getFullPath();
-      IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+      final File javaIoFile = this.createJavaIoFile(output.getFile(_path).getLocation());
+      IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
-      boolean _exists = javaIoFile.exists();
-      Assert.assertFalse(_exists);
+      Assert.assertFalse(javaIoFile.exists());
       Path _path_1 = new Path(".Foo.txt._trace");
-      IFile _file_2 = output.getFile(_path_1);
-      boolean _exists_1 = _file_2.exists();
-      Assert.assertFalse(_exists_1);
+      Assert.assertFalse(output.getFile(_path_1).exists());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -220,24 +181,13 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
     };
     final Procedure0 _function_1 = () -> {
       try {
-        IFile _file = this.project.getFile("src-gen/Lalala.txt");
-        IPath _location = _file.getLocation();
-        File _createJavaIoFile = this.createJavaIoFile(_location);
-        final File srcGenDirectory = _createJavaIoFile.getParentFile();
-        File[] _listFiles = srcGenDirectory.listFiles();
-        boolean _isEmpty = ((List<File>)Conversions.doWrapArray(_listFiles)).isEmpty();
-        Assert.assertFalse(_isEmpty);
-        IFile _file_1 = this.project.getFile(("src/Foo" + this.F_EXT));
-        IPath _fullPath = _file_1.getFullPath();
-        IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+        final File srcGenDirectory = this.createJavaIoFile(this.project.getFile("src-gen/Lalala.txt").getLocation()).getParentFile();
+        Assert.assertFalse(((List<File>)Conversions.doWrapArray(srcGenDirectory.listFiles())).isEmpty());
+        IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
         IResourcesSetupUtil.reallyWaitForAutoBuild();
-        File[] _listFiles_1 = srcGenDirectory.listFiles();
-        boolean _isEmpty_1 = ((List<File>)Conversions.doWrapArray(_listFiles_1)).isEmpty();
-        Assert.assertFalse(_isEmpty_1);
+        Assert.assertFalse(((List<File>)Conversions.doWrapArray(srcGenDirectory.listFiles())).isEmpty());
         IResourcesSetupUtil.cleanBuild();
-        File[] _listFiles_2 = srcGenDirectory.listFiles();
-        boolean _isEmpty_2 = ((List<File>)Conversions.doWrapArray(_listFiles_2)).isEmpty();
-        Assert.assertTrue(_isEmpty_2);
+        Assert.assertTrue(((List<File>)Conversions.doWrapArray(srcGenDirectory.listFiles())).isEmpty());
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
@@ -253,29 +203,16 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
     };
     final Procedure0 _function_1 = () -> {
       try {
-        IFolder _folder = this.project.getFolder("src-gen");
-        IPath _location = _folder.getLocation();
-        final File srcGenDirectory = _location.toFile();
-        boolean _exists = srcGenDirectory.exists();
-        Assert.assertFalse(_exists);
-        IFile _file = this.project.getFile(("src/Foo" + this.F_EXT));
-        IPath _fullPath = _file.getFullPath();
-        IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+        final File srcGenDirectory = this.project.getFolder("src-gen").getLocation().toFile();
+        Assert.assertFalse(srcGenDirectory.exists());
+        IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
         IResourcesSetupUtil.reallyWaitForAutoBuild();
-        boolean _exists_1 = srcGenDirectory.exists();
-        Assert.assertTrue(_exists_1);
-        File[] _listFiles = srcGenDirectory.listFiles();
-        boolean _isEmpty = ((List<File>)Conversions.doWrapArray(_listFiles)).isEmpty();
-        Assert.assertFalse(_isEmpty);
-        IFile _file_1 = this.project.getFile("src-gen/Lalala.txt");
-        IPath _location_1 = _file_1.getLocation();
-        this.createJavaIoFile(_location_1);
+        Assert.assertTrue(srcGenDirectory.exists());
+        Assert.assertFalse(((List<File>)Conversions.doWrapArray(srcGenDirectory.listFiles())).isEmpty());
+        this.createJavaIoFile(this.project.getFile("src-gen/Lalala.txt").getLocation());
         IResourcesSetupUtil.cleanBuild();
-        boolean _exists_2 = srcGenDirectory.exists();
-        Assert.assertTrue(_exists_2);
-        File[] _listFiles_1 = srcGenDirectory.listFiles();
-        boolean _isEmpty_1 = ((List<File>)Conversions.doWrapArray(_listFiles_1)).isEmpty();
-        Assert.assertTrue(_isEmpty_1);
+        Assert.assertTrue(srcGenDirectory.exists());
+        Assert.assertTrue(((List<File>)Conversions.doWrapArray(srcGenDirectory.listFiles())).isEmpty());
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
@@ -292,22 +229,15 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
     };
     final Procedure0 _function_1 = () -> {
       try {
-        IPath _location = this.project.getLocation();
-        final File projectDirectory = _location.toFile();
-        File[] _listFiles = projectDirectory.listFiles();
-        final int initialSize = ((List<File>)Conversions.doWrapArray(_listFiles)).size();
+        final File projectDirectory = this.project.getLocation().toFile();
+        final int initialSize = ((List<File>)Conversions.doWrapArray(projectDirectory.listFiles())).size();
         Assert.assertNotEquals(0, initialSize);
-        IFile _file = this.project.getFile(("src/Foo" + this.F_EXT));
-        IPath _fullPath = _file.getFullPath();
-        IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+        IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
         IResourcesSetupUtil.reallyWaitForAutoBuild();
-        File[] _listFiles_1 = projectDirectory.listFiles();
-        final int expectedSize = ((List<File>)Conversions.doWrapArray(_listFiles_1)).size();
+        final int expectedSize = ((List<File>)Conversions.doWrapArray(projectDirectory.listFiles())).size();
         Assert.assertNotEquals(initialSize, expectedSize);
         IResourcesSetupUtil.cleanBuild();
-        File[] _listFiles_2 = projectDirectory.listFiles();
-        int _size = ((List<File>)Conversions.doWrapArray(_listFiles_2)).size();
-        Assert.assertEquals(expectedSize, _size);
+        Assert.assertEquals(expectedSize, ((List<File>)Conversions.doWrapArray(projectDirectory.listFiles())).size());
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
@@ -317,26 +247,22 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testCleanUpDerivedResourcesWithCreateBefore() {
-    IFolder _folder = this.project.getFolder("src-gen");
-    this.testCleanUpDerivedResourcesWithCreateBefore(_folder);
+    this.testCleanUpDerivedResourcesWithCreateBefore(this.project.getFolder("src-gen"));
   }
   
   @Test
   public void testCleanUpDerivedResourcesWithCreateBetween() {
-    IFolder _folder = this.project.getFolder("src-gen");
-    this.testCleanUpDerivedResourcesWithCreateBetween(_folder);
+    this.testCleanUpDerivedResourcesWithCreateBetween(this.project.getFolder("src-gen"));
   }
   
   @Test
   public void testCleanUpDerivedResourcesWithUpdateDerived() {
-    IFolder _folder = this.project.getFolder("src-gen");
-    this.testCleanUpDerivedResourcesWithUpdateDerived(_folder);
+    this.testCleanUpDerivedResourcesWithUpdateDerived(this.project.getFolder("src-gen"));
   }
   
   @Test
   public void testCleanUpDerivedResourcesWithDeleteDerived() {
-    IFolder _folder = this.project.getFolder("src-gen");
-    this.testCleanUpDerivedResourcesWithDeleteDerived(_folder);
+    this.testCleanUpDerivedResourcesWithDeleteDerived(this.project.getFolder("src-gen"));
   }
   
   @Test
@@ -386,26 +312,14 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   protected void testCleanUpDerivedResourcesWithCreateBefore(final IContainer output) {
     try {
       Path _path = new Path("Lalala.txt");
-      IFile _file = output.getFile(_path);
-      IPath _location = _file.getLocation();
-      File _createJavaIoFile = this.createJavaIoFile(_location);
-      final File ouputDirectory = _createJavaIoFile.getParentFile();
-      String[] _list = ouputDirectory.list();
-      final int expectedSize = ((List<String>)Conversions.doWrapArray(_list)).size();
-      IFile _file_1 = this.project.getFile(("src/Foo" + this.F_EXT));
-      IPath _fullPath = _file_1.getFullPath();
-      IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+      final File ouputDirectory = this.createJavaIoFile(output.getFile(_path).getLocation()).getParentFile();
+      final int expectedSize = ((List<String>)Conversions.doWrapArray(ouputDirectory.list())).size();
+      IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
-      String[] _list_1 = ouputDirectory.list();
-      int _size = ((List<String>)Conversions.doWrapArray(_list_1)).size();
-      Assert.assertNotEquals(expectedSize, _size);
+      Assert.assertNotEquals(expectedSize, ((List<String>)Conversions.doWrapArray(ouputDirectory.list())).size());
       IResourcesSetupUtil.cleanBuild();
-      String[] _list_2 = ouputDirectory.list();
-      int _size_1 = ((List<String>)Conversions.doWrapArray(_list_2)).size();
-      Assert.assertEquals(expectedSize, _size_1);
-      String[] _list_3 = ouputDirectory.list();
-      boolean _contains = ((List<String>)Conversions.doWrapArray(_list_3)).contains("Lalala.txt");
-      Assert.assertTrue(_contains);
+      Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(ouputDirectory.list())).size());
+      Assert.assertTrue(((List<String>)Conversions.doWrapArray(ouputDirectory.list())).contains("Lalala.txt"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -413,36 +327,24 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   protected void testCleanUpDerivedResourcesWithCreateBetween(final IContainer output) {
     try {
-      IPath _location = output.getLocation();
-      final File outputDirectory = _location.toFile();
+      final File outputDirectory = output.getLocation().toFile();
       int _xifexpression = (int) 0;
       boolean _exists = outputDirectory.exists();
       if (_exists) {
-        String[] _list = outputDirectory.list();
-        _xifexpression = ((List<String>)Conversions.doWrapArray(_list)).size();
+        _xifexpression = ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size();
       } else {
         _xifexpression = 0;
       }
       final int initialSize = _xifexpression;
-      IFile _file = this.project.getFile(("src/Foo" + this.F_EXT));
-      IPath _fullPath = _file.getFullPath();
-      IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+      IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
-      String[] _list_1 = outputDirectory.list();
-      int _size = ((List<String>)Conversions.doWrapArray(_list_1)).size();
-      Assert.assertNotEquals(initialSize, _size);
+      Assert.assertNotEquals(initialSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
       Path _path = new Path("Lalala.txt");
-      IFile _file_1 = output.getFile(_path);
-      IPath _location_1 = _file_1.getLocation();
-      this.createJavaIoFile(_location_1);
+      this.createJavaIoFile(output.getFile(_path).getLocation());
       final int expectedSize = (initialSize + 1);
       IResourcesSetupUtil.cleanBuild();
-      String[] _list_2 = outputDirectory.list();
-      int _size_1 = ((List<String>)Conversions.doWrapArray(_list_2)).size();
-      Assert.assertEquals(expectedSize, _size_1);
-      String[] _list_3 = outputDirectory.list();
-      boolean _contains = ((List<String>)Conversions.doWrapArray(_list_3)).contains("Lalala.txt");
-      Assert.assertTrue(_contains);
+      Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
+      Assert.assertTrue(((List<String>)Conversions.doWrapArray(outputDirectory.list())).contains("Lalala.txt"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -450,36 +352,26 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   protected void testCleanUpDerivedResourcesWithUpdateDerived(final IContainer output) {
     try {
-      IPath _location = output.getLocation();
-      final File outputDirectory = _location.toFile();
+      final File outputDirectory = output.getLocation().toFile();
       int _xifexpression = (int) 0;
       boolean _exists = outputDirectory.exists();
       if (_exists) {
-        String[] _list = outputDirectory.list();
-        _xifexpression = ((List<String>)Conversions.doWrapArray(_list)).size();
+        _xifexpression = ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size();
       } else {
         _xifexpression = 0;
       }
       final int expectedSize = _xifexpression;
-      IFile _file = this.project.getFile(("src/Foo" + this.F_EXT));
-      IPath _fullPath = _file.getFullPath();
-      IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+      IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
-      String[] _list_1 = outputDirectory.list();
-      int _size = ((List<String>)Conversions.doWrapArray(_list_1)).size();
-      Assert.assertNotEquals(expectedSize, _size);
+      Assert.assertNotEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
       Thread.sleep(1000);
       Path _path = new Path("Foo.txt");
       final IFile file = output.getFile(_path);
-      IPath _location_1 = file.getLocation();
-      File _file_1 = _location_1.toFile();
-      this.setContent(_file_1, "Lalala");
-      boolean _isSynchronized = this.isSynchronized(file);
-      Assert.assertFalse(_isSynchronized);
+      File _file = file.getLocation().toFile();
+      this.setContent(_file, "Lalala");
+      Assert.assertFalse(this.isSynchronized(file));
       IResourcesSetupUtil.cleanBuild();
-      String[] _list_2 = outputDirectory.list();
-      int _size_1 = ((List<String>)Conversions.doWrapArray(_list_2)).size();
-      Assert.assertEquals(expectedSize, _size_1);
+      Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -487,37 +379,25 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   protected void testCleanUpDerivedResourcesWithDeleteDerived(final IContainer output) {
     try {
-      IPath _location = output.getLocation();
-      final File outputDirectory = _location.toFile();
+      final File outputDirectory = output.getLocation().toFile();
       int _xifexpression = (int) 0;
       boolean _exists = outputDirectory.exists();
       if (_exists) {
-        String[] _list = outputDirectory.list();
-        _xifexpression = ((List<String>)Conversions.doWrapArray(_list)).size();
+        _xifexpression = ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size();
       } else {
         _xifexpression = 0;
       }
       final int expectedSize = _xifexpression;
-      IFile _file = this.project.getFile(("src/Foo" + this.F_EXT));
-      IPath _fullPath = _file.getFullPath();
-      IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+      IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
-      String[] _list_1 = outputDirectory.list();
-      int _size = ((List<String>)Conversions.doWrapArray(_list_1)).size();
-      Assert.assertNotEquals(expectedSize, _size);
+      Assert.assertNotEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
       Thread.sleep(1000);
       Path _path = new Path("Foo.txt");
       final IFile file = output.getFile(_path);
-      IPath _location_1 = file.getLocation();
-      File _file_1 = _location_1.toFile();
-      boolean _delete = _file_1.delete();
-      Assert.assertTrue(_delete);
-      boolean _isSynchronized = this.isSynchronized(file);
-      Assert.assertFalse(_isSynchronized);
+      Assert.assertTrue(file.getLocation().toFile().delete());
+      Assert.assertFalse(this.isSynchronized(file));
       IResourcesSetupUtil.cleanBuild();
-      String[] _list_2 = outputDirectory.list();
-      int _size_1 = ((List<String>)Conversions.doWrapArray(_list_2)).size();
-      Assert.assertEquals(expectedSize, _size_1);
+      Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -525,8 +405,7 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testDeleteUpdatedDerivedResource() {
-    IFolder _folder = this.project.getFolder("src-gen");
-    this.testDeleteUpdatedDerivedResource(_folder);
+    this.testDeleteUpdatedDerivedResource(this.project.getFolder("src-gen"));
   }
   
   @Test
@@ -542,38 +421,27 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   protected void testDeleteUpdatedDerivedResource(final IContainer output) {
     try {
-      IPath _location = output.getLocation();
-      final File outputDirectory = _location.toFile();
+      final File outputDirectory = output.getLocation().toFile();
       int _xifexpression = (int) 0;
       boolean _exists = outputDirectory.exists();
       if (_exists) {
-        String[] _list = outputDirectory.list();
-        _xifexpression = ((List<String>)Conversions.doWrapArray(_list)).size();
+        _xifexpression = ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size();
       } else {
         _xifexpression = 0;
       }
       final int expectedSize = _xifexpression;
-      IFile _file = this.project.getFile(("src/Foo" + this.F_EXT));
-      IPath _fullPath = _file.getFullPath();
-      final IFile sourceFile = IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+      final IFile sourceFile = IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
-      String[] _list_1 = outputDirectory.list();
-      int _size = ((List<String>)Conversions.doWrapArray(_list_1)).size();
-      Assert.assertNotEquals(expectedSize, _size);
+      Assert.assertNotEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
       Thread.sleep(1000);
       Path _path = new Path("Foo.txt");
       final IFile file = output.getFile(_path);
-      IPath _location_1 = file.getLocation();
-      File _file_1 = _location_1.toFile();
-      this.setContent(_file_1, "Lalala");
-      boolean _isSynchronized = this.isSynchronized(file);
-      Assert.assertFalse(_isSynchronized);
-      IProgressMonitor _monitor = IResourcesSetupUtil.monitor();
-      sourceFile.delete(false, _monitor);
+      File _file = file.getLocation().toFile();
+      this.setContent(_file, "Lalala");
+      Assert.assertFalse(this.isSynchronized(file));
+      sourceFile.delete(false, IResourcesSetupUtil.monitor());
       IResourcesSetupUtil.reallyWaitForAutoBuild();
-      String[] _list_2 = outputDirectory.list();
-      int _size_1 = ((List<String>)Conversions.doWrapArray(_list_2)).size();
-      Assert.assertEquals(expectedSize, _size_1);
+      Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -581,8 +449,7 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testDeleteDeletedDerivedResource() {
-    IFolder _folder = this.project.getFolder("src-gen");
-    this.testDeleteDeletedDerivedResource(_folder);
+    this.testDeleteDeletedDerivedResource(this.project.getFolder("src-gen"));
   }
   
   @Test
@@ -598,39 +465,26 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   protected void testDeleteDeletedDerivedResource(final IContainer output) {
     try {
-      IPath _location = output.getLocation();
-      final File outputDirectory = _location.toFile();
+      final File outputDirectory = output.getLocation().toFile();
       int _xifexpression = (int) 0;
       boolean _exists = outputDirectory.exists();
       if (_exists) {
-        String[] _list = outputDirectory.list();
-        _xifexpression = ((List<String>)Conversions.doWrapArray(_list)).size();
+        _xifexpression = ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size();
       } else {
         _xifexpression = 0;
       }
       final int expectedSize = _xifexpression;
-      IFile _file = this.project.getFile(("src/Foo" + this.F_EXT));
-      IPath _fullPath = _file.getFullPath();
-      final IFile sourceFile = IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+      final IFile sourceFile = IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
-      String[] _list_1 = outputDirectory.list();
-      int _size = ((List<String>)Conversions.doWrapArray(_list_1)).size();
-      Assert.assertNotEquals(expectedSize, _size);
+      Assert.assertNotEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
       Thread.sleep(1000);
       Path _path = new Path("Foo.txt");
       final IFile file = output.getFile(_path);
-      IPath _location_1 = file.getLocation();
-      File _file_1 = _location_1.toFile();
-      boolean _delete = _file_1.delete();
-      Assert.assertTrue(_delete);
-      boolean _isSynchronized = this.isSynchronized(file);
-      Assert.assertFalse(_isSynchronized);
-      IProgressMonitor _monitor = IResourcesSetupUtil.monitor();
-      sourceFile.delete(false, _monitor);
+      Assert.assertTrue(file.getLocation().toFile().delete());
+      Assert.assertFalse(this.isSynchronized(file));
+      sourceFile.delete(false, IResourcesSetupUtil.monitor());
       IResourcesSetupUtil.reallyWaitForAutoBuild();
-      String[] _list_2 = outputDirectory.list();
-      int _size_1 = ((List<String>)Conversions.doWrapArray(_list_2)).size();
-      Assert.assertEquals(expectedSize, _size_1);
+      Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -645,10 +499,8 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   protected File createJavaIoFile(final IPath location) {
     try {
       final File javaIoFile = location.toFile();
-      File _parentFile = javaIoFile.getParentFile();
-      _parentFile.mkdirs();
-      boolean _createNewFile = javaIoFile.createNewFile();
-      Assert.assertTrue(_createNewFile);
+      javaIoFile.getParentFile().mkdirs();
+      Assert.assertTrue(javaIoFile.createNewFile());
       return javaIoFile;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -658,8 +510,7 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   protected void setContent(final File javaIoFile, final String content) {
     try {
       final FileOutputStream fos = new FileOutputStream(javaIoFile);
-      byte[] _bytes = content.getBytes();
-      fos.write(_bytes);
+      fos.write(content.getBytes());
       fos.flush();
       fos.close();
     } catch (Throwable _e) {
@@ -671,8 +522,7 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
     boolean _xblockexpression = false;
     {
       final org.eclipse.core.internal.resources.File target = ((org.eclipse.core.internal.resources.File) file);
-      FileSystemResourceManager _localManager = target.getLocalManager();
-      _xblockexpression = _localManager.fastIsSynchronized(target);
+      _xblockexpression = target.getLocalManager().fastIsSynchronized(target);
     }
     return _xblockexpression;
   }

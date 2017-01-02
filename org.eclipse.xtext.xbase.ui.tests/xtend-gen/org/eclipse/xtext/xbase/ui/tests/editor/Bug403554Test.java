@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.ui.tests.editor.AbstractXbaseContentAssistBugTest;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -27,67 +26,47 @@ public class Bug403554Test extends AbstractXbaseContentAssistBugTest {
   public void setUp() throws Exception {
     super.setUp();
     final IJavaProject project = this.getJavaProject(null);
-    String _name = ArrayList.class.getName();
-    IType type = project.findType(_name);
+    IType type = project.findType(ArrayList.class.getName());
     IMethod method = type.getMethod("subList", new String[] { "I", "I" });
     while ((!method.exists())) {
       {
         String superclassName = type.getSuperclassName();
         final int idx = superclassName.indexOf("<");
         if ((idx != (-1))) {
-          String _substring = superclassName.substring(0, idx);
-          superclassName = _substring;
+          superclassName = superclassName.substring(0, idx);
         }
-        IType _findType = project.findType(superclassName);
-        type = _findType;
-        IMethod _method = type.getMethod("subList", new String[] { "I", "I" });
-        method = _method;
+        type = project.findType(superclassName);
+        method = type.getMethod("subList", new String[] { "I", "I" });
       }
     }
-    String _elementName = type.getElementName();
-    this.declarator = _elementName;
+    this.declarator = type.getElementName();
   }
   
   @Test
   public void testProposalOnIt() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("newArrayList(\"\") => [ it.");
-    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("subList()");
-    _assertProposal.withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
+    this.newBuilder().append("newArrayList(\"\") => [ it.").assertProposal("subList()").withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
   }
   
   @Ignore
   @Test
   public void testProposalOnItWithExplicitParameters() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("newArrayList(\"\") => [ it | it.");
-    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("subList()");
-    _assertProposal.withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
+    this.newBuilder().append("newArrayList(\"\") => [ it | it.").assertProposal("subList()").withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
   }
   
   @Ignore
   @Test
   public void testProposalOnImplicitWithExplicitParameters() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("newArrayList(\"\") => [ it | ");
-    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("subList()");
-    _assertProposal.withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
+    this.newBuilder().append("newArrayList(\"\") => [ it | ").assertProposal("subList()").withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
   }
   
   @Ignore
   @Test
   public void testProposalOnImplicit() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("newArrayList(\"\") => [ ");
-    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("subList()");
-    _assertProposal.withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
+    this.newBuilder().append("newArrayList(\"\") => [ ").assertProposal("subList()").withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
   }
   
   @Test
   public void testProposalOnList() throws Exception {
-    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("newArrayList(\"\").");
-    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("subList()");
-    _assertProposal.withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
+    this.newBuilder().append("newArrayList(\"\").").assertProposal("subList()").withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
   }
 }

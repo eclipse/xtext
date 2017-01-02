@@ -52,7 +52,6 @@ public class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
     }
     boolean _isJvmType = this.isJvmType(_eClass);
     if (_isJvmType) {
-      URI _eObjectURI = description.getEObjectURI();
       final IUnitOfWork<IEObjectDescription, EObject> _function = (EObject targetElement) -> {
         final EObject sourceElement = this._iJvmModelAssociations.getPrimarySourceElement(targetElement);
         EClass _eClass_1 = null;
@@ -65,7 +64,7 @@ public class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
         }
         return null;
       };
-      return this.<IEObjectDescription>readOnly(_eObjectURI, _function);
+      return this.<IEObjectDescription>readOnly(description.getEObjectURI(), _function);
     }
     EClass _eClass_1 = null;
     if (description!=null) {
@@ -76,8 +75,7 @@ public class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
       return description;
     }
     final IUnitOfWork<IEObjectDescription, EObject> _function_1 = (EObject object) -> {
-      Entity _containerOfType = EcoreUtil2.<Entity>getContainerOfType(object, Entity.class);
-      return this.getDescription(_containerOfType);
+      return this.getDescription(EcoreUtil2.<Entity>getContainerOfType(object, Entity.class));
     };
     return this.<IEObjectDescription>readOnly(objectURI, _function_1);
   }
@@ -87,7 +85,6 @@ public class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
     if (((reference == null) || (!this.isJvmType(reference.getEReference().getEType())))) {
       return false;
     }
-    URI _sourceEObjectUri = reference.getSourceEObjectUri();
     final IUnitOfWork<Boolean, EObject> _function = (EObject referenceOwner) -> {
       Property _containerOfType = null;
       if (referenceOwner!=null) {
@@ -99,7 +96,7 @@ public class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
       }
       return Boolean.valueOf((_containerOfType_1 != null));
     };
-    return (this.<Boolean>readOnly(_sourceEObjectUri, _function)).booleanValue();
+    return (this.<Boolean>readOnly(reference.getSourceEObjectUri(), _function)).booleanValue();
   }
   
   protected boolean isJvmType(final EClassifier type) {

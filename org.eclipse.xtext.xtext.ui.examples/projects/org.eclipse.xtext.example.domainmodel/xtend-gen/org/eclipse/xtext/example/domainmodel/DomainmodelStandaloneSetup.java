@@ -11,7 +11,6 @@ import org.eclipse.xtext.example.domainmodel.DomainmodelStandaloneSetupGenerated
 @SuppressWarnings("all")
 public class DomainmodelStandaloneSetup extends DomainmodelStandaloneSetupGenerated {
   public static void doSetup() {
-    DomainmodelStandaloneSetup _domainmodelStandaloneSetup = new DomainmodelStandaloneSetup();
-    _domainmodelStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new DomainmodelStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

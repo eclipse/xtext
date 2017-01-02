@@ -15,7 +15,6 @@ import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -55,8 +54,7 @@ public class StatusWidget extends Composite {
     this.link = _link;
     GridData _gridData_1 = new GridData(GridData.FILL_HORIZONTAL);
     this.link.setLayoutData(_gridData_1);
-    Font _font = this.getFont();
-    this.link.setFont(_font);
+    this.link.setFont(this.getFont());
     this.link.setText("\n\n\n");
     this.link.addSelectionListener(new SelectionAdapter() {
       @Override
@@ -80,14 +78,10 @@ public class StatusWidget extends Composite {
     {
       this.severity = severity;
       this.setVisible((severity != IMessageProvider.NONE));
-      Image _imageFor = this.imageFor(severity);
-      this.imageLabel.setImage(_imageFor);
+      this.imageLabel.setImage(this.imageFor(severity));
       this.link.setText(text);
-      Pattern _compile = Pattern.compile("<a>(.*)</a>");
-      String _trim = text.trim();
-      final Matcher matcher = _compile.matcher(_trim);
-      String _replaceAll = matcher.replaceAll("$1");
-      this.link.setToolTipText(_replaceAll);
+      final Matcher matcher = Pattern.compile("<a>(.*)</a>").matcher(text.trim());
+      this.link.setToolTipText(matcher.replaceAll("$1"));
       final Procedure0 _function = () -> {
         quickFix.apply();
         callback.apply();
@@ -99,9 +93,7 @@ public class StatusWidget extends Composite {
   
   public Procedure0 addStatus(final int severity, final String text) {
     Procedure0 _xifexpression = null;
-    String _text = this.link.getText();
-    String _trim = _text.trim();
-    boolean _isEmpty = _trim.isEmpty();
+    boolean _isEmpty = this.link.getText().trim().isEmpty();
     if (_isEmpty) {
       final Procedure0 _function = () -> {
       };
@@ -109,20 +101,16 @@ public class StatusWidget extends Composite {
       };
       _xifexpression = this.setStatus(severity, text, _function, _function_1);
     } else {
-      String _text_1 = this.link.getText();
-      String _plus = (_text_1 + "\n");
+      String _text = this.link.getText();
+      String _plus = (_text + "\n");
       String _plus_1 = (_plus + text);
       this.link.setText(_plus_1);
-      Pattern _compile = Pattern.compile("<a>(.*)</a>");
-      String _trim_1 = text.trim();
-      final Matcher matcher = _compile.matcher(_trim_1);
-      String _replaceAll = matcher.replaceAll("$1");
-      this.link.setToolTipText(_replaceAll);
+      final Matcher matcher = Pattern.compile("<a>(.*)</a>").matcher(text.trim());
+      this.link.setToolTipText(matcher.replaceAll("$1"));
       if ((severity > this.severity)) {
         this.severity = severity;
         this.setVisible((severity != IMessageProvider.NONE));
-        Image _imageFor = this.imageFor(severity);
-        this.imageLabel.setImage(_imageFor);
+        this.imageLabel.setImage(this.imageFor(severity));
       }
     }
     return _xifexpression;

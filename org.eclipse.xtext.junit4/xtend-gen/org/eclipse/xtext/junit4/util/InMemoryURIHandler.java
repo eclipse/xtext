@@ -45,8 +45,7 @@ public class InMemoryURIHandler implements URIHandler {
       return new ByteArrayOutputStream() {
         @Override
         public void close() throws IOException {
-          byte[] _byteArray = this.toByteArray();
-          InMemFile.this.contents = _byteArray;
+          InMemFile.this.contents = this.toByteArray();
           InMemFile.this.exists = true;
         }
       };
@@ -109,14 +108,12 @@ public class InMemoryURIHandler implements URIHandler {
   
   @Override
   public InputStream createInputStream(final URI uri, final Map<?, ?> options) throws IOException {
-    InMemoryURIHandler.InMemFile _inMemoryFile = this.getInMemoryFile(uri);
-    return _inMemoryFile.createInputStream();
+    return this.getInMemoryFile(uri).createInputStream();
   }
   
   @Override
   public OutputStream createOutputStream(final URI uri, final Map<?, ?> options) throws IOException {
-    InMemoryURIHandler.InMemFile _inMemoryFile = this.getInMemoryFile(uri);
-    return _inMemoryFile.createOutputstream();
+    return this.getInMemoryFile(uri).createOutputstream();
   }
   
   @Override
@@ -127,8 +124,7 @@ public class InMemoryURIHandler implements URIHandler {
   
   @Override
   public boolean exists(final URI uri, final Map<?, ?> options) {
-    InMemoryURIHandler.InMemFile _inMemoryFile = this.getInMemoryFile(uri);
-    return _inMemoryFile.exists;
+    return this.getInMemoryFile(uri).exists;
   }
   
   @Override

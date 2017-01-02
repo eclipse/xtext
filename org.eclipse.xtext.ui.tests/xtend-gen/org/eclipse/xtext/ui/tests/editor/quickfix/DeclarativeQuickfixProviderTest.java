@@ -42,10 +42,8 @@ public class DeclarativeQuickfixProviderTest extends Assert {
       public void signature(final Issue i, final IssueResolutionAcceptor acceptor) {
       }
     };
-    boolean _hasResolutionFor = provider.hasResolutionFor((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1)));
-    Assert.assertFalse(_hasResolutionFor);
-    boolean _hasResolutionFor_1 = provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE);
-    Assert.assertTrue(_hasResolutionFor_1);
+    Assert.assertFalse(provider.hasResolutionFor((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1))));
+    Assert.assertTrue(provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE));
   }
   
   @Test
@@ -74,26 +72,20 @@ public class DeclarativeQuickfixProviderTest extends Assert {
       return new IssueResolutionAcceptor(_function_1);
     };
     provider.setIssueResolutionAcceptorProvider(_function);
-    Issue _createIssue = this.createIssue((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1)));
-    List<IssueResolution> resolutionsIterable = provider.getResolutions(_createIssue);
-    IssueResolution _head = IterableExtensions.<IssueResolution>head(resolutionsIterable);
-    Assert.assertNull(_head);
-    Issue _createIssue_1 = this.createIssue(DeclarativeQuickfixProviderTest.DUMMY_CODE);
-    List<IssueResolution> resolutions = provider.getResolutions(_createIssue_1);
-    int _size = resolutions.size();
-    Assert.assertEquals(2, _size);
+    List<IssueResolution> resolutionsIterable = provider.getResolutions(this.createIssue((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1))));
+    Assert.assertNull(IterableExtensions.<IssueResolution>head(resolutionsIterable));
+    List<IssueResolution> resolutions = provider.getResolutions(this.createIssue(DeclarativeQuickfixProviderTest.DUMMY_CODE));
+    Assert.assertEquals(2, resolutions.size());
     final Function1<IssueResolution, Boolean> _function_1 = (IssueResolution it) -> {
       String _label = it.getLabel();
       return Boolean.valueOf(Objects.equal(_label, "fixError1"));
     };
-    boolean _exists = IterableExtensions.<IssueResolution>exists(resolutions, _function_1);
-    Assert.assertTrue(_exists);
+    Assert.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_1));
     final Function1<IssueResolution, Boolean> _function_2 = (IssueResolution it) -> {
       String _label = it.getLabel();
       return Boolean.valueOf(Objects.equal(_label, "fixError2"));
     };
-    boolean _exists_1 = IterableExtensions.<IssueResolution>exists(resolutions, _function_2);
-    Assert.assertTrue(_exists_1);
+    Assert.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_2));
   }
   
   protected Issue createIssue(final String code) {

@@ -31,18 +31,13 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
   
   @Override
   public Set<? extends EclipseProjectConfig> getProjects() {
-    IProject[] _projects = this.workspaceRoot.getProjects();
     final Function1<IProject, Boolean> _function = (IProject it) -> {
-      IProject _project = it.getProject();
-      return Boolean.valueOf(_project.isAccessible());
+      return Boolean.valueOf(it.getProject().isAccessible());
     };
-    Iterable<IProject> _filter = IterableExtensions.<IProject>filter(((Iterable<IProject>)Conversions.doWrapArray(_projects)), _function);
     final Function1<IProject, EclipseProjectConfig> _function_1 = (IProject it) -> {
-      IProject _project = it.getProject();
-      return this.projectConfigProvider.createProjectConfig(_project);
+      return this.projectConfigProvider.createProjectConfig(it.getProject());
     };
-    Iterable<EclipseProjectConfig> _map = IterableExtensions.<IProject, EclipseProjectConfig>map(_filter, _function_1);
-    return IterableExtensions.<EclipseProjectConfig>toSet(_map);
+    return IterableExtensions.<EclipseProjectConfig>toSet(IterableExtensions.<IProject, EclipseProjectConfig>map(IterableExtensions.<IProject>filter(((Iterable<IProject>)Conversions.doWrapArray(this.workspaceRoot.getProjects())), _function), _function_1));
   }
   
   @Override
@@ -68,9 +63,7 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
   public EclipseProjectConfig findProjectContaining(final URI member) {
     boolean _isPlatformResource = member.isPlatformResource();
     if (_isPlatformResource) {
-      String _segment = member.segment(1);
-      String _decode = URI.decode(_segment);
-      return this.findProjectByName(_decode);
+      return this.findProjectByName(URI.decode(member.segment(1)));
     }
     return null;
   }

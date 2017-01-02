@@ -3,7 +3,6 @@
  */
 package org.eclipse.xtext.example.domainmodel.ui.labeling;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
@@ -17,8 +16,7 @@ public class DomainmodelDescriptionLabelProvider extends DefaultDescriptionLabel
   @Override
   public String image(final IEObjectDescription description) {
     StringConcatenation _builder = new StringConcatenation();
-    EClass _eClass = description.getEClass();
-    String _name = _eClass.getName();
+    String _name = description.getEClass().getName();
     _builder.append(_name);
     _builder.append(".gif");
     return _builder.toString();

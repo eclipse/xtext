@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.tests.workspace;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jdt.core.IJavaProject;
@@ -19,8 +18,6 @@ import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
-import org.eclipse.xtext.workspace.IProjectConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.After;
 import org.junit.Assert;
@@ -34,8 +31,7 @@ public class EclipseWorkspaceConfigurationTest {
   
   @Before
   public void setup() {
-    TestsActivator _instance = TestsActivator.getInstance();
-    final Injector injector = _instance.getInjector(
+    final Injector injector = TestsActivator.getInstance().getInjector(
       TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE);
     injector.injectMembers(this);
   }
@@ -52,23 +48,17 @@ public class EclipseWorkspaceConfigurationTest {
   @Test
   public void testConfig() {
     try {
-      IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-      final IWorkspaceRoot wsroot = _workspace.getRoot();
+      final IWorkspaceRoot wsroot = ResourcesPlugin.getWorkspace().getRoot();
       IProject[] _projects = wsroot.getProjects();
       for (final IProject p : _projects) {
         p.delete(true, true, null);
       }
-      IProject[] _projects_1 = wsroot.getProjects();
-      int _length = _projects_1.length;
-      Assert.assertEquals(0, _length);
+      Assert.assertEquals(0, wsroot.getProjects().length);
       final IJavaProject project = JavaProjectSetupUtil.createJavaProject("projectA");
       JavaProjectSetupUtil.createJavaProject("projectB");
-      IProject _project = project.getProject();
-      final EclipseProjectConfig projectConfig = this.projectConfigProvider.createProjectConfig(_project);
+      final EclipseProjectConfig projectConfig = this.projectConfigProvider.createProjectConfig(project.getProject());
       Assert.assertNotNull(projectConfig);
-      IWorkspaceConfig _workspaceConfig = projectConfig.getWorkspaceConfig();
-      IProjectConfig _findProjectByName = _workspaceConfig.findProjectByName("projectB");
-      Assert.assertNotNull(_findProjectByName);
+      Assert.assertNotNull(projectConfig.getWorkspaceConfig().findProjectByName("projectB"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

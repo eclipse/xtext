@@ -29,8 +29,7 @@ public class ContentAssistCatchTest3 extends ContentAssistInBlockTest {
   
   @Override
   protected String[] getKeywordsAndStatics() {
-    String[] _keywordsAndStatics = super.getKeywordsAndStatics();
-    final ArrayList<String> result = CollectionLiterals.<String>newArrayList(_keywordsAndStatics);
+    final ArrayList<String> result = CollectionLiterals.<String>newArrayList(super.getKeywordsAndStatics());
     result.add("ex");
     return ((String[])Conversions.unwrapArray(result, String.class));
   }

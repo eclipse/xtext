@@ -42,16 +42,13 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
   
   @Override
   public void reset() {
-    HashMap<String, JavaBuilderState> _newHashMap = CollectionLiterals.<String, JavaBuilderState>newHashMap();
-    this.javaBuildState = _newHashMap;
-    ArrayList<UnconfirmedStructuralChangesDelta> _newArrayList = CollectionLiterals.<UnconfirmedStructuralChangesDelta>newArrayList();
-    this.unconfirmedDeltas = _newArrayList;
+    this.javaBuildState = CollectionLiterals.<String, JavaBuilderState>newHashMap();
+    this.unconfirmedDeltas = CollectionLiterals.<UnconfirmedStructuralChangesDelta>newArrayList();
   }
   
   @Override
   public void reset(final IProject project) {
-    String _name = project.getName();
-    this.javaBuildState.remove(_name);
+    this.javaBuildState.remove(project.getName());
   }
   
   /**
@@ -70,16 +67,11 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       boolean _xblockexpression = false;
       {
         final IProject project = ((UnconfirmedStructuralChangesDelta)delta).getProject();
-        String _name = project.getName();
-        JavaBuilderState state = this.javaBuildState.get(_name);
+        JavaBuilderState state = this.javaBuildState.get(project.getName());
         if ((state == null)) {
-          String _name_1 = project.getName();
-          JavaBuilderState _lastBuiltState = JavaBuilderState.getLastBuiltState(project);
-          JavaBuilderState _state = state = _lastBuiltState;
-          this.javaBuildState.put(_name_1, _state);
+          this.javaBuildState.put(project.getName(), state = JavaBuilderState.getLastBuiltState(project));
         }
-        Integer _buildNumber = state.getBuildNumber();
-        ((UnconfirmedStructuralChangesDelta)delta).setBuildNumber((_buildNumber).intValue());
+        ((UnconfirmedStructuralChangesDelta)delta).setBuildNumber((state.getBuildNumber()).intValue());
         this.unconfirmedDeltas.add(((UnconfirmedStructuralChangesDelta)delta));
         _xblockexpression = true;
       }
@@ -95,8 +87,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
   public boolean needsRebuild(final IProject it, final Collection<IResourceDescription.Delta> deltas) {
     boolean _xblockexpression = false;
     {
-      String _name = it.getName();
-      final JavaBuilderState oldState = this.javaBuildState.get(_name);
+      final JavaBuilderState oldState = this.javaBuildState.get(it.getName());
       final JavaBuilderState newState = JavaBuilderState.getLastBuiltState(it);
       Procedure1<UnconfirmedStructuralChangesDelta> _xifexpression = null;
       if (((oldState == null) || (!Objects.equal(oldState.getLastStructuralBuildTime(), newState.getLastStructuralBuildTime())))) {
@@ -144,8 +135,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       }
       Iterable<IEObjectDescription> _exportedObjects = resourceDescription.getExportedObjects();
       for (final IEObjectDescription objectDescription : _exportedObjects) {
-        QualifiedName _qualifiedName = objectDescription.getQualifiedName();
-        boolean _contains = names.contains(_qualifiedName);
+        boolean _contains = names.contains(objectDescription.getQualifiedName());
         if (_contains) {
           return true;
         }

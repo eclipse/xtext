@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.workspace;
 
 import java.util.Set;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Data;
@@ -51,18 +50,15 @@ public class EclipseProjectConfig implements IProjectConfig {
   
   @Override
   public ISourceFolder findSourceFolderContaining(final URI member) {
-    Set<? extends ISourceFolder> _sourceFolders = this.getSourceFolders();
     final Function1<ISourceFolder, Boolean> _function = (ISourceFolder folder) -> {
-      URI _path = folder.getPath();
-      return Boolean.valueOf(UriUtil.isPrefixOf(_path, member));
+      return Boolean.valueOf(UriUtil.isPrefixOf(folder.getPath(), member));
     };
-    return IterableExtensions.findFirst(_sourceFolders, _function);
+    return IterableExtensions.findFirst(this.getSourceFolders(), _function);
   }
   
   @Override
   public IWorkspaceConfig getWorkspaceConfig() {
-    IWorkspace _workspace = this.project.getWorkspace();
-    IWorkspaceRoot _root = _workspace.getRoot();
+    IWorkspaceRoot _root = this.project.getWorkspace().getRoot();
     return new EclipseWorkspaceConfig(_root, this.projectConfigProvider);
   }
   

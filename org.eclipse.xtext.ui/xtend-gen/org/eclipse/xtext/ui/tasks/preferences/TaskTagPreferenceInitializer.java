@@ -23,9 +23,7 @@ public class TaskTagPreferenceInitializer implements IPreferenceStoreInitializer
   public void initialize(final IPreferenceStoreAccess access) {
     final IPreferenceStore store = access.getWritablePreferenceStore();
     final Consumer<PreferenceKey> _function = (PreferenceKey it) -> {
-      String _id = it.getId();
-      String _defaultValue = it.getDefaultValue();
-      store.setDefault(_id, _defaultValue);
+      store.setDefault(it.getId(), it.getDefaultValue());
     };
     PreferenceTaskTagProvider.KEYS.forEach(_function);
   }

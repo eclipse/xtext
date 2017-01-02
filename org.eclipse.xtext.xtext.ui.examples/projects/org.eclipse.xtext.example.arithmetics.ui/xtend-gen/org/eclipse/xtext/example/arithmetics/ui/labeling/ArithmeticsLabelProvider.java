@@ -8,7 +8,6 @@
 package org.eclipse.xtext.example.arithmetics.ui.labeling;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
@@ -35,11 +34,10 @@ public class ArithmeticsLabelProvider extends DefaultEObjectLabelProvider {
   
   public String text(final Definition ele) {
     String _name = ele.getName();
-    EList<DeclaredParameter> _args = ele.getArgs();
     final Function1<DeclaredParameter, CharSequence> _function = (DeclaredParameter it) -> {
       return it.getName();
     };
-    String _join = IterableExtensions.<DeclaredParameter>join(_args, "(", ",", ")", _function);
+    String _join = IterableExtensions.<DeclaredParameter>join(ele.getArgs(), "(", ",", ")", _function);
     return (_name + _join);
   }
   

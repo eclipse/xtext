@@ -68,12 +68,11 @@ public class TaskHighlightingTest extends AbstractXtextTests implements IHighlig
       _builder.newLine();
       _builder.append("Hello notATODO!");
       _builder.newLine();
-      String _unix = LineDelimiters.toUnix(_builder.toString());
-      final XtextResource resource = this.getResourceFromString(_unix);
+      final XtextResource resource = this.getResourceFromString(
+        LineDelimiters.toUnix(_builder.toString()));
       this.expect(2, 4, DefaultHighlightingConfiguration.TASK_ID);
       this.expect(17, 5, DefaultHighlightingConfiguration.TASK_ID);
-      DefaultSemanticHighlightingCalculator _highlighter = this.getHighlighter();
-      _highlighter.provideHighlightingFor(resource, this, CancelIndicator.NullImpl);
+      this.getHighlighter().provideHighlightingFor(resource, this, CancelIndicator.NullImpl);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -90,18 +89,14 @@ public class TaskHighlightingTest extends AbstractXtextTests implements IHighlig
   
   @Override
   public void addPosition(final int offset, final int length, final String... id) {
-    int _length = id.length;
-    Assert.assertEquals(1, _length);
+    Assert.assertEquals(1, id.length);
     String _get = id[0];
     final TypedRegion region = new TypedRegion(offset, length, _get);
-    String _string = region.toString();
-    boolean _isEmpty = this.expectedRegions.isEmpty();
-    Assert.assertFalse(_string, _isEmpty);
-    String _string_1 = this.expectedRegions.toString();
-    String _plus = ("expected: " + _string_1);
+    Assert.assertFalse(region.toString(), this.expectedRegions.isEmpty());
+    String _string = this.expectedRegions.toString();
+    String _plus = ("expected: " + _string);
     String _plus_1 = (_plus + " but was: ");
     String _plus_2 = (_plus_1 + region);
-    boolean _remove = this.expectedRegions.remove(region);
-    Assert.assertTrue(_plus_2, _remove);
+    Assert.assertTrue(_plus_2, this.expectedRegions.remove(region));
   }
 }

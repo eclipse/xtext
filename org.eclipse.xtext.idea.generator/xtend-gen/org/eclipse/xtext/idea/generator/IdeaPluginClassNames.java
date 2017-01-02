@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.generator;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -37,26 +36,22 @@ public class IdeaPluginClassNames {
   }
   
   public String getBasePackageName(final Grammar grammar) {
-    String _name = grammar.getName();
-    String _packageName = this.toPackageName(_name);
+    String _packageName = this.toPackageName(grammar.getName());
     return (_packageName + ".idea");
   }
   
   public String getIdeaModuleName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "IdeaModule");
   }
   
   public String getStandaloneSetup(final Grammar it) {
-    String _name = it.getName();
-    String _packageName = this.toPackageName(_name);
+    String _packageName = this.toPackageName(it.getName());
     String _plus = (_packageName + ".");
-    String _name_1 = it.getName();
-    String _simpleName = this.toSimpleName(_name_1);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "StandaloneSetup");
   }
@@ -64,8 +59,7 @@ public class IdeaPluginClassNames {
   public String getStandaloneSetupIdea(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "StandaloneSetupIdea");
   }
@@ -73,8 +67,7 @@ public class IdeaPluginClassNames {
   public String getIdeaSetup(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "IdeaSetup");
   }
@@ -82,8 +75,7 @@ public class IdeaPluginClassNames {
   public String getExtensionFactoryName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "ExtensionFactory");
   }
@@ -91,8 +83,7 @@ public class IdeaPluginClassNames {
   public String getAbstractIdeaModuleName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".Abstract");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "IdeaModule");
   }
@@ -100,8 +91,7 @@ public class IdeaPluginClassNames {
   public String getFileTypeName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "FileType");
   }
@@ -109,8 +99,7 @@ public class IdeaPluginClassNames {
   public String getAbstractFileTypeName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.Abstract");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "FileType");
   }
@@ -118,8 +107,7 @@ public class IdeaPluginClassNames {
   public String getFileTypeFactoryName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "FileTypeFactory");
   }
@@ -127,8 +115,7 @@ public class IdeaPluginClassNames {
   public String getLanguageName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "Language");
   }
@@ -136,8 +123,7 @@ public class IdeaPluginClassNames {
   public String getCodeBlockModificationListenerName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.psi.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "CodeBlockModificationListener");
   }
@@ -145,8 +131,7 @@ public class IdeaPluginClassNames {
   public String getPsiParserName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.parser.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "PsiParser");
   }
@@ -154,8 +139,7 @@ public class IdeaPluginClassNames {
   public String getAntlrTokenFileProvider(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.parser.antlr.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "AntlrTokenFileProvider");
   }
@@ -163,8 +147,7 @@ public class IdeaPluginClassNames {
   public String getPomDeclarationSearcherName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.pom.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "PomDeclarationSearcher");
   }
@@ -172,8 +155,7 @@ public class IdeaPluginClassNames {
   public String getSyntaxHighlighterFactoryName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".highlighting.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "SyntaxHighlighterFactory");
   }
@@ -181,8 +163,7 @@ public class IdeaPluginClassNames {
   public String getSemanticHighlightVisitorName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".highlighting.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "SemanticHighlightVisitor");
   }
@@ -194,8 +175,7 @@ public class IdeaPluginClassNames {
   public String getParserDefinitionName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.parser.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "ParserDefinition");
   }
@@ -203,8 +183,7 @@ public class IdeaPluginClassNames {
   public String getTokenTypeProviderName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.parser.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "TokenTypeProvider");
   }
@@ -212,18 +191,15 @@ public class IdeaPluginClassNames {
   public String getElementTypeProviderName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "ElementTypeProvider");
   }
   
   public String getGrammarAccessName(final Grammar it) {
-    String _name = it.getName();
-    String _packageName = this.toPackageName(_name);
+    String _packageName = this.toPackageName(it.getName());
     String _plus = (_packageName + ".services.");
-    String _name_1 = it.getName();
-    String _simpleName = this.toSimpleName(_name_1);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "GrammarAccess");
   }
@@ -231,8 +207,7 @@ public class IdeaPluginClassNames {
   public String getPsiInternalLexerName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".parser.antlr.internal.PsiInternal");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "Lexer");
   }
@@ -240,8 +215,7 @@ public class IdeaPluginClassNames {
   public String getPsiInternalParserName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".parser.antlr.internal.PsiInternal");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "Parser");
   }
@@ -249,18 +223,15 @@ public class IdeaPluginClassNames {
   public String getTokens(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".parser.antlr.internal.PsiInternal");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
-    String _plus_1 = (_plus + _simpleName);
-    String _path = this.toPath(_plus_1);
+    String _simpleName = this.toSimpleName(it.getName());
+    String _path = this.toPath((_plus + _simpleName));
     return (_path + ".tokens");
   }
   
   public String getFileImplName(final Grammar it) {
     String _psiImplPackageName = this.getPsiImplPackageName(it);
     String _plus = (_psiImplPackageName + ".");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "FileImpl");
   }
@@ -276,29 +247,24 @@ public class IdeaPluginClassNames {
   }
   
   public String getInternalParserName(final Grammar it) {
-    String _name = it.getName();
-    String _packageName = this.toPackageName(_name);
+    String _packageName = this.toPackageName(it.getName());
     String _plus = (_packageName + ".parser.antlr.internal.Internal");
-    String _name_1 = it.getName();
-    String _simpleName = this.toSimpleName(_name_1);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "Parser");
   }
   
   public String getAntlrLexerName(final Grammar it) {
-    String _name = it.getName();
-    String _packageName = this.toPackageName(_name);
+    String _packageName = this.toPackageName(it.getName());
     String _plus = (_packageName + ".parser.antlr.internal.Internal");
-    String _name_1 = it.getName();
-    String _simpleName = this.toSimpleName(_name_1);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "Lexer");
   }
   
   public String getCompletionContributorSuperClass(final Grammar it) {
     String _elvis = null;
-    EList<Grammar> _usedGrammars = it.getUsedGrammars();
-    Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
+    Grammar _head = IterableExtensions.<Grammar>head(it.getUsedGrammars());
     String _completionContributor = null;
     if (_head!=null) {
       _completionContributor=this.getCompletionContributor(_head);
@@ -314,8 +280,7 @@ public class IdeaPluginClassNames {
   public String getCompletionContributor(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".completion.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "CompletionContributor");
   }
@@ -323,8 +288,7 @@ public class IdeaPluginClassNames {
   public String getAbstractCompletionContributor(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".completion.Abstract");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "CompletionContributor");
   }
@@ -332,8 +296,7 @@ public class IdeaPluginClassNames {
   public String getFacetConfiguration(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".facet.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "FacetConfiguration");
   }
@@ -341,8 +304,7 @@ public class IdeaPluginClassNames {
   public String getFacetTypeName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".facet.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "FacetType");
   }
@@ -350,18 +312,15 @@ public class IdeaPluginClassNames {
   public String baseColorSettingsPage(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".highlighting.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "BaseColorSettingsPage");
   }
   
   public String colorSettingsPage(final Grammar it) {
-    String _baseColorSettingsPage = this.baseColorSettingsPage(it);
-    String _packageName = this.toPackageName(_baseColorSettingsPage);
+    String _packageName = this.toPackageName(this.baseColorSettingsPage(it));
     String _plus = (_packageName + ".");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
+    String _simpleName = this.toSimpleName(it.getName());
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "ColorSettingsPage");
   }

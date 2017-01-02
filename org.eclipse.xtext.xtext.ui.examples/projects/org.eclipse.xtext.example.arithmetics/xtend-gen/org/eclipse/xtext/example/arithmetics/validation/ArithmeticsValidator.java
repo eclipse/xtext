@@ -36,8 +36,7 @@ public class ArithmeticsValidator extends AbstractArithmeticsValidator {
   
   @Check
   public void checkDivByZero(final Div div) {
-    Expression _right = div.getRight();
-    final BigDecimal bigDecimal = this.calculator.evaluate(_right);
+    final BigDecimal bigDecimal = this.calculator.evaluate(div.getRight());
     double _doubleValue = bigDecimal.doubleValue();
     boolean _equals = (_doubleValue == 0.0);
     if (_equals) {
@@ -67,16 +66,15 @@ public class ArithmeticsValidator extends AbstractArithmeticsValidator {
       }
     }
     final BigDecimal decimal = this.calculator.evaluate(expr);
-    String _string = decimal.toString();
-    int _length = _string.length();
+    int _length = decimal.toString().length();
     boolean _lessEqualsThan = (_length <= 8);
     if (_lessEqualsThan) {
-      String _string_1 = decimal.toString();
       this.warning(
         (("Expression could be normalized to constant \'" + decimal) + "\'"), 
         null, 
         ValidationMessageAcceptor.INSIGNIFICANT_INDEX, 
-        ArithmeticsValidator.NORMALIZABLE, _string_1);
+        ArithmeticsValidator.NORMALIZABLE, 
+        decimal.toString());
     }
   }
 }

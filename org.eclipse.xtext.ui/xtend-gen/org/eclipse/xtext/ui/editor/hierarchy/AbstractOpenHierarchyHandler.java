@@ -11,14 +11,10 @@ import com.google.inject.Inject;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
@@ -26,7 +22,6 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hierarchy.AbstractHierarchyViewPart;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -51,26 +46,21 @@ public abstract class AbstractOpenHierarchyHandler extends AbstractHandler {
       if ((editor != null)) {
         Object _xblockexpression_1 = null;
         {
-          ISelectionProvider _selectionProvider = editor.getSelectionProvider();
-          final ISelection selection = _selectionProvider.getSelection();
+          final ISelection selection = editor.getSelectionProvider().getSelection();
           Object _xifexpression_1 = null;
           if ((selection instanceof ITextSelection)) {
             Object _xblockexpression_2 = null;
             {
-              IWorkbenchPartSite _site = editor.getSite();
-              final IWorkbenchWindow workbenchWindow = _site.getWorkbenchWindow();
-              IXtextDocument _document = editor.getDocument();
+              final IWorkbenchWindow workbenchWindow = editor.getSite().getWorkbenchWindow();
               final IUnitOfWork<Object, XtextResource> _function = (XtextResource it) -> {
                 Object _xblockexpression_3 = null;
                 {
-                  int _offset = ((ITextSelection)selection).getOffset();
-                  EObject _resolveElementAt = this._eObjectAtOffsetHelper.resolveElementAt(it, _offset);
-                  this.openHierarchy(_resolveElementAt, workbenchWindow);
+                  this.openHierarchy(this._eObjectAtOffsetHelper.resolveElementAt(it, ((ITextSelection)selection).getOffset()), workbenchWindow);
                   _xblockexpression_3 = null;
                 }
                 return _xblockexpression_3;
               };
-              _xblockexpression_2 = _document.<Object>priorityReadOnly(_function);
+              _xblockexpression_2 = editor.getDocument().<Object>priorityReadOnly(_function);
             }
             _xifexpression_1 = _xblockexpression_2;
           }
@@ -85,14 +75,10 @@ public abstract class AbstractOpenHierarchyHandler extends AbstractHandler {
   
   protected void openHierarchy(final EObject target, final IWorkbenchWindow workbenchWindow) {
     try {
-      IWorkbenchPage _activePage = workbenchWindow.getActivePage();
-      String _hierarchyViewPartID = this.getHierarchyViewPartID();
-      final IViewPart viewPart = _activePage.showView(_hierarchyViewPartID);
+      final IViewPart viewPart = workbenchWindow.getActivePage().showView(this.getHierarchyViewPartID());
       if ((viewPart instanceof AbstractHierarchyViewPart)) {
-        IHierarchyBuilder _createHierarchyBuilder = this.createHierarchyBuilder(target);
-        ((AbstractHierarchyViewPart)viewPart).setBuilder(_createHierarchyBuilder);
-        URI _platformResourceOrNormalizedURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(target);
-        ((AbstractHierarchyViewPart)viewPart).setRootURI(_platformResourceOrNormalizedURI);
+        ((AbstractHierarchyViewPart)viewPart).setBuilder(this.createHierarchyBuilder(target));
+        ((AbstractHierarchyViewPart)viewPart).setRootURI(EcoreUtil2.getPlatformResourceOrNormalizedURI(target));
         ((AbstractHierarchyViewPart)viewPart).refresh(null);
       }
     } catch (Throwable _e) {

@@ -200,8 +200,7 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
     int _offset_1 = selectedRegion.getOffset();
     int _length = selectedRegion.getLength();
     int _plus = (_offset_1 + _length);
-    String _substring = cleanedModel.substring(_offset, _plus);
-    Assert.assertEquals(expectedSelection, _substring);
+    Assert.assertEquals(expectedSelection, cleanedModel.substring(_offset, _plus));
   }
   
   protected void assertSiblingExpressionsSelected(final String modelWithSelectionMarkup, final String expectedSelection) {
@@ -217,17 +216,15 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
     final Function1<XExpression, ITextRegion> _function = (XExpression it) -> {
       return this.locationInFileProvider.getFullTextRegion(it);
     };
-    List<ITextRegion> _map = ListExtensions.<XExpression, ITextRegion>map(selectedExpressions, _function);
     final Function2<ITextRegion, ITextRegion, ITextRegion> _function_1 = (ITextRegion a, ITextRegion b) -> {
       return a.merge(b);
     };
-    final ITextRegion selectedRegion = IterableExtensions.<ITextRegion>reduce(_map, _function_1);
+    final ITextRegion selectedRegion = IterableExtensions.<ITextRegion>reduce(ListExtensions.<XExpression, ITextRegion>map(selectedExpressions, _function), _function_1);
     int _offset = selectedRegion.getOffset();
     int _offset_1 = selectedRegion.getOffset();
     int _length = selectedRegion.getLength();
     int _plus = (_offset_1 + _length);
-    String _substring = cleanedModel.substring(_offset, _plus);
-    Assert.assertEquals(expectedSelection, _substring);
+    Assert.assertEquals(expectedSelection, cleanedModel.substring(_offset, _plus));
   }
   
   protected void assertInsertionPoint(final String modelWithInsertionMarkup, final String expectedSuccessor) {
@@ -247,8 +244,7 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
       int _offset_1 = selectedRegion.getOffset();
       int _length = selectedRegion.getLength();
       int _plus = (_offset_1 + _length);
-      String _substring = cleanedModel.substring(_offset, _plus);
-      Assert.assertEquals(expectedSuccessor, _substring);
+      Assert.assertEquals(expectedSuccessor, cleanedModel.substring(_offset, _plus));
     }
   }
   

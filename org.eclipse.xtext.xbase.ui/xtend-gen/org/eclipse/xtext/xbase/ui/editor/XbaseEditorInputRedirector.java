@@ -11,8 +11,6 @@ import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -68,23 +66,14 @@ public class XbaseEditorInputRedirector {
     try {
       final IFile resource = ResourceUtil.getFile(input);
       if ((resource != null)) {
-        IPath _fullPath = resource.getFullPath();
-        String _fileExtension = _fullPath.getFileExtension();
-        boolean _isValid = this.fileExtensionProvider.isValid(_fileExtension);
+        boolean _isValid = this.fileExtensionProvider.isValid(resource.getFullPath().getFileExtension());
         if (_isValid) {
-          IProject _project = resource.getProject();
-          final IJavaProject project = JavaCore.create(_project);
+          final IJavaProject project = JavaCore.create(resource.getProject());
           boolean _exists = project.exists();
           if (_exists) {
-            IPath _outputLocation = project.getOutputLocation();
-            IPath _fullPath_1 = resource.getFullPath();
-            boolean _isPrefixOf = _outputLocation.isPrefixOf(_fullPath_1);
+            boolean _isPrefixOf = project.getOutputLocation().isPrefixOf(resource.getFullPath());
             if (_isPrefixOf) {
-              IPath _fullPath_2 = resource.getFullPath();
-              IPath _outputLocation_1 = project.getOutputLocation();
-              int _segmentCount = _outputLocation_1.segmentCount();
-              final IPath relative = _fullPath_2.removeFirstSegments(_segmentCount);
-              IPackageFragmentRoot[] _packageFragmentRoots = project.getPackageFragmentRoots();
+              final IPath relative = resource.getFullPath().removeFirstSegments(project.getOutputLocation().segmentCount());
               final Function1<IPackageFragmentRoot, Boolean> _function = (IPackageFragmentRoot it) -> {
                 try {
                   int _kind = it.getKind();
@@ -93,14 +82,11 @@ public class XbaseEditorInputRedirector {
                   throw Exceptions.sneakyThrow(_e);
                 }
               };
-              Iterable<IPackageFragmentRoot> _filter = IterableExtensions.<IPackageFragmentRoot>filter(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(_packageFragmentRoots)), _function);
+              Iterable<IPackageFragmentRoot> _filter = IterableExtensions.<IPackageFragmentRoot>filter(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(project.getPackageFragmentRoots())), _function);
               for (final IPackageFragmentRoot source : _filter) {
                 {
-                  IResource _correspondingResource = source.getCorrespondingResource();
-                  IPath _projectRelativePath = _correspondingResource.getProjectRelativePath();
-                  final IPath fullPath = _projectRelativePath.append(relative);
-                  IProject _project_1 = resource.getProject();
-                  final IFile newFile = _project_1.getFile(fullPath);
+                  final IPath fullPath = source.getCorrespondingResource().getProjectRelativePath().append(relative);
+                  final IFile newFile = resource.getProject().getFile(fullPath);
                   boolean _exists_1 = newFile.exists();
                   if (_exists_1) {
                     return new FileEditorInput(newFile);
@@ -108,25 +94,17 @@ public class XbaseEditorInputRedirector {
                 }
               }
             }
-            IClasspathEntry[] _rawClasspath = project.getRawClasspath();
             final Function1<IClasspathEntry, Boolean> _function_1 = (IClasspathEntry it) -> {
               int _entryKind = it.getEntryKind();
               return Boolean.valueOf((_entryKind == IClasspathEntry.CPE_SOURCE));
             };
-            Iterable<IClasspathEntry> _filter_1 = IterableExtensions.<IClasspathEntry>filter(((Iterable<IClasspathEntry>)Conversions.doWrapArray(_rawClasspath)), _function_1);
+            Iterable<IClasspathEntry> _filter_1 = IterableExtensions.<IClasspathEntry>filter(((Iterable<IClasspathEntry>)Conversions.doWrapArray(project.getRawClasspath())), _function_1);
             for (final IClasspathEntry sourceFolder : _filter_1) {
               if (((sourceFolder.getOutputLocation() != null) && sourceFolder.getOutputLocation().isPrefixOf(resource.getFullPath()))) {
-                IPath _fullPath_3 = resource.getFullPath();
-                IPath _outputLocation_2 = sourceFolder.getOutputLocation();
-                int _segmentCount_1 = _outputLocation_2.segmentCount();
-                final IPath relative_1 = _fullPath_3.removeFirstSegments(_segmentCount_1);
-                IPackageFragmentRoot[] _findPackageFragmentRoots = project.findPackageFragmentRoots(sourceFolder);
-                final IPackageFragmentRoot source_1 = IterableExtensions.<IPackageFragmentRoot>head(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(_findPackageFragmentRoots)));
-                IResource _correspondingResource = source_1.getCorrespondingResource();
-                IPath _projectRelativePath = _correspondingResource.getProjectRelativePath();
-                final IPath fullPath = _projectRelativePath.append(relative_1);
-                IProject _project_1 = resource.getProject();
-                final IFile newFile = _project_1.getFile(fullPath);
+                final IPath relative_1 = resource.getFullPath().removeFirstSegments(sourceFolder.getOutputLocation().segmentCount());
+                final IPackageFragmentRoot source_1 = IterableExtensions.<IPackageFragmentRoot>head(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(project.findPackageFragmentRoots(sourceFolder))));
+                final IPath fullPath = source_1.getCorrespondingResource().getProjectRelativePath().append(relative_1);
+                final IFile newFile = resource.getProject().getFile(fullPath);
                 boolean _exists_1 = newFile.exists();
                 if (_exists_1) {
                   return new FileEditorInput(newFile);
@@ -153,14 +131,12 @@ public class XbaseEditorInputRedirector {
       if ((trace == null)) {
         return input;
       }
-      Iterable<? extends ILocationInEclipseResource> _allAssociatedLocations = trace.getAllAssociatedLocations();
-      final Iterator<? extends ILocationInEclipseResource> allLocations = _allAssociatedLocations.iterator();
+      final Iterator<? extends ILocationInEclipseResource> allLocations = trace.getAllAssociatedLocations().iterator();
       ILocationInEclipseResource sourceInformation = null;
       while ((allLocations.hasNext() && (sourceInformation == null))) {
         {
           final ILocationInEclipseResource candidate = allLocations.next();
-          LanguageInfo _language = candidate.getLanguage();
-          boolean _equals = this.languageInfo.equals(_language);
+          boolean _equals = this.languageInfo.equals(candidate.getLanguage());
           if (_equals) {
             sourceInformation = candidate;
           }
@@ -178,8 +154,7 @@ public class XbaseEditorInputRedirector {
   }
   
   protected IPackageFragmentRoot _getPackageFragmentRoot(final IJavaElement element) {
-    IJavaElement _parent = element.getParent();
-    return this.getPackageFragmentRoot(_parent);
+    return this.getPackageFragmentRoot(element.getParent());
   }
   
   protected IPackageFragmentRoot _getPackageFragmentRoot(final IPackageFragmentRoot element) {

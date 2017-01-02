@@ -10,16 +10,12 @@ package org.eclipse.xtext.example.arithmetics.ui.autoedit;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.math.BigDecimal;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
 import org.eclipse.xtext.example.arithmetics.interpreter.Calculator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -74,22 +70,16 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
   }
   
   protected BigDecimal evaluate(final Evaluation stmt) {
-    Calculator _calculator = new Calculator();
-    Expression _expression = stmt.getExpression();
-    return _calculator.evaluate(_expression);
+    return new Calculator().evaluate(stmt.getExpression());
   }
   
   protected Evaluation findEvaluation(final DocumentCommand command, final XtextResource state) {
-    EList<EObject> _contents = state.getContents();
-    boolean _isEmpty = _contents.isEmpty();
+    boolean _isEmpty = state.getContents().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      EList<EObject> _contents_1 = state.getContents();
-      Iterable<Module> _filter = Iterables.<Module>filter(_contents_1, Module.class);
-      Module m = IterableExtensions.<Module>head(_filter);
-      EList<Statement> _statements = m.getStatements();
-      Iterable<Evaluation> _filter_1 = Iterables.<Evaluation>filter(_statements, Evaluation.class);
-      for (final Evaluation evaluation : _filter_1) {
+      Module m = IterableExtensions.<Module>head(Iterables.<Module>filter(state.getContents(), Module.class));
+      Iterable<Evaluation> _filter = Iterables.<Evaluation>filter(m.getStatements(), Evaluation.class);
+      for (final Evaluation evaluation : _filter) {
         {
           ICompositeNode node = NodeModelUtils.getNode(evaluation);
           if (((node.getOffset() <= command.offset) && ((node.getOffset() + node.getLength()) >= command.offset))) {

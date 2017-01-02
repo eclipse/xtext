@@ -56,11 +56,9 @@ public class CompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          final Object obj = _compiledClass.newInstance();
+          final Object obj = it.getCompiledClass().newInstance();
           this._reflectExtensions.invoke(obj, "setName", "Foo");
-          Object _invoke = this._reflectExtensions.invoke(obj, "doStuff", "Hello");
-          Assert.assertEquals("Hello Foo", _invoke);
+          Assert.assertEquals("Hello Foo", this._reflectExtensions.invoke(obj, "doStuff", "Hello"));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -101,14 +99,11 @@ public class CompilerTest {
       _builder_1.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass("Bar");
-          final Object barObj = _compiledClass.newInstance();
+          final Object barObj = it.getCompiledClass("Bar").newInstance();
           this._reflectExtensions.invoke(barObj, "setName", "Bar");
-          Class<?> _compiledClass_1 = it.getCompiledClass("Foo");
-          final Object fooObj = _compiledClass_1.newInstance();
+          final Object fooObj = it.getCompiledClass("Foo").newInstance();
           this._reflectExtensions.invoke(fooObj, "setBar", barObj);
-          Object _invoke = this._reflectExtensions.invoke(fooObj, "doStuff", "Hello");
-          Assert.assertEquals("Hello Bar", _invoke);
+          Assert.assertEquals("Hello Bar", this._reflectExtensions.invoke(fooObj, "doStuff", "Hello"));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -204,9 +199,7 @@ public class CompilerTest {
         _builder_1.newLine();
         _builder_1.append("}");
         _builder_1.newLine();
-        String _string = _builder_1.toString();
-        String _singleGeneratedCode = it.getSingleGeneratedCode();
-        Assert.assertEquals(_string, _singleGeneratedCode);
+        Assert.assertEquals(_builder_1.toString(), it.getSingleGeneratedCode());
       };
       this._compilationTestHelper.compile(_builder, _function);
     } catch (Throwable _e) {

@@ -88,12 +88,9 @@ public class Bug350007Test extends AbstractXbaseContentAssistBugTest {
   protected void expectArrayList(final String input) {
     try {
       final ContentAssistProcessorTestBuilder tester = this.newBuilder();
-      ContentAssistProcessorTestBuilder _append = tester.append(input);
-      final ICompletionProposal[] proposals = _append.computeCompletionProposals();
+      final ICompletionProposal[] proposals = tester.append(input).computeCompletionProposals();
       final List<String> proposalStrings = tester.toString(proposals);
-      String _string = proposalStrings.toString();
-      boolean _contains = proposalStrings.contains("java.util.ArrayList");
-      Assert.assertTrue(_string, _contains);
+      Assert.assertTrue(proposalStrings.toString(), proposalStrings.contains("java.util.ArrayList"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

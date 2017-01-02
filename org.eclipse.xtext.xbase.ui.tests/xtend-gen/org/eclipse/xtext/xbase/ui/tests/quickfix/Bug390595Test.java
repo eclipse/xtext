@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.ui.tests.quickfix;
 
 import com.google.inject.Inject;
-import java.util.List;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
@@ -53,12 +52,9 @@ public class Bug390595Test extends AbstractXbaseQuickfixTest {
     final String code = _builder.toString();
     StringInputStream _stringInputStream = new StringInputStream(code);
     final XtextResource resource = this.getResourceFor(_stringInputStream);
-    XtextDocument _document = this.getDocument(resource, code);
-    this.modificationContext.setDocument(_document);
-    List<Issue> _validate = this.resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-    final Issue issue = IterableExtensions.<Issue>head(_validate);
-    List<IssueResolution> _resolutionsForLinkingIssue = this.quickfixProvider.getResolutionsForLinkingIssue(issue);
-    IterableExtensions.<IssueResolution>head(_resolutionsForLinkingIssue);
+    this.modificationContext.setDocument(this.getDocument(resource, code));
+    final Issue issue = IterableExtensions.<Issue>head(this.resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl));
+    IterableExtensions.<IssueResolution>head(this.quickfixProvider.getResolutionsForLinkingIssue(issue));
   }
   
   public XtextDocument getDocument(final XtextResource xtextResource, final String code) {

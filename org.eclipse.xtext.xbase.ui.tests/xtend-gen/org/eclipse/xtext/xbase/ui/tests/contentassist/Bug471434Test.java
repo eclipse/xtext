@@ -39,9 +39,7 @@ public class Bug471434Test extends AbstractContentAssistTest {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("val second = f");
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("first");
-    _assertProposal.withDisplayString("first");
+    _newBuilder.append(_builder.toString()).assertProposal("first").withDisplayString("first");
   }
   
   @Test
@@ -55,8 +53,6 @@ public class Bug471434Test extends AbstractContentAssistTest {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("val second = ");
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("first");
-    _assertProposal.withDisplayString("first");
+    _newBuilder.append(_builder.toString()).assertProposal("first").withDisplayString("first");
   }
 }

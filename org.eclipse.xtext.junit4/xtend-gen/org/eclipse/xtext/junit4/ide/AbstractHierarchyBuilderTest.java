@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import java.util.Collection;
 import javax.inject.Provider;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -24,7 +23,6 @@ import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -126,17 +124,14 @@ public abstract class AbstractHierarchyBuilderTest {
     final IHierarchyBuilder hierarchyBuilder = configuration.hierarchyBuilderProvider.apply(resourceSet);
     String _xifexpression = null;
     if ((configuration.resourceURI == null)) {
-      Pair<String, String> _last = IterableExtensions.<Pair<String, String>>last(configuration.models);
-      _xifexpression = _last.getKey();
+      _xifexpression = IterableExtensions.<Pair<String, String>>last(configuration.models).getKey();
     } else {
       _xifexpression = configuration.resourceURI;
     }
     final String resourceURI = _xifexpression;
-    URI _createURI = URI.createURI(resourceURI);
-    Resource _resource = resourceSet.getResource(_createURI, false);
+    Resource _resource = resourceSet.getResource(URI.createURI(resourceURI), false);
     final XtextResource resource = ((XtextResource) _resource);
-    EObject _resolveElementAt = this._eObjectAtOffsetHelper.resolveElementAt(resource, configuration.index);
-    final URI rootURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(_resolveElementAt);
+    final URI rootURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(this._eObjectAtOffsetHelper.resolveElementAt(resource, configuration.index));
     final String actualHierarchy = this.toExpectation(rootURI, hierarchyBuilder);
     Assert.assertEquals(configuration.expectedHierarchy, actualHierarchy);
   }
@@ -146,9 +141,7 @@ public abstract class AbstractHierarchyBuilderTest {
       final XtextResourceSet resourceSet = this.resourceSetProvider.get();
       for (final Pair<String, String> model : configuration.models) {
         {
-          String _key = model.getKey();
-          URI _createURI = URI.createURI(_key);
-          final Resource resource = resourceSet.createResource(_createURI);
+          final Resource resource = resourceSet.createResource(URI.createURI(model.getKey()));
           String _value = model.getValue();
           LazyStringInputStream _lazyStringInputStream = new LazyStringInputStream(_value, "UTF-8");
           resource.load(_lazyStringInputStream, null);
@@ -164,8 +157,7 @@ public abstract class AbstractHierarchyBuilderTest {
   protected <T extends AbstractHierarchyBuilder> T configureBuilderWith(final T hierarchyBuilder, final ResourceSet resourceSet) {
     SimpleLocalResourceAccess _simpleLocalResourceAccess = new SimpleLocalResourceAccess(resourceSet);
     hierarchyBuilder.setResourceAccess(_simpleLocalResourceAccess);
-    IResourceDescriptions _resourceDescriptions = this.resourceDescriptionsProvider.getResourceDescriptions(resourceSet);
-    hierarchyBuilder.setIndexData(_resourceDescriptions);
+    hierarchyBuilder.setIndexData(this.resourceDescriptionsProvider.getResourceDescriptions(resourceSet));
     return hierarchyBuilder;
   }
   

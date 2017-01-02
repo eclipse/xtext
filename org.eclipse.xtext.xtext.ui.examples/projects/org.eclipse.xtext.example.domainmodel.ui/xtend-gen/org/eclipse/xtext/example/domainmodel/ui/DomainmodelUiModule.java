@@ -4,9 +4,6 @@
 package org.eclipse.xtext.example.domainmodel.ui;
 
 import com.google.inject.Binder;
-import com.google.inject.binder.AnnotatedBindingBuilder;
-import com.google.inject.binder.LinkedBindingBuilder;
-import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.example.domainmodel.ui.AbstractDomainmodelUiModule;
@@ -43,10 +40,7 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
   }
   
   public void configureFilterOperationsOutlineContribution(final Binder binder) {
-    AnnotatedBindingBuilder<IOutlineContribution> _bind = binder.<IOutlineContribution>bind(IOutlineContribution.class);
-    Named _named = Names.named("FilterOperationsContribution");
-    LinkedBindingBuilder<IOutlineContribution> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(
+    binder.<IOutlineContribution>bind(IOutlineContribution.class).annotatedWith(Names.named("FilterOperationsContribution")).to(
       FilterOperationsContribution.class);
   }
 }

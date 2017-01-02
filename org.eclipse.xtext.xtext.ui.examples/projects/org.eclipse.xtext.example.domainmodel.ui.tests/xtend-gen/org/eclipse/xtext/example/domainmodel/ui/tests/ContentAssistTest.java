@@ -1,7 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.ui.tests;
 
 import org.eclipse.xtext.example.domainmodel.ui.tests.DomainmodelUiInjectorProvider;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.xbase.junit.ui.AbstractContentAssistTest;
@@ -19,9 +18,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
   @Test
   public void testImportCompletion() {
     try {
-      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append("import java.util.Da");
-      _append.assertText("java.util.Date");
+      this.newBuilder().append("import java.util.Da").assertText("java.util.Date");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -30,9 +27,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
   @Test
   public void testImportCompletion_1() {
     try {
-      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append("import LinkedHashSet");
-      _append.assertText("java.util.LinkedHashSet");
+      this.newBuilder().append("import LinkedHashSet").assertText("java.util.LinkedHashSet");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -41,9 +36,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
   @Test
   public void testTypeCompletion() {
     try {
-      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append("entity Foo { bar: LinkedHashSet");
-      _append.assertText("java.util.LinkedHashSet");
+      this.newBuilder().append("entity Foo { bar: LinkedHashSet").assertText("java.util.LinkedHashSet");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

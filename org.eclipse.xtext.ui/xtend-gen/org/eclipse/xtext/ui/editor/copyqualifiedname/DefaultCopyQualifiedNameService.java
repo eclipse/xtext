@@ -77,8 +77,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
       if (_eIsProxy) {
         return null;
       }
-      QualifiedName _fullyQualifiedName = this.getFullyQualifiedName(it);
-      _xblockexpression = this.toString(it, _fullyQualifiedName);
+      _xblockexpression = this.toString(it, this.getFullyQualifiedName(it));
     }
     return _xblockexpression;
   }

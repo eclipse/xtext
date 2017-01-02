@@ -12,7 +12,6 @@ import org.apache.log4j.Level;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -62,8 +61,7 @@ public class Bug462047Test extends AbstractEditorTest {
   @Before
   public void createProjects() {
     try {
-      IProject _createPluginProject = AbstractXbaseUITestCase.createPluginProject("bug462047");
-      this.project = _createPluginProject;
+      this.project = AbstractXbaseUITestCase.createPluginProject("bug462047");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -98,9 +96,7 @@ public class Bug462047Test extends AbstractEditorTest {
           final IUnitOfWork<Object, XtextResource> _function_1 = (XtextResource res) -> {
             EcoreUtil.resolveAll(res);
             final ResourceSet resourceSet = res.getResourceSet();
-            URI _createURI = URI.createURI("java:/Objects/CORE.CORE");
-            Resource _resource = resourceSet.getResource(_createURI, false);
-            Assert.assertNull(_resource);
+            Assert.assertNull(resourceSet.getResource(URI.createURI("java:/Objects/CORE.CORE"), false));
             return null;
           };
           document.<Object>readOnly(_function_1);
@@ -108,8 +104,7 @@ public class Bug462047Test extends AbstractEditorTest {
           throw Exceptions.sneakyThrow(_e);
         }
       };
-      LoggingTester.LogCapture _captureLogging = LoggingTester.captureLogging(Level.ERROR, BatchLinkableResource.class, _function);
-      _captureLogging.assertNoLogEntries();
+      LoggingTester.captureLogging(Level.ERROR, BatchLinkableResource.class, _function).assertNoLogEntries();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

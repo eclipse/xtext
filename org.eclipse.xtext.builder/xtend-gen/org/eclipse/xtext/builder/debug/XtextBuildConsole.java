@@ -30,8 +30,7 @@ public class XtextBuildConsole extends IOConsole {
   public static class Factory implements IConsoleFactory {
     @Override
     public void openConsole() {
-      ConsolePlugin _default = ConsolePlugin.getDefault();
-      IConsoleManager consoleManager = _default.getConsoleManager();
+      IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
       XtextBuildConsole _xtextBuildConsole = new XtextBuildConsole();
       consoleManager.addConsoles(new IConsole[] { _xtextBuildConsole });
     }
@@ -46,14 +45,10 @@ public class XtextBuildConsole extends IOConsole {
       if ((XtextBuildConsole.Logger.delegate != null)) {
         XtextBuildConsole.Logger.delegate.log(it);
       }
-      ConsolePlugin _default = ConsolePlugin.getDefault();
-      final IConsoleManager consoleManager = _default.getConsoleManager();
-      IConsole[] _consoles = consoleManager.getConsoles();
-      Iterable<XtextBuildConsole> _filter = Iterables.<XtextBuildConsole>filter(((Iterable<?>)Conversions.doWrapArray(_consoles)), XtextBuildConsole.class);
-      final XtextBuildConsole console = IterableExtensions.<XtextBuildConsole>head(_filter);
+      final IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
+      final XtextBuildConsole console = IterableExtensions.<XtextBuildConsole>head(Iterables.<XtextBuildConsole>filter(((Iterable<?>)Conversions.doWrapArray(consoleManager.getConsoles())), XtextBuildConsole.class));
       if (console!=null) {
-        Thread _currentThread = Thread.currentThread();
-        String _name = _currentThread.getName();
+        String _name = Thread.currentThread().getName();
         String _plus = ("[" + _name);
         String _plus_1 = (_plus + "] ");
         String _switchResult = null;

@@ -36,8 +36,7 @@ public class HierarchyLabelProvider extends LabelProvider implements DelegatingS
     if ((element instanceof PendingUpdateAdapter)) {
       return null;
     }
-    IEObjectDescription _description = this.getDescription(element);
-    final Image image = this.globalDescriptionProvider.getImage(_description);
+    final Image image = this.globalDescriptionProvider.getImage(this.getDescription(element));
     if ((image == null)) {
       return null;
     }
@@ -53,8 +52,7 @@ public class HierarchyLabelProvider extends LabelProvider implements DelegatingS
   }
   
   protected Image decorateRecursive(final Image image) {
-    DecorationOverlayIcon _decorationOverlayIcon = new DecorationOverlayIcon(image, XtextPluginImages.DESC_OVR_RECURSIVE, IDecoration.BOTTOM_LEFT);
-    return _decorationOverlayIcon.createImage();
+    return new DecorationOverlayIcon(image, XtextPluginImages.DESC_OVR_RECURSIVE, IDecoration.BOTTOM_LEFT).createImage();
   }
   
   @Override
@@ -62,8 +60,7 @@ public class HierarchyLabelProvider extends LabelProvider implements DelegatingS
     if ((element instanceof PendingUpdateAdapter)) {
       return this.getPendingText();
     }
-    IEObjectDescription _description = this.getDescription(element);
-    return this.globalDescriptionProvider.getText(_description);
+    return this.globalDescriptionProvider.getText(this.getDescription(element));
   }
   
   @Override
@@ -72,8 +69,7 @@ public class HierarchyLabelProvider extends LabelProvider implements DelegatingS
       String _pendingText = this.getPendingText();
       return new StyledString(_pendingText);
     }
-    IEObjectDescription _description = this.getDescription(element);
-    return this.globalDescriptionProvider.getStyledText(_description);
+    return this.globalDescriptionProvider.getStyledText(this.getDescription(element));
   }
   
   protected IEObjectDescription getDescription(final Object element) {

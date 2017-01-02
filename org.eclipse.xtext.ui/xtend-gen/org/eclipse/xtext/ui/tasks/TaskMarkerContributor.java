@@ -53,8 +53,7 @@ public class TaskMarkerContributor implements IMarkerContributor {
     } catch (final Throwable _t) {
       if (_t instanceof CoreException) {
         final CoreException e = (CoreException)_t;
-        String _message = e.getMessage();
-        TaskMarkerContributor.log.error(_message, e);
+        TaskMarkerContributor.log.error(e.getMessage(), e);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -63,8 +62,7 @@ public class TaskMarkerContributor implements IMarkerContributor {
   
   protected void createTaskMarkers(final IFile file, final List<Task> tasks, final IProgressMonitor monitor) throws CoreException {
     for (final Task task : tasks) {
-      String _markerType = this.typeProvider.getMarkerType(task);
-      this.markerCreator.createMarker(task, file, _markerType);
+      this.markerCreator.createMarker(task, file, this.typeProvider.getMarkerType(task));
     }
   }
   

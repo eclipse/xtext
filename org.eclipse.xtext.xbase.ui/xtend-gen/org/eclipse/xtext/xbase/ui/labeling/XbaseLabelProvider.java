@@ -3,7 +3,6 @@ package org.eclipse.xtext.xbase.ui.labeling;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
-import java.util.List;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -72,27 +70,19 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     ImageDescriptor _xifexpression = null;
     boolean _isInterface = genericType.isInterface();
     if (_isInterface) {
-      JvmVisibility _visibility = genericType.getVisibility();
-      int _get = this.adornments.get(genericType);
-      _xifexpression = this.images.forInterface(_visibility, _get);
+      _xifexpression = this.images.forInterface(genericType.getVisibility(), this.adornments.get(genericType));
     } else {
-      JvmVisibility _visibility_1 = genericType.getVisibility();
-      int _get_1 = this.adornments.get(genericType);
-      _xifexpression = this.images.forClass(_visibility_1, _get_1);
+      _xifexpression = this.images.forClass(genericType.getVisibility(), this.adornments.get(genericType));
     }
     return _xifexpression;
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmEnumerationType enumerationType) {
-    JvmVisibility _visibility = enumerationType.getVisibility();
-    int _get = this.adornments.get(enumerationType);
-    return this.images.forEnum(_visibility, _get);
+    return this.images.forEnum(enumerationType.getVisibility(), this.adornments.get(enumerationType));
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmAnnotationType annotationType) {
-    JvmVisibility _visibility = annotationType.getVisibility();
-    int _get = this.adornments.get(annotationType);
-    return this.images.forAnnotation(_visibility, _get);
+    return this.images.forAnnotation(annotationType.getVisibility(), this.adornments.get(annotationType));
   }
   
   protected String text(final JvmGenericType genericType) {
@@ -100,45 +90,35 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmOperation operation) {
-    JvmVisibility _visibility = operation.getVisibility();
-    int _get = this.adornments.get(operation);
-    return this.images.forOperation(_visibility, _get);
+    return this.images.forOperation(operation.getVisibility(), this.adornments.get(operation));
   }
   
   protected ImageDescriptor _imageDescriptor(final IResolvedOperation operation) {
-    JvmOperation _declaration = operation.getDeclaration();
-    return this.imageDescriptor(_declaration);
+    return this.imageDescriptor(operation.getDeclaration());
   }
   
   protected Object text(final JvmOperation element) {
-    String _simpleName = element.getSimpleName();
-    return this.signature(_simpleName, element);
+    return this.signature(element.getSimpleName(), element);
   }
   
   protected Object text(final IResolvedOperation element) {
-    LightweightTypeReference _resolvedReturnType = element.getResolvedReturnType();
-    final String returnTypeString = _resolvedReturnType.getSimpleName();
+    final String returnTypeString = element.getResolvedReturnType().getSimpleName();
     String decoratedPart = (" : " + returnTypeString);
-    List<JvmTypeParameter> _typeParameters = element.getTypeParameters();
-    boolean _isEmpty = _typeParameters.isEmpty();
+    boolean _isEmpty = element.getTypeParameters().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      List<JvmTypeParameter> _typeParameters_1 = element.getTypeParameters();
-      String _string = this.uiStrings.toString(_typeParameters_1);
+      String _string = this.uiStrings.toString(element.getTypeParameters());
       String _plus = (" <" + _string);
       String _plus_1 = (_plus + "> : ");
       String _plus_2 = (_plus_1 + returnTypeString);
       decoratedPart = _plus_2;
     }
-    JvmOperation _declaration = element.getDeclaration();
-    String _simpleName = _declaration.getSimpleName();
+    String _simpleName = element.getDeclaration().getSimpleName();
     String _plus_3 = (_simpleName + "(");
-    List<LightweightTypeReference> _resolvedParameterTypes = element.getResolvedParameterTypes();
     final Function1<LightweightTypeReference, String> _function = (LightweightTypeReference it) -> {
       return it.getHumanReadableName();
     };
-    List<String> _map = ListExtensions.<LightweightTypeReference, String>map(_resolvedParameterTypes, _function);
-    String _join = IterableExtensions.join(_map, ", ");
+    String _join = IterableExtensions.join(ListExtensions.<LightweightTypeReference, String>map(element.getResolvedParameterTypes(), _function), ", ");
     String _plus_4 = (_plus_3 + _join);
     String _plus_5 = (_plus_4 + ")");
     StyledString _styledString = new StyledString(_plus_5);
@@ -147,9 +127,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmConstructor constructor) {
-    JvmVisibility _visibility = constructor.getVisibility();
-    int _get = this.adornments.get(constructor);
-    return this.images.forConstructor(_visibility, _get);
+    return this.images.forConstructor(constructor.getVisibility(), this.adornments.get(constructor));
   }
   
   protected String text(final JvmConstructor constructor) {
@@ -158,53 +136,44 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   }
   
   protected ImageDescriptor _imageDescriptor(final IResolvedConstructor constructor) {
-    JvmConstructor _declaration = constructor.getDeclaration();
-    return this._imageDescriptor(_declaration);
+    return this._imageDescriptor(constructor.getDeclaration());
   }
   
   protected Object text(final IResolvedConstructor constructor) {
-    List<LightweightTypeReference> _resolvedParameterTypes = constructor.getResolvedParameterTypes();
     final Function1<LightweightTypeReference, String> _function = (LightweightTypeReference it) -> {
       return it.getHumanReadableName();
     };
-    List<String> _map = ListExtensions.<LightweightTypeReference, String>map(_resolvedParameterTypes, _function);
-    String _join = IterableExtensions.join(_map, ", ");
+    String _join = IterableExtensions.join(ListExtensions.<LightweightTypeReference, String>map(constructor.getResolvedParameterTypes(), _function), ", ");
     String _plus = ("new(" + _join);
     String _plus_1 = (_plus + ")");
     return new StyledString(_plus_1);
   }
   
   protected ImageDescriptor _imageDescriptor(final IResolvedField field) {
-    JvmField _declaration = field.getDeclaration();
-    return this._imageDescriptor(_declaration);
+    return this._imageDescriptor(field.getDeclaration());
   }
   
   protected Object text(final IResolvedField field) {
     String _simpleSignature = field.getSimpleSignature();
     String _plus = (_simpleSignature + " : ");
-    LightweightTypeReference _resolvedType = field.getResolvedType();
-    String _humanReadableName = _resolvedType.getHumanReadableName();
+    String _humanReadableName = field.getResolvedType().getHumanReadableName();
     String _plus_1 = (_plus + _humanReadableName);
     return new StyledString(_plus_1);
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmField field) {
-    JvmVisibility _visibility = field.getVisibility();
-    int _get = this.adornments.get(field);
-    return this.images.forField(_visibility, _get);
+    return this.images.forField(field.getVisibility(), this.adornments.get(field));
   }
   
   protected Object text(final JvmField field) {
     String _simpleName = field.getSimpleName();
     String _plus = (_simpleName + " : ");
-    JvmTypeReference _type = field.getType();
-    String _simpleName_1 = _type.getSimpleName();
+    String _simpleName_1 = field.getType().getSimpleName();
     return (_plus + _simpleName_1);
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmFormalParameter parameter) {
-    int _get = this.adornments.get(parameter);
-    return this.images.forLocalVariable(_get);
+    return this.images.forLocalVariable(this.adornments.get(parameter));
   }
   
   protected String text(final JvmFormalParameter parameter) {
@@ -226,8 +195,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   }
   
   protected ImageDescriptor _imageDescriptor(final XVariableDeclaration variableDeclaration) {
-    int _get = this.adornments.get(variableDeclaration);
-    return this.images.forLocalVariable(_get);
+    return this.images.forLocalVariable(this.adornments.get(variableDeclaration));
   }
   
   protected String text(final XImportDeclaration it) {
@@ -275,8 +243,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmTypeParameter parameter) {
-    int _get = this.adornments.get(parameter);
-    return this.images.forTypeParameter(_get);
+    return this.images.forTypeParameter(this.adornments.get(parameter));
   }
   
   protected StyledString signature(final String simpleName, final JvmIdentifiableElement element) {
@@ -298,8 +265,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     if ((returnType == null)) {
       _xifexpression_2 = "void";
     } else {
-      LightweightTypeReference _lightweightTypeReference = owner.toLightweightTypeReference(returnType);
-      _xifexpression_2 = _lightweightTypeReference.getHumanReadableName();
+      _xifexpression_2 = owner.toLightweightTypeReference(returnType).getHumanReadableName();
     }
     final String returnTypeString = _xifexpression_2;
     String decoratedPart = (" : " + returnTypeString);

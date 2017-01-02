@@ -22,10 +22,7 @@ import org.eclipse.xtext.example.homeautomation.ruleEngine.RuleEnginePackage;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.State;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
-import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -71,62 +68,47 @@ public class RuleEngineFormatter extends XbaseFormatter {
     document.<Model>prepend(model, _function);
     EList<Declaration> _declarations = model.getDeclarations();
     for (final Declaration declaration : _declarations) {
-      Declaration _format = document.<Declaration>format(declaration);
       final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
         it.setNewLines(1, 1, 2);
       };
-      document.<Declaration>append(_format, _function_1);
+      document.<Declaration>append(document.<Declaration>format(declaration), _function_1);
     }
   }
   
   protected void _format(final Device device, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(device);
-    ISemanticRegion _feature = _regionFor.feature(RuleEnginePackage.Literals.DEVICE__NAME);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.surround(_feature, _function);
-    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(device);
-    ISemanticRegion _keyword = _regionFor_1.keyword("be");
+    document.surround(this.textRegionExtensions.regionFor(device).feature(RuleEnginePackage.Literals.DEVICE__NAME), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.surround(_keyword, _function_1);
+    document.surround(this.textRegionExtensions.regionFor(device).keyword("be"), _function_1);
     EList<State> _states = device.getStates();
     for (final State state : _states) {
-      State _format = document.<State>format(state);
-      ISemanticRegionFinder _immediatelyPreceding = this.textRegionExtensions.immediatelyPreceding(_format);
-      ISemanticRegion _keyword_1 = _immediatelyPreceding.keyword(",");
       final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
         it.noSpace();
       };
-      ISemanticRegion _prepend = document.prepend(_keyword_1, _function_2);
       final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
         it.oneSpace();
       };
-      document.append(_prepend, _function_3);
+      document.append(document.prepend(this.textRegionExtensions.immediatelyPreceding(document.<State>format(state)).keyword(","), _function_2), _function_3);
     }
   }
   
   protected void _format(final Rule rule, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(rule);
-    ISemanticRegion _feature = _regionFor.feature(RuleEnginePackage.Literals.RULE__DESCRIPTION);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.surround(_feature, _function);
-    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(rule);
-    ISemanticRegion _feature_1 = _regionFor_1.feature(RuleEnginePackage.Literals.RULE__DEVICE_STATE);
+    document.surround(this.textRegionExtensions.regionFor(rule).feature(RuleEnginePackage.Literals.RULE__DESCRIPTION), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.surround(_feature_1, _function_1);
-    XExpression _thenPart = rule.getThenPart();
-    XExpression _format = document.<XExpression>format(_thenPart);
+    document.surround(this.textRegionExtensions.regionFor(rule).feature(RuleEnginePackage.Literals.RULE__DEVICE_STATE), _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
-    document.<XExpression>prepend(_format, _function_2);
+    document.<XExpression>prepend(document.<XExpression>format(rule.getThenPart()), _function_2);
   }
   
   @Override
@@ -138,15 +120,13 @@ public class RuleEngineFormatter extends XbaseFormatter {
     EList<XExpression> _expressions = expr.getExpressions();
     for (final XExpression child : _expressions) {
       {
-        ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(child);
-        final ISemanticRegion sem = _immediatelyFollowing.keyword(";");
+        final ISemanticRegion sem = this.textRegionExtensions.immediatelyFollowing(child).keyword(";");
         if ((sem != null)) {
           final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
             it.noSpace();
           };
           document.prepend(sem, _function_1);
-          EList<XExpression> _expressions_1 = expr.getExpressions();
-          XExpression _last = IterableExtensions.<XExpression>last(_expressions_1);
+          XExpression _last = IterableExtensions.<XExpression>last(expr.getExpressions());
           boolean _notEquals = (!Objects.equal(child, _last));
           if (_notEquals) {
             final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
@@ -155,8 +135,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
             document.append(sem, _function_2);
           }
         } else {
-          EList<XExpression> _expressions_2 = expr.getExpressions();
-          XExpression _last_1 = IterableExtensions.<XExpression>last(_expressions_2);
+          XExpression _last_1 = IterableExtensions.<XExpression>last(expr.getExpressions());
           boolean _notEquals_1 = (!Objects.equal(child, _last_1));
           if (_notEquals_1) {
             final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
@@ -172,96 +151,75 @@ public class RuleEngineFormatter extends XbaseFormatter {
   
   @Override
   protected void _format(final XSwitchExpression expr, @Extension final IFormattableDocument document) {
-    XExpression _switch = expr.getSwitch();
-    IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(_switch);
-    IHiddenRegion _nextHiddenRegion = this.textRegionExtensions.nextHiddenRegion(expr);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.indent();
     };
-    document.set(_previousHiddenRegion, _nextHiddenRegion, _function);
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
-    ISemanticRegion _keyword = _regionFor.keyword("switch");
+    document.set(this.textRegionExtensions.previousHiddenRegion(expr.getSwitch()), this.textRegionExtensions.nextHiddenRegion(expr), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(_keyword, _function_1);
-    XExpression _switch_1 = expr.getSwitch();
+    document.append(this.textRegionExtensions.regionFor(expr).keyword("switch"), _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
-    XExpression _append = document.<XExpression>append(_switch_1, _function_2);
-    document.<XExpression>format(_append);
+    document.<XExpression>format(document.<XExpression>append(expr.getSwitch(), _function_2));
     EList<XCasePart> _cases = expr.getCases();
     for (final XCasePart c : _cases) {
       {
         if (((c.getTypeGuard() != null) && (c.getCase() != null))) {
-          JvmTypeReference _typeGuard = c.getTypeGuard();
           final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
             it.oneSpace();
           };
-          document.<JvmTypeReference>append(_typeGuard, _function_3);
-          XExpression _case = c.getCase();
+          document.<JvmTypeReference>append(c.getTypeGuard(), _function_3);
           final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
             it.noSpace();
           };
-          document.<XExpression>append(_case, _function_4);
+          document.<XExpression>append(c.getCase(), _function_4);
         } else {
-          JvmTypeReference _typeGuard_1 = c.getTypeGuard();
-          boolean _tripleNotEquals = (_typeGuard_1 != null);
+          JvmTypeReference _typeGuard = c.getTypeGuard();
+          boolean _tripleNotEquals = (_typeGuard != null);
           if (_tripleNotEquals) {
-            JvmTypeReference _typeGuard_2 = c.getTypeGuard();
             final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
               it.noSpace();
             };
-            document.<JvmTypeReference>append(_typeGuard_2, _function_5);
+            document.<JvmTypeReference>append(c.getTypeGuard(), _function_5);
           } else {
-            XExpression _case_1 = c.getCase();
-            boolean _tripleNotEquals_1 = (_case_1 != null);
+            XExpression _case = c.getCase();
+            boolean _tripleNotEquals_1 = (_case != null);
             if (_tripleNotEquals_1) {
-              XExpression _case_2 = c.getCase();
               final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
                 it.oneSpace();
               };
-              XExpression _prepend = document.<XExpression>prepend(_case_2, _function_6);
               final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
                 it.noSpace();
               };
-              document.<XExpression>append(_prepend, _function_7);
+              document.<XExpression>append(document.<XExpression>prepend(c.getCase(), _function_6), _function_7);
             }
           }
         }
-        ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(c);
-        ISemanticRegion _feature = _regionFor_1.feature(XbasePackage.Literals.XCASE_PART__FALL_THROUGH);
         final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
           it.noSpace();
         };
-        ISemanticRegion _prepend_1 = document.prepend(_feature, _function_8);
         final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
-        document.append(_prepend_1, _function_9);
-        XExpression _case_3 = c.getCase();
-        document.<XExpression>format(_case_3);
+        document.append(document.prepend(this.textRegionExtensions.regionFor(c).feature(XbasePackage.Literals.XCASE_PART__FALL_THROUGH), _function_8), _function_9);
+        document.<XExpression>format(c.getCase());
         if ((Objects.equal(c, IterableExtensions.<XCasePart>last(expr.getCases())) && (expr.getDefault() == null))) {
-          XExpression _then = c.getThen();
-          this.formatBody(_then, true, document);
+          this.formatBody(c.getThen(), true, document);
         } else {
-          XExpression _then_1 = c.getThen();
-          this.formatBodyParagraph(_then_1, document);
+          this.formatBodyParagraph(c.getThen(), document);
         }
       }
     }
     XExpression _default = expr.getDefault();
     boolean _tripleNotEquals = (_default != null);
     if (_tripleNotEquals) {
-      ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
-      ISemanticRegion _keyword_1 = _regionFor_1.keyword("default");
       final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
         it.noSpace();
       };
-      document.append(_keyword_1, _function_3);
-      XExpression _default_1 = expr.getDefault();
-      this.formatBody(_default_1, true, document);
+      document.append(this.textRegionExtensions.regionFor(expr).keyword("default"), _function_3);
+      this.formatBody(expr.getDefault(), true, document);
     }
   }
   
@@ -280,11 +238,10 @@ public class RuleEngineFormatter extends XbaseFormatter {
         final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
-        XExpression _prepend = doc.<XExpression>prepend(expr, _function_1);
         final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
           it.indent();
         };
-        doc.<XExpression>surround(_prepend, _function_2);
+        doc.<XExpression>surround(doc.<XExpression>prepend(expr, _function_1), _function_2);
       } else {
         final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
           it.oneSpace();
@@ -310,15 +267,13 @@ public class RuleEngineFormatter extends XbaseFormatter {
         final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
-        XExpression _prepend = doc.<XExpression>prepend(expr, _function_1);
         final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
           it.indent();
         };
-        XExpression _surround = doc.<XExpression>surround(_prepend, _function_2);
         final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
-        doc.<XExpression>append(_surround, _function_3);
+        doc.<XExpression>append(doc.<XExpression>surround(doc.<XExpression>prepend(expr, _function_1), _function_2), _function_3);
       } else {
         final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
           it.oneSpace();

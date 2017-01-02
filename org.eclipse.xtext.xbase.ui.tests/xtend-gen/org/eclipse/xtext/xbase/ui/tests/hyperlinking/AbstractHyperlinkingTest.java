@@ -40,9 +40,7 @@ public class AbstractHyperlinkingTest extends AbstractXbaseUITestCase implements
   
   @BeforeClass
   public static void createTestProject() throws Exception {
-    String _name = AbstractHyperlinkingTest.class.getName();
-    IProject _createPluginProject = AbstractXbaseUITestCase.createPluginProject(_name);
-    AbstractHyperlinkingTest.staticProject = _createPluginProject;
+    AbstractHyperlinkingTest.staticProject = AbstractXbaseUITestCase.createPluginProject(AbstractHyperlinkingTest.class.getName());
   }
   
   @AfterClass
@@ -53,9 +51,7 @@ public class AbstractHyperlinkingTest extends AbstractXbaseUITestCase implements
   @Override
   public XtextResource getResourceFor(final InputStream stream) {
     try {
-      XtextResourceSet _resourceSet = this.getResourceSet();
-      URI _createURI = URI.createURI(("Test." + this.fileExtension));
-      Resource _createResource = _resourceSet.createResource(_createURI);
+      Resource _createResource = this.getResourceSet().createResource(URI.createURI(("Test." + this.fileExtension)));
       final XtextResource result = ((XtextResource) _createResource);
       result.load(stream, null);
       return result;
@@ -78,8 +74,7 @@ public class AbstractHyperlinkingTest extends AbstractXbaseUITestCase implements
   protected void initializeTypeProvider(final XtextResourceSet set) {
     final JdtTypeProviderFactory typeProviderFactory = new JdtTypeProviderFactory(this);
     typeProviderFactory.findOrCreateTypeProvider(set);
-    IJavaProject _javaProject = this.getJavaProject(set);
-    set.setClasspathURIContext(_javaProject);
+    set.setClasspathURIContext(this.getJavaProject(set));
   }
   
   @Override

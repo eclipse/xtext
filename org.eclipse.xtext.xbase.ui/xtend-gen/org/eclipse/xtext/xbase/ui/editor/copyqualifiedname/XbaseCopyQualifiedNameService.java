@@ -10,14 +10,12 @@ package org.eclipse.xtext.xbase.ui.editor.copyqualifiedname;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ui.editor.copyqualifiedname.DefaultCopyQualifiedNameService;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -61,12 +59,10 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     String _fullyQualifiedName = this.toFullyQualifiedName(it);
     _builder.append(_fullyQualifiedName);
     _builder.append("(");
-    EList<JvmFormalParameter> _parameters = it.getParameters();
     final Function1<JvmFormalParameter, String> _function = (JvmFormalParameter it_1) -> {
-      JvmTypeReference _parameterType = it_1.getParameterType();
-      return _parameterType.getSimpleName();
+      return it_1.getParameterType().getSimpleName();
     };
-    CharSequence _qualifiedNames = this.<JvmFormalParameter>toQualifiedNames(_parameters, _function);
+    CharSequence _qualifiedNames = this.<JvmFormalParameter>toQualifiedNames(it.getParameters(), _function);
     _builder.append(_qualifiedNames);
     _builder.append(")");
     return _builder.toString();
@@ -81,12 +77,10 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       String _fullyQualifiedName = this.toFullyQualifiedName(executable);
       _builder.append(_fullyQualifiedName);
       _builder.append("(");
-      EList<XExpression> _actualArguments = featureCall.getActualArguments();
       final Function1<XExpression, String> _function = (XExpression it) -> {
-        EList<XExpression> _actualArguments_1 = featureCall.getActualArguments();
-        return this.toQualifiedName(it, resolvedExecutable, executable, resolvedTypes, _actualArguments_1);
+        return this.toQualifiedName(it, resolvedExecutable, executable, resolvedTypes, featureCall.getActualArguments());
       };
-      CharSequence _qualifiedNames = this.<XExpression>toQualifiedNames(_actualArguments, _function);
+      CharSequence _qualifiedNames = this.<XExpression>toQualifiedNames(featureCall.getActualArguments(), _function);
       _builder.append(_qualifiedNames);
       _builder.append(")");
       _xblockexpression = _builder.toString();
@@ -103,12 +97,10 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       String _fullyQualifiedName = this.toFullyQualifiedName(constructor);
       _builder.append(_fullyQualifiedName);
       _builder.append("(");
-      EList<XExpression> _arguments = constructorCall.getArguments();
       final Function1<XExpression, String> _function = (XExpression it) -> {
-        EList<XExpression> _arguments_1 = constructorCall.getArguments();
-        return this.toQualifiedName(it, resolvedExecutable, constructor, resolvedTypes, _arguments_1);
+        return this.toQualifiedName(it, resolvedExecutable, constructor, resolvedTypes, constructorCall.getArguments());
       };
-      CharSequence _qualifiedNames = this.<XExpression>toQualifiedNames(_arguments, _function);
+      CharSequence _qualifiedNames = this.<XExpression>toQualifiedNames(constructorCall.getArguments(), _function);
       _builder.append(_qualifiedNames);
       _builder.append(")");
       _xblockexpression = _builder.toString();
@@ -123,14 +115,9 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     }
     final int index = arguments.indexOf(it);
     if ((resolvedExecutable == null)) {
-      EList<JvmFormalParameter> _parameters = executable.getParameters();
-      JvmFormalParameter _get = _parameters.get(index);
-      JvmTypeReference _parameterType = _get.getParameterType();
-      return _parameterType.getSimpleName();
+      return executable.getParameters().get(index).getParameterType().getSimpleName();
     }
-    List<LightweightTypeReference> _resolvedParameterTypes = resolvedExecutable.getResolvedParameterTypes();
-    LightweightTypeReference _get_1 = _resolvedParameterTypes.get(index);
-    return _get_1.getSimpleName();
+    return resolvedExecutable.getResolvedParameterTypes().get(index).getSimpleName();
   }
   
   protected IResolvedExecutable _resolveExecutable(final JvmConstructor constructor, final XConstructorCall it, @Extension final IResolvedTypes resolvedTypes) {
@@ -146,8 +133,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     Iterable<IResolvedConstructor> _filter = null;
     if (_declaredConstructors!=null) {
       final Function1<IResolvedConstructor, Boolean> _function = (IResolvedConstructor it_1) -> {
-        JvmConstructor _declaration = it_1.getDeclaration();
-        return Boolean.valueOf(_declaration.equals(constructor));
+        return Boolean.valueOf(it_1.getDeclaration().equals(constructor));
       };
       _filter=IterableExtensions.<IResolvedConstructor>filter(_declaredConstructors, _function);
     }
@@ -175,8 +161,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     Iterable<IResolvedOperation> _filter = null;
     if (_allOperations!=null) {
       final Function1<IResolvedOperation, Boolean> _function = (IResolvedOperation it_1) -> {
-        JvmOperation _declaration = it_1.getDeclaration();
-        return Boolean.valueOf(_declaration.equals(operation));
+        return Boolean.valueOf(it_1.getDeclaration().equals(operation));
       };
       _filter=IterableExtensions.<IResolvedOperation>filter(_allOperations, _function);
     }
@@ -204,8 +189,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     Iterable<IResolvedConstructor> _filter = null;
     if (_declaredConstructors!=null) {
       final Function1<IResolvedConstructor, Boolean> _function = (IResolvedConstructor it_1) -> {
-        JvmConstructor _declaration = it_1.getDeclaration();
-        return Boolean.valueOf(_declaration.equals(consturctor));
+        return Boolean.valueOf(it_1.getDeclaration().equals(consturctor));
       };
       _filter=IterableExtensions.<IResolvedConstructor>filter(_declaredConstructors, _function);
     }

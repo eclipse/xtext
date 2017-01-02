@@ -37,8 +37,7 @@ public class OrganizeImportsTest {
   
   protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) {
     try {
-      String _string = model.toString();
-      final DomainModel domainModel = this._parseHelper.parse(_string);
+      final DomainModel domainModel = this._parseHelper.parse(model.toString());
       Resource _eResource = domainModel.eResource();
       final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
       final StringBuilder builder = new StringBuilder(model);
@@ -61,12 +60,9 @@ public class OrganizeImportsTest {
         int _offset_1 = it_1.getOffset();
         int _length = it_1.getLength();
         int _plus = (_offset_1 + _length);
-        String _text = it_1.getText();
-        builder.replace(_offset, _plus, _text);
+        builder.replace(_offset, _plus, it_1.getText());
       }
-      String _string_1 = expected.toString();
-      String _string_2 = builder.toString();
-      Assert.assertEquals(_string_1, _string_2);
+      Assert.assertEquals(expected.toString(), builder.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

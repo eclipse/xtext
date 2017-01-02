@@ -15,7 +15,6 @@ import org.eclipse.xtext.example.arithmetics.ArithmeticsStandaloneSetupGenerated
 @SuppressWarnings("all")
 public class ArithmeticsStandaloneSetup extends ArithmeticsStandaloneSetupGenerated {
   public static void doSetup() {
-    ArithmeticsStandaloneSetup _arithmeticsStandaloneSetup = new ArithmeticsStandaloneSetup();
-    _arithmeticsStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new ArithmeticsStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

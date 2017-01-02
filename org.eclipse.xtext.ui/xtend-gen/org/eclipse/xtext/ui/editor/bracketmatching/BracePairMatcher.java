@@ -44,11 +44,9 @@ public class BracePairMatcher implements ICharacterPairMatcher {
       Set<BracePair> _pairs = bracePairProvider.getPairs();
       for (final BracePair pair : _pairs) {
         if (((pair.getLeftBrace().length() == 1) && (pair.getRightBrace().length() == 1))) {
-          String _leftBrace = pair.getLeftBrace();
-          char _charAt = _leftBrace.charAt(0);
+          char _charAt = pair.getLeftBrace().charAt(0);
           chars.add(Character.valueOf(_charAt));
-          String _rightBrace = pair.getRightBrace();
-          char _charAt_1 = _rightBrace.charAt(0);
+          char _charAt_1 = pair.getRightBrace().charAt(0);
           chars.add(Character.valueOf(_charAt_1));
         } else {
           throw new IllegalStateException((("Brace pair is invalid: " + pair) + "; left and right braces should have length of one character."));

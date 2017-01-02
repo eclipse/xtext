@@ -9,7 +9,6 @@ package org.eclipse.xtext.builder.impl.javasupport;
 
 import com.google.common.base.Preconditions;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
@@ -42,7 +41,6 @@ public class UnconfirmedStructuralChangesDelta extends ChangedResourceDescriptio
   }
   
   public IProject getProject() {
-    IJavaProject _javaProject = this.type.getJavaProject();
-    return _javaProject.getProject();
+    return this.type.getJavaProject().getProject();
   }
 }

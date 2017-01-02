@@ -4,7 +4,6 @@
 package org.eclipse.xtext.example.fowlerdsl.ui.quickfix;
 
 import org.eclipse.xtext.example.fowlerdsl.validation.StatemachineValidator;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
@@ -24,24 +23,15 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class StatemachineQuickfixProvider extends DefaultQuickfixProvider {
   @Fix(StatemachineValidator.INVALID_NAME)
   public void capitalizeName(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    String[] _data = issue.getData();
-    String _head = IterableExtensions.<String>head(((Iterable<String>)Conversions.doWrapArray(_data)));
-    String _firstLower = StringExtensions.toFirstLower(_head);
+    String _firstLower = StringExtensions.toFirstLower(IterableExtensions.<String>head(((Iterable<String>)Conversions.doWrapArray(issue.getData()))));
     String _plus = ("Change to \'" + _firstLower);
     String _plus_1 = (_plus + "\'.");
-    String[] _data_1 = issue.getData();
-    String _head_1 = IterableExtensions.<String>head(((Iterable<String>)Conversions.doWrapArray(_data_1)));
-    String _firstLower_1 = StringExtensions.toFirstLower(_head_1);
+    String _firstLower_1 = StringExtensions.toFirstLower(IterableExtensions.<String>head(((Iterable<String>)Conversions.doWrapArray(issue.getData()))));
     String _plus_2 = ("Change to \'" + _firstLower_1);
     String _plus_3 = (_plus_2 + "\'.");
     final IModification _function = (IModificationContext it) -> {
-      IXtextDocument _xtextDocument = it.getXtextDocument();
-      Integer _offset = issue.getOffset();
-      final String firstLetter = _xtextDocument.get((_offset).intValue(), 1);
-      IXtextDocument _xtextDocument_1 = it.getXtextDocument();
-      Integer _offset_1 = issue.getOffset();
-      String _lowerCase = firstLetter.toLowerCase();
-      _xtextDocument_1.replace((_offset_1).intValue(), 1, _lowerCase);
+      final String firstLetter = it.getXtextDocument().get((issue.getOffset()).intValue(), 1);
+      it.getXtextDocument().replace((issue.getOffset()).intValue(), 1, firstLetter.toLowerCase());
     };
     acceptor.accept(issue, _plus_1, _plus_3, "upcase.png", _function);
   }

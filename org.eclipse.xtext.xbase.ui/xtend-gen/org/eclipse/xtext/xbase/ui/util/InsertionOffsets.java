@@ -21,8 +21,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class InsertionOffsets {
   public int before(final EObject element) {
-    ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(element);
-    return _findActualNodeFor.getOffset();
+    return NodeModelUtils.findActualNodeFor(element).getOffset();
   }
   
   public int after(final EObject element) {
@@ -38,12 +37,11 @@ public class InsertionOffsets {
     int _xblockexpression = (int) 0;
     {
       final ICompositeNode node = NodeModelUtils.findActualNodeFor(element);
-      Iterable<ILeafNode> _leafNodes = node.getLeafNodes();
       final Function1<ILeafNode, Boolean> _function = (ILeafNode it) -> {
         String _text = it.getText();
         return Boolean.valueOf(Objects.equal(_text, "{"));
       };
-      final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(_leafNodes, _function);
+      final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(node.getLeafNodes(), _function);
       int _xifexpression = (int) 0;
       if ((openingBraceNode != null)) {
         int _offset = openingBraceNode.getOffset();

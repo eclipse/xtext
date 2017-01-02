@@ -100,11 +100,8 @@ public class SerializerTest extends Assert {
       Rule _createRule = this._ruleEngineFactory.createRule();
       final Procedure1<Rule> _function_2 = (Rule it) -> {
         it.setDescription("Save energy");
-        EList<Declaration> _declarations_3 = model.getDeclarations();
-        Declaration _head = IterableExtensions.<Declaration>head(_declarations_3);
-        EList<State> _states = ((Device) _head).getStates();
-        State _head_1 = IterableExtensions.<State>head(_states);
-        it.setDeviceState(_head_1);
+        Declaration _head = IterableExtensions.<Declaration>head(model.getDeclarations());
+        it.setDeviceState(IterableExtensions.<State>head(((Device) _head).getStates()));
         XBlockExpression _createXBlockExpression = this._xbaseFactory.createXBlockExpression();
         final Procedure1<XBlockExpression> _function_3 = (XBlockExpression it_1) -> {
           EList<XExpression> _expressions = it_1.getExpressions();
@@ -139,15 +136,11 @@ public class SerializerTest extends Assert {
       };
       Rule _doubleArrow_2 = ObjectExtensions.<Rule>operator_doubleArrow(_createRule, _function_2);
       _declarations_2.add(_doubleArrow_2);
-      URI _createURI = URI.createURI("heater.rules");
-      final Resource resource = rs.createResource(_createURI);
+      final Resource resource = rs.createResource(URI.createURI("heater.rules"));
       EList<EObject> _contents = resource.getContents();
       _contents.add(model);
       final StringWriter sw = new StringWriter();
-      SaveOptions.Builder _newBuilder = SaveOptions.newBuilder();
-      SaveOptions.Builder _format = _newBuilder.format();
-      SaveOptions _options = _format.getOptions();
-      this.serializer.serialize(model, sw, _options);
+      this.serializer.serialize(model, sw, SaveOptions.newBuilder().format().getOptions());
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Device Window can be open, closed");
       _builder.newLine();
@@ -161,9 +154,7 @@ public class SerializerTest extends Assert {
       _builder.append("\t");
       _builder.append("val x = 1");
       _builder.newLine();
-      String _string = _builder.toString();
-      String _string_1 = sw.toString();
-      Assert.assertEquals(_string, _string_1);
+      Assert.assertEquals(_builder.toString(), sw.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

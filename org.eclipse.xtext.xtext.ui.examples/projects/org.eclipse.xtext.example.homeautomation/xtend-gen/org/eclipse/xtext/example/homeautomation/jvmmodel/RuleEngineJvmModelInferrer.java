@@ -6,12 +6,9 @@ package org.eclipse.xtext.example.homeautomation.jvmmodel;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -19,14 +16,11 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.example.homeautomation.ruleEngine.Declaration;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Device;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Model;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Rule;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.State;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -52,40 +46,29 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
   private JvmTypesBuilder _jvmTypesBuilder;
   
   protected void _infer(final Model element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
-    Resource _eResource = element.eResource();
-    URI _uRI = _eResource.getURI();
-    URI _trimFileExtension = _uRI.trimFileExtension();
-    final String className = _trimFileExtension.lastSegment();
-    JvmGenericType _class = this._jvmTypesBuilder.toClass(element, className);
+    final String className = element.eResource().getURI().trimFileExtension().lastSegment();
     final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
-      EList<Declaration> _declarations = element.getDeclarations();
-      Iterable<Rule> _filter = Iterables.<Rule>filter(_declarations, Rule.class);
+      Iterable<Rule> _filter = Iterables.<Rule>filter(element.getDeclarations(), Rule.class);
       for (final Rule device : _filter) {
         EList<JvmMember> _members = it.getMembers();
-        String _ruleMethodName = RuleEngineJvmModelInferrer.getRuleMethodName(device);
-        JvmTypeReference _typeRef = this._typeReferenceBuilder.typeRef(void.class);
         final Procedure1<JvmOperation> _function_1 = (JvmOperation it_1) -> {
           it_1.setStatic(true);
-          XExpression _thenPart = device.getThenPart();
-          this._jvmTypesBuilder.setBody(it_1, _thenPart);
+          this._jvmTypesBuilder.setBody(it_1, device.getThenPart());
         };
-        JvmOperation _method = this._jvmTypesBuilder.toMethod(device, _ruleMethodName, _typeRef, _function_1);
+        JvmOperation _method = this._jvmTypesBuilder.toMethod(device, RuleEngineJvmModelInferrer.getRuleMethodName(device), this._typeReferenceBuilder.typeRef(void.class), _function_1);
         this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
       }
       EList<JvmMember> _members_1 = it.getMembers();
-      JvmTypeReference _typeRef_1 = this._typeReferenceBuilder.typeRef(void.class);
       final Procedure1<JvmOperation> _function_2 = (JvmOperation it_1) -> {
         it_1.setStatic(true);
         EList<JvmFormalParameter> _parameters = it_1.getParameters();
-        JvmTypeReference _typeRef_2 = this._typeReferenceBuilder.typeRef(Object.class);
-        JvmFormalParameter _parameter = this._jvmTypesBuilder.toParameter(element, "event", _typeRef_2);
+        JvmFormalParameter _parameter = this._jvmTypesBuilder.toParameter(element, "event", this._typeReferenceBuilder.typeRef(Object.class));
         this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             {
-              EList<Declaration> _declarations = element.getDeclarations();
-              Iterable<Device> _filter = Iterables.<Device>filter(_declarations, Device.class);
+              Iterable<Device> _filter = Iterables.<Device>filter(element.getDeclarations(), Device.class);
               for(final Device device : _filter) {
                 {
                   EList<State> _states = device.getStates();
@@ -111,12 +94,10 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
               }
             }
             {
-              EList<Declaration> _declarations_1 = element.getDeclarations();
-              Iterable<Rule> _filter_1 = Iterables.<Rule>filter(_declarations_1, Rule.class);
+              Iterable<Rule> _filter_1 = Iterables.<Rule>filter(element.getDeclarations(), Rule.class);
               for(final Rule rule : _filter_1) {
                 _builder.append("if (event == ");
-                State _deviceState = rule.getDeviceState();
-                String _qualifiedJavaName_1 = RuleEngineJvmModelInferrer.this.getQualifiedJavaName(_deviceState);
+                String _qualifiedJavaName_1 = RuleEngineJvmModelInferrer.this.getQualifiedJavaName(rule.getDeviceState());
                 _builder.append(_qualifiedJavaName_1);
                 _builder.append(") {");
                 _builder.newLineIfNotEmpty();
@@ -133,16 +114,13 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
         };
         this._jvmTypesBuilder.setBody(it_1, _client);
       };
-      JvmOperation _method_1 = this._jvmTypesBuilder.toMethod(element, "fire", _typeRef_1, _function_2);
+      JvmOperation _method_1 = this._jvmTypesBuilder.toMethod(element, "fire", this._typeReferenceBuilder.typeRef(void.class), _function_2);
       this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _method_1);
       EList<JvmMember> _members_2 = it.getMembers();
-      JvmTypeReference _typeRef_2 = this._typeReferenceBuilder.typeRef(void.class);
       final Procedure1<JvmOperation> _function_3 = (JvmOperation it_1) -> {
         it_1.setStatic(true);
         EList<JvmFormalParameter> _parameters = it_1.getParameters();
-        JvmTypeReference _typeRef_3 = this._typeReferenceBuilder.typeRef(String.class);
-        JvmTypeReference _addArrayTypeDimension = this._jvmTypesBuilder.addArrayTypeDimension(_typeRef_3);
-        JvmFormalParameter _parameter = this._jvmTypesBuilder.toParameter(element, "args", _addArrayTypeDimension);
+        JvmFormalParameter _parameter = this._jvmTypesBuilder.toParameter(element, "args", this._jvmTypesBuilder.addArrayTypeDimension(this._typeReferenceBuilder.typeRef(String.class)));
         this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
@@ -155,8 +133,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
             _builder.append("System.out.println(\"Available commands : \");");
             _builder.newLine();
             {
-              EList<Declaration> _declarations = element.getDeclarations();
-              Iterable<Device> _filter = Iterables.<Device>filter(_declarations, Device.class);
+              Iterable<Device> _filter = Iterables.<Device>filter(element.getDeclarations(), Device.class);
               for(final Device device : _filter) {
                 {
                   EList<State> _states = device.getStates();
@@ -181,8 +158,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
             _builder.append("String command = scanner.next();");
             _builder.newLine();
             {
-              EList<Declaration> _declarations_1 = element.getDeclarations();
-              Iterable<Device> _filter_1 = Iterables.<Device>filter(_declarations_1, Device.class);
+              Iterable<Device> _filter_1 = Iterables.<Device>filter(element.getDeclarations(), Device.class);
               for(final Device device_1 : _filter_1) {
                 _builder.append("\t");
                 _builder.append("if (command.equalsIgnoreCase(\"");
@@ -228,12 +204,10 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
                 String _name_4 = device_1.getName();
                 _builder.append(_name_4, "\t\t\t");
                 _builder.append(" can only have the following states: ");
-                EList<State> _states_2 = device_1.getStates();
                 final Function1<State, String> _function = (State it_2) -> {
                   return it_2.getName();
                 };
-                List<String> _map = ListExtensions.<State, String>map(_states_2, _function);
-                String _join = IterableExtensions.join(_map, ",");
+                String _join = IterableExtensions.join(ListExtensions.<State, String>map(device_1.getStates(), _function), ",");
                 _builder.append(_join, "\t\t\t");
                 _builder.append(".\");");
                 _builder.newLineIfNotEmpty();
@@ -264,30 +238,26 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
         };
         this._jvmTypesBuilder.setBody(it_1, _client);
       };
-      JvmOperation _method_2 = this._jvmTypesBuilder.toMethod(element, "main", _typeRef_2, _function_3);
+      JvmOperation _method_2 = this._jvmTypesBuilder.toMethod(element, "main", this._typeReferenceBuilder.typeRef(void.class), _function_3);
       this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _method_2);
     };
-    acceptor.<JvmGenericType>accept(_class, _function);
-    EList<Declaration> _declarations = element.getDeclarations();
-    Iterable<Device> _filter = Iterables.<Device>filter(_declarations, Device.class);
+    acceptor.<JvmGenericType>accept(this._jvmTypesBuilder.toClass(element, className), _function);
+    Iterable<Device> _filter = Iterables.<Device>filter(element.getDeclarations(), Device.class);
     for (final Device device : _filter) {
-      String _name = device.getName();
       final Procedure1<JvmEnumerationType> _function_1 = (JvmEnumerationType it) -> {
       };
-      JvmEnumerationType _enumerationType = this._jvmTypesBuilder.toEnumerationType(device, _name, _function_1);
       final Procedure1<JvmEnumerationType> _function_2 = (JvmEnumerationType it) -> {
         EList<State> _states = device.getStates();
         for (final State state : _states) {
           EList<JvmMember> _members = it.getMembers();
-          String _name_1 = state.getName();
           final Procedure1<JvmEnumerationLiteral> _function_3 = (JvmEnumerationLiteral it_1) -> {
             it_1.setVisibility(JvmVisibility.PUBLIC);
           };
-          JvmEnumerationLiteral _enumerationLiteral = this._jvmTypesBuilder.toEnumerationLiteral(state, _name_1, _function_3);
+          JvmEnumerationLiteral _enumerationLiteral = this._jvmTypesBuilder.toEnumerationLiteral(state, state.getName(), _function_3);
           this._jvmTypesBuilder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
         }
       };
-      acceptor.<JvmEnumerationType>accept(_enumerationType, _function_2);
+      acceptor.<JvmEnumerationType>accept(this._jvmTypesBuilder.toEnumerationType(device, device.getName(), _function_1), _function_2);
     }
   }
   

@@ -32,9 +32,7 @@ public class ArithmeticsProposalProvider extends AbstractArithmeticsProposalProv
         public void accept(final ICompletionProposal proposal) {
           if ((proposal instanceof ConfigurableCompletionProposal)) {
             String string = ((ConfigurableCompletionProposal)proposal).getReplacementString();
-            Character _valueOf = Character.valueOf('(');
-            char _charValue = _valueOf.charValue();
-            int indexOfOpenPar = string.indexOf(_charValue);
+            int indexOfOpenPar = string.indexOf(Character.valueOf('(').charValue());
             if ((indexOfOpenPar != (-1))) {
               int oldSelectionStart = ((ConfigurableCompletionProposal)proposal).getSelectionStart();
               int _length = string.length();
