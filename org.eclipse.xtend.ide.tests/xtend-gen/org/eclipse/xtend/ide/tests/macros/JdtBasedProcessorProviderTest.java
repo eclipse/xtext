@@ -12,10 +12,7 @@ import java.util.function.Consumer;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
@@ -47,8 +44,7 @@ public class JdtBasedProcessorProviderTest {
   @Test
   public void testClassLoaderSeesAllUpstreamProjects() {
     try {
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");
-      final IJavaProject macroProject = JavaCore.create(_createPluginProject);
+      final IJavaProject macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject("macroProject"));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package annotation");
       _builder.newLine();
@@ -88,10 +84,8 @@ public class JdtBasedProcessorProviderTest {
       _builder.append("}");
       _builder.newLine();
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder.toString());
-      IProject _project = macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("libProject");
-      final IJavaProject libProject = JavaCore.create(_createPluginProject_1);
+      WorkbenchTestHelper.addExportedPackages(macroProject.getProject(), "annotation");
+      final IJavaProject libProject = JavaCore.create(WorkbenchTestHelper.createPluginProject("libProject"));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package mylib");
       _builder_1.newLine();
@@ -110,12 +104,11 @@ public class JdtBasedProcessorProviderTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this.newSource(libProject, "mylib/Lib.xtend", _builder_1.toString());
-      IProject _project_1 = libProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project_1, "mylib");
+      WorkbenchTestHelper.addExportedPackages(libProject.getProject(), "mylib");
       IResourcesSetupUtil.waitForBuild();
-      IProject _createPluginProject_2 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-        "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject", "libProject");
-      final IJavaProject userProject = JavaCore.create(_createPluginProject_2);
+      final IJavaProject userProject = JavaCore.create(
+        WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
+          "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject", "libProject"));
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package client");
       _builder_2.newLine();
@@ -132,8 +125,7 @@ public class JdtBasedProcessorProviderTest {
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
       final String javaCode = WorkbenchTestHelper.getContentsAsString(((IFile) _file));
-      boolean _contains = javaCode.contains("HUNKELDUNKEL");
-      Assert.assertTrue(_contains);
+      Assert.assertTrue(javaCode.contains("HUNKELDUNKEL"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -142,8 +134,7 @@ public class JdtBasedProcessorProviderTest {
   @Test
   public void testClassLoaderSeesAllUpstreamProjects_01() {
     try {
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("libProject");
-      final IJavaProject libProject = JavaCore.create(_createPluginProject);
+      final IJavaProject libProject = JavaCore.create(WorkbenchTestHelper.createPluginProject("libProject"));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package mylib");
       _builder.newLine();
@@ -162,11 +153,9 @@ public class JdtBasedProcessorProviderTest {
       _builder.append("}");
       _builder.newLine();
       this.newSource(libProject, "mylib/Lib.xtend", _builder.toString());
-      IProject _project = libProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project, "mylib");
-      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("macroProject", "com.google.inject", "org.eclipse.xtend.lib", 
-        "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "libProject");
-      final IJavaProject macroProject = JavaCore.create(_createPluginProject_1);
+      WorkbenchTestHelper.addExportedPackages(libProject.getProject(), "mylib");
+      final IJavaProject macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject("macroProject", "com.google.inject", "org.eclipse.xtend.lib", 
+        "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "libProject"));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package annotation");
       _builder_1.newLine();
@@ -203,12 +192,11 @@ public class JdtBasedProcessorProviderTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder_1.toString());
-      IProject _project_1 = macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project_1, "annotation");
+      WorkbenchTestHelper.addExportedPackages(macroProject.getProject(), "annotation");
       IResourcesSetupUtil.waitForBuild();
-      IProject _createPluginProject_2 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-        "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
-      final IJavaProject userProject = JavaCore.create(_createPluginProject_2);
+      final IJavaProject userProject = JavaCore.create(
+        WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
+          "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package client");
       _builder_2.newLine();
@@ -225,8 +213,7 @@ public class JdtBasedProcessorProviderTest {
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
       final String javaCode = WorkbenchTestHelper.getContentsAsString(((IFile) _file));
-      boolean _contains = javaCode.contains("HUNKELDUNKEL");
-      Assert.assertTrue(_contains);
+      Assert.assertTrue(javaCode.contains("HUNKELDUNKEL"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -237,14 +224,11 @@ public class JdtBasedProcessorProviderTest {
   private IJavaProject xtendProject(final String name, final IJavaProject... upstreamProjects) {
     try {
       final IJavaProject result = JavaProjectSetupUtil.createJavaProject(name);
-      IProject _project = result.getProject();
-      IResourcesSetupUtil.addNature(_project, XtextProjectHelper.NATURE_ID);
+      IResourcesSetupUtil.addNature(result.getProject(), XtextProjectHelper.NATURE_ID);
       this.xtendLibs.addLibsToClasspath(result, null);
       final Consumer<IJavaProject> _function = (IJavaProject it) -> {
         try {
-          IPath _path = it.getPath();
-          IClasspathEntry _newProjectEntry = JavaCore.newProjectEntry(_path, true);
-          JavaProjectSetupUtil.addToClasspath(result, _newProjectEntry);
+          JavaProjectSetupUtil.addToClasspath(result, JavaCore.newProjectEntry(it.getPath(), true));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -278,8 +262,7 @@ public class JdtBasedProcessorProviderTest {
       _builder.append("}");
       _builder.newLine();
       this.newSource(libProject, "mylib/Lib.xtend", _builder.toString());
-      IJavaProject _xtendProject = this.xtendProject("inbetween", libProject);
-      final IJavaProject macroProject = this.xtendProject("macroProject", _xtendProject);
+      final IJavaProject macroProject = this.xtendProject("macroProject", this.xtendProject("inbetween", libProject));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package annotation");
       _builder_1.newLine();
@@ -334,8 +317,7 @@ public class JdtBasedProcessorProviderTest {
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
       final String javaCode = WorkbenchTestHelper.getContentsAsString(((IFile) _file));
-      boolean _contains = javaCode.contains("HUNKELDUNKEL");
-      Assert.assertTrue(_contains);
+      Assert.assertTrue(javaCode.contains("HUNKELDUNKEL"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -417,8 +399,7 @@ public class JdtBasedProcessorProviderTest {
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
       final String javaCode = WorkbenchTestHelper.getContentsAsString(((IFile) _file));
-      boolean _contains = javaCode.contains("classnotfound");
-      Assert.assertTrue(_contains);
+      Assert.assertTrue(javaCode.contains("classnotfound"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -426,8 +407,7 @@ public class JdtBasedProcessorProviderTest {
   
   public IFile newSource(final IJavaProject it, final String fileName, final String contents) {
     try {
-      IProject _project = it.getProject();
-      final IFile result = _project.getFile(("src/" + fileName));
+      final IFile result = it.getProject().getFile(("src/" + fileName));
       IContainer parent = result.getParent();
       while ((!parent.exists())) {
         ((IFolder) parent).create(true, false, null);

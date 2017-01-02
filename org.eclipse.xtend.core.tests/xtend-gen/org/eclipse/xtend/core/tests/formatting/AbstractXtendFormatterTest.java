@@ -6,7 +6,6 @@ import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
-import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -60,39 +59,27 @@ public abstract class AbstractXtendFormatterTest {
   }
   
   public void assertFormattedExpression(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final boolean allowErrors) {
-    String _string = expectation.toString();
-    String _trim = _string.trim();
-    String _replace = _trim.replace("\n", "\n\t\t");
-    String _string_1 = toBeFormatted.toString();
-    String _trim_1 = _string_1.trim();
-    String _replace_1 = _trim_1.replace("\n", "\n\t\t");
-    this.assertFormatted(cfg, _replace, _replace_1, 
+    this.assertFormatted(cfg, 
+      expectation.toString().trim().replace("\n", "\n\t\t"), 
+      toBeFormatted.toString().trim().replace("\n", "\n\t\t"), 
       "class bar {\n\tdef baz() {\n\t\t", 
       "\n\t}\n}", allowErrors);
   }
   
   public void assertFormattedMember(final String expectation, final CharSequence toBeFormatted) {
-    CharSequence _member = this.toMember(expectation);
-    CharSequence _member_1 = this.toMember(toBeFormatted);
-    this.assertFormatted(_member, _member_1);
+    this.assertFormatted(this.toMember(expectation), this.toMember(toBeFormatted));
   }
   
   public void assertFormattedMember(final Procedure1<? super MapBasedPreferenceValues> cfg, final String expectation, final CharSequence toBeFormatted) {
-    CharSequence _member = this.toMember(expectation);
-    CharSequence _member_1 = this.toMember(toBeFormatted);
-    this.assertFormatted(cfg, _member, _member_1);
+    this.assertFormatted(cfg, this.toMember(expectation), this.toMember(toBeFormatted));
   }
   
   public void assertFormattedMember(final Procedure1<? super MapBasedPreferenceValues> cfg, final String expectation) {
-    CharSequence _member = this.toMember(expectation);
-    CharSequence _member_1 = this.toMember(expectation);
-    this.assertFormatted(cfg, _member, _member_1);
+    this.assertFormatted(cfg, this.toMember(expectation), this.toMember(expectation));
   }
   
   public void assertFormattedMember(final String expectation) {
-    CharSequence _member = this.toMember(expectation);
-    CharSequence _member_1 = this.toMember(expectation);
-    this.assertFormatted(_member, _member_1);
+    this.assertFormatted(this.toMember(expectation), this.toMember(expectation));
   }
   
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation) {
@@ -119,8 +106,7 @@ public abstract class AbstractXtendFormatterTest {
       it.preferences(_function_1);
       it.setExpectation(((prefix + expectation) + postfix));
       it.setToBeFormatted(((prefix + toBeFormatted) + postfix));
-      FormatterRequest _request = it.getRequest();
-      Collection<ITextRegion> _regions = _request.getRegions();
+      Collection<ITextRegion> _regions = it.getRequest().getRegions();
       int _length = prefix.length();
       int _length_1 = toBeFormatted.length();
       TextRegion _textRegion = new TextRegion(_length, _length_1);
@@ -131,31 +117,22 @@ public abstract class AbstractXtendFormatterTest {
   }
   
   protected String decode(final CharSequence seq) {
-    String _string = seq.toString();
-    String _replace = _string.replace("<<", "«");
-    String _replace_1 = _replace.replace(">>", "»");
-    return _replace_1.replace("```", "\'\'\'");
+    return seq.toString().replace("<<", "«").replace(">>", "»").replace("```", "\'\'\'");
   }
   
   public void assertFormattedRichStringExpression(final CharSequence seq) {
-    String _decode = this.decode(seq);
-    this.assertFormattedExpression(_decode);
+    this.assertFormattedExpression(this.decode(seq));
   }
   
   public void assertFormattedRichString(final CharSequence seq) {
-    String _decode = this.decode(seq);
-    this.assertFormatted(_decode);
+    this.assertFormatted(this.decode(seq));
   }
   
   public void assertFormattedRichStringExpression(final CharSequence expected, final CharSequence actual) {
-    String _decode = this.decode(expected);
-    String _decode_1 = this.decode(actual);
-    this.assertFormattedExpression(_decode, _decode_1);
+    this.assertFormattedExpression(this.decode(expected), this.decode(actual));
   }
   
   public void assertFormattedRichStringExpressionWithErrors(final CharSequence actual) {
-    String _decode = this.decode(actual);
-    String _decode_1 = this.decode(actual);
-    this.assertFormattedExpression(null, _decode, _decode_1, true);
+    this.assertFormattedExpression(null, this.decode(actual), this.decode(actual), true);
   }
 }

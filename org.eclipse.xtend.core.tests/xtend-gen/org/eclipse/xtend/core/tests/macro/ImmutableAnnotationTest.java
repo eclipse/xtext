@@ -28,12 +28,8 @@ public class ImmutableAnnotationTest extends AbstractActiveAnnotationTest {
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = (XtendCompilerTester.CompilationResult it) -> {
       final Class<?> clazz = it.getCompiledClass();
       final Constructor<?>[] constr = clazz.getDeclaredConstructors();
-      int _length = constr.length;
-      Assert.assertEquals(1, _length);
-      Constructor<?> _head = IterableExtensions.<Constructor<?>>head(((Iterable<Constructor<?>>)Conversions.doWrapArray(constr)));
-      Class<?>[] _parameterTypes = _head.getParameterTypes();
-      int _length_1 = _parameterTypes.length;
-      Assert.assertEquals(1, _length_1);
+      Assert.assertEquals(1, constr.length);
+      Assert.assertEquals(1, IterableExtensions.<Constructor<?>>head(((Iterable<Constructor<?>>)Conversions.doWrapArray(constr))).getParameterTypes().length);
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }

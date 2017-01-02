@@ -9,10 +9,8 @@ package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.Path;
@@ -42,10 +40,8 @@ public class FileLocationsImpl implements FileLocations {
   private Resource context;
   
   protected IProjectConfig getProjectConfig(final Path path) {
-    List<String> _segments = path.getSegments();
-    final String firstSegment = _segments.get(0);
-    ResourceSet _resourceSet = this.context.getResourceSet();
-    final IProjectConfig projectConfig = this.projectInformationProvider.getProjectConfig(_resourceSet);
+    final String firstSegment = path.getSegments().get(0);
+    final IProjectConfig projectConfig = this.projectInformationProvider.getProjectConfig(this.context.getResourceSet());
     if (((projectConfig == null) || (!Objects.equal(projectConfig.getName(), firstSegment)))) {
       throw new IllegalArgumentException((("The project \'" + firstSegment) + "\' has not been configured."));
     }
@@ -54,11 +50,10 @@ public class FileLocationsImpl implements FileLocations {
   
   @Override
   public Path getSourceFolder(final Path path) {
-    Set<Path> _projectSourceFolders = this.getProjectSourceFolders(path);
     final Function1<Path, Boolean> _function = (Path sourceFolder) -> {
       return Boolean.valueOf(path.startsWith(sourceFolder));
     };
-    return IterableExtensions.<Path>findFirst(_projectSourceFolders, _function);
+    return IterableExtensions.<Path>findFirst(this.getProjectSourceFolders(path), _function);
   }
   
   @Override
@@ -69,8 +64,7 @@ public class FileLocationsImpl implements FileLocations {
       if ((projectFolder == null)) {
         return null;
       }
-      Set<OutputConfiguration> _outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(this.context);
-      final OutputConfiguration outputConfiguration = IterableExtensions.<OutputConfiguration>head(_outputConfigurations);
+      final OutputConfiguration outputConfiguration = IterableExtensions.<OutputConfiguration>head(this.outputConfigurationProvider.getOutputConfigurations(this.context));
       final Path sourceFolder = this.getSourceFolder(path);
       String _xifexpression = null;
       if ((sourceFolder == null)) {
@@ -78,9 +72,7 @@ public class FileLocationsImpl implements FileLocations {
       } else {
         String _xblockexpression_1 = null;
         {
-          List<String> _segments = sourceFolder.getSegments();
-          Iterable<String> _tail = IterableExtensions.<String>tail(_segments);
-          final String projectRelativeSourceFolder = IterableExtensions.join(_tail, "/");
+          final String projectRelativeSourceFolder = IterableExtensions.join(IterableExtensions.<String>tail(sourceFolder.getSegments()), "/");
           _xblockexpression_1 = outputConfiguration.getOutputDirectory(projectRelativeSourceFolder);
         }
         _xifexpression = _xblockexpression_1;
@@ -94,21 +86,15 @@ public class FileLocationsImpl implements FileLocations {
   @Override
   public Path getProjectFolder(final Path path) {
     final IProjectConfig config = this.getProjectConfig(path);
-    String _name = config.getName();
-    return Path.ROOT.append(_name);
+    return Path.ROOT.append(config.getName());
   }
   
   @Override
   public Set<Path> getProjectSourceFolders(final Path path) {
-    IProjectConfig _projectConfig = this.getProjectConfig(path);
-    Set<? extends ISourceFolder> _sourceFolders = _projectConfig.getSourceFolders();
     final Function1<ISourceFolder, Path> _function = (ISourceFolder it) -> {
-      Path _projectFolder = this.getProjectFolder(path);
-      String _name = it.getName();
-      return _projectFolder.append(_name);
+      return this.getProjectFolder(path).append(it.getName());
     };
-    Iterable<Path> _map = IterableExtensions.map(_sourceFolders, _function);
-    return IterableExtensions.<Path>toSet(_map);
+    return IterableExtensions.<Path>toSet(IterableExtensions.map(this.getProjectConfig(path).getSourceFolders(), _function));
   }
   
   @Pure

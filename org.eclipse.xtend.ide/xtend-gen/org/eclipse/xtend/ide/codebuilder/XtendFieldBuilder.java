@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
@@ -17,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -37,27 +35,19 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuil
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {
-      JvmVisibility _visibility = this.getVisibility();
-      this.appendVisibility(appendable, _visibility, JvmVisibility.PRIVATE);
+      this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.PRIVATE);
       boolean _isStaticFlag = this.isStaticFlag();
       if (_isStaticFlag) {
         appendable.append("static ");
       }
-      LightweightTypeReference _fieldType = this.getFieldType();
-      ISourceAppender _appendType = this.appendType(appendable, _fieldType, "Object");
-      ISourceAppender _append = _appendType.append(" ");
-      String _fieldName = this.getFieldName();
-      _xblockexpression = _append.append(_fieldName);
+      _xblockexpression = this.appendType(appendable, this.getFieldType(), "Object").append(" ").append(this.getFieldName());
     }
     return _xblockexpression;
   }
   
   @Override
   public int getInsertOffset(final XtextResource resource) {
-    EObject _context = this.getContext();
-    XtendTypeDeclaration _xtendType = this.getXtendType();
-    XtendTypeDeclaration _findByFragment = this.<XtendTypeDeclaration>findByFragment(resource, _xtendType);
-    return this._insertionOffsets.getNewFieldInsertOffset(_context, _findByFragment);
+    return this._insertionOffsets.getNewFieldInsertOffset(this.getContext(), this.<XtendTypeDeclaration>findByFragment(resource, this.getXtendType()));
   }
   
   @Override

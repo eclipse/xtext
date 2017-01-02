@@ -61,16 +61,13 @@ public class Bug462915Test extends AbstractXtendContentAssistBugTest {
       _builder.newLine();
       _builder.append("}");
       final String model = _builder.toString();
-      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(model);
+      ContentAssistProcessorTestBuilder _append = this.newBuilder().append(model);
       int _indexOf = model.indexOf("test");
       int _plus = (_indexOf + 4);
       final ICompletionProposal[] proposals = _append.computeCompletionProposals(_plus);
-      int _size = ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size();
-      Assert.assertEquals("More than one proposal found", 1, _size);
+      Assert.assertEquals("More than one proposal found", 1, ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size());
       final ICompletionProposal proposal = IterableExtensions.<ICompletionProposal>head(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)));
-      String _displayString = proposal.getDisplayString();
-      Assert.assertEquals("test - JUnit test method", _displayString);
+      Assert.assertEquals("test - JUnit test method", proposal.getDisplayString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("@Test");
       _builder_1.newLine();
@@ -79,9 +76,7 @@ public class Bug462915Test extends AbstractXtendContentAssistBugTest {
       _builder_1.append("\t");
       _builder_1.newLine();
       _builder_1.append("}");
-      String _string = _builder_1.toString();
-      String _additionalProposalInfo = proposal.getAdditionalProposalInfo();
-      Assert.assertEquals(_string, _additionalProposalInfo);
+      Assert.assertEquals(_builder_1.toString(), proposal.getAdditionalProposalInfo());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -101,13 +96,11 @@ public class Bug462915Test extends AbstractXtendContentAssistBugTest {
       _builder.newLine();
       _builder.append("}");
       final String model = _builder.toString();
-      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(model);
+      ContentAssistProcessorTestBuilder _append = this.newBuilder().append(model);
       int _indexOf = model.indexOf("inject");
       int _plus = (_indexOf + 6);
       final ICompletionProposal[] proposals = _append.computeCompletionProposals(_plus);
-      int _size = ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size();
-      Assert.assertEquals("Did not expect to find any proposal", 0, _size);
+      Assert.assertEquals("Did not expect to find any proposal", 0, ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -118,11 +111,8 @@ public class Bug462915Test extends AbstractXtendContentAssistBugTest {
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(Bug462915Test.NO_GUICE_PROJECT_NAME);
     if (((javaProject == null) || (!javaProject.exists()))) {
       try {
-        List<String> _testProjectRequiredBundles = this.getTestProjectRequiredBundles();
-        IProject _createPluginProject = WorkbenchTestHelper.createPluginProject(Bug462915Test.NO_GUICE_PROJECT_NAME, ((String[])Conversions.unwrapArray(_testProjectRequiredBundles, String.class)));
-        this.noGuiceProject = _createPluginProject;
-        IJavaProject _findJavaProject = JavaProjectSetupUtil.findJavaProject(Bug462915Test.NO_GUICE_PROJECT_NAME);
-        javaProject = _findJavaProject;
+        this.noGuiceProject = WorkbenchTestHelper.createPluginProject(Bug462915Test.NO_GUICE_PROJECT_NAME, ((String[])Conversions.unwrapArray(this.getTestProjectRequiredBundles(), String.class)));
+        javaProject = JavaProjectSetupUtil.findJavaProject(Bug462915Test.NO_GUICE_PROJECT_NAME);
       } catch (final Throwable _t) {
         if (_t instanceof CoreException) {
           final CoreException e = (CoreException)_t;

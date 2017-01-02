@@ -7,189 +7,86 @@
  */
 package org.eclipse.xtend.idea.macro;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootModificationUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.testFramework.PlatformTestCase;
-import com.intellij.testFramework.PsiTestCase;
-import com.intellij.util.Consumer;
 import java.io.IOException;
-import org.eclipse.xtend.core.idea.lang.XtendLanguage;
-import org.eclipse.xtend.core.idea.macro.IdeaFileSystemSupport;
-import org.eclipse.xtend.core.tests.macro.JavaIoFileSystemTest;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
-import org.eclipse.xtend.lib.macro.file.Path;
-import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
-import org.eclipse.xtext.idea.tests.TestDecorator;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-@TestDecorator
-@SuppressWarnings("all")
-public class IdeaFileSystemTest extends PsiTestCase {
-  @FinalFieldsConstructor
-  private static class Delegate extends JavaIoFileSystemTest {
-    @Extension
+/* @TestDecorator */@SuppressWarnings("all")
+public class IdeaFileSystemTest /* implements PsiTestCase  */{
+  /* @FinalFieldsConstructor
+   */private static class Delegate /* implements JavaIoFileSystemTest  */{
     private final IdeaFileSystemTest _ideaFileSystemTest;
     
-    public void setFileSystemSupport(final MutableFileSystemSupport fileSystemSupport) {
-      this.fs = fileSystemSupport;
+    public void setFileSystemSupport(final /* MutableFileSystemSupport */Object fileSystemSupport) {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method fs(MutableFileSystemSupport) is undefined");
     }
     
     @Override
     protected Object createProject(final String name) {
-      return this._ideaFileSystemTest.createModule(name);
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method createModule(String) is undefined");
     }
     
     @Override
-    public void assertToURI(final Path file, final String expectedContent) {
-      IdeaResourceSetProvider.VirtualFileBasedUriHandler _find = IdeaResourceSetProvider.VirtualFileBasedUriHandler.find(this._ideaFileSystemTest.resourceSet);
-      _find.flushToDisk();
-      super.assertToURI(file, expectedContent);
-    }
-    
-    public Delegate(final IdeaFileSystemTest _ideaFileSystemTest) {
-      super();
-      this._ideaFileSystemTest = _ideaFileSystemTest;
+    public Object assertToURI(final /* Path */Object file, final String expectedContent) {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method or field VirtualFileBasedUriHandler is undefined"
+        + "\nThe method or field resourceSet is undefined"
+        + "\nThe method or field super is undefined"
+        + "\nfind cannot be resolved"
+        + "\nflushToDisk cannot be resolved"
+        + "\nassertToURI cannot be resolved");
     }
   }
   
-  @Inject
-  private IdeaResourceSetProvider ideaResourceSetProvider;
+  /* @Inject
+   */private /* IdeaResourceSetProvider */Object ideaResourceSetProvider;
   
-  @Inject
-  private Provider<IdeaFileSystemSupport> fileSystemSupportProvider;
+  /* @Inject
+   */private /* Provider<IdeaFileSystemSupport> */Object fileSystemSupportProvider;
   
-  private final IdeaFileSystemTest.Delegate delegate = new IdeaFileSystemTest.Delegate(this);
+  private final IdeaFileSystemTest.Delegate delegate /* Skipped initializer because of errors */;
   
-  private XtextResourceSet resourceSet;
+  private /* XtextResourceSet */Object resourceSet;
   
   @Override
   protected void setUp() throws Exception {
-    super.setUp();
-    XtendLanguage.INSTANCE.injectMembers(this);
-    Module _module = this.getModule();
-    XtextResourceSet _get = this.ideaResourceSetProvider.get(_module);
-    this.resourceSet = _get;
-    final IdeaFileSystemSupport fileSystemSupport = this.fileSystemSupportProvider.get();
-    fileSystemSupport.setContext(this.resourceSet);
-    this.delegate.setFileSystemSupport(fileSystemSupport);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field super is undefined"
+      + "\nThe method or field XtendLanguage is undefined"
+      + "\nThe method or field module is undefined"
+      + "\nThe field IdeaFileSystemTest.resourceSet refers to the missing type XtextResourceSet"
+      + "\nThe field IdeaFileSystemTest.ideaResourceSetProvider refers to the missing type IdeaResourceSetProvider"
+      + "\nThe field IdeaFileSystemTest.fileSystemSupportProvider refers to the missing type Provider"
+      + "\nThe field IdeaFileSystemTest.resourceSet refers to the missing type XtextResourceSet"
+      + "\nThe method setFileSystemSupport(MutableFileSystemSupport) from the type IdeaFileSystemTest.Delegate refers to the missing type MutableFileSystemSupport"
+      + "\nsetUp cannot be resolved"
+      + "\nINSTANCE cannot be resolved"
+      + "\ninjectMembers cannot be resolved"
+      + "\nget cannot be resolved"
+      + "\nget cannot be resolved"
+      + "\ncontext cannot be resolved");
   }
   
   @Override
-  protected Module createMainModule() throws IOException {
-    return this.createModule("foo");
+  protected Object createMainModule() throws IOException {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method createModule(String) from the type IdeaFileSystemTest refers to the missing type Object");
   }
   
   @Override
-  protected Module createModule(final String moduleName) {
-    Module _xblockexpression = null;
-    {
-      final Module module = super.createModule(moduleName);
-      Project _project = this.getProject();
-      VirtualFile _baseDir = _project.getBaseDir();
-      final VirtualFile moduleDir = PlatformTestCase.createChildDirectory(_baseDir, moduleName);
-      final VirtualFile srcDir = PlatformTestCase.createChildDirectory(moduleDir, "src");
-      final Consumer<ModifiableRootModel> _function = (ModifiableRootModel rootModel) -> {
-        final ContentEntry contentEntry = rootModel.addContentEntry(moduleDir);
-        contentEntry.addSourceFolder(srcDir, false);
-      };
-      ModuleRootModificationUtil.updateModel(module, _function);
-      _xblockexpression = module;
-    }
-    return _xblockexpression;
-  }
-  
-  public void testDeleteWorkspace() {
-    delegate.testDeleteWorkspace();
-  }
-  
-  public void testGetFileChildren() {
-    delegate.testGetFileChildren();
-  }
-  
-  public void testGetFileURI() {
-    delegate.testGetFileURI();
-  }
-  
-  public void testGetFolderChildren() {
-    delegate.testGetFolderChildren();
-  }
-  
-  public void testGetFolderURI() {
-    delegate.testGetFolderURI();
-  }
-  
-  public void testGetProjectChildren() {
-    delegate.testGetProjectChildren();
-  }
-  
-  public void testGetProjectURI() {
-    delegate.testGetProjectURI();
-  }
-  
-  public void testGetWorkspaceCharset() {
-    delegate.testGetWorkspaceCharset();
-  }
-  
-  public void testGetWorkspaceChildren() {
-    delegate.testGetWorkspaceChildren();
-  }
-  
-  public void testGetWorkspaceContent() {
-    delegate.testGetWorkspaceContent();
-  }
-  
-  public void testGetWorkspaceContentAsSteam() {
-    delegate.testGetWorkspaceContentAsSteam();
-  }
-  
-  public void testGetWorkspaceLastModification() {
-    delegate.testGetWorkspaceLastModification();
-  }
-  
-  public void testGetWorkspaceURI() {
-    delegate.testGetWorkspaceURI();
-  }
-  
-  public void testMakeAndDeleteFile() {
-    delegate.testMakeAndDeleteFile();
-  }
-  
-  public void testMakeAndDeleteFolder() {
-    delegate.testMakeAndDeleteFolder();
-  }
-  
-  public void testModificationStamp_01() {
-    delegate.testModificationStamp_01();
-  }
-  
-  public void testModificationStamp_02() {
-    delegate.testModificationStamp_02();
-  }
-  
-  public void testSetWorkspaceContents() {
-    delegate.testSetWorkspaceContents();
-  }
-  
-  public void testSetWorkspaceContentsAsStream() {
-    delegate.testSetWorkspaceContentsAsStream();
-  }
-  
-  public void testWorkspaceIsFile() {
-    delegate.testWorkspaceIsFile();
-  }
-  
-  public void testWorkspaceIsFolder() {
-    delegate.testWorkspaceIsFolder();
+  protected Object createModule(final String moduleName) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field super is undefined"
+      + "\nThe method createChildDirectory(Object, String) is undefined"
+      + "\nThe method or field project is undefined"
+      + "\nThe method createChildDirectory(Object, String) is undefined"
+      + "\ncreateModule cannot be resolved"
+      + "\nbaseDir cannot be resolved"
+      + "\nupdateModel cannot be resolved"
+      + "\naddContentEntry cannot be resolved"
+      + "\naddSourceFolder cannot be resolved");
   }
 }

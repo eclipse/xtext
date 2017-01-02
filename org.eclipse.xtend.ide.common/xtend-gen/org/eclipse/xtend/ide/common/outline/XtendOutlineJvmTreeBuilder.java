@@ -10,9 +10,7 @@ package org.eclipse.xtend.ide.common.outline;
 import com.google.common.collect.Iterables;
 import java.util.Arrays;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.common.outline.AbstractXtendOutlineTreeBuilder;
@@ -26,13 +24,10 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 public class XtendOutlineJvmTreeBuilder extends AbstractXtendOutlineTreeBuilder {
   protected void _build(final XtendFile xtendFile, final IXtendOutlineContext context) {
     this.buildPackageAndImportSection(xtendFile, context);
-    Resource _eResource = xtendFile.eResource();
-    EList<EObject> _contents = _eResource.getContents();
-    Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
     final Consumer<JvmDeclaredType> _function = (JvmDeclaredType it) -> {
       this.buildType(it, context);
     };
-    _filter.forEach(_function);
+    Iterables.<JvmDeclaredType>filter(xtendFile.eResource().getContents(), JvmDeclaredType.class).forEach(_function);
   }
   
   protected void _build(final JvmDeclaredType jvmDeclaredType, final IXtendOutlineContext context) {

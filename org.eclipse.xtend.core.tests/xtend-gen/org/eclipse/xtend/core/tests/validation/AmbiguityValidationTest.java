@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
@@ -57,20 +56,14 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
   
   protected void assertAmbiguous(final CharSequence contents, final String... messageParts) {
     final XtendFile file = this.getParsedXtendFile(contents);
-    Resource _eResource = file.eResource();
-    final EList<Resource.Diagnostic> errors = _eResource.getErrors();
-    String _string = errors.toString();
-    int _size = errors.size();
-    Assert.assertEquals(_string, 1, _size);
+    final EList<Resource.Diagnostic> errors = file.eResource().getErrors();
+    Assert.assertEquals(errors.toString(), 1, errors.size());
     Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(errors);
     final AbstractDiagnostic singleError = ((AbstractDiagnostic) _head);
-    String _message = singleError.getMessage();
-    String _code = singleError.getCode();
-    Assert.assertEquals(_message, IssueCodes.AMBIGUOUS_FEATURE_CALL, _code);
+    Assert.assertEquals(singleError.getMessage(), IssueCodes.AMBIGUOUS_FEATURE_CALL, singleError.getCode());
     final Function1<String, String> _function = (String it) -> {
       return LineDelimiters.toUnix(it);
     };
-    List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function);
     final Consumer<String> _function_1 = (String it) -> {
       final String message = singleError.getMessage();
       boolean _contains = message.contains(it);
@@ -79,40 +72,30 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
         Assert.assertEquals(it, message);
       }
     };
-    _map.forEach(_function_1);
-    EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-    final XtendTypeDeclaration firstType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-    EList<XtendMember> _members = firstType.getMembers();
-    XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
+    ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function).forEach(_function_1);
+    final XtendTypeDeclaration firstType = IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes());
+    XtendMember _head_1 = IterableExtensions.<XtendMember>head(firstType.getMembers());
     final XtendFunction firstMember = ((XtendFunction) _head_1);
     XExpression _expression = firstMember.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    XExpression _last = IterableExtensions.<XExpression>last(_expressions);
+    XExpression _last = IterableExtensions.<XExpression>last(block.getExpressions());
     final XAbstractFeatureCall featureCall = ((XAbstractFeatureCall) _last);
-    IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(file);
-    final IFeatureLinkingCandidate linkingCandidate = _resolveTypes.getLinkingCandidate(featureCall);
+    final IFeatureLinkingCandidate linkingCandidate = this._iBatchTypeResolver.resolveTypes(file).getLinkingCandidate(featureCall);
     Assert.assertTrue((linkingCandidate instanceof IAmbiguousLinkingCandidate));
   }
   
   protected void assertUnambiguous(final CharSequence contents) {
     final XtendFile file = this.getParsedXtendFile(contents);
-    Resource _eResource = file.eResource();
-    final EList<Resource.Diagnostic> errors = _eResource.getErrors();
-    String _string = errors.toString();
-    int _size = errors.size();
-    Assert.assertEquals(_string, 0, _size);
+    final EList<Resource.Diagnostic> errors = file.eResource().getErrors();
+    Assert.assertEquals(errors.toString(), 0, errors.size());
     this._validationTestHelper.assertNoErrors(file);
   }
   
   protected XtendFile getParsedXtendFile(final CharSequence contents) {
     try {
       final XtendFile file = this._parseHelper.parse(contents);
-      Resource _eResource = file.eResource();
-      final EList<Resource.Diagnostic> errors = _eResource.getErrors();
-      String _string = errors.toString();
-      boolean _isEmpty = errors.isEmpty();
-      Assert.assertTrue(_string, _isEmpty);
+      final EList<Resource.Diagnostic> errors = file.eResource().getErrors();
+      Assert.assertTrue(errors.toString(), errors.isEmpty());
       EcoreUtil.resolveAll(file);
       return file;
     } catch (Throwable _e) {

@@ -7,15 +7,15 @@
  */
 package org.eclipse.xtend.idea.findUsages;
 
-import org.eclipse.xtend.core.idea.lang.XtendFileType;
-import org.eclipse.xtext.xbase.idea.findusages.AbstractXbaseWordsScannerTest;
-
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtendWordsScannerTest extends AbstractXbaseWordsScannerTest {
+public class XtendWordsScannerTest /* implements AbstractXbaseWordsScannerTest  */{
   public XtendWordsScannerTest() {
-    super(XtendFileType.INSTANCE);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method super(Object) is undefined"
+      + "\nThe method or field XtendFileType is undefined"
+      + "\nINSTANCE cannot be resolved");
   }
 }

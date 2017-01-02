@@ -116,16 +116,12 @@ public class ASTParserFactory {
     ASTParser parser = null;
     final Hashtable options = JavaCore.getOptions();
     try {
-      int _asJLS = ASTParserFactory.asJLS(javaVersion);
-      ASTParser _newParser = ASTParser.newParser(_asJLS);
-      parser = _newParser;
+      parser = ASTParser.newParser(ASTParserFactory.asJLS(javaVersion));
       JavaCore.setComplianceOptions(javaVersion, options);
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
         final IllegalArgumentException e = (IllegalArgumentException)_t;
-        int _asJLS_1 = ASTParserFactory.asJLS(this.minParserApiLevel);
-        ASTParser _newParser_1 = ASTParser.newParser(_asJLS_1);
-        parser = _newParser_1;
+        parser = ASTParser.newParser(ASTParserFactory.asJLS(this.minParserApiLevel));
         JavaCore.setComplianceOptions(this.minParserApiLevel, options);
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -178,16 +174,13 @@ public class ASTParserFactory {
    */
   protected void provideCustomEnvironment(final ASTParser parser) {
     final ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
-    URL[] _uRLs = ((URLClassLoader) sysClassLoader).getURLs();
     final Function1<URL, String> _function = (URL it) -> {
       return it.getFile();
     };
-    List<String> _map = ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(_uRLs)), _function);
     final Function1<String, Boolean> _function_1 = (String it) -> {
-      File _file = new File(it);
-      return Boolean.valueOf(_file.exists());
+      return Boolean.valueOf(new File(it).exists());
     };
-    final Iterable<String> cpEntries = IterableExtensions.<String>filter(_map, _function_1);
+    final Iterable<String> cpEntries = IterableExtensions.<String>filter(ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(((URLClassLoader) sysClassLoader).getURLs())), _function), _function_1);
     parser.setEnvironment(((String[])Conversions.unwrapArray(cpEntries, String.class)), null, null, true);
   }
 }

@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.resource;
 
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -19,8 +18,6 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -61,27 +58,16 @@ public class UnloadingTest extends AbstractXtendTestCase {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      Iterable<XtendFile> _files = this.files(true, _builder_1.toString(), fileB);
-      final List<XtendFile> parsedFiles = IterableExtensions.<XtendFile>toList(_files);
-      XtendFile _get = parsedFiles.get(1);
-      Resource _eResource = _get.eResource();
+      final List<XtendFile> parsedFiles = IterableExtensions.<XtendFile>toList(this.files(true, _builder_1.toString(), fileB));
+      Resource _eResource = parsedFiles.get(1).eResource();
       final DerivedStateAwareResource resource = ((DerivedStateAwareResource) _eResource);
-      XtendFile _head = IterableExtensions.<XtendFile>head(parsedFiles);
-      final Resource resourceA = _head.eResource();
+      final Resource resourceA = IterableExtensions.<XtendFile>head(parsedFiles).eResource();
       resource.reparse(fileB);
-      EList<EObject> _contents = resourceA.getContents();
-      EObject _head_1 = IterableExtensions.<EObject>head(_contents);
-      final XtendFile file = ((XtendFile) _head_1);
-      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-      XtendTypeDeclaration _head_2 = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = ((XtendClass) _head_2).getMembers();
-      XtendMember _head_3 = IterableExtensions.<XtendMember>head(_members);
-      EList<XtendParameter> _parameters = ((XtendConstructor) _head_3).getParameters();
-      XtendParameter _head_4 = IterableExtensions.<XtendParameter>head(_parameters);
-      JvmTypeReference _parameterType = _head_4.getParameterType();
-      JvmType _type = _parameterType.getType();
-      Resource _eResource_1 = _type.eResource();
-      Assert.assertNotNull(_eResource_1);
+      EObject _head = IterableExtensions.<EObject>head(resourceA.getContents());
+      final XtendFile file = ((XtendFile) _head);
+      XtendTypeDeclaration _head_1 = IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes());
+      XtendMember _head_2 = IterableExtensions.<XtendMember>head(((XtendClass) _head_1).getMembers());
+      Assert.assertNotNull(IterableExtensions.<XtendParameter>head(((XtendConstructor) _head_2).getParameters()).getParameterType().getType().eResource());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

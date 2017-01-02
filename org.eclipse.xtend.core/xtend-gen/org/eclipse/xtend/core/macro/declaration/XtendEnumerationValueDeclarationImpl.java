@@ -17,8 +17,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 public class XtendEnumerationValueDeclarationImpl extends XtendMemberDeclarationImpl<XtendEnumLiteral> implements EnumerationValueDeclaration {
   @Override
   public String getSimpleName() {
-    XtendEnumLiteral _delegate = this.getDelegate();
-    return _delegate.getName();
+    return this.getDelegate().getName();
   }
   
   @Override

@@ -14,7 +14,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
@@ -28,7 +27,6 @@ import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ide.editor.contentassist.IFollowElementAcceptor;
@@ -36,7 +34,6 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElementComputer;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -59,8 +56,7 @@ public abstract class XtendCodeContextType extends TemplateContextType {
       super("xtend.statement", "Statement", XtendCodeContextType.Generic.class);
       TokenSet _defaultTokens = this.tokenSetProvider.getDefaultTokens();
       this.tokenSets.add(_defaultTokens);
-      XtendGrammarAccess.XVariableDeclarationElements _xVariableDeclarationAccess = this.grammarAccess.getXVariableDeclarationAccess();
-      Keyword _valKeyword_0_0_1_0_0_1 = _xVariableDeclarationAccess.getValKeyword_0_0_1_0_0_1();
+      Keyword _valKeyword_0_0_1_0_0_1 = this.grammarAccess.getXVariableDeclarationAccess().getValKeyword_0_0_1_0_0_1();
       this.followElements.add(_valKeyword_0_0_1_0_0_1);
     }
   }
@@ -70,8 +66,7 @@ public abstract class XtendCodeContextType extends TemplateContextType {
       super("xtend.expression", "Expression", XtendCodeContextType.Statement.class);
       TokenSet _defaultTokens = this.tokenSetProvider.getDefaultTokens();
       this.tokenSets.add(_defaultTokens);
-      XbaseGrammarAccess.XPrimaryExpressionElements _xPrimaryExpressionAccess = this.grammarAccess.getXPrimaryExpressionAccess();
-      RuleCall _xFeatureCallParserRuleCall_4 = _xPrimaryExpressionAccess.getXFeatureCallParserRuleCall_4();
+      RuleCall _xFeatureCallParserRuleCall_4 = this.grammarAccess.getXPrimaryExpressionAccess().getXFeatureCallParserRuleCall_4();
       this.followElements.add(_xFeatureCallParserRuleCall_4);
     }
   }
@@ -118,11 +113,10 @@ public abstract class XtendCodeContextType extends TemplateContextType {
   }
   
   protected void registerFollowElementsfor(final EStructuralFeature eStructuralFeature) {
-    Grammar _grammar = this.grammarAccess.getGrammar();
     final IFollowElementAcceptor _function = (AbstractElement it) -> {
       this.followElements.add(it);
     };
-    this.followElementComputer.collectAbstractElements(_grammar, eStructuralFeature, _function);
+    this.followElementComputer.collectAbstractElements(this.grammarAccess.getGrammar(), eStructuralFeature, _function);
   }
   
   @Override
@@ -166,11 +160,7 @@ public abstract class XtendCodeContextType extends TemplateContextType {
     if (_tripleEquals) {
       return false;
     }
-    String _text = file.getText();
-    ASTNode _node_1 = element.getNode();
-    int _startOffset = _node_1.getStartOffset();
-    String _substring = _text.substring(0, _startOffset);
-    final Collection<FollowElement> elements = this.contentAssistParser.getFollowElements(_substring, false);
+    final Collection<FollowElement> elements = this.contentAssistParser.getFollowElements(file.getText().substring(0, element.getNode().getStartOffset()), false);
     final AtomicBoolean hasFollowElement = new AtomicBoolean(false);
     final IFollowElementAcceptor _function = (AbstractElement it) -> {
       if (((!hasFollowElement.get()) && this.followElements.contains(it))) {
@@ -184,10 +174,8 @@ public abstract class XtendCodeContextType extends TemplateContextType {
   protected Object getTokenSet(final PsiFile file, final int offset) {
     TokenSet _xblockexpression = null;
     {
-      Project _project = file.getProject();
-      final Lexer lexer = this.parserDefinition.createLexer(_project);
-      String _text = file.getText();
-      lexer.start(_text);
+      final Lexer lexer = this.parserDefinition.createLexer(file.getProject());
+      lexer.start(file.getText());
       while (((lexer.getTokenType() != null) && (lexer.getTokenEnd() <= offset))) {
         lexer.advance();
       }

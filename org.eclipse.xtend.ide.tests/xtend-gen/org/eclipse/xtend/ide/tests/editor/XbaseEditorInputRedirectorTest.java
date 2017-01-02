@@ -67,12 +67,10 @@ public class XbaseEditorInputRedirectorTest extends AbstractXtendUITestCase {
       final IFile fileInBin = this.helper.createFileImpl((WorkbenchTestHelper.TESTPROJECT_NAME + "/bin/mypack/HelloXtend.xtend"), _builder_1.toString());
       FileEditorInput _fileEditorInput = new FileEditorInput(fileInBin);
       final IEditorInput result = this.redirector.findOriginalSource(_fileEditorInput);
-      IFile _file = ResourceUtil.getFile(result);
-      Assert.assertEquals(fileInSrc, _file);
+      Assert.assertEquals(fileInSrc, ResourceUtil.getFile(result));
       FileEditorInput _fileEditorInput_1 = new FileEditorInput(fileInSrc);
       final IEditorInput result2 = this.redirector.findOriginalSource(_fileEditorInput_1);
-      IFile _file_1 = ResourceUtil.getFile(result2);
-      Assert.assertEquals(fileInSrc, _file_1);
+      Assert.assertEquals(fileInSrc, ResourceUtil.getFile(result2));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

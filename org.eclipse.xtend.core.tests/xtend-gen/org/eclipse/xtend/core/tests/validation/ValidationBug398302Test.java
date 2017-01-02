@@ -49,9 +49,7 @@ public class ValidationBug398302Test extends AbstractXtendTestCase {
       final String s = _builder.toString();
       final XtendFile file = this.parser.parse(s);
       final String fieldName = "CASE_INSENSITIVE_ORDER";
-      int _indexOf = s.indexOf(fieldName);
-      int _length = fieldName.length();
-      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.ASSIGNMENT_TO_FINAL, _indexOf, _length);
+      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.ASSIGNMENT_TO_FINAL, s.indexOf(fieldName), fieldName.length());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -77,9 +75,7 @@ public class ValidationBug398302Test extends AbstractXtendTestCase {
       final String s = _builder.toString();
       final XtendFile file = this.parser.parse(s);
       final String fieldName = "CASE_INSENSITIVE_ORDER";
-      int _indexOf = s.indexOf(fieldName);
-      int _length = fieldName.length();
-      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.ASSIGNMENT_TO_FINAL, _indexOf, _length);
+      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.ASSIGNMENT_TO_FINAL, s.indexOf(fieldName), fieldName.length());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -107,9 +103,7 @@ public class ValidationBug398302Test extends AbstractXtendTestCase {
       final String s = _builder.toString();
       final XtendFile file = this.parser.parse(s);
       final String fieldName = "CASE_INSENSITIVE_ORDER";
-      int _indexOf = s.indexOf(fieldName);
-      int _length = fieldName.length();
-      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.ASSIGNMENT_TO_FINAL, _indexOf, _length);
+      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.ASSIGNMENT_TO_FINAL, s.indexOf(fieldName), fieldName.length());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -138,8 +132,7 @@ public class ValidationBug398302Test extends AbstractXtendTestCase {
       final String s = _builder.toString();
       final XtendFile file = this.parser.parse(s);
       final String assignment = "string = null";
-      int _indexOf = s.indexOf(assignment);
-      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.ASSIGNMENT_TO_FINAL, _indexOf, 6);
+      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.ASSIGNMENT_TO_FINAL, s.indexOf(assignment), 6);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -168,8 +161,7 @@ public class ValidationBug398302Test extends AbstractXtendTestCase {
       final String s = _builder.toString();
       final XtendFile file = this.parser.parse(s);
       final String assignment = "string = null";
-      int _indexOf = s.indexOf(assignment);
-      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.ASSIGNMENT_TO_FINAL, _indexOf, 6);
+      this.helper.assertError(file, XbasePackage.Literals.XASSIGNMENT, IssueCodes.ASSIGNMENT_TO_FINAL, s.indexOf(assignment), 6);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

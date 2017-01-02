@@ -42,24 +42,20 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
   
   @Override
   public String toString() {
-    XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
-    return _delegate.toString();
+    return this.getDelegate().toString();
   }
   
   @Override
   public boolean equals(final Object obj) {
     if ((obj instanceof InferredTypeReferenceImpl)) {
-      XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
-      XComputedTypeReferenceImplCustom _delegate_1 = ((InferredTypeReferenceImpl)obj).getDelegate();
-      return _delegate.equals(_delegate_1);
+      return this.getDelegate().equals(((InferredTypeReferenceImpl)obj).getDelegate());
     }
     return false;
   }
   
   @Override
   public int hashCode() {
-    XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
-    return _delegate.hashCode();
+    return this.getDelegate().hashCode();
   }
   
   public List<TypeReference> getActualTypeArguments() {

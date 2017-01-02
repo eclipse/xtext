@@ -15,8 +15,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
@@ -150,17 +148,10 @@ public class XAnnotationExtensions {
       if (_eIsProxy) {
         _matched=true;
         final URI uri = ((InternalEObject) proxy).eProxyURI();
-        Resource _eResource = it.eResource();
-        String _fragment = uri.fragment();
-        boolean _isCrossLinkFragment = this.encoder.isCrossLinkFragment(_eResource, _fragment);
+        boolean _isCrossLinkFragment = this.encoder.isCrossLinkFragment(it.eResource(), uri.fragment());
         if (_isCrossLinkFragment) {
-          Resource _eResource_1 = it.eResource();
-          String _fragment_1 = uri.fragment();
-          final Triple<EObject, EReference, INode> triple = this.encoder.decode(_eResource_1, _fragment_1);
-          EObject _first = triple.getFirst();
-          EReference _second = triple.getSecond();
-          INode _third = triple.getThird();
-          final List<EObject> candidates = this.linkingService.getLinkedObjects(_first, _second, _third);
+          final Triple<EObject, EReference, INode> triple = this.encoder.decode(it.eResource(), uri.fragment());
+          final List<EObject> candidates = this.linkingService.getLinkedObjects(triple.getFirst(), triple.getSecond(), triple.getThird());
           boolean _isEmpty = candidates.isEmpty();
           boolean _not = (!_isEmpty);
           if (_not) {
@@ -182,7 +173,6 @@ public class XAnnotationExtensions {
   }
   
   public JvmType getProcessorType(final JvmAnnotationType it) {
-    EList<JvmAnnotationReference> _annotations = it.getAnnotations();
     final Function1<JvmAnnotationReference, Boolean> _function = (JvmAnnotationReference it_1) -> {
       JvmAnnotationType _annotation = it_1.getAnnotation();
       String _identifier = null;
@@ -192,17 +182,15 @@ public class XAnnotationExtensions {
       String _name = Active.class.getName();
       return Boolean.valueOf(Objects.equal(_identifier, _name));
     };
-    final JvmAnnotationReference activeAnnotation = IterableExtensions.<JvmAnnotationReference>findFirst(_annotations, _function);
-    EList<JvmAnnotationValue> _values = activeAnnotation.getValues();
+    final JvmAnnotationReference activeAnnotation = IterableExtensions.<JvmAnnotationReference>findFirst(it.getAnnotations(), _function);
     final Function1<JvmAnnotationValue, Boolean> _function_1 = (JvmAnnotationValue it_1) -> {
       return Boolean.valueOf(((it_1.getOperation() == null) || Objects.equal(it_1.getOperation().getSimpleName(), "value")));
     };
-    final JvmAnnotationValue annoVal = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function_1);
+    final JvmAnnotationValue annoVal = IterableExtensions.<JvmAnnotationValue>findFirst(activeAnnotation.getValues(), _function_1);
     boolean _matched = false;
     if (annoVal instanceof JvmTypeAnnotationValue) {
       _matched=true;
-      EList<JvmTypeReference> _values_1 = ((JvmTypeAnnotationValue)annoVal).getValues();
-      JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_values_1);
+      JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(((JvmTypeAnnotationValue)annoVal).getValues());
       JvmType _type = null;
       if (_head!=null) {
         _type=_head.getType();
@@ -212,8 +200,7 @@ public class XAnnotationExtensions {
     if (!_matched) {
       if (annoVal instanceof JvmCustomAnnotationValue) {
         _matched=true;
-        EList<EObject> _values_1 = ((JvmCustomAnnotationValue)annoVal).getValues();
-        EObject _head = IterableExtensions.<EObject>head(_values_1);
+        EObject _head = IterableExtensions.<EObject>head(((JvmCustomAnnotationValue)annoVal).getValues());
         JvmOperation _operation = ((JvmCustomAnnotationValue)annoVal).getOperation();
         JvmTypeReference _returnType = null;
         if (_operation!=null) {
@@ -229,8 +216,7 @@ public class XAnnotationExtensions {
   }
   
   public JvmType getProcessorType(final XAnnotation it) {
-    JvmAnnotationType _tryFindAnnotationType = this.tryFindAnnotationType(it);
-    return this.getProcessorType(_tryFindAnnotationType);
+    return this.getProcessorType(this.tryFindAnnotationType(it));
   }
   
   public JvmAnnotationType tryFindAnnotationType(final XAnnotation it) {
@@ -242,9 +228,7 @@ public class XAnnotationExtensions {
       if (_eIsProxy) {
         _matched=true;
         final URI uri = ((InternalEObject) proxy).eProxyURI();
-        Resource _eResource = it.eResource();
-        ResourceSet _resourceSet = _eResource.getResourceSet();
-        EObject _eObject = _resourceSet.getEObject(uri, true);
+        EObject _eObject = it.eResource().getResourceSet().getEObject(uri, true);
         return ((JvmAnnotationType) _eObject);
       }
     }
@@ -260,8 +244,7 @@ public class XAnnotationExtensions {
   protected boolean isActiveAnnotation(final JvmAnnotationType annotationType) {
     EList<JvmAnnotationReference> _annotations = annotationType.getAnnotations();
     for (final JvmAnnotationReference anno : _annotations) {
-      JvmAnnotationType _annotation = anno.getAnnotation();
-      String _identifier = _annotation.getIdentifier();
+      String _identifier = anno.getAnnotation().getIdentifier();
       String _name = Active.class.getName();
       boolean _equals = Objects.equal(_identifier, _name);
       if (_equals) {

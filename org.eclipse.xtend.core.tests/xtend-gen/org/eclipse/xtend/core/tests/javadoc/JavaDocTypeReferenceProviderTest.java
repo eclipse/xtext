@@ -4,11 +4,9 @@ import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -43,25 +41,14 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       _builder.append("class Foo{}");
       _builder.newLine();
       final String input = _builder.toString();
-      XtendClass _clazz = this.clazz(input);
-      Resource _eResource = _clazz.eResource();
+      Resource _eResource = this.clazz(input).eResource();
       final XtextResource resource = ((XtextResource) _eResource);
-      IParseResult _parseResult = resource.getParseResult();
-      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final ICompositeNode rootNode = resource.getParseResult().getRootNode();
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
-      int _size = regions.size();
-      Assert.assertEquals(3, _size);
-      ReplaceRegion _head = IterableExtensions.<ReplaceRegion>head(regions);
-      String _text = _head.getText();
-      Assert.assertEquals("List", _text);
-      int _indexOf = input.indexOf("List");
-      ReplaceRegion _head_1 = IterableExtensions.<ReplaceRegion>head(regions);
-      int _offset = _head_1.getOffset();
-      Assert.assertEquals(_indexOf, _offset);
-      int _length = "List".length();
-      ReplaceRegion _head_2 = IterableExtensions.<ReplaceRegion>head(regions);
-      int _length_1 = _head_2.getLength();
-      Assert.assertEquals(_length, _length_1);
+      Assert.assertEquals(3, regions.size());
+      Assert.assertEquals("List", IterableExtensions.<ReplaceRegion>head(regions).getText());
+      Assert.assertEquals(input.indexOf("List"), IterableExtensions.<ReplaceRegion>head(regions).getOffset());
+      Assert.assertEquals("List".length(), IterableExtensions.<ReplaceRegion>head(regions).getLength());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -83,25 +70,14 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       _builder.append("class Foo{}");
       _builder.newLine();
       final String input = _builder.toString();
-      XtendClass _clazz = this.clazz(input);
-      Resource _eResource = _clazz.eResource();
+      Resource _eResource = this.clazz(input).eResource();
       final XtextResource resource = ((XtextResource) _eResource);
-      IParseResult _parseResult = resource.getParseResult();
-      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final ICompositeNode rootNode = resource.getParseResult().getRootNode();
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
-      int _size = regions.size();
-      Assert.assertEquals(1, _size);
-      ReplaceRegion _head = IterableExtensions.<ReplaceRegion>head(regions);
-      String _text = _head.getText();
-      Assert.assertEquals("java.util.ArrayList", _text);
-      int _indexOf = input.indexOf("java.util.ArrayList");
-      ReplaceRegion _head_1 = IterableExtensions.<ReplaceRegion>head(regions);
-      int _offset = _head_1.getOffset();
-      Assert.assertEquals(_indexOf, _offset);
-      int _length = "java.util.ArrayList".length();
-      ReplaceRegion _head_2 = IterableExtensions.<ReplaceRegion>head(regions);
-      int _length_1 = _head_2.getLength();
-      Assert.assertEquals(_length, _length_1);
+      Assert.assertEquals(1, regions.size());
+      Assert.assertEquals("java.util.ArrayList", IterableExtensions.<ReplaceRegion>head(regions).getText());
+      Assert.assertEquals(input.indexOf("java.util.ArrayList"), IterableExtensions.<ReplaceRegion>head(regions).getOffset());
+      Assert.assertEquals("java.util.ArrayList".length(), IterableExtensions.<ReplaceRegion>head(regions).getLength());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -123,14 +99,11 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       _builder.append("class Foo{}");
       _builder.newLine();
       final String input = _builder.toString();
-      XtendClass _clazz = this.clazz(input);
-      Resource _eResource = _clazz.eResource();
+      Resource _eResource = this.clazz(input).eResource();
       final XtextResource resource = ((XtextResource) _eResource);
-      IParseResult _parseResult = resource.getParseResult();
-      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final ICompositeNode rootNode = resource.getParseResult().getRootNode();
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
-      int _size = regions.size();
-      Assert.assertEquals(0, _size);
+      Assert.assertEquals(0, regions.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -153,14 +126,11 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       _builder.append("class Foo{}");
       _builder.newLine();
       final String input = _builder.toString();
-      XtendClass _clazz = this.clazz(input);
-      Resource _eResource = _clazz.eResource();
+      Resource _eResource = this.clazz(input).eResource();
       final XtextResource resource = ((XtextResource) _eResource);
-      IParseResult _parseResult = resource.getParseResult();
-      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final ICompositeNode rootNode = resource.getParseResult().getRootNode();
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
-      int _size = regions.size();
-      Assert.assertEquals(0, _size);
+      Assert.assertEquals(0, regions.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -196,47 +166,20 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final String input = _builder.toString();
-      XtendClass _clazz = this.clazz(input);
-      Resource _eResource = _clazz.eResource();
+      Resource _eResource = this.clazz(input).eResource();
       final XtextResource resource = ((XtextResource) _eResource);
-      IParseResult _parseResult = resource.getParseResult();
-      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final ICompositeNode rootNode = resource.getParseResult().getRootNode();
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeParameterTypeRefRegions(rootNode);
-      int _size = regions.size();
-      Assert.assertEquals(3, _size);
-      ReplaceRegion _head = IterableExtensions.<ReplaceRegion>head(regions);
-      String _text = _head.getText();
-      Assert.assertEquals("string", _text);
-      int _indexOf = input.indexOf("string");
-      ReplaceRegion _head_1 = IterableExtensions.<ReplaceRegion>head(regions);
-      int _offset = _head_1.getOffset();
-      Assert.assertEquals(_indexOf, _offset);
-      int _length = "string".length();
-      ReplaceRegion _head_2 = IterableExtensions.<ReplaceRegion>head(regions);
-      int _length_1 = _head_2.getLength();
-      Assert.assertEquals(_length, _length_1);
-      ReplaceRegion _get = regions.get(1);
-      String _text_1 = _get.getText();
-      Assert.assertEquals("anotherString", _text_1);
-      int _indexOf_1 = input.indexOf("anotherString");
-      ReplaceRegion _get_1 = regions.get(1);
-      int _offset_1 = _get_1.getOffset();
-      Assert.assertEquals(_indexOf_1, _offset_1);
-      int _length_2 = "anotherString".length();
-      ReplaceRegion _get_2 = regions.get(1);
-      int _length_3 = _get_2.getLength();
-      Assert.assertEquals(_length_2, _length_3);
-      ReplaceRegion _get_3 = regions.get(2);
-      String _text_2 = _get_3.getText();
-      Assert.assertEquals("zonk", _text_2);
-      int _indexOf_2 = input.indexOf("zonk");
-      ReplaceRegion _get_4 = regions.get(2);
-      int _offset_2 = _get_4.getOffset();
-      Assert.assertEquals(_indexOf_2, _offset_2);
-      int _length_4 = "zonk".length();
-      ReplaceRegion _get_5 = regions.get(2);
-      int _length_5 = _get_5.getLength();
-      Assert.assertEquals(_length_4, _length_5);
+      Assert.assertEquals(3, regions.size());
+      Assert.assertEquals("string", IterableExtensions.<ReplaceRegion>head(regions).getText());
+      Assert.assertEquals(input.indexOf("string"), IterableExtensions.<ReplaceRegion>head(regions).getOffset());
+      Assert.assertEquals("string".length(), IterableExtensions.<ReplaceRegion>head(regions).getLength());
+      Assert.assertEquals("anotherString", regions.get(1).getText());
+      Assert.assertEquals(input.indexOf("anotherString"), regions.get(1).getOffset());
+      Assert.assertEquals("anotherString".length(), regions.get(1).getLength());
+      Assert.assertEquals("zonk", regions.get(2).getText());
+      Assert.assertEquals(input.indexOf("zonk"), regions.get(2).getOffset());
+      Assert.assertEquals("zonk".length(), regions.get(2).getLength());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -264,14 +207,11 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       _builder.append("class Foo{}");
       _builder.newLine();
       final String input = _builder.toString();
-      XtendClass _clazz = this.clazz(input);
-      Resource _eResource = _clazz.eResource();
+      Resource _eResource = this.clazz(input).eResource();
       final XtextResource resource = ((XtextResource) _eResource);
-      IParseResult _parseResult = resource.getParseResult();
-      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final ICompositeNode rootNode = resource.getParseResult().getRootNode();
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
-      int _size = regions.size();
-      Assert.assertEquals(0, _size);
+      Assert.assertEquals(0, regions.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -293,14 +233,11 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       _builder.append("class Foo{}");
       _builder.newLine();
       final String input = _builder.toString();
-      XtendClass _clazz = this.clazz(input);
-      Resource _eResource = _clazz.eResource();
+      Resource _eResource = this.clazz(input).eResource();
       final XtextResource resource = ((XtextResource) _eResource);
-      IParseResult _parseResult = resource.getParseResult();
-      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final ICompositeNode rootNode = resource.getParseResult().getRootNode();
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
-      int _size = regions.size();
-      Assert.assertEquals(1, _size);
+      Assert.assertEquals(1, regions.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -322,14 +259,11 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       _builder.append("class Foo{}");
       _builder.newLine();
       final String input = _builder.toString();
-      XtendClass _clazz = this.clazz(input);
-      Resource _eResource = _clazz.eResource();
+      Resource _eResource = this.clazz(input).eResource();
       final XtextResource resource = ((XtextResource) _eResource);
-      IParseResult _parseResult = resource.getParseResult();
-      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final ICompositeNode rootNode = resource.getParseResult().getRootNode();
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
-      int _size = regions.size();
-      Assert.assertEquals(1, _size);
+      Assert.assertEquals(1, regions.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -351,17 +285,12 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       _builder.append("class Foo{}");
       _builder.newLine();
       final String input = _builder.toString();
-      XtendClass _clazz = this.clazz(input);
-      Resource _eResource = _clazz.eResource();
+      Resource _eResource = this.clazz(input).eResource();
       final XtextResource resource = ((XtextResource) _eResource);
-      IParseResult _parseResult = resource.getParseResult();
-      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final ICompositeNode rootNode = resource.getParseResult().getRootNode();
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
-      int _size = regions.size();
-      Assert.assertEquals(1, _size);
-      ReplaceRegion _head = IterableExtensions.<ReplaceRegion>head(regions);
-      String _text = _head.getText();
-      Assert.assertEquals("String", _text);
+      Assert.assertEquals(1, regions.size());
+      Assert.assertEquals("String", IterableExtensions.<ReplaceRegion>head(regions).getText());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -52,8 +52,7 @@ public class Bug440069Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("xyzManager");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("xyzManager");
   }
   
   @Test
@@ -70,8 +69,7 @@ public class Bug440069Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("String");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("String");
   }
   
   @Test
@@ -106,8 +104,7 @@ public class Bug440069Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("xyzManager");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("xyzManager");
   }
   
   @Flaky
@@ -144,8 +141,7 @@ public class Bug440069Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("xyzManager");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("xyzManager");
   }
   
   @Test
@@ -180,7 +176,6 @@ public class Bug440069Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("xyzManager");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("xyzManager");
   }
 }

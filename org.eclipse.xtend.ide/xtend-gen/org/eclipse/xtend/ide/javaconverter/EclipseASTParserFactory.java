@@ -32,8 +32,7 @@ public class EclipseASTParserFactory extends ASTParserFactory {
       } else {
         if ((context instanceof ICompilationUnit)) {
           parser.setSource(((ICompilationUnit)context));
-          IJavaProject _javaProject = ((ICompilationUnit)context).getJavaProject();
-          this.tweakOptions(parser, _javaProject);
+          this.tweakOptions(parser, ((ICompilationUnit)context).getJavaProject());
         }
       }
       return new ASTParserFactory.ASTParserWrapper(projlevel, parser);

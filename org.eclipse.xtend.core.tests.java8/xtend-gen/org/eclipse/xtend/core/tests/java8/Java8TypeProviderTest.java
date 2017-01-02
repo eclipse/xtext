@@ -10,15 +10,12 @@ package org.eclipse.xtend.core.tests.java8;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.java8.JavaInterface;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
@@ -48,8 +45,7 @@ public class Java8TypeProviderTest {
   @Test
   public void testDefaultJavaMethod() {
     final IJvmTypeProvider typeProvider = this.typeProviderFactory.createTypeProvider();
-    String _canonicalName = JavaInterface.class.getCanonicalName();
-    JvmType _findTypeByName = typeProvider.findTypeByName(_canonicalName);
+    JvmType _findTypeByName = typeProvider.findTypeByName(JavaInterface.class.getCanonicalName());
     final JvmGenericType intf = ((JvmGenericType) _findTypeByName);
     this.doTestMethods(intf);
   }
@@ -69,9 +65,7 @@ public class Java8TypeProviderTest {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parseHelper.parse(_builder);
-      Resource _eResource = file.eResource();
-      EList<EObject> _contents = _eResource.getContents();
-      EObject _last = IterableExtensions.<EObject>last(_contents);
+      EObject _last = IterableExtensions.<EObject>last(file.eResource().getContents());
       final JvmGenericType intf = ((JvmGenericType) _last);
       this.doTestMethods(intf);
     } catch (Throwable _e) {
@@ -80,35 +74,23 @@ public class Java8TypeProviderTest {
   }
   
   protected void doTestMethods(final JvmGenericType intf) {
-    EList<JvmMember> _members = intf.getMembers();
-    Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
     final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
       String _simpleName = it.getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, "staticMethod"));
     };
-    Iterable<JvmOperation> _filter_1 = IterableExtensions.<JvmOperation>filter(_filter, _function);
-    final JvmOperation staticMethod = IterableExtensions.<JvmOperation>head(_filter_1);
+    final JvmOperation staticMethod = IterableExtensions.<JvmOperation>head(IterableExtensions.<JvmOperation>filter(Iterables.<JvmOperation>filter(intf.getMembers(), JvmOperation.class), _function));
     Assert.assertNotNull(staticMethod);
-    boolean _isAbstract = staticMethod.isAbstract();
-    Assert.assertFalse(_isAbstract);
-    boolean _isStatic = staticMethod.isStatic();
-    Assert.assertTrue(_isStatic);
-    boolean _isDefault = staticMethod.isDefault();
-    Assert.assertFalse(_isDefault);
-    EList<JvmMember> _members_1 = intf.getMembers();
-    Iterable<JvmOperation> _filter_2 = Iterables.<JvmOperation>filter(_members_1, JvmOperation.class);
+    Assert.assertFalse(staticMethod.isAbstract());
+    Assert.assertTrue(staticMethod.isStatic());
+    Assert.assertFalse(staticMethod.isDefault());
     final Function1<JvmOperation, Boolean> _function_1 = (JvmOperation it) -> {
       String _simpleName = it.getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, "defaultMethod"));
     };
-    Iterable<JvmOperation> _filter_3 = IterableExtensions.<JvmOperation>filter(_filter_2, _function_1);
-    final JvmOperation defaultMethod = IterableExtensions.<JvmOperation>head(_filter_3);
+    final JvmOperation defaultMethod = IterableExtensions.<JvmOperation>head(IterableExtensions.<JvmOperation>filter(Iterables.<JvmOperation>filter(intf.getMembers(), JvmOperation.class), _function_1));
     Assert.assertNotNull(defaultMethod);
-    boolean _isAbstract_1 = defaultMethod.isAbstract();
-    Assert.assertFalse(_isAbstract_1);
-    boolean _isStatic_1 = defaultMethod.isStatic();
-    Assert.assertFalse(_isStatic_1);
-    boolean _isDefault_1 = defaultMethod.isDefault();
-    Assert.assertTrue(_isDefault_1);
+    Assert.assertFalse(defaultMethod.isAbstract());
+    Assert.assertFalse(defaultMethod.isStatic());
+    Assert.assertTrue(defaultMethod.isDefault());
   }
 }

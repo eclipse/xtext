@@ -83,9 +83,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       Region _region = new Region(19, 1);
       Object _hoverInfo2 = ((ITextHoverExtension2) this.hoverer).getHoverInfo2(((ITextViewer) _internalSourceViewer), _region);
       final XtextBrowserInformationControlInput info = ((XtextBrowserInformationControlInput) _hoverInfo2);
-      String _html = info.getHtml();
-      boolean _contains = _html.contains("Hello Foo");
-      Assert.assertTrue(_contains);
+      Assert.assertTrue(info.getHtml().contains("Hello Foo"));
       final XtextEditor fooEditor = this.helper.openEditor(fileFoo);
       IXtextDocument _document = fooEditor.getDocument();
       StringConcatenation _builder_2 = new StringConcatenation();
@@ -106,12 +104,8 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       Region _region_1 = new Region(19, 1);
       Object _hoverInfo2_1 = ((ITextHoverExtension2) this.hoverer).getHoverInfo2(((ITextViewer) _internalSourceViewer_1), _region_1);
       final XtextBrowserInformationControlInput info2 = ((XtextBrowserInformationControlInput) _hoverInfo2_1);
-      String _html_1 = info2.getHtml();
-      boolean _contains_1 = _html_1.contains("Hello Foo");
-      Assert.assertFalse(_contains_1);
-      String _html_2 = info2.getHtml();
-      boolean _contains_2 = _html_2.contains("Hello BAZ");
-      Assert.assertTrue(_contains_2);
+      Assert.assertFalse(info2.getHtml().contains("Hello Foo"));
+      Assert.assertTrue(info2.getHtml().contains("Hello BAZ"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -147,14 +141,8 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
         Region _region = new Region(19, 1);
         Object _hoverInfo2 = ((ITextHoverExtension2) this.hoverer).getHoverInfo2(((ITextViewer) _internalSourceViewer), _region);
         final XtextBrowserInformationControlInput info = ((XtextBrowserInformationControlInput) _hoverInfo2);
-        String _html = info.getHtml();
-        String _html_1 = info.getHtml();
-        boolean _contains = _html_1.contains("Hello Foo");
-        Assert.assertTrue(_html, _contains);
-        String _html_2 = info.getHtml();
-        String _html_3 = info.getHtml();
-        boolean _contains_1 = _html_3.contains("SuppressWarnings</a>(\"foo\")");
-        Assert.assertTrue(_html_2, _contains_1);
+        Assert.assertTrue(info.getHtml(), info.getHtml().contains("Hello Foo"));
+        Assert.assertTrue(info.getHtml(), info.getHtml().contains("SuppressWarnings</a>(\"foo\")"));
       };
       final LoggingTester.LogCapture loggings = LoggingTester.captureLogging(Level.ERROR, AbstractBatchTypeResolver.class, _function);
       loggings.assertNoLogEntries();
@@ -181,16 +169,9 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
         Region _region = new Region(19, 1);
         Object _hoverInfo2 = ((ITextHoverExtension2) this.hoverer).getHoverInfo2(((ITextViewer) _internalSourceViewer), _region);
         final XtextBrowserInformationControlInput info2 = ((XtextBrowserInformationControlInput) _hoverInfo2);
-        String _html = info2.getHtml();
-        boolean _contains = _html.contains("Hello Foo");
-        Assert.assertFalse(_contains);
-        String _html_1 = info2.getHtml();
-        boolean _contains_1 = _html_1.contains("Hello BAZ");
-        Assert.assertTrue(_contains_1);
-        String _html_2 = info2.getHtml();
-        String _html_3 = info2.getHtml();
-        boolean _contains_2 = _html_3.contains("SuppressWarnings</a>(\"bar\")");
-        Assert.assertTrue(_html_2, _contains_2);
+        Assert.assertFalse(info2.getHtml().contains("Hello Foo"));
+        Assert.assertTrue(info2.getHtml().contains("Hello BAZ"));
+        Assert.assertTrue(info2.getHtml(), info2.getHtml().contains("SuppressWarnings</a>(\"bar\")"));
       };
       final LoggingTester.LogCapture moreLoggings = LoggingTester.captureLogging(Level.ERROR, AbstractBatchTypeResolver.class, _function_1);
       moreLoggings.assertNoLogEntries();

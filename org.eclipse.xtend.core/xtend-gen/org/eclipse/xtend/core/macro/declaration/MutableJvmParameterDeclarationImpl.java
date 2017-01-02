@@ -8,23 +8,18 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.ConditionUtils;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmParameterDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationImpl implements MutableParameterDeclaration {
   @Override
   public void markAsRead() {
     this.checkMutable();
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
-    JvmFormalParameter _delegate = this.getDelegate();
-    _readAndWriteTracking.markReadAccess(_delegate);
+    this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
   
   @Override

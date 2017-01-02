@@ -2,13 +2,11 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -23,15 +21,10 @@ import org.eclipse.xtend.lib.macro.services.SourceTypeLookup;
 import org.eclipse.xtend.lib.macro.services.TypeLookup;
 import org.eclipse.xtend.lib.macro.services.UpstreamTypeLookup;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -95,18 +88,14 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
   }
   
   private Type findType(final String qualifiedName) {
-    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-    Resource _eResource = _xtendFile.eResource();
-    EList<EObject> _contents = _eResource.getContents();
-    Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
     final Function1<JvmDeclaredType, String> _function = (JvmDeclaredType type) -> {
       return type.getQualifiedName('.');
     };
     final Function1<JvmDeclaredType, Iterable<? extends JvmDeclaredType>> _function_1 = (JvmDeclaredType type) -> {
-      EList<JvmMember> _members = type.getMembers();
-      return Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
+      return Iterables.<JvmDeclaredType>filter(type.getMembers(), JvmDeclaredType.class);
     };
-    final JvmDeclaredType result = this.<JvmDeclaredType>recursiveFindType(qualifiedName, _filter, _function, _function_1);
+    final JvmDeclaredType result = this.<JvmDeclaredType>recursiveFindType(qualifiedName, 
+      Iterables.<JvmDeclaredType>filter(this.compilationUnit.getXtendFile().eResource().getContents(), JvmDeclaredType.class), _function, _function_1);
     Type _xifexpression = null;
     if ((result != null)) {
       _xifexpression = this.compilationUnit.toType(result);
@@ -163,22 +152,15 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
   }
   
   private XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> findSourceType(final String qualifiedName) {
-    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-    Resource _eResource = _xtendFile.eResource();
-    EList<EObject> _contents = _eResource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
-    EList<XtendTypeDeclaration> _xtendTypes = ((XtendFile) _head).getXtendTypes();
+    EObject _head = IterableExtensions.<EObject>head(this.compilationUnit.getXtendFile().eResource().getContents());
     final Function1<XtendTypeDeclaration, String> _function = (XtendTypeDeclaration type) -> {
-      IQualifiedNameConverter _qualifiedNameConverter = this.compilationUnit.getQualifiedNameConverter();
-      IQualifiedNameProvider _qualifiedNameProvider = this.compilationUnit.getQualifiedNameProvider();
-      QualifiedName _fullyQualifiedName = _qualifiedNameProvider.getFullyQualifiedName(type);
-      return _qualifiedNameConverter.toString(_fullyQualifiedName);
+      return this.compilationUnit.getQualifiedNameConverter().toString(this.compilationUnit.getQualifiedNameProvider().getFullyQualifiedName(type));
     };
     final Function1<XtendTypeDeclaration, Iterable<? extends XtendTypeDeclaration>> _function_1 = (XtendTypeDeclaration type) -> {
-      EList<XtendMember> _members = type.getMembers();
-      return Iterables.<XtendTypeDeclaration>filter(_members, XtendTypeDeclaration.class);
+      return Iterables.<XtendTypeDeclaration>filter(type.getMembers(), XtendTypeDeclaration.class);
     };
-    final XtendTypeDeclaration result = this.<XtendTypeDeclaration>recursiveFindType(qualifiedName, _xtendTypes, _function, _function_1);
+    final XtendTypeDeclaration result = this.<XtendTypeDeclaration>recursiveFindType(qualifiedName, 
+      ((XtendFile) _head).getXtendTypes(), _function, _function_1);
     XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xifexpression = null;
     if ((result != null)) {
       _xifexpression = this.compilationUnit.toXtendTypeDeclaration(result);
@@ -196,8 +178,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
           return type;
         }
         if ((qualifiedName.startsWith(name) && (qualifiedName.charAt(name.length()) == dot))) {
-          Iterable<? extends T> _apply = subTypeProvider.apply(type);
-          return this.<T>recursiveFindType(qualifiedName, _apply, qualifiedNameProvider, subTypeProvider);
+          return this.<T>recursiveFindType(qualifiedName, subTypeProvider.apply(type), qualifiedNameProvider, subTypeProvider);
         }
       }
     }
@@ -206,8 +187,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
   
   @Override
   public Type findTypeGlobally(final Class<?> clazz) {
-    String _canonicalName = clazz.getCanonicalName();
-    return this.findTypeGlobally(_canonicalName);
+    return this.findTypeGlobally(clazz.getCanonicalName());
   }
   
   @Override
@@ -228,29 +208,22 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
   
   @Override
   public Type findUpstreamType(final Class<?> clazz) {
-    String _canonicalName = clazz.getCanonicalName();
-    return this.findUpstreamType(_canonicalName);
+    return this.findUpstreamType(clazz.getCanonicalName());
   }
   
   @Override
   public Type findUpstreamType(final String typeName) {
     final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
-      EObject _eObjectOrProxy = it.getEObjectOrProxy();
-      Resource _eResource = _eObjectOrProxy.eResource();
-      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-      Resource _eResource_1 = _xtendFile.eResource();
+      Resource _eResource = it.getEObjectOrProxy().eResource();
+      Resource _eResource_1 = this.compilationUnit.getXtendFile().eResource();
       return Boolean.valueOf((!Objects.equal(_eResource, _eResource_1)));
     };
     return this.findTypeOnScope(typeName, _function);
   }
   
   private Type findTypeOnScope(final String typeName, final Function1<? super IEObjectDescription, ? extends Boolean> filter) {
-    IQualifiedNameConverter _qualifiedNameConverter = this.compilationUnit.getQualifiedNameConverter();
-    final QualifiedName qualifiedName = _qualifiedNameConverter.toQualifiedName(typeName);
-    IScopeProvider _scopeProvider = this.compilationUnit.getScopeProvider();
-    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-    IScope _scope = _scopeProvider.getScope(_xtendFile, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE);
-    final IEObjectDescription result = _scope.getSingleElement(qualifiedName);
+    final QualifiedName qualifiedName = this.compilationUnit.getQualifiedNameConverter().toQualifiedName(typeName);
+    final IEObjectDescription result = this.compilationUnit.getScopeProvider().getScope(this.compilationUnit.getXtendFile(), XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE).getSingleElement(qualifiedName);
     if ((((result != null) && TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(result.getEClass())) && (filter.apply(result)).booleanValue())) {
       EObject _eObjectOrProxy = result.getEObjectOrProxy();
       return this.compilationUnit.toType(((JvmType) _eObjectOrProxy));

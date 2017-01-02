@@ -59,8 +59,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -83,8 +82,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -107,8 +105,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -131,8 +128,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type String is accessible in scope");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type String is accessible in scope");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -155,8 +151,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type String is accessible in scope");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type String is accessible in scope");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -179,8 +174,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -203,8 +197,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -227,8 +220,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type Object is accessible in scope");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type Object is accessible in scope");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -251,8 +243,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type Object is accessible in scope");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type Object is accessible in scope");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -284,8 +275,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot refer to the non-final variable x inside a local class");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot refer to the non-final variable x inside a local class");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -317,8 +307,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -350,8 +339,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -380,8 +368,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_SUPER_CALL, "Cannot call super of an anonymous class from a lambda expression");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_SUPER_CALL, "Cannot call super of an anonymous class from a lambda expression");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -434,8 +421,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable u inside a local class");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable u inside a local class");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -485,8 +471,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable it inside a local class");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable it inside a local class");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -533,8 +518,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable it inside a local class");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot implicitly refer to the non-final variable it inside a local class");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

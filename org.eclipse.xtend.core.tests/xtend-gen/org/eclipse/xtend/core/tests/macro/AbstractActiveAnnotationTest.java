@@ -13,8 +13,6 @@ public abstract class AbstractActiveAnnotationTest extends AbstractXtendTestCase
   @Inject
   public void doInject(final XtendCompilerTester compilerTester) {
     this._xtendCompilerTester = compilerTester;
-    Class<? extends AbstractActiveAnnotationTest> _class = this.getClass();
-    ClassLoader _classLoader = _class.getClassLoader();
-    this._xtendCompilerTester.setJavaCompilerClassPath(_classLoader);
+    this._xtendCompilerTester.setJavaCompilerClassPath(this.getClass().getClassLoader());
   }
 }

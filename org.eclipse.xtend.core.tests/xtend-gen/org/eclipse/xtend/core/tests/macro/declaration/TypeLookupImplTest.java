@@ -3,18 +3,8 @@ package org.eclipse.xtend.core.tests.macro.declaration;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -37,31 +27,16 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("annotation MyAnnotation {}");
     _builder.newLine();
-    XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      MutableClassDeclaration _findClass = _typeLookup.findClass("foo.MyClass");
-      Assert.assertNotNull(_findClass);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      MutableClassDeclaration _findClass_1 = _typeLookup_1.findClass("foo.MyClass.Unknown");
-      Assert.assertNull(_findClass_1);
-      TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
-      MutableClassDeclaration _findClass_2 = _typeLookup_2.findClass("foo.MyInterface");
-      Assert.assertNull(_findClass_2);
-      TypeLookupImpl _typeLookup_3 = it.getTypeLookup();
-      MutableEnumerationTypeDeclaration _findEnumerationType = _typeLookup_3.findEnumerationType("foo.MyEnum");
-      Assert.assertNotNull(_findEnumerationType);
-      TypeLookupImpl _typeLookup_4 = it.getTypeLookup();
-      MutableAnnotationTypeDeclaration _findAnnotationType = _typeLookup_4.findAnnotationType("foo.MyAnnotation");
-      Assert.assertNotNull(_findAnnotationType);
-      TypeLookupImpl _typeLookup_5 = it.getTypeLookup();
-      MutableInterfaceDeclaration _findInterface = _typeLookup_5.findInterface("foo.MyInterface");
-      Assert.assertNotNull(_findInterface);
-      TypeLookupImpl _typeLookup_6 = it.getTypeLookup();
-      MutableClassDeclaration _findClass_3 = _typeLookup_6.findClass("java.lang.String");
-      Assert.assertNull(_findClass_3);
+      Assert.assertNotNull(it.getTypeLookup().findClass("foo.MyClass"));
+      Assert.assertNull(it.getTypeLookup().findClass("foo.MyClass.Unknown"));
+      Assert.assertNull(it.getTypeLookup().findClass("foo.MyInterface"));
+      Assert.assertNotNull(it.getTypeLookup().findEnumerationType("foo.MyEnum"));
+      Assert.assertNotNull(it.getTypeLookup().findAnnotationType("foo.MyAnnotation"));
+      Assert.assertNotNull(it.getTypeLookup().findInterface("foo.MyInterface"));
+      Assert.assertNull(it.getTypeLookup().findClass("java.lang.String"));
     };
-    this.asCompilationUnit(_validFile, _function);
+    this.asCompilationUnit(this.validFile(_builder), _function);
   }
   
   @Test
@@ -80,22 +55,13 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("@AddNestedTypes annotation MyAnnotation {}");
     _builder.newLine();
-    XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      MutableClassDeclaration _findClass = _typeLookup.findClass("foo.MyClass.NestedClass");
-      Assert.assertNotNull(_findClass);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      MutableInterfaceDeclaration _findInterface = _typeLookup_1.findInterface("foo.MyClass.NestedInterface");
-      Assert.assertNotNull(_findInterface);
-      TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
-      MutableEnumerationTypeDeclaration _findEnumerationType = _typeLookup_2.findEnumerationType("foo.MyClass.NestedEnumerationType");
-      Assert.assertNotNull(_findEnumerationType);
-      TypeLookupImpl _typeLookup_3 = it.getTypeLookup();
-      MutableAnnotationTypeDeclaration _findAnnotationType = _typeLookup_3.findAnnotationType("foo.MyClass.NestedAnnotationType");
-      Assert.assertNotNull(_findAnnotationType);
+      Assert.assertNotNull(it.getTypeLookup().findClass("foo.MyClass.NestedClass"));
+      Assert.assertNotNull(it.getTypeLookup().findInterface("foo.MyClass.NestedInterface"));
+      Assert.assertNotNull(it.getTypeLookup().findEnumerationType("foo.MyClass.NestedEnumerationType"));
+      Assert.assertNotNull(it.getTypeLookup().findAnnotationType("foo.MyClass.NestedAnnotationType"));
     };
-    this.asCompilationUnit(_validFile, _function);
+    this.asCompilationUnit(this.validFile(_builder), _function);
   }
   
   @Test
@@ -106,16 +72,11 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("class MyClass {}");
     _builder.newLine();
-    XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      Type _findUpstreamType = _typeLookup.findUpstreamType("foo.MyClass");
-      Assert.assertNull(_findUpstreamType);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      Type _findUpstreamType_1 = _typeLookup_1.findUpstreamType("java.lang.String");
-      Assert.assertNotNull(_findUpstreamType_1);
+      Assert.assertNull(it.getTypeLookup().findUpstreamType("foo.MyClass"));
+      Assert.assertNotNull(it.getTypeLookup().findUpstreamType("java.lang.String"));
     };
-    this.asCompilationUnit(_validFile, _function);
+    this.asCompilationUnit(this.validFile(_builder), _function);
   }
   
   @Test
@@ -134,34 +95,17 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("@AddNestedTypes annotation MyAnnotation {}");
     _builder.newLine();
-    XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      TypeLookupImpl _typeLookup = it.getTypeLookup();
-      ClassDeclaration _findSourceClass = _typeLookup.findSourceClass("foo.MyClass");
-      Assert.assertNotNull(_findSourceClass);
-      TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
-      InterfaceDeclaration _findSourceInterface = _typeLookup_1.findSourceInterface("foo.MyInterface");
-      Assert.assertNotNull(_findSourceInterface);
-      TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
-      EnumerationTypeDeclaration _findSourceEnumerationType = _typeLookup_2.findSourceEnumerationType("foo.MyEnum");
-      Assert.assertNotNull(_findSourceEnumerationType);
-      TypeLookupImpl _typeLookup_3 = it.getTypeLookup();
-      AnnotationTypeDeclaration _findSourceAnnotationType = _typeLookup_3.findSourceAnnotationType("foo.MyAnnotation");
-      Assert.assertNotNull(_findSourceAnnotationType);
-      TypeLookupImpl _typeLookup_4 = it.getTypeLookup();
-      ClassDeclaration _findSourceClass_1 = _typeLookup_4.findSourceClass("foo.MyClass.NestedClass");
-      Assert.assertNull(_findSourceClass_1);
-      TypeLookupImpl _typeLookup_5 = it.getTypeLookup();
-      InterfaceDeclaration _findSourceInterface_1 = _typeLookup_5.findSourceInterface("foo.MyClass.NestedInterface");
-      Assert.assertNull(_findSourceInterface_1);
-      TypeLookupImpl _typeLookup_6 = it.getTypeLookup();
-      EnumerationTypeDeclaration _findSourceEnumerationType_1 = _typeLookup_6.findSourceEnumerationType("foo.MyClass.NestedEnumerationType");
-      Assert.assertNull(_findSourceEnumerationType_1);
-      TypeLookupImpl _typeLookup_7 = it.getTypeLookup();
-      AnnotationTypeDeclaration _findSourceAnnotationType_1 = _typeLookup_7.findSourceAnnotationType("foo.MyClass.NestedAnnotationType");
-      Assert.assertNull(_findSourceAnnotationType_1);
+      Assert.assertNotNull(it.getTypeLookup().findSourceClass("foo.MyClass"));
+      Assert.assertNotNull(it.getTypeLookup().findSourceInterface("foo.MyInterface"));
+      Assert.assertNotNull(it.getTypeLookup().findSourceEnumerationType("foo.MyEnum"));
+      Assert.assertNotNull(it.getTypeLookup().findSourceAnnotationType("foo.MyAnnotation"));
+      Assert.assertNull(it.getTypeLookup().findSourceClass("foo.MyClass.NestedClass"));
+      Assert.assertNull(it.getTypeLookup().findSourceInterface("foo.MyClass.NestedInterface"));
+      Assert.assertNull(it.getTypeLookup().findSourceEnumerationType("foo.MyClass.NestedEnumerationType"));
+      Assert.assertNull(it.getTypeLookup().findSourceAnnotationType("foo.MyClass.NestedAnnotationType"));
     };
-    this.asCompilationUnit(_validFile, _function);
+    this.asCompilationUnit(this.validFile(_builder), _function);
   }
   
   @Inject
@@ -169,8 +113,7 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
   
   public XtendFile validFile(final CharSequence code) {
     try {
-      String _string = code.toString();
-      return this.file(_string, true);
+      return this.file(code.toString(), true);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

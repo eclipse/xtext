@@ -6,10 +6,8 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtend.core.parser.antlr.XtendAntlrTokenFileProvider;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
@@ -18,25 +16,20 @@ import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
-import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.document.DocumentRewriter;
@@ -80,12 +73,9 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.append("//***********");
     _builder.newLine();
     final Procedure2<DocumentRewriter, XtextResource> _function = (DocumentRewriter it, XtextResource r) -> {
-      DocumentRewriter.Section _newSection = it.newSection(3, 1);
-      _newSection.append("one");
-      DocumentRewriter.Section _newSection_1 = it.newSection(4, 2);
-      _newSection_1.append("two");
-      DocumentRewriter.Section _newSection_2 = it.newSection(6, 1);
-      _newSection_2.append("three");
+      it.newSection(3, 1).append("one");
+      it.newSection(4, 2).append("two");
+      it.newSection(6, 1).append("three");
       final Procedure1<DocumentRewriter> _function_1 = (DocumentRewriter it_1) -> {
         it_1.newSection(4, 2);
       };
@@ -128,12 +118,9 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.append("//***********");
     _builder.newLine();
     final Procedure2<DocumentRewriter, XtextResource> _function = (DocumentRewriter it, XtextResource r) -> {
-      DocumentRewriter.Section _newSection = it.newSection(6, 1);
-      _newSection.append("one");
-      DocumentRewriter.Section _newSection_1 = it.newSection(4, 2);
-      _newSection_1.append("two");
-      DocumentRewriter.Section _newSection_2 = it.newSection(3, 1);
-      _newSection_2.append("three");
+      it.newSection(6, 1).append("one");
+      it.newSection(4, 2).append("two");
+      it.newSection(3, 1).append("three");
       final Procedure1<DocumentRewriter> _function_1 = (DocumentRewriter it_1) -> {
         it_1.newSection(4, 2);
       };
@@ -189,18 +176,10 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final String model = _builder.toString();
     final Procedure2<DocumentRewriter, XtextResource> _function = (DocumentRewriter it, XtextResource r) -> {
-      int _indexOf = model.indexOf("class");
-      DocumentRewriter.Section _newSection = it.newSection(_indexOf, 0);
-      _newSection.append("abstract ");
-      int _indexOf_1 = model.indexOf("foo");
-      DocumentRewriter.Section _newSection_1 = it.newSection(_indexOf_1, 0);
-      _newSection_1.append("static ");
-      int _indexOf_2 = model.indexOf("bar");
-      DocumentRewriter.Section _newSection_2 = it.newSection(_indexOf_2, 0);
-      _newSection_2.append("private int ");
-      int _lastIndexOf = model.lastIndexOf("{}");
-      DocumentRewriter.Section _newSection_3 = it.newSection(_lastIndexOf, 2);
-      _newSection_3.append("{ 42 }");
+      it.newSection(model.indexOf("class"), 0).append("abstract ");
+      it.newSection(model.indexOf("foo"), 0).append("static ");
+      it.newSection(model.indexOf("bar"), 0).append("private int ");
+      it.newSection(model.lastIndexOf("{}"), 2).append("{ 42 }");
     };
     String _rewrite = this.rewrite(model, _function);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -238,11 +217,8 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final String model = _builder.toString();
     final Procedure2<DocumentRewriter, XtextResource> _function = (DocumentRewriter it, XtextResource r) -> {
-      int _indexOf = model.indexOf("foo");
-      final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
-      TypeReferences _typeReferences = this.services.getTypeReferences();
-      JvmType _findDeclaredType = _typeReferences.findDeclaredType(Serializable.class, r);
-      beforeFoo.append(_findDeclaredType);
+      final DocumentRewriter.Section beforeFoo = it.newSection(model.indexOf("foo"), 0);
+      beforeFoo.append(this.services.getTypeReferences().findDeclaredType(Serializable.class, r));
       beforeFoo.append(" ");
     };
     String _rewrite = this.rewrite(model, _function);
@@ -284,20 +260,12 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final String model = _builder.toString();
     final Procedure2<DocumentRewriter, XtextResource> _function = (DocumentRewriter it, XtextResource r) -> {
-      int _indexOf = model.indexOf("foo");
-      final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
-      int _indexOf_1 = model.indexOf("bar");
-      final DocumentRewriter.Section beforeBar = it.newSection(_indexOf_1, 0);
+      final DocumentRewriter.Section beforeFoo = it.newSection(model.indexOf("foo"), 0);
+      final DocumentRewriter.Section beforeBar = it.newSection(model.indexOf("bar"), 0);
       final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, r);
-      TypeReferences _typeReferences = this.services.getTypeReferences();
-      JvmWildcardTypeReference _createJvmWildcardTypeReference = this._typesFactory.createJvmWildcardTypeReference();
-      final JvmTypeReference list = _typeReferences.getTypeForName(List.class, r, _createJvmWildcardTypeReference);
-      LightweightTypeReference _lightweightTypeReference = owner.toLightweightTypeReference(list);
-      beforeFoo.append(_lightweightTypeReference);
-      TypeReferences _typeReferences_1 = this.services.getTypeReferences();
-      JvmTypeReference _typeForName = _typeReferences_1.getTypeForName(File.class, r);
-      LightweightTypeReference _lightweightTypeReference_1 = owner.toLightweightTypeReference(_typeForName);
-      beforeBar.append(_lightweightTypeReference_1);
+      final JvmTypeReference list = this.services.getTypeReferences().getTypeForName(List.class, r, this._typesFactory.createJvmWildcardTypeReference());
+      beforeFoo.append(owner.toLightweightTypeReference(list));
+      beforeBar.append(owner.toLightweightTypeReference(this.services.getTypeReferences().getTypeForName(File.class, r)));
       beforeFoo.append(" ");
       beforeBar.append(" ");
     };
@@ -346,23 +314,11 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final String model = _builder.toString();
     final Procedure2<DocumentRewriter, XtextResource> _function = (DocumentRewriter it, XtextResource r) -> {
-      int _indexOf = model.indexOf("foo");
-      final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
-      int _indexOf_1 = model.indexOf("bar");
-      final DocumentRewriter.Section beforeBar = it.newSection(_indexOf_1, 0);
+      final DocumentRewriter.Section beforeFoo = it.newSection(model.indexOf("foo"), 0);
+      final DocumentRewriter.Section beforeBar = it.newSection(model.indexOf("bar"), 0);
       final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, r);
-      TypeReferences _typeReferences = this.services.getTypeReferences();
-      TypeReferences _typeReferences_1 = this.services.getTypeReferences();
-      JvmTypeReference _typeForName = _typeReferences_1.getTypeForName(String.class, r);
-      JvmTypeReference _typeForName_1 = _typeReferences.getTypeForName(List.class, r, _typeForName);
-      LightweightTypeReference _lightweightTypeReference = owner.toLightweightTypeReference(_typeForName_1);
-      beforeFoo.append(_lightweightTypeReference);
-      TypeReferences _typeReferences_2 = this.services.getTypeReferences();
-      TypeReferences _typeReferences_3 = this.services.getTypeReferences();
-      JvmTypeReference _typeForName_2 = _typeReferences_3.getTypeForName(File.class, r);
-      JvmTypeReference _typeForName_3 = _typeReferences_2.getTypeForName(List.class, r, _typeForName_2);
-      LightweightTypeReference _lightweightTypeReference_1 = owner.toLightweightTypeReference(_typeForName_3);
-      beforeBar.append(_lightweightTypeReference_1);
+      beforeFoo.append(owner.toLightweightTypeReference(this.services.getTypeReferences().getTypeForName(List.class, r, this.services.getTypeReferences().getTypeForName(String.class, r))));
+      beforeBar.append(owner.toLightweightTypeReference(this.services.getTypeReferences().getTypeForName(List.class, r, this.services.getTypeReferences().getTypeForName(File.class, r))));
       beforeFoo.append(" ");
       beforeBar.append(" ");
     };
@@ -405,8 +361,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final String model = _builder.toString();
     final Procedure2<DocumentRewriter, XtextResource> _function = (DocumentRewriter it, XtextResource r) -> {
-      int _indexOf = model.indexOf("def bar");
-      final DocumentRewriter.Section beforeDefBar = it.newSection(_indexOf, 0, true);
+      final DocumentRewriter.Section beforeDefBar = it.newSection(model.indexOf("def bar"), 0, true);
       beforeDefBar.append("val x = 42");
     };
     String _rewrite = this.rewrite(model, _function);
@@ -451,16 +406,13 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     final Procedure2<DocumentRewriter, XtextResource> _function = (DocumentRewriter it, XtextResource r) -> {
       int _indexOf = model.indexOf("{}");
       int _plus = (_indexOf + 3);
-      DocumentRewriter.Section _newSection = it.newSection(_plus, 0, true);
-      _newSection.append("val x = 42");
+      it.newSection(_plus, 0, true).append("val x = 42");
       int _lastIndexOf = model.lastIndexOf("{\n");
       int _plus_1 = (_lastIndexOf + 1);
-      DocumentRewriter.Section _newSection_1 = it.newSection(_plus_1, 0, 2, true);
-      _newSection_1.append("val y = 43");
+      it.newSection(_plus_1, 0, 2, true).append("val y = 43");
       int _indexOf_1 = model.indexOf("\t}");
       int _plus_2 = (_indexOf_1 + 2);
-      DocumentRewriter.Section _newSection_2 = it.newSection(_plus_2, 0, true);
-      _newSection_2.append("val z = 44");
+      it.newSection(_plus_2, 0, true).append("val z = 44");
     };
     String _rewrite = this.rewrite(model, _function);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -504,20 +456,17 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     try {
       String _xblockexpression = null;
       {
-        String _string = model.toString();
-        final XtextDocument document = this.createDocument(_string);
+        final XtextDocument document = this.createDocument(model.toString());
         final IUnitOfWork<TextEdit, XtextResource> _function = (XtextResource it) -> {
           TextEdit _xblockexpression_1 = null;
           {
             final DocumentRewriter rewriter = this.factory.create(document, it);
             test.apply(rewriter, it);
-            List<ReplaceRegion> _changes = rewriter.getChanges();
-            _xblockexpression_1 = this._replaceConverter.convertToTextEdit(_changes);
+            _xblockexpression_1 = this._replaceConverter.convertToTextEdit(rewriter.getChanges());
           }
           return _xblockexpression_1;
         };
-        TextEdit _readOnly = document.<TextEdit>readOnly(_function);
-        _readOnly.apply(document);
+        document.<TextEdit>readOnly(_function).apply(document);
         _xblockexpression = document.get();
       }
       return _xblockexpression;
@@ -527,8 +476,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
   }
   
   protected void andExpect(final String model, final CharSequence expectation) {
-    String _string = expectation.toString();
-    Assert.assertEquals(_string, model);
+    Assert.assertEquals(expectation.toString(), model);
   }
   
   protected Object assertFails(final DocumentRewriter it, final Procedure1<? super DocumentRewriter> procedure) {
@@ -551,11 +499,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     XtextDocument _xblockexpression = null;
     {
       final IFile file = this._workbenchTestHelper.createFile("Foo", content);
-      ResourceSet _resourceSet = this._workbenchTestHelper.getResourceSet();
-      IPath _fullPath = file.getFullPath();
-      String _string = _fullPath.toString();
-      URI _createPlatformResourceURI = URI.createPlatformResourceURI(_string, true);
-      final Resource resource = _resourceSet.getResource(_createPlatformResourceURI, true);
+      final Resource resource = this._workbenchTestHelper.getResourceSet().getResource(URI.createPlatformResourceURI(file.getFullPath().toString(), true), true);
       XtendDocumentTokenSource _xtendDocumentTokenSource = new XtendDocumentTokenSource();
       final Procedure1<XtendDocumentTokenSource> _function = (XtendDocumentTokenSource it) -> {
         AntlrTokenDefProvider _antlrTokenDefProvider = new AntlrTokenDefProvider();

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.macros;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.io.ByteArrayInputStream;
@@ -113,20 +112,14 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
       Pair<Integer, String> _mappedTo_12 = Pair.<Integer, String>of(Integer.valueOf(IResourceDelta.REPLACED), "REPLACED");
       final Function1<Pair<Integer, String>, String> _function = (Pair<Integer, String> it) -> {
         String _xifexpression = null;
-        int _flags = delta.getFlags();
-        Integer _key = it.getKey();
-        int _bitwiseAnd = (_flags & (_key).intValue());
-        boolean _notEquals = (_bitwiseAnd != 0);
-        if (_notEquals) {
+        if (((delta.getFlags() & (it.getKey()).intValue()) != 0)) {
           _xifexpression = it.getValue();
         } else {
           _xifexpression = null;
         }
         return _xifexpression;
       };
-      List<String> _map = ListExtensions.<Pair<Integer, String>, String>map(Collections.<Pair<Integer, String>>unmodifiableList(CollectionLiterals.<Pair<Integer, String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9, _mappedTo_10, _mappedTo_11, _mappedTo_12)), _function);
-      Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map);
-      String _join = IterableExtensions.join(_filterNull, ",");
+      String _join = IterableExtensions.join(IterableExtensions.<String>filterNull(ListExtensions.<Pair<Integer, String>, String>map(Collections.<Pair<Integer, String>>unmodifiableList(CollectionLiterals.<Pair<Integer, String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9, _mappedTo_10, _mappedTo_11, _mappedTo_12)), _function)), ",");
       _builder.append(_join);
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
@@ -158,8 +151,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
   @Override
   public void tearDown() {
     try {
-      IProject _project = this.workbenchTestHelper.getProject();
-      _project.delete(true, null);
+      this.workbenchTestHelper.getProject().delete(true, null);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -170,23 +162,17 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
   @Test
   public void testConcurrentDiscard() throws Exception {
     try {
-      IntegerRange _upTo = new IntegerRange(1, 10000);
       final Consumer<Integer> _function = (Integer it) -> {
-        String _string = it.toString();
-        URI _appendSegment = this.uri.appendSegment(_string);
-        this.resourceChangeRegistry.registerCreateOrModify("/foo", _appendSegment);
+        this.resourceChangeRegistry.registerCreateOrModify("/foo", this.uri.appendSegment(it.toString()));
       };
-      _upTo.forEach(_function);
+      new IntegerRange(1, 10000).forEach(_function);
       final Runnable _function_1 = () -> {
         final SecureRandom random = new SecureRandom(new byte[] { ((byte) 1) });
-        IntegerRange _upTo_1 = new IntegerRange(1, 1000);
         final Consumer<Integer> _function_2 = (Integer it) -> {
-          int _nextInt = random.nextInt(10000);
-          String _string = Integer.valueOf(_nextInt).toString();
-          final URI removedURI = this.uri.appendSegment(_string);
+          final URI removedURI = this.uri.appendSegment(Integer.valueOf(random.nextInt(10000)).toString());
           this.resourceChangeRegistry.discardCreateOrModifyInformation(removedURI);
         };
-        _upTo_1.forEach(_function_2);
+        new IntegerRange(1, 1000).forEach(_function_2);
       };
       final Runnable r = _function_1;
       final ExecutorService executorService = Executors.newCachedThreadPool();
@@ -218,38 +204,26 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
   public void testSerialization() {
     this.resourceChangeRegistry.registerExists("/foo", this.uri);
     this.resourceChangeRegistry.registerExists("/foo/bar", this.uri);
-    URI _appendFragment = this.uri.appendFragment("fragment");
-    this.resourceChangeRegistry.registerExists("/foo/bar", _appendFragment);
+    this.resourceChangeRegistry.registerExists("/foo/bar", this.uri.appendFragment("fragment"));
     this.resourceChangeRegistry.registerGetCharset("/foo", this.uri);
     this.resourceChangeRegistry.registerGetCharset("/foo/bar", this.uri);
-    URI _appendFragment_1 = this.uri.appendFragment("fragment");
-    this.resourceChangeRegistry.registerGetCharset("/foo/bar", _appendFragment_1);
+    this.resourceChangeRegistry.registerGetCharset("/foo/bar", this.uri.appendFragment("fragment"));
     this.resourceChangeRegistry.registerGetChildren("/foo", this.uri);
     this.resourceChangeRegistry.registerGetChildren("/foo/bar", this.uri);
-    URI _appendFragment_2 = this.uri.appendFragment("fragment");
-    this.resourceChangeRegistry.registerGetChildren("/foo/bar", _appendFragment_2);
+    this.resourceChangeRegistry.registerGetChildren("/foo/bar", this.uri.appendFragment("fragment"));
     this.resourceChangeRegistry.registerGetContents("/foo", this.uri);
     this.resourceChangeRegistry.registerGetContents("/foo/bar", this.uri);
-    URI _appendFragment_3 = this.uri.appendFragment("fragment");
-    this.resourceChangeRegistry.registerGetContents("/foo/bar", _appendFragment_3);
+    this.resourceChangeRegistry.registerGetContents("/foo/bar", this.uri.appendFragment("fragment"));
     final ByteArrayOutputStream out = new ByteArrayOutputStream();
     this.resourceChangeRegistry.writeState(out);
     final UIResourceChangeRegistryTest.TestUiResourceChangeRegistry copy = new UIResourceChangeRegistryTest.TestUiResourceChangeRegistry();
     byte[] _byteArray = out.toByteArray();
     ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
     copy.readState(_byteArrayInputStream);
-    HashMultimap<String, URI> _existsListeners = this.resourceChangeRegistry.getExistsListeners();
-    HashMultimap<String, URI> _existsListeners_1 = copy.getExistsListeners();
-    Assert.assertEquals(_existsListeners, _existsListeners_1);
-    HashMultimap<String, URI> _charsetListeners = this.resourceChangeRegistry.getCharsetListeners();
-    HashMultimap<String, URI> _charsetListeners_1 = copy.getCharsetListeners();
-    Assert.assertEquals(_charsetListeners, _charsetListeners_1);
-    HashMultimap<String, URI> _contentsListeners = this.resourceChangeRegistry.getContentsListeners();
-    HashMultimap<String, URI> _contentsListeners_1 = copy.getContentsListeners();
-    Assert.assertEquals(_contentsListeners, _contentsListeners_1);
-    HashMultimap<String, URI> _childrenListeners = this.resourceChangeRegistry.getChildrenListeners();
-    HashMultimap<String, URI> _childrenListeners_1 = copy.getChildrenListeners();
-    Assert.assertEquals(_childrenListeners, _childrenListeners_1);
+    Assert.assertEquals(this.resourceChangeRegistry.getExistsListeners(), copy.getExistsListeners());
+    Assert.assertEquals(this.resourceChangeRegistry.getCharsetListeners(), copy.getCharsetListeners());
+    Assert.assertEquals(this.resourceChangeRegistry.getContentsListeners(), copy.getContentsListeners());
+    Assert.assertEquals(this.resourceChangeRegistry.getChildrenListeners(), copy.getChildrenListeners());
   }
   
   @Test
@@ -257,17 +231,11 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
     try {
       final String folderPath = "/foo/bar";
       this.resourceChangeRegistry.registerExists(folderPath, this.uri);
-      HashMultimap<String, URI> _existsListeners = this.resourceChangeRegistry.getExistsListeners();
-      boolean _containsKey = _existsListeners.containsKey(folderPath);
-      Assert.assertTrue(_containsKey);
+      Assert.assertTrue(this.resourceChangeRegistry.getExistsListeners().containsKey(folderPath));
       final IProject project = WorkbenchTestHelper.createPluginProject("foo");
-      HashMultimap<String, URI> _existsListeners_1 = this.resourceChangeRegistry.getExistsListeners();
-      boolean _containsKey_1 = _existsListeners_1.containsKey(folderPath);
-      Assert.assertTrue(_containsKey_1);
+      Assert.assertTrue(this.resourceChangeRegistry.getExistsListeners().containsKey(folderPath));
       final IFolder folder = project.getFolder("bar");
-      HashMultimap<String, URI> _existsListeners_2 = this.resourceChangeRegistry.getExistsListeners();
-      boolean _containsKey_2 = _existsListeners_2.containsKey(folderPath);
-      Assert.assertTrue(_containsKey_2);
+      Assert.assertTrue(this.resourceChangeRegistry.getExistsListeners().containsKey(folderPath));
       final WorkspaceModifyOperation _function = new WorkspaceModifyOperation() {
         @Override
         protected void execute(final IProgressMonitor it) throws CoreException, InvocationTargetException, InterruptedException {
@@ -275,11 +243,8 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
         }
       };
       this.modifyWorkspace(_function);
-      HashMultimap<String, URI> _existsListeners_3 = this.resourceChangeRegistry.getExistsListeners();
-      boolean _containsKey_3 = _existsListeners_3.containsKey(folderPath);
-      Assert.assertFalse(_containsKey_3);
-      int _size = this.resourceChangeRegistry.queuedURIs.size();
-      Assert.assertEquals(1, _size);
+      Assert.assertFalse(this.resourceChangeRegistry.getExistsListeners().containsKey(folderPath));
+      Assert.assertEquals(1, this.resourceChangeRegistry.queuedURIs.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -291,9 +256,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
       final IProject project = WorkbenchTestHelper.createPluginProject("foo");
       final String folderPath = "/foo/bar";
       this.resourceChangeRegistry.registerGetChildren(folderPath, this.uri);
-      HashMultimap<String, URI> _childrenListeners = this.resourceChangeRegistry.getChildrenListeners();
-      boolean _containsKey = _childrenListeners.containsKey(folderPath);
-      Assert.assertTrue(_containsKey);
+      Assert.assertTrue(this.resourceChangeRegistry.getChildrenListeners().containsKey(folderPath));
       final IFolder folder = project.getFolder("bar");
       final WorkspaceModifyOperation _function = new WorkspaceModifyOperation() {
         @Override
@@ -302,11 +265,8 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
         }
       };
       this.modifyWorkspace(_function);
-      HashMultimap<String, URI> _childrenListeners_1 = this.resourceChangeRegistry.getChildrenListeners();
-      boolean _containsKey_1 = _childrenListeners_1.containsKey(folderPath);
-      Assert.assertFalse(_containsKey_1);
-      int _size = this.resourceChangeRegistry.queuedURIs.size();
-      Assert.assertEquals(1, _size);
+      Assert.assertFalse(this.resourceChangeRegistry.getChildrenListeners().containsKey(folderPath));
+      Assert.assertEquals(1, this.resourceChangeRegistry.queuedURIs.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -335,11 +295,8 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
         }
       };
       this.modifyWorkspace(_function_1);
-      HashMultimap<String, URI> _childrenListeners = this.resourceChangeRegistry.getChildrenListeners();
-      boolean _containsKey = _childrenListeners.containsKey(folderPath);
-      Assert.assertFalse(_containsKey);
-      int _size = this.resourceChangeRegistry.queuedURIs.size();
-      Assert.assertEquals(1, _size);
+      Assert.assertFalse(this.resourceChangeRegistry.getChildrenListeners().containsKey(folderPath));
+      Assert.assertEquals(1, this.resourceChangeRegistry.queuedURIs.size());
       this.resourceChangeRegistry.registerGetChildren(folderPath, this.uri);
       final WorkspaceModifyOperation _function_2 = new WorkspaceModifyOperation() {
         @Override
@@ -350,24 +307,17 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
         }
       };
       this.modifyWorkspace(_function_2);
-      HashMultimap<String, URI> _childrenListeners_1 = this.resourceChangeRegistry.getChildrenListeners();
-      boolean _containsKey_1 = _childrenListeners_1.containsKey(folderPath);
-      Assert.assertTrue(_containsKey_1);
-      int _size_1 = this.resourceChangeRegistry.queuedURIs.size();
-      Assert.assertEquals(1, _size_1);
+      Assert.assertTrue(this.resourceChangeRegistry.getChildrenListeners().containsKey(folderPath));
+      Assert.assertEquals(1, this.resourceChangeRegistry.queuedURIs.size());
       final WorkspaceModifyOperation _function_3 = new WorkspaceModifyOperation() {
         @Override
         protected void execute(final IProgressMonitor it) throws CoreException, InvocationTargetException, InterruptedException {
-          IFile _file = folder.getFile("test.txt");
-          _file.delete(true, true, null);
+          folder.getFile("test.txt").delete(true, true, null);
         }
       };
       this.modifyWorkspace(_function_3);
-      HashMultimap<String, URI> _childrenListeners_2 = this.resourceChangeRegistry.getChildrenListeners();
-      boolean _containsKey_2 = _childrenListeners_2.containsKey(folderPath);
-      Assert.assertFalse(_containsKey_2);
-      int _size_2 = this.resourceChangeRegistry.queuedURIs.size();
-      Assert.assertEquals(2, _size_2);
+      Assert.assertFalse(this.resourceChangeRegistry.getChildrenListeners().containsKey(folderPath));
+      Assert.assertEquals(2, this.resourceChangeRegistry.queuedURIs.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -399,39 +349,28 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
         }
       };
       this.modifyWorkspace(_function_1);
-      HashMultimap<String, URI> _contentsListeners = this.resourceChangeRegistry.getContentsListeners();
-      boolean _containsKey = _contentsListeners.containsKey(folderPath);
-      Assert.assertFalse(_containsKey);
-      int _size = this.resourceChangeRegistry.queuedURIs.size();
-      Assert.assertEquals(1, _size);
+      Assert.assertFalse(this.resourceChangeRegistry.getContentsListeners().containsKey(folderPath));
+      Assert.assertEquals(1, this.resourceChangeRegistry.queuedURIs.size());
       this.resourceChangeRegistry.registerGetContents(folderPath, this.uri);
       final WorkspaceModifyOperation _function_2 = new WorkspaceModifyOperation() {
         @Override
         protected void execute(final IProgressMonitor it) throws CoreException, InvocationTargetException, InterruptedException {
-          IFile _file = folder.getFile("test.txt");
-          _file.setCharset("UTF-8", null);
+          folder.getFile("test.txt").setCharset("UTF-8", null);
         }
       };
       this.modifyWorkspace(_function_2);
-      HashMultimap<String, URI> _contentsListeners_1 = this.resourceChangeRegistry.getContentsListeners();
-      boolean _containsKey_1 = _contentsListeners_1.containsKey(folderPath);
-      Assert.assertFalse(_containsKey_1);
-      int _size_1 = this.resourceChangeRegistry.queuedURIs.size();
-      Assert.assertEquals(2, _size_1);
+      Assert.assertFalse(this.resourceChangeRegistry.getContentsListeners().containsKey(folderPath));
+      Assert.assertEquals(2, this.resourceChangeRegistry.queuedURIs.size());
       this.resourceChangeRegistry.registerGetContents(folderPath, this.uri);
       final WorkspaceModifyOperation _function_3 = new WorkspaceModifyOperation() {
         @Override
         protected void execute(final IProgressMonitor it) throws CoreException, InvocationTargetException, InterruptedException {
-          IFile _file = folder.getFile("test.txt");
-          _file.delete(true, true, null);
+          folder.getFile("test.txt").delete(true, true, null);
         }
       };
       this.modifyWorkspace(_function_3);
-      HashMultimap<String, URI> _contentsListeners_2 = this.resourceChangeRegistry.getContentsListeners();
-      boolean _containsKey_2 = _contentsListeners_2.containsKey(folderPath);
-      Assert.assertFalse(_containsKey_2);
-      int _size_2 = this.resourceChangeRegistry.queuedURIs.size();
-      Assert.assertEquals(3, _size_2);
+      Assert.assertFalse(this.resourceChangeRegistry.getContentsListeners().containsKey(folderPath));
+      Assert.assertEquals(3, this.resourceChangeRegistry.queuedURIs.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

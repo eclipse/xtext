@@ -5,9 +5,7 @@ import com.google.inject.Inject;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.compiler.RootTraceRegionForTesting;
@@ -26,7 +24,6 @@ import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -1554,43 +1551,29 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     try {
       final String xtendWithSpaces = ((" " + xtend) + " ");
       final Matcher xtendMatcher = this.p.matcher(xtendWithSpaces);
-      boolean _matches = xtendMatcher.matches();
-      Assert.assertTrue("xtendMatcher.matches", _matches);
+      Assert.assertTrue("xtendMatcher.matches", xtendMatcher.matches());
       final String xtendGroup1 = xtendMatcher.group(1);
       final String xtendGroup2 = xtendMatcher.group(2);
       final String xtendGroup3 = xtendMatcher.group(3);
       final String actualXtendCode = ((xtendGroup1 + xtendGroup2) + xtendGroup3);
       final XtendFile file = this.file(actualXtendCode, true);
-      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes());
       final JvmGenericType inferredType = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
-      GeneratorConfig _get = this.generatorConfigProvider.get(inferredType);
-      CharSequence compiledCode = this.generator.generateType(inferredType, _get);
-      CharSequence _postProcess = this.postProcessor.postProcess(null, compiledCode);
-      compiledCode = _postProcess;
-      String _string = java.toString();
-      final Matcher javaMatcher = this.p.matcher(_string);
-      boolean _matches_1 = javaMatcher.matches();
-      Assert.assertTrue("javaMatcher.matches", _matches_1);
+      CharSequence compiledCode = this.generator.generateType(inferredType, this.generatorConfigProvider.get(inferredType));
+      compiledCode = this.postProcessor.postProcess(null, compiledCode);
+      final Matcher javaMatcher = this.p.matcher(java.toString());
+      Assert.assertTrue("javaMatcher.matches", javaMatcher.matches());
       final String javaGroup1 = javaMatcher.group(1);
       final String javaGroup2 = javaMatcher.group(2);
       final String javaGroup3 = javaMatcher.group(3);
       final String actualJavaExpectation = ((javaGroup1 + javaGroup2) + javaGroup3);
-      String _string_1 = compiledCode.toString();
-      Assert.assertEquals(actualJavaExpectation, _string_1);
+      Assert.assertEquals(actualJavaExpectation, compiledCode.toString());
       AbstractTraceRegion _traceRegion = ((ITraceRegionProvider) compiledCode).getTraceRegion();
-      Resource _eResource = file.eResource();
-      URI _uRI = _eResource.getURI();
-      String _path = _uRI.path();
-      URI _createURI = URI.createURI(_path);
+      URI _createURI = URI.createURI(file.eResource().getURI().path());
       SourceRelativeURI _sourceRelativeURI = new SourceRelativeURI(_createURI);
-      Resource _eResource_1 = file.eResource();
-      URI _uRI_1 = _eResource_1.getURI();
-      String _path_1 = _uRI_1.path();
-      URI _createURI_1 = URI.createURI(_path_1);
+      URI _createURI_1 = URI.createURI(file.eResource().getURI().path());
       SourceRelativeURI _sourceRelativeURI_1 = new SourceRelativeURI(_createURI_1);
-      List<AbstractTraceRegion> _invertFor = _traceRegion.invertFor(_sourceRelativeURI, _sourceRelativeURI_1);
-      AbstractTraceRegion _merge = this.merge(_invertFor);
+      AbstractTraceRegion _merge = this.merge(_traceRegion.invertFor(_sourceRelativeURI, _sourceRelativeURI_1));
       final SimpleTrace trace = new SimpleTrace(_merge);
       int _length = xtendGroup1.length();
       int _length_1 = xtendGroup2.length();
@@ -1599,8 +1582,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
       int _length_2 = javaGroup1.length();
       int _length_3 = javaGroup2.length();
       final TextRegion expectedRegion = new TextRegion(_length_2, _length_3);
-      boolean _isEmpty = IterableExtensions.isEmpty(locations);
-      Assert.assertFalse(_isEmpty);
+      Assert.assertFalse(IterableExtensions.isEmpty(locations));
       for (final ILocationInResource location : locations) {
         ITextRegionWithLineInformation _textRegion_1 = location.getTextRegion();
         boolean _equals = Objects.equal(_textRegion_1, expectedRegion);
@@ -1630,12 +1612,10 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
           int _myLineNumber = child.getMyLineNumber();
           int _myEndLineNumber = child.getMyEndLineNumber();
           TextRegionWithLineInformation _textRegionWithLineInformation = new TextRegionWithLineInformation(_myOffset, _myLength, _myLineNumber, _myEndLineNumber);
-          ITextRegionWithLineInformation _merge = rootLocation.merge(_textRegionWithLineInformation);
-          rootLocation = _merge;
+          rootLocation = rootLocation.merge(_textRegionWithLineInformation);
           ILocationData childAssociation = child.getMergedAssociatedLocation();
           if ((childAssociation != null)) {
-            ITextRegionWithLineInformation _merge_1 = associated.merge(childAssociation);
-            associated = _merge_1;
+            associated = associated.merge(childAssociation);
           }
         }
       }

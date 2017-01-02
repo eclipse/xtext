@@ -29,9 +29,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       _builder.newLine();
       _builder.append("class Foo {}");
       _builder.newLine();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      ContentAssistProcessorTestBuilder _assertTextAtCursorPosition = _append.assertTextAtCursorPosition(37, "java.util.Date");
-      ContentAssistProcessorTestBuilder _applyProposal = _assertTextAtCursorPosition.applyProposal(37);
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).assertTextAtCursorPosition(37, "java.util.Date").applyProposal(37);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package foo");
       _builder_1.newLine();
@@ -72,9 +70,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       _builder.newLine();
       _builder.append("class Foo {}");
       _builder.newLine();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      ContentAssistProcessorTestBuilder _assertTextAtCursorPosition = _append.assertTextAtCursorPosition(44, "StringBuffer");
-      ContentAssistProcessorTestBuilder _applyProposal = _assertTextAtCursorPosition.applyProposal(44);
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).assertTextAtCursorPosition(44, "StringBuffer").applyProposal(44);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package foo");
       _builder_1.newLine();
@@ -111,10 +107,8 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       _builder.newLine();
       _builder.append("class Foo {}");
       _builder.newLine();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      ICompletionProposal[] _computeCompletionProposals = _append.computeCompletionProposals(39);
-      boolean _isEmpty = ((List<ICompletionProposal>)Conversions.doWrapArray(_computeCompletionProposals)).isEmpty();
-      Assert.assertTrue(_isEmpty);
+      Assert.assertTrue(
+        ((List<ICompletionProposal>)Conversions.doWrapArray(_newBuilder.append(_builder.toString()).computeCompletionProposals(39))).isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -137,9 +131,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       _builder.newLine();
       _builder.append("class Foo {}");
       _builder.newLine();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      ContentAssistProcessorTestBuilder _assertTextAtCursorPosition = _append.assertTextAtCursorPosition(47, "StringBuffer");
-      ContentAssistProcessorTestBuilder _applyProposal = _assertTextAtCursorPosition.applyProposal(47);
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).assertTextAtCursorPosition(47, "StringBuffer").applyProposal(47);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package foo");
       _builder_1.newLine();
@@ -176,9 +168,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       _builder.newLine();
       _builder.append("class Foo {}");
       _builder.newLine();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      ContentAssistProcessorTestBuilder _assertTextAtCursorPosition = _append.assertTextAtCursorPosition(46, "StringBuffer");
-      ContentAssistProcessorTestBuilder _applyProposal = _assertTextAtCursorPosition.applyProposal(46);
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).assertTextAtCursorPosition(46, "StringBuffer").applyProposal(46);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package foo");
       _builder_1.newLine();
@@ -215,9 +205,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       _builder.newLine();
       _builder.append("class Foo {}");
       _builder.newLine();
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      ContentAssistProcessorTestBuilder _assertTextAtCursorPosition = _append.assertTextAtCursorPosition(49, "StringBuffer");
-      ContentAssistProcessorTestBuilder _applyProposal = _assertTextAtCursorPosition.applyProposal(49);
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).assertTextAtCursorPosition(49, "StringBuffer").applyProposal(49);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package foo");
       _builder_1.newLine();

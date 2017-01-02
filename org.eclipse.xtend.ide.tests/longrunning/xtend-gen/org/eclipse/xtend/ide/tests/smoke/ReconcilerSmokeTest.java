@@ -3,8 +3,6 @@ package org.eclipse.xtend.ide.tests.smoke;
 import com.google.inject.Inject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.intro.IIntroManager;
-import org.eclipse.ui.intro.IIntroPart;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -2482,10 +2480,7 @@ public class ReconcilerSmokeTest extends AbstractXtendUITestCase {
       final String model = _builder.toString();
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       this._syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor);
-      IIntroManager _introManager = this.workbench.getIntroManager();
-      IIntroManager _introManager_1 = this.workbench.getIntroManager();
-      IIntroPart _intro = _introManager_1.getIntro();
-      _introManager.closeIntro(_intro);
+      this.workbench.getIntroManager().closeIntro(this.workbench.getIntroManager().getIntro());
       final XtextEditor editor = this._workbenchTestHelper.openEditor("Foo.xtend", model);
       ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, 300, true);
       for (final Integer i : _doubleDotLessThan) {

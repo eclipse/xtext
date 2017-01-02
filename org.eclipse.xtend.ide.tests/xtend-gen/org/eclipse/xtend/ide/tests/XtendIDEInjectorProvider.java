@@ -8,7 +8,6 @@ import org.eclipse.xtext.testing.IInjectorProvider;
 public class XtendIDEInjectorProvider implements IInjectorProvider {
   @Override
   public Injector getInjector() {
-    XtendActivator _instance = XtendActivator.getInstance();
-    return _instance.getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND);
+    return XtendActivator.getInstance().getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND);
   }
 }

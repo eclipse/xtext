@@ -60,23 +60,13 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("first.p384008/src/acme/B.xtend", _builder_1.toString());
-      Map<String, String> _emptyStringMap = UniqueClassNameValidatorUITest.emptyStringMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap, null);
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
       final IMarker[] firstFileMarkers = firstFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      String _printMarker = IResourcesSetupUtil.printMarker(firstFileMarkers);
-      int _length = firstFileMarkers.length;
-      Assert.assertEquals(_printMarker, 1, _length);
-      IMarker _head = IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(firstFileMarkers)));
-      Object _attribute = _head.getAttribute(IMarker.MESSAGE);
-      Assert.assertEquals("The type A is already defined in B.xtend.", _attribute);
-      IMarker[] _findMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      final Iterable<IMarker> secondFileMarkers = this.onlyErrors(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers)));
-      String _printMarker_1 = IResourcesSetupUtil.printMarker(((IMarker[])Conversions.unwrapArray(secondFileMarkers, IMarker.class)));
-      int _length_1 = ((Object[])Conversions.unwrapArray(secondFileMarkers, Object.class)).length;
-      Assert.assertEquals(_printMarker_1, 1, _length_1);
-      IMarker _head_1 = IterableExtensions.<IMarker>head(secondFileMarkers);
-      Object _attribute_1 = _head_1.getAttribute(IMarker.MESSAGE);
-      Assert.assertEquals("The type A is already defined in A.xtend.", _attribute_1);
+      Assert.assertEquals(IResourcesSetupUtil.printMarker(firstFileMarkers), 1, firstFileMarkers.length);
+      Assert.assertEquals("The type A is already defined in B.xtend.", IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(firstFileMarkers))).getAttribute(IMarker.MESSAGE));
+      final Iterable<IMarker> secondFileMarkers = this.onlyErrors(((Iterable<IMarker>)Conversions.doWrapArray(secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE))));
+      Assert.assertEquals(IResourcesSetupUtil.printMarker(((IMarker[])Conversions.unwrapArray(secondFileMarkers, IMarker.class))), 1, ((Object[])Conversions.unwrapArray(secondFileMarkers, Object.class)).length);
+      Assert.assertEquals("The type A is already defined in A.xtend.", IterableExtensions.<IMarker>head(secondFileMarkers).getAttribute(IMarker.MESSAGE));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -101,16 +91,11 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("second.p384008/src/acme/B.xtend", _builder_1.toString());
-      Map<String, String> _emptyStringMap = UniqueClassNameValidatorUITest.emptyStringMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap, null);
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
       final IMarker[] firstFileMarkers = firstFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      String _printMarker = IResourcesSetupUtil.printMarker(firstFileMarkers);
-      int _length = firstFileMarkers.length;
-      Assert.assertEquals(_printMarker, 0, _length);
+      Assert.assertEquals(IResourcesSetupUtil.printMarker(firstFileMarkers), 0, firstFileMarkers.length);
       final IMarker[] secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      String _printMarker_1 = IResourcesSetupUtil.printMarker(secondFileMarkers);
-      int _length_1 = secondFileMarkers.length;
-      Assert.assertEquals(_printMarker_1, 0, _length_1);
+      Assert.assertEquals(IResourcesSetupUtil.printMarker(secondFileMarkers), 0, secondFileMarkers.length);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -135,18 +120,11 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("first.p384008/src/acme/B.xtend", _builder_1.toString());
-      Map<String, String> _emptyStringMap = UniqueClassNameValidatorUITest.emptyStringMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap, null);
-      Map<String, String> _emptyStringMap_1 = UniqueClassNameValidatorUITest.emptyStringMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyStringMap_1, null);
-      IMarker[] _findMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      final Iterable<IMarker> secondFileMarkers = this.onlyErrors(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers)));
-      String _printMarker = IResourcesSetupUtil.printMarker(((IMarker[])Conversions.unwrapArray(secondFileMarkers, IMarker.class)));
-      int _length = ((Object[])Conversions.unwrapArray(secondFileMarkers, Object.class)).length;
-      Assert.assertEquals(_printMarker, 1, _length);
-      IMarker _head = IterableExtensions.<IMarker>head(secondFileMarkers);
-      Object _attribute = _head.getAttribute(IMarker.MESSAGE);
-      Assert.assertEquals("The type A is already defined in A.java.", _attribute);
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      final Iterable<IMarker> secondFileMarkers = this.onlyErrors(((Iterable<IMarker>)Conversions.doWrapArray(secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE))));
+      Assert.assertEquals(IResourcesSetupUtil.printMarker(((IMarker[])Conversions.unwrapArray(secondFileMarkers, IMarker.class))), 1, ((Object[])Conversions.unwrapArray(secondFileMarkers, Object.class)).length);
+      Assert.assertEquals("The type A is already defined in A.java.", IterableExtensions.<IMarker>head(secondFileMarkers).getAttribute(IMarker.MESSAGE));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -171,14 +149,10 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("second.p384008/src/acme/B.xtend", _builder_1.toString());
-      Map<String, String> _emptyStringMap = UniqueClassNameValidatorUITest.emptyStringMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap, null);
-      Map<String, String> _emptyStringMap_1 = UniqueClassNameValidatorUITest.emptyStringMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyStringMap_1, null);
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
       final IMarker[] secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      String _printMarker = IResourcesSetupUtil.printMarker(secondFileMarkers);
-      int _length = secondFileMarkers.length;
-      Assert.assertEquals(_printMarker, 0, _length);
+      Assert.assertEquals(IResourcesSetupUtil.printMarker(secondFileMarkers), 0, secondFileMarkers.length);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -196,8 +170,7 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       final IFile firstFile = IResourcesSetupUtil.createFile("first.p384008/src/acme/B.xtend", _builder.toString());
-      Map<String, String> _emptyStringMap = UniqueClassNameValidatorUITest.emptyStringMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap, null);
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package acme;");
       _builder_1.newLine();
@@ -206,23 +179,15 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile javaFile = IResourcesSetupUtil.createFile("first.p384008/src/acme/A.java", _builder_1.toString());
-      Map<String, String> _emptyStringMap_1 = UniqueClassNameValidatorUITest.emptyStringMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyStringMap_1, null);
-      Map<String, String> _emptyStringMap_2 = UniqueClassNameValidatorUITest.emptyStringMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap_2, null);
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
       StringInputStream _stringInputStream = new StringInputStream("package acme; class A{}");
       javaFile.setContents(_stringInputStream, false, false, null);
-      Map<String, String> _emptyStringMap_3 = UniqueClassNameValidatorUITest.emptyStringMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyStringMap_3, null);
-      Map<String, String> _emptyStringMap_4 = UniqueClassNameValidatorUITest.emptyStringMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap_4, null);
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
       final IMarker[] markers = firstFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      String _printMarker = IResourcesSetupUtil.printMarker(markers);
-      int _length = markers.length;
-      Assert.assertEquals(_printMarker, 1, _length);
-      IMarker _head = IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(markers)));
-      Object _attribute = _head.getAttribute(IMarker.MESSAGE);
-      Assert.assertEquals("The type A is already defined in A.java.", _attribute);
+      Assert.assertEquals(IResourcesSetupUtil.printMarker(markers), 1, markers.length);
+      Assert.assertEquals("The type A is already defined in A.java.", IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(markers))).getAttribute(IMarker.MESSAGE));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -248,10 +213,8 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("first.p384008");
-    this.first = _createPluginProject;
-    IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("second.p384008");
-    this.second = _createPluginProject_1;
+    this.first = WorkbenchTestHelper.createPluginProject("first.p384008");
+    this.second = WorkbenchTestHelper.createPluginProject("second.p384008");
     IResourcesSetupUtil.setReference(this.second, this.first);
   }
   

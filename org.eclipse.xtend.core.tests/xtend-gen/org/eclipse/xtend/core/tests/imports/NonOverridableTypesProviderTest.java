@@ -1,7 +1,6 @@
 package org.eclipse.xtend.core.tests.imports;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -54,8 +53,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertNotInScope("MiddleClass.InnerMostClass", inferredType);
       this.assertNotInScope("OuterClass", inferredType);
       this.assertNotInScope("PrivateMiddleClass", inferredType);
-      EList<XtendMember> _members = xtendClass.getMembers();
-      final XtendMember method = _members.get(0);
+      final XtendMember method = xtendClass.getMembers().get(0);
       final JvmOperation operation = this.associations.getDirectlyInferredOperation(((XtendFunction) method));
       this.assertTypeInScope("Foo", operation);
       this.assertTypeInScope("MiddleClass", operation);
@@ -92,8 +90,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertNotInScope("MiddleClass", inferredType);
       this.assertNotInScope("OuterClass", inferredType);
       this.assertNotInScope("PrivateMiddleClass", inferredType);
-      EList<XtendMember> _members = xtendClass.getMembers();
-      final XtendMember method = _members.get(0);
+      final XtendMember method = xtendClass.getMembers().get(0);
       final JvmOperation operation = this.associations.getDirectlyInferredOperation(((XtendFunction) method));
       this.assertTypeInScope("Foo", operation);
       this.assertTypeInScope("InnerMostClass", operation);
@@ -131,8 +128,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertNotInScope("MiddleClass", inferredType);
       this.assertNotInScope("OuterClass", inferredType);
       this.assertNotInScope("PrivateMiddleClass", inferredType);
-      EList<XtendMember> _members = xtendClass.getMembers();
-      final XtendMember method = _members.get(0);
+      final XtendMember method = xtendClass.getMembers().get(0);
       final JvmOperation operation = this.associations.getDirectlyInferredOperation(((XtendFunction) method));
       this.assertTypeInScope("Foo", operation);
       this.assertTypeInScope("InnerMostClass", operation);
@@ -172,16 +168,14 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertNotInScope("MiddleClass.InnerMostClass", inferredType);
       this.assertTypeParameterInScope("T", inferredType);
       this.assertNotInScope("OuterClass", inferredType);
-      EList<XtendMember> _members = xtendClass.getMembers();
-      final XtendMember method = _members.get(0);
+      final XtendMember method = xtendClass.getMembers().get(0);
       final JvmOperation operation = this.associations.getDirectlyInferredOperation(((XtendFunction) method));
       this.assertTypeInScope("Foo", operation);
       this.assertTypeParameterInScope("MiddleClass", operation);
       this.assertTypeParameterInScope("T", operation);
       this.assertNotInScope("MiddleClass.InnerMostClass", operation);
       this.assertNotInScope("OuterClass", operation);
-      EList<XtendMember> _members_1 = xtendClass.getMembers();
-      final XtendMember method2 = _members_1.get(0);
+      final XtendMember method2 = xtendClass.getMembers().get(0);
       final JvmOperation operation2 = this.associations.getDirectlyInferredOperation(((XtendFunction) method2));
       this.assertTypeInScope("Foo", operation2);
       this.assertTypeParameterInScope("MiddleClass", operation2);
@@ -221,8 +215,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertNotInScope("OuterClass.MiddleClass", inferredType);
       this.assertNotInScope("MiddleClass", inferredType);
       this.assertNotInScope("OuterClass", inferredType);
-      EList<XtendMember> _members = xtendClass.getMembers();
-      final XtendMember method = _members.get(0);
+      final XtendMember method = xtendClass.getMembers().get(0);
       final JvmOperation operation = this.associations.getDirectlyInferredOperation(((XtendFunction) method));
       this.assertTypeInScope("Foo", operation);
       this.assertTypeParameterInScope("InnerMostClass", operation);
@@ -230,8 +223,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertNotInScope("OuterClass.MiddleClass", operation);
       this.assertNotInScope("MiddleClass", operation);
       this.assertNotInScope("OuterClass", operation);
-      EList<XtendMember> _members_1 = xtendClass.getMembers();
-      final XtendMember method2 = _members_1.get(0);
+      final XtendMember method2 = xtendClass.getMembers().get(0);
       final JvmOperation operation2 = this.associations.getDirectlyInferredOperation(((XtendFunction) method2));
       this.assertTypeInScope("Foo", operation2);
       this.assertTypeInScope("InnerMostClass", operation2);
@@ -272,8 +264,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertNotInScope("OuterClass.MiddleClass", inferredType);
       this.assertNotInScope("MiddleClass", inferredType);
       this.assertNotInScope("OuterClass", inferredType);
-      EList<XtendMember> _members = xtendClass.getMembers();
-      final XtendMember method = _members.get(0);
+      final XtendMember method = xtendClass.getMembers().get(0);
       final JvmOperation operation = this.associations.getDirectlyInferredOperation(((XtendFunction) method));
       this.assertTypeInScope("Foo", operation);
       this.assertTypeParameterInScope("InnerMostClass", operation);
@@ -281,8 +272,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertNotInScope("OuterClass.MiddleClass", operation);
       this.assertNotInScope("MiddleClass", operation);
       this.assertNotInScope("OuterClass", operation);
-      EList<XtendMember> _members_1 = xtendClass.getMembers();
-      final XtendMember method2 = _members_1.get(0);
+      final XtendMember method2 = xtendClass.getMembers().get(0);
       final JvmOperation operation2 = this.associations.getDirectlyInferredOperation(((XtendFunction) method2));
       this.assertTypeInScope("Foo", operation2);
       this.assertTypeInScope("InnerMostClass", operation2);

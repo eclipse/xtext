@@ -13,7 +13,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,6 @@ import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -100,8 +98,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
    */
   public static class VisibleFieldsCollector {
     public void collect(final JvmDeclaredType type, final Map<String, JvmIdentifiableElement> result) {
-      HashSet<JvmType> _newHashSet = CollectionLiterals.<JvmType>newHashSet();
-      this.collect(type, _newHashSet, result);
+      this.collect(type, CollectionLiterals.<JvmType>newHashSet(), result);
     }
     
     private void collect(final JvmDeclaredType type, final Set<JvmType> seen, final Map<String, JvmIdentifiableElement> result) {
@@ -111,11 +108,9 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         for (final JvmMember member : _members) {
           if ((member instanceof JvmField)) {
             if ((((JvmField)member).isFinal() && ((JvmField)member).isStatic())) {
-              String _simpleName = ((JvmField)member).getSimpleName();
-              final JvmIdentifiableElement existing = result.put(_simpleName, member);
+              final JvmIdentifiableElement existing = result.put(((JvmField)member).getSimpleName(), member);
               if ((existing != null)) {
-                String _simpleName_1 = existing.getSimpleName();
-                result.put(_simpleName_1, existing);
+                result.put(existing.getSimpleName(), existing);
               }
             }
           }
@@ -208,11 +203,10 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       }
       final JvmDeclaredType container = _switchResult_1;
       Pair<String, JvmDeclaredType> _mappedTo = Pair.<String, JvmDeclaredType>of("visibleFeaturesForAnnotationValues", container);
-      Resource _eResource_1 = expression.eResource();
       final Provider<HashMap<String, JvmIdentifiableElement>> _function = () -> {
         final HashMap<String, JvmIdentifiableElement> result = CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
-        Resource _eResource_2 = expression.eResource();
-        final XImportSection section = this.importSectionLocator.getImportSection(((XtextResource) _eResource_2));
+        Resource _eResource_1 = expression.eResource();
+        final XImportSection section = this.importSectionLocator.getImportSection(((XtextResource) _eResource_1));
         if ((section != null)) {
           EList<XImportDeclaration> _importDeclarations = section.getImportDeclarations();
           for (final XImportDeclaration imp : _importDeclarations) {
@@ -231,8 +225,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
                     _matched_2=true;
                     EList<JvmEnumerationLiteral> _literals = ((JvmEnumerationType)type).getLiterals();
                     for (final JvmEnumerationLiteral feature : _literals) {
-                      String _simpleName = feature.getSimpleName();
-                      result.put(_simpleName, feature);
+                      result.put(feature.getSimpleName(), feature);
                     }
                   }
                 }
@@ -243,7 +236,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         this.collectAllVisibleFields(container, result);
         return result;
       };
-      _xblockexpression = this.cache.<HashMap<String, JvmIdentifiableElement>>get(_mappedTo, _eResource_1, _function);
+      _xblockexpression = this.cache.<HashMap<String, JvmIdentifiableElement>>get(_mappedTo, expression.eResource(), _function);
     }
     return _xblockexpression;
   }
@@ -252,16 +245,13 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     if ((type == null)) {
       return;
     }
-    JvmDeclaredType _declaringType = type.getDeclaringType();
-    this.collectAllVisibleFields(_declaringType, result);
-    HashMap<String, JvmIdentifiableElement> _allVisibleFields = this.getAllVisibleFields(type);
-    result.putAll(_allVisibleFields);
+    this.collectAllVisibleFields(type.getDeclaringType(), result);
+    result.putAll(this.getAllVisibleFields(type));
   }
   
   protected HashMap<String, JvmIdentifiableElement> getAllVisibleFields(final JvmDeclaredType type) {
     final HashMap<String, JvmIdentifiableElement> result = CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
-    ConstantExpressionsInterpreter.VisibleFieldsCollector _visibleFieldsCollector = new ConstantExpressionsInterpreter.VisibleFieldsCollector();
-    _visibleFieldsCollector.collect(type, result);
+    new ConstantExpressionsInterpreter.VisibleFieldsCollector().collect(type, result);
     return result;
   }
   
@@ -286,10 +276,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         if (_tripleEquals) {
           _xifexpression = this.numberLiterals.getJavaType(it);
         } else {
-          JvmTypeReference _expectedType_1 = ctx.getExpectedType();
-          JvmType _type = _expectedType_1.getType();
-          ClassFinder _classFinder = ctx.getClassFinder();
-          Class<?> _javaType = this.getJavaType(_type, _classFinder);
+          Class<?> _javaType = this.getJavaType(ctx.getExpectedType().getType(), ctx.getClassFinder());
           _xifexpression = ((Class<? extends Number>) _javaType);
         }
         final Class<? extends Number> type = _xifexpression;
@@ -312,25 +299,20 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         _switchResult = ((JvmGenericArrayTypeReference)exp).getComponentType();
       }
       final JvmTypeReference expectedComponentType = _switchResult;
-      EList<XExpression> _elements = it.getElements();
       final Function1<XExpression, Object> _function = (XExpression it_1) -> {
-        Context _cloneWithExpectation = ctx.cloneWithExpectation(expectedComponentType);
-        return this.evaluate(it_1, _cloneWithExpectation);
+        return this.evaluate(it_1, ctx.cloneWithExpectation(expectedComponentType));
       };
-      final List<Object> elements = ListExtensions.<XExpression, Object>map(_elements, _function);
+      final List<Object> elements = ListExtensions.<XExpression, Object>map(it.getElements(), _function);
       Class<?> _xifexpression = null;
       if ((expectedComponentType != null)) {
-        JvmType _type = expectedComponentType.getType();
-        ClassFinder _classFinder = ctx.getClassFinder();
-        _xifexpression = this.getJavaType(_type, _classFinder);
+        _xifexpression = this.getJavaType(expectedComponentType.getType(), ctx.getClassFinder());
       } else {
         Class<?> _xifexpression_1 = null;
         boolean _isEmpty = elements.isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
           Class<?> _switchResult_1 = null;
-          Object _head = IterableExtensions.<Object>head(elements);
-          Class<?> _class = _head.getClass();
+          Class<?> _class = IterableExtensions.<Object>head(elements).getClass();
           final Class<?> cl = _class;
           boolean _matched_1 = false;
           if (Objects.equal(cl, Integer.class)) {
@@ -405,8 +387,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   }
   
   protected Object _internalEvaluate(final XFeatureCall it, final Context ctx) {
-    boolean _isResolveProxies = this.isResolveProxies(it);
-    Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, _isResolveProxies);
+    Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, this.isResolveProxies(it));
     final EObject feature = ((EObject) _eGet);
     boolean _eIsProxy = feature.eIsProxy();
     boolean _not = (!_eIsProxy);
@@ -481,12 +462,10 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         final JvmEnumerationType enumType = _switchResult_2;
         Map<String, JvmIdentifiableElement> _visibleFeatures = ctx.getVisibleFeatures();
         final HashMap<String, JvmIdentifiableElement> copy = new HashMap<String, JvmIdentifiableElement>(_visibleFeatures);
-        EList<JvmEnumerationLiteral> _literals = enumType.getLiterals();
         final Consumer<JvmEnumerationLiteral> _function = (JvmEnumerationLiteral it_2) -> {
-          String _simpleName = it_2.getSimpleName();
-          copy.put(_simpleName, it_2);
+          copy.put(it_2.getSimpleName(), it_2);
         };
-        _literals.forEach(_function);
+        enumType.getLiterals().forEach(_function);
         _xblockexpression = copy;
       }
       _xifexpression = _xblockexpression;
@@ -540,8 +519,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         return true;
       }
       if ((container instanceof XListLiteral)) {
-        EObject _eContainer = ((XListLiteral)container).eContainer();
-        container = _eContainer;
+        container = ((XListLiteral)container).eContainer();
         if ((container instanceof XAnnotationElementValuePair)) {
           return true;
         }
@@ -554,8 +532,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   }
   
   protected Object _internalEvaluate(final XMemberFeatureCall it, final Context ctx) {
-    boolean _isResolveProxies = this.isResolveProxies(it);
-    Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, _isResolveProxies);
+    Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, this.isResolveProxies(it));
     final EObject feature = ((EObject) _eGet);
     boolean _eIsProxy = feature.eIsProxy();
     boolean _not = (!_eIsProxy);
@@ -582,8 +559,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     }
     final String featureName = it.getConcreteSyntaxFeatureName();
     try {
-      XExpression _memberCallTarget = it.getMemberCallTarget();
-      final Object receiver = this.evaluate(_memberCallTarget, ctx);
+      final Object receiver = this.evaluate(it.getMemberCallTarget(), ctx);
       boolean _matched_1 = false;
       if (receiver instanceof JvmTypeReference) {
         _matched_1=true;
@@ -592,12 +568,11 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         boolean _matched_2 = false;
         if (type instanceof JvmEnumerationType) {
           _matched_2=true;
-          EList<JvmEnumerationLiteral> _literals = ((JvmEnumerationType)type).getLiterals();
           final Function1<JvmEnumerationLiteral, Boolean> _function = (JvmEnumerationLiteral it_1) -> {
             String _simpleName = it_1.getSimpleName();
             return Boolean.valueOf(Objects.equal(_simpleName, featureName));
           };
-          final JvmEnumerationLiteral enumValue = IterableExtensions.<JvmEnumerationLiteral>findFirst(_literals, _function);
+          final JvmEnumerationLiteral enumValue = IterableExtensions.<JvmEnumerationLiteral>findFirst(((JvmEnumerationType)type).getLiterals(), _function);
           if ((enumValue == null)) {
             String _simpleName = ((JvmTypeReference)receiver).getSimpleName();
             String _plus = ((("Couldn\'t find enum value " + featureName) + " on enum ") + _simpleName);
@@ -609,13 +584,11 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         if (!_matched_2) {
           if (type instanceof JvmGenericType) {
             _matched_2=true;
-            Iterable<JvmFeature> _allFeatures = ((JvmGenericType)type).getAllFeatures();
-            Iterable<JvmField> _filter = Iterables.<JvmField>filter(_allFeatures, JvmField.class);
             final Function1<JvmField, Boolean> _function = (JvmField it_1) -> {
               String _simpleName = it_1.getSimpleName();
               return Boolean.valueOf(Objects.equal(_simpleName, featureName));
             };
-            final JvmField field = IterableExtensions.<JvmField>findFirst(_filter, _function);
+            final JvmField field = IterableExtensions.<JvmField>findFirst(Iterables.<JvmField>filter(((JvmGenericType)type).getAllFeatures(), JvmField.class), _function);
             if ((field == null)) {
               String _simpleName = ((JvmTypeReference)receiver).getSimpleName();
               String _plus = ((("Couldn\'t find field " + featureName) + " on type ") + _simpleName);
@@ -652,8 +625,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   }
   
   protected String _getFullName(final XMemberFeatureCall call) {
-    XExpression _memberCallTarget = call.getMemberCallTarget();
-    final String prefix = this.getFullName(_memberCallTarget);
+    final String prefix = this.getFullName(call.getMemberCallTarget());
     String _concreteSyntaxFeatureName = call.getConcreteSyntaxFeatureName();
     return ((prefix + ".") + _concreteSyntaxFeatureName);
   }
@@ -668,8 +640,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       if (_isConstant) {
         return field.getConstantValue();
       } else {
-        JvmDeclaredType _declaringType = field.getDeclaringType();
-        String _simpleName = _declaringType.getSimpleName();
+        String _simpleName = field.getDeclaringType().getSimpleName();
         String _plus = ("Field " + _simpleName);
         String _plus_1 = (_plus + ".");
         String _simpleName_1 = field.getSimpleName();
@@ -679,8 +650,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       }
     }
     final XExpression expression = this.containerProvider.getAssociatedExpression(field);
-    Set<XExpression> _alreadyEvaluating = context.getAlreadyEvaluating();
-    boolean _contains = _alreadyEvaluating.contains(expression);
+    boolean _contains = context.getAlreadyEvaluating().contains(expression);
     if (_contains) {
       throw new ConstantExpressionEvaluationException("Endless recursive evaluation detected.");
     }
@@ -688,8 +658,8 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       final Map<String, JvmIdentifiableElement> visibleFeatures = this.findVisibleFeatures(expression);
       JvmTypeReference _type = field.getType();
       ClassFinder _classFinder = context.getClassFinder();
-      Set<XExpression> _alreadyEvaluating_1 = context.getAlreadyEvaluating();
-      final Context ctx = new Context(_type, _classFinder, visibleFeatures, _alreadyEvaluating_1);
+      Set<XExpression> _alreadyEvaluating = context.getAlreadyEvaluating();
+      final Context ctx = new Context(_type, _classFinder, visibleFeatures, _alreadyEvaluating);
       return this.evaluate(expression, ctx);
     } catch (final Throwable _t) {
       if (_t instanceof ConstantExpressionEvaluationException) {
@@ -708,8 +678,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       while ((t instanceof JvmArrayType)) {
         {
           dimensions = (dimensions + "[]");
-          JvmComponentType _componentType = ((JvmArrayType)t).getComponentType();
-          t = _componentType;
+          t = ((JvmArrayType)t).getComponentType();
         }
       }
       final Class<?> componentClass = this.getJavaType(t, classFinder);
@@ -728,18 +697,15 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     if ((type instanceof JvmAnnotationType)) {
       return XAnnotation.class;
     }
-    String _identifier_1 = type.getIdentifier();
-    return classFinder.forName(_identifier_1);
+    return classFinder.forName(type.getIdentifier());
   }
   
   protected void resolveType(final XAbstractFeatureCall featureCall, final JvmIdentifiableElement feature) {
-    TypeLiteralLinkingCandidateResolver _typeLiteralLinkingCandidateResolver = new TypeLiteralLinkingCandidateResolver(featureCall);
-    _typeLiteralLinkingCandidateResolver.resolveLinkingProxy(((InternalEObject) featureCall), feature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
+    new TypeLiteralLinkingCandidateResolver(featureCall).resolveLinkingProxy(((InternalEObject) featureCall), feature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
   }
   
   protected void resolveFeature(final XAbstractFeatureCall featureCall, final JvmIdentifiableElement feature) {
-    PendingLinkingCandidateResolver<XAbstractFeatureCall> _pendingLinkingCandidateResolver = new PendingLinkingCandidateResolver<XAbstractFeatureCall>(featureCall);
-    _pendingLinkingCandidateResolver.resolveLinkingProxy(((InternalEObject) featureCall), feature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
+    new PendingLinkingCandidateResolver<XAbstractFeatureCall>(featureCall).resolveLinkingProxy(((InternalEObject) featureCall), feature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
   }
   
   public Object internalEvaluate(final XExpression it, final Context ctx) {

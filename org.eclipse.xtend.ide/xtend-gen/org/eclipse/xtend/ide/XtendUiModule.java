@@ -4,11 +4,6 @@
 package org.eclipse.xtend.ide;
 
 import com.google.inject.Binder;
-import com.google.inject.binder.AnnotatedBindingBuilder;
-import com.google.inject.binder.AnnotatedConstantBindingBuilder;
-import com.google.inject.binder.ConstantBindingBuilder;
-import com.google.inject.binder.LinkedBindingBuilder;
-import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.source.IAnnotationHover;
@@ -189,34 +184,20 @@ public class XtendUiModule extends AbstractXtendUiModule {
   public void configureDebugMode(final Binder binder) {
     boolean _boolean = Boolean.getBoolean("org.eclipse.xtext.xtend.debug");
     if (_boolean) {
-      AnnotatedConstantBindingBuilder _bindConstant = binder.bindConstant();
-      Named _named = Names.named(AbstractEditStrategy.DEBUG);
-      ConstantBindingBuilder _annotatedWith = _bindConstant.annotatedWith(_named);
-      _annotatedWith.to(true);
+      binder.bindConstant().annotatedWith(Names.named(AbstractEditStrategy.DEBUG)).to(true);
     }
-    AnnotatedConstantBindingBuilder _bindConstant_1 = binder.bindConstant();
-    Named _named_1 = Names.named(XtextEditor.KEY_BINDING_SCOPE);
-    ConstantBindingBuilder _annotatedWith_1 = _bindConstant_1.annotatedWith(_named_1);
-    _annotatedWith_1.to("org.eclipse.xtend.ide.XtendEditorScope");
+    binder.bindConstant().annotatedWith(Names.named(XtextEditor.KEY_BINDING_SCOPE)).to("org.eclipse.xtend.ide.XtendEditorScope");
   }
   
   public void configureOverrideIndicatorSupport(final Binder binder) {
-    AnnotatedBindingBuilder<IXtextEditorCallback> _bind = binder.<IXtextEditorCallback>bind(IXtextEditorCallback.class);
-    Named _named = Names.named("OverrideIndicatorModelListener");
-    LinkedBindingBuilder<IXtextEditorCallback> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(OverrideIndicatorModelListener.class);
-    AnnotatedBindingBuilder<IActionContributor> _bind_1 = binder.<IActionContributor>bind(IActionContributor.class);
-    Named _named_1 = Names.named("OverrideIndicatorRulerAction");
-    LinkedBindingBuilder<IActionContributor> _annotatedWith_1 = _bind_1.annotatedWith(_named_1);
-    _annotatedWith_1.to(
+    binder.<IXtextEditorCallback>bind(IXtextEditorCallback.class).annotatedWith(Names.named("OverrideIndicatorModelListener")).to(OverrideIndicatorModelListener.class);
+    binder.<IActionContributor>bind(IActionContributor.class).annotatedWith(Names.named("OverrideIndicatorRulerAction")).to(
       OverrideIndicatorRulerAction.class);
   }
   
   @Override
   public void configureHyperlinkLabelProvider(final Binder binder) {
-    AnnotatedBindingBuilder<ILabelProvider> _bind = binder.<ILabelProvider>bind(ILabelProvider.class);
-    LinkedBindingBuilder<ILabelProvider> _annotatedWith = _bind.annotatedWith(HyperlinkLabelProvider.class);
-    _annotatedWith.to(
+    binder.<ILabelProvider>bind(ILabelProvider.class).annotatedWith(HyperlinkLabelProvider.class).to(
       HyperLinkingLabelProvider.class);
   }
   
@@ -255,10 +236,7 @@ public class XtendUiModule extends AbstractXtendUiModule {
   }
   
   public void configureIShowWhitespaceCharactersActionContributor(final Binder binder) {
-    AnnotatedBindingBuilder<IActionContributor> _bind = binder.<IActionContributor>bind(IActionContributor.class);
-    Named _named = Names.named("Show Whitespace");
-    LinkedBindingBuilder<IActionContributor> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(ShowWhitespaceCharactersActionContributor.class);
+    binder.<IActionContributor>bind(IActionContributor.class).annotatedWith(Names.named("Show Whitespace")).to(ShowWhitespaceCharactersActionContributor.class);
   }
   
   public Class<? extends DoubleClickStrategyProvider> bindDoubleClickStrategyProvider() {
@@ -345,10 +323,7 @@ public class XtendUiModule extends AbstractXtendUiModule {
   
   @Override
   public void configureIPreferenceStoreInitializer(final Binder binder) {
-    AnnotatedBindingBuilder<IPreferenceStoreInitializer> _bind = binder.<IPreferenceStoreInitializer>bind(IPreferenceStoreInitializer.class);
-    Named _named = Names.named("RefactoringPreferences");
-    LinkedBindingBuilder<IPreferenceStoreInitializer> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(XtendRefactoringPreferences.Initializer.class);
+    binder.<IPreferenceStoreInitializer>bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("RefactoringPreferences")).to(XtendRefactoringPreferences.Initializer.class);
   }
   
   @Override
@@ -372,9 +347,7 @@ public class XtendUiModule extends AbstractXtendUiModule {
   
   @Override
   public void configureJvmMemberRenameStrategy$Provider$Delegate(final Binder binder) {
-    AnnotatedBindingBuilder<IRenameStrategy.Provider> _bind = binder.<IRenameStrategy.Provider>bind(IRenameStrategy.Provider.class);
-    LinkedBindingBuilder<IRenameStrategy.Provider> _annotatedWith = _bind.annotatedWith(JvmMemberRenameStrategy.Provider.Delegate.class);
-    _annotatedWith.to(XtendRenameStrategyProvider.class);
+    binder.<IRenameStrategy.Provider>bind(IRenameStrategy.Provider.class).annotatedWith(JvmMemberRenameStrategy.Provider.Delegate.class).to(XtendRenameStrategyProvider.class);
   }
   
   public Class<? extends JdtRenameRefactoringParticipantProcessor> bindJdtRenameRefactoringParticipantProcessor() {
@@ -409,10 +382,7 @@ public class XtendUiModule extends AbstractXtendUiModule {
   }
   
   public void configureFilterSyntheticMembersContribution(final Binder binder) {
-    AnnotatedBindingBuilder<IOutlineContribution> _bind = binder.<IOutlineContribution>bind(IOutlineContribution.class);
-    Named _named = Names.named("FilterSyntheticsContribution");
-    LinkedBindingBuilder<IOutlineContribution> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(
+    binder.<IOutlineContribution>bind(IOutlineContribution.class).annotatedWith(Names.named("FilterSyntheticsContribution")).to(
       ShowSyntheticMembersContribution.class);
   }
   
@@ -429,10 +399,7 @@ public class XtendUiModule extends AbstractXtendUiModule {
   
   @Override
   public void configureSmartCaretPreferenceInitializer(final Binder binder) {
-    AnnotatedBindingBuilder<IPreferenceStoreInitializer> _bind = binder.<IPreferenceStoreInitializer>bind(IPreferenceStoreInitializer.class);
-    Named _named = Names.named("smartCaretPreferenceInitializer");
-    LinkedBindingBuilder<IPreferenceStoreInitializer> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(XtendPreferenceStoreInitializer.class);
+    binder.<IPreferenceStoreInitializer>bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("smartCaretPreferenceInitializer")).to(XtendPreferenceStoreInitializer.class);
   }
   
   public Class<? extends IssueSeveritiesProvider> bindIssueSeverityServiceProvider() {
@@ -502,20 +469,13 @@ public class XtendUiModule extends AbstractXtendUiModule {
   
   @Override
   public void configureContentAssistLexerProvider(final Binder binder) {
-    AnnotatedBindingBuilder<InternalXtendLexer> _bind = binder.<InternalXtendLexer>bind(InternalXtendLexer.class);
-    LexerProvider<DisabledInternalLexer> _create = LexerProvider.<DisabledInternalLexer>create(DisabledInternalLexer.class);
-    _bind.toProvider(_create);
-    AnnotatedBindingBuilder<DisabledInternalLexer> _bind_1 = binder.<DisabledInternalLexer>bind(DisabledInternalLexer.class);
-    LexerProvider<DisabledInternalLexer> _create_1 = LexerProvider.<DisabledInternalLexer>create(DisabledInternalLexer.class);
-    _bind_1.toProvider(_create_1);
+    binder.<InternalXtendLexer>bind(InternalXtendLexer.class).toProvider(LexerProvider.<DisabledInternalLexer>create(DisabledInternalLexer.class));
+    binder.<DisabledInternalLexer>bind(DisabledInternalLexer.class).toProvider(LexerProvider.<DisabledInternalLexer>create(DisabledInternalLexer.class));
   }
   
   @Override
   public void configureContentAssistLexer(final Binder binder) {
-    AnnotatedBindingBuilder<Lexer> _bind = binder.<Lexer>bind(Lexer.class);
-    Named _named = Names.named(LexerIdeBindings.CONTENT_ASSIST);
-    LinkedBindingBuilder<Lexer> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(DisabledInternalLexer.class);
+    binder.<Lexer>bind(Lexer.class).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(DisabledInternalLexer.class);
   }
   
   @Override
@@ -554,17 +514,11 @@ public class XtendUiModule extends AbstractXtendUiModule {
   }
   
   public void configureSwitchOutlineModeContribution(final Binder binder) {
-    AnnotatedBindingBuilder<IOutlineContribution> _bind = binder.<IOutlineContribution>bind(IOutlineContribution.class);
-    Named _named = Names.named("SwitchOutlineModeContribution");
-    LinkedBindingBuilder<IOutlineContribution> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(SwitchOutlineModeContribution.class);
+    binder.<IOutlineContribution>bind(IOutlineContribution.class).annotatedWith(Names.named("SwitchOutlineModeContribution")).to(SwitchOutlineModeContribution.class);
   }
   
   public void configureSwitchQuickOutlineModeContribution(final Binder binder) {
-    AnnotatedBindingBuilder<IQuickOutlineContribution> _bind = binder.<IQuickOutlineContribution>bind(IQuickOutlineContribution.class);
-    Named _named = Names.named("SwitchQuickOutlineModeContribution");
-    LinkedBindingBuilder<IQuickOutlineContribution> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(SwitchOutlineModeContribution.class);
+    binder.<IQuickOutlineContribution>bind(IQuickOutlineContribution.class).annotatedWith(Names.named("SwitchQuickOutlineModeContribution")).to(SwitchOutlineModeContribution.class);
   }
   
   @SingletonBinding(eager = true)

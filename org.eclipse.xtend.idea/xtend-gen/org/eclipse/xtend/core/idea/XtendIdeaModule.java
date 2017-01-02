@@ -8,9 +8,6 @@
 package org.eclipse.xtend.core.idea;
 
 import com.google.inject.Binder;
-import com.google.inject.binder.AnnotatedBindingBuilder;
-import com.google.inject.binder.LinkedBindingBuilder;
-import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.util.Key;
@@ -72,20 +69,13 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
   }
   
   public void configureContentAssistLexerProvider(final Binder binder) {
-    AnnotatedBindingBuilder<InternalXtendLexer> _bind = binder.<InternalXtendLexer>bind(InternalXtendLexer.class);
-    LexerProvider<DisabledInternalLexer> _create = LexerProvider.<DisabledInternalLexer>create(DisabledInternalLexer.class);
-    _bind.toProvider(_create);
-    AnnotatedBindingBuilder<DisabledInternalLexer> _bind_1 = binder.<DisabledInternalLexer>bind(DisabledInternalLexer.class);
-    LexerProvider<DisabledInternalLexer> _create_1 = LexerProvider.<DisabledInternalLexer>create(DisabledInternalLexer.class);
-    _bind_1.toProvider(_create_1);
+    binder.<InternalXtendLexer>bind(InternalXtendLexer.class).toProvider(LexerProvider.<DisabledInternalLexer>create(DisabledInternalLexer.class));
+    binder.<DisabledInternalLexer>bind(DisabledInternalLexer.class).toProvider(LexerProvider.<DisabledInternalLexer>create(DisabledInternalLexer.class));
   }
   
   @Override
   public void configureContentAssistLexer(final Binder binder) {
-    AnnotatedBindingBuilder<Lexer> _bind = binder.<Lexer>bind(Lexer.class);
-    Named _named = Names.named(LexerIdeBindings.CONTENT_ASSIST);
-    LinkedBindingBuilder<Lexer> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(DisabledInternalLexer.class);
+    binder.<Lexer>bind(Lexer.class).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(DisabledInternalLexer.class);
   }
   
   public Class<? extends ContentAssistContextFactory> bindContentAssistContextFactory() {
@@ -126,10 +116,7 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
   
   @Override
   public void configureGlobalModificationTracker(final Binder binder) {
-    AnnotatedBindingBuilder<Key> _bind = binder.<Key>bind(Key.class);
-    Named _named = Names.named(BaseXtextFile.GLOBAL_MODIFICATION_COUNT);
-    LinkedBindingBuilder<Key> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.toInstance(
+    binder.<Key>bind(Key.class).annotatedWith(Names.named(BaseXtextFile.GLOBAL_MODIFICATION_COUNT)).toInstance(
       PsiModificationTracker.JAVA_STRUCTURE_MODIFICATION_COUNT);
   }
   

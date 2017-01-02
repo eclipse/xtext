@@ -7,17 +7,8 @@
  */
 package org.eclipse.xtend.idea.imports;
 
-import com.intellij.openapi.application.Application;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.command.CommandProcessor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiFile;
-import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.idea.imports.XImportSectionOptimizer;
-import org.junit.Assert;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -94,25 +85,28 @@ public class ImportOptimizerTest extends LightXtendTest {
   }
   
   public void assertAfterOptimizeImports(final CharSequence before, final String expected) {
-    String _string = before.toString();
-    final PsiFile file = this.myFixture.addFileToProject("MyClass.xtend", _string);
-    XImportSectionOptimizer _instance = XtendLanguage.INSTANCE.<XImportSectionOptimizer>getInstance(XImportSectionOptimizer.class);
-    final Runnable runnable = _instance.processFile(file);
-    CommandProcessor _instance_1 = CommandProcessor.getInstance();
-    Project _project = this.getProject();
-    final Runnable _function = () -> {
-      Application _application = ApplicationManager.getApplication();
-      final Runnable _function_1 = () -> {
-        runnable.run();
-      };
-      _application.runWriteAction(_function_1);
-      Project _project_1 = this.getProject();
-      PsiDocumentManager _instance_2 = PsiDocumentManager.getInstance(_project_1);
-      _instance_2.commitAllDocuments();
-    };
-    _instance_1.executeCommand(_project, _function, "", "");
-    String _string_1 = expected.toString();
-    String _text = file.getText();
-    Assert.assertEquals(_string_1, _text);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method or field XtendLanguage is undefined"
+      + "\nThe method or field XImportSectionOptimizer is undefined"
+      + "\nThe method or field CommandProcessor is undefined"
+      + "\nThe method or field project is undefined"
+      + "\nThe method or field ApplicationManager is undefined"
+      + "\nThe method or field PsiDocumentManager is undefined"
+      + "\nThe method getProject() is undefined"
+      + "\nThe method or field Assert is undefined"
+      + "\naddFileToProject cannot be resolved"
+      + "\nINSTANCE cannot be resolved"
+      + "\ngetInstance cannot be resolved"
+      + "\nprocessFile cannot be resolved"
+      + "\ninstance cannot be resolved"
+      + "\nexecuteCommand cannot be resolved"
+      + "\napplication cannot be resolved"
+      + "\nrunWriteAction cannot be resolved"
+      + "\nrun cannot be resolved"
+      + "\ngetInstance cannot be resolved"
+      + "\ncommitAllDocuments cannot be resolved"
+      + "\nassertEquals cannot be resolved"
+      + "\ngetText cannot be resolved");
   }
 }

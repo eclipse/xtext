@@ -10,8 +10,6 @@ package org.eclipse.xtend.ide.tests.compiler;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.ui.texteditor.MarkerUtilities;
@@ -453,9 +451,7 @@ public class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITe
   
   public void assertNoErrorsInWorkspace() {
     try {
-      IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-      IWorkspaceRoot _root = _workspace.getRoot();
-      final IMarker[] findMarkers = _root.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      final IMarker[] findMarkers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       for (final IMarker iMarker : findMarkers) {
         String _message = MarkerUtilities.getMessage(iMarker);
         int _severity = MarkerUtilities.getSeverity(iMarker);

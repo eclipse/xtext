@@ -73,9 +73,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
   
   public void runConverter() {
     try {
-      File _file = new File("");
-      File _absoluteFile = _file.getAbsoluteFile();
-      File _parentFile = _absoluteFile.getParentFile();
+      File _parentFile = new File("").getAbsoluteFile().getParentFile();
       final File srcProjectRoot = new File(_parentFile, this.sourceProject);
       File _parentFile_1 = srcProjectRoot.getParentFile();
       final File testProject = new File(_parentFile_1, this.targetProject);
@@ -101,17 +99,12 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         {
           String _fileString = uri.toFileString();
           final File file = new File(_fileString);
-          String _fileString_1 = uri.toFileString();
-          String _absolutePath_1 = srcProjectRoot.getAbsolutePath();
-          final String javaFileProjRelPath = _fileString_1.replace(_absolutePath_1, "");
+          final String javaFileProjRelPath = uri.toFileString().replace(srcProjectRoot.getAbsolutePath(), "");
           InputOutput.<String>println(("Converting: " + javaFileProjRelPath));
           boolean compileError = false;
-          Charset _defaultCharset = Charset.defaultCharset();
-          final String javaCode = Files.toString(file, _defaultCharset);
-          String _name = file.getName();
-          final JavaConverter.ConversionResult xtendResult = this.converToXtend(_name, javaCode);
-          Iterable<String> _problems = xtendResult.getProblems();
-          final int knownProblemsFound = IterableExtensions.size(_problems);
+          final String javaCode = Files.toString(file, Charset.defaultCharset());
+          final JavaConverter.ConversionResult xtendResult = this.converToXtend(file.getName(), javaCode);
+          final int knownProblemsFound = IterableExtensions.size(xtendResult.getProblems());
           String xtendCode = xtendResult.getXtendCode();
           String fileName = (javaFileProjRelPath + ".xtend");
           try {
@@ -140,8 +133,8 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
               errors++;
             }
           }
-          int _problems_1 = problems;
-          problems = (_problems_1 + knownProblemsFound);
+          int _problems = problems;
+          problems = (_problems + knownProblemsFound);
           files++;
           this.writeToFile(testProject, fileName, xtendCode);
         }
@@ -178,19 +171,15 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
     try {
       final JavaConverter j2x = this.javaConverter.get();
       JavaConverter.ConversionResult result = j2x.toXtend(unitName, javaCode);
-      Iterable<String> _problems = result.getProblems();
-      int _size = IterableExtensions.size(_problems);
+      int _size = IterableExtensions.size(result.getProblems());
       boolean _equals = (_size == 0);
       if (_equals) {
         try {
-          String _xtendCode = result.getXtendCode();
-          this.file(_xtendCode, true);
+          this.file(result.getXtendCode(), true);
         } catch (final Throwable _t) {
           if (_t instanceof AssertionError) {
             final AssertionError error = (AssertionError)_t;
-            JavaConverter _useRobustSyntax = j2x.useRobustSyntax();
-            JavaConverter.ConversionResult _xtend = _useRobustSyntax.toXtend(unitName, javaCode);
-            result = _xtend;
+            result = j2x.useRobustSyntax().toXtend(unitName, javaCode);
           } else {
             throw Exceptions.sneakyThrow(_t);
           }
@@ -215,8 +204,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         Files.createParentDirs(targetFile);
         targetFile.createNewFile();
       }
-      Charset _defaultCharset = Charset.defaultCharset();
-      Files.write(content, targetFile, _defaultCharset);
+      Files.write(content, targetFile, Charset.defaultCharset());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

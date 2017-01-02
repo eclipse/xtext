@@ -8,22 +8,16 @@
 package org.eclipse.xtend.ide.tests;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.RefactoringTestParameters;
@@ -60,10 +54,7 @@ public abstract class AbstractRefactoringSwtBotTest {
       UIThreadRunnable.syncExec(new VoidResult() {
         @Override
         public void run() {
-          IWorkbench _workbench = PlatformUI.getWorkbench();
-          IWorkbenchWindow _activeWorkbenchWindow = _workbench.getActiveWorkbenchWindow();
-          Shell _shell = _activeWorkbenchWindow.getShell();
-          _shell.forceActive();
+          PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().forceActive();
         }
       });
       SwtBotProjectHelper.newXtendProject(AbstractRefactoringSwtBotTest.bot, "test");
@@ -92,21 +83,18 @@ public abstract class AbstractRefactoringSwtBotTest {
   
   @Before
   public void setUp() {
-    XtendActivator _instance = XtendActivator.getInstance();
-    Injector _injector = _instance.getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND);
-    _injector.injectMembers(this);
+    XtendActivator.getInstance().getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND).injectMembers(this);
     AbstractRefactoringSwtBotTest.bot.closeAllEditors();
     SwtBotProjectHelper.clearSourceFolderContents(AbstractRefactoringSwtBotTest.bot);
   }
   
   @After
   public void tearDown() {
-    Display _default = Display.getDefault();
     final Runnable _function = () -> {
       this.preferences.setUseInlineRefactoring(true);
       this.preferences.setSaveAllBeforeRefactoring(true);
     };
-    _default.syncExec(_function);
+    Display.getDefault().syncExec(_function);
   }
   
   public AbstractRefactoringSwtBotTest() {
@@ -121,14 +109,11 @@ public abstract class AbstractRefactoringSwtBotTest {
   @Inject
   public void initialize(final RefactoringPreferences preferences) {
     this.preferences = preferences;
-    Display _default = Display.getDefault();
     final Runnable _function = () -> {
-      boolean _isUseInlineRefactoring = this.testParams.isUseInlineRefactoring();
-      preferences.setUseInlineRefactoring(_isUseInlineRefactoring);
-      boolean _isSaveAllBeforeRefactoring = this.testParams.isSaveAllBeforeRefactoring();
-      preferences.setSaveAllBeforeRefactoring(_isSaveAllBeforeRefactoring);
+      preferences.setUseInlineRefactoring(this.testParams.isUseInlineRefactoring());
+      preferences.setSaveAllBeforeRefactoring(this.testParams.isSaveAllBeforeRefactoring());
     };
-    _default.syncExec(_function);
+    Display.getDefault().syncExec(_function);
   }
   
   public void renameInXtendEditor(final SWTBotEclipseEditor xtendEditor, final String newName, final String dialogName) {
@@ -141,28 +126,21 @@ public abstract class AbstractRefactoringSwtBotTest {
       boolean _isUsePreview = this.testParams.isUsePreview();
       if (_isUsePreview) {
         xtendEditor.pressShortcut(SWT.CTRL, SWT.CR);
-        SWTBotShell _shell = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
-        _shell.activate();
-        SWTBotButton _button = AbstractRefactoringSwtBotTest.bot.button("OK");
-        _button.click();
+        AbstractRefactoringSwtBotTest.bot.shell(dialogName).activate();
+        AbstractRefactoringSwtBotTest.bot.button("OK").click();
       } else {
-        KeyStroke _instance = KeyStroke.getInstance(SWT.LF);
-        xtendEditor.pressShortcut(_instance);
+        xtendEditor.pressShortcut(KeyStroke.getInstance(SWT.LF));
       }
     } else {
-      SWTBotShell _shell_1 = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
-      SWTBotShell _activate = _shell_1.activate();
-      SWTBot _bot = _activate.bot();
+      SWTBot _bot = AbstractRefactoringSwtBotTest.bot.shell(dialogName).activate().bot();
       final Procedure1<SWTBot> _function = (SWTBot it) -> {
         SWTBotText _textWithLabel = it.textWithLabel("New name:");
         _textWithLabel.setText(newName);
         boolean _isUsePreview_1 = this.testParams.isUsePreview();
         if (_isUsePreview_1) {
-          SWTBotButton _button_1 = it.button("Preview >");
-          _button_1.click();
+          it.button("Preview >").click();
         }
-        SWTBotButton _button_2 = it.button("OK");
-        _button_2.click();
+        it.button("OK").click();
       };
       ObjectExtensions.<SWTBot>operator_doubleArrow(_bot, _function);
     }
@@ -178,28 +156,21 @@ public abstract class AbstractRefactoringSwtBotTest {
       boolean _isUsePreview = this.testParams.isUsePreview();
       if (_isUsePreview) {
         javaEditor.pressShortcut(SWT.CTRL, SWT.CR);
-        SWTBotShell _shell = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
-        _shell.activate();
-        SWTBotButton _button = AbstractRefactoringSwtBotTest.bot.button("OK");
-        _button.click();
+        AbstractRefactoringSwtBotTest.bot.shell(dialogName).activate();
+        AbstractRefactoringSwtBotTest.bot.button("OK").click();
       } else {
-        KeyStroke _instance = KeyStroke.getInstance(SWT.LF);
-        javaEditor.pressShortcut(_instance);
+        javaEditor.pressShortcut(KeyStroke.getInstance(SWT.LF));
       }
     } else {
-      SWTBotShell _shell_1 = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
-      SWTBotShell _activate = _shell_1.activate();
-      SWTBot _bot = _activate.bot();
+      SWTBot _bot = AbstractRefactoringSwtBotTest.bot.shell(dialogName).activate().bot();
       final Procedure1<SWTBot> _function = (SWTBot it) -> {
         SWTBotText _textWithLabel = it.textWithLabel("New name:");
         _textWithLabel.setText(newName);
         boolean _isUsePreview_1 = this.testParams.isUsePreview();
         if (_isUsePreview_1) {
-          SWTBotButton _button_1 = it.button("Next");
-          _button_1.click();
+          it.button("Next").click();
         }
-        SWTBotButton _button_2 = it.button("Finish");
-        _button_2.click();
+        it.button("Finish").click();
       };
       ObjectExtensions.<SWTBot>operator_doubleArrow(_bot, _function);
     }
@@ -209,10 +180,8 @@ public abstract class AbstractRefactoringSwtBotTest {
   public void undo(final SWTBotEclipseEditor editor) {
     editor.setFocus();
     editor.pressShortcut(SWT.MOD1, 'Z');
-    SWTBotShell _shell = AbstractRefactoringSwtBotTest.bot.shell("Undo");
-    _shell.activate();
-    SWTBotButton _button = AbstractRefactoringSwtBotTest.bot.button("OK");
-    _button.click();
+    AbstractRefactoringSwtBotTest.bot.shell("Undo").activate();
+    AbstractRefactoringSwtBotTest.bot.button("OK").click();
     SWTBot _sWTBot = new SWTBot();
     WaitForRefactoringCondition _waitForRefactoringCondition = new WaitForRefactoringCondition(editor, true);
     _sWTBot.waitUntil(_waitForRefactoringCondition, 15000);
@@ -235,8 +204,6 @@ public abstract class AbstractRefactoringSwtBotTest {
   }
   
   protected void assertEquals(final CharSequence expected, final CharSequence value) {
-    String _string = expected.toString();
-    String _string_1 = value.toString();
-    Assert.assertEquals(_string, _string_1);
+    Assert.assertEquals(expected.toString(), value.toString());
   }
 }

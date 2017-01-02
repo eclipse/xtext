@@ -8,16 +8,12 @@
 package org.eclipse.xtend.ide.macro;
 
 import com.google.common.collect.Iterables;
-import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.notify.Adapter;
@@ -48,14 +44,13 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
   public Object getProcessorInstance(final JvmType type) {
     try {
       final ClassLoader classLoader = this.getClassLoader(type);
-      String _identifier = type.getIdentifier();
-      final Class<?> result = classLoader.loadClass(_identifier);
+      final Class<?> result = classLoader.loadClass(type.getIdentifier());
       return result.newInstance();
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;
-        String _identifier_1 = type.getIdentifier();
-        String _plus = ("Problem during instantiation of " + _identifier_1);
+        String _identifier = type.getIdentifier();
+        String _plus = ("Problem during instantiation of " + _identifier);
         String _plus_1 = (_plus + " : ");
         String _message = e.getMessage();
         String _plus_2 = (_plus_1 + _message);
@@ -68,33 +63,23 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
   
   @Override
   public ClassLoader getClassLoader(final EObject ctx) {
-    Resource _eResource = ctx.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
+    ResourceSet _resourceSet = ctx.eResource().getResourceSet();
     final XtextResourceSet rs = ((XtextResourceSet) _resourceSet);
-    ResourceSetContext _get = ResourceSetContext.get(rs);
-    final boolean isBuilder = _get.isBuilder();
-    ResourceSetContext _get_1 = ResourceSetContext.get(rs);
-    final boolean isEditor = _get_1.isEditor();
+    final boolean isBuilder = ResourceSetContext.get(rs).isBuilder();
+    final boolean isEditor = ResourceSetContext.get(rs).isEditor();
     if (isBuilder) {
-      EList<Adapter> _eAdapters = rs.eAdapters();
-      Iterable<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter> _filter = Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(_eAdapters, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
-      final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(_filter);
+      final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(rs.eAdapters(), ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class));
       if ((adapter != null)) {
         return adapter.getClassLoader();
       }
     }
     if (isEditor) {
-      Resource _editorResource = this.getEditorResource(ctx);
-      EList<Adapter> _eAdapters_1 = _editorResource.eAdapters();
-      Iterable<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter> _filter_1 = Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(_eAdapters_1, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
-      final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter_1 = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(_filter_1);
+      final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter_1 = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(this.getEditorResource(ctx).eAdapters(), ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class));
       if ((adapter_1 != null)) {
         ClassLoader _classLoader = adapter_1.getClassLoader();
         boolean _tripleEquals = (_classLoader == null);
         if (_tripleEquals) {
-          Resource _editorResource_1 = this.getEditorResource(ctx);
-          EList<Adapter> _eAdapters_2 = _editorResource_1.eAdapters();
-          _eAdapters_2.remove(adapter_1);
+          this.getEditorResource(ctx).eAdapters().remove(adapter_1);
         } else {
           return adapter_1.getClassLoader();
         }
@@ -104,24 +89,20 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     final IJavaProject project = ((IJavaProject) _classpathURIContext);
     final URLClassLoader classloader = this.createClassLoaderForJavaProject(project);
     if (isBuilder) {
-      EList<Adapter> _eAdapters_3 = rs.eAdapters();
+      EList<Adapter> _eAdapters = rs.eAdapters();
       ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter = new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(classloader);
-      _eAdapters_3.add(_processorClassloaderAdapter);
+      _eAdapters.add(_processorClassloaderAdapter);
     }
     if (isEditor) {
-      Resource _editorResource_2 = this.getEditorResource(ctx);
-      EList<Adapter> _eAdapters_4 = _editorResource_2.eAdapters();
+      EList<Adapter> _eAdapters_1 = this.getEditorResource(ctx).eAdapters();
       ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter_1 = new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(classloader);
-      _eAdapters_4.add(_processorClassloaderAdapter_1);
+      _eAdapters_1.add(_processorClassloaderAdapter_1);
     }
     return classloader;
   }
   
   private Resource getEditorResource(final EObject ctx) {
-    Resource _eResource = ctx.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
-    EList<Resource> _resources = _resourceSet.getResources();
-    return IterableExtensions.<Resource>head(_resources);
+    return IterableExtensions.<Resource>head(ctx.eResource().getResourceSet().getResources());
   }
   
   /**
@@ -131,17 +112,14 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
   protected URLClassLoader createClassLoaderForJavaProject(final IJavaProject projectToUse) {
     final LinkedHashSet<URL> urls = CollectionLiterals.<URL>newLinkedHashSet();
     try {
-      boolean _isOutputFolderIncluded = this.isOutputFolderIncluded();
-      HashSet<IJavaProject> _newHashSet = CollectionLiterals.<IJavaProject>newHashSet();
-      this.collectClasspathURLs(projectToUse, urls, _isOutputFolderIncluded, _newHashSet);
+      this.collectClasspathURLs(projectToUse, urls, this.isOutputFolderIncluded(), CollectionLiterals.<IJavaProject>newHashSet());
     } catch (final Throwable _t) {
       if (_t instanceof JavaModelException) {
         final JavaModelException e = (JavaModelException)_t;
         boolean _isDoesNotExist = e.isDoesNotExist();
         boolean _not = (!_isDoesNotExist);
         if (_not) {
-          String _message = e.getMessage();
-          JdtBasedProcessorProvider.LOG.error(_message, e);
+          JdtBasedProcessorProvider.LOG.error(e.getMessage(), e);
         }
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -161,12 +139,9 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
         return;
       }
       if (includeOutputFolder) {
-        IPath _outputLocation = projectToUse.getOutputLocation();
-        IPath path = _outputLocation.addTrailingSeparator();
-        String _string = path.toString();
-        URI _createPlatformResourceURI = URI.createPlatformResourceURI(_string, true);
-        String _string_1 = _createPlatformResourceURI.toString();
-        URL url = new URL(_string_1);
+        IPath path = projectToUse.getOutputLocation().addTrailingSeparator();
+        String _string = URI.createPlatformResourceURI(path.toString(), true).toString();
+        URL url = new URL(_string);
         result.add(url);
       }
       final IClasspathEntry[] resolvedClasspath = projectToUse.getResolvedClasspath(true);
@@ -179,45 +154,33 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               if (includeOutputFolder) {
                 final IPath path_1 = entry.getOutputLocation();
                 if ((path_1 != null)) {
-                  IPath _addTrailingSeparator = path_1.addTrailingSeparator();
-                  String _string_2 = _addTrailingSeparator.toString();
-                  URI _createPlatformResourceURI_1 = URI.createPlatformResourceURI(_string_2, true);
-                  String _string_3 = _createPlatformResourceURI_1.toString();
-                  URL _uRL = new URL(_string_3);
+                  String _string_1 = URI.createPlatformResourceURI(path_1.addTrailingSeparator().toString(), true).toString();
+                  URL _uRL = new URL(_string_1);
                   url_1 = _uRL;
                 }
               }
               break;
             case IClasspathEntry.CPE_PROJECT:
               IPath path_2 = entry.getPath();
-              IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot(projectToUse);
-              final IResource project = _workspaceRoot.findMember(path_2);
-              IProject _project = project.getProject();
-              final IJavaProject referencedProject = JavaCore.create(_project);
+              final IResource project = this.getWorkspaceRoot(projectToUse).findMember(path_2);
+              final IJavaProject referencedProject = JavaCore.create(project.getProject());
               this.collectClasspathURLs(referencedProject, result, true, visited);
               break;
             case IClasspathEntry.CPE_LIBRARY:
               IPath path_3 = entry.getPath();
-              IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot(projectToUse);
-              final IResource library = _workspaceRoot_1.findMember(path_3);
+              final IResource library = this.getWorkspaceRoot(projectToUse).findMember(path_3);
               URL _xifexpression = null;
               if ((library != null)) {
-                java.net.URI _rawLocationURI = library.getRawLocationURI();
-                _xifexpression = _rawLocationURI.toURL();
+                _xifexpression = library.getRawLocationURI().toURL();
               } else {
-                File _file = path_3.toFile();
-                java.net.URI _uRI = _file.toURI();
-                _xifexpression = _uRI.toURL();
+                _xifexpression = path_3.toFile().toURI().toURL();
               }
               url_1 = _xifexpression;
               break;
             default:
               {
                 IPath path_4 = entry.getPath();
-                File _file_1 = path_4.toFile();
-                java.net.URI _uRI_1 = _file_1.toURI();
-                URL _uRL_1 = _uRI_1.toURL();
-                url_1 = _uRL_1;
+                url_1 = path_4.toFile().toURI().toURL();
               }
               break;
           }
@@ -237,9 +200,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
   }
   
   private IWorkspaceRoot getWorkspaceRoot(final IJavaProject javaProject) {
-    IProject _project = javaProject.getProject();
-    IWorkspace _workspace = _project.getWorkspace();
-    return _workspace.getRoot();
+    return javaProject.getProject().getWorkspace().getRoot();
   }
   
   private final static Logger LOG = Logger.getLogger(JdtBasedProcessorProvider.class);

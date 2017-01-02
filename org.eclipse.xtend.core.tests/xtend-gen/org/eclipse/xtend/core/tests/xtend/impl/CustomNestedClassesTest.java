@@ -7,15 +7,12 @@
  */
 package org.eclipse.xtend.core.tests.xtend.impl;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.tests.xtend.impl.CustomClassesTest;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendEnum;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -33,11 +30,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     _builder.append("class C { ");
     _builder.append(string);
     _builder.append(" }");
-    XtendFile _file = this.file(_builder.toString());
-    EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
-    XtendTypeDeclaration _get = _xtendTypes.get(0);
-    EList<XtendMember> _members = _get.getMembers();
-    XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+    XtendMember _head = IterableExtensions.<XtendMember>head(this.file(_builder.toString()).getXtendTypes().get(0).getMembers());
     return ((XtendClass) _head);
   }
   
@@ -47,11 +40,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     _builder.append("class C { ");
     _builder.append(string);
     _builder.append(" }");
-    XtendFile _file = this.file(_builder.toString());
-    EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
-    XtendTypeDeclaration _get = _xtendTypes.get(0);
-    EList<XtendMember> _members = _get.getMembers();
-    XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+    XtendMember _head = IterableExtensions.<XtendMember>head(this.file(_builder.toString()).getXtendTypes().get(0).getMembers());
     return ((XtendInterface) _head);
   }
   
@@ -61,11 +50,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     _builder.append("class C { ");
     _builder.append(string);
     _builder.append(" }");
-    XtendFile _file = this.file(_builder.toString());
-    EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
-    XtendTypeDeclaration _get = _xtendTypes.get(0);
-    EList<XtendMember> _members = _get.getMembers();
-    XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+    XtendMember _head = IterableExtensions.<XtendMember>head(this.file(_builder.toString()).getXtendTypes().get(0).getMembers());
     return ((XtendEnum) _head);
   }
   
@@ -75,11 +60,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     _builder.append("class C { ");
     _builder.append(string);
     _builder.append(" }");
-    XtendFile _file = this.file(_builder.toString());
-    EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
-    XtendTypeDeclaration _get = _xtendTypes.get(0);
-    EList<XtendMember> _members = _get.getMembers();
-    XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+    XtendMember _head = IterableExtensions.<XtendMember>head(this.file(_builder.toString()).getXtendTypes().get(0).getMembers());
     return ((XtendAnnotationType) _head);
   }
   
@@ -89,14 +70,10 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("interface Foo {}");
-      XtendInterface _interfaze = this.interfaze(_builder.toString());
-      boolean _isFinal = _interfaze.isFinal();
-      Assert.assertFalse(_isFinal);
+      Assert.assertFalse(this.interfaze(_builder.toString()).isFinal());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("interface Foo {}");
-      XtendInterface _interfaze_1 = this.interfaze(_builder_1.toString());
-      boolean _isStatic = _interfaze_1.isStatic();
-      Assert.assertTrue(_isStatic);
+      Assert.assertTrue(this.interfaze(_builder_1.toString()).isStatic());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -108,14 +85,10 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("enum Foo {}");
-      XtendEnum _enumeration = this.enumeration(_builder.toString());
-      boolean _isStatic = _enumeration.isStatic();
-      Assert.assertTrue(_isStatic);
+      Assert.assertTrue(this.enumeration(_builder.toString()).isStatic());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("enum Foo {}");
-      XtendEnum _enumeration_1 = this.enumeration(_builder_1.toString());
-      boolean _isFinal = _enumeration_1.isFinal();
-      Assert.assertTrue(_isFinal);
+      Assert.assertTrue(this.enumeration(_builder_1.toString()).isFinal());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -127,14 +100,10 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("static annotation Foo {}");
-      XtendAnnotationType _annotationType = this.annotationType(_builder.toString());
-      boolean _isStatic = _annotationType.isStatic();
-      Assert.assertTrue(_isStatic);
+      Assert.assertTrue(this.annotationType(_builder.toString()).isStatic());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("final annotation Foo {}");
-      XtendAnnotationType _annotationType_1 = this.annotationType(_builder_1.toString());
-      boolean _isFinal = _annotationType_1.isFinal();
-      Assert.assertFalse(_isFinal);
+      Assert.assertFalse(this.annotationType(_builder_1.toString()).isFinal());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

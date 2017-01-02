@@ -31,10 +31,7 @@ public class Bug464136Test extends AbstractActiveAnnotationTest {
       final Function1<Problem, String> _function_1 = (Problem it_1) -> {
         return it_1.getMessage();
       };
-      List<String> _map = ListExtensions.map(problems, _function_1);
-      String _string = _map.toString();
-      int _size = problems.size();
-      Assert.assertEquals(_string, 1, _size);
+      Assert.assertEquals(ListExtensions.map(problems, _function_1).toString(), 1, problems.size());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("Error during annotation processing:");
       _builder_1.newLine();
@@ -43,10 +40,7 @@ public class Bug464136Test extends AbstractActiveAnnotationTest {
       _builder_1.append("\t");
       _builder_1.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$0(Bug464136Processor.java:21)");
       _builder_1.newLine();
-      String _string_1 = _builder_1.toString();
-      Problem _head = IterableExtensions.head(problems);
-      String _message = _head.getMessage();
-      Assert.assertEquals(_string_1, _message);
+      Assert.assertEquals(_builder_1.toString(), IterableExtensions.head(problems).getMessage());
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }

@@ -21,7 +21,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -76,8 +75,7 @@ public class ProcessorInstanceForJvmTypeProvider {
         } catch (final Throwable _t) {
           if (_t instanceof IOException) {
             final IOException e = (IOException)_t;
-            String _message = e.getMessage();
-            ProcessorInstanceForJvmTypeProvider.logger.error(_message, e);
+            ProcessorInstanceForJvmTypeProvider.logger.error(e.getMessage(), e);
           } else {
             throw Exceptions.sneakyThrow(_t);
           }
@@ -107,8 +105,7 @@ public class ProcessorInstanceForJvmTypeProvider {
       ClassLoader _classLoader = this.getClassLoader(type);
       Class<?> _loadClass = null;
       if (_classLoader!=null) {
-        String _identifier = type.getIdentifier();
-        _loadClass=_classLoader.loadClass(_identifier);
+        _loadClass=_classLoader.loadClass(type.getIdentifier());
       }
       final Class<?> loadClass = _loadClass;
       Object _newInstance = null;
@@ -119,8 +116,8 @@ public class ProcessorInstanceForJvmTypeProvider {
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;
-        String _identifier_1 = type.getIdentifier();
-        String _plus = ("Problem during instantiation of " + _identifier_1);
+        String _identifier = type.getIdentifier();
+        String _plus = ("Problem during instantiation of " + _identifier);
         String _plus_1 = (_plus + " : ");
         String _message = e.getMessage();
         String _plus_2 = (_plus_1 + _message);
@@ -132,11 +129,8 @@ public class ProcessorInstanceForJvmTypeProvider {
   }
   
   protected ClassLoader getClassLoader(final EObject ctx) {
-    Resource _eResource = ctx.eResource();
-    final ResourceSet resourceSet = _eResource.getResourceSet();
-    EList<Adapter> _eAdapters = resourceSet.eAdapters();
-    Iterable<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter> _filter = Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(_eAdapters, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
-    final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(_filter);
+    final ResourceSet resourceSet = ctx.eResource().getResourceSet();
+    final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(resourceSet.eAdapters(), ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class));
     if ((adapter != null)) {
       return adapter.getClassLoader();
     }
@@ -178,14 +172,13 @@ public class ProcessorInstanceForJvmTypeProvider {
       }
       final ClassLoader processorClassLoader = _xifexpression;
       if ((processorClassLoader != null)) {
-        EList<Adapter> _eAdapters_1 = ((XtextResourceSet)resourceSet).eAdapters();
+        EList<Adapter> _eAdapters = ((XtextResourceSet)resourceSet).eAdapters();
         ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter = new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(processorClassLoader);
-        _eAdapters_1.add(_processorClassloaderAdapter);
+        _eAdapters.add(_processorClassloaderAdapter);
         return processorClassLoader;
       }
     }
     ProcessorInstanceForJvmTypeProvider.logger.info("No class loader configured. Trying with this class classloader.");
-    Class<? extends ProcessorInstanceForJvmTypeProvider> _class = this.getClass();
-    return _class.getClassLoader();
+    return this.getClass().getClassLoader();
   }
 }

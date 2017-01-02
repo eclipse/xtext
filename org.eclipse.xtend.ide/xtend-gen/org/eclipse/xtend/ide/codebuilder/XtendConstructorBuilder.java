@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
@@ -29,20 +28,12 @@ public class XtendConstructorBuilder extends AbstractConstructorBuilder implemen
   
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
-    JvmVisibility _visibility = this.getVisibility();
-    ISourceAppender _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PUBLIC);
-    ISourceAppender _append = _appendVisibility.append("new");
-    ISourceAppender _appendParameters = this.appendParameters(_append);
-    ISourceAppender _appendThrowsClause = this.appendThrowsClause(_appendParameters);
-    return this.appendBody(_appendThrowsClause, "");
+    return this.appendBody(this.appendThrowsClause(this.appendParameters(this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.PUBLIC).append("new"))), "");
   }
   
   @Override
   public int getInsertOffset(final XtextResource resource) {
-    EObject _context = this.getContext();
-    XtendTypeDeclaration _xtendType = this.getXtendType();
-    XtendTypeDeclaration _findByFragment = this.<XtendTypeDeclaration>findByFragment(resource, _xtendType);
-    return this._insertionOffsets.getNewConstructorInsertOffset(_context, _findByFragment);
+    return this._insertionOffsets.getNewConstructorInsertOffset(this.getContext(), this.<XtendTypeDeclaration>findByFragment(resource, this.getXtendType()));
   }
   
   @Override

@@ -55,8 +55,7 @@ public class Bug458611Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("sum");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("sum");
   }
   
   @Test
@@ -96,8 +95,7 @@ public class Bug458611Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("sum");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("sum");
   }
   
   @Test
@@ -138,8 +136,7 @@ public class Bug458611Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("sum");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("sum");
   }
   
   @Test
@@ -179,7 +176,6 @@ public class Bug458611Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("sum");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("sum");
   }
 }

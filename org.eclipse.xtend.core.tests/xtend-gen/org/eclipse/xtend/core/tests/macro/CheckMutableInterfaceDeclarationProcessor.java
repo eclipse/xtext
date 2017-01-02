@@ -19,7 +19,6 @@ import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceBuildContext;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -40,8 +39,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
     for (final MutableInterfaceDeclaration annotatedTargetElement : annotatedTargetElements) {
       {
         final Procedure1<String> _function = (String identifier) -> {
-          MutableTypeParameterDeclaration _addTypeParameter = annotatedTargetElement.addTypeParameter(identifier);
-          _addTypeParameter.remove();
+          annotatedTargetElement.addTypeParameter(identifier).remove();
         };
         MutableAssert.assertValidJavaIdentifier("name", _function);
         final Procedure0 _function_1 = () -> {
@@ -52,9 +50,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
           annotatedTargetElement.addTypeParameter("T", new TypeReference[] { null });
         };
         MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "upperBounds cannot contain null", _function_2);
-        List<TypeReference> _emptyList = CollectionLiterals.<TypeReference>emptyList();
-        MutableTypeParameterDeclaration _addTypeParameter = annotatedTargetElement.addTypeParameter("T", ((TypeReference[])Conversions.unwrapArray(_emptyList, TypeReference.class)));
-        _addTypeParameter.remove();
+        annotatedTargetElement.addTypeParameter("T", ((TypeReference[])Conversions.unwrapArray(CollectionLiterals.<TypeReference>emptyList(), TypeReference.class))).remove();
         final Procedure0 _function_3 = () -> {
           annotatedTargetElement.setExtendedInterfaces(null);
         };
@@ -63,8 +59,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
           annotatedTargetElement.setExtendedInterfaces(Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList((TypeReference)null)));
         };
         MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "superinterfaces cannot contain null", _function_4);
-        List<TypeReference> _emptyList_1 = CollectionLiterals.<TypeReference>emptyList();
-        annotatedTargetElement.setExtendedInterfaces(_emptyList_1);
+        annotatedTargetElement.setExtendedInterfaces(CollectionLiterals.<TypeReference>emptyList());
         final Procedure1<AnnotationReferenceBuildContext> _function_5 = (AnnotationReferenceBuildContext it) -> {
           final Procedure0 _function_6 = () -> {
             it.set(null, null);
@@ -109,8 +104,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
           };
           MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "The annotation property \'doesNotExist\' is not declared on the annotation type \'java.lang.Deprecated\'.", _function_13);
         };
-        AnnotationReference _newAnnotationReference = context.newAnnotationReference(Deprecated.class, _function_5);
-        final AnnotationReference annotationReference = annotatedTargetElement.addAnnotation(_newAnnotationReference);
+        final AnnotationReference annotationReference = annotatedTargetElement.addAnnotation(context.newAnnotationReference(Deprecated.class, _function_5));
         annotatedTargetElement.removeAnnotation(annotationReference);
         final Procedure1<AnnotationReferenceBuildContext> _function_6 = (AnnotationReferenceBuildContext it) -> {
           String[] _xblockexpression = null;
@@ -129,27 +123,21 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
           };
           MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "int[] is not applicable at this location. Expected java.lang.String[]", _function_7);
         };
-        AnnotationReference _newAnnotationReference_1 = context.newAnnotationReference(SuppressWarnings.class, _function_6);
-        final AnnotationReference otherAnnotationReference = annotatedTargetElement.addAnnotation(_newAnnotationReference_1);
+        final AnnotationReference otherAnnotationReference = annotatedTargetElement.addAnnotation(context.newAnnotationReference(SuppressWarnings.class, _function_6));
         annotatedTargetElement.removeAnnotation(otherAnnotationReference);
         final Procedure1<AnnotationReferenceBuildContext> _function_7 = (AnnotationReferenceBuildContext it) -> {
-          TypeReference[] _newArrayOfSize = new TypeReference[0];
-          it.set("validators", _newArrayOfSize);
-          TypeReference _newTypeReference = context.newTypeReference(String.class);
-          it.set("validators", _newTypeReference);
+          it.set("validators", new TypeReference[0]);
+          it.set("validators", context.newTypeReference(String.class));
           final Procedure0 _function_8 = () -> {
-            String[] _newArrayOfSize_1 = new String[0];
-            it.set("validators", _newArrayOfSize_1);
+            it.set("validators", new String[0]);
           };
           MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "java.lang.String[] is not applicable at this location. Expected org.eclipse.xtend.lib.macro.declaration.TypeReference[]", _function_8);
           final Procedure0 _function_9 = () -> {
-            Object[] _newArrayOfSize_1 = new Object[0];
-            it.set("validators", _newArrayOfSize_1);
+            it.set("validators", new Object[0]);
           };
           MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot set annotation values of type java.lang.Object[]", _function_9);
         };
-        AnnotationReference _newAnnotationReference_2 = context.newAnnotationReference(ComposedChecks.class, _function_7);
-        final AnnotationReference composedChecksReference = annotatedTargetElement.addAnnotation(_newAnnotationReference_2);
+        final AnnotationReference composedChecksReference = annotatedTargetElement.addAnnotation(context.newAnnotationReference(ComposedChecks.class, _function_7));
         annotatedTargetElement.removeAnnotation(composedChecksReference);
       }
     }

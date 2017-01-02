@@ -2,7 +2,6 @@ package org.eclipse.xtend.ide.tests.hover;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -77,8 +76,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    String _string = _builder.toString();
-    this.testHelper.createFile(("testpackage/Extension" + XtendUnsugaredHoverTest.FILEEXTENSION), _string);
+    this.testHelper.createFile(("testpackage/Extension" + XtendUnsugaredHoverTest.FILEEXTENSION), _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package testpackage;");
     _builder_1.newLine();
@@ -95,8 +93,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.newLine();
-    String _string_1 = _builder_1.toString();
-    this.testHelper.createFile("testpackage/ExtensionJava.java", _string_1);
+    this.testHelper.createFile("testpackage/ExtensionJava.java", _builder_1.toString());
     IResourcesSetupUtil.waitForBuild();
   }
   
@@ -134,21 +131,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("this._extension.bar(it, 42)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("this._extension.bar(it, 42)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -176,21 +166,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("this._extension.bar(it, 42)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("this._extension.bar(it, 42)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -221,21 +204,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(1);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("this._extension.bar(it, 42 + a)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(1);
+    Assert.assertEquals("this._extension.bar(it, 42 + a)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -263,21 +239,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("this._extension.bar(it, 40 + 2)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("this._extension.bar(it, 40 + 2)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -307,21 +276,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("this._extension.bar(new ArrayList<String>(), 42)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("this._extension.bar(new ArrayList<String>(), 42)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -351,21 +313,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("this._extension.bar(new ArrayList<String>(), 42)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("this._extension.bar(new ArrayList<String>(), 42)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -401,19 +356,13 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
+    final XExpression call = block.getExpressions().get(0);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("this._extension.barCharSequence(42, ");
     _builder_1.append("\'\'\'");
@@ -422,9 +371,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder_1.append("Test");
     _builder_1.append("\'\'\'");
     _builder_1.append(")");
-    String _string_1 = _builder_1.toString();
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals(_string_1, _computeUnsugaredExpression);
+    Assert.assertEquals(_builder_1.toString(), this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -454,21 +401,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("this._extension.bar(it, 42)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("this._extension.bar(it, 42)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -498,21 +438,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("it.substring(0)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("it.substring(0)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -545,21 +478,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(1);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("it.substring(0)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(1);
+    Assert.assertEquals("it.substring(0)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -589,21 +515,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("IterableExtensions.head(new ArrayList<String>())", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("IterableExtensions.head(new ArrayList<String>())", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -631,21 +550,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("this.fooBarBaz(it)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("this.fooBarBaz(it)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -673,21 +585,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("this._extensionJava.bar(it, 40 + 2)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("this._extensionJava.bar(it, 40 + 2)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -709,21 +614,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("a.foo(\"\")", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("a.foo(\"\")", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -751,21 +649,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("Extension.setZonk(it, s + s + s)", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("Extension.setZonk(it, s + s + s)", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -799,21 +690,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(0);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(0);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -848,21 +732,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(0);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(0);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -888,21 +765,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(1);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(1);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("this.foo()", _computeUnsugaredExpression);
+    final XExpression call = block.getExpressions().get(0);
+    Assert.assertEquals("this.foo()", this.serializer.computeUnsugaredExpression(call));
   }
   
   @Test
@@ -930,25 +800,16 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
     IResourcesSetupUtil.waitForBuild();
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(0);
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(0);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    EList<XExpression> _expressions_1 = block.getExpressions();
-    final XExpression call2 = _expressions_1.get(1);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("String.valueOf(it)", _computeUnsugaredExpression);
-    String _computeUnsugaredExpression_1 = this.serializer.computeUnsugaredExpression(call2);
-    Assert.assertEquals("", _computeUnsugaredExpression_1);
+    final XExpression call = block.getExpressions().get(0);
+    final XExpression call2 = block.getExpressions().get(1);
+    Assert.assertEquals("String.valueOf(it)", this.serializer.computeUnsugaredExpression(call));
+    Assert.assertEquals("", this.serializer.computeUnsugaredExpression(call2));
   }
   
   @Test
@@ -1002,39 +863,23 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-    XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-    EList<XtendMember> _members = _head.getMembers();
-    XtendMember _get = _members.get(2);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _builder.toString());
+    XtendMember _get = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class)).getMembers().get(2);
     final XtendFunction function = ((XtendFunction) _get);
     XExpression _expression = function.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
-    EList<XExpression> _expressions = block.getExpressions();
-    final XExpression call = _expressions.get(0);
-    EList<XExpression> _expressions_1 = block.getExpressions();
-    final XExpression call2 = _expressions_1.get(1);
-    EList<XExpression> _expressions_2 = block.getExpressions();
-    final XExpression call3 = _expressions_2.get(2);
-    EList<XExpression> _expressions_3 = block.getExpressions();
-    final XExpression call4 = _expressions_3.get(3);
-    EList<XtendTypeDeclaration> _xtendTypes_1 = xtendFile.getXtendTypes();
-    final XtendTypeDeclaration foo = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes_1);
-    EList<XtendMember> _members_1 = foo.getMembers();
-    XtendMember _get_1 = _members_1.get(1);
+    final XExpression call = block.getExpressions().get(0);
+    final XExpression call2 = block.getExpressions().get(1);
+    final XExpression call3 = block.getExpressions().get(2);
+    final XExpression call4 = block.getExpressions().get(3);
+    final XtendTypeDeclaration foo = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+    XtendMember _get_1 = foo.getMembers().get(1);
     final XtendField extensionField = ((XtendField) _get_1);
     final JvmTypeReference extensionFieldType = extensionField.getType();
-    String _identifier = extensionFieldType.getIdentifier();
-    Assert.assertEquals("testpackage.Extension", _identifier);
-    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
-    Assert.assertEquals("it.fieldInBar", _computeUnsugaredExpression);
-    String _computeUnsugaredExpression_1 = this.serializer.computeUnsugaredExpression(call2);
-    Assert.assertEquals("this._extension.fieldInExtension", _computeUnsugaredExpression_1);
-    String _computeUnsugaredExpression_2 = this.serializer.computeUnsugaredExpression(call3);
-    Assert.assertEquals("this.fieldInFoo", _computeUnsugaredExpression_2);
-    String _computeUnsugaredExpression_3 = this.serializer.computeUnsugaredExpression(call4);
-    Assert.assertEquals("", _computeUnsugaredExpression_3);
+    Assert.assertEquals("testpackage.Extension", extensionFieldType.getIdentifier());
+    Assert.assertEquals("it.fieldInBar", this.serializer.computeUnsugaredExpression(call));
+    Assert.assertEquals("this._extension.fieldInExtension", this.serializer.computeUnsugaredExpression(call2));
+    Assert.assertEquals("this.fieldInFoo", this.serializer.computeUnsugaredExpression(call3));
+    Assert.assertEquals("", this.serializer.computeUnsugaredExpression(call4));
   }
 }

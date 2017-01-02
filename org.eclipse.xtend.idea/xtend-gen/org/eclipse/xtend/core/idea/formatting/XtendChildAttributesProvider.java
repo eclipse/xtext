@@ -28,14 +28,12 @@ public class XtendChildAttributesProvider extends XbaseChildAttributesProvider {
   @Override
   protected Indent getIndentAfter(final EObject grammarElement) {
     boolean _matched = false;
-    XtendGrammarAccess.XSwitchExpressionElements _xSwitchExpressionAccess = this._xtendGrammarAccess.getXSwitchExpressionAccess();
-    Keyword _colonKeyword_5_1 = _xSwitchExpressionAccess.getColonKeyword_5_1();
+    Keyword _colonKeyword_5_1 = this._xtendGrammarAccess.getXSwitchExpressionAccess().getColonKeyword_5_1();
     if (Objects.equal(grammarElement, _colonKeyword_5_1)) {
       _matched=true;
     }
     if (!_matched) {
-      XtendGrammarAccess.XVariableDeclarationElements _xVariableDeclarationAccess = this._xtendGrammarAccess.getXVariableDeclarationAccess();
-      Keyword _equalsSignKeyword_2_0 = _xVariableDeclarationAccess.getEqualsSignKeyword_2_0();
+      Keyword _equalsSignKeyword_2_0 = this._xtendGrammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_2_0();
       if (Objects.equal(grammarElement, _equalsSignKeyword_2_0)) {
         _matched=true;
       }

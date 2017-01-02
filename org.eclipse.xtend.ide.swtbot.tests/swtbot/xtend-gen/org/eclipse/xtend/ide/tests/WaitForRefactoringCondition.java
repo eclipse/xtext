@@ -16,10 +16,7 @@ import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.text.undo.DocumentUndoManagerRegistry;
 import org.eclipse.text.undo.IDocumentUndoManager;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IEditorReference;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 
 @SuppressWarnings("all")
@@ -45,11 +42,9 @@ public class WaitForRefactoringCondition extends DefaultCondition {
       final IOperationHistory operationHistory = OperationHistoryFactory.getOperationHistory();
       IUndoableOperation _xifexpression = null;
       if (this.isRedo) {
-        IUndoContext _undoContext = this.getUndoContext();
-        _xifexpression = operationHistory.getRedoOperation(_undoContext);
+        _xifexpression = operationHistory.getRedoOperation(this.getUndoContext());
       } else {
-        IUndoContext _undoContext_1 = this.getUndoContext();
-        _xifexpression = operationHistory.getUndoOperation(_undoContext_1);
+        _xifexpression = operationHistory.getUndoOperation(this.getUndoContext());
       }
       String _label = null;
       if (_xifexpression!=null) {
@@ -64,12 +59,9 @@ public class WaitForRefactoringCondition extends DefaultCondition {
   protected IUndoContext getUndoContext() {
     IUndoContext _xblockexpression = null;
     {
-      IEditorReference _reference = this.editor.getReference();
-      IEditorPart _editor = _reference.getEditor(true);
+      IEditorPart _editor = this.editor.getReference().getEditor(true);
       final ITextEditor ed = ((ITextEditor) _editor);
-      IDocumentProvider _documentProvider = ed.getDocumentProvider();
-      IEditorInput _editorInput = ed.getEditorInput();
-      final IDocument document = _documentProvider.getDocument(_editorInput);
+      final IDocument document = ed.getDocumentProvider().getDocument(ed.getEditorInput());
       final IDocumentUndoManager undoManager = DocumentUndoManagerRegistry.getDocumentUndoManager(document);
       _xblockexpression = undoManager.getUndoContext();
     }

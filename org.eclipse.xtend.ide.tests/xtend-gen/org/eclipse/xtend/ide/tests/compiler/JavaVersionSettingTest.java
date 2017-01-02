@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.tests.compiler;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import org.eclipse.core.resources.IFile;
@@ -41,9 +40,7 @@ public class JavaVersionSettingTest extends Assert {
   
   @Before
   public void setUp() throws Exception {
-    XtendActivator _instance = XtendActivator.getInstance();
-    Injector _injector = _instance.getInjector("org.eclipse.xtend.core.Xtend");
-    _injector.injectMembers(this);
+    XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend").injectMembers(this);
   }
   
   @BeforeClass
@@ -93,10 +90,8 @@ public class JavaVersionSettingTest extends Assert {
       final IFile xtendFile = this.workbenchTestHelper.createFile("mypackage/OverrideTest.xtend", _builder.toString());
       IResourcesSetupUtil.waitForBuild();
       this.assertNoErrors(xtendFile);
-      IProject _project = xtendFile.getProject();
-      final String content = this.getJavaFileContent("xtend-gen/mypackage/B.java", _project);
-      boolean _contains = content.contains("@Override");
-      Assert.assertFalse("@Override annotation was generated, but it shouldn\'t.", _contains);
+      final String content = this.getJavaFileContent("xtend-gen/mypackage/B.java", xtendFile.getProject());
+      Assert.assertFalse("@Override annotation was generated, but it shouldn\'t.", content.contains("@Override"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -130,10 +125,8 @@ public class JavaVersionSettingTest extends Assert {
       final IFile xtendFile = this.workbenchTestHelper.createFile("mypackage/OverrideTest.xtend", _builder.toString());
       IResourcesSetupUtil.waitForBuild();
       this.assertNoErrors(xtendFile);
-      IProject _project = xtendFile.getProject();
-      final String content = this.getJavaFileContent("xtend-gen/mypackage/B.java", _project);
-      boolean _contains = content.contains("@Override");
-      Assert.assertTrue("@Override annotation was not generated.", _contains);
+      final String content = this.getJavaFileContent("xtend-gen/mypackage/B.java", xtendFile.getProject());
+      Assert.assertTrue("@Override annotation was not generated.", content.contains("@Override"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -142,8 +135,7 @@ public class JavaVersionSettingTest extends Assert {
   private String getJavaFileContent(final String fileName, final IProject project) {
     try {
       final IFile javaFile = project.getFile(fileName);
-      boolean _exists = javaFile.exists();
-      Assert.assertTrue("Generated Java file does not exist.", _exists);
+      Assert.assertTrue("Generated Java file does not exist.", javaFile.exists());
       this.assertNoErrors(javaFile);
       final InputStream javaFileStream = javaFile.getContents();
       InputStreamReader _inputStreamReader = new InputStreamReader(javaFileStream, Charsets.UTF_8);

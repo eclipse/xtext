@@ -8,8 +8,6 @@
 package org.eclipse.xtend.ide.tests.buildpath;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -39,8 +37,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
       final Procedure1<IProject> _function = (IProject it) -> {
         try {
-          IJavaProject _create = JavaCore.create(it);
-          JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", null, null);
+          JavaProjectSetupUtil.addSourceFolder(JavaCore.create(it), "filtered-src", null, null);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -48,8 +45,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       ObjectExtensions.<IProject>operator_doubleArrow(_createPluginProject, _function);
       IResourcesSetupUtil.createFile("testProject/filtered-src/Foo.xtend", "class Foo {}");
       IResourcesSetupUtil.waitForBuild();
-      IResource _file = IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java");
-      Assert.assertNotNull(_file);
+      Assert.assertNotNull(IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -61,8 +57,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
       final Procedure1<IProject> _function = (IProject it) -> {
         try {
-          IJavaProject _create = JavaCore.create(it);
-          JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", null, new String[] { "**.xtend" });
+          JavaProjectSetupUtil.addSourceFolder(JavaCore.create(it), "filtered-src", null, new String[] { "**.xtend" });
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -70,8 +65,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       ObjectExtensions.<IProject>operator_doubleArrow(_createPluginProject, _function);
       IResourcesSetupUtil.createFile("testProject/filtered-src/Foo.xtend", "class Foo {}");
       IResourcesSetupUtil.waitForBuild();
-      IResource _file = IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java");
-      Assert.assertNull(_file);
+      Assert.assertNull(IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -88,8 +82,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
       final Procedure1<IProject> _function = (IProject it) -> {
         try {
-          IJavaProject _create = JavaCore.create(it);
-          JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", new String[] { "Foo.xtend" }, null);
+          JavaProjectSetupUtil.addSourceFolder(JavaCore.create(it), "filtered-src", new String[] { "Foo.xtend" }, null);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -99,12 +92,9 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       IResourcesSetupUtil.createFile("testProject/filtered-src/Bar.xtend", "class Bar {}");
       IResourcesSetupUtil.createFile("testProject/filtered-src/foo/Foo.xtend", "package foo class Foo {}");
       IResourcesSetupUtil.waitForBuild();
-      IResource _file = IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java");
-      Assert.assertNotNull(_file);
-      IResource _file_1 = IResourcesSetupUtil.file("testProject/xtend-gen/Bar.java");
-      Assert.assertNotNull(_file_1);
-      IResource _file_2 = IResourcesSetupUtil.file("testProject/xtend-gen/foo/Foo.java");
-      Assert.assertNotNull(_file_2);
+      Assert.assertNotNull(IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java"));
+      Assert.assertNotNull(IResourcesSetupUtil.file("testProject/xtend-gen/Bar.java"));
+      Assert.assertNotNull(IResourcesSetupUtil.file("testProject/xtend-gen/foo/Foo.java"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -116,8 +106,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
       final Procedure1<IProject> _function = (IProject it) -> {
         try {
-          IJavaProject _create = JavaCore.create(it);
-          JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", null, new String[] { "**/Foo.xtend" });
+          JavaProjectSetupUtil.addSourceFolder(JavaCore.create(it), "filtered-src", null, new String[] { "**/Foo.xtend" });
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -127,12 +116,9 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       IResourcesSetupUtil.createFile("testProject/filtered-src/Bar.xtend", "class Bar {}");
       IResourcesSetupUtil.createFile("testProject/filtered-src/foo/Foo.xtend", "package foo class Foo {}");
       IResourcesSetupUtil.waitForBuild();
-      IResource _file = IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java");
-      Assert.assertNull(_file);
-      IResource _file_1 = IResourcesSetupUtil.file("testProject/xtend-gen/Bar.java");
-      Assert.assertNotNull(_file_1);
-      IResource _file_2 = IResourcesSetupUtil.file("testProject/xtend-gen/foo/Foo.java");
-      Assert.assertNull(_file_2);
+      Assert.assertNull(IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java"));
+      Assert.assertNotNull(IResourcesSetupUtil.file("testProject/xtend-gen/Bar.java"));
+      Assert.assertNull(IResourcesSetupUtil.file("testProject/xtend-gen/foo/Foo.java"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

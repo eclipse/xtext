@@ -36,10 +36,8 @@ public class XtendAutoEditBlockProvider extends AbstractAutoEditBlockProvider {
     TokenSet _stringLiteralTokens_1 = tokenSetProvider.getStringLiteralTokens();
     AutoEditString _autoEditString_2 = new AutoEditString("\'", _stringLiteralTokens_1);
     this.registerQuote(_autoEditString_2);
-    TokenSet _richStringLiteralTokens_1 = tokenSetProvider.getRichStringLiteralTokens();
     AutoEditMultiLineBlockInRichString _autoEditMultiLineBlockInRichString = new AutoEditMultiLineBlockInRichString("{", "}");
-    this.registerBlock(_richStringLiteralTokens_1, _autoEditMultiLineBlockInRichString);
-    TokenSet _richStringLiteralTokens_2 = tokenSetProvider.getRichStringLiteralTokens();
+    this.registerBlock(tokenSetProvider.getRichStringLiteralTokens(), _autoEditMultiLineBlockInRichString);
     AutoEditMultiLineBlock _autoEditMultiLineBlock = new AutoEditMultiLineBlock("«", "»");
     final Procedure1<AutoEditMultiLineBlock> _function = (AutoEditMultiLineBlock it) -> {
       it.setShouldDeleteClosing(true);
@@ -47,6 +45,6 @@ public class XtendAutoEditBlockProvider extends AbstractAutoEditBlockProvider {
       it.setShouldInsertClosingTerminalBeforeSpecialCharacters(true);
     };
     AutoEditMultiLineBlock _doubleArrow = ObjectExtensions.<AutoEditMultiLineBlock>operator_doubleArrow(_autoEditMultiLineBlock, _function);
-    this.registerBlock(_richStringLiteralTokens_2, _doubleArrow);
+    this.registerBlock(tokenSetProvider.getRichStringLiteralTokens(), _doubleArrow);
   }
 }

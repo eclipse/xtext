@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.idea.presentation;
 
 import com.google.inject.Inject;
 import java.util.Arrays;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.idea.presentation.XbaseItemPresentationProvider;
@@ -44,8 +42,7 @@ public class XtendJvmItemPresentationProvider extends XbaseItemPresentationProvi
     {
       final boolean local = genericType.isLocal();
       if (local) {
-        EList<JvmTypeReference> _superTypes = genericType.getSuperTypes();
-        final JvmTypeReference supertype = IterableExtensions.<JvmTypeReference>last(_superTypes);
+        final JvmTypeReference supertype = IterableExtensions.<JvmTypeReference>last(genericType.getSuperTypes());
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("new ");
         String _simpleName = supertype.getSimpleName();
@@ -55,13 +52,11 @@ public class XtendJvmItemPresentationProvider extends XbaseItemPresentationProvi
       }
       String _simpleName_1 = genericType.getSimpleName();
       String _xifexpression = null;
-      EList<JvmTypeParameter> _typeParameters = genericType.getTypeParameters();
-      boolean _isEmpty = _typeParameters.isEmpty();
+      boolean _isEmpty = genericType.getTypeParameters().isEmpty();
       if (_isEmpty) {
         _xifexpression = "";
       } else {
-        EList<JvmTypeParameter> _typeParameters_1 = genericType.getTypeParameters();
-        _xifexpression = this.uiStrings.typeParameters(_typeParameters_1);
+        _xifexpression = this.uiStrings.typeParameters(genericType.getTypeParameters());
       }
       _xblockexpression = (_simpleName_1 + _xifexpression);
     }

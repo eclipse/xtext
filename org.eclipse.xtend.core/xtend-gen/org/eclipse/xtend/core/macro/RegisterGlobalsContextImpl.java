@@ -14,12 +14,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
@@ -40,10 +37,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -67,9 +61,7 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     final JvmGenericType newType = TypesFactory.eINSTANCE.createJvmGenericType();
     newType.setVisibility(JvmVisibility.PUBLIC);
     EList<JvmTypeReference> _superTypes = newType.getSuperTypes();
-    TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
-    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-    JvmTypeReference _typeForName = _typeReferences.getTypeForName(Object.class, _xtendFile);
+    JvmTypeReference _typeForName = this.compilationUnit.getTypeReferences().getTypeForName(Object.class, this.compilationUnit.getXtendFile());
     _superTypes.add(_typeForName);
     this.setNameAndAccept(newType, qualifiedName);
   }
@@ -100,39 +92,28 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     Preconditions.checkArgument(_tripleEquals, _builder);
     this.compilationUnit.checkCanceled();
     final Pair<String, String> namespaceAndName = this.getNameParts(qualifiedName);
-    IFileHeaderProvider _fileHeaderProvider = this.compilationUnit.getFileHeaderProvider();
-    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-    Resource _eResource = _xtendFile.eResource();
-    final String headerText = _fileHeaderProvider.getFileHeader(_eResource);
-    JvmTypesBuilder _jvmTypesBuilder = this.compilationUnit.getJvmTypesBuilder();
-    _jvmTypesBuilder.setFileHeader(newType, headerText);
+    final String headerText = this.compilationUnit.getFileHeaderProvider().getFileHeader(this.compilationUnit.getXtendFile().eResource());
+    this.compilationUnit.getJvmTypesBuilder().setFileHeader(newType, headerText);
     String _key = namespaceAndName.getKey();
     boolean _tripleNotEquals = (_key != null);
     if (_tripleNotEquals) {
-      String _key_1 = namespaceAndName.getKey();
-      final JvmDeclaredType parentType = this.findType(_key_1);
+      final JvmDeclaredType parentType = this.findType(namespaceAndName.getKey());
       if ((parentType != null)) {
         EList<JvmMember> _members = parentType.getMembers();
         _members.add(newType);
         newType.setStatic(true);
       } else {
-        String _key_2 = namespaceAndName.getKey();
-        newType.setPackageName(_key_2);
+        newType.setPackageName(namespaceAndName.getKey());
         this.acceptor.<JvmDeclaredType>accept(newType);
       }
     } else {
       this.acceptor.<JvmDeclaredType>accept(newType);
     }
-    String _value = namespaceAndName.getValue();
-    newType.setSimpleName(_value);
+    newType.setSimpleName(namespaceAndName.getValue());
   }
   
   private JvmDeclaredType findType(final String string) {
-    XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-    Resource _eResource = _xtendFile.eResource();
-    EList<EObject> _contents = _eResource.getContents();
-    Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
-    return this.findRecursively(string, _filter);
+    return this.findRecursively(string, Iterables.<JvmDeclaredType>filter(this.compilationUnit.getXtendFile().eResource().getContents(), JvmDeclaredType.class));
   }
   
   private JvmDeclaredType findRecursively(final String string, final Iterable<? extends JvmDeclaredType> types) {
@@ -145,9 +126,7 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
         }
         boolean _startsWith = string.startsWith(candidateQualifiedName);
         if (_startsWith) {
-          EList<JvmMember> _members = type.getMembers();
-          Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
-          final JvmDeclaredType result = this.findRecursively(string, _filter);
+          final JvmDeclaredType result = this.findRecursively(string, Iterables.<JvmDeclaredType>filter(type.getMembers(), JvmDeclaredType.class));
           if ((result != null)) {
             return result;
           }

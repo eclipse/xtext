@@ -19,8 +19,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class SemanticText extends Chunk {
   @Override
   public String toString() {
-    CharSequence _text = this.getText();
-    return _text.toString();
+    return this.getText().toString();
   }
   
   public SemanticText(final CharSequence text) {

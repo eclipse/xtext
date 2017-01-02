@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.tests.editor;
 
 import com.google.inject.Inject;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -40,14 +39,10 @@ public class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase
   @Test
   public void testOpenXtendFileFromBuildPath() {
     try {
-      IJavaProject _createJavaProject = JavaProjectSetupUtil.createJavaProject("testProject");
-      final IProject project = _createJavaProject.getProject();
-      boolean _hasNature = XtextProjectHelper.hasNature(project);
-      Assert.assertFalse(_hasNature);
-      IFile _createFile = IResourcesSetupUtil.createFile("testProject/src/Foo.xtend", "class Foo {}");
-      this.workbenchTestHelper.openEditor(_createFile);
-      boolean _hasNature_1 = XtextProjectHelper.hasNature(project);
-      Assert.assertTrue(_hasNature_1);
+      final IProject project = JavaProjectSetupUtil.createJavaProject("testProject").getProject();
+      Assert.assertFalse(XtextProjectHelper.hasNature(project));
+      this.workbenchTestHelper.openEditor(IResourcesSetupUtil.createFile("testProject/src/Foo.xtend", "class Foo {}"));
+      Assert.assertTrue(XtextProjectHelper.hasNature(project));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -64,14 +59,10 @@ public class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase
           throw Exceptions.sneakyThrow(_e);
         }
       };
-      IJavaProject _doubleArrow = ObjectExtensions.<IJavaProject>operator_doubleArrow(_createJavaProject, _function);
-      final IProject project = _doubleArrow.getProject();
-      boolean _hasNature = XtextProjectHelper.hasNature(project);
-      Assert.assertFalse(_hasNature);
-      IFile _createFile = IResourcesSetupUtil.createFile("testProject/filtered-src/Foo.xtend", "class Foo {}");
-      this.workbenchTestHelper.openEditor(_createFile);
-      boolean _hasNature_1 = XtextProjectHelper.hasNature(project);
-      Assert.assertFalse(_hasNature_1);
+      final IProject project = ObjectExtensions.<IJavaProject>operator_doubleArrow(_createJavaProject, _function).getProject();
+      Assert.assertFalse(XtextProjectHelper.hasNature(project));
+      this.workbenchTestHelper.openEditor(IResourcesSetupUtil.createFile("testProject/filtered-src/Foo.xtend", "class Foo {}"));
+      Assert.assertFalse(XtextProjectHelper.hasNature(project));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -80,14 +71,10 @@ public class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase
   @Test
   public void testOpenXtendFileFromOutOfBuildPath() {
     try {
-      IJavaProject _createJavaProject = JavaProjectSetupUtil.createJavaProject("testProject");
-      final IProject project = _createJavaProject.getProject();
-      boolean _hasNature = XtextProjectHelper.hasNature(project);
-      Assert.assertFalse(_hasNature);
-      IFile _createFile = IResourcesSetupUtil.createFile("testProject/doc/Foo.xtend", "class Foo {}");
-      this.workbenchTestHelper.openEditor(_createFile);
-      boolean _hasNature_1 = XtextProjectHelper.hasNature(project);
-      Assert.assertFalse(_hasNature_1);
+      final IProject project = JavaProjectSetupUtil.createJavaProject("testProject").getProject();
+      Assert.assertFalse(XtextProjectHelper.hasNature(project));
+      this.workbenchTestHelper.openEditor(IResourcesSetupUtil.createFile("testProject/doc/Foo.xtend", "class Foo {}"));
+      Assert.assertFalse(XtextProjectHelper.hasNature(project));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

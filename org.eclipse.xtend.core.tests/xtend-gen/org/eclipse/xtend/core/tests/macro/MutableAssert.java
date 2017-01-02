@@ -67,8 +67,7 @@ public class MutableAssert extends Assert {
     T _xblockexpression = null;
     {
       final T t = MutableAssert.<T>assertThrowable(clazz, codeToTest);
-      String _message = t.getMessage();
-      Assert.assertEquals(message, _message);
+      Assert.assertEquals(message, t.getMessage());
       _xblockexpression = t;
     }
     return _xblockexpression;
@@ -82,9 +81,7 @@ public class MutableAssert extends Assert {
       } catch (final Throwable _t) {
         if (_t instanceof Throwable) {
           final Throwable e = (Throwable)_t;
-          String _message = e.getMessage();
-          Class<? extends Throwable> _class = e.getClass();
-          Assert.assertEquals(_message, clazz, _class);
+          Assert.assertEquals(e.getMessage(), clazz, e.getClass());
           return ((T) e);
         } else {
           throw Exceptions.sneakyThrow(_t);

@@ -14,8 +14,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -54,8 +52,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
   @Override
   public void tearDown() {
     try {
-      IProject _project = this.workbenchTestHelper.getProject();
-      _project.delete(true, null);
+      this.workbenchTestHelper.getProject().delete(true, null);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -144,10 +141,8 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       final IFile type2 = this.workbenchTestHelper.createFile("otherpack/Annotation.xtend", _builder_1.toString());
       IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(type1, "same project");
-      IProject _project = type2.getProject();
-      final IFile file = _project.getFile("xtend-gen/mypackage/ShouldNotExist.java");
-      boolean _exists = file.exists();
-      Assert.assertFalse(_exists);
+      final IFile file = type2.getProject().getFile("xtend-gen/mypackage/ShouldNotExist.java");
+      Assert.assertFalse(file.exists());
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package mypack");
       _builder_2.newLine();
@@ -161,8 +156,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       StringInputStream _stringInputStream = new StringInputStream(_builder_2.toString());
       type1.setContents(_stringInputStream, true, true, null);
       IResourcesSetupUtil.waitForBuild();
-      boolean _exists_1 = file.exists();
-      Assert.assertFalse(_exists_1);
+      Assert.assertFalse(file.exists());
       this.assertHasErrors(type1, "same project");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -177,8 +171,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       WorkbenchTestHelper.addExportedPackages(annoProject, "otherpack");
       WorkbenchTestHelper.createPluginProject("client.project", "com.google.inject", "org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib", 
         "org.eclipse.xtend.ide.tests.data", "org.junit", "annotation.project");
-      IProject _project = annoProject.getProject();
-      _project.getFile("META-IND/MANIFEST.MF");
+      annoProject.getProject().getFile("META-IND/MANIFEST.MF");
       Path _path = new Path("/annotation.project/src/otherpack/Annotation.xtend");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package otherpack");
@@ -255,10 +248,8 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       final IFile type1 = IResourcesSetupUtil.createFile(_path_1, _builder_1.toString());
       IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
-      IProject _project_1 = type1.getProject();
-      final IFile file = _project_1.getFile("xtend-gen/mypackage/ShouldExist.java");
-      boolean _exists = file.exists();
-      Assert.assertTrue(_exists);
+      final IFile file = type1.getProject().getFile("xtend-gen/mypackage/ShouldExist.java");
+      Assert.assertTrue(file.exists());
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package mypack");
       _builder_2.newLine();
@@ -272,8 +263,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       StringInputStream _stringInputStream = new StringInputStream(_builder_2.toString());
       type1.setContents(_stringInputStream, true, true, null);
       IResourcesSetupUtil.waitForBuild();
-      boolean _exists_1 = file.exists();
-      Assert.assertTrue(_exists_1);
+      Assert.assertTrue(file.exists());
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -368,10 +358,8 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       this.workbenchTestHelper.createFile("otherpack/Processor.java", _builder_2.toString());
       IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(type1, "same project");
-      IProject _project = type2.getProject();
-      final IFile file = _project.getFile("xtend-gen/mypackage/ShouldNotExist.java");
-      boolean _exists = file.exists();
-      Assert.assertFalse(_exists);
+      final IFile file = type2.getProject().getFile("xtend-gen/mypackage/ShouldNotExist.java");
+      Assert.assertFalse(file.exists());
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("package mypack");
       _builder_3.newLine();
@@ -385,8 +373,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       StringInputStream _stringInputStream = new StringInputStream(_builder_3.toString());
       type1.setContents(_stringInputStream, true, true, null);
       IResourcesSetupUtil.waitForBuild();
-      boolean _exists_1 = file.exists();
-      Assert.assertFalse(_exists_1);
+      Assert.assertFalse(file.exists());
       this.assertHasErrors(type1, "same project");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -470,9 +457,9 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
   @Test
   public void testActiveAnnotationInSameProjectInJar() {
     try {
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, "com.google.inject", 
-        "org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib");
-      final IJavaProject project = JavaCore.create(_createPluginProject);
+      final IJavaProject project = JavaCore.create(
+        WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, "com.google.inject", 
+          "org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib"));
       final IFile jarFile = this.copyFile(project, "Bug414992.jar", "Bug414992.jar");
       JavaProjectSetupUtil.addJarToClasspath(project, jarFile);
       StringConcatenation _builder = new StringConcatenation();
@@ -496,8 +483,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
   
   public IFile copyFile(final IJavaProject javaProject, final String srcFile, final String destFile) {
     try {
-      IProject _project = javaProject.getProject();
-      final IFile file = _project.getFile(destFile);
+      final IFile file = javaProject.getProject().getFile(destFile);
       final InputStream inputStream = ActiveAnnotationsInSameProjectTest.class.getResourceAsStream(srcFile);
       file.create(inputStream, IResource.FORCE, null);
       return file;
@@ -508,9 +494,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
   
   public void assertNoErrorsInWorkspace() {
     try {
-      IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-      IWorkspaceRoot _root = _workspace.getRoot();
-      final IMarker[] findMarkers = _root.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      final IMarker[] findMarkers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       for (final IMarker iMarker : findMarkers) {
         String _message = MarkerUtilities.getMessage(iMarker);
         int _severity = MarkerUtilities.getSeverity(iMarker);
@@ -539,8 +523,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       final Function1<IMarker, String> _function = (IMarker it) -> {
         return MarkerUtilities.getMessage(it);
       };
-      List<String> _map = ListExtensions.<IMarker, String>map(((List<IMarker>)Conversions.doWrapArray(findMarkers)), _function);
-      String _join = IterableExtensions.join(_map, ",");
+      String _join = IterableExtensions.join(ListExtensions.<IMarker, String>map(((List<IMarker>)Conversions.doWrapArray(findMarkers)), _function), ",");
       String _plus_2 = (_plus_1 + _join);
       Assert.fail(_plus_2);
     } catch (Throwable _e) {

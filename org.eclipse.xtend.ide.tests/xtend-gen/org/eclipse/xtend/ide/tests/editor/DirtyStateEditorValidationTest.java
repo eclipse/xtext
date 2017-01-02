@@ -10,18 +10,13 @@ package org.eclipse.xtend.ide.tests.editor;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
-import java.util.Iterator;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.source.Annotation;
-import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -115,15 +110,11 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       final String content = _builder.toString();
       final IFile file = this.helper.createFile("SomeClass.xtend", content);
       this._syncUtil.waitForBuild(null);
-      IMarker[] _findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      int _length = _findMarkers.length;
-      Assert.assertEquals(0, _length);
+      Assert.assertEquals(0, file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length);
       final XtextEditor editor = this.helper.openEditor(file);
-      IXtextDocument _document = editor.getDocument();
-      _document.set("");
+      editor.getDocument().set("");
       this._syncUtil.waitForReconciler(editor);
-      IXtextDocument _document_1 = editor.getDocument();
-      _document_1.set(content);
+      editor.getDocument().set(content);
       this._syncUtil.waitForReconciler(editor);
       this.assertNumberOfErrorAnnotations(editor, 0);
     } catch (Throwable _e) {
@@ -134,12 +125,9 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
   @Test
   public void testBug410575() {
     try {
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("projectA", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib");
-      final IJavaProject projectA = JavaCore.create(_createPluginProject);
-      IProject _project = projectA.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project, "mypack");
-      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("projectB", "projectA", "org.eclipse.xtext.xbase.lib");
-      JavaCore.create(_createPluginProject_1);
+      final IJavaProject projectA = JavaCore.create(WorkbenchTestHelper.createPluginProject("projectA", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib"));
+      WorkbenchTestHelper.addExportedPackages(projectA.getProject(), "mypack");
+      JavaCore.create(WorkbenchTestHelper.createPluginProject("projectB", "projectA", "org.eclipse.xtext.xbase.lib"));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package mypack");
       _builder.newLine();
@@ -188,9 +176,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
             throw Exceptions.sneakyThrow(_e);
           }
         };
-        List<Object> _map = ListExtensions.<IMarker, Object>map(((List<IMarker>)Conversions.doWrapArray(markers)), _function);
-        String _join = IterableExtensions.join(_map, "\n");
-        Assert.fail(_join);
+        Assert.fail(IterableExtensions.join(ListExtensions.<IMarker, Object>map(((List<IMarker>)Conversions.doWrapArray(markers)), _function), "\n"));
       }
       final XtextEditor editor = this.helper.openEditor(declaration);
       IXtextDocument _document = editor.getDocument();
@@ -296,16 +282,12 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       final String bar = _builder_1.toString();
       final IFile file = this.helper.createFile("SomeClass.xtend", (contentWithoutBar + bar));
       this._syncUtil.waitForBuild(null);
-      IMarker[] _findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      int _length = _findMarkers.length;
-      Assert.assertEquals(0, _length);
+      Assert.assertEquals(0, file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length);
       final XtextEditor editor = this.helper.openEditor(file);
-      IXtextDocument _document = editor.getDocument();
-      _document.set(contentWithoutBar);
+      editor.getDocument().set(contentWithoutBar);
       this._syncUtil.waitForReconciler(editor);
       this.assertNumberOfErrorAnnotations(editor, 3);
-      IXtextDocument _document_1 = editor.getDocument();
-      _document_1.set((contentWithoutBar + bar));
+      editor.getDocument().set((contentWithoutBar + bar));
       this._syncUtil.waitForReconciler(editor);
       this.assertNumberOfErrorAnnotations(editor, 0);
     } catch (Throwable _e) {
@@ -340,44 +322,34 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       final IFile interfaceFile = this.helper.createFile("Foo.xtend", interface_);
       final IFile classFile = this.helper.createFile("Bar.xtend", class_);
       this._syncUtil.waitForBuild(null);
-      IMarker[] _findMarkers = classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      int _length = _findMarkers.length;
-      Assert.assertEquals(0, _length);
+      Assert.assertEquals(0, classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length);
       final XtextEditor interfaceEditor = this.helper.openEditor(interfaceFile);
       final XtextEditor classEditor = this.helper.openEditor(classFile);
       this.assertNumberOfErrorAnnotations(classEditor, 0);
-      IXtextDocument _document = interfaceEditor.getDocument();
-      _document.set(interfaceChanged);
+      interfaceEditor.getDocument().set(interfaceChanged);
       this._syncUtil.waitForReconciler(interfaceEditor);
       this._syncUtil.waitForReconciler(classEditor);
-      IXtextDocument _document_1 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function = (XtextResource it) -> {
         final CancelIndicator _function_1 = () -> {
           return false;
         };
         final List<Issue> issues = this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function_1);
-        String _string = issues.toString();
-        int _size = issues.size();
-        Assert.assertEquals(_string, 1, _size);
+        Assert.assertEquals(issues.toString(), 1, issues.size());
         return null;
       };
-      _document_1.<Object>readOnly(_function);
-      IXtextDocument _document_2 = interfaceEditor.getDocument();
-      _document_2.set(interface_);
+      classEditor.getDocument().<Object>readOnly(_function);
+      interfaceEditor.getDocument().set(interface_);
       this._syncUtil.waitForReconciler(interfaceEditor);
       this._syncUtil.waitForReconciler(classEditor);
-      IXtextDocument _document_3 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function_1 = (XtextResource it) -> {
         final CancelIndicator _function_2 = () -> {
           return false;
         };
         final List<Issue> issues = this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function_2);
-        String _string = issues.toString();
-        boolean _isEmpty = issues.isEmpty();
-        Assert.assertTrue(_string, _isEmpty);
+        Assert.assertTrue(issues.toString(), issues.isEmpty());
         return null;
       };
-      _document_3.<Object>readOnly(_function_1);
+      classEditor.getDocument().<Object>readOnly(_function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -416,44 +388,34 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       final IFile interfaceFile = this.helper.createFile("Foo.xtend", interface_);
       final IFile classFile = this.helper.createFile("Bar.xtend", class_);
       this._syncUtil.waitForBuild(null);
-      IMarker[] _findMarkers = classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      int _length = _findMarkers.length;
-      Assert.assertEquals(0, _length);
+      Assert.assertEquals(0, classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length);
       final XtextEditor interfaceEditor = this.helper.openEditor(interfaceFile);
       final XtextEditor classEditor = this.helper.openEditor(classFile);
       this.assertNumberOfErrorAnnotations(classEditor, 0);
-      IXtextDocument _document = interfaceEditor.getDocument();
-      _document.set(interfaceChanged);
+      interfaceEditor.getDocument().set(interfaceChanged);
       this._syncUtil.waitForReconciler(interfaceEditor);
       this._syncUtil.waitForReconciler(classEditor);
-      IXtextDocument _document_1 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function = (XtextResource it) -> {
         final CancelIndicator _function_1 = () -> {
           return false;
         };
         final List<Issue> issues = this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function_1);
-        String _string = issues.toString();
-        int _size = issues.size();
-        Assert.assertEquals(_string, 2, _size);
+        Assert.assertEquals(issues.toString(), 2, issues.size());
         return null;
       };
-      _document_1.<Object>readOnly(_function);
-      IXtextDocument _document_2 = interfaceEditor.getDocument();
-      _document_2.set(interface_);
+      classEditor.getDocument().<Object>readOnly(_function);
+      interfaceEditor.getDocument().set(interface_);
       this._syncUtil.waitForReconciler(interfaceEditor);
       this._syncUtil.waitForReconciler(classEditor);
-      IXtextDocument _document_3 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function_1 = (XtextResource it) -> {
         final CancelIndicator _function_2 = () -> {
           return false;
         };
         final List<Issue> issues = this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function_2);
-        String _string = issues.toString();
-        boolean _isEmpty = issues.isEmpty();
-        Assert.assertTrue(_string, _isEmpty);
+        Assert.assertTrue(issues.toString(), issues.isEmpty());
         return null;
       };
-      _document_3.<Object>readOnly(_function_1);
+      classEditor.getDocument().<Object>readOnly(_function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -492,15 +454,12 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       final IFile interfaceFile = this.helper.createFile("Foo.xtend", interface_);
       final IFile classFile = this.helper.createFile("Bar.xtend", class_);
       this._syncUtil.waitForBuild(null);
-      IMarker[] _findMarkers = classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      int _length = _findMarkers.length;
-      Assert.assertEquals(0, _length);
+      Assert.assertEquals(0, classFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).length);
       final XtextEditor interfaceEditor = this.helper.openEditor(interfaceFile);
       final XtextEditor classEditor = this.helper.openEditor(classFile);
       this.assertNumberOfErrorAnnotations(classEditor, 0);
       this.helper.closeEditor(classEditor, false);
-      IXtextDocument _document = interfaceEditor.getDocument();
-      _document.set(interfaceChanged);
+      interfaceEditor.getDocument().set(interfaceChanged);
       this._syncUtil.waitForReconciler(interfaceEditor);
       final XtextEditor classEditorWithError = this.helper.openEditor(classFile);
       this.assertNumberOfErrorAnnotations(classEditorWithError, 2);
@@ -511,8 +470,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
   
   private void assertNumberOfErrorAnnotations(final XtextEditor editor, final int expectedNumber) {
     final Function0<Boolean> _function = () -> {
-      List<Annotation> _errorAnnotations = this.getErrorAnnotations(editor);
-      int _size = _errorAnnotations.size();
+      int _size = this.getErrorAnnotations(editor).size();
       return Boolean.valueOf((_size == expectedNumber));
     };
     this.helper.awaitUIUpdate(_function, DirtyStateEditorValidationTest.VALIDATION_TIMEOUT);
@@ -524,23 +482,14 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       String _plus_1 = (_plus + Boolean.valueOf(_isPersistent));
       return (_plus_1 + ")");
     };
-    List<String> _map = ListExtensions.<Annotation, String>map(errors, _function_1);
-    String _join = IterableExtensions.join(_map, ", ");
-    int _size = errors.size();
-    Assert.assertEquals(_join, expectedNumber, _size);
+    Assert.assertEquals(IterableExtensions.join(ListExtensions.<Annotation, String>map(errors, _function_1), ", "), expectedNumber, errors.size());
   }
   
   private List<Annotation> getErrorAnnotations(final XtextEditor editor) {
-    IDocumentProvider _documentProvider = editor.getDocumentProvider();
-    IEditorInput _editorInput = editor.getEditorInput();
-    IAnnotationModel _annotationModel = _documentProvider.getAnnotationModel(_editorInput);
-    Iterator _annotationIterator = _annotationModel.getAnnotationIterator();
-    Iterator<Annotation> _filter = Iterators.<Annotation>filter(_annotationIterator, Annotation.class);
     final Function1<Annotation, Boolean> _function = (Annotation it) -> {
       String _type = it.getType();
       return Boolean.valueOf(Objects.equal(_type, "org.eclipse.xtext.ui.editor.error"));
     };
-    Iterator<Annotation> _filter_1 = IteratorExtensions.<Annotation>filter(_filter, _function);
-    return IteratorExtensions.<Annotation>toList(_filter_1);
+    return IteratorExtensions.<Annotation>toList(IteratorExtensions.<Annotation>filter(Iterators.<Annotation>filter(editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput()).getAnnotationIterator(), Annotation.class), _function));
   }
 }

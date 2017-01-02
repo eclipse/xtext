@@ -14,10 +14,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
@@ -75,26 +73,23 @@ public class XtendAntlrGrammarGeneratorHelper {
   }
   
   protected void _collectTokens(final Keyword it, final Set<String> tokens) {
-    String _value = it.getValue();
-    boolean _contains = tokens.contains(_value);
+    boolean _contains = tokens.contains(it.getValue());
     boolean _not = (!_contains);
     if (_not) {
-      String _value_1 = it.getValue();
-      tokens.add(_value_1);
+      String _value = it.getValue();
+      tokens.add(_value);
     }
   }
   
   protected void _collectTokens(final AbstractRule it, final Set<String> tokens) {
-    AbstractElement _alternatives = it.getAlternatives();
-    this.collectTokens(_alternatives, tokens);
+    this.collectTokens(it.getAlternatives(), tokens);
   }
   
   protected void _collectTokens(final EObject it, final Set<String> tokens) {
-    EList<EObject> _eContents = it.eContents();
     final Consumer<EObject> _function = (EObject it_1) -> {
       this.collectTokens(it_1, tokens);
     };
-    _eContents.forEach(_function);
+    it.eContents().forEach(_function);
   }
   
   public void collectTokens(final EObject it, final Set<String> tokens) {

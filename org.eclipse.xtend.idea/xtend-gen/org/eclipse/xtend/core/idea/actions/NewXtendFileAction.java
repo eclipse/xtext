@@ -30,11 +30,7 @@ public class NewXtendFileAction extends JavaCreateTemplateInPackageAction<PsiEle
   
   @Override
   public void buildDialog(final Project project, final PsiDirectory directory, final CreateFileFromTemplateDialog.Builder builder) {
-    CreateFileFromTemplateDialog.Builder _setTitle = builder.setTitle("Xtend Type");
-    CreateFileFromTemplateDialog.Builder _addKind = _setTitle.addKind("Class", XtendIcons.Xtend_CLASS, "Xtend Class");
-    CreateFileFromTemplateDialog.Builder _addKind_1 = _addKind.addKind("Interface", XtendIcons.Xtend_INTERFACE, "Xtend Interface");
-    CreateFileFromTemplateDialog.Builder _addKind_2 = _addKind_1.addKind("Enum", XtendIcons.Xtend_ENUM, "Xtend Enum");
-    _addKind_2.addKind("Annotation Type", XtendIcons.Xtend_ANNOTATIONTYPE, "Xtend Annotation Type");
+    builder.setTitle("Xtend Type").addKind("Class", XtendIcons.Xtend_CLASS, "Xtend Class").addKind("Interface", XtendIcons.Xtend_INTERFACE, "Xtend Interface").addKind("Enum", XtendIcons.Xtend_ENUM, "Xtend Enum").addKind("Annotation Type", XtendIcons.Xtend_ANNOTATIONTYPE, "Xtend Annotation Type");
   }
   
   @Override
@@ -45,18 +41,15 @@ public class NewXtendFileAction extends JavaCreateTemplateInPackageAction<PsiEle
   @Override
   protected PsiElement doCreate(final PsiDirectory dir, final String name, final String templateName) throws IncorrectOperationException {
     Project project = dir.getProject();
-    FileTemplateManager _instance = FileTemplateManager.getInstance(project);
-    FileTemplate template = _instance.getInternalTemplate(templateName);
-    FileTemplateManager _instance_1 = FileTemplateManager.getInstance(project);
-    Properties defaultProperties = _instance_1.getDefaultProperties();
+    FileTemplate template = FileTemplateManager.getInstance(project).getInternalTemplate(templateName);
+    Properties defaultProperties = FileTemplateManager.getInstance(project).getDefaultProperties();
     Properties properties = new Properties(defaultProperties);
     properties.setProperty(FileTemplate.ATTRIBUTE_NAME, name);
     String _defaultExtension = XtendFileType.INSTANCE.getDefaultExtension();
     String fileName = ((name + ".") + _defaultExtension);
     PsiElement element = null;
     try {
-      PsiElement _createFromTemplate = FileTemplateUtil.createFromTemplate(template, fileName, properties, dir);
-      element = _createFromTemplate;
+      element = FileTemplateUtil.createFromTemplate(template, fileName, properties, dir);
     } catch (final Throwable _t) {
       if (_t instanceof IncorrectOperationException) {
         final IncorrectOperationException e = (IncorrectOperationException)_t;

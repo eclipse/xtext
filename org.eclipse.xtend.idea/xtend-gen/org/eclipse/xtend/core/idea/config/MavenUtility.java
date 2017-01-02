@@ -10,13 +10,9 @@ package org.eclipse.xtend.core.idea.config;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.xml.XmlFile;
 import com.intellij.util.xml.DomUtil;
-import com.intellij.util.xml.GenericDomValue;
 import java.util.List;
-import org.eclipse.xtend.core.idea.config.MavenArtifact;
 import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.util.PlatformUtil;
@@ -50,38 +46,30 @@ public class MavenUtility {
     if ((mavenProject == null)) {
       return;
     }
-    VirtualFile _file = mavenProject.getFile();
-    final MavenDomProjectModel model = MavenDomUtil.getMavenDomProjectModel(project, _file);
+    final MavenDomProjectModel model = MavenDomUtil.getMavenDomProjectModel(project, mavenProject.getFile());
     if ((model == null)) {
       return;
     }
-    XmlFile _file_1 = DomUtil.getFile(model);
-    List<PsiFile> _newImmutableList = CollectionLiterals.<PsiFile>newImmutableList(_file_1);
+    List<PsiFile> _newImmutableList = CollectionLiterals.<PsiFile>newImmutableList(DomUtil.getFile(model));
     new WriteCommandAction.Simple(project, "Add Xtend lib Maven Dependency", ((PsiFile[])Conversions.unwrapArray(_newImmutableList, PsiFile.class))) {
       @Override
       protected void run() throws Throwable {
-        MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
-        String _groupId = _xtendLibMavenId.getGroupId();
-        MavenArtifact _xtendLibMavenId_1 = XtendLibraryConfigurator.xtendLibMavenId();
-        String _artifactId = _xtendLibMavenId_1.getArtifactId();
-        MavenArtifact _xtendLibMavenId_2 = XtendLibraryConfigurator.xtendLibMavenId();
-        String _version = _xtendLibMavenId_2.getVersion();
+        String _groupId = XtendLibraryConfigurator.xtendLibMavenId().getGroupId();
+        String _artifactId = XtendLibraryConfigurator.xtendLibMavenId().getArtifactId();
+        String _version = XtendLibraryConfigurator.xtendLibMavenId().getVersion();
         MavenId _mavenId = new MavenId(_groupId, _artifactId, _version);
         MavenDomDependency dependency = MavenDomUtil.createDomDependency(model, null, _mavenId);
         if (isTestScope) {
-          GenericDomValue<String> _scope = dependency.getScope();
-          _scope.setStringValue("test");
+          dependency.getScope().setStringValue("test");
         }
       }
     }.execute();
   }
   
   public boolean isMavenizedModule(final Module module) {
-    PlatformUtil _platformUtil = new PlatformUtil();
-    boolean _isMavenInstalled = _platformUtil.isMavenInstalled();
+    boolean _isMavenInstalled = new PlatformUtil().isMavenInstalled();
     if (_isMavenInstalled) {
-      Project _project = module.getProject();
-      MavenProjectsManager mavenProjectsManager = MavenProjectsManager.getInstance(_project);
+      MavenProjectsManager mavenProjectsManager = MavenProjectsManager.getInstance(module.getProject());
       boolean _xifexpression = false;
       if ((mavenProjectsManager != null)) {
         _xifexpression = mavenProjectsManager.isMavenizedModule(module);

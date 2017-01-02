@@ -7,18 +7,8 @@
  */
 package org.eclipse.xtend.idea.structureview;
 
-import com.intellij.ide.structureView.StructureView;
-import com.intellij.ide.structureView.impl.StructureViewComposite;
-import com.intellij.ide.structureView.newStructureView.StructureViewComponent;
-import org.eclipse.xtend.core.idea.structureview.SyntheticMemberFilter;
 import org.eclipse.xtend.idea.structureview.AbstractOutlineTests;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.junit.Ignore;
-import org.junit.Test;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -26,14 +16,17 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class JvmOutlineTests extends AbstractOutlineTests {
   @Override
-  protected StructureViewComponent getStructureViewComponent(final StructureView structureView) {
-    StructureViewComposite.StructureViewDescriptor[] _structureViews = ((StructureViewComposite) structureView).getStructureViews();
-    StructureViewComposite.StructureViewDescriptor _last = IterableExtensions.<StructureViewComposite.StructureViewDescriptor>last(((Iterable<StructureViewComposite.StructureViewDescriptor>)Conversions.doWrapArray(_structureViews)));
-    final Procedure1<StructureViewComponent> _function = (StructureViewComponent it) -> {
-      it.setActionActive(SyntheticMemberFilter.ID, true);
-    };
-    return ObjectExtensions.<StructureViewComponent>operator_doubleArrow(
-      ((StructureViewComponent) _last.structureView), _function);
+  protected StructureViewComponent getStructureViewComponent(final /* StructureView */Object structureView) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nStructureViewComposite cannot be resolved to a type."
+      + "\nStructureViewComponent cannot be resolved to a type."
+      + "\nThe method setActionActive(Object, boolean) is undefined"
+      + "\nThe method or field SyntheticMemberFilter is undefined"
+      + "\nstructureViews cannot be resolved"
+      + "\nlast cannot be resolved"
+      + "\nstructureView cannot be resolved"
+      + "\n=> cannot be resolved"
+      + "\nID cannot be resolved");
   }
   
   @Override
@@ -76,50 +69,11 @@ public class JvmOutlineTests extends AbstractOutlineTests {
     return _builder.toString();
   }
   
-  @Test
-  public void testDispatchMethod_1() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def dispatch foo(String x) {\'\'}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def dispatch foo(Object y) {\'\'}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def dispatch bar(String x) {\'\'}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def dispatch bar(Object y) {\'\'}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("aaa.xtend");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("Foo");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("_foo(String) : String");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("_foo(Object) : String");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("_bar(String) : String");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("_bar(Object) : String");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("foo(Object) : String");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("bar(Object) : String");
-    _builder_1.newLine();
-    this.testStructureView(_builder.toString(), _builder_1.toString());
+  /* @Test
+   */public void testDispatchMethod_1() {
+    throw new Error("Unresolved compilation problems:"
+      + "\nInvalid number of arguments. The method testStructureView(Consumer) is not applicable for the arguments (CharSequence,String)"
+      + "\nThe method testStructureView(Consumer) from the type AbstractOutlineTests refers to the missing type Consumer");
   }
   
   @Override
@@ -239,8 +193,8 @@ public class JvmOutlineTests extends AbstractOutlineTests {
     return _builder.toString();
   }
   
-  @Test
+  /* @Test
   @Ignore("TODO: org.eclipse.xtend.ide.tests.outline.JvmOutlineTests.testActiveAnnotation()")
-  public void testActiveAnnotation() {
+   */public void testActiveAnnotation() {
   }
 }

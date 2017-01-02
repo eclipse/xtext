@@ -9,9 +9,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
-import java.util.List;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -27,23 +24,18 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget> extends XtendNamedElementImpl<T> implements AnnotationTarget {
   @Override
   public Iterable<? extends AnnotationReference> getAnnotations() {
-    T _delegate = this.getDelegate();
-    EList<XAnnotation> _annotations = _delegate.getAnnotations();
     final Function1<XAnnotation, AnnotationReference> _function = (XAnnotation it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toAnnotationReference(it);
+      return this.getCompilationUnit().toAnnotationReference(it);
     };
-    List<AnnotationReference> _map = ListExtensions.<XAnnotation, AnnotationReference>map(_annotations, _function);
-    return ImmutableList.<AnnotationReference>copyOf(_map);
+    return ImmutableList.<AnnotationReference>copyOf(ListExtensions.<XAnnotation, AnnotationReference>map(this.getDelegate().getAnnotations(), _function));
   }
   
   @Override
   public AnnotationReference findAnnotation(final Type annotationType) {
-    Iterable<? extends AnnotationReference> _annotations = this.getAnnotations();
     final Function1<AnnotationReference, Boolean> _function = (AnnotationReference it) -> {
       AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
       return Boolean.valueOf(Objects.equal(_annotationTypeDeclaration, annotationType));
     };
-    return IterableExtensions.findFirst(_annotations, _function);
+    return IterableExtensions.findFirst(this.getAnnotations(), _function);
   }
 }

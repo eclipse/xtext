@@ -25,20 +25,17 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
   @Override
   public void doTransform(final List<? extends MutableClassDeclaration> annotatedSourceClasses, @Extension final TransformationContext ctx) {
     final Consumer<MutableClassDeclaration> _function = (MutableClassDeclaration it) -> {
-      Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
       final Consumer<MutableFieldDeclaration> _function_1 = (MutableFieldDeclaration field) -> {
         MutableTypeDeclaration _declaringType = field.getDeclaringType();
-        String _simpleName = field.getSimpleName();
-        String _firstUpper = StringExtensions.toFirstUpper(_simpleName);
+        String _firstUpper = StringExtensions.toFirstUpper(field.getSimpleName());
         String _plus = ("get" + _firstUpper);
         final Procedure1<MutableMethodDeclaration> _function_2 = (MutableMethodDeclaration it_1) -> {
-          TypeReference _type = field.getType();
-          it_1.setReturnType(_type);
+          it_1.setReturnType(field.getType());
           final CompilationStrategy _function_3 = (CompilationStrategy.CompilationContext it_2) -> {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("return this.");
-            String _simpleName_1 = field.getSimpleName();
-            _builder.append(_simpleName_1);
+            String _simpleName = field.getSimpleName();
+            _builder.append(_simpleName);
             _builder.append(";");
             _builder.newLineIfNotEmpty();
             return _builder;
@@ -47,20 +44,18 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
         };
         _declaringType.addMethod(_plus, _function_2);
       };
-      _declaredFields.forEach(_function_1);
+      it.getDeclaredFields().forEach(_function_1);
       String _qualifiedName = it.getQualifiedName();
-      String _qualifiedName_1 = it.getQualifiedName();
-      int _length = _qualifiedName_1.length();
-      String _simpleName = it.getSimpleName();
-      int _length_1 = _simpleName.length();
+      int _length = it.getQualifiedName().length();
+      int _length_1 = it.getSimpleName().length();
       int _minus = (_length - _length_1);
       final String pkg = _qualifiedName.substring(0, _minus);
       final TypeReference ser = ctx.newTypeReference(Serializable.class);
       if ((ser == null)) {
         ctx.addError(it, "Cannot find Serializable");
       }
-      String _simpleName_1 = it.getSimpleName();
-      final String PVersionName = ((pkg + "P") + _simpleName_1);
+      String _simpleName = it.getSimpleName();
+      final String PVersionName = ((pkg + "P") + _simpleName);
       final MutableClassDeclaration p = ctx.findClass(PVersionName);
       if ((p == null)) {
         ctx.addError(it, (("Class " + PVersionName) + " not found"));
@@ -70,8 +65,8 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
         pIfcs.add(ser);
         p.setImplementedInterfaces(pIfcs);
       }
-      String _simpleName_2 = it.getSimpleName();
-      final String GVersionName = ((pkg + "G") + _simpleName_2);
+      String _simpleName_1 = it.getSimpleName();
+      final String GVersionName = ((pkg + "G") + _simpleName_1);
       final MutableClassDeclaration g = ctx.findClass(GVersionName);
       if ((g == null)) {
         ctx.addError(it, (("Class " + GVersionName) + " not found"));
@@ -89,16 +84,14 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
   public void doRegisterGlobals(final List<? extends ClassDeclaration> annotatedSourceElements, @Extension final RegisterGlobalsContext ctx) {
     final Consumer<ClassDeclaration> _function = (ClassDeclaration it) -> {
       String _qualifiedName = it.getQualifiedName();
-      String _qualifiedName_1 = it.getQualifiedName();
-      int _length = _qualifiedName_1.length();
-      String _simpleName = it.getSimpleName();
-      int _length_1 = _simpleName.length();
+      int _length = it.getQualifiedName().length();
+      int _length_1 = it.getSimpleName().length();
       int _minus = (_length - _length_1);
       final String pkg = _qualifiedName.substring(0, _minus);
+      String _simpleName = it.getSimpleName();
+      final String PVersionName = ((pkg + "P") + _simpleName);
       String _simpleName_1 = it.getSimpleName();
-      final String PVersionName = ((pkg + "P") + _simpleName_1);
-      String _simpleName_2 = it.getSimpleName();
-      final String GVersionName = ((pkg + "G") + _simpleName_2);
+      final String GVersionName = ((pkg + "G") + _simpleName_1);
       ctx.registerClass(PVersionName);
       ctx.registerClass(GVersionName);
     };

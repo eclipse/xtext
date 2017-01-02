@@ -9,9 +9,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import java.util.List;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -26,23 +23,18 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class XtendAnnotationTypeDeclarationImpl extends XtendTypeDeclarationImpl<XtendAnnotationType> implements AnnotationTypeDeclaration {
   @Override
   public AnnotationTypeElementDeclaration findDeclaredAnnotationTypeElement(final String name) {
-    Iterable<? extends AnnotationTypeElementDeclaration> _declaredAnnotationTypeElements = this.getDeclaredAnnotationTypeElements();
     final Function1<AnnotationTypeElementDeclaration, Boolean> _function = (AnnotationTypeElementDeclaration it) -> {
       String _simpleName = it.getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
-    return IterableExtensions.findFirst(_declaredAnnotationTypeElements, _function);
+    return IterableExtensions.findFirst(this.getDeclaredAnnotationTypeElements(), _function);
   }
   
   @Override
   public Iterable<? extends AnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements() {
-    XtendAnnotationType _delegate = this.getDelegate();
-    EList<XtendMember> _members = _delegate.getMembers();
     final Function1<XtendMember, MemberDeclaration> _function = (XtendMember it) -> {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toXtendMemberDeclaration(it);
+      return this.getCompilationUnit().toXtendMemberDeclaration(it);
     };
-    List<MemberDeclaration> _map = ListExtensions.<XtendMember, MemberDeclaration>map(_members, _function);
-    return Iterables.<AnnotationTypeElementDeclaration>filter(_map, AnnotationTypeElementDeclaration.class);
+    return Iterables.<AnnotationTypeElementDeclaration>filter(ListExtensions.<XtendMember, MemberDeclaration>map(this.getDelegate().getMembers(), _function), AnnotationTypeElementDeclaration.class);
   }
 }

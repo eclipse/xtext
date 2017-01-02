@@ -111,10 +111,8 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
     this.helper.classDefString = "interface Foo<Foo> extends Iterable<Foo>";
     this.expectInterface(10, 3);
     this.expectTypeVariable(14, 3);
-    int _indexOf = this.helper.classDefString.indexOf("Iterable");
-    this.expectInterface(_indexOf, 8);
-    int _lastIndexOf = this.helper.classDefString.lastIndexOf("Foo");
-    this.expectTypeVariable(_lastIndexOf, 3);
+    this.expectInterface(this.helper.classDefString.indexOf("Iterable"), 8);
+    this.expectTypeVariable(this.helper.classDefString.lastIndexOf("Foo"), 3);
     this.highlight();
   }
   
@@ -122,12 +120,9 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
   public void testExtendedInterfaceWithTypeArg() {
     this.helper.classDefString = "interface Foo extends Iterable<Object>";
     this.expectInterface(10, 3);
-    int _indexOf = this.helper.classDefString.indexOf("Iterable");
-    this.expectInterface(_indexOf, 8);
-    int _indexOf_1 = this.helper.classDefString.indexOf("Object");
-    this.expectClass(_indexOf_1, 6);
-    int _indexOf_2 = this.helper.classDefString.indexOf("Object");
-    this.helper.expect(_indexOf_2, 6, XbaseHighlightingStyles.TYPE_ARGUMENT);
+    this.expectInterface(this.helper.classDefString.indexOf("Iterable"), 8);
+    this.expectClass(this.helper.classDefString.indexOf("Object"), 6);
+    this.helper.expect(this.helper.classDefString.indexOf("Object"), 6, XbaseHighlightingStyles.TYPE_ARGUMENT);
     this.highlight();
   }
   
@@ -233,10 +228,8 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
     int _indexOf_1 = model.indexOf("Object");
     int _plus_1 = (_prefixLength_1 + _indexOf_1);
     this.expectClass(_plus_1, 6);
-    int _indexOf_2 = model.indexOf("o)");
-    this.helper.expectAbsolute(_indexOf_2, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
-    int _indexOf_3 = model.indexOf("this");
-    this.helper.expectAbsolute(_indexOf_3, 4, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.indexOf("o)"), 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
+    this.helper.expectAbsolute(model.indexOf("this"), 4, HighlightingStyles.KEYWORD_ID);
     this.helper.highlight(model);
   }
   
@@ -254,10 +247,8 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
     int _indexOf_1 = model.indexOf("Object");
     int _plus_1 = (_prefixLength_1 + _indexOf_1);
     this.expectClass(_plus_1, 6);
-    int _indexOf_2 = model.indexOf("o)");
-    this.helper.expectAbsolute(_indexOf_2, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
-    int _indexOf_3 = model.indexOf("this");
-    this.helper.expectAbsolute(_indexOf_3, 4, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.indexOf("o)"), 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
+    this.helper.expectAbsolute(model.indexOf("this"), 4, HighlightingStyles.KEYWORD_ID);
     int _prefixLength_2 = this.helper.getPrefixLength();
     int _lastIndexOf = model.lastIndexOf("Foo");
     int _plus_2 = (_prefixLength_2 + _lastIndexOf);
@@ -373,20 +364,16 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
     int _indexOf = model.indexOf("foo");
     int _plus = (_prefixLength + _indexOf);
     this.helper.expectMethod(_plus, 3);
-    int _indexOf_1 = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
+    this.helper.expectAbsolute(model.indexOf("x"), 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
     this.helper.highlight(model);
   }
   
   @Test
   public void testMethodParamReference() {
     final String model = "{} def foo(int x) { x }";
-    int _indexOf = model.indexOf("int");
-    this.helper.expectAbsolute(_indexOf, 3, HighlightingStyles.KEYWORD_ID);
-    int _indexOf_1 = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
-    int _lastIndexOf = model.lastIndexOf("x");
-    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
+    this.helper.expectAbsolute(model.indexOf("int"), 3, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.indexOf("x"), 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
+    this.helper.expectAbsolute(model.lastIndexOf("x"), 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
     this.helper.highlight(model);
   }
   
@@ -397,8 +384,7 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
     int _indexOf = model.indexOf("foo");
     int _plus = (_prefixLength + _indexOf);
     this.helper.expectMethod(_plus, 3);
-    int _indexOf_1 = model.indexOf("it");
-    this.helper.expectAbsolute(_indexOf_1, 2, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.indexOf("it"), 2, HighlightingStyles.KEYWORD_ID);
     this.helper.highlight(model);
   }
   
@@ -409,172 +395,131 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
     int _indexOf = model.indexOf("foo");
     int _plus = (_prefixLength + _indexOf);
     this.helper.expectMethod(_plus, 3);
-    int _indexOf_1 = model.indexOf("it");
-    this.helper.expectAbsolute(_indexOf_1, 2, HighlightingStyles.KEYWORD_ID);
-    int _lastIndexOf = model.lastIndexOf("it");
-    this.helper.expectAbsolute(_lastIndexOf, 2, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.indexOf("it"), 2, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.lastIndexOf("it"), 2, HighlightingStyles.KEYWORD_ID);
     this.helper.highlight(model);
   }
   
   @Test
   public void testLocalVariable() {
     final String model = "{ var int x = 1 println(x) }";
-    int _indexOf = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
-    int _lastIndexOf = model.lastIndexOf("x");
-    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE);
+    this.helper.expectAbsolute(model.indexOf("x"), 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.lastIndexOf("x"), 1, XbaseHighlightingStyles.LOCAL_VARIABLE);
     this.helper.highlight(model);
   }
   
   @Test
   public void testLocalVariableIt() {
     final String model = "{ var int it = 1 println(it) }";
-    int _indexOf = model.indexOf("it");
-    this.helper.expectAbsolute(_indexOf, 2, HighlightingStyles.KEYWORD_ID);
-    int _lastIndexOf = model.lastIndexOf("it");
-    this.helper.expectAbsolute(_lastIndexOf, 2, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.indexOf("it"), 2, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.lastIndexOf("it"), 2, HighlightingStyles.KEYWORD_ID);
     this.helper.highlight(model);
   }
   
   @Test
   public void testLocalFinalVariable() {
     final String model = "{ val int x = 1 println(x) }";
-    int _indexOf = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
-    int _indexOf_1 = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
-    int _lastIndexOf = model.lastIndexOf("x");
-    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE);
-    int _lastIndexOf_1 = model.lastIndexOf("x");
-    this.helper.expectAbsolute(_lastIndexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE);
+    this.helper.expectAbsolute(model.indexOf("x"), 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.indexOf("x"), 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.lastIndexOf("x"), 1, XbaseHighlightingStyles.LOCAL_VARIABLE);
+    this.helper.expectAbsolute(model.lastIndexOf("x"), 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE);
     this.helper.highlight(model);
   }
   
   @Test
   public void testLocalVariableTE() {
     final String model = "\'\'\' «{var int x = 1 println(x)}» \'\'\'";
-    int _indexOf = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
-    int _lastIndexOf = model.lastIndexOf("x");
-    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE);
+    this.helper.expectAbsolute(model.indexOf("x"), 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.lastIndexOf("x"), 1, XbaseHighlightingStyles.LOCAL_VARIABLE);
     this.helper.highlight(model);
   }
   
   @Test
   public void testLocalFinalVariableTE() {
     final String model = "\'\'\' «{val int x = 1 println(x)}» \'\'\'";
-    int _indexOf = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
-    int _indexOf_1 = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
-    int _lastIndexOf = model.lastIndexOf("x");
-    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE);
-    int _lastIndexOf_1 = model.lastIndexOf("x");
-    this.helper.expectAbsolute(_lastIndexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE);
+    this.helper.expectAbsolute(model.indexOf("x"), 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.indexOf("x"), 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.lastIndexOf("x"), 1, XbaseHighlightingStyles.LOCAL_VARIABLE);
+    this.helper.expectAbsolute(model.lastIndexOf("x"), 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE);
     this.helper.highlight(model);
   }
   
   @Test
   public void testImplicitClosureParameter() {
     final String model = "{ [ it ] }";
-    int _indexOf = model.indexOf("it");
-    this.helper.expectAbsolute(_indexOf, 2, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.indexOf("it"), 2, HighlightingStyles.KEYWORD_ID);
     this.helper.highlight(model);
   }
   
   @Test
   public void testClosureParameterIt() {
     final String model = "{ [ it | println(it) ] }";
-    int _indexOf = model.indexOf("it");
-    this.helper.expectAbsolute(_indexOf, 2, HighlightingStyles.KEYWORD_ID);
-    int _indexOf_1 = model.indexOf("println");
-    this.helper.expectAbsolute(_indexOf_1, 7, XbaseHighlightingStyles.METHOD);
-    int _indexOf_2 = model.indexOf("println");
-    this.helper.expectAbsolute(_indexOf_2, 7, XbaseHighlightingStyles.STATIC_METHOD_INVOCATION);
-    int _lastIndexOf = model.lastIndexOf("it");
-    this.helper.expectAbsolute(_lastIndexOf, 2, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.indexOf("it"), 2, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.indexOf("println"), 7, XbaseHighlightingStyles.METHOD);
+    this.helper.expectAbsolute(model.indexOf("println"), 7, XbaseHighlightingStyles.STATIC_METHOD_INVOCATION);
+    this.helper.expectAbsolute(model.lastIndexOf("it"), 2, HighlightingStyles.KEYWORD_ID);
     this.helper.highlight(model);
   }
   
   @Test
   public void testClosureParameter() {
     final String model = "{ [ int x | x ] }";
-    int _indexOf = model.indexOf("int");
-    this.helper.expectAbsolute(_indexOf, 3, HighlightingStyles.KEYWORD_ID);
-    int _indexOf_1 = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
-    int _lastIndexOf = model.lastIndexOf("x");
-    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
+    this.helper.expectAbsolute(model.indexOf("int"), 3, HighlightingStyles.KEYWORD_ID);
+    this.helper.expectAbsolute(model.indexOf("x"), 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
+    this.helper.expectAbsolute(model.lastIndexOf("x"), 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
     this.helper.highlight(model);
   }
   
   @Test
   public void testLoopParameter() {
     final String model = "{ for(i: 0..42) { } }";
-    int _indexOf = model.indexOf("i");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
-    int _indexOf_1 = model.indexOf("i");
-    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.indexOf("i"), 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.indexOf("i"), 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
     this.helper.highlight(model);
   }
   
   @Test
   public void testTELoopParameter() {
     final String model = "\'\'\' «FOR i: 0..42» «ENDFOR» \'\'\'";
-    int _indexOf = model.indexOf("i");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
-    int _indexOf_1 = model.indexOf("i");
-    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.indexOf("i"), 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.indexOf("i"), 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
     this.helper.highlight(model);
   }
   
   @Test
   public void testSwitchParameter() {
     final String model = "{ switch( i: 0..47) { default: { } } }";
-    int _indexOf = model.indexOf("i:");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
-    int _indexOf_1 = model.indexOf("i:");
-    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.indexOf("i:"), 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(model.indexOf("i:"), 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
     this.helper.highlight(model);
   }
   
   @Test
   public void testMethodCallWithTypeArg() {
     final String model = "{ <Object>newArrayList() }";
-    int _indexOf = model.indexOf("Object");
-    this.helper.expectAbsolute(_indexOf, 6, XbaseHighlightingStyles.CLASS);
-    int _indexOf_1 = model.indexOf("Object");
-    this.helper.expectAbsolute(_indexOf_1, 6, XbaseHighlightingStyles.TYPE_ARGUMENT);
-    int _indexOf_2 = model.indexOf("newArrayList");
-    this.helper.expectAbsolute(_indexOf_2, 12, XbaseHighlightingStyles.METHOD);
-    int _indexOf_3 = model.indexOf("newArrayList");
-    this.helper.expectAbsolute(_indexOf_3, 12, XbaseHighlightingStyles.STATIC_METHOD_INVOCATION);
+    this.helper.expectAbsolute(model.indexOf("Object"), 6, XbaseHighlightingStyles.CLASS);
+    this.helper.expectAbsolute(model.indexOf("Object"), 6, XbaseHighlightingStyles.TYPE_ARGUMENT);
+    this.helper.expectAbsolute(model.indexOf("newArrayList"), 12, XbaseHighlightingStyles.METHOD);
+    this.helper.expectAbsolute(model.indexOf("newArrayList"), 12, XbaseHighlightingStyles.STATIC_METHOD_INVOCATION);
     this.helper.highlight(model);
   }
   
   @Test
   public void testFieldDeclWithTypeArg() {
     final String model = "{ } Iterable<Object> foo";
-    int _indexOf = model.indexOf("Iterable");
-    this.helper.expectAbsolute(_indexOf, 8, XbaseHighlightingStyles.INTERFACE);
-    int _indexOf_1 = model.indexOf("Object");
-    this.helper.expectAbsolute(_indexOf_1, 6, XbaseHighlightingStyles.CLASS);
-    int _indexOf_2 = model.indexOf("Object");
-    this.helper.expectAbsolute(_indexOf_2, 6, XbaseHighlightingStyles.TYPE_ARGUMENT);
-    int _indexOf_3 = model.indexOf("foo");
-    this.helper.expectAbsolute(_indexOf_3, 3, XbaseHighlightingStyles.FIELD);
+    this.helper.expectAbsolute(model.indexOf("Iterable"), 8, XbaseHighlightingStyles.INTERFACE);
+    this.helper.expectAbsolute(model.indexOf("Object"), 6, XbaseHighlightingStyles.CLASS);
+    this.helper.expectAbsolute(model.indexOf("Object"), 6, XbaseHighlightingStyles.TYPE_ARGUMENT);
+    this.helper.expectAbsolute(model.indexOf("foo"), 3, XbaseHighlightingStyles.FIELD);
     this.helper.highlight(model);
   }
   
   @Test
   public void testConstructorCallWithTypeArg() {
     final String model = "{ new Iterable<Object>{} }";
-    int _indexOf = model.indexOf("Iterable");
-    this.helper.expectAbsolute(_indexOf, 8, XbaseHighlightingStyles.INTERFACE);
-    int _indexOf_1 = model.indexOf("Object");
-    this.helper.expectAbsolute(_indexOf_1, 6, XbaseHighlightingStyles.CLASS);
-    int _indexOf_2 = model.indexOf("Object");
-    this.helper.expectAbsolute(_indexOf_2, 6, XbaseHighlightingStyles.TYPE_ARGUMENT);
+    this.helper.expectAbsolute(model.indexOf("Iterable"), 8, XbaseHighlightingStyles.INTERFACE);
+    this.helper.expectAbsolute(model.indexOf("Object"), 6, XbaseHighlightingStyles.CLASS);
+    this.helper.expectAbsolute(model.indexOf("Object"), 6, XbaseHighlightingStyles.TYPE_ARGUMENT);
     this.helper.highlight(model);
   }
 }

@@ -55,8 +55,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -85,8 +84,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -115,8 +113,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type C is accessible in scope");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type C is accessible in scope");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -145,8 +142,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type C is accessible in scope");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type C is accessible in scope");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -175,8 +171,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type I is accessible in scope");
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type I is accessible in scope");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -208,8 +203,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -253,8 +247,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

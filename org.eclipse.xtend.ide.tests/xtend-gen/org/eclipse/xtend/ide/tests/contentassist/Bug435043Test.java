@@ -59,8 +59,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -101,8 +100,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -141,8 +139,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -177,8 +174,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -223,8 +219,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -265,8 +260,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -305,8 +299,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -341,8 +334,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -386,8 +378,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -437,8 +428,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -476,8 +466,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -521,8 +510,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -566,8 +554,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -617,8 +604,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -656,8 +642,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -701,8 +686,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -737,8 +721,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -773,8 +756,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -809,8 +791,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -845,8 +826,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
   
   @Test
@@ -891,8 +871,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
   }
   
   @Test
@@ -935,8 +914,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
   }
   
   @Test
@@ -981,8 +959,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
   }
   
   @Test
@@ -1011,8 +988,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("x");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("x");
   }
   
   @Test
@@ -1051,8 +1027,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
   }
   
   @Test
@@ -1089,8 +1064,7 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
   }
   
   @Test
@@ -1129,7 +1103,6 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+    _newBuilder.append(_builder.toString()).assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
   }
 }

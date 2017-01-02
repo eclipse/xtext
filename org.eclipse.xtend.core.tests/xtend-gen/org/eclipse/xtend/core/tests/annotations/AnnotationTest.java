@@ -1,19 +1,16 @@
 package org.eclipse.xtend.core.tests.annotations;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -41,8 +38,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    CharSequence _compileToJavaCode = this.compileToJavaCode(_builder);
-    this.assertContains(_compileToJavaCode, "@Click(2)");
+    this.assertContains(this.compileToJavaCode(_builder), "@Click(2)");
   }
   
   @Test
@@ -61,8 +57,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    CharSequence _compileToJavaCode = this.compileToJavaCode(_builder);
-    this.assertContains(_compileToJavaCode, "@Click({ 2 })");
+    this.assertContains(this.compileToJavaCode(_builder), "@Click({ 2 })");
   }
   
   @Test
@@ -81,8 +76,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    CharSequence _compileToJavaCode = this.compileToJavaCode(_builder);
-    this.assertContains(_compileToJavaCode, "@Click({ 2, 3 })");
+    this.assertContains(this.compileToJavaCode(_builder), "@Click({ 2, 3 })");
   }
   
   @Test
@@ -101,8 +95,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    CharSequence _compileToJavaCode = this.compileToJavaCode(_builder);
-    this.assertContains(_compileToJavaCode, "@Click(value = 2)");
+    this.assertContains(this.compileToJavaCode(_builder), "@Click(value = 2)");
   }
   
   @Test
@@ -121,8 +114,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    CharSequence _compileToJavaCode = this.compileToJavaCode(_builder);
-    this.assertContains(_compileToJavaCode, "@Click(value = { 2 })");
+    this.assertContains(this.compileToJavaCode(_builder), "@Click(value = { 2 })");
   }
   
   @Test
@@ -141,8 +133,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    CharSequence _compileToJavaCode = this.compileToJavaCode(_builder);
-    this.assertContains(_compileToJavaCode, "@Click(value = { 2, 3 })");
+    this.assertContains(this.compileToJavaCode(_builder), "@Click(value = { 2, 3 })");
   }
   
   protected void assertContains(final CharSequence code, final String text) {
@@ -152,9 +143,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.append("\' not found in \'");
     _builder.append(code);
     _builder.append("\' ");
-    String _string = code.toString();
-    boolean _contains = _string.contains(text);
-    Assert.assertTrue(_builder.toString(), _contains);
+    Assert.assertTrue(_builder.toString(), code.toString().contains(text));
   }
   
   @Inject
@@ -178,11 +167,8 @@ public class AnnotationTest extends AbstractXtendTestCase {
       {
         final XtendFile file = this.parseHelper.parse(xtendCode);
         this.validationHelper.assertNoErrors(file);
-        EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-        XtendTypeDeclaration _get = _xtendTypes.get(0);
-        final JvmDeclaredType inferredType = this.associations.getInferredType(_get);
-        GeneratorConfig _get_1 = this.generatorConfigProvider.get(inferredType);
-        _xblockexpression = this.generator.generateType(inferredType, _get_1);
+        final JvmDeclaredType inferredType = this.associations.getInferredType(file.getXtendTypes().get(0));
+        _xblockexpression = this.generator.generateType(inferredType, this.generatorConfigProvider.get(inferredType));
       }
       return _xblockexpression;
     } catch (Throwable _e) {

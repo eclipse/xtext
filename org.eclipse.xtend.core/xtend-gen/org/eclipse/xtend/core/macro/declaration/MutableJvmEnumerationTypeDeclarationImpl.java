@@ -10,9 +10,7 @@ package org.eclipse.xtend.core.macro.declaration;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmEnumerationTypeDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -35,24 +33,18 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
-import org.eclipse.xtext.common.types.JvmEnumerationType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclarationImpl implements MutableEnumerationTypeDeclaration {
   @Override
   public void markAsRead() {
     this.checkMutable();
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
-    JvmEnumerationType _delegate = this.getDelegate();
-    _readAndWriteTracking.markReadAccess(_delegate);
+    this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
   
   @Override
@@ -141,18 +133,16 @@ public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationType
   
   @Override
   public Iterable<? extends MutableEnumerationValueDeclaration> getDeclaredValues() {
-    Iterable<? extends MutableMemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    return Iterables.<MutableEnumerationValueDeclaration>filter(_declaredMembers, MutableEnumerationValueDeclaration.class);
+    return Iterables.<MutableEnumerationValueDeclaration>filter(this.getDeclaredMembers(), MutableEnumerationValueDeclaration.class);
   }
   
   @Override
   public MutableEnumerationValueDeclaration findDeclaredValue(final String name) {
-    Iterable<? extends MutableEnumerationValueDeclaration> _declaredValues = this.getDeclaredValues();
     final Function1<MutableEnumerationValueDeclaration, Boolean> _function = (MutableEnumerationValueDeclaration value) -> {
       String _simpleName = value.getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
-    return IterableExtensions.findFirst(_declaredValues, _function);
+    return IterableExtensions.findFirst(this.getDeclaredValues(), _function);
   }
   
   @Override
@@ -163,11 +153,8 @@ public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationType
     final JvmEnumerationLiteral jvmLiteral = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
     jvmLiteral.setSimpleName(name);
     jvmLiteral.setVisibility(JvmVisibility.PUBLIC);
-    JvmEnumerationType _delegate = this.getDelegate();
-    EList<JvmMember> _members = _delegate.getMembers();
-    _members.add(jvmLiteral);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(jvmLiteral);
+    this.getDelegate().getMembers().add(jvmLiteral);
+    MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(jvmLiteral);
     final MutableEnumerationValueDeclaration mutableEnumerationValueDeclaration = ((MutableEnumerationValueDeclaration) _memberDeclaration);
     initializer.apply(mutableEnumerationValueDeclaration);
     return mutableEnumerationValueDeclaration;

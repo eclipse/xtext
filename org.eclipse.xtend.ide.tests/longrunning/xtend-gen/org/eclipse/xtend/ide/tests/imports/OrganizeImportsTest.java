@@ -3,13 +3,9 @@ package org.eclipse.xtend.ide.tests.imports;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.ui.PreferenceConstants;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -42,8 +38,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   public void close() {
     try {
       this._workbenchTestHelper.tearDown();
-      IPreferenceStore _preferenceStore = PreferenceConstants.getPreferenceStore();
-      PreferenceConstants.initializeDefaultValues(_preferenceStore);
+      PreferenceConstants.initializeDefaultValues(PreferenceConstants.getPreferenceStore());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -55,30 +50,23 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   
   protected void assertIsOrganizedTo(final CharSequence model, final String fileName, final CharSequence expected) {
     try {
-      String _string = expected.toString();
-      boolean _contains = _string.contains("$");
-      Assert.assertFalse(_contains);
-      String _string_1 = model.toString();
-      final XtendFile xtendFile = this._workbenchTestHelper.xtendFile(fileName, _string_1);
+      Assert.assertFalse(expected.toString().contains("$"));
+      final XtendFile xtendFile = this._workbenchTestHelper.xtendFile(fileName, model.toString());
       Resource _eResource = xtendFile.eResource();
       final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
       final StringBuilder builder = new StringBuilder(model);
       final Function1<ReplaceRegion, Integer> _function = (ReplaceRegion it) -> {
         return Integer.valueOf(it.getOffset());
       };
-      List<ReplaceRegion> _sortBy = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
-      List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(_sortBy);
+      List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function));
       for (final ReplaceRegion it : _reverse) {
         int _offset = it.getOffset();
         int _offset_1 = it.getOffset();
         int _length = it.getLength();
         int _plus = (_offset_1 + _length);
-        String _text = it.getText();
-        builder.replace(_offset, _plus, _text);
+        builder.replace(_offset, _plus, it.getText());
       }
-      String _string_2 = expected.toString();
-      String _string_3 = builder.toString();
-      Assert.assertEquals(_string_2, _string_3);
+      Assert.assertEquals(expected.toString(), builder.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -86,30 +74,23 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   
   protected void assertIsOrganizedWithErrorsTo(final CharSequence model, final CharSequence expected) {
     try {
-      String _string = expected.toString();
-      boolean _contains = _string.contains("$");
-      Assert.assertFalse(_contains);
-      String _string_1 = model.toString();
-      final XtendFile xtendFile = this.xtendFileWithError(_string_1);
+      Assert.assertFalse(expected.toString().contains("$"));
+      final XtendFile xtendFile = this.xtendFileWithError(model.toString());
       Resource _eResource = xtendFile.eResource();
       final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
       final StringBuilder builder = new StringBuilder(model);
       final Function1<ReplaceRegion, Integer> _function = (ReplaceRegion it) -> {
         return Integer.valueOf(it.getOffset());
       };
-      List<ReplaceRegion> _sortBy = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
-      List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(_sortBy);
+      List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function));
       for (final ReplaceRegion it : _reverse) {
         int _offset = it.getOffset();
         int _offset_1 = it.getOffset();
         int _length = it.getLength();
         int _plus = (_offset_1 + _length);
-        String _text = it.getText();
-        builder.replace(_offset, _plus, _text);
+        builder.replace(_offset, _plus, it.getText());
       }
-      String _string_2 = expected.toString();
-      String _string_3 = builder.toString();
-      Assert.assertEquals(_string_2, _string_3);
+      Assert.assertEquals(expected.toString(), builder.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -117,19 +98,14 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   
   protected XtendFile xtendFileWithError(final String content) throws Exception {
     IFile file = this._workbenchTestHelper.createFile("HasErrors", content);
-    ResourceSet _resourceSet = this._workbenchTestHelper.getResourceSet();
-    URI _uri = this._workbenchTestHelper.uri(file);
-    Resource resource = _resourceSet.createResource(_uri);
+    Resource resource = this._workbenchTestHelper.getResourceSet().createResource(this._workbenchTestHelper.uri(file));
     StringInputStream _stringInputStream = new StringInputStream(content);
     resource.load(_stringInputStream, null);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
+    String _string = resource.getErrors().toString();
+    int _size = resource.getErrors().size();
     boolean _greaterThan = (_size > 0);
     Assert.assertTrue(_string, _greaterThan);
-    EList<EObject> _contents = resource.getContents();
-    EObject _get = _contents.get(0);
+    EObject _get = resource.getContents().get(0);
     XtendFile xtendFile = ((XtendFile) _get);
     return xtendFile;
   }
@@ -1368,8 +1344,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
    */
   @Test
   public void testTypeFilter_unique() {
-    IPreferenceStore _preferenceStore = PreferenceConstants.getPreferenceStore();
-    _preferenceStore.setValue(PreferenceConstants.TYPEFILTER_ENABLED, "*.awt.*;*.sun.*;antlr.*");
+    PreferenceConstants.getPreferenceStore().setValue(PreferenceConstants.TYPEFILTER_ENABLED, "*.awt.*;*.sun.*;antlr.*");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package p");
     _builder.newLine();

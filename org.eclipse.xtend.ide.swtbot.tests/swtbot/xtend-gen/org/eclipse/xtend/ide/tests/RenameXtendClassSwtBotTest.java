@@ -82,15 +82,12 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    String _text = fooEditor.getText();
-    this.assertEquals(_builder_2, _text);
+    this.assertEquals(_builder_2, fooEditor.getText());
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("class NewBar {}");
     _builder_3.newLine();
-    String _text_1 = barEditor.getText();
-    this.assertEquals(_builder_3, _text_1);
-    String _title = barEditor.getTitle();
-    this.assertEquals("NewBar.xtend", _title);
+    this.assertEquals(_builder_3, barEditor.getText());
+    this.assertEquals("NewBar.xtend", barEditor.getTitle());
   }
   
   @Test
@@ -113,15 +110,12 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    String _text = fooEditor.getText();
-    this.assertEquals(_builder_2, _text);
+    this.assertEquals(_builder_2, fooEditor.getText());
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("class NewBar {}");
     _builder_3.newLine();
-    String _text_1 = barEditor.getText();
-    this.assertEquals(_builder_3, _text_1);
-    String _title = barEditor.getTitle();
-    this.assertEquals("NewBar.xtend", _title);
+    this.assertEquals(_builder_3, barEditor.getText());
+    this.assertEquals("NewBar.xtend", barEditor.getTitle());
   }
   
   @Test
@@ -143,9 +137,7 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     _builder_1.newLine();
     _builder_1.append("class NewFonk {}");
     _builder_1.newLine();
-    String _text = barEditor.getText();
-    this.assertEquals(_builder_1, _text);
-    String _title = barEditor.getTitle();
-    this.assertEquals("NewFonk.xtend", _title);
+    this.assertEquals(_builder_1, barEditor.getText());
+    this.assertEquals("NewFonk.xtend", barEditor.getTitle());
   }
 }

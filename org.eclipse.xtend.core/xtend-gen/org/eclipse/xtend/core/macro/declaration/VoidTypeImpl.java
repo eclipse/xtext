@@ -8,11 +8,9 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.VoidType;
-import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmVoid;
 
 @SuppressWarnings("all")
@@ -27,12 +25,8 @@ public class VoidTypeImpl extends AbstractElementImpl<JvmVoid> implements VoidTy
     if ((otherType == null)) {
       return false;
     }
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    TypeReferenceProvider _typeReferenceProvider = _compilationUnit.getTypeReferenceProvider();
-    final TypeReference thisTypeRef = _typeReferenceProvider.newTypeReference(this);
-    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    TypeReferenceProvider _typeReferenceProvider_1 = _compilationUnit_1.getTypeReferenceProvider();
-    final TypeReference thatTypeRef = _typeReferenceProvider_1.newTypeReference(otherType);
+    final TypeReference thisTypeRef = this.getCompilationUnit().getTypeReferenceProvider().newTypeReference(this);
+    final TypeReference thatTypeRef = this.getCompilationUnit().getTypeReferenceProvider().newTypeReference(otherType);
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
   

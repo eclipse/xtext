@@ -57,7 +57,6 @@ public class XtendSelectableTreeStructureProvider implements SelectableTreeStruc
       }
       return _xblockexpression;
     };
-    Iterable<AbstractTreeNode> _map = IterableExtensions.<AbstractTreeNode, AbstractTreeNode>map(children, _function);
-    return IterableExtensions.<AbstractTreeNode>toList(_map);
+    return IterableExtensions.<AbstractTreeNode>toList(IterableExtensions.<AbstractTreeNode, AbstractTreeNode>map(children, _function));
   }
 }

@@ -29,8 +29,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
     final String s = "abc";
     final Object value = this.valueConverterService.toValue(s, "ID", null);
     Assert.assertEquals("abc", value);
-    String _string = this.valueConverterService.toString(value, "ID");
-    Assert.assertEquals(s, _string);
+    Assert.assertEquals(s, this.valueConverterService.toString(value, "ID"));
   }
   
   @Test
@@ -38,8 +37,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
     final String s = "\\u0050";
     final Object value = this.valueConverterService.toValue(s, "ID", null);
     Assert.assertEquals("P", value);
-    String _string = this.valueConverterService.toString(value, "ID");
-    Assert.assertEquals("P", _string);
+    Assert.assertEquals("P", this.valueConverterService.toString(value, "ID"));
   }
   
   @Test
@@ -115,8 +113,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
     final String s = "class";
     final String value = this.valueConverterService.toString(s, "ID");
     Assert.assertEquals("^class", value);
-    Object _value = this.valueConverterService.toValue(value, "ID", null);
-    Assert.assertEquals(s, _value);
+    Assert.assertEquals(s, this.valueConverterService.toValue(value, "ID", null));
   }
   
   @Test

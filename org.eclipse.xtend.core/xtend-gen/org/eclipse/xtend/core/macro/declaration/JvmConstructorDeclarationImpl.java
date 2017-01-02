@@ -9,14 +9,12 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.declaration.JvmExecutableDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtext.common.types.JvmConstructor;
 
 @SuppressWarnings("all")
 public class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmConstructor> implements ConstructorDeclaration {
   @Override
   public String getSimpleName() {
-    TypeDeclaration _declaringType = this.getDeclaringType();
-    return _declaringType.getSimpleName();
+    return this.getDeclaringType().getSimpleName();
   }
 }

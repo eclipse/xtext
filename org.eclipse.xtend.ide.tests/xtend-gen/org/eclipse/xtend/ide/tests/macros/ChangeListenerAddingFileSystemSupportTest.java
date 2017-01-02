@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.macros;
 
-import com.google.common.collect.HashMultimap;
 import java.io.InputStream;
 import java.net.URI;
 import org.eclipse.xtend.core.macro.declaration.ChangeListenerAddingFileSystemSupport;
@@ -101,8 +100,7 @@ public class ChangeListenerAddingFileSystemSupportTest {
   public void setup() {
     UIResourceChangeRegistry _uIResourceChangeRegistry = new UIResourceChangeRegistry();
     this.registry = _uIResourceChangeRegistry;
-    org.eclipse.emf.common.util.URI _createPlatformResourceURI = org.eclipse.emf.common.util.URI.createPlatformResourceURI("myProject/src/com/acme/C.xtend", true);
-    this.uri = _createPlatformResourceURI;
+    this.uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI("myProject/src/com/acme/C.xtend", true);
     ChangeListenerAddingFileSystemSupportTest.NoopFileSystemSupport _noopFileSystemSupport = new ChangeListenerAddingFileSystemSupportTest.NoopFileSystemSupport();
     ChangeListenerAddingFileSystemSupport _changeListenerAddingFileSystemSupport = new ChangeListenerAddingFileSystemSupport(this.uri, _noopFileSystemSupport, this.registry);
     this.fsa = _changeListenerAddingFileSystemSupport;
@@ -121,81 +119,58 @@ public class ChangeListenerAddingFileSystemSupportTest {
   @Test
   public void readFile() {
     this.fsa.getContents(this.path);
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _contentsListeners = this.registry.getContentsListeners();
-    String _string = this.path.toString();
-    boolean _containsEntry = _contentsListeners.containsEntry(_string, this.uri);
-    Assert.assertTrue(_containsEntry);
+    Assert.assertTrue(this.registry.getContentsListeners().containsEntry(this.path.toString(), this.uri));
   }
   
   @Test
   public void readWriteAndReadFile() {
     this.fsa.setContents(this.path, "");
     this.fsa.getContents(this.path);
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _contentsListeners = this.registry.getContentsListeners();
-    boolean _isEmpty = _contentsListeners.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.registry.getContentsListeners().isEmpty());
   }
   
   @Test
   public void readReadAndWriteFile() {
     this.fsa.getContents(this.path);
     this.fsa.setContents(this.path, "");
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _contentsListeners = this.registry.getContentsListeners();
-    boolean _isEmpty = _contentsListeners.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.registry.getContentsListeners().isEmpty());
   }
   
   @Test
   public void listChildren() {
     this.fsa.getChildren(this.path);
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _childrenListeners = this.registry.getChildrenListeners();
-    String _string = this.path.toString();
-    boolean _containsEntry = _childrenListeners.containsEntry(_string, this.uri);
-    Assert.assertTrue(_containsEntry);
+    Assert.assertTrue(this.registry.getChildrenListeners().containsEntry(this.path.toString(), this.uri));
   }
   
   @Test
   public void exists() {
     this.fsa.exists(this.path);
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _existsListeners = this.registry.getExistsListeners();
-    String _string = this.path.toString();
-    boolean _containsEntry = _existsListeners.containsEntry(_string, this.uri);
-    Assert.assertTrue(_containsEntry);
+    Assert.assertTrue(this.registry.getExistsListeners().containsEntry(this.path.toString(), this.uri));
   }
   
   @Test
   public void isFile() {
     this.fsa.isFile(this.path);
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _existsListeners = this.registry.getExistsListeners();
-    String _string = this.path.toString();
-    boolean _containsEntry = _existsListeners.containsEntry(_string, this.uri);
-    Assert.assertTrue(_containsEntry);
+    Assert.assertTrue(this.registry.getExistsListeners().containsEntry(this.path.toString(), this.uri));
   }
   
   @Test
   public void isFolder() {
     this.fsa.isFolder(this.path);
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _existsListeners = this.registry.getExistsListeners();
-    String _string = this.path.toString();
-    boolean _containsEntry = _existsListeners.containsEntry(_string, this.uri);
-    Assert.assertTrue(_containsEntry);
+    Assert.assertTrue(this.registry.getExistsListeners().containsEntry(this.path.toString(), this.uri));
   }
   
   @Test
   public void mkDir() {
     this.fsa.mkdir(this.path);
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _childrenListeners = this.registry.getChildrenListeners();
-    boolean _isEmpty = _childrenListeners.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.registry.getChildrenListeners().isEmpty());
   }
   
   @Test
   public void isFolderAndMkDir() {
     this.fsa.isFolder(this.path);
     this.fsa.mkdir(this.path);
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _childrenListeners = this.registry.getChildrenListeners();
-    boolean _isEmpty = _childrenListeners.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.registry.getChildrenListeners().isEmpty());
   }
   
   @Test
@@ -203,16 +178,9 @@ public class ChangeListenerAddingFileSystemSupportTest {
     this.fsa.mkdir(this.path);
     Path _path = new Path("b");
     this.fsa.mkdir(_path);
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _changesNotRelevantListeners = this.registry.getChangesNotRelevantListeners();
-    String _string = this.path.toString();
-    boolean _containsEntry = _changesNotRelevantListeners.containsEntry(_string, this.uri);
-    Assert.assertTrue(_containsEntry);
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _changesNotRelevantListeners_1 = this.registry.getChangesNotRelevantListeners();
-    boolean _containsEntry_1 = _changesNotRelevantListeners_1.containsEntry("b", this.uri);
-    Assert.assertTrue(_containsEntry_1);
+    Assert.assertTrue(this.registry.getChangesNotRelevantListeners().containsEntry(this.path.toString(), this.uri));
+    Assert.assertTrue(this.registry.getChangesNotRelevantListeners().containsEntry("b", this.uri));
     this.registry.discardCreateOrModifyInformation(this.uri);
-    HashMultimap<String, org.eclipse.emf.common.util.URI> _changesNotRelevantListeners_2 = this.registry.getChangesNotRelevantListeners();
-    boolean _isEmpty = _changesNotRelevantListeners_2.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.registry.getChangesNotRelevantListeners().isEmpty());
   }
 }

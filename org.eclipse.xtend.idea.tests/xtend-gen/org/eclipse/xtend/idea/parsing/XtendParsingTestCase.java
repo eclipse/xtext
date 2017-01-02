@@ -7,307 +7,117 @@
  */
 package org.eclipse.xtend.idea.parsing;
 
-import org.eclipse.xtend.core.idea.lang.XtendFileType;
-import org.eclipse.xtend.core.tests.parsing.ParserTest;
-import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.idea.lang.IXtextLanguage;
-import org.eclipse.xtext.idea.tests.TestDecorator;
-import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase;
-import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.junit.Ignore;
-import org.junit.Test;
-
 /**
  * @author kosyakov - Initial contribution and API
  */
-@TestDecorator
-@SuppressWarnings("all")
-public class XtendParsingTestCase extends AbstractModelTestCase {
-  @FinalFieldsConstructor
-  private static class Delegate extends ParserTest {
-    private final ModelChecker modelChecker;
+/* @TestDecorator */@SuppressWarnings("all")
+public class XtendParsingTestCase /* implements AbstractModelTestCase  */{
+  /* @FinalFieldsConstructor
+   */private static class Delegate /* implements ParserTest  */{
+    private final /* ModelChecker */Object modelChecker;
     
     @Override
-    public XtendFile file(final String string, final boolean validate) {
-      return this.modelChecker.<XtendFile>checkModel(string, validate);
+    public Object file(final String string, final boolean validate) {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe field XtendParsingTestCase.Delegate.modelChecker refers to the missing type ModelChecker"
+        + "\ncheckModel cannot be resolved");
     }
     
-    @Test
-    public void testErrorRecovery() {
-      try {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("\t");
-        _builder.append("package foo");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("class Foo2323 {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("    ");
-        _builder.append("def create val result = newArrayList foo() {");
-        _builder.newLine();
-        _builder.append("        ");
-        _builder.append("result.");
-        _builder.newLine();
-        _builder.append("    ");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        this.file(_builder.toString());
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
+    /* @Test
+     */public void testErrorRecovery() {
+      throw new Error("Unresolved compilation problems:"
+        + "\nType mismatch: cannot convert implicit first argument from Delegate to String"
+        + "\nType mismatch: cannot convert from CharSequence to boolean"
+        + "\nThe method file(String, boolean) from the type XtendParsingTestCase.Delegate refers to the missing type Object");
     }
     
-    @Ignore
-    @Override
-    public void testAllGrammarElementsUniqueAfterReparse() throws Exception {
-      super.testAllGrammarElementsUniqueAfterReparse();
+    /* @Ignore */@Override
+    public Object testAllGrammarElementsUniqueAfterReparse() throws Exception {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method or field super is undefined"
+        + "\ntestAllGrammarElementsUniqueAfterReparse cannot be resolved");
     }
     
-    @Ignore
-    @Override
-    public void testRichString_01() throws Exception {
-      super.testRichString_01();
+    /* @Ignore */@Override
+    public Object testRichString_01() throws Exception {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method or field super is undefined"
+        + "\ntestRichString_01 cannot be resolved");
     }
     
-    @Ignore
-    @Override
-    public void testRichStringFOR_01() throws Exception {
-      super.testRichStringFOR_01();
+    /* @Ignore */@Override
+    public Object testRichStringFOR_01() throws Exception {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method or field super is undefined"
+        + "\ntestRichStringFOR_01 cannot be resolved");
     }
     
-    @Ignore
-    @Override
-    public void testRichStringFOR_02() throws Exception {
-      super.testRichStringFOR_02();
+    /* @Ignore */@Override
+    public Object testRichStringFOR_02() throws Exception {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method or field super is undefined"
+        + "\ntestRichStringFOR_02 cannot be resolved");
     }
     
-    @Ignore
-    @Override
-    public void testRichStringFOR_03() throws Exception {
-      super.testRichStringFOR_03();
+    /* @Ignore */@Override
+    public Object testRichStringFOR_03() throws Exception {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method or field super is undefined"
+        + "\ntestRichStringFOR_03 cannot be resolved");
     }
     
-    @Ignore
-    @Override
-    public void testRichStringIF_00() throws Exception {
-      super.testRichStringIF_00();
+    /* @Ignore */@Override
+    public Object testRichStringIF_00() throws Exception {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method or field super is undefined"
+        + "\ntestRichStringIF_00 cannot be resolved");
     }
     
-    @Ignore
-    @Override
-    public void testRichStringIF_01() throws Exception {
-      super.testRichStringIF_01();
+    /* @Ignore */@Override
+    public Object testRichStringIF_01() throws Exception {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method or field super is undefined"
+        + "\ntestRichStringIF_01 cannot be resolved");
     }
     
-    @Ignore
-    @Override
-    public void testRichStringWithComment_00() throws Exception {
-      super.testRichStringWithComment_00();
+    /* @Ignore */@Override
+    public Object testRichStringWithComment_00() throws Exception {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method or field super is undefined"
+        + "\ntestRichStringWithComment_00 cannot be resolved");
     }
     
-    @Ignore
-    @Override
-    public void testRichStringWithComment_01() throws Exception {
-      super.testRichStringWithComment_01();
+    /* @Ignore */@Override
+    public Object testRichStringWithComment_01() throws Exception {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method or field super is undefined"
+        + "\ntestRichStringWithComment_01 cannot be resolved");
     }
     
-    @Ignore
-    @Override
-    public void testRichStringWithComment_03() throws Exception {
-      super.testRichStringWithComment_03();
-    }
-    
-    public Delegate(final ModelChecker modelChecker) {
-      super();
-      this.modelChecker = modelChecker;
+    /* @Ignore */@Override
+    public Object testRichStringWithComment_03() throws Exception {
+      throw new Error("Unresolved compilation problems:"
+        + "\nThe method or field super is undefined"
+        + "\ntestRichStringWithComment_03 cannot be resolved");
     }
   }
   
   private XtendParsingTestCase.Delegate delegate;
   
   public XtendParsingTestCase() {
-    super(XtendFileType.INSTANCE);
-    XtendParsingTestCase.Delegate _delegate = new XtendParsingTestCase.Delegate(this);
-    this.delegate = _delegate;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method super(Object) is undefined"
+      + "\nThe method or field XtendFileType is undefined"
+      + "\nInvalid number of arguments. The constructor Delegate() is not applicable for the arguments (XtendParsingTestCase)"
+      + "\nINSTANCE cannot be resolved");
   }
   
   @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    IXtextLanguage _xtextLanguage = this.getXtextLanguage();
-    _xtextLanguage.injectMembers(this.delegate);
-  }
-  
-  public void testAllGrammarElementsUnique() throws Exception {
-    delegate.testAllGrammarElementsUnique();
-  }
-  
-  public void testBug367949() throws Exception {
-    delegate.testBug367949();
-  }
-  
-  public void testBug427257() throws Exception {
-    delegate.testBug427257();
-  }
-  
-  public void testConstructor_01() throws Exception {
-    delegate.testConstructor_01();
-  }
-  
-  public void testConstructor_02() throws Exception {
-    delegate.testConstructor_02();
-  }
-  
-  public void testCreateExtension_00() throws Exception {
-    delegate.testCreateExtension_00();
-  }
-  
-  public void testCreateExtension_01() throws Exception {
-    delegate.testCreateExtension_01();
-  }
-  
-  public void testErrorRecovery() {
-    delegate.testErrorRecovery();
-  }
-  
-  public void testExtensionOnCatchClause_01() throws Exception {
-    delegate.testExtensionOnCatchClause_01();
-  }
-  
-  public void testExtensionOnForLoopParam_01() throws Exception {
-    delegate.testExtensionOnForLoopParam_01();
-  }
-  
-  public void testExtensionOnLambdaParameter_01() throws Exception {
-    delegate.testExtensionOnLambdaParameter_01();
-  }
-  
-  public void testExtensionOnLocalVar_01() throws Exception {
-    delegate.testExtensionOnLocalVar_01();
-  }
-  
-  public void testExtensionOnLocalVar_02() throws Exception {
-    delegate.testExtensionOnLocalVar_02();
-  }
-  
-  public void testExtensionOnMethodParameter_01() throws Exception {
-    delegate.testExtensionOnMethodParameter_01();
-  }
-  
-  public void testFunctionTypeRef_0() throws Exception {
-    delegate.testFunctionTypeRef_0();
-  }
-  
-  public void testFunctionTypeRef_1() throws Exception {
-    delegate.testFunctionTypeRef_1();
-  }
-  
-  public void testFunction_0() throws Exception {
-    delegate.testFunction_0();
-  }
-  
-  public void testFunction_1() throws Exception {
-    delegate.testFunction_1();
-  }
-  
-  public void testFunction_2() throws Exception {
-    delegate.testFunction_2();
-  }
-  
-  public void testFunction_3() throws Exception {
-    delegate.testFunction_3();
-  }
-  
-  public void testFunction_4() throws Exception {
-    delegate.testFunction_4();
-  }
-  
-  public void testFunction_5() throws Exception {
-    delegate.testFunction_5();
-  }
-  
-  public void testFunction_6() throws Exception {
-    delegate.testFunction_6();
-  }
-  
-  public void testFunction_7() throws Exception {
-    delegate.testFunction_7();
-  }
-  
-  public void testImport_01() throws Exception {
-    delegate.testImport_01();
-  }
-  
-  public void testImport_02() throws Exception {
-    delegate.testImport_02();
-  }
-  
-  public void testImport_03() throws Exception {
-    delegate.testImport_03();
-  }
-  
-  public void testImport_04() throws Exception {
-    delegate.testImport_04();
-  }
-  
-  public void testMultipleClasses_01() throws Exception {
-    delegate.testMultipleClasses_01();
-  }
-  
-  public void testMultipleClasses_02() throws Exception {
-    delegate.testMultipleClasses_02();
-  }
-  
-  public void testRichString_00() throws Exception {
-    delegate.testRichString_00();
-  }
-  
-  public void testRichString_02() throws Exception {
-    delegate.testRichString_02();
-  }
-  
-  public void testTypeParams_1() throws Exception {
-    delegate.testTypeParams_1();
-  }
-  
-  public void testTypeParams_2() throws Exception {
-    delegate.testTypeParams_2();
-  }
-  
-  public void testTypeParams_3() throws Exception {
-    delegate.testTypeParams_3();
-  }
-  
-  public void testUnambiguity_00() throws Exception {
-    delegate.testUnambiguity_00();
-  }
-  
-  public void testUnambiguity_01() throws Exception {
-    delegate.testUnambiguity_01();
-  }
-  
-  public void testXtendField_00() throws Exception {
-    delegate.testXtendField_00();
-  }
-  
-  public void testXtendField_01() throws Exception {
-    delegate.testXtendField_01();
-  }
-  
-  public void testXtendField_03() throws Exception {
-    delegate.testXtendField_03();
-  }
-  
-  public void testXtendField_04() throws Exception {
-    delegate.testXtendField_04();
+  protected Object setUp() throws Exception {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field super is undefined"
+      + "\nThe method or field xtextLanguage is undefined"
+      + "\nsetUp cannot be resolved"
+      + "\ninjectMembers cannot be resolved");
   }
 }

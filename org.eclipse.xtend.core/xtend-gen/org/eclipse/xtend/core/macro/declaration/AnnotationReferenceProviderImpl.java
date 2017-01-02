@@ -9,16 +9,12 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Preconditions;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceBuildContextImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendAnnotationTypeDeclarationImpl;
-import org.eclipse.xtend.core.xtend.XtendAnnotationType;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceBuildContext;
@@ -29,11 +25,9 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -91,10 +85,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("initializer cannot be null");
       Preconditions.checkArgument((initializer != null), _builder_1);
-      TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
-      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-      JvmType _findDeclaredType = _typeReferences.findDeclaredType(annotationTypeName, _xtendFile);
-      final JvmAnnotationReference jvmAnnotationReference = this.createJvmAnnotationReference(_findDeclaredType);
+      final JvmAnnotationReference jvmAnnotationReference = this.createJvmAnnotationReference(this.compilationUnit.getTypeReferences().findDeclaredType(annotationTypeName, this.compilationUnit.getXtendFile()));
       if ((jvmAnnotationReference == null)) {
         return null;
       }
@@ -130,9 +121,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
       if (!_matched) {
         if (annotationTypeDelcaration instanceof XtendAnnotationTypeDeclarationImpl) {
           _matched=true;
-          IXtendJvmAssociations _jvmModelAssociations = this.compilationUnit.getJvmModelAssociations();
-          XtendAnnotationType _delegate = ((XtendAnnotationTypeDeclarationImpl)annotationTypeDelcaration).getDelegate();
-          _switchResult = _jvmModelAssociations.getInferredType(_delegate);
+          _switchResult = this.compilationUnit.getJvmModelAssociations().getInferredType(((XtendAnnotationTypeDeclarationImpl)annotationTypeDelcaration).getDelegate());
         }
       }
       if (!_matched) {
@@ -162,8 +151,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("annotationClass cannot be null");
       Preconditions.checkArgument((annotationClass != null), _builder);
-      String _name = annotationClass.getName();
-      _xblockexpression = this.newAnnotationReference(_name, initializer);
+      _xblockexpression = this.newAnnotationReference(annotationClass.getName(), initializer);
     }
     return _xblockexpression;
   }
@@ -182,15 +170,13 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
       if ((annotationReference instanceof JvmAnnotationReferenceImpl)) {
         final JvmAnnotationReference baseJvmAnnotationReference = ((JvmAnnotationReferenceImpl)annotationReference).getDelegate();
         ConditionUtils.notRemoved(baseJvmAnnotationReference, "annotationReference");
-        JvmAnnotationType _annotation = baseJvmAnnotationReference.getAnnotation();
-        final JvmAnnotationReference newJvmAnnotationReference = this.createJvmAnnotationReference(_annotation);
+        final JvmAnnotationReference newJvmAnnotationReference = this.createJvmAnnotationReference(baseJvmAnnotationReference.getAnnotation());
         AnnotationReferenceBuildContextImpl _annotationReferenceBuildContextImpl = new AnnotationReferenceBuildContextImpl();
         final Procedure1<AnnotationReferenceBuildContextImpl> _function = (AnnotationReferenceBuildContextImpl it) -> {
           it.setDelegate(newJvmAnnotationReference);
           it.setCompilationUnit(this.compilationUnit);
         };
         final AnnotationReferenceBuildContextImpl buildContext = ObjectExtensions.<AnnotationReferenceBuildContextImpl>operator_doubleArrow(_annotationReferenceBuildContextImpl, _function);
-        EList<JvmAnnotationValue> _explicitValues = baseJvmAnnotationReference.getExplicitValues();
         final Function1<JvmAnnotationValue, String> _function_1 = (JvmAnnotationValue it) -> {
           String _elvis = null;
           String _valueName = it.getValueName();
@@ -201,7 +187,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
           }
           return _elvis;
         };
-        List<String> _map = ListExtensions.<JvmAnnotationValue, String>map(_explicitValues, _function_1);
+        List<String> _map = ListExtensions.<JvmAnnotationValue, String>map(baseJvmAnnotationReference.getExplicitValues(), _function_1);
         for (final String valueName : _map) {
           {
             final Object value = ((JvmAnnotationReferenceImpl)annotationReference).getValue(valueName);
@@ -217,11 +203,9 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
   }
   
   protected boolean isArrayOfAnnotations(final JvmAnnotationValue annotationValue) {
-    JvmOperation _operation = annotationValue.getOperation();
-    final JvmTypeReference returnType = _operation.getReturnType();
+    final JvmTypeReference returnType = annotationValue.getOperation().getReturnType();
     if ((returnType instanceof JvmGenericArrayTypeReference)) {
-      JvmTypeReference _componentType = ((JvmGenericArrayTypeReference)returnType).getComponentType();
-      JvmType _type = _componentType.getType();
+      JvmType _type = ((JvmGenericArrayTypeReference)returnType).getComponentType().getType();
       return (_type instanceof JvmAnnotationType);
     }
     return false;

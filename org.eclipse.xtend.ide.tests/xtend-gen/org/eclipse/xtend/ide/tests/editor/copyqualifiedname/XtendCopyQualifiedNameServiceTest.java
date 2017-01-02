@@ -8,10 +8,7 @@
 package org.eclipse.xtend.ide.tests.editor.copyqualifiedname;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import java.util.Arrays;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -22,8 +19,6 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
@@ -74,20 +69,13 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendFunction) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(0);
-      this.assertCopyQualifiedName(_get, "java.util.List.clear()");
-      EList<XExpression> _expressions_1 = expression.getExpressions();
-      XExpression _get_1 = _expressions_1.get(1);
-      this.assertCopyQualifiedName(_get_1, "java.util.List.add(String)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(0), "java.util.List.clear()");
+      this.assertCopyQualifiedName(expression.getExpressions().get(1), "java.util.List.add(String)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -127,23 +115,14 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendFunction) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(0);
-      this.assertCopyQualifiedName(_get, "java.util.Map.get(Object)");
-      EList<XExpression> _expressions_1 = expression.getExpressions();
-      XExpression _get_1 = _expressions_1.get(1);
-      this.assertCopyQualifiedName(_get_1, "java.util.Map.put(? extends String, ? extends String)");
-      EList<XExpression> _expressions_2 = expression.getExpressions();
-      XExpression _get_2 = _expressions_2.get(2);
-      this.assertCopyQualifiedName(_get_2, "Foo.bar(Map<? extends String, ? extends String>)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(0), "java.util.Map.get(Object)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(1), "java.util.Map.put(? extends String, ? extends String)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(2), "Foo.bar(Map<? extends String, ? extends String>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -171,20 +150,13 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendFunction) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(0);
-      this.assertCopyQualifiedName(_get, "java.util.ArrayList.clear()");
-      EList<XExpression> _expressions_1 = expression.getExpressions();
-      XExpression _get_1 = _expressions_1.get(1);
-      this.assertCopyQualifiedName(_get_1, "java.util.ArrayList.add(String)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(0), "java.util.ArrayList.clear()");
+      this.assertCopyQualifiedName(expression.getExpressions().get(1), "java.util.ArrayList.add(String)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -238,26 +210,15 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendFunction) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(0);
-      this.assertCopyQualifiedName(_get, "Foo.clear()");
-      EList<XExpression> _expressions_1 = expression.getExpressions();
-      XExpression _get_1 = _expressions_1.get(1);
-      this.assertCopyQualifiedName(_get_1, "Foo.add(String)");
-      EList<XExpression> _expressions_2 = expression.getExpressions();
-      XExpression _get_2 = _expressions_2.get(2);
-      this.assertCopyQualifiedName(_get_2, "java.util.ArrayList.clear()");
-      EList<XExpression> _expressions_3 = expression.getExpressions();
-      XExpression _get_3 = _expressions_3.get(3);
-      this.assertCopyQualifiedName(_get_3, "java.util.ArrayList.add(String)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(0), "Foo.clear()");
+      this.assertCopyQualifiedName(expression.getExpressions().get(1), "Foo.add(String)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(2), "java.util.ArrayList.clear()");
+      this.assertCopyQualifiedName(expression.getExpressions().get(3), "java.util.ArrayList.add(String)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -288,20 +249,13 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendFunction) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(1);
-      this.assertCopyQualifiedName(_get, "java.util.ArrayList.clear()");
-      EList<XExpression> _expressions_1 = expression.getExpressions();
-      XExpression _get_1 = _expressions_1.get(2);
-      this.assertCopyQualifiedName(_get_1, "java.util.ArrayList.add(String)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(1), "java.util.ArrayList.clear()");
+      this.assertCopyQualifiedName(expression.getExpressions().get(2), "java.util.ArrayList.add(String)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -355,26 +309,15 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendFunction) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(0);
-      this.assertCopyQualifiedName(_get, "Foo.clear()");
-      EList<XExpression> _expressions_1 = expression.getExpressions();
-      XExpression _get_1 = _expressions_1.get(1);
-      this.assertCopyQualifiedName(_get_1, "Foo.add(T)");
-      EList<XExpression> _expressions_2 = expression.getExpressions();
-      XExpression _get_2 = _expressions_2.get(2);
-      this.assertCopyQualifiedName(_get_2, "java.util.ArrayList.clear()");
-      EList<XExpression> _expressions_3 = expression.getExpressions();
-      XExpression _get_3 = _expressions_3.get(3);
-      this.assertCopyQualifiedName(_get_3, "java.util.ArrayList.add(T)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(0), "Foo.clear()");
+      this.assertCopyQualifiedName(expression.getExpressions().get(1), "Foo.add(T)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(2), "java.util.ArrayList.clear()");
+      this.assertCopyQualifiedName(expression.getExpressions().get(3), "java.util.ArrayList.add(T)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -417,20 +360,13 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendFunction) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(0);
-      this.assertCopyQualifiedName(_get, "Bar.bar(List<String>)");
-      EList<XExpression> _expressions_1 = expression.getExpressions();
-      XExpression _get_1 = _expressions_1.get(1);
-      this.assertCopyQualifiedName(_get_1, "Bar.bar(ArrayList<String>)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(0), "Bar.bar(List<String>)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(1), "Bar.bar(ArrayList<String>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -468,20 +404,13 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendFunction) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(0);
-      this.assertCopyQualifiedName(_get, "Foo.add(Iterable<T>)");
-      EList<XExpression> _expressions_1 = expression.getExpressions();
-      XExpression _get_1 = _expressions_1.get(1);
-      this.assertCopyQualifiedName(_get_1, "java.util.ArrayList.add(Iterable<T>)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(0), "Foo.add(Iterable<T>)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(1), "java.util.ArrayList.add(Iterable<T>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -533,23 +462,14 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendFunction) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(0);
-      this.assertCopyQualifiedName(_get, "Bar()");
-      EList<XExpression> _expressions_1 = expression.getExpressions();
-      XExpression _get_1 = _expressions_1.get(1);
-      this.assertCopyQualifiedName(_get_1, "Bar(List<?>)");
-      EList<XExpression> _expressions_2 = expression.getExpressions();
-      XExpression _get_2 = _expressions_2.get(2);
-      this.assertCopyQualifiedName(_get_2, "Bar(ArrayList<String>)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(0), "Bar()");
+      this.assertCopyQualifiedName(expression.getExpressions().get(1), "Bar(List<?>)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(2), "Bar(ArrayList<String>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -600,23 +520,14 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendFunction) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(0);
-      this.assertCopyQualifiedName(_get, "Bar()");
-      EList<XExpression> _expressions_1 = expression.getExpressions();
-      XExpression _get_1 = _expressions_1.get(1);
-      this.assertCopyQualifiedName(_get_1, "Bar(List<String>)");
-      EList<XExpression> _expressions_2 = expression.getExpressions();
-      XExpression _get_2 = _expressions_2.get(2);
-      this.assertCopyQualifiedName(_get_2, "Bar(ArrayList<String>)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(0), "Bar()");
+      this.assertCopyQualifiedName(expression.getExpressions().get(1), "Bar(List<String>)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(2), "Bar(ArrayList<String>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -665,25 +576,16 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendConstructor) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(0);
-      this.assertCopyQualifiedName(_get, "Bar(List<?>)");
-      EList<XtendMember> _members_1 = xtendType.getMembers();
-      Iterable<XtendMember> _tail = IterableExtensions.<XtendMember>tail(_members_1);
-      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_tail);
+      this.assertCopyQualifiedName(expression.getExpressions().get(0), "Bar(List<?>)");
+      XtendMember _head_1 = IterableExtensions.<XtendMember>head(IterableExtensions.<XtendMember>tail(xtendType.getMembers()));
       XExpression _expression_1 = ((XtendConstructor) _head_1).getExpression();
       final XBlockExpression expression2 = ((XBlockExpression) _expression_1);
-      EList<XExpression> _expressions_1 = expression2.getExpressions();
-      XExpression _get_1 = _expressions_1.get(0);
-      this.assertCopyQualifiedName(_get_1, "Bar(ArrayList<String>)");
+      this.assertCopyQualifiedName(expression2.getExpressions().get(0), "Bar(ArrayList<String>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -717,17 +619,12 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      XtendMember _head = IterableExtensions.<XtendMember>head(xtendType.getMembers());
       XExpression _expression = ((XtendConstructor) _head).getExpression();
       final XBlockExpression expression = ((XBlockExpression) _expression);
-      EList<XExpression> _expressions = expression.getExpressions();
-      XExpression _get = _expressions.get(0);
-      this.assertCopyQualifiedName(_get, "Foo(ArrayList<String>)");
+      this.assertCopyQualifiedName(expression.getExpressions().get(0), "Foo(ArrayList<String>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -749,13 +646,9 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
-      this.assertCopyQualifiedName(_head, "Foo.foo(List<String>)");
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(xtendType.getMembers()), "Foo.foo(List<String>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -784,17 +677,10 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
-      this.assertCopyQualifiedName(_head, "Foo.foo(Map<? extends String, ? extends String>)");
-      EList<XtendMember> _members_1 = xtendType.getMembers();
-      Iterable<XtendMember> _tail = IterableExtensions.<XtendMember>tail(_members_1);
-      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_tail);
-      this.assertCopyQualifiedName(_head_1, "Foo.bar(Map<K, V>)");
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(xtendType.getMembers()), "Foo.foo(Map<? extends String, ? extends String>)");
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(IterableExtensions.<XtendMember>tail(xtendType.getMembers())), "Foo.bar(Map<K, V>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -829,17 +715,10 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
-      this.assertCopyQualifiedName(_head, "Foo.clear()");
-      EList<XtendMember> _members_1 = xtendType.getMembers();
-      Iterable<XtendMember> _tail = IterableExtensions.<XtendMember>tail(_members_1);
-      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_tail);
-      this.assertCopyQualifiedName(_head_1, "Foo.add(String)");
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(xtendType.getMembers()), "Foo.clear()");
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(IterableExtensions.<XtendMember>tail(xtendType.getMembers())), "Foo.add(String)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -874,17 +753,10 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
-      this.assertCopyQualifiedName(_head, "Foo.clear()");
-      EList<XtendMember> _members_1 = xtendType.getMembers();
-      Iterable<XtendMember> _tail = IterableExtensions.<XtendMember>tail(_members_1);
-      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_tail);
-      this.assertCopyQualifiedName(_head_1, "Foo.add(T)");
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(xtendType.getMembers()), "Foo.clear()");
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(IterableExtensions.<XtendMember>tail(xtendType.getMembers())), "Foo.add(T)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -906,13 +778,9 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
-      this.assertCopyQualifiedName(_head, "Foo.foo(List<T>)");
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(xtendType.getMembers()), "Foo.foo(List<T>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -942,17 +810,10 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
-      this.assertCopyQualifiedName(_head, "Foo()");
-      EList<XtendMember> _members_1 = xtendType.getMembers();
-      Iterable<XtendMember> _tail = IterableExtensions.<XtendMember>tail(_members_1);
-      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_tail);
-      this.assertCopyQualifiedName(_head_1, "Foo(List<?>)");
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(xtendType.getMembers()), "Foo()");
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(IterableExtensions.<XtendMember>tail(xtendType.getMembers())), "Foo(List<?>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -974,13 +835,9 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
-      this.assertCopyQualifiedName(_head, "Foo(List<T>)");
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(xtendType.getMembers()), "Foo(List<T>)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1002,43 +859,30 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      EList<XtendMember> _members = xtendType.getMembers();
-      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
-      this.assertCopyQualifiedName(_head, "Foo(X, Y)");
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendTypeDeclaration xtendType = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
+      this.assertCopyQualifiedName(IterableExtensions.<XtendMember>head(xtendType.getMembers()), "Foo(X, Y)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
   protected void _assertCopyQualifiedName(final XAbstractFeatureCall featureCall, final String expectedQualifiedName) {
-    JvmIdentifiableElement _feature = featureCall.getFeature();
-    String _qualifiedName = this.copyQualifiedNameService.getQualifiedName(_feature, featureCall);
-    Assert.assertEquals(expectedQualifiedName, _qualifiedName);
+    Assert.assertEquals(expectedQualifiedName, this.copyQualifiedNameService.getQualifiedName(featureCall.getFeature(), featureCall));
   }
   
   protected void _assertCopyQualifiedName(final XConstructorCall constructorCall, final String expectedQualifiedName) {
-    JvmConstructor _constructor = constructorCall.getConstructor();
-    String _qualifiedName = this.copyQualifiedNameService.getQualifiedName(_constructor, constructorCall);
-    Assert.assertEquals(expectedQualifiedName, _qualifiedName);
+    Assert.assertEquals(expectedQualifiedName, 
+      this.copyQualifiedNameService.getQualifiedName(constructorCall.getConstructor(), constructorCall));
   }
   
   protected void _assertCopyQualifiedName(final EObject object, final String expectedQualifiedName) {
-    String _qualifiedName = this.copyQualifiedNameService.getQualifiedName(object, null);
-    Assert.assertEquals(expectedQualifiedName, _qualifiedName);
-    EObject _eContainer = object.eContainer();
-    String _qualifiedName_1 = this.copyQualifiedNameService.getQualifiedName(object, _eContainer);
-    Assert.assertEquals(expectedQualifiedName, _qualifiedName_1);
+    Assert.assertEquals(expectedQualifiedName, this.copyQualifiedNameService.getQualifiedName(object, null));
+    Assert.assertEquals(expectedQualifiedName, this.copyQualifiedNameService.getQualifiedName(object, object.eContainer()));
   }
   
   public ResourceSet getResourceSet() {
-    Injector _injector = this.getInjector();
-    IResourceSetProvider _instance = _injector.<IResourceSetProvider>getInstance(IResourceSetProvider.class);
-    IProject _project = this.testHelper.getProject();
-    return _instance.get(_project);
+    return this.getInjector().<IResourceSetProvider>getInstance(IResourceSetProvider.class).get(this.testHelper.getProject());
   }
   
   public void assertCopyQualifiedName(final EObject featureCall, final String expectedQualifiedName) {

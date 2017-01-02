@@ -47,9 +47,7 @@ public class Bug460093Test extends AbstractXtendContentAssistBugTest {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("str");
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      ContentAssistProcessorTestBuilder _assertText = _append.assertText("\n\toverride stream() {\n\t\tList.super.stream()\n\t}");
-      ContentAssistProcessorTestBuilder _applyProposal = _assertText.applyProposal();
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).assertText("\n\toverride stream() {\n\t\tList.super.stream()\n\t}").applyProposal();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("import java.util.List");
       _builder_1.newLine();
@@ -84,9 +82,7 @@ public class Bug460093Test extends AbstractXtendContentAssistBugTest {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("r");
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      ContentAssistProcessorTestBuilder _assertText = _append.assertText("\n\toverride reversed() {\n\t\tComparator.super.reversed()\n\t}");
-      ContentAssistProcessorTestBuilder _applyProposal = _assertText.applyProposal();
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).assertText("\n\toverride reversed() {\n\t\tComparator.super.reversed()\n\t}").applyProposal();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("import java.util.Comparator");
       _builder_1.newLine();

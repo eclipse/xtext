@@ -15,7 +15,6 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
@@ -588,11 +587,8 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          Constructor<?> _declaredConstructor = _compiledClass.getDeclaredConstructor(int.class);
-          final Object instance = _declaredConstructor.newInstance(Integer.valueOf(2));
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
+          final Object instance = it.getCompiledClass().getDeclaredConstructor(int.class).newInstance(Integer.valueOf(2));
+          final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");
           Assert.assertEquals(Integer.valueOf(4), getFoo.invoke(instance));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
@@ -626,11 +622,8 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          Constructor<?> _declaredConstructor = _compiledClass.getDeclaredConstructor(int.class);
-          final Object instance = _declaredConstructor.newInstance(Integer.valueOf(2));
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
+          final Object instance = it.getCompiledClass().getDeclaredConstructor(int.class).newInstance(Integer.valueOf(2));
+          final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");
           Assert.assertEquals(Integer.valueOf(5), getFoo.invoke(instance));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
@@ -664,11 +657,8 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          Constructor<?> _declaredConstructor = _compiledClass.getDeclaredConstructor(int.class);
-          final Object instance = _declaredConstructor.newInstance(Integer.valueOf(2));
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method toString = _compiledClass_1.getDeclaredMethod("toString");
+          final Object instance = it.getCompiledClass().getDeclaredConstructor(int.class).newInstance(Integer.valueOf(2));
+          final Method toString = it.getCompiledClass().getDeclaredMethod("toString");
           Assert.assertEquals("5", toString.invoke(instance));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
@@ -702,11 +692,8 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          Constructor<?> _declaredConstructor = _compiledClass.getDeclaredConstructor(int.class);
-          final Object instance = _declaredConstructor.newInstance(Integer.valueOf(2));
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method equals = _compiledClass_1.getDeclaredMethod("equals", Object.class);
+          final Object instance = it.getCompiledClass().getDeclaredConstructor(int.class).newInstance(Integer.valueOf(2));
+          final Method equals = it.getCompiledClass().getDeclaredMethod("equals", Object.class);
           Assert.assertEquals(Boolean.valueOf(true), equals.invoke(instance, Integer.valueOf(1)));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
@@ -740,11 +727,8 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          Class<?> _compiledClass = it.getCompiledClass();
-          Constructor<?> _declaredConstructor = _compiledClass.getDeclaredConstructor(int.class);
-          final Object instance = _declaredConstructor.newInstance(Integer.valueOf(2));
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          final Method hashCode = _compiledClass_1.getDeclaredMethod("hashCode");
+          final Object instance = it.getCompiledClass().getDeclaredConstructor(int.class).newInstance(Integer.valueOf(2));
+          final Method hashCode = it.getCompiledClass().getDeclaredMethod("hashCode");
           Assert.assertEquals(Integer.valueOf(0), hashCode.invoke(instance));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
@@ -858,16 +842,12 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      XtendClass _clazz = this.clazz(text);
-      this._validationTestHelper.assertNoIssues(_clazz);
+      this._validationTestHelper.assertNoIssues(this.clazz(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
-          String _name = it_1.getName();
-          return Boolean.valueOf(_name.startsWith("get"));
+          return Boolean.valueOf(it_1.getName().startsWith("get"));
         };
-        Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_1));
+        Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
       this.compilationTestHelper.compile(text, _function);
     } catch (Throwable _e) {
@@ -1066,25 +1046,21 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         Class<?> _compiledClass = it.getCompiledClass();
         final Procedure1<Class<?>> _function_1 = (Class<?> it_1) -> {
-          Field[] _declaredFields = it_1.getDeclaredFields();
           final Function1<Field, Boolean> _function_2 = (Field it_2) -> {
             String _name = it_2.getName();
             return Boolean.valueOf(Objects.equal(_name, "foo"));
           };
-          Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields)), _function_2));
-          Method[] _declaredMethods = it_1.getDeclaredMethods();
+          Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(it_1.getDeclaredFields())), _function_2));
           final Function1<Method, Boolean> _function_3 = (Method it_2) -> {
             String _name = it_2.getName();
             return Boolean.valueOf(Objects.equal(_name, "getFoo"));
           };
-          Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_3));
-          Constructor<?>[] _declaredConstructors = it_1.getDeclaredConstructors();
+          Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_3));
           final Function1<Constructor<?>, Boolean> _function_4 = (Constructor<?> it_2) -> {
-            Class<?>[] _parameterTypes = it_2.getParameterTypes();
-            int _length = _parameterTypes.length;
+            int _length = it_2.getParameterTypes().length;
             return Boolean.valueOf((_length == 0));
           };
-          Assert.assertTrue(IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_4));
+          Assert.assertTrue(IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it_1.getDeclaredConstructors())), _function_4));
         };
         ObjectExtensions.<Class<?>>operator_doubleArrow(_compiledClass, _function_1);
       };
@@ -1111,30 +1087,26 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         Class<?> _compiledClass = it.getCompiledClass();
         final Procedure1<Class<?>> _function_1 = (Class<?> it_1) -> {
-          Field[] _declaredFields = it_1.getDeclaredFields();
           final Function1<Field, Boolean> _function_2 = (Field it_2) -> {
             String _name = it_2.getName();
             return Boolean.valueOf(Objects.equal(_name, "_foo"));
           };
-          Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields)), _function_2));
-          Field[] _declaredFields_1 = it_1.getDeclaredFields();
+          Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(it_1.getDeclaredFields())), _function_2));
           final Function1<Field, Boolean> _function_3 = (Field it_2) -> {
             String _name = it_2.getName();
             return Boolean.valueOf(Objects.equal(_name, "_bar"));
           };
-          Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields_1)), _function_3));
-          Method[] _declaredMethods = it_1.getDeclaredMethods();
+          Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(it_1.getDeclaredFields())), _function_3));
           final Function1<Method, Boolean> _function_4 = (Method it_2) -> {
             String _name = it_2.getName();
             return Boolean.valueOf(Objects.equal(_name, "isFoo"));
           };
-          Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_4));
-          Method[] _declaredMethods_1 = it_1.getDeclaredMethods();
+          Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_4));
           final Function1<Method, Boolean> _function_5 = (Method it_2) -> {
             String _name = it_2.getName();
             return Boolean.valueOf(Objects.equal(_name, "getBar"));
           };
-          Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods_1)), _function_5));
+          Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_5));
         };
         ObjectExtensions.<Class<?>>operator_doubleArrow(_compiledClass, _function_1);
       };
@@ -1165,13 +1137,11 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         Class<?> _compiledClass = it.getCompiledClass("Bar");
         final Procedure1<Class<?>> _function_1 = (Class<?> it_1) -> {
-          Constructor<?>[] _declaredConstructors = it_1.getDeclaredConstructors();
           final Function1<Constructor<?>, Boolean> _function_2 = (Constructor<?> it_2) -> {
-            Class<?>[] _parameterTypes = it_2.getParameterTypes();
-            List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+            List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_2.getParameterTypes())));
             return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
           };
-          Assert.assertTrue(IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_2));
+          Assert.assertTrue(IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it_1.getDeclaredConstructors())), _function_2));
         };
         ObjectExtensions.<Class<?>>operator_doubleArrow(_compiledClass, _function_1);
       };
@@ -1197,8 +1167,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        String _generatedCode = it.getGeneratedCode("Bar");
-        Assert.assertTrue(_generatedCode.contains("public Bar(final String foo) {"));
+        Assert.assertTrue(it.getGeneratedCode("Bar").contains("public Bar(final String foo) {"));
       };
       this.compilationTestHelper.compile(_builder, _function);
     } catch (Throwable _e) {
@@ -1222,8 +1191,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        String _generatedCode = it.getGeneratedCode("Bar");
-        Assert.assertTrue(_generatedCode.contains("public Bar(final X foo) {"));
+        Assert.assertTrue(it.getGeneratedCode("Bar").contains("public Bar(final X foo) {"));
       };
       this.compilationTestHelper.compile(_builder, _function);
     } catch (Throwable _e) {

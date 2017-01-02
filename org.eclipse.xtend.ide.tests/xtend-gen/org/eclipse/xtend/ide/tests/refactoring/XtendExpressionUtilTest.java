@@ -106,8 +106,7 @@ public class XtendExpressionUtilTest extends AbstractXtendTestCase {
     int _offset_1 = selectedRegion.getOffset();
     int _length = selectedRegion.getLength();
     int _plus = (_offset_1 + _length);
-    String _substring = cleanedModel.substring(_offset, _plus);
-    Assert.assertEquals(expectedSelection, _substring);
+    Assert.assertEquals(expectedSelection, cleanedModel.substring(_offset, _plus));
   }
   
   protected XtendFile parse(final CharSequence string) {

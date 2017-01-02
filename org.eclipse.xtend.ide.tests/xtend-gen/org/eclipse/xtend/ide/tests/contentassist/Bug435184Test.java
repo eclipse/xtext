@@ -52,8 +52,7 @@ public class Bug435184Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("|", "read", "read()", "read()");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("|", "read", "read()", "read()");
   }
   
   @Test
@@ -91,8 +90,7 @@ public class Bug435184Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("|", "bytes");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("|", "bytes");
   }
   
   @Test
@@ -130,7 +128,6 @@ public class Bug435184Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("|", "args");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("|", "args");
   }
 }

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend.core.tests.compiler.PublicResolvedTypes;
@@ -50,18 +49,16 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
         return null;
       }
       try {
-        Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _typeParameterMapping = this.getTypeParameterMapping();
-        final LightweightMergedBoundTypeArgument mappedReference = _typeParameterMapping.get(type);
+        final LightweightMergedBoundTypeArgument mappedReference = this.getTypeParameterMapping().get(type);
         if ((mappedReference != null)) {
-          LightweightTypeReference _typeReference = mappedReference.getTypeReference();
-          return _typeReference.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, visiting);
+          return mappedReference.getTypeReference().<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, visiting);
         } else {
           ITypeReferenceOwner _owner = this.getOwner();
           Object _object = new Object();
           final SimpleUnboundTypeReference result = new SimpleUnboundTypeReference(_owner, ((JvmTypeParameter)type), _object);
-          Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _typeParameterMapping_1 = this.getTypeParameterMapping();
+          Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _typeParameterMapping = this.getTypeParameterMapping();
           LightweightMergedBoundTypeArgument _lightweightMergedBoundTypeArgument = new LightweightMergedBoundTypeArgument(result, VarianceInfo.INVARIANT);
-          _typeParameterMapping_1.put(((JvmTypeParameter)type), _lightweightMergedBoundTypeArgument);
+          _typeParameterMapping.put(((JvmTypeParameter)type), _lightweightMergedBoundTypeArgument);
           return result;
         }
       } finally {
@@ -73,14 +70,12 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
   
   @Override
   public LightweightTypeReference doVisitUnboundTypeReference(final UnboundTypeReference reference, final Set<JvmTypeParameter> param) {
-    ITypeReferenceOwner _owner = this.getOwner();
-    return reference.copyInto(_owner);
+    return reference.copyInto(this.getOwner());
   }
   
   @Override
   public LightweightTypeReference substitute(final LightweightTypeReference original) {
-    HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();
-    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);
+    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, CollectionLiterals.<JvmTypeParameter>newHashSet());
   }
   
   @Override

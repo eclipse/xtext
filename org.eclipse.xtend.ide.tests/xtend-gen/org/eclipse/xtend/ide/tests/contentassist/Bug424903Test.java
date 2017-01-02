@@ -41,7 +41,6 @@ public class Bug424903Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("|", "StringBuilder");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("|", "StringBuilder");
   }
 }

@@ -11,13 +11,11 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -70,11 +68,9 @@ public class ProblemSupportImpl implements ProblemSupport {
     this.checkCanceled();
     this.checkValidationAllowed();
     final Pair<Resource, EObject> resAndObj = this.getResourceAndEObject(element);
-    Resource _key = resAndObj.getKey();
-    EList<Resource.Diagnostic> _errors = _key.getErrors();
+    EList<Resource.Diagnostic> _errors = resAndObj.getKey().getErrors();
     EObject _value = resAndObj.getValue();
-    EObject _value_1 = resAndObj.getValue();
-    EStructuralFeature _significantFeature = this.getSignificantFeature(_value_1);
+    EStructuralFeature _significantFeature = this.getSignificantFeature(resAndObj.getValue());
     EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "user.issue", message, _value, _significantFeature, (-1), null);
     _errors.add(_eObjectDiagnosticImpl);
   }
@@ -84,11 +80,9 @@ public class ProblemSupportImpl implements ProblemSupport {
     this.checkCanceled();
     this.checkValidationAllowed();
     final Pair<Resource, EObject> resAndObj = this.getResourceAndEObject(element);
-    Resource _key = resAndObj.getKey();
-    EList<Resource.Diagnostic> _warnings = _key.getWarnings();
+    EList<Resource.Diagnostic> _warnings = resAndObj.getKey().getWarnings();
     EObject _value = resAndObj.getValue();
-    EObject _value_1 = resAndObj.getValue();
-    EStructuralFeature _significantFeature = this.getSignificantFeature(_value_1);
+    EStructuralFeature _significantFeature = this.getSignificantFeature(resAndObj.getValue());
     EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.WARNING, "user.issue", message, _value, _significantFeature, (-1), null);
     _warnings.add(_eObjectDiagnosticImpl);
   }
@@ -113,11 +107,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     } catch (final Throwable _t) {
       if (_t instanceof Throwable) {
         final Throwable t = (Throwable)_t;
-        XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-        Set<XtendFile> _singleton = Collections.<XtendFile>singleton(_xtendFile);
-        XtendFile _xtendFile_1 = this.compilationUnit.getXtendFile();
-        Resource _eResource = _xtendFile_1.eResource();
-        this.compilationUnit.handleProcessingError(_singleton, _eResource, t);
+        this.compilationUnit.handleProcessingError(Collections.<XtendFile>singleton(this.compilationUnit.getXtendFile()), this.compilationUnit.getXtendFile().eResource(), t);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -133,23 +123,20 @@ public class ProblemSupportImpl implements ProblemSupport {
     final Resource resource = resAndObj.getKey();
     EList<Resource.Diagnostic> _errors = resource.getErrors();
     EList<Resource.Diagnostic> _warnings = resource.getWarnings();
-    Iterable<Resource.Diagnostic> _plus = Iterables.<Resource.Diagnostic>concat(_errors, _warnings);
-    final Iterable<EObjectDiagnosticImpl> issues = Iterables.<EObjectDiagnosticImpl>filter(_plus, EObjectDiagnosticImpl.class);
+    final Iterable<EObjectDiagnosticImpl> issues = Iterables.<EObjectDiagnosticImpl>filter(Iterables.<Resource.Diagnostic>concat(_errors, _warnings), EObjectDiagnosticImpl.class);
     final Function1<EObjectDiagnosticImpl, Boolean> _function = (EObjectDiagnosticImpl diag) -> {
       EObject _problematicObject = diag.getProblematicObject();
       EObject _value = resAndObj.getValue();
       return Boolean.valueOf(Objects.equal(_problematicObject, _value));
     };
-    Iterable<EObjectDiagnosticImpl> _filter = IterableExtensions.<EObjectDiagnosticImpl>filter(issues, _function);
     final Function1<EObjectDiagnosticImpl, Problem> _function_1 = (EObjectDiagnosticImpl diag) -> {
       String _code = diag.getCode();
       String _message = diag.getMessage();
-      Severity _severity = diag.getSeverity();
-      Problem.Severity _translateSeverity = this.translateSeverity(_severity);
+      Problem.Severity _translateSeverity = this.translateSeverity(diag.getSeverity());
       ProblemImpl _problemImpl = new ProblemImpl(_code, _message, _translateSeverity);
       return ((Problem) _problemImpl);
     };
-    final Iterable<Problem> result = IterableExtensions.<EObjectDiagnosticImpl, Problem>map(_filter, _function_1);
+    final Iterable<Problem> result = IterableExtensions.<EObjectDiagnosticImpl, Problem>map(IterableExtensions.<EObjectDiagnosticImpl>filter(issues, _function), _function_1);
     return IterableExtensions.<Problem>toList(result);
   }
   
@@ -194,27 +181,22 @@ public class ProblemSupportImpl implements ProblemSupport {
       boolean _equals = Objects.equal(element, this.compilationUnit);
       if (_equals) {
         _matched=true;
+        Resource _eResource = this.compilationUnit.getXtendFile().eResource();
         XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-        Resource _eResource = _xtendFile.eResource();
-        XtendFile _xtendFile_1 = this.compilationUnit.getXtendFile();
-        return Pair.<Resource, EObject>of(_eResource, _xtendFile_1);
+        return Pair.<Resource, EObject>of(_eResource, _xtendFile);
       }
     }
     if (!_matched) {
       if (element instanceof AbstractElementImpl) {
         _matched=true;
-        EObject _delegate = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
-        final Resource resource = _delegate.eResource();
-        XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-        Resource _eResource = _xtendFile.eResource();
+        final Resource resource = ((AbstractElementImpl<? extends EObject>)element).getDelegate().eResource();
+        Resource _eResource = this.compilationUnit.getXtendFile().eResource();
         boolean _equals = Objects.equal(resource, _eResource);
         if (_equals) {
-          IXtendJvmAssociations _jvmModelAssociations = this.compilationUnit.getJvmModelAssociations();
-          EObject _delegate_1 = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
-          final EObject eobject = _jvmModelAssociations.getPrimarySourceElement(_delegate_1);
+          final EObject eobject = this.compilationUnit.getJvmModelAssociations().getPrimarySourceElement(((AbstractElementImpl<? extends EObject>)element).getDelegate());
           if ((eobject == null)) {
-            EObject _delegate_2 = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
-            return Pair.<Resource, EObject>of(resource, _delegate_2);
+            EObject _delegate = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
+            return Pair.<Resource, EObject>of(resource, _delegate);
           }
           return Pair.<Resource, EObject>of(resource, eobject);
         }

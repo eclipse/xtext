@@ -19,7 +19,6 @@ import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend.core.idea.config.XtendProjectConfigurator;
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
 import org.eclipse.xtend.core.idea.framework.XtendLibraryDescription;
-import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
@@ -39,11 +38,9 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
   
   @Override
   public void addSupport(final Module module, final ModifiableRootModel rootModel, final ModifiableModelsProvider modifiableModelsProvider) {
-    Module _module = rootModel.getModule();
-    final XtendFacetConfiguration conf = this.projectConfiguator.createOrGetXtendFacetConf(_module);
+    final XtendFacetConfiguration conf = this.projectConfiguator.createOrGetXtendFacetConf(rootModel.getModule());
     this.projectConfiguator.setupOutputConfiguration(rootModel, conf);
-    XbaseGeneratorConfigurationState _state = conf.getState();
-    this.projectConfiguator.createOutputFolders(rootModel, _state);
+    this.projectConfiguator.createOutputFolders(rootModel, conf.getState());
     this.xtendLibManager.ensureXtendLibAvailable(rootModel);
   }
   

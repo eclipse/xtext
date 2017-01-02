@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.validation;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
@@ -52,8 +51,7 @@ public class UniqueClassNameValidatorRuntimeTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this.parseHelper.parse(_builder);
-      this.validationHelper.assertError(_parse, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.DUPLICATE_TYPE, "The type C is already defined.");
+      this.validationHelper.assertError(this.parseHelper.parse(_builder), XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.DUPLICATE_TYPE, "The type C is already defined.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -79,8 +77,7 @@ public class UniqueClassNameValidatorRuntimeTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this.parseHelper.parse(_builder);
-      this.validationHelper.assertError(_parse, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.DUPLICATE_TYPE, "Duplicate nested type C");
+      this.validationHelper.assertError(this.parseHelper.parse(_builder), XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.DUPLICATE_TYPE, "Duplicate nested type C");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -92,14 +89,11 @@ public class UniqueClassNameValidatorRuntimeTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class C {}");
       _builder.newLine();
-      URI _createPlatformResourceURI = URI.createPlatformResourceURI("projectName/src/C1.xtend", true);
-      final Resource first = this.resourceHelper.resource(_builder, _createPlatformResourceURI);
+      final Resource first = this.resourceHelper.resource(_builder, URI.createPlatformResourceURI("projectName/src/C1.xtend", true));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("interface C {}");
       _builder_1.newLine();
-      URI _createPlatformResourceURI_1 = URI.createPlatformResourceURI("projectName/src/C2.xtend", true);
-      ResourceSet _resourceSet = first.getResourceSet();
-      final Resource second = this.resourceHelper.resource(_builder_1, _createPlatformResourceURI_1, _resourceSet);
+      final Resource second = this.resourceHelper.resource(_builder_1, URI.createPlatformResourceURI("projectName/src/C2.xtend", true), first.getResourceSet());
       this.validationHelper.assertError(first, XtendPackage.Literals.XTEND_CLASS, IssueCodes.DUPLICATE_TYPE, "The type C is already defined in C2.xtend.");
       this.validationHelper.assertError(second, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.DUPLICATE_TYPE, "The type C is already defined in C1.xtend.");
     } catch (Throwable _e) {

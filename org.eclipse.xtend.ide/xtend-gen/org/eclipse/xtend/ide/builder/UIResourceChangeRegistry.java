@@ -19,7 +19,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -34,9 +33,7 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ISaveContext;
 import org.eclipse.core.resources.ISaveParticipant;
 import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -131,16 +128,13 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   
   @Override
   public synchronized void discardCreateOrModifyInformation(final URI uri) {
-    Collection<URI> _values = this.changesNotRelevantListeners.values();
-    Set<URI> _singleton = Collections.<URI>singleton(uri);
-    _values.removeAll(_singleton);
+    this.changesNotRelevantListeners.values().removeAll(Collections.<URI>singleton(uri));
   }
   
   @Override
   public synchronized void resourceChanged(final IResourceChangeEvent event) {
     try {
-      IResourceDelta _delta = event.getDelta();
-      _delta.accept(this);
+      event.getDelta().accept(this);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -149,10 +143,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   @Override
   public boolean visit(final IResourceDelta delta) throws CoreException {
     if (((!this.existsListeners.isEmpty()) && this.hasExistsChanged(delta))) {
-      IResource _resource = delta.getResource();
-      IPath _fullPath = _resource.getFullPath();
-      String _string = _fullPath.toString();
-      final Set<URI> interestedFiles = this.existsListeners.removeAll(_string);
+      final Set<URI> interestedFiles = this.existsListeners.removeAll(delta.getResource().getFullPath().toString());
       boolean _isEmpty = interestedFiles.isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
@@ -160,10 +151,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       }
     }
     if (((!this.childrenListeners.isEmpty()) && (this.hasExistsChanged(delta) || this.hasChildrenChanged(delta)))) {
-      IResource _resource_1 = delta.getResource();
-      IPath _fullPath_1 = _resource_1.getFullPath();
-      String _string_1 = _fullPath_1.toString();
-      final Set<URI> interestedFiles_1 = this.childrenListeners.removeAll(_string_1);
+      final Set<URI> interestedFiles_1 = this.childrenListeners.removeAll(delta.getResource().getFullPath().toString());
       boolean _isEmpty_1 = interestedFiles_1.isEmpty();
       boolean _not_1 = (!_isEmpty_1);
       if (_not_1) {
@@ -171,10 +159,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       }
     }
     if (((!this.charsetListeners.isEmpty()) && (this.hasExistsChanged(delta) || this.hasCharsetChanged(delta)))) {
-      IResource _resource_2 = delta.getResource();
-      IPath _fullPath_2 = _resource_2.getFullPath();
-      String _string_2 = _fullPath_2.toString();
-      final Set<URI> interestedFiles_2 = this.charsetListeners.removeAll(_string_2);
+      final Set<URI> interestedFiles_2 = this.charsetListeners.removeAll(delta.getResource().getFullPath().toString());
       boolean _isEmpty_2 = interestedFiles_2.isEmpty();
       boolean _not_2 = (!_isEmpty_2);
       if (_not_2) {
@@ -182,10 +167,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       }
     }
     if (((!this.contentsListeners.isEmpty()) && (this.hasExistsChanged(delta) || this.hasContentsChanged(delta)))) {
-      IResource _resource_3 = delta.getResource();
-      IPath _fullPath_3 = _resource_3.getFullPath();
-      String _string_3 = _fullPath_3.toString();
-      final Set<URI> interestedFiles_3 = this.contentsListeners.removeAll(_string_3);
+      final Set<URI> interestedFiles_3 = this.contentsListeners.removeAll(delta.getResource().getFullPath().toString());
       boolean _isEmpty_3 = interestedFiles_3.isEmpty();
       boolean _not_3 = (!_isEmpty_3);
       if (_not_3) {
@@ -227,9 +209,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     int _kind = delta.getKind();
     boolean _equals = (_kind == IResourceDelta.CHANGED);
     if (_equals) {
-      int _flags = delta.getFlags();
-      int _bitwiseAnd = (_flags & UIResourceChangeRegistry.HAS_CONTENTS_CHANGED_FLAGS);
-      return (_bitwiseAnd != 0);
+      return ((delta.getFlags() & UIResourceChangeRegistry.HAS_CONTENTS_CHANGED_FLAGS) != 0);
     } else {
       return false;
     }
@@ -301,8 +281,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
             {
               final String path = reader.readUTF();
               final String uri = reader.readUTF();
-              URI _createURI = URI.createURI(uri);
-              map.put(path, _createURI);
+              map.put(path, URI.createURI(uri));
             }
           }
         }
@@ -338,15 +317,11 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       for (final HashMultimap<String, URI> map : Collections.<HashMultimap<String, URI>>unmodifiableList(CollectionLiterals.<HashMultimap<String, URI>>newArrayList(this.existsListeners, this.charsetListeners, this.childrenListeners, this.contentsListeners))) {
         {
           final Set<Map.Entry<String, URI>> entries = map.entries();
-          int _size = entries.size();
-          writer.writeInt(_size);
+          writer.writeInt(entries.size());
           for (final Map.Entry<String, URI> entry : entries) {
             {
-              String _key = entry.getKey();
-              writer.writeUTF(_key);
-              URI _value = entry.getValue();
-              String _string = _value.toString();
-              writer.writeUTF(_string);
+              writer.writeUTF(entry.getKey());
+              writer.writeUTF(entry.getValue().toString());
             }
           }
         }
@@ -357,14 +332,10 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   }
   
   private File getRegistryStateLocation() {
-    IPath _stateLocation = this.uiPlugin.getStateLocation();
-    IPath _append = _stateLocation.append("resource.change.registry");
-    return _append.toFile();
+    return this.uiPlugin.getStateLocation().append("resource.change.registry").toFile();
   }
   
   private void forgetBuildState() {
-    IWorkspaceRoot _root = this.workspace.getRoot();
-    IProject[] _projects = _root.getProjects();
     final Function1<IProject, Boolean> _function = (IProject it) -> {
       try {
         return Boolean.valueOf(((it.isAccessible() && it.hasNature(XtextProjectHelper.NATURE_ID)) && it.hasNature(JavaCore.NATURE_ID)));
@@ -372,7 +343,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
         throw Exceptions.sneakyThrow(_e);
       }
     };
-    final Iterable<IProject> projects = IterableExtensions.<IProject>filter(((Iterable<IProject>)Conversions.doWrapArray(_projects)), _function);
+    final Iterable<IProject> projects = IterableExtensions.<IProject>filter(((Iterable<IProject>)Conversions.doWrapArray(this.workspace.getRoot().getProjects())), _function);
     this.scheduler.scheduleBuildIfNecessary(projects, IBuildFlag.FORGET_BUILD_STATE_ONLY);
   }
   

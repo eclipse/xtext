@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.formatting2.Chunk;
 import org.eclipse.xtend.core.formatting2.Line;
-import org.eclipse.xtend.core.formatting2.LineModel;
 import org.eclipse.xtend.core.formatting2.RichStringToLineModel;
 import org.eclipse.xtend.core.formatting2.SemanticWhitespace;
 import org.eclipse.xtend.core.formatting2.TemplateWhitespace;
@@ -29,7 +28,6 @@ import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
@@ -38,13 +36,10 @@ import org.eclipse.xtext.formatting2.IHiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionReplacer;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
 import org.eclipse.xtext.formatting2.regionaccess.internal.NodeEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment;
-import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
@@ -85,14 +80,12 @@ public class RichStringFormatter {
   private final ITextRegionExtensions _iTextRegionExtensions;
   
   protected void _format(final RichString richString, final IFormattableDocument doc) {
-    EObject _eContainer = richString.eContainer();
-    RichString _containerOfType = EcoreUtil2.<RichString>getContainerOfType(_eContainer, RichString.class);
+    RichString _containerOfType = EcoreUtil2.<RichString>getContainerOfType(richString.eContainer(), RichString.class);
     boolean _tripleNotEquals = (_containerOfType != null);
     if (_tripleNotEquals) {
       return;
     }
-    IEObjectRegion _regionForEObject = this._iTextRegionExtensions.regionForEObject(richString);
-    boolean _hasSyntaxError = this.hasSyntaxError(_regionForEObject);
+    boolean _hasSyntaxError = this.hasSyntaxError(this._iTextRegionExtensions.regionForEObject(richString));
     if (_hasSyntaxError) {
       return;
     }
@@ -105,12 +98,10 @@ public class RichStringFormatter {
     for (final XExpression e : _expressions) {
       this.format(e, doc);
     }
-    LineModel _model = impl.getModel();
-    final List<Line> lines = _model.getLines();
+    final List<Line> lines = impl.getModel().getLines();
     final boolean canIndent = ((!lines.isEmpty()) && StringExtensions.isNullOrEmpty(IterableExtensions.<Line>last(lines).getContent()));
     for (final Line line : lines) {
-      LineModel _model_1 = impl.getModel();
-      int _rootIndentLenght = _model_1.getRootIndentLenght();
+      int _rootIndentLenght = impl.getModel().getRootIndentLenght();
       boolean _greaterThan = (_rootIndentLenght > 0);
       if (_greaterThan) {
         int _xifexpression = (int) 0;
@@ -137,10 +128,7 @@ public class RichStringFormatter {
           _xifexpression_2 = line.getOffset();
         }
         final int nloffset = _xifexpression_2;
-        int _indentLength = line.getIndentLength();
-        LineModel _model_2 = impl.getModel();
-        int _rootIndentLenght_1 = _model_2.getRootIndentLenght();
-        final int i = Math.min(_indentLength, _rootIndentLenght_1);
+        final int i = Math.min(line.getIndentLength(), impl.getModel().getRootIndentLenght());
         int _xifexpression_3 = (int) 0;
         boolean _isLeadingSemanticNewLine_1 = line.isLeadingSemanticNewLine();
         if (_isLeadingSemanticNewLine_1) {
@@ -156,16 +144,13 @@ public class RichStringFormatter {
         } else {
           this.setNewLines(doc, nloffset, nllength, increaseIndentationChange, decraseIndentationChange, 1);
         }
-        List<Chunk> _chunks = line.getChunks();
-        boolean _isEmpty = _chunks.isEmpty();
+        boolean _isEmpty = line.getChunks().isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
           final int offset = (nloffset + nllength);
-          int _indentLength_1 = line.getIndentLength();
-          LineModel _model_3 = impl.getModel();
-          int _rootIndentLenght_2 = _model_3.getRootIndentLenght();
-          final int length = (_indentLength_1 - _rootIndentLenght_2);
-          List<Chunk> _chunks_1 = line.getChunks();
+          int _indentLength = line.getIndentLength();
+          int _rootIndentLenght_1 = impl.getModel().getRootIndentLenght();
+          final int length = (_indentLength - _rootIndentLenght_1);
           final Function1<Chunk, CharSequence> _function = (Chunk chunk) -> {
             CharSequence _switchResult = null;
             boolean _matched = false;
@@ -176,14 +161,12 @@ public class RichStringFormatter {
             if (!_matched) {
               if (chunk instanceof TemplateWhitespace) {
                 _matched=true;
-                AbstractFormatter2 _formatter = doc.getFormatter();
-                _switchResult = _formatter.<String>getPreference(FormatterPreferenceKeys.indentation);
+                _switchResult = doc.getFormatter().<String>getPreference(FormatterPreferenceKeys.indentation);
               }
             }
             return _switchResult;
           };
-          List<CharSequence> _map = ListExtensions.<Chunk, CharSequence>map(_chunks_1, _function);
-          final String text = IterableExtensions.join(_map);
+          final String text = IterableExtensions.join(ListExtensions.<Chunk, CharSequence>map(line.getChunks(), _function));
           this.setSpace(doc, offset, length, text);
         }
       }
@@ -195,12 +178,9 @@ public class RichStringFormatter {
   }
   
   protected boolean _hasSyntaxError(final NodeEObjectRegion region) {
-    INode _node = region.getNode();
-    BidiTreeIterable<INode> _asTreeIterable = _node.getAsTreeIterable();
-    final BidiTreeIterator<INode> i = _asTreeIterable.iterator();
+    final BidiTreeIterator<INode> i = region.getNode().getAsTreeIterable().iterator();
     while (i.hasNext()) {
-      INode _next = i.next();
-      SyntaxErrorMessage _syntaxErrorMessage = _next.getSyntaxErrorMessage();
+      SyntaxErrorMessage _syntaxErrorMessage = i.next().getSyntaxErrorMessage();
       boolean _tripleNotEquals = (_syntaxErrorMessage != null);
       if (_tripleNotEquals) {
         return true;
@@ -210,8 +190,7 @@ public class RichStringFormatter {
   }
   
   protected void setNewLines(final IFormattableDocument doc, final int offset, final int length, final int indentationIncrease, final int indentationDecrease, final int newLines) {
-    AbstractFormatter2 _formatter = doc.getFormatter();
-    IHiddenRegionFormatting _createHiddenRegionFormatting = _formatter.createHiddenRegionFormatting();
+    IHiddenRegionFormatting _createHiddenRegionFormatting = doc.getFormatter().createHiddenRegionFormatting();
     final Procedure1<IHiddenRegionFormatting> _function = (IHiddenRegionFormatting it) -> {
       it.setIndentationIncrease(Integer.valueOf(indentationIncrease));
       it.setIndentationDecrease(Integer.valueOf(indentationDecrease));
@@ -220,24 +199,23 @@ public class RichStringFormatter {
       it.setNewLinesMax(Integer.valueOf(newLines));
     };
     final IHiddenRegionFormatting fmt = ObjectExtensions.<IHiddenRegionFormatting>operator_doubleArrow(_createHiddenRegionFormatting, _function);
-    AbstractFormatter2 _formatter_1 = doc.getFormatter();
+    AbstractFormatter2 _formatter = doc.getFormatter();
     ITextRegionAccess _textRegionAccess = this._iTextRegionExtensions.getTextRegionAccess();
     TextSegment _textSegment = new TextSegment(_textRegionAccess, offset, length);
-    final ITextReplacer replacer = _formatter_1.createWhitespaceReplacer(_textSegment, fmt);
+    final ITextReplacer replacer = _formatter.createWhitespaceReplacer(_textSegment, fmt);
     doc.addReplacer(replacer);
   }
   
   protected void setSpace(final IFormattableDocument doc, final int offset, final int length, final String space) {
-    AbstractFormatter2 _formatter = doc.getFormatter();
-    IHiddenRegionFormatting _createHiddenRegionFormatting = _formatter.createHiddenRegionFormatting();
+    IHiddenRegionFormatting _createHiddenRegionFormatting = doc.getFormatter().createHiddenRegionFormatting();
     final Procedure1<IHiddenRegionFormatting> _function = (IHiddenRegionFormatting it) -> {
       it.setSpace(space);
     };
     final IHiddenRegionFormatting fmt = ObjectExtensions.<IHiddenRegionFormatting>operator_doubleArrow(_createHiddenRegionFormatting, _function);
-    AbstractFormatter2 _formatter_1 = doc.getFormatter();
+    AbstractFormatter2 _formatter = doc.getFormatter();
     ITextRegionAccess _textRegionAccess = this._iTextRegionExtensions.getTextRegionAccess();
     TextSegment _textSegment = new TextSegment(_textRegionAccess, offset, length);
-    final ITextReplacer replacer = _formatter_1.createWhitespaceReplacer(_textSegment, fmt);
+    final ITextReplacer replacer = _formatter.createWhitespaceReplacer(_textSegment, fmt);
     doc.addReplacer(replacer);
   }
   
@@ -248,7 +226,6 @@ public class RichStringFormatter {
   }
   
   protected void formatIntoSingleLine(final IFormattableDocument doc, final EObject obj) {
-    AbstractFormatter2 _formatter = doc.getFormatter();
     final Predicate<ITextReplacer> _function = (ITextReplacer it) -> {
       boolean _xblockexpression = false;
       {
@@ -257,16 +234,14 @@ public class RichStringFormatter {
       }
       return _xblockexpression;
     };
-    IFormattableDocument _withReplacerFilter = doc.withReplacerFilter(_function);
-    _formatter.format(obj, _withReplacerFilter);
+    doc.getFormatter().format(obj, doc.withReplacerFilter(_function));
   }
   
   protected void _suppressLineWraps(final ITextReplacer it) {
   }
   
   protected void _suppressLineWraps(final HiddenRegionReplacer it) {
-    IHiddenRegionFormatting _formatting = it.getFormatting();
-    this.suppressLineWraps(_formatting);
+    this.suppressLineWraps(it.getFormatting());
   }
   
   protected void _suppressLineWraps(final IHiddenRegionFormatting it) {
@@ -290,128 +265,90 @@ public class RichStringFormatter {
   }
   
   protected void _format(final RichStringIf expr, @Extension final IFormattableDocument doc) {
-    ISemanticRegionsFinder _regionFor = this._iTextRegionExtensions.regionFor(expr);
-    ISemanticRegion _keyword = _regionFor.keyword("IF");
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    ISemanticRegion _prepend = doc.prepend(_keyword, _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    doc.append(_prepend, _function_1);
-    EList<RichStringElseIf> _elseIfs = expr.getElseIfs();
-    RichStringElseIf _last = IterableExtensions.<RichStringElseIf>last(_elseIfs);
+    doc.append(doc.prepend(this._iTextRegionExtensions.regionFor(expr).keyword("IF"), _function), _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    doc.<RichStringElseIf>append(_last, _function_2);
-    XExpression _if = expr.getIf();
-    this.formatIntoSingleLine(doc, _if);
-    XExpression _then = expr.getThen();
-    this.format(_then, doc);
-    EList<RichStringElseIf> _elseIfs_1 = expr.getElseIfs();
-    for (final RichStringElseIf elseif : _elseIfs_1) {
+    doc.<RichStringElseIf>append(IterableExtensions.<RichStringElseIf>last(expr.getElseIfs()), _function_2);
+    this.formatIntoSingleLine(doc, expr.getIf());
+    this.format(expr.getThen(), doc);
+    EList<RichStringElseIf> _elseIfs = expr.getElseIfs();
+    for (final RichStringElseIf elseif : _elseIfs) {
       this.format(elseif, doc);
     }
-    ISemanticRegionsFinder _regionFor_1 = this._iTextRegionExtensions.regionFor(expr);
-    ISemanticRegion _keyword_1 = _regionFor_1.keyword("ELSE");
     final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    doc.surround(_keyword_1, _function_3);
-    XExpression _else = expr.getElse();
-    this.format(_else, doc);
-    ISemanticRegionsFinder _regionFor_2 = this._iTextRegionExtensions.regionFor(expr);
-    ISemanticRegion _keyword_2 = _regionFor_2.keyword("ENDIF");
+    doc.surround(this._iTextRegionExtensions.regionFor(expr).keyword("ELSE"), _function_3);
+    this.format(expr.getElse(), doc);
     final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    doc.surround(_keyword_2, _function_4);
+    doc.surround(this._iTextRegionExtensions.regionFor(expr).keyword("ENDIF"), _function_4);
   }
   
   protected void _format(final RichStringElseIf expr, @Extension final IFormattableDocument doc) {
-    ISemanticRegionsFinder _regionFor = this._iTextRegionExtensions.regionFor(expr);
-    ISemanticRegion _keyword = _regionFor.keyword("ELSEIF");
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    ISemanticRegion _prepend = doc.prepend(_keyword, _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    doc.append(_prepend, _function_1);
-    XExpression _if = expr.getIf();
+    doc.append(doc.prepend(this._iTextRegionExtensions.regionFor(expr).keyword("ELSEIF"), _function), _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    doc.<XExpression>append(_if, _function_2);
-    XExpression _if_1 = expr.getIf();
-    this.formatIntoSingleLine(doc, _if_1);
+    doc.<XExpression>append(expr.getIf(), _function_2);
+    this.formatIntoSingleLine(doc, expr.getIf());
   }
   
   protected void _format(final RichStringForLoop expr, @Extension final IFormattableDocument doc) {
-    ISemanticRegionsFinder _regionFor = this._iTextRegionExtensions.regionFor(expr);
-    ISemanticRegion _keyword = _regionFor.keyword("FOR");
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    ISemanticRegion _prepend = doc.prepend(_keyword, _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    doc.append(_prepend, _function_1);
-    ISemanticRegionsFinder _regionFor_1 = this._iTextRegionExtensions.regionFor(expr);
-    ISemanticRegion _keyword_1 = _regionFor_1.keyword(":");
+    doc.append(doc.prepend(this._iTextRegionExtensions.regionFor(expr).keyword("FOR"), _function), _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    ISemanticRegion _prepend_1 = doc.prepend(_keyword_1, _function_2);
     final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    doc.append(_prepend_1, _function_3);
-    JvmFormalParameter _declaredParam = expr.getDeclaredParam();
-    this.formatIntoSingleLine(doc, _declaredParam);
-    XExpression _forExpression = expr.getForExpression();
-    this.formatIntoSingleLine(doc, _forExpression);
-    XExpression _eachExpression = expr.getEachExpression();
-    this.format(_eachExpression, doc);
-    ISemanticRegionsFinder _regionFor_2 = this._iTextRegionExtensions.regionFor(expr);
-    ISemanticRegion _keyword_2 = _regionFor_2.keyword("BEFORE");
+    doc.append(doc.prepend(this._iTextRegionExtensions.regionFor(expr).keyword(":"), _function_2), _function_3);
+    this.formatIntoSingleLine(doc, expr.getDeclaredParam());
+    this.formatIntoSingleLine(doc, expr.getForExpression());
+    this.format(expr.getEachExpression(), doc);
     final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    doc.surround(_keyword_2, _function_4);
-    XExpression _before = expr.getBefore();
-    this.formatIntoSingleLine(doc, _before);
-    ISemanticRegionsFinder _regionFor_3 = this._iTextRegionExtensions.regionFor(expr);
-    ISemanticRegion _keyword_3 = _regionFor_3.keyword("SEPARATOR");
+    doc.surround(this._iTextRegionExtensions.regionFor(expr).keyword("BEFORE"), _function_4);
+    this.formatIntoSingleLine(doc, expr.getBefore());
     final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    doc.surround(_keyword_3, _function_5);
-    XExpression _separator = expr.getSeparator();
-    this.formatIntoSingleLine(doc, _separator);
-    ISemanticRegionsFinder _regionFor_4 = this._iTextRegionExtensions.regionFor(expr);
-    ISemanticRegion _keyword_4 = _regionFor_4.keyword("AFTER");
+    doc.surround(this._iTextRegionExtensions.regionFor(expr).keyword("SEPARATOR"), _function_5);
+    this.formatIntoSingleLine(doc, expr.getSeparator());
     final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    doc.surround(_keyword_4, _function_6);
-    XExpression _after = expr.getAfter();
-    this.formatIntoSingleLine(doc, _after);
-    XExpression _eachExpression_1 = expr.getEachExpression();
+    doc.surround(this._iTextRegionExtensions.regionFor(expr).keyword("AFTER"), _function_6);
+    this.formatIntoSingleLine(doc, expr.getAfter());
     final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    doc.<XExpression>prepend(_eachExpression_1, _function_7);
-    ISemanticRegionsFinder _regionFor_5 = this._iTextRegionExtensions.regionFor(expr);
-    ISemanticRegion _keyword_5 = _regionFor_5.keyword("ENDFOR");
+    doc.<XExpression>prepend(expr.getEachExpression(), _function_7);
     final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    doc.surround(_keyword_5, _function_8);
+    doc.surround(this._iTextRegionExtensions.regionFor(expr).keyword("ENDFOR"), _function_8);
   }
   
   public void format(final EObject richString, final IFormattableDocument doc) {

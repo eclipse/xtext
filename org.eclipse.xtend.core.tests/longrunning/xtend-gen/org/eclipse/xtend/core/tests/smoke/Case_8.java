@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -26,20 +25,16 @@ public class Case_8 {
   private IQualifiedNameProvider qualifiedNameProvider;
   
   public EList<Resource.Diagnostic> getErrors(final EObject obj) {
-    Resource _eResource = obj.eResource();
-    return _eResource.getErrors();
+    return obj.eResource().getErrors();
   }
   
   public void resolve(final EObject obj) {
-    Resource _eResource = obj.eResource();
-    EcoreUtil.resolveAll(_eResource);
+    EcoreUtil.resolveAll(obj.eResource());
   }
   
   public EObject parseAcme(final CharSequence seq) {
     try {
-      EObject _parse = this.helper.parse(seq);
-      EList<EObject> _eContents = _parse.eContents();
-      return IterableExtensions.<EObject>head(_eContents);
+      return IterableExtensions.<EObject>head(this.helper.parse(seq).eContents());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -51,9 +46,7 @@ public class Case_8 {
     _builder.append("com.acme.SimpleElement as FooBar {}");
     _builder.newLine();
     final EObject element = this.parseAcme(_builder);
-    QualifiedName _fullyQualifiedName = this.qualifiedNameProvider.getFullyQualifiedName(element);
-    String _string = _fullyQualifiedName.toString();
-    Assert.assertEquals("FooBar", _string);
+    Assert.assertEquals("FooBar", this.qualifiedNameProvider.getFullyQualifiedName(element).toString());
   }
   
   public <T1 extends Object> List<List<T1>> foo(final T1 t) {

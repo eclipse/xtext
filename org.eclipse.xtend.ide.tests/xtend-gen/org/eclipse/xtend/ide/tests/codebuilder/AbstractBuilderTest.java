@@ -1,20 +1,16 @@
 package org.eclipse.xtend.ide.tests.codebuilder;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
@@ -67,11 +63,8 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
           _builder.newLine();
           _builder.append("}");
           _builder.newLine();
-          XtendFile _xtendFile = this._workbenchTestHelper.xtendFile("Foo", _builder.toString());
-          EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
-          XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-          JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
-          AbstractBuilderTest.xtendClass = _inferredType;
+          XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(this._workbenchTestHelper.xtendFile("Foo", _builder.toString()).getXtendTypes());
+          AbstractBuilderTest.xtendClass = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
         }
         _xblockexpression = AbstractBuilderTest.xtendClass;
       }
@@ -93,9 +86,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
           _builder.newLine();
           this._workbenchTestHelper.createFile("Bar.java", _builder.toString());
           IResourcesSetupUtil.waitForBuild();
-          JvmDeclaredType _xtendClass = this.getXtendClass();
-          JvmTypeReference _typeForName = this._typeReferences.getTypeForName("Bar", _xtendClass);
-          JvmType _type = _typeForName.getType();
+          JvmType _type = this._typeReferences.getTypeForName("Bar", this.getXtendClass()).getType();
           AbstractBuilderTest.javaClass = ((JvmDeclaredType) _type);
         }
         _xblockexpression = AbstractBuilderTest.javaClass;
@@ -125,11 +116,9 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
   }
   
   protected void assertBuilds(final ICodeBuilder builder, final String expectedCode) {
-    boolean _isValid = builder.isValid();
-    Assert.assertTrue(_isValid);
+    Assert.assertTrue(builder.isValid());
     final StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
     builder.build(appendable);
-    String _string = appendable.toString();
-    Assert.assertEquals(expectedCode, _string);
+    Assert.assertEquals(expectedCode, appendable.toString());
   }
 }

@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.tests.resource;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.Collections;
 import org.eclipse.core.resources.IFile;
@@ -20,9 +19,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -33,17 +30,12 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.ui.editor.SchedulingRuleFactory;
@@ -129,36 +121,23 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       IResourcesSetupUtil.waitForBuild();
       final URI uri = this.uriMapper.getUri(file);
       final URI uri2 = this.uriMapper.getUri(file2);
-      IProject _project = file.getProject();
-      final ResourceSet resourceSet = this.resourceSetProvider.get(_project);
+      final ResourceSet resourceSet = this.resourceSetProvider.get(file.getProject());
       SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
       Resource _resource = resourceSet.getResource(uri2, true);
       final StorageAwareResource resource2 = ((StorageAwareResource) _resource);
-      boolean _isLoadedFromStorage = resource2.isLoadedFromStorage();
-      Assert.assertTrue(_isLoadedFromStorage);
+      Assert.assertTrue(resource2.isLoadedFromStorage());
       EcoreUtil.resolveAll(resource2);
-      IResourceDescription _resourceDescription = resource2.getResourceDescription();
-      Iterable<IEObjectDescription> _exportedObjects = _resourceDescription.getExportedObjects();
       final Function1<IEObjectDescription, String> _function = (IEObjectDescription it) -> {
-        QualifiedName _name = it.getName();
-        return _name.toString();
+        return it.getName().toString();
       };
-      Iterable<String> _map = IterableExtensions.<IEObjectDescription, String>map(_exportedObjects, _function);
-      String _join = IterableExtensions.join(_map, ",");
-      Assert.assertEquals("mypack.OtherClass", _join);
+      Assert.assertEquals("mypack.OtherClass", IterableExtensions.join(IterableExtensions.<IEObjectDescription, String>map(resource2.getResourceDescription().getExportedObjects(), _function), ","));
       Resource _resource_1 = resourceSet.getResource(uri, false);
       final StorageAwareResource resource = ((StorageAwareResource) _resource_1);
-      boolean _isLoadedFromStorage_1 = resource.isLoadedFromStorage();
-      Assert.assertTrue(_isLoadedFromStorage_1);
-      IResourceDescription _resourceDescription_1 = resource.getResourceDescription();
-      Iterable<IEObjectDescription> _exportedObjects_1 = _resourceDescription_1.getExportedObjects();
+      Assert.assertTrue(resource.isLoadedFromStorage());
       final Function1<IEObjectDescription, String> _function_1 = (IEObjectDescription it) -> {
-        QualifiedName _name = it.getName();
-        return _name.toString();
+        return it.getName().toString();
       };
-      Iterable<String> _map_1 = IterableExtensions.<IEObjectDescription, String>map(_exportedObjects_1, _function_1);
-      String _join_1 = IterableExtensions.join(_map_1, ",");
-      Assert.assertEquals("mypack.MyClass", _join_1);
+      Assert.assertEquals("mypack.MyClass", IterableExtensions.join(IterableExtensions.<IEObjectDescription, String>map(resource.getResourceDescription().getExportedObjects(), _function_1), ","));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -184,24 +163,19 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       final IFile file = this.helper.createFile("mypack/MyClass.xtend", _builder.toString());
       IResourcesSetupUtil.waitForBuild();
       final URI uri = this.uriMapper.getUri(file);
-      IProject _project = file.getProject();
-      final ResourceSet resourceSet = this.resourceSetProvider.get(_project);
+      final ResourceSet resourceSet = this.resourceSetProvider.get(file.getProject());
       SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
       Resource _createResource = resourceSet.createResource(uri);
       final StorageAwareResource resource = ((StorageAwareResource) _createResource);
       final Procedure0 _function = () -> {
-        IResourceStorageFacade _resourceStorageFacade = resource.getResourceStorageFacade();
-        boolean _shouldLoadFromStorage = _resourceStorageFacade.shouldLoadFromStorage(resource);
-        Assert.assertTrue(_shouldLoadFromStorage);
+        Assert.assertTrue(resource.getResourceStorageFacade().shouldLoadFromStorage(resource));
       };
       this.doWorkInJob(_function);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       file.delete(true, _nullProgressMonitor);
       IResourcesSetupUtil.waitForBuild();
       final Procedure0 _function_1 = () -> {
-        IResourceStorageFacade _resourceStorageFacade = resource.getResourceStorageFacade();
-        boolean _shouldLoadFromStorage = _resourceStorageFacade.shouldLoadFromStorage(resource);
-        Assert.assertFalse(_shouldLoadFromStorage);
+        Assert.assertFalse(resource.getResourceStorageFacade().shouldLoadFromStorage(resource));
       };
       this.doWorkInJob(_function_1);
     } catch (Throwable _e) {
@@ -221,9 +195,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       this.helper.createFile("mypack/MyClass.xtend", _builder.toString());
-      IProject _project = this.helper.getProject();
-      String _name = _project.getName();
-      final IProject downStreamProject = WorkbenchTestHelper.createPluginProject("downstream", _name);
+      final IProject downStreamProject = WorkbenchTestHelper.createPluginProject("downstream", this.helper.getProject().getName());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package downstream");
       _builder_1.newLine();
@@ -247,20 +219,12 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(downstreamUri)));
       Resource _resource = resourceSet.getResource(downstreamUri, true);
       final StorageAwareResource downstreamResource = ((StorageAwareResource) _resource);
-      EList<EObject> _contents = downstreamResource.getContents();
-      EObject _get = _contents.get(1);
+      EObject _get = downstreamResource.getContents().get(1);
       final JvmGenericType type = ((JvmGenericType) _get);
-      EList<JvmMember> _members = type.getMembers();
-      Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
-      JvmOperation _head = IterableExtensions.<JvmOperation>head(_filter);
-      EList<JvmFormalParameter> _parameters = _head.getParameters();
-      JvmFormalParameter _head_1 = IterableExtensions.<JvmFormalParameter>head(_parameters);
-      JvmTypeReference _parameterType = _head_1.getParameterType();
-      final JvmType parameterType = _parameterType.getType();
+      final JvmType parameterType = IterableExtensions.<JvmFormalParameter>head(IterableExtensions.<JvmOperation>head(Iterables.<JvmOperation>filter(type.getMembers(), JvmOperation.class)).getParameters()).getParameterType().getType();
       Assert.assertNotNull(parameterType);
       Resource _eResource = parameterType.eResource();
-      boolean _isLoadedFromStorage = ((StorageAwareResource) _eResource).isLoadedFromStorage();
-      Assert.assertTrue(_isLoadedFromStorage);
+      Assert.assertTrue(((StorageAwareResource) _eResource).isLoadedFromStorage());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -270,13 +234,11 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
     try {
       final ArrayList<Throwable> throwables = CollectionLiterals.<Throwable>newArrayList();
       StringConcatenation _builder = new StringConcatenation();
-      Class<? extends ResourceStorageTest> _class = this.getClass();
-      String _name = _class.getName();
+      String _name = this.getClass().getName();
       _builder.append(_name);
       _builder.append(".TestJob");
       final Procedure1<Job> _function = (Job it) -> {
-        ISchedulingRule _newSequence = SchedulingRuleFactory.INSTANCE.newSequence();
-        it.setRule(_newSequence);
+        it.setRule(SchedulingRuleFactory.INSTANCE.newSequence());
       };
       final Job testShouldLoadFromStorageJob = ObjectExtensions.<Job>operator_doubleArrow(new Job(_builder.toString()) {
         @Override
@@ -329,21 +291,17 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       final IFile file = this.helper.createFile("mypack/MyClass Foo.xtend", _builder.toString());
       IResourcesSetupUtil.waitForBuild();
       final ResourceStorageTest.TestableStorageAwareTrace storageAwareTrace = new ResourceStorageTest.TestableStorageAwareTrace();
-      Injector _injector = this.getInjector();
-      _injector.injectMembers(storageAwareTrace);
+      this.getInjector().injectMembers(storageAwareTrace);
       storageAwareTrace.setLocalStorage(file);
       URI _createURI = URI.createURI("mypack/MyClass%20Foo.xtend");
       SourceRelativeURI _sourceRelativeURI = new SourceRelativeURI(_createURI);
       AbsoluteURI result = storageAwareTrace.resolvePath(_sourceRelativeURI);
-      String _string = result.toString();
-      Assert.assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend", _string);
+      Assert.assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend", result.toString());
       IProject _project = this.helper.getProject();
       URI _createURI_1 = URI.createURI("src/mypack/MyClass%20Foo.xtend");
       SourceRelativeURI _sourceRelativeURI_1 = new SourceRelativeURI(_createURI_1);
-      AbsoluteURI _resolvePath = storageAwareTrace.resolvePath(_project, _sourceRelativeURI_1);
-      result = _resolvePath;
-      String _string_1 = result.toString();
-      Assert.assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend", _string_1);
+      result = storageAwareTrace.resolvePath(_project, _sourceRelativeURI_1);
+      Assert.assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend", result.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

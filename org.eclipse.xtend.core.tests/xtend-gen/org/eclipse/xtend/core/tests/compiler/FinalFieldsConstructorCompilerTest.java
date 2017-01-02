@@ -13,7 +13,6 @@ import java.lang.reflect.Constructor;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
@@ -55,18 +54,14 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.append("}");
       _builder.newLine();
       final String source = _builder.toString();
-      XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertNoErrors(_clazz);
+      this._validationTestHelper.assertNoErrors(this.clazz(source));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
         final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
-          Class<?>[] _parameterTypes = it_1.getParameterTypes();
-          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())));
           return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
         };
-        boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_1);
-        Assert.assertTrue(_exists);
+        Assert.assertTrue(
+          IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredConstructors())), _function_1));
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {
@@ -96,26 +91,19 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.append("}");
       _builder.newLine();
       final String source = _builder.toString();
-      XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertNoErrors(_clazz);
+      this._validationTestHelper.assertNoErrors(this.clazz(source));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
         final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
-          Class<?>[] _parameterTypes = it_1.getParameterTypes();
-          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())));
           return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
         };
-        boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_1);
-        Assert.assertTrue(_exists);
-        Class<?> _compiledClass_1 = it.getCompiledClass();
-        Constructor<?>[] _declaredConstructors_1 = _compiledClass_1.getDeclaredConstructors();
+        Assert.assertTrue(
+          IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredConstructors())), _function_1));
         final Function1<Constructor<?>, Boolean> _function_2 = (Constructor<?> it_1) -> {
-          Class<?>[] _parameterTypes = it_1.getParameterTypes();
-          return Boolean.valueOf(((List<Class<?>>)Conversions.doWrapArray(_parameterTypes)).isEmpty());
+          return Boolean.valueOf(((List<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())).isEmpty());
         };
-        boolean _exists_1 = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors_1)), _function_2);
-        Assert.assertFalse(_exists_1);
+        Assert.assertFalse(
+          IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredConstructors())), _function_2));
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {
@@ -137,12 +125,9 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.append("}");
       _builder.newLine();
       final String source = _builder.toString();
-      XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertNoErrors(_clazz);
+      this._validationTestHelper.assertNoErrors(this.clazz(source));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        String _singleGeneratedCode = it.getSingleGeneratedCode();
-        boolean _contains = _singleGeneratedCode.contains("C(final T a)");
-        Assert.assertTrue(_contains);
+        Assert.assertTrue(it.getSingleGeneratedCode().contains("C(final T a)"));
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {
@@ -169,8 +154,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.append("}");
       _builder.newLine();
       final String source = _builder.toString();
-      XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "new(int)", "already exists");
+      this._validationTestHelper.assertError(this.clazz(source), XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "new(int)", "already exists");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -196,8 +180,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.append("}");
       _builder.newLine();
       final String source = _builder.toString();
-      XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "new(int)", "already exists");
+      this._validationTestHelper.assertError(this.clazz(source), XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "FinalFieldsConstructor", "new(int)", "already exists");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -220,8 +203,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.append("}");
       _builder.newLine();
       final String source = _builder.toString();
-      XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "Parameter list must be empty");
+      this._validationTestHelper.assertError(this.clazz(source), XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "Parameter list must be empty");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -250,8 +232,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.append("}");
       _builder.newLine();
       final String source = _builder.toString();
-      XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "Body must be empty");
+      this._validationTestHelper.assertError(this.clazz(source), XtendPackage.Literals.XTEND_CONSTRUCTOR, "user.issue", "Body must be empty");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -276,18 +257,14 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.append("}");
       _builder.newLine();
       final String source = _builder.toString();
-      XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertNoErrors(_clazz);
+      this._validationTestHelper.assertNoErrors(this.clazz(source));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
         final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
-          Class<?>[] _parameterTypes = it_1.getParameterTypes();
-          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())));
           return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
         };
-        boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_1);
-        Assert.assertTrue(_exists);
+        Assert.assertTrue(
+          IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredConstructors())), _function_1));
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {
@@ -326,18 +303,14 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.append("}");
       _builder.newLine();
       final String source = _builder.toString();
-      XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertNoErrors(_clazz);
+      this._validationTestHelper.assertNoErrors(this.clazz(source));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
         final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
-          Class<?>[] _parameterTypes = it_1.getParameterTypes();
-          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())));
           return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
         };
-        boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_1);
-        Assert.assertTrue(_exists);
+        Assert.assertTrue(
+          IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredConstructors())), _function_1));
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {
@@ -364,18 +337,14 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.append("}");
       _builder.newLine();
       final String source = _builder.toString();
-      XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertNoErrors(_clazz);
+      this._validationTestHelper.assertNoErrors(this.clazz(source));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
-        Class<?> _compiledClass = it.getCompiledClass();
-        Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
         final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
-          Class<?>[] _parameterTypes = it_1.getParameterTypes();
-          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())));
           return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
         };
-        boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_1);
-        Assert.assertTrue(_exists);
+        Assert.assertTrue(
+          IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredConstructors())), _function_1));
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {
@@ -394,8 +363,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       _builder.append("class Foo{}");
       _builder.newLine();
       final String source = _builder.toString();
-      XtendClass _clazz = this.clazz(source);
-      this._validationTestHelper.assertWarning(_clazz, XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no final fields");
+      this._validationTestHelper.assertWarning(this.clazz(source), XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no final fields");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

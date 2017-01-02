@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -49,11 +48,8 @@ public abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTes
   @Override
   protected XtendFunction function(final String string) throws Exception {
     final XtendFunction result = super.function(string);
-    Resource _eResource = result.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
-    this.contextResourceSet = _resourceSet;
-    StandardTypeReferenceOwner _createOwner = this.createOwner();
-    this.owner = _createOwner;
+    this.contextResourceSet = result.eResource().getResourceSet();
+    this.owner = this.createOwner();
     return result;
   }
   

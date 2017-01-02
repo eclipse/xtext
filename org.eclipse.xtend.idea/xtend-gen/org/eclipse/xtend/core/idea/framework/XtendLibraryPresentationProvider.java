@@ -35,8 +35,7 @@ public class XtendLibraryPresentationProvider extends LibraryPresentationProvide
   public XtendLibraryProperties detect(final List<VirtualFile> classesRoots) {
     final List<? extends Class<?>> detectorClasses = XtendLibraryDescription.getDetectorClasses();
     if (((detectorClasses.size() == classesRoots.size()) && IterableExtensions.forall(detectorClasses, ((Function1<Class<?>, Boolean>) (Class<?> it) -> {
-      String _name = it.getName();
-      return Boolean.valueOf(LibraryUtil.isClassAvailableInLibrary(classesRoots, _name));
+      return Boolean.valueOf(LibraryUtil.isClassAvailableInLibrary(classesRoots, it.getName()));
     })))) {
       return new XtendLibraryProperties();
     }

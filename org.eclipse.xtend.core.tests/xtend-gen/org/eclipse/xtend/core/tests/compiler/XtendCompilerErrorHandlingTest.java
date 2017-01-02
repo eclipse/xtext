@@ -2,8 +2,6 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -11,7 +9,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -661,21 +658,14 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
   
   public void assertCompilesTo(final CharSequence input, final CharSequence expected, final boolean shouldBeSyntacticallyValid) {
     try {
-      String _string = input.toString();
-      final XtendFile file = this.file(_string, false, shouldBeSyntacticallyValid);
+      final XtendFile file = this.file(input.toString(), false, shouldBeSyntacticallyValid);
       final Resource resource = file.eResource();
       try {
         this.issueProviderFactory.attachData(resource);
-        EList<EObject> _contents = resource.getContents();
-        Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
-        final JvmDeclaredType inferredType = IterableExtensions.<JvmDeclaredType>head(_filter);
-        GeneratorConfig _get = this.generatorConfigProvider.get(inferredType);
-        CharSequence javaCode = this.generator.generateType(inferredType, _get);
-        CharSequence _postProcess = this.postProcessor.postProcess(null, javaCode);
-        javaCode = _postProcess;
-        String _string_1 = expected.toString();
-        String _string_2 = javaCode.toString();
-        Assert.assertEquals(_string_1, _string_2);
+        final JvmDeclaredType inferredType = IterableExtensions.<JvmDeclaredType>head(Iterables.<JvmDeclaredType>filter(resource.getContents(), JvmDeclaredType.class));
+        CharSequence javaCode = this.generator.generateType(inferredType, this.generatorConfigProvider.get(inferredType));
+        javaCode = this.postProcessor.postProcess(null, javaCode);
+        Assert.assertEquals(expected.toString(), javaCode.toString());
       } finally {
         this.issueProviderFactory.detachData(resource);
       }

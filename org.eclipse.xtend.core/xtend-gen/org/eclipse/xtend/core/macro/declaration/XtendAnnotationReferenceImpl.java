@@ -9,28 +9,20 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
@@ -48,8 +40,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     boolean _matched = false;
     if (type instanceof JvmAnnotationType) {
       _matched=true;
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      TypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(((JvmDeclaredType)type));
+      TypeDeclaration _typeDeclaration = this.getCompilationUnit().toTypeDeclaration(((JvmDeclaredType)type));
       _switchResult = ((AnnotationTypeDeclaration) _typeDeclaration);
     }
     if (!_matched) {
@@ -61,16 +52,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   public JvmType getAnnotationType() {
     JvmType _xblockexpression = null;
     {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      boolean _isIndexing = _compilationUnit.isIndexing();
+      boolean _isIndexing = this.getCompilationUnit().isIndexing();
       boolean _not = (!_isIndexing);
       if (_not) {
-        XAnnotation _delegate = this.getDelegate();
-        return _delegate.getAnnotationType();
+        return this.getDelegate().getAnnotationType();
       }
       JvmType _switchResult = null;
-      XAnnotation _delegate_1 = this.getDelegate();
-      Object _eGet = _delegate_1.eGet(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
+      Object _eGet = this.getDelegate().eGet(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
       final Object proxy = _eGet;
       boolean _matched = false;
       if (proxy instanceof EObject) {
@@ -78,10 +66,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
         if (_eIsProxy) {
           _matched=true;
           final URI uri = ((InternalEObject) proxy).eProxyURI();
-          XAnnotation _delegate_2 = this.getDelegate();
-          Resource _eResource = _delegate_2.eResource();
-          ResourceSet _resourceSet = _eResource.getResourceSet();
-          EObject _eObject = _resourceSet.getEObject(uri, true);
+          EObject _eObject = this.getDelegate().eResource().getResourceSet().getEObject(uri, true);
           return ((JvmType) _eObject);
         }
       }
@@ -100,8 +85,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   public Expression getExpression(final String property) {
     final XExpression value = this.findValue(property);
     if ((value != null)) {
-      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      return _compilationUnit.toExpression(value);
+      return this.getCompilationUnit().toExpression(value);
     }
     return null;
   }
@@ -112,26 +96,20 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     if ((value != null)) {
       return this.translateAnnotationValue(value, property);
     }
-    AnnotationTypeDeclaration _annotationTypeDeclaration = this.getAnnotationTypeDeclaration();
-    AnnotationTypeElementDeclaration _findDeclaredAnnotationTypeElement = _annotationTypeDeclaration.findDeclaredAnnotationTypeElement(property);
-    return _findDeclaredAnnotationTypeElement.getDefaultValue();
+    return this.getAnnotationTypeDeclaration().findDeclaredAnnotationTypeElement(property).getDefaultValue();
   }
   
   protected XExpression findValue(final String property) {
     XExpression _xblockexpression = null;
     {
       if ((Objects.equal(property, "value") && (this.getDelegate().getValue() != null))) {
-        XAnnotation _delegate = this.getDelegate();
-        return _delegate.getValue();
+        return this.getDelegate().getValue();
       }
-      XAnnotation _delegate_1 = this.getDelegate();
-      EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_1.getElementValuePairs();
       final Function1<XAnnotationElementValuePair, Boolean> _function = (XAnnotationElementValuePair it) -> {
-        JvmOperation _element = it.getElement();
-        String _simpleName = _element.getSimpleName();
+        String _simpleName = it.getElement().getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, property));
       };
-      XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
+      XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(this.getDelegate().getElementValuePairs(), _function);
       XExpression _value = null;
       if (_findFirst!=null) {
         _value=_findFirst.getValue();
@@ -142,28 +120,19 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   }
   
   protected Object translateAnnotationValue(final XExpression value, final String property) {
-    XAnnotation _delegate = this.getDelegate();
-    final JvmType annotationType = _delegate.getAnnotationType();
+    final JvmType annotationType = this.getDelegate().getAnnotationType();
     if ((annotationType instanceof JvmAnnotationType)) {
-      EList<JvmMember> _members = ((JvmAnnotationType)annotationType).getMembers();
-      Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
       final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
         String _simpleName = it.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, property));
       };
-      final JvmOperation operation = IterableExtensions.<JvmOperation>findFirst(_filter, _function);
+      final JvmOperation operation = IterableExtensions.<JvmOperation>findFirst(Iterables.<JvmOperation>filter(((JvmAnnotationType)annotationType).getMembers(), JvmOperation.class), _function);
       if ((operation != null)) {
-        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
-        JvmTypeReference _returnType = operation.getReturnType();
-        final boolean array = _typeReferences.isArray(_returnType);
-        CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-        JvmTypeReference _returnType_1 = operation.getReturnType();
-        return _compilationUnit_1.translateAnnotationValue(value, _returnType_1, array);
+        final boolean array = this.getCompilationUnit().getTypeReferences().isArray(operation.getReturnType());
+        return this.getCompilationUnit().translateAnnotationValue(value, operation.getReturnType(), array);
       }
     }
-    CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
-    return _compilationUnit_2.translateAnnotationValue(value, null, false);
+    return this.getCompilationUnit().translateAnnotationValue(value, null, false);
   }
   
   @Override

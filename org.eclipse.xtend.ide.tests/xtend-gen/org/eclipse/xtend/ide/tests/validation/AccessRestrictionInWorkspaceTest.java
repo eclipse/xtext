@@ -13,9 +13,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Collections;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -58,10 +55,8 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Test
   public void testForbiddenReferenceInOtherProject() {
     try {
-      IFile _createFile = IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { restricted.A a }");
-      final XtendFile xtendFile = this.parse(_createFile);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { restricted.A a }"));
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
       final XtendClass c = ((XtendClass) _head);
       this._validationTestHelper.assertError(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
     } catch (Throwable _e) {
@@ -72,10 +67,8 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Test
   public void testDiscouragedReferenceInOtherProject() {
     try {
-      IFile _createFile = IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { discouraged.B b }");
-      final XtendFile xtendFile = this.parse(_createFile);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { discouraged.B b }"));
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
       final XtendClass c = ((XtendClass) _head);
       this._validationTestHelper.assertWarning(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE, "Discouraged access: The type B is not accessible", "on required project firstProject");
     } catch (Throwable _e) {
@@ -86,10 +79,8 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Test
   public void testForbiddenReferenceInSameProject() {
     try {
-      IFile _createFile = IResourcesSetupUtil.createFile("firstProject/src/Dummy.xtend", "class D { restricted.A a }");
-      final XtendFile xtendFile = this.parse(_createFile);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("firstProject/src/Dummy.xtend", "class D { restricted.A a }"));
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
       final XtendClass c = ((XtendClass) _head);
       this._validationTestHelper.assertNoError(c, IssueCodes.DISCOURAGED_REFERENCE);
       this._validationTestHelper.assertNoError(c, IssueCodes.FORBIDDEN_REFERENCE);
@@ -101,10 +92,8 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Test
   public void testDiscouragedReferenceInSameProject() {
     try {
-      IFile _createFile = IResourcesSetupUtil.createFile("firstProject/src/Dummy.xtend", "class D { discouraged.B b }");
-      final XtendFile xtendFile = this.parse(_createFile);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("firstProject/src/Dummy.xtend", "class D { discouraged.B b }"));
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
       final XtendClass c = ((XtendClass) _head);
       this._validationTestHelper.assertNoError(c, IssueCodes.DISCOURAGED_REFERENCE);
       this._validationTestHelper.assertNoError(c, IssueCodes.FORBIDDEN_REFERENCE);
@@ -116,10 +105,8 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Test
   public void testExportedByOtherProject() {
     try {
-      IFile _createFile = IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { allowed.C c }");
-      final XtendFile xtendFile = this.parse(_createFile);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { allowed.C c }"));
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
       final XtendClass c = ((XtendClass) _head);
       this._validationTestHelper.assertNoError(c, IssueCodes.DISCOURAGED_REFERENCE);
       this._validationTestHelper.assertNoError(c, IssueCodes.FORBIDDEN_REFERENCE);
@@ -131,10 +118,8 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Test
   public void testForbiddenReferenceInReexportedProject() {
     try {
-      IFile _createFile = IResourcesSetupUtil.createFile("thirdProject/src/Dummy.xtend", "class D { restricted.A a }");
-      final XtendFile xtendFile = this.parse(_createFile);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("thirdProject/src/Dummy.xtend", "class D { restricted.A a }"));
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
       final XtendClass c = ((XtendClass) _head);
       this._validationTestHelper.assertError(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
     } catch (Throwable _e) {
@@ -145,10 +130,8 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Test
   public void testDiscouragedReferenceInReexportedProject() {
     try {
-      IFile _createFile = IResourcesSetupUtil.createFile("thirdProject/src/Dummy.xtend", "class D { discouraged.B b }");
-      final XtendFile xtendFile = this.parse(_createFile);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("thirdProject/src/Dummy.xtend", "class D { discouraged.B b }"));
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
       final XtendClass c = ((XtendClass) _head);
       this._validationTestHelper.assertWarning(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE, "Discouraged access: The type B is not accessible", "on required project firstProject");
     } catch (Throwable _e) {
@@ -159,10 +142,8 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Test
   public void testReexported() {
     try {
-      IFile _createFile = IResourcesSetupUtil.createFile("thirdProject/src/Dummy.xtend", "class D { allowed.C c }");
-      final XtendFile xtendFile = this.parse(_createFile);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("thirdProject/src/Dummy.xtend", "class D { allowed.C c }"));
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
       final XtendClass c = ((XtendClass) _head);
       this._validationTestHelper.assertNoError(c, IssueCodes.DISCOURAGED_REFERENCE);
       this._validationTestHelper.assertNoError(c, IssueCodes.FORBIDDEN_REFERENCE);
@@ -174,10 +155,8 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Test
   public void testForbiddenReferenceInImplicitLambdaParameter() {
     try {
-      IFile _createFile = IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { new () { new discouraged.B().accept[] } }");
-      final XtendFile xtendFile = this.parse(_createFile);
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { new () { new discouraged.B().accept[] } }"));
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes());
       final XtendClass c = ((XtendClass) _head);
       this._validationTestHelper.assertError(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
     } catch (Throwable _e) {
@@ -186,14 +165,10 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   }
   
   public XtendFile parse(final IFile file) {
-    IProject _project = file.getProject();
-    final ResourceSet resourceSet = this._iResourceSetProvider.get(_project);
-    IPath _fullPath = file.getFullPath();
-    String _string = _fullPath.toString();
-    final URI uri = URI.createPlatformResourceURI(_string, true);
+    final ResourceSet resourceSet = this._iResourceSetProvider.get(file.getProject());
+    final URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
     final Resource resource = resourceSet.getResource(uri, true);
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     return ((XtendFile) _head);
   }
   
@@ -201,9 +176,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("firstProject");
-    IJavaProject _create = JavaCore.create(_createPluginProject);
-    this.configureExportedPackages(_create);
+    this.configureExportedPackages(JavaCore.create(WorkbenchTestHelper.createPluginProject("firstProject")));
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package restricted; public class A {}");
     IResourcesSetupUtil.createFile("firstProject/src/restricted/A.java", _builder.toString());
@@ -230,10 +203,8 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("package allowed; public class C {}");
     IResourcesSetupUtil.createFile("firstProject/src/allowed/C.java", _builder_2.toString());
-    IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("secondProject", "firstProject;visibility:=reexport");
-    JavaCore.create(_createPluginProject_1);
-    IProject _createPluginProject_2 = WorkbenchTestHelper.createPluginProject("thirdProject", "secondProject");
-    JavaCore.create(_createPluginProject_2);
+    JavaCore.create(WorkbenchTestHelper.createPluginProject("secondProject", "firstProject;visibility:=reexport"));
+    JavaCore.create(WorkbenchTestHelper.createPluginProject("thirdProject", "secondProject"));
     IResourcesSetupUtil.waitForBuild();
   }
   
@@ -245,8 +216,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   
   private IJavaProject configureExportedPackages(final IJavaProject pluginProject) {
     try {
-      IProject _project = pluginProject.getProject();
-      final IFile manifestFile = _project.getFile("META-INF/MANIFEST.MF");
+      final IFile manifestFile = pluginProject.getProject().getFile("META-INF/MANIFEST.MF");
       final InputStream contents = manifestFile.getContents();
       MergeableManifest _xtrycatchfinallyexpression = null;
       try {

@@ -47,8 +47,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -79,8 +78,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -111,8 +109,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -149,8 +146,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -181,8 +177,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -213,8 +208,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -245,8 +239,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -277,8 +270,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -315,8 +307,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -347,8 +338,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -379,8 +369,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -411,8 +400,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -443,8 +431,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -481,8 +468,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
   
   @Test
@@ -513,7 +499,6 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertProposalAtCursor("NAME");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
 }

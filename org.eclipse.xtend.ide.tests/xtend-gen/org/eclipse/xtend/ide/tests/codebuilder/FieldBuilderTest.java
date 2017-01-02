@@ -4,12 +4,10 @@ import com.google.inject.Inject;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.tests.codebuilder.AbstractBuilderTest;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -20,103 +18,73 @@ public class FieldBuilderTest extends AbstractBuilderTest {
   
   @Test
   public void testXtendField() {
-    JvmDeclaredType _xtendClass = this.getXtendClass();
-    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_xtendClass);
+    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getXtendClass());
     final Procedure1<AbstractFieldBuilder> _function = (AbstractFieldBuilder it) -> {
-      JvmDeclaredType _xtendClass_1 = this.getXtendClass();
-      it.setContext(_xtendClass_1);
+      it.setContext(this.getXtendClass());
       it.setFieldName("foo");
-      JvmDeclaredType _xtendClass_2 = this.getXtendClass();
-      LightweightTypeReference _createTypeRef = this.createTypeRef(_xtendClass_2);
-      it.setFieldType(_createTypeRef);
+      it.setFieldType(this.createTypeRef(this.getXtendClass()));
     };
-    AbstractFieldBuilder _doubleArrow = ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function);
-    this.assertBuilds(_doubleArrow, "Foo foo");
+    this.assertBuilds(ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function), "Foo foo");
   }
   
   @Test
   public void testPublicXtendField() {
-    JvmDeclaredType _xtendClass = this.getXtendClass();
-    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_xtendClass);
+    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getXtendClass());
     final Procedure1<AbstractFieldBuilder> _function = (AbstractFieldBuilder it) -> {
-      JvmDeclaredType _xtendClass_1 = this.getXtendClass();
-      it.setContext(_xtendClass_1);
+      it.setContext(this.getXtendClass());
       it.setFieldName("foo");
-      JvmDeclaredType _xtendClass_2 = this.getXtendClass();
-      LightweightTypeReference _createTypeRef = this.createTypeRef(_xtendClass_2);
-      it.setFieldType(_createTypeRef);
+      it.setFieldType(this.createTypeRef(this.getXtendClass()));
       it.setVisibility(JvmVisibility.PUBLIC);
     };
-    AbstractFieldBuilder _doubleArrow = ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function);
-    this.assertBuilds(_doubleArrow, "public Foo foo");
+    this.assertBuilds(ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function), "public Foo foo");
   }
   
   @Test
   public void testStaticXtendField() {
-    JvmDeclaredType _xtendClass = this.getXtendClass();
-    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_xtendClass);
+    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getXtendClass());
     final Procedure1<AbstractFieldBuilder> _function = (AbstractFieldBuilder it) -> {
-      JvmDeclaredType _xtendClass_1 = this.getXtendClass();
-      it.setContext(_xtendClass_1);
+      it.setContext(this.getXtendClass());
       it.setFieldName("foo");
-      JvmDeclaredType _xtendClass_2 = this.getXtendClass();
-      LightweightTypeReference _createTypeRef = this.createTypeRef(_xtendClass_2);
-      it.setFieldType(_createTypeRef);
+      it.setFieldType(this.createTypeRef(this.getXtendClass()));
       it.setVisibility(JvmVisibility.PROTECTED);
       it.setStaticFlag(true);
     };
-    AbstractFieldBuilder _doubleArrow = ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function);
-    this.assertBuilds(_doubleArrow, "protected static Foo foo");
+    this.assertBuilds(ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function), "protected static Foo foo");
   }
   
   @Test
   public void testJavaField() {
-    JvmDeclaredType _javaClass = this.getJavaClass();
-    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_javaClass);
+    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getJavaClass());
     final Procedure1<AbstractFieldBuilder> _function = (AbstractFieldBuilder it) -> {
-      JvmDeclaredType _javaClass_1 = this.getJavaClass();
-      it.setContext(_javaClass_1);
+      it.setContext(this.getJavaClass());
       it.setFieldName("bar");
-      JvmDeclaredType _javaClass_2 = this.getJavaClass();
-      LightweightTypeReference _createTypeRef = this.createTypeRef(_javaClass_2);
-      it.setFieldType(_createTypeRef);
+      it.setFieldType(this.createTypeRef(this.getJavaClass()));
     };
-    AbstractFieldBuilder _doubleArrow = ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function);
-    this.assertBuilds(_doubleArrow, "Bar bar;");
+    this.assertBuilds(ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function), "Bar bar;");
   }
   
   @Test
   public void testPublicJavaField() {
-    JvmDeclaredType _javaClass = this.getJavaClass();
-    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_javaClass);
+    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getJavaClass());
     final Procedure1<AbstractFieldBuilder> _function = (AbstractFieldBuilder it) -> {
-      JvmDeclaredType _javaClass_1 = this.getJavaClass();
-      it.setContext(_javaClass_1);
+      it.setContext(this.getJavaClass());
       it.setFieldName("bar");
-      JvmDeclaredType _javaClass_2 = this.getJavaClass();
-      LightweightTypeReference _createTypeRef = this.createTypeRef(_javaClass_2);
-      it.setFieldType(_createTypeRef);
+      it.setFieldType(this.createTypeRef(this.getJavaClass()));
       it.setVisibility(JvmVisibility.PUBLIC);
     };
-    AbstractFieldBuilder _doubleArrow = ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function);
-    this.assertBuilds(_doubleArrow, "public Bar bar;");
+    this.assertBuilds(ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function), "public Bar bar;");
   }
   
   @Test
   public void testStaticJavaField() {
-    JvmDeclaredType _javaClass = this.getJavaClass();
-    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_javaClass);
+    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getJavaClass());
     final Procedure1<AbstractFieldBuilder> _function = (AbstractFieldBuilder it) -> {
-      JvmDeclaredType _javaClass_1 = this.getJavaClass();
-      it.setContext(_javaClass_1);
+      it.setContext(this.getJavaClass());
       it.setFieldName("bar");
-      JvmDeclaredType _javaClass_2 = this.getJavaClass();
-      LightweightTypeReference _createTypeRef = this.createTypeRef(_javaClass_2);
-      it.setFieldType(_createTypeRef);
+      it.setFieldType(this.createTypeRef(this.getJavaClass()));
       it.setVisibility(JvmVisibility.PROTECTED);
       it.setStaticFlag(true);
     };
-    AbstractFieldBuilder _doubleArrow = ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function);
-    this.assertBuilds(_doubleArrow, "protected static Bar bar;");
+    this.assertBuilds(ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function), "protected static Bar bar;");
   }
 }

@@ -92,13 +92,10 @@ public class PerformanceTest extends AbstractXtendUITestCase {
     final IJavaProject downStreamProject = PerformanceTestProjectSetup.createJavaProject("performance.test.project.downstream", 
       new String[] { JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature" });
     JavaProjectSetupUtil.addProjectReference(downStreamProject, project);
-    ToggleXtextNatureAction _toggleXtextNatureAction = new ToggleXtextNatureAction();
-    IProject _project = downStreamProject.getProject();
-    _toggleXtextNatureAction.toggleNature(_project);
+    new ToggleXtextNatureAction().toggleNature(downStreamProject.getProject());
     final IFolder sourceFolder = JavaProjectSetupUtil.addSourceFolder(downStreamProject, "src");
     JavaProjectSetupUtil.addSourceFolder(downStreamProject, "xtend-gen");
-    IFolder _folder = sourceFolder.getFolder("foo");
-    _folder.create(true, true, null);
+    sourceFolder.getFolder("foo").create(true, true, null);
     final IFile sourceFile = sourceFolder.getFile("foo/MyFile.xtend");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -194,8 +191,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
   }
   
   protected static void assertNoErrorsInWorkspace() throws CoreException {
-    IProject _project = PerformanceTestProjectSetup.testProject.getProject();
-    final IMarker[] markers = _project.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+    final IMarker[] markers = PerformanceTestProjectSetup.testProject.getProject().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
     for (final IMarker marker : markers) {
       String _message = MarkerUtilities.getMessage(marker);
       int _severity = MarkerUtilities.getSeverity(marker);

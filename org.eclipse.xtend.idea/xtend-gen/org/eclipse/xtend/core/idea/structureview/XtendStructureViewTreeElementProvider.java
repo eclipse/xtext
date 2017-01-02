@@ -16,7 +16,6 @@ import com.intellij.ide.structureView.newStructureView.TreeActionsOwner;
 import com.intellij.navigation.ItemPresentation;
 import java.util.Arrays;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.idea.structureview.IntellijXtendOutlineContext;
 import org.eclipse.xtend.core.idea.structureview.XtendEObjectTreeElement;
@@ -33,14 +32,11 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.idea.structureview.DefaultStructureViewTreeElementProvider;
 import org.eclipse.xtext.idea.structureview.EObjectTreeElement;
 import org.eclipse.xtext.idea.structureview.EStructuralFeatureTreeElement;
 import org.eclipse.xtext.idea.structureview.XtextFileTreeElement;
-import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -48,7 +44,6 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeature;
-import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
@@ -74,16 +69,11 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
   
   @Override
   protected void _buildChildren(final XtextFileTreeElement xtextFileTreeElement) {
-    BaseXtextFile _element = xtextFileTreeElement.getElement();
-    XtextResource _resource = _element.getResource();
-    EList<EObject> _contents = _resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+    EObject _head = IterableExtensions.<EObject>head(xtextFileTreeElement.getElement().getResource().getContents());
     IntellijXtendOutlineContext _intellijXtendOutlineContext = new IntellijXtendOutlineContext();
     final Procedure1<IntellijXtendOutlineContext> _function = (IntellijXtendOutlineContext it) -> {
-      boolean _isShowInherited = this.isShowInherited();
-      it.setShowInherited(_isShowInherited);
-      BaseXtextFile _element_1 = xtextFileTreeElement.getElement();
-      it.setXtextFile(_element_1);
+      it.setShowInherited(this.isShowInherited());
+      it.setXtextFile(xtextFileTreeElement.getElement());
       it.setStructureViewTreeElement(xtextFileTreeElement);
     };
     IntellijXtendOutlineContext _doubleArrow = ObjectExtensions.<IntellijXtendOutlineContext>operator_doubleArrow(_intellijXtendOutlineContext, _function);
@@ -92,17 +82,15 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
   
   @Override
   protected void _buildChildren(final EObjectTreeElement objectTreeElement) {
-    EObject _object = objectTreeElement.getObject();
     IntellijXtendOutlineContext _intellijXtendOutlineContext = new IntellijXtendOutlineContext();
     final Procedure1<IntellijXtendOutlineContext> _function = (IntellijXtendOutlineContext it) -> {
-      boolean _isShowInherited = this.isShowInherited();
-      it.setShowInherited(_isShowInherited);
-      BaseXtextFile _xtextFile = objectTreeElement.getXtextFile();
-      it.setXtextFile(_xtextFile);
+      it.setShowInherited(this.isShowInherited());
+      it.setXtextFile(objectTreeElement.getXtextFile());
       it.setStructureViewTreeElement(objectTreeElement);
     };
     IntellijXtendOutlineContext _doubleArrow = ObjectExtensions.<IntellijXtendOutlineContext>operator_doubleArrow(_intellijXtendOutlineContext, _function);
-    this.xtendOutlineTreeBuilder.build(_object, _doubleArrow);
+    this.xtendOutlineTreeBuilder.build(
+      objectTreeElement.getObject(), _doubleArrow);
   }
   
   protected boolean isShowInherited() {
@@ -121,9 +109,8 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     IntellijXtendOutlineContext _xblockexpression = null;
     {
       final IntellijXtendOutlineContext intellijContext = ((IntellijXtendOutlineContext) context);
-      BaseXtextFile _xtextFile = intellijContext.getXtextFile();
-      EObjectTreeElement _createEObjectTreeElement = this.createEObjectTreeElement(modelElement, _xtextFile);
-      _xblockexpression = intellijContext.withStructureViewTreeElement(_createEObjectTreeElement);
+      _xblockexpression = intellijContext.withStructureViewTreeElement(
+        this.createEObjectTreeElement(modelElement, intellijContext.getXtextFile()));
     }
     return _xblockexpression;
   }
@@ -133,9 +120,8 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     IntellijXtendOutlineContext _xblockexpression = null;
     {
       final IntellijXtendOutlineContext intellijContext = ((IntellijXtendOutlineContext) context);
-      BaseXtextFile _xtextFile = intellijContext.getXtextFile();
-      EObjectTreeElement _createEObjectTreeElement = this.createEObjectTreeElement(modelElement, _xtextFile);
-      _xblockexpression = intellijContext.withStructureViewTreeElement(_createEObjectTreeElement);
+      _xblockexpression = intellijContext.withStructureViewTreeElement(
+        this.createEObjectTreeElement(modelElement, intellijContext.getXtextFile()));
     }
     return _xblockexpression;
   }
@@ -145,10 +131,10 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     IntellijXtendOutlineContext _xblockexpression = null;
     {
       final IntellijXtendOutlineContext intellijContext = ((IntellijXtendOutlineContext) context);
-      ItemPresentation _itemPresentation = this.itemPresentationProvider.getItemPresentation(semanticFeature);
-      XtendFeatureTreeElement _createXtendFeatureTreeElement = this.createXtendFeatureTreeElement(semanticFeature, 
-        true, _itemPresentation, intellijContext);
-      _xblockexpression = intellijContext.withStructureViewTreeElement(_createXtendFeatureTreeElement);
+      _xblockexpression = intellijContext.withStructureViewTreeElement(
+        this.createXtendFeatureTreeElement(semanticFeature, 
+          true, 
+          this.itemPresentationProvider.getItemPresentation(semanticFeature), intellijContext));
     }
     return _xblockexpression;
   }
@@ -158,9 +144,9 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     IntellijXtendOutlineContext _xblockexpression = null;
     {
       final IntellijXtendOutlineContext intellijContext = ((IntellijXtendOutlineContext) context);
-      ItemPresentation _itemPresentation = this.itemPresentationProvider.getItemPresentation(dispatcher);
       XtendFeatureTreeElement _createXtendFeatureTreeElement = this.createXtendFeatureTreeElement(dispatcher, 
-        true, _itemPresentation, intellijContext);
+        true, 
+        this.itemPresentationProvider.getItemPresentation(dispatcher), intellijContext);
       final Procedure1<XtendFeatureTreeElement> _function = (XtendFeatureTreeElement it) -> {
         it.setDispatch(true);
       };
@@ -175,18 +161,17 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     IntellijXtendOutlineContext _xblockexpression = null;
     {
       final IntellijXtendOutlineContext intellijContext = ((IntellijXtendOutlineContext) context);
-      BaseXtextFile _xtextFile = intellijContext.getXtextFile();
       PresentationData _presentationData = new PresentationData();
       final Procedure1<PresentationData> _function = (PresentationData it) -> {
         it.setIcon(AllIcons.Nodes.Package);
-        String _package = xtendFile.getPackage();
-        it.setPresentableText(_package);
+        it.setPresentableText(xtendFile.getPackage());
       };
       PresentationData _doubleArrow = ObjectExtensions.<PresentationData>operator_doubleArrow(_presentationData, _function);
-      EStructuralFeatureTreeElement _createEStructuralFeatureTreeElement = this.createEStructuralFeatureTreeElement(xtendFile, 
-        XtendPackage.Literals.XTEND_FILE__PACKAGE, _xtextFile, 
-        true, _doubleArrow);
-      _xblockexpression = intellijContext.withStructureViewTreeElement(_createEStructuralFeatureTreeElement);
+      _xblockexpression = intellijContext.withStructureViewTreeElement(
+        this.createEStructuralFeatureTreeElement(xtendFile, 
+          XtendPackage.Literals.XTEND_FILE__PACKAGE, 
+          intellijContext.getXtextFile(), 
+          true, _doubleArrow));
     }
     return _xblockexpression;
   }
@@ -196,14 +181,12 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     IntellijXtendOutlineContext _xblockexpression = null;
     {
       final IntellijXtendOutlineContext intellijContext = ((IntellijXtendOutlineContext) context);
-      XImportSection _importSection = xtendFile.getImportSection();
-      BaseXtextFile _xtextFile = intellijContext.getXtextFile();
-      XImportSection _importSection_1 = xtendFile.getImportSection();
-      ItemPresentation _itemPresentation = this.itemPresentationProvider.getItemPresentation(_importSection_1);
-      EStructuralFeatureTreeElement _createEStructuralFeatureTreeElement = this.createEStructuralFeatureTreeElement(_importSection, 
-        XtypePackage.Literals.XIMPORT_SECTION__IMPORT_DECLARATIONS, _xtextFile, 
-        false, _itemPresentation);
-      _xblockexpression = intellijContext.withStructureViewTreeElement(_createEStructuralFeatureTreeElement);
+      _xblockexpression = intellijContext.withStructureViewTreeElement(
+        this.createEStructuralFeatureTreeElement(xtendFile.getImportSection(), 
+          XtypePackage.Literals.XIMPORT_SECTION__IMPORT_DECLARATIONS, 
+          intellijContext.getXtextFile(), 
+          false, 
+          this.itemPresentationProvider.getItemPresentation(xtendFile.getImportSection())));
     }
     return _xblockexpression;
   }
@@ -213,43 +196,36 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     IntellijXtendOutlineContext _xblockexpression = null;
     {
       final IntellijXtendOutlineContext intellijContext = ((IntellijXtendOutlineContext) context);
-      JvmFeature _declaration = resolvedFeature.getDeclaration();
-      ItemPresentation _itemPresentation = this.itemPresentationProvider.getItemPresentation(resolvedFeature);
-      XtendFeatureTreeElement _createXtendFeatureTreeElement = this.createXtendFeatureTreeElement(_declaration, 
-        true, _itemPresentation, intellijContext);
-      _xblockexpression = intellijContext.withStructureViewTreeElement(_createXtendFeatureTreeElement);
+      _xblockexpression = intellijContext.withStructureViewTreeElement(
+        this.createXtendFeatureTreeElement(resolvedFeature.getDeclaration(), 
+          true, 
+          this.itemPresentationProvider.getItemPresentation(resolvedFeature), intellijContext));
     }
     return _xblockexpression;
   }
   
   protected XtendFeatureTreeElement createXtendFeatureTreeElement(final EObject modelElement, final boolean leaf, final ItemPresentation presentation, final IntellijXtendOutlineContext context) {
-    XtendFeatureTreeElement _get = this.xtendFeatureTreeElementProvider.get();
-    XtendFeatureTreeElement _configureTreeElement = this.<XtendFeatureTreeElement>configureTreeElement(_get, modelElement, leaf, presentation, context);
+    XtendFeatureTreeElement _configureTreeElement = this.<XtendFeatureTreeElement>configureTreeElement(this.xtendFeatureTreeElementProvider.get(), modelElement, leaf, presentation, context);
     final Procedure1<XtendFeatureTreeElement> _function = (XtendFeatureTreeElement it) -> {
-      boolean _isSynthetic = this.isSynthetic(modelElement);
-      it.setSynthetic(_isSynthetic);
+      it.setSynthetic(this.isSynthetic(modelElement));
     };
     return ObjectExtensions.<XtendFeatureTreeElement>operator_doubleArrow(_configureTreeElement, _function);
   }
   
   protected XtendEObjectTreeElement createXtendEObjectTreeElement(final EObject modelElement, final boolean leaf, final ItemPresentation presentation, final IntellijXtendOutlineContext context) {
-    XtendEObjectTreeElement _get = this.xtendEObjectTreeElementProvider.get();
-    return this.<XtendEObjectTreeElement>configureTreeElement(_get, modelElement, leaf, presentation, context);
+    return this.<XtendEObjectTreeElement>configureTreeElement(this.xtendEObjectTreeElementProvider.get(), modelElement, leaf, presentation, context);
   }
   
   protected <T extends XtendEObjectTreeElement> T configureTreeElement(final T objectTreeElement, final EObject modelElement, final boolean leaf, final ItemPresentation presentation, final IntellijXtendOutlineContext context) {
     T _xblockexpression = null;
     {
       objectTreeElement.setObject(modelElement);
-      BaseXtextFile _xtextFile = context.getXtextFile();
-      objectTreeElement.setXtextFile(_xtextFile);
+      objectTreeElement.setXtextFile(context.getXtextFile());
       objectTreeElement.setLeaf(leaf);
       objectTreeElement.setItemPresentation(presentation);
       objectTreeElement.setStructureViewTreeElementProvider(this);
-      boolean _isStatic = this.isStatic(modelElement);
-      objectTreeElement.setStatic(_isStatic);
-      int _inheritanceDepth = context.getInheritanceDepth();
-      objectTreeElement.setInheritanceDepth(_inheritanceDepth);
+      objectTreeElement.setStatic(this.isStatic(modelElement));
+      objectTreeElement.setInheritanceDepth(context.getInheritanceDepth());
       _xblockexpression = objectTreeElement;
     }
     return _xblockexpression;
@@ -294,14 +270,12 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     boolean _matched = false;
     if (modelElement instanceof JvmDeclaredType) {
       _matched=true;
-      EList<JvmMember> _members = ((JvmDeclaredType)modelElement).getMembers();
-      _switchResult = _members.isEmpty();
+      _switchResult = ((JvmDeclaredType)modelElement).getMembers().isEmpty();
     }
     if (!_matched) {
       if (modelElement instanceof XtendTypeDeclaration) {
         _matched=true;
-        EList<XtendMember> _members = ((XtendTypeDeclaration)modelElement).getMembers();
-        _switchResult = _members.isEmpty();
+        _switchResult = ((XtendTypeDeclaration)modelElement).getMembers().isEmpty();
       }
     }
     if (!_matched) {

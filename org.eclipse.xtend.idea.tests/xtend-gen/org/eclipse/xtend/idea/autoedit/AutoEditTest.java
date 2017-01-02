@@ -7,12 +7,7 @@
  */
 package org.eclipse.xtend.idea.autoedit;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtend.idea.autoedit.AbstractCStyleLanguageAutoEditTest;
-import org.eclipse.xtext.idea.tests.LibraryUtil;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -20,12 +15,16 @@ import org.eclipse.xtext.idea.tests.LibraryUtil;
 @SuppressWarnings("all")
 public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
   public AutoEditTest() {
-    super(XtendFileType.INSTANCE);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field XtendFileType is undefined"
+      + "\nThe constructor AbstractCStyleLanguageAutoEditTest(LanguageFileType) refers to the missing type LanguageFileType"
+      + "\nINSTANCE cannot be resolved");
   }
   
   @Override
-  protected void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
-    LibraryUtil.addXtendLibrary(model);
+  protected Object configureModule(final /* Module */Object module, final /* ModifiableRootModel */Object model, final /* ContentEntry */Object contentEntry) {
+    throw new Error("Unresolved compilation problems:"
+      + "\naddXtendLibrary cannot be resolved");
   }
   
   @Override
@@ -33,233 +32,314 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
   }
   
   public void testCurlyBraceBlockAndRichStrings_0() {
-    this.configureByText("\n{|\n\'\'\'«{null}»\'\'\'}");
-    this.myFixture.type("\n");
-    this.assertState("\n{\n\t|\n\'\'\'«{null}»\'\'\'}");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testIndentationEdit_1() {
-    this.configureByText("   \'|\'");
-    this.myFixture.type("\n");
-    this.assertState("   \'\n   |\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testIndentationEdit_2() {
-    this.configureByText("  |");
-    this.myFixture.type("\n");
-    this.assertState("  \n  |");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testIndentationEdit_3() {
-    this.configureByText("  \'\'\'\n  |\n\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("  \'\'\'\n  \n  |\n\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_1() {
-    this.configureByText("\'\'\'|\'\'\'");
-    this.myFixture.type("{");
-    this.assertState("\'\'\'{|\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{\n\t|\n}\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{\n\t\n\t|\n}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_2() {
-    this.configureByText("\'\'\'{|\n}\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{\n\t|\n}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_3() {
-    this.configureByText("\'\'\'|\'\'\'");
-    this.myFixture.type("}");
-    this.assertState("\'\'\'}|\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_4() {
-    this.configureByText("\'\'\'foo {|\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'foo {\n\t|\n}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_5() {
-    this.configureByText("\'\'\'{|}\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{\n\t|\n}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_6() {
-    this.configureByText("\'\'\'{| }\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{\n\t|\n}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_7() {
-    this.configureByText("\'\'\'{ |foo }\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{ \n\t|foo\n}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_8() {
-    this.configureByText("\'\'\'{ foo| }\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{ foo\n |}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_9() {
-    this.configureByText("\'\'\'\"{\" foo| }\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'\"{\" foo\n |}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_10() {
-    this.configureByText("\'\'\'/*{*/ foo|\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'/*{*/ foo\n|\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_11() {
-    this.configureByText("\'\'\'{|}\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{\n\t|\n}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_12() {
-    this.configureByText("\'\'\'{foo|}\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{foo\n|}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_13() {
-    this.configureByText("\'\'\'{foo|bar}\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{foo\n|bar}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_14() {
-    this.configureByText("\'\'\'{\nfoo|bar}\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{\nfoo\n|bar}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_15() {
-    this.configureByText("\'\'\'{\nfoo}|{bar}\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{\nfoo}\n|{bar}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_16() {
-    this.configureByText("\'\'\'{\n|}\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{\n\n|}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_17() {
-    this.configureByText("\'\'\'{\n|\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{\n\n|\n}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testCurlyBracesBlockInRichString_18() {
-    this.configureByText("\'\'\'{{foo}|{bar}}\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'{{foo}\n|{bar}}\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testRichStringLiteral_01() {
-    this.configureByText("\'\'|");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\'|\'\'\'");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\'\'|\'\'");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\'\'\'|\'");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\'\'\'\'|");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved");
   }
   
   public void testRichStringLiteral_02() {
-    this.configureByText("\'\'\'|\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("\'\'\'\n|\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testRichStringLiteral_03() {
-    this.configureByText("  \'\'\'|\'\'\'");
-    this.myFixture.type("\n");
-    this.assertState("  \'\'\'\n  |\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testRichStringLiteral_04() {
-    this.configureByText("\'\'\'|\'\'\'");
-    this.myFixture.type("\"");
-    this.assertState("\'\'\'\"|\"\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testRichStringLiteral_05() {
-    this.configureByText("\'\'\'|\'\'\'");
-    this.myFixture.type("«");
-    this.assertState("\'\'\'«|»\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testRichStringLiteral_06() {
-    this.configureByText("\'\'\'«foobar|»\'\'\'");
-    this.myFixture.type("»");
-    this.assertState("\'\'\'«foobar»|\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testRichStringLiteral_07() {
-    this.configureByText("\'\'\'«|»\'\'\'");
-    this.myFixture.type(AbstractCStyleLanguageAutoEditTest.BS);
-    this.assertState("\'\'\'|\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   public void testRichStringLiteral_08() {
-    this.configureByText("\'\'\' foobar |\'\'\'");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\' foobar \'|\'\'");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\' foobar \'\'|\'");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\' foobar \'\'\'|");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved");
   }
   
   public void testRichStringLiteral_09() {
-    this.configureByText("\'\'\' |«foobar» \'\'\'");
-    this.myFixture.type("«");
-    this.assertState("\'\'\' «|»«foobar» \'\'\'");
-    this.myFixture.type("a");
-    this.assertState("\'\'\' «a|»«foobar» \'\'\'");
-    this.myFixture.type("»");
-    this.assertState("\'\'\' «a»|«foobar» \'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved");
   }
   
   public void testRichStringLiteral_10() {
-    this.configureByText("\'\'\' «foobar» |\'\'\'");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\' «foobar» \'|\'\'");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\' «foobar» \'\'|\'");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\' «foobar» \'\'\'|");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved");
   }
   
   public void testRichStringLiteral_11() {
-    this.configureByText("\'\'\' text \'\'|");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\' text \'\'\'|");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved");
   }
   
   @Override
   public void testSingleQuotedStringLiteral_3() {
-    this.configureByText("|\'");
-    this.myFixture.type("\'");
-    this.assertState("\'|\'");
-    this.myFixture.type("\'");
-    this.assertState("\'\'|");
-    this.myFixture.type("\'");
-    this.assertState("\'\'\'|\'\'\'");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method configureByText(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\nThe method or field myFixture is undefined"
+      + "\nThe method assertState(String) is undefined"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved"
+      + "\ntype cannot be resolved");
   }
 }

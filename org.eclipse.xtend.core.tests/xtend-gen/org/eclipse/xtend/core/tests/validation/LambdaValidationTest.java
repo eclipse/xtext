@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.validation;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -46,8 +45,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XbasePackage.Literals.XCLOSURE, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from (String)=>int to I<Integer>");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XCLOSURE, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from (String)=>int to I<Integer>");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -71,8 +69,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from int to String");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from int to String");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -96,8 +93,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XbasePackage.Literals.XCLOSURE, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from (int)=>String to I<Integer>");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XCLOSURE, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from (int)=>String to I<Integer>");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -121,8 +117,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XbasePackage.Literals.XCLOSURE, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from (int)=>String to I<Integer>");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XCLOSURE, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from (int)=>String to I<Integer>");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -146,8 +141,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from String to Integer");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from String to Integer");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -171,8 +165,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XbasePackage.Literals.XCLOSURE, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from (int)=>String to I<Integer>");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XCLOSURE, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from (int)=>String to I<Integer>");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -197,8 +190,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _file = this.file(_builder.toString());
-      this._validationTestHelper.assertError(_file, XbasePackage.Literals.XCLOSURE, IssueCodes.INCOMPATIBLE_TYPES, "zonk");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XCLOSURE, IssueCodes.INCOMPATIBLE_TYPES, "zonk");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

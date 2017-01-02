@@ -43,22 +43,19 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
   
   protected void _build(final XtendFile xtendFile, final IXtendOutlineContext context) {
     this.buildPackageAndImportSection(xtendFile, context);
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     final Consumer<XtendTypeDeclaration> _function = (XtendTypeDeclaration it) -> {
       this.buildXtendType(it, context);
     };
-    _xtendTypes.forEach(_function);
+    xtendFile.getXtendTypes().forEach(_function);
   }
   
   protected void _build(final XtendTypeDeclaration xtendType, final IXtendOutlineContext context) {
-    JvmDeclaredType _inferredType = this._iXtendJvmAssociations.getInferredType(xtendType);
-    this.buildMembers(xtendType, _inferredType, context);
+    this.buildMembers(xtendType, this._iXtendJvmAssociations.getInferredType(xtendType), context);
   }
   
   protected void buildXtendType(final XtendTypeDeclaration xtendType, final IXtendOutlineContext context) {
     final JvmDeclaredType inferredType = this._iXtendJvmAssociations.getInferredType(xtendType);
-    IXtendOutlineContext _buildXtendNode = this.xtendOutlineNodeBuilder.buildXtendNode(xtendType, context);
-    final IXtendOutlineContext xtendTypeContext = _buildXtendNode.markAsProcessed(inferredType);
+    final IXtendOutlineContext xtendTypeContext = this.xtendOutlineNodeBuilder.buildXtendNode(xtendType, context).markAsProcessed(inferredType);
     this.buildMembers(xtendType, inferredType, xtendTypeContext);
   }
   
@@ -67,11 +64,10 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
       final IXtendOutlineContext membersContext = context.newContext();
       this.buildMembers(xtendType, inferredType, inferredType, membersContext);
     } else {
-      EList<XtendMember> _members = xtendType.getMembers();
       final Consumer<XtendMember> _function = (XtendMember it) -> {
         this.xtendOutlineNodeBuilder.buildEObjectNode(it, context);
       };
-      _members.forEach(_function);
+      xtendType.getMembers().forEach(_function);
     }
   }
   
@@ -122,12 +118,11 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
   }
   
   protected void buildLocalClasses(final JvmFeature jvmFeature, final IXtendOutlineContext context) {
-    EList<JvmGenericType> _localClasses = jvmFeature.getLocalClasses();
-    boolean _isEmpty = _localClasses.isEmpty();
+    boolean _isEmpty = jvmFeature.getLocalClasses().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      EList<JvmGenericType> _localClasses_1 = jvmFeature.getLocalClasses();
-      for (final JvmGenericType jvmGenericType : _localClasses_1) {
+      EList<JvmGenericType> _localClasses = jvmFeature.getLocalClasses();
+      for (final JvmGenericType jvmGenericType : _localClasses) {
         {
           final IXtendOutlineContext typeContext = context.newContext();
           Set<EObject> _sourceElements = this._iXtendJvmAssociations.getSourceElements(jvmGenericType);
@@ -140,16 +135,14 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
   }
   
   protected void buildDispatchers(final JvmDeclaredType inferredType, final JvmDeclaredType baseType, final IXtendOutlineContext context) {
-    Iterable<JvmOperation> _declaredOperations = inferredType.getDeclaredOperations();
     final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
       return Boolean.valueOf(this.dispatchHelper.isDispatcherFunction(it));
     };
-    Iterable<JvmOperation> _filter = IterableExtensions.<JvmOperation>filter(_declaredOperations, _function);
+    Iterable<JvmOperation> _filter = IterableExtensions.<JvmOperation>filter(inferredType.getDeclaredOperations(), _function);
     for (final JvmOperation dispatcher : _filter) {
       {
         final List<JvmOperation> dispatchCases = this.getDispatchCases(dispatcher, baseType, context);
-        IXtendOutlineContext _buildDispatcherNode = this.xtendOutlineNodeBuilder.buildDispatcherNode(baseType, dispatcher, dispatchCases, context);
-        final IXtendOutlineContext dispatcherContext = _buildDispatcherNode.markAsProcessed(dispatcher);
+        final IXtendOutlineContext dispatcherContext = this.xtendOutlineNodeBuilder.buildDispatcherNode(baseType, dispatcher, dispatchCases, context).markAsProcessed(dispatcher);
         for (final JvmOperation dispatchCase : dispatchCases) {
           EObject _elvis = null;
           XtendFunction _xtendFunction = this._iXtendJvmAssociations.getXtendFunction(dispatchCase);
@@ -158,8 +151,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
           } else {
             _elvis = dispatchCase;
           }
-          IXtendOutlineContext _buildFeature = this.buildFeature(baseType, dispatchCase, _elvis, dispatcherContext);
-          _buildFeature.markAsProcessed(dispatchCase);
+          this.buildFeature(baseType, dispatchCase, _elvis, dispatcherContext).markAsProcessed(dispatchCase);
         }
       }
     }
@@ -171,15 +163,12 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
     if (_isShowInherited) {
       _xifexpression = this.dispatchHelper.getAllDispatchCases(dispatcher);
     } else {
-      List<JvmOperation> _localDispatchCases = this.dispatchHelper.getLocalDispatchCases(dispatcher);
       final Comparator<JvmOperation> _function = (JvmOperation o1, JvmOperation o2) -> {
-        EList<JvmMember> _members = baseType.getMembers();
-        int _indexOf = _members.indexOf(o1);
-        EList<JvmMember> _members_1 = baseType.getMembers();
-        int _indexOf_1 = _members_1.indexOf(o2);
+        int _indexOf = baseType.getMembers().indexOf(o1);
+        int _indexOf_1 = baseType.getMembers().indexOf(o2);
         return (_indexOf - _indexOf_1);
       };
-      _xifexpression = IterableExtensions.<JvmOperation>sortWith(_localDispatchCases, _function);
+      _xifexpression = IterableExtensions.<JvmOperation>sortWith(this.dispatchHelper.getLocalDispatchCases(dispatcher), _function);
     }
     return _xifexpression;
   }

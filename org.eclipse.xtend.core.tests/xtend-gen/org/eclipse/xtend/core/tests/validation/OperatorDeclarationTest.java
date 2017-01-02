@@ -9,8 +9,6 @@ package org.eclipse.xtend.core.tests.validation;
 
 import com.google.inject.Inject;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -61,13 +59,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this._parseHelper.parse(_builder);
-      Resource _eResource = file.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = file.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
+      Assert.assertTrue(IterableExtensions.join(file.eResource().getErrors(), "\n"), file.eResource().getErrors().isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -92,13 +84,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this._parseHelper.parse(_builder);
-      Resource _eResource = file.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = file.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
+      Assert.assertTrue(IterableExtensions.join(file.eResource().getErrors(), "\n"), file.eResource().getErrors().isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -123,13 +109,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this._parseHelper.parse(_builder);
-      Resource _eResource = file.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = file.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
+      Assert.assertTrue(IterableExtensions.join(file.eResource().getErrors(), "\n"), file.eResource().getErrors().isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -154,13 +134,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this._parseHelper.parse(_builder);
-      Resource _eResource = file.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = file.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
+      Assert.assertTrue(IterableExtensions.join(file.eResource().getErrors(), "\n"), file.eResource().getErrors().isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -185,13 +159,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this._parseHelper.parse(_builder);
-      Resource _eResource = file.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = file.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
+      Assert.assertTrue(IterableExtensions.join(file.eResource().getErrors(), "\n"), file.eResource().getErrors().isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -216,13 +184,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this._parseHelper.parse(_builder);
-      Resource _eResource = file.eResource();
-      EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-      String _join = IterableExtensions.join(_errors, "\n");
-      Resource _eResource_1 = file.eResource();
-      EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
-      boolean _isEmpty = _errors_1.isEmpty();
-      Assert.assertTrue(_join, _isEmpty);
+      Assert.assertTrue(IterableExtensions.join(file.eResource().getErrors(), "\n"), file.eResource().getErrors().isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

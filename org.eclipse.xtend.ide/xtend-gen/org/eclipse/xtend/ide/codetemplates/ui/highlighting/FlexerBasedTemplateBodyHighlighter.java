@@ -39,13 +39,11 @@ public class FlexerBasedTemplateBodyHighlighter extends TemplateBodyHighlighter 
     Token token = tokenSource.nextToken();
     while ((!Objects.equal(token, Token.EOF_TOKEN))) {
       {
-        int _type = token.getType();
-        final String id = this._abstractAntlrTokenToAttributeIdMapper.getId(_type);
+        final String id = this._abstractAntlrTokenToAttributeIdMapper.getId(token.getType());
         final int offset = TokenTool.getOffset(token);
         final int length = TokenTool.getLength(token);
         acceptor.addPosition(offset, length, id);
-        Token _nextToken = tokenSource.nextToken();
-        token = _nextToken;
+        token = tokenSource.nextToken();
       }
     }
   }

@@ -16,7 +16,6 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -62,8 +61,7 @@ public class BuildAffectionTest {
     IResourcesSetupUtil.cleanWorkspace();
     final IWorkspace workspace = ResourcesPlugin.getWorkspace();
     final IWorkspaceDescription description = workspace.getDescription();
-    boolean _isAutoBuilding = description.isAutoBuilding();
-    BuildAffectionTest.wasAutoBuilding = _isAutoBuilding;
+    BuildAffectionTest.wasAutoBuilding = description.isAutoBuilding();
     description.setAutoBuilding(false);
     workspace.setDescription(description);
     WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
@@ -80,8 +78,7 @@ public class BuildAffectionTest {
   
   @Before
   public void setUp() {
-    XtendActivator _instance = XtendActivator.getInstance();
-    final Injector injector = _instance.getInjector("org.eclipse.xtend.core.Xtend");
+    final Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
     injector.injectMembers(this);
     this.queuedBuildData.reset();
   }
@@ -1063,21 +1060,13 @@ public class BuildAffectionTest {
   private void assertBuildLogs(final CharSequence expected) {
     final StringBuilder logs = new StringBuilder();
     final IBuildLogger _function = (Object it) -> {
-      String _string = it.toString();
-      String _trim = _string.trim();
+      String _trim = it.toString().trim();
       String _plus = (_trim + "\n");
       logs.append(_plus);
     };
     ((XtextBuildConsole.Logger) this.logger).registerDelegate(_function);
     this.autoBuild();
-    String _string = logs.toString();
-    String _trim = _string.trim();
-    String _string_1 = logs.toString();
-    String _trim_1 = _string_1.trim();
-    String _string_2 = expected.toString();
-    String _trim_2 = _string_2.trim();
-    boolean _matches = _trim_1.matches(_trim_2);
-    Assert.assertTrue(_trim, _matches);
+    Assert.assertTrue(logs.toString().trim(), logs.toString().trim().matches(expected.toString().trim()));
   }
   
   private void autoBuild() {
@@ -1098,15 +1087,10 @@ public class BuildAffectionTest {
     try {
       IFile _xblockexpression = null;
       {
-        IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("test.client");
-        this.clientProject = _createPluginProject;
-        IJavaProject _create = JavaCore.create(this.clientProject);
-        IProject _project = this.workbenchTestHelper.getProject();
-        IJavaProject _create_1 = JavaCore.create(_project);
-        JavaProjectSetupUtil.addProjectReference(_create, _create_1);
+        this.clientProject = WorkbenchTestHelper.createPluginProject("test.client");
+        JavaProjectSetupUtil.addProjectReference(JavaCore.create(this.clientProject), JavaCore.create(this.workbenchTestHelper.getProject()));
         Path _path = new Path((("test.client/src/" + name) + ".xtend"));
-        String _string = content.toString();
-        _xblockexpression = IResourcesSetupUtil.createFile(_path, _string);
+        _xblockexpression = IResourcesSetupUtil.createFile(_path, content.toString());
       }
       return _xblockexpression;
     } catch (Throwable _e) {

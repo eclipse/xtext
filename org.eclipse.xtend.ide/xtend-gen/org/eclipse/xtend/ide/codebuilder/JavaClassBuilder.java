@@ -25,14 +25,7 @@ public class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuild
   
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
-    JvmVisibility _visibility = this.getVisibility();
-    ISourceAppender _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.DEFAULT);
-    ISourceAppender _append = _appendVisibility.append("class ");
-    String _className = this.getClassName();
-    ISourceAppender _append_1 = _append.append(_className);
-    ISourceAppender _append_2 = _append_1.append(" {");
-    ISourceAppender _newLine = _append_2.newLine();
-    return _newLine.append("}");
+    return this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.DEFAULT).append("class ").append(this.getClassName()).append(" {").newLine().append("}");
   }
   
   @Override

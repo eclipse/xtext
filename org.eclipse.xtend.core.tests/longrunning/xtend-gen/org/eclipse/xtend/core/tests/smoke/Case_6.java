@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.smoke;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
@@ -16,11 +15,10 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class Case_6 {
   protected Object _transform(final EPackage packageDecl) {
-    EList<EObject> _eContents = packageDecl.eContents();
     final Function1<EObject, Object> _function = (EObject e) -> {
       return this.transform(((EStructuralFeature) e));
     };
-    return ListExtensions.<EObject, Object>map(_eContents, _function);
+    return ListExtensions.<EObject, Object>map(packageDecl.eContents(), _function);
   }
   
   protected Object _transform(final EStructuralFeature entity) {
@@ -33,11 +31,10 @@ public class Case_6 {
   }
   
   protected Object _transform(final EClass model) {
-    EList<ETypeParameter> _eTypeParameters = model.getETypeParameters();
     final Function1<ETypeParameter, Object> _function = (ETypeParameter e) -> {
       return this.transform(e);
     };
-    return ListExtensions.<ETypeParameter, Object>map(_eTypeParameters, _function);
+    return ListExtensions.<ETypeParameter, Object>map(model.getETypeParameters(), _function);
   }
   
   public Object transform(final ENamedElement model) {

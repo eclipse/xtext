@@ -12,10 +12,8 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
@@ -26,7 +24,6 @@ import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
-import java.util.HashMap;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -77,20 +74,16 @@ public class XtendLibraryConfigurator {
   }
   
   public void ensureXtendLibAvailable(final ModifiableRootModel rootModel, @Nullable final PsiFile context) {
-    Project _project = rootModel.getProject();
     final Runnable _function = () -> {
       this.doEnsureXtendLibAvailable(rootModel, context);
     };
-    this._projectLifecycleUtil.executeWhenProjectReady(_project, _function);
+    this._projectLifecycleUtil.executeWhenProjectReady(rootModel.getProject(), _function);
   }
   
   protected void doEnsureXtendLibAvailable(final ModifiableRootModel rootModel, @Nullable final PsiFile context) {
     final Module module = rootModel.getModule();
     final GlobalSearchScope scope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module);
-    Project _project = rootModel.getProject();
-    JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
-    String _name = Data.class.getName();
-    final PsiClass psiClass = _instance.findClass(_name, scope);
+    final PsiClass psiClass = JavaPsiFacade.getInstance(rootModel.getProject()).findClass(Data.class.getName(), scope);
     if ((psiClass == null)) {
       final boolean testScope = this.isTestScope(context);
       if ((this._platformUtil.isMavenInstalled() && this._mavenUtility.isMavenizedModule(module))) {
@@ -107,8 +100,7 @@ public class XtendLibraryConfigurator {
   
   public static MavenArtifact xtendLibMavenId() {
     if ((XtendLibraryConfigurator.XTEND_LIB_MAVEN_ID == null)) {
-      XtextVersion _current = XtextVersion.getCurrent();
-      final String version = _current.getVersion();
+      final String version = XtextVersion.getCurrent().getVersion();
       XtendLibraryConfigurator.LOG.info(("The current Xtend plugin version is " + version));
       MavenArtifact _mavenArtifact = new MavenArtifact("org.eclipse.xtend", "org.eclipse.xtend.lib", version);
       XtendLibraryConfigurator.XTEND_LIB_MAVEN_ID = _mavenArtifact;
@@ -127,13 +119,8 @@ public class XtendLibraryConfigurator {
   }
   
   public Library createOrGetXtendJavaLibrary(final ModifiableRootModel rootModel, final Module module) {
-    LibraryTablesRegistrar _instance = LibraryTablesRegistrar.getInstance();
-    Project _project = module.getProject();
-    LibraryTable _libraryTable = _instance.getLibraryTable(_project);
-    Library[] _libraries = _libraryTable.getLibraries();
-    LibraryTablesRegistrar _instance_1 = LibraryTablesRegistrar.getInstance();
-    LibraryTable _libraryTable_1 = _instance_1.getLibraryTable();
-    Library[] _libraries_1 = _libraryTable_1.getLibraries();
+    Library[] _libraries = LibraryTablesRegistrar.getInstance().getLibraryTable(module.getProject()).getLibraries();
+    Library[] _libraries_1 = LibraryTablesRegistrar.getInstance().getLibraryTable().getLibraries();
     final Iterable<Library> libraryTable = Iterables.<Library>concat(((Iterable<? extends Library>)Conversions.doWrapArray(_libraries)), ((Iterable<? extends Library>)Conversions.doWrapArray(_libraries_1)));
     final Function1<Library, Boolean> _function = (Library it) -> {
       String _name = it.getName();
@@ -163,19 +150,16 @@ public class XtendLibraryConfigurator {
       }
     } else {
       final NewLibraryConfiguration libDescr = this.xtendLibDescr.createLibraryDescription();
-      LibraryTable _moduleLibraryTable = rootModel.getModuleLibraryTable();
-      final LibraryTable.ModifiableModel model = _moduleLibraryTable.getModifiableModel();
-      String _defaultLibraryName = libDescr.getDefaultLibraryName();
-      final Library createdLib = model.createLibrary(_defaultLibraryName);
+      final LibraryTable.ModifiableModel model = rootModel.getModuleLibraryTable().getModifiableModel();
+      final Library createdLib = model.createLibrary(libDescr.getDefaultLibraryName());
       final Library.ModifiableModel libModel = createdLib.getModifiableModel();
-      HashMap<OrderRootType, List<String>> _libraryRoots = this.xtendLibDescr.libraryRoots();
       final BiConsumer<OrderRootType, List<String>> _function_3 = (OrderRootType type, List<String> roots) -> {
         final Consumer<String> _function_4 = (String it) -> {
           libModel.addRoot(it, type);
         };
         roots.forEach(_function_4);
       };
-      _libraryRoots.forEach(_function_3);
+      this.xtendLibDescr.libraryRoots().forEach(_function_3);
       libModel.commit();
       model.commit();
       return createdLib;
@@ -186,13 +170,9 @@ public class XtendLibraryConfigurator {
     if ((context == null)) {
       return false;
     }
-    PsiFile _originalFile = context.getOriginalFile();
-    VirtualFile virtualFile = _originalFile.getVirtualFile();
+    VirtualFile virtualFile = context.getOriginalFile().getVirtualFile();
     if ((virtualFile != null)) {
-      Project _project = context.getProject();
-      ProjectRootManager _instance = ProjectRootManager.getInstance(_project);
-      ProjectFileIndex _fileIndex = _instance.getFileIndex();
-      return _fileIndex.isInTestSourceContent(virtualFile);
+      return ProjectRootManager.getInstance(context.getProject()).getFileIndex().isInTestSourceContent(virtualFile);
     }
     return false;
   }

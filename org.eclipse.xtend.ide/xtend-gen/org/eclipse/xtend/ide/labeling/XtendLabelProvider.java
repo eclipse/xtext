@@ -3,11 +3,7 @@ package org.eclipse.xtend.ide.labeling;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Set;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
@@ -28,7 +24,6 @@ import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtend.ide.labeling.XtendJvmLabelProvider;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -36,7 +31,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -86,31 +80,19 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
   }
   
   protected ImageDescriptor _imageDescriptor(final XtendClass element) {
-    JvmVisibility _visibility = element.getVisibility();
-    JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
-    int _get = this.adornments.get(_inferredType);
-    return this.images.forClass(_visibility, _get);
+    return this.images.forClass(element.getVisibility(), this.adornments.get(this._iXtendJvmAssociations.getInferredType(element)));
   }
   
   protected ImageDescriptor _imageDescriptor(final XtendInterface element) {
-    JvmVisibility _visibility = element.getVisibility();
-    JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
-    int _get = this.adornments.get(_inferredType);
-    return this.images.forInterface(_visibility, _get);
+    return this.images.forInterface(element.getVisibility(), this.adornments.get(this._iXtendJvmAssociations.getInferredType(element)));
   }
   
   protected ImageDescriptor _imageDescriptor(final XtendEnum element) {
-    JvmVisibility _visibility = element.getVisibility();
-    JvmDeclaredType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
-    int _get = this.adornments.get(_inferredType);
-    return this.images.forEnum(_visibility, _get);
+    return this.images.forEnum(element.getVisibility(), this.adornments.get(this._iXtendJvmAssociations.getInferredType(element)));
   }
   
   protected ImageDescriptor _imageDescriptor(final XtendAnnotationType element) {
-    JvmVisibility _visibility = element.getVisibility();
-    JvmDeclaredType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
-    int _get = this.adornments.get(_inferredType);
-    return this.images.forAnnotation(_visibility, _get);
+    return this.images.forAnnotation(element.getVisibility(), this.adornments.get(this._iXtendJvmAssociations.getInferredType(element)));
   }
   
   protected ImageDescriptor _imageDescriptor(final XtendFunction element) {
@@ -119,9 +101,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
       ImageDescriptor _xifexpression = null;
       if ((operation != null)) {
-        JvmVisibility _visibility = element.getVisibility();
-        int _get = this.adornments.get(operation);
-        _xifexpression = this.images.forOperation(_visibility, _get);
+        _xifexpression = this.images.forOperation(element.getVisibility(), this.adornments.get(operation));
       }
       _xblockexpression = _xifexpression;
     }
@@ -129,11 +109,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
   }
   
   protected ImageDescriptor _imageDescriptor(final AnonymousClass element) {
-    JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
-    JvmVisibility _visibility = _inferredType.getVisibility();
-    JvmGenericType _inferredType_1 = this._iXtendJvmAssociations.getInferredType(element);
-    int _get = this.adornments.get(_inferredType_1);
-    return this.images.forClass(_visibility, _get);
+    return this.images.forClass(this._iXtendJvmAssociations.getInferredType(element).getVisibility(), this.adornments.get(this._iXtendJvmAssociations.getInferredType(element)));
   }
   
   @Override
@@ -141,55 +117,37 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
     ImageDescriptor _xifexpression = null;
     boolean _isDispatcherFunction = this._dispatchHelper.isDispatcherFunction(operation);
     if (_isDispatcherFunction) {
-      JvmVisibility _visibility = operation.getVisibility();
-      int _get = this.adornments.get(operation);
-      _xifexpression = this.images.forDispatcherFunction(_visibility, _get);
+      _xifexpression = this.images.forDispatcherFunction(operation.getVisibility(), this.adornments.get(operation));
     } else {
-      JvmVisibility _visibility_1 = operation.getVisibility();
-      int _get_1 = this.adornments.get(operation);
-      _xifexpression = this.images.forOperation(_visibility_1, _get_1);
+      _xifexpression = this.images.forOperation(operation.getVisibility(), this.adornments.get(operation));
     }
     return _xifexpression;
   }
   
   protected ImageDescriptor _imageDescriptor(final XtendConstructor element) {
-    JvmVisibility _visibility = element.getVisibility();
-    JvmConstructor _inferredConstructor = this._iXtendJvmAssociations.getInferredConstructor(element);
-    int _get = this.adornments.get(_inferredConstructor);
-    return this.images.forConstructor(_visibility, _get);
+    return this.images.forConstructor(element.getVisibility(), this.adornments.get(this._iXtendJvmAssociations.getInferredConstructor(element)));
   }
   
   protected ImageDescriptor _imageDescriptor(final XtendField element) {
-    JvmVisibility _visibility = element.getVisibility();
-    JvmField _jvmField = this._iXtendJvmAssociations.getJvmField(element);
-    int _get = this.adornments.get(_jvmField);
-    return this.images.forField(_visibility, _get);
+    return this.images.forField(element.getVisibility(), this.adornments.get(this._iXtendJvmAssociations.getJvmField(element)));
   }
   
   protected ImageDescriptor _imageDescriptor(final XtendEnumLiteral element) {
-    JvmVisibility _visibility = element.getVisibility();
-    JvmField _jvmField = this._iXtendJvmAssociations.getJvmField(element);
-    int _get = this.adornments.get(_jvmField);
-    return this.images.forField(_visibility, _get);
+    return this.images.forField(element.getVisibility(), this.adornments.get(this._iXtendJvmAssociations.getJvmField(element)));
   }
   
   protected String text(final XtendFile element) {
-    Resource _eResource = element.eResource();
-    URI _uRI = _eResource.getURI();
-    URI _trimFileExtension = _uRI.trimFileExtension();
-    return _trimFileExtension.lastSegment();
+    return element.eResource().getURI().trimFileExtension().lastSegment();
   }
   
   protected String text(final XtendClass element) {
     String _name = element.getName();
     String _xifexpression = null;
-    EList<JvmTypeParameter> _typeParameters = element.getTypeParameters();
-    boolean _isEmpty = _typeParameters.isEmpty();
+    boolean _isEmpty = element.getTypeParameters().isEmpty();
     if (_isEmpty) {
       _xifexpression = "";
     } else {
-      EList<JvmTypeParameter> _typeParameters_1 = element.getTypeParameters();
-      _xifexpression = this.uiStrings.typeParameters(_typeParameters_1);
+      _xifexpression = this.uiStrings.typeParameters(element.getTypeParameters());
     }
     return (_name + _xifexpression);
   }
@@ -197,25 +155,21 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
   protected String text(final XtendInterface element) {
     String _name = element.getName();
     String _xifexpression = null;
-    EList<JvmTypeParameter> _typeParameters = element.getTypeParameters();
-    boolean _isEmpty = _typeParameters.isEmpty();
+    boolean _isEmpty = element.getTypeParameters().isEmpty();
     if (_isEmpty) {
       _xifexpression = "";
     } else {
-      EList<JvmTypeParameter> _typeParameters_1 = element.getTypeParameters();
-      _xifexpression = this.uiStrings.typeParameters(_typeParameters_1);
+      _xifexpression = this.uiStrings.typeParameters(element.getTypeParameters());
     }
     return (_name + _xifexpression);
   }
   
   protected String text(final AnonymousClass element) {
-    JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
-    return this.text(_inferredType);
+    return this.text(this._iXtendJvmAssociations.getInferredType(element));
   }
   
   protected String text(final XtendConstructor element) {
-    JvmConstructor _inferredConstructor = this._iXtendJvmAssociations.getInferredConstructor(element);
-    String _parameters = this.uiStrings.parameters(_inferredConstructor);
+    String _parameters = this.uiStrings.parameters(this._iXtendJvmAssociations.getInferredConstructor(element));
     return ("new" + _parameters);
   }
   
@@ -225,24 +179,19 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
       final QualifiedName qnName = QualifiedName.create(simpleName);
       final QualifiedName operator = this.operatorMapping.getOperator(qnName);
       if ((operator != null)) {
-        String _firstSegment = operator.getFirstSegment();
-        JvmOperation _directlyInferredOperation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
-        final StyledString result = this.signature(_firstSegment, _directlyInferredOperation);
+        final StyledString result = this.signature(operator.getFirstSegment(), this._iXtendJvmAssociations.getDirectlyInferredOperation(element));
         result.append(((" (" + simpleName) + ")"), StyledString.COUNTER_STYLER);
         return result;
       }
     }
-    String _name = element.getName();
-    JvmOperation _directlyInferredOperation_1 = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
-    return this.signature(_name, _directlyInferredOperation_1);
+    return this.signature(element.getName(), this._iXtendJvmAssociations.getDirectlyInferredOperation(element));
   }
   
   protected StyledString text(final XtendField element) {
     StyledString _xblockexpression = null;
     {
       if (((element.getName() == null) && element.isExtension())) {
-        JvmTypeReference _type = element.getType();
-        String _referenceToString = this.uiStrings.referenceToString(_type, "extension");
+        String _referenceToString = this.uiStrings.referenceToString(element.getType(), "extension");
         return new StyledString(_referenceToString, 
           StyledString.DECORATIONS_STYLER);
       }
@@ -269,8 +218,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
   }
   
   protected String text(final XtendParameter element) {
-    JvmTypeReference _parameterType = element.getParameterType();
-    String _simpleName = _parameterType.getSimpleName();
+    String _simpleName = element.getParameterType().getSimpleName();
     String _plus = (_simpleName + " ");
     String _name = element.getName();
     return (_plus + _name);
@@ -283,8 +231,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
       if ((jvmField != null)) {
         return jvmField.getType();
       } else {
-        Set<EObject> _jvmElements = this._iXtendJvmAssociations.getJvmElements(field);
-        final Iterator<EObject> i = _jvmElements.iterator();
+        final Iterator<EObject> i = this._iXtendJvmAssociations.getJvmElements(field).iterator();
         boolean _hasNext = i.hasNext();
         if (_hasNext) {
           final EObject next = i.next();

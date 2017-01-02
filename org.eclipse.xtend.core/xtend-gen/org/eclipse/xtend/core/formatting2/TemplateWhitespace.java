@@ -19,8 +19,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class TemplateWhitespace extends Chunk {
   @Override
   public String toString() {
-    CharSequence _text = this.getText();
-    int _length = _text.length();
+    int _length = this.getText().length();
     return ("T" + Integer.valueOf(_length));
   }
   

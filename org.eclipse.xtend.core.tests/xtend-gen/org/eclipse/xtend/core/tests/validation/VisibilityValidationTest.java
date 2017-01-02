@@ -38,8 +38,7 @@ public class VisibilityValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class Bar { public val bar = new Foo().foo }");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -88,8 +87,7 @@ public class VisibilityValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

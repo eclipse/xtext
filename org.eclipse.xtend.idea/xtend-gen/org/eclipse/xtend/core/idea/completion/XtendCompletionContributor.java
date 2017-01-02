@@ -23,9 +23,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.RangeMarker;
 import com.intellij.openapi.editor.ScrollType;
-import com.intellij.openapi.editor.ScrollingModel;
 import com.intellij.openapi.editor.SelectionModel;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
@@ -35,7 +33,6 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.ProcessingContext;
 import java.util.ArrayList;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.idea.completion.AbstractXtendCompletionContributor;
@@ -45,12 +42,9 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.idea.document.DocumentUtils;
@@ -106,12 +100,10 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
     final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
       @Override
       protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
-        LookupElementBuilder _create = LookupElementBuilder.create("«");
         final InsertHandler<LookupElement> _function = (InsertionContext context, LookupElement item) -> {
-          Editor _editor = context.getEditor();
-          EditorModificationUtil.insertStringAtCaret(_editor, "»", false, false);
+          EditorModificationUtil.insertStringAtCaret(context.getEditor(), "»", false, false);
         };
-        LookupElementBuilder _withInsertHandler = _create.withInsertHandler(_function);
+        LookupElementBuilder _withInsertHandler = LookupElementBuilder.create("«").withInsertHandler(_function);
         XtendCompletionContributor.this._completionExtensions.operator_add($2, _withInsertHandler);
       }
     };
@@ -136,40 +128,31 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
         }
         final EObject jvmType = XtendCompletionContributor.this.jvmModelAssociations.getPrimaryJvmElement(clazz);
         if ((jvmType instanceof JvmGenericType)) {
-          boolean _isAnonymous = clazz.isAnonymous();
-          final List<IResolvedExecutable> candidates = XtendCompletionContributor.this.overrideProposalUtil.getImplementationCandidates(((JvmDeclaredType)jvmType), _isAnonymous);
+          final List<IResolvedExecutable> candidates = XtendCompletionContributor.this.overrideProposalUtil.getImplementationCandidates(((JvmDeclaredType)jvmType), clazz.isAnonymous());
           for (final IResolvedExecutable candidate : candidates) {
             if ((candidate instanceof IResolvedOperation)) {
               final InsertHandler<LookupElement> _function = (InsertionContext context, LookupElement item) -> {
-                Document _document = context.getDocument();
-                int _startOffset = context.getStartOffset();
-                int _tailOffset = context.getTailOffset();
-                _document.deleteString(_startOffset, _tailOffset);
+                context.getDocument().deleteString(context.getStartOffset(), context.getTailOffset());
                 context.commitDocument();
                 Resource _eResource = clazz.eResource();
                 final RewritableImportSection importSection = XtendCompletionContributor.this.importSectionfactory.parse(((XtextResource) _eResource));
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("override ");
-                List<JvmTypeParameter> _typeParameters = ((IResolvedOperation)candidate).getTypeParameters();
                 final Function1<JvmTypeParameter, CharSequence> _function_1 = (JvmTypeParameter it) -> {
                   return it.getName();
                 };
-                String _join = IterableExtensions.<JvmTypeParameter>join(_typeParameters, "<", ",", "> ", _function_1);
+                String _join = IterableExtensions.<JvmTypeParameter>join(((IResolvedOperation)candidate).getTypeParameters(), "<", ",", "> ", _function_1);
                 _builder.append(_join);
-                JvmOperation _declaration = ((IResolvedOperation)candidate).getDeclaration();
-                String _simpleName = _declaration.getSimpleName();
+                String _simpleName = ((IResolvedOperation)candidate).getDeclaration().getSimpleName();
                 _builder.append(_simpleName);
                 _builder.append("(");
-                ArrayList<String> _parameterText = XtendCompletionContributor.this.getParameterText(candidate, importSection);
-                String _join_1 = IterableExtensions.join(_parameterText, ", ");
+                String _join_1 = IterableExtensions.join(XtendCompletionContributor.this.getParameterText(candidate, importSection), ", ");
                 _builder.append(_join_1);
                 _builder.append(") ");
-                JvmOperation _declaration_1 = ((IResolvedOperation)candidate).getDeclaration();
-                EList<JvmTypeReference> _exceptions = _declaration_1.getExceptions();
                 final Function1<JvmTypeReference, CharSequence> _function_2 = (JvmTypeReference it) -> {
                   return XtendCompletionContributor.this.documentUtils.toImportableString(it, importSection);
                 };
-                String _join_2 = IterableExtensions.<JvmTypeReference>join(_exceptions, "throws ", ", ", " ", _function_2);
+                String _join_2 = IterableExtensions.<JvmTypeReference>join(((IResolvedOperation)candidate).getDeclaration().getExceptions(), "throws ", ", ", " ", _function_2);
                 _builder.append(_join_2);
                 _builder.append("{");
                 _builder.newLineIfNotEmpty();
@@ -181,44 +164,34 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                 _builder.append("}");
                 _builder.newLine();
                 XtendCompletionContributor.this.insertAndAdjust(context, _builder.toString());
-                Document _document_1 = context.getDocument();
-                XtendCompletionContributor.this.documentUtils.updateImportSection(_document_1, importSection);
+                XtendCompletionContributor.this.documentUtils.updateImportSection(context.getDocument(), importSection);
               };
-              LookupElementBuilder _createOverrideMethodElement = XtendCompletionContributor.this.createOverrideMethodElement(((IResolvedOperation)candidate), _function);
-              $2.addElement(_createOverrideMethodElement);
+              $2.addElement(XtendCompletionContributor.this.createOverrideMethodElement(((IResolvedOperation)candidate), _function));
             } else {
               if ((candidate instanceof IResolvedConstructor)) {
                 final InsertHandler<LookupElement> _function_1 = (InsertionContext context, LookupElement item) -> {
-                  Document _document = context.getDocument();
-                  int _startOffset = context.getStartOffset();
-                  int _tailOffset = context.getTailOffset();
-                  _document.deleteString(_startOffset, _tailOffset);
+                  context.getDocument().deleteString(context.getStartOffset(), context.getTailOffset());
                   context.commitDocument();
                   Resource _eResource = clazz.eResource();
                   final RewritableImportSection importSection = XtendCompletionContributor.this.importSectionfactory.parse(((XtextResource) _eResource));
                   StringConcatenation _builder = new StringConcatenation();
                   _builder.append("new (");
-                  ArrayList<String> _parameterText = XtendCompletionContributor.this.getParameterText(candidate, importSection);
-                  String _join = IterableExtensions.join(_parameterText, ", ");
+                  String _join = IterableExtensions.join(XtendCompletionContributor.this.getParameterText(candidate, importSection), ", ");
                   _builder.append(_join);
                   _builder.append(") ");
-                  JvmConstructor _declaration = ((IResolvedConstructor)candidate).getDeclaration();
-                  EList<JvmTypeReference> _exceptions = _declaration.getExceptions();
                   final Function1<JvmTypeReference, CharSequence> _function_2 = (JvmTypeReference it) -> {
                     return XtendCompletionContributor.this.documentUtils.toImportableString(it, importSection);
                   };
-                  String _join_1 = IterableExtensions.<JvmTypeReference>join(_exceptions, "throws ", ", ", " ", _function_2);
+                  String _join_1 = IterableExtensions.<JvmTypeReference>join(((IResolvedConstructor)candidate).getDeclaration().getExceptions(), "throws ", ", ", " ", _function_2);
                   _builder.append(_join_1);
                   _builder.append("{");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
                   _builder.append("super(");
-                  JvmConstructor _declaration_1 = ((IResolvedConstructor)candidate).getDeclaration();
-                  EList<JvmFormalParameter> _parameters = _declaration_1.getParameters();
                   final Function1<JvmFormalParameter, CharSequence> _function_3 = (JvmFormalParameter it) -> {
                     return it.getName();
                   };
-                  String _join_2 = IterableExtensions.<JvmFormalParameter>join(_parameters, ", ", _function_3);
+                  String _join_2 = IterableExtensions.<JvmFormalParameter>join(((IResolvedConstructor)candidate).getDeclaration().getParameters(), ", ", _function_3);
                   _builder.append(_join_2, "\t");
                   _builder.append(")");
                   _builder.append(XtendCompletionContributor.SELECTION_MARKER, "\t");
@@ -226,11 +199,9 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                   _builder.append("}");
                   _builder.newLine();
                   XtendCompletionContributor.this.insertAndAdjust(context, _builder.toString());
-                  Document _document_1 = context.getDocument();
-                  XtendCompletionContributor.this.documentUtils.updateImportSection(_document_1, importSection);
+                  XtendCompletionContributor.this.documentUtils.updateImportSection(context.getDocument(), importSection);
                 };
-                LookupElementBuilder _createOverrideConstructorElement = XtendCompletionContributor.this.createOverrideConstructorElement(((IResolvedConstructor)candidate), _function_1);
-                $2.addElement(_createOverrideConstructorElement);
+                $2.addElement(XtendCompletionContributor.this.createOverrideConstructorElement(((IResolvedConstructor)candidate), _function_1));
               }
             }
           }
@@ -252,11 +223,9 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
     final int startIndex = toInsert.indexOf(XtendCompletionContributor.START_SELECTION_MARKER);
     String cleanedText = toInsert.replace(XtendCompletionContributor.START_SELECTION_MARKER, "");
     final int endIndex = cleanedText.indexOf(XtendCompletionContributor.END_SELECTION_MARKER);
-    String _replace = cleanedText.replace(XtendCompletionContributor.END_SELECTION_MARKER, "");
-    cleanedText = _replace;
+    cleanedText = cleanedText.replace(XtendCompletionContributor.END_SELECTION_MARKER, "");
     final int cursorIndex = cleanedText.indexOf(XtendCompletionContributor.SELECTION_MARKER);
-    String _replace_1 = cleanedText.replace(XtendCompletionContributor.SELECTION_MARKER, "");
-    cleanedText = _replace_1;
+    cleanedText = cleanedText.replace(XtendCompletionContributor.SELECTION_MARKER, "");
     int _xifexpression = (int) 0;
     if ((cursorIndex != (-1))) {
       _xifexpression = cursorIndex;
@@ -271,45 +240,38 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
       _xifexpression_1 = endIndex;
     }
     final int end = _xifexpression_1;
+    context.getDocument().insertString(context.getStartOffset(), cleanedText);
     Document _document = context.getDocument();
     int _startOffset = context.getStartOffset();
-    _document.insertString(_startOffset, cleanedText);
-    Document _document_1 = context.getDocument();
     int _startOffset_1 = context.getStartOffset();
-    int _startOffset_2 = context.getStartOffset();
     int _length = cleanedText.length();
-    int _plus = (_startOffset_2 + _length);
-    RangeMarker fullChange = _document_1.createRangeMarker(_startOffset_1, _plus);
+    int _plus = (_startOffset_1 + _length);
+    RangeMarker fullChange = _document.createRangeMarker(_startOffset, _plus);
     final Editor editor = context.getEditor();
     CaretModel _caretModel = editor.getCaretModel();
-    int _startOffset_3 = fullChange.getStartOffset();
+    int _startOffset_2 = fullChange.getStartOffset();
     int _min = Math.min(start, end);
-    int _plus_1 = (_startOffset_3 + _min);
+    int _plus_1 = (_startOffset_2 + _min);
     _caretModel.moveToOffset(_plus_1);
-    ScrollingModel _scrollingModel = editor.getScrollingModel();
-    _scrollingModel.scrollToCaret(ScrollType.RELATIVE);
+    editor.getScrollingModel().scrollToCaret(ScrollType.RELATIVE);
     if ((start < end)) {
       SelectionModel _selectionModel = editor.getSelectionModel();
+      int _startOffset_3 = fullChange.getStartOffset();
+      int _plus_2 = (_startOffset_3 + start);
       int _startOffset_4 = fullChange.getStartOffset();
-      int _plus_2 = (_startOffset_4 + start);
-      int _startOffset_5 = fullChange.getStartOffset();
-      int _plus_3 = (_startOffset_5 + end);
+      int _plus_3 = (_startOffset_4 + end);
       _selectionModel.setSelection(_plus_2, _plus_3);
     }
     context.commitDocument();
-    Project _project = context.getProject();
-    PsiDocumentManager _instance = PsiDocumentManager.getInstance(_project);
-    Document _document_2 = context.getDocument();
-    _instance.doPostponedOperationsAndUnblockDocument(_document_2);
+    PsiDocumentManager.getInstance(context.getProject()).doPostponedOperationsAndUnblockDocument(context.getDocument());
     boolean _isValid = fullChange.isValid();
     if (_isValid) {
-      Project _project_1 = context.getProject();
-      CodeStyleManager _instance_1 = CodeStyleManager.getInstance(_project_1);
+      CodeStyleManager _instance = CodeStyleManager.getInstance(context.getProject());
       PsiFile _file = context.getFile();
-      int _startOffset_6 = fullChange.getStartOffset();
+      int _startOffset_5 = fullChange.getStartOffset();
       int _endOffset = fullChange.getEndOffset();
-      TextRange _textRange = new TextRange(_startOffset_6, _endOffset);
-      _instance_1.adjustLineIndent(_file, _textRange);
+      TextRange _textRange = new TextRange(_startOffset_5, _endOffset);
+      _instance.adjustLineIndent(_file, _textRange);
     }
   }
   
@@ -317,15 +279,10 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
     final ArrayList<String> result = CollectionLiterals.<String>newArrayList();
     for (int i = 0; (i < executable.getDeclaration().getParameters().size()); i++) {
       StringConcatenation _builder = new StringConcatenation();
-      List<LightweightTypeReference> _resolvedParameterTypes = executable.getResolvedParameterTypes();
-      LightweightTypeReference _get = _resolvedParameterTypes.get(i);
-      String _importableString = this.documentUtils.toImportableString(_get, importSection);
+      String _importableString = this.documentUtils.toImportableString(executable.getResolvedParameterTypes().get(i), importSection);
       _builder.append(_importableString);
       _builder.append(" ");
-      JvmExecutable _declaration = executable.getDeclaration();
-      EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-      JvmFormalParameter _get_1 = _parameters.get(i);
-      String _simpleName = _get_1.getSimpleName();
+      String _simpleName = executable.getDeclaration().getParameters().get(i).getSimpleName();
       _builder.append(_simpleName);
       result.add(_builder.toString());
     }
@@ -333,17 +290,15 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
   }
   
   protected LookupElementBuilder createOverrideMethodElement(final IResolvedOperation prototype, final InsertHandler<LookupElement> insertHandler) {
-    JvmOperation _declaration = prototype.getDeclaration();
-    String methodName = _declaration.getSimpleName();
+    String methodName = prototype.getDeclaration().getSimpleName();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("override ");
     _builder.append(methodName);
     _builder.append("(");
-    List<LightweightTypeReference> _resolvedParameterTypes = prototype.getResolvedParameterTypes();
     final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
       return it.getHumanReadableName();
     };
-    String _join = IterableExtensions.<LightweightTypeReference>join(_resolvedParameterTypes, ",", _function);
+    String _join = IterableExtensions.<LightweightTypeReference>join(prototype.getResolvedParameterTypes(), ",", _function);
     _builder.append(_join);
     _builder.append(")");
     String signature = _builder.toString();
@@ -351,37 +306,21 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
     _builder_1.append("override ");
     _builder_1.append(signature);
     String overrideSignature = _builder_1.toString();
-    LookupElementBuilder _create = LookupElementBuilder.create(prototype, signature);
-    LookupElementBuilder _withLookupString = _create.withLookupString(methodName);
-    LookupElementBuilder _withLookupString_1 = _withLookupString.withLookupString(overrideSignature);
-    LookupElementBuilder _withInsertHandler = _withLookupString_1.withInsertHandler(insertHandler);
-    LookupElementBuilder _appendTailText = _withInsertHandler.appendTailText(" {...}", true);
-    LightweightTypeReference _resolvedDeclarator = prototype.getResolvedDeclarator();
-    String _humanReadableName = _resolvedDeclarator.getHumanReadableName();
-    LookupElementBuilder _withTypeText = _appendTailText.withTypeText(_humanReadableName);
-    LookupElementBuilder element = _withTypeText.withIcon(AllIcons.Nodes.Method);
+    LookupElementBuilder element = LookupElementBuilder.create(prototype, signature).withLookupString(methodName).withLookupString(overrideSignature).withInsertHandler(insertHandler).appendTailText(" {...}", true).withTypeText(prototype.getResolvedDeclarator().getHumanReadableName()).withIcon(AllIcons.Nodes.Method);
     return element;
   }
   
   protected LookupElementBuilder createOverrideConstructorElement(final IResolvedConstructor prototype, final InsertHandler<LookupElement> insertHandler) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("new (");
-    List<LightweightTypeReference> _resolvedParameterTypes = prototype.getResolvedParameterTypes();
     final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
       return it.getHumanReadableName();
     };
-    String _join = IterableExtensions.<LightweightTypeReference>join(_resolvedParameterTypes, ",", _function);
+    String _join = IterableExtensions.<LightweightTypeReference>join(prototype.getResolvedParameterTypes(), ",", _function);
     _builder.append(_join);
     _builder.append(")");
     String signature = _builder.toString();
-    LookupElementBuilder _create = LookupElementBuilder.create(prototype, signature);
-    LookupElementBuilder _withLookupString = _create.withLookupString(signature);
-    LookupElementBuilder _withInsertHandler = _withLookupString.withInsertHandler(insertHandler);
-    LookupElementBuilder _appendTailText = _withInsertHandler.appendTailText(" {...}", true);
-    LightweightTypeReference _resolvedDeclarator = prototype.getResolvedDeclarator();
-    String _humanReadableName = _resolvedDeclarator.getHumanReadableName();
-    LookupElementBuilder _withTypeText = _appendTailText.withTypeText(_humanReadableName);
-    LookupElementBuilder element = _withTypeText.withIcon(AllIcons.Nodes.Method);
+    LookupElementBuilder element = LookupElementBuilder.create(prototype, signature).withLookupString(signature).withInsertHandler(insertHandler).appendTailText(" {...}", true).withTypeText(prototype.getResolvedDeclarator().getHumanReadableName()).withIcon(AllIcons.Nodes.Method);
     return element;
   }
 }

@@ -26,12 +26,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CancellationException;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.AbstractFileSystemSupport;
@@ -150,7 +148,6 @@ import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -226,10 +223,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   @Override
   public String getSimpleName() {
-    Resource _eResource = this.xtendFile.eResource();
-    URI _uRI = _eResource.getURI();
-    String _lastSegment = _uRI.lastSegment();
-    return _lastSegment.toString();
+    return this.xtendFile.eResource().getURI().lastSegment().toString();
   }
   
   @Override
@@ -249,11 +243,10 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   @Override
   public Iterable<? extends TypeDeclaration> getSourceTypeDeclarations() {
-    EList<XtendTypeDeclaration> _xtendTypes = this.xtendFile.getXtendTypes();
     final Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = (XtendTypeDeclaration it) -> {
       return this.toXtendTypeDeclaration(it);
     };
-    return ListExtensions.<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>map(_xtendTypes, _function);
+    return ListExtensions.<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>map(this.xtendFile.getXtendTypes(), _function);
   }
   
   private volatile boolean canceled = false;
@@ -374,16 +367,11 @@ public class CompilationUnitImpl implements CompilationUnit {
     MutableFileSystemSupport _xblockexpression = null;
     {
       if ((this.decoratedFileSystemSupport == null)) {
-        Resource _eResource = this.xtendFile.eResource();
-        ResourceSet _resourceSet = _eResource.getResourceSet();
-        EList<Adapter> _eAdapters = _resourceSet.eAdapters();
-        Iterable<FileSystemAccessQueue> _filter = Iterables.<FileSystemAccessQueue>filter(_eAdapters, FileSystemAccessQueue.class);
-        final FileSystemAccessQueue fileSystemAccessQueue = IterableExtensions.<FileSystemAccessQueue>head(_filter);
+        final FileSystemAccessQueue fileSystemAccessQueue = IterableExtensions.<FileSystemAccessQueue>head(Iterables.<FileSystemAccessQueue>filter(this.xtendFile.eResource().getResourceSet().eAdapters(), FileSystemAccessQueue.class));
         if ((fileSystemAccessQueue == null)) {
           return this.createListeningFileSystemSupport();
         }
-        Resource _eResource_1 = this.xtendFile.eResource();
-        URI _uRI = _eResource_1.getURI();
+        URI _uRI = this.xtendFile.eResource().getURI();
         ChangeListenerAddingFileSystemSupport _createListeningFileSystemSupport = this.createListeningFileSystemSupport();
         ParallelFileSystemSupport _parallelFileSystemSupport = new ParallelFileSystemSupport(_uRI, _createListeningFileSystemSupport, fileSystemAccessQueue);
         this.decoratedFileSystemSupport = _parallelFileSystemSupport;
@@ -394,15 +382,13 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   private ChangeListenerAddingFileSystemSupport createListeningFileSystemSupport() {
-    Resource _eResource = this.xtendFile.eResource();
-    URI _uRI = _eResource.getURI();
+    URI _uRI = this.xtendFile.eResource().getURI();
     return new ChangeListenerAddingFileSystemSupport(_uRI, this.fileSystemSupport, this.resourceChangeRegistry);
   }
   
   @Override
   public Path getFilePath() {
-    Resource _eResource = this.xtendFile.eResource();
-    return this.fileSystemSupport.getPath(_eResource);
+    return this.fileSystemSupport.getPath(this.xtendFile.eResource());
   }
   
   public void setXtendFile(final XtendFile xtendFile) {
@@ -410,11 +396,8 @@ public class CompilationUnitImpl implements CompilationUnit {
     StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, xtendFile);
     LightweightTypeReferenceFactory _lightweightTypeReferenceFactory = new LightweightTypeReferenceFactory(_standardTypeReferenceOwner);
     this.typeRefFactory = _lightweightTypeReferenceFactory;
-    Resource _eResource = xtendFile.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
-    this.fileSystemSupport.setContext(_resourceSet);
-    Resource _eResource_1 = xtendFile.eResource();
-    this.fileLocations.setContext(_eResource_1);
+    this.fileSystemSupport.setContext(xtendFile.eResource().getResourceSet());
+    this.fileLocations.setContext(xtendFile.eResource());
   }
   
   public void before(final ActiveAnnotationContexts.AnnotationCallback phase) {
@@ -441,9 +424,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     boolean _equals_1 = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
     if (_equals_1) {
-      Resource _eResource = this.xtendFile.eResource();
-      URI _uRI = _eResource.getURI();
-      this.resourceChangeRegistry.discardCreateOrModifyInformation(_uRI);
+      this.resourceChangeRegistry.discardCreateOrModifyInformation(this.xtendFile.eResource().getURI());
     }
   }
   
@@ -923,8 +904,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         }
       }
       if (!_matched) {
-        LightweightTypeReference _lightweightReference = this.typeRefFactory.toLightweightReference(delegate);
-        _switchResult = this.toTypeReference(_lightweightReference, delegate);
+        _switchResult = this.toTypeReference(this.typeRefFactory.toLightweightReference(delegate), delegate);
       }
       _xblockexpression = _switchResult;
     }
@@ -1149,14 +1129,12 @@ public class CompilationUnitImpl implements CompilationUnit {
     boolean _matched = false;
     if (typeRef instanceof TypeReferenceImpl) {
       _matched=true;
-      LightweightTypeReference _lightweightTypeReference = ((TypeReferenceImpl)typeRef).getLightweightTypeReference();
-      _switchResult = _lightweightTypeReference.toJavaCompliantTypeReference();
+      _switchResult = ((TypeReferenceImpl)typeRef).getLightweightTypeReference().toJavaCompliantTypeReference();
     }
     if (!_matched) {
       if (typeRef instanceof InferredTypeReferenceImpl) {
         _matched=true;
-        XComputedTypeReferenceImplCustom _delegate = ((InferredTypeReferenceImpl)typeRef).getDelegate();
-        _switchResult = EcoreUtil.<XComputedTypeReferenceImplCustom>copy(_delegate);
+        _switchResult = EcoreUtil.<XComputedTypeReferenceImplCustom>copy(((InferredTypeReferenceImpl)typeRef).getDelegate());
       }
     }
     return _switchResult;
@@ -1195,9 +1173,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     this.checkCanceled();
     final Procedure1<ITreeAppendable> _function = (ITreeAppendable it) -> {
       final CompilationContextImpl context = new CompilationContextImpl(it, this);
-      CharSequence _compile = compilationStrategy.compile(context);
-      CharSequence _trimTrailingLinebreak = this.trimTrailingLinebreak(_compile, executable);
-      it.append(_trimTrailingLinebreak);
+      it.append(this.trimTrailingLinebreak(compilationStrategy.compile(context), executable));
     };
     this.jvmTypesBuilder.setBody(executable, _function);
   }
@@ -1215,8 +1191,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     this.checkCanceled();
     final Procedure1<ITreeAppendable> _function = (ITreeAppendable it) -> {
       final CompilationContextImpl context = new CompilationContextImpl(it, this);
-      CharSequence _compile = compilationStrategy.compile(context);
-      it.append(_compile);
+      it.append(compilationStrategy.compile(context));
     };
     this.jvmTypesBuilder.setInitializer(field, _function);
   }
@@ -1266,8 +1241,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       if ((((JvmCustomAnnotationValue)value).getValues().isEmpty() && isArray)) {
         _matched=true;
         List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
-        JvmTypeReference _findExpectedType = this.findExpectedType(value);
-        Class<?> _arrayComponentType = this.toArrayComponentType(_findExpectedType);
+        Class<?> _arrayComponentType = this.toArrayComponentType(this.findExpectedType(value));
         _switchResult = Pair.<List<?>, Class<?>>of(_emptyList, _arrayComponentType);
       }
     }
@@ -1275,35 +1249,30 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (value instanceof JvmCustomAnnotationValue) {
         _matched=true;
         final JvmTypeReference expectedType = this.findExpectedType(value);
-        EList<EObject> _values = ((JvmCustomAnnotationValue)value).getValues();
-        Iterable<XExpression> _filter = Iterables.<XExpression>filter(_values, XExpression.class);
         final Function1<XExpression, Object> _function = (XExpression it) -> {
           return this.evaluate(it, expectedType);
         };
-        Iterable<Object> _map = IterableExtensions.<XExpression, Object>map(_filter, _function);
-        final Object result = IterableExtensions.<Object>head(_map);
+        final Object result = IterableExtensions.<Object>head(IterableExtensions.<XExpression, Object>map(Iterables.<XExpression>filter(((JvmCustomAnnotationValue)value).getValues(), XExpression.class), _function));
         return this.translateAnnotationValue(result, expectedType, isArray);
       }
     }
     if (!_matched) {
       if (value instanceof JvmTypeAnnotationValue) {
         _matched=true;
-        EList<JvmTypeReference> _values = ((JvmTypeAnnotationValue)value).getValues();
         final Function1<JvmTypeReference, TypeReference> _function = (JvmTypeReference it) -> {
           return this.toTypeReference(it);
         };
-        List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_values, _function);
+        List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(((JvmTypeAnnotationValue)value).getValues(), _function);
         _switchResult = Pair.<List<?>, Class<?>>of(_map, TypeReference.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmAnnotationAnnotationValue) {
         _matched=true;
-        EList<JvmAnnotationReference> _values = ((JvmAnnotationAnnotationValue)value).getValues();
         final Function1<JvmAnnotationReference, AnnotationReference> _function = (JvmAnnotationReference it) -> {
           return this.toAnnotationReference(it);
         };
-        List<AnnotationReference> _map = ListExtensions.<JvmAnnotationReference, AnnotationReference>map(_values, _function);
+        List<AnnotationReference> _map = ListExtensions.<JvmAnnotationReference, AnnotationReference>map(((JvmAnnotationAnnotationValue)value).getValues(), _function);
         _switchResult = Pair.<List<?>, Class<?>>of(_map, AnnotationReference.class);
       }
     }
@@ -1352,11 +1321,10 @@ public class CompilationUnitImpl implements CompilationUnit {
     if (!_matched) {
       if (value instanceof JvmEnumAnnotationValue) {
         _matched=true;
-        EList<JvmEnumerationLiteral> _values = ((JvmEnumAnnotationValue)value).getValues();
         final Function1<JvmEnumerationLiteral, NamedElement> _function = (JvmEnumerationLiteral it) -> {
           return this.toNamedElement(it);
         };
-        List<NamedElement> _map = ListExtensions.<JvmEnumerationLiteral, NamedElement>map(_values, _function);
+        List<NamedElement> _map = ListExtensions.<JvmEnumerationLiteral, NamedElement>map(((JvmEnumAnnotationValue)value).getValues(), _function);
         _switchResult = Pair.<List<?>, Class<?>>of(_map, EnumerationValueDeclaration.class);
       }
     }
@@ -1387,12 +1355,9 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     final Pair<List<?>, Class<?>> result = _switchResult;
     if (isArray) {
-      List<?> _key = result.getKey();
-      Class<?> _value = result.getValue();
-      return this.toArrayOfType(_key, _value);
+      return this.toArrayOfType(result.getKey(), result.getValue());
     } else {
-      List<?> _key_1 = result.getKey();
-      return IterableExtensions.head(_key_1);
+      return IterableExtensions.head(result.getKey());
     }
   }
   
@@ -1405,9 +1370,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (((!isArray) || value.getClass().isArray())) {
         return value;
       }
-      ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList(value);
-      Class<?> _arrayComponentType = this.toArrayComponentType(expectedType);
-      _xblockexpression = this.toArrayOfType(_newArrayList, _arrayComponentType);
+      _xblockexpression = this.toArrayOfType(CollectionLiterals.<Object>newArrayList(value), this.toArrayComponentType(expectedType));
     }
     return _xblockexpression;
   }
@@ -1498,8 +1461,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     JvmOperation _operation = value.getOperation();
     boolean _tripleNotEquals = (_operation != null);
     if (_tripleNotEquals) {
-      JvmOperation _operation_1 = value.getOperation();
-      return _operation_1.getReturnType();
+      return value.getOperation().getReturnType();
     }
     JvmTypeReference _switchResult = null;
     EObject _eContainer = value.eContainer();
@@ -1514,10 +1476,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         _matched=true;
         JvmTypeReference _xblockexpression = null;
         {
-          JvmAnnotationType _annotation = ((JvmAnnotationReference)container).getAnnotation();
-          Iterable<JvmFeature> _findAllFeaturesByName = _annotation.findAllFeaturesByName("value");
-          Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_findAllFeaturesByName, JvmOperation.class);
-          final JvmOperation defaultOp = IterableExtensions.<JvmOperation>head(_filter);
+          final JvmOperation defaultOp = IterableExtensions.<JvmOperation>head(Iterables.<JvmOperation>filter(((JvmAnnotationReference)container).getAnnotation().findAllFeaturesByName("value"), JvmOperation.class));
           JvmTypeReference _xifexpression = null;
           if ((defaultOp != null)) {
             _xifexpression = defaultOp.getReturnType();
@@ -1601,9 +1560,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
         String _message = e.getMessage();
         final EObjectDiagnosticImpl error = new EObjectDiagnosticImpl(Severity.ERROR, "constant_expression_evaluation_problem", _message, expression, null, (-1), null);
-        Resource _eResource = expression.eResource();
-        EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-        _errors.add(error);
+        expression.eResource().getErrors().add(error);
         return null;
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -1613,14 +1570,11 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   protected Object translate(final Object object) {
     if ((object instanceof XAnnotation[])) {
+      final AnnotationReference[] result = new AnnotationReference[((Object[])object).length];
       int _length = ((Object[])object).length;
-      final AnnotationReference[] result = new AnnotationReference[_length];
-      int _length_1 = ((Object[])object).length;
-      ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _length_1, true);
+      ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _length, true);
       for (final Integer i : _doubleDotLessThan) {
-        XAnnotation _get = ((XAnnotation[])object)[(i).intValue()];
-        AnnotationReference _translateAnnotation = this.translateAnnotation(_get);
-        result[(i).intValue()] = _translateAnnotation;
+        result[(i).intValue()] = this.translateAnnotation(((XAnnotation[])object)[(i).intValue()]);
       }
       return result;
     }
@@ -1628,13 +1582,11 @@ public class CompilationUnitImpl implements CompilationUnit {
       return this.translateAnnotation(((XAnnotation)object));
     }
     if ((object instanceof JvmTypeReference[])) {
-      int _length_2 = ((Object[])object).length;
-      final TypeReference[] result_1 = new TypeReference[_length_2];
-      int _length_3 = ((Object[])object).length;
-      ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, _length_3, true);
+      final TypeReference[] result_1 = new TypeReference[((Object[])object).length];
+      int _length_1 = ((Object[])object).length;
+      ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, _length_1, true);
       for (final Integer i_1 : _doubleDotLessThan_1) {
-        Object _get_1 = ((Object[])object)[(i_1).intValue()];
-        Object _translate = this.translate(_get_1);
+        Object _translate = this.translate(((Object[])object)[(i_1).intValue()]);
         result_1[(i_1).intValue()] = ((TypeReference) _translate);
       }
       return result_1;
@@ -1643,13 +1595,11 @@ public class CompilationUnitImpl implements CompilationUnit {
       return this.toTypeReference(((JvmTypeReference)object));
     }
     if ((object instanceof JvmEnumerationLiteral[])) {
-      int _length_4 = ((Object[])object).length;
-      final EnumerationValueDeclaration[] result_2 = new EnumerationValueDeclaration[_length_4];
-      int _length_5 = ((Object[])object).length;
-      ExclusiveRange _doubleDotLessThan_2 = new ExclusiveRange(0, _length_5, true);
+      final EnumerationValueDeclaration[] result_2 = new EnumerationValueDeclaration[((Object[])object).length];
+      int _length_2 = ((Object[])object).length;
+      ExclusiveRange _doubleDotLessThan_2 = new ExclusiveRange(0, _length_2, true);
       for (final Integer i_2 : _doubleDotLessThan_2) {
-        Object _get_2 = ((Object[])object)[(i_2).intValue()];
-        Object _translate_1 = this.translate(_get_2);
+        Object _translate_1 = this.translate(((Object[])object)[(i_2).intValue()]);
         result_2[(i_2).intValue()] = ((EnumerationValueDeclaration) _translate_1);
       }
       return result_2;
@@ -1681,22 +1631,18 @@ public class CompilationUnitImpl implements CompilationUnit {
           final XExpression value = valuePair.getValue();
           if ((value != null)) {
             final JvmOperation operation = valuePair.getElement();
-            JvmTypeReference _returnType = operation.getReturnType();
-            final Object annotationValue = this.translateAnnotationValue(value, _returnType);
-            String _simpleName = operation.getSimpleName();
-            buildContext.set(_simpleName, annotationValue);
+            final Object annotationValue = this.translateAnnotationValue(value, operation.getReturnType());
+            buildContext.set(operation.getSimpleName(), annotationValue);
           }
         }
       }
       XExpression _value = annotation.getValue();
       boolean _tripleNotEquals = (_value != null);
       if (_tripleNotEquals) {
-        XExpression _value_1 = annotation.getValue();
-        final Object annotationValue = this.translateAnnotationValue(_value_1, null);
+        final Object annotationValue = this.translateAnnotationValue(annotation.getValue(), null);
         buildContext.set("value", annotationValue);
       }
-      JvmAnnotationReference _delegate = buildContext.getDelegate();
-      _xblockexpression = this.toAnnotationReference(_delegate);
+      _xblockexpression = this.toAnnotationReference(buildContext.getDelegate());
     }
     return _xblockexpression;
   }
@@ -1708,10 +1654,8 @@ public class CompilationUnitImpl implements CompilationUnit {
         return this.translateAnnotation(((XAnnotation)value));
       }
       if ((value instanceof XListLiteral)) {
-        EList<XExpression> _elements = ((XListLiteral)value).getElements();
-        final Iterable<XAnnotation> annotations = Iterables.<XAnnotation>filter(_elements, XAnnotation.class);
-        EList<XExpression> _elements_1 = ((XListLiteral)value).getElements();
-        int _size = _elements_1.size();
+        final Iterable<XAnnotation> annotations = Iterables.<XAnnotation>filter(((XListLiteral)value).getElements(), XAnnotation.class);
+        int _size = ((XListLiteral)value).getElements().size();
         int _size_1 = IterableExtensions.size(annotations);
         boolean _equals = (_size == _size_1);
         if (_equals) {
@@ -1723,8 +1667,7 @@ public class CompilationUnitImpl implements CompilationUnit {
           return annotationReferences;
         }
       }
-      Object _evaluate = this.evaluate(value, expectedType);
-      _xblockexpression = this.translate(_evaluate);
+      _xblockexpression = this.translate(this.evaluate(value, expectedType));
     }
     return _xblockexpression;
   }
@@ -1771,8 +1714,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         final Procedure1<StringWriter> _function_1 = (StringWriter it_1) -> {
           PrintWriter _printWriter = new PrintWriter(it_1);
           final Procedure1<PrintWriter> _function_2 = (PrintWriter it_2) -> {
-            String _messageWithoutStackTrace = this.getMessageWithoutStackTrace(t);
-            it_2.println(_messageWithoutStackTrace);
+            it_2.println(this.getMessageWithoutStackTrace(t));
             t.printStackTrace(it_2);
             it_2.flush();
           };

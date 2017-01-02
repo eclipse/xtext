@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.performance;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -500,12 +499,10 @@ public class PerformanceTest extends AbstractXtendTestCase {
       final int num = 50;
       final Map<String, ? extends CharSequence> map = this.fileGenerator.getDependencies();
       final List<String> files = CollectionLiterals.<String>newArrayList();
-      Collection<? extends CharSequence> _values = map.values();
       final Function1<CharSequence, String> _function = (CharSequence it) -> {
         return it.toString();
       };
-      Iterable<String> _map = IterableExtensions.map(_values, _function);
-      Iterables.<String>addAll(files, _map);
+      Iterables.<String>addAll(files, IterableExtensions.map(map.values(), _function));
       final GeneratorConfig config = new GeneratorConfig();
       config.packageName = "generated";
       config.noTypeInference = false;
@@ -513,9 +510,7 @@ public class PerformanceTest extends AbstractXtendTestCase {
       for (final Integer i : _upTo) {
         {
           config.className = ("MyGeneratedType" + i);
-          CharSequence _contents = this.fileGenerator.getContents(config);
-          String _string = _contents.toString();
-          files.add(_string);
+          files.add(this.fileGenerator.getContents(config).toString());
         }
       }
       final Stopwatches.StoppedTask task = Stopwatches.forTask("PerformanceTest.doCompile");

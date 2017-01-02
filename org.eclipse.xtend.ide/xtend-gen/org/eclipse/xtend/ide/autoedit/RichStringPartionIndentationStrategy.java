@@ -22,12 +22,10 @@ public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoE
     if (((c.text.length() > 1) && (!((List<String>)Conversions.doWrapArray(d.getLegalLineDelimiters())).contains(c.text)))) {
       try {
         final String lineIndentation = this.getLineIndentation(d, c.offset);
-        String[] _legalLineDelimiters = d.getLegalLineDelimiters();
         final Function1<String, Integer> _function = (String s) -> {
           return Integer.valueOf(s.length());
         };
-        List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(((Iterable<String>)Conversions.doWrapArray(_legalLineDelimiters)), _function);
-        final List<String> legalLineDelimiters = ListExtensions.<String>reverseView(_sortBy);
+        final List<String> legalLineDelimiters = ListExtensions.<String>reverseView(IterableExtensions.<String, Integer>sortBy(((Iterable<String>)Conversions.doWrapArray(d.getLegalLineDelimiters())), _function));
         final String defaultLineDelimiter = TextUtilities.getDefaultLineDelimiter(d);
         final Function1<String, CharSequence> _function_1 = (String delimiter) -> {
           return Pattern.quote(delimiter);
@@ -40,16 +38,13 @@ public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoE
         int currentEnd = 0;
         while (matcher.find()) {
           {
-            int _start = matcher.start();
-            currentEnd = _start;
+            currentEnd = matcher.start();
             if ((currentStart != 0)) {
               convertedText.append(lineIndentation);
             }
-            String _substring = c.text.substring(currentStart, currentEnd);
-            convertedText.append(_substring);
+            convertedText.append(c.text.substring(currentStart, currentEnd));
             convertedText.append(defaultLineDelimiter);
-            int _end = matcher.end();
-            currentStart = _end;
+            currentStart = matcher.end();
           }
         }
         int _length = c.text.length();
@@ -58,11 +53,9 @@ public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoE
           if ((currentStart != 0)) {
             convertedText.append(lineIndentation);
           }
-          String _substring = c.text.substring(currentStart);
-          convertedText.append(_substring);
+          convertedText.append(c.text.substring(currentStart));
         }
-        String _string = convertedText.toString();
-        c.text = _string;
+        c.text = convertedText.toString();
       } catch (final Throwable _t) {
         if (_t instanceof BadLocationException) {
           final BadLocationException e = (BadLocationException)_t;

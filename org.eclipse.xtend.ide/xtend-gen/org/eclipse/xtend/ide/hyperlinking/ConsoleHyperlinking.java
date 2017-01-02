@@ -2,7 +2,6 @@ package org.eclipse.xtend.ide.hyperlinking;
 
 import com.google.inject.Inject;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.console.IPatternMatchListenerDelegate;
 import org.eclipse.ui.console.PatternMatchEvent;
@@ -22,8 +21,7 @@ public class ConsoleHyperlinking implements IPatternMatchListenerDelegate {
     try {
       final int offset = event.getOffset();
       final int length = event.getLength();
-      IDocument _document = this.console.getDocument();
-      String _get = _document.get(offset, length);
+      String _get = this.console.getDocument().get(offset, length);
       final XtendFileHyperlink link = new XtendFileHyperlink(_get, this.workbench, this.console);
       this.console.addHyperlink(link, offset, length);
     } catch (final Throwable _t) {

@@ -49,39 +49,27 @@ public class AnnotationTestingTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
           final Class<?> compiledClass = it.getCompiledClass();
-          Field[] _declaredFields = compiledClass.getDeclaredFields();
-          int _size = ((List<Field>)Conversions.doWrapArray(_declaredFields)).size();
-          Assert.assertEquals(3, _size);
-          Field[] _declaredFields_1 = compiledClass.getDeclaredFields();
+          Assert.assertEquals(3, ((List<Field>)Conversions.doWrapArray(compiledClass.getDeclaredFields())).size());
           final Function1<Field, Boolean> _function_1 = (Field it_1) -> {
             String _name = it_1.getName();
             return Boolean.valueOf(Objects.equal(_name, "foo"));
           };
-          boolean _exists = IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields_1)), _function_1);
-          Assert.assertTrue(_exists);
-          Field[] _declaredFields_2 = compiledClass.getDeclaredFields();
+          Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(compiledClass.getDeclaredFields())), _function_1));
           final Function1<Field, Boolean> _function_2 = (Field it_1) -> {
             String _name = it_1.getName();
             return Boolean.valueOf(Objects.equal(_name, "bar"));
           };
-          boolean _exists_1 = IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields_2)), _function_2);
-          Assert.assertTrue(_exists_1);
-          Field[] _declaredFields_3 = compiledClass.getDeclaredFields();
+          Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(compiledClass.getDeclaredFields())), _function_2));
           final Function1<Field, Boolean> _function_3 = (Field it_1) -> {
             String _name = it_1.getName();
             return Boolean.valueOf(Objects.equal(_name, "baz"));
           };
-          boolean _exists_2 = IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields_3)), _function_3);
-          Assert.assertTrue(_exists_2);
-          URI _trimSegments = sourceFileUri.trimSegments(2);
-          URI _appendSegment = _trimSegments.appendSegment("xtend-gen");
-          final URI targetFileUri = _appendSegment.appendSegment("out.txt");
+          Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(compiledClass.getDeclaredFields())), _function_3));
+          final URI targetFileUri = sourceFileUri.trimSegments(2).appendSegment("xtend-gen").appendSegment("out.txt");
           String _fileString = targetFileUri.toFileString();
           final File targetFile = new File(_fileString);
-          Charset _defaultCharset = Charset.defaultCharset();
-          final String result = Files.toString(targetFile, _defaultCharset);
-          String _trim = result.trim();
-          Assert.assertEquals("foo|bar|baz", _trim);
+          final String result = Files.toString(targetFile, Charset.defaultCharset());
+          Assert.assertEquals("foo|bar|baz", result.trim());
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }

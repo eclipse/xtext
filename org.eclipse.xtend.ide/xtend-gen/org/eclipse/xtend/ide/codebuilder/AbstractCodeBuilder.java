@@ -12,7 +12,6 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Iterator;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaElement;
@@ -21,7 +20,6 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
@@ -29,7 +27,6 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -75,11 +72,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     String _xblockexpression = null;
     {
       final StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
-      IAppendable _append = appendable.append("...");
-      IAppendable _newLine = _append.newLine();
-      ISourceAppender _build = this.build(_newLine);
-      ISourceAppender _newLine_1 = _build.newLine();
-      _newLine_1.append("...");
+      this.build(appendable.append("...").newLine()).newLine().append("...");
       _xblockexpression = appendable.toString();
     }
     return _xblockexpression;
@@ -151,16 +144,12 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
         do {
           {
             final JvmTypeParameter typeParameter = iterator.next();
-            String _name = typeParameter.getName();
-            appendable.append(_name);
-            EList<JvmTypeConstraint> _constraints = typeParameter.getConstraints();
-            Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints, JvmUpperBound.class);
+            appendable.append(typeParameter.getName());
             final Function1<JvmUpperBound, Boolean> _function = (JvmUpperBound it) -> {
-              JvmTypeReference _typeReference = it.getTypeReference();
-              String _identifier = _typeReference.getIdentifier();
+              String _identifier = it.getTypeReference().getIdentifier();
               return Boolean.valueOf((!Objects.equal(_identifier, "java.lang.Object")));
             };
-            final Iterable<JvmUpperBound> upperBounds = IterableExtensions.<JvmUpperBound>filter(_filter, _function);
+            final Iterable<JvmUpperBound> upperBounds = IterableExtensions.<JvmUpperBound>filter(Iterables.<JvmUpperBound>filter(typeParameter.getConstraints(), JvmUpperBound.class), _function);
             boolean _isEmpty = IterableExtensions.isEmpty(upperBounds);
             boolean _not = (!_isEmpty);
             if (_not) {
@@ -173,9 +162,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
                     appendable.append(" & ");
                   }
                   isFirst = false;
-                  JvmTypeReference _typeReference = upperBound.getTypeReference();
-                  LightweightTypeReference _lightweightTypeReference = owner.toLightweightTypeReference(_typeReference);
-                  this.appendType(appendable, _lightweightTypeReference, "Object");
+                  this.appendType(appendable, owner.toLightweightTypeReference(upperBound.getTypeReference()), "Object");
                 }
               }
             }

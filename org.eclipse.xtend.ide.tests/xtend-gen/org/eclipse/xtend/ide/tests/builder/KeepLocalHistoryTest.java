@@ -11,8 +11,6 @@ import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFileState;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -20,7 +18,6 @@ import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -137,15 +134,12 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     try {
       XtextEditor _openEditor = this.workbenchTestHelper.openEditor(it);
       final Procedure1<XtextEditor> _function = (XtextEditor it_1) -> {
-        IXtextDocument _document = it_1.getDocument();
-        final String currentContent = _document.get();
+        final String currentContent = it_1.getDocument().get();
         boolean _equals = currentContent.equals(KeepLocalHistoryTest.CONTENT_WITHOUT_BODY);
         if (_equals) {
-          IXtextDocument _document_1 = it_1.getDocument();
-          _document_1.set(KeepLocalHistoryTest.CONTENT_WITH_BODY);
+          it_1.getDocument().set(KeepLocalHistoryTest.CONTENT_WITH_BODY);
         } else {
-          IXtextDocument _document_2 = it_1.getDocument();
-          _document_2.set(KeepLocalHistoryTest.CONTENT_WITHOUT_BODY);
+          it_1.getDocument().set(KeepLocalHistoryTest.CONTENT_WITHOUT_BODY);
         }
         this.workbenchTestHelper.saveEditor(it_1, false);
       };
@@ -160,10 +154,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     try {
       XtextEditor _openEditor = this.workbenchTestHelper.openEditor(it);
       final Procedure1<XtextEditor> _function = (XtextEditor it_1) -> {
-        IXtextDocument _document = it_1.getDocument();
-        IXtextDocument _document_1 = it_1.getDocument();
-        String _get = _document_1.get();
-        _document.set(_get);
+        it_1.getDocument().set(it_1.getDocument().get());
         this.workbenchTestHelper.saveEditor(it_1, false);
       };
       ObjectExtensions.<XtextEditor>operator_doubleArrow(_openEditor, _function);
@@ -196,10 +187,8 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   public void assertGeneratedFiles(final int expectedLocalHistorySize) {
     try {
       IResourcesSetupUtil.fullBuild();
-      String _assertExist = this.assertExist(KeepLocalHistoryTest.GENERATE_FILE_NAME);
-      this.assertFileLocalHistory(_assertExist, expectedLocalHistorySize);
-      String _assertExist_1 = this.assertExist(KeepLocalHistoryTest.GENERATE_TRACK_FILE_NAME);
-      this.assertFileLocalHistoryEmpty(_assertExist_1);
+      this.assertFileLocalHistory(this.assertExist(KeepLocalHistoryTest.GENERATE_FILE_NAME), expectedLocalHistorySize);
+      this.assertFileLocalHistoryEmpty(this.assertExist(KeepLocalHistoryTest.GENERATE_TRACK_FILE_NAME));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -212,9 +201,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   public String assertExist(final String it) {
     String _xblockexpression = null;
     {
-      IFile _file = this.workbenchTestHelper.getFile(it);
-      boolean _exists = _file.exists();
-      Assert.assertTrue(_exists);
+      Assert.assertTrue(this.workbenchTestHelper.getFile(it).exists());
       _xblockexpression = it;
     }
     return _xblockexpression;
@@ -222,10 +209,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   
   public void assertFileLocalHistory(final String it, final int expectedLocalHistorySize) {
     try {
-      IFile _file = this.workbenchTestHelper.getFile(it);
-      IFileState[] _history = _file.getHistory(null);
-      int _size = ((List<IFileState>)Conversions.doWrapArray(_history)).size();
-      Assert.assertEquals(expectedLocalHistorySize, _size);
+      Assert.assertEquals(expectedLocalHistorySize, ((List<IFileState>)Conversions.doWrapArray(this.workbenchTestHelper.getFile(it).getHistory(null))).size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -248,10 +232,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   }
   
   public void setValue(final String preferenceName, final boolean value) {
-    IProject _project = this.workbenchTestHelper.getProject();
-    IPreferenceStore _writablePreferenceStore = this._iPreferenceStoreAccess.getWritablePreferenceStore(_project);
-    String _key = this.getKey(preferenceName);
-    _writablePreferenceStore.setValue(_key, value);
+    this._iPreferenceStoreAccess.getWritablePreferenceStore(this.workbenchTestHelper.getProject()).setValue(this.getKey(preferenceName), value);
   }
   
   public String getKey(final String preferenceName) {

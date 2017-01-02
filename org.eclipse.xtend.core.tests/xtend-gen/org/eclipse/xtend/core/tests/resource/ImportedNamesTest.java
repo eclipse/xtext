@@ -4,7 +4,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -90,15 +89,11 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      Resource _eResource = file.eResource();
-      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
-      Iterable<QualifiedName> _importedNames = description.getImportedNames();
+      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(file.eResource());
       final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
-        String _lastSegment = it.getLastSegment();
-        return Boolean.valueOf(this.primitives.contains(_lastSegment));
+        return Boolean.valueOf(this.primitives.contains(it.getLastSegment()));
       };
-      boolean _exists = IterableExtensions.<QualifiedName>exists(_importedNames, _function);
-      Assert.assertFalse(_exists);
+      Assert.assertFalse(IterableExtensions.<QualifiedName>exists(description.getImportedNames(), _function));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -120,15 +115,12 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      Resource _eResource = file.eResource();
-      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
+      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(file.eResource());
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
       final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
-        String _lastSegment = it.getLastSegment();
-        return Boolean.valueOf(_lastSegment.equals("collection"));
+        return Boolean.valueOf(it.getLastSegment().equals("collection"));
       };
-      boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
-      Assert.assertTrue(("" + importedNames), _exists);
+      Assert.assertTrue(("" + importedNames), IterableExtensions.<QualifiedName>exists(importedNames, _function));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -155,15 +147,12 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      Resource _eResource = file.eResource();
-      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
+      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(file.eResource());
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
       final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
-        String _lastSegment = it.getLastSegment();
-        return Boolean.valueOf(_lastSegment.equals("runnable"));
+        return Boolean.valueOf(it.getLastSegment().equals("runnable"));
       };
-      boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
-      Assert.assertTrue(("" + importedNames), _exists);
+      Assert.assertTrue(("" + importedNames), IterableExtensions.<QualifiedName>exists(importedNames, _function));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -184,16 +173,14 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      Resource _eResource = file.eResource();
-      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
+      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(file.eResource());
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
       final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
         String _string = it.toString();
         String _lowerCase = "types.StaticOuterClass$StaticMiddleClass$StaticInnerClass".toLowerCase();
         return Boolean.valueOf(Objects.equal(_string, _lowerCase));
       };
-      boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
-      Assert.assertTrue(("" + importedNames), _exists);
+      Assert.assertTrue(("" + importedNames), IterableExtensions.<QualifiedName>exists(importedNames, _function));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -214,16 +201,14 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      Resource _eResource = file.eResource();
-      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
+      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(file.eResource());
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
       final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
         String _string = it.toString();
         String _lowerCase = "types.StaticOuterClass$Unknown".toLowerCase();
         return Boolean.valueOf(Objects.equal(_string, _lowerCase));
       };
-      boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
-      Assert.assertTrue(("" + importedNames), _exists);
+      Assert.assertTrue(("" + importedNames), IterableExtensions.<QualifiedName>exists(importedNames, _function));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -244,16 +229,14 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
-      Resource _eResource = file.eResource();
-      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
+      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(file.eResource());
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
       final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
         String _string = it.toString();
         String _lowerCase = "types.StaticOuterClass$StaticMiddleClass$Unknown".toLowerCase();
         return Boolean.valueOf(Objects.equal(_string, _lowerCase));
       };
-      boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
-      Assert.assertTrue(("" + importedNames), _exists);
+      Assert.assertTrue(("" + importedNames), IterableExtensions.<QualifiedName>exists(importedNames, _function));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

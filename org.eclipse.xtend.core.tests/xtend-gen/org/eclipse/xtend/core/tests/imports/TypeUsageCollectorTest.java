@@ -8,11 +8,9 @@
 package org.eclipse.xtend.core.tests.imports;
 
 import com.google.inject.Inject;
-import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.imports.TypeUsage;
@@ -36,9 +34,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
   
   private void hasUnresolvedType(final CharSequence xtendFile, final String... typeNames) {
     try {
-      String _string = xtendFile.toString();
-      XtendFile _file = this.file(_string);
-      final Resource resource = _file.eResource();
+      final Resource resource = this.file(xtendFile.toString()).eResource();
       this.hasUnresolvedType(resource, typeNames);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -47,21 +43,16 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
   
   private void hasUnresolvedType(final Resource resource, final String... typeNames) {
     final TypeUsages typeUsages = this.typeUsageCollector.collectTypeUsages(((XtextResource) resource));
-    List<TypeUsage> _unresolvedTypeUsages = typeUsages.getUnresolvedTypeUsages();
     final Function1<TypeUsage, String> _function = (TypeUsage it) -> {
       return it.getUsedTypeName();
     };
-    List<String> _map = ListExtensions.<TypeUsage, String>map(_unresolvedTypeUsages, _function);
-    final Set<String> usedNames = IterableExtensions.<String>toSet(_map);
-    Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(typeNames)));
-    Assert.assertEquals(_set, usedNames);
+    final Set<String> usedNames = IterableExtensions.<String>toSet(ListExtensions.<TypeUsage, String>map(typeUsages.getUnresolvedTypeUsages(), _function));
+    Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(typeNames))), usedNames);
   }
   
   private void hasUnresolvedTypesWithErrors(final CharSequence xtendFile, final String... typeNames) {
     try {
-      String _string = xtendFile.toString();
-      XtendFile _fileWithErrors = this.fileWithErrors(_string);
-      final Resource resource = _fileWithErrors.eResource();
+      final Resource resource = this.fileWithErrors(xtendFile.toString()).eResource();
       this.hasUnresolvedType(resource, typeNames);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -70,18 +61,13 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
   
   private void hasUnresolvedTypeSuffix(final CharSequence xtendFile, final String... suffix) {
     try {
-      String _string = xtendFile.toString();
-      XtendFile _file = this.file(_string);
-      final Resource resource = _file.eResource();
+      final Resource resource = this.file(xtendFile.toString()).eResource();
       final TypeUsages typeUsages = this.typeUsageCollector.collectTypeUsages(((XtextResource) resource));
-      List<TypeUsage> _unresolvedTypeUsages = typeUsages.getUnresolvedTypeUsages();
       final Function1<TypeUsage, String> _function = (TypeUsage it) -> {
         return it.getSuffix();
       };
-      List<String> _map = ListExtensions.<TypeUsage, String>map(_unresolvedTypeUsages, _function);
-      final Set<String> foundSuffix = IterableExtensions.<String>toSet(_map);
-      Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(suffix)));
-      Assert.assertEquals(_set, foundSuffix);
+      final Set<String> foundSuffix = IterableExtensions.<String>toSet(ListExtensions.<TypeUsage, String>map(typeUsages.getUnresolvedTypeUsages(), _function));
+      Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(suffix))), foundSuffix);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

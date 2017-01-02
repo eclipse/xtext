@@ -59,8 +59,7 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(_parse);
+      this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -93,8 +92,7 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XABSTRACT_FEATURE_CALL, IssueCodes.ASSIGNMENT_TO_FINAL);
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XABSTRACT_FEATURE_CALL, IssueCodes.ASSIGNMENT_TO_FINAL);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -124,8 +122,7 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XABSTRACT_FEATURE_CALL, IssueCodes.ASSIGNMENT_TO_FINAL);
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XABSTRACT_FEATURE_CALL, IssueCodes.ASSIGNMENT_TO_FINAL);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -160,8 +157,7 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XABSTRACT_FEATURE_CALL, IssueCodes.ASSIGNMENT_TO_FINAL);
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XABSTRACT_FEATURE_CALL, IssueCodes.ASSIGNMENT_TO_FINAL);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -196,8 +192,7 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XABSTRACT_FEATURE_CALL, IssueCodes.ASSIGNMENT_TO_FINAL);
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XABSTRACT_FEATURE_CALL, IssueCodes.ASSIGNMENT_TO_FINAL);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -232,8 +227,7 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoErrors(_parse);
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -263,8 +257,7 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.ASSIGNMENT_TO_NO_VARIABLE);
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.ASSIGNMENT_TO_NO_VARIABLE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -305,8 +298,7 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.ASSIGNMENT_TO_NO_VARIABLE);
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XFEATURE_CALL, IssueCodes.ASSIGNMENT_TO_NO_VARIABLE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -348,8 +340,7 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoErrors(_parse);
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -391,8 +382,7 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoErrors(_parse);
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -434,8 +424,7 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoErrors(_parse);
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

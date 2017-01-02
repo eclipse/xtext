@@ -36,8 +36,7 @@ public class CheckMutableEnumerationTypeDeclarationProcessor implements Register
         final Procedure1<String> _function = (String identifier) -> {
           final Procedure1<MutableEnumerationValueDeclaration> _function_1 = (MutableEnumerationValueDeclaration it) -> {
           };
-          MutableEnumerationValueDeclaration _addValue = enumeration.addValue(identifier, _function_1);
-          _addValue.remove();
+          enumeration.addValue(identifier, _function_1).remove();
         };
         MutableAssert.assertValidJavaIdentifier("name", _function);
         final Procedure0 _function_1 = () -> {
@@ -47,8 +46,7 @@ public class CheckMutableEnumerationTypeDeclarationProcessor implements Register
         final Procedure0 _function_2 = () -> {
           final Procedure1<MutableEnumerationValueDeclaration> _function_3 = (MutableEnumerationValueDeclaration it) -> {
           };
-          MutableEnumerationValueDeclaration _addValue = enumeration.addValue("A", _function_3);
-          _addValue.setVisibility(Visibility.PRIVATE);
+          enumeration.addValue("A", _function_3).setVisibility(Visibility.PRIVATE);
         };
         MutableAssert.<UnsupportedOperationException>assertThrowable(UnsupportedOperationException.class, "It is not possible to change visibility of enumeration value.", _function_2);
       }

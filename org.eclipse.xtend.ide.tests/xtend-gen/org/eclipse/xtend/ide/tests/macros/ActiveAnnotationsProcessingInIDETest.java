@@ -7,9 +7,6 @@ import com.google.inject.Provider;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -21,14 +18,10 @@ import org.eclipse.xtend.core.tests.macro.AbstractReusableActiveAnnotationTests;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
@@ -158,34 +151,22 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("usercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      XtendFile _xtendFile = it.getXtendFile();
-      EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
-      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-      final XtendClass xtendClass = IterableExtensions.<XtendClass>head(_filter);
+      final XtendClass xtendClass = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(it.getXtendFile().getXtendTypes(), XtendClass.class));
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/myannotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Comment");
       this.assertDocumentation(_builder_2, xtendClass);
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/myannotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");
-      EList<XtendMember> _members = xtendClass.getMembers();
-      Iterable<XtendField> _filter_1 = Iterables.<XtendField>filter(_members, XtendField.class);
       final Function1<XtendField, Boolean> _function_1 = (XtendField it_1) -> {
-        String _name = it_1.getName();
-        return Boolean.valueOf(_name.equals("object"));
+        return Boolean.valueOf(it_1.getName().equals("object"));
       };
-      Iterable<XtendField> _filter_2 = IterableExtensions.<XtendField>filter(_filter_1, _function_1);
-      XtendField _head = IterableExtensions.<XtendField>head(_filter_2);
-      JvmTypeReference _type = _head.getType();
-      JvmType _type_1 = _type.getType();
-      this.assertDocumentation(_builder_3, _type_1);
+      this.assertDocumentation(_builder_3, IterableExtensions.<XtendField>head(IterableExtensions.<XtendField>filter(Iterables.<XtendField>filter(xtendClass.getMembers(), XtendField.class), _function_1)).getType().getType());
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
   
   public void assertDocumentation(final CharSequence charSequence, final EObject sourceElement) {
-    String _string = charSequence.toString();
-    String _documentation = this.documentationProvider.getDocumentation(sourceElement);
-    Assert.assertEquals(_string, _documentation);
+    Assert.assertEquals(charSequence.toString(), this.documentationProvider.getDocumentation(sourceElement));
   }
   
   @Inject
@@ -205,16 +186,12 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   public static void createProjects() {
     try {
       TargetPlatformUtil.setTargetPlatform();
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");
-      IJavaProject _create = JavaCore.create(_createPluginProject);
-      ActiveAnnotationsProcessingInIDETest.macroProject = _create;
-      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-        "org.eclipse.xtend.core.tests", 
-        "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
-      IJavaProject _create_1 = JavaCore.create(_createPluginProject_1);
-      ActiveAnnotationsProcessingInIDETest.userProject = _create_1;
-      IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project, "myannotation");
+      ActiveAnnotationsProcessingInIDETest.macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject("macroProject"));
+      ActiveAnnotationsProcessingInIDETest.userProject = JavaCore.create(
+        WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
+          "org.eclipse.xtend.core.tests", 
+          "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
+      WorkbenchTestHelper.addExportedPackages(ActiveAnnotationsProcessingInIDETest.macroProject.getProject(), "myannotation");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -237,8 +214,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     this.macroFile.delete(true, null);
     boolean _notEquals = (!Objects.equal("myannotation", this.exportedPackage));
     if (_notEquals) {
-      IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
-      boolean _removeExportedPackages = WorkbenchTestHelper.removeExportedPackages(_project, this.exportedPackage);
+      boolean _removeExportedPackages = WorkbenchTestHelper.removeExportedPackages(ActiveAnnotationsProcessingInIDETest.macroProject.getProject(), this.exportedPackage);
       if (_removeExportedPackages) {
         IResourcesSetupUtil.waitForBuild();
       }
@@ -254,43 +230,23 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   @Override
   public void assertProcessing(final Pair<String, String> macroContent, final Pair<String, String> clientContent, final Procedure1<? super CompilationUnitImpl> expectations) {
     try {
-      String _key = macroContent.getKey();
-      String _value = macroContent.getValue();
-      String _string = _value.toString();
-      IFile _newSource = this.newSource(ActiveAnnotationsProcessingInIDETest.macroProject, _key, _string);
-      this.macroFile = _newSource;
-      String _key_1 = macroContent.getKey();
-      final int lidx = _key_1.lastIndexOf("/");
+      this.macroFile = this.newSource(ActiveAnnotationsProcessingInIDETest.macroProject, macroContent.getKey(), macroContent.getValue().toString());
+      final int lidx = macroContent.getKey().lastIndexOf("/");
       if ((lidx != (-1))) {
-        String _key_2 = macroContent.getKey();
-        String _substring = _key_2.substring(0, lidx);
-        String _replace = _substring.replace("/", ".");
-        this.exportedPackage = _replace;
-        IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
-        boolean _addExportedPackages = WorkbenchTestHelper.addExportedPackages(_project, this.exportedPackage);
+        this.exportedPackage = macroContent.getKey().substring(0, lidx).replace("/", ".");
+        boolean _addExportedPackages = WorkbenchTestHelper.addExportedPackages(ActiveAnnotationsProcessingInIDETest.macroProject.getProject(), this.exportedPackage);
         if (_addExportedPackages) {
           IResourcesSetupUtil.reallyWaitForAutoBuild();
         }
       }
-      String _key_3 = clientContent.getKey();
-      String _value_1 = clientContent.getValue();
-      String _string_1 = _value_1.toString();
-      IFile _newSource_1 = this.newSource(ActiveAnnotationsProcessingInIDETest.userProject, _key_3, _string_1);
-      this.clientFile = _newSource_1;
+      this.clientFile = this.newSource(ActiveAnnotationsProcessingInIDETest.userProject, clientContent.getKey(), clientContent.getValue().toString());
       IResourcesSetupUtil.waitForBuild();
-      IProject _project_1 = ActiveAnnotationsProcessingInIDETest.userProject.getProject();
-      final ResourceSet resourceSet = this.resourceSetProvider.get(_project_1);
-      IPath _fullPath = this.clientFile.getFullPath();
-      String _string_2 = _fullPath.toString();
-      URI _createPlatformResourceURI = URI.createPlatformResourceURI(_string_2, true);
-      final Resource resource = resourceSet.getResource(_createPlatformResourceURI, true);
+      final ResourceSet resourceSet = this.resourceSetProvider.get(ActiveAnnotationsProcessingInIDETest.userProject.getProject());
+      final Resource resource = resourceSet.getResource(URI.createPlatformResourceURI(this.clientFile.getFullPath().toString(), true), true);
       EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
       this.validator.validate(resource, CheckMode.FAST_ONLY, CancelIndicator.NullImpl);
       final CompilationUnitImpl unit = this.compilationUnitProvider.get();
-      EList<EObject> _contents = resource.getContents();
-      Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
-      XtendFile _head = IterableExtensions.<XtendFile>head(_filter);
-      unit.setXtendFile(_head);
+      unit.setXtendFile(IterableExtensions.<XtendFile>head(Iterables.<XtendFile>filter(resource.getContents(), XtendFile.class)));
       expectations.apply(unit);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -299,10 +255,8 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   
   public IFile newSource(final IJavaProject it, final String fileName, final String contents) {
     try {
-      IProject _project = it.getProject();
-      final IFile result = _project.getFile(("src/" + fileName));
-      IContainer _parent = result.getParent();
-      this.createIfNotExistent(_parent);
+      final IFile result = it.getProject().getFile(("src/" + fileName));
+      this.createIfNotExistent(result.getParent());
       StringInputStream _stringInputStream = new StringInputStream(contents);
       result.create(_stringInputStream, true, null);
       return result;
@@ -316,8 +270,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       boolean _exists = container.exists();
       boolean _not = (!_exists);
       if (_not) {
-        IContainer _parent = container.getParent();
-        this.createIfNotExistent(_parent);
+        this.createIfNotExistent(container.getParent());
         ((IFolder) container).create(true, false, null);
       }
     } catch (Throwable _e) {

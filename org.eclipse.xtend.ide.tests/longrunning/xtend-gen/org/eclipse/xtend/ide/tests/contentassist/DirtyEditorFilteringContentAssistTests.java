@@ -19,7 +19,6 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -88,23 +87,18 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       _builder_2.append("class MyDirtyType2 {}");
       _builder_2.newLine();
       _document.set(_builder_2.toString());
-      int _indexOf = clientModel.indexOf("|");
-      final ICompletionProposal[] proposals = this.computeCompletionProposals(clientEditor, fooEditor, _indexOf);
-      int _size = ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size();
-      Assert.assertEquals(1, _size);
+      final ICompletionProposal[] proposals = this.computeCompletionProposals(clientEditor, fooEditor, clientModel.indexOf("|"));
+      Assert.assertEquals(1, ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size());
       final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal e) -> {
-        String _string = e.toString();
-        return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType - "));
+        return Boolean.valueOf(e.toString().startsWith("Proposal: MyDirtyType - "));
       };
       boolean _exists = IterableExtensions.<ICompletionProposal>exists(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function);
       boolean _not = (!_exists);
       Assert.assertTrue(_not);
       final Function1<ICompletionProposal, Boolean> _function_1 = (ICompletionProposal e) -> {
-        String _string = e.toString();
-        return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType2 - "));
+        return Boolean.valueOf(e.toString().startsWith("Proposal: MyDirtyType2 - "));
       };
-      boolean _exists_1 = IterableExtensions.<ICompletionProposal>exists(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function_1);
-      Assert.assertTrue(_exists_1);
+      Assert.assertTrue(IterableExtensions.<ICompletionProposal>exists(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function_1));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -145,21 +139,17 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       _builder_2.append("class MyDirtyType2 {}");
       _builder_2.newLine();
       _document.set(_builder_2.toString());
-      int _indexOf = clientModel.indexOf("|");
-      final ICompletionProposal[] proposals = this.computeCompletionProposals(clientEditor, fooEditor, _indexOf);
+      final ICompletionProposal[] proposals = this.computeCompletionProposals(clientEditor, fooEditor, clientModel.indexOf("|"));
       final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal e) -> {
-        String _string = e.toString();
-        return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType - "));
+        return Boolean.valueOf(e.toString().startsWith("Proposal: MyDirtyType - "));
       };
       boolean _exists = IterableExtensions.<ICompletionProposal>exists(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function);
       boolean _not = (!_exists);
       Assert.assertTrue(_not);
       final Function1<ICompletionProposal, Boolean> _function_1 = (ICompletionProposal e) -> {
-        String _string = e.toString();
-        return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType2 - "));
+        return Boolean.valueOf(e.toString().startsWith("Proposal: MyDirtyType2 - "));
       };
-      boolean _exists_1 = IterableExtensions.<ICompletionProposal>exists(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function_1);
-      Assert.assertTrue(_exists_1);
+      Assert.assertTrue(IterableExtensions.<ICompletionProposal>exists(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function_1));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -168,10 +158,8 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
   public ICompletionProposal[] computeCompletionProposals(final XtextEditor editorForCompletion, final XtextEditor dirtyEditor, final int cursorPosition) throws BadLocationException {
     this.syncUtil.waitForReconciler(dirtyEditor);
     final ISourceViewer sourceViewer = editorForCompletion.getInternalSourceViewer();
-    XtextSourceViewerConfiguration _xtextSourceViewerConfiguration = editorForCompletion.getXtextSourceViewerConfiguration();
-    final IContentAssistant contentAssistant = _xtextSourceViewerConfiguration.getContentAssistant(sourceViewer);
-    IXtextDocument _document = editorForCompletion.getDocument();
-    final String contentType = _document.getContentType(cursorPosition);
+    final IContentAssistant contentAssistant = editorForCompletion.getXtextSourceViewerConfiguration().getContentAssistant(sourceViewer);
+    final String contentType = editorForCompletion.getDocument().getContentType(cursorPosition);
     final IContentAssistProcessor processor = contentAssistant.getContentAssistProcessor(contentType);
     if ((processor != null)) {
       return processor.computeCompletionProposals(sourceViewer, cursorPosition);

@@ -7,13 +7,10 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
-import java.util.List;
 import org.eclipse.xtend.core.tests.macro.MutableAssert;
 import org.eclipse.xtend.lib.macro.AbstractMethodProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -26,8 +23,7 @@ public class CheckMutableMethodDeclarationProcessor extends AbstractMethodProces
   @Override
   public void doTransform(final MutableMethodDeclaration annotatedMethod, @Extension final TransformationContext context) {
     final Procedure1<String> _function = (String identifier) -> {
-      MutableTypeParameterDeclaration _addTypeParameter = annotatedMethod.addTypeParameter(identifier);
-      _addTypeParameter.remove();
+      annotatedMethod.addTypeParameter(identifier).remove();
     };
     MutableAssert.assertValidJavaIdentifier("name", _function);
     final Procedure0 _function_1 = () -> {
@@ -38,13 +34,9 @@ public class CheckMutableMethodDeclarationProcessor extends AbstractMethodProces
       annotatedMethod.addTypeParameter("T", new TypeReference[] { null });
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "upperBounds cannot contain null", _function_2);
-    List<TypeReference> _emptyList = CollectionLiterals.<TypeReference>emptyList();
-    MutableTypeParameterDeclaration _addTypeParameter = annotatedMethod.addTypeParameter("T", ((TypeReference[])Conversions.unwrapArray(_emptyList, TypeReference.class)));
-    _addTypeParameter.remove();
+    annotatedMethod.addTypeParameter("T", ((TypeReference[])Conversions.unwrapArray(CollectionLiterals.<TypeReference>emptyList(), TypeReference.class))).remove();
     final Procedure1<String> _function_3 = (String identifier) -> {
-      TypeReference _newTypeReference = context.newTypeReference(String.class);
-      MutableParameterDeclaration _addParameter = annotatedMethod.addParameter(identifier, _newTypeReference);
-      _addParameter.remove();
+      annotatedMethod.addParameter(identifier, context.newTypeReference(String.class)).remove();
     };
     MutableAssert.assertValidJavaIdentifier("name", _function_3);
     final Procedure0 _function_4 = () -> {
@@ -67,7 +59,6 @@ public class CheckMutableMethodDeclarationProcessor extends AbstractMethodProces
       annotatedMethod.setExceptions(new TypeReference[] { null });
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "exceptions cannot contain null", _function_8);
-    List<TypeReference> _emptyList_1 = CollectionLiterals.<TypeReference>emptyList();
-    annotatedMethod.setExceptions(((TypeReference[])Conversions.unwrapArray(_emptyList_1, TypeReference.class)));
+    annotatedMethod.setExceptions(((TypeReference[])Conversions.unwrapArray(CollectionLiterals.<TypeReference>emptyList(), TypeReference.class)));
   }
 }

@@ -28,9 +28,7 @@ public class Bug415030Test extends AbstractXtendContentAssistBugTest {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("to");
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      ContentAssistProcessorTestBuilder _assertText = _append.assertText("\n\toverride toString() {\n\t\tsuper.toString()\n\t}");
-      ContentAssistProcessorTestBuilder _applyProposal = _assertText.applyProposal();
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).assertText("\n\toverride toString() {\n\t\tsuper.toString()\n\t}").applyProposal();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("class A {");
       _builder_1.newLine();
@@ -59,9 +57,7 @@ public class Bug415030Test extends AbstractXtendContentAssistBugTest {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("to");
-      ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-      ContentAssistProcessorTestBuilder _assertText = _append.assertText("\n\toverride toString() {\n\t\tsuper.toString()\n\t}");
-      ContentAssistProcessorTestBuilder _appendAndApplyProposal = _assertText.appendAndApplyProposal("Str");
+      ContentAssistProcessorTestBuilder _appendAndApplyProposal = _newBuilder.append(_builder.toString()).assertText("\n\toverride toString() {\n\t\tsuper.toString()\n\t}").appendAndApplyProposal("Str");
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("class A {");
       _builder_1.newLine();

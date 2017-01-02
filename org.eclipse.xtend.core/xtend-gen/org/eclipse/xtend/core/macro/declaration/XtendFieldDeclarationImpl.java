@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -16,50 +15,38 @@ import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.XExpression;
 
 @SuppressWarnings("all")
 public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> implements FieldDeclaration {
   @Override
   public Visibility getVisibility() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    XtendField _delegate = this.getDelegate();
-    JvmVisibility _visibility = _delegate.getVisibility();
-    return _compilationUnit.toVisibility(_visibility);
+    return this.getCompilationUnit().toVisibility(this.getDelegate().getVisibility());
   }
   
   @Override
   public String getSimpleName() {
-    XtendField _delegate = this.getDelegate();
-    return _delegate.getName();
+    return this.getDelegate().getName();
   }
   
   @Override
   public Expression getInitializer() {
-    XtendField _delegate = this.getDelegate();
-    XExpression _initialValue = _delegate.getInitialValue();
+    XExpression _initialValue = this.getDelegate().getInitialValue();
     boolean _tripleEquals = (_initialValue == null);
     if (_tripleEquals) {
       return null;
     }
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    XtendField _delegate_1 = this.getDelegate();
-    XExpression _initialValue_1 = _delegate_1.getInitialValue();
-    return _compilationUnit.toExpression(_initialValue_1);
+    return this.getCompilationUnit().toExpression(this.getDelegate().getInitialValue());
   }
   
   @Override
   public boolean isFinal() {
-    XtendField _delegate = this.getDelegate();
-    return _delegate.isFinal();
+    return this.getDelegate().isFinal();
   }
   
   @Override
   public boolean isStatic() {
-    XtendField _delegate = this.getDelegate();
-    return _delegate.isStatic();
+    return this.getDelegate().isStatic();
   }
   
   @Override
@@ -74,10 +61,7 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
   
   @Override
   public TypeReference getType() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    XtendField _delegate = this.getDelegate();
-    JvmTypeReference _type = _delegate.getType();
-    return _compilationUnit.toTypeReference(_type);
+    return this.getCompilationUnit().toTypeReference(this.getDelegate().getType());
   }
   
   @Override

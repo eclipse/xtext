@@ -38,8 +38,7 @@ public class XtendFileJvmTreeModel extends XtendFileTreeModel {
       final Object element = this.getSuperCurrentEditorElement();
       Object _xifexpression = null;
       if ((element instanceof PsiEObject)) {
-        EObject _eObject = ((PsiEObject)element).getEObject();
-        EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(_eObject);
+        EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(((PsiEObject)element).getEObject());
         URI _uRI = null;
         if (_primaryJvmElement!=null) {
           _uRI=EcoreUtil.getURI(_primaryJvmElement);

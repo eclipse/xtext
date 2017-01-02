@@ -36,9 +36,7 @@ public class Bug370955Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    int _length = "toString".length();
-    _append.assertTextAtCursorPosition("toString", _length, 
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("toString", "toString".length(), 
       "!=", "!==", "+", "->", "<", "<=", "<=>", "==", "===", "=>", ">", ">=", "?:", 
       "toString");
   }
@@ -61,9 +59,7 @@ public class Bug370955Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    int _length = "toString".length();
-    _append.assertTextAtCursorPosition("toString", _length, 
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("toString", "toString".length(), 
       "!=", "!==", "+", "->", "<", "<=", "<=>", "==", "===", "=>", ">", ">=", "?:", 
       "toString");
   }
@@ -89,9 +85,7 @@ public class Bug370955Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    int _length = "toString".length();
-    _append.assertTextAtCursorPosition("toString", _length, 
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("toString", "toString".length(), 
       "!=", "!==", "+", "->", "<", "<=", "<=>", "==", "===", "=>", ">", ">=", "?:", 
       "toString");
   }
@@ -120,9 +114,7 @@ public class Bug370955Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    int _length = "toString".length();
-    _append.assertTextAtCursorPosition("toString", _length, 
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("toString", "toString".length(), 
       "!=", "!==", "+", "->", "<", "<=", "<=>", "==", "===", "=>", ">", ">=", "?:", 
       "toString");
   }

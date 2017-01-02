@@ -37,11 +37,8 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   
   protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected, final boolean validate) {
     try {
-      String _string = expected.toString();
-      boolean _contains = _string.contains("$");
-      Assert.assertFalse(_contains);
-      String _string_1 = model.toString();
-      final XtendFile xtendFile = this.file(_string_1, validate);
+      Assert.assertFalse(expected.toString().contains("$"));
+      final XtendFile xtendFile = this.file(model.toString(), validate);
       Resource _eResource = xtendFile.eResource();
       final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
       final StringBuilder builder = new StringBuilder(model);
@@ -64,12 +61,9 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
         int _offset_1 = it_1.getOffset();
         int _length = it_1.getLength();
         int _plus = (_offset_1 + _length);
-        String _text = it_1.getText();
-        builder.replace(_offset, _plus, _text);
+        builder.replace(_offset, _plus, it_1.getText());
       }
-      String _string_2 = expected.toString();
-      String _string_3 = builder.toString();
-      Assert.assertEquals(_string_2, _string_3);
+      Assert.assertEquals(expected.toString(), builder.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

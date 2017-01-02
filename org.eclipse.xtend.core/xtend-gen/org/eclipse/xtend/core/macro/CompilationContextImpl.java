@@ -31,8 +31,7 @@ public class CompilationContextImpl implements CompilationStrategy.CompilationCo
   
   public CompilationContextImpl(final ITreeAppendable appendable, final CompilationUnitImpl compilationUnit) {
     this.appendable = appendable;
-    ImportManager _importManager = this.getImportManager(appendable);
-    this.importManager = _importManager;
+    this.importManager = this.getImportManager(appendable);
     this.compilationUnit = compilationUnit;
   }
   

@@ -59,8 +59,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("ethod|", "methodA", "methodB", "main", "myInstance");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("ethod|", "methodA", "methodB", "main", "myInstance");
   }
   
   @Test
@@ -103,8 +102,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("ethod|", "methodA", "main");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("ethod|", "methodA", "main");
   }
   
   @Flaky
@@ -148,8 +146,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("ethod|", "methodB", "main()", "myInstance()");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("ethod|", "methodB", "main()", "myInstance()");
   }
   
   @Test
@@ -192,8 +189,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("ethod|", "main()");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("ethod|", "main()");
   }
   
   @Flaky
@@ -237,8 +233,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("ethod|", "methodA", "main", "myInstance");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("ethod|", "methodA", "main", "myInstance");
   }
   
   @Test
@@ -281,7 +276,6 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("ethod|", "main", "methodA");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("ethod|", "main", "methodA");
   }
 }

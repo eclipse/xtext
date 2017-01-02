@@ -7,26 +7,24 @@
  */
 package org.eclipse.xtend.idea.autoedit;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.idea.tests.LibraryUtil;
-import org.eclipse.xtext.xbase.idea.formatting.AbstractXbaseAdjustLineIndentTest;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtendAdjustLineIndentTest extends AbstractXbaseAdjustLineIndentTest {
+public class XtendAdjustLineIndentTest /* implements AbstractXbaseAdjustLineIndentTest  */{
   public XtendAdjustLineIndentTest() {
-    super(XtendFileType.INSTANCE);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method super(Object) is undefined"
+      + "\nThe method or field XtendFileType is undefined"
+      + "\nINSTANCE cannot be resolved");
   }
   
   @Override
-  protected void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
-    LibraryUtil.addXtendLibrary(model);
+  protected Object configureModule(final /* Module */Object module, final /* ModifiableRootModel */Object model, final /* ContentEntry */Object contentEntry) {
+    throw new Error("Unresolved compilation problems:"
+      + "\naddXtendLibrary cannot be resolved");
   }
   
   public void testXAssignment_05() {
@@ -688,39 +686,11 @@ public class XtendAdjustLineIndentTest extends AbstractXbaseAdjustLineIndentTest
   }
   
   protected void assertAdjustLineIndent(final CharSequence model, final String expectedAdjustedModel, final boolean wrap) {
-    if (wrap) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("class Foo {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("def foo() {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append(model, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("class Foo {");
-      _builder_1.newLine();
-      _builder_1.append("\t");
-      _builder_1.append("def foo() {");
-      _builder_1.newLine();
-      _builder_1.append("\t\t");
-      _builder_1.append(expectedAdjustedModel, "\t\t");
-      _builder_1.newLineIfNotEmpty();
-      _builder_1.append("\t");
-      _builder_1.append("}");
-      _builder_1.newLine();
-      _builder_1.append("}");
-      _builder_1.newLine();
-      super.assertAdjustLineIndent(_builder, _builder_1.toString());
-    } else {
-      super.assertAdjustLineIndent(model, expectedAdjustedModel);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field super is undefined"
+      + "\nThe method or field super is undefined"
+      + "\nassertAdjustLineIndent cannot be resolved"
+      + "\nassertAdjustLineIndent cannot be resolved");
   }
   
   @Override

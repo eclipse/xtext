@@ -7,10 +7,6 @@
  */
 package org.eclipse.xtend.idea.highlighting;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import junit.framework.TestCase;
-import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingLexer;
 import org.eclipse.xtend.idea.LightXtendTest;
 
 /**
@@ -18,32 +14,36 @@ import org.eclipse.xtend.idea.LightXtendTest;
  */
 @SuppressWarnings("all")
 public class XtendHighlightingLexerTest extends LightXtendTest {
-  @Inject
-  private Provider<XtendHighlightingLexer> lexerProvider;
+  /* @Inject
+   */private /* Provider<XtendHighlightingLexer> */Object lexerProvider;
   
   public void testStart_01() {
-    final XtendHighlightingLexer lexer = this.lexerProvider.get();
-    lexer.start("package mypackage");
-    int _tokenStart = lexer.getTokenStart();
-    TestCase.assertEquals(0, _tokenStart);
-    lexer.advance();
-    int _tokenStart_1 = lexer.getTokenStart();
-    TestCase.assertNotSame(Integer.valueOf(0), Integer.valueOf(_tokenStart_1));
-    lexer.start("package mypackage");
-    int _tokenStart_2 = lexer.getTokenStart();
-    TestCase.assertEquals(0, _tokenStart_2);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method assertEquals(int, Object) is undefined"
+      + "\nThe method assertNotSame(int, Object) is undefined"
+      + "\nThe method assertEquals(int, Object) is undefined"
+      + "\nThe field XtendHighlightingLexerTest.lexerProvider refers to the missing type Provider"
+      + "\nget cannot be resolved"
+      + "\nstart cannot be resolved"
+      + "\ntokenStart cannot be resolved"
+      + "\nadvance cannot be resolved"
+      + "\ntokenStart cannot be resolved"
+      + "\nstart cannot be resolved"
+      + "\ntokenStart cannot be resolved");
   }
   
   public void ignoreStart_02() {
-    final XtendHighlightingLexer lexer = this.lexerProvider.get();
-    lexer.start("\'\'\' «» \'\'\'");
-    int _tokenStart = lexer.getTokenStart();
-    TestCase.assertEquals(0, _tokenStart);
-    lexer.advance();
-    int _tokenStart_1 = lexer.getTokenStart();
-    TestCase.assertNotSame(Integer.valueOf(0), Integer.valueOf(_tokenStart_1));
-    lexer.start("\'\'\' «» \'\'\'");
-    int _tokenStart_2 = lexer.getTokenStart();
-    TestCase.assertEquals(0, _tokenStart_2);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method assertEquals(int, Object) is undefined"
+      + "\nThe method assertNotSame(int, Object) is undefined"
+      + "\nThe method assertEquals(int, Object) is undefined"
+      + "\nThe field XtendHighlightingLexerTest.lexerProvider refers to the missing type Provider"
+      + "\nget cannot be resolved"
+      + "\nstart cannot be resolved"
+      + "\ntokenStart cannot be resolved"
+      + "\nadvance cannot be resolved"
+      + "\ntokenStart cannot be resolved"
+      + "\nstart cannot be resolved"
+      + "\ntokenStart cannot be resolved");
   }
 }

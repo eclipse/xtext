@@ -12,7 +12,6 @@ import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.function.Consumer;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -25,7 +24,6 @@ import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller;
 import org.eclipse.xtext.builder.impl.javasupport.JdtQueuedBuildData;
 import org.eclipse.xtext.builder.impl.javasupport.UnconfirmedStructuralChangesDelta;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -90,8 +88,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   }
   
   public Collection<? extends IResourceDescription.Delta> assertThereAreDeltas(final Procedure0 producer, final String... expectedExportedNames) {
-    Collection<IResourceDescription.Delta> _assertDeltas = this.assertDeltas(producer);
-    return this.assertThereAreDeltas(_assertDeltas, expectedExportedNames);
+    return this.assertThereAreDeltas(this.assertDeltas(producer), expectedExportedNames);
   }
   
   public Collection<? extends IResourceDescription.Delta> assertThereAreDeltas(final Collection<? extends IResourceDescription.Delta> deltas, final String... expectedExportedNames) {
@@ -122,13 +119,13 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("There are unexpected exported names: ");
         _builder.append(unexpectedExportedNames);
-        int _length_1 = ((Object[])Conversions.unwrapArray(unexpectedExportedNames, Object.class)).length;
-        Assert.assertEquals(_builder.toString(), 0, _length_1);
+        Assert.assertEquals(_builder.toString(), 0, 
+          ((Object[])Conversions.unwrapArray(unexpectedExportedNames, Object.class)).length);
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("There are not expected exported names ");
         _builder_1.append(remainingExportedNames);
-        int _length_2 = ((Object[])Conversions.unwrapArray(remainingExportedNames, Object.class)).length;
-        Assert.assertEquals(_builder_1.toString(), 0, _length_2);
+        Assert.assertEquals(_builder_1.toString(), 0, 
+          ((Object[])Conversions.unwrapArray(remainingExportedNames, Object.class)).length);
       }
       _xblockexpression = deltas;
     }
@@ -149,8 +146,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     {
       HashSet<String> _exportedNames = this.getExportedNames(deltas);
       String _plus = ("There are deltas: " + _exportedNames);
-      int _size = deltas.size();
-      Assert.assertEquals(_plus, 0, _size);
+      Assert.assertEquals(_plus, 0, deltas.size());
       _xblockexpression = deltas;
     }
     return _xblockexpression;
@@ -173,8 +169,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
         }
         if (_exportedObjects!=null) {
           final Consumer<IEObjectDescription> _function_1 = (IEObjectDescription it_1) -> {
-            QualifiedName _name = it_1.getName();
-            String _string = _name.toString();
+            String _string = it_1.getName().toString();
             names.add(_string);
           };
           _exportedObjects.forEach(_function_1);
@@ -186,8 +181,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
         }
         if (_exportedObjects_1!=null) {
           final Consumer<IEObjectDescription> _function_2 = (IEObjectDescription it_1) -> {
-            QualifiedName _name = it_1.getName();
-            String _string = _name.toString();
+            String _string = it_1.getName().toString();
             names.add(_string);
           };
           _exportedObjects_1.forEach(_function_2);
@@ -196,7 +190,6 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
       }
       return _xblockexpression;
     };
-    Iterable<HashSet<String>> _map = IterableExtensions.map(deltas, _function);
     final Function2<HashSet<String>, HashSet<String>, HashSet<String>> _function_1 = (HashSet<String> t, HashSet<String> t2) -> {
       HashSet<String> _xblockexpression = null;
       {
@@ -205,7 +198,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
       }
       return _xblockexpression;
     };
-    return IterableExtensions.<HashSet<String>>reduce(_map, _function_1);
+    return IterableExtensions.<HashSet<String>>reduce(IterableExtensions.map(deltas, _function), _function_1);
   }
   
   public Collection<IResourceDescription.Delta> assertDeltas(final Procedure0 producer) {
@@ -238,8 +231,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     boolean _xblockexpression = false;
     {
       IResourcesSetupUtil.waitForBuild();
-      IProject _project = this.testHelper.getProject();
-      boolean _needRebuild = this.queuedBuildData.needRebuild(_project);
+      boolean _needRebuild = this.queuedBuildData.needRebuild(this.testHelper.getProject());
       _xblockexpression = (!_needRebuild);
     }
     return _xblockexpression;

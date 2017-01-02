@@ -40,14 +40,11 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
     {
       this.appendModifiers(appendable);
       if (this.varArgsFlag) {
-        LightweightTypeReference _componentType = ((ArrayTypeReference) this.type).getComponentType();
-        ISourceAppender _appendType = this.appendType(appendable, _componentType, "Object");
-        _appendType.append("...");
+        this.appendType(appendable, ((ArrayTypeReference) this.type).getComponentType(), "Object").append("...");
       } else {
         this.appendType(appendable, this.type, "Object");
       }
-      ISourceAppender _append = appendable.append(" ");
-      _xblockexpression = _append.append(this.name);
+      _xblockexpression = appendable.append(" ").append(this.name);
     }
     return _xblockexpression;
   }

@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.debug;
 
 import com.google.inject.Inject;
 import java.util.List;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.debug.AbstractTraceRegionFSA;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -322,8 +321,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
   public void assertLineNumbers(final CharSequence xtendCodeWithLineNumbers) {
     final AbstractTraceRegion region = this.getTraceRegion(xtendCodeWithLineNumbers);
     final List<LineMappingProvider.LineMapping> normalizedMappings = this.lineMappingProvider.getLineMapping(region);
-    String _string = xtendCodeWithLineNumbers.toString();
-    final String[] lines = _string.split("\n");
+    final String[] lines = xtendCodeWithLineNumbers.toString().split("\n");
     int _size = ((List<String>)Conversions.doWrapArray(lines)).size();
     int _minus = (_size - 1);
     IntegerRange _upTo = new IntegerRange(0, _minus);
@@ -343,29 +341,21 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
             _builder.append("(\'");
             _builder.append(line);
             _builder.append("\')");
-            String _string_1 = _builder.toString();
-            Assert.fail(_string_1);
+            Assert.fail(_builder.toString());
           }
           int _indexOf_1 = line.indexOf("//");
           int _plus = (_indexOf_1 + 2);
-          String _substring = line.substring(_plus);
-          final String expectation = _substring.trim();
+          final String expectation = line.substring(_plus).trim();
           int expTargetStart = (-1);
           int expTargetEnd = (-1);
           int _indexOf_2 = expectation.indexOf("..");
           boolean _notEquals = (_indexOf_2 != (-1));
           if (_notEquals) {
             final int idx = expectation.indexOf("..");
-            String _substring_1 = expectation.substring(0, idx);
-            int _parseInt = Integer.parseInt(_substring_1);
-            expTargetStart = _parseInt;
-            String _substring_2 = expectation.substring((idx + 2));
-            int _parseInt_1 = Integer.parseInt(_substring_2);
-            expTargetEnd = _parseInt_1;
+            expTargetStart = Integer.parseInt(expectation.substring(0, idx));
+            expTargetEnd = Integer.parseInt(expectation.substring((idx + 2)));
           } else {
-            int _parseInt_2 = Integer.parseInt(expectation);
-            int _expTargetEnd = (expTargetEnd = _parseInt_2);
-            expTargetStart = _expTargetEnd;
+            expTargetStart = (expTargetEnd = Integer.parseInt(expectation));
           }
           Assert.assertEquals(line, expTargetStart, mapping.targetStartLine);
           Assert.assertEquals(("unexpected end in line : " + line), expTargetEnd, mapping.targetEndLine);
@@ -391,14 +381,11 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
   
   public AbstractTraceRegion getTraceRegion(final CharSequence xtendCode) {
     try {
-      String _string = xtendCode.toString();
-      final XtendClass clazz = super.clazz(_string);
+      final XtendClass clazz = super.clazz(xtendCode.toString());
       final AbstractTraceRegionFSA fsa = new AbstractTraceRegionFSA();
-      Resource _eResource = clazz.eResource();
-      this.generator.doGenerate(_eResource, fsa);
+      this.generator.doGenerate(clazz.eResource(), fsa);
       final AbstractTraceRegion result = ((ITraceRegionProvider) fsa.charSequence).getTraceRegion();
-      String _string_1 = fsa.charSequence.toString();
-      this.print(result, _string_1);
+      this.print(result, fsa.charSequence.toString());
       return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

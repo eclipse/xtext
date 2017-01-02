@@ -58,8 +58,7 @@ public class ValidationBug371957Test extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -91,8 +90,7 @@ public class ValidationBug371957Test extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoErrors(_parse);
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -121,8 +119,7 @@ public class ValidationBug371957Test extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(_parse, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -151,8 +148,7 @@ public class ValidationBug371957Test extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      XtendFile _parse = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoErrors(_parse);
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

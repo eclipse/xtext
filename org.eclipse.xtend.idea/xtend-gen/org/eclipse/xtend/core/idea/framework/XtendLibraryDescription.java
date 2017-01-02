@@ -64,8 +64,7 @@ public class XtendLibraryDescription extends CustomLibraryDescription {
       HashMap<OrderRootType, List<String>> roots;
     }
     
-    List<XtendLibraryPresentationProvider> _providers = XtendLibraryDescription.getProviders();
-    final XtendLibraryPresentationProvider provider = IterableExtensions.<XtendLibraryPresentationProvider>head(_providers);
+    final XtendLibraryPresentationProvider provider = IterableExtensions.<XtendLibraryPresentationProvider>head(XtendLibraryDescription.getProviders());
     if ((provider == null)) {
       return null;
     }
@@ -92,11 +91,10 @@ public class XtendLibraryDescription extends CustomLibraryDescription {
   }
   
   public HashMap<OrderRootType, List<String>> libraryRoots() {
-    List<? extends Class<?>> _detectorClasses = XtendLibraryDescription.getDetectorClasses();
     final Function1<Class<?>, String> _function = (Class<?> it) -> {
       return this.getUrlForLibraryRoot(it);
     };
-    List<String> _map = ListExtensions.map(_detectorClasses, _function);
+    List<String> _map = ListExtensions.map(XtendLibraryDescription.getDetectorClasses(), _function);
     Pair<OrderRootType, List<String>> _mappedTo = Pair.<OrderRootType, List<String>>of(OrderRootType.CLASSES, _map);
     return CollectionLiterals.<OrderRootType, List<String>>newHashMap(_mappedTo);
   }
@@ -115,15 +113,13 @@ public class XtendLibraryDescription extends CustomLibraryDescription {
     {
       String _jarPathForClass = PathUtil.getJarPathForClass(clazz);
       final File libraryRoot = new File(_jarPathForClass);
-      LocalFileSystem _instance = LocalFileSystem.getInstance();
-      _instance.refreshAndFindFileByIoFile(libraryRoot);
+      LocalFileSystem.getInstance().refreshAndFindFileByIoFile(libraryRoot);
       _xblockexpression = VfsUtil.getUrlForLibraryRoot(libraryRoot);
     }
     return _xblockexpression;
   }
   
   protected static List<XtendLibraryPresentationProvider> getProviders() {
-    LibraryPresentationProvider[] _extensions = LibraryPresentationProvider.EP_NAME.getExtensions();
-    return ContainerUtil.<LibraryPresentationProvider, XtendLibraryPresentationProvider>findAll(_extensions, XtendLibraryPresentationProvider.class);
+    return ContainerUtil.<LibraryPresentationProvider, XtendLibraryPresentationProvider>findAll(LibraryPresentationProvider.EP_NAME.getExtensions(), XtendLibraryPresentationProvider.class);
   }
 }
