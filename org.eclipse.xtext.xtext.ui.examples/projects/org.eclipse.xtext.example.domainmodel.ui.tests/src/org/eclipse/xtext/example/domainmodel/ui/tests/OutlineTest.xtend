@@ -1,7 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.ui.tests
 
 import org.eclipse.xtext.example.domainmodel.ui.internal.DomainmodelActivator
-import org.eclipse.xtext.example.domainmodel.ui.tests.DomainmodelUiInjectorProvider
 import org.eclipse.xtext.junit4.ui.AbstractOutlineTest
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner

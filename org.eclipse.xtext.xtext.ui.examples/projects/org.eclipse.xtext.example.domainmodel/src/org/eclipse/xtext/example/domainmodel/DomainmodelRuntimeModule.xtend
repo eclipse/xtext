@@ -12,8 +12,8 @@ import org.eclipse.xtext.resource.persistence.IResourceStorageFacade
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelTargetURICollector
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageFacade
 
-/** 
- * used to register components to be used within the IDE.
+/**
+ * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
 	def Class<? extends IResourceStorageFacade> bindResourceStorageFacade() {

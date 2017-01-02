@@ -1,13 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Ide
-Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ide
-Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr,
- org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.internal
+Bundle-Name: Xtext Domainmodel Example - Generic IDE
+Bundle-Vendor: Eclipse Xtext
+Bundle-Version: 2.11.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide,
  org.antlr.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr
 

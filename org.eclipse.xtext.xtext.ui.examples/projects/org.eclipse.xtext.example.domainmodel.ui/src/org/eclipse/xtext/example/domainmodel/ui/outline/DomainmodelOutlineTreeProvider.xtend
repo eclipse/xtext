@@ -8,8 +8,10 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Feature
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode
 
-/** 
- * customization of the default outline structure
+/**
+ * Customization of the default outline structure.
+ *
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#outline
  */
 class DomainmodelOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	override protected void _createChildren(DocumentRootNode parentNode, EObject rootElement) {

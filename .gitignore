@@ -5,3 +5,4 @@ target/
 *._trace
 *.xtendbin
 .antlr-generator-*.jar
+.DS_Store
