@@ -13,7 +13,6 @@ import com.google.inject.Singleton;
 import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -40,19 +39,16 @@ public class ValidationService extends AbstractCachedService<ValidationResult> {
    */
   @Override
   public ValidationResult compute(final IXtextWebDocument it, final CancelIndicator cancelIndicator) {
-    XtextResource _resource = it.getResource();
-    final List<Issue> issues = this.resourceValidator.validate(_resource, CheckMode.ALL, cancelIndicator);
+    final List<Issue> issues = this.resourceValidator.validate(it.getResource(), CheckMode.ALL, cancelIndicator);
     final ValidationResult result = new ValidationResult();
     final Function1<Issue, Boolean> _function = (Issue it_1) -> {
       Severity _severity = it_1.getSeverity();
       return Boolean.valueOf((!Objects.equal(_severity, Severity.IGNORE)));
     };
-    Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
     final Consumer<Issue> _function_1 = (Issue issue) -> {
       List<ValidationResult.Issue> _issues = result.getIssues();
       String _message = issue.getMessage();
-      Severity _severity = issue.getSeverity();
-      String _translate = this.translate(_severity);
+      String _translate = this.translate(issue.getSeverity());
       Integer _lineNumber = issue.getLineNumber();
       Integer _column = issue.getColumn();
       Integer _offset = issue.getOffset();
@@ -60,7 +56,7 @@ public class ValidationService extends AbstractCachedService<ValidationResult> {
       ValidationResult.Issue _issue = new ValidationResult.Issue(_message, _translate, _lineNumber, _column, _offset, _length);
       _issues.add(_issue);
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.<Issue>filter(issues, _function).forEach(_function_1);
     return result;
   }
   

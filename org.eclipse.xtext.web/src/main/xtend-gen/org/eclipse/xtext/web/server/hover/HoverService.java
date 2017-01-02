@@ -20,7 +20,6 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
-import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.labels.AlternativeImageDescription;
 import org.eclipse.xtext.ide.labels.DecoratedImageDescription;
 import org.eclipse.xtext.ide.labels.IImageDescription;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.ide.labels.IImageDescriptionProvider;
 import org.eclipse.xtext.ide.labels.INameLabelProvider;
 import org.eclipse.xtext.ide.labels.SimpleImageDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
@@ -87,8 +85,7 @@ public class HoverService {
       public HoverResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
         HoverResult _xblockexpression = null;
         {
-          XtextResource _resource = it.getResource();
-          final EObject element = HoverService.this._elementAtOffsetUtil.getElementAt(_resource, offset);
+          final EObject element = HoverService.this._elementAtOffsetUtil.getElementAt(it.getResource(), offset);
           _xblockexpression = HoverService.this.createHover(element, it.getStateId(), cancelIndicator);
         }
         return _xblockexpression;
@@ -108,14 +105,12 @@ public class HoverService {
         {
           final ContentAssistContext[] contexts = HoverService.this.contentAssistService.getContexts(it, selection, offset);
           final Wrapper<Object> proposedElement = new Wrapper<Object>();
-          IdeContentProposalProvider _proposalProvider = HoverService.this.contentAssistService.getProposalProvider();
-          _proposalProvider.createProposals(((Collection<ContentAssistContext>)Conversions.doWrapArray(contexts)), new IIdeContentProposalAcceptor() {
+          HoverService.this.contentAssistService.getProposalProvider().createProposals(((Collection<ContentAssistContext>)Conversions.doWrapArray(contexts)), new IIdeContentProposalAcceptor() {
             @Override
             public void accept(final ContentAssistEntry entry, final int priority) {
               HoverService.this._operationCanceledManager.checkCanceled(cancelIndicator);
               if ((((entry != null) && (entry.getSource() != null)) && Objects.equal(entry.getProposal(), proposal))) {
-                Object _source = entry.getSource();
-                proposedElement.set(_source);
+                proposedElement.set(entry.getSource());
               }
             }
             
@@ -145,9 +140,7 @@ public class HoverService {
     final String nameLabel = _surroundWithDiv;
     if ((nameLabel != null)) {
       this._operationCanceledManager.checkCanceled(cancelIndicator);
-      IImageDescription _imageDescription = this._iImageDescriptionProvider.getImageDescription(element);
-      String _addIconDivs = this.addIconDivs(_imageDescription, nameLabel);
-      final String titleHtml = this.surroundWithDiv(_addIconDivs, "xtext-hover");
+      final String titleHtml = this.surroundWithDiv(this.addIconDivs(this._iImageDescriptionProvider.getImageDescription(element), nameLabel), "xtext-hover");
       this._operationCanceledManager.checkCanceled(cancelIndicator);
       EObject _switchResult = null;
       boolean _matched = false;
@@ -186,12 +179,10 @@ public class HoverService {
     if (!_matched) {
       if (it instanceof AlternativeImageDescription) {
         _matched=true;
-        List<String> _imageIDs = ((AlternativeImageDescription)it).getImageIDs();
         final Function1<String, String> _function = (String it_1) -> {
           return (it_1 + "-icon");
         };
-        List<String> _map = ListExtensions.<String, String>map(_imageIDs, _function);
-        _switchResult = this.surroundWithDiv(nameHtml, ((String[])Conversions.unwrapArray(_map, String.class)));
+        _switchResult = this.surroundWithDiv(nameHtml, ((String[])Conversions.unwrapArray(ListExtensions.<String, String>map(((AlternativeImageDescription)it).getImageIDs(), _function), String.class)));
       }
     }
     if (!_matched) {
@@ -199,11 +190,10 @@ public class HoverService {
         _matched=true;
         List<IImageDescription> _decorators = ((DecoratedImageDescription)it).getDecorators();
         IImageDescription _baseImage = ((DecoratedImageDescription)it).getBaseImage();
-        Iterable<IImageDescription> _plus = Iterables.<IImageDescription>concat(_decorators, Collections.<IImageDescription>unmodifiableList(CollectionLiterals.<IImageDescription>newArrayList(_baseImage)));
         final Function2<String, IImageDescription, String> _function = (String $0, IImageDescription $1) -> {
           return this.addIconDivs($1, $0);
         };
-        _switchResult = IterableExtensions.<IImageDescription, String>fold(_plus, nameHtml, _function);
+        _switchResult = IterableExtensions.<IImageDescription, String>fold(Iterables.<IImageDescription>concat(_decorators, Collections.<IImageDescription>unmodifiableList(CollectionLiterals.<IImageDescription>newArrayList(_baseImage))), nameHtml, _function);
       }
     }
     return _switchResult;

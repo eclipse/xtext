@@ -13,7 +13,6 @@ import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.web.test.AbstractXbaseWebTest;
 import org.junit.Assert;
@@ -43,8 +42,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("caretOffset", _string_1);
     final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
-    Function0<? extends IServiceResult> _service = contentAssist.getService();
-    IServiceResult _apply = _service.apply();
+    IServiceResult _apply = contentAssist.getService().apply();
     final ContentAssistResult result = ((ContentAssistResult) _apply);
     Assert.assertEquals(expectedResult.toString(), result.toString());
   }

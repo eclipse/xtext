@@ -60,22 +60,19 @@ public class XtextWebDocument implements IXtextWebDocument {
   
   public <T extends IServiceResult> T getCachedServiceResult(final AbstractCachedService<T> service, final CancelIndicator cancelIndicator, final boolean logCacheMiss) {
     T _elvis = null;
-    Class<? extends AbstractCachedService> _class = service.getClass();
-    IServiceResult _get = this.cachedServiceResults.get(_class);
+    IServiceResult _get = this.cachedServiceResults.get(service.getClass());
     if (((T) _get) != null) {
       _elvis = ((T) _get);
     } else {
       T _xblockexpression = null;
       {
         if (logCacheMiss) {
-          Class<? extends AbstractCachedService> _class_1 = service.getClass();
-          String _simpleName = _class_1.getSimpleName();
+          String _simpleName = service.getClass().getSimpleName();
           String _plus = ("Cache miss for " + _simpleName);
           XtextWebDocument.LOG.trace(_plus);
         }
         final T result = service.compute(this, cancelIndicator);
-        Class<? extends AbstractCachedService> _class_2 = service.getClass();
-        this.cachedServiceResults.put(_class_2, result);
+        this.cachedServiceResults.put(service.getClass(), result);
         _xblockexpression = result;
       }
       _elvis = _xblockexpression;
@@ -88,8 +85,7 @@ public class XtextWebDocument implements IXtextWebDocument {
     String _xblockexpression = null;
     {
       if ((this.resourceId != null)) {
-        Class<? extends XtextWebDocument> _class = this.getClass();
-        String _simpleName = _class.getSimpleName();
+        String _simpleName = this.getClass().getSimpleName();
         String _plus = (_simpleName + "(");
         String _plus_1 = (_plus + this.resourceId);
         return (_plus_1 + ")");
@@ -130,8 +126,7 @@ public class XtextWebDocument implements IXtextWebDocument {
   
   @Override
   public String getStateId() {
-    long _modificationStamp = this.resource.getModificationStamp();
-    return Long.toString(_modificationStamp, 16);
+    return Long.toString(this.resource.getModificationStamp(), 16);
   }
   
   /**

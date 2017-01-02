@@ -11,7 +11,6 @@ import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.xtext.web.server.IServiceContext;
-import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.web.server.model.DocumentSynchronizer;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -38,11 +37,10 @@ public interface IWebDocumentProvider {
         if ((resourceId == null)) {
           _xifexpression = this.synchronizerProvider.get();
         } else {
-          ISession _session = serviceContext.getSession();
           final Function0<DocumentSynchronizer> _function = () -> {
             return this.synchronizerProvider.get();
           };
-          _xifexpression = _session.<DocumentSynchronizer>get(DocumentSynchronizer.class, _function);
+          _xifexpression = serviceContext.getSession().<DocumentSynchronizer>get(DocumentSynchronizer.class, _function);
         }
         final DocumentSynchronizer synchronizer = _xifexpression;
         _xblockexpression = new XtextWebDocument(resourceId, synchronizer);

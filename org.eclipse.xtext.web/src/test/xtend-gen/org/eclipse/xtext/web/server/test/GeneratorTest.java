@@ -12,7 +12,6 @@ import com.google.inject.Module;
 import java.io.File;
 import java.util.Collections;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.web.server.generator.GeneratorResult;
 import org.eclipse.xtext.web.server.generator.GeneratorService;
 import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
@@ -46,9 +44,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     @Override
     public void doGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext ctx) {
       this.invocationCount++;
-      EList<EObject> _contents = input.getContents();
-      Iterable<Statemachine> _filter = Iterables.<Statemachine>filter(_contents, Statemachine.class);
-      final Statemachine statemachine = IterableExtensions.<Statemachine>head(_filter);
+      final Statemachine statemachine = IterableExtensions.<Statemachine>head(Iterables.<Statemachine>filter(input.getContents(), Statemachine.class));
       StringConcatenation _builder = new StringConcatenation();
       {
         EList<State> _states = statemachine.getStates();
@@ -91,8 +87,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
     Assert.assertFalse(generate.isHasSideEffects());
-    Function0<? extends IServiceResult> _service = generate.getService();
-    IServiceResult _apply = _service.apply();
+    IServiceResult _apply = generate.getService().apply();
     final GeneratorResult result = ((GeneratorResult) _apply);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("GeneratorResult [");
@@ -117,8 +112,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("artifact", "DEFAULT_OUTPUT/test.txt");
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
     Assert.assertFalse(generate.isHasSideEffects());
-    Function0<? extends IServiceResult> _service = generate.getService();
-    IServiceResult _apply = _service.apply();
+    IServiceResult _apply = generate.getService().apply();
     final GeneratorResult result = ((GeneratorResult) _apply);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("GeneratorResult [");
@@ -147,11 +141,9 @@ public class GeneratorTest extends AbstractWebServerTest {
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
-    Function0<? extends IServiceResult> _service = generate.getService();
-    _service.apply();
+    generate.getService().apply();
     Assert.assertEquals(1, GeneratorTest.generatorInstance.invocationCount);
-    Function0<? extends IServiceResult> _service_1 = generate.getService();
-    _service_1.apply();
+    generate.getService().apply();
     Assert.assertEquals(1, GeneratorTest.generatorInstance.invocationCount);
   }
   
@@ -164,8 +156,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("artifact", "DEFAULT_OUTPUT/test.txt");
     Pair<String, String> _mappedTo_3 = Pair.<String, String>of("includeContent", "false");
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
-    Function0<? extends IServiceResult> _service = generate.getService();
-    IServiceResult _apply = _service.apply();
+    IServiceResult _apply = generate.getService().apply();
     final GeneratorResult result = ((GeneratorResult) _apply);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("GeneratorResult [");
@@ -189,8 +180,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("allArtifacts", "true");
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
-    Function0<? extends IServiceResult> _service = generate.getService();
-    IServiceResult _apply = _service.apply();
+    IServiceResult _apply = generate.getService().apply();
     final GeneratorService.GeneratedArtifacts result = ((GeneratorService.GeneratedArtifacts) _apply);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("GeneratedArtifacts [");
@@ -242,8 +232,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("allArtifacts", "true");
     Pair<String, String> _mappedTo_3 = Pair.<String, String>of("includeContent", "false");
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
-    Function0<? extends IServiceResult> _service = generate.getService();
-    IServiceResult _apply = _service.apply();
+    IServiceResult _apply = generate.getService().apply();
     final GeneratorService.GeneratedArtifacts result = ((GeneratorService.GeneratedArtifacts) _apply);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("GeneratedArtifacts [");

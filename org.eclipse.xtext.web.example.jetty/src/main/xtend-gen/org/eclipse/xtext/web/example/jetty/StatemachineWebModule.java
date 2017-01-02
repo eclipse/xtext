@@ -8,7 +8,6 @@
 package org.eclipse.xtext.web.example.jetty;
 
 import com.google.inject.Binder;
-import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.web.example.jetty.AbstractStatemachineWebModule;
 import org.eclipse.xtext.web.example.jetty.resource.StatemachineContentTypeProvider;
@@ -38,8 +37,7 @@ public class StatemachineWebModule extends AbstractStatemachineWebModule {
   
   public void configureResourceBaseProvider(final Binder binder) {
     if ((this.resourceBaseProvider != null)) {
-      AnnotatedBindingBuilder<IResourceBaseProvider> _bind = binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class);
-      _bind.toInstance(this.resourceBaseProvider);
+      binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class).toInstance(this.resourceBaseProvider);
     }
   }
   

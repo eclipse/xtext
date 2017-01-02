@@ -26,8 +26,7 @@ public class MockServiceContext implements IServiceContext {
   
   @Override
   public Set<String> getParameterKeys() {
-    Set<String> _keySet = this.parameters.keySet();
-    return Collections.<String>unmodifiableSet(_keySet);
+    return Collections.<String>unmodifiableSet(this.parameters.keySet());
   }
   
   @Override

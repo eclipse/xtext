@@ -9,16 +9,13 @@ package org.eclipse.xtext.web.example.statemachine.formatting2;
 
 import com.google.inject.Inject;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Command;
@@ -61,113 +58,87 @@ public class StatemachineFormatter extends AbstractFormatter2 {
   }
   
   protected void _format(final Signal signal, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(signal);
-    StatemachineGrammarAccess.SignalElements _signalAccess = this._statemachineGrammarAccess.getSignalAccess();
-    Keyword _signalKeyword_1 = _signalAccess.getSignalKeyword_1();
-    ISemanticRegion _keyword = _regionFor.keyword(_signalKeyword_1);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    ISemanticRegion _prepend = document.prepend(_keyword, _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(_prepend, _function_1);
+    document.append(document.prepend(this.textRegionExtensions.regionFor(signal).keyword(this._statemachineGrammarAccess.getSignalAccess().getSignalKeyword_1()), _function), _function_1);
   }
   
   protected void _format(final State state, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(state);
-    StatemachineGrammarAccess.StateElements _stateAccess = this._statemachineGrammarAccess.getStateAccess();
-    Keyword _stateKeyword_0 = _stateAccess.getStateKeyword_0();
-    ISemanticRegion _keyword = _regionFor.keyword(_stateKeyword_0);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(_keyword, _function);
+    document.append(this.textRegionExtensions.regionFor(state).keyword(this._statemachineGrammarAccess.getStateAccess().getStateKeyword_0()), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.indent();
     };
     document.<ISemanticRegion, ISemanticRegion>interior(
-      document.append(this.textRegionExtensions.regionFor(state).assignment(this._statemachineGrammarAccess.getStateAccess().getNameAssignment_1()), ((Procedure1<IHiddenRegionFormatter>) (IHiddenRegionFormatter it) -> {
-        it.newLine();
-      })), 
-      this.textRegionExtensions.regionFor(state).keyword(this._statemachineGrammarAccess.getStateAccess().getEndKeyword_5()), _function_1);
+      document.append(this.textRegionExtensions.regionFor(state).assignment(this._statemachineGrammarAccess.getStateAccess().getNameAssignment_1()), _function_1), 
+      this.textRegionExtensions.regionFor(state).keyword(this._statemachineGrammarAccess.getStateAccess().getEndKeyword_5()), _function_2);
     EList<Command> _commands = state.getCommands();
     for (final Command command : _commands) {
       {
         this.format(command, document);
-        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
-        document.<Command>append(command, _function_2);
+        document.<Command>append(command, _function_3);
       }
     }
     EList<Transition> _transitions = state.getTransitions();
     for (final Transition transition : _transitions) {
       {
         this.format(transition, document);
-        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
-        document.<Transition>append(transition, _function_2);
+        document.<Transition>append(transition, _function_3);
       }
     }
     EList<State> _nestedStates = state.getNestedStates();
     for (final State nestedState : _nestedStates) {
       {
         this.format(nestedState, document);
-        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
-        document.<State>append(nestedState, _function_2);
+        document.<State>append(nestedState, _function_3);
       }
     }
   }
   
   protected void _format(final Command command, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(command);
-    StatemachineGrammarAccess.CommandElements _commandAccess = this._statemachineGrammarAccess.getCommandAccess();
-    Keyword _setKeyword_0 = _commandAccess.getSetKeyword_0();
-    ISemanticRegion _keyword = _regionFor.keyword(_setKeyword_0);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(_keyword, _function);
-    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(command);
-    StatemachineGrammarAccess.CommandElements _commandAccess_1 = this._statemachineGrammarAccess.getCommandAccess();
-    Keyword _equalsSignKeyword_2 = _commandAccess_1.getEqualsSignKeyword_2();
-    ISemanticRegion _keyword_1 = _regionFor_1.keyword(_equalsSignKeyword_2);
+    document.append(this.textRegionExtensions.regionFor(command).keyword(this._statemachineGrammarAccess.getCommandAccess().getSetKeyword_0()), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    ISemanticRegion _prepend = document.prepend(_keyword_1, _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(_prepend, _function_2);
+    document.append(document.prepend(this.textRegionExtensions.regionFor(command).keyword(this._statemachineGrammarAccess.getCommandAccess().getEqualsSignKeyword_2()), _function_1), _function_2);
   }
   
   protected void _format(final Transition transition, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(transition);
-    StatemachineGrammarAccess.TransitionElements _transitionAccess = this._statemachineGrammarAccess.getTransitionAccess();
-    Keyword _ifKeyword_0 = _transitionAccess.getIfKeyword_0();
-    ISemanticRegion _keyword = _regionFor.keyword(_ifKeyword_0);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(_keyword, _function);
-    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(transition);
-    StatemachineGrammarAccess.TransitionElements _transitionAccess_1 = this._statemachineGrammarAccess.getTransitionAccess();
-    Keyword _gotoKeyword_2 = _transitionAccess_1.getGotoKeyword_2();
-    ISemanticRegion _keyword_1 = _regionFor_1.keyword(_gotoKeyword_2);
+    document.append(this.textRegionExtensions.regionFor(transition).keyword(this._statemachineGrammarAccess.getTransitionAccess().getIfKeyword_0()), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    ISemanticRegion _prepend = document.prepend(_keyword_1, _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(_prepend, _function_2);
+    document.append(document.prepend(this.textRegionExtensions.regionFor(transition).keyword(this._statemachineGrammarAccess.getTransitionAccess().getGotoKeyword_2()), _function_1), _function_2);
     Condition _condition = transition.getCondition();
     boolean _tripleNotEquals = (_condition != null);
     if (_tripleNotEquals) {
@@ -176,21 +147,16 @@ public class StatemachineFormatter extends AbstractFormatter2 {
   }
   
   protected void _format(final Condition condition, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(condition);
-    StatemachineGrammarAccess.ConditionElements _conditionAccess = this._statemachineGrammarAccess.getConditionAccess();
-    Keyword _andKeyword_1_0 = _conditionAccess.getAndKeyword_1_0();
-    List<ISemanticRegion> _keywords = _regionFor.keywords(_andKeyword_1_0);
     final Consumer<ISemanticRegion> _function = (ISemanticRegion it) -> {
       final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
         it_1.oneSpace();
       };
-      ISemanticRegion _prepend = document.prepend(it, _function_1);
       final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_1) -> {
         it_1.oneSpace();
       };
-      document.append(_prepend, _function_2);
+      document.append(document.prepend(it, _function_1), _function_2);
     };
-    _keywords.forEach(_function);
+    this.textRegionExtensions.regionFor(condition).keywords(this._statemachineGrammarAccess.getConditionAccess().getAndKeyword_1_0()).forEach(_function);
     EList<Event> _events = condition.getEvents();
     for (final Event event : _events) {
       this.format(event, document);
@@ -198,18 +164,13 @@ public class StatemachineFormatter extends AbstractFormatter2 {
   }
   
   protected void _format(final Event event, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(event);
-    StatemachineGrammarAccess.EventElements _eventAccess = this._statemachineGrammarAccess.getEventAccess();
-    Keyword _equalsSignEqualsSignKeyword_1 = _eventAccess.getEqualsSignEqualsSignKeyword_1();
-    ISemanticRegion _keyword = _regionFor.keyword(_equalsSignEqualsSignKeyword_1);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    ISemanticRegion _prepend = document.prepend(_keyword, _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(_prepend, _function_1);
+    document.append(document.prepend(this.textRegionExtensions.regionFor(event).keyword(this._statemachineGrammarAccess.getEventAccess().getEqualsSignEqualsSignKeyword_1()), _function), _function_1);
   }
   
   public void format(final Object command, final IFormattableDocument document) {

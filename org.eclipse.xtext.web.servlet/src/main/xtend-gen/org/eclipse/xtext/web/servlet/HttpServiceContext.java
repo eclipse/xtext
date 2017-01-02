@@ -9,7 +9,6 @@ package org.eclipse.xtext.web.servlet;
 
 import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;
-import java.io.BufferedReader;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Collections;
@@ -56,24 +55,18 @@ public class HttpServiceContext implements IServiceContext {
         if (((contentType != null) && Objects.equal(contentType[0], "application/x-www-form-urlencoded"))) {
           String _xifexpression = null;
           if ((((contentType != null) && (contentType.length >= 2)) && contentType[1].startsWith("charset="))) {
-            String _get = contentType[1];
-            int _length = "charset=".length();
-            _xifexpression = _get.substring(_length);
+            _xifexpression = contentType[1].substring("charset=".length());
           } else {
-            Charset _defaultCharset = Charset.defaultCharset();
-            _xifexpression = _defaultCharset.toString();
+            _xifexpression = Charset.defaultCharset().toString();
           }
           String charset = _xifexpression;
-          BufferedReader _reader = this.request.getReader();
-          String _string = CharStreams.toString(_reader);
-          final String[] encodedParams = _string.split("&");
+          final String[] encodedParams = CharStreams.toString(this.request.getReader()).split("&");
           for (final String param : encodedParams) {
             {
               final int nameEnd = param.indexOf("=");
               if ((nameEnd > 0)) {
                 final String key = param.substring(0, nameEnd);
-                String _substring = param.substring((nameEnd + 1));
-                final String value = URLDecoder.decode(_substring, charset);
+                final String value = URLDecoder.decode(param.substring((nameEnd + 1)), charset);
                 this.parameters.put(key, value);
               }
             }
@@ -83,8 +76,7 @@ public class HttpServiceContext implements IServiceContext {
         while (paramNames.hasMoreElements()) {
           {
             final String name = paramNames.nextElement();
-            String _parameter = this.request.getParameter(name);
-            this.parameters.put(name, _parameter);
+            this.parameters.put(name, this.request.getParameter(name));
           }
         }
         String _xifexpression_1 = null;
@@ -108,8 +100,7 @@ public class HttpServiceContext implements IServiceContext {
   
   @Override
   public Set<String> getParameterKeys() {
-    Set<String> _keySet = this.parameters.keySet();
-    return Collections.<String>unmodifiableSet(_keySet);
+    return Collections.<String>unmodifiableSet(this.parameters.keySet());
   }
   
   @Override

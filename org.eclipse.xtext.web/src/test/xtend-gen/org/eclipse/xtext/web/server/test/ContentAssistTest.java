@@ -16,7 +16,6 @@ import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Assert;
@@ -47,8 +46,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
     Assert.assertFalse(contentAssist.isHasSideEffects());
-    Function0<? extends IServiceResult> _service = contentAssist.getService();
-    IServiceResult _apply = _service.apply();
+    IServiceResult _apply = contentAssist.getService().apply();
     final ContentAssistResult result = ((ContentAssistResult) _apply);
     Assert.assertEquals(expectedResult.toString(), result.toString());
   }
@@ -1163,8 +1161,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
     Assert.assertTrue(contentAssist.isHasConflict());
-    Function0<? extends IServiceResult> _service = contentAssist.getService();
-    final IServiceResult result = _service.apply();
+    final IServiceResult result = contentAssist.getService().apply();
     Assert.<IServiceResult>assertThat(result, IsInstanceOf.<IServiceResult>instanceOf(ServiceConflictResult.class));
     Assert.assertEquals(((ServiceConflictResult) result).getConflict(), "invalidStateId");
   }

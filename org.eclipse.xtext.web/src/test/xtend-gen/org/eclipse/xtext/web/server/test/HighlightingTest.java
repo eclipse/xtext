@@ -8,7 +8,6 @@
 package org.eclipse.xtext.web.server.test;
 
 import java.util.Collections;
-import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
@@ -17,7 +16,6 @@ import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingResult;
 import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
@@ -32,8 +30,7 @@ public class HighlightingTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", _replace);
     final XtextServiceDispatcher.ServiceDescriptor highlighting = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
-    Function0<? extends IServiceResult> _service = highlighting.getService();
-    IServiceResult _apply = _service.apply();
+    IServiceResult _apply = highlighting.getService().apply();
     final HighlightingResult result = ((HighlightingResult) _apply);
     Assert.assertEquals(styleClasses.length, result.getRegions().size());
     int offset = 0;
@@ -41,13 +38,10 @@ public class HighlightingTest extends AbstractWebServerTest {
     for (int i = 0; (i < styleClasses.length); i++) {
       {
         int _offset = offset;
-        String _get = snippets[(2 * i)];
-        int _length = _get.length();
+        int _length = snippets[(2 * i)].length();
         offset = (_offset + _length);
-        String _get_1 = snippets[((2 * i) + 1)];
-        final int length = _get_1.length();
-        List<HighlightingResult.Region> _regions = result.getRegions();
-        final HighlightingResult.Region region = _regions.get(i);
+        final int length = snippets[((2 * i) + 1)].length();
+        final HighlightingResult.Region region = result.getRegions().get(i);
         Assert.assertEquals(styleClasses[i], IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(region.getStyleClasses()))));
         Assert.assertEquals(offset, region.getOffset());
         Assert.assertEquals(length, region.getLength());

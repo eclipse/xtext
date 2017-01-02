@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.web.server.IServiceContext;
@@ -80,16 +79,11 @@ public class FileResourceHandler implements IServerResourceHandler {
   public void put(final IXtextWebDocument document, final IServiceContext serviceContext) throws IOException {
     try {
       try {
-        String _resourceId = document.getResourceId();
-        final URI uri = this.resourceBaseProvider.getFileURI(_resourceId);
-        XtextResource _resource = document.getResource();
-        ResourceSet _resourceSet = _resource.getResourceSet();
-        URIConverter _uRIConverter = _resourceSet.getURIConverter();
-        final OutputStream outputStream = _uRIConverter.createOutputStream(uri);
+        final URI uri = this.resourceBaseProvider.getFileURI(document.getResourceId());
+        final OutputStream outputStream = document.getResource().getResourceSet().getURIConverter().createOutputStream(uri);
         String _encoding = this.encodingProvider.getEncoding(uri);
         final OutputStreamWriter writer = new OutputStreamWriter(outputStream, _encoding);
-        String _text = document.getText();
-        writer.write(_text);
+        writer.write(document.getText());
         writer.close();
       } catch (final Throwable _t) {
         if (_t instanceof WrappedException) {

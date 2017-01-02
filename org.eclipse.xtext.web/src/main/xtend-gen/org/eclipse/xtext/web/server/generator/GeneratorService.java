@@ -14,13 +14,11 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException;
@@ -117,28 +115,23 @@ public class GeneratorService extends AbstractCachedService<GeneratorService.Gen
   @Override
   public GeneratorService.GeneratedArtifacts compute(final IXtextWebDocument it, final CancelIndicator cancelIndicator) {
     final InMemoryFileSystemAccess fileSystemAccess = this.fileSystemAccessProvider.get();
-    XtextResource _resource = it.getResource();
     final IGeneratorContext _function = () -> {
       return cancelIndicator;
     };
-    this.generator.generate(_resource, fileSystemAccess, _function);
+    this.generator.generate(it.getResource(), fileSystemAccess, _function);
     final GeneratorService.GeneratedArtifacts result = new GeneratorService.GeneratedArtifacts();
-    Map<String, CharSequence> _textFiles = fileSystemAccess.getTextFiles();
-    Set<Map.Entry<String, CharSequence>> _entrySet = _textFiles.entrySet();
     final Function1<Map.Entry<String, CharSequence>, GeneratorResult> _function_1 = (Map.Entry<String, CharSequence> it_1) -> {
       GeneratorResult _xblockexpression = null;
       {
+        final String contentType = this.contentTypeProvider.getContentType(it_1.getKey());
         String _key = it_1.getKey();
-        final String contentType = this.contentTypeProvider.getContentType(_key);
-        String _key_1 = it_1.getKey();
-        CharSequence _value = it_1.getValue();
-        String _string = _value.toString();
-        _xblockexpression = new GeneratorResult(_key_1, contentType, _string);
+        String _string = it_1.getValue().toString();
+        _xblockexpression = new GeneratorResult(_key, contentType, _string);
       }
       return _xblockexpression;
     };
-    Iterable<GeneratorResult> _map = IterableExtensions.<Map.Entry<String, CharSequence>, GeneratorResult>map(_entrySet, _function_1);
-    Iterables.<GeneratorResult>addAll(result.artifacts, _map);
+    Iterables.<GeneratorResult>addAll(result.artifacts, 
+      IterableExtensions.<Map.Entry<String, CharSequence>, GeneratorResult>map(fileSystemAccess.getTextFiles().entrySet(), _function_1));
     return result;
   }
   
@@ -150,8 +143,7 @@ public class GeneratorService extends AbstractCachedService<GeneratorService.Gen
    * the output configuration prefix may be omitted.
    */
   public GeneratorResult getArtifact(final XtextWebDocumentAccess document, final String artifactId) {
-    GeneratorService.GeneratedArtifacts _result = this.getResult(document);
-    final List<GeneratorResult> artifacts = _result.artifacts;
+    final List<GeneratorResult> artifacts = this.getResult(document).artifacts;
     String _elvis = null;
     if (artifactId != null) {
       _elvis = artifactId;
@@ -166,10 +158,11 @@ public class GeneratorService extends AbstractCachedService<GeneratorService.Gen
     GeneratorResult result = IterableExtensions.<GeneratorResult>findFirst(artifacts, _function);
     if (((result == null) && (!searchString.startsWith(IFileSystemAccess.DEFAULT_OUTPUT)))) {
       final String defaultSearchString = (IFileSystemAccess.DEFAULT_OUTPUT + searchString);
-      result = IterableExtensions.<GeneratorResult>findFirst(artifacts, ((Function1<GeneratorResult, Boolean>) (GeneratorResult it) -> {
+      final Function1<GeneratorResult, Boolean> _function_1 = (GeneratorResult it) -> {
         String _name = it.getName();
         return Boolean.valueOf(Objects.equal(_name, defaultSearchString));
-      }));
+      };
+      result = IterableExtensions.<GeneratorResult>findFirst(artifacts, _function_1);
     }
     if ((result == null)) {
       throw new InvalidRequestException.ResourceNotFoundException("The requested generator artifact was not found.");
@@ -200,16 +193,14 @@ public class GeneratorService extends AbstractCachedService<GeneratorService.Gen
     if (includeContent) {
       return this.getResult(document);
     } else {
-      GeneratorService.GeneratedArtifacts _result = this.getResult(document);
-      final List<GeneratorResult> artifacts = _result.artifacts;
+      final List<GeneratorResult> artifacts = this.getResult(document).artifacts;
       final GeneratorService.GeneratedArtifacts result = new GeneratorService.GeneratedArtifacts();
       final Function1<GeneratorResult, GeneratorResult> _function = (GeneratorResult it) -> {
         String _name = it.getName();
         String _contentType = it.getContentType();
         return new GeneratorResult(_name, _contentType, null);
       };
-      List<GeneratorResult> _map = ListExtensions.<GeneratorResult, GeneratorResult>map(artifacts, _function);
-      result.artifacts.addAll(_map);
+      result.artifacts.addAll(ListExtensions.<GeneratorResult, GeneratorResult>map(artifacts, _function));
       return result;
     }
   }

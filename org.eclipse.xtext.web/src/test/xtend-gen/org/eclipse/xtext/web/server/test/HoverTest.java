@@ -14,7 +14,6 @@ import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.hover.HoverResult;
 import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,8 +32,7 @@ public class HoverTest extends AbstractWebServerTest {
       Pair<String, String> _mappedTo_2 = Pair.<String, String>of("caretOffset", _string);
       final XtextServiceDispatcher.ServiceDescriptor hover = this.getService(
         Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
-      Function0<? extends IServiceResult> _service = hover.getService();
-      IServiceResult _apply = _service.apply();
+      IServiceResult _apply = hover.getService().apply();
       _xblockexpression = ((HoverResult) _apply);
     }
     return _xblockexpression;
@@ -53,8 +51,7 @@ public class HoverTest extends AbstractWebServerTest {
       Pair<String, String> _mappedTo_3 = Pair.<String, String>of("proposal", proposal);
       final XtextServiceDispatcher.ServiceDescriptor hover = this.getService(
         Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
-      Function0<? extends IServiceResult> _service = hover.getService();
-      IServiceResult _apply = _service.apply();
+      IServiceResult _apply = hover.getService().apply();
       _xblockexpression = ((HoverResult) _apply);
     }
     return _xblockexpression;
@@ -80,9 +77,7 @@ public class HoverTest extends AbstractWebServerTest {
   
   @Test
   public void testNoHoverOnEmptyFile() {
-    HoverResult _hover = this.getHover("#");
-    String _content = _hover.getContent();
-    Assert.assertNull(_content);
+    Assert.assertNull(this.getHover("#").getContent());
   }
   
   @Test
@@ -175,9 +170,7 @@ public class HoverTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("#state foo");
     _builder.newLine();
-    HoverResult _hover = this.getHover(_builder);
-    String _content = _hover.getContent();
-    Assert.assertNull(_content);
+    Assert.assertNull(this.getHover(_builder).getContent());
   }
   
   @Test
@@ -257,9 +250,7 @@ public class HoverTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("end");
     _builder.newLine();
-    HoverResult _hover = this.getHover(_builder);
-    String _content = _hover.getContent();
-    Assert.assertNull(_content);
+    Assert.assertNull(this.getHover(_builder).getContent());
   }
   
   @Test

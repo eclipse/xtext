@@ -14,7 +14,6 @@ import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.occurrences.OccurrencesResult;
 import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,8 +32,7 @@ public class OccurrenceTest extends AbstractWebServerTest {
       Pair<String, String> _mappedTo_2 = Pair.<String, String>of("caretOffset", _string);
       final XtextServiceDispatcher.ServiceDescriptor occurrences = this.getService(
         Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
-      Function0<? extends IServiceResult> _service = occurrences.getService();
-      IServiceResult _apply = _service.apply();
+      IServiceResult _apply = occurrences.getService().apply();
       _xblockexpression = ((OccurrencesResult) _apply);
     }
     return _xblockexpression;
@@ -56,8 +54,7 @@ public class OccurrenceTest extends AbstractWebServerTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("#state foo");
     _builder.newLine();
-    OccurrencesResult _occurrences = this.getOccurrences(_builder);
-    final OccurrencesResult result = _occurrences;
+    final OccurrencesResult result = this.getOccurrences(_builder);
     Assert.assertTrue(result.getReadRegions().isEmpty());
     Assert.assertTrue(result.getWriteRegions().isEmpty());
   }
