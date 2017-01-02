@@ -1,10 +1,8 @@
 /*
- * Configuration of Java compiler, Javadoc, and additional dependency configurations.
+ * Configuration of Java compiler, Javadoc, additional archives, and additional dependency configurations.
  */
 
-plugins.withType(JavaBasePlugin) {
-	sourceCompatibility = '1.8'
-}
+sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'ISO-8859-1'
@@ -16,13 +14,26 @@ tasks.withType(Javadoc) {
 	options.addStringOption('Xdoclint:none', '-quiet')
 }
 
-sourceSets {
-	mwe2 {
-		java {
-			compileClasspath += main.output
-			runtimeClasspath += main.output
-		}
+task sourcesJar(type: Jar, dependsOn: classes) {
+	group 'Build'
+	description 'Assembles a jar archive containing the sources.'
+	classifier = 'sources'
+	from sourceSets.main.allSource
+	from ('.') {
+		include 'schema/**', 'model/**'
 	}
+}
+artifacts.archives sourcesJar
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+	group 'Build'
+	description 'Assembles a jar archive containing the JavaDoc output.'
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+sourceSets {
+	mwe2 {}
 }
 
 configurations {
@@ -33,9 +44,7 @@ configurations {
 	mwe2Compile.extendsFrom mainCompile
 	mwe2Runtime.extendsFrom mainRuntime
 	
-	/*
-	 * Put any unwanted transitive dependencies here, they will be excluded from all projects
-	 */
+	// Put any unwanted transitive dependencies here, they will be excluded from all projects.
 	all {
 		exclude group: 'org.apache.felix', module: 'org.osgi.foundation'
 		exclude group: 'org.antlr', module: 'stringtemplate'
@@ -47,13 +56,3 @@ sourceSets.main.compileClasspath += configurations.optional
 sourceSets.test.compileClasspath += configurations.optional
 sourceSets.test.runtimeClasspath += configurations.optional
 javadoc.classpath += configurations.optional
-
-eclipse {
-	classpath.plusConfigurations += [configurations.optional]
-	classpath.plusConfigurations += [configurations.mwe2Runtime]
-
-	project {
-		natures 'org.eclipse.xtext.ui.shared.xtextNature'
-		buildCommands.add(0,new org.gradle.plugins.ide.eclipse.model.BuildCommand('org.eclipse.xtext.ui.shared.xtextBuilder'))
-	}
-}
