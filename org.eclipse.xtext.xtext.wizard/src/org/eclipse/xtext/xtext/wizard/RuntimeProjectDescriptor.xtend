@@ -83,8 +83,15 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			]
 		]
 		if (!isEclipsePluginProject && config.needsMavenBuild) {
-			deps += createXtextDependency("org.eclipse.xtext.xtext") => [maven.optional = true]
 			deps += createXtextDependency("org.eclipse.xtext.xtext.generator")  => [maven.optional = true]
+			deps += new ExternalDependency => [
+				maven [
+					groupId = "org.eclipse.emf"
+					artifactId = "org.eclipse.emf.mwe2.launch"
+					version = config.xtextVersion.mweVersion
+					optional = true
+				]
+			]
 		}
 		deps
 	}

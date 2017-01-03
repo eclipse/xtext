@@ -17,6 +17,7 @@ import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -132,19 +133,27 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
       deps.add(_doubleArrow);
       if (((!this.isEclipsePluginProject()) && this.getConfig().needsMavenBuild())) {
-        ExternalDependency _createXtextDependency_2 = ExternalDependency.createXtextDependency("org.eclipse.xtext.xtext");
+        ExternalDependency _createXtextDependency_2 = ExternalDependency.createXtextDependency("org.eclipse.xtext.xtext.generator");
         final Procedure1<ExternalDependency> _function_1 = (ExternalDependency it) -> {
           ExternalDependency.MavenCoordinates _maven = it.getMaven();
           _maven.setOptional(true);
         };
         ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency_2, _function_1);
         deps.add(_doubleArrow_1);
-        ExternalDependency _createXtextDependency_3 = ExternalDependency.createXtextDependency("org.eclipse.xtext.xtext.generator");
+        ExternalDependency _externalDependency_1 = new ExternalDependency();
         final Procedure1<ExternalDependency> _function_2 = (ExternalDependency it) -> {
-          ExternalDependency.MavenCoordinates _maven = it.getMaven();
-          _maven.setOptional(true);
+          final Procedure1<ExternalDependency.MavenCoordinates> _function_3 = (ExternalDependency.MavenCoordinates it_1) -> {
+            it_1.setGroupId("org.eclipse.emf");
+            it_1.setArtifactId("org.eclipse.emf.mwe2.launch");
+            WizardConfiguration _config = this.getConfig();
+            XtextVersion _xtextVersion = _config.getXtextVersion();
+            String _mweVersion = _xtextVersion.getMweVersion();
+            it_1.setVersion(_mweVersion);
+            it_1.setOptional(true);
+          };
+          it.maven(_function_3);
         };
-        ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency_3, _function_2);
+        ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_1, _function_2);
         deps.add(_doubleArrow_2);
       }
       _xblockexpression = deps;

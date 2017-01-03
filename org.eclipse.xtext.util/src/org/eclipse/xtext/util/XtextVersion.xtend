@@ -20,14 +20,14 @@ class XtextVersion {
 	}
 
 	def getXtextGradlePluginVersion() {
-		'1.0.2'
+		'1.0.15'
 	}
 
 	/**
 	 * @noreference
 	 */
 	def getMweVersion() {
-		'2.8.3'
+		'2.9.0.201605261059'
 	}
 
 	def getXtendGradlePluginVersion() {

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.wizard
 import org.eclipse.xtend.lib.annotations.Accessors
 
 class PomFile extends TextFile {
+	
 	@Accessors String packaging = "jar"
 	@Accessors String buildSection = ""
 	@Accessors String profileSection = ""
@@ -41,28 +42,28 @@ class PomFile extends TextFile {
 			«buildSection»
 		
 			«IF !project.isEclipsePluginProject»
-			<dependencies>
-				«FOR p: project.upstreamProjects»
-					<dependency>
-						<groupId>${project.groupId}</groupId>
-						<artifactId>«p.name»</artifactId>
-						<version>${project.version}</version>
-					</dependency>
-				«ENDFOR»
-				«FOR dep : project.externalDependencies.map[maven].filter[artifactId !== null]»
-					<dependency>
-						<groupId>«dep.groupId»</groupId>
-						<artifactId>«dep.artifactId»</artifactId>
-						<version>«dep.version»</version>
-						«IF dep.scope != Scope.COMPILE»
-							<scope>«dep.scope.mavenNotation»</scope>
-						«ENDIF»
-						«IF dep.optional»
-							<optional>true</optional>
-						«ENDIF»
-					</dependency>
-				«ENDFOR»
-			</dependencies>
+				<dependencies>
+					«FOR p: project.upstreamProjects»
+						<dependency>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>«p.name»</artifactId>
+							<version>${project.version}</version>
+						</dependency>
+					«ENDFOR»
+					«FOR dep : project.externalDependencies.map[maven].filter[artifactId !== null]»
+						<dependency>
+							<groupId>«dep.groupId»</groupId>
+							<artifactId>«dep.artifactId»</artifactId>
+							<version>«dep.version»</version>
+							«IF dep.scope != Scope.COMPILE»
+								<scope>«dep.scope.mavenNotation»</scope>
+							«ENDIF»
+							«IF dep.optional»
+								<optional>true</optional>
+							«ENDIF»
+						</dependency>
+					«ENDFOR»
+				</dependencies>
 			«ENDIF»
 			«profileSection»
 		</project>

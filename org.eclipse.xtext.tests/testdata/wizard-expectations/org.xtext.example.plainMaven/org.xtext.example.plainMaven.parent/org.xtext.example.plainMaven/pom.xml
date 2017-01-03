@@ -213,14 +213,14 @@
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xtext</artifactId>
+			<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
 			<version>${xtextVersion}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
-			<version>${xtextVersion}</version>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+			<version>2.9.0.201605261059</version>
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
