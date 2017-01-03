@@ -10,6 +10,7 @@ Child hidden (WS, ID):
 	'child' name=STRING
 ;
 
+@Override 
 terminal WS:
 	(' ' | '\t')+
 ;
