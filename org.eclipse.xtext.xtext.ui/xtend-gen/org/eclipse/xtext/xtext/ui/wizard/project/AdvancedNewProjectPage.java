@@ -108,22 +108,12 @@ public class AdvancedNewProjectPage extends WizardPage {
         final Procedure1<Button> _function_5 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projWeb);
           it_2.setEnabled(true);
-          final FieldDecorationRegistry decRegistry = FieldDecorationRegistry.getDefault();
-          final FieldDecoration infoField = decRegistry.getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION);
-          ControlDecoration _controlDecoration = new ControlDecoration(it_2, (SWT.TOP + SWT.RIGHT));
-          final Procedure1<ControlDecoration> _function_6 = (ControlDecoration it_3) -> {
-            it_3.setImage(infoField.getImage());
-            it_3.setDescriptionText("Creates an additional project for the integration in web applications.\nSee <a href=\"https://eclipse.org/Xtext/documentation/330_web_support.html\">https://eclipse.org/Xtext/documentation/330_web_support.html</a> for details.");
-            it_3.setShowHover(true);
-          };
-          ObjectExtensions.<ControlDecoration>operator_doubleArrow(_controlDecoration, _function_6);
-          final GridData gridData = new GridData(SWT.NONE, SWT.CENTER, true, false);
-          it_2.setLayoutData(gridData);
         };
         this.createWebProject = this.CheckBox(it_1, _function_5);
         final Procedure1<Button> _function_6 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projIde);
           it_2.setEnabled(false);
+          this.InfoDecoration(it_2, Messages.AdvancedNewProjectPage_projIde_description);
         };
         this.createIdeProject = this.CheckBox(it_1, _function_6);
         final Procedure1<Button> _function_7 = (Button it_2) -> {
@@ -447,6 +437,19 @@ public class AdvancedNewProjectPage extends WizardPage {
       config.apply(it);
     };
     return ObjectExtensions.<Combo>operator_doubleArrow(_combo, _function);
+  }
+  
+  protected void InfoDecoration(final Control control, final String text) {
+    final FieldDecoration infoField = FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION);
+    ControlDecoration _controlDecoration = new ControlDecoration(control, (SWT.TOP + SWT.RIGHT));
+    final Procedure1<ControlDecoration> _function = (ControlDecoration it) -> {
+      it.setImage(infoField.getImage());
+      it.setDescriptionText(text);
+      it.setShowHover(true);
+    };
+    ObjectExtensions.<ControlDecoration>operator_doubleArrow(_controlDecoration, _function);
+    final GridData gridData = new GridData(SWT.NONE, SWT.CENTER, true, false);
+    control.setLayoutData(gridData);
   }
   
   protected void setDefaults() {

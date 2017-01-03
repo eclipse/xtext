@@ -76,20 +76,11 @@ class AdvancedNewProjectPage extends WizardPage {
 				createWebProject = CheckBox [
 					text = AdvancedNewProjectPage_projWeb
 					enabled = true
-					val decRegistry = FieldDecorationRegistry.getDefault()
-					val infoField = decRegistry.getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION)
-					new ControlDecoration(it, SWT.TOP + SWT.RIGHT) => [
-						image = infoField.image
-						descriptionText = "Creates an additional project for the integration in web applications.\nSee <a href=\"https://eclipse.org/Xtext/documentation/330_web_support.html\">https://eclipse.org/Xtext/documentation/330_web_support.html</a> for details."
-						showHover = true
-					]
-					val gridData = new GridData(SWT.NONE, SWT.CENTER, true, false)
-					// gridData.horizontalIndent = decRegistry.maximumDecorationWidth
-					it.layoutData = gridData
 				]
 				createIdeProject = CheckBox [
 					text = AdvancedNewProjectPage_projIde
 					enabled = false
+					it.InfoDecoration(AdvancedNewProjectPage_projIde_description)
 				]
 				createTestProject = CheckBox [
 					text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
@@ -300,6 +291,17 @@ class AdvancedNewProjectPage extends WizardPage {
 			layoutData = new GridData(GridData.FILL_HORIZONTAL)
 			config.apply(it)
 		]
+	}
+	
+	def protected InfoDecoration(Control control, String text) {
+		val infoField = FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION)
+		new ControlDecoration(control, SWT.TOP + SWT.RIGHT) => [
+			image = infoField.image
+			descriptionText = text
+			showHover = true
+		]
+		val gridData = new GridData(SWT.NONE, SWT.CENTER, true, false)
+		control.layoutData = gridData
 	}
 
 	def protected setDefaults() {
