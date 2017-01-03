@@ -5,7 +5,6 @@ package org.eclipse.xtext.example.domainmodel.ide;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import org.eclipse.xtext.example.domainmodel.DomainmodelRuntimeModule;
 import org.eclipse.xtext.example.domainmodel.DomainmodelStandaloneSetup;
 import org.eclipse.xtext.example.domainmodel.ide.DomainmodelIdeModule;
@@ -20,7 +19,6 @@ public class DomainmodelIdeSetup extends DomainmodelStandaloneSetup {
   public Injector createInjector() {
     DomainmodelRuntimeModule _domainmodelRuntimeModule = new DomainmodelRuntimeModule();
     DomainmodelIdeModule _domainmodelIdeModule = new DomainmodelIdeModule();
-    Module _mixin = Modules2.mixin(_domainmodelRuntimeModule, _domainmodelIdeModule);
-    return Guice.createInjector(_mixin);
+    return Guice.createInjector(Modules2.mixin(_domainmodelRuntimeModule, _domainmodelIdeModule));
   }
 }
