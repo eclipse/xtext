@@ -78,27 +78,18 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	
 	@Test
 	public void testDefaultArrayList_01() throws Exception {
-		//FIXME use our own types, since ArrayList has changed in Java7 and Java8
-		ContentAssistProcessorTestBuilder builder = newBuilder().append("default ArrayLis");
-		if (isJava6()) {
-			builder.assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
-		} else {
-			builder.assertText("java.util.ArrayList", "java.util.ArrayList.ArrayListSpliterator", "java.util.ArrayList.Itr",
-					"java.util.ArrayList.ListItr", "java.util.ArrayList.SubList", "com.google.common.collect.ArrayListMultimap");
-		}
+		//FIXME this does not consider JDT type filter, i.e. TypeFilter#isFiltered(char[],char[]) is not called.
+		//      in test testSubtypeArrayList_01 this is respected.
+		ContentAssistProcessorTestBuilder builder = newBuilder().append("default Appendable");
+		builder.assertText("java.lang.Appendable", "com.google.common.io.AppendableWriter");
 	}
 
 	@Test
 	public void testDefaultArrayList_02() throws Exception {
-		//FIXME use our own types, since ArrayList has changed in Java7 and Java8
-		ContentAssistProcessorTestBuilder builder = newBuilder().append("import java.util.* default ArrayLis");
-		if (isJava6()) {
-			builder.assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
-		} else {
-			builder.assertText("ArrayList", "ArrayList.ArrayListSpliterator", "ArrayList.Itr", "ArrayList.ListItr", "ArrayList.SubList",
-					"com.google.common.collect.ArrayListMultimap"
-					);
-		}
+		//FIXME this does not consider JDT type filter, i.e. TypeFilter#isFiltered(char[],char[]) is not called.
+		//      in test testSubtypeArrayList_01 this is respected.
+		ContentAssistProcessorTestBuilder builder = newBuilder().append("import java.lang.* default Appendable");
+		builder.assertText("Appendable", "com.google.common.io.AppendableWriter");
 	}
 
 	@Test public void testCustomArrayList_01() throws Exception {

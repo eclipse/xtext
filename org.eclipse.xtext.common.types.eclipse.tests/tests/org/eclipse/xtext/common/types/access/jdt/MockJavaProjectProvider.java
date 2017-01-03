@@ -33,6 +33,7 @@ import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.xtext.common.types.tests.AbstractActivator;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
@@ -98,6 +99,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 			createFile(fileToCopy.substring(0, fileToCopy.length() - ".txt".length()), srcFolder, contentAsString);
 		}
 		createFile("ClassWithDefaultPackage.java", sourceFolder, "public class ClassWithDefaultPackage {}");
+		PreferenceConstants.getPreferenceStore().putValue(PreferenceConstants.TYPEFILTER_ENABLED, "*.javafx.*;");
 		IResourcesSetupUtil.waitForBuild();
 	}
 
