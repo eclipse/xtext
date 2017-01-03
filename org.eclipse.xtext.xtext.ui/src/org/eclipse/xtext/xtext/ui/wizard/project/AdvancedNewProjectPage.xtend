@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project
 
+import org.eclipse.jface.fieldassist.ControlDecoration
+import org.eclipse.jface.fieldassist.FieldDecorationRegistry
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT
 import org.eclipse.swt.events.SelectionAdapter
@@ -74,6 +76,16 @@ class AdvancedNewProjectPage extends WizardPage {
 				createWebProject = CheckBox [
 					text = AdvancedNewProjectPage_projWeb
 					enabled = true
+					val decRegistry = FieldDecorationRegistry.getDefault()
+					val infoField = decRegistry.getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION)
+					new ControlDecoration(it, SWT.TOP + SWT.RIGHT) => [
+						image = infoField.image
+						descriptionText = "Creates an additional project for the integration in web applications.\nSee <a href=\"https://eclipse.org/Xtext/documentation/330_web_support.html\">https://eclipse.org/Xtext/documentation/330_web_support.html</a> for details."
+						showHover = true
+					]
+					val gridData = new GridData(SWT.NONE, SWT.CENTER, true, false)
+					// gridData.horizontalIndent = decRegistry.maximumDecorationWidth
+					it.layoutData = gridData
 				]
 				createIdeProject = CheckBox [
 					text = AdvancedNewProjectPage_projIde
