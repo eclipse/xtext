@@ -33,7 +33,9 @@ subprojects {
 	}
 	
 	apply plugin: 'java'
-	apply plugin: 'org.xtext.xtend'
+	if (findProperty('skipXtendCompiler') != 'true') {
+		apply plugin: 'org.xtext.xtend'
+	}
 	apply plugin: 'eclipse'
 	apply plugin: 'maven'
 	
