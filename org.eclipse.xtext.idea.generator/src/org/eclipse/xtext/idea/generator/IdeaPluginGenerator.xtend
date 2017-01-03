@@ -183,14 +183,14 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				«IF !value.provider && value.statements.isEmpty»
 					// contributed by «contributedBy»
 					«IF key.singleton»@org.eclipse.xtext.service.SingletonBinding«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
-					public «IF value.expression==null»Class<? extends «key.type»>«ELSE»«key.type»«ENDIF» «bindMethodName(it)»() {
-						return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+					public «IF value.expression===null»Class<? extends «key.type»>«ELSE»«key.type»«ENDIF» «bindMethodName(it)»() {
+						return «IF value.expression!==null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
 					}
 				«ELSEIF value.statements.isEmpty»
 					// contributed by «contributedBy»
 					«IF key.singleton»@org.eclipse.xtext.service.SingletonBinding«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
-					public «IF value.expression==null»Class<? extends com.google.inject.Provider<«key.type»>>«ELSE»com.google.inject.Provider<«key.type»>«ENDIF» «bindMethodName(it)»() {
-						return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+					public «IF value.expression===null»Class<? extends com.google.inject.Provider<«key.type»>>«ELSE»com.google.inject.Provider<«key.type»>«ENDIF» «bindMethodName(it)»() {
+						return «IF value.expression!==null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
 					}
 				«ELSE»
 					// contributed by «contributedBy»
@@ -215,7 +215,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			else 
 				'configure'
 		}
-		val suffix = if (value.expression!=null && !value.provider) 'ToInstance' else ''
+		val suffix = if (value.expression!==null && !value.provider) 'ToInstance' else ''
 		return prefix + simpleMethodName(key.type) + suffix
 	}
 	
