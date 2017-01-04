@@ -26,7 +26,8 @@ import org.eclipse.xtext.util.IDisposable
 @Singleton
 class ExecutorServiceProvider implements Provider<ExecutorService>, IDisposable {
 	
-	@Inject new(DisposableRegistry disposableRegistry) {
+	@Inject
+	def registerTo(DisposableRegistry disposableRegistry) {
 		disposableRegistry.register(this)
 	}
 	
@@ -39,8 +40,13 @@ class ExecutorServiceProvider implements Provider<ExecutorService>, IDisposable 
 	def ExecutorService get(String key) {
 		var result = instanceCache.get(key)
 		if (result === null) {
-			result = createInstance(key)
-			instanceCache.put(key, result)
+			synchronized (instanceCache) {
+				result = instanceCache.get(key)
+				if (result === null) {
+					result = createInstance(key)
+					instanceCache.put(key, result)
+				}
+			}
 		}
 		return result
 	}
@@ -53,6 +59,7 @@ class ExecutorServiceProvider implements Provider<ExecutorService>, IDisposable 
 		for (executorService : instanceCache.values) {
 			executorService.shutdown()
 		}
+		instanceCache.clear()
 	}
 	
 }

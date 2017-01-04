@@ -28,7 +28,7 @@ import org.eclipse.xtext.util.IDisposable;
 @SuppressWarnings("all")
 public class ExecutorServiceProvider implements Provider<ExecutorService>, IDisposable {
   @Inject
-  public ExecutorServiceProvider(final DisposableRegistry disposableRegistry) {
+  public void registerTo(final DisposableRegistry disposableRegistry) {
     disposableRegistry.register(this);
   }
   
@@ -42,8 +42,13 @@ public class ExecutorServiceProvider implements Provider<ExecutorService>, IDisp
   public ExecutorService get(final String key) {
     ExecutorService result = this.instanceCache.get(key);
     if ((result == null)) {
-      result = this.createInstance(key);
-      this.instanceCache.put(key, result);
+      synchronized (this.instanceCache) {
+        result = this.instanceCache.get(key);
+        if ((result == null)) {
+          result = this.createInstance(key);
+          this.instanceCache.put(key, result);
+        }
+      }
     }
     return result;
   }
@@ -58,5 +63,6 @@ public class ExecutorServiceProvider implements Provider<ExecutorService>, IDisp
     for (final ExecutorService executorService : _values) {
       executorService.shutdown();
     }
+    this.instanceCache.clear();
   }
 }
