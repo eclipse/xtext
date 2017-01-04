@@ -71,6 +71,12 @@ project {
 			organizationUrl 'http://typefox.io'
 		}
 		developer {
+			name = 'Karsten Thoms'
+			email = 'karsten.thoms@itemis.de'
+			organization = 'itemis'
+			organizationUrl = 'http://www.itemis.com'
+		}
+		developer {
 			name 'Knut Wannheden'
 		}
 		developer {
