@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project
 
+import org.eclipse.jface.fieldassist.ControlDecoration
+import org.eclipse.jface.fieldassist.FieldDecorationRegistry
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT
 import org.eclipse.swt.events.SelectionAdapter
@@ -40,6 +42,8 @@ class AdvancedNewProjectPage extends WizardPage {
 	Group createUiProjectSubGroup
 
 	StatusWidget statusWidget
+	
+	boolean autoSelectIdeProject
 
 	new(String pageName) {
 		super(pageName)
@@ -75,7 +79,8 @@ class AdvancedNewProjectPage extends WizardPage {
 				]
 				createIdeProject = CheckBox [
 					text = AdvancedNewProjectPage_projIde
-					enabled = true
+					enabled = false
+					it.InfoDecoration(AdvancedNewProjectPage_projIde_description)
 				]
 				createTestProject = CheckBox [
 					text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
@@ -106,6 +111,23 @@ class AdvancedNewProjectPage extends WizardPage {
 				validate(e)
 			}
 		}
+		val uiButtons = #[createUiProject,createIdeaProject,createWebProject]
+		val selectionControlUi = new SelectionAdapter() {
+			override widgetSelected(SelectionEvent e) {
+				if ((e.source as Button).selection) {
+					if (!createIdeProject.selection) {
+						autoSelectIdeProject = true
+					}
+					createIdeProject.selection = true
+					createIdeProject.enabled = false
+				} else {
+					if (uiButtons.forall[!selection]) {
+						createIdeProject.enabled = true
+					}
+				}
+				validate(e)
+			}
+		}
 
 		createUiProject.addSelectionListener(new SelectionAdapter() {
 			override widgetSelected(SelectionEvent e) {
@@ -119,9 +141,9 @@ class AdvancedNewProjectPage extends WizardPage {
 		sourceLayout.addSelectionListener(selectionControl)
 		createTestProject.addSelectionListener(selectionControl)
 		preferredBuildSystem.addSelectionListener(selectionControl)
-		createUiProject.addSelectionListener(selectionControl)
-		createIdeaProject.addSelectionListener(selectionControl)
-		createWebProject.addSelectionListener(selectionControl)
+		createUiProject.addSelectionListener(selectionControlUi)
+		createIdeaProject.addSelectionListener(selectionControlUi)
+		createWebProject.addSelectionListener(selectionControlUi)
 		createIdeProject.addSelectionListener(selectionControl)
 		createSDKProject.addSelectionListener(selectionControl)
 		createP2Project.addSelectionListener(selectionControl)
@@ -211,22 +233,11 @@ class AdvancedNewProjectPage extends WizardPage {
 			}
 		}
 
-		val dependend = #[createUiProject, createIdeaProject, createWebProject]
-		if (!createIdeProject.selection && dependend.exists[selection]) {
-			val affectedProjects = dependend.filter[selection].join(', ', [text])
-			if (createIdeProject === source) {
-				reportIssue(ERROR, '''
-				Frontend projects like '«affectedProjects»' depends on '«createIdeProject.text»' project.
-				Please <a>deselect</a> these.''', [
-					dependend.forEach[selection = false]
-				])
-			} else {
-				reportIssue(ERROR, '''
-				Projects like '«affectedProjects»' depends on '«createIdeProject.text»' project.
-				Please <a>enable '«createIdeProject.text»'</a> project.''', [
-					createIdeProject.selection = true
-				])
-			}
+		if (autoSelectIdeProject) {
+			autoSelectIdeProject = false
+			reportIssue(INFORMATION, '''
+				'«createIdeProject.text»' project was automatically selected as option '«(source as Button).text»' requires it.
+				''')
 		}
 	}
 
@@ -280,6 +291,17 @@ class AdvancedNewProjectPage extends WizardPage {
 			layoutData = new GridData(GridData.FILL_HORIZONTAL)
 			config.apply(it)
 		]
+	}
+	
+	def protected InfoDecoration(Control control, String text) {
+		val infoField = FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION)
+		new ControlDecoration(control, SWT.TOP + SWT.RIGHT) => [
+			image = infoField.image
+			descriptionText = text
+			showHover = true
+		]
+		val gridData = new GridData(SWT.NONE, SWT.CENTER, true, false)
+		control.layoutData = gridData
 	}
 
 	def protected setDefaults() {
