@@ -52,7 +52,9 @@ import com.google.common.collect.Lists;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @noextend This class is not intended to be subclassed by clients.
+ * @deprecated Use {@link org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage} instead.
  */
+@Deprecated
 public class LanguageConfig extends CompositeGeneratorFragment {
 
 	private final class ToStringFunction implements Function<IGeneratorFragment, String> {
