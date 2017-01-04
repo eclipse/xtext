@@ -17,7 +17,6 @@ import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -145,10 +144,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           final Procedure1<ExternalDependency.MavenCoordinates> _function_3 = (ExternalDependency.MavenCoordinates it_1) -> {
             it_1.setGroupId("org.eclipse.emf");
             it_1.setArtifactId("org.eclipse.emf.mwe2.launch");
-            WizardConfiguration _config = this.getConfig();
-            XtextVersion _xtextVersion = _config.getXtextVersion();
-            String _mweVersion = _xtextVersion.getMweVersion();
-            it_1.setVersion(_mweVersion);
+            it_1.setVersion(this.getConfig().getXtextVersion().getMweVersion());
             it_1.setOptional(true);
           };
           it.maven(_function_3);
