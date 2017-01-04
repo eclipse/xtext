@@ -203,6 +203,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 				
 				generate callHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage"
 				
+				@Override
 				Model: name=ID;
 			''')
 
@@ -221,7 +222,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 					}
 					Model {
 						grammar: org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage
-						'name=ID' [295, 7]
+						'name=ID' [305, 7]
 					}
 				}
 			'''
@@ -269,6 +270,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 					elements+=Element*
 				;
 				
+				@Override
 				Element:
 					name=ID
 				;
@@ -317,6 +319,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 					elements+=Element*
 				;
 				
+				@Override
 				Element:
 					name=ID
 				;

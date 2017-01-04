@@ -346,6 +346,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder_1.append("generate callHierarchyBuilderTestLanguage \"http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage\"");
       _builder_1.newLine();
       _builder_1.newLine();
+      _builder_1.append("@Override");
+      _builder_1.newLine();
       _builder_1.append("Model: name=ID;");
       _builder_1.newLine();
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _builder_1.toString());
@@ -389,7 +391,7 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder_2.append("grammar: org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage");
       _builder_2.newLine();
       _builder_2.append("\t\t");
-      _builder_2.append("\'name=ID\' [295, 7]");
+      _builder_2.append("\'name=ID\' [305, 7]");
       _builder_2.newLine();
       _builder_2.append("\t");
       _builder_2.append("}");
@@ -465,6 +467,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder_1.newLine();
       _builder_1.append(";");
       _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@Override");
       _builder_1.newLine();
       _builder_1.append("Element:");
       _builder_1.newLine();
@@ -557,6 +561,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder_1.newLine();
       _builder_1.append(";");
       _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@Override");
       _builder_1.newLine();
       _builder_1.append("Element:");
       _builder_1.newLine();
