@@ -10,13 +10,8 @@ package org.eclipse.xtend.ide.tests.editor;
 import com.google.inject.Inject;
 import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Event;
@@ -26,14 +21,10 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -92,37 +83,19 @@ public class Bug493784Test extends AbstractXtendUITestCase {
   }
   
   private Integer getListenerCount(final XtextEditor editor) {
-    IXtextDocument _document = editor.getDocument();
     final IUnitOfWork<Integer, XtextResource> _function = (XtextResource it) -> {
-      ResourceSet _resourceSet = it.getResourceSet();
-      final JvmTypeChangeDispatcher dispatcher = JvmTypeChangeDispatcher.findResourceChangeDispatcher(_resourceSet);
-      Class<? extends JvmTypeChangeDispatcher> _class = dispatcher.getClass();
-      final Field field = _class.getDeclaredField("listeners");
+      final JvmTypeChangeDispatcher dispatcher = JvmTypeChangeDispatcher.findResourceChangeDispatcher(it.getResourceSet());
+      final Field field = dispatcher.getClass().getDeclaredField("listeners");
       field.setAccessible(true);
       Object _get = field.get(dispatcher);
-      final Map<Notifier, List<Runnable>> listeners = ((Map<Notifier, List<Runnable>>) _get);
-      Set<Map.Entry<Notifier, List<Runnable>>> _entrySet = listeners.entrySet();
-      final Function1<Map.Entry<Notifier, List<Runnable>>, Integer> _function_1 = (Map.Entry<Notifier, List<Runnable>> it_1) -> {
-        List<Runnable> _value = it_1.getValue();
-        int _size = 0;
-        if (_value!=null) {
-          _size=_value.size();
-        }
-        return Integer.valueOf(_size);
-      };
-      Iterable<Integer> _map = IterableExtensions.<Map.Entry<Notifier, List<Runnable>>, Integer>map(_entrySet, _function_1);
-      Iterable<Integer> _filterNull = IterableExtensions.<Integer>filterNull(_map);
-      final Function2<Integer, Integer, Integer> _function_2 = (Integer p1, Integer p2) -> {
-        return Integer.valueOf(((p1).intValue() + (p2).intValue()));
-      };
-      return IterableExtensions.<Integer>reduce(_filterNull, _function_2);
+      final List<Runnable> listeners = ((List<Runnable>) _get);
+      return Integer.valueOf(listeners.size());
     };
-    return _document.<Integer>readOnly(_function);
+    return editor.getDocument().<Integer>readOnly(_function);
   }
   
   private void pressKey(final XtextEditor editor, final char c) throws Exception {
-    ISourceViewer _internalSourceViewer = editor.getInternalSourceViewer();
-    final StyledText textWidget = _internalSourceViewer.getTextWidget();
+    final StyledText textWidget = editor.getInternalSourceViewer().getTextWidget();
     final Event e = new Event();
     e.character = c;
     e.type = SWT.KeyDown;

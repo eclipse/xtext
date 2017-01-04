@@ -67,8 +67,9 @@ class Bug493784Test extends AbstractXtendUITestCase {
 			val JvmTypeChangeDispatcher dispatcher = JvmTypeChangeDispatcher.findResourceChangeDispatcher(it.resourceSet)
 			val Field field = dispatcher.getClass().getDeclaredField("listeners")
 			field.accessible = true
-			val listeners = field.get(dispatcher) as Map<Notifier, List<Runnable>>
-			return listeners.entrySet.map[value?.size].filterNull.reduce[p1, p2| p1 + p2]
+			val listeners = field.get(dispatcher) as List<Runnable>
+			
+			return listeners.size
 		]
 	}
 	
