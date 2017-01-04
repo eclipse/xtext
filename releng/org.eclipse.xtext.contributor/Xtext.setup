@@ -68,6 +68,11 @@
       value="http://download.eclipse.org/tools/gef/updates/releases"/>
   <setupTask
       xsi:type="setup:VariableTask"
+      type="URI"
+      name="buildship.p2.repository"
+      value="http://download.eclipse.org/buildship/updates/e45/milestones/2.x/"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
       id="github.user.password"
       type="PASSWORD"
       name="github.user.password"
@@ -288,7 +293,7 @@
     <repository
         url="http://download.eclipse.org/technology/m2e/releases/1.5/1.5.2.20150413-2215/"/>
     <repository
-        url="http://download.eclipse.org/buildship/updates/e45/milestones/2.x/"/>
+        url="${buildship.p2.repository}"/>
     <repository
         url="http://findbugs.cs.umd.edu/eclipse"/>
     <repository
@@ -406,7 +411,7 @@
               project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -482,7 +487,7 @@
               project="org.eclipse.xtext.xbase.lib"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -556,7 +561,7 @@
               project="org.eclipse.xtext.xbase"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -796,12 +801,16 @@
             name="org.eclipse.m2e.feature.feature.group"/>
         <requirement
             name="org.eclipse.jem.util"/>
+        <requirement
+            name="org.eclipse.buildship.feature.group"/>
         <repositoryList
             name="Oldest Helios">
           <repository
               url="http://download.eclipse.org/webtools/downloads/drops/R3.2.3/R-3.2.3-20110217214612/repository"/>
           <repository
               url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
+          <repository
+              url="${buildship.p2.repository}"/>
         </repositoryList>
       </targlet>
       <description>Target platform</description>
@@ -824,7 +833,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.14/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2 //@projects[name='eclipse']/@setupTasks.4/@workingSets.1"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2 //@projects[name='eclipse']/@setupTasks.4/@workingSets.1"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -836,7 +845,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.14/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.FeatureNature"/>
@@ -851,7 +860,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.example\..*"/>
@@ -948,7 +957,7 @@
               project="org.eclipse.xtext.core.idea.tests"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1024,7 +1033,7 @@
               project="org.eclipse.xtext.web"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1095,7 +1104,7 @@
               project="org.eclipse.xtext.maven.plugin"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1187,7 +1196,7 @@
               project="org.eclipse.xtend.core"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
