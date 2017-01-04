@@ -8,8 +8,8 @@
 package org.eclipse.xtext.ui.tests.editor.syntaxcoloring
 
 import com.google.inject.Inject
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor
+import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

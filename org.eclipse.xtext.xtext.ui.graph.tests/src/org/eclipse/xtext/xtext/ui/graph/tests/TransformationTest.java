@@ -8,8 +8,8 @@ import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.xtext.ui.graph.figures.BypassSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.CompartmentSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.CrossPointSegment;

@@ -23,7 +23,7 @@ public class WrappedCoreException extends IOException {
 	}
 	
 	@Override
-	public CoreException getCause() {
+	public synchronized CoreException getCause() {
 		return (CoreException) super.getCause();
 	}
 }

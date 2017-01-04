@@ -10,6 +10,7 @@ grammar org.eclipse.xtext.ui.tests.editor.contentassist.TwoParametersTestLanguag
 
 import "http://www.eclipse.org/2015/tmf/xtext/parameters"
 
+@Override 
 ParserRuleParameters: {ParserRuleParameters} 
   ( '#1' scenario=Scenario6<true, true>
   |	'#2' scenario=Scenario6<false, false>

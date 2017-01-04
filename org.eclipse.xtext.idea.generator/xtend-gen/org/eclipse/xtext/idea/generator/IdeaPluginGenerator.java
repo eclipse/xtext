@@ -247,8 +247,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
             _builder.append("public ");
             {
               String _expression = it.getValue().getExpression();
-              boolean _equals = Objects.equal(_expression, null);
-              if (_equals) {
+              boolean _tripleEquals = (_expression == null);
+              if (_tripleEquals) {
                 _builder.append("Class<? extends ");
                 String _type = it.getKey().getType();
                 _builder.append(_type, "\t");
@@ -268,8 +268,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
             _builder.append("return ");
             {
               String _expression_1 = it.getValue().getExpression();
-              boolean _notEquals = (!Objects.equal(_expression_1, null));
-              if (_notEquals) {
+              boolean _tripleNotEquals = (_expression_1 != null);
+              if (_tripleNotEquals) {
                 String _expression_2 = it.getValue().getExpression();
                 _builder.append(_expression_2, "\t\t");
               } else {
@@ -309,8 +309,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               _builder.append("public ");
               {
                 String _expression_3 = it.getValue().getExpression();
-                boolean _equals_1 = Objects.equal(_expression_3, null);
-                if (_equals_1) {
+                boolean _tripleEquals_1 = (_expression_3 == null);
+                if (_tripleEquals_1) {
                   _builder.append("Class<? extends com.google.inject.Provider<");
                   String _type_2 = it.getKey().getType();
                   _builder.append(_type_2, "\t");
@@ -332,8 +332,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               _builder.append("return ");
               {
                 String _expression_4 = it.getValue().getExpression();
-                boolean _notEquals_1 = (!Objects.equal(_expression_4, null));
-                if (_notEquals_1) {
+                boolean _tripleNotEquals_1 = (_expression_4 != null);
+                if (_tripleNotEquals_1) {
                   String _expression_5 = it.getValue().getExpression();
                   _builder.append(_expression_5, "\t\t");
                 } else {
@@ -408,7 +408,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     }
     final String prefix = _xifexpression;
     String _xifexpression_2 = null;
-    if (((!Objects.equal(it.getValue().getExpression(), null)) && (!it.getValue().isProvider()))) {
+    if (((it.getValue().getExpression() != null) && (!it.getValue().isProvider()))) {
       _xifexpression_2 = "ToInstance";
     } else {
       _xifexpression_2 = "";

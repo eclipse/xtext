@@ -112,6 +112,7 @@ terminal NL:
 	'\r'? '\n' 
 ;
 
+@Override 
 terminal WS:
 	' ' | '\t'
 ;
