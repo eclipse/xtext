@@ -34,7 +34,6 @@ import com.google.inject.Inject;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclaredType> {
 
 	private final StoppedTask createTypeTask = Stopwatches.forTask("AsmTypeFactory.createType");

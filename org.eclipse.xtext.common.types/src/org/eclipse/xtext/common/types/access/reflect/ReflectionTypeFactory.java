@@ -79,7 +79,6 @@ import com.google.inject.Inject;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class ReflectionTypeFactory implements ITypeFactory<Class<?>, JvmDeclaredType> {
 
 	private final static Logger log = Logger.getLogger(ReflectionTypeFactory.class);
