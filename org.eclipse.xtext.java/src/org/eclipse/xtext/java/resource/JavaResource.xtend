@@ -30,7 +30,6 @@ import org.eclipse.xtext.resource.IFragmentProvider
 import org.eclipse.xtext.resource.IFragmentProvider.Fallback
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.util.concurrent.IUnitOfWork
-import org.eclipse.xtend.lib.annotations.Data
 
 class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISynchronizable<JavaResource> {
 	
