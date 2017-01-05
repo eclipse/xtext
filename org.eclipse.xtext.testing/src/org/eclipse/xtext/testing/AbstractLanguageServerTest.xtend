@@ -145,7 +145,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			processId = 1
 			rootPath = testRootPath.toString
 		]
-		initializer?.apply(params as InitializeParams)
+		initializer?.apply(params)
 		return languageServer.initialize(params).get
 	}
 

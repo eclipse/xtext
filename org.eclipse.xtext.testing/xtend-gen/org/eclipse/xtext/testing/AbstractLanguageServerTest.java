@@ -206,7 +206,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       };
       final InitializeParams params = ObjectExtensions.<InitializeParams>operator_doubleArrow(_initializeParams, _function);
       if (initializer!=null) {
-        initializer.apply(((InitializeParams) params));
+        initializer.apply(params);
       }
       return this.languageServer.initialize(params).get();
     } catch (Throwable _e) {
