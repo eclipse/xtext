@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
 @Documented
 public @interface InjectWith {
 	/**
-	 * the IInjectorProvider class which will be used to create an {@link Injector Injector}.
+	 * the IInjectorProvider class which will be used to create an {@link com.google.inject.Injector Injector}.
 	 */
 	Class<? extends IInjectorProvider> value();
 }

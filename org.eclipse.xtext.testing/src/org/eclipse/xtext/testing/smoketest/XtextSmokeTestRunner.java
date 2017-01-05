@@ -14,7 +14,7 @@ import org.junit.runners.model.InitializationError;
 import com.google.common.annotations.Beta;
 
 /**
- * Use this runner on a class that is annotated with {@link Suite.SuiteClasses}
+ * Use this runner on a class that is annotated with {@link org.junit.runners.Suite.SuiteClasses SuitClasses}
  * to test the input documents that are used in that test class for exceptions
  * by using a {@link ScenarioProcessor}. The suite has to be annotated with {@link ProcessedBy}
  * to find the processor instance and the parameters.

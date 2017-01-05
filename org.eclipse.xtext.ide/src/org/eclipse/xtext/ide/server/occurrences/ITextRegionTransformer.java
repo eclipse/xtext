@@ -50,7 +50,7 @@ public interface ITextRegionTransformer {
 	 * @param kind
 	 *            the document highlight kind. Cannot be {@code null}.
 	 * 
-	 * @param returns
+	 * @return
 	 *            with a new transformed {@link DocumentHighlight document
 	 *            highlight} instance.
 	 */

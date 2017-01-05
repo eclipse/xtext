@@ -57,7 +57,7 @@ public class RequestManager {
    * Currently <i>running requests</i> will be cancelled.
    * </p>
    * <p>
-   * A provided cancel indicator should implement {@link CancellableIndicator CancellableIndicator}
+   * A provided cancel indicator should implement {@link CancelIndicator}
    * to let the given request to be cancelled by a write request.
    * </p>
    */

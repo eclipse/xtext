@@ -19,10 +19,10 @@ import org.eclipse.xtext.util.DisposableRegistry;
 import org.eclipse.xtext.util.IDisposable;
 
 /**
- * Provider for executor services. By calling {@link dispose()} all created executor services are shut down.
+ * Provider for executor services. By calling {@link #dispose()} all created executor services are shut down.
  * <p>
  * In some situations it is necessary to use multiple instances of executor services in order to avoid deadlocks.
- * That can be achieved with the {@link get(String)} method, which will return a different instance for each key.
+ * That can be achieved with the {@link #get(String)} method, which will return a different instance for each key.
  */
 @Singleton
 @SuppressWarnings("all")
