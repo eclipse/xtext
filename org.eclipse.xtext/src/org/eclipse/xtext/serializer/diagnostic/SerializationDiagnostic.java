@@ -106,7 +106,10 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 	@Override
 	@Deprecated
 	public EObject getContext() {
-		return ((SerializationContext) context).getActionOrRule();
+		if (context instanceof SerializationContext)
+			return ((SerializationContext) context).getActionOrRule();
+		else
+			return null;
 	}
 
 	@Override
