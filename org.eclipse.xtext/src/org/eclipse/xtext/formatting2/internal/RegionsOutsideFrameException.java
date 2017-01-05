@@ -27,6 +27,7 @@ public class RegionsOutsideFrameException extends RuntimeException {
 	private final String frameTitle;
 	private final Pair<String, ITextSegment>[] regions;
 
+	@SafeVarargs
 	public RegionsOutsideFrameException(String title, ITextSegment frame, Pair<String, ITextSegment>... regions) {
 		this.frameTitle = title;
 		this.frameRegion = frame;

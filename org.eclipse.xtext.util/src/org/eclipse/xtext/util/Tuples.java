@@ -25,6 +25,7 @@ public final class Tuples {
 		return new Triple<A, B, C>(a,b,c);
 	}
 
+	@SafeVarargs
 	public static <A,B> Map<A,B> toMap(Pair<A,B>...pairs) {
 		Map<A, B> result = new LinkedHashMap<A, B>();
 		for (Pair<A,B> pair : pairs) {

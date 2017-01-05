@@ -158,6 +158,7 @@ public class NfaToProduction {
 			super();
 		}
 
+		@SafeVarargs
 		public AlternativeAlias(boolean optional, boolean many, AbstractElementAlias<T>... children) {
 			super(optional, many);
 			Collections.addAll(this.children, children);
@@ -243,6 +244,7 @@ public class NfaToProduction {
 			super();
 		}
 
+		@SafeVarargs
 		public GroupAlias(boolean optional, boolean many, AbstractElementAlias<T>... children) {
 			super(optional, many);
 			Collections.addAll(this.children, children);
