@@ -9,14 +9,11 @@ package org.eclipse.xtext.xtext.ecoreInference;
 
 import com.google.common.base.Joiner;
 import java.io.InputStream;
-import java.util.List;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
@@ -124,18 +121,6 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     super.tearDown();
   }
   
-  private EPackage getEPackageFromGrammar(final String xtextGrammar, final int expectedErrors) throws Exception {
-    final List<EPackage> metamodels = this.getEPackagesFromGrammar(xtextGrammar, expectedErrors);
-    Assert.assertEquals(1, metamodels.size());
-    final EPackage result = IterableExtensions.<EPackage>head(metamodels);
-    Assert.assertNotNull(result);
-    return result;
-  }
-  
-  private EPackage getEPackageFromGrammar(final String xtextGrammar) throws Exception {
-    return this.getEPackageFromGrammar(xtextGrammar, 0);
-  }
-  
   @Override
   public XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
     XtextResourceSet rs = this.<XtextResourceSet>get(XtextResourceSet.class);
@@ -175,42 +160,6 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     resource.setLinker(linker);
     resource.load(in, null);
     return resource;
-  }
-  
-  private List<EPackage> getEPackagesFromGrammar(final String xtextGrammar, final int expectedErrors) throws Exception {
-    this.errorAcceptorMock.replay();
-    EObject _modelAndExpect = this.getModelAndExpect(xtextGrammar, expectedErrors);
-    final Grammar grammar = ((Grammar) _modelAndExpect);
-    this.errorAcceptorMock.verify();
-    final List<EPackage> metamodels = Xtext2EcoreTransformer.doGetGeneratedPackages(grammar);
-    Assert.assertNotNull(metamodels);
-    return metamodels;
-  }
-  
-  private EAttribute assertAttributeConfiguration(final EClass eClass, final int attributeIndex, final String featureName, final String featureTypeName) {
-    final EAttribute feature = eClass.getEAttributes().get(attributeIndex);
-    Assert.assertEquals(featureName, feature.getName());
-    Assert.assertNotNull(feature.getEType());
-    Assert.assertEquals(featureTypeName, feature.getEType().getName());
-    return feature;
-  }
-  
-  private EAttribute assertAttributeConfiguration(final EClass eClass, final int attributeIndex, final String featureName, final String featureTypeName, final int lowerBound, final int upperBound) {
-    final EAttribute feature = this.assertAttributeConfiguration(eClass, attributeIndex, featureName, featureTypeName);
-    Assert.assertEquals(lowerBound, feature.getLowerBound());
-    Assert.assertEquals(upperBound, feature.getUpperBound());
-    return feature;
-  }
-  
-  private EReference assertReferenceConfiguration(final EClass eClass, final int referenceIndex, final String featureName, final String featureTypeName, final boolean isContainment, final int lowerBound, final int upperBound) {
-    final EReference reference = eClass.getEReferences().get(referenceIndex);
-    Assert.assertEquals(featureName, reference.getName());
-    Assert.assertNotNull(reference.getEType());
-    Assert.assertEquals(featureTypeName, reference.getEType().getName());
-    Assert.assertEquals(Boolean.valueOf(isContainment), Boolean.valueOf(reference.isContainment()));
-    Assert.assertEquals(lowerBound, reference.getLowerBound());
-    Assert.assertEquals(upperBound, reference.getUpperBound());
-    return reference;
   }
   
   @Test

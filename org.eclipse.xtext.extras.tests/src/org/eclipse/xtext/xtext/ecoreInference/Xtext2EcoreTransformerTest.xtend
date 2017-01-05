@@ -9,14 +9,11 @@ package org.eclipse.xtext.xtext.ecoreInference
 
 import com.google.common.base.Joiner
 import java.io.InputStream
-import java.util.List
 import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EClassifier
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
-import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.GeneratedMetamodel
@@ -95,18 +92,6 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		super.tearDown()
 	}
 
-	def private EPackage getEPackageFromGrammar(String xtextGrammar, int expectedErrors) throws Exception {
-		val metamodels = getEPackagesFromGrammar(xtextGrammar, expectedErrors)
-		assertEquals(1, metamodels.size)
-		val result = metamodels.head
-		assertNotNull(result)
-		return result
-	}
-
-	def private EPackage getEPackageFromGrammar(String xtextGrammar) throws Exception {
-		return getEPackageFromGrammar(xtextGrammar, 0)
-	}
-
 	override XtextResource doGetResource(InputStream in, URI uri) throws Exception {
 		var rs = get(XtextResourceSet)
 		rs.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext/", false), URI.createURI("classpath:/"));
@@ -135,44 +120,6 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		resource.setLinker(linker)
 		resource.load(in, null)
 		return resource
-	}
-
-	def private List<EPackage> getEPackagesFromGrammar(String xtextGrammar, int expectedErrors) throws Exception {
-		errorAcceptorMock.replay()
-		val grammar = getModelAndExpect(xtextGrammar, expectedErrors) as Grammar
-		errorAcceptorMock.verify()
-		val metamodels = Xtext2EcoreTransformer.doGetGeneratedPackages(grammar)
-		assertNotNull(metamodels)
-		return metamodels
-	}
-
-	def private EAttribute assertAttributeConfiguration(EClass eClass, int attributeIndex, String featureName,
-		String featureTypeName) {
-		val feature = eClass.getEAttributes().get(attributeIndex)
-		assertEquals(featureName, feature.name)
-		assertNotNull(feature.EType)
-		assertEquals(featureTypeName, feature.EType.name)
-		return feature
-	}
-
-	def private EAttribute assertAttributeConfiguration(EClass eClass, int attributeIndex, String featureName,
-		String featureTypeName, int lowerBound, int upperBound) {
-		val feature = assertAttributeConfiguration(eClass, attributeIndex, featureName, featureTypeName)
-		assertEquals(lowerBound, feature.getLowerBound())
-		assertEquals(upperBound, feature.getUpperBound())
-		return feature
-	}
-
-	def private EReference assertReferenceConfiguration(EClass eClass, int referenceIndex, String featureName,
-		String featureTypeName, boolean isContainment, int lowerBound, int upperBound) {
-		val reference = eClass.getEReferences().get(referenceIndex)
-		assertEquals(featureName, reference.name)
-		assertNotNull(reference.EType)
-		assertEquals(featureTypeName, reference.EType.name)
-		assertEquals(isContainment, reference.isContainment())
-		assertEquals(lowerBound, reference.getLowerBound())
-		assertEquals(upperBound, reference.getUpperBound())
-		return reference
 	}
 
 	@Test def void testMultiInheritance_01() throws Exception {
