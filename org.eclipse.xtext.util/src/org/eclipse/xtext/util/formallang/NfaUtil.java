@@ -598,20 +598,25 @@ public class NfaUtil {
 	 */
 	public <S> Map<S, Set<S>> findCycles(Nfa<S> nfa) {
 		Map<S, Set<S>> cycles = Maps.newLinkedHashMap();
-		findCycles(nfa, nfa.getStart(), (List<S> t) -> {
-			Set<S> cycle = Sets.newHashSet(t);
-			for (S cycleNode : t) {
-				// We have two cycles that are connected via at least
-				// one node. Treat them as one cycle.
-				Set<S> existingCycle = cycles.get(cycleNode);
-				if (existingCycle != null) {
-					cycle.addAll(existingCycle);
+		IAcceptor<List<S>> cycleAcceptor = new IAcceptor<List<S>>() {
+			@Override
+			public void accept(List<S> t) {
+				Set<S> cycle = Sets.newHashSet(t);
+				for (S cycleNode : t) {
+					// We have two cycles that are connected via at least
+					// one node. Treat them as one cycle.
+					Set<S> existingCycle = cycles.get(cycleNode);
+					if (existingCycle != null) {
+						cycle.addAll(existingCycle);
+					}
+				}
+				for (S n : cycle) {
+					cycles.put(n, cycle);
 				}
 			}
-			for (S n : cycle) {
-				cycles.put(n, cycle);
-			}
-		}, Maps.newHashMap(), Lists.newLinkedList());
+		};
+		
+		findCycles(nfa, nfa.getStart(), cycleAcceptor, Maps.<S, Integer>newHashMap(), Lists.<S>newLinkedList());
 		return cycles;
 	}
 	
