@@ -141,8 +141,6 @@ VerticalLine : '|';
 
 RightCurlyBracket : '}';
 
-// Rules duplicated to allow inter-rule references
-
 RULE_DOCUMENTATION : '/**' ( options {greedy=false;} : . )*'*/';
 
 RULE_HEX : '0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+;
