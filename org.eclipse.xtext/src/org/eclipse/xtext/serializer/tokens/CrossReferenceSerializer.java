@@ -9,11 +9,13 @@ package org.eclipse.xtext.serializer.tokens;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -43,9 +45,6 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 	@Inject
 	private LinkingHelper linkingHelper;
 
-	//	@Inject
-	//	private ILinkingService linkingService;
-
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 
@@ -61,10 +60,11 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 
 	@Override
 	public boolean isValid(EObject semanticObject, CrossReference crossref, EObject target, INode node, Acceptor errors) {
-		if (target.eIsProxy() && node != null) {
+		if ((target == null || target.eIsProxy()) && node != null) {
 			CrossReference crossrefFromNode = GrammarUtil.containingCrossReference(node.getGrammarElement());
 			return crossref == crossrefFromNode;
 		}
+		
 		final EReference ref = GrammarUtil.getReference(crossref, semanticObject.eClass());
 		final IScope scope = scopeProvider.getScope(semanticObject, ref);
 		if (scope == null) {
@@ -72,13 +72,17 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 				errors.accept(diagnostics.getNoScopeFoundDiagnostic(semanticObject, crossref, target));
 			return false;
 		}
+		
+		if (target != null && target.eIsProxy()) {
+			target = handleProxy(target, semanticObject, ref);
+		}
+		
 		return getCrossReferenceNameFromScope(semanticObject, crossref, target, scope, errors) != null;
 	}
 
 	@Override
 	public String serializeCrossRef(EObject semanticObject, CrossReference crossref, EObject target, INode node,
 			Acceptor errors) {
-
 		if ((target == null || target.eIsProxy()) && node != null)
 			return tokenUtil.serializeNode(node);
 
@@ -89,16 +93,19 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 				errors.accept(diagnostics.getNoScopeFoundDiagnostic(semanticObject, crossref, target));
 			return null;
 		}
+		
+		if (target != null && target.eIsProxy()) {
+			target = handleProxy(target, semanticObject, ref);
+		}
 
 		if (target != null && node != null) {
 			String text = linkingHelper.getCrossRefNodeAsString(node, true);
 			QualifiedName qn = qualifiedNameConverter.toQualifiedName(text);
-			URI targetURI = EcoreUtil.getURI(target);
-			if (target.eResource() != null && target.eResource().getResourceSet() != null)
-				targetURI = target.eResource().getResourceSet().getURIConverter().normalize(targetURI);
-			for (IEObjectDescription desc : scope.getElements(qn))
-				if (desc.getEObjectURI().equals(targetURI))
+			URI targetURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(target);
+			for (IEObjectDescription desc : scope.getElements(qn)) {
+				if (targetURI.equals(desc.getEObjectURI()))
 					return tokenUtil.serializeNode(node);
+			}
 		}
 
 		return getCrossReferenceNameFromScope(semanticObject, crossref, target, scope, errors);
@@ -132,6 +139,24 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 						scope));
 		}
 		return null;
+	}
+	
+	/**
+	 * @since 2.11
+	 */
+	protected EObject handleProxy(EObject proxy, EObject semanticObject, EReference reference) {
+		if (reference != null && reference.isResolveProxies()) {
+			if (reference.isMany()) {
+				@SuppressWarnings("unchecked")
+				EList<? extends EObject> list = (EList<? extends EObject>) semanticObject.eGet(reference);
+				int index = list.indexOf(proxy);
+				if (index >= 0)
+					return list.get(index);
+			} else {
+				return (EObject) semanticObject.eGet(reference, true);
+			}
+		}
+		return EcoreUtil.resolve(proxy, semanticObject);
 	}
 
 }
