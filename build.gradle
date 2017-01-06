@@ -25,7 +25,7 @@ subprojects {
 	version = rootProject.version
 	
 	apply plugin: 'java'
-	if (findProperty('skipXtendCompiler') != 'true') {
+	if (findProperty('compileXtend') == 'true') {
 		apply plugin: 'org.xtext.xtend'
 	}
 	apply plugin: 'eclipse'

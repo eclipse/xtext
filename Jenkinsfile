@@ -10,7 +10,7 @@ node {
 		
 		stage 'Gradle Build'
 		try {
-			sh "./gradlew -PuseJenkinsSnapshots=true clean build createLocalMavenRepo --refresh-dependencies --continue"
+			sh "./gradlew clean build createLocalMavenRepo -PuseJenkinsSnapshots=true -PcompileXtend=true --refresh-dependencies --continue"
 		} finally {
 			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
 		}
