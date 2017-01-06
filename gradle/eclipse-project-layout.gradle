@@ -16,10 +16,10 @@ sourceSets {
 			srcDirs = sourceDirs
 			exclude '**/*.java', '**/*.xtend'
 		}
-		if (findProperty('skipXtendCompiler') == 'true') {
-			java.srcDir 'xtend-gen'
-		} else {
+		if (findProperty('compileXtend') == 'true') {
 			xtendOutputDir = 'xtend-gen'
+		} else {
+			java.srcDir 'xtend-gen'
 		}
 	}
 	configure(isTestProject? main : test) {

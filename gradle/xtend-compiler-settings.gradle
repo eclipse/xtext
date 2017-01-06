@@ -2,7 +2,7 @@
  * Configuration of Xtend compiler.
  */
 
-if (findProperty('skipXtendCompiler') != 'true') {
+if (findProperty('compileXtend') == 'true') {
 	[generateXtext, generateTestXtext].each { gen ->
 		gen.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
 	}
