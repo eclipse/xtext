@@ -13,10 +13,10 @@ dependencies {
 sourceSets {
 	longrunning {
 		java.srcDirs = ['longrunning/src']
-		if (findProperty('skipXtendCompiler') == 'true') {
-			java.srcDir 'longrunning/xtend-gen'
-		} else {
+		if (findProperty('compileXtend') == 'true') {
 			xtendOutputDir = 'longrunning/xtend-gen'
+		} else {
+			java.srcDir 'longrunning/xtend-gen'
 		}
 		compileClasspath += sourceSets.test.output
 		runtimeClasspath += sourceSets.test.output
@@ -35,7 +35,7 @@ configurations {
 	suitesRuntime.extendsFrom testRuntime
 }
 
-if (findProperty('skipXtendCompiler') != 'true') {
+if (findProperty('compileXtend') == 'true') {
 	generateLongrunningXtext.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
 }
 
