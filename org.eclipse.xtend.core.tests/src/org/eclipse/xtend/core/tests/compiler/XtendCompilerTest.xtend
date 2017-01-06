@@ -4331,7 +4331,44 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
-
+	
+	@Test
+	def testRichStringEmptyEmission_01 () {
+		assertCompilesTo(
+			"class Foo { def test() '''Hello «null»World!''' }",
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public CharSequence test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("Hello ");
+				    _builder.append("World!");
+				    return _builder;
+				  }
+				}
+			''')
+	}
+	@Test
+	def testRichStringEmptyEmission_02 () {
+		assertCompilesTo(
+			"class Foo { def test() '''Hello «\"\"»World!''' }",
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public CharSequence test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("Hello ");
+				    _builder.append("World!");
+				    return _builder;
+				  }
+				}
+			''')
+	}
+	
 	@Test
 	def compileClassWithFileHeader(){
 		assertCompilesTo(

@@ -9611,6 +9611,74 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testRichStringEmptyEmission_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public CharSequence test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"Hello \");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"World!\");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return _builder;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertCompilesTo(
+      "class Foo { def test() \'\'\'Hello «null»World!\'\'\' }", _builder);
+  }
+  
+  @Test
+  public void testRichStringEmptyEmission_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public CharSequence test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"Hello \");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"World!\");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return _builder;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertCompilesTo(
+      "class Foo { def test() \'\'\'Hello «\"\"»World!\'\'\' }", _builder);
+  }
+  
+  @Test
   public void compileClassWithFileHeader() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
