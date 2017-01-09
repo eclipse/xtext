@@ -11,7 +11,7 @@ dependencies {
 	compile "com.google.inject:guice:$versions.guice"
 	compile "org.antlr:antlr-runtime:$versions.antlr"
 	optional "org.eclipse.core:org.eclipse.core.runtime:$versions.eclipseCore"
-	optional "org.eclipse.equinox:org.eclipse.equinox.registry:$versions.equinoxRegistry"
+	optional "org.eclipse.platform:org.eclipse.equinox.registry:$versions.equinoxRegistry"
 	optional "org.eclipse.emf:org.eclipse.emf.mwe.utils:$versions.emfMwe"
 	optional "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"
 	optional "org.eclipse.xpand:org.eclipse.xtend.typesystem.emf:$versions.xpand"
