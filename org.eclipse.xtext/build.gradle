@@ -5,7 +5,7 @@ dependencies {
 	compile project(':org.eclipse.xtext.util')
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
 	compile "log4j:log4j:$versions.log4j"
-	compile "org.eclipse.equinox:org.eclipse.equinox.common:$versions.equinoxCommon"
+	compile "org.eclipse.platform:org.eclipse.equinox.common:$versions.equinoxCommon"
 	compile "org.eclipse.emf:org.eclipse.emf.common:$versions.emfCommon"
 	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.emfEcore"
 	compile "com.google.inject:guice:$versions.guice"
