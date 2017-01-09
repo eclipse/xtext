@@ -62,14 +62,14 @@ public class ExUnorderedGroupsTestLanguageSyntacticSequencer extends AbstractSyn
 	/**
 	 * Ambiguous syntax:
 	 *     (
-	  *         '10' | 
-	  *         '11' | 
-	  *         '3' | 
-	  *         '7' | 
-	  *         'bug302585' | 
+	  *         '5' | 
 	  *         '6' | 
+	  *         '3' | 
+	  *         '11' | 
+	  *         '7' | 
 	  *         '4' | 
-	  *         '5'
+	  *         '10' | 
+	  *         'bug302585'
 	  *     )
 	 *
 	 * This ambiguous syntax occurs at:

@@ -22,7 +22,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.parameters.ParametersTestLanguageEx.ParserRuleParameters");
 		private final RuleCall cParserRuleParametersParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//ParserRuleParameters:
+		//@ Override ParserRuleParameters:
 		//	super::ParserRuleParameters;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -33,7 +33,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.parameters.ParametersTestLanguageEx.Scenario1");
 		private final RuleCall cScenario1ParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Scenario1 <Param Scenario:
+		//@ Override Scenario1 <Param Scenario:
 		//	super::Scenario1<Param>;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -93,7 +93,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	}
 
 	
-	//ParserRuleParameters:
+	//@ Override ParserRuleParameters:
 	//	super::ParserRuleParameters;
 	public ParserRuleParametersElements getParserRuleParametersAccess() {
 		return pParserRuleParameters;
@@ -103,7 +103,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 		return getParserRuleParametersAccess().getRule();
 	}
 	
-	//Scenario1 <Param Scenario:
+	//@ Override Scenario1 <Param Scenario:
 	//	super::Scenario1<Param>;
 	public Scenario1Elements getScenario1Access() {
 		return pScenario1;

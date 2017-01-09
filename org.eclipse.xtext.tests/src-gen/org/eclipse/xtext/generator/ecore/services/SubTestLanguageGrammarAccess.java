@@ -63,7 +63,7 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//AnotherSuperMain:
+		//@ Override AnotherSuperMain:
 		//	"ups" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -142,7 +142,7 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getSubMainAccess().getRule();
 	}
 	
-	//AnotherSuperMain:
+	//@ Override AnotherSuperMain:
 	//	"ups" name=ID;
 	public AnotherSuperMainElements getAnotherSuperMainAccess() {
 		return pAnotherSuperMain;

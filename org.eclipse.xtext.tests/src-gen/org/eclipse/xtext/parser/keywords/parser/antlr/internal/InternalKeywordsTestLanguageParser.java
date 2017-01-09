@@ -282,7 +282,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     {
                     lv_forth_3_0=(Token)match(input,14,FollowSets000.FOLLOW_2); 
 
-                    					newLeafNode(lv_forth_3_0, grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0());
+                    					newLeafNode(lv_forth_3_0, grammarAccess.getModelAccess().getForthBackslashKeyword_3_0());
                     				
 
                     					if (current==null) {

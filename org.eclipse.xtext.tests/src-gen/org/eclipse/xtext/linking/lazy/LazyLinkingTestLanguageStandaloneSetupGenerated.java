@@ -5,11 +5,9 @@ package org.eclipse.xtext.linking.lazy;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.common.TerminalsStandaloneSetup;
-import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
@@ -35,8 +33,5 @@ public class LazyLinkingTestLanguageStandaloneSetupGenerated implements ISetup {
 		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("lazylinkingtestlanguage", resourceFactory);
 		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("lazylinkingtestlanguage", serviceProvider);
-		if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/lazyLinkingTestLanguage")) {
-			EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/lazyLinkingTestLanguage", LazyLinkingPackage.eINSTANCE);
-		}
 	}
 }

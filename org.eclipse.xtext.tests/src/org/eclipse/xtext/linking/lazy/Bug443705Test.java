@@ -46,7 +46,7 @@ public class Bug443705Test {
 		}
 	}
 
-	public static class Bug443705StandaloneSetup extends LazyLinkingTestLanguageStandaloneSetupGenerated {
+	public static class Bug443705StandaloneSetup extends LazyLinkingTestLanguageStandaloneSetup {
 		@Override
 		public Injector createInjector() {
 			return Guice.createInjector(new Bug443705RuntimeModule());

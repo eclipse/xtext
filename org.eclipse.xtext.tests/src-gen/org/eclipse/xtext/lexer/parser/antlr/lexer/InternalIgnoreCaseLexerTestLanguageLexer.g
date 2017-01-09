@@ -15,8 +15,6 @@ Case : ('C'|'c')('A'|'a')('S'|'s')('E'|'e');
 
 Foo : ('F'|'f')('O'|'o')('O'|'o');
 
-// Rules duplicated to allow inter-rule references
-
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
