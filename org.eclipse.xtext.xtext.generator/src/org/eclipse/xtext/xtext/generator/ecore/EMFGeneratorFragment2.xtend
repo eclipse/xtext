@@ -704,13 +704,18 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	private def void updateBuildProperties() {
 		if (!updateBuildProperties || modelPluginID !== null || projectConfig.runtime.manifest === null)
 			return;
-		val rootOutlet = projectConfig.runtime.root
-		val buildPropertiesPath = rootOutlet.path + '/build.properties'
-		val modelContainer = projectConfig.runtime.ecoreModelFolder
-		val buildProperties = new Properties
-		val reader = new InputStreamReader(new FileInputStream(new File(buildPropertiesPath)), Charset.forName(codeConfig.encoding))
-		try {
-			var existingContent = CharStreams.toString(reader)
+		val buildPropertiesPath = projectConfig.runtime.root.path + '/build.properties'
+		val buildPropertiesFile = new File(buildPropertiesPath)
+		if (buildPropertiesFile.exists) {
+			val modelContainer = projectConfig.runtime.ecoreModelFolder
+			val buildProperties = new Properties
+			val charset = Charset.forName(codeConfig.encoding)
+			val reader = new InputStreamReader(new FileInputStream(buildPropertiesFile), charset)
+			var existingContent = try {
+				CharStreams.toString(reader)
+			} finally {
+				reader.close()
+			}
 			buildProperties.load(new StringInputStream(existingContent, 'ISO-8859-1'))
 			val binIncludes = buildProperties.getProperty('bin.includes')
 			var changed = false
@@ -723,12 +728,13 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 				changed = true
 			}
 			if (changed) {
-				val writer = new OutputStreamWriter(new FileOutputStream(new File(buildPropertiesPath)), Charset.forName(codeConfig.encoding))
-				writer.write(existingContent)
-				writer.close()
+				val writer = new OutputStreamWriter(new FileOutputStream(buildPropertiesFile), charset)
+				try {
+					writer.write(existingContent)
+				} finally {
+					writer.close()
+				}
 			}
-		} finally {
-			reader.close()
 		}
 	}
 

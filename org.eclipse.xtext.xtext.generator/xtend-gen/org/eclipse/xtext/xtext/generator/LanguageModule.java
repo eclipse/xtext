@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.generator;
 
 import com.google.inject.Binder;
 import com.google.inject.Provider;
-import com.google.inject.binder.ScopedBindingBuilder;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.service.AbstractGenericModule;
@@ -23,21 +22,24 @@ class LanguageModule extends AbstractGenericModule {
   private final XtextGeneratorLanguage language;
   
   public void configureLanguage(final Binder binder) {
-    binder.<IXtextGeneratorLanguage>bind(IXtextGeneratorLanguage.class).toInstance(this.language);
+    final Provider<IXtextGeneratorLanguage> _function = () -> {
+      return this.language;
+    };
+    binder.<IXtextGeneratorLanguage>bind(IXtextGeneratorLanguage.class).toProvider(_function);
   }
   
-  public ScopedBindingBuilder configureGrammar(final Binder binder) {
+  public void configureGrammar(final Binder binder) {
     final Provider<Grammar> _function = () -> {
       return this.language.getGrammar();
     };
-    return binder.<Grammar>bind(Grammar.class).toProvider(_function);
+    binder.<Grammar>bind(Grammar.class).toProvider(_function);
   }
   
-  public ScopedBindingBuilder configureRuleNames(final Binder binder) {
+  public void configureRuleNames(final Binder binder) {
     final Provider<RuleNames> _function = () -> {
       return this.language.getRuleNames();
     };
-    return binder.<RuleNames>bind(RuleNames.class).toProvider(_function);
+    binder.<RuleNames>bind(RuleNames.class).toProvider(_function);
   }
   
   public void configureAdditionalBindings(final Binder binder) {

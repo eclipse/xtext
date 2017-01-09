@@ -130,7 +130,7 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	
 	override initialize(Injector injector) {
 		fragments.addAll(0, implicitFragments)
-		injector.injectMembers(XtextGeneratorLanguage)
+		injector.injectMembers(this)
 		if (resourceSet === null)
 			resourceSet = resourceSetProvider.get()
 		resourceSetInitializer.initialize(resourceSet, referencedResources)
@@ -167,7 +167,7 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	protected def List<? extends IXtextGeneratorFragment> getImplicitFragments() {
 		val fragments = newArrayList
 		fragments += new ImplicitFragment
-		fragments
+		return fragments
 	}
 	
 	def void initialize(Grammar grammar) {
