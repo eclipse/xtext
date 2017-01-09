@@ -188,9 +188,9 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 	}
 	
 	/**
-	 * Return <code>true</code> if the folder should be traversed. <code>False</code> otherwise.
+	 * Return <code>true</code> if the folder should be traversed. <code>false</code> otherwise.
 	 * Defaults to <code>true</code> for all folders.
-	 * @return <code>true</code> if the folder should be traversed. <code>False</code> otherwise.
+	 * @return <code>true</code> if the folder should be traversed. <code>false</code> otherwise.
 	 * @since 2.4
 	 */
 	protected boolean isHandled(IFolder folder) {
@@ -215,10 +215,14 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 	}
 
 	private Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri, IFile file) {
+		Iterable<Pair<IStorage, IProject>> storages = null;
 		if (file == null || !file.isAccessible()) {
-			return contribution.getStorages(uri);
+			storages = contribution.getStorages(uri);
 		}
-		return Collections.singleton(Tuples.<IStorage,IProject>create(file, file.getProject()));
+		if (file!=null && (storages == null || Iterables.isEmpty(storages))) {
+			storages = Collections.singleton(Tuples.<IStorage,IProject>create(file, file.getProject()));
+		}
+		return storages;
 	}
 
 	protected IWorkspaceRoot getWorkspaceRoot() {

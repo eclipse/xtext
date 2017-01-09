@@ -26,9 +26,10 @@ import com.google.inject.Singleton;
 
 /**
  * Resolves the encoding for {@link IEncodedStorage} behind the given {@link URI}s and falls back to the
- * {@link IEncodingProvider} configured for in the runtime module otherwise.
+ * {@link IEncodingProvider} configured for the runtime module otherwise.
  * 
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Karsten Thoms - bug#510084
  */
 @Singleton
 public class WorkspaceEncodingProvider implements IEncodingProvider {
@@ -47,30 +48,27 @@ public class WorkspaceEncodingProvider implements IEncodingProvider {
 
 	@Override
 	public String getEncoding(URI uri) {
-		if (workspace != null) {
-			if (uri != null) {
-				Iterator<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(uri).iterator();
-				while (storages.hasNext()) {
-					Pair<IStorage, IProject> storage = storages.next();
-					if (storage.getFirst() instanceof IEncodedStorage) {
-						try {
-							return ((IEncodedStorage) storage.getFirst()).getCharset();
-						} catch (CoreException e) {
-							LOG.error("Error getting file encoding", e);
-						}
-					}
+		if (workspace != null && uri != null) {
+			Iterator<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(uri).iterator();
+			while (storages.hasNext()) {
+				Pair<IStorage, IProject> storage = storages.next();
+				if (storage.getFirst() instanceof IEncodedStorage) {
 					try {
-						String result = storage.getSecond().getDefaultCharset(true);
-						return result;
+						return ((IEncodedStorage) storage.getFirst()).getCharset();
 					} catch (CoreException e) {
-						LOG.error("Error getting project's default encoding", e);
+						LOG.warn("Error getting file encoding", e);
 					}
+				}
+				try {
+					return storage.getSecond().getDefaultCharset(true);
+				} catch (CoreException e) {
+					LOG.warn("Error getting project's default encoding", e);
 				}
 			}
 			try {
 				return workspace.getRoot().getDefaultCharset();
 			} catch (CoreException e) {
-				LOG.error("Error getting project's default encoding", e);
+				LOG.warn("Error getting workspace's default encoding", e);
 			}
 		}
 		// fallback to runtime encoding provider
