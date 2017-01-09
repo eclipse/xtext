@@ -34,7 +34,7 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cIdsFQNParserRuleCall_4_0 = (RuleCall)cIdsAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Model:
+		//@ Override Model:
 		//	"model" name=ID "{"
 		//	elements+=Element*
 		//	ids+=FQN
@@ -130,7 +130,7 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	
-	//Model:
+	//@ Override Model:
 	//	"model" name=ID "{"
 	//	elements+=Element*
 	//	ids+=FQN
@@ -153,7 +153,7 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractGrammarElemen
 		return getElementAccess().getRule();
 	}
 	
-	//terminal ID:
+	//@ Override terminal ID:
 	//	'a'..'z'+;
 	public TerminalRule getIDRule() {
 		return gaInheritanceTestLanguage.getIDRule();

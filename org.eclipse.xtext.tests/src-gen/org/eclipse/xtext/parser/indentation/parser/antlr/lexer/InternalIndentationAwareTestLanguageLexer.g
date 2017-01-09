@@ -11,8 +11,6 @@ package org.eclipse.xtext.parser.indentation.parser.antlr.lexer;
 import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
-// Rules duplicated to allow inter-rule references
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))*;
 
 fragment RULE_INDENT : ;

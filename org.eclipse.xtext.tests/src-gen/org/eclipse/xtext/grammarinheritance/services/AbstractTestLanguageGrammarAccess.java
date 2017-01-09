@@ -282,7 +282,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return tREAL;
 	}
 	
-	//terminal ID:
+	//@ Override terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | 'ö' | 'ä' | 'ü' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;

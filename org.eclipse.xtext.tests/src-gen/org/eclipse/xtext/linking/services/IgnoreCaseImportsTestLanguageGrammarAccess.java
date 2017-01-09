@@ -28,7 +28,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cElementsElementParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
-		//Model:
+		//@ Override Model:
 		//	imports+=Import*
 		//	elements+=Element+;
 		@Override public ParserRule getRule() { return rule; }
@@ -116,7 +116,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	
-	//Model:
+	//@ Override Model:
 	//	imports+=Import*
 	//	elements+=Element+;
 	public ModelElements getModelAccess() {

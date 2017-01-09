@@ -27,7 +27,7 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.InheritanceTest3Language.Model");
 		private final RuleCall cModelParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Model:
+		//@ Override Model:
 		//	super::Model;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -54,7 +54,7 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		private final Assignment cNameAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
 		private final RuleCall cNameSTRINGTerminalRuleCall_3_2_0 = (RuleCall)cNameAssignment_3_2.eContents().get(0);
 		
-		//Element:
+		//@ Override Element:
 		//	super::Element
 		//	| {Element} "element" name=super::ID
 		//	| {Element} "element" name=Terminals::ID
@@ -176,7 +176,7 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	
-	//Model:
+	//@ Override Model:
 	//	super::Model;
 	public ModelElements getModelAccess() {
 		return pModel;
@@ -186,7 +186,7 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		return getModelAccess().getRule();
 	}
 	
-	//Element:
+	//@ Override Element:
 	//	super::Element
 	//	| {Element} "element" name=super::ID
 	//	| {Element} "element" name=Terminals::ID
@@ -199,13 +199,13 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		return getElementAccess().getRule();
 	}
 	
-	//terminal ID:
+	//@ Override terminal ID:
 	//	'id';
 	public TerminalRule getIDRule() {
 		return tID;
 	}
 	
-	//Model:
+	//@ Override Model:
 	//	"model" name=super::ID "{"
 	//	elements+=super::Element*
 	//	"}";
@@ -227,7 +227,7 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		return getInheritanceTestLanguageElementAccess().getRule();
 	}
 	
-	//terminal ID:
+	//@ Override terminal ID:
 	//	'a'..'z'+;
 	public TerminalRule getInheritanceTestLanguageIDRule() {
 		return gaInheritanceTestLanguage.getIDRule();

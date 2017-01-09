@@ -15,8 +15,6 @@ LineFeed : '\n';
 
 CarriageReturn : '\r';
 
-// Rules duplicated to allow inter-rule references
-
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_WS : (' '|'\t')+;

@@ -186,7 +186,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return tValue;
 	}
 	
-	//terminal SL_COMMENT:
+	//@ Override terminal SL_COMMENT:
 	//	'#' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;

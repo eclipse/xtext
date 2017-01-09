@@ -7,7 +7,7 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage with org.eclipse.xtext.common.Terminals
 
-generate lazyLinking "http://eclipse.org/xtext/lazyLinkingTestLanguage"
+import "http://eclipse.org/xtext/lazyLinkingTestLanguage"
 
 Model : 
 	types+=Type*;

@@ -92,8 +92,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//// override OverridableParserRule and call it
-		//OverridableParserRule mm::AType:
+		//@ Override OverridableParserRule mm::AType:
 		//	'overriddenelement' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -134,8 +133,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Assignment cAgeAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cAgeINTTerminalRuleCall_3_0 = (RuleCall)cAgeAssignment_3.eContents().get(0);
 		
-		//// override parser rule and change return type
-		//OverridableParserRule2 AType2:
+		//@ Override OverridableParserRule2 AType2:
 		//	'overridden other element' name=ID '-' age=INT;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -167,8 +165,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final RuleCall cSubrule2ParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cSubrule3ParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//// override and extend ExtendableParserRule and call it
-		//ExtendableParserRule mm::AType:
+		//@ Override ExtendableParserRule mm::AType:
 		//	Subrule1 | Subrule2 | Subrule3;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -384,8 +381,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getConcreteParserRuleAccess().getRule();
 	}
 	
-	//// override OverridableParserRule and call it
-	//OverridableParserRule mm::AType:
+	//@ Override OverridableParserRule mm::AType:
 	//	'overriddenelement' name=ID;
 	public OverridableParserRuleElements getOverridableParserRuleAccess() {
 		return pOverridableParserRule;
@@ -405,8 +401,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getCallOverridenParserRuleAccess().getRule();
 	}
 	
-	//// override parser rule and change return type
-	//OverridableParserRule2 AType2:
+	//@ Override OverridableParserRule2 AType2:
 	//	'overridden other element' name=ID '-' age=INT;
 	public OverridableParserRule2Elements getOverridableParserRule2Access() {
 		return pOverridableParserRule2;
@@ -416,8 +411,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getOverridableParserRule2Access().getRule();
 	}
 	
-	//// override and extend ExtendableParserRule and call it
-	//ExtendableParserRule mm::AType:
+	//@ Override ExtendableParserRule mm::AType:
 	//	Subrule1 | Subrule2 | Subrule3;
 	public ExtendableParserRuleElements getExtendableParserRuleAccess() {
 		return pExtendableParserRule;
@@ -467,7 +461,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getCallExtendedParserRuleAccess().getRule();
 	}
 	
-	//terminal ID:
+	//@ Override terminal ID:
 	//	super;
 	public TerminalRule getIDRule() {
 		return tID;
@@ -509,7 +503,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return gaAbstractTestLanguage.getREALRule();
 	}
 	
-	//terminal ID:
+	//@ Override terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | 'ö' | 'ä' | 'ü' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getAbstractTestLanguageIDRule() {
 		return gaAbstractTestLanguage.getIDRule();
