@@ -174,7 +174,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   @Override
   public void initialize(final Injector injector) {
     this.getFragments().addAll(0, this.getImplicitFragments());
-    injector.injectMembers(XtextGeneratorLanguage.class);
+    injector.injectMembers(this);
     if ((this.resourceSet == null)) {
       this.resourceSet = this.resourceSetProvider.get();
     }
@@ -248,14 +248,10 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   protected List<? extends IXtextGeneratorFragment> getImplicitFragments() {
-    ArrayList<ImplicitFragment> _xblockexpression = null;
-    {
-      final ArrayList<ImplicitFragment> fragments = CollectionLiterals.<ImplicitFragment>newArrayList();
-      ImplicitFragment _implicitFragment = new ImplicitFragment();
-      fragments.add(_implicitFragment);
-      _xblockexpression = fragments;
-    }
-    return _xblockexpression;
+    final ArrayList<ImplicitFragment> fragments = CollectionLiterals.<ImplicitFragment>newArrayList();
+    ImplicitFragment _implicitFragment = new ImplicitFragment();
+    fragments.add(_implicitFragment);
+    return fragments;
   }
   
   public void initialize(final Grammar grammar) {

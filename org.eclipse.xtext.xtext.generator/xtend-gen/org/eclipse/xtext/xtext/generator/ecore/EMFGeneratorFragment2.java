@@ -89,7 +89,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
@@ -1026,17 +1025,23 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       if ((((!this.updateBuildProperties) || (this.modelPluginID != null)) || (this.getProjectConfig().getRuntime().getManifest() == null))) {
         return;
       }
-      final IXtextGeneratorFileSystemAccess rootOutlet = this.getProjectConfig().getRuntime().getRoot();
-      String _path = rootOutlet.getPath();
+      String _path = this.getProjectConfig().getRuntime().getRoot().getPath();
       final String buildPropertiesPath = (_path + "/build.properties");
-      final String modelContainer = this.getProjectConfig().getRuntime().getEcoreModelFolder();
-      final Properties buildProperties = new Properties();
-      File _file = new File(buildPropertiesPath);
-      FileInputStream _fileInputStream = new FileInputStream(_file);
-      Charset _forName = Charset.forName(this.codeConfig.getEncoding());
-      final InputStreamReader reader = new InputStreamReader(_fileInputStream, _forName);
-      try {
-        String existingContent = CharStreams.toString(reader);
+      final File buildPropertiesFile = new File(buildPropertiesPath);
+      boolean _exists = buildPropertiesFile.exists();
+      if (_exists) {
+        final String modelContainer = this.getProjectConfig().getRuntime().getEcoreModelFolder();
+        final Properties buildProperties = new Properties();
+        final Charset charset = Charset.forName(this.codeConfig.getEncoding());
+        FileInputStream _fileInputStream = new FileInputStream(buildPropertiesFile);
+        final InputStreamReader reader = new InputStreamReader(_fileInputStream, charset);
+        String _xtrycatchfinallyexpression = null;
+        try {
+          _xtrycatchfinallyexpression = CharStreams.toString(reader);
+        } finally {
+          reader.close();
+        }
+        String existingContent = _xtrycatchfinallyexpression;
         StringInputStream _stringInputStream = new StringInputStream(existingContent, "ISO-8859-1");
         buildProperties.load(_stringInputStream);
         final String binIncludes = buildProperties.getProperty("bin.includes");
@@ -1060,15 +1065,14 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
           }
         }
         if (changed) {
-          File _file_1 = new File(buildPropertiesPath);
-          FileOutputStream _fileOutputStream = new FileOutputStream(_file_1);
-          Charset _forName_1 = Charset.forName(this.codeConfig.getEncoding());
-          final OutputStreamWriter writer = new OutputStreamWriter(_fileOutputStream, _forName_1);
-          writer.write(existingContent);
-          writer.close();
+          FileOutputStream _fileOutputStream = new FileOutputStream(buildPropertiesFile);
+          final OutputStreamWriter writer = new OutputStreamWriter(_fileOutputStream, charset);
+          try {
+            writer.write(existingContent);
+          } finally {
+            writer.close();
+          }
         }
-      } finally {
-        reader.close();
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

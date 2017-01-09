@@ -18,19 +18,19 @@ package class LanguageModule extends AbstractGenericModule {
 	
 	val XtextGeneratorLanguage language
 	
-	def configureLanguage(Binder binder) {
-		binder.bind(IXtextGeneratorLanguage).toInstance(language)
+	def void configureLanguage(Binder binder) {
+		binder.bind(IXtextGeneratorLanguage).toProvider[language]
 	}
 	
-	def configureGrammar(Binder binder) {
+	def void configureGrammar(Binder binder) {
 		binder.bind(Grammar).toProvider[language.grammar]
 	}
 	
-	def configureRuleNames(Binder binder) {
+	def void configureRuleNames(Binder binder) {
 		binder.bind(RuleNames).toProvider[language.ruleNames]
 	}
 	
-	def configureAdditionalBindings(Binder binder) {
+	def void configureAdditionalBindings(Binder binder) {
 		binder.install(language.guiceModule)
 	}
 	
