@@ -20,7 +20,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  * @noreference This class is not intended to be referenced by clients.
  * 
  * @since 2.9
+ * @deprecated Use org.eclipse.xtext.xbase.testing.OnTheFlyJavaCompiler2 instead
  */
+@Deprecated
 @Singleton
 @SuppressWarnings("all")
 public class OnTheFlyJavaCompiler2 {

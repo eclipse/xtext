@@ -18,7 +18,9 @@ import com.google.inject.Module;
  * 
  * @author Miro Spoenemann - Initial contribution and API
  * @since 2.8
+ * @deprecated Use org.eclipse.xtext.xbase.testing.JavaVersionModule instead
  */
+@Deprecated
 public class JavaVersionModule implements Module {
 
 	private final JavaVersion targetVersion;
