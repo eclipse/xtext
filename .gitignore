@@ -1,4 +1,5 @@
 bin/
+xtend-gen/
 .gradle/
 build/
 *._trace
