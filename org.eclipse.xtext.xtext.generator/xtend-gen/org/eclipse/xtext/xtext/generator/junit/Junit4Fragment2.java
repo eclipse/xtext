@@ -46,6 +46,16 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     return _xifexpression;
   }
   
+  protected String getXbaseTestingPackage() {
+    String _xifexpression = null;
+    if (this.useDeprecatedClasses) {
+      _xifexpression = "org.eclipse.xtext.xbase.junit";
+    } else {
+      _xifexpression = "org.eclipse.xtext.xbase.testing";
+    }
+    return _xifexpression;
+  }
+  
   @Override
   public void generate() {
     ManifestAccess _manifest = this.getProjectConfig().getRuntimeTest().getManifest();
@@ -55,6 +65,7 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
       final Procedure1<ManifestAccess> _function = (ManifestAccess it) -> {
         CollectionExtensions.<String>addAll(it.getRequiredBundles(), 
           this.getTestingPackage(), 
+          this.getXbaseTestingPackage(), 
           "org.eclipse.xtext.xbase.lib");
         String _runtimeTestBasePackage = this._xtextGeneratorNaming.getRuntimeTestBasePackage(this.getGrammar());
         String _plus = (_runtimeTestBasePackage + ";x-internal=true");
@@ -69,6 +80,7 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
       final Procedure1<ManifestAccess> _function_1 = (ManifestAccess it) -> {
         CollectionExtensions.<String>addAll(it.getRequiredBundles(), 
           this.getTestingPackage(), 
+          this.getXbaseTestingPackage(), 
           "org.eclipse.core.runtime", 
           "org.eclipse.ui.workbench;resolution:=optional");
         String _eclipsePluginTestBasePackage = this._xtextGeneratorNaming.getEclipsePluginTestBasePackage(this.getGrammar());
