@@ -2,19 +2,17 @@
  * Configuration of Xtend compiler.
  */
 
-if (findProperty('skipXtendCompiler') != 'true') {
-	[generateXtext, generateTestXtext].each { gen ->
-		gen.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
+[generateXtext, generateTestXtext].each { gen ->
+	gen.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
+}
+
+sourcesJar {
+	from (sourceSets.main.xtendOutputDir) {
+		include '**/*._trace'
 	}
-	
-	sourcesJar {
-		from (sourceSets.main.xtendOutputDir) {
+	if (name.endsWith('tests')) {
+		from (sourceSets.test.xtendOutputDir) {
 			include '**/*._trace'
-		}
-		if (name.endsWith('tests')) {
-			from (sourceSets.test.xtendOutputDir) {
-				include '**/*._trace'
-			}
 		}
 	}
 }
