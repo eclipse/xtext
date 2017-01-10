@@ -24,15 +24,21 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 
 	private final Function<? super T, ? extends ITextSegment> regionGetter;
 	private final Function<? super T, String> titleGetter;
-	private final IdentityHashMap<T, RegionTrace> traces = new IdentityHashMap<T, RegionTrace>();
+	private final IdentityHashMap<T, RegionTrace> traces;
 
 	public TextSegmentSet(Function<? super T, ? extends ITextSegment> region, Function<? super T, String> title) {
+		this(region, title, true);
+	}
+
+	public TextSegmentSet(Function<? super T, ? extends ITextSegment> region, Function<? super T, String> title,
+			boolean trace) {
 		super();
 		this.regionGetter = region;
 		this.titleGetter = title;
+		this.traces = trace ? new IdentityHashMap<T, RegionTrace>() : null;
 	}
 
-	public void add(T segment) throws ConflictingRegionsException {
+	public void add(T segment) throws ConflictingRegionsException, RegionTraceMissingException {
 		add(segment, null);
 	}
 
@@ -52,11 +58,22 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 		return titleGetter.apply(t);
 	}
 
+	@Deprecated
 	public IdentityHashMap<T, RegionTrace> getTraces() {
 		return traces;
 	}
 
-	protected void handleConflict(List<T> conflicts, Exception cause) throws ConflictingRegionsException {
+	protected void trace(T segment) {
+		if (traces != null) {
+			traces.put(segment, new RegionTrace(getTitle(segment), getRegion(segment)));
+		}
+	}
+
+	protected void handleConflict(List<T> conflicts, Exception cause)
+			throws ConflictingRegionsException, RegionTraceMissingException {
+		if (traces == null) {
+			throw new RegionTraceMissingException(cause);
+		}
 		List<RegionTrace> causes = Lists.newArrayList();
 		for (T t : conflicts) {
 			RegionTrace exception = traces.get(t);

@@ -92,10 +92,14 @@ public class FormatterTestHelper {
 		String document = req.getToBeFormatted().toString();
 		XtextResource parsed = parse(document);
 		if (req.isAllowSyntaxErrors()) {
-			request.setExceptionHandler(ExceptionAcceptor.IGNORING);
+			if (request.getExplicitExceptionHandler() == null) {
+				request.setExceptionHandler(ExceptionAcceptor.IGNORING);
+			}
 		} else {
 			assertNoSyntaxErrors(parsed);
-			request.setExceptionHandler(ExceptionAcceptor.THROWING);
+			if (request.getExplicitExceptionHandler() == null) {
+				request.setExceptionHandler(ExceptionAcceptor.THROWING);
+			}
 		}
 		request.setTextRegionAccess(createRegionAccess(parsed, req));
 		if (request.getPreferences() == null)

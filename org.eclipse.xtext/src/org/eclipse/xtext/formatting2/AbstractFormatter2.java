@@ -21,6 +21,7 @@ import org.eclipse.xtext.formatting2.internal.HiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormattingMerger;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionReplacer;
 import org.eclipse.xtext.formatting2.internal.MultilineCommentReplacer;
+import org.eclipse.xtext.formatting2.internal.RegionTraceMissingException;
 import org.eclipse.xtext.formatting2.internal.RootDocument;
 import org.eclipse.xtext.formatting2.internal.SingleHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.internal.SinglelineCodeCommentReplacer;
@@ -264,15 +265,30 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	public final List<ITextReplacement> format(FormatterRequest request) {
 		try {
 			initialize(request);
-			IFormattableDocument document = createFormattableRootDocument();
 			XtextResource xtextResource = request.getTextRegionAccess().getResource();
-			format(xtextResource, document);
+			IFormattableDocument document = createFormattableRootDocument();
+			try {
+				format(xtextResource, document);
+			} catch (RegionTraceMissingException e) {
+				document = handleTraceMissing(document, e);
+			}
 			List<ITextReplacement> rendered = document.renderToTextReplacements();
 			List<ITextReplacement> postprocessed = postProcess(document, rendered);
 			return postprocessed;
 		} finally {
 			reset();
 		}
+	}
+
+	protected IFormattableDocument handleTraceMissing(IFormattableDocument problematic, RegionTraceMissingException e) {
+		if (request.isEnableDebugTracing()) {
+			return problematic;
+		}
+		request.setEnableDebugTracing(true);
+		XtextResource xtextResource = request.getTextRegionAccess().getResource();
+		IFormattableDocument document = createFormattableRootDocument();
+		format(xtextResource, document);
+		return document;
 	}
 
 	/**

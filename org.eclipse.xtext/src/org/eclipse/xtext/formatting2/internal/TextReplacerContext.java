@@ -66,7 +66,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 					public String apply(ITextReplacement input) {
 						return input.getReplacementText();
 					}
-				});
+				}, getDocument().getRequest().isEnableDebugTracing());
 	}
 
 	@Override
@@ -223,7 +223,6 @@ public class TextReplacerContext implements ITextReplacerContext {
 			String frameTitle = replacer.getClass().getSimpleName();
 			ITextSegment frameRegion = replacer.getRegion();
 			String replacerTitle = replacement.getReplacementText();
-			@SuppressWarnings("unchecked")
 			RegionsOutsideFrameException exception = new RegionsOutsideFrameException(frameTitle, frameRegion,
 					Tuples.create(replacerTitle, (ITextSegment) replacement));
 			request.getExceptionHandler().accept(exception);
