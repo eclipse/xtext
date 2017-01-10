@@ -6,3 +6,5 @@ dependencies {
 	compile "junit:junit:$versions.junit"
 	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
 }
+
+sourceSets.main.java.srcDir 'testdata'
