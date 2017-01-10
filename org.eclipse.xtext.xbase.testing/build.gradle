@@ -3,6 +3,7 @@ description = 'Infrastructure for testing Xbase languages.'
 
 dependencies {
 	compile project(':org.eclipse.xtext.xbase')
+	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	compile "junit:junit:$versions.junit"
 	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
 }
