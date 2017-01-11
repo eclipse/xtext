@@ -1,19 +1,11 @@
 sourceSets {
 	main {
 		java.srcDir 'src/main/xtext-gen'
-		if (findProperty('skipXtendCompiler') == 'true') {
-			java.srcDir 'src/main/xtend-gen'
-		} else {
-			xtendOutputDir = 'src/main/xtend-gen'
-		}
+		xtendOutputDir = 'src/main/xtend-gen'
 	}
 	test {
 		java.srcDir 'src/test/xtext-gen'
-		if (findProperty('skipXtendCompiler') == 'true') {
-			java.srcDir 'src/test/xtend-gen'
-		} else {
-			xtendOutputDir = 'src/test/xtend-gen'
-		}
+		xtendOutputDir = 'src/test/xtend-gen'
 	}
 }
 
