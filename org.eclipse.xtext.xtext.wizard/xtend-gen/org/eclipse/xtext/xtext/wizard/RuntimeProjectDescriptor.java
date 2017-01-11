@@ -596,6 +596,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("\t");
       _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}\"");
       _builder.newLine();
+      _builder.append("\t");
+      _builder.append("mwe2 \"org.eclipse.xtext:xtext-antlr-generator:[2.1.1, 3.0)\"");
+      _builder.newLine();
       {
         boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
         if (_isFromExistingEcoreModels) {

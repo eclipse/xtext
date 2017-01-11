@@ -284,6 +284,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:«config.xtextVersion.mweVersion»"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
+					mwe2 "org.eclipse.xtext:xtext-antlr-generator:[2.1.1, 3.0)"
 					«IF fromExistingEcoreModels»
 						mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:${xtextVersion}"
 						mwe2 "org.eclipse.xpand:org.eclipse.xpand:2.0.0"
