@@ -114,7 +114,7 @@ public class ASTParserFactory {
   
   protected final ASTParser createDefaultJavaParser(final String javaVersion) {
     ASTParser parser = null;
-    final Hashtable options = JavaCore.getOptions();
+    final Hashtable<String, String> options = JavaCore.getOptions();
     try {
       parser = ASTParser.newParser(ASTParserFactory.asJLS(javaVersion));
       JavaCore.setComplianceOptions(javaVersion, options);
