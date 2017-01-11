@@ -14,7 +14,7 @@ node {
 		
 		stage 'Gradle Build'
 		try {
-			sh "./gradlew -PuseJenkinsSnapshots=true clean build createLocalMavenRepo --refresh-dependencies --continue"
+			sh "./gradlew clean build createLocalMavenRepo -PuseJenkinsSnapshots=true -PcompileXtend=true --refresh-dependencies --continue"
 			archive 'build/maven-repository/**/*.*'
 		} finally {
 			//https://github.com/eclipse/xtext-xtend/issues/62
