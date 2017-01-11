@@ -115,7 +115,10 @@ class ProjectManager {
     }
     
     def Resource getResource(URI uri) {
-        resourceSet.getResource(uri, true)
+        val resource = resourceSet.getResource(uri, true)
+        // initialize
+        resource.contents
+        return resource
     }
     
     def void reportProjectIssue(String message, String code, Severity severity) {
