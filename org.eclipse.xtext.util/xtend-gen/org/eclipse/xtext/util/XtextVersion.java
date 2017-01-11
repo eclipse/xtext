@@ -54,7 +54,7 @@ public class XtextVersion {
   }
   
   public String getAntlrGeneratorVersion() {
-    return "[2.1.1, 3.0)";
+    return "[2.1.1, 3)";
   }
   
   public String getXtendGradlePluginVersion() {
