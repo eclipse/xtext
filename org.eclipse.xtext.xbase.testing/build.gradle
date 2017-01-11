@@ -5,4 +5,5 @@ dependencies {
 	compile project(':org.eclipse.xtext.xbase')
 	compile "junit:junit:$versions.junit"
 	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
+	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt"
 }

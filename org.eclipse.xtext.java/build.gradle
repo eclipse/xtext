@@ -4,4 +4,5 @@ description = 'Integrate Xtext languages with Java code.'
 dependencies {
 	compile project(':org.eclipse.xtext.common.types')
 	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
+	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt"
 }
