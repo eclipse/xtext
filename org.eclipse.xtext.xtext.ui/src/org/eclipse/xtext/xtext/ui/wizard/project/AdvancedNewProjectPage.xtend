@@ -57,7 +57,7 @@ class AdvancedNewProjectPage extends WizardPage {
 			layout = new GridLayout(1, false)
 			
 			Group [
-				text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
+				text = Messages.AdvancedNewProjectPage_LabelFacets
 				createUiProject = CheckBox [
 					text = AdvancedNewProjectPage_projEclipse
 				]

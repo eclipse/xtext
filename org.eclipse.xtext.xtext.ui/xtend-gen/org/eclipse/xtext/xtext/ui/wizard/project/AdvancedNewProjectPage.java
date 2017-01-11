@@ -84,7 +84,7 @@ public class AdvancedNewProjectPage extends WizardPage {
       GridLayout _gridLayout = new GridLayout(1, false);
       it.setLayout(_gridLayout);
       final Procedure1<Group> _function_1 = (Group it_1) -> {
-        it_1.setText(Messages.WizardNewXtextProjectCreationPage_LabelFacets);
+        it_1.setText(Messages.AdvancedNewProjectPage_LabelFacets);
         final Procedure1<Button> _function_2 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projEclipse);
         };
