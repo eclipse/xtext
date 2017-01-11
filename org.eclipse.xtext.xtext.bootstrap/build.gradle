@@ -1,26 +1,27 @@
+apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
+
 dependencies {
 	// We cannot use the projects within the workspace, as we would have
 	// to compile them before generating the code, so we need to stick to the bootstrapping version.
-	// Buildship, however, links the workspace projects anyway (as yet).
+	// Buildship, however, links the workspace projects anyway if a composite build is used.
 	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext_bootstrap"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext_bootstrap"
-	
-	// Dependencies required for successfully executing the Xtext generation workflow
-	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
-	mwe2Runtime "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext_bootstrap"
-	mwe2Runtime "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext_bootstrap"
 }
 
-// Call this task for generating the 'Xtext' language implementation.
-// The employed version of the Xtext generator is determined by '$versions.xtext_bootstrap', see above.
-task generateXtextLanguage(type: JavaExec) {
-	main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
-	classpath = sourceSets.mwe2.runtimeClasspath
-	args += "src/org/eclipse/xtext/xtext/bootstrap/GenerateXtext.mwe2"
-	args += "-p"
-	args += "rootPath=/${projectDir}/.."
-}
+sourceSets.main.java.srcDirs = []
 
-// The following setting would cause 'generateXtextLanguage' to be executed as part of 'build',
-// namely before compiling the classes of the 'main' sourceSet, which however is empty here.
-// classes.dependsOn(generateXtextLanguage)
+sourceSets.mwe2 {
+	java.srcDir 'src'
+	if (findProperty('compileXtend') == 'true') {
+		xtendOutputDir = 'xtend-gen'
+	} else {
+		java.srcDir 'xtend-gen'
+	}
+}
+configurations.mwe2Compile.extendsFrom configurations.compile
+jar.from sourceSets.mwe2.output
+sourcesJar.from sourceSets.mwe2.allSource
+
+task generateXtextLanguage(type: XtextGeneratorTask) {
+	workflow = file('src/org/eclipse/xtext/xtext/bootstrap/GenerateXtext.mwe2')
+}
