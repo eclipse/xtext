@@ -13,6 +13,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.testing
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.xbase.testing,
- org.eclipse.xtext.xbase.testing.evaluation
- testdata;x-internal:=true
+ org.eclipse.xtext.xbase.testing.evaluation,
+ testdata;x-internal:=true,
+ testdata.a;x-internal:=true,
+ testdata.b;x-internal:=true
 Import-Package: org.apache.log4j;version="1.2.15"

@@ -74,7 +74,7 @@ public class MethodOverrides3<V extends Iterable<String>> {
 		return "m4(t)";
 	}
 	
-	public static <T extends CharSequence> Iterable<T> staticM5() {
+	public static <T extends CharSequence> Iterable<T> staticM5(T t) {
 		return null;
 	}
 	
