@@ -173,6 +173,11 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
     return _xsynchronizedexpression;
   }
   
+  @Override
+  protected List<EObject> getUnloadingContents() {
+    return super.getContents();
+  }
+  
   public void installStubs() {
     final Procedure0 _function = () -> {
       this.derivedStateComputer.installStubs(this);
