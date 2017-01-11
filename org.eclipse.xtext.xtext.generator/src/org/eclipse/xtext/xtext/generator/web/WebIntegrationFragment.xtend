@@ -737,7 +737,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				}
 				
 				override destroy() {
-					if (disposableRegistry != null) {
+					if (disposableRegistry !== null) {
 						disposableRegistry.dispose()
 						disposableRegistry = null
 					}

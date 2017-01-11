@@ -1749,7 +1749,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.append("override destroy() {");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("if (disposableRegistry != null) {");
+        _builder.append("if (disposableRegistry !== null) {");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("disposableRegistry.dispose()");
