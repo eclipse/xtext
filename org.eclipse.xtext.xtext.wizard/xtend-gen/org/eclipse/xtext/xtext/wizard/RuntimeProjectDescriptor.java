@@ -915,6 +915,26 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           _builder.append("</dependency>");
           _builder.newLine();
           _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("<dependency>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<groupId>org.eclipse.xtext</groupId>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<artifactId>xtext-antlr-generator</artifactId>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<version>[2.1.1, 3.0)</version>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("</dependency>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
           _builder.append("</dependencies>");
           _builder.newLine();
         }
