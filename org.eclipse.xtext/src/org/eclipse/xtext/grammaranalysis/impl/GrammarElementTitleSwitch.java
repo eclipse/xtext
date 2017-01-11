@@ -211,7 +211,13 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 
 	@Override
 	public String caseRuleCall(RuleCall object) {
-		return addCrossRefOrAssignemnt(object.getRule().getName(), object) + card(object);
+		AbstractRule rule = object.getRule();
+		String ruleName;
+		if (rule != null && !rule.eIsProxy())
+			ruleName = rule.getName();
+		else
+			ruleName = "unresolved_rule";
+		return addCrossRefOrAssignemnt(ruleName, object) + card(object);
 	}
 
 	@Override
