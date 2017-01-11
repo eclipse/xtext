@@ -53,6 +53,10 @@ public class XtextVersion {
     return "2.9.0.201605261059";
   }
   
+  public String getAntlrGeneratorVersion() {
+    return "[2.1.1, 3.0)";
+  }
+  
   public String getXtendGradlePluginVersion() {
     return this.getXtextGradlePluginVersion();
   }

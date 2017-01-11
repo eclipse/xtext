@@ -284,7 +284,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:«config.xtextVersion.mweVersion»"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
-					mwe2 "org.eclipse.xtext:xtext-antlr-generator:[2.1.1, 3.0)"
+					mwe2 "org.eclipse.xtext:xtext-antlr-generator:«config.xtextVersion.antlrGeneratorVersion»"
 					«IF fromExistingEcoreModels»
 						mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:${xtextVersion}"
 						mwe2 "org.eclipse.xpand:org.eclipse.xpand:2.0.0"
@@ -379,7 +379,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 									<dependency>
 										<groupId>org.eclipse.xtext</groupId>
 										<artifactId>xtext-antlr-generator</artifactId>
-										<version>[2.1.1, 3.0)</version>
+										<version>«config.xtextVersion.antlrGeneratorVersion»</version>
 									</dependency>
 								</dependencies>
 							«ENDIF»

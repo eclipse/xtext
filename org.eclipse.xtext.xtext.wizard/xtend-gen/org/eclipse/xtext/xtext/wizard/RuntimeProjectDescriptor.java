@@ -597,8 +597,11 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}\"");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("mwe2 \"org.eclipse.xtext:xtext-antlr-generator:[2.1.1, 3.0)\"");
-      _builder.newLine();
+      _builder.append("mwe2 \"org.eclipse.xtext:xtext-antlr-generator:");
+      String _antlrGeneratorVersion = this.getConfig().getXtextVersion().getAntlrGeneratorVersion();
+      _builder.append(_antlrGeneratorVersion, "\t");
+      _builder.append("\"");
+      _builder.newLineIfNotEmpty();
       {
         boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
         if (_isFromExistingEcoreModels) {
@@ -931,8 +934,11 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t\t");
-          _builder.append("<version>[2.1.1, 3.0)</version>");
-          _builder.newLine();
+          _builder.append("<version>");
+          String _antlrGeneratorVersion = this.getConfig().getXtextVersion().getAntlrGeneratorVersion();
+          _builder.append(_antlrGeneratorVersion, "\t\t\t\t\t");
+          _builder.append("</version>");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t\t\t");
           _builder.append("\t");
           _builder.append("</dependency>");
