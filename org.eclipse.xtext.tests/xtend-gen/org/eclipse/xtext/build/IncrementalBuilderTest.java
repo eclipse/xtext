@@ -18,6 +18,8 @@ import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.index.IndexTestLanguageInjectorProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.builder.AbstractIncrementalBuilderTest;
@@ -292,6 +294,55 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
     };
     this.build(this.newBuildRequest(_function_1));
     Assert.assertTrue(validateCalled.get());
+  }
+  
+  @Test
+  public void testDeleteClearsReusedResourceSet() {
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("entity A {foo.B references}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/A.indextestlanguage", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("foo {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("entity B");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      URI _minus_1 = this.operator_minus(
+        "src/B.indextestlanguage", _builder_1.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
+    };
+    final BuildRequest req = this.newBuildRequest(_function);
+    final XtextResourceSet resourceSet = req.getResourceSet();
+    this.build(req);
+    final AtomicBoolean validateCalled = new AtomicBoolean(false);
+    final Procedure1<BuildRequest> _function_1 = (BuildRequest it) -> {
+      URI _uri = this.uri("src/B.indextestlanguage");
+      it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uri)));
+      final BuildRequest.IPostValidationCallback _function_2 = (URI uri, Iterable<Issue> issues) -> {
+        Assert.assertEquals(this.uri("src/A.indextestlanguage"), uri);
+        String _string = issues.toString();
+        Assert.assertTrue(_string, ((!IterableExtensions.isEmpty(issues)) && IterableExtensions.<Issue>head(issues).getMessage().contains("Couldn\'t resolve reference to Type \'foo.B\'")));
+        validateCalled.set(true);
+        return false;
+      };
+      it.setAfterValidate(_function_2);
+      it.setResourceSet(resourceSet);
+      final ChunkedResourceDescriptions desc = ChunkedResourceDescriptions.findInEmfObject(it.getResourceSet());
+      desc.setContainer("test-project", it.getState().getResourceDescriptions());
+    };
+    this.build(this.newBuildRequest(_function_1));
+    Assert.assertTrue(validateCalled.get());
+    Assert.assertNull(resourceSet.getResource(this.uri("src/B.indextestlanguage"), false));
   }
   
   @Test

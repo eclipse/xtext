@@ -185,6 +185,20 @@ public class IncrementalBuilder {
       this.request.getDeletedFiles().forEach(_function);
       final Indexer.IndexResult result = this.indexer.computeAndIndexAffected(this.request, this.context);
       this._operationCanceledManager.checkCanceled(this.request.getCancelIndicator());
+      boolean _isEmpty = this.request.getResourceSet().getResources().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        List<IResourceDescription.Delta> _resourceDeltas = result.getResourceDeltas();
+        for (final IResourceDescription.Delta delta : _resourceDeltas) {
+          {
+            final Resource resource = this.request.getResourceSet().getResource(delta.getUri(), false);
+            if ((resource != null)) {
+              this.request.getResourceSet().getResources().remove(resource);
+              resource.unload();
+            }
+          }
+        }
+      }
       final ArrayList<IResourceDescription.Delta> resolvedDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
       final Function1<IResourceDescription.Delta, Boolean> _function_1 = (IResourceDescription.Delta it) -> {
         IResourceDescription _new = it.getNew();

@@ -139,20 +139,29 @@ public class ProjectManager {
   }
   
   protected XtextResourceSet createFreshResourceSet(final ResourceDescriptionsData newIndex) {
-    XtextResourceSet _get = this.resourceSetProvider.get();
-    final Procedure1<XtextResourceSet> _function = (XtextResourceSet it) -> {
-      this.projectDescription.attachToEmfObject(it);
-      ProjectConfigAdapter.install(it, this.projectConfig);
-      Map<String, ResourceDescriptionsData> _get_1 = this.indexProvider.get();
-      final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_get_1, it);
-      index.setContainer(this.projectDescription.getName(), newIndex);
-      this.externalContentSupport.configureResourceSet(it, this.openedDocumentsContentProvider);
-    };
-    return ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
+    if ((this.resourceSet == null)) {
+      XtextResourceSet _get = this.resourceSetProvider.get();
+      final Procedure1<XtextResourceSet> _function = (XtextResourceSet it) -> {
+        this.projectDescription.attachToEmfObject(it);
+        ProjectConfigAdapter.install(it, this.projectConfig);
+        Map<String, ResourceDescriptionsData> _get_1 = this.indexProvider.get();
+        final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_get_1, it);
+        index.setContainer(this.projectDescription.getName(), newIndex);
+        this.externalContentSupport.configureResourceSet(it, this.openedDocumentsContentProvider);
+      };
+      XtextResourceSet _doubleArrow = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
+      this.resourceSet = _doubleArrow;
+    } else {
+      final ChunkedResourceDescriptions resDescs = ChunkedResourceDescriptions.findInEmfObject(this.resourceSet);
+      resDescs.setContainer(this.projectDescription.getName(), newIndex);
+    }
+    return this.resourceSet;
   }
   
   public Resource getResource(final URI uri) {
-    return this.resourceSet.getResource(uri, true);
+    final Resource resource = this.resourceSet.getResource(uri, true);
+    resource.getContents();
+    return resource;
   }
   
   public void reportProjectIssue(final String message, final String code, final Severity severity) {

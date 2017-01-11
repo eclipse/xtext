@@ -74,6 +74,16 @@ import org.eclipse.xtext.generator.GeneratorContext
 			]
 			val result = indexer.computeAndIndexAffected(request, context)
 			request.cancelIndicator.checkCanceled
+			if (!request.resourceSet.resources.empty) {
+			    for (delta : result.resourceDeltas) {
+                    val resource = request.resourceSet.getResource(delta.uri, false)
+                    if (resource !== null) {
+                        request.resourceSet.resources.remove(resource)
+                        resource.unload
+                    }
+			    }
+			}
+			
 			val resolvedDeltas = newArrayList
 			// add deleted deltas
 			resolvedDeltas += result.resourceDeltas.filter[getNew === null]

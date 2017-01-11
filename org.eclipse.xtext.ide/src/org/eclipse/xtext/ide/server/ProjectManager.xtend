@@ -105,17 +105,26 @@ class ProjectManager {
     }
 
     protected def XtextResourceSet createFreshResourceSet(ResourceDescriptionsData newIndex) {
-        resourceSetProvider.get => [
-            projectDescription.attachToEmfObject(it)
-            ProjectConfigAdapter.install(it, projectConfig)
-            val index = new ChunkedResourceDescriptions(indexProvider.get, it)
-            index.setContainer(projectDescription.name, newIndex)
-            externalContentSupport.configureResourceSet(it, openedDocumentsContentProvider)
-        ]
+        if (this.resourceSet === null) {
+            this.resourceSet = resourceSetProvider.get => [
+                projectDescription.attachToEmfObject(it)
+                ProjectConfigAdapter.install(it, projectConfig)
+                val index = new ChunkedResourceDescriptions(indexProvider.get, it)
+                index.setContainer(projectDescription.name, newIndex)
+                externalContentSupport.configureResourceSet(it, openedDocumentsContentProvider)
+            ]
+        } else {
+            val resDescs = ChunkedResourceDescriptions.findInEmfObject(this.resourceSet);
+            resDescs.setContainer(projectDescription.name, newIndex)   
+        }
+        return this.resourceSet;
     }
     
     def Resource getResource(URI uri) {
-        resourceSet.getResource(uri, true)
+        val resource = resourceSet.getResource(uri, true)
+        // initialize
+        resource.contents
+        return resource
     }
     
     def void reportProjectIssue(String message, String code, Severity severity) {

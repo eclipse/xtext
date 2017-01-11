@@ -23,6 +23,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -216,6 +217,42 @@ class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		])
 		assertTrue(validateCalled.get)
 	}
+	
+	@Test def void testDeleteClearsReusedResourceSet() {
+        val req = newBuildRequest [
+            dirtyFiles = #[
+                'src/A.indextestlanguage' - '''
+                    foo {
+                        entity A {foo.B references}
+                    }
+                ''',
+                'src/B.indextestlanguage' - '''
+                    foo {
+                        entity B
+                    }
+                '''
+            ]
+        ]
+        val resourceSet = req.resourceSet
+        build(req)
+        
+        val validateCalled = new AtomicBoolean(false)
+        
+        build(newBuildRequest [
+            deletedFiles = #[uri('src/B.indextestlanguage')]
+            afterValidate = [ uri, issues |
+                assertEquals(uri('src/A.indextestlanguage'), uri)
+                assertTrue(issues.toString, !issues.isEmpty && issues.head.message.contains("Couldn't resolve reference to Type 'foo.B'"))
+                validateCalled.set(true)
+                return false
+            ]
+            it.resourceSet = resourceSet
+            val desc = ChunkedResourceDescriptions.findInEmfObject(it.resourceSet)
+            desc.setContainer('test-project', it.state.resourceDescriptions)
+        ])
+        assertTrue(validateCalled.get)
+        assertNull(resourceSet.getResource(uri('src/B.indextestlanguage'), false));
+    }
 
 	@Test def void testIncrementalBuild() {
 		build(newBuildRequest [
