@@ -34,7 +34,6 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
-import org.eclipse.xtend.core.tests.compiler.PublicResolvedTypes
 
 /**
  * @author Sebastian Zarnekow

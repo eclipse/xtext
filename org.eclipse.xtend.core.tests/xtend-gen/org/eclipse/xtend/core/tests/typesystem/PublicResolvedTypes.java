@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.tests.compiler;
+package org.eclipse.xtend.core.tests.typesystem;
 
 import java.util.List;
 import java.util.Map;

@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests.typesystem;
 
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.xtend.core.tests.compiler.PublicResolvedTypes;
+import org.eclipse.xtend.core.tests.typesystem.PublicResolvedTypes;
 import org.eclipse.xtend.core.tests.typesystem.SimpleUnboundTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;

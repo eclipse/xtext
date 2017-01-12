@@ -10,7 +10,7 @@ package org.eclipse.xtend.core.tests.typesystem
 import com.google.inject.Inject
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtend.core.tests.compiler.Oven
+import org.eclipse.xtend.core.tests.compiler.NoJRESmokeTester
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendField
@@ -31,7 +31,6 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
-import org.eclipse.xtend.core.tests.compiler.NoJRESmokeTester
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

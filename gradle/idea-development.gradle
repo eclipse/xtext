@@ -3,14 +3,14 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:${versions.ideaGradlePluginVersion}"
+		classpath "org.xtext:xtext-idea-gradle-plugin:$versions.xtext_gradle_plugin"
 	}
 }
 
 apply plugin: org.xtext.gradle.idea.IdeaDevelopmentPlugin
 
 ideaDevelopment {
-	ideaVersion = versions.ideaVersion
+	ideaVersion = versions.idea
 	pluginDependencies {
 		id 'junit'
 	}
