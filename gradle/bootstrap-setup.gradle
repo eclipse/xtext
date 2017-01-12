@@ -32,5 +32,5 @@ configurations {
 dependencies {
 	xtendCompiler "org.eclipse.xtend:org.eclipse.xtend.core:$bootstrapXtendVersion"
 	xtendCompiler "org.eclipse.xtext:org.eclipse.xtext.smap:$bootstrapXtendVersion"
-	xtendCompiler "org.xtext:xtext-gradle-builder:$versions.xtend_plugin"
+	xtendCompiler "org.xtext:xtext-gradle-builder:$versions.xtext_gradle_plugin"
 }

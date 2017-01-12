@@ -28,13 +28,17 @@ jar {
 	from ('.') {
 		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**', 'plugin.properties'
 	}
-	if (isTestProject)
-		from(sourceSets.test.output)
+	if (isTestProject) {
+		from sourceSets.test.output
+	}
 }
 
 sourcesJar {
 	from ('.') {
 		include 'about*.*'
+	}
+	if (isTestProject) {
+		from sourceSets.test.allSource
 	}
 }
 

@@ -6,13 +6,16 @@
 	gen.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
 }
 
-sourcesJar {
-	from (sourceSets.main.xtendOutputDir) {
-		include '**/*._trace'
-	}
-	if (name.endsWith('tests')) {
-		from (sourceSets.test.xtendOutputDir) {
+// Defer the sources jar configuration to later when the source sets are set up completely
+afterEvaluate {
+	sourcesJar {
+		from (sourceSets.main.xtendOutputDir) {
 			include '**/*._trace'
+		}
+		if (name.endsWith('tests')) {
+			from (sourceSets.test.xtendOutputDir) {
+				include '**/*._trace'
+			}
 		}
 	}
 }
