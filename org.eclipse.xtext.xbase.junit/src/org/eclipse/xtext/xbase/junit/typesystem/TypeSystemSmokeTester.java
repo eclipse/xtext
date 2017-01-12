@@ -22,7 +22,9 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.xbase.testing.typesystem.TypeSystemSmokeTester instead
  */
+@Deprecated
 @Singleton
 public class TypeSystemSmokeTester extends ScenarioProcessor {
 	@Inject

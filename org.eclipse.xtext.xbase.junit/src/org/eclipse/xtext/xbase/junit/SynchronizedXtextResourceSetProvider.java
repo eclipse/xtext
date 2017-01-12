@@ -19,7 +19,9 @@ import com.google.inject.Provider;
  * 
  * @author Sebastian Zarnekow
  * @since 2.4
+ * @deprecated Use org.eclipse.xtext.xbase.testing.SynchronizedXtextResourceSetProvider instead
  */
+@Deprecated
 public class SynchronizedXtextResourceSetProvider implements Provider<SynchronizedXtextResourceSet> {
 
 	@Inject

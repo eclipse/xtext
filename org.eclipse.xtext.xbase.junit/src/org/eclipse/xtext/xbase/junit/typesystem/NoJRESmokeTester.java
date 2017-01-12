@@ -38,7 +38,9 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.xbase.testing.typesystem.NoJRESmokeTester instead
  */
+@Deprecated
 @Singleton
 public class NoJRESmokeTester extends ScenarioProcessor {
 
