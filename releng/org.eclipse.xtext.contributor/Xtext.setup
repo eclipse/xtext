@@ -70,7 +70,7 @@
       xsi:type="setup:VariableTask"
       type="URI"
       name="buildship.p2.repository"
-      value="http://download.eclipse.org/buildship/updates/e45/milestones/2.x/"/>
+      value="http://download.eclipse.org/buildship/updates/e46/releases/2.x/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="github.user.password"
