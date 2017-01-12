@@ -35,7 +35,10 @@ subprojects {
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/xtend-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
-	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+	// The bootstrap project uses only the mwe2 source set
+	if (!name.endsWith('bootstrap')) {
+		apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+	}
 	apply from: "${rootDir}/gradle/manifest-gen.gradle"
 	apply from: "${rootDir}/gradle/validation.gradle"
 }
