@@ -11,25 +11,15 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.EcorePerNsURIPackage;
-
 import org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.impl.EcorePerNsURIPackageImpl;
-
 import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.EcorePerPlatformPluginFactory;
 import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.EcorePerPlatformPluginPackage;
 import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.ExtendsEAttribute;
 import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.ExtendsPluginEObject;
-
 import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.EcorePerPlatformResourcePackage;
-
 import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.impl.EcorePerPlatformResourcePackageImpl;
-
-import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.EcoreReferencePackage;
-
-import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.impl.EcoreReferencePackageImpl;
 
 /**
  * <!-- begin-user-doc -->

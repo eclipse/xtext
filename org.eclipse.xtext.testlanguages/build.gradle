@@ -1,10 +1,15 @@
+apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
+
 dependencies {
 	compile project(':org.eclipse.xtext')
 	compile project(':org.eclipse.xtext.testing')
 	compile "org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore"
-	mwe2Compile project(':org.eclipse.xtext.xtext.generator')
-	mwe2Runtime "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext_bootstrap"
-	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
 
-uploadArchives.enabled = false
+// Include the mwe2 and xtext files from the main source set when executing the workflow
+sourceSets.mwe2.runtimeClasspath += processResources.outputs.files
+
+task generateTestLanguages(type: XtextGeneratorTask) {
+	workflow = file('src/org/eclipse/xtext/testlanguages/GenerateTestLanguages.mwe2')
+	outputs.dir 'src-gen'
+}

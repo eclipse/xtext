@@ -63,13 +63,13 @@ public class SimpleUnorderedGroupsTestLanguageSyntacticSequencer extends Abstrac
 	 * Ambiguous syntax:
 	 *     (
 	  *         '3' | 
-	  *         '5' | 
-	  *         '11' | 
-	  *         '4' | 
-	  *         '10' | 
-	  *         'bug302585' | 
 	  *         '6' | 
-	  *         '7'
+	  *         '10' | 
+	  *         '7' | 
+	  *         '4' | 
+	  *         '5' | 
+	  *         'bug302585' | 
+	  *         '11'
 	  *     )
 	 *
 	 * This ambiguous syntax occurs at:
