@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
+import org.eclipse.xtend.core.tests.typesystem.Oven;
 import org.eclipse.xtext.testing.smoketest.ScenarioProcessor;
 
 import com.google.common.collect.Sets;
