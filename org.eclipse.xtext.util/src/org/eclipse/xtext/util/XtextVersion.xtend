@@ -30,6 +30,10 @@ class XtextVersion {
 		'2.9.0.201605261059'
 	}
 
+	def getAntlrGeneratorVersion() {
+		'[2.1.1, 3)'
+	}
+
 	def getXtendGradlePluginVersion() {
 		xtextGradlePluginVersion
 	}

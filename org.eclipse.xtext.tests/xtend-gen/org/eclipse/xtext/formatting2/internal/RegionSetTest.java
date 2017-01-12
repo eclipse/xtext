@@ -27,7 +27,7 @@ public class RegionSetTest {
   private void test(final CharSequence expectation, final Procedure1<? super TestableTextSegmentSet> test) {
     Function<ITextSegment, ITextSegment> _identity = Functions.<ITextSegment>identity();
     Function<Object, String> _stringFunction = Functions.toStringFunction();
-    ArrayListTextSegmentSet<ITextSegment> _arrayListTextSegmentSet = new ArrayListTextSegmentSet<ITextSegment>(_identity, _stringFunction);
+    ArrayListTextSegmentSet<ITextSegment> _arrayListTextSegmentSet = new ArrayListTextSegmentSet<ITextSegment>(_identity, _stringFunction, true);
     final TestableTextSegmentSet set = new TestableTextSegmentSet(_arrayListTextSegmentSet);
     try {
       test.apply(set);

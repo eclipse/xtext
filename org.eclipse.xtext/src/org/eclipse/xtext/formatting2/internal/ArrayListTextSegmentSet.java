@@ -27,14 +27,20 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 
 	private final List<T> contents = Lists.newArrayList();
 
-	public ArrayListTextSegmentSet(Function<? super T, ? extends ITextSegment> region, Function<? super T, String> title) {
+	public ArrayListTextSegmentSet(Function<? super T, ? extends ITextSegment> region,
+			Function<? super T, String> title) {
 		super(region, title);
 	}
 
+	public ArrayListTextSegmentSet(Function<? super T, ? extends ITextSegment> region,
+			Function<? super T, String> title, boolean trace) {
+		super(region, title, trace);
+	}
+
 	@Override
-	public void add(T segment, IMerger<T> merger) throws ConflictingRegionsException {
+	public void add(T segment, IMerger<T> merger) throws ConflictingRegionsException, RegionTraceMissingException {
 		Preconditions.checkNotNull(segment);
-		getTraces().put(segment, new RegionTrace(getTitle(segment), getRegion(segment)));
+		trace(segment);
 		if (contents.isEmpty()) {
 			contents.add(segment);
 		} else {
@@ -52,7 +58,8 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 		return searchResult >= 0 ? contents.get(searchResult) : null;
 	}
 
-	protected void insertAtIndex(T segment, int newIndex, IMerger<T> merger) throws ConflictingRegionsException {
+	protected void insertAtIndex(T segment, int newIndex, IMerger<T> merger)
+			throws ConflictingRegionsException, RegionTraceMissingException {
 		List<T> conflicting = null;
 		int low = newIndex;
 		while (--low >= 0) {
@@ -75,7 +82,7 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 				break;
 		}
 		if (conflicting == null) {
-			getTraces().put(segment, new RegionTrace(getTitle(segment), getRegion(segment)));
+			trace(segment);
 			contents.add(newIndex, segment);
 		} else {
 			conflicting.add(0, segment);
@@ -84,7 +91,7 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 				if (merged != null) {
 					for (int i = high - 1; i > low; i--)
 						contents.remove(i);
-					getTraces().put(merged, new RegionTrace(getTitle(merged), getRegion(merged)));
+					trace(merged);
 					contents.add(low + 1, merged);
 				} else {
 					int segmentLengh = getRegion(segment).getLength();
@@ -95,7 +102,7 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 						for (int i = high - 1; i > low; i--)
 							contents.remove(i);
 					if (segmentLengh > totalLength) {
-						getTraces().put(segment, new RegionTrace(getTitle(segment), getRegion(segment)));
+						trace(segment);
 						contents.add(low + 1, segment);
 					}
 					handleConflict(conflicting, null);
@@ -113,13 +120,14 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 		return Iterables.unmodifiableIterable(contents).iterator();
 	}
 
-	protected void replaceExistingEntry(T segment, int index, IMerger<T> merger) throws ConflictingRegionsException {
+	protected void replaceExistingEntry(T segment, int index, IMerger<T> merger)
+			throws ConflictingRegionsException, RegionTraceMissingException {
 		T existing = contents.get(index);
 		List<T> conflicting = ImmutableList.of(segment, existing);
 		try {
 			T merged = merger != null ? merger.merge(conflicting) : null;
 			if (merged != null) {
-				getTraces().put(merged, new RegionTrace(getTitle(merged), getRegion(merged)));
+				trace(merged);
 				contents.set(index, merged);
 			} else {
 				contents.remove(index);

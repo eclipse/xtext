@@ -1,8 +1,4 @@
-repositories {
-	flatDir {
-		dirs 'lib'
-	}
-}
+apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 
 dependencies {
 	compile project(':org.eclipse.xtext.testing')
@@ -12,19 +8,33 @@ dependencies {
 	compile "junit:junit:$versions.junit"
 	compile "org.eclipse.emf:org.eclipse.emf.common:$versions.emfCommon"
 	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.emfEcore"
-	// From the 'lib' folder
-	optional name: 'simple'
-	mwe2Runtime "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext_bootstrap"
-	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+	optional files('lib/simple.jar')
+	// The MWE2 workflow depends on emf-gen, so we have to include it in the test dependencies
+	testCompile sourceSets.mwe2.output
 }
 
-sourceSets.test.java {
-	srcDir 'suites'
+sourceSets.test {
+	java.srcDirs = ['src', 'src-gen', 'suites']
+	if (findProperty('compileXtend') != 'true') {
+		java.srcDir 'xtend-gen'
+	}
 }
 
-sourceSets.mwe2.java {
-	srcDir 'generator/src'
-	srcDir 'generator/xtend-gen'
+sourceSets.mwe2 {
+	java.srcDirs = ['generator/src', 'emf-gen']
+	if (findProperty('compileXtend') == 'true') {
+		xtendOutputDir = 'generator/xtend-gen'
+	} else {
+		java.srcDir 'generator/xtend-gen'
+	}
+	runtimeClasspath += processTestResources.outputs.files
+}
+jar.from sourceSets.mwe2.output
+sourcesJar.from sourceSets.mwe2.allSource
+
+task generateTestLanguages(type: XtextGeneratorTask) {
+	workflow = file('src/org/eclipse/xtext/GenerateAllTestLanguages.mwe2')
+	outputs.dir 'src-gen'
 }
 
 test {

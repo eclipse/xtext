@@ -206,6 +206,10 @@ public class FormatterRequest {
 			return ExceptionAcceptor.LOGGING;
 		return exceptionHandler;
 	}
+	
+	public IAcceptor<Exception> getExplicitExceptionHandler() {
+		return exceptionHandler;
+	}
 
 	/**
 	 * @see #exceptionHandler
@@ -213,5 +217,24 @@ public class FormatterRequest {
 	public FormatterRequest setExceptionHandler(IAcceptor<Exception> problemHandler) {
 		this.exceptionHandler = problemHandler;
 		return this;
+	}
+	
+	/**
+	 * Enable creation of Java stack traces to diagnose conflicting formatting
+	 * instructions.
+	 * 
+	 * This option is disabled for performance reasons. It is safe to leave it
+	 * disabled, because in case a conflict happens, the formatter will
+	 * automatically enable this flag and format again. The second pass of the
+	 * formatter will then lead to the desired debug information.
+	 **/
+	private boolean enableDebugTracing = false;
+
+	public boolean isEnableDebugTracing() {
+		return enableDebugTracing;
+	}
+
+	public void setEnableDebugTracing(boolean enableDebugTracing) {
+		this.enableDebugTracing = enableDebugTracing;
 	}
 }

@@ -79,8 +79,8 @@ public class TextRegionAccessToString {
 	private static final String HIDDEN_PADDED = Strings.padEnd(HIDDEN, TITLE_WIDTH, ' ');
 	private static final String SEMANTIC_PADDED = Strings.padEnd("S", TITLE_WIDTH, ' ');
 
-	private Function<AbstractElement, String> grammarToString = new GrammarElementTitleSwitch().showRule().showAssignments()
-			.showQualified();
+	private Function<AbstractElement, String> grammarToString = new GrammarElementTitleSwitch().showRule()
+			.showAssignments().showQualified();
 
 	private boolean hideColumnExplanation = false;
 
@@ -180,7 +180,23 @@ public class TextRegionAccessToString {
 		}
 		for (String error : errors)
 			result.add(error, false);
-		int indentation = 0;
+		int indentation = 0, min = 0;
+		for (ITextSegment region : list) {
+			if (region instanceof IHiddenRegion) {
+				Collection<IEObjectRegion> found = hiddens.get((IHiddenRegion) region);
+				for (IEObjectRegion obj : found) {
+					boolean p = obj.getNextHiddenRegion().equals(region);
+					boolean n = obj.getPreviousHiddenRegion().equals(region);
+					if (p)
+						indentation--;
+					else if (n)
+						indentation++;
+					if (indentation < min)
+						min = indentation;
+				}
+			}
+		}
+		indentation = min < 0 ? min * -1 : 0;
 		for (ITextSegment region : list) {
 			List<IEObjectRegion> previous = Lists.newArrayList();
 			List<IEObjectRegion> next = Lists.newArrayList();

@@ -22,7 +22,7 @@ import static org.junit.Assert.*
 class RegionSetTest {
 
 	def private void test(CharSequence expectation, (TestableTextSegmentSet)=>void test) {
-		val set = new TestableTextSegmentSet(new ArrayListTextSegmentSet(Functions.identity, Functions.toStringFunction))
+		val set = new TestableTextSegmentSet(new ArrayListTextSegmentSet(Functions.identity, Functions.toStringFunction, true))
 		try {
 			test.apply(set)
 		} catch (Throwable t) {

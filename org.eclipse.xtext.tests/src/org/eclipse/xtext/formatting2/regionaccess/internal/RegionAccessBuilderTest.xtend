@@ -23,6 +23,10 @@ import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion
+import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -661,8 +665,26 @@ class RegionAccessBuilderTest {
 		validationTestHelper.assertNoErrors(obj)
 		val access1 = obj.createFromNodeModel
 		val access2 = obj.serializeToRegions
+		assertToStringDoesNotCrash(access1)
+		assertToStringDoesNotCrash(access2)
 		Assert.assertEquals(exp, new TextRegionAccessToString().withRegionAccess(access1).cfg() + "\n")
 		Assert.assertEquals(exp, new TextRegionAccessToString().withRegionAccess(access2).cfg() + "\n")
+	}
+
+	private def assertToStringDoesNotCrash(ITextRegionAccess access) {
+		var current = access.regionForRootEObject.previousHiddenRegion as ISequentialRegion
+		while (current !== null) {
+			Assert.assertNotNull(current.toString)
+			switch current {
+				IHiddenRegion: {
+					current = current.nextSemanticRegion
+				}
+				ISemanticRegion: {
+					Assert.assertNotNull(current.EObjectRegion.toString)
+					current = current.nextHiddenRegion
+				}
+			}
+		}
 	}
 
 	private def TextRegionAccessToString cfg(TextRegionAccessToString toStr) {

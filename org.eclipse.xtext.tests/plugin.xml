@@ -886,4 +886,27 @@
             class="org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.NoLiteralsPackage"
             genModel="src/org/eclipse/xtext/generator/ecore/GenModelAccessTest.genmodel"/>
    </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated EcoreReferences -->
+      <package
+            uri="http://www.eclipse.org/2011/tmf/xtext/ecorePerNsURI"
+            class="org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.EcorePerNsURIPackage"
+            genModel="src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated EcoreReferences -->
+      <package
+            uri="http://www.eclipse.org/2011/tmf/xtext/ecorePerPlatformPlugin"
+            class="org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.EcorePerPlatformPluginPackage"
+            genModel="src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated EcoreReferences -->
+      <package
+            uri="http://www.eclipse.org/2011/tmf/xtext/ecorePerPlatformResource"
+            class="org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.EcorePerPlatformResourcePackage"
+            genModel="src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel"/>
+   </extension>
 </plugin>

@@ -152,7 +152,9 @@ public class ProjectManager {
   }
   
   public Resource getResource(final URI uri) {
-    return this.resourceSet.getResource(uri, true);
+    final Resource resource = this.resourceSet.getResource(uri, true);
+    resource.getContents();
+    return resource;
   }
   
   public void reportProjectIssue(final String message, final String code, final Severity severity) {

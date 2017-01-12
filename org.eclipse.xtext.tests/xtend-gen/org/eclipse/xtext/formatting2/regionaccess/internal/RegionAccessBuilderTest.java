@@ -13,6 +13,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
@@ -1433,6 +1436,8 @@ public class RegionAccessBuilderTest {
       this.validationTestHelper.assertNoErrors(obj);
       final ITextRegionAccess access1 = this.createFromNodeModel(obj);
       final ITextRegionAccess access2 = this.serializer.serializeToRegions(obj);
+      this.assertToStringDoesNotCrash(access1);
+      this.assertToStringDoesNotCrash(access2);
       TextRegionAccessToString _cfg = this.cfg(new TextRegionAccessToString().withRegionAccess(access1));
       String _plus = (_cfg + "\n");
       Assert.assertEquals(exp, _plus);
@@ -1441,6 +1446,28 @@ public class RegionAccessBuilderTest {
       Assert.assertEquals(exp, _plus_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void assertToStringDoesNotCrash(final ITextRegionAccess access) {
+    IHiddenRegion _previousHiddenRegion = access.regionForRootEObject().getPreviousHiddenRegion();
+    ISequentialRegion current = ((ISequentialRegion) _previousHiddenRegion);
+    while ((current != null)) {
+      {
+        Assert.assertNotNull(current.toString());
+        boolean _matched = false;
+        if (current instanceof IHiddenRegion) {
+          _matched=true;
+          current = ((IHiddenRegion)current).getNextSemanticRegion();
+        }
+        if (!_matched) {
+          if (current instanceof ISemanticRegion) {
+            _matched=true;
+            Assert.assertNotNull(((ISemanticRegion)current).getEObjectRegion().toString());
+            current = ((ISemanticRegion)current).getNextHiddenRegion();
+          }
+        }
+      }
     }
   }
   

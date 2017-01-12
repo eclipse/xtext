@@ -1,3 +1,5 @@
+apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
+
 dependencies {
 	compile project(':org.eclipse.xtext.ide')
 	compile project(':org.eclipse.xtext.testing')
@@ -5,20 +7,6 @@ dependencies {
 	compile project(':org.eclipse.xtext.testlanguages.ide')
 	compile "junit:junit:$versions.junit"
 	compile "org.eclipse.lsp4j:org.eclipse.lsp4j:$versions.lsp4j"
-	mwe2Compile project(':org.eclipse.xtext.xtext.generator')
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext_bootstrap"
-	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
-}
-
-task generateXtextLanguage(type: JavaExec) {
-	main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
-	classpath = configurations.mwe2Runtime
-	inputs.file "testlang-src/org/eclipse/xtext/ide/tests/testlanguage/GenerateTestLanguage.mwe2"
-	inputs.file "testlang-src/org/eclipse/xtext/ide/tests/testlanguage/TestLanguage.xtext"
-	outputs.dir "testlang-src-gen"
-	args += "testlang-src/org/eclipse/xtext/ide/tests/testlanguage/GenerateTestLanguage.mwe2"
-	args += "-p"
-	args += "rootPath=/${projectDir}/.."
 }
 
 sourceSets.test.java {
@@ -28,4 +16,10 @@ sourceSets.test.java {
 sourceSets.test.resources {
 	srcDir 'testlang-src'
 	srcDir 'testlang-src-gen'
+}
+
+task generateTestLanguages(type: XtextGeneratorTask) {
+	workflow = file('testlang-src/org/eclipse/xtext/ide/tests/testlanguage/GenerateTestLanguage.mwe2')
+	inputs.file 'testlang-src/org/eclipse/xtext/ide/tests/testlanguage/TestLanguage.xtext'
+	outputs.dir 'testlang-src-gen'
 }

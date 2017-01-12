@@ -9,7 +9,7 @@ buildscript {
 	apply from: "${rootDir}/gradle/versions.gradle"
 	repositories.jcenter()
 	dependencies {
-		classpath "org.xtext:xtext-gradle-plugin:$versions.xtend_plugin"
+		classpath "org.xtext:xtext-gradle-plugin:$versions.xtext_gradle_plugin"
 		classpath "io.typefox.gradle:gradle-p2gen:$versions.gradle_plugins"
 	}
 }
@@ -35,7 +35,10 @@ subprojects {
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/xtend-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
-	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+	// The bootstrap project uses only the mwe2 source set
+	if (!name.endsWith('bootstrap')) {
+		apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+	}
 	apply from: "${rootDir}/gradle/manifest-gen.gradle"
 	apply from: "${rootDir}/gradle/validation.gradle"
 }
