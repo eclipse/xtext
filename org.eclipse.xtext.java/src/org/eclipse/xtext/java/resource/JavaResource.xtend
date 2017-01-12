@@ -91,6 +91,10 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 		}
 	}
 	
+    override protected getUnloadingContents() {
+        super.getContents();
+    }
+	
 	def installStubs() {
 		initializing[
 			derivedStateComputer.installStubs(this)

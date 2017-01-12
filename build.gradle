@@ -9,7 +9,7 @@ buildscript {
 	apply from: "${rootDir}/gradle/versions.gradle"
 	repositories.jcenter()
 	dependencies {
-		classpath "org.xtext:xtext-gradle-plugin:$versions.xtend_plugin"
+		classpath "org.xtext:xtext-gradle-plugin:$versions.xtext_gradle_plugin"
 		classpath "io.typefox.gradle:gradle-p2gen:$versions.gradle_plugins"
 	}
 }
