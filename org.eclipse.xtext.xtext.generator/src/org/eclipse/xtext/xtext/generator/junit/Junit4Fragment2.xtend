@@ -20,6 +20,9 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 	@Accessors(PUBLIC_SETTER)
 	boolean useDeprecatedClasses
 	
+	@Accessors(PUBLIC_SETTER)
+	boolean skipXbaseTestingPackage
+	
 	def protected getTestingPackage() {
 		if (useDeprecatedClasses)
 			"org.eclipse.xtext.junit4"
@@ -28,6 +31,8 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 	}
 	
 	def protected getXbaseTestingPackage() {
+		if (skipXbaseTestingPackage)
+			return ""
 		if (useDeprecatedClasses)
 			"org.eclipse.xtext.xbase.junit"
 		else
