@@ -36,14 +36,14 @@ kramdown:
     coderay_css:               style
 
 src:
-  xtext: "https://github.com/eclipse/xtext/blob/v2.9.0"
-  mwe: "https://github.com/eclipse/mwe/blob/v2.7.1"
-  emf: "https://github.com/eclipse/emf/blob/R2_9_0"
+  xtext: "https://github.com/eclipse/xtext/blob/v2.11.0"
+  mwe: "https://github.com/eclipse/mwe/blob/v2.9.0"
+  emf: "https://github.com/eclipse/emf/blob/R2_12_0"
   gef: "https://github.com/eclipse/gef/blob/master"
   sevenlang: "https://github.com/xtext/seven-languages-xtext/blob/master"
 
 javadoc:
-  xtext: "http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.9"
+  xtext: "http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.11"
   eclipse-platform: "http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api"
   eclipse-jdt: "http://help.eclipse.org/luna/topic/org.eclipse.jdt.doc.isv/reference/api"
   java: "http://docs.oracle.com/javase/8/docs/api/"
