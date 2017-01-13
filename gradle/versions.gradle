@@ -12,6 +12,8 @@ ext.versions = [
 	'jdtCompilerApt': '1.2.100',
 	'emfMwe2': '2.9.0.201605261059',
 	'emfEcore': '[2.10.2,3)',
+ 	'equinox': '[3.10.0,4)',
+ 	'pdeCore': '3.11.1',
 	'xpand': '2.0.0',
 	'guice': '3.0',
 	'asm': '5.0.1',

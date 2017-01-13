@@ -6,12 +6,50 @@ dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:$versions.xtext"
 	compile "org.apache.ant:ant:$versions.ant"
+	testCompile "org.eclipse.pde:org.eclipse.pde.core:$versions.pdeCore"
 }
 
-sourceSets.test {
-	java.srcDir 'testdata'
-	java.srcDir 'suites'
-	resources.srcDir 'testdata'
+sourceSets {
+	test {
+		java.srcDir 'testdata'
+		resources.srcDir 'testdata'
+	}
+	longrunning {
+		java.srcDirs = ['longrunning/src']
+		if (findProperty('compileXtend') == 'true') {
+			xtendOutputDir = 'longrunning/xtend-gen'
+		} else {
+			java.srcDir 'longrunning/xtend-gen'
+		}
+		compileClasspath += sourceSets.test.output
+		runtimeClasspath += sourceSets.test.output
+	}
+	suites {
+		java.srcDirs =  ['suites', 'smoke-suites']
+		compileClasspath += sourceSets.test.output + sourceSets.longrunning.output
+		runtimeClasspath += sourceSets.test.output + sourceSets.longrunning.output
+	}
+}
+
+configurations {
+	longrunningCompile.extendsFrom testCompile
+	longrunningRuntime.extendsFrom testRuntime
+	suitesCompile.extendsFrom testCompile
+	suitesRuntime.extendsFrom testRuntime
+}
+
+if (findProperty('compileXtend') == 'true') {
+	generateLongrunningXtext.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
+}
+
+jar {
+	from sourceSets.longrunning.output
+	from sourceSets.suites.output
+}
+
+sourcesJar {
+	from sourceSets.longrunning.allSource
+	from sourceSets.suites.allSource
 }
 
 // The tests have to be executed as Eclipse plug-in tests, so disable them in the Gradle build
