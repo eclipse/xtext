@@ -18,17 +18,6 @@
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<sign.skip>true</sign.skip>
 	</properties>
-
-	<distributionManagement>
-		<repository>
-			<id>local.release.repo</id>
-			<url>file:${basedir}/../../build/maven-repository</url>
-		</repository>
-		<snapshotRepository>
-			<id>local.release.repo</id>
-			<url>file:${basedir}/../../build/maven-repository</url>
-		</snapshotRepository>
-	</distributionManagement>
 	
 	<pluginRepositories>
 		<pluginRepository>
