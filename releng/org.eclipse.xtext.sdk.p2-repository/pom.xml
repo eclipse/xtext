@@ -26,6 +26,9 @@
 						<goals>
 							<goal>assemble-repository</goal>
 						</goals>
+						<configuration>
+							<repositoryName>Xtext</repositoryName>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
