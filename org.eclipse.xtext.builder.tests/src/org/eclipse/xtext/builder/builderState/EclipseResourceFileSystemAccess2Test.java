@@ -17,6 +17,8 @@ import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.util.RuntimeIOException;
+import org.eclipse.xtext.util.StringInputStream;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -73,4 +75,26 @@ public class EclipseResourceFileSystemAccess2Test extends Assert {
 		fsa.generateFile("tmp/X", "XX");
 		assertTrue(fsa.isFile("tmp/X", IFileSystemAccess.DEFAULT_OUTPUT));
 	}
+	
+	@Test
+	public void testMarkNotSupported() throws Exception {
+		fsa.generateFile("tmp/bar", new StringInputStream("you should never see this"));
+		InputStream input = new StringInputStream("foo") {
+			@Override
+			public boolean markSupported() {
+				return false;
+			}
+			@Override
+			public synchronized void reset() {
+				throw new RuntimeIOException("mark/reset not supported");
+			}
+		};
+		fsa.generateFile("tmp/bar", input);
+		IFolder dir = project.getFolder("src-gen/tmp");
+		assertTrue(dir.exists());
+		IFile file = dir.getFile("bar");
+		assertTrue(file.exists());
+		assertEquals("foo", fsa.readTextFile("tmp/bar"));
+	}
+	
 }

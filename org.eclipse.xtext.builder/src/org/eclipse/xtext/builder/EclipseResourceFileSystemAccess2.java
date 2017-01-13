@@ -240,20 +240,26 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	/**
 	 * @since 2.9
 	 */
-	protected void generateFile(IFile file, InputStream content, IFile traceFile, CharSequence traceContent, OutputConfiguration outputConfig) {
+	protected void generateFile(IFile file, InputStream content, IFile traceFile, CharSequence traceContent,
+			OutputConfiguration outputConfig) {
 		if (file == null) 
 			return;
 		
 		try {
 			if (file.exists()) {
 				if (outputConfig.isOverrideExistingResources()) {
+					if (!content.markSupported()) {
+						// The stream should be read only once
+						byte[] bytes = ByteStreams.toByteArray(content);
+						content = new ByteArrayInputStream(bytes);
+					}
 					if (hasContentsChanged(file, content)) {
-						// reset to offset zero allows to reuse internal byte[]
+						// Reset to offset zero allows to reuse internal byte[]
 						// no need to convert the string twice
 						content.reset();
 						file.setContents(content, true, outputConfig.isKeepLocalHistory(), monitor);
 					} else {
-						file.touch(getMonitor());
+						file.touch(monitor);
 					}
 					if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
 						setDerived(file, outputConfig.isSetDerivedProperty());
