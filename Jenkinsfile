@@ -17,8 +17,7 @@ node {
 			sh "./gradlew clean build createLocalMavenRepo -PuseJenkinsSnapshots=true -PcompileXtend=true --refresh-dependencies --continue"
 			archive 'build/maven-repository/**/*.*'
 		} finally {
-			//https://github.com/eclipse/xtext-xtend/issues/62
-			//step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
+			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
 		}
 		
 		def workspace = pwd()
