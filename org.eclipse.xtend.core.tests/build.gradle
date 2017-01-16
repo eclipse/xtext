@@ -54,4 +54,3 @@ task longrunningTest(type: Test) {
 	testClassesDir = sourceSets.longrunning.output.classesDir
 	classpath = sourceSets.longrunning.runtimeClasspath
 }
-check.dependsOn longrunningTest

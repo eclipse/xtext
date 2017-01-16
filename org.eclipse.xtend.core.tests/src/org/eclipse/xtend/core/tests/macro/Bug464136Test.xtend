@@ -11,8 +11,11 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.junit.Ignore
 import org.junit.Test
 
+// https://github.com/eclipse/xtext-xtend/issues/123
+@Ignore
 class Bug464136Test extends AbstractActiveAnnotationTest {
 	
 	@Test def void testThrownErrorInPreValidation() {
