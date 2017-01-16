@@ -25,18 +25,28 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 	
 	def protected getTestingPackage() {
 		if (useDeprecatedClasses)
-			"org.eclipse.xtext.junit4"
+			getUiTestingPackage()
 		else
 			"org.eclipse.xtext.testing"
+	}
+	
+	protected def String getUiTestingPackage() {
+		"org.eclipse.xtext.junit4"
 	}
 	
 	def protected getXbaseTestingPackage() {
 		if (skipXbaseTestingPackage)
 			return ""
 		if (useDeprecatedClasses)
-			"org.eclipse.xtext.xbase.junit"
+			getXbaseUiTestingPackage()
 		else
 			"org.eclipse.xtext.xbase.testing"
+	}
+	
+	protected def String getXbaseUiTestingPackage() {
+		if (skipXbaseTestingPackage)
+			return ""
+		"org.eclipse.xtext.xbase.junit"
 	}
 	
 	override generate() {
@@ -55,6 +65,8 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 				requiredBundles.addAll(
 					testingPackage,
 					xbaseTestingPackage,
+					uiTestingPackage,
+					xbaseUiTestingPackage,
 					"org.eclipse.core.runtime",
 					"org.eclipse.ui.workbench;resolution:=optional"
 				)

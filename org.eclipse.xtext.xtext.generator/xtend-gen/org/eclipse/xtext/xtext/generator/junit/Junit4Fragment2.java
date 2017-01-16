@@ -42,11 +42,15 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
   protected String getTestingPackage() {
     String _xifexpression = null;
     if (this.useDeprecatedClasses) {
-      _xifexpression = "org.eclipse.xtext.junit4";
+      _xifexpression = this.getUiTestingPackage();
     } else {
       _xifexpression = "org.eclipse.xtext.testing";
     }
     return _xifexpression;
+  }
+  
+  protected String getUiTestingPackage() {
+    return "org.eclipse.xtext.junit4";
   }
   
   protected String getXbaseTestingPackage() {
@@ -57,11 +61,22 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
       }
       String _xifexpression = null;
       if (this.useDeprecatedClasses) {
-        _xifexpression = "org.eclipse.xtext.xbase.junit";
+        _xifexpression = this.getXbaseUiTestingPackage();
       } else {
         _xifexpression = "org.eclipse.xtext.xbase.testing";
       }
       _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  protected String getXbaseUiTestingPackage() {
+    String _xblockexpression = null;
+    {
+      if (this.skipXbaseTestingPackage) {
+        return "";
+      }
+      _xblockexpression = "org.eclipse.xtext.xbase.junit";
     }
     return _xblockexpression;
   }
@@ -91,6 +106,8 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
         CollectionExtensions.<String>addAll(it.getRequiredBundles(), 
           this.getTestingPackage(), 
           this.getXbaseTestingPackage(), 
+          this.getUiTestingPackage(), 
+          this.getXbaseUiTestingPackage(), 
           "org.eclipse.core.runtime", 
           "org.eclipse.ui.workbench;resolution:=optional");
         String _eclipsePluginTestBasePackage = this._xtextGeneratorNaming.getEclipsePluginTestBasePackage(this.getGrammar());
