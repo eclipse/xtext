@@ -1079,6 +1079,135 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
   
+  /**
+   * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=460455
+   */
+  @Test
+  public void testInnerClass_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package p");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class OuterClazz {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Innerfaze() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("interface Innerfaze {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package p");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class OuterClazz {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("new() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("new Innerfaze() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("interface Innerfaze {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  /**
+   * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=460455
+   * @Ignore ("TODO Fix ConflictResolver")
+   */
+  @Test
+  public void testInnerClass_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package p");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class OuterClazz {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Innerfaze() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("interface Innerfaze {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package p");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class OuterClazz {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("new() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("new Innerfaze() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("interface Innerfaze {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
   @Test
   public void testBug447227() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1155,9 +1284,9 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   public void testBug447227_2() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package p");
+      _builder.append("package p;");
       _builder.newLine();
-      _builder.append("public class class Outer {");
+      _builder.append("public class Outer {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public static class Inner {}");
