@@ -202,7 +202,10 @@ public class ImportOrganizer {
 			String name) {
 		for (TypeUsage usage : usages) {
 			JvmIdentifiableElement visibleType = nonOverridableTypesProvider.getVisibleType(usage.getContext(), name);
-			if (visibleType == null && (!equal(usage.getContextPackageName(), type.getPackageName()) || type.getDeclaringType() != null))
+			if (visibleType == null && (
+				!equal(usage.getContextPackageName(), type.getPackageName())
+				|| (type.getDeclaringType() != null && usage.getContext().eResource() != type.getDeclaringType().eResource())
+			))
 				return false;
 		}
 		return true;
