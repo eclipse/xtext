@@ -46,7 +46,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * Set `version` property in `gradle/versions.gradle` to the release version.
    * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
    * Set `upstreamBranch` property in `gradle/upstream-repositories.gradle` to the release branch name.
-   * Replace all occurrences of the previous (snapshot) version with the release version in the Maven plugin related pom.xml files (`maven-pom.xml`, `org.eclipse.xtend.maven.*`).
+   * Replace all occurrences of the previous (snapshot) version with the release version in the Maven plugin related pom.xml files (`maven-pom.xml`, `org.eclipse.xtend.maven.*`).
    * Replace all occurrences of `job/master` according to the release branch name.
    * Set `xtend-maven-plugin-version` property in `releng/org.eclipse.xtend.tycho.parent/pom.xml` to the used Xtend compiler version.
    * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
