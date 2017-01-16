@@ -11,10 +11,12 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IEncodedStorage;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.service.DispatchingProvider;
@@ -26,10 +28,9 @@ import com.google.inject.Singleton;
 
 /**
  * Resolves the encoding for {@link IEncodedStorage} behind the given {@link URI}s and falls back to the
- * {@link IEncodingProvider} configured for the runtime module otherwise.
+ * {@link IEncodingProvider} configured for in the runtime module otherwise.
  * 
  * @author Jan Koehnlein - Initial contribution and API
- * @author Karsten Thoms - bug#510084
  */
 @Singleton
 public class WorkspaceEncodingProvider implements IEncodingProvider {
@@ -48,27 +49,41 @@ public class WorkspaceEncodingProvider implements IEncodingProvider {
 
 	@Override
 	public String getEncoding(URI uri) {
-		if (workspace != null && uri != null) {
-			Iterator<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(uri).iterator();
-			while (storages.hasNext()) {
-				Pair<IStorage, IProject> storage = storages.next();
-				if (storage.getFirst() instanceof IEncodedStorage) {
+		if (workspace != null) {
+			if (uri != null) {
+				if (uri.isPlatformResource()) {
+					IFile file = workspace.getRoot().getFile(new Path(uri.toPlatformString(true)));
 					try {
-						return ((IEncodedStorage) storage.getFirst()).getCharset();
+						return file.getCharset(true);
 					} catch (CoreException e) {
-						LOG.warn("Error getting file encoding", e);
+						LOG.error("Error getting file encoding for "+uri, e);
 					}
-				}
-				try {
-					return storage.getSecond().getDefaultCharset(true);
-				} catch (CoreException e) {
-					LOG.warn("Error getting project's default encoding", e);
+				} else {
+					Iterator<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(uri).iterator();
+					if (storages.hasNext()) {
+						Pair<IStorage,IProject> next = storages.next();
+						IStorage storage = next.getFirst();
+						if (storage instanceof IEncodedStorage) {
+							try {
+								return ((IEncodedStorage) storage).getCharset();
+							} catch (CoreException e) {
+								LOG.error("Error getting file encoding for "+uri, e);
+							}
+						} else {
+							try {
+								String result = next.getSecond().getDefaultCharset(true);
+								return result;
+							} catch (CoreException e) {
+								LOG.error("Error getting file encoding for "+uri, e);
+							}
+						}
+					}
 				}
 			}
 			try {
 				return workspace.getRoot().getDefaultCharset();
 			} catch (CoreException e) {
-				LOG.warn("Error getting workspace's default encoding", e);
+				LOG.error("Error getting file encoding for "+uri, e);
 			}
 		}
 		// fallback to runtime encoding provider
