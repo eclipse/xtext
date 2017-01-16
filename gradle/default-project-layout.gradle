@@ -1,3 +1,9 @@
+/*
+ * Configuration for projects with default layout (src/main/java etc.)
+ */
+
+ext.eclipseProjectLayout = false
+
 sourceSets {
 	main {
 		java.srcDir 'src/main/xtext-gen'

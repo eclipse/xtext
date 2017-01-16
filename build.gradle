@@ -32,6 +32,7 @@ subprojects {
 	apply from: "${rootDir}/gradle/xtend-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 	apply from: "${rootDir}/gradle/manifest-gen.gradle"
+	apply from: "${rootDir}/gradle/validation.gradle"
 }
 
 task clean(type: Delete) {

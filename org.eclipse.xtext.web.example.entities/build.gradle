@@ -7,9 +7,3 @@ dependencies {
 }
 
 sourceSets.mwe2.java.srcDir 'generator'
-
-jar {
-	metaInf {
-		from 'META-INF'
-	}
-}

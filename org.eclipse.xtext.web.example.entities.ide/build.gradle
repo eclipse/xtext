@@ -4,9 +4,3 @@ dependencies {
 	compile project(':org.eclipse.xtext.web.example.entities')
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:$versions.xtext"
 }
-
-jar {
-	metaInf {
-		from 'META-INF'
-	}
-}

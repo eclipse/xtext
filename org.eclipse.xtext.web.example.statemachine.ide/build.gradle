@@ -4,9 +4,3 @@ dependencies {
 	compile project(':org.eclipse.xtext.web.example.statemachine')
 	compile "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
 }
-
-jar {
-	metaInf {
-		from 'META-INF'
-	}
-}

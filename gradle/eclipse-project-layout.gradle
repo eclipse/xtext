@@ -3,6 +3,7 @@
  * folders, we need to make some adjustments to Gradle's defaults.
  */
 
+ext.eclipseProjectLayout = true
 def isTestProject = name.endsWith('tests')
 def sourceDirs = ['src', 'src-gen', 'emf-gen']
 
