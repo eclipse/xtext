@@ -12,11 +12,11 @@
 
 <p><em>Active annotations</em> allow developers to participate in the translation process of Xtend source code to Java code via library. That’s useful in cases where Java requires to write a lot of boilerplate manually. For instance, many of the good old design patterns fall into this category. With <em>active annotations</em> you no longer need to remember how the <a href="http://en.wikipedia.org/wiki/Visitor_pattern">Visitor</a> or the <a href="http://en.wikipedia.org/wiki/Observer_pattern">Observer</a> pattern should be implemented. In Xtend you can implement the expansion of such patterns in a library and let the compiler do the heavy lifting for you.</p>
 
-<p>An <em>active annotation</em> is just an annotation declared either in Java or Xtend, which is itself annotated with <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/Active.java">Active</a>. <code>@Active</code> takes a type literal as a parameter pointing to the processor.</p>
+<p>An <em>active annotation</em> is just an annotation declared either in Java or Xtend, which is itself annotated with <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/Active.java">Active</a>. <code class="highlighter-rouge">@Active</code> takes a type literal as a parameter pointing to the processor.</p>
 
 <p>The IDE plugin comes with an example project, which you can easily materialize into your workspace. To do so use the new project wizard and in the category <em>Xtend Examples</em> choose the active annotation example. The examples contain three different annotations which we will use for further explanation.</p>
 
-<p>For instance, <code>@Extract</code> is an annotation which extracts an interface for a class. The annotation declaration looks like this:</p>
+<p>For instance, <code class="highlighter-rouge">@Extract</code> is an annotation which extracts an interface for a class. The annotation declaration looks like this:</p>
 
 <pre><code class="language-xtend">@Active(ExtractProcessor)
 annotation Extract {}
@@ -24,7 +24,7 @@ annotation Extract {}
 
 <h2 id="active-annotations-processor">Annotation Processor</h2>
 
-<p>A processor class must implement one or more of the lifecycle call-back interfaces provided by the compiler. This interfaces are: </p>
+<p>A processor class must implement one or more of the lifecycle call-back interfaces provided by the compiler. This interfaces are:</p>
 
 <ul>
   <li><a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">RegisterGlobalsParticipant</a> The first call back. Only called to register type names when a global symbol table (i.e. index) is created. See <a href="204_activeannotations.html#active-annotations-register-globals">Phase 1</a>.</li>
@@ -33,7 +33,7 @@ annotation Extract {}
   <li><a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/CodeGenerationParticipant.java">CodeGenerationParticipant</a> If you want to generate some additional text, e.g. XML, this hook is for you. See <a href="204_activeannotations.html#active-annotations-code-generation">Phase 4</a>.</li>
 </ul>
 
-<p>There are base classes that implment all callback interfaces. You should subclass one of those depending on your annotation target: </p>
+<p>There are base classes that implment all callback interfaces. You should subclass one of those depending on your annotation target:</p>
 
 <ul>
   <li><a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/AbstractClassProcessor.java">AbstractClassProcessor</a> is a base class for class annotations</li>
@@ -66,9 +66,9 @@ annotation Extract {}
 }
 </code></pre>
 
-<p>The <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/RegisterGlobalsContext.java">RegisterGlobalsContext</a> provides all the services that are available during this compilation step. It is passed into the method <code>doRegisterGlobals()</code> along with a read-only representation of the annotated source elements. The AbstractClassProcessor in this example is invoked for all classes that are annotated with <code>@Extract</code>.</p>
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/RegisterGlobalsContext.java">RegisterGlobalsContext</a> provides all the services that are available during this compilation step. It is passed into the method <code class="highlighter-rouge">doRegisterGlobals()</code> along with a read-only representation of the annotated source elements. The AbstractClassProcessor in this example is invoked for all classes that are annotated with <code class="highlighter-rouge">@Extract</code>.</p>
 
-<p>The compiler calls <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">RegisterGlobalsParticipant</a> once per compilation unit and provides access to all elements which are annotated with the <em>active annotation</em> this processor is registered for. Therefore the <code>ExtractProcessor</code> is invoked with a list of all classes that are defined in the same Xtend file for all the files that are being compiled.</p>
+<p>The compiler calls <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">RegisterGlobalsParticipant</a> once per compilation unit and provides access to all elements which are annotated with the <em>active annotation</em> this processor is registered for. Therefore the <code class="highlighter-rouge">ExtractProcessor</code> is invoked with a list of all classes that are defined in the same Xtend file for all the files that are being compiled.</p>
 
 <h3 id="active-annotations-transformation-phase">Phase 2: Transformation</h3>
 
@@ -76,7 +76,7 @@ annotation Extract {}
 
 <p>A transformation participant can access and modify mutable Java elements. These are an in-memory representation of the generated Java code. They are usually very similar to the source elements, but can be modified and new methods, fields or constructors can be added. It is not possible to create new types during the transformation step. Also note, that other annotation processors might already have altered the model.</p>
 
-<p>The <code>ExtractProcessor</code> implements the method <code>doTransform</code> like this:</p>
+<p>The <code class="highlighter-rouge">ExtractProcessor</code> implements the method <code class="highlighter-rouge">doTransform</code> like this:</p>
 
 <pre><code class="language-xtend">class ExtractProcessor extends AbstractClassProcessor {
   
@@ -111,14 +111,14 @@ annotation Extract {}
 }
 </code></pre>
 
-<p>In the first line, <code>findInterface</code> retrieves the interface which was registered during the registration of global symbols in the first phase: The method is defined in <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/TransformationContext.java">TransformationContext</a> which is used as an <a href="202_xtend_classes_members.html#extension-provider">extension provider</a>.</p>
+<p>In the first line, <code class="highlighter-rouge">findInterface</code> retrieves the interface which was registered during the registration of global symbols in the first phase: The method is defined in <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/TransformationContext.java">TransformationContext</a> which is used as an <a href="202_xtend_classes_members.html#extension-provider">extension provider</a>.</p>
 
-<p>Next up the newly created interface is added to the existing list of implemented interfaces. </p>
+<p>Next up the newly created interface is added to the existing list of implemented interfaces.</p>
 
 <pre><code class="language-xtend">annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #[interfaceType.newTypeReference]
 </code></pre>
 
-<p>The code calls <code>setImplementedInterfaces(Iterable&lt;TypeReference&gt;)</code> on the annotated class. The right hand side of the assignment is a concatenation of the existing implemented interfaces and a type reference pointing to the freshly created interface.</p>
+<p>The code calls <code class="highlighter-rouge">setImplementedInterfaces(Iterable&lt;TypeReference&gt;)</code> on the annotated class. The right hand side of the assignment is a concatenation of the existing implemented interfaces and a type reference pointing to the freshly created interface.</p>
 
 <p>A <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/declaration/TypeReference.java">TypeReference</a> can be created using one of the various methods from <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/services/TypeReferenceProvider.java">TypeReferenceProvider</a> which is a super type of <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/TransformationContext.java">TransformationContext</a>. These utilities are available as extensions, too.</p>
 
@@ -173,14 +173,14 @@ annotation Extract {}
 
 <h3 id="active-annotations-assigning-expressions">Assigning Expressions</h3>
 
-<p>A second alternative is to put expressions from the Xtend source into the context of a generated Java element. This allows to directly use the code that was written in the source file. An annotation <code>@Lazy</code> which turns fields into lazily initialized properties, may be used like this: </p>
+<p>A second alternative is to put expressions from the Xtend source into the context of a generated Java element. This allows to directly use the code that was written in the source file. An annotation <code class="highlighter-rouge">@Lazy</code> which turns fields into lazily initialized properties, may be used like this:</p>
 
 <pre><code class="language-xtend">class MyClass {
   @Lazy String myField = expensiveComputation()
 }
 </code></pre>
 
-<p>The processor for this <em>active annotation</em> could infer a synthetic initializer method and add a getter-method, which calls the initializer if the field is still <code>null</code>. Therefore, the initialization expression of the field has to become the method body of the synthesized initializer method. The following code performs this transformation:</p>
+<p>The processor for this <em>active annotation</em> could infer a synthetic initializer method and add a getter-method, which calls the initializer if the field is still <code class="highlighter-rouge">null</code>. Therefore, the initialization expression of the field has to become the method body of the synthesized initializer method. The following code performs this transformation:</p>
 
 <pre><code class="language-xtend">override doTransform(MutableFieldDeclaration field, extension TransformationContext context) {
 
@@ -207,11 +207,11 @@ annotation Extract {}
 
 <h2 id="active-annotations-validation">Custom Compiler Checks</h2>
 
-<p>The previous example requires each annotated field to have an initializer. Otherwise it would not be possible to use lazy initialization to assign its value. Also a simple check for a <code>null</code> reference could cause trouble with primitive values. A validation for that case would be sensible, too. In order to guide the user dedicated compilation errors should be raised if these constrains are violated.</p>
+<p>The previous example requires each annotated field to have an initializer. Otherwise it would not be possible to use lazy initialization to assign its value. Also a simple check for a <code class="highlighter-rouge">null</code> reference could cause trouble with primitive values. A validation for that case would be sensible, too. In order to guide the user dedicated compilation errors should be raised if these constrains are violated.</p>
 
 <p>The <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/TransformationContext.java">TransformationContext</a> inherits methods for exactly that purpose from the <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib.macro/src/org/eclipse/xtend/lib/macro/services/ProblemSupport.java">ProblemSupport</a> service.</p>
 
-<p>Since the <code>context</code> is declared as an <a href="202_xtend_classes_members.html#extension-provider">extension provider</a>, those methods can be used as extensions and it allows to implement the constraint check accordingly:</p>
+<p>Since the <code class="highlighter-rouge">context</code> is declared as an <a href="202_xtend_classes_members.html#extension-provider">extension provider</a>, those methods can be used as extensions and it allows to implement the constraint check accordingly:</p>
 
 <pre><code class="language-xtend">override doTransform(MutableFieldDeclaration field, extension TransformationContext context) {
   if (field.type.primitive)
@@ -223,11 +223,11 @@ annotation Extract {}
 }
 </code></pre>
 
-<p>This ensures that the user is notified about invalid applications of the <em>active annotation</em> <code>@Lazy</code>.</p>
+<p>This ensures that the user is notified about invalid applications of the <em>active annotation</em> <code class="highlighter-rouge">@Lazy</code>.</p>
 
 <h2 id="active-annotation-classpath">Class Path Setup and Testing</h2>
 
-<p>An <em>active annotation</em> can not be used in the same project it is declared in, but has to reside on an upstream project. Alternatively it can be compiled and deployed in a jar. The annotation and the processor itself only rely on the interfaces defined in <code>org.eclipse.xtend.lib.macro</code> which is part of Xtend’s small standard library.</p>
+<p>An <em>active annotation</em> can not be used in the same project it is declared in, but has to reside on an upstream project. Alternatively it can be compiled and deployed in a jar. The annotation and the processor itself only rely on the interfaces defined in <code class="highlighter-rouge">org.eclipse.xtend.lib.macro</code> which is part of Xtend’s small standard library.</p>
 
 <p>Also note that the macro library as well as the processors are strictly speaking compile-time only dependencies. So if it matters, like e.g. on Android devices, you don’t need to ship them at runtime.</p>
 
@@ -235,19 +235,20 @@ annotation Extract {}
 
 <p>Therefore, careful testing and debugging of the processor is essential. It is best done in a unit test. Such a test needs the whole Xtend compiler on the class path, which you can obtain by means of an OSGi bundle dependency or via Maven. The maven dependency is</p>
 
-<pre><code>&lt;dependency&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
   &lt;artifactId&gt;org.eclipse.xtend.core&lt;/artifactId&gt;
   &lt;version&gt;2.7.1&lt;/version&gt;
   &lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;
 </code></pre>
+</div>
 
-<p>and the equivalent OSGI bundle is <code>org.eclipse.xtend.core</code>.</p>
+<p>and the equivalent OSGI bundle is <code class="highlighter-rouge">org.eclipse.xtend.core</code>.</p>
 
 <h3 id="active-annotation-compiler-tester">Testing</h3>
 
-<p>The <code>XtendCompilerTester</code> is a convenient helper class for testing the processing and the compilation. It allows to test active annotation processors by either comparing the generated Java source using a String comparison or by inspecting the produced Java elements. In addition you can even compile the generated Java source to a Java class and create and test instances of it reflectively.</p>
+<p>The <code class="highlighter-rouge">XtendCompilerTester</code> is a convenient helper class for testing the processing and the compilation. It allows to test active annotation processors by either comparing the generated Java source using a String comparison or by inspecting the produced Java elements. In addition you can even compile the generated Java source to a Java class and create and test instances of it reflectively.</p>
 
 <p>The example project contains a couple of test cases:</p>
 
@@ -286,7 +287,7 @@ annotation Extract {}
 }
 </code></pre>
 
-<p>This is a basic string comparison. It is a good way to start the development of a new annotation processor. Later on assertions against the produced elements and syntax tree (AST) may be a better choice since these are not so fragile against changes in the formatting. The <code>@Extract</code>-example uses this technique: </p>
+<p>This is a basic string comparison. It is a good way to start the development of a new annotation processor. Later on assertions against the produced elements and syntax tree (AST) may be a better choice since these are not so fragile against changes in the formatting. The <code class="highlighter-rouge">@Extract</code>-example uses this technique:</p>
 
 <pre><code class="language-xtend">@Test def void testExtractAnnotation() {
   '''
@@ -323,29 +324,30 @@ annotation Extract {}
 
 <h2 id="existing-active-annotations">Existing Active Annotations</h2>
 
-<p>Xtend comes with ready-to-use active annotations for common code patterns. They reside in the <code>org.eclipse.xtend.lib.annotations</code> plug-in/jar which must be on the class path of the project containing the Xtend files.</p>
+<p>Xtend comes with ready-to-use active annotations for common code patterns. They reside in the <code class="highlighter-rouge">org.eclipse.xtend.lib.annotations</code> plug-in/jar which must be on the class path of the project containing the Xtend files.</p>
 
 <h2 id="property-annotation">@Accessors</h2>
 
-<p>If you want to add getter and or setter methods for your fields <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Accessors.xtend"><code>@Accessors</code></a> is your friend. Here’s a basic example.</p>
+<p>If you want to add getter and or setter methods for your fields <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Accessors.xtend"><code class="highlighter-rouge">@Accessors</code></a> is your friend. Here’s a basic example.</p>
 
 <pre><code class="language-xtend">@Accessors String name
 </code></pre>
 
 <p>will compile to the Java code</p>
 
-<pre><code class="language-java">private String name;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
 
-public String getName() {
-  return this.name;
-}
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
+<span class="o">}</span>
 
-public void setName(final String name) {
-  this.name = name;
-}
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="p">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
-<p>So by default a public getter and a public setter method is created. The <code>@Accessors</code> can be configured to tell that you only want one or the other and to change the visibility. this is done by means of <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Accessors.xtend">AccessorType</a> You can also use the annotation on class level to do the same for all fields.</p>
+<p>So by default a public getter and a public setter method is created. The <code class="highlighter-rouge">@Accessors</code> can be configured to tell that you only want one or the other and to change the visibility. this is done by means of <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Accessors.xtend">AccessorType</a> You can also use the annotation on class level to do the same for all fields.</p>
 
 <p>Here is a more complex example, that shows how it works:</p>
 
@@ -360,41 +362,42 @@ public void setName(final String name) {
 
 <p>will compile to the Java code</p>
 
-<pre><code class="language-java">@Accessors public class Person {
-  private String name
-  private String firstName
-  @Accessors(PUBLIC_GETTER, PROTECTED_SETTER) private int age
-  @Accessors(NONE) private String internalField
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Accessors</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">firstName</span>
+  <span class="nd">@Accessors</span><span class="o">(</span><span class="n">PUBLIC_GETTER</span><span class="o">,</span> <span class="n">PROTECTED_SETTER</span><span class="o">)</span> <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span>
+  <span class="nd">@Accessors</span><span class="o">(</span><span class="n">NONE</span><span class="o">)</span> <span class="kd">private</span> <span class="n">String</span> <span class="n">internalField</span>
   
-  public String getName() {
-    return this.name;
-  }
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">getName</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
+  <span class="o">}</span>
   
-  public void setName(final String name) {
-    this.name = name;
-  }
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setName</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+  <span class="o">}</span>
   
-  public String getFirstName() {
-    return this.firstName;
-  }
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">getFirstName</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">firstName</span><span class="o">;</span>
+  <span class="o">}</span>
   
-  public void setFirstName(final String firstName) {
-    this.firstName = firstName;
-  }
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setFirstName</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+  <span class="o">}</span>
   
-  public int getAge() {
-    return this.age;
-  }
+  <span class="kd">public</span> <span class="kt">int</span> <span class="n">getAge</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">age</span><span class="o">;</span>
+  <span class="o">}</span>
   
-  protected void setAge(final int age) {
-    this.age = age;
-  }
-}
+  <span class="kd">protected</span> <span class="kt">void</span> <span class="n">setAge</span><span class="o">(</span><span class="kd">final</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
 <h2 id="data-annotation">@Data</h2>
 
-<p>The annotation <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Data.xtend"><code>@Data</code></a>, will turn an annotated class into a value object class. A class annotated with <code>@Data</code> is processed according to the following rules:</p>
+<p>The annotation <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Data.xtend"><code class="highlighter-rouge">@Data</code></a>, will turn an annotated class into a value object class. A class annotated with <code class="highlighter-rouge">@Data</code> is processed according to the following rules:</p>
 
 <ul>
   <li>all fields are final,</li>
@@ -419,7 +422,7 @@ public void setName(final String name) {
 
 <h2 id="delegate-annotation">@Delegate</h2>
 
-<p>The <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Delegate.xtend"><code>@Delegate</code></a> annotation automatically generated delegate methods for all interfaces shared between the delegate and the currently implemented class. You can optionally restrict it to explicitly stated interfaces.</p>
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/annotations/Delegate.xtend"><code class="highlighter-rouge">@Delegate</code></a> annotation automatically generated delegate methods for all interfaces shared between the delegate and the currently implemented class. You can optionally restrict it to explicitly stated interfaces.</p>
 
 <p>Let’s start with a basic example:</p>
 
@@ -433,7 +436,7 @@ public void setName(final String name) {
 
 <p>It is not only possible to delegate to fields, but also to methods so you for instance could lazily create the delegate object or use a different one each time. If you use a method you can also declare additional parameters, that will tell you about the method that should be invoked.</p>
 
-<p>Here’s another example: </p>
+<p>Here’s another example:</p>
 
 <pre><code class="language-xtend">class MyClass implements SomeInterface {
 

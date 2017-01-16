@@ -10,9 +10,9 @@
 
 <h1 id="xtend-classes-members">Classes and Members</h1>
 
-<p>At a first glance an Xtend file pretty much looks like a Java file. It starts with a package declaration followed by an import section and class definitions. The classes in fact are directly translated to Java classes in the corresponding Java package. A class can have constructors, fields, methods and annotations. </p>
+<p>At a first glance an Xtend file pretty much looks like a Java file. It starts with a package declaration followed by an import section and class definitions. The classes in fact are directly translated to Java classes in the corresponding Java package. A class can have constructors, fields, methods and annotations.</p>
 
-<p>Here is an examplary Xtend file: </p>
+<p>Here is an examplary Xtend file:</p>
 
 <pre><code class="language-xtend">package com.acme
 
@@ -33,10 +33,10 @@ class MyClass {
 
 <h2 id="package-decl">Package Declaration</h2>
 
-<p>Package declarations can look like those in Java. Two small, optional differences: </p>
+<p>Package declarations can look like those in Java. Two small, optional differences:</p>
 
 <ul>
-  <li>An identifier can be escaped with a <code>^</code> character in case it conflicts with a keyword.</li>
+  <li>An identifier can be escaped with a <code class="highlighter-rouge">^</code> character in case it conflicts with a keyword.</li>
   <li>The terminating semicolon is optional.</li>
 </ul>
 
@@ -45,34 +45,34 @@ class MyClass {
 
 <h2 id="imports">Imports</h2>
 
-<p>The ordinary imports of type names are equivalent to the imports known from Java. Again one can escape any names conflicting with keywords using a <code>^</code>. In contrast to Java, the terminating semicolon is optional. Non-static wildcard type imports are deprecated for the benefit of better usability and well defined dependencies. </p>
+<p>The ordinary imports of type names are equivalent to the imports known from Java. Again one can escape any names conflicting with keywords using a <code class="highlighter-rouge">^</code>. In contrast to Java, the terminating semicolon is optional. Non-static wildcard type imports are deprecated for the benefit of better usability and well defined dependencies.</p>
 
-<p>Xtend also features static imports for importing static fields and methods. The semantics and syntax are just like in Java. </p>
+<p>Xtend also features static imports for importing static fields and methods. The semantics and syntax are just like in Java.</p>
 
-<p>As in Java all classes from the <code>java.lang</code> package are implicitly imported. </p>
+<p>As in Java all classes from the <code class="highlighter-rouge">java.lang</code> package are implicitly imported.</p>
 
 <pre><code class="language-xtend">import java.math.BigDecimal
 import static java.util.Collections.sort
 import static org.junit.Assert.*
 </code></pre>
 
-<p>Static methods can also be imported as <code>extension</code>s. See the section on <a href="202_xtend_classes_members.html#extension-methods">extension methods</a> for details.</p>
+<p>Static methods can also be imported as <code class="highlighter-rouge">extension</code>s. See the section on <a href="202_xtend_classes_members.html#extension-methods">extension methods</a> for details.</p>
 
 <h2 id="xtend-class-declaration">Class Declaration</h2>
 
-<p>The class declaration reuses a lot of Java’s syntax but still is a bit different in some aspects: All Xtend types are <code>public</code> by default since that’s the common case. Java’s “package private” default visibility is declared by the more explicit keyword <code>package</code> in Xtend. In contrast to Java, Xtend supports multiple public top level class declarations per file. Each Xtend class is compiled to a separate top-level Java class.</p>
+<p>The class declaration reuses a lot of Java’s syntax but still is a bit different in some aspects: All Xtend types are <code class="highlighter-rouge">public</code> by default since that’s the common case. Java’s “package private” default visibility is declared by the more explicit keyword <code class="highlighter-rouge">package</code> in Xtend. In contrast to Java, Xtend supports multiple public top level class declarations per file. Each Xtend class is compiled to a separate top-level Java class.</p>
 
-<p>Abstract classes are defined using the <code>abstract</code> modifier as in Java. See also <a href="202_xtend_classes_members.html#abstract-methods">abstract methods</a>.</p>
+<p>Abstract classes are defined using the <code class="highlighter-rouge">abstract</code> modifier as in Java. See also <a href="202_xtend_classes_members.html#abstract-methods">abstract methods</a>.</p>
 
-<p>Xtend’s approach to inheritance is conceptually the same as in Java. Single inheritance of classes as well as implementing multiple interfaces is supported. Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. If no super type is specified, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a> is used. </p>
+<p>Xtend’s approach to inheritance is conceptually the same as in Java. Single inheritance of classes as well as implementing multiple interfaces is supported. Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. If no super type is specified, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a> is used.</p>
 
-<p>The most simple class looks like this: </p>
+<p>The most simple class looks like this:</p>
 
 <pre><code class="language-xtend">class MyClass {
 }
 </code></pre>
 
-<p>A more advanced generic class declaration in Xtend: </p>
+<p>A more advanced generic class declaration in Xtend:</p>
 
 <pre><code class="language-xtend">class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
         implements List&lt;E&gt;, RandomAccess, 
@@ -83,7 +83,7 @@ import static org.junit.Assert.*
 
 <h2 id="constructors">Constructors</h2>
 
-<p>An Xtend class can define any number of constructors. Unlike Java you do not have to repeat the name of the class over and over again, but use the keyword <code>new</code> to declare a constructor. Constructors can also delegate to other constructors using <code>this(args...)</code> in their first line. </p>
+<p>An Xtend class can define any number of constructors. Unlike Java you do not have to repeat the name of the class over and over again, but use the keyword <code class="highlighter-rouge">new</code> to declare a constructor. Constructors can also delegate to other constructors using <code class="highlighter-rouge">this(args...)</code> in their first line.</p>
 
 <pre><code class="language-xtend">class MyClass extends AnotherClass {
   new(String s) {
@@ -96,13 +96,13 @@ import static org.junit.Assert.*
 }
 </code></pre>
 
-<p>The same rules with regard to inheritance apply as in Java, i.e. if the super class does not define a no-argument constructor, you have to explicitly call one using <code>super(args...)</code> as the first expression in the body of the constructor.</p>
+<p>The same rules with regard to inheritance apply as in Java, i.e. if the super class does not define a no-argument constructor, you have to explicitly call one using <code class="highlighter-rouge">super(args...)</code> as the first expression in the body of the constructor.</p>
 
-<p>The default visibility of constructors is <code>public</code> but you can also specify an explicit visiblity <code>public</code>, <code>protected</code>, <code>package</code> or <code>private</code>.</p>
+<p>The default visibility of constructors is <code class="highlighter-rouge">public</code> but you can also specify an explicit visiblity <code class="highlighter-rouge">public</code>, <code class="highlighter-rouge">protected</code>, <code class="highlighter-rouge">package</code> or <code class="highlighter-rouge">private</code>.</p>
 
 <h2 id="fields">Fields</h2>
 
-<p>A field can have an initializer. Final fields are declared using <code>val</code>, while <code>var</code> introduces a non-final field and can be omitted. Yet, if an initializer expression is present, the type of a field can be inferred if <code>val</code> or <code>var</code> was used to introduce the field. The keyword <code>final</code> is synonym to <code>val</code>. Fields marked as <code>static</code> will be compiled to static Java fields. </p>
+<p>A field can have an initializer. Final fields are declared using <code class="highlighter-rouge">val</code>, while <code class="highlighter-rouge">var</code> introduces a non-final field and can be omitted. Yet, if an initializer expression is present, the type of a field can be inferred if <code class="highlighter-rouge">val</code> or <code class="highlighter-rouge">var</code> was used to introduce the field. The keyword <code class="highlighter-rouge">final</code> is synonym to <code class="highlighter-rouge">val</code>. Fields marked as <code class="highlighter-rouge">static</code> will be compiled to static Java fields.</p>
 
 <pre><code class="language-xtend">class MyClass {
   int count = 1
@@ -113,7 +113,7 @@ import static org.junit.Assert.*
 }
 </code></pre>
 
-<p>The default visibility for fields is <code>private</code>. You can also declare it explicitly as being <code>public</code>, <code>protected</code>, <code>package</code> or <code>private</code>. </p>
+<p>The default visibility for fields is <code class="highlighter-rouge">private</code>. You can also declare it explicitly as being <code class="highlighter-rouge">public</code>, <code class="highlighter-rouge">protected</code>, <code class="highlighter-rouge">package</code> or <code class="highlighter-rouge">private</code>.</p>
 
 <p>A specialty of Xtend are fields that provide <em>extension methods</em> which are covered in <a href="202_xtend_classes_members.html#extension-methods">their own section</a>.</p>
 
@@ -126,16 +126,16 @@ import static org.junit.Assert.*
 }
 </code></pre>
 
-<p>Method declarations start with the keyword <code>def</code>. The default visibility of a method is <code>public</code>. You can explicitly declare it as being <code>public</code>, <code>protected</code>, <code>package</code> or <code>private</code>.</p>
+<p>Method declarations start with the keyword <code class="highlighter-rouge">def</code>. The default visibility of a method is <code class="highlighter-rouge">public</code>. You can explicitly declare it as being <code class="highlighter-rouge">public</code>, <code class="highlighter-rouge">protected</code>, <code class="highlighter-rouge">package</code> or <code class="highlighter-rouge">private</code>.</p>
 
-<p>Xtend supports the <code>static</code> modifier for methods and can <a href="202_xtend_classes_members.html#inferred-return-types">infer</a> the return type if it is not explicitly given: </p>
+<p>Xtend supports the <code class="highlighter-rouge">static</code> modifier for methods and can <a href="202_xtend_classes_members.html#inferred-return-types">infer</a> the return type if it is not explicitly given:</p>
 
 <pre><code class="language-xtend">def static createInstance() {
   new MyClass('foo')
 }
 </code></pre>
 
-<p>As in Java, vararg parameters are allowed and accessible as array values in the method body: </p>
+<p>As in Java, vararg parameters are allowed and accessible as array values in the method body:</p>
 
 <pre><code class="language-xtend">def printAll(String... strings) {
   strings.forEach[ s | println(s) ]
@@ -146,7 +146,7 @@ import static org.junit.Assert.*
 
 <h3 id="abstract-methods">Abstract Methods</h3>
 
-<p>An abstract method in Xtend does not define a body and must be declared within an <code>abstract</code> class or an interface. Also specifying the return type is mandatory since it cannot be inferred. </p>
+<p>An abstract method in Xtend does not define a body and must be declared within an <code class="highlighter-rouge">abstract</code> class or an interface. Also specifying the return type is mandatory since it cannot be inferred.</p>
 
 <pre><code class="language-xtend">abstract class MyAbstractClass() {
   def String abstractMethod() // no body
@@ -155,9 +155,9 @@ import static org.junit.Assert.*
 
 <h3 id="overriding-methods">Overriding Methods</h3>
 
-<p>Methods can override other methods from the super class or implement interface methods using the keyword <code>override</code>. If a method overrides a method from a super type, the <code>override</code> keyword is mandatory and replaces the keyword <code>def</code>. The override semantics are the same as in Java, e.g. it is impossible to override <code>final</code> methods or invisible methods. Overriding methods inherit their return type from the super declaration.</p>
+<p>Methods can override other methods from the super class or implement interface methods using the keyword <code class="highlighter-rouge">override</code>. If a method overrides a method from a super type, the <code class="highlighter-rouge">override</code> keyword is mandatory and replaces the keyword <code class="highlighter-rouge">def</code>. The override semantics are the same as in Java, e.g. it is impossible to override <code class="highlighter-rouge">final</code> methods or invisible methods. Overriding methods inherit their return type from the super declaration.</p>
 
-<p>Example: </p>
+<p>Example:</p>
 
 <pre><code class="language-xtend">override String second(List&lt;String&gt; elements) {
   elements.get(1)
@@ -166,9 +166,9 @@ import static org.junit.Assert.*
 
 <h3 id="declared-exceptions">Declared Exceptions</h3>
 
-<p>Xtend does not force you to catch or declare checked exceptions. Nevertheless, you can still declare the exceptions thrown in a method’s body using the <code>throws</code> clause as in Java.</p>
+<p>Xtend does not force you to catch or declare checked exceptions. Nevertheless, you can still declare the exceptions thrown in a method’s body using the <code class="highlighter-rouge">throws</code> clause as in Java.</p>
 
-<p>If you do not declare checked exceptions in your method but they are possibly thrown in your code, the compiler will throw the checked exception silently (using the sneaky-throw technique introduced by <a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>). </p>
+<p>If you do not declare checked exceptions in your method but they are possibly thrown in your code, the compiler will throw the checked exception silently (using the sneaky-throw technique introduced by <a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>).</p>
 
 <pre><code class="language-xtend">/*
  * throws an Exception
@@ -191,14 +191,14 @@ def void sneakyThrowException() {
 
 <p>If the return type of a method can be inferred from its body it does not have to be declared.</p>
 
-<p>That is the method </p>
+<p>That is the method</p>
 
 <pre><code class="language-xtend">def String second(List&lt;String&gt; elements) {
   elements.get(1)
 }
 </code></pre>
 
-<p>could be declared like this: </p>
+<p>could be declared like this:</p>
 
 <pre><code class="language-xtend">def second(List&lt;String&gt; elements) {
   elements.get(1)
@@ -234,7 +234,7 @@ def void sneakyThrowException() {
 
 <p>Generally, method resolution and binding is done statically at compile time as in Java. Method calls are bound based on the static types of arguments. Sometimes this is not what you want. Especially in the context of <a href="202_xtend_classes_members.html#extension-methods">extension methods</a> you would like to have polymorphic behavior.</p>
 
-<p>A dispatch method is declared using the keyword <code>dispatch</code>. </p>
+<p>A dispatch method is declared using the keyword <code class="highlighter-rouge">dispatch</code>.</p>
 
 <pre><code class="language-xtend">def dispatch printType(Number x) { 
   "it's a number" 
@@ -247,31 +247,32 @@ def dispatch printType(Integer x) {
 
 <p>For a set of visible dispatch methods in the current type hierarchy with the same name and the same number of arguments, the compiler infers a synthetic dispatcher method. This dispatcher uses the common super type of all declared arguments. The method name of the actual dispatch cases is prepended with an underscore and the visibility of these methods is reduced to protected if they have been defined as public methods. Client code always binds to the synthesized dispatcher method.</p>
 
-<p>For the two dispatch methods in the example above the following Java code would be generated: </p>
+<p>For the two dispatch methods in the example above the following Java code would be generated:</p>
 
-<pre><code class="language-java">protected String _printType(final Number x) {
-  return "it\'s a number";
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">protected</span> <span class="n">String</span> <span class="nf">_printType</span><span class="p">(</span><span class="kd">final</span> <span class="n">Number</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="s">"it\'s a number"</span><span class="o">;</span>
+<span class="o">}</span>
 
-protected String _printType(final Integer x) {
-  return "it\'s an int";
-}
+<span class="kd">protected</span> <span class="n">String</span> <span class="nf">_printType</span><span class="p">(</span><span class="kd">final</span> <span class="n">Integer</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="s">"it\'s an int"</span><span class="o">;</span>
+<span class="o">}</span>
 
-public String printType(final Number x) {
-  if (x instanceof Integer) {
-    return _printType((Integer)x);
-  } else if (x != null) {
-    return _printType(x);
-  } else {
-    throw new IllegalArgumentException("Unhandled parameter types: " +
-      Arrays.&lt;Object&gt;asList(x).toString());
-  }
-}
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">printType</span><span class="p">(</span><span class="kd">final</span> <span class="n">Number</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="k">instanceof</span> <span class="n">Integer</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">_printType</span><span class="o">((</span><span class="n">Integer</span><span class="o">)</span><span class="n">x</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">_printType</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">"Unhandled parameter types: "</span> <span class="o">+</span>
+      <span class="n">Arrays</span><span class="o">.&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="n">asList</span><span class="o">(</span><span class="n">x</span><span class="o">).</span><span class="na">toString</span><span class="o">());</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
-<p>Note that the <code>instanceof</code> cascade is ordered such that more specific types are handled first.</p>
+<p>Note that the <code class="highlighter-rouge">instanceof</code> cascade is ordered such that more specific types are handled first.</p>
 
-<p>The default visibility of the dispatch cases is <code>protected</code>. If all dispatch methods explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too. Otherwise it is <code>public</code>. The comparison of the parameter types is performed from left to right. That is in the following example, the second method declaration is considered more specific since its first parameter type is the most specific:</p>
+<p>The default visibility of the dispatch cases is <code class="highlighter-rouge">protected</code>. If all dispatch methods explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too. Otherwise it is <code class="highlighter-rouge">public</code>. The comparison of the parameter types is performed from left to right. That is in the following example, the second method declaration is considered more specific since its first parameter type is the most specific:</p>
 
 <pre><code class="language-xtend">def dispatch printTypes(Number x, Integer y) { 
   "it's some number and an int" 
@@ -282,23 +283,24 @@ def dispatch printTypes(Integer x, Number y) {
 }
 </code></pre>
 
-<p>generates the following Java code : </p>
+<p>generates the following Java code :</p>
 
-<pre><code class="language-java">public String printTypes(final Number x, final Number y) {
-  if (x instanceof Integer
-       &amp;&amp; y != null) {
-    return _printTypes((Integer)x, y);
-  } else if (x != null
-       &amp;&amp; y instanceof Integer) {
-    return _printTypes(x, (Integer)y);
-  } else {
-    throw new IllegalArgumentException("Unhandled parameter types: " +
-      Arrays.&lt;Object&gt;asList(x, y).toString());
-  }
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">String</span> <span class="nf">printTypes</span><span class="p">(</span><span class="kd">final</span> <span class="n">Number</span> <span class="n">x</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Number</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="k">instanceof</span> <span class="n">Integer</span>
+       <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">_printTypes</span><span class="o">((</span><span class="n">Integer</span><span class="o">)</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span>
+       <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="k">instanceof</span> <span class="n">Integer</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">_printTypes</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">Integer</span><span class="o">)</span><span class="n">y</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">"Unhandled parameter types: "</span> <span class="o">+</span>
+      <span class="n">Arrays</span><span class="o">.&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="n">asList</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">).</span><span class="na">toString</span><span class="o">());</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
-<p>The code is compiled in a way that a <code>null</code> reference is never a match. <code>null</code> values can be handled by dispatch cases that use the parameter type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Void.html">Void</a>. </p>
+<p>The code is compiled in a way that a <code class="highlighter-rouge">null</code> reference is never a match. <code class="highlighter-rouge">null</code> values can be handled by dispatch cases that use the parameter type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Void.html">Void</a>.</p>
 
 <pre><code class="language-xtend">def dispatch printType(Number x) { 
   "it's some number" 
@@ -313,36 +315,38 @@ def dispatch printType(Void x) {
 }
 </code></pre>
 
-<p>This compiles to the following Java code: </p>
+<p>This compiles to the following Java code:</p>
 
-<pre><code class="language-java">public String printType(final Number x) {
-  if (x instanceof Integer) {
-    return _printType((Integer)x);
-  } else if (x != null) {
-    return _printType(x);
-  } else if (x == null) {
-    return _printType((Void)null);
-  } else {
-    throw new IllegalArgumentException("Unhandled parameter types: " +
-      Arrays.&lt;Object&gt;asList(x).toString());
-  }
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">String</span> <span class="nf">printType</span><span class="p">(</span><span class="kd">final</span> <span class="n">Number</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="k">instanceof</span> <span class="n">Integer</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">_printType</span><span class="o">((</span><span class="n">Integer</span><span class="o">)</span><span class="n">x</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">_printType</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">_printType</span><span class="o">((</span><span class="n">Void</span><span class="o">)</span><span class="kc">null</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">"Unhandled parameter types: "</span> <span class="o">+</span>
+      <span class="n">Arrays</span><span class="o">.&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="n">asList</span><span class="o">(</span><span class="n">x</span><span class="o">).</span><span class="na">toString</span><span class="o">());</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
 <h4 id="dispatch-methods-and-inheritance">Dispatch Methods and Inheritance</h4>
 
 <p>All visible Java methods from all super types that are conformant to the compiled representation of a dispatch method are also included in the dispatcher. Conforming means they have the expected number of arguments and have the same compiled name with the prepended underscore.</p>
 
-<p>For example, consider the following Java class : </p>
+<p>For example, consider the following Java class :</p>
 
-<pre><code class="language-java">public abstract class AbstractLabelProvider {
-   protected String _label(Object o) {
-      // some generic implementation
-   }
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractLabelProvider</span> <span class="o">{</span>
+   <span class="kd">protected</span> <span class="n">String</span> <span class="n">_label</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+      <span class="c1">// some generic implementation</span>
+   <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
-<p>and the following Xtend class which extends the Java class : </p>
+<p>and the following Xtend class which extends the Java class :</p>
 
 <pre><code class="language-xtend">class MyLabelProvider extends AbstractLabelProvider {
    def dispatch label(Entity it)  {
@@ -359,23 +363,24 @@ def dispatch printType(Void x) {
 }
 </code></pre>
 
-<p>The resulting dispatch method in the generated Java class <code>MyLabelProvider</code> would then look like this: </p>
+<p>The resulting dispatch method in the generated Java class <code class="highlighter-rouge">MyLabelProvider</code> would then look like this:</p>
 
-<pre><code class="language-java">public String label(final Object it) {
-  if (it instanceof Entity) {
-    return _label((Entity)it);
-  } else if (it instanceof Field) {
-    return _label((Field)it);
-  } else if (it instanceof Method) {
-    return _label((Method)it);
-  } else if (it != null) {
-    return super._label(it);
-  } else {
-    throw new IllegalArgumentException("Unhandled parameter types: " +
-      Arrays.&lt;Object&gt;asList(it).toString());
-  }
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">String</span> <span class="nf">label</span><span class="p">(</span><span class="kd">final</span> <span class="n">Object</span> <span class="n">it</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">it</span> <span class="k">instanceof</span> <span class="n">Entity</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">_label</span><span class="o">((</span><span class="n">Entity</span><span class="o">)</span><span class="n">it</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">it</span> <span class="k">instanceof</span> <span class="n">Field</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">_label</span><span class="o">((</span><span class="n">Field</span><span class="o">)</span><span class="n">it</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">it</span> <span class="k">instanceof</span> <span class="n">Method</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">_label</span><span class="o">((</span><span class="n">Method</span><span class="o">)</span><span class="n">it</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">it</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">_label</span><span class="o">(</span><span class="n">it</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">"Unhandled parameter types: "</span> <span class="o">+</span>
+      <span class="n">Arrays</span><span class="o">.&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="n">asList</span><span class="o">(</span><span class="n">it</span><span class="o">).</span><span class="na">toString</span><span class="o">());</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
 <h4 id="static-dispatch-methods">Static Dispatch Methods</h4>
 
@@ -387,7 +392,7 @@ def dispatch printType(Void x) {
 
 <p>Consider you want to create a copy of the following list of persons into a :</p>
 
-<pre><code>Fred Flintstone {
+<div class="highlighter-rouge"><pre class="highlight"><code>Fred Flintstone {
 	marriedTo Willma Flintstone
 	friendWith Barny Rubble
 }
@@ -398,6 +403,7 @@ Barny Rubble {
 	friendWith Fred Flintstone
 }
 </code></pre>
+</div>
 
 <p>A function like the following could do the trick :</p>
 
@@ -413,7 +419,7 @@ def copy(Person p) {
 }
 </code></pre>
 
-<p>The problem with that code is that we don’t track the origins of the created copies. This is the main problem with model transformations. The classic solution is to run the copying in two passes. First we create all instances and then we establish the links. Although it works it results in cluttered and non coherent code. Xtend’s create functions handle this problem by introducing identity perservation by tracking the origin of each created instance. Therefore, a create function takes two expressions. One to instantiate the actual object and a second one to initialize it. </p>
+<p>The problem with that code is that we don’t track the origins of the created copies. This is the main problem with model transformations. The classic solution is to run the copying in two passes. First we create all instances and then we establish the links. Although it works it results in cluttered and non coherent code. Xtend’s create functions handle this problem by introducing identity perservation by tracking the origin of each created instance. Therefore, a create function takes two expressions. One to instantiate the actual object and a second one to initialize it.</p>
 
 <pre><code class="language-xtend">def create result: new Person copy(Person p) {
 	result.name = p.name
@@ -423,7 +429,7 @@ def copy(Person p) {
 }	
 </code></pre>
 
-<p>If you do not specify the name of the result variable it is assumed to be the implicit receiver variable <code>it</code>, which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:</p>
+<p>If you do not specify the name of the result variable it is assumed to be the implicit receiver variable <code class="highlighter-rouge">it</code>, which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:</p>
 
 <pre><code class="language-xtend">def Person create new PersonImpl() copy(Person p) {
 	/* it.*/name = p.name
@@ -434,13 +440,13 @@ def copy(Person p) {
 
 <h4 id="how-it-works">How it works</h4>
 
-<p>In addition to the keyword <code>create</code> one specifies two expressions. The first expression is the factory to create an instance while the second will initialize it further. Prior to invoking the factory expression, a cache lookup is performed to find a previously created instance for the very same arguments. If there is no such instance, the factory expression is evaluated and the result is stored in the cache. Subsequently the main expression (also called the initializer expression) is evaluated. This happens only if there was no previously created instance available in the cache. If that expression in turn calls the create function transitively using the same set of arguments the previously instantiated and cached object is returned. Note that the object is probably currently initialized. That is, its internal state may not yet be available. The lifecycle of the cache is attached to the instance of the declaring Xtend class. That is you can control how long the cache lives by means of Guice.</p>
+<p>In addition to the keyword <code class="highlighter-rouge">create</code> one specifies two expressions. The first expression is the factory to create an instance while the second will initialize it further. Prior to invoking the factory expression, a cache lookup is performed to find a previously created instance for the very same arguments. If there is no such instance, the factory expression is evaluated and the result is stored in the cache. Subsequently the main expression (also called the initializer expression) is evaluated. This happens only if there was no previously created instance available in the cache. If that expression in turn calls the create function transitively using the same set of arguments the previously instantiated and cached object is returned. Note that the object is probably currently initialized. That is, its internal state may not yet be available. The lifecycle of the cache is attached to the instance of the declaring Xtend class. That is you can control how long the cache lives by means of Guice.</p>
 
 <hr />
 
 <h2 id="annotations">Annotations</h2>
 
-<p>Annotations are available on classes, fields, methods and parameters. They are prefixed with the <code>@</code> character and accept a number of key-value pairs or a default value for the annotation property named <code>value</code>. Annotation values that expect arrays can handle single values, too. Value arrays are enclosed in array literals <code>#['first', 'second']</code>. The semantics for annotations are exactly like defined in the <a href="http://docs.oracle.com/javase/specs/jls/se6/html/interfaces.html#9.7">Java Language Specification</a>. Here is an example:</p>
+<p>Annotations are available on classes, fields, methods and parameters. They are prefixed with the <code class="highlighter-rouge">@</code> character and accept a number of key-value pairs or a default value for the annotation property named <code class="highlighter-rouge">value</code>. Annotation values that expect arrays can handle single values, too. Value arrays are enclosed in array literals <code class="highlighter-rouge">#['first', 'second']</code>. The semantics for annotations are exactly like defined in the <a href="http://docs.oracle.com/javase/specs/jls/se6/html/interfaces.html#9.7">Java Language Specification</a>. Here is an example:</p>
 
 <pre><code class="language-xtend">@TypeAnnotation("some value")
 class MyClass {
@@ -458,7 +464,7 @@ class MyClass {
 
 <h2 id="extension-methods">Extension Methods</h2>
 
-<p>Extension methods allow to add new methods to existing types without modifying them. This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: Instead of passing the first argument of an extension method inside the parentheses of a method invocation, the method can be called with the first argument as its receiver - it can be called as if the method was one of the argument type’s members. </p>
+<p>Extension methods allow to add new methods to existing types without modifying them. This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: Instead of passing the first argument of an extension method inside the parentheses of a method invocation, the method can be called with the first argument as its receiver - it can be called as if the method was one of the argument type’s members.</p>
 
 <pre><code class="language-xtend">"hello".toFirstUpper() // calls StringExtensions.toFirstUpper("hello")
 </code></pre>
@@ -467,8 +473,9 @@ class MyClass {
 
 <p>For instance, you might not want to put UI-specific methods and dependencies into your domain model classes. Therefore this functionality is often defined in static methods or methods in utility classes or service layers. That works, but the code is less readable and less object-oriented if you call methods like this. In Java you often see code like this:</p>
 
-<pre><code class="language-java">persistenceManager.save(myObject);
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">persistenceManager</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">myObject</span><span class="o">);</span>
 </code></pre>
+</div>
 
 <p>Without tying your entities to the persistenceManager, extension methods allow you to write</p>
 
@@ -500,7 +507,7 @@ listOfStrings.map[ toUpperCase ] // calls ListExtensions.&lt;T, R&gt;map(List&lt
 
 <h3 id="local-extension-methods">Local Extension Methods</h3>
 
-<p>All visible non-static methods of the current class and its super types are automatically available as extensions. For example </p>
+<p>All visible non-static methods of the current class and its super types are automatically available as extensions. For example</p>
 
 <pre><code class="language-xtend">class MyClass {
   def doSomething(Object obj) {
@@ -517,14 +524,14 @@ listOfStrings.map[ toUpperCase ] // calls ListExtensions.&lt;T, R&gt;map(List&lt
 
 <h3 id="extension-imports">Extension Imports</h3>
 
-<p>In Java, you would usually write a helper class with static methods to decorate an existing class with additional behavior. In order to integrate such static helper classes, Xtend allows to put the keyword <code>extension</code> after the <code>static</code> keyword of a <a href="202_xtend_classes_members.html#imports">static import</a> thus making all imported static functions available as extensions methods.</p>
+<p>In Java, you would usually write a helper class with static methods to decorate an existing class with additional behavior. In order to integrate such static helper classes, Xtend allows to put the keyword <code class="highlighter-rouge">extension</code> after the <code class="highlighter-rouge">static</code> keyword of a <a href="202_xtend_classes_members.html#imports">static import</a> thus making all imported static functions available as extensions methods.</p>
 
-<p>The following import declaration </p>
+<p>The following import declaration</p>
 
 <pre><code class="language-xtend">import static extension java.util.Collections.singletonList
 </code></pre>
 
-<p>allows us to use singletonList methods like this: </p>
+<p>allows us to use singletonList methods like this:</p>
 
 <pre><code class="language-xtend">new MyClass().singletonList() 
 // calls Collections.singletonList(new MyClass())
@@ -532,18 +539,19 @@ listOfStrings.map[ toUpperCase ] // calls ListExtensions.&lt;T, R&gt;map(List&lt
 
 <h3 id="extension-provider">Extension Provider</h3>
 
-<p>By adding the <code>extension</code> keyword to a field, a local variable or a parameter declaration, its instance methods become extension methods.</p>
+<p>By adding the <code class="highlighter-rouge">extension</code> keyword to a field, a local variable or a parameter declaration, its instance methods become extension methods.</p>
 
-<p>Imagine you want to have some layer specific functionality on a class <code>Person</code>. Let us say you are in a servlet-like class and want to persist a <code>Person</code> using some persistence mechanism. Let us assume <code>Person</code> implements a common interface <code>Entity</code>. You could have the following interface </p>
+<p>Imagine you want to have some layer specific functionality on a class <code class="highlighter-rouge">Person</code>. Let us say you are in a servlet-like class and want to persist a <code class="highlighter-rouge">Person</code> using some persistence mechanism. Let us assume <code class="highlighter-rouge">Person</code> implements a common interface <code class="highlighter-rouge">Entity</code>. You could have the following interface</p>
 
-<pre><code class="language-java">interface EntityPersistence {
-  public save(Entity e);
-  public update(Entity e);
-  public delete(Entity e);
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">EntityPersistence</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">save</span><span class="o">(</span><span class="n">Entity</span> <span class="n">e</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="n">update</span><span class="o">(</span><span class="n">Entity</span> <span class="n">e</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="n">delete</span><span class="o">(</span><span class="n">Entity</span> <span class="n">e</span><span class="o">);</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
-<p>And if you have obtained an instance of that type (through a factory or dependency injection or what ever) like this: </p>
+<p>And if you have obtained an instance of that type (through a factory or dependency injection or what ever) like this:</p>
 
 <pre><code class="language-xtend">class MyServlet {
   extension EntityPersistence ep = Factory.get(EntityPersistence)
@@ -561,11 +569,11 @@ person.update  // calls ep.update(person)
 person.delete  // calls ep.delete(person)
 </code></pre>
 
-<p>Using the <code>extension</code> modifier on values has a significant advantage over static <a href="202_xtend_classes_members.html#extension-imports">extension imports</a>: Your code is not bound to the actual implementation of the extension method. You can simply exchange the component that provides the referenced extension with another implementation from outside, by providing a different instance.</p>
+<p>Using the <code class="highlighter-rouge">extension</code> modifier on values has a significant advantage over static <a href="202_xtend_classes_members.html#extension-imports">extension imports</a>: Your code is not bound to the actual implementation of the extension method. You can simply exchange the component that provides the referenced extension with another implementation from outside, by providing a different instance.</p>
 
 <h2 id="interfaces">Interface Declarations</h2>
 
-<p>An interface declaration is very similar to the one in Java. An interface can declare fields, which are by default final static therefore must have an initial value. And of course methods can be declared, which are public by default. Interfaces can extend any number of other interfaces and can declare type parameters. Here’s an example: </p>
+<p>An interface declaration is very similar to the one in Java. An interface can declare fields, which are by default final static therefore must have an initial value. And of course methods can be declared, which are public by default. Interfaces can extend any number of other interfaces and can declare type parameters. Here’s an example:</p>
 
 <pre><code class="language-xtend">interface MyInterface&lt;T&gt; extends OtherInterface {
   val CONSTANT = 42
@@ -573,7 +581,7 @@ person.delete  // calls ep.delete(person)
 }
 </code></pre>
 
-<p>Since version 8 of the Java language, interfaces are allowed to contain non-abstract instance methods, called <a href="http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html">default methods</a>, as well as static methods. This is also supported in Xtend (since 2.8): if Java 8 is selected as target language version, interfaces are allowed to declare methods with bodies like in the following example. </p>
+<p>Since version 8 of the Java language, interfaces are allowed to contain non-abstract instance methods, called <a href="http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html">default methods</a>, as well as static methods. This is also supported in Xtend (since 2.8): if Java 8 is selected as target language version, interfaces are allowed to declare methods with bodies like in the following example.</p>
 
 <pre><code class="language-xtend">interface MyInterface {
   def doStuff() {
@@ -585,7 +593,7 @@ person.delete  // calls ep.delete(person)
 }
 </code></pre>
 
-<p>The behavior of non-abstract instance methods is equivalent to that of Java default methods. Since interfaces can extend multiple other interfaces, multiple-inheritance conflicts can occur when different implementations of a method are inherited: </p>
+<p>The behavior of non-abstract instance methods is equivalent to that of Java default methods. Since interfaces can extend multiple other interfaces, multiple-inheritance conflicts can occur when different implementations of a method are inherited:</p>
 
 <pre><code class="language-xtend">interface A {
     def execute() {
@@ -606,17 +614,17 @@ class D implements A, B {
 }
 </code></pre>
 
-<p>The interface <code>C</code> and the class <code>D</code> are both marked with an error due to the multiple inheritance of the method <code>execute()</code>. There are four ways to resolve the problem. </p>
+<p>The interface <code class="highlighter-rouge">C</code> and the class <code class="highlighter-rouge">D</code> are both marked with an error due to the multiple inheritance of the method <code class="highlighter-rouge">execute()</code>. There are four ways to resolve the problem.</p>
 
 <ul>
   <li>
-    <p>Redeclare the method as abstract (not allowed for non-abstract classes):     </p>
+    <p>Redeclare the method as abstract (not allowed for non-abstract classes):</p>
 
     <pre><code class="language-xtend">override execute()
 </code></pre>
   </li>
   <li>
-    <p>Override the implementation:     </p>
+    <p>Override the implementation:</p>
 
     <pre><code class="language-xtend">override execute() {
     return 3
@@ -624,7 +632,7 @@ class D implements A, B {
 </code></pre>
   </li>
   <li>
-    <p>Refer to a supertype implementation:     </p>
+    <p>Refer to a supertype implementation:</p>
 
     <pre><code class="language-xtend">override execute() {
     A.super.execute()
@@ -638,7 +646,7 @@ class D implements A, B {
 
 <h2 id="annotation-type-declaration">Annotation Type Declarations</h2>
 
-<p>Annotation types can also be declared. The are introduced by the keyword <code>annotation</code> and declare their values with a concise syntax:</p>
+<p>Annotation types can also be declared. The are introduced by the keyword <code class="highlighter-rouge">annotation</code> and declare their values with a concise syntax:</p>
 
 <pre><code class="language-xtend">annotation MyAnnotation {
   String[] value

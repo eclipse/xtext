@@ -14,12 +14,13 @@
 
 <h2 id="the-data">The Data</h2>
 
-<p>The movie database is a plain text file (data.csv) with data sets describing movies. Here is an example data set: </p>
+<p>The movie database is a plain text file (data.csv) with data sets describing movies. Here is an example data set:</p>
 
-<pre><code>Naked Lunch  1991  6.9  16578  Biography  Comedy  Drama  Fantasy
+<div class="highlighter-rouge"><pre class="highlight"><code>Naked Lunch  1991  6.9  16578  Biography  Comedy  Drama  Fantasy
 </code></pre>
+</div>
 
-<p>The values are separated by two spaces. The columns are : </p>
+<p>The values are separated by two spaces. The columns are :</p>
 
 <ol>
   <li>title</li>
@@ -29,7 +30,7 @@
   <li>categories</li>
 </ol>
 
-<p>Let us define a data type <code>Movie</code> representing a data set:</p>
+<p>Let us define a data type <code class="highlighter-rouge">Movie</code> representing a data set:</p>
 
 <pre><code class="language-xtend">@Data class Movie {
   String title
@@ -40,18 +41,18 @@
 }
 </code></pre>
 
-<p>A movie is a POJO with a strongly typed field for each column in the data sets. The <a href="204_activeannotations.html#data-annotation">@Data</a> annotation will turn the class into an immutable value class, that is it will get </p>
+<p>A movie is a POJO with a strongly typed field for each column in the data sets. The <a href="204_activeannotations.html#data-annotation">@Data</a> annotation will turn the class into an immutable value class, that is it will get</p>
 
 <ul>
   <li>a getter-method for each field,</li>
-  <li>a <code>hashCode()</code>/<code>equals()</code> implementation,</li>
-  <li>implementation of <code>Object.toString(),</code></li>
+  <li>a <code class="highlighter-rouge">hashCode()</code>/<code class="highlighter-rouge">equals()</code> implementation,</li>
+  <li>implementation of <code class="highlighter-rouge">Object.toString(),</code></li>
   <li>a constructor accepting values for all fields in the declared order.</li>
 </ul>
 
 <h2 id="parsing-the-data">Parsing The Data</h2>
 
-<p>Let us now add another class to the same file and initialize a field called movies with a list of movies. For the initialization we parse the text file and turn the data records into <code>Movie</code>s:</p>
+<p>Let us now add another class to the same file and initialize a field called movies with a list of movies. For the initialization we parse the text file and turn the data records into <code class="highlighter-rouge">Movie</code>s:</p>
 
 <pre><code class="language-xtend">import java.io.FileReader
 import java.util.Set
@@ -72,21 +73,21 @@ class Movies {
 }
 </code></pre>
 
-<p>A <a href="202_xtend_classes_members.html#fields">field’s type</a> can be inferred from the expression on the right hand-side. That is called local type inference and is supported everywhere in Xtend. We want the field to be final, so we declare it as a value using the keyword <code>val</code>.</p>
+<p>A <a href="202_xtend_classes_members.html#fields">field’s type</a> can be inferred from the expression on the right hand-side. That is called local type inference and is supported everywhere in Xtend. We want the field to be final, so we declare it as a value using the keyword <code class="highlighter-rouge">val</code>.</p>
 
-<p>The initialization on the right hand side first creates a new <a href="http://docs.oracle.com/javase/8/docs/api/java/io/FileReader.html">FileReader</a>. Then the method <code>readLines()</code> is invoked on that instance. But if you have a look at <code>FileReader</code> you will not find such a method. In fact <code>readLines()</code> is a static method from Google Guava’s <a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharStreams.html">CharStreams</a> which was imported as an <a href="202_xtend_classes_members.html#extension-imports">extension</a>. Extensions allow us to use this readable syntax.</p>
+<p>The initialization on the right hand side first creates a new <a href="http://docs.oracle.com/javase/8/docs/api/java/io/FileReader.html">FileReader</a>. Then the method <code class="highlighter-rouge">readLines()</code> is invoked on that instance. But if you have a look at <code class="highlighter-rouge">FileReader</code> you will not find such a method. In fact <code class="highlighter-rouge">readLines()</code> is a static method from Google Guava’s <a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharStreams.html">CharStreams</a> which was imported as an <a href="202_xtend_classes_members.html#extension-imports">extension</a>. Extensions allow us to use this readable syntax.</p>
 
 <pre><code class="language-xtend">import static extension com.google.common.io.CharStreams.*
 </code></pre>
 
-<p><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharStreams.html"><code>CharStreams.readLines(Reader)</code></a> returns a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html"><code>List&lt;String&gt;</code></a> on which we call another extension method <code>map</code>. This one is defined in the runtime library (<a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java">ListExtensions.map(…)</a>) and is automatically imported and therefore available on all lists. The <code>map</code> extension expects a function as a parameter. It basically invokes that function for each value in the list and returns another list containing the results of the function invocations. Actually this mapping is performed lazily so if you never access the values of the result list, the mapping function is never executed.</p>
+<p><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharStreams.html"><code class="highlighter-rouge">CharStreams.readLines(Reader)</code></a> returns a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html"><code class="highlighter-rouge">List&lt;String&gt;</code></a> on which we call another extension method <code class="highlighter-rouge">map</code>. This one is defined in the runtime library (<a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java">ListExtensions.map(…)</a>) and is automatically imported and therefore available on all lists. The <code class="highlighter-rouge">map</code> extension expects a function as a parameter. It basically invokes that function for each value in the list and returns another list containing the results of the function invocations. Actually this mapping is performed lazily so if you never access the values of the result list, the mapping function is never executed.</p>
 
-<p>Function objects are created using <a href="203_xtend_expressions.html#lambdas">lambda expressions</a> (the code in squared brackets). Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using two whitespace characters as the separator. On the result of the split operation, the method <code>iterator()</code> is invoked. As you might know <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String.split(String)</a> returns a string array (<code>String[]</code>), which Xtend <a href="201_types.html#conversion-rules">auto-converts to a list</a> when we call <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html"><code>Iterable.iterator()</code></a> on it.</p>
+<p>Function objects are created using <a href="203_xtend_expressions.html#lambdas">lambda expressions</a> (the code in squared brackets). Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using two whitespace characters as the separator. On the result of the split operation, the method <code class="highlighter-rouge">iterator()</code> is invoked. As you might know <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String.split(String)</a> returns a string array (<code class="highlighter-rouge">String[]</code>), which Xtend <a href="201_types.html#conversion-rules">auto-converts to a list</a> when we call <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html"><code class="highlighter-rouge">Iterable.iterator()</code></a> on it.</p>
 
 <pre><code class="language-xtend">val segments = line.split('  ').iterator
 </code></pre>
 
-<p>Now we use the iterator to create an instance of <code>Movie</code> for each String that it yields. The data type conversion (e.g. <code>String</code> to <code>int</code>) is done by calling <a href="203_xtend_expressions.html#static-access">static methods</a> from the wrapper types. The rest of the <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterable</a> is turned into a set of categories. Therefore, the extension method <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java"><code>IteratorExtensions.toSet(Iterator&lt;T&gt;)</code></a> is invoked on the iterator to consume its remaining values.</p>
+<p>Now we use the iterator to create an instance of <code class="highlighter-rouge">Movie</code> for each String that it yields. The data type conversion (e.g. <code class="highlighter-rouge">String</code> to <code class="highlighter-rouge">int</code>) is done by calling <a href="203_xtend_expressions.html#static-access">static methods</a> from the wrapper types. The rest of the <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterable</a> is turned into a set of categories. Therefore, the extension method <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java"><code class="highlighter-rouge">IteratorExtensions.toSet(Iterator&lt;T&gt;)</code></a> is invoked on the iterator to consume its remaining values.</p>
 
 <pre><code class="language-xtend">return new Movie (
   segments.next, 
@@ -99,7 +100,7 @@ class Movies {
 
 <h2 id="answering-some-questions">Answering Some Questions</h2>
 
-<p>Now that we have parsed the text file into a <code>List&lt;Movie&gt;</code>, we are ready to execute some queries against it. We use <em>JUnit</em> to make the individual queries executable and to confirm their results.</p>
+<p>Now that we have parsed the text file into a <code class="highlighter-rouge">List&lt;Movie&gt;</code>, we are ready to execute some queries against it. We use <em>JUnit</em> to make the individual queries executable and to confirm their results.</p>
 
 <h3 id="question1">Question 1 : What Is The Number Of Action Movies?</h3>
 
@@ -109,22 +110,22 @@ class Movies {
 }
 </code></pre>
 
-<p>First the movies are <code>filter</code>ed. The lambda expression checks whether the current movie’s categories contain the entry <code>'Action'</code>. Note that unlike the lambda we used to turn the lines in the file into movies, we have not declared a parameter name this time. We could have written </p>
+<p>First the movies are <code class="highlighter-rouge">filter</code>ed. The lambda expression checks whether the current movie’s categories contain the entry <code class="highlighter-rouge">'Action'</code>. Note that unlike the lambda we used to turn the lines in the file into movies, we have not declared a parameter name this time. We could have written</p>
 
 <pre><code class="language-xtend">movies.filter[ movie | movie.categories.contains('Action') ].size
 </code></pre>
 
-<p>but since we left out the name and the vertical bar the variable is automatically named <code>it</code>. <code>it</code> is an <a href="203_xtend_expressions.html#implicit-variables">implicit variable</a>. It’s uses are similar to the implicit variable <code>this</code>. We can write either</p>
+<p>but since we left out the name and the vertical bar the variable is automatically named <code class="highlighter-rouge">it</code>. <code class="highlighter-rouge">it</code> is an <a href="203_xtend_expressions.html#implicit-variables">implicit variable</a>. It’s uses are similar to the implicit variable <code class="highlighter-rouge">this</code>. We can write either</p>
 
 <pre><code class="language-xtend">movies.filter[ it.categories.contains('Action') ].size
 </code></pre>
 
-<p>or even more compact </p>
+<p>or even more compact</p>
 
 <pre><code class="language-xtend">movies.filter[ categories.contains('Action') ].size
 </code></pre>
 
-<p>Eventually we call <code>size</code> on the resulting iterable which is an extension method, too. It is defined in the utility class <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java">IterableExtensions</a>.</p>
+<p>Eventually we call <code class="highlighter-rouge">size</code> on the resulting iterable which is an extension method, too. It is defined in the utility class <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java">IterableExtensions</a>.</p>
 
 <h3 id="question2">Question 2 : What Is The Year The Best Movie From The 80’s Was Released?</h3>
 
@@ -134,23 +135,23 @@ class Movies {
 }
 </code></pre>
 
-<p>Here we <code>filter</code> for all movies whose year is included in the range from 1980 to 1989 (the 80’s). The <code>..</code> operator is again an extension defined in <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java">IntegerExtensions</a> and returns an instance of <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java">IntegerRange</a>. Operator overloading is explained in <a href="203_xtend_expressions.html#operators">section</a>.</p>
+<p>Here we <code class="highlighter-rouge">filter</code> for all movies whose year is included in the range from 1980 to 1989 (the 80’s). The <code class="highlighter-rouge">..</code> operator is again an extension defined in <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java">IntegerExtensions</a> and returns an instance of <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java">IntegerRange</a>. Operator overloading is explained in <a href="203_xtend_expressions.html#operators">section</a>.</p>
 
-<p>The resulting iterable is sorted (<a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java"><code>IterableExtensions.sortBy</code></a>) by the <code>rating</code> of the movies. Since it is sorted in ascending order, we take the last movie from the list and return its <code>year</code>. </p>
+<p>The resulting iterable is sorted (<a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java"><code class="highlighter-rouge">IterableExtensions.sortBy</code></a>) by the <code class="highlighter-rouge">rating</code> of the movies. Since it is sorted in ascending order, we take the last movie from the list and return its <code class="highlighter-rouge">year</code>.</p>
 
-<p>We could have sorted descending and take the head of the list as well: </p>
+<p>We could have sorted descending and take the head of the list as well:</p>
 
 <pre><code class="language-xtend">movies.filter[ (1980..1989).contains(year) ].sortBy[ -rating ].head.year
 </code></pre>
 
-<p>Another possible solution would be to reverse the order of the sorted list: </p>
+<p>Another possible solution would be to reverse the order of the sorted list:</p>
 
 <pre><code class="language-xtend">movies.filter[ (1980..1989).contains(year) ].sortBy[ rating ].reverseView.head.year
 </code></pre>
 
-<p>Note that first sorting and then taking the last or first is slightly more expensive than needed. We could have used the method <code>reduce</code> instead to find the best movie which would be more efficient. Maybe you want to try it on your own?</p>
+<p>Note that first sorting and then taking the last or first is slightly more expensive than needed. We could have used the method <code class="highlighter-rouge">reduce</code> instead to find the best movie which would be more efficient. Maybe you want to try it on your own?</p>
 
-<p>The calls to <code>movie.year</code> as well as <code>movie.categories</code> in the previous example in fact access the corresponding <a href="203_xtend_expressions.html#property-access">getter methods</a>.</p>
+<p>The calls to <code class="highlighter-rouge">movie.year</code> as well as <code class="highlighter-rouge">movie.categories</code> in the previous example in fact access the corresponding <a href="203_xtend_expressions.html#property-access">getter methods</a>.</p>
 
 <h3 id="question3">Question 3 : What Is The The Sum Of All Votes Of The Top Two Movies?</h3>
 
@@ -160,9 +161,9 @@ class Movies {
 }
 </code></pre>
 
-<p>First the movies are sorted by rating, then we take the best two. Next the list of movies is turned into a list of their <code>numberOfVotes</code> using the <code>map</code> function. Now we have a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html"><code>List&lt;Long&gt;</code></a> which can be reduced to a single <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Long.html">Long</a> by adding the values.</p>
+<p>First the movies are sorted by rating, then we take the best two. Next the list of movies is turned into a list of their <code class="highlighter-rouge">numberOfVotes</code> using the <code class="highlighter-rouge">map</code> function. Now we have a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html"><code class="highlighter-rouge">List&lt;Long&gt;</code></a> which can be reduced to a single <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Long.html">Long</a> by adding the values.</p>
 
-<p>You could also use <code>reduce</code> instead of <code>map</code> and <code>reduce</code>. Do you know how?</p>
+<p>You could also use <code class="highlighter-rouge">reduce</code> instead of <code class="highlighter-rouge">map</code> and <code class="highlighter-rouge">reduce</code>. Do you know how?</p>
 
 <hr />
 
