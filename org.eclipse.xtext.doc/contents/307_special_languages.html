@@ -21,58 +21,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h2 id="case-insensitive-languages">Case Insensitive Languages</h2>
 
-<p>In some cases, e.g. if your <em>SHIFT</em> key is broken, you might want to design a case insensitive language. Xtext offers options on some of its <a href="302_configuration.html#generator-fragment">generator fragments</a> for this purpose. </p>
+<p>In some cases, e.g. if your <em>SHIFT</em> key is broken, you might want to design a case insensitive language. Xtext offers options on some of its <a href="302_configuration.html#generator-fragment">generator fragments</a> for this purpose.</p>
 
-<p>For case insensitive keywords, open your MWE workflow and replace the ANTLR related fragments: </p>
+<p>For case insensitive keywords, open your MWE workflow and enable the ignoreCase property:</p>
 
-<pre><code class="language-mwe2">// The antlr parser generator fragment.
-fragment = parser.antlr.XtextAntlrGeneratorFragment {
-//  options = {
-//    backtrack = true
-//  }
-}
-...
+<pre><code class="language-mwe2"> ... StandardLanguage {
+    ... other config
 
-// generates a more lightweight ANTLR parser and lexer tailored ...
-fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
-}
-</code></pre>
-
-<p>with</p>
-
-<pre><code class="language-mwe2">// The antlr parser generator fragment.
-fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
-    options = {
+    parserGenerator = {
+      options = {
         ignoreCase = true
+      }
     }
-}
-...
+ }
 
-// generates a more lightweight ANTLR parser and lexer tailored ...
-fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {
-    options = {
-        ignoreCase = true
+For case insensitive element names, use the *ignoreCase* option in the scoping, too :
+
+```mwe2
+    scopeProvider = {
+      ignoreCase = true
     }
-}
-</code></pre>
-
-<p>For case insensitive element names, use the <em>ignoreCase</em> option in your scope fragment, i.e.</p>
-
-<pre><code class="language-mwe2">fragment = scoping.ImportNamespacesScopingFragment {
-    ignoreCase = true
-}
-</code></pre>
-
-<p>or if you are using <em>importURI</em> based global scopes</p>
-
-<pre><code class="language-mwe2">fragment = scoping.ImportURIScopingFragment {
-    ignoreCase = true
-}
 </code></pre>
 
 <h2 id="whitespace-aware-languages">Whitespace-Aware Languages</h2>
 
-<p>Some language designers prefer to use indentation to structure code blocks instead of surrounding them with braces <code>{ ... }</code>, which are really hard to type with certain kinds of keyboards. A well-known example of such a language is <a href="https://www.python.org">Python</a>. Another well-known example is the <em>Home Automation</em> language shipped with Xtext (since version 2.8), available through <em>File → New → Example → Xtext Examples → Xtext Home Automation Example</em>.</p>
+<p>Some language designers prefer to use indentation to structure code blocks instead of surrounding them with braces <code class="highlighter-rouge"><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span></code>, which are really hard to type with certain kinds of keyboards. A well-known example of such a language is <a href="https://www.python.org">Python</a>. Another well-known example is the <em>Home Automation</em> language shipped with Xtext (since version 2.8), available through <em>File → New → Example → Xtext Examples → Xtext Home Automation Example</em>.</p>
 
 <pre><code class="language-ruleengine">Device Window can be open, closed
 
@@ -83,7 +56,7 @@ Rule 'Save energy' when Window.open then
     println('Another penny to the piggy bank!')
 </code></pre>
 
-<p>The <code>'Save energy'</code> rule contains a code block with two operations, which is indicated by the equal indentation of these operations. Nested blocks are also possible:</p>
+<p>The <code class="highlighter-rouge">'Save energy'</code> rule contains a code block with two operations, which is indicated by the equal indentation of these operations. Nested blocks are also possible:</p>
 
 <pre><code class="language-ruleengine">Rule 'Report error' when Heater.error then
     var String report
@@ -94,7 +67,7 @@ Rule 'Save energy' when Window.open then
     println(report)
 </code></pre>
 
-<p>The first step for including whitespace-aware blocks in your language is to use the <code>parser.antlr.ex.rt.AntlrGeneratorFragment</code> and <code>parser.antlr.ex.ca.ContentAssistParserGeneratorFragment</code> in the workflow as shown in the <a href="307_special_languages.html#case-insensitive-languages">previous section</a> (with or without the <code>ignoreCase</code> option). Then define <em>synthetic tokens</em> in the grammar by writing terminals of the form <code>'synthetic:&lt;terminal name&gt;'</code>:</p>
+<p>The first step for including whitespace-aware blocks in your language is to use  <em>synthetic tokens</em> in the grammar by writing terminals of the form <code class="highlighter-rouge">'synthetic:&lt;terminal name&gt;'</code>:</p>
 
 <pre><code class="language-xtext">terminal BEGIN: 'synthetic:BEGIN';
 terminal END: 'synthetic:END';
@@ -109,64 +82,68 @@ terminal END: 'synthetic:END';
     END;
 </code></pre>
 
-<p>After running the workflow, a stub implementation of <code>AbstractIndentationTokenSource</code> is generated in the subpackage <code>parser.antlr</code>, e.g. <code>RuleEngineTokenSource</code>. Here you can specify which terminal rule should be applied to your synthetic tokens. For the Home Automation language the <code>WS</code> (whitespace) rule is selected, which brings the indentation awareness as seen above.</p>
+<p>After running the workflow, a stub implementation of <code class="highlighter-rouge">AbstractIndentationTokenSource</code> is generated in the subpackage <code class="highlighter-rouge">parser.antlr</code>, e.g. <code class="highlighter-rouge">RuleEngineTokenSource</code>. Here you can specify which terminal rule should be applied to your synthetic tokens. For the Home Automation language the <code class="highlighter-rouge">WS</code> (whitespace) rule is selected, which brings the indentation awareness as seen above.</p>
 
-<p>In case of a whitespace-aware language, the <a href="303_runtime_concepts.html#formatting">formatter</a> must be either adapted to produce whitespace that correctly reflects the document structure, or it must be deactivated. Otherwise automatic formatting might produce code with different semantics or even syntax errors. </p>
+<p>In case of a whitespace-aware language, the <a href="303_runtime_concepts.html#formatting">formatter</a> must be either adapted to produce whitespace that correctly reflects the document structure, or it must be deactivated. Otherwise automatic formatting might produce code with different semantics or even syntax errors. See how we customized the formatter in the homeautomation example.</p>
 
 <h2 id="java-independent-languages">Languages Independent of JDT</h2>
 
 <p>The following section describes how you make your language independent of Eclipse’s Java Development Toolkit (JDT).</p>
 
-<p>In the <em>UIModule</em> of your language you have to overwrite two bindings. First, remove the bindings to components with support for the <em>‘classpath:’</em> URI protocol, i.e. </p>
+<p>In the <em>UIModule</em> of your language you have to overwrite two bindings. First, remove the bindings to components with support for the <em>‘classpath:’</em> URI protocol, i.e.</p>
 
-<pre><code class="language-java">@Override
-public Class&lt;? extends IResourceForEditorInputFactory&gt;
-    bindIResourceForEditorInputFactory() {
-        return ResourceForIEditorInputFactory.class;
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">IResourceForEditorInputFactory</span><span class="o">&gt;</span>
+    <span class="n">bindIResourceForEditorInputFactory</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">ResourceForIEditorInputFactory</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+<span class="o">}</span>
 
-@Override
-public Class&lt;? extends IResourceSetProvider&gt; bindIResourceSetProvider() {
-    return SimpleResourceSetProvider.class;
-}
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">IResourceSetProvider</span><span class="o">&gt;</span> <span class="n">bindIResourceSetProvider</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">SimpleResourceSetProvider</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
-<p>Second, configure the global scope provider to scan project root folders instead of the class path of Java projects. </p>
+<p>Second, configure the global scope provider to scan project root folders instead of the class path of Java projects.</p>
 
-<pre><code class="language-java">@Override
-public Provider&lt;IAllContainersState&gt; provideIAllContainersState() {
-  return org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="n">Provider</span><span class="o">&lt;</span><span class="n">IAllContainersState</span><span class="o">&gt;</span> <span class="n">provideIAllContainersState</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">org</span><span class="o">.</span><span class="na">eclipse</span><span class="o">.</span><span class="na">xtext</span><span class="o">.</span><span class="na">ui</span><span class="o">.</span><span class="na">shared</span><span class="o">.</span><span class="na">Access</span><span class="o">.</span><span class="na">getWorkspaceProjectsState</span><span class="o">();</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
-<p>The remaining steps show you how to adapt the project wizard for your language, if you have generated one. The best way to do this is to create a new subclass of the generated <em>IProjectCreator</em> in the <em>src/</em> folder of the <em>ui</em> project and apply the necessary changes there. First, remove the JDT project configuration by overriding <em>configureProject</em> with an empty body. </p>
+<p>The remaining steps show you how to adapt the project wizard for your language, if you have generated one. The best way to do this is to create a new subclass of the generated <em>IProjectCreator</em> in the <em>src/</em> folder of the <em>ui</em> project and apply the necessary changes there. First, remove the JDT project configuration by overriding <em>configureProject</em> with an empty body.</p>
 
 <p>The next thing is to redefine the project natures and builders that should be applied to you language projects.</p>
 
 <p>In in this case just remove the JDT stuff in this way:</p>
 
-<pre><code class="language-java">protected String[] getProjectNatures() {
-    return new String[] {
-        "org.eclipse.pde.PluginNature",
-        "org.eclipse.xtext.ui.shared.xtextNature"
-    };
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">protected</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getProjectNatures</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span>
+        <span class="s">"org.eclipse.pde.PluginNature"</span><span class="o">,</span>
+        <span class="s">"org.eclipse.xtext.ui.shared.xtextNature"</span>
+    <span class="o">};</span>
+<span class="o">}</span>
 
-protected String[] getBuilders() {
-    return new String[] {
-        "org.eclipse.pde.ManifestBuilder", 
-        "org.eclipse.pde.SchemaBuilder"
-    };
-}
+<span class="kd">protected</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getBuilders</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span>
+        <span class="s">"org.eclipse.pde.ManifestBuilder"</span><span class="o">,</span> 
+        <span class="s">"org.eclipse.pde.SchemaBuilder"</span>
+    <span class="o">};</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
 <p>After that you have to bind the new <em>IProjectCreator</em></p>
 
-<pre><code class="language-java">@Override
-public Class&lt;? extends IProjectCreator&gt; bindIProjectCreator() {
-    return JDTFreeMyDslProjectCreator.class;
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">IProjectCreator</span><span class="o">&gt;</span> <span class="n">bindIProjectCreator</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">JDTFreeMyDslProjectCreator</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
 <p>Now your language and its IDE should now no longer depend on JDT.</p>
 
@@ -176,7 +153,7 @@ public Class&lt;? extends IProjectCreator&gt; bindIProjectCreator() {
 
 <p>Let’s have a look at parsing a simple arithmetic expression:</p>
 
-<p><code>2 + 20 * 2</code></p>
+<p><code class="highlighter-rouge">2 + 20 * 2</code></p>
 
 <p>If you know EBNF a bit and wouldn’t think about avoiding left recursion, operator precedence or associativity, you’ld probably write a grammar like this:</p>
 
@@ -204,7 +181,7 @@ NumberLiteral:
 
 <p>As you can see the main difference is that it uses three rules instead of one, and if you look a bit closer you see that there’s a certain delegation pattern involved. The rule Addition doesn’t call itself but calls Multiplication instead. The operator precedence is defined by the order of delegation. The later the rule is called the higher is its precedence. This is at least the case for the first two rules which are of a left recursive nature (but we’ve left-factored them now). The last rule is not left recursive which is why you can implement it without applying this pattern.</p>
 
-<p>The next task is to allow users to explicitly adjust precedence by adding parentheses, e.g. write something like <code>(2 + 20) * 2</code>. So let’s add support for that (note that the grammar is still not working with Xtext):</p>
+<p>The next task is to allow users to explicitly adjust precedence by adding parentheses, e.g. write something like <code class="highlighter-rouge">(2 + 20) * 2</code>. So let’s add support for that (note that the grammar is still not working with Xtext):</p>
 
 <pre><code class="language-xtext">Addition :
   Multiplication ('+' Multiplication)*;
@@ -226,7 +203,7 @@ NumberLiteral:
 
 <p>Now that left recursion is avoided, the parser should produce a proper syntax tree. In Xtext each rule returns a value. Production rules return AST nodes (i.e. instances of EObject), enum rules return enum literals and data type rules as well as terminal rules return simple values like strings. Xtext can automatically infer whether some rule is a production rule, i.e. constructs and returns an AST node, or if it is a data type rule that returns a value. The grammar above only consists of data type rules all of them returning plain strings. In order to construct an AST we need to add assignments and actions to the grammar.</p>
 
-<p>The return type of a rule can be specified explicitly using the <code>returns</code> keyword but can be inferred if the type’s name is the same as the rule’s name. That is</p>
+<p>The return type of a rule can be specified explicitly using the <code class="highlighter-rouge">returns</code> keyword but can be inferred if the type’s name is the same as the rule’s name. That is</p>
 
 <pre><code class="language-xtext">NumberLiteral : ... ;
 </code></pre>
@@ -270,8 +247,9 @@ NumberLiteral:
 
 <p>This is how the parser processes the following expression:</p>
 
-<pre><code class="language-java">(1 + 20) * 2
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">20</span><span class="o">)</span> <span class="o">*</span> <span class="mi">2</span>
 </code></pre>
+</div>
 
 <p>It always starts with the first rule (Addition). Therein the first element is an unassigned rule call to Multiplication which in turn calls Primary. Primary now has two alternatives. The first one is calling NumberLiteral which consists only of one assignment to a feature called ‘value’. The type of ‘value’ has to be compatible to the return type of the INT rule.</p>
 
@@ -279,27 +257,29 @@ NumberLiteral:
 
 <p>As soon as the parser hits an assignment it checks whether an AST node for the current rule was already created. Otherwise it will create one based on the return type of the current rule, which is NumberLiteral. The Xtext generator created the EClass ‘NumberLiteral’ before which can now be instantiated. That type will also have a property called value of type int , which will get the value ‘1’ set. This is what the Java equivalent looks like:</p>
 
-<pre><code class="language-java">// value=INT
-if (current == null)
- current = new NumberLiteral();
-current.setValue(ruleINT());
-...
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// value=INT</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">current</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+ <span class="n">current</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NumberLiteral</span><span class="o">();</span>
+<span class="n">current</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">ruleINT</span><span class="o">());</span>
+<span class="o">...</span>
 </code></pre>
+</div>
 
 <p>Now that the rule has been completed the produced EObject is returned to the calling rule Primary, which in turn returns the object unchanged to its own caller. Within Multiplication the rule Primary has been successfully parsed and returned an instance of NumberLiteral. The remainder of the rule (everything within the parentheses) is a so called group. The asterisk behind the closing parenthesis states that this part can be consumed zero or more times. The first token to consume in this group is the multiplication operator ‘*’. Unfortunately in the current input the next token to accept is the plus sign ‘+’, so the group is not consumed at all and the rule returns the NumberLiteral that was returned from the previous unassigned rule call.</p>
 
 <p>In rule Addition there is a similar group but this time it expects the correct operator. The parser steps into the group. The first element in the group is an assigned action. It will create a new instance of type Addition and assigns what was the to-be-returned object to the feature ‘left’. In Java this would have been something like:</p>
 
-<pre><code class="language-java">// Multiplication rule call
-current = ruleMultiplication();
-// {Addition.left=current}
-Addition temp = new Addition();
-temp.setLeft(current);
-current = temp;
-...
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// Multiplication rule call</span>
+<span class="n">current</span> <span class="o">=</span> <span class="n">ruleMultiplication</span><span class="o">();</span>
+<span class="c1">// {Addition.left=current}</span>
+<span class="n">Addition</span> <span class="n">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Addition</span><span class="o">();</span>
+<span class="n">temp</span><span class="o">.</span><span class="na">setLeft</span><span class="o">(</span><span class="n">current</span><span class="o">);</span>
+<span class="n">current</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+<span class="o">...</span>
 </code></pre>
+</div>
 
-<p>As a result the rule would now return an instance of Addition which has a NumberLiteral set to its property left. Next up the parser consumes the ‘+’ operator. The operator itself is not stored in the AST because there is an explicit Addition type. It implicitly contains this information. The assignment <code>right=Multiplication</code> calls the rule Multiplication another time and assigns its result object (a NumberLiteral of value=20) to the property <code>right</code>. The closing parenthesis is matched afterwards, consumed and the parser stack is reduced once more.</p>
+<p>As a result the rule would now return an instance of Addition which has a NumberLiteral set to its property left. Next up the parser consumes the ‘+’ operator. The operator itself is not stored in the AST because there is an explicit Addition type. It implicitly contains this information. The assignment <code class="highlighter-rouge">right=Multiplication</code> calls the rule Multiplication another time and assigns its result object (a NumberLiteral of value=20) to the property <code class="highlighter-rouge">right</code>. The closing parenthesis is matched afterwards, consumed and the parser stack is reduced once more.</p>
 
 <p>The parser is now in the rule Multiplication and has the multiplication operator ‘*’ on the lookahead. It steps into the group and applies the action. Finally it calls the Primary rule, produces another instance of NumberLiteral (value=2), assigns it as the ‘right’ operand of the Multiplication and returns the Multiplication to the rule Addition which in turn returns the very same object as there’s nothing left to parse.</p>
 

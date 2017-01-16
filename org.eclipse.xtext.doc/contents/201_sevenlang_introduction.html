@@ -31,7 +31,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. For that purpose you use a so-called <em>model inferrer</em>, a special API that allows you to create any number of Java classes, interfaces or members from your DSL. This hook not only defines how your language is translated to Java, but also defines the scope of the embedded expressions. The expressions from your language ‘live’ in the context you give them. If you want an expression to have access to certain local variables, just put it into a method with appropriate parameters or use instance fields if they work better.</p>
 
-<p>While in plain Xtext you would usually customize a bunch of further services to fit your needs, Xbase already has JVM model aware implementations almost all of them. For example, a generic code generator generates the Java code directly from the inferred model. The same way, Xbase already integrates your language with JDT to an extend that customizations beyond the JVM model inferrer will only be necessary for very special cases. You can naturally mix Java and DSL code in the same application without any barriers. </p>
+<p>While in plain Xtext you would usually customize a bunch of further services to fit your needs, Xbase already has JVM model aware implementations almost all of them. For example, a generic code generator generates the Java code directly from the inferred model. The same way, Xbase already integrates your language with JDT to an extend that customizations beyond the JVM model inferrer will only be necessary for very special cases. You can naturally mix Java and DSL code in the same application without any barriers.</p>
 
 <p>The inferred model also reveals your DSL constructs to other JVM languages. The Java type system is used as a common hub to integrate arbitrary languages with each other. You can for instance call <a href="207_template.html">templates</a> directly from a <a href="202_scripting.html">script</a> and vice versa. You do not even need to generate the equivalent Java code; everything is based on the Java types you create in the model inferrer.</p>
 
@@ -65,7 +65,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>You can get the source code for all languages from the github repository at <a href="https://github.com/xtext-dev/seven-languages-xtext.git">github.com/xtext-dev/seven-languages-xtext</a>. The repository contains two folders <em>languages</em> and <em>examples</em>. Download the plug-ins from <em>languages</em> into the root workspace and the <em>examples</em> into the runtime workspace spawned from the root one using <em>Run → Run Configurations… → Eclipse Application → Run (&lt;language&gt;)</em>.</p>
 
-<p>Each language consists of several Eclipse projects </p>
+<p>Each language consists of several Eclipse projects</p>
 
 <table>
   <tbody>
@@ -96,13 +96,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h2 id="xtend-primer">A Short Xtend Primer</h2>
 
-<p>Any general code in the examples is implemented in <a href="http://www.xtend-lang.org">Xtend</a>. Xtend is a more expressive and less verbose way to implement Java applications. It is 100% interoperable with Java APIs and compiles to readable Java code. In addition, it uses the same expressions that we use in our example languages. In fact it is built with the very same API that is described in this document. This should give you a taste of how powerful JVM-languages built with Xtext can actually be. </p>
+<p>Any general code in the examples is implemented in <a href="http://www.xtend-lang.org">Xtend</a>. Xtend is a more expressive and less verbose way to implement Java applications. It is 100% interoperable with Java APIs and compiles to readable Java code. In addition, it uses the same expressions that we use in our example languages. In fact it is built with the very same API that is described in this document. This should give you a taste of how powerful JVM-languages built with Xtext can actually be.</p>
 
-<p>Xtend is designed to be easy to learn for Java developers. In this section we will shortly describe the most important language features that were used in our examples. For a full description of the Xtend language, please refer to the <a href="http://www.xtend-lang.org/documentation">Xtend documentation</a>. </p>
+<p>Xtend is designed to be easy to learn for Java developers. In this section we will shortly describe the most important language features that were used in our examples. For a full description of the Xtend language, please refer to the <a href="http://www.xtend-lang.org/documentation">Xtend documentation</a>.</p>
 
-<p>Just like a Java file, an Xtend file starts with a <code>package</code> declaration and an <code>import</code> section followed by one or more class declarations. Semicolons are optional. All types are <code>public</code> by default. Xtend classes can extend other classes and implement interfaces just like in Java. It does not make any difference whether they were originally declared in Xtend or in Java.</p>
+<p>Just like a Java file, an Xtend file starts with a <code class="highlighter-rouge">package</code> declaration and an <code class="highlighter-rouge">import</code> section followed by one or more class declarations. Semicolons are optional. All types are <code class="highlighter-rouge">public</code> by default. Xtend classes can extend other classes and implement interfaces just like in Java. It does not make any difference whether they were originally declared in Xtend or in Java.</p>
 
-<p><a name="xtend_property"></a> JavaBean properties can be accessed directly by their name. The access will be automatically mapped to the appropriate accessor method. That means you can write </p>
+<p><a name="xtend_property"></a> JavaBean properties can be accessed directly by their name. The access will be automatically mapped to the appropriate accessor method. That means you can write</p>
 
 <pre><code class="language-xtend">println(foo.bar)      // instead of println(foo.getBar())
 foo.bar = baz         // instead of foo.setBar(baz)
@@ -113,15 +113,15 @@ foo.fooBars += foobar // instead of foo.getFooBars().add(foobar)
 
 <p><a name="xtend_methods"></a></p>
 
-<p>Methods are introduced with the keyword <code>def</code> or <code>override</code> if they override/implement a super type’s method. Methods are public if not specified otherwise. The value of the last expression is returned if no explicit return expression is used and the method’s return type is not <code>void</code>.</p>
+<p>Methods are introduced with the keyword <code class="highlighter-rouge">def</code> or <code class="highlighter-rouge">override</code> if they override/implement a super type’s method. Methods are public if not specified otherwise. The value of the last expression is returned if no explicit return expression is used and the method’s return type is not <code class="highlighter-rouge">void</code>.</p>
 
 <p><a name="xtend_variables"></a></p>
 
-<p>Variables are declared with the keywords <code>val</code> (final) or <code>var</code> (non-final). Field declarations can use the same syntax as in Java.</p>
+<p>Variables are declared with the keywords <code class="highlighter-rouge">val</code> (final) or <code class="highlighter-rouge">var</code> (non-final). Field declarations can use the same syntax as in Java.</p>
 
 <p><a name="xtend_typeinferrence"></a></p>
 
-<p>Xtend is statically typed, but you do not have to specify the type in a declaration if it can be inferred from the context: </p>
+<p>Xtend is statically typed, but you do not have to specify the type in a declaration if it can be inferred from the context:</p>
 
 <pre><code class="language-xtend">val x = newArrayList('foo', 'bar', 'baz') // x is of type List&lt;String&gt;
 def foo() {  // equivalent to  def int foo()...
@@ -129,7 +129,7 @@ def foo() {  // equivalent to  def int foo()...
 }
 </code></pre>
 
-<p><a name="xtend_extension"></a> The methods of fields marked as <code>extension</code> are callable in extension syntax. That means, you can put the first argument in front as if it were the receiver of the call, e.g. </p>
+<p><a name="xtend_extension"></a> The methods of fields marked as <code class="highlighter-rouge">extension</code> are callable in extension syntax. That means, you can put the first argument in front as if it were the receiver of the call, e.g.</p>
 
 <pre><code class="language-xtend">// assume the class Foo defines a method foo(Baz)
 extension Foo theFoo
@@ -139,14 +139,14 @@ def bar(Baz baz) {
 }
 </code></pre>
 
-<p>Static methods can be put on the extension scope with a <code>static extension</code> import, e.g. </p>
+<p>Static methods can be put on the extension scope with a <code class="highlighter-rouge">static extension</code> import, e.g.</p>
 
 <pre><code class="language-xtend">import static extension java.util.Collections.*
 ...
 val foo = singleton('foo') // calls Collections.&lt;String&gt;singleton('foo')
 </code></pre>
 
-<p><a name="xtend_it"></a> In addition to Java’s <code>this</code>, you can define another implicit receiver variable named <code>it</code>. As with <code>this</code>, you can omit <code>it</code> in feature calls, i.e. </p>
+<p><a name="xtend_it"></a> In addition to Java’s <code class="highlighter-rouge">this</code>, you can define another implicit receiver variable named <code class="highlighter-rouge">it</code>. As with <code class="highlighter-rouge">this</code>, you can omit <code class="highlighter-rouge">it</code> in feature calls, i.e.</p>
 
 <pre><code class="language-xtend">class Foo {
   def foo(Bar it) {
@@ -155,18 +155,18 @@ val foo = singleton('foo') // calls Collections.&lt;String&gt;singleton('foo')
 }
 </code></pre>
 
-<p><a name="xtend_lambda"></a> Xtend provides lambda expressions. These are anonymous functions in square brackets. </p>
+<p><a name="xtend_lambda"></a> Xtend provides lambda expressions. These are anonymous functions in square brackets.</p>
 
 <pre><code class="language-xtend">[String foo, String bar | foo + bar]  
   // a function (String foo, String bar) { foo + bar }
 </code></pre>
 
-<p><a name="xtend_lambda_coercion"></a> As this is a bit bulky, there are more rules to make working with lambdas more attractive: </p>
+<p><a name="xtend_lambda_coercion"></a> As this is a bit bulky, there are more rules to make working with lambdas more attractive:</p>
 
 <ol>
   <li>When a lambda expression is the last argument in a method call, it can be put behind the closing parentheses.</li>
   <li>Lambdas are automatically coerced to interfaces with a single function. Parameter types will be inferred.</li>
-  <li>If you skip the declaration of the only parameter, it will be implicitly called <code>it</code>.</li>
+  <li>If you skip the declaration of the only parameter, it will be implicitly called <code class="highlighter-rouge">it</code>.</li>
 </ol>
 
 <pre><code class="language-xtend">new Thread [ println("Hello concurrent world") ] 
@@ -177,7 +177,7 @@ list.sortBy[ length ]
   // equivalent to list.sortBy[String it | it.length]
 </code></pre>
 
-<p><a name="xtend_templates"></a> Also noteworthy is the template expression, which allows defining interpolated multi-line string literals. In addition, the template expressions has intelligent whitespace handling and supports a special <code>FOR</code> and <code>IF</code> construct, which is far better readable in this context. In model inferrers, the template expressions are enhanced further to support type literals, automatically adding an import to the generated Java file.</p>
+<p><a name="xtend_templates"></a> Also noteworthy is the template expression, which allows defining interpolated multi-line string literals. In addition, the template expressions has intelligent whitespace handling and supports a special <code class="highlighter-rouge">FOR</code> and <code class="highlighter-rouge">IF</code> construct, which is far better readable in this context. In model inferrers, the template expressions are enhanced further to support type literals, automatically adding an import to the generated Java file.</p>
 
 <p>We most often use this expression in the examples to generate some synthetic Java boilerplate code. Here is an example from the <a href="206_httprouting.html">http routing language</a>:</p>
 

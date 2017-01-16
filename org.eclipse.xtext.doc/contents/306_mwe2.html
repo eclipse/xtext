@@ -23,7 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h2 id="mwe2-exampe">Examples</h2>
 
-<p>Let’s start with a couple of examples to demonstrate some usage scenarios for MWE2. The first example is a simple <code>HelloWorld</code> module that does nothing but print a message to standard out. The second module is assembled of three components that read an Ecore file, transform the contained classifier-names to upper-case and serialize the resource back to a new file. The last example uses the life-cycle methods of the <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a> to print the execution time of the workflow.</p>
+<p>Let’s start with a couple of examples to demonstrate some usage scenarios for MWE2. The first example is a simple <code class="highlighter-rouge">HelloWorld</code> module that does nothing but print a message to standard out. The second module is assembled of three components that read an Ecore file, transform the contained classifier-names to upper-case and serialize the resource back to a new file. The last example uses the life-cycle methods of the <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a> to print the execution time of the workflow.</p>
 
 <h3 id="mwe2-hello-world">The Simplest Workflow</h3>
 
@@ -36,31 +36,32 @@ SayHello {
 }
 </code></pre>
 
-<p>It configures a very simple workflow component with a message that should be printed to <code>System.out</code> when the workflow is executed. The module begins with a declaration of its name. It must fulfill the Java conventions for fully qualified class-names. That’s why the module <code>HelloWorld</code> has to be placed into the default package of a Java source folder. The second element in the module is the class-name <code>SayHello</code> which introduces the root element of the module. The interpreter will create an instance of the given type and configure it as declared between the curly braces. E.g. the assignment <code>message = "Hello World!"</code> in the module will be interpreted as an invocation of the <code>setMessage(String)</code> on the instantiated object. As one can easily imagine, the implementation of the class <code>SayHello</code> looks straight forward:</p>
+<p>It configures a very simple workflow component with a message that should be printed to <code class="highlighter-rouge">System.out</code> when the workflow is executed. The module begins with a declaration of its name. It must fulfill the Java conventions for fully qualified class-names. That’s why the module <code class="highlighter-rouge">HelloWorld</code> has to be placed into the default package of a Java source folder. The second element in the module is the class-name <code class="highlighter-rouge">SayHello</code> which introduces the root element of the module. The interpreter will create an instance of the given type and configure it as declared between the curly braces. E.g. the assignment <code class="highlighter-rouge">message = "Hello World!"</code> in the module will be interpreted as an invocation of the <code class="highlighter-rouge">setMessage(String)</code> on the instantiated object. As one can easily imagine, the implementation of the class <code class="highlighter-rouge">SayHello</code> looks straight forward:</p>
 
-<pre><code class="language-java">import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
-import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext</span><span class="o">;</span>
 
-public class SayHello implements IWorkflowComponent {
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SayHello</span> <span class="kd">implements</span> <span class="n">IWorkflowComponent</span> <span class="o">{</span>
 
-  private String message = "Hello World!";
-  public void setMessage(String message) {
-    this.message = message;
-  }
-  public String getMessage() {
-    return message;
-  }
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"Hello World!"</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setMessage</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">getMessage</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">message</span><span class="o">;</span>
+  <span class="o">}</span>
 
-  public void invoke(IWorkflowContext ctx) {
-    System.out.println(getMessage());
-  }
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">invoke</span><span class="o">(</span><span class="n">IWorkflowContext</span> <span class="n">ctx</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getMessage</span><span class="o">());</span>
+  <span class="o">}</span>
 
-  public void postInvoke() {}
-  public void preInvoke() {}
-}
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">postInvoke</span><span class="o">()</span> <span class="o">{}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">preInvoke</span><span class="o">()</span> <span class="o">{}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
-<p>It looks like a simple POJO and that’s the philosophy behind MWE2. It is easily possible to assemble completely independent objects in a declarative manner. To make the workflow executable with the <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java">Mwe2Runner</a>, the component <code>SayHello</code> must be nested in a root workflow:</p>
+<p>It looks like a simple POJO and that’s the philosophy behind MWE2. It is easily possible to assemble completely independent objects in a declarative manner. To make the workflow executable with the <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java">Mwe2Runner</a>, the component <code class="highlighter-rouge">SayHello</code> must be nested in a root workflow:</p>
 
 <pre><code class="language-mwe2">module HelloWorld 
 
@@ -71,9 +72,9 @@ Workflow {
 }
 </code></pre>
 
-<p>The package <code>org.eclipse.emf.mwe2.runtime.workflow</code> of the class <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow</a> is implicitly imported in MWE2 modules to make the the modules more concise. The execution result of this workflow will be revealed after a quick <em>Run As .. → MWE2 Workflow</em> in the console as </p>
+<p>The package <code class="highlighter-rouge">org.eclipse.emf.mwe2.runtime.workflow</code> of the class <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow</a> is implicitly imported in MWE2 modules to make the the modules more concise. The execution result of this workflow will be revealed after a quick <em>Run As .. → MWE2 Workflow</em> in the console as</p>
 
-<p><code>Hello World!</code></p>
+<p><code class="highlighter-rouge">Hello World!</code></p>
 
 <h3 id="mwe2-simple-transformation">A Simple Transformation</h3>
 
@@ -93,94 +94,98 @@ Workflow {
 
 <p>The implementation of these components is surprisingly simple. It is easily possible to create own components even for minor operations to automate a process.</p>
 
-<p>The <code>ResourceReader</code> simply reads the file with the given <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a> and stores it in a so called <em>slot</em> of the workflow context. A slot can be understood as a dictionary or map-entry.</p>
+<p>The <code class="highlighter-rouge">ResourceReader</code> simply reads the file with the given <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a> and stores it in a so called <em>slot</em> of the workflow context. A slot can be understood as a dictionary or map-entry.</p>
 
-<pre><code class="language-java">public class ResourceReader extends WorkflowComponentWithSlot {
-  private String uri;
-  public void invoke(IWorkflowContext ctx) {
-    ResourceSet resourceSet = new ResourceSetImpl();
-    URI fileURI = URI.createFileURI(uri); 
-    Resource resource = resourceSet.getResource(fileURI, true);
-    ctx.put(getSlot(), resource);
-  }
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ResourceReader</span> <span class="kd">extends</span> <span class="n">WorkflowComponentWithSlot</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">uri</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">invoke</span><span class="o">(</span><span class="n">IWorkflowContext</span> <span class="n">ctx</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ResourceSet</span> <span class="n">resourceSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ResourceSetImpl</span><span class="o">();</span>
+    <span class="n">URI</span> <span class="n">fileURI</span> <span class="o">=</span> <span class="n">URI</span><span class="o">.</span><span class="na">createFileURI</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span> 
+    <span class="n">Resource</span> <span class="n">resource</span> <span class="o">=</span> <span class="n">resourceSet</span><span class="o">.</span><span class="na">getResource</span><span class="o">(</span><span class="n">fileURI</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">getSlot</span><span class="o">(),</span> <span class="n">resource</span><span class="o">);</span>
+  <span class="o">}</span>
   
-  public void setUri(String uri) {
-    this.uri = uri;
-  }
-  public String getUri() {
-    return uri;
-  }
-}
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUri</span><span class="o">(</span><span class="n">String</span> <span class="n">uri</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">uri</span> <span class="o">=</span> <span class="n">uri</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">getUri</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">uri</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
-<p>The actual transformer takes the model from the slot and modifies it. It simply iterates the content of the resource, identifies each <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifier</a> and sets its name. </p>
+<p>The actual transformer takes the model from the slot and modifies it. It simply iterates the content of the resource, identifies each <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifier</a> and sets its name.</p>
 
-<pre><code class="language-java">public class RenamingTransformer extends WorkflowComponentWithSlot {
-  private boolean toLowerCase = false;
-  public void invoke(IWorkflowContext ctx) {
-    Resource resource = (Resource) ctx.get(getSlot());
-    EcoreUtil.resolveAll(resource);
-    Iterator&lt;Object&gt; contents = EcoreUtil.getAllContents(resource, true);
-    Iterator&lt;EClassifier&gt; iter = 
-        Iterators.filter(contents, EClassifier.class);
-    while(iter.hasNext()) {
-      EClassifier classifier = (EClassifier) iter.next();
-      classifier.setName(isToLowerCase() 
-          ? classifier.getName().toLowerCase()
-          : classifier.getName().toUpperCase());
-    }
-  }
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RenamingTransformer</span> <span class="kd">extends</span> <span class="n">WorkflowComponentWithSlot</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">toLowerCase</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">invoke</span><span class="o">(</span><span class="n">IWorkflowContext</span> <span class="n">ctx</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Resource</span> <span class="n">resource</span> <span class="o">=</span> <span class="o">(</span><span class="n">Resource</span><span class="o">)</span> <span class="n">ctx</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">getSlot</span><span class="o">());</span>
+    <span class="n">EcoreUtil</span><span class="o">.</span><span class="na">resolveAll</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
+    <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">contents</span> <span class="o">=</span> <span class="n">EcoreUtil</span><span class="o">.</span><span class="na">getAllContents</span><span class="o">(</span><span class="n">resource</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+    <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">EClassifier</span><span class="o">&gt;</span> <span class="n">iter</span> <span class="o">=</span> 
+        <span class="n">Iterators</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">contents</span><span class="o">,</span> <span class="n">EClassifier</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="k">while</span><span class="o">(</span><span class="n">iter</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+      <span class="n">EClassifier</span> <span class="n">classifier</span> <span class="o">=</span> <span class="o">(</span><span class="n">EClassifier</span><span class="o">)</span> <span class="n">iter</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+      <span class="n">classifier</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">isToLowerCase</span><span class="o">()</span> 
+          <span class="o">?</span> <span class="n">classifier</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">toLowerCase</span><span class="o">()</span>
+          <span class="o">:</span> <span class="n">classifier</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">toUpperCase</span><span class="o">());</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
 
-  public void setToLowerCase(boolean toLowerCase) {
-    this.toLowerCase = toLowerCase;
-  }
-  public boolean isToLowerCase() {
-    return toLowerCase;
-  }
-}
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setToLowerCase</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">toLowerCase</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">toLowerCase</span> <span class="o">=</span> <span class="n">toLowerCase</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">isToLowerCase</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">toLowerCase</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
-<p>After the model has been modified it should be written to a new file. That’s what the <code>ResourceWriter</code> does. It actually takes the resource from the given <em>slot</em> and saves it with the configured <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a>:</p>
+<p>After the model has been modified it should be written to a new file. That’s what the <code class="highlighter-rouge">ResourceWriter</code> does. It actually takes the resource from the given <em>slot</em> and saves it with the configured <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a>:</p>
 
-<pre><code class="language-java">public class ResourceWriter extends WorkflowComponentWithSlot {
-  private String uri;
-  public void invoke(IWorkflowContext ctx) {
-    Resource resource = (Resource) ctx.get(getSlot());
-    URI uri = URI.createFileURI(getUri());
-    uri = resource.getResourceSet().getURIConverter().normalize(uri);
-    resource.setURI(uri);
-    try {
-      resource.save(null);
-    } catch (IOException e) {
-      throw new WrappedException(e);
-    }
-  }
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ResourceWriter</span> <span class="kd">extends</span> <span class="n">WorkflowComponentWithSlot</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">uri</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">invoke</span><span class="o">(</span><span class="n">IWorkflowContext</span> <span class="n">ctx</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Resource</span> <span class="n">resource</span> <span class="o">=</span> <span class="o">(</span><span class="n">Resource</span><span class="o">)</span> <span class="n">ctx</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">getSlot</span><span class="o">());</span>
+    <span class="n">URI</span> <span class="n">uri</span> <span class="o">=</span> <span class="n">URI</span><span class="o">.</span><span class="na">createFileURI</span><span class="o">(</span><span class="n">getUri</span><span class="o">());</span>
+    <span class="n">uri</span> <span class="o">=</span> <span class="n">resource</span><span class="o">.</span><span class="na">getResourceSet</span><span class="o">().</span><span class="na">getURIConverter</span><span class="o">().</span><span class="na">normalize</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+    <span class="n">resource</span><span class="o">.</span><span class="na">setURI</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+    <span class="k">try</span> <span class="o">{</span>
+      <span class="n">resource</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">WrappedException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
 
-  public void setUri(String uri) {
-    this.uri = uri;
-  }
-  public String getUri() {
-    return uri;
-  }
-}
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setUri</span><span class="o">(</span><span class="n">String</span> <span class="n">uri</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">uri</span> <span class="o">=</span> <span class="n">uri</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">getUri</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">uri</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
 <p>Last but not least, the common super type for those components looks like this:</p>
 
-<pre><code class="language-java">public abstract class WorkflowComponentWithSlot 
-      implements IWorkflowComponent {
-  private String slot = "model";
-  public void setSlot(String slot) {
-    this.slot = slot;
-  }
-  public String getSlot() {
-    return slot;
-  }
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">WorkflowComponentWithSlot</span> 
+      <span class="kd">implements</span> <span class="n">IWorkflowComponent</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">"model"</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setSlot</span><span class="o">(</span><span class="n">String</span> <span class="n">slot</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">slot</span> <span class="o">=</span> <span class="n">slot</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">getSlot</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">slot</span><span class="o">;</span>
+  <span class="o">}</span>
   
-  public void postInvoke() {}
-  public void preInvoke() {}
-}
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">postInvoke</span><span class="o">()</span> <span class="o">{}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">preInvoke</span><span class="o">()</span> <span class="o">{}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
 <p>Each of the mentioned implementations is rather simple and can be done in a couple of minutes. Many tedious tasks that developers face in their daily work can be addressed by a chain of rather simple components. MWE2 can be used to automate these tasks with minimum effort.</p>
 
@@ -188,26 +193,27 @@ Workflow {
 
 <p>The last example demonstrates how to combine the MWE2 concepts to create a simple stop-watch that allows to measure the execution time of a set of components. The idea is to add the very same stop-watch twice as a component to a workflow. It will measure the time from the first pre-invoke to the last post-invoke event and print the elapsed milliseconds to the console.</p>
 
-<pre><code class="language-java">public class StopWatch implements IWorkflowComponent {
-  private long start;
-  private boolean shouldStop = false;
-  public void invoke(IWorkflowContext ctx) {}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StopWatch</span> <span class="kd">implements</span> <span class="n">IWorkflowComponent</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kt">long</span> <span class="n">start</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">shouldStop</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">invoke</span><span class="o">(</span><span class="n">IWorkflowContext</span> <span class="n">ctx</span><span class="o">)</span> <span class="o">{}</span>
 
-  public void postInvoke() {
-    if (shouldStop) {
-      long elapsed = System.currentTimeMillis() - start;
-      System.out.println("Time elapsed: " + elapsed + " ms");
-    }
-    shouldStop = true;
-  }
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">postInvoke</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">shouldStop</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kt">long</span> <span class="n">elapsed</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">start</span><span class="o">;</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Time elapsed: "</span> <span class="o">+</span> <span class="n">elapsed</span> <span class="o">+</span> <span class="s">" ms"</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">shouldStop</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+  <span class="o">}</span>
 
-  public void preInvoke() {
-    start = System.currentTimeMillis();
-  }
-}
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">preInvoke</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
-<p>Clients who want to leverage this kind of stop-watch may use the following pattern. The instance of the class <code>StopWatch</code> has to be added as the first component and the last component to a workflow. Every component in-between will be measured. In this case, it is another workflow that does not need know about this decoration. The idea is to use a local identifier for the instantiated <code>StopWatch</code> and reuse this one at the end to receive the post-invoke life-cycle event twice. </p>
+<p>Clients who want to leverage this kind of stop-watch may use the following pattern. The instance of the class <code class="highlighter-rouge">StopWatch</code> has to be added as the first component and the last component to a workflow. Every component in-between will be measured. In this case, it is another workflow that does not need know about this decoration. The idea is to use a local identifier for the instantiated <code class="highlighter-rouge">StopWatch</code> and reuse this one at the end to receive the post-invoke life-cycle event twice.</p>
 
 <pre><code class="language-mwe2">module MeasuredWorkflow
 
@@ -223,12 +229,12 @@ Workflow {
 <p>MWE2 has a few well defined concepts which can be combined to assemble arbitrary object graphs in a compact and declarative manner.</p>
 
 <ul>
-  <li>A MWE2 file defines a <code>module</code> which exposes its root <code>component</code> as reusable artifact.</li>
-  <li><code>Properties</code> can be used to extract reusable, configurable parts of the workflow.</li>
-  <li>Components are mapped to plain vanilla <em>Java objects</em>. Arbitrary <code>setABC(..)</code> and <code>addXYZ(..)</code> methods are used to configure them.</li>
+  <li>A MWE2 file defines a <code class="highlighter-rouge">module</code> which exposes its root <code class="highlighter-rouge">component</code> as reusable artifact.</li>
+  <li><code class="highlighter-rouge">Properties</code> can be used to extract reusable, configurable parts of the workflow.</li>
+  <li>Components are mapped to plain vanilla <em>Java objects</em>. Arbitrary <code class="highlighter-rouge">setABC(..)</code> and <code class="highlighter-rouge">addXYZ(..)</code> methods are used to configure them.</li>
 </ul>
 
-<p>Let’s consider the follow short example module and <code>SampleClass</code> to explain these concepts.</p>
+<p>Let’s consider the follow short example module and <code class="highlighter-rouge">SampleClass</code> to explain these concepts.</p>
 
 <pre><code class="language-mwe2">module com.mycompany.Example
 
@@ -241,32 +247,33 @@ SampleClass {
 } 
 </code></pre>
 
-<pre><code class="language-java">package com.mycompany;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">;</span>
 
-import java.util.List;
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
 
-public class SampleClass {
-  public void setSingleValue(String value) {..}
-  public void addMultiValue(List&lt;?&gt; value) {..}
-  public void addChild(SampleClass value) {..}
-}
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleClass</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setSingleValue</span><span class="o">(</span><span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{..}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">addMultiValue</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span> <span class="n">value</span><span class="o">)</span> <span class="o">{..}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">addChild</span><span class="o">(</span><span class="n">SampleClass</span> <span class="n">value</span><span class="o">)</span> <span class="o">{..}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
 <h3 id="mwe2-java-references">Mapping to Java Classes</h3>
 
-<p>The module <code>com.mycompany.Example</code> defines a root component of type <code>com.mycompany.SampleClass</code>. It is possible to use the simple class-name because MWE2 uses the very same visibility rules as the Java compiler. Classes that are in the same package as the module can be referenced by their simple name. The same rule applies for classes from the <code>java.lang</code> package. For convenience reasons is the package <code>org.eclipse.emf.mwe2.runtime.workflow</code> implicitly imported as well as it exposes some library workflow components. However, the imports are more flexible then in Java since MWE2-imports can be relative, e.g. the <code>import java.*</code> resolves the reference <code>util.ArrayList</code> to <code>java.util.ArrayList</code>. </p>
+<p>The module <code class="highlighter-rouge">com.mycompany.Example</code> defines a root component of type <code class="highlighter-rouge">com.mycompany.SampleClass</code>. It is possible to use the simple class-name because MWE2 uses the very same visibility rules as the Java compiler. Classes that are in the same package as the module can be referenced by their simple name. The same rule applies for classes from the <code class="highlighter-rouge">java.lang</code> package. For convenience reasons is the package <code class="highlighter-rouge">org.eclipse.emf.mwe2.runtime.workflow</code> implicitly imported as well as it exposes some library workflow components. However, the imports are more flexible then in Java since MWE2-imports can be relative, e.g. the <code class="highlighter-rouge">import java.*</code> resolves the reference <code class="highlighter-rouge">util.ArrayList</code> to <code class="highlighter-rouge">java.util.ArrayList</code>.</p>
 
-<p>The root instance of type <code>SampleClass</code> has to be configured after it has been created. Therefore the method <code>setSingleValue</code> will be called at first. The given parameter is <code>'a string'</code>. The method is identified by its name which starts with <code>set</code>. To allow to assign multi-value properties, MWE provides access to methods called <code>add*</code> as well. </p>
+<p>The root instance of type <code class="highlighter-rouge">SampleClass</code> has to be configured after it has been created. Therefore the method <code class="highlighter-rouge">setSingleValue</code> will be called at first. The given parameter is <code class="highlighter-rouge">'a string'</code>. The method is identified by its name which starts with <code class="highlighter-rouge">set</code>. To allow to assign multi-value properties, MWE provides access to methods called <code class="highlighter-rouge">add*</code> as well.</p>
 
-<p>If the right side of the assignment in the workflow file does not define a class explicitly, its type is inferred from the method parameter. The line <code>child = {}</code> is equivalent to <code>child = SampleClass {}</code> and creates a new instance of <code>SampleClass</code>.</p>
+<p>If the right side of the assignment in the workflow file does not define a class explicitly, its type is inferred from the method parameter. The line <code class="highlighter-rouge">child = {}</code> is equivalent to <code class="highlighter-rouge">child = SampleClass {}</code> and creates a new instance of <code class="highlighter-rouge">SampleClass</code>.</p>
 
 <p>MWE2 ships with nice tool support. The editor will provide content assist for the allowed types and highlight incompatible assignments. The available properties for Java classes will be proposed as well.</p>
 
 <h3 id="mwe2-module">Module</h3>
 
-<p>As MWE2 modules have a fully qualified name, it is possible to refer to them from other modules. The type of the module is derived from the type of its root component. The <code>com.mycompany.Example</code> can be assigned at any place where a <code>com.mycompany.SampleClass</code> is expected.</p>
+<p>As MWE2 modules have a fully qualified name, it is possible to refer to them from other modules. The type of the module is derived from the type of its root component. The <code class="highlighter-rouge">com.mycompany.Example</code> can be assigned at any place where a <code class="highlighter-rouge">com.mycompany.SampleClass</code> is expected.</p>
 
-<p>Let’s create a second module <code>com.mycompany.Second</code> like this:</p>
+<p>Let’s create a second module <code class="highlighter-rouge">com.mycompany.Second</code> like this:</p>
 
 <pre><code class="language-mwe2">module com.mycompany.sub.Second
 
@@ -277,13 +284,13 @@ SampleClass {
 } 
 </code></pre>
 
-<p>The <code>child</code> value will be assigned to an instance of <code>SampleClass</code> that is configured as in the first example workflow. This enables nice composition and a very focused, reusable component design. </p>
+<p>The <code class="highlighter-rouge">child</code> value will be assigned to an instance of <code class="highlighter-rouge">SampleClass</code> that is configured as in the first example workflow. This enables nice composition and a very focused, reusable component design.</p>
 
-<p>As the same rules apply in MWE2 like in Java, the module <code>com.mycompany.sub.Second</code> has to be defined in a file called <em>Second.mwe2</em> in the package <code>com.mycompany.sub</code>. The import semantic for other modules is the same as for classes. The import statement allows to refer to <code>com.mycompany.Example</code> with a shortened name.</p>
+<p>As the same rules apply in MWE2 like in Java, the module <code class="highlighter-rouge">com.mycompany.sub.Second</code> has to be defined in a file called <em>Second.mwe2</em> in the package <code class="highlighter-rouge">com.mycompany.sub</code>. The import semantic for other modules is the same as for classes. The import statement allows to refer to <code class="highlighter-rouge">com.mycompany.Example</code> with a shortened name.</p>
 
 <h3 id="mwe2-properties">Properties</h3>
 
-<p>MWE2 allows to extract arbitrary information into properties to ensure that these pieces are not cluttered around the workflow and to allow for easier external customization. The exemplary component definition was only changed slightly by introducing a property <code>value</code>.</p>
+<p>MWE2 allows to extract arbitrary information into properties to ensure that these pieces are not cluttered around the workflow and to allow for easier external customization. The exemplary component definition was only changed slightly by introducing a property <code class="highlighter-rouge">value</code>.</p>
 
 <pre><code class="language-mwe2">module com.mycompany.Example
 
@@ -294,7 +301,7 @@ SampleClass {
 }
 </code></pre>
 
-<p>The type of the property will be derived from the default value similar to the mechanism that is already known from <code>set</code>- and <code>add</code>-methods. If no default value is given, <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a> will be assumed. However, properties are not limited to strings. The second built in type is boolean via the familiar literals <code>true</code> and <code>false</code>. More flexibility is available via actual component literals.</p>
+<p>The type of the property will be derived from the default value similar to the mechanism that is already known from <code class="highlighter-rouge">set</code>- and <code class="highlighter-rouge">add</code>-methods. If no default value is given, <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a> will be assumed. However, properties are not limited to strings. The second built in type is boolean via the familiar literals <code class="highlighter-rouge">true</code> and <code class="highlighter-rouge">false</code>. More flexibility is available via actual component literals.</p>
 
 <pre><code class="language-mwe2">module com.mycompany.Example
 
@@ -307,7 +314,7 @@ SampleClass {
 }
 </code></pre>
 
-<p>If one wants to define string properties that are actual reusable parts for other properties, she may use defined variables inside other literals like this: </p>
+<p>If one wants to define string properties that are actual reusable parts for other properties, she may use defined variables inside other literals like this:</p>
 
 <pre><code class="language-mwe2">var aString = "part"
 var anotherString = "reuse the ${part} here"
@@ -317,7 +324,7 @@ var anotherString = "reuse the ${part} here"
 
 <h3 id="mwe2-mandatory">Mandatory Properties</h3>
 
-<p>It is not always feasible to define default values for properties. That is where mandatory properties come into play. Modules define their interface not only via their fully qualified name and the type of the root component but also by means of the defined properties. </p>
+<p>It is not always feasible to define default values for properties. That is where mandatory properties come into play. Modules define their interface not only via their fully qualified name and the type of the root component but also by means of the defined properties.</p>
 
 <pre><code class="language-mwe2">module com.mycompany.Example
 
@@ -332,7 +339,7 @@ SampleClass {
 }
 </code></pre>
 
-<p>This version of the example module exposes two externally assignable properties. The second one has no default value assigned and is thereby considered to be mandatory. The mandatory value must be assigned if we reuse <code>org.mycompany.Example</code> in another module like this:</p>
+<p>This version of the example module exposes two externally assignable properties. The second one has no default value assigned and is thereby considered to be mandatory. The mandatory value must be assigned if we reuse <code class="highlighter-rouge">org.mycompany.Example</code> in another module like this:</p>
 
 <pre><code class="language-mwe2">module com.mycompany.Second
 
@@ -344,13 +351,13 @@ var newMandatory
 } 
 </code></pre>
 
-<p>Note that it is even possible to reuse another module as the root component of a new module. In this case we set the mandatory property of <code>Example</code> to a specific constant value while the previously optional value is now redefined as mandatory by means of a new property without a default value.</p>
+<p>Note that it is even possible to reuse another module as the root component of a new module. In this case we set the mandatory property of <code class="highlighter-rouge">Example</code> to a specific constant value while the previously optional value is now redefined as mandatory by means of a new property without a default value.</p>
 
-<p>It is not only possible to define mandatory properties for MWE2 modules but for classes as well. Therefore MWE2 ships with the <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">Mandatory</a> annotation. If a <code>set</code>- or <code>add</code>-method is marked as <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">Mandatory</a>, the module validation will fail if no value was assigned to that feature.</p>
+<p>It is not only possible to define mandatory properties for MWE2 modules but for classes as well. Therefore MWE2 ships with the <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">Mandatory</a> annotation. If a <code class="highlighter-rouge">set</code>- or <code class="highlighter-rouge">add</code>-method is marked as <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">Mandatory</a>, the module validation will fail if no value was assigned to that feature.</p>
 
 <h3 id="mwe2-named-components">Named Components</h3>
 
-<p>Properties are not the only way to define something that can be reused. It is possible to assign a name to any instantiated component whether it’s created from a class literal or from another component. This allows to refer to previously created and configured instances. Named instances can come handy for notification and call-back mechanisms or more general in terms of defined life-cycle events. </p>
+<p>Properties are not the only way to define something that can be reused. It is possible to assign a name to any instantiated component whether it’s created from a class literal or from another component. This allows to refer to previously created and configured instances. Named instances can come handy for notification and call-back mechanisms or more general in terms of defined life-cycle events.</p>
 
 <p>If we wanted to assign the created instance to a property of itself, we could use the following syntax:</p>
 
@@ -365,7 +372,7 @@ SampleClass : self {
 
 <h3 id="mwe2-auto-inject">Auto Injection</h3>
 
-<p>Existing modules or classes often expose a set of properties that will be assigned to features of its root component or set- and add- methods respectively. In many cases its quite hard to come up with yet another name for the very same concept which leads to the situation where the properties itself have the very same name as the component’s feature. To avoid the overall repetition of assignments, MWE2 offers the possibility to use the <code>auto-inject</code> modifier on the component literal:</p>
+<p>Existing modules or classes often expose a set of properties that will be assigned to features of its root component or set- and add- methods respectively. In many cases its quite hard to come up with yet another name for the very same concept which leads to the situation where the properties itself have the very same name as the component’s feature. To avoid the overall repetition of assignments, MWE2 offers the possibility to use the <code class="highlighter-rouge">auto-inject</code> modifier on the component literal:</p>
 
 <pre><code class="language-mwe2">module com.mycompany.Example
 
@@ -375,9 +382,9 @@ SampleClass auto-inject {
 }
 </code></pre>
 
-<p>This example will implicitly assign the value of the property <code>child</code> to the feature <code>child</code> of the root component. This is especially useful for highly configurable workflows that expose dozens of optional parameters each of which can be assigned to one or more components.</p>
+<p>This example will implicitly assign the value of the property <code class="highlighter-rouge">child</code> to the feature <code class="highlighter-rouge">child</code> of the root component. This is especially useful for highly configurable workflows that expose dozens of optional parameters each of which can be assigned to one or more components.</p>
 
-<p>The <code>auto-inject</code> modifier can be used for a subset of the available features as well. It will suppressed for the explicitly set values of a component. </p>
+<p>The <code class="highlighter-rouge">auto-inject</code> modifier can be used for a subset of the available features as well. It will suppressed for the explicitly set values of a component.</p>
 
 <h2 id="mwe2-syntax-reference">Syntax Reference</h2>
 
@@ -403,7 +410,7 @@ ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 <p><img src="images/mwe2/module.png" alt="" /></p>
 
-<p>A <code>module</code> consists of four parts. The very first statement in a <em>*.mwe2</em> file is the module declaration. The name of the module must follow the naming convention for Java classes. That MWE2 file’s name must therefore be the same as the last segment of the module-name and it has to be placed in the appropriate package of a Java source path.</p>
+<p>A <code class="highlighter-rouge">module</code> consists of four parts. The very first statement in a <em>*.mwe2</em> file is the module declaration. The name of the module must follow the naming convention for Java classes. That MWE2 file’s name must therefore be the same as the last segment of the module-name and it has to be placed in the appropriate package of a Java source path.</p>
 
 <p>It is allowed to define any number of import statements in a module. Imports are either suffixed by a wildcard or they import a concrete class or module. MWE2 can handle relative imports in case one uses the wildcard notation:</p>
 
@@ -412,13 +419,13 @@ ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 <h3 id="mwe2-property-syntax">Property</h3>
 
-<p>The list of declared properties follows the optional import section. It is allowed to define modules without any properties. </p>
+<p>The list of declared properties follows the optional import section. It is allowed to define modules without any properties.</p>
 
 <p><img src="images/mwe2/property.png" alt="" /></p>
 
 <p>Each declared property is locally visible in the module. It furthermore defines an assignable feature of the module in case one refers to it from another module. Properties may either have a default value or they are considered to be <em>mandatory</em>. If the type of property is omitted it will be inferred from the default value. The default type of a property is <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a>. That is, if no default value is available, the property is <em>mandatory</em> and of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a>.</p>
 
-<p>There are four types of values available in MWE2. One may either define a string, boolean or component literal or a reference to a previously defined property. </p>
+<p>There are four types of values available in MWE2. One may either define a string, boolean or component literal or a reference to a previously defined property.</p>
 
 <h3 id="mwe2-component-syntax">Component</h3>
 
@@ -426,17 +433,17 @@ ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 <p><img src="images/mwe2/component.png" alt="" /></p>
 
-<p>The type of the component can be derived in many cases except for the root component. That’s why it’s optional in the component literal. If no type is given, it will be inferred from the left side of the assignment. The assigned feature can either be a declared property of the module or a <code>set</code>- or <code>add</code>-method of a Java class.</p>
+<p>The type of the component can be derived in many cases except for the root component. That’s why it’s optional in the component literal. If no type is given, it will be inferred from the left side of the assignment. The assigned feature can either be a declared property of the module or a <code class="highlighter-rouge">set</code>- or <code class="highlighter-rouge">add</code>-method of a Java class.</p>
 
-<p>Components can be named to make them referable in subsequent assignments. Following the <code>':'</code> keyword, one can define an identifier for the instantiated component. The identifier is locally visible in the module and any assignment that is defined after the named component can refer to this identifier and thereby exactly point to the instantiated object.</p>
+<p>Components can be named to make them referable in subsequent assignments. Following the <code class="highlighter-rouge">':'</code> keyword, one can define an identifier for the instantiated component. The identifier is locally visible in the module and any assignment that is defined after the named component can refer to this identifier and thereby exactly point to the instantiated object.</p>
 
-<p>The next option for a component is <code>auto-inject</code>. If this modifier is set on a component, any available feature of the component that has the same name as a property or previously created named component will be automatically assigned.</p>
+<p>The next option for a component is <code class="highlighter-rouge">auto-inject</code>. If this modifier is set on a component, any available feature of the component that has the same name as a property or previously created named component will be automatically assigned.</p>
 
-<p>The core of a component is the list of assignments between the curly braces. An arbitrary number of values can be set on the component by means of feature-to-value pairs. </p>
+<p>The core of a component is the list of assignments between the curly braces. An arbitrary number of values can be set on the component by means of feature-to-value pairs.</p>
 
 <p><img src="images/mwe2/assignment.png" alt="" /></p>
 
-<p>The available constructs on the right hand side of the assignment are the same as for default values for properties. </p>
+<p>The available constructs on the right hand side of the assignment are the same as for default values for properties.</p>
 
 <h3 id="mwe2-string-literals-syntax">String Literals</h3>
 
@@ -447,40 +454,40 @@ var anotherString = 'It is possible to embed ${aString} into
  a multi-line string'
 </code></pre>
 
-<p>This is especially convenient for path-substitution if one defines e.g. a common root directory and wants to specify other paths relative to the base. </p>
+<p>This is especially convenient for path-substitution if one defines e.g. a common root directory and wants to specify other paths relative to the base.</p>
 
 <p>There are two different delimiters available for strings. Users are free to either use single- or double-quotes to start and end strings. If a certain string contains a lot of single-quotes one would better choose double-quotes as delimiter and vice versa. There is no semantic difference between both notations.</p>
 
-<p>The escape character in MWE2 is the back-slash <code>"\\"</code>. It can be used to write line-breaks or tabular characters explicitly and to escape the beginning of substitution variables <code>${</code> and the quotes itself. Allowed escape sequences are:</p>
+<p>The escape character in MWE2 is the back-slash <code class="highlighter-rouge">"\\"</code>. It can be used to write line-breaks or tabular characters explicitly and to escape the beginning of substitution variables <code class="highlighter-rouge">${</code> and the quotes itself. Allowed escape sequences are:</p>
 
 <table>
   <tbody>
     <tr>
-      <td><code>\n</code></td>
+      <td><code class="highlighter-rouge">\n</code></td>
       <td>line break</td>
     </tr>
     <tr>
-      <td><code>\r</code></td>
+      <td><code class="highlighter-rouge">\r</code></td>
       <td>carriage return</td>
     </tr>
     <tr>
-      <td><code>\t</code></td>
+      <td><code class="highlighter-rouge">\t</code></td>
       <td>tabular character</td>
     </tr>
     <tr>
-      <td><code>\'</code></td>
+      <td><code class="highlighter-rouge">\'</code></td>
       <td>single-quote (can be omitted in double-quoted strings)</td>
     </tr>
     <tr>
-      <td><code>\"</code></td>
+      <td><code class="highlighter-rouge">\"</code></td>
       <td>double-quote (can be omitted in single-quoted strings)</td>
     </tr>
     <tr>
-      <td><code>\${</code></td>
+      <td><code class="highlighter-rouge">\${</code></td>
       <td>escape the substitution variable start ${</td>
     </tr>
     <tr>
-      <td><code>\\</code></td>
+      <td><code class="highlighter-rouge">\\</code></td>
       <td>the back-slash itself</td>
     </tr>
   </tbody>
@@ -490,15 +497,11 @@ var anotherString = 'It is possible to embed ${aString} into
 
 <h3 id="mwe2-boolean-literals">Boolean Literals</h3>
 
-<p>MWE2 has native support for the boolean type. The literals are <code>true</code> and <code>false</code>.</p>
+<p>MWE2 has native support for the boolean type. The literals are <code class="highlighter-rouge">true</code> and <code class="highlighter-rouge">false</code>.</p>
 
 <h3 id="mwe2-references">References</h3>
 
 <p>Each assigned value in MWE2 either as default for properties or in a component assignment can be a reference to a previously declared property or named component. The can be referenced intuitively by their name.</p>
-
-<hr />
-
-<p><strong><a href="307_special_languages.html">Next Chapter: Typical Language Configurations</a></strong></p>
 
 
 </body>

@@ -27,19 +27,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h2 id="builddsl-solution">Overview</h2>
 
-<p>The above screenshot shows an exemplary build script. A script has a couple of parameters. The tasks define dependencies to other tasks. What happens if the task is executed is defined in a block within curly braces. </p>
+<p>The above screenshot shows an exemplary build script. A script has a couple of parameters. The tasks define dependencies to other tasks. What happens if the task is executed is defined in a block within curly braces.</p>
 
-<p>A build script can be run from the command line, assigning values to the parameters in the syntax <code>myscript --&lt;paramName&gt; &lt;value&gt;</code>. </p>
+<p>A build script can be run from the command line, assigning values to the parameters in the syntax <code class="highlighter-rouge">myscript --&lt;paramName&gt; &lt;value&gt;</code>.</p>
 
 <p>We have put most functionality of the language in the runtime library: Detecting the order of execution, parsing parameters, etc. The language itself focusses on the structural parts, and leaves the actions to Xbase. This allows both us and future users to add new tasks as library methods instead of hard-coding them in the language.</p>
 
 <h2 id="builddsl-running">Running the Example</h2>
 
-<p>In the runtime workspace, open the <em>BuildExample.build</em> in the editor. The example project comes with some sample java code to compile in the <em>example-project</em> folder. Choose <em>Run as → Build Task</em> from the context menu of any task to execute it. </p>
+<p>In the runtime workspace, open the <em>BuildExample.build</em> in the editor. The example project comes with some sample java code to compile in the <em>example-project</em> folder. Choose <em>Run as → Build Task</em> from the context menu of any task to execute it.</p>
 
 <h2 id="builddsl-grammar">Grammar</h2>
 
-<p>The grammar of the DSL is once again quite slim: </p>
+<p>The grammar of the DSL is once again quite slim:</p>
 
 <pre><code class="language-xtext">grammar org.xtext.builddsl.BuildDSL with org.eclipse.xtext.xbase.Xbase
 
@@ -66,7 +66,7 @@ Task:
 
 <h2 id="builddsl-inferrer">Translation to Java</h2>
 
-<p>For each <em>BuildFile</em> we create a Java class that extends the library class <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.xtend">BuildScript</a>. We generate a main method allowing to execute the script as a Java application with command line parameters. The use of <code>System.exit</code> allows to return error codes to the caller. </p>
+<p>For each <em>BuildFile</em> we create a Java class that extends the library class <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/BuildScript.xtend">BuildScript</a>. We generate a main method allowing to execute the script as a Java application with command line parameters. The use of <code class="highlighter-rouge">System.exit</code> allows to return error codes to the caller.</p>
 
 <ul>
   <li>
@@ -78,24 +78,25 @@ Task:
   <li>
     <p>Java:</p>
 
-    <pre><code class="language-java">package sample;
-...
-public class SimpleBuild extends BuildScript {
-...
-  public static void main(final String... args) {
-    SimpleBuild script = new SimpleBuild();
-    if (script.showHelp(args)) {
-      System.exit(HELP);
-    }
-    System.exit(script.doBuild(args));
-  }
-...
-}
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">sample</span><span class="o">;</span>
+<span class="o">...</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleBuild</span> <span class="kd">extends</span> <span class="n">BuildScript</span> <span class="o">{</span>
+<span class="o">...</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">SimpleBuild</span> <span class="n">script</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleBuild</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">script</span><span class="o">.</span><span class="na">showHelp</span><span class="o">(</span><span class="n">args</span><span class="o">))</span> <span class="o">{</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">HELP</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">script</span><span class="o">.</span><span class="na">doBuild</span><span class="o">(</span><span class="n">args</span><span class="o">));</span>
+  <span class="o">}</span>
+<span class="o">...</span>
+<span class="o">}</span>
 </code></pre>
+    </div>
   </li>
 </ul>
 
-<p>The respective inferrer code looks like this: </p>
+<p>The respective inferrer code looks like this:</p>
 
 <pre><code class="language-xtend">class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
 
@@ -140,15 +141,16 @@ public class SimpleBuild extends BuildScript {
   <li>
     <p>Java:</p>
 
-    <pre><code class="language-java">@DependsOn("prepare")
-protected void print() {
-  InputOutput.&lt;String&gt;print(this.name);
-}
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@DependsOn</span><span class="o">(</span><span class="s">"prepare"</span><span class="o">)</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">InputOutput</span><span class="o">.&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="n">print</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">);</span>
+<span class="o">}</span>
 </code></pre>
+    </div>
   </li>
 </ul>
 
-<p>The annotation part may be interesting, so here is the snippet from the inferrer: </p>
+<p>The annotation part may be interesting, so here is the snippet from the inferrer:</p>
 
 <pre><code class="language-xtend">// a method for the actual task body
 members += file.tasks.map[ task | toMethod(task.methodName, typeRef(Void.TYPE)) [
@@ -159,7 +161,7 @@ members += file.tasks.map[ task | toMethod(task.methodName, typeRef(Void.TYPE)) 
 ]
 </code></pre>
 
-<p>Finally, we create a field with the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.xtend">Param</a> annotation from each <em>Parameter</em>. The superclass will make the so marked fields initializable from command line arguments. </p>
+<p>Finally, we create a field with the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.xtend">Param</a> annotation from each <em>Parameter</em>. The superclass will make the so marked fields initializable from command line arguments.</p>
 
 <ul>
   <li>
@@ -171,13 +173,14 @@ members += file.tasks.map[ task | toMethod(task.methodName, typeRef(Void.TYPE)) 
   <li>
     <p>Java:</p>
 
-    <pre><code class="language-java">@Param
-public String name = "World";
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Param</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"World"</span><span class="o">;</span>
 </code></pre>
+    </div>
   </li>
 </ul>
 
-<p>The type can be skipped. If there is an initialization expression, the parameter’s type is inferred from the initialization expression. If that one is missing, too, <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a> is assumed. The Elvis-operator <code>?:</code> comes handy for this use case. The different sources are tried to find the best type for the field. In the inferrer, this looks like:</p>
+<p>The type can be skipped. If there is an initialization expression, the parameter’s type is inferred from the initialization expression. If that one is missing, too, <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a> is assumed. The Elvis-operator <code class="highlighter-rouge">?:</code> comes handy for this use case. The different sources are tried to find the best type for the field. In the inferrer, this looks like:</p>
 
 <pre><code class="language-xtend">@Inject ITypeProvider typeProvider
 ...
@@ -227,15 +230,16 @@ val type = declaredParameter.type
 
 <p>As always, such an implementation has to be bound in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/BuildDSLRuntimeModule.java">BuildDSLRuntimeModule</a>:</p>
 
-<pre><code class="language-java">public class BuildDSLRuntimeModule 
-    extends org.xtext.builddsl.AbstractBuildDSLRuntimeModule {
-...
-  public Class&lt;? extends ImplicitlyImportedFeatures&gt; 
-      bindImplicitlyImportedFeatures() {
-    return BuildDSLImplicitlyImportedTypes.class;
-  }
-}
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BuildDSLRuntimeModule</span> 
+    <span class="kd">extends</span> <span class="n">org</span><span class="o">.</span><span class="na">xtext</span><span class="o">.</span><span class="na">builddsl</span><span class="o">.</span><span class="na">AbstractBuildDSLRuntimeModule</span> <span class="o">{</span>
+<span class="o">...</span>
+  <span class="kd">public</span> <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">ImplicitlyImportedFeatures</span><span class="o">&gt;</span> 
+      <span class="n">bindImplicitlyImportedFeatures</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">BuildDSLImplicitlyImportedTypes</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
 <h2 id="builddsl-library">Operator Overloading</h2>
 
@@ -253,20 +257,21 @@ val theSameFile = 'someDir' / 'fileName.txt'
   <li>
     <p>Java:</p>
 
-    <pre><code class="language-java">final File dir = FileExtensions.file("someDir");
-final File file = FileExtensions.operator_divide(dir, "fileName.txt");
-final File theSameFile = FileExtensions.operator_divide(
-    "someDir", 
-    "fileName.txt");
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">final</span> <span class="n">File</span> <span class="n">dir</span> <span class="o">=</span> <span class="n">FileExtensions</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s">"someDir"</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="n">FileExtensions</span><span class="o">.</span><span class="na">operator_divide</span><span class="o">(</span><span class="n">dir</span><span class="o">,</span> <span class="s">"fileName.txt"</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">File</span> <span class="n">theSameFile</span> <span class="o">=</span> <span class="n">FileExtensions</span><span class="o">.</span><span class="na">operator_divide</span><span class="o">(</span>
+    <span class="s">"someDir"</span><span class="o">,</span> 
+    <span class="s">"fileName.txt"</span><span class="o">);</span>
 </code></pre>
+    </div>
   </li>
 </ul>
 
-<p>The compiler replaces operators with method calls to methods named <code>operator_&lt;operatorName&gt;()</code>. These have to be callable on the left operand, i.e. be a method of the left operands type or be added as an extension to the left operand type. In this case, we use the latter approach, since <a href="http://docs.oracle.com/javase/8/docs/api//java/io/File.html">File</a> as well as <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a> are sealed types. To learn more about operators and operator overloading please consult the <a href="305_xbase.html#xbase-expressions-operators">Xbase documentation</a>.</p>
+<p>The compiler replaces operators with method calls to methods named <code class="highlighter-rouge">operator_&lt;operatorName&gt;()</code>. These have to be callable on the left operand, i.e. be a method of the left operands type or be added as an extension to the left operand type. In this case, we use the latter approach, since <a href="http://docs.oracle.com/javase/8/docs/api//java/io/File.html">File</a> as well as <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a> are sealed types. To learn more about operators and operator overloading please consult the <a href="305_xbase.html#xbase-expressions-operators">Xbase documentation</a>.</p>
 
 <h2 id="builddsl-launch">Run as… Integration</h2>
 
-<p>To facilitate executing build scripts from within Java, we have extended Eclipse’s launch support. The respective classes are <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchDelegate.xtend">BuildDSLLaunchDelegate</a>, <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchShortcut.xtend">BuildDSLLaunchShortcut</a> and <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchTabGroup.xtend">BuildDSLLaunchTabGroup</a>. Describing all the details would be a bit lengthy but it is quite straightforward if you are familiar with the launching API. </p>
+<p>To facilitate executing build scripts from within Java, we have extended Eclipse’s launch support. The respective classes are <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchDelegate.xtend">BuildDSLLaunchDelegate</a>, <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchShortcut.xtend">BuildDSLLaunchShortcut</a> and <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.ui/src/org/xtext/builddsl/ui/launch/BuildDSLLaunchTabGroup.xtend">BuildDSLLaunchTabGroup</a>. Describing all the details would be a bit lengthy but it is quite straightforward if you are familiar with the launching API.</p>
 
 <hr />
 

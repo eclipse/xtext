@@ -19,37 +19,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h1 id="configuration">Configuration</h1>
 
-<h2 id="generator">The Language Generator</h2>
+<p>Xtext offers two levels on which you can configure your language: the language generator and dependency injection. The language generator uses a special DSL called MWE2 to configure the generator.</p>
 
-<p>Xtext provides a lot of generic implementations for your language’s infrastructure but also uses code generation to generate some of the components. Those generated components are for instance the parser, the serializer, the inferred Ecore model (if any) and a couple of convenient base classes for content assist, etc.</p>
+<h2 id="short-intro-to-mwe">A Short Introduction to MWE2</h2>
 
-<p>The generator also contributes to shared project resources such as the <em>plugin.xml</em>, <em>MANIFEST.MF</em> and the <a href="#guicemodules">Guice modules</a>.</p>
-
-<p>Xtext’s generator uses a special DSL called <a href="306_mwe2.html">MWE2 - the modeling workflow engine</a> to configure the generator.</p>
-
-<h3 id="short-intro-to-mwe">A Short Introduction to MWE2</h3>
-
-<p>MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as one is used to from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter <a href="306_mwe2.html">MWE2</a>.</p>
+<p>MWE2 (Modeling Workflow Engine) allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as known from Java Beans encapsulation principles. More in-depth information can be found in the <a href="306_mwe2.html">MWE2 documentation</a>.</p>
 
 <p>Given the following simple Java class (POJO):</p>
 
-<pre><code class="language-java">package com.mycompany;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">;</span>
 
-public class Person {
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
 
-  private String name;
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
 
-  public void setName(String name) { 
-    this.name = name;
-  }
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+  <span class="o">}</span>
 
-  private final List&lt;Person&gt; children = new ArrayList&lt;Person&gt;();
+  <span class="kd">private</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">children</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;();</span>
 
-  public void addChild(Person child) {
-    this.children.add(child);
-  }
-}
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">addChild</span><span class="o">(</span><span class="n">Person</span> <span class="n">child</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">children</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">child</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+</div>
 
 <p>One can create a family tree with MWE2 easily by describing it in a declarative manner without writing a single line of Java code and without the need to compile classes:</p>
 
@@ -57,7 +52,7 @@ public class Person {
 
 Person {
   name = "Grandpa"
-  child = {
+  child = Person {
     name = "Father"
     child = {
       name = "Son"
@@ -66,299 +61,403 @@ Person {
 }
 </code></pre>
 
-<p>These couple of lines will, when interpreted by MWE2, result in an object tree consisting of three instances of <em>com.mycompany.Person</em>. The interpreter will basically do the same as the following <em>main</em> method: </p>
+<p>These few lines will, when interpreted by MWE2, result in an object tree consisting of three instances of <em>com.mycompany.Person</em>. The interpreter will basically do the same as the following <em>main</em> method:</p>
 
-<pre><code class="language-java">package com.mycompany;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">;</span>
 
-public class CreatePersons {
-  public static void main(String[] args) {
-    Person grandpa = new Person();
-    grandpa.setName("Grandpa");
-    Person father = new Person();
-    father.setName("Father");
-    grandpa.addChild(father);
-    Person son = new Person();
-    son.setName("Son");
-    father.addChild(son);
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CreatePersons</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Person</span> <span class="n">grandpa</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+        <span class="n">grandpa</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Grandpa"</span><span class="o">);</span>
+        <span class="n">Person</span> <span class="n">father</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+        <span class="n">father</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Father"</span><span class="o">);</span>
+        <span class="n">grandpa</span><span class="o">.</span><span class="na">addChild</span><span class="o">(</span><span class="n">father</span><span class="o">);</span>
+        <span class="n">Person</span> <span class="n">son</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+        <span class="n">son</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Son"</span><span class="o">);</span>
+        <span class="n">father</span><span class="o">.</span><span class="na">addChild</span><span class="o">(</span><span class="n">son</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>And this is how it works: The root element is a plain Java class name. As this MWE2 module is a sibling to the class <em>com.mycompany.Person</em> it is not necessary to use fully qualified name. The constructed objects are furthermore configured according to the declaration in the module, i.e. a second instance of Person is created and added to the list of children of “Grandpa” while the third person becomes a child of “Father”. All three instances will have their respective <em>name</em> assigned via a reflective invocation of the <em>setName</em> method. Note that in this example the <em>Person</em> type for “Father” is given explicitly, while for “Son” it is inferred from the assigned feature <em>child</em>.</p>
+
+<p><em>Hint: Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept: Just use content assist (ctrl + space) in the MWE2 Editor or navigate directly to the declaration of the underlying Java implementation by means of F3 (Go To Declaration).</em></p>
+
+<p>Another frequently used feature of MWE2 is <em>variables</em>, which can be declared with <code class="highlighter-rouge">var</code> as shown below. Such a variable can be reset from outside when calling the module, e.g. allowing to use different settings when calling it from a Maven build. You can refer the variables inside strings using the <code class="highlighter-rouge">${variable-name}</code> notation.</p>
+
+<pre><code class="language-mwe2">module com.mycompany.CreatePersons
+
+var surname = "Johnson"
+
+Person {
+  name = "John ${surname}"
+  child = {
+    name = "Jim ${surname}"
+  }
+  child = {
+    name = "Jane ${surname}"
   }
 }
 </code></pre>
 
-<p><img src="images/family_tree.png" alt="" /></p>
+<p>Although arbitrary Java classes can be used, the standard root element for MWE2 files is <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow</a>, which is part of the very slim runtime model shipped with MWE2. It accepts <em>beans</em> and <em>components</em>.</p>
 
-<p>And this is how it works: The root element is a plain Java class name. As the module is a sibling to the class <em>com.mycompany.Person</em> it is not necessary to use fully qualified name. There are other packages implicitly imported into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered in depth in the appropriate <a href="306_mwe2.html">chapter</a>. The constructed objects are furthermore configured according to the declaration in the module, e.g. a second instance of Person will be created and added to the list of children of “Grandpa” while the third person - the class is inferred from the assigned feature - becomes a child of “Father”. All three instances will have their respective <em>name</em> assigned via a reflective invocation of the <em>setName</em> method. If one wants to add another child to “Father”, she can simply repeat the child assignment:</p>
+<ul>
+  <li>
+    <p>The method Workflow.addBean(Object) provides a means to apply global side-effects, which unfortunately is required sometimes. For instance, <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> can be used to initialize global EMF metadata such as the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">Epackage.Registry</a>.</p>
+  </li>
+  <li>
+    <p>The method Workflow.addComponent(..) accepts instances of <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a>, which is the primary concept of the workflow model of MWE2. The language generator component itself is an instance of IWorkflowComponent and can therefore be used within MWE2 workflows.</p>
+  </li>
+</ul>
 
-<pre><code class="language-mwe2">child = com.mycompany.Person {
-  name = "Father"
-  child = {
-    name = "Son"
-  }
-  child = {
-    name = "Daughter"
-  }
-}
-</code></pre>
+<p>We will now have a look at the component model used to configure the Xtext language generator.</p>
 
-<p>As you can see in the example above MWE2 can be used to instantiate arbitrary Java object models without any dependency or limitation to MWE2 specific implementations.</p>
+<h2 id="generator">The Language Generator</h2>
 
-<p><em>Hint: Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept: Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java implementation by means of F3 (Go To Declaration).</em></p>
+<p>Xtext provides a lot of generic implementations for the infrastructure of your language, but also uses code generation to create specialized components. Such generated components are for instance the parser, the serializer, the inferred Ecore model (if any) and a couple of convenient base classes for further configuration. The generator also contributes to shared project resources such as the <em>plugin.xml</em>, <em>MANIFEST.MF</em> and the <a href="#guicemodules">Guice modules</a>.</p>
 
-<p>This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please refer to the dedicated MWE2 <a href="306_mwe2.html">reference documentation</a> for additional information. We will now have a look at the component model used to configure the Language Generator.</p>
+<p>This documentation is about the new generator infrastructure introduced with Xtext 2.9. In order to migrate an older Xtext project to this new infrastructure, the recommended approach is to create a new Xtext project and copy the grammar and existing configuration from the old project to the new one step by step.</p>
 
-<h3 id="general-architecture">General Architecture</h3>
+<p>The entry point for Xtext code generation is <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGenerator.xtend">XtextGenerator</a>, which is composed of a <em>general configuration</em> and a set of <em>language configurations</em>. The general configuration describes the structure of your project as well as general settings for generating code. Each language configuration corresponds to a specific grammar file and allows to configure the generated code for the respective language. The actual code generation is performed by <em>generator fragments</em> contained in a language configuration.</p>
 
-<p>A language generator is composed of so called language configurations. For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. In addition, a language is configured with a list of <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java">generator fragments</a>. The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, the outline view, etc.</p>
+<p>In the following we see an exemplary language generator configuration written in MWE2:</p>
 
-<p><img src="images/generator-structure.png" alt="" /></p>
+<pre><code class="language-mwe2">module org.example.domainmodel.GenerateDomainmodel
 
-<h4 id="generator-fragment">Generator Fragments</h4>
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
 
-<p>The list of grammar fragments forms a chain of responsibility, that is they each get the chance to contribute to the generation of language infrastructure components and are called in the declared order. Each fragment gets the grammar of the language as an EMF model passed in and is able to generate code in one of the configured locations and contribute to several shared artifacts. A generator fragment must implement the interface <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java">IGeneratorFragment</a>.</p>
-
-<p>There is usually no need to write your own generator fragments and only rarely you might want to extend an existing one.</p>
-
-<h4 id="mwe-configuration">Configuration</h4>
-
-<p>As already explained we use MWE2 from EMFT in order to instantiate, configure and execute this structure of components. In the following we see an exemplary language generator configuration written in MWE2 configuration code: </p>
-
-<pre><code class="language-mwe2">module org.xtext.example.MyDsl
-
-import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
-
-var grammarURI = "classpath:/org/xtext/example/MyDsl.xtext"
-var file.extensions = "mydsl"
-var projectName = "org.xtext.example.mydsl"
-var runtimeProject = "../${projectName}"
+var rootPath = ".."
 
 Workflow {
-  bean = StandaloneSetup {
-    platformUri = "${runtimeProject}/.."
-  }
+    component = XtextGenerator {
+        configuration = {
+            project = StandardProjectConfig {
+                baseName = "org.example.domainmodel"
+                rootPath = rootPath
+                eclipsePlugin = {
+                    enabled = true
+                }
+                createEclipseMetaData = true
+            }
+            code = {
+                encoding = "UTF-8"
+            }
+        }
+        language = StandardLanguage {
+            name = "org.example.domainmodel.Domainmodel"
+            fileExtensions = "dmodel"
 
-  component = DirectoryCleaner {
-    directory = "${runtimeProject}/src-gen"
-  }
-
-  component = DirectoryCleaner {
-    directory = "${runtimeProject}.ui/src-gen"
-  }
-
-  component = Generator {
-    pathRtProject = runtimeProject
-    pathUiProject = "${runtimeProject}.ui"
-    projectNameRt = projectName
-    projectNameUi = "${projectName}.ui"
-
-    language = {
-      uri = grammarURI
-      fileExtensions = file.extensions
-
-      // Java API to access grammar elements
-      fragment = grammarAccess.GrammarAccessFragment {}
-
-      /* more fragments to configure the language */
-      ...
+            serializer = {
+                generateStub = false
+            }
+        }
     }
-  }
 }
 </code></pre>
 
-<p>Here the root element is <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow</a> and is part of the very slim runtime model shipped with MWE2. It accepts <code>bean</code>s and <code>component</code>s. A <code>var</code> declaration is a first class concept of MWE2’s configuration language and defines a variable which can be reset from outside, i.e. when calling the module. It allows to externalize some common configuration parameters. Note that you can refer to the variables using the <code>${variable-name}</code> notation. </p>
+<p>This example is similar to the workflows generated by the Xtext project wizard when you create new projects. It uses two convenience classes <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/model/project/StandardProjectConfig.xtend">StandardProjectConfig</a> and <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/StandardLanguage.xtend">StandardLanguage</a>, both of which are designed to apply default configurations that work for the majority of language projects.</p>
 
-<p>The method <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow.addBean(Object)</a> does nothing but provides a means to apply global side-effects, which unfortunately is required sometimes. In this example we do a so called <em>EMF stand-alone setup</em>. This class initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, e.g. it allows to populate EMF’s singletons like the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">Registry</a>.</p>
+<h3 id="project-configuration">Project Configuration</h3>
 
-<p>Following the <code>bean</code> assignment there are three <code>component</code> elements. The <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow.addComponent()</a> method accepts instances of <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a>, which is the primary concept of MWE2’s workflow model. The language generator component itself is an instance of <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a> and can therefore be used within MWE2 workflows. </p>
+<p>The Xtext generator needs to know the structure of your project in order to generate code into the correct paths. The base class for describing the project structure is <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/model/project/XtextProjectConfig.xtend">XtextProjectConfig</a>. It is composed of several descriptors for the individual subprojects:</p>
 
-<h3 id="standard-generator-fragments">Standard Generator Fragments</h3>
+<ul>
+  <li><code class="highlighter-rouge">runtime</code> – The basic language features: grammar definition, parser, serializer, scoping, validation, etc.</li>
+  <li><code class="highlighter-rouge">runtimeTest</code> – Unit tests for <code class="highlighter-rouge">runtime</code></li>
+  <li><code class="highlighter-rouge">genericIde</code> – Platform-independent IDE features such as services for content assist</li>
+  <li><code class="highlighter-rouge">eclipsePlugin</code> – Integration plug-in for Eclipse</li>
+  <li><code class="highlighter-rouge">eclipsePluginTest</code> – Unit tests for <code class="highlighter-rouge">eclipsePlugin</code></li>
+  <li><code class="highlighter-rouge">ideaPlugin</code> – Integration plug-in for IntelliJ IDEA</li>
+  <li><code class="highlighter-rouge">web</code> – Integration into web applications</li>
+</ul>
 
-<p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation. Also have a look at what the Xtext wizard provides and how the workflow configuration in the various example languages look like.</p>
+<p>These subprojects are of type <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/model/project/SubProjectConfig.xtend">SubProjectConfig</a> and offer important parameters:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Class</th>
-      <th style="text-align: left">Generated Artifacts</th>
-      <th style="text-align: left">Related Documentation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java">EcoreGeneratorFragment</a></td>
-      <td style="text-align: left">EMF code for generated models</td>
-      <td style="text-align: left"><a href="301_grammarlanguage.html#metamodel-inference">Model inference</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java">XtextAntlrGeneratorFragment</a></td>
-      <td style="text-align: left">ANTLR grammar, parser, lexer and related services</td>
-      <td style="text-align: left"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java">GrammarAccessFragment</a></td>
-      <td style="text-align: left">Access to the grammar</td>
-      <td style="text-align: left"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java">ResourceFactoryFragment</a></td>
-      <td style="text-align: left">EMF resource factory</td>
-      <td style="text-align: left"><a href="308_emf_integration.html#xtext-resource">Xtext Resource</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java">ParseTreeConstructorFragment</a></td>
-      <td style="text-align: left">Model-to-text serialization</td>
-      <td style="text-align: left"><a href="303_runtime_concepts.html#serialization">Serialization</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java">ImportNamespacesScopingFragment</a></td>
-      <td style="text-align: left">Index-based scoping</td>
-      <td style="text-align: left"><a href="303_runtime_concepts.html#index-based">Index-based namespace scoping</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java">JavaValidatorFragment</a></td>
-      <td style="text-align: left">Model validation</td>
-      <td style="text-align: left"><a href="303_runtime_concepts.html#custom-validation">Model validation</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java">FormatterFragment</a></td>
-      <td style="text-align: left">Code formatter</td>
-      <td style="text-align: left"><a href="303_runtime_concepts.html#formatting">Code formatter</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java">LabelProviderFragment</a></td>
-      <td style="text-align: left">Label provider</td>
-      <td style="text-align: left"><a href="304_ide_concepts.html#label-provider">Label provider</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.java">OutlineTreeProviderFragment</a></td>
-      <td style="text-align: left">Outline view configuration</td>
-      <td style="text-align: left"><a href="304_ide_concepts.html#outline">Outline</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java">JavaBasedContentAssistFragment</a></td>
-      <td style="text-align: left">Java-based content assist</td>
-      <td style="text-align: left"><a href="304_ide_concepts.html#content-assist">Content assist</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java">XtextAntlrUiGeneratorFragment</a></td>
-      <td style="text-align: left">Content assist helper based on ANTLR</td>
-      <td style="text-align: left"><a href="304_ide_concepts.html#content-assist">Content assist</a></td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li><code class="highlighter-rouge">enabled</code> – whether the subproject is present or not</li>
+  <li><code class="highlighter-rouge">name</code> – the name of the subproject</li>
+  <li><code class="highlighter-rouge">root</code> – the path to the root folder of the subproject</li>
+  <li><code class="highlighter-rouge">src</code> – the path to the folder for Java source files</li>
+  <li><code class="highlighter-rouge">srcGen</code> – the path to the folder for generated Java source files</li>
+  <li><code class="highlighter-rouge">manifest</code> – configuration for the MANIFEST.MF file</li>
+  <li><code class="highlighter-rouge">pluginXml</code> – configuration for the plugin.xml file</li>
+</ul>
 
-<h2 id="dependency-injection">Dependency Injection in Xtext with Google Guice</h2>
+<p>Since setting all these parameters manually would be tedious and the structure of most Xtext projects is quite similar, it is advisable to use the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/model/project/StandardProjectConfig.xtend">StandardProjectConfig</a> as shown in our example above. This specialized project configuration applies default values to all parameters, so you only have to specify those where you wish to override the defaults. For example, given the configuration</p>
 
-<p>All Xtext components are assembled by means of Dependency Injection (DI). This means basically that whenever some code is in need for functionality (or state) from another component, one just declares the dependency rather then stating how to resolve it, i.e. obtaining that component.</p>
-
-<p>For instance when some code wants to use a scope provider, it just declares a field (or method or constructor) and adds the <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Inject.html">Inject</a> annotation: </p>
-
-<pre><code class="language-java">public class MyLanguageLinker extends Linker {
-
-  @Inject
-  private IScopeProvider scopeProvider;
-
+<pre><code class="language-mwe2">project = StandardProjectConfig {
+    baseName = "org.example.domainmodel"
+    rootPath = rootPath
+    eclipsePlugin = {
+        enabled = true
+    }
+    createEclipseMetaData = true
 }
 </code></pre>
 
-<p>It is not the duty of the client code to care about where the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> comes from or how it is created. When above’s class is instantiated, Guice sees that it requires an instance of IScopeProvider and assigns it to the specified field or method parameter. This of course only works, if the object itself is created by Guice. In Xtext almost every instance is created that way and therefore the whole dependency net is controlled and configured by the means of Google Guice.</p>
+<p>we obtain a runtime project with the name <code class="highlighter-rouge">org.example.domainmodel</code>, an Eclipse integration project with the name <code class="highlighter-rouge">org.example.domainmodel.ui</code>, and a generic IDE project with the name <code class="highlighter-rouge">org.example.domainmodel.ide</code> (the generic IDE project is enabled automatically if any integration project is enabled). The source folder, MANIFEST.MF and plugin.xml paths are set to the defaults for Eclipse plug-in projects. If you don’t want a separate IDE project you can merge its content into another subproject by assigning it the same name:</p>
 
-<p>Guice of course needs to know how to instantiate real objects for declared dependencies. This is done in so called <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html">Modules</a>. A <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html">Module</a> defines a set of mappings from types to either existing instances, instance providers or concrete classes. Modules are implemented in Java. Here’s an example:</p>
-
-<pre><code class="language-java">public class MyDslRuntimeModule 
-  extends AbstractMyDslRuntimeModule {
-  
-  @Override
-  public void configure(Binder binder) {
-    super.configure(binder);
-    binder
-      .bind(IScopeProvider.class)
-      .to(MyConcreteScopeProvider.class);
-  }
+<pre><code class="language-mwe2">project = StandardProjectConfig {
+    baseName = "org.example.domainmodel"
+    rootPath = rootPath
+    genericIde = {
+        name = "org.example.domainmodel.ui"
+    }
+    eclipsePlugin = {
+        enabled = true
+    }
+    createEclipseMetaData = true
 }
 </code></pre>
 
-<p>With plain Guice modules one implements a method called configure and gets a <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html">Binder</a> passed in. That binder provides a fluent API to define the mentioned mappings. This was just a very brief and simplified description. We highly recommend to have a look at <a href="https://github.com/google/guice">the Google Guice website</a> to learn more. </p>
+<p>This leads to the generic IDE code being generated into the Eclipse integration plug-in.</p>
 
-<h3 id="guicemodules">The Module API</h3>
+<h3 id="other-general-configuration">Other General Configuration</h3>
 
-<p>Xtext comes with a slightly enhanced module API. For your language you get two different modules: One for the runtime bundle which is used when executing your language infrastructure outside of Eclipse such as on the build server. The other is located in the UI bundle and adds or overrides bindings when Xtext is used within an Eclipse environment. </p>
+<p>The configuration block of our generator workflow example above contains a <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/CodeConfig.xtend">CodeConfig</a> as sibling of <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/model/project/StandardProjectConfig.xtend">StandardProjectConfig</a>. As the name suggests, the parameters of CodeConfig influence the generated code:</p>
 
-<p>The enhancement we added to Guice’s Module API is that we provide an abstract base class, which reflectively looks for certain methods in order to find declared bindings. The most common kind of method is :</p>
+<ul>
+  <li><code class="highlighter-rouge">encoding</code> – The character encoding</li>
+  <li><code class="highlighter-rouge">fileHeader</code> – The file header comment to insert at the beginning of each file</li>
+  <li><code class="highlighter-rouge">preferXtendStubs</code> – Whether to prefer Xtend over Java for stub files to be implemented manually; this option applies only to files in <code class="highlighter-rouge">src</code> folders, while for <code class="highlighter-rouge">src-gen</code> folders Java files are always generated.</li>
+</ul>
 
-<pre><code class="language-java">public Class&lt;? extends IScopeProvider&gt; bindIScopeProvider() {
-  return MyConcreteScopeProvider.class;
+<p>The container for the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/model/project/StandardProjectConfig.xtend">StandardProjectConfig</a> and <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/CodeConfig.xtend">CodeConfig</a> is of type <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/DefaultGeneratorModule.xtend">DefaultGeneratorModule</a> and is assigned to the property <code class="highlighter-rouge">configuration</code> of the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGenerator.xtend">XtextGenerator</a>. The DefaultGeneratorModule is actually a <a href="https://github.com/google/guice">Guice</a> module, which can be subclassed in a similar way as explained in <a href="#dependency-injection">Dependency Injection</a> for overriding default configurations. This allows to alter the configuration in places that are not accessible through MWE2. For instance, you could bind your own subclass of <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGeneratorNaming.xtend">XtextGeneratorNaming</a> in order to influence the names of generated classes.</p>
+
+<h3 id="language-configuration">Language Configuration</h3>
+
+<p>The base class for describing a language configuration is <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGeneratorLanguage.xtend">XtextGeneratorLanguage</a>, whose most important parameters are</p>
+
+<ul>
+  <li><code class="highlighter-rouge">name</code> – The name of the language exactly as specified in the first line of your grammar definition</li>
+  <li><code class="highlighter-rouge">grammarUri</code> – A <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a> pointing to the grammar definition file; if omitted, the grammar file is assumed to be in the Java source folder of the runtime project and to be named according to the language name.</li>
+  <li><code class="highlighter-rouge">fileExtensions</code> – A comma-separated list of file extensions for the language</li>
+  <li><code class="highlighter-rouge">referencedResources</code> – Additional resources to load (see <a href="#importing-metamodels">Importing Existing Metamodels</a>)</li>
+</ul>
+
+<p>The actual code generation is performed by <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/IXtextGeneratorFragment.xtend">generator fragments</a>, which can be added to a language configuration using the <code class="highlighter-rouge">fragment</code> property. The Xtext project wizard creates a workflow that employs the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/StandardLanguage.xtend">StandardLanguage</a>, which specializes XtextGeneratorLanguage in a similar way as StandardProjectConfig specializes XtextProjectConfig (see <a href="#project-configuration">Project Configuration</a>). The main contribution of StandardLanguage is a default list of generator fragments that includes all features of Xtext. These fragments automatically adapt their generated code to your language and project configuration. Some fragments offer their own configuration parameters, hence each fragment can be accessed via a dedicated property in StandardLanguage. For instance, in the language configuration</p>
+
+<pre><code class="language-mwe2">language = StandardLanguage {
+    name = "org.example.domainmodel.Domainmodel"
+    fileExtensions = "dmodel"
+
+    serializer = {
+        generateStub = false
+    }
+}
+</code></pre>
+<p>we see the <code class="highlighter-rouge">generateStub</code> parameter disabled for the <code class="highlighter-rouge">serializer</code> fragment, which means that the fragment should not create any stub file for customizing serialization.</p>
+
+<p>It is not possible to remove fragments from the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/StandardLanguage.xtend">StandardLanguage</a>. If you need a language configuration where one or more of the default fragments are omitted, you can do so by using <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGeneratorLanguage.xtend">XtextGeneratorLanguage</a> instead and listing the required fragments explicitly. You can take the following configuration as a template:</p>
+
+<pre><code class="language-mwe2">language = XtextGeneratorLanguage {
+    name = "org.example.domainmodel.Domainmodel"
+    fileExtensions = "dmodel"
+    referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+
+    fragment = grammarAccess.GrammarAccessFragment2 {}
+    fragment = ecore.EMFGeneratorFragment2 {}
+    fragment = serializer.SerializerFragment2 {}
+    fragment = resourceFactory.ResourceFactoryFragment2 {}
+    fragment = parser.antlr.XtextAntlrGeneratorFragment2 {}
+    fragment = validation.ValidatorFragment2 {}
+    fragment = scoping.ImportNamespacesScopingFragment2 {}
+    fragment = exporting.QualifiedNamesFragment2 {}
+    fragment = builder.BuilderIntegrationFragment2 {}
+    fragment = generator.GeneratorFragment2 {}
+    fragment = formatting.Formatter2Fragment2 {}
+    fragment = ui.labeling.LabelProviderFragment2 {}
+    fragment = ui.outline.QuickOutlineFragment2 {}
+    fragment = ui.outline.OutlineTreeProviderFragment2 {}
+    fragment = ui.quickfix.QuickfixProviderFragment2 {}
+    fragment = ui.contentAssist.ContentAssistFragment2 {}
+    fragment = junit.Junit4Fragment2 {}
+    fragment = ui.refactoring.RefactorElementNameFragment2 {}
+    fragment = types.TypesGeneratorFragment2 {}
+    fragment = xbase.XtypeGeneratorFragment2 {}
+    fragment = xbase.XbaseGeneratorFragment2 {}
+    fragment = ui.templates.CodetemplatesGeneratorFragment2 {}
+    fragment = ui.compare.CompareFragment2 {}
+    fragment = idea.parser.antlr.XtextAntlrIDEAGeneratorFragment {}
+    fragment = idea.IdeaPluginGenerator {}
+    fragment = web.WebIntegrationFragment {
+        framework = "Ace"
+    }
 }
 </code></pre>
 
-<p>which would do the same as the code snippet above. It simply declares a binding from <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> to <em>MyConcreteScopeProvider</em>. That binding will make Guice instantiate and inject a new instance of <em>MyConcreteScopeProvider</em> whenever a dependency to <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> is declared.</p>
+<h3 id="importing-metamodels">Importing Existing Metamodels</h3>
 
-<p>Having a method per binding allows to deactivate individual bindings by overriding the corresponding methods and either change the binding by returning a different target type or removing that binding completely by returning null.</p>
+<p>As explained in the <a href="301_grammarlanguage.html#epackage-import">grammar language reference</a> it is possible to import existing metamodels into your language definition.</p>
 
-<p>There are two additional kinds of binding-methods supported. The first one allows to configure a provider. A <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Provider.html">Provider</a> is an interface with just one method : </p>
+<p>You can use namespace URIs in your grammar file in order to import existing EPackages. This is generally preferable, and other URI schemes are considered deprecated. With a namespace URI the package will be read from the Xtext index and therefore your grammar is independent from the concrete location of the respective ecore file. You have to make sure though that the ecore file is contained in a project that is managed by Xtext. Therefore the project has to have the Xtext project nature attached. Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if the referencing project itself is an Xtext project.</p>
 
-<pre><code class="language-java">public interface Provider&lt;T&gt; {
+<p>In order to be able to find the referenced package in the language generator, its Ecore generator model has to be mentioned in the language configuration:</p>
 
-  /**
-   * Provides an instance of {@code T}. Must never return {@code null}.
-   */
-  T get();
+<pre><code class="language-mwe2">language = StandardLanguage {
+    name = "org.example.domainmodel.Domainmodel"
+    fileExtensions = "dmodel"
+    referencedResource =
+        "platform:/resource/org.example.domainmodel/model/Domainmodel.genmodel"
 }
 </code></pre>
 
-<p>This one can be used if you need a hook whenever an instance of a certain type is created. For instance if you want to provide lazy access to a singleton or you need to do some computation each time an instance is created (i.e. factory). If you want to point to a provider rather than to a concrete class you can use the following binding method.</p>
+<p>If you are importing more than one metamodel, you can add more <code class="highlighter-rouge">referencedResource</code> declarations as required.</p>
 
-<pre><code class="language-java">public Class&lt;? extends Provider&lt;IScopeProvider&gt;&gt; 
-  provideIScopeProvider() {
-    return MyConcreteScopeProviderFactory.class;
+<p>In some occasions this simple way of referencing metamodels is not sufficient; you can then use the <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> as a Workflow bean for fine-tuning your EMF setup. Example:</p>
+
+<pre><code class="language-mwe2">bean = StandaloneSetup {
+    platformUri = "${rootPath}"
+    scanClassPath = true
+    registerGeneratedEPackage = "my.project.DomainmodelPackage"
+    registerGenModelFile = "platform:/resource/my.project/model/Domainmodel.genmodel"
 }
 </code></pre>
-
-<p>Note: Please forgive us the overuse of the term <em>provider</em>. The <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> is not a Guice <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Provider.html">Provider</a>.</p>
-
-<p>That binding tells Guice to instantiate <em>MyConcreteScopeProviderFactory</em> and invoke get() in order to obtain an instance of <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> for clients having declared a dependency to that type. Both mentioned methods are allowed to return an instance instead of a type. This may be useful if some global state should be shared in the application:</p>
-
-<pre><code class="language-java">public Provider&lt;IScopeProvider&gt; provideIScopeProvider() {
-  return new MyConcreteScopeProviderFactory();
-}
-</code></pre>
-
-<p>or</p>
-
-<pre><code class="language-java">public IScopeProvider bindIScopeProvider() {
-  return new MyConcreteScopeProvider();
-}
-</code></pre>
-
-<p>respectively.</p>
-
-<p>The last binding method provided by Xtext allows to do anything you can do with Guice’s binding API, since it allows you to use the <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html">Binder</a> directly. If your method’s name starts with the name ‘configure’, has a return type <code>void</code> and accepts one argument of type <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html">Binder</a>:</p>
-
-<pre><code class="language-java">public void configureIScopeProvider(Binder binder) {
-  binder.bind(IScopeProvider.class).to(MyConcreteScopeProvider.class);
-} 
-</code></pre>
-
-<h3 id="obtaining-an-injector">Obtaining an Injector</h3>
-
-<p>In every application wired up with Guice there is usually one point where you initialize an <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html">Injector</a> using the modules declared. That injector is used to create the root instance of the whole application. In plain Java environments this is something that’s done in the main method. It could look like this:</p>
-
-<pre><code class="language-java">public static void main(String[] args) {
-  Injector injector = Guice.createInjector(
-    new MyDslRuntimeModule());
-  MyApplication application = injector.getInstance(
-    MyApplication.class);
-  application.run();
-}
-</code></pre>
-
-<p>In Xtext, you should never instantiate the injector of your language yourself. The sections <a href="303_runtime_concepts.html#runtime-setup">Runtime Setup</a> and <a href="303_runtime_concepts.html#equinox-setup">Equinox Setup</a> explain how to access it in different scenarios. </p>
-
-<p>These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we strongly encourage you to read through the documentation on <a href="http://code.google.com/p/google-guice/">the website of Google Guice</a>. </p>
 
 <hr />
 
-<p><strong><a href="303_runtime_concepts.html">Next Chapter: Runtime Concepts</a></strong></p>
+<h2 id="dependency-injection">Dependency Injection</h2>
+
+<p>All Xtext components are assembled by means of dependency injection (DI). This means basically that whenever some code is in need for functionality (or state) from another component, one just declares the dependency rather then stating how to resolve it, i.e. obtaining that component.</p>
+
+<p>For instance when some code wants to use a scope provider, it just declares a field (or method or constructor) and adds the <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Inject.html">Inject</a> annotation:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyLanguageLinker</span> <span class="kd">extends</span> <span class="n">Linker</span> <span class="o">{</span>
+
+    <span class="nd">@Inject</span>
+    <span class="kd">private</span> <span class="n">IScopeProvider</span> <span class="n">scopeProvider</span><span class="o">;</span>
+
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>It is not the duty of the client code to care about where the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> implementation comes from or how it is created. When the above class is instantiated, Guice sees that it requires an instance of IScopeProvider and assigns it to the specified field or method parameter. This of course only works if the object itself is created by Guice. In Xtext almost every instance is created that way and therefore the whole dependency net is controlled and configured by the means of Guice.</p>
+
+<p>Guice of course needs to know how to instantiate real objects for declared dependencies. This is done in so-called <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html">Modules</a>. A <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html">Module</a> defines a set of mappings from types to either existing instances, instance providers or concrete classes. Modules are implemented in Java. Here’s an example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyDslRuntimeModule</span> <span class="kd">implements</span> <span class="n">Module</span> <span class="o">{</span>
+  
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">configure</span><span class="o">(</span><span class="n">Binder</span> <span class="n">binder</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">binder</span>
+            <span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="n">IScopeProvider</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">to</span><span class="o">(</span><span class="n">MyConcreteScopeProvider</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>With plain Guice modules one implements a method called configure and gets a <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html">Binder</a> passed in. That binder provides a fluent API to define the mentioned mappings.</p>
+
+<h3 id="guicemodules">The Module API</h3>
+
+<p>After running the Xtext generator you get several different modules for your language: one for the base project and one for each platform integration project. For instance, for a language named <em>Domainmodel</em> we would have a <em>DomainmodelRuntimeModule</em>, a <em>DomainmodelUiModule</em> (for the Eclipse integration), a <em>DomainmodelIdeaModule</em> (for the IntelliJ IDEA integration), and a <em>DomainmodelWebModule</em>. The bindings from the runtime module are shared by all integration projects.</p>
+
+<p>Xtext comes with a slightly enhanced module API. The abstract base class <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java">AbstractGenericModule</a> looks reflectively for certain methods in order to find declared bindings. The most common kind of method is</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">IScopeProvider</span><span class="o">&gt;</span> <span class="n">bindIScopeProvider</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">MyConcreteScopeProvider</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>which would do the same as the code snippet above. It simply declares a binding from <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> to <em>MyConcreteScopeProvider</em>. That binding will make Guice instantiate and inject a new instance of <em>MyConcreteScopeProvider</em> whenever a dependency to <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> is declared.</p>
+
+<p>Having one method per binding allows to deactivate individual bindings by overriding the corresponding methods and either change the binding by returning a different target type or removing that binding completely by returning null.</p>
+
+<p>There are two additional kinds of binding-methods supported. The first one allows to configure a <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Provider.html">Provider</a>, which is like a factory for one specific type. This one can be used if you need a hook whenever an instance of a certain type is created. For instance if you want to provide lazy access to a singleton or you need to do some computation each time an instance is created (i.e. factory). If you want to point to a provider rather than to a concrete class you can use the following binding method.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Provider</span><span class="o">&lt;</span><span class="n">IScopeProvider</span><span class="o">&gt;&gt;</span> <span class="n">provideIScopeProvider</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">MyConcreteScopeProviderFactory</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Note: Please forgive us the overuse of the term <em>provider</em>. The <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> is not a Guice <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Provider.html">Provider</a>.</p>
+
+<p>That binding tells Guice to instantiate <em>MyConcreteScopeProviderFactory</em> and invoke get() in order to obtain an instance of <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> for clients having declared a dependency to that type. Both mentioned binding methods are allowed to return an instance instead of a type. This may be useful if some global state should be shared in the application. For a simple instance this would be</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">IScopeProvider</span> <span class="nf">bindIScopeProvider</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">MyConcreteScopeProvider</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>and for a provider binding</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Provider</span><span class="o">&lt;</span><span class="n">IScopeProvider</span><span class="o">&gt;</span> <span class="n">provideIScopeProvider</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">MyConcreteScopeProviderFactory</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>The third binding method provided by Xtext allows to do anything you can do with the binding API of Guice, since it allows you to use the <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html">Binder</a> directly. The name of the method has to start with the ‘configure’, the return type must be <code class="highlighter-rouge">void</code>, and it must accept one argument of type <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html">Binder</a>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">configureIScopeProvider</span><span class="p">(</span><span class="n">Binder</span> <span class="n">binder</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">binder</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="n">IScopeProvider</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">to</span><span class="o">(</span><span class="n">MyConcreteScopeProvider</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="o">}</span> 
+</code></pre>
+</div>
+
+<p>These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we strongly encourage you to read through the documentation on <a href="https://github.com/google/guice">the website of Google Guice</a>.</p>
+
+<h3 id="obtaining-an-injector">Obtaining an Injector</h3>
+
+<p>In every application wired up with Guice there is usually one point where you initialize an <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html">Injector</a> using the modules declared. Usually this is done with the static methods of <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Guice.html">Guice</a>. In Xtext, however, you should never instantiate the injector of your language yourself.</p>
+
+<p>Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java">ISetup</a> implementations in normal mode and uses the extension mechanism of Eclipse when it should be configured in an OSGi environment.</p>
+
+<h4 id="runtime-setup">Runtime Setup</h4>
+
+<p>For each language there is an implementation of <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java">ISetup</a> generated. It implements a method called <code class="highlighter-rouge">createInjectorAndDoEMFRegistration()</code>, which can be called to do the initialization of the language infrastructure.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Injector</span> <span class="n">injector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyDslStandaloneSetup</span><span class="o">().</span><span class="na">createInjectorAndDoEMFRegistration</span><span class="o">();</span>
+    <span class="n">MyApplication</span> <span class="n">application</span> <span class="o">=</span> <span class="n">injector</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">MyApplication</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="n">application</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>The setup method returns an <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html">Injector</a>, which can further be used to obtain a parser, etc. It also registers the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Resource.Factory</a> and generated <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> to the respective global registries provided by EMF. So basically after having run the setup and you can start using EMF API to load and store models of your language.</p>
+
+<p><strong>Caveat:</strong> The <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java">ISetup</a> class is intended to be used for runtime and for unit testing, only. if you use it in an Equinox scenario, you will very likely break the running application because entries to the global registries will be overwritten.</p>
+
+<h4 id="equinox-setup">Setup within Eclipse-Equinox (OSGi)</h4>
+
+<p>Within Eclipse we have a generated <em>Activator</em>, which creates a Guice <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html">Injector</a> using the <a href="#guicemodules">modules</a>. In addition an <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtensionFactory.html">IExecutableExtensionFactory</a> is generated for each language, which is used to create <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtension.html">IExecutableExtensions</a>. This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation.</p>
+
+<p>The only thing you have to do in order to use this factory is to prefix the class with the generated <em>ExecutableExtensionFactory</em> name followed by a colon.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;extension</span> <span class="na">point=</span><span class="s">"org.eclipse.ui.editors"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;editor</span>
+    <span class="na">class=</span>
+      <span class="s">"example.MyDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"</span>
+    <span class="na">contributorClass=</span>
+      <span class="s">"org.eclipse.ui.editors.text.TextEditorActionContributor"</span>
+    <span class="na">default=</span><span class="s">"true"</span>
+    <span class="na">extensions=</span><span class="s">"mydsl"</span>
+    <span class="na">id=</span><span class="s">"org.eclipse.xtext.example.MyDsl"</span>
+    <span class="na">name=</span><span class="s">"MyDsl Editor"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/editor&gt;</span>
+<span class="nt">&lt;/extension&gt;</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="logging">Logging</h2>
+
+<p>Xtext uses <a href="http://logging.apache.org/log4j/">Apache Log4j</a> for logging. It is configured using files named <em>log4j.properties</em>, which are looked up in the root of the Java class path. If you want to change or provide configuration at runtime (i.e. non-OSGi), all you have to do is putting such a <em>log4j.properties</em> in place and make sure that it is not overridden by other <em>log4j.properties</em> in previous class path entries.</p>
+
+<p>In OSGi you provide configuration by creating a fragment for <em>org.apache.log4j</em>. In this case you need to make sure that there is not any second fragment contributing a <em>log4j.properties</em> file.</p>
+
+<hr />
+
+<p><strong><a href="303_runtime_concepts.html">Next Chapter: Language Implementation</a></strong></p>
 
 
 </body>

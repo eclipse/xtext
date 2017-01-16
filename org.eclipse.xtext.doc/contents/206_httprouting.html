@@ -27,7 +27,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>For server-side web development one needs to match any incoming HTTP requests to some handling code. A request is defined by a HTTP method (i.e. GET, POST, etc.), a URL and maybe some other data (headers, parameters, etc.). In the Java world there are many different solutions to this problem. Java Servlets come with an external configuration (web.xml), where you configure what servlet should be called for which URLs. JAX-RS (JSR-311) uses annotations to match incoming URLs and other frameworks have their own external DSLs for that.</p>
 
-<p>The HTTP routing language explained in this section uses an approach very similar to the one from the <a href="http://playframework.org">Play framework</a>. You basically declare a list of URL patterns and explain what to do for each case. In contrast to Play! which heavily relies on static methods, you can also declare so called dependencies which are translated to fields annotated with <code>@Inject</code>. So this DSL plays nicely with dependency injection and especially with the <a href="205_guice.html">Guice modules DSL</a>.</p>
+<p>The HTTP routing language explained in this section uses an approach very similar to the one from the <a href="http://playframework.org">Play framework</a>. You basically declare a list of URL patterns and explain what to do for each case. In contrast to Play! which heavily relies on static methods, you can also declare so called dependencies which are translated to fields annotated with <code class="highlighter-rouge">@Inject</code>. So this DSL plays nicely with dependency injection and especially with the <a href="205_guice.html">Guice modules DSL</a>.</p>
 
 <pre><code class="language-routing">inject GuessTheNumber controller
 
@@ -35,7 +35,7 @@ GET /guess/:theGuess
   do controller.handleGuess(theGuess)
 </code></pre>
 
-<p>As you can see, you can have named variable placeholders in the URL and use them in the <code>do</code>-part. There also is a <code>when</code>-part which allows to specify an additional condition using the request object as well as any parameters:</p>
+<p>As you can see, you can have named variable placeholders in the URL and use them in the <code class="highlighter-rouge">do</code>-part. There also is a <code class="highlighter-rouge">when</code>-part which allows to specify an additional condition using the request object as well as any parameters:</p>
 
 <pre><code class="language-routing">inject GuessTheNumber controller
 
@@ -49,11 +49,11 @@ GET /guess/:theGuess
 
 <h2 id="routing-running">Running the Example</h2>
 
-<p>The example project’s name is <em>org.xtext.httprouting.examples</em> and includes a simple but runnable number guessing game. Just start the server (an embedded Jetty) by running <code>framework.StartServer</code> as a Java Application. Then point your browser to the URL <a href="http://localhost:8080/guess">http://localhost:8080/guess</a>.</p>
+<p>The example project’s name is <em>org.xtext.httprouting.examples</em> and includes a simple but runnable number guessing game. Just start the server (an embedded Jetty) by running <code class="highlighter-rouge">framework.StartServer</code> as a Java Application. Then point your browser to the URL <a href="http://localhost:8080/guess">http://localhost:8080/guess</a>.</p>
 
 <h2 id="routing-grammar">Grammar</h2>
 
-<p>The Routing DSL extends <em>org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations</em> to make use of expressions predefined by <a href="305_xbase.html#xbase-expressions">Xbase</a> plus support for Annotations. </p>
+<p>The Routing DSL extends <em>org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations</em> to make use of expressions predefined by <a href="305_xbase.html#xbase-expressions">Xbase</a> plus support for Annotations.</p>
 
 <pre><code class="language-xtext">grammar org.xtext.httprouting.Route 
   with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
@@ -140,37 +140,38 @@ GET /guess/:theGuess
   <li>
     <p>Java:</p>
 
-    <pre><code class="language-java">@SuppressWarnings("serial")
-public class NumberGuessing extends HttpServlet {
-  @Inject
-  private GuessTheNumber controller;
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"serial"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumberGuessing</span> <span class="kd">extends</span> <span class="n">HttpServlet</span> <span class="o">{</span>
+  <span class="nd">@Inject</span>
+  <span class="kd">private</span> <span class="n">GuessTheNumber</span> <span class="n">controller</span><span class="o">;</span>
       
-  private static Pattern _pattern2 = Pattern.compile("/guess/(\\w+)");
+  <span class="kd">private</span> <span class="kd">static</span> <span class="n">Pattern</span> <span class="n">_pattern2</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="s">"/guess/(\\w+)"</span><span class="o">);</span>
       
-  public void _doGet2(final HttpServletRequest request, 
-                      final HttpServletResponse response, 
-                      final String theGuess) {
-    this.controller.handleGuess(theGuess);
-  }
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">_doGet2</span><span class="o">(</span><span class="kd">final</span> <span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> 
+                      <span class="kd">final</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> 
+                      <span class="kd">final</span> <span class="n">String</span> <span class="n">theGuess</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">controller</span><span class="o">.</span><span class="na">handleGuess</span><span class="o">(</span><span class="n">theGuess</span><span class="o">);</span>
+  <span class="o">}</span>
       
-  @Override
-  public void doGet(final HttpServletRequest request, 
-                    final HttpServletResponse response) {
-    String url =  request.getRequestURL().toString();
-    {
-      Matcher _matcher = _pattern2.matcher(url);
-      if (_matcher.find()) {
-        String theGuess = _matcher.group(1);
-        _doGet2(request, response, theGuess);
-      }
-    }
-  }
-}
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="n">doGet</span><span class="o">(</span><span class="kd">final</span> <span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> 
+                    <span class="kd">final</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">url</span> <span class="o">=</span>  <span class="n">request</span><span class="o">.</span><span class="na">getRequestURL</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+    <span class="o">{</span>
+      <span class="n">Matcher</span> <span class="n">_matcher</span> <span class="o">=</span> <span class="n">_pattern2</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">_matcher</span><span class="o">.</span><span class="na">find</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">theGuess</span> <span class="o">=</span> <span class="n">_matcher</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">_doGet2</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">,</span> <span class="n">theGuess</span><span class="o">);</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
+    </div>
   </li>
 </ul>
 
-<p>As you can see the expression <code>controller.handleGuess(theGuess)</code> is put into a method with three parameters. This is done in the following method from <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.httprouting/src/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.xtend">RouteJvmModelInferrer</a>:</p>
+<p>As you can see the expression <code class="highlighter-rouge">controller.handleGuess(theGuess)</code> is put into a method with three parameters. This is done in the following method from <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.httprouting/src/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.xtend">RouteJvmModelInferrer</a>:</p>
 
 <pre><code class="language-xtend">  /**
    * Creates a method for the route's target call.
@@ -188,7 +189,7 @@ public class NumberGuessing extends HttpServlet {
   }
 </code></pre>
 
-<p>Just because of that code you can now refer to the local variables <code>request</code>, <code>response</code>, and <code>theGuess</code>. Also it defines that the expected type is <code>void</code> so you are not allowed to write things like <code>return 42</code>. </p>
+<p>Just because of that code you can now refer to the local variables <code class="highlighter-rouge">request</code>, <code class="highlighter-rouge">response</code>, and <code class="highlighter-rouge">theGuess</code>. Also it defines that the expected type is <code class="highlighter-rouge">void</code> so you are not allowed to write things like <code class="highlighter-rouge">return 42</code>.</p>
 
 <hr />
 

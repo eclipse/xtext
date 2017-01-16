@@ -4,11 +4,11 @@
 		<topic href="contents/102_domainmodelwalkthrough.html" label="15 Minutes Tutorial">
 			<topic href="contents/102_domainmodelwalkthrough.html#create-a-new-xtext-project" label="Create A New Xtext Project">
 			</topic>
-			<topic href="contents/102_domainmodelwalkthrough.html#write-your-own-grammar" label="Write Your Own Grammar">
+			<topic href="contents/102_domainmodelwalkthrough.html#write-the-grammar" label="Write The Grammar">
 			</topic>
 			<topic href="contents/102_domainmodelwalkthrough.html#generate-language-artifacts" label="Generate Language Artifacts">
 			</topic>
-			<topic href="contents/102_domainmodelwalkthrough.html#run-generated-plugin" label="Run the Generated IDE Plug-in">
+			<topic href="contents/102_domainmodelwalkthrough.html#run-generated-plugin" label="Run the Generated Eclipse Plug-in">
 			</topic>
 			<topic href="contents/102_domainmodelwalkthrough.html#add-imports" label="Second Iteration: Adding Packages and Imports">
 			</topic>
@@ -152,14 +152,12 @@
 	</topic>
 	<topic href="contents/301_grammarlanguage.html" label="Reference Documentation">
 		<topic href="contents/301_grammarlanguage.html" label="The Grammar Language">
-			<topic href="contents/301_grammarlanguage.html#statemachine" label="A First Example">
-			</topic>
 			<topic href="contents/301_grammarlanguage.html#syntax" label="The Syntax">
 				<topic href="contents/301_grammarlanguage.html#language-declaration" label="Language Declaration">
 				</topic>
 				<topic href="contents/301_grammarlanguage.html#package-declarations" label="EPackage Declarations">
 				</topic>
-				<topic href="contents/301_grammarlanguage.html#rules" label="Rules">
+				<topic href="contents/301_grammarlanguage.html#terminal-rules" label="Terminal Rules">
 				</topic>
 				<topic href="contents/301_grammarlanguage.html#parser-rules" label="Parser Rules">
 				</topic>
@@ -169,8 +167,6 @@
 				</topic>
 				<topic href="contents/301_grammarlanguage.html#enum-rules" label="Enum Rules">
 				</topic>
-				<topic href="contents/301_grammarlanguage.html#syntactic-predicates" label="Syntactic Predicates">
-				</topic>
 			</topic>
 			<topic href="contents/301_grammarlanguage.html#metamodel-inference" label="Ecore Model Inference">
 				<topic href="contents/301_grammarlanguage.html#type-and-package-generation" label="Type and Package Generation">
@@ -179,40 +175,38 @@
 				</topic>
 				<topic href="contents/301_grammarlanguage.html#enum-literal-generation" label="Enum Literal Generation">
 				</topic>
-				<topic href="contents/301_grammarlanguage.html#feature-normalization" label="Feature Normalization">
-				</topic>
 				<topic href="contents/301_grammarlanguage.html#error-conditions" label="Error Conditions">
 				</topic>
 			</topic>
 			<topic href="contents/301_grammarlanguage.html#grammar-mixins" label="Grammar Mixins">
-			</topic>
-			<topic href="contents/301_grammarlanguage.html#common-terminals" label="Common Terminals">
+				<topic href="contents/301_grammarlanguage.html#common-terminals" label="Common Terminals">
+				</topic>
 			</topic>
 		</topic>
 		<topic href="contents/302_configuration.html" label="Configuration">
+			<topic href="contents/302_configuration.html#short-intro-to-mwe" label="A Short Introduction to MWE2">
+			</topic>
 			<topic href="contents/302_configuration.html#generator" label="The Language Generator">
-				<topic href="contents/302_configuration.html#short-intro-to-mwe" label="A Short Introduction to MWE2">
+				<topic href="contents/302_configuration.html#project-configuration" label="Project Configuration">
 				</topic>
-				<topic href="contents/302_configuration.html#general-architecture" label="General Architecture">
+				<topic href="contents/302_configuration.html#other-general-configuration" label="Other General Configuration">
 				</topic>
-				<topic href="contents/302_configuration.html#standard-generator-fragments" label="Standard Generator Fragments">
+				<topic href="contents/302_configuration.html#language-configuration" label="Language Configuration">
+				</topic>
+				<topic href="contents/302_configuration.html#importing-metamodels" label="Importing Existing Metamodels">
 				</topic>
 			</topic>
-			<topic href="contents/302_configuration.html#dependency-injection" label="Dependency Injection in Xtext with Google Guice">
+			<topic href="contents/302_configuration.html#dependency-injection" label="Dependency Injection">
 				<topic href="contents/302_configuration.html#guicemodules" label="The Module API">
 				</topic>
 				<topic href="contents/302_configuration.html#obtaining-an-injector" label="Obtaining an Injector">
 				</topic>
 			</topic>
+			<topic href="contents/302_configuration.html#logging" label="Logging">
+			</topic>
 		</topic>
-		<topic href="contents/303_runtime_concepts.html" label="Runtime Concepts">
-			<topic href="contents/303_runtime_concepts.html#runtime-setup" label="Runtime Setup (ISetup)">
-			</topic>
-			<topic href="contents/303_runtime_concepts.html#equinox-setup" label="Setup within Eclipse-Equinox (OSGi)">
-			</topic>
-			<topic href="contents/303_runtime_concepts.html#logging" label="Logging">
-			</topic>
-			<topic href="contents/303_runtime_concepts.html#code-generation" label="Code Generation / Compilation">
+		<topic href="contents/303_runtime_concepts.html" label="Language Implementation">
+			<topic href="contents/303_runtime_concepts.html#code-generation" label="Code Generation">
 				<topic href="contents/303_runtime_concepts.html#igenerator" label="IGenerator">
 				</topic>
 				<topic href="contents/303_runtime_concepts.html#output-configurations" label="Output Configurations">
@@ -223,15 +217,9 @@
 				</topic>
 				<topic href="contents/303_runtime_concepts.html#custom-validation" label="Custom Validation">
 				</topic>
-				<topic href="contents/303_runtime_concepts.html#validating-manually" label="Validating Manually">
-				</topic>
-				<topic href="contents/303_runtime_concepts.html#test-validators" label="Test Validators">
-				</topic>
 			</topic>
 			<topic href="contents/303_runtime_concepts.html#linking" label="Linking">
-				<topic href="contents/303_runtime_concepts.html#declaration-of-cross-links" label="Declaration of Cross-links">
-				</topic>
-				<topic href="contents/303_runtime_concepts.html#lazy-linking" label="Default Runtime Behavior (Lazy Linking)">
+				<topic href="contents/303_runtime_concepts.html#lazy-linking" label="Lazy Linking">
 				</topic>
 			</topic>
 			<topic href="contents/303_runtime_concepts.html#scoping" label="Scoping">
@@ -266,88 +254,28 @@
 				<topic href="contents/303_runtime_concepts.html#token-stream" label="Token Stream">
 				</topic>
 			</topic>
-			<topic href="contents/303_runtime_concepts.html#formatting" label="Formatting (Pretty Printing)">
-				<topic href="contents/303_runtime_concepts.html#formatting-new" label="New API in Xtext 2.8">
-				</topic>
-				<topic href="contents/303_runtime_concepts.html#formatting-old" label="Before Xtext 2.8">
-				</topic>
+			<topic href="contents/303_runtime_concepts.html#formatting" label="Formatting">
 			</topic>
-			<topic href="contents/303_runtime_concepts.html#fragment-provider" label="Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)">
-			</topic>
-			<topic href="contents/303_runtime_concepts.html#encoding" label="Encoding in Xtext">
+			<topic href="contents/303_runtime_concepts.html#encoding" label="Character Encoding">
 				<topic href="contents/303_runtime_concepts.html#encoding-at-language-design-time" label="Encoding at Language Design Time">
 				</topic>
 				<topic href="contents/303_runtime_concepts.html#encoding-at-language-runtime" label="Encoding at Language Runtime">
 				</topic>
 				<topic href="contents/303_runtime_concepts.html#encoding-of-an-xtextresource" label="Encoding of an XtextResource">
 				</topic>
-				<topic href="contents/303_runtime_concepts.html#encoding-in-new-model-projects" label="Encoding in New Model Projects">
-				</topic>
-				<topic href="contents/303_runtime_concepts.html#encoding-of-xtext-source-code" label="Encoding of Xtext Source Code">
-				</topic>
 			</topic>
-			<topic href="contents/303_runtime_concepts.html#testing" label="Unit Testing the Language">
-				<topic href="contents/303_runtime_concepts.html#creating-a-simple-test-class" label="Creating a simple test class">
+			<topic href="contents/303_runtime_concepts.html#testing" label="Unit Testing">
+				<topic href="contents/303_runtime_concepts.html#creating-a-simple-test-class" label="Creating a Simple Test Class">
 				</topic>
-				<topic href="contents/303_runtime_concepts.html#writing-a-parser-test" label="Writing a parser test">
+				<topic href="contents/303_runtime_concepts.html#testing-the-parser" label="Testing the Parser">
 				</topic>
-				<topic href="contents/303_runtime_concepts.html#how-to-write-tests-that-includes-multiple-different-languages" label="How to write tests that includes multiple different languages">
+				<topic href="contents/303_runtime_concepts.html#test-validators" label="Testing Validators">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#testing-multiple-languages" label="Testing Multiple Languages">
 				</topic>
 			</topic>
 		</topic>
-		<topic href="contents/304_ide_concepts.html" label="IDE Concepts">
-			<topic href="contents/304_ide_concepts.html#label-provider" label="Label Provider">
-				<topic href="contents/304_ide_concepts.html#eobject-label-provider" label="Label Providers For EObjects">
-				</topic>
-				<topic href="contents/304_ide_concepts.html#description-label-provider" label="Label Providers For Index Entries">
-				</topic>
-			</topic>
-			<topic href="contents/304_ide_concepts.html#content-assist" label="Content Assist">
-			</topic>
-			<topic href="contents/304_ide_concepts.html#quick-fixes" label="Quick Fixes">
-				<topic href="contents/304_ide_concepts.html#quick-fixes-for-linking-errors-and-syntax-errors" label="Quick Fixes for Linking Errors and Syntax Errors">
-				</topic>
-			</topic>
-			<topic href="contents/304_ide_concepts.html#templates" label="Template Proposals">
-				<topic href="contents/304_ide_concepts.html#cross-reference-template-variable-resolver" label="Cross Reference Template Variable Resolver">
-				</topic>
-				<topic href="contents/304_ide_concepts.html#enumeration-template-variable-resolver" label="Enumeration Template Variable Resolver">
-				</topic>
-			</topic>
-			<topic href="contents/304_ide_concepts.html#outline" label="Outline View">
-				<topic href="contents/304_ide_concepts.html#influencing-the-outline-structure" label="Influencing the outline structure">
-				</topic>
-				<topic href="contents/304_ide_concepts.html#styling-the-outline" label="Styling the outline">
-				</topic>
-				<topic href="contents/304_ide_concepts.html#filtering-actions" label="Filtering actions">
-				</topic>
-				<topic href="contents/304_ide_concepts.html#sorting-actions" label="Sorting actions">
-				</topic>
-				<topic href="contents/304_ide_concepts.html#quick-outline" label="Quick Outline">
-				</topic>
-			</topic>
-			<topic href="contents/304_ide_concepts.html#hyperlinking" label="Hyperlinking">
-				<topic href="contents/304_ide_concepts.html#location-provider" label="Location Provider">
-				</topic>
-				<topic href="contents/304_ide_concepts.html#customizing-available-hyperlinks" label="Customizing Available Hyperlinks">
-				</topic>
-			</topic>
-			<topic href="contents/304_ide_concepts.html#highlighting" label="Syntax Coloring">
-				<topic href="contents/304_ide_concepts.html#lexical-highlighting" label="Lexical Highlighting">
-				</topic>
-				<topic href="contents/304_ide_concepts.html#semantic-highlighting" label="Semantic Highlighting">
-				</topic>
-			</topic>
-			<topic href="contents/304_ide_concepts.html#refactoring" label="Rename Refactoring">
-				<topic href="contents/304_ide_concepts.html#customizing" label="Customizing">
-				</topic>
-				<topic href="contents/304_ide_concepts.html#rename-participants" label="Rename Participants">
-				</topic>
-			</topic>
-		</topic>
-		<topic href="contents/305_xbase.html" label="Xtext and Java">
-			<topic href="contents/305_xbase.html#plug-in-setup" label="Plug-in Setup">
-			</topic>
+		<topic href="contents/305_xbase.html" label="Integration with Java">
 			<topic href="contents/305_xbase.html#jvmtypes" label="Referring to Java Elements using JVM Types">
 				<topic href="contents/305_xbase.html#customization-points" label="Customization Points">
 				</topic>
@@ -434,6 +362,8 @@
 			</topic>
 			<topic href="contents/308_emf_integration.html#xtext-resource" label="XtextResource Implementation">
 			</topic>
+			<topic href="contents/308_emf_integration.html#fragment-provider" label="Referencing From EMF">
+			</topic>
 			<topic href="contents/308_emf_integration.html#gmf-integration" label="Integration with GMF Editors">
 				<topic href="contents/308_emf_integration.html#gmf-integration-stage1" label="Stage 1: Make GMF Read and Write the Semantic Model As Text">
 				</topic>
@@ -443,33 +373,87 @@
 				</topic>
 			</topic>
 		</topic>
-		<topic href="contents/310_web_integration.html" label="Web Editor Support">
-			<topic href="contents/310_web_integration.html#client" label="The Client">
-				<topic href="contents/310_web_integration.html#javascript-api" label="JavaScript API">
+		<topic href="contents/310_eclipse_support.html" label="Eclipse Support">
+			<topic href="contents/310_eclipse_support.html#label-provider" label="Label Provider">
+				<topic href="contents/310_eclipse_support.html#eobject-label-provider" label="Label Providers For EObjects">
 				</topic>
-				<topic href="contents/310_web_integration.html#options" label="Options">
-				</topic>
-				<topic href="contents/310_web_integration.html#getting-text-content" label="Getting the Text Content">
-				</topic>
-				<topic href="contents/310_web_integration.html#operation-modes" label="Operation Modes">
-				</topic>
-				<topic href="contents/310_web_integration.html#syntax-highlighting" label="Syntax Highlighting">
-				</topic>
-				<topic href="contents/310_web_integration.html#invoking-services" label="Invoking Services">
-				</topic>
-				<topic href="contents/310_web_integration.html#options-reference" label="Full List of Options">
+				<topic href="contents/310_eclipse_support.html#description-label-provider" label="Label Providers For Index Entries">
 				</topic>
 			</topic>
-			<topic href="contents/310_web_integration.html#server" label="The Server">
-				<topic href="contents/310_web_integration.html#content-assist" label="Content Assist">
+			<topic href="contents/310_eclipse_support.html#content-assist" label="Content Assist">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#quick-fixes" label="Quick Fixes">
+				<topic href="contents/310_eclipse_support.html#quick-fixes-for-linking-errors-and-syntax-errors" label="Quick Fixes for Linking Errors and Syntax Errors">
 				</topic>
-				<topic href="contents/310_web_integration.html#semantic-highlighting" label="Semantic Highlighting">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#templates" label="Template Proposals">
+				<topic href="contents/310_eclipse_support.html#cross-reference-template-variable-resolver" label="Cross Reference Template Variable Resolver">
 				</topic>
-				<topic href="contents/310_web_integration.html#mark-occurrences" label="Mark Occurrences">
+				<topic href="contents/310_eclipse_support.html#enumeration-template-variable-resolver" label="Enumeration Template Variable Resolver">
 				</topic>
-				<topic href="contents/310_web_integration.html#hover-info" label="Hover Information">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#outline" label="Outline View">
+				<topic href="contents/310_eclipse_support.html#influencing-the-outline-structure" label="Influencing the outline structure">
 				</topic>
-				<topic href="contents/310_web_integration.html#persistence" label="Persistence">
+				<topic href="contents/310_eclipse_support.html#styling-the-outline" label="Styling the outline">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#filtering-actions" label="Filtering actions">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#sorting-actions" label="Sorting actions">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#quick-outline" label="Quick Outline">
+				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#hyperlinking" label="Hyperlinking">
+				<topic href="contents/310_eclipse_support.html#location-provider" label="Location Provider">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#customizing-available-hyperlinks" label="Customizing Available Hyperlinks">
+				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#highlighting" label="Syntax Coloring">
+				<topic href="contents/310_eclipse_support.html#lexical-highlighting" label="Lexical Highlighting">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#semantic-highlighting" label="Semantic Highlighting">
+				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#refactoring" label="Rename Refactoring">
+				<topic href="contents/310_eclipse_support.html#customizing" label="Customizing">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#rename-participants" label="Rename Participants">
+				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#project-wizard" label="Project Wizard">
+			</topic>
+		</topic>
+		<topic href="contents/320_idea_support.html" label="IntelliJ IDEA Support">
+		</topic>
+		<topic href="contents/330_web_support.html" label="Web Editor Support">
+			<topic href="contents/330_web_support.html#client" label="The Client">
+				<topic href="contents/330_web_support.html#javascript-api" label="JavaScript API">
+				</topic>
+				<topic href="contents/330_web_support.html#options" label="Options">
+				</topic>
+				<topic href="contents/330_web_support.html#getting-text-content" label="Getting the Text Content">
+				</topic>
+				<topic href="contents/330_web_support.html#operation-modes" label="Operation Modes">
+				</topic>
+				<topic href="contents/330_web_support.html#syntax-highlighting" label="Syntax Highlighting">
+				</topic>
+				<topic href="contents/330_web_support.html#invoking-services" label="Invoking Services">
+				</topic>
+				<topic href="contents/330_web_support.html#options-reference" label="Full List of Options">
+				</topic>
+			</topic>
+			<topic href="contents/330_web_support.html#server" label="The Server">
+				<topic href="contents/330_web_support.html#content-assist" label="Content Assist">
+				</topic>
+				<topic href="contents/330_web_support.html#semantic-highlighting" label="Semantic Highlighting">
+				</topic>
+				<topic href="contents/330_web_support.html#mark-occurrences" label="Mark Occurrences">
+				</topic>
+				<topic href="contents/330_web_support.html#hover-info" label="Hover Information">
+				</topic>
+				<topic href="contents/330_web_support.html#persistence" label="Persistence">
 				</topic>
 			</topic>
 		</topic>
@@ -489,58 +473,6 @@
 			<topic href="contents/350_continuous_integration.html#standalone-build" label="Integration in Standard Maven Builds">
 			</topic>
 			<topic href="contents/350_continuous_integration.html#maven-tycho-hints" label="Maven Tycho Hints">
-			</topic>
-		</topic>
-	</topic>
-	<topic href="contents/401_migrating_from_1_0_x.html" label="Appendix">
-		<topic href="contents/401_migrating_from_1_0_x.html" label="Migrating from Xtext 1.0.x to 2.0">
-			<topic href="contents/401_migrating_from_1_0_x.html#take-the-shortcut" label="Take the Shortcut">
-			</topic>
-			<topic href="contents/401_migrating_from_1_0_x.html#migrating-step-by-step" label="Migrating Step By Step">
-				<topic href="contents/401_migrating_from_1_0_x.html#update-the-plug-in-dependencies-and-import-statements" label="Update the Plug-in Dependencies and Import Statements">
-				</topic>
-				<topic href="contents/401_migrating_from_1_0_x.html#introduction-of-the-qualified-name" label="Introduction of the Qualified Name">
-				</topic>
-				<topic href="contents/401_migrating_from_1_0_x.html#changes-in-the-index-and-in-find-references" label="Changes in the index and in find references">
-				</topic>
-				<topic href="contents/401_migrating_from_1_0_x.html#rewritten-node-model" label="Rewritten Node Model">
-				</topic>
-				<topic href="contents/401_migrating_from_1_0_x.html#new-outline" label="New Outline">
-				</topic>
-				<topic href="contents/401_migrating_from_1_0_x.html#autoeditstrategy" label="AutoEditStrategy">
-				</topic>
-				<topic href="contents/401_migrating_from_1_0_x.html#other-noteworthy-api-changes" label="Other Noteworthy API Changes">
-				</topic>
-			</topic>
-			<topic href="contents/401_migrating_from_1_0_x.html#now-go-for-then-new-features" label="Now go for then new features">
-			</topic>
-		</topic>
-		<topic href="contents/402_migrating_from_0_7.html" label="Migrating from Xtext 0.7.x to 1.0">
-			<topic href="contents/402_migrating_from_0_7.html#migrating-step-by-step" label="Migrating Step By Step">
-				<topic href="contents/402_migrating_from_0_7.html#update-the-plug-in-dependencies-and-import-statements" label="Update the Plug-in Dependencies and Import Statements">
-				</topic>
-				<topic href="contents/402_migrating_from_0_7.html#rename-the-packages-in-the-dslui-plug-in" label="Rename the Packages in the dsl.ui-Plug-in">
-				</topic>
-				<topic href="contents/402_migrating_from_0_7.html#update-the-workflow" label="Update the Workflow">
-				</topic>
-				<topic href="contents/402_migrating_from_0_7.html#manifestmf-and-pluginxml" label="MANIFEST.MF and plugin.xml">
-				</topic>
-				<topic href="contents/402_migrating_from_0_7.html#noteworthy-api-changes" label="Noteworthy API Changes">
-				</topic>
-			</topic>
-		</topic>
-	</topic>
-	<topic href="contents/faq.html" label="Frequently Asked Questions">
-		<topic href="contents/faq.html" label="Overview">
-			<topic href="contents/faq.html#what-is-xtext" label="What is Xtext?">
-			</topic>
-			<topic href="contents/faq.html#how-does-it-work" label="How Does It Work?">
-			</topic>
-			<topic href="contents/faq.html#who-uses-xtext" label="Who Uses Xtext?">
-			</topic>
-			<topic href="contents/faq.html#who-is-behind-xtext" label="Who is Behind Xtext?">
-			</topic>
-			<topic href="contents/faq.html#DSL" label="What is a Domain-Specific Language">
 			</topic>
 		</topic>
 	</topic>
