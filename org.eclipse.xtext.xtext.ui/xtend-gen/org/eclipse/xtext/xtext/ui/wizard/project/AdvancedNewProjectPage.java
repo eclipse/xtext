@@ -69,6 +69,8 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   private boolean autoSelectIdeProject;
   
+  private boolean autoSelectSDKProject;
+  
   public AdvancedNewProjectPage(final String pageName) {
     super(pageName);
     this.setTitle(Messages.AdvancedNewProjectPage_WindowTitle);
@@ -185,6 +187,31 @@ public class AdvancedNewProjectPage extends WizardPage {
           if (_forall) {
             AdvancedNewProjectPage.this.createIdeProject.setEnabled(true);
           }
+          Object _source_1 = e.getSource();
+          boolean _equals = Objects.equal(_source_1, AdvancedNewProjectPage.this.createUiProject);
+          if (_equals) {
+            AdvancedNewProjectPage.this.createSDKProject.setSelection(false);
+            AdvancedNewProjectPage.this.createP2Project.setSelection(false);
+          }
+        }
+        AdvancedNewProjectPage.this.validate(e);
+      }
+    };
+    final SelectionAdapter selectionControlUpdateSite = new SelectionAdapter() {
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        Object _source = e.getSource();
+        boolean _selection = ((Button) _source).getSelection();
+        if (_selection) {
+          boolean _selection_1 = AdvancedNewProjectPage.this.createSDKProject.getSelection();
+          boolean _not = (!_selection_1);
+          if (_not) {
+            AdvancedNewProjectPage.this.autoSelectSDKProject = true;
+          }
+          AdvancedNewProjectPage.this.createSDKProject.setSelection(true);
+          AdvancedNewProjectPage.this.createSDKProject.setEnabled(false);
+        } else {
+          AdvancedNewProjectPage.this.createSDKProject.setEnabled(true);
         }
         AdvancedNewProjectPage.this.validate(e);
       }
@@ -207,7 +234,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createWebProject.addSelectionListener(selectionControlUi);
     this.createIdeProject.addSelectionListener(selectionControl);
     this.createSDKProject.addSelectionListener(selectionControl);
-    this.createP2Project.addSelectionListener(selectionControl);
+    this.createP2Project.addSelectionListener(selectionControlUpdateSite);
     this.setDefaults();
     PlatformUI.getWorkbench().getHelpSystem().setHelp(this.getShell(), "org.eclipse.xtext.xtext.ui.newProject_Advanced");
   }
@@ -340,21 +367,32 @@ public class AdvancedNewProjectPage extends WizardPage {
           this.<Control>reportIssue(IMessageProvider.ERROR, _builder_5.toString(), _function_5);
         }
       }
-      Procedure0 _xifexpression = null;
       if (this.autoSelectIdeProject) {
+        this.autoSelectIdeProject = false;
+        StringConcatenation _builder_6 = new StringConcatenation();
+        _builder_6.append("\'");
+        String _text_6 = this.createIdeProject.getText();
+        _builder_6.append(_text_6);
+        _builder_6.append("\' project was automatically selected as option \'");
+        String _text_7 = ((Button) source).getText();
+        _builder_6.append(_text_7);
+        _builder_6.append("\' requires it.");
+        this.<Control>reportIssue(IMessageProvider.INFORMATION, _builder_6.toString());
+      }
+      Procedure0 _xifexpression = null;
+      if (this.autoSelectSDKProject) {
         Procedure0 _xblockexpression_1 = null;
         {
-          this.autoSelectIdeProject = false;
-          StringConcatenation _builder_6 = new StringConcatenation();
-          _builder_6.append("\'");
-          String _text_6 = this.createIdeProject.getText();
-          _builder_6.append(_text_6);
-          _builder_6.append("\' project was automatically selected as option \'");
-          String _text_7 = ((Button) source).getText();
-          _builder_6.append(_text_7);
-          _builder_6.append("\' requires it.");
-          _builder_6.newLineIfNotEmpty();
-          _xblockexpression_1 = this.<Control>reportIssue(IMessageProvider.INFORMATION, _builder_6.toString());
+          this.autoSelectSDKProject = false;
+          StringConcatenation _builder_7 = new StringConcatenation();
+          _builder_7.append("\'");
+          String _text_8 = this.createSDKProject.getText();
+          _builder_7.append(_text_8);
+          _builder_7.append("\' was automatically selected as option \'");
+          String _text_9 = ((Button) source).getText();
+          _builder_7.append(_text_9);
+          _builder_7.append("\' requires it.");
+          _xblockexpression_1 = this.<Control>reportIssue(IMessageProvider.INFORMATION, _builder_7.toString());
         }
         _xifexpression = _xblockexpression_1;
       }
