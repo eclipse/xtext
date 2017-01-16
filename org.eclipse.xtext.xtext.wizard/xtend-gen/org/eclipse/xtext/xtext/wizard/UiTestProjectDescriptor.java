@@ -43,6 +43,20 @@ public class UiTestProjectDescriptor extends TestProjectDescriptor {
       };
       ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency_1, _function_1);
       deps.add(_doubleArrow_1);
+      ExternalDependency _createXtextDependency_2 = ExternalDependency.createXtextDependency("org.eclipse.xtext.junit4");
+      final Procedure1<ExternalDependency> _function_2 = (ExternalDependency it) -> {
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setScope(Scope.TESTCOMPILE);
+      };
+      ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency_2, _function_2);
+      deps.add(_doubleArrow_2);
+      ExternalDependency _createXtextDependency_3 = ExternalDependency.createXtextDependency("org.eclipse.xtext.xbase.junit");
+      final Procedure1<ExternalDependency> _function_3 = (ExternalDependency it) -> {
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setScope(Scope.TESTCOMPILE);
+      };
+      ExternalDependency _doubleArrow_3 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency_3, _function_3);
+      deps.add(_doubleArrow_3);
       _xblockexpression = deps;
     }
     return _xblockexpression;
