@@ -9,10 +9,13 @@ package org.eclipse.xtend.caliper.tests.typesystem.newImpl;
 
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.junit.Ignore;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+// https://github.com/eclipse/xtext-xtend/issues/125
+@Ignore
 public class UnitTest extends AssignabilityTest {
 	private TypeConformanceComputer conformanceComputer = new TypeConformanceComputer();
 	
