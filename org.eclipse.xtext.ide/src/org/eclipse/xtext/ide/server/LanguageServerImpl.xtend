@@ -152,7 +152,7 @@ import org.eclipse.xtext.validation.Issue
 	}
 
 	override CompletableFuture<Object> shutdown() {
-		return CompletableFuture.completedFuture(null);
+		return CompletableFuture.completedFuture(new Object());
 	}
 
 	override TextDocumentService getTextDocumentService() {
