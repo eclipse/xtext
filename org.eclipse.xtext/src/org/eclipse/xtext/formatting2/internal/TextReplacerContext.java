@@ -231,23 +231,30 @@ public class TextReplacerContext implements ITextReplacerContext {
 		if (!isInRequestedRange(replacement)) {
 			return;
 		}
-		if (!request.allowIdentityEdits() && isIdentityEdit(replacement)) {
-			return;
-		}
-		if (request.isFormatUndefinedHiddenRegionsOnly()) {
-			IHiddenRegion hidden = null;
-			if (replacerRegion instanceof IHiddenRegionPart)
-				hidden = ((IHiddenRegionPart) replacerRegion).getHiddenRegion();
-			else if (replacerRegion instanceof IHiddenRegion)
-				hidden = (IHiddenRegion) replacerRegion;
-			if (hidden == null || !hidden.isUndefined())
+		if (!isInUndefinedRegion(replacement)) {
+			if (request.isFormatUndefinedHiddenRegionsOnly()) {
 				return;
+			}
+			if (!request.allowIdentityEdits() && isIdentityEdit(replacement)) {
+				return;
+			}
 		}
 		try {
 			replacements.add(replacement);
 		} catch (ConflictingRegionsException e) {
 			request.getExceptionHandler().accept(e);
 		}
+	}
+	
+	protected boolean isInUndefinedRegion(ITextReplacement repl) {
+		ITextSegment replacerRegion = replacer.getRegion();
+		IHiddenRegion hidden = null;
+		if (replacerRegion instanceof IHiddenRegionPart) {
+			hidden = ((IHiddenRegionPart) replacerRegion).getHiddenRegion();
+		} else if (replacerRegion instanceof IHiddenRegion) {
+			hidden = (IHiddenRegion) replacerRegion;
+		}
+		return hidden == null || hidden.isUndefined();
 	}
 
 	protected boolean isIdentityEdit(ITextReplacement replacement) {
