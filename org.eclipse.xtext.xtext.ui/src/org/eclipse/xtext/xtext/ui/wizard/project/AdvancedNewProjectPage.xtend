@@ -44,6 +44,7 @@ class AdvancedNewProjectPage extends WizardPage {
 	StatusWidget statusWidget
 	
 	boolean autoSelectIdeProject
+	boolean autoSelectSDKProject
 
 	new(String pageName) {
 		super(pageName)
@@ -124,6 +125,25 @@ class AdvancedNewProjectPage extends WizardPage {
 					if (uiButtons.forall[!selection]) {
 						createIdeProject.enabled = true
 					}
+					// auto deselect SDK and p2 project when Eclipse plug-in is deselected
+					if (e.source == createUiProject) {
+						createSDKProject.selection = false
+						createP2Project.selection = false
+					}
+				}
+				validate(e)
+			}
+		}
+		val selectionControlUpdateSite = new SelectionAdapter() {
+			override widgetSelected(SelectionEvent e) {
+				if ((e.source as Button).selection) {
+					if (!createSDKProject.selection) {
+						autoSelectSDKProject = true
+					}
+					createSDKProject.selection = true
+					createSDKProject.enabled = false
+				} else {
+					createSDKProject.enabled = true
 				}
 				validate(e)
 			}
@@ -146,7 +166,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		createWebProject.addSelectionListener(selectionControlUi)
 		createIdeProject.addSelectionListener(selectionControl)
 		createSDKProject.addSelectionListener(selectionControl)
-		createP2Project.addSelectionListener(selectionControl)
+		createP2Project.addSelectionListener(selectionControlUpdateSite)
 		setDefaults
 
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(shell, "org.eclipse.xtext.xtext.ui.newProject_Advanced")
@@ -235,9 +255,11 @@ class AdvancedNewProjectPage extends WizardPage {
 
 		if (autoSelectIdeProject) {
 			autoSelectIdeProject = false
-			reportIssue(INFORMATION, '''
-				'«createIdeProject.text»' project was automatically selected as option '«(source as Button).text»' requires it.
-				''')
+			reportIssue(INFORMATION, ''''«createIdeProject.text»' project was automatically selected as option '«(source as Button).text»' requires it.''')
+		}
+		if (autoSelectSDKProject) {
+			autoSelectSDKProject = false
+			reportIssue(INFORMATION, ''''«createSDKProject.text»' was automatically selected as option '«(source as Button).text»' requires it.''')
 		}
 	}
 
