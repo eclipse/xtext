@@ -20,13 +20,6 @@ node {
 			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
 		}
 		
-		stage 'Gradle Longrunning Tests'
-		try {
-			sh "./gradlew longrunningTest -PuseJenkinsSnapshots=true --continue"
-		} finally {
-			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/longrunningTest/*.xml'])
-		}
-		
 		def workspace = pwd()
 		def mvnHome = tool 'M3'
 		env.M2_HOME = "${mvnHome}"
@@ -42,6 +35,13 @@ node {
 			archive 'build/**'
 		} finally {
 			step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
+		}
+		
+		stage 'Gradle Longrunning Tests'
+		try {
+			sh "./gradlew longrunningTest -PuseJenkinsSnapshots=true --continue"
+		} finally {
+			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/longrunningTest/*.xml'])
 		}
 		
 		if ('UNSTABLE' == currentBuild.result) {
