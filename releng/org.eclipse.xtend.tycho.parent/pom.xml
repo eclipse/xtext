@@ -9,7 +9,8 @@
 
 	<properties>
 		<mavenVersion>3.2.5</mavenVersion>
-		<tycho-version>0.25.0</tycho-version>
+		<tycho-version>0.26.0</tycho-version>
+		<xtend-maven-plugin-version>2.11.0-SNAPSHOT</xtend-maven-plugin-version>
 		<emf.version>(2.8,3.0)</emf.version>
 		<mwe2-version>2.8.3</mwe2-version>
 		<mwe-version>1.3.13</mwe-version>
@@ -46,6 +47,19 @@
 		<url>https://github.com/eclipse/xtext-xtend</url>
 	</scm>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>xtend-bootstrap</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtend-bootstrap/lastStableBuild/artifact/build-result/maven-repository/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -70,12 +84,6 @@
 						<groupId>org.eclipse.tycho</groupId>
 						<artifactId>tycho-compiler-jdt</artifactId>
 						<version>${tycho-version}</version>
-						<exclusions>
-							<exclusion>
-								<groupId>org.eclipse.tycho</groupId>
-								<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
-							</exclusion>
-						</exclusions>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -202,6 +210,42 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${project.basedir}/target</directory>
+						</fileset>
+						<fileset>
+							<directory>${project.basedir}/xtend-gen</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+							<excludes>
+								<exclude>.gitignore</exclude>
+							</excludes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+				<version>${xtend-maven-plugin-version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<outputDirectory>${basedir}/xtend-gen</outputDirectory>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
