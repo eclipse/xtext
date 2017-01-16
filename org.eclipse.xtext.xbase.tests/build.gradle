@@ -41,12 +41,16 @@ if (findProperty('compileXtend') == 'true') {
 }
 
 jar {
-	from (sourceSets.longrunning.output)
-	from (sourceSets.suites.output)
+	from sourceSets.longrunning.output
+	from sourceSets.suites.output
+}
+
+sourcesJar {
+	from sourceSets.longrunning.allSource
+	from sourceSets.suites.allSource
 }
 
 task longrunningTest(type: Test) {
 	testClassesDir = sourceSets.longrunning.output.classesDir
 	classpath = sourceSets.longrunning.runtimeClasspath
 }
-check.dependsOn longrunningTest

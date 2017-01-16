@@ -15,6 +15,13 @@ node {
 			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
 		}
 		
+		stage 'Gradle Longrunning Tests'
+		try {
+			sh "./gradlew longrunningTest -PuseJenkinsSnapshots=true --continue"
+		} finally {
+			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/longrunningTest/*.xml'])
+		}
+		
 		stage 'Maven Build'
 		def mvnHome = tool 'M3'
 		env.M2_HOME = "${mvnHome}"
