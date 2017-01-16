@@ -3,7 +3,7 @@
  * folders, we need to make some adjustments to Gradle's defaults.
  */
 
-def isTestProject = name.endsWith('tests')
+def isTestProject = name.endsWith('tests') || name.endsWith('tests.java8')
 def sourceDirs = ['src', 'src-gen', 'emf-gen']
 
 sourceSets {

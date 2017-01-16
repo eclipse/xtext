@@ -13,7 +13,7 @@ if (findProperty('compileXtend') == 'true') {
 			from (sourceSets.main.xtendOutputDir) {
 				include '**/*._trace'
 			}
-			if (name.endsWith('tests')) {
+			if (project.name.endsWith('tests') || project.name.endsWith('tests.java8')) {
 				from (sourceSets.test.xtendOutputDir) {
 					include '**/*._trace'
 				}

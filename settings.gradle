@@ -3,5 +3,9 @@ rootProject.name = 'xtext-xtend'
 include 'org.eclipse.xtend.core'
 include 'org.eclipse.xtend.ide.common'
 include 'org.eclipse.xtend.core.tests'
+include 'org.eclipse.xtend.core.tests.java8'
 include 'org.eclipse.xtend.idea'
+
+// https://github.com/eclipse/xtext-xtend/issues/11
+// https://github.com/eclipse/xtext-xtend/issues/62
 //include 'org.eclipse.xtend.idea.tests'

@@ -24,7 +24,7 @@ node {
 		try {
 			sh "./gradlew longrunningTest -PuseJenkinsSnapshots=true --continue"
 		} finally {
-			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
+			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/longrunningTest/*.xml'])
 		}
 		
 		def workspace = pwd()
