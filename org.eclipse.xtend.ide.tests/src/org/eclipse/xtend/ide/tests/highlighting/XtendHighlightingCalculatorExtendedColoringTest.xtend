@@ -9,10 +9,10 @@ package org.eclipse.xtend.ide.tests.highlighting
 
 import com.google.inject.Inject
 import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles
+import org.eclipse.xtend.ide.tests.AbstractXtendTestCase
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 
 /**
  * @author Christian Schneider - Initial contribution and API

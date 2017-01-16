@@ -13,7 +13,6 @@ import java.util.Set
 import org.eclipse.core.internal.resources.ProjectDescription
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.xtend.core.tests.macro.JavaIoFileSystemTest
 import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtend.lib.macro.file.Path

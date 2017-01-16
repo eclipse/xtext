@@ -5,8 +5,6 @@ dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.java:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:$versions.xtext"
-	compile "org.apache.ant:ant:$versions.ant"
-	testCompile "org.eclipse.pde:org.eclipse.pde.core:$versions.pdeCore"
 }
 
 sourceSets {
@@ -52,5 +50,7 @@ sourcesJar {
 	from sourceSets.suites.allSource
 }
 
-// The tests have to be executed as Eclipse plug-in tests, so disable them in the Gradle build
-test.enabled = false
+task longrunningTest(type: Test) {
+	testClassesDir = sourceSets.longrunning.output.classesDir
+	classpath = sourceSets.longrunning.runtimeClasspath
+}

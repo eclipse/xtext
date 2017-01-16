@@ -18,8 +18,6 @@
 		<module>releng/org.eclipse.xtend.target</module>
 		<module>releng/org.eclipse.xtend.p2-repository</module>
 		<module>org.eclipse.xtend.core</module>
-		<module>org.eclipse.xtend.core.tests</module>
-		<module>org.eclipse.xtend.core.tests.java8</module>
 		<module>org.eclipse.xtend.ide</module>
 		<module>org.eclipse.xtend.ide.tests</module>
 		<module>org.eclipse.xtend.ide.tests.data</module>

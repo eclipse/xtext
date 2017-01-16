@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.tests.compiler.batch;
+package org.eclipse.xtend.ide.tests.compiler.batch;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -17,16 +17,19 @@ import org.apache.tools.ant.BuildListener;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.types.selectors.FilenameSelector;
-import org.eclipse.pde.core.plugin.TargetPlatform;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+// https://github.com/eclipse/xtext-xtend/issues/126
+@Ignore
 public class XtendCompilerAntTaskTest {
 	protected Project project;
 	private StringBuffer outBuffer;
