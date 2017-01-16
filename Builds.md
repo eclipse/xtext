@@ -52,4 +52,4 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
 9. xtext-umbrella
    * Replace all occurrences of `job/master` according to the release branch name.
-   * Update the name of the zipped p2 repository according to the release version in `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml`.
+   * Update the name of the zipped p2 repository according to the release version in `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml`.
