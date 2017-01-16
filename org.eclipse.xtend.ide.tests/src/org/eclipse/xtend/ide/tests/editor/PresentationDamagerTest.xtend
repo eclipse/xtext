@@ -5,8 +5,8 @@ import org.eclipse.jface.text.Document
 import org.eclipse.xtend.core.parser.antlr.XtendAntlrTokenFileProvider
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
-import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource
+import org.eclipse.xtend.ide.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.ui.AbstractDamagerRepairerTest
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
 import org.eclipse.xtext.testing.InjectWith

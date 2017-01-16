@@ -9,13 +9,13 @@ package org.eclipse.xtend.ide.tests.refactoring
 
 import com.google.inject.Inject
 import org.eclipse.jface.text.TextSelection
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.ide.refactoring.XtendExpressionUtil
-import org.eclipse.xtext.testing.util.ParseHelper
-import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import org.eclipse.xtend.ide.tests.AbstractXtendTestCase
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Test
 
 /**
