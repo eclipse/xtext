@@ -1,3 +1,6 @@
+//outlet.DEFAULT_OUTPUT.sourceFolder.longrunning/src.directory=xtend-gen
+//outlet.DEFAULT_OUTPUT.sourceFolder.quarantine/src.directory=xtend-gen
+BuilderConfiguration.is_project_specific=true
 eclipse.preferences.version=1
 is_project_specific=true
 org.eclipse.xtend.core.validation.IssueCodes.dispatch_plain_function_name_clash=warning
@@ -9,3 +12,7 @@ org.eclipse.xtext.xbase.validation.IssueCodes.import_unsued=org.eclipse.jdt.core
 org.eclipse.xtext.xbase.validation.IssueCodes.import_wildcard_deprecated=warning
 org.eclipse.xtext.xbase.validation.IssueCodes.obsolete_instanceof=org.eclipse.jdt.core.compiler.problem.unnecessaryTypeCheck\:warning
 org.eclipse.xtext.xbase.validation.IssueCodes.unused_local_variable=org.eclipse.jdt.core.compiler.problem.unusedLocal\:warning
+outlet.DEFAULT_OUTPUT.sourceFolder.src.directory=xtend-gen
+outlet.DEFAULT_OUTPUT.sourceFolder.suites.directory=xtend-gen
+outlet.DEFAULT_OUTPUT.sourceFolder.xtend-gen.ignore=true
+outlet.DEFAULT_OUTPUT.userOutputPerSourceFolder=true
