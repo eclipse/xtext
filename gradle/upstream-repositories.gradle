@@ -6,16 +6,11 @@
  */
 
 if (!hasProperty('upstreamBranch'))
-	ext.upstreamBranch = 'master'
+	ext.upstreamBranch = 'milestone_2.11.0.RC1'
 def jenkinsPipelineRepo = { jobName -> "http://services.typefox.io/open-source/jenkins/job/$jobName/job/$upstreamBranch/lastStableBuild/artifact/build/maven-repository/" }
 
 repositories {
 	jcenter()
-	// Temporarily include Maven Central since jcenter is lagging behind
-	maven {
-		name 'maven-central'
-		url 'http://repo1.maven.org/maven2/'
-	}
 	// Artifacts of xtext-idea are not available as public snapshots, so Jenkins snapshots are the default
 	if (!hasProperty('useJenkinsSnapshots') || findProperty('useJenkinsSnapshots') == 'true') {
 		maven { url jenkinsPipelineRepo('lsp4j') }
