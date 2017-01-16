@@ -641,6 +641,29 @@
         <requirement
             name="org.eclipse.draw2d.sdk.feature.group"/>
         <repositoryList
+            name="Oxygen">
+          <repository
+              url="${xtext.nightly.composite}"/>
+          <repository
+              url="${mwe2.update.site}"/>
+          <repository
+              url="${antlr-gen.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.7"/>
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+          <repository
+              url="${emf.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/eclipse/updates/4.7/"/>
+          <repository
+              url="${draw2d.p2.repository}"/>
+        </repositoryList>
+        <repositoryList
             name="Neon">
           <repository
               url="${xtext.nightly.composite}"/>
