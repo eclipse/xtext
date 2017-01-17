@@ -10,7 +10,7 @@ Do you remember the programming language [Logo](http://en.wikipedia.org/wiki/Log
 
 ![](images/tortoise_screenshot.png)
 
-The goal is a language to control a turtle drawing an image. Technically, this example will teach you how to adapt and use the [XbaseInterpreter]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java) for your own languages. 
+The goal is a language to control a turtle drawing an image. Technically, this example will teach you how to adapt and use the [XbaseInterpreter]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java) for your own languages. 
 
 ## Overview {#tortoise-solution}
 
@@ -136,7 +136,7 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 
 ## Interpreter {#tortoise-interpreter}
 
-The Xbase language library does not only provide a compiler that generates Java code, but also an [interpreter]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java). This has been adapted to execute our *Programs*. 
+The Xbase language library does not only provide a compiler that generates Java code, but also an [interpreter]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java). This has been adapted to execute our *Programs*. 
 
 After all an interpreter is just a big visitor. For each expression type, it has an evaluation method, that recursively calls the evaluation methods for the subexpressions for its arguments. The methods also pass an execution context storing all temporary state such as local variables.
 
@@ -165,7 +165,7 @@ The first thing we have to cope with is the mixture of existing Java methods (fr
   }
 ```
 
-One thing you have to know about the Java inferrence is that when creating Java elements using the [JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java), the infrastructure stores the information which elements have been inferred from which source elements. To navigate these traces, we use the Xbase service [IJvmModelAssociations]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java). So to detect whether a [JvmOperation]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java) is inferred, we check whether it has a source element. If so, we have to setup an execution context binding `this` and the parameters as local variables and then execute the method's body using the interpreter. 
+One thing you have to know about the Java inferrence is that when creating Java elements using the [JvmTypesBuilder]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java), the infrastructure stores the information which elements have been inferred from which source elements. To navigate these traces, we use the Xbase service [IJvmModelAssociations]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java). So to detect whether a [JvmOperation]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java) is inferred, we check whether it has a source element. If so, we have to setup an execution context binding `this` and the parameters as local variables and then execute the method's body using the interpreter. 
 
 To start the interpretation we have to do almost the same: Setup the execution context and then evaluate the *Program's* body. The respective code is 
 

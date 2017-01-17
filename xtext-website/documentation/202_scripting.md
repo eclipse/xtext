@@ -42,7 +42,7 @@ Make sure you have the projects *org.xtext.scripting* and *org.xtext.scripting.u
 
 To build a language with Xtext, you first have to define a grammar. As opposed to other parser generators, an Xtext grammar defines both, the lexical structure of the language and an object model (the AST or semantic model) that is build during parsing. For a more detailed description of the Xtext grammar language, please see the respective [documentation section](301_grammarlanguage.html).
 
-The grammar for our DSL is rather simple. We inherit from `org.eclipse.xtext.xbase.Xbase` to get the syntax of the expressions. As we want to refer to the type [XBlockExpression]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java), we have to import Xbase's Ecore model. The single type inferred from this grammar goes into the Ecore model `simpleExpressions`.
+The grammar for our DSL is rather simple. We inherit from `org.eclipse.xtext.xbase.Xbase` to get the syntax of the expressions. As we want to refer to the type [XBlockExpression]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java), we have to import Xbase's Ecore model. The single type inferred from this grammar goes into the Ecore model `simpleExpressions`.
 
 ```xtext
 grammar org.xtext.scripting.Scripting with org.eclipse.xtext.xbase.Xbase
@@ -59,7 +59,7 @@ The main rule *Script* is defined to produce an object of type `Script`, which i
 
 ## Translation to Java {#scripting-inferrer}
 
-To make our language executable, we have to define how its concepts relate to Java concepts. In Xtext, this is defined by the [IJvmModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java). The language generator automatically generates an Xtend stub for it. Nevertheless, it is up to the language developer to implement the `infer()` method. 
+To make our language executable, we have to define how its concepts relate to Java concepts. In Xtext, this is defined by the [IJvmModelInferrer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java). The language generator automatically generates an Xtend stub for it. Nevertheless, it is up to the language developer to implement the `infer()` method. 
 
 This hook is not only used to explain how to generate Java code, but also to give expressions a proper scope and to make your DSL constructs visible by other JVM languages. The Java type system is used as a common hub to integrate arbitrary languages with each other.
 

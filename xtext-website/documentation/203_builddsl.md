@@ -50,7 +50,7 @@ Task:
 	action=XBlockExpression;
 ```
 
-A *BuildFile* starts with a *package* declaration. The generated Java class will be located in this namespace. The next part is an *importSection*. Since version 2.4, Xbase includes extensive tooling to validate and organize import statements. To make this available in your language, you just have to include an *XImportSection* as in this example. The imports are followed by the *Declarations*. A *Declaration* can be a *Task* or a *Parameter*. A *Parameter* can declare a type and an initialization expression. *Tasks* define dependencies on other tasks by means of an Xtext cross-reference. They also contain an action, which is a [XBlockExpression]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java) from Xbase, thus everthing is possible within a task.
+A *BuildFile* starts with a *package* declaration. The generated Java class will be located in this namespace. The next part is an *importSection*. Since version 2.4, Xbase includes extensive tooling to validate and organize import statements. To make this available in your language, you just have to include an *XImportSection* as in this example. The imports are followed by the *Declarations*. A *Declaration* can be a *Task* or a *Parameter*. A *Parameter* can declare a type and an initialization expression. *Tasks* define dependencies on other tasks by means of an Xtext cross-reference. They also contain an action, which is a [XBlockExpression]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java) from Xbase, thus everthing is possible within a task.
 
 ## Translation to Java {#builddsl-inferrer}
 

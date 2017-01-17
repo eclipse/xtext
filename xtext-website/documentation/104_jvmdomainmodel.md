@@ -150,7 +150,7 @@ Some parts of this grammar are equal to the one in the [15 Minutes Tutorial](102
         '}';
     ```
 
-    A *PackageDeclaration* is used to declare a name space which can again contain any number of *AbstractElement*s. Xtext has built-in support for qualified names and scoping based on the hierarchy of the produced model. The default implementation will add the package names as the prefix to contained entities and nested packages. The qualified name of an *Entity* 'Baz' which is contained in a *PackageDeclaration* 'foo.bar' will be 'foo.bar.Baz'. In case you do not like the default behavior you will need to use a different implementation of [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java). 
+    A *PackageDeclaration* is used to declare a name space which can again contain any number of *AbstractElement*s. Xtext has built-in support for qualified names and scoping based on the hierarchy of the produced model. The default implementation will add the package names as the prefix to contained entities and nested packages. The qualified name of an *Entity* 'Baz' which is contained in a *PackageDeclaration* 'foo.bar' will be 'foo.bar.Baz'. In case you do not like the default behavior you will need to use a different implementation of [IQualifiedNameProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java). 
 1.      
     
     ```xtext
@@ -210,9 +210,9 @@ This action generates the parser and text editor and some additional infrastruct
 
 ## Step Four: Define the Mapping to JVM Concepts {#domain-model-step4}
 
-The syntax alone is not enough to make the language work. We need to map the domain-specific concepts to some other language in order to instruct Xtext how it is executed. Usually you define a code generator or an interpreter for that matter, but languages using Xbase can omit this step and make use of the [IJvmModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java).
+The syntax alone is not enough to make the language work. We need to map the domain-specific concepts to some other language in order to instruct Xtext how it is executed. Usually you define a code generator or an interpreter for that matter, but languages using Xbase can omit this step and make use of the [IJvmModelInferrer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java).
 
-The idea is that you translate your language concepts to any number of Java types ([JvmDeclaredType]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java)). Such a type can be a Java class, Java interface, Java annotation type or a Java enum and may contain any valid members. In the end you as a language developer are responsible to create a correct model according to the Java language.
+The idea is that you translate your language concepts to any number of Java types ([JvmDeclaredType]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java)). Such a type can be a Java class, Java interface, Java annotation type or a Java enum and may contain any valid members. In the end you as a language developer are responsible to create a correct model according to the Java language.
 
 By mapping your language concepts to Java elements, you implicitly tell Xtext in what kind of scopes the various expressions live and what return types are expected from them. Xtext 2.x also comes with a code generator which can translate that Java model into readable Java code, including the expressions.
 
@@ -272,7 +272,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 }
 ```
 
-Let's go through the code to get an idea of what is going on. (Please also refer to the JavaDoc of the used API for details, especially the [JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java)).
+Let's go through the code to get an idea of what is going on. (Please also refer to the JavaDoc of the used API for details, especially the [JvmTypesBuilder]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java)).
 
 1.  ```xtend
     def dispatch void infer(Entity element, 
@@ -280,20 +280,20 @@ Let's go through the code to get an idea of what is going on. (Please also refer
             boolean isPrelinkingPhase) {
     ```
 
-    Using the dispatch keyword makes sure that the method is called for instances of type *Entity* only. Have a look at [the Xtend documentation](http://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#polymorphic-dispatch) on polymorphic dispatch to understand Xtend's dispatch functions. Extending [AbstractModelInferrer]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java) makes sure we don't have to walk the syntax model on our own. 
+    Using the dispatch keyword makes sure that the method is called for instances of type *Entity* only. Have a look at [the Xtend documentation](http://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#polymorphic-dispatch) on polymorphic dispatch to understand Xtend's dispatch functions. Extending [AbstractModelInferrer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java) makes sure we don't have to walk the syntax model on our own. 
 1.  ```xtend
     acceptor.accept(element.toClass(element.fullyQualifiedName)) [  
         ...
     ]
     ```
 
-    Every [JvmDeclaredType]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java) you create in the model inference needs to be passed to the *acceptor* in order to get recognized. The extension method *toClass* comes from [JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java). That class provides a lot of convenient extension methods, which help making the code extremely readable and concise. It is important to understand that the creation and assignment of a qualified name is done in an early phase where the compiler collects all global symbols. You cannot resolve type references at this point.
+    Every [JvmDeclaredType]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java) you create in the model inference needs to be passed to the *acceptor* in order to get recognized. The extension method *toClass* comes from [JvmTypesBuilder]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java). That class provides a lot of convenient extension methods, which help making the code extremely readable and concise. It is important to understand that the creation and assignment of a qualified name is done in an early phase where the compiler collects all global symbols. You cannot resolve type references at this point.
 1.  The second argument to *accept* is a lambda block that contains further initialization of the created Java type. Only in this block you are allowed to do type reference resolution. This is also the place where you add members and put the XExpressions into context. Let's see what we do in the initialization block in detail:
 1.  ```xtend
     documentation = element.documentation
     ```
 
-    Here we assign some JavaDoc to the newly created element. The assignment is translated to an invocation of the method *[JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java).setDocumentation([JvmIdentifiableElement]({{site.src.xtext}}/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java), String)*, and `element.documentation` is in fact calling the extension method *[JvmTypesBuilder]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java).getDocumentation([EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java))*. Such extension methods are explained in detail in the [Xtend documentation](https://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#extension-methods). 
+    Here we assign some JavaDoc to the newly created element. The assignment is translated to an invocation of the method *[JvmTypesBuilder]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java).setDocumentation([JvmIdentifiableElement]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java), String)*, and `element.documentation` is in fact calling the extension method *[JvmTypesBuilder]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java).getDocumentation([EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java))*. Such extension methods are explained in detail in the [Xtend documentation](https://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#extension-methods). 
 1.  ```xtend
     if (element.superType != null)
         superTypes += entity.superType.cloneWithProxies

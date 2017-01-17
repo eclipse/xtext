@@ -217,7 +217,7 @@ The body of the template is compiled into a big private `generate()` method. We 
 
 ## Extending the Compiler {#templates-compiler}
 
-We have added additional expressions to Xbase, so we have to tell the compiler how to translate them to Java. The [XbaseCompiler]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java) has a method `doInternalToJavaStatement` that dispatches the compilation with regard to the type of the current expression. This is where we have to hook in with our [TemplateCompiler]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend):
+We have added additional expressions to Xbase, so we have to tell the compiler how to translate them to Java. The [XbaseCompiler]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java) has a method `doInternalToJavaStatement` that dispatches the compilation with regard to the type of the current expression. This is where we have to hook in with our [TemplateCompiler]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend):
 
 ```xtend
 class TemplateCompiler extends XbaseCompiler {
@@ -256,7 +256,7 @@ RichString : {
 }
 ```
 
-As our *RichStringLiteral* inherits from [XStringLiteral]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XStringLiteral.java), it does not need any special treatment. The same holds for *RichStringIf* and *RichStringElseIif*. The *RichStringForLoop* requires special treatment, because as opposed to the [XForLoopExpression]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java) that always returns `null`, we want it to return a concatenation of its results. This looks like
+As our *RichStringLiteral* inherits from [XStringLiteral]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XStringLiteral.java), it does not need any special treatment. The same holds for *RichStringIf* and *RichStringElseIif*. The *RichStringForLoop* requires special treatment, because as opposed to the [XForLoopExpression]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java) that always returns `null`, we want it to return a concatenation of its results. This looks like
 
 ```xtend
 RichStringForLoop : {
@@ -293,11 +293,11 @@ override protected internalToConvertedExpression(XExpression obj,
 }
 ```
 
-As usual, we have to bind our [TemplateCompiler]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend) in the [TemplateRuntimeModule]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java) in order to be picked up as the [XbaseCompiler]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java) in the context of our language.
+As usual, we have to bind our [TemplateCompiler]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend) in the [TemplateRuntimeModule]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java) in order to be picked up as the [XbaseCompiler]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java) in the context of our language.
 
 ## Type Computation {#templates-type-provider}
 
-The type system has to know how to determine the types of our new expressions. This is the job of the [TemplateTypeComputer]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/typesystem/TemplateTypeComputer.xtend): *RichString* becomes a [StringBuilder]({{site.javadoc.java}}/java/lang/StringBuilder.html). As opposed to its super type [XForLoopExpression]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java) a *RichStringForLoop* is of type [StringBuilder]({{site.javadoc.java}}/java/lang/StringBuilder.html) as well. The for-loop's body is expected to have a type, as the results must be concatenatable, which is different from Xbase's for-loop.
+The type system has to know how to determine the types of our new expressions. This is the job of the [TemplateTypeComputer]({{site.src.sevenlang}}/languages/org.xtext.template/src/org/xtext/template/typesystem/TemplateTypeComputer.xtend): *RichString* becomes a [StringBuilder]({{site.javadoc.java}}/java/lang/StringBuilder.html). As opposed to its super type [XForLoopExpression]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java) a *RichStringForLoop* is of type [StringBuilder]({{site.javadoc.java}}/java/lang/StringBuilder.html) as well. The for-loop's body is expected to have a type, as the results must be concatenatable, which is different from Xbase's for-loop.
 
 ```xtend
 class TemplateTypeComputer extends XbaseWithAnnotationsTypeComputer {

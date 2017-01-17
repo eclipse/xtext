@@ -172,7 +172,7 @@ First you need to use a *platform:resource* URI instead of a *classpath* URI to 
   var grammarURI = "platform:/resource/${projectName}/src/my/mavenized/HeroLanguage.xtext"
 ```
 
-Next we need to register some URI mappings and make sure we use an [XtextResourceSet]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResourceSet.java) in the build process. This is only needed if you have ecore file references (also transitively) via platform URI. As we are using Xbase in the example it is needed to resolve the URIs to the Xbase related EPackages.
+Next we need to register some URI mappings and make sure we use an [XtextResourceSet]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResourceSet.java) in the build process. This is only needed if you have ecore file references (also transitively) via platform URI. As we are using Xbase in the example it is needed to resolve the URIs to the Xbase related EPackages.
 
 ```mwe2
   // use an XtextResourceset throughout the process, which is able to resolve classpath:/ URIs.
