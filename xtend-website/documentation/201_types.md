@@ -47,7 +47,7 @@ Subsequent changes to the array are reflected by the list and vice versa. Arrays
 
 The conversion works the other way round, too. In fact, all subtypes of [Iterable]({{site.javadoc.java}}/java/lang/Iterable.html) are automatically converted to arrays on demand.
 
-Another very useful conversion applies to lambda expressions. A lambda expression usually is of one of the types declared in [Functions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) or [Procedures]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java). However, if the expected type is an interface or a class with a single abstract method declaration, a lambda expression is automatically converted to that type. This allows to use lambda expressions with many existing Java libraries. See [Lambda Expression Typing](203_xtend_expressions.html#closure-types) for more details. 
+Another very useful conversion applies to lambda expressions. A lambda expression usually is of one of the types declared in [Functions]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) or [Procedures]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java). However, if the expected type is an interface or a class with a single abstract method declaration, a lambda expression is automatically converted to that type. This allows to use lambda expressions with many existing Java libraries. See [Lambda Expression Typing](203_xtend_expressions.html#closure-types) for more details. 
 
 ---
 

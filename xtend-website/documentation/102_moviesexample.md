@@ -75,7 +75,7 @@ The initialization on the right hand side first creates a new [FileReader]({{sit
 import static extension com.google.common.io.CharStreams.*
 ```
 
-[`CharStreams.readLines(Reader)`]({{site.javadoc.guava}}/com/google/common/io/CharStreams.html) returns a [`List<String>`]({{site.javadoc.java}}/java/util/List.html) on which we call another extension method `map`. This one is defined in the runtime library ([ListExtensions.map(...)]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java)) and is automatically imported and therefore available on all lists. The `map` extension expects a function as a parameter. It basically invokes that function for each value in the list and returns another list containing the results of the function invocations. Actually this mapping is performed lazily so if you never access the values of the result list, the mapping function is never executed.
+[`CharStreams.readLines(Reader)`]({{site.javadoc.guava}}/com/google/common/io/CharStreams.html) returns a [`List<String>`]({{site.javadoc.java}}/java/util/List.html) on which we call another extension method `map`. This one is defined in the runtime library ([ListExtensions.map(...)]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java)) and is automatically imported and therefore available on all lists. The `map` extension expects a function as a parameter. It basically invokes that function for each value in the list and returns another list containing the results of the function invocations. Actually this mapping is performed lazily so if you never access the values of the result list, the mapping function is never executed.
 
 Function objects are created using [lambda expressions](203_xtend_expressions.html#lambdas) (the code in squared brackets). Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using two whitespace characters as the separator. On the result of the split operation, the method `iterator()` is invoked. As you might know [String.split(String)]({{site.javadoc.java}}/java/lang/String.html) returns a string array (`String[]`), which Xtend [auto-converts to a list](201_types.html#conversion-rules) when we call [`Iterable.iterator()`]({{site.javadoc.java}}/java/lang/Iterable.html) on it.
 
@@ -83,7 +83,7 @@ Function objects are created using [lambda expressions](203_xtend_expressions.ht
 val segments = line.split('  ').iterator
 ```
 
-Now we use the iterator to create an instance of `Movie` for each String that it yields. The data type conversion (e.g. `String` to `int`) is done by calling [static methods](203_xtend_expressions.html#static-access) from the wrapper types. The rest of the [Iterable]({{site.javadoc.java}}/java/lang/Iterable.html) is turned into a set of categories. Therefore, the extension method [`IteratorExtensions.toSet(Iterator<T>)`]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java) is invoked on the iterator to consume its remaining values.
+Now we use the iterator to create an instance of `Movie` for each String that it yields. The data type conversion (e.g. `String` to `int`) is done by calling [static methods](203_xtend_expressions.html#static-access) from the wrapper types. The rest of the [Iterable]({{site.javadoc.java}}/java/lang/Iterable.html) is turned into a set of categories. Therefore, the extension method [`IteratorExtensions.toSet(Iterator<T>)`]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java) is invoked on the iterator to consume its remaining values.
 
 ```xtend
 return new Movie (
@@ -126,7 +126,7 @@ or even more compact
 movies.filter[ categories.contains('Action') ].size
 ```
 
-Eventually we call `size` on the resulting iterable which is an extension method, too. It is defined in the utility class [IterableExtensions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java).
+Eventually we call `size` on the resulting iterable which is an extension method, too. It is defined in the utility class [IterableExtensions]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java).
 
 ### Question 2 : What Is The Year The Best Movie From The 80's Was Released? {#question2}
 
@@ -137,9 +137,9 @@ Eventually we call `size` on the resulting iterable which is an extension method
 }
 ```
 
-Here we `filter` for all movies whose year is included in the range from 1980 to 1989 (the 80's). The `..` operator is again an extension defined in [IntegerExtensions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java) and returns an instance of [IntegerRange]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java). Operator overloading is explained in [section](203_xtend_expressions.html#operators).
+Here we `filter` for all movies whose year is included in the range from 1980 to 1989 (the 80's). The `..` operator is again an extension defined in [IntegerExtensions]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java) and returns an instance of [IntegerRange]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java). Operator overloading is explained in [section](203_xtend_expressions.html#operators).
 
-The resulting iterable is sorted ([`IterableExtensions.sortBy`]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java)) by the `rating` of the movies. Since it is sorted in ascending order, we take the last movie from the list and return its `year`. 
+The resulting iterable is sorted ([`IterableExtensions.sortBy`]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java)) by the `rating` of the movies. Since it is sorted in ascending order, we take the last movie from the list and return its `year`. 
 
 We could have sorted descending and take the head of the list as well: 
 

@@ -96,7 +96,7 @@ Previous versions of Xtend (2.4.1 and before) used the dollar as the delimiter c
 
 ### Collection Literals {#collection-literals}
 
-The methods in [CollectionLiterals]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionLiterals.java) are automatically imported so it's very easy and convenient to create instances of the various collection types the JDK offers.
+The methods in [CollectionLiterals]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionLiterals.java) are automatically imported so it's very easy and convenient to create instances of the various collection types the JDK offers.
 
 ```xtend
 val myList = newArrayList('Hello', 'World')
@@ -129,7 +129,7 @@ val myMap = #{'a' -> 1 ,'b' ->2}
 
 ### Arrays {#arrays}
 
-Java arrays can be created either using a [literal](203_xtend_expressions.html#collection-literals) as described in the previous section, or if it should be a new array with a fixed size, one of the methods from [ArrayLiterals]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayLiterals.java) can be used. The generic `newArrayOfSize(int)` method works for all reference types, while there is a specific factory method for each primitive type.
+Java arrays can be created either using a [literal](203_xtend_expressions.html#collection-literals) as described in the previous section, or if it should be a new array with a fixed size, one of the methods from [ArrayLiterals]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayLiterals.java) can be used. The generic `newArrayOfSize(int)` method works for all reference types, while there is a specific factory method for each primitive type.
 
 Example: 
 
@@ -166,7 +166,7 @@ Instead of a plain type cast it's also possible to use a [switch with a type gua
 
 ## Infix Operators and Operator Overloading {#operators}
 
-There are a couple of common predefined infix operators. These operators are not limited to operations on certain types. Instead an operator-to-method mapping allows to redefine the operators for any type just by implementing the corresponding method signature. As an example, the runtime library contains a class [BigDecimalExtensions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java) that defines operators for [BigDecimals]({{site.javadoc.java}}/java/math/BigDecimal.html). The following code is therefore perfectly valid: 
+There are a couple of common predefined infix operators. These operators are not limited to operations on certain types. Instead an operator-to-method mapping allows to redefine the operators for any type just by implementing the corresponding method signature. As an example, the runtime library contains a class [BigDecimalExtensions]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java) that defines operators for [BigDecimals]({{site.javadoc.java}}/java/math/BigDecimal.html). The following code is therefore perfectly valid: 
 
 ```xtend
 val x = 2.71BD
@@ -223,7 +223,7 @@ The table above also defines the operator precedence in ascending order. The bla
 
 ### Short-Circuit Boolean Operators
 
-If the operators `||`, `&&`, and `?:` are bound to the library methods [`BooleanExtensions.operator_and(boolean l, boolean r)`]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java), [`BooleanExtensions.operator_or(boolean l, boolean r)`]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java) resp. [`<T> T operator_elvis(T first, T second)`]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java) the operation is inlined and evaluated in short circuit mode. That means that the right hand operand might not be evaluated at all in the following cases: 
+If the operators `||`, `&&`, and `?:` are bound to the library methods [`BooleanExtensions.operator_and(boolean l, boolean r)`]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java), [`BooleanExtensions.operator_or(boolean l, boolean r)`]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java) resp. [`<T> T operator_elvis(T first, T second)`]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java) the operation is inlined and evaluated in short circuit mode. That means that the right hand operand might not be evaluated at all in the following cases: 
 
 1.  in the case of `||` the operand on the right hand side is not evaluated if the left operand evaluates to `true`.
 1.  in the case of `&&` the operand on the right hand side is not evaluated if the left operand evaluates to `false`.
@@ -671,7 +671,7 @@ However, if you write a lambda expression without having any target type expecta
 val toUpperCaseFunction = [ String s | s.toUpperCase ] // inferred type is (String)=>String
 ```
 
-The type will be one of the inner types found in [Functions]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) or [Procedures]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java). It is a procedure if the return type is `void`, otherwise it is a function.
+The type will be one of the inner types found in [Functions]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) or [Procedures]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java). It is a procedure if the return type is `void`, otherwise it is a function.
 
 Xtend supports a shorthand syntax for function types. Instead of writing `Function1<? super String,? extends String>` which is what you will find in the generated Java code, you can simply write `(String)=>String`.
 

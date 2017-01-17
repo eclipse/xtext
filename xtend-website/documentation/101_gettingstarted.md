@@ -31,7 +31,7 @@ public class HelloWorld {
 }
 ```
 
-The only surprising fact in the generated Java code may be the referenced library class [InputOutput]({{site.src.xtext}}/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java). It is part of the runtime library and a nice utility that is quite handy when used in expressions.
+The only surprising fact in the generated Java code may be the referenced library class [InputOutput]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java). It is part of the runtime library and a nice utility that is quite handy when used in expressions.
 
 You can put an Xtend class into a source folder of any Java project within Eclipse or any Maven project. If the project is not yet configured properly, Eclipse will complain about the missing library. The xtend.lib has to be on the class path. The IDE will provide a quick fix to add it.
 

@@ -36,7 +36,7 @@ kramdown:
     coderay_css:               style
 
 src:
-  xtext: "https://github.com/eclipse/xtext/blob/v2.7.0"
+  xtext_lib: "https://github.com/eclipse/xtext-lib/blob/master"
 
 javadoc:
   xtext: "http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.8"
