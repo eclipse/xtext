@@ -205,7 +205,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ArithmeticsPackage.Literals.IMPORT__MODULE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getImportAccess().getModuleModuleIDTerminalRuleCall_1_0_1(), semanticObject.getModule());
+		feeder.accept(grammarAccess.getImportAccess().getModuleModuleIDTerminalRuleCall_1_0_1(), semanticObject.eGet(ArithmeticsPackage.Literals.IMPORT__MODULE, false));
 		feeder.finish();
 	}
 	
