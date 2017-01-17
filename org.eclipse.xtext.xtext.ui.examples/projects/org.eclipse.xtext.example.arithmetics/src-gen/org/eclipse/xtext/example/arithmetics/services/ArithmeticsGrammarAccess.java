@@ -275,7 +275,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightMultiplicationParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
 		//Addition Expression:
-		//	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*
+		//	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*
@@ -287,7 +287,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//(({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//({Plus.left=current} '+' | {Minus.left=current} '-')
+		//{Plus.left=current} '+' | {Minus.left=current} '-'
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 		
 		//{Plus.left=current} '+'
@@ -330,7 +330,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightPrimaryExpressionParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
 		//Multiplication Expression:
-		//	PrimaryExpression (({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*
+		//	PrimaryExpression (({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//PrimaryExpression (({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*
@@ -342,7 +342,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//(({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//({Multi.left=current} '*' | {Div.left=current} '/')
+		//{Multi.left=current} '*' | {Div.left=current} '/'
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 		
 		//{Multi.left=current} '*'
@@ -397,7 +397,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//PrimaryExpression Expression:
 		//	'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression
-		//	(',' args+=Expression)* ')')?
+		//	(',' args+=Expression)* ')')?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression (','
@@ -621,7 +621,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Addition Expression:
-	//	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*
+	//	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*;
 	public AdditionElements getAdditionAccess() {
 		return pAddition;
 	}
@@ -631,7 +631,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Multiplication Expression:
-	//	PrimaryExpression (({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*
+	//	PrimaryExpression (({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*;
 	public MultiplicationElements getMultiplicationAccess() {
 		return pMultiplication;
 	}
@@ -642,7 +642,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//PrimaryExpression Expression:
 	//	'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression
-	//	(',' args+=Expression)* ')')?
+	//	(',' args+=Expression)* ')')?;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return pPrimaryExpression;
 	}
@@ -677,7 +677,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
