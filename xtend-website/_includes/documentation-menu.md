@@ -9,7 +9,4 @@
 	<li><a href="202_xtend_classes_members.html">Classes and Members</a></li>
 	<li><a href="203_xtend_expressions.html">Expressions</a></li>
 	<li><a href="204_activeannotations.html">Active Annotations</a></li>
-	<li>&nbsp;</li>
-	<li style="color : #333;">Additional Resources
-	<li><a href="{{site.javadoc.xtext}}/">API Documentation (JavaDoc)</a>
 </ul>
