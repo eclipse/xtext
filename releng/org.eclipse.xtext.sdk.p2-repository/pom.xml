@@ -61,7 +61,8 @@
 								</copy>
 								<copy
 									file="${basedir}/target/org.eclipse.xtext.sdk.p2-repository-2.11.0-SNAPSHOT.zip"
-									toDir="${basedir}/../../build/" />
+									tofile="${basedir}/../../build/org.eclipse.xtext.sdk.p2-repository-2.11.0-SNAPSHOT.zip">
+								</copy>
 							</tasks>
 						</configuration>
 					</execution>
