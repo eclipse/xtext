@@ -48,7 +48,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		resource.getContents().add(instanceOfExpression);
 		ISerializer serializer = get(ISerializer.class);
 		String string = serializer.serialize(instanceOfExpression);
-		assertEquals("[ | \"value\" ] instanceof String", string);
+		assertEquals("[|\"value\"] instanceof String", string);
 		
 		XInstanceOfExpression parsedExpression = parseHelper.parse(string);
 		assertTrue(EcoreUtil.equals(instanceOfExpression, parsedExpression));
@@ -72,7 +72,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		ISerializer serializer = get(ISerializer.class);
 		String string = serializer.serialize(instanceOfExpression);
 		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=464846
-		assertEquals("( if ( false ) \"value\" ) instanceof String", string);
+		assertEquals("( if(false) \"value\" ) instanceof String", string);
 		
 		XInstanceOfExpression parsedExpression = parseHelper.parse(string);
 		assertTrue(EcoreUtil.equals(instanceOfExpression, parsedExpression));
