@@ -660,7 +660,7 @@ def dispatch void format(PackageDeclaration p, extension IFormattableDocument do
 
 The API is designed in a way that allows to describe the formatting in a declarative way by calling methods on the [IHiddenRegionFormatter]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IHiddenRegionFormatter.java) which is made available inside invocations of `prepend`, `surround` or `append` to specify the formatting rules. This can be done in arbitrary order &ndash; the infrastructure will reorder all the configurations to execute them from top to bottom of the document. If the configuration-based approach is not sufficient for a particular use case, the [document]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/IFormattableDocument.java) also accepts imperative logic that is associated with a given range. The [ITextReplacer]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/ITextReplacer.java) that can be added directly to the document allows to perform all kinds of modifications to the text in the region that it is associated with.
 
-More detailed information about the API is available as [JavaDoc on the org.eclipse.xtext.formatting2 package]({{site.javadoc.xtext}}/org/eclipse/xtext/formatting2/package-summary.html).
+More detailed information about the API is available as [JavaDoc on the org.eclipse.xtext.formatting2 package]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/formatting2/package-info.java).
 
 ## Character Encoding {#encoding}
 
