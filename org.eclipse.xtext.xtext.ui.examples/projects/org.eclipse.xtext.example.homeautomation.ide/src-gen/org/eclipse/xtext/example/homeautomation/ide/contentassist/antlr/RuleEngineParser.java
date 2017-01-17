@@ -3,18 +3,14 @@
 package org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr;
 
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import org.antlr.runtime.CharStream;
-import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr.internal.InternalRuleEngineParser;
 import org.eclipse.xtext.example.homeautomation.services.RuleEngineGrammarAccess;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 
 public class RuleEngineParser extends AbstractContentAssistParser {
 
@@ -421,18 +417,7 @@ public class RuleEngineParser extends AbstractContentAssistParser {
 		}
 		return nameMappings.get(element);
 	}
-
-	@Override
-	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
-		try {
-			InternalRuleEngineParser typedParser = (InternalRuleEngineParser) parser;
-			typedParser.entryRuleModel();
-			return typedParser.getFollowElements();
-		} catch(RecognitionException ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
+			
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };

@@ -139,7 +139,7 @@ public abstract class AbstractRuleEngineRuntimeModule extends DefaultXbaseRuntim
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalRuleEngineLexer> provideInternalRuleEngineLexer() {
+	public Provider<? extends InternalRuleEngineLexer> provideInternalRuleEngineLexer() {
 		return LexerProvider.create(InternalRuleEngineLexer.class);
 	}
 	
