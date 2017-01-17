@@ -37,6 +37,12 @@ kramdown:
 
 src:
   xtext: "https://github.com/eclipse/xtext/blob/v2.9.0"
+  xtext_lib: "https://github.com/eclipse/xtext-lib/blob/master"
+  xtext_core: "https://github.com/eclipse/xtext-core/blob/master"
+  xtext_extras: "https://github.com/eclipse/xtext-extras/blob/master"
+  xtext_eclipse: "https://github.com/eclipse/xtext-eclipse/blob/master"
+  xtext_idea: "https://github.com/eclipse/xtext-idea/blob/master"
+  xtext_web: "https://github.com/eclipse/xtext-web/blob/master"
   mwe: "https://github.com/eclipse/mwe/blob/v2.7.1"
   emf: "https://github.com/eclipse/emf/blob/R2_9_0"
   gef: "https://github.com/eclipse/gef/blob/master"
