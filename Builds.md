@@ -2,7 +2,7 @@
 
 ## Preparing Releases and Milestones
 
-Branch names should be `milestone_«version»` for milestones, and `release_«version»` for releases. Tag names should be `v«version»`.
+Branch names should be `milestone_«version»` for milestones, and `release_«version»` for releases. Tag names should be `v«version»`. When updating branch names for upstream dependencies, care must be taken to select the correct versions for additional libraries that are included in the Xtext build infrastructure (LSP4J).
 
 The Xtend compiler version used in the build should be the current snapshot or the last milestone for milestones, and it should always be the last milestone for releases (this is important for making release builds reproducible).
 
@@ -52,4 +52,4 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
 9. xtext-umbrella
    * Replace all occurrences of `job/master` according to the release branch name.
-   * Update the name of the zipped p2 repository according to the release version in `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml`.
+   * Update the name of the zipped p2 repository  according to the release version in `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml` (`tofile` property).
