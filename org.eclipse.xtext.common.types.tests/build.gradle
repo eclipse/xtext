@@ -1,3 +1,5 @@
+apply from: "${rootDir}/gradle/longrunning-tests.gradle"
+
 dependencies {
 	compile project(':org.eclipse.xtext.common.types')
 	compile project(':org.eclipse.xtext.xbase.testdata')
@@ -10,21 +12,11 @@ dependencies {
 	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
 
-configurations {
-	compile.exclude module: 'jsr305'
-}
-
 sourceSets.test.java {
 	srcDir 'testdata'
 	srcDir 'tests'
-	srcDir 'suites'
 }
 
 sourceSets.test.resources {
 	srcDir 'tests'
-	srcDir 'suites'
-}
-
-test {
-	exclude '**/*Suite.class'
 }

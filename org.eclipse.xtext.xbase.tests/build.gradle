@@ -1,3 +1,5 @@
+apply from: "${rootDir}/gradle/longrunning-tests.gradle"
+
 dependencies {
 	compile project(':org.eclipse.xtext.generator')
 	compile project(':org.eclipse.xtext.common.types')
@@ -9,48 +11,4 @@ dependencies {
 	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt"
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	compile "junit:junit:$versions.junit"
-}
-
-sourceSets {
-	longrunning {
-		java.srcDirs = ['longrunning/src']
-		if (findProperty('compileXtend') == 'true') {
-			xtendOutputDir = 'longrunning/xtend-gen'
-		} else {
-			java.srcDir 'longrunning/xtend-gen'
-		}
-		compileClasspath += sourceSets.test.output
-		runtimeClasspath += sourceSets.test.output
-	}
-	suites {
-		java.srcDirs =  ['suites', 'smoke-suites']
-		compileClasspath += sourceSets.test.output + sourceSets.longrunning.output
-		runtimeClasspath += sourceSets.test.output + sourceSets.longrunning.output
-	}
-}
-
-configurations {
-	longrunningCompile.extendsFrom testCompile
-	longrunningRuntime.extendsFrom testRuntime
-	suitesCompile.extendsFrom testCompile
-	suitesRuntime.extendsFrom testRuntime
-}
-
-if (findProperty('compileXtend') == 'true') {
-	generateLongrunningXtext.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
-}
-
-jar {
-	from sourceSets.longrunning.output
-	from sourceSets.suites.output
-}
-
-sourcesJar {
-	from sourceSets.longrunning.allSource
-	from sourceSets.suites.allSource
-}
-
-task longrunningTest(type: Test) {
-	testClassesDir = sourceSets.longrunning.output.classesDir
-	classpath = sourceSets.longrunning.runtimeClasspath
 }
