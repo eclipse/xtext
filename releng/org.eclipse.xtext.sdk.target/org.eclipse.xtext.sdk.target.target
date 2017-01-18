@@ -13,7 +13,7 @@
 		<unit id="org.eclipse.xtend.lib.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib.macro" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib.macro.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/release_2.11.0/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -37,7 +37,7 @@
 		<unit id="org.eclipse.xtext.testlanguages.ide.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-core/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-core/job/release_2.11.0/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -63,7 +63,7 @@
 		<unit id="org.eclipse.xtext.xbase.testing.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/release_2.11.0/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -110,7 +110,7 @@
 		<unit id="org.eclipse.xtext.xtext.ui.examples.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xtext.ui.graph" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xtext.ui.graph.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/release_2.11.0/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -126,7 +126,7 @@
 		<unit id="org.eclipse.xtend.m2e.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.standalone" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.standalone.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-xtend/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-xtend/job/release_2.11.0/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
