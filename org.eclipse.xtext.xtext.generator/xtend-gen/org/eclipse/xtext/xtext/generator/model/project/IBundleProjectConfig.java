@@ -12,7 +12,9 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 
 /**
- * @noimplement
+ * Configuration of subprojects that can be used as Eclipse bundles.
+ * 
+ * @noimplement This interface should not be implemented by clients.
  */
 @SuppressWarnings("all")
 public interface IBundleProjectConfig extends ISubProjectConfig {

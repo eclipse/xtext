@@ -11,7 +11,9 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
 
 /**
- * @noimplement
+ * Configuration of the runtime project, i.e. the main subproject containing the language definition.
+ * 
+ * @noimplement This interface should not be implemented by clients.
  */
 @SuppressWarnings("all")
 public interface IRuntimeProjectConfig extends IBundleProjectConfig {

@@ -14,9 +14,12 @@ import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
 /**
- * @noextend
+ * Configuration of subprojects.
+ * 
+ * @noextend This class should not be extended by clients.
  */
 class SubProjectConfig implements ISubProjectConfig {
+	
 	@Inject
 	@Accessors(PUBLIC_GETTER)
 	XtextProjectConfig owner

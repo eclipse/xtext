@@ -19,7 +19,6 @@ import java.nio.charset.Charset
 
 /**
  * Configuration object for generated code.
- * @noextend
  */
 class CodeConfig implements IGuiceAwareGeneratorComponent {
 
@@ -56,7 +55,7 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	 *   <li><code>${date}</code> - the current date (month day, year)</li>
 	 *   <li><code>${year}</code> - the current year</li>
 	 *   <li><code>${user}</code> - the content of the 'user.name' system property</li>
-	 *   <li><code>${version}</code> - the generator plug-in version</li>
+	 *   <li><code>${version}</code> - the generator bundle version</li>
 	 * </ul>
 	 */
 	def void setFileHeader(String fileHeaderTemplate) {

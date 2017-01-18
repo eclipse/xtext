@@ -13,7 +13,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
 /**
- * @noextend
+ * Configuration of the runtime project, i.e. the main subproject containing the language definition.
+ * 
+ * @noextend This class should not be extended by clients.
  */
 class RuntimeProjectConfig extends BundleProjectConfig implements IRuntimeProjectConfig {
 	@Accessors(PUBLIC_GETTER)

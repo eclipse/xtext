@@ -15,6 +15,9 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.util.internal.Log
 
+/**
+ * Configuration object for Guice modules based on {@link org.eclipse.xtext.service.AbstractGenericModule}.
+ */
 @Log
 class GuiceModuleAccess {
 	

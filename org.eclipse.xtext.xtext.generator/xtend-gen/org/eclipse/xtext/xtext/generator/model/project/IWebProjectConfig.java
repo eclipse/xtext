@@ -11,7 +11,9 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 
 /**
- * @noimplement
+ * Configuration of the web project.
+ * 
+ * @noimplement This interface should not be implemented by clients.
  */
 @SuppressWarnings("all")
 public interface IWebProjectConfig extends ISubProjectConfig {

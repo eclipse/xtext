@@ -18,16 +18,26 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess
 
 /**
- * @noextend
+ * Configuration of the subprojects for one or more Xtext languages. If the standard project names
+ * and layout is sufficient, use {@link StandardProjectConfig}.
+ * 
+ * @noextend This class should not be extended by clients.
  */
 @Accessors
 class XtextProjectConfig implements IXtextProjectConfig {
+	
 	RuntimeProjectConfig runtime = new RuntimeProjectConfig
+	
 	BundleProjectConfig runtimeTest = new BundleProjectConfig
+	
 	BundleProjectConfig genericIde = new BundleProjectConfig
+	
 	BundleProjectConfig eclipsePlugin = new BundleProjectConfig
+	
 	BundleProjectConfig eclipsePluginTest = new BundleProjectConfig
+	
 	SubProjectConfig ideaPlugin = new SubProjectConfig
+	
 	WebProjectConfig web = new WebProjectConfig
 	
 	@Inject CodeConfig codeConfig

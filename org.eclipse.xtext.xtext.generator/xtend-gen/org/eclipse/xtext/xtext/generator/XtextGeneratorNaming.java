@@ -15,7 +15,8 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
- * @noreference
+ * Configuration of the names of the generated classes. Create a subclass and register it with a specialized
+ * {@link DefaultGeneratorModule} in order to customize some class or package names.
  */
 @SuppressWarnings("all")
 public class XtextGeneratorNaming {

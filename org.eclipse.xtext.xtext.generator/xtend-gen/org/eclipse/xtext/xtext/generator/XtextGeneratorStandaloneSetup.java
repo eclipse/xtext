@@ -26,7 +26,8 @@ import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
- * @noextend
+ * Standalone setup for resolving EMF URIs in the context of the {@link XtextGenerator}. The actual
+ * setup is done by {@link StandaloneSetup}.
  */
 @Log
 @SuppressWarnings("all")

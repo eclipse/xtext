@@ -15,7 +15,9 @@ import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
 
 /**
- * @noimplement
+ * Configuration of the subprojects for one or more Xtext languages. Implemented by {@link XtextProjectConfig}.
+ * 
+ * @noimplement This interface should not be implemented by clients.
  */
 @SuppressWarnings("all")
 public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {

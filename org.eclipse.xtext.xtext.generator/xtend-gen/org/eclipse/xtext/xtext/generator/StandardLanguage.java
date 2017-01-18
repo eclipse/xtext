@@ -49,8 +49,24 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2;
 
 /**
+ * This specialization of the {@link XtextGeneratorLanguage} adds all the standard generator fragments
+ * that are commonly used for Xtext languages. This eliminates the need to list all these fragments
+ * explicitly in the workflow file. More fragments can be added as required, but the standard fragments
+ * cannot be removed. However, most of these fragments disable themselves automatically if they are
+ * not applicable, e.g. the {@link WebIntegrationFragment} does not generate anything if the web project
+ * is disabled in the project configuration.
+ * 
+ * <p>The configuration for individual fragments can be made with the corresponding properties.
+ * For example, write
+ * <pre>
+ * formatter = formatting.Formatter2Fragment2 {
+ *     generateStub = true
+ * }
+ * </pre>
+ * to enable stub generation for the formatter.</p>
+ * 
  * @author Sven Efftinge - Initial contribution and API
- * @noextend
+ * @noextend This class should not be extended by clients.
  */
 @Accessors({ AccessorType.PUBLIC_SETTER, AccessorType.PROTECTED_GETTER })
 @Log

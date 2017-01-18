@@ -12,7 +12,9 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
- * @noreference
+ * A generator fragment that delegates to a list of contained fragments. This can be
+ * useful for extracting parts of a language configuration to a separate mwe2 file,
+ * for example.
  */
 class CompositeGeneratorFragment2 implements IXtextGeneratorFragment {
 

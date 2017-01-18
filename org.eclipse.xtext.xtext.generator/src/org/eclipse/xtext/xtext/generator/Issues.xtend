@@ -8,11 +8,16 @@
 package org.eclipse.xtext.xtext.generator
 
 /**
- * @noreference
+ * Use this to report configuration problems during the {@link IXtextGeneratorFragment#checkConfiguration(Issues)} phase.
  */
 interface Issues {
+	
 	def void addError(String message)
+	
 	def void addError(String message, Object source)
+	
 	def void addWarning(String message)
+	
 	def void addWarning(String message, Object source)
+	
 }

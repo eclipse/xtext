@@ -25,7 +25,19 @@ import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
 /**
- * @noextend
+ * An instance of this module is assigned to the {@code configuration} property of
+ * {@link XtextGenerator}. It contains the {@link XtextProjectConfig project configuration}
+ * and the {@link CodeConfig code configuration}. If you need to configure more aspects of
+ * the generator, create a subclass and bind your custom configuration classes. For example,
+ * in order to adapt the {@link XtextGeneratorNaming naming} of the generated code, use
+ * the following:
+ * <pre>
+ * class MyGeneratorModule extends DefaultGeneratorModule {
+ *     def Class&lt;? extends XtextGeneratorNaming&gt; bindXtextGeneratorNaming() {
+ *         MyGeneratorNaming
+ *     }
+ * }
+ * </pre>
  */
 @SuppressWarnings("all")
 public class DefaultGeneratorModule extends AbstractGenericModule {

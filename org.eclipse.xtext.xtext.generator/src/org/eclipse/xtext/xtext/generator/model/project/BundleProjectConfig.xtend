@@ -14,10 +14,13 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 
 /**
- * @noextend
+ * Configuration of subprojects that can be used as Eclipse bundles.
+ * 
+ * @noextend This class should not be extended by clients.
  */
 @Accessors
-class BundleProjectConfig extends SubProjectConfig implements IBundleProjectConfig{
+class BundleProjectConfig extends SubProjectConfig implements IBundleProjectConfig {
+	
 	ManifestAccess manifest
 	PluginXmlAccess pluginXml
 	

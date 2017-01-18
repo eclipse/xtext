@@ -40,10 +40,28 @@ import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 /**
- * The Xtext language infrastructure generator. Can be configured with {@link IXtextGeneratorFragment}
- * instances as well as with some properties declared via setter or adder methods.
+ * The Xtext language infrastructure generator. Use the {@code configuration} block to add general
+ * configuration for your Xtext project and the generated code, e.g.
+ * <pre>
+ * configuration = {
+ *     project = model.project.StandardProjectConfig {
+ *         baseName = "org.example.language"
+ *         rootPath = ".."
+ *     }
+ *     code = {
+ *         encoding = 'ISO-8859-1'
+ *     }
+ * }
+ * </pre>
+ * You can generate code for one or more Xtext languages within the same project. For each language,
+ * add a {@code language} block, e.g.
+ * <pre>
+ * language = StandardLanguage {
+ *     name = "org.example.language.MyExampleLanguage"
+ * }
+ * </pre>
  * 
- * @noextend
+ * @noextend This class should not be extended by clients.
  */
 @Log
 class XtextGenerator extends AbstractWorkflowComponent2 {

@@ -12,7 +12,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.Issues
 
 /**
- * @noextend
+ * Specialized project configuration that uses standard names and paths. Usually it is sufficient to
+ * set the {@code baseName} and {@code rootPath} properties and to enable the required subprojects.
+ * 
+ * @noextend This class should not be extended by clients.
  */
 @Accessors
 class StandardProjectConfig extends XtextProjectConfig {
@@ -23,11 +26,17 @@ class StandardProjectConfig extends XtextProjectConfig {
 	String rootPath
 	String baseName
 
+	/**
+	 * The base name of the project, which is usually equal to the runtime subproject.
+	 */
 	@Mandatory
 	def setBaseName(String baseName) {
 		this.baseName = baseName
 	}
 
+	/**
+	 * The root path, usually {@code ".."}.
+	 */
 	@Mandatory
 	def setRootPath(String rootPath) {
 		this.rootPath = rootPath

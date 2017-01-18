@@ -14,6 +14,9 @@ import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
+/**
+ * A utility class for generating Xtend files.
+ */
 @SuppressWarnings("all")
 public class XtendFileAccess extends JavaFileAccess {
   /**

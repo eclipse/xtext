@@ -11,16 +11,28 @@ import java.util.List
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
 
 /**
- * @noimplement
+ * Configuration of the subprojects for one or more Xtext languages. Implemented by {@link XtextProjectConfig}.
+ * 
+ * @noimplement This interface should not be implemented by clients.
  */
 interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
+	
 	def IRuntimeProjectConfig getRuntime()
+	
 	def IBundleProjectConfig getRuntimeTest()
+	
 	def IBundleProjectConfig getGenericIde()
+	
 	def IBundleProjectConfig getEclipsePlugin()
+	
 	def IBundleProjectConfig getEclipsePluginTest()
+	
 	def ISubProjectConfig getIdeaPlugin()
+	
 	def IWebProjectConfig getWeb()
+	
 	def List<? extends ISubProjectConfig> getEnabledProjects()
+	
 	def List<? extends ISubProjectConfig> getTestProjects()
+	
 }

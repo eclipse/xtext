@@ -18,7 +18,9 @@ import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
 
 /**
- * @noextend
+ * Configuration of the runtime project, i.e. the main subproject containing the language definition.
+ * 
+ * @noextend This class should not be extended by clients.
  */
 @SuppressWarnings("all")
 public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntimeProjectConfig {

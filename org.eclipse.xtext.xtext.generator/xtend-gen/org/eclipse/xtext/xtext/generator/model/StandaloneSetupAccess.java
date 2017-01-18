@@ -15,6 +15,10 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
+/**
+ * Configuration object for the generated standalone setup class. This class is responsible for adding
+ * required EMF packages to the global registries.
+ */
 @Accessors
 @SuppressWarnings("all")
 public class StandaloneSetupAccess {

@@ -7,6 +7,9 @@ import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess.JavaTypeAwareStringConcatenation
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
 
+/**
+ * A specialized Java file generator used for classes in the 'src-gen' folder.
+ */
 class GeneratedJavaFileAccess extends JavaFileAccess {
 	
 	CharSequence typeComment

@@ -12,6 +12,10 @@ import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 
+/**
+ * Configuration object for the generated standalone setup class. This class is responsible for adding
+ * required EMF packages to the global registries.
+ */
 @Accessors
 class StandaloneSetupAccess {
 	

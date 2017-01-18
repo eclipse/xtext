@@ -29,6 +29,9 @@ import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
+/**
+ * A utility class for generating Java files.
+ */
 @SuppressWarnings("all")
 public class JavaFileAccess extends TextFileAccess {
   protected static class JavaTypeAwareStringConcatenation extends StringConcatenation {

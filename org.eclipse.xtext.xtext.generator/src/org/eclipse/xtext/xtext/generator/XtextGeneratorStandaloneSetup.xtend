@@ -16,17 +16,19 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 /**
- * @noextend
+ * Standalone setup for resolving EMF URIs in the context of the {@link XtextGenerator}. The actual
+ * setup is done by {@link StandaloneSetup}.
  */
 @Log
 class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorComponent {
+	
 	@Inject IXtextProjectConfig projectConfig
 
 	@Accessors boolean scanClasspath = true
 
 	override initialize(Injector injector) {
 		injector.injectMembers(this)
-		setup
+		setup()
 	}
 
 	private def void setup() {

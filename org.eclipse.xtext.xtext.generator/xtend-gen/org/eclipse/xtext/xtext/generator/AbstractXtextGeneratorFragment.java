@@ -18,6 +18,10 @@ import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
+/**
+ * Convenience class for implementing generator fragments. Provides access to the
+ * {@link IXtextProjectConfig project configuration} and the {@link IXtextGeneratorLanguage language configuration}.
+ */
 @SuppressWarnings("all")
 public abstract class AbstractXtextGeneratorFragment implements IXtextGeneratorFragment {
   @Accessors(AccessorType.PROTECTED_GETTER)

@@ -17,6 +17,9 @@ import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
 import com.google.inject.Injector
 
+/**
+ * Configuration object for plugin.xml files for use in Eclipse.
+ */
 @Log
 @Accessors
 class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGeneratorComponent {

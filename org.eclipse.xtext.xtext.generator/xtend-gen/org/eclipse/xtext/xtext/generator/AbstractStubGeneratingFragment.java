@@ -16,6 +16,14 @@ import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
 
+/**
+ * A fragment that generates a <em>stub</em>, that is a class where the user can add
+ * custom behavior, e.g. validation or formatting rules. The stub is generated into
+ * the source folder that is not overwritten when the generator is executed again
+ * ({@code src} for plain project layout, {@code src/main/java} for Maven/Gradle
+ * project layout). If you want the stub to be generated again, delete the already
+ * existing file.
+ */
 @SuppressWarnings("all")
 public abstract class AbstractStubGeneratingFragment extends AbstractXtextGeneratorFragment {
   @Inject

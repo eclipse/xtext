@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xtext.generator;
 
 /**
- * @noreference
+ * Use this to report configuration problems during the {@link IXtextGeneratorFragment#checkConfiguration(Issues)} phase.
  */
 @SuppressWarnings("all")
 public interface Issues {

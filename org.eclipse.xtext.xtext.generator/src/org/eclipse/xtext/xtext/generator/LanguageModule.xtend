@@ -13,6 +13,10 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.xtext.RuleNames
 
+/**
+ * Language-specific Guice module that is used in a child injector of the global injector
+ * derived from {@link DefaultGeneratorModule}.
+ */
 @FinalFieldsConstructor
 package class LanguageModule extends AbstractGenericModule {
 	

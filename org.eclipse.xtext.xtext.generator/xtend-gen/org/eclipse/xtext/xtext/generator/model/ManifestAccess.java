@@ -31,6 +31,9 @@ import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
+/**
+ * Configuration object for MANIFEST.MF files for use in Eclipse.
+ */
 @Log
 @Accessors
 @SuppressWarnings("all")

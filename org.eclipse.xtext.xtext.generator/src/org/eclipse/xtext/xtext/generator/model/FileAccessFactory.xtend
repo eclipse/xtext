@@ -11,6 +11,9 @@ import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtend2.lib.StringConcatenationClient
 
+/**
+ * Factory for creating text files, Java files, and Xtend files.
+ */
 class FileAccessFactory {
 	
 	@Inject CodeConfig codeConfig
