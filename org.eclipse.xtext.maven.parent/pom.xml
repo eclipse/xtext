@@ -6,7 +6,7 @@
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.maven.parent</artifactId>
 	<packaging>pom</packaging>
-	<version>2.11.0.RC1</version>
+	<version>2.11.0</version>
 
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
@@ -251,19 +251,19 @@
 			<repositories>
 				<repository>
 					<id>lsp4j-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/release_2.11.0/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 				<repository>
 					<id>xtext-lib-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/release_2.11.0/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 				<repository>
 					<id>xtext-core-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/release_2.11.0/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 				<repository>
 					<id>xtext-extras-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/release_2.11.0/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 			</repositories>
 		</profile>
