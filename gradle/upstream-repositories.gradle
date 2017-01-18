@@ -2,11 +2,22 @@
  * The build uses either public snapshots or branch-specific repositories on the Jenkins
  * build server as upstream repositories. Use the argument '-PuseJenkinsSnapshots=true'
  * to enable the Jenkins repositories. In this case you can select an upstream branch
- * with the argument '-PupstreamBranch=<branch name>'.
+ * with the argument '-PupstreamBranch=<branch name>'. Without that argument, the
+ * upstream branch is selected automatically based on the version string.
  */
 
-if (!hasProperty('upstreamBranch'))
-	ext.upstreamBranch = 'master'
+if (!hasProperty('upstreamBranch')) {
+	def versionSplit = version.split('\\.')
+	if (versionSplit.length == 4)
+		ext.upstreamBranch = 'milestone_' + version
+	else if (versionSplit[2] == '0-SNAPSHOT')
+		ext.upstreamBranch = 'master'
+	else if (versionSplit[2].endsWith('-SNAPSHOT'))
+		ext.upstreamBranch = 'maintenance_' + version.substring(0, version.lastIndexOf('.'))
+	else
+		ext.upstreamBranch = 'release_' + version
+}
+
 def jenkinsPipelineRepo = { jobName -> "http://services.typefox.io/open-source/jenkins/job/$jobName/job/$upstreamBranch/lastStableBuild/artifact/build/maven-repository/" }
 
 repositories {
