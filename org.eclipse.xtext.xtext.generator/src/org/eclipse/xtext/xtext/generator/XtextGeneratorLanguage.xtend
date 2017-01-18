@@ -49,7 +49,6 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	
 	String name
 	
-	@Accessors(PUBLIC_SETTER)	
 	Boolean generateXtendStubs
 	
 	@Accessors(PUBLIC_GETTER)
@@ -124,6 +123,18 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 		return fileExtensions
 	}
 	
+	/**
+	 * @deprecated Use {@link CodeConfig#setPreferXtendStubs(boolean)} instead
+	 */
+	@Deprecated
+	def void setGenerateXtendStubs(Boolean generateXtendStubs) {
+		this.generateXtendStubs = generateXtendStubs
+	}
+	
+	/**
+	 * @deprecated Use {@link CodeConfig#isPreferXtendStubs(boolean)} instead
+	 */
+	@Deprecated
 	override isGenerateXtendStubs() {
 		if (generateXtendStubs !== null) generateXtendStubs.booleanValue else codeConfig.preferXtendStubs
 	}
