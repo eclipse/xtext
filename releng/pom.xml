@@ -26,15 +26,11 @@
 		</repository>
 		<repository>
 			<id>maven</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/release_2.11.0/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>maven2</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/maven-repository/</url>
-		</repository>
-		<repository>
-			<id>maven3</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/milestone_2.11.0.RC1/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/release_2.11.0/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 	</repositories>
 
@@ -42,155 +38,155 @@
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.builder.standalone</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.builder.standalone</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.common.types</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.common.types</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.common.types.tests</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.common.types.tests</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.ecore</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.ecore</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.generator</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.generator</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.java</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.java</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.purexbase</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.purexbase</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.purexbase.tests</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.purexbase.tests</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.smap</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.smap</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.ide</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.ide</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testing</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testing</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testlanguages</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testlanguages</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.tests</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.tests</artifactId>
-			<version>2.11.0.RC1</version>
+			<version>2.11.0</version>
 			<classifier>sources</classifier>
 		</dependency>
 	</dependencies>
