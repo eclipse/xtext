@@ -52,4 +52,28 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
 9. xtext-umbrella
    * Replace all occurrences of `job/master` according to the release branch name.
-   * Update the name of the zipped p2 repository  according to the release version in `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml` (`tofile` property).
+   * Update the name of the zipped p2 repository  according to the release version in `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml` (`tofile` property).
+10. Once all previous builds are successful, trigger the build job https://hudson.eclipse.org/xtext/job/xtext-release/ with the release version and branch name as parameters.
+11. Ask @dhuebner to publish the Eclipse and Maven artifacts.
+
+## Lifting the Version Number on `master`
+
+Once the release branch for a major or minor release has been created, the master branch should be lifted to the next version.
+
+Note that the Xtend compiler cannot be set to use snapshot versions from the beginning, since the new snapshots do not exist yet. It should be set to the latest published version (a release candidate or the actual release), and changed to the new snapshot version when it's available.
+
+1. xtext-lib
+   * Set `version` property in `gradle/versions.gradle` to the next version.
+   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * Replace occurrences of the previous version in `MANIFEST.MF` and `feature.xml` files.
+   * `./gradlew generateP2Build`
+2. xtext-core
+   * Set `version` property in `gradle/versions.gradle` to the next version.
+   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * Replace occurrences of the previous version in `MANIFEST.MF` and `feature.xml` files.
+   * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
+3. xtext-extras
+   * Set `version` property in `gradle/versions.gradle` to the next version.
+   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * Replace occurrences of the previous version in `MANIFEST.MF` and `feature.xml` files.
+   * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
