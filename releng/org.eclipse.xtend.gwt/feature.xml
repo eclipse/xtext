@@ -22,8 +22,8 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
    <requires>
-      <import feature="org.eclipse.xtext.gwt" version="2.11.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib" version="2.11.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.gwt" version="2.12.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib" version="2.12.0" match="equivalent"/>
    </requires>
 
    <plugin
