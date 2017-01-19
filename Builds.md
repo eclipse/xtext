@@ -2,6 +2,34 @@
 
 Xtext uses [Gradle](https://gradle.org) to build the Java projects that are independent of Eclipse and Maven, [Maven](https://maven.apache.org) to build the Maven plug-ins, and [Tycho](https://eclipse.org/tycho/) to build the Eclipse plug-ins. The builds are executed on a [Jenkins server](http://services.typefox.io/open-source/jenkins/).
 
+An overview of the project dependencies and their build systems is shown here:
+```
+xtext-lib
+(Gradle*)
+    |
+    |
+xtext-core
+(Gradle*)
+    |
+    |
+xtext-extras________ ____________ ___________
+ (Gradle*)          |            |           |
+    |               |            |           |
+    |               |            |           |
+xtext-eclipse   xtext-idea   xtext-web   xtext-maven
+ (Tycho)         (Gradle)    (Gradle)      (Maven)
+    |
+    |
+xtext-xtend
+(Gradle + Maven + Tycho)
+    |
+    |
+xtext-umbrella
+ (Tycho)
+```
+
+The Gradle projects marked with `*` include generated Tycho builds for creating p2 repositories as described below.
+
 ## Build Systems
 
 ### The Gradle builds
