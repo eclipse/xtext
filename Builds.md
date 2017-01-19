@@ -28,7 +28,7 @@ xtext-umbrella
  (Tycho)
 ```
 
-The Gradle projects marked with `*` include generated Tycho builds for creating p2 repositories as described below.
+The Gradle projects marked with `*` include generated Tycho builds for creating p2 repositories as described below. For `xtext-xtend`, only the Tycho build depends on `xtext-eclipse`, while the Gradle and Maven builds just require `xtext-extras`.
 
 ## Build Systems
 
@@ -71,7 +71,13 @@ Another Tycho build is found in `xtext-umbrella`, with a very similar structure 
 
 ## The Build Servers
 
-TODO
+### Jenkins
+
+Each project has its own [multibranch pipeline](https://jenkins.io/blog/2015/12/03/pipeline-as-code-with-multibranch-workflows-in-jenkins/) on the [Jenkins build server](http://services.typefox.io/open-source/jenkins/). The server polls the git repositories every few minutes and automatically refreshes its build jobs: a new job is created for each new branch that is found, and the jobs of branches that do not exist anymore are deleted. This approach gives committers a very convenient way to test their changes on the server without affecting the main development streams (master and maintenance branches).
+
+The actual build job description is written in a [Jenkinsfile](https://jenkins.io/doc/book/pipeline/jenkinsfile/). This file is included in the git repositories and thus can be modified per branch. Basically it defines the commands to execute for each build, where to find the test results, and which artifacts to make available.
+
+The build artifacts of each project are made available as a Maven repository, a p2 repository, or both. The build jobs of downstream projects are configured to consume the build artifacts of the projects they depend on. Gradle and Maven plug-in builds pick up their dependencies from the Maven repositories generated for their upstream projects, while Tycho builds use the p2 repositories.
 
 ## The Release Process
 
