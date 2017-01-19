@@ -189,7 +189,6 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       ActiveAnnotationsProcessingInIDETest.macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject("macroProject"));
       ActiveAnnotationsProcessingInIDETest.userProject = JavaCore.create(
         WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-          "org.eclipse.xtend.core.tests", 
           "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
       WorkbenchTestHelper.addExportedPackages(ActiveAnnotationsProcessingInIDETest.macroProject.getProject(), "myannotation");
     } catch (Throwable _e) {

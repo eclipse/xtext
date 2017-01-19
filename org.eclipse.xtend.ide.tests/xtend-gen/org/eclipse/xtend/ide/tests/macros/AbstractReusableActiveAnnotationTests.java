@@ -1590,7 +1590,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
   
-  @Ignore
   @Test
   public void testAnnotationValueSetting_3() {
     StringConcatenation _builder = new StringConcatenation();
