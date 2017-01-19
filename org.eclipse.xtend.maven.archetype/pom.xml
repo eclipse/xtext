@@ -66,7 +66,8 @@
 				<artifactId>maven-archetype-plugin</artifactId>
 				<configuration>
 					<skip>${it-tests-skip}</skip>
-					<settingsFile>${basedir}/it-settings.xml</settingsFile>
+					<settingsFile>${basedir}/it_settings.xml</settingsFile>
+					<debug>true</debug>
 				</configuration>
 				<executions>
 					<execution>
