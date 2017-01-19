@@ -2,7 +2,9 @@
 
 Xtext uses [Gradle](https://gradle.org) to build the Java projects that are independent of Eclipse and Maven, [Maven](https://maven.apache.org) to build the Maven plug-ins, and [Tycho](https://eclipse.org/tycho/) to build the Eclipse plug-ins. The builds are executed on a [Jenkins server](http://services.typefox.io/open-source/jenkins/).
 
-## The Gradle builds
+## Build Systems
+
+### The Gradle builds
 
 The projects that include Gradle builds are `xtext-lib`, `xtext-core`, `xtext-extras`, `xtext-idea`, `xtext-web`, and `xtext-xtend`. These repositories share some common concepts:
 
@@ -18,13 +20,26 @@ The projects that include Gradle builds are `xtext-lib`, `xtext-core`, `xtext-ex
 * The builds of `xtext-lib`, `xtext-core`, and `xtext-extras` include a Gradle plug-in that can generate a second Tycho-based build into the `releng` directory by running `./gradlew generateP2Build` (see `p2-deployment.gradle`). This Tycho build creates a local p2 repository in `build/p2-repository`. This approach eliminates the need to manually keep these Tycho builds consistent with the Gradle builds, e.g. regarding version numbers.
 * The Xtext generator can be invoked from Gradle for the languages contained in the Xtext projects (see `mwe2-workflows.gradle`). For example, test languages can be generated with `./gradlew generateTestLanguages`.
 
-## The Maven Plugin Builds
+### The Maven Plug-in Builds
 
-TODO
+Maven plug-ins are built by the `xtext-maven` project and by the `org.eclipse.xtend.maven.*` subprojects in `xtext-xtend`.
 
-## The Tycho Builds
+* The root `pom.xml` (in `xtext-xtend` it's named `maven-pom.xml`) lists the subprojects to be included in the build.
+* The parent modules `org.eclipse.xtext.maven.parent` and `org.eclipse.xtend.maven.parent` define the common plug-in configuration and metadata.
+* Depending on the chosen profile, dependencies to upstream Xtext projects are resolved either against the Maven repositories created by [Jenkins build jobs](#the-build-servers) (`useJenkinsSnapshots` profile) or against [public snapshots](https://oss.sonatype.org/content/repositories/snapshots) (`useSonatypeSnapshots` profile).
+* The `deploy` goal installs the artifacts into a local Maven repository `build/maven-repository`.
 
-TODO
+### The Tycho Builds
+
+The Eclipse plug-ins and features of `xtext-eclipse` and `xtext-xtend` are built with Tycho.
+
+* The root `pom.xml` (in `xtext-xtend` it's named `tycho-pom.xml`) lists the subprojects to be included in the build.
+* The parent modules `org.eclipse.xtext.tycho.parent` and `org.eclipse.xtend.tycho.parent` define the common plug-in configuration.
+* The target platform modules `org.eclipse.xtext.target` and `org.eclipse.xtend.target` define from where to fetch the dependencies. This includes both external dependencies such as EMF and upstream Xtext projects, which are referenced via the p2 repositories created by [Jenkins build jobs](#the-build-servers).
+* The modules `org.eclipse.xtext.p2-repository` and `org.eclipse.xtend.p2-repository` list the plug-ins and features to be exported. The resulting p2 repositories are copied to `build/p2-repository`.
+* The [Xtend](http://xtend-lang.org) code is compiled with the [xtend-maven-plugin](https://github.com/eclipse/xtext-xtend/tree/master/org.eclipse.xtend.maven.plugin).
+
+Another Tycho build is found in `xtext-umbrella`, with a very similar structure as described above. The difference is that the umbrella does not build its own plug-ins, but fetches all plug-ins from the other projects, builds some cross-project features (Xtext and Xtend SDKs), and exports them to a common p2 repository. The resulting p2 repository is used to create the Xtext update site for Eclipse.
 
 ## The Build Servers
 
