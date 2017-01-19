@@ -42,6 +42,8 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
  */
 @Singleton
 class XtextGeneratorTemplates {
+	
+	@Inject CodeConfig codeConfig
 
 	@Inject FileAccessFactory fileAccessFactory
 	
@@ -49,7 +51,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createRuntimeSetup(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		if (langConfig.generateXtendStubs) {
+		if (codeConfig.preferXtendStubs) {
 			return fileAccessFactory.createXtendFile(runtimeSetup,'''
 				/**
 				 * Initialization support for running Xtext languages without Equinox extension registry.
@@ -168,7 +170,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createRuntimeModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		if (langConfig.generateXtendStubs) {
+		if (codeConfig.preferXtendStubs) {
 			return fileAccessFactory.createXtendFile(runtimeModule,'''
 				/**
 				 * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -232,7 +234,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createIdeModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		if (langConfig.generateXtendStubs) {
+		if (codeConfig.preferXtendStubs) {
 			return fileAccessFactory.createXtendFile(genericIdeModule,'''
 				/**
 				 * Use this class to register ide components.
@@ -278,7 +280,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createIdeSetup(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		if (langConfig.generateXtendStubs) {
+		if (codeConfig.preferXtendStubs) {
 			return fileAccessFactory.createXtendFile(genericIdeSetup,'''
 				/**
 				 * Initialization support for running Xtext languages as language servers.
@@ -311,7 +313,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createEclipsePluginModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		if (langConfig.generateXtendStubs) {
+		if (codeConfig.preferXtendStubs) {
 			return fileAccessFactory.createXtendFile(eclipsePluginModule,'''
 				/**
 				 * Use this class to register components to be used within the Eclipse IDE.
@@ -366,7 +368,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createIdeaModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		if (langConfig.generateXtendStubs) {
+		if (codeConfig.preferXtendStubs) {
 			return fileAccessFactory.createXtendFile(ideaModule,'''
 				/**
 				 * Use this class to register components to be used within IntelliJ IDEA.
@@ -411,7 +413,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createWebModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		if (langConfig.generateXtendStubs) {
+		if (codeConfig.preferXtendStubs) {
 			return fileAccessFactory.createXtendFile(webModule,'''
 				/**
 				 * Use this class to register additional components to be used within the web application.
@@ -456,7 +458,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createWebSetup(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		if (langConfig.generateXtendStubs) {
+		if (codeConfig.preferXtendStubs) {
 			return fileAccessFactory.createXtendFile(webSetup, '''
 				/**
 				 * Initialization support for running Xtext languages in web applications.

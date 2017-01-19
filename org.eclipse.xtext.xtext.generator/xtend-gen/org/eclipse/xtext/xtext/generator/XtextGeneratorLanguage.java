@@ -69,7 +69,6 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   
   private String name;
   
-  @Accessors(AccessorType.PUBLIC_SETTER)
   private Boolean generateXtendStubs;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
@@ -160,6 +159,18 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
     return this.fileExtensions;
   }
   
+  /**
+   * @deprecated Use {@link CodeConfig#setPreferXtendStubs(boolean)} instead
+   */
+  @Deprecated
+  public void setGenerateXtendStubs(final Boolean generateXtendStubs) {
+    this.generateXtendStubs = generateXtendStubs;
+  }
+  
+  /**
+   * @deprecated Use {@link CodeConfig#isPreferXtendStubs(boolean)} instead
+   */
+  @Deprecated
   @Override
   public boolean isGenerateXtendStubs() {
     boolean _xifexpression = false;
@@ -356,10 +367,6 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   private final static Logger LOG = Logger.getLogger(XtextGeneratorLanguage.class);
-  
-  public void setGenerateXtendStubs(final Boolean generateXtendStubs) {
-    this.generateXtendStubs = generateXtendStubs;
-  }
   
   @Pure
   public Grammar getGrammar() {
