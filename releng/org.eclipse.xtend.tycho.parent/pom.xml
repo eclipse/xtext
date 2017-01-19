@@ -9,7 +9,7 @@
 
 	<properties>
 		<tycho-version>0.26.0</tycho-version>
-		<xtend-maven-plugin-version>2.11.0-SNAPSHOT</xtend-maven-plugin-version>
+		<xtend-maven-plugin-version>2.11.0.RC1</xtend-maven-plugin-version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
@@ -18,19 +18,6 @@
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<sign.skip>true</sign.skip>
 	</properties>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>xtend-bootstrap</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtend-bootstrap/lastStableBuild/artifact/build-result/maven-repository/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<build>
 		<plugins>
