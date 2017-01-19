@@ -1,6 +1,22 @@
 # The Build Infrastructure of Xtext
 
-## Preparing Releases and Milestones
+Xtext uses [Gradle](https://gradle.org) to build the Eclipse-independent Java projects and [Tycho](https://eclipse.org/tycho/) to build the Eclipse plug-ins. The builds are executed on a [Jenkins server](http://services.typefox.io/open-source/jenkins/).
+
+## The Gradle builds
+
+The projects that include Gradle builds are `xtext-lib`, `xtext-core`, `xtext-extras`, `xtext-idea`, `xtext-web`, and `xtext-xtend`. The structure of the build configuration is consistent across all these repositories:
+
+* `settings.gradle` in the project root lists the subprojects to be included in the build.
+* `build.gradle` in the project root applies commonly used plugin-ins such as `java` and applies configuration scripts from the `gradle` directory to all subprojects.
+* The intent of each configuration script is explained in a file header comment.
+* Each subproject has its own `build.gradle` that declares a title, description, and dependencies.
+* The [Xtend](http://xtend-lang.org) code is compiled with the [xtext-gradle-plugin](https://github.com/xtext/xtext-gradle-plugin).
+
+The builds of `xtext-lib`, `xtext-core`, and `xtext-extras` include a Gradle plug-in that can generate a second Tycho-based build by running `./gradlew generateP2Build`.
+
+## The Release Process
+
+### Preparing Releases and Milestones
 
 Branch names should be `milestone_«version»` for milestones, and `release_«version»` for releases. Tag names should be `v«version»`. When updating branch names for upstream dependencies, care must be taken to select the correct versions for additional libraries that are included in the Xtext build infrastructure (LSP4J).
 
@@ -50,7 +66,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
 10. Once all previous builds are successful, trigger the build job https://hudson.eclipse.org/xtext/job/xtext-release/ with the release version and branch name as parameters.
 11. Ask @dhuebner to publish the Eclipse and Maven artifacts.
 
-## Lifting the Version Number
+### Lifting the Version Number
 
 Once the release branch for a major or minor release has been created, the master branch should be lifted to the next version. Similarly, the third version digit should be increased on the corresponding maintenance branch after every release (including service releases).
 
