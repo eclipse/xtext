@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -427,12 +428,15 @@ public class CompilationTestHelper {
 		 */
 		public String getSingleGeneratedCode() {
 			doGenerate();
-			if (access.getGeneratedFiles().size() == 1)
-				return access.getGeneratedFiles().iterator().next().getContents().toString();
+			Set<GeneratedFile> generatedFiles = access.getGeneratedFiles();
+			if (generatedFiles.size() == 1)
+				return generatedFiles.iterator().next().getContents().toString();
+			else if (generatedFiles.isEmpty())
+				return "NO FILE WAS GENERATED";
 			String separator = System.getProperty("line.separator");
 			if (separator == null)
 				separator = "\n";
-			List<GeneratedFile> files = newArrayList(access.getGeneratedFiles());
+			List<GeneratedFile> files = newArrayList(generatedFiles);
 			Collections.sort(files, new Comparator<GeneratedFile>() {
 				@Override
 				public int compare(GeneratedFile o1,
