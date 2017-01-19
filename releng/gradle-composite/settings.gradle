@@ -1,10 +1,20 @@
 if (!hasProperty('generatePrefs')) {
-	(files { file('../../../').listFiles() })
-.filter { 
-    File it ->
-    it.isDirectory() && XTEXT_GRADLE_PROJECTS.split(',').any{p->it.name.contains(p)} && new File(it, "settings.gradle").exists()
-}.each {
-    File it ->
-    includeBuild it
+    (files { file('../../../').listFiles() })
+    .filter { 
+        File it ->
+        it.isDirectory() && XTEXT_GRADLE_PROJECTS.split(',').any{p->it.name.contains(p)} && new File(it, "settings.gradle").exists()
+    }.collect{ it.path }
+    .toUnique { a, b ->
+        findProjectName(a) <=> findProjectName(b)
+    }.each { it -> includeBuild it }
 }
+
+def findProjectName(rootPath) {
+    try {
+        Properties props =  new Properties()
+        props.load(new FileInputStream(new File(rootPath, "settings.gradle")))
+        return props.getProperty('rootProject.name')
+    } catch(Exception e) {
+        return rootPath
+    }
 }
