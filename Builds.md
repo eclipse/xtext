@@ -37,8 +37,7 @@ The Gradle projects marked with `*` include generated Tycho builds for creating 
 The projects that include Gradle builds are `xtext-lib`, `xtext-core`, `xtext-extras`, `xtext-idea`, `xtext-web`, and `xtext-xtend`. These repositories share some common concepts:
 
 * `settings.gradle` in the project root lists the subprojects to be included in the build.
-* `build.gradle` in the project root applies commonly used plugin-ins such as `java` and applies configuration scripts from the `gradle` directory to all subprojects.
-* The intent of each configuration script is explained in a file header comment.
+* `build.gradle` in the project root applies commonly used plugin-ins such as `java` and applies configuration scripts from the `gradle` directory to all subprojects. The intent of each configuration script is explained in a file header comment.
 * Each subproject has its own `build.gradle` that declares a title, description, and dependencies.
 * The project version as well the versions of common dependencies are declared in `versions.gradle`.
 * The remote repositories from which dependencies are drawn are declared in `upstream-repositories.gradle`. Depending on the `useJenkinsSnapshots` property, dependencies to upstream Xtext projects are resolved either against the Maven repositories created by [Jenkins build jobs](#the-build-servers) or against [public snapshots](https://oss.sonatype.org/content/repositories/snapshots).
@@ -63,7 +62,7 @@ The Eclipse plug-ins and features of `xtext-eclipse` and `xtext-xtend` are built
 
 * The root `pom.xml` (in `xtext-xtend` it's named `tycho-pom.xml`) lists the subprojects to be included in the build.
 * The parent modules `org.eclipse.xtext.tycho.parent` and `org.eclipse.xtend.tycho.parent` define the common plug-in configuration.
-* The target platform modules `org.eclipse.xtext.target` and `org.eclipse.xtend.target` define from where to fetch the dependencies. This includes both external dependencies such as EMF and upstream Xtext projects, which are referenced via the p2 repositories created by [Jenkins build jobs](#the-build-servers).
+* The target platform modules `org.eclipse.xtext.target` and `org.eclipse.xtend.target` define from where to fetch the dependencies. This includes external dependencies such as EMF as well as upstream Xtext projects, which are referenced via the p2 repositories created by [Jenkins build jobs](#the-build-servers).
 * The modules `org.eclipse.xtext.p2-repository` and `org.eclipse.xtend.p2-repository` list the plug-ins and features to be exported. The resulting p2 repositories are copied to `build/p2-repository`.
 * The [Xtend](http://xtend-lang.org) code is compiled with the [xtend-maven-plugin](https://github.com/eclipse/xtext-xtend/tree/master/org.eclipse.xtend.maven.plugin).
 
@@ -96,7 +95,7 @@ The actual publishing is done on a [Hudson build server](https://hudson.eclipse.
 
 The `master` branch on each repository is the development stream for the next major or minor release. There are also one or more development streams for service releases, which are named `maintenance_«minorversion»`, where `«minorversion»` is the version number without the third segment.
 
-When major or minor releases are done, there should be a time period of at least one week when only important fixes are added to the code base to be released. This is achieved by creating the maintenance branch for that release and committing the fixes directly to that branch. The maintenance branch is merged back into master just before the actual release is done so the fixes are available there, too. After the release is done, the service release version is increased on the maintenance branch. Furthermore, a "pseudo-merge" to `master` should be made afterwards so the following bug fixes can be merged later on without including the version change. The necessary git command line flag for this kind of merging is `-s ours`.
+When major or minor releases are done, there should be a time period of at least one week when only important fixes are added to the code base to be released. This is achieved by creating the maintenance branch for that release and committing the fixes directly to that branch. The maintenance branch is merged back into `master` just before the actual release is done so the fixes are available there, too. After the release is done, the service release version is increased on the maintenance branch. Furthermore, a "pseudo-merge" to `master` should be made afterwards so the following bug fixes can be merged later on without including the version change. The necessary git command line flag for this kind of merging is `-s ours`.
 
 ### Preparing Milestones and Releases
 
