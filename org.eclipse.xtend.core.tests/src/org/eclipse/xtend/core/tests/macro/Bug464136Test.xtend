@@ -11,11 +11,8 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-import org.junit.Ignore
 import org.junit.Test
 
-// https://github.com/eclipse/xtext-xtend/issues/123
-@Ignore
 class Bug464136Test extends AbstractActiveAnnotationTest {
 	
 	@Test def void testThrownErrorInPreValidation() {
@@ -24,11 +21,30 @@ class Bug464136Test extends AbstractActiveAnnotationTest {
 		'''.compile [
 			val problems = allProblems
 			assertEquals(problems.map[message].toString, 1, problems.size)
-			assertEquals('''
+			val messageJava = '''
+				Error during annotation processing:
+				java.lang.LinkageError: Just a test :-/
+					at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$doTransform$0(Bug464136Processor.java:21)
+			'''.toString
+			
+			val messageEclipse = '''
 				Error during annotation processing:
 				java.lang.LinkageError: Just a test :-/
 					at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$0(Bug464136Processor.java:21)
-			'''.toString, problems.head.message)
+			'''.toString
+			if (messageJava != problems.head.message && messageEclipse != problems.head.message) {
+				fail('''
+				Expected one of the following problem messages:
+				
+				«messageJava»
+				
+				«messageEclipse»
+				
+				But got:
+				
+				«problems.head.message»
+				''')
+			}
 		]
 	}
 	
