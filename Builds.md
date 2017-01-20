@@ -30,9 +30,9 @@ xtext-umbrella
 
 The Gradle projects marked with `*` include generated Tycho builds for creating p2 repositories as described below. For `xtext-xtend`, only the Tycho build depends on `xtext-eclipse`, while the Gradle and Maven builds just require `xtext-extras`.
 
-## Build Systems
+## The Build Systems
 
-### The Gradle builds
+### Gradle
 
 The projects that include Gradle builds are `xtext-lib`, `xtext-core`, `xtext-extras`, `xtext-idea`, `xtext-web`, and `xtext-xtend`. These repositories share some common concepts:
 
@@ -48,7 +48,7 @@ The projects that include Gradle builds are `xtext-lib`, `xtext-core`, `xtext-ex
 * The builds of `xtext-lib`, `xtext-core`, and `xtext-extras` include a Gradle plug-in that can generate a second Tycho-based build into the `releng` directory by running `./gradlew generateP2Build` (see `p2-deployment.gradle`). This Tycho build creates a local p2 repository in `build/p2-repository`. This approach eliminates the need to manually keep these Tycho builds consistent with the Gradle builds, e.g. regarding version numbers.
 * The Xtext generator can be invoked from Gradle for the languages contained in the Xtext projects (see `mwe2-workflows.gradle`). For example, test languages can be generated with `./gradlew generateTestLanguages`.
 
-### The Maven Plug-in Builds
+### Maven Plug-ins
 
 Maven plug-ins are built by the `xtext-maven` project and by the `org.eclipse.xtend.maven.*` subprojects in `xtext-xtend`.
 
@@ -57,7 +57,7 @@ Maven plug-ins are built by the `xtext-maven` project and by the `org.eclipse.xt
 * Depending on the chosen profile, dependencies to upstream Xtext projects are resolved either against the Maven repositories created by [Jenkins build jobs](#the-build-servers) (`useJenkinsSnapshots` profile) or against [public snapshots](https://oss.sonatype.org/content/repositories/snapshots) (`useSonatypeSnapshots` profile).
 * The `deploy` goal installs the artifacts into a local Maven repository `build/maven-repository`.
 
-### The Tycho Builds
+### Tycho
 
 The Eclipse plug-ins and features of `xtext-eclipse` and `xtext-xtend` are built with Tycho.
 
@@ -75,13 +75,26 @@ Another Tycho build is found in `xtext-umbrella`, with a very similar structure 
 
 Each project has its own [multibranch pipeline](https://jenkins.io/blog/2015/12/03/pipeline-as-code-with-multibranch-workflows-in-jenkins/) on the [Jenkins build server](http://services.typefox.io/open-source/jenkins/). The server polls the git repositories every few minutes and automatically refreshes its build jobs: a new job is created for each new branch that is found, and the jobs of branches that do not exist anymore are deleted. This approach gives committers a very convenient way to test their changes on the server without affecting the main development streams (master and maintenance branches).
 
-The actual build job description is written in a [Jenkinsfile](https://jenkins.io/doc/book/pipeline/jenkinsfile/). This file is included in the git repositories and thus can be modified per branch. Basically it defines the commands to execute for each build, where to find the test results, and which artifacts to make available.
+The actual build job description is written in a [Jenkinsfile](https://jenkins.io/doc/book/pipeline/jenkinsfile/). This file is included in the git repositories and thus can be modified per branch. Basically it defines the commands to execute for each build, where to find test results, and which artifacts to make available.
 
 The build artifacts of each project are made available as a Maven repository, a p2 repository, or both. The build jobs of downstream projects are configured to consume the build artifacts of the projects they depend on. Gradle and Maven plug-in builds pick up their dependencies from the Maven repositories generated for their upstream projects, while Tycho builds use the p2 repositories.
 
+### Hudson
+
+The actual publishing is done on a [Hudson build server](https://hudson.eclipse.org/xtext/) by two build jobs: [xtext-snapshots](https://hudson.eclipse.org/xtext/job/xtext-snapshots/) for nightly snapshots and [xtext-release](https://hudson.eclipse.org/xtext/job/xtext-release/) for milestones and releases. Both employ the [publishing](https://github.com/TypeFox/publishing) project, which does the following:
+
+1. Download Maven artifacts with a specified version from the repositories that are made available by the various Jenkins build jobs as described above.
+2. [Sign the jar files](https://wiki.eclipse.org/JAR_Signing) with the remote service of the Eclipse Foundation.
+3. Create additional signature files for publishing to remote Maven repositories.
+4. Upload the results either to a snapshot repository or to a staging repository.
+5. Download the common p2 repository from the Jenkins build job of `xtext-umbrella` as a zip file and unzip it.
+6. Sign the jar files that have not already been signed in step 2 (results of the signing service are reused if the input files are equal).
+7. Copy the signed jars and p2 repository metadata to the `build-result` directory and zip it.
+8. Generate ant scripts for deploying the p2 repository to the Eclipse public download area (this might be improved in the future).
+
 ## The Release Process
 
-### Preparing Releases and Milestones
+### Preparing Milestones and Releases
 
 Branch names should be `milestone_«version»` for milestones, and `release_«version»` for releases. Tag names should be `v«version»`. When updating branch names for upstream dependencies, care must be taken to select the correct versions for additional libraries that are included in the Xtext build infrastructure (LSP4J).
 
