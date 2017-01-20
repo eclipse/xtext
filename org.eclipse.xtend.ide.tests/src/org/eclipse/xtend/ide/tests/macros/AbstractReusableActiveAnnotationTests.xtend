@@ -848,8 +848,6 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 	
-	// https://github.com/eclipse/xtext-xtend/issues/127
-	@Ignore
 	@Test def void testAnnotationValueSetting_3() {
 		assertProcessing(
 			'myannotation/MoveValues.xtend' -> '''

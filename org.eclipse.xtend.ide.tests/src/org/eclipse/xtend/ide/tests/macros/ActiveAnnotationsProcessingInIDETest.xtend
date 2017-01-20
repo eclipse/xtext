@@ -119,7 +119,6 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		macroProject = JavaCore.create(createPluginProject("macroProject"))
 		userProject = JavaCore::create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
-				"org.eclipse.xtend.core.tests",
 				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
 		macroProject.project.addExportedPackages("myannotation")
 	}
