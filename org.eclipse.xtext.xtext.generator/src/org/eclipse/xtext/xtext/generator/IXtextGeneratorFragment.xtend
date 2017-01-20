@@ -8,8 +8,8 @@
 package org.eclipse.xtext.xtext.generator
 
 /**
- * A fragment that contributes to the {@link XtextGenerator}.
- * @noimplement
+ * A fragment that contributes to the {@link XtextGenerator}. Use {@link AbstractXtextGeneratorFragment}
+ * for implementing new fragments.
  */
 interface IXtextGeneratorFragment extends IGuiceAwareGeneratorComponent {
 	

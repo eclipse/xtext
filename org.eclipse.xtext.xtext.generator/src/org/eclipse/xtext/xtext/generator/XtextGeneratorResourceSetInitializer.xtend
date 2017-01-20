@@ -21,8 +21,8 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.emf.ecore.EcorePackage
 
 /**
- * @noextend
- * @noreference
+ * Initializes a resource set in order to load the grammar of a language. The resources to include are specified
+ * via {@link XtextGeneratorLanguage#addReferencedResource(String)}.
  */
 @Log
 class XtextGeneratorResourceSetInitializer {

@@ -11,13 +11,22 @@ import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
 /**
- * @noimplement
+ * Configuration of subprojects.
+ * 
+ * @noimplement This interface should not be implemented by clients.
  */
 interface ISubProjectConfig extends IGuiceAwareGeneratorComponent {
+	
 	def boolean isEnabled()
+	
 	def String getName()
+	
 	def IXtextGeneratorFileSystemAccess getRoot()
+	
 	def IXtextGeneratorFileSystemAccess getMetaInf()
+	
 	def IXtextGeneratorFileSystemAccess getSrc()
+	
 	def IXtextGeneratorFileSystemAccess getSrcGen()
+	
 }

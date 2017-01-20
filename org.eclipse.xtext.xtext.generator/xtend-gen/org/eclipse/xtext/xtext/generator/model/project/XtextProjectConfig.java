@@ -33,7 +33,10 @@ import org.eclipse.xtext.xtext.generator.model.project.SubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.WebProjectConfig;
 
 /**
- * @noextend
+ * Configuration of the subprojects for one or more Xtext languages. If the standard project names
+ * and layout is sufficient, use {@link StandardProjectConfig}.
+ * 
+ * @noextend This class should not be extended by clients.
  */
 @Accessors
 @SuppressWarnings("all")

@@ -15,6 +15,9 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * A utility class for generating plain text files.
+ */
 @SuppressWarnings("all")
 public class TextFileAccess {
   @Accessors

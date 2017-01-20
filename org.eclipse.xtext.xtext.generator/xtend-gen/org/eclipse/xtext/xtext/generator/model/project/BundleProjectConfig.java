@@ -17,7 +17,9 @@ import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.SubProjectConfig;
 
 /**
- * @noextend
+ * Configuration of subprojects that can be used as Eclipse bundles.
+ * 
+ * @noextend This class should not be extended by clients.
  */
 @Accessors
 @SuppressWarnings("all")

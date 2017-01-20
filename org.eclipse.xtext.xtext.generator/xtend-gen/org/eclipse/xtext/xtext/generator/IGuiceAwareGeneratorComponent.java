@@ -10,7 +10,9 @@ package org.eclipse.xtext.xtext.generator;
 import com.google.inject.Injector;
 
 /**
- * @noreference
+ * The Xtext generator uses dependency injection with <a href="https://github.com/google/guice">Guice</a>
+ * for distributing the configuration to all its components. Instances of this interface can initialize
+ * themselves with a Guice injector, e.g. by calling {@code injector.injectMembers(this)}.
  */
 @SuppressWarnings("all")
 public interface IGuiceAwareGeneratorComponent {

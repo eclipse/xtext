@@ -9,6 +9,9 @@ package org.eclipse.xtext.xtext.generator.model
 
 import org.eclipse.xtext.xtext.generator.CodeConfig
 
+/**
+ * A utility class for generating Xtend files.
+ */
 class XtendFileAccess extends JavaFileAccess {
 	
 	/**

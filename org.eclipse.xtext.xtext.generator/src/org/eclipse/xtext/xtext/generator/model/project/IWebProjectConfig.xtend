@@ -10,8 +10,12 @@ package org.eclipse.xtext.xtext.generator.model.project
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
 /**
- * @noimplement
+ * Configuration of the web project.
+ * 
+ * @noimplement This interface should not be implemented by clients.
  */
 interface IWebProjectConfig extends ISubProjectConfig {
+	
 	def IXtextGeneratorFileSystemAccess getAssets()
+	
 }

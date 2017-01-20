@@ -12,6 +12,9 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtend2.lib.StringConcatenation
 
+/**
+ * A utility class for generating plain text files.
+ */
 class TextFileAccess {
 
 	@Accessors

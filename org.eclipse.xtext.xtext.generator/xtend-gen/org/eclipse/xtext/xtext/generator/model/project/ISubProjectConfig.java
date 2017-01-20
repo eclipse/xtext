@@ -11,7 +11,9 @@ import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 
 /**
- * @noimplement
+ * Configuration of subprojects.
+ * 
+ * @noimplement This interface should not be implemented by clients.
  */
 @SuppressWarnings("all")
 public interface ISubProjectConfig extends IGuiceAwareGeneratorComponent {

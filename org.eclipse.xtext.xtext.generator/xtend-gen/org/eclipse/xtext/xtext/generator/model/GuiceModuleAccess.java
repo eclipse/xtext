@@ -23,6 +23,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
+/**
+ * Configuration object for Guice modules based on {@link org.eclipse.xtext.service.AbstractGenericModule}.
+ */
 @Log
 @SuppressWarnings("all")
 public class GuiceModuleAccess {

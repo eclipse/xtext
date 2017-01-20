@@ -27,8 +27,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
- * @noextend
- * @noreference
+ * Initializes a resource set in order to load the grammar of a language. The resources to include are specified
+ * via {@link XtextGeneratorLanguage#addReferencedResource(String)}.
  */
 @Log
 @SuppressWarnings("all")

@@ -10,9 +10,14 @@ package org.eclipse.xtext.xtext.generator.model.project
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
 /**
- * @noimplement
+ * Configuration of the runtime project, i.e. the main subproject containing the language definition.
+ * 
+ * @noimplement This interface should not be implemented by clients.
  */
 interface IRuntimeProjectConfig extends IBundleProjectConfig {
+	
 	def IXtextGeneratorFileSystemAccess getEcoreModel()
+	
 	def String getEcoreModelFolder()
+	
 }

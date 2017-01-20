@@ -23,6 +23,9 @@ import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 
+/**
+ * Configuration object for plugin.xml files for use in Eclipse.
+ */
 @Log
 @Accessors
 @SuppressWarnings("all")

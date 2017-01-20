@@ -16,6 +16,9 @@ import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 
+/**
+ * Factory for creating text files, Java files, and Xtend files.
+ */
 @SuppressWarnings("all")
 public class FileAccessFactory {
   @Inject

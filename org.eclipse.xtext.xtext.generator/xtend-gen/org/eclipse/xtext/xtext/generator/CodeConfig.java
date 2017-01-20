@@ -24,7 +24,6 @@ import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 
 /**
  * Configuration object for generated code.
- * @noextend
  */
 @SuppressWarnings("all")
 public class CodeConfig implements IGuiceAwareGeneratorComponent {
@@ -65,7 +64,7 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
    *   <li><code>${date}</code> - the current date (month day, year)</li>
    *   <li><code>${year}</code> - the current year</li>
    *   <li><code>${user}</code> - the content of the 'user.name' system property</li>
-   *   <li><code>${version}</code> - the generator plug-in version</li>
+   *   <li><code>${version}</code> - the generator bundle version</li>
    * </ul>
    */
   public void setFileHeader(final String fileHeaderTemplate) {

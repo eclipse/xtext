@@ -16,7 +16,9 @@ import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.SubProjectConfig;
 
 /**
- * @noextend
+ * Configuration of the web project.
+ * 
+ * @noextend This class should not be extended by clients.
  */
 @SuppressWarnings("all")
 public class WebProjectConfig extends SubProjectConfig implements IWebProjectConfig {

@@ -12,11 +12,15 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
 /**
- * @noextend
+ * Configuration of the web project.
+ * 
+ * @noextend This class should not be extended by clients.
  */
 class WebProjectConfig extends SubProjectConfig implements IWebProjectConfig {
+	
 	@Accessors(PUBLIC_GETTER)
 	String assetsPath
+	
 	@Accessors(PUBLIC_GETTER)
 	IXtextGeneratorFileSystemAccess assets
 	

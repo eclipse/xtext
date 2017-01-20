@@ -14,7 +14,9 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
 
 /**
- * @noimplement
+ * Configuration for an Xtext language. Implemented by {@link XtextGeneratorLanguage}.
+ * 
+ * @noimplement This interface should not be implemented by clients.
  */
 interface IXtextGeneratorLanguage {
 	

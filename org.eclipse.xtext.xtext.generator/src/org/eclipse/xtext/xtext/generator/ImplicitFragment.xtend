@@ -17,6 +17,9 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
+/**
+ * The ImplicitFragment is added in the first slot to all language configurations.
+ */
 package class ImplicitFragment extends AbstractStubGeneratingFragment {
 	
 	@Inject extension XbaseUsageDetector

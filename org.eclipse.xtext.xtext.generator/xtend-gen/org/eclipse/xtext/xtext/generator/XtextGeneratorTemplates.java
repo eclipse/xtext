@@ -48,7 +48,7 @@ import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation;
 
 /**
- * @noreference
+ * Templates for generating the common language infrastructure.
  */
 @Singleton
 @SuppressWarnings("all")

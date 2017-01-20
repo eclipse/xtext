@@ -11,6 +11,10 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 
+/**
+ * A fragment that generates a class that inherits from the generated class of the super-grammar.
+ * This inheritance can be disabled with the {@code inheritImplementation} property.
+ */
 @SuppressWarnings("all")
 public abstract class AbstractInheritingFragment extends AbstractStubGeneratingFragment {
   @Accessors

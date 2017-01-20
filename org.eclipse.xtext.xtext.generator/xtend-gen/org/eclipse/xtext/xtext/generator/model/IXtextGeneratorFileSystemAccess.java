@@ -7,9 +7,15 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
+import com.google.inject.ImplementedBy;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
+import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 
+/**
+ * File system access for the Xtext generator.
+ */
+@ImplementedBy(XtextGeneratorFileSystemAccess.class)
 @SuppressWarnings("all")
 public interface IXtextGeneratorFileSystemAccess extends IFileSystemAccess2, IGuiceAwareGeneratorComponent {
   public abstract String getPath();

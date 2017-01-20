@@ -24,6 +24,10 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
+/**
+ * Reference to a Java type. Use this for automatic import of types in {@link JavaFileAccess}
+ * and {@link XtendFileAccess}.
+ */
 @Accessors
 @EqualsHashCode
 @SuppressWarnings("all")

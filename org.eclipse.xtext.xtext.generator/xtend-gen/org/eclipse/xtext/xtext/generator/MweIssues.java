@@ -14,7 +14,7 @@ import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
 
 /**
- * @noreference
+ * {@link Issues} implementation for MWE2 workflows.
  */
 @FinalFieldsConstructor
 @SuppressWarnings("all")

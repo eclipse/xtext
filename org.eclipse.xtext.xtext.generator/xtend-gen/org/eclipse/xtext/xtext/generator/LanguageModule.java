@@ -16,6 +16,10 @@ import org.eclipse.xtext.xtext.RuleNames;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 
+/**
+ * Language-specific Guice module that is used in a child injector of the global injector
+ * derived from {@link DefaultGeneratorModule}.
+ */
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 class LanguageModule extends AbstractGenericModule {

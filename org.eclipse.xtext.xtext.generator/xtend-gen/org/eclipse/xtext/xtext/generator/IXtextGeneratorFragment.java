@@ -11,8 +11,8 @@ import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.Issues;
 
 /**
- * A fragment that contributes to the {@link XtextGenerator}.
- * @noimplement
+ * A fragment that contributes to the {@link XtextGenerator}. Use {@link AbstractXtextGeneratorFragment}
+ * for implementing new fragments.
  */
 @SuppressWarnings("all")
 public interface IXtextGeneratorFragment extends IGuiceAwareGeneratorComponent {

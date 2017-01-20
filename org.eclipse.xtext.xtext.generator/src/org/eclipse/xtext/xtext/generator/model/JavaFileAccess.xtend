@@ -17,6 +17,9 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.util.internal.CodeGenUtil2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 
+/**
+ * A utility class for generating Java files.
+ */
 class JavaFileAccess extends TextFileAccess {
 	
 	/**

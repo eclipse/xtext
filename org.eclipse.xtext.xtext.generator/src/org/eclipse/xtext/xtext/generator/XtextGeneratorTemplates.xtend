@@ -38,7 +38,7 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnot
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 /**
- * @noreference
+ * Templates for generating the common language infrastructure.
  */
 @Singleton
 class XtextGeneratorTemplates {

@@ -11,7 +11,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 /**
- * @noreference
+ * {@link Issues} implementation for MWE2 workflows.
  */
 @FinalFieldsConstructor
 class MweIssues implements Issues {

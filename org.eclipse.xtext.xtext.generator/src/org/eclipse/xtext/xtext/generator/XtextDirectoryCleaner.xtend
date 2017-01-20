@@ -16,13 +16,18 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 /**
- * @noextend
+ * This component cleans all directories for generated code according to the project configuration
+ * (usually 'src-gen' for plain layout and 'src/main/xtext-gen' for Maven/Gradle layout).
+ * 
+ * @noextend This class should not be extended by clients.
  */
 class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
+	
 	@Inject IXtextProjectConfig config
 
 	@Accessors(PUBLIC_SETTER)
 	boolean enabled = true
+	
 	@Accessors(PUBLIC_SETTER)
 	boolean useDefaultExcludes = true
 	

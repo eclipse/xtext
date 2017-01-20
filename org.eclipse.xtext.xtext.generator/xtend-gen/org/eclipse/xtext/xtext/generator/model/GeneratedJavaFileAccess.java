@@ -15,6 +15,9 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 
+/**
+ * A specialized Java file generator used for classes in the 'src-gen' folder.
+ */
 @SuppressWarnings("all")
 public class GeneratedJavaFileAccess extends JavaFileAccess {
   private CharSequence typeComment;

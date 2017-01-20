@@ -27,6 +27,9 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
+/**
+ * The ImplicitFragment is added in the first slot to all language configurations.
+ */
 @SuppressWarnings("all")
 class ImplicitFragment extends AbstractStubGeneratingFragment {
   @Inject

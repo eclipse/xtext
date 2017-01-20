@@ -19,7 +19,9 @@ import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.Issues;
 
 /**
- * @noreference
+ * A generator fragment that delegates to a list of contained fragments. This can be
+ * useful for extracting parts of a language configuration to a separate mwe2 file,
+ * for example.
  */
 @SuppressWarnings("all")
 public class CompositeGeneratorFragment2 implements IXtextGeneratorFragment {

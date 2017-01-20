@@ -40,7 +40,19 @@ import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 /**
- * @noextend
+ * Configuration for an Xtext language. Use this class if you need to specify exactly which generator
+ * fragments you want to include, or alternatively {@link StandardLanguage} to work with the standard
+ * fragments.
+ * 
+ * <p>The most important property is {@code name}, which should be set to the language name exactly
+ * as specified in the grammar file. If the default grammar resolution based on the name does not
+ * work in your particular scenario, set the {@code grammarUri} property instead. Furthermore,
+ * use {@code fileExtensions} to specify the file extensions for your language.</p>
+ * 
+ * <p>Generator fragments can be added with the {@code fragment} property. See {@link StandardLanguage}
+ * for a list of useful fragments.</p>
+ * 
+ * @noextend This class should not be extended by clients.
  */
 @Log
 class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXtextGeneratorLanguage {
@@ -95,6 +107,10 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	
 	@Inject XtextGeneratorResourceSetInitializer resourceSetInitializer
 	
+	/**
+	 * The URI of the grammar file. Use this property if the automatic grammar resolution based on {@link #setName(String)}
+	 * does not work in your particular scenario.
+	 */
 	def void setGrammarUri(String uri) {
 		this.grammarUri = uri
 	}
@@ -103,14 +119,25 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 		grammarUri ?: new File(projectConfig.runtime.src.path, name.replace('.', '/') + ".xtext").toURI.toString
 	}
 	
+	/**
+	 * The language name exactly as specified in the grammar.
+	 */
 	def void setName(String name) {
 		this.name = name
 	}
 	
+	/**
+	 * Either a single file extension or a comma-separated list of extensions for which the language
+	 * shall be registered.
+	 */
 	def void setFileExtensions(String fileExtensions) {
 		this.fileExtensions = fileExtensions.trim.split('\\s*,\\s*').toList
 	}
 	
+	/**
+	 * Add a resource to be included in the resource set that will be used to load the grammar file.
+	 * This is often necessary if additional Ecore models are referenced by the grammar.
+	 */
 	def void addReferencedResource(String referencedResource) {
 		this.referencedResources += referencedResource
 	}

@@ -19,7 +19,9 @@ import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
 /**
- * @noextend
+ * Configuration of subprojects.
+ * 
+ * @noextend This class should not be extended by clients.
  */
 @SuppressWarnings("all")
 public class SubProjectConfig implements ISubProjectConfig {

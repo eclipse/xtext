@@ -19,6 +19,9 @@ import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
 import com.google.inject.Injector
 import org.eclipse.xtext.util.Strings
 
+/**
+ * Configuration object for MANIFEST.MF files for use in Eclipse.
+ */
 @Log
 @Accessors
 class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorComponent {
