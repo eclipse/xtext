@@ -128,7 +128,7 @@ public abstract class AbstractArithmeticsRuntimeModule extends DefaultRuntimeMod
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalArithmeticsLexer> provideInternalArithmeticsLexer() {
+	public Provider<? extends InternalArithmeticsLexer> provideInternalArithmeticsLexer() {
 		return LexerProvider.create(InternalArithmeticsLexer.class);
 	}
 	
