@@ -16,7 +16,7 @@
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
 		<maven.archetype.version>2.3</maven.archetype.version>
-		<it-tests-skip>false</it-tests-skip>
+		<it-archetype-tests-skip>true</it-archetype-tests-skip>
 	</properties>
 
 	<build>
@@ -65,7 +65,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-archetype-plugin</artifactId>
 				<configuration>
-					<skip>${it-tests-skip}</skip>
+					<skip>${it-archetype-tests-skip}</skip>
 					<settingsFile>${basedir}/it_settings.xml</settingsFile>
 					<debug>true</debug>
 				</configuration>
@@ -74,6 +74,7 @@
 						<goals>
 							<goal>integration-test</goal>
 						</goals>
+						<configuration><debug>true</debug></configuration>
 					</execution>
 				</executions>
 			</plugin>
