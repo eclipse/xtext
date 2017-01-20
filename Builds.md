@@ -94,6 +94,10 @@ The actual publishing is done on a [Hudson build server](https://hudson.eclipse.
 
 ## The Release Process
 
+The `master` branch on each repository is the development stream for the next major or minor release. There are also one or more development streams for service releases, which are named `maintenance_«minorversion»`, where `«minorversion»` is the version number without the third segment.
+
+When major or minor releases are done, there should be a time period of at least one week when only important fixes are added to the code base to be released. This is achieved by creating the maintenance branch for that release and committing the fixes directly to that branch. The maintenance branch is merged back into master just before the actual release is done so the fixes are available there, too. After the release is done, the service release version is increased on the maintenance branch. Furthermore, a "pseudo-merge" to `master` should be made afterwards so the following bug fixes can be merged later on without including the version change. The necessary git command line flag for this kind of merging is `-s ours`.
+
 ### Preparing Milestones and Releases
 
 Branch names should be `milestone_«version»` for milestones, and `release_«version»` for releases. Tag names should be `v«version»`. When updating branch names for upstream dependencies, care must be taken to select the correct versions for additional libraries that are included in the Xtext build infrastructure (LSP4J).
