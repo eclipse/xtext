@@ -12,7 +12,9 @@ import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler.Result
  * @noreference This class is not intended to be referenced by clients.
  * 
  * @since 2.9
+ * @deprecated Use org.eclipse.xtext.xbase.testing.OnTheFlyJavaCompiler2 instead
  */
+@Deprecated
 @Singleton
 class OnTheFlyJavaCompiler2 {
 	InMemoryJavaCompiler inMemoryCompiler

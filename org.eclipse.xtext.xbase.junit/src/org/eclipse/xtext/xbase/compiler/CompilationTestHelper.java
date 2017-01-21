@@ -82,7 +82,9 @@ import com.google.inject.Provider;
  * @since 2.7
  * 
  * @noextend This class is not intended to be subclassed by clients.
+ * @deprecated Use org.eclipse.xtext.xbase.testing.CompilationTestHelper instead
  */
+@Deprecated
 public class CompilationTestHelper {
 	
 	private final static Logger LOG = Logger.getLogger(CompilationTestHelper.class);

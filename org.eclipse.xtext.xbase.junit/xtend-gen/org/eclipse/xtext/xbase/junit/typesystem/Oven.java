@@ -37,7 +37,9 @@ import org.junit.ComparisonFailure;
  * after it was processed by the {@link IBatchTypeResolver}
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.xbase.testing.typesystem.Oven instead
  */
+@Deprecated
 @Beta
 @Singleton
 @SuppressWarnings("all")

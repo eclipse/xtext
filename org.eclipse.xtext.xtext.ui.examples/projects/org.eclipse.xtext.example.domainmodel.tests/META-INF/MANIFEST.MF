@@ -6,11 +6,10 @@ Bundle-Version: 2.11.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.domainmodel,
- org.eclipse.xtext.junit4,
- org.eclipse.xtext.xbase.junit,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.xbase.lib,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
+ org.eclipse.xtext.xbase.testing
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.domainmodel.tests;x-internal=true
 Import-Package: org.hamcrest.core,

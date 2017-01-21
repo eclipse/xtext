@@ -18,7 +18,9 @@ import org.eclipse.xtext.generator.InMemoryFileSystemAccess
  * @noreference This class is not intended to be referenced by clients.
  * 
  * @since 2.7
+ * @deprecated Use org.eclipse.xtext.xbase.testing.RegisteringFileSystemAccess instead
  */
+@Deprecated
 class RegisteringFileSystemAccess extends InMemoryFileSystemAccess { 
 
 	/**

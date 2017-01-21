@@ -16,7 +16,9 @@ import com.google.inject.Singleton;
 /**
  * @author Miro Spoenemann - Initial contribution and API
  * @since 2.8
+ * @deprecated Use org.eclipse.xtext.xbase.testing.SingletonGeneratorConfigModule instead
  */
+@Deprecated
 public class SingletonGeneratorConfigModule implements Module {
 
 	@Override

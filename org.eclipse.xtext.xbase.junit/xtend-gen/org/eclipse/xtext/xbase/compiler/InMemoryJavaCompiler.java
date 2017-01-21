@@ -45,7 +45,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @since 2.9
+ * @deprecated Use org.eclipse.xtext.xbase.testing.InMemoryJavaCompiler instead
  */
+@Deprecated
 @SuppressWarnings("all")
 public class InMemoryJavaCompiler {
   @FinalFieldsConstructor

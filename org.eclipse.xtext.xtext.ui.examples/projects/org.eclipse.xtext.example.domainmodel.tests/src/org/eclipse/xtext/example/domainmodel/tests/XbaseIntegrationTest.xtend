@@ -8,9 +8,9 @@ import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler2
-import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
+import org.eclipse.xtext.xbase.testing.OnTheFlyJavaCompiler2
 import org.junit.runner.RunWith
+import org.eclipse.xtext.xbase.testing.evaluation.AbstractXbaseEvaluationTest
 
 /**
  * Xbase integration test.
