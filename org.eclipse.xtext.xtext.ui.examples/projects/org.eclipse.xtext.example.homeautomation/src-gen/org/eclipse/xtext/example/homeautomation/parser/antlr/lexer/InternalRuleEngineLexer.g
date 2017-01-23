@@ -170,8 +170,6 @@ VerticalLine : '|';
 
 RightCurlyBracket : '}';
 
-// Rules duplicated to allow inter-rule references
-
 fragment RULE_BEGIN : ;
 
 fragment RULE_END : ;

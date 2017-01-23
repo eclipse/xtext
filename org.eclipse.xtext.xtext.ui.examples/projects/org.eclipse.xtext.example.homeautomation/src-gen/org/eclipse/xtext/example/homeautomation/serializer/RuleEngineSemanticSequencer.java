@@ -379,7 +379,7 @@ public class RuleEngineSemanticSequencer extends XbaseSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getRuleAccess().getDescriptionSTRINGTerminalRuleCall_1_0(), semanticObject.getDescription());
-		feeder.accept(grammarAccess.getRuleAccess().getDeviceStateStateQualifiedNameParserRuleCall_3_0_1(), semanticObject.getDeviceState());
+		feeder.accept(grammarAccess.getRuleAccess().getDeviceStateStateQualifiedNameParserRuleCall_3_0_1(), semanticObject.eGet(RuleEnginePackage.Literals.RULE__DEVICE_STATE, false));
 		feeder.accept(grammarAccess.getRuleAccess().getThenPartXBlockExpressionParserRuleCall_5_0(), semanticObject.getThenPart());
 		feeder.finish();
 	}
