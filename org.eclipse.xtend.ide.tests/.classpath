@@ -5,9 +5,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="xtend-gen"/>
 	<classpathentry kind="src" path="longrunning/src"/>
-	<classpathentry kind="src" path="longrunning/xtend-gen"/>
 	<classpathentry kind="src" path="quarantine/src"/>
-	<classpathentry kind="src" path="quarantine/xtend-gen"/>
 	<classpathentry kind="src" path="suites"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
