@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-	<feature url="features/org.eclipse.xtext.sdk_2.11.0.qualifier.jar" id="org.eclipse.xtext.sdk" version="2.11.0.qualifier">
+	<feature id="org.eclipse.xtext.sdk" version="2.11.0.qualifier">
 		<category name="Xtext"/>
 	</feature>
-	<feature url="features/org.eclipse.xtend.sdk_2.11.0.qualifier.jar" id="org.eclipse.xtend.sdk" version="2.11.0.qualifier">
+	<feature id="org.eclipse.xtend.sdk" version="2.11.0.qualifier">
 		<category name="Xtext"/>
 	</feature>
-	<feature url="features/org.eclipse.lsp4j.sdk_0.1.0.qualifier.jar" id="org.eclipse.lsp4j.sdk" version="0.1.0.qualifier">
+	<feature id="org.eclipse.lsp4j.sdk" version="0.1.1.qualifier">
 		<category name="lsp4j"/>
 	</feature>
 	<bundle id="com.google.gson" version="2.7.0.v20161205-1708">
