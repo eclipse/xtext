@@ -19,11 +19,11 @@ public class Messages extends NLS {
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageProjectName;
 	public static String WizardNewXtextProjectCreationPage_LabelExtensions;
 	public static String WizardNewXtextProjectCreationPage_LabelLanguage;
-	public static String WizardNewXtextProjectCreationPage_LabelFacets;
 	public static String WizardNewXtextProjectCreationPage_LabelName;
 	public static String WizardNewXtextProjectCreationPage_WindowTitle;
 	public static String AdvancedNewProjectPage_WindowTitle;
 	public static String AdvancedNewProjectPage_Description;
+	public static String AdvancedNewProjectPage_LabelFacets;
 	public static String AdvancedNewProjectPage_eclipseAndGradleWarn;
 	public static String AdvancedNewProjectPage_ideaAndMavenWarn;
 	public static String AdvancedNewProjectPage_ideaReqGradleInfo;
