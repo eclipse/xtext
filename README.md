@@ -15,6 +15,7 @@ This is an umbrella repository for the following modules.
 - [xtext-web](https://github.com/eclipse/xtext-web): Support for [Orion](http://eclipse.org/orion/), [Ace](http://ace.c9.io) and [CodeMirror](https://codemirror.net)
 - [xtext-maven](https://github.com/eclipse/xtext-maven): Support for [Maven](https://maven.apache.org)
 - [xtext-xtend](https://github.com/eclipse/xtext-xtend): The [Xtend](http://www.xtend-lang.org) language
+- [xtext-umbrella](https://github.com/eclipse/xtext-umbrella): Common Eclipse features and P2 update sites
 
 Please check the individual repositories for instructions for building and contributing.
 
