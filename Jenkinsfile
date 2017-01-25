@@ -23,6 +23,8 @@ node {
 		def workspace = pwd()
 		def mvnHome = tool 'M3'
 		env.M2_HOME = "${mvnHome}"
+		dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
+		dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
 		try {
 			stage 'Maven Plugin Build'
 			sh "${mvnHome}/bin/mvn -f maven-pom.xml --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -Dmaven.test.failure.ignore=true -Dmaven.repo.local=${workspace}/.m2/repository clean install deploy"
