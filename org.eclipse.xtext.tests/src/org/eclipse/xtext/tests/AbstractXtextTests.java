@@ -287,10 +287,14 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	protected void disableSerializerTest() {
 		isSerializerTestDisabled = true;
 	}
+	
+	protected Object getClasspathURIContext() {
+		return getClass();
+	}
 
 	protected XtextResource doGetResource(InputStream in, URI uri) throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);
-		rs.setClasspathURIContext(getClass());
+		rs.setClasspathURIContext(getClasspathURIContext());
 		XtextResource resource = (XtextResource) getResourceFactory().createResource(uri);
 		rs.getResources().add(resource);
 		resource.load(in, null);
