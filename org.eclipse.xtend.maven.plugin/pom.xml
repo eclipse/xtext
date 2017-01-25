@@ -213,6 +213,12 @@
 				<version>2.10</version>
 				<configuration>
 					<argLine>-Xmx1024m -XX:MaxPermSize=512m</argLine>
+					<systemPropertyVariables>
+						<property>
+							<name>gradleMavenRepo</name>
+							<value>${gradleMavenRepo}</value>
+						</property>
+					</systemPropertyVariables>
 				</configuration>
 				<executions>
 					<execution>

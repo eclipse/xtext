@@ -23,8 +23,11 @@ public class MavenVerifierUtil {
 		File testDir = ResourceExtractor.simpleExtractResources(MavenVerifierUtil.class, pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath());
 		String localRepo = Paths.get("../.m2/repository/").toAbsolutePath().normalize().toString();
+		
+		verifier.setSystemProperty("gradleMavenRepo", System.getProperty("gradleMavenRepo"));
 		verifier.setLocalRepo(localRepo);
 		verifier.setDebug(true);
+		// verifier.setMavenDebug(true);
 		// verifier.setDebugJvm(true);
 		// verifier.setForkJvm(false);
 		return verifier;

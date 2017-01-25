@@ -30,6 +30,16 @@
 	</pluginRepositories>
 	<repositories>
 		<repository>
+			<id>gradle-build-it</id>
+			<url>${gradleMavenRepo}</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
 			<id>central</id>
 			<releases>
 				<enabled>true</enabled>

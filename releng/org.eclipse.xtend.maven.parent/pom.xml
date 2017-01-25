@@ -39,6 +39,13 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+		
+		<!-- 
+		  Maven repository initially produced by gradle upstream build.
+		  Used to grab the upstream maven artifacts like org.eclipse.xtend.core
+		  and also to deploy the artifacts produced in this build.
+		 -->
+		<gradleMavenRepo>file:${root-dir}/build/maven-repository</gradleMavenRepo>
 	</properties>
 	
 	<build>
@@ -251,7 +258,7 @@
 			<repositories>
 				<repository>
 					<id>local-repo</id>
-					<url>file:${root-dir}/build/maven-repository</url>
+					<url>${gradleMavenRepo}</url>
 				</repository>
 				<repository>
 					<id>xtext-lib-from-jenkins</id>
@@ -288,11 +295,11 @@
 	<distributionManagement>
 		<repository>
 			<id>local-repo</id>
-			<url>file:${root-dir}/build/maven-repository</url>
+			<url>${gradleMavenRepo}</url>
 		</repository>
 		<snapshotRepository>
 			<id>local-repo</id>
-			<url>file:${root-dir}/build/maven-repository</url>
+			<url>${gradleMavenRepo}</url>
 		</snapshotRepository>
 	</distributionManagement>
 
