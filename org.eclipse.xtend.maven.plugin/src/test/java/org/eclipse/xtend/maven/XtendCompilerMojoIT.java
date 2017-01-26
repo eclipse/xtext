@@ -25,7 +25,7 @@ public class XtendCompilerMojoIT {
 	@BeforeClass
 	static public void setUpOnce() throws IOException, VerificationException {
 		MavenVerifierUtil.checkMavenExecutable(ROOT);
-		Verifier clientVerifier = MavenVerifierUtil.newVerifier(ROOT);
+		Verifier clientVerifier = MavenVerifierUtil.newVerifier("/it");
 		clientVerifier.executeGoal("install");
 	}
 

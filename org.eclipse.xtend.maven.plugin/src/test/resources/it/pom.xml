@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>it-tests-parent</artifactId>
-	<packaging>pom</packaging>
 	<version>IT-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>central</id>

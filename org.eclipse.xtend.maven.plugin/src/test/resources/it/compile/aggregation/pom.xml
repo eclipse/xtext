@@ -1,13 +1,18 @@
 <project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.mycompany.app</groupId>
-  <artifactId>my-app</artifactId>
-  <version>1</version>
-  <packaging>pom</packaging>
-
-  <modules>
-    <module>my-module</module>
-    <!-- //https://bugs.eclipse.org/bugs/show_bug.cgi?id=409759 -->
-    <module>relativeoutput-module</module>
-  </modules>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.mycompany.app</groupId>
+	<artifactId>my-app</artifactId>
+	<version>1</version>
+	<packaging>pom</packaging>
+	<parent>
+		<groupId>org.eclipse.xtend</groupId>
+		<artifactId>it-tests-parent</artifactId>
+		<version>IT-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+	<modules>
+		<module>my-module</module>
+		<!-- //https://bugs.eclipse.org/bugs/show_bug.cgi?id=409759 -->
+		<module>relativeoutput-module</module>
+	</modules>
 </project>
