@@ -413,7 +413,7 @@
         encoding="UTF-8">
       <modification
           pattern="(gitclonextextcorelocationprototype)">
-        <substitution>${git.clone.xtext.core.location}</substitution>
+        <substitution>${git.clone.xtext.core.location|property}</substitution>
       </modification>
     </setupTask>
     <setupTask
@@ -497,7 +497,7 @@
         encoding="UTF-8">
       <modification
           pattern="(gitclonextextliblocationprototype)">
-        <substitution>${git.clone.xtext.lib.location}</substitution>
+        <substitution>${git.clone.xtext.lib.location|property}</substitution>
       </modification>
     </setupTask>
     <setupTask
@@ -585,7 +585,7 @@
         encoding="UTF-8">
       <modification
           pattern="(gitclonextextextraslocationprototype)">
-        <substitution>${git.clone.xtext.extras.location}</substitution>
+        <substitution>${git.clone.xtext.extras.location|property}</substitution>
       </modification>
     </setupTask>
     <setupTask
@@ -1012,7 +1012,7 @@
         encoding="UTF-8">
       <modification
           pattern="(gitclonextextidealocationprototype)">
-        <substitution>${git.clone.xtext.idea.location}</substitution>
+        <substitution>${git.clone.xtext.idea.location|property}</substitution>
       </modification>
     </setupTask>
     <setupTask
@@ -1099,7 +1099,7 @@
         encoding="UTF-8">
       <modification
           pattern="(gitclonextextweblocationprototype)">
-        <substitution>${git.clone.xtext.web.location}</substitution>
+        <substitution>${git.clone.xtext.web.location|property}</substitution>
       </modification>
     </setupTask>
     <setupTask
@@ -1263,7 +1263,7 @@
         encoding="UTF-8">
       <modification
           pattern="(gitclonextextxtendlocationprototype)">
-        <substitution>${git.clone.xtext.xtend.location}</substitution>
+        <substitution>${git.clone.xtext.xtend.location|property}</substitution>
       </modification>
     </setupTask>
     <setupTask
