@@ -594,6 +594,73 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	/**
+	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=460455
+	 */
+	@Test def void testInnerClass_01 () {
+		'''
+			package p
+			
+			class OuterClazz {
+			
+				new() {
+					new Innerfaze() {
+					}
+				}
+			
+				interface Innerfaze {
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			package p
+			
+			class OuterClazz {
+			
+				new() {
+					new Innerfaze() {
+					}
+				}
+			
+				interface Innerfaze {
+				}
+			}
+		''')
+	}
+	/**
+	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=460455
+	 * @Ignore ("TODO Fix ConflictResolver")
+	 */
+	@Test def void testInnerClass_02 () {
+		'''
+			package p
+			
+			class OuterClazz {
+			
+				new() {
+					new Innerfaze() {
+					}
+				}
+			
+				interface Innerfaze {
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			package p
+			
+			class OuterClazz {
+			
+				new() {
+					new Innerfaze() {
+					}
+				}
+			
+				interface Innerfaze {
+				}
+			}
+		''')
+	}
+	
 	@Test 
 	def void testBug447227(){
 		'''		
@@ -633,8 +700,8 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 	def void testBug447227_2(){
 		createFile('/p/Outer.java',
 			'''
-			package p
-			public class class Outer {
+			package p;
+			public class Outer {
 				public static class Inner {}
 			}
 			''')
