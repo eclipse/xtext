@@ -15,7 +15,7 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.smoketest.IgnoredBySmokeTest;
 import org.eclipse.xtext.testing.smoketest.ScenarioProcessor;
 import org.junit.Ignore;
-import org.junit.internal.AssumptionViolatedException;
+import org.junit.AssumptionViolatedException;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.model.FrameworkMethod;
