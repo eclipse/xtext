@@ -1018,7 +1018,13 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("<goal>compile</goal>");
       _builder.newLine();
       _builder.append("\t\t\t\t\t\t\t");
+      _builder.append("<goal>xtend-install-debug-info</goal>");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t");
       _builder.append("<goal>testCompile</goal>");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t");
+      _builder.append("<goal>xtend-test-install-debug-info</goal>");
       _builder.newLine();
       _builder.append("\t\t\t\t\t\t");
       _builder.append("</goals>");
