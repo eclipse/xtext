@@ -316,7 +316,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 									<execution>
 										<goals>
 											<goal>compile</goal>
+											<goal>xtend-install-debug-info</goal>
 											<goal>testCompile</goal>
+											<goal>xtend-test-install-debug-info</goal>
 										</goals>
 									</execution>
 								</executions>
