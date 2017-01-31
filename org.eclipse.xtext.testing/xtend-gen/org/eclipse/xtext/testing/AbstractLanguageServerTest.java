@@ -221,7 +221,6 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   protected void open(final String fileUri, final String langaugeId, final String model) {
     DidOpenTextDocumentParams _didOpenTextDocumentParams = new DidOpenTextDocumentParams();
     final Procedure1<DidOpenTextDocumentParams> _function = (DidOpenTextDocumentParams it) -> {
-      it.setUri(fileUri);
       TextDocumentItem _textDocumentItem = new TextDocumentItem();
       final Procedure1<TextDocumentItem> _function_1 = (TextDocumentItem it_1) -> {
         it_1.setUri(fileUri);

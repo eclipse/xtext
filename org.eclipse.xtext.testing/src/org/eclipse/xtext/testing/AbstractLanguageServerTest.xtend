@@ -155,7 +155,6 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 	protected def void open(String fileUri, String langaugeId, String model) {
 		languageServer.didOpen(new DidOpenTextDocumentParams => [
-			uri = fileUri
 			textDocument = new TextDocumentItem => [
 				uri = fileUri
 				languageId = langaugeId
