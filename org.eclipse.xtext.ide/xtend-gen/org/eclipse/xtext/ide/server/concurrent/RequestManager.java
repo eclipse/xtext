@@ -117,8 +117,8 @@ public class RequestManager {
         final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(it);
         this.cancelIndicators.add(cancelIndicator);
         this.semaphore.acquire(1);
-        cancelIndicator.checkCanceled();
         try {
+          cancelIndicator.checkCanceled();
           final CancelIndicator _function_1 = () -> {
             cancelIndicator.checkCanceled();
             return false;

@@ -96,9 +96,9 @@ class RequestManager {
 		return CompletableFutures.computeAsync(executorService) [
 			val cancelIndicator = new RequestCancelIndicator(it)
 			cancelIndicators += cancelIndicator
-    		semaphore.acquire(1)
-    		cancelIndicator.checkCanceled
+			semaphore.acquire(1)
 			try {
+    			cancelIndicator.checkCanceled
 				return readRequest.apply [
 					cancelIndicator.checkCanceled
 					return false
