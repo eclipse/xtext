@@ -20,7 +20,9 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.xbase.testing.typesystem.PublicResolvedTypes instead
  */
+@Deprecated
 @SuppressWarnings("all")
 public class PublicResolvedTypes extends RootResolvedTypes {
   public PublicResolvedTypes(final DefaultReentrantTypeResolver resolver) {

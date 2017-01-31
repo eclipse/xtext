@@ -19,7 +19,9 @@ import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.xbase.testing.typesystem.PublicResolvedTypes instead
  */
+@Deprecated
 class PublicResolvedTypes extends RootResolvedTypes {
 	new(DefaultReentrantTypeResolver resolver) {
 		super(resolver, CancelIndicator.NullImpl)

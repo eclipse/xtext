@@ -34,7 +34,9 @@ import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler.Result
 /**
  * 
  * @since 2.9
+ * @deprecated Use org.eclipse.xtext.xbase.testing.InMemoryJavaCompiler instead
  */
+@Deprecated
 class InMemoryJavaCompiler {
 	
 	@FinalFieldsConstructor private static class ClassLoaderBasedNameEnvironment implements INameEnvironment {

@@ -21,7 +21,9 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * @noreference This class is not intended to be referenced by clients.
  * 
  * @since 2.7
+ * @deprecated Use org.eclipse.xtext.xbase.testing.RegisteringFileSystemAccess instead
  */
+@Deprecated
 @SuppressWarnings("all")
 public class RegisteringFileSystemAccess extends InMemoryFileSystemAccess {
   /**

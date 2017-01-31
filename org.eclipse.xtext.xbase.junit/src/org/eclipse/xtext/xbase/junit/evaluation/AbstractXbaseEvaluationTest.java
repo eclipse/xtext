@@ -40,7 +40,9 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
+ * @deprecated Use org.eclipse.xtext.xbase.testing.evaluation.AbstractXbaseEvaluationTest instead
  */
+@Deprecated
 public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Rule
