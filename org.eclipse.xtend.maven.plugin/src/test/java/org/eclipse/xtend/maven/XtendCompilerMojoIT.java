@@ -1,5 +1,7 @@
 package org.eclipse.xtend.maven;
 
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -23,7 +25,7 @@ public class XtendCompilerMojoIT {
 	@BeforeClass
 	static public void setUpOnce() throws IOException, VerificationException {
 		MavenVerifierUtil.checkMavenExecutable(ROOT);
-		Verifier clientVerifier = MavenVerifierUtil.newVerifier(ROOT);
+		Verifier clientVerifier = MavenVerifierUtil.newVerifier("/it");
 		clientVerifier.executeGoal("install");
 	}
 

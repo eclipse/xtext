@@ -1,12 +1,18 @@
 <project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.mycompany.app</groupId>
-  <artifactId>macros</artifactId>
-  <version>1</version>
-  <packaging>pom</packaging>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.mycompany.app</groupId>
+	<artifactId>macros</artifactId>
+	<version>1</version>
+	<packaging>pom</packaging>
+    <parent>
+        <groupId>org.eclipse.xtend</groupId>
+        <artifactId>it-tests-parent</artifactId>
+        <version>IT-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
 
-  <modules>
-    <module>lib</module>
-    <module>client</module>
-  </modules>
+	<modules>
+		<module>lib</module>
+		<module>client</module>
+	</modules>
 </project>

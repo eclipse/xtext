@@ -3,6 +3,12 @@
 	<groupId>com.mycompany.app</groupId>
 	<artifactId>lib</artifactId>
 	<version>1</version>
+	<parent>
+		<relativePath>../pom.xml</relativePath>
+		<groupId>com.mycompany.app</groupId>
+		<artifactId>macros</artifactId>
+		<version>1</version>
+	</parent>
 	<build>
 		<plugins>
 			<plugin>
@@ -12,7 +18,7 @@
 				<executions>
 					<execution>
 						<goals>
-                            <goal>compile</goal>
+							<goal>compile</goal>
 						</goals>
 					</execution>
 				</executions>

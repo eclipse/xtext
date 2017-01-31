@@ -4,7 +4,12 @@
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>smap_multisources</artifactId>
 	<version>2.2.1-SNAPSHOT</version>
-
+    <parent>
+        <groupId>org.eclipse.xtend</groupId>
+        <artifactId>it-tests-parent</artifactId>
+        <version>IT-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
 	<build>
 		<plugins>
 			<plugin>

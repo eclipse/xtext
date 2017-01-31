@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>it-tests-parent</artifactId>
-	<packaging>pom</packaging>
 	<version>IT-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>central</id>
@@ -29,6 +29,16 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<repositories>
+		<repository>
+			<id>gradle-build-it</id>
+			<url>${gradleMavenRepo}</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 		<repository>
 			<id>central</id>
 			<releases>
