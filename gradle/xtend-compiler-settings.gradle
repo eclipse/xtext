@@ -21,3 +21,6 @@ afterEvaluate {
 		}
 	}
 }
+
+// Always delete xtend-gen folders
+clean.dependsOn(cleanGenerateXtext)
