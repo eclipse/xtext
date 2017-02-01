@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.example.arithmetics.validation;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.math.BigDecimal;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -52,8 +51,8 @@ public class ArithmeticsValidator extends AbstractArithmeticsValidator {
       return;
     }
     Evaluation _containerOfType = EcoreUtil2.<Evaluation>getContainerOfType(expr, Evaluation.class);
-    boolean _notEquals = (!Objects.equal(_containerOfType, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_containerOfType != null);
+    if (_tripleNotEquals) {
       return;
     }
     final TreeIterator<EObject> contents = expr.eAllContents();

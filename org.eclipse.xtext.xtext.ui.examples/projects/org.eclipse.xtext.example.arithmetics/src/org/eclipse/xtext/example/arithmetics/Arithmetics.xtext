@@ -51,5 +51,6 @@ PrimaryExpression returns Expression:
 terminal NUMBER returns ecore::EBigDecimal:
 	('0'..'9')* ('.' ('0'..'9')+)?;
 
+@Override 
 terminal INT returns ecore::EInt:
 	'this one has been deactivated';

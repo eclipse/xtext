@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.eclipse.xtext.common.types,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.homeautomation.ruleEngine.util,
  org.eclipse.xtext.example.homeautomation.ruleEngine,
  org.eclipse.xtext.example.homeautomation.ruleEngine.impl,
