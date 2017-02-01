@@ -57,27 +57,21 @@ class RequestManager {
 	 * </p>
 	 */
 	def <V> CompletableFuture<V> runWrite((CancelIndicator)=>V writeRequest) {
-		semaphore.acquire(MAX_PERMITS)
-		return CompletableFutures.computeAsync(executorService) [
-			val cancelIndicator = new RequestCancelIndicator(it)
-			cancelIndicators += cancelIndicator
-	
-			try {
-				return writeRequest.apply([
-					cancelIndicator.checkCanceled
-					return false
-				])
-			} catch (Throwable t) {
-	            if (isCancelException(t)) {
-	            	LOGGER.info("request cancelled.")
-	            	throw new CancellationException()
-	            }
-	            throw t
-			} finally {
-				cancelIndicators -= cancelIndicator
-				semaphore.release(MAX_PERMITS)
-			}
-		]
+		try {
+    		semaphore.acquire(MAX_PERMITS)
+			val result = writeRequest.apply([
+				return false
+			])
+			return CompletableFuture.completedFuture(result);
+		} catch (Throwable t) {
+            if (isCancelException(t)) {
+            	LOGGER.info("request cancelled.")
+            	throw new CancellationException()
+            }
+            throw t
+		} finally {
+			semaphore.release(MAX_PERMITS)
+		}
 	}
 
 

@@ -63,38 +63,28 @@ public class RequestManager {
    */
   public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
     try {
-      this.semaphore.acquire(this.MAX_PERMITS);
-      final Function<CancelChecker, V> _function = (CancelChecker it) -> {
-        try {
-          final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(it);
-          this.cancelIndicators.add(cancelIndicator);
-          try {
-            final CancelIndicator _function_1 = () -> {
-              cancelIndicator.checkCanceled();
-              return false;
-            };
-            return writeRequest.apply(_function_1);
-          } catch (final Throwable _t) {
-            if (_t instanceof Throwable) {
-              final Throwable t = (Throwable)_t;
-              boolean _isCancelException = this.isCancelException(t);
-              if (_isCancelException) {
-                RequestManager.LOGGER.info("request cancelled.");
-                throw new CancellationException();
-              }
-              throw t;
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
-          } finally {
-            this.cancelIndicators.remove(cancelIndicator);
-            this.semaphore.release(this.MAX_PERMITS);
+      try {
+        this.semaphore.acquire(this.MAX_PERMITS);
+        final CancelIndicator _function = () -> {
+          return false;
+        };
+        final V result = writeRequest.apply(_function);
+        return CompletableFuture.<V>completedFuture(result);
+      } catch (final Throwable _t) {
+        if (_t instanceof Throwable) {
+          final Throwable t = (Throwable)_t;
+          boolean _isCancelException = this.isCancelException(t);
+          if (_isCancelException) {
+            RequestManager.LOGGER.info("request cancelled.");
+            throw new CancellationException();
           }
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
+          throw t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
-      };
-      return CompletableFutures.<V>computeAsync(this.executorService, _function);
+      } finally {
+        this.semaphore.release(this.MAX_PERMITS);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
