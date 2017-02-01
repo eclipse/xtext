@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xbase Generic IDE Services
 Bundle-Vendor: Eclipse Xtext
 Bundle-SymbolicName: org.eclipse.xtext.xbase.ide;singleton:=true
-Bundle-Version: 2.11.0.qualifier
+Bundle-Version: 2.11.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.ide,
