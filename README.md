@@ -1,5 +1,13 @@
-# Xtext Lib
+# Eclipse Xtext Library
 
-This repository contains the standard library for xbase languages, such as Xtend.
+This repository contains the standard library for [Xbase](https://www.eclipse.org/Xtext/documentation/305_xbase.html) languages such as [Xtend](http://xtend-lang.org).
 
-[![Javadocs](http://javadoc.io/badge/org.eclipse.xtext/org.eclipse.xtext.xbase.lib.svg)](http://javadoc.io/doc/org.eclipse.xtext/org.eclipse.xtext.xbase.lib)
+## How To Build
+
+Check out and run `./gradlew build`.
+
+The additional command line argument `-PcompileXtend=true` activates the [Xtend](http://xtend-lang.org) compiler, but this is optional because the generated Java code is included in the repository.
+
+## Continuos Integration
+
+http://services.typefox.io/open-source/jenkins/job/xtext-lib/
