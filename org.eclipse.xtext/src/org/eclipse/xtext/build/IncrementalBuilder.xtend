@@ -56,8 +56,27 @@ import org.eclipse.xtext.generator.GeneratorContext
 		@Inject Indexer indexer
 		@Inject extension OperationCanceledManager
 		
+		protected def void unloadResource(URI uri) {
+		    val resource = request.resourceSet.getResource(uri, false)
+            if (resource !== null) {
+                request.resourceSet.resources.remove(resource)
+                resource.unload
+            }
+		}
+		
 		def Result launch() {
 			val newSource2GeneratedMapping = request.state.fileMappings
+			val unloaded = newHashSet()
+		    for (deleted : request.deletedFiles) {
+                if (unloaded.add(deleted)) {
+                    unloadResource(deleted)
+                }
+            }
+            for (dirty : request.dirtyFiles) {
+                if (unloaded.add(dirty)) {
+                    unloadResource(dirty)
+                }
+            }
 			request.deletedFiles.forEach [ source |
 				newSource2GeneratedMapping.deleteSource(source).forEach [ generated |
 					if (LOG.isInfoEnabled)
@@ -74,15 +93,11 @@ import org.eclipse.xtext.generator.GeneratorContext
 			]
 			val result = indexer.computeAndIndexAffected(request, context)
 			request.cancelIndicator.checkCanceled
-			if (!request.resourceSet.resources.empty) {
-			    for (delta : result.resourceDeltas) {
-                    val resource = request.resourceSet.getResource(delta.uri, false)
-                    if (resource !== null) {
-                        request.resourceSet.resources.remove(resource)
-                        resource.unload
-                    }
-			    }
-			}
+		    for (delta : result.resourceDeltas) {
+                if (unloaded.add(delta.uri)) {
+                    unloadResource(delta.uri)
+                }
+		    }
 			
 			val resolvedDeltas = newArrayList
 			// add deleted deltas

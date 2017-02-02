@@ -166,13 +166,15 @@ public class BuildManager {
     for (final ProjectDescription it : sortedDescriptions) {
       {
         final ProjectManager projectManager = this.workspaceManager.getProjectManager(it.getName());
-        final IncrementalBuilder.Result partialResult = projectManager.doBuild(IterableExtensions.<URI>toList(project2dirty.get(it)), IterableExtensions.<URI>toList(project2deleted.get(it)), cancelIndicator);
+        final List<URI> projectDirty = IterableExtensions.<URI>toList(project2dirty.get(it));
+        final List<URI> projectDeleted = IterableExtensions.<URI>toList(project2deleted.get(it));
+        final IncrementalBuilder.Result partialResult = projectManager.doBuild(projectDirty, projectDeleted, result, cancelIndicator);
         final Function1<IResourceDescription.Delta, URI> _function = (IResourceDescription.Delta it_1) -> {
           return it_1.getUri();
         };
         allDirty.addAll(ListExtensions.<IResourceDescription.Delta, URI>map(partialResult.getAffectedResources(), _function));
-        Iterables.removeAll(this.dirtyFiles, this.dirtyFiles);
-        Iterables.removeAll(this.deletedFiles, this.deletedFiles);
+        Iterables.removeAll(this.dirtyFiles, projectDirty);
+        Iterables.removeAll(this.deletedFiles, projectDeleted);
         result.addAll(partialResult.getAffectedResources());
       }
     }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.build.Source2GeneratedMapping;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.IExternalContentSupport;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
@@ -102,11 +104,11 @@ public class ProjectManager {
       this.fileSystemScanner.scan(it.getPath(), _function_1);
     };
     this.projectConfig.getSourceFolders().forEach(_function);
-    return this.doBuild(uris, CollectionLiterals.<URI>emptyList(), cancelIndicator);
+    return this.doBuild(uris, CollectionLiterals.<URI>emptyList(), CollectionLiterals.<IResourceDescription.Delta>emptyList(), cancelIndicator);
   }
   
-  public IncrementalBuilder.Result doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
-    final BuildRequest request = this.newBuildRequest(dirtyFiles, deletedFiles, cancelIndicator);
+  public IncrementalBuilder.Result doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final List<IResourceDescription.Delta> externalDeltas, final CancelIndicator cancelIndicator) {
+    final BuildRequest request = this.newBuildRequest(dirtyFiles, deletedFiles, externalDeltas, cancelIndicator);
     final Function1<URI, IResourceServiceProvider> _function = (URI it) -> {
       return this.languagesRegistry.getResourceServiceProvider(it);
     };
@@ -117,7 +119,7 @@ public class ProjectManager {
     return result;
   }
   
-  protected BuildRequest newBuildRequest(final List<URI> changedFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
+  protected BuildRequest newBuildRequest(final List<URI> changedFiles, final List<URI> deletedFiles, final List<IResourceDescription.Delta> externalDeltas, final CancelIndicator cancelIndicator) {
     BuildRequest _buildRequest = new BuildRequest();
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
       it.setBaseDir(this.baseDir);
@@ -128,6 +130,7 @@ public class ProjectManager {
       it.setResourceSet(this.createFreshResourceSet(it.getState().getResourceDescriptions()));
       it.setDirtyFiles(changedFiles);
       it.setDeletedFiles(deletedFiles);
+      it.setExternalDeltas(externalDeltas);
       final BuildRequest.IPostValidationCallback _function_1 = (URI uri, Iterable<Issue> issues) -> {
         this.issueAcceptor.apply(uri, issues);
         return true;
@@ -153,6 +156,10 @@ public class ProjectManager {
       this.resourceSet = _doubleArrow;
     } else {
       final ChunkedResourceDescriptions resDescs = ChunkedResourceDescriptions.findInEmfObject(this.resourceSet);
+      Set<Map.Entry<String, ResourceDescriptionsData>> _entrySet = this.indexProvider.get().entrySet();
+      for (final Map.Entry<String, ResourceDescriptionsData> entry : _entrySet) {
+        resDescs.setContainer(entry.getKey(), entry.getValue());
+      }
       resDescs.setContainer(this.projectDescription.getName(), newIndex);
     }
     return this.resourceSet;

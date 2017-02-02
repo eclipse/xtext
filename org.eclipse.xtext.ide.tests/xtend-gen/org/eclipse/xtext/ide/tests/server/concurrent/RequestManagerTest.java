@@ -144,45 +144,6 @@ public class RequestManagerTest {
   }
   
   @Test(timeout = 1000)
-  public void testCancelWrite() {
-    try {
-      final Function1<CancelIndicator, Integer> _function = (CancelIndicator cancelIndicator) -> {
-        try {
-          this.sharedState.incrementAndGet();
-          while ((!cancelIndicator.isCanceled())) {
-          }
-          return Integer.valueOf(this.sharedState.get());
-        } catch (final Throwable _t) {
-          if (_t instanceof CancellationException) {
-            final CancellationException e = (CancellationException)_t;
-            return Integer.valueOf(this.sharedState.incrementAndGet());
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        }
-      };
-      final CompletableFuture<Integer> future = this.requestManager.<Integer>runWrite(_function);
-      while ((this.sharedState.get() == 0)) {
-        Thread.sleep(10);
-      }
-      future.cancel(true);
-      try {
-        future.get();
-        Assert.fail("cancellation exception expected");
-      } catch (final Throwable _t) {
-        if (_t instanceof CancellationException) {
-          final CancellationException e = (CancellationException)_t;
-          Assert.assertEquals(1, this.sharedState.get());
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test(timeout = 1000)
   public void testCancelRead() {
     try {
       final Function1<CancelIndicator, Integer> _function = (CancelIndicator cancelIndicator) -> {

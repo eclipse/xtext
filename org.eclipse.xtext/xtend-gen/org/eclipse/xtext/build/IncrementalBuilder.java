@@ -13,6 +13,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -155,8 +156,31 @@ public class IncrementalBuilder {
     @Extension
     private OperationCanceledManager _operationCanceledManager;
     
+    protected void unloadResource(final URI uri) {
+      final Resource resource = this.request.getResourceSet().getResource(uri, false);
+      if ((resource != null)) {
+        this.request.getResourceSet().getResources().remove(resource);
+        resource.unload();
+      }
+    }
+    
     public IncrementalBuilder.Result launch() {
       final Source2GeneratedMapping newSource2GeneratedMapping = this.request.getState().getFileMappings();
+      final HashSet<URI> unloaded = CollectionLiterals.<URI>newHashSet();
+      List<URI> _deletedFiles = this.request.getDeletedFiles();
+      for (final URI deleted : _deletedFiles) {
+        boolean _add = unloaded.add(deleted);
+        if (_add) {
+          this.unloadResource(deleted);
+        }
+      }
+      List<URI> _dirtyFiles = this.request.getDirtyFiles();
+      for (final URI dirty : _dirtyFiles) {
+        boolean _add_1 = unloaded.add(dirty);
+        if (_add_1) {
+          this.unloadResource(dirty);
+        }
+      }
       final Consumer<URI> _function = (URI source) -> {
         final Consumer<URI> _function_1 = (URI generated) -> {
           try {
@@ -185,18 +209,11 @@ public class IncrementalBuilder {
       this.request.getDeletedFiles().forEach(_function);
       final Indexer.IndexResult result = this.indexer.computeAndIndexAffected(this.request, this.context);
       this._operationCanceledManager.checkCanceled(this.request.getCancelIndicator());
-      boolean _isEmpty = this.request.getResourceSet().getResources().isEmpty();
-      boolean _not = (!_isEmpty);
-      if (_not) {
-        List<IResourceDescription.Delta> _resourceDeltas = result.getResourceDeltas();
-        for (final IResourceDescription.Delta delta : _resourceDeltas) {
-          {
-            final Resource resource = this.request.getResourceSet().getResource(delta.getUri(), false);
-            if ((resource != null)) {
-              this.request.getResourceSet().getResources().remove(resource);
-              resource.unload();
-            }
-          }
+      List<IResourceDescription.Delta> _resourceDeltas = result.getResourceDeltas();
+      for (final IResourceDescription.Delta delta : _resourceDeltas) {
+        boolean _add_2 = unloaded.add(delta.getUri());
+        if (_add_2) {
+          this.unloadResource(delta.getUri());
         }
       }
       final ArrayList<IResourceDescription.Delta> resolvedDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();

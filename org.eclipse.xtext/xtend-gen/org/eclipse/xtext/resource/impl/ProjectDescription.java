@@ -13,9 +13,11 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.util.internal.EmfAdaptable;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -23,6 +25,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @since 2.9
  */
 @Beta
+@ToString
 @EmfAdaptable
 @SuppressWarnings("all")
 public class ProjectDescription {
@@ -54,6 +57,15 @@ public class ProjectDescription {
    */
   @Accessors
   private List<String> dependencies = CollectionLiterals.<String>newArrayList();
+  
+  @Override
+  @Pure
+  public String toString() {
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("name", this.name);
+    b.add("dependencies", this.dependencies);
+    return b.toString();
+  }
   
   public static ProjectDescription findInEmfObject(final Notifier emfObject) {
     for (Adapter adapter : emfObject.eAdapters()) {

@@ -31,6 +31,7 @@ import org.eclipse.xtext.util.IFileSystemScanner
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.workspace.IProjectConfig
 import org.eclipse.xtext.workspace.ProjectConfigAdapter
+import org.eclipse.xtext.resource.IResourceDescription
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -75,11 +76,11 @@ class ProjectManager {
         projectConfig.sourceFolders.forEach [
             fileSystemScanner.scan(path) [uris += it]
         ] 
-        return doBuild(uris, emptyList, cancelIndicator)        
+        return doBuild(uris, emptyList, emptyList, cancelIndicator)        
     } 
 
-    def Result doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
-        val request = newBuildRequest(dirtyFiles, deletedFiles, cancelIndicator)
+    def Result doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, List<IResourceDescription.Delta> externalDeltas, CancelIndicator cancelIndicator) {
+        val request = newBuildRequest(dirtyFiles, deletedFiles, externalDeltas, cancelIndicator)
         val result = incrementalBuilder.build(request, [
             languagesRegistry.getResourceServiceProvider(it)
         ])
@@ -89,13 +90,14 @@ class ProjectManager {
         return result;
     }
 
-    protected def BuildRequest newBuildRequest(List<URI> changedFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
+    protected def BuildRequest newBuildRequest(List<URI> changedFiles, List<URI> deletedFiles, List<IResourceDescription.Delta> externalDeltas, CancelIndicator cancelIndicator) {
         new BuildRequest => [
             it.baseDir = baseDir
             it.state = new IndexState(indexState.resourceDescriptions.copy, indexState.fileMappings.copy)
             it.resourceSet = createFreshResourceSet(state.resourceDescriptions)
             it.dirtyFiles = changedFiles
             it.deletedFiles = deletedFiles
+            it.externalDeltas = externalDeltas
             afterValidate = [ uri, issues |
                 issueAcceptor.apply(uri, issues)
                 return true
@@ -115,6 +117,10 @@ class ProjectManager {
             ]
         } else {
             val resDescs = ChunkedResourceDescriptions.findInEmfObject(this.resourceSet);
+            // update index with possible upstream changes
+            for (entry : indexProvider.get.entrySet) {
+                resDescs.setContainer(entry.key, entry.value)   
+            }
             resDescs.setContainer(projectDescription.name, newIndex)   
         }
         return this.resourceSet;

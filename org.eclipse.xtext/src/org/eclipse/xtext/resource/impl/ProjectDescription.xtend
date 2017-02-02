@@ -11,6 +11,7 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.internal.EmfAdaptable
 import com.google.common.annotations.Beta
+import org.eclipse.xtend.lib.annotations.ToString
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -18,6 +19,7 @@ import com.google.common.annotations.Beta
  * @since 2.9
  */
 @Beta
+@ToString
 @EmfAdaptable class ProjectDescription {
 	
 	/**

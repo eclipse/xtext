@@ -108,31 +108,6 @@ class RequestManagerTest {
 	}
 
 	@Test(timeout = 1000)
-	def void testCancelWrite() {
-		val future = requestManager.runWrite [ cancelIndicator |
-			try {
-				sharedState.incrementAndGet
-				while (!cancelIndicator.isCanceled) {
-				}
-				return sharedState.get
-			} catch (CancellationException e) {
-				return sharedState.incrementAndGet
-			}
-		]
-		while (sharedState.get == 0) {
-			Thread.sleep(10)
-		}
-		future.cancel(true)
-		try {
-			future.get
-			Assert.fail("cancellation exception expected")
-		} catch (CancellationException e) {
-			// expected
-			Assert.assertEquals(1, sharedState.get)
-		}
-	}
-
-	@Test(timeout = 1000)
 	def void testCancelRead() {
 		val future = requestManager.runRead [ cancelIndicator |
 			try {

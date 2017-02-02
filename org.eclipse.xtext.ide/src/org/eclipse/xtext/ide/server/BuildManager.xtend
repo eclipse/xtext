@@ -15,12 +15,12 @@ import java.util.Collection
 import java.util.List
 import java.util.Set
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.diagnostics.Severity
+import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.resource.IResourceDescription
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -74,10 +74,12 @@ class BuildManager {
         val result = newArrayList()
         for(ProjectDescription it: sortedDescriptions) {
             val projectManager = workspaceManager.getProjectManager(name)
-            val partialResult = projectManager.doBuild(project2dirty.get(it).toList, project2deleted.get(it).toList, cancelIndicator)
+            val projectDirty = project2dirty.get(it).toList
+            val projectDeleted = project2deleted.get(it).toList
+            val partialResult = projectManager.doBuild(projectDirty, projectDeleted, result, cancelIndicator)
             allDirty.addAll(partialResult.affectedResources.map[uri])
-            this.dirtyFiles -= dirtyFiles
-            this.deletedFiles -= deletedFiles
+            this.dirtyFiles -= projectDirty
+            this.deletedFiles -= projectDeleted
             result.addAll(partialResult.affectedResources)
         }
         return result
