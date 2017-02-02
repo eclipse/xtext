@@ -107,8 +107,9 @@ import org.eclipse.xtext.validation.Issue
 		if (this.params !== null) {
 			throw new IllegalStateException("This language server has already been initialized.")
 		}
-		if (params.rootPath === null) {
-			throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.")
+		val baseDir = params.baseDir
+		if (baseDir === null) {
+			throw new IllegalArgumentException("Bad initialization request: rootUri must not be null.")
 		}
 		if (languagesRegistry.extensionToFactoryMap.isEmpty) {
 			throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages's setup class in '/META-INF/services/org.eclipse.xtext.ISetup'")
@@ -134,14 +135,23 @@ import org.eclipse.xtext.validation.Issue
 		]
 
 		requestManager.runWrite [ cancelIndicator |
-			val rootURI = URI.createFileURI(params.rootPath).toPath.toUri
-			workspaceManager.initialize(rootURI, [this.publishDiagnostics($0, $1)], cancelIndicator)
+			workspaceManager.initialize(baseDir, [this.publishDiagnostics($0, $1)], cancelIndicator)
 			return null
 		]
 
 		access.addBuildListener(this);
 
 		return CompletableFuture.completedFuture(result)
+	}
+	
+	protected def URI getBaseDir(InitializeParams params) {
+		if (params.rootUri !== null) {
+			return params.rootUri.toUri
+		}
+		if (params.rootPath !== null) {
+			return URI.createFileURI(params.rootPath).toPath.toUri
+		}
+		return null
 	}
 	
 	override connect(LanguageClient client) {

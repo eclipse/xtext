@@ -143,7 +143,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	protected def InitializeResult initialize((InitializeParams)=>void initializer) {
 		val params = new InitializeParams => [
 			processId = 1
-			rootPath = testRootPath.toString
+			rootUri = root.toURI.normalize.toPath
 		]
 		initializer?.apply(params)
 		return languageServer.initialize(params).get

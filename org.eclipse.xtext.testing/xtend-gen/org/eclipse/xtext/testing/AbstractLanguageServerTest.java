@@ -202,7 +202,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       InitializeParams _initializeParams = new InitializeParams();
       final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
         it.setProcessId(Integer.valueOf(1));
-        it.setRootPath(this.getTestRootPath().toString());
+        it.setRootUri(this._uriExtensions.toPath(this.root.toURI().normalize()));
       };
       final InitializeParams params = ObjectExtensions.<InitializeParams>operator_doubleArrow(_initializeParams, _function);
       if (initializer!=null) {

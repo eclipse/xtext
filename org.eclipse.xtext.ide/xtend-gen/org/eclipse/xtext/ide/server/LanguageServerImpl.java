@@ -171,10 +171,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     if ((this.params != null)) {
       throw new IllegalStateException("This language server has already been initialized.");
     }
-    String _rootPath = params.getRootPath();
-    boolean _tripleEquals = (_rootPath == null);
-    if (_tripleEquals) {
-      throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.");
+    final URI baseDir = this.getBaseDir(params);
+    if ((baseDir == null)) {
+      throw new IllegalArgumentException("Bad initialization request: rootUri must not be null.");
     }
     boolean _isEmpty = this.languagesRegistry.getExtensionToFactoryMap().isEmpty();
     if (_isEmpty) {
@@ -206,16 +205,29 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     ServerCapabilities _doubleArrow = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
     result.setCapabilities(_doubleArrow);
     final Function1<CancelIndicator, Object> _function_1 = (CancelIndicator cancelIndicator) -> {
-      final URI rootURI = this._uriExtensions.toUri(this._uriExtensions.toPath(URI.createFileURI(params.getRootPath())));
       final Procedure2<URI, Iterable<Issue>> _function_2 = (URI $0, Iterable<Issue> $1) -> {
         this.publishDiagnostics($0, $1);
       };
-      this.workspaceManager.initialize(rootURI, _function_2, cancelIndicator);
+      this.workspaceManager.initialize(baseDir, _function_2, cancelIndicator);
       return null;
     };
     this.requestManager.<Object>runWrite(_function_1);
     this.access.addBuildListener(this);
     return CompletableFuture.<InitializeResult>completedFuture(result);
+  }
+  
+  protected URI getBaseDir(final InitializeParams params) {
+    String _rootUri = params.getRootUri();
+    boolean _tripleNotEquals = (_rootUri != null);
+    if (_tripleNotEquals) {
+      return this._uriExtensions.toUri(params.getRootUri());
+    }
+    String _rootPath = params.getRootPath();
+    boolean _tripleNotEquals_1 = (_rootPath != null);
+    if (_tripleNotEquals_1) {
+      return this._uriExtensions.toUri(this._uriExtensions.toPath(URI.createFileURI(params.getRootPath())));
+    }
+    return null;
   }
   
   @Override
