@@ -10,4 +10,4 @@ The additional command line argument `-PcompileXtend=true` activates the [Xtend]
 
 ## Continuos Integration
 
-http://services.typefox.io/open-source/jenkins/job/xtext-lib/
+This project is built by the [xtext-lib multi-branch job on Jenkins](http://services.typefox.io/open-source/jenkins/job/xtext-lib/).
