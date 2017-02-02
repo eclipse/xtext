@@ -6,7 +6,6 @@ Bundle-Version: 2.12.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ui.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.domainmodel.ui,
- org.eclipse.xtext.junit4,
  org.eclipse.xtext.xbase.junit,
  org.eclipse.xtext.testing,
  org.eclipse.core.runtime,

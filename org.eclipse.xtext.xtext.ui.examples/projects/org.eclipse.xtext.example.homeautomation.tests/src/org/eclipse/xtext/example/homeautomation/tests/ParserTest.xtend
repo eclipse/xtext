@@ -2,8 +2,8 @@ package org.eclipse.xtext.example.homeautomation.tests
 
 import com.google.inject.Inject
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Model
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 
 class ParserTest extends AbstractTest {
 

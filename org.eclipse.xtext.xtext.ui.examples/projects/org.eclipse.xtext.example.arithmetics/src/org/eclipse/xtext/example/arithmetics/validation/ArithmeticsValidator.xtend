@@ -44,7 +44,7 @@ class ArithmeticsValidator extends AbstractArithmeticsValidator {
 		if (expr instanceof NumberLiteral || expr instanceof FunctionCall) 
 			return;
 		// ignore evaluations
-		if (EcoreUtil2.getContainerOfType(expr, Evaluation)!=null)
+		if (EcoreUtil2.getContainerOfType(expr, Evaluation)!==null)
 			return;
 		
 		val contents = expr.eAllContents
