@@ -14,7 +14,10 @@ Additional command line arguments:
 
 ### Maven Support
 
-First run `./gradlew createLocalMavenRepo` to compile and install the Xtend core module, then run `mvn -f maven-pom.xml clean install -PuseSonatypeSnapshots`.
+First run `./gradlew createLocalMavenRepo` to compile and install the Xtend core module, then run
+```
+mvn -f maven-pom.xml clean install -PuseSonatypeSnapshots
+```
 
 With the above configuration, [Sonatype snapshots](https://oss.sonatype.org/content/repositories/snapshots) are used for upstream Xtext dependencies. The alternative profile `-PuseJenkinsSnapshots` activates the Maven repositories generated on the [Jenkins server](http://services.typefox.io/open-source/jenkins/) for [xtext-lib](https://github.com/eclipse/xtext-lib), [xtext-core](https://github.com/eclipse/xtext-core), and [xtext-extras](https://github.com/eclipse/xtext-extras) instead.
 
