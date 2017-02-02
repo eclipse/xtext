@@ -93,7 +93,7 @@ The actual publishing is done on a [Hudson build server](https://hudson.eclipse.
 
 ## The Release Process
 
-The `master` branch on each repository is the development stream for the next major or minor release. There are also one or more development streams for service releases, which are named `maintenance_«minorversion»`, where `«minorversion»` is the version number without the third segment.
+The `master` branch on each repository is the development stream for the next major or minor release. There are also one or more development streams for service releases, which are named `maintenance_«minorversion»`, where `«minorversion»` is the version number without the third segment (e.g. `maintenance_2.12`).
 
 When major or minor releases are done, there should be a time period of at least one week when only important fixes are added to the code base to be released. This is achieved by creating the maintenance branch for that release and committing the fixes directly to that branch. The maintenance branch is merged back into `master` just before the actual release is done so the fixes are available there, too. After the release is done, the service release version is increased on the maintenance branch. Furthermore, a "pseudo-merge" to `master` should be made afterwards so the following bug fixes can be merged later on without including the version change. The necessary git command line flag for this kind of merging is `-s ours`.
 
@@ -185,3 +185,11 @@ Note that the Xtend compiler cannot be set to use snapshot versions from the beg
    * Set `xtend-maven-plugin-version` property in `releng/org.eclipse.xtend.tycho.parent/pom.xml` to the used Xtend compiler version.
 9. xtext-umbrella
    * Replace all occurrences of the previous version with the next version.
+
+### GitHub Milestones
+
+We use GitHub milestones to communicate when bug fixes and new features will be available and to generate a list of resolved issues for the release notes.
+
+When a major or minor release is done, the corresponding GitHub milestone should be closed. If there are open issues left in that milestone, they should be removed from it or assigned to another milestone. Afterwards two new milestones should be created: one for the next major/minor release and one for the next service release. The due date should be set to a preliminary date if no date has been chosen yet.
+
+When a service release is done, its milestone should be closed. A new milestone should be created if it is likely that another service release will be done.
