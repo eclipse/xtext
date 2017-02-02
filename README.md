@@ -1,9 +1,9 @@
 # Eclipse Support For The Xtext Framework
 
 This repository contains all Eclipse related code for Xtext, including
- - the general Eclipse support for Xtext languages,
+ - the [general Eclipse support](https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html) for Xtext languages,
  - the Xtext SDK for Eclipse itself.
- 
+
 ## How To Build
 
 Checkout and run `mvn clean install`.
@@ -11,6 +11,7 @@ Checkout and run `mvn clean install`.
 Note: The [target platform](releng/org.eclipse.xtext.target/org.eclipse.xtext.target.target) used for the Tycho build loads the required Xtext dependencies ([xtext-lib](https://github.com/eclipse/xtext-lib), [xtext-core](https://github.com/eclipse/xtext-core), [xtext-extras](https://github.com/eclipse/xtext-extras)) from their respective p2 repositories on the [Jenkins server](http://services.typefox.io/open-source/jenkins/).
 
 ## How to Work with the Source Code
+
 For
  * how to setup your workspace,
  * how to contribute,
