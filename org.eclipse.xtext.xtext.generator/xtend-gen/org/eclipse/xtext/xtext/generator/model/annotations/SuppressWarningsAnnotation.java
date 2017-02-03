@@ -61,6 +61,16 @@ public class SuppressWarningsAnnotation implements IClassAnnotation {
     return this.generate().toString();
   }
   
+  @Override
+  public boolean equals(final Object obj) {
+    return (obj instanceof SuppressWarningsAnnotation);
+  }
+  
+  @Override
+  public int hashCode() {
+    return this.getClass().getName().hashCode();
+  }
+  
   @Pure
   public String getSuppress() {
     return this.suppress;

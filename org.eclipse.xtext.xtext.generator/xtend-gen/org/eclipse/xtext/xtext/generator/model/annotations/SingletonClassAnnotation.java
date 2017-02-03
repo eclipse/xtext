@@ -36,4 +36,14 @@ public class SingletonClassAnnotation implements IClassAnnotation {
   public String toString() {
     return this.generate().toString();
   }
+  
+  @Override
+  public boolean equals(final Object obj) {
+    return (obj instanceof SingletonClassAnnotation);
+  }
+  
+  @Override
+  public int hashCode() {
+    return this.getClass().getName().hashCode();
+  }
 }

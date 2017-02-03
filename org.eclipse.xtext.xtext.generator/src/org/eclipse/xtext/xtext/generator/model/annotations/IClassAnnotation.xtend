@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model.annotations
 
+import java.lang.annotation.Repeatable
 import org.eclipse.xtext.xtext.generator.XtextGenerator
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
@@ -14,6 +15,12 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 /** 
  * Class annotations can be added to the {@link XtextGenerator} workflow component in order
  * to configure specific Java annotations to be added to each generated class.
+ * <br/><br/>
+ * Make sure that you implement {@link Object#equals(Object)} and {@link Object#hashCode()} to fulfill following contract
+ * <ul>
+ * 	<li>If the underlying Annotation is {@link Repeatable} then the methods should behave like in {@link Object}.</li>
+ * 	<li>If the underlying Annotation is NOT {@link Repeatable} then {@link Object#equals(Object)} should return true for all instances and {@link Object#hashCode()} should return the same value for all instances</li>
+ * </ul>
  */
 interface IClassAnnotation {
 	

@@ -31,4 +31,12 @@ class SingletonClassAnnotation implements IClassAnnotation {
 	override toString() {
 		generate.toString
 	}
+	
+	override equals(Object obj) {
+		return obj instanceof SingletonClassAnnotation
+	}
+	
+	override hashCode() {
+		return class.name.hashCode;
+	}
 }
