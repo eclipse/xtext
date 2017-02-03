@@ -25,6 +25,7 @@ import org.eclipse.xtext.util.Pair
 import org.eclipse.xtext.util.Tuples
 
 import static java.util.Collections.*
+import org.eclipse.lsp4j.jsonrpc.messages.Either
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -48,23 +49,23 @@ class HoverService {
 	def Hover hover(XtextResource resource, int offset) {
 		val pair = resource.getXtextElementAt(offset)
 		if (pair === null || pair.first === null || pair.second === null) {
-			return new Hover(emptyList, null)
+			return new Hover(Either.forRight(emptyList), null)
 		}
 		val element = pair.first
 		
 		val contents = getContents(element)
 		if (contents === null)
-			return new Hover(emptyList, null)
+			return new Hover(Either.forRight(emptyList), null)
 
 		val ITextRegion textRegion = pair.second
 
 		if (!textRegion.contains(offset))
-			return new Hover(emptyList, null)
+			return new Hover(Either.forRight(emptyList), null)
 
 		val range = resource.newRange(textRegion)
 		return new Hover() => [ b |
     		b.range = range
-		    b.contents = contents.map[it]
+		    b.contents = contents.map[Either.forLeft(it)]
 		]
 	}
 	

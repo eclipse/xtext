@@ -56,6 +56,7 @@ import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider
+import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
 import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.lsp4j.services.LanguageClientAware
@@ -277,39 +278,43 @@ import org.eclipse.xtext.validation.Issue
 	    
 	}
 	// completion stuff
-	override CompletableFuture<CompletionList> completion(TextDocumentPositionParams params) {
-		return requestManager.runRead[ origialCancelIndicator |
-		    
-		    val cancelIndicator = new BufferedCancelIndicator(origialCancelIndicator)
-			val uri = params.textDocument.uri.toUri
-			val resourceServiceProvider = uri.resourceServiceProvider
-			val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
-			if (contentAssistService === null)
-				return new CompletionList();
-            
-            val result = workspaceManager.doRead(uri) [ document, resource |
-                return contentAssistService.createCompletionList(document, resource, params, cancelIndicator)
-            ]
-            return result
-		]
+	override completion(TextDocumentPositionParams params) {
+		return requestManager.runRead[origialCancelIndicator|completion(origialCancelIndicator, params)]
+	}
+	
+	protected def Either<List<CompletionItem>, CompletionList> completion(CancelIndicator origialCancelIndicator, TextDocumentPositionParams params) {
+		val cancelIndicator = new BufferedCancelIndicator(origialCancelIndicator)
+		val uri = params.textDocument.uri.toUri
+		val resourceServiceProvider = uri.resourceServiceProvider
+		val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
+		if (contentAssistService === null) {
+			return Either.forRight(new CompletionList())
+		}
+        
+        val completionList = workspaceManager.doRead(uri) [ document, resource |
+            return contentAssistService.createCompletionList(document, resource, params, cancelIndicator)
+        ]
+        return Either.forRight(completionList)
 	}
 
 	// end completion stuff
 	// symbols
 	override definition(TextDocumentPositionParams params) {
-		return requestManager.<List<? extends Location>>runRead[ cancelIndicator |
-			val uri = params.textDocument.uri.toUri
-			val resourceServiceProvider = uri.resourceServiceProvider
-			val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
-			if (documentSymbolService === null)
-				return emptyList
+		return requestManager.runRead[cancelIndicator|definition(cancelIndicator, params)]
+	}
 	
-			val definitions = workspaceManager.doRead(uri) [ document, resource |
-				val offset = document.getOffSet(params.position)
-				return documentSymbolService.getDefinitions(resource, offset, resourceAccess, cancelIndicator)
-			]
-			return definitions
+	protected def Either<Location, List<? extends Location>> definition(CancelIndicator cancelIndicator, TextDocumentPositionParams params) {
+		val uri = params.textDocument.uri.toUri
+		val resourceServiceProvider = uri.resourceServiceProvider
+		val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
+		if (documentSymbolService === null)
+			return Either.forRight(emptyList)
+
+		val definitions = workspaceManager.doRead(uri) [ document, resource |
+			val offset = document.getOffSet(params.position)
+			return documentSymbolService.getDefinitions(resource, offset, resourceAccess, cancelIndicator)
 		]
+		return Either.forRight(definitions)
 	}
 
 	override references(ReferenceParams params) {
@@ -367,7 +372,7 @@ import org.eclipse.xtext.validation.Issue
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val hoverService = resourceServiceProvider?.get(HoverService)
 			if (hoverService === null)
-				return new Hover(emptyList, null)
+				return new Hover(Either.forRight(emptyList), null)
 
 			return workspaceManager.doRead(uri) [ document, resource |
 				val offset = document.getOffSet(params.position)

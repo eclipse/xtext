@@ -67,6 +67,7 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
+import org.eclipse.lsp4j.jsonrpc.messages.Either
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -209,6 +210,14 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	
 	protected def dispatch String toExpectation(Void it) { '' }
 
+	protected dispatch def String toExpectation(Either<?, ?> either) '''
+		«IF either.isLeft»
+		«either.getLeft.toExpectation»
+		«ELSE»
+		«either.getRight.toExpectation»
+		«ENDIF»
+	'''
+
 	protected def dispatch String toExpectation(Location it) '''«uri.relativize» «range.toExpectation»'''
 
 	protected def dispatch String toExpectation(Range it) '''[«start.toExpectation» .. «end.toExpectation»]'''
@@ -235,9 +244,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 	protected dispatch def String toExpectation(Hover it) '''
 		«range.toExpectation»
-		«FOR content : contents»
-			«content.toExpectation»
-		«ENDFOR»
+		«contents.toExpectation»
 	'''
 
 	protected dispatch def String toExpectation(SignatureHelp it) {
@@ -297,13 +304,14 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			position = new Position(line, column)
 		])
 
-		val list = completionItems.get
+		val result = completionItems.get
+		val items = if (result.isLeft) result.getLeft else result.getRight.items 
 		// assert ordered by sortText
-		Assert.assertEquals(list.items, list.items.sortBy[sortText].toList)
+		Assert.assertEquals(items, items.sortBy[sortText].toList)
 		if (configuration.assertCompletionList !== null) {
-			configuration.assertCompletionList.apply(list)
+			configuration.assertCompletionList.apply(result.getRight)
 		} else {
-			val actualCompletionItems = list.items.toExpectation
+			val actualCompletionItems = items.toExpectation
 			assertEquals(expectedCompletionItems, actualCompletionItems)
 		}
 	}
@@ -336,7 +344,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		])
 		val definitions = definitionsFuture.get
 		if (configuration.assertDefinitions !== null) {
-			configuration.assertDefinitions.apply(definitions)
+			configuration.assertDefinitions.apply(definitions.getRight)
 		} else {
 			val actualDefinitions = definitions.toExpectation
 			assertEquals(expectedDefinitions, actualDefinitions)

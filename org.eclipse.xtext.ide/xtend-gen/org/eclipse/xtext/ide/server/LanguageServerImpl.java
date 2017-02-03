@@ -53,6 +53,7 @@ import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Location;
+import org.eclipse.lsp4j.MarkedString;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
@@ -71,6 +72,7 @@ import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod;
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider;
+import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.lsp4j.services.LanguageClientAware;
@@ -399,49 +401,58 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   @Override
-  public CompletableFuture<CompletionList> completion(final TextDocumentPositionParams params) {
-    final Function1<CancelIndicator, CompletionList> _function = (CancelIndicator origialCancelIndicator) -> {
-      final LanguageServerImpl.BufferedCancelIndicator cancelIndicator = new LanguageServerImpl.BufferedCancelIndicator(origialCancelIndicator);
-      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
-      final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
-      ContentAssistService _get = null;
-      if (resourceServiceProvider!=null) {
-        _get=resourceServiceProvider.<ContentAssistService>get(ContentAssistService.class);
-      }
-      final ContentAssistService contentAssistService = _get;
-      if ((contentAssistService == null)) {
-        return new CompletionList();
-      }
-      final Function2<Document, XtextResource, CompletionList> _function_1 = (Document document, XtextResource resource) -> {
-        return contentAssistService.createCompletionList(document, resource, params, cancelIndicator);
-      };
-      final CompletionList result = this.workspaceManager.<CompletionList>doRead(uri, _function_1);
-      return result;
+  public CompletableFuture<Either<List<CompletionItem>, CompletionList>> completion(final TextDocumentPositionParams params) {
+    final Function1<CancelIndicator, Either<List<CompletionItem>, CompletionList>> _function = (CancelIndicator origialCancelIndicator) -> {
+      return this.completion(origialCancelIndicator, params);
     };
-    return this.requestManager.<CompletionList>runRead(_function);
+    return this.requestManager.<Either<List<CompletionItem>, CompletionList>>runRead(_function);
+  }
+  
+  protected Either<List<CompletionItem>, CompletionList> completion(final CancelIndicator origialCancelIndicator, final TextDocumentPositionParams params) {
+    final LanguageServerImpl.BufferedCancelIndicator cancelIndicator = new LanguageServerImpl.BufferedCancelIndicator(origialCancelIndicator);
+    final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
+    final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+    ContentAssistService _get = null;
+    if (resourceServiceProvider!=null) {
+      _get=resourceServiceProvider.<ContentAssistService>get(ContentAssistService.class);
+    }
+    final ContentAssistService contentAssistService = _get;
+    if ((contentAssistService == null)) {
+      CompletionList _completionList = new CompletionList();
+      return Either.<List<CompletionItem>, CompletionList>forRight(_completionList);
+    }
+    final Function2<Document, XtextResource, CompletionList> _function = (Document document, XtextResource resource) -> {
+      return contentAssistService.createCompletionList(document, resource, params, cancelIndicator);
+    };
+    final CompletionList completionList = this.workspaceManager.<CompletionList>doRead(uri, _function);
+    return Either.<List<CompletionItem>, CompletionList>forRight(completionList);
   }
   
   @Override
-  public CompletableFuture<List<? extends Location>> definition(final TextDocumentPositionParams params) {
-    final Function1<CancelIndicator, List<? extends Location>> _function = (CancelIndicator cancelIndicator) -> {
-      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
-      final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
-      DocumentSymbolService _get = null;
-      if (resourceServiceProvider!=null) {
-        _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
-      }
-      final DocumentSymbolService documentSymbolService = _get;
-      if ((documentSymbolService == null)) {
-        return CollectionLiterals.<Location>emptyList();
-      }
-      final Function2<Document, XtextResource, List<? extends Location>> _function_1 = (Document document, XtextResource resource) -> {
-        final int offset = document.getOffSet(params.getPosition());
-        return documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
-      };
-      final List<? extends Location> definitions = this.workspaceManager.<List<? extends Location>>doRead(uri, _function_1);
-      return definitions;
+  public CompletableFuture<Either<Location, List<? extends Location>>> definition(final TextDocumentPositionParams params) {
+    final Function1<CancelIndicator, Either<Location, List<? extends Location>>> _function = (CancelIndicator cancelIndicator) -> {
+      return this.definition(cancelIndicator, params);
     };
-    return this.requestManager.<List<? extends Location>>runRead(_function);
+    return this.requestManager.<Either<Location, List<? extends Location>>>runRead(_function);
+  }
+  
+  protected Either<Location, List<? extends Location>> definition(final CancelIndicator cancelIndicator, final TextDocumentPositionParams params) {
+    final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
+    final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+    DocumentSymbolService _get = null;
+    if (resourceServiceProvider!=null) {
+      _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
+    }
+    final DocumentSymbolService documentSymbolService = _get;
+    if ((documentSymbolService == null)) {
+      return Either.<Location, List<? extends Location>>forRight(CollectionLiterals.<Location>emptyList());
+    }
+    final Function2<Document, XtextResource, List<? extends Location>> _function = (Document document, XtextResource resource) -> {
+      final int offset = document.getOffSet(params.getPosition());
+      return documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
+    };
+    final List<? extends Location> definitions = this.workspaceManager.<List<? extends Location>>doRead(uri, _function);
+    return Either.<Location, List<? extends Location>>forRight(definitions);
   }
   
   @Override
@@ -518,8 +529,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       final HoverService hoverService = _get;
       if ((hoverService == null)) {
-        List<String> _emptyList = CollectionLiterals.<String>emptyList();
-        return new Hover(_emptyList, null);
+        Either<Either<String, MarkedString>, List<Either<String, MarkedString>>> _forRight = Either.<Either<String, MarkedString>, List<Either<String, MarkedString>>>forRight(CollectionLiterals.<Either<String, MarkedString>>emptyList());
+        return new Hover(_forRight, null);
       }
       final Function2<Document, XtextResource, Hover> _function_1 = (Document document, XtextResource resource) -> {
         final int offset = document.getOffSet(params.getPosition());

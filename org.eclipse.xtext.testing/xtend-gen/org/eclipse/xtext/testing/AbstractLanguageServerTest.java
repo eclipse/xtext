@@ -59,6 +59,7 @@ import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
+import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClientExtensions;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -308,6 +309,23 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return "";
   }
   
+  protected String _toExpectation(final Either<?, ?> either) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isLeft = either.isLeft();
+      if (_isLeft) {
+        String _expectation = this.toExpectation(either.getLeft());
+        _builder.append(_expectation);
+        _builder.newLineIfNotEmpty();
+      } else {
+        String _expectation_1 = this.toExpectation(either.getRight());
+        _builder.append(_expectation_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder.toString();
+  }
+  
   protected String _toExpectation(final Location it) {
     StringConcatenation _builder = new StringConcatenation();
     Path _relativize = this.relativize(it.getUri());
@@ -425,14 +443,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     String _expectation = this.toExpectation(it.getRange());
     _builder.append(_expectation);
     _builder.newLineIfNotEmpty();
-    {
-      List<String> _contents = it.getContents();
-      for(final String content : _contents) {
-        String _expectation_1 = this.toExpectation(content);
-        _builder.append(_expectation_1);
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    String _expectation_1 = this.toExpectation(it.getContents());
+    _builder.append(_expectation_1);
+    _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   
@@ -567,18 +580,26 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         it.setPosition(_position);
       };
       TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
-      final CompletableFuture<CompletionList> completionItems = this.languageServer.completion(_doubleArrow);
-      final CompletionList list = completionItems.get();
+      final CompletableFuture<Either<List<CompletionItem>, CompletionList>> completionItems = this.languageServer.completion(_doubleArrow);
+      final Either<List<CompletionItem>, CompletionList> result = completionItems.get();
+      List<CompletionItem> _xifexpression = null;
+      boolean _isLeft = result.isLeft();
+      if (_isLeft) {
+        _xifexpression = result.getLeft();
+      } else {
+        _xifexpression = result.getRight().getItems();
+      }
+      final List<CompletionItem> items = _xifexpression;
       final Function1<CompletionItem, String> _function_1 = (CompletionItem it) -> {
         return it.getSortText();
       };
-      Assert.assertEquals(list.getItems(), IterableExtensions.<CompletionItem>toList(IterableExtensions.<CompletionItem, String>sortBy(list.getItems(), _function_1)));
+      Assert.assertEquals(items, IterableExtensions.<CompletionItem>toList(IterableExtensions.<CompletionItem, String>sortBy(items, _function_1)));
       Procedure1<? super CompletionList> _assertCompletionList = configuration.getAssertCompletionList();
       boolean _tripleNotEquals = (_assertCompletionList != null);
       if (_tripleNotEquals) {
-        configuration.getAssertCompletionList().apply(list);
+        configuration.getAssertCompletionList().apply(result.getRight());
       } else {
-        final String actualCompletionItems = this.toExpectation(list.getItems());
+        final String actualCompletionItems = this.toExpectation(items);
         this.assertEquals(configuration.getExpectedCompletionItems(), actualCompletionItems);
       }
     } catch (Throwable _e) {
@@ -628,12 +649,12 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         it.setPosition(_position);
       };
       TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
-      final CompletableFuture<List<? extends Location>> definitionsFuture = this.languageServer.definition(_doubleArrow);
-      final List<? extends Location> definitions = definitionsFuture.get();
+      final CompletableFuture<Either<Location, List<? extends Location>>> definitionsFuture = this.languageServer.definition(_doubleArrow);
+      final Either<Location, List<? extends Location>> definitions = definitionsFuture.get();
       Procedure1<? super List<? extends Location>> _assertDefinitions = configuration.getAssertDefinitions();
       boolean _tripleNotEquals = (_assertDefinitions != null);
       if (_tripleNotEquals) {
-        configuration.getAssertDefinitions().apply(definitions);
+        configuration.getAssertDefinitions().apply(definitions.getRight());
       } else {
         final String actualDefinitions = this.toExpectation(definitions);
         this.assertEquals(configuration.getExpectedDefinitions(), actualDefinitions);
@@ -943,6 +964,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((SymbolInformation)it);
     } else if (it instanceof TextEdit) {
       return _toExpectation((TextEdit)it);
+    } else if (it instanceof Either) {
+      return _toExpectation((Either<?, ?>)it);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it).toString());

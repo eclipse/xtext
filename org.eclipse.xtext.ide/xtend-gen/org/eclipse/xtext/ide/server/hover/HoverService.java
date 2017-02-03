@@ -13,7 +13,9 @@ import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.lsp4j.Hover;
+import org.eclipse.lsp4j.MarkedString;
 import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -58,28 +60,28 @@ public class HoverService {
   public Hover hover(final XtextResource resource, final int offset) {
     final Pair<EObject, ITextRegion> pair = this.getXtextElementAt(resource, offset);
     if ((((pair == null) || (pair.getFirst() == null)) || (pair.getSecond() == null))) {
-      List<String> _emptyList = Collections.<String>emptyList();
-      return new Hover(_emptyList, null);
+      Either<Either<String, MarkedString>, List<Either<String, MarkedString>>> _forRight = Either.<Either<String, MarkedString>, List<Either<String, MarkedString>>>forRight(Collections.<Either<String, MarkedString>>emptyList());
+      return new Hover(_forRight, null);
     }
     final EObject element = pair.getFirst();
     final List<? extends String> contents = this.getContents(element);
     if ((contents == null)) {
-      List<String> _emptyList_1 = Collections.<String>emptyList();
-      return new Hover(_emptyList_1, null);
+      Either<Either<String, MarkedString>, List<Either<String, MarkedString>>> _forRight_1 = Either.<Either<String, MarkedString>, List<Either<String, MarkedString>>>forRight(Collections.<Either<String, MarkedString>>emptyList());
+      return new Hover(_forRight_1, null);
     }
     final ITextRegion textRegion = pair.getSecond();
     boolean _contains = textRegion.contains(offset);
     boolean _not = (!_contains);
     if (_not) {
-      List<String> _emptyList_2 = Collections.<String>emptyList();
-      return new Hover(_emptyList_2, null);
+      Either<Either<String, MarkedString>, List<Either<String, MarkedString>>> _forRight_2 = Either.<Either<String, MarkedString>, List<Either<String, MarkedString>>>forRight(Collections.<Either<String, MarkedString>>emptyList());
+      return new Hover(_forRight_2, null);
     }
     final Range range = this._documentExtensions.newRange(resource, textRegion);
     Hover _hover = new Hover();
     final Procedure1<Hover> _function = (Hover b) -> {
       b.setRange(range);
-      final Function1<String, String> _function_1 = (String it) -> {
-        return it;
+      final Function1<String, Either<String, MarkedString>> _function_1 = (String it) -> {
+        return Either.<String, MarkedString>forLeft(it);
       };
       b.setContents(ListExtensions.map(contents, _function_1));
     };
