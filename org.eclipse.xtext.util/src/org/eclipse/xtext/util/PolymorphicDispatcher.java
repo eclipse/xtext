@@ -15,7 +15,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class PolymorphicDispatcher<RT> {
 	private final List<? extends Object> targets;
 	private final Predicate<Method> methodFilter;
 
-	private List<MethodDesc> declaredMethodsOrderedBySpecificParameterType;
+	private List<MethodDesc> methods;
 
 	public static class DefaultErrorHandler<RT> implements ErrorHandler<RT> {
 		@Override
@@ -164,7 +163,7 @@ public class PolymorphicDispatcher<RT> {
 		this.targets = targets;
 		this.methodFilter = methodFilter;
 		this.handler = handler;
-		declaredMethodsOrderedBySpecificParameterType = getDeclaredMethodsOrderedBySpecificParameterType();
+		this.methods = getCandidateMethods();
 	}
 
 	protected class MethodDesc {
@@ -210,20 +209,21 @@ public class PolymorphicDispatcher<RT> {
 		}
 	}
 
+	/**
+	 * returns > 0 when o1 is more specific than o2,
+	 * 
+	 * returns == 0 when o1 and o2 are equal or unrelated,
+	 * 
+	 * returns < 0 when o2 is more specific than o1,
+	 */
 	protected int compare(MethodDesc o1, MethodDesc o2) {
-		final List<Class<?>> paramTypes1 = Arrays.asList(o1.getParameterTypes());
-		final List<Class<?>> paramTypes2 = Arrays.asList(o2.getParameterTypes());
-
-		// sort by number of parameters
-		if (paramTypes1.size() > paramTypes2.size())
-			return 1;
-		if (paramTypes2.size() > paramTypes1.size())
-			return -1;
+		final Class<?>[] paramTypes1 = o1.getParameterTypes();
+		final Class<?>[] paramTypes2 = o2.getParameterTypes();
 
 		// sort by parameter types from left to right
-		for (int i = 0; i < paramTypes1.size(); i++) {
-			final Class<?> class1 = paramTypes1.get(i);
-			final Class<?> class2 = paramTypes2.get(i);
+		for (int i = 0; i < paramTypes1.length; i++) {
+			final Class<?> class1 = paramTypes1[i];
+			final Class<?> class2 = paramTypes2[i];
 
 			if (class1.equals(class2))
 				continue;
@@ -251,21 +251,27 @@ public class PolymorphicDispatcher<RT> {
 			new Function<List<Class<?>>, List<MethodDesc>>() {
 				@Override
 				public List<MethodDesc> apply(List<Class<?>> paramTypes) {
+					// 'result' contains all best-matched MethodDesc for which 
+					// pairwise compare(m1, m2) == 0, meaning they're equal or unrelated. 
 					List<MethodDesc> result = new ArrayList<MethodDesc>();
-					Iterator<MethodDesc> iterator = declaredMethodsOrderedBySpecificParameterType.iterator();
-					while (iterator.hasNext()) {
+					Iterator<MethodDesc> iterator = methods.iterator();
+					NEXT: while (iterator.hasNext()) {
 						MethodDesc methodDesc = iterator.next();
 						if (methodDesc.isInvokeable(paramTypes)) {
 							if (result.isEmpty()) {
 								result.add(methodDesc);
 							} else {
-								int compare = compare(result.get(0), methodDesc);
-								if (compare < 0) {
-									result.clear();
-									result.add(methodDesc);
-								} else if (compare == 0) {
-									result.add(methodDesc);
+								Iterator<MethodDesc> it = result.iterator();
+								while(it.hasNext()) {
+									MethodDesc next = it.next();
+									int compare = compare(next, methodDesc);
+									if (compare < 0) {
+										it.remove();
+									} else if (compare > 0) {
+										continue NEXT;
+									}
 								}
+								result.add(methodDesc);
 							}
 						}
 					}
@@ -336,27 +342,21 @@ public class PolymorphicDispatcher<RT> {
 		return Void.class;
 	}
 
-	private List<MethodDesc> getDeclaredMethodsOrderedBySpecificParameterType() {
-		ArrayList<MethodDesc> cachedDescriptors = new ArrayList<MethodDesc>();
+	private List<MethodDesc> getCandidateMethods() {
+		ArrayList<MethodDesc> result = new ArrayList<MethodDesc>();
 		for (Object target : targets) {
 			Class<?> current = target.getClass();
 			while (current != Object.class) {
 				Method[] methods = current.getDeclaredMethods();
 				for (Method method : methods) {
 					if (methodFilter.apply(method)) {
-						cachedDescriptors.add(createMethodDesc(target, method));
+						result.add(createMethodDesc(target, method));
 					}
 				}
 				current = current.getSuperclass();
 			}
 		}
-		Collections.sort(cachedDescriptors, new Comparator<MethodDesc>() {
-			@Override
-			public int compare(MethodDesc o1, MethodDesc o2) {
-				return PolymorphicDispatcher.this.compare(o1, o2);
-			}
-		});
-		return cachedDescriptors;
+		return result;
 	}
 	
 	protected MethodDesc createMethodDesc(Object target, Method method) {

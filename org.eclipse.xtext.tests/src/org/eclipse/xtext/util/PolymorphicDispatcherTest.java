@@ -15,10 +15,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
@@ -182,6 +186,42 @@ public class PolymorphicDispatcherTest extends Assert {
 		} catch (IllegalStateException e) {
 			// ignore
 		}
+	}
+	
+	interface A {}
+	interface B {}
+	interface CB extends B {}
+	class DCBA implements A, CB, E {}
+	interface E {}
+	
+	@Test public void testAmbiguous2() throws Exception {
+		Object o1 = new Object() {
+			String label(A i) {
+				return "A";
+			}
+			String label(B b) {
+				return "B";
+			}
+			String label(CB cb) {
+				return "CB";
+			}
+			String label(E e) {
+				return "E";
+			}
+		};
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(o1)) {
+			@Override
+			protected String handleAmbigousMethods(List<MethodDesc> result, Object... params) {
+				List<String> p = new ArrayList<>();
+				for(MethodDesc md:result) {
+					p.add(md.getParameterTypes()[0].getSimpleName());
+				}
+				Collections.sort(p);
+				return Joiner.on(", ").join(p);
+			}
+		};
+		String string = dispatcher.invoke(new DCBA());
+		assertEquals("A, CB, E", string);
 	}
 
 	@Test public void testNullParams() throws Exception {
