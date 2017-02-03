@@ -4,7 +4,6 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.xtext.generator.CodeConfig
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess.JavaTypeAwareStringConcatenation
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
 
 /**
@@ -49,7 +48,7 @@ class GeneratedJavaFileAccess extends JavaFileAccess {
 	}
 	
 	private def getClassAnnotations() {
-		annotations + codeConfig.classAnnotations.filter[appliesTo(this)]
+		(annotations + codeConfig.classAnnotations.filter[appliesTo(this)]).toSet
 	}
 	
 	override getInternalContent() '''

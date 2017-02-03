@@ -41,5 +41,14 @@ class SuppressWarningsAnnotation implements IClassAnnotation {
 
 	override toString() {
 		generate.toString
-	}	
+	}
+	
+	override equals(Object obj) {
+		return obj instanceof SuppressWarningsAnnotation
+	}
+	
+	override hashCode() {
+		return class.name.hashCode;
+	}
+	
 }

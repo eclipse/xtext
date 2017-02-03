@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Injector
+import java.nio.charset.Charset
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.List
@@ -15,7 +16,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.util.XtextVersion
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
-import java.nio.charset.Charset
 
 /**
  * Configuration object for generated code.

@@ -69,5 +69,13 @@ class GeneratedClassAnnotation implements IClassAnnotation {
 	override toString() {
 		generate.toString
 	}
+	
+	override equals(Object obj) {
+		return obj instanceof GeneratedClassAnnotation
+	}
+	
+	override hashCode() {
+		return class.name.hashCode;
+	}
 
 }

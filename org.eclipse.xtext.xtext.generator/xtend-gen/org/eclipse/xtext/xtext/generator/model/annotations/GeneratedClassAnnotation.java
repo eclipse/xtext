@@ -80,6 +80,16 @@ public class GeneratedClassAnnotation implements IClassAnnotation {
     return this.generate().toString();
   }
   
+  @Override
+  public boolean equals(final Object obj) {
+    return (obj instanceof GeneratedClassAnnotation);
+  }
+  
+  @Override
+  public int hashCode() {
+    return this.getClass().getName().hashCode();
+  }
+  
   @Pure
   public boolean isIncludeDate() {
     return this.includeDate;

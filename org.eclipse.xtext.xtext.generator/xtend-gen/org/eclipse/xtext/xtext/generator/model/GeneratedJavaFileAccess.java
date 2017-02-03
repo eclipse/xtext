@@ -2,6 +2,7 @@ package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.collect.Iterables;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -65,12 +66,12 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
     return _xblockexpression;
   }
   
-  private Iterable<IClassAnnotation> getClassAnnotations() {
+  private Set<IClassAnnotation> getClassAnnotations() {
     final Function1<IClassAnnotation, Boolean> _function = (IClassAnnotation it) -> {
       return Boolean.valueOf(it.appliesTo(this));
     };
     Iterable<IClassAnnotation> _filter = IterableExtensions.<IClassAnnotation>filter(this.codeConfig.getClassAnnotations(), _function);
-    return Iterables.<IClassAnnotation>concat(this.annotations, _filter);
+    return IterableExtensions.<IClassAnnotation>toSet(Iterables.<IClassAnnotation>concat(this.annotations, _filter));
   }
   
   @Override
@@ -79,7 +80,7 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
     _builder.append(this.typeComment);
     _builder.newLineIfNotEmpty();
     {
-      Iterable<IClassAnnotation> _classAnnotations = this.getClassAnnotations();
+      Set<IClassAnnotation> _classAnnotations = this.getClassAnnotations();
       for(final IClassAnnotation annot : _classAnnotations) {
         CharSequence _generate = annot.generate();
         _builder.append(_generate);
