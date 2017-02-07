@@ -22,11 +22,13 @@ Ruby Troubleshooting
 - On Linux/Mac OS we recommend using [RVM](https://rvm.io/) to manage your Ruby installations
 - On Windows you will have to install the [development kit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit)
 
-For hudson:
---------------------
+### For hudson:
+
+```
 rvm autolibs disable
 rvm install ruby-2.2.0
 rvm use 2.2.0
 ~/.rvm/rubies/ruby-2.2.0/bin/gem install jekyll
 ~/.rvm/rubies/ruby-2.2.0/bin/gem install bundler
 ~/.rvm/rubies/ruby-2.2.0/bin/gem install jekyll-markdown-block
+```
