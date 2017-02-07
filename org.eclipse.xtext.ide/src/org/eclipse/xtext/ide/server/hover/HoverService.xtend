@@ -49,18 +49,18 @@ class HoverService {
 	def Hover hover(XtextResource resource, int offset) {
 		val pair = resource.getXtextElementAt(offset)
 		if (pair === null || pair.first === null || pair.second === null) {
-			return new Hover(Either.forRight(emptyList), null)
+			return new Hover(emptyList, null)
 		}
 		val element = pair.first
 		
 		val contents = getContents(element)
 		if (contents === null)
-			return new Hover(Either.forRight(emptyList), null)
+			return new Hover(emptyList, null)
 
 		val ITextRegion textRegion = pair.second
 
 		if (!textRegion.contains(offset))
-			return new Hover(Either.forRight(emptyList), null)
+			return new Hover(emptyList, null)
 
 		val range = resource.newRange(textRegion)
 		return new Hover() => [ b |

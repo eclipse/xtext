@@ -303,18 +303,18 @@ import org.eclipse.xtext.validation.Issue
 		return requestManager.runRead[cancelIndicator|definition(cancelIndicator, params)]
 	}
 	
-	protected def Either<Location, List<? extends Location>> definition(CancelIndicator cancelIndicator, TextDocumentPositionParams params) {
+	protected def List<? extends Location> definition(CancelIndicator cancelIndicator, TextDocumentPositionParams params) {
 		val uri = params.textDocument.uri.toUri
 		val resourceServiceProvider = uri.resourceServiceProvider
 		val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
 		if (documentSymbolService === null)
-			return Either.forRight(emptyList)
+			return emptyList
 
 		val definitions = workspaceManager.doRead(uri) [ document, resource |
 			val offset = document.getOffSet(params.position)
 			return documentSymbolService.getDefinitions(resource, offset, resourceAccess, cancelIndicator)
 		]
-		return Either.forRight(definitions)
+		return definitions
 	}
 
 	override references(ReferenceParams params) {
@@ -372,7 +372,7 @@ import org.eclipse.xtext.validation.Issue
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val hoverService = resourceServiceProvider?.get(HoverService)
 			if (hoverService === null)
-				return new Hover(Either.forRight(emptyList), null)
+				return new Hover(emptyList, null)
 
 			return workspaceManager.doRead(uri) [ document, resource |
 				val offset = document.getOffSet(params.position)

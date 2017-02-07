@@ -649,12 +649,12 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         it.setPosition(_position);
       };
       TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
-      final CompletableFuture<Either<Location, List<? extends Location>>> definitionsFuture = this.languageServer.definition(_doubleArrow);
-      final Either<Location, List<? extends Location>> definitions = definitionsFuture.get();
+      final CompletableFuture<List<? extends Location>> definitionsFuture = this.languageServer.definition(_doubleArrow);
+      final List<? extends Location> definitions = definitionsFuture.get();
       Procedure1<? super List<? extends Location>> _assertDefinitions = configuration.getAssertDefinitions();
       boolean _tripleNotEquals = (_assertDefinitions != null);
       if (_tripleNotEquals) {
-        configuration.getAssertDefinitions().apply(definitions.getRight());
+        configuration.getAssertDefinitions().apply(definitions);
       } else {
         final String actualDefinitions = this.toExpectation(definitions);
         this.assertEquals(configuration.getExpectedDefinitions(), actualDefinitions);

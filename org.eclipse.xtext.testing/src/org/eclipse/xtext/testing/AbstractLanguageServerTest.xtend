@@ -344,7 +344,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		])
 		val definitions = definitionsFuture.get
 		if (configuration.assertDefinitions !== null) {
-			configuration.assertDefinitions.apply(definitions.getRight)
+			configuration.assertDefinitions.apply(definitions)
 		} else {
 			val actualDefinitions = definitions.toExpectation
 			assertEquals(expectedDefinitions, actualDefinitions)

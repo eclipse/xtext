@@ -60,21 +60,21 @@ public class HoverService {
   public Hover hover(final XtextResource resource, final int offset) {
     final Pair<EObject, ITextRegion> pair = this.getXtextElementAt(resource, offset);
     if ((((pair == null) || (pair.getFirst() == null)) || (pair.getSecond() == null))) {
-      Either<Either<String, MarkedString>, List<Either<String, MarkedString>>> _forRight = Either.<Either<String, MarkedString>, List<Either<String, MarkedString>>>forRight(Collections.<Either<String, MarkedString>>emptyList());
-      return new Hover(_forRight, null);
+      List<Either<String, MarkedString>> _emptyList = Collections.<Either<String, MarkedString>>emptyList();
+      return new Hover(_emptyList, null);
     }
     final EObject element = pair.getFirst();
     final List<? extends String> contents = this.getContents(element);
     if ((contents == null)) {
-      Either<Either<String, MarkedString>, List<Either<String, MarkedString>>> _forRight_1 = Either.<Either<String, MarkedString>, List<Either<String, MarkedString>>>forRight(Collections.<Either<String, MarkedString>>emptyList());
-      return new Hover(_forRight_1, null);
+      List<Either<String, MarkedString>> _emptyList_1 = Collections.<Either<String, MarkedString>>emptyList();
+      return new Hover(_emptyList_1, null);
     }
     final ITextRegion textRegion = pair.getSecond();
     boolean _contains = textRegion.contains(offset);
     boolean _not = (!_contains);
     if (_not) {
-      Either<Either<String, MarkedString>, List<Either<String, MarkedString>>> _forRight_2 = Either.<Either<String, MarkedString>, List<Either<String, MarkedString>>>forRight(Collections.<Either<String, MarkedString>>emptyList());
-      return new Hover(_forRight_2, null);
+      List<Either<String, MarkedString>> _emptyList_2 = Collections.<Either<String, MarkedString>>emptyList();
+      return new Hover(_emptyList_2, null);
     }
     final Range range = this._documentExtensions.newRange(resource, textRegion);
     Hover _hover = new Hover();
