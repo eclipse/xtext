@@ -6,6 +6,7 @@ Bundle-Version: 2.12.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.purexbase;visibility:=reexport,
+ org.eclipse.xtext.purexbase.ide;visibility:=reexport,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors;bundle-version="3.6.0",
  org.eclipse.ui.ide;bundle-version="3.6.0",
@@ -19,18 +20,17 @@ Require-Bundle: org.eclipse.xtext.purexbase;visibility:=reexport,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare;bundle-version="3.4.0",
  org.eclipse.xtext.xbase.lib,
- org.eclipse.jdt.debug.ui;bundle-version="3.5.2"
+ org.eclipse.jdt.debug.ui;bundle-version="3.5.2",
+ org.eclipse.xtend.lib;resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15",
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.purexbase.ui,
  org.eclipse.xtext.purexbase.ui.autoedit,
  org.eclipse.xtext.purexbase.ui.contentassist,
- org.eclipse.xtext.purexbase.ui.contentassist.antlr,
- org.eclipse.xtext.purexbase.ui.contentassist.antlr.internal,
  org.eclipse.xtext.purexbase.ui.folding,
  org.eclipse.xtext.purexbase.ui.internal,
  org.eclipse.xtext.purexbase.ui.labeling,
  org.eclipse.xtext.purexbase.ui.outline,
  org.eclipse.xtext.purexbase.ui.quickfix
-Bundle-Activator: org.eclipse.xtext.purexbase.ui.internal.PureXbaseActivator
+Bundle-Activator: org.eclipse.xtext.purexbase.ui.internal.PurexbaseActivator

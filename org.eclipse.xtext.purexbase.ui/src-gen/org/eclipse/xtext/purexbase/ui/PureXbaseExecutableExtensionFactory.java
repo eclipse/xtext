@@ -3,12 +3,10 @@
  */
 package org.eclipse.xtext.purexbase.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.xtext.purexbase.ui.internal.PurexbaseActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.xtext.purexbase.ui.internal.PureXbaseActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -18,12 +16,12 @@ public class PureXbaseExecutableExtensionFactory extends AbstractGuiceAwareExecu
 
 	@Override
 	protected Bundle getBundle() {
-		return PureXbaseActivator.getInstance().getBundle();
+		return PurexbaseActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return PureXbaseActivator.getInstance().getInjector(PureXbaseActivator.ORG_ECLIPSE_XTEXT_PUREXBASE_PUREXBASE);
+		return PurexbaseActivator.getInstance().getInjector(PurexbaseActivator.ORG_ECLIPSE_XTEXT_PUREXBASE_PUREXBASE);
 	}
 	
 }
