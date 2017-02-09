@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.purexbase.test;
 
-import org.eclipse.xtext.purexbase.PureXbaseInjectorProvider;
 import org.eclipse.xtext.purexbase.PureXbaseStandaloneSetup;
+import org.eclipse.xtext.purexbase.tests.PureXbaseInjectorProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

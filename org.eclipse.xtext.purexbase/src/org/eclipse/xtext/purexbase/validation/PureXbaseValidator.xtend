@@ -5,17 +5,17 @@ package org.eclipse.xtext.purexbase.validation
 
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator
 
 /**
- * Custom validation rules. 
+ * This class contains custom validation rules. 
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
-class PureXbaseValidator extends XbaseJavaValidator {
-
+class PureXbaseValidator extends AbstractPureXbaseValidator {
+	
 	@Check
 	override checkInnerExpressions(XExpression expr) {
 		// disabled since pure xbase is meant to be a playground
 	}
+	
 }

@@ -10,5 +10,6 @@ SpecialBlockExpression returns xbase::XBlockExpression:
 	{xbase::XBlockExpression}
 	(expressions+=XExpressionOrVarDeclaration ';'?)*;
 
+@Override
 FeatureCallID:
 	ValidID;
