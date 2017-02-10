@@ -436,7 +436,7 @@ class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		binder.bind(Lexer).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(DisabledInternalLexer)
 	}
 
-	override Class<? extends ContentAssistContextFactory> bindContentAssistContextFactory() {
+	def Class<? extends ContentAssistContextFactory> bindContentAssistContextFactory() {
 		return FlexerBasedContentAssistContextFactory
 	}
 

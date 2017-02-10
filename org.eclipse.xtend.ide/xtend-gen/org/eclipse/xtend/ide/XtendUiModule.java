@@ -478,7 +478,6 @@ public class XtendUiModule extends AbstractXtendUiModule {
     binder.<Lexer>bind(Lexer.class).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(DisabledInternalLexer.class);
   }
   
-  @Override
   public Class<? extends ContentAssistContextFactory> bindContentAssistContextFactory() {
     return FlexerBasedContentAssistContextFactory.class;
   }
