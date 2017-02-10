@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -142,7 +142,7 @@ public abstract class AbstractXtendRuntimeModule extends DefaultXbaseWithAnnotat
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalXtendLexer> provideInternalXtendLexer() {
+	public Provider<? extends InternalXtendLexer> provideInternalXtendLexer() {
 		return LexerProvider.create(InternalXtendLexer.class);
 	}
 	

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -39,9 +39,7 @@ import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRename
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
@@ -127,7 +125,7 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
-	public Provider<IAllContainersState> provideIAllContainersState() {
+	public Provider<? extends IAllContainersState> provideIAllContainersState() {
 		return Access.getJavaProjectsState();
 	}
 	
@@ -185,11 +183,6 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
 		binder.bind(InternalXtendLexer.class).toProvider(LexerProvider.create(InternalXtendLexer.class));
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Class<? extends ContentAssistContextFactory> bindContentAssistContextFactory() {
-		return PartialContentAssistContextFactory.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
@@ -380,12 +373,12 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
-	public Provider<TemplatesLanguageConfiguration> provideTemplatesLanguageConfiguration() {
+	public Provider<? extends TemplatesLanguageConfiguration> provideTemplatesLanguageConfiguration() {
 		return AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider();
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
-	public Provider<LanguageRegistry> provideLanguageRegistry() {
+	public Provider<? extends LanguageRegistry> provideLanguageRegistry() {
 		return AccessibleCodetemplatesActivator.getLanguageRegistry();
 	}
 	
