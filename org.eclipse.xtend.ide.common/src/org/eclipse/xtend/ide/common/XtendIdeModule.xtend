@@ -5,16 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.idea.lang;
+package org.eclipse.xtend.ide.common
 
-import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
 
-public final class XtendLanguage extends AbstractXtextLanguage {
-
-	public static final XtendLanguage INSTANCE = new XtendLanguage();
-
-	private XtendLanguage() {
-		super("org.eclipse.xtend.core.Xtend");
-	}
-
+/**
+ * Use this class to register ide components.
+ * 
+ * @since 2.12
+ */
+class XtendIdeModule extends AbstractXtendIdeModule {
 }

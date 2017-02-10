@@ -5,16 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.idea.lang;
+package org.eclipse.xtend.ide.common
 
-import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
+import com.google.inject.Guice
+import org.eclipse.xtend.core.XtendRuntimeModule
+import org.eclipse.xtend.core.XtendStandaloneSetup
+import org.eclipse.xtext.util.Modules2
 
-public final class XtendLanguage extends AbstractXtextLanguage {
+/**
+ * Initialization support for running Xtext languages as language servers.
+ * 
+ * @since 2.12
+ */
+class XtendIdeSetup extends XtendStandaloneSetup {
 
-	public static final XtendLanguage INSTANCE = new XtendLanguage();
-
-	private XtendLanguage() {
-		super("org.eclipse.xtend.core.Xtend");
+	override createInjector() {
+		Guice.createInjector(Modules2.mixin(new XtendRuntimeModule, new XtendIdeModule))
 	}
-
+	
 }

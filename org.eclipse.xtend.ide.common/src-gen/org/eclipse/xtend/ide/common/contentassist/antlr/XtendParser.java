@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,16 +8,12 @@
 package org.eclipse.xtend.ide.common.contentassist.antlr;
 
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractPartialContentAssistParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 
 public class XtendParser extends AbstractPartialContentAssistParser {
 
@@ -780,18 +776,7 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 		}
 		return nameMappings.get(element);
 	}
-
-	@Override
-	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
-		try {
-			InternalXtendParser typedParser = (InternalXtendParser) parser;
-			typedParser.entryRuleFile();
-			return typedParser.getFollowElements();
-		} catch(RecognitionException ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
+			
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };

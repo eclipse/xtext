@@ -10,6 +10,10 @@ package org.eclipse.xtend.core.ide
 
 /**
  * Use this class to register ide components.
+ * 
+ * 
+ * @deprecated use {@link org.eclipse.xtend.ide.common.XtendIdeModule} instead.
  */
-class XtendIdeModule extends AbstractXtendIdeModule {
+@Deprecated
+class XtendIdeModule extends org.eclipse.xtend.ide.common.XtendIdeModule {
 }

@@ -7,21 +7,11 @@
  */
 package org.eclipse.xtend.core.ide;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import org.eclipse.xtend.core.XtendRuntimeModule;
-import org.eclipse.xtend.core.XtendStandaloneSetup;
-import org.eclipse.xtend.core.ide.XtendIdeModule;
-
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
+ * @deprecated use {@link org.eclipse.xtend.ide.common.XtendIdeSetup} instead.
  */
+@Deprecated
 @SuppressWarnings("all")
-public class XtendIdeSetup extends XtendStandaloneSetup {
-  @Override
-  public Injector createInjector() {
-    XtendRuntimeModule _xtendRuntimeModule = new XtendRuntimeModule();
-    XtendIdeModule _xtendIdeModule = new XtendIdeModule();
-    return Guice.createInjector(_xtendRuntimeModule, _xtendIdeModule);
-  }
+public class XtendIdeSetup extends org.eclipse.xtend.ide.common.XtendIdeSetup {
 }

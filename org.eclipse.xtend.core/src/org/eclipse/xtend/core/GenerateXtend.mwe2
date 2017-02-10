@@ -64,7 +64,7 @@ Workflow {
 				encoding = "ISO-8859-1"
 				lineDelimiter = lineDelimiter
 				fileHeader = fileHeader
-				preferXtendStubs = false
+				preferXtendStubs = true
 			}
 		}
 		language = {
@@ -74,10 +74,10 @@ Workflow {
 			name = "org.eclipse.xtend.core.Xtend"
 			fileExtensions = file.extensions
 			guiceModule = parser.XtendLanguageGeneratorModule {}
-			generateXtendStubs = true
 			
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 			fragment = serializer.SerializerFragment2 {
+				generateXtendStub = false
 				// generateDebugData = true
 			}
 			fragment = resourceFactory.ResourceFactoryFragment2 {}
@@ -92,25 +92,35 @@ Workflow {
 				registerAdvice = "org::eclipse::xtend::core::parser::AntlrGrammarWithTokens"
 				registerAdvice = "org::eclipse::xtend::core::parser::ContentAssistAntlrGrammarWithTokens"
 			}
-			fragment = validation.ValidatorFragment2 {}
+			fragment = validation.ValidatorFragment2 {
+				generateXtendStub = false
+			}
 			fragment = formatting.Formatter2Fragment2 {}
 			fragment = generator.GeneratorFragment2 {}
-			fragment = scoping.ImportNamespacesScopingFragment2 {}
+			fragment = scoping.ImportNamespacesScopingFragment2 {
+				generateXtendStub = false
+			}
 			fragment = builder.BuilderIntegrationFragment2 {}
 
-			fragment = ui.quickfix.QuickfixProviderFragment2 {}
+			fragment = ui.quickfix.QuickfixProviderFragment2 {
+				generateXtendStub = false
+			}
 
 			fragment = ui.labeling.LabelProviderFragment2 {
 				generateStub = false
 			}
 
-			fragment = ui.outline.OutlineTreeProviderFragment2 {}
+			fragment = ui.outline.OutlineTreeProviderFragment2 {
+				generateXtendStub = false
+			}
 
 			fragment = ui.outline.QuickOutlineFragment2 {}
 
 			fragment = ui.compare.CompareFragment2 {}
 
-			fragment = ui.contentAssist.ContentAssistFragment2 {}
+			fragment = ui.contentAssist.ContentAssistFragment2 {
+				generateXtendStub = false
+			}
 
 			fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {
 				useJdtRefactoring = true
