@@ -2564,18 +2564,31 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class XtendEnumLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtend.core.Xtend.XtendEnumLiteral");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameValidIDParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cAnnotationsXAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//XtendEnumLiteral:
+		//	annotations+=XAnnotation*
 		//	name=ValidID;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//annotations+=XAnnotation* name=ValidID
+		public Group getGroup() { return cGroup; }
+		
+		//annotations+=XAnnotation*
+		public Assignment getAnnotationsAssignment_0() { return cAnnotationsAssignment_0; }
+		
+		//XAnnotation
+		public RuleCall getAnnotationsXAnnotationParserRuleCall_0_0() { return cAnnotationsXAnnotationParserRuleCall_0_0; }
+		
 		//name=ValidID
-		public Assignment getNameAssignment() { return cNameAssignment; }
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_0() { return cNameValidIDParserRuleCall_0; }
+		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
 	}
 	public class CommonModifierElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtend.core.Xtend.CommonModifier");
@@ -4407,6 +4420,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//XtendEnumLiteral:
+	//	annotations+=XAnnotation*
 	//	name=ValidID;
 	public XtendEnumLiteralElements getXtendEnumLiteralAccess() {
 		return pXtendEnumLiteral;

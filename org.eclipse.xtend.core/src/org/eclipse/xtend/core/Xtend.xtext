@@ -215,7 +215,8 @@ Operators:
 	| OpPostfix
 ;
 
-XtendEnumLiteral: 
+XtendEnumLiteral:
+	annotations+=XAnnotation*
 	name=ValidID
 ;
 

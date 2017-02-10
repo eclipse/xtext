@@ -396,6 +396,9 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 			if (elementType == elementTypeProvider.getXtendEnumLiteralElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
+			if (elementType == elementTypeProvider.getXtendEnumLiteral_AnnotationsXAnnotationParserRuleCall_0_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
 			if (elementType == elementTypeProvider.getCreateExtensionInfoElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}

@@ -2826,6 +2826,45 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testEnum476555() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("enum Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Deprecated FOO, @SuppressWarnings(\"just-a-test\") BAR, BAZ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public enum Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Deprecated");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("FOO,");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@SuppressWarnings(\"just-a-test\")");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("BAR,");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("BAZ;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testEnumBug428707() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("enum E {");

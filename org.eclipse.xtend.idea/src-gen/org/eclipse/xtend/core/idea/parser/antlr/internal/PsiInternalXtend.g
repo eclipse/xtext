@@ -3873,17 +3873,34 @@ ruleXtendEnumLiteral returns [Boolean current=false]
 :
 	(
 		(
-			{
-				markComposite(elementTypeProvider.getXtendEnumLiteral_NameValidIDParserRuleCall_0ElementType());
-			}
-			lv_name_0_0=ruleValidID
-			{
-				doneComposite();
-				if(!$current) {
-					associateWithSemanticElement();
-					$current = true;
+			(
+				{
+					markComposite(elementTypeProvider.getXtendEnumLiteral_AnnotationsXAnnotationParserRuleCall_0_0ElementType());
 				}
-			}
+				lv_annotations_0_0=ruleXAnnotation
+				{
+					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+			)
+		)*
+		(
+			(
+				{
+					markComposite(elementTypeProvider.getXtendEnumLiteral_NameValidIDParserRuleCall_1_0ElementType());
+				}
+				lv_name_1_0=ruleValidID
+				{
+					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+			)
 		)
 	)
 ;

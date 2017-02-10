@@ -1234,6 +1234,25 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def testEnum476555() {
+		'''
+			enum Foo {
+				@Deprecated FOO, @SuppressWarnings("just-a-test") BAR, BAZ
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public enum Foo {
+			  @Deprecated
+			  FOO,
+			  
+			  @SuppressWarnings("just-a-test")
+			  BAR,
+			  
+			  BAZ;
+			}
+		''')
+	}
+	
 	@Test def testEnumBug428707() {
 		'''
 			enum E {
