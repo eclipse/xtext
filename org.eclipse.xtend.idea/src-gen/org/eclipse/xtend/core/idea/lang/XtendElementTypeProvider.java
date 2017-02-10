@@ -2888,19 +2888,34 @@ public class XtendElementTypeProvider implements IElementTypeProvider {
 		public static IGrammarAwareElementType createXtendEnumLiteralElementType() {
 			return new IGrammarAwareElementType("XtendEnumLiteral_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXtendEnumLiteralRule());
 		}
-		public static IGrammarAwareElementType createXtendEnumLiteral_NameAssignmentElementType() {
-			return new IGrammarAwareElementType("XtendEnumLiteral_NameAssignment_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXtendEnumLiteralAccess().getNameAssignment());
+		public static IGrammarAwareElementType createXtendEnumLiteral_GroupElementType() {
+			return new IGrammarAwareElementType("XtendEnumLiteral_Group_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXtendEnumLiteralAccess().getGroup());
 		}
-		public static IGrammarAwareElementType createXtendEnumLiteral_NameValidIDParserRuleCall_0ElementType() {
-			return new IGrammarAwareElementType("XtendEnumLiteral_NameValidIDParserRuleCall_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXtendEnumLiteralAccess().getNameValidIDParserRuleCall_0());
+		public static IGrammarAwareElementType createXtendEnumLiteral_AnnotationsAssignment_0ElementType() {
+			return new IGrammarAwareElementType("XtendEnumLiteral_AnnotationsAssignment_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXtendEnumLiteralAccess().getAnnotationsAssignment_0());
+		}
+		public static IGrammarAwareElementType createXtendEnumLiteral_AnnotationsXAnnotationParserRuleCall_0_0ElementType() {
+			return new IGrammarAwareElementType("XtendEnumLiteral_AnnotationsXAnnotationParserRuleCall_0_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXtendEnumLiteralAccess().getAnnotationsXAnnotationParserRuleCall_0_0());
+		}
+		public static IGrammarAwareElementType createXtendEnumLiteral_NameAssignment_1ElementType() {
+			return new IGrammarAwareElementType("XtendEnumLiteral_NameAssignment_1_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXtendEnumLiteralAccess().getNameAssignment_1());
+		}
+		public static IGrammarAwareElementType createXtendEnumLiteral_NameValidIDParserRuleCall_1_0ElementType() {
+			return new IGrammarAwareElementType("XtendEnumLiteral_NameValidIDParserRuleCall_1_0_ELEMENT_TYPE", XtendLanguage.INSTANCE, GRAMMAR_ACCESS.getXtendEnumLiteralAccess().getNameValidIDParserRuleCall_1_0());
 		}
 	}
 
 	public static final IGrammarAwareElementType XtendEnumLiteral_ELEMENT_TYPE = associate(XtendEnumLiteralFactory.createXtendEnumLiteralElementType());
 
-	public static final IGrammarAwareElementType XtendEnumLiteral_NameAssignment_ELEMENT_TYPE = associate(XtendEnumLiteralFactory.createXtendEnumLiteral_NameAssignmentElementType());
+	public static final IGrammarAwareElementType XtendEnumLiteral_Group_ELEMENT_TYPE = associate(XtendEnumLiteralFactory.createXtendEnumLiteral_GroupElementType());
 
-	public static final IGrammarAwareElementType XtendEnumLiteral_NameValidIDParserRuleCall_0_ELEMENT_TYPE = associate(XtendEnumLiteralFactory.createXtendEnumLiteral_NameValidIDParserRuleCall_0ElementType());
+	public static final IGrammarAwareElementType XtendEnumLiteral_AnnotationsAssignment_0_ELEMENT_TYPE = associate(XtendEnumLiteralFactory.createXtendEnumLiteral_AnnotationsAssignment_0ElementType());
+
+	public static final IGrammarAwareElementType XtendEnumLiteral_AnnotationsXAnnotationParserRuleCall_0_0_ELEMENT_TYPE = associate(XtendEnumLiteralFactory.createXtendEnumLiteral_AnnotationsXAnnotationParserRuleCall_0_0ElementType());
+
+	public static final IGrammarAwareElementType XtendEnumLiteral_NameAssignment_1_ELEMENT_TYPE = associate(XtendEnumLiteralFactory.createXtendEnumLiteral_NameAssignment_1ElementType());
+
+	public static final IGrammarAwareElementType XtendEnumLiteral_NameValidIDParserRuleCall_1_0_ELEMENT_TYPE = associate(XtendEnumLiteralFactory.createXtendEnumLiteral_NameValidIDParserRuleCall_1_0ElementType());
 
 	private static class CommonModifierFactory {
 		public static IGrammarAwareElementType createCommonModifierElementType() {
@@ -11353,12 +11368,24 @@ public class XtendElementTypeProvider implements IElementTypeProvider {
 		return XtendEnumLiteral_ELEMENT_TYPE;
 	}
 	
-	public IGrammarAwareElementType getXtendEnumLiteral_NameAssignmentElementType() {
-		return XtendEnumLiteral_NameAssignment_ELEMENT_TYPE;
+	public IGrammarAwareElementType getXtendEnumLiteral_GroupElementType() {
+		return XtendEnumLiteral_Group_ELEMENT_TYPE;
 	}
 	
-	public IGrammarAwareElementType getXtendEnumLiteral_NameValidIDParserRuleCall_0ElementType() {
-		return XtendEnumLiteral_NameValidIDParserRuleCall_0_ELEMENT_TYPE;
+	public IGrammarAwareElementType getXtendEnumLiteral_AnnotationsAssignment_0ElementType() {
+		return XtendEnumLiteral_AnnotationsAssignment_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXtendEnumLiteral_AnnotationsXAnnotationParserRuleCall_0_0ElementType() {
+		return XtendEnumLiteral_AnnotationsXAnnotationParserRuleCall_0_0_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXtendEnumLiteral_NameAssignment_1ElementType() {
+		return XtendEnumLiteral_NameAssignment_1_ELEMENT_TYPE;
+	}
+	
+	public IGrammarAwareElementType getXtendEnumLiteral_NameValidIDParserRuleCall_1_0ElementType() {
+		return XtendEnumLiteral_NameValidIDParserRuleCall_1_0_ELEMENT_TYPE;
 	}
 	
 	public IGrammarAwareElementType getCommonModifierElementType() {

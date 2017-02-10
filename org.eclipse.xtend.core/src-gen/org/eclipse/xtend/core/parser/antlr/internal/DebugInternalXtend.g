@@ -577,6 +577,8 @@ ruleOperators:
 
 // Rule XtendEnumLiteral
 ruleXtendEnumLiteral:
+	ruleXAnnotation
+	*
 	ruleValidID
 ;
 

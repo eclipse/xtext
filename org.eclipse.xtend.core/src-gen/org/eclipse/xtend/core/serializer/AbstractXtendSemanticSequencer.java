@@ -1584,16 +1584,10 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     XtendEnumLiteral returns XtendEnumLiteral
 	 *
 	 * Constraint:
-	 *     name=ValidID
+	 *     (annotations+=XAnnotation* name=ValidID)
 	 */
 	protected void sequence_XtendEnumLiteral(ISerializationContext context, XtendEnumLiteral semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, XtendPackage.Literals.XTEND_ENUM_LITERAL__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtendPackage.Literals.XTEND_ENUM_LITERAL__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getXtendEnumLiteralAccess().getNameValidIDParserRuleCall_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
