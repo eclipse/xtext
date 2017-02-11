@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ide.server
 
 import com.google.inject.Singleton
+import java.nio.file.FileSystemNotFoundException
 import java.nio.file.Paths
 import org.eclipse.emf.common.util.URI
 
@@ -19,7 +20,9 @@ import org.eclipse.emf.common.util.URI
 class UriExtensions {
 
 	def URI toUri(String pathWithScheme) {
-		return URI.createURI(java.net.URI.create(pathWithScheme).toPath)
+		val javaNetUri = java.net.URI.create(pathWithScheme);
+		val path = javaNetUri.toPath
+        return URI.createURI(path)
 	}
 
 	def String toPath(URI uri) {
@@ -27,8 +30,11 @@ class UriExtensions {
 	}
 
 	def String toPath(java.net.URI uri) {
-		val path = Paths.get(uri)
-		return path.toUri.toString
+	    try {
+    		val path = Paths.get(uri)
+    		return path.toUri.toString
+	    } catch (FileSystemNotFoundException e) {
+	        return uri.toString
+	    }
 	}
-
 }
