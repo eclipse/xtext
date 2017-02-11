@@ -166,6 +166,7 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 				classBuilder.setClassName(typeName);
 				classBuilder.setVisibility(JvmVisibility.PUBLIC);
 				classBuilder.setContext(xtendType);
+				classBuilder.setImage("xtend_file.png");
 				codeBuilderQuickfix.addQuickfix(classBuilder, "Create local Xtend class '" + typeName + "'", issue, issueResolutionAcceptor);
 			}
 		}
@@ -182,6 +183,7 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 				interfaceBuilder.setInterfaceName(typeName);
 				interfaceBuilder.setVisibility(JvmVisibility.PUBLIC);
 				interfaceBuilder.setContext(xtendType);
+				interfaceBuilder.setImage("xtend_file.png");
 				codeBuilderQuickfix.addQuickfix(interfaceBuilder, "Create local Xtend interface '" + typeName + "'", issue, issueResolutionAcceptor);
 			}
 		}
