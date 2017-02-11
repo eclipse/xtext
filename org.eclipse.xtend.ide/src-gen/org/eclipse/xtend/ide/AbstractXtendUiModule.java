@@ -262,6 +262,11 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		return DefaultViewerCreator.class;
 	}
 	
+	// contributed by org.eclipse.xtext.xtext.generator.ui.compare.CompareFragment2
+	public void configureCompareViewerTitle(Binder binder) {
+		binder.bind(String.class).annotatedWith(Names.named(DefaultViewerCreator.COMPARE_VIEWER_TITLE)).toInstance("Xtend Compare");
+	}
+	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2
 	public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 		return XtendProposalProvider.class;
