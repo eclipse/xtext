@@ -12,10 +12,12 @@ import org.eclipse.compare.IViewerCreator;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.xtext.ui.UIBindings;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -29,6 +31,8 @@ public class DefaultViewerCreator implements IViewerCreator {
 	protected StreamContentDocumentProvider documentProvider;
 	@Inject
 	protected Provider<XtextSourceViewerConfiguration> sourceViewerConfigurationProvider;
+	@Inject(optional=true) @Named(UIBindings.COMPARE_VIEWER_TITLE)
+	protected String compareViewerTitle = "Text Compare";
 
 	@Override
 	public Viewer createViewer(Composite parent, CompareConfiguration compareConfiguration) {
@@ -41,7 +45,15 @@ public class DefaultViewerCreator implements IViewerCreator {
 	protected Viewer createMergeViewer(Composite parent, CompareConfiguration compareConfiguration) {
 		compareConfiguration.setProperty(DefaultMergeEditor.PROVIDER, mergeEditorProvider);
 		return new DefaultMergeViewer(parent, SWT.NULL, compareConfiguration, documentProvider,
-				sourceViewerConfigurationProvider);
+				sourceViewerConfigurationProvider) {
+			@Override
+			public String getTitle() {
+				if (compareViewerTitle != null) {
+					return compareViewerTitle;
+				}
+				return super.getTitle();
+			}
+		};
 	}
 
 	protected Viewer createContentViever(Composite parent, CompareConfiguration compareConfiguration) {
