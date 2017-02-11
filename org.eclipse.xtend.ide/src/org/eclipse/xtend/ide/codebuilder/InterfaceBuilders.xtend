@@ -22,9 +22,7 @@ abstract class AbstractInterfaceBuilder extends AbstractCodeBuilder {
 	
 	@Accessors String interfaceName
 	
-	override getImage() {
-		'newint_wiz.gif'
-	}
+	@Accessors String image ='newint_wiz.gif'
 	
 }
 

@@ -19,10 +19,8 @@ public abstract class AbstractInterfaceBuilder extends AbstractCodeBuilder {
   @Accessors
   private String interfaceName;
   
-  @Override
-  public String getImage() {
-    return "newint_wiz.gif";
-  }
+  @Accessors
+  private String image = "newint_wiz.gif";
   
   @Pure
   public String getInterfaceName() {
@@ -31,5 +29,14 @@ public abstract class AbstractInterfaceBuilder extends AbstractCodeBuilder {
   
   public void setInterfaceName(final String interfaceName) {
     this.interfaceName = interfaceName;
+  }
+  
+  @Pure
+  public String getImage() {
+    return this.image;
+  }
+  
+  public void setImage(final String image) {
+    this.image = image;
   }
 }

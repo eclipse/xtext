@@ -22,9 +22,7 @@ abstract class AbstractClassBuilder extends AbstractCodeBuilder {
 	
 	@Accessors String className
 	
-	override getImage() {
-		'newclass_wiz.gif'
-	}
+	@Accessors String image = 'newclass_wiz.gif'
 	
 }
 

@@ -19,10 +19,8 @@ public abstract class AbstractClassBuilder extends AbstractCodeBuilder {
   @Accessors
   private String className;
   
-  @Override
-  public String getImage() {
-    return "newclass_wiz.gif";
-  }
+  @Accessors
+  private String image = "newclass_wiz.gif";
   
   @Pure
   public String getClassName() {
@@ -31,5 +29,14 @@ public abstract class AbstractClassBuilder extends AbstractCodeBuilder {
   
   public void setClassName(final String className) {
     this.className = className;
+  }
+  
+  @Pure
+  public String getImage() {
+    return this.image;
+  }
+  
+  public void setImage(final String image) {
+    this.image = image;
   }
 }
