@@ -75,7 +75,7 @@ public class RefactoringCrossReferenceSerializer {
 						bestRefText = convertedRefText;
 				} catch (ValueConverterException e) {
 					status.add(RefactoringStatus.WARNING,
-							"Missconfigured language: New reference text has invalid syntax.", owner, linkTextRegion);
+							"Misconfigured language: New reference text has invalid syntax.", owner, linkTextRegion);
 				}
 			}
 			return bestRefText;
