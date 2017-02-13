@@ -48,6 +48,8 @@
 		<unit id="org.eclipse.xtext.java.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.purexbase" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.purexbase.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.purexbase.ide" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.purexbase.ide.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.smap" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.smap.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase" version="0.0.0"/>

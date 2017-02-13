@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.purexbase.ui.internal.PureXbaseActivator;
+import org.eclipse.xtext.purexbase.ui.internal.PurexbaseActivator;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.generator.trace.TraceMarkers;
 import org.eclipse.xtext.util.StringInputStream;
@@ -30,9 +30,9 @@ import com.google.inject.Injector;
 
 public class BuilderWithTracesTest {
 
-	private static Injector injector = PureXbaseActivator.getInstance()
+	private static Injector injector = PurexbaseActivator.getInstance()
 			.getInjector(
-					PureXbaseActivator.ORG_ECLIPSE_XTEXT_PUREXBASE_PUREXBASE);
+					PurexbaseActivator.ORG_ECLIPSE_XTEXT_PUREXBASE_PUREXBASE);
 
 	@Inject
 	private TraceMarkers traceMarkers;
