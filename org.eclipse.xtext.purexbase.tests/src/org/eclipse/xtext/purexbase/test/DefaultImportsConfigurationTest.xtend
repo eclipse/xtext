@@ -1,8 +1,8 @@
 package org.eclipse.xtext.purexbase.test
 
 import com.google.inject.Inject
-import org.eclipse.xtext.purexbase.PureXbaseInjectorProvider
 import org.eclipse.xtext.purexbase.pureXbase.Model
+import org.eclipse.xtext.purexbase.tests.PureXbaseInjectorProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
