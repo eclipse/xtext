@@ -33,6 +33,7 @@ import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.internal.Nullable;
 
 import com.google.inject.Inject;
 
@@ -50,7 +51,7 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	private IStorage2UriMapper mapper;
 	
 	@Inject(optional=true) 
-	/* @Nullable */
+	@Nullable
 	private IWorkbench workbench;
 	
 	/**
