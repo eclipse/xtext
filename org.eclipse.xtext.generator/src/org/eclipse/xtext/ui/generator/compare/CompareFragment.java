@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment;
@@ -33,8 +34,13 @@ public class CompareFragment extends ResourceFactoryFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
+		String simpleName = GrammarUtil.getSimpleName(grammar);
+		String statement =
+				"binder.bind(String.class).annotatedWith("
+				+ "com.google.inject.name.Names.named(org.eclipse.xtext.ui.UIBindings.COMPARE_VIEWER_TITLE))"
+				+ ".toInstance(\""+simpleName+" Compare\");";
 		return new BindFactory().addTypeToType("org.eclipse.compare.IViewerCreator",
-				"org.eclipse.xtext.ui.compare.DefaultViewerCreator").getBindings();
+				"org.eclipse.xtext.ui.compare.DefaultViewerCreator").addConfiguredBinding("CompareViewerTitle", statement).getBindings();
 	}
 
 	@Override
