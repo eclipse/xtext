@@ -33,7 +33,7 @@ class XbaseEditorInputRedirector {
 	@Inject
 	private FileExtensionProvider fileExtensionProvider
 	
-	def getTypeRoot(IEditorInput it) {
+	def ITypeRoot getTypeRoot(IEditorInput it) {
 		val adapter = getAdapter(IJavaElement);
 		if (adapter instanceof ITypeRoot) {
 			adapter
