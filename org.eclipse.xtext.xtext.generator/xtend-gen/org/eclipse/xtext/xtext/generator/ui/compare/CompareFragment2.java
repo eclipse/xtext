@@ -9,10 +9,12 @@ package org.eclipse.xtext.xtext.generator.ui.compare;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.name.Names;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -48,10 +50,27 @@ public class CompareFragment2 extends AbstractXtextGeneratorFragment {
       Set<String> _requiredBundles = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
       Iterables.<String>addAll(_requiredBundles, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.compare", "org.eclipse.xtext.ui")));
     }
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("binder.bind(");
+        _builder.append(String.class);
+        _builder.append(".class).annotatedWith(");
+        _builder.append(Names.class);
+        _builder.append(".named(");
+        TypeReference _typeReference = new TypeReference("org.eclipse.xtext.ui.UIBindings");
+        _builder.append(_typeReference);
+        _builder.append(".COMPARE_VIEWER_TITLE)).toInstance(\"");
+        String _simpleName = GrammarUtil.getSimpleName(CompareFragment2.this.getGrammar());
+        _builder.append(_simpleName);
+        _builder.append(" Compare\");");
+      }
+    };
+    final StringConcatenationClient statement = _client;
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeReference = new TypeReference("org.eclipse.compare.IViewerCreator");
     TypeReference _typeReference_1 = new TypeReference("org.eclipse.xtext.ui.compare.DefaultViewerCreator");
-    _bindingFactory.addTypeToType(_typeReference, _typeReference_1).contributeTo(this.getLanguage().getEclipsePluginGenModule());
+    _bindingFactory.addTypeToType(_typeReference, _typeReference_1).addConfiguredBinding("CompareViewerTitle", statement).contributeTo(this.getLanguage().getEclipsePluginGenModule());
     IBundleProjectConfig _eclipsePlugin_1 = this.getProjectConfig().getEclipsePlugin();
     PluginXmlAccess _pluginXml = null;
     if (_eclipsePlugin_1!=null) {
