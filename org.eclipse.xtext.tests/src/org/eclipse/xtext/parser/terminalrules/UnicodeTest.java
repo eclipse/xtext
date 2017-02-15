@@ -8,14 +8,24 @@
 package org.eclipse.xtext.parser.terminalrules;
 
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.terminalrules.unicode.AbstractString;
 import org.eclipse.xtext.parser.terminalrules.unicode.GString;
 import org.eclipse.xtext.parser.terminalrules.unicode.Model;
 import org.eclipse.xtext.parser.terminalrules.unicode.QuotedString;
 import org.eclipse.xtext.parser.terminalrules.unicode.UnicodeFactory;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 
 /**
@@ -31,6 +41,17 @@ public class UnicodeTest extends AbstractXtextTests {
 	public void setUp() throws Exception {
 		super.setUp();
 		with(UnicodeTestLanguageStandaloneSetup.class);
+		IEncodingProvider.Runtime encodingProvider = get(IEncodingProvider.Runtime.class);
+		encodingProvider.setDefaultEncoding(StandardCharsets.ISO_8859_1.name());
+	}
+
+	@Override
+	protected InputStream getAsStream(String model) {
+		try {
+			return new StringInputStream(model, StandardCharsets.ISO_8859_1.name());
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException("Encoding ISO-8859-1 not found.", e);
+		}
 	}
 
 	@Test public void testParse() throws Exception {
@@ -69,7 +90,7 @@ public class UnicodeTest extends AbstractXtextTests {
 		
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		resource.save(outputStream, null);
-		String textualModel = new String(outputStream.toByteArray());
+		String textualModel = new String(outputStream.toByteArray(), StandardCharsets.ISO_8859_1);
 		assertEquals(doubleQuote(UMLAUTS + " \"" + UMLAUTS + "\" \"" + QUOTED_UMLAUTS + "\" \"" + MIXED_UMLAUTS + "\""), textualModel); 
 	}
 	
