@@ -73,5 +73,15 @@
            label="Xtext Build">
      </consoleFactory>
   </extension>
+   <extension
+         point="org.eclipse.ui.console.consolePageParticipants">
+      <consolePageParticipant
+            class="org.eclipse.xtext.builder.debug.XtextBuildConsolePageParticipant"
+            id="org.eclipse.xtext.builder.debug.xtextbuildconsolepageparticipant">
+         <enablement>
+            <test property="org.eclipse.ui.console.consoleTypeTest" value="xtextBuildConsole"/>
+         </enablement>
+      </consolePageParticipant>
+   </extension>
    
 </plugin>
