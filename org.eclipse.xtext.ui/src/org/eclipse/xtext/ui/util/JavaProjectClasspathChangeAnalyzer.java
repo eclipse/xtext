@@ -86,18 +86,27 @@ public class JavaProjectClasspathChangeAnalyzer {
 	/**
 	 * determines if the delta is a relevant change on a IPackageFragmentRoot
 	 * 
-	 * @param delta the IJavaElementDelta to analyze. the deltas element must be an instance of IPackageFragmentRoot
+	 * @param delta
+	 *            the IJavaElementDelta to analyze. the deltas element must be an instance of IPackageFragmentRoot
 	 */
 	public boolean isRelevantPackageFragmentRootChange(IJavaElementDelta delta) {
 		IJavaElement element = delta.getElement();
 		assert (element instanceof IPackageFragmentRoot);
-		return delta.getKind() == IJavaElementDelta.REMOVED
-			|| delta.getKind() == IJavaElementDelta.ADDED
-			|| (delta.getFlags() & IJavaElementDelta.F_REORDER) != 0
-			|| (delta.getFlags() & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) != 0
-			|| (delta.getFlags() & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0
-			|| (((IPackageFragmentRoot) element).isExternal() && (delta.getFlags() & // external folders change
-					(IJavaElementDelta.F_CONTENT)) == delta.getFlags());
+		return delta.getKind() == IJavaElementDelta.REMOVED 
+				|| delta.getKind() == IJavaElementDelta.ADDED
+				|| (delta.getFlags() & IJavaElementDelta.F_REORDER) != 0
+				|| (delta.getFlags() & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) != 0
+				|| (delta.getFlags() & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0
+				|| (
+						(
+							((IPackageFragmentRoot) element).isExternal() 
+							|| ((IPackageFragmentRoot) element).isArchive()
+						) && 
+						(
+							delta.getFlags() & // external folders change
+							(IJavaElementDelta.F_CONTENT | IJavaElementDelta.F_ARCHIVE_CONTENT_CHANGED)
+						) == delta.getFlags()
+				);
 	}
 
 	private boolean isAttachmentChangeFlagOnly(IJavaElementDelta child) {
