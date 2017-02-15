@@ -208,15 +208,6 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	}
 
 	protected EStructuralFeatureNode createEStructuralFeatureNode(IOutlineNode parentNode, EObject owner,
-			EStructuralFeature feature, ImageDescriptor imageDescriptor, Object text, boolean isLeaf) {
-		boolean isFeatureSet = owner.eIsSet(feature);
-		EStructuralFeatureNode eStructuralFeatureNode = new EStructuralFeatureNode(owner, feature, parentNode, imageDescriptor,
-				text, isLeaf || !isFeatureSet);
-		setTextRegion(eStructuralFeatureNode, isFeatureSet, owner, feature);
-		return eStructuralFeatureNode;
-	}
-
-	protected EStructuralFeatureNode createEStructuralFeatureNode(IOutlineNode parentNode, EObject owner,
 			EStructuralFeature feature, Image image, Object text, boolean isLeaf) {
 		boolean isFeatureSet = owner.eIsSet(feature);
 		EStructuralFeatureNode eStructuralFeatureNode = new EStructuralFeatureNode(owner, feature, parentNode, image,
@@ -225,6 +216,21 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		return eStructuralFeatureNode;
 	}
 
+	/**
+	 * @since 2.12
+	 */
+	protected EStructuralFeatureNode createEStructuralFeatureNode(IOutlineNode parentNode, EObject owner,
+			EStructuralFeature feature, ImageDescriptor imageDescriptor, Object text, boolean isLeaf) {
+		boolean isFeatureSet = owner.eIsSet(feature);
+		EStructuralFeatureNode eStructuralFeatureNode = new EStructuralFeatureNode(owner, feature, parentNode, imageDescriptor,
+				text, isLeaf || !isFeatureSet);
+		setTextRegion(eStructuralFeatureNode, isFeatureSet, owner, feature);
+		return eStructuralFeatureNode;
+	}
+
+	/**
+	 * @since 2.12
+	 */
 	protected void setTextRegion(EStructuralFeatureNode eStructuralFeatureNode, boolean setTextRegion, EObject owner,
 			EStructuralFeature feature) {
 		if (setTextRegion) {
