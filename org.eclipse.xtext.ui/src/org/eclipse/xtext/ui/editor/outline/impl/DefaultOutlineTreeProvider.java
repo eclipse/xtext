@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -211,7 +212,28 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		boolean isFeatureSet = owner.eIsSet(feature);
 		EStructuralFeatureNode eStructuralFeatureNode = new EStructuralFeatureNode(owner, feature, parentNode, image,
 				text, isLeaf || !isFeatureSet);
-		if (isFeatureSet) {
+		setTextRegion(eStructuralFeatureNode, isFeatureSet, owner, feature);
+		return eStructuralFeatureNode;
+	}
+
+	/**
+	 * @since 2.12
+	 */
+	protected EStructuralFeatureNode createEStructuralFeatureNode(IOutlineNode parentNode, EObject owner,
+			EStructuralFeature feature, ImageDescriptor imageDescriptor, Object text, boolean isLeaf) {
+		boolean isFeatureSet = owner.eIsSet(feature);
+		EStructuralFeatureNode eStructuralFeatureNode = new EStructuralFeatureNode(owner, feature, parentNode, imageDescriptor,
+				text, isLeaf || !isFeatureSet);
+		setTextRegion(eStructuralFeatureNode, isFeatureSet, owner, feature);
+		return eStructuralFeatureNode;
+	}
+
+	/**
+	 * @since 2.12
+	 */
+	protected void setTextRegion(EStructuralFeatureNode eStructuralFeatureNode, boolean setTextRegion, EObject owner,
+			EStructuralFeature feature) {
+		if (setTextRegion) {
 			ITextRegion region = locationInFileProvider.getFullTextRegion(owner, feature, 0);
 			if (feature.isMany()) {
 				int numValues = ((Collection<?>) owner.eGet(feature)).size();
@@ -221,7 +243,6 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 			}
 			eStructuralFeatureNode.setTextRegion(region);
 		}
-		return eStructuralFeatureNode;
 	}
 
 	/**
