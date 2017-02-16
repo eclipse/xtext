@@ -159,10 +159,19 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 							digits = digits.substring(0, e);
 						}
 					}
-					b.append("new ").append(type.getType()).append("(\"")
+					final boolean fracturedDigits = digits.contains(".");
+					if (fracturedDigits) {
+						b.append("new ").append(BigDecimal.class).append("(\"")
 						.append(digits).append("\"");
-					if (base != 10) {
-						b.append(", ").append(Integer.toString(base));
+						if (base != 10) {
+							b.append(", ").append(Integer.toString(base));
+						}
+					} else {
+						b.append("new ").append(type.getType()).append("(\"")
+						.append(digits).append("\"");
+						if (base != 10) {
+							b.append(", ").append(Integer.toString(base));
+						}
 					}
 					b.append(")");
 					if (exponent != null) {
@@ -173,7 +182,11 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 						} else {
 							exponentAsString = Integer.toString(exponentAsInt);
 						}
-						b.append(".multiply(").append(type.getType()).append(".TEN.pow(").append(exponentAsString).append("))");
+						if (fracturedDigits) {
+							b.append(".multiply(").append(BigDecimal.class).append(".TEN.pow(").append(exponentAsString).append(")).toBigInteger()");
+						} else {
+							b.append(".multiply(").append(type.getType()).append(".TEN.pow(").append(exponentAsString).append("))");
+						}
 					}
 				}
 			}

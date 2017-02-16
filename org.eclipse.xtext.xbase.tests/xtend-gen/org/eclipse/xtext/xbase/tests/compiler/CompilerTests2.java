@@ -4571,4 +4571,64 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testBigIntegerLiteral01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("1bi");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("return java.math.BigInteger.ONE;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBigIntegerLiteral02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("1.0bi");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("return java.math.BigInteger.ONE;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBigIntegerLiteral03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("1e23bi");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("return new java.math.BigInteger(\"1\").multiply(java.math.BigInteger.TEN.pow(23));");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBigIntegerLiteral04() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("1.23e45bi");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("return new java.math.BigDecimal(\"1.23\").multiply(java.math.BigDecimal.TEN.pow(45)).toBigInteger();");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

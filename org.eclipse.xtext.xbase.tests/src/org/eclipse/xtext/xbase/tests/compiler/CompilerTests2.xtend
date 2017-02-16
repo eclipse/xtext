@@ -2125,4 +2125,36 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			return ("Foo" != null);
 		''')
 	}
+
+	@Test def void testBigIntegerLiteral01 () {
+		'''
+			1bi
+		'''.compilesTo ('''
+			return java.math.BigInteger.ONE;
+		''')
+	}
+
+	@Test def void testBigIntegerLiteral02 () {
+		'''
+			1.0bi
+		'''.compilesTo ('''
+			return java.math.BigInteger.ONE;
+		''')
+	}
+
+	@Test def void testBigIntegerLiteral03 () {
+		'''
+			1e23bi
+		'''.compilesTo ('''
+			return new java.math.BigInteger("1").multiply(java.math.BigInteger.TEN.pow(23));
+		''')
+	}
+
+	@Test def void testBigIntegerLiteral04 () {
+		'''
+			1.23e45bi
+		'''.compilesTo ('''
+			return new java.math.BigDecimal("1.23").multiply(java.math.BigDecimal.TEN.pow(45)).toBigInteger();
+		''')
+	}
 }
