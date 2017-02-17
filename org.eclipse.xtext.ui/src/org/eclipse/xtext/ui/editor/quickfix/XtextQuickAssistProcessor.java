@@ -83,6 +83,16 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 
 		return false;
 	}
+	
+	/**
+	 * Check whether the given annotation type is supported, i.e. {@link #canFix(Annotation)} might return {@code true}.
+	 * This could be made protected in a future release.
+	 */
+	private boolean isSupported(Annotation annotation) {
+		return !annotation.isMarkedDeleted()
+				&& (annotation instanceof XtextAnnotation || annotation instanceof MarkerAnnotation
+					|| annotation instanceof SpellingAnnotation);
+	}
 
 	@Override
 	public boolean canAssist(IQuickAssistInvocationContext invocationContext) {
@@ -201,7 +211,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 			Object key = iterator.next();
 			if (key instanceof Annotation) {
 				Annotation annotation = (Annotation) key;
-				if (canFix(annotation)) {
+				if (isSupported(annotation)) {
 					Position pos = annotationModel.getPosition(annotation);
 					// Consider all annotations that are on the same line as the cursor
 					if (pos != null && pos.overlapsWith(lineOffset, lineLength)) {
@@ -219,17 +229,15 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 				}
 			}
 		}
-		
-		// There is at most one annotation in the same line as the cursor
-		if (possibleAnnotations.size() <= 1) {
-			return possibleAnnotations.keySet();
+		if (possibleAnnotations.isEmpty()) {
+			return Collections.emptySet();
 		}
 		
 		// There is an annotation that includes the cursor, so accept all including annotations
 		if (hasIncludingAnnotation) {
 			Set<Annotation> includingAnnotations = Sets.newLinkedHashSetWithExpectedSize(possibleAnnotations.size());
 			for (Map.Entry<Annotation, Position> entry : possibleAnnotations.entrySet()) {
-				if (entry.getValue().includes(offset))
+				if (entry.getValue().includes(offset) && canFix(entry.getKey()))
 					includingAnnotations.add(entry.getKey());
 			}
 			return includingAnnotations;
@@ -240,7 +248,8 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 			Set<Annotation> nearestAnnotations = Sets.newLinkedHashSetWithExpectedSize(possibleAnnotations.size());
 			for (Map.Entry<Annotation, Position> entry : possibleAnnotations.entrySet()) {
 				Position pos = entry.getValue();
-				if (offset >= pos.getOffset() && offset - (pos.getOffset() + pos.getLength()) == smallestAnnotationDistance)
+				if (offset >= pos.getOffset() && offset - (pos.getOffset() + pos.getLength()) == smallestAnnotationDistance
+						&& canFix(entry.getKey()))
 					nearestAnnotations.add(entry.getKey());
 			}
 			return nearestAnnotations;
@@ -249,7 +258,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		// Accept the nearest annotations on the right
 		Set<Annotation> nearestAnnotations = Sets.newLinkedHashSetWithExpectedSize(possibleAnnotations.size());
 		for (Map.Entry<Annotation, Position> entry : possibleAnnotations.entrySet()) {
-			if (entry.getValue().getOffset() == offsetOfFirstAnnotation)
+			if (entry.getValue().getOffset() == offsetOfFirstAnnotation && canFix(entry.getKey()))
 				nearestAnnotations.add(entry.getKey());
 		}
 		return nearestAnnotations;

@@ -91,4 +91,12 @@ public class XtextAnnotation extends Annotation implements IAnnotationPresentati
 		return isQuickfixable ? XtextPluginImages.getAnnotationImagesFixable() : XtextPluginImages.getAnnotationImagesNonfixable();
 	}
 	
+	@Override
+	public String toString() {
+		if (issue.getSeverity() != null && issue.getMessage() != null)
+			return issue.getSeverity() + ": " + issue.getMessage();
+		else
+			return super.toString();
+	}
+	
 }
