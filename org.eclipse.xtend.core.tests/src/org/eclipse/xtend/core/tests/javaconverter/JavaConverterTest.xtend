@@ -1769,6 +1769,28 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		assertTrue("Force statement when parent is executable", j2x.shouldForceStatementMode(block))
 	}
 	
+	@Test
+	def testBug477445() {
+		var xtendCode = toXtendCode('''
+			public class Foo {
+				
+				private static final String CONSTANT = "depre";
+				
+				@SuppressWarnings(CONSTANT+"cation") public String toString() {
+					return "bar";
+				}
+			}
+		''')
+		val expected = '''
+			class Foo {
+				static final String CONSTANT="depre"
+				@SuppressWarnings(CONSTANT + "cation")override String toString() {
+					return "bar" 
+				}
+			}'''
+		assertEquals(expected, xtendCode)
+	}
+	
 	def protected XtendClass toValidXtendClass(CharSequence javaCode) throws Exception {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
 	}
