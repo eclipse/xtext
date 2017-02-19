@@ -733,7 +733,16 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectAbsolute(model.indexOf("1"), 1, HighlightingStyles.NUMBER_ID);
 		highlight(model);
 	}
-
+	
+	@Test
+	public void testIssue49() {
+		String model =
+			"new() {\n    val x = '''\n        demo\n    '''\n}";
+		expectInsignificant(model.indexOf("demo")-8, 8);
+		expectInsignificant(model.indexOf("demo")+5, 4);
+		highlight(model);
+	}
+	
 	protected void highlight(String functionBody) {
 		try {
 			EObject model = member(functionBody);

@@ -143,6 +143,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 					highlightElement((XtendField) object, acceptor, cancelIndicator);
 					break;
 				case XtendPackage.XTEND_CONSTRUCTOR:
+					highlightElement((XtendConstructor) object, acceptor, cancelIndicator);
 					break;
 				case XtendPackage.XTEND_FUNCTION:
 					highlightElement((XtendFunction) object, acceptor, cancelIndicator);
@@ -188,6 +189,14 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 		
 		XExpression initializer = field.getInitialValue();
 		highlightRichStrings(initializer, acceptor);
+	}
+	
+	/**
+	 * @since 2.12
+	 */
+	protected void highlightElement(XtendConstructor function, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
+		XExpression rootExpression = function.getExpression();
+		highlightRichStrings(rootExpression, acceptor);
 	}
 	
 	protected void highlightElement(XtendFunction function, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
