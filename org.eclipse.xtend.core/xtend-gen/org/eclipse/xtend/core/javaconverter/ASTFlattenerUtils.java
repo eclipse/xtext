@@ -43,6 +43,7 @@ import org.eclipse.jdt.core.dom.PrimitiveType;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.ReturnStatement;
 import org.eclipse.jdt.core.dom.SimpleName;
+import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.Statement;
 import org.eclipse.jdt.core.dom.StringLiteral;
@@ -231,6 +232,10 @@ public class ASTFlattenerUtils {
       if ((typeDeclr.isInterface() || (this.isFinal(parentFieldDecl.modifiers()) && this.isStatic(parentFieldDecl.modifiers())))) {
         return false;
       }
+    }
+    final SingleMemberAnnotation parentSingleMemberAnnotation = this.<SingleMemberAnnotation>findParentOfType(node, SingleMemberAnnotation.class);
+    if ((parentSingleMemberAnnotation != null)) {
+      return false;
     }
     final Iterable<StringLiteral> nodes = this.collectCompatibleNodes(node);
     return ((!IterableExtensions.isEmpty(nodes)) && IterableExtensions.<StringLiteral>forall(nodes, ((Function1<StringLiteral, Boolean>) (StringLiteral it) -> {
