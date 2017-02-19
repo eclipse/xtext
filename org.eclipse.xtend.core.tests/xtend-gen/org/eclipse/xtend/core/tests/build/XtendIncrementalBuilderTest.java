@@ -778,4 +778,106 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertTrue(this.issues.toString(), this.issues.isEmpty());
     Assert.assertEquals(2, this.generated.size());
   }
+  
+  @Test
+  public void testBug487806() {
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package test;");
+      _builder.newLine();
+      _builder.append("public class BaseException extends java.lang.Exception {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("private static final long serialVersionUID = 1L;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public BaseException() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("super();");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/test/BaseException.java", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package test;");
+      _builder_1.newLine();
+      _builder_1.append("public interface ClientGame extends Game<ClientPlayer> {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      URI _minus_1 = this.operator_minus(
+        "src/test/ClientGame.java", _builder_1.toString());
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package test;");
+      _builder_2.newLine();
+      _builder_2.append("public interface ClientPlayer extends Player {");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      URI _minus_2 = this.operator_minus(
+        "src/test/ClientPlayer.java", _builder_2.toString());
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("package test;");
+      _builder_3.newLine();
+      _builder_3.append("import java.util.Collection;");
+      _builder_3.newLine();
+      _builder_3.append("public interface Game<P extends Player> extends IDElement {");
+      _builder_3.newLine();
+      _builder_3.append("\t");
+      _builder_3.append("Collection<P> getPlayers();");
+      _builder_3.newLine();
+      _builder_3.append("\t");
+      _builder_3.append("void addPlayer(P player) throws BaseException;");
+      _builder_3.newLine();
+      _builder_3.append("}");
+      URI _minus_3 = this.operator_minus(
+        "src/test/Game.java", _builder_3.toString());
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("package test;");
+      _builder_4.newLine();
+      _builder_4.append("public interface IDElement {");
+      _builder_4.newLine();
+      _builder_4.append("\t");
+      _builder_4.append("public int getId();");
+      _builder_4.newLine();
+      _builder_4.append("}");
+      URI _minus_4 = this.operator_minus(
+        "src/test/IDElement.java", _builder_4.toString());
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("package test;");
+      _builder_5.newLine();
+      _builder_5.append("public interface Player extends IDElement {");
+      _builder_5.newLine();
+      _builder_5.append("}");
+      URI _minus_5 = this.operator_minus(
+        "src/test/Player.java", _builder_5.toString());
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("package test");
+      _builder_6.newLine();
+      _builder_6.append("class BoardUpdateCommandProcessor  {");
+      _builder_6.newLine();
+      _builder_6.append("\t");
+      _builder_6.append("new(ClientGame game) {");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("var player = game.players.findFirst[it.id == 343]");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("player = null");
+      _builder_6.newLine();
+      _builder_6.append("\t");
+      _builder_6.append("}");
+      _builder_6.newLine();
+      _builder_6.append("}");
+      URI _minus_6 = this.operator_minus(
+        "src/test/BoardUpdateCommandProcessor.xtend", _builder_6.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1, _minus_2, _minus_3, _minus_4, _minus_5, _minus_6)));
+    };
+    final BuildRequest buildRequest = this.newBuildRequest(_function);
+    this.build(buildRequest);
+    Assert.assertTrue(this.issues.toString(), this.issues.isEmpty());
+  }
 }

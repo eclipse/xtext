@@ -482,4 +482,54 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		assertEquals(2, generated.size)
 	}
 
+	@Test def void testBug487806() {
+	val buildRequest = newBuildRequest [
+		dirtyFiles = #[
+			'src/test/BaseException.java' - '''
+			package test;
+			public class BaseException extends java.lang.Exception {
+				private static final long serialVersionUID = 1L;
+				public BaseException() {
+					super();
+				}
+			}
+			''',
+			'src/test/ClientGame.java' - '''
+			package test;
+			public interface ClientGame extends Game<ClientPlayer> {
+			}''',
+			'src/test/ClientPlayer.java' - '''
+			package test;
+			public interface ClientPlayer extends Player {
+			}''',
+			'src/test/Game.java' - '''
+			package test;
+			import java.util.Collection;
+			public interface Game<P extends Player> extends IDElement {
+				Collection<P> getPlayers();
+				void addPlayer(P player) throws BaseException;
+			}''',
+			'src/test/IDElement.java' - '''
+			package test;
+			public interface IDElement {
+				public int getId();
+			}''',
+			'src/test/Player.java' - '''
+			package test;
+			public interface Player extends IDElement {
+			}''',
+			'src/test/BoardUpdateCommandProcessor.xtend' - '''
+			package test
+			class BoardUpdateCommandProcessor  {
+				new(ClientGame game) {
+					var player = game.players.findFirst[it.id == 343]
+					player = null
+				}
+			}'''
+		]
+	]
+	build(buildRequest)
+	assertTrue(issues.toString, issues.isEmpty)
+}
+
 }
