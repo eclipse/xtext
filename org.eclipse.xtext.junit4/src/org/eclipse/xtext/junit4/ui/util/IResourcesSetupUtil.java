@@ -9,6 +9,7 @@ package org.eclipse.xtext.junit4.ui.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.ICommand;
@@ -25,9 +26,11 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.texteditor.MarkerUtilities;
@@ -220,7 +223,11 @@ public class IResourcesSetupUtil {
 					InterruptedException {
 				create(file.getParent());
 				file.delete(true, monitor());
-				file.create(new StringInputStream(s), true, monitor());
+				try {
+					file.create(new StringInputStream(s, file.getCharset(true)), true, monitor());
+				} catch (UnsupportedEncodingException exc) {
+					throw new CoreException(new Status(IStatus.ERROR, "org.eclipse.xtext.junit4", exc.getMessage(), exc));
+				}
 			}
 
 		}.run(monitor());
