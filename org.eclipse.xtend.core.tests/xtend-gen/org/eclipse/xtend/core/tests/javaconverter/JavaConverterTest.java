@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsFactoryImpl;
 import org.eclipse.xtext.xbase.impl.XbaseFactoryImpl;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
@@ -3217,6 +3218,54 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     final XBlockExpression block = new XbaseFactoryImpl().createXBlockExpression();
     xc.setExpression(block);
     Assert.assertTrue("Force statement when parent is executable", this.j2x.shouldForceStatementMode(block));
+  }
+  
+  @Test
+  public void testBug477445() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("private static final String CONSTANT = \"depre\";");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@SuppressWarnings(CONSTANT+\"cation\") public String toString() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return \"bar\";");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String xtendCode = this.toXtendCode(_builder);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("class Foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("static final String CONSTANT=\"depre\"");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("@SuppressWarnings(CONSTANT + \"cation\")override String toString() {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("return \"bar\" ");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      final String expected = _builder_1.toString();
+      Assert.assertEquals(expected, xtendCode);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected XtendClass toValidXtendClass(final CharSequence javaCode) throws Exception {

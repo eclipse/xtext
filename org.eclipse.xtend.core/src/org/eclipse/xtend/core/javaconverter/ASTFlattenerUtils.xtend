@@ -47,6 +47,7 @@ import org.eclipse.jdt.core.dom.VariableDeclaration
 import org.eclipse.jdt.core.dom.VariableDeclarationExpression
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
+import org.eclipse.jdt.core.dom.SingleMemberAnnotation
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -197,6 +198,10 @@ class ASTFlattenerUtils {
 			// Do not convert static final fields
 			if (typeDeclr.isInterface || parentFieldDecl.modifiers().isFinal && parentFieldDecl.modifiers().isStatic)
 				return false
+		}
+		val parentSingleMemberAnnotation = node.findParentOfType(SingleMemberAnnotation)
+		if (parentSingleMemberAnnotation !== null) {
+			return false
 		}
 		val nodes = node.collectCompatibleNodes()
 		return !nodes.empty && nodes.forall[canTranslate]
