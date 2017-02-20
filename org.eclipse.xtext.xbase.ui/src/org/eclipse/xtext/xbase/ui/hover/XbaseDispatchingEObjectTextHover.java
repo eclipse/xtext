@@ -25,12 +25,14 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 
 import com.google.inject.Inject;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @author Stephane Galland - Adding support for XConstructorCall
  * @since 2.3
  */
 public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHover {
@@ -68,16 +70,19 @@ public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 	@Override
 	protected Pair<EObject, IRegion> getXtextElementAt(XtextResource resource, int offset) {
 		Pair<EObject, IRegion> original = super.getXtextElementAt(resource, offset);
-		EObject object = eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
-		if (object != null && object instanceof XAbstractFeatureCall){
-			JvmIdentifiableElement feature = ((XAbstractFeatureCall) object).getFeature();
-			if(feature instanceof JvmExecutable 
-					|| feature instanceof JvmField 
-					|| feature instanceof JvmConstructor 
-					|| feature instanceof XVariableDeclaration 
-					|| feature instanceof JvmFormalParameter)
-				if (original != null)
+		if (original != null) {
+			EObject object = eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
+			if (object instanceof XAbstractFeatureCall){
+				JvmIdentifiableElement feature = ((XAbstractFeatureCall) object).getFeature();
+				if(feature instanceof JvmExecutable 
+						|| feature instanceof JvmField 
+						|| feature instanceof JvmConstructor 
+						|| feature instanceof XVariableDeclaration 
+						|| feature instanceof JvmFormalParameter)
 					return Tuples.create(object, original.getSecond());
+			} else if (object instanceof XConstructorCall){
+					return Tuples.create(object, original.getSecond());
+			}
 		}
 		return original;
 	}
