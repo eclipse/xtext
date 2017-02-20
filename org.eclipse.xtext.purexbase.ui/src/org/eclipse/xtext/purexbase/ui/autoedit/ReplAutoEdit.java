@@ -21,6 +21,7 @@ import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextUtilities;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
@@ -105,8 +106,9 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 		if (node == null || document.getLineOfOffset(command.offset) + 1 != node.getEndLine())
 			return null;
 		List<Issue> issues = validator.validate(resource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
-		if (!issues.isEmpty())
+		if (issues.stream().anyMatch(i -> i.getSeverity() == Severity.ERROR)) {
 			return null;
+		}
 		XbaseInterpreter xbaseInterpreter = getConfiguredInterpreter(resource);
 		IEvaluationResult result = xbaseInterpreter.evaluate(model.getBlock(), new DefaultEvaluationContext(),
 				new CancelIndicator() {
