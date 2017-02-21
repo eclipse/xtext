@@ -126,6 +126,9 @@ public abstract class AbstractClassMirror implements IClassMirror {
 				if(equal(fragment,name)) {
 					return member;
 				}
+			}
+			for(JvmMember member: members) {
+				String name = member.getIdentifier();
 				if(fragment.startsWith(name)) {
 					EObject match = findMember(member, fragment);
 					if(match != null) 
