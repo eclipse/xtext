@@ -2,7 +2,6 @@ dependencies {
 	compile project(':org.eclipse.xtext.java')
 	compile project(':org.eclipse.xtext.xbase.testdata')
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	compile "org.eclipse.xtext:org.eclipse.xtext.testlanguages:$versions.xtext"
 	compile "junit:junit:$versions.junit"
 	mwe2Compile project(':org.eclipse.xtext.generator')
 	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
