@@ -9,7 +9,6 @@ dependencies {
 	compile project(':org.eclipse.xtext.common.types')
 	compile project(':org.eclipse.xtext.xbase')
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	compile "org.eclipse.xtext:org.eclipse.xtext.testlanguages:$versions.xtext"
 	compile "junit:junit:$versions.junit"
 	// From the 'lib' folder
 	compile name: 'simple'
