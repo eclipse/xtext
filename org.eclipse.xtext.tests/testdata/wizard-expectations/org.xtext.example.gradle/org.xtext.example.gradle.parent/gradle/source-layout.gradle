@@ -15,6 +15,9 @@ jar {
 	from('model') {
 		into('model')
 	}
+	from(sourceSets.main.allSource) {
+		include '**/*.xtext'
+	}
 	manifest {
 		attributes 'Bundle-SymbolicName': project.name
 	}
