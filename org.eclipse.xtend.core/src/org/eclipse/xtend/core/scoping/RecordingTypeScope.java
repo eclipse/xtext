@@ -10,7 +10,9 @@ package org.eclipse.xtend.core.scoping;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider.ClassNameVariants;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScope;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -23,8 +25,8 @@ class RecordingTypeScope extends AbstractTypeScope {
 	private final AbstractTypeScope typeScope;
 	private final Set<QualifiedName> importedNames;
 
-	public RecordingTypeScope(AbstractTypeScope typeScope, Set<QualifiedName> importedNames) {
-		super(null, null, null);
+	public RecordingTypeScope(AbstractTypeScope typeScope, Set<QualifiedName> importedNames, IQualifiedNameConverter qnc) {
+		super(null, qnc, null);
 		this.typeScope = typeScope;
 		this.importedNames = importedNames;
 	}
@@ -32,13 +34,29 @@ class RecordingTypeScope extends AbstractTypeScope {
 	@Override
 	public IEObjectDescription getSingleElement(QualifiedName name, boolean binary) {
 		importedNames.add(name.toLowerCase());
-		return typeScope.getSingleElement(name, binary);
+		IEObjectDescription element = typeScope.getSingleElement(name, binary);
+		if (element == null) {
+			ClassNameVariants nameVariants = new ClassNameVariants(name.toString());
+			while (nameVariants.hasNext()) {
+				String nextVariant = nameVariants.next();
+				importedNames.add(getQualifiedNameConverter().toQualifiedName(nextVariant).toLowerCase());
+			}
+		}
+		return element;
 	}
 
 	@Override
 	public IEObjectDescription getSingleElement(QualifiedName name) {
 		importedNames.add(name.toLowerCase());
-		return typeScope.getSingleElement(name);
+		IEObjectDescription element = typeScope.getSingleElement(name);
+		if (element == null) {
+			ClassNameVariants nameVariants = new ClassNameVariants(name.toString());
+			while (nameVariants.hasNext()) {
+				String nextVariant = nameVariants.next();
+				importedNames.add(getQualifiedNameConverter().toQualifiedName(nextVariant).toLowerCase());
+			}
+		}
+		return element;
 	}
 
 	@Override
