@@ -5,70 +5,70 @@
 project {
 	developers {
 		developer {
-			name 'Sven Efftinge'
-			email 'sven.efftinge@typefox.io'
-			organization 'TypeFox'
-			organizationUrl 'http://typefox.io'
+			name = 'Sven Efftinge'
+			email = 'sven.efftinge@typefox.io'
+			organization = 'TypeFox'
+			organizationUrl = 'http://typefox.io'
 		}
 		developer {
-			name 'Sebastian Benz'
+			name = 'Sebastian Benz'
 		}
 		developer {
-			name 'Lorenzo Bettini'
+			name = 'Lorenzo Bettini'
 		}
 		developer {
-			name 'Michael Clay'
+			name = 'Michael Clay'
 		}
 		developer {
-			name 'Christian Dietrich'
-			email 'christian.dietrich@itemis.de'
-			organization 'itemis'
-			organizationUrl 'http://www.itemis.com'
+			name = 'Christian Dietrich'
+			email = 'christian.dietrich@itemis.de'
+			organization = 'itemis'
+			organizationUrl = 'http://www.itemis.com'
 		}
 		developer {
-			name 'Moritz Eysholdt'
-			email 'moritz.eysholdt@typefox.io'
-			organization 'TypeFox'
-			organizationUrl 'http://typefox.io'
+			name = 'Moritz Eysholdt'
+			email = 'moritz.eysholdt@typefox.io'
+			organization = 'TypeFox'
+			organizationUrl = 'http://typefox.io'
 		}
 		developer {
-			name 'Dennis Hübner'
-			email 'dennis.huebner@typefox.io'
-			organization 'TypeFox'
-			organizationUrl 'http://typefox.io'
+			name = 'Dennis Hübner'
+			email = 'dennis.huebner@typefox.io'
+			organization = 'TypeFox'
+			organizationUrl = 'http://typefox.io'
 		}
 		developer {
-			name 'Jan Köhnlein'
-			email 'jan.koehnlein@typefox.io'
-			organization 'TypeFox'
-			organizationUrl 'http://typefox.io'
+			name = 'Jan Köhnlein'
+			email = 'jan.koehnlein@typefox.io'
+			organization = 'TypeFox'
+			organizationUrl = 'http://typefox.io'
 		}
 		developer {
-			name 'Anton Kosyakov'
-			email 'anton.kosyakov@typefox.io'
-			organization 'TypeFox'
-			organizationUrl 'http://typefox.io'
+			name = 'Anton Kosyakov'
+			email = 'anton.kosyakov@typefox.io'
+			organization = 'TypeFox'
+			organizationUrl = 'http://typefox.io'
 		}
 		developer {
-			name 'Stefan Oehme'
+			name = 'Stefan Oehme'
 		}
 		developer {
-			name 'Holger Schill'
-			email 'holger.schill@itemis.de'
-			organization 'itemis'
-			organizationUrl 'http://www.itemis.com'
+			name = 'Holger Schill'
+			email = 'holger.schill@itemis.de'
+			organization = 'itemis'
+			organizationUrl = 'http://www.itemis.com'
 		}
 		developer {
-			name 'Christian Schneider'
-			email 'christian.schneider@typefox.io'
-			organization 'TypeFox'
-			organizationUrl 'http://typefox.io'
+			name = 'Christian Schneider'
+			email = 'christian.schneider@typefox.io'
+			organization = 'TypeFox'
+			organizationUrl = 'http://typefox.io'
 		}
 		developer {
-			name 'Miro Spönemann'
-			email 'miro.spoenemann@typefox.io'
-			organization 'TypeFox'
-			organizationUrl 'http://typefox.io'
+			name = 'Miro Spönemann'
+			email = 'miro.spoenemann@typefox.io'
+			organization = 'TypeFox'
+			organizationUrl = 'http://typefox.io'
 		}
 		developer {
 			name = 'Karsten Thoms'
@@ -77,10 +77,10 @@ project {
 			organizationUrl = 'http://www.itemis.com'
 		}
 		developer {
-			name 'Knut Wannheden'
+			name = 'Knut Wannheden'
 		}
 		developer {
-			name 'Sebastian Zarnekow'
+			name = 'Sebastian Zarnekow'
 		}
 	}
 }
