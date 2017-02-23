@@ -154,7 +154,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			}
 			
 			sourceSets.all {
-				resources.exclude '**/*.g', '**/*.xtext', '**/*.mwe2', '**/*.xtend', '**/*._trace'
+				resources.exclude '**/*.g', '**/*.mwe2', '**/*.xtend', '**/*._trace'
 			}
 		«ELSE»
 			sourceSets {
@@ -175,6 +175,11 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			from('model') {
 				into('model')
 			}
+			«IF config.sourceLayout != SourceLayout.PLAIN»
+				from(sourceSets.main.allSource) {
+					include '**/*.xtext'
+				}
+			«ENDIF»
 			manifest {
 				attributes 'Bundle-SymbolicName': project.name
 			}
