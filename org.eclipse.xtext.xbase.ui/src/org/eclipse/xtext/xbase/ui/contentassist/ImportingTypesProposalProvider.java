@@ -101,8 +101,10 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 				QualifiedName shortQualifiedName = qualifiedNameConverter.toQualifiedName(shortTypeName);
 				if (shortQualifiedName.getSegmentCount() == 1) {
 					proposal.setCursorPosition(replacementString.length());
-					document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(),
-							replacementString);
+					if (!replacementString.equals(document.get(proposal.getReplacementOffset(), proposal.getReplacementLength()))) {
+						document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(),
+								replacementString);
+					}
 					return;
 				}
 			}
