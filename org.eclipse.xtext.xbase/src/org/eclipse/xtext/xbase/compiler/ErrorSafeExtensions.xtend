@@ -156,7 +156,7 @@ class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.InheritanceAwar
 	}
 	
 	override doVisitTypeReference(JvmTypeReference it) {
-		type==null || type.eIsProxy
+		type===null || type.eIsProxy
 	}
 	
 	override doVisitCompoundTypeReference(JvmCompoundTypeReference it) {

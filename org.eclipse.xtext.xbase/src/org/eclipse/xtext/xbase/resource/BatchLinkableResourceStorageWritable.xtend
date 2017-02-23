@@ -72,7 +72,7 @@ import java.io.IOException
 		}
 		
 		// store Documentation adapters
-		if (documentationAdapter!=null) {
+		if (documentationAdapter!==null) {
 			out.writeBoolean(true)
 			out.writeString(documentationAdapter.documentation)
 		} else {
@@ -135,7 +135,7 @@ import java.io.IOException
 	}
 
 	protected def String getFragment(EObject obj) {
-		if (obj==null || obj.eIsProxy || obj.eResource === null) {
+		if (obj===null || obj.eIsProxy || obj.eResource === null) {
 			return "none"
 		}
 		obj.eResource.getURIFragment(obj)

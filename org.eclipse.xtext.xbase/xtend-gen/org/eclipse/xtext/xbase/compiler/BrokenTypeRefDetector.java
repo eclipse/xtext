@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -30,7 +29,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
   
   @Override
   public Boolean doVisitTypeReference(final JvmTypeReference it) {
-    return Boolean.valueOf((Objects.equal(it.getType(), null) || it.getType().eIsProxy()));
+    return Boolean.valueOf(((it.getType() == null) || it.getType().eIsProxy()));
   }
   
   @Override

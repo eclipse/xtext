@@ -96,8 +96,7 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
         }
       }
     }
-    boolean _notEquals = (!Objects.equal(documentationAdapter, null));
-    if (_notEquals) {
+    if ((documentationAdapter != null)) {
       out.writeBoolean(true);
       out.writeString(documentationAdapter.getDocumentation());
     } else {
@@ -205,7 +204,7 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
   protected String getFragment(final EObject obj) {
     String _xblockexpression = null;
     {
-      if (((Objects.equal(obj, null) || obj.eIsProxy()) || (obj.eResource() == null))) {
+      if ((((obj == null) || obj.eIsProxy()) || (obj.eResource() == null))) {
         return "none";
       }
       _xblockexpression = obj.eResource().getURIFragment(obj);
