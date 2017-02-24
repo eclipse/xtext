@@ -31,14 +31,19 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.tasks.Priority;
 import org.eclipse.xtext.tasks.TaskTag;
+import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
 import org.eclipse.xtext.ui.editor.tasks.dialogfields.DialogField;
 import org.eclipse.xtext.ui.editor.tasks.dialogfields.IDialogFieldListener;
 import org.eclipse.xtext.ui.editor.tasks.dialogfields.IListAdapter;
 import org.eclipse.xtext.ui.editor.tasks.dialogfields.ListDialogField;
 import org.eclipse.xtext.ui.editor.tasks.dialogfields.SelectionButtonDialogField;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 /**
  * @author Stefan Oehme - Initial contribution and API
  */
@@ -55,10 +60,31 @@ public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
 	private SelectionButtonDialogField caseSensitiveCheckBox;
 	private String languageName;
 
+	/**
+	 * @deprecated use {@link #TaskTagConfigurationBlock(String)} instead
+	 */
+	@Deprecated
 	public TaskTagConfigurationBlock(IProject project, IPreferenceStore preferenceStore,
 			IWorkbenchPreferenceContainer container, String languageName) {
 		super(project, preferenceStore, container);
 		this.languageName = languageName;
+		initialize();
+
+		unpackTaskTags();
+		if (taskTags.getSize() > 0) {
+			taskTags.selectFirstElement();
+		} else {
+			taskTags.enableButton(IDX_EDIT, false);
+		}
+	}
+
+	@Inject
+	public TaskTagConfigurationBlock(@Named(Constants.LANGUAGE_NAME) String languageName) {
+		super();
+		initialize();
+	}
+
+	private void initialize() {
 		registerKey(getTasksCaseSensitiveKey());
 		registerKey(getTaskTagsKey());
 		registerKey(getTaskPrioritiesKey());
@@ -80,7 +106,11 @@ public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
 		caseSensitiveCheckBox = new SelectionButtonDialogField(SWT.CHECK);
 		caseSensitiveCheckBox.setLabelText(PreferencesMessages.TaskTagConfigurationBlock_casesensitive_label);
 		caseSensitiveCheckBox.setDialogFieldListener(adapter);
+	}
 
+	@Override
+	public void setPreferenceStore(IPreferenceStore preferenceStore) {
+		super.setPreferenceStore(preferenceStore);
 		unpackTaskTags();
 		if (taskTags.getSize() > 0) {
 			taskTags.selectFirstElement();

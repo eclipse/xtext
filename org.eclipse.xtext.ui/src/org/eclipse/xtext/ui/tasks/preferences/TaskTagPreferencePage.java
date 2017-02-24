@@ -26,6 +26,7 @@ import com.google.inject.name.Named;
  */
 public class TaskTagPreferencePage extends PropertyAndPreferencePage {
 
+	@Inject
 	private TaskTagConfigurationBlock taskConfigurationBlock;
 	private String languageName;
 	private IPreferenceStoreAccess preferenceStoreAccess;
@@ -49,7 +50,9 @@ public class TaskTagPreferencePage extends PropertyAndPreferencePage {
 	public void createControl(Composite parent) {
 		IWorkbenchPreferenceContainer container = (IWorkbenchPreferenceContainer) getContainer();
 		IPreferenceStore preferenceStore = preferenceStoreAccess.getWritablePreferenceStore(getProject());
-		taskConfigurationBlock = new TaskTagConfigurationBlock(getProject(), preferenceStore, container, languageName);
+		taskConfigurationBlock.setProject(getProject());
+		taskConfigurationBlock.setPreferenceStore(preferenceStore);
+		taskConfigurationBlock.setWorkbenchPreferenceContainer(container);
 		taskConfigurationBlock.setStatusChangeListener(getNewStatusChangedListener());
 		super.createControl(parent);
 	}
