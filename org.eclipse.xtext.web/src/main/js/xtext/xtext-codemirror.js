@@ -27,7 +27,7 @@
  * enableContentAssistService = true {Boolean}
  *     Whether content assist should be enabled.
  * enableFormattingAction = false {Boolean}
- *     Whether the formatting action should be bound to the standard keystroke ctrl+shift+f / cmd+shift+f.
+ *     Whether the formatting action should be bound to the standard keystroke ctrl+shift+s / cmd+shift+f.
  * enableFormattingService = true {Boolean}
  *     Whether text formatting should be enabled.
  * enableGeneratorService = true {Boolean}
