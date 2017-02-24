@@ -109,7 +109,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				if (resourceDescription != null) {
 					typeScope = new LocalResourceFilteringTypeScope(typeScope, resourceDescription);
 				}
-				RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource));
+				RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource), getQualifiedNameConverter());
 				//TODO this scope doesn't support binary syntax for inner types. It should be a KnownTypes scope which doesn't allow simple names
 				// Unfortunately I cannot use a RecordingTypeScope as a parent as it is not compatible...
 				IScope scope = SelectableBasedScope.createScope(recordingTypeScope, getAllDescriptions(resource), reference.getEReferenceType(), false);
@@ -127,7 +127,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 					if (resourceDescription != null) {
 						typeScope = new LocalResourceFilteringTypeScope(typeScope, resourceDescription);
 					}
-					RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource));
+					RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource), getQualifiedNameConverter());
 					AbstractScope rootTypeScope = getRootTypeScope(xtendFile, recordingTypeScope);
 					AbstractScope importScope = getImportScope(xtendFile.getImportSection(), rootTypeScope, recordingTypeScope);
 					AbstractScope localTypes = getResourceTypeScope(xtendFile.eResource(), xtendFile.getPackage(), importScope);
