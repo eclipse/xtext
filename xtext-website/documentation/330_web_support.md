@@ -285,7 +285,7 @@ The following functions are available, provided that the respective services are
  * `enableContentAssistService`
    Whether content assist should be enabled (default: `true`).
  * `enableFormattingAction`
-   Whether the formatting action should be bound to the standard keystroke Ctrl+Shift+F / Cmd+Shift+F (default: `false`).
+   Whether the formatting action should be bound to the standard keystroke Ctrl+Shift+F (Ctrl+Shift+S on CodeMirror) / Cmd+Shift+F (default: `false`).
  * `enableFormattingService`
    Whether text formatting should be enabled (default: `true`).
  * `enableGeneratorService`
