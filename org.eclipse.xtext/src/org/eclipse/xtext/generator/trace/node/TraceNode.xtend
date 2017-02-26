@@ -7,16 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace.node
 
-import java.util.List
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.generator.trace.ILocationData
 
 /**
  * @author Sven Efftinge - initial contribution and API
  */
-@Data class TraceNode extends CompositeNode {
+@Data class TraceNode extends CompositeGeneratorNode {
 	
 	final ILocationData sourceLocation
-	final List<IGeneratorNode> children = newArrayList
 	
 }

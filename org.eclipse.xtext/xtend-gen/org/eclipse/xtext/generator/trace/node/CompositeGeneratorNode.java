@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @Accessors
 @SuppressWarnings("all")
-public class CompositeNode implements IGeneratorNode {
+public class CompositeGeneratorNode implements IGeneratorNode {
   private final List<IGeneratorNode> children = CollectionLiterals.<IGeneratorNode>newArrayList();
   
   @Pure

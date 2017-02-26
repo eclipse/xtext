@@ -8,7 +8,7 @@
 package org.eclipse.xtext.generator.trace.node;
 
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.generator.trace.node.CompositeNode;
+import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  */
 @Data
 @SuppressWarnings("all")
-public class IndentNode extends CompositeNode {
+public class IndentNode extends CompositeGeneratorNode {
   @Override
   @Pure
   public int hashCode() {

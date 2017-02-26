@@ -7,12 +7,9 @@
  */
 package org.eclipse.xtext.generator.trace.node;
 
-import java.util.List;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.generator.trace.ILocationData;
-import org.eclipse.xtext.generator.trace.node.CompositeNode;
-import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -21,10 +18,8 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  */
 @Data
 @SuppressWarnings("all")
-public class TraceNode extends CompositeNode {
+public class TraceNode extends CompositeGeneratorNode {
   private final ILocationData sourceLocation;
-  
-  private final List<IGeneratorNode> children = CollectionLiterals.<IGeneratorNode>newArrayList();
   
   public TraceNode(final ILocationData sourceLocation) {
     super();
@@ -37,7 +32,6 @@ public class TraceNode extends CompositeNode {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.sourceLocation== null) ? 0 : this.sourceLocation.hashCode());
-    result = prime * result + ((this.children== null) ? 0 : this.children.hashCode());
     return result;
   }
   
@@ -56,11 +50,6 @@ public class TraceNode extends CompositeNode {
         return false;
     } else if (!this.sourceLocation.equals(other.sourceLocation))
       return false;
-    if (this.children == null) {
-      if (other.children != null)
-        return false;
-    } else if (!this.children.equals(other.children))
-      return false;
     return true;
   }
   
@@ -76,10 +65,5 @@ public class TraceNode extends CompositeNode {
   @Pure
   public ILocationData getSourceLocation() {
     return this.sourceLocation;
-  }
-  
-  @Pure
-  public List<IGeneratorNode> getChildren() {
-    return this.children;
   }
 }

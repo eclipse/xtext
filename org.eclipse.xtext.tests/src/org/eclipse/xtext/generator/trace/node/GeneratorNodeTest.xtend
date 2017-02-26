@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 TypeFox (http://www.typefox.io) and others.
+ * Copyright (c) 2017 TypeFox (https://typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,7 +18,7 @@ import org.junit.Test
  */
 class GeneratorNodeTest {
 	
-	extension GeneratorNodeExtensions exts = new GeneratorNodeExtensions("  ") 
+	extension GeneratorNodeExtensions exts = new GeneratorNodeExtensions()
 	
 	@Test def void testBasicCreationAndProcessing() {
 		val root = loc(0)

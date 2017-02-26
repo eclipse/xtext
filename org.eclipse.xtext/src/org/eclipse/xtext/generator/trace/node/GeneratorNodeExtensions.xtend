@@ -7,51 +7,48 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace.node
 
-import org.eclipse.xtend.lib.annotations.Data
+import com.google.inject.Inject
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.generator.trace.ILocationData
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Data class GeneratorNodeExtensions {
+class GeneratorNodeExtensions {
 	
-	def CompositeNode startTrace(ILocationData data) {
+	@Inject WhiteSpaceConfig wsConfig = new WhiteSpaceConfig
+	
+	def CompositeGeneratorNode startTrace(ILocationData data) {
 		val result =  new TraceNode(data)
 		return result
 	}
 	
-	def CompositeNode trace(CompositeNode parent, ILocationData data) {
+	def CompositeGeneratorNode trace(CompositeGeneratorNode parent, ILocationData data) {
 		val result =  new TraceNode(data)
 		parent.children += result
 		return result
 	}
 	
-	def CompositeNode indent(CompositeNode parent) {
+	def CompositeGeneratorNode indent(CompositeGeneratorNode parent) {
 		val result =  new IndentNode
 		parent.children += result
 		return result
 	}
 	
-	def CompositeNode appendNewLine(CompositeNode parent) {
+	def CompositeGeneratorNode appendNewLine(CompositeGeneratorNode parent) {
 		parent.children += new NewLineNode
 		return parent
 	}
 	
-	def CompositeNode append(CompositeNode parent, String text) {
-		parent.children += new TextNode(text)
+	def CompositeGeneratorNode append(CompositeGeneratorNode parent, Object object) {
+		if (object !== null) {
+			parent.children += new TextNode(object.toString)
+		}
 		return parent
 	}
 	
-	def CompositeNode append(CompositeNode parent, CharSequence text) {
-		parent.children += new TextNode(text)
-		return parent
-	}
-	
-	String indentationString
-	
-	def IGeneratorNode appendTemplate(CompositeNode parent, StringConcatenationClient contents) {
-		val proc = new TemplateNode(indentationString, contents, this)
+	def CompositeGeneratorNode appendTemplate(CompositeGeneratorNode parent, StringConcatenationClient contents) {
+		val proc = new TemplateNode(wsConfig.indentationString, contents, this)
 		parent.children += proc
 		return parent
 	}

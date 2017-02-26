@@ -1,0 +1,135 @@
+/*******************************************************************************
+ * Copyright (c) 2017 TypeFox (https://typefox.io) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.generator.trace.node
+
+import com.google.inject.Inject
+import org.eclipse.xtext.generator.InMemoryFileSystemAccess
+import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingFactory
+import org.eclipse.xtext.linking.lazy.lazyLinking.Model
+import org.eclipse.xtext.linking.lazy.lazyLinking.Property
+import org.eclipse.xtext.linking.lazy.lazyLinking.Type
+import org.eclipse.xtext.linking.lazy.tests.LazyLinkingTestLanguageInjectorProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.Assert
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
+@RunWith(XtextRunner)
+@InjectWith(LazyLinkingTestLanguageInjectorProvider)
+class TracingSugarTest {
+	
+	@TracingExtensionsForEMF(LazyLinkingFactory)
+	static class MyExtensions {
+		
+		/**
+		 * manual implementation for unsupported multi cross reference
+		 */
+		def IGeneratorNode _type(Property it, (Type)=>String provider) {
+			val location = location(eClass.getEStructuralFeature("type"), 0)
+			val result = location.startTrace
+			result.append(provider.apply(type.head))
+			return result
+		}
+	}
+	
+	@Inject extension MyExtensions
+	@Inject ParseHelper<Model> parseHelper
+	
+	CharSequence generated
+	
+	InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess() {
+		override generateFile(String fileName, CharSequence contents) {
+			generated = contents
+			super.generateFile(fileName, contents)
+		}
+	};
+	
+	@Test def void testCodeGeneration() {
+		val root = parseHelper.parse('''
+			type String {}
+			type Foo {
+				String name;
+			}
+		''')
+		fsa.generateTracedFile('foo/bar.txt', root, '''
+			«FOR t : root.types»
+				«t._generateType»
+			«ENDFOR»
+		''')
+		
+		// check the generated string is as expected
+		Assert.assertEquals('''
+			«FOR t : root.types»
+				«t.generateType»
+			«ENDFOR»
+		'''.toString, generated.toString)
+		
+		val trace = (generated as ITraceRegionProvider).traceRegion
+		Assert.assertEquals('''
+			CompletableTraceRegion [myOffset=0, myLength=55] associations={
+			  LocationData [TextRegionWithLineInformation [0:41][lineNumber=0, endLineNumber=3]][path=__synthetic0.lazylinkingtestlanguage]
+			} nestedRegions={
+			  CompletableTraceRegion [myOffset=0, myLength=17] associations={
+			    LocationData [TextRegionWithLineInformation [0:14][lineNumber=0, endLineNumber=0]][path=__synthetic0.lazylinkingtestlanguage]
+			  } nestedRegions={
+			    CompletableTraceRegion [myOffset=6, myLength=6] associations={
+			      LocationData [TextRegionWithLineInformation [5:6][lineNumber=0, endLineNumber=0]][path=__synthetic0.lazylinkingtestlanguage]
+			    }
+			  }
+			  CompletableTraceRegion [myOffset=17, myLength=38] associations={
+			    LocationData [TextRegionWithLineInformation [15:26][lineNumber=1, endLineNumber=3]][path=__synthetic0.lazylinkingtestlanguage]
+			  } nestedRegions={
+			    CompletableTraceRegion [myOffset=23, myLength=3] associations={
+			      LocationData [TextRegionWithLineInformation [20:3][lineNumber=1, endLineNumber=1]][path=__synthetic0.lazylinkingtestlanguage]
+			    }
+			    CompletableTraceRegion [myOffset=30, myLength=23] associations={
+			      LocationData [TextRegionWithLineInformation [27:12][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]
+			    } nestedRegions={
+			      CompletableTraceRegion [myOffset=39, myLength=4] associations={
+			        LocationData [TextRegionWithLineInformation [34:4][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]
+			      }
+			      CompletableTraceRegion [myOffset=46, myLength=6] associations={
+			        LocationData [TextRegionWithLineInformation [27:6][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]
+			      }
+			    }
+			  }
+			}'''.toString, trace.toString)
+	}
+	
+	@Traced def _generateType(Type it) '''
+		Class «_name» {
+			«FOR p : properties»
+				«p._generateProperty»
+			«ENDFOR»
+		}
+	'''
+	
+	@Traced def _generateProperty(Property it) '''
+		Property «_name» : «_type[name]»
+	'''
+	
+	def generateType(Type it) '''
+		Class «name» {
+			«FOR p : properties»
+				«p.generateProperty»
+			«ENDFOR»
+		}
+	'''
+	
+	def generateProperty(Property it) '''
+		Property «name» : «type.head.name»
+	'''
+	
+	
+}

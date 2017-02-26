@@ -20,7 +20,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation
  * @author Sven Efftinge - Initial contribution and API
  */
 @FinalFieldsConstructor class GeneratorNodeProcessor {
-
+	
 	@Accessors(PUBLIC_GETTER) val StringBuilder contents
 	val String indentationString
 	val String newLineString
@@ -28,7 +28,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation
 	int currentIndentLevel = 0
 	int currentLine = 0
 	@Accessors(PUBLIC_GETTER) AbstractTraceRegion currentRegion = null
-
+	
 	def dispatch void process(IGeneratorNode node) {
 		throw new IllegalArgumentException("No processing for " + node)
 	}
@@ -55,7 +55,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation
 		contents.append(node.text)
 	}
 	
-	def dispatch void process(CompositeNode node) {
+	def dispatch void process(CompositeGeneratorNode node) {
 		processChildren(node)
 	}
 
@@ -74,7 +74,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation
 		}
 	}
 
-	protected def void processChildren(CompositeNode node) {
+	protected def void processChildren(CompositeGeneratorNode node) {
 		for (child : node.children) {
 			process(child)
 		}

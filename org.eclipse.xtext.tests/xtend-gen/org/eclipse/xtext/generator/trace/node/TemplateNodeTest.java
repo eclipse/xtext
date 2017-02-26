@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2017 TypeFox (https://typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,7 +9,7 @@ package org.eclipse.xtext.generator.trace.node;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
-import org.eclipse.xtext.generator.trace.node.CompositeNode;
+import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeExtensions;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeProcessor;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -104,10 +104,10 @@ public class TemplateNodeTest {
   }
   
   public void assertEquals(final StringConcatenationClient c) {
-    final GeneratorNodeExtensions ext = new GeneratorNodeExtensions("  ");
+    final GeneratorNodeExtensions ext = new GeneratorNodeExtensions();
     StringBuilder _stringBuilder = new StringBuilder();
     final GeneratorNodeProcessor processor = new GeneratorNodeProcessor(_stringBuilder, "  ", "\n");
-    final CompositeNode root = new CompositeNode();
+    final CompositeGeneratorNode root = new CompositeGeneratorNode();
     ext.appendTemplate(root, c);
     processor.process(root);
     final StringConcatenation expected = new StringConcatenation();

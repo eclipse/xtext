@@ -7,11 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace.node
 
-import org.eclipse.xtend.lib.annotations.Data
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Data class IndentNode extends CompositeGeneratorNode {
+class WhiteSpaceConfig {
 	
+	def String getIndentationString() {
+		'  '
+	}
+	
+	def String getLineDelimiter() {
+		'\n'
+	}
 }

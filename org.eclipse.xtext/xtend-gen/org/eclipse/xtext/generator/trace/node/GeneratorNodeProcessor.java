@@ -16,7 +16,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
-import org.eclipse.xtext.generator.trace.node.CompositeNode;
+import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.IndentNode;
 import org.eclipse.xtext.generator.trace.node.NewLineNode;
@@ -147,7 +147,7 @@ public class GeneratorNodeProcessor {
     this.contents.append(node.getText());
   }
   
-  protected void _process(final CompositeNode node) {
+  protected void _process(final CompositeGeneratorNode node) {
     this.processChildren(node);
   }
   
@@ -170,7 +170,7 @@ public class GeneratorNodeProcessor {
     }
   }
   
-  protected void processChildren(final CompositeNode node) {
+  protected void processChildren(final CompositeGeneratorNode node) {
     List<IGeneratorNode> _children = node.getChildren();
     for (final IGeneratorNode child : _children) {
       this.process(child);
@@ -184,8 +184,8 @@ public class GeneratorNodeProcessor {
     } else if (node instanceof TraceNode) {
       _process((TraceNode)node);
       return;
-    } else if (node instanceof CompositeNode) {
-      _process((CompositeNode)node);
+    } else if (node instanceof CompositeGeneratorNode) {
+      _process((CompositeGeneratorNode)node);
       return;
     } else if (node instanceof NewLineNode) {
       _process((NewLineNode)node);

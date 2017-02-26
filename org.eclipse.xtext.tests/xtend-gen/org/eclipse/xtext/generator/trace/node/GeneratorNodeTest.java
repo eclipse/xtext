@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 TypeFox (http://www.typefox.io) and others.
+ * Copyright (c) 2017 TypeFox (https://typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,10 +11,9 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
-import org.eclipse.xtext.generator.trace.node.CompositeNode;
+import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeExtensions;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeProcessor;
-import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
@@ -26,12 +25,12 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class GeneratorNodeTest {
   @Extension
-  private GeneratorNodeExtensions exts = new GeneratorNodeExtensions("  ");
+  private GeneratorNodeExtensions exts = new GeneratorNodeExtensions();
   
   @Test
   public void testBasicCreationAndProcessing() {
     final LocationData root = this.loc(0);
-    CompositeNode node = this.exts.appendNewLine(this.exts.append(this.exts.startTrace(root), "notindented"));
+    CompositeGeneratorNode node = this.exts.appendNewLine(this.exts.append(this.exts.startTrace(root), "notindented"));
     this.exts.append(this.exts.appendNewLine(this.exts.append(this.exts.trace(this.exts.indent(node), this.loc(1)), "indented1")), "indented2");
     this.exts.append(this.exts.appendNewLine(node), "dedented");
     StringBuilder _stringBuilder = new StringBuilder();
@@ -72,7 +71,7 @@ public class GeneratorNodeTest {
   @Test
   public void testTemplateProcessing() {
     final LocationData root = this.loc(0);
-    CompositeNode _startTrace = this.exts.startTrace(root);
+    CompositeGeneratorNode _startTrace = this.exts.startTrace(root);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -81,7 +80,7 @@ public class GeneratorNodeTest {
         _builder.newLineIfNotEmpty();
       }
     };
-    IGeneratorNode node = this.exts.appendTemplate(_startTrace, _client);
+    CompositeGeneratorNode node = this.exts.appendTemplate(_startTrace, _client);
     StringBuilder _stringBuilder = new StringBuilder();
     final GeneratorNodeProcessor processor = new GeneratorNodeProcessor(_stringBuilder, "  ", "\n");
     processor.process(node);
@@ -188,7 +187,7 @@ public class GeneratorNodeTest {
           ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, n, true);
           for(final Integer i : _doubleDotLessThan) {
             _builder.append("before ");
-            CompositeNode _append = GeneratorNodeTest.this.exts.append(GeneratorNodeTest.this.exts.startTrace(GeneratorNodeTest.this.loc((10 + (i).intValue()))), "Hello");
+            CompositeGeneratorNode _append = GeneratorNodeTest.this.exts.append(GeneratorNodeTest.this.exts.startTrace(GeneratorNodeTest.this.loc((10 + (i).intValue()))), "Hello");
             _builder.append(_append);
             _builder.append(" after");
             _builder.newLineIfNotEmpty();

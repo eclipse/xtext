@@ -13,7 +13,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Accessors class CompositeNode implements IGeneratorNode {
+@Accessors class CompositeGeneratorNode implements IGeneratorNode {
 	
 	val List<IGeneratorNode> children = newArrayList
 	

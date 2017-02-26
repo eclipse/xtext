@@ -7,15 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace.node
 
+import com.google.common.base.Splitter
+import com.google.common.collect.Iterables
+import java.util.regex.Pattern
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtend2.lib.StringConcatenationClient.TargetStringConcatenation
-import com.google.common.base.Splitter
-import java.util.regex.Pattern
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class TemplateNode extends CompositeNode implements TargetStringConcatenation {
+class TemplateNode extends CompositeGeneratorNode implements TargetStringConcatenation {
 
 	val String indentationString
 	val GeneratorNodeExtensions nodeFactory
@@ -26,7 +27,7 @@ class TemplateNode extends CompositeNode implements TargetStringConcatenation {
 		StringConcatenationClient.appendTo(contents, this)
 	}
 
-	CompositeNode currentParent = this
+	CompositeGeneratorNode currentParent = this
 	boolean isEmptyLine = true;
 
 	override append(Object object, String indentation) {
@@ -41,7 +42,7 @@ class TemplateNode extends CompositeNode implements TargetStringConcatenation {
 				currentParent = before
 			}
 		}
-		// TODO check indentation string
+		// TODO check indentation string for consistency
 		append(object)
 	}
 	
@@ -52,7 +53,7 @@ class TemplateNode extends CompositeNode implements TargetStringConcatenation {
 			StringConcatenationClient:
 				nodeFactory.appendTemplate(currentParent, object)
 			IGeneratorNode: {
-				isEmptyLine = false				
+				isEmptyLine = isEmptyLine(object)				
 				currentParent.children += object
 			}
 			default: {
@@ -67,6 +68,31 @@ class TemplateNode extends CompositeNode implements TargetStringConcatenation {
 						newLine
 					}
 				}
+			}
+		}
+	}
+	
+	private def boolean isEmptyLine(IGeneratorNode n) {
+		for (leaf : n.leafsBackwards) {
+			if (leaf instanceof TextNode) {
+				if (!leaf.text.toString().trim().empty) {
+					return false
+				}
+			}
+			if (leaf instanceof NewLineNode) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private def Iterable<IGeneratorNode> leafsBackwards(IGeneratorNode it) {
+		switch it {
+			CompositeGeneratorNode : {
+				children.reverseView.map[leafsBackwards].reduce[p1, p2| Iterables.concat(p1, p2)]
+			}
+			default : {
+				#[it]
 			}
 		}
 	}

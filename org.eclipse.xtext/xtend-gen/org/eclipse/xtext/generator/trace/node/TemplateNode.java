@@ -8,22 +8,29 @@
 package org.eclipse.xtext.generator.trace.node;
 
 import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
-import org.eclipse.xtext.generator.trace.node.CompositeNode;
+import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeExtensions;
 import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.IndentNode;
 import org.eclipse.xtext.generator.trace.node.NewLineNode;
 import org.eclipse.xtext.generator.trace.node.TextNode;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class TemplateNode extends CompositeNode implements StringConcatenationClient.TargetStringConcatenation {
+public class TemplateNode extends CompositeGeneratorNode implements StringConcatenationClient.TargetStringConcatenation {
   private final String indentationString;
   
   private final GeneratorNodeExtensions nodeFactory;
@@ -34,7 +41,7 @@ public class TemplateNode extends CompositeNode implements StringConcatenationCl
     StringConcatenationClient.appendTo(contents, this);
   }
   
-  private CompositeNode currentParent = this;
+  private CompositeGeneratorNode currentParent = this;
   
   private boolean isEmptyLine = true;
   
@@ -42,7 +49,7 @@ public class TemplateNode extends CompositeNode implements StringConcatenationCl
   public void append(final Object object, final String indentation) {
     final int idx = indentation.indexOf(this.indentationString);
     if ((idx == 0)) {
-      final CompositeNode before = this.currentParent;
+      final CompositeGeneratorNode before = this.currentParent;
       try {
         IndentNode _indentNode = new IndentNode();
         this.currentParent = _indentNode;
@@ -68,7 +75,7 @@ public class TemplateNode extends CompositeNode implements StringConcatenationCl
     if (!_matched) {
       if (object instanceof IGeneratorNode) {
         _matched=true;
-        this.isEmptyLine = false;
+        this.isEmptyLine = this.isEmptyLine(((IGeneratorNode)object));
         List<IGeneratorNode> _children = this.currentParent.getChildren();
         _children.add(((IGeneratorNode)object));
       }
@@ -94,6 +101,44 @@ public class TemplateNode extends CompositeNode implements StringConcatenationCl
         }
       }
     }
+  }
+  
+  private boolean isEmptyLine(final IGeneratorNode n) {
+    Iterable<IGeneratorNode> _leafsBackwards = this.leafsBackwards(n);
+    for (final IGeneratorNode leaf : _leafsBackwards) {
+      {
+        if ((leaf instanceof TextNode)) {
+          boolean _isEmpty = ((TextNode)leaf).getText().toString().trim().isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            return false;
+          }
+        }
+        if ((leaf instanceof NewLineNode)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  
+  private Iterable<IGeneratorNode> leafsBackwards(final IGeneratorNode it) {
+    Iterable<IGeneratorNode> _switchResult = null;
+    boolean _matched = false;
+    if (it instanceof CompositeGeneratorNode) {
+      _matched=true;
+      final Function1<IGeneratorNode, Iterable<IGeneratorNode>> _function = (IGeneratorNode it_1) -> {
+        return this.leafsBackwards(it_1);
+      };
+      final Function2<Iterable<IGeneratorNode>, Iterable<IGeneratorNode>, Iterable<IGeneratorNode>> _function_1 = (Iterable<IGeneratorNode> p1, Iterable<IGeneratorNode> p2) -> {
+        return Iterables.<IGeneratorNode>concat(p1, p2);
+      };
+      _switchResult = IterableExtensions.<Iterable<IGeneratorNode>>reduce(ListExtensions.<IGeneratorNode, Iterable<IGeneratorNode>>map(ListExtensions.<IGeneratorNode>reverseView(((CompositeGeneratorNode)it).getChildren()), _function), _function_1);
+    }
+    if (!_matched) {
+      _switchResult = Collections.<IGeneratorNode>unmodifiableList(CollectionLiterals.<IGeneratorNode>newArrayList(it));
+    }
+    return _switchResult;
   }
   
   @Override
