@@ -770,6 +770,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		jvmLiteral.setVisibility(JvmVisibility.PUBLIC);
 		jvmLiteral.setStatic(true);
 		jvmLiteral.setFinal(true);
+		jvmTypesBuilder.copyDocumentationTo(literal, jvmLiteral);
 		for (XAnnotation anno : literal.getAnnotations()) {
 			if (!annotationTranslationFilter.apply(anno))
 				continue;

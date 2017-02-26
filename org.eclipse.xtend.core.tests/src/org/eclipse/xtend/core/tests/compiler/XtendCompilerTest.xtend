@@ -1234,6 +1234,45 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def testEnumIssue165() {
+		'''
+			enum Foo {
+				/**
+				 * This is FOO
+				 */
+				FOO,
+				
+				/**
+				 * This is BAR
+				 */
+				BAR,
+				
+				/**
+				 * This is BAZ
+				 */
+				BAZ
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public enum Foo {
+			  /**
+			   * This is FOO
+			   */
+			  FOO,
+			  
+			  /**
+			   * This is BAR
+			   */
+			  BAR,
+			  
+			  /**
+			   * This is BAZ
+			   */
+			  BAZ;
+			}
+		''')
+	}
+	
 	@Test def testEnum476555() {
 		'''
 			enum Foo {
