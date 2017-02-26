@@ -28,7 +28,7 @@ import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
-import org.eclipse.xtext.generator.trace.node.TracingExtensionsForEMF;
+import org.eclipse.xtext.generator.trace.node.TracingExtensions;
 import org.eclipse.xtext.generator.trace.node.TracingSugar;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -40,12 +40,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
-public class TracingExtensionsForEMFProcessor extends AbstractClassProcessor {
+public class TracingExtensionsProcessor extends AbstractClassProcessor {
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     final TypeReference eobjectType = context.newTypeReference(EObject.class);
     annotatedClass.setExtendedClass(context.newTypeReference(TracingSugar.class));
-    final Type annotationType = context.findTypeGlobally(TracingExtensionsForEMF.class);
+    final Type annotationType = context.findTypeGlobally(TracingExtensions.class);
     AnnotationReference _findAnnotation = annotatedClass.findAnnotation(annotationType);
     TypeReference[] _classArrayValue = null;
     if (_findAnnotation!=null) {
@@ -75,7 +75,7 @@ public class TracingExtensionsForEMFProcessor extends AbstractClassProcessor {
         for (final ResolvedMethod getter : _filter_1) {
           {
             final TypeReference rt = getter.getResolvedReturnType();
-            boolean _contains = TracingExtensionsForEMFProcessor.allowedLowerCaseTypeNames.contains(rt.getType().getSimpleName().toLowerCase());
+            boolean _contains = TracingExtensionsProcessor.allowedLowerCaseTypeNames.contains(rt.getType().getSimpleName().toLowerCase());
             if (_contains) {
               final Procedure1<MutableMethodDeclaration> _function_4 = (MutableMethodDeclaration it) -> {
                 it.setReturnType(context.newTypeReference(IGeneratorNode.class));
@@ -85,7 +85,7 @@ public class TracingExtensionsForEMFProcessor extends AbstractClassProcessor {
                   protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
                     _builder.append(EStructuralFeature.class);
                     _builder.append(" feature = target.eClass().getEStructuralFeature(\"");
-                    String _featureName = TracingExtensionsForEMFProcessor.this.featureName(getter);
+                    String _featureName = TracingExtensionsProcessor.this.featureName(getter);
                     _builder.append(_featureName);
                     _builder.append("\");");
                     _builder.newLineIfNotEmpty();
@@ -120,7 +120,7 @@ public class TracingExtensionsForEMFProcessor extends AbstractClassProcessor {
                     protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
                       _builder.append(EStructuralFeature.class);
                       _builder.append(" feature = target.eClass().getEStructuralFeature(\"");
-                      String _featureName = TracingExtensionsForEMFProcessor.this.featureName(getter);
+                      String _featureName = TracingExtensionsProcessor.this.featureName(getter);
                       _builder.append(_featureName);
                       _builder.append("\");");
                       _builder.newLineIfNotEmpty();

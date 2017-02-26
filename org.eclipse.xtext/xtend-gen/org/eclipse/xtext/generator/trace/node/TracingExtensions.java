@@ -9,12 +9,12 @@ package org.eclipse.xtext.generator.trace.node;
 
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.xtend.lib.macro.Active;
-import org.eclipse.xtext.generator.trace.node.TracingExtensionsForEMFProcessor;
+import org.eclipse.xtext.generator.trace.node.TracingExtensionsProcessor;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Active(TracingExtensionsForEMFProcessor.class)
-public @interface TracingExtensionsForEMF {
+@Active(TracingExtensionsProcessor.class)
+public @interface TracingExtensions {
   public Class<? extends EFactory>[] value();
 }

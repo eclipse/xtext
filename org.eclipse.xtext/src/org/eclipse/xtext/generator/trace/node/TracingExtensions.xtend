@@ -22,17 +22,17 @@ import org.eclipse.xtext.generator.trace.ILocationData
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Active(TracingExtensionsForEMFProcessor)
-annotation TracingExtensionsForEMF {
+@Active(TracingExtensionsProcessor)
+annotation TracingExtensions {
 	Class<? extends EFactory>[] value
 }
 
-class TracingExtensionsForEMFProcessor extends AbstractClassProcessor {
+class TracingExtensionsProcessor extends AbstractClassProcessor {
 	
 	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
 		val eobjectType = EObject.newTypeReference()
 		annotatedClass.extendedClass = TracingSugar.newTypeReference()
-		val annotationType = findTypeGlobally(TracingExtensionsForEMF)
+		val annotationType = findTypeGlobally(TracingExtensions)
 		val factories = annotatedClass.findAnnotation(annotationType)?.getClassArrayValue("value")
 		if (factories === null) {
 			return;

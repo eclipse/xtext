@@ -20,7 +20,7 @@ import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.Traced;
-import org.eclipse.xtext.generator.trace.node.TracingExtensionsForEMF;
+import org.eclipse.xtext.generator.trace.node.TracingExtensions;
 import org.eclipse.xtext.generator.trace.node.TracingSugar;
 import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingFactory;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
@@ -46,7 +46,7 @@ import org.junit.runner.RunWith;
 @InjectWith(LazyLinkingTestLanguageInjectorProvider.class)
 @SuppressWarnings("all")
 public class TracingSugarTest {
-  @TracingExtensionsForEMF(LazyLinkingFactory.class)
+  @TracingExtensions(LazyLinkingFactory.class)
   public static class MyExtensions extends TracingSugar {
     /**
      * manual implementation for unsupported multi cross reference
