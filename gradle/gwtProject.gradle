@@ -1,0 +1,27 @@
+configurations {
+	prepareGwt
+}
+
+task copyGwtSources(type: Copy) {
+	dependsOn configurations.prepareGwt
+	from {
+		configurations.prepareGwt.collect { zipTree(it) }
+	}
+	include '**/*.java'
+	exclude { details ->
+		details.file.isDirectory() ||
+		!details.file.text.contains('@GwtCompatible') ||
+		details.file.text.contains('emulated = true')
+	}
+	into 'build/gwtSources'
+}
+
+jar {
+	dependsOn copyGwtSources
+	from('.') {
+		include 'OSGI-INF/**'
+	}
+	from('build/gwtSources') {
+		include '**/*.java'
+	}
+}

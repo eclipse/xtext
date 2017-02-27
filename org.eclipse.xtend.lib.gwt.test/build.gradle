@@ -19,4 +19,14 @@ dependencies {
 gwt {
 	gwtVersion = versions.gwt
 	modules 'org.eclipse.xtend.lib.test.Test'
+	compiler {
+		strict = true
+		enableClosureCompiler = true
+		disableClassMetadata = true
+		disableCastChecking = true
+	}
+}
+
+test {
+	dependsOn compileGwt
 }

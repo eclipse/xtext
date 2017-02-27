@@ -2,12 +2,10 @@ group = 'org.eclipse.xtend'
 ext.title = 'Eclipse Xtend GWT Library'
 description = 'The runtime library for Xtend for use with GWT.'
 
+apply from: "${rootDir}/gradle/gwtProject.gradle"
+
 dependencies {
 	compile project(':org.eclipse.xtend.lib')
-}
-
-jar {
-	from('.') {
-		include 'OSGI-INF/**'
-	}
+	prepareGwt project(path: ':org.eclipse.xtend.lib', configuration: 'sourceJar')
+	compile project(':org.eclipse.xtext.xbase.lib.gwt')
 }

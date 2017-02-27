@@ -2,12 +2,16 @@ group = 'org.eclipse.xtext'
 ext.title = 'Eclipse Xbase GWT Library'
 description = 'The runtime library for Xbase languages for use with GWT.'
 
+apply from: "${rootDir}/gradle/gwtProject.gradle"
+
 dependencies {
 	compile project(':org.eclipse.xtext.xbase.lib')
+	prepareGwt project(path: ':org.eclipse.xtext.xbase.lib', configuration: 'sourceJar')
+	compile "com.google.guava:guava-gwt:$versions.guava"
 }
 
 jar {
-	from('.') {
-		include 'OSGI-INF/**'
+	from('src-super') {
+		include '**/*.java'
 	}
 }

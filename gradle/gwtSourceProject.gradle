@@ -1,0 +1,7 @@
+configurations {
+	sourceJar
+}
+
+artifacts {
+	sourceJar sourcesJar
+}

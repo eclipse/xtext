@@ -6,3 +6,5 @@ dependencies {
 	compile project(':org.eclipse.xtext.xbase.lib')
 	compile project(':org.eclipse.xtend.lib.macro')
 }
+
+apply from: "${rootDir}/gradle/gwtSourceProject.gradle"
