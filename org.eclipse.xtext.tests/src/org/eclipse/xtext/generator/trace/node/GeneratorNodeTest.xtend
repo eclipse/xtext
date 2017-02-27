@@ -22,19 +22,19 @@ class GeneratorNodeTest {
 	
 	@Test def void testBasicCreationAndProcessing() {
 		val root = loc(0)
-		var node = root.startTrace
+		var node = root.trace
 			.append('notindented').appendNewLine
 		node.indent.trace(loc(1))
 			.append("indented1").appendNewLine
 			.append("indented2")
 		node.appendNewLine.append("dedented")
-		val processor = new GeneratorNodeProcessor(new StringBuilder, "  ", "\n")
-		processor.process(node)
+		val processor = new GeneratorNodeProcessor()
+		val result = processor.process(node)
 		Assert.assertEquals('''
 			notindented
 			  indented1
 			  indented2
-			dedented'''.toString, processor.contents.toString)
+			dedented'''.toString, result.toString)
 		Assert.assertEquals('''
 			CompletableTraceRegion [myOffset=0, myLength=44] associations={
 			  LocationData [TextRegionWithLineInformation [0:100][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
@@ -42,62 +42,49 @@ class GeneratorNodeTest {
 			  CompletableTraceRegion [myOffset=14, myLength=21] associations={
 			    LocationData [TextRegionWithLineInformation [1:99][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			  }
-			}'''.toString, processor.currentRegion.toString)
+			}'''.toString, result.traceRegion.toString)
 	}
 	
 	
 	@Test def void testTemplateProcessing() {
 		val root = loc(0)
-		var node = root.startTrace
+		var node = root.trace
 			.appendTemplate('''
 				«someCodeGen(2)»
 			''')
-		val processor = new GeneratorNodeProcessor(new StringBuilder, "  ", "\n")
-		processor.process(node)
+			
+		val processor = new GeneratorNodeProcessor()
+		val result = processor.process(node)
+		Assert.assertEquals(someCodeGen_noTrace(2).toString, result.toString)
 		Assert.assertEquals('''
-			before Hello after
-			    before Hello after
-			      
-			  before Hello after
-			    
-			
-			before Hello after
-			    before Hello after
-			      
-			  before Hello after
-			    
-			
-			
-		'''.toString, processor.contents.toString)
-		Assert.assertEquals('''
-			CompletableTraceRegion [myOffset=0, myLength=153] associations={
+			CompletableTraceRegion [myOffset=0, myLength=80] associations={
 			  LocationData [TextRegionWithLineInformation [0:100][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			} nestedRegions={
 			  CompletableTraceRegion [myOffset=7, myLength=5] associations={
 			    LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			  }
-			  CompletableTraceRegion [myOffset=30, myLength=5] associations={
+			  CompletableTraceRegion [myOffset=28, myLength=5] associations={
 			    LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			  }
-			  CompletableTraceRegion [myOffset=58, myLength=5] associations={
-			    LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
-			  }
-			  CompletableTraceRegion [myOffset=83, myLength=5] associations={
+			  CompletableTraceRegion [myOffset=47, myLength=5] associations={
 			    LocationData [TextRegionWithLineInformation [11:89][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			  }
-			  CompletableTraceRegion [myOffset=106, myLength=5] associations={
+			  CompletableTraceRegion [myOffset=68, myLength=5] associations={
 			    LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			  }
-			  CompletableTraceRegion [myOffset=134, myLength=5] associations={
-			    LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
-			  }
-			}'''.toString, processor.currentRegion.toString)
+			}'''.toString, result.traceRegion.toString)
 	}
 	
 	def StringConcatenationClient someCodeGen(int n) '''
 		«FOR i : 0..<n»
-			before «loc(10+i).startTrace.append("Hello")» after
+			before «loc(10+i).trace.append("Hello")» after
 			  «someCodeGen(n-1)»
+		«ENDFOR»
+	'''
+	def String someCodeGen_noTrace(int n) '''
+		«FOR i : 0..<n»
+			before «"Hello"» after
+			  «someCodeGen_noTrace(n-1)»
 		«ENDFOR»
 	'''
 	

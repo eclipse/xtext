@@ -93,7 +93,7 @@ public class TracingExtensionsProcessor extends AbstractClassProcessor {
                     _builder.append(" location = this.location(target, feature, -1);");
                     _builder.newLineIfNotEmpty();
                     _builder.append(CompositeGeneratorNode.class);
-                    _builder.append(" trace = this.startTrace(location);");
+                    _builder.append(" trace = this.trace(location);");
                     _builder.newLineIfNotEmpty();
                     _builder.append("this.append(trace, target.");
                     String _simpleName = getter.getDeclaration().getSimpleName();
@@ -128,7 +128,7 @@ public class TracingExtensionsProcessor extends AbstractClassProcessor {
                       _builder.append(" location = this.location(target, feature, -1);");
                       _builder.newLineIfNotEmpty();
                       _builder.append(CompositeGeneratorNode.class);
-                      _builder.append(" trace = this.startTrace(location);");
+                      _builder.append(" trace = this.trace(location);");
                       _builder.newLineIfNotEmpty();
                       _builder.append("this.append(trace, stringProvider.apply(target.");
                       String _simpleName = getter.getDeclaration().getSimpleName();

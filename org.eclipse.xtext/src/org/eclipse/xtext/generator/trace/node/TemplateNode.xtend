@@ -18,11 +18,9 @@ import org.eclipse.xtend2.lib.StringConcatenationClient.TargetStringConcatenatio
  */
 class TemplateNode extends CompositeGeneratorNode implements TargetStringConcatenation {
 
-	val String indentationString
 	val GeneratorNodeExtensions nodeFactory
 
-	new(String indentationString, StringConcatenationClient contents, GeneratorNodeExtensions nodeFactory) {
-		this.indentationString = indentationString
+	new(StringConcatenationClient contents, GeneratorNodeExtensions nodeFactory) {
 		this.nodeFactory = nodeFactory
 		StringConcatenationClient.appendTo(contents, this)
 	}
@@ -31,34 +29,32 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 	boolean isEmptyLine = true;
 
 	override append(Object object, String indentation) {
-		val idx = indentation.indexOf(indentationString)
-		if (idx === 0) {
+		if (indentation.length > 0) {
 			val before = currentParent
 			try {
-				currentParent = new IndentNode
+				currentParent = new IndentNode(indentation)
 				before.children += currentParent
-				append(object, indentation.substring(indentationString.length))
+				append(object)
 			} finally {
 				currentParent = before
 			}
+		} else {
+			append(object)
 		}
-		// TODO check indentation string for consistency
-		append(object)
 	}
 	
-	val splitter = Splitter.on(Pattern.compile("\\R"))
+	val lineSplitter = Splitter.on(Pattern.compile("\\R"))
 	
 	override append(Object object) {
 		switch object {
 			StringConcatenationClient:
 				nodeFactory.appendTemplate(currentParent, object)
 			IGeneratorNode: {
-				isEmptyLine = isEmptyLine(object)				
 				currentParent.children += object
 			}
 			default: {
 				val str = object.toString
-				val iter = splitter.split(str).iterator
+				val iter = lineSplitter.split(str).iterator
 				while (iter.hasNext) {
 					val segment = iter.next
 					if (!segment.isEmpty)
@@ -72,21 +68,7 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 		}
 	}
 	
-	private def boolean isEmptyLine(IGeneratorNode n) {
-		for (leaf : n.leafsBackwards) {
-			if (leaf instanceof TextNode) {
-				if (!leaf.text.toString().trim().empty) {
-					return false
-				}
-			}
-			if (leaf instanceof NewLineNode) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	private def Iterable<IGeneratorNode> leafsBackwards(IGeneratorNode it) {
+	protected def Iterable<IGeneratorNode> leafsBackwards(IGeneratorNode it) {
 		switch it {
 			CompositeGeneratorNode : {
 				children.reverseView.map[leafsBackwards].reduce[p1, p2| Iterables.concat(p1, p2)]
@@ -110,13 +92,11 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 	}
 
 	override newLine() {
-		currentParent.children += new NewLineNode
-		isEmptyLine = true
+		this.nodeFactory.appendNewLine(currentParent)
 	}
 
 	override newLineIfNotEmpty() {
-		if (!isEmptyLine)
-			newLine
+		this.nodeFactory.appendNewLineIfNotEmpty(currentParent)
 	}
 	
 	//

@@ -18,7 +18,6 @@ import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeExtensions;
 import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.IndentNode;
-import org.eclipse.xtext.generator.trace.node.NewLineNode;
 import org.eclipse.xtext.generator.trace.node.TextNode;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -31,12 +30,9 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  */
 @SuppressWarnings("all")
 public class TemplateNode extends CompositeGeneratorNode implements StringConcatenationClient.TargetStringConcatenation {
-  private final String indentationString;
-  
   private final GeneratorNodeExtensions nodeFactory;
   
-  public TemplateNode(final String indentationString, final StringConcatenationClient contents, final GeneratorNodeExtensions nodeFactory) {
-    this.indentationString = indentationString;
+  public TemplateNode(final StringConcatenationClient contents, final GeneratorNodeExtensions nodeFactory) {
     this.nodeFactory = nodeFactory;
     StringConcatenationClient.appendTo(contents, this);
   }
@@ -47,23 +43,25 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
   
   @Override
   public void append(final Object object, final String indentation) {
-    final int idx = indentation.indexOf(this.indentationString);
-    if ((idx == 0)) {
+    int _length = indentation.length();
+    boolean _greaterThan = (_length > 0);
+    if (_greaterThan) {
       final CompositeGeneratorNode before = this.currentParent;
       try {
-        IndentNode _indentNode = new IndentNode();
+        IndentNode _indentNode = new IndentNode(indentation);
         this.currentParent = _indentNode;
         List<IGeneratorNode> _children = before.getChildren();
         _children.add(this.currentParent);
-        this.append(object, indentation.substring(this.indentationString.length()));
+        this.append(object);
       } finally {
         this.currentParent = before;
       }
+    } else {
+      this.append(object);
     }
-    this.append(object);
   }
   
-  private final Splitter splitter = Splitter.on(Pattern.compile("\\R"));
+  private final Splitter lineSplitter = Splitter.on(Pattern.compile("\\R"));
   
   @Override
   public void append(final Object object) {
@@ -75,7 +73,6 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
     if (!_matched) {
       if (object instanceof IGeneratorNode) {
         _matched=true;
-        this.isEmptyLine = this.isEmptyLine(((IGeneratorNode)object));
         List<IGeneratorNode> _children = this.currentParent.getChildren();
         _children.add(((IGeneratorNode)object));
       }
@@ -83,7 +80,7 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
     if (!_matched) {
       {
         final String str = object.toString();
-        final Iterator<String> iter = this.splitter.split(str).iterator();
+        final Iterator<String> iter = this.lineSplitter.split(str).iterator();
         while (iter.hasNext()) {
           {
             final String segment = iter.next();
@@ -103,26 +100,7 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
     }
   }
   
-  private boolean isEmptyLine(final IGeneratorNode n) {
-    Iterable<IGeneratorNode> _leafsBackwards = this.leafsBackwards(n);
-    for (final IGeneratorNode leaf : _leafsBackwards) {
-      {
-        if ((leaf instanceof TextNode)) {
-          boolean _isEmpty = ((TextNode)leaf).getText().toString().trim().isEmpty();
-          boolean _not = (!_isEmpty);
-          if (_not) {
-            return false;
-          }
-        }
-        if ((leaf instanceof NewLineNode)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-  
-  private Iterable<IGeneratorNode> leafsBackwards(final IGeneratorNode it) {
+  protected Iterable<IGeneratorNode> leafsBackwards(final IGeneratorNode it) {
     Iterable<IGeneratorNode> _switchResult = null;
     boolean _matched = false;
     if (it instanceof CompositeGeneratorNode) {
@@ -160,17 +138,12 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
   
   @Override
   public void newLine() {
-    List<IGeneratorNode> _children = this.currentParent.getChildren();
-    NewLineNode _newLineNode = new NewLineNode();
-    _children.add(_newLineNode);
-    this.isEmptyLine = true;
+    this.nodeFactory.appendNewLine(this.currentParent);
   }
   
   @Override
   public void newLineIfNotEmpty() {
-    if ((!this.isEmptyLine)) {
-      this.newLine();
-    }
+    this.nodeFactory.appendNewLineIfNotEmpty(this.currentParent);
   }
   
   @Override

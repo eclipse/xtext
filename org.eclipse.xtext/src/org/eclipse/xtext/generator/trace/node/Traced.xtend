@@ -55,7 +55,7 @@ class TracedProcessor extends AbstractMethodProcessor {
 		annotatedMethod.returnType = nodeType
 		annotatedMethod.body = '''
 			«ILocationData» _location = this.«field.simpleName».location(«traceParam.simpleName»);
-			«CompositeGeneratorNode» _traceNode = this.«field.simpleName».startTrace(_location);
+			«CompositeGeneratorNode» _traceNode = this.«field.simpleName».trace(_location);
 			this.«field.simpleName».appendTemplate(_traceNode, _«annotatedMethod.simpleName»(«annotatedMethod.parameters.join(',')[simpleName]»));
 			return _traceNode;
 		'''

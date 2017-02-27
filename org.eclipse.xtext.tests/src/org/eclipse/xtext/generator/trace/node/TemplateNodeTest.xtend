@@ -29,11 +29,12 @@ class TemplateNodeTest {
 		''')
 	}
 
-	@Test def void testString() {
+	@Test def void testWeirdTemplateString() {
 		assertEquals('''
 			fooo bar
-			«IF 2 > 1»
-				«FOR i : 1..4»
+			d   «IF 2 > 1»s
+				  ee  «FOR i : 1..4»
+					«''»
 					«other» «i»
 					«multiLineString» «multiLineString»
 				«ENDFOR»
@@ -53,14 +54,14 @@ class TemplateNodeTest {
 	
 	def void assertEquals(StringConcatenationClient c) {
 		val ext = new GeneratorNodeExtensions()
-		val processor = new GeneratorNodeProcessor(new StringBuilder, "  ", "\n")
+		val processor = new GeneratorNodeProcessor()
 		
 		val root = new CompositeGeneratorNode()
 		ext.appendTemplate(root, c);
-		processor.process(root)
+		val result = processor.process(root)
 		
 		val expected = new StringConcatenation()
 		expected.append(c)
-		Assert.assertEquals(expected.toString, processor.contents.toString)
+		Assert.assertEquals(expected.toString, result.toString)
 	}
 }

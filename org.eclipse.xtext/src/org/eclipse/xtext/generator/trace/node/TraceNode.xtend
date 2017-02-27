@@ -7,14 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace.node
 
-import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.generator.trace.ILocationData
 
 /**
  * @author Sven Efftinge - initial contribution and API
  */
-@Data class TraceNode extends CompositeGeneratorNode {
+@FinalFieldsConstructor class TraceNode extends CompositeGeneratorNode {
 	
-	final ILocationData sourceLocation
+	@Accessors final ILocationData sourceLocation
 	
 }

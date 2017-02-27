@@ -53,7 +53,7 @@ public class TracingSugarTest {
      */
     public IGeneratorNode _type(final Property it, final Function1<? super Type, ? extends String> provider) {
       final ILocationData location = this.location(it, it.eClass().getEStructuralFeature("type"), 0);
-      final CompositeGeneratorNode result = this.startTrace(location);
+      final CompositeGeneratorNode result = this.trace(location);
       this.append(result, provider.apply(IterableExtensions.<Type>head(it.getType())));
       return result;
     }
@@ -61,7 +61,7 @@ public class TracingSugarTest {
     public IGeneratorNode _name(final Property target) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
-      CompositeGeneratorNode trace = this.startTrace(location);
+      CompositeGeneratorNode trace = this.trace(location);
       this.append(trace, target.getName());
       return trace;
     }
@@ -69,7 +69,7 @@ public class TracingSugarTest {
     public IGeneratorNode _extends(final Type target, final Function<Type, String> stringProvider) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("extends");
       ILocationData location = this.location(target, feature, -1);
-      CompositeGeneratorNode trace = this.startTrace(location);
+      CompositeGeneratorNode trace = this.trace(location);
       this.append(trace, stringProvider.apply(target.getExtends()));
       return trace;
     }
@@ -77,7 +77,7 @@ public class TracingSugarTest {
     public IGeneratorNode _name(final Type target) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
-      CompositeGeneratorNode trace = this.startTrace(location);
+      CompositeGeneratorNode trace = this.trace(location);
       this.append(trace, target.getName());
       return trace;
     }
@@ -85,7 +85,7 @@ public class TracingSugarTest {
     public IGeneratorNode _parentId(final Type target, final Function<Property, String> stringProvider) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("parentId");
       ILocationData location = this.location(target, feature, -1);
-      CompositeGeneratorNode trace = this.startTrace(location);
+      CompositeGeneratorNode trace = this.trace(location);
       this.append(trace, stringProvider.apply(target.getParentId()));
       return trace;
     }
@@ -93,7 +93,7 @@ public class TracingSugarTest {
     public IGeneratorNode _name(final UnresolvedProxyProperty target) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
-      CompositeGeneratorNode trace = this.startTrace(location);
+      CompositeGeneratorNode trace = this.trace(location);
       this.append(trace, target.getName());
       return trace;
     }
@@ -203,7 +203,7 @@ public class TracingSugarTest {
       _builder_2.append("}");
       _builder_2.newLine();
       _builder_2.append("    ");
-      _builder_2.append("CompletableTraceRegion [myOffset=30, myLength=23] associations={");
+      _builder_2.append("CompletableTraceRegion [myOffset=30, myLength=24] associations={");
       _builder_2.newLine();
       _builder_2.append("      ");
       _builder_2.append("LocationData [TextRegionWithLineInformation [27:12][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]");
@@ -245,7 +245,7 @@ public class TracingSugarTest {
   @Traced
   public IGeneratorNode _generateType(final Type it) {
     ILocationData _location = this._myExtensions.location(it);
-    CompositeGeneratorNode _traceNode = this._myExtensions.startTrace(_location);
+    CompositeGeneratorNode _traceNode = this._myExtensions.trace(_location);
     this._myExtensions.appendTemplate(_traceNode, __generateType(it));
     return _traceNode;
   }
@@ -253,7 +253,7 @@ public class TracingSugarTest {
   @Traced
   public IGeneratorNode _generateProperty(final Property it) {
     ILocationData _location = this._myExtensions.location(it);
-    CompositeGeneratorNode _traceNode = this._myExtensions.startTrace(_location);
+    CompositeGeneratorNode _traceNode = this._myExtensions.trace(_location);
     this._myExtensions.appendTemplate(_traceNode, __generateProperty(it));
     return _traceNode;
   }

@@ -50,17 +50,24 @@ public class TemplateNodeTest {
   }
   
   @Test
-  public void testString() {
+  public void testWeirdTemplateString() {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("fooo bar");
         _builder.newLine();
+        _builder.append("d   ");
         {
           if ((2 > 1)) {
+            _builder.append("s");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t  ");
+            _builder.append("ee  ");
             {
               IntegerRange _upTo = new IntegerRange(1, 4);
               for(final Integer i : _upTo) {
+                _builder.newLineIfNotEmpty();
+                _builder.newLineIfNotEmpty();
                 CharSequence _other = TemplateNodeTest.this.other();
                 _builder.append(_other);
                 _builder.append(" ");
@@ -105,13 +112,12 @@ public class TemplateNodeTest {
   
   public void assertEquals(final StringConcatenationClient c) {
     final GeneratorNodeExtensions ext = new GeneratorNodeExtensions();
-    StringBuilder _stringBuilder = new StringBuilder();
-    final GeneratorNodeProcessor processor = new GeneratorNodeProcessor(_stringBuilder, "  ", "\n");
+    final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();
     final CompositeGeneratorNode root = new CompositeGeneratorNode();
     ext.appendTemplate(root, c);
-    processor.process(root);
+    final GeneratorNodeProcessor.Result result = processor.process(root);
     final StringConcatenation expected = new StringConcatenation();
     expected.append(c);
-    Assert.assertEquals(expected.toString(), processor.getContents().toString());
+    Assert.assertEquals(expected.toString(), result.toString());
   }
 }

@@ -37,7 +37,7 @@ class TracingSugarTest {
 		 */
 		def IGeneratorNode _type(Property it, (Type)=>String provider) {
 			val location = location(eClass.getEStructuralFeature("type"), 0)
-			val result = location.startTrace
+			val result = location.trace
 			result.append(provider.apply(type.head))
 			return result
 		}
@@ -93,7 +93,7 @@ class TracingSugarTest {
 			    CompletableTraceRegion [myOffset=23, myLength=3] associations={
 			      LocationData [TextRegionWithLineInformation [20:3][lineNumber=1, endLineNumber=1]][path=__synthetic0.lazylinkingtestlanguage]
 			    }
-			    CompletableTraceRegion [myOffset=30, myLength=23] associations={
+			    CompletableTraceRegion [myOffset=30, myLength=24] associations={
 			      LocationData [TextRegionWithLineInformation [27:12][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]
 			    } nestedRegions={
 			      CompletableTraceRegion [myOffset=39, myLength=4] associations={

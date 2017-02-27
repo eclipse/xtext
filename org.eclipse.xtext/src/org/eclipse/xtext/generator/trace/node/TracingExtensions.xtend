@@ -48,7 +48,7 @@ class TracingExtensionsProcessor extends AbstractClassProcessor {
 							body = '''
 								«EStructuralFeature» feature = target.eClass().getEStructuralFeature("«getter.featureName»");
 								«ILocationData» location = this.location(target, feature, -1);
-								«CompositeGeneratorNode» trace = this.startTrace(location);
+								«CompositeGeneratorNode» trace = this.trace(location);
 								this.append(trace, target.«getter.declaration.simpleName»());
 								return trace;
 							'''
@@ -62,7 +62,7 @@ class TracingExtensionsProcessor extends AbstractClassProcessor {
 							body = '''
 								«EStructuralFeature» feature = target.eClass().getEStructuralFeature("«getter.featureName»");
 								«ILocationData» location = this.location(target, feature, -1);
-								«CompositeGeneratorNode» trace = this.startTrace(location);
+								«CompositeGeneratorNode» trace = this.trace(location);
 								this.append(trace, stringProvider.apply(target.«getter.declaration.simpleName»()));
 								return trace;
 							'''

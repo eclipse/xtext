@@ -95,7 +95,7 @@ public class TracedProcessor extends AbstractMethodProcessor {
         _builder.append(" _traceNode = this.");
         String _simpleName_2 = field.getSimpleName();
         _builder.append(_simpleName_2);
-        _builder.append(".startTrace(_location);");
+        _builder.append(".trace(_location);");
         _builder.newLineIfNotEmpty();
         _builder.append("this.");
         String _simpleName_3 = field.getSimpleName();

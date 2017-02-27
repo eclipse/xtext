@@ -30,12 +30,11 @@ public class GeneratorNodeTest {
   @Test
   public void testBasicCreationAndProcessing() {
     final LocationData root = this.loc(0);
-    CompositeGeneratorNode node = this.exts.appendNewLine(this.exts.append(this.exts.startTrace(root), "notindented"));
+    CompositeGeneratorNode node = this.exts.appendNewLine(this.exts.append(this.exts.trace(root), "notindented"));
     this.exts.append(this.exts.appendNewLine(this.exts.append(this.exts.trace(this.exts.indent(node), this.loc(1)), "indented1")), "indented2");
     this.exts.append(this.exts.appendNewLine(node), "dedented");
-    StringBuilder _stringBuilder = new StringBuilder();
-    final GeneratorNodeProcessor processor = new GeneratorNodeProcessor(_stringBuilder, "  ", "\n");
-    processor.process(node);
+    final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();
+    final GeneratorNodeProcessor.Result result = processor.process(node);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("notindented");
     _builder.newLine();
@@ -46,7 +45,7 @@ public class GeneratorNodeTest {
     _builder.append("indented2");
     _builder.newLine();
     _builder.append("dedented");
-    Assert.assertEquals(_builder.toString(), processor.getContents().toString());
+    Assert.assertEquals(_builder.toString(), result.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("CompletableTraceRegion [myOffset=0, myLength=44] associations={");
     _builder_1.newLine();
@@ -65,13 +64,13 @@ public class GeneratorNodeTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("}");
-    Assert.assertEquals(_builder_1.toString(), processor.getCurrentRegion().toString());
+    Assert.assertEquals(_builder_1.toString(), result.getTraceRegion().toString());
   }
   
   @Test
   public void testTemplateProcessing() {
     final LocationData root = this.loc(0);
-    CompositeGeneratorNode _startTrace = this.exts.startTrace(root);
+    CompositeGeneratorNode _trace = this.exts.trace(root);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -80,103 +79,56 @@ public class GeneratorNodeTest {
         _builder.newLineIfNotEmpty();
       }
     };
-    CompositeGeneratorNode node = this.exts.appendTemplate(_startTrace, _client);
-    StringBuilder _stringBuilder = new StringBuilder();
-    final GeneratorNodeProcessor processor = new GeneratorNodeProcessor(_stringBuilder, "  ", "\n");
-    processor.process(node);
+    CompositeGeneratorNode node = this.exts.appendTemplate(_trace, _client);
+    final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();
+    final GeneratorNodeProcessor.Result result = processor.process(node);
+    Assert.assertEquals(this.someCodeGen_noTrace(2).toString(), result.toString());
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("before Hello after");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("before Hello after");
-    _builder.newLine();
-    _builder.append("      ");
+    _builder.append("CompletableTraceRegion [myOffset=0, myLength=80] associations={");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("before Hello after");
+    _builder.append("LocationData [TextRegionWithLineInformation [0:100][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
     _builder.newLine();
-    _builder.append("    ");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("before Hello after");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("before Hello after");
-    _builder.newLine();
-    _builder.append("      ");
+    _builder.append("} nestedRegions={");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("before Hello after");
+    _builder.append("CompletableTraceRegion [myOffset=7, myLength=5] associations={");
     _builder.newLine();
     _builder.append("    ");
+    _builder.append("LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("CompletableTraceRegion [myOffset=28, myLength=5] associations={");
     _builder.newLine();
-    Assert.assertEquals(_builder.toString(), processor.getContents().toString());
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("CompletableTraceRegion [myOffset=0, myLength=153] associations={");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("LocationData [TextRegionWithLineInformation [0:100][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
-    _builder_1.newLine();
-    _builder_1.append("} nestedRegions={");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("CompletableTraceRegion [myOffset=7, myLength=5] associations={");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("CompletableTraceRegion [myOffset=30, myLength=5] associations={");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("CompletableTraceRegion [myOffset=58, myLength=5] associations={");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("CompletableTraceRegion [myOffset=83, myLength=5] associations={");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("LocationData [TextRegionWithLineInformation [11:89][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("CompletableTraceRegion [myOffset=106, myLength=5] associations={");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("CompletableTraceRegion [myOffset=134, myLength=5] associations={");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    Assert.assertEquals(_builder_1.toString(), processor.getCurrentRegion().toString());
+    _builder.append("    ");
+    _builder.append("LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("CompletableTraceRegion [myOffset=47, myLength=5] associations={");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("LocationData [TextRegionWithLineInformation [11:89][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("CompletableTraceRegion [myOffset=68, myLength=5] associations={");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    Assert.assertEquals(_builder.toString(), result.getTraceRegion().toString());
   }
   
   public StringConcatenationClient someCodeGen(final int n) {
@@ -187,7 +139,7 @@ public class GeneratorNodeTest {
           ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, n, true);
           for(final Integer i : _doubleDotLessThan) {
             _builder.append("before ");
-            CompositeGeneratorNode _append = GeneratorNodeTest.this.exts.append(GeneratorNodeTest.this.exts.startTrace(GeneratorNodeTest.this.loc((10 + (i).intValue()))), "Hello");
+            CompositeGeneratorNode _append = GeneratorNodeTest.this.exts.append(GeneratorNodeTest.this.exts.trace(GeneratorNodeTest.this.loc((10 + (i).intValue()))), "Hello");
             _builder.append(_append);
             _builder.append(" after");
             _builder.newLineIfNotEmpty();
@@ -200,6 +152,24 @@ public class GeneratorNodeTest {
       }
     };
     return _client;
+  }
+  
+  public String someCodeGen_noTrace(final int n) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, n, true);
+      for(final Integer i : _doubleDotLessThan) {
+        _builder.append("before ");
+        _builder.append("Hello");
+        _builder.append(" after");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        String _someCodeGen_noTrace = this.someCodeGen_noTrace((n - 1));
+        _builder.append(_someCodeGen_noTrace, "  ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder.toString();
   }
   
   public LocationData loc(final int idx) {

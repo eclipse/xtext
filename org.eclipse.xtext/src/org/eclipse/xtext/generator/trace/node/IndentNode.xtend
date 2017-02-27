@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace.node
 
-import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Data class IndentNode extends CompositeGeneratorNode {
+@FinalFieldsConstructor class IndentNode extends CompositeGeneratorNode {
 	
+	@Accessors val String indentationString
 }

@@ -17,4 +17,12 @@ import org.eclipse.xtend.lib.annotations.Accessors
 	
 	val List<IGeneratorNode> children = newArrayList
 	
+	override toString() '''
+		«class.simpleName» {
+			«FOR c: children»
+				«c.toString»
+			«ENDFOR»
+		}
+	'''
+	
 }

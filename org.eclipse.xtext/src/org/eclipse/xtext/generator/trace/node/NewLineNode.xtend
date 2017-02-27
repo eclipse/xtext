@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace.node
 
+import org.eclipse.xtend.lib.annotations.Data
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class NewLineNode implements IGeneratorNode {
-	
+@Data class NewLineNode implements IGeneratorNode {
+	String lineDelimiter
+	boolean ifNotEmpty
 }
