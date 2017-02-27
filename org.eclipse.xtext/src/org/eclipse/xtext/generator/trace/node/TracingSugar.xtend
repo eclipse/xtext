@@ -21,7 +21,8 @@ class TracingSugar extends GeneratorNodeExtensions {
 	
 	@Inject protected ILocationInFileProvider locationProvider
 	@Inject protected ITraceURIConverter traceURIConverter
-	@Inject protected WhiteSpaceConfig whiteSpaceConfig
+	@Inject protected GeneratorWhiteSpaceConfig whiteSpaceConfig
+	@Inject protected GeneratorNodeProcessor processor
 	
 	/**
 	 * Convenience extension, to generate traced code.
@@ -35,8 +36,7 @@ class TracingSugar extends GeneratorNodeExtensions {
 	 * Use to generate a file based on generator node.
 	 */
 	def void generateTracedFile(IFileSystemAccess2 fsa, String path, CompositeGeneratorNode rootNode) {
-		val proc = new GeneratorNodeProcessor()
-		val result = proc.process(rootNode);
+		val result = processor.process(rootNode);
 		fsa.generateFile(path, result)
 	}
 	

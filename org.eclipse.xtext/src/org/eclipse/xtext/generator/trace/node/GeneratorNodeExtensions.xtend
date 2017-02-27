@@ -18,7 +18,7 @@ import org.eclipse.xtext.generator.trace.ILocationData
  */
 class GeneratorNodeExtensions {
 	
-	@Inject WhiteSpaceConfig wsConfig = new WhiteSpaceConfig
+	@Inject GeneratorWhiteSpaceConfig wsConfig = new GeneratorWhiteSpaceConfig
 	
 	/**
 	 * @return a root trace node for the given location

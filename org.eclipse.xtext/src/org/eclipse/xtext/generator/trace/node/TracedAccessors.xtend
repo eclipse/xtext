@@ -9,7 +9,6 @@ package org.eclipse.xtext.generator.trace.node
 
 import java.util.function.Function
 import org.eclipse.emf.ecore.EFactory
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
@@ -22,26 +21,26 @@ import org.eclipse.xtext.generator.trace.ILocationData
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Active(TracingExtensionsProcessor)
-annotation TracingExtensions {
+@Active(TracedAccessorsProcessor)
+annotation TracedAccessors {
 	Class<? extends EFactory>[] value
 }
 
-class TracingExtensionsProcessor extends AbstractClassProcessor {
+class TracedAccessorsProcessor extends AbstractClassProcessor {
 	
 	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
-		val eobjectType = EObject.newTypeReference()
 		annotatedClass.extendedClass = TracingSugar.newTypeReference()
-		val annotationType = findTypeGlobally(TracingExtensions)
-		val factories = annotatedClass.findAnnotation(annotationType)?.getClassArrayValue("value")
+		val iterableType = Iterable.newTypeReference(newWildcardTypeReference)
+		val annotationType = TracedAccessors.newTypeReference
+		val factories = annotatedClass.findAnnotation(annotationType.type)?.getClassArrayValue("value")
 		if (factories === null) {
 			return;
 		}
 		for (f : factories.map[type].filter(InterfaceDeclaration)) {
 			for (t: f.declaredMethods.filter[simpleName.startsWith('create') && parameters.empty].map[returnType]) {
-				for (getter : t.allResolvedMethods.filter[ isGetter]) {
+				for (getter : t.allResolvedMethods.filter[ isSupportedGetter].filter[!iterableType.isAssignableFrom(declaration.returnType)]) {
 					val rt = getter.resolvedReturnType
-					if (allowedLowerCaseTypeNames.contains(rt.type.simpleName.toLowerCase)) {
+					if (TYPES_WITH_GOOD_TO_STRING.contains(rt.type.simpleName.toLowerCase)) {
 						annotatedClass.addMethod(getter.tracerName) [
 							returnType = IGeneratorNode.newTypeReference()
 							addParameter('target', t)
@@ -53,21 +52,20 @@ class TracingExtensionsProcessor extends AbstractClassProcessor {
 								return trace;
 							'''
 						]
-					} else if (eobjectType.isAssignableFrom(rt)) {
-						annotatedClass.addMethod(getter.tracerName) [
-							returnType = IGeneratorNode.newTypeReference
-							addParameter('target', t)
-							val stringProvider = Function.newTypeReference(rt, string)
-							addParameter('stringProvider', stringProvider)
-							body = '''
-								«EStructuralFeature» feature = target.eClass().getEStructuralFeature("«getter.featureName»");
-								«ILocationData» location = this.location(target, feature, -1);
-								«CompositeGeneratorNode» trace = this.trace(location);
-								this.append(trace, stringProvider.apply(target.«getter.declaration.simpleName»()));
-								return trace;
-							'''
-						]
-					}
+					} 
+					annotatedClass.addMethod(getter.tracerName) [
+						returnType = IGeneratorNode.newTypeReference
+						addParameter('target', t)
+						val stringProvider = Function.newTypeReference(rt, string)
+						addParameter('stringProvider', stringProvider)
+						body = '''
+							«EStructuralFeature» feature = target.eClass().getEStructuralFeature("«getter.featureName»");
+							«ILocationData» location = this.location(target, feature, -1);
+							«CompositeGeneratorNode» trace = this.trace(location);
+							this.append(trace, stringProvider.apply(target.«getter.declaration.simpleName»()));
+							return trace;
+						'''
+					]
 				}
 			}
 		}
@@ -83,9 +81,9 @@ class TracingExtensionsProcessor extends AbstractClassProcessor {
 		m.declaration.simpleName.substring(skip).toFirstLower
 	}
 	
-	static val allowedLowerCaseTypeNames = #{'string','boolean','int','long','integer'}
+	static val TYPES_WITH_GOOD_TO_STRING = #{'string','boolean','int','long','integer'}
 	
-	def boolean isGetter(ResolvedMethod it) {
+	def boolean isSupportedGetter(ResolvedMethod it) {
 		if (!declaration.parameters.empty)
 			return false
 		if (declaration.static)

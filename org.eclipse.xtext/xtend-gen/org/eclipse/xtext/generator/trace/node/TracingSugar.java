@@ -12,7 +12,7 @@ import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeExtensions;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeProcessor;
-import org.eclipse.xtext.generator.trace.node.WhiteSpaceConfig;
+import org.eclipse.xtext.generator.trace.node.GeneratorWhiteSpaceConfig;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
@@ -32,7 +32,10 @@ public class TracingSugar extends GeneratorNodeExtensions {
   protected ITraceURIConverter traceURIConverter;
   
   @Inject
-  protected WhiteSpaceConfig whiteSpaceConfig;
+  protected GeneratorWhiteSpaceConfig whiteSpaceConfig;
+  
+  @Inject
+  protected GeneratorNodeProcessor processor;
   
   /**
    * Convenience extension, to generate traced code.
@@ -46,8 +49,7 @@ public class TracingSugar extends GeneratorNodeExtensions {
    * Use to generate a file based on generator node.
    */
   public void generateTracedFile(final IFileSystemAccess2 fsa, final String path, final CompositeGeneratorNode rootNode) {
-    final GeneratorNodeProcessor proc = new GeneratorNodeProcessor();
-    final GeneratorNodeProcessor.Result result = proc.process(rootNode);
+    final GeneratorNodeProcessor.Result result = this.processor.process(rootNode);
     fsa.generateFile(path, result);
   }
   

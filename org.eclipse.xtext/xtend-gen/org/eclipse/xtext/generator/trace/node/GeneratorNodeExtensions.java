@@ -12,13 +12,13 @@ import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
+import org.eclipse.xtext.generator.trace.node.GeneratorWhiteSpaceConfig;
 import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.IndentNode;
 import org.eclipse.xtext.generator.trace.node.NewLineNode;
 import org.eclipse.xtext.generator.trace.node.TemplateNode;
 import org.eclipse.xtext.generator.trace.node.TextNode;
 import org.eclipse.xtext.generator.trace.node.TraceNode;
-import org.eclipse.xtext.generator.trace.node.WhiteSpaceConfig;
 
 /**
  * A builder API to create generator node trees
@@ -28,7 +28,7 @@ import org.eclipse.xtext.generator.trace.node.WhiteSpaceConfig;
 @SuppressWarnings("all")
 public class GeneratorNodeExtensions {
   @Inject
-  private WhiteSpaceConfig wsConfig = new WhiteSpaceConfig();
+  private GeneratorWhiteSpaceConfig wsConfig = new GeneratorWhiteSpaceConfig();
   
   /**
    * @return a root trace node for the given location

@@ -29,7 +29,7 @@ import org.eclipse.xtext.generator.trace.ITraceRegionProvider
 @InjectWith(LazyLinkingTestLanguageInjectorProvider)
 class TracingSugarTest {
 	
-	@TracingExtensions(LazyLinkingFactory)
+	@TracedAccessors(LazyLinkingFactory)
 	static class MyExtensions {
 		
 		/**

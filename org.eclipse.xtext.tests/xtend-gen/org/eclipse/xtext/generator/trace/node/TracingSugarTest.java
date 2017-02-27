@@ -20,7 +20,7 @@ import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.Traced;
-import org.eclipse.xtext.generator.trace.node.TracingExtensions;
+import org.eclipse.xtext.generator.trace.node.TracedAccessors;
 import org.eclipse.xtext.generator.trace.node.TracingSugar;
 import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingFactory;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
@@ -46,7 +46,7 @@ import org.junit.runner.RunWith;
 @InjectWith(LazyLinkingTestLanguageInjectorProvider.class)
 @SuppressWarnings("all")
 public class TracingSugarTest {
-  @TracingExtensions(LazyLinkingFactory.class)
+  @TracedAccessors(LazyLinkingFactory.class)
   public static class MyExtensions extends TracingSugar {
     /**
      * manual implementation for unsupported multi cross reference
@@ -58,11 +58,35 @@ public class TracingSugarTest {
       return result;
     }
     
+    public IGeneratorNode _class(final Model target, final Function<Class<?>, String> stringProvider) {
+      EStructuralFeature feature = target.eClass().getEStructuralFeature("class");
+      ILocationData location = this.location(target, feature, -1);
+      CompositeGeneratorNode trace = this.trace(location);
+      this.append(trace, stringProvider.apply(target.getClass()));
+      return trace;
+    }
+    
     public IGeneratorNode _name(final Property target) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
       CompositeGeneratorNode trace = this.trace(location);
       this.append(trace, target.getName());
+      return trace;
+    }
+    
+    public IGeneratorNode _name(final Property target, final Function<String, String> stringProvider) {
+      EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
+      ILocationData location = this.location(target, feature, -1);
+      CompositeGeneratorNode trace = this.trace(location);
+      this.append(trace, stringProvider.apply(target.getName()));
+      return trace;
+    }
+    
+    public IGeneratorNode _class(final Property target, final Function<Class<?>, String> stringProvider) {
+      EStructuralFeature feature = target.eClass().getEStructuralFeature("class");
+      ILocationData location = this.location(target, feature, -1);
+      CompositeGeneratorNode trace = this.trace(location);
+      this.append(trace, stringProvider.apply(target.getClass()));
       return trace;
     }
     
@@ -82,6 +106,14 @@ public class TracingSugarTest {
       return trace;
     }
     
+    public IGeneratorNode _name(final Type target, final Function<String, String> stringProvider) {
+      EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
+      ILocationData location = this.location(target, feature, -1);
+      CompositeGeneratorNode trace = this.trace(location);
+      this.append(trace, stringProvider.apply(target.getName()));
+      return trace;
+    }
+    
     public IGeneratorNode _parentId(final Type target, final Function<Property, String> stringProvider) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("parentId");
       ILocationData location = this.location(target, feature, -1);
@@ -90,11 +122,35 @@ public class TracingSugarTest {
       return trace;
     }
     
+    public IGeneratorNode _class(final Type target, final Function<Class<?>, String> stringProvider) {
+      EStructuralFeature feature = target.eClass().getEStructuralFeature("class");
+      ILocationData location = this.location(target, feature, -1);
+      CompositeGeneratorNode trace = this.trace(location);
+      this.append(trace, stringProvider.apply(target.getClass()));
+      return trace;
+    }
+    
     public IGeneratorNode _name(final UnresolvedProxyProperty target) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
       CompositeGeneratorNode trace = this.trace(location);
       this.append(trace, target.getName());
+      return trace;
+    }
+    
+    public IGeneratorNode _name(final UnresolvedProxyProperty target, final Function<String, String> stringProvider) {
+      EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
+      ILocationData location = this.location(target, feature, -1);
+      CompositeGeneratorNode trace = this.trace(location);
+      this.append(trace, stringProvider.apply(target.getName()));
+      return trace;
+    }
+    
+    public IGeneratorNode _class(final UnresolvedProxyProperty target, final Function<Class<?>, String> stringProvider) {
+      EStructuralFeature feature = target.eClass().getEStructuralFeature("class");
+      ILocationData location = this.location(target, feature, -1);
+      CompositeGeneratorNode trace = this.trace(location);
+      this.append(trace, stringProvider.apply(target.getClass()));
       return trace;
     }
   }

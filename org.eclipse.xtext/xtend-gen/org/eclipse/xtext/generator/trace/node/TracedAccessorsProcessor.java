@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -28,7 +27,7 @@ import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
-import org.eclipse.xtext.generator.trace.node.TracingExtensions;
+import org.eclipse.xtext.generator.trace.node.TracedAccessors;
 import org.eclipse.xtext.generator.trace.node.TracingSugar;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -40,13 +39,13 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
-public class TracingExtensionsProcessor extends AbstractClassProcessor {
+public class TracedAccessorsProcessor extends AbstractClassProcessor {
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
-    final TypeReference eobjectType = context.newTypeReference(EObject.class);
     annotatedClass.setExtendedClass(context.newTypeReference(TracingSugar.class));
-    final Type annotationType = context.findTypeGlobally(TracingExtensions.class);
-    AnnotationReference _findAnnotation = annotatedClass.findAnnotation(annotationType);
+    final TypeReference iterableType = context.newTypeReference(Iterable.class, context.newWildcardTypeReference());
+    final TypeReference annotationType = context.newTypeReference(TracedAccessors.class);
+    AnnotationReference _findAnnotation = annotatedClass.findAnnotation(annotationType.getType());
     TypeReference[] _classArrayValue = null;
     if (_findAnnotation!=null) {
       _classArrayValue=_findAnnotation.getClassArrayValue("value");
@@ -69,15 +68,19 @@ public class TracingExtensionsProcessor extends AbstractClassProcessor {
       Iterable<TypeReference> _map = IterableExtensions.map(IterableExtensions.filter(f.getDeclaredMethods(), _function_1), _function_2);
       for (final TypeReference t : _map) {
         final Function1<ResolvedMethod, Boolean> _function_3 = (ResolvedMethod it) -> {
-          return Boolean.valueOf(this.isGetter(it));
+          return Boolean.valueOf(this.isSupportedGetter(it));
         };
-        Iterable<? extends ResolvedMethod> _filter_1 = IterableExtensions.filter(t.getAllResolvedMethods(), _function_3);
+        final Function1<ResolvedMethod, Boolean> _function_4 = (ResolvedMethod it) -> {
+          boolean _isAssignableFrom = iterableType.isAssignableFrom(it.getDeclaration().getReturnType());
+          return Boolean.valueOf((!_isAssignableFrom));
+        };
+        Iterable<? extends ResolvedMethod> _filter_1 = IterableExtensions.filter(IterableExtensions.filter(t.getAllResolvedMethods(), _function_3), _function_4);
         for (final ResolvedMethod getter : _filter_1) {
           {
             final TypeReference rt = getter.getResolvedReturnType();
-            boolean _contains = TracingExtensionsProcessor.allowedLowerCaseTypeNames.contains(rt.getType().getSimpleName().toLowerCase());
+            boolean _contains = TracedAccessorsProcessor.TYPES_WITH_GOOD_TO_STRING.contains(rt.getType().getSimpleName().toLowerCase());
             if (_contains) {
-              final Procedure1<MutableMethodDeclaration> _function_4 = (MutableMethodDeclaration it) -> {
+              final Procedure1<MutableMethodDeclaration> _function_5 = (MutableMethodDeclaration it) -> {
                 it.setReturnType(context.newTypeReference(IGeneratorNode.class));
                 it.addParameter("target", t);
                 StringConcatenationClient _client = new StringConcatenationClient() {
@@ -85,7 +88,7 @@ public class TracingExtensionsProcessor extends AbstractClassProcessor {
                   protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
                     _builder.append(EStructuralFeature.class);
                     _builder.append(" feature = target.eClass().getEStructuralFeature(\"");
-                    String _featureName = TracingExtensionsProcessor.this.featureName(getter);
+                    String _featureName = TracedAccessorsProcessor.this.featureName(getter);
                     _builder.append(_featureName);
                     _builder.append("\");");
                     _builder.newLineIfNotEmpty();
@@ -106,44 +109,40 @@ public class TracingExtensionsProcessor extends AbstractClassProcessor {
                 };
                 it.setBody(_client);
               };
-              annotatedClass.addMethod(this.tracerName(getter), _function_4);
-            } else {
-              boolean _isAssignableFrom = eobjectType.isAssignableFrom(rt);
-              if (_isAssignableFrom) {
-                final Procedure1<MutableMethodDeclaration> _function_5 = (MutableMethodDeclaration it) -> {
-                  it.setReturnType(context.newTypeReference(IGeneratorNode.class));
-                  it.addParameter("target", t);
-                  final TypeReference stringProvider = context.newTypeReference(Function.class, rt, context.getString());
-                  it.addParameter("stringProvider", stringProvider);
-                  StringConcatenationClient _client = new StringConcatenationClient() {
-                    @Override
-                    protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-                      _builder.append(EStructuralFeature.class);
-                      _builder.append(" feature = target.eClass().getEStructuralFeature(\"");
-                      String _featureName = TracingExtensionsProcessor.this.featureName(getter);
-                      _builder.append(_featureName);
-                      _builder.append("\");");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append(ILocationData.class);
-                      _builder.append(" location = this.location(target, feature, -1);");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append(CompositeGeneratorNode.class);
-                      _builder.append(" trace = this.trace(location);");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("this.append(trace, stringProvider.apply(target.");
-                      String _simpleName = getter.getDeclaration().getSimpleName();
-                      _builder.append(_simpleName);
-                      _builder.append("()));");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("return trace;");
-                      _builder.newLine();
-                    }
-                  };
-                  it.setBody(_client);
-                };
-                annotatedClass.addMethod(this.tracerName(getter), _function_5);
-              }
+              annotatedClass.addMethod(this.tracerName(getter), _function_5);
             }
+            final Procedure1<MutableMethodDeclaration> _function_6 = (MutableMethodDeclaration it) -> {
+              it.setReturnType(context.newTypeReference(IGeneratorNode.class));
+              it.addParameter("target", t);
+              final TypeReference stringProvider = context.newTypeReference(Function.class, rt, context.getString());
+              it.addParameter("stringProvider", stringProvider);
+              StringConcatenationClient _client = new StringConcatenationClient() {
+                @Override
+                protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                  _builder.append(EStructuralFeature.class);
+                  _builder.append(" feature = target.eClass().getEStructuralFeature(\"");
+                  String _featureName = TracedAccessorsProcessor.this.featureName(getter);
+                  _builder.append(_featureName);
+                  _builder.append("\");");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append(ILocationData.class);
+                  _builder.append(" location = this.location(target, feature, -1);");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append(CompositeGeneratorNode.class);
+                  _builder.append(" trace = this.trace(location);");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("this.append(trace, stringProvider.apply(target.");
+                  String _simpleName = getter.getDeclaration().getSimpleName();
+                  _builder.append(_simpleName);
+                  _builder.append("()));");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("return trace;");
+                  _builder.newLine();
+                }
+              };
+              it.setBody(_client);
+            };
+            annotatedClass.addMethod(this.tracerName(getter), _function_6);
           }
         }
       }
@@ -172,9 +171,9 @@ public class TracingExtensionsProcessor extends AbstractClassProcessor {
     return _xblockexpression;
   }
   
-  private final static Set<String> allowedLowerCaseTypeNames = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("string", "boolean", "int", "long", "integer"));
+  private final static Set<String> TYPES_WITH_GOOD_TO_STRING = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("string", "boolean", "int", "long", "integer"));
   
-  public boolean isGetter(final ResolvedMethod it) {
+  public boolean isSupportedGetter(final ResolvedMethod it) {
     boolean _isEmpty = IterableExtensions.isEmpty(it.getDeclaration().getParameters());
     boolean _not = (!_isEmpty);
     if (_not) {
