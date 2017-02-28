@@ -26,6 +26,10 @@ public interface IAllContainersState {
 
 	String getContainerHandle(URI uri);
 	
+	default boolean containsURI(String containerHandle, URI candidateURI) {
+		return getContainedURIs(containerHandle).contains(candidateURI);	
+	}
+
 	interface Provider {
 		IAllContainersState get(IResourceDescriptions context);
 	}
