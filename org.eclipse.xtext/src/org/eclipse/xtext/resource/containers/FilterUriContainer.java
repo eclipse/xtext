@@ -36,7 +36,12 @@ public class FilterUriContainer extends AbstractContainer {
 	
 	@Override
 	public boolean isEmpty() {
-		return getResourceDescriptionCount() == 0;
+		int delegateCount = delegate.getResourceDescriptionCount();
+		if (delegateCount == 0)
+			return true;
+		if (delegateCount > 1)
+			return false;
+		return delegate.hasResourceDescription(filterMe);
 	}
 	
 	@Override
