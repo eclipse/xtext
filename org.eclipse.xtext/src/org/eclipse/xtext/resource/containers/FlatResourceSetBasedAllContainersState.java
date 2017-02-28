@@ -1,6 +1,7 @@
 package org.eclipse.xtext.resource.containers;
 
 import static com.google.common.collect.Lists.*;
+import static org.eclipse.xtext.resource.impl.ResourceDescriptionsData.ResourceSetAdapter.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -43,18 +44,44 @@ public class FlatResourceSetBasedAllContainersState extends AdapterImpl implemen
 		if (!HANDLE.equals(containerHandle))
 			return Collections.emptySet();
 		if (resourceSet instanceof XtextResourceSet) {
-			XtextResourceSet xtextResourceSet = (XtextResourceSet) resourceSet;
-			ResourceDescriptionsData descriptionsData = ResourceDescriptionsData.ResourceSetAdapter.findResourceDescriptionsData(resourceSet);
+			ResourceDescriptionsData descriptionsData = findResourceDescriptionsData(resourceSet);
 			if (descriptionsData != null) {
 				return descriptionsData.getAllURIs();
 			}
-			return newArrayList(xtextResourceSet.getNormalizationMap().values());
+			return newArrayList(((XtextResourceSet) resourceSet).getNormalizationMap().values());
 		}
 		List<URI> uris = Lists.newArrayListWithCapacity(resourceSet.getResources().size());
 		URIConverter uriConverter = resourceSet.getURIConverter();
 		for (Resource r : resourceSet.getResources())
 			uris.add(uriConverter.normalize(r.getURI()));
 		return uris;
+	}
+	
+	@Override
+	public boolean containsURI(String containerHandle, URI candidateURI) {
+		if (!HANDLE.equals(containerHandle))
+			return false;
+		if (resourceSet instanceof XtextResourceSet) {
+			ResourceDescriptionsData descriptionsData = findResourceDescriptionsData(resourceSet);
+			if (descriptionsData != null) {
+				return descriptionsData.getResourceDescription(candidateURI) != null;
+			}
+			Collection<URI> allUris = ((XtextResourceSet) resourceSet).getNormalizationMap().values();
+			for (URI uri : allUris) {
+				if (uri.equals(candidateURI)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		URIConverter uriConverter = resourceSet.getURIConverter();
+		for (Resource r : resourceSet.getResources()) {
+			URI normalized = uriConverter.normalize(r.getURI());
+			if (normalized.equals(candidateURI)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
