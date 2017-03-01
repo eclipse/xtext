@@ -34,7 +34,6 @@ import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbenchPart;
@@ -107,7 +106,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			final IEditorInput editorInput = xtextEditor.getEditorInput();
 			final IResource breakpointResource = breakpointUtil.getBreakpointResource(editorInput);
 			final SourceRelativeURI breakpointUri = breakpointUtil.getBreakpointURI(editorInput);
-			final int offset = ((TextSelection) selection).getOffset();
+			final int offset = ((ITextSelection) selection).getOffset();
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
 			
 			Data data = xtextEditor.getDocument().readOnly(new IUnitOfWork<Data, XtextResource>() {

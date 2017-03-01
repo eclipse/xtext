@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.editor.bracketmatching;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.TextSelection;
+import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -37,8 +37,8 @@ public class GoToMatchingBracketAction extends Action implements IActionContribu
 	public void run() {
 		IXtextDocument document = editor.getDocument();
 		ISelection selection = editor.getSelectionProvider().getSelection();
-		if (selection instanceof TextSelection) {
-			TextSelection textSelection = (TextSelection) selection;
+		if (selection instanceof ITextSelection) {
+			ITextSelection textSelection = (ITextSelection) selection;
 			if (textSelection.getLength()==0) {
 				IRegion region = matcher.match(document, textSelection.getOffset());
 				if (region != null) {
