@@ -80,12 +80,14 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 		if(workspace != null) {
 			IWorkspaceRoot root = workspace.getRoot();
 			if(root != null) {
-				IFile file = root.getFile(new Path(uri.toPlatformString(true)));
-				if(!file.isSynchronized(IResource.DEPTH_ZERO)) {
-					// don't bother trying to refresh it, this loading-thread doesn't own the project resource lock
-					// we will recover & load the resource in the main builder thread (that owns the project resource lock)
-					// (if we do try to load resources that are out of sync, we create a deadlock)
-					return null;
+				if (uri.isPlatformResource()) {
+					IFile file = root.getFile(new Path(uri.toPlatformString(true)));
+					if(!file.isSynchronized(IResource.DEPTH_ZERO)) {
+						// don't bother trying to refresh it, this loading-thread doesn't own the project resource lock
+						// we will recover & load the resource in the main builder thread (that owns the project resource lock)
+						// (if we do try to load resources that are out of sync, we create a deadlock)
+						return null;
+					}
 				}
 			}
 		}
@@ -211,12 +213,14 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 		private void synchronizeResources(Collection<URI> toLoad) {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			for(URI uri : toLoad) {
-				Path path = new Path(uri.toPlatformString(true));
-				IFile file = root.getFile(path);
-				try {
-					file.refreshLocal(IResource.DEPTH_ZERO, new NullProgressMonitor());
-				} catch (CoreException e) {
-					throw new RuntimeException(e);
+				if (uri.isPlatformResource()) {
+					Path path = new Path(uri.toPlatformString(true));
+					IFile file = root.getFile(path);
+					try {
+						file.refreshLocal(IResource.DEPTH_ZERO, new NullProgressMonitor());
+					} catch (CoreException e) {
+						throw new RuntimeException(e);
+					}
 				}
 			}
 		}
