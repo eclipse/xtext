@@ -19,6 +19,8 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.bindings.keys.IKeyLookup;
 import org.eclipse.jface.bindings.keys.KeyLookupFactory;
 import org.eclipse.jface.bindings.keys.KeyStroke;
+import org.eclipse.jface.resource.ColorRegistry;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.ITextViewerExtension5;
 import org.eclipse.jface.text.IViewportListener;
 import org.eclipse.jface.text.IWidgetTokenKeeper;
@@ -220,8 +222,15 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 
 	protected void createContent(Composite parent) {
 		Display display = parent.getDisplay();
-		Color foreground = display.getSystemColor(SWT.COLOR_INFO_FOREGROUND);
-		Color background = display.getSystemColor(SWT.COLOR_INFO_BACKGROUND);
+		ColorRegistry registry = JFaceResources.getColorRegistry();
+		Color foreground= registry.get("org.eclipse.ui.workbench.HOVER_FOREGROUND"); //$NON-NLS-1$
+		if (foreground == null) {
+			foreground = display.getSystemColor(SWT.COLOR_INFO_FOREGROUND);
+		}
+		Color background= registry.get("org.eclipse.ui.workbench.HOVER_BACKGROUND"); //$NON-NLS-1$
+		if (background == null) {
+			background = display.getSystemColor(SWT.COLOR_INFO_BACKGROUND);
+		}
 		StyledText hint = new StyledText(popup, SWT.READ_ONLY | SWT.SINGLE);
 		String enterKeyName = getEnterBinding();
 		String hintTemplate = "Enter new name, press {0} to refactor";

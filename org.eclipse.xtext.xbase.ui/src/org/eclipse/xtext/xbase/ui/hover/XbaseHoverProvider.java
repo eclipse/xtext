@@ -25,6 +25,8 @@ import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.internal.text.html.BrowserInformationControl;
 import org.eclipse.jface.internal.text.html.BrowserInformationControlInput;
 import org.eclipse.jface.internal.text.html.HTMLPrinter;
+import org.eclipse.jface.resource.ColorRegistry;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
@@ -32,6 +34,7 @@ import org.eclipse.jface.text.IInputChangedListener;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PartInitException;
@@ -103,7 +106,14 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 		String html = getHoverInfoAsHtml(element, objectToView, hoverRegion);
 		if (html != null) {
 			StringBuffer buffer = new StringBuffer(html);
-			HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
+			ColorRegistry registry = JFaceResources.getColorRegistry();
+			RGB fgRGB = registry.getRGB("org.eclipse.ui.workbench.HOVER_FOREGROUND"); //$NON-NLS-1$
+			RGB bgRGB = registry.getRGB("org.eclipse.ui.workbench.HOVER_BACKGROUND"); //$NON-NLS-1$
+			if (fgRGB != null && bgRGB != null) {
+				HTMLPrinter.insertPageProlog(buffer, 0, fgRGB, bgRGB, getStyleSheet());
+			} else {
+				HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
+			}
 			HTMLPrinter.addPageEpilog(buffer);
 			html = buffer.toString();
 			IJavaElement javaElement = null;
