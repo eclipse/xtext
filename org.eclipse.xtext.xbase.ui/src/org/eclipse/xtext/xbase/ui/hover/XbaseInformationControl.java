@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.internal.text.html.HTML2TextReader;
 import org.eclipse.jface.internal.text.html.HTMLPrinter;
+import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.AbstractInformationControl;
 import org.eclipse.jface.text.IDelayedInputChangeProvider;
@@ -36,9 +37,11 @@ import org.eclipse.swt.browser.ProgressEvent;
 import org.eclipse.swt.browser.WindowEvent;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyleRange;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.graphics.TextLayout;
 import org.eclipse.swt.graphics.TextStyle;
@@ -114,8 +117,16 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		fBrowser = new Browser(fSashForm, SWT.NONE);
 		fBrowser.setJavascriptEnabled(false);
 		Display display = getShell().getDisplay();
-		fBrowser.setForeground(display.getSystemColor(SWT.COLOR_INFO_FOREGROUND));
-		fBrowser.setBackground(display.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
+		ColorRegistry registry = JFaceResources.getColorRegistry();
+		Color foreground= registry.get("org.eclipse.ui.workbench.HOVER_FOREGROUND"); //$NON-NLS-1$
+		Color background= registry.get("org.eclipse.ui.workbench.HOVER_BACKGROUND"); //$NON-NLS-1$
+		if (background != null && foreground != null) {
+			fBrowser.setForeground(foreground);
+			fBrowser.setBackground(background);
+		} else {
+			fBrowser.setForeground(display.getSystemColor(SWT.COLOR_INFO_FOREGROUND));
+			fBrowser.setBackground(display.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
+		}
 		fBrowser.addProgressListener(new ProgressAdapter() {
 			@Override
 			public void completed(ProgressEvent event) {
@@ -138,8 +149,13 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 			gl.marginWidth = 0;
 			gl.numColumns = 1;
 		}
-		detailPaneComposite.setForeground(display.getSystemColor(SWT.COLOR_INFO_FOREGROUND));
-		detailPaneComposite.setBackground(display.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
+		if (background != null && foreground != null) {
+			detailPaneComposite.setForeground(foreground);
+			detailPaneComposite.setBackground(background);
+		} else {
+			detailPaneComposite.setForeground(display.getSystemColor(SWT.COLOR_INFO_FOREGROUND));
+			detailPaneComposite.setBackground(display.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
+		}
 		resourceProvider = new HoverEditedResourceProvider();
 		embeddedEditor = xbaseHoverConfiguration.getEditorFactory().newEditor(resourceProvider).readOnly()
 				.processIssuesBy(new IValidationIssueProcessor() {
@@ -148,8 +164,14 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 					}
 				}).withParent(detailPaneComposite);
 		Control viewerControl = embeddedEditor.getViewer().getControl();
-		viewerControl.setBackground(display.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
-		viewerControl.setForeground(display.getSystemColor(SWT.COLOR_INFO_FOREGROUND));
+
+		if (background != null && foreground != null) {
+			viewerControl.setForeground(foreground);
+			viewerControl.setBackground(background);
+		} else {
+			viewerControl.setBackground(display.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
+			viewerControl.setForeground(display.getSystemColor(SWT.COLOR_INFO_FOREGROUND));
+		}
 		embeddedEditor.getDocument().setValidationJob(null);
 		createTextLayout();
 	}

@@ -26,6 +26,7 @@ import org.eclipse.jface.internal.text.html.BrowserInformationControl;
 import org.eclipse.jface.internal.text.html.BrowserInformationControlInput;
 import org.eclipse.jface.internal.text.html.BrowserInput;
 import org.eclipse.jface.internal.text.html.HTMLPrinter;
+import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
 import org.eclipse.jface.text.DefaultInformationControl;
@@ -37,7 +38,9 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISharedImages;
@@ -91,7 +94,14 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		String html = getHoverInfoAsHtml(element);
 		if (html != null) {
 			StringBuffer buffer = new StringBuffer(html);
-			HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
+			ColorRegistry registry = JFaceResources.getColorRegistry();
+			RGB fgRGB = registry.getRGB("org.eclipse.ui.workbench.HOVER_FOREGROUND"); //$NON-NLS-1$
+			RGB bgRGB = registry.getRGB("org.eclipse.ui.workbench.HOVER_BACKGROUND"); //$NON-NLS-1$
+			if (fgRGB != null && bgRGB != null) {
+				HTMLPrinter.insertPageProlog(buffer, 0, fgRGB, bgRGB, getStyleSheet());
+			} else {
+				HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
+			}
 			HTMLPrinter.addPageEpilog(buffer);
 			html = buffer.toString();
 			return new XtextBrowserInformationControlInput(previous, element, html, labelProvider);
