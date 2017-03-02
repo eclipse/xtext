@@ -88,7 +88,7 @@ public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment
         _builder.append("*");
         _builder.newLine();
         _builder.append(" ");
-        _builder.append("* See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#outline");
+        _builder.append("* See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#outline");
         _builder.newLine();
         _builder.append(" ");
         _builder.append("*/");
@@ -123,7 +123,7 @@ public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment
         _builder.append("*");
         _builder.newLine();
         _builder.append(" ");
-        _builder.append("* See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#outline");
+        _builder.append("* See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#outline");
         _builder.newLine();
         _builder.append(" ");
         _builder.append("*/");
