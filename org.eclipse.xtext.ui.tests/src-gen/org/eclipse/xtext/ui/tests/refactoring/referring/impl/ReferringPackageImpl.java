@@ -3,14 +3,18 @@
  */
 package org.eclipse.xtext.ui.tests.refactoring.referring.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.ui.tests.refactoring.referring.AbstractReference;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Main;
+import org.eclipse.xtext.ui.tests.refactoring.referring.Named;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
+import org.eclipse.xtext.ui.tests.refactoring.referring.Reference2;
 import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringFactory;
 import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringPackage;
 
@@ -34,7 +38,28 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass abstractReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass referenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass reference2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass namedEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -124,6 +149,16 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getAbstractReference()
+  {
+    return abstractReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getReference()
   {
     return referenceEClass;
@@ -137,6 +172,46 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
   public EReference getReference_Referenced()
   {
     return (EReference)referenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getReference2()
+  {
+    return reference2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getNamed()
+  {
+    return namedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getNamed_Referenced()
+  {
+    return (EReference)namedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getNamed_Name()
+  {
+    return (EAttribute)namedEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -172,8 +247,16 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
     mainEClass = createEClass(MAIN);
     createEReference(mainEClass, MAIN__REFERENCED);
 
+    abstractReferenceEClass = createEClass(ABSTRACT_REFERENCE);
+
     referenceEClass = createEClass(REFERENCE);
     createEReference(referenceEClass, REFERENCE__REFERENCED);
+
+    reference2EClass = createEClass(REFERENCE2);
+
+    namedEClass = createEClass(NAMED);
+    createEReference(namedEClass, NAMED__REFERENCED);
+    createEAttribute(namedEClass, NAMED__NAME);
   }
 
   /**
@@ -205,13 +288,24 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    referenceEClass.getESuperTypes().add(this.getAbstractReference());
+    reference2EClass.getESuperTypes().add(this.getAbstractReference());
+    namedEClass.getESuperTypes().add(this.getReference2());
 
     // Initialize classes and features; add operations and parameters
     initEClass(mainEClass, Main.class, "Main", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMain_Referenced(), this.getReference(), null, "referenced", null, 0, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMain_Referenced(), this.getAbstractReference(), null, "referenced", null, 0, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(abstractReferenceEClass, AbstractReference.class, "AbstractReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(referenceEClass, Reference.class, "Reference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReference_Referenced(), ecorePackage.getEObject(), null, "referenced", null, 0, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(reference2EClass, Reference2.class, "Reference2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(namedEClass, Named.class, "Named", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getNamed_Referenced(), ecorePackage.getEObject(), null, "referenced", null, 0, 1, Named.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getNamed_Name(), ecorePackage.getEString(), "name", null, 0, 1, Named.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -4,9 +4,15 @@
     nsPrefix="referring">
   <eClassifiers xsi:type="ecore:EClass" name="Main">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenced" upperBound="-1"
-        eType="#//Reference" containment="true"/>
+        eType="#//AbstractReference" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Reference">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//AbstractReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenced" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reference2" eSuperTypes="#//AbstractReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Named" eSuperTypes="#//Reference2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenced" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

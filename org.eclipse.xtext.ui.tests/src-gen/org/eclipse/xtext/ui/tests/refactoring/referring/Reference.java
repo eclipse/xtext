@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Reference extends EObject
+public interface Reference extends AbstractReference
 {
   /**
    * Returns the value of the '<em><b>Referenced</b></em>' reference.

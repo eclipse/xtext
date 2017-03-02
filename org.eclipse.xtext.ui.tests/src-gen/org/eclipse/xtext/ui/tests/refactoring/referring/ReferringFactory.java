@@ -33,6 +33,15 @@ public interface ReferringFactory extends EFactory
   Main createMain();
 
   /**
+   * Returns a new object of class '<em>Abstract Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Abstract Reference</em>'.
+   * @generated
+   */
+  AbstractReference createAbstractReference();
+
+  /**
    * Returns a new object of class '<em>Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -40,6 +49,24 @@ public interface ReferringFactory extends EFactory
    * @generated
    */
   Reference createReference();
+
+  /**
+   * Returns a new object of class '<em>Reference2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reference2</em>'.
+   * @generated
+   */
+  Reference2 createReference2();
+
+  /**
+   * Returns a new object of class '<em>Named</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Named</em>'.
+   * @generated
+   */
+  Named createNamed();
 
   /**
    * Returns the package supported by this factory.

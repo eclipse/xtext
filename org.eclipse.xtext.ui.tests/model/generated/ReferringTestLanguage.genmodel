@@ -9,8 +9,14 @@
     <genClasses ecoreClass="ReferringTestLanguage.ecore#//Main">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ReferringTestLanguage.ecore#//Main/referenced"/>
     </genClasses>
+    <genClasses ecoreClass="ReferringTestLanguage.ecore#//AbstractReference"/>
     <genClasses ecoreClass="ReferringTestLanguage.ecore#//Reference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ReferringTestLanguage.ecore#//Reference/referenced"/>
+    </genClasses>
+    <genClasses ecoreClass="ReferringTestLanguage.ecore#//Reference2"/>
+    <genClasses ecoreClass="ReferringTestLanguage.ecore#//Named">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ReferringTestLanguage.ecore#//Named/referenced"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ReferringTestLanguage.ecore#//Named/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

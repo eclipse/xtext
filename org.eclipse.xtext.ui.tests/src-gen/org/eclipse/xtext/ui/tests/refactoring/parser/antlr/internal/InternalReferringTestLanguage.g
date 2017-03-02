@@ -78,9 +78,9 @@ ruleMain returns [EObject current=null]
 	(
 		(
 			{
-				newCompositeNode(grammarAccess.getMainAccess().getReferencedReferenceParserRuleCall_0());
+				newCompositeNode(grammarAccess.getMainAccess().getReferencedAbstractReferenceParserRuleCall_0());
 			}
-			lv_referenced_0_0=ruleReference
+			lv_referenced_0_0=ruleAbstractReference
 			{
 				if ($current==null) {
 					$current = createModelElementForParent(grammarAccess.getMainRule());
@@ -89,11 +89,47 @@ ruleMain returns [EObject current=null]
 					$current,
 					"referenced",
 					lv_referenced_0_0,
-					"org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage.Reference");
+					"org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage.AbstractReference");
 				afterParserOrEnumRuleCall();
 			}
 		)
 	)*
+;
+
+// Entry rule entryRuleAbstractReference
+entryRuleAbstractReference returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAbstractReferenceRule()); }
+	iv_ruleAbstractReference=ruleAbstractReference
+	{ $current=$iv_ruleAbstractReference.current; }
+	EOF;
+
+// Rule AbstractReference
+ruleAbstractReference returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getAbstractReferenceAccess().getReferenceParserRuleCall_0());
+		}
+		this_Reference_0=ruleReference
+		{
+			$current = $this_Reference_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getAbstractReferenceAccess().getReference2ParserRuleCall_1());
+		}
+		this_Reference2_1=ruleReference2
+		{
+			$current = $this_Reference2_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
 ;
 
 // Entry rule entryRuleReference
@@ -131,6 +167,88 @@ ruleReference returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
+		)
+	)
+;
+
+// Entry rule entryRuleReference2
+entryRuleReference2 returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getReference2Rule()); }
+	iv_ruleReference2=ruleReference2
+	{ $current=$iv_ruleReference2.current; }
+	EOF;
+
+// Rule Reference2
+ruleReference2 returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getReference2Access().getNamedParserRuleCall_0());
+		}
+		this_Named_0=ruleNamed
+		{
+			$current = $this_Named_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		otherlv_1='='
+		{
+			newLeafNode(otherlv_1, grammarAccess.getReference2Access().getEqualsSignKeyword_1());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getReference2Rule());
+					}
+				}
+				{
+					newCompositeNode(grammarAccess.getReference2Access().getReferencedEObjectCrossReference_2_0());
+				}
+				ruleFQN
+				{
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleNamed
+entryRuleNamed returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getNamedRule()); }
+	iv_ruleNamed=ruleNamed
+	{ $current=$iv_ruleNamed.current; }
+	EOF;
+
+// Rule Named
+ruleNamed returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_name_0_0=RULE_ID
+			{
+				newLeafNode(lv_name_0_0, grammarAccess.getNamedAccess().getNameIDTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getNamedRule());
+				}
+				setWithLastConsumed(
+					$current,
+					"name",
+					lv_name_0_0,
+					"org.eclipse.xtext.common.Terminals.ID");
+			}
 		)
 	)
 ;
