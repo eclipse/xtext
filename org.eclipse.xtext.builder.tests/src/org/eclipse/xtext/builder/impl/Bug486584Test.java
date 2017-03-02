@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.junit4.Flaky;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Before;
@@ -91,6 +92,7 @@ public class Bug486584Test extends AbstractBuilderTest {
 	}
 
 	@Test
+	@Flaky
 	public void testFullBuildWhenClasspathChanged_2() throws CoreException {
 		IJavaProject project = setupProject();
 		IFile libaryFile = copyAndGetXtendExampleJar(project);
@@ -107,6 +109,7 @@ public class Bug486584Test extends AbstractBuilderTest {
 	}
 
 	@Test
+	@Flaky
 	public void testFullBuildWhenClasspathChanged_3() throws CoreException, IOException {
 		IJavaProject project = setupProject();
 		IFile libaryFile = copyAndGetXtendExampleJar(project);
