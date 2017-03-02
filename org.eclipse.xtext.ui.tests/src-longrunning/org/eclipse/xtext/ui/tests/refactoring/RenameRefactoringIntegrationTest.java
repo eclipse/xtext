@@ -174,6 +174,14 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		doRename();
 		assertEquals(initialModel.replaceAll("B", "C"), readFile(otherLanguageFile));
 	}
+	
+	@Test public void testRefFromOtherXtextLanguage2() throws Exception {
+		String initialModel = "refx = B";
+		IFile otherLanguageFile = IResourcesSetupUtil.createFile(TEST_PROJECT
+				+ "/otherLanguageFile.referringtestlanguage", initialModel);
+		doRename();
+		assertEquals(initialModel.replaceAll("B", "C"), readFile(otherLanguageFile));
+	}
 
 	@Test public void testRefFromOtherNonXtextLanguage() throws Exception {
 		ResourceSet resourceSet = new ResourceSetImpl();
