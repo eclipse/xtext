@@ -941,7 +941,7 @@ Templates allow for readable string concatenation. Templates are surrounded by t
 
 The terminals for interpolated expression are so called guillemets `«expression»`. They read nicely and are not often used in text so you seldom need to escape them. These escaping conflicts are the reason why template languages often use longer character sequences like e.g. `<%= expression %>` in JSP, for the price of worse readability. The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
 
-If you use the Eclipse plug-in the guillemets will be inserted on content assist within a template. They are additionally bound to *CTRL+\<* and *CTRL+\>* for `«` and `»` respectively. 
+If you use the Eclipse plug-in the guillemets will be inserted on content assist within a template. They are additionally bound to <kbd>CTRL</kbd> + <kbd>&lt;</kbd> and <kbd>CTRL</kbd> + <kbd>&gt;</kbd> for `«` and `»` respectively. 
 
 Let us have a look at an example of how a typical method with a template expressions looks like:
 
@@ -974,6 +974,32 @@ def toText(Node n) {
   }
 }
 ```
+
+### Comments in Templates {#template-comment}
+
+Normal single line comments `//...` and multiline comments `/* ... */` will not work inside a template expression. However, you can comment out a complete line inside a template expression using `««« .....`.
+
+```xtend
+def someHTML(String body) '''
+  <html>
+    <body>
+    ««« this will not be visible in the result
+    ««« nor will this: «body»
+    </body>
+  </html>
+'''
+```
+
+For convenience you can use the normal toggle comment commands from context menu or via shortcuts 
+
+* On PC
+  * <kbd>CTRL</kbd> + <kbd>7</kbd>
+  * <kbd>CTRL</kbd> + <kbd>/</kbd>
+  * <kbd>CTRL</kbd> + <kbd>⇧</kbd> + <kbd>C</kbd>
+* On Mac
+  * <kbd>⌘</kbd> + <kbd>7</kbd>
+  * <kbd>⌘</kbd> + <kbd>/</kbd>
+  * <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>C</kbd>
 
 ### Conditions in Templates {#template-if}
 
