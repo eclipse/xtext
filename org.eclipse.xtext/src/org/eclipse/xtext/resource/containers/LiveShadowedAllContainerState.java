@@ -59,6 +59,14 @@ public class LiveShadowedAllContainerState implements IAllContainersState {
 		result.addAll(globalState.getContainedURIs(containerHandle));
 		return result;
 	}
+	
+	@Override
+	public boolean containsURI(String containerHandle, URI candidateURI) {
+		if(localDescriptions.getResourceDescription(candidateURI) != null) {
+			return true;
+		}
+		return globalState.containsURI(containerHandle, candidateURI);
+	}
 
 	@Override
 	public String getContainerHandle(URI uri) {

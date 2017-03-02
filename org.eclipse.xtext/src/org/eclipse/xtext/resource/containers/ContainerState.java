@@ -27,7 +27,7 @@ class ContainerState implements IContainerState {
 
 	@Override
 	public boolean contains(URI uri) {
-		return getContents().contains(uri);
+		return globalState.containsURI(root, uri);
 	}
 	
 	@Override

@@ -398,7 +398,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("sourceSets.all {");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("resources.exclude \'**/*.g\', \'**/*.xtext\', \'**/*.mwe2\', \'**/*.xtend\', \'**/*._trace\'");
+        _builder.append("resources.exclude \'**/*.g\', \'**/*.mwe2\', \'**/*.xtend\', \'**/*._trace\'");
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
@@ -481,6 +481,22 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    {
+      SourceLayout _sourceLayout_1 = this.getConfig().getSourceLayout();
+      boolean _notEquals = (!Objects.equal(_sourceLayout_1, SourceLayout.PLAIN));
+      if (_notEquals) {
+        _builder.append("\t");
+        _builder.append("from(sourceSets.main.allSource) {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("include \'**/*.xtext\'");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     _builder.append("\t");
     _builder.append("manifest {");
     _builder.newLine();

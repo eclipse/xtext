@@ -39,6 +39,11 @@ public class DelegatingIAllContainerAdapter extends AdapterImpl implements IAllC
 	public Collection<URI> getContainedURIs(String containerHandle) {
 		return delegate.getContainedURIs(containerHandle);
 	}
+	
+	@Override
+	public boolean containsURI(String containerHandle, URI candidateURI) {
+		return delegate.containsURI(containerHandle, candidateURI);
+	}
 
 	@Override
 	public String getContainerHandle(URI uri) {
