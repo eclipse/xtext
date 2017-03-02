@@ -264,7 +264,46 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				"\t|\n" +
 				";" , editor);
 	}
-
+	
+	@Test public void testXtendIssue163() throws Exception {
+		XtextEditor editor = openEditor(
+				"/*******************************************************************************\n" +
+				" * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.\n" +
+				" * All rights reserved. This program and the accompanying materials\n" +
+				" * are made available under the terms of the Eclipse Public License v1.0\n" +
+				" * which accompanies this distribution, and is available at\n" +
+				" * http://www.eclipse.org/legal/epl-v10.html|\n" +
+				" *******************************************************************************/\n" +
+				"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals\n" +
+				"\n" +
+				"/*\n" +
+				" * this is a comment\n" +
+				" */\n" +
+				"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"\n" +
+				"\n" +
+				"A: name=ID\n" +
+				"\n");
+		pressKey(editor, '\n');
+		assertState(
+				"/*******************************************************************************\n" +
+				" * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.\n" +
+				" * All rights reserved. This program and the accompanying materials\n" +
+				" * are made available under the terms of the Eclipse Public License v1.0\n" +
+				" * which accompanies this distribution, and is available at\n" +
+				" * http://www.eclipse.org/legal/epl-v10.html\n" +
+				" * |\n" +
+				" *******************************************************************************/\n" +
+				"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals\n" +
+				"\n" +
+				"/*\n" +
+				" * this is a comment\n" +
+				" */\n" +
+				"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"\n" +
+				"\n" +
+				"A: name=ID\n" +
+				"\n" , editor);
+	}
+	
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
