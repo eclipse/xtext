@@ -179,7 +179,7 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 	}
 
 	protected CrossReference getCrossReference(EObject referringElement, int offset) {
-		ICompositeNode node = NodeModelUtils.getNode(referringElement);
+		ICompositeNode node = NodeModelUtils.findActualNodeFor(referringElement);
 		if (node != null) {
 			Iterator<INode> iter = node.getAsTreeIterable().iterator();
 			while (iter.hasNext()) {
