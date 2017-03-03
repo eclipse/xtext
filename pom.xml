@@ -32,6 +32,7 @@
 		<module>org.eclipse.xtext.ui.codetemplates.ui</module>
 		<module>org.eclipse.xtext.ui.ecore</module>
 		<module>org.eclipse.xtext.junit4</module>
+		<module>org.eclipse.xtext.ui.testing</module>
 		<module>org.eclipse.xtext.xbase.junit</module>
 		<module>org.eclipse.xtext.xtext.ui</module>
 		<module>org.eclipse.xtext.xtext.ui.graph</module>
