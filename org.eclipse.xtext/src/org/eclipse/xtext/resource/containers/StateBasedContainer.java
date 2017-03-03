@@ -83,7 +83,7 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 
 	@Override
 	public Iterable<IResourceDescription> getResourceDescriptions() {
-		if (state.getContents().isEmpty())
+		if (isEmpty())
 			return Collections.emptyList();
 		return getUriToDescription().values();
 	}
@@ -101,28 +101,28 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
-		if (state.getContents().isEmpty())
+		if (isEmpty())
 			return emptyList();
 		return super.getExportedObjects();
 	}
 	
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
-		if (state.getContents().isEmpty())
+		if (isEmpty())
 			return emptyList();
 		return super.getExportedObjectsByType(type);
 	}
 	
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
-		if (state.getContents().isEmpty())
+		if (isEmpty())
 			return emptyList();
 		return super.getExportedObjectsByObject(object);
 	}
 	
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName qualifiedName, boolean ignoreCase) {
-		if (state.getContents().isEmpty())
+		if (isEmpty())
 			return emptyList();
 		return super.getExportedObjects(type, qualifiedName, ignoreCase);
 	}
