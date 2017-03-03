@@ -66,7 +66,10 @@ public class ReferringFactoryImpl extends EFactoryImpl implements ReferringFacto
     switch (eClass.getClassifierID())
     {
       case ReferringPackage.MAIN: return createMain();
+      case ReferringPackage.ABSTRACT_REFERENCE: return createAbstractReference();
       case ReferringPackage.REFERENCE: return createReference();
+      case ReferringPackage.REFERENCE2: return createReference2();
+      case ReferringPackage.NAMED: return createNamed();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -88,10 +91,43 @@ public class ReferringFactoryImpl extends EFactoryImpl implements ReferringFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  public AbstractReference createAbstractReference()
+  {
+    AbstractReferenceImpl abstractReference = new AbstractReferenceImpl();
+    return abstractReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Reference createReference()
   {
     ReferenceImpl reference = new ReferenceImpl();
     return reference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Reference2 createReference2()
+  {
+    Reference2Impl reference2 = new Reference2Impl();
+    return reference2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Named createNamed()
+  {
+    NamedImpl named = new NamedImpl();
+    return named;
   }
 
   /**

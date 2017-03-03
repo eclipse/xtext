@@ -4,14 +4,10 @@
 package org.eclipse.xtext.ui.tests.refactoring.ide.contentassist.antlr;
 
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ui.tests.refactoring.ide.contentassist.antlr.internal.InternalReferringTestLanguageParser;
 import org.eclipse.xtext.ui.tests.refactoring.services.ReferringTestLanguageGrammarAccess;
 
@@ -35,28 +31,21 @@ public class ReferringTestLanguageParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
+					put(grammarAccess.getAbstractReferenceAccess().getAlternatives(), "rule__AbstractReference__Alternatives");
 					put(grammarAccess.getReferenceAccess().getGroup(), "rule__Reference__Group__0");
+					put(grammarAccess.getReference2Access().getGroup(), "rule__Reference2__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
 					put(grammarAccess.getMainAccess().getReferencedAssignment(), "rule__Main__ReferencedAssignment");
 					put(grammarAccess.getReferenceAccess().getReferencedAssignment_1(), "rule__Reference__ReferencedAssignment_1");
+					put(grammarAccess.getReference2Access().getReferencedAssignment_2(), "rule__Reference2__ReferencedAssignment_2");
+					put(grammarAccess.getNamedAccess().getNameAssignment(), "rule__Named__NameAssignment");
 				}
 			};
 		}
 		return nameMappings.get(element);
 	}
-
-	@Override
-	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
-		try {
-			InternalReferringTestLanguageParser typedParser = (InternalReferringTestLanguageParser) parser;
-			typedParser.entryRuleMain();
-			return typedParser.getFollowElements();
-		} catch(RecognitionException ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
+			
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };

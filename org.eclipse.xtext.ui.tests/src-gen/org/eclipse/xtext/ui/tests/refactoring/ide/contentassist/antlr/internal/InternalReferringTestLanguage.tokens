@@ -1,4 +1,5 @@
-'.'=12
+'.'=13
+'='=12
 'ref'=11
 RULE_ANY_OTHER=10
 RULE_ID=4
@@ -9,3 +10,4 @@ RULE_STRING=6
 RULE_WS=9
 T__11=11
 T__12=12
+T__13=13

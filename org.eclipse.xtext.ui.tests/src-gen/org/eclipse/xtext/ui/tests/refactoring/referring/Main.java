@@ -27,7 +27,7 @@ public interface Main extends EObject
 {
   /**
    * Returns the value of the '<em><b>Referenced</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.ui.tests.refactoring.referring.Reference}.
+   * The list contents are of type {@link org.eclipse.xtext.ui.tests.refactoring.referring.AbstractReference}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Referenced</em>' containment reference list isn't clear,
@@ -39,6 +39,6 @@ public interface Main extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<Reference> getReferenced();
+  EList<AbstractReference> getReferenced();
 
 } // Main

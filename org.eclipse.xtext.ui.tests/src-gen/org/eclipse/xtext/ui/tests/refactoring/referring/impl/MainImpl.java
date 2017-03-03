@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.ui.tests.refactoring.referring.AbstractReference;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Main;
-import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
 import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringPackage;
 
 /**
@@ -44,7 +44,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
    * @generated
    * @ordered
    */
-  protected EList<Reference> referenced;
+  protected EList<AbstractReference> referenced;
 
   /**
    * <!-- begin-user-doc -->
@@ -72,11 +72,11 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Reference> getReferenced()
+  public EList<AbstractReference> getReferenced()
   {
     if (referenced == null)
     {
-      referenced = new EObjectContainmentEList<Reference>(Reference.class, this, ReferringPackage.MAIN__REFERENCED);
+      referenced = new EObjectContainmentEList<AbstractReference>(AbstractReference.class, this, ReferringPackage.MAIN__REFERENCED);
     }
     return referenced;
   }
@@ -126,7 +126,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
     {
       case ReferringPackage.MAIN__REFERENCED:
         getReferenced().clear();
-        getReferenced().addAll((Collection<? extends Reference>)newValue);
+        getReferenced().addAll((Collection<? extends AbstractReference>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

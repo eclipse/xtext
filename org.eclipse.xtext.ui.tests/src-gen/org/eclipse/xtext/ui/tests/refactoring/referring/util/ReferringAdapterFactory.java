@@ -81,9 +81,24 @@ public class ReferringAdapterFactory extends AdapterFactoryImpl
         return createMainAdapter();
       }
       @Override
+      public Adapter caseAbstractReference(AbstractReference object)
+      {
+        return createAbstractReferenceAdapter();
+      }
+      @Override
       public Adapter caseReference(Reference object)
       {
         return createReferenceAdapter();
+      }
+      @Override
+      public Adapter caseReference2(Reference2 object)
+      {
+        return createReference2Adapter();
+      }
+      @Override
+      public Adapter caseNamed(Named object)
+      {
+        return createNamedAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -123,6 +138,21 @@ public class ReferringAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.refactoring.referring.AbstractReference <em>Abstract Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.AbstractReference
+   * @generated
+   */
+  public Adapter createAbstractReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.refactoring.referring.Reference <em>Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -133,6 +163,36 @@ public class ReferringAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.refactoring.referring.Reference2 <em>Reference2</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.Reference2
+   * @generated
+   */
+  public Adapter createReference2Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.refactoring.referring.Named <em>Named</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.Named
+   * @generated
+   */
+  public Adapter createNamedAdapter()
   {
     return null;
   }

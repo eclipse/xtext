@@ -3,6 +3,7 @@
  */
 package org.eclipse.xtext.ui.tests.refactoring.referring;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -85,6 +86,25 @@ public interface ReferringPackage extends EPackage
   int MAIN_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.AbstractReferenceImpl <em>Abstract Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.AbstractReferenceImpl
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferringPackageImpl#getAbstractReference()
+   * @generated
+   */
+  int ABSTRACT_REFERENCE = 1;
+
+  /**
+   * The number of structural features of the '<em>Abstract Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_REFERENCE_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferenceImpl <em>Reference</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -92,7 +112,7 @@ public interface ReferringPackage extends EPackage
    * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferringPackageImpl#getReference()
    * @generated
    */
-  int REFERENCE = 1;
+  int REFERENCE = 2;
 
   /**
    * The feature id for the '<em><b>Referenced</b></em>' reference.
@@ -101,7 +121,7 @@ public interface ReferringPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFERENCE__REFERENCED = 0;
+  int REFERENCE__REFERENCED = ABSTRACT_REFERENCE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Reference</em>' class.
@@ -110,7 +130,63 @@ public interface ReferringPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFERENCE_FEATURE_COUNT = 1;
+  int REFERENCE_FEATURE_COUNT = ABSTRACT_REFERENCE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.Reference2Impl <em>Reference2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.Reference2Impl
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferringPackageImpl#getReference2()
+   * @generated
+   */
+  int REFERENCE2 = 3;
+
+  /**
+   * The number of structural features of the '<em>Reference2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFERENCE2_FEATURE_COUNT = ABSTRACT_REFERENCE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.NamedImpl <em>Named</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.NamedImpl
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferringPackageImpl#getNamed()
+   * @generated
+   */
+  int NAMED = 4;
+
+  /**
+   * The feature id for the '<em><b>Referenced</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED__REFERENCED = REFERENCE2_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED__NAME = REFERENCE2_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Named</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED_FEATURE_COUNT = REFERENCE2_FEATURE_COUNT + 2;
 
 
   /**
@@ -135,6 +211,16 @@ public interface ReferringPackage extends EPackage
   EReference getMain_Referenced();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.refactoring.referring.AbstractReference <em>Abstract Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Abstract Reference</em>'.
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.AbstractReference
+   * @generated
+   */
+  EClass getAbstractReference();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.refactoring.referring.Reference <em>Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -154,6 +240,48 @@ public interface ReferringPackage extends EPackage
    * @generated
    */
   EReference getReference_Referenced();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.refactoring.referring.Reference2 <em>Reference2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Reference2</em>'.
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.Reference2
+   * @generated
+   */
+  EClass getReference2();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.refactoring.referring.Named <em>Named</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Named</em>'.
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.Named
+   * @generated
+   */
+  EClass getNamed();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.ui.tests.refactoring.referring.Named#getReferenced <em>Referenced</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Referenced</em>'.
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.Named#getReferenced()
+   * @see #getNamed()
+   * @generated
+   */
+  EReference getNamed_Referenced();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.refactoring.referring.Named#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.ui.tests.refactoring.referring.Named#getName()
+   * @see #getNamed()
+   * @generated
+   */
+  EAttribute getNamed_Name();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -197,6 +325,16 @@ public interface ReferringPackage extends EPackage
     EReference MAIN__REFERENCED = eINSTANCE.getMain_Referenced();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.AbstractReferenceImpl <em>Abstract Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.AbstractReferenceImpl
+     * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferringPackageImpl#getAbstractReference()
+     * @generated
+     */
+    EClass ABSTRACT_REFERENCE = eINSTANCE.getAbstractReference();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferenceImpl <em>Reference</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -213,6 +351,42 @@ public interface ReferringPackage extends EPackage
      * @generated
      */
     EReference REFERENCE__REFERENCED = eINSTANCE.getReference_Referenced();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.Reference2Impl <em>Reference2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.Reference2Impl
+     * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferringPackageImpl#getReference2()
+     * @generated
+     */
+    EClass REFERENCE2 = eINSTANCE.getReference2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.NamedImpl <em>Named</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.NamedImpl
+     * @see org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferringPackageImpl#getNamed()
+     * @generated
+     */
+    EClass NAMED = eINSTANCE.getNamed();
+
+    /**
+     * The meta object literal for the '<em><b>Referenced</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NAMED__REFERENCED = eINSTANCE.getNamed_Referenced();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NAMED__NAME = eINSTANCE.getNamed_Name();
 
   }
 

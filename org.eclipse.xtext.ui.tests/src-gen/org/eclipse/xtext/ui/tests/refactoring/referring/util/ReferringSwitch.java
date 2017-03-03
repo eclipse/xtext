@@ -80,10 +80,35 @@ public class ReferringSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ReferringPackage.ABSTRACT_REFERENCE:
+      {
+        AbstractReference abstractReference = (AbstractReference)theEObject;
+        T result = caseAbstractReference(abstractReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ReferringPackage.REFERENCE:
       {
         Reference reference = (Reference)theEObject;
         T result = caseReference(reference);
+        if (result == null) result = caseAbstractReference(reference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ReferringPackage.REFERENCE2:
+      {
+        Reference2 reference2 = (Reference2)theEObject;
+        T result = caseReference2(reference2);
+        if (result == null) result = caseAbstractReference(reference2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ReferringPackage.NAMED:
+      {
+        Named named = (Named)theEObject;
+        T result = caseNamed(named);
+        if (result == null) result = caseReference2(named);
+        if (result == null) result = caseAbstractReference(named);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -108,6 +133,22 @@ public class ReferringSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAbstractReference(AbstractReference object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -119,6 +160,38 @@ public class ReferringSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseReference(Reference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Reference2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Reference2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseReference2(Reference2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Named</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Named</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNamed(Named object)
   {
     return null;
   }

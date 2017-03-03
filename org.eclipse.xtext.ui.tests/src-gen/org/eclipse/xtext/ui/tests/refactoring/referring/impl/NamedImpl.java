@@ -11,23 +11,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
+import org.eclipse.xtext.ui.tests.refactoring.referring.Named;
 import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Reference</b></em>'.
+ * An implementation of the model object '<em><b>Named</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferenceImpl#getReferenced <em>Referenced</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.NamedImpl#getReferenced <em>Referenced</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.NamedImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ReferenceImpl extends AbstractReferenceImpl implements Reference
+public class NamedImpl extends Reference2Impl implements Named
 {
   /**
    * The cached value of the '{@link #getReferenced() <em>Referenced</em>}' reference.
@@ -40,11 +41,31 @@ public class ReferenceImpl extends AbstractReferenceImpl implements Reference
   protected EObject referenced;
 
   /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ReferenceImpl()
+  protected NamedImpl()
   {
     super();
   }
@@ -57,7 +78,7 @@ public class ReferenceImpl extends AbstractReferenceImpl implements Reference
   @Override
   protected EClass eStaticClass()
   {
-    return ReferringPackage.Literals.REFERENCE;
+    return ReferringPackage.Literals.NAMED;
   }
 
   /**
@@ -74,7 +95,7 @@ public class ReferenceImpl extends AbstractReferenceImpl implements Reference
       if (referenced != oldReferenced)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ReferringPackage.REFERENCE__REFERENCED, oldReferenced, referenced));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ReferringPackage.NAMED__REFERENCED, oldReferenced, referenced));
       }
     }
     return referenced;
@@ -100,7 +121,30 @@ public class ReferenceImpl extends AbstractReferenceImpl implements Reference
     EObject oldReferenced = referenced;
     referenced = newReferenced;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ReferringPackage.REFERENCE__REFERENCED, oldReferenced, referenced));
+      eNotify(new ENotificationImpl(this, Notification.SET, ReferringPackage.NAMED__REFERENCED, oldReferenced, referenced));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ReferringPackage.NAMED__NAME, oldName, name));
   }
 
   /**
@@ -113,9 +157,11 @@ public class ReferenceImpl extends AbstractReferenceImpl implements Reference
   {
     switch (featureID)
     {
-      case ReferringPackage.REFERENCE__REFERENCED:
+      case ReferringPackage.NAMED__REFERENCED:
         if (resolve) return getReferenced();
         return basicGetReferenced();
+      case ReferringPackage.NAMED__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -130,8 +176,11 @@ public class ReferenceImpl extends AbstractReferenceImpl implements Reference
   {
     switch (featureID)
     {
-      case ReferringPackage.REFERENCE__REFERENCED:
+      case ReferringPackage.NAMED__REFERENCED:
         setReferenced((EObject)newValue);
+        return;
+      case ReferringPackage.NAMED__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -147,8 +196,11 @@ public class ReferenceImpl extends AbstractReferenceImpl implements Reference
   {
     switch (featureID)
     {
-      case ReferringPackage.REFERENCE__REFERENCED:
+      case ReferringPackage.NAMED__REFERENCED:
         setReferenced((EObject)null);
+        return;
+      case ReferringPackage.NAMED__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -164,10 +216,29 @@ public class ReferenceImpl extends AbstractReferenceImpl implements Reference
   {
     switch (featureID)
     {
-      case ReferringPackage.REFERENCE__REFERENCED:
+      case ReferringPackage.NAMED__REFERENCED:
         return referenced != null;
+      case ReferringPackage.NAMED__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
 
-} //ReferenceImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
+
+} //NamedImpl
