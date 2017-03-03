@@ -396,6 +396,12 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	}
 	
 	@Override
+	public void completeAnnotationField_Members(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeMember_Members(model, assignment, context, acceptor);
+	}
+	
+	@Override
 	public void completeMember_Members(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (isValidTypeForOverriding(model)) {
