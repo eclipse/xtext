@@ -56,4 +56,4 @@ javadoc:
   guice: "https://google.github.io/guice/api-docs/latest/javadoc"
   mongodb: "http://api.mongodb.org/java/2.6"
 
-edit-repo : "https://github.com/eclipse/xtext/edit/maintenance/xtext-website/"
+edit-repo : "https://github.com/eclipse/xtext/edit/website-published/xtext-website/"
