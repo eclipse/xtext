@@ -63,6 +63,8 @@ public class DefaultAutoEditStrategyProvider extends AbstractEditStrategyProvide
 
 	protected void configureMultilineComments(IEditStrategyAcceptor acceptor) {
 		acceptor.accept(singleLineTerminals.newInstance("/*", " */"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(multiLineTerminals.newInstance("/***"," * ", " ***/"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(multiLineTerminals.newInstance("/***"," * ", " ***/"),TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
 		acceptor.accept(multiLineTerminals.newInstance("/*"," * ", " */"),IDocument.DEFAULT_CONTENT_TYPE);
 		acceptor.accept(multiLineTerminals.newInstance("/*"," * ", " */"),TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
 	}
