@@ -40,7 +40,7 @@ public interface IResourceDescription extends ISelectable {
 	Iterable<IEObjectDescription> getExportedObjects();
 
 	/**
-	 * @return the list of names the described resource depends depends on.
+	 * @return the list of names the described resource depends on.
 	 */
 	Iterable<QualifiedName> getImportedNames();
 	
@@ -84,7 +84,7 @@ public interface IResourceDescription extends ISelectable {
 		 * @param deltas List of deltas to check. May not be <code>null</code>.
 		 * @param candidate The description to check. May not be <code>null</code>.
 		 * @param context The current context of the batch operation. May not be <code>null</code>.
-		 * @return whether the condidate is affected by any of the given changes.
+		 * @return whether the candidate is affected by any of the given changes.
 		 * @throws IllegalArgumentException
 		 *             if this manager is not responsible for the given candidate.
 		 */
@@ -107,7 +107,7 @@ public interface IResourceDescription extends ISelectable {
 			 * callers of this method are expected to pass in all deltas, even if they don't have changed {@link IEObjectDescription}s
 			 * @param candidate The description to check. May not be <code>null</code>.
 			 * @param context The current context of the batch operation. May not be <code>null</code>.
-			 * @return whether the condidate is affected by any of the given changes.
+			 * @return whether the candidate is affected by any of the given changes.
 			 * @throws IllegalArgumentException
 			 *             if this manager is not responsible for the given candidate.
 			 */
@@ -120,7 +120,7 @@ public interface IResourceDescription extends ISelectable {
 
 	/**
 	 * A delta describing the differences between two versions of the same {@link IResourceDescription}. Instances have
-	 * to follow the rule :
+	 * to follow the rule:
 	 * <p>
 	 * <code>getNew()==null || getOld()==null || getOld().getURI().equals(getNew().getURI())</code>
 	 * </p>
@@ -200,7 +200,7 @@ public interface IResourceDescription extends ISelectable {
 
 			/**
 			 * <p>
-			 * The source will invoce this method to announce changed resource. The event will never be
+			 * The source will invoke this method to announce changed resources. The event will never be
 			 * <code>null</code>. However, it may contain an empty list of deltas.
 			 * </p>
 			 * <p>
