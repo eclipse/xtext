@@ -9,7 +9,7 @@ package org.eclipse.xtend.ide.tests.contentassist
 
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest
 import org.junit.Test
-import org.eclipse.xtext.junit4.Flaky
+import org.eclipse.xtext.testing.Flaky
 
 /**
  * @author Stefan Oehme - Initial contribution and API

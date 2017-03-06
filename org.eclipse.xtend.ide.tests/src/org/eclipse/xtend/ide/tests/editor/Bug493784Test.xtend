@@ -15,8 +15,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor
 import org.junit.Test
 import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher
 import java.lang.reflect.Field
-import java.util.Map
-import org.eclipse.emf.common.notify.Notifier
 import java.util.List
 import org.eclipse.swt.SWT
 import org.eclipse.swt.custom.StyledText
