@@ -19,7 +19,9 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.inject.Inject;
@@ -172,8 +174,15 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 				replacementLength);
 		result.setPriority(priority);
 		result.setMatcher(context.getMatcher());
-		result.setReplaceContextLength(context.getReplaceContextLength());
+		result.setReplaceContextLength(getReplacementContextLength(context));
 		return result;
+	}
+
+	/**
+	 * @since 2.12
+	 */
+	protected int getReplacementContextLength(ContentAssistContext context) {
+		return context.getReplaceContextLength();
 	}
 
 	protected ConfigurableCompletionProposal doCreateProposal(String proposal, StyledString displayString, Image image,

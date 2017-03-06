@@ -1402,7 +1402,7 @@
           password="${eclipse.user.password}">
         <query
             summary="Xtext Bugs"
-            url="https://bugs.eclipse.org/bugs/buglist.cgi?product=TMF&amp;bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED"/>
+            url="https://bugs.eclipse.org/bugs/buglist.cgi?product=TMF&amp;product=Xtend&amp;bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED"/>
       </setupTask>
       <setupTask
           xsi:type="mylyn:MylynQueriesTask"
@@ -1700,7 +1700,7 @@
           password="${eclipse.user.password}">
         <query
             summary="Xtext Bugs"
-            url="https://bugs.eclipse.org/bugs/buglist.cgi?product=TMF&amp;bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED"/>
+            url="https://bugs.eclipse.org/bugs/buglist.cgi?product=TMF&amp;product=Xtend&amp;bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED"/>
       </setupTask>
     </stream>
     <stream
