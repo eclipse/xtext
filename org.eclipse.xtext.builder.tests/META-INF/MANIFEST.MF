@@ -30,7 +30,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.ui.ecore,
  org.eclipse.xtext.testlanguages,
  org.eclipse.xtext.testlanguages.ide,
- org.eclipse.xtext.testlanguages.ui
+ org.eclipse.xtext.testlanguages.ui,
+ org.eclipse.xtext.testing
 Import-Package: org.apache.log4j;version="1.2.15",
  org.hamcrest.core;version="1.1.0",
  org.junit;version="4.5.0",
