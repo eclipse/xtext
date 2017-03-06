@@ -94,7 +94,7 @@ public class JavaProjectSetupUtil {
 		}
 	}
 	
-	public static InputStream jarInputStream(Pair<String, InputStream> ...entries) {
+	public static InputStream jarInputStream(@SuppressWarnings("unchecked") Pair<String, InputStream> ...entries) {
 		try {
 			ByteArrayOutputStream out2 = new ByteArrayOutputStream();
 			JarOutputStream jo = new JarOutputStream(new BufferedOutputStream(out2));
