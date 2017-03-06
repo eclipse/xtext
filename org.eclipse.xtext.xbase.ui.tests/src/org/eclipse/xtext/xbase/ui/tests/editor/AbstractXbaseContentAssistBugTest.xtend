@@ -13,10 +13,10 @@ import org.eclipse.core.runtime.CoreException
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder
-import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase
 import org.junit.AfterClass
 import org.junit.BeforeClass
