@@ -28,7 +28,7 @@ import org.eclipse.jdt.internal.core.JarEntryFile;
 import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
 import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.jdt.internal.core.NonJavaResource;
-import org.eclipse.xtext.junit4.Flaky;
+import org.eclipse.xtext.testing.Flaky;
 import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile;
