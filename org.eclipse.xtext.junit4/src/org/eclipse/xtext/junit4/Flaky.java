@@ -29,6 +29,7 @@ import com.google.common.annotations.Beta;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noreference This annotation is not intended to be referenced by clients.
+ * @deprecated Use org.eclipse.xtext.testing.Flaky instead
  * 
  * @since 2.7
  */
@@ -36,6 +37,7 @@ import com.google.common.annotations.Beta;
 @Documented
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
+@Deprecated
 public @interface Flaky {
 
 	/**
