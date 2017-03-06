@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.tests.contentassist
 
 import org.junit.Test
-import org.eclipse.xtext.junit4.Flaky
+import org.eclipse.xtext.testing.Flaky
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
