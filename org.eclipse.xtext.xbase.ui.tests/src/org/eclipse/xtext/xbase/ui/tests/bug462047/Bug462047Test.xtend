@@ -15,12 +15,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.logging.LoggingTester
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
-import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.editor.XtextEditorInfo
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil
+import org.eclipse.xtext.ui.testing.AbstractEditorTest
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource
 import org.eclipse.xtext.xbase.testlanguages.bug462047.Bug462047LangUiInjectorProvider
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase

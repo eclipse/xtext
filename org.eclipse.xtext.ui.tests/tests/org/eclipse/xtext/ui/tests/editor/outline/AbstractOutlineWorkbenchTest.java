@@ -23,12 +23,12 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
+import org.eclipse.xtext.ui.testing.AbstractEditorTest;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

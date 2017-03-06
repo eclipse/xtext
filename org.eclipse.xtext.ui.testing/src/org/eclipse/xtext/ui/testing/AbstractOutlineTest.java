@@ -55,7 +55,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Lorenzo Bettini - Adapted to be used for any DSL
  * 
- * @since 2.10
+ * @since 2.12
  */
 public abstract class AbstractOutlineTest extends AbstractEditorTest {
 

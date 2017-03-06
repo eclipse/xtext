@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.autoedit;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import java.util.Collections;
 
@@ -17,10 +17,10 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.swt.SWT;
-import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.testing.AbstractCStyleLanguageAutoEditTest;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.xtext.ui.internal.Activator;
@@ -31,7 +31,6 @@ import com.google.inject.Injector;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTest {
 	private static final String SAMPLE_HEADER = "grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals\ngenerate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"\n";
 	private static final String TESTPROJECT_NAME = "autoedit";

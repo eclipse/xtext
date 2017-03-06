@@ -13,19 +13,19 @@ import java.util.List
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.emf.common.util.URI
 import org.eclipse.swt.SWT
+import org.eclipse.swt.custom.StyledText
 import org.eclipse.swt.widgets.Display
 import org.eclipse.swt.widgets.Event
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.XtextSourceViewer
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
+import org.eclipse.xtext.ui.testing.AbstractEditorTest
 import org.junit.Before
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import org.eclipse.swt.custom.StyledText
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

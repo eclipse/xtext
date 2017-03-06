@@ -7,19 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.folding;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import java.util.Collection;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRegion;
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.FoldedPosition;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.tests.folding.Element;
 import org.junit.Test;
 

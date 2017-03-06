@@ -8,17 +8,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.handler;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.handlers.IHandlerService;
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
+import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.junit.Test;
 
 /**
