@@ -15,6 +15,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Stephane Galland - add calls to getValuesProvider()
  * @since 2.4
  */
 public class IssueSeveritiesProvider {
@@ -28,7 +29,7 @@ public class IssueSeveritiesProvider {
 	}
 	
 	public IssueSeverities getIssueSeverities(Resource context) {
-		IPreferenceValues preferenceValues = valuesProvider.getPreferenceValues(context);
+		IPreferenceValues preferenceValues = getValuesProvider().getPreferenceValues(context);
 		return new IssueSeverities(preferenceValues, issueCodesProvider.getConfigurableIssueCodes(), severityConverter);
 	}
 }
