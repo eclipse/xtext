@@ -40,6 +40,8 @@
    <bundle id="org.eclipse.xtext.ui.shared.source" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xbase.junit" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xbase.junit.source" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtext.xbase.ui.testing" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtext.xbase.ui.testing.source" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xbase.testlanguages.ui" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xbase.testlanguages.ui.source" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xbase.ui" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
