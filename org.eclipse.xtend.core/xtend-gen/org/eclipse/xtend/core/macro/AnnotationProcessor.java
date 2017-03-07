@@ -33,7 +33,6 @@ import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.ValidationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.Declaration;
 import org.eclipse.xtend.lib.macro.declaration.Element;
-import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -141,10 +140,24 @@ public class AnnotationProcessor {
             registerGlobalsCtx.setAcceptor(acceptor);
             registerGlobalsCtx.setCompilationUnit(ctx.getCompilationUnit());
             final Runnable _function = () -> {
-              final Function1<XtendAnnotationTarget, MemberDeclaration> _function_1 = (XtendAnnotationTarget it) -> {
-                return ctx.getCompilationUnit().toXtendMemberDeclaration(((XtendMember) it));
+              final Function1<XtendAnnotationTarget, Declaration> _function_1 = (XtendAnnotationTarget it) -> {
+                Declaration _switchResult_1 = null;
+                boolean _matched_1 = false;
+                if (it instanceof XtendMember) {
+                  _matched_1=true;
+                  _switchResult_1 = ctx.getCompilationUnit().toXtendMemberDeclaration(((XtendMember)it));
+                }
+                if (!_matched_1) {
+                  if (it instanceof XtendParameter) {
+                    _matched_1=true;
+                    _switchResult_1 = ctx.getCompilationUnit().toXtendParameterDeclaration(((XtendParameter)it));
+                  }
+                }
+                final Declaration xtendMember = _switchResult_1;
+                return xtendMember;
               };
-              ((RegisterGlobalsParticipant<NamedElement>)processor).doRegisterGlobals(ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(ctx.getAnnotatedSourceElements(), _function_1), registerGlobalsCtx);
+              ((RegisterGlobalsParticipant<NamedElement>)processor).doRegisterGlobals(
+                ListExtensions.<XtendAnnotationTarget, Declaration>map(ctx.getAnnotatedSourceElements(), _function_1), registerGlobalsCtx);
             };
             _xblockexpression_1 = this.runWithCancelIndiciator(ctx, monitor, _function);
           }

@@ -55,7 +55,13 @@ class AnnotationProcessor {
 					registerGlobalsCtx.compilationUnit = ctx.compilationUnit
 					
 					runWithCancelIndiciator(ctx, monitor) [|
-						processor.doRegisterGlobals(ctx.annotatedSourceElements.map[ctx.compilationUnit.toXtendMemberDeclaration(it as XtendMember)], registerGlobalsCtx)
+						processor.doRegisterGlobals(ctx.annotatedSourceElements.map[
+							val xtendMember = switch it {
+								XtendMember : ctx.compilationUnit.toXtendMemberDeclaration(it)
+								XtendParameter : ctx.compilationUnit.toXtendParameterDeclaration(it)
+							}
+							return xtendMember
+						], registerGlobalsCtx)
 					]
 				}
 			}
