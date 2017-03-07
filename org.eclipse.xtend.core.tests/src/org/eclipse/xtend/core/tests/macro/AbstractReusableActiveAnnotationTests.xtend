@@ -2135,17 +2135,26 @@ abstract class AbstractReusableActiveAnnotationTests {
 				
 				import java.util.List
 				import org.eclipse.xtend.lib.macro.Active
-				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
 				
 				@Active(typeof(ParamProcessor))
 				annotation Param { }
-				class ParamProcessor implements TransformationParticipant<MutableParameterDeclaration> {
+				class ParamProcessor implements TransformationParticipant<MutableParameterDeclaration>, RegisterGlobalsParticipant<ParameterDeclaration> {
 					
 					override doTransform(List<? extends MutableParameterDeclaration> params, extension TransformationContext context) {
 						params.forEach[
 							simpleName = simpleName+'foo'
+						]
+					}
+					
+					override doRegisterGlobals(List<? extends ParameterDeclaration> annotatedSourceElements, extension RegisterGlobalsContext context) {
+						annotatedSourceElements.forEach [
+							context.registerInterface("demo.I"+it.simpleName.toFirstUpper)
 						]
 					}
 					
@@ -2162,6 +2171,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 		) [
 			val clazz = typeLookup.findClass('myusercode.MyClass')
 			assertTrue(clazz.declaredMethods.head.parameters.forall[simpleName.endsWith('foo')])
+			assertNotNull(typeLookup.findInterface('demo.IA'))
+			assertNotNull(typeLookup.findInterface('demo.IB'))
 		]
 	}
 	
