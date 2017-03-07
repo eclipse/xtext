@@ -240,19 +240,13 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	}
 
 	override dispatch void format(XVariableDeclaration expr, extension IFormattableDocument format) {
-		expr.regionFor.keyword("val").append[oneSpace]
-		expr.regionFor.keyword("var").append[oneSpace]
 		expr.regionFor.keyword("extension").append[oneSpace]
-		expr.type.append[oneSpace]
-		expr.regionFor.keyword("=").surround[oneSpace]
-		expr.type.format
-		expr.right.format
+		super._format(expr,format)
 	}
 
 	override dispatch void format(JvmFormalParameter expr, extension IFormattableDocument format) {
 		expr.regionFor.keyword("extension").append[oneSpace]
-		expr.parameterType?.append[oneSpace]
-		expr.parameterType.format
+		super._format(expr, format)
 	}
 
 	def dispatch void format(RichString rs, extension IFormattableDocument format) {

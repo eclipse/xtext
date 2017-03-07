@@ -495,25 +495,8 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    format.append(this.textRegionExtensions.regionFor(expr).keyword("val"), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    format.append(this.textRegionExtensions.regionFor(expr).keyword("var"), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    format.append(this.textRegionExtensions.regionFor(expr).keyword("extension"), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    format.<JvmTypeReference>append(expr.getType(), _function_3);
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    format.surround(this.textRegionExtensions.regionFor(expr).keyword("="), _function_4);
-    format.<JvmTypeReference>format(expr.getType());
-    format.<XExpression>format(expr.getRight());
+    format.append(this.textRegionExtensions.regionFor(expr).keyword("extension"), _function);
+    super._format(expr, format);
   }
   
   @Override
@@ -522,14 +505,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       it.oneSpace();
     };
     format.append(this.textRegionExtensions.regionFor(expr).keyword("extension"), _function);
-    JvmTypeReference _parameterType = expr.getParameterType();
-    if (_parameterType!=null) {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-        it.oneSpace();
-      };
-      format.<JvmTypeReference>append(_parameterType, _function_1);
-    }
-    format.<JvmTypeReference>format(expr.getParameterType());
+    super._format(expr, format);
   }
   
   protected void _format(final RichString rs, @Extension final IFormattableDocument format) {
