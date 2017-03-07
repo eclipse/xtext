@@ -24,12 +24,14 @@ import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.annotations.formatting2.XbaseWithAnnotationsFormatter
 
 import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*
@@ -219,6 +221,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	}
 
 	def dispatch void format(XtendField field, extension IFormattableDocument document) {
+		field.regionFor.keyword("extension").append[oneSpace]
 		formatAnnotations(field, document, newLineAfterFieldAnnotations)
 		formatModifiers(field, document)
 		if (field.name !== null)
@@ -229,10 +232,27 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	}
 
 	def dispatch void format(XtendParameter param, extension IFormattableDocument format) {
+		param.regionFor.keyword("extension").append[oneSpace]
 		formatAnnotations(param, format, newLineAfterParameterAnnotations)
 		param.parameterType.format
 		val nameNode = param.regionFor.feature(XTEND_PARAMETER__NAME)
 		nameNode.prepend[oneSpace]
+	}
+
+	override dispatch void format(XVariableDeclaration expr, extension IFormattableDocument format) {
+		expr.regionFor.keyword("val").append[oneSpace]
+		expr.regionFor.keyword("var").append[oneSpace]
+		expr.regionFor.keyword("extension").append[oneSpace]
+		expr.type.append[oneSpace]
+		expr.regionFor.keyword("=").surround[oneSpace]
+		expr.type.format
+		expr.right.format
+	}
+
+	override dispatch void format(JvmFormalParameter expr, extension IFormattableDocument format) {
+		expr.regionFor.keyword("extension").append[oneSpace]
+		expr.parameterType?.append[oneSpace]
+		expr.parameterType.format
 	}
 
 	def dispatch void format(RichString rs, extension IFormattableDocument format) {

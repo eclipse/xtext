@@ -451,35 +451,85 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
   }
   
   protected void _format(final XtendField field, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(field).keyword("extension"), _function);
     this.formatAnnotations(field, document, XbaseFormatterPreferenceKeys.newLineAfterFieldAnnotations);
     this.formatModifiers(field, document);
     String _name = field.getName();
     boolean _tripleNotEquals = (_name != null);
     if (_tripleNotEquals) {
-      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
         it.oneSpace();
       };
-      document.<JvmTypeReference>append(field.getType(), _function);
+      document.<JvmTypeReference>append(field.getType(), _function_1);
     }
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(document.prepend(this.textRegionExtensions.regionFor(field).keyword("="), _function_1), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(document.prepend(this.textRegionExtensions.regionFor(field).keyword("="), _function_2), _function_3);
     document.<JvmTypeReference>format(field.getType());
     document.<XExpression>format(field.getInitialValue());
   }
   
   protected void _format(final XtendParameter param, @Extension final IFormattableDocument format) {
-    this.formatAnnotations(param, format, XbaseFormatterPreferenceKeys.newLineAfterParameterAnnotations);
-    format.<JvmTypeReference>format(param.getParameterType());
-    final ISemanticRegion nameNode = this.textRegionExtensions.regionFor(param).feature(XtendPackage.Literals.XTEND_PARAMETER__NAME);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    format.prepend(nameNode, _function);
+    format.append(this.textRegionExtensions.regionFor(param).keyword("extension"), _function);
+    this.formatAnnotations(param, format, XbaseFormatterPreferenceKeys.newLineAfterParameterAnnotations);
+    format.<JvmTypeReference>format(param.getParameterType());
+    final ISemanticRegion nameNode = this.textRegionExtensions.regionFor(param).feature(XtendPackage.Literals.XTEND_PARAMETER__NAME);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    format.prepend(nameNode, _function_1);
+  }
+  
+  @Override
+  protected void _format(final XVariableDeclaration expr, @Extension final IFormattableDocument format) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    format.append(this.textRegionExtensions.regionFor(expr).keyword("val"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    format.append(this.textRegionExtensions.regionFor(expr).keyword("var"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    format.append(this.textRegionExtensions.regionFor(expr).keyword("extension"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    format.<JvmTypeReference>append(expr.getType(), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    format.surround(this.textRegionExtensions.regionFor(expr).keyword("="), _function_4);
+    format.<JvmTypeReference>format(expr.getType());
+    format.<XExpression>format(expr.getRight());
+  }
+  
+  @Override
+  protected void _format(final JvmFormalParameter expr, @Extension final IFormattableDocument format) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    format.append(this.textRegionExtensions.regionFor(expr).keyword("extension"), _function);
+    JvmTypeReference _parameterType = expr.getParameterType();
+    if (_parameterType!=null) {
+      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+        it.oneSpace();
+      };
+      format.<JvmTypeReference>append(_parameterType, _function_1);
+    }
+    format.<JvmTypeReference>format(expr.getParameterType());
   }
   
   protected void _format(final RichString rs, @Extension final IFormattableDocument format) {
