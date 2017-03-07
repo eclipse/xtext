@@ -32,6 +32,10 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
+/**
+ * @deprecated Use org.eclipse.xtext.ui.testing.AbstractContentAssistTest instead
+ */
+@Deprecated
 @SuppressWarnings("all")
 public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
   @Inject

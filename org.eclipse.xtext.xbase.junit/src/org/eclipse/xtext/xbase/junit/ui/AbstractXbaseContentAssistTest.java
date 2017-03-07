@@ -47,6 +47,10 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.name.Named;
 
+/**
+ * @deprecated Use org.eclipse.xtext.xbase.ui.testing.AbstractXbaseContentAssistTest instead
+ */
+@Deprecated
 public abstract class AbstractXbaseContentAssistTest extends Assert implements ResourceLoadHelper, IJavaProjectProvider {
 
 	@Inject

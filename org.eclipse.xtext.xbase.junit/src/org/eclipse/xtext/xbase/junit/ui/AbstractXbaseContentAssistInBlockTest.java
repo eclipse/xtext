@@ -9,6 +9,10 @@ package org.eclipse.xtext.xbase.junit.ui;
 
 import org.junit.Test;
 
+/**
+ * @deprecated Use org.eclipse.xtext.xbase.ui.testing.AbstractXbaseContentAssistInBlockTest instead
+ */
+@Deprecated
 public abstract class AbstractXbaseContentAssistInBlockTest extends AbstractXbaseContentAssistTest {
 
 	protected static String[] VARIABLE_DECL = {"val", "var"};

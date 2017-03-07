@@ -28,7 +28,9 @@ import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.xbase.ui.testing.FindReferencesTestUtil instead
  */
+@Deprecated
 public class FindReferencesTestUtil extends Assert {
 
 	@Inject
