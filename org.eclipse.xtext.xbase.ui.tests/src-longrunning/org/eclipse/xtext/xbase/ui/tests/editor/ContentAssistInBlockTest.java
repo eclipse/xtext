@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;

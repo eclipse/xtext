@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.tests.workspace
 
 import com.google.inject.Inject
 import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider
 import org.junit.After
@@ -17,7 +17,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 
 class EclipseWorkspaceConfigurationTest {
 	

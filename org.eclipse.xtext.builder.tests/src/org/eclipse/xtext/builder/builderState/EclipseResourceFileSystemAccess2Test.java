@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.After;

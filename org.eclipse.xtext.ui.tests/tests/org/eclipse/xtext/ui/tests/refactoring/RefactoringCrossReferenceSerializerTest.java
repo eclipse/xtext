@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;

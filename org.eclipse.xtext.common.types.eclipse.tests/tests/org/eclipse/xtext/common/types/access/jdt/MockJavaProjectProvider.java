@@ -35,10 +35,10 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.xtext.common.types.tests.AbstractActivator;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.junit4.ui.util.PluginUtil;
-import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.testing.util.PluginUtil;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.util.Strings;
 

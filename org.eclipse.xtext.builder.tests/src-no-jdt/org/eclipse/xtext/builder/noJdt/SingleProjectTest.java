@@ -8,12 +8,12 @@
 package org.eclipse.xtext.builder.noJdt;
 
 import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourceAttributes;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.junit.Test;
 

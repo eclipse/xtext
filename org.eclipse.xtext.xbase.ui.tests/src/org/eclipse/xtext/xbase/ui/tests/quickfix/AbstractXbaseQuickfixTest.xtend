@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.ui.XbaseUiModule
 import org.eclipse.xtext.xbase.ui.internal.XbaseActivator
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase
 
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 
 abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
 	IProject demandCreateProject;

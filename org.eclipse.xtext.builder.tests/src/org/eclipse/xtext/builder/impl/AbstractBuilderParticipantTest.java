@@ -8,8 +8,8 @@
 package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Set;
@@ -27,7 +27,7 @@ import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfigurationProvider;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;

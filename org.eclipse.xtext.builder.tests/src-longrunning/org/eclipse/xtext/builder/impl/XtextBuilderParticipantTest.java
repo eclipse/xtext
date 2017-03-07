@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 
 import java.util.Collection;
 
@@ -19,7 +19,7 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;

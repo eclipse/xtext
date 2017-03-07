@@ -8,8 +8,8 @@
 package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 
 import java.io.File;
 import java.io.IOException;

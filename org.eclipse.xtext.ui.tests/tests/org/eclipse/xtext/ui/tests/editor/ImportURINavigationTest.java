@@ -21,7 +21,7 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;

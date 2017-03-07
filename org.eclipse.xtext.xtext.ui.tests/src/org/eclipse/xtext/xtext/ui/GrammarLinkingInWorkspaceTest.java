@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.util.StringInputStream;

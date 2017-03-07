@@ -16,7 +16,7 @@ import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jface.text.hyperlink.IHyperlink
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper

@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.notification;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.shared.Access;

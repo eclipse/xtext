@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.navigation;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 
 import java.io.InputStream;

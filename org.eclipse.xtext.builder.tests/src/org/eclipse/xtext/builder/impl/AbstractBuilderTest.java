@@ -8,7 +8,7 @@
 package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.intro.IIntroManager;
 import org.eclipse.xtext.builder.tests.Activator;
-import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
 import org.junit.After;

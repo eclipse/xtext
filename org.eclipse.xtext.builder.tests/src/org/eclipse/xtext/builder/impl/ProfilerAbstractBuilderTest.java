@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
 import org.eclipse.xtext.ui.XtextProjectHelper;
