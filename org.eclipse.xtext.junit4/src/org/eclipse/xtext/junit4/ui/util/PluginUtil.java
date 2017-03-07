@@ -14,6 +14,10 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.Bundle;
 
+/**
+ * @deprecated Use org.eclipse.xtext.ui.testing.util.PluginUtil instead
+ */
+@Deprecated
 public class PluginUtil {
 
 	public static IPath findPathInPlugin(Plugin srcPlugin, String fileName)

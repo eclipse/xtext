@@ -23,7 +23,9 @@ import org.junit.Before;
  * Abstract base class for test classes that need access to the workbench.
  * 
  * @author Peter Friese - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.ui.testing.AbstractWorkbenchTest instead
  */
+@Deprecated
 public abstract class AbstractWorkbenchTest extends Assert {
 
 	@Before

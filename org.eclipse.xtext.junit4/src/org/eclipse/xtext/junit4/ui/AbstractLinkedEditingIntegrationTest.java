@@ -18,7 +18,9 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.ui.testing.AbstractLinkedEditingIntegrationTest instead
  */
+@Deprecated
 public abstract class AbstractLinkedEditingIntegrationTest extends AbstractEditorTest {
 
 	protected void waitForReconciler(final XtextEditor editor) {

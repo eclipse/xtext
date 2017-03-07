@@ -24,7 +24,9 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.ui.testing.AbstractCursorHandlingTest instead
  */
+@Deprecated
 public abstract class AbstractCursorHandlingTest extends AbstractEditorTest {
 
 	private List<IFile> files = Lists.newArrayList();
