@@ -12,6 +12,121 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
   @Test
+  public void testBug402917_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Dully {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension IntegerExtensions y");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension IntegerExtensions x");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def all(extension IntegerExtensions x) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val extension IntegerExtensions foo = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val c = [ extension IntegerExtensions p |");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("123.bitwiseAnd(1)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void testBug402917_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Dully {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension IntegerExtensions y");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension IntegerExtensions x");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def all(extension IntegerExtensions x) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val extension IntegerExtensions foo = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val c = [ extension IntegerExtensions p |");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("123.bitwiseAnd(1)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Dully {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("extension ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("IntegerExtensions y");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("extension    IntegerExtensions x");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def all(extension    IntegerExtensions x) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val extension    IntegerExtensions foo = null");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val c = [ extension    IntegerExtensions p |");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("123.bitwiseAnd(1)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("]");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug398718() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");

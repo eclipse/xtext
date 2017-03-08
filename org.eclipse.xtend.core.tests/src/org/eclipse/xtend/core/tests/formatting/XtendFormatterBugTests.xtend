@@ -7,6 +7,67 @@ import org.junit.Test
 class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 
 	@Test
+	def testBug402917_01() {
+		assertFormatted(
+			'''
+			package foo
+			
+			class Dully {
+			
+				extension IntegerExtensions y
+				extension IntegerExtensions x
+			
+				def all(extension IntegerExtensions x) {
+					val extension IntegerExtensions foo = null
+					val c = [ extension IntegerExtensions p |
+						123.bitwiseAnd(1)
+					]
+				}
+			}
+			'''
+		)
+	}
+
+	@Test
+	def testBug402917_02() {
+		assertFormatted(
+			'''
+			package foo
+			
+			class Dully {
+			
+				extension IntegerExtensions y
+				extension IntegerExtensions x
+			
+				def all(extension IntegerExtensions x) {
+					val extension IntegerExtensions foo = null
+					val c = [ extension IntegerExtensions p |
+						123.bitwiseAnd(1)
+					]
+				}
+			}
+			''',
+			'''
+			package foo
+			
+			class Dully {
+			
+				extension 
+				IntegerExtensions y
+				extension    IntegerExtensions x
+			
+				def all(extension    IntegerExtensions x) {
+					val extension    IntegerExtensions foo = null
+					val c = [ extension    IntegerExtensions p |
+						123.bitwiseAnd(1)
+					]
+				}
+			}
+			'''
+		)
+	}
+
+	@Test
 	def testBug398718(){
 		assertFormatted('''
 			package foo
