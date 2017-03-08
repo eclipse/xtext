@@ -14,10 +14,10 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 			
 			class Dully {
 			
-				extension IntegerExtensions y
-				extension IntegerExtensions x
+				@Deprecated extension IntegerExtensions y
+				@Deprecated extension IntegerExtensions x
 			
-				def all(extension IntegerExtensions x) {
+				def all(@Deprecated extension IntegerExtensions x) {
 					val extension IntegerExtensions foo = null
 					val c = [ extension IntegerExtensions p |
 						123.bitwiseAnd(1)
@@ -36,14 +36,18 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 			
 			class Dully {
 			
+				@Deprecated
 				extension IntegerExtensions y
-				extension IntegerExtensions x
+				@Deprecated extension IntegerExtensions x
 			
-				def all(extension IntegerExtensions x) {
+				def all(@Deprecated extension IntegerExtensions x) {
 					val extension IntegerExtensions foo = null
 					val c = [ extension IntegerExtensions p |
 						123.bitwiseAnd(1)
 					]
+				}
+			
+				def all2(extension @Deprecated IntegerExtensions x) {
 				}
 			}
 			''',
@@ -52,16 +56,19 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 			
 			class Dully {
 			
+				@Deprecated 
 				extension 
 				IntegerExtensions y
-				extension    IntegerExtensions x
+				@Deprecated   extension    IntegerExtensions x
 			
-				def all(extension    IntegerExtensions x) {
+				def all(@Deprecated   extension    IntegerExtensions x) {
 					val extension    IntegerExtensions foo = null
 					val c = [ extension    IntegerExtensions p |
 						123.bitwiseAnd(1)
 					]
 				}
+				def all2(   extension  @Deprecated  IntegerExtensions x) {
+				}	
 			}
 			'''
 		)
