@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.ui.actions.WorkspaceModifyOperation
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile
 import org.eclipse.xtext.ui.resource.JarEntryLocator
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl.PackageFragmentRootData
@@ -28,8 +28,8 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 
 /**
  * @author Anton Kosyakov - Initial contribution and API

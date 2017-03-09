@@ -24,7 +24,9 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.ui.testing.AbstractEditorTest instead
  */
+@Deprecated
 public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 
 	static final long STEP_DELAY = 0;

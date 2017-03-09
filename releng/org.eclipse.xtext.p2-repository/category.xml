@@ -18,6 +18,8 @@
    <bundle id="org.eclipse.xtext.idea.generator.source" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.junit4" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.junit4.source" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtext.ui.testing" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtext.ui.testing.source" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.logging" version="1.2.15.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.logging.source" version="1.2.15.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.m2e" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
@@ -38,6 +40,8 @@
    <bundle id="org.eclipse.xtext.ui.shared.source" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xbase.junit" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xbase.junit.source" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtext.xbase.ui.testing" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtext.xbase.ui.testing.source" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xbase.testlanguages.ui" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xbase.testlanguages.ui.source" version="2.12.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xbase.ui" version="2.12.0.qualifier"><category name="Xtext"/></bundle>

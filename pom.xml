@@ -32,6 +32,7 @@
 		<module>org.eclipse.xtext.ui.codetemplates.ui</module>
 		<module>org.eclipse.xtext.ui.ecore</module>
 		<module>org.eclipse.xtext.junit4</module>
+		<module>org.eclipse.xtext.ui.testing</module>
 		<module>org.eclipse.xtext.xbase.junit</module>
 		<module>org.eclipse.xtext.xtext.ui</module>
 		<module>org.eclipse.xtext.xtext.ui.graph</module>
@@ -46,6 +47,7 @@
 		<module>org.eclipse.xtext.ui.tests</module>
 		<module>org.eclipse.xtext.testlanguages.ui</module>
 		<module>org.eclipse.xtext.xbase.testlanguages.ui</module>
+		<module>org.eclipse.xtext.xbase.ui.testing</module>
 		<module>org.eclipse.xtext.xbase.ui.tests</module>
 		<module>org.eclipse.xtext.xtext.ui.graph.tests</module>
 		<module>org.eclipse.xtext.xtext.ui.tests</module>

@@ -14,7 +14,9 @@ import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.ui.testing.AbstractCStyleLanguageAutoEditTest instead
  */
+@Deprecated
 public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEditTest {
 
 	@Test public void testParenthesis_1() throws Exception {

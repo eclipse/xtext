@@ -59,7 +59,9 @@ import com.google.common.io.ByteStreams;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
+ * @deprecated Use org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil instead
  */
+@Deprecated
 public class JavaProjectSetupUtil {
 
 	private static final String JRE_CONTAINER_1_5 = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5";

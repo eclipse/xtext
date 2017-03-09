@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.contentassist
 
-import org.eclipse.xtext.xbase.junit.ui.AbstractContentAssistTest
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.ui.testing.AbstractContentAssistTest
+import org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLangUiInjectorProvider
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLangUiInjectorProvider
 
 /**
  * Test the content assist to make sure we inherit the default XbaseProposalProvider

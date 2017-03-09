@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.navigation;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 
 import java.io.InputStream;
@@ -22,8 +22,8 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.junit.ui.FindReferencesTestUtil;
-import org.eclipse.xtext.xbase.junit.ui.FindReferencesTestUtil.MockAcceptor;
+import org.eclipse.xtext.xbase.ui.testing.FindReferencesTestUtil;
+import org.eclipse.xtext.xbase.ui.testing.FindReferencesTestUtil.MockAcceptor;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
 import org.junit.After;
 import org.junit.Before;

@@ -23,7 +23,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.emf.common.util.URI.*
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 
 /**

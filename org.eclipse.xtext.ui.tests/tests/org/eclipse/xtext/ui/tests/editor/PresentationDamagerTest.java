@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor;
 
-import org.eclipse.xtext.junit4.ui.AbstractDamagerRepairerTest;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer;
+import org.eclipse.xtext.ui.testing.AbstractDamagerRepairerTest;
 import org.junit.Test;
 
 /**

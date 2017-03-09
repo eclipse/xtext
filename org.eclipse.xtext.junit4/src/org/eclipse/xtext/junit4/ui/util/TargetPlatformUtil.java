@@ -26,7 +26,9 @@ import org.osgi.framework.Bundle;
 
 /**
  * @author dietrich - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.ui.testing.util.TargetPlatformUtil instead
  */
+@Deprecated
 public class TargetPlatformUtil {
 	
 	public static void setTargetPlatform() throws Exception {

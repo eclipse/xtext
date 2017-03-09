@@ -8,9 +8,9 @@
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
 import java.util.ArrayList;
-import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.ui.testing.AbstractXbaseContentAssistTest;
 import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

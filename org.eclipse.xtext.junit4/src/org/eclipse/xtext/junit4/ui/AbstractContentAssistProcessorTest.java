@@ -23,7 +23,9 @@ import com.google.inject.Injector;
  * @author Jan Koehnlein
  * @author Sebastian Zarnekow
  * @see org.eclipse.xtext.ui.editor.contentassist.impl.DefaultContentAssistProcessor
+ * @deprecated Use org.eclipse.xtext.ui.testing.AbstractContentAssistTest instead
  */
+@Deprecated
 public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTests {
 
 	public static class SetupExtension implements ISetup {

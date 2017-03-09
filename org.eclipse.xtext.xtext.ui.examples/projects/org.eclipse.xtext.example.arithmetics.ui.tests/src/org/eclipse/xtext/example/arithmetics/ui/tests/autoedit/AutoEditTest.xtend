@@ -14,12 +14,12 @@ import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator
 import org.eclipse.xtext.example.arithmetics.ui.tests.ArithmeticsUiInjectorProvider
-import org.eclipse.xtext.junit4.ui.AbstractAutoEditTest
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.XtextProjectHelper
+import org.eclipse.xtext.ui.testing.AbstractAutoEditTest
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
 import org.eclipse.xtext.ui.util.JREContainerProvider
 import org.eclipse.xtext.ui.util.PluginProjectFactory
 import org.junit.Before

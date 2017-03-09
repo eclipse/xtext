@@ -228,7 +228,7 @@ public class InMemoryJavaCompiler {
     InMemoryJavaCompiler.ClassLoaderBasedNameEnvironment _classLoaderBasedNameEnvironment = new InMemoryJavaCompiler.ClassLoaderBasedNameEnvironment(parent);
     this.nameEnv = _classLoaderBasedNameEnvironment;
     this.parentClassLoader = parent;
-    Map<String, String> _map = compilerOptions.getMap();
+    Map _map = compilerOptions.getMap();
     CompilerOptions _compilerOptions = new CompilerOptions(_map);
     this.compilerOptions = _compilerOptions;
   }

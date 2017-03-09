@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.encoding;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -20,12 +20,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.nature.XtextNature;
-import org.eclipse.xtext.junit4.ui.AbstractWorkbenchTest;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testlanguages.ui.internal.TestlanguagesActivator;
 import org.eclipse.xtext.ui.editor.WorkspaceEncodingProvider;
+import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -6,14 +6,13 @@ Bundle-Version: 2.12.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ui.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.domainmodel.ui,
- org.eclipse.xtext.junit4,
- org.eclipse.xtext.xbase.junit,
  org.eclipse.xtext.testing,
  org.eclipse.core.runtime,
  org.eclipse.ui.workbench;resolution:=optional,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.jdt.core,
- org.eclipse.xtext.xbase.testing
+ org.eclipse.xtext.xbase.testing,
+ org.eclipse.xtext.ui.testing
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.domainmodel.ui.tests;x-internal=true
 Import-Package: org.hamcrest.core,

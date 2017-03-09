@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.ui.tests.editor;
 
 import java.util.List;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.ui.tests.editor.AbstractXbaseContentAssistBugTest;
 import org.junit.Assert;

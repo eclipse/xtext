@@ -13,7 +13,9 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.ui.testing.MockableSelectionProvider instead
  */
+@Deprecated
 public class MockableSelectionProvider implements ISelectionProvider {
 
 	@Override

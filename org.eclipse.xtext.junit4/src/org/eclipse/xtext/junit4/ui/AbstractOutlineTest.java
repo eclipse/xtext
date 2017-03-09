@@ -57,7 +57,9 @@ import com.google.inject.Inject;
  * @author Lorenzo Bettini - Adapted to be used for any DSL
  * 
  * @since 2.10
+ * @deprecated Use org.eclipse.xtext.ui.testing.AbstractOutlineTest instead
  */
+@Deprecated
 public abstract class AbstractOutlineTest extends AbstractEditorTest {
 
 	protected static int TAB_INDENT = 2;

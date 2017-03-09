@@ -58,7 +58,9 @@ import com.google.inject.Injector;
  * @author Michael Clay - Initial contribution and API
  * @author Sven Efftinge
  * @author Sebastian Zarnekow
+ * @deprecated Use org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder instead
  */
+@Deprecated
 public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	private String model;

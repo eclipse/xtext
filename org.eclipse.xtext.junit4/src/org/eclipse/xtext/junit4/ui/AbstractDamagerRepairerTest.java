@@ -31,7 +31,9 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
+ * @deprecated Use org.eclipse.xtext.ui.testing.AbstractDamagerRepairerTest instead
  */
+@Deprecated
 public abstract class AbstractDamagerRepairerTest extends Assert implements IDocumentListener, ITokenScanner {
 
 	private IPresentationDamager damager;

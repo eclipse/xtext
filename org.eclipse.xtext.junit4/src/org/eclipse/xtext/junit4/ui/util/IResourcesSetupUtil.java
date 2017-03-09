@@ -40,6 +40,10 @@ import org.junit.Assert;
 
 import com.google.common.io.ByteStreams;
 
+/**
+ * @deprecated Use org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil instead
+ */
+@Deprecated
 public class IResourcesSetupUtil {
 
 	public static IWorkspaceRoot root() {

@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ui.tests.resource;
 
 import static com.google.common.collect.Iterables.*;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
