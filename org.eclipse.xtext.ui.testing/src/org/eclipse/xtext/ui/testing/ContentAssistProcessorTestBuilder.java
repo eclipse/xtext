@@ -56,6 +56,8 @@ import com.google.inject.Injector;
  * @author Michael Clay - Initial contribution and API
  * @author Sven Efftinge
  * @author Sebastian Zarnekow
+ * 
+ * @since 2.12
  */
 public class ContentAssistProcessorTestBuilder implements Cloneable {
 

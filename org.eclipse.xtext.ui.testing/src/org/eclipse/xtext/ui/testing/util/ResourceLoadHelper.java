@@ -14,7 +14,10 @@ import org.eclipse.xtext.resource.XtextResource;
 /**
  * Abstraction for other test utilities that want to load a resource for a
  * textual model.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @since 2.12
  */
 public interface ResourceLoadHelper {
 

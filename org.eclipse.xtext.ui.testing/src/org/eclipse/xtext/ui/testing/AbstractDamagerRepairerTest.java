@@ -31,6 +31,8 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
+ * 
+ * @since 2.12
  */
 public abstract class AbstractDamagerRepairerTest extends Assert implements IDocumentListener, ITokenScanner {
 

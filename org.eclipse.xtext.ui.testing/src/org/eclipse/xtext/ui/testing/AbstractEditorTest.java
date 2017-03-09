@@ -24,6 +24,8 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * 
+ * @since 2.12
  */
 public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 

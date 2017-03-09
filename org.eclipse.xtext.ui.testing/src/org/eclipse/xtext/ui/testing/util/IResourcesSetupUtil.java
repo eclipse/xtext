@@ -40,6 +40,9 @@ import org.junit.Assert;
 
 import com.google.common.io.ByteStreams;
 
+/**
+ * @since 2.12
+ */
 public class IResourcesSetupUtil {
 
 	public static IWorkspaceRoot root() {

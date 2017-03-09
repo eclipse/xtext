@@ -13,6 +13,8 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @since 2.12
  */
 public class MockableSelectionProvider implements ISelectionProvider {
 

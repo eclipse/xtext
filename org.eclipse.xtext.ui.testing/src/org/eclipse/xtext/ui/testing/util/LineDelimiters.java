@@ -11,6 +11,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
+ * 
+ * @since 2.12
  */
 public class LineDelimiters {
 	public static String toUnix(String s) {

@@ -59,6 +59,8 @@ import com.google.common.io.ByteStreams;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
+ * 
+ * @since 2.12
  */
 public class JavaProjectSetupUtil {
 

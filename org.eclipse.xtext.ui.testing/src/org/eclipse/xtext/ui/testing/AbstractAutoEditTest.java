@@ -27,6 +27,8 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @since 2.12
  */
 public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 

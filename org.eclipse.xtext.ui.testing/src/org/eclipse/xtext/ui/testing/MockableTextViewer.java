@@ -28,6 +28,8 @@ import org.eclipse.swt.graphics.Point;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @since 2.12
  */
 @SuppressWarnings("deprecation")
 public class MockableTextViewer implements ITextViewer {

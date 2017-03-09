@@ -26,6 +26,9 @@ import org.junit.BeforeClass
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper
 
+/**
+ * @since 2.12
+ */
 class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
 	
 	@Inject Provider<XtextResourceSet> resourceSetProvider

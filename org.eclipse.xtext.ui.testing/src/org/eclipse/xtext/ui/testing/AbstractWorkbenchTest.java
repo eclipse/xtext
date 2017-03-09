@@ -23,6 +23,8 @@ import org.junit.Before;
  * Abstract base class for test classes that need access to the workbench.
  * 
  * @author Peter Friese - Initial contribution and API
+ * 
+ * @since 2.12
  */
 public abstract class AbstractWorkbenchTest extends Assert {
 

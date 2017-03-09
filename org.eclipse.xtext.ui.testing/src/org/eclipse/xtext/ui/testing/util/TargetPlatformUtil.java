@@ -26,6 +26,8 @@ import org.osgi.framework.Bundle;
 
 /**
  * @author dietrich - Initial contribution and API
+ * 
+ * @since 2.12
  */
 public class TargetPlatformUtil {
 	

@@ -17,6 +17,8 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * 
+ * @since 2.12
  */
 public abstract class AbstractLinkedEditingIntegrationTest extends AbstractEditorTest {
 

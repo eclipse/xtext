@@ -47,6 +47,9 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.name.Named;
 
+/**
+ * @since 2.12
+ */
 public abstract class AbstractXbaseContentAssistTest extends Assert implements ResourceLoadHelper, IJavaProjectProvider {
 
 	@Inject

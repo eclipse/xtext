@@ -14,6 +14,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.Bundle;
 
+/**
+ * @since 2.12
+ */
 public class PluginUtil {
 
 	public static IPath findPathInPlugin(Plugin srcPlugin, String fileName)

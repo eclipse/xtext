@@ -28,6 +28,8 @@ import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @since 2.12
  */
 public class FindReferencesTestUtil extends Assert {
 

@@ -23,6 +23,8 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @since 2.12
  */
 public abstract class AbstractCursorHandlingTest extends AbstractEditorTest {
 
