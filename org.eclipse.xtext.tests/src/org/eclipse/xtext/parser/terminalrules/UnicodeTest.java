@@ -10,6 +10,7 @@ package org.eclipse.xtext.parser.terminalrules;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import org.eclipse.emf.common.util.URI;
@@ -42,15 +43,19 @@ public class UnicodeTest extends AbstractXtextTests {
 		super.setUp();
 		with(UnicodeTestLanguageStandaloneSetup.class);
 		IEncodingProvider.Runtime encodingProvider = get(IEncodingProvider.Runtime.class);
-		encodingProvider.setDefaultEncoding(StandardCharsets.ISO_8859_1.name());
+		encodingProvider.setDefaultEncoding(getCharsetForTest().name());
+	}
+	
+	protected Charset getCharsetForTest() {
+		return StandardCharsets.ISO_8859_1;
 	}
 
 	@Override
 	protected InputStream getAsStream(String model) {
 		try {
-			return new StringInputStream(model, StandardCharsets.ISO_8859_1.name());
+			return new StringInputStream(model, getCharsetForTest().name());
 		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException("Encoding ISO-8859-1 not found.", e);
+			throw new RuntimeException("Encoding " + getCharsetForTest().name() +" not found.", e);
 		}
 	}
 
@@ -90,7 +95,7 @@ public class UnicodeTest extends AbstractXtextTests {
 		
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		resource.save(outputStream, null);
-		String textualModel = new String(outputStream.toByteArray(), StandardCharsets.ISO_8859_1);
+		String textualModel = new String(outputStream.toByteArray(), getCharsetForTest());
 		assertEquals(doubleQuote(UMLAUTS + " \"" + UMLAUTS + "\" \"" + QUOTED_UMLAUTS + "\" \"" + MIXED_UMLAUTS + "\""), textualModel); 
 	}
 	
