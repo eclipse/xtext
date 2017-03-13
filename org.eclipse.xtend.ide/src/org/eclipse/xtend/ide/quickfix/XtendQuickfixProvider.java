@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.quickfix;
 
 import static com.google.common.collect.Sets.*;
+import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtext.ui.util.DisplayRunHelper.*;
 import static org.eclipse.xtext.util.Strings.*;
 
@@ -74,6 +75,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedConstructor;
@@ -187,6 +189,15 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					public void apply(EObject element, IModificationContext context) throws Exception {
 						replaceKeyword(grammarAccess.getMethodModifierAccess().findKeywords("def").get(0), "override", element,
 								context.getXtextDocument());
+						if (element instanceof XtendFunction) {
+							XtendFunction function = (XtendFunction) element;
+							for (XAnnotation anno : Lists.reverse(function.getAnnotations())) {
+								if (anno != null && anno.getAnnotationType() != null && Override.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
+									ICompositeNode node = NodeModelUtils.findActualNodeFor(anno);
+									context.getXtextDocument().replace(node.getOffset(), node.getLength(), "");
+								}
+							}
+						}
 					}
 				});
 	}
@@ -199,8 +210,28 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					public void apply(EObject element, IModificationContext context) throws Exception {
 						replaceKeyword(grammarAccess.getMethodModifierAccess().findKeywords("override").get(0), "def", element,
 								context.getXtextDocument());
+						if (element instanceof XtendFunction) {
+							XtendFunction function = (XtendFunction) element;
+							for (XAnnotation anno : Lists.reverse(function.getAnnotations())) {
+								if (anno != null && anno.getAnnotationType() != null && Override.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
+									ICompositeNode node = NodeModelUtils.findActualNodeFor(anno);
+									context.getXtextDocument().replace(node.getOffset(), node.getLength(), "");
+								}
+							}
+						}
 					}
 				});
+	}
+
+	@Fix(IssueCodes.OBSOLETE_ANNOTATION_OVERRIDE)
+	public void fixObsoleteOverrideAnnotation(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove superfluous @Override", "Removes superfluous @Override annotation from this function", "fix_indent.gif",
+			new IModification() {
+				@Override
+				public void apply(IModificationContext context) throws Exception {
+					context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), "");
+				}
+		});
 	}
 
 	protected void replaceKeyword(Keyword keyword, String replacement, EObject container, IXtextDocument document)

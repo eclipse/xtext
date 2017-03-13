@@ -1010,6 +1010,12 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 					if (function.isOverride()) {
 						error("The method "+ operation.getSimpleSignature() +" of type "+getDeclaratorName(operation.getDeclaration())+" must override a superclass method.", 
 								function, XTEND_MEMBER__MODIFIERS, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
+					} else {
+						for (XAnnotation anno : function.getAnnotations()) {
+							if (anno != null && anno.getAnnotationType() != null && Override.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
+								error("Superfluous @Override annotation", anno, null, OBSOLETE_ANNOTATION_OVERRIDE);
+							}
+						}
 					}
 				}
 			} else if (flaggedOperations.add(sourceElement)) {
@@ -1057,6 +1063,13 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 					error("The method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(resolved) + 
 							" shadows the method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(inherited) + 
 							", but does not override it.", function, XTEND_FUNCTION__NAME, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
+				}
+			}
+			if (function.isOverride()) {
+				for (XAnnotation anno : function.getAnnotations()) {
+					if (anno != null && anno.getAnnotationType() != null && Override.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
+						warning("Superfluous @Override annotation", anno, null, OBSOLETE_ANNOTATION_OVERRIDE);
+					}
 				}
 			}
 		}
