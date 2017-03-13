@@ -39,7 +39,7 @@ interface IXtextGeneratorLanguage {
 	def ResourceSet getResourceSet()
 	
 	/**
-	 * @deprecated Use {@link CodeConfig#isPreferXtendStubs(boolean)} instead
+	 * @deprecated Use {@link CodeConfig#isPreferXtendStubs()} instead
 	 */
 	@Deprecated
 	def boolean isGenerateXtendStubs() 

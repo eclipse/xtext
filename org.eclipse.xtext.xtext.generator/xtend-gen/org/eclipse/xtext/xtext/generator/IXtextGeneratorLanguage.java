@@ -39,7 +39,7 @@ public interface IXtextGeneratorLanguage {
   public abstract ResourceSet getResourceSet();
   
   /**
-   * @deprecated Use {@link CodeConfig#isPreferXtendStubs(boolean)} instead
+   * @deprecated Use {@link CodeConfig#isPreferXtendStubs()} instead
    */
   @Deprecated
   public abstract boolean isGenerateXtendStubs();
