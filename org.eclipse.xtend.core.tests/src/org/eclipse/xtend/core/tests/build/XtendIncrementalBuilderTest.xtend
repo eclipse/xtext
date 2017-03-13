@@ -126,7 +126,6 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 				'src/A.xtend' - '''
 					import b.B
 					class A {
-					   @Override
 					   def foo() {
 					      B.foo
 					   }

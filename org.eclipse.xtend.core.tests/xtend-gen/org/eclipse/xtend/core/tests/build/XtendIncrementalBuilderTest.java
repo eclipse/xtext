@@ -195,9 +195,6 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
       _builder.append("class A {");
       _builder.newLine();
       _builder.append("   ");
-      _builder.append("@Override");
-      _builder.newLine();
-      _builder.append("   ");
       _builder.append("def foo() {");
       _builder.newLine();
       _builder.append("      ");
