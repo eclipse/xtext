@@ -1045,6 +1045,9 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 				} else if (details.contains(OverrideCheckDetails.RETURN_MISMATCH)) {
 					error("The return type is incompatible with " + inherited.getSimpleSignature(), sourceElement,
 							returnTypeFeature(sourceElement), INCOMPATIBLE_RETURN_TYPE);
+				} else if (details.contains(OverrideCheckDetails.SYNCHRONIZED_MISMATCH)) {
+					warning("The overridden method is synchronized, the current one is not synchronized.", sourceElement,
+							nameFeature(sourceElement), MISSING_SYNCHRONIZED);
 				}
 			}
 		}

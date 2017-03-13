@@ -41,6 +41,9 @@ class MemberFromSuperImplementor {
 		methodBuilder.overrideFlag = true
 		methodBuilder.methodName = overriddenOperation.declaration.simpleName
 		methodBuilder.returnType = overriddenOperation.resolvedReturnType
+		if (overriddenOperation.declaration.synchronized) {
+			methodBuilder.synchronizedFlag = true
+		}
 		if(!overriddenOperation.resolvedTypeParameters.empty) {
 			val typeParameters = newArrayList
 			overriddenOperation.resolvedTypeParameters.forEach [ typeParam, idx |

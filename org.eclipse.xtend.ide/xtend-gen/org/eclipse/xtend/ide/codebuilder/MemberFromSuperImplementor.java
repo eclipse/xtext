@@ -72,6 +72,10 @@ public class MemberFromSuperImplementor {
     methodBuilder.setOverrideFlag(true);
     methodBuilder.setMethodName(overriddenOperation.getDeclaration().getSimpleName());
     methodBuilder.setReturnType(overriddenOperation.getResolvedReturnType());
+    boolean _isSynchronized = overriddenOperation.getDeclaration().isSynchronized();
+    if (_isSynchronized) {
+      methodBuilder.setSynchronizedFlag(true);
+    }
     boolean _isEmpty = overriddenOperation.getResolvedTypeParameters().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {

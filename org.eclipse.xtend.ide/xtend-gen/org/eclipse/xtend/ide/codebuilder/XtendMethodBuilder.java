@@ -47,6 +47,10 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBu
       if (_isStaticFlag) {
         appendable.append("static ");
       }
+      boolean _isSynchronizedFlag = this.isSynchronizedFlag();
+      if (_isSynchronizedFlag) {
+        appendable.append("synchronized ");
+      }
       this.appendTypeParameters(appendable, this.getTypeParameters());
       boolean _isAbstractFlag = this.isAbstractFlag();
       if (_isAbstractFlag) {

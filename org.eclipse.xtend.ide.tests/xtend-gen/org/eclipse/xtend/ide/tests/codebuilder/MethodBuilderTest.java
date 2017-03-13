@@ -402,6 +402,49 @@ public class MethodBuilderTest extends AbstractBuilderTest {
   }
   
   @Test
+  public void testXtendSynchronized() {
+    AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());
+    final Procedure1<AbstractMethodBuilder> _function = (AbstractMethodBuilder it) -> {
+      it.setContext(this.getXtendClass());
+      it.setMethodName("foo");
+      it.setReturnType(this.createTypeRef(this.getXtendClass()));
+      it.setVisibility(JvmVisibility.PUBLIC);
+      it.setSynchronizedFlag(true);
+    };
+    AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("def synchronized foo() {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(AbstractBuilderTest.DEFAULT_BODY, "  ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    this.assertBuilds(_doubleArrow, _builder.toString());
+  }
+  
+  @Test
+  public void testJavaSynchronized() {
+    AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getJavaClass());
+    final Procedure1<AbstractMethodBuilder> _function = (AbstractMethodBuilder it) -> {
+      it.setContext(this.getJavaClass());
+      it.setMethodName("bar");
+      it.setReturnType(this.createTypeRef(this.getJavaClass()));
+      it.setVisibility(JvmVisibility.PUBLIC);
+      it.setSynchronizedFlag(true);
+    };
+    AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public synchronized Bar bar() {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(AbstractBuilderTest.DEFAULT_BODY, "  ");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    this.assertBuilds(_doubleArrow, _builder.toString());
+  }
+  
+  @Test
   public void testSetContextOnParameters() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());
     final Procedure1<AbstractMethodBuilder> _function = (AbstractMethodBuilder it) -> {

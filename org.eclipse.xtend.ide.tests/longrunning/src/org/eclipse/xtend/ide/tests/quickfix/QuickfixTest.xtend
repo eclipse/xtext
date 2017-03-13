@@ -75,6 +75,40 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	def void missingSynchronized() {
+		setSeverity(MISSING_SYNCHRONIZED, "warning")		
+		create('XXX.xtend', '''
+			class Bar {
+				def synchronized int doSth() {
+					0
+				}
+				
+			}
+			class Foo extends Bar {
+				
+				override int doSth|() {
+					0
+				}
+			}
+		''').assertIssueCodes(MISSING_SYNCHRONIZED).assertResolutionLabels("Mark operation as synchronized").
+			assertModelAfterQuickfix('''
+				class Bar {
+					def synchronized int doSth() {
+						0
+					}
+					
+				}
+				class Foo extends Bar {
+					
+					override synchronized int doSth() {
+						0
+					}
+				
+				}
+			''')
+	}
+
+	@Test
 	def void obsoletCast_01() {
 		setSeverity(IssueCodes.OBSOLETE_CAST, "warning")
 		create('Foo.xtend', '''
