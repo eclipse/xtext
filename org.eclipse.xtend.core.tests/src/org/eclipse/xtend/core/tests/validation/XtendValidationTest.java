@@ -1492,7 +1492,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testUsedFunction() throws Exception {
-		XtendClass clazz = clazz("abstract class X { def private String foo() def bar(){foo}}");
+		XtendClass clazz = clazz("abstract class X { def protected String foo() def bar(){foo}}");
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	

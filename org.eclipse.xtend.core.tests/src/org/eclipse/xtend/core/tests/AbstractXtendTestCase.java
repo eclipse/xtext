@@ -160,7 +160,12 @@ public abstract class AbstractXtendTestCase extends Assert {
 		XtendClass clazz = clazz("class Foo { " + string + "}");
 		return (XtendFunction) clazz.getMembers().get(0);
 	}
-	
+
+	protected XtendFunction abstractFunction(String string) throws Exception {
+		XtendClass clazz = clazz("abstract class Foo { " + string + "}");
+		return (XtendFunction) clazz.getMembers().get(0);
+	}
+
 	protected XtendConstructor constructor(String string) throws Exception {
 		XtendClass clazz = clazz("class Foo { " + string + "}");
 		return (XtendConstructor) clazz.getMembers().get(0);
