@@ -423,7 +423,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	protected List<IResourceDescription.Delta> getRelevantDeltas(IBuildContext context) {
 		List<IResourceDescription.Delta> result = newArrayList();
 		for (IResourceDescription.Delta delta : context.getDeltas()) {
-			if (resourceServiceProvider.canHandle(delta.getUri()) && context.isSourceLevelURI(delta.getUri())) {
+			if (getResourceServiceProvider().canHandle(delta.getUri()) && context.isSourceLevelURI(delta.getUri())) {
 				result.add(delta);
 			}
 		}
