@@ -456,12 +456,21 @@
     </handler>
  </extension>
  <extension
+       point="org.eclipse.ui.contexts">
+    <context
+       description="Editing Arithmetics File Context"
+       id="org.eclipse.xtext.example.arithmetics.ui.editor.XtextEditorScope"
+       name="Editing Arithmetics File"
+       parentId="org.eclipse.xtext.ui.XtextEditorScope">
+    </context>
+ </extension>
+ <extension
        point="org.eclipse.ui.bindings">
     <key
           commandId="org.eclipse.xtext.example.arithmetics.ui.editor.OpenCallHierarchy"
-          contextId="org.eclipse.xtext.ui.XtextEditorScope"
+          contextId="org.eclipse.xtext.example.arithmetics.ui.editor.XtextEditorScope"
           schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-          sequence="M1+M3+H">
+          sequence="CTRL+ALT+H">
     </key>
  </extension>
 </plugin>

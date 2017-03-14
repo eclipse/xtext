@@ -477,12 +477,21 @@
     </handler>
  </extension>
  <extension
+       point="org.eclipse.ui.contexts">
+    <context
+       description="%XtextGrammarContext_description"
+       id="org.eclipse.xtext.xtext.ui.XtextEditorScope"
+       name="%XtextGrammarContext_name"
+       parentId="org.eclipse.xtext.ui.XtextEditorScope">
+    </context>
+ </extension>
+ <extension
        point="org.eclipse.ui.bindings">
     <key
-          commandId="org.eclipse.xtext.ui.editor.OpenCallHierarchy"
-          contextId="org.eclipse.xtext.ui.XtextEditorScope"
-          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-          sequence="M1+M3+H">
+       commandId="org.eclipse.xtext.ui.editor.OpenCallHierarchy"
+       contextId="org.eclipse.xtext.xtext.ui.XtextEditorScope"
+       schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+       sequence="CTRL+ALT+H">
     </key>
  </extension>
 
