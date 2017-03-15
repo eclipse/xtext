@@ -164,6 +164,9 @@ import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
 import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider
 import com.google.inject.Binder
 import com.google.inject.name.Names
+import org.eclipse.xtext.ui.refactoring.IReferenceUpdater
+import org.eclipse.xtext.xbase.ui.refactoring.XbaseReferenceUpdater
+import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater
 
 /** 
  * Use this class to register components to be used within the IDE.
@@ -323,6 +326,13 @@ class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	def Class<? extends JdtRenameRefactoringParticipantProcessor> bindJdtRenameRefactoringParticipantProcessor() {
 		return XtendJdtRenameParticipantProcessor
+	}
+	
+	/**
+	 * @since 2.12
+	 */
+	override Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
+		return XtendReferenceUpdater;
 	}
 
 	def Class<? extends XbaseDeclarativeHoverSignatureProvider> bindXbaseDeclarativeHoverSignatureProvider() {

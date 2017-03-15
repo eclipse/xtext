@@ -82,6 +82,7 @@ import org.eclipse.xtend.ide.refactoring.XtendDependentElementsCalculator;
 import org.eclipse.xtend.ide.refactoring.XtendExpressionUtil;
 import org.eclipse.xtend.ide.refactoring.XtendJdtRenameParticipantProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRefactoringPreferences;
+import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater;
 import org.eclipse.xtend.ide.refactoring.XtendRenameContextFactory;
 import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
@@ -154,6 +155,7 @@ import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.generator.trace.TraceForStorageProvider;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
+import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
@@ -352,6 +354,14 @@ public class XtendUiModule extends AbstractXtendUiModule {
   
   public Class<? extends JdtRenameRefactoringParticipantProcessor> bindJdtRenameRefactoringParticipantProcessor() {
     return XtendJdtRenameParticipantProcessor.class;
+  }
+  
+  /**
+   * @since 2.12
+   */
+  @Override
+  public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
+    return XtendReferenceUpdater.class;
   }
   
   public Class<? extends XbaseDeclarativeHoverSignatureProvider> bindXbaseDeclarativeHoverSignatureProvider() {
