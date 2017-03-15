@@ -2042,6 +2042,12 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 				int finalIndex = method.getModifiers().indexOf("final");
 				if(finalIndex != -1) 
 					error("Abstract method " + method.getName() + " cannot be final", XTEND_MEMBER__MODIFIERS, finalIndex, INVALID_MODIFIER);
+				int privateIndex = method.getModifiers().indexOf("private");
+				if(privateIndex != -1) 
+					error("Abstract method " + method.getName() + " cannot be private", XTEND_MEMBER__MODIFIERS, privateIndex, INVALID_MODIFIER);
+				int staticIndex = method.getModifiers().indexOf("static");
+				if(staticIndex != -1) 
+					error("Abstract method " + method.getName() + " cannot be static", XTEND_MEMBER__MODIFIERS, staticIndex, INVALID_MODIFIER);
 			}
 		} else if (method.getDeclaringType() instanceof XtendInterface) {
 			// The validator for interface methods is created lazily when the generator configuration is loaded

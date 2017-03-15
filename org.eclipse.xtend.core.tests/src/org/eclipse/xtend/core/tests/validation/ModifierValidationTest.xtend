@@ -124,6 +124,9 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		function('''public def foo() {}''').assertNoErrors
 		function('''static def foo() {}''').assertNoErrors
 		function('''abstract def foo()''').assertNoError(INVALID_MODIFIER)	
+		abstractFunction('''private def int foo();''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		abstractFunction('''final def int foo();''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		abstractFunction('''static def int foo();''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		function('''dispatch def foo (int i){}''').assertNoErrors
 		function('''final def foo() {}''').assertNoErrors
 	}
