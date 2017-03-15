@@ -7,11 +7,14 @@
  */
 package org.eclipse.xtext.example.arithmetics.ui;
 
+import com.google.inject.Binder;
 import com.google.inject.Provider;
+import com.google.inject.name.Names;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.example.arithmetics.ui.AbstractArithmeticsUiModule;
 import org.eclipse.xtext.example.arithmetics.ui.autoedit.AutoEditStrategy;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
@@ -39,5 +42,9 @@ public class ArithmeticsUiModule extends AbstractArithmeticsUiModule {
   @Override
   public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
     return AutoEditStrategy.class;
+  }
+  
+  public void configureEditorScope(final Binder binder) {
+    binder.bindConstant().annotatedWith(Names.named(XtextEditor.KEY_BINDING_SCOPE)).to("org.eclipse.xtext.example.arithmetics.ui.editor.XtextEditorScope");
   }
 }
