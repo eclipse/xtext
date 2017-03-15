@@ -42,6 +42,7 @@ public class LazyOverrideCheckResult implements IOverrideCheckResult {
 			OverrideCheckDetails.RETURN_MISMATCH,
 			OverrideCheckDetails.SAME_ERASURE,
 			OverrideCheckDetails.STATIC_MISMATCH,
+			OverrideCheckDetails.SYNCHRONIZED_MISMATCH,
 			OverrideCheckDetails.TYPE_PARAMETER_MISMATCH,
 			OverrideCheckDetails.UNCHECKED_CONVERSION_REQUIRED,
 			OverrideCheckDetails.VAR_ARG_MISMATCH);

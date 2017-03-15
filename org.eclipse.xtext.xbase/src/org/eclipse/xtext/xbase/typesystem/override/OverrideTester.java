@@ -177,6 +177,9 @@ public class OverrideTester {
 		if (isConflictingDefaultImplementation(overriding, overridden)) {
 			result.add(OverrideCheckDetails.DEFAULT_IMPL_CONFLICT);
 		}
+		if (!overridingDecl.isSynchronized() && overriddenDecl.isSynchronized()) {
+			result.add(OverrideCheckDetails.SYNCHRONIZED_MISMATCH);
+		}
 	}
 
 	protected void addExceptionDetails(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden,

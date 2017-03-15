@@ -184,7 +184,12 @@ public interface IOverrideCheckResult {
 		 * The operations are declared in different interfaces that do not extend each other, their type erasure is equal,
 		 * and at least one of them is not abstract, i.e. it has a default implementation (Java 8).
 		 */
-		DEFAULT_IMPL_CONFLICT;
+		DEFAULT_IMPL_CONFLICT,
+		/**
+		 * The overriding operation is not <code>synchronized</code> although the overridden is.
+		 */
+		SYNCHRONIZED_MISMATCH
+		;
 	}
 
 }
