@@ -950,9 +950,19 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		XtendClass xtendClass = clazz("class Foo { val foo = new Bar(new Object()) { } } class Bar { new(int x) {} }");
 		helper.assertError(xtendClass, XbasePackage.Literals.XCONSTRUCTOR_CALL, INCOMPATIBLE_TYPES);
 	}
-
+	
 	@Test public void testAnonymousClassConstructorVisibility() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { val foo = new Bar() { } } class Bar { private new() {} }");
 		helper.assertError(xtendClass, XCONSTRUCTOR_CALL, FEATURE_NOT_VISIBLE);
+	}
+	
+	@Test public void testSynchronized_1() throws Exception{
+		XtendClass xtendClass = clazz("class Foo extends Bar { override myMethod() {1} } class Bar { def synchronized int myMethod() {0} }");
+		helper.assertWarning(xtendClass, XTEND_FUNCTION, MISSING_SYNCHRONIZED);
+	}
+	
+	@Test public void testSynchronized_2() throws Exception{
+		XtendClass xtendClass = clazz("class Foo extends Bar { override synchronized myMethod() {1} } class Bar { def synchronized int myMethod() {0} }");
+		helper.assertNoWarnings(xtendClass, XTEND_FUNCTION, MISSING_SYNCHRONIZED);
 	}
 }

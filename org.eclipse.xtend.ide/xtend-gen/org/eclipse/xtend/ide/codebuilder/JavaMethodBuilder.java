@@ -40,6 +40,10 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBui
       if (_isStaticFlag) {
         appendable.append("static ");
       }
+      boolean _isSynchronizedFlag = this.isSynchronizedFlag();
+      if (_isSynchronizedFlag) {
+        appendable.append("synchronized ");
+      }
       this.appendThrowsClause(this.appendParameters(this.appendType(this.appendTypeParameters(appendable, this.getTypeParameters()), this.getReturnType(), "void").append(" ").append(this.getMethodName())));
       boolean _isAbstractFlag_1 = this.isAbstractFlag();
       if (_isAbstractFlag_1) {

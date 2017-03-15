@@ -32,6 +32,9 @@ public abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
   @Accessors
   private boolean overrideFlag;
   
+  @Accessors
+  private boolean synchronizedFlag;
+  
   @Pure
   public String getMethodName() {
     return this.methodName;
@@ -75,5 +78,14 @@ public abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
   
   public void setOverrideFlag(final boolean overrideFlag) {
     this.overrideFlag = overrideFlag;
+  }
+  
+  @Pure
+  public boolean isSynchronizedFlag() {
+    return this.synchronizedFlag;
+  }
+  
+  public void setSynchronizedFlag(final boolean synchronizedFlag) {
+    this.synchronizedFlag = synchronizedFlag;
   }
 }

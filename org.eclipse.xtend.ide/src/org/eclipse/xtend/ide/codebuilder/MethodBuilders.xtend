@@ -27,6 +27,7 @@ abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
 	@Accessors boolean staticFlag
 	@Accessors boolean abstractFlag
 	@Accessors boolean overrideFlag
+	@Accessors boolean synchronizedFlag
 }
 
 /**
@@ -45,6 +46,8 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.X
 			.appendVisibility(visibility, PUBLIC)
 		if(staticFlag)
 			appendable.append('static ')
+		if(synchronizedFlag)
+			appendable.append('synchronized ')
 		appendable.appendTypeParameters(typeParameters)
 		if(abstractFlag)
 			appendable.appendType(returnType, "void").append(' ')
@@ -87,6 +90,8 @@ class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Ja
 			appendable.append('abstract ')
 		if(staticFlag)
 			appendable.append('static ')
+		if(synchronizedFlag)
+			appendable.append('synchronized ')
 		appendable
 			.appendTypeParameters(typeParameters)
 			.appendType(returnType, "void").append(' ')

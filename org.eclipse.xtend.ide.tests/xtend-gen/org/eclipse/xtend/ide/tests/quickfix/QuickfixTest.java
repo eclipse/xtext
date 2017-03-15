@@ -112,6 +112,76 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void missingSynchronized() {
+    this.builder.setSeverity(org.eclipse.xtend.core.validation.IssueCodes.MISSING_SYNCHRONIZED, "warning");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def synchronized int doSth() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("0");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class Foo extends Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override int doSth|() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("0");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("XXX.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.MISSING_SYNCHRONIZED).assertResolutionLabels("Mark operation as synchronized");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def synchronized int doSth() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("0");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("class Foo extends Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("override synchronized int doSth() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("0");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
   public void obsoletCast_01() {
     this.builder.setSeverity(IssueCodes.OBSOLETE_CAST, "warning");
     StringConcatenation _builder = new StringConcatenation();

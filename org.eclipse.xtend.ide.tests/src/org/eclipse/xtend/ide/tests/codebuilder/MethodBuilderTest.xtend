@@ -233,6 +233,33 @@ class MethodBuilderTest extends AbstractBuilderTest {
 			}''')
 	}
 	
+	@Test
+	def testXtendSynchronized() {
+		(createMethodBuilder(xtendClass) => [
+			context = xtendClass
+			methodName = 'foo'
+			returnType = xtendClass.createTypeRef
+			visibility = JvmVisibility::PUBLIC
+			synchronizedFlag = true
+		]).assertBuilds('''
+			def synchronized foo() {
+			  «DEFAULT_BODY»
+			}''')
+	}
+	
+	@Test
+	def testJavaSynchronized() {
+		(createMethodBuilder(javaClass) => [
+			context = javaClass
+			methodName = 'bar'
+			returnType = javaClass.createTypeRef
+			visibility = JvmVisibility::PUBLIC
+			synchronizedFlag = true
+		]).assertBuilds('''
+			public synchronized Bar bar() {
+			  «DEFAULT_BODY»;
+			}''')
+	}
 	
 	@Test
 	def void testSetContextOnParameters() {

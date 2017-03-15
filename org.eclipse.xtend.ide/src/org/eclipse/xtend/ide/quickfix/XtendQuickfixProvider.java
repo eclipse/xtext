@@ -234,6 +234,18 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		});
 	}
 
+	@Fix(IssueCodes.MISSING_SYNCHRONIZED)
+	public void fixMissingSynchronizedKeyword(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Mark operation as synchronized", "Marks this operation as synchronized", "fix_indent.gif", new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				if (element instanceof XtendFunction) {
+					((XtendFunction) element).getModifiers().add("synchronized");
+				}
+			}
+		});
+	}
+
 	protected void replaceKeyword(Keyword keyword, String replacement, EObject container, IXtextDocument document)
 			throws BadLocationException {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(container);
