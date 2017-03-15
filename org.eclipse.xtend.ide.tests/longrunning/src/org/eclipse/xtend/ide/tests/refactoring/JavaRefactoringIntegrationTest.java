@@ -1332,6 +1332,50 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertDocumentContains(editor, "import static extension java.util.Collections.*");
 	}
 	
+	@Test
+	public void testBug489208_1() throws Exception {
+		try {
+			testHelper.getProject().close(null);
+			testHelper.getProject().open(null);
+			syncUtil.waitForBuild(null);
+			String xtendModel = "class FooBug489208 {new(BarBug489208 bar) {}}\n" +
+					"class BarBug489208 { public val f1 = new FooBug489208(this) {} public val f2 = new FooBug489208(this) {} public val f3 = new FooBug489208(this) {} def void foo4() {new Foot(this) {}}}";
+			IFile xtendClass = testHelper.createFile("Foo.xtend", xtendModel);
+			final XtextEditor editor = openEditorSafely(xtendClass);
+			renameXtendElement(editor, xtendModel.indexOf("BarBug489208", 20), "BazBug489208");
+			assertDocumentContains(editor, "public val f1 = new FooBug489208(this) {}");
+			assertDocumentContains(editor, "public val f2 = new FooBug489208(this) {}");
+			assertDocumentContains(editor, "public val f3 = new FooBug489208(this) {}");
+			assertDocumentContains(editor, "def void foo4() {new Foot(this) {}}");
+		} finally {
+			testHelper.getProject().getFile("src/test/Foo.xtend").delete(true, new NullProgressMonitor());
+			syncUtil.waitForBuild(null);
+		}
+	}
+	
+	@Test 
+	public void testBug489208_2() throws Exception {
+		try {
+			testHelper.getProject().close(null);
+			testHelper.getProject().open(null);
+			syncUtil.waitForBuild(null);
+			String fooModel = "class FooBug489208 {new(BarBug489208 bar) {}}";
+			testHelper.createFile("FooBug489208.xtend", fooModel);
+			String barModel = "class BarBug489208 { public val f1 = new FooBug489208(this) {} public val f2 = new FooBug489208(this) {} public val f3 = new FooBug489208(this) {}} def void foo4() {new Foot(this) {}}";
+			IFile barClass = testHelper.createFile("Bar.xtend", barModel);
+			final XtextEditor editor = openEditorSafely(barClass);
+			renameXtendElement(editor, barModel.indexOf("BarBug489208"), "BazBug489208");
+			assertDocumentContains(editor, "public val f1 = new FooBug489208(this) {}");
+			assertDocumentContains(editor, "public val f2 = new FooBug489208(this) {}");
+			assertDocumentContains(editor, "public val f3 = new FooBug489208(this) {}");
+			assertDocumentContains(editor, "def void foo4() {new Foot(this) {}}");
+		} finally {
+			testHelper.getProject().getFile("src/test/FooBug489208.xtend").delete(true, new NullProgressMonitor());
+			testHelper.getProject().getFile("src/test/bar.xtend").delete(true, new NullProgressMonitor());
+			syncUtil.waitForBuild(null);
+		}
+	}
+	
 	@Test 
 	public void testRenameSuperclassOfAnonymous() throws Exception {
 		String fooModel = "class Foo {}";
@@ -1345,7 +1389,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertDocumentContains(editor, "Foo1");
 		fileAsserts.assertFileContains(barClass, "new Foo1() {}");
 	}
-
+	
 	protected void assertDocumentContains(XtextEditor editor, String expectedContent) throws CoreException {
 		String editorContent = editor.getDocument().get();
 		if (!editorContent.contains(expectedContent)) {
