@@ -123,9 +123,10 @@ The second plug-in invokes the MWE2 file through a standard Java process:
 <plugin>
   <groupId>org.codehaus.mojo</groupId>
   <artifactId>exec-maven-plugin</artifactId>
-  <version>1.2.1</version>
+  <version>1.4.0</version>
   <executions>
     <execution>
+      <id>mwe2Launcher</id>
       <phase>generate-sources</phase>
       <goals>
         <goal>java</goal>
@@ -133,31 +134,41 @@ The second plug-in invokes the MWE2 file through a standard Java process:
     </execution>
   </executions>
   <configuration>
-    <includeProjectDependencies>false</includeProjectDependencies>
-    <includePluginDependencies>true</includePluginDependencies>
     <mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
     <arguments>
-      <argument>
-        file://${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2
-      </argument>
-      <argument>
-          -p
-      </argument>
-      <argument>
-          runtimeProject=/${project.basedir}
-      </argument>
+      <argument>/${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2</argument>
+      <argument>-p</argument>
+      <argument>rootPath=/${project.basedir}/..</argument>
     </arguments>
+    <classpathScope>compile</classpathScope>
+    <includePluginDependencies>true</includePluginDependencies>
+    <cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
   </configuration>
   <dependencies>
     <dependency>
+      <groupId>org.eclipse.emf</groupId>
+      <artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+      <version>2.9.0.201605261059</version>
+    </dependency>
+    <dependency>
       <groupId>org.eclipse.xtext</groupId>
-      <artifactId>org.eclipse.xtext.xtext</artifactId>
-      <version>2.9.1</version>
+      <artifactId>org.eclipse.xtext.common.types</artifactId>
+      <version>2.11.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.xtext</groupId>
+      <artifactId>org.eclipse.xtext.xtext.generator</artifactId>
+      <version>2.11.0</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.xtext</groupId>
       <artifactId>org.eclipse.xtext.xbase</artifactId>
-      <version>2.9.1</version>
+      <version>2.11.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.xtext</groupId>
+      <artifactId>xtext-antlr-generator</artifactId>
+      <version>[2.1.1, 3)</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -207,11 +218,11 @@ Now that we can build our language we need to be able to integrate our language 
 <plugin>
   <groupId>org.eclipse.xtext</groupId>
   <artifactId>xtext-maven-plugin</artifactId>
-  <version>2.9.1</version>
+  <version>2.11.0</version>
   <executions>
     <execution>
       <goals>
-  <goal>generate</goal>
+        <goal>generate</goal>
       </goals>
     </execution>
   </executions>
