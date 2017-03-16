@@ -15,6 +15,11 @@ import java.lang.annotation.Target;
 /**
  * Annotation Container for {@link Fix} Annotations
  * 
+ * You can mark a method in a {@link AbstractDeclarativeQuickfixProvider} with this annotation to specify which issue codes the method offers quickfixes for.
+ * 
+ * <code>
+@Fixes(@Fix(MyDslValidator.INVALID_NAME), @Fix(MyDslValidator.SOMETHING_ELSE)) public void fixIt(Issue issue, IssueResolutionAcceptor acceptor) { ... }</code>
+ * 
  * @author dietrich - Initial contribution and API
  * @since 2.12
  */
