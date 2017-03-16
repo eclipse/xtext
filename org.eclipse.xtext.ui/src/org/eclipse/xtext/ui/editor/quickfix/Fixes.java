@@ -13,7 +13,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation Container for {@link Fix} Annotations
+ * Annotation Container for @{@link Fix} annotations.
  * 
  * You can mark a method in a {@link AbstractDeclarativeQuickfixProvider} with this annotation to specify which issue codes the method offers quickfixes for.
  * 
