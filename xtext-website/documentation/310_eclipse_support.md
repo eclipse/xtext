@@ -198,6 +198,27 @@ public void fixFeatureName(final Issue issue,
 }
 ```
 
+The `@Fix` annotation is repeatable so you can specify it multiple times if a method offers a quickfix for multiple issue codes. 
+
+```java
+@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)
+@Fix(DomainmodelJavaValidator.OTHER_ISSUE)
+public void fixName(final Issue issue, 
+  IssueResolutionAcceptor acceptor) {
+    ...
+}
+```
+
+Alternatively you can wrap it in a `@Fixes` container.
+
+```java
+@Fixes(@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME),@Fix(DomainmodelJavaValidator.OTHER_ISSUE))
+public void fixName(final Issue issue, 
+  IssueResolutionAcceptor acceptor) {
+    ...
+}
+```
+
 ### Quick Fixes for Linking Errors and Syntax Errors
 
 You can even define quick fixes for linking errors. The issue codes are assigned by the [ILinkingDiagnosticMessageProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.java). Have a look at the domain model example how to add quick fixes for these errors.
