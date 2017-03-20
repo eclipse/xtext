@@ -28,6 +28,17 @@ sourceSets {
 	}
 }
 
+if (isTestProject) {
+	task cleanupEcoreFiles {
+		doLast {
+			fileTree(dir:sourceSets.test.output.resourcesDir, includes:['**/*.ecore','**/*.xtext']).each {
+				it.delete()
+			}
+		}
+	}
+	test.finalizedBy(cleanupEcoreFiles)
+}
+
 jar {
 	from ('.') {
 		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**', 'plugin.properties'
