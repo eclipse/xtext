@@ -1498,6 +1498,28 @@ class XbaseFormatterTest {
 		]
 	}
 
+	@Test def formatTryCatchFinallyExpressionBug474022() {
+		assertFormattedExpression [
+			preferences [
+				put(bracesInNewLine, false)
+			]
+			expectation = '''
+				val i = try {
+						println("x")
+						1
+					} catch (Exception e) {
+						println("y")
+						2
+					} finally {
+						println("z")
+					}
+				'''
+			toBeFormatted = '''
+				val i = try  {   println("x") 1  }   catch   (   Exception   e   )  {  println("y") 2  } finally  {  println("z")  }
+			'''
+		]
+	}
+
 	@Test def formatTryCatchFinallyExpression2() {
 		assertFormattedExpression [
 			preferences [

@@ -813,18 +813,25 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final XTryCatchFinallyExpression expr, @Extension final IFormattableDocument format) {
+    EObject _eContainer = expr.eContainer();
+    if ((_eContainer instanceof XVariableDeclaration)) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.indent();
+      };
+      format.<XTryCatchFinallyExpression>surround(expr, _function);
+    }
     this.formatBodyInline(expr.getExpression(), true, format);
     EList<XCatchClause> _catchClauses = expr.getCatchClauses();
     for (final XCatchClause cc : _catchClauses) {
       {
         format.append(this.textRegionExtensions.regionFor(cc).keyword("catch"), XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
-        final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-          it.noSpace();
-        };
         final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
           it.noSpace();
         };
-        format.<JvmFormalParameter>format(format.<JvmFormalParameter>append(format.<JvmFormalParameter>prepend(cc.getDeclaredParam(), _function), _function_1));
+        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+          it.noSpace();
+        };
+        format.<JvmFormalParameter>format(format.<JvmFormalParameter>append(format.<JvmFormalParameter>prepend(cc.getDeclaredParam(), _function_1), _function_2));
         if (((!Objects.equal(cc, IterableExtensions.<XCatchClause>last(expr.getCatchClauses()))) || (expr.getFinallyExpression() != null))) {
           this.formatBodyInline(cc.getExpression(), true, format);
         } else {
