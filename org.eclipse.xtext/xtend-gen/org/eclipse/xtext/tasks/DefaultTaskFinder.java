@@ -89,7 +89,7 @@ public class DefaultTaskFinder implements ITaskFinder {
   protected List<Task> findTasks(final ILeafNode node, final TaskTags taskTags) {
     boolean _canContainTaskTags = this.canContainTaskTags(node);
     if (_canContainTaskTags) {
-      final List<Task> tasks = this.parser.parseTasks(node.getText(), taskTags);
+      final List<Task> tasks = this.parser.parseTasks(this.stripText(node, node.getText()), taskTags);
       final Consumer<Task> _function = (Task it) -> {
         int _offset = it.getOffset();
         int _offset_1 = node.getOffset();
@@ -105,6 +105,19 @@ public class DefaultTaskFinder implements ITaskFinder {
       return tasks;
     }
     return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
+  }
+  
+  /**
+   * @since 2.12
+   */
+  protected String stripText(final ILeafNode node, final String text) {
+    boolean _endsWith = text.endsWith("*/");
+    if (_endsWith) {
+      int _length = text.length();
+      int _minus = (_length - 2);
+      return text.substring(0, _minus);
+    }
+    return text;
   }
   
   protected boolean canContainTaskTags(final ILeafNode node) {

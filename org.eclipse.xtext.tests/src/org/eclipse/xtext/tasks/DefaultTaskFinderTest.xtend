@@ -47,6 +47,7 @@ class DefaultTaskFinderTest extends AbstractXtextTests {
 				 * Fixme no match
 				 * FOO also no match
 				 */
+				/* TODO Get rid of this */
 				Hello notATODO!
 			''')
 		)
@@ -68,9 +69,17 @@ class DefaultTaskFinderTest extends AbstractXtextTests {
 				description = " bar"
 				offset = 17
 				lineNumber = 3
+			],
+			new Task => [
+				tag = new TaskTag => [
+					name = "TODO"
+					priority = Priority.NORMAL
+				]
+				description = " Get rid of this "
+				offset = 73
+				lineNumber = 7
 			]
 		])
-		
 		
 	}
 

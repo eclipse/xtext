@@ -10,11 +10,11 @@ package org.eclipse.xtext.tasks
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.ILeafNode
-import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -45,7 +45,7 @@ class DefaultTaskFinder implements ITaskFinder {
 	protected def List<Task> findTasks(ILeafNode node, TaskTags taskTags) {
 		if (node.canContainTaskTags) {
 			//TODO strip comment characters before parsing, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=380449#c13
-			val tasks = parser.parseTasks(node.text, taskTags)
+			val tasks = parser.parseTasks(stripText(node, node.text), taskTags)
 			tasks.forEach [
 				offset = offset + node.offset
 				lineNumber = lineNumber + node.startLine - 1
@@ -53,6 +53,16 @@ class DefaultTaskFinder implements ITaskFinder {
 			return tasks
 		}
 		return #[]
+	}
+
+	/**
+	 * @since 2.12
+	 */
+	protected def String stripText(ILeafNode node, String text) {
+		if (text.endsWith("*/")) {
+			return text.substring(0, text.length-2)
+		}
+		return text
 	}
 
 	protected def boolean canContainTaskTags(ILeafNode node) {

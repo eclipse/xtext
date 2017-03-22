@@ -72,6 +72,8 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
       _builder.append(" ");
       _builder.append("*/");
       _builder.newLine();
+      _builder.append("/* TODO Get rid of this */");
+      _builder.newLine();
       _builder.append("Hello notATODO!");
       _builder.newLine();
       Task _task = new Task();
@@ -102,9 +104,23 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
         it.setLineNumber(3);
       };
       Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_1);
+      Task _task_2 = new Task();
+      final Procedure1<Task> _function_2 = (Task it) -> {
+        TaskTag _taskTag = new TaskTag();
+        final Procedure1<TaskTag> _function_3 = (TaskTag it_1) -> {
+          it_1.setName("TODO");
+          it_1.setPriority(Priority.NORMAL);
+        };
+        TaskTag _doubleArrow_2 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_3);
+        it.setTag(_doubleArrow_2);
+        it.setDescription(" Get rid of this ");
+        it.setOffset(73);
+        it.setLineNumber(7);
+      };
+      Task _doubleArrow_2 = ObjectExtensions.<Task>operator_doubleArrow(_task_2, _function_2);
       this.assertContainsTasks(this.getResourceFromString(
         LineDelimiters.toUnix(_builder.toString())), 
-        Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow, _doubleArrow_1)));
+        Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
