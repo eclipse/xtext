@@ -29,6 +29,7 @@ import org.eclipse.jface.text.source.IAnnotationAccessExtension;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISharedTextColors;
+import org.eclipse.jface.text.source.LineNumberRulerColumn;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -89,6 +90,7 @@ import com.google.inject.Provider;
  * 
  * @since 2.2
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Christian Dietrich - Line number support
  */
 public class EmbeddedEditorFactory {
 
@@ -132,7 +134,7 @@ public class EmbeddedEditorFactory {
 
 		protected IEditedResourceProvider resourceProvider;
 		protected String[] annotationTypes;
-//		protected Boolean lineNumbers;
+		protected Boolean lineNumbers;
 //		protected Boolean folding;
 		protected Boolean readonly;
 		protected boolean editorBuild;
@@ -150,12 +152,18 @@ public class EmbeddedEditorFactory {
 			this.annotationTypes = annotationTypes;
 			return this;
 		}
-//		public Builder showLineNumbers() {
-//			if (lineNumbers != null)
-//				throw new IllegalStateException();
-//			this.lineNumbers = true;
-//			return this;
-//		}
+		
+		/**
+		 * Enables the line number column in the embedded editor
+		 * 
+		 * @since 2.11
+		 */
+		public Builder showLineNumbers() {
+			if (lineNumbers != null)
+				throw new IllegalStateException();
+			this.lineNumbers = true;
+			return this;
+		}
 		public Builder processIssuesBy(IValidationIssueProcessor issueProcessor) {
 			if (this.issueProcessor != null)
 				throw new IllegalStateException();
@@ -185,15 +193,15 @@ public class EmbeddedEditorFactory {
 				throw new IllegalStateException();
 			editorBuild = true;
 //			/*fProjectionSupport =*/installProjectionSupport(this.fSourceViewer);
-			final CompositeRuler annotationRuler;
-			if (annotationTypes != null && annotationTypes.length != 0) {
-				annotationRuler = new CompositeRuler();
+			final CompositeRuler verticalRuler;
+			if ((annotationTypes != null && annotationTypes.length != 0) || Boolean.TRUE.equals(lineNumbers)) {
+				verticalRuler = new CompositeRuler();
 			} else {
-				annotationRuler = null;
+				verticalRuler = null;
 			}
 			final XtextSourceViewer viewer = this.sourceViewerFactory.createSourceViewer(
 					parent, 
-					annotationRuler, 
+					verticalRuler, 
 					null, // overviewRuler
 					false, // showAnnotationOverview 
 					SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
@@ -243,7 +251,7 @@ public class EmbeddedEditorFactory {
 					document, viewer, viewerConfiguration, resourceProvider, new Runnable() {
 						@Override
 						public void run() {
-							afterCreatePartialEditor(viewer, document, annotationRuler, actions);
+							afterCreatePartialEditor(viewer, document, verticalRuler, actions);
 							highlightingHelper.install(viewerConfiguration, viewer);
 						}
 					});
@@ -341,6 +349,7 @@ public class EmbeddedEditorFactory {
 		
 		protected void afterCreatePartialEditor(XtextSourceViewer viewer, XtextDocument document, CompositeRuler verticalRuler, 
 				final EmbeddedEditorActions actions) {
+			int rulerColumnCounter = 1;
 			if (verticalRuler != null && annotationTypes != null && annotationTypes.length > 0) {
 				AnnotationRulerColumn annotationRulerColumn = new AnnotationRulerColumn(viewer.getAnnotationModel(), VERTICAL_RULER_WIDTH, new DefaultMarkerAnnotationAccess() {
 					@Override
@@ -353,7 +362,11 @@ public class EmbeddedEditorFactory {
 				});
 				for(String annotationType: annotationTypes)
 					annotationRulerColumn.addAnnotationType(annotationType);
-				verticalRuler.addDecorator(1, annotationRulerColumn);
+				verticalRuler.addDecorator(rulerColumnCounter++, annotationRulerColumn);
+			}
+			if (verticalRuler != null && Boolean.TRUE.equals(lineNumbers)) {
+				LineNumberRulerColumn lineNumberRulerColumn = new LineNumberRulerColumn();
+				verticalRuler.addDecorator(rulerColumnCounter++, lineNumberRulerColumn);
 			}
 
 			final OperationHistoryListener listener = installUndoRedoSupport(viewer, document, actions);
