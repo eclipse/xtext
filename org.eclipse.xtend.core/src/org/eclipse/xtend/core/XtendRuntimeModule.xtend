@@ -106,6 +106,8 @@ import org.eclipse.xtext.xbase.typesystem.util.HumanReadableTypeNames
 import org.eclipse.xtext.xbase.util.XExpressionHelper
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder
+import org.eclipse.xtext.tasks.ITaskFinder
+import org.eclipse.xtend.core.tasks.XtendTaskFinder
 
 /** 
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -332,5 +334,9 @@ class XtendRuntimeModule extends AbstractXtendRuntimeModule {
 
 	def Class<? extends IShouldGenerate> bindIShouldGenerate() {
 		return IShouldGenerate.Always
+	}
+
+	def Class<? extends ITaskFinder> bindITaskFinder() {
+		return XtendTaskFinder
 	}
 }
