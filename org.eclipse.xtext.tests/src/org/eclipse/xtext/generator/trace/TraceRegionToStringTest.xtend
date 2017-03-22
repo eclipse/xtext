@@ -15,6 +15,7 @@ import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.TextRegion
 import org.junit.Assert
 import org.junit.Test
+import java.util.Collection
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -197,11 +198,12 @@ class TraceRegionToStringTest {
 	}
 
 	static class Region extends TraceRegion {
-		new(int myOffset, int myLength, List<ILocationData> allLocationData, AbstractTraceRegion parent) {
+		
+		new(int myOffset, int myLength, Collection<ILocationData> allLocationData, AbstractTraceRegion parent) {
 			super(myOffset, myLength, 0, 0, true, allLocationData, parent)
 		}
-
-		new(int myOffset, int myLength, List<ILocationData> allLocationData) {
+		
+		new(int myOffset, int myLength, Collection<ILocationData> allLocationData) {
 			super(myOffset, myLength, 0, 0, true, allLocationData, null)
 		}
 

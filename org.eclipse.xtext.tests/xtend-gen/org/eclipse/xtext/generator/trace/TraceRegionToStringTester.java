@@ -8,6 +8,7 @@
 package org.eclipse.xtext.generator.trace;
 
 import com.google.common.base.Objects;
+import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -33,11 +34,11 @@ public class TraceRegionToStringTester extends AbstractTraceRegionToString {
   }
   
   public static class Region extends TraceRegion {
-    public Region(final int myOffset, final int myLength, final List<ILocationData> allLocationData, final AbstractTraceRegion parent) {
+    public Region(final int myOffset, final int myLength, final Collection<ILocationData> allLocationData, final AbstractTraceRegion parent) {
       super(myOffset, myLength, 0, 0, true, allLocationData, parent);
     }
     
-    public Region(final int myOffset, final int myLength, final List<ILocationData> allLocationData) {
+    public Region(final int myOffset, final int myLength, final Collection<ILocationData> allLocationData) {
       super(myOffset, myLength, 0, 0, true, allLocationData, null);
     }
     
