@@ -64,9 +64,9 @@ public class JDTAwareEclipseResourceFileSystemAccess2 extends EclipseResourceFil
 		IJavaProject jp = JavaCore.create(container.getProject());
 		if (jp.exists() && !jp.isOnClasspath(container)) {
 			if (getCurrentSource() != null) {
-				IPackageFragmentRoot currentSource = jp.findPackageFragmentRoot(jp.getPath().append(getCurrentSource()));
-				if (currentSource != null) {
-					IClasspathEntry currentClasspathEntry = currentSource.getRawClasspathEntry();
+				IPackageFragmentRoot packageFragmentRoot = jp.findPackageFragmentRoot(jp.getPath().append(getCurrentSource()));
+				if (packageFragmentRoot != null) {
+					IClasspathEntry currentClasspathEntry = packageFragmentRoot.getRawClasspathEntry();
 					if (currentClasspathEntry != null) {
 						insertClasspathEntry(container, currentClasspathEntry, jp);
 						return;
