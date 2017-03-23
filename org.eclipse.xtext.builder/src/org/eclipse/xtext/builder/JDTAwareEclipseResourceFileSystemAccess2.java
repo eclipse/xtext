@@ -63,12 +63,14 @@ public class JDTAwareEclipseResourceFileSystemAccess2 extends EclipseResourceFil
 	protected void addToSourceFolders(IContainer container) throws JavaModelException {
 		IJavaProject jp = JavaCore.create(container.getProject());
 		if (jp.exists() && !jp.isOnClasspath(container)) {
-			IPackageFragmentRoot currentSource = jp.findPackageFragmentRoot(jp.getPath().append(getCurrentSource()));
-			if (currentSource != null) {
-				IClasspathEntry currentClasspathEntry = currentSource.getRawClasspathEntry();
-				if (currentClasspathEntry != null) {
-					insertClasspathEntry(container, currentClasspathEntry, jp);
-					return;
+			if (getCurrentSource() != null) {
+				IPackageFragmentRoot currentSource = jp.findPackageFragmentRoot(jp.getPath().append(getCurrentSource()));
+				if (currentSource != null) {
+					IClasspathEntry currentClasspathEntry = currentSource.getRawClasspathEntry();
+					if (currentClasspathEntry != null) {
+						insertClasspathEntry(container, currentClasspathEntry, jp);
+						return;
+					}
 				}
 			}
 			addClasspathEntry(container, jp);
