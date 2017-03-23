@@ -143,8 +143,8 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 			for (IOutlineNode child : input.getChildren()) {
 				IOutlineNode candidate = findBestNode(child, selectedTextRegion);
 				if (candidate != null
-						&& (currentBestNode.getFullTextRegion() == null || currentBestNode.getFullTextRegion()
-								.getLength() >= candidate.getFullTextRegion().getLength())) {
+						&& (currentBestNode.getFullTextRegion() == null || candidate.getFullTextRegion() != null
+								&& currentBestNode.getFullTextRegion().getLength() >= candidate.getFullTextRegion().getLength())) {
 					currentBestNode = candidate;
 				}
 			}
