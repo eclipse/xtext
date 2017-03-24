@@ -262,7 +262,7 @@ def void checkFeatureNameIsUnique(Feature f) {
     var superEntity = (f.eContainer as Entity).superType
     while (superEntity !== null) {
         for (other : superEntity.features) {
-            if (f.name === other.name) {
+            if (f.name == other.name) {
                 error("Feature names have to be unique",
                     DomainmodelPackage.Literals.FEATURE__NAME)
                 return
