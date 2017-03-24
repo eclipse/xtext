@@ -2428,6 +2428,49 @@ public class XbaseFormatterTest {
   }
   
   @Test
+  public void formatTryCatchFinallyExpressionBug474022() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("val i = try {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("println(\"x\")");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} catch (Exception e) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("println(\"y\")");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} finally {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("println(\"z\")");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      it.setExpectation(_builder);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("val i = try  {   println(\"x\") 1  }   catch   (   Exception   e   )  {  println(\"y\") 2  } finally  {  println(\"z\")  }");
+      _builder_1.newLine();
+      it.setToBeFormatted(_builder_1);
+    };
+    this._xbaseFormatterTester.assertFormattedExpression(_function);
+  }
+  
+  @Test
   public void formatTryCatchFinallyExpression2() {
     final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
       final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {

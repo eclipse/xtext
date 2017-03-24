@@ -405,6 +405,9 @@ class XbaseFormatter extends XtypeFormatter {
 	}
 
 	def dispatch void format(XTryCatchFinallyExpression expr, extension IFormattableDocument format) {
+		if (expr.eContainer instanceof XVariableDeclaration) {
+			expr.surround[indent]
+		}
 		expr.expression.formatBodyInline(true, format)
 		for (cc : expr.catchClauses) {
 			cc.regionFor.keyword("catch").append(whitespaceBetweenKeywordAndParenthesisML)
