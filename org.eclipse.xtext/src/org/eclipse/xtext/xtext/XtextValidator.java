@@ -44,6 +44,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EOF;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
@@ -53,6 +54,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.NamedArgument;
+import org.eclipse.xtext.NegatedToken;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
@@ -1275,6 +1277,13 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					break;
 				}
 			}
+		}
+	}
+	
+	@Check
+	public void checkNegatedTokenNotEOF(NegatedToken token) {
+		for (EOF eof : EcoreUtil2.getAllContentsOfType(token, EOF.class)) {
+			error("It is not possible to negate EOF", eof, null);
 		}
 	}
 }
