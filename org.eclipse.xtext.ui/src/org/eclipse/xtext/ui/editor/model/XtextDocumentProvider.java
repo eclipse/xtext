@@ -22,9 +22,12 @@ import java.nio.charset.UnsupportedCharsetException;
 import java.util.Collections;
 import java.util.Map;
 
+import org.eclipse.core.filesystem.IFileInfo;
+import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IEncodedStorage;
 import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -86,6 +89,8 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		public boolean isReadOnly= true;
 		/** The flag representing the need to update the cached flag.  */
 		public boolean updateCache= true;
+	    /** The time stamp at which this provider changed the file. */
+	    public long synchronizationStamp = IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
 
 		public URIInfo(IDocument document, IAnnotationModel model) {
 			super(document, model);
@@ -390,16 +395,33 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	}
 	
 	@Override
+	public long getModificationStamp(Object element) {
+		if (isWorkspaceExternalEditorInput(element)) {
+			IFileStore fileStore = Adapters.adapt(element, IFileStore.class);
+			if (fileStore != null) {
+				IFileInfo info = fileStore.fetchInfo();
+				if (info.exists()) {
+					return info.getLastModified();
+				}
+			}
+			return IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
+		} else {
+			return super.getModificationStamp(element);
+		}
+	}
+	
+	@Override
 	public boolean isSynchronized(Object element) {
 		ElementInfo info = getElementInfo(element);
+		long synchronizationStamp;
 		if (info instanceof FileInfo) {
-			FileInfo fileInfo = (FileInfo) getElementInfo(element);
-			long modificationStamp = getModificationStamp(element);
-			if (fileInfo.fModificationStamp != modificationStamp) {
-				return false;
-			}
+			synchronizationStamp = ((FileInfo) info).fModificationStamp;
+		} else if (info instanceof URIInfo) {
+			synchronizationStamp = ((URIInfo) info).synchronizationStamp;
+		} else {
+			return super.isSynchronized(element);
 		}
-		return super.isSynchronized(element);
+	    return synchronizationStamp == getModificationStamp(element);
 	}
 	
 	@Override
@@ -508,6 +530,8 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 					// TODO: see todo above
 					stream = URIConverter.INSTANCE.createOutputStream(toEmfUri(casted.getURI()));
 					stream.write(bytes, 0, byteBuffer.limit());
+					URIInfo info = (URIInfo) getElementInfo(element);
+					info.synchronizationStamp = getModificationStamp(element);
 				} finally {
 					monitor.done();
 				}
@@ -531,7 +555,16 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		}
 		super.doSaveDocument(monitor, element, document, overwrite);
 	}
-
+	
+	@Override
+	protected void doSynchronize(Object element, IProgressMonitor monitor) throws CoreException {
+		if (isWorkspaceExternalEditorInput(element)) {
+			doResetDocument(element, monitor);
+		} else {
+			super.doSynchronize(element, monitor);
+		}
+	}
+	
 	@Override
 	protected void doUpdateStateCache(Object element) throws CoreException {
 		if (isWorkspaceExternalEditorInput(element)) {
