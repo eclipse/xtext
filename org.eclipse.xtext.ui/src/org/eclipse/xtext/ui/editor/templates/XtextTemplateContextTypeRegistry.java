@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
@@ -39,8 +40,8 @@ public class XtextTemplateContextTypeRegistry extends ContextTypeRegistry {
 	}
 
 	protected void registerContextTypes(IGrammarAccess grammarAccess, Provider<XtextTemplateContextType> ctxTypeProvider) {
-		List<ParserRule> parserRules = GrammarUtil.allParserRules(grammarAccess.getGrammar());
 		List<XtextTemplateContextType> allContextTypes = Lists.newArrayList();
+		List<ParserRule> parserRules = GrammarUtil.allParserRules(grammarAccess.getGrammar());
 		for (ParserRule parserRule : parserRules) {
 			XtextTemplateContextType type = ctxTypeProvider.get();
 			type.setName(parserRule.getName());
@@ -51,6 +52,19 @@ public class XtextTemplateContextTypeRegistry extends ContextTypeRegistry {
 				String value = getId(keyword);
 				if (value!=null) {
 					type = ctxTypeProvider.get();
+					type.setName("Keyword '"+keyword.getValue()+"'");
+					type.setId(value);
+					allContextTypes.add(type);
+				}
+			}
+		}
+		List<EnumRule> enumRules = GrammarUtil.allEnumRules(grammarAccess.getGrammar());
+		for (EnumRule enumRule : enumRules) {
+			List<Keyword> keywords = EcoreUtil2.getAllContentsOfType(enumRule, Keyword.class);
+			for (Keyword keyword : keywords) {
+				String value = getId(keyword);
+				if (value!=null) {
+					XtextTemplateContextType type = ctxTypeProvider.get();
 					type.setName("Keyword '"+keyword.getValue()+"'");
 					type.setId(value);
 					allContextTypes.add(type);
