@@ -558,4 +558,175 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     };
     this.tester.assertFormatted(_function);
   }
+  
+  @Test
+  public void bug403823() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(120));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void format(String a, String b, String c) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (a != b)");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("(");
+      _builder.append("«", "\t\t\t");
+      _builder.append("c");
+      _builder.append("»", "\t\t\t");
+      _builder.append(")");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("else");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("\'\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+    };
+    this.tester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void bug403823_1() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(120));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void format(String a, String b, String c) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (a != b) ");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("(");
+      _builder.append("«", "\t\t");
+      _builder.append("c");
+      _builder.append("»", "\t\t");
+      _builder.append(")");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append(" else \'\'");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+    };
+    this.tester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void bug403340() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(120));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void format(String v1, String v2) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (v1 === v2)");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("Same");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("else");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("Not the Same");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+    };
+    this.tester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void bug403340_1() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(120));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void format(String v1, String v2) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (v1 === v2) ");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("Same");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append(" else ");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("Not the Same");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+    };
+    this.tester.assertFormatted(_function);
+  }
 }

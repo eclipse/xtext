@@ -297,4 +297,70 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 			'''
 		]
 	}
+	
+	@Test def bug403823() {
+		tester.assertFormatted [
+			preferences[
+				put(FormatterPreferenceKeys.maxLineWidth, 120)
+			]
+			toBeFormatted = '''
+				class Foo {
+					def void format(String a, String b, String c) {
+						if (a != b)
+							«"'"»«"'"»«"'"»(«"\u00AB"»c«"\u00BB"»)«"'"»«"'"»«"'"»
+						else
+							''
+					}
+				}
+			'''
+		]
+	}
+	
+	@Test def bug403823_1() {
+		tester.assertFormatted [
+			preferences[
+				put(FormatterPreferenceKeys.maxLineWidth, 120)
+			]
+			toBeFormatted = '''
+				class Foo {
+					def void format(String a, String b, String c) {
+						if (a != b) «"'"»«"'"»«"'"»(«"\u00AB"»c«"\u00BB"»)«"'"»«"'"»«"'"» else ''
+					}
+				}
+			'''
+		]
+	}
+	
+	@Test def bug403340() {
+		tester.assertFormatted [
+			preferences[
+				put(FormatterPreferenceKeys.maxLineWidth, 120)
+			]
+			toBeFormatted = '''
+				class Foo {
+					def void format(String v1, String v2) {
+						if (v1 === v2)
+							«"'"»«"'"»«"'"»Same«"'"»«"'"»«"'"»
+						else
+							«"'"»«"'"»«"'"»Not the Same«"'"»«"'"»«"'"»
+					}
+				}
+			'''
+		]
+	}
+	
+	@Test def bug403340_1() {
+		tester.assertFormatted [
+			preferences[
+				put(FormatterPreferenceKeys.maxLineWidth, 120)
+			]
+			toBeFormatted = '''
+				class Foo {
+					def void format(String v1, String v2) {
+						if (v1 === v2) «"'"»«"'"»«"'"»Same«"'"»«"'"»«"'"» else «"'"»«"'"»«"'"»Not the Same«"'"»«"'"»«"'"»
+					}
+				}
+			'''
+		]
+	}
 }
