@@ -27,8 +27,8 @@ import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IEncodedStorage;
 import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -397,11 +397,13 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	@Override
 	public long getModificationStamp(Object element) {
 		if (isWorkspaceExternalEditorInput(element)) {
-			IFileStore fileStore = Adapters.adapt(element, IFileStore.class);
-			if (fileStore != null) {
-				IFileInfo info = fileStore.fetchInfo();
-				if (info.exists()) {
-					return info.getLastModified();
+			if (element instanceof IAdaptable) {
+				IFileStore fileStore = (IFileStore)((IAdaptable) element).getAdapter(IFileStore.class);
+				if (fileStore != null) {
+					IFileInfo info = fileStore.fetchInfo();
+					if (info.exists()) {
+						return info.getLastModified();
+					}
 				}
 			}
 			return IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
@@ -421,7 +423,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		} else {
 			return super.isSynchronized(element);
 		}
-	    return synchronizationStamp == getModificationStamp(element);
+		return synchronizationStamp == getModificationStamp(element);
 	}
 	
 	@Override
