@@ -11,6 +11,7 @@ import java.io.CharArrayWriter;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 
 import com.google.inject.Inject;
 
@@ -27,6 +28,10 @@ public class LineSeparatorHarmonizer implements IFilePostProcessor {
 
 	@Override
 	public CharSequence postProcess(URI fileURI, CharSequence content) {
+		// if the content is trace region aware, we should not simply treat it as a string.
+		if (content instanceof ITraceRegionProvider) {
+			return content;
+		}
 		String lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(fileURI).getLineSeparator();
 		return replaceLineSeparators(content, lineSeparator);
 	}
