@@ -89,8 +89,11 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		public boolean isReadOnly= true;
 		/** The flag representing the need to update the cached flag.  */
 		public boolean updateCache= true;
-	    /** The time stamp at which this provider changed the file. */
-	    public long synchronizationStamp = IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
+		/**
+		 * The time stamp at which this provider changed the file.
+		 * @since 2.12
+		 */
+		public long synchronizationStamp = IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
 
 		public URIInfo(IDocument document, IAnnotationModel model) {
 			super(document, model);
@@ -398,7 +401,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	public long getModificationStamp(Object element) {
 		if (isWorkspaceExternalEditorInput(element)) {
 			if (element instanceof IAdaptable) {
-				IFileStore fileStore = (IFileStore)((IAdaptable) element).getAdapter(IFileStore.class);
+				IFileStore fileStore = ((IAdaptable) element).getAdapter(IFileStore.class);
 				if (fileStore != null) {
 					IFileInfo info = fileStore.fetchInfo();
 					if (info.exists()) {
