@@ -577,7 +577,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         boolean _needsTychoBuild = this.getConfig().needsTychoBuild();
         if (_needsTychoBuild) {
           _builder.append("\t");
-          _builder.append("<tycho-version>0.25.0</tycho-version>");
+          _builder.append("<tycho-version>1.0.0</tycho-version>");
           _builder.newLine();
         }
       }
