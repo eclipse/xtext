@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
@@ -45,7 +46,15 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
  		}
 	}
 	
+	/**
+	 * @deprecated use {link {@link #TraceRegion(int, int, int, int, boolean, Collection, AbstractTraceRegion)} instead.
+	 */
+	@Deprecated
 	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, boolean useForDebugging, List<ILocationData> allLocationData, AbstractTraceRegion parent) {
+		this(myOffset, myLength, myLineNumber, myEndLineNumber, useForDebugging, (Collection<ILocationData>) allLocationData, parent);
+	}
+	
+	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, boolean useForDebugging, Collection<? extends ILocationData> allLocationData, AbstractTraceRegion parent) {
 		super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), useForDebugging, Lists.newArrayList(allLocationData), parent);
 		if (parent == null) {
 			for(ILocationData locationData: allLocationData) {

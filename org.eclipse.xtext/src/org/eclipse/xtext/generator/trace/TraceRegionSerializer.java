@@ -17,6 +17,7 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -59,7 +60,7 @@ public class TraceRegionSerializer {
 		@Override
 		public AbstractTraceRegion createRegion(int offset, int length, int lineNumber, int endLineNumber, boolean useForDebugging, List<ILocationData> associations,
 				AbstractTraceRegion parent) {
-			return new TraceRegion(offset, length, lineNumber, endLineNumber, useForDebugging, associations, parent);
+			return new TraceRegion(offset, length, lineNumber, endLineNumber, useForDebugging, (Collection<ILocationData>) associations, parent);
 		}
 
 		@Override
