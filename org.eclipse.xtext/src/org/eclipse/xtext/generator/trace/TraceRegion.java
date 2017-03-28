@@ -54,7 +54,7 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
 		this(myOffset, myLength, myLineNumber, myEndLineNumber, useForDebugging, (Collection<ILocationData>) allLocationData, parent);
 	}
 	
-	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, boolean useForDebugging, Collection<ILocationData> allLocationData, AbstractTraceRegion parent) {
+	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, boolean useForDebugging, Collection<? extends ILocationData> allLocationData, AbstractTraceRegion parent) {
 		super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), useForDebugging, Lists.newArrayList(allLocationData), parent);
 		if (parent == null) {
 			for(ILocationData locationData: allLocationData) {
