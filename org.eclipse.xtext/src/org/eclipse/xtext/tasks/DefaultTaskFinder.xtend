@@ -8,9 +8,12 @@
 package org.eclipse.xtext.tasks
 
 import com.google.inject.Inject
+import com.google.inject.name.Named
 import java.util.List
+import java.util.regex.Pattern
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.documentation.impl.AbstractMultiLineCommentProvider
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper
@@ -27,6 +30,16 @@ class DefaultTaskFinder implements ITaskFinder {
 	ITaskTagProvider taskTagProvider
 	@Inject
 	IHiddenTokenHelper hiddenTokenHelper
+	Pattern endTagPattern = Pattern.compile("\\*/\\z")
+
+	/**
+	 * this method is not intended to be called by clients
+	 * @since 2.12
+	 */
+	@Inject(optional=true)
+	protected def setEndTag(@Named(AbstractMultiLineCommentProvider.END_TAG) String endTag) {
+		endTagPattern = Pattern.compile(endTag+"\\z")
+	}
 
 	override findTasks(Resource resource) {
 		val taskTags = taskTagProvider.getTaskTags(resource)
@@ -59,10 +72,7 @@ class DefaultTaskFinder implements ITaskFinder {
 	 * @since 2.12
 	 */
 	protected def String stripText(ILeafNode node, String text) {
-		if (text.endsWith("*/")) {
-			return text.substring(0, text.length-2)
-		}
-		return text
+		return endTagPattern.matcher(text).replaceAll("")
 	}
 
 	protected def boolean canContainTaskTags(ILeafNode node) {

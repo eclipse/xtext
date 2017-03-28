@@ -9,12 +9,15 @@ package org.eclipse.xtext.tasks;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.regex.Pattern;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.documentation.impl.AbstractMultiLineCommentProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parser.IParseResult;
@@ -43,6 +46,17 @@ public class DefaultTaskFinder implements ITaskFinder {
   
   @Inject
   private IHiddenTokenHelper hiddenTokenHelper;
+  
+  private Pattern endTagPattern = Pattern.compile("\\*/\\z");
+  
+  /**
+   * this method is not intended to be called by clients
+   * @since 2.12
+   */
+  @Inject(optional = true)
+  protected Pattern setEndTag(@Named(AbstractMultiLineCommentProvider.END_TAG) final String endTag) {
+    return this.endTagPattern = Pattern.compile((endTag + "\\z"));
+  }
   
   @Override
   public List<Task> findTasks(final Resource resource) {
@@ -111,13 +125,7 @@ public class DefaultTaskFinder implements ITaskFinder {
    * @since 2.12
    */
   protected String stripText(final ILeafNode node, final String text) {
-    boolean _endsWith = text.endsWith("*/");
-    if (_endsWith) {
-      int _length = text.length();
-      int _minus = (_length - 2);
-      return text.substring(0, _minus);
-    }
-    return text;
+    return this.endTagPattern.matcher(text).replaceAll("");
   }
   
   protected boolean canContainTaskTags(final ILeafNode node) {
