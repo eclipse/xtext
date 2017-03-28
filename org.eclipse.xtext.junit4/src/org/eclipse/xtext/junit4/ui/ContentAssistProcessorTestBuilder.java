@@ -221,8 +221,15 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	protected ContentAssistProcessorTestBuilder applyProposal(ICompletionProposal proposal, IXtextDocument document)
 			throws Exception {
-		proposal.apply(document);
-		return reset().append(document.get());
+		Shell shell = new Shell();
+		try {
+			int position = document.getLength();
+			XtextSourceViewerConfiguration configuration = get(XtextSourceViewerConfiguration.class);
+			ISourceViewer sourceViewer = getSourceViewer(shell, document, configuration);
+			return appendAndApplyProposal(proposal, sourceViewer, model, position);
+		} finally {
+			shell.dispose();
+		}
 	}
 
 	public ContentAssistProcessorTestBuilder expectContent(String expectation){

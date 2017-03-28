@@ -24,4 +24,11 @@ class ContentAssistTest extends AbstractContentAssistTest {
 	@Test def void testTypeCompletion() {
 		newBuilder.append('entity Foo { bar: LinkedHashSet').assertText('java.util.LinkedHashSet')
 	}
+	
+	@Test def void testTemplateProposal() {
+		newBuilder.applyProposal("Entity - template for an Entity").expectContent('''
+		entity name {
+			 
+		}''')
+	}
 }
