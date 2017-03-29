@@ -192,6 +192,13 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getReturnType(expression);
 	}
+	
+	/* @Nullable */
+	@Override
+	public LightweightTypeReference getReturnType(XExpression expression, boolean onlyExplicitReturn) {
+		IResolvedTypes delegate = getDelegate(expression);
+		return delegate.getReturnType(expression, onlyExplicitReturn);
+	}
 
 	/* @Nullable */
 	@Override
