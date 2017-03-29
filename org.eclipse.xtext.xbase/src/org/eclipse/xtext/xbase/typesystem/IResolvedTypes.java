@@ -67,10 +67,21 @@ public interface IResolvedTypes {
 	
 	/**
 	 * Returns the actually inferred return type for the given expression or <code>null</code> if none.
+	 * Returns the actual expression type, if no explicit return type exists.
+	 * 
+	 * Shorthand for {{@link #getReturnType(XExpression, false)}}
+	 * 
 	 * @param expression expression whose return type is queried.
 	 */
 	/* @Nullable */
 	LightweightTypeReference getReturnType(XExpression expression);
+	
+	/**
+	 * Returns the actually inferred return type for the given expression or <code>null</code> if none.
+	 * @param expression expression whose return type is queried.
+	 */
+	/* @Nullable */
+	LightweightTypeReference getReturnType(XExpression expression, boolean onlyExplicitReturns);
 	
 	/**
 	 * Returns the actually inferred or declared type for the given identifiable or <code>null</code> if none.
@@ -238,6 +249,12 @@ public interface IResolvedTypes {
 		/* @Nullable */
 		@Override
 		public LightweightTypeReference getReturnType(XExpression expression) {
+			return null;
+		}
+		
+		/* @Nullable */
+		@Override
+		public LightweightTypeReference getReturnType(XExpression expression, boolean onlyExplicitReturn) {
 			return null;
 		}
 

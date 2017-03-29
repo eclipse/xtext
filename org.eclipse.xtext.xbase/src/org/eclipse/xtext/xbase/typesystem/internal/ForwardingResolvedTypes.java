@@ -63,6 +63,12 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 	
 	/* @Nullable */
 	@Override
+	public LightweightTypeReference getReturnType(XExpression expression, boolean onlyExplicitReturn) {
+		return delegate().getReturnType(expression, onlyExplicitReturn);
+	}
+	
+	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedReturnType(XExpression expression) {
 		return delegate().getExpectedReturnType(expression);
 	}
