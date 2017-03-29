@@ -42,6 +42,7 @@ import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;
 import org.eclipse.xtend.core.scoping.AnonymousClassConstructorScopes;
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
 import org.eclipse.xtend.core.serializer.XtendSerializerScopeProvider;
+import org.eclipse.xtend.core.tasks.XtendTaskFinder;
 import org.eclipse.xtend.core.tasks.XtendTaskTagProvider;
 import org.eclipse.xtend.core.typesystem.LocalClassAwareTypeNames;
 import org.eclipse.xtend.core.typesystem.TypeDeclarationAwareBatchTypeResolver;
@@ -83,6 +84,7 @@ import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
+import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.tasks.ITaskTagProvider;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
@@ -360,5 +362,9 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
   
   public Class<? extends IShouldGenerate> bindIShouldGenerate() {
     return IShouldGenerate.Always.class;
+  }
+  
+  public Class<? extends ITaskFinder> bindITaskFinder() {
+    return XtendTaskFinder.class;
   }
 }
