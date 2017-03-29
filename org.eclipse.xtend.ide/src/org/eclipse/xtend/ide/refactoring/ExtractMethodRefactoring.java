@@ -442,14 +442,10 @@ public class ExtractMethodRefactoring extends Refactoring {
 	protected LightweightTypeReference calculateReturnType(IResolvedTypes resolvedTypes) {
 		List<LightweightTypeReference> returnTypes = newArrayList();
 		for(XExpression expression: expressions) {
-			LightweightTypeReference expressionReturnType = resolvedTypes.getReturnType(expression);
+			LightweightTypeReference expressionReturnType = resolvedTypes.getReturnType(expression, expression != lastExpression);
 			if(expressionReturnType != null)
 				returnTypes.add(expressionReturnType);
 		}
-		LightweightTypeReference actualType = resolvedTypes.getActualType(lastExpression);
-		//TODO this is a hack! Branching expressions without a default branch but all other branches are returns, will be of type void.
-		if (!actualType.isPrimitiveVoid())
-			returnTypes.add(actualType);
 		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(typeComputationServices, xtendClass);
 		return typeComputationServices.getTypeConformanceComputer().getCommonSuperType(returnTypes, owner);
 	}
