@@ -214,7 +214,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 			throws Exception {
 			return applyProposal(proposal, cursorPosition, document);
 	}
-	
+
 	protected ContentAssistProcessorTestBuilder applyProposal(ICompletionProposal proposal, int position, IXtextDocument document)
 			throws Exception {
 		Shell shell = new Shell();
