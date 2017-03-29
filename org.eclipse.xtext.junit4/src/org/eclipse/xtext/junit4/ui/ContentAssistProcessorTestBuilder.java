@@ -221,8 +221,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	protected ContentAssistProcessorTestBuilder applyProposal(ICompletionProposal proposal, IXtextDocument document)
 			throws Exception {
-			int position = document.getLength();
-			return applyProposal(proposal, position, document);
+			return applyProposal(proposal, cursorPosition, document);
 	}
 	
 	protected ContentAssistProcessorTestBuilder applyProposal(ICompletionProposal proposal, int position, IXtextDocument document)
