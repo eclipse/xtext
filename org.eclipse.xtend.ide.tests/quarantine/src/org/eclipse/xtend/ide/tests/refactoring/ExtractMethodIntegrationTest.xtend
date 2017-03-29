@@ -8,10 +8,10 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus
 import org.eclipse.xtend.ide.refactoring.ExtractMethodRefactoring
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
 import org.junit.After
 import org.junit.Test
-import org.eclipse.xtext.common.types.JvmVisibility
 
 /**
  * @author Jan Koehnlein
@@ -999,7 +999,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 		''')
 	}
 
-		@Test def test_Bug_453376_3() {
+	@Test def test_Bug_453376_3() {
 		'''
 			class Foo {
 				def foo() {
@@ -1014,6 +1014,59 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				
 				def bar() {
 					1
+				}
+			}
+		''')
+	}
+	
+	
+	@Test def test_Issue_107_a() {
+		'''
+			import java.util.ArrayList
+			
+			class Test {
+				def void test() {
+					$val int a = 5
+					new ArrayList<Integer>.addAll(#[a])$
+				}
+			}
+		'''.assertAfterExtract([explicitlyDeclareReturnType = true], '''
+			import java.util.ArrayList
+			
+			class Test {
+				def void test() {
+					bar()
+				}
+				
+				def boolean bar() {
+					val int a = 5
+					new ArrayList<Integer>.addAll(#[a])
+				}
+			}
+		''')
+	}
+		
+	@Test def test_Issue_107_b() {
+		'''
+			import java.util.ArrayList
+			
+			class Test {
+				def boolean test() {
+					$val int a = 5
+					return new ArrayList<Integer>.addAll(#[a])$
+				}
+			}
+		'''.assertAfterExtract([explicitlyDeclareReturnType = true], '''
+			import java.util.ArrayList
+			
+			class Test {
+				def boolean test() {
+					bar()
+				}
+				
+				def boolean bar() {
+					val int a = 5
+					return new ArrayList<Integer>.addAll(#[a])
 				}
 			}
 		''')

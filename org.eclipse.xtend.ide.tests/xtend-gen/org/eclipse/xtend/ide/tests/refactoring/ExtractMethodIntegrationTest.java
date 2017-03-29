@@ -2757,6 +2757,124 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
   
+  @Test
+  public void test_Issue_107_a() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.ArrayList");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void test() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$val int a = 5");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new ArrayList<Integer>.addAll(#[a])$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = (ExtractMethodRefactoring it) -> {
+      it.setExplicitlyDeclareReturnType(true);
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.ArrayList");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Test {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void test() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar()");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def boolean bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val int a = 5");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("new ArrayList<Integer>.addAll(#[a])");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void test_Issue_107_b() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.ArrayList");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def boolean test() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$val int a = 5");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return new ArrayList<Integer>.addAll(#[a])$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = (ExtractMethodRefactoring it) -> {
+      it.setExplicitlyDeclareReturnType(true);
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.ArrayList");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Test {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def boolean test() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar()");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def boolean bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val int a = 5");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("return new ArrayList<Integer>.addAll(#[a])");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
   protected void assertAfterExtract(final CharSequence input, final Procedure1<? super ExtractMethodRefactoring> initializer, final CharSequence expected) {
     try {
       final String inputString = input.toString();
