@@ -196,7 +196,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		try {
 			ICompletionProposal[] proposals = computeCompletionProposals(document, position, shell);
 			ICompletionProposal proposal = findProposal(proposalString, proposals);
-			return applyProposal(proposal, document);
+			return applyProposal(proposal, position, document);
 		} finally {
 			shell.dispose();
 		}
@@ -221,9 +221,14 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	protected ContentAssistProcessorTestBuilder applyProposal(ICompletionProposal proposal, IXtextDocument document)
 			throws Exception {
+			int position = document.getLength();
+			return applyProposal(proposal, position, document);
+	}
+	
+	protected ContentAssistProcessorTestBuilder applyProposal(ICompletionProposal proposal, int position, IXtextDocument document)
+			throws Exception {
 		Shell shell = new Shell();
 		try {
-			int position = document.getLength();
 			XtextSourceViewerConfiguration configuration = get(XtextSourceViewerConfiguration.class);
 			ISourceViewer sourceViewer = getSourceViewer(shell, document, configuration);
 			return appendAndApplyProposal(proposal, sourceViewer, model, position);
