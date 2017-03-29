@@ -9,12 +9,15 @@ package org.eclipse.xtext.tasks;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.regex.Pattern;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.documentation.impl.AbstractMultiLineCommentProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parser.IParseResult;
@@ -43,6 +46,17 @@ public class DefaultTaskFinder implements ITaskFinder {
   
   @Inject
   private IHiddenTokenHelper hiddenTokenHelper;
+  
+  private Pattern endTagPattern = Pattern.compile("\\*/\\z");
+  
+  /**
+   * this method is not intended to be called by clients
+   * @since 2.12
+   */
+  @Inject(optional = true)
+  protected Pattern setEndTag(@Named(AbstractMultiLineCommentProvider.END_TAG) final String endTag) {
+    return this.endTagPattern = Pattern.compile((endTag + "\\z"));
+  }
   
   @Override
   public List<Task> findTasks(final Resource resource) {
@@ -89,7 +103,7 @@ public class DefaultTaskFinder implements ITaskFinder {
   protected List<Task> findTasks(final ILeafNode node, final TaskTags taskTags) {
     boolean _canContainTaskTags = this.canContainTaskTags(node);
     if (_canContainTaskTags) {
-      final List<Task> tasks = this.parser.parseTasks(node.getText(), taskTags);
+      final List<Task> tasks = this.parser.parseTasks(this.stripText(node, node.getText()), taskTags);
       final Consumer<Task> _function = (Task it) -> {
         int _offset = it.getOffset();
         int _offset_1 = node.getOffset();
@@ -105,6 +119,13 @@ public class DefaultTaskFinder implements ITaskFinder {
       return tasks;
     }
     return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
+  }
+  
+  /**
+   * @since 2.12
+   */
+  protected String stripText(final ILeafNode node, final String text) {
+    return this.endTagPattern.matcher(text).replaceAll("");
   }
   
   protected boolean canContainTaskTags(final ILeafNode node) {

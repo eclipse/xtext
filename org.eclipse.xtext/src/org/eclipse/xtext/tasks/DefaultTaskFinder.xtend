@@ -8,13 +8,16 @@
 package org.eclipse.xtext.tasks
 
 import com.google.inject.Inject
+import com.google.inject.name.Named
 import java.util.List
+import java.util.regex.Pattern
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.documentation.impl.AbstractMultiLineCommentProvider
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.ILeafNode
-import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -27,6 +30,16 @@ class DefaultTaskFinder implements ITaskFinder {
 	ITaskTagProvider taskTagProvider
 	@Inject
 	IHiddenTokenHelper hiddenTokenHelper
+	Pattern endTagPattern = Pattern.compile("\\*/\\z")
+
+	/**
+	 * this method is not intended to be called by clients
+	 * @since 2.12
+	 */
+	@Inject(optional=true)
+	protected def setEndTag(@Named(AbstractMultiLineCommentProvider.END_TAG) String endTag) {
+		endTagPattern = Pattern.compile(endTag+"\\z")
+	}
 
 	override findTasks(Resource resource) {
 		val taskTags = taskTagProvider.getTaskTags(resource)
@@ -45,7 +58,7 @@ class DefaultTaskFinder implements ITaskFinder {
 	protected def List<Task> findTasks(ILeafNode node, TaskTags taskTags) {
 		if (node.canContainTaskTags) {
 			//TODO strip comment characters before parsing, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=380449#c13
-			val tasks = parser.parseTasks(node.text, taskTags)
+			val tasks = parser.parseTasks(stripText(node, node.text), taskTags)
 			tasks.forEach [
 				offset = offset + node.offset
 				lineNumber = lineNumber + node.startLine - 1
@@ -53,6 +66,13 @@ class DefaultTaskFinder implements ITaskFinder {
 			return tasks
 		}
 		return #[]
+	}
+
+	/**
+	 * @since 2.12
+	 */
+	protected def String stripText(ILeafNode node, String text) {
+		return endTagPattern.matcher(text).replaceAll("")
 	}
 
 	protected def boolean canContainTaskTags(ILeafNode node) {

@@ -7,16 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.tasks
 
+import com.google.inject.Binder
+import com.google.inject.Guice
 import java.util.List
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl
+import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageRuntimeModule
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup
+import org.eclipse.xtext.tests.AbstractXtextTests
+import org.eclipse.xtext.tests.LineDelimiters
 import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.tasks.TaskAssert.*
-import org.eclipse.xtext.tests.AbstractXtextTests
-import org.eclipse.xtext.tests.LineDelimiters
+import com.google.inject.name.Names
+import org.eclipse.xtext.documentation.impl.AbstractMultiLineCommentProvider
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -47,6 +52,7 @@ class DefaultTaskFinderTest extends AbstractXtextTests {
 				 * Fixme no match
 				 * FOO also no match
 				 */
+				/* TODO Get rid of this */
 				Hello notATODO!
 			''')
 		)
@@ -68,9 +74,55 @@ class DefaultTaskFinderTest extends AbstractXtextTests {
 				description = " bar"
 				offset = 17
 				lineNumber = 3
+			],
+			new Task => [
+				tag = new TaskTag => [
+					name = "TODO"
+					priority = Priority.NORMAL
+				]
+				description = " Get rid of this "
+				offset = 73
+				lineNumber = 7
 			]
 		])
 		
+	}
+	
+	@Test
+	def void testSpecialEndTag() {
+		with(NoJdtTestLanguageStandaloneSetupCustom)
+		finder = get(DefaultTaskFinder)
+		getResourceFromString(
+			LineDelimiters.toUnix(
+			'''
+				/* TODO Get rid of this ***/
+				Hello notATODO!
+			''')
+		)
+		.assertContainsTasks(#[
+			new Task => [
+				tag = new TaskTag => [
+					name = "TODO"
+					priority = Priority.NORMAL
+				]
+				description = " Get rid of this "
+				offset = 3
+				lineNumber = 1
+			]
+		])
+	}
+	
+	static class NoJdtTestLanguageStandaloneSetupCustom extends NoJdtTestLanguageStandaloneSetup {
+		
+		override createInjector() {
+			return Guice.createInjector(new NoJdtTestLanguageRuntimeModule() {
+				def configureEndTag(Binder binder) {
+					binder.bind(String).annotatedWith(
+						Names.named(AbstractMultiLineCommentProvider.END_TAG)
+					).toInstance("\\*\\*\\*/")
+				}
+			});
+		}
 		
 	}
 
