@@ -539,6 +539,61 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
   }
   
   @Override
+  protected void formatBodyInline(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
+    if ((expr == null)) {
+      return;
+    }
+    if (((expr instanceof XBlockExpression) && ((!(expr instanceof RichString)) || (!forceMultiline)))) {
+      doc.<XExpression>append(doc.<XExpression>prepend(expr, XbaseFormatterPreferenceKeys.bracesInNewLine), XbaseFormatterPreferenceKeys.bracesInNewLine);
+    } else {
+      if ((forceMultiline || this.textRegionExtensions.previousHiddenRegion(expr).isMultiline())) {
+        final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+          it.newLine();
+        };
+        final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+          it.indent();
+        };
+        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+          it.newLine();
+        };
+        doc.<XExpression>append(doc.<XExpression>surround(doc.<XExpression>prepend(expr, _function), _function_1), _function_2);
+      } else {
+        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+          it.oneSpace();
+        };
+        doc.<XExpression>surround(expr, _function_3);
+      }
+    }
+    doc.<XExpression>format(expr);
+  }
+  
+  @Override
+  protected void formatBody(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
+    if ((expr == null)) {
+      return;
+    }
+    if (((expr instanceof XBlockExpression) && ((!(expr instanceof RichString)) || (!forceMultiline)))) {
+      doc.<XExpression>prepend(expr, XbaseFormatterPreferenceKeys.bracesInNewLine);
+    } else {
+      if ((forceMultiline || this.textRegionExtensions.previousHiddenRegion(expr).isMultiline())) {
+        final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+          it.newLine();
+        };
+        final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+          it.indent();
+        };
+        doc.<XExpression>surround(doc.<XExpression>prepend(expr, _function), _function_1);
+      } else {
+        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+          it.oneSpace();
+        };
+        doc.<XExpression>prepend(expr, _function_2);
+      }
+    }
+    doc.<XExpression>format(expr);
+  }
+  
+  @Override
   protected XClosure builder(final List<XExpression> params) {
     XClosure _xifexpression = null;
     XExpression _last = IterableExtensions.<XExpression>last(params);

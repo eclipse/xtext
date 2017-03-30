@@ -274,6 +274,32 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 			!expr.nextHiddenRegion.immediatelyPreceding.keyword("}").previousHiddenRegion.multiline
 	}
 
+	override protected void formatBodyInline(XExpression expr, boolean forceMultiline, extension IFormattableDocument doc) {
+		if (expr === null)
+			return;
+		if (expr instanceof XBlockExpression && (!(expr instanceof RichString) || !forceMultiline)) {
+			expr.prepend(bracesInNewLine).append(bracesInNewLine)
+		} else if (forceMultiline || expr.previousHiddenRegion.isMultiline) {
+			expr.prepend[newLine].surround[indent].append[newLine]
+		} else {
+			expr.surround[oneSpace]
+		}
+		expr.format
+	}
+
+	override protected void formatBody(XExpression expr, boolean forceMultiline, extension IFormattableDocument doc) {
+		if (expr === null)
+			return;
+		if (expr instanceof XBlockExpression && (!(expr instanceof RichString) || !forceMultiline)) {
+			expr.prepend(bracesInNewLine)
+		} else if (forceMultiline || expr.previousHiddenRegion.isMultiline) {
+			expr.prepend[newLine].surround[indent]
+		} else {
+			expr.prepend[oneSpace]
+		}
+		expr.format
+	}
+
 	override protected builder(List<XExpression> params) {
 		if (params.last !== null) {
 			val grammarElement = params.last.grammarElement
