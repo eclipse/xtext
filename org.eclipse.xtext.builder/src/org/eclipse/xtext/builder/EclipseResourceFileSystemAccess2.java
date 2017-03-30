@@ -46,6 +46,7 @@ import org.eclipse.xtext.ui.generator.trace.TraceMarkers;
 import org.eclipse.xtext.ui.resource.ProjectByResourceProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -483,18 +484,23 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 * @since 2.3
 	 */
 	public void flushSourceTraces(String generatorName) throws CoreException {
+		Multimap<SourceRelativeURI, IPath> sourceTraces = getSourceTraces();
 		if (sourceTraces != null) {
 			Set<SourceRelativeURI> keys = sourceTraces.keySet();
-			for(SourceRelativeURI uri: keys) {
-				Collection<IPath> paths = sourceTraces.get(uri);
-				IFile sourceFile = workspace.getRoot().getFile(new Path(uri.getURI().path()));
-				if (sourceFile.exists()) {
-					IPath[] tracePathArray = paths.toArray(new IPath[paths.size()]);
-					traceMarkers.installMarker(sourceFile, generatorName, tracePathArray);
+			String source = getCurrentSource();
+			IContainer container = Strings.isEmpty(source) ? getProject() : getProject().getFolder(source);
+			for (SourceRelativeURI uri : keys) {
+				if (uri != null) {
+					Collection<IPath> paths = sourceTraces.get(uri);
+					IFile sourceFile = container.getFile(new Path(uri.getURI().path()));
+					if (sourceFile.exists()) {
+						IPath[] tracePathArray = paths.toArray(new IPath[paths.size()]);
+						getTraceMarkers().installMarker(sourceFile, generatorName, tracePathArray);
+					}
 				}
 			}
 		}
-		sourceTraces = null;
+		resetSourceTraces();
 	}
 
 	/**
