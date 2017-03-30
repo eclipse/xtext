@@ -33,6 +33,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.CompositeRefactoringProcessor;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.testing.Flaky;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
@@ -1333,6 +1334,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	@Flaky(trials=10)
 	public void testBug489208_1() throws Exception {
 		try {
 			testHelper.getProject().close(null);
@@ -1353,7 +1355,8 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		}
 	}
 	
-	@Test 
+	@Test
+	@Flaky(trials=10)
 	public void testBug489208_2() throws Exception {
 		try {
 			testHelper.getProject().close(null);
