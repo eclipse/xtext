@@ -72,6 +72,7 @@ import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
@@ -858,6 +859,10 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		
 		appendSyntheticDispatchMethods(anonymousClass, inferredType);
 		nameClashResolver.resolveNameClashes(inferredType);
+		final XConstructorCall constructorCall = anonymousClass.getConstructorCall();
+		for (XExpression actualParameter : constructorCall.getArguments()) {
+			associator.associateLogicalContainer(actualParameter, container);
+		}
 	}
 	
 	protected boolean hasAdditionalMembers(AnonymousClass anonymousClass) {
