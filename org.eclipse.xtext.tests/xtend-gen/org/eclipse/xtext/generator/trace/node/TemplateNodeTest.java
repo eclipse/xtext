@@ -22,6 +22,36 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class TemplateNodeTest {
   @Test
+  public void testNull() {
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("fooo ");
+        _builder.append("bar");
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    this.assertEquals(_client);
+  }
+  
+  @Test
+  public void testNull_02() {
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("fooo");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append(" ");
+        _builder.append("bar");
+        _builder.newLine();
+      }
+    };
+    this.assertEquals(_client);
+  }
+  
+  @Test
   public void testSimpleString() {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override

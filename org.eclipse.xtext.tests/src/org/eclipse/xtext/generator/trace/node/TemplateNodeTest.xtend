@@ -17,6 +17,20 @@ import org.eclipse.xtend2.lib.StringConcatenation
  */
 class TemplateNodeTest {
 	
+	@Test def void testNull() {
+		assertEquals('''
+			fooo «null»bar
+		''')
+	}
+	
+	@Test def void testNull_02() {
+		assertEquals('''
+			fooo
+				«null»
+			 bar
+		''')
+	}
+	
 	@Test def void testSimpleString() {
 		assertEquals('''
 			fooo bar

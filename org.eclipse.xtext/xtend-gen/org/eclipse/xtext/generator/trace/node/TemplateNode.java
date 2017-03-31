@@ -65,6 +65,9 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
   
   @Override
   public void append(final Object object) {
+    if ((object == null)) {
+      return;
+    }
     boolean _matched = false;
     if (object instanceof StringConcatenationClient) {
       _matched=true;

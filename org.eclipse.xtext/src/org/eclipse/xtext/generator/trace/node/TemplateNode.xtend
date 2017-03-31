@@ -46,6 +46,9 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 	val lineSplitter = Splitter.on(Pattern.compile("\\R"))
 	
 	override append(Object object) {
+		if (object === null) {
+			return;
+		}
 		switch object {
 			StringConcatenationClient:
 				nodeFactory.appendTemplate(currentParent, object)
