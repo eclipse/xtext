@@ -23,10 +23,12 @@ import org.junit.Test;
 public class TemplateNodeTest {
   @Test
   public void testNull() {
+    final Object x = null;
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("fooo ");
+        _builder.append(x);
         _builder.append("bar");
         _builder.newLineIfNotEmpty();
       }
@@ -36,12 +38,14 @@ public class TemplateNodeTest {
   
   @Test
   public void testNull_02() {
+    final Object x = null;
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("fooo");
         _builder.newLine();
         _builder.append("\t");
+        _builder.append(x, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append(" ");
         _builder.append("bar");

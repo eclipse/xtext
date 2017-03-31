@@ -18,15 +18,19 @@ import org.eclipse.xtend2.lib.StringConcatenation
 class TemplateNodeTest {
 	
 	@Test def void testNull() {
+		// need to create a local var, so the compiler doesn't remove the null segment
+		val x = null
 		assertEquals('''
-			fooo «null»bar
+			fooo «x»bar
 		''')
 	}
 	
 	@Test def void testNull_02() {
+		// need to create a local var, so the compiler doesn't remove the null segment
+		val x = null
 		assertEquals('''
 			fooo
-				«null»
+				«x»
 			 bar
 		''')
 	}
