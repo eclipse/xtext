@@ -70,7 +70,7 @@ public class XtendParallelBuilderParticipant extends ParallelBuilderParticipant 
 				generatorMarkers.put(config, markers);
 			}
 		}
-		return generatorMarkers;
+		return buildGeneratorMarkersReverseLookupMap(generatorMarkers);
 	}
 	
 	public List<IPath> getSourceFolderPathes(IProject project){
