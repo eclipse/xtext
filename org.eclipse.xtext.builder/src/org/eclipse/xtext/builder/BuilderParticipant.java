@@ -60,8 +60,10 @@ import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 import com.google.common.base.Function;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -191,7 +193,26 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				generatorMarkers.put(config, markers);
 			}
 		}
-		return generatorMarkers;
+		return buildGeneratorMarkersReverseLookupMap(generatorMarkers);
+	}
+
+	/**
+	 * @since 2.12
+	 */
+	protected Map<OutputConfiguration, Iterable<IMarker>> buildGeneratorMarkersReverseLookupMap(Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers) {
+		SetMultimap<String, IFile> reverseLookupMap = HashMultimap.create();
+		for (java.util.Map.Entry<OutputConfiguration, Iterable<IMarker>> entry : generatorMarkers.entrySet()) {
+			OutputConfiguration outputConfiguration = entry.getKey();
+			if (outputConfiguration.isCleanUpDerivedResources()) {
+				for (IMarker marker : entry.getValue()) {
+					String source = derivedResourceMarkers.getSource(marker);
+					if (source != null) {
+						reverseLookupMap.put(source, (IFile) marker.getResource());
+					}
+				}
+			}
+		}
+		return new DerivedResourcesLookupMap(generatorMarkers, reverseLookupMap);
 	}
 
 	@Override
@@ -399,6 +420,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			final Map<String, OutputConfiguration> outputConfigurations,
 			Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers) {
 		String uri = delta.getUri().toString();
+		if (generatorMarkers instanceof DerivedResourcesLookupMap) {
+			return ((DerivedResourcesLookupMap) generatorMarkers).getDerivedResources(uri);
+		}
 		Set<IFile> derivedResources = newLinkedHashSet();
 		for (OutputConfiguration config : outputConfigurations.values()) {
 			if (config.isCleanUpDerivedResources()) {
