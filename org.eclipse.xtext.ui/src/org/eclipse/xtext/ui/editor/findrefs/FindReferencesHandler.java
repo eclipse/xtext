@@ -67,6 +67,9 @@ public class FindReferencesHandler extends AbstractHandler {
 	}
 
 	protected ReferenceQueryExecutor getQueryExecutor(EObject target) {
+		if (target == null) {
+			return null;
+		}
 		URI targetURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(target);
 		if(targetURI != null) {
 			ReferenceQueryExecutor queryExecutor = globalServiceProvider.findService(targetURI.trimFragment(), ReferenceQueryExecutor.class);
