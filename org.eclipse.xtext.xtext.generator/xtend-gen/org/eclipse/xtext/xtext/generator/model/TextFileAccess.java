@@ -38,6 +38,10 @@ public class TextFileAccess {
     return this.internalContents.toString();
   }
   
+  public String getContentString() {
+    return this.getContent().toString();
+  }
+  
   public void writeTo(final IFileSystemAccess2 fileSystemAccess) {
     if ((fileSystemAccess != null)) {
       fileSystemAccess.generateFile(this.path, this.getContent());

@@ -447,7 +447,29 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
         final IXtextGeneratorFileSystemAccess root = entry.getValue();
         boolean _isFile = root.isFile(pluginXml.getPath());
         if (_isFile) {
-          if ((((!pluginXml.getEntries().isEmpty()) && (!Objects.equal(root.readTextFile(pluginXml.getPath()), pluginXml.getContent()))) && pluginXml.getPath().endsWith(".xml"))) {
+          boolean _and = false;
+          boolean _and_1 = false;
+          boolean _isEmpty = pluginXml.getEntries().isEmpty();
+          boolean _not = (!_isEmpty);
+          if (!_not) {
+            _and_1 = false;
+          } else {
+            CharSequence _readTextFile = root.readTextFile(pluginXml.getPath());
+            String _string = null;
+            if (_readTextFile!=null) {
+              _string=_readTextFile.toString();
+            }
+            String _contentString = pluginXml.getContentString();
+            boolean _notEquals = (!Objects.equal(_string, _contentString));
+            _and_1 = _notEquals;
+          }
+          if (!_and_1) {
+            _and = false;
+          } else {
+            boolean _endsWith = pluginXml.getPath().endsWith(".xml");
+            _and = _endsWith;
+          }
+          if (_and) {
             String _path = pluginXml.getPath();
             String _plus = (_path + "_gen");
             pluginXml.setPath(_plus);

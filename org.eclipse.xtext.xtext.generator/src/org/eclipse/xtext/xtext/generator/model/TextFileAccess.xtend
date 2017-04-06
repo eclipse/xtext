@@ -32,6 +32,10 @@ class TextFileAccess {
 		return internalContents.toString
 	}
 
+	def String getContentString() {
+		return getContent.toString
+	}
+
 	def void writeTo(IFileSystemAccess2 fileSystemAccess) {
 		if (fileSystemAccess !== null) {
 			fileSystemAccess.generateFile(path, content)
