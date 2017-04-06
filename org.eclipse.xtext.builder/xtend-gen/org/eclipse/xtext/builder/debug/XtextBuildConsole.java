@@ -47,7 +47,7 @@ public class XtextBuildConsole extends IOConsole {
       }
       final IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
       final XtextBuildConsole console = IterableExtensions.<XtextBuildConsole>head(Iterables.<XtextBuildConsole>filter(((Iterable<?>)Conversions.doWrapArray(consoleManager.getConsoles())), XtextBuildConsole.class));
-      if (console!=null) {
+      if ((console != null)) {
         String _name = Thread.currentThread().getName();
         String _plus = ("[" + _name);
         String _plus_1 = (_plus + "] ");
@@ -62,8 +62,8 @@ public class XtextBuildConsole extends IOConsole {
         }
         String _plus_2 = (_plus_1 + _switchResult);
         console.println(_plus_2);
+        consoleManager.showConsoleView(console);
       }
-      consoleManager.showConsoleView(console);
     }
     
     public IBuildLogger registerDelegate(final IBuildLogger delegate) {

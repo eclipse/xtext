@@ -49,15 +49,17 @@ class XtextBuildConsole extends IOConsole {
 				delegate.log(it)
 			val consoleManager = ConsolePlugin.getDefault.consoleManager
 			val console = consoleManager.consoles.filter(XtextBuildConsole).head
-			console?.println(
-				'[' + Thread.currentThread.name + '] ' + switch it {
-					Throwable:
-						stackTraceAsString
-					default:
-						it.toString
-				}
-			)
-			consoleManager.showConsoleView(console)
+			if (console !== null) {
+				console.println(
+					'[' + Thread.currentThread.name + '] ' + switch it {
+						Throwable:
+							stackTraceAsString
+						default:
+							it.toString
+					}
+				)
+				consoleManager.showConsoleView(console)
+			}
 		}
 		
 		def registerDelegate(IBuildLogger delegate) {
