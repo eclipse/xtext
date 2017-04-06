@@ -154,7 +154,7 @@ public abstract class AbstractNewXtendElementWizardPage extends NewTypeWizardPag
 						}
 					}
 					IResource res = getPackageFragment().getResource();
-					IFile xtendFile = ((IFolder) res).getFile(getTypeName() + ".xtend"); //$NON-NLS-1$
+					IFile xtendFile = ((IFolder) res).getFile(getTypeNameWithoutParameters() + ".xtend"); //$NON-NLS-1$
 					URI uri = storage2UriMapper.getUri(xtendFile);
 					size[0] = createXtendElement(monitor, xtendFile, whitespaceInformationProvider
 							.getIndentationInformation(uri).getIndentString(), whitespaceInformationProvider
@@ -178,6 +178,19 @@ public abstract class AbstractNewXtendElementWizardPage extends NewTypeWizardPag
 			MessageDialog.openError(getShell(), getElementCreationErrorMessage(), realException.getMessage());
 		}
 		return size[0];
+	}
+
+	protected String getTypeNameWithoutParameters() {
+		return getTypeNameWithoutParameters(getTypeName());
+	}
+
+	protected String getTypeNameWithoutParameters(String typeNameWithParameters) {
+		int angleBracketOffset= typeNameWithParameters.indexOf('<');
+		if (angleBracketOffset == -1) {
+			return typeNameWithParameters;
+		} else {
+			return typeNameWithParameters.substring(0, angleBracketOffset);
+		}
 	}
 
 	protected void displayError(final String title, final String message) {
