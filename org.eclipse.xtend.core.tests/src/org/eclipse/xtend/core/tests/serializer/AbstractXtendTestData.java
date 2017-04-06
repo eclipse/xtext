@@ -237,5 +237,19 @@ public abstract class AbstractXtendTestData extends AbstractXtendTestCase {
 		str.append("}");
 		doTest(str.toString());
 	}
+	
+	@Test public void testBug445698() throws Exception {
+		StringBuilder str = new StringBuilder();
+		str.append("class MoreBlocks {\n");
+		str.append("    def i_am_created() {\n");
+		str.append("        val s = new java.util.Stack<Integer>;\n");
+		str.append("        {\n");
+		str.append("            val x = 0\n");
+		str.append("            println(x)\n");
+		str.append("        }\n");
+		str.append("    }\n");
+		str.append("}");
+		doTest(str.toString());
+	}
 
 }
