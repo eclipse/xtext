@@ -33,6 +33,7 @@ import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -206,7 +207,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
                 EClass _eReferenceType = ref.getEReferenceType();
                 _builder.append(_eReferenceType, "\t");
                 _builder.append(" ");
-                String _varName_1 = Formatter2Fragment2.this.toVarName(ref);
+                String _varName_1 = Formatter2Fragment2.this.toVarName(ref, Formatter2Fragment2.this.toVarName(clazz), "document");
                 _builder.append(_varName_1, "\t");
                 _builder.append(" : ");
                 String _varName_2 = Formatter2Fragment2.this.toVarName(clazz);
@@ -218,7 +219,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
                 _builder.append("\t");
-                String _varName_3 = Formatter2Fragment2.this.toVarName(ref);
+                String _varName_3 = Formatter2Fragment2.this.toVarName(ref, Formatter2Fragment2.this.toVarName(clazz), "document");
                 _builder.append(_varName_3, "\t\t");
                 _builder.append(".format;");
                 _builder.newLineIfNotEmpty();
@@ -297,21 +298,22 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
     }
   }
   
-  protected String toVarName(final ENamedElement element) {
+  protected String toVarName(final ENamedElement element, final String... reservedNames) {
     String _xblockexpression = null;
     {
       if ((element instanceof EReference)) {
-        return this.toVarName(((EReference)element).getEReferenceType());
+        return this.toVarName(((EReference)element).getEReferenceType(), reservedNames);
       }
-      final String name = StringExtensions.toFirstLower(element.getName());
-      String _xifexpression = null;
+      String name = StringExtensions.toFirstLower(element.getName());
       boolean _contains = XtendFileAccess.XTEND_KEYWORDS.contains(name);
       if (_contains) {
-        _xifexpression = ("_" + name);
-      } else {
-        _xifexpression = name;
+        name = ("_" + name);
       }
-      _xblockexpression = _xifexpression;
+      boolean _contains_1 = ((List<String>)Conversions.doWrapArray(reservedNames)).contains(name);
+      if (_contains_1) {
+        name = ("_" + name);
+      }
+      _xblockexpression = name;
     }
     return _xblockexpression;
   }

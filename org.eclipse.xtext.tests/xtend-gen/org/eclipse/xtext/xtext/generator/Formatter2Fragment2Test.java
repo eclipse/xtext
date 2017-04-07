@@ -7,8 +7,12 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,8 +24,8 @@ import org.junit.Test;
 public class Formatter2Fragment2Test {
   public static class TestableFormatter2Fragment2 extends Formatter2Fragment2 {
     @Override
-    public String toVarName(final ENamedElement element) {
-      return super.toVarName(element);
+    public String toVarName(final ENamedElement element, final String... reservedNames) {
+      return super.toVarName(element, reservedNames);
     }
   }
   
@@ -45,5 +49,20 @@ public class Formatter2Fragment2Test {
   @Test
   public void testVarNameConflictingWithXtendKeyword() {
     Assert.assertEquals("_abstract", this.fragment.toVarName(EcorePackage.eINSTANCE.getEClass_Abstract()));
+  }
+  
+  @Test
+  public void testVarNameConflictingWithParam() {
+    EAttribute _createEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+    final Procedure1<EAttribute> _function = (EAttribute it) -> {
+      it.setName("xxx");
+    };
+    EAttribute _doubleArrow = ObjectExtensions.<EAttribute>operator_doubleArrow(_createEAttribute, _function);
+    Assert.assertEquals("_xxx", this.fragment.toVarName(_doubleArrow), "xxx");
+  }
+  
+  @Test
+  public void testVarNameConflictingWithXtendKeywordAndParam() {
+    Assert.assertEquals("__abstract", this.fragment.toVarName(EcorePackage.eINSTANCE.getEClass_Abstract(), "_abstract"));
   }
 }
