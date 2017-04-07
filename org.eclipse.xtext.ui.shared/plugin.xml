@@ -114,29 +114,12 @@
       </objectContribution>
    </extension>
    <extension
-         point="org.eclipse.ui.decorators">
-      <decorator
-            adaptable="true"
-            icon="icons/nature_overlay.png"
-            id="org.eclipse.xtext.builder.nature.overlay"
-            label="Xtext Nature"
-            lightweight="true"
-            location="TOP_RIGHT"
-            state="true">
-         <description>
-            %XtextNature.description
-         </description>
-         <enablement>
-         	<and>
-		     	<objectClass
-		              name="org.eclipse.core.resources.IProject"/>
-		        <objectState
-		              name="nature"
-		              value="org.eclipse.xtext.ui.shared.xtextNature">
-		        </objectState>
-            </and>
-         </enablement>
-      </decorator>
+        point="org.eclipse.ui.ide.projectNatureImages">
+     <image
+           icon="icons/nature_overlay.png"
+           id="org.eclipse.xtext.builder.nature.overlay"
+           natureId="org.eclipse.xtext.ui.shared.xtextNature">
+     </image>
    </extension>
    <!-- open Xtext element -->
    <extension
