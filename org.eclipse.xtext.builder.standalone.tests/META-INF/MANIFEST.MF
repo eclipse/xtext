@@ -1,1 +1,22 @@
-
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Builder Standalone Tests
+Bundle-SymbolicName: org.eclipse.xtext.builder.standalone.tests;singleton:=true
+Bundle-Version: 2.12.0.qualifier
+Bundle-Vendor: Eclipse Xtext
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime
+Export-Package: org.eclipse.xtext.builder.tests.builderTestLanguage,
+ org.eclipse.xtext.builder.tests.builderTestLanguage.impl,
+ org.eclipse.xtext.builder.tests.builderTestLanguage.util,
+ org.eclipse.xtext.builder.tests,
+ org.eclipse.xtext.builder.tests.services,
+ org.eclipse.xtext.builder.tests.serializer,
+ org.eclipse.xtext.builder.tests.parser.antlr,
+ org.eclipse.xtext.builder.tests.parser.antlr.internal,
+ org.eclipse.xtext.builder.tests.validation
+Import-Package: org.apache.log4j
