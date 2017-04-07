@@ -7,14 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.refactoring
 
-import org.eclipse.xtext.xbase.ui.refactoring.XbaseReferenceUpdater
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtend.core.xtend.AnonymousClass
+import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.xtext.resource.IReferenceDescription
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor
 import org.eclipse.xtext.xbase.XConstructorCall
-import org.eclipse.xtext.common.types.JvmType
-import org.eclipse.xtend.core.xtend.AnonymousClass
+import org.eclipse.xtext.xbase.ui.refactoring.XbaseReferenceUpdater
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -30,6 +31,27 @@ class XtendReferenceUpdater extends XbaseReferenceUpdater {
 			return;
 		}
 		super.createReferenceUpdate(referringElement, referringResourceURI, reference, indexInList, newTargetElement, updateAcceptor)
+	}
+	
+	override protected getNotImportTypeReferences(Iterable<IReferenceDescription> referenceDescriptions) {
+		val result = super.getNotImportTypeReferences(referenceDescriptions).toList
+		val localClassesFragmentPart = "@localClasses."
+		// sort @localClasses to the end since the refactoring of local classes is order dependent
+		result.sort[o1,o2|
+			val f1 = o1.sourceEObjectUri.fragment
+			val f2 = o2.sourceEObjectUri.fragment
+			if (f1.contains(localClassesFragmentPart) && f2.contains(localClassesFragmentPart)) {
+				return f1.compareTo(f2)
+			}
+			if (f1.contains(localClassesFragmentPart)) {
+				return 1
+			}
+			if (f2.contains(localClassesFragmentPart)) {
+				return -1
+			}
+			return f1.compareTo(f2)
+		]
+		result
 	}
 	
 }
