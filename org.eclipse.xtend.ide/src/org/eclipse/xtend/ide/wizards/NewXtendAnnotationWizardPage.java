@@ -45,7 +45,7 @@ public class NewXtendAnnotationWizardPage extends AbstractNewXtendElementWizardP
 
 	@Override
 	protected String getTypeContent(String indentation, String lineSeparator) {
-		return XtendTypeCreatorUtil.createAnnotationContent(getTypeName(), indentation, lineSeparator);
+		return XtendTypeCreatorUtil.createAnnotationContent(getTypeNameWithoutParameters(), indentation, lineSeparator);
 	}
 
 }

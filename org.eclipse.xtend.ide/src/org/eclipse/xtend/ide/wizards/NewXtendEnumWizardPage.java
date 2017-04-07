@@ -45,7 +45,7 @@ public class NewXtendEnumWizardPage extends AbstractNewXtendElementWizardPage {
 
 	@Override
 	protected String getTypeContent(String indentation, String lineSeparator) {
-		return XtendTypeCreatorUtil.createEnumContent(getTypeName(), indentation, lineSeparator);
+		return XtendTypeCreatorUtil.createEnumContent(getTypeNameWithoutParameters(), indentation, lineSeparator);
 	}
 
 }
