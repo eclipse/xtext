@@ -105,8 +105,8 @@ import org.eclipse.xtext.util.internal.Log
 			// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 			«FOR ref:containmentRefs»
 				«IF ref.isMany»
-					for («ref.EReferenceType» «ref.toVarName» : «clazz.toVarName».«ref.getGetAccessor()»()) {
-						«ref.toVarName».format;
+					for («ref.EReferenceType» «ref.toVarName(clazz.toVarName, "document")» : «clazz.toVarName».«ref.getGetAccessor()»()) {
+						«ref.toVarName(clazz.toVarName, "document")».format;
 					}
 				«ELSE»
 					«clazz.toVarName».«ref.getGetAccessor()».format;
@@ -158,14 +158,17 @@ import org.eclipse.xtext.util.internal.Log
 			return AbstractFormatter2.typeRef
 	}
 	
-	protected def String toVarName(ENamedElement element) {
+	protected def String toVarName(ENamedElement element, String... reservedNames) {
 		if (element instanceof EReference)
-			return element.EReferenceType.toVarName
-		val name = element.name.toFirstLower
-		if (XtendFileAccess.XTEND_KEYWORDS.contains(name))
-			'_' + name
-		else
-			name
+			return element.EReferenceType.toVarName(reservedNames)
+		var name = element.name.toFirstLower
+		if (XtendFileAccess.XTEND_KEYWORDS.contains(name)) {
+			name = "_" + name
+		}
+		if (reservedNames.contains(name)) {
+			name = "_" + name
+		}
+		name
 	}
 	
 	protected def String getGetAccessor(EStructuralFeature feature) {

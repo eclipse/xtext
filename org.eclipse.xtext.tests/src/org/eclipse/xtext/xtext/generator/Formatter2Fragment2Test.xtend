@@ -13,6 +13,7 @@ import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
 import org.junit.Test
 
 import static extension org.junit.Assert.*
+import org.eclipse.emf.ecore.EcoreFactory
 
 /**
  * @author Lorenzo Bettini - Initial contribution and API
@@ -23,8 +24,8 @@ class Formatter2Fragment2Test {
 
 	static class TestableFormatter2Fragment2 extends Formatter2Fragment2 {
 		
-		override public toVarName(ENamedElement element) {
-			super.toVarName(element)
+		override public toVarName(ENamedElement element, String... reservedNames) {
+			super.toVarName(element, reservedNames)
 		}
 		
 	}
@@ -43,5 +44,13 @@ class Formatter2Fragment2Test {
 
 	@Test def void testVarNameConflictingWithXtendKeyword() {
 		"_abstract".assertEquals(fragment.toVarName(EcorePackage.eINSTANCE.EClass_Abstract))
+	}
+
+	@Test def void testVarNameConflictingWithParam() {
+		"_xxx".assertEquals(fragment.toVarName(EcoreFactory.eINSTANCE.createEAttribute=>[name="xxx"]),"xxx")
+	}
+
+	@Test def void testVarNameConflictingWithXtendKeywordAndParam() {
+		"__abstract".assertEquals(fragment.toVarName(EcorePackage.eINSTANCE.EClass_Abstract, "_abstract"))
 	}
 }
