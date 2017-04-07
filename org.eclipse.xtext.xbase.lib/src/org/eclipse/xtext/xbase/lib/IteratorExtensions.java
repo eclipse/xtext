@@ -44,7 +44,13 @@ import com.google.common.collect.Sets;
 @GwtCompatible public class IteratorExtensions {
 
 	/**
-	 * Wraps an {@link Iterator} in an {@link Iterable}.
+	 * Wraps an {@link Iterator} in an {@link Iterable}. WARNING: The resulting
+	 * {@link Iterable} may be used (e.g. calling
+	 * {@link IterableExtensions#isEmpty(Iterable)}) / iterated (e.g. in a for
+	 * loop) only once. If you want to create a reusable {@link Iterable} call
+	 * {@link IterableExtensions#toList(Iterable)} or
+	 * {@link IterableExtensions#toSet(Iterable)} on the result and reuse the
+	 * resulting {@link List} / {@link Set}
 	 * @param iterator the {@link Iterator} to wrap in an {@link Iterable}. May not be <code>null</code>.
 	 * @return an {@link Iterable} providing the given {@link Iterator}. Never <code>null</code>.
 	 */
