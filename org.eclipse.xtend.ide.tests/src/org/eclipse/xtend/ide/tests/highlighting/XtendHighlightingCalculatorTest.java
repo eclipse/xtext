@@ -222,6 +222,18 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 				"'''");
 	}
 	
+	@Test public void testXtextXtendIssue184() {
+		// this should not cause an exception
+		highlight(
+				"'''\r\n" + 
+				"		TODO i am no todo\r\n" + 
+				"		ллл		TODO xxxxxxx\r\n" + 
+				"lala TODO i am no todo\r\n" + 
+				"ллл		TODO2 xxxxxxx22\r\n" + 
+				"lala TODO i am no todo\r\n" + 
+				"'''");
+	}
+	
 	@Test public void testExpression() {
 		strictMode = true;
 		String model = 
