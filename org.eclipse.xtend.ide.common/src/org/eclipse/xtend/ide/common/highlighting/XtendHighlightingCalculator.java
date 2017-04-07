@@ -336,7 +336,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 						}
 						int expectedOffset = recentNode.getTotalEndOffset() - closingQuoteLength;
 						if (expectedOffset != currentOffset) {
-							pendingRegions.add(new TextRegion(currentOffset, expectedOffset - currentOffset));
+							pendingRegions.add(new TextRegion(currentOffset, Math.max(0, expectedOffset - currentOffset)));
 						}
 					}
 				}
