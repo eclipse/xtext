@@ -174,6 +174,21 @@ public class AstSelectionProviderTest extends AbstractXtextTests {
 		}
 		assertEquals(ITextRegion.EMPTY_REGION, provider.selectLast(res, currentEditorSelection));
 	}
+	
+	@Test public void testBug515055_1() throws Exception {
+		XtextResource res = getResource(getAsStream("    "));
+		AstSelectionProvider provider = get(AstSelectionProvider.class);
+		final TextRegion currentEditorSelection = new TextRegion(2,0);
+		assertEquals(ITextRegion.EMPTY_REGION, provider.selectEnclosing(res, currentEditorSelection));
+		assertEquals(ITextRegion.EMPTY_REGION, provider.selectEnclosing(res, currentEditorSelection));
+	}
+	
+	@Test public void testBug515055_2() throws Exception {
+		XtextResource res = getResource(getAsStream(""));
+		AstSelectionProvider provider = get(AstSelectionProvider.class);
+		final TextRegion currentEditorSelection = new TextRegion(0,0);
+		assertEquals(ITextRegion.EMPTY_REGION, provider.selectEnclosing(res, currentEditorSelection));
+	}
 
 	protected TextRegion region(String all, String part) {
 		return new TextRegion(all.indexOf(part), part.length());
