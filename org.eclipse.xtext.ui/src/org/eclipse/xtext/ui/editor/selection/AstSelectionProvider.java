@@ -69,14 +69,16 @@ public class AstSelectionProvider {
 				ICompositeNode rootNode = parseResult.getRootNode();
 				int offset = getSelectionOffset(rootNode, currentEditorSelection);
 				INode node = findLeafNodeAtOffset(rootNode, offset);
-				ITextRegion fineGrainedRegion = computeInitialFineGrainedSelection(node, currentEditorSelection);
-				if (fineGrainedRegion != null) {
-					selectionHistory.clear();
-					register(currentEditorSelection);
-					return register(fineGrainedRegion);
+				if (node != null) {
+					ITextRegion fineGrainedRegion = computeInitialFineGrainedSelection(node, currentEditorSelection);
+					if (fineGrainedRegion != null) {
+						selectionHistory.clear();
+						register(currentEditorSelection);
+						return register(fineGrainedRegion);
+					}
+					EObject eObject = findSemanticObjectFor(node);
+					return register(getTextRegion(eObject));
 				}
-				EObject eObject = findSemanticObjectFor(node);
-				return register(getTextRegion(eObject));
 			}
 		} else {
 			EObject first = currentlySelected.getFirst();
@@ -253,6 +255,9 @@ public class AstSelectionProvider {
 	}
 
 	protected ITextRegion register(ITextRegion textRegion) {
+		if (textRegion == null) {
+			return ITextRegion.EMPTY_REGION;
+		}
 		if (selectionHistory.isEmpty() || !selectionHistory.peek().equals(textRegion)) {
 			selectionHistory.push(textRegion);
 		}
