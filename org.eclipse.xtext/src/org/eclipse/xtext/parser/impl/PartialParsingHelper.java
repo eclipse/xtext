@@ -84,7 +84,12 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		if (changedRegion.getOffset() >= oldRootNode.getTotalLength() && changedRegion.getText().trim().length() == 0) {
 			return fullyReparse(parser, previousParseResult, changedRegion);
 		}
-		ReplaceRegion replaceRegion = tokenRegionProvider.getTokenReplaceRegion(insertChangeIntoReplaceRegion(oldRootNode, changedRegion), changedRegion);
+		ReplaceRegion replaceRegion;
+		if (tokenRegionProvider != null) {
+			replaceRegion = tokenRegionProvider.getTokenReplaceRegion(insertChangeIntoReplaceRegion(oldRootNode, changedRegion), changedRegion);
+		} else {
+			replaceRegion = changedRegion;
+		}
 		if (isNullEdit(oldRootNode, replaceRegion)) {
 			return previousParseResult;
 		}
