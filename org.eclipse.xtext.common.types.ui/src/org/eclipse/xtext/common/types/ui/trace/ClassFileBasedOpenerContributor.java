@@ -9,7 +9,6 @@ package org.eclipse.xtext.common.types.ui.trace;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jdt.core.IClassFile;
-import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
@@ -38,18 +37,23 @@ public class ClassFileBasedOpenerContributor extends OppositeFileOpenerContribut
 
 	@Override
 	public boolean collectGeneratedFileOpeners(IEditorPart editor, IAcceptor<FileOpener> acceptor) {
-		if (editor instanceof XtextEditor && editor.getEditorInput() instanceof IClassFileEditorInput) {
-			acceptor.accept(createEditorOpener(editor.getEditorInput(), JavaUI.ID_CF_EDITOR));
-			return true;
+		if (editor instanceof XtextEditor && editor.getEditorInput() != null) {
+			if (editor.getEditorInput().getAdapter(IClassFile.class) != null) {
+				acceptor.accept(createEditorOpener(editor.getEditorInput(), JavaUI.ID_CF_EDITOR));
+				return true;
+			}
 		}
 		return false;
 	}
 
 	@Override
 	public boolean collectSourceFileOpeners(IEditorPart editor, IAcceptor<FileOpener> acceptor) {
-		if (!(editor instanceof XtextEditor) && editor.getEditorInput() instanceof IClassFileEditorInput) {
+		if (!(editor instanceof XtextEditor) && editor.getEditorInput() != null) {
 			try {
-				IClassFile classFile = ((IClassFileEditorInput) editor.getEditorInput()).getClassFile();
+				IClassFile classFile = (IClassFile) editor.getEditorInput().getAdapter(IClassFile.class);
+				if (classFile == null) {
+					return false;
+				}
 				ITrace trace = traceForTypeRootProvider.getTraceToSource(classFile);
 				if (trace == null) {
 					return false;
