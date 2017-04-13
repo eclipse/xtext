@@ -120,12 +120,14 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 			}
 			IEObjectDescription description = scope.getSingleElement(qualifiedName.skipFirst(qualifiedName
 					.getSegmentCount() - 1));
+			IEObjectDescription typeToImport = scope.getSingleElement(qualifiedName);
 			if (description != null) {
-				// there exists a conflict - insert fully qualified name
-				proposal.setCursorPosition(proposalReplacementString.length());
-				document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(),
-						proposalReplacementString);
-				return;
+				if (typeToImport != null && !description.getEObjectURI().equals(typeToImport.getEObjectURI())) {
+					// there exists a conflict - insert fully qualified name
+					proposal.setCursorPosition(proposalReplacementString.length());
+					document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(), proposalReplacementString);
+					return;
+				}
 			}
 
 			// Import does not introduce ambiguities - add import and insert short name
@@ -142,7 +144,6 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 			}
 			
 			RewritableImportSection importSection = importSectionFactory.parse((XtextResource) context);
-			IEObjectDescription typeToImport = scope.getSingleElement(qualifiedName);
 			if(typeToImport == null) {
 				LOG.error("Could not find unique type named '" + notNull(qualifiedName) + "' in scope");
 				if (viewerExtension != null)
