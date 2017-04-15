@@ -66,12 +66,16 @@ public class AdvancedTemplatesPreferencePage extends XtextTemplatePreferencePage
 			Template template= data.getTemplate();
 			String name = template.getName();
 			TemplateContextType contextType = getContextTypeRegistry().getContextType(template.getContextTypeId());
-			String prefix = 
-				"templates for " + grammarAccess.getGrammar().getName() +
-				"'" + name + "'" + " for " + getContextTypeForGrammar(contextType) + ">>";
-			String editablePart = template.getPattern();
-			String suffix = "";
-			partialEditor.updateModel(prefix, editablePart, suffix);
+			if (contextType != null) {
+				String prefix = 
+						"templates for " + grammarAccess.getGrammar().getName() +
+						"'" + name + "'" + " for " + getContextTypeForGrammar(contextType) + ">>";
+				String editablePart = template.getPattern();
+				String suffix = "";
+				partialEditor.updateModel(prefix, editablePart, suffix);
+			} else {
+				partialEditor.updateModel("", template.getPattern(), "");
+			}
 		} else {
 			partialEditor.updateModel("", "", "");
 		}
