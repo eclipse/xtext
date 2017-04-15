@@ -7,7 +7,7 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.builder.tests.BuilderTestLanguage with org.eclipse.xtext.common.Terminals
 
-generate builderTestLanguage "http://eclipse.org/xtext/builderTestLanguage"
+generate builderTestLanguage "http://eclipse.org/xtext/builderStandaloneTestLanguage"
 
 NamedElement :
 	Namespace | Element;
