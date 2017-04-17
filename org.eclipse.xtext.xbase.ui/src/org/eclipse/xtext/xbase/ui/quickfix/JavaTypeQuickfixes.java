@@ -325,7 +325,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			final char[] wantedPackageChars = (isEmpty(wantedPackageName)) ? null : wantedPackageName.toCharArray();
 			final String wantedTypeName = packageAndType.getSecond();
 			searchEngine.searchAllTypeNames(wantedPackageChars, SearchPattern.R_EXACT_MATCH, wantedTypeName.toCharArray(),
-					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor() {
+					SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, IJavaSearchConstants.TYPE, searchScope, new org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor() {
 						
 						@Override
 						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
