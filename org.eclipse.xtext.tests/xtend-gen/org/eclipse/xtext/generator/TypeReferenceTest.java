@@ -109,4 +109,11 @@ public class TypeReferenceTest {
     final TypeReference ref = new TypeReference(EcorePackage.Literals.EOBJECT, rs);
     Assert.assertEquals("org.eclipse.emf.ecore.EObject", ref.getName());
   }
+  
+  @Test
+  public void testBug508810() {
+    final ResourceSetImpl rs = new ResourceSetImpl();
+    final TypeReference ref = new TypeReference(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY, rs);
+    Assert.assertEquals("java.util.Map.Entry", ref.getName());
+  }
 }
