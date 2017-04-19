@@ -38,7 +38,7 @@ public interface BuilderTestLanguagePackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://eclipse.org/xtext/builderTestLanguage";
+  String eNS_URI = "http://eclipse.org/xtext/builderStandaloneTestLanguage";
 
   /**
    * The package namespace name.

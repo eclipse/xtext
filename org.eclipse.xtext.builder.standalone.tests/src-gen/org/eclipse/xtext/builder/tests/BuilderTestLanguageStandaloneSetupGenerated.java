@@ -30,8 +30,8 @@ public class BuilderTestLanguageStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/builderTestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/builderTestLanguage", org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/builderStandaloneTestLanguage")) {
+		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/builderStandaloneTestLanguage", org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
