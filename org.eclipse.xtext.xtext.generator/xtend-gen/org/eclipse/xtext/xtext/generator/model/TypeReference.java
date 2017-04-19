@@ -213,8 +213,16 @@ public class TypeReference {
       String _nsURI_1 = clazz.getEPackage().getNsURI();
       boolean _equals_1 = Objects.equal(_nsURI_1, "http://www.eclipse.org/emf/2002/Ecore");
       if (_equals_1) {
-        String _name_1 = clazz.getName();
-        _xifexpression_1 = ("org.eclipse.emf.ecore." + _name_1);
+        String _xifexpression_2 = null;
+        String _instanceTypeName = clazz.getInstanceTypeName();
+        boolean _tripleNotEquals = (_instanceTypeName != null);
+        if (_tripleNotEquals) {
+          _xifexpression_2 = clazz.getInstanceTypeName().replace("$", ".");
+        } else {
+          String _name_1 = clazz.getName();
+          _xifexpression_2 = ("org.eclipse.emf.ecore." + _name_1);
+        }
+        _xifexpression_1 = _xifexpression_2;
       } else {
         _xifexpression_1 = GenModelUtil2.getGenClass(clazz, resourceSet).getQualifiedInterfaceName();
       }

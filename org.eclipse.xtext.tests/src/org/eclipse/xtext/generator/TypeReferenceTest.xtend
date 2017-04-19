@@ -109,4 +109,11 @@ class TypeReferenceTest {
 		val ref = new TypeReference(EcorePackage.Literals.EOBJECT, rs)
 		assertEquals("org.eclipse.emf.ecore.EObject", ref.name)
 	}
+	
+	@Test
+	def void testBug508810() {
+		val rs = new ResourceSetImpl
+		val ref = new TypeReference(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY, rs)
+		assertEquals("java.util.Map.Entry", ref.name)
+	}
 }
