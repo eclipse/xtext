@@ -19,6 +19,7 @@ import java.util.AbstractList;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -931,6 +932,25 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Assert.assertTrue(Modifier.isSynchronized(compiled.getMethod("synchronizedMethod").getModifiers()));
       Assert.assertTrue(Modifier.isStrict(compiled.getMethod("strictFpMethod").getModifiers()));
       Assert.assertTrue(Modifier.isNative(compiled.getMethod("nativeMethod").getModifiers()));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug426073() {
+    try {
+      final XExpression expression = this.expression("org.eclipse.emf.common.util.URI.createURI(\"dummy\")");
+      final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
+        EList<JvmMember> _members = it.getMembers();
+        final Procedure1<JvmField> _function_1 = (JvmField it_1) -> {
+          this.builder.setInitializer(it_1, expression);
+        };
+        JvmField _field = this.builder.toField(expression, "URI", this.typeRef(expression, URI.class), _function_1);
+        this.builder.<JvmField>operator_add(_members, _field);
+      };
+      final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
+      this.compile(expression.eResource(), clazz);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

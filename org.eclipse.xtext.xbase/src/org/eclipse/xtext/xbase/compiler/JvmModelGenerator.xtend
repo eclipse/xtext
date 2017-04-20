@@ -455,7 +455,8 @@ class JvmModelGenerator implements IGenerator {
 		generateModifier(tracedAppendable, config)
 		type.serializeSafely("Object", tracedAppendable)
 		tracedAppendable.append(" ")
-		tracedAppendable.traceSignificant(it).append(simpleName.makeJavaIdentifier)
+		val name = tracedAppendable.declareVariable(it, simpleName.makeJavaIdentifier)
+		tracedAppendable.traceSignificant(it).append(name)
 		generateInitialization(tracedAppendable, config)
 		tracedAppendable.append(";")
 	}

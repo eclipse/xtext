@@ -760,7 +760,8 @@ public class JvmModelGenerator implements IGenerator {
       this.generateModifier(it, tracedAppendable, config);
       this._errorSafeExtensions.serializeSafely(it.getType(), "Object", tracedAppendable);
       tracedAppendable.append(" ");
-      this._treeAppendableUtil.traceSignificant(tracedAppendable, it).append(this.makeJavaIdentifier(it.getSimpleName()));
+      final String name = tracedAppendable.declareVariable(it, this.makeJavaIdentifier(it.getSimpleName()));
+      this._treeAppendableUtil.traceSignificant(tracedAppendable, it).append(name);
       this.generateInitialization(it, tracedAppendable, config);
       _xblockexpression = tracedAppendable.append(";");
     }
