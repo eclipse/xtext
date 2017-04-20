@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjecto
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.emf.common.util.URI
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
@@ -539,7 +540,17 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		assertTrue(Modifier::isStrict(compiled.getMethod("strictFpMethod").modifiers))
 		assertTrue(Modifier::isNative(compiled.getMethod("nativeMethod").modifiers))
 	}
-
+	
+	@Test def void testBug426073() {
+		val expression = expression("org.eclipse.emf.common.util.URI.createURI(\"dummy\")")
+		val clazz = expression.toClass("my.test.Foo") [
+			members += expression.toField("URI", expression.typeRef(URI)) [
+				initializer = expression
+			]
+		]
+		compile(expression.eResource, clazz)
+	}
+	
 	def JvmTypeReference typeRef(EObject ctx, Class<?> clazz) {
 		return references.getTypeForName(clazz, ctx)
 	}
