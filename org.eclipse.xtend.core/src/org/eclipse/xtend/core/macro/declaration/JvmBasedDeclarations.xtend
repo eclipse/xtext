@@ -1412,5 +1412,32 @@ class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<J
 		return null
 	}
 	
+	def setDefaultValueExpression(Expression body) {
+		checkMutable
+		if (body === null) {
+			compilationUnit.jvmTypesBuilder.removeExistingBody(delegate)
+		} else {
+			compilationUnit.jvmTypesBuilder.setBody(delegate, (body as ExpressionImpl).delegate)
+		}
+	}
+	
+	def setDefaultValueExpression(CompilationStrategy compilationStrategy) {
+		checkMutable
+		Preconditions.checkArgument(compilationStrategy !== null, "compilationStrategy cannot be null")
+		compilationUnit.setCompilationStrategy(delegate, compilationStrategy)
+	}
+	
+	def setDefaultValueExpression(StringConcatenationClient compilationTemplate) {
+		checkMutable
+		Preconditions.checkArgument(compilationTemplate !== null, "compilationTemplate cannot be null")
+		compilationUnit.setCompilationTemplate(delegate, compilationTemplate)
+	}
+	
+	def setType(TypeReference type) {
+		checkMutable
+		Preconditions.checkArgument(type !== null, "returnType cannot be null");
+		delegate.setReturnType(compilationUnit.toJvmTypeReference(type))
+	}
+	
 }
 
