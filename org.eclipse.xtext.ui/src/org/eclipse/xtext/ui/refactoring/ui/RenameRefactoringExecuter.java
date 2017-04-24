@@ -118,6 +118,7 @@ public class RenameRefactoringExecuter {
 		}
 		syncUtil.yieldToQueuedDisplayJobs(new NullProgressMonitor());
 		syncUtil.reconcileAllEditors(workbench, false, new NullProgressMonitor());
+		syncUtil.waitForBuild(new NullProgressMonitor());
 	}
 
 	private void showFatalErrorMessage(Shell parent, String message) {
