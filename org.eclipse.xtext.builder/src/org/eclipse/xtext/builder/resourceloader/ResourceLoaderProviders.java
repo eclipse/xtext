@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.resourceloader;
 
+import java.util.concurrent.TimeUnit;
+
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader.Sorter;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
@@ -42,9 +44,22 @@ public final class ResourceLoaderProviders {
 
 	/** Returns a loader with a parallelization degree of 2 to 4 (depending on how many processors are available). */
 	public static Provider<IResourceLoader> getParallelLoader() {
+		int nThreads = getNumberOfThreads();
+		return getParallelLoader(nThreads, 0);
+	}
+
+	/**
+	 * since 2.12
+	 */
+	public static Provider<IResourceLoader> getParallelLoader(long timeoutTime, TimeUnit timeoutUnit) {
+		int nThreads = getNumberOfThreads();
+		return getParallelLoader(nThreads, 0, timeoutTime, timeoutUnit);
+	}
+
+	private static int getNumberOfThreads() {
 		int nProcessors = Runtime.getRuntime().availableProcessors();
 		int nThreads = Math.max(2, Math.min(4, nProcessors));
-		return getParallelLoader(nThreads, 0);
+		return nThreads;
 	}
 
 	public static Provider<IResourceLoader> getParallelLoader(final int nrOfThreads) {
@@ -56,6 +71,20 @@ public final class ResourceLoaderProviders {
 			@Override
 			public IResourceLoader get() {
 				ParallelResourceLoader resourceLoader = new ParallelResourceLoader(getResourceSetProvider(), getResourceSorter(), nrOfThreads, bufferSize);
+				return resourceLoader;
+			}
+		};
+	}
+
+	/**
+	 * @since 2.12
+	 */
+	public static Provider<IResourceLoader> getParallelLoader(final int nrOfThreads, final int bufferSize, long timeoutTime, TimeUnit timeoutUnit) {
+		return new AbstractResourceLoaderProvider() {
+			@Override
+			public IResourceLoader get() {
+				ParallelResourceLoader resourceLoader = new ParallelResourceLoader(getResourceSetProvider(), getResourceSorter(), nrOfThreads, bufferSize);
+				resourceLoader.setTimeout(timeoutTime, timeoutUnit);
 				return resourceLoader;
 			}
 		};
