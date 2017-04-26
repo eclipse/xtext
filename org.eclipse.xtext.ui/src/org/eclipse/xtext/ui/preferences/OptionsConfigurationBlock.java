@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.preferences;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -180,7 +181,7 @@ public abstract class OptionsConfigurationBlock {
 	protected String[] keys;
 	private Shell shell;
 	private Map<String, String> disabledProjectSettings;
-	private Map<String, String> originalSettings;
+	private Map<String, String> originalSettings = Collections.emptyMap();
 	private int rebuildCount;
 	private IPreferenceStore preferenceStore;
 	private IWorkbenchPreferenceContainer workbenchPreferenceContainer;
