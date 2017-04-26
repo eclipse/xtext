@@ -6,15 +6,5 @@
 	<feature id="org.eclipse.xtend.sdk" version="2.12.0.qualifier">
 		<category name="Xtext"/>
 	</feature>
-	<feature id="org.eclipse.lsp4j.sdk" version="0.2.0.qualifier">
-		<category name="lsp4j"/>
-	</feature>
-	<bundle id="com.google.gson" version="2.7.0.v20170129-0911">
-		<category name="lsp4j"/>
-	</bundle>
-	<bundle id="com.google.gson.source" version="2.7.0.v20170129-0911">
-		<category name="lsp4j"/>
-	</bundle>
 	<category-def name="Xtext" label="Xtext"/>
-	<category-def name="lsp4j" label="LSP4J"/>
 </site>
