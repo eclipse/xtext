@@ -3,22 +3,22 @@
  */
 package org.eclipse.xtext.xbase.testlanguages.bug462047;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.xbase.testlanguages.bug462047.bug462047.Bug462047Package;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
-/**
- * Generated from StandaloneSetup.xpt!
- */
 @SuppressWarnings("all")
 public class Bug462047LangStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.xtext.xbase.XbaseStandaloneSetup.doSetup();
+		XbaseStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);
@@ -26,20 +26,17 @@ public class Bug462047LangStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.xbase.testlanguages.bug462047.Bug462047LangRuntimeModule());
+		return Guice.createInjector(new Bug462047LangRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("xbase.bug462047")) {
-		EPackage.Registry.INSTANCE.put("xbase.bug462047", org.eclipse.xtext.xbase.testlanguages.bug462047.bug462047.Bug462047Package.eINSTANCE);
-	}
-
-		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("bug462047lang", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("bug462047lang", serviceProvider);
+		if (!EPackage.Registry.INSTANCE.containsKey("xbase.bug462047")) {
+			EPackage.Registry.INSTANCE.put("xbase.bug462047", Bug462047Package.eINSTANCE);
+		}
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		
-
-
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("", resourceFactory);
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("", serviceProvider);
 	}
 }

@@ -17,7 +17,7 @@ import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.imports.DefaultImportsConfiguration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLangInjectorProvider;
+import org.eclipse.xtext.xbase.testlanguages.tests.XImportSectionTestLangInjectorProvider;
 import org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot;
 import org.junit.Assert;
 import org.junit.Test;

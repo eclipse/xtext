@@ -7,10 +7,10 @@ import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class XImportSectionTestLangAntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/xbase/testlanguages/parser/antlr/internal/InternalXImportSectionTestLang.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtext/xbase/testlanguages/parser/antlr/internal/InternalXImportSectionTestLang.tokens");
 	}
 }
