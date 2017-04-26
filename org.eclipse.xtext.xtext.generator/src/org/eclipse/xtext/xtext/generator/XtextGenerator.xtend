@@ -338,7 +338,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			if (root.isFile(pluginXml.path)) { 
 				// only write plugin.xml_gen if entries exist and content differs
 				if (!pluginXml.entries.isEmpty
-					&& root.readTextFile(pluginXml.path) != pluginXml.getContent 
+					&& root.readTextFile(pluginXml.path)?.toString != pluginXml.getContentString
 					&& pluginXml.path.endsWith('.xml')) {
 						pluginXml.path = pluginXml.path + '_gen'
 						pluginXml.writeTo(root)
