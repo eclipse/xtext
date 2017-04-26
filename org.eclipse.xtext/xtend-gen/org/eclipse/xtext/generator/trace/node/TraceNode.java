@@ -8,7 +8,7 @@
 package org.eclipse.xtext.generator.trace.node;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtend.lib.annotations.EqualsHashCode;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -16,19 +16,51 @@ import org.eclipse.xtext.xbase.lib.Pure;
 /**
  * @author Sven Efftinge - initial contribution and API
  */
-@FinalFieldsConstructor
+@Accessors
+@EqualsHashCode
 @SuppressWarnings("all")
 public class TraceNode extends CompositeGeneratorNode {
-  @Accessors
-  private final ILocationData sourceLocation;
+  private ILocationData sourceLocation;
   
   public TraceNode(final ILocationData sourceLocation) {
-    super();
     this.sourceLocation = sourceLocation;
   }
   
   @Pure
   public ILocationData getSourceLocation() {
     return this.sourceLocation;
+  }
+  
+  public void setSourceLocation(final ILocationData sourceLocation) {
+    this.sourceLocation = sourceLocation;
+  }
+  
+  @Override
+  @Pure
+  public boolean equals(final Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    if (!super.equals(obj))
+      return false;
+    TraceNode other = (TraceNode) obj;
+    if (this.sourceLocation == null) {
+      if (other.sourceLocation != null)
+        return false;
+    } else if (!this.sourceLocation.equals(other.sourceLocation))
+      return false;
+    return true;
+  }
+  
+  @Override
+  @Pure
+  public int hashCode() {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + ((this.sourceLocation== null) ? 0 : this.sourceLocation.hashCode());
+    return result;
   }
 }

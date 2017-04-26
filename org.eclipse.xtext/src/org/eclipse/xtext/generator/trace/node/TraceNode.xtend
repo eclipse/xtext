@@ -8,14 +8,20 @@
 package org.eclipse.xtext.generator.trace.node
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
 import org.eclipse.xtext.generator.trace.ILocationData
 
 /**
  * @author Sven Efftinge - initial contribution and API
  */
-@FinalFieldsConstructor class TraceNode extends CompositeGeneratorNode {
+@Accessors
+@EqualsHashCode
+class TraceNode extends CompositeGeneratorNode {
 	
-	@Accessors final ILocationData sourceLocation
+	ILocationData sourceLocation
+	
+	new(ILocationData sourceLocation) {
+		this.sourceLocation = sourceLocation
+	}
 	
 }

@@ -7,35 +7,66 @@
  */
 package org.eclipse.xtext.generator.trace.node;
 
-import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.EqualsHashCode;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Data
+@Accessors
+@EqualsHashCode
 @SuppressWarnings("all")
 public class NewLineNode implements IGeneratorNode {
-  private final String lineDelimiter;
+  private String lineDelimiter;
   
-  private final boolean ifNotEmpty;
+  private boolean ifNotEmpty;
+  
+  public NewLineNode(final String lineDelimiter) {
+    this.lineDelimiter = lineDelimiter;
+  }
   
   public NewLineNode(final String lineDelimiter, final boolean ifNotEmpty) {
-    super();
     this.lineDelimiter = lineDelimiter;
     this.ifNotEmpty = ifNotEmpty;
   }
   
   @Override
+  public String toString() {
+    StringConcatenation _builder = new StringConcatenation();
+    String _simpleName = this.getClass().getSimpleName();
+    _builder.append(_simpleName);
+    _builder.append(" \"");
+    String _convertToJavaString = Strings.convertToJavaString(this.lineDelimiter);
+    _builder.append(_convertToJavaString);
+    _builder.append("\"");
+    {
+      if (this.ifNotEmpty) {
+        _builder.append(" if not empty");
+      }
+    }
+    return _builder.toString();
+  }
+  
   @Pure
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((this.lineDelimiter== null) ? 0 : this.lineDelimiter.hashCode());
-    result = prime * result + (this.ifNotEmpty ? 1231 : 1237);
-    return result;
+  public String getLineDelimiter() {
+    return this.lineDelimiter;
+  }
+  
+  public void setLineDelimiter(final String lineDelimiter) {
+    this.lineDelimiter = lineDelimiter;
+  }
+  
+  @Pure
+  public boolean isIfNotEmpty() {
+    return this.ifNotEmpty;
+  }
+  
+  public void setIfNotEmpty(final boolean ifNotEmpty) {
+    this.ifNotEmpty = ifNotEmpty;
   }
   
   @Override
@@ -60,20 +91,11 @@ public class NewLineNode implements IGeneratorNode {
   
   @Override
   @Pure
-  public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("lineDelimiter", this.lineDelimiter);
-    b.add("ifNotEmpty", this.ifNotEmpty);
-    return b.toString();
-  }
-  
-  @Pure
-  public String getLineDelimiter() {
-    return this.lineDelimiter;
-  }
-  
-  @Pure
-  public boolean isIfNotEmpty() {
-    return this.ifNotEmpty;
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((this.lineDelimiter== null) ? 0 : this.lineDelimiter.hashCode());
+    result = prime * result + (this.ifNotEmpty ? 1231 : 1237);
+    return result;
   }
 }

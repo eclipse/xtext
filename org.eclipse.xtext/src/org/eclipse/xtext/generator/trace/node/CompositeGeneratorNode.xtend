@@ -9,11 +9,14 @@ package org.eclipse.xtext.generator.trace.node
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Accessors class CompositeGeneratorNode implements IGeneratorNode {
+@Accessors
+@EqualsHashCode
+class CompositeGeneratorNode implements IGeneratorNode {
 	
 	val List<IGeneratorNode> children = newArrayList
 	

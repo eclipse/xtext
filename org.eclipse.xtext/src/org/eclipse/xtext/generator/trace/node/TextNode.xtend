@@ -7,11 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace.node
 
-import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
+import org.eclipse.xtext.util.Strings
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Data class TextNode implements IGeneratorNode {
+@Accessors
+@EqualsHashCode
+class TextNode implements IGeneratorNode {
+	
 	CharSequence text
+	
+	new(CharSequence text) {
+		this.text = text
+	}
+	
+	override toString() {
+		'''«class.simpleName» "«Strings.convertToJavaString(text.toString)»"'''
+	}
+	
 }

@@ -7,12 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace.node
 
-import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
+import org.eclipse.xtext.util.Strings
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Data class NewLineNode implements IGeneratorNode {
+@Accessors
+@EqualsHashCode
+class NewLineNode implements IGeneratorNode {
+	
 	String lineDelimiter
+	
 	boolean ifNotEmpty
+	
+	new(String lineDelimiter) {
+		this.lineDelimiter = lineDelimiter
+	}
+	
+	new(String lineDelimiter, boolean ifNotEmpty) {
+		this.lineDelimiter = lineDelimiter
+		this.ifNotEmpty = ifNotEmpty
+	}
+	
+	override toString() {
+		'''«class.simpleName» "«Strings.convertToJavaString(lineDelimiter)»"«IF ifNotEmpty» if not empty«ENDIF»'''
+	}
+	
 }
