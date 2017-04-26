@@ -60,6 +60,13 @@ class TemplateNodeTest {
 		''')
 	}
 	
+	@Test def void testSeparatorLoop() {
+		val strings = #['a', 'b', 'c']
+		assertEquals('''
+			«FOR s : strings SEPARATOR ', '»"«s»"«ENDFOR»
+		''')
+	}
+	
 	private def other() '''
 		foo «"dfdf" + 23» bar
 	'''

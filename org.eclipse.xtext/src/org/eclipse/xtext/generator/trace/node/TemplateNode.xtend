@@ -83,7 +83,7 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 	}
 
 	override appendImmediate(Object object, String indentation) {
-		for (var i = currentParent.children.size; i >= 0; i--) {
+		for (var i = currentParent.children.size - 1; i >= 0; i--) {
 			val node = currentParent.children.get(i)
 			if (node instanceof TextNode) {
 				if (node.text.toString.trim.length === 0) {

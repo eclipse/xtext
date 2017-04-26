@@ -7,11 +7,14 @@
  */
 package org.eclipse.xtext.generator.trace.node;
 
+import java.util.Collections;
+import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeExtensions;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeProcessor;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.junit.Assert;
 import org.junit.Test;
@@ -117,6 +120,31 @@ public class TemplateNodeTest {
             }
           }
         }
+      }
+    };
+    this.assertEquals(_client);
+  }
+  
+  @Test
+  public void testSeparatorLoop() {
+    final List<String> strings = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "b", "c"));
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          boolean _hasElements = false;
+          for(final String s : strings) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(", ", "");
+            }
+            _builder.append("\"");
+            _builder.append(s);
+            _builder.append("\"");
+          }
+        }
+        _builder.newLineIfNotEmpty();
       }
     };
     this.assertEquals(_client);
