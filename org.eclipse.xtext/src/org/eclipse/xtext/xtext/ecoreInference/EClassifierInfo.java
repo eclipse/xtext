@@ -11,6 +11,7 @@ package org.eclipse.xtext.xtext.ecoreInference;
 import java.util.Collection;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.AbstractElement;
@@ -204,6 +206,9 @@ public abstract class EClassifierInfo {
 								if (isAssignableByID(castedExistingType, castedExpectedType)) {
 									errorMessage.append("The type " + classifierToString(castedExistingType) + " used in the reference '" + name + "' is inconsistent. " +
 											"Probably this is due to an unsupported kind of metamodel hierarchy.");
+								} else if (castedExistingType instanceof InternalEObject && castedExistingType.eIsProxy()) {
+									URI proxyURI = ((InternalEObject) castedExistingType).eProxyURI();
+									errorMessage.append("The type of the reference '" + name + "' could not be resolved. The URI is " + proxyURI);
 								} else {
 									errorMessage.append("The existing reference '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
 											"The expected type is " + classifierToString(castedExpectedType) + ".");
