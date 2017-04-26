@@ -22,7 +22,7 @@ class UriExtensions {
 	def URI toUri(String pathWithScheme) {
 		val javaNetUri = java.net.URI.create(pathWithScheme);
 		val path = javaNetUri.toPath
-        return URI.createURI(path)
+		return URI.createURI(path)
 	}
 
 	def String toPath(URI uri) {
@@ -30,11 +30,11 @@ class UriExtensions {
 	}
 
 	def String toPath(java.net.URI uri) {
-	    try {
-    		val path = Paths.get(uri)
-    		return path.toUri.toString
-	    } catch (FileSystemNotFoundException e) {
-	        return uri.toString
-	    }
+		try {
+			val path = Paths.get(uri)
+			return path.toUri.toString
+		} catch (FileSystemNotFoundException e) {
+			return uri.toString
+		}
 	}
 }
