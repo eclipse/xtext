@@ -124,7 +124,7 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
   
   @Override
   public void appendImmediate(final Object object, final String indentation) {
-    for (int i = this.currentParent.getChildren().size(); (i >= 0); i--) {
+    for (int i = (this.currentParent.getChildren().size() - 1); (i >= 0); i--) {
       {
         final IGeneratorNode node = this.currentParent.getChildren().get(i);
         if ((node instanceof TextNode)) {
