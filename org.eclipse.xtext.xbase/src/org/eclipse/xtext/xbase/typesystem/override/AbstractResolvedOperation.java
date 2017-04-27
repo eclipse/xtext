@@ -128,12 +128,14 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 		List<LightweightTypeReference> superTypes = currentDeclarator.getSuperTypes();
 		List<JvmOperation> result = Lists.newArrayListWithCapacity(5);
 		for(LightweightTypeReference superType: superTypes) {
-			JvmDeclaredType declaredSuperType = (JvmDeclaredType) superType.getType();
-			if (declaredSuperType != null) {
-				Iterable<JvmFeature> equallyNamedFeatures = declaredSuperType.findAllFeaturesByName(getDeclaration().getSimpleName());
-				for(JvmFeature equallyNamedFeature: equallyNamedFeatures) {
-					if (equallyNamedFeature instanceof JvmOperation) {
-						result.add((JvmOperation) equallyNamedFeature);
+			if (superType.getType() instanceof JvmDeclaredType) {
+				JvmDeclaredType declaredSuperType = (JvmDeclaredType) superType.getType();
+				if (declaredSuperType != null) {
+					Iterable<JvmFeature> equallyNamedFeatures = declaredSuperType.findAllFeaturesByName(getDeclaration().getSimpleName());
+					for(JvmFeature equallyNamedFeature: equallyNamedFeatures) {
+						if (equallyNamedFeature instanceof JvmOperation) {
+							result.add((JvmOperation) equallyNamedFeature);
+						}
 					}
 				}
 			}

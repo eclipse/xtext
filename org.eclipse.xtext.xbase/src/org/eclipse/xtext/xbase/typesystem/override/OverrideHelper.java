@@ -125,22 +125,24 @@ public class OverrideHelper {
 		int parameterSize = operation.getParameters().size();
 		List<LightweightTypeReference> superTypes = declaringType.getSuperTypes();
 		for(LightweightTypeReference superType: superTypes) {
-			JvmDeclaredType declaredSuperType = (JvmDeclaredType) superType.getType();
-			if (declaredSuperType != null) {
-				Iterable<JvmFeature> equallyNamedFeatures = declaredSuperType.findAllFeaturesByName(operation.getSimpleName());
-				for(JvmFeature feature: equallyNamedFeatures) {
-					if (feature instanceof JvmOperation) {
-						JvmOperation candidate = (JvmOperation) feature;
-						if (parameterSize == candidate.getParameters().size()) {
-							if (visibilityHelper.isVisible(feature)) {
-								boolean matchesSignature = true;
-								for(int i = 0; i < parameterSize && matchesSignature; i++) {
-									JvmFormalParameter parameter = operation.getParameters().get(i);
-									JvmFormalParameter candidateParameter = candidate.getParameters().get(i);
-									matchesSignature = isMatchesSignature(parameter, candidateParameter, substitutor, owner);
-								}
-								if (matchesSignature) {
-									return candidate;
+			if (superType instanceof JvmDeclaredType) {
+				JvmDeclaredType declaredSuperType = (JvmDeclaredType) superType.getType();
+				if (declaredSuperType != null) {
+					Iterable<JvmFeature> equallyNamedFeatures = declaredSuperType.findAllFeaturesByName(operation.getSimpleName());
+					for(JvmFeature feature: equallyNamedFeatures) {
+						if (feature instanceof JvmOperation) {
+							JvmOperation candidate = (JvmOperation) feature;
+							if (parameterSize == candidate.getParameters().size()) {
+								if (visibilityHelper.isVisible(feature)) {
+									boolean matchesSignature = true;
+									for(int i = 0; i < parameterSize && matchesSignature; i++) {
+										JvmFormalParameter parameter = operation.getParameters().get(i);
+										JvmFormalParameter candidateParameter = candidate.getParameters().get(i);
+										matchesSignature = isMatchesSignature(parameter, candidateParameter, substitutor, owner);
+									}
+									if (matchesSignature) {
+										return candidate;
+									}
 								}
 							}
 						}
