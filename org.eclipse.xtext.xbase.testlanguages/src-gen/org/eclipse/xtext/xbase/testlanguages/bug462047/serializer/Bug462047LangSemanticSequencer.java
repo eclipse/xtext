@@ -20,6 +20,8 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.serializer.ISerializationContext;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -346,6 +348,212 @@ public class Bug462047LangSemanticSequencer extends XbaseSemanticSequencer {
 	 *     elements+=Bug462047Element+
 	 */
 	protected void sequence_Bug462047Root(ISerializationContext context, Bug462047Root semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     JvmLowerBoundAnded returns JvmLowerBound
+	 *
+	 * Constraint:
+	 *     typeReference=JvmTypeReference
+	 */
+	protected void sequence_JvmLowerBoundAnded(ISerializationContext context, JvmLowerBound semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getJvmLowerBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0(), semanticObject.getTypeReference());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     JvmLowerBound returns JvmLowerBound
+	 *
+	 * Constraint:
+	 *     typeReference=JvmTypeReference
+	 */
+	protected void sequence_JvmLowerBound(ISerializationContext context, JvmLowerBound semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0(), semanticObject.getTypeReference());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     JvmTypeReference returns JvmInnerTypeReference
+	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmInnerTypeReference
+	 *     JvmParameterizedTypeReference returns JvmInnerTypeReference
+	 *     JvmParameterizedTypeReference.JvmInnerTypeReference_1_4_0_0_0 returns JvmInnerTypeReference
+	 *     JvmArgumentTypeReference returns JvmInnerTypeReference
+	 *
+	 * Constraint:
+	 *     (
+	 *         outer=JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0 
+	 *         type=[JvmType|ValidID] 
+	 *         (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?
+	 *     )
+	 */
+	protected void sequence_JvmParameterizedTypeReference(ISerializationContext context, JvmInnerTypeReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     JvmParameterizedTypeReference.JvmInnerTypeReference_1_4_0_0_0 returns JvmParameterizedTypeReference
+	 *
+	 * Constraint:
+	 *     (type=[JvmType|QualifiedName] arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)
+	 */
+	protected void sequence_JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0(ISerializationContext context, JvmParameterizedTypeReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     JvmTypeReference returns JvmParameterizedTypeReference
+	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmParameterizedTypeReference
+	 *     JvmParameterizedTypeReference returns JvmParameterizedTypeReference
+	 *     JvmArgumentTypeReference returns JvmParameterizedTypeReference
+	 *
+	 * Constraint:
+	 *     (type=[JvmType|QualifiedName] (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?)
+	 */
+	protected void sequence_JvmParameterizedTypeReference(ISerializationContext context, JvmParameterizedTypeReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     JvmTypeParameter returns JvmTypeParameter
+	 *
+	 * Constraint:
+	 *     (name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?)
+	 */
+	protected void sequence_JvmTypeParameter(ISerializationContext context, JvmTypeParameter semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     JvmTypeReference returns JvmGenericArrayTypeReference
+	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmGenericArrayTypeReference
+	 *     JvmArgumentTypeReference returns JvmGenericArrayTypeReference
+	 *
+	 * Constraint:
+	 *     componentType=JvmTypeReference_JvmGenericArrayTypeReference_0_1_0_0
+	 */
+	protected void sequence_JvmTypeReference(ISerializationContext context, JvmGenericArrayTypeReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0(), semanticObject.getComponentType());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     JvmUpperBoundAnded returns JvmUpperBound
+	 *
+	 * Constraint:
+	 *     typeReference=JvmTypeReference
+	 */
+	protected void sequence_JvmUpperBoundAnded(ISerializationContext context, JvmUpperBound semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0(), semanticObject.getTypeReference());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     JvmUpperBound returns JvmUpperBound
+	 *
+	 * Constraint:
+	 *     typeReference=JvmTypeReference
+	 */
+	protected void sequence_JvmUpperBound(ISerializationContext context, JvmUpperBound semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0(), semanticObject.getTypeReference());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     JvmArgumentTypeReference returns JvmWildcardTypeReference
+	 *     JvmWildcardTypeReference returns JvmWildcardTypeReference
+	 *
+	 * Constraint:
+	 *     ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | (constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*))?
+	 */
+	protected void sequence_JvmWildcardTypeReference(ISerializationContext context, JvmWildcardTypeReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     JvmTypeReference returns XFunctionTypeRef
+	 *     XFunctionTypeRef returns XFunctionTypeRef
+	 *     JvmArgumentTypeReference returns XFunctionTypeRef
+	 *
+	 * Constraint:
+	 *     ((paramTypes+=JvmTypeReference paramTypes+=JvmTypeReference*)? returnType=JvmTypeReference)
+	 */
+	protected void sequence_XFunctionTypeRef(ISerializationContext context, XFunctionTypeRef semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     XImportDeclaration returns XImportDeclaration
+	 *
+	 * Constraint:
+	 *     (
+	 *         (static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' | memberName=ValidID)) | 
+	 *         importedType=[JvmDeclaredType|QualifiedName] | 
+	 *         importedNamespace=QualifiedNameWithWildcard
+	 *     )
+	 */
+	protected void sequence_XImportDeclaration(ISerializationContext context, XImportDeclaration semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     XImportSection returns XImportSection
+	 *
+	 * Constraint:
+	 *     importDeclarations+=XImportDeclaration+
+	 */
+	protected void sequence_XImportSection(ISerializationContext context, XImportSection semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

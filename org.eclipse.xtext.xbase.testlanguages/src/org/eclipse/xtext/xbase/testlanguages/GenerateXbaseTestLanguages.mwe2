@@ -6,6 +6,9 @@ import org.eclipse.xtext.xtext.generator.*
 var rootPath = ".."
 
 Workflow {
+	bean = StandaloneSetup {
+		platformUri = rootPath
+	}
 	
     component = XtextGenerator {
     	configuration = {
@@ -30,7 +33,11 @@ Workflow {
     	language = {
     		grammarUri = "classpath:/org/eclipse/xtext/xbase/testlanguages/XImportSectionTestLang.xtext"
     		fileExtensions = ""
+    		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
     		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xtype.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xbase.xtext"
     
     		fragment = grammarAccess.GrammarAccessFragment2 {}
     		fragment = ecore.EMFGeneratorFragment2 {}
@@ -62,7 +69,11 @@ Workflow {
     	language = {
     		grammarUri = "classpath:/org/eclipse/xtext/xbase/testlanguages/ContentAssistFragmentTestLang.xtext"
     		fileExtensions = ""
+    		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
     		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xtype.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xbase.xtext"
     
     		fragment = grammarAccess.GrammarAccessFragment2 {}
     		fragment = ecore.EMFGeneratorFragment2 {}
@@ -90,7 +101,11 @@ Workflow {
     	language = {
     		grammarUri = "classpath:/org/eclipse/xtext/xbase/testlanguages/bug462047/Bug462047Lang.xtext"
     		fileExtensions = ""
+    		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
     		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xtype.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xbase.xtext"
     
     		fragment = grammarAccess.GrammarAccessFragment2 {}
     		fragment = ecore.EMFGeneratorFragment2 {}
