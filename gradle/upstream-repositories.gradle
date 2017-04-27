@@ -23,7 +23,7 @@ def jenkinsPipelineRepo = { jobName -> "http://services.typefox.io/open-source/j
 repositories {
 	jcenter()
 	if (findProperty('useJenkinsSnapshots') == 'true') {
-		maven { url jenkinsPipelineRepo('lsp4j') }
+		maven { url "http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/" }
 		maven { url jenkinsPipelineRepo('xtext-lib') }
 		maven { url jenkinsPipelineRepo('xtext-core') }
 	} else {
