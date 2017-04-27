@@ -36,7 +36,7 @@ import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSu
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.common.types.testSetups.DeprecatedMembers;
 import org.eclipse.xtext.common.types.testSetups.TestConstants;
-import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
+import org.eclipse.xtext.common.types.xtext.ui.tests.RefactoringTestLanguageInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.junit.After;

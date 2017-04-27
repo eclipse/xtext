@@ -72,7 +72,7 @@ public class RefactoringTestLanguageSemanticSequencer extends AbstractDelegating
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getReferenceHolderAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getReferenceHolderAccess().getDefaultReferenceJvmTypeFQNParserRuleCall_1_0_1(), semanticObject.getDefaultReference());
+		feeder.accept(grammarAccess.getReferenceHolderAccess().getDefaultReferenceJvmTypeFQNParserRuleCall_1_0_1(), semanticObject.eGet(RefactoringTestLanguagePackage.Literals.REFERENCE_HOLDER__DEFAULT_REFERENCE, false));
 		feeder.finish();
 	}
 	
