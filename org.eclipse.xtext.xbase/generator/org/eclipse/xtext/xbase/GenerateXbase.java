@@ -12,6 +12,7 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
+import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig;
 import org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.resourceFactory.ResourceFactoryFragment2;
@@ -38,6 +39,7 @@ final class GenerateXbase {
 		final String root = "..";
 		final String projectName = "org.eclipse.xtext.xbase";
 		final String runtimeProject = root + "/" + projectName;
+		final String uiProject = root + "/../xtext-eclipse/" + projectName + ".ui";	
 		final boolean backtrack = false;
 		final boolean memoize = false;
 		final String lineDelimiter = "\n";
@@ -60,7 +62,9 @@ final class GenerateXbase {
 					setRootPath(root);
 					setBaseName(projectName);
 					setCreateEclipseMetaData(true);
-					getEclipsePlugin().setEnabled(true);
+					BundleProjectConfig eclipsePlugin = getEclipsePlugin();
+					eclipsePlugin.setEnabled(true);
+					eclipsePlugin.setRoot(uiProject);
 				}});
 				setCode(new CodeConfig() {{
 					setEncoding("ISO-8859-1");

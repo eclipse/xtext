@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 /*******************************************************************************
- * Copyright (c) 2010-2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -31,91 +31,91 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_HEX", "RULE_INT", "RULE_DECIMAL", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'@'", "'('", "','", "')'", "'='", "'#'", "'['", "']'", "'+='", "'-='", "'*='", "'/='", "'%='", "'<'", "'>'", "'>='", "'||'", "'&&'", "'=='", "'!='", "'==='", "'!=='", "'instanceof'", "'->'", "'..<'", "'..'", "'=>'", "'<>'", "'?:'", "'+'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'as'", "'++'", "'--'", "'.'", "'::'", "'?.'", "'{'", "'}'", "'|'", "';'", "'if'", "'else'", "'switch'", "':'", "'default'", "'case'", "'for'", "'while'", "'do'", "'var'", "'val'", "'extends'", "'static'", "'import'", "'extension'", "'super'", "'new'", "'false'", "'true'", "'null'", "'typeof'", "'throw'", "'return'", "'try'", "'finally'", "'synchronized'", "'catch'", "'?'", "'&'"
     };
-    public static final int T__68=68;
-    public static final int T__69=69;
-    public static final int RULE_ID=8;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__64=64;
-    public static final int T__29=29;
-    public static final int T__65=65;
-    public static final int T__28=28;
-    public static final int T__62=62;
-    public static final int T__27=27;
-    public static final int T__63=63;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int T__24=24;
-    public static final int T__23=23;
-    public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=12;
-    public static final int T__21=21;
-    public static final int T__20=20;
-    public static final int T__61=61;
-    public static final int T__60=60;
-    public static final int EOF=-1;
+    public static final int RULE_HEX=5;
+    public static final int T__50=50;
+    public static final int T__19=19;
+    public static final int T__15=15;
+    public static final int T__59=59;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int T__18=18;
     public static final int T__55=55;
     public static final int T__56=56;
-    public static final int T__19=19;
+    public static final int T__13=13;
     public static final int T__57=57;
-    public static final int RULE_HEX=5;
+    public static final int T__14=14;
     public static final int T__58=58;
-    public static final int T__16=16;
     public static final int T__51=51;
     public static final int T__52=52;
-    public static final int T__15=15;
     public static final int T__53=53;
-    public static final int T__18=18;
     public static final int T__54=54;
-    public static final int T__17=17;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int T__59=59;
-    public static final int RULE_INT=6;
+    public static final int T__60=60;
+    public static final int T__61=61;
+    public static final int RULE_ID=8;
     public static final int RULE_DECIMAL=7;
-    public static final int T__50=50;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__80=80;
-    public static final int T__46=46;
-    public static final int T__81=81;
-    public static final int T__47=47;
-    public static final int T__82=82;
-    public static final int T__44=44;
-    public static final int T__83=83;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int T__85=85;
-    public static final int RULE_SL_COMMENT=10;
-    public static final int T__84=84;
-    public static final int T__87=87;
-    public static final int T__86=86;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int RULE_INT=6;
+    public static final int T__29=29;
+    public static final int T__22=22;
+    public static final int T__66=66;
     public static final int RULE_ML_COMMENT=9;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int RULE_STRING=4;
-    public static final int T__32=32;
-    public static final int T__71=71;
-    public static final int T__33=33;
-    public static final int T__72=72;
-    public static final int T__34=34;
-    public static final int T__35=35;
+    public static final int T__23=23;
+    public static final int T__67=67;
+    public static final int T__24=24;
+    public static final int T__68=68;
+    public static final int T__25=25;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__63=63;
+    public static final int T__20=20;
+    public static final int T__64=64;
+    public static final int T__21=21;
+    public static final int T__65=65;
     public static final int T__70=70;
-    public static final int T__36=36;
+    public static final int T__71=71;
+    public static final int T__72=72;
+    public static final int RULE_STRING=4;
+    public static final int RULE_SL_COMMENT=10;
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
-    public static final int RULE_WS=11;
-    public static final int T__76=76;
-    public static final int T__75=75;
-    public static final int T__74=74;
-    public static final int T__73=73;
-    public static final int T__79=79;
-    public static final int T__78=78;
+    public static final int T__33=33;
     public static final int T__77=77;
+    public static final int T__34=34;
+    public static final int T__78=78;
+    public static final int T__35=35;
+    public static final int T__79=79;
+    public static final int T__36=36;
+    public static final int T__73=73;
+    public static final int EOF=-1;
+    public static final int T__30=30;
+    public static final int T__74=74;
+    public static final int T__31=31;
+    public static final int T__75=75;
+    public static final int T__32=32;
+    public static final int T__76=76;
+    public static final int T__80=80;
+    public static final int T__81=81;
+    public static final int T__82=82;
+    public static final int T__83=83;
+    public static final int RULE_WS=11;
+    public static final int RULE_ANY_OTHER=12;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__40=40;
+    public static final int T__84=84;
+    public static final int T__41=41;
+    public static final int T__85=85;
+    public static final int T__42=42;
+    public static final int T__86=86;
+    public static final int T__43=43;
+    public static final int T__87=87;
 
     // delegates
     // delegators
@@ -1645,11 +1645,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 {
                 int LA14_1 = input.LA(2);
 
-                if ( (LA14_1==EOF||(LA14_1>=RULE_STRING && LA14_1<=RULE_ID)||(LA14_1>=14 && LA14_1<=16)||(LA14_1>=18 && LA14_1<=56)||(LA14_1>=58 && LA14_1<=85)) ) {
-                    alt14=2;
-                }
-                else if ( (LA14_1==17) ) {
+                if ( (LA14_1==17) ) {
                     alt14=1;
+                }
+                else if ( (LA14_1==EOF||(LA14_1>=RULE_STRING && LA14_1<=RULE_ID)||(LA14_1>=14 && LA14_1<=16)||(LA14_1>=18 && LA14_1<=56)||(LA14_1>=58 && LA14_1<=85)) ) {
+                    alt14=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -1664,11 +1664,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 {
                 int LA14_2 = input.LA(2);
 
-                if ( (LA14_2==EOF||(LA14_2>=RULE_STRING && LA14_2<=RULE_ID)||(LA14_2>=14 && LA14_2<=16)||(LA14_2>=18 && LA14_2<=56)||(LA14_2>=58 && LA14_2<=85)) ) {
-                    alt14=2;
-                }
-                else if ( (LA14_2==17) ) {
+                if ( (LA14_2==17) ) {
                     alt14=1;
+                }
+                else if ( (LA14_2==EOF||(LA14_2>=RULE_STRING && LA14_2<=RULE_ID)||(LA14_2>=14 && LA14_2<=16)||(LA14_2>=18 && LA14_2<=56)||(LA14_2>=58 && LA14_2<=85)) ) {
+                    alt14=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -1702,11 +1702,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 {
                 int LA14_4 = input.LA(2);
 
-                if ( (LA14_4==EOF||(LA14_4>=RULE_STRING && LA14_4<=RULE_ID)||(LA14_4>=14 && LA14_4<=16)||(LA14_4>=18 && LA14_4<=56)||(LA14_4>=58 && LA14_4<=85)) ) {
-                    alt14=2;
-                }
-                else if ( (LA14_4==17) ) {
+                if ( (LA14_4==17) ) {
                     alt14=1;
+                }
+                else if ( (LA14_4==EOF||(LA14_4>=RULE_STRING && LA14_4<=RULE_ID)||(LA14_4>=14 && LA14_4<=16)||(LA14_4>=18 && LA14_4<=56)||(LA14_4>=58 && LA14_4<=85)) ) {
+                    alt14=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -7918,11 +7918,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( (LA47_0==18) ) {
                 int LA47_1 = input.LA(2);
 
-                if ( (LA47_1==55) ) {
-                    alt47=1;
-                }
-                else if ( (LA47_1==19) ) {
+                if ( (LA47_1==19) ) {
                     alt47=2;
+                }
+                else if ( (LA47_1==55) ) {
+                    alt47=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -20546,6 +20546,20 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // Delegated rules
 
+    public final boolean synpred2_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred2_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred35_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
@@ -20574,165 +20588,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred43_InternalXbaseWithAnnotations() {
+    public final boolean synpred23_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred43_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred21_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred21_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred14_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred14_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred22_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred22_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred5_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred5_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred26_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred26_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred12_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred12_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred10_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred10_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred8_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred8_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred20_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred20_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred33_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred33_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred2_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred2_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred23_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -20756,81 +20616,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred42_InternalXbaseWithAnnotations() {
+    public final boolean synpred7_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred42_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred9_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred9_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred48_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred48_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred29_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred29_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred1_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred1_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred16_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred16_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred7_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -20854,11 +20644,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred37_InternalXbaseWithAnnotations() {
+    public final boolean synpred36_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred37_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred36_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -20868,11 +20658,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred49_InternalXbaseWithAnnotations() {
+    public final boolean synpred12_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred49_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred12_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -20882,11 +20672,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred32_InternalXbaseWithAnnotations() {
+    public final boolean synpred29_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred32_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred29_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -20896,11 +20686,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred18_InternalXbaseWithAnnotations() {
+    public final boolean synpred42_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred18_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred42_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -20910,25 +20700,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred19_InternalXbaseWithAnnotations() {
+    public final boolean synpred20_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred19_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred44_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred44_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred20_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -20952,11 +20728,81 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred27_InternalXbaseWithAnnotations() {
+    public final boolean synpred8_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred27_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred8_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred32_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred32_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred48_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred48_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred44_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred44_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred18_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred18_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred43_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred43_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -20980,34 +20826,6 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred11_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred11_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred6_InternalXbaseWithAnnotations() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred6_InternalXbaseWithAnnotations_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
     public final boolean synpred25_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
@@ -21022,11 +20840,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred38_InternalXbaseWithAnnotations() {
+    public final boolean synpred49_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred38_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred49_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21036,11 +20854,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred51_InternalXbaseWithAnnotations() {
+    public final boolean synpred37_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred51_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred37_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21050,11 +20868,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred45_InternalXbaseWithAnnotations() {
+    public final boolean synpred14_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred45_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred14_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21064,11 +20882,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred40_InternalXbaseWithAnnotations() {
+    public final boolean synpred33_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred40_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred33_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21078,11 +20896,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred39_InternalXbaseWithAnnotations() {
+    public final boolean synpred9_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred39_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred9_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21092,11 +20910,25 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred23_InternalXbaseWithAnnotations() {
+    public final boolean synpred26_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred23_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred26_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred19_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred19_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21120,11 +20952,81 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred7_InternalXbaseWithAnnotations() {
+    public final boolean synpred40_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred7_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred40_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred38_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred38_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred45_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred45_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred51_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred51_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred21_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred21_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred27_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred27_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21148,6 +21050,20 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
+    public final boolean synpred1_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred1_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred15_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
@@ -21162,11 +21078,95 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred36_InternalXbaseWithAnnotations() {
+    public final boolean synpred5_InternalXbaseWithAnnotations() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred36_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+            synpred5_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred11_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred11_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred39_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred39_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred10_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred10_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred6_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred6_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred22_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred22_InternalXbaseWithAnnotations_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred16_InternalXbaseWithAnnotations() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred16_InternalXbaseWithAnnotations_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21438,7 +21438,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     static final String dfa_15s = "\1\4\7\0\2\uffff";
     static final String dfa_16s = "\1\125\7\0\2\uffff";
     static final String dfa_17s = "\10\uffff\1\2\1\1";
-    static final String dfa_18s = "\1\uffff\1\6\1\5\1\4\1\3\1\2\1\1\1\0\2\uffff}>";
+    static final String dfa_18s = "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\2\uffff}>";
     static final String[] dfa_19s = {
             "\5\10\5\uffff\3\10\1\uffff\3\10\1\1\1\2\1\3\1\4\1\5\1\6\1\7\35\10\1\uffff\34\10",
             "\1\uffff",
@@ -21481,10 +21481,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA13_7 = input.LA(1);
+                        int LA13_1 = input.LA(1);
 
                          
-                        int index13_7 = input.index();
+                        int index13_1 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred7_InternalXbaseWithAnnotations()) ) {s = 9;}
@@ -21492,14 +21492,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index13_7);
+                        input.seek(index13_1);
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA13_6 = input.LA(1);
+                        int LA13_2 = input.LA(1);
 
                          
-                        int index13_6 = input.index();
+                        int index13_2 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred7_InternalXbaseWithAnnotations()) ) {s = 9;}
@@ -21507,14 +21507,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index13_6);
+                        input.seek(index13_2);
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA13_5 = input.LA(1);
+                        int LA13_3 = input.LA(1);
 
                          
-                        int index13_5 = input.index();
+                        int index13_3 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred7_InternalXbaseWithAnnotations()) ) {s = 9;}
@@ -21522,7 +21522,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index13_5);
+                        input.seek(index13_3);
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
@@ -21541,10 +21541,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         if ( s>=0 ) return s;
                         break;
                     case 4 : 
-                        int LA13_3 = input.LA(1);
+                        int LA13_5 = input.LA(1);
 
                          
-                        int index13_3 = input.index();
+                        int index13_5 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred7_InternalXbaseWithAnnotations()) ) {s = 9;}
@@ -21552,14 +21552,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index13_3);
+                        input.seek(index13_5);
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
-                        int LA13_2 = input.LA(1);
+                        int LA13_6 = input.LA(1);
 
                          
-                        int index13_2 = input.index();
+                        int index13_6 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred7_InternalXbaseWithAnnotations()) ) {s = 9;}
@@ -21567,14 +21567,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index13_2);
+                        input.seek(index13_6);
                         if ( s>=0 ) return s;
                         break;
                     case 6 : 
-                        int LA13_1 = input.LA(1);
+                        int LA13_7 = input.LA(1);
 
                          
-                        int index13_1 = input.index();
+                        int index13_7 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred7_InternalXbaseWithAnnotations()) ) {s = 9;}
@@ -21582,7 +21582,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index13_1);
+                        input.seek(index13_7);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -21598,7 +21598,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     static final String dfa_22s = "\1\4\1\uffff\10\0\1\uffff";
     static final String dfa_23s = "\1\125\1\uffff\10\0\1\uffff";
     static final String dfa_24s = "\1\uffff\1\2\10\uffff\1\1";
-    static final String dfa_25s = "\2\uffff\1\5\1\1\1\6\1\7\1\0\1\4\1\2\1\3\1\uffff}>";
+    static final String dfa_25s = "\2\uffff\1\3\1\0\1\1\1\2\1\4\1\5\1\6\1\7\1\uffff}>";
     static final String[] dfa_26s = {
             "\5\1\5\uffff\3\1\1\uffff\10\1\1\2\1\3\10\1\1\4\1\5\1\6\1\7\1\10\1\11\17\1\1\uffff\34\1",
             "",
@@ -21642,21 +21642,6 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA23_6 = input.LA(1);
-
-                         
-                        int index23_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred13_InternalXbaseWithAnnotations()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index23_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA23_3 = input.LA(1);
 
                          
@@ -21671,67 +21656,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         input.seek(index23_3);
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
-                        int LA23_8 = input.LA(1);
-
-                         
-                        int index23_8 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred13_InternalXbaseWithAnnotations()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index23_8);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA23_9 = input.LA(1);
-
-                         
-                        int index23_9 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred13_InternalXbaseWithAnnotations()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index23_9);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
-                        int LA23_7 = input.LA(1);
-
-                         
-                        int index23_7 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred13_InternalXbaseWithAnnotations()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index23_7);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
-                        int LA23_2 = input.LA(1);
-
-                         
-                        int index23_2 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred13_InternalXbaseWithAnnotations()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index23_2);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
+                    case 1 : 
                         int LA23_4 = input.LA(1);
 
                          
@@ -21746,7 +21671,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         input.seek(index23_4);
                         if ( s>=0 ) return s;
                         break;
-                    case 7 : 
+                    case 2 : 
                         int LA23_5 = input.LA(1);
 
                          
@@ -21759,6 +21684,81 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                          
                         input.seek(index23_5);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA23_2 = input.LA(1);
+
+                         
+                        int index23_2 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred13_InternalXbaseWithAnnotations()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index23_2);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA23_6 = input.LA(1);
+
+                         
+                        int index23_6 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred13_InternalXbaseWithAnnotations()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index23_6);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA23_7 = input.LA(1);
+
+                         
+                        int index23_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred13_InternalXbaseWithAnnotations()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index23_7);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA23_8 = input.LA(1);
+
+                         
+                        int index23_8 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred13_InternalXbaseWithAnnotations()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index23_8);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 7 : 
+                        int LA23_9 = input.LA(1);
+
+                         
+                        int index23_9 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred13_InternalXbaseWithAnnotations()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index23_9);
                         if ( s>=0 ) return s;
                         break;
             }
