@@ -9,7 +9,7 @@
 
 	<properties>
 		<tycho-version>1.0.0</tycho-version>
-		<xtend-maven-plugin-version>2.11.0.RC2</xtend-maven-plugin-version>
+		<xtend-maven-plugin-version>2.11.0</xtend-maven-plugin-version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
