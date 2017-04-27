@@ -74,7 +74,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 	private XbaseBreakpointUtil breakpointUtil;
 
 	@Override
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		if (adaptableObject instanceof XtextEditor) {
 			return this;

@@ -96,7 +96,7 @@ public class DisplayChangeWrapper {
 			return delegate.getAffectedObjects();
 		}
 	
-		@SuppressWarnings("rawtypes")
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		@Override
 		public Object getAdapter(Class adapter) {
 			return delegate.getAdapter(adapter);
@@ -200,7 +200,7 @@ public class DisplayChangeWrapper {
 			return delegate.getAffectedObjects();
 		}
 
-		@SuppressWarnings("rawtypes")
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		@Override
 		public Object getAdapter(Class adapter) {
 			return delegate.getAdapter(adapter);
@@ -254,7 +254,7 @@ public class DisplayChangeWrapper {
 			delegate.addTextEditGroup(group);
 		}
 
-		@SuppressWarnings("rawtypes")
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		@Override
 		public boolean hasOneGroupCategory(List groupCategories) {
 			return delegate.hasOneGroupCategory(groupCategories);

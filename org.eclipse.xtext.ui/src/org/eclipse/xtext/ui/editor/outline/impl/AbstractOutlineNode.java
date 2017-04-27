@@ -192,7 +192,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object getAdapter(Class adapterType) {
 		return Platform.getAdapterManager().getAdapter(this, adapterType);
 	}

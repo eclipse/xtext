@@ -86,8 +86,9 @@ public class JavaElementDelegate implements IAdaptable {
 		this.resource = resource;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
+	public Object getAdapter(Class adapter) {
 		if (IJavaElement.class.equals(adapter)) {
 			if (editor != null) {
 				IJavaElement javaMethod = getJavaElementForXtextEditor(editor);

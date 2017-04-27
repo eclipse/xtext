@@ -61,7 +61,6 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	/**
 	 * copied from org.eclipse.jdt.internal.ui.javaeditor.JavaSourceViewer.prependTextPresentationListener(ITextPresentationListener)
 	 */
-	@SuppressWarnings("unchecked")
 	public void prependTextPresentationListener(ITextPresentationListener listener) {
 		Assert.isNotNull(listener);
 
@@ -86,7 +85,6 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 			// handle plain redraw changes
 			super.updateTextListeners(cmd);
 		} else {
-			@SuppressWarnings("unchecked")
 			List<ITextListener> textListeners= fTextListeners;
 			if (textListeners != null) {
 				textListeners= new ArrayList<ITextListener>(textListeners);
@@ -136,7 +134,7 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	 * @since 2.3
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object getAdapter(Class adapter) {
 		if (IReconciler.class.isAssignableFrom(adapter)) {
 			return fReconciler;
