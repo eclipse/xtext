@@ -7,10 +7,10 @@ import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class MultiRuleEnumTestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/enumrules/parser/antlr/internal/InternalMultiRuleEnumTestLanguage.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtext/enumrules/parser/antlr/internal/InternalMultiRuleEnumTestLanguage.tokens");
 	}
 }
