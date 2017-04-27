@@ -18,10 +18,8 @@ Workflow {
 				
 				runtimeTest = {
 					enabled = true
-					root = "${rootPath}/org.eclipse.xtext.xbase.testlanguages"	
+					root = "${rootPath}/org.eclipse.xtext.xbase.testlanguages"
 				}
-
-				createEclipseMetaData = true
 			}
 			code = {
 				encoding = 'ISO-8859-1'

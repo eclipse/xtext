@@ -1,4 +1,5 @@
 apply from: "${rootDir}/gradle/longrunning-tests.gradle"
+apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 
 dependencies {
 	compile project(':org.eclipse.xtext.common.types')
@@ -8,8 +9,6 @@ dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	
 	compile "junit:junit:$versions.junit"
-	mwe2Compile project(':org.eclipse.xtext.generator')
-	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
 
 sourceSets.test.java {
@@ -19,4 +18,12 @@ sourceSets.test.java {
 
 sourceSets.test.resources {
 	srcDir 'tests'
+}
+
+// Include the mwe2 and xtext files from the test source set when executing the workflow
+sourceSets.mwe2.runtimeClasspath += processTestResources.outputs.files
+
+task generateTestLanguages(type: XtextGeneratorTask) {
+	workflow = file('src/org/eclipse/xtext/common/types/xtext/ui/GenerateTypesTestLanguages.mwe2')
+	outputs.dir 'src-gen'
 }

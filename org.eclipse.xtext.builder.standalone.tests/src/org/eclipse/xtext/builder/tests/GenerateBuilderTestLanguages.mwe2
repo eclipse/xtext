@@ -19,8 +19,6 @@ Workflow {
 			project = model.project.StandardProjectConfig {
 				baseName = "org.eclipse.xtext.builder.standalone.tests"
 				rootPath = rootPath
-				
-				createEclipseMetaData = true
 			}
 			code = {
 				encoding = 'ISO-8859-1'
