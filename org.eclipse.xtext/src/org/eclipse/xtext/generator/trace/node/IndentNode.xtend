@@ -8,12 +8,17 @@
 package org.eclipse.xtext.generator.trace.node
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@FinalFieldsConstructor class IndentNode extends CompositeGeneratorNode {
+@Accessors
+class IndentNode extends CompositeGeneratorNode {
 	
-	@Accessors val String indentationString
+	String indentationString
+	
+	new(String indentationString) {
+		this.indentationString = indentationString
+	}
+	
 }

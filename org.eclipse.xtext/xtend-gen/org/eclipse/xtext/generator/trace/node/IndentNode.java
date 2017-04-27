@@ -8,26 +8,27 @@
 package org.eclipse.xtext.generator.trace.node;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@FinalFieldsConstructor
+@Accessors
 @SuppressWarnings("all")
 public class IndentNode extends CompositeGeneratorNode {
-  @Accessors
-  private final String indentationString;
+  private String indentationString;
   
   public IndentNode(final String indentationString) {
-    super();
     this.indentationString = indentationString;
   }
   
   @Pure
   public String getIndentationString() {
     return this.indentationString;
+  }
+  
+  public void setIndentationString(final String indentationString) {
+    this.indentationString = indentationString;
   }
 }

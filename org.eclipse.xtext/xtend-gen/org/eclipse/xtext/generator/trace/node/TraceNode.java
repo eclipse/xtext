@@ -8,7 +8,6 @@
 package org.eclipse.xtext.generator.trace.node;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -16,19 +15,21 @@ import org.eclipse.xtext.xbase.lib.Pure;
 /**
  * @author Sven Efftinge - initial contribution and API
  */
-@FinalFieldsConstructor
+@Accessors
 @SuppressWarnings("all")
 public class TraceNode extends CompositeGeneratorNode {
-  @Accessors
-  private final ILocationData sourceLocation;
+  private ILocationData sourceLocation;
   
   public TraceNode(final ILocationData sourceLocation) {
-    super();
     this.sourceLocation = sourceLocation;
   }
   
   @Pure
   public ILocationData getSourceLocation() {
     return this.sourceLocation;
+  }
+  
+  public void setSourceLocation(final ILocationData sourceLocation) {
+    this.sourceLocation = sourceLocation;
   }
 }
