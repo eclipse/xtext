@@ -5,8 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping;
+package org.eclipse.xtext.xbase.ide;
 
 
-public abstract class AbstractXbaseScopeProvider extends XtypeScopeProvider {
+/**
+ * Use this class to register ide components.
+ */
+public class XbaseIdeModule extends AbstractXbaseIdeModule {
 }

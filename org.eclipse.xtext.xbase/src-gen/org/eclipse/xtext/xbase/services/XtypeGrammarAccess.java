@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -291,7 +291,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cJvmWildcardTypeReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//JvmArgumentTypeReference JvmTypeReference:
-		//	JvmTypeReference | JvmWildcardTypeReference
+		//	JvmTypeReference | JvmWildcardTypeReference;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//JvmTypeReference | JvmWildcardTypeReference
@@ -400,7 +400,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeReferenceJvmTypeReferenceParserRuleCall_1_0 = (RuleCall)cTypeReferenceAssignment_1.eContents().get(0);
 		
 		//JvmUpperBoundAnded JvmUpperBound:
-		//	'&' typeReference=JvmTypeReference
+		//	'&' typeReference=JvmTypeReference;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'&' typeReference=JvmTypeReference
@@ -446,7 +446,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeReferenceJvmTypeReferenceParserRuleCall_1_0 = (RuleCall)cTypeReferenceAssignment_1.eContents().get(0);
 		
 		//JvmLowerBoundAnded JvmLowerBound:
-		//	'&' typeReference=JvmTypeReference
+		//	'&' typeReference=JvmTypeReference;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'&' typeReference=JvmTypeReference
@@ -819,7 +819,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//JvmArgumentTypeReference JvmTypeReference:
-	//	JvmTypeReference | JvmWildcardTypeReference
+	//	JvmTypeReference | JvmWildcardTypeReference;
 	public JvmArgumentTypeReferenceElements getJvmArgumentTypeReferenceAccess() {
 		return pJvmArgumentTypeReference;
 	}
@@ -850,7 +850,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//JvmUpperBoundAnded JvmUpperBound:
-	//	'&' typeReference=JvmTypeReference
+	//	'&' typeReference=JvmTypeReference;
 	public JvmUpperBoundAndedElements getJvmUpperBoundAndedAccess() {
 		return pJvmUpperBoundAnded;
 	}
@@ -870,7 +870,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//JvmLowerBoundAnded JvmLowerBound:
-	//	'&' typeReference=JvmTypeReference
+	//	'&' typeReference=JvmTypeReference;
 	public JvmLowerBoundAndedElements getJvmLowerBoundAndedAccess() {
 		return pJvmLowerBoundAnded;
 	}
@@ -965,7 +965,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return tML_COMMENT;
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -54,56 +54,62 @@ ruleXAnnotationElementValuePair:
 // Rule XAnnotationElementValueOrCommaList
 ruleXAnnotationElementValueOrCommaList:
 	(
-		('#'
-		'['
-		)=>
-		'#'
-		'['
-	)
-	(
+		(
+			('#'
+			'['
+			)=>
+			'#'
+			'['
+		)
+		(
+			ruleXAnnotationOrExpression
+			(
+				','
+				ruleXAnnotationOrExpression
+			)*
+		)?
+		']'
+		    |
 		ruleXAnnotationOrExpression
 		(
-			','
-			ruleXAnnotationOrExpression
-		)*
-	)?
-	']'
-	    |
-	ruleXAnnotationOrExpression
-	(
-		(
-			','
-			ruleXAnnotationOrExpression
-		)+
-	)?
+			(
+				','
+				ruleXAnnotationOrExpression
+			)+
+		)?
+	)
 ;
 
 // Rule XAnnotationElementValue
 ruleXAnnotationElementValue:
 	(
-		('#'
-		'['
-		)=>
-		'#'
-		'['
-	)
-	(
-		ruleXAnnotationOrExpression
 		(
-			','
+			('#'
+			'['
+			)=>
+			'#'
+			'['
+		)
+		(
 			ruleXAnnotationOrExpression
-		)*
-	)?
-	']'
-	    |
-	ruleXAnnotationOrExpression
+			(
+				','
+				ruleXAnnotationOrExpression
+			)*
+		)?
+		']'
+		    |
+		ruleXAnnotationOrExpression
+	)
 ;
 
 // Rule XAnnotationOrExpression
 ruleXAnnotationOrExpression:
-	ruleXAnnotation
-	    |
-	ruleXExpression
+	(
+		ruleXAnnotation
+		    |
+		ruleXExpression
+	)
 ;
 
 // Rule XExpression
@@ -113,19 +119,21 @@ ruleXExpression:
 
 // Rule XAssignment
 ruleXAssignment:
-	ruleFeatureCallID
-	ruleOpSingleAssign
-	ruleXAssignment
-	    |
-	ruleXOrExpression
 	(
-		(
-			(ruleOpMultiAssign
-			)=>
-			ruleOpMultiAssign
-		)
+		ruleFeatureCallID
+		ruleOpSingleAssign
 		ruleXAssignment
-	)?
+		    |
+		ruleXOrExpression
+		(
+			(
+				(ruleOpMultiAssign
+				)=>
+				ruleOpMultiAssign
+			)
+			ruleXAssignment
+		)?
+	)
 ;
 
 // Rule OpSingleAssign
@@ -135,23 +143,25 @@ ruleOpSingleAssign:
 
 // Rule OpMultiAssign
 ruleOpMultiAssign:
-	'+='
-	    |
-	'-='
-	    |
-	'*='
-	    |
-	'/='
-	    |
-	'%='
-	    |
-	'<'
-	'<'
-	'='
-	    |
-	'>'
-	'>'?
-	'>='
+	(
+		'+='
+		    |
+		'-='
+		    |
+		'*='
+		    |
+		'/='
+		    |
+		'%='
+		    |
+		'<'
+		'<'
+		'='
+		    |
+		'>'
+		'>'?
+		'>='
+	)
 ;
 
 // Rule XOrExpression
@@ -205,13 +215,15 @@ ruleXEqualityExpression:
 
 // Rule OpEquality
 ruleOpEquality:
-	'=='
-	    |
-	'!='
-	    |
-	'==='
-	    |
-	'!=='
+	(
+		'=='
+		    |
+		'!='
+		    |
+		'==='
+		    |
+		'!=='
+	)
 ;
 
 // Rule XRelationalExpression
@@ -236,14 +248,16 @@ ruleXRelationalExpression:
 
 // Rule OpCompare
 ruleOpCompare:
-	'>='
-	    |
-	'<'
-	'='
-	    |
-	'>'
-	    |
-	'<'
+	(
+		'>='
+		    |
+		'<'
+		'='
+		    |
+		'>'
+		    |
+		'<'
+	)
 ;
 
 // Rule XOtherOperatorExpression
@@ -261,44 +275,50 @@ ruleXOtherOperatorExpression:
 
 // Rule OpOther
 ruleOpOther:
-	'->'
-	    |
-	'..<'
-	    |
-	'>'
-	'..'
-	    |
-	'..'
-	    |
-	'=>'
-	    |
-	'>'
 	(
-		('>'
+		'->'
+		    |
+		'..<'
+		    |
 		'>'
-		)=>
+		'..'
+		    |
+		'..'
+		    |
+		'=>'
+		    |
 		'>'
-		'>'
+		(
+			(
+				('>'
+				'>'
+				)=>
+				'>'
+				'>'
+			)
+			    |
+			'>'
+		)
+		    |
+		'<'
+		(
+			(
+				('<'
+				'<'
+				)=>
+				'<'
+				'<'
+			)
+			    |
+			'<'
+			    |
+			'=>'
+		)
+		    |
+		'<>'
+		    |
+		'?:'
 	)
-	    |
-	'>'
-	    |
-	'<'
-	(
-		('<'
-		'<'
-		)=>
-		'<'
-		'<'
-	)
-	    |
-	'<'
-	    |
-	'=>'
-	    |
-	'<>'
-	    |
-	'?:'
 ;
 
 // Rule XAdditiveExpression
@@ -316,9 +336,11 @@ ruleXAdditiveExpression:
 
 // Rule OpAdd
 ruleOpAdd:
-	'+'
-	    |
-	'-'
+	(
+		'+'
+		    |
+		'-'
+	)
 ;
 
 // Rule XMultiplicativeExpression
@@ -336,30 +358,36 @@ ruleXMultiplicativeExpression:
 
 // Rule OpMulti
 ruleOpMulti:
-	'*'
-	    |
-	'**'
-	    |
-	'/'
-	    |
-	'%'
+	(
+		'*'
+		    |
+		'**'
+		    |
+		'/'
+		    |
+		'%'
+	)
 ;
 
 // Rule XUnaryOperation
 ruleXUnaryOperation:
-	ruleOpUnary
-	ruleXUnaryOperation
-	    |
-	ruleXCastedExpression
+	(
+		ruleOpUnary
+		ruleXUnaryOperation
+		    |
+		ruleXCastedExpression
+	)
 ;
 
 // Rule OpUnary
 ruleOpUnary:
-	'!'
-	    |
-	'-'
-	    |
-	'+'
+	(
+		'!'
+		    |
+		'-'
+		    |
+		'+'
+	)
 ;
 
 // Rule XCastedExpression
@@ -387,9 +415,11 @@ ruleXPostfixOperation:
 
 // Rule OpPostfix
 ruleOpPostfix:
-	'++'
-	    |
-	'--'
+	(
+		'++'
+		    |
+		'--'
+	)
 ;
 
 // Rule XMemberFeatureCall
@@ -397,32 +427,40 @@ ruleXMemberFeatureCall:
 	ruleXPrimaryExpression
 	(
 		(
-			('.'
-			    |
-			'::'
+			((
+				'.'
+				    |
+				'::'
+			)
 			ruleFeatureCallID
 			ruleOpSingleAssign
 			)=>
-			'.'
-			    |
-			'::'
+			(
+				'.'
+				    |
+				'::'
+			)
 			ruleFeatureCallID
 			ruleOpSingleAssign
 		)
 		ruleXAssignment
 		    |
 		(
-			('.'
-			    |
-			'?.'
-			    |
-			'::'
+			((
+				'.'
+				    |
+				'?.'
+				    |
+				'::'
+			)
 			)=>
-			'.'
-			    |
-			'?.'
-			    |
-			'::'
+			(
+				'.'
+				    |
+				'?.'
+				    |
+				'::'
+			)
 		)
 		(
 			'<'
@@ -472,75 +510,81 @@ ruleXMemberFeatureCall:
 
 // Rule XPrimaryExpression
 ruleXPrimaryExpression:
-	ruleXConstructorCall
-	    |
-	ruleXBlockExpression
-	    |
-	ruleXSwitchExpression
-	    |
 	(
-		('synchronized'
-		'('
-		)=>
-		ruleXSynchronizedExpression
+		ruleXConstructorCall
+		    |
+		ruleXBlockExpression
+		    |
+		ruleXSwitchExpression
+		    |
+		(
+			('synchronized'
+			'('
+			)=>
+			ruleXSynchronizedExpression
+		)
+		    |
+		ruleXFeatureCall
+		    |
+		ruleXLiteral
+		    |
+		ruleXIfExpression
+		    |
+		(
+			('for'
+			'('
+			ruleJvmFormalParameter
+			':'
+			)=>
+			ruleXForLoopExpression
+		)
+		    |
+		ruleXBasicForLoopExpression
+		    |
+		ruleXWhileExpression
+		    |
+		ruleXDoWhileExpression
+		    |
+		ruleXThrowExpression
+		    |
+		ruleXReturnExpression
+		    |
+		ruleXTryCatchFinallyExpression
+		    |
+		ruleXParenthesizedExpression
 	)
-	    |
-	ruleXFeatureCall
-	    |
-	ruleXLiteral
-	    |
-	ruleXIfExpression
-	    |
-	(
-		('for'
-		'('
-		ruleJvmFormalParameter
-		':'
-		)=>
-		ruleXForLoopExpression
-	)
-	    |
-	ruleXBasicForLoopExpression
-	    |
-	ruleXWhileExpression
-	    |
-	ruleXDoWhileExpression
-	    |
-	ruleXThrowExpression
-	    |
-	ruleXReturnExpression
-	    |
-	ruleXTryCatchFinallyExpression
-	    |
-	ruleXParenthesizedExpression
 ;
 
 // Rule XLiteral
 ruleXLiteral:
-	ruleXCollectionLiteral
-	    |
 	(
-		('['
-		)=>
-		ruleXClosure
+		ruleXCollectionLiteral
+		    |
+		(
+			('['
+			)=>
+			ruleXClosure
+		)
+		    |
+		ruleXBooleanLiteral
+		    |
+		ruleXNumberLiteral
+		    |
+		ruleXNullLiteral
+		    |
+		ruleXStringLiteral
+		    |
+		ruleXTypeLiteral
 	)
-	    |
-	ruleXBooleanLiteral
-	    |
-	ruleXNumberLiteral
-	    |
-	ruleXNullLiteral
-	    |
-	ruleXStringLiteral
-	    |
-	ruleXTypeLiteral
 ;
 
 // Rule XCollectionLiteral
 ruleXCollectionLiteral:
-	ruleXSetLiteral
-	    |
-	ruleXListLiteral
+	(
+		ruleXSetLiteral
+		    |
+		ruleXListLiteral
+	)
 ;
 
 // Rule XSetLiteral
@@ -660,25 +704,27 @@ ruleXIfExpression:
 ruleXSwitchExpression:
 	'switch'
 	(
-		('('
-		ruleJvmFormalParameter
-		':'
-		)=>
-		'('
-		ruleJvmFormalParameter
-		':'
+		(
+			('('
+			ruleJvmFormalParameter
+			':'
+			)=>
+			'('
+			ruleJvmFormalParameter
+			':'
+		)
+		ruleXExpression
+		')'
+		    |
+		(
+			(ruleJvmFormalParameter
+			':'
+			)=>
+			ruleJvmFormalParameter
+			':'
+		)?
+		ruleXExpression
 	)
-	ruleXExpression
-	')'
-	    |
-	(
-		(ruleJvmFormalParameter
-		':'
-		)=>
-		ruleJvmFormalParameter
-		':'
-	)?
-	ruleXExpression
 	'{'
 	ruleXCasePart
 	*
@@ -698,10 +744,12 @@ ruleXCasePart:
 		'case'
 		ruleXExpression
 	)?
-	':'
-	ruleXExpression
-	    |
-	','
+	(
+		':'
+		ruleXExpression
+		    |
+		','
+	)
 ;
 
 // Rule XForLoopExpression
@@ -779,25 +827,31 @@ ruleXBlockExpression:
 
 // Rule XExpressionOrVarDeclaration
 ruleXExpressionOrVarDeclaration:
-	ruleXVariableDeclaration
-	    |
-	ruleXExpression
+	(
+		ruleXVariableDeclaration
+		    |
+		ruleXExpression
+	)
 ;
 
 // Rule XVariableDeclaration
 ruleXVariableDeclaration:
-	'var'
-	    |
-	'val'
 	(
-		(ruleJvmTypeReference
-		ruleValidID
-		)=>
-		ruleJvmTypeReference
+		'var'
+		    |
+		'val'
+	)
+	(
+		(
+			(ruleJvmTypeReference
+			ruleValidID
+			)=>
+			ruleJvmTypeReference
+			ruleValidID
+		)
+		    |
 		ruleValidID
 	)
-	    |
-	ruleValidID
 	(
 		'='
 		ruleXExpression
@@ -866,22 +920,26 @@ ruleXFeatureCall:
 
 // Rule FeatureCallID
 ruleFeatureCallID:
-	ruleValidID
-	    |
-	'extends'
-	    |
-	'static'
-	    |
-	'import'
-	    |
-	'extension'
+	(
+		ruleValidID
+		    |
+		'extends'
+		    |
+		'static'
+		    |
+		'import'
+		    |
+		'extension'
+	)
 ;
 
 // Rule IdOrSuper
 ruleIdOrSuper:
-	ruleFeatureCallID
-	    |
-	'super'
+	(
+		ruleFeatureCallID
+		    |
+		'super'
+	)
 ;
 
 // Rule XConstructorCall
@@ -937,9 +995,11 @@ ruleXConstructorCall:
 
 // Rule XBooleanLiteral
 ruleXBooleanLiteral:
-	'false'
-	    |
-	'true'
+	(
+		'false'
+		    |
+		'true'
+	)
 ;
 
 // Rule XNullLiteral
@@ -987,19 +1047,21 @@ ruleXTryCatchFinallyExpression:
 	'try'
 	ruleXExpression
 	(
-		('catch')=>
-		ruleXCatchClause
-	)+
-	(
 		(
-			('finally')=>
-			'finally'
-		)
+			('catch')=>
+			ruleXCatchClause
+		)+
+		(
+			(
+				('finally')=>
+				'finally'
+			)
+			ruleXExpression
+		)?
+		    |
+		'finally'
 		ruleXExpression
-	)?
-	    |
-	'finally'
-	ruleXExpression
+	)
 ;
 
 // Rule XSynchronizedExpression
@@ -1042,29 +1104,37 @@ ruleQualifiedName:
 
 // Rule Number
 ruleNumber:
-	RULE_HEX
-	    |
-	RULE_INT
-	    |
-	RULE_DECIMAL
 	(
-		'.'
-		RULE_INT
+		RULE_HEX
 		    |
-		RULE_DECIMAL
-	)?
+		(
+			RULE_INT
+			    |
+			RULE_DECIMAL
+		)
+		(
+			'.'
+			(
+				RULE_INT
+				    |
+				RULE_DECIMAL
+			)
+		)?
+	)
 ;
 
 // Rule JvmTypeReference
 ruleJvmTypeReference:
-	ruleJvmParameterizedTypeReference
 	(
-		(ruleArrayBrackets
-		)=>
-		ruleArrayBrackets
-	)*
-	    |
-	ruleXFunctionTypeRef
+		ruleJvmParameterizedTypeReference
+		(
+			(ruleArrayBrackets
+			)=>
+			ruleArrayBrackets
+		)*
+		    |
+		ruleXFunctionTypeRef
+	)
 ;
 
 // Rule ArrayBrackets
@@ -1129,9 +1199,11 @@ ruleJvmParameterizedTypeReference:
 
 // Rule JvmArgumentTypeReference
 ruleJvmArgumentTypeReference:
-	ruleJvmTypeReference
-	    |
-	ruleJvmWildcardTypeReference
+	(
+		ruleJvmTypeReference
+		    |
+		ruleJvmWildcardTypeReference
+	)
 ;
 
 // Rule JvmWildcardTypeReference
@@ -1187,17 +1259,21 @@ ruleValidID:
 // Rule XImportDeclaration
 ruleXImportDeclaration:
 	'import'
-	'static'
-	'extension'
-	?
-	ruleQualifiedNameInStaticImport
-	'*'
-	    |
-	ruleValidID
-	    |
-	ruleQualifiedName
-	    |
-	ruleQualifiedNameWithWildcard
+	(
+		'static'
+		'extension'
+		?
+		ruleQualifiedNameInStaticImport
+		(
+			'*'
+			    |
+			ruleValidID
+		)
+		    |
+		ruleQualifiedName
+		    |
+		ruleQualifiedNameWithWildcard
+	)
 	';'?
 ;
 

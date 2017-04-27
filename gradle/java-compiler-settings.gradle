@@ -32,17 +32,11 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 	from javadoc.destinationDir
 }
 
-sourceSets {
-	mwe2 {}
-}
-
 configurations {
 	optional {
 		description 'Dependencies required at build time, but not exported into meta data'
 		extendsFrom compile
 	}
-	mwe2Compile.extendsFrom mainCompile
-	mwe2Runtime.extendsFrom mainRuntime
 	
 	// Put any unwanted transitive dependencies here, they will be excluded from all projects.
 	all {

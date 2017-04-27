@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -57,6 +57,7 @@ import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsValida
 import org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
+import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 
 /**
  * Manual modifications go to {@link XbaseWithAnnotationsRuntimeModule}.
@@ -132,7 +133,7 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalXbaseWithAnnotationsLexer> provideInternalXbaseWithAnnotationsLexer() {
+	public Provider<? extends InternalXbaseWithAnnotationsLexer> provideInternalXbaseWithAnnotationsLexer() {
 		return LexerProvider.create(InternalXbaseWithAnnotationsLexer.class);
 	}
 	
@@ -150,7 +151,7 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
-	public Class<? extends IScopeProvider> bindIScopeProvider() {
+	public Class<? extends IBatchScopeProvider> bindIBatchScopeProvider() {
 		return XbaseWithAnnotationsBatchScopeProvider.class;
 	}
 	
