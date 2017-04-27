@@ -9,6 +9,9 @@ import org.eclipse.xtext.xtext.generator.model.project.*
 var rootPath = ".."
 
 Workflow {
+	bean = StandaloneSetup {
+		platformUri = rootPath
+	}
 	
 	component = XtextGenerator {
 		configuration = {
@@ -41,6 +44,11 @@ Workflow {
 		language = StandardLanguage {
 			name = "org.eclipse.xtext.purexbase.PureXbase"
 			fileExtensions = "xbase"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xtype.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xbase.xtext"
 
 			serializer = {
 				generateStub = false
