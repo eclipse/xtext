@@ -7,51 +7,49 @@
  *******************************************************************************/
 module org.eclipse.xtext.builder.tests.GenerateBuilderTestLanguages
 
-import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
-var uri = "classpath:/org/eclipse/xtext/builder/tests/BuilderTestLanguage.xtext"
-var projectName = "org.eclipse.xtext.builder.standalone.tests"
-var runtimeProject = "../${projectName}"
-var classSplitting = true
-var lineDelimiter = '\n'
+var rootPath = ".."
 
 Workflow {
 	
-	bean = StandaloneSetup {
-		ignoreBrokenProjectFiles = true
-		platformUri = ".."
-	}
-	
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}/src-gen"
-	}
-	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
+    component = XtextGenerator {
+    	configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = "org.eclipse.xtext.builder.standalone.tests"
+				rootPath = rootPath
+				
+				createEclipseMetaData = true
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = "\n"
+				preferXtendStubs = false
+			}
+		}
 		
-		language = auto-inject {
-			fragment = ecore.EMFGeneratorFragment {
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/builder/tests/BuilderTestLanguage.xtext"
+			
+			fragment = ecore.EMFGeneratorFragment2 {
 				emfRuntimeVersion = "2.9"
 				jdkLevel = "JDK60"
 			}
-			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-			fragment = resourceFactory.ResourceFactoryFragment {}
-			fragment = serializer.SerializerFragment auto-inject {
-				srcGenOnly = true
+			fragment = grammarAccess.GrammarAccessFragment2 {}
+			fragment = resourceFactory.ResourceFactoryFragment2 {}
+			fragment = serializer.SerializerFragment2 {
+				generateStub = false
 			}
-			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
-				options = auto-inject {} 
+			fragment = parser.antlr.XtextAntlrGeneratorFragment2 {
+				options = {
+					classSplitting = true
+				}
 			}
-			fragment = validation.JavaValidatorFragment {}
-//			fragment = contentAssist.JavaBasedContentAssistFragment {}
-//			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject { 
-//				options = auto-inject {}
-//			}
-			fragment = builder.BuilderIntegrationFragment {}
+			fragment = validation.ValidatorFragment2 {
+				generateStub = false
+			}
+			fragment = builder.BuilderIntegrationFragment2 {}
 		}
 	}
 }

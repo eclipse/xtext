@@ -10,7 +10,7 @@ package org.eclipse.xtext.common.types.access.impl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
-import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
+import org.eclipse.xtext.common.types.xtext.ui.tests.RefactoringTestLanguageInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.junit.After;

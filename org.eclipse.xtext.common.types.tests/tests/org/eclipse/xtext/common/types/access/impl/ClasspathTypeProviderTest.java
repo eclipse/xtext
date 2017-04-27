@@ -28,7 +28,7 @@ import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
-import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
+import org.eclipse.xtext.common.types.xtext.ui.tests.RefactoringTestLanguageInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.junit.After;
