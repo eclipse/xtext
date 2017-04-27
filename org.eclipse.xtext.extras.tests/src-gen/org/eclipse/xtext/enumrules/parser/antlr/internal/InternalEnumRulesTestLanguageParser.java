@@ -1,4 +1,4 @@
-package org.eclipse.xtext.enumrules.parser.antlr.internal; 
+package org.eclipse.xtext.enumrules.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -57,18 +57,18 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
 
      	private EnumRulesTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalEnumRulesTestLanguageParser(TokenStream input, EnumRulesTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected EnumRulesTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -76,8 +76,9 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalEnumRulesTestLanguage.g:68:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalEnumRulesTestLanguage.g:65:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -85,8 +86,8 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalEnumRulesTestLanguage.g:69:2: (iv_ruleModel= ruleModel EOF )
-            // InternalEnumRulesTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
+            // InternalEnumRulesTestLanguage.g:65:46: (iv_ruleModel= ruleModel EOF )
+            // InternalEnumRulesTestLanguage.g:66:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -100,11 +101,11 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -113,7 +114,7 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // InternalEnumRulesTestLanguage.g:77:1: ruleModel returns [EObject current=null] : ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) ;
+    // InternalEnumRulesTestLanguage.g:72:1: ruleModel returns [EObject current=null] : ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -127,13 +128,14 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
         Enumerator lv_generated_5_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalEnumRulesTestLanguage.g:80:28: ( ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) )
-            // InternalEnumRulesTestLanguage.g:81:1: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
+            // InternalEnumRulesTestLanguage.g:78:2: ( ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) )
+            // InternalEnumRulesTestLanguage.g:79:2: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
             {
-            // InternalEnumRulesTestLanguage.g:81:1: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
+            // InternalEnumRulesTestLanguage.g:79:2: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -151,47 +153,47 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // InternalEnumRulesTestLanguage.g:81:2: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
+                    // InternalEnumRulesTestLanguage.g:80:3: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
                     {
-                    // InternalEnumRulesTestLanguage.g:81:2: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
+                    // InternalEnumRulesTestLanguage.g:80:3: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
                     // InternalEnumRulesTestLanguage.g:81:4: otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )?
                     {
                     otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getExistingKeyword_0_0());
-                        
-                    // InternalEnumRulesTestLanguage.g:85:1: ( (lv_existing_1_0= ruleExistingEnum ) )
-                    // InternalEnumRulesTestLanguage.g:86:1: (lv_existing_1_0= ruleExistingEnum )
+                    				newLeafNode(otherlv_0, grammarAccess.getModelAccess().getExistingKeyword_0_0());
+                    			
+                    // InternalEnumRulesTestLanguage.g:85:4: ( (lv_existing_1_0= ruleExistingEnum ) )
+                    // InternalEnumRulesTestLanguage.g:86:5: (lv_existing_1_0= ruleExistingEnum )
                     {
-                    // InternalEnumRulesTestLanguage.g:86:1: (lv_existing_1_0= ruleExistingEnum )
-                    // InternalEnumRulesTestLanguage.g:87:3: lv_existing_1_0= ruleExistingEnum
+                    // InternalEnumRulesTestLanguage.g:86:5: (lv_existing_1_0= ruleExistingEnum )
+                    // InternalEnumRulesTestLanguage.g:87:6: lv_existing_1_0= ruleExistingEnum
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_4);
                     lv_existing_1_0=ruleExistingEnum();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"existing",
-                            		lv_existing_1_0, 
-                            		"org.eclipse.xtext.enumrules.EnumRulesTestLanguage.ExistingEnum");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"existing",
+                    							lv_existing_1_0,
+                    							"org.eclipse.xtext.enumrules.EnumRulesTestLanguage.ExistingEnum");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
 
                     }
 
-                    // InternalEnumRulesTestLanguage.g:103:2: (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )?
+                    // InternalEnumRulesTestLanguage.g:104:4: (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -200,37 +202,37 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     switch (alt1) {
                         case 1 :
-                            // InternalEnumRulesTestLanguage.g:103:4: otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) )
+                            // InternalEnumRulesTestLanguage.g:105:5: otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) )
                             {
                             otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
-                                	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0());
-                                
-                            // InternalEnumRulesTestLanguage.g:107:1: ( (lv_generated_3_0= ruleGeneratedEnum ) )
-                            // InternalEnumRulesTestLanguage.g:108:1: (lv_generated_3_0= ruleGeneratedEnum )
+                            					newLeafNode(otherlv_2, grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0());
+                            				
+                            // InternalEnumRulesTestLanguage.g:109:5: ( (lv_generated_3_0= ruleGeneratedEnum ) )
+                            // InternalEnumRulesTestLanguage.g:110:6: (lv_generated_3_0= ruleGeneratedEnum )
                             {
-                            // InternalEnumRulesTestLanguage.g:108:1: (lv_generated_3_0= ruleGeneratedEnum )
-                            // InternalEnumRulesTestLanguage.g:109:3: lv_generated_3_0= ruleGeneratedEnum
+                            // InternalEnumRulesTestLanguage.g:110:6: (lv_generated_3_0= ruleGeneratedEnum )
+                            // InternalEnumRulesTestLanguage.g:111:7: lv_generated_3_0= ruleGeneratedEnum
                             {
-                             
-                            	        newCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0()); 
-                            	    
+
+                            							newCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0());
+                            						
                             pushFollow(FollowSets000.FOLLOW_2);
                             lv_generated_3_0=ruleGeneratedEnum();
 
                             state._fsp--;
 
 
-                            	        if (current==null) {
-                            	            current = createModelElementForParent(grammarAccess.getModelRule());
-                            	        }
-                                   		set(
-                                   			current, 
-                                   			"generated",
-                                    		lv_generated_3_0, 
-                                    		"org.eclipse.xtext.enumrules.EnumRulesTestLanguage.GeneratedEnum");
-                            	        afterParserOrEnumRuleCall();
-                            	    
+                            							if (current==null) {
+                            								current = createModelElementForParent(grammarAccess.getModelRule());
+                            							}
+                            							set(
+                            								current,
+                            								"generated",
+                            								lv_generated_3_0,
+                            								"org.eclipse.xtext.enumrules.EnumRulesTestLanguage.GeneratedEnum");
+                            							afterParserOrEnumRuleCall();
+                            						
 
                             }
 
@@ -250,40 +252,40 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalEnumRulesTestLanguage.g:126:6: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
+                    // InternalEnumRulesTestLanguage.g:131:3: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
                     {
-                    // InternalEnumRulesTestLanguage.g:126:6: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
-                    // InternalEnumRulesTestLanguage.g:126:8: otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) )
+                    // InternalEnumRulesTestLanguage.g:131:3: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
+                    // InternalEnumRulesTestLanguage.g:132:4: otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) )
                     {
                     otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
-                        	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getGeneratedKeyword_1_0());
-                        
-                    // InternalEnumRulesTestLanguage.g:130:1: ( (lv_generated_5_0= ruleGeneratedEnum ) )
-                    // InternalEnumRulesTestLanguage.g:131:1: (lv_generated_5_0= ruleGeneratedEnum )
+                    				newLeafNode(otherlv_4, grammarAccess.getModelAccess().getGeneratedKeyword_1_0());
+                    			
+                    // InternalEnumRulesTestLanguage.g:136:4: ( (lv_generated_5_0= ruleGeneratedEnum ) )
+                    // InternalEnumRulesTestLanguage.g:137:5: (lv_generated_5_0= ruleGeneratedEnum )
                     {
-                    // InternalEnumRulesTestLanguage.g:131:1: (lv_generated_5_0= ruleGeneratedEnum )
-                    // InternalEnumRulesTestLanguage.g:132:3: lv_generated_5_0= ruleGeneratedEnum
+                    // InternalEnumRulesTestLanguage.g:137:5: (lv_generated_5_0= ruleGeneratedEnum )
+                    // InternalEnumRulesTestLanguage.g:138:6: lv_generated_5_0= ruleGeneratedEnum
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_generated_5_0=ruleGeneratedEnum();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"generated",
-                            		lv_generated_5_0, 
-                            		"org.eclipse.xtext.enumrules.EnumRulesTestLanguage.GeneratedEnum");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"generated",
+                    							lv_generated_5_0,
+                    							"org.eclipse.xtext.enumrules.EnumRulesTestLanguage.GeneratedEnum");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -302,13 +304,15 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -317,7 +321,7 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleExistingEnum"
-    // InternalEnumRulesTestLanguage.g:156:1: ruleExistingEnum returns [Enumerator current=null] : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) ;
+    // InternalEnumRulesTestLanguage.g:160:1: ruleExistingEnum returns [Enumerator current=null] : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) ;
     public final Enumerator ruleExistingEnum() throws RecognitionException {
         Enumerator current = null;
 
@@ -325,12 +329,14 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
         Token enumLiteral_1=null;
         Token enumLiteral_2=null;
 
-         enterRule(); 
+
+        	enterRule();
+
         try {
-            // InternalEnumRulesTestLanguage.g:158:28: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) )
-            // InternalEnumRulesTestLanguage.g:159:1: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
+            // InternalEnumRulesTestLanguage.g:166:2: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) )
+            // InternalEnumRulesTestLanguage.g:167:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
             {
-            // InternalEnumRulesTestLanguage.g:159:1: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
+            // InternalEnumRulesTestLanguage.g:167:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
             int alt3=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -357,16 +363,16 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt3) {
                 case 1 :
-                    // InternalEnumRulesTestLanguage.g:159:2: (enumLiteral_0= 'SameName' )
+                    // InternalEnumRulesTestLanguage.g:168:3: (enumLiteral_0= 'SameName' )
                     {
-                    // InternalEnumRulesTestLanguage.g:159:2: (enumLiteral_0= 'SameName' )
-                    // InternalEnumRulesTestLanguage.g:159:4: enumLiteral_0= 'SameName'
+                    // InternalEnumRulesTestLanguage.g:168:3: (enumLiteral_0= 'SameName' )
+                    // InternalEnumRulesTestLanguage.g:169:4: enumLiteral_0= 'SameName'
                     {
                     enumLiteral_0=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
-                            current = grammarAccess.getExistingEnumAccess().getSameNameEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_0, grammarAccess.getExistingEnumAccess().getSameNameEnumLiteralDeclaration_0()); 
-                        
+                    				current = grammarAccess.getExistingEnumAccess().getSameNameEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_0, grammarAccess.getExistingEnumAccess().getSameNameEnumLiteralDeclaration_0());
+                    			
 
                     }
 
@@ -374,16 +380,16 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalEnumRulesTestLanguage.g:165:6: (enumLiteral_1= 'overridden' )
+                    // InternalEnumRulesTestLanguage.g:176:3: (enumLiteral_1= 'overridden' )
                     {
-                    // InternalEnumRulesTestLanguage.g:165:6: (enumLiteral_1= 'overridden' )
-                    // InternalEnumRulesTestLanguage.g:165:8: enumLiteral_1= 'overridden'
+                    // InternalEnumRulesTestLanguage.g:176:3: (enumLiteral_1= 'overridden' )
+                    // InternalEnumRulesTestLanguage.g:177:4: enumLiteral_1= 'overridden'
                     {
                     enumLiteral_1=(Token)match(input,14,FollowSets000.FOLLOW_2); 
 
-                            current = grammarAccess.getExistingEnumAccess().getOverriddenLiteralEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_1, grammarAccess.getExistingEnumAccess().getOverriddenLiteralEnumLiteralDeclaration_1()); 
-                        
+                    				current = grammarAccess.getExistingEnumAccess().getOverriddenLiteralEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_1, grammarAccess.getExistingEnumAccess().getOverriddenLiteralEnumLiteralDeclaration_1());
+                    			
 
                     }
 
@@ -391,16 +397,16 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 3 :
-                    // InternalEnumRulesTestLanguage.g:171:6: (enumLiteral_2= 'DifferentLiteral' )
+                    // InternalEnumRulesTestLanguage.g:184:3: (enumLiteral_2= 'DifferentLiteral' )
                     {
-                    // InternalEnumRulesTestLanguage.g:171:6: (enumLiteral_2= 'DifferentLiteral' )
-                    // InternalEnumRulesTestLanguage.g:171:8: enumLiteral_2= 'DifferentLiteral'
+                    // InternalEnumRulesTestLanguage.g:184:3: (enumLiteral_2= 'DifferentLiteral' )
+                    // InternalEnumRulesTestLanguage.g:185:4: enumLiteral_2= 'DifferentLiteral'
                     {
                     enumLiteral_2=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
-                            current = grammarAccess.getExistingEnumAccess().getDifferentNameEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_2, grammarAccess.getExistingEnumAccess().getDifferentNameEnumLiteralDeclaration_2()); 
-                        
+                    				current = grammarAccess.getExistingEnumAccess().getDifferentNameEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_2, grammarAccess.getExistingEnumAccess().getDifferentNameEnumLiteralDeclaration_2());
+                    			
 
                     }
 
@@ -413,13 +419,15 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -428,19 +436,21 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleGeneratedEnum"
-    // InternalEnumRulesTestLanguage.g:181:1: ruleGeneratedEnum returns [Enumerator current=null] : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) ;
+    // InternalEnumRulesTestLanguage.g:195:1: ruleGeneratedEnum returns [Enumerator current=null] : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) ;
     public final Enumerator ruleGeneratedEnum() throws RecognitionException {
         Enumerator current = null;
 
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
 
-         enterRule(); 
+
+        	enterRule();
+
         try {
-            // InternalEnumRulesTestLanguage.g:183:28: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) )
-            // InternalEnumRulesTestLanguage.g:184:1: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
+            // InternalEnumRulesTestLanguage.g:201:2: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) )
+            // InternalEnumRulesTestLanguage.g:202:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
             {
-            // InternalEnumRulesTestLanguage.g:184:1: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
+            // InternalEnumRulesTestLanguage.g:202:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -458,16 +468,16 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt4) {
                 case 1 :
-                    // InternalEnumRulesTestLanguage.g:184:2: (enumLiteral_0= 'SameName' )
+                    // InternalEnumRulesTestLanguage.g:203:3: (enumLiteral_0= 'SameName' )
                     {
-                    // InternalEnumRulesTestLanguage.g:184:2: (enumLiteral_0= 'SameName' )
-                    // InternalEnumRulesTestLanguage.g:184:4: enumLiteral_0= 'SameName'
+                    // InternalEnumRulesTestLanguage.g:203:3: (enumLiteral_0= 'SameName' )
+                    // InternalEnumRulesTestLanguage.g:204:4: enumLiteral_0= 'SameName'
                     {
                     enumLiteral_0=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
-                            current = grammarAccess.getGeneratedEnumAccess().getSameNameEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_0, grammarAccess.getGeneratedEnumAccess().getSameNameEnumLiteralDeclaration_0()); 
-                        
+                    				current = grammarAccess.getGeneratedEnumAccess().getSameNameEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_0, grammarAccess.getGeneratedEnumAccess().getSameNameEnumLiteralDeclaration_0());
+                    			
 
                     }
 
@@ -475,16 +485,16 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalEnumRulesTestLanguage.g:190:6: (enumLiteral_1= 'DifferentLiteral' )
+                    // InternalEnumRulesTestLanguage.g:211:3: (enumLiteral_1= 'DifferentLiteral' )
                     {
-                    // InternalEnumRulesTestLanguage.g:190:6: (enumLiteral_1= 'DifferentLiteral' )
-                    // InternalEnumRulesTestLanguage.g:190:8: enumLiteral_1= 'DifferentLiteral'
+                    // InternalEnumRulesTestLanguage.g:211:3: (enumLiteral_1= 'DifferentLiteral' )
+                    // InternalEnumRulesTestLanguage.g:212:4: enumLiteral_1= 'DifferentLiteral'
                     {
                     enumLiteral_1=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
-                            current = grammarAccess.getGeneratedEnumAccess().getDifferentNameEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_1, grammarAccess.getGeneratedEnumAccess().getDifferentNameEnumLiteralDeclaration_1()); 
-                        
+                    				current = grammarAccess.getGeneratedEnumAccess().getDifferentNameEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_1, grammarAccess.getGeneratedEnumAccess().getDifferentNameEnumLiteralDeclaration_1());
+                    			
 
                     }
 
@@ -497,13 +507,15 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
