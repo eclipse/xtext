@@ -58,20 +58,20 @@
 			<and>
 				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
 				<with variable="activeEditor">
-					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-						value="org.eclipse.xtext.xbase.Xtype" 
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xtext.xbase.Xtype"
 						forcePluginActivation="true"/>
-				</with>		
+				</with>
 			</and>
 		</definition>
 		<definition id="org.eclipse.xtext.xbase.Xtype.XtextEditor.opened">
 			<and>
 				<reference definitionId="isXtextEditorActive"/>
 				<with variable="activeEditor">
-					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-						value="org.eclipse.xtext.xbase.Xtype" 
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xtext.xbase.Xtype"
 						forcePluginActivation="true"/>
-				</with>		
+				</with>
 			</and>
 		</definition>
 	</extension>
@@ -154,7 +154,7 @@
 		</menuContribution>
 		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
-			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.xtext.xbase.Xtype.Editor.opened" />
@@ -170,7 +170,7 @@
 			</command>
 		</menuContribution>
 		<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
-			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
 					<and>
@@ -262,20 +262,20 @@
 			<and>
 				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
 				<with variable="activeEditor">
-					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-						value="org.eclipse.xtext.xbase.Xbase" 
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xtext.xbase.Xbase"
 						forcePluginActivation="true"/>
-				</with>		
+				</with>
 			</and>
 		</definition>
 		<definition id="org.eclipse.xtext.xbase.Xbase.XtextEditor.opened">
 			<and>
 				<reference definitionId="isXtextEditorActive"/>
 				<with variable="activeEditor">
-					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-						value="org.eclipse.xtext.xbase.Xbase" 
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xtext.xbase.Xbase"
 						forcePluginActivation="true"/>
-				</with>		
+				</with>
 			</and>
 		</definition>
 	</extension>
@@ -358,7 +358,7 @@
 		</menuContribution>
 		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
-			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.xtext.xbase.Xbase.Editor.opened" />
@@ -374,7 +374,7 @@
 			</command>
 		</menuContribution>
 		<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
-			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
 					<and>
@@ -645,20 +645,20 @@
 			<and>
 				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
 				<with variable="activeEditor">
-					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-						value="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations" 
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations"
 						forcePluginActivation="true"/>
-				</with>		
+				</with>
 			</and>
 		</definition>
 		<definition id="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations.XtextEditor.opened">
 			<and>
 				<reference definitionId="isXtextEditorActive"/>
 				<with variable="activeEditor">
-					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-						value="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations" 
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations"
 						forcePluginActivation="true"/>
-				</with>		
+				</with>
 			</and>
 		</definition>
 	</extension>
@@ -741,7 +741,7 @@
 		</menuContribution>
 		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
-			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations.Editor.opened" />
@@ -757,7 +757,7 @@
 			</command>
 		</menuContribution>
 		<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
-			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
 					<and>
