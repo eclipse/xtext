@@ -3029,4 +3029,18 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 			"}");
 		helper.assertNoIssues(file);
 	}
+	
+	@Test public void testOverridingBug515801() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo implements int {"+
+					"override void doSth(Object obj){ "+
+					"}"+
+				"}");
+		List<Issue> issues = helper.validate(clazz);
+		for (Issue issue : issues) {
+			if (issue.getMessage() != null && issue.getMessage().contains("Error executing EValidator")) {
+				fail(issue.getMessage());
+			}
+		}
+	}
 }
