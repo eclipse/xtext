@@ -4,36 +4,37 @@
 package org.eclipse.xtext.xbase.testlanguages.bug462047.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.xbase.testlanguages.bug462047.parser.antlr.internal.InternalBug462047LangParser;
 import org.eclipse.xtext.xbase.testlanguages.bug462047.services.Bug462047LangGrammarAccess;
 
-public class Bug462047LangParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class Bug462047LangParser extends AbstractAntlrParser {
+
 	@Inject
 	private Bug462047LangGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.xbase.testlanguages.bug462047.parser.antlr.internal.InternalBug462047LangParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.xbase.testlanguages.bug462047.parser.antlr.internal.InternalBug462047LangParser(stream, getGrammarAccess());
+	protected InternalBug462047LangParser createParser(XtextTokenStream stream) {
+		return new InternalBug462047LangParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Bug462047Root";
 	}
-	
+
 	public Bug462047LangGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(Bug462047LangGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

@@ -1646,10 +1646,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:6061:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // InternalContentAssistFragmentTestLang.g:6061:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalContentAssistFragmentTestLang.g:6381:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // InternalContentAssistFragmentTestLang.g:6381:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // InternalContentAssistFragmentTestLang.g:6061:12: ( '0x' | '0X' )
+            // InternalContentAssistFragmentTestLang.g:6381:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1677,7 +1677,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:6061:13: '0x'
+                    // InternalContentAssistFragmentTestLang.g:6381:13: '0x'
                     {
                     match("0x"); 
 
@@ -1685,7 +1685,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:6061:18: '0X'
+                    // InternalContentAssistFragmentTestLang.g:6381:18: '0X'
                     {
                     match("0X"); 
 
@@ -1695,7 +1695,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:6061:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // InternalContentAssistFragmentTestLang.g:6381:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1733,7 +1733,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // InternalContentAssistFragmentTestLang.g:6061:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalContentAssistFragmentTestLang.g:6381:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1742,10 +1742,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:6061:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalContentAssistFragmentTestLang.g:6381:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // InternalContentAssistFragmentTestLang.g:6061:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalContentAssistFragmentTestLang.g:6381:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1763,7 +1763,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:6061:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // InternalContentAssistFragmentTestLang.g:6381:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1787,7 +1787,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // InternalContentAssistFragmentTestLang.g:6061:84: ( 'l' | 'L' )
+                            // InternalContentAssistFragmentTestLang.g:6381:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1826,11 +1826,11 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:6063:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // InternalContentAssistFragmentTestLang.g:6063:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // InternalContentAssistFragmentTestLang.g:6383:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // InternalContentAssistFragmentTestLang.g:6383:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // InternalContentAssistFragmentTestLang.g:6063:21: ( '0' .. '9' | '_' )*
+            // InternalContentAssistFragmentTestLang.g:6383:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -1879,11 +1879,11 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:6065:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // InternalContentAssistFragmentTestLang.g:6065:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalContentAssistFragmentTestLang.g:6385:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // InternalContentAssistFragmentTestLang.g:6385:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // InternalContentAssistFragmentTestLang.g:6065:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // InternalContentAssistFragmentTestLang.g:6385:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1892,7 +1892,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:6065:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // InternalContentAssistFragmentTestLang.g:6385:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1903,7 +1903,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // InternalContentAssistFragmentTestLang.g:6065:36: ( '+' | '-' )?
+                    // InternalContentAssistFragmentTestLang.g:6385:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1936,7 +1936,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:6065:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalContentAssistFragmentTestLang.g:6385:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -1948,7 +1948,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:6065:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // InternalContentAssistFragmentTestLang.g:6385:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -1972,7 +1972,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:6065:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // InternalContentAssistFragmentTestLang.g:6385:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2005,10 +2005,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:6067:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // InternalContentAssistFragmentTestLang.g:6067:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalContentAssistFragmentTestLang.g:6387:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // InternalContentAssistFragmentTestLang.g:6387:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // InternalContentAssistFragmentTestLang.g:6067:11: ( '^' )?
+            // InternalContentAssistFragmentTestLang.g:6387:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2017,7 +2017,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:6067:11: '^'
+                    // InternalContentAssistFragmentTestLang.g:6387:11: '^'
                     {
                     match('^'); 
 
@@ -2035,7 +2035,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalContentAssistFragmentTestLang.g:6067:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalContentAssistFragmentTestLang.g:6387:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2084,10 +2084,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:6069:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // InternalContentAssistFragmentTestLang.g:6069:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalContentAssistFragmentTestLang.g:6389:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // InternalContentAssistFragmentTestLang.g:6389:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // InternalContentAssistFragmentTestLang.g:6069:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalContentAssistFragmentTestLang.g:6389:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2105,10 +2105,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:6069:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // InternalContentAssistFragmentTestLang.g:6389:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // InternalContentAssistFragmentTestLang.g:6069:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:6389:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2124,7 +2124,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:6069:21: '\\\\' .
+                    	    // InternalContentAssistFragmentTestLang.g:6389:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2132,7 +2132,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalContentAssistFragmentTestLang.g:6069:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalContentAssistFragmentTestLang.g:6389:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2152,7 +2152,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalContentAssistFragmentTestLang.g:6069:44: ( '\"' )?
+                    // InternalContentAssistFragmentTestLang.g:6389:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2161,7 +2161,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:6069:44: '\"'
+                            // InternalContentAssistFragmentTestLang.g:6389:44: '\"'
                             {
                             match('\"'); 
 
@@ -2174,10 +2174,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:6069:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // InternalContentAssistFragmentTestLang.g:6389:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // InternalContentAssistFragmentTestLang.g:6069:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:6389:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2193,7 +2193,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:6069:55: '\\\\' .
+                    	    // InternalContentAssistFragmentTestLang.g:6389:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2201,7 +2201,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalContentAssistFragmentTestLang.g:6069:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalContentAssistFragmentTestLang.g:6389:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2221,7 +2221,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalContentAssistFragmentTestLang.g:6069:79: ( '\\'' )?
+                    // InternalContentAssistFragmentTestLang.g:6389:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2230,7 +2230,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:6069:79: '\\''
+                            // InternalContentAssistFragmentTestLang.g:6389:79: '\\''
                             {
                             match('\''); 
 
@@ -2261,12 +2261,12 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:6071:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalContentAssistFragmentTestLang.g:6071:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalContentAssistFragmentTestLang.g:6391:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalContentAssistFragmentTestLang.g:6391:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalContentAssistFragmentTestLang.g:6071:24: ( options {greedy=false; } : . )*
+            // InternalContentAssistFragmentTestLang.g:6391:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2291,7 +2291,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:6071:52: .
+            	    // InternalContentAssistFragmentTestLang.g:6391:52: .
             	    {
             	    matchAny(); 
 
@@ -2321,12 +2321,12 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:6073:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalContentAssistFragmentTestLang.g:6073:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalContentAssistFragmentTestLang.g:6393:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalContentAssistFragmentTestLang.g:6393:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalContentAssistFragmentTestLang.g:6073:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalContentAssistFragmentTestLang.g:6393:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2339,7 +2339,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:6073:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalContentAssistFragmentTestLang.g:6393:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2359,7 +2359,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalContentAssistFragmentTestLang.g:6073:40: ( ( '\\r' )? '\\n' )?
+            // InternalContentAssistFragmentTestLang.g:6393:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2368,9 +2368,9 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:6073:41: ( '\\r' )? '\\n'
+                    // InternalContentAssistFragmentTestLang.g:6393:41: ( '\\r' )? '\\n'
                     {
-                    // InternalContentAssistFragmentTestLang.g:6073:41: ( '\\r' )?
+                    // InternalContentAssistFragmentTestLang.g:6393:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2379,7 +2379,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:6073:41: '\\r'
+                            // InternalContentAssistFragmentTestLang.g:6393:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2411,10 +2411,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:6075:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalContentAssistFragmentTestLang.g:6075:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalContentAssistFragmentTestLang.g:6395:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalContentAssistFragmentTestLang.g:6395:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalContentAssistFragmentTestLang.g:6075:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalContentAssistFragmentTestLang.g:6395:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2468,8 +2468,8 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:6077:16: ( . )
-            // InternalContentAssistFragmentTestLang.g:6077:18: .
+            // InternalContentAssistFragmentTestLang.g:6397:16: ( . )
+            // InternalContentAssistFragmentTestLang.g:6397:18: .
             {
             matchAny(); 
 
