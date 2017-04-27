@@ -8,7 +8,6 @@
 package org.eclipse.xtext.generator.trace.node;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend.lib.annotations.EqualsHashCode;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
 import org.eclipse.xtext.util.Strings;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author Sven Efftinge - Initial contribution and API
  */
 @Accessors
-@EqualsHashCode
 @SuppressWarnings("all")
 public class NewLineNode implements IGeneratorNode {
   private String lineDelimiter;
@@ -67,35 +65,5 @@ public class NewLineNode implements IGeneratorNode {
   
   public void setIfNotEmpty(final boolean ifNotEmpty) {
     this.ifNotEmpty = ifNotEmpty;
-  }
-  
-  @Override
-  @Pure
-  public boolean equals(final Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    NewLineNode other = (NewLineNode) obj;
-    if (this.lineDelimiter == null) {
-      if (other.lineDelimiter != null)
-        return false;
-    } else if (!this.lineDelimiter.equals(other.lineDelimiter))
-      return false;
-    if (other.ifNotEmpty != this.ifNotEmpty)
-      return false;
-    return true;
-  }
-  
-  @Override
-  @Pure
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((this.lineDelimiter== null) ? 0 : this.lineDelimiter.hashCode());
-    result = prime * result + (this.ifNotEmpty ? 1231 : 1237);
-    return result;
   }
 }

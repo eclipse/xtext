@@ -8,14 +8,12 @@
 package org.eclipse.xtext.generator.trace.node
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.EqualsHashCode
 import org.eclipse.xtext.util.Strings
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @Accessors
-@EqualsHashCode
 class TextNode implements IGeneratorNode {
 	
 	CharSequence text

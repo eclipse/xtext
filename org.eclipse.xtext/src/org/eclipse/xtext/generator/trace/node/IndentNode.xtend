@@ -8,13 +8,11 @@
 package org.eclipse.xtext.generator.trace.node
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.EqualsHashCode
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @Accessors
-@EqualsHashCode
 class IndentNode extends CompositeGeneratorNode {
 	
 	String indentationString
