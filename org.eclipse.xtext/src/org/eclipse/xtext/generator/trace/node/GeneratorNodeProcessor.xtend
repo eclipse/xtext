@@ -77,6 +77,12 @@ class GeneratorNodeProcessor {
 	 * Indent nodes apply indentation between newline and content of its children.
 	 */
 	protected def dispatch void doProcess(IndentNode node, Context ctx) {
+		// do nothing if the indent node is empty
+		if (node.children.empty) {
+			return;
+		}
+		ctx.pendingIndent = false;
+		ctx.currentLine.append(node.indentationString)
 		try {
 			ctx.currentIndents.push(node.indentationString);
 			doProcessChildren(node, ctx);

@@ -62,13 +62,10 @@ public class GeneratorNodeExtensions {
    * @return an indentation node, using the given indentString, appended as a child on the given parent
    */
   public CompositeGeneratorNode indent(final CompositeGeneratorNode parent, final String indentString) {
-    final TextNode text = new TextNode(indentString);
+    final IndentNode indent = new IndentNode(indentString);
     List<IGeneratorNode> _children = parent.getChildren();
-    _children.add(text);
-    final IndentNode result = new IndentNode(indentString);
-    List<IGeneratorNode> _children_1 = parent.getChildren();
-    _children_1.add(result);
-    return result;
+    _children.add(indent);
+    return indent;
   }
   
   /**

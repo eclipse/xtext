@@ -288,6 +288,12 @@ public class GeneratorNodeProcessor {
    * Indent nodes apply indentation between newline and content of its children.
    */
   protected void _doProcess(final IndentNode node, final GeneratorNodeProcessor.Context ctx) {
+    boolean _isEmpty = node.getChildren().isEmpty();
+    if (_isEmpty) {
+      return;
+    }
+    ctx.pendingIndent = false;
+    ctx.currentLine().append(node.getIndentationString());
     try {
       ctx.currentIndents.push(node.getIndentationString());
       this.doProcessChildren(node, ctx);

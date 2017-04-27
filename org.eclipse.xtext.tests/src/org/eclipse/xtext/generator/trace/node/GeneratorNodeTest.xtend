@@ -45,6 +45,19 @@ class GeneratorNodeTest {
 			}'''.toString, result.traceRegion.toString)
 	}
 	
+	@Test def void testEmptyIndent() {
+		val root = loc(0)
+		var node = root.trace.append("Hallo").appendNewLine;
+		node.indent;
+		node.append("noindent").appendNewLine
+
+		val processor = new GeneratorNodeProcessor()
+		Assert.assertEquals('''
+			Hallo
+			noindent
+		'''.toString,processor.process(node).toString)
+	}
+	
 	
 	@Test def void testTemplateProcessing() {
 		val root = loc(0)

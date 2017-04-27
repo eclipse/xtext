@@ -68,6 +68,21 @@ public class GeneratorNodeTest {
   }
   
   @Test
+  public void testEmptyIndent() {
+    final LocationData root = this.loc(0);
+    CompositeGeneratorNode node = this.exts.appendNewLine(this.exts.append(this.exts.trace(root), "Hallo"));
+    this.exts.indent(node);
+    this.exts.appendNewLine(this.exts.append(node, "noindent"));
+    final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Hallo");
+    _builder.newLine();
+    _builder.append("noindent");
+    _builder.newLine();
+    Assert.assertEquals(_builder.toString(), processor.process(node).toString());
+  }
+  
+  @Test
   public void testTemplateProcessing() {
     final LocationData root = this.loc(0);
     CompositeGeneratorNode _trace = this.exts.trace(root);

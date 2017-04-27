@@ -51,11 +51,9 @@ class GeneratorNodeExtensions {
 	 * @return an indentation node, using the given indentString, appended as a child on the given parent
 	 */
 	def CompositeGeneratorNode indent(CompositeGeneratorNode parent, String indentString) {
-		val text = new TextNode(indentString)
-		parent.children += text
-		val result =  new IndentNode(indentString)
-		parent.children += result
-		return result
+		val indent =  new IndentNode(indentString)
+		parent.children += indent
+		return indent
 	}
 	
 	/**
