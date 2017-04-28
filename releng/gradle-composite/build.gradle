@@ -28,7 +28,7 @@ def doGenerateInProject(File file) {
     def prefsFile = new File(file, '.settings/org.eclipse.buildship.core.prefs')
     if (forceGeneration||!prefsFile.exists()) {
         logger.quiet("generating buildship prefs for " + file.path)
-        prefsFile.text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir="+rootDir+"\nproject.path=\\:"+file.name+"\n"
+        prefsFile.text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir="+rootDir.absolutePath.replace('\\','/')+"\nproject.path=\\:"+file.name+"\n"
     }       
     file.listFiles().each { File fx -> 
         if (fx.isDirectory() && new File(fx, "build.gradle").exists()) {
@@ -38,7 +38,7 @@ def doGenerateInProject(File file) {
             prefsFile = new File(fx, '.settings/org.eclipse.buildship.core.prefs')
             if (forceGeneration||!prefsFile.exists()) {
                 logger.quiet("generating buildship prefs for " + fx.path)
-                prefsFile.text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir="+rootDir+"\nproject.path=\\:"+fx.name+"\n"
+                prefsFile.text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir="+rootDir.absolutePath.replace('\\','/')+"\nproject.path=\\:"+fx.name+"\n"
             }
         }
 
