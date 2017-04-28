@@ -11,6 +11,9 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
+ * A composite node does not contribute any output directly, but only through its children.
+ * Thus it is an <em>inner</em> node of the code generator tree.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 @Accessors

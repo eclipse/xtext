@@ -14,6 +14,8 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtend2.lib.StringConcatenationClient.TargetStringConcatenation
 
 /**
+ * A template node applies a {@link StringConcatenationClient} to compute its children.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 class TemplateNode extends CompositeGeneratorNode implements TargetStringConcatenation {
@@ -31,6 +33,12 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 	override append(Object object, String indentation) {
 		if (indentation.length > 0) {
 			val before = currentParent
+			// The first line of an indented template is prepended with an explicit indentation string.
+			// We need to revert this because this case is already handled by the GeneratorNodeProcessor.
+			val lastChild = before.children.last
+			if (lastChild instanceof TextNode && (lastChild as TextNode).text == indentation) {
+				before.children.remove(before.children.size - 1)
+			}
 			try {
 				currentParent = new IndentNode(indentation)
 				before.children += currentParent
@@ -102,17 +110,16 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 		this.nodeFactory.appendNewLineIfNotEmpty(currentParent)
 	}
 	
-	//
 	override charAt(int index) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		throw new UnsupportedOperationException
 	}
 
 	override length() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		throw new UnsupportedOperationException
 	}
 
 	override subSequence(int start, int end) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		throw new UnsupportedOperationException
 	}
 
 }

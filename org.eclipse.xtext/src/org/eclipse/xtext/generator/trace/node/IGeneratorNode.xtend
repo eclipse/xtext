@@ -9,7 +9,7 @@ package org.eclipse.xtext.generator.trace.node
 
 /**
  * 
- * A node in the code generator graph
+ * A node in the code generator tree.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */

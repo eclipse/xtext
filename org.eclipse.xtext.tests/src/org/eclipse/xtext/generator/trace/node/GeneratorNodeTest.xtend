@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace.node
 
+import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.generator.trace.LocationData
 import org.eclipse.xtext.generator.trace.SourceRelativeURI
@@ -25,10 +26,10 @@ class GeneratorNodeTest {
 		var node = root.trace
 			.append('notindented').appendNewLine
 		node.indent.trace(loc(1))
-			.append("indented1").appendNewLine
-			.append("indented2")
-		node.appendNewLine.append("dedented")
-		val processor = new GeneratorNodeProcessor()
+			.append('indented1').appendNewLine
+			.append('indented2')
+		node.appendNewLine.append('dedented')
+		val processor = new GeneratorNodeProcessor
 		val result = processor.process(node)
 		Assert.assertEquals('''
 			notindented
@@ -45,15 +46,28 @@ class GeneratorNodeTest {
 			}'''.toString, result.traceRegion.toString)
 	}
 	
+	@Test def void testEmptyIndent() {
+		val root = loc(0)
+		var node = root.trace.append('Hallo').appendNewLine
+		node.indent
+		node.append('noindent').appendNewLine
+
+		val processor = new GeneratorNodeProcessor
+		Assert.assertEquals('''
+			Hallo
+			noindent
+		'''.toString, processor.process(node).toString)
+	}
+	
 	
 	@Test def void testTemplateProcessing() {
 		val root = loc(0)
-		var node = root.trace
+		val node = root.trace
 			.appendTemplate('''
 				«someCodeGen(2)»
 			''')
 			
-		val processor = new GeneratorNodeProcessor()
+		val processor = new GeneratorNodeProcessor
 		val result = processor.process(node)
 		Assert.assertEquals(someCodeGen_noTrace(2).toString, result.toString)
 		Assert.assertEquals('''
@@ -77,18 +91,59 @@ class GeneratorNodeTest {
 	
 	def StringConcatenationClient someCodeGen(int n) '''
 		«FOR i : 0..<n»
-			before «loc(10+i).trace.append("Hello")» after
+			before «loc(10+i).trace.append('Hello')» after
 			  «someCodeGen(n-1)»
 		«ENDFOR»
 	'''
 	def String someCodeGen_noTrace(int n) '''
 		«FOR i : 0..<n»
-			before «"Hello"» after
+			before «'Hello'» after
 			  «someCodeGen_noTrace(n-1)»
 		«ENDFOR»
 	'''
 	
 	def loc(int idx) {
-		new LocationData(idx, 100-idx, 0, 0, new SourceRelativeURI("foo/mymodel.dsl"))
+		new LocationData(idx, 100-idx, 0, 0, new SourceRelativeURI('foo/mymodel.dsl'))
 	}
+	
+	@Test def void testAppendVariants() {
+		val node = new CompositeGeneratorNode
+		val String string = '''* a simple string'''
+		node.append(string)
+		node.appendNewLine
+		val StringConcatenation stringConcat1 = '''
+			* a multi-line string concatenation embedding
+			  	«string»
+		'''
+		node.append(stringConcat1)
+		val StringConcatenationClient client = '''
+			* a string concatentation client embedding
+			  	«stringConcat1»
+		'''
+		node.append(client)
+		val nestedNode = new CompositeGeneratorNode
+		val StringConcatenation stringConcat2 = '''
+			* I can even embed
+			  	«client»
+			  in a string concatenation
+		'''
+		nestedNode.append(stringConcat2)
+		node.append(nestedNode)
+
+		val processor = new GeneratorNodeProcessor
+		Assert.assertEquals('''
+			* a simple string
+			* a multi-line string concatenation embedding
+			  	* a simple string
+			* a string concatentation client embedding
+			  	* a multi-line string concatenation embedding
+			  	  	* a simple string
+			* I can even embed
+			  	* a string concatentation client embedding
+			  	  	* a multi-line string concatenation embedding
+			  	  	  	* a simple string
+			  in a string concatenation
+		'''.toString, processor.process(node).toString)
+	}
+	
 }
