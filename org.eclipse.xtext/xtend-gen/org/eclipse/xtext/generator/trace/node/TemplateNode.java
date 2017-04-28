@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.generator.trace.node;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
@@ -26,6 +27,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
+ * A template node applies a {@link StringConcatenationClient} to compute its children.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
@@ -47,6 +50,12 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
     boolean _greaterThan = (_length > 0);
     if (_greaterThan) {
       final CompositeGeneratorNode before = this.currentParent;
+      final IGeneratorNode lastChild = IterableExtensions.<IGeneratorNode>last(before.getChildren());
+      if (((lastChild instanceof TextNode) && Objects.equal(((TextNode) lastChild).getText(), indentation))) {
+        int _size = before.getChildren().size();
+        int _minus = (_size - 1);
+        before.getChildren().remove(_minus);
+      }
       try {
         IndentNode _indentNode = new IndentNode(indentation);
         this.currentParent = _indentNode;
@@ -151,16 +160,16 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
   
   @Override
   public char charAt(final int index) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    throw new UnsupportedOperationException();
   }
   
   @Override
   public int length() {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    throw new UnsupportedOperationException();
   }
   
   @Override
   public CharSequence subSequence(final int start, final int end) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    throw new UnsupportedOperationException();
   }
 }

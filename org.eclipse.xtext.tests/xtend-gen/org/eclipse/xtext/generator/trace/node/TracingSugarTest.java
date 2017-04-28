@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
@@ -162,16 +163,6 @@ public class TracingSugarTest {
   @Inject
   private ParseHelper<Model> parseHelper;
   
-  private CharSequence generated;
-  
-  private InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess() {
-    @Override
-    public void generateFile(final String fileName, final CharSequence contents) {
-      TracingSugarTest.this.generated = contents;
-      super.generateFile(fileName, contents);
-    }
-  };
-  
   @Test
   public void testCodeGeneration() {
     try {
@@ -186,6 +177,7 @@ public class TracingSugarTest {
       _builder.append("}");
       _builder.newLine();
       final Model root = this.parseHelper.parse(_builder);
+      final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -199,7 +191,8 @@ public class TracingSugarTest {
           }
         }
       };
-      this._myExtensions.generateTracedFile(this.fsa, "foo/bar.txt", root, _client);
+      this._myExtensions.generateTracedFile(fsa, "foo/bar.txt", root, _client);
+      final CharSequence generated = fsa.getTextFiles().get((IFileSystemAccess.DEFAULT_OUTPUT + "foo/bar.txt"));
       StringConcatenation _builder_1 = new StringConcatenation();
       {
         EList<Type> _types = root.getTypes();
@@ -209,8 +202,8 @@ public class TracingSugarTest {
           _builder_1.newLineIfNotEmpty();
         }
       }
-      Assert.assertEquals(_builder_1.toString(), this.generated.toString());
-      final AbstractTraceRegion trace = ((ITraceRegionProvider) this.generated).getTraceRegion();
+      Assert.assertEquals(_builder_1.toString(), generated.toString());
+      final AbstractTraceRegion trace = ((ITraceRegionProvider) generated).getTraceRegion();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("CompletableTraceRegion [myOffset=0, myLength=55] associations={");
       _builder_2.newLine();

@@ -8,7 +8,9 @@
 package org.eclipse.xtext.generator.trace.node
 
 import com.google.inject.Inject
+import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider
 import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingFactory
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property
@@ -17,10 +19,9 @@ import org.eclipse.xtext.linking.lazy.tests.LazyLinkingTestLanguageInjectorProvi
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.Assert
-import org.eclipse.xtext.generator.trace.ITraceRegionProvider
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -46,15 +47,6 @@ class TracingSugarTest {
 	@Inject extension MyExtensions
 	@Inject ParseHelper<Model> parseHelper
 	
-	CharSequence generated
-	
-	InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess() {
-		override generateFile(String fileName, CharSequence contents) {
-			generated = contents
-			super.generateFile(fileName, contents)
-		}
-	};
-	
 	@Test def void testCodeGeneration() {
 		val root = parseHelper.parse('''
 			type String {}
@@ -62,11 +54,13 @@ class TracingSugarTest {
 				String name;
 			}
 		''')
+		val fsa = new InMemoryFileSystemAccess
 		fsa.generateTracedFile('foo/bar.txt', root, '''
 			«FOR t : root.types»
 				«t._generateType»
 			«ENDFOR»
 		''')
+		val generated = fsa.textFiles.get(IFileSystemAccess.DEFAULT_OUTPUT + 'foo/bar.txt')
 		
 		// check the generated string is as expected
 		Assert.assertEquals('''
@@ -130,6 +124,5 @@ class TracingSugarTest {
 	def generateProperty(Property it) '''
 		Property «name» : «type.head.name»
 	'''
-	
 	
 }
