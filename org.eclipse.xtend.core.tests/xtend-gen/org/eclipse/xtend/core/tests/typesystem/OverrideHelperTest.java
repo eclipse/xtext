@@ -256,4 +256,26 @@ public class OverrideHelperTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void checkFindOverriddenOperation_05() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.append("class Foo implements int {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override bar(Map<?, ?> map) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.file(_builder.toString());
+      EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(IterableExtensions.<XtendFunction>head(Iterables.<XtendFunction>filter(IterableExtensions.<XtendTypeDeclaration>head(xtendFile.getXtendTypes()).getMembers(), XtendFunction.class)));
+      final JvmOperation operation = ((JvmOperation) _primaryJvmElement);
+      Assert.assertNull(this.overrideHelper.findOverriddenOperation(operation));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
