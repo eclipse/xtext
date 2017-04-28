@@ -125,7 +125,7 @@ public class OverrideHelper {
 		int parameterSize = operation.getParameters().size();
 		List<LightweightTypeReference> superTypes = declaringType.getSuperTypes();
 		for(LightweightTypeReference superType: superTypes) {
-			if (superType instanceof JvmDeclaredType) {
+			if (superType.getType() instanceof JvmDeclaredType) {
 				JvmDeclaredType declaredSuperType = (JvmDeclaredType) superType.getType();
 				if (declaredSuperType != null) {
 					Iterable<JvmFeature> equallyNamedFeatures = declaredSuperType.findAllFeaturesByName(operation.getSimpleName());
