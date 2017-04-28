@@ -83,7 +83,7 @@ public class ContentFormatter implements IContentFormatter {
 	protected TextEdit exec(IXtextDocument document, IRegion region, XtextResource resource) throws Exception {
 		try {
 			IParseResult parseResult = resource.getParseResult();
-			if (parseResult != null) {
+			if (parseResult != null && parseResult.getRootASTElement() != null) {
 				FormatterRequest request = requestProvider.get();
 				initRequest(document, region, resource, request);
 				IFormatter2 formatter = formatterProvider.get();
