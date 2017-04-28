@@ -79,13 +79,12 @@ class GeneratorNodeProcessor {
 	protected def dispatch void doProcess(IndentNode node, Context ctx) {
 		// do nothing if the indent node is empty
 		if (node.children.empty) {
-			return;
+			return
 		}
-		ctx.pendingIndent = false;
-		ctx.currentLine.append(node.indentationString)
 		try {
-			ctx.currentIndents.push(node.indentationString);
-			doProcessChildren(node, ctx);
+			ctx.currentIndents.push(node.indentationString)
+			ctx.pendingIndent = true
+			doProcessChildren(node, ctx)
 		} finally {
 			ctx.currentIndents.pop
 		}

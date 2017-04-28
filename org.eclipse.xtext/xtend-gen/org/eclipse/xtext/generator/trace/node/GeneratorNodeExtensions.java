@@ -113,11 +113,20 @@ public class GeneratorNodeExtensions {
    * @return the given parent node
    */
   public CompositeGeneratorNode append(final CompositeGeneratorNode parent, final Object object) {
-    if ((object != null)) {
-      List<IGeneratorNode> _children = parent.getChildren();
-      String _string = object.toString();
-      TextNode _textNode = new TextNode(_string);
-      _children.add(_textNode);
+    if ((object instanceof StringConcatenationClient)) {
+      this.appendTemplate(parent, ((StringConcatenationClient)object));
+    } else {
+      if ((object instanceof IGeneratorNode)) {
+        List<IGeneratorNode> _children = parent.getChildren();
+        _children.add(((IGeneratorNode)object));
+      } else {
+        if ((object != null)) {
+          List<IGeneratorNode> _children_1 = parent.getChildren();
+          String _string = object.toString();
+          TextNode _textNode = new TextNode(_string);
+          _children_1.add(_textNode);
+        }
+      }
     }
     return parent;
   }

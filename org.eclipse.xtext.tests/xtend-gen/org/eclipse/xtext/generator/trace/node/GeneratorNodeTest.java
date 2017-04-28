@@ -191,4 +191,79 @@ public class GeneratorNodeTest {
     SourceRelativeURI _sourceRelativeURI = new SourceRelativeURI("foo/mymodel.dsl");
     return new LocationData(idx, (100 - idx), 0, 0, _sourceRelativeURI);
   }
+  
+  @Test
+  public void testAppendVariants() {
+    final CompositeGeneratorNode node = new CompositeGeneratorNode();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("* a simple string");
+    final String string = _builder.toString();
+    this.exts.append(node, string);
+    this.exts.appendNewLine(node);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("* a multi-line string concatenation embedding");
+    _builder_1.newLine();
+    _builder_1.append("  \t");
+    _builder_1.append(string, "  \t");
+    _builder_1.newLineIfNotEmpty();
+    final StringConcatenation stringConcat1 = _builder_1;
+    this.exts.append(node, stringConcat1);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("* a string concatentation client embedding");
+        _builder.newLine();
+        _builder.append("  \t");
+        _builder.append(stringConcat1, "  \t");
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    final StringConcatenationClient client = _client;
+    this.exts.append(node, client);
+    final CompositeGeneratorNode nestedNode = new CompositeGeneratorNode();
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("* I can even embed");
+    _builder_2.newLine();
+    _builder_2.append("  \t");
+    _builder_2.append(client, "  \t");
+    _builder_2.newLineIfNotEmpty();
+    _builder_2.append("  ");
+    _builder_2.append("in a string concatenation");
+    _builder_2.newLine();
+    final StringConcatenation stringConcat2 = _builder_2;
+    this.exts.append(nestedNode, stringConcat2);
+    this.exts.append(node, nestedNode);
+    final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();
+    StringConcatenation _builder_3 = new StringConcatenation();
+    _builder_3.append("* a simple string");
+    _builder_3.newLine();
+    _builder_3.append("* a multi-line string concatenation embedding");
+    _builder_3.newLine();
+    _builder_3.append("  \t");
+    _builder_3.append("* a simple string");
+    _builder_3.newLine();
+    _builder_3.append("* a string concatentation client embedding");
+    _builder_3.newLine();
+    _builder_3.append("  \t");
+    _builder_3.append("* a multi-line string concatenation embedding");
+    _builder_3.newLine();
+    _builder_3.append("  \t  \t");
+    _builder_3.append("* a simple string");
+    _builder_3.newLine();
+    _builder_3.append("* I can even embed");
+    _builder_3.newLine();
+    _builder_3.append("  \t");
+    _builder_3.append("* a string concatentation client embedding");
+    _builder_3.newLine();
+    _builder_3.append("  \t  \t");
+    _builder_3.append("* a multi-line string concatenation embedding");
+    _builder_3.newLine();
+    _builder_3.append("  \t  \t  \t");
+    _builder_3.append("* a simple string");
+    _builder_3.newLine();
+    _builder_3.append("  ");
+    _builder_3.append("in a string concatenation");
+    _builder_3.newLine();
+    Assert.assertEquals(_builder_3.toString(), processor.process(node).toString());
+  }
 }

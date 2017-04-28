@@ -292,10 +292,9 @@ public class GeneratorNodeProcessor {
     if (_isEmpty) {
       return;
     }
-    ctx.pendingIndent = false;
-    ctx.currentLine().append(node.getIndentationString());
     try {
       ctx.currentIndents.push(node.getIndentationString());
+      ctx.pendingIndent = true;
       this.doProcessChildren(node, ctx);
     } finally {
       ctx.currentIndents.pop();

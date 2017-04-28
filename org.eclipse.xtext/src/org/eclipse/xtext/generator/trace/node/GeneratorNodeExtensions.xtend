@@ -92,7 +92,11 @@ class GeneratorNodeExtensions {
 	 * @return the given parent node 
 	 */
 	def CompositeGeneratorNode append(CompositeGeneratorNode parent, Object object) {
-		if (object !== null) {
+		if (object instanceof StringConcatenationClient) {
+			appendTemplate(parent, object)
+		} else if (object instanceof IGeneratorNode) {
+			parent.children += object
+		} else if (object !== null) {
 			parent.children += new TextNode(object.toString)
 		}
 		return parent
