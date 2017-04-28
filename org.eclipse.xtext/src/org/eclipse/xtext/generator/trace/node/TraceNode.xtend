@@ -11,6 +11,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.generator.trace.ILocationData
 
 /**
+ * A trace node maps the text generated through its children to a source location.
+ * 
  * @author Sven Efftinge - initial contribution and API
  */
 @Accessors

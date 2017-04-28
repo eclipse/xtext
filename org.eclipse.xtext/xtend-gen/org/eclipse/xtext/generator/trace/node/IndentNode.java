@@ -12,6 +12,9 @@ import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
+ * An indent node prepends the indentation string to each line that is generated through its children
+ * (including the first line).
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 @Accessors

@@ -11,6 +11,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
 
 /**
+ * A text node is a <em>leaf</em> in the code generator tree and produces arbitrary text.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 @Accessors

@@ -29,14 +29,14 @@ class TracingSugar extends GeneratorNodeExtensions {
 	 */
 	def void generateTracedFile(IFileSystemAccess2 fsa, String path, EObject rootTrace, StringConcatenationClient code) {
 		val node = trace(rootTrace, code)
-		generateTracedFile(fsa, path, node);
+		generateTracedFile(fsa, path, node)
 	}
 	
 	/**
 	 * Use to generate a file based on generator node.
 	 */
 	def void generateTracedFile(IFileSystemAccess2 fsa, String path, CompositeGeneratorNode rootNode) {
-		val result = processor.process(rootNode);
+		val result = processor.process(rootNode)
 		fsa.generateFile(path, result)
 	}
 	
@@ -44,7 +44,7 @@ class TracingSugar extends GeneratorNodeExtensions {
 	 * Convenience shorthand for <code>obj.location.trace</code>
 	 */
 	def CompositeGeneratorNode trace(EObject obj) {
-		return obj.location.trace;
+		return obj.location.trace
 	}
 	
 	/**
@@ -60,7 +60,7 @@ class TracingSugar extends GeneratorNodeExtensions {
 	def ILocationData location(EObject obj) {
 		val region = locationProvider.getFullTextRegion(obj)
 		val uri = traceURIConverter.getURIForTrace(obj.eResource)
-		return new LocationData(region as ITextRegionWithLineInformation, uri);
+		return new LocationData(region as ITextRegionWithLineInformation, uri)
 	}
 	
 	/**
@@ -73,7 +73,7 @@ class TracingSugar extends GeneratorNodeExtensions {
 	def ILocationData location(EObject obj, EStructuralFeature feature, int idx) {
 		val region = locationProvider.getFullTextRegion(obj, feature, idx)
 		val uri = traceURIConverter.getURIForTrace(obj.eResource)
-		return new LocationData(region as ITextRegionWithLineInformation, uri);
+		return new LocationData(region as ITextRegionWithLineInformation, uri)
 	}
 	
 }

@@ -14,6 +14,8 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
+ * A new line node is a <em>leaf</em> in the code generator tree and produces line breaks.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 @Accessors

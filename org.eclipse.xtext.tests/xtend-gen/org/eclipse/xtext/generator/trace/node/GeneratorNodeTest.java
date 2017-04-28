@@ -94,7 +94,7 @@ public class GeneratorNodeTest {
         _builder.newLineIfNotEmpty();
       }
     };
-    CompositeGeneratorNode node = this.exts.appendTemplate(_trace, _client);
+    final CompositeGeneratorNode node = this.exts.appendTemplate(_trace, _client);
     final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();
     final GeneratorNodeProcessor.Result result = processor.process(node);
     Assert.assertEquals(this.someCodeGen_noTrace(2).toString(), result.toString());

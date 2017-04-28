@@ -11,6 +11,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
 
 /**
+ * A new line node is a <em>leaf</em> in the code generator tree and produces line breaks.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 @Accessors

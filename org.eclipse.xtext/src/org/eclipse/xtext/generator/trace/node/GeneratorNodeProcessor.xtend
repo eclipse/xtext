@@ -46,7 +46,7 @@ class GeneratorNodeProcessor {
 		AbstractTraceRegion currentRegion = null
 		
 		def StringBuilder currentLine() {
-			return lines.get(currentLineNumber);
+			return lines.get(currentLineNumber)
 		}
 		
 		def int contentLength() {
@@ -65,12 +65,12 @@ class GeneratorNodeProcessor {
 	
 	def Result process(IGeneratorNode root) {
 		val ctx = new Context => [
-			lines = newArrayList(new StringBuilder())
+			lines = newArrayList(new StringBuilder)
 			currentIndents = new ArrayDeque<String>()
 			pendingIndent = true
 		]
 		doProcess(root, ctx)
-		return new Result(ctx.lines.join, ctx.currentRegion);
+		return new Result(ctx.lines.join, ctx.currentRegion)
 	}
 
 	/**
@@ -93,7 +93,7 @@ class GeneratorNodeProcessor {
 	protected def dispatch void doProcess(NewLineNode node, Context ctx) {
 		val trimmedLine = ctx.currentLine.toString.trim
 		if (node.ifNotEmpty && trimmedLine.empty) {
-			ctx.lines.set(ctx.currentLineNumber, new StringBuilder())
+			ctx.lines.set(ctx.currentLineNumber, new StringBuilder)
 			return
 		}
 		ctx.currentLine.append(node.lineDelimiter)
@@ -104,10 +104,10 @@ class GeneratorNodeProcessor {
 	protected def dispatch void doProcess(TextNode node, Context ctx) {
 		val txt = node.text.toString
 		if (txt.empty) {
-			return;
+			return
 		}
 		if (ctx.pendingIndent) {
-			val indentString = new StringBuilder()
+			val indentString = new StringBuilder
 			for (indentationString : ctx.currentIndents) {
 				indentString.append(indentationString)
 			}
@@ -125,10 +125,10 @@ class GeneratorNodeProcessor {
 		val beforeRegion = ctx.currentRegion
 		val newRegion = new CompletableTraceRegion(false, node.sourceLocation, beforeRegion)
 		val offset = ctx.contentLength
-		val startLineNumber = ctx.currentLineNumber;
+		val startLineNumber = ctx.currentLineNumber
 		try {
 			ctx.currentRegion = newRegion
-			doProcessChildren(node, ctx);
+			doProcessChildren(node, ctx)
 		} finally {
 			if (beforeRegion !== null)
 				ctx.currentRegion = beforeRegion

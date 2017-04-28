@@ -10,6 +10,9 @@ package org.eclipse.xtext.generator.trace.node
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
+ * An indent node prepends the indentation string to each line that is generated through its children
+ * (including the first line).
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 @Accessors

@@ -13,6 +13,8 @@ import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
+ * A trace node maps the text generated through its children to a source location.
+ * 
  * @author Sven Efftinge - initial contribution and API
  */
 @Accessors
