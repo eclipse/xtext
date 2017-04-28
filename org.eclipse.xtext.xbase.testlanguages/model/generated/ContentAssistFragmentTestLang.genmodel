@@ -5,7 +5,8 @@
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.12" usedGenPackages="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <genPackages prefix="ContentAssistFragmentTestLang" basePackage="org.eclipse.xtext.xbase.testlanguages"
-      disposableProviderFactory="true" fileExtensions="" ecorePackage="ContentAssistFragmentTestLang.ecore#/">
+      disposableProviderFactory="true" fileExtensions="contentassistfragmenttestlang"
+      ecorePackage="ContentAssistFragmentTestLang.ecore#/">
     <genClasses ecoreClass="ContentAssistFragmentTestLang.ecore#//ContentAssistFragmentTestLanguageRoot">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistFragmentTestLang.ecore#//ContentAssistFragmentTestLanguageRoot/expression"/>
     </genClasses>
