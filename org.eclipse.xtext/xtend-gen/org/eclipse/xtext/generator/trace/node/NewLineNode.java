@@ -23,13 +23,19 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class NewLineNode implements IGeneratorNode {
   private String lineDelimiter;
   
+  /**
+   * When this is set to {@code true}, the preceding line is removed if it contains only whitespace.
+   */
   private boolean ifNotEmpty;
   
   public NewLineNode(final String lineDelimiter) {
-    this.lineDelimiter = lineDelimiter;
+    this(lineDelimiter, false);
   }
   
   public NewLineNode(final String lineDelimiter, final boolean ifNotEmpty) {
+    if ((lineDelimiter == null)) {
+      throw new NullPointerException();
+    }
     this.lineDelimiter = lineDelimiter;
     this.ifNotEmpty = ifNotEmpty;
   }

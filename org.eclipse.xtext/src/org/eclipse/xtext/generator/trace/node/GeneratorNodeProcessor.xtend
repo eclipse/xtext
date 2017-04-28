@@ -41,7 +41,7 @@ class GeneratorNodeProcessor {
 	
 	@Accessors protected static class Context {
 		List<StringBuilder> lines
-		Deque<String> currentIndents
+		Deque<IndentNode> currentIndents
 		boolean pendingIndent
 		AbstractTraceRegion currentRegion = null
 		
@@ -52,7 +52,7 @@ class GeneratorNodeProcessor {
 		def int contentLength() {
 			val contentLength = lines.fold(0) [ $0 + $1.length ]
 			if (pendingIndent) {
-				return contentLength + currentIndents.fold(0) [ $0 + $1.length ] 
+				return contentLength + currentIndents.fold(0) [ $0 + $1.indentationString.length ] 
 			} else {
 				return contentLength
 			}
@@ -66,7 +66,7 @@ class GeneratorNodeProcessor {
 	def Result process(IGeneratorNode root) {
 		val ctx = new Context => [
 			lines = newArrayList(new StringBuilder)
-			currentIndents = new ArrayDeque<String>()
+			currentIndents = new ArrayDeque
 			pendingIndent = true
 		]
 		doProcess(root, ctx)
@@ -74,51 +74,52 @@ class GeneratorNodeProcessor {
 	}
 
 	/**
-	 * Indent nodes apply indentation between newline and content of its children.
+	 * An indent node prepends indentation to each line of its children.
 	 */
 	protected def dispatch void doProcess(IndentNode node, Context ctx) {
-		// do nothing if the indent node is empty
-		if (node.children.empty) {
-			return
+		if (node.indentImmediately && !ctx.pendingIndent) {
+			ctx.currentLine.append(node.indentationString)
 		}
-		try {
-			ctx.currentIndents.push(node.indentationString)
-			ctx.pendingIndent = true
-			doProcessChildren(node, ctx)
-		} finally {
-			ctx.currentIndents.pop
+		if (!node.children.empty) {
+			try {
+				ctx.currentIndents.push(node)
+				doProcessChildren(node, ctx)
+			} finally {
+				ctx.currentIndents.pop
+			}
 		}
 	}
 	
 	protected def dispatch void doProcess(NewLineNode node, Context ctx) {
-		val trimmedLine = ctx.currentLine.toString.trim
-		if (node.ifNotEmpty && trimmedLine.empty) {
+		if (node.ifNotEmpty && !ctx.currentLine.hasContent) {
 			ctx.lines.set(ctx.currentLineNumber, new StringBuilder)
-			return
+		} else {
+			if (ctx.pendingIndent)
+				handlePendingIndent(ctx, true)
+			ctx.currentLine.append(node.lineDelimiter)
+			ctx.lines.add(new StringBuilder)
+			ctx.pendingIndent = true
 		}
-		ctx.currentLine.append(node.lineDelimiter)
-		ctx.lines.add(new StringBuilder)
-		ctx.pendingIndent = true
 	}
 
 	protected def dispatch void doProcess(TextNode node, Context ctx) {
-		val txt = node.text.toString
-		if (txt.empty) {
-			return
+		if (!node.text.nullOrEmpty) {
+			if (ctx.pendingIndent)
+				handlePendingIndent(ctx, false)
+			ctx.currentLine.append(node.text)
 		}
-		if (ctx.pendingIndent) {
-			val indentString = new StringBuilder
-			for (indentationString : ctx.currentIndents) {
-				indentString.append(indentationString)
-			}
-			ctx.currentLine.insert(0, indentString)
-			ctx.pendingIndent = false
-		}
-		ctx.currentLine.append(node.text)
 	}
 	
-	protected def dispatch void doProcess(CompositeGeneratorNode node, Context ctx) {
-		doProcessChildren(node, ctx)
+	protected def void handlePendingIndent(Context ctx, boolean endOfLine) {
+		val indentString = new StringBuilder
+		for (indentNode : ctx.currentIndents) {
+			if (indentNode.indentEmptyLines || !endOfLine)
+				indentString.append(indentNode.indentationString)
+		}
+		if (indentString.length > 0) {
+			ctx.currentLine.insert(0, indentString)
+		}
+		ctx.pendingIndent = false
 	}
 
 	protected def dispatch void doProcess(TraceNode node, Context ctx) {
@@ -135,6 +136,10 @@ class GeneratorNodeProcessor {
 			newRegion.complete(offset, ctx.contentLength - offset, startLineNumber, ctx.currentLineNumber)
 		}
 	}
+	
+	protected def dispatch void doProcess(CompositeGeneratorNode node, Context ctx) {
+		doProcessChildren(node, ctx)
+	}
 
 	protected def void doProcessChildren(CompositeGeneratorNode node, Context ctx) {
 		for (child : node.children) {
@@ -142,6 +147,18 @@ class GeneratorNodeProcessor {
 		}
 	}
 
+	protected static def boolean hasContent(CharSequence s) {
+		for (var i = 0; i < s.length; i++) {
+			if (!Character.isWhitespace(s.charAt(i)))
+				return true
+		}
+		return false
+	}
+	
+	protected static def boolean isNullOrEmpty(CharSequence s) {
+		s === null || s.length == 0
+	}
+	
 	/**
 	 * Used to avoid multi-pass processing, when constructing a trace region tree.
 	 * 

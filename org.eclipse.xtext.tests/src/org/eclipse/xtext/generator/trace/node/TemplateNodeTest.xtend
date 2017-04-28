@@ -60,13 +60,6 @@ class TemplateNodeTest {
 		''')
 	}
 	
-	@Test def void testSeparatorLoop() {
-		val strings = #['a', 'b', 'c']
-		assertEquals('''
-			«FOR s : strings SEPARATOR ', '»"«s»"«ENDFOR»
-		''')
-	}
-	
 	private def other() '''
 		foo «"dfdf" + 23» bar
 	'''
@@ -77,7 +70,45 @@ class TemplateNodeTest {
 			«other()»
 	'''
 	
-	def void assertEquals(StringConcatenationClient c) {
+	@Test def void testSeparatorLoop() {
+		val strings = #['a', 'b', 'c']
+		assertEquals('''
+			«FOR s : strings SEPARATOR ', '»"«s»"«ENDFOR»
+		''')
+	}
+	
+	@Test def void testIndentedIf() {
+		val condition = true
+		val string = 'foo'
+		assertEquals('''
+			Very wise:
+				«IF condition»
+					who «string» do
+				«ENDIF»
+		''')
+	}
+	
+	@Test def void testIndentedFor() {
+		val list = #['foo', 'bar']
+		assertEquals('''
+			Very wise:
+				«FOR s : list»	«s»«ENDFOR»
+		''')
+	}
+	
+	@Test def void testIndentedTemplate() {
+		val StringConcatenationClient template = '''
+			sometimes foo
+			
+			and sometimes bar
+		'''
+		assertEquals('''
+			Very wise:
+				«template»
+		''')
+	}
+	
+	protected def void assertEquals(StringConcatenationClient c) {
 		val ext = new GeneratorNodeExtensions()
 		val processor = new GeneratorNodeProcessor()
 		

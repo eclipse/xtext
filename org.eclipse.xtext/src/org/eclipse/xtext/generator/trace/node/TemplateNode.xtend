@@ -33,14 +33,8 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 	override append(Object object, String indentation) {
 		if (indentation.length > 0) {
 			val before = currentParent
-			// The first line of an indented template is prepended with an explicit indentation string.
-			// We need to revert this because this case is already handled by the GeneratorNodeProcessor.
-			val lastChild = before.children.last
-			if (lastChild instanceof TextNode && (lastChild as TextNode).text == indentation) {
-				before.children.remove(before.children.size - 1)
-			}
 			try {
-				currentParent = new IndentNode(indentation)
+				currentParent = new IndentNode(indentation, false, true)
 				before.children += currentParent
 				append(object)
 			} finally {
@@ -94,12 +88,20 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 		for (var i = currentParent.children.size - 1; i >= 0; i--) {
 			val node = currentParent.children.get(i)
 			if (node instanceof TextNode) {
-				if (node.text.toString.trim.length === 0) {
+				if (!node.text.hasContent) {
 					currentParent.children.remove(i)					
 				}
 			}
 		}
 		append(object, indentation)
+	}
+
+	protected static def boolean hasContent(CharSequence s) {
+		for (var i = 0; i < s.length; i++) {
+			if (!Character.isWhitespace(s.charAt(i)))
+				return true
+		}
+		return false
 	}
 
 	override newLine() {
