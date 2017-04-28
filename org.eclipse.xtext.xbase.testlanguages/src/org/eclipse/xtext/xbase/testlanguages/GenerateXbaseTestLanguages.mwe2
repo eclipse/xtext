@@ -30,7 +30,6 @@ Workflow {
     	
     	language = {
     		grammarUri = "classpath:/org/eclipse/xtext/xbase/testlanguages/XImportSectionTestLang.xtext"
-    		fileExtensions = ""
     		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
     		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
     		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
@@ -66,7 +65,6 @@ Workflow {
 
     	language = {
     		grammarUri = "classpath:/org/eclipse/xtext/xbase/testlanguages/ContentAssistFragmentTestLang.xtext"
-    		fileExtensions = ""
     		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
     		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
     		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
@@ -98,7 +96,6 @@ Workflow {
     	
     	language = {
     		grammarUri = "classpath:/org/eclipse/xtext/xbase/testlanguages/bug462047/Bug462047Lang.xtext"
-    		fileExtensions = ""
     		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
     		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
     		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
