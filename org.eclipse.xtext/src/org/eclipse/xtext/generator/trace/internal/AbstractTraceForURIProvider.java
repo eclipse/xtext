@@ -225,7 +225,7 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 	
 	public Trace getTraceToTarget(final SomeFile sourceFile, final AbsoluteURI absoluteSourceResource, final IProjectConfig projectConfig) {
 		final List<PersistedTrace> traceFiles = findInverseTraceFiles(sourceFile);
-		if (!traceFiles.isEmpty()) {
+		if (!traceFiles.isEmpty() && projectConfig != null) {
 			Trace result = newAbstractTrace(sourceFile);
 			result.setTraceToSource(false);
 			final IResourceServiceProvider serviceProvider = getServiceProvider(absoluteSourceResource);
