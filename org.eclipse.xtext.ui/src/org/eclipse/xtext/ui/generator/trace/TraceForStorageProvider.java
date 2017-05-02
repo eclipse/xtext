@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
@@ -22,6 +23,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.internal.AbstractTraceForURIProvider;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
 import org.eclipse.xtext.workspace.IProjectConfig;
 
@@ -39,6 +41,8 @@ public class TraceForStorageProvider extends AbstractTraceForURIProvider<IFile, 
 	// use TraceFileNameProvider.TRACE_FILE_EXTENSION
 	@Deprecated 
 	public static final String TRACE_FILE_EXTENSION = TraceFileNameProvider.TRACE_FILE_EXTENSION;
+	
+	private static final Logger LOG = Logger.getLogger(TraceForStorageProvider.class);
 
 	@Inject
 	private Provider<StorageAwareTrace> traceToSourceProvider;
@@ -139,8 +143,14 @@ public class TraceForStorageProvider extends AbstractTraceForURIProvider<IFile, 
 	@Override
 	protected IProjectConfig getProjectConfig(IFile sourceFile) {
 		AbsoluteURI location = getAbsoluteLocation(sourceFile);
-		EclipseProjectConfigProvider projectConfigProvider = getServiceProvider(location).get(EclipseProjectConfigProvider.class);
-		return projectConfigProvider.createProjectConfig(sourceFile.getProject());
+		IResourceServiceProvider resourceServiceProvider = getServiceProvider(location);
+		if (resourceServiceProvider != null) {
+			EclipseProjectConfigProvider projectConfigProvider = resourceServiceProvider.get(EclipseProjectConfigProvider.class);
+			return projectConfigProvider.createProjectConfig(sourceFile.getProject());
+		} else {
+			LOG.error("No trace available for source file "+sourceFile.getFullPath()+", since no resource service provider could be determined.");
+			return null;
+		}
 	}
 	
 	@Override
