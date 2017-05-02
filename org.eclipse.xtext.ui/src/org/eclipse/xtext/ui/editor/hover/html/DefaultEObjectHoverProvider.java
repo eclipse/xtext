@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -64,7 +65,7 @@ import com.ibm.icu.text.MessageFormat;
  * @author Sven Efftinge
  */
 public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
-
+	private static final Logger LOG = Logger.getLogger(DefaultEObjectHoverProvider.class);
 	@Inject
 	private ILabelProvider labelProvider;
 
@@ -534,7 +535,12 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 
 			@Override
 			public Object getInfo() {
-				return getHoverInfo(object, region, null);
+				try {
+					return getHoverInfo(object, region, null);
+				} catch (RuntimeException e) {
+					LOG.error("Error on computation of hover information. No hover information available for "+ object + " at " + region, e);
+					return null;
+				}
 			}
 
 			@Override
