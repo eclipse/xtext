@@ -88,7 +88,7 @@ public class WorkflowLaunchUtils {
 				"org.eclipse.debug.ui.launchShortcuts");
 		for (IConfigurationElement configurationElement : config) {
 			String id = configurationElement.getAttribute("id");
-			if (id.equals(MWE2_LAUNCH_SHORCUT_ID)) {
+			if (MWE2_LAUNCH_SHORCUT_ID.equals(id)) {
 				Object executableExtension = configurationElement.createExecutableExtension("class");
 				if (executableExtension instanceof ILaunchShortcut) {
 					ILaunchShortcut launchShortcut = (ILaunchShortcut) executableExtension;
