@@ -12,6 +12,7 @@ import static com.google.common.collect.Maps.*;
 import java.util.Map;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.actions.AbstractToggleActionContributor;
@@ -48,7 +49,9 @@ public class MarkOccurrenceActionContributor extends AbstractToggleActionContrib
 			editor.setAction(getAction().getId(), getAction());
 			IToolBarManager toolBarManager = editor.getEditorSite().getActionBars().getToolBarManager();
 			if(toolBarManager.find(getAction().getId())==null) {
-				toolBarManager.add(getAction());				
+				ActionContributionItem item = new ActionContributionItem(getAction());
+				item.setVisible(false);
+				toolBarManager.add(item);				
 			}
 			occurrenceMarker = occurrenceMarkerProvider.get();
 			occurrenceMarker.connect(editor, isPropertySet());
