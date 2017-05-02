@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.hyperlinking;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -32,6 +33,7 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class HyperlinkHelper implements IHyperlinkHelper {
+	private static final Logger LOG = Logger.getLogger(HyperlinkHelper.class);
 
 	protected static class HyperlinkAcceptor implements IHyperlinkAcceptor {
 
@@ -79,7 +81,11 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		List<IHyperlink> links = Lists.newArrayList();
 		IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);
 		
-		createHyperlinksByOffset(resource, offset, acceptor);
+		try {
+			createHyperlinksByOffset(resource, offset, acceptor);
+		} catch (RuntimeException e) {
+			LOG.error(e.getMessage(), e);
+		}
 		if (!links.isEmpty())
 			return Iterables.toArray(links, IHyperlink.class);
 		return null;
