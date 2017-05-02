@@ -77,10 +77,10 @@ class GeneratorNodeProcessor {
 	 * An indent node prepends indentation to each line of its children.
 	 */
 	protected def dispatch void doProcess(IndentNode node, Context ctx) {
-		if (node.indentImmediately && !ctx.pendingIndent) {
-			ctx.currentLine.append(node.indentationString)
-		}
-		if (!node.children.empty) {
+		if (node._hasContent(ctx)) {
+			if (node.indentImmediately && !ctx.pendingIndent) {
+				ctx.currentLine.append(node.indentationString)
+			}
 			try {
 				ctx.currentIndents.push(node)
 				doProcessChildren(node, ctx)
@@ -91,19 +91,19 @@ class GeneratorNodeProcessor {
 	}
 	
 	protected def dispatch void doProcess(NewLineNode node, Context ctx) {
-		if (node.ifNotEmpty && !ctx.currentLine.hasContent) {
+		if (node.ifNotEmpty && !ctx.currentLine.hasNonWhitespace) {
 			ctx.lines.set(ctx.currentLineNumber, new StringBuilder)
 		} else {
 			if (ctx.pendingIndent)
 				handlePendingIndent(ctx, true)
 			ctx.currentLine.append(node.lineDelimiter)
 			ctx.lines.add(new StringBuilder)
-			ctx.pendingIndent = true
 		}
+		ctx.pendingIndent = true
 	}
 
 	protected def dispatch void doProcess(TextNode node, Context ctx) {
-		if (!node.text.nullOrEmpty) {
+		if (node._hasContent(ctx)) {
 			if (ctx.pendingIndent)
 				handlePendingIndent(ctx, false)
 			ctx.currentLine.append(node.text)
@@ -123,17 +123,19 @@ class GeneratorNodeProcessor {
 	}
 
 	protected def dispatch void doProcess(TraceNode node, Context ctx) {
-		val beforeRegion = ctx.currentRegion
-		val newRegion = new CompletableTraceRegion(false, node.sourceLocation, beforeRegion)
-		val offset = ctx.contentLength
-		val startLineNumber = ctx.currentLineNumber
-		try {
-			ctx.currentRegion = newRegion
-			doProcessChildren(node, ctx)
-		} finally {
-			if (beforeRegion !== null)
-				ctx.currentRegion = beforeRegion
-			newRegion.complete(offset, ctx.contentLength - offset, startLineNumber, ctx.currentLineNumber)
+		if (node._hasContent(ctx)) {
+			val beforeRegion = ctx.currentRegion
+			val newRegion = new CompletableTraceRegion(false, node.sourceLocation, beforeRegion)
+			val offset = ctx.contentLength
+			val startLineNumber = ctx.currentLineNumber
+			try {
+				ctx.currentRegion = newRegion
+				doProcessChildren(node, ctx)
+			} finally {
+				if (beforeRegion !== null)
+					ctx.currentRegion = beforeRegion
+				newRegion.complete(offset, ctx.contentLength - offset, startLineNumber, ctx.currentLineNumber)
+			}
 		}
 	}
 	
@@ -146,8 +148,19 @@ class GeneratorNodeProcessor {
 			doProcess(child, ctx)
 		}
 	}
+	protected def dispatch boolean hasContent(CompositeGeneratorNode node, Context ctx) {
+		node.children.exists[hasContent(ctx)]
+	}
+	
+	protected def dispatch boolean hasContent(NewLineNode node, Context ctx) {
+		!(node.ifNotEmpty && ctx.currentLine.length == 0)
+	}
 
-	protected static def boolean hasContent(CharSequence s) {
+	protected def dispatch boolean hasContent(TextNode node, Context ctx) {
+		!node.text.nullOrEmpty
+	}
+
+	protected static def boolean hasNonWhitespace(CharSequence s) {
 		for (var i = 0; i < s.length; i++) {
 			if (!Character.isWhitespace(s.charAt(i)))
 				return true

@@ -108,6 +108,17 @@ class TemplateNodeTest {
 		''')
 	}
 	
+	@Test def void testIfNotEmpty() {
+		val StringConcatenationClient template = '''
+			«''»
+			foo
+		'''
+		assertEquals('''
+			Very wise:
+				«template»
+		''')
+	}
+	
 	protected def void assertEquals(StringConcatenationClient c) {
 		val ext = new GeneratorNodeExtensions()
 		val processor = new GeneratorNodeProcessor()

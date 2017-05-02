@@ -242,6 +242,30 @@ public class TemplateNodeTest {
     this.assertEquals(_client_1);
   }
   
+  @Test
+  public void testIfNotEmpty() {
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.newLineIfNotEmpty();
+        _builder.append("foo");
+        _builder.newLine();
+      }
+    };
+    final StringConcatenationClient template = _client;
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("Very wise:");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append(template, "\t");
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    this.assertEquals(_client_1);
+  }
+  
   protected void assertEquals(final StringConcatenationClient c) {
     final GeneratorNodeExtensions ext = new GeneratorNodeExtensions();
     final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();

@@ -51,14 +51,16 @@ class GeneratorNodeTest {
 		var node = root.trace.append('Hallo').appendNewLine
 		node.indent
 		node.append('noindent').appendNewLine
+		node.append(new IndentNode('  ', true, true))
+		node.append('noindent').appendNewLine
 
 		val processor = new GeneratorNodeProcessor
 		Assert.assertEquals('''
 			Hallo
 			noindent
+			noindent
 		'''.toString, processor.process(node).toString)
 	}
-	
 	
 	@Test def void testTemplateProcessing() {
 		val root = loc(0)

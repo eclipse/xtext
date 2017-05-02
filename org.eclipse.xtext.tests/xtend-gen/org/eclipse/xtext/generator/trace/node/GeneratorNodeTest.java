@@ -74,9 +74,14 @@ public class GeneratorNodeTest {
     CompositeGeneratorNode node = this.exts.appendNewLine(this.exts.append(this.exts.trace(root), "Hallo"));
     this.exts.indent(node);
     this.exts.appendNewLine(this.exts.append(node, "noindent"));
+    IndentNode _indentNode = new IndentNode("  ", true, true);
+    this.exts.append(node, _indentNode);
+    this.exts.appendNewLine(this.exts.append(node, "noindent"));
     final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Hallo");
+    _builder.newLine();
+    _builder.append("noindent");
     _builder.newLine();
     _builder.append("noindent");
     _builder.newLine();

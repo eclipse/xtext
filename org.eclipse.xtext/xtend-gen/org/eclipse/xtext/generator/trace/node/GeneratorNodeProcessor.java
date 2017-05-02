@@ -30,6 +30,7 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -288,12 +289,11 @@ public class GeneratorNodeProcessor {
    * An indent node prepends indentation to each line of its children.
    */
   protected void _doProcess(final IndentNode node, final GeneratorNodeProcessor.Context ctx) {
-    if ((node.isIndentImmediately() && (!ctx.pendingIndent))) {
-      ctx.currentLine().append(node.getIndentationString());
-    }
-    boolean _isEmpty = node.getChildren().isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
+    boolean __hasContent = this._hasContent(node, ctx);
+    if (__hasContent) {
+      if ((node.isIndentImmediately() && (!ctx.pendingIndent))) {
+        ctx.currentLine().append(node.getIndentationString());
+      }
       try {
         ctx.currentIndents.push(node);
         this.doProcessChildren(node, ctx);
@@ -304,7 +304,7 @@ public class GeneratorNodeProcessor {
   }
   
   protected void _doProcess(final NewLineNode node, final GeneratorNodeProcessor.Context ctx) {
-    if ((node.isIfNotEmpty() && (!GeneratorNodeProcessor.hasContent(ctx.currentLine())))) {
+    if ((node.isIfNotEmpty() && (!GeneratorNodeProcessor.hasNonWhitespace(ctx.currentLine())))) {
       int _currentLineNumber = ctx.currentLineNumber();
       StringBuilder _stringBuilder = new StringBuilder();
       ctx.lines.set(_currentLineNumber, _stringBuilder);
@@ -315,14 +315,13 @@ public class GeneratorNodeProcessor {
       ctx.currentLine().append(node.getLineDelimiter());
       StringBuilder _stringBuilder_1 = new StringBuilder();
       ctx.lines.add(_stringBuilder_1);
-      ctx.pendingIndent = true;
     }
+    ctx.pendingIndent = true;
   }
   
   protected void _doProcess(final TextNode node, final GeneratorNodeProcessor.Context ctx) {
-    boolean _isNullOrEmpty = GeneratorNodeProcessor.isNullOrEmpty(node.getText());
-    boolean _not = (!_isNullOrEmpty);
-    if (_not) {
+    boolean __hasContent = this._hasContent(node, ctx);
+    if (__hasContent) {
       if (ctx.pendingIndent) {
         this.handlePendingIndent(ctx, false);
       }
@@ -346,21 +345,24 @@ public class GeneratorNodeProcessor {
   }
   
   protected void _doProcess(final TraceNode node, final GeneratorNodeProcessor.Context ctx) {
-    final AbstractTraceRegion beforeRegion = ctx.currentRegion;
-    ILocationData _sourceLocation = node.getSourceLocation();
-    final GeneratorNodeProcessor.CompletableTraceRegion newRegion = new GeneratorNodeProcessor.CompletableTraceRegion(false, _sourceLocation, beforeRegion);
-    final int offset = ctx.contentLength();
-    final int startLineNumber = ctx.currentLineNumber();
-    try {
-      ctx.currentRegion = newRegion;
-      this.doProcessChildren(node, ctx);
-    } finally {
-      if ((beforeRegion != null)) {
-        ctx.currentRegion = beforeRegion;
+    boolean __hasContent = this._hasContent(node, ctx);
+    if (__hasContent) {
+      final AbstractTraceRegion beforeRegion = ctx.currentRegion;
+      ILocationData _sourceLocation = node.getSourceLocation();
+      final GeneratorNodeProcessor.CompletableTraceRegion newRegion = new GeneratorNodeProcessor.CompletableTraceRegion(false, _sourceLocation, beforeRegion);
+      final int offset = ctx.contentLength();
+      final int startLineNumber = ctx.currentLineNumber();
+      try {
+        ctx.currentRegion = newRegion;
+        this.doProcessChildren(node, ctx);
+      } finally {
+        if ((beforeRegion != null)) {
+          ctx.currentRegion = beforeRegion;
+        }
+        int _contentLength = ctx.contentLength();
+        int _minus = (_contentLength - offset);
+        newRegion.complete(offset, _minus, startLineNumber, ctx.currentLineNumber());
       }
-      int _contentLength = ctx.contentLength();
-      int _minus = (_contentLength - offset);
-      newRegion.complete(offset, _minus, startLineNumber, ctx.currentLineNumber());
     }
   }
   
@@ -375,7 +377,23 @@ public class GeneratorNodeProcessor {
     }
   }
   
-  protected static boolean hasContent(final CharSequence s) {
+  protected boolean _hasContent(final CompositeGeneratorNode node, final GeneratorNodeProcessor.Context ctx) {
+    final Function1<IGeneratorNode, Boolean> _function = (IGeneratorNode it) -> {
+      return Boolean.valueOf(this.hasContent(it, ctx));
+    };
+    return IterableExtensions.<IGeneratorNode>exists(node.getChildren(), _function);
+  }
+  
+  protected boolean _hasContent(final NewLineNode node, final GeneratorNodeProcessor.Context ctx) {
+    return (!(node.isIfNotEmpty() && (ctx.currentLine().length() == 0)));
+  }
+  
+  protected boolean _hasContent(final TextNode node, final GeneratorNodeProcessor.Context ctx) {
+    boolean _isNullOrEmpty = GeneratorNodeProcessor.isNullOrEmpty(node.getText());
+    return (!_isNullOrEmpty);
+  }
+  
+  protected static boolean hasNonWhitespace(final CharSequence s) {
     for (int i = 0; (i < s.length()); i++) {
       boolean _isWhitespace = Character.isWhitespace(s.charAt(i));
       boolean _not = (!_isWhitespace);
@@ -406,6 +424,19 @@ public class GeneratorNodeProcessor {
     } else if (node instanceof TextNode) {
       _doProcess((TextNode)node, ctx);
       return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(node, ctx).toString());
+    }
+  }
+  
+  protected boolean hasContent(final IGeneratorNode node, final GeneratorNodeProcessor.Context ctx) {
+    if (node instanceof CompositeGeneratorNode) {
+      return _hasContent((CompositeGeneratorNode)node, ctx);
+    } else if (node instanceof NewLineNode) {
+      return _hasContent((NewLineNode)node, ctx);
+    } else if (node instanceof TextNode) {
+      return _hasContent((TextNode)node, ctx);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(node, ctx).toString());
