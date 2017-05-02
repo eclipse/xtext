@@ -60,7 +60,6 @@ class FeatureProjectFactory extends ProjectFactory {
 		return this;
 	}
 	
-	@Override
 	override protected void enhanceProject(IProject project, SubMonitor subMonitor, Shell shell) throws CoreException {
 		super.enhanceProject(project, subMonitor, shell);
 		createManifest(project, subMonitor.newChild(1));

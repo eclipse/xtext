@@ -776,7 +776,6 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 			@SuppressWarnings("all")
 			ASTParser parser = ASTParser.newParser(AST.JLS3);
 			parser.setProject(javaProject);
-			@SuppressWarnings("unchecked")
 			Map<String, String> options = javaProject.getOptions(true);
 			options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED); // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=212207
 			parser.setCompilerOptions(options);

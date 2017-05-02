@@ -103,7 +103,6 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		return getAdaptedResolutions(Lists.newArrayList(resolutions));
 	}
 
-	@SuppressWarnings("unchecked")
 	public boolean isMarkerStillValid(final IMarker marker, final IAnnotationModel annotationModel) {
 		Iterator<Annotation> iterator = annotationModel.getAnnotationIterator();
 		return Iterators.any(iterator, new Predicate<Annotation>() {
