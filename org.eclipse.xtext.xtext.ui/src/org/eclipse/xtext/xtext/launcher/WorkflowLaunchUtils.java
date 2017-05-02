@@ -69,6 +69,9 @@ public class WorkflowLaunchUtils {
 	}
 
 	public static IResource workflowFileFor(IResource resource) {
+		if (resource == null) {
+			return null;
+		}
 		IContainer parent = resource.getParent();
 		IPath locationWithoutFileExtension = parent.getProjectRelativePath().append("Generate" + resource.getName()).removeFileExtension();
 		IResource workflowFile = resource.getProject().findMember(locationWithoutFileExtension
