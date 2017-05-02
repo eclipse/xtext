@@ -51,14 +51,16 @@ class GeneratorNodeTest {
 		var node = root.trace.append('Hallo').appendNewLine
 		node.indent
 		node.append('noindent').appendNewLine
+		node.append(new IndentNode('  ', true, true))
+		node.append('noindent').appendNewLine
 
 		val processor = new GeneratorNodeProcessor
 		Assert.assertEquals('''
 			Hallo
 			noindent
+			noindent
 		'''.toString, processor.process(node).toString)
 	}
-	
 	
 	@Test def void testTemplateProcessing() {
 		val root = loc(0)
@@ -89,20 +91,20 @@ class GeneratorNodeTest {
 			}'''.toString, result.traceRegion.toString)
 	}
 	
-	def StringConcatenationClient someCodeGen(int n) '''
+	private def StringConcatenationClient someCodeGen(int n) '''
 		«FOR i : 0..<n»
 			before «loc(10+i).trace.append('Hello')» after
 			  «someCodeGen(n-1)»
 		«ENDFOR»
 	'''
-	def String someCodeGen_noTrace(int n) '''
+	private def String someCodeGen_noTrace(int n) '''
 		«FOR i : 0..<n»
 			before «'Hello'» after
 			  «someCodeGen_noTrace(n-1)»
 		«ENDFOR»
 	'''
 	
-	def loc(int idx) {
+	private def loc(int idx) {
 		new LocationData(idx, 100-idx, 0, 0, new SourceRelativeURI('foo/mymodel.dsl'))
 	}
 	
@@ -144,6 +146,51 @@ class GeneratorNodeTest {
 			  	  	  	* a simple string
 			  in a string concatenation
 		'''.toString, processor.process(node).toString)
+	}
+	
+	@Test def void testIndentVariants() {
+		val node = new CompositeGeneratorNode
+		node.doIndent(false, false)
+		node.doIndent(true, false)
+		node.doIndent(false, true)
+		node.doIndent(true, true)
+
+		val processor = new GeneratorNodeProcessor
+		Assert.assertEquals('''
+			  // indentImmediately: false, indentEmptyLines: false
+			    a
+			  
+			    bc
+			  
+			  d
+			  // indentImmediately: true, indentEmptyLines: false
+			    a
+			  
+			    b  c
+			  
+			  d  
+			  // indentImmediately: false, indentEmptyLines: true
+			    a
+			    
+			    bc
+			    
+			  d
+			  // indentImmediately: true, indentEmptyLines: true
+			    a
+			    
+			    b  c
+			    
+			  d  
+		'''.toString, processor.process(node).toString)
+	}
+	
+	private def void doIndent(CompositeGeneratorNode parent, boolean indentImmediately, boolean indentEmptyLines) {
+		parent.append('// indentImmediately: ').append(indentImmediately)
+		parent.append(', indentEmptyLines: ').append(indentEmptyLines).appendNewLine
+		parent.append(new IndentNode('  ', indentImmediately, indentEmptyLines).append('a').appendNewLine.appendNewLine.append('b'))
+		parent.append(new IndentNode('  ', indentImmediately, indentEmptyLines).append('c')).appendNewLine
+		parent.append(new IndentNode('  ', indentImmediately, indentEmptyLines).appendNewLine)
+		parent.append('d').append(new IndentNode('  ', indentImmediately, indentEmptyLines).appendNewLine)
 	}
 	
 }

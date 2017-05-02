@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeExtensions;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeProcessor;
+import org.eclipse.xtext.generator.trace.node.IndentNode;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
@@ -73,9 +74,14 @@ public class GeneratorNodeTest {
     CompositeGeneratorNode node = this.exts.appendNewLine(this.exts.append(this.exts.trace(root), "Hallo"));
     this.exts.indent(node);
     this.exts.appendNewLine(this.exts.append(node, "noindent"));
+    IndentNode _indentNode = new IndentNode("  ", true, true);
+    this.exts.append(node, _indentNode);
+    this.exts.appendNewLine(this.exts.append(node, "noindent"));
     final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Hallo");
+    _builder.newLine();
+    _builder.append("noindent");
     _builder.newLine();
     _builder.append("noindent");
     _builder.newLine();
@@ -146,7 +152,7 @@ public class GeneratorNodeTest {
     Assert.assertEquals(_builder.toString(), result.getTraceRegion().toString());
   }
   
-  public StringConcatenationClient someCodeGen(final int n) {
+  private StringConcatenationClient someCodeGen(final int n) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -169,7 +175,7 @@ public class GeneratorNodeTest {
     return _client;
   }
   
-  public String someCodeGen_noTrace(final int n) {
+  private String someCodeGen_noTrace(final int n) {
     StringConcatenation _builder = new StringConcatenation();
     {
       ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, n, true);
@@ -187,7 +193,7 @@ public class GeneratorNodeTest {
     return _builder.toString();
   }
   
-  public LocationData loc(final int idx) {
+  private LocationData loc(final int idx) {
     SourceRelativeURI _sourceRelativeURI = new SourceRelativeURI("foo/mymodel.dsl");
     return new LocationData(idx, (100 - idx), 0, 0, _sourceRelativeURI);
   }
@@ -265,5 +271,78 @@ public class GeneratorNodeTest {
     _builder_3.append("in a string concatenation");
     _builder_3.newLine();
     Assert.assertEquals(_builder_3.toString(), processor.process(node).toString());
+  }
+  
+  @Test
+  public void testIndentVariants() {
+    final CompositeGeneratorNode node = new CompositeGeneratorNode();
+    this.doIndent(node, false, false);
+    this.doIndent(node, true, false);
+    this.doIndent(node, false, true);
+    this.doIndent(node, true, true);
+    final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("// indentImmediately: false, indentEmptyLines: false");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("a");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("bc");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("d");
+    _builder.newLine();
+    _builder.append("// indentImmediately: true, indentEmptyLines: false");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("a");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("b  c");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("d  ");
+    _builder.newLine();
+    _builder.append("// indentImmediately: false, indentEmptyLines: true");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("a");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("bc");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("d");
+    _builder.newLine();
+    _builder.append("// indentImmediately: true, indentEmptyLines: true");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("a");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("b  c");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("d  ");
+    _builder.newLine();
+    Assert.assertEquals(_builder.toString(), processor.process(node).toString());
+  }
+  
+  private void doIndent(final CompositeGeneratorNode parent, final boolean indentImmediately, final boolean indentEmptyLines) {
+    this.exts.append(this.exts.append(parent, "// indentImmediately: "), Boolean.valueOf(indentImmediately));
+    this.exts.appendNewLine(this.exts.append(this.exts.append(parent, ", indentEmptyLines: "), Boolean.valueOf(indentEmptyLines)));
+    this.exts.append(parent, this.exts.append(this.exts.appendNewLine(this.exts.appendNewLine(this.exts.append(new IndentNode("  ", indentImmediately, indentEmptyLines), "a"))), "b"));
+    this.exts.appendNewLine(this.exts.append(parent, this.exts.append(new IndentNode("  ", indentImmediately, indentEmptyLines), "c")));
+    this.exts.append(parent, this.exts.appendNewLine(new IndentNode("  ", indentImmediately, indentEmptyLines)));
+    this.exts.append(this.exts.append(parent, "d"), this.exts.appendNewLine(new IndentNode("  ", indentImmediately, indentEmptyLines)));
   }
 }

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.generator.trace.node;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
@@ -50,14 +49,8 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
     boolean _greaterThan = (_length > 0);
     if (_greaterThan) {
       final CompositeGeneratorNode before = this.currentParent;
-      final IGeneratorNode lastChild = IterableExtensions.<IGeneratorNode>last(before.getChildren());
-      if (((lastChild instanceof TextNode) && Objects.equal(((TextNode) lastChild).getText(), indentation))) {
-        int _size = before.getChildren().size();
-        int _minus = (_size - 1);
-        before.getChildren().remove(_minus);
-      }
       try {
-        IndentNode _indentNode = new IndentNode(indentation);
+        IndentNode _indentNode = new IndentNode(indentation, false, true);
         this.currentParent = _indentNode;
         List<IGeneratorNode> _children = before.getChildren();
         _children.add(this.currentParent);
@@ -137,15 +130,26 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
       {
         final IGeneratorNode node = this.currentParent.getChildren().get(i);
         if ((node instanceof TextNode)) {
-          int _length = ((TextNode)node).getText().toString().trim().length();
-          boolean _tripleEquals = (_length == 0);
-          if (_tripleEquals) {
+          boolean _hasContent = TemplateNode.hasContent(((TextNode)node).getText());
+          boolean _not = (!_hasContent);
+          if (_not) {
             this.currentParent.getChildren().remove(i);
           }
         }
       }
     }
     this.append(object, indentation);
+  }
+  
+  protected static boolean hasContent(final CharSequence s) {
+    for (int i = 0; (i < s.length()); i++) {
+      boolean _isWhitespace = Character.isWhitespace(s.charAt(i));
+      boolean _not = (!_isWhitespace);
+      if (_not) {
+        return true;
+      }
+    }
+    return false;
   }
   
   @Override

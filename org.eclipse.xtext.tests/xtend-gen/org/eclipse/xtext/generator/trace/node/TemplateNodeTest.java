@@ -125,6 +125,28 @@ public class TemplateNodeTest {
     this.assertEquals(_client);
   }
   
+  private CharSequence other() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("foo ");
+    _builder.append(("dfdf" + Integer.valueOf(23)));
+    _builder.append(" bar");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  private String multiLineString() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("test ");
+    _builder.newLine();
+    _builder.append("bar");
+    _builder.newLine();
+    _builder.append("\t");
+    CharSequence _other = this.other();
+    _builder.append(_other, "\t");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
   @Test
   public void testSeparatorLoop() {
     final List<String> strings = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "b", "c"));
@@ -150,29 +172,101 @@ public class TemplateNodeTest {
     this.assertEquals(_client);
   }
   
-  private CharSequence other() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("foo ");
-    _builder.append(("dfdf" + Integer.valueOf(23)));
-    _builder.append(" bar");
-    _builder.newLineIfNotEmpty();
-    return _builder;
+  @Test
+  public void testIndentedIf() {
+    final boolean condition = true;
+    final String string = "foo";
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("Very wise:");
+        _builder.newLine();
+        {
+          if (condition) {
+            _builder.append("\t");
+            _builder.append("who ");
+            _builder.append(string, "\t");
+            _builder.append(" do");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    };
+    this.assertEquals(_client);
   }
   
-  private String multiLineString() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("test ");
-    _builder.newLine();
-    _builder.append("bar");
-    _builder.newLine();
-    _builder.append("\t");
-    CharSequence _other = this.other();
-    _builder.append(_other, "\t");
-    _builder.newLineIfNotEmpty();
-    return _builder.toString();
+  @Test
+  public void testIndentedFor() {
+    final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("foo", "bar"));
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("Very wise:");
+        _builder.newLine();
+        _builder.append("\t");
+        {
+          for(final String s : list) {
+            _builder.append("\t");
+            _builder.append(s, "\t");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    this.assertEquals(_client);
   }
   
-  public void assertEquals(final StringConcatenationClient c) {
+  @Test
+  public void testIndentedTemplate() {
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("sometimes foo");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("and sometimes bar");
+        _builder.newLine();
+      }
+    };
+    final StringConcatenationClient template = _client;
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("Very wise:");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append(template, "\t");
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    this.assertEquals(_client_1);
+  }
+  
+  @Test
+  public void testIfNotEmpty() {
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.newLineIfNotEmpty();
+        _builder.append("foo");
+        _builder.newLine();
+      }
+    };
+    final StringConcatenationClient template = _client;
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("Very wise:");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append(template, "\t");
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    this.assertEquals(_client_1);
+  }
+  
+  protected void assertEquals(final StringConcatenationClient c) {
     final GeneratorNodeExtensions ext = new GeneratorNodeExtensions();
     final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();
     final CompositeGeneratorNode root = new CompositeGeneratorNode();

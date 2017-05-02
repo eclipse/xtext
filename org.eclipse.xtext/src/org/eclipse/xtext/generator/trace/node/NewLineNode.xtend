@@ -20,13 +20,18 @@ class NewLineNode implements IGeneratorNode {
 	
 	String lineDelimiter
 	
+	/**
+	 * When this is set to {@code true}, the preceding line is removed if it contains only whitespace.
+	 */
 	boolean ifNotEmpty
 	
 	new(String lineDelimiter) {
-		this.lineDelimiter = lineDelimiter
+		this(lineDelimiter, false)
 	}
 	
 	new(String lineDelimiter, boolean ifNotEmpty) {
+		if (lineDelimiter === null)
+			throw new NullPointerException
 		this.lineDelimiter = lineDelimiter
 		this.ifNotEmpty = ifNotEmpty
 	}
