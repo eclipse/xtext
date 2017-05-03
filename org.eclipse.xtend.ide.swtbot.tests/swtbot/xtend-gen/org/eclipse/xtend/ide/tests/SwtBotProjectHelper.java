@@ -67,7 +67,7 @@ public class SwtBotProjectHelper {
       SwtBotProjectHelper.expandNode(it.tree(), "Java").select("Java Project");
       it.button("Next >").click();
       SWTBotText _textWithLabel = it.textWithLabel("Project name:");
-      _textWithLabel.setText("test");
+      _textWithLabel.setText(projectName);
       it.button("Next >").click();
       it.tabItem("Libraries").activate();
       it.button("Add Library...").click();
