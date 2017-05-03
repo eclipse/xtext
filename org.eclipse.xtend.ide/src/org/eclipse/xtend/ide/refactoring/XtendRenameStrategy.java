@@ -83,7 +83,7 @@ public class XtendRenameStrategy extends DefaultJvmModelRenameStrategy {
 			URI resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(targetObject).trimFragment();
 			if (!resourceURI.isPlatformResource())
 				throw new RefactoringException("Renamed type does not reside in the workspace");
-			IPath path = new Path("/").append(new Path(resourceURI.path()).removeFirstSegments(1));
+			IPath path = new Path(resourceURI.toPlatformString(true));
 			if(context instanceof IChangeRedirector.Aware) { 
 				if(((IChangeRedirector.Aware) context).getChangeRedirector().getRedirectedPath(path) != path)
 					return null;
