@@ -8,12 +8,15 @@
 package org.eclipse.xtend.core.validation;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Lists.transform;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.util.JavaVersion.*;
 import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.util.Strings.isEmpty;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
@@ -378,8 +381,12 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		if (targets.isEmpty())
 			return;
 		final EObject eContainer = getContainingAnnotationTarget(annotation);
+		Class<? extends EObject> clazz = eContainer.getClass();
+		if (eContainer instanceof XtendField && eContainer.eContainer() instanceof XtendAnnotationType) {
+			clazz = XtendFunction.class;
+		}
 		for (Entry<Class<?>, Collection<ElementType>> mapping : targetInfos.asMap().entrySet()) {
-			if (mapping.getKey().isInstance(eContainer)) {
+			if (mapping.getKey().isAssignableFrom(clazz)) {
 				targets.retainAll(mapping.getValue());
 				if (targets.isEmpty()) {
 					error("The annotation @" + annotation.getAnnotationType().getSimpleName()
