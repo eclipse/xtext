@@ -101,6 +101,11 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 		URI referringElementNewURI = elementRenameArguments
 				.getNewElementURI(referenceDescription.getSourceEObjectUri());
 		EObject referringElement = resourceSet.getEObject(referringElementNewURI, false);
+		if (referringElement == null) {
+			updateAcceptor.getRefactoringStatus().add(RefactoringStatus.ERROR, "Cannot find new referring element.", referringElementNewURI);
+			log.error("Cannot find new referring element. ReferringElementURI:" + referringElementNewURI);
+			return;
+		}
 		URI targetElementNewURI = elementRenameArguments.getNewElementURI(referenceDescription.getTargetEObjectUri());
 		EObject newTargetElement = resourceSet.getEObject(targetElementNewURI, false);
 		if (newTargetElement == null) {
