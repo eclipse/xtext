@@ -39,7 +39,7 @@ class SwtBotProjectHelper {
 		shell('New Project').activate
 		tree.expandNode('Java').select('Java Project')
 		button('Next >').click
-		textWithLabel('Project name:').text = 'test'
+		textWithLabel('Project name:').text = projectName
 		button('Next >').click
 		tabItem('Libraries').activate
 		button('Add Library...').click
