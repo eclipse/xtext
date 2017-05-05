@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -80,6 +81,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper;
 import org.eclipse.xtext.xbase.typesystem.override.BottomResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideTester;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -1628,10 +1630,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append(" ").append(operation.getSimpleName());
 			b.append("(");
 			List<JvmFormalParameter> closureParams = closure.getFormalParameters();
+			boolean isVarArgs = operation.isVarArgs();
 			for (int i = 0; i < closureParams.size(); i++) {
 				JvmFormalParameter closureParam = closureParams.get(i);
 				LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
-				appendClosureParameter(closureParam, parameterType, b);
+				if (isVarArgs && i == closureParams.size()-1 && parameterType instanceof ArrayTypeReference) {
+					appendClosureParameterVarArgs(closureParam, parameterType.getComponentType(), b);
+				} else {					
+					appendClosureParameter(closureParam, parameterType, b);
+				}
 				if (i != closureParams.size() - 1)
 					b.append(", ");
 			}
@@ -1696,6 +1703,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		String name = appendable.declareVariable(closureParam, proposedParamName);
 		appendable.append(name);
 	}
+	
+	protected void appendClosureParameterVarArgs(JvmFormalParameter closureParam, LightweightTypeReference parameterType, ITreeAppendable appendable) {
+		appendable.append("final ");
+		appendable.append(parameterType);
+		appendable.append("... ");
+		final String proposedParamName = makeJavaIdentifier(closureParam.getName());
+		String name = appendable.declareVariable(closureParam, proposedParamName);
+		appendable.append(name);
+	}
 
 	protected void appendOperationVisibility(final ITreeAppendable b, JvmOperation operation) {
 		b.newLine();
@@ -1738,10 +1754,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.openPseudoScope();
 			b.append("(");
 			List<JvmFormalParameter> closureParams = closure.getFormalParameters();
+			boolean isVarArgs = operation.isVarArgs();
 			for (int i = 0; i < closureParams.size(); i++) {
 				JvmFormalParameter closureParam = closureParams.get(i);
 				LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
-				b.append(parameterType);
+				if (isVarArgs && i == closureParams.size()-1 && parameterType instanceof ArrayTypeReference) {
+					b.append(((ArrayTypeReference) parameterType).getComponentType());
+					b.append("...");
+				} else {
+					b.append(parameterType);
+				}
 				b.append(" ");
 				String proposedParamName = makeJavaIdentifier(closureParam.getName());	
 				// Usually a normal variable would suffice here. The 'unique name' variable is a workaround for
