@@ -33,6 +33,7 @@ import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.refactoring.IChangeRedirector;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
+import org.eclipse.xtext.util.internal.Nullable;
 
 import com.google.inject.Inject;
 
@@ -44,6 +45,7 @@ import com.google.inject.Inject;
 public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.Provider, IChangeRedirector.Aware {
 
 	@Inject(optional = true)
+	@Nullable
 	private IWorkbench workbench;
 
 	@Inject
@@ -75,26 +77,28 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			IPath redirectedPath = changeRedirector.getRedirectedPath(file.getFullPath());
 			IFile redirectedFile = file.getWorkspace().getRoot().getFile(redirectedPath);
 			if(redirectedFile.equals(file)) {
-				ITextEditor editor = new DisplayRunnableWithResult<ITextEditor>() {
-					@Override
-					protected ITextEditor run() throws Exception {
-						IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-						IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-						IEditorPart editor = activePage.findEditor(fileEditorInput);
-						if (editor instanceof ITextEditor) {
-							if (editor instanceof ITextEditorExtension
-									&& ((ITextEditorExtension) editor).isEditorInputReadOnly())
-								status.add(ERROR, "Editor for {0} is read only", fileEditorInput.getName());
-							return ((ITextEditor) editor);
+				if (workbench != null) {
+					ITextEditor editor = new DisplayRunnableWithResult<ITextEditor>() {
+						@Override
+						protected ITextEditor run() throws Exception {
+							IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+							IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+							IEditorPart editor = activePage.findEditor(fileEditorInput);
+							if (editor instanceof ITextEditor) {
+								if (editor instanceof ITextEditorExtension
+										&& ((ITextEditorExtension) editor).isEditorInputReadOnly())
+									status.add(ERROR, "Editor for {0} is read only", fileEditorInput.getName());
+								return ((ITextEditor) editor);
+							}
+							return null;
 						}
-						return null;
+					}.syncExec();
+					if (editor != null) {
+						IDocument document = editor.getDocumentProvider().getDocument(fileEditorInput);
+						if (document != null)
+							return new EditorDocument(resourceURI, editor, document, 
+									preferences.isSaveAllBeforeRefactoring() || !editor.isDirty());
 					}
-				}.syncExec();
-				if (editor != null) {
-					IDocument document = editor.getDocumentProvider().getDocument(fileEditorInput);
-					if (document != null)
-						return new EditorDocument(resourceURI, editor, document, 
-							preferences.isSaveAllBeforeRefactoring() || !editor.isDirty());
 				}
 				return new FileDocument(resourceURI, file, getEncodingProvider(resourceURI));
 			} else {
