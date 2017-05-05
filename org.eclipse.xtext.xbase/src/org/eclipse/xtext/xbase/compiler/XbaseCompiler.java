@@ -26,7 +26,6 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -81,7 +80,6 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper;
 import org.eclipse.xtext.xbase.typesystem.override.BottomResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideTester;
-import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -1634,7 +1632,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			for (int i = 0; i < closureParams.size(); i++) {
 				JvmFormalParameter closureParam = closureParams.get(i);
 				LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
-				if (isVarArgs && i == closureParams.size()-1 && parameterType instanceof ArrayTypeReference) {
+				if (isVarArgs && i == closureParams.size()-1 && parameterType.isArray()) {
 					appendClosureParameterVarArgs(closureParam, parameterType.getComponentType(), b);
 				} else {					
 					appendClosureParameter(closureParam, parameterType, b);
@@ -1758,8 +1756,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			for (int i = 0; i < closureParams.size(); i++) {
 				JvmFormalParameter closureParam = closureParams.get(i);
 				LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
-				if (isVarArgs && i == closureParams.size()-1 && parameterType instanceof ArrayTypeReference) {
-					b.append(((ArrayTypeReference) parameterType).getComponentType());
+				if (isVarArgs && i == closureParams.size()-1 && parameterType.isArray()) {
+					b.append(parameterType.getComponentType());
 					b.append("...");
 				} else {
 					b.append(parameterType);
