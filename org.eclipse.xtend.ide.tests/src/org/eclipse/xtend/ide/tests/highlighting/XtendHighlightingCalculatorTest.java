@@ -570,7 +570,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectAbsolute(model.lastIndexOf("TestClassDeprecated"), "TestClassDeprecated".length(), XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		expectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, METHOD);
 		expectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
-		notExpectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
 	}
 	
