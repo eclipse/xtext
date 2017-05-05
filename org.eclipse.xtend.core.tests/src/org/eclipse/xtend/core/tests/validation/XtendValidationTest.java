@@ -510,6 +510,16 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET);
 	}
 	
+	@Test public void testAnnotationTarget_11() throws Exception {
+		XtendAnnotationType annotationType = annotationType("annotation A { @testdata.Annotation6 String value = 'Issue206'}");
+		helper.assertNoErrors(annotationType);
+	}
+	
+	@Test public void testAnnotationTarget_12() throws Exception {
+		XtendClass clazz = clazz("class C { @testdata.Annotation6 String value = 'Issue206'}");
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET);
+	}
+	
 	@Test public void testMultipleAnnotations_00() throws Exception {
 		XtendClass clazz = clazz("@testdata.Annotation4 @testdata.Annotation4  class X { }");
 		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_MULTIPLE, "@Annotation4");
