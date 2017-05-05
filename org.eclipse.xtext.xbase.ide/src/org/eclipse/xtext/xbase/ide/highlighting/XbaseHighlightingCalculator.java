@@ -236,7 +236,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 			EReference reference, EObject resolvedReferencedObject) {
 		if (resolvedReferencedObject instanceof JvmAnnotationTarget) {
 			JvmAnnotationTarget annoTarget = (JvmAnnotationTarget) resolvedReferencedObject;
-			if(DeprecationUtil.isDeprecated(annoTarget))
+			if(DeprecationUtil.isTransitivelyDeprecated(annoTarget))
 				highlightFeature(acceptor, referencer, reference, DEPRECATED_MEMBERS);
 		}
 	}
@@ -307,7 +307,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 				highlightReferenceJvmType(acceptor, featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, feature);
 			}
 			
-			if(feature instanceof JvmAnnotationTarget && DeprecationUtil.isDeprecated((JvmAnnotationTarget)feature)){
+			if(feature instanceof JvmAnnotationTarget && DeprecationUtil.isTransitivelyDeprecated((JvmAnnotationTarget)feature)){
 				highlightFeatureCall(featureCall, acceptor, DEPRECATED_MEMBERS);
 			}
 		}

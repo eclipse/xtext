@@ -36,6 +36,12 @@ public class DeprecationUtilTest extends Assert {
 		assertFalse(DeprecationUtil.isDeprecated(getOperation(clazz, "localDeprecated")));
 	}
 	
+	@Test
+	public void testDeprecationUtil_2() {
+		JvmDeclaredType clazz = (JvmDeclaredType) typesProvider.findTypeByName("org.eclipse.xtext.common.types.util.Deprecation2");
+		assertTrue(DeprecationUtil.isTransitivelyDeprecated(getOperation(clazz, "implicitDeprecated")));
+	}
+	
 	protected JvmOperation getOperation(JvmDeclaredType type, final String name) {
 		JvmOperation operation = find(type.getDeclaredOperations(), new Predicate<JvmOperation>() {
 			@Override
