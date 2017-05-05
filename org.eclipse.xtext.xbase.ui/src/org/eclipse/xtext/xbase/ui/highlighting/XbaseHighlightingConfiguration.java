@@ -25,6 +25,7 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 	public static final String STATIC_METHOD_INVOCATION = XbaseHighlightingStyles.STATIC_METHOD_INVOCATION;
 	public static final String STATIC_FIELD = XbaseHighlightingStyles.STATIC_FIELD;
 	public static final String FIELD = XbaseHighlightingStyles.FIELD;
+	public static final String METHOD = XbaseHighlightingStyles.METHOD;
 	public static final String ANNOTATION = XbaseHighlightingStyles.ANNOTATION;
 	public static final String EXTENSION_METHOD_INVOCATION = XbaseHighlightingStyles.EXTENSION_METHOD_INVOCATION;
 	public static final String DEPRECATED_MEMBERS = XbaseHighlightingStyles.DEPRECATED_MEMBERS;
