@@ -42,3 +42,4 @@ Export-Package: org.eclipse.xtext.xtext.ui.ecore2xtext,
  org.eclipse.xtext.xtext.ui.ecore2xtext.ui.contentassist.antlr,
  org.eclipse.xtext.xtext.ui.ecore2xtext.ui.contentassist,
  org.eclipse.xtext.xtext.ui.ecore2xtext.serializer
+Bundle-ActivationPolicy: lazy
