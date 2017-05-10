@@ -117,6 +117,9 @@ public class JavaBreakPointProvider {
 			if (rootTraceRegion == null)
 				return -1;
 			List<LineMapping> lineMappings = lineMappingProvider.getLineMapping(rootTraceRegion);
+			if (lineMappings == null) {
+				return -1;
+			}
 			for (LineMapping lineMapping : lineMappings) {
 				if (lineMapping.sourceStartLine == breakpoint.getLineNumber()) {
 					return lineMapping.targetEndLine + 1;
