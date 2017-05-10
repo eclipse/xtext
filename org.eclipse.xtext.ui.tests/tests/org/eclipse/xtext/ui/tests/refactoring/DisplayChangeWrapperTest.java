@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.refactoring;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.text.Document;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -43,5 +44,21 @@ public class DisplayChangeWrapperTest extends AbstractXtextTests {
 		assertEquals(change, ((DisplayChangeWrapper.Wrapper) wrapped).getDelegate());
 		Change undo = wrapped.perform(new NullProgressMonitor());
 		assertTrue(undo instanceof DisplayChangeWrapper.Wrapper);
+	}
+	
+	@Test 
+	public void testNoUndoChange() throws CoreException {
+		Change change = new NullChange("my no undo change") {
+			@Override
+			public Change perform(IProgressMonitor pm) throws CoreException {
+				return null;
+			}
+		};
+		Change wrapped = DisplayChangeWrapper.wrap(change);
+		assertFalse(wrapped instanceof TextEditBasedChange);
+		assertTrue(wrapped instanceof DisplayChangeWrapper.Wrapper);
+		assertEquals(change, ((DisplayChangeWrapper.Wrapper) wrapped).getDelegate());
+		Change undo = wrapped.perform(new NullProgressMonitor());
+		assertNull(undo);
 	}
 }

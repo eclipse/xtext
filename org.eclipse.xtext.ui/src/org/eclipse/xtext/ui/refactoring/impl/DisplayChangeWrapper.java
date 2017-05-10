@@ -34,8 +34,10 @@ public class DisplayChangeWrapper {
 	public static Change wrap(Change delegate) {
 		if(delegate instanceof TextEditBasedChange) {
 			return new TextEditBased((TextEditBasedChange) delegate);
-		} else {
+		} else if (delegate != null) {
 			return new Generic(delegate);
+		} else {
+			return null;
 		}
 	}
 	
