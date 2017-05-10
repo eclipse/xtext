@@ -340,12 +340,14 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeType_Extends(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+		final boolean isInterface = assignment == grammarAccess.getTypeAccess().getExtendsAssignment_2_1_5_1()
+				|| assignment == grammarAccess.getTypeAccess().getExtendsAssignment_2_1_5_2_1();
 		//	FIXME filter "self"
 		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true, getQualifiedNameValueConverter(),
 				new ITypesProposalProvider.Filter() {
 					@Override
 					public int getSearchFor() {
-						return IJavaSearchConstants.CLASS;
+						return isInterface ? IJavaSearchConstants.INTERFACE : IJavaSearchConstants.CLASS;
 					}
 
 					@Override
