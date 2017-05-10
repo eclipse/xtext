@@ -15,7 +15,7 @@ import org.eclipse.xtext.ui.tests.*
 import de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 import de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 
-var projectName = "org.eclipse.xtext.common.types.tests"
+var projectName = "org.eclipse.xtext.common.types.eclipse.tests"
 var runtimeProject = "../${projectName}"
 var lineDelimiter = '\n'
 

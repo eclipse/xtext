@@ -30,8 +30,8 @@ public class ContentAssistTestLanguageStandaloneSetupGenerated implements ISetup
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2010/xtext/ui/common/types/tests/ContentAssist")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2010/xtext/ui/common/types/tests/ContentAssist", org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguagePackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2010/xtext/ui/common/types/tests/ContentAssist2")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2010/xtext/ui/common/types/tests/ContentAssist2", org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguagePackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

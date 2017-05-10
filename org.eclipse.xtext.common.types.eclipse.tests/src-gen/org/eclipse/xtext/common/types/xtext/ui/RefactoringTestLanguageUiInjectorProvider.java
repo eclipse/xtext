@@ -8,10 +8,10 @@ import org.eclipse.xtext.junit4.IInjectorProvider;
 import com.google.inject.Injector;
 
 public class RefactoringTestLanguageUiInjectorProvider implements IInjectorProvider {
-	
+
 	@Override
 	public Injector getInjector() {
 		return org.eclipse.xtext.common.types.tests.AbstractActivator.getInstance().getInjector("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage");
 	}
-	
+
 }

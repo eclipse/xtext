@@ -7,7 +7,7 @@
 *******************************************************************************/
 grammar org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1 with org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage
 
-import "http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring" 
+import "http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring2" 
 
 Entry returns Model:
 	Model;
