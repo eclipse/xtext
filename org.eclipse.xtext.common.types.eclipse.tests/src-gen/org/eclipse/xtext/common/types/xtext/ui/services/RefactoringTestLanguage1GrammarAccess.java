@@ -13,6 +13,7 @@ import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.types.xtext.ui.services.RefactoringTestLanguageGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class RefactoringTestLanguage1GrammarAccess extends AbstractGrammarElementFinder {
@@ -23,7 +24,7 @@ public class RefactoringTestLanguage1GrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cModelParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Entry Model:
-		//	Model
+		//	Model;
 		@Override public ParserRule getRule() { return rule; }
 
 		//Model
@@ -37,11 +38,15 @@ public class RefactoringTestLanguage1GrammarAccess extends AbstractGrammarElemen
 
 	private final RefactoringTestLanguageGrammarAccess gaRefactoringTestLanguage;
 
+	private final TerminalsGrammarAccess gaTerminals;
+
 	@Inject
 	public RefactoringTestLanguage1GrammarAccess(GrammarProvider grammarProvider,
-		RefactoringTestLanguageGrammarAccess gaRefactoringTestLanguage) {
+		RefactoringTestLanguageGrammarAccess gaRefactoringTestLanguage,
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaRefactoringTestLanguage = gaRefactoringTestLanguage;
+		this.gaTerminals = gaTerminals;
 		this.pEntry = new EntryElements();
 	}
 	
@@ -71,9 +76,13 @@ public class RefactoringTestLanguage1GrammarAccess extends AbstractGrammarElemen
 		return gaRefactoringTestLanguage;
 	}
 
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
+	}
+
 	
 	//Entry Model:
-	//	Model
+	//	Model;
 	public EntryElements getEntryAccess() {
 		return pEntry;
 	}
@@ -115,43 +124,43 @@ public class RefactoringTestLanguage1GrammarAccess extends AbstractGrammarElemen
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
-		return gaRefactoringTestLanguage.getIDRule();
+		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
-		return gaRefactoringTestLanguage.getINTRule();
+		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
-		return gaRefactoringTestLanguage.getSTRINGRule();
+		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
-		return gaRefactoringTestLanguage.getML_COMMENTRule();
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaRefactoringTestLanguage.getSL_COMMENTRule();
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaRefactoringTestLanguage.getWSRule();
+		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaRefactoringTestLanguage.getANY_OTHERRule();
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

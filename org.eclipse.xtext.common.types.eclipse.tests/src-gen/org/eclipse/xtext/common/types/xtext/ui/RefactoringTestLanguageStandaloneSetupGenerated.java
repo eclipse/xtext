@@ -30,8 +30,8 @@ public class RefactoringTestLanguageStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring", org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.RefactoringTestLanguagePackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring2")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring2", org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.RefactoringTestLanguagePackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

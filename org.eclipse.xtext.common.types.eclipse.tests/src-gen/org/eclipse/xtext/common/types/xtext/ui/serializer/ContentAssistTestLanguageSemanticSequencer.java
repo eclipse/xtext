@@ -4,23 +4,21 @@
 package org.eclipse.xtext.common.types.xtext.ui.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguagePackage;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.GenerateDirective;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Import;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Model;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ReferenceHolder;
 import org.eclipse.xtext.common.types.xtext.ui.services.ContentAssistTestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -30,8 +28,13 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	private ContentAssistTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == ContentAssistTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == ContentAssistTestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case ContentAssistTestLanguagePackage.GENERATE_DIRECTIVE:
 				sequence_GenerateDirective(context, (GenerateDirective) semanticObject); 
 				return; 
@@ -45,55 +48,72 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 				sequence_ReferenceHolder(context, (ReferenceHolder) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     GenerateDirective returns GenerateDirective
+	 *
 	 * Constraint:
 	 *     typeName=QN
 	 */
-	protected void sequence_GenerateDirective(EObject context, GenerateDirective semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ContentAssistTestLanguagePackage.Literals.GENERATE_DIRECTIVE__TYPE_NAME) == ValueTransient.YES)
+	protected void sequence_GenerateDirective(ISerializationContext context, GenerateDirective semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ContentAssistTestLanguagePackage.Literals.GENERATE_DIRECTIVE__TYPE_NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContentAssistTestLanguagePackage.Literals.GENERATE_DIRECTIVE__TYPE_NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getGenerateDirectiveAccess().getTypeNameQNParserRuleCall_1_0(), semanticObject.getTypeName());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Import returns Import
+	 *
 	 * Constraint:
 	 *     importedNamespace=ImportedFQN
 	 */
-	protected void sequence_Import(EObject context, Import semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ContentAssistTestLanguagePackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
+	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ContentAssistTestLanguagePackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContentAssistTestLanguagePackage.Literals.IMPORT__IMPORTED_NAMESPACE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0(), semanticObject.getImportedNamespace());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
-	 *     (imports+=Import* generateDirective=GenerateDirective? referenceHolder=ReferenceHolder?)
+	 *     (
+	 *         (imports+=Import* generateDirective=GenerateDirective referenceHolder=ReferenceHolder) | 
+	 *         (imports+=Import* referenceHolder=ReferenceHolder) | 
+	 *         referenceHolder=ReferenceHolder
+	 *     )?
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ReferenceHolder returns ReferenceHolder
+	 *
 	 * Constraint:
 	 *     (defaultReference=[JvmType|FQN] | customizedReference=[JvmType|FQN] | subtypeReference=[JvmType|FQN])
 	 */
-	protected void sequence_ReferenceHolder(EObject context, ReferenceHolder semanticObject) {
+	protected void sequence_ReferenceHolder(ISerializationContext context, ReferenceHolder semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }
