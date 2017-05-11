@@ -14,10 +14,14 @@ import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -50,21 +54,42 @@ public class Bug486584Test extends AbstractBuilderTest {
 	}
 
 	@Test
-	public void testFullBuildWhenClasspathChanged() throws CoreException {
+	public void testFullBuildWhenClasspathChanged() throws CoreException, InterruptedException {
 		IJavaProject project = setupProject();
 		assertFalse(getEvents().isEmpty());
 		getEvents().clear();
-
+		final CountDownLatch latch = createWaitForFullBuildLatch(project);
 		IFile libaryFile = copyAndGetXtendExampleJar(project);
 		IClasspathEntry libraryEntry = JavaCore.newLibraryEntry(libaryFile.getFullPath(), null, null);
 		addToClasspath(project, libraryEntry);
+		// wait for FORGET_BUILD_STATE_ONLY
+		latch.await(300, TimeUnit.MILLISECONDS);
+		assertEquals("no fullbuild sheduled", 0l, latch.getCount());
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 
 	}
 
+	private CountDownLatch createWaitForFullBuildLatch(IJavaProject project) {
+		final CountDownLatch latch = new CountDownLatch(1);
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
+			
+			@Override
+			public void resourceChanged(IResourceChangeEvent event) {
+				if (event.getBuildKind() == IncrementalProjectBuilder.FULL_BUILD) {
+					if (project.getProject() == event.getSource()) {
+						latch.countDown();
+					}
+					
+				}
+				
+			}
+		}, IResourceChangeEvent.POST_BUILD);
+		return latch;
+	}
+
 	@Test
-	public void testNoFullBuildIfAttachmentChangeOnly() throws CoreException {
+	public void testNoFullBuildIfAttachmentChangeOnly() throws CoreException, InterruptedException {
 		IJavaProject project = setupProject();
 		assertFalse(getEvents().isEmpty());
 		getEvents().clear();
@@ -74,7 +99,7 @@ public class Bug486584Test extends AbstractBuilderTest {
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 		getEvents().clear();
-
+		final CountDownLatch latch = createWaitForFullBuildLatch(project);
 		IClasspathEntry[] classpath = project.getRawClasspath();
 		for (int i = 0; i < classpath.length; ++i) {
 			IPath entryPath = classpath[i].getPath();
@@ -87,13 +112,16 @@ public class Bug486584Test extends AbstractBuilderTest {
 
 			}
 		}
+		// wait for FORGET_BUILD_STATE_ONLY
+		latch.await(300, TimeUnit.MILLISECONDS);
+		assertEquals("no fullbuild sheduled", 1l, latch.getCount());
 		waitForBuild();
 		assertTrue(getEvents().isEmpty());
 	}
 
 	@Test
 	@Flaky
-	public void testFullBuildWhenClasspathChanged_2() throws CoreException {
+	public void testFullBuildWhenClasspathChanged_2() throws CoreException, InterruptedException {
 		IJavaProject project = setupProject();
 		IFile libaryFile = copyAndGetXtendExampleJar(project);
 		IClasspathEntry libraryEntry = JavaCore.newLibraryEntry(libaryFile.getFullPath(), null, null);
@@ -101,8 +129,13 @@ public class Bug486584Test extends AbstractBuilderTest {
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 		getEvents().clear();
+		
+		final CountDownLatch latch = createWaitForFullBuildLatch(project);
 		libaryFile.touch(null);
 		libaryFile.refreshLocal(IResource.DEPTH_INFINITE, null);
+		// wait for FORGET_BUILD_STATE_ONLY
+		latch.await(300, TimeUnit.MILLISECONDS);
+		assertEquals("no fullbuild sheduled", 0l, latch.getCount());
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 
@@ -110,7 +143,7 @@ public class Bug486584Test extends AbstractBuilderTest {
 
 	@Test
 	@Flaky
-	public void testFullBuildWhenClasspathChanged_3() throws CoreException, IOException {
+	public void testFullBuildWhenClasspathChanged_3() throws CoreException, IOException, InterruptedException {
 		IJavaProject project = setupProject();
 		IFile libaryFile = copyAndGetXtendExampleJar(project);
 		IPath rawLocation = libaryFile.getRawLocation();
@@ -119,11 +152,16 @@ public class Bug486584Test extends AbstractBuilderTest {
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 		getEvents().clear();
+		
+		final CountDownLatch latch = createWaitForFullBuildLatch(project);
 		File file = rawLocation.toFile();
 		Files.touch(file);
 		project.setRawClasspath(project.getRawClasspath(), null);
 		project.getProject().getFile("src/dummy.txt").create(new StringInputStream(""), false, null);
 		project.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
+		// wait for FORGET_BUILD_STATE_ONLY
+		latch.await(300, TimeUnit.MILLISECONDS);
+		assertEquals("no fullbuild sheduled", 0l, latch.getCount());
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 
