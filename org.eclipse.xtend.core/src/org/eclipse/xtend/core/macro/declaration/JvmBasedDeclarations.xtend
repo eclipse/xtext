@@ -1368,7 +1368,7 @@ class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclaration
 class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements AnnotationTarget, TypeParameterDeclaration {
 	
 	override TypeParameterDeclarator getTypeParameterDeclarator() {
-		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmExecutable) as TypeParameterDeclarator
+		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmMember) as TypeParameterDeclarator
 	}
 	
 	override isAssignableFrom(Type otherType) {

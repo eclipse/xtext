@@ -15,14 +15,14 @@ import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmMember;
 
 @SuppressWarnings("all")
 public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements AnnotationTarget, TypeParameterDeclaration {
   @Override
   public TypeParameterDeclarator getTypeParameterDeclarator() {
     EObject _eContainer = this.getDelegate().eContainer();
-    MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(((JvmExecutable) _eContainer));
+    MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(((JvmMember) _eContainer));
     return ((TypeParameterDeclarator) _memberDeclaration);
   }
   
