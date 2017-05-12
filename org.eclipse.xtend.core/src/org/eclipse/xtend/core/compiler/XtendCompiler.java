@@ -550,7 +550,7 @@ public class XtendCompiler extends XbaseCompiler {
 				compileAnonymousClassBody((AnonymousClass) expr.eContainer(), declaringType, b);
 			}
 			b.append(";");
-		} else if (isVariableDeclarationRequired(expr, b)) {
+		} else if (isVariableDeclarationRequired(expr, b, true)) {
 			Later later = new Later() {
 				@Override
 				public void exec(ITreeAppendable appendable) {
@@ -577,13 +577,13 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 	
 	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
-		boolean result = super.isVariableDeclarationRequired(expr, b);
+	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b, boolean recursive) {
+		boolean result = super.isVariableDeclarationRequired(expr, b, recursive);
 		if (result && expr instanceof XConstructorCall) {
 			EObject container = expr.eContainer();
 			if (container instanceof AnonymousClass) {
 				AnonymousClass anonymousClass = (AnonymousClass) container;
-				result = isVariableDeclarationRequired(anonymousClass, b);
+				result = isVariableDeclarationRequired(anonymousClass, b, recursive);
 				if (result) {
 					JvmConstructor constructor = anonymousClass.getConstructorCall().getConstructor();
 					JvmDeclaredType type = constructor.getDeclaringType();
