@@ -249,7 +249,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 	
 	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b, boolean recursive) {
 		if (expr instanceof XBooleanLiteral
 			|| expr instanceof XStringLiteral
 			|| expr instanceof XNumberLiteral
@@ -257,7 +257,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 			|| expr instanceof XClosure
 			|| expr instanceof XNullLiteral)
 			return false;
-		return super.isVariableDeclarationRequired(expr,b);
+		return super.isVariableDeclarationRequired(expr,b, recursive);
 	}
 	
 }

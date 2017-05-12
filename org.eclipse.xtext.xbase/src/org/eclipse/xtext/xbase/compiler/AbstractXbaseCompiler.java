@@ -656,11 +656,24 @@ public abstract class AbstractXbaseCompiler {
 	 * If an expression has side effects this method must return true for it.
 	 * @param expr the checked expression
 	 * @param b the appendable which represents the current compiler state
+	 * @deprecated use {@link #isVariableDeclarationRequired(XExpression, ITreeAppendable, boolean)} instead.
 	 */
+	@Deprecated
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
+		return isVariableDeclarationRequired(expr, b, true);
+	}
+
+	/**
+	 * whether an expression needs to be declared in a statement
+	 * If an expression has side effects this method must return true for it.
+	 * @param expr the checked expression
+	 * @param b the appendable which represents the current compiler state
+	 * @param recursive determines if the siblings of the expression shall be investigated too to determine the is variable declaration required status
+	 */
+	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b, boolean recursive) {
 		return true;
 	}
-	
+
 	/**
 	 * @return the variable name under which the result of the expression is stored. Returns <code>null</code> if the
 	 *          expression hasn't been assigned to a local variable before.

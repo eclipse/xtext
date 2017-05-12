@@ -166,7 +166,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 							b.append(" */");
 						}
 					}
-				} else if (isVariableDeclarationRequired(expr, b)) {
+				} else if (isVariableDeclarationRequired(expr, b, true)) {
 					Later later = new Later() {
 						@Override
 						public void exec(ITreeAppendable appendable) {
@@ -371,8 +371,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 	
 	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
-		if (isVariableDeclarationRequired(getFeatureCall(expr), expr, b)) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b, boolean recursive) {
+		if (recursive && isVariableDeclarationRequired(getFeatureCall(expr), expr, b)) {
 			return true;
 		}
 		final EStructuralFeature eContainingFeature = expr.eContainingFeature();
@@ -414,13 +414,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				if (inlineAnnotation == null)
 					return true;
 				for (XExpression argument : featureCall.getActualArguments()) {
-					if (isVariableDeclarationRequired(argument, b)) {
+					if (isVariableDeclarationRequired(argument, b, recursive)) {
 						return true;
 					}
-					if (argument instanceof XInstanceOfExpression && isVariableDeclarationRequired(((XInstanceOfExpression) argument).getExpression(), b)) {
+					if (argument instanceof XInstanceOfExpression && isVariableDeclarationRequired(((XInstanceOfExpression) argument).getExpression(), b, recursive)) {
 						return true;
 					}
-					if (argument instanceof XCastedExpression && isVariableDeclarationRequired(((XCastedExpression) argument).getTarget(), b)) {
+					if (argument instanceof XCastedExpression && isVariableDeclarationRequired(((XCastedExpression) argument).getTarget(), b, recursive)) {
 						return true;
 					}
 				}
@@ -447,7 +447,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 			return !b.hasName(feature);
 		}
-		return super.isVariableDeclarationRequired(expr, b);
+		return super.isVariableDeclarationRequired(expr, b, recursive);
 	}
 	
 	protected boolean isVariableDeclarationRequired(XAbstractFeatureCall featureCall, XExpression expression, ITreeAppendable b) {
@@ -472,7 +472,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		int startIndex = argumentIndex + 1;
 		int endIndex = arguments.size();
 		for (int i = startIndex; i < endIndex; i++) {
-			if (isVariableDeclarationRequired(arguments.get(i), b))
+			if (isVariableDeclarationRequired(arguments.get(i), b, false))
 				return true;
 		}
 		return false;
@@ -499,7 +499,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected void prepareExpression(XExpression arg, ITreeAppendable b) {
 		if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall) arg).getFeature() instanceof JvmField)
-				&& !isVariableDeclarationRequired(arg, b)) {
+				&& !isVariableDeclarationRequired(arg, b, true)) {
 			// we have to convert the given value in a later step and the
 			// conversion code may produce an anonymous class of the expected type
 			// where the implementation needs to reference the value of this expression
@@ -1028,7 +1028,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.increaseIndentation();
 			b.newLine();
 		}
-		if (referenceName == null && isVariableDeclarationRequired(argument, b)) {
+		if (referenceName == null && isVariableDeclarationRequired(argument, b, true)) {
 			if (canCompileToJavaExpression(argument, b)) {
 				internalToJavaExpression(argument, b);
 			} else {
