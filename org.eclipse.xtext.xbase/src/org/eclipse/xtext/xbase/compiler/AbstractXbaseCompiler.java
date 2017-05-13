@@ -659,7 +659,7 @@ public abstract class AbstractXbaseCompiler {
 	 * @deprecated use {@link #isVariableDeclarationRequired(XExpression, ITreeAppendable, boolean)} instead.
 	 */
 	@Deprecated
-	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
+	protected final boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
 		return isVariableDeclarationRequired(expr, b, true);
 	}
 
