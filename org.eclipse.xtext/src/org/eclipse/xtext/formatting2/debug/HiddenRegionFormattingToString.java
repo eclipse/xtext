@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.debug;
 
-import static com.google.common.base.Objects.*;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.List;
 
@@ -46,5 +46,9 @@ public class HiddenRegionFormattingToString implements Function<IHiddenRegionFor
 		if (indentationDecrease != null)
 			result.add("indentDec=" + indentationDecrease);
 		return Joiner.on(";").join(result);
+	}
+	
+	private static <T> T firstNonNull(T first, T second) {
+		return first != null ? first : checkNotNull(second);
 	}
 }
