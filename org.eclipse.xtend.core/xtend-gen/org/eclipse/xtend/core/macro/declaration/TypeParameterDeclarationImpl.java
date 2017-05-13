@@ -16,7 +16,7 @@ import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -46,7 +46,7 @@ public class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypePar
   @Override
   public TypeParameterDeclarator getTypeParameterDeclarator() {
     EObject _eContainer = this.getDelegate().eContainer();
-    MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(((JvmExecutable) _eContainer));
+    MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(((JvmMember) _eContainer));
     return ((TypeParameterDeclarator) _memberDeclaration);
   }
   

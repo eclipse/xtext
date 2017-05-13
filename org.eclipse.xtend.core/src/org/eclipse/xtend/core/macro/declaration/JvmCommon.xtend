@@ -40,6 +40,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.Delegate
+import org.eclipse.xtext.common.types.JvmMember
 
 abstract class AbstractDelegator<T> {
 	@Accessors T delegate
@@ -368,7 +369,7 @@ class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypeParameter>
 	}
 	
 	override getTypeParameterDeclarator() {
-		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmExecutable) as TypeParameterDeclarator
+		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmMember) as TypeParameterDeclarator
 	}
 	
 	override getAnnotations() {
