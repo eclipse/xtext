@@ -268,7 +268,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	protected boolean canUseArrayInitializerImpl(XListLiteral literal, ITreeAppendable appendable) {
 		for(XExpression element: literal.getElements()) {
-			if (isVariableDeclarationRequired(element, appendable))
+			if (isVariableDeclarationRequired(element, appendable, true))
 				return false;
 		}
 		return true;
@@ -884,7 +884,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.newLine();
 			constructorCallToJavaExpression(expr, b);
 			b.append(";");
-		} else if (isVariableDeclarationRequired(expr, b)) {
+		} else if (isVariableDeclarationRequired(expr, b, true)) {
 			Later later = new Later() {
 				@Override
 				public void exec(ITreeAppendable appendable) {
@@ -1890,7 +1890,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b, boolean recursive) {
 		if (expr instanceof XAnnotation) {
 			return false;
 		}
@@ -1946,12 +1946,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr instanceof XAssignment) {
 			XAssignment a = (XAssignment) expr;
 			for (XExpression arg : getActualArguments(a)) {
-				if (isVariableDeclarationRequired(arg, b)) {
+				if (isVariableDeclarationRequired(arg, b, recursive)) {
 					return true;
 				}
 			}
 		}
-		return super.isVariableDeclarationRequired(expr, b);
+		return super.isVariableDeclarationRequired(expr, b, recursive);
 	}
 	
 	protected void _toJavaExpression(final XAnnotation annotation, final ITreeAppendable b) {
