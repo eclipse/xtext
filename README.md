@@ -1,3 +1,5 @@
+[![Gitter](https://badges.gitter.im/eclipse/xtext.svg)](https://gitter.im/eclipse/xtext?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 # Eclipse Xtext™
 
 Eclipse Xtext is a framework for development of programming languages and [domain specific languages](https://en.wikipedia.org/wiki/Domain-specific_language). It covers all aspects of a complete language infrastructure, from parsers, over linker, compiler or interpreter to fully-blown top-notch IDE integration for Eclipse, IntelliJ and Web-based IDEs. Further, languages developed with Xtext can be integrated into editors supporting the [Language Server Protocol](https://github.com/Microsoft/language-server-protocol) (e.g. [VS Code](https://code.visualstudio.com/), [Eclipse Che](https://www.eclipse.org/che/)). Xtext comes with great defaults for all these aspects, which at the same time can be easily tailored to your individual needs.
