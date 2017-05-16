@@ -44,16 +44,13 @@ src:
   xtext_web: "https://github.com/eclipse/xtext-web/blob/master"
   mwe: "https://github.com/eclipse/mwe/blob/v2.7.1"
   emf: "https://github.com/eclipse/emf/blob/R2_9_0"
-  gef: "https://github.com/eclipse/gef/blob/master"
-  sevenlang: "https://github.com/xtext/seven-languages-xtext/blob/master"
 
 javadoc:
   eclipse-platform: "http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api"
   eclipse-jdt: "http://help.eclipse.org/luna/topic/org.eclipse.jdt.doc.isv/reference/api"
-  java: "http://docs.oracle.com/javase/8/docs/api/"
+  java: "http://docs.oracle.com/javase/8/docs/api"
   javaee: "https://docs.oracle.com/javaee/7/api"
   junit: "http://junit.sourceforge.net/javadoc"
   guice: "https://google.github.io/guice/api-docs/latest/javadoc"
-  mongodb: "http://api.mongodb.org/java/2.6"
 
 edit-repo : "https://github.com/eclipse/xtext/edit/maintenance/xtext-website/"

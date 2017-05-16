@@ -3,17 +3,7 @@
 	<li><a href="102_domainmodelwalkthrough.html">15 Minutes Tutorial</a></li>
 	<li><a href="103_domainmodelnextsteps.html">15 Minutes Tutorial - Extended</a></li>
 	<li><a href="104_jvmdomainmodel.html">Five simple steps to your JVM language</a></li>
-	
-	<!--li class="nav-part">Seven JVM Languages Built With Xbase</li>
-	<li><a href="201_sevenlang_introduction.html">Introduction</a></li>
-	<li><a href="202_scripting.html">Scripting Language</a></li>
-	<li><a href="203_builddsl.html">Build Language</a></li>
-	<li><a href="204_mongodb.html">DSL for MongoDB</a></li>
-	<li><a href="205_guice.html">DSL for Guice</a></li>
-	<li><a href="206_httprouting.html">Http Routing Language</a></li>
-	<li><a href="207_template.html">Template Language</a></li>
-	<li><a href="208_tortoise.html">Little Tortoise</a></li-->
-	
+		
 	<li class="nav-part">Reference Documentation</li>
 	<li><a href="301_grammarlanguage.html">The Grammar Language</a></li>
 	<li><a href="302_configuration.html">Configuration</a></li>
@@ -26,8 +16,4 @@
 	<!--li><a href="320_idea_support.html">IntelliJ IDEA Support</a></li-->
 	<li><a href="330_web_support.html">Web Editor Support</a></li>
 	<li><a href="350_continuous_integration.html">Continuous Integration</a></li>
-	
-	<!--li class="nav-part">Appendix</li>
-	<li><a href="401_migrating_from_1_0_x.html">Migrating from Xtext 1.0.x to 2.0</a></li>
-	<li><a href="402_migrating_from_0_7.html">Migrating from Xtext 0.7.x to 1.0</a></li-->
 </ul>
