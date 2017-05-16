@@ -52,7 +52,7 @@ class ServerLauncher {
 
 	def static redirectStandardStreams() {
 		System.setIn(new ByteArrayInputStream(newByteArrayOfSize(0)))
-		val id = ServerLauncher.name + "-" + new Timestamp(System.currentTimeMillis)
+		val id = (ServerLauncher.name + "-" + new Timestamp(System.currentTimeMillis)).replace(" ", "_")
 		if (IS_DEBUG) {
 			val stdFileOut = new FileOutputStream("out-" + id + ".log")
 			System.setOut(new PrintStream(stdFileOut))
