@@ -202,7 +202,7 @@ public class TracingSugarTest {
           _builder_1.newLineIfNotEmpty();
         }
       }
-      Assert.assertEquals(_builder_1.toString(), generated.toString());
+      this.assertEquals(_builder_1.toString(), generated.toString());
       final AbstractTraceRegion trace = ((ITraceRegionProvider) generated).getTraceRegion();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("CompletableTraceRegion [myOffset=0, myLength=55] associations={");
@@ -285,7 +285,7 @@ public class TracingSugarTest {
       _builder_2.append("}");
       _builder_2.newLine();
       _builder_2.append("}");
-      Assert.assertEquals(_builder_2.toString(), trace.toString());
+      this.assertEquals(_builder_2.toString(), trace.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -338,6 +338,12 @@ public class TracingSugarTest {
     _builder.append(_name_1);
     _builder.newLineIfNotEmpty();
     return _builder;
+  }
+  
+  public void assertEquals(final String expected, final String actual) {
+    final String expectedM = expected.replace(System.lineSeparator(), "\n");
+    final String actualM = actual.replace(System.lineSeparator(), "\n");
+    Assert.assertEquals(expectedM, actualM);
   }
   
   public StringConcatenationClient __generateType(final Type it) {

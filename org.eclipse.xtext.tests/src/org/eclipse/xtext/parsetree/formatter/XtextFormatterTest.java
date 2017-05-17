@@ -54,7 +54,8 @@ public class XtextFormatterTest extends AbstractXtextTests {
 		URI expectedURI = URI.createURI("classpath:/" + path + "/XtextFormatterExpected.xtext");
 		XtextResource expectedResource = (XtextResource) resourceSet.getResource(expectedURI, true);
 		String expected = expectedResource.getParseResult().getRootNode().getText();
-		assertEquals(expected, formatted.toString());
+		assertEquals(expected.replaceAll(System.lineSeparator(), "\n"), 
+		    formatted.toString().replaceAll(System.lineSeparator(), "\n"));
 	}
 
 	public void _testXtextXtext() {

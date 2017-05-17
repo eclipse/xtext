@@ -80,7 +80,8 @@ public interface TestLangLSPExtension extends ILanguageServerExtension {
         final int start = ctx.getDocument().getOffSet(_position);
         Position _position_1 = new Position((param.line + 1), 0);
         int _offSet = ctx.getDocument().getOffSet(_position_1);
-        final int end = (_offSet - 1);
+        int _length = System.lineSeparator().length();
+        final int end = (_offSet - _length);
         TestLangLSPExtension.TextOfLineResult _textOfLineResult = new TestLangLSPExtension.TextOfLineResult();
         final Procedure1<TestLangLSPExtension.TextOfLineResult> _function_1 = (TestLangLSPExtension.TextOfLineResult it) -> {
           it.text = ctx.getDocument().getContents().substring(start, end);

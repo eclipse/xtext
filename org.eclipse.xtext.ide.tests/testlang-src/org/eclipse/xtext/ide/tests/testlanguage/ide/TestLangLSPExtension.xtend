@@ -58,7 +58,7 @@ interface TestLangLSPExtension extends ILanguageServerExtension {
 		override getTextOfLine(TextOfLineParam param) {
 			return access.doRead(param.uri) [ ctx |
 				val start = ctx.document.getOffSet(new Position(param.line, 0 ))
-				val end = ctx.document.getOffSet(new Position(param.line + 1, 0 )) -1
+				val end = ctx.document.getOffSet(new Position(param.line + 1, 0 )) -System.lineSeparator.length
 				return new TextOfLineResult => [
 					text = ctx.document.contents.substring(start, end)
 				]

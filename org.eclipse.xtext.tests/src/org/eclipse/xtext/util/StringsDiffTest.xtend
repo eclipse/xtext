@@ -94,7 +94,9 @@ class StringsDiffTest {
 	
 	
 	protected def assertDiff(String one, String two, CharSequence expected) {
-		assertEquals(expected?.toString()?.trim, DiffUtil.diff(one, two))
+		val expectedM = expected?.toString()?.trim?.replaceAll(System.lineSeparator, "\n")
+		val actualM = DiffUtil.diff(one, two)?.replaceAll(System.lineSeparator, "\n")
+		assertEquals(expectedM, actualM)
 	}
 		
 }

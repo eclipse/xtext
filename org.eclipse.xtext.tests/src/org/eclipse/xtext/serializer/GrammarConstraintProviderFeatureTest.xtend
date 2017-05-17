@@ -40,7 +40,7 @@ class GrammarConstraintProviderFeatureTest {
 			  val[1,1]
 			}
 		'''
-		Assert.assertEquals(expected, actual)
+		assertEquals(expected, actual)
 	}
 
 	@Test def void optional() {
@@ -52,7 +52,7 @@ class GrammarConstraintProviderFeatureTest {
 			  val[0,1]
 			}
 		'''
-		Assert.assertEquals(expected, actual)
+		assertEquals(expected, actual)
 	}
 
 	@Test def void multi() {
@@ -64,7 +64,7 @@ class GrammarConstraintProviderFeatureTest {
 			  val[1,*]
 			}
 		'''
-		Assert.assertEquals(expected, actual)
+		assertEquals(expected, actual)
 	}
 
 	@Test def void optionalMulti() {
@@ -76,7 +76,7 @@ class GrammarConstraintProviderFeatureTest {
 			  val[0,*]
 			}
 		'''
-		Assert.assertEquals(expected, actual)
+		assertEquals(expected, actual)
 	}
 
 	@Test def void twoToThree() {
@@ -88,7 +88,7 @@ class GrammarConstraintProviderFeatureTest {
 			  val[2,3]
 			}
 		'''
-		Assert.assertEquals(expected, actual)
+		assertEquals(expected, actual)
 	}
 	
 	@Test def void twoDoubleLoop() {
@@ -101,7 +101,7 @@ class GrammarConstraintProviderFeatureTest {
 			  val2[0,*]
 			}
 		'''
-		Assert.assertEquals(expected, actual)
+		assertEquals(expected, actual)
 	}
 	
 	@Test def void zeroToThree() {
@@ -115,7 +115,7 @@ class GrammarConstraintProviderFeatureTest {
 			  val3[0,1]
 			}
 		'''
-		Assert.assertEquals(expected, actual)
+		assertEquals(expected, actual)
 	}
 	
 	@Test def void unordered() {
@@ -128,7 +128,7 @@ class GrammarConstraintProviderFeatureTest {
 			  val2[0,*]
 			}
 		'''
-		Assert.assertEquals(expected, actual)
+		assertEquals(expected, actual)
 	}
 	
 	@Test def void complex1() {
@@ -153,7 +153,7 @@ class GrammarConstraintProviderFeatureTest {
 			  val6[0,*]
 			}
 		'''
-		Assert.assertEquals(expected, actual)
+		assertEquals(expected, actual)
 	}
 	
 	@Test def void complex2() {
@@ -168,7 +168,14 @@ class GrammarConstraintProviderFeatureTest {
 			  val2[0,*]
 			}
 		'''
-		Assert.assertEquals(expected, actual)
+		assertEquals(expected, actual)
+	}
+	
+	def assertEquals(String expected, String actual)
+	{
+		val expectedM = expected?.replaceAll(System.lineSeparator, "\n");
+		val actualM = expected?.replaceAll(System.lineSeparator, "\n");
+		Assert.assertEquals(expectedM, actualM)
 	}
 
 	def String toFeatureInfo(CharSequence grammarString) {

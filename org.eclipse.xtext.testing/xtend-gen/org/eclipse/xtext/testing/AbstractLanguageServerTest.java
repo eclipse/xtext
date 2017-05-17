@@ -845,7 +845,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   }
   
   public void assertEquals(final String expected, final String actual) {
-    Assert.assertEquals(expected.replace("\t", "    "), actual.replace("\t", "    "));
+    final String expectedM = expected.replace(System.lineSeparator(), "\n");
+    final String actualM = actual.replace(System.lineSeparator(), "\n");
+    Assert.assertEquals(expectedM.replace("\t", "    "), actualM.replace("\t", "    "));
   }
   
   protected void testFormatting(final Procedure1<? super FormattingConfiguration> configurator) {

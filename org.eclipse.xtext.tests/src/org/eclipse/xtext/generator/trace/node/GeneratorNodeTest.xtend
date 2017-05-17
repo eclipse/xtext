@@ -31,12 +31,12 @@ class GeneratorNodeTest {
 		node.appendNewLine.append('dedented')
 		val processor = new GeneratorNodeProcessor
 		val result = processor.process(node)
-		Assert.assertEquals('''
+		assertEquals('''
 			notindented
 			  indented1
 			  indented2
 			dedented'''.toString, result.toString)
-		Assert.assertEquals('''
+		assertEquals('''
 			CompletableTraceRegion [myOffset=0, myLength=44] associations={
 			  LocationData [TextRegionWithLineInformation [0:100][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			} nestedRegions={
@@ -55,7 +55,7 @@ class GeneratorNodeTest {
 		node.append('noindent').appendNewLine
 
 		val processor = new GeneratorNodeProcessor
-		Assert.assertEquals('''
+		assertEquals('''
 			Hallo
 			noindent
 			noindent
@@ -71,8 +71,8 @@ class GeneratorNodeTest {
 			
 		val processor = new GeneratorNodeProcessor
 		val result = processor.process(node)
-		Assert.assertEquals(someCodeGen_noTrace(2).toString, result.toString)
-		Assert.assertEquals('''
+		assertEquals(someCodeGen_noTrace(2).toString, result.toString)
+		assertEquals('''
 			CompletableTraceRegion [myOffset=0, myLength=80] associations={
 			  LocationData [TextRegionWithLineInformation [0:100][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			} nestedRegions={
@@ -133,7 +133,7 @@ class GeneratorNodeTest {
 		node.append(nestedNode)
 
 		val processor = new GeneratorNodeProcessor
-		Assert.assertEquals('''
+		assertEquals('''
 			* a simple string
 			* a multi-line string concatenation embedding
 			  	* a simple string
@@ -156,7 +156,7 @@ class GeneratorNodeTest {
 		node.doIndent(true, true)
 
 		val processor = new GeneratorNodeProcessor
-		Assert.assertEquals('''
+		assertEquals('''
 			  // indentImmediately: false, indentEmptyLines: false
 			    a
 			  
@@ -191,6 +191,12 @@ class GeneratorNodeTest {
 		parent.append(new IndentNode('  ', indentImmediately, indentEmptyLines).append('c')).appendNewLine
 		parent.append(new IndentNode('  ', indentImmediately, indentEmptyLines).appendNewLine)
 		parent.append('d').append(new IndentNode('  ', indentImmediately, indentEmptyLines).appendNewLine)
+	}
+	
+    private def void assertEquals(String expected, String actual) {
+		val expectedM = expected.toString.replaceAll(System.lineSeparator, "\n")
+		val actualM = actual.toString.replaceAll(System.lineSeparator, "\n")
+		Assert.assertEquals(expectedM, actualM)
 	}
 	
 }
