@@ -28,11 +28,8 @@ repositories {
 		maven { url jenkinsPipelineRepo('xtext-core') }
 		maven { url jenkinsPipelineRepo('xtext-extras') }
 		maven { url jenkinsPipelineRepo('xtext-eclipse') }
-		maven { url jenkinsPipelineRepo('xtext-idea') }
 	} else {
 		mavenLocal()
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-		// Artifacts of xtext-idea are not available as public snapshots, so add the Jenkins repository
-		maven { url jenkinsPipelineRepo('xtext-idea') }
 	}
 }
