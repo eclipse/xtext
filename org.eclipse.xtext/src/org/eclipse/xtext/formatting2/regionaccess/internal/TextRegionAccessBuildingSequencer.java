@@ -9,12 +9,14 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import java.util.LinkedList;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.generator.trace.internal.AbstractTraceForURIProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.XtextResource;
@@ -24,6 +26,9 @@ import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.util.Strings;
 
 public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
+
+	private static final Logger log = Logger.getLogger(TextRegionAccessBuildingSequencer.class);
+
 	private StringHiddenRegion last;
 	private StringBasedRegionAccess regionAccess;
 	private final LinkedList<AbstractEObjectRegion> stack = new LinkedList<AbstractEObjectRegion>();
@@ -201,6 +206,9 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	}
 
 	public TextRegionAccessBuildingSequencer withRoot(ISerializationContext ctx, EObject root) {
+		if (root.eResource() == null) {
+			log.error("Root has no XtextResource. This is likely to cause follow-up errors");
+		}
 		this.regionAccess = new StringBasedRegionAccess((XtextResource) root.eResource());
 		this.last = createHiddenRegion();
 		this.regionAccess.setRootEObject(enterEObject(((SerializationContext) ctx).getActionOrRule(), root));

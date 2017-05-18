@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
@@ -33,6 +34,8 @@ import com.google.inject.Singleton;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
+
+	private static final Logger log = Logger.getLogger(AbstractDeclarativeFormatter.class);
 
 	@Singleton
 	protected static class ConfigStore {
@@ -71,6 +74,8 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 	public ITokenStream createFormatterStream(EObject context, String indent, ITokenStream out, boolean preserveWhitespaces) {
 		if(context != null && context.eResource() != null && context.eResource().getURI() != null) {
 			contextResourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(context).trimFragment();
+		} else if (context != null && context.eResource() == null) {
+			log.error("Model has no XtextResource. This is likely to cause follow-up errors");
 		}
 		return new FormattingConfigBasedStream(out, indent, getConfig(), createMatcher(), hiddenTokenHelper,
 				preserveWhitespaces);
