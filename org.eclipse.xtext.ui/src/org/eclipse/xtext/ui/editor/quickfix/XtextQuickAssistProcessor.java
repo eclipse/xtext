@@ -12,6 +12,7 @@ import static java.util.Arrays.*;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -80,6 +82,16 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		}
 
 		return false;
+	}
+	
+	/**
+	 * Check whether the given annotation type is supported, i.e. {@link #canFix(Annotation)} might return {@code true}.
+	 * This could be made protected in a future release.
+	 */
+	private boolean isSupported(Annotation annotation) {
+		return !annotation.isMarkedDeleted()
+				&& (annotation instanceof XtextAnnotation || annotation instanceof MarkerAnnotation
+					|| annotation instanceof SpellingAnnotation);
 	}
 
 	@Override
@@ -154,11 +166,11 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
         if (completionProposals.isEmpty()) {
         	return;
         }
-		if (invocationContext instanceof QuickAssistInvocationContext && !((QuickAssistInvocationContext) invocationContext).isSuppressSelection()) {
+		if (!(invocationContext instanceof QuickAssistInvocationContext && ((QuickAssistInvocationContext) invocationContext).isSuppressSelection())) {
 			ISourceViewer sourceViewer = invocationContext.getSourceViewer();
 			IAnnotationModel annotationModel = sourceViewer.getAnnotationModel();
 			Iterator<Annotation> iterator = applicableAnnotations.iterator();
-			while(iterator.hasNext()){
+			while (iterator.hasNext()) {
 				Position pos = annotationModel.getPosition(iterator.next());
 				if (pos != null) {
 					sourceViewer.setSelectedRange(pos.getOffset(), pos.getLength());
@@ -187,58 +199,69 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 
 		Iterator<?> iterator;
 		if (annotationModel instanceof IAnnotationModelExtension2)
-			iterator = ((IAnnotationModelExtension2) annotationModel).getAnnotationIterator(lineOffset, lineLength, true,
-					true);
+			iterator = ((IAnnotationModelExtension2) annotationModel).getAnnotationIterator(lineOffset, lineLength, true, true);
 		else
 			iterator = annotationModel.getAnnotationIterator();
 
-		Set<Annotation> possibleAnnotations = Sets.newHashSet();
-		Annotation actualAnnotation = null;
-		int nearestAnnotationOffset = Integer.MAX_VALUE;
-		Annotation firstAnnotation = null;
+		Map<Annotation, Position> possibleAnnotations = Maps.newLinkedHashMap();
+		boolean hasIncludingAnnotation = false;
+		int smallestAnnotationDistance = Integer.MAX_VALUE;
 		int offsetOfFirstAnnotation = Integer.MAX_VALUE;
-
 		while (iterator.hasNext()) {
 			Object key = iterator.next();
-			if (!(key instanceof Annotation))
-				continue;
-
-			Annotation annotationTemp = (Annotation) key;
-			if (!canFix(annotationTemp))
-				continue;
-
-			Position pos = annotationModel.getPosition(annotationTemp);
-			if (pos == null)
-				continue;
-
-			if (pos.overlapsWith(lineOffset, lineLength)) {
-				possibleAnnotations.add(annotationTemp);
-				if (pos.getOffset() < offsetOfFirstAnnotation) {
-					offsetOfFirstAnnotation = pos.getOffset();
-					firstAnnotation = annotationTemp;
+			if (key instanceof Annotation) {
+				Annotation annotation = (Annotation) key;
+				if (isSupported(annotation)) {
+					Position pos = annotationModel.getPosition(annotation);
+					// Consider all annotations that are on the same line as the cursor
+					if (pos != null && pos.overlapsWith(lineOffset, lineLength)) {
+						possibleAnnotations.put(annotation, pos);
+						if (pos.includes(offset)) {
+							hasIncludingAnnotation = true;
+						} else if (offset >= pos.getOffset()) {
+							int annotationDistance = offset - (pos.getOffset() + pos.getLength());
+							if (annotationDistance < smallestAnnotationDistance)
+								smallestAnnotationDistance = annotationDistance;
+						} else if (pos.getOffset() < offsetOfFirstAnnotation) {
+							offsetOfFirstAnnotation = pos.getOffset();
+						}
+					}
 				}
-				int distanceToOffset = offset - pos.getOffset();
-				if (distanceToOffset >= 0 && distanceToOffset < nearestAnnotationOffset) {
-					actualAnnotation = annotationTemp;
-					nearestAnnotationOffset = distanceToOffset;
-				} 
 			}
 		}
-		// choose the first annotation if there is no better selection available
-		if (actualAnnotation == null) {
-			actualAnnotation = firstAnnotation;
+		if (possibleAnnotations.isEmpty()) {
+			return Collections.emptySet();
 		}
-		// Find Annotations with same offset an length
-		Set<Annotation> actualAnnotations = Sets.newHashSet();
-		for(Annotation possibleAnnotation : possibleAnnotations){
-			Position possibleAnnotationPosition = annotationModel.getPosition(possibleAnnotation);
-			Position actualAnnotationPosition = annotationModel.getPosition(actualAnnotation);
-			// position may be null due to concurrent operation on the annotation model
-			if(possibleAnnotationPosition != null && possibleAnnotationPosition.equals(actualAnnotationPosition)){
-				actualAnnotations.add(possibleAnnotation);
+		
+		// There is an annotation that includes the cursor, so accept all including annotations
+		if (hasIncludingAnnotation) {
+			Set<Annotation> includingAnnotations = Sets.newLinkedHashSetWithExpectedSize(possibleAnnotations.size());
+			for (Map.Entry<Annotation, Position> entry : possibleAnnotations.entrySet()) {
+				if (entry.getValue().includes(offset) && canFix(entry.getKey()))
+					includingAnnotations.add(entry.getKey());
 			}
+			return includingAnnotations;
 		}
-		return actualAnnotations;
+		
+		// There is an annotation that is left of the cursor, so accept the nearest annotations on the left
+		if (smallestAnnotationDistance != Integer.MAX_VALUE) {
+			Set<Annotation> nearestAnnotations = Sets.newLinkedHashSetWithExpectedSize(possibleAnnotations.size());
+			for (Map.Entry<Annotation, Position> entry : possibleAnnotations.entrySet()) {
+				Position pos = entry.getValue();
+				if (offset >= pos.getOffset() && offset - (pos.getOffset() + pos.getLength()) == smallestAnnotationDistance
+						&& canFix(entry.getKey()))
+					nearestAnnotations.add(entry.getKey());
+			}
+			return nearestAnnotations;
+		}
+		
+		// Accept the nearest annotations on the right
+		Set<Annotation> nearestAnnotations = Sets.newLinkedHashSetWithExpectedSize(possibleAnnotations.size());
+		for (Map.Entry<Annotation, Position> entry : possibleAnnotations.entrySet()) {
+			if (entry.getValue().getOffset() == offsetOfFirstAnnotation && canFix(entry.getKey()))
+				nearestAnnotations.add(entry.getKey());
+		}
+		return nearestAnnotations;
 	}
 	
 	public IssueUtil getIssueUtil() {
