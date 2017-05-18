@@ -6,3 +6,7 @@ dependencies {
 }
 
 sourceSets.main.resources.srcDir 'resources'
+
+sourcesJar {
+	exclude '**/gradlew/**'
+}
