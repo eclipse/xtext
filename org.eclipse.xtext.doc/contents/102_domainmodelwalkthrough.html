@@ -154,17 +154,17 @@ Feature:
     (elements+=Type)*;
 </code></pre>
 
-    <p>It says that a <em>Domainmodel</em> contains an arbitrary number (<code class="highlighter-rouge">*</code>) of <em>Type</em>s which are added (<code class="highlighter-rouge">+=</code>) to a feature called <code class="highlighter-rouge">elements</code>.</p>
+    <p>It says that a <em>Domainmodel</em> contains an arbitrary number (<code>*</code>) of <em>Type</em>s which are added (<code>+=</code>) to a feature called <code>elements</code>.</p>
   </li>
   <li>
-    <p>The rule <em>Type</em> delegates to either the rule <em>DataType</em> or (<code class="highlighter-rouge">|</code>) the rule <em>Entity</em>.</p>
+    <p>The rule <em>Type</em> delegates to either the rule <em>DataType</em> or (<code>|</code>) the rule <em>Entity</em>.</p>
 
     <pre><code class="language-xtext">Type:
     DataType | Entity;
 </code></pre>
   </li>
   <li>
-    <p>The rule <em>DataType</em> starts with a keyword <code class="highlighter-rouge">'datatype'</code>, followed by an identifier which is parsed by a rule called <em>ID</em>. The rule <em>ID</em> is defined in the super grammar <em>org.eclipse.xtext.common.Terminals</em> and parses a single word, a.k.a identifier. You can navigate to the declaration by using <em>F3</em> on the rule call. The value returned by the call to <em>ID</em> is assigned (<code class="highlighter-rouge">=</code>) to the feature <code class="highlighter-rouge">name</code>.</p>
+    <p>The rule <em>DataType</em> starts with a keyword <code>'datatype'</code>, followed by an identifier which is parsed by a rule called <em>ID</em>. The rule <em>ID</em> is defined in the super grammar <em>org.eclipse.xtext.common.Terminals</em> and parses a single word, a.k.a identifier. You can navigate to the declaration by using <em>F3</em> on the rule call. The value returned by the call to <em>ID</em> is assigned (<code>=</code>) to the feature <code>name</code>.</p>
 
     <pre><code class="language-xtext">DataType:
     'datatype' name=ID;
@@ -179,7 +179,7 @@ Feature:
     '}';
 </code></pre>
 
-    <p>Next up there is the <code class="highlighter-rouge">extends</code> clause which is parenthesized and optional (<code class="highlighter-rouge">?</code>). Since the feature named <code class="highlighter-rouge">superType</code> is a cross reference (note the square brackets), the parser rule <em>Entity</em> is not called here, but only a single identifier (the <em>ID</em>-rule) is parsed. The actual <em>Entity</em> to assign to the <code class="highlighter-rouge">superType</code> reference is resolved during the linking phase. Finally between curly braces there can be any number of <em>Features</em>, which invokes the next rule.</p>
+    <p>Next up there is the <code>extends</code> clause which is parenthesized and optional (<code>?</code>). Since the feature named <code>superType</code> is a cross reference (note the square brackets), the parser rule <em>Entity</em> is not called here, but only a single identifier (the <em>ID</em>-rule) is parsed. The actual <em>Entity</em> to assign to the <code>superType</code> reference is resolved during the linking phase. Finally between curly braces there can be any number of <em>Features</em>, which invokes the next rule.</p>
   </li>
   <li>
     <p>Last but not least, the rule <em>Feature</em> is defined as follows:</p>
@@ -188,11 +188,11 @@ Feature:
     (many?='many')? name=ID ':' type=[Type];
 </code></pre>
 
-    <p>The keyword <code class="highlighter-rouge">many</code> shall be used to model a multi-valued feature in this DSL. The assignment operator (<code class="highlighter-rouge">?=</code>) implies that the feature <code class="highlighter-rouge">many</code> is of type <em>boolean</em>. You are already familiar with the other syntax elements in this parser rule.</p>
+    <p>The keyword <code>many</code> shall be used to model a multi-valued feature in this DSL. The assignment operator (<code>?=</code>) implies that the feature <code>many</code> is of type <em>boolean</em>. You are already familiar with the other syntax elements in this parser rule.</p>
   </li>
 </ol>
 
-<p>This entities grammar already uses the most important concepts of Xtext’s grammar language. You have learned that keywords are written as string literals and a simple assignment uses a plain equal sign (<code class="highlighter-rouge">=</code>), whereas a multi-value assignment uses a plus-equals (<code class="highlighter-rouge">+=</code>). We have also seen the boolean assignment operator (<code class="highlighter-rouge">?=</code>). Furthermore the example contains syntax elements with different cardinalities (<code class="highlighter-rouge">?</code> = optional, <code class="highlighter-rouge">*</code> = any number, <code class="highlighter-rouge">+</code> = at least once) and demonstrates how cross-references can be declared. Please consult the <a href="301_grammarlanguage.html">Grammar Language Reference</a> for more details. Let’s now have a look what you can do with such a language description.</p>
+<p>This entities grammar already uses the most important concepts of Xtext’s grammar language. You have learned that keywords are written as string literals and a simple assignment uses a plain equal sign (<code>=</code>), whereas a multi-value assignment uses a plus-equals (<code>+=</code>). We have also seen the boolean assignment operator (<code>?=</code>). Furthermore the example contains syntax elements with different cardinalities (<code>?</code> = optional, <code>*</code> = any number, <code>+</code> = at least once) and demonstrates how cross-references can be declared. Please consult the <a href="301_grammarlanguage.html">Grammar Language Reference</a> for more details. Let’s now have a look what you can do with such a language description.</p>
 
 <h2 id="generate-language-artifacts">Generate Language Artifacts</h2>
 
@@ -206,7 +206,7 @@ Feature:
 
 <h2 id="run-generated-plugin">Run the Generated Eclipse Plug-in</h2>
 
-<p>We are now able to test the Eclipse IDE integration. If you right-click the project <code class="highlighter-rouge">org.example.domainmodel</code> in the Package Explorer and select <em>Run As → Eclipse Application</em>, a new run configuration is created and launched that starts a second instance of Eclipse including your new language plug-ins. In the new instance, create a new project of your choice, e.g. <em>File → New → Project… → Java Project</em> and therein a new file with the file extension you chose in the beginning (<em>*.dmodel</em>). This will open the generated entity editor. Try it and discover the default functionality for code completion, syntax highlighting, syntactic validation, linking errors, the outline view, find references etc.</p>
+<p>We are now able to test the Eclipse IDE integration. If you right-click the project <code>org.example.domainmodel</code> in the Package Explorer and select <em>Run As → Eclipse Application</em>, a new run configuration is created and launched that starts a second instance of Eclipse including your new language plug-ins. In the new instance, create a new project of your choice, e.g. <em>File → New → Project… → Java Project</em> and therein a new file with the file extension you chose in the beginning (<em>*.dmodel</em>). This will open the generated entity editor. Try it and discover the default functionality for code completion, syntax highlighting, syntactic validation, linking errors, the outline view, find references etc.</p>
 
 <p><img src="images/30min_editor.png" alt="" /></p>
 
@@ -268,7 +268,7 @@ AbstractElement:
 </code></pre>
   </li>
   <li>
-    <p>A <code class="highlighter-rouge">PackageDeclaration</code> in turn looks pretty much as expected. It contains a number of <em>Imports</em> and <em>AbstractElements</em>. Since <em>Imports</em> should be allowed for the root-Domainmodel, too, we add them as an alternative to the rule <code class="highlighter-rouge">AbstractElement</code>.</p>
+    <p>A <code>PackageDeclaration</code> in turn looks pretty much as expected. It contains a number of <em>Imports</em> and <em>AbstractElements</em>. Since <em>Imports</em> should be allowed for the root-Domainmodel, too, we add them as an alternative to the rule <code>AbstractElement</code>.</p>
 
     <pre><code class="language-xtext">PackageDeclaration:
     'package' name=QualifiedName '{'
@@ -282,10 +282,10 @@ QualifiedName:
     ID ('.' ID)*;
 </code></pre>
 
-    <p>The <code class="highlighter-rouge">QualifiedName</code> is a little special. It does not contain any assignments. Therefore it serves as a data type rule that returns a String. Hence the feature <code class="highlighter-rouge">name</code> of a <em>Package</em> is still of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a>.</p>
+    <p>The <code>QualifiedName</code> is a little special. It does not contain any assignments. Therefore it serves as a data type rule that returns a String. Hence the feature <code>name</code> of a <em>Package</em> is still of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>.</p>
   </li>
   <li>
-    <p>Imports can be defined in a very convenient way with Xtext. If you use the name <code class="highlighter-rouge">importedNamespace</code> in a parser rule, the framework will treat the value as an import. It even supports wildcards and handles them as expected:</p>
+    <p>Imports can be defined in a very convenient way with Xtext. If you use the name <code>importedNamespace</code> in a parser rule, the framework will treat the value as an import. It even supports wildcards and handles them as expected:</p>
 
     <pre><code class="language-xtext">Import:
     'import' importedNamespace=QualifiedNameWithWildcard;
@@ -294,7 +294,7 @@ QualifiedNameWithWildcard:
     QualifiedName '.*'?;
 </code></pre>
 
-    <p>Similar to the rule <code class="highlighter-rouge">QualifiedName</code>, <code class="highlighter-rouge">QualifiedNameWithWildcard</code> returns a plain string.</p>
+    <p>Similar to the rule <code>QualifiedName</code>, <code>QualifiedNameWithWildcard</code> returns a plain string.</p>
   </li>
   <li>
     <p>The last step is to allow fully qualified names in cross-references, too. Otherwise one could not refer to an entity without adding an import statement.</p>
@@ -308,7 +308,7 @@ Feature:
     (many?='many')? name=ID ':' type=[Type|QualifiedName];
 </code></pre>
 
-    <p>Please note that the bar (<code class="highlighter-rouge">|</code>) is not an alternative in the context of a cross-reference, but used to specify the syntax of the parsed string.</p>
+    <p>Please note that the bar (<code>|</code>) is not an alternative in the context of a cross-reference, but used to specify the syntax of the parsed string.</p>
   </li>
 </ol>
 

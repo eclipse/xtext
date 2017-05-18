@@ -27,30 +27,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>In this lesson you will generate Java Beans for entities that are defined in the domain model DSL. For each <em>Entity</em>, a Java class is generated and each <em>Feature</em> will lead to a private field in that class including public getters and setters. For the sake of simplicity, we will use fully qualified names all over the generated code.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">my</span><span class="o">.</span><span class="na">company</span><span class="o">.</span><span class="na">blog</span><span class="o">;</span>
+<pre><code class="language-java">package my.company.blog;
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HasAuthor</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">String</span> <span class="n">author</span><span class="o">;</span>
+public class HasAuthor {
+    private java.lang.String author;
     
-    <span class="kd">public</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">String</span> <span class="n">getAuthor</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">author</span><span class="o">;</span>
-    <span class="o">}</span>
+    public java.lang.String getAuthor() {
+        return author;
+    }
     
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setAuthor</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">String</span> <span class="n">author</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">author</span> <span class="o">=</span> <span class="n">author</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    public void setAuthor(java.lang.String author) {
+        this.author = author;
+    }
+}
 </code></pre>
-</div>
 
 <p>First of all, locate the file <em>DomainmodelGenerator.xtend</em> in the package <em>org.example.domainmodel.generator</em>. This Xtend class is used to generate code for your models in the standalone scenario and in the interactive Eclipse environment. Let’s make the implementation more meaningful and start writing the code generator. The strategy is to find all entities within a resource and trigger code generation for each one.</p>
 
 <ol>
   <li>
-    <p>First of all, you will have to filter the contents of the resource down to the defined entities. Therefore we need to iterate a resource with all its deeply nested elements. This can be achieved with the method <code class="highlighter-rouge">getAllContents()</code>. To use the resulting <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java">TreeIterator</a> in a <code class="highlighter-rouge">for</code> loop, we use the extension method <code class="highlighter-rouge">toIterable()</code> from the built-in library class <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java">IteratorExtensions</a>.</p>
+    <p>First of all, you will have to filter the contents of the resource down to the defined entities. Therefore we need to iterate a resource with all its deeply nested elements. This can be achieved with the method <code>getAllContents()</code>. To use the resulting <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java">TreeIterator</a> in a <code>for</code> loop, we use the extension method <code>toIterable()</code> from the built-in library class <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java">IteratorExtensions</a>.</p>
 
-    <pre><code class="language-xtend">class DomainmodelGenerator implements IGenerator {
-    override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+    <pre><code class="language-xtend">class DomainmodelGenerator extends AbstractGenerator {
+    override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         for (e : resource.allContents.toIterable.filter(Entity)) {
                 
         }
@@ -59,14 +58,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
   </li>
   <li>
-    <p>Now let’s answer the question how we determine the file name of the Java class that each <em>Entity</em> should yield. This information should be derived from the qualified name of the <em>Entity</em> since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> into the generator.</p>
+    <p>Now let’s answer the question how we determine the file name of the Java class that each <em>Entity</em> should yield. This information should be derived from the qualified name of the <em>Entity</em> since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> into the generator.</p>
 
     <pre><code class="language-xtend">  @Inject extension IQualifiedNameProvider
 </code></pre>
 
     <p>This allows to ask for the name of an entity. It is straightforward to convert the name into a file name:</p>
 
-    <pre><code class="language-xtend">override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+    <pre><code class="language-xtend">override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
     for (e : resource.allContents.toIterable.filter(Entity)) {
         fsa.generateFile(
             e.fullyQualifiedName.toString("/") + ".java",
@@ -76,7 +75,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
   </li>
   <li>
-    <p>The next step is to write the actual template code for an entity. For now, the function <code class="highlighter-rouge">Entity.compile</code> does not exist, but it is easy to create it:</p>
+    <p>The next step is to write the actual template code for an entity. For now, the function <code>Entity.compile</code> does not exist, but it is easy to create it:</p>
 
     <pre><code class="language-xtend">def compile(Entity e) '''
     package «e.eContainer.fullyQualifiedName»;
@@ -87,10 +86,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
   </li>
   <li>
-    <p>This small template is basically the first shot at a Java-Beans generator. However, it is currently rather incomplete and will fail if the <em>Entity</em> is not contained in a package. A small modification fixes this. The <code class="highlighter-rouge">package</code> declaration has to be wrapped in an <code class="highlighter-rouge">IF</code> expression:</p>
+    <p>This small template is basically the first shot at a Java-Beans generator. However, it is currently rather incomplete and will fail if the <em>Entity</em> is not contained in a package. A small modification fixes this. The <code>package</code> declaration has to be wrapped in an <code>IF</code> expression:</p>
 
     <pre><code class="language-xtend">def compile(Entity e) '''
-    «IF e.eContainer.fullyQualifiedName != null»
+    «IF e.eContainer.fullyQualifiedName !== null»
         package «e.eContainer.fullyQualifiedName»;
     «ENDIF»
         
@@ -99,14 +98,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '''
 </code></pre>
 
-    <p>Let’s handle the <em>superType</em> of an <em>Entity</em> gracefully, too, by using another <code class="highlighter-rouge">IF</code> expression:</p>
+    <p>Let’s handle the <em>superType</em> of an <em>Entity</em> gracefully, too, by using another <code>IF</code> expression:</p>
 
     <pre><code class="language-xtend">def compile(Entity e) ''' 
-    «IF e.eContainer.fullyQualifiedName != null»
+    «IF e.eContainer.fullyQualifiedName !== null»
         package «e.eContainer.fullyQualifiedName»;
     «ENDIF»
         
-    public class «e.name» «IF e.superType != null
+    public class «e.name» «IF e.superType !== null
             »extends «e.superType.fullyQualifiedName» «ENDIF»{
     }
 '''
@@ -131,11 +130,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <p>As you can see, there is nothing fancy about this one. Last but not least, we have to make sure that the function is actually used.</p>
 
     <pre><code class="language-xtend">def compile(Entity e) ''' 
-    «IF e.eContainer.fullyQualifiedName != null»
+    «IF e.eContainer.fullyQualifiedName !== null»
         package «e.eContainer.fullyQualifiedName»;
     «ENDIF»
         
-    public class «e.name» «IF e.superType != null
+    public class «e.name» «IF e.superType !== null
             »extends «e.superType.fullyQualifiedName» «ENDIF»{
         «FOR f:e.features»
             «f.compile»
@@ -151,19 +150,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <pre><code class="language-xtend">package org.example.domainmodel.generator
 
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.AbstractGenerator
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.IGeneratorContext
 import org.example.domainmodel.domainmodel.Entity
 import org.example.domainmodel.domainmodel.Feature
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 import com.google.inject.Inject
 
-class DomainmodelGenerator implements IGenerator {
+class DomainmodelGenerator extends AbstractGenerator {
 
     @Inject extension IQualifiedNameProvider
 
-    override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+    override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         for (e : resource.allContents.toIterable.filter(Entity)) {
             fsa.generateFile(
                 e.fullyQualifiedName.toString("/") + ".java",
@@ -172,11 +172,11 @@ class DomainmodelGenerator implements IGenerator {
     }
 
     def compile(Entity e) ''' 
-        «IF e.eContainer.fullyQualifiedName != null»
+        «IF e.eContainer.fullyQualifiedName !== null»
             package «e.eContainer.fullyQualifiedName»;
         «ENDIF»
         
-        public class «e.name» «IF e.superType != null
+        public class «e.name» «IF e.superType !== null
                 »extends «e.superType.fullyQualifiedName» «ENDIF»{
             «FOR f : e.features»
                 «f.compile»
@@ -208,7 +208,7 @@ class DomainmodelGenerator implements IGenerator {
 
 <ol>
   <li>
-    <p>The core of the test infrastructure is the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java">XtextRunner</a> and the language-specific <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java">IInjectorProvider</a>. Both have to be provided by means of class annotations. An example test class should have already been generated by the Xtext code generator, named <em>org.example.domainmodel.tests.DomainmodelParsingTest</em>:</p>
+    <p>The core of the test infrastructure is the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/XtextRunner.java">XtextRunner</a> and the language-specific <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/IInjectorProvider.java">IInjectorProvider</a>. Both have to be provided by means of class annotations. An example test class should have already been generated by the Xtext code generator, named <em>org.example.domainmodel.tests.DomainmodelParsingTest</em>:</p>
 
     <pre><code class="language-xtend">@RunWith(XtextRunner)
 @InjectWith(DomainmodelInjectorProvider)
@@ -229,7 +229,7 @@ class DomainmodelParsingTest{
 </code></pre>
   </li>
   <li>
-    <p>The utility class <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/util/ParseHelper.java">ParseHelper</a> allows to parse an arbitrary string into a <em>Domainmodel</em>. The model itself can be traversed and checked afterwards. A static import of <a href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html">Assert</a> leads to concise and readable test cases. You can rewrite the generated example as follows:</p>
+    <p>The utility class <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/util/ParseHelper.java">ParseHelper</a> allows to parse an arbitrary string into a <em>Domainmodel</em>. The model itself can be traversed and checked afterwards. A static import of <a href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html">Assert</a> leads to concise and readable test cases. You can rewrite the generated example as follows:</p>
 
     <pre><code class="language-xtend">import static org.junit.Assert.*
     
@@ -266,14 +266,14 @@ def void checkNameStartsWithCapital(Entity entity) {
 }
 </code></pre>
 
-<p>Any name for the method will do. The important thing is the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">Check</a> annotation that advises the framework to use the method as a validation rule. If the name starts with a lower case letter, a warning will be attached to the name of the <em>Entity</em>.</p>
+<p>Any name for the method will do. The important thing is the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">Check</a> annotation that advises the framework to use the method as a validation rule. If the name starts with a lower case letter, a warning will be attached to the name of the <em>Entity</em>.</p>
 
 <p>The second validation rule is straight-forward, too. We traverse the inheritance hierarchy of the <em>Entity</em> and look for features with equal names.</p>
 
 <pre><code class="language-xtend">@Check
 def void checkFeatureNameIsUnique(Feature f) {
     var superEntity = (f.eContainer as Entity).superType
-    while (superEntity != null) {
+    while (superEntity !== null) {
         for (other : superEntity.features) {
             if (f.name == other.name) {
                 error("Feature names have to be unique",

@@ -19,7 +19,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h1 id="grammarLanguage">The Grammar Language</h1>
 
-<p>The <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext">grammar language</a> is the corner stone of Xtext. It is a domain-specific language, carefully designed for the description of textual languages. The main idea is to describe the concrete syntax and how it is mapped to an in-memory representation – the semantic model. This model will be produced by the parser on-the-fly when it consumes an input file. Of course the Xtext grammar language itself is implemented with Xtext, so you will find parts of its syntax described with its own means in this documentation.</p>
+<p>The <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext">grammar language</a> is the corner stone of Xtext. It is a domain-specific language, carefully designed for the description of textual languages. The main idea is to describe the concrete syntax and how it is mapped to an in-memory representation – the semantic model. This model will be produced by the parser on-the-fly when it consumes an input file. Of course the Xtext grammar language itself is implemented with Xtext, so you will find parts of its syntax described with its own means in this documentation.</p>
 
 <p>An example grammar is shown in the <a href="102_domainmodelwalkthrough.html#write-your-own-grammar">15 Minutes Tutorial</a>.</p>
 
@@ -35,7 +35,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         with org.eclipse.xtext.common.Terminals
 </code></pre>
 
-<p>The first line declares the name of the language. Xtext leverages Java’s class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the language name and have the file extension <code class="highlighter-rouge">.xtext</code>. This means that the name has to be <em>SecretCompartments.xtext</em> and must be placed in a package <em>org.xtext.example</em> on your project’s class path. In other words, your <code class="highlighter-rouge">.xtext</code> file has to reside in a Java source folder to be valid.</p>
+<p>The first line declares the name of the language. Xtext leverages Java’s class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the language name and have the file extension <code>.xtext</code>. This means that the name has to be <em>SecretCompartments.xtext</em> and must be placed in a package <em>org.xtext.example</em> on your project’s class path. In other words, your <code>.xtext</code> file has to reside in a Java source folder to be valid.</p>
 
 <p>The second aspect that can be deduced from the first line of the grammar is its relationship to other languages. An Xtext grammar can declare another existing grammar to be reused. The mechanism is called <a href="301_grammarlanguage.html#grammar-mixins">grammar mixin</a>).</p>
 
@@ -45,12 +45,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h4 id="epackage-generation">EPackage Generation</h4>
 
-<p>The easiest way to get started is to let Xtext infer the Ecore model from your grammar. The <code class="highlighter-rouge">generate</code> declaration in the grammar advises the framework to do so:</p>
+<p>The easiest way to get started is to let Xtext infer the Ecore model from your grammar. The <code>generate</code> declaration in the grammar advises the framework to do so:</p>
 
 <pre><code class="language-xtext">generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 </code></pre>
 
-<p>That statement could actually be read as: generate an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> with the <em>name</em> <code class="highlighter-rouge">domainmodel</code> and the <em>nsURI</em> <code class="highlighter-rouge">"http://www.example.org/domainmodel/Domainmodel"</code>. Xtext will then add <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClasses</a> with <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttributes</a> and <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReferences</a> for the different parser rules in your grammar, as described in <a href="301_grammarlanguage.html#metamodel-inference">Ecore model inference</a>.</p>
+<p>That statement could actually be read as: generate an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> with the <em>name</em> <code>domainmodel</code> and the <em>nsURI</em> <code>"http://www.example.org/domainmodel/Domainmodel"</code>. Xtext will then add <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClasses</a> with <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttributes</a> and <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReferences</a> for the different parser rules in your grammar, as described in <a href="301_grammarlanguage.html#metamodel-inference">Ecore model inference</a>.</p>
 
 <h4 id="epackage-import">EPackage Import</h4>
 
@@ -71,11 +71,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 import 'http://www.eclipse.org/anotherPackage' as another
 </code></pre>
 
-<p>When referring to a type somewhere in the grammar you need to qualify the reference using that alias (e.g. <code class="highlighter-rouge">another::SomeType</code>). Cases where such type references occur are explained below.</p>
+<p>When referring to a type somewhere in the grammar you need to qualify the reference using that alias (e.g. <code>another::SomeType</code>). Cases where such type references occur are explained below.</p>
 
-<p>It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifiers</a> with the same name. In that case none of them can be referenced. It is even possible to <code class="highlighter-rouge">import</code> multiple and <code class="highlighter-rouge">generate</code> one Ecore model and declare all of them with same alias. If you do so, for a reference to an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifier</a> first the imported <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> are scanned before it is assumed that a type needs to be generated into the inferred package.</p>
+<p>It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifiers</a> with the same name. In that case none of them can be referenced. It is even possible to <code>import</code> multiple and <code>generate</code> one Ecore model and declare all of them with same alias. If you do so, for a reference to an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifier</a> first the imported <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> are scanned before it is assumed that a type needs to be generated into the inferred package.</p>
 
-<p>Note that using the same alias for multiple EPackages is not recommended, because it might cause problems that are hard to track down. For instance, a reference to <code class="highlighter-rouge">classA</code> could mistakenly be linked to a newly created EClass instead of an existing EClass <code class="highlighter-rouge">ClassA</code> because the latter is written with a capital letter.</p>
+<p>Note that using the same alias for multiple EPackages is not recommended, because it might cause problems that are hard to track down. For instance, a reference to <code>classA</code> could mistakenly be linked to a newly created EClass instead of an existing EClass <code>ClassA</code> because the latter is written with a capital letter.</p>
 
 <h3 id="terminal-rules">Terminal Rules</h3>
 
@@ -90,13 +90,13 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 <p>In the first stage called <em>lexing</em>, a sequence of characters (the text input) is transformed into a sequence of so-called <em>tokens</em>. In this context, a token is sort of a strongly typed part or region of the input sequence. It consists of one or more characters and is matched by a particular terminal rule or keyword and therefore represents an atomic symbol. Terminal rules are also referred to as <em>token rules</em> or <em>lexer rules</em>. There is an informal naming convention that names of terminal rules are all upper-case.</p>
 
-<p>In the <a href="102_domainmodelwalkthrough.html">entities example</a> there are no explicitly defined terminal rules, since it only uses the <em>ID</em> rule which is inherited from the grammar <code class="highlighter-rouge">org.eclipse.xtext.common.Terminals</code> (see <a href="#common-terminals">Common Terminals</a>). Therein the <em>ID</em> rule is defined as follows:</p>
+<p>In the <a href="102_domainmodelwalkthrough.html">entities example</a> there are no explicitly defined terminal rules, since it only uses the <em>ID</em> rule which is inherited from the grammar <code>org.eclipse.xtext.common.Terminals</code> (see <a href="#common-terminals">Common Terminals</a>). Therein the <em>ID</em> rule is defined as follows:</p>
 
 <pre><code class="language-xtext">terminal ID: 
     ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*; 
 </code></pre>
 
-<p>It says that a token <em>ID</em> starts with an optional <code class="highlighter-rouge">'^'</code> character (caret), followed by a letter <code class="highlighter-rouge">('a'..'z'|'A'..'Z')</code> or underscore <code class="highlighter-rouge">'_'</code> followed by any number of letters, underscores and numbers <code class="highlighter-rouge">('0'..'9')</code>.</p>
+<p>It says that a token <em>ID</em> starts with an optional <code>'^'</code> character (caret), followed by a letter <code>('a'..'z'|'A'..'Z')</code> or underscore <code>'_'</code> followed by any number of letters, underscores and numbers <code>('0'..'9')</code>.</p>
 
 <p>The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed by the <em>ID</em> rule’s <a href="303_runtime_concepts.html#value-converter">ValueConverter</a>.</p>
 
@@ -113,13 +113,13 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 <h4 id="return-types">Return Types</h4>
 
-<p>Each terminal rule returns an atomic value (an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">EDataType</a>). By default, it’s assumed that an instance of <code class="highlighter-rouge">ecore::EString</code>) should be returned. However, if you want to provide a different type you can specify it. For instance, the rule <em>INT</em> is defined as:</p>
+<p>Each terminal rule returns an atomic value (an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">EDataType</a>). By default, it’s assumed that an instance of <code>ecore::EString</code>) should be returned. However, if you want to provide a different type you can specify it. For instance, the rule <em>INT</em> is defined as:</p>
 
 <pre><code class="language-xtext">terminal INT returns ecore::EInt: 
     ('0'..'9')+;
 </code></pre>
 
-<p>This means that the terminal rule <em>INT</em> returns instances of <code class="highlighter-rouge">ecore::EInt</code>. It is possible to define any kind of data type here, which just needs to be an instance of <code class="highlighter-rouge">ecore::EDataType</code>. In order to tell the framework how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java">IValueConverterService</a> (see <a href="303_runtime_concepts.html#value-converter">Value Converters</a>). The value converter is also the service that allows to remove escape sequences or semantically unnecessary characters such as quotes from string literals or the caret <code class="highlighter-rouge">'^'</code> from identifiers.</p>
+<p>This means that the terminal rule <em>INT</em> returns instances of <code>ecore::EInt</code>. It is possible to define any kind of data type here, which just needs to be an instance of <code>ecore::EDataType</code>. In order to tell the framework how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java">IValueConverterService</a> (see <a href="303_runtime_concepts.html#value-converter">Value Converters</a>). The value converter is also the service that allows to remove escape sequences or semantically unnecessary characters such as quotes from string literals or the caret <code>'^'</code> from identifiers.</p>
 
 <h4 id="extended-backus-naur-form-expressions">Extended Backus-Naur Form Expressions</h4>
 
@@ -127,14 +127,14 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 <ol>
   <li>exactly one (the default, no operator)</li>
-  <li>zero or one (operator <code class="highlighter-rouge">?</code>)</li>
-  <li>zero or more (operator <code class="highlighter-rouge">*</code>)</li>
-  <li>one or more (operator <code class="highlighter-rouge">+</code>)</li>
+  <li>zero or one (operator <code>?</code>)</li>
+  <li>zero or more (operator <code>*</code>)</li>
+  <li>one or more (operator <code>+</code>)</li>
 </ol>
 
 <h5 id="keywords">Keywords / Characters</h5>
 
-<p>Keywords are a kind of terminal rule literals. The <em>ID</em> rule in <code class="highlighter-rouge">org.eclipse.xtext.common.Terminals</code> for instance starts with a keyword:</p>
+<p>Keywords are a kind of terminal rule literals. The <em>ID</em> rule in <code>org.eclipse.xtext.common.Terminals</code> for instance starts with a keyword:</p>
 
 <pre><code class="language-xtext">terminal ID:
     '^'? ... ;
@@ -142,27 +142,27 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 <p>The question mark sets the cardinality to <em>zero or one</em> (i.e. optional) as explained above.</p>
 
-<p>A keyword can have any length, e.g. <code class="highlighter-rouge">'entity'</code>, and contain arbitrary characters. The following standard Java notations for special characters are allowed: <code class="highlighter-rouge">\n</code>, <code class="highlighter-rouge">\r</code>, <code class="highlighter-rouge">\t</code>, <code class="highlighter-rouge">\b</code>, <code class="highlighter-rouge">\f</code> and the quoted unicode character notation, such as <code class="highlighter-rouge">\u123</code>.</p>
+<p>A keyword can have any length, e.g. <code>'entity'</code>, and contain arbitrary characters. The following standard Java notations for special characters are allowed: <code>\n</code>, <code>\r</code>, <code>\t</code>, <code>\b</code>, <code>\f</code> and the quoted unicode character notation, such as <code>\u123</code>.</p>
 
 <h5 id="character-ranges">Character Ranges</h5>
 
-<p>A character range can be declared using the <code class="highlighter-rouge">..</code> operator. Example:</p>
+<p>A character range can be declared using the <code>..</code> operator. Example:</p>
 
 <pre><code class="language-xtext">terminal INT returns ecore::EInt:
     ('0'..'9')+;
 </code></pre>
 
-<p>In this case an <em>INT</em> is comprised of one or more (note the <code class="highlighter-rouge">+</code> operator) characters between (and including) <code class="highlighter-rouge">'0'</code> and <code class="highlighter-rouge">'9'</code>.</p>
+<p>In this case an <em>INT</em> is comprised of one or more (note the <code>+</code> operator) characters between (and including) <code>'0'</code> and <code>'9'</code>.</p>
 
 <h5 id="wildcard">Wildcard</h5>
 
-<p>If you want to allow any character you can simply write the wildcard operator <code class="highlighter-rouge">.</code> (dot). Example:</p>
+<p>If you want to allow any character you can simply write the wildcard operator <code>.</code> (dot). Example:</p>
 
 <pre><code class="language-xtext">terminal FOO:
     'f' . 'o';
 </code></pre>
 
-<p>The rule above would allow expressions like <code class="highlighter-rouge">foo</code>, <code class="highlighter-rouge">f0o</code> or even <code class="highlighter-rouge">f°o</code>.</p>
+<p>The rule above would allow expressions like <code>foo</code>, <code>f0o</code> or even <code>f°o</code>.</p>
 
 <h5 id="until-token">Until Token</h5>
 
@@ -172,7 +172,7 @@ import 'http://www.eclipse.org/anotherPackage' as another
     '/*' -&gt; '*/';
 </code></pre>
 
-<p>This is the rule for Java-style comments that begin with <code class="highlighter-rouge">/*</code> and end with <code class="highlighter-rouge">*/</code>.</p>
+<p>This is the rule for Java-style comments that begin with <code>/*</code> and end with <code>*/</code>.</p>
 
 <h5 id="negated-tokens">Negated Token</h5>
 
@@ -200,7 +200,7 @@ import 'http://www.eclipse.org/anotherPackage' as another
     (' '|'\t'|'\r'|'\n')+;
 </code></pre>
 
-<p>That is a WS can be made of one or more white space characters (including <code class="highlighter-rouge">' ', '\t', '\r', '\n'</code>).</p>
+<p>That is a WS can be made of one or more white space characters (including <code>' ', '\t', '\r', '\n'</code>).</p>
 
 <h5 id="groups">Groups</h5>
 
@@ -210,7 +210,7 @@ import 'http://www.eclipse.org/anotherPackage' as another
     '0x' ('0'..'7') ('0'..'9'|'A'..'F');
 </code></pre>
 
-<p>This group has three elements <code class="highlighter-rouge">'0x'</code>, <code class="highlighter-rouge">('0'..'7')</code>, and <code class="highlighter-rouge">('0'..'9'|'A'..'F')</code>, which have to appear in this order.</p>
+<p>This group has three elements <code>'0x'</code>, <code>('0'..'7')</code>, and <code>('0'..'9'|'A'..'F')</code>, which have to appear in this order.</p>
 
 <h4 id="terminal-fragment">Terminal Fragments</h4>
 
@@ -225,11 +225,11 @@ terminal STRING:
 
 <h4 id="eof">EOF – End Of File</h4>
 
-<p>The <code class="highlighter-rouge">EOF</code> (End Of File) token may be used to describe that the end of the input stream is a valid situation at a certain point in a terminal rule. This allows to consume the complete remaining input of a file starting with a special delimiter.</p>
+<p>The <code>EOF</code> (End Of File) token may be used to describe that the end of the input stream is a valid situation at a certain point in a terminal rule. This allows to consume the complete remaining input of a file starting with a special delimiter.</p>
 
-<p><code class="highlighter-rouge">terminal UNCLOSED_STRING : '"' (!'"')* EOF;</code></p>
+<p><code>terminal UNCLOSED_STRING : '"' (!'"')* EOF;</code></p>
 
-<p>The <code class="highlighter-rouge">EOF</code> token cannot be <a href="301_grammarlanguage.html#negated-tokens">negated</a>.</p>
+<p>The <code>EOF</code> token cannot be <a href="301_grammarlanguage.html#negated-tokens">negated</a>.</p>
 
 <h3 id="parser-rules">Parser Rules</h3>
 
@@ -260,14 +260,14 @@ terminal STRING:
     'datatype' name = ID;
 </code></pre>
 
-<p>The syntactic declaration for datatypes starts with a keyword <code class="highlighter-rouge">datatype</code> followed by an assignment: <code class="highlighter-rouge">name = ID</code>. The left hand side refers to a feature <em>name</em> of the current object (which has the EClass <em>State</em> in this case). The right hand side can be a rule call, a keyword, a <a href="301_grammarlanguage.html#cross-references">cross-reference</a> or an alternative comprised by the former options. The type of the feature needs to be compatible with the type of the expression on the right. As <em>ID</em> returns an <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">EString</a> in this case, the feature <em>name</em> needs to be of type EString as well.</p>
+<p>The syntactic declaration for datatypes starts with a keyword <code>datatype</code> followed by an assignment: <code>name = ID</code>. The left hand side refers to a feature <em>name</em> of the current object (which has the EClass <em>State</em> in this case). The right hand side can be a rule call, a keyword, a <a href="301_grammarlanguage.html#cross-references">cross-reference</a> or an alternative comprised by the former options. The type of the feature needs to be compatible with the type of the expression on the right. As <em>ID</em> returns an <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">EString</a> in this case, the feature <em>name</em> needs to be of type EString as well.</p>
 
 <p>There are three different assignment operators, each with different semantics.</p>
 
 <ol>
-  <li>The simple equal sign <code class="highlighter-rouge">=</code> is the straightforward assignment, and is used for features which take only one element.</li>
-  <li>The <code class="highlighter-rouge">+=</code> sign (the add operator) expects a multi-valued feature and adds the value on the right hand side to that feature, which is a list feature.</li>
-  <li>The <code class="highlighter-rouge">?=</code> sign (boolean assignment operator) expects a feature of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/Boolean.html">EBoolean</a> and sets it to true if the right hand side was consumed, independently from the concrete value of the right hand side.</li>
+  <li>The simple equal sign <code>=</code> is the straightforward assignment, and is used for features which take only one element.</li>
+  <li>The <code>+=</code> sign (the add operator) expects a multi-valued feature and adds the value on the right hand side to that feature, which is a list feature.</li>
+  <li>The <code>?=</code> sign (boolean assignment operator) expects a feature of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">EBoolean</a> and sets it to true if the right hand side was consumed, independently from the concrete value of the right hand side.</li>
 </ol>
 
 <p>The used assignment operator does not influence the cardinality of the expected symbols on the right hand side.</p>
@@ -294,7 +294,7 @@ terminal STRING:
 
 <h5 id="unordered-groups">Unordered Groups</h5>
 
-<p>The elements of an unordered group can occur in any order, but each element must appear once. Members of unordered groups are separated by <code class="highlighter-rouge">&amp;</code>. The following rule <code class="highlighter-rouge">Modifier</code> allows to parse simplified modifiers of the Java language:</p>
+<p>The elements of an unordered group can occur in any order, but each element must appear once. Members of unordered groups are separated by <code>&amp;</code>. The following rule <code>Modifier</code> allows to parse simplified modifiers of the Java language:</p>
 
 <pre><code class="language-xtext">Modifier: 
     static?='static'? &amp; final?='final'? &amp; visibility=Visibility;
@@ -305,22 +305,20 @@ enum Visibility:
 
 <p>With these definitions the following sequences of tokens are valid:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span>
-<span class="kd">static</span> <span class="kd">protected</span> 
-<span class="kd">final</span> <span class="kd">private</span> <span class="kd">static</span>
-<span class="kd">public</span>
+<pre><code class="language-java">public static final
+static protected 
+final private static
+public
 </code></pre>
-</div>
 
 <p>In contrast, the parser refuses to accept these input lines:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">static</span> <span class="kd">final</span> <span class="kd">static</span> <span class="c1">// ERROR: static appears twice</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kd">private</span> <span class="c1">// ERROR: visibility appears twice</span>
-<span class="kd">final</span> <span class="c1">// ERROR: visibility is missing</span>
+<pre><code class="language-java">static final static // ERROR: static appears twice
+public static final private // ERROR: visibility appears twice
+final // ERROR: visibility is missing
 </code></pre>
-</div>
 
-<p>Note that if you want an element of an unordered group to appear once or not at all, you have to choose a cardinality of <code class="highlighter-rouge">?</code>. In the example, the visibility is mandatory, while <code class="highlighter-rouge">static</code> or <code class="highlighter-rouge">final</code> are optional. Elements with a cardinality of <code class="highlighter-rouge">*</code> or <code class="highlighter-rouge">+</code> have to appear continuously without interruption, i.e.</p>
+<p>Note that if you want an element of an unordered group to appear once or not at all, you have to choose a cardinality of <code>?</code>. In the example, the visibility is mandatory, while <code>static</code> or <code>final</code> are optional. Elements with a cardinality of <code>*</code> or <code>+</code> have to appear continuously without interruption, i.e.</p>
 
 <pre><code class="language-xtext">ExampleRule:
     values+=INT* &amp; name=ID;
@@ -328,16 +326,14 @@ enum Visibility:
 
 <p>can parse these lines</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="mi">0</span> <span class="mi">8</span> <span class="mi">15</span> <span class="n">x</span>
-<span class="n">x</span> <span class="mi">0</span> <span class="mi">8</span> <span class="mi">15</span> 
+<pre><code class="language-java">0 8 15 x
+x 0 8 15 
 </code></pre>
-</div>
 
 <p>but not does not consume the following sequence without raising an error</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="mi">0</span> <span class="n">x</span> <span class="mi">8</span> <span class="mi">15</span> <span class="c1">// wrong, as values must not be interrupted by a name (ID)</span>
+<pre><code class="language-java">0 x 8 15 // wrong, as values must not be interrupted by a name (ID)
 </code></pre>
-</div>
 
 <h5 id="simple-actions">Simple Actions</h5>
 
@@ -350,7 +346,7 @@ enum Visibility:
   <li><em>Assigned</em> Actions.</li>
 </ol>
 
-<p>If you want to enforce the creation of an instance with specific type you can use simple actions. In the following example <em>TypeB</em> must be a subtype of <em>TypeA</em>. An expression <code class="highlighter-rouge">A ident</code> should create an instance of <em>TypeA</em>, whereas <code class="highlighter-rouge">B ident</code> should instantiate <em>TypeB</em>.</p>
+<p>If you want to enforce the creation of an instance with specific type you can use simple actions. In the following example <em>TypeB</em> must be a subtype of <em>TypeA</em>. An expression <code>A ident</code> should create an instance of <em>TypeA</em>, whereas <code>B ident</code> should instantiate <em>TypeB</em>.</p>
 
 <p>If you don’t use actions, you’ll have to define an alternative and delegate rules to guide the parser to the right types for the to-be-instantiated objects:</p>
 
@@ -369,7 +365,7 @@ MyOtherRule returns TypeB:
     "B" {TypeB} name=ID; 
 </code></pre>
 
-<p>Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>. The notation <code class="highlighter-rouge"><span class="p">{</span><span class="err">TypeB</span><span class="p">}</span></code> will create an instance of <em>TypeB</em> and assign it to the result of the parser rule. This allows to define parser rules without any assignment and to create objects without the need to introduce unnecessary delegate rules.</p>
+<p>Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>. The notation <code>{TypeB}</code> will create an instance of <em>TypeB</em> and assign it to the result of the parser rule. This allows to define parser rules without any assignment and to create objects without the need to introduce unnecessary delegate rules.</p>
 
 <p>Note: If a parser rule does not instantiate any object because it does not contain an Action and no mandatory Assignment, you’ll likely end up with unexpected situations for valid input files. Xtext detects this situation and will raise a warning for the parser rules in question.</p>
 
@@ -385,7 +381,7 @@ MyOtherRule returns TypeB:
     TokenC;
 </code></pre>
 
-<p>As <code class="highlighter-rouge">AbstractToken</code> could possibly return an instance of <em>TokenA</em>, <em>TokenB</em> or <em>TokenC</em> its type must be a super type for all these types. Since the return value of the called rule becomes the result of the current rule, it is possible to further change the state of the AST element by assigning additional features.</p>
+<p>As <code>AbstractToken</code> could possibly return an instance of <em>TokenA</em>, <em>TokenB</em> or <em>TokenC</em> its type must be a super type for all these types. Since the return value of the called rule becomes the result of the current rule, it is possible to further change the state of the AST element by assigning additional features.</p>
 
 <p>Example:</p>
 
@@ -399,7 +395,7 @@ MyOtherRule returns TypeB:
 
 <h5 id="grammar-actions">Assigned Actions</h5>
 
-<p>Xtext leverages the powerful ANTLR parser which implements an <code class="highlighter-rouge">LL(*)</code> algorithm. Even though LL parsers have many advantages with respect to readability, debuggability and error recovery, there are also some drawbacks. The most important one is that it does not allow left recursive grammars. For instance, the following rule is not allowed in LL-based grammars, because <code class="highlighter-rouge">Expression '+' Expression</code> is left-recursive:</p>
+<p>Xtext leverages the powerful ANTLR parser which implements an <code>LL(*)</code> algorithm. Even though LL parsers have many advantages with respect to readability, debuggability and error recovery, there are also some drawbacks. The most important one is that it does not allow left recursive grammars. For instance, the following rule is not allowed in LL-based grammars, because <code>Expression '+' Expression</code> is left-recursive:</p>
 
 <pre><code class="language-xtext">Expression:
     Expression '+' Expression |
@@ -427,7 +423,7 @@ TerminalExpression returns Expression:
     {IntLiteral} value=INT;
 </code></pre>
 
-<p>would result in unwanted elements in the AST. For instance the expression <code class="highlighter-rouge">(42)</code> would result in a tree like this:</p>
+<p>would result in unwanted elements in the AST. For instance the expression <code>(42)</code> would result in a tree like this:</p>
 
 <pre><code class="language-mwe2">Operation {
   left=Operation {
@@ -449,19 +445,18 @@ TerminalExpression returns Expression:
     {IntLiteral} value=INT;
 </code></pre>
 
-<p>In the example above <code class="highlighter-rouge"><span class="p">{</span><span class="err">Operation.left=current</span><span class="p">}</span></code> is a so-called <em>tree rewrite action</em>, which creates a new instance of the stated <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> <em>Operation</em> and assigns the element currently to-be-returned (the <code class="highlighter-rouge">current</code> variable) to a feature of the newly created object. The example uses the feature <em>left</em> of the <em>Operation</em> instance to store the previously returned <em>Expression</em>. In Java these semantics could be expressed as:</p>
+<p>In the example above <code>{Operation.left=current}</code> is a so-called <em>tree rewrite action</em>, which creates a new instance of the stated <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> <em>Operation</em> and assigns the element currently to-be-returned (the <code>current</code> variable) to a feature of the newly created object. The example uses the feature <em>left</em> of the <em>Operation</em> instance to store the previously returned <em>Expression</em>. In Java these semantics could be expressed as:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">Operation</span> <span class="n">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Operation</span><span class="o">();</span>
-<span class="n">temp</span><span class="o">.</span><span class="na">setLeft</span><span class="o">(</span><span class="n">current</span><span class="o">);</span>
-<span class="n">current</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+<pre><code class="language-java">Operation temp = new Operation();
+temp.setLeft(current);
+current = temp;
 </code></pre>
-</div>
 
-<p>With these improved rules the expression <code class="highlighter-rouge">(42)</code> would lead to a single <em>IntLiteral</em> instance, while <code class="highlighter-rouge">40 + 2</code> creates an <em>Operation</em> with two <em>IntLiterals</em>.</p>
+<p>With these improved rules the expression <code>(42)</code> would lead to a single <em>IntLiteral</em> instance, while <code>40 + 2</code> creates an <em>Operation</em> with two <em>IntLiterals</em>.</p>
 
 <h4 id="syntactic-predicates">Syntactic Predicates</h4>
 
-<p>It is sometimes not easily possible to define an <code class="highlighter-rouge">LL(*)</code> grammar for a given language that parses all possible valid input files and still produces abstract syntax graphs that mimic the actual structure of the files. There are even cases that cannot be described with an unambiguous grammar. There are solutions that allow to deal with this problem:</p>
+<p>It is sometimes not easily possible to define an <code>LL(*)</code> grammar for a given language that parses all possible valid input files and still produces abstract syntax graphs that mimic the actual structure of the files. There are even cases that cannot be described with an unambiguous grammar. There are solutions that allow to deal with this problem:</p>
 
 <ul>
   <li>Enable backtracking: Xtext allows to enable backtracking for the ANTLR parser generator. This is usually not recommended since it influences error message strategies at runtime and shadows actually existing problems in the grammar.</li>
@@ -470,24 +465,22 @@ TerminalExpression returns Expression:
 
 <p>The classical example for ambiguous language parts is the <em>dangling else problem</em>. A conditional in a programming language usually looks like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">isTrue</span><span class="o">())</span> 
-    <span class="n">doStuff</span><span class="o">();</span> 
-<span class="k">else</span> 
-    <span class="nf">dontDoStuff</span><span class="p">(</span><span class="o">);</span> 
+<pre><code class="language-java">if (isTrue()) 
+    doStuff(); 
+else 
+    dontDoStuff(); 
 </code></pre>
-</div>
 
 <p>The problems becomes obvious as soon as nested conditions are used:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">isTrue</span><span class="o">())</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">isTrueAsWell</span><span class="o">())</span>  
-        <span class="n">doStuff</span><span class="o">();</span> 
-    <span class="k">else</span> 
-        <span class="n">dontDoStuff</span><span class="o">();</span> 
+<pre><code class="language-java">if (isTrue())
+    if (isTrueAsWell())  
+        doStuff(); 
+    else 
+        dontDoStuff(); 
 </code></pre>
-</div>
 
-<p>Where does the <code class="highlighter-rouge">else</code> branch belong to? This question can be answered by a quick look into the language specification which tells that the <code class="highlighter-rouge">else</code> branch is part of the inner condition. However, the parser generator cannot be convinced that easily. We have to guide it to this decision point by means of syntactic predicates which are expressed by a leading <code class="highlighter-rouge">=&gt;</code> operator.</p>
+<p>Where does the <code>else</code> branch belong to? This question can be answered by a quick look into the language specification which tells that the <code>else</code> branch is part of the inner condition. However, the parser generator cannot be convinced that easily. We have to guide it to this decision point by means of syntactic predicates which are expressed by a leading <code>=&gt;</code> operator.</p>
 
 <pre><code class="language-xtext">Condition: 
     'if' '(' condition=BooleanExpression ')' 
@@ -495,19 +488,19 @@ TerminalExpression returns Expression:
     (=&gt;'else' else=Expression)?
 </code></pre>
 
-<p>The parser understands the predicate basically like this: If you are at this particular decision point and you don’t know what to do, check whether the <code class="highlighter-rouge">else</code> keyword is present. If it is, take that branch directly without considering other options that would match the same token sequence.</p>
+<p>The parser understands the predicate basically like this: If you are at this particular decision point and you don’t know what to do, check whether the <code>else</code> keyword is present. If it is, take that branch directly without considering other options that would match the same token sequence.</p>
 
 <p>Well chosen predicates allow to solve most ambiguities and backtracking can often be disabled. Be warned, though, that an ambiguity for the parser can also mean an ambiguity for the user, so before forcing the syntax into handling such cases you should consider avoiding them in the first place.</p>
 
 <h5 id="first-token-set-predicates">First Token Set Predicates</h5>
 
-<p>Sometimes you need to put a syntactic predicate on a more complex rule, e.g. an expression, which might be very long. For disambiguation it is often sufficient to look only at the first token set. In those cases one can use the <code class="highlighter-rouge">-&gt;</code> operator instead of <code class="highlighter-rouge">=&gt;</code>, instructing the parser to just look at the first token and make the decision based on that. This can heavily reduce the lookahead and as a consequence make the parser faster and more robust to syntactic errors. This also affects the behavior of the IDE, such as content assist, in a positive way.</p>
+<p>Sometimes you need to put a syntactic predicate on a more complex rule, e.g. an expression, which might be very long. For disambiguation it is often sufficient to look only at the first token set. In those cases one can use the <code>-&gt;</code> operator instead of <code>=&gt;</code>, instructing the parser to just look at the first token and make the decision based on that. This can heavily reduce the lookahead and as a consequence make the parser faster and more robust to syntactic errors. This also affects the behavior of the IDE, such as content assist, in a positive way.</p>
 
 <h3 id="hidden-terminals">Hidden Terminal Symbols</h3>
 
 <p>Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define the important parts of the input. Xtext introduces the concept of hidden tokens to handle semantically irrelevant things like white spaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal symbols that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they are transparently woven into the node model, but not relevant for the semantic model.</p>
 
-<p>Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When <a href="301_grammarlanguage.html#grammar-mixins">reusing a single grammar</a> its definition of hidden tokens is reused, too. The grammar <code class="highlighter-rouge">org.eclipse.xtext.common.Terminals</code> comes with a reasonable default and hides all comments and white space from the parser rules.</p>
+<p>Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When <a href="301_grammarlanguage.html#grammar-mixins">reusing a single grammar</a> its definition of hidden tokens is reused, too. The grammar <code>org.eclipse.xtext.common.Terminals</code> comes with a reasonable default and hides all comments and white space from the parser rules.</p>
 
 <p>If a rule defines hidden symbols, you can think of a kind of scope that is automatically introduced. Any rule that is called transitively by the declaring rule uses the same hidden terminals as the calling rule, unless it defines hidden tokens itself.</p>
 
@@ -518,15 +511,14 @@ Fullname:
     (firstname=ID)? lastname=ID;
 </code></pre>
 
-<p>The sample rule <em>Person</em> defines multiline comments (<code class="highlighter-rouge">ML_COMMENT</code>), single-line comments (<code class="highlighter-rouge">SL_COMMENT</code>), and white space (<code class="highlighter-rouge">WS</code>) to be allowed between the <em>name</em> and the <em>age</em>. Because the rule <em>Fullname</em> does not introduce an own set of hidden terminals, it allows the same symbols to appear between <em>firstname</em> and <em>lastname</em> as the calling rule <em>Person</em>. Thus, the following input is perfectly valid for the given grammar snippet:</p>
+<p>The sample rule <em>Person</em> defines multiline comments (<code>ML_COMMENT</code>), single-line comments (<code>SL_COMMENT</code>), and white space (<code>WS</code>) to be allowed between the <em>name</em> and the <em>age</em>. Because the rule <em>Fullname</em> does not introduce an own set of hidden terminals, it allows the same symbols to appear between <em>firstname</em> and <em>lastname</em> as the calling rule <em>Person</em>. Thus, the following input is perfectly valid for the given grammar snippet:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">John</span> <span class="cm">/* comment */</span> <span class="n">Smith</span> <span class="c1">// line comment</span>
-<span class="cm">/* comment */</span>
-      <span class="mi">42</span>      <span class="o">;</span> <span class="c1">// line comment</span>
+<pre><code class="language-java">John /* comment */ Smith // line comment
+/* comment */
+      42      ; // line comment
 </code></pre>
-</div>
 
-<p>A list of all default terminals such as <code class="highlighter-rouge">WS</code> can be found in <a href="#common-terminals">Common Terminals</a>.</p>
+<p>A list of all default terminals such as <code>WS</code> can be found in <a href="#common-terminals">Common Terminals</a>.</p>
 
 <h3 id="datatype-rules">Data Type Rules</h3>
 
@@ -537,7 +529,7 @@ Fullname:
   <li>allow for use of hidden tokens.</li>
 </ol>
 
-<p>Assuming you want to define a rule to consume Java-like qualified names (e.g. <code class="highlighter-rouge">foo.bar.Baz</code>) you could write:</p>
+<p>Assuming you want to define a rule to consume Java-like qualified names (e.g. <code>foo.bar.Baz</code>) you could write:</p>
 
 <pre><code class="language-xtext">QualifiedName:
     ID ('.' ID)*;
@@ -545,7 +537,7 @@ Fullname:
 
 <p>In contrast to a terminal rule this is only valid in certain contexts, i.e. it won’t conflict with the rule <em>ID</em>. If you had defined it as a terminal rule, it would possibly hide the simple <em>ID</em> rule.</p>
 
-<p>In addition, by defining the <em>QualifiedName</em> as a data type rule, it is allowed to use hidden tokens such as <code class="highlighter-rouge">/* comment */</code> between the segment IDs and dots (e.g. <code class="highlighter-rouge">foo/* comment */. bar . Baz</code>).</p>
+<p>In addition, by defining the <em>QualifiedName</em> as a data type rule, it is allowed to use hidden tokens such as <code>/* comment */</code> between the segment IDs and dots (e.g. <code>foo/* comment */. bar . Baz</code>).</p>
 
 <p>Return types can be specified in the same way as for terminal rules:</p>
 
@@ -553,7 +545,7 @@ Fullname:
     ID ('.' ID)*;
 </code></pre>
 
-<p>Note that rules that do not call other parser rules and do neither contain any actions nor <a href="301_grammarlanguage.html#assignments">assignments</a> are considered to be data type rules, and the data type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">EString</a> is implied if none has been explicitly declared.</p>
+<p>Note that rules that do not call other parser rules and do neither contain any actions nor <a href="301_grammarlanguage.html#assignments">assignments</a> are considered to be data type rules, and the data type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">EString</a> is implied if none has been explicitly declared.</p>
 
 <p><a href="303_runtime_concepts.html#value-converter">Value converters</a> are used to transform the parsed string to the actually returned data type value.</p>
 
@@ -561,7 +553,7 @@ Fullname:
 
 <p>Enum rules return enumeration literals from strings. They can be seen as a shortcut for data type rules with specific value converters. The main advantage of enum rules is their simplicity, type safety and therefore nice validation. Furthermore it is possible to infer enums and their respective literals during the Ecore model transformation.</p>
 
-<p>If you want to define a <code class="highlighter-rouge">ChangeKind</code> from <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/change/package-summary.html">org.eclipse.emf.ecore.change/model/Change.ecore</a> with <em>ADD</em>, <em>MOVE</em> and <em>REMOVE</em> you could write:</p>
+<p>If you want to define a <code>ChangeKind</code> from <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/change/package-summary.html">org.eclipse.emf.ecore.change/model/Change.ecore</a> with <em>ADD</em>, <em>MOVE</em> and <em>REMOVE</em> you could write:</p>
 
 <pre><code class="language-xtext">enum ChangeKind:
     ADD | MOVE | REMOVE;
@@ -581,7 +573,7 @@ Fullname:
 	'element' name=ID (value=SomeEnum)?;
 </code></pre>
 
-<p>with the input of <code class="highlighter-rouge">element Foo</code> the resulting instance <em>Foo</em> will hold the enum value with the internal representation of <code class="highlighter-rouge">0</code> (zero). When generating the EPackage from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation. You can overcome this by importing a meta model where the enum is defined and omitting some of its literals in the grammar.</p>
+<p>with the input of <code>element Foo</code> the resulting instance <em>Foo</em> will hold the enum value with the internal representation of <code>0</code> (zero). When generating the EPackage from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation. You can overcome this by importing a meta model where the enum is defined and omitting some of its literals in the grammar.</p>
 
 <hr />
 
@@ -589,7 +581,7 @@ Fullname:
 
 <p>The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST).</p>
 
-<p>Xtext uses Ecore’s EPackages to define Ecore models. Ecore models are declared to be either inferred from the grammar or imported. By using the <code class="highlighter-rouge">generate</code> directive, one tells Xtext to infer an EPackage from the grammar.</p>
+<p>Xtext uses Ecore’s EPackages to define Ecore models. Ecore models are declared to be either inferred from the grammar or imported. By using the <code>generate</code> directive, one tells Xtext to infer an EPackage from the grammar.</p>
 
 <h3 id="type-and-package-generation">Type and Package Generation</h3>
 
@@ -598,7 +590,7 @@ Fullname:
 <ul>
   <li>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a>
     <ul>
-      <li>for each <code class="highlighter-rouge">generate</code> declaration. The <em>name</em> of the EPackage is set to the first parameter of such a declaration, its <em>nsURI</em> to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</li>
+      <li>for each <code>generate</code> declaration. The <em>name</em> of the EPackage is set to the first parameter of such a declaration, its <em>nsURI</em> to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</li>
     </ul>
   </li>
   <li>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a>
@@ -630,7 +622,7 @@ Fullname:
   <li>Entering an element of an alternative the set is reset to the same state it was in when entering the first option of the alternative.</li>
   <li>Leaving an alternative the set contains the union of all types at the end of each of its paths.</li>
   <li>After an optional element, the set is reset to the same state it was before entering it.</li>
-  <li>After a non-optional unassigned rule call the set contains only the return type of the called rule. An optional rule call does not modify the set. A rule call is optional if its cardinality is <code class="highlighter-rouge">?</code> or <code class="highlighter-rouge">*</code>.</li>
+  <li>After a non-optional unassigned rule call the set contains only the return type of the called rule. An optional rule call does not modify the set. A rule call is optional if its cardinality is <code>?</code> or <code>*</code>.</li>
   <li>After an action the set contains only the type of the action.</li>
 </ul>
 
@@ -639,19 +631,19 @@ Fullname:
 <ul>
   <li>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> in each current return type
     <ul>
-      <li>of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/Boolean.html">EBoolean</a> for each feature assignment using the <code class="highlighter-rouge">?=</code> operator. No further EReferences or EAttributes are generated from such an assignment.</li>
-      <li>for each assignment with the <code class="highlighter-rouge">=</code> or <code class="highlighter-rouge">+=</code> operator calling a terminal rule or data type rule. Its type is the return type of the called rule.</li>
+      <li>of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">EBoolean</a> for each feature assignment using the <code>?=</code> operator. No further EReferences or EAttributes are generated from such an assignment.</li>
+      <li>for each assignment with the <code>=</code> or <code>+=</code> operator calling a terminal rule or data type rule. Its type is the return type of the called rule.</li>
     </ul>
   </li>
   <li>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a> in each current return type
     <ul>
-      <li>for each assignment with the <code class="highlighter-rouge">=</code> or <code class="highlighter-rouge">+=</code> operator in a parser rule calling a parser rule. The type of the EReference is the return type of the called parser rule.</li>
+      <li>for each assignment with the <code>=</code> or <code>+=</code> operator in a parser rule calling a parser rule. The type of the EReference is the return type of the called parser rule.</li>
       <li>for each assigned action. The type of the reference is the return type of the current rule containing the action.</li>
     </ul>
   </li>
 </ul>
 
-<p>Each <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> or <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a> takes its name from the assignment or action that caused it. Multiplicities are <code class="highlighter-rouge">0..1</code> for assignments with the <code class="highlighter-rouge">=</code> operator and <code class="highlighter-rouge">0..*</code> for assignments with the <code class="highlighter-rouge">+=</code> operator.</p>
+<p>Each <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> or <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a> takes its name from the assignment or action that caused it. Multiplicities are <code>0..1</code> for assignments with the <code>=</code> operator and <code>0..*</code> for assignments with the <code>+=</code> operator.</p>
 
 <p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of “artificial” parser rules that are never called, e.g.</p>
 
@@ -687,7 +679,7 @@ Fullname:
 
 <h2 id="grammar-mixins">Grammar Mixins</h2>
 
-<p>Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use <code class="highlighter-rouge">org.eclipse.xtext.common.Terminals</code> by default, which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.</p>
+<p>Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use <code>org.eclipse.xtext.common.Terminals</code> by default, which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.</p>
 
 <pre><code class="language-xtext">grammar org.example.domainmodel.Domainmodel
     with org.eclipse.xtext.common.Terminals
@@ -701,7 +693,7 @@ Greeting:
     'Hello' name=ID '!';
 </code></pre>
 
-<p>To reuse an existing grammar, make sure the grammar file is on the classpath of the inheriting language. If it is in a different plug-in, make sure to add a plug-in dependency in the <code class="highlighter-rouge">MANIFEST.MF</code>.</p>
+<p>To reuse an existing grammar, make sure the grammar file is on the classpath of the inheriting language. If it is in a different plug-in, make sure to add a plug-in dependency in the <code>MANIFEST.MF</code>.</p>
 
 <p>Mixing another grammar into a language makes the rules defined in that grammar referable. It is also possible to overwrite rules from the used grammar. Example:</p>
 
