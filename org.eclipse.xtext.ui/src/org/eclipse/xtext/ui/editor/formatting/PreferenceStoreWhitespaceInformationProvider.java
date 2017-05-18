@@ -65,6 +65,9 @@ public class PreferenceStoreWhitespaceInformationProvider implements IWhitespace
 	}
 
 	protected String getLineSeparatorPreference(URI uri) {
+		if (uri == null) {
+			return System.getProperty("line.separator");
+		}
 		if (uri.isPlatformResource()) {
 			IFile file = workspace.getRoot().getFile(new Path(uri.toPlatformString(true)));
 			String delimiter = senseLineDelimiter(file);
