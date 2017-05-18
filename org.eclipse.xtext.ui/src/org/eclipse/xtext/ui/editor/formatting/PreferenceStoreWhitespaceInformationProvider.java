@@ -41,6 +41,9 @@ public class PreferenceStoreWhitespaceInformationProvider implements IWhitespace
 
 	@Inject
 	private IIndentationInformation indentInfo;
+	
+	@Inject
+	private ILineSeparatorInformation lineSeparatorInformation;
 
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
@@ -55,6 +58,9 @@ public class PreferenceStoreWhitespaceInformationProvider implements IWhitespace
 
 	@Override
 	public ILineSeparatorInformation getLineSeparatorInformation(URI uri) {
+		if (uri == null) {
+			return lineSeparatorInformation;
+		}
 		final String lineSeparator = getLineSeparatorPreference(uri);
 		return new ILineSeparatorInformation() {
 			@Override
@@ -65,9 +71,6 @@ public class PreferenceStoreWhitespaceInformationProvider implements IWhitespace
 	}
 
 	protected String getLineSeparatorPreference(URI uri) {
-		if (uri == null) {
-			return System.getProperty("line.separator");
-		}
 		if (uri.isPlatformResource()) {
 			IFile file = workspace.getRoot().getFile(new Path(uri.toPlatformString(true)));
 			String delimiter = senseLineDelimiter(file);
