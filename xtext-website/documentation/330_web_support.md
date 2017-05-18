@@ -285,7 +285,7 @@ The following functions are available, provided that the respective services are
  * `enableContentAssistService`
    Whether content assist should be enabled (default: `true`).
  * `enableFormattingAction`
-   Whether the formatting action should be bound to the standard keystroke Ctrl+Shift+F / Cmd+Shift+F (default: `false`).
+   Whether the formatting action should be bound to the standard keystroke <kbd>Ctrl</kbd>+<kbd>⇧</kbd>+<kbd>F</kbd> (<kbd>Ctrl</kbd>+<kbd>⇧</kbd>+<kbd>S</kbd> on CodeMirror) / <kbd>⌘</kbd>+<kbd>⇧</kbd>+<kbd>F</kbd> (default: `false`).
  * `enableFormattingService`
    Whether text formatting should be enabled (default: `true`).
  * `enableGeneratorService`
@@ -297,7 +297,7 @@ The following functions are available, provided that the respective services are
  * `enableOccurrencesService`
    Whether marking occurrences should be enabled (default: `true`).
  * `enableSaveAction`
-   Whether the save action should be bound to the standard keystroke Ctrl+S / Cmd+S (default: `false`).
+   Whether the save action should be bound to the standard keystroke <kbd>Ctrl</kbd>+<kbd>S</kbd> / <kbd>⌘</kbd>+<kbd>S</kbd> (default: `false`).
  * `enableValidationService`
    Whether validation should be enabled (default: `true`).
  * `loadFromServer`

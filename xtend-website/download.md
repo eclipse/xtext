@@ -41,7 +41,7 @@ title: Download
 			    
 			    <h3>Plug-In Repositories</h3>
 				<p>Choose one of the following repository URLs for IDEA :</p>
-				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.2/updatePlugins.xml" class="has-popover btn btn-primary btn-medium">Releases (right click &amp; copy)</a></p>
+				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/idea/2.10.0/updatePlugins.xml" class="has-popover btn btn-primary btn-medium">Releases (right click &amp; copy)</a></p>
 				<!--p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" class="has-popover btn btn-primary btn-medium">Milestones (right click &amp; copy)</a></p-->
 				<p><a href="https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml" class="has-popover btn btn-primary btn-medium">Nightly Builds (right click &amp; copy)</a>
 				</p>
@@ -71,7 +71,7 @@ If you already have a project, you need to add the Xtend library:
 <dependency>
   <groupId>org.eclipse.xtend</groupId>
   <artifactId>org.eclipse.xtend.lib</artifactId>
-  <version>2.9.0</version>
+  <version>2.11.0</version>
 </dependency>
 ```
 
@@ -81,7 +81,7 @@ and the Xtend compiler plugin:
 <plugin>
   <groupId>org.eclipse.xtend</groupId>
   <artifactId>xtend-maven-plugin</artifactId>
-  <version>2.9.0</version>
+  <version>2.11.0</version>
   <executions>
     <execution>
       <goals>
@@ -103,13 +103,13 @@ Here is a minimal Gradle build script using Xtend:
 
 ```groovy
 plugins {
-  id "org.xtend.xtend" version "0.4.10"
+  id "org.xtend.xtend" version "1.0.17"
 }
 
 repositories.jcenter()
 
 dependencies {
-  compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.9.0'
+  compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.11.0'
 }
 ```
 

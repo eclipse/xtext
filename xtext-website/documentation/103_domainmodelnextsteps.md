@@ -35,8 +35,8 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
 1.  First of all, you will have to filter the contents of the resource down to the defined entities. Therefore we need to iterate a resource with all its deeply nested elements. This can be achieved with the method `getAllContents()`. To use the resulting [TreeIterator]({{site.src.emf}}/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java) in a `for` loop, we use the extension method `toIterable()` from the built-in library class [IteratorExtensions]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java).     
     
     ```xtend
-    class DomainmodelGenerator implements IGenerator {
-        override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+    class DomainmodelGenerator extends AbstractGenerator {
+        override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
             for (e : resource.allContents.toIterable.filter(Entity)) {
                 
             }
@@ -53,7 +53,7 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     This allows to ask for the name of an entity. It is straightforward to convert the name into a file name:     
     
     ```xtend
-    override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+    override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         for (e : resource.allContents.toIterable.filter(Entity)) {
             fsa.generateFile(
                 e.fullyQualifiedName.toString("/") + ".java",
@@ -77,7 +77,7 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     
     ```xtend
     def compile(Entity e) '''
-        «IF e.eContainer.fullyQualifiedName != null»
+        «IF e.eContainer.fullyQualifiedName !== null»
             package «e.eContainer.fullyQualifiedName»;
         «ENDIF»
         
@@ -90,11 +90,11 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     
     ```xtend
     def compile(Entity e) ''' 
-        «IF e.eContainer.fullyQualifiedName != null»
+        «IF e.eContainer.fullyQualifiedName !== null»
             package «e.eContainer.fullyQualifiedName»;
         «ENDIF»
         
-        public class «e.name» «IF e.superType != null
+        public class «e.name» «IF e.superType !== null
                 »extends «e.superType.fullyQualifiedName» «ENDIF»{
         }
     '''
@@ -120,11 +120,11 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     
     ```xtend
     def compile(Entity e) ''' 
-        «IF e.eContainer.fullyQualifiedName != null»
+        «IF e.eContainer.fullyQualifiedName !== null»
             package «e.eContainer.fullyQualifiedName»;
         «ENDIF»
         
-        public class «e.name» «IF e.superType != null
+        public class «e.name» «IF e.superType !== null
                 »extends «e.superType.fullyQualifiedName» «ENDIF»{
             «FOR f:e.features»
                 «f.compile»
@@ -139,19 +139,20 @@ The final code generator is listed below. Now you can give it a try! Launch a ne
 package org.example.domainmodel.generator
 
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.AbstractGenerator
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.IGeneratorContext
 import org.example.domainmodel.domainmodel.Entity
 import org.example.domainmodel.domainmodel.Feature
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 import com.google.inject.Inject
 
-class DomainmodelGenerator implements IGenerator {
+class DomainmodelGenerator extends AbstractGenerator {
 
     @Inject extension IQualifiedNameProvider
 
-    override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+    override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         for (e : resource.allContents.toIterable.filter(Entity)) {
             fsa.generateFile(
                 e.fullyQualifiedName.toString("/") + ".java",
@@ -160,11 +161,11 @@ class DomainmodelGenerator implements IGenerator {
     }
 
     def compile(Entity e) ''' 
-        «IF e.eContainer.fullyQualifiedName != null»
+        «IF e.eContainer.fullyQualifiedName !== null»
             package «e.eContainer.fullyQualifiedName»;
         «ENDIF»
         
-        public class «e.name» «IF e.superType != null
+        public class «e.name» «IF e.superType !== null
                 »extends «e.superType.fullyQualifiedName» «ENDIF»{
             «FOR f : e.features»
                 «f.compile»
@@ -259,7 +260,7 @@ The second validation rule is straight-forward, too. We traverse the inheritance
 @Check
 def void checkFeatureNameIsUnique(Feature f) {
     var superEntity = (f.eContainer as Entity).superType
-    while (superEntity != null) {
+    while (superEntity !== null) {
         for (other : superEntity.features) {
             if (f.name == other.name) {
                 error("Feature names have to be unique",

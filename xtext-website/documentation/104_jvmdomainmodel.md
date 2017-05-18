@@ -245,7 +245,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                 boolean isPrelinkingPhase) {
     acceptor.accept(element.toClass( element.fullyQualifiedName )) [
       documentation = element.documentation
-      if (element.superType != null)
+      if (element.superType !== null)
         superTypes += element.superType.cloneWithProxies
       for (feature : element.features) {
         switch feature {
@@ -295,7 +295,7 @@ Let's go through the code to get an idea of what is going on. (Please also refer
 
     Here we assign some JavaDoc to the newly created element. The assignment is translated to an invocation of the method *[JvmTypesBuilder]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java).setDocumentation([JvmIdentifiableElement]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java), String)*, and `element.documentation` is in fact calling the extension method *[JvmTypesBuilder]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java).getDocumentation([EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java))*. Such extension methods are explained in detail in the [Xtend documentation](https://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#extension-methods). 
 1.  ```xtend
-    if (element.superType != null)
+    if (element.superType !== null)
         superTypes += entity.superType.cloneWithProxies
     ```
 

@@ -123,9 +123,10 @@ The second plug-in invokes the MWE2 file through a standard Java process:
 <plugin>
   <groupId>org.codehaus.mojo</groupId>
   <artifactId>exec-maven-plugin</artifactId>
-  <version>1.2.1</version>
+  <version>1.4.0</version>
   <executions>
     <execution>
+      <id>mwe2Launcher</id>
       <phase>generate-sources</phase>
       <goals>
         <goal>java</goal>
@@ -133,31 +134,41 @@ The second plug-in invokes the MWE2 file through a standard Java process:
     </execution>
   </executions>
   <configuration>
-    <includeProjectDependencies>false</includeProjectDependencies>
-    <includePluginDependencies>true</includePluginDependencies>
     <mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
     <arguments>
-      <argument>
-        file://${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2
-      </argument>
-      <argument>
-          -p
-      </argument>
-      <argument>
-          runtimeProject=/${project.basedir}
-      </argument>
+      <argument>/${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2</argument>
+      <argument>-p</argument>
+      <argument>rootPath=/${project.basedir}/..</argument>
     </arguments>
+    <classpathScope>compile</classpathScope>
+    <includePluginDependencies>true</includePluginDependencies>
+    <cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
   </configuration>
   <dependencies>
     <dependency>
+      <groupId>org.eclipse.emf</groupId>
+      <artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+      <version>2.9.0.201605261059</version>
+    </dependency>
+    <dependency>
       <groupId>org.eclipse.xtext</groupId>
-      <artifactId>org.eclipse.xtext.xtext</artifactId>
-      <version>2.9.1</version>
+      <artifactId>org.eclipse.xtext.common.types</artifactId>
+      <version>2.11.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.xtext</groupId>
+      <artifactId>org.eclipse.xtext.xtext.generator</artifactId>
+      <version>2.11.0</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.xtext</groupId>
       <artifactId>org.eclipse.xtext.xbase</artifactId>
-      <version>2.9.1</version>
+      <version>2.11.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.xtext</groupId>
+      <artifactId>xtext-antlr-generator</artifactId>
+      <version>[2.1.1, 3)</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -207,11 +218,11 @@ Now that we can build our language we need to be able to integrate our language 
 <plugin>
   <groupId>org.eclipse.xtext</groupId>
   <artifactId>xtext-maven-plugin</artifactId>
-  <version>2.9.1</version>
+  <version>2.11.0</version>
   <executions>
     <execution>
       <goals>
-  <goal>generate</goal>
+        <goal>generate</goal>
       </goals>
     </execution>
   </executions>
@@ -250,6 +261,8 @@ To further speed up the p2 dependency resolution step, use the concrete build re
 
 | Xtext 													|				EMF  								| MWE2/MWE | Xpand   | Eclipse  | All included in |
 | ------------- | ------------- | ----------- | ----------- | ----------- | ----------- |
+| [2.11.0]({{page.upsite.xtext}}releases/2.11.0/)           | [2.12.0]({{page.upsite.eclipse}}releases/neon/201606221000) (2.12.0)     | [2.9.0]({{page.upsite.mwe}}releases/2.9.0/) (2.7.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.6.0]({{page.upsite.eclipse}}eclipse/updates/4.6/R-4.6-201606061100) (3.6) | [Neon*]({{page.upsite.eclipse}}releases/neon/201606221000)|
+| [2.10.0]({{page.upsite.xtext}}releases/2.10.0/)           | [2.12.0]({{page.upsite.eclipse}}releases/neon/201606221000) (2.12.0)     | [2.9.0]({{page.upsite.mwe}}releases/2.9.0/) (2.7.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.6.0]({{page.upsite.eclipse}}eclipse/updates/4.6/R-4.6-201606061100) (3.6) | [Neon]({{page.upsite.eclipse}}releases/neon/201606221000)|
 | [2.9.1]({{page.upsite.xtext}}releases/2.9.1/) 					| [2.11.1]({{page.upsite.emf}}2.11.x/core/) (2.10.2)  	 | [2.8.3]({{page.upsite.mwe}}releases/2.8.3/) (2.7.1) | [2.1.0]({{page.upsite.xpand}}releases/R201505260349) (1.4)  | [4.5.2]({{page.upsite.eclipse}}eclipse/updates/4.5-M-builds/) (3.6) | [Mars SR2*]({{page.upsite.eclipse}}releases/mars/)|
 | [2.8.4]({{page.upsite.xtext}}releases/2.8.4/) 					| [2.11.1]({{page.upsite.emf}}2.11.x/core/) (2.10.2)  	 | [2.8.1]({{page.upsite.mwe}}releases/2.8.1/) (2.7.1) | [2.1.0]({{page.upsite.xpand}}releases/R201505260349) (1.4)  | [4.5.1]({{page.upsite.eclipse}}eclipse/updates/4.5/R-4.5-201506032000/) (3.6) | [Mars SR1]({{page.upsite.eclipse}}releases/mars/)|
 | [2.8.3]({{page.upsite.xtext}}releases/2.8.3/), [2.8.2]({{page.upsite.xtext}}releases/2.8.2/), [2.8.1]({{page.upsite.xtext}}releases/2.8.1/) | [2.11.0]({{page.upsite.emf}}2.11/core/R201506010402/) (2.10.2)  	 | [2.8.0]({{page.upsite.mwe}}releases/2.8.0/) (2.7.1) | [2.1.0]({{page.upsite.xpand}}releases/R201505260349) (1.4)  | [4.5.0]({{page.upsite.eclipse}}eclipse/updates/4.5/R-4.5-201506032000/) (3.6) | [Mars R]({{page.upsite.eclipse}}releases/mars/201506241002/)|
