@@ -155,6 +155,8 @@
 			<topic href="contents/203_xtend_expressions.html#xtend-expressions-synchronized" label="Synchronized">
 			</topic>
 			<topic href="contents/203_xtend_expressions.html#templates" label="Template Expressions">
+				<topic href="contents/203_xtend_expressions.html#template-comment" label="Comments in Templates">
+				</topic>
 				<topic href="contents/203_xtend_expressions.html#template-if" label="Conditions in Templates">
 				</topic>
 				<topic href="contents/203_xtend_expressions.html#template-foreach" label="Loops in Templates">

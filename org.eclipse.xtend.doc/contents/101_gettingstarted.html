@@ -19,22 +19,21 @@
 }
 </code></pre>
 
-<p>You see that Xtend looks quite similar to Java. At a first glance the main difference seems to be the <code class="highlighter-rouge">def</code> keyword to declare a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. Admittedly <em>Hello World</em> programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real things as you will learn in a second.</p>
+<p>You see that Xtend looks quite similar to Java. At a first glance the main difference seems to be the <code>def</code> keyword to declare a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. Admittedly <em>Hello World</em> programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real things as you will learn in a second.</p>
 
 <p>An Xtend class resides in a plain Eclipse Java project. As soon as the SDK is installed, Eclipse will automatically translate all the classes to Java source code. By default you will find it in a source folder <em>xtend-gen</em>. The hello world example is translated to the following Java code:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// Generated Java Source Code</span>
-<span class="kn">import</span> <span class="nn">org.eclipse.xtext.xbase.lib.InputOutput</span><span class="o">;</span>
+<pre><code class="language-java">// Generated Java Source Code
+import org.eclipse.xtext.xbase.lib.InputOutput;
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="o">{</span>
-  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">InputOutput</span><span class="o">.&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="n">println</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">);</span>
-  <span class="o">}</span>
-<span class="o">}</span>
+public class HelloWorld {
+  public static void main(final String[] args) {
+    InputOutput.&lt;String&gt;println("Hello World");
+  }
+}
 </code></pre>
-</div>
 
-<p>The only surprising fact in the generated Java code may be the referenced library class <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java">InputOutput</a>. It is part of the runtime library and a nice utility that is quite handy when used in expressions.</p>
+<p>The only surprising fact in the generated Java code may be the referenced library class <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java">InputOutput</a>. It is part of the runtime library and a nice utility that is quite handy when used in expressions.</p>
 
 <p>You can put an Xtend class into a source folder of any Java project within Eclipse or any Maven project. If the project is not yet configured properly, Eclipse will complain about the missing library. The xtend.lib has to be on the class path. The IDE will provide a quick fix to add it.</p>
 
