@@ -174,7 +174,7 @@ class GrammarConstraintProviderFeatureTest {
 	def assertEquals(String expected, String actual)
 	{
 		val expectedM = expected?.replaceAll(System.lineSeparator, "\n");
-		val actualM = expected?.replaceAll(System.lineSeparator, "\n");
+		val actualM = actual?.replaceAll(System.lineSeparator, "\n");
 		Assert.assertEquals(expectedM, actualM)
 	}
 
