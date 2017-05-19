@@ -46,7 +46,7 @@ public class GeneratorNodeTest {
     _builder.append("indented2");
     _builder.newLine();
     _builder.append("dedented");
-    Assert.assertEquals(_builder.toString(), result.toString());
+    this.assertEquals(_builder.toString(), result.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("CompletableTraceRegion [myOffset=0, myLength=44] associations={");
     _builder_1.newLine();
@@ -65,7 +65,7 @@ public class GeneratorNodeTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("}");
-    Assert.assertEquals(_builder_1.toString(), result.getTraceRegion().toString());
+    this.assertEquals(_builder_1.toString(), result.getTraceRegion().toString());
   }
   
   @Test
@@ -85,7 +85,7 @@ public class GeneratorNodeTest {
     _builder.newLine();
     _builder.append("noindent");
     _builder.newLine();
-    Assert.assertEquals(_builder.toString(), processor.process(node).toString());
+    this.assertEquals(_builder.toString(), processor.process(node).toString());
   }
   
   @Test
@@ -103,7 +103,7 @@ public class GeneratorNodeTest {
     final CompositeGeneratorNode node = this.exts.appendTemplate(_trace, _client);
     final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();
     final GeneratorNodeProcessor.Result result = processor.process(node);
-    Assert.assertEquals(this.someCodeGen_noTrace(2).toString(), result.toString());
+    this.assertEquals(this.someCodeGen_noTrace(2).toString(), result.toString());
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("CompletableTraceRegion [myOffset=0, myLength=80] associations={");
     _builder.newLine();
@@ -149,7 +149,7 @@ public class GeneratorNodeTest {
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
-    Assert.assertEquals(_builder.toString(), result.getTraceRegion().toString());
+    this.assertEquals(_builder.toString(), result.getTraceRegion().toString());
   }
   
   private StringConcatenationClient someCodeGen(final int n) {
@@ -270,7 +270,7 @@ public class GeneratorNodeTest {
     _builder_3.append("  ");
     _builder_3.append("in a string concatenation");
     _builder_3.newLine();
-    Assert.assertEquals(_builder_3.toString(), processor.process(node).toString());
+    this.assertEquals(_builder_3.toString(), processor.process(node).toString());
   }
   
   @Test
@@ -334,7 +334,7 @@ public class GeneratorNodeTest {
     _builder.newLine();
     _builder.append("d  ");
     _builder.newLine();
-    Assert.assertEquals(_builder.toString(), processor.process(node).toString());
+    this.assertEquals(_builder.toString(), processor.process(node).toString());
   }
   
   private void doIndent(final CompositeGeneratorNode parent, final boolean indentImmediately, final boolean indentEmptyLines) {
@@ -344,5 +344,11 @@ public class GeneratorNodeTest {
     this.exts.appendNewLine(this.exts.append(parent, this.exts.append(new IndentNode("  ", indentImmediately, indentEmptyLines), "c")));
     this.exts.append(parent, this.exts.appendNewLine(new IndentNode("  ", indentImmediately, indentEmptyLines)));
     this.exts.append(this.exts.append(parent, "d"), this.exts.appendNewLine(new IndentNode("  ", indentImmediately, indentEmptyLines)));
+  }
+  
+  private void assertEquals(final String expected, final String actual) {
+    final String expectedM = expected.toString().replaceAll(System.lineSeparator(), "\n");
+    final String actualM = actual.toString().replaceAll(System.lineSeparator(), "\n");
+    Assert.assertEquals(expectedM, actualM);
   }
 }

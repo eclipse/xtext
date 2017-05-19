@@ -667,8 +667,17 @@ class RegionAccessBuilderTest {
 		val access2 = obj.serializeToRegions
 		assertToStringDoesNotCrash(access1)
 		assertToStringDoesNotCrash(access2)
-		Assert.assertEquals(exp, new TextRegionAccessToString().withRegionAccess(access1).cfg() + "\n")
-		Assert.assertEquals(exp, new TextRegionAccessToString().withRegionAccess(access2).cfg() + "\n")
+		
+		val tra1 = new TextRegionAccessToString().withRegionAccess(access1).cfg() + "\n"
+		val tra2 = new TextRegionAccessToString().withRegionAccess(access2).cfg() + "\n"
+		
+		val expM = exp.replaceAll(System.lineSeparator, "\n")
+		
+		val tra1M = tra1.replaceAll(System.lineSeparator, "\n")
+		val tra2M = tra2.replaceAll(System.lineSeparator, "\n")
+		
+		Assert.assertEquals(expM, tra1M)
+		Assert.assertEquals(expM, tra2M)
 	}
 
 	private def assertToStringDoesNotCrash(ITextRegionAccess access) {

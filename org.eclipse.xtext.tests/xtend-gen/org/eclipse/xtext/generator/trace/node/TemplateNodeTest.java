@@ -274,6 +274,8 @@ public class TemplateNodeTest {
     final GeneratorNodeProcessor.Result result = processor.process(root);
     final StringConcatenation expected = new StringConcatenation();
     expected.append(c);
-    Assert.assertEquals(expected.toString(), result.toString());
+    final String expectedM = expected.toString().replaceAll(System.lineSeparator(), "\n");
+    final String resultM = result.toString().replaceAll(System.lineSeparator(), "\n");
+    Assert.assertEquals(expectedM, resultM);
   }
 }

@@ -457,7 +457,9 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	}
 
 	def void assertEquals(String expected, String actual) {
-		Assert.assertEquals(expected.replace('\t', '    '), actual.replace('\t', '    '))
+		val expectedM = expected.replace(System.lineSeparator, '\n')
+		val actualM = actual.replace(System.lineSeparator, '\n')
+		Assert.assertEquals(expectedM.replace('\t', '    '), actualM.replace('\t', '    '))
 	}
 
 	protected def testFormatting((FormattingConfiguration)=>void configurator) {

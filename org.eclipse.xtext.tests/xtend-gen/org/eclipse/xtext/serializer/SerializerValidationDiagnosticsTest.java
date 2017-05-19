@@ -180,7 +180,9 @@ public class SerializerValidationDiagnosticsTest {
     } catch (final Throwable _t) {
       if (_t instanceof Throwable) {
         final Throwable t = (Throwable)_t;
-        Assert.assertEquals(expected.toString().trim(), t.getMessage());
+        final String expectedM = expected.toString().trim().replaceAll(System.lineSeparator(), "\n");
+        final String messageM = t.getMessage().replaceAll(System.lineSeparator(), "\n");
+        Assert.assertEquals(expectedM, messageM);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

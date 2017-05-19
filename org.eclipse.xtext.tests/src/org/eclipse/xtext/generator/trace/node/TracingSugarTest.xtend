@@ -63,14 +63,14 @@ class TracingSugarTest {
 		val generated = fsa.textFiles.get(IFileSystemAccess.DEFAULT_OUTPUT + 'foo/bar.txt')
 		
 		// check the generated string is as expected
-		Assert.assertEquals('''
+		assertEquals('''
 			«FOR t : root.types»
 				«t.generateType»
 			«ENDFOR»
 		'''.toString, generated.toString)
 		
 		val trace = (generated as ITraceRegionProvider).traceRegion
-		Assert.assertEquals('''
+		assertEquals('''
 			CompletableTraceRegion [myOffset=0, myLength=55] associations={
 			  LocationData [TextRegionWithLineInformation [0:41][lineNumber=0, endLineNumber=3]][path=__synthetic0.lazylinkingtestlanguage]
 			} nestedRegions={
@@ -124,5 +124,11 @@ class TracingSugarTest {
 	def generateProperty(Property it) '''
 		Property «name» : «type.head.name»
 	'''
+	
+	def void assertEquals(String expected, String actual) {
+		val expectedM = expected.replace(System.lineSeparator, '\n')
+		val actualM = actual.replace(System.lineSeparator, '\n')
+		Assert.assertEquals(expectedM, actualM)
+	}
 	
 }

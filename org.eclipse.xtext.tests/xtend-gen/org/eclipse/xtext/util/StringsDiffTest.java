@@ -139,6 +139,17 @@ public class StringsDiffTest {
     if (_string!=null) {
       _trim=_string.trim();
     }
-    Assert.assertEquals(_trim, DiffUtil.diff(one, two));
+    String _replaceAll = null;
+    if (_trim!=null) {
+      _replaceAll=_trim.replaceAll(System.lineSeparator(), "\n");
+    }
+    final String expectedM = _replaceAll;
+    String _diff = DiffUtil.diff(one, two);
+    String _replaceAll_1 = null;
+    if (_diff!=null) {
+      _replaceAll_1=_diff.replaceAll(System.lineSeparator(), "\n");
+    }
+    final String actualM = _replaceAll_1;
+    Assert.assertEquals(expectedM, actualM);
   }
 }

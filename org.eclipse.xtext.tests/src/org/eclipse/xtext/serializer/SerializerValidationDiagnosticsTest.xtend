@@ -105,7 +105,10 @@ class SerializerValidationDiagnosticsTest {
 			obj.serialize
 			Assert.fail("Serialization should not succeed.")
 		} catch (Throwable t) {
-			Assert.assertEquals(expected.toString.trim, t.message)
+			val expectedM = expected.toString.trim.replaceAll(System.lineSeparator, "\n")
+			val messageM = t.message.replaceAll(System.lineSeparator, "\n")
+			
+			Assert.assertEquals(expectedM, messageM)
 		}
 	}
 

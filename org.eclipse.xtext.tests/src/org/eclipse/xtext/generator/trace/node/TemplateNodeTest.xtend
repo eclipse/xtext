@@ -129,6 +129,10 @@ class TemplateNodeTest {
 		
 		val expected = new StringConcatenation()
 		expected.append(c)
-		Assert.assertEquals(expected.toString, result.toString)
+		
+		val expectedM = expected.toString.replaceAll(System.lineSeparator, "\n")
+		val resultM = result.toString.replaceAll(System.lineSeparator, "\n")
+		
+		Assert.assertEquals(expectedM, resultM)
 	}
 }

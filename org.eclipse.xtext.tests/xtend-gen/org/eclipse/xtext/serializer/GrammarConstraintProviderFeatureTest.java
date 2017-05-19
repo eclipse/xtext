@@ -58,7 +58,7 @@ public class GrammarConstraintProviderFeatureTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    Assert.assertEquals(expected, actual);
+    this.assertEquals(expected, actual);
   }
   
   @Test
@@ -76,7 +76,7 @@ public class GrammarConstraintProviderFeatureTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    Assert.assertEquals(expected, actual);
+    this.assertEquals(expected, actual);
   }
   
   @Test
@@ -94,7 +94,7 @@ public class GrammarConstraintProviderFeatureTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    Assert.assertEquals(expected, actual);
+    this.assertEquals(expected, actual);
   }
   
   @Test
@@ -112,7 +112,7 @@ public class GrammarConstraintProviderFeatureTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    Assert.assertEquals(expected, actual);
+    this.assertEquals(expected, actual);
   }
   
   @Test
@@ -130,7 +130,7 @@ public class GrammarConstraintProviderFeatureTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    Assert.assertEquals(expected, actual);
+    this.assertEquals(expected, actual);
   }
   
   @Test
@@ -151,7 +151,7 @@ public class GrammarConstraintProviderFeatureTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    Assert.assertEquals(expected, actual);
+    this.assertEquals(expected, actual);
   }
   
   @Test
@@ -175,7 +175,7 @@ public class GrammarConstraintProviderFeatureTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    Assert.assertEquals(expected, actual);
+    this.assertEquals(expected, actual);
   }
   
   @Test
@@ -196,7 +196,7 @@ public class GrammarConstraintProviderFeatureTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    Assert.assertEquals(expected, actual);
+    this.assertEquals(expected, actual);
   }
   
   @Test
@@ -253,7 +253,7 @@ public class GrammarConstraintProviderFeatureTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    Assert.assertEquals(expected, actual);
+    this.assertEquals(expected, actual);
   }
   
   @Test
@@ -280,7 +280,21 @@ public class GrammarConstraintProviderFeatureTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    Assert.assertEquals(expected, actual);
+    this.assertEquals(expected, actual);
+  }
+  
+  public void assertEquals(final String expected, final String actual) {
+    String _replaceAll = null;
+    if (expected!=null) {
+      _replaceAll=expected.replaceAll(System.lineSeparator(), "\n");
+    }
+    final String expectedM = _replaceAll;
+    String _replaceAll_1 = null;
+    if (expected!=null) {
+      _replaceAll_1=expected.replaceAll(System.lineSeparator(), "\n");
+    }
+    final String actualM = _replaceAll_1;
+    Assert.assertEquals(expectedM, actualM);
   }
   
   public String toFeatureInfo(final CharSequence grammarString) {

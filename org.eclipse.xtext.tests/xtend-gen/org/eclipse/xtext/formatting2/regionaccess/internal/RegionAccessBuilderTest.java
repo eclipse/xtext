@@ -1439,11 +1439,14 @@ public class RegionAccessBuilderTest {
       this.assertToStringDoesNotCrash(access1);
       this.assertToStringDoesNotCrash(access2);
       TextRegionAccessToString _cfg = this.cfg(new TextRegionAccessToString().withRegionAccess(access1));
-      String _plus = (_cfg + "\n");
-      Assert.assertEquals(exp, _plus);
+      final String tra1 = (_cfg + "\n");
       TextRegionAccessToString _cfg_1 = this.cfg(new TextRegionAccessToString().withRegionAccess(access2));
-      String _plus_1 = (_cfg_1 + "\n");
-      Assert.assertEquals(exp, _plus_1);
+      final String tra2 = (_cfg_1 + "\n");
+      final String expM = exp.replaceAll(System.lineSeparator(), "\n");
+      final String tra1M = tra1.replaceAll(System.lineSeparator(), "\n");
+      final String tra2M = tra2.replaceAll(System.lineSeparator(), "\n");
+      Assert.assertEquals(expM, tra1M);
+      Assert.assertEquals(expM, tra2M);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
