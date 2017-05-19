@@ -77,7 +77,7 @@ public class ServerLauncher {
       String _plus = (_name + "-");
       long _currentTimeMillis = System.currentTimeMillis();
       Timestamp _timestamp = new Timestamp(_currentTimeMillis);
-      final String id = (_plus + _timestamp);
+      final String id = (_plus + _timestamp).replace(" ", "_");
       if (ServerLauncher.IS_DEBUG) {
         final FileOutputStream stdFileOut = new FileOutputStream((("out-" + id) + ".log"));
         PrintStream _printStream = new PrintStream(stdFileOut);
