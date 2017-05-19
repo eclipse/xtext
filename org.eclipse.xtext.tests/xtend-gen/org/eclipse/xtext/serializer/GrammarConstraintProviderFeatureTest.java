@@ -290,8 +290,8 @@ public class GrammarConstraintProviderFeatureTest {
     }
     final String expectedM = _replaceAll;
     String _replaceAll_1 = null;
-    if (expected!=null) {
-      _replaceAll_1=expected.replaceAll(System.lineSeparator(), "\n");
+    if (actual!=null) {
+      _replaceAll_1=actual.replaceAll(System.lineSeparator(), "\n");
     }
     final String actualM = _replaceAll_1;
     Assert.assertEquals(expectedM, actualM);
