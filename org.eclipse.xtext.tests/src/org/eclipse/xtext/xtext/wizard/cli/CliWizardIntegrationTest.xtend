@@ -55,6 +55,7 @@ class CliWizardIntegrationTest {
 			runtimeProject.testProject.enabled = true
 			ideProject.enabled = true
 			webProject.enabled = true
+			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.mavenTycho"
@@ -66,6 +67,7 @@ class CliWizardIntegrationTest {
 			uiProject.testProject.enabled = true
 			ideProject.enabled = true
 			webProject.enabled = true
+			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.gradle"
@@ -76,6 +78,7 @@ class CliWizardIntegrationTest {
 			ideProject.enabled = true
 			webProject.enabled = true
 			intellijProject.enabled = true
+			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.eclipsePlugin"
@@ -86,6 +89,7 @@ class CliWizardIntegrationTest {
 			ideProject.enabled = true
 			uiProject.enabled = true
 			uiProject.testProject.enabled = true
+			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.eclipsePluginP2"
@@ -97,6 +101,7 @@ class CliWizardIntegrationTest {
 			uiProject.enabled = true
 			uiProject.testProject.enabled = true
 			p2Project.enabled = true
+			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.mavenTychoP2"
@@ -109,6 +114,7 @@ class CliWizardIntegrationTest {
 			ideProject.enabled = true
 			webProject.enabled = true
 			p2Project.enabled = true
+			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.full"
@@ -122,6 +128,7 @@ class CliWizardIntegrationTest {
 			webProject.enabled = true
 			intellijProject.enabled = true
 			p2Project.enabled = true
+			lineDelimiter = "\n"
 		]
 	]
 
