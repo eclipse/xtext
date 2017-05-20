@@ -32,6 +32,7 @@ import org.eclipse.xtext.linking.lazy.tests.LazyLinkingTestLanguageInjectorProvi
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.tests.LineDelimiters;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -176,7 +177,7 @@ public class TracingSugarTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final Model root = this.parseHelper.parse(_builder);
+      final Model root = this.parseHelper.parse(LineDelimiters.toUnix(_builder.toString()));
       final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -202,7 +203,7 @@ public class TracingSugarTest {
           _builder_1.newLineIfNotEmpty();
         }
       }
-      this.assertEquals(_builder_1.toString(), generated.toString());
+      Assert.assertEquals(LineDelimiters.toUnix(_builder_1.toString()), generated.toString());
       final AbstractTraceRegion trace = ((ITraceRegionProvider) generated).getTraceRegion();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("CompletableTraceRegion [myOffset=0, myLength=55] associations={");
@@ -285,7 +286,7 @@ public class TracingSugarTest {
       _builder_2.append("}");
       _builder_2.newLine();
       _builder_2.append("}");
-      this.assertEquals(_builder_2.toString(), trace.toString());
+      Assert.assertEquals(LineDelimiters.toUnix(_builder_2.toString()), trace.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -338,12 +339,6 @@ public class TracingSugarTest {
     _builder.append(_name_1);
     _builder.newLineIfNotEmpty();
     return _builder;
-  }
-  
-  public void assertEquals(final String expected, final String actual) {
-    final String expectedM = expected.replace(System.lineSeparator(), "\n");
-    final String actualM = actual.replace(System.lineSeparator(), "\n");
-    Assert.assertEquals(expectedM, actualM);
   }
   
   public StringConcatenationClient __generateType(final Type it) {

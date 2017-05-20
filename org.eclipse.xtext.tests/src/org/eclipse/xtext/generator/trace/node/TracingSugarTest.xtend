@@ -19,6 +19,7 @@ import org.eclipse.xtext.linking.lazy.tests.LazyLinkingTestLanguageInjectorProvi
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.tests.LineDelimiters
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -48,12 +49,12 @@ class TracingSugarTest {
 	@Inject ParseHelper<Model> parseHelper
 	
 	@Test def void testCodeGeneration() {
-		val root = parseHelper.parse('''
+		val root = parseHelper.parse(LineDelimiters.toUnix('''
 			type String {}
 			type Foo {
 				String name;
 			}
-		''')
+		'''))
 		val fsa = new InMemoryFileSystemAccess
 		fsa.generateTracedFile('foo/bar.txt', root, '''
 			«FOR t : root.types»
@@ -63,14 +64,14 @@ class TracingSugarTest {
 		val generated = fsa.textFiles.get(IFileSystemAccess.DEFAULT_OUTPUT + 'foo/bar.txt')
 		
 		// check the generated string is as expected
-		assertEquals('''
+		Assert.assertEquals(LineDelimiters.toUnix('''
 			«FOR t : root.types»
 				«t.generateType»
 			«ENDFOR»
-		'''.toString, generated.toString)
+		'''), generated.toString)
 		
 		val trace = (generated as ITraceRegionProvider).traceRegion
-		assertEquals('''
+		Assert.assertEquals(LineDelimiters.toUnix('''
 			CompletableTraceRegion [myOffset=0, myLength=55] associations={
 			  LocationData [TextRegionWithLineInformation [0:41][lineNumber=0, endLineNumber=3]][path=__synthetic0.lazylinkingtestlanguage]
 			} nestedRegions={
@@ -98,7 +99,7 @@ class TracingSugarTest {
 			      }
 			    }
 			  }
-			}'''.toString, trace.toString)
+			}'''), trace.toString)
 	}
 	
 	@Traced def _generateType(Type it) '''
@@ -124,11 +125,5 @@ class TracingSugarTest {
 	def generateProperty(Property it) '''
 		Property «name» : «type.head.name»
 	'''
-	
-	def void assertEquals(String expected, String actual) {
-		val expectedM = expected.replace(System.lineSeparator, '\n')
-		val actualM = actual.replace(System.lineSeparator, '\n')
-		Assert.assertEquals(expectedM, actualM)
-	}
 	
 }
