@@ -950,12 +950,6 @@
         vm="true"/>
     <stream
         name="master">
-      <setupTask
-          xsi:type="pde:APIBaselineTask"
-          name="xtext"
-          version="2.11"
-          location="${installation.location}/api/v2.11/"
-          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.11.0/R201702010242/tmf-xtext-Update-2.11.0.zip&amp;r=1"/>
     </stream>
     <stream
         name="maintenance">
@@ -971,12 +965,6 @@
           xsi:type="setup:VariableTask"
           name="emf.update.site"
           value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
-      <setupTask
-          xsi:type="pde:APIBaselineTask"
-          name="xtext"
-          version="2.10"
-          location="${installation.location}/api/v2.10/"
-          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.10.0/R201605250459/tmf-xtext-Update-2.10.0.zip&amp;r=1"/>
     </stream>
     <description>Plug-ins for Eclipse</description>
   </project>
