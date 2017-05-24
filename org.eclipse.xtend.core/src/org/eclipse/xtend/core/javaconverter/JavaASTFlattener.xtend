@@ -1231,7 +1231,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(SuperConstructorInvocation node) {
+	override boolean visit(SuperConstructorInvocation node) {
 		if (node.getExpression() !== null) {
 			node.getExpression().accept(this)
 			appendToBuffer(".")
@@ -1245,7 +1245,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(SuperFieldAccess node) {
+	override boolean visit(SuperFieldAccess node) {
 		if (node.getQualifier() !== null) {
 			node.getQualifier().accept(this)
 			appendToBuffer(".")
@@ -1255,7 +1255,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(SuperMethodInvocation node) {
+	override boolean visit(SuperMethodInvocation node) {
 		if (node.getQualifier() !== null) {
 			node.getQualifier().accept(this)
 			appendToBuffer(".")
@@ -1432,7 +1432,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	/* Start self Converted part*/
-	@Override override boolean visit(AnnotationTypeDeclaration node) {
+	override boolean visit(AnnotationTypeDeclaration node) {
 		if (node.getJavadoc() !== null) {
 			node.getJavadoc().accept(this)
 		}
@@ -1446,7 +1446,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(AnnotationTypeMemberDeclaration node) {
+	override boolean visit(AnnotationTypeMemberDeclaration node) {
 		if (node.getJavadoc() !== null) {
 			node.getJavadoc().accept(this)
 		}
@@ -1462,7 +1462,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(AnonymousClassDeclaration node) {
+	override boolean visit(AnonymousClassDeclaration node) {
 		appendToBuffer("{")
 		increaseIndent
 		appendLineWrapToBuffer
@@ -1472,7 +1472,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(ArrayAccess node) {
+	override boolean visit(ArrayAccess node) {
 		if (node.index instanceof NumberLiteral) {
 			node.array.accept(this)
 			appendToBuffer(".get(")
@@ -1504,7 +1504,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 	}
 
-	@Override override boolean visit(ArrayCreation node) {
+	override boolean visit(ArrayCreation node) {
 		var at = node.getType()
 		var dims = at.getDimensions()
 		if (dims > 1) {
@@ -1531,14 +1531,14 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(ArrayInitializer node) {
+	override boolean visit(ArrayInitializer node) {
 		appendToBuffer("#[")
 		node.expressions().visitAllSeparatedByComma
 		appendToBuffer("]")
 		return false
 	}
 
-	@Override override boolean visit(ArrayType node) {
+	override boolean visit(ArrayType node) {
 		if (!java8orHigher) {
 			node.getComponentType().accept(this)
 			appendToBuffer("[]")
@@ -1556,7 +1556,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(AssertStatement node) {
+	override boolean visit(AssertStatement node) {
 		appendToBuffer("if(!(")
 		node.getExpression().accept(this)
 		appendToBuffer(")) {")
@@ -1568,7 +1568,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(BreakStatement node) {
+	override boolean visit(BreakStatement node) {
 		appendToBuffer('''/* FIXME Unsupported BreakStatement */ break''')
 		node.addProblem("Break statement is not supported")
 		if (node.getLabel() !== null) {
@@ -1578,7 +1578,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(CatchClause node) {
+	override boolean visit(CatchClause node) {
 		if (node.exception.type.nodeType === 84) {
 			// Java7 multi catch
 			node.exception.type.genericChildListProperty("types")?.forEach [ child, index |
@@ -1598,7 +1598,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(ConstructorInvocation node) {
+	override boolean visit(ConstructorInvocation node) {
 		if (!node.typeArguments().isEmpty()) {
 			appendTypeParameters(node.typeArguments())
 		}
@@ -1608,7 +1608,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(ContinueStatement node) {
+	override boolean visit(ContinueStatement node) {
 		appendToBuffer("/* FIXME Unsupported continue statement */ continue")
 		node.addProblem("Continue statement is not supported")
 		if (node.getLabel() !== null) {
@@ -1620,7 +1620,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(DoStatement node) {
+	override boolean visit(DoStatement node) {
 		appendToBuffer("do ")
 		node.getBody().accept(this)
 		appendToBuffer(" while (")
@@ -1629,12 +1629,12 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(EmptyStatement node) {
+	override boolean visit(EmptyStatement node) {
 		appendToBuffer(';')
 		return false
 	}
 
-	@Override override boolean visit(EnhancedForStatement node) {
+	override boolean visit(EnhancedForStatement node) {
 		appendToBuffer("for (")
 		node.getParameter().accept(this)
 		appendToBuffer(" : ")
@@ -1644,7 +1644,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(EnumConstantDeclaration node) {
+	override boolean visit(EnumConstantDeclaration node) {
 		if (node.getJavadoc() !== null) {
 			node.getJavadoc().accept(this)
 		}
@@ -1663,7 +1663,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(EnumDeclaration node) {
+	override boolean visit(EnumDeclaration node) {
 		if (node.getJavadoc() !== null) {
 			node.getJavadoc().accept(this)
 		}
@@ -1696,7 +1696,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(LabeledStatement node) {
+	override boolean visit(LabeledStatement node) {
 		node.addProblem("LabeledStatements are not supported")
 		appendToBuffer("/*")
 		node.getLabel().accept(this)
@@ -1705,7 +1705,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(MemberRef node) {
+	override boolean visit(MemberRef node) {
 		if (node.getQualifier() !== null) {
 			node.getQualifier().accept(this)
 		}
@@ -1714,7 +1714,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(MethodRef node) {
+	override boolean visit(MethodRef node) {
 		if (node.getQualifier() !== null) {
 			node.getQualifier().accept(this)
 		}
@@ -1726,7 +1726,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(MethodRefParameter node) {
+	override boolean visit(MethodRefParameter node) {
 		node.getType().accept(this)
 		if (node.isVarargs()) {
 			appendToBuffer("...")
@@ -1738,14 +1738,14 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(QualifiedType node) {
+	override boolean visit(QualifiedType node) {
 		node.getQualifier().accept(this)
 		appendToBuffer(".")
 		node.getName().accept(this)
 		return false
 	}
 
-	@Override override boolean visit(SwitchCase node) {
+	override boolean visit(SwitchCase node) {
 		appendLineWrapToBuffer
 		if (node.isDefault()) {
 			appendToBuffer("default ")
@@ -1756,7 +1756,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(SwitchStatement node) {
+	override boolean visit(SwitchStatement node) {
 		appendLineWrapToBuffer
 		appendToBuffer("switch (")
 		node.getExpression().accept(this)
@@ -1811,7 +1811,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(SynchronizedStatement node) {
+	override boolean visit(SynchronizedStatement node) {
 		appendToBuffer("synchronized (")
 		node.getExpression().accept(this)
 		appendToBuffer(") ")
@@ -1819,7 +1819,7 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	@Override override boolean visit(TypeDeclarationStatement node) {
+	override boolean visit(TypeDeclarationStatement node) {
 		if (isNotSupportedInnerType(node)) {
 			appendToBuffer('''/*FIXME Non-static inner classes are not supported. */''')
 			node.addProblem("Non-static inner classes are not supported.")
