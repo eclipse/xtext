@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.generator.trace.node;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
@@ -184,6 +185,12 @@ public class TracedAccessorsProcessor extends AbstractClassProcessor {
       return false;
     }
     final String n = it.getDeclaration().getSimpleName();
+    String _qualifiedName = it.getDeclaration().getDeclaringType().getQualifiedName();
+    String _name = Object.class.getName();
+    boolean _equals = Objects.equal(_qualifiedName, _name);
+    if (_equals) {
+      return false;
+    }
     return (n.startsWith("get") || n.startsWith("is"));
   }
 }
