@@ -36,7 +36,7 @@ import org.eclipse.xtext.xbase.XWhileExpression
 @Singleton class DefaultEarlyExitComputer implements IEarlyExitComputer {
 	@Inject EarlyExitInterpreter earlyExitInterpreter
 
-	@Override override boolean isEarlyExit(XExpression expression) {
+	override boolean isEarlyExit(XExpression expression) {
 		var Collection<ExitPoint> exitPoints = getExitPoints(expression)
 		if(isNotEmpty(exitPoints)) return true
 		return false
@@ -46,7 +46,7 @@ import org.eclipse.xtext.xbase.XWhileExpression
 		return exitPoints !== null && !exitPoints.isEmpty()
 	}
 
-	@Override override Collection<ExitPoint> getExitPoints(XExpression expression) {
+	override Collection<ExitPoint> getExitPoints(XExpression expression) {
 		if(expression === null) return Collections.emptyList()
 		return exitPoints(expression)
 	}

@@ -32,15 +32,15 @@ interface ImportsAcceptor {
 		Set<String> staticImport = newHashSet()
 		Set<String> extensions = newHashSet()
 
-		@Override override void acceptTypeImport(JvmType typeImport) {
+		override void acceptTypeImport(JvmType typeImport) {
 			types.add(typeImport.qualifiedNameWithout$)
 		}
 
-		@Override override void acceptStaticImport(XAbstractFeatureCall statImport) {
+		override void acceptStaticImport(XAbstractFeatureCall statImport) {
 			staticImport.add(statImport.feature.qualifiedNameWithout$)
 		}
 
-		@Override override void acceptStaticExtensionImport(XAbstractFeatureCall extImport) {
+		override void acceptStaticExtensionImport(XAbstractFeatureCall extImport) {
 			extensions.add(extImport.feature.qualifiedNameWithout$)
 		}
 
