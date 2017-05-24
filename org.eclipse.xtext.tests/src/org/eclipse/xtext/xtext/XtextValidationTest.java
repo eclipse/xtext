@@ -61,7 +61,6 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
