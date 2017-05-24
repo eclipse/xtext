@@ -88,7 +88,9 @@ class TracedAccessorsProcessor extends AbstractClassProcessor {
 			return false
 		if (declaration.static)
 			return false
-		val n = it.declaration.simpleName
+		val n = declaration.simpleName
+		if (declaration.declaringType.qualifiedName == Object.name)
+			return false
 		return n.startsWith('get') || n.startsWith('is')
 	}
 }
