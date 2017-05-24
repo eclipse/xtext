@@ -60,14 +60,6 @@ public class TracingSugarTest {
       return result;
     }
     
-    public IGeneratorNode _class(final Model target, final Function<Class<?>, String> stringProvider) {
-      EStructuralFeature feature = target.eClass().getEStructuralFeature("class");
-      ILocationData location = this.location(target, feature, -1);
-      CompositeGeneratorNode trace = this.trace(location);
-      this.append(trace, stringProvider.apply(target.getClass()));
-      return trace;
-    }
-    
     public IGeneratorNode _name(final Property target) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -81,14 +73,6 @@ public class TracingSugarTest {
       ILocationData location = this.location(target, feature, -1);
       CompositeGeneratorNode trace = this.trace(location);
       this.append(trace, stringProvider.apply(target.getName()));
-      return trace;
-    }
-    
-    public IGeneratorNode _class(final Property target, final Function<Class<?>, String> stringProvider) {
-      EStructuralFeature feature = target.eClass().getEStructuralFeature("class");
-      ILocationData location = this.location(target, feature, -1);
-      CompositeGeneratorNode trace = this.trace(location);
-      this.append(trace, stringProvider.apply(target.getClass()));
       return trace;
     }
     
@@ -124,14 +108,6 @@ public class TracingSugarTest {
       return trace;
     }
     
-    public IGeneratorNode _class(final Type target, final Function<Class<?>, String> stringProvider) {
-      EStructuralFeature feature = target.eClass().getEStructuralFeature("class");
-      ILocationData location = this.location(target, feature, -1);
-      CompositeGeneratorNode trace = this.trace(location);
-      this.append(trace, stringProvider.apply(target.getClass()));
-      return trace;
-    }
-    
     public IGeneratorNode _name(final UnresolvedProxyProperty target) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -145,14 +121,6 @@ public class TracingSugarTest {
       ILocationData location = this.location(target, feature, -1);
       CompositeGeneratorNode trace = this.trace(location);
       this.append(trace, stringProvider.apply(target.getName()));
-      return trace;
-    }
-    
-    public IGeneratorNode _class(final UnresolvedProxyProperty target, final Function<Class<?>, String> stringProvider) {
-      EStructuralFeature feature = target.eClass().getEStructuralFeature("class");
-      ILocationData location = this.location(target, feature, -1);
-      CompositeGeneratorNode trace = this.trace(location);
-      this.append(trace, stringProvider.apply(target.getClass()));
       return trace;
     }
   }
