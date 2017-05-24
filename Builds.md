@@ -100,26 +100,22 @@ The actual publishing is done on a [Hudson build server](https://hudson.eclipse.
    2. [Publish milestones](#preparing-milestones-and-releases) as required, e.g. when important new features have been implemented.
 2. Release phase
    1. Stop implementing new features, but work on bug fixes.
-   2. Create a maintenance branch and [publish release candidate milestones](#preparing-milestones-and-releases) as required.
+   2. Create a release branch and [publish release candidate milestones](#preparing-milestones-and-releases) if required.
    3. [Lift the version number](#lifting-the-version-number) on the `master` branch and start the development phase for the next major/minor release (in parallel to the following steps).
    4. Create a test plan and test both old and new features.
    5. Prepare release notes.
-   6. Merge the bug fixes into the `master` branch.
+   6. Merge or cherry-pick the bug fixes between the `master` branch and the release branch.
    7. [Publish the release](#preparing-milestones-and-releases).
    8. Create and push git tags.
    9. [Close the GitHub milestone](#github-milestones) and create new milestones.
 3. Maintenance phase
-   1. [Lift the version number](#lifting-the-version-number) on the maintenance branch.
-   2. Work on bug fixes on the maintenance branch.
-   3. Merge the bug fixes into the `master` branch.
-   4. [Publish a service release](#preparing-milestones-and-releases).
-   5. Create and push git tags.
-   6. [Close the GitHub milestone](#github-milestones).
-   7. If necessary, create a new GitHub milestone and repeat the maintenance phase.
+   1. Work on bug fixes on the `master` branch.
+   2. When it appears appropriate, create a service release branch and cherry-pick the bug fixes.
+   3. [Publish a service release](#preparing-milestones-and-releases).
+   4. Create and push git tags.
+   5. If necessary, repeat the maintenance phase.
 
-The `master` branch on each repository is the development stream for the next major or minor release. There are also one or more development streams for service releases, which are named `maintenance_«minorversion»`, where `«minorversion»` is the version number without the third segment (e.g. `maintenance_2.12`).
-
-When major or minor releases are done, there should be a time period of at least one week when only important fixes are added to the code base to be released. This is achieved by creating the maintenance branch for that release and committing the fixes directly to that branch. The maintenance branch is merged back into `master` just before the actual release is done so the fixes are available there, too. After the release is done, the service release version is increased on the maintenance branch. Furthermore, a "pseudo-merge" to `master` should be made afterwards so the following bug fixes can be merged later on without including the version change. The necessary git command line flag for this kind of merging is `-s ours`.
+When major or minor releases are done, there should be a time period of at least one week when only important fixes are added to the code base to be released. This can be achieved by creating the release branch and committing the fixes directly to that branch. The release branch is merged back into `master` just before the actual release is done so the fixes are available there, too.
 
 ### Preparing Milestones and Releases
 
@@ -173,7 +169,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
 
 ### Lifting the Version Number
 
-Once the release branch for a major or minor release has been created, the master branch should be lifted to the next version. Similarly, the third version digit should be increased on the corresponding maintenance branch after every release (including service releases).
+Once the release branch for a major or minor release has been created, the master branch should be lifted to the next version.
 
 Note that the Xtend compiler cannot be set to use snapshot versions from the beginning, since the new snapshots do not exist yet. It should be set to the latest published version (a release candidate or the actual release), and changed to the new snapshot version when it's available.
 
@@ -212,8 +208,4 @@ Note that the Xtend compiler cannot be set to use snapshot versions from the beg
 
 ### GitHub Milestones
 
-We use GitHub milestones to communicate when bug fixes and new features will be available and to generate a list of resolved issues for the release notes.
-
-When a major or minor release is done, the corresponding GitHub milestone should be closed. If there are open issues left in that milestone, they should be removed from it or assigned to another milestone. Afterwards two new milestones should be created: one for the next major/minor release and one for the next service release. The due date should be set to a preliminary date if no date has been chosen yet.
-
-When a service release is done, its milestone should be closed. A new milestone should be created if it is likely that another service release will be done.
+We use GitHub milestones to communicate when bug fixes and new features will be available and to generate a list of resolved issues for the release notes. When a major or minor release is done, the corresponding GitHub milestone should be closed. If there are open issues left in that milestone, they should be removed from it or assigned to another milestone.
