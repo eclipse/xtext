@@ -68,7 +68,6 @@ class SignatureHelpServiceImpl implements ISignatureHelpService {
 
     extension TestLanguagePackage = TestLanguagePackage.eINSTANCE;
 
-    @Override
     override getSignatureHelp(XtextResource resource, int offset) {
 
         Preconditions.checkNotNull(resource, "resource");

@@ -32,7 +32,6 @@ class ColoringServiceImpl implements IColoringService {
 
 	static val STYLE_IDS = Collections.singletonList(ColoringStyle.Identifier);
 
-	@Override
 	override getColoring(XtextResource resource, Document document) {
 		if (resource === null) {
 			return emptyList;

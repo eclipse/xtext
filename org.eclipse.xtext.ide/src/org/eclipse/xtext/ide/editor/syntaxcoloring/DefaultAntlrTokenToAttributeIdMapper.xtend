@@ -21,7 +21,6 @@ class DefaultAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToAttribute
 
 	static val PUNCTUATION = Pattern.compile("\\p{Punct}*")
 
-	@Override
 	override protected calculateId(String tokenName, int tokenType) {
 		switch tokenName {
 			case PUNCTUATION.matcher(tokenName).matches:

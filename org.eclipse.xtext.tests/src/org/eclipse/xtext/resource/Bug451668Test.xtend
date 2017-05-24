@@ -24,7 +24,7 @@ class Bug451668Test extends AbstractXtextTests {
 	static class TestResource extends DerivedStateAwareResource {
 		int contentsCalls = 0 		
 		
-		@Override override synchronized EList<EObject> getContents() {
+		override synchronized EList<EObject> getContents() {
 			contentsCalls++;
 			return super.getContents()
 		}
