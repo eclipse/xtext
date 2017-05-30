@@ -241,9 +241,9 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	private boolean isExtendsClause(ContentAssistContext context) {
 		return context.getLastCompleteNode() != null && context.getLastCompleteNode().getGrammarElement() instanceof Keyword
 				&& (((Keyword) context.getLastCompleteNode().getGrammarElement()) == grammarAccess.getTypeAccess()
-						.getExtendsKeyword_2_0_5_0())
+						.getExtendsKeyword_2_0_5_0()
 				|| (((Keyword) context.getLastCompleteNode().getGrammarElement()) == grammarAccess.getTypeAccess()
-						.getExtendsKeyword_2_1_5_0());
+						.getExtendsKeyword_2_1_5_0()));
 	}
 	
 	@Override
