@@ -6,7 +6,6 @@ package org.eclipse.xtend.maven;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Properties;
 
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;

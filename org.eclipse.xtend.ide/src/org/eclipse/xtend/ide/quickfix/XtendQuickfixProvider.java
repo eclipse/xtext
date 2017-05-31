@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.quickfix;
 
 import static com.google.common.collect.Sets.*;
-import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtext.ui.util.DisplayRunHelper.*;
 import static org.eclipse.xtext.util.Strings.*;
 

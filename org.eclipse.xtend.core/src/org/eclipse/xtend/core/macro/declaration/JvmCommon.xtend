@@ -16,7 +16,6 @@ import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.VoidType
-import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmPrimitiveType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmUpperBound

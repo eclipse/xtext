@@ -165,7 +165,6 @@ import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider
 import com.google.inject.Binder
 import com.google.inject.name.Names
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater
-import org.eclipse.xtext.xbase.ui.refactoring.XbaseReferenceUpdater
 import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater
 
 /** 
