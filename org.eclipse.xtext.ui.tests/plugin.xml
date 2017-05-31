@@ -5908,5 +5908,54 @@
             type="org.eclipse.core.resources.textmarker">
       </super>
    </extension>
-
+   
+   <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2015/tmf/xtext/parameters" 
+       class = "org.eclipse.xtext.ui.tests.editor.contentassist.parametersTestLanguage.ParametersTestLanguagePackage"
+       genModel = "org/eclipse/xtext/ui/tests/editor/contentassist/ParametersTestLanguage.genmodel" /> 
+	
+  </extension>
+  
+  	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParametersTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="parameterstestlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParametersTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="parameterstestlanguage">
+        </resourceServiceProvider>
+    </extension>
+    
+    	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParametersTestLanguageExExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="parameterstestlanguageex">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParametersTestLanguageExExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="parameterstestlanguageex">
+        </resourceServiceProvider>
+	</extension>
+	
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoParametersTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="twoparameterstestlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoParametersTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="twoparameterstestlanguage">
+        </resourceServiceProvider>
+    </extension>
 </plugin>

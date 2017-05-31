@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.backtracking.services.BeeLangTestLanguageGrammarAccess;
@@ -21,6 +21,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
 
@@ -31,7 +33,16 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractBug326948Test extends AbstractContentAssistProcessorTest {
+public abstract class AbstractBug326948Test extends AbstractXtextTests implements ResourceLoadHelper {
+	
+	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
+		with(getSetup());
+		return new ContentAssistProcessorTestBuilder(getInjector(), this);
+	}
+	
+	protected ISetup getSetup() {
+		return doGetSetup();
+	}
 
 	public void completeInfixExpression_FeatureName(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -77,7 +88,6 @@ public abstract class AbstractBug326948Test extends AbstractContentAssistProcess
 		}
 	}
 	
-	@Override
 	public ISetup doGetSetup() {
 		return new BeeLangTestLanguageStandaloneSetup() {
 			@Override

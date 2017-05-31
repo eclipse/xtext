@@ -7,29 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
-import org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoParametersTestLanguageUiModule;
-import org.eclipse.xtext.util.Modules2;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ui.tests.TwoParametersTestLanguageUiInjectorProvider;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(TwoParametersTestLanguageUiInjectorProvider.class)
 public class TwoParametersContentAssistTest extends AbstractParametersContentAssistTest {
-
-	@Override
-	public ISetup doGetSetup() {
-		return new TwoParametersTestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new TwoParametersTestLanguageRuntimeModule(),
-						new TwoParametersTestLanguageUiModule(TestsActivator.getInstance()), new SharedStateModule()));
-			}
-		};
-	}
 
 }

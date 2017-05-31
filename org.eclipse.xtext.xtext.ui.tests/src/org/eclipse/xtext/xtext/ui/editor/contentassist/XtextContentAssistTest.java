@@ -19,8 +19,9 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
@@ -44,7 +45,16 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
+public class XtextContentAssistTest extends AbstractXtextTests implements ResourceLoadHelper {
+	
+	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
+		with(getSetup());
+		return new ContentAssistProcessorTestBuilder(getInjector(), this);
+	}
+	
+	protected ISetup getSetup() {
+		return doGetSetup();
+	}
 	
 	private static final String TEST_PROJECT = "TestProject";
 	private static final String MODEL_FILE_NAME = "mytestmodel";
@@ -78,7 +88,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 			project.delete(true, new NullProgressMonitor());
 	}
 	
-	@Override
 	public ISetup doGetSetup() {
 		return new XtextStandaloneSetup() {
 			@Override

@@ -20,9 +20,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -30,46 +29,64 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestFactory;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Model;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.impl.ClassImpl;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.CrossReferenceProposalTestLanguageGrammarAccess;
-import org.eclipse.xtext.ui.tests.editor.contentassist.ui.CrossReferenceProposalTestLanguageUiModule;
-import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ui.tests.CrossReferenceProposalTestLanguageUiInjectorProvider;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Sets;
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.name.Names;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTest {
-
+@RunWith(XtextRunner.class)
+@InjectWith(CrossReferenceProposalTestLanguageUiInjectorProvider.class)
+public class CrossReferenceProposalTest extends AbstractXtextTests implements ResourceLoadHelper {
+	
+	@Inject
+	private Injector injector;
+	
 	@Override
-	public ISetup doGetSetup() {
-		return new CrossReferenceProposalTestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(
-						new CrossReferenceProposalTestLanguageRuntimeModule(),
-						new CrossReferenceProposalTestLanguageUiModule(
-						TestsActivator.getInstance()),
-						new SharedStateModule()));
-			}
-		};
+	public<T> T get(java.lang.Class<T> clazz) {
+		if (injector == null)
+			injector = Guice.createInjector();
+		return injector.getInstance(clazz);
+	}
+	
+	
+	@Override
+	protected String getCurrentFileExtension() {
+		String instance = injector.getInstance(Key.get(String.class,Names.named(Constants.FILE_EXTENSIONS)));
+		if (instance.indexOf(',')==-1)
+			return instance;
+		return instance.split(",")[0];
+	}
+	
+
+	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
+		setInjector(injector);
+		return new ContentAssistProcessorTestBuilder(injector, this);
 	}
 	
 	@Test public void testBug276742_08() throws Exception {
@@ -126,7 +143,6 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 	}
 
 	@Test public void testBug356185() throws Exception {
-		with(getSetup());
 		final String content = "Foo {}";
 		XtextResourceSet rs = new XtextResourceSet(){
 			@Override

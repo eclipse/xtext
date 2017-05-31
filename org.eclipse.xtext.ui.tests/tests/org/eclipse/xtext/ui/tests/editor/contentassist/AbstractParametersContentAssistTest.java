@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
 import org.eclipse.xtext.util.Strings;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractParametersContentAssistTest extends AbstractContentAssistProcessorTest {
+public abstract class AbstractParametersContentAssistTest extends AbstractContentAssistTest {
 
 	@Test public void testEmptyModel() throws Exception {
 		newBuilder().assertText(

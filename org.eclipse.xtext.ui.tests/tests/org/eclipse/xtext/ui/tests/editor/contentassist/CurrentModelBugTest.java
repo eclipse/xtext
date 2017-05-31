@@ -12,7 +12,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
@@ -31,7 +32,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CurrentModelBugTest extends AbstractXtextTests {
+public class CurrentModelBugTest extends AbstractXtextTests implements ResourceLoadHelper {
 
 	private EClass expectedClass;
 
@@ -230,7 +231,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
 		with(standAloneSetup);
-		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);
+		return new ContentAssistProcessorTestBuilder(getInjector(), this);
 	}
 
 	public static class MockedProposals extends DomainModelTestLanguageProposalProvider {

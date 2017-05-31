@@ -12,7 +12,8 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
@@ -31,7 +32,7 @@ import com.google.inject.Injector;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class TwoContextsContentAssistTest extends AbstractXtextTests {
+public class TwoContextsContentAssistTest extends AbstractXtextTests implements ResourceLoadHelper {
 
 	@Test public void testTwoContexts() throws Exception {
     	newBuilder(getGrammarSetup()).append("Foo; FooBar; Bar refersTo Foo").assertText(";", "Foo", "FooBar");
@@ -59,7 +60,7 @@ public class TwoContextsContentAssistTest extends AbstractXtextTests {
 
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
 		with(standAloneSetup);
-		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);
+		return new ContentAssistProcessorTestBuilder(getInjector(), this);
 	}
 
 	public static class TwoContextsTestLanguageTestProposals extends AbstractTwoContextsTestLanguageProposalProvider {

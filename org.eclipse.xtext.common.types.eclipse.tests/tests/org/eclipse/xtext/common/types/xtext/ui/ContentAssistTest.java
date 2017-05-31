@@ -14,9 +14,10 @@ import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.tests.AbstractActivator;
 import org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiModule;
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,13 +32,20 @@ import com.google.inject.Injector;
 /**
  * @author dhuebner - Initial contribution and API
  */
-public class ContentAssistTest extends AbstractContentAssistProcessorTest {
+public class ContentAssistTest extends AbstractXtextTests implements ResourceLoadHelper {
 
 	@BeforeClass public static void createMockJavaProject() throws Exception {
 		MockJavaProjectProvider.setUp();
 	}
 	
-	@Override
+	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
+		with(getSetup());
+		return new ContentAssistProcessorTestBuilder(getInjector(), this);
+	}
+	
+	protected ISetup getSetup() {
+		return doGetSetup();
+	}
 	public ISetup doGetSetup() {
 		return new ContentAssistTestLanguageStandaloneSetup() {
 			@Override
