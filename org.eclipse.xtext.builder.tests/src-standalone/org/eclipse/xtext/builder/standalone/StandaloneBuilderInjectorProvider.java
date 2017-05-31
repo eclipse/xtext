@@ -8,10 +8,10 @@
 package org.eclipse.xtext.builder.standalone;
 
 import org.eclipse.xtext.builder.tests.BuilderTestLanguageStandaloneSetup;
-import org.eclipse.xtext.junit4.GlobalRegistries;
-import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
-import org.eclipse.xtext.junit4.IInjectorProvider;
-import org.eclipse.xtext.junit4.IRegistryConfigurator;
+import org.eclipse.xtext.testing.GlobalRegistries;
+import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento;
+import org.eclipse.xtext.testing.IInjectorProvider;
+import org.eclipse.xtext.testing.IRegistryConfigurator;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

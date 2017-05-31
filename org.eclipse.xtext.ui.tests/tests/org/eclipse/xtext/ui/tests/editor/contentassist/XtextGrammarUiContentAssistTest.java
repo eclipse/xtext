@@ -7,34 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.testlanguages.ui.internal.TestlanguagesActivator;
-import org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguageRuntimeModule;
-import org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.testlanguages.xtextgrammar.ui.XtextGrammarTestLanguageUiModule;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testlanguages.xtextgrammar.ui.tests.XtextGrammarTestLanguageUiInjectorProvider;
+import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
 import org.junit.Test;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextGrammarUiContentAssistTest extends AbstractContentAssistProcessorTest {
-
-	@Override
-	public ISetup doGetSetup() {
-		return new XtextGrammarTestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new XtextGrammarTestLanguageRuntimeModule(),
-						new XtextGrammarTestLanguageUiModule(TestlanguagesActivator.getInstance()), new SharedStateModule()));
-			}
-		};
-	}
+@InjectWith(XtextGrammarTestLanguageUiInjectorProvider.class)
+@RunWith(XtextRunner.class)
+public class XtextGrammarUiContentAssistTest extends AbstractContentAssistTest {
 
 	@Test public void testCompleteRuleCall() throws Exception {
 		newBuilder().appendNl("grammar foo").appendNl("generate foo \"foo\"").appendNl(

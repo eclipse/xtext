@@ -7,32 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
-import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug289187TestLanguageUiModule;
-import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ui.tests.Bug289187TestLanguageUiInjectorProvider;
 import org.junit.Test;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class Bug289187Test extends AbstractContentAssistProcessorTest {
-
-	@Override
-	public ISetup doGetSetup() {
-		return new Bug289187TestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new Bug289187TestLanguageRuntimeModule(),new Bug289187TestLanguageUiModule(TestsActivator.getInstance()),
-						new SharedStateModule()));
-			}
-		};
-	}
+@InjectWith(Bug289187TestLanguageUiInjectorProvider.class)
+@RunWith(XtextRunner.class)
+public class Bug289187Test extends AbstractContentAssistTest {
 	
 	@Test public void testBug289187_01() throws Exception {
     	newBuilder().append(
