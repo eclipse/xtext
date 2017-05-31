@@ -2,10 +2,10 @@ package org.eclipse.xtext.xbase.ui.tests.refactoring
 
 import com.google.inject.Inject
 import org.eclipse.jface.text.TextSelection
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseTestCase

@@ -9,13 +9,12 @@ package org.eclipse.xtext.xbase.ui.tests.editor
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.jface.text.Region
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase
 import org.junit.Test
-
-import org.eclipse.jface.text.Region
 
 /**
  * @author Holger Schill - Initial contribution and API

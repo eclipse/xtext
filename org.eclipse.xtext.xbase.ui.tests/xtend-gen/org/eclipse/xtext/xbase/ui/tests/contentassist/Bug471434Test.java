@@ -8,8 +8,9 @@
 package org.eclipse.xtext.xbase.ui.tests.contentassist;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.testing.IInjectorProvider;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLangUiInjectorProvider;
@@ -25,9 +26,12 @@ import org.junit.runner.RunWith;
  * @author Lorenzo Bettini - Initial contribution and API
  */
 @RunWith(XtextRunner.class)
-@InjectWith(ContentAssistFragmentTestLangUiInjectorProvider.class)
+@InjectWith(Bug471434Test.ContentAssistFragmentTestLangUiInjectorProviderAdapter.class)
 @SuppressWarnings("all")
 public class Bug471434Test extends AbstractContentAssistTest {
+  public static class ContentAssistFragmentTestLangUiInjectorProviderAdapter extends ContentAssistFragmentTestLangUiInjectorProvider implements IInjectorProvider {
+  }
+  
   @Test
   public void testVariableRightWithPrefix() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
