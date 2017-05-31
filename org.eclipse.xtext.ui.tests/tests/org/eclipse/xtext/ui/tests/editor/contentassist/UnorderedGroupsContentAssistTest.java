@@ -7,32 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
-import org.eclipse.xtext.ui.tests.editor.contentassist.ui.UnorderedGroupsTestLanguageUiModule;
-import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ui.tests.UnorderedGroupsTestLanguageUiInjectorProvider;
 import org.junit.Test;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class UnorderedGroupsContentAssistTest extends AbstractContentAssistProcessorTest {
-
-	@Override
-	public ISetup doGetSetup() {
-		return new UnorderedGroupsTestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new UnorderedGroupsTestLanguageRuntimeModule(),
-						new UnorderedGroupsTestLanguageUiModule(TestsActivator.getInstance()), new SharedStateModule()));
-			}
-		};
-	}
+@InjectWith(UnorderedGroupsTestLanguageUiInjectorProvider.class)
+@RunWith(XtextRunner.class)
+public class UnorderedGroupsContentAssistTest extends AbstractContentAssistTest {
 
 	@Test public void testEmptyModel() throws Exception {
 		newBuilder().assertText("1", "2", "3", "4", "5", "bug304681");

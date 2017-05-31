@@ -8,8 +8,8 @@
 package org.eclipse.xtext.xbase.ui.tests;
 
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
-import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
+import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

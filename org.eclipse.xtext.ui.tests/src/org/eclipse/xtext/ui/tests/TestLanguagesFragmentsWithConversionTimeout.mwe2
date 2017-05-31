@@ -30,4 +30,7 @@ CompositeGeneratorFragment2 {
 		generateStub = false
 	}
 	fragment = contentAssist.ContentAssistFragment2 {}
+	fragment = junit.Junit4Fragment2 {
+		generateStub = false
+	}
 }

@@ -7,36 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
-import org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageRuntimeModule;
-import org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageStandaloneSetup;
-import org.eclipse.xtext.ui.tests.parser.keywords.ui.KeywordsUiTestLanguageUiModule;
-import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
+import org.eclipse.xtext.ui.tests.parser.keywords.ui.tests.KeywordsUiTestLanguageUiInjectorProvider;
 import org.junit.Test;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class KeywordContentAssistTest extends AbstractContentAssistProcessorTest {
-
-	@Override
-	public ISetup doGetSetup() {
-		return new KeywordsUiTestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(
-						new KeywordsUiTestLanguageRuntimeModule(),
-						new KeywordsUiTestLanguageUiModule(TestsActivator.getInstance()),
-						new SharedStateModule()));
-			}
-		};
-	}
+@InjectWith(KeywordsUiTestLanguageUiInjectorProvider.class)
+@RunWith(XtextRunner.class)
+public class KeywordContentAssistTest extends AbstractContentAssistTest {
 	
 	@Test public void testKeywordWithBackslashes() throws Exception {
 		newBuilder().assertText(

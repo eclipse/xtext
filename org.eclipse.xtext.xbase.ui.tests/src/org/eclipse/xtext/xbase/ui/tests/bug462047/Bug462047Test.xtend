@@ -12,10 +12,10 @@ import org.apache.log4j.Level
 import org.eclipse.core.resources.IProject
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.logging.LoggingTester
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.logging.LoggingTester
 import org.eclipse.xtext.ui.editor.XtextEditorInfo
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil
 import org.eclipse.xtext.ui.testing.AbstractEditorTest
@@ -29,13 +29,18 @@ import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.testing.IInjectorProvider
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @RunWith(XtextRunner)
-@InjectWith(Bug462047LangUiInjectorProvider)
+@InjectWith(Bug462047LangUiInjectorProviderAdapter)
 class Bug462047Test extends AbstractEditorTest {
+	
+	static class Bug462047LangUiInjectorProviderAdapter extends Bug462047LangUiInjectorProvider implements IInjectorProvider {
+		
+	}
 	
 	@BeforeClass
 	def static void setupTargetPlatform() {

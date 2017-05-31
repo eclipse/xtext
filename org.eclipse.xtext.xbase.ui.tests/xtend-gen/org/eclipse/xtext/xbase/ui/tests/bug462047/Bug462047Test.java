@@ -14,10 +14,11 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.testing.IInjectorProvider;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -41,9 +42,12 @@ import org.junit.runner.RunWith;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @RunWith(XtextRunner.class)
-@InjectWith(Bug462047LangUiInjectorProvider.class)
+@InjectWith(Bug462047Test.Bug462047LangUiInjectorProviderAdapter.class)
 @SuppressWarnings("all")
 public class Bug462047Test extends AbstractEditorTest {
+  public static class Bug462047LangUiInjectorProviderAdapter extends Bug462047LangUiInjectorProvider implements IInjectorProvider {
+  }
+  
   @BeforeClass
   public static void setupTargetPlatform() {
     try {

@@ -7,36 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
-import org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguageRuntimeModule;
-import org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguageStandaloneSetup;
-import org.eclipse.xtext.ui.tests.testlanguages.ui.ReferenceGrammarUiTestLanguageUiModule;
-import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
+import org.eclipse.xtext.ui.tests.testlanguages.ui.tests.ReferenceGrammarUiTestLanguageUiInjectorProvider;
 import org.junit.Test;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistProcessorTest {
-
-	@Override
-	public ReferenceGrammarUiTestLanguageStandaloneSetup doGetSetup() {
-		return new ReferenceGrammarUiTestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(
-						new ReferenceGrammarUiTestLanguageRuntimeModule(),
-						new ReferenceGrammarUiTestLanguageUiModule(TestsActivator.getInstance()),
-						new SharedStateModule()));
-			}
-		};
-	}
+@InjectWith(ReferenceGrammarUiTestLanguageUiInjectorProvider.class)
+@RunWith(XtextRunner.class)
+public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistTest {
 	
 	@Test public void testComputePrefix() throws Exception {
 		String model = "spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ";
