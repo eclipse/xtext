@@ -19,9 +19,9 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.builder.debug.IBuildLogger
 import org.eclipse.xtext.builder.debug.XtextBuildConsole
 import org.eclipse.xtext.builder.impl.QueuedBuildData
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
-import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.AfterClass
@@ -29,7 +29,7 @@ import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 
 /**

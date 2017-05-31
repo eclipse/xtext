@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.outline;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlineFilterAndSorter;

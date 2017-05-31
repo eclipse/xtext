@@ -13,7 +13,7 @@ import org.junit.After
 import org.junit.Ignore
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import org.eclipse.jdt.ui.PreferenceConstants
 
 class OrganizeImportsTest extends AbstractXtendUITestCase {

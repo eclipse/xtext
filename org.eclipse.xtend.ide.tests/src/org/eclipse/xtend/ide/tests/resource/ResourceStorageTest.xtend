@@ -22,7 +22,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.generator.trace.SourceRelativeURI
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.ui.editor.SchedulingRuleFactory

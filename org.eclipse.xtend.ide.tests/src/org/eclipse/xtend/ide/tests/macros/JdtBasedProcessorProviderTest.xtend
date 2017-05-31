@@ -18,10 +18,10 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API

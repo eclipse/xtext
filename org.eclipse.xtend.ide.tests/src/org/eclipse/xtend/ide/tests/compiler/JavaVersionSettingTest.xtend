@@ -18,7 +18,7 @@ import org.eclipse.core.resources.IResource
 import org.eclipse.ui.texteditor.MarkerUtilities
 import org.eclipse.xtend.ide.internal.XtendActivator
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 import org.eclipse.xtext.util.JavaVersion
 import org.junit.After
 import org.junit.AfterClass
@@ -27,7 +27,7 @@ import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 /**
  * @author Miro Spoenemann - Initial contribution and API

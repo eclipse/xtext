@@ -28,7 +28,7 @@ import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

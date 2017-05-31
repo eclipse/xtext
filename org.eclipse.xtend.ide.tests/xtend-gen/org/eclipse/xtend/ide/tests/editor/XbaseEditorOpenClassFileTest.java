@@ -27,8 +27,8 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -514,7 +514,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   public String getEditorContents(final IJavaElement javaElement) {
     try {
       final IEditorPart editor = JavaUI.openInEditor(javaElement);
-      Object _adapter = editor.getAdapter(IRewriteTarget.class);
+      IRewriteTarget _adapter = editor.<IRewriteTarget>getAdapter(IRewriteTarget.class);
       final String text = ((IRewriteTarget) _adapter).getDocument().get();
       this.helper.closeEditor(editor, false);
       return text;

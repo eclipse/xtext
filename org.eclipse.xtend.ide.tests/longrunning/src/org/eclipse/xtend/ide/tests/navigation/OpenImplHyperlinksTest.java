@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.navigation;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.lang.reflect.Field;
@@ -27,7 +27,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.xbase.ui.navigation.JvmImplementationOpener;
 import org.eclipse.xtext.xbase.ui.navigation.XbaseImplementatorsHyperlink;

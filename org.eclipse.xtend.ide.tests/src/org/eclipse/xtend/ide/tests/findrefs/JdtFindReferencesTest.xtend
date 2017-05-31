@@ -29,7 +29,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 class JdtFindReferencesTest extends AbstractXtendUITestCase {
 	

@@ -15,8 +15,8 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.junit.After
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.findJavaProject
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.findJavaProject
 
 /**
  * Tests for <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=462915">Bug 462915</a>

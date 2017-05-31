@@ -6,7 +6,6 @@ Bundle-Version: 2.13.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtend.core,
- org.eclipse.xtext.junit4,
  org.eclipse.xtext,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.ui.workbench;bundle-version="3.6.0",
@@ -34,11 +33,14 @@ Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.xtext.common.types.shared,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.shared,
- org.eclipse.xtext.testing
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.ui.testing,
+ org.eclipse.xtext.xbase.testing
 Import-Package: org.apache.log4j;version="1.2.15",
  org.apache.log4j.spi;version="1.2.15",
  org.junit;version="4.5.0",
  org.junit.rules;version="4.5.0",
  org.junit.runner;version="4.5.0",
- org.junit.runners;version="4.5.0"
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0"
 Export-Package: org.eclipse.xtend.ide.tests;x-friends:="org.eclipse.xtend.performance.tests"

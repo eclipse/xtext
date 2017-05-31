@@ -12,20 +12,20 @@ import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.IncrementalProjectBuilder
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
-import org.eclipse.xtext.junit4.internal.StopwatchRule
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
+import org.eclipse.xtend.ide.tests.StopwatchRule
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

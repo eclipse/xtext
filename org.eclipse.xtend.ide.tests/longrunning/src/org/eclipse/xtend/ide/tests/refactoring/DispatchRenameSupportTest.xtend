@@ -11,7 +11,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.common.types.JvmOperation
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 import static extension com.google.common.collect.Iterables.*
 

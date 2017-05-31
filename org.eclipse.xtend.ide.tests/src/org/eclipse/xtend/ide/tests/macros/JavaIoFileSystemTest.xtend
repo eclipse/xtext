@@ -13,10 +13,10 @@ import java.io.FileInputStream
 import org.eclipse.xtend.core.macro.JavaIOFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
-import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.workspace.FileProjectConfig
+import org.eclipse.xtext.xbase.testing.TemporaryFolder
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

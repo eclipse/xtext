@@ -25,7 +25,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.junit4.TemporaryFolder;
+import org.eclipse.xtext.xbase.testing.TemporaryFolder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testing.InjectWith;

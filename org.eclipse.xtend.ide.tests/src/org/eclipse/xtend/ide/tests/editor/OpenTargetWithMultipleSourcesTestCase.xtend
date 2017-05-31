@@ -18,7 +18,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 /**
  * @author Anton Kosyakov - Initial contribution and API

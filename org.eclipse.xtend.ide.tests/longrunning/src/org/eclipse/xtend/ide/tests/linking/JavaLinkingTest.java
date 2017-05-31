@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.linking;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;

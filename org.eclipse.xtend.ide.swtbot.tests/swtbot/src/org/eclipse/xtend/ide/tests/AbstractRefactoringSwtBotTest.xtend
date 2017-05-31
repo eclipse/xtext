@@ -23,7 +23,7 @@ import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.texteditor.ITextEditor
 import org.eclipse.xtend.ide.internal.XtendActivator
 import org.eclipse.xtend.lib.Property
-import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController
 import org.junit.After
@@ -32,7 +32,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.BeforeClass
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.xtend.ide.tests.SwtBotProjectHelper.*
 

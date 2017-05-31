@@ -14,8 +14,8 @@ import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory
 import org.junit.After
 import org.junit.Test
 
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import static extension org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 
 /**
  * @author Anton Kosyakov - Initial contribution and API

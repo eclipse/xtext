@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.hierarchy;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collections;
@@ -24,7 +24,7 @@ import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.xbase.ui.editor.AbstractJvmElementHandler;
 import org.junit.Test;

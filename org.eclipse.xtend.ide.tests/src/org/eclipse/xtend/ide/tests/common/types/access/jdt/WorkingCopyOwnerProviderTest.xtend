@@ -16,7 +16,7 @@ import org.junit.Test
 import org.eclipse.xtext.common.types.access.jdt.WorkingCopyOwnerProvider
 import org.eclipse.core.resources.IProject
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import org.eclipse.jdt.core.JavaCore
 
 /**

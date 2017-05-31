@@ -20,7 +20,7 @@ import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.IResourceVisitor
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
-import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.testing.InjectWith
@@ -34,8 +34,8 @@ import org.junit.runner.RunWith
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import static extension org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API

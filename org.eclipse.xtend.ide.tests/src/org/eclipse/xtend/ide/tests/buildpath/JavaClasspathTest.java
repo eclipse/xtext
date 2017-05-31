@@ -22,8 +22,8 @@ import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeMirror;
 import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.eclipse.xtext.testing.logging.LoggingTester.LogCapture;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 

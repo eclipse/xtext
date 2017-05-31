@@ -12,21 +12,21 @@ import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IMarker
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.runtime.Path
+import org.eclipse.jdt.core.IJavaProject
+import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.junit4.internal.StopwatchRule
+import org.eclipse.xtend.ide.tests.StopwatchRule
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
-import org.eclipse.core.runtime.Path
-import org.eclipse.jdt.core.JavaCore
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
-import org.eclipse.jdt.core.IJavaProject
 
 /**
  * @author Sven Efftinge - Initial contribution and API

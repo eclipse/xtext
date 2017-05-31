@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.tests.contentassist;
 
 import static com.google.common.collect.Lists.*;
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +22,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;

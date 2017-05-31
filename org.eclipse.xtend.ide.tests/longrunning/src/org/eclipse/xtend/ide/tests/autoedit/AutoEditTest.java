@@ -8,8 +8,7 @@
 package org.eclipse.xtend.ide.tests.autoedit;
 
 import static com.google.common.collect.Lists.*;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
-
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
@@ -20,10 +19,10 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtend.ide.internal.XtendActivator;
-import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.testing.AbstractCStyleLanguageAutoEditTest;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.junit.Test;

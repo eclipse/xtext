@@ -12,14 +12,14 @@ import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.xtext.junit4.internal.StopwatchRule
+import org.eclipse.xtend.ide.tests.StopwatchRule
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*

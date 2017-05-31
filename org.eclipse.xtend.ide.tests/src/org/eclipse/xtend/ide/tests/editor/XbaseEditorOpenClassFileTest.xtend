@@ -19,8 +19,8 @@ import org.junit.After
 import org.junit.Test
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import static extension org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 import org.eclipse.xtext.util.internal.Log
 import org.junit.Before
 

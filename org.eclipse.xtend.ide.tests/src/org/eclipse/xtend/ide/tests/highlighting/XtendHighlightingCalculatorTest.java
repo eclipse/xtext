@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.tests.highlighting;
 
 import static com.google.common.collect.Lists.*;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collection;

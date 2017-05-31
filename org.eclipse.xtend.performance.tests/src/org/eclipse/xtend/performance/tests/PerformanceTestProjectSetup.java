@@ -34,8 +34,8 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;

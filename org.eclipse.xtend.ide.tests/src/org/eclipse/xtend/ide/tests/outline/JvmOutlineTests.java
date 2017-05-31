@@ -17,7 +17,7 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.util.Files;
 import org.junit.Test;

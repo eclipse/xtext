@@ -22,7 +22,7 @@ import org.junit.After
 import org.junit.Test
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 
 /**
  * @author Sven Efftinge - Initial contribution and API

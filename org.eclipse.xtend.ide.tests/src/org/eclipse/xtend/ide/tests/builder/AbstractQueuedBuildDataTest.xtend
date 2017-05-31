@@ -14,7 +14,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.builder.impl.javasupport.JdtQueuedBuildData
 import org.eclipse.xtext.resource.IResourceDescription.Delta
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper
 import org.eclipse.xtext.builder.impl.javasupport.BuilderDeltaConverter
 import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller

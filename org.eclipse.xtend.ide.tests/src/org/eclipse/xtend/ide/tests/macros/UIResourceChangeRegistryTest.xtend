@@ -20,7 +20,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation
 import org.eclipse.xtend.ide.builder.UIResourceChangeRegistry
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.junit4.internal.StopwatchRule
+import org.eclipse.xtend.ide.tests.StopwatchRule
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.Rule

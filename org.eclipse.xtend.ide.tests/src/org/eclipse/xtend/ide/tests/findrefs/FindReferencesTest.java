@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.tests.findrefs;
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;

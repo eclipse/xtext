@@ -12,8 +12,8 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.junit.Test
 
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import static extension org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 import static extension org.eclipse.xtext.ui.XtextProjectHelper.*
 import org.junit.After
 

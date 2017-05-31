@@ -15,8 +15,8 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.junit4.internal.StopwatchRule
-import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
+import org.eclipse.xtend.ide.tests.StopwatchRule
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
@@ -32,7 +32,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*

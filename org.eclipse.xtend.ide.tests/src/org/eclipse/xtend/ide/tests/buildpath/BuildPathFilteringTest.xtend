@@ -13,8 +13,8 @@ import org.junit.Test
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 
 import static extension org.eclipse.jdt.core.JavaCore.*
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import static extension org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 import org.junit.After
 
 /**

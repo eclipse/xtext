@@ -16,8 +16,8 @@ import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction
 import org.junit.After
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 
 /**
  * @author Sven Efftinge

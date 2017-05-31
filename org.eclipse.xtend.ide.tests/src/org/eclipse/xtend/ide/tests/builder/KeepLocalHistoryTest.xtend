@@ -17,7 +17,7 @@ import org.junit.Test
 
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*
 import static org.eclipse.xtext.generator.IFileSystemAccess.*
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.ui.editor.preferences.PreferenceConstants.*
 
 /**

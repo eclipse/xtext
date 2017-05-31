@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
 import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.util.JREContainerProvider
 import org.eclipse.xtext.ui.util.PluginProjectFactory
@@ -24,7 +24,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import com.google.inject.Provider
 
 /**

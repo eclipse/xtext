@@ -1,6 +1,6 @@
 package org.eclipse.xtend.ide.tests.contentassist;
 
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -17,8 +17,8 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.junit4.util.ResourceLoadHelper;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testing.Flaky;

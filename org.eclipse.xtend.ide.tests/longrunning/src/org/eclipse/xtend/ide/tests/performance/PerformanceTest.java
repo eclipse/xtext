@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.performance;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -20,8 +20,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
+import org.eclipse.xtend.ide.tests.StopwatchRule;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.junit.Rule;
 import org.junit.Test;
 

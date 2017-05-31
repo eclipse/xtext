@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.contentassist;
 
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.junit.Test;
 
 /**

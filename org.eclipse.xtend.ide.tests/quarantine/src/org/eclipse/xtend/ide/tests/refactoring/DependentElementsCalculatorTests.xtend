@@ -7,7 +7,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.common.types.JvmConstructor
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator
 import org.junit.Test
 

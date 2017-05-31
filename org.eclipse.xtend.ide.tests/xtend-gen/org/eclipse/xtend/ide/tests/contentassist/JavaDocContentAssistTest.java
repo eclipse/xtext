@@ -4,7 +4,7 @@ import java.util.List;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
