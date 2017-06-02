@@ -119,7 +119,8 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 						Hello Xtext!
 					''«»')
 					«assert».assertNotNull(result)
-					«assert».assertTrue(result.eResource.errors.isEmpty)
+					val errors = result.eResource.errors
+					«assert».assertTrue(''«»'Unexpected errors: «"\u00AB"»errors.join(", ")«"\u00BB"»''«»', errors.isEmpty)
 				}
 			}
 		''')

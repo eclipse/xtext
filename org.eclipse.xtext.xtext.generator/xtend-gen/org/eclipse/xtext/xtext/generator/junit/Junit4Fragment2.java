@@ -218,8 +218,17 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
         _builder.append(".assertNotNull(result)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
+        _builder.append("val errors = result.eResource.errors");
+        _builder.newLine();
+        _builder.append("\t\t");
         _builder.append(assert_, "\t\t");
-        _builder.append(".assertTrue(result.eResource.errors.isEmpty)");
+        _builder.append(".assertTrue(\'\'");
+        _builder.append("\'Unexpected errors: ");
+        _builder.append("«", "\t\t");
+        _builder.append("errors.join(\", \")");
+        _builder.append("»", "\t\t");
+        _builder.append("\'\'");
+        _builder.append("\', errors.isEmpty)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
