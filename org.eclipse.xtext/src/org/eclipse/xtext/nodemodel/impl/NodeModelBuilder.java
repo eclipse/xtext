@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.RandomAccess;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
@@ -262,7 +263,8 @@ public class NodeModelBuilder {
 		rootNode.basicSetLookAhead(oldNode.getLookAhead());
 		EObject semanticElement = oldNode.getSemanticElement();
 		if (semanticElement != null) {
-			semanticElement.eAdapters().remove(oldNode);
+			if (oldNode instanceof Adapter)
+				semanticElement.eAdapters().remove((Adapter)oldNode);
 			rootNode.getSemanticElement().eAdapters().add(rootNode);
 		}
 	}
@@ -299,7 +301,8 @@ public class NodeModelBuilder {
 				CompositeNodeWithSemanticElementAndSyntaxError newComposite = new CompositeNodeWithSemanticElementAndSyntaxError();
 				newComposite.basicSetSemanticElement(oldNode.basicGetSemanticElement());
 				newComposite.basicSetSyntaxErrorMessage(errorMessage);
-				oldNode.basicGetSemanticElement().eAdapters().remove(oldNode);
+				if (oldNode instanceof Adapter)
+					oldNode.basicGetSemanticElement().eAdapters().remove((Adapter)oldNode);
 				newComposite.basicGetSemanticElement().eAdapters().add(newComposite);
 				newNode = newComposite;
 			} else {
