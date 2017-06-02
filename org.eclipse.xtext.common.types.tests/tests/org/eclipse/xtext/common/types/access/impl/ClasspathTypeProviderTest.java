@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.access.impl;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -311,5 +312,24 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	@Test
 	public void testParameterNames_03() {
 		doTestParameterName(ClassWithVarArgs.class, "method(java.lang.String[])", "arg0");
+	}
+	
+	@Test
+	public void testJvmTypeSimple_Issue145() {
+		Resource resource = resourceSet.createResource(URI.createURI("foo.typesRefactoring"));
+		JvmGenericType expected = TypesFactory.eINSTANCE.createJvmGenericType();
+		expected.setSimpleName("SimpleName");
+		expected.setPackageName("package.name");
+		resource.getContents().add(expected);
+		JvmType actual = getTypeProvider().findTypeByName("package.name.SimpleName");
+		assertEquals(expected, actual);
+		resource.getContents().remove(expected);
+		((InternalEObject)expected).eSetProxyURI(EcoreUtil.getURI(expected));
+		JvmGenericType expected2 = TypesFactory.eINSTANCE.createJvmGenericType();
+		expected2.setSimpleName("SimpleName");
+		expected2.setPackageName("package.name");
+		resource.getContents().add(expected2);
+		JvmType actual2 = getTypeProvider().findTypeByName("package.name.SimpleName");
+		assertEquals(expected2, actual2);
 	}
 }

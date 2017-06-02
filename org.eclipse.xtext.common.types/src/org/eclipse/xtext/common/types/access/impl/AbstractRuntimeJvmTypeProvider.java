@@ -46,8 +46,13 @@ public abstract class AbstractRuntimeJvmTypeProvider extends AbstractJvmTypeProv
 		
 		public JvmType tryFindTypeInIndex(String name, AbstractRuntimeJvmTypeProvider typeProvider, boolean binaryNestedTypeDelimiter) throws UnknownNestedTypeException {
 			JvmType result = typeByQueryString.get(name);
-			if (result != null)
-				return result;
+			if (result != null) {
+				if (result.eIsProxy()) {
+					typeByQueryString.remove(name);
+				} else {
+					return result;
+				}
+			}
 			JvmType candidate = typeProvider.doTryFindInIndex(name, binaryNestedTypeDelimiter);
 			if (candidate != null) {
 				typeByQueryString.put(name, candidate);
