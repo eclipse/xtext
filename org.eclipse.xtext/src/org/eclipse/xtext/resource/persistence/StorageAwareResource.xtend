@@ -79,7 +79,7 @@ class StorageAwareResource extends LazyLinkingResource {
 		super.clearInternalState();
 	}
 	
-	override getEObject(String uriFragment) {
+	override synchronized getEObject(String uriFragment) {
 		if (portableURIs.isPortableURIFragment(uriFragment)) {
 			return portableURIs.resolve(this, uriFragment)
 		}

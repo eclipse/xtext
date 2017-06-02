@@ -110,7 +110,7 @@ public class StorageAwareResource extends LazyLinkingResource {
   }
   
   @Override
-  public EObject getEObject(final String uriFragment) {
+  public synchronized EObject getEObject(final String uriFragment) {
     EObject _xblockexpression = null;
     {
       boolean _isPortableURIFragment = this.portableURIs.isPortableURIFragment(uriFragment);
