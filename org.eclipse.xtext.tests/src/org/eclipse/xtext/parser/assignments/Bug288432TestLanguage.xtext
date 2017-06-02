@@ -15,13 +15,16 @@ Body :
 	'body'
 	content=(Content|ParameterRef)
 	(foo+=Foo)+
+	/* SuppressWarnings[SpacesInKeyword] */
 	'end body';
 	
 Foo:
 	fooValue = STRING;
 	
 Content :
-	'content' MyElement 'end content' ;
+	'content' MyElement 
+	/* SuppressWarnings[SpacesInKeyword] */
+	'end content' ;
 	
 MyElement :
 	'element' bar=(MyInt|ParameterRef);   

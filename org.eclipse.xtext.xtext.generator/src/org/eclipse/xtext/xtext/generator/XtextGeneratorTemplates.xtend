@@ -36,6 +36,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess
 
 /**
  * Templates for generating the common language infrastructure.
@@ -78,13 +79,18 @@ class XtextGeneratorTemplates {
 		}
 	}
 	
+	@Deprecated
+	private static def addBackwardsCompabibleImportsTo(IXtextGeneratorLanguage langConfig, GeneratedJavaFileAccess file) {
+		for (type : langConfig.runtimeGenSetup.imports) {
+			file.importType(type)
+		}
+	}
+	
 	def JavaFileAccess createRuntimeGenSetup(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		val file = fileAccessFactory.createGeneratedJavaFile(runtimeGenSetup)
 		// The following imports are added for backwards-compatibility
-		for (type : langConfig.runtimeGenSetup.imports) {
-			file.importType(type)
-		}
+		langConfig.addBackwardsCompabibleImportsTo(file);
 		
 		file.annotations += new SuppressWarningsAnnotation
 		file.content = '''

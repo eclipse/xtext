@@ -21,6 +21,7 @@ AbstractCallOverridenParserRule returns mm::AModel:
 OverridableParserRule returns mm::AType :
 	'element' name=ID;
 	
+/* SuppressWarnings[SpacesInKeyword] */
 OverridableParserRule2 returns mm::AType :
 	'other element' name=STRING;
 

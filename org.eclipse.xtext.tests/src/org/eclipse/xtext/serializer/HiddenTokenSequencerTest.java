@@ -21,14 +21,12 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
-import org.eclipse.xtext.serializer.sequencer.EmitterNodeIterator;
 import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
 import org.eclipse.xtext.testing.serializer.DebugSequenceAcceptor;
 import org.eclipse.xtext.tests.AbstractXtextTests;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
@@ -108,30 +106,17 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 		assertEquals(Joiner.on("\n").join(getNodeSequence(model)), Joiner.on("\n").join(actual.getColumn(4)));
 	}
 
-	@Test
-	@Ignore
-	public void testXtext() throws Exception {
-//		with(XtextStandaloneSetup.class);
-//		Grammar model = (Grammar) new XtextResourceSet()
-//				.getResource(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"), true).getContents().get(0);
-//		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
-//		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
-//		recSequencer.createSequence(/*syn, semSequencer,*/getGrammarAccess().getGrammar().getRules().get(0), model,
-//				actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-//		//		System.out.println(actual);
-//		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.getNode(model), false));
-//		assertEquals(Joiner.on("\n").join(getNodeSequence(model)), Joiner.on("\n").join(actual.getColumn(4)));
-	}
-
 	@Test public void testMandatoryKeywords() throws Exception {
 		testSequence("#1 a kw1 b kw2 kw3 c kw4");
 	}
 
+	@SuppressWarnings("deprecation")
 	private List<String> getNodeSequence(EObject model) {
 		List<String> result = Lists.newArrayList();
 		GrammarElementTitleSwitch titleSwitch = new GrammarElementTitleSwitch().showAssignments();
 		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.findActualNodeFor(model), true));
-		EmitterNodeIterator ni = new EmitterNodeIterator(NodeModelUtils.findActualNodeFor(model), null, true, true);
+		org.eclipse.xtext.serializer.sequencer.EmitterNodeIterator ni = 
+				new org.eclipse.xtext.serializer.sequencer.EmitterNodeIterator(NodeModelUtils.findActualNodeFor(model), null, true, true);
 		while (ni.hasNext()) {
 			INode next = ni.next();
 			if (next instanceof ILeafNode)

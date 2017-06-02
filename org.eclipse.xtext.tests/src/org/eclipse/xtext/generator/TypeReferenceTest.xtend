@@ -79,6 +79,7 @@ class TypeReferenceTest {
 	}
 	
 	@Test
+	@Deprecated
 	def void testGuessTypeRef() {
 		val ref = TypeReference.guessTypeRef("java.util.Map.Entry")
 		assertEquals("java.util", ref.packageName)

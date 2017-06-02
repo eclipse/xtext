@@ -42,7 +42,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class ResourceStorageFacade implements IResourceStorageFacade {
   private static class MyByteArrayOutputStream extends ByteArrayOutputStream {
     @Override
-    public byte[] toByteArray() {
+    public synchronized byte[] toByteArray() {
       return this.buf;
     }
     

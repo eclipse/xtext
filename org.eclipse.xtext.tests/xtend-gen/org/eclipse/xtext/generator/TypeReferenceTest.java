@@ -79,6 +79,7 @@ public class TypeReferenceTest {
   }
   
   @Test
+  @Deprecated
   public void testGuessTypeRef() {
     final TypeReference ref = TypeReference.guessTypeRef("java.util.Map.Entry");
     Assert.assertEquals("java.util", ref.getPackageName());

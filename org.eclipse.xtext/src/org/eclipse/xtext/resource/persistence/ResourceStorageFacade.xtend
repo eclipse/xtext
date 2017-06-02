@@ -144,7 +144,7 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 	}
 	
 	private static class MyByteArrayOutputStream extends ByteArrayOutputStream {
-		override toByteArray() { buf }
+		override synchronized toByteArray() { buf }
 		def int length() { count }
 	}
 }

@@ -26,7 +26,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
-import org.eclipse.xtext.serializer.sequencer.EmitterNodeIterator;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
@@ -216,10 +215,12 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		assertEquals(Joiner.on("\n").join(getNodeSequence(outObj)), Joiner.on("\n").join(actual.getResult()));
 	}
 
+	@SuppressWarnings("deprecation")
 	private List<String> getNodeSequence(EObject model) {
 		List<String> result = Lists.newArrayList();
 		GrammarElementTitleSwitch titleSwitch = new GrammarElementTitleSwitch().showAssignments();
-		EmitterNodeIterator ni = new EmitterNodeIterator(NodeModelUtils.findActualNodeFor(model));
+		org.eclipse.xtext.serializer.sequencer.EmitterNodeIterator ni = 
+				new org.eclipse.xtext.serializer.sequencer.EmitterNodeIterator(NodeModelUtils.findActualNodeFor(model));
 		while (ni.hasNext()) {
 			INode next = ni.next();
 			EObject ele = next.getGrammarElement() instanceof CrossReference ? ((CrossReference) next

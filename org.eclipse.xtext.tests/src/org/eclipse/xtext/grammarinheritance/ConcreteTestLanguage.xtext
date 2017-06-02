@@ -27,6 +27,7 @@ CallOverridenParserRule:
 	call=AbstractCallOverridenParserRule;
 	
 // override parser rule and change return type
+/* SuppressWarnings[SpacesInKeyword] */
 @Override 
 OverridableParserRule2 returns AType2 :
 	'overridden other element' name=ID '-' age=INT;
