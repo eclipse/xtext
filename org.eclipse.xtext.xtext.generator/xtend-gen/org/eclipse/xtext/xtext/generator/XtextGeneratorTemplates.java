@@ -147,13 +147,18 @@ public class XtextGeneratorTemplates {
     }
   }
   
-  public JavaFileAccess createRuntimeGenSetup(final IXtextGeneratorLanguage langConfig) {
-    final Grammar it = langConfig.getGrammar();
-    final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(this.naming.getRuntimeGenSetup(it));
+  @Deprecated
+  private static void addBackwardsCompabibleImportsTo(final IXtextGeneratorLanguage langConfig, final GeneratedJavaFileAccess file) {
     Set<TypeReference> _imports = langConfig.getRuntimeGenSetup().getImports();
     for (final TypeReference type : _imports) {
       file.importType(type);
     }
+  }
+  
+  public JavaFileAccess createRuntimeGenSetup(final IXtextGeneratorLanguage langConfig) {
+    final Grammar it = langConfig.getGrammar();
+    final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(this.naming.getRuntimeGenSetup(it));
+    XtextGeneratorTemplates.addBackwardsCompabibleImportsTo(langConfig, file);
     List<IClassAnnotation> _annotations = file.getAnnotations();
     SuppressWarningsAnnotation _suppressWarningsAnnotation = new SuppressWarningsAnnotation();
     _annotations.add(_suppressWarningsAnnotation);
