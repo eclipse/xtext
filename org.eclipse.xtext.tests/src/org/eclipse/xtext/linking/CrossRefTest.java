@@ -3,6 +3,7 @@ package org.eclipse.xtext.linking;
 import java.util.List;
 
 import org.apache.log4j.Level;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -137,7 +138,8 @@ public class CrossRefTest extends AbstractXtextTests {
 		linkText = crossRefSerializer.serializeCrossRef(type, grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), superType, node);
 		assertEquals("^type", linkText);
 
-		type.eAdapters().remove(NodeModelUtils.getNode(type));
+		Adapter adapter = (Adapter) NodeModelUtils.getNode(type);
+		type.eAdapters().remove(adapter);
 		linkText = crossRefSerializer.serializeCrossRef(type, grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), superType, null);
 		assertNull(linkText);
 	}
@@ -179,7 +181,8 @@ public class CrossRefTest extends AbstractXtextTests {
 				linkText = crossRefSerializer.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, null);
 				assertEquals("TypeB", linkText);
 		
-				prop.eAdapters().remove(NodeModelUtils.getNode(prop));
+				Adapter adapter = (Adapter) NodeModelUtils.getNode(prop);
+				prop.eAdapters().remove(adapter);
 				propType = prop.getType().get(1);
 				assertTrue(propType.eIsProxy());
 				linkText = crossRefSerializer.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType, null);
