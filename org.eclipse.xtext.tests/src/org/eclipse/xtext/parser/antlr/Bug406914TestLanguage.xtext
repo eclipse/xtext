@@ -14,6 +14,7 @@ Model:
     name=ID BS_ESCAPE
 ;
 
+/* SuppressWarnings[SpacesInKeyword] */
 BS_ESCAPE:
 	'\b' | '\f' | '\n' | 'lineFeed' | '\r' | '\t' | '\\'
 ;
