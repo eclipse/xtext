@@ -145,14 +145,19 @@ import org.eclipse.xtext.validation.Issue
 		return CompletableFuture.completedFuture(result)
 	}
 	
-	protected def URI getBaseDir(InitializeParams params) {
-		if (params.rootUri !== null) {
-			return params.rootUri.toUri
-		}
+	@Deprecated
+	private def URI deprecatedToBaseDir(InitializeParams params) {
 		if (params.rootPath !== null) {
 			return URI.createFileURI(params.rootPath).toPath.toUri
 		}
 		return null
+	}
+	
+	protected def URI getBaseDir(InitializeParams params) {
+		if (params.rootUri !== null) {
+			return params.rootUri.toUri
+		}
+		return params.deprecatedToBaseDir;
 	}
 	
 	override connect(LanguageClient client) {

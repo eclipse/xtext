@@ -218,18 +218,23 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     return CompletableFuture.<InitializeResult>completedFuture(result);
   }
   
+  @Deprecated
+  private URI deprecatedToBaseDir(final InitializeParams params) {
+    String _rootPath = params.getRootPath();
+    boolean _tripleNotEquals = (_rootPath != null);
+    if (_tripleNotEquals) {
+      return this._uriExtensions.toUri(this._uriExtensions.toPath(URI.createFileURI(params.getRootPath())));
+    }
+    return null;
+  }
+  
   protected URI getBaseDir(final InitializeParams params) {
     String _rootUri = params.getRootUri();
     boolean _tripleNotEquals = (_rootUri != null);
     if (_tripleNotEquals) {
       return this._uriExtensions.toUri(params.getRootUri());
     }
-    String _rootPath = params.getRootPath();
-    boolean _tripleNotEquals_1 = (_rootPath != null);
-    if (_tripleNotEquals_1) {
-      return this._uriExtensions.toUri(this._uriExtensions.toPath(URI.createFileURI(params.getRootPath())));
-    }
-    return null;
+    return this.deprecatedToBaseDir(params);
   }
   
   @Override
