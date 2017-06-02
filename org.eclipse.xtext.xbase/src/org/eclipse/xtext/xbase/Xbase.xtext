@@ -308,6 +308,7 @@ XCatchClause :
 	=>'catch' '(' declaredParam=FullJvmFormalParameter ')' expression=XExpression;
 
 
+@Override
 QualifiedName:
   ValidID (=>'.' ValidID)*;
 
