@@ -71,9 +71,11 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
     final Procedure2<IEObjectDescription, IReferenceDescription> _function = (IEObjectDescription declaration, IReferenceDescription reference) -> {
       final IHierarchyNode childNode = this.createChild(children, declaration, parent);
       if ((childNode != null)) {
-        Collection<IHierarchyNodeReference> _references = childNode.getReferences();
-        IHierarchyNodeReference _createNodeReference = this.createNodeReference(reference);
-        _references.add(_createNodeReference);
+        final IHierarchyNodeReference nodeReference = this.createNodeReference(reference);
+        if ((nodeReference != null)) {
+          Collection<IHierarchyNodeReference> _references = childNode.getReferences();
+          _references.add(nodeReference);
+        }
       }
     };
     this.findDeclarations(parent, monitor, _function);
@@ -146,14 +148,14 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
     if ((targetURI == null)) {
       return targetURIs;
     }
-    final IUnitOfWork<TargetURIs, EObject> _function = (EObject targetObject) -> {
-      if ((targetObject == null)) {
-        return targetURIs;
+    final IUnitOfWork<Object, EObject> _function = (EObject targetObject) -> {
+      if ((targetObject != null)) {
+        this.getTargetURICollector().add(targetObject, targetURIs);
       }
-      this.getTargetURICollector().add(targetObject, targetURIs);
-      return targetURIs;
+      return null;
     };
-    return this.<TargetURIs>readOnly(targetURI, _function);
+    this.<Object>readOnly(targetURI, _function);
+    return targetURIs;
   }
   
   protected boolean filterReference(final IReferenceDescription reference) {

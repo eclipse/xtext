@@ -48,8 +48,11 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements IC
 		val children = newLinkedHashMap
 		findDeclarations(parent, monitor) [ declaration, reference |
 			val childNode = children.createChild(declaration, parent)
-			if (childNode !== null)
-				childNode.references += reference.createNodeReference
+			if (childNode !== null) {
+				val nodeReference = reference.createNodeReference
+				if (nodeReference !== null)
+					childNode.references += nodeReference
+			}
 		]
 		return children.values
 	}
@@ -111,11 +114,13 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements IC
 		val targetURIs = targetURIProvider.get
 		if(targetURI === null) return targetURIs
 
-		return readOnly(targetURI) [ targetObject |
-			if(targetObject === null) return targetURIs
-			targetURICollector.add(targetObject, targetURIs)
-			return targetURIs
+		readOnly(targetURI) [ targetObject |
+			if(targetObject !== null) {
+				targetURICollector.add(targetObject, targetURIs)
+			}
+			return null
 		]
+		return targetURIs
 	}
 
 	protected def boolean filterReference(IReferenceDescription reference) {
