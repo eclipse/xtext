@@ -185,11 +185,17 @@ public class DocumentSymbolService {
         if (_filter) {
           final SymbolInformation symbol = this.createSymbol(description);
           if ((symbol != null)) {
-            symbols.add(symbol);
-            final Procedure1<EObject> _function = (EObject obj) -> {
-              symbol.setLocation(this._documentExtensions.newLocation(obj));
-            };
-            this.doRead(resourceAccess, description.getEObjectURI(), _function);
+            Location _location = symbol.getLocation();
+            boolean _tripleNotEquals = (_location != null);
+            if (_tripleNotEquals) {
+              symbols.add(symbol);
+            } else {
+              final Procedure1<EObject> _function = (EObject obj) -> {
+                symbol.setLocation(this._documentExtensions.newLocation(obj));
+                symbols.add(symbol);
+              };
+              this.doRead(resourceAccess, description.getEObjectURI(), _function);
+            }
           }
         }
       }

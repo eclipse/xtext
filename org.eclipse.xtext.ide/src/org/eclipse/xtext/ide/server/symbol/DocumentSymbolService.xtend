@@ -177,10 +177,14 @@ class DocumentSymbolService {
 			if (description.filter(query)) {
 				val symbol = description.createSymbol
 				if (symbol !== null) {
-					symbols += symbol
-					resourceAccess.doRead(description.EObjectURI) [ obj |
-						symbol.location = obj.newLocation
-					]
+					if (symbol.location !== null) {
+						symbols += symbol
+					} else {
+						resourceAccess.doRead(description.EObjectURI) [ obj |
+							symbol.location = obj.newLocation
+							symbols += symbol
+						]
+					}
 				}
 			}
 		}
