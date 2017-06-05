@@ -10,7 +10,10 @@ package org.eclipse.xtext.ide.server.signatureHelp;
 import static java.util.Collections.*;
 
 import org.eclipse.lsp4j.SignatureHelp;
+import org.eclipse.lsp4j.TextDocumentPositionParams;
+import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.ImplementedBy;
 import com.google.inject.Singleton;
@@ -29,6 +32,8 @@ public interface ISignatureHelpService {
 	 */
 	SignatureHelp EMPTY = new SignatureHelp(emptyList(), null, null);
 	
+	SignatureHelp getSignatureHelp(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator);
+	
 	/**
 	 * Returns with a {@link SignatureHelp signature help} instance for a
 	 * resource at a given offset. This method never returns with {@code null}.
@@ -41,6 +46,7 @@ public interface ISignatureHelpService {
 	 * 
 	 * @return a signature help instance.
 	 */
+	@Deprecated
 	SignatureHelp getSignatureHelp(final XtextResource resource, final int offset);
 
 	/**
@@ -53,6 +59,11 @@ public interface ISignatureHelpService {
 		
 		@Override
 		public SignatureHelp getSignatureHelp(final XtextResource resource, final int offset) {
+			return EMPTY;
+		}
+
+		@Override
+		public SignatureHelp getSignatureHelp(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
 			return EMPTY;
 		}
 

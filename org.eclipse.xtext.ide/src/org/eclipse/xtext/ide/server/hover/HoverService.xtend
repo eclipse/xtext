@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.lsp4j.Hover
 import org.eclipse.lsp4j.MarkedString
 import org.eclipse.lsp4j.Range
+import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
@@ -23,6 +24,7 @@ import org.eclipse.xtext.ide.server.DocumentExtensions
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.ITextRegion
 
 import static java.util.Collections.*
@@ -49,10 +51,16 @@ class HoverService {
 
 	@Inject
 	extension IEObjectDocumentationProvider
-
-	def Hover hover(Document document, XtextResource resource, int offset) {
+	
+	def Hover hover(
+		Document document, 
+		XtextResource resource, 
+		TextDocumentPositionParams params,
+		CancelIndicator cancelIndicator
+	) {
+		val offset = document.getOffSet(params.position)
 		val context = createContext(document, resource, offset)
-		return context.hover
+		return context.hover	
 	}
 
 	protected def HoverContext createContext(Document document, XtextResource resource, int offset) {

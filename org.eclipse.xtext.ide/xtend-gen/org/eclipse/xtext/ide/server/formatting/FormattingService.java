@@ -11,6 +11,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.lsp4j.DocumentFormattingParams;
+import org.eclipse.lsp4j.DocumentRangeFormattingParams;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtext.formatting2.FormatterRequest;
@@ -21,6 +23,7 @@ import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -46,6 +49,22 @@ public class FormattingService {
   
   @Inject
   private TextRegionAccessBuilder regionBuilder;
+  
+  public List<? extends TextEdit> format(final Document document, final XtextResource resource, final DocumentFormattingParams params, final CancelIndicator cancelIndicator) {
+    final int offset = 0;
+    final int length = document.getContents().length();
+    if (((length == 0) || resource.getContents().isEmpty())) {
+      return CollectionLiterals.<TextEdit>emptyList();
+    }
+    return this.format(resource, document, offset, length);
+  }
+  
+  public List<? extends TextEdit> format(final Document document, final XtextResource resource, final DocumentRangeFormattingParams params, final CancelIndicator cancelIndicator) {
+    final int offset = document.getOffSet(params.getRange().getStart());
+    int _offSet = document.getOffSet(params.getRange().getEnd());
+    final int length = (_offSet - offset);
+    return this.format(resource, document, offset, length);
+  }
   
   public List<TextEdit> format(final XtextResource resource, final Document document, final int offset, final int length) {
     if ((this.formatter2Provider != null)) {

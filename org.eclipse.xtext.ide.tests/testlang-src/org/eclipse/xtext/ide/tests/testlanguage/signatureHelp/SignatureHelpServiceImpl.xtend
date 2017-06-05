@@ -29,6 +29,9 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.scoping.IScopeProvider
+import org.eclipse.xtext.ide.server.Document
+import org.eclipse.lsp4j.TextDocumentPositionParams
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * Signature help service implementation for the test language.
@@ -67,6 +70,11 @@ class SignatureHelpServiceImpl implements ISignatureHelpService {
     IScopeProvider scopeProvider;
 
     extension TestLanguagePackage = TestLanguagePackage.eINSTANCE;
+				
+	override getSignatureHelp(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
+		val offset = document.getOffSet(params.position)
+		return getSignatureHelp(resource, offset)
+	}
 
     override getSignatureHelp(XtextResource resource, int offset) {
 

@@ -17,11 +17,13 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.lsp4j.Location
 import org.eclipse.lsp4j.SymbolInformation
 import org.eclipse.lsp4j.SymbolKind
+import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.xtext.findReferences.IReferenceFinder
 import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 import org.eclipse.xtext.findReferences.ReferenceAcceptor
 import org.eclipse.xtext.findReferences.TargetURICollector
 import org.eclipse.xtext.findReferences.TargetURIs
+import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.DocumentExtensions
 import org.eclipse.xtext.ide.util.CancelIndicatorProgressMonitor
 import org.eclipse.xtext.naming.IQualifiedNameProvider
@@ -36,6 +38,8 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.eclipse.lsp4j.ReferenceParams
+import org.eclipse.lsp4j.DocumentSymbolParams
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -69,6 +73,17 @@ class DocumentSymbolService {
 	IResourceServiceProvider.Registry resourceServiceProviderRegistry
 
 	def List<? extends Location> getDefinitions(
+		Document document,
+		XtextResource resource,
+		TextDocumentPositionParams params,
+		IResourceAccess resourceAccess,
+		CancelIndicator cancelIndicator
+	) {
+		val offset = document.getOffSet(params.position)
+		return getDefinitions(resource, offset, resourceAccess, cancelIndicator)
+	}
+
+	def List<? extends Location> getDefinitions(
 		XtextResource resource,
 		int offset,
 		IResourceAccess resourceAccess,
@@ -90,6 +105,26 @@ class DocumentSymbolService {
 			]
 		}
 		return locations
+	}
+	
+	def List<? extends Location> getReferences(
+		Document document,
+		XtextResource resource,
+		ReferenceParams params,
+		IResourceAccess resourceAccess,
+		IResourceDescriptions indexData,
+		CancelIndicator cancelIndicator
+	) {
+		val offset = document.getOffSet(params.position)
+				
+		val definitions = if (params.context.includeDeclaration)
+				getDefinitions(resource, offset, resourceAccess, cancelIndicator)
+			else
+				emptyList
+		
+		val references = getReferences(resource, offset, resourceAccess, indexData, cancelIndicator)
+		val result = definitions + references
+		return result.toList
 	}
 
 	def List<? extends Location> getReferences(
@@ -125,6 +160,15 @@ class DocumentSymbolService {
 		val targetURIs = targetURIProvider.get
 		targetURICollector.add(targetObject, targetURIs)
 		return targetURIs
+	}
+	
+	def List<? extends SymbolInformation> getSymbols(
+		Document document,
+		XtextResource resource,
+		DocumentSymbolParams params,
+		CancelIndicator cancelIndicator
+	) {
+		return getSymbols(resource, cancelIndicator)
 	}
 
 	def List<? extends SymbolInformation> getSymbols(XtextResource resource, CancelIndicator cancelIndicator) {

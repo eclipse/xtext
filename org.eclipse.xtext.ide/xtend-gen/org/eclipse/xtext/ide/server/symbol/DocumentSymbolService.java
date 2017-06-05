@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.server.symbol;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -20,13 +21,17 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.Location;
+import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.SymbolKind;
+import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.ReferenceAcceptor;
 import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.findReferences.TargetURIs;
+import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
 import org.eclipse.xtext.ide.util.CancelIndicatorProgressMonitor;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -81,6 +86,11 @@ public class DocumentSymbolService {
   @Inject
   private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
   
+  public List<? extends Location> getDefinitions(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final IReferenceFinder.IResourceAccess resourceAccess, final CancelIndicator cancelIndicator) {
+    final int offset = document.getOffSet(params.getPosition());
+    return this.getDefinitions(resource, offset, resourceAccess, cancelIndicator);
+  }
+  
   public List<? extends Location> getDefinitions(final XtextResource resource, final int offset, final IReferenceFinder.IResourceAccess resourceAccess, final CancelIndicator cancelIndicator) {
     final EObject element = this._eObjectAtOffsetHelper.resolveElementAt(resource, offset);
     if ((element == null)) {
@@ -101,6 +111,21 @@ public class DocumentSymbolService {
       }
     }
     return locations;
+  }
+  
+  public List<? extends Location> getReferences(final Document document, final XtextResource resource, final ReferenceParams params, final IReferenceFinder.IResourceAccess resourceAccess, final IResourceDescriptions indexData, final CancelIndicator cancelIndicator) {
+    final int offset = document.getOffSet(params.getPosition());
+    List<? extends Location> _xifexpression = null;
+    boolean _isIncludeDeclaration = params.getContext().isIncludeDeclaration();
+    if (_isIncludeDeclaration) {
+      _xifexpression = this.getDefinitions(resource, offset, resourceAccess, cancelIndicator);
+    } else {
+      _xifexpression = CollectionLiterals.emptyList();
+    }
+    final List<? extends Location> definitions = _xifexpression;
+    final List<? extends Location> references = this.getReferences(resource, offset, resourceAccess, indexData, cancelIndicator);
+    final Iterable<Location> result = Iterables.<Location>concat(definitions, references);
+    return IterableExtensions.<Location>toList(result);
   }
   
   public List<? extends Location> getReferences(final XtextResource resource, final int offset, final IReferenceFinder.IResourceAccess resourceAccess, final IResourceDescriptions indexData, final CancelIndicator cancelIndicator) {
@@ -129,6 +154,10 @@ public class DocumentSymbolService {
     final TargetURIs targetURIs = this.targetURIProvider.get();
     this.targetURICollector.add(targetObject, targetURIs);
     return targetURIs;
+  }
+  
+  public List<? extends SymbolInformation> getSymbols(final Document document, final XtextResource resource, final DocumentSymbolParams params, final CancelIndicator cancelIndicator) {
+    return this.getSymbols(resource, cancelIndicator);
   }
   
   public List<? extends SymbolInformation> getSymbols(final XtextResource resource, final CancelIndicator cancelIndicator) {
