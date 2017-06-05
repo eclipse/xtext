@@ -7,16 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server
 
+import com.google.common.io.ByteStreams
 import com.google.inject.Guice
 import com.google.inject.Inject
 import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 import java.io.PrintStream
 import java.io.PrintWriter
-import java.sql.Timestamp
 import org.eclipse.lsp4j.jsonrpc.Launcher
 import org.eclipse.lsp4j.services.LanguageClient
 
@@ -26,13 +25,13 @@ import org.eclipse.lsp4j.services.LanguageClient
  */
 class ServerLauncher {
 
-	private static boolean IS_DEBUG = false
+	public static val OPTION_PREFIX = '-Dorg.eclipse.xtext.ide.server.'
+	public static val LOG_STANDARD_STREAMS = OPTION_PREFIX + 'logStandardStreams'
 
 	def static void main(String[] args) {
-		IS_DEBUG = args.exists[it == 'debug']
 		val stdin = System.in
 		val stdout = System.out
-		redirectStandardStreams()
+		redirectStandardStreams(args)
 		val launcher = Guice.createInjector(new ServerModule).getInstance(ServerLauncher)
 		launcher.start(stdin, stdout)
 	}
@@ -40,28 +39,63 @@ class ServerLauncher {
 	@Inject LanguageServerImpl languageServer
 
 	def void start(InputStream in, OutputStream out) {
-		System.err.println("Starting Xtext Language Server.")
-		val launcher = Launcher.createLauncher(languageServer, LanguageClient, in, out, true, new PrintWriter(System.out))
+		println("Starting Xtext Language Server.")
+		val launcher = Launcher.createLauncher(languageServer, LanguageClient, in, out, true,
+			new PrintWriter(System.out))
 		languageServer.connect(launcher.remoteProxy)
 		val future = launcher.startListening
-		System.err.println("started.")
+		println("started.")
 		while (!future.done) {
 			Thread.sleep(10_000l)
 		}
 	}
 
-	def static redirectStandardStreams() {
-		System.setIn(new ByteArrayInputStream(newByteArrayOfSize(0)))
-		val id = (ServerLauncher.name + "-" + new Timestamp(System.currentTimeMillis)).replace(" ", "_")
-		if (IS_DEBUG) {
-			val stdFileOut = new FileOutputStream("out-" + id + ".log")
-			System.setOut(new PrintStream(stdFileOut))
-			val stdFileErr = new FileOutputStream("error-" + id + ".log")
-			System.setErr(new PrintStream(stdFileErr))
+	def static redirectStandardStreams(String[] args) {
+		redirectStandardStreams(ServerLauncher.name, args)
+	}
+
+	def static redirectStandardStreams(String prefix, String[] args) {
+		if (shouldLogStandardStreams(args)) {
+			logStandardStreams(prefix)
 		} else {
-			System.setOut(new PrintStream(new ByteArrayOutputStream()))
-			System.setErr(new PrintStream(new ByteArrayOutputStream()))
+			silentStandardStreams
 		}
+	}
+
+	def static boolean shouldLogStandardStreams(String[] args) {
+		return args.exists[shouldLogStandardStreams]
+	}
+
+	def static boolean shouldLogStandardStreams(String arg) {
+		return arg == LOG_STANDARD_STREAMS || arg == 'debug'
+	}
+
+	def static void logStandardStreams(String prefix) {
+		val stdFileOut = new FileOutputStream(prefix + "-debug.log")
+		val stdFileErr = new FileOutputStream(prefix + "-error.log")
+		redirectStandardStreams(stdFileOut, stdFileErr)
+	}
+
+	def static void silentStandardStreams() {
+		redirectStandardStreams(ServerLauncher.silentOut, ServerLauncher.silentOut)
+	}
+
+	def static void redirectStandardStreams(OutputStream out, OutputStream err) {
+		redirectStandardStreams(ServerLauncher.silentIn, out, err)
+	}
+
+	def static void redirectStandardStreams(InputStream in, OutputStream out, OutputStream err) {
+		System.setIn(in)
+		System.setOut(new PrintStream(out))
+		System.setErr(new PrintStream(err))
+	}
+
+	def static OutputStream silentOut() {
+		ByteStreams.nullOutputStream
+	}
+
+	def static InputStream silentIn() {
+		new ByteArrayInputStream(newByteArrayOfSize(0))
 	}
 
 }
