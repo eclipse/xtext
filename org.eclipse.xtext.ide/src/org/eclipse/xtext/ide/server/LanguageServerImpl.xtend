@@ -380,7 +380,7 @@ import org.eclipse.xtext.validation.Issue
 
 			return workspaceManager.doRead(uri) [ document, resource |
 				val offset = document.getOffSet(params.position)
-				return hoverService.hover(resource, offset)
+				return hoverService.hover(document, resource, offset)
 			]
 		]
 	}

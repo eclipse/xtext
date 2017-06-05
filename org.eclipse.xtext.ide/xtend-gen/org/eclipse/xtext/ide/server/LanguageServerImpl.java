@@ -537,7 +537,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       final Function2<Document, XtextResource, Hover> _function_1 = (Document document, XtextResource resource) -> {
         final int offset = document.getOffSet(params.getPosition());
-        return hoverService.hover(resource, offset);
+        return hoverService.hover(document, resource, offset);
       };
       return this.workspaceManager.<Hover>doRead(uri, _function_1);
     };
