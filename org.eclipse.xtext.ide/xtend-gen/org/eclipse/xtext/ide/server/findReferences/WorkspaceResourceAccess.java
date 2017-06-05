@@ -31,7 +31,15 @@ public class WorkspaceResourceAccess implements IReferenceFinder.IResourceAccess
   public <R extends Object> R readOnly(final URI targetURI, final IUnitOfWork<R, ResourceSet> work) {
     final Function2<Document, XtextResource, R> _function = (Document document, XtextResource resource) -> {
       try {
-        return work.exec(resource.getResourceSet());
+        ResourceSet _resourceSet = null;
+        if (resource!=null) {
+          _resourceSet=resource.getResourceSet();
+        }
+        final ResourceSet resourceSet = _resourceSet;
+        if ((resourceSet == null)) {
+          return null;
+        }
+        return work.exec(resourceSet);
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }

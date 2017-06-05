@@ -31,6 +31,7 @@ import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
@@ -163,14 +164,22 @@ public class WorkspaceManager {
     URI _xblockexpression = null;
     {
       final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(candidate);
-      _xblockexpression = projectConfig.getPath();
+      URI _path = null;
+      if (projectConfig!=null) {
+        _path=projectConfig.getPath();
+      }
+      _xblockexpression = _path;
     }
     return _xblockexpression;
   }
   
   public ProjectManager getProjectManager(final URI uri) {
     final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(uri);
-    return this.projectName2ProjectManager.get(projectConfig.getName());
+    String _name = null;
+    if (projectConfig!=null) {
+      _name=projectConfig.getName();
+    }
+    return this.projectName2ProjectManager.get(_name);
   }
   
   public ProjectManager getProjectManager(final String projectName) {
@@ -221,14 +230,25 @@ public class WorkspaceManager {
   }
   
   protected boolean exists(final URI uri) {
-    return this.getProjectManager(uri).getResourceSet().getURIConverter().exists(uri, null);
+    ProjectManager _projectManager = this.getProjectManager(uri);
+    XtextResourceSet _resourceSet = null;
+    if (_projectManager!=null) {
+      _resourceSet=_projectManager.getResourceSet();
+    }
+    return _resourceSet.getURIConverter().exists(uri, null);
   }
   
   public <T extends Object> T doRead(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
     final URI resourceURI = uri.trimFragment();
     final ProjectManager projectMnr = this.getProjectManager(resourceURI);
-    Resource _resource = projectMnr.getResource(resourceURI);
+    Resource _resource = null;
+    if (projectMnr!=null) {
+      _resource=projectMnr.getResource(resourceURI);
+    }
     final XtextResource resource = ((XtextResource) _resource);
+    if ((resource == null)) {
+      return work.apply(null, null);
+    }
     Document doc = this.getDocument(resource);
     Resource _resource_1 = projectMnr.getResource(resourceURI);
     return work.apply(doc, ((XtextResource) _resource_1));

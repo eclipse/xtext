@@ -25,7 +25,11 @@ class WorkspaceResourceAccess implements IResourceAccess {
 
 	override <R> readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work) {
 		return workspaceManager.doRead(targetURI) [ document, resource |
-			return work.exec(resource.resourceSet)
+			val resourceSet = resource?.resourceSet
+			if (resourceSet === null) {
+				return null
+			}
+			return work.exec(resourceSet)
 		]
 	}
 
