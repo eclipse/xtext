@@ -33,6 +33,8 @@ import org.eclipse.lsp4j.jsonrpc.messages.Either
  */
 @Singleton
 class HoverService {
+	
+	public static val EMPTY_HOVER = new Hover(emptyList, null)
 
 	@Inject
 	extension DocumentExtensions
@@ -49,18 +51,18 @@ class HoverService {
 	def Hover hover(XtextResource resource, int offset) {
 		val pair = resource.getXtextElementAt(offset)
 		if (pair === null || pair.first === null || pair.second === null) {
-			return new Hover(emptyList, null)
+			return EMPTY_HOVER
 		}
 		val element = pair.first
 		
 		val contents = getContents(element)
 		if (contents === null)
-			return new Hover(emptyList, null)
+			return EMPTY_HOVER
 
 		val ITextRegion textRegion = pair.second
 
 		if (!textRegion.contains(offset))
-			return new Hover(emptyList, null)
+			return EMPTY_HOVER
 
 		val range = resource.newRange(textRegion)
 		return new Hover() => [ b |

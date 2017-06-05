@@ -41,6 +41,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class HoverService {
+  public final static Hover EMPTY_HOVER = new Hover(Collections.<Either<String, MarkedString>>emptyList(), null);
+  
   @Inject
   @Extension
   private DocumentExtensions _documentExtensions;
@@ -60,21 +62,18 @@ public class HoverService {
   public Hover hover(final XtextResource resource, final int offset) {
     final Pair<EObject, ITextRegion> pair = this.getXtextElementAt(resource, offset);
     if ((((pair == null) || (pair.getFirst() == null)) || (pair.getSecond() == null))) {
-      List<Either<String, MarkedString>> _emptyList = Collections.<Either<String, MarkedString>>emptyList();
-      return new Hover(_emptyList, null);
+      return HoverService.EMPTY_HOVER;
     }
     final EObject element = pair.getFirst();
     final List<? extends String> contents = this.getContents(element);
     if ((contents == null)) {
-      List<Either<String, MarkedString>> _emptyList_1 = Collections.<Either<String, MarkedString>>emptyList();
-      return new Hover(_emptyList_1, null);
+      return HoverService.EMPTY_HOVER;
     }
     final ITextRegion textRegion = pair.getSecond();
     boolean _contains = textRegion.contains(offset);
     boolean _not = (!_contains);
     if (_not) {
-      List<Either<String, MarkedString>> _emptyList_2 = Collections.<Either<String, MarkedString>>emptyList();
-      return new Hover(_emptyList_2, null);
+      return HoverService.EMPTY_HOVER;
     }
     final Range range = this._documentExtensions.newRange(resource, textRegion);
     Hover _hover = new Hover();

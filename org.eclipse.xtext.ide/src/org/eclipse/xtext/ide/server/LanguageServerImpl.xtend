@@ -36,7 +36,6 @@ import org.eclipse.lsp4j.DocumentOnTypeFormattingParams
 import org.eclipse.lsp4j.DocumentRangeFormattingParams
 import org.eclipse.lsp4j.DocumentSymbolParams
 import org.eclipse.lsp4j.FileChangeType
-import org.eclipse.lsp4j.Hover
 import org.eclipse.lsp4j.InitializeParams
 import org.eclipse.lsp4j.InitializeResult
 import org.eclipse.lsp4j.Location
@@ -377,7 +376,7 @@ import org.eclipse.xtext.validation.Issue
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val hoverService = resourceServiceProvider?.get(HoverService)
 			if (hoverService === null)
-				return new Hover(emptyList, null)
+				return HoverService.EMPTY_HOVER
 
 			return workspaceManager.doRead(uri) [ document, resource |
 				val offset = document.getOffSet(params.position)

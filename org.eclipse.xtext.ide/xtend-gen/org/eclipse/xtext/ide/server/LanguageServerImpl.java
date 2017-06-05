@@ -53,7 +53,6 @@ import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Location;
-import org.eclipse.lsp4j.MarkedString;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
@@ -534,8 +533,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       final HoverService hoverService = _get;
       if ((hoverService == null)) {
-        List<Either<String, MarkedString>> _emptyList = CollectionLiterals.<Either<String, MarkedString>>emptyList();
-        return new Hover(_emptyList, null);
+        return HoverService.EMPTY_HOVER;
       }
       final Function2<Document, XtextResource, Hover> _function_1 = (Document document, XtextResource resource) -> {
         final int offset = document.getOffSet(params.getPosition());
