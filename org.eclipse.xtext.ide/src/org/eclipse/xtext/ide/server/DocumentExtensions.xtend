@@ -45,7 +45,13 @@ class DocumentExtensions {
 
 	def Range newRange(Resource resource, int startOffset, int endOffset) {
 		val startPosition = resource.newPosition(startOffset)
+		if (startPosition === null) {
+			return null
+		}
 		val endPosition = resource.newPosition(endOffset)
+		if (endPosition === null) {
+			return null
+		}
 		return new Range(startPosition, endPosition)
 	}
 
@@ -55,10 +61,12 @@ class DocumentExtensions {
 	}
 
 	def Location newLocation(Resource resource, ITextRegion textRegion) {
-		val location = new Location
-		location.uri = resource.URI.toPath
-		location.range = resource.newRange(textRegion)
-		return location
+		val range = resource.newRange(textRegion)
+		if (range === null) {
+			return null
+		}
+		val uri = resource.URI.toPath
+		return new Location(uri, range)
 	}
 
 	def Location newLocation(EObject object) {

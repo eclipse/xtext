@@ -84,7 +84,9 @@ class DocumentSymbolService {
 			operationCanceledManager.checkCanceled(cancelIndicator)
 
 			resourceAccess.doRead(targetURI) [ obj |
-				locations += obj.newLocation
+				val location = obj.newLocation
+				if (location !== null)
+					locations += location
 			]
 		}
 		return locations
@@ -109,7 +111,9 @@ class DocumentSymbolService {
 			indexData,
 			new ReferenceAcceptor(resourceServiceProviderRegistry) [ reference |
 				resourceAccess.doRead(reference.sourceEObjectUri) [ obj |
-					locations += obj.newLocation(reference.EReference, reference.indexInList)
+					val location = obj.newLocation(reference.EReference, reference.indexInList)
+					if (location !== null)
+						locations += location
 				]
 			],
 			new CancelIndicatorProgressMonitor(cancelIndicator)
@@ -147,13 +151,19 @@ class DocumentSymbolService {
 	}
 
 	protected def SymbolInformation createSymbol(EObject object) {
-		val symbolName = object.symbolName
-		if(symbolName === null) return null
+		val name = object.symbolName
+		if(name === null) return null
+
+		val kind = object.symbolKind
+		if(kind === null) return null
+
+		val location = object.symbolLocation
+		if(location === null) return null
 
 		val symbol = new SymbolInformation
-		symbol.name = symbolName
-		symbol.kind = object.symbolKind
-		symbol.location = object.newLocation
+		symbol.name = name
+		symbol.kind = kind
+		symbol.location = location
 		return symbol
 	}
 
@@ -163,6 +173,10 @@ class DocumentSymbolService {
 
 	protected def SymbolKind getSymbolKind(EObject object) {
 		return object.eClass.symbolKind
+	}
+
+	protected def Location getSymbolLocation(EObject object) {
+		return object.newLocation
 	}
 
 	def List<? extends SymbolInformation> getSymbols(
@@ -175,17 +189,9 @@ class DocumentSymbolService {
 		for (description : resourceDescription.exportedObjects) {
 			operationCanceledManager.checkCanceled(cancelIndicator)
 			if (description.filter(query)) {
-				val symbol = description.createSymbol
-				if (symbol !== null) {
-					if (symbol.location !== null) {
-						symbols += symbol
-					} else {
-						resourceAccess.doRead(description.EObjectURI) [ obj |
-							symbol.location = obj.newLocation
-							symbols += symbol
-						]
-					}
-				}
+				description.createSymbol(resourceAccess) [ symbol |
+					symbols += symbol
+				]
 			}
 		}
 		return symbols
@@ -195,14 +201,34 @@ class DocumentSymbolService {
 		return description.qualifiedName.toLowerCase.toString.contains(query.toLowerCase)
 	}
 
+	protected def void createSymbol(
+		IEObjectDescription description,
+		IResourceAccess resourceAccess,
+		(SymbolInformation)=>void acceptor
+	) {
+		val name = description.symbolName
+		if(name === null) return;
+
+		val kind = description.symbolKind
+		if(kind === null) return;
+
+		description.getSymbolLocation(resourceAccess) [ location |
+			val symbol = new SymbolInformation(name, kind, location)
+			acceptor.apply(symbol)
+		]
+	}
+
 	protected def SymbolInformation createSymbol(IEObjectDescription description) {
 		val symbolName = description.symbolName
-		if(symbolName === null) return null
+		if(symbolName === null) return null;
+
+		val symbolKind = description.symbolKind
+		if(symbolKind === null) return null;
 
 		val symbol = new SymbolInformation
 		symbol.name = symbolName
-		symbol.kind = description.symbolKind
-		return symbol
+		symbol.kind = symbolKind
+		return symbol;
 	}
 
 	protected def String getSymbolName(IEObjectDescription description) {
@@ -213,12 +239,25 @@ class DocumentSymbolService {
 		return description.EClass.symbolKind
 	}
 
+	protected def void getSymbolLocation(
+		IEObjectDescription description,
+		IResourceAccess resourceAccess,
+		(Location)=>void acceptor
+	) {
+		resourceAccess.doRead(description.EObjectURI) [ obj |
+			val location = obj.symbolLocation
+			if (location !== null) {
+				acceptor.apply(location)
+			}
+		]
+	}
+
 	protected def String getSymbolName(QualifiedName qualifiedName) {
 		return qualifiedName?.toString
 	}
 
 	protected def SymbolKind getSymbolKind(EClass type) {
-		//TODO implement meaningful
+		// TODO implement meaningful
 		return SymbolKind.Property
 	}
 

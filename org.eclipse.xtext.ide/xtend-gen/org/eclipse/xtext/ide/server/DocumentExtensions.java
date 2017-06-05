@@ -53,7 +53,13 @@ public class DocumentExtensions {
   
   public Range newRange(final Resource resource, final int startOffset, final int endOffset) {
     final Position startPosition = this.newPosition(resource, startOffset);
+    if ((startPosition == null)) {
+      return null;
+    }
     final Position endPosition = this.newPosition(resource, endOffset);
+    if ((endPosition == null)) {
+      return null;
+    }
     return new Range(startPosition, endPosition);
   }
   
@@ -69,10 +75,12 @@ public class DocumentExtensions {
   }
   
   public Location newLocation(final Resource resource, final ITextRegion textRegion) {
-    final Location location = new Location();
-    location.setUri(this._uriExtensions.toPath(resource.getURI()));
-    location.setRange(this.newRange(resource, textRegion));
-    return location;
+    final Range range = this.newRange(resource, textRegion);
+    if ((range == null)) {
+      return null;
+    }
+    final String uri = this._uriExtensions.toPath(resource.getURI());
+    return new Location(uri, range);
   }
   
   public Location newLocation(final EObject object) {
