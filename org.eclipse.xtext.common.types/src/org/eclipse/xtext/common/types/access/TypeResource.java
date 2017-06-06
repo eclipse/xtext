@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -73,7 +74,10 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 		if (resourceSet == null) {
 			ResourceSet oldResourceSet = this.resourceSet;
 			if (oldResourceSet != null && !oldResourceSet.eDeliver()) {
-				oldResourceSet.eAdapters().remove(mirror);
+				if (mirror instanceof Adapter) {
+					Adapter adapter = (Adapter) mirror;
+					oldResourceSet.eAdapters().remove(adapter);
+				}
 				mirror = null;
 				eSetDeliver(false);
 				if (contents != null)
