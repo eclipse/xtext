@@ -10,6 +10,7 @@ package org.eclipse.xtext.ide.server
 import com.google.common.io.ByteStreams
 import com.google.inject.Guice
 import com.google.inject.Inject
+import com.google.inject.Module
 import java.io.ByteArrayInputStream
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -32,14 +33,13 @@ class ServerLauncher {
 	public static val NO_VALIDATE = OPTION_PREFIX + 'noValidate'
 
 	def static void main(String[] args) {
-		val launchArgs = new LaunchArgs
-		launchArgs.in = System.in
-		launchArgs.out = System.out
-		redirectStandardStreams(args)
-		launchArgs.trace = args.trace
-		launchArgs.validate = args.shouldValidate
+		launch(ServerLauncher.name, args, new ServerModule)
+	}
 
-		val launcher = Guice.createInjector(new ServerModule).getInstance(ServerLauncher)
+	def static void launch(String prefix, String[] args, Module... modules) {
+		val launchArgs = createLaunchArgs(prefix, args)
+
+		val launcher = Guice.createInjector(modules).getInstance(ServerLauncher)
 		launcher.start(launchArgs)
 	}
 
@@ -56,6 +56,16 @@ class ServerLauncher {
 		}
 	}
 
+	def static LaunchArgs createLaunchArgs(String prefix, String[] args) {
+		val launchArgs = new LaunchArgs
+		launchArgs.in = System.in
+		launchArgs.out = System.out
+		redirectStandardStreams(prefix, args)
+		launchArgs.trace = args.trace
+		launchArgs.validate = args.shouldValidate
+		return launchArgs
+	}
+
 	def static PrintWriter getTrace(String[] args) {
 		if (shouldTrace(args))
 			return createTrace
@@ -65,10 +75,6 @@ class ServerLauncher {
 		return new PrintWriter(System.out)
 	}
 
-	def static redirectStandardStreams(String[] args) {
-		redirectStandardStreams(ServerLauncher.name, args)
-	}
-
 	def static redirectStandardStreams(String prefix, String[] args) {
 		if (shouldLogStandardStreams(args)) {
 			logStandardStreams(prefix)
@@ -76,7 +82,7 @@ class ServerLauncher {
 			silentStandardStreams
 		}
 	}
-	
+
 	def static boolean shouldValidate(String[] args) {
 		return !args.testArg(NO_VALIDATE)
 	}

@@ -10,6 +10,7 @@ package org.eclipse.xtext.ide.server;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Module;
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -43,14 +44,14 @@ public class ServerLauncher {
   public final static String NO_VALIDATE = (ServerLauncher.OPTION_PREFIX + "noValidate");
   
   public static void main(final String[] args) {
-    final LaunchArgs launchArgs = new LaunchArgs();
-    launchArgs.setIn(System.in);
-    launchArgs.setOut(System.out);
-    ServerLauncher.redirectStandardStreams(args);
-    launchArgs.setTrace(ServerLauncher.getTrace(args));
-    launchArgs.setValidate(ServerLauncher.shouldValidate(args));
+    String _name = ServerLauncher.class.getName();
     ServerModule _serverModule = new ServerModule();
-    final ServerLauncher launcher = Guice.createInjector(_serverModule).<ServerLauncher>getInstance(ServerLauncher.class);
+    ServerLauncher.launch(_name, args, _serverModule);
+  }
+  
+  public static void launch(final String prefix, final String[] args, final Module... modules) {
+    final LaunchArgs launchArgs = ServerLauncher.createLaunchArgs(prefix, args);
+    final ServerLauncher launcher = Guice.createInjector(modules).<ServerLauncher>getInstance(ServerLauncher.class);
     launcher.start(launchArgs);
   }
   
@@ -72,6 +73,16 @@ public class ServerLauncher {
     }
   }
   
+  public static LaunchArgs createLaunchArgs(final String prefix, final String[] args) {
+    final LaunchArgs launchArgs = new LaunchArgs();
+    launchArgs.setIn(System.in);
+    launchArgs.setOut(System.out);
+    ServerLauncher.redirectStandardStreams(prefix, args);
+    launchArgs.setTrace(ServerLauncher.getTrace(args));
+    launchArgs.setValidate(ServerLauncher.shouldValidate(args));
+    return launchArgs;
+  }
+  
   public static PrintWriter getTrace(final String[] args) {
     boolean _shouldTrace = ServerLauncher.shouldTrace(args);
     if (_shouldTrace) {
@@ -82,10 +93,6 @@ public class ServerLauncher {
   
   public static PrintWriter createTrace() {
     return new PrintWriter(System.out);
-  }
-  
-  public static void redirectStandardStreams(final String[] args) {
-    ServerLauncher.redirectStandardStreams(ServerLauncher.class.getName(), args);
   }
   
   public static void redirectStandardStreams(final String prefix, final String[] args) {
