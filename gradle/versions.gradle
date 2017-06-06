@@ -17,6 +17,7 @@ ext.versions = [
 	'eclipseOSGI' : '3.11.2',
 	'emfCommon': '[2.10.1,3)',
 	'emfEcore': '[2.10.2,3)',
+	'emfChange': '[2.10.2,3)',
 	'emfMwe': '1.3.20.201605261059',
 	'emfMwe2': '2.9.0.201605261059',
 	'xpand': '2.0.0',
