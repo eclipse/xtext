@@ -27,27 +27,38 @@ class ServerLauncher {
 
 	public static val OPTION_PREFIX = '-Dorg.eclipse.xtext.ide.server.'
 	public static val LOG_STANDARD_STREAMS = OPTION_PREFIX + 'logStandardStreams'
+	public static val TRACE = OPTION_PREFIX + 'trace'
 
 	def static void main(String[] args) {
 		val stdin = System.in
 		val stdout = System.out
 		redirectStandardStreams(args)
+		val trace = args.trace
+
 		val launcher = Guice.createInjector(new ServerModule).getInstance(ServerLauncher)
-		launcher.start(stdin, stdout)
+		launcher.start(stdin, stdout, trace)
 	}
 
 	@Inject LanguageServerImpl languageServer
 
-	def void start(InputStream in, OutputStream out) {
-		println("Starting Xtext Language Server.")
-		val launcher = Launcher.createLauncher(languageServer, LanguageClient, in, out, true,
-			new PrintWriter(System.out))
+	def void start(InputStream in, OutputStream out, PrintWriter trace) {
+		println("Xtext Language Server is starting.")
+		val launcher = Launcher.createLauncher(languageServer, LanguageClient, in, out, true, trace)
 		languageServer.connect(launcher.remoteProxy)
 		val future = launcher.startListening
-		println("started.")
+		println("Xtext Language Server has been started.")
 		while (!future.done) {
 			Thread.sleep(10_000l)
 		}
+	}
+
+	def static PrintWriter getTrace(String[] args) {
+		if (shouldTrace(args))
+			return createTrace
+	}
+
+	def static PrintWriter createTrace() {
+		return new PrintWriter(System.out)
 	}
 
 	def static redirectStandardStreams(String[] args) {
@@ -62,12 +73,20 @@ class ServerLauncher {
 		}
 	}
 
-	def static boolean shouldLogStandardStreams(String[] args) {
-		return args.exists[shouldLogStandardStreams]
+	def static boolean shouldTrace(String[] args) {
+		return args.testArg(TRACE)
 	}
 
-	def static boolean shouldLogStandardStreams(String arg) {
-		return arg == LOG_STANDARD_STREAMS || arg == 'debug'
+	def static boolean shouldLogStandardStreams(String[] args) {
+		return args.testArg(LOG_STANDARD_STREAMS, 'debug')
+	}
+
+	def static boolean testArg(String[] args, String ... values) {
+		return args.exists[testArg(values)]
+	}
+
+	def static boolean testArg(String arg, String ... values) {
+		return values.exists[value|value === arg]
 	}
 
 	def static void logStandardStreams(String prefix) {

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ide.server;
 
-import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -38,32 +37,46 @@ public class ServerLauncher {
   
   public final static String LOG_STANDARD_STREAMS = (ServerLauncher.OPTION_PREFIX + "logStandardStreams");
   
+  public final static String TRACE = (ServerLauncher.OPTION_PREFIX + "trace");
+  
   public static void main(final String[] args) {
     final InputStream stdin = System.in;
     final PrintStream stdout = System.out;
     ServerLauncher.redirectStandardStreams(args);
+    final PrintWriter trace = ServerLauncher.getTrace(args);
     ServerModule _serverModule = new ServerModule();
     final ServerLauncher launcher = Guice.createInjector(_serverModule).<ServerLauncher>getInstance(ServerLauncher.class);
-    launcher.start(stdin, stdout);
+    launcher.start(stdin, stdout, trace);
   }
   
   @Inject
   private LanguageServerImpl languageServer;
   
-  public void start(final InputStream in, final OutputStream out) {
+  public void start(final InputStream in, final OutputStream out, final PrintWriter trace) {
     try {
-      InputOutput.<String>println("Starting Xtext Language Server.");
-      PrintWriter _printWriter = new PrintWriter(System.out);
-      final Launcher<LanguageClient> launcher = Launcher.<LanguageClient>createLauncher(this.languageServer, LanguageClient.class, in, out, true, _printWriter);
+      InputOutput.<String>println("Xtext Language Server is starting.");
+      final Launcher<LanguageClient> launcher = Launcher.<LanguageClient>createLauncher(this.languageServer, LanguageClient.class, in, out, true, trace);
       this.languageServer.connect(launcher.getRemoteProxy());
       final Future<?> future = launcher.startListening();
-      InputOutput.<String>println("started.");
+      InputOutput.<String>println("Xtext Language Server has been started.");
       while ((!future.isDone())) {
         Thread.sleep(10_000l);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public static PrintWriter getTrace(final String[] args) {
+    boolean _shouldTrace = ServerLauncher.shouldTrace(args);
+    if (_shouldTrace) {
+      return ServerLauncher.createTrace();
+    }
+    return null;
+  }
+  
+  public static PrintWriter createTrace() {
+    return new PrintWriter(System.out);
   }
   
   public static void redirectStandardStreams(final String[] args) {
@@ -79,15 +92,26 @@ public class ServerLauncher {
     }
   }
   
+  public static boolean shouldTrace(final String[] args) {
+    return ServerLauncher.testArg(args, ServerLauncher.TRACE);
+  }
+  
   public static boolean shouldLogStandardStreams(final String[] args) {
+    return ServerLauncher.testArg(args, ServerLauncher.LOG_STANDARD_STREAMS, "debug");
+  }
+  
+  public static boolean testArg(final String[] args, final String... values) {
     final Function1<String, Boolean> _function = (String it) -> {
-      return Boolean.valueOf(ServerLauncher.shouldLogStandardStreams(it));
+      return Boolean.valueOf(ServerLauncher.testArg(values));
     };
     return IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), _function);
   }
   
-  public static boolean shouldLogStandardStreams(final String arg) {
-    return (Objects.equal(arg, ServerLauncher.LOG_STANDARD_STREAMS) || Objects.equal(arg, "debug"));
+  public static boolean testArg(final String arg, final String... values) {
+    final Function1<String, Boolean> _function = (String value) -> {
+      return Boolean.valueOf((value == arg));
+    };
+    return IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(values)), _function);
   }
   
   public static void logStandardStreams(final String prefix) {
