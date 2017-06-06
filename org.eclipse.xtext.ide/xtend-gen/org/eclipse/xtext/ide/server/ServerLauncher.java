@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -116,15 +117,15 @@ public class ServerLauncher {
   }
   
   public static boolean testArg(final String[] args, final String... values) {
-    final Function1<String, Boolean> _function = (String it) -> {
-      return Boolean.valueOf(ServerLauncher.testArg(values));
+    final Function1<String, Boolean> _function = (String arg) -> {
+      return Boolean.valueOf(ServerLauncher.testArg(arg, values));
     };
     return IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), _function);
   }
   
   public static boolean testArg(final String arg, final String... values) {
     final Function1<String, Boolean> _function = (String value) -> {
-      return Boolean.valueOf((value == arg));
+      return Boolean.valueOf(Objects.equal(value, arg));
     };
     return IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(values)), _function);
   }

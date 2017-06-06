@@ -95,11 +95,11 @@ class ServerLauncher {
 	}
 
 	def static boolean testArg(String[] args, String ... values) {
-		return args.exists[testArg(values)]
+		return args.exists[arg|arg.testArg(values)]
 	}
 
 	def static boolean testArg(String arg, String ... values) {
-		return values.exists[value|value === arg]
+		return values.exists[value|value == arg]
 	}
 
 	def static void logStandardStreams(String prefix) {
