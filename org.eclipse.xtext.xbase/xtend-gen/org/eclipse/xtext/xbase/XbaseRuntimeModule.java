@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.formatting.XbaseFormatter;
  */
 @SuppressWarnings("all")
 public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
-  @SuppressWarnings("deprecation")
+  @Deprecated
   @Override
   public Class<? extends IFormatter> bindIFormatter() {
     return XbaseFormatter.class;
