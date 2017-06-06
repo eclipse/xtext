@@ -20,6 +20,7 @@ import java.util.concurrent.Future;
 import org.eclipse.lsp4j.jsonrpc.Launcher;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
+import org.eclipse.xtext.ide.server.LaunchArgs;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -39,23 +40,27 @@ public class ServerLauncher {
   
   public final static String TRACE = (ServerLauncher.OPTION_PREFIX + "trace");
   
+  public final static String NO_VALIDATE = (ServerLauncher.OPTION_PREFIX + "noValidate");
+  
   public static void main(final String[] args) {
-    final InputStream stdin = System.in;
-    final PrintStream stdout = System.out;
+    final LaunchArgs launchArgs = new LaunchArgs();
+    launchArgs.setIn(System.in);
+    launchArgs.setOut(System.out);
     ServerLauncher.redirectStandardStreams(args);
-    final PrintWriter trace = ServerLauncher.getTrace(args);
+    launchArgs.setTrace(ServerLauncher.getTrace(args));
+    launchArgs.setValidate(ServerLauncher.shouldValidate(args));
     ServerModule _serverModule = new ServerModule();
     final ServerLauncher launcher = Guice.createInjector(_serverModule).<ServerLauncher>getInstance(ServerLauncher.class);
-    launcher.start(stdin, stdout, trace);
+    launcher.start(launchArgs);
   }
   
   @Inject
   private LanguageServerImpl languageServer;
   
-  public void start(final InputStream in, final OutputStream out, final PrintWriter trace) {
+  public void start(final LaunchArgs it) {
     try {
       InputOutput.<String>println("Xtext Language Server is starting.");
-      final Launcher<LanguageClient> launcher = Launcher.<LanguageClient>createLauncher(this.languageServer, LanguageClient.class, in, out, true, trace);
+      final Launcher<LanguageClient> launcher = Launcher.<LanguageClient>createLauncher(this.languageServer, LanguageClient.class, it.getIn(), it.getOut(), it.isValidate(), it.getTrace());
       this.languageServer.connect(launcher.getRemoteProxy());
       final Future<?> future = launcher.startListening();
       InputOutput.<String>println("Xtext Language Server has been started.");
@@ -90,6 +95,11 @@ public class ServerLauncher {
     } else {
       ServerLauncher.silentStandardStreams();
     }
+  }
+  
+  public static boolean shouldValidate(final String[] args) {
+    boolean _testArg = ServerLauncher.testArg(args, ServerLauncher.NO_VALIDATE);
+    return (!_testArg);
   }
   
   public static boolean shouldTrace(final String[] args) {

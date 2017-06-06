@@ -18,6 +18,7 @@ import java.io.PrintStream
 import java.io.PrintWriter
 import org.eclipse.lsp4j.jsonrpc.Launcher
 import org.eclipse.lsp4j.services.LanguageClient
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -28,22 +29,25 @@ class ServerLauncher {
 	public static val OPTION_PREFIX = '-Dorg.eclipse.xtext.ide.server.'
 	public static val LOG_STANDARD_STREAMS = OPTION_PREFIX + 'logStandardStreams'
 	public static val TRACE = OPTION_PREFIX + 'trace'
+	public static val NO_VALIDATE = OPTION_PREFIX + 'noValidate'
 
 	def static void main(String[] args) {
-		val stdin = System.in
-		val stdout = System.out
+		val launchArgs = new LaunchArgs
+		launchArgs.in = System.in
+		launchArgs.out = System.out
 		redirectStandardStreams(args)
-		val trace = args.trace
+		launchArgs.trace = args.trace
+		launchArgs.validate = args.shouldValidate
 
 		val launcher = Guice.createInjector(new ServerModule).getInstance(ServerLauncher)
-		launcher.start(stdin, stdout, trace)
+		launcher.start(launchArgs)
 	}
 
 	@Inject LanguageServerImpl languageServer
 
-	def void start(InputStream in, OutputStream out, PrintWriter trace) {
+	def void start(LaunchArgs it) {
 		println("Xtext Language Server is starting.")
-		val launcher = Launcher.createLauncher(languageServer, LanguageClient, in, out, true, trace)
+		val launcher = Launcher.createLauncher(languageServer, LanguageClient, in, out, validate, trace)
 		languageServer.connect(launcher.remoteProxy)
 		val future = launcher.startListening
 		println("Xtext Language Server has been started.")
@@ -71,6 +75,10 @@ class ServerLauncher {
 		} else {
 			silentStandardStreams
 		}
+	}
+	
+	def static boolean shouldValidate(String[] args) {
+		return !args.testArg(NO_VALIDATE)
 	}
 
 	def static boolean shouldTrace(String[] args) {
@@ -117,4 +125,12 @@ class ServerLauncher {
 		new ByteArrayInputStream(newByteArrayOfSize(0))
 	}
 
+}
+
+@Accessors
+class LaunchArgs {
+	InputStream in
+	OutputStream out
+	PrintWriter trace
+	boolean validate
 }
