@@ -27,10 +27,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 class ServerLauncher {
 
-	public static val OPTION_PREFIX = '-Dorg.eclipse.xtext.ide.server.'
-	public static val LOG_STANDARD_STREAMS = OPTION_PREFIX + 'logStandardStreams'
-	public static val TRACE = OPTION_PREFIX + 'trace'
-	public static val NO_VALIDATE = OPTION_PREFIX + 'noValidate'
+	public static val LOG = '-log'
+	public static val TRACE = '-trace'
+	public static val NO_VALIDATE = '-noValidate'
 
 	def static void main(String[] args) {
 		launch(ServerLauncher.name, args, new ServerModule)
@@ -92,7 +91,7 @@ class ServerLauncher {
 	}
 
 	def static boolean shouldLogStandardStreams(String[] args) {
-		return args.testArg(LOG_STANDARD_STREAMS, 'debug')
+		return args.testArg(ServerLauncher.LOG, 'debug')
 	}
 
 	def static boolean testArg(String[] args, String ... values) {

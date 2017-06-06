@@ -35,13 +35,11 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class ServerLauncher {
-  public final static String OPTION_PREFIX = "-Dorg.eclipse.xtext.ide.server.";
+  public final static String LOG = "-log";
   
-  public final static String LOG_STANDARD_STREAMS = (ServerLauncher.OPTION_PREFIX + "logStandardStreams");
+  public final static String TRACE = "-trace";
   
-  public final static String TRACE = (ServerLauncher.OPTION_PREFIX + "trace");
-  
-  public final static String NO_VALIDATE = (ServerLauncher.OPTION_PREFIX + "noValidate");
+  public final static String NO_VALIDATE = "-noValidate";
   
   public static void main(final String[] args) {
     String _name = ServerLauncher.class.getName();
@@ -114,7 +112,7 @@ public class ServerLauncher {
   }
   
   public static boolean shouldLogStandardStreams(final String[] args) {
-    return ServerLauncher.testArg(args, ServerLauncher.LOG_STANDARD_STREAMS, "debug");
+    return ServerLauncher.testArg(args, ServerLauncher.LOG, "debug");
   }
   
   public static boolean testArg(final String[] args, final String... values) {
