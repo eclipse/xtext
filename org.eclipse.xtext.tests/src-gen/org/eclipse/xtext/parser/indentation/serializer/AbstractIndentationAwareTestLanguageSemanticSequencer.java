@@ -10,7 +10,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.ChildList;
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.IndentationAwareTestLanguagePackage;
+import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.OtherTreeNode;
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree;
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.TreeNode;
 import org.eclipse.xtext.parser.indentation.services.IndentationAwareTestLanguageGrammarAccess;
@@ -31,6 +33,12 @@ public abstract class AbstractIndentationAwareTestLanguageSemanticSequencer exte
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == IndentationAwareTestLanguagePackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case IndentationAwareTestLanguagePackage.CHILD_LIST:
+				sequence_ChildList(context, (ChildList) semanticObject); 
+				return; 
+			case IndentationAwareTestLanguagePackage.OTHER_TREE_NODE:
+				sequence_OtherTreeNode(context, (OtherTreeNode) semanticObject); 
+				return; 
 			case IndentationAwareTestLanguagePackage.TREE:
 				sequence_Tree(context, (Tree) semanticObject); 
 				return; 
@@ -41,6 +49,30 @@ public abstract class AbstractIndentationAwareTestLanguageSemanticSequencer exte
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Contexts:
+	 *     ChildList returns ChildList
+	 *
+	 * Constraint:
+	 *     children+=OtherTreeNode+
+	 */
+	protected void sequence_ChildList(ISerializationContext context, ChildList semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     OtherTreeNode returns OtherTreeNode
+	 *
+	 * Constraint:
+	 *     (name=STRING childList=ChildList?)
+	 */
+	protected void sequence_OtherTreeNode(ISerializationContext context, OtherTreeNode semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Contexts:
@@ -59,7 +91,7 @@ public abstract class AbstractIndentationAwareTestLanguageSemanticSequencer exte
 	 *     Tree returns Tree
 	 *
 	 * Constraint:
-	 *     nodes+=TreeNode*
+	 *     (nodes+=TreeNode* moreNodes+=OtherTreeNode*)
 	 */
 	protected void sequence_Tree(ISerializationContext context, Tree semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
