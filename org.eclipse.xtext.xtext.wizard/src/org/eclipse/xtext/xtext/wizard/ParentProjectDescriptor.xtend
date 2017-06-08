@@ -456,6 +456,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<version>${tycho-version}</version>
 								<configuration>
 									<compilerArgument>-err:-forbidden</compilerArgument>
+									<useProjectSettings>false</useProjectSettings>
 								</configuration>
 							</plugin>
 							«ENDIF»

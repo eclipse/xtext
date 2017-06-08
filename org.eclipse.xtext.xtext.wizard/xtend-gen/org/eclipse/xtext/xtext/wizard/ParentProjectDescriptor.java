@@ -1495,6 +1495,10 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("<compilerArgument>-err:-forbidden</compilerArgument>");
           _builder.newLine();
           _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<useProjectSettings>false</useProjectSettings>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
           _builder.append("\t");
           _builder.append("</configuration>");
           _builder.newLine();
