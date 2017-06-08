@@ -63,8 +63,8 @@ public class RequestManager {
    */
   public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
     try {
+      this.semaphore.acquire(this.MAX_PERMITS);
       try {
-        this.semaphore.acquire(this.MAX_PERMITS);
         final CancelIndicator _function = () -> {
           return false;
         };
@@ -105,9 +105,9 @@ public class RequestManager {
     final Function<CancelChecker, V> _function = (CancelChecker it) -> {
       try {
         final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(it);
-        this.cancelIndicators.add(cancelIndicator);
         this.semaphore.acquire(1);
         try {
+          this.cancelIndicators.add(cancelIndicator);
           cancelIndicator.checkCanceled();
           final CancelIndicator _function_1 = () -> {
             cancelIndicator.checkCanceled();
