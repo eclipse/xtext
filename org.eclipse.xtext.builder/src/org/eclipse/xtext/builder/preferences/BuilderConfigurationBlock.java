@@ -47,6 +47,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @author Stephane Galland - Add getOutputConfigurations()
  * @since 2.1
  */
 public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
@@ -91,6 +92,16 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 		return mainComp;
 	}
 
+	/** Replies the output configurations from the given project that should be displayed by the configuration block.
+	 *
+	 * @param project the project, usually the result of {@link #getProject()}.
+	 * @return the output configurations.
+	 * @since 2.13
+	 */
+	protected Set<OutputConfiguration> getOutputConfigurations(IProject project) {
+		return configurationProvider.getOutputConfigurations(project);
+	}
+
 	private Composite createBuildPathTabContent(Composite parent) {
 		int columns = 3;
 		final ScrolledPageContent pageContent = new ScrolledPageContent(parent);
@@ -110,7 +121,7 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 
 		createGeneralSectionItems(othersComposite);
 
-		Set<OutputConfiguration> outputConfigurations = configurationProvider.getOutputConfigurations(getProject());
+		Set<OutputConfiguration> outputConfigurations = getOutputConfigurations(getProject());
 
 		for (OutputConfiguration outputConfiguration : outputConfigurations) {
 			label = outputConfiguration.getDescription();
