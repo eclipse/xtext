@@ -66,6 +66,20 @@ Workflow {
 			}
 		}
 		language = StandardLanguage {
+			name = "org.eclipse.xtext.ide.tests.testlanguage.IndentationAwareUiTestLanguage"
+			fileExtensions = "indentationAwareUiTestLang"
+
+			serializer = {
+				generateStub = false
+			}
+			validator = {
+				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+			junitSupport = {
+				generateStub = false
+			}
+		}
+		language = StandardLanguage {
 			name = "org.eclipse.xtext.ide.tests.testlanguage.PartialContentAssistTestLanguage"
 			fileExtensions = "partialcontentassisttestlang"
 			serializer = {

@@ -12,6 +12,7 @@ dependencies {
 sourceSets.test.java {
 	srcDir 'testlang-src'
 	srcDir 'testlang-src-gen'
+	srcDir 'suites'
 }
 sourceSets.test.resources {
 	srcDir 'testlang-src'
