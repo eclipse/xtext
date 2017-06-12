@@ -18,6 +18,6 @@ import org.junit.runners.Suite.SuiteClasses
  */
 @RunWith(XtextSmokeTestRunner)
 @ProcessedBy(value = PartialParsingProcessor, processInParallel = true)
-@SuiteClasses(IndentationAwareLanguageTest)
+@SuiteClasses(IndentationAwareLanguageTest, NodeModelTest)
 class IndentationAwarePartialParsingTest {
 }

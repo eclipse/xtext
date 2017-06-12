@@ -207,6 +207,49 @@ class NodeModelTest {
 		'''.toString.trim.assertEquals(tree.asText)
 	}
 	
+	@Test
+	def void testIgnoreEmptyLines_5() {
+		// first<LB>
+		//   abc<LB>
+		// <LB>
+		// <EOF>
+		val tree = 'first\n\t\tabc\n\n'.rootNode
+		'''
+			[ID:first][-WS:
+			\t\t][INDENT:][ID:abc][-WS:
+			][DEDENT:][-WS:
+			]
+		'''.toString.trim.assertEquals(tree.asText)
+	}
+	
+	@Test
+	def void testIgnoreEmptyLines_6() {
+		// first<LB>
+		//   abc<LB>
+		//   <LB>
+		// <EOF>
+		val tree = 'first\n\t\tabc\n\t\n'.rootNode
+		'''
+			[ID:first][-WS:
+			\t\t][INDENT:][ID:abc][-WS:
+			][DEDENT:][-WS:\t
+			]
+		'''.toString.trim.assertEquals(tree.asText)
+	}
+	
+	@Test
+	def void testIgnoreEmptyLines_7() {
+		// a<LB>
+		//   b<LB>
+		//     <EOF>
+		val tree = 'a\n\tb\n\t '.rootNode
+		'''
+			[ID:a][-WS:
+			\t][INDENT:][ID:b][-WS:
+			\t ][DEDENT:]
+		'''.toString.trim.assertEquals(tree.asText)
+	}
+	
 //	@Test
 //	def void testTree_02() {
 //		val tree = '''

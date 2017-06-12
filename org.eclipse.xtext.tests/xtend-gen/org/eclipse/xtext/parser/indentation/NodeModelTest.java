@@ -296,6 +296,49 @@ public class NodeModelTest {
     Assert.assertEquals(_builder.toString().trim(), this.asText(tree));
   }
   
+  @Test
+  public void testIgnoreEmptyLines_5() {
+    final ICompositeNode tree = this.getRootNode("first\n\t\tabc\n\n");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("[ID:first][-WS:");
+    _builder.newLine();
+    _builder.append("\\t\\t][INDENT:][ID:abc][-WS:");
+    _builder.newLine();
+    _builder.append("][DEDENT:][-WS:");
+    _builder.newLine();
+    _builder.append("]");
+    _builder.newLine();
+    Assert.assertEquals(_builder.toString().trim(), this.asText(tree));
+  }
+  
+  @Test
+  public void testIgnoreEmptyLines_6() {
+    final ICompositeNode tree = this.getRootNode("first\n\t\tabc\n\t\n");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("[ID:first][-WS:");
+    _builder.newLine();
+    _builder.append("\\t\\t][INDENT:][ID:abc][-WS:");
+    _builder.newLine();
+    _builder.append("][DEDENT:][-WS:\\t");
+    _builder.newLine();
+    _builder.append("]");
+    _builder.newLine();
+    Assert.assertEquals(_builder.toString().trim(), this.asText(tree));
+  }
+  
+  @Test
+  public void testIgnoreEmptyLines_7() {
+    final ICompositeNode tree = this.getRootNode("a\n\tb\n\t ");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("[ID:a][-WS:");
+    _builder.newLine();
+    _builder.append("\\t][INDENT:][ID:b][-WS:");
+    _builder.newLine();
+    _builder.append("\\t ][DEDENT:]");
+    _builder.newLine();
+    Assert.assertEquals(_builder.toString().trim(), this.asText(tree));
+  }
+  
   private ICompositeNode getRootNode(final CharSequence seq) {
     try {
       final Tree model = this.parseHelper.parse(seq);
