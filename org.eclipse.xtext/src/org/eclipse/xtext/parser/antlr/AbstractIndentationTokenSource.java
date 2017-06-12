@@ -95,38 +95,50 @@ public abstract class AbstractIndentationTokenSource extends AbstractSplittingTo
 		String text = token.getText();
 		int indentation = computeIndentation(text);
 		if (indentation == -1 || indentation == currentIndentation) {
+			// no change of indentation level detected simply process the token
 			result.accept(token);
 		} else if (indentation > currentIndentation) {
+			// indentation level increased
 			splitIntoBeginToken(token, indentation, result);
 		} else if (indentation < currentIndentation) {
-			// emit whitespace including newline
-			int charCount = text.length() - computeIndentationRelevantCharCount(text);
-			String leading = text.substring(0, charCount);
-			if (leading.length() > 0) {
-				CommonToken leadingToken = createToken((CommonToken) token, leading, null, null, nextOffset, nextOffset + charCount - 1, null);
-				result.accept(leadingToken);
-				nextOffset += charCount;	
+			// indentation level decreased
+			int charCount = computeIndentationRelevantCharCount(text);
+			if (charCount > 0) {
+				// emit whitespace including newline
+				splitWithText(token, text.substring(0, charCount), result);	
 			}
 			// emit end tokens at the beginning of the line
-			while(indentation < currentIndentation) {
-				indentationStack.pop();
-				currentIndentation = indentationStack.peek();
-				result.accept(createEndToken(nextOffset));
+			decreaseIndentation(indentation, result);
+			if (charCount != text.length()) {
+				handleRemainingText(token, text.substring(charCount), indentation, result);
 			}
-			String trailing = text.substring(charCount);
-			if (trailing.length() != 0) {
-				CommonToken trailingToken = createToken((CommonToken) token, trailing, null, null, nextOffset, null, null);
-				if (indentation > currentIndentation) {
-					splitIntoBeginToken(trailingToken, indentation, result);
-					return;
-				}
-				// emit pending whitespace
-				result.accept(trailingToken);	
-			}
-			
 		} else {
 			throw new IllegalStateException(String.valueOf(indentation));
 		}
+	}
+
+	protected void handleRemainingText(Token token, String text, int indentation, ITokenAcceptor result) {
+		CommonToken trailingToken = createToken((CommonToken) token, text, null, null, nextOffset, null, null);
+		if (indentation > currentIndentation) {
+			splitIntoBeginToken(trailingToken, indentation, result);
+		} else {
+			// emit pending whitespace
+			result.accept(trailingToken);
+		}
+	}
+
+	protected void decreaseIndentation(int indentation, ITokenAcceptor result) {
+		while(indentation < currentIndentation) {
+			indentationStack.pop();
+			currentIndentation = indentationStack.peek();
+			result.accept(createEndToken(nextOffset));
+		}
+	}
+
+	protected void splitWithText(Token token, String text, ITokenAcceptor result) {
+		CommonToken leadingToken = createToken((CommonToken) token, text, null, null, nextOffset, nextOffset + text.length() - 1, null);
+		result.accept(leadingToken);
+		nextOffset += text.length();
 	}
 
 	private void splitIntoBeginToken(Token token, int indentation, ITokenAcceptor result) {
@@ -134,6 +146,7 @@ public abstract class AbstractIndentationTokenSource extends AbstractSplittingTo
 		if (shouldEmitPendingEndTokens()) {
 			Token nextToken = getDelegate().nextToken();
 			if (shouldSplitToken(nextToken)) {
+				nextOffset = ((CommonToken) token).getStopIndex() + 1;
 				doSplitToken(nextToken, result);
 			} else {
 				indentationStack.push(indentation);
@@ -171,9 +184,16 @@ public abstract class AbstractIndentationTokenSource extends AbstractSplittingTo
 	
 	protected int computeIndentationRelevantCharCount(String text) {
 		int result = 0;
-		for(int i = text.length() - 1; i>=0; i--) {
-			char c = text.charAt(i);
-			if (c == '\n' || c == '\r') {
+		while(result < text.length()) {
+			char c = text.charAt(result);
+			if (c == '\n') {
+				result++;
+				if (result < text.length()) {
+					c = text.charAt(result);
+					if (c == '\r') {
+						result++;
+					}
+				}
 				return result;
 			}
 			result++;
