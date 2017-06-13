@@ -9,14 +9,22 @@ dependencies {
 	compile "org.eclipse.lsp4j:org.eclipse.lsp4j:$versions.lsp4j"
 }
 
-sourceSets.test.java {
+sourceSets.main.java {
 	srcDir 'testlang-src'
 	srcDir 'testlang-src-gen'
+}
+
+sourceSets.test.java {
 	srcDir 'suites'
 }
-sourceSets.test.resources {
+
+sourceSets.main.resources {
 	srcDir 'testlang-src'
 	srcDir 'testlang-src-gen'
+}
+
+test {   
+   exclude '**/*Suite.class'
 }
 
 task generateTestLanguages(type: XtextGeneratorTask) {

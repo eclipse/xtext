@@ -21,5 +21,5 @@ import org.junit.runners.Suite;
 @ProcessedBy(value = PartialParsingProcessor.class, processInParallel = true)
 @Suite.SuiteClasses(CompletionPrefixProviderTest.class)
 @SuppressWarnings("all")
-public class IndentationAwarePartialParsingTest {
+public class IndentationAwarePartialParsingSuite {
 }

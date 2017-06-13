@@ -18,7 +18,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ 
 	CompletionPrefixProviderTest.class,
 	IndentationAwareCompletionPrefixProviderTest.class,
-	IndentationAwarePartialParsingTest.class
+	IndentationAwarePartialParsingSuite.class
 })
 public class IndentationTestLanguageSuite {
 

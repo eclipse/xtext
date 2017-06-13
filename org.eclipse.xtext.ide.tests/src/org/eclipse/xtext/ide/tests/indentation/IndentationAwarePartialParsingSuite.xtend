@@ -19,5 +19,5 @@ import org.junit.runners.Suite.SuiteClasses
 @RunWith(XtextSmokeTestRunner)
 @ProcessedBy(value = PartialParsingProcessor, processInParallel = true)
 @SuiteClasses(CompletionPrefixProviderTest)
-class IndentationAwarePartialParsingTest {
+class IndentationAwarePartialParsingSuite {
 }
