@@ -22,5 +22,5 @@ import org.junit.runners.Suite;
 @ProcessedBy(value = PartialParsingProcessor.class, processInParallel = true)
 @Suite.SuiteClasses({ IndentationAwareLanguageTest.class, NodeModelTest.class })
 @SuppressWarnings("all")
-public class IndentationAwarePartialParsingSuite {
+public class IndentationAwarePartialParsingTest {
 }
