@@ -9,16 +9,13 @@ dependencies {
 	compile "org.eclipse.lsp4j:org.eclipse.lsp4j:$versions.lsp4j"
 }
 
-sourceSets.main.java {
+sourceSets.test.java {
+	srcDir 'suites'
 	srcDir 'testlang-src'
 	srcDir 'testlang-src-gen'
 }
 
-sourceSets.test.java {
-	srcDir 'suites'
-}
-
-sourceSets.main.resources {
+sourceSets.test.resources {
 	srcDir 'testlang-src'
 	srcDir 'testlang-src-gen'
 }
