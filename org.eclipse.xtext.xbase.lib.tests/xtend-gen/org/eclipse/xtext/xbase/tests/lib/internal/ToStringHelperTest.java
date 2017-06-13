@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
+@Deprecated
 @SuppressWarnings("all")
 public class ToStringHelperTest {
   public static class OtherClass {

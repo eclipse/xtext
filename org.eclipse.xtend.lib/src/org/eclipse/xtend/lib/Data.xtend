@@ -13,7 +13,6 @@ import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 
 /**
  * This annotation is used by the Xtend compiler.
@@ -101,7 +100,7 @@ class DataProcessor extends AbstractClassProcessor {
 				addAnnotation(newAnnotationReference(Override))
 				addAnnotation(newAnnotationReference(Pure))
 				body = '''
-					String result = new «ToStringHelper»().toString(this);
+					String result = new «org.eclipse.xtext.xbase.lib.util.ToStringHelper»().toString(this);
 					return result;
 				'''
 			]

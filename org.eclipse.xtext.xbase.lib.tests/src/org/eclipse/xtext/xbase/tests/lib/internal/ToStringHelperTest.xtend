@@ -2,18 +2,18 @@ package org.eclipse.xtext.xbase.tests.lib.internal
 
 import java.lang.annotation.RetentionPolicy
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtend.lib.annotations.ToString
 
+@Deprecated
 class ToStringHelperTest {
 
 	@Test def void testToString() {
-		val helper = new ToStringHelper
+		val helper = new org.eclipse.xtext.xbase.lib.util.ToStringHelper
 		assertEquals(toUnix(
 				'''
 		MyEntity [
@@ -76,7 +76,7 @@ class ToStringHelperTest {
 	}
 
 	@Test def void recursionHandling() {
-		val helper = new ToStringHelper
+		val helper = new org.eclipse.xtext.xbase.lib.util.ToStringHelper
 		val obj = new OtherClass
 		obj.name = 'foo'
 		obj.other = obj
@@ -90,7 +90,7 @@ class ToStringHelperTest {
 	}
 
 	@Test def void recursionHandling_02() {
-		val helper = new ToStringHelper
+		val helper = new org.eclipse.xtext.xbase.lib.util.ToStringHelper
 		val obj = new DataClass()
 		obj.other = obj
 		obj.name = "test"

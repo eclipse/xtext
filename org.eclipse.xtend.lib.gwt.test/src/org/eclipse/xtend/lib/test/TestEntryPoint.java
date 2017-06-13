@@ -7,5 +7,6 @@ import com.google.gwt.core.client.EntryPoint;
 public class TestEntryPoint implements EntryPoint {
   public void onModuleLoad() {
 	  StringConcatenation demo = null;
+	  assert demo == null;
   }
 }
