@@ -16,14 +16,14 @@ XAnnotation :
 	{XAnnotation}
 	'@' annotationType=[types::JvmAnnotationType | QualifiedName] (=>'('
 		(
-			elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)* 
+			elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)*
 		|	value=XAnnotationElementValueOrCommaList
 		)?
 	')')?
 ;
 
 XAnnotationElementValuePair :
-	=>(element=[types::JvmOperation|ValidID] '=') value=XAnnotationElementValue	
+	=>(element=[types::JvmOperation|ValidID] '=') value=XAnnotationElementValue
 ;
 
 XAnnotationElementValueOrCommaList returns xbase::XExpression:

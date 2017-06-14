@@ -15,7 +15,7 @@ XExpression returns XExpression :
 	XAssignment;
 
 XAssignment returns XExpression :
-	{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |	
+	{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |
 	XOrExpression (
 		=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment
 	)?;
@@ -25,8 +25,8 @@ OpSingleAssign:
 ;
 
 OpMultiAssign:
-	'+=' | '-=' | '*=' | '/=' | '%=' | 
-	'<' '<' '=' | 
+	'+=' | '-=' | '*=' | '/=' | '%=' |
+	'<' '<' '=' |
 	'>' '>'? '>=';
 
 XOrExpression returns XExpression:
@@ -61,12 +61,12 @@ XOtherOperatorExpression returns XExpression:
 	rightOperand=XAdditiveExpression)*;
 
 OpOther:
-	  '->' 
+	  '->'
 	| '..<'
 	| '>' '..'
 	| '..'
-	| '=>' 
-	| '>' (=>('>' '>') | '>') 
+	| '=>'
+	| '>' (=>('>' '>') | '>')
 	| '<' (=>('<' '<') | '<' | '=>')
 	| '<>'
 	| '?:';
@@ -90,7 +90,7 @@ XUnaryOperation returns XExpression:
 
 OpUnary:
 	"!" | "-" | "+";
-	
+
 XCastedExpression returns XExpression:
 	XPostfixOperation (=>({XCastedExpression.target=current} 'as') type=JvmTypeReference)*
 ;
@@ -106,14 +106,14 @@ OpPostfix:
 XMemberFeatureCall returns XExpression:
 	XPrimaryExpression
 	(=>({XAssignment.assignable=current} ('.'|explicitStatic?="::") feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
-	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|explicitStatic?="::")) 
-		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
+	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|explicitStatic?="::"))
+		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
 		feature=[types::JvmIdentifiableElement|IdOrSuper] (
-			=>explicitOperationCall?='(' 
+			=>explicitOperationCall?='('
 				(
 				    memberCallArguments+=XShortClosure
-				  |	memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*
-				)? 
+				  | memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*
+				)?
 			')')?
 			memberCallArguments+=XClosure?
 		)*;
@@ -158,13 +158,13 @@ XListLiteral:
 ;
 
 XClosure returns XExpression:
-	=>({XClosure} 
-	'[') 
-		=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')? 
-		expression=XExpressionInClosure 
+	=>({XClosure}
+	'[')
+		=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')?
+		expression=XExpressionInClosure
 	']';
-	
-XExpressionInClosure returns XExpression: 
+
+XExpressionInClosure returns XExpression:
 	{XBlockExpression}
 	(expressions+=XExpressionOrVarDeclaration ';'?)*
 ;
@@ -191,7 +191,7 @@ XSwitchExpression returns XExpression:
 
 XCasePart:
 	{XCasePart}
-	typeGuard=JvmTypeReference? ('case' case=XExpression)? 
+	typeGuard=JvmTypeReference? ('case' case=XExpression)?
 		(':' then=XExpression | fallThrough?=',') ;
 
 XForLoopExpression returns XExpression:
@@ -201,8 +201,8 @@ XForLoopExpression returns XExpression:
 
 XBasicForLoopExpression returns XExpression:
 	{XBasicForLoopExpression}
-	'for' '('(initExpressions+=XExpressionOrVarDeclaration (',' initExpressions+=XExpressionOrVarDeclaration)*)? ';' 
-		expression=XExpression? ';' 
+	'for' '('(initExpressions+=XExpressionOrVarDeclaration (',' initExpressions+=XExpressionOrVarDeclaration)*)? ';'
+		expression=XExpression? ';'
 		(updateExpressions+=XExpression (',' updateExpressions+=XExpression)*)? ')'
 		eachExpression=XExpression;
 
@@ -210,14 +210,14 @@ XWhileExpression returns XExpression:
 	{XWhileExpression}
 	'while' '(' predicate=XExpression ')'
 		body=XExpression;
-	
+
 XDoWhileExpression returns XExpression:
 	{XDoWhileExpression}
-   'do'
-       body=XExpression
-   'while' '(' predicate=XExpression ')';
+	'do'
+		body=XExpression
+	'while' '(' predicate=XExpression ')';
 
-XBlockExpression returns XExpression: 
+XBlockExpression returns XExpression:
 	{XBlockExpression}
 	'{'
 		(expressions+=XExpressionOrVarDeclaration ';'?)*
@@ -232,22 +232,22 @@ XVariableDeclaration returns XExpression:
 
 JvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=JvmTypeReference)? name=ValidID;
-	
+
 FullJvmFormalParameter returns types::JvmFormalParameter:
 	parameterType=JvmTypeReference name=ValidID;
 
 XFeatureCall returns XExpression:
 	{XFeatureCall}
-	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
-	feature=[types::JvmIdentifiableElement|IdOrSuper] 
-	(=>explicitOperationCall?='(' 
+	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
+	feature=[types::JvmIdentifiableElement|IdOrSuper]
+	(=>explicitOperationCall?='('
 		(
 		    featureCallArguments+=XShortClosure
-		  |	featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
-		)? 
+		  | featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
+		)?
 	')')?
 	featureCallArguments+=XClosure?;
-	
+
 FeatureCallID:
 	ValidID | 'extends' | 'static' | 'import' | 'extension'
 ;
@@ -255,16 +255,16 @@ FeatureCallID:
 IdOrSuper :
 	FeatureCallID | 'super'
 ;
-	
+
 XConstructorCall returns XExpression:
 	{XConstructorCall}
-	'new' constructor=[types::JvmConstructor|QualifiedName] 
+	'new' constructor=[types::JvmConstructor|QualifiedName]
 	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	(=>explicitConstructorCall?='(' 
+	(=>explicitConstructorCall?='('
 		(
 		    arguments+=XShortClosure
-		  |	arguments+=XExpression (',' arguments+=XExpression)*
-		)? 
+		  | arguments+=XExpression (',' arguments+=XExpression)*
+		)?
 	')')?
 	arguments+=XClosure?;
 
@@ -286,20 +286,20 @@ XTypeLiteral returns XExpression :
 
 XThrowExpression returns XExpression :
 	{XThrowExpression} 'throw' expression=XExpression;
-	
+
 XReturnExpression returns XExpression :
 	{XReturnExpression} 'return' (->expression=XExpression)?;
-	
+
 XTryCatchFinallyExpression returns XExpression:
 	{XTryCatchFinallyExpression}
-	'try' 
+	'try'
 		expression=XExpression
 	(
 		catchClauses+=XCatchClause+
 		(=>'finally' finallyExpression=XExpression)?
 	|	'finally' finallyExpression=XExpression
 	);
-	
+
 XSynchronizedExpression returns XExpression:
 	=>({XSynchronizedExpression}
 	'synchronized' '(') param=XExpression ')' expression=XExpression;
@@ -310,13 +310,13 @@ XCatchClause :
 
 @Override
 QualifiedName:
-  ValidID (=>'.' ValidID)*;
+	ValidID (=>'.' ValidID)*;
 
 Number hidden():
 	HEX | (INT | DECIMAL) ('.' (INT | DECIMAL))?;
 
 /**
- * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
+ * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes,
  * which makes downstream grammars break on classloading, when a rule is removed.
  */
 StaticQualifier:
@@ -324,16 +324,13 @@ StaticQualifier:
 ;
 
 terminal HEX:
-	('0x'|'0X') ('0'..'9'|'a'..'f'|'A'..'F'|'_')+ 
+	('0x'|'0X') ('0'..'9'|'a'..'f'|'A'..'F'|'_')+
 	('#' (('b'|'B')('i'|'I') | ('l'|'L')))?;
-	
+
 terminal INT returns ecore::EInt:
-	'0'..'9' ('0'..'9'|'_')*; 
+	'0'..'9' ('0'..'9'|'_')*;
 
 terminal DECIMAL:
-	INT 
-	(('e'|'E') ('+'|'-')? INT)? 
+	INT
+	(('e'|'E') ('+'|'-')? INT)?
 	(('b'|'B')('i'|'I'|'d'|'D') | ('l'|'L'|'d'|'D'|'f'|'F'))?;
-	
-	
-

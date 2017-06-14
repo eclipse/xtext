@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
- 
+
 grammar org.eclipse.xtext.xbase.Xtype hidden(WS, ML_COMMENT, SL_COMMENT)
 
 import "http://www.eclipse.org/xtext/xbase/Xtype"
@@ -13,49 +13,49 @@ import "http://www.eclipse.org/xtext/common/JavaVMTypes"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 JvmTypeReference:
-    JvmParameterizedTypeReference =>({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)* 
-  | XFunctionTypeRef;
-  
+	JvmParameterizedTypeReference =>({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
+	| XFunctionTypeRef;
+
 ArrayBrackets :
 	'[' ']'
 ;
 
 XFunctionTypeRef:
-  ('(' (paramTypes+=JvmTypeReference (',' paramTypes+=JvmTypeReference)*)? ')')? '=>' returnType=JvmTypeReference;
+	('(' (paramTypes+=JvmTypeReference (',' paramTypes+=JvmTypeReference)*)? ')')? '=>' returnType=JvmTypeReference;
 
 JvmParameterizedTypeReference:
-  type=[JvmType|QualifiedName] (
-  	=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>'
-  	(=>({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*
-  )?;
+	type=[JvmType|QualifiedName] (
+		=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>'
+		(=>({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*
+	)?;
 
 JvmArgumentTypeReference returns JvmTypeReference:
 	JvmTypeReference | JvmWildcardTypeReference;
 
 JvmWildcardTypeReference:
-  {JvmWildcardTypeReference} '?' (
-  	constraints+=JvmUpperBound (constraints+=JvmUpperBoundAnded)*
-  | constraints+=JvmLowerBound (constraints+=JvmLowerBoundAnded)*
-  )?;
-  
-JvmUpperBound : 
- 'extends' typeReference=JvmTypeReference;
+	{JvmWildcardTypeReference} '?' (
+	  constraints+=JvmUpperBound (constraints+=JvmUpperBoundAnded)*
+	| constraints+=JvmLowerBound (constraints+=JvmLowerBoundAnded)*
+	)?;
 
-JvmUpperBoundAnded returns JvmUpperBound: 
- '&' typeReference=JvmTypeReference;
+JvmUpperBound :
+	'extends' typeReference=JvmTypeReference;
+
+JvmUpperBoundAnded returns JvmUpperBound:
+	'&' typeReference=JvmTypeReference;
 
 JvmLowerBound :
- 'super' typeReference=JvmTypeReference;
+	'super' typeReference=JvmTypeReference;
 
-JvmLowerBoundAnded returns JvmLowerBound: 
- '&' typeReference=JvmTypeReference;
+JvmLowerBoundAnded returns JvmLowerBound:
+	'&' typeReference=JvmTypeReference;
 
 JvmTypeParameter :
-  name=ValidID 
-  (constraints+=JvmUpperBound (constraints+=JvmUpperBoundAnded)*)?;
+	name=ValidID
+	(constraints+=JvmUpperBound (constraints+=JvmUpperBoundAnded)*)?;
 
 QualifiedName:
-  ValidID ('.' ValidID)*;
+	ValidID ('.' ValidID)*;
 
 QualifiedNameWithWildcard :
 	QualifiedName  '.' '*';
@@ -66,24 +66,24 @@ ValidID:
 XImportSection:
 	importDeclarations+=XImportDeclaration+;
 
-XImportDeclaration: 
+XImportDeclaration:
 	'import' (
-		(static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' | memberName=ValidID)) 
-		| importedType=[JvmDeclaredType|QualifiedName] 
+		(static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' | memberName=ValidID))
+		| importedType=[JvmDeclaredType|QualifiedName]
 		| importedNamespace=QualifiedNameWithWildcard) ';'?
 ;
 
 QualifiedNameInStaticImport:
-  (ValidID '.')+
+	(ValidID '.')+
 ;
 
 terminal ID:
 	'^'? ('a'..'z'|'A'..'Z'|'$'|'_') ('a'..'z'|'A'..'Z'|'$'|'_'|'0'..'9')*;
-	
-terminal STRING: 
+
+terminal STRING:
 			'"' ( '\\' . /* ('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') */ | !('\\'|'"') )* '"'? |
 			"'" ( '\\' . /* ('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') */ | !('\\'|"'") )* "'"?;
-			 
+
 terminal ML_COMMENT: '/*' -> '*/';
 
 terminal SL_COMMENT: '//' !('\n'|'\r')* ('\r'? '\n')?;
