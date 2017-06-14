@@ -57,18 +57,18 @@ class RequestManager {
 	 * </p>
 	 */
 	def <V> CompletableFuture<V> runWrite((CancelIndicator)=>V writeRequest) {
+		semaphore.acquire(MAX_PERMITS)
 		try {
-    		semaphore.acquire(MAX_PERMITS)
 			val result = writeRequest.apply([
 				return false
 			])
 			return CompletableFuture.completedFuture(result);
 		} catch (Throwable t) {
-            if (isCancelException(t)) {
-            	LOGGER.info("request cancelled.")
-            	throw new CancellationException()
-            }
-            throw t
+			if (isCancelException(t)) {
+				LOGGER.info("request cancelled.")
+				throw new CancellationException()
+			}
+			throw t
 		} finally {
 			semaphore.release(MAX_PERMITS)
 		}
@@ -89,20 +89,20 @@ class RequestManager {
 	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest) {
 		return CompletableFutures.computeAsync(executorService) [
 			val cancelIndicator = new RequestCancelIndicator(it)
-			cancelIndicators += cancelIndicator
 			semaphore.acquire(1)
 			try {
-    			cancelIndicator.checkCanceled
+				cancelIndicators += cancelIndicator
+				cancelIndicator.checkCanceled
 				return readRequest.apply [
 					cancelIndicator.checkCanceled
 					return false
 				]
 			} catch (Throwable t) {
-	            if (isCancelException(t)) {
-	            	LOGGER.info("request cancelled.")
-	            	throw new CancellationException()
-	            }
-	            throw t
+				if (isCancelException(t)) {
+					LOGGER.info("request cancelled.")
+					throw new CancellationException()
+				}
+				throw t
 			} finally {
 				cancelIndicators -= cancelIndicator
 				semaphore.release(1)
@@ -111,9 +111,9 @@ class RequestManager {
 	}
 	
 	protected def boolean isCancelException(Throwable t) {
-        if(t === null) return false;
-        val cause = if (t instanceof CompletionException) t.cause else t
-        return operationCanceledManager.isOperationCanceledException(cause);
-    }
+		if(t === null) return false;
+		val cause = if(t instanceof CompletionException) t.cause else t
+		return operationCanceledManager.isOperationCanceledException(cause);
+	}
 
 }
