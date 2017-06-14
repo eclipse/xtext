@@ -550,7 +550,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectAbsolute(model.indexOf("Inject"), 6,XbaseHighlightingConfiguration.ANNOTATION);
 		expectAbsolute(model.indexOf("clazz"), 5, XbaseHighlightingConfiguration.FIELD);
 		expectAbsolute(model.lastIndexOf("clazz"), 5, XbaseHighlightingConfiguration.FIELD);
-		notExpectAbsolute(model.indexOf("testMethodNotDeprecated"), 23, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.indexOf("testMethodNotDeprecated"), 23, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.indexOf("testMethodNotDeprecated"), 23, XbaseHighlightingConfiguration.METHOD);
 		highlight(model);
 	}
 	
@@ -570,7 +571,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectAbsolute(model.lastIndexOf("TestClassDeprecated"), "TestClassDeprecated".length(), XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		expectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, METHOD);
 		expectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
-		notExpectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
 	}
 	
@@ -586,7 +587,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectAbsolute(model.indexOf("clazz"), 5, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		expectAbsolute(model.lastIndexOf("clazz"), 5, XbaseHighlightingConfiguration.FIELD);
 		expectAbsolute(model.lastIndexOf("clazz"), 5,XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
-		notExpectAbsolute(model.indexOf("testMethodNotDeprecated"), 23, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.indexOf("testMethodNotDeprecated"), 23, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.indexOf("testMethodNotDeprecated"), 23, XbaseHighlightingConfiguration.METHOD);
 		highlight(model);
 	}
 	
