@@ -319,7 +319,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 					}
 				} catch (Throwable t) {
 					LOG.error("Error refreshing outline", t);
-				}finally{
+				} finally {
 					getTreeViewer().getTree().setRedraw(true);
 				}
 			}
