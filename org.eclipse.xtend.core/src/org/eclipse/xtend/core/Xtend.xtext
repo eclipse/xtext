@@ -14,40 +14,40 @@ import "http://www.eclipse.org/Xtext/Xbase/XAnnotations" as annotations
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
 File returns XtendFile :
-    ('package' package=QualifiedName ';'?)?
+	('package' package=QualifiedName ';'?)?
 	importSection=XImportSection?
 	(xtendTypes+=Type)*
 ;
 
 Type returns XtendTypeDeclaration :
-	{XtendTypeDeclaration} annotations+=XAnnotation*   
+	{XtendTypeDeclaration} annotations+=XAnnotation*
 	(
 		{XtendClass.annotationInfo = current}
 		modifiers+=CommonModifier*
-	  	'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
-	   	("extends" extends=JvmParameterizedTypeReference)? 
-	   	('implements' implements+=JvmSuperTypeReference (',' implements+=JvmSuperTypeReference)*)?'{'
-		   (members+=Member)*
-	   	'}'
+		'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+		("extends" extends=JvmParameterizedTypeReference)?
+		('implements' implements+=JvmSuperTypeReference (',' implements+=JvmSuperTypeReference)*)?'{'
+			(members+=Member)*
+		'}'
 	 |
 		{XtendInterface.annotationInfo = current}
 		modifiers+=CommonModifier*
-	  	'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
-	   	('extends' extends+=JvmSuperTypeReference (',' extends+=JvmSuperTypeReference)*)?'{'
-		   (members+=Member)*
-	   	'}'
+		'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+		('extends' extends+=JvmSuperTypeReference (',' extends+=JvmSuperTypeReference)*)?'{'
+			(members+=Member)*
+		'}'
 	 |
 		{XtendEnum.annotationInfo = current}
 		modifiers+=CommonModifier*
-	  	'enum' name=ValidID '{'   
-		   (members+=XtendEnumLiteral (',' members+=XtendEnumLiteral)*)? ';'?
-	   	'}'
+		'enum' name=ValidID '{'
+			(members+=XtendEnumLiteral (',' members+=XtendEnumLiteral)*)? ';'?
+		'}'
 	 |
-	 	{XtendAnnotationType.annotationInfo = current}
-	 	modifiers+=CommonModifier*
+		{XtendAnnotationType.annotationInfo = current}
+		modifiers+=CommonModifier*
 		'annotation' name=ValidID '{'
-		   (members+=AnnotationField)*
-	   	'}'
+			(members+=AnnotationField)*
+		'}'
 	)
 ;
 
@@ -56,11 +56,11 @@ JvmSuperTypeReference returns types::JvmTypeReference:
 ;
 
 XFunctionSuperTypeRef returns xtype::XFunctionTypeRef:
-  (instanceContext?='(' (paramTypes+=JvmTypeReference (',' paramTypes+=JvmTypeReference)*)? ')')? '=>' returnType=JvmTypeReference;
+	(instanceContext?='(' (paramTypes+=JvmTypeReference (',' paramTypes+=JvmTypeReference)*)? ')')? '=>' returnType=JvmTypeReference;
 
 
 AnnotationField returns XtendMember :
-	{XtendMember} annotations+=XAnnotation* 
+	{XtendMember} annotations+=XAnnotation*
 	(
 		(
 				{XtendField.annotationInfo = current} modifiers+=CommonModifier*
@@ -72,58 +72,58 @@ AnnotationField returns XtendMember :
 		| (
 			{XtendClass.annotationInfo = current}
 			modifiers+=CommonModifier*
-	  		'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
-	   		("extends" extends=JvmParameterizedTypeReference)? 
-		   	('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
-			   (members+=Member)*
-	   		'}'
-	 	) | (
+			'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+			("extends" extends=JvmParameterizedTypeReference)?
+			('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
+				(members+=Member)*
+			'}'
+		) | (
 			{XtendInterface.annotationInfo = current}
 			modifiers+=CommonModifier*
-		  	'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
-		   	('extends' extends+=JvmParameterizedTypeReference (',' extends+=JvmParameterizedTypeReference)*)?'{'
-			   (members+=Member)*
-		   	'}'
-	 	) | (
+			'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+			('extends' extends+=JvmParameterizedTypeReference (',' extends+=JvmParameterizedTypeReference)*)?'{'
+				(members+=Member)*
+			'}'
+		) | (
 			{XtendEnum.annotationInfo = current}
 			modifiers+=CommonModifier*
-		  	'enum' name=ValidID '{'   
-			   (members+=XtendEnumLiteral (',' members+=XtendEnumLiteral)*)? ';'?
-		   	'}'
-	 	) | (
-		 	{XtendAnnotationType.annotationInfo = current}
-		 	modifiers+=CommonModifier*
+			'enum' name=ValidID '{'
+				(members+=XtendEnumLiteral (',' members+=XtendEnumLiteral)*)? ';'?
+			'}'
+		) | (
+			{XtendAnnotationType.annotationInfo = current}
+			modifiers+=CommonModifier*
 			'annotation' name=ValidID '{'
-			   (members+=AnnotationField)*
-		   	'}'
-	   	)
+				(members+=AnnotationField)*
+			'}'
+		)
 	)
 ;
 
 Member returns XtendMember:
 	{XtendMember} annotations+=XAnnotation*
 	(
-		(	
+		(
 			{XtendField.annotationInfo = current} modifiers+=CommonModifier*
 			(
-				modifiers+=FieldModifier modifiers+=CommonModifier* 
-				type=JvmTypeReference? name=ValidID 
+				modifiers+=FieldModifier modifiers+=CommonModifier*
+				type=JvmTypeReference? name=ValidID
 			|
-				modifiers+='extension' (modifiers+=FieldModifier | modifiers+=CommonModifier)* 
+				modifiers+='extension' (modifiers+=FieldModifier | modifiers+=CommonModifier)*
 				type=JvmTypeReference name=ValidID?
-			| 
-				modifiers+=FieldModifier (modifiers+=CommonModifier)* modifiers+='extension' (modifiers+=CommonModifier)*  
+			|
+				modifiers+=FieldModifier (modifiers+=CommonModifier)* modifiers+='extension' (modifiers+=CommonModifier)*
 				type=JvmTypeReference name=ValidID?
-			|  
+			|
 				type=JvmTypeReference name=ValidID
 			) ('=' initialValue=XExpression)? ';'?
 
 		) | (
 			{XtendFunction.annotationInfo = current} modifiers+=CommonModifier*
-			modifiers+=MethodModifier (modifiers+=CommonModifier | modifiers+=MethodModifier)* 
+			modifiers+=MethodModifier (modifiers+=CommonModifier | modifiers+=MethodModifier)*
 			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-			( 
-				=>(returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID '(')
+			(
+			    =>(returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID '(')
 			  | =>(returnType=TypeReferenceWithTypeArgs name=FunctionID '(')
 			  | =>(returnType=TypeReferenceNoTypeArgs name=FunctionID '(')
 			  | =>(createExtensionInfo=CreateExtensionInfo name=ValidID '(')
@@ -132,10 +132,10 @@ Member returns XtendMember:
 			(parameters+=Parameter (',' parameters+=Parameter)*)? ')'
 			('throws' exceptions+=JvmTypeReference (',' exceptions+=JvmTypeReference)*)?
 			(expression=XBlockExpression | expression=RichString | ';')?
-			
+
 		) | (
 			{XtendConstructor.annotationInfo = current} modifiers+=CommonModifier*
-			'new' 
+			'new'
 			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
 			'(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')'
 			('throws' exceptions+=JvmTypeReference (',' exceptions+=JvmTypeReference)*)?
@@ -143,36 +143,36 @@ Member returns XtendMember:
 		) | (
 			{XtendClass.annotationInfo = current}
 			modifiers+=CommonModifier*
-	  		'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
-	   		("extends" extends=JvmParameterizedTypeReference)? 
-		   	('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
-			   (members+=Member)*
-	   		'}'
-	 	) | (
+			'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+			("extends" extends=JvmParameterizedTypeReference)?
+			('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
+				(members+=Member)*
+			'}'
+		) | (
 			{XtendInterface.annotationInfo = current}
 			modifiers+=CommonModifier*
-		  	'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
-		   	('extends' extends+=JvmParameterizedTypeReference (',' extends+=JvmParameterizedTypeReference)*)?'{'
-			   (members+=Member)*
-		   	'}'
-	 	) | (
+			'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+			('extends' extends+=JvmParameterizedTypeReference (',' extends+=JvmParameterizedTypeReference)*)?'{'
+				(members+=Member)*
+			'}'
+		) | (
 			{XtendEnum.annotationInfo = current}
 			modifiers+=CommonModifier*
-		  	'enum' name=ValidID '{'   
-			   (members+=XtendEnumLiteral (',' members+=XtendEnumLiteral)*)? ';'?
-		   	'}'
-	 	) | (
-		 	{XtendAnnotationType.annotationInfo = current}
-		 	modifiers+=CommonModifier*
+			'enum' name=ValidID '{'
+				(members+=XtendEnumLiteral (',' members+=XtendEnumLiteral)*)? ';'?
+			'}'
+		) | (
+			{XtendAnnotationType.annotationInfo = current}
+			modifiers+=CommonModifier*
 			'annotation' name=ValidID '{'
-			   (members+=AnnotationField)*
-		   	'}'
-	   	)
+				(members+=AnnotationField)*
+			'}'
+		)
 	)
 ;
 
 TypeReferenceNoTypeArgs returns types::JvmParameterizedTypeReference:
-  type=[types::JvmType|QualifiedName]
+	type=[types::JvmType|QualifiedName]
 ;
 
 /*** The following two rules are a workaround for a limitation in serialization logic
@@ -190,10 +190,10 @@ TypeReferenceWithTypeArgs returns types::JvmTypeReference:
 ;
 
 ParameterizedTypeReferenceWithTypeArgs returns types::JvmParameterizedTypeReference:
-  type=[types::JvmType|QualifiedName] (
-  	'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>'
-  	(=>({types::JvmInnerTypeReference.outer=current} '.') type=[types::JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*
-  )
+	type=[types::JvmType|QualifiedName] (
+		'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>'
+		(=>({types::JvmInnerTypeReference.outer=current} '.') type=[types::JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*
+	)
 ;
 /*** The following two rules are a workaround for a limitation in serialiation logic */
 
@@ -221,7 +221,7 @@ XtendEnumLiteral:
 ;
 
 CommonModifier:
-		'public' | 'private' | 'protected' | 'package' | 'abstract' | 'static' | 'dispatch' | 'final' 
+		'public' | 'private' | 'protected' | 'package' | 'abstract' | 'static' | 'dispatch' | 'final'
 		| 'strictfp' | 'native' |'volatile' | 'synchronized' | 'transient'
 ;
 
@@ -230,73 +230,73 @@ FieldModifier:
 ;
 
 MethodModifier:
-		'def' | 'override' 
-; 
+		'def' | 'override'
+;
 
 CreateExtensionInfo:
 	'create' (name=ValidID ':')? createExpression=XExpression
 ;
 
-@Override 
+@Override
 ValidID:
 	ID | 'create' | 'annotation' | 'AFTER' | 'BEFORE' | 'SEPARATOR'
 ;
 
 // For feature calls we add 'extension' since there are method such as 'isExtension' or 'getExtension' out there.
-@Override 
+@Override
 FeatureCallID:
 	InnerVarID | 'extension'
 ;
 
 InnerVarID:
-	ID | 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' 
-	   | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' 
+	ID | 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends'
+	   | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private'
 	   | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient'
 	   | 'AFTER' | 'BEFORE' | 'SEPARATOR'
 ;
 
 Parameter returns XtendParameter:
-	annotations+=XAnnotation* (extension?='extension' annotations+=XAnnotation*)?  
+	annotations+=XAnnotation* (extension?='extension' annotations+=XAnnotation*)?
 	parameterType=JvmTypeReference varArg?='...'? name=ValidID;
-	
-@Override 
+
+@Override
 XVariableDeclaration returns xbase::XExpression:
 	=>({XtendVariableDeclaration}
 	(((writeable?='var'|'val') extension?='extension'?) | (extension?='extension' (writeable?='var'|'val'))))
 	(=>(type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ('=' right=XExpression)?;
 
-@Override 
+@Override
 XConstructorCall returns xbase::XExpression:
 	XbaseConstructorCall (=>({AnonymousClass.constructorCall=current} '{') members+=Member* '}')?
 ;
 
 XbaseConstructorCall returns xbase::XConstructorCall:
 	{xbase::XConstructorCall}
-	'new' constructor=[types::JvmConstructor|QualifiedName] 
+	'new' constructor=[types::JvmConstructor|QualifiedName]
 	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	(=>explicitConstructorCall?='(' 
+	(=>explicitConstructorCall?='('
 		(
 		    arguments+=XShortClosure
-		  |	arguments+=XExpression (',' arguments+=XExpression)*
-		)? 
+		  | arguments+=XExpression (',' arguments+=XExpression)*
+		)?
 	')')?
 	(arguments+=XClosure)?
 ;
 
-@Override 
+@Override
 JvmFormalParameter returns XtendFormalParameter:
 	extension?='extension'? (parameterType=JvmTypeReference)? name=InnerVarID;
-	
-@Override 
+
+@Override
 FullJvmFormalParameter returns XtendFormalParameter:
 	extension?='extension'? parameterType=JvmTypeReference name=InnerVarID;
 
-@Override 
+@Override
 XStringLiteral returns xbase::XExpression:
 	SimpleStringLiteral | RichString
 ;
 
-@Override 
+@Override
 XSwitchExpression returns xbase::XExpression:
 	{xbase::XSwitchExpression}
 	'switch' (=>('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
@@ -313,13 +313,13 @@ XExpressionOrSimpleConstructorCall returns xbase::XExpression:
 SimpleStringLiteral returns xbase::XExpression:
 	{xbase::XStringLiteral} value=STRING
 ;
-		
+
 RichString returns xbase::XExpression:
-	{RichString} ( 
-	  expressions+=RichStringLiteral |
-	  expressions+=RichStringLiteralStart expressions+=RichStringPart? 
-	  	(expressions+=RichStringLiteralInbetween expressions+=RichStringPart?)* 
-	  expressions+=RichStringLiteralEnd
+	{RichString} (
+		expressions+=RichStringLiteral |
+		expressions+=RichStringLiteralStart expressions+=RichStringPart?
+		(expressions+=RichStringLiteralInbetween expressions+=RichStringPart?)*
+		expressions+=RichStringLiteralEnd
 	)
 ;
 
@@ -329,17 +329,17 @@ RichStringLiteral returns xbase::XExpression :
 
 RichStringLiteralStart returns xbase::XExpression :
 	{RichStringLiteral} value=RICH_TEXT_START
-; 
+;
 
 RichStringLiteralInbetween returns xbase::XExpression :
-	{RichStringLiteral} 
+	{RichStringLiteral}
 	( value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN )
-; 
+;
 
 RichStringLiteralEnd returns xbase::XExpression :
-	{RichStringLiteral} 
+	{RichStringLiteral}
 	( value=RICH_TEXT_END | value=COMMENT_RICH_TEXT_END )
-; 
+;
 
 InternalRichString returns xbase::XExpression:
 	{RichString} (
@@ -368,7 +368,7 @@ RichStringIf returns xbase::XExpression :
 	"IF" if=XExpression
 		then=InternalRichString
 		elseIfs+=RichStringElseIf*
-	("ELSE" 
+	("ELSE"
 		else=InternalRichString)?
 	"ENDIF"
 ;
@@ -377,9 +377,9 @@ RichStringElseIf returns RichStringElseIf:
 	"ELSEIF" if=XExpression then=InternalRichString
 ;
 
-@Override 
+@Override
 terminal ID:
-	'^'? (IDENTIFIER_START | UNICODE_ESCAPE) (IDENTIFIER_PART | UNICODE_ESCAPE)*	
+	'^'? (IDENTIFIER_START | UNICODE_ESCAPE) (IDENTIFIER_PART | UNICODE_ESCAPE)*
 ;
 
 terminal fragment HEX_DIGIT:
@@ -394,11 +394,11 @@ terminal RICH_TEXT : "'''" IN_RICH_STRING* ("'''"| ("'" "'"?)? EOF);
 terminal RICH_TEXT_START : "'''" IN_RICH_STRING* ("'" "'"?)? 'л';
 terminal RICH_TEXT_END : '╗' IN_RICH_STRING* ("'''"| ("'" "'"?)? EOF) ;
 terminal RICH_TEXT_INBETWEEN : '╗' IN_RICH_STRING* ("'" "'"?)? 'л';
-terminal COMMENT_RICH_TEXT_INBETWEEN: "лл" !('\n'|'\r')* ('\r'? '\n' IN_RICH_STRING* ("'" "'"?)? 'л')?; 
-terminal COMMENT_RICH_TEXT_END: "лл" !('\n'|'\r')* (('\r'? '\n' IN_RICH_STRING* ("'''"| ("'" "'"?)? EOF)) | EOF); 
+terminal COMMENT_RICH_TEXT_INBETWEEN: "лл" !('\n'|'\r')* ('\r'? '\n' IN_RICH_STRING* ("'" "'"?)? 'л')?;
+terminal COMMENT_RICH_TEXT_END: "лл" !('\n'|'\r')* (('\r'? '\n' IN_RICH_STRING* ("'''"| ("'" "'"?)? EOF)) | EOF);
 
-terminal fragment IN_RICH_STRING : 
-	  "''" !('л'|"'") 
+terminal fragment IN_RICH_STRING :
+	  "''" !('л'|"'")
 	| "'" !('л'|"'")
 	| !('л'|"'");
 
@@ -850,4 +850,3 @@ terminal fragment IDENTIFIER_PART_IMPL:
 	| '\uFF10'..'\uFF19'
 	| '\uFFF9'..'\uFFFB'
 ;
-
