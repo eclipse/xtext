@@ -21,9 +21,20 @@ import org.eclipse.xtext.common.types.JvmType;
  * @author Sebastian Zarnekow - Use explicit deprecated bit if available
  */
 public class DeprecationUtil {
+	
 	public static boolean isDeprecated(JvmAnnotationTarget jvmAnnotationTarget) {
 		if (jvmAnnotationTarget instanceof JvmMember) {
 			return isDeprecatedMember((JvmMember) jvmAnnotationTarget);
+		}
+		return false;
+	}
+	
+	/**
+	 * @since 2.13
+	 */
+	public static boolean isTransitivelyDeprecated(JvmAnnotationTarget jvmAnnotationTarget) {
+		if (jvmAnnotationTarget instanceof JvmMember) {
+			return isTransitivelyDeprecatedMember((JvmMember) jvmAnnotationTarget);
 		}
 		return false;
 	}
