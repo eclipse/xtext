@@ -297,6 +297,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 				try {
 					TreeViewer treeViewer = getTreeViewer();
 					if (!treeViewer.getTree().isDisposed()) {
+						getTreeViewer().getTree().setRedraw(false);
 						if (treeViewer.getLabelProvider() != labelProvider) {
 							if (treeViewer.getInput() != null && treeViewer.getContentProvider() != null)
 								treeViewer.setInput(null);
@@ -318,6 +319,8 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 					}
 				} catch (Throwable t) {
 					LOG.error("Error refreshing outline", t);
+				}finally{
+					getTreeViewer().getTree().setRedraw(true);
 				}
 			}
 		});
