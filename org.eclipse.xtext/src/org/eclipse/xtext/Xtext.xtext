@@ -11,20 +11,20 @@ import "http://www.eclipse.org/2008/Xtext"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Grammar:
-    'grammar' name=GrammarID ('with' usedGrammars+=[Grammar|GrammarID] (',' usedGrammars+=[Grammar|GrammarID])*)?
+	'grammar' name=GrammarID ('with' usedGrammars+=[Grammar|GrammarID] (',' usedGrammars+=[Grammar|GrammarID])*)?
 	(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID] (',' hiddenTokens+=[AbstractRule|RuleID])*)? ')')?
-	metamodelDeclarations+=AbstractMetamodelDeclaration* 
-    (rules+=AbstractRule)+
+	metamodelDeclarations+=AbstractMetamodelDeclaration*
+	(rules+=AbstractRule)+
 ;
 
 GrammarID returns ecore::EString:
-  ValidID ('.' ValidID)*;
-  
+	ValidID ('.' ValidID)*;
+
 AbstractRule : ParserRule | TerminalRule | EnumRule;
 
 AbstractMetamodelDeclaration :
 	GeneratedMetamodel | ReferencedMetamodel;
-	
+
 // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
 // generated metamodels have to have different aliases
 GeneratedMetamodel :
@@ -46,12 +46,12 @@ Annotation returns Annotation:
 ParserRule :
 	(annotations += Annotation)?
 	(
-	  ^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) 
+	  ^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?)
 	| RuleNameAndParams ('returns' type=TypeRef)?
 	)
 	(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID] (',' hiddenTokens+=[AbstractRule|RuleID])*)? ')')? ':'
-    	alternatives=Alternatives   
-    ';'
+		alternatives=Alternatives
+	';'
 ;
 
 fragment RuleNameAndParams returns ParserRule:
@@ -67,7 +67,7 @@ TypeRef :
 ;
 
 Alternatives returns AbstractElement:
-      ConditionalBranch ({Alternatives.elements+=current} ('|' elements+=ConditionalBranch)+)?
+	ConditionalBranch ({Alternatives.elements+=current} ('|' elements+=ConditionalBranch)+)?
 ;
 
 ConditionalBranch returns AbstractElement:
@@ -80,7 +80,7 @@ UnorderedGroup returns AbstractElement:
 ;
 
 Group returns AbstractElement:
-    AbstractToken ({Group.elements+=current} (elements+=AbstractToken)+)?
+	AbstractToken ({Group.elements+=current} (elements+=AbstractToken)+)?
 ;
 
 AbstractToken returns AbstractElement:
@@ -97,26 +97,26 @@ Action returns Action:
 	'{' type=TypeRef ('.' feature=ValidID operator=('='|'+=') 'current')? '}'
 ;
 
-AbstractTerminal returns AbstractElement: 
-   Keyword | 
-   RuleCall | 
-   ParenthesizedElement |
-   // Keyword and RuleCall are used inside of Assignable terminal
-   // As we do not want to be able to write name==>ID
-   // the rules for Keyword and RuleCall have been copied
-   PredicatedKeyword | 
-   PredicatedRuleCall |
-   // We have to make this one explicit since the ParenthesizedElement does not
-   // create an object but we have to set the predicated flag
-   PredicatedGroup
+AbstractTerminal returns AbstractElement:
+	Keyword |
+	RuleCall |
+	ParenthesizedElement |
+	// Keyword and RuleCall are used inside of Assignable terminal
+	// As we do not want to be able to write name==>ID
+	// the rules for Keyword and RuleCall have been copied
+	PredicatedKeyword |
+	PredicatedRuleCall |
+	// We have to make this one explicit since the ParenthesizedElement does not
+	// create an object but we have to set the predicated flag
+	PredicatedGroup
 ;
 
-Keyword : 
-   value=STRING 
+Keyword :
+	value=STRING
 ;
 
 RuleCall :
-   rule=[AbstractRule|RuleID] ('<' arguments+=NamedArgument (',' arguments+=NamedArgument)* '>')?
+	rule=[AbstractRule|RuleID] ('<' arguments+=NamedArgument (',' arguments+=NamedArgument)* '>')?
 ;
 
 NamedArgument:
@@ -153,19 +153,19 @@ ParameterReference:
 ;
 
 TerminalRuleCall returns RuleCall:
-   rule=[AbstractRule|RuleID]
+	rule=[AbstractRule|RuleID]
 ;
 
 RuleID returns ecore::EString:
-  ValidID ('::' ValidID)*
+	ValidID ('::' ValidID)*
 ;
 
 ValidID returns ecore::EString:
-  ID | 'true' | 'false'
+	ID | 'true' | 'false'
 ;
 
 PredicatedKeyword returns Keyword:
-	(predicated?='=>' | firstSetPredicated?='->') value=STRING  
+	(predicated?='=>' | firstSetPredicated?='->') value=STRING
 ;
 
 PredicatedRuleCall returns RuleCall:
@@ -173,19 +173,19 @@ PredicatedRuleCall returns RuleCall:
 ;
 
 Assignment returns Assignment:
-   (predicated?='=>' | firstSetPredicated?='->')? feature=ValidID operator=('+='|'='|'?=') ^terminal=AssignableTerminal
+	(predicated?='=>' | firstSetPredicated?='->')? feature=ValidID operator=('+='|'='|'?=') ^terminal=AssignableTerminal
 ;
 
 AssignableTerminal returns AbstractElement:
-   Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference
+	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference
 ;
 
 ParenthesizedAssignableElement returns AbstractElement:
-   '(' AssignableAlternatives ')'
+	'(' AssignableAlternatives ')'
 ;
 
 AssignableAlternatives returns AbstractElement:
-    AssignableTerminal ({Alternatives.elements+=current} ('|' elements+=AssignableTerminal)+)?
+	AssignableTerminal ({Alternatives.elements+=current} ('|' elements+=AssignableTerminal)+)?
 ;
 
 CrossReference :
@@ -193,15 +193,15 @@ CrossReference :
 ;
 
 CrossReferenceableTerminal returns AbstractElement:
-   Keyword | RuleCall
+	Keyword | RuleCall
 ;
 
 ParenthesizedElement returns AbstractElement:
-   '(' Alternatives ')'
+	'(' Alternatives ')'
 ;
 
 PredicatedGroup returns Group:
-	(predicated?='=>' | firstSetPredicated?='->') '(' elements+=Alternatives ')' 
+	(predicated?='=>' | firstSetPredicated?='->') '(' elements+=Alternatives ')'
 ;
 
 TerminalRule :
@@ -224,16 +224,16 @@ TerminalToken returns AbstractElement:
 	TerminalTokenElement cardinality=('?'|'*'|'+')?
 ;
 
-TerminalTokenElement returns AbstractElement: 
-   CharacterRange | TerminalRuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard | ^EOF
+TerminalTokenElement returns AbstractElement:
+	CharacterRange | TerminalRuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard | ^EOF
 ;
 
 ParenthesizedTerminalElement returns AbstractElement:
-   '(' TerminalAlternatives ')'
+	'(' TerminalAlternatives ')'
 ;
 
 AbstractNegatedToken:
-   NegatedToken | UntilToken
+	NegatedToken | UntilToken
 ;
 
 NegatedToken:
@@ -258,15 +258,15 @@ CharacterRange returns AbstractElement:
 
 EnumRule:
 	(annotations += Annotation)?
-    'enum' name=ValidID ('returns' type=TypeRef)? ':' 
-    	alternatives=EnumLiterals   
-    ';'
+	'enum' name=ValidID ('returns' type=TypeRef)? ':'
+		alternatives=EnumLiterals
+	';'
 ;
 
 EnumLiterals returns AbstractElement:
 	EnumLiteralDeclaration ({Alternatives.elements+=current} ('|' elements+=EnumLiteralDeclaration)+)?
-; 
+;
 
 EnumLiteralDeclaration:
-    enumLiteral=[ecore::EEnumLiteral] ('=' literal=Keyword)?
+	enumLiteral=[ecore::EEnumLiteral] ('=' literal=Keyword)?
 ;
