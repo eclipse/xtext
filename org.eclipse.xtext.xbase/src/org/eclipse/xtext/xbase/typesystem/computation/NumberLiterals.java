@@ -62,7 +62,7 @@ public class NumberLiterals {
 			String value = literal.getValue();
 			if (!floatingPoint && !value.startsWith("0x")) {
 				// strip leading zeros since they denote octal literals
-				value = value.replaceAll("^0+(\\d)", "\\1");
+				value = value.replaceAll("^[0_]+(\\d)", "$1");
 			}
 			if (removeUnderscores)
 				return value.replace("_", "").replace("#", "");

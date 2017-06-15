@@ -101,6 +101,22 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(19, "019");
 	}
 	
+	@Test public void testIntLiteral_7() throws Exception {
+		assertEvaluatesTo(999, "000999");
+	}
+	
+	@Test public void testIntLiteral_8() throws Exception {
+		assertEvaluatesTo(0, "0000");
+	}
+	
+	@Test public void testIntLiteral_9() throws Exception {
+		assertEvaluatesTo(0x987, "0x___0__0__0__9__8__7");
+	}
+	
+	@Test public void testIntLiteral_10() throws Exception {
+		assertEvaluatesTo(987, "0___0__0__0__9__8__7");
+	}
+	
 	@Test public void testLongLiteral_0() throws Exception {
 		assertEvaluatesTo(1l, "1l");
 	}
