@@ -97,6 +97,26 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(0xffffeeee, "0xffff_eeee");
 	}
 	
+	@Test public void testIntLiteral_6() throws Exception {
+		assertEvaluatesTo(19, "019");
+	}
+	
+	@Test public void testIntLiteral_7() throws Exception {
+		assertEvaluatesTo(999, "000999");
+	}
+	
+	@Test public void testIntLiteral_8() throws Exception {
+		assertEvaluatesTo(0, "0000");
+	}
+	
+	@Test public void testIntLiteral_9() throws Exception {
+		assertEvaluatesTo(0x987, "0x___0__0__0__9__8__7");
+	}
+	
+	@Test public void testIntLiteral_10() throws Exception {
+		assertEvaluatesTo(987, "0___0__0__0__9__8__7");
+	}
+	
 	@Test public void testLongLiteral_0() throws Exception {
 		assertEvaluatesTo(1l, "1l");
 	}
@@ -111,6 +131,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testLongLiteral_5() throws Exception {
 		assertEvaluatesTo(0xffffeeeeddddccccl, "0xffff_eeee_dddd_cccc#L");
+	}
+	
+	@Test public void testLongLiteral_6() throws Exception {
+		assertEvaluatesTo(19L, "019L");
 	}
 	
 	@Test public void testFloatLiteral_0() throws Exception {
@@ -192,6 +216,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testDoubleLiteral_13() throws Exception {
 		assertEvaluatesTo(123456789d, "123_456_789d");
 	}
+	
+	@Test public void testDoubleLiteral_14() throws Exception {
+		assertEvaluatesTo(19d, "019d");
+	}
+	
+	@Test public void testDoubleLiteral_15() throws Exception {
+		assertEvaluatesTo(0.019d, "00.019d");
+	}
 
 	@Test public void testBigInteger_0() throws Exception {
 		assertEvaluatesTo(new BigInteger("1"), "1bi");
@@ -216,6 +248,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testBigInteger_6() throws Exception {
 		assertEvaluatesTo(new BigInteger("beefbeefbeefbeefbeef", 16), "0xbeef_beef_beef_beef_beef#BI");
+	}
+	
+	@Test public void testBigInteger_7() throws Exception {
+		assertEvaluatesTo(new BigInteger("19", 10), "019BI");
 	}
 
 	@Test public void testBigDecimal_0() throws Exception {

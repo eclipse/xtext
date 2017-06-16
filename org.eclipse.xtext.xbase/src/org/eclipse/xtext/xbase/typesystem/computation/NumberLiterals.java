@@ -58,10 +58,16 @@ public class NumberLiterals {
 	
 	public String toJavaLiteral(XNumberLiteral literal, boolean removeUnderscores) {
 		if (getJavaType(literal).isPrimitive()) {
+			boolean floatingPoint = isFloatingPoint(literal);
+			String value = literal.getValue();
+			if (!floatingPoint && !value.startsWith("0x")) {
+				// strip leading zeros since they denote octal literals
+				value = value.replaceAll("^[0_]+(\\d)", "$1");
+			}
 			if (removeUnderscores)
-				return literal.getValue().replace("_", "").replace("#", "");
+				return value.replace("_", "").replace("#", "");
 			else
-				return literal.getValue().replace("#", "");
+				return value.replace("#", "");
 		} else
 			return null;
 	}
