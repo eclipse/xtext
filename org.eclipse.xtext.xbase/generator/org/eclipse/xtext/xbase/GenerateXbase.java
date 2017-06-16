@@ -56,6 +56,7 @@ final class GenerateXbase {
 		antlrOptions.setBacktrack(backtrack);
 		antlrOptions.setMemoize(memoize);
 		
+		@SuppressWarnings("deprecation")
 		final XtextGenerator generator = new XtextGenerator() {{
 			setConfiguration(new DefaultGeneratorModule() {{
 				setProject(new StandardProjectConfig() {{

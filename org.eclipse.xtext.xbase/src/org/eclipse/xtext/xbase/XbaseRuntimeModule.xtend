@@ -14,7 +14,7 @@ package org.eclipse.xtext.xbase
  */
 class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 
-	@SuppressWarnings("deprecation") override Class<? extends org.eclipse.xtext.formatting.IFormatter> bindIFormatter() {
+	@Deprecated override Class<? extends org.eclipse.xtext.formatting.IFormatter> bindIFormatter() {
 		// this binding can be removed once 
 		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=453440
 		// is fixed. 
