@@ -104,22 +104,20 @@ class ServerLauncher {
 
 	def static void logStandardStreams(String prefix) {
 		val stdFileOut = new FileOutputStream(prefix + "-debug.log")
-		val stdFileErr = new FileOutputStream(prefix + "-error.log")
-		redirectStandardStreams(stdFileOut, stdFileErr)
+		redirectStandardStreams(stdFileOut)
 	}
 
 	def static void silentStandardStreams() {
-		redirectStandardStreams(ServerLauncher.silentOut, ServerLauncher.silentOut)
+		redirectStandardStreams(ServerLauncher.silentOut)
 	}
 
-	def static void redirectStandardStreams(OutputStream out, OutputStream err) {
-		redirectStandardStreams(ServerLauncher.silentIn, out, err)
+	def static void redirectStandardStreams(OutputStream out) {
+		redirectStandardStreams(ServerLauncher.silentIn, out)
 	}
 
-	def static void redirectStandardStreams(InputStream in, OutputStream out, OutputStream err) {
+	def static void redirectStandardStreams(InputStream in, OutputStream out) {
 		System.setIn(in)
 		System.setOut(new PrintStream(out))
-		System.setErr(new PrintStream(err))
 	}
 
 	def static OutputStream silentOut() {

@@ -133,27 +133,24 @@ public class ServerLauncher {
   public static void logStandardStreams(final String prefix) {
     try {
       final FileOutputStream stdFileOut = new FileOutputStream((prefix + "-debug.log"));
-      final FileOutputStream stdFileErr = new FileOutputStream((prefix + "-error.log"));
-      ServerLauncher.redirectStandardStreams(stdFileOut, stdFileErr);
+      ServerLauncher.redirectStandardStreams(stdFileOut);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
   public static void silentStandardStreams() {
-    ServerLauncher.redirectStandardStreams(ServerLauncher.silentOut(), ServerLauncher.silentOut());
+    ServerLauncher.redirectStandardStreams(ServerLauncher.silentOut());
   }
   
-  public static void redirectStandardStreams(final OutputStream out, final OutputStream err) {
-    ServerLauncher.redirectStandardStreams(ServerLauncher.silentIn(), out, err);
+  public static void redirectStandardStreams(final OutputStream out) {
+    ServerLauncher.redirectStandardStreams(ServerLauncher.silentIn(), out);
   }
   
-  public static void redirectStandardStreams(final InputStream in, final OutputStream out, final OutputStream err) {
+  public static void redirectStandardStreams(final InputStream in, final OutputStream out) {
     System.setIn(in);
     PrintStream _printStream = new PrintStream(out);
     System.setOut(_printStream);
-    PrintStream _printStream_1 = new PrintStream(err);
-    System.setErr(_printStream_1);
   }
   
   public static OutputStream silentOut() {
