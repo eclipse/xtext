@@ -95,6 +95,9 @@ public class HoverService {
   }
   
   protected Hover hover(final HoverContext context) {
+    if ((context == null)) {
+      return HoverService.EMPTY_HOVER;
+    }
     final List<Either<String, MarkedString>> contents = this.getContents(context);
     if ((contents == null)) {
       return HoverService.EMPTY_HOVER;

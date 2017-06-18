@@ -60,7 +60,7 @@ class HoverService {
 	) {
 		val offset = document.getOffSet(params.position)
 		val context = createContext(document, resource, offset)
-		return context.hover	
+		return context.hover
 	}
 
 	protected def HoverContext createContext(Document document, XtextResource resource, int offset) {
@@ -88,6 +88,8 @@ class HoverService {
 	}
 
 	protected def Hover hover(HoverContext context) {
+		if (context === null) return EMPTY_HOVER
+		
 		val contents = context.contents
 		if(contents === null) return EMPTY_HOVER
 
