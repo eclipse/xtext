@@ -20,8 +20,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.lsp4j.ParameterInformation;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureInformation;
+import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall;
@@ -38,6 +40,7 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -95,6 +98,12 @@ public class SignatureHelpServiceImpl implements ISignatureHelpService {
   
   @Extension
   private TestLanguagePackage _testLanguagePackage = TestLanguagePackage.eINSTANCE;
+  
+  @Override
+  public SignatureHelp getSignatureHelp(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator) {
+    final int offset = document.getOffSet(params.getPosition());
+    return this.getSignatureHelp(resource, offset);
+  }
   
   @Override
   public SignatureHelp getSignatureHelp(final XtextResource resource, final int offset) {

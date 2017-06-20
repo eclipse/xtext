@@ -8,24 +8,26 @@
 package org.eclipse.xtext.ide.server;
 
 import com.google.common.base.Objects;
+import com.google.common.io.ByteStreams;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Module;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
 import java.util.concurrent.Future;
 import org.eclipse.lsp4j.jsonrpc.Launcher;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
+import org.eclipse.xtext.ide.server.LaunchArgs;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
@@ -34,32 +36,34 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class ServerLauncher {
-  private static boolean IS_DEBUG = false;
+  public final static String LOG = "-log";
+  
+  public final static String TRACE = "-trace";
+  
+  public final static String NO_VALIDATE = "-noValidate";
   
   public static void main(final String[] args) {
-    final Function1<String, Boolean> _function = (String it) -> {
-      return Boolean.valueOf(Objects.equal(it, "debug"));
-    };
-    ServerLauncher.IS_DEBUG = IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), _function);
-    final InputStream stdin = System.in;
-    final PrintStream stdout = System.out;
-    ServerLauncher.redirectStandardStreams();
+    String _name = ServerLauncher.class.getName();
     ServerModule _serverModule = new ServerModule();
-    final ServerLauncher launcher = Guice.createInjector(_serverModule).<ServerLauncher>getInstance(ServerLauncher.class);
-    launcher.start(stdin, stdout);
+    ServerLauncher.launch(_name, args, _serverModule);
+  }
+  
+  public static void launch(final String prefix, final String[] args, final Module... modules) {
+    final LaunchArgs launchArgs = ServerLauncher.createLaunchArgs(prefix, args);
+    final ServerLauncher launcher = Guice.createInjector(modules).<ServerLauncher>getInstance(ServerLauncher.class);
+    launcher.start(launchArgs);
   }
   
   @Inject
   private LanguageServerImpl languageServer;
   
-  public void start(final InputStream in, final OutputStream out) {
+  public void start(final LaunchArgs it) {
     try {
-      System.err.println("Starting Xtext Language Server.");
-      PrintWriter _printWriter = new PrintWriter(System.out);
-      final Launcher<LanguageClient> launcher = Launcher.<LanguageClient>createLauncher(this.languageServer, LanguageClient.class, in, out, true, _printWriter);
+      InputOutput.<String>println("Xtext Language Server is starting.");
+      final Launcher<LanguageClient> launcher = Launcher.<LanguageClient>createLauncher(this.languageServer, LanguageClient.class, it.getIn(), it.getOut(), it.isValidate(), it.getTrace());
       this.languageServer.connect(launcher.getRemoteProxy());
       final Future<?> future = launcher.startListening();
-      System.err.println("started.");
+      InputOutput.<String>println("Xtext Language Server has been started.");
       while ((!future.isDone())) {
         Thread.sleep(10_000l);
       }
@@ -68,33 +72,93 @@ public class ServerLauncher {
     }
   }
   
-  public static void redirectStandardStreams() {
+  public static LaunchArgs createLaunchArgs(final String prefix, final String[] args) {
+    final LaunchArgs launchArgs = new LaunchArgs();
+    launchArgs.setIn(System.in);
+    launchArgs.setOut(System.out);
+    ServerLauncher.redirectStandardStreams(prefix, args);
+    launchArgs.setTrace(ServerLauncher.getTrace(args));
+    launchArgs.setValidate(ServerLauncher.shouldValidate(args));
+    return launchArgs;
+  }
+  
+  public static PrintWriter getTrace(final String[] args) {
+    boolean _shouldTrace = ServerLauncher.shouldTrace(args);
+    if (_shouldTrace) {
+      return ServerLauncher.createTrace();
+    }
+    return null;
+  }
+  
+  public static PrintWriter createTrace() {
+    return new PrintWriter(System.out);
+  }
+  
+  public static void redirectStandardStreams(final String prefix, final String[] args) {
+    boolean _shouldLogStandardStreams = ServerLauncher.shouldLogStandardStreams(args);
+    if (_shouldLogStandardStreams) {
+      ServerLauncher.logStandardStreams(prefix);
+    } else {
+      ServerLauncher.silentStandardStreams();
+    }
+  }
+  
+  public static boolean shouldValidate(final String[] args) {
+    boolean _testArg = ServerLauncher.testArg(args, ServerLauncher.NO_VALIDATE);
+    return (!_testArg);
+  }
+  
+  public static boolean shouldTrace(final String[] args) {
+    return ServerLauncher.testArg(args, ServerLauncher.TRACE);
+  }
+  
+  public static boolean shouldLogStandardStreams(final String[] args) {
+    return ServerLauncher.testArg(args, ServerLauncher.LOG, "debug");
+  }
+  
+  public static boolean testArg(final String[] args, final String... values) {
+    final Function1<String, Boolean> _function = (String arg) -> {
+      return Boolean.valueOf(ServerLauncher.testArg(arg, values));
+    };
+    return IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), _function);
+  }
+  
+  public static boolean testArg(final String arg, final String... values) {
+    final Function1<String, Boolean> _function = (String value) -> {
+      return Boolean.valueOf(Objects.equal(value, arg));
+    };
+    return IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(values)), _function);
+  }
+  
+  public static void logStandardStreams(final String prefix) {
     try {
-      byte[] _newByteArrayOfSize = new byte[0];
-      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_newByteArrayOfSize);
-      System.setIn(_byteArrayInputStream);
-      String _name = ServerLauncher.class.getName();
-      String _plus = (_name + "-");
-      long _currentTimeMillis = System.currentTimeMillis();
-      Timestamp _timestamp = new Timestamp(_currentTimeMillis);
-      final String id = (_plus + _timestamp).replace(" ", "_");
-      if (ServerLauncher.IS_DEBUG) {
-        final FileOutputStream stdFileOut = new FileOutputStream((("out-" + id) + ".log"));
-        PrintStream _printStream = new PrintStream(stdFileOut);
-        System.setOut(_printStream);
-        final FileOutputStream stdFileErr = new FileOutputStream((("error-" + id) + ".log"));
-        PrintStream _printStream_1 = new PrintStream(stdFileErr);
-        System.setErr(_printStream_1);
-      } else {
-        ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();
-        PrintStream _printStream_2 = new PrintStream(_byteArrayOutputStream);
-        System.setOut(_printStream_2);
-        ByteArrayOutputStream _byteArrayOutputStream_1 = new ByteArrayOutputStream();
-        PrintStream _printStream_3 = new PrintStream(_byteArrayOutputStream_1);
-        System.setErr(_printStream_3);
-      }
+      final FileOutputStream stdFileOut = new FileOutputStream((prefix + "-debug.log"));
+      ServerLauncher.redirectStandardStreams(stdFileOut);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public static void silentStandardStreams() {
+    ServerLauncher.redirectStandardStreams(ServerLauncher.silentOut());
+  }
+  
+  public static void redirectStandardStreams(final OutputStream out) {
+    ServerLauncher.redirectStandardStreams(ServerLauncher.silentIn(), out);
+  }
+  
+  public static void redirectStandardStreams(final InputStream in, final OutputStream out) {
+    System.setIn(in);
+    PrintStream _printStream = new PrintStream(out);
+    System.setOut(_printStream);
+  }
+  
+  public static OutputStream silentOut() {
+    return ByteStreams.nullOutputStream();
+  }
+  
+  public static InputStream silentIn() {
+    byte[] _newByteArrayOfSize = new byte[0];
+    return new ByteArrayInputStream(_newByteArrayOfSize);
   }
 }

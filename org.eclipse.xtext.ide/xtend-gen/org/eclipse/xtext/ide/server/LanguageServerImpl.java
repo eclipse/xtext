@@ -53,7 +53,6 @@ import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Location;
-import org.eclipse.lsp4j.MarkedString;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
@@ -453,11 +452,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       return CollectionLiterals.<Location>emptyList();
     }
     final Function2<Document, XtextResource, List<? extends Location>> _function = (Document document, XtextResource resource) -> {
-      final int offset = document.getOffSet(params.getPosition());
-      return documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
+      return documentSymbolService.getDefinitions(document, resource, params, this.resourceAccess, cancelIndicator);
     };
-    final List<? extends Location> definitions = this.workspaceManager.<List<? extends Location>>doRead(uri, _function);
-    return definitions;
+    return this.workspaceManager.<List<? extends Location>>doRead(uri, _function);
   }
   
   @Override
@@ -473,22 +470,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       if ((documentSymbolService == null)) {
         return CollectionLiterals.<Location>emptyList();
       }
-      final Function2<Document, XtextResource, List<Location>> _function_1 = (Document document, XtextResource resource) -> {
-        final int offset = document.getOffSet(params.getPosition());
-        List<? extends Location> _xifexpression = null;
-        boolean _isIncludeDeclaration = params.getContext().isIncludeDeclaration();
-        if (_isIncludeDeclaration) {
-          _xifexpression = documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
-        } else {
-          _xifexpression = CollectionLiterals.emptyList();
-        }
-        final List<? extends Location> definitions = _xifexpression;
-        final IResourceDescriptions indexData = this.workspaceManager.getIndex();
-        final List<? extends Location> references = documentSymbolService.getReferences(resource, offset, this.resourceAccess, indexData, cancelIndicator);
-        final Iterable<Location> result = Iterables.<Location>concat(definitions, references);
-        return IterableExtensions.<Location>toList(result);
+      final Function2<Document, XtextResource, List<? extends Location>> _function_1 = (Document document, XtextResource resource) -> {
+        return documentSymbolService.getReferences(document, resource, params, this.resourceAccess, this.workspaceManager.getIndex(), cancelIndicator);
       };
-      return this.workspaceManager.<List<Location>>doRead(uri, _function_1);
+      return this.workspaceManager.<List<? extends Location>>doRead(uri, _function_1);
     };
     return this.requestManager.<List<? extends Location>>runRead(_function);
   }
@@ -507,7 +492,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         return CollectionLiterals.<SymbolInformation>emptyList();
       }
       final Function2<Document, XtextResource, List<? extends SymbolInformation>> _function_1 = (Document document, XtextResource resource) -> {
-        return documentSymbolService.getSymbols(resource, cancelIndicator);
+        return documentSymbolService.getSymbols(document, resource, params, cancelIndicator);
       };
       return this.workspaceManager.<List<? extends SymbolInformation>>doRead(uri, _function_1);
     };
@@ -534,12 +519,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       final HoverService hoverService = _get;
       if ((hoverService == null)) {
-        List<Either<String, MarkedString>> _emptyList = CollectionLiterals.<Either<String, MarkedString>>emptyList();
-        return new Hover(_emptyList, null);
+        return HoverService.EMPTY_HOVER;
       }
       final Function2<Document, XtextResource, Hover> _function_1 = (Document document, XtextResource resource) -> {
-        final int offset = document.getOffSet(params.getPosition());
-        return hoverService.hover(resource, offset);
+        return hoverService.hover(document, resource, params, cancelIndicator);
       };
       return this.workspaceManager.<Hover>doRead(uri, _function_1);
     };
@@ -552,9 +535,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   @Override
-  public CompletableFuture<SignatureHelp> signatureHelp(final TextDocumentPositionParams position) {
+  public CompletableFuture<SignatureHelp> signatureHelp(final TextDocumentPositionParams params) {
     final Function1<CancelIndicator, SignatureHelp> _function = (CancelIndicator cancelIndicator) -> {
-      final URI uri = this._uriExtensions.toUri(position.getTextDocument().getUri());
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       ISignatureHelpService _get = null;
       if (serviceProvider!=null) {
@@ -562,11 +545,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       final ISignatureHelpService helper = _get;
       if ((helper == null)) {
-        return new SignatureHelp();
+        return ISignatureHelpService.EMPTY;
       }
       final Function2<Document, XtextResource, SignatureHelp> _function_1 = (Document doc, XtextResource resource) -> {
-        final int offset = doc.getOffSet(position.getPosition());
-        return helper.getSignatureHelp(resource, offset);
+        return helper.getSignatureHelp(doc, resource, params, cancelIndicator);
       };
       return this.workspaceManager.<SignatureHelp>doRead(uri, _function_1);
     };
@@ -574,9 +556,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   @Override
-  public CompletableFuture<List<? extends DocumentHighlight>> documentHighlight(final TextDocumentPositionParams position) {
+  public CompletableFuture<List<? extends DocumentHighlight>> documentHighlight(final TextDocumentPositionParams params) {
     final Function1<CancelIndicator, List<? extends DocumentHighlight>> _function = (CancelIndicator cancelIndicator) -> {
-      final URI uri = this._uriExtensions.toUri(position.getTextDocument().getUri());
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       IDocumentHighlightService _get = null;
       if (serviceProvider!=null) {
@@ -587,8 +569,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         return CollectionLiterals.<DocumentHighlight>emptyList();
       }
       final Function2<Document, XtextResource, List<? extends DocumentHighlight>> _function_1 = (Document doc, XtextResource resource) -> {
-        final int offset = doc.getOffSet(position.getPosition());
-        return service.getDocumentHighlights(resource, offset);
+        return service.getDocumentHighlights(doc, resource, params, cancelIndicator);
       };
       return this.workspaceManager.<List<? extends DocumentHighlight>>doRead(uri, _function_1);
     };
@@ -621,15 +602,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       final FormattingService formatterService = _get;
       if ((formatterService == null)) {
-        return Collections.<TextEdit>emptyList();
+        return CollectionLiterals.<TextEdit>emptyList();
       }
-      final Function2<Document, XtextResource, List<TextEdit>> _function_1 = (Document document, XtextResource resource) -> {
-        final int offset = 0;
-        final int length = document.getContents().length();
-        if (((length == 0) || resource.getContents().isEmpty())) {
-          return CollectionLiterals.<TextEdit>emptyList();
-        }
-        return formatterService.format(resource, document, offset, length);
+      final Function2<Document, XtextResource, List<? extends TextEdit>> _function_1 = (Document document, XtextResource resource) -> {
+        return formatterService.format(document, resource, params, cancelIndicator);
       };
       return this.workspaceManager.<List<? extends TextEdit>>doRead(uri, _function_1);
     };
@@ -647,13 +623,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       final FormattingService formatterService = _get;
       if ((formatterService == null)) {
-        return Collections.<TextEdit>emptyList();
+        return CollectionLiterals.<TextEdit>emptyList();
       }
-      final Function2<Document, XtextResource, List<TextEdit>> _function_1 = (Document document, XtextResource resource) -> {
-        final int offset = document.getOffSet(params.getRange().getStart());
-        int _offSet = document.getOffSet(params.getRange().getEnd());
-        final int length = (_offSet - offset);
-        return formatterService.format(resource, document, offset, length);
+      final Function2<Document, XtextResource, List<? extends TextEdit>> _function_1 = (Document document, XtextResource resource) -> {
+        return formatterService.format(document, resource, params, cancelIndicator);
       };
       return this.workspaceManager.<List<? extends TextEdit>>doRead(uri, _function_1);
     };

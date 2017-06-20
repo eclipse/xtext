@@ -10,7 +10,10 @@ package org.eclipse.xtext.ide.server.occurrences;
 import java.util.List;
 
 import org.eclipse.lsp4j.DocumentHighlight;
+import org.eclipse.lsp4j.TextDocumentPositionParams;
+import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.ImplementedBy;
 
@@ -28,6 +31,8 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(DefaultDocumentHighlightService.class)
 public interface IDocumentHighlightService {
+	
+	List<? extends DocumentHighlight> getDocumentHighlights(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator);
 
 	/**
 	 * Returns with a list of {@link DocumentHighlight document highlight}
@@ -45,6 +50,7 @@ public interface IDocumentHighlightService {
 	 *         selected text based on an arbitrary logic. Might return with an
 	 *         empty list but never returns with {@code null}.
 	 */
+	@Deprecated
 	List<? extends DocumentHighlight> getDocumentHighlights(final XtextResource resource, final int offset);
 
 }

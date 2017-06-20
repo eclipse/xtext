@@ -44,6 +44,8 @@ public interface IReferenceFinder {
 	/**
 	 * Provides safe read access to a resource set for searching local references or references in a demand-created or
 	 * shared resource set.
+	 * 
+	 * Return <code>null</code> if a resource set cannot be provided for the given target URI.
 	 */
 	interface IResourceAccess {
 		<R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work);

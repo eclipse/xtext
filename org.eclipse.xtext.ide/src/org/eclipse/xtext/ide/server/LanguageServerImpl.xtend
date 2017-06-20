@@ -10,7 +10,6 @@ package org.eclipse.xtext.ide.server
 import com.google.common.collect.LinkedListMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Inject
-import java.util.Collections
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CompletableFuture
@@ -36,7 +35,6 @@ import org.eclipse.lsp4j.DocumentOnTypeFormattingParams
 import org.eclipse.lsp4j.DocumentRangeFormattingParams
 import org.eclipse.lsp4j.DocumentSymbolParams
 import org.eclipse.lsp4j.FileChangeType
-import org.eclipse.lsp4j.Hover
 import org.eclipse.lsp4j.InitializeParams
 import org.eclipse.lsp4j.InitializeResult
 import org.eclipse.lsp4j.Location
@@ -46,7 +44,6 @@ import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.ReferenceParams
 import org.eclipse.lsp4j.RenameParams
 import org.eclipse.lsp4j.ServerCapabilities
-import org.eclipse.lsp4j.SignatureHelp
 import org.eclipse.lsp4j.SignatureHelpOptions
 import org.eclipse.lsp4j.SymbolInformation
 import org.eclipse.lsp4j.TextDocumentPositionParams
@@ -315,11 +312,9 @@ import org.eclipse.xtext.validation.Issue
 		if (documentSymbolService === null)
 			return emptyList
 
-		val definitions = workspaceManager.doRead(uri) [ document, resource |
-			val offset = document.getOffSet(params.position)
-			return documentSymbolService.getDefinitions(resource, offset, resourceAccess, cancelIndicator)
+		return workspaceManager.doRead(uri) [ document, resource |
+			documentSymbolService.getDefinitions(document, resource, params, resourceAccess, cancelIndicator)
 		]
-		return definitions
 	}
 
 	override references(ReferenceParams params) {
@@ -331,17 +326,7 @@ import org.eclipse.xtext.validation.Issue
 				return emptyList
 	
 			return workspaceManager.doRead(uri) [ document, resource |
-				val offset = document.getOffSet(params.position)
-				
-				val definitions = if (params.context.includeDeclaration)
-						documentSymbolService.getDefinitions(resource, offset, resourceAccess, cancelIndicator)
-					else
-						emptyList
-				
-				val indexData = workspaceManager.index
-				val references = documentSymbolService.getReferences(resource, offset, resourceAccess, indexData, cancelIndicator)
-				val result = definitions + references
-				return result.toList
+				documentSymbolService.getReferences(document, resource, params, resourceAccess, workspaceManager.index, cancelIndicator)
 			]
 		]
 	}
@@ -355,7 +340,7 @@ import org.eclipse.xtext.validation.Issue
 				return emptyList
 	
 			return workspaceManager.doRead(uri) [ document, resource |
-				return documentSymbolService.getSymbols(resource, cancelIndicator)
+				return documentSymbolService.getSymbols(document, resource, params, cancelIndicator)
 			]
 		]
 	}
@@ -377,11 +362,10 @@ import org.eclipse.xtext.validation.Issue
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val hoverService = resourceServiceProvider?.get(HoverService)
 			if (hoverService === null)
-				return new Hover(emptyList, null)
+				return HoverService.EMPTY_HOVER
 
 			return workspaceManager.doRead(uri) [ document, resource |
-				val offset = document.getOffSet(params.position)
-				return hoverService.hover(resource, offset)
+				hoverService.hover(document, resource, params, cancelIndicator)
 			]
 		]
 	}
@@ -392,35 +376,31 @@ import org.eclipse.xtext.validation.Issue
 		return CompletableFuture.completedFuture(unresolved)
 	}
 
-	override signatureHelp(TextDocumentPositionParams position) {
+	override signatureHelp(TextDocumentPositionParams params) {
 		return requestManager.runRead [ cancelIndicator |
-            val uri = position.textDocument.uri.toUri;
+            val uri = params.textDocument.uri.toUri;
             val serviceProvider = uri.resourceServiceProvider;
             val helper = serviceProvider?.get(ISignatureHelpService);
-            if (helper === null) {
-                return new SignatureHelp(); 
-            }
+            if (helper === null)
+                return ISignatureHelpService.EMPTY
             
-            return workspaceManager.doRead(uri, [doc, resource |
-                val offset = doc.getOffSet(position.position);
-                return helper.getSignatureHelp(resource, offset);
-            ]);
+            return workspaceManager.doRead(uri) [doc, resource |
+                helper.getSignatureHelp(doc, resource, params, cancelIndicator)
+            ]
         ];
 	}
 
-	override documentHighlight(TextDocumentPositionParams position) {
+	override documentHighlight(TextDocumentPositionParams params) {
 		return requestManager.runRead [ cancelIndicator |
-			val uri = position.textDocument.uri.toUri;
+			val uri = params.textDocument.uri.toUri;
 			val serviceProvider = uri.resourceServiceProvider;
 			val service =  serviceProvider?.get(IDocumentHighlightService);
-			if (service === null) {
-				return emptyList;
-			}
+			if (service === null)
+				return emptyList
 			
-			return workspaceManager.doRead(uri, [doc, resource |
-				val offset = doc.getOffSet(position.position);
-				return service.getDocumentHighlights(resource, offset);
-			]);
+			return workspaceManager.doRead(uri) [doc, resource |
+				service.getDocumentHighlights(doc, resource, params, cancelIndicator)
+			]
 		];
 	}
 
@@ -442,15 +422,10 @@ import org.eclipse.xtext.validation.Issue
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val formatterService = resourceServiceProvider?.get(FormattingService)
 			if (formatterService === null)
-				return Collections.emptyList
+				return emptyList
 
 			return workspaceManager.doRead(uri) [ document, resource |
-				val offset = 0
-				val length = document.contents.length
-				if (length === 0 || resource.contents.isEmpty) {
-				    return emptyList
-				}
-				return formatterService.format(resource, document, offset, length)
+				formatterService.format(document, resource, params, cancelIndicator)
 			]  
 		]
 	}
@@ -461,12 +436,10 @@ import org.eclipse.xtext.validation.Issue
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val formatterService = resourceServiceProvider?.get(FormattingService)
 			if (formatterService === null)
-				return Collections.emptyList
+				return emptyList
 
 			return workspaceManager.doRead(uri) [ document, resource |
-				val offset = document.getOffSet(params.range.start)
-				val length = document.getOffSet(params.range.end) - offset
-				return formatterService.format(resource, document, offset, length)
+				formatterService.format(document, resource, params, cancelIndicator)
 			]  
 		]
 	}

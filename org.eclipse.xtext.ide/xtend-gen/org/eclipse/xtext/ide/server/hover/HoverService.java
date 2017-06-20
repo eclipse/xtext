@@ -15,24 +15,24 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.MarkedString;
 import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
+import org.eclipse.xtext.ide.server.hover.HoverContext;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -41,6 +41,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class HoverService {
+  public final static Hover EMPTY_HOVER = new Hover(Collections.<Either<String, MarkedString>>emptyList(), null);
+  
   @Inject
   @Extension
   private DocumentExtensions _documentExtensions;
@@ -57,77 +59,93 @@ public class HoverService {
   @Extension
   private IEObjectDocumentationProvider _iEObjectDocumentationProvider;
   
-  public Hover hover(final XtextResource resource, final int offset) {
-    final Pair<EObject, ITextRegion> pair = this.getXtextElementAt(resource, offset);
-    if ((((pair == null) || (pair.getFirst() == null)) || (pair.getSecond() == null))) {
-      List<Either<String, MarkedString>> _emptyList = Collections.<Either<String, MarkedString>>emptyList();
-      return new Hover(_emptyList, null);
-    }
-    final EObject element = pair.getFirst();
-    final List<? extends String> contents = this.getContents(element);
-    if ((contents == null)) {
-      List<Either<String, MarkedString>> _emptyList_1 = Collections.<Either<String, MarkedString>>emptyList();
-      return new Hover(_emptyList_1, null);
-    }
-    final ITextRegion textRegion = pair.getSecond();
-    boolean _contains = textRegion.contains(offset);
-    boolean _not = (!_contains);
-    if (_not) {
-      List<Either<String, MarkedString>> _emptyList_2 = Collections.<Either<String, MarkedString>>emptyList();
-      return new Hover(_emptyList_2, null);
-    }
-    final Range range = this._documentExtensions.newRange(resource, textRegion);
-    Hover _hover = new Hover();
-    final Procedure1<Hover> _function = (Hover b) -> {
-      b.setRange(range);
-      final Function1<String, Either<String, MarkedString>> _function_1 = (String it) -> {
-        return Either.<String, MarkedString>forLeft(it);
-      };
-      b.setContents(ListExtensions.map(contents, _function_1));
-    };
-    return ObjectExtensions.<Hover>operator_doubleArrow(_hover, _function);
+  public Hover hover(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator) {
+    final int offset = document.getOffSet(params.getPosition());
+    final HoverContext context = this.createContext(document, resource, offset);
+    return this.hover(context);
   }
   
-  protected List<? extends String> getContents(final EObject element) {
-    List<String> _xblockexpression = null;
-    {
-      final String documentation = this._iEObjectDocumentationProvider.getDocumentation(element);
-      List<String> _xifexpression = null;
-      if ((documentation == null)) {
-        return Collections.<String>emptyList();
-      } else {
-        _xifexpression = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(documentation));
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
-  }
-  
-  protected Pair<EObject, ITextRegion> getXtextElementAt(final XtextResource resource, final int offset) {
+  protected HoverContext createContext(final Document document, final XtextResource resource, final int offset) {
     final EObject crossLinkedEObject = this._eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset);
     if ((crossLinkedEObject != null)) {
       boolean _eIsProxy = crossLinkedEObject.eIsProxy();
-      boolean _not = (!_eIsProxy);
-      if (_not) {
-        final IParseResult parseResult = resource.getParseResult();
-        if ((parseResult != null)) {
-          ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
-          if ((((leafNode != null) && leafNode.isHidden()) && (leafNode.getOffset() == offset))) {
-            leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), (offset - 1));
-          }
-          if ((leafNode != null)) {
-            final ITextRegion leafRegion = leafNode.getTextRegion();
-            return Tuples.<EObject, ITextRegion>create(crossLinkedEObject, leafRegion);
-          }
-        }
+      if (_eIsProxy) {
+        return null;
       }
-    } else {
-      final EObject o = this._eObjectAtOffsetHelper.resolveElementAt(resource, offset);
-      if ((o != null)) {
-        final ITextRegion region = this._iLocationInFileProvider.getSignificantTextRegion(o);
-        return Tuples.<EObject, ITextRegion>create(o, region);
+      final IParseResult parseResult = resource.getParseResult();
+      if ((parseResult == null)) {
+        return null;
       }
+      ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
+      if ((((leafNode != null) && leafNode.isHidden()) && (leafNode.getOffset() == offset))) {
+        leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), (offset - 1));
+      }
+      if ((leafNode == null)) {
+        return null;
+      }
+      final ITextRegion leafRegion = leafNode.getTextRegion();
+      return new HoverContext(document, resource, offset, leafRegion, crossLinkedEObject);
     }
+    final EObject element = this._eObjectAtOffsetHelper.resolveElementAt(resource, offset);
+    if ((element == null)) {
+      return null;
+    }
+    final ITextRegion region = this._iLocationInFileProvider.getSignificantTextRegion(element);
+    return new HoverContext(document, resource, offset, region, element);
+  }
+  
+  protected Hover hover(final HoverContext context) {
+    if ((context == null)) {
+      return HoverService.EMPTY_HOVER;
+    }
+    final List<Either<String, MarkedString>> contents = this.getContents(context);
+    if ((contents == null)) {
+      return HoverService.EMPTY_HOVER;
+    }
+    final Range range = this.getRange(context);
+    if ((range == null)) {
+      return HoverService.EMPTY_HOVER;
+    }
+    return new Hover(contents, range);
+  }
+  
+  protected Range getRange(final HoverContext it) {
+    boolean _contains = it.getRegion().contains(it.getOffset());
+    boolean _not = (!_contains);
+    if (_not) {
+      return null;
+    }
+    return this._documentExtensions.newRange(it.getResource(), it.getRegion());
+  }
+  
+  protected List<Either<String, MarkedString>> getContents(final HoverContext it) {
+    final String language = this.getLanguage(it);
+    final Function1<String, Either<String, MarkedString>> _function = (String value) -> {
+      return this.toContents(language, value);
+    };
+    return ListExtensions.<String, Either<String, MarkedString>>map(this.getContents(it.getElement()), _function);
+  }
+  
+  protected String getLanguage(final HoverContext it) {
     return null;
+  }
+  
+  protected Either<String, MarkedString> toContents(final String language, final String value) {
+    if ((language == null)) {
+      return Either.<String, MarkedString>forLeft(value);
+    }
+    MarkedString _markedString = new MarkedString(language, value);
+    return Either.<String, MarkedString>forRight(_markedString);
+  }
+  
+  public List<String> getContents(final EObject element) {
+    if ((element == null)) {
+      return Collections.<String>emptyList();
+    }
+    final String documentation = this._iEObjectDocumentationProvider.getDocumentation(element);
+    if ((documentation == null)) {
+      return Collections.<String>emptyList();
+    }
+    return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(documentation));
   }
 }

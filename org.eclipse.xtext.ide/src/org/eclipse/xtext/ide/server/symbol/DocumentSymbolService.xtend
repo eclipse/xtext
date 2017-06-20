@@ -17,11 +17,13 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.lsp4j.Location
 import org.eclipse.lsp4j.SymbolInformation
 import org.eclipse.lsp4j.SymbolKind
+import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.xtext.findReferences.IReferenceFinder
 import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 import org.eclipse.xtext.findReferences.ReferenceAcceptor
 import org.eclipse.xtext.findReferences.TargetURICollector
 import org.eclipse.xtext.findReferences.TargetURIs
+import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.DocumentExtensions
 import org.eclipse.xtext.ide.util.CancelIndicatorProgressMonitor
 import org.eclipse.xtext.naming.IQualifiedNameProvider
@@ -36,6 +38,8 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.eclipse.lsp4j.ReferenceParams
+import org.eclipse.lsp4j.DocumentSymbolParams
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -69,6 +73,17 @@ class DocumentSymbolService {
 	IResourceServiceProvider.Registry resourceServiceProviderRegistry
 
 	def List<? extends Location> getDefinitions(
+		Document document,
+		XtextResource resource,
+		TextDocumentPositionParams params,
+		IResourceAccess resourceAccess,
+		CancelIndicator cancelIndicator
+	) {
+		val offset = document.getOffSet(params.position)
+		return getDefinitions(resource, offset, resourceAccess, cancelIndicator)
+	}
+
+	def List<? extends Location> getDefinitions(
 		XtextResource resource,
 		int offset,
 		IResourceAccess resourceAccess,
@@ -84,10 +99,32 @@ class DocumentSymbolService {
 			operationCanceledManager.checkCanceled(cancelIndicator)
 
 			resourceAccess.doRead(targetURI) [ obj |
-				locations += obj.newLocation
+				val location = obj.newLocation
+				if (location !== null)
+					locations += location
 			]
 		}
 		return locations
+	}
+	
+	def List<? extends Location> getReferences(
+		Document document,
+		XtextResource resource,
+		ReferenceParams params,
+		IResourceAccess resourceAccess,
+		IResourceDescriptions indexData,
+		CancelIndicator cancelIndicator
+	) {
+		val offset = document.getOffSet(params.position)
+				
+		val definitions = if (params.context.includeDeclaration)
+				getDefinitions(resource, offset, resourceAccess, cancelIndicator)
+			else
+				emptyList
+		
+		val references = getReferences(resource, offset, resourceAccess, indexData, cancelIndicator)
+		val result = definitions + references
+		return result.toList
 	}
 
 	def List<? extends Location> getReferences(
@@ -109,7 +146,9 @@ class DocumentSymbolService {
 			indexData,
 			new ReferenceAcceptor(resourceServiceProviderRegistry) [ reference |
 				resourceAccess.doRead(reference.sourceEObjectUri) [ obj |
-					locations += obj.newLocation(reference.EReference, reference.indexInList)
+					val location = obj.newLocation(reference.EReference, reference.indexInList)
+					if (location !== null)
+						locations += location
 				]
 			],
 			new CancelIndicatorProgressMonitor(cancelIndicator)
@@ -121,6 +160,15 @@ class DocumentSymbolService {
 		val targetURIs = targetURIProvider.get
 		targetURICollector.add(targetObject, targetURIs)
 		return targetURIs
+	}
+	
+	def List<? extends SymbolInformation> getSymbols(
+		Document document,
+		XtextResource resource,
+		DocumentSymbolParams params,
+		CancelIndicator cancelIndicator
+	) {
+		return getSymbols(resource, cancelIndicator)
 	}
 
 	def List<? extends SymbolInformation> getSymbols(XtextResource resource, CancelIndicator cancelIndicator) {
@@ -147,13 +195,19 @@ class DocumentSymbolService {
 	}
 
 	protected def SymbolInformation createSymbol(EObject object) {
-		val symbolName = object.symbolName
-		if(symbolName === null) return null
+		val name = object.symbolName
+		if(name === null) return null
+
+		val kind = object.symbolKind
+		if(kind === null) return null
+
+		val location = object.symbolLocation
+		if(location === null) return null
 
 		val symbol = new SymbolInformation
-		symbol.name = symbolName
-		symbol.kind = object.symbolKind
-		symbol.location = object.newLocation
+		symbol.name = name
+		symbol.kind = kind
+		symbol.location = location
 		return symbol
 	}
 
@@ -163,6 +217,10 @@ class DocumentSymbolService {
 
 	protected def SymbolKind getSymbolKind(EObject object) {
 		return object.eClass.symbolKind
+	}
+
+	protected def Location getSymbolLocation(EObject object) {
+		return object.newLocation
 	}
 
 	def List<? extends SymbolInformation> getSymbols(
@@ -175,13 +233,9 @@ class DocumentSymbolService {
 		for (description : resourceDescription.exportedObjects) {
 			operationCanceledManager.checkCanceled(cancelIndicator)
 			if (description.filter(query)) {
-				val symbol = description.createSymbol
-				if (symbol !== null) {
+				description.createSymbol(resourceAccess) [ symbol |
 					symbols += symbol
-					resourceAccess.doRead(description.EObjectURI) [ obj |
-						symbol.location = obj.newLocation
-					]
-				}
+				]
 			}
 		}
 		return symbols
@@ -191,14 +245,34 @@ class DocumentSymbolService {
 		return description.qualifiedName.toLowerCase.toString.contains(query.toLowerCase)
 	}
 
+	protected def void createSymbol(
+		IEObjectDescription description,
+		IResourceAccess resourceAccess,
+		(SymbolInformation)=>void acceptor
+	) {
+		val name = description.symbolName
+		if(name === null) return;
+
+		val kind = description.symbolKind
+		if(kind === null) return;
+
+		description.getSymbolLocation(resourceAccess) [ location |
+			val symbol = new SymbolInformation(name, kind, location)
+			acceptor.apply(symbol)
+		]
+	}
+
 	protected def SymbolInformation createSymbol(IEObjectDescription description) {
 		val symbolName = description.symbolName
-		if(symbolName === null) return null
+		if(symbolName === null) return null;
+
+		val symbolKind = description.symbolKind
+		if(symbolKind === null) return null;
 
 		val symbol = new SymbolInformation
 		symbol.name = symbolName
-		symbol.kind = description.symbolKind
-		return symbol
+		symbol.kind = symbolKind
+		return symbol;
 	}
 
 	protected def String getSymbolName(IEObjectDescription description) {
@@ -209,12 +283,25 @@ class DocumentSymbolService {
 		return description.EClass.symbolKind
 	}
 
+	protected def void getSymbolLocation(
+		IEObjectDescription description,
+		IResourceAccess resourceAccess,
+		(Location)=>void acceptor
+	) {
+		resourceAccess.doRead(description.EObjectURI) [ obj |
+			val location = obj.symbolLocation
+			if (location !== null) {
+				acceptor.apply(location)
+			}
+		]
+	}
+
 	protected def String getSymbolName(QualifiedName qualifiedName) {
 		return qualifiedName?.toString
 	}
 
 	protected def SymbolKind getSymbolKind(EClass type) {
-		//TODO implement meaningful
+		// TODO implement meaningful
 		return SymbolKind.Property
 	}
 

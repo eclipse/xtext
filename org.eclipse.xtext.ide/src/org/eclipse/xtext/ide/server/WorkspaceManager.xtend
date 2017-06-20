@@ -122,12 +122,12 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 
     def URI getProjectBaseDir(URI candidate) {
         val projectConfig = workspaceConfig.findProjectContaining(candidate)
-        projectConfig.path
+        projectConfig?.path
     }
     
     def ProjectManager getProjectManager(URI uri) {
         val projectConfig = workspaceConfig.findProjectContaining(uri)
-        return projectName2ProjectManager.get(projectConfig.name)
+        return projectName2ProjectManager.get(projectConfig?.name)
     }
     
     def ProjectManager getProjectManager(String projectName) {
@@ -163,13 +163,16 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
     }
     
     protected def boolean exists(URI uri) {
-        getProjectManager(uri).resourceSet.URIConverter.exists(uri, null)
+        getProjectManager(uri)?.resourceSet.URIConverter.exists(uri, null)
     }
     
     def <T> T doRead(URI uri, (Document, XtextResource)=>T work) {
     	val resourceURI = uri.trimFragment
     	val projectMnr = getProjectManager(resourceURI)
-        val resource = projectMnr.getResource(resourceURI) as XtextResource
+        val resource = projectMnr?.getResource(resourceURI) as XtextResource
+        if (resource === null) {
+        	return work.apply(null, null)	
+        }
         var doc = getDocument(resource)
         return work.apply(doc, projectMnr.getResource(resourceURI) as XtextResource)
     }
