@@ -288,6 +288,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		}
 	}
 
+	/**
+	 * @since 2.13
+	 */
 	protected boolean shouldTouch(IFile file) throws CoreException {
 		return true;
 	}
