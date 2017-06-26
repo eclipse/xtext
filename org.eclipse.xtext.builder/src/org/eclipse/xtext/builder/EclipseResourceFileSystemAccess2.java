@@ -259,7 +259,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 						// no need to convert the string twice
 						content.reset();
 						file.setContents(content, true, outputConfig.isKeepLocalHistory(), monitor);
-					} else {
+					} else if (shouldTouch(file)) {
 						file.touch(monitor);
 					}
 					if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
@@ -288,6 +288,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		}
 	}
 
+	/**
+	 * @since 2.13
+	 */
+	protected boolean shouldTouch(IFile file) throws CoreException {
+		return true;
+	}
+	
 	/**
 	 * @since 2.3
 	 */
