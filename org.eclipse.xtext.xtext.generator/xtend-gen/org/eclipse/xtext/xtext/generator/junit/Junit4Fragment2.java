@@ -4,6 +4,9 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.Collections;
 import java.util.function.Consumer;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -22,7 +25,6 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 @SuppressWarnings("all")
 public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
@@ -159,8 +161,9 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     final TypeReference parseHelper = new TypeReference(_plus_2);
     final TypeReference test = new TypeReference("org.junit.Test");
     final TypeReference assert_ = new TypeReference("org.junit.Assert");
-    String _javaTypeName = GenModelUtil2.getJavaTypeName(IterableExtensions.<AbstractRule>head(this.getGrammar().getRules()).getType().getClassifier(), this.getGrammar().eResource().getResourceSet());
-    final TypeReference rootType = new TypeReference(_javaTypeName);
+    EClassifier _classifier = IterableExtensions.<AbstractRule>head(this.getGrammar().getRules()).getType().getClassifier();
+    ResourceSet _resourceSet = this.getGrammar().eResource().getResourceSet();
+    final TypeReference rootType = new TypeReference(((EClass) _classifier), _resourceSet);
     TypeReference _exampleRuntimeTest = this.exampleRuntimeTest();
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override

@@ -17,6 +17,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 /**
  * Reference to a Java type. Use this for automatic import of types in {@link JavaFileAccess}
@@ -102,7 +103,11 @@ class TypeReference {
 	new(EClass clazz, ResourceSet resourceSet) {
 		// the qualified name might be a nested type, e.g. jav.util.Map.Entry
 		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=483088
-		this(getQualifiedName(clazz, resourceSet), null, false)
+		this(getQualifiedName(clazz, resourceSet))
+	}
+	
+	new(QualifiedClazzName qualifiedClazzName) {
+		this(qualifiedClazzName.packageName, qualifiedClazzName.className, null)
 	}
 	
 	new(EPackage epackage, ResourceSet resourceSet) {
@@ -139,18 +144,26 @@ class TypeReference {
 			qualifiedName.substring(packageName.length + 1, qualifiedName.length)
 	}
 	
-	private static def getQualifiedName(EClass clazz, ResourceSet resourceSet) {
+	private static def QualifiedClazzName getQualifiedName(EClass clazz, ResourceSet resourceSet) {
 		if (clazz.EPackage.nsURI == 'http://www.eclipse.org/2008/Xtext') {
-			'org.eclipse.xtext.' + clazz.name
+			new QualifiedClazzName('org.eclipse.xtext', clazz.name)
 		} else if (clazz.EPackage.nsURI == 'http://www.eclipse.org/emf/2002/Ecore') {
-			if (clazz.instanceTypeName !== null) clazz.instanceTypeName.replace('$', '.') else 'org.eclipse.emf.ecore.' + clazz.name
+			if (clazz.instanceTypeName !== null) {
+				val itn = clazz.instanceTypeName;
+				new QualifiedClazzName(itn.substring(0, itn.lastIndexOf('.')),
+					itn.substring(itn.lastIndexOf(".") + 1).replace("$", "."))
+			} else {
+				new QualifiedClazzName('org.eclipse.emf.ecore', clazz.name)
+			}
 		} else {
-			GenModelUtil2.getGenClass(clazz, resourceSet).qualifiedInterfaceName
+			new QualifiedClazzName(GenModelUtil2.getGenClass(clazz, resourceSet).genPackage.qualifiedPackageName,
+				GenModelUtil2.getGenClass(clazz, resourceSet).interfaceName)
 		}
 	}
-	
-	private static def getQualifiedName(EPackage epackage, ResourceSet resourceSet) {
-		GenModelUtil2.getGenPackage(epackage, resourceSet).qualifiedPackageInterfaceName
+
+	private static def QualifiedClazzName getQualifiedName(EPackage epackage, ResourceSet resourceSet) {
+		new QualifiedClazzName(GenModelUtil2.getGenPackage(epackage, resourceSet).qualifiedPackageName,
+			GenModelUtil2.getGenPackage(epackage, resourceSet).packageInterfaceName)
 	}
 	
 	override toString() {
@@ -175,6 +188,14 @@ class TypeReference {
 	
 	def String getXtendPath() {
 		path + ".xtend"
+	}
+	
+	@FinalFieldsConstructor
+	static class QualifiedClazzName {
+		@Accessors(PUBLIC_GETTER)
+		val String packageName
+		@Accessors(PUBLIC_GETTER)
+		val String className
 	}
 	
 }
