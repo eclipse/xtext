@@ -5,11 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.annotations.ide;
+package org.eclipse.xtext.xbase.annotations.ide
 
-
-/**
+/** 
  * Use this class to register ide components.
  */
-public class XbaseWithAnnotationsIdeModule extends AbstractXbaseWithAnnotationsIdeModule {
+class XbaseWithAnnotationsIdeModule extends AbstractXbaseWithAnnotationsIdeModule {
 }
