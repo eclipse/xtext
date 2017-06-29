@@ -11,6 +11,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.emf.ecore.EClass
 
 class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 	
@@ -105,7 +106,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 		val parseHelper = new TypeReference(testingPackage + ".util.ParseHelper")
 		val test = new TypeReference("org.junit.Test")
 		val assert = new TypeReference("org.junit.Assert")
-		val rootType = new TypeReference(GenModelUtil2.getJavaTypeName(grammar.rules.head.type.classifier, grammar.eResource.resourceSet))
+		val rootType = new TypeReference(grammar.rules.head.type.classifier as EClass, grammar.eResource.resourceSet)
 		return fileAccessFactory.createXtendFile(exampleRuntimeTest, '''
 			@«runWith»(«xtextRunner»)
 			@«injectWith»(«injectorProvider»)

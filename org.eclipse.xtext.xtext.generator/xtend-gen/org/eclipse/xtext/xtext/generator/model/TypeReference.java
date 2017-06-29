@@ -14,8 +14,10 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.EqualsHashCode;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -32,6 +34,31 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 @EqualsHashCode
 @SuppressWarnings("all")
 public class TypeReference {
+  @FinalFieldsConstructor
+  public static class QualifiedClazzName {
+    @Accessors(AccessorType.PUBLIC_GETTER)
+    private final String packageName;
+    
+    @Accessors(AccessorType.PUBLIC_GETTER)
+    private final String className;
+    
+    @Pure
+    public String getPackageName() {
+      return this.packageName;
+    }
+    
+    @Pure
+    public String getClassName() {
+      return this.className;
+    }
+    
+    public QualifiedClazzName(final String packageName, final String className) {
+      super();
+      this.packageName = packageName;
+      this.className = className;
+    }
+  }
+  
   public static TypeReference typeRef(final String name, final TypeReference... arguments) {
     return new TypeReference(name, (List<TypeReference>)Conversions.doWrapArray(arguments));
   }
@@ -137,7 +164,11 @@ public class TypeReference {
   }
   
   public TypeReference(final EClass clazz, final ResourceSet resourceSet) {
-    this(TypeReference.getQualifiedName(clazz, resourceSet), null, false);
+    this(TypeReference.getQualifiedName(clazz, resourceSet));
+  }
+  
+  public TypeReference(final TypeReference.QualifiedClazzName qualifiedClazzName) {
+    this(qualifiedClazzName.packageName, qualifiedClazzName.className, null);
   }
   
   public TypeReference(final EPackage epackage, final ResourceSet resourceSet) {
@@ -201,38 +232,51 @@ public class TypeReference {
     return _xblockexpression;
   }
   
-  private static String getQualifiedName(final EClass clazz, final ResourceSet resourceSet) {
-    String _xifexpression = null;
+  private static TypeReference.QualifiedClazzName getQualifiedName(final EClass clazz, final ResourceSet resourceSet) {
+    TypeReference.QualifiedClazzName _xifexpression = null;
     String _nsURI = clazz.getEPackage().getNsURI();
     boolean _equals = Objects.equal(_nsURI, "http://www.eclipse.org/2008/Xtext");
     if (_equals) {
       String _name = clazz.getName();
-      _xifexpression = ("org.eclipse.xtext." + _name);
+      _xifexpression = new TypeReference.QualifiedClazzName("org.eclipse.xtext", _name);
     } else {
-      String _xifexpression_1 = null;
+      TypeReference.QualifiedClazzName _xifexpression_1 = null;
       String _nsURI_1 = clazz.getEPackage().getNsURI();
       boolean _equals_1 = Objects.equal(_nsURI_1, "http://www.eclipse.org/emf/2002/Ecore");
       if (_equals_1) {
-        String _xifexpression_2 = null;
+        TypeReference.QualifiedClazzName _xifexpression_2 = null;
         String _instanceTypeName = clazz.getInstanceTypeName();
         boolean _tripleNotEquals = (_instanceTypeName != null);
         if (_tripleNotEquals) {
-          _xifexpression_2 = clazz.getInstanceTypeName().replace("$", ".");
+          TypeReference.QualifiedClazzName _xblockexpression = null;
+          {
+            final String itn = clazz.getInstanceTypeName();
+            String _substring = itn.substring(0, itn.lastIndexOf("."));
+            int _lastIndexOf = itn.lastIndexOf(".");
+            int _plus = (_lastIndexOf + 1);
+            String _replace = itn.substring(_plus).replace("$", ".");
+            _xblockexpression = new TypeReference.QualifiedClazzName(_substring, _replace);
+          }
+          _xifexpression_2 = _xblockexpression;
         } else {
           String _name_1 = clazz.getName();
-          _xifexpression_2 = ("org.eclipse.emf.ecore." + _name_1);
+          _xifexpression_2 = new TypeReference.QualifiedClazzName("org.eclipse.emf.ecore", _name_1);
         }
         _xifexpression_1 = _xifexpression_2;
       } else {
-        _xifexpression_1 = GenModelUtil2.getGenClass(clazz, resourceSet).getQualifiedInterfaceName();
+        String _qualifiedPackageName = GenModelUtil2.getGenClass(clazz, resourceSet).getGenPackage().getQualifiedPackageName();
+        String _interfaceName = GenModelUtil2.getGenClass(clazz, resourceSet).getInterfaceName();
+        _xifexpression_1 = new TypeReference.QualifiedClazzName(_qualifiedPackageName, _interfaceName);
       }
       _xifexpression = _xifexpression_1;
     }
     return _xifexpression;
   }
   
-  private static String getQualifiedName(final EPackage epackage, final ResourceSet resourceSet) {
-    return GenModelUtil2.getGenPackage(epackage, resourceSet).getQualifiedPackageInterfaceName();
+  private static TypeReference.QualifiedClazzName getQualifiedName(final EPackage epackage, final ResourceSet resourceSet) {
+    String _qualifiedPackageName = GenModelUtil2.getGenPackage(epackage, resourceSet).getQualifiedPackageName();
+    String _packageInterfaceName = GenModelUtil2.getGenPackage(epackage, resourceSet).getPackageInterfaceName();
+    return new TypeReference.QualifiedClazzName(_qualifiedPackageName, _packageInterfaceName);
   }
   
   @Override
