@@ -34,5 +34,10 @@ public class TemplateProposalProvider extends XbaseTemplateProposalProvider {
 	public Image getImage(Template template) {
 		return JavaPlugin.getImageDescriptorRegistry().get(JavaPluginImages.DESC_OBJS_TEMPLATE);
 	}
+	
+	@Override
+	public int getRelevance(Template template) {
+		return 500;
+	}
 
 }
