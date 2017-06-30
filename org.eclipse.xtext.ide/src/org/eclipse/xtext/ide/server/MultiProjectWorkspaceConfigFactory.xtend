@@ -17,6 +17,7 @@ import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.workspace.IProjectConfig
 import org.eclipse.xtext.workspace.ISourceFolder
 import org.eclipse.xtext.workspace.IWorkspaceConfig
+import org.eclipse.xtext.workspace.InMemoryProjectConfig
 
 import static extension org.eclipse.xtext.util.UriUtil.*
 
@@ -27,19 +28,23 @@ import static extension org.eclipse.xtext.util.UriUtil.*
 class MultiProjectWorkspaceConfigFactory implements IWorkspaceConfigFactory {
         
     override getWorkspaceConfig(URI workspaceBaseURI) {
-        val baseFile = new File(workspaceBaseURI.toFileString)
-        if(baseFile.isDirectory) {
-            val name2config = <String, IProjectConfig> newHashMap
-            val result = new MultiProjectWorkspaceConfig(name2config)
-            val IAcceptor<IProjectConfig> acceptor = [
-                name2config.put(name, it)
-            ]
-            baseFile.listFiles.filter[directory].forEach [
-                addProjectConfigs(URI.createFileURI(absolutePath), result, acceptor)   
-            ]
-            return result
+    	if (workspaceBaseURI === null) {
+			val projectConfig = new InMemoryProjectConfig
+			return projectConfig.workspaceConfig
+    	} else {
+	        val baseFile = new File(workspaceBaseURI.toFileString)
+	        if (baseFile.isDirectory) {
+	            val name2config = <String, IProjectConfig> newHashMap
+	            val result = new MultiProjectWorkspaceConfig(name2config)
+	            val IAcceptor<IProjectConfig> acceptor = [
+	                name2config.put(name, it)
+	            ]
+	            baseFile.listFiles.filter[directory].forEach [
+	                addProjectConfigs(URI.createFileURI(absolutePath), result, acceptor)   
+	            ]
+	            return result
+	        }
         }
-        return null
     }
     
     def addProjectConfigs(URI projectBaseURI, IWorkspaceConfig workspaceConfig, IAcceptor<IProjectConfig> acceptor) {
@@ -61,9 +66,11 @@ class MultiProjectWorkspaceConfig implements IWorkspaceConfig {
     }
     
     override findProjectContaining(URI member) {
-        name2config.values.filter[
+        val candidates = name2config.values.filter[
             findSourceFolderContaining(member) !== null
-        ].maxBy[path.segmentCount]
+        ]
+        if (!candidates.empty)
+        	return candidates.maxBy[path.segmentCount]
     }
 }
 
