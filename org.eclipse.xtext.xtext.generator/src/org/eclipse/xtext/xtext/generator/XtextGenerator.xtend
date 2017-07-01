@@ -307,7 +307,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	protected def void generateActivator() {
 		if (projectConfig.eclipsePlugin.srcGen !== null && !languageConfigs.empty)
-			templates.createEclipsePluginActivator(languageConfigs).writeTo(projectConfig.eclipsePlugin.srcGen)
+			templates.createEclipsePluginActivator(projectConfig, languageConfigs).writeTo(projectConfig.eclipsePlugin.srcGen)
 	}
 	
 	protected def void generatePluginXmls() {
