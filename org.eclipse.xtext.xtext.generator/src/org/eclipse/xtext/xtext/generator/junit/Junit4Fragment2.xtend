@@ -8,7 +8,6 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
-import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.emf.ecore.EClass
