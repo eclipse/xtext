@@ -111,10 +111,11 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 			throw new IllegalArgumentException(prefKey + Messages.XbaseValidationConfigurationBlock_not_java_message);
 		}
 		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
-				SeverityConverter.SEVERITY_IGNORE, javaIssueCode };
+				SeverityConverter.SEVERITY_INFO, SeverityConverter.SEVERITY_IGNORE, javaIssueCode };
 		String javaValue = javaValue(javaIssueCode);
 		String[] valueLabels = new String[] { Messages.XbaseValidationConfigurationBlock_error,
-				Messages.XbaseValidationConfigurationBlock_warning, Messages.XbaseValidationConfigurationBlock_ignore,
+				Messages.XbaseValidationConfigurationBlock_warning, Messages.XbaseValidationConfigurationBlock_info,
+				Messages.XbaseValidationConfigurationBlock_ignore,
 				NLS.bind(Messages.XbaseValidationConfigurationBlock_java_label, javaValue) };
 		Combo comboBox = addComboBox(parent, label, prefKey, indent, values, valueLabels);
 		return comboBox;
@@ -122,9 +123,9 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 
 	protected Combo addComboBox(String prefKey, String label, Composite parent, int indent) {
 		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
-				SeverityConverter.SEVERITY_IGNORE };
+				SeverityConverter.SEVERITY_INFO, SeverityConverter.SEVERITY_IGNORE };
 		String[] valueLabels = new String[] { Messages.XbaseValidationConfigurationBlock_error,
-				Messages.XbaseValidationConfigurationBlock_warning, Messages.XbaseValidationConfigurationBlock_ignore };
+				Messages.XbaseValidationConfigurationBlock_warning, Messages.XbaseValidationConfigurationBlock_info, Messages.XbaseValidationConfigurationBlock_ignore };
 		Combo comboBox = addComboBox(parent, label, prefKey, indent, values, valueLabels);
 		return comboBox;
 	}
