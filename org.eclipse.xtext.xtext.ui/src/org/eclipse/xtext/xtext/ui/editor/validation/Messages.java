@@ -32,6 +32,7 @@ public final class Messages extends NLS {
 	public static String XtextValidatorConfigurationBlock_13;
 	public static String XtextValidatorConfigurationBlock_14;
 	public static String XtextValidatorConfigurationBlock_15;
+	public static String XtextValidatorConfigurationBlock_16;
 	
 	static {
 		// initialize resource bundle

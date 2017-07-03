@@ -51,9 +51,9 @@ public class XtextValidatorConfigurationBlock extends AbstractValidatorConfigura
 
 	protected Combo addComboBox(String prefKey, String label, Composite parent, int indent) {
 		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
-				SeverityConverter.SEVERITY_IGNORE };
-		String[] valueLabels = new String[] { Messages.XtextValidatorConfigurationBlock_8,
-				Messages.XtextValidatorConfigurationBlock_9, Messages.XtextValidatorConfigurationBlock_10 };
+				SeverityConverter.SEVERITY_INFO, SeverityConverter.SEVERITY_IGNORE };
+		String[] valueLabels = new String[] { Messages.XtextValidatorConfigurationBlock_8, Messages.XtextValidatorConfigurationBlock_9,
+				Messages.XtextValidatorConfigurationBlock_16, Messages.XtextValidatorConfigurationBlock_10 };
 		Combo comboBox = addComboBox(parent, label, prefKey, indent, values, valueLabels);
 		return comboBox;
 	}

@@ -27,6 +27,7 @@ public class Messages extends NLS {
 	public static String XbaseValidationConfigurationBlock_not_java_message;
 	public static String XbaseValidationConfigurationBlock_restricted_api_section_title;
 	public static String XbaseValidationConfigurationBlock_warning;
+	public static String XbaseValidationConfigurationBlock_info;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
