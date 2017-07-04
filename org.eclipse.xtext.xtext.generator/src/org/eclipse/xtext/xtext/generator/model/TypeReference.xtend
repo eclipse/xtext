@@ -106,7 +106,7 @@ class TypeReference {
 		this(getQualifiedName(clazz, resourceSet))
 	}
 	
-	new(TypeReference.QualifiedClassName qualifiedClazzName) {
+	new(QualifiedClassName qualifiedClazzName) {
 		this(qualifiedClazzName.packageName, qualifiedClazzName.className, null)
 	}
 	
@@ -144,7 +144,7 @@ class TypeReference {
 			qualifiedName.substring(packageName.length + 1, qualifiedName.length)
 	}
 	
-	private static def TypeReference.QualifiedClassName getQualifiedName(EClass clazz, ResourceSet resourceSet) {
+	private static def QualifiedClassName getQualifiedName(EClass clazz, ResourceSet resourceSet) {
 		if (clazz.EPackage.nsURI == 'http://www.eclipse.org/2008/Xtext') {
 			new QualifiedClassName('org.eclipse.xtext', clazz.name)
 		} else if (clazz.EPackage.nsURI == 'http://www.eclipse.org/emf/2002/Ecore') {
@@ -161,7 +161,7 @@ class TypeReference {
 		}
 	}
 
-	private static def TypeReference.QualifiedClassName getQualifiedName(EPackage epackage, ResourceSet resourceSet) {
+	private static def QualifiedClassName getQualifiedName(EPackage epackage, ResourceSet resourceSet) {
 		new QualifiedClassName(GenModelUtil2.getGenPackage(epackage, resourceSet).qualifiedPackageName,
 			GenModelUtil2.getGenPackage(epackage, resourceSet).packageInterfaceName)
 	}
