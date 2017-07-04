@@ -11,58 +11,111 @@ import com.google.inject.Inject
 import java.util.concurrent.CancellationException
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CompletionException
+import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.Executors
 import java.util.concurrent.Semaphore
 import org.apache.log4j.Logger
-import org.eclipse.lsp4j.jsonrpc.CompletableFutures
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 
 /**
+ * <p>
+ * The request manager run read/write requests.
+ * </p>
+ * <p>
+ * <b>Execution:</b>
+ * <ul>
+ *  <li>requests are processed in an insertion order;</li>
+ * 	<li>write requests are executed exclusive;</li>
+ *  <li>read requests are executed in parallel.</li>
+ * </ul>
+ * </p>
+ * 
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
 class RequestManager {
-    
-    static val LOGGER = Logger.getLogger(RequestManager)
+
+	static val LOGGER = Logger.getLogger(RequestManager)
 
 	val final MAX_PERMITS = Integer.MAX_VALUE
+	val final WRITE_PERMITS = MAX_PERMITS
+	val final READ_PERMITS = 1
 
-	@Inject
-	ExecutorService executorService
+	val sequential = Executors.newSingleThreadExecutor
+	@Inject ExecutorService parallel
 
 	@Inject
 	OperationCanceledManager operationCanceledManager
 
-	val cancelIndicators = new LinkedBlockingQueue<Cancellable>
+	val toCancel = new CopyOnWriteArrayList<Cancellable>
 
 	val semaphore = new Semaphore(MAX_PERMITS)
 
 	def void shutdown() {
-		executorService.shutdown()
+		sequential.shutdown()
+		parallel.shutdown()
 	}
 
+	def <V> V lockRead(()=>V request) {
+		lock(READ_PERMITS, request)
+	}
 
-	/**
-	 * <p>
-	 * The given <i>write request</i> will be run first when <i>all running requests</i> completed.
-	 * </p>
-	 * <p>
-	 * Currently <i>running requests</i> will be cancelled.
-	 * </p>
-	 * <p>
-	 * A provided cancel indicator should implement {@link CancelIndicator} 
-	 * to let the given request to be cancelled by a write request.
-	 * </p>
-	 */
-	def <V> CompletableFuture<V> runWrite((CancelIndicator)=>V writeRequest) {
-		semaphore.acquire(MAX_PERMITS)
+	def <V> V lockWrite(()=>V request) {
+		lock(WRITE_PERMITS, request)
+	}
+
+	def void cancel() {
+		for (cancellable : toCancel) {
+			cancellable.cancel
+			toCancel -= cancellable
+		}
+	}
+
+	def <V> CompletableFuture<V> runWrite((CancelIndicator)=>V request) {
+		queue(request) [
+			thenApply[lockWrite]
+		]
+	}
+
+	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V request) {
+		queue(request) [
+			thenApplyAsync([lockRead], parallel)
+		]
+	}
+
+	protected def <V> CompletableFuture<V> queue(
+		(CancelIndicator)=>V request,
+		(CompletableFuture<()=>V>)=>CompletableFuture<V> requestExecutor
+	) {
+		val origin = new CompletableFuture<RequestCancelIndicator>
+		val requestFuture = requestExecutor.apply(
+			origin.thenApplyAsync([bind(request)], sequential)
+		)
+
+		val cancelIndicator = new RequestCancelIndicator(requestFuture)
+		toCancel += cancelIndicator
+		val result = requestFuture.whenComplete [
+			toCancel -= cancelIndicator
+		]
+
+		origin.complete(cancelIndicator)
+		return result
+	}
+
+	protected def <V> ()=>V bind(RequestCancelIndicator cancelIndicator, (CancelIndicator)=>V request) {
+		cancelIndicator.checkCanceled
+		return [
+			cancelIndicator.checkCanceled
+			request.apply(cancelIndicator)
+		]
+	}
+
+	protected def <V> V lock(int permits, ()=>V request) {
+		semaphore.acquire(permits)
 		try {
-			val result = writeRequest.apply([
-				return false
-			])
-			return CompletableFuture.completedFuture(result);
+			return request.apply()
 		} catch (Throwable t) {
 			if (isCancelException(t)) {
 				LOGGER.info("request cancelled.")
@@ -70,46 +123,10 @@ class RequestManager {
 			}
 			throw t
 		} finally {
-			semaphore.release(MAX_PERMITS)
+			semaphore.release(permits)
 		}
 	}
 
-
-	/**
-	 * <p>
-	 * The given <i>read request</i> will be run:
-	 * <ul>
-	 * 	<li>concurrent with <i>running read requests</i>;</li>
-	 * 	<li>first when <i>running write requests</i> completed.</li>
-	 * </ul>
-	 * </p>
-	 * <p>
-	 * </p>
-	 */
-	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest) {
-		return CompletableFutures.computeAsync(executorService) [
-			val cancelIndicator = new RequestCancelIndicator(it)
-			semaphore.acquire(1)
-			try {
-				cancelIndicators += cancelIndicator
-				cancelIndicator.checkCanceled
-				return readRequest.apply [
-					cancelIndicator.checkCanceled
-					return false
-				]
-			} catch (Throwable t) {
-				if (isCancelException(t)) {
-					LOGGER.info("request cancelled.")
-					throw new CancellationException()
-				}
-				throw t
-			} finally {
-				cancelIndicators -= cancelIndicator
-				semaphore.release(1)
-			}
-		]
-	}
-	
 	protected def boolean isCancelException(Throwable t) {
 		if(t === null) return false;
 		val cause = if(t instanceof CompletionException) t.cause else t

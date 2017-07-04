@@ -81,6 +81,7 @@ import org.eclipse.lsp4j.services.TextDocumentService;
 import org.eclipse.lsp4j.services.WorkspaceService;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.ide.server.BuildManager;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
@@ -106,6 +107,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -205,14 +207,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     };
     ServerCapabilities _doubleArrow = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
     result.setCapabilities(_doubleArrow);
-    final Function1<CancelIndicator, Object> _function_1 = (CancelIndicator cancelIndicator) -> {
+    final Function0<Object> _function_1 = () -> {
       final Procedure2<URI, Iterable<Issue>> _function_2 = (URI $0, Iterable<Issue> $1) -> {
         this.publishDiagnostics($0, $1);
       };
-      this.workspaceManager.initialize(baseDir, _function_2, cancelIndicator);
+      this.workspaceManager.initialize(baseDir, _function_2, CancelIndicator.NullImpl);
       return null;
     };
-    this.requestManager.<Object>runWrite(_function_1);
+    this.requestManager.<Object>lockWrite(_function_1);
     this.access.addBuildListener(this);
     return CompletableFuture.<InitializeResult>completedFuture(result);
   }
@@ -263,34 +265,49 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void didOpen(final DidOpenTextDocumentParams params) {
-    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
-      this.workspaceManager.didOpen(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), params.getTextDocument().getText(), cancelIndicator);
-      return null;
+    this.requestManager.cancel();
+    final Function0<BuildManager.Buildable> _function = () -> {
+      return this.workspaceManager.didOpen(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), params.getTextDocument().getText());
     };
-    this.requestManager.<Object>runWrite(_function);
+    final BuildManager.Buildable buildable = this.requestManager.<BuildManager.Buildable>lockWrite(_function);
+    this.requestManager.<List<IResourceDescription.Delta>>runWrite(new Function1<CancelIndicator, List<IResourceDescription.Delta>>() {
+        public List<IResourceDescription.Delta> apply(CancelIndicator p) {
+          return buildable.build(p);
+        }
+    });
   }
   
   @Override
   public void didChange(final DidChangeTextDocumentParams params) {
-    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
+    this.requestManager.cancel();
+    final Function0<BuildManager.Buildable> _function = () -> {
       final Function1<TextDocumentContentChangeEvent, TextEdit> _function_1 = (TextDocumentContentChangeEvent event) -> {
         Range _range = event.getRange();
         String _text = event.getText();
         return new TextEdit(_range, _text);
       };
-      this.workspaceManager.didChange(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(params.getContentChanges(), _function_1), cancelIndicator);
-      return null;
+      return this.workspaceManager.didChange(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(params.getContentChanges(), _function_1));
     };
-    this.requestManager.<Object>runWrite(_function);
+    final BuildManager.Buildable buildable = this.requestManager.<BuildManager.Buildable>lockWrite(_function);
+    this.requestManager.<List<IResourceDescription.Delta>>runWrite(new Function1<CancelIndicator, List<IResourceDescription.Delta>>() {
+        public List<IResourceDescription.Delta> apply(CancelIndicator p) {
+          return buildable.build(p);
+        }
+    });
   }
   
   @Override
   public void didClose(final DidCloseTextDocumentParams params) {
-    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
-      this.workspaceManager.didClose(this._uriExtensions.toUri(params.getTextDocument().getUri()), cancelIndicator);
-      return null;
+    this.requestManager.cancel();
+    final Function0<BuildManager.Buildable> _function = () -> {
+      return this.workspaceManager.didClose(this._uriExtensions.toUri(params.getTextDocument().getUri()));
     };
-    this.requestManager.<Object>runWrite(_function);
+    final BuildManager.Buildable buildable = this.requestManager.<BuildManager.Buildable>lockWrite(_function);
+    this.requestManager.<List<IResourceDescription.Delta>>runWrite(new Function1<CancelIndicator, List<IResourceDescription.Delta>>() {
+        public List<IResourceDescription.Delta> apply(CancelIndicator p) {
+          return buildable.build(p);
+        }
+    });
   }
   
   @Override
@@ -299,34 +316,44 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void didChangeWatchedFiles(final DidChangeWatchedFilesParams params) {
-    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
-      final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
-      final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
-      List<FileEvent> _changes = params.getChanges();
-      for (final FileEvent fileEvent : _changes) {
-        FileChangeType _type = fileEvent.getType();
-        boolean _tripleEquals = (_type == FileChangeType.Deleted);
-        if (_tripleEquals) {
-          URI _uri = this._uriExtensions.toUri(fileEvent.getUri());
-          deletedFiles.add(_uri);
-        } else {
-          URI _uri_1 = this._uriExtensions.toUri(fileEvent.getUri());
-          dirtyFiles.add(_uri_1);
+    this.requestManager.cancel();
+    final Function0<BuildManager.Buildable> _function = () -> {
+      BuildManager.Buildable _xblockexpression = null;
+      {
+        final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
+        final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
+        List<FileEvent> _changes = params.getChanges();
+        for (final FileEvent fileEvent : _changes) {
+          FileChangeType _type = fileEvent.getType();
+          boolean _tripleEquals = (_type == FileChangeType.Deleted);
+          if (_tripleEquals) {
+            URI _uri = this._uriExtensions.toUri(fileEvent.getUri());
+            deletedFiles.add(_uri);
+          } else {
+            URI _uri_1 = this._uriExtensions.toUri(fileEvent.getUri());
+            dirtyFiles.add(_uri_1);
+          }
         }
+        _xblockexpression = this.workspaceManager.didChangeFiles(dirtyFiles, deletedFiles);
       }
-      this.workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
-      return null;
+      return _xblockexpression;
     };
-    this.requestManager.<Object>runWrite(_function);
+    final BuildManager.Buildable buildable = this.requestManager.<BuildManager.Buildable>lockWrite(_function);
+    this.requestManager.<List<IResourceDescription.Delta>>runWrite(new Function1<CancelIndicator, List<IResourceDescription.Delta>>() {
+        public List<IResourceDescription.Delta> apply(CancelIndicator p) {
+          return buildable.build(p);
+        }
+    });
   }
   
   @Override
   public void didChangeConfiguration(final DidChangeConfigurationParams params) {
-    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
-      this.workspaceManager.refreshWorkspaceConfig(cancelIndicator);
+    this.requestManager.cancel();
+    final Function0<Object> _function = () -> {
+      this.workspaceManager.refreshWorkspaceConfig(CancelIndicator.NullImpl);
       return null;
     };
-    this.requestManager.<Object>runWrite(_function);
+    this.requestManager.<Object>lockWrite(_function);
   }
   
   private WorkspaceResourceAccess resourceAccess;

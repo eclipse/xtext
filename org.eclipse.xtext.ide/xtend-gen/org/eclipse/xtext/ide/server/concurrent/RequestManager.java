@@ -11,21 +11,34 @@ import com.google.inject.Inject;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 import org.apache.log4j.Logger;
-import org.eclipse.lsp4j.jsonrpc.CancelChecker;
-import org.eclipse.lsp4j.jsonrpc.CompletableFutures;
 import org.eclipse.xtext.ide.server.concurrent.Cancellable;
 import org.eclipse.xtext.ide.server.concurrent.RequestCancelIndicator;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 /**
+ * <p>
+ * The request manager run read/write requests.
+ * </p>
+ * <p>
+ * <b>Execution:</b>
+ * <ul>
+ *  <li>requests are processed in an insertion order;</li>
+ * 	<li>write requests are executed exclusive;</li>
+ *  <li>read requests are executed in parallel.</li>
+ * </ul>
+ * </p>
+ * 
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
@@ -35,41 +48,99 @@ public class RequestManager {
   
   private final int MAX_PERMITS = Integer.MAX_VALUE;
   
+  private final int WRITE_PERMITS = this.MAX_PERMITS;
+  
+  private final int READ_PERMITS = 1;
+  
+  private final ExecutorService sequential = Executors.newSingleThreadExecutor();
+  
   @Inject
-  private ExecutorService executorService;
+  private ExecutorService parallel;
   
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
-  private final LinkedBlockingQueue<Cancellable> cancelIndicators = new LinkedBlockingQueue<Cancellable>();
+  private final CopyOnWriteArrayList<Cancellable> toCancel = new CopyOnWriteArrayList<Cancellable>();
   
   private final Semaphore semaphore = new Semaphore(this.MAX_PERMITS);
   
   public void shutdown() {
-    this.executorService.shutdown();
+    this.sequential.shutdown();
+    this.parallel.shutdown();
   }
   
-  /**
-   * <p>
-   * The given <i>write request</i> will be run first when <i>all running requests</i> completed.
-   * </p>
-   * <p>
-   * Currently <i>running requests</i> will be cancelled.
-   * </p>
-   * <p>
-   * A provided cancel indicator should implement {@link CancelIndicator}
-   * to let the given request to be cancelled by a write request.
-   * </p>
-   */
-  public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
+  public <V extends Object> V lockRead(final Function0<? extends V> request) {
+    return this.<V>lock(this.READ_PERMITS, request);
+  }
+  
+  public <V extends Object> V lockWrite(final Function0<? extends V> request) {
+    return this.<V>lock(this.WRITE_PERMITS, request);
+  }
+  
+  public void cancel() {
+    for (final Cancellable cancellable : this.toCancel) {
+      {
+        cancellable.cancel();
+        this.toCancel.remove(cancellable);
+      }
+    }
+  }
+  
+  public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> request) {
+    final Function1<CompletableFuture<Function0<? extends V>>, CompletableFuture<V>> _function = (CompletableFuture<Function0<? extends V>> it) -> {
+      final Function<Function0<? extends V>, V> _function_1 = (Function0<? extends V> it_1) -> {
+        return this.<V>lockWrite(it_1);
+      };
+      return it.<V>thenApply(_function_1);
+    };
+    return this.<V>queue(request, _function);
+  }
+  
+  public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> request) {
+    final Function1<CompletableFuture<Function0<? extends V>>, CompletableFuture<V>> _function = (CompletableFuture<Function0<? extends V>> it) -> {
+      final Function<Function0<? extends V>, V> _function_1 = (Function0<? extends V> it_1) -> {
+        return this.<V>lockRead(it_1);
+      };
+      return it.<V>thenApplyAsync(_function_1, this.parallel);
+    };
+    return this.<V>queue(request, _function);
+  }
+  
+  protected <V extends Object> CompletableFuture<V> queue(final Function1<? super CancelIndicator, ? extends V> request, final Function1<? super CompletableFuture<Function0<? extends V>>, ? extends CompletableFuture<V>> requestExecutor) {
+    final CompletableFuture<RequestCancelIndicator> origin = new CompletableFuture<RequestCancelIndicator>();
+    final Function<RequestCancelIndicator, Function0<? extends V>> _function = (RequestCancelIndicator it) -> {
+      return this.<V>bind(it, request);
+    };
+    final CompletableFuture<V> requestFuture = requestExecutor.apply(
+      origin.<Function0<? extends V>>thenApplyAsync(_function, this.sequential));
+    final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(requestFuture);
+    this.toCancel.add(cancelIndicator);
+    final BiConsumer<V, Throwable> _function_1 = (V $0, Throwable $1) -> {
+      this.toCancel.remove(cancelIndicator);
+    };
+    final CompletableFuture<V> result = requestFuture.whenComplete(_function_1);
+    origin.complete(cancelIndicator);
+    return result;
+  }
+  
+  protected <V extends Object> Function0<? extends V> bind(final RequestCancelIndicator cancelIndicator, final Function1<? super CancelIndicator, ? extends V> request) {
+    cancelIndicator.checkCanceled();
+    final Function0<V> _function = () -> {
+      V _xblockexpression = null;
+      {
+        cancelIndicator.checkCanceled();
+        _xblockexpression = request.apply(cancelIndicator);
+      }
+      return _xblockexpression;
+    };
+    return _function;
+  }
+  
+  protected <V extends Object> V lock(final int permits, final Function0<? extends V> request) {
     try {
-      this.semaphore.acquire(this.MAX_PERMITS);
+      this.semaphore.acquire(permits);
       try {
-        final CancelIndicator _function = () -> {
-          return false;
-        };
-        final V result = writeRequest.apply(_function);
-        return CompletableFuture.<V>completedFuture(result);
+        return request.apply();
       } catch (final Throwable _t) {
         if (_t instanceof Throwable) {
           final Throwable t = (Throwable)_t;
@@ -83,58 +154,11 @@ public class RequestManager {
           throw Exceptions.sneakyThrow(_t);
         }
       } finally {
-        this.semaphore.release(this.MAX_PERMITS);
+        this.semaphore.release(permits);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  /**
-   * <p>
-   * The given <i>read request</i> will be run:
-   * <ul>
-   * 	<li>concurrent with <i>running read requests</i>;</li>
-   * 	<li>first when <i>running write requests</i> completed.</li>
-   * </ul>
-   * </p>
-   * <p>
-   * </p>
-   */
-  public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
-    final Function<CancelChecker, V> _function = (CancelChecker it) -> {
-      try {
-        final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(it);
-        this.semaphore.acquire(1);
-        try {
-          this.cancelIndicators.add(cancelIndicator);
-          cancelIndicator.checkCanceled();
-          final CancelIndicator _function_1 = () -> {
-            cancelIndicator.checkCanceled();
-            return false;
-          };
-          return readRequest.apply(_function_1);
-        } catch (final Throwable _t) {
-          if (_t instanceof Throwable) {
-            final Throwable t = (Throwable)_t;
-            boolean _isCancelException = this.isCancelException(t);
-            if (_isCancelException) {
-              RequestManager.LOGGER.info("request cancelled.");
-              throw new CancellationException();
-            }
-            throw t;
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        } finally {
-          this.cancelIndicators.remove(cancelIndicator);
-          this.semaphore.release(1);
-        }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
-    };
-    return CompletableFutures.<V>computeAsync(this.executorService, _function);
   }
   
   protected boolean isCancelException(final Throwable t) {

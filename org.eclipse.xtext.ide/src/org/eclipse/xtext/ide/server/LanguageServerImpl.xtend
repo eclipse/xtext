@@ -132,8 +132,8 @@ import org.eclipse.xtext.validation.Issue
 			documentHighlightProvider = true
 		]
 
-		requestManager.runWrite [ cancelIndicator |
-			workspaceManager.initialize(baseDir, [this.publishDiagnostics($0, $1)], cancelIndicator)
+		requestManager.lockWrite [
+			workspaceManager.initialize(baseDir, [this.publishDiagnostics($0, $1)], CancelIndicator.NullImpl)
 			return null
 		]
 
@@ -179,26 +179,29 @@ import org.eclipse.xtext.validation.Issue
 	// end notification callbacks
 	// file/content change events
 	override didOpen(DidOpenTextDocumentParams params) {
-		requestManager.runWrite [ cancelIndicator |
-			workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text, cancelIndicator)
-			return null
+		requestManager.cancel
+		val buildable = requestManager.lockWrite [
+			workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text)
 		]
+		requestManager.runWrite(buildable)
 	}
 
 	override didChange(DidChangeTextDocumentParams params) {
-		requestManager.runWrite [ cancelIndicator |
+		requestManager.cancel
+		val buildable = requestManager.lockWrite [ 
 			workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
 				new TextEdit(event.range, event.text)
-			], cancelIndicator)
-			return null
+			])
 		]
+		requestManager.runWrite(buildable)
 	}
 
 	override didClose(DidCloseTextDocumentParams params) {
-		requestManager.runWrite [ cancelIndicator |
-			workspaceManager.didClose(params.textDocument.uri.toUri, cancelIndicator)
-			return null
+		requestManager.cancel
+		val buildable = requestManager.lockWrite [
+			workspaceManager.didClose(params.textDocument.uri.toUri)
 		]
+		requestManager.runWrite(buildable)
 	}
 
 	override didSave(DidSaveTextDocumentParams params) {
@@ -207,7 +210,8 @@ import org.eclipse.xtext.validation.Issue
 	}
 
 	override didChangeWatchedFiles(DidChangeWatchedFilesParams params) {
-		requestManager.runWrite [ cancelIndicator |
+		requestManager.cancel
+		val buildable = requestManager.lockWrite [
 			val dirtyFiles = newArrayList
 			val deletedFiles = newArrayList
 			for (fileEvent : params.changes) {
@@ -217,14 +221,15 @@ import org.eclipse.xtext.validation.Issue
 					dirtyFiles += toUri(fileEvent.uri)
 				}
 			}
-			workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator)
-			return null
+			workspaceManager.didChangeFiles(dirtyFiles, deletedFiles)
 		]
+		requestManager.runWrite(buildable)
 	}
 	
 	override didChangeConfiguration(DidChangeConfigurationParams params) {
-        requestManager.runWrite [ cancelIndicator |
-            workspaceManager.refreshWorkspaceConfig(cancelIndicator)
+		requestManager.cancel
+        requestManager.lockWrite [
+            workspaceManager.refreshWorkspaceConfig(CancelIndicator.NullImpl)
             return null
         ]
     }
