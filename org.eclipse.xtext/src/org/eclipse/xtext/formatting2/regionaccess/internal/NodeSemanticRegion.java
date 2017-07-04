@@ -14,6 +14,7 @@ import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
+import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.nodemodel.INode;
 
 /**
@@ -51,6 +52,11 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 	public ISemanticRegion getNextSemanticRegion() {
 		return trailing != null ? trailing.getNextSemanticRegion() : null;
 	}
+	
+	@Override
+	public ISequentialRegion getNextSequentialRegion() {
+		return trailing;
+	}
 
 	@Override
 	public IHiddenRegion getPreviousHiddenRegion() {
@@ -60,6 +66,11 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 	@Override
 	public ISemanticRegion getPreviousSemanticRegion() {
 		return leading != null ? leading.getPreviousSemanticRegion() : null;
+	}
+	
+	@Override
+	public ISequentialRegion getPreviousSequentialRegion() {
+		return leading;
 	}
 
 	@Override

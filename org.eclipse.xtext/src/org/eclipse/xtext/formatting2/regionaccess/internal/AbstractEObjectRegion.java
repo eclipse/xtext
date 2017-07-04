@@ -15,6 +15,7 @@ import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
+import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 
 import com.google.common.collect.Lists;
@@ -58,6 +59,11 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 	public ISemanticRegion getNextSemanticRegion() {
 		return nextHidden.getNextSemanticRegion();
 	}
+	
+	@Override
+	public ISequentialRegion getNextSequentialRegion() {
+		return nextHidden;
+	}
 
 	@Override
 	public int getOffset() {
@@ -72,6 +78,11 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 	@Override
 	public ISemanticRegion getPreviousSemanticRegion() {
 		return previousHidden.getPreviousSemanticRegion();
+	}
+	
+	@Override
+	public ISequentialRegion getPreviousSequentialRegion() {
+		return previousHidden;
 	}
 
 	@Override

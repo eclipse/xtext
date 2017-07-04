@@ -29,7 +29,11 @@ public interface ISequentialRegion extends ITextSegment {
 
 	ISemanticRegion getNextSemanticRegion();
 
+	ISequentialRegion getNextSequentialRegion();
+
 	IHiddenRegion getPreviousHiddenRegion();
 
 	ISemanticRegion getPreviousSemanticRegion();
+
+	ISequentialRegion getPreviousSequentialRegion();
 }
