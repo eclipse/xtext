@@ -35,7 +35,7 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 @SuppressWarnings("all")
 public class TypeReference {
   @FinalFieldsConstructor
-  public static class QualifiedClazzName {
+  public static class QualifiedClassName {
     @Accessors(AccessorType.PUBLIC_GETTER)
     private final String packageName;
     
@@ -52,7 +52,7 @@ public class TypeReference {
       return this.className;
     }
     
-    public QualifiedClazzName(final String packageName, final String className) {
+    public QualifiedClassName(final String packageName, final String className) {
       super();
       this.packageName = packageName;
       this.className = className;
@@ -167,7 +167,7 @@ public class TypeReference {
     this(TypeReference.getQualifiedName(clazz, resourceSet));
   }
   
-  public TypeReference(final TypeReference.QualifiedClazzName qualifiedClazzName) {
+  public TypeReference(final TypeReference.QualifiedClassName qualifiedClazzName) {
     this(qualifiedClazzName.packageName, qualifiedClazzName.className, null);
   }
   
@@ -232,51 +232,51 @@ public class TypeReference {
     return _xblockexpression;
   }
   
-  private static TypeReference.QualifiedClazzName getQualifiedName(final EClass clazz, final ResourceSet resourceSet) {
-    TypeReference.QualifiedClazzName _xifexpression = null;
+  private static TypeReference.QualifiedClassName getQualifiedName(final EClass clazz, final ResourceSet resourceSet) {
+    TypeReference.QualifiedClassName _xifexpression = null;
     String _nsURI = clazz.getEPackage().getNsURI();
     boolean _equals = Objects.equal(_nsURI, "http://www.eclipse.org/2008/Xtext");
     if (_equals) {
       String _name = clazz.getName();
-      _xifexpression = new TypeReference.QualifiedClazzName("org.eclipse.xtext", _name);
+      _xifexpression = new TypeReference.QualifiedClassName("org.eclipse.xtext", _name);
     } else {
-      TypeReference.QualifiedClazzName _xifexpression_1 = null;
+      TypeReference.QualifiedClassName _xifexpression_1 = null;
       String _nsURI_1 = clazz.getEPackage().getNsURI();
       boolean _equals_1 = Objects.equal(_nsURI_1, "http://www.eclipse.org/emf/2002/Ecore");
       if (_equals_1) {
-        TypeReference.QualifiedClazzName _xifexpression_2 = null;
+        TypeReference.QualifiedClassName _xifexpression_2 = null;
         String _instanceTypeName = clazz.getInstanceTypeName();
         boolean _tripleNotEquals = (_instanceTypeName != null);
         if (_tripleNotEquals) {
-          TypeReference.QualifiedClazzName _xblockexpression = null;
+          TypeReference.QualifiedClassName _xblockexpression = null;
           {
             final String itn = clazz.getInstanceTypeName();
             String _substring = itn.substring(0, itn.lastIndexOf("."));
             int _lastIndexOf = itn.lastIndexOf(".");
             int _plus = (_lastIndexOf + 1);
             String _replace = itn.substring(_plus).replace("$", ".");
-            _xblockexpression = new TypeReference.QualifiedClazzName(_substring, _replace);
+            _xblockexpression = new TypeReference.QualifiedClassName(_substring, _replace);
           }
           _xifexpression_2 = _xblockexpression;
         } else {
           String _name_1 = clazz.getName();
-          _xifexpression_2 = new TypeReference.QualifiedClazzName("org.eclipse.emf.ecore", _name_1);
+          _xifexpression_2 = new TypeReference.QualifiedClassName("org.eclipse.emf.ecore", _name_1);
         }
         _xifexpression_1 = _xifexpression_2;
       } else {
         String _qualifiedPackageName = GenModelUtil2.getGenClass(clazz, resourceSet).getGenPackage().getQualifiedPackageName();
         String _interfaceName = GenModelUtil2.getGenClass(clazz, resourceSet).getInterfaceName();
-        _xifexpression_1 = new TypeReference.QualifiedClazzName(_qualifiedPackageName, _interfaceName);
+        _xifexpression_1 = new TypeReference.QualifiedClassName(_qualifiedPackageName, _interfaceName);
       }
       _xifexpression = _xifexpression_1;
     }
     return _xifexpression;
   }
   
-  private static TypeReference.QualifiedClazzName getQualifiedName(final EPackage epackage, final ResourceSet resourceSet) {
+  private static TypeReference.QualifiedClassName getQualifiedName(final EPackage epackage, final ResourceSet resourceSet) {
     String _qualifiedPackageName = GenModelUtil2.getGenPackage(epackage, resourceSet).getQualifiedPackageName();
     String _packageInterfaceName = GenModelUtil2.getGenPackage(epackage, resourceSet).getPackageInterfaceName();
-    return new TypeReference.QualifiedClazzName(_qualifiedPackageName, _packageInterfaceName);
+    return new TypeReference.QualifiedClassName(_qualifiedPackageName, _packageInterfaceName);
   }
   
   @Override
