@@ -23,6 +23,7 @@ import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Karsten Thoms - Bug#462906
  */
 public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IExecutableExtensionFactory, IExecutableExtension {
 	public static final String GUICEKEY = "guicekey";
@@ -57,28 +58,43 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 			if (result instanceof IExecutableExtension)
 				((IExecutableExtension) result).setInitializationData(config, null, null);
 			return result;
+		} catch (VirtualMachineError | CoreException e) {
+			throw e;
 		} catch (Throwable e) {
 			throw handleCreationError(e);
 		}
 	}
 	
-	private CoreException handleCreationError (Throwable cause) {
-		Bundle bundle = null;
-		String bundleName = null;
-		try {
-			bundle = getBundle();
-		} catch (NullPointerException e) {
-			// subclasses generated with Xtext <2.13 will raise a NPE when the UI bundle wqs not activated
-			// try to guess the bundle from the EEF's package
-			bundle = Platform.getBundle(getClass().getPackage().getName());
+	/**
+	 * In the case that the EEF fails to create an injector or an instance of the desired class
+	 * this method is called to produce a more user friendly error message.
+	 * @since 2.13
+	 */
+	protected CoreException handleCreationError(Throwable cause) {
+		String message;
+		String contributor = config.getDeclaringExtension().getContributor().getName();
+		Bundle bundle = Platform.getBundle(contributor);
+		if (cause != null && ! (cause instanceof NullPointerException)) {
+			message = cause.getMessage() + " (occurred in " + getClass().getName() + ")";
+		} else {
+			message = "Could not create the Injector for " + getClass().getName() + ".";
 		}
-		bundleName = bundle != null ? bundle.getSymbolicName() : "UNKNOWN";
-		
-		if (bundle != null && bundle.getState()!=Bundle.ACTIVE) {
-			return new CoreException(new Status(IStatus.ERROR, bundleName, "Bundle "+ bundleName+" not activated. Please check that all dependencies could be resolved and 'Bundle-ActivationPolicy: lazy' is configured in the bundle's MANIFEST.MF. Check also the error log."));	
+
+		if (bundle.getState() != Bundle.ACTIVE) {
+			message += "\nBundle " + bundle.getSymbolicName() + " was not activated.\n"
+				+ "Please check that all dependencies could be resolved and 'Bundle-ActivationPolicy: lazy' is configured in the bundle's MANIFEST.MF. "
+				+ "Check also the error log.";
 		}
-		
-		return new CoreException(new Status(IStatus.ERROR, bundleName, cause.getMessage() + " ExtensionFactory: "+ getClass().getName(), cause));
+		if (cause instanceof NullPointerException) {
+			message += "\nA NullPointerException occurred. This also indicates that bundle "+bundle.getSymbolicName()
+				+ " was compiled with an outdated version of Xtext. Please consider to regenerate the DSL implementation "
+				+ " with a current version.\n"
+				+ "Your currently installed version of Xtext is "
+				+ Platform.getBundle("org.eclipse.xtext.ui").getVersion() + ".";
+		}
+
+		return new CoreException(
+				new Status(IStatus.ERROR, bundle.getSymbolicName(), message, cause));
 	}
 	
 	protected abstract Bundle getBundle();
