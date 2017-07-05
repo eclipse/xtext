@@ -28,37 +28,66 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class InMemoryWorkspaceTest extends AbstractTestLangLanguageServerTest {
   @Test
-  public void testCompletion() {
+  public void testCompletionWithInmemoryScheme() {
+    final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
+      it.setRootUri(null);
+    };
+    this.initialize(_function);
+    final String inmemoryUri = "inmemory:/mydoc.testlang";
+    DidOpenTextDocumentParams _didOpenTextDocumentParams = new DidOpenTextDocumentParams();
+    final Procedure1<DidOpenTextDocumentParams> _function_1 = (DidOpenTextDocumentParams it) -> {
+      TextDocumentItem _textDocumentItem = new TextDocumentItem();
+      final Procedure1<TextDocumentItem> _function_2 = (TextDocumentItem it_1) -> {
+        it_1.setUri(inmemoryUri);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("type Foo {}");
+        _builder.newLine();
+        it_1.setText(_builder.toString());
+      };
+      TextDocumentItem _doubleArrow = ObjectExtensions.<TextDocumentItem>operator_doubleArrow(_textDocumentItem, _function_2);
+      it.setTextDocument(_doubleArrow);
+    };
+    DidOpenTextDocumentParams _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParams>operator_doubleArrow(_didOpenTextDocumentParams, _function_1);
+    this.languageServer.didOpen(_doubleArrow);
+    this.checkCompletion(inmemoryUri);
+  }
+  
+  @Test
+  public void testCompletionWithFileScheme() {
+    final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
+      it.setRootUri(null);
+    };
+    this.initialize(_function);
+    final String fileUri = "file:/home/test/workspace/mydoc.testlang";
+    DidOpenTextDocumentParams _didOpenTextDocumentParams = new DidOpenTextDocumentParams();
+    final Procedure1<DidOpenTextDocumentParams> _function_1 = (DidOpenTextDocumentParams it) -> {
+      TextDocumentItem _textDocumentItem = new TextDocumentItem();
+      final Procedure1<TextDocumentItem> _function_2 = (TextDocumentItem it_1) -> {
+        it_1.setUri(fileUri);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("type Foo {}");
+        _builder.newLine();
+        it_1.setText(_builder.toString());
+      };
+      TextDocumentItem _doubleArrow = ObjectExtensions.<TextDocumentItem>operator_doubleArrow(_textDocumentItem, _function_2);
+      it.setTextDocument(_doubleArrow);
+    };
+    DidOpenTextDocumentParams _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParams>operator_doubleArrow(_didOpenTextDocumentParams, _function_1);
+    this.languageServer.didOpen(_doubleArrow);
+    this.checkCompletion(fileUri);
+  }
+  
+  protected void checkCompletion(final String uri) {
     try {
-      final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
-        it.setRootUri(null);
-      };
-      this.initialize(_function);
-      final String inmemoryUri = "inmemory:/mydoc.testlang";
-      DidOpenTextDocumentParams _didOpenTextDocumentParams = new DidOpenTextDocumentParams();
-      final Procedure1<DidOpenTextDocumentParams> _function_1 = (DidOpenTextDocumentParams it) -> {
-        TextDocumentItem _textDocumentItem = new TextDocumentItem();
-        final Procedure1<TextDocumentItem> _function_2 = (TextDocumentItem it_1) -> {
-          it_1.setUri(inmemoryUri);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("type Foo {}");
-          _builder.newLine();
-          it_1.setText(_builder.toString());
-        };
-        TextDocumentItem _doubleArrow = ObjectExtensions.<TextDocumentItem>operator_doubleArrow(_textDocumentItem, _function_2);
-        it.setTextDocument(_doubleArrow);
-      };
-      DidOpenTextDocumentParams _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParams>operator_doubleArrow(_didOpenTextDocumentParams, _function_1);
-      this.languageServer.didOpen(_doubleArrow);
       TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
-      final Procedure1<TextDocumentPositionParams> _function_2 = (TextDocumentPositionParams it) -> {
-        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(inmemoryUri);
+      final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
         it.setTextDocument(_textDocumentIdentifier);
         Position _position = new Position(0, 10);
         it.setPosition(_position);
       };
-      TextDocumentPositionParams _doubleArrow_1 = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function_2);
-      final CompletableFuture<Either<List<CompletionItem>, CompletionList>> completionItems = this.languageServer.completion(_doubleArrow_1);
+      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+      final CompletableFuture<Either<List<CompletionItem>, CompletionList>> completionItems = this.languageServer.completion(_doubleArrow);
       final Either<List<CompletionItem>, CompletionList> result = completionItems.get();
       List<CompletionItem> _xifexpression = null;
       boolean _isLeft = result.isLeft();

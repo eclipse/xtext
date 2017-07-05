@@ -37,7 +37,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class TestLanguageGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
-    String _scheme = resource.getURI().scheme();
+    String _scheme = fsa.getURI("").scheme();
     boolean _equals = Objects.equal(_scheme, "inmemory");
     if (_equals) {
       return;

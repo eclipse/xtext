@@ -17,7 +17,7 @@ import org.junit.Test
 class InMemoryWorkspaceTest extends AbstractTestLangLanguageServerTest {
 	
 	@Test
-	def void testCompletion() {
+	def void testCompletionWithInmemoryScheme() {
 		initialize[rootUri = null]
 		val inmemoryUri = 'inmemory:/mydoc.testlang'
 		languageServer.didOpen(new DidOpenTextDocumentParams => [
@@ -28,9 +28,27 @@ class InMemoryWorkspaceTest extends AbstractTestLangLanguageServerTest {
 				'''
 			]
 		])
-		
+		checkCompletion(inmemoryUri)
+	}
+	
+	@Test
+	def void testCompletionWithFileScheme() {
+		initialize[rootUri = null]
+		val fileUri = 'file:/home/test/workspace/mydoc.testlang'
+		languageServer.didOpen(new DidOpenTextDocumentParams => [
+			textDocument = new TextDocumentItem => [
+				uri = fileUri
+				text = '''
+					type Foo {}
+				'''
+			]
+		])
+		checkCompletion(fileUri)
+	}
+	
+	protected def checkCompletion(String uri) {
 		val completionItems = languageServer.completion(new TextDocumentPositionParams => [
-			textDocument = new TextDocumentIdentifier(inmemoryUri)
+			textDocument = new TextDocumentIdentifier(uri)
 			position = new Position(0, 10)
 		])
 		val result = completionItems.get
