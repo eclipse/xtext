@@ -118,6 +118,11 @@ public class DefaultLinkingService extends AbstractLinkingService {
 			logger.debug("before getLinkedObjects: node: '" + crossRefString + "'");
 		}
 		final IScope scope = getScope(context, ref);
+		if (scope == null) {
+			throw new AssertionError(
+					"Scope provider " + scopeProvider.getClass().getName() + " must not return null for context "
+							+ context + ", reference " + ref + "! Consider to return IScope.NULLSCOPE instead.");
+		}
 		final QualifiedName qualifiedLinkName = qualifiedNameConverter.toQualifiedName(crossRefString);
 		final IEObjectDescription eObjectDescription = scope.getSingleElement(qualifiedLinkName);
 		if (logger.isDebugEnabled()) {
