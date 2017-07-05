@@ -140,6 +140,11 @@ public class EmbeddedEditorFactory {
 		protected boolean editorBuild;
 		protected IValidationIssueProcessor issueProcessor;
 		
+		/**
+		 * @since 2.13
+		 */
+		protected int style = SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL;
+		
 		public Builder showErrorAndWarningAnnotations() {
 			return showAnnotations("org.eclipse.xtext.ui.editor.error", "org.eclipse.xtext.ui.editor.warning");
 		}
@@ -204,7 +209,7 @@ public class EmbeddedEditorFactory {
 					verticalRuler, 
 					null, // overviewRuler
 					false, // showAnnotationOverview 
-					SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
+					style); // SWT styling
 			final XtextSourceViewerConfiguration viewerConfiguration = this.sourceViewerConfigurationProvider.get();
 			viewer.configure(viewerConfiguration);
 
@@ -345,6 +350,15 @@ public class EmbeddedEditorFactory {
 			GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 			control.setLayoutData(data);
 			return result;
+		}
+		
+		/**
+		 * Configures the SWT style of the embedded editor.
+		 * @since 2.13
+		 */
+		public Builder withStyle(int style){
+			this.style = style;
+			return this;
 		}
 		
 		protected void afterCreatePartialEditor(XtextSourceViewer viewer, XtextDocument document, CompositeRuler verticalRuler, 
