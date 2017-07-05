@@ -173,9 +173,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       throw new IllegalStateException("This language server has already been initialized.");
     }
     final URI baseDir = this.getBaseDir(params);
-    if ((baseDir == null)) {
-      throw new IllegalArgumentException("Bad initialization request: rootUri must not be null.");
-    }
     boolean _isEmpty = this.languagesRegistry.getExtensionToFactoryMap().isEmpty();
     if (_isEmpty) {
       throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages\'s setup class in \'/META-INF/services/org.eclipse.xtext.ISetup\'");

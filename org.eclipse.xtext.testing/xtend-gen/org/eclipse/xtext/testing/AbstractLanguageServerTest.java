@@ -9,7 +9,7 @@ package org.eclipse.xtext.testing;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.inject.AbstractModule;
+import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -115,29 +115,27 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   public void setup() {
     try {
       ServerModule _serverModule = new ServerModule();
-      final Module module = Modules2.mixin(_serverModule, new AbstractModule() {
-        @Override
-        protected void configure() {
-          AnnotatedBindingBuilder<RequestManager> _bind = this.<RequestManager>bind(RequestManager.class);
-          _bind.toInstance(new RequestManager() {
-            @Override
-            public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
-              final CancelIndicator _function = () -> {
-                return false;
-              };
-              return CompletableFuture.<V>completedFuture(writeRequest.apply(_function));
-            }
-            
-            @Override
-            public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
-              final CancelIndicator _function = () -> {
-                return false;
-              };
-              return CompletableFuture.<V>completedFuture(readRequest.apply(_function));
-            }
-          });
-        }
-      });
+      final Module _function = (Binder it) -> {
+        AnnotatedBindingBuilder<RequestManager> _bind = it.<RequestManager>bind(RequestManager.class);
+        _bind.toInstance(new RequestManager() {
+          @Override
+          public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
+            final CancelIndicator _function = () -> {
+              return false;
+            };
+            return CompletableFuture.<V>completedFuture(writeRequest.apply(_function));
+          }
+          
+          @Override
+          public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
+            final CancelIndicator _function = () -> {
+              return false;
+            };
+            return CompletableFuture.<V>completedFuture(readRequest.apply(_function));
+          }
+        });
+      };
+      final Module module = Modules2.mixin(_serverModule, _function);
       final Injector injector = Guice.createInjector(module);
       injector.injectMembers(this);
       final Object resourceServiceProvider = this.resourceServerProviderRegistry.getExtensionToFactoryMap().get(this.fileExtension);

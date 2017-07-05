@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.generator;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
@@ -36,6 +37,11 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class TestLanguageGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    String _scheme = fsa.getURI("").scheme();
+    boolean _equals = Objects.equal(_scheme, "inmemory");
+    if (_equals) {
+      return;
+    }
     List<TypeDeclaration> _list = IteratorExtensions.<TypeDeclaration>toList(Iterators.<TypeDeclaration>filter(resource.getAllContents(), TypeDeclaration.class));
     for (final TypeDeclaration type : _list) {
       String _name = type.getName();

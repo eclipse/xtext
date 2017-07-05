@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.testing
 
-import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Inject
 import java.io.File
@@ -50,6 +49,7 @@ import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
+import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
 import org.eclipse.lsp4j.services.LanguageClientExtensions
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -67,7 +67,6 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-import org.eclipse.lsp4j.jsonrpc.messages.Either
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -80,23 +79,19 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 	@Before
 	def void setup() {
-		val module = Modules2.mixin(new ServerModule, new AbstractModule() {
-
-			override protected configure() {
-				bind(RequestManager).toInstance(new RequestManager() {
-
-					override <V> runWrite((CancelIndicator)=>V writeRequest) {
-						return CompletableFuture.completedFuture(writeRequest.apply [ false ])
-					}
-
-					override <V> runRead((CancelIndicator)=>V readRequest) {
-						return CompletableFuture.completedFuture(readRequest.apply [ false ])
-					}
-
-				})
-			}
-
-		})
+		val module = Modules2.mixin(new ServerModule, [
+			bind(RequestManager).toInstance(new RequestManager() {
+	
+				override <V> runWrite((CancelIndicator)=>V writeRequest) {
+					return CompletableFuture.completedFuture(writeRequest.apply [ false ])
+				}
+	
+				override <V> runRead((CancelIndicator)=>V readRequest) {
+					return CompletableFuture.completedFuture(readRequest.apply [ false ])
+				}
+	
+			})
+		])
 
 		val injector = Guice.createInjector(module)
 		injector.injectMembers(this)

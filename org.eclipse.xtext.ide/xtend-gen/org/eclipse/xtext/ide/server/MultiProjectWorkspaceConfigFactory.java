@@ -17,6 +17,7 @@ import org.eclipse.xtext.ide.server.RootSourceFolderProjectConfig;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.workspace.InMemoryProjectConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -30,24 +31,29 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class MultiProjectWorkspaceConfigFactory implements IWorkspaceConfigFactory {
   @Override
   public IWorkspaceConfig getWorkspaceConfig(final URI workspaceBaseURI) {
-    String _fileString = workspaceBaseURI.toFileString();
-    final File baseFile = new File(_fileString);
-    boolean _isDirectory = baseFile.isDirectory();
-    if (_isDirectory) {
-      final HashMap<String, IProjectConfig> name2config = CollectionLiterals.<String, IProjectConfig>newHashMap();
-      final MultiProjectWorkspaceConfig result = new MultiProjectWorkspaceConfig(name2config);
-      final IAcceptor<IProjectConfig> _function = (IProjectConfig it) -> {
-        name2config.put(it.getName(), it);
-      };
-      final IAcceptor<IProjectConfig> acceptor = _function;
-      final Function1<File, Boolean> _function_1 = (File it) -> {
-        return Boolean.valueOf(it.isDirectory());
-      };
-      final Consumer<File> _function_2 = (File it) -> {
-        this.addProjectConfigs(URI.createFileURI(it.getAbsolutePath()), result, acceptor);
-      };
-      IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(baseFile.listFiles())), _function_1).forEach(_function_2);
-      return result;
+    if ((workspaceBaseURI == null)) {
+      final InMemoryProjectConfig projectConfig = new InMemoryProjectConfig();
+      return projectConfig.getWorkspaceConfig();
+    } else {
+      String _fileString = workspaceBaseURI.toFileString();
+      final File baseFile = new File(_fileString);
+      boolean _isDirectory = baseFile.isDirectory();
+      if (_isDirectory) {
+        final HashMap<String, IProjectConfig> name2config = CollectionLiterals.<String, IProjectConfig>newHashMap();
+        final MultiProjectWorkspaceConfig result = new MultiProjectWorkspaceConfig(name2config);
+        final IAcceptor<IProjectConfig> _function = (IProjectConfig it) -> {
+          name2config.put(it.getName(), it);
+        };
+        final IAcceptor<IProjectConfig> acceptor = _function;
+        final Function1<File, Boolean> _function_1 = (File it) -> {
+          return Boolean.valueOf(it.isDirectory());
+        };
+        final Consumer<File> _function_2 = (File it) -> {
+          this.addProjectConfigs(URI.createFileURI(it.getAbsolutePath()), result, acceptor);
+        };
+        IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(baseFile.listFiles())), _function_1).forEach(_function_2);
+        return result;
+      }
     }
     return null;
   }

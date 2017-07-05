@@ -106,9 +106,6 @@ import org.eclipse.xtext.validation.Issue
 			throw new IllegalStateException("This language server has already been initialized.")
 		}
 		val baseDir = params.baseDir
-		if (baseDir === null) {
-			throw new IllegalArgumentException("Bad initialization request: rootUri must not be null.")
-		}
 		if (languagesRegistry.extensionToFactoryMap.isEmpty) {
 			throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages's setup class in '/META-INF/services/org.eclipse.xtext.ISetup'")
 		}

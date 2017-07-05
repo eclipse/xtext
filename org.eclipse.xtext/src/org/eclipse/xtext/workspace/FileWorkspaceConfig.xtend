@@ -124,11 +124,15 @@ class SingleProjectWorkspaceConfig implements IWorkspaceConfig {
 	override findProjectByName(String name) {
 		if (projectConfig.name == name)
 			return projectConfig
+		else
+			return null
 	}
 	
 	override findProjectContaining(URI member) {
 		if (projectConfig.path.isPrefixOf(member))
 			return projectConfig
+		else
+			return null
 	}
 	
 	override getProjects() {
