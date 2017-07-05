@@ -21,13 +21,15 @@ class InMemoryWorkspaceConfig implements IWorkspaceConfig {
 	override findProjectByName(String name) {
 		if (projectConfig.name == name)
 			return projectConfig
+		else
+			return null
 	}
 	
 	override findProjectContaining(URI member) {
 		if (projectConfig.path.isPrefixOf(member))
 			return projectConfig
 		else
-			new InMemoryProjectConfig(member.trimFragment.trimQuery.trimSegments(1))
+			return new InMemoryProjectConfig(member.trimFragment.trimQuery.trimSegments(1))
 	}
 	
 	override getProjects() {

@@ -71,6 +71,8 @@ class MultiProjectWorkspaceConfig implements IWorkspaceConfig {
         ]
         if (!candidates.empty)
         	return candidates.maxBy[path.segmentCount]
+        else
+        	return null
     }
 }
 

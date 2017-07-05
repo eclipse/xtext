@@ -49,8 +49,9 @@ public class MultiProjectWorkspaceConfig implements IWorkspaceConfig {
         return Integer.valueOf(it.getPath().segmentCount());
       };
       return IterableExtensions.<IProjectConfig, Integer>maxBy(candidates, _function_1);
+    } else {
+      return null;
     }
-    return null;
   }
   
   public MultiProjectWorkspaceConfig(final Map<String, IProjectConfig> name2config) {

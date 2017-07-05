@@ -29,21 +29,20 @@ public class InMemoryWorkspaceConfig implements IWorkspaceConfig {
     boolean _equals = Objects.equal(_name, name);
     if (_equals) {
       return this.projectConfig;
+    } else {
+      return null;
     }
-    return null;
   }
   
   @Override
   public IProjectConfig findProjectContaining(final URI member) {
-    InMemoryProjectConfig _xifexpression = null;
     boolean _isPrefixOf = UriUtil.isPrefixOf(this.projectConfig.getPath(), member);
     if (_isPrefixOf) {
       return this.projectConfig;
     } else {
       URI _trimSegments = member.trimFragment().trimQuery().trimSegments(1);
-      _xifexpression = new InMemoryProjectConfig(_trimSegments);
+      return new InMemoryProjectConfig(_trimSegments);
     }
-    return _xifexpression;
   }
   
   @Override

@@ -30,8 +30,9 @@ public class SingleProjectWorkspaceConfig implements IWorkspaceConfig {
     boolean _equals = Objects.equal(_name, name);
     if (_equals) {
       return this.projectConfig;
+    } else {
+      return null;
     }
-    return null;
   }
   
   @Override
@@ -39,8 +40,9 @@ public class SingleProjectWorkspaceConfig implements IWorkspaceConfig {
     boolean _isPrefixOf = UriUtil.isPrefixOf(this.projectConfig.getPath(), member);
     if (_isPrefixOf) {
       return this.projectConfig;
+    } else {
+      return null;
     }
-    return null;
   }
   
   @Override
