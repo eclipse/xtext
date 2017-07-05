@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.server.concurrent;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.inject.Inject;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
@@ -52,7 +53,8 @@ public class RequestManager {
   
   private final int READ_PERMITS = 1;
   
-  private final ExecutorService sequential = Executors.newSingleThreadExecutor();
+  private final ExecutorService sequential = Executors.newSingleThreadExecutor(
+    new ThreadFactoryBuilder().setDaemon(true).setNameFormat("RequestManager-Queue-%d").build());
   
   @Inject
   private ExecutorService parallel;
@@ -67,6 +69,7 @@ public class RequestManager {
   public void shutdown() {
     this.sequential.shutdown();
     this.parallel.shutdown();
+    this.cancel();
   }
   
   public <V extends Object> V lockRead(final Function0<? extends V> request) {

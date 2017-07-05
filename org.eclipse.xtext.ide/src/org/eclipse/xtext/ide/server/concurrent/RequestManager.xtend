@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.concurrent
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder
 import com.google.inject.Inject
 import java.util.concurrent.CancellationException
 import java.util.concurrent.CompletableFuture
@@ -43,7 +44,9 @@ class RequestManager {
 	val final WRITE_PERMITS = MAX_PERMITS
 	val final READ_PERMITS = 1
 
-	val sequential = Executors.newSingleThreadExecutor
+	val sequential = Executors.newSingleThreadExecutor(
+		new ThreadFactoryBuilder().setDaemon(true).setNameFormat("RequestManager-Queue-%d").build
+	)
 	@Inject ExecutorService parallel
 
 	@Inject
@@ -56,6 +59,7 @@ class RequestManager {
 	def void shutdown() {
 		sequential.shutdown()
 		parallel.shutdown()
+		cancel()
 	}
 
 	def <V> V lockRead(()=>V request) {
