@@ -57,7 +57,7 @@ public class OrganizeImportsHandler extends AbstractHandler {
 				return importOrganizer.getOrganizedImportChanges(state);
 			}
 		});
-		if (result == null)
+		if (result == null || result.isEmpty())
 			return;
 		try {
 			DocumentRewriteSession session = null;
