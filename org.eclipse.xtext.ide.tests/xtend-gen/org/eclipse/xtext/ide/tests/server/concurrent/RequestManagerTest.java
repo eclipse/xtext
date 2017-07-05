@@ -134,7 +134,8 @@ public class RequestManagerTest {
     final Function1<CancelIndicator, Integer> _function_1 = (CancelIndicator it) -> {
       int _xblockexpression = (int) 0;
       {
-        Assert.assertEquals(1, this.sharedState.get());
+        while ((this.sharedState.get() == 0)) {
+        }
         _xblockexpression = this.sharedState.incrementAndGet();
       }
       return Integer.valueOf(_xblockexpression);
