@@ -21,6 +21,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.jsonrpc.ResponseErrorException;
+import org.eclipse.lsp4j.jsonrpc.messages.ResponseError;
+import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode;
 import org.eclipse.xtext.ide.server.BuildManager;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
@@ -145,6 +148,13 @@ public class WorkspaceManager {
     this.afterBuild(result);
   }
   
+  protected void checkInitialized() {
+    if ((this.workspaceConfig == null)) {
+      final ResponseError error = new ResponseError(ResponseErrorCode.serverNotInitialized, "Workspace has not been initialized yet.", null);
+      throw new ResponseErrorException(error);
+    }
+  }
+  
   protected void afterBuild(final List<IResourceDescription.Delta> deltas) {
     for (final ILanguageServerAccess.IBuildListener listener : this.buildListeners) {
       listener.afterBuild(deltas);
@@ -169,20 +179,18 @@ public class WorkspaceManager {
     return new ChunkedResourceDescriptions(this.fullIndex);
   }
   
-  public URI getProjectBaseDir(final URI candidate) {
-    URI _xblockexpression = null;
-    {
-      final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(candidate);
-      URI _path = null;
-      if (projectConfig!=null) {
-        _path=projectConfig.getPath();
-      }
-      _xblockexpression = _path;
+  public URI getProjectBaseDir(final URI uri) {
+    this.checkInitialized();
+    final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(uri);
+    URI _path = null;
+    if (projectConfig!=null) {
+      _path=projectConfig.getPath();
     }
-    return _xblockexpression;
+    return _path;
   }
   
   public ProjectManager getProjectManager(final URI uri) {
+    this.checkInitialized();
     final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(uri);
     String _name = null;
     if (projectConfig!=null) {

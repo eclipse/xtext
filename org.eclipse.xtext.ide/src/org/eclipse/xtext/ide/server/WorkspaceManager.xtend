@@ -16,6 +16,9 @@ import java.util.Map
 import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.lsp4j.TextEdit
+import org.eclipse.lsp4j.jsonrpc.ResponseErrorException
+import org.eclipse.lsp4j.jsonrpc.messages.ResponseError
+import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode
 import org.eclipse.xtext.ide.server.BuildManager.Buildable
 import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider
@@ -106,6 +109,13 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
         val result = buildManager.doInitialBuild(newProjects, cancelIndicator)
         afterBuild(result)
     }
+    
+    protected def checkInitialized() {
+    	if (workspaceConfig === null) {
+    		val error = new ResponseError(ResponseErrorCode.serverNotInitialized, "Workspace has not been initialized yet.", null)
+    		throw new ResponseErrorException(error)
+		}
+    }
 	
 	protected def afterBuild(List<Delta> deltas) {
 		for (listener : buildListeners) {
@@ -130,12 +140,14 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
     	return new ChunkedResourceDescriptions(fullIndex)
     }
 
-    def URI getProjectBaseDir(URI candidate) {
-        val projectConfig = workspaceConfig.findProjectContaining(candidate)
-        projectConfig?.path
+    def URI getProjectBaseDir(URI uri) {
+    	checkInitialized()
+        val projectConfig = workspaceConfig.findProjectContaining(uri)
+        return projectConfig?.path
     }
     
     def ProjectManager getProjectManager(URI uri) {
+    	checkInitialized()
         val projectConfig = workspaceConfig.findProjectContaining(uri)
         return projectName2ProjectManager.get(projectConfig?.name)
     }
