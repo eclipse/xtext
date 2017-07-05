@@ -659,8 +659,9 @@ public class RawTypeConformanceComputer {
 			if (leftHint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
 				final LightweightTypeReference leftHintReference = leftHint.getTypeReference();
 				if (!leftHintReference.getUniqueIdentifier().equals(right.getUniqueIdentifier())) {
+					final LightweightMergedBoundTypeArgument rightTypeArgument = new LightweightMergedBoundTypeArgument(right.getWrapperTypeIfPrimitive(), VarianceInfo.INVARIANT);
 					final UnboundTypeParameterPreservingSubstitutor unboundSubstitutor = new UnboundTypeParameterPreservingSubstitutor(
-							Collections.singletonMap(left.getTypeParameter(), new LightweightMergedBoundTypeArgument(right, VarianceInfo.INVARIANT)), right.getOwner()) {
+							Collections.singletonMap(left.getTypeParameter(), rightTypeArgument), right.getOwner()) {
 						@Override
 						public LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference, Set<JvmTypeParameter> visiting) {
 							if (reference.getHandle() == left.getHandle()) {
@@ -674,7 +675,7 @@ public class RawTypeConformanceComputer {
 										}
 									}
 								}
-								return right;
+								return rightTypeArgument.getTypeReference();
 							}
 							return super.doVisitUnboundTypeReference(reference, visiting);
 						}

@@ -33,6 +33,7 @@ import org.junit.Test;
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 
+import testdata.AssertJLikeAssertions.AssertJLikeException;
 import testdata.ExceptionSubclass;
 import testdata.OuterClass;
 
@@ -5042,6 +5043,18 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test 
 	public void testNullSaveLazyEvaluation2() throws Exception {
 		assertEvaluatesTo(0, "{ val x = <String>newArrayList; var c = [|x += 'x';1]; (null as String)?.substring(c.apply); return x.size; }");
+	}
+	
+	@Test public void testBug485032_01() throws Exception {
+		assertEvaluatesTo(1, "{var x = testdata.AssertJLikeAssertions.assertThat(1); return x.value;}");
+	}
+	
+	@Test public void testBug485032_02() throws Exception {
+		assertEvaluatesWithException(AssertJLikeException.class, "{var x = testdata.AssertJLikeAssertions.assertThat(1).isEqualTo(2)}");
+	}
+	
+	@Test public void testBug485032_03() throws Exception {
+		assertEvaluatesTo(-1, "{var x = testdata.AssertJLikeAssertions.assertThat(1 as Integer).compareTo(2); return x;}");
 	}
 	
 	/**
