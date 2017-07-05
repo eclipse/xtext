@@ -1419,6 +1419,27 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals(4, new OverloadedMethods<Object>(chars, strings).usedConstructor);
 		assertEquals(4, new OverloadedMethods<Object>(strings, chars).usedConstructor);
 	}
-
+	
+	@Test public void testBug485032_01() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var testdata.IntegerAssert result = testdata.AssertJLikeAssertions.assertThat(1);\n" +
+				"    result.isEqualTo(2)\n" +
+				"}");
+		XExpression expression = block.getExpressions().get(0);
+		XExpression right = ((XVariableDeclaration) expression).getRight();
+		assertEquals("testdata.AssertJLikeAssertions.assertThat(int)", (((XMemberFeatureCall) right).getFeature().getIdentifier()));
+	}
+	
+	@Test public void testBug485032_02() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" +
+				"    var result = testdata.AssertJLikeAssertions.assertThat(1 as Integer)\n" +
+				"    result.compareTo(2)\n" +
+				"}");
+		XExpression expression = block.getExpressions().get(0);
+		XExpression right = ((XVariableDeclaration) expression).getRight();
+		assertEquals("testdata.AssertJLikeAssertions.assertThat(T)", (((XMemberFeatureCall) right).getFeature().getIdentifier()));
+	}
 	
 }
