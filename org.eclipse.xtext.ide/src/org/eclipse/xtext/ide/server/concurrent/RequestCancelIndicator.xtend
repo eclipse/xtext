@@ -8,35 +8,32 @@
 package org.eclipse.xtext.ide.server.concurrent
 
 import java.util.concurrent.CancellationException
+import java.util.concurrent.CompletableFuture
 import org.eclipse.lsp4j.jsonrpc.CancelChecker
-import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
-class RequestCancelIndicator implements CancelChecker, Cancellable {
+@FinalFieldsConstructor
+class RequestCancelIndicator implements CancelIndicator, CancelChecker, Cancellable {
 
-	@Accessors(PUBLIC_GETTER)
-	volatile boolean canceled
-	
-	CancelChecker delegate
-	
-	new () {}
-	new (CancelChecker delegate) {
-		this.delegate = delegate
-	}
+	val CompletableFuture<?> requestFuture
 
 	override cancel() {
-		canceled = true
+		requestFuture.cancel(true)
 	}
 	
-	override checkCanceled() {
-		if (delegate !== null) {
-			delegate.checkCanceled
-		}
-		if (canceled) {
-			throw new CancellationException("process canceled")
+	override isCanceled() {
+		checkCanceled
+		return false
+	}
+
+	override void checkCanceled() {
+		if (requestFuture.cancelled) {
+			throw new CancellationException()
 		}
 	}
 

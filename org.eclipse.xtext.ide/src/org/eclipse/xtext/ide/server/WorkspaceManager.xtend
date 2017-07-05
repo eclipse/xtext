@@ -26,6 +26,7 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.workspace.IWorkspaceConfig
+import org.eclipse.xtext.ide.server.BuildManager.Buildable
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -109,11 +110,18 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 			listener.afterBuild(deltas)
 		}
 	}
+	
+	def Buildable didChangeFiles(List<URI> dirtyFiles, List<URI> deletedFiles) {
+		val buildable = buildManager.submit(dirtyFiles, deletedFiles)
+		return [ cancelIndicator |
+			val deltas = buildable.build(cancelIndicator)
+			afterBuild(deltas)
+			return deltas
+		]
+	}
 
-    def List<IResourceDescription.Delta> doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
-    	val doBuild = buildManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator)
-    	afterBuild(doBuild)
-		return doBuild
+	def List<IResourceDescription.Delta> doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
+    	return didChangeFiles(dirtyFiles, deletedFiles).build(cancelIndicator)
     }
     
     def IResourceDescriptions getIndex() {
@@ -139,27 +147,38 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
     }
 
     def didChange(URI uri, int version, Iterable<TextEdit> changes, CancelIndicator cancelIndicator) {
+    	didChange(uri, version, changes).build(cancelIndicator)
+    }
+
+    def Buildable didChange(URI uri, int version, Iterable<TextEdit> changes) {
         if (!openDocuments.containsKey(uri)) {
             LOG.error("The document "+uri+" has not been opened.")
-            return;
+            return [];
         }
         val contents = openDocuments.get(uri)
         openDocuments.put(uri, contents.applyChanges(changes))
-        doBuild(#[uri], newArrayList, cancelIndicator)
+        return didChangeFiles(#[uri], newArrayList)
     }
     
     def didOpen(URI uri, int version, String contents, CancelIndicator cancelIndicator) {
+        didOpen(uri, version, contents).build(cancelIndicator)
+    }
+    
+    def Buildable didOpen(URI uri, int version, String contents) {
         openDocuments.put(uri, new Document(version, contents))
-        doBuild(#[uri], newArrayList, cancelIndicator)
+        return didChangeFiles(#[uri], newArrayList)
     }
     
     def didClose(URI uri, CancelIndicator cancelIndicator) {
-        openDocuments.remove(uri)
+    	didClose(uri).build(cancelIndicator)
+    }
+    
+    def Buildable didClose(URI uri) {
+    	openDocuments.remove(uri)
         if (exists(uri)) {
-            doBuild(#[uri], newArrayList, cancelIndicator)
-        } else {
-            doBuild(newArrayList, #[uri], cancelIndicator)
+            return didChangeFiles(#[uri], newArrayList)
         }
+        return didChangeFiles(newArrayList, #[uri])
     }
     
     protected def boolean exists(URI uri) {

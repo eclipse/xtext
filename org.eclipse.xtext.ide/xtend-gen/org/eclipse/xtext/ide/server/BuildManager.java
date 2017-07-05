@@ -107,6 +107,10 @@ public class BuildManager {
     }
   }
   
+  public interface Buildable {
+    public abstract List<IResourceDescription.Delta> build(final CancelIndicator cancelIndicator);
+  }
+  
   public final static String CYCLIC_PROJECT_DEPENDENCIES = (BuildManager.class.getCanonicalName() + ".cyclicProjectDependencies");
   
   @Accessors(AccessorType.PUBLIC_SETTER)
@@ -119,10 +123,17 @@ public class BuildManager {
   
   private final LinkedHashSet<URI> deletedFiles = CollectionLiterals.<URI>newLinkedHashSet();
   
-  public List<IResourceDescription.Delta> doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
+  public BuildManager.Buildable submit(final List<URI> dirtyFiles, final List<URI> deletedFiles) {
     this.queue(this.dirtyFiles, deletedFiles, dirtyFiles);
     this.queue(this.deletedFiles, dirtyFiles, deletedFiles);
-    return this.internalBuild(cancelIndicator);
+    final BuildManager.Buildable _function = (CancelIndicator cancelIndicator) -> {
+      return this.internalBuild(cancelIndicator);
+    };
+    return _function;
+  }
+  
+  public List<IResourceDescription.Delta> doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
+    return this.submit(dirtyFiles, deletedFiles).build(cancelIndicator);
   }
   
   protected void queue(final Set<URI> files, final Collection<URI> toRemove, final Collection<URI> toAdd) {

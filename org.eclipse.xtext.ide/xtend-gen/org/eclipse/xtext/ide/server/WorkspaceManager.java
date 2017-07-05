@@ -150,10 +150,18 @@ public class WorkspaceManager {
     }
   }
   
+  public BuildManager.Buildable didChangeFiles(final List<URI> dirtyFiles, final List<URI> deletedFiles) {
+    final BuildManager.Buildable buildable = this.buildManager.submit(dirtyFiles, deletedFiles);
+    final BuildManager.Buildable _function = (CancelIndicator cancelIndicator) -> {
+      final List<IResourceDescription.Delta> deltas = buildable.build(cancelIndicator);
+      this.afterBuild(deltas);
+      return deltas;
+    };
+    return _function;
+  }
+  
   public List<IResourceDescription.Delta> doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
-    final List<IResourceDescription.Delta> doBuild = this.buildManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
-    this.afterBuild(doBuild);
-    return doBuild;
+    return this.didChangeFiles(dirtyFiles, deletedFiles).build(cancelIndicator);
   }
   
   public IResourceDescriptions getIndex() {
@@ -191,42 +199,46 @@ public class WorkspaceManager {
     return new ArrayList<ProjectManager>(_values);
   }
   
-  public void didChange(final URI uri, final int version, final Iterable<TextEdit> changes, final CancelIndicator cancelIndicator) {
+  public List<IResourceDescription.Delta> didChange(final URI uri, final int version, final Iterable<TextEdit> changes, final CancelIndicator cancelIndicator) {
+    return this.didChange(uri, version, changes).build(cancelIndicator);
+  }
+  
+  public BuildManager.Buildable didChange(final URI uri, final int version, final Iterable<TextEdit> changes) {
     boolean _containsKey = this.openDocuments.containsKey(uri);
     boolean _not = (!_containsKey);
     if (_not) {
       WorkspaceManager.LOG.error((("The document " + uri) + " has not been opened."));
-      return;
+      final BuildManager.Buildable _function = (CancelIndicator it) -> {
+        return null;
+      };
+      return _function;
     }
     final Document contents = this.openDocuments.get(uri);
     this.openDocuments.put(uri, contents.applyChanges(changes));
-    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList(), cancelIndicator);
+    return this.didChangeFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList());
   }
   
   public List<IResourceDescription.Delta> didOpen(final URI uri, final int version, final String contents, final CancelIndicator cancelIndicator) {
-    List<IResourceDescription.Delta> _xblockexpression = null;
-    {
-      Document _document = new Document(version, contents);
-      this.openDocuments.put(uri, _document);
-      _xblockexpression = this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList(), cancelIndicator);
-    }
-    return _xblockexpression;
+    return this.didOpen(uri, version, contents).build(cancelIndicator);
+  }
+  
+  public BuildManager.Buildable didOpen(final URI uri, final int version, final String contents) {
+    Document _document = new Document(version, contents);
+    this.openDocuments.put(uri, _document);
+    return this.didChangeFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList());
   }
   
   public List<IResourceDescription.Delta> didClose(final URI uri, final CancelIndicator cancelIndicator) {
-    List<IResourceDescription.Delta> _xblockexpression = null;
-    {
-      this.openDocuments.remove(uri);
-      List<IResourceDescription.Delta> _xifexpression = null;
-      boolean _exists = this.exists(uri);
-      if (_exists) {
-        _xifexpression = this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList(), cancelIndicator);
-      } else {
-        _xifexpression = this.doBuild(CollectionLiterals.<URI>newArrayList(), Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), cancelIndicator);
-      }
-      _xblockexpression = _xifexpression;
+    return this.didClose(uri).build(cancelIndicator);
+  }
+  
+  public BuildManager.Buildable didClose(final URI uri) {
+    this.openDocuments.remove(uri);
+    boolean _exists = this.exists(uri);
+    if (_exists) {
+      return this.didChangeFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList());
     }
-    return _xblockexpression;
+    return this.didChangeFiles(CollectionLiterals.<URI>newArrayList(), Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)));
   }
   
   protected boolean exists(final URI uri) {
