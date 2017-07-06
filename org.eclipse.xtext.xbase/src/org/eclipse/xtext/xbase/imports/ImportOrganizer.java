@@ -58,6 +58,11 @@ public class ImportOrganizer {
 			unresolvedTypeResolver.resolve(typeUsages, resource);
 		Map<String, JvmDeclaredType> name2type = conflictResolver.resolveConflicts(typeUsages, nonOverridableTypesProvider, resource);
 		List<ReplaceRegion> changes = getOrganizedImportChanges(resource, name2type, typeUsages);
+		removeNullEdits(resource, changes);
+		return changes;
+	}
+
+	protected void removeNullEdits(XtextResource resource, List<ReplaceRegion> changes) {
 		Iterator<ReplaceRegion> iterator = changes.iterator();
 		String document = resource.getParseResult().getRootNode().getText();
 		while(iterator.hasNext()) {
@@ -66,7 +71,6 @@ public class ImportOrganizer {
 				iterator.remove();
 			}
 		}
-		return changes;
 	}
 
 	private List<ReplaceRegion> getOrganizedImportChanges(XtextResource resource, Map<String, JvmDeclaredType> resolvedConflicts, TypeUsages typeUsages) {
