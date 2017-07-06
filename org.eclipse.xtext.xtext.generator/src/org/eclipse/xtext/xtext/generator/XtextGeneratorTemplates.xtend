@@ -37,6 +37,7 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnot
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 /**
  * Templates for generating the common language infrastructure.
@@ -494,7 +495,6 @@ class XtextGeneratorTemplates {
 		}
 	}
 
-	
 	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(IXtextGeneratorLanguage langConfig, IXtextGeneratorLanguage activatorLanguage) {
 		val grammar = langConfig.grammar
 		
@@ -510,20 +510,21 @@ class XtextGeneratorTemplates {
 			
 				@Override
 				protected «'org.osgi.framework.Bundle'.typeRef» getBundle() {
-					return «eclipsePluginActivator».getInstance().getBundle();
+					return «'org.eclipse.core.runtime.Platform'.typeRef».getBundle(«eclipsePluginActivator».PLUGIN_ID);
 				}
 				
 				@Override
 				protected «Injector» getInjector() {
-					return «eclipsePluginActivator».getInstance().getInjector(«eclipsePluginActivator».«langConfig.grammar.name.toUpperCase.replaceAll('\\.', '_')»);
+					«eclipsePluginActivator» activator = «eclipsePluginActivator».getInstance();
+					return activator != null ? activator.getInjector(«eclipsePluginActivator».«langConfig.grammar.name.toUpperCase.replaceAll('\\.', '_')») : null;
 				}
-				
+			
 			}
 		'''
 		return file
 	}
 	
-	def JavaFileAccess createEclipsePluginActivator(List<? extends IXtextGeneratorLanguage> langConfigs) {
+	def JavaFileAccess createEclipsePluginActivator(IXtextProjectConfig projectConfig, List<? extends IXtextGeneratorLanguage> langConfigs) {
 		val activator = eclipsePluginActivator
 		val file = fileAccessFactory.createGeneratedJavaFile(activator)
 		
@@ -536,6 +537,7 @@ class XtextGeneratorTemplates {
 		file.content = '''
 			public class «activator.simpleName» extends «'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» {
 			
+				public static final String PLUGIN_ID = "«projectConfig.eclipsePlugin.name»";
 				«FOR lang : langConfigs»
 					public static final String «lang.grammar.name.toUpperCase.replaceAll('\\.', '_')» = "«lang.grammar.name»";
 				«ENDFOR»
@@ -608,6 +610,7 @@ class XtextGeneratorTemplates {
 				protected «Module» getSharedStateModule() {
 					return new «'org.eclipse.xtext.ui.shared.SharedStateModule'.typeRef»();
 				}
+				
 				
 			}
 		'''
