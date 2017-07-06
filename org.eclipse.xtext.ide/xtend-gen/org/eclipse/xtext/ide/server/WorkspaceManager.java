@@ -148,11 +148,12 @@ public class WorkspaceManager {
     this.afterBuild(result);
   }
   
-  protected void checkInitialized() {
+  protected IWorkspaceConfig getWorkspaceConfig() {
     if ((this.workspaceConfig == null)) {
       final ResponseError error = new ResponseError(ResponseErrorCode.serverNotInitialized, "Workspace has not been initialized yet.", null);
       throw new ResponseErrorException(error);
     }
+    return this.workspaceConfig;
   }
   
   protected void afterBuild(final List<IResourceDescription.Delta> deltas) {
@@ -180,8 +181,7 @@ public class WorkspaceManager {
   }
   
   public URI getProjectBaseDir(final URI uri) {
-    this.checkInitialized();
-    final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(uri);
+    final IProjectConfig projectConfig = this.getWorkspaceConfig().findProjectContaining(uri);
     URI _path = null;
     if (projectConfig!=null) {
       _path=projectConfig.getPath();
@@ -190,8 +190,7 @@ public class WorkspaceManager {
   }
   
   public ProjectManager getProjectManager(final URI uri) {
-    this.checkInitialized();
-    final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(uri);
+    final IProjectConfig projectConfig = this.getWorkspaceConfig().findProjectContaining(uri);
     String _name = null;
     if (projectConfig!=null) {
       _name=projectConfig.getName();

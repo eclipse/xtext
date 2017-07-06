@@ -87,7 +87,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
         refreshWorkspaceConfig(cancelIndicator)
     }
     
-    protected def refreshWorkspaceConfig(CancelIndicator cancelIndicator) {
+    protected def void refreshWorkspaceConfig(CancelIndicator cancelIndicator) {
         workspaceConfig = workspaceConfigFactory.getWorkspaceConfig(baseDir)
         val newProjects = newArrayList
         val Set<String> remainingProjectNames = new HashSet(projectName2ProjectManager.keySet)
@@ -110,14 +110,15 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
         afterBuild(result)
     }
     
-    protected def checkInitialized() {
+    protected def IWorkspaceConfig getWorkspaceConfig() {
     	if (workspaceConfig === null) {
     		val error = new ResponseError(ResponseErrorCode.serverNotInitialized, "Workspace has not been initialized yet.", null)
     		throw new ResponseErrorException(error)
 		}
+		return workspaceConfig
     }
 	
-	protected def afterBuild(List<Delta> deltas) {
+	protected def void afterBuild(List<Delta> deltas) {
 		for (listener : buildListeners) {
 			listener.afterBuild(deltas)
 		}
@@ -141,14 +142,12 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
     }
 
     def URI getProjectBaseDir(URI uri) {
-    	checkInitialized()
-        val projectConfig = workspaceConfig.findProjectContaining(uri)
+        val projectConfig = getWorkspaceConfig.findProjectContaining(uri)
         return projectConfig?.path
     }
     
     def ProjectManager getProjectManager(URI uri) {
-    	checkInitialized()
-        val projectConfig = workspaceConfig.findProjectContaining(uri)
+        val projectConfig = getWorkspaceConfig.findProjectContaining(uri)
         return projectName2ProjectManager.get(projectConfig?.name)
     }
     
