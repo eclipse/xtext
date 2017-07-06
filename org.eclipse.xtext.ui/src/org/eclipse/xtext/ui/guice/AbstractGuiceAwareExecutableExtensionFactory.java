@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IExecutableExtensionFactory;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.osgi.framework.Bundle;
 
@@ -22,6 +23,7 @@ import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Karsten Thoms - Bug#462906
  */
 public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IExecutableExtensionFactory, IExecutableExtension {
 	public static final String GUICEKEY = "guicekey";
@@ -49,15 +51,50 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 		try {
 			final Class<?> clazz = getBundle().loadClass(clazzName);
 			final Injector injector = getInjector();
+			if (injector == null) {
+				throw handleCreationError(null);
+			}
 			final Object result = injector.getInstance(clazz);
 			if (result instanceof IExecutableExtension)
 				((IExecutableExtension) result).setInitializationData(config, null, null);
 			return result;
+		} catch (VirtualMachineError | CoreException e) {
+			throw e;
+		} catch (Throwable e) {
+			throw handleCreationError(e);
 		}
-		catch (Exception e) {
-			log.error(e.getMessage(), e);
-			throw new CoreException(new Status(IStatus.ERROR, getBundle().getSymbolicName(), e.getMessage() + " ExtensionFactory: "+ getClass().getName(), e));
+	}
+	
+	/**
+	 * In the case that the EEF fails to create an injector or an instance of the desired class
+	 * this method is called to produce a more user friendly error message.
+	 * @since 2.13
+	 */
+	protected CoreException handleCreationError(Throwable cause) {
+		String message;
+		String contributor = config.getDeclaringExtension().getContributor().getName();
+		Bundle bundle = Platform.getBundle(contributor);
+		if (cause != null && ! (cause instanceof NullPointerException)) {
+			message = cause.getMessage() + " (occurred in " + getClass().getName() + ")";
+		} else {
+			message = "Could not create the Injector for " + getClass().getName() + ".";
 		}
+
+		if (bundle.getState() != Bundle.ACTIVE) {
+			message += "\nBundle " + bundle.getSymbolicName() + " was not activated.\n"
+				+ "Please check that all dependencies could be resolved and 'Bundle-ActivationPolicy: lazy' is configured in the bundle's MANIFEST.MF. "
+				+ "Check also the error log.";
+		}
+		if (cause instanceof NullPointerException) {
+			message += "\nA NullPointerException occurred. This also indicates that bundle "+bundle.getSymbolicName()
+				+ " was compiled with an outdated version of Xtext. Please consider to regenerate the DSL implementation "
+				+ " with a current version.\n"
+				+ "Your currently installed version of Xtext is "
+				+ Platform.getBundle("org.eclipse.xtext.ui").getVersion() + ".";
+		}
+
+		return new CoreException(
+				new Status(IStatus.ERROR, bundle.getSymbolicName(), message, cause));
 	}
 	
 	protected abstract Bundle getBundle();
