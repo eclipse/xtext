@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.imports;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +57,16 @@ public class ImportOrganizer {
 		if (unresolvedTypeResolver != null)
 			unresolvedTypeResolver.resolve(typeUsages, resource);
 		Map<String, JvmDeclaredType> name2type = conflictResolver.resolveConflicts(typeUsages, nonOverridableTypesProvider, resource);
-		return getOrganizedImportChanges(resource, name2type, typeUsages);
+		List<ReplaceRegion> changes = getOrganizedImportChanges(resource, name2type, typeUsages);
+		Iterator<ReplaceRegion> iterator = changes.iterator();
+		String document = resource.getParseResult().getRootNode().getText();
+		while(iterator.hasNext()) {
+			ReplaceRegion region = iterator.next();
+			if (region.getText().equals(document.substring(region.getOffset(), region.getEndOffset()))) {
+				iterator.remove();
+			}
+		}
+		return changes;
 	}
 
 	private List<ReplaceRegion> getOrganizedImportChanges(XtextResource resource, Map<String, JvmDeclaredType> resolvedConflicts, TypeUsages typeUsages) {
