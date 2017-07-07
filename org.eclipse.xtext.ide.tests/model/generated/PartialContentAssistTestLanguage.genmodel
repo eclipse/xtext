@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.ide.tests/testlang-src-gen" modelPluginID="org.eclipse.xtext.ide.tests"
     forceOverwrite="true" modelName="PartialContentAssistTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
-    copyrightFields="false" runtimeVersion="2.12">
+    copyrightFields="false" runtimeVersion="2.12" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="PartialContentAssistTestLanguage" basePackage="org.eclipse.xtext.ide.tests.testlanguage"
       disposableProviderFactory="true" fileExtensions="partialcontentassisttestlang"
       ecorePackage="PartialContentAssistTestLanguage.ecore#/">
