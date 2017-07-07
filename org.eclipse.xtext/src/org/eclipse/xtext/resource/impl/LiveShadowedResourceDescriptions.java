@@ -51,6 +51,7 @@ public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDe
 	@Override
 	public void setContext(Notifier ctx) {
 		localDescriptions.setContext(ctx);
+		localDescriptions.setData(null);
 		if(globalDescriptions instanceof IResourceDescriptions.IContextAware)
 			((IResourceDescriptions.IContextAware) globalDescriptions).setContext(ctx);
 	}
