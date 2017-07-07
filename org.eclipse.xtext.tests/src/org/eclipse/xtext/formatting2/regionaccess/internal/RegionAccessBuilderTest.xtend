@@ -8,6 +8,8 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal
 
 import com.google.inject.Inject
+
+import static extension org.eclipse.xtext.util.Strings.*
 import javax.inject.Provider
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString
@@ -671,13 +673,8 @@ class RegionAccessBuilderTest {
 		val tra1 = new TextRegionAccessToString().withRegionAccess(access1).cfg() + "\n"
 		val tra2 = new TextRegionAccessToString().withRegionAccess(access2).cfg() + "\n"
 		
-		val expM = exp.replaceAll(System.lineSeparator, "\n")
-		
-		val tra1M = tra1.replaceAll(System.lineSeparator, "\n")
-		val tra2M = tra2.replaceAll(System.lineSeparator, "\n")
-		
-		Assert.assertEquals(expM, tra1M)
-		Assert.assertEquals(expM, tra2M)
+		Assert.assertEquals(exp.toPlatformLineSeparator, tra1.toPlatformLineSeparator)
+		Assert.assertEquals(exp.toPlatformLineSeparator, tra2.toPlatformLineSeparator)
 	}
 
 	private def assertToStringDoesNotCrash(ITextRegionAccess access) {

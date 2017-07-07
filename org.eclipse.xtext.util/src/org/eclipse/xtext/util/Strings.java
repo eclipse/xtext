@@ -98,6 +98,13 @@ public class Strings {
 	public static String newLine() {
 		return System.getProperty("line.separator");
 	}
+	
+	/**
+	 * @since 2.13
+	 */
+	public static String toPlatformLineSeparator(CharSequence cs) {
+		return cs.toString().replaceAll("\r?\n", Strings.newLine());
+	}
 
 	public static String toFirstLower(String s) {
 		if (s == null || s.length() == 0 || Character.isLowerCase(s.charAt(0)))

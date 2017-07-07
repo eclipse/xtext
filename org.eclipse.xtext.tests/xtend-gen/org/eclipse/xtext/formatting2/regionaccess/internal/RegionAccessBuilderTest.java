@@ -26,6 +26,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
@@ -1442,11 +1443,8 @@ public class RegionAccessBuilderTest {
       final String tra1 = (_cfg + "\n");
       TextRegionAccessToString _cfg_1 = this.cfg(new TextRegionAccessToString().withRegionAccess(access2));
       final String tra2 = (_cfg_1 + "\n");
-      final String expM = exp.replaceAll(System.lineSeparator(), "\n");
-      final String tra1M = tra1.replaceAll(System.lineSeparator(), "\n");
-      final String tra2M = tra2.replaceAll(System.lineSeparator(), "\n");
-      Assert.assertEquals(expM, tra1M);
-      Assert.assertEquals(expM, tra2M);
+      Assert.assertEquals(Strings.toPlatformLineSeparator(exp), Strings.toPlatformLineSeparator(tra1));
+      Assert.assertEquals(Strings.toPlatformLineSeparator(exp), Strings.toPlatformLineSeparator(tra2));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
