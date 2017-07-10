@@ -126,7 +126,8 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		ITextReplacerContext wrappable = null;
 		Set<ITextReplacer> wrapped = Sets.newHashSet();
 		LinkedList<ITextReplacer> queue = new LinkedList<ITextReplacer>();
-		for (ITextReplacer replacer : getReplacers()) {
+		TextSegmentSet<ITextReplacer> replacers = getReplacers();
+		for (ITextReplacer replacer : replacers) {
 			queue.add(replacer);
 		}
 		while (!queue.isEmpty()) {
@@ -140,8 +141,15 @@ public abstract class FormattableDocument implements IFormattableDocument {
 				// then doesn't
 				while (context != wrappable) {
 					ITextReplacer r = context.getReplacer();
-					if (r != null && getReplacers().get(r) == r) {
-						queue.addFirst(r);
+					if (r != null) {
+						ITextReplacer r2 = replacers.get(r);
+						if (r2 instanceof ICompositeTextReplacer) {
+							if (r == r2) {
+								queue.addFirst(r2);
+							}
+						} else if (r2 != null) {
+							queue.addFirst(r2);
+						}
 					}
 					context = context.getPreviousContext();
 				}
