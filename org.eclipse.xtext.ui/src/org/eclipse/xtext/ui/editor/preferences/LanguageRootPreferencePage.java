@@ -19,6 +19,10 @@ import com.google.inject.Inject;
  */
 public class LanguageRootPreferencePage extends AbstractPreferencePage {
 	private @Inject ResetPromptDialogSettingsField resetPromptDialogSettings;
+	
+	public LanguageRootPreferencePage () {
+		noDefaultAndApplyButton();
+	}
 
 	@Override
 	protected void createFieldEditors() {
@@ -35,5 +39,4 @@ public class LanguageRootPreferencePage extends AbstractPreferencePage {
 	protected IPreferenceStore doGetPreferenceStore() {
 		return super.doGetPreferenceStore();
 	}
-
 }
