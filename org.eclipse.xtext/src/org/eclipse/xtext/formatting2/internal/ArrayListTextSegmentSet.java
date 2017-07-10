@@ -16,6 +16,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -118,6 +119,24 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 	@Override
 	public Iterator<T> iterator() {
 		return Iterables.unmodifiableIterable(contents).iterator();
+	}
+
+	@Override
+	public Iterator<T> iteratorAfter(T segment) {
+		int searchResult = 1 + Collections.binarySearch(contents, segment, new RegionComparator<T>(getRegionAccess()));
+		if (searchResult < 1) {
+			return Collections.emptyIterator();
+		}
+		return new AbstractIterator<T>() {
+			private int index = searchResult;
+
+			@Override
+			protected T computeNext() {
+				if (index >= contents.size())
+					return endOfData();
+				return contents.get(index++);
+			}
+		};
 	}
 
 	protected void replaceExistingEntry(T segment, int index, IMerger<T> merger)

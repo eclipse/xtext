@@ -127,6 +127,54 @@ class FormattableDocumentTest {
 			'''
 		]
 	}
+	
+	@Test def void autoWrapRewrite() {
+		assertFormatted[
+			preferences[
+				put(maxLineWidth, 10)
+			]
+			toBeFormatted = '''
+				kwlist  kw1  kw2
+			'''
+			formatter = [ KWList model, extension regions, extension document |
+				model.regionFor.keyword("kwlist").append [
+					autowrap;
+					onAutowrap = [ region, wrapped, extension doc |
+						model.regionFor.keyword("kw1").append[space = "!"]
+					]
+					model.regionFor.keyword("kw1").append[space = "@"; lowPriority]
+				]
+			]
+			expectation = '''
+				kwlist
+				kw1!kw2
+			'''
+		]
+	}
+	
+	@Test def void autoWrapInsert() {
+		assertFormatted[
+			preferences[
+				put(maxLineWidth, 10)
+			]
+			toBeFormatted = '''
+				kwlist  kw1  kw2
+			'''
+			formatter = [ KWList model, extension regions, extension document |
+				model.regionFor.keyword("kwlist").append [
+					autowrap;
+					onAutowrap = [ region, wrapped, extension doc |
+						model.regionFor.keyword("kw1").append[space = "!"]
+					]
+					model.regionFor.keyword("kw2").append[space = "@\n"]
+				]
+			]
+			expectation = '''
+				kwlist
+				kw1!kw2@
+			'''
+		]
+	}
 
 	@Test def void conditionalFormatting1() {
 		assertFormatted[
@@ -227,4 +275,6 @@ class FormattableDocumentTest {
 			expectation = '''idlist'''
 		]
 	}
+	
+	
 }

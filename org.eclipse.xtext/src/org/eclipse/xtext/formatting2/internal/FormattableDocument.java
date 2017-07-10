@@ -9,7 +9,7 @@ package org.eclipse.xtext.formatting2.internal;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -125,13 +125,9 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		ITextReplacerContext context = previous.withDocument(this);
 		ITextReplacerContext wrappable = null;
 		Set<ITextReplacer> wrapped = Sets.newHashSet();
-		LinkedList<ITextReplacer> queue = new LinkedList<ITextReplacer>();
-		TextSegmentSet<ITextReplacer> replacers = getReplacers();
-		for (ITextReplacer replacer : replacers) {
-			queue.add(replacer);
-		}
-		while (!queue.isEmpty()) {
-			ITextReplacer replacer = queue.poll();
+		Iterator<ITextReplacer> replacers = getReplacers().iterator();
+		while (replacers.hasNext()) {
+			ITextReplacer replacer = replacers.next();
 			context = context.withReplacer(replacer);
 			if (wrappable != null && context.isWrapSincePrevious()) {
 				wrappable = null;
@@ -140,20 +136,10 @@ public abstract class FormattableDocument implements IFormattableDocument {
 				// TODO: raise report if replacer claims it can do autowrap but
 				// then doesn't
 				while (context != wrappable) {
-					ITextReplacer r = context.getReplacer();
-					if (r != null) {
-						ITextReplacer r2 = replacers.get(r);
-						if (r2 instanceof ICompositeTextReplacer) {
-							if (r == r2) {
-								queue.addFirst(r2);
-							}
-						} else if (r2 != null) {
-							queue.addFirst(r2);
-						}
-					}
 					context = context.getPreviousContext();
 				}
 				replacer = context.getReplacer();
+				replacers = getReplacers().iteratorAfter(replacer);
 				context.setAutowrap(true);
 				wrappable = null;
 			}
@@ -233,7 +219,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
-	public <T1 extends ISemanticRegion, T2 extends ISemanticRegion> // 
+	public <T1 extends ISemanticRegion, T2 extends ISemanticRegion> //
 	Pair<T1, T2> interior(Pair<T1, T2> pair, Procedure1<? super IHiddenRegionFormatter> init) {
 		return interior(pair.getKey(), pair.getValue(), init);
 	}
@@ -254,7 +240,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
-	public <T1 extends ISemanticRegion, T2 extends ISemanticRegion> // 
+	public <T1 extends ISemanticRegion, T2 extends ISemanticRegion> //
 	Pair<T1, T2> interior(T1 first, T2 second, Procedure1<? super IHiddenRegionFormatter> init) {
 		if (first != null && second != null) {
 			set(first.getNextHiddenRegion(), second.getPreviousHiddenRegion(), init);
@@ -269,13 +255,14 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		int length = context.getReplacer().getRegion().getEndOffset() - offset;
 		if (length > wrappable.canAutowrap())
 			return false;
-		//		for (ITextReplacement rep : context.getReplacementsUntil(wrappable))
-		//			if (rep.getReplacementText().contains("\n"))
-		//				return true;
-		//		TextSegment region = new TextSegment(getTextRegionAccess(), offset, length);
-		//		String text = TextReplacements.apply(region, );
-		//		if (text.contains("\n"))
-		//			return true;
+		// for (ITextReplacement rep : context.getReplacementsUntil(wrappable))
+		// if (rep.getReplacementText().contains("\n"))
+		// return true;
+		// TextSegment region = new TextSegment(getTextRegionAccess(), offset,
+		// length);
+		// String text = TextReplacements.apply(region, );
+		// if (text.contains("\n"))
+		// return true;
 		return false;
 	}
 
@@ -350,7 +337,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	public <T extends EObject> T surround(T owner, Procedure1<? super IHiddenRegionFormatter> beforeAndAfter) {
 		if (owner != null && !owner.eIsProxy()) {
 			IEObjectRegion region = getTextRegionAccess().regionForEObject(owner);
-			if (region == null) 
+			if (region == null)
 				return owner;
 			IHiddenRegion previous = region.getPreviousHiddenRegion();
 			IHiddenRegion next = region.getNextHiddenRegion();
