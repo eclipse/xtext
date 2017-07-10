@@ -273,6 +273,21 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 	}
 	
 	@Test
+	def testBug_xtext_xtend_194(){
+		assertFormatted('''
+			class Foo {
+			
+				static val SOME_MULTI_LINE_THINGY = new StringBuilder('a').append('b').
+					append('c').append('d').append('e').append('f').append('g').append('h').
+					append('i').append('j').append('k').append('l').append('m').toString;
+			
+				var bar = new Object
+			
+			}
+		''')
+	}
+	
+	@Test
 	def testBug455582() {
 		assertFormatted('''
 		abstract package class XtendTest {

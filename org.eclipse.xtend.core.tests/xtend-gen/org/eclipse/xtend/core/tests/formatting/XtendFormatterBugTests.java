@@ -512,6 +512,31 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
   }
   
   @Test
+  public void testBug_xtext_xtend_194() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static val SOME_MULTI_LINE_THINGY = new StringBuilder(\'a\').append(\'b\').");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("append(\'c\').append(\'d\').append(\'e\').append(\'f\').append(\'g\').append(\'h\').");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("append(\'i\').append(\'j\').append(\'k\').append(\'l\').append(\'m\').toString;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var bar = new Object");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
   public void testBug455582() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("abstract package class XtendTest {");
