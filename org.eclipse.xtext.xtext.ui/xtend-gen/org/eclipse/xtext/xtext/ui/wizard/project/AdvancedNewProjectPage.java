@@ -51,6 +51,8 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   private Button createP2Project;
   
+  private Button createLanguageServer;
+  
   private Button createIdeaProject;
   
   private Button createWebProject;
@@ -103,25 +105,31 @@ public class AdvancedNewProjectPage extends WizardPage {
         };
         this.createUiProjectSubGroup = this.Group(it_1, _function_3);
         final Procedure1<Button> _function_4 = (Button it_2) -> {
+          it_2.setText(Messages.AdvancedNewProjectPage_languageServer);
+          it_2.setEnabled(true);
+          this.InfoDecoration(it_2, Messages.AdvancedNewProjectPage_languageServer_description);
+        };
+        this.createLanguageServer = this.CheckBox(it_1, _function_4);
+        final Procedure1<Button> _function_5 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projIdea);
           it_2.setEnabled(true);
         };
-        this.createIdeaProject = this.CheckBox(it_1, _function_4);
-        final Procedure1<Button> _function_5 = (Button it_2) -> {
+        this.createIdeaProject = this.CheckBox(it_1, _function_5);
+        final Procedure1<Button> _function_6 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projWeb);
           it_2.setEnabled(true);
         };
-        this.createWebProject = this.CheckBox(it_1, _function_5);
-        final Procedure1<Button> _function_6 = (Button it_2) -> {
+        this.createWebProject = this.CheckBox(it_1, _function_6);
+        final Procedure1<Button> _function_7 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projIde);
           it_2.setEnabled(false);
           this.InfoDecoration(it_2, Messages.AdvancedNewProjectPage_projIde_description);
         };
-        this.createIdeProject = this.CheckBox(it_1, _function_6);
-        final Procedure1<Button> _function_7 = (Button it_2) -> {
+        this.createIdeProject = this.CheckBox(it_1, _function_7);
+        final Procedure1<Button> _function_8 = (Button it_2) -> {
           it_2.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
         };
-        this.createTestProject = this.CheckBox(it_1, _function_7);
+        this.createTestProject = this.CheckBox(it_1, _function_8);
       };
       this.Group(it, _function_1);
       final Procedure1<Group> _function_2 = (Group it_1) -> {

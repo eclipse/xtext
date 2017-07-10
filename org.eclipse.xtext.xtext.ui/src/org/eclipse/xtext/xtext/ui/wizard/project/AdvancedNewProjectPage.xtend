@@ -33,6 +33,7 @@ class AdvancedNewProjectPage extends WizardPage {
 	Button createUiProject
 	Button createSDKProject
 	Button createP2Project
+	Button createLanguageServer
 	Button createIdeaProject
 	Button createWebProject
 	Button createIdeProject
@@ -69,6 +70,11 @@ class AdvancedNewProjectPage extends WizardPage {
 					createP2Project = CheckBox [
 						text = AdvancedNewProjectPage_projEclipseP2
 					]
+				]
+				createLanguageServer = CheckBox [
+					text = AdvancedNewProjectPage_languageServer
+					enabled = true
+					it.InfoDecoration(AdvancedNewProjectPage_languageServer_description)
 				]
 				createIdeaProject = CheckBox [
 					text = AdvancedNewProjectPage_projIdea
