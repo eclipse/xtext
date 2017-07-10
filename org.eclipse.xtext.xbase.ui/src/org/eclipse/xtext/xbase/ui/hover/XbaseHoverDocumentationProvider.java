@@ -20,9 +20,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -42,6 +47,7 @@ import org.eclipse.jdt.core.dom.TagElement;
 import org.eclipse.jdt.core.dom.TextElement;
 import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.builder.EclipseSourceFolderProvider;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -62,6 +68,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.ui.containers.JavaProjectsStateHelper;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.util.Strings;
@@ -109,6 +116,8 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	private IWhitespaceInformationProvider whitespaceInformationProvider;
 	@Inject
 	private JvmTypeExtensions typeExtensions;
+	@Inject
+	private EclipseSourceFolderProvider sourceFolderProvider;
 
 	protected String rawJavaDoc = "";
 	protected EObject context = null;
@@ -370,13 +379,20 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		if (!TagElement.TAG_DOCROOT.equals(node.getTagName()))
 			return false;
 		URI uri = EcoreUtil.getURI(context);
-		String projectName = uri.segment(1);
-		String sourceFolderName = uri.segment(2);
-		IProject project = workspace.getRoot().getProject(projectName);
-		if (project.exists() && project.isOpen()) {
-			IFolder sourceFolder = project.getFolder(sourceFolderName);
-			if (sourceFolder.exists()) {
-				buffer.append(sourceFolder.getLocationURI().toASCIIString());
+		if (uri.isPlatformResource()) {
+			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
+			IPath fullPath = file.getFullPath();
+			IProject project = file.getProject();
+			if (project.exists() && project.isOpen()) {
+				for (IContainer f : sourceFolderProvider.getSourceFolders(project)) {
+					if (f.getFullPath().isPrefixOf(fullPath)) {
+						IPath location = f.getLocation();
+						if (location != null) {
+							buffer.append(location.toFile().toURI().toASCIIString());
+							return true;
+						}
+					}
+				}
 			}
 		}
 		return true;
