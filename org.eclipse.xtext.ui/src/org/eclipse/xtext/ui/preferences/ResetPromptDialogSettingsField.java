@@ -32,6 +32,10 @@ public class ResetPromptDialogSettingsField extends FieldEditor {
 	private Group dontAskGroup;
 	private @Inject DontAskAgainDialogs dialogs;
 	private @Inject LanguageInfo languageInfo;
+	
+	public ResetPromptDialogSettingsField () {
+		init("resetPromptDialog", "Reset Prompt Dialog");
+	}
 
 	@Override
 	public int getNumberOfControls() {
