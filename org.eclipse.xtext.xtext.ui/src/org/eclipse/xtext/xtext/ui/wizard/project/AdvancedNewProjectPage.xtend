@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Group
 import org.eclipse.ui.PlatformUI
 import org.eclipse.xtext.xtext.ui.internal.Activator
 import org.eclipse.xtext.xtext.wizard.BuildSystem
+import org.eclipse.xtext.xtext.wizard.LanguageServer
 import org.eclipse.xtext.xtext.wizard.SourceLayout
 
 import static org.eclipse.xtext.xtext.ui.wizard.project.Messages.*
@@ -33,12 +34,12 @@ class AdvancedNewProjectPage extends WizardPage {
 	Button createUiProject
 	Button createSDKProject
 	Button createP2Project
-	Button createLanguageServer
 	Button createIdeaProject
 	Button createWebProject
 	Button createIdeProject
 	Button createTestProject
 	Combo preferredBuildSystem
+	Combo createLanguageServer
 	Combo sourceLayout
 	Group createUiProjectSubGroup
 
@@ -71,11 +72,6 @@ class AdvancedNewProjectPage extends WizardPage {
 						text = AdvancedNewProjectPage_projEclipseP2
 					]
 				]
-				createLanguageServer = CheckBox [
-					text = AdvancedNewProjectPage_languageServer
-					enabled = true
-					it.InfoDecoration(AdvancedNewProjectPage_languageServer_description)
-				]
 				createIdeaProject = CheckBox [
 					text = AdvancedNewProjectPage_projIdea
 					enabled = true
@@ -88,6 +84,7 @@ class AdvancedNewProjectPage extends WizardPage {
 					text = AdvancedNewProjectPage_projIde
 					enabled = false
 					it.InfoDecoration(AdvancedNewProjectPage_projIde_description)
+					layoutData = new GridData(SWT.LEFT, SWT.CENTER, true, false)
 				]
 				createTestProject = CheckBox [
 					text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
@@ -100,6 +97,15 @@ class AdvancedNewProjectPage extends WizardPage {
 					items = BuildSystem.values.map[toString]
 				]
 			]
+			Group [
+				text = AdvancedNewProjectPage_languageServer
+				createLanguageServer = DropDown[
+					enabled = false
+					items = LanguageServer.values.map[toString]
+					it.InfoDecoration(AdvancedNewProjectPage_languageServer_description)
+				]
+			]
+			
 			Group [
 				text = AdvancedNewProjectPage_srcLayout
 				sourceLayout = DropDown[
@@ -157,22 +163,45 @@ class AdvancedNewProjectPage extends WizardPage {
 
 		createUiProject.addSelectionListener(new SelectionAdapter() {
 			override widgetSelected(SelectionEvent e) {
-				validate(e)
 				val uiProjectSelected = createUiProject.selection
 				createUiProjectSubGroup.enabled = uiProjectSelected
 				createSDKProject.enabled = uiProjectSelected
 				createP2Project.enabled = uiProjectSelected
+				validate(e)
 			}
 		})
+		preferredBuildSystem.addSelectionListener(new SelectionAdapter() {
+			override widgetSelected(SelectionEvent e) {
+				val boolean lsEnabled = (getPreferredBuildSystem!=BuildSystem.NONE)
+				createLanguageServer.enabled = lsEnabled
+				validate(e)
+			}
+		})
+		createLanguageServer.addSelectionListener(new SelectionAdapter() {
+			override widgetSelected(SelectionEvent e) {
+				if (createLanguageServer.isSelected(LanguageServer.NONE)) {
+					if (uiButtons.forall[!selection]) {
+						createIdeProject.enabled = true
+					}
+				} else {
+					if (!createIdeProject.selection) {
+						createIdeProject.selection = true
+						autoSelectIdeProject = true
+					}
+				}
+				validate(e)
+			}
+		})
+		
 		sourceLayout.addSelectionListener(selectionControl)
 		createTestProject.addSelectionListener(selectionControl)
-		preferredBuildSystem.addSelectionListener(selectionControl)
 		createUiProject.addSelectionListener(selectionControlUi)
 		createIdeaProject.addSelectionListener(selectionControlUi)
 		createWebProject.addSelectionListener(selectionControlUi)
 		createIdeProject.addSelectionListener(selectionControl)
 		createSDKProject.addSelectionListener(selectionControl)
 		createP2Project.addSelectionListener(selectionControlUpdateSite)
+		createLanguageServer.addSelectionListener(selectionControl)
 		setDefaults
 
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(shell, "org.eclipse.xtext.xtext.ui.newProject_Advanced")
@@ -185,7 +214,8 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	def checkWidgets(SelectionEvent e) {
-
+		val uiButtons = #[createUiProject,createIdeaProject,createWebProject]
+		
 		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && !isBundleResolved("org.eclipse.m2e.maven.runtime")) {
 			reportIssue(WARNING, AdvancedNewProjectPage_noM2e)
 		}
@@ -258,6 +288,10 @@ class AdvancedNewProjectPage extends WizardPage {
 				])
 			}
 		}
+		
+		if (uiButtons.exists[selection]) {
+			createIdeProject.enabled = false
+		}
 
 		if (autoSelectIdeProject) {
 			autoSelectIdeProject = false
@@ -313,6 +347,14 @@ class AdvancedNewProjectPage extends WizardPage {
 		]
 	}
 
+	def protected Radio(Composite composite, (Button)=>void config) {
+		new Button(composite, SWT.RADIO) => [
+			font = parent.font
+			layoutData = new GridData(SWT.FILL, SWT.CENTER, true, false)
+			config.apply(it)
+		]
+	}
+
 	def protected DropDown(Composite parent, (Combo)=>void config) {
 		new Combo(parent, SWT.READ_ONLY) => [
 			font = parent.font
@@ -328,8 +370,6 @@ class AdvancedNewProjectPage extends WizardPage {
 			descriptionText = text
 			showHover = true
 		]
-		val gridData = new GridData(SWT.NONE, SWT.CENTER, true, false)
-		control.layoutData = gridData
 	}
 
 	def protected setDefaults() {
@@ -341,6 +381,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		createSDKProject.selection = false
 		createP2Project.selection = false
 		preferredBuildSystem.select(BuildSystem.values.head)
+		createLanguageServer.select(LanguageServer.values.head)
 		sourceLayout.select(SourceLayout.values.head)
 	}
 
@@ -378,6 +419,12 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def SourceLayout getSourceLayout() {
 		SourceLayout.values.get(sourceLayout.selectionIndex)
+	}
+	
+	def LanguageServer getLanguageServer () {
+		if (getPreferredBuildSystem==BuildSystem.NONE)
+			return LanguageServer.NONE
+		LanguageServer.values.get(createLanguageServer.selectionIndex)
 	}
 
 }

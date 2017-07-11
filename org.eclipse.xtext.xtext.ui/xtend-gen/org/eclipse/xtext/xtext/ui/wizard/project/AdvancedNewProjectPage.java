@@ -40,6 +40,7 @@ import org.eclipse.xtext.xtext.ui.internal.Activator;
 import org.eclipse.xtext.xtext.ui.wizard.project.Messages;
 import org.eclipse.xtext.xtext.ui.wizard.project.StatusWidget;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
+import org.eclipse.xtext.xtext.wizard.LanguageServer;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.osgi.framework.Bundle;
 
@@ -51,8 +52,6 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   private Button createP2Project;
   
-  private Button createLanguageServer;
-  
   private Button createIdeaProject;
   
   private Button createWebProject;
@@ -62,6 +61,8 @@ public class AdvancedNewProjectPage extends WizardPage {
   private Button createTestProject;
   
   private Combo preferredBuildSystem;
+  
+  private Combo createLanguageServer;
   
   private Combo sourceLayout;
   
@@ -105,31 +106,27 @@ public class AdvancedNewProjectPage extends WizardPage {
         };
         this.createUiProjectSubGroup = this.Group(it_1, _function_3);
         final Procedure1<Button> _function_4 = (Button it_2) -> {
-          it_2.setText(Messages.AdvancedNewProjectPage_languageServer);
-          it_2.setEnabled(true);
-          this.InfoDecoration(it_2, Messages.AdvancedNewProjectPage_languageServer_description);
-        };
-        this.createLanguageServer = this.CheckBox(it_1, _function_4);
-        final Procedure1<Button> _function_5 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projIdea);
           it_2.setEnabled(true);
         };
-        this.createIdeaProject = this.CheckBox(it_1, _function_5);
-        final Procedure1<Button> _function_6 = (Button it_2) -> {
+        this.createIdeaProject = this.CheckBox(it_1, _function_4);
+        final Procedure1<Button> _function_5 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projWeb);
           it_2.setEnabled(true);
         };
-        this.createWebProject = this.CheckBox(it_1, _function_6);
-        final Procedure1<Button> _function_7 = (Button it_2) -> {
+        this.createWebProject = this.CheckBox(it_1, _function_5);
+        final Procedure1<Button> _function_6 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projIde);
           it_2.setEnabled(false);
           this.InfoDecoration(it_2, Messages.AdvancedNewProjectPage_projIde_description);
+          GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, true, false);
+          it_2.setLayoutData(_gridData_1);
         };
-        this.createIdeProject = this.CheckBox(it_1, _function_7);
-        final Procedure1<Button> _function_8 = (Button it_2) -> {
+        this.createIdeProject = this.CheckBox(it_1, _function_6);
+        final Procedure1<Button> _function_7 = (Button it_2) -> {
           it_2.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
         };
-        this.createTestProject = this.CheckBox(it_1, _function_8);
+        this.createTestProject = this.CheckBox(it_1, _function_7);
       };
       this.Group(it, _function_1);
       final Procedure1<Group> _function_2 = (Group it_1) -> {
@@ -145,23 +142,36 @@ public class AdvancedNewProjectPage extends WizardPage {
       };
       this.Group(it, _function_2);
       final Procedure1<Group> _function_3 = (Group it_1) -> {
-        it_1.setText(Messages.AdvancedNewProjectPage_srcLayout);
+        it_1.setText(Messages.AdvancedNewProjectPage_languageServer);
         final Procedure1<Combo> _function_4 = (Combo it_2) -> {
-          it_2.setEnabled(true);
-          final Function1<SourceLayout, String> _function_5 = (SourceLayout it_3) -> {
+          it_2.setEnabled(false);
+          final Function1<LanguageServer, String> _function_5 = (LanguageServer it_3) -> {
             return it_3.toString();
           };
-          it_2.setItems(((String[])Conversions.unwrapArray(ListExtensions.<SourceLayout, String>map(((List<SourceLayout>)Conversions.doWrapArray(SourceLayout.values())), _function_5), String.class)));
+          it_2.setItems(((String[])Conversions.unwrapArray(ListExtensions.<LanguageServer, String>map(((List<LanguageServer>)Conversions.doWrapArray(LanguageServer.values())), _function_5), String.class)));
+          this.InfoDecoration(it_2, Messages.AdvancedNewProjectPage_languageServer_description);
         };
-        this.sourceLayout = this.DropDown(it_1, _function_4);
+        this.createLanguageServer = this.DropDown(it_1, _function_4);
       };
       this.Group(it, _function_3);
+      final Procedure1<Group> _function_4 = (Group it_1) -> {
+        it_1.setText(Messages.AdvancedNewProjectPage_srcLayout);
+        final Procedure1<Combo> _function_5 = (Combo it_2) -> {
+          it_2.setEnabled(true);
+          final Function1<SourceLayout, String> _function_6 = (SourceLayout it_3) -> {
+            return it_3.toString();
+          };
+          it_2.setItems(((String[])Conversions.unwrapArray(ListExtensions.<SourceLayout, String>map(((List<SourceLayout>)Conversions.doWrapArray(SourceLayout.values())), _function_6), String.class)));
+        };
+        this.sourceLayout = this.DropDown(it_1, _function_5);
+      };
+      this.Group(it, _function_4);
       StatusWidget _statusWidget = new StatusWidget(it, SWT.NONE);
-      final Procedure1<StatusWidget> _function_4 = (StatusWidget it_1) -> {
+      final Procedure1<StatusWidget> _function_5 = (StatusWidget it_1) -> {
         GridData _gridData_1 = new GridData(SWT.FILL, SWT.TOP, true, false);
         it_1.setLayoutData(_gridData_1);
       };
-      StatusWidget _doubleArrow = ObjectExtensions.<StatusWidget>operator_doubleArrow(_statusWidget, _function_4);
+      StatusWidget _doubleArrow = ObjectExtensions.<StatusWidget>operator_doubleArrow(_statusWidget, _function_5);
       this.statusWidget = _doubleArrow;
     };
     Composite _doubleArrow = ObjectExtensions.<Composite>operator_doubleArrow(_composite, _function);
@@ -227,22 +237,55 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createUiProject.addSelectionListener(new SelectionAdapter() {
       @Override
       public void widgetSelected(final SelectionEvent e) {
-        AdvancedNewProjectPage.this.validate(e);
         final boolean uiProjectSelected = AdvancedNewProjectPage.this.createUiProject.getSelection();
         AdvancedNewProjectPage.this.createUiProjectSubGroup.setEnabled(uiProjectSelected);
         AdvancedNewProjectPage.this.createSDKProject.setEnabled(uiProjectSelected);
         AdvancedNewProjectPage.this.createP2Project.setEnabled(uiProjectSelected);
+        AdvancedNewProjectPage.this.validate(e);
+      }
+    });
+    this.preferredBuildSystem.addSelectionListener(new SelectionAdapter() {
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        BuildSystem _preferredBuildSystem = AdvancedNewProjectPage.this.getPreferredBuildSystem();
+        final boolean lsEnabled = (!Objects.equal(_preferredBuildSystem, BuildSystem.NONE));
+        AdvancedNewProjectPage.this.createLanguageServer.setEnabled(lsEnabled);
+        AdvancedNewProjectPage.this.validate(e);
+      }
+    });
+    this.createLanguageServer.addSelectionListener(new SelectionAdapter() {
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        boolean _isSelected = AdvancedNewProjectPage.this.isSelected(AdvancedNewProjectPage.this.createLanguageServer, LanguageServer.NONE);
+        if (_isSelected) {
+          final Function1<Button, Boolean> _function = (Button it) -> {
+            boolean _selection = it.getSelection();
+            return Boolean.valueOf((!_selection));
+          };
+          boolean _forall = IterableExtensions.<Button>forall(uiButtons, _function);
+          if (_forall) {
+            AdvancedNewProjectPage.this.createIdeProject.setEnabled(true);
+          }
+        } else {
+          boolean _selection = AdvancedNewProjectPage.this.createIdeProject.getSelection();
+          boolean _not = (!_selection);
+          if (_not) {
+            AdvancedNewProjectPage.this.createIdeProject.setSelection(true);
+            AdvancedNewProjectPage.this.autoSelectIdeProject = true;
+          }
+        }
+        AdvancedNewProjectPage.this.validate(e);
       }
     });
     this.sourceLayout.addSelectionListener(selectionControl);
     this.createTestProject.addSelectionListener(selectionControl);
-    this.preferredBuildSystem.addSelectionListener(selectionControl);
     this.createUiProject.addSelectionListener(selectionControlUi);
     this.createIdeaProject.addSelectionListener(selectionControlUi);
     this.createWebProject.addSelectionListener(selectionControlUi);
     this.createIdeProject.addSelectionListener(selectionControl);
     this.createSDKProject.addSelectionListener(selectionControl);
     this.createP2Project.addSelectionListener(selectionControlUpdateSite);
+    this.createLanguageServer.addSelectionListener(selectionControl);
     this.setDefaults();
     PlatformUI.getWorkbench().getHelpSystem().setHelp(this.getShell(), "org.eclipse.xtext.xtext.ui.newProject_Advanced");
   }
@@ -258,6 +301,7 @@ public class AdvancedNewProjectPage extends WizardPage {
   public Procedure0 checkWidgets(final SelectionEvent e) {
     Procedure0 _xblockexpression = null;
     {
+      final List<Button> uiButtons = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createIdeaProject, this.createWebProject));
       if ((this.isSelected(this.preferredBuildSystem, BuildSystem.MAVEN) && (!this.isBundleResolved("org.eclipse.m2e.maven.runtime")))) {
         this.<Control>reportIssue(IMessageProvider.WARNING, Messages.AdvancedNewProjectPage_noM2e);
       }
@@ -375,6 +419,13 @@ public class AdvancedNewProjectPage extends WizardPage {
           this.<Control>reportIssue(IMessageProvider.ERROR, _builder_5.toString(), _function_5);
         }
       }
+      final Function1<Button, Boolean> _function_6 = (Button it) -> {
+        return Boolean.valueOf(it.getSelection());
+      };
+      boolean _exists = IterableExtensions.<Button>exists(uiButtons, _function_6);
+      if (_exists) {
+        this.createIdeProject.setEnabled(false);
+      }
       if (this.autoSelectIdeProject) {
         this.autoSelectIdeProject = false;
         StringConcatenation _builder_6 = new StringConcatenation();
@@ -474,6 +525,17 @@ public class AdvancedNewProjectPage extends WizardPage {
     return ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
   }
   
+  protected Button Radio(final Composite composite, final Procedure1<? super Button> config) {
+    Button _button = new Button(composite, SWT.RADIO);
+    final Procedure1<Button> _function = (Button it) -> {
+      it.setFont(it.getParent().getFont());
+      GridData _gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
+      it.setLayoutData(_gridData);
+      config.apply(it);
+    };
+    return ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
+  }
+  
   protected Combo DropDown(final Composite parent, final Procedure1<? super Combo> config) {
     Combo _combo = new Combo(parent, SWT.READ_ONLY);
     final Procedure1<Combo> _function = (Combo it) -> {
@@ -485,17 +547,19 @@ public class AdvancedNewProjectPage extends WizardPage {
     return ObjectExtensions.<Combo>operator_doubleArrow(_combo, _function);
   }
   
-  protected void InfoDecoration(final Control control, final String text) {
-    final FieldDecoration infoField = FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION);
-    ControlDecoration _controlDecoration = new ControlDecoration(control, (SWT.TOP + SWT.RIGHT));
-    final Procedure1<ControlDecoration> _function = (ControlDecoration it) -> {
-      it.setImage(infoField.getImage());
-      it.setDescriptionText(text);
-      it.setShowHover(true);
-    };
-    ObjectExtensions.<ControlDecoration>operator_doubleArrow(_controlDecoration, _function);
-    final GridData gridData = new GridData(SWT.NONE, SWT.CENTER, true, false);
-    control.setLayoutData(gridData);
+  protected ControlDecoration InfoDecoration(final Control control, final String text) {
+    ControlDecoration _xblockexpression = null;
+    {
+      final FieldDecoration infoField = FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION);
+      ControlDecoration _controlDecoration = new ControlDecoration(control, (SWT.TOP + SWT.RIGHT));
+      final Procedure1<ControlDecoration> _function = (ControlDecoration it) -> {
+        it.setImage(infoField.getImage());
+        it.setDescriptionText(text);
+        it.setShowHover(true);
+      };
+      _xblockexpression = ObjectExtensions.<ControlDecoration>operator_doubleArrow(_controlDecoration, _function);
+    }
+    return _xblockexpression;
   }
   
   protected void setDefaults() {
@@ -507,6 +571,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createSDKProject.setSelection(false);
     this.createP2Project.setSelection(false);
     this.select(this.preferredBuildSystem, IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(BuildSystem.values()))));
+    this.select(this.createLanguageServer, IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(LanguageServer.values()))));
     this.select(this.sourceLayout, IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(SourceLayout.values()))));
   }
   
@@ -544,5 +609,18 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   public SourceLayout getSourceLayout() {
     return SourceLayout.values()[this.sourceLayout.getSelectionIndex()];
+  }
+  
+  public LanguageServer getLanguageServer() {
+    LanguageServer _xblockexpression = null;
+    {
+      BuildSystem _preferredBuildSystem = this.getPreferredBuildSystem();
+      boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.NONE);
+      if (_equals) {
+        return LanguageServer.NONE;
+      }
+      _xblockexpression = LanguageServer.values()[this.createLanguageServer.getSelectionIndex()];
+    }
+    return _xblockexpression;
   }
 }
