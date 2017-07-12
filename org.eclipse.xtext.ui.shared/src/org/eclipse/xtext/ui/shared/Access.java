@@ -41,10 +41,14 @@ public class Access {
 
 		@Override
 		public T get() {
-			if (Activator.getDefault()==null) {
+			Activator activator = Activator.getDefault();
+			if (activator==null) {
 				throw new IllegalStateException("The bundle has not been started!");
 			}
-			return Activator.getDefault().getInjector().getInstance(clazz);
+			if (activator.getInjector()==null) {
+				throw new IllegalStateException("The bundle was not initialized properly!");
+			}
+			return activator.getInjector().getInstance(clazz);
 		}
 	}
 	

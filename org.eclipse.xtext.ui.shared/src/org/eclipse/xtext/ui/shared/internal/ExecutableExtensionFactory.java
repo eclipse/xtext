@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.shared.internal;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
 
@@ -16,12 +17,12 @@ public class ExecutableExtensionFactory extends AbstractGuiceAwareExecutableExte
 
 	@Override
 	protected Bundle getBundle() {
-		return Activator.getDefault().getBundle();
+		return Platform.getBundle(Activator.PLUGIN_ID);
 	}
 
 	@Override
 	protected Injector getInjector() {
-		return Activator.getDefault().getInjector();
+		return Activator.getDefault() != null ? Activator.getDefault().getInjector() : null;
 	}
 
 }
