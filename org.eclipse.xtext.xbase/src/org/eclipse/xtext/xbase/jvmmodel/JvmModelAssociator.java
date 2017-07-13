@@ -465,7 +465,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		Set<EObject> sources = targetToSourceMap(resource).get(jvmElement);
 		if (sources != null && sources.remove(sourceElement)) {
 			Set<EObject> targets = sourceToTargetMap(resource).get(sourceElement);
-			targets.remove(sourceElement);
+			targets.remove(jvmElement);
 		}
 	}
 
