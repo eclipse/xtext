@@ -24,6 +24,10 @@ import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property
 class TestLanguageGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+		if (fsa.getURI('').scheme == 'inmemory') {
+			// Suppress the generator when building in memory, see InMemoryWorkspaceTest
+			return
+		}
 		for (type : resource.allContents.filter(TypeDeclaration).toList) {
 			fsa.generateFile(type.name+".java", '''
 			public class «type.name» {

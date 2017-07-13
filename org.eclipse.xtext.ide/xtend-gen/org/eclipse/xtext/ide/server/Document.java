@@ -80,6 +80,12 @@ public class Document {
     return new Position(line, column);
   }
   
+  public String getSubstring(final Range range) {
+    final int start = this.getOffSet(range.getStart());
+    final int end = this.getOffSet(range.getEnd());
+    return this.contents.substring(start, end);
+  }
+  
   public Document applyChanges(final Iterable<? extends TextEdit> changes) {
     String newContent = this.contents;
     for (final TextEdit change : changes) {

@@ -9,12 +9,11 @@ package org.eclipse.xtext.ide.tests.server.concurrent
 
 import com.google.inject.Guice
 import com.google.inject.Inject
-import java.util.concurrent.CancellationException
+import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.junit.After
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -54,6 +53,7 @@ class RequestManagerTest {
 	def void testRunReadConcurrent() {
 		val future = requestManager.runRead [
 			while (sharedState.get == 0) {
+				Thread.sleep(10)
 			}
 			sharedState.incrementAndGet
 		]
@@ -66,9 +66,9 @@ class RequestManagerTest {
 
 	@Test(timeout = 1000)
 	def void testRunReadAfterWrite() {
-		requestManager.runWrite [
-    		sharedState.incrementAndGet
-		]
+		requestManager.runWrite([], [
+			sharedState.incrementAndGet
+		])
 		val future = requestManager.runRead [
 			sharedState.get
 		]
@@ -77,58 +77,57 @@ class RequestManagerTest {
 
 	@Test(timeout = 1000)
 	def void testRunWrite() {
-		requestManager.runWrite [
+		requestManager.runWrite([], [
 			sharedState.incrementAndGet
-		].join
+		]).join
 		assertEquals(1, sharedState.get)
 	}
 
 	@Test(timeout = 1000)
 	def void testRunWriteAfterWrite() {
-		requestManager.runWrite [
+		requestManager.runWrite([], [
 			sharedState.incrementAndGet
-		]
-		requestManager.runWrite [
+		]).join
+		requestManager.runWrite([], [
 			if (sharedState.get != 0)
 				sharedState.incrementAndGet as Integer
-		].join
+		]).join
 		assertEquals(2, sharedState.get)
 	}
 
 	@Test(timeout = 1000)
 	def void testRunWriteAfterRead() {
-		requestManager.runRead [
+		val previsousRead = requestManager.runRead [
 			sharedState.incrementAndGet
 		]
-		requestManager.runWrite [
-			assertEquals(1, sharedState.get)
+		requestManager.runWrite([], [
+			while (sharedState.get == 0 && !previsousRead.cancelled) {
+			}
 			sharedState.incrementAndGet
-		].join
+		]).join
 		assertEquals(2, sharedState.get)
 	}
 
 	@Test(timeout = 1000)
 	def void testCancelRead() {
+		val isCanceled = new AtomicBoolean(false)
 		val future = requestManager.runRead [ cancelIndicator |
 			try {
-				sharedState.incrementAndGet
+				sharedState.incrementAndGet			
 				while (!cancelIndicator.isCanceled) {
+					Thread.sleep(10)
 				}
-				return sharedState.get
-			} catch (CancellationException e) {
-				return sharedState.incrementAndGet
+			} finally {					
+				isCanceled.set(true)
 			}
+			return null
 		]
-		while (sharedState.get == 0) {
+		while (sharedState.get === 0) {			
 			Thread.sleep(10)
 		}
 		future.cancel(true)
-		try {
-			future.get
-			Assert.fail("cancellation exception expected")
-		} catch (CancellationException e) {
-			// expected
-			Assert.assertEquals(1, sharedState.get)
+		while (!isCanceled.get) {
+			Thread.sleep(10)
 		}
 	}
 

@@ -17,6 +17,7 @@ import java.util.function.Function
 import org.eclipse.emf.common.util.URI
 import org.eclipse.lsp4j.CodeActionParams
 import org.eclipse.lsp4j.CodeLens
+import org.eclipse.lsp4j.CodeLensOptions
 import org.eclipse.lsp4j.CodeLensParams
 import org.eclipse.lsp4j.ColoringParams
 import org.eclipse.lsp4j.CompletionItem
@@ -63,12 +64,14 @@ import org.eclipse.lsp4j.services.TextDocumentService
 import org.eclipse.lsp4j.services.WorkspaceService
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
+import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver
+import org.eclipse.xtext.ide.server.codelens.ICodeLensService
 import org.eclipse.xtext.ide.server.coloring.IColoringService
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 import org.eclipse.xtext.ide.server.formatting.FormattingService
-import org.eclipse.xtext.ide.server.hover.HoverService
+import org.eclipse.xtext.ide.server.hover.IHoverService
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
@@ -79,6 +82,8 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -86,7 +91,7 @@ import org.eclipse.xtext.validation.Issue
  */
 @Log class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider, IBuildListener {
 
-	@Inject RequestManager requestManager
+	@Inject @Accessors(PUBLIC_GETTER) RequestManager requestManager
 	@Inject WorkspaceSymbolService workspaceSymbolService
 	@Inject extension UriExtensions
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
@@ -100,27 +105,41 @@ import org.eclipse.xtext.validation.Issue
 		this.workspaceManager = manager
 		resourceAccess = new WorkspaceResourceAccess(workspaceManager)
 	}
+	
+	private def Iterable<? extends IResourceServiceProvider> getAllLanguages() {
+		this.languagesRegistry.extensionToFactoryMap.keySet.toList.sort.map[ext|
+			val synthUri = URI.createURI("synth:///file."+ext)
+			return synthUri.resourceServiceProvider
+		]
+	} 
 
 	override CompletableFuture<InitializeResult> initialize(InitializeParams params) {
 		if (this.params !== null) {
 			throw new IllegalStateException("This language server has already been initialized.")
 		}
 		val baseDir = params.baseDir
-		if (baseDir === null) {
-			throw new IllegalArgumentException("Bad initialization request: rootUri must not be null.")
-		}
 		if (languagesRegistry.extensionToFactoryMap.isEmpty) {
 			throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages's setup class in '/META-INF/services/org.eclipse.xtext.ISetup'")
 		}
 		this.params = params
 		val result = new InitializeResult
-		result.capabilities = new ServerCapabilities => [
+		var capabilities = new ServerCapabilities => [
 			hoverProvider = true
 			definitionProvider = true
 			referencesProvider = true
 			documentSymbolProvider = true
 			workspaceSymbolProvider = true
-            //TODO make this language specific
+			
+			// check if a language with code lens capability exists
+			if (allLanguages.exists[get(ICodeLensService)!==null]) {
+				codeLensProvider = new CodeLensOptions => [
+					resolveProvider = allLanguages.exists[get(ICodeLensResolver)!==null]
+				]
+			}
+			
+			// check if a language with code actions capability exists
+			codeActionProvider = allLanguages.exists[get(ICodeActionService)!==null] 
+			
             signatureHelpProvider = new SignatureHelpOptions(#['(', ','])
 			textDocumentSync = TextDocumentSyncKind.Incremental
 			completionProvider = new CompletionOptions => [
@@ -131,15 +150,17 @@ import org.eclipse.xtext.validation.Issue
 			documentRangeFormattingProvider = true
 			documentHighlightProvider = true
 		]
-
-		requestManager.runWrite [ cancelIndicator |
-			workspaceManager.initialize(baseDir, [this.publishDiagnostics($0, $1)], cancelIndicator)
-			return null
-		]
-
+		for (language : allLanguages) {
+			language.get(ICapabilitiesContributor)?.contribute(capabilities, params)
+		}
+		result.capabilities = capabilities
+		
 		access.addBuildListener(this);
-
-		return CompletableFuture.completedFuture(result)
+		
+		return requestManager.runWrite([
+			workspaceManager.initialize(baseDir, [this.publishDiagnostics($0, $1)], CancelIndicator.NullImpl)
+			return null
+		], []).thenApply [result]
 	}
 	
 	@Deprecated
@@ -179,26 +200,29 @@ import org.eclipse.xtext.validation.Issue
 	// end notification callbacks
 	// file/content change events
 	override didOpen(DidOpenTextDocumentParams params) {
-		requestManager.runWrite [ cancelIndicator |
-			workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text, cancelIndicator)
-			return null
-		]
+		requestManager.runWrite([
+			workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text)
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 
 	override didChange(DidChangeTextDocumentParams params) {
-		requestManager.runWrite [ cancelIndicator |
+		requestManager.runWrite([ 
 			workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
 				new TextEdit(event.range, event.text)
-			], cancelIndicator)
-			return null
-		]
+			])
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 
 	override didClose(DidCloseTextDocumentParams params) {
-		requestManager.runWrite [ cancelIndicator |
-			workspaceManager.didClose(params.textDocument.uri.toUri, cancelIndicator)
-			return null
-		]
+		requestManager.runWrite([
+			workspaceManager.didClose(params.textDocument.uri.toUri)
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 
 	override didSave(DidSaveTextDocumentParams params) {
@@ -207,7 +231,7 @@ import org.eclipse.xtext.validation.Issue
 	}
 
 	override didChangeWatchedFiles(DidChangeWatchedFilesParams params) {
-		requestManager.runWrite [ cancelIndicator |
+		requestManager.runWrite([
 			val dirtyFiles = newArrayList
 			val deletedFiles = newArrayList
 			for (fileEvent : params.changes) {
@@ -217,16 +241,17 @@ import org.eclipse.xtext.validation.Issue
 					dirtyFiles += toUri(fileEvent.uri)
 				}
 			}
-			workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator)
-			return null
-		]
+			workspaceManager.didChangeFiles(dirtyFiles, deletedFiles)
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 	
 	override didChangeConfiguration(DidChangeConfigurationParams params) {
-        requestManager.runWrite [ cancelIndicator |
-            workspaceManager.refreshWorkspaceConfig(cancelIndicator)
+		requestManager.runWrite([
+            workspaceManager.refreshWorkspaceConfig(CancelIndicator.NullImpl)
             return null
-        ]
+        ], [])
     }
 
 	// end file/content change events
@@ -360,9 +385,9 @@ import org.eclipse.xtext.validation.Issue
 		return requestManager.runRead[ cancelIndicator |
 			val uri = params.textDocument.uri.toUri
 			val resourceServiceProvider = uri.resourceServiceProvider
-			val hoverService = resourceServiceProvider?.get(HoverService)
+			val hoverService = resourceServiceProvider?.get(IHoverService)
 			if (hoverService === null)
-				return HoverService.EMPTY_HOVER
+				return IHoverService.EMPTY_HOVER
 
 			return workspaceManager.doRead(uri) [ document, resource |
 				hoverService.hover(document, resource, params, cancelIndicator)
@@ -405,15 +430,74 @@ import org.eclipse.xtext.validation.Issue
 	}
 
 	override codeAction(CodeActionParams params) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.runRead [ cancelIndicator |
+			val uri = params.textDocument.uri.toUri;
+			val serviceProvider = uri.resourceServiceProvider;
+			val service =  serviceProvider?.get(ICodeActionService);
+			if (service === null)
+				return emptyList
+			
+			return workspaceManager.doRead(uri) [doc, resource |
+				service.getCodeActions(doc, resource, params, cancelIndicator)
+			]
+		]
 	}
-
+	
+	private def void installURI(List<? extends CodeLens> codeLenses, String uri) {
+		for (lens : codeLenses) {
+			if (lens.data !== null) {
+				lens.data = newArrayList(uri, lens.data)
+			} else {
+				lens.data = uri
+			}
+		}
+	}
+	
+	private def URI uninstallURI(CodeLens lens) {
+		var URI result = null
+		if (lens.data instanceof String) {
+			result = URI.createURI(lens.data.toString)
+			lens.data = null
+		} else if (lens.data instanceof List<?>) {
+			val l = lens.data as List<?>
+			result = URI.createURI(l.head.toString)
+			lens.data = l.get(1)
+		}
+		return result
+	}
+	
 	override codeLens(CodeLensParams params) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.runRead[ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val codeLensService = resourceServiceProvider?.get(ICodeLensService)
+			if (codeLensService === null)
+				return emptyList
+
+			return workspaceManager.doRead(uri) [ document, resource |
+				val result = codeLensService.computeCodeLenses(document, resource, params, cancelIndicator)
+				installURI(result, uri.toString)
+				return result
+			]
+		]
 	}
 
 	override resolveCodeLens(CodeLens unresolved) {
-		return CompletableFuture.completedFuture(unresolved)
+		val uri = uninstallURI(unresolved)
+		if (uri === null) {
+			return CompletableFuture.completedFuture(unresolved)
+		}
+		return requestManager.runRead[ cancelIndicator |
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val resolver = resourceServiceProvider?.get(ICodeLensResolver)
+			if (resolver === null)
+				return unresolved
+
+			return workspaceManager.doRead(uri) [ document, resource |
+				val result = resolver.resolveCodeLens(document, resource, unresolved, cancelIndicator)
+				return result
+			]
+		]
 	}
 
 	override formatting(DocumentFormattingParams params) {

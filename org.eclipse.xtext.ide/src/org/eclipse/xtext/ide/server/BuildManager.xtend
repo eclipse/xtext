@@ -36,11 +36,15 @@ class BuildManager {
 
     val dirtyFiles = <URI>newLinkedHashSet
     val deletedFiles = <URI>newLinkedHashSet
+    
+    def Buildable submit(List<URI> dirtyFiles, List<URI> deletedFiles) {
+    	queue(this.dirtyFiles, deletedFiles, dirtyFiles)
+        queue(this.deletedFiles, dirtyFiles, deletedFiles)
+        return [cancelIndicator|internalBuild(cancelIndicator)]
+    }
 
     def List<IResourceDescription.Delta> doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
-        queue(this.dirtyFiles, deletedFiles, dirtyFiles)
-        queue(this.deletedFiles, dirtyFiles, deletedFiles)
-        return internalBuild(cancelIndicator)
+    	return submit(dirtyFiles, deletedFiles).build(cancelIndicator)
     }
     
     protected def void queue(Set<URI> files, Collection<URI> toRemove, Collection<URI> toAdd) {
@@ -99,5 +103,9 @@ class BuildManager {
     protected static class ProjectBuildData {
         List<URI> dirtyFiles
         List<URI> deletedFiles
+    }
+    
+    static interface Buildable {
+    	def List<IResourceDescription.Delta> build(CancelIndicator cancelIndicator)
     }
 }

@@ -22,7 +22,7 @@ import org.eclipse.xtext.Keyword;
  * 
  * @since 2.8
  */
-public interface ISemanticRegion extends ISequentialRegion, IAstRegion {
+public interface ISemanticRegion extends IAstRegion {
 
 	/**
 	 * Same as calling {@link ITextRegionAccess#regionForEObject(EObject)} for {@link #getSemanticElement()}, but faster.

@@ -13,6 +13,7 @@ import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
 import org.eclipse.xtext.workspace.FileProjectConfig;
 import org.eclipse.xtext.workspace.FileSourceFolder;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.workspace.InMemoryProjectConfig;
 
 /**
  * The workspace itself is a single project
@@ -24,10 +25,15 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig;
 public class ProjectWorkspaceConfigFactory implements IWorkspaceConfigFactory {
   @Override
   public IWorkspaceConfig getWorkspaceConfig(final URI workspaceBaseURI) {
-    final FileProjectConfig projectConfig = new FileProjectConfig(workspaceBaseURI);
-    Set<FileSourceFolder> _sourceFolders = projectConfig.getSourceFolders();
-    FileSourceFolder _fileSourceFolder = new FileSourceFolder(projectConfig, ".");
-    _sourceFolders.add(_fileSourceFolder);
-    return projectConfig.getWorkspaceConfig();
+    if ((workspaceBaseURI == null)) {
+      final InMemoryProjectConfig projectConfig = new InMemoryProjectConfig();
+      return projectConfig.getWorkspaceConfig();
+    } else {
+      final FileProjectConfig projectConfig_1 = new FileProjectConfig(workspaceBaseURI);
+      Set<FileSourceFolder> _sourceFolders = projectConfig_1.getSourceFolders();
+      FileSourceFolder _fileSourceFolder = new FileSourceFolder(projectConfig_1, ".");
+      _sourceFolders.add(_fileSourceFolder);
+      return projectConfig_1.getWorkspaceConfig();
+    }
   }
 }

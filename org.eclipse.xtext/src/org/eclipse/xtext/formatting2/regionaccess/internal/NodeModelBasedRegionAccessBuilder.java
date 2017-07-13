@@ -8,6 +8,7 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EDataType;
@@ -234,5 +235,25 @@ public class NodeModelBasedRegionAccessBuilder {
 	public NodeModelBasedRegionAccessBuilder withResource(XtextResource resource) {
 		this.resource = resource;
 		return this;
+	}
+
+	protected NodeHiddenRegion getFirstHidden() {
+		return firstHidden;
+	}
+
+	protected void setFirstHidden(NodeHiddenRegion firstHidden) {
+		this.firstHidden = firstHidden;
+	}
+
+	protected NodeHiddenRegion getLastHidden() {
+		return lastHidden;
+	}
+
+	protected void setLastHidden(NodeHiddenRegion lastHidden) {
+		this.lastHidden = lastHidden;
+	}
+
+	protected List<NodeEObjectRegion> getStack() {
+		return stack;
 	}
 }

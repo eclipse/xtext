@@ -8,6 +8,7 @@
 package org.eclipse.xtext.formatting2.internal;
 
 import java.util.IdentityHashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.IMerger;
@@ -43,7 +44,7 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 	}
 
 	public abstract void add(T segment, IMerger<T> merger) throws ConflictingRegionsException;
-	
+
 	public abstract T get(T segment);
 
 	protected ITextSegment getRegion(T t) {
@@ -61,12 +62,6 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 	@Deprecated
 	public IdentityHashMap<T, RegionTrace> getTraces() {
 		return traces;
-	}
-
-	protected void trace(T segment) {
-		if (traces != null) {
-			traces.put(segment, new RegionTrace(getTitle(segment), getRegion(segment)));
-		}
 	}
 
 	protected void handleConflict(List<T> conflicts, Exception cause)
@@ -100,6 +95,8 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 		return isConflict(getRegion(t1), getRegion(t2));
 	}
 
+	public abstract Iterator<T> iteratorAfter(T segment);
+
 	@Override
 	public String toString() {
 		TextRegionsToString toString = new TextRegionsToString();
@@ -107,5 +104,11 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 		for (T t : this)
 			toString.add(getRegion(t), getTitle(t));
 		return toString.toString();
+	}
+
+	protected void trace(T segment) {
+		if (traces != null) {
+			traces.put(segment, new RegionTrace(getTitle(segment), getRegion(segment)));
+		}
 	}
 }

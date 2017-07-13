@@ -9,16 +9,24 @@ package org.eclipse.xtext.ide.tests.server;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.TextDocumentIdentifier;
+import org.eclipse.lsp4j.TextDocumentPositionParams;
+import org.eclipse.lsp4j.jsonrpc.ResponseErrorException;
+import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode;
 import org.eclipse.lsp4j.services.WorkspaceService;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -94,5 +102,35 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
       return Boolean.valueOf(it.isEmpty());
     };
     Assert.assertTrue(IterableExtensions.join(this.getDiagnostics().values(), ","), IterableExtensions.<List<Diagnostic>>forall(this.getDiagnostics().values(), _function));
+  }
+  
+  @Test
+  public void testMissingInitialize() {
+    try {
+      try {
+        TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
+        final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+          TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier();
+          final Procedure1<TextDocumentIdentifier> _function_1 = (TextDocumentIdentifier it_1) -> {
+            it_1.setUri("file:/home/test/workspace/mydoc.testlang");
+          };
+          TextDocumentIdentifier _doubleArrow = ObjectExtensions.<TextDocumentIdentifier>operator_doubleArrow(_textDocumentIdentifier, _function_1);
+          it.setTextDocument(_doubleArrow);
+        };
+        TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+        this.languageServer.definition(_doubleArrow).get();
+        Assert.fail("Expected a ResponseErrorException");
+      } catch (final Throwable _t) {
+        if (_t instanceof ExecutionException) {
+          final ExecutionException exception = (ExecutionException)_t;
+          Throwable _cause = exception.getCause();
+          Assert.assertEquals(ResponseErrorCode.serverNotInitialized.getValue(), ((ResponseErrorException) _cause).getResponseError().getCode());
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

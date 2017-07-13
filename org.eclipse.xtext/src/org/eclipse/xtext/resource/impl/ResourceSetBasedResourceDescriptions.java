@@ -127,6 +127,14 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 			data = ResourceDescriptionsData.ResourceSetAdapter.findResourceDescriptionsData(resourceSet);
 		}
 	}
+	
+	protected ResourceDescriptionsData getData() {
+		return data;
+	}
+	
+	protected void setData(ResourceDescriptionsData data) {
+		this.data = data;
+	}
 
 	@Override
 	public String toString() {

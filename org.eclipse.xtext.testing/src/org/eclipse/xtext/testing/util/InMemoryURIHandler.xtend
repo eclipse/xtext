@@ -48,7 +48,7 @@ class InMemoryURIHandler implements URIHandler {
 
 	public final static String SCHEME = 'inmemory'
 	
-	Map<URI, InMemFile> files = newHashMap()
+	@Accessors(PUBLIC_GETTER) Map<URI, InMemFile> files = newHashMap()
 
 	override canHandle(URI uri) {
 		uri.scheme == SCHEME
@@ -81,7 +81,7 @@ class InMemoryURIHandler implements URIHandler {
 	override setAttributes(URI uri, Map<String, ?> attributes, Map<?, ?> options) throws IOException {
 	}
 
-	protected def getInMemoryFile(URI uri) {
+	def InMemFile getInMemoryFile(URI uri) {
 		var result = files.get(uri)
 		if (result === null) {
 			result = new InMemFile(uri)

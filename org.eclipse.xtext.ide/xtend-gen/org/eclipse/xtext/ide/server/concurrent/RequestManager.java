@@ -8,133 +8,146 @@
 package org.eclipse.xtext.ide.server.concurrent;
 
 import com.google.inject.Inject;
-import java.util.concurrent.CancellationException;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.Semaphore;
-import java.util.function.Function;
-import org.apache.log4j.Logger;
-import org.eclipse.lsp4j.jsonrpc.CancelChecker;
-import org.eclipse.lsp4j.jsonrpc.CompletableFutures;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.eclipse.xtext.ide.server.concurrent.Cancellable;
 import org.eclipse.xtext.ide.server.concurrent.RequestCancelIndicator;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 
 /**
+ * <p>
+ * The request manager run read/write requests.
+ * </p>
+ * <p>
+ * <b>Execution:</b>
+ * <ul>
+ *  <li>requests are processed in an insertion order;</li>
+ * 	<li>write requests are executed exclusive;</li>
+ *  <li>read requests are executed in parallel.</li>
+ * </ul>
+ * </p>
+ * 
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
 @SuppressWarnings("all")
 public class RequestManager {
-  private final static Logger LOGGER = Logger.getLogger(RequestManager.class);
+  private final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
   
-  private final int MAX_PERMITS = Integer.MAX_VALUE;
+  private final Lock r = this.rwl.readLock();
+  
+  private final Lock w = this.rwl.writeLock();
   
   @Inject
-  private ExecutorService executorService;
+  private ExecutorService parallel;
   
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
-  private final LinkedBlockingQueue<Cancellable> cancelIndicators = new LinkedBlockingQueue<Cancellable>();
-  
-  private final Semaphore semaphore = new Semaphore(this.MAX_PERMITS);
+  private final CopyOnWriteArrayList<Cancellable> toCancel = new CopyOnWriteArrayList<Cancellable>();
   
   public void shutdown() {
-    this.executorService.shutdown();
+    this.parallel.shutdown();
+    this.cancel();
   }
   
-  /**
-   * <p>
-   * The given <i>write request</i> will be run first when <i>all running requests</i> completed.
-   * </p>
-   * <p>
-   * Currently <i>running requests</i> will be cancelled.
-   * </p>
-   * <p>
-   * A provided cancel indicator should implement {@link CancelIndicator}
-   * to let the given request to be cancelled by a write request.
-   * </p>
-   */
-  public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
-    try {
-      this.semaphore.acquire(this.MAX_PERMITS);
-      try {
-        final CancelIndicator _function = () -> {
-          return false;
-        };
-        final V result = writeRequest.apply(_function);
-        return CompletableFuture.<V>completedFuture(result);
-      } catch (final Throwable _t) {
-        if (_t instanceof Throwable) {
-          final Throwable t = (Throwable)_t;
-          boolean _isCancelException = this.isCancelException(t);
-          if (_isCancelException) {
-            RequestManager.LOGGER.info("request cancelled.");
-            throw new CancellationException();
+  public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> request) {
+    final CompletableFuture<V> result = new CompletableFuture<V>();
+    final Runnable _function = () -> {
+      final Callable<Boolean> _function_1 = () -> {
+        boolean _xblockexpression = false;
+        {
+          final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(result);
+          boolean _xtrycatchfinallyexpression = false;
+          try {
+            boolean _xblockexpression_1 = false;
+            {
+              this.r.lock();
+              this.toCancel.add(cancelIndicator);
+              cancelIndicator.checkCanceled();
+              _xblockexpression_1 = result.complete(request.apply(cancelIndicator));
+            }
+            _xtrycatchfinallyexpression = _xblockexpression_1;
+          } catch (final Throwable _t) {
+            if (_t instanceof Throwable) {
+              final Throwable e = (Throwable)_t;
+              _xtrycatchfinallyexpression = result.completeExceptionally(e);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
+          } finally {
+            this.toCancel.remove(cancelIndicator);
+            this.r.unlock();
           }
-          throw t;
-        } else {
-          throw Exceptions.sneakyThrow(_t);
+          _xblockexpression = _xtrycatchfinallyexpression;
         }
-      } finally {
-        this.semaphore.release(this.MAX_PERMITS);
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+        return Boolean.valueOf(_xblockexpression);
+      };
+      this.parallel.<Boolean>submit(_function_1);
+    };
+    this.writePending.thenRun(_function);
+    return result;
   }
   
-  /**
-   * <p>
-   * The given <i>read request</i> will be run:
-   * <ul>
-   * 	<li>concurrent with <i>running read requests</i>;</li>
-   * 	<li>first when <i>running write requests</i> completed.</li>
-   * </ul>
-   * </p>
-   * <p>
-   * </p>
-   */
-  public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
-    final Function<CancelChecker, V> _function = (CancelChecker it) -> {
-      try {
-        final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(it);
-        this.semaphore.acquire(1);
+  private CompletableFuture<Void> writePending = CompletableFuture.<Void>completedFuture(null);
+  
+  public <U extends Object, V extends Object> CompletableFuture<V> runWrite(final Function0<? extends U> nonCancellable, final Function2<? super CancelIndicator, ? super U, ? extends V> request) {
+    final CompletableFuture<V> result = new CompletableFuture<V>();
+    final CompletableFuture<Void> localWritePending = new CompletableFuture<Void>();
+    this.writePending = localWritePending;
+    final Callable<Boolean> _function = () -> {
+      boolean _xblockexpression = false;
+      {
+        final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(result);
+        boolean _xtrycatchfinallyexpression = false;
         try {
-          this.cancelIndicators.add(cancelIndicator);
-          cancelIndicator.checkCanceled();
-          final CancelIndicator _function_1 = () -> {
+          boolean _xblockexpression_1 = false;
+          {
+            this.cancel();
+            this.w.lock();
+            localWritePending.complete(null);
+            final U intermediateResult = nonCancellable.apply();
+            this.toCancel.add(cancelIndicator);
             cancelIndicator.checkCanceled();
-            return false;
-          };
-          return readRequest.apply(_function_1);
+            _xblockexpression_1 = result.complete(request.apply(cancelIndicator, intermediateResult));
+          }
+          _xtrycatchfinallyexpression = _xblockexpression_1;
         } catch (final Throwable _t) {
           if (_t instanceof Throwable) {
-            final Throwable t = (Throwable)_t;
-            boolean _isCancelException = this.isCancelException(t);
-            if (_isCancelException) {
-              RequestManager.LOGGER.info("request cancelled.");
-              throw new CancellationException();
-            }
-            throw t;
+            final Throwable e = (Throwable)_t;
+            _xtrycatchfinallyexpression = result.completeExceptionally(e);
           } else {
             throw Exceptions.sneakyThrow(_t);
           }
         } finally {
-          this.cancelIndicators.remove(cancelIndicator);
-          this.semaphore.release(1);
+          this.toCancel.remove(cancelIndicator);
+          this.w.unlock();
         }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
+        _xblockexpression = _xtrycatchfinallyexpression;
       }
+      return Boolean.valueOf(_xblockexpression);
     };
-    return CompletableFutures.<V>computeAsync(this.executorService, _function);
+    this.parallel.<Boolean>submit(_function);
+    return result;
+  }
+  
+  protected void cancel() {
+    for (final Cancellable cancellable : this.toCancel) {
+      {
+        cancellable.cancel();
+        this.toCancel.remove(cancellable);
+      }
+    }
   }
   
   protected boolean isCancelException(final Throwable t) {

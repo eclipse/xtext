@@ -254,8 +254,10 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 													<exclude>profile.list</exclude>
 													<exclude>**/*._trace</exclude>
 													<exclude>**/*.g</exclude>
+													<exclude>**/*.tokens</exclude>
 													<exclude>**/*.mwe2</exclude>
 													<exclude>**/*.xtext</exclude>
+													<exclude>**/*.xtextbin</exclude>
 												</excludes>
 											</filter>
 										</filters>

@@ -13,9 +13,11 @@ import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
+import org.eclipse.xtext.formatting2.IAutowrapFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IFormattableSubDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
+import org.eclipse.xtext.formatting2.IHiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.ISubFormatter;
 import org.eclipse.xtext.formatting2.internal.GenericFormatter;
 import org.eclipse.xtext.formatting2.internal.GenericFormatterTestRequest;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.formatting2.internal.services.FormatterTestLanguageGram
 import org.eclipse.xtext.formatting2.internal.tests.FormatterTestLanguageInjectorProvider;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -239,6 +242,91 @@ public class FormattableDocumentTest {
       _builder_1.append("kw1 kw2");
       _builder_1.newLine();
       _builder_1.append("kw3 kw4");
+      _builder_1.newLine();
+      it.setExpectation(_builder_1);
+    };
+    this._genericFormatterTester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void autoWrapRewrite() {
+    final Procedure1<GenericFormatterTestRequest> _function = (GenericFormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(10));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("kwlist  kw1  kw2");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+      final GenericFormatter<KWList> _function_2 = new GenericFormatter<KWList>() {
+        @Override
+        protected void format(final KWList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
+          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
+            it_1.autowrap();
+            final IAutowrapFormatter _function_1 = (ITextSegment region, IHiddenRegionFormatting wrapped, IFormattableDocument doc) -> {
+              final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_2) -> {
+                it_2.setSpace("!");
+              };
+              doc.append(regions.regionFor(model).keyword("kw1"), _function_2);
+            };
+            it_1.setOnAutowrap(_function_1);
+            final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_2) -> {
+              it_2.setSpace("@");
+              it_2.lowPriority();
+            };
+            document.append(regions.regionFor(model).keyword("kw1"), _function_2);
+          };
+          document.append(regions.regionFor(model).keyword("kwlist"), _function);
+        }
+      };
+      it.setFormatter(_function_2);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("kwlist");
+      _builder_1.newLine();
+      _builder_1.append("kw1!kw2");
+      _builder_1.newLine();
+      it.setExpectation(_builder_1);
+    };
+    this._genericFormatterTester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void autoWrapInsert() {
+    final Procedure1<GenericFormatterTestRequest> _function = (GenericFormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(10));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("kwlist  kw1  kw2");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+      final GenericFormatter<KWList> _function_2 = new GenericFormatter<KWList>() {
+        @Override
+        protected void format(final KWList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
+          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
+            it_1.autowrap();
+            final IAutowrapFormatter _function_1 = (ITextSegment region, IHiddenRegionFormatting wrapped, IFormattableDocument doc) -> {
+              final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_2) -> {
+                it_2.setSpace("!");
+              };
+              doc.append(regions.regionFor(model).keyword("kw1"), _function_2);
+            };
+            it_1.setOnAutowrap(_function_1);
+            final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_2) -> {
+              it_2.setSpace("@\n");
+            };
+            document.append(regions.regionFor(model).keyword("kw2"), _function_2);
+          };
+          document.append(regions.regionFor(model).keyword("kwlist"), _function);
+        }
+      };
+      it.setFormatter(_function_2);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("kwlist");
+      _builder_1.newLine();
+      _builder_1.append("kw1!kw2@");
       _builder_1.newLine();
       it.setExpectation(_builder_1);
     };

@@ -43,7 +43,7 @@ class WorkspaceManagerTest {
             }
         '''
         
-        workspaceManger.didOpen(path, 1, inMemContents, null)
+        workspaceManger.didOpen(path, 1, inMemContents).build(null)
         
         Assert.assertEquals(inMemContents, workspaceManger.doRead(path, [$0.contents]))
     }

@@ -35,9 +35,11 @@ public interface IFileSystemScanner {
       acceptor.accept(uri);
       boolean _isDirectory = file.isDirectory();
       if (_isDirectory) {
-        File[] _listFiles = file.listFiles();
-        for (final File f : _listFiles) {
-          this.scanRec(f, acceptor);
+        final File[] files = file.listFiles();
+        if ((files != null)) {
+          for (final File f : files) {
+            this.scanRec(f, acceptor);
+          }
         }
       }
     }

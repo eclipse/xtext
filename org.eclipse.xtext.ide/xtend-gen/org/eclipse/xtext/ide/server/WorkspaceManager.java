@@ -21,6 +21,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.jsonrpc.ResponseErrorException;
+import org.eclipse.lsp4j.jsonrpc.messages.ResponseError;
+import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode;
 import org.eclipse.xtext.ide.server.BuildManager;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
@@ -68,7 +71,7 @@ public class WorkspaceManager {
   
   private Procedure2<? super URI, ? super Iterable<Issue>> issueAcceptor;
   
-  private IWorkspaceConfig workspaceConfig;
+  private IWorkspaceConfig _workspaceConfig;
   
   private List<ILanguageServerAccess.IBuildListener> buildListeners = CollectionLiterals.<ILanguageServerAccess.IBuildListener>newArrayList();
   
@@ -115,9 +118,10 @@ public class WorkspaceManager {
   }
   
   protected void refreshWorkspaceConfig(final CancelIndicator cancelIndicator) {
-    this.workspaceConfig = this.workspaceConfigFactory.getWorkspaceConfig(this.baseDir);
+    this.setWorkspaceConfig(this.workspaceConfigFactory.getWorkspaceConfig(this.baseDir));
     final ArrayList<ProjectDescription> newProjects = CollectionLiterals.<ProjectDescription>newArrayList();
-    final HashSet<Set<String>> remainingProjectNames = CollectionLiterals.<Set<String>>newHashSet(this.projectName2ProjectManager.keySet());
+    Set<String> _keySet = this.projectName2ProjectManager.keySet();
+    final Set<String> remainingProjectNames = new HashSet<String>(_keySet);
     final Consumer<IProjectConfig> _function = (IProjectConfig projectConfig) -> {
       boolean _containsKey = this.projectName2ProjectManager.containsKey(projectConfig.getName());
       if (_containsKey) {
@@ -128,13 +132,14 @@ public class WorkspaceManager {
         final Provider<Map<String, ResourceDescriptionsData>> _function_1 = () -> {
           return this.fullIndex;
         };
-        projectManager.initialize(projectDescription, projectConfig, this.issueAcceptor, this.openedDocumentsContentProvider, _function_1, cancelIndicator);
+        projectManager.initialize(projectDescription, projectConfig, this.issueAcceptor, 
+          this.openedDocumentsContentProvider, _function_1, cancelIndicator);
         this.projectName2ProjectManager.put(projectDescription.getName(), projectManager);
         newProjects.add(projectDescription);
       }
     };
-    this.workspaceConfig.getProjects().forEach(_function);
-    for (final Set<String> deletedProject : remainingProjectNames) {
+    this.getWorkspaceConfig().getProjects().forEach(_function);
+    for (final String deletedProject : remainingProjectNames) {
       {
         this.projectName2ProjectManager.remove(deletedProject);
         this.fullIndex.remove(deletedProject);
@@ -144,37 +149,54 @@ public class WorkspaceManager {
     this.afterBuild(result);
   }
   
+  protected IWorkspaceConfig getWorkspaceConfig() {
+    if ((this._workspaceConfig == null)) {
+      final ResponseError error = new ResponseError(ResponseErrorCode.serverNotInitialized, 
+        "Workspace has not been initialized yet.", null);
+      throw new ResponseErrorException(error);
+    }
+    return this._workspaceConfig;
+  }
+  
+  protected void setWorkspaceConfig(final IWorkspaceConfig workspaceConfig) {
+    this._workspaceConfig = workspaceConfig;
+  }
+  
   protected void afterBuild(final List<IResourceDescription.Delta> deltas) {
     for (final ILanguageServerAccess.IBuildListener listener : this.buildListeners) {
       listener.afterBuild(deltas);
     }
   }
   
+  public BuildManager.Buildable didChangeFiles(final List<URI> dirtyFiles, final List<URI> deletedFiles) {
+    final BuildManager.Buildable buildable = this.buildManager.submit(dirtyFiles, deletedFiles);
+    final BuildManager.Buildable _function = (CancelIndicator cancelIndicator) -> {
+      final List<IResourceDescription.Delta> deltas = buildable.build(cancelIndicator);
+      this.afterBuild(deltas);
+      return deltas;
+    };
+    return _function;
+  }
+  
   public List<IResourceDescription.Delta> doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
-    final List<IResourceDescription.Delta> doBuild = this.buildManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
-    this.afterBuild(doBuild);
-    return doBuild;
+    return this.didChangeFiles(dirtyFiles, deletedFiles).build(cancelIndicator);
   }
   
   public IResourceDescriptions getIndex() {
     return new ChunkedResourceDescriptions(this.fullIndex);
   }
   
-  public URI getProjectBaseDir(final URI candidate) {
-    URI _xblockexpression = null;
-    {
-      final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(candidate);
-      URI _path = null;
-      if (projectConfig!=null) {
-        _path=projectConfig.getPath();
-      }
-      _xblockexpression = _path;
+  public URI getProjectBaseDir(final URI uri) {
+    final IProjectConfig projectConfig = this.getWorkspaceConfig().findProjectContaining(uri);
+    URI _path = null;
+    if (projectConfig!=null) {
+      _path=projectConfig.getPath();
     }
-    return _xblockexpression;
+    return _path;
   }
   
   public ProjectManager getProjectManager(final URI uri) {
-    final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(uri);
+    final IProjectConfig projectConfig = this.getWorkspaceConfig().findProjectContaining(uri);
     String _name = null;
     if (projectConfig!=null) {
       _name=projectConfig.getName();
@@ -191,42 +213,46 @@ public class WorkspaceManager {
     return new ArrayList<ProjectManager>(_values);
   }
   
-  public void didChange(final URI uri, final int version, final Iterable<TextEdit> changes, final CancelIndicator cancelIndicator) {
+  public List<IResourceDescription.Delta> didChange(final URI uri, final int version, final Iterable<TextEdit> changes, final CancelIndicator cancelIndicator) {
+    return this.didChange(uri, version, changes).build(cancelIndicator);
+  }
+  
+  public BuildManager.Buildable didChange(final URI uri, final int version, final Iterable<TextEdit> changes) {
     boolean _containsKey = this.openDocuments.containsKey(uri);
     boolean _not = (!_containsKey);
     if (_not) {
       WorkspaceManager.LOG.error((("The document " + uri) + " has not been opened."));
-      return;
+      final BuildManager.Buildable _function = (CancelIndicator it) -> {
+        return null;
+      };
+      return _function;
     }
     final Document contents = this.openDocuments.get(uri);
     this.openDocuments.put(uri, contents.applyChanges(changes));
-    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList(), cancelIndicator);
+    return this.didChangeFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList());
   }
   
   public List<IResourceDescription.Delta> didOpen(final URI uri, final int version, final String contents, final CancelIndicator cancelIndicator) {
-    List<IResourceDescription.Delta> _xblockexpression = null;
-    {
-      Document _document = new Document(version, contents);
-      this.openDocuments.put(uri, _document);
-      _xblockexpression = this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList(), cancelIndicator);
-    }
-    return _xblockexpression;
+    return this.didOpen(uri, version, contents).build(cancelIndicator);
+  }
+  
+  public BuildManager.Buildable didOpen(final URI uri, final int version, final String contents) {
+    Document _document = new Document(version, contents);
+    this.openDocuments.put(uri, _document);
+    return this.didChangeFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList());
   }
   
   public List<IResourceDescription.Delta> didClose(final URI uri, final CancelIndicator cancelIndicator) {
-    List<IResourceDescription.Delta> _xblockexpression = null;
-    {
-      this.openDocuments.remove(uri);
-      List<IResourceDescription.Delta> _xifexpression = null;
-      boolean _exists = this.exists(uri);
-      if (_exists) {
-        _xifexpression = this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList(), cancelIndicator);
-      } else {
-        _xifexpression = this.doBuild(CollectionLiterals.<URI>newArrayList(), Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), cancelIndicator);
-      }
-      _xblockexpression = _xifexpression;
+    return this.didClose(uri).build(cancelIndicator);
+  }
+  
+  public BuildManager.Buildable didClose(final URI uri) {
+    this.openDocuments.remove(uri);
+    boolean _exists = this.exists(uri);
+    if (_exists) {
+      return this.didChangeFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList());
     }
-    return _xblockexpression;
+    return this.didChangeFiles(CollectionLiterals.<URI>newArrayList(), Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)));
   }
   
   protected boolean exists(final URI uri) {
@@ -235,7 +261,11 @@ public class WorkspaceManager {
     if (_projectManager!=null) {
       _resourceSet=_projectManager.getResourceSet();
     }
-    return _resourceSet.getURIConverter().exists(uri, null);
+    final XtextResourceSet rs = _resourceSet;
+    if ((rs == null)) {
+      return false;
+    }
+    return rs.getURIConverter().exists(uri, null);
   }
   
   public <T extends Object> T doRead(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {

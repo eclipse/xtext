@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.CodeLens;
+import org.eclipse.lsp4j.CodeLensOptions;
 import org.eclipse.lsp4j.CodeLensParams;
 import org.eclipse.lsp4j.ColoringInformation;
 import org.eclipse.lsp4j.ColoringParams;
@@ -79,19 +80,26 @@ import org.eclipse.lsp4j.services.LanguageClientExtensions;
 import org.eclipse.lsp4j.services.LanguageServer;
 import org.eclipse.lsp4j.services.TextDocumentService;
 import org.eclipse.lsp4j.services.WorkspaceService;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.ide.server.BuildManager;
 import org.eclipse.xtext.ide.server.Document;
+import org.eclipse.xtext.ide.server.ICapabilitiesContributor;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService;
+import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
+import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
 import org.eclipse.xtext.ide.server.coloring.IColoringService;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
 import org.eclipse.xtext.ide.server.formatting.FormattingService;
-import org.eclipse.xtext.ide.server.hover.HoverService;
+import org.eclipse.xtext.ide.server.hover.IHoverService;
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
@@ -106,6 +114,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -113,6 +122,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -143,6 +153,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   @Inject
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private RequestManager requestManager;
   
   @Inject
@@ -167,15 +178,20 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     this.resourceAccess = _workspaceResourceAccess;
   }
   
+  private Iterable<? extends IResourceServiceProvider> getAllLanguages() {
+    final Function1<String, IResourceServiceProvider> _function = (String ext) -> {
+      final URI synthUri = URI.createURI(("synth:///file." + ext));
+      return this.languagesRegistry.getResourceServiceProvider(synthUri);
+    };
+    return ListExtensions.<String, IResourceServiceProvider>map(IterableExtensions.<String>sort(IterableExtensions.<String>toList(this.languagesRegistry.getExtensionToFactoryMap().keySet())), _function);
+  }
+  
   @Override
   public CompletableFuture<InitializeResult> initialize(final InitializeParams params) {
     if ((this.params != null)) {
       throw new IllegalStateException("This language server has already been initialized.");
     }
     final URI baseDir = this.getBaseDir(params);
-    if ((baseDir == null)) {
-      throw new IllegalArgumentException("Bad initialization request: rootUri must not be null.");
-    }
     boolean _isEmpty = this.languagesRegistry.getExtensionToFactoryMap().isEmpty();
     if (_isEmpty) {
       throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages\'s setup class in \'/META-INF/services/org.eclipse.xtext.ISetup\'");
@@ -189,32 +205,66 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       it.setReferencesProvider(Boolean.valueOf(true));
       it.setDocumentSymbolProvider(Boolean.valueOf(true));
       it.setWorkspaceSymbolProvider(Boolean.valueOf(true));
+      final Function1<IResourceServiceProvider, Boolean> _function_1 = (IResourceServiceProvider it_1) -> {
+        ICodeLensService _get = it_1.<ICodeLensService>get(ICodeLensService.class);
+        return Boolean.valueOf((_get != null));
+      };
+      boolean _exists = IterableExtensions.exists(this.getAllLanguages(), _function_1);
+      if (_exists) {
+        CodeLensOptions _codeLensOptions = new CodeLensOptions();
+        final Procedure1<CodeLensOptions> _function_2 = (CodeLensOptions it_1) -> {
+          final Function1<IResourceServiceProvider, Boolean> _function_3 = (IResourceServiceProvider it_2) -> {
+            ICodeLensResolver _get = it_2.<ICodeLensResolver>get(ICodeLensResolver.class);
+            return Boolean.valueOf((_get != null));
+          };
+          it_1.setResolveProvider(IterableExtensions.exists(this.getAllLanguages(), _function_3));
+        };
+        CodeLensOptions _doubleArrow = ObjectExtensions.<CodeLensOptions>operator_doubleArrow(_codeLensOptions, _function_2);
+        it.setCodeLensProvider(_doubleArrow);
+      }
+      final Function1<IResourceServiceProvider, Boolean> _function_3 = (IResourceServiceProvider it_1) -> {
+        ICodeActionService _get = it_1.<ICodeActionService>get(ICodeActionService.class);
+        return Boolean.valueOf((_get != null));
+      };
+      it.setCodeActionProvider(Boolean.valueOf(IterableExtensions.exists(this.getAllLanguages(), _function_3)));
       SignatureHelpOptions _signatureHelpOptions = new SignatureHelpOptions(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("(", ",")));
       it.setSignatureHelpProvider(_signatureHelpOptions);
       it.setTextDocumentSync(TextDocumentSyncKind.Incremental);
       CompletionOptions _completionOptions = new CompletionOptions();
-      final Procedure1<CompletionOptions> _function_1 = (CompletionOptions it_1) -> {
+      final Procedure1<CompletionOptions> _function_4 = (CompletionOptions it_1) -> {
         it_1.setResolveProvider(Boolean.valueOf(false));
         it_1.setTriggerCharacters(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(".")));
       };
-      CompletionOptions _doubleArrow = ObjectExtensions.<CompletionOptions>operator_doubleArrow(_completionOptions, _function_1);
-      it.setCompletionProvider(_doubleArrow);
+      CompletionOptions _doubleArrow_1 = ObjectExtensions.<CompletionOptions>operator_doubleArrow(_completionOptions, _function_4);
+      it.setCompletionProvider(_doubleArrow_1);
       it.setDocumentFormattingProvider(Boolean.valueOf(true));
       it.setDocumentRangeFormattingProvider(Boolean.valueOf(true));
       it.setDocumentHighlightProvider(Boolean.valueOf(true));
     };
-    ServerCapabilities _doubleArrow = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
-    result.setCapabilities(_doubleArrow);
-    final Function1<CancelIndicator, Object> _function_1 = (CancelIndicator cancelIndicator) -> {
+    ServerCapabilities capabilities = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
+    Iterable<? extends IResourceServiceProvider> _allLanguages = this.getAllLanguages();
+    for (final IResourceServiceProvider language : _allLanguages) {
+      ICapabilitiesContributor _get = language.<ICapabilitiesContributor>get(ICapabilitiesContributor.class);
+      if (_get!=null) {
+        _get.contribute(capabilities, params);
+      }
+    }
+    result.setCapabilities(capabilities);
+    this.access.addBuildListener(this);
+    final Function0<Object> _function_1 = () -> {
       final Procedure2<URI, Iterable<Issue>> _function_2 = (URI $0, Iterable<Issue> $1) -> {
         this.publishDiagnostics($0, $1);
       };
-      this.workspaceManager.initialize(baseDir, _function_2, cancelIndicator);
+      this.workspaceManager.initialize(baseDir, _function_2, CancelIndicator.NullImpl);
       return null;
     };
-    this.requestManager.<Object>runWrite(_function_1);
-    this.access.addBuildListener(this);
-    return CompletableFuture.<InitializeResult>completedFuture(result);
+    final Function2<CancelIndicator, Object, Object> _function_2 = (CancelIndicator $0, Object $1) -> {
+      return null;
+    };
+    final Function<Object, InitializeResult> _function_3 = (Object it) -> {
+      return result;
+    };
+    return this.requestManager.<Object, Object>runWrite(_function_1, _function_2).<InitializeResult>thenApply(_function_3);
   }
   
   @Deprecated
@@ -263,34 +313,40 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void didOpen(final DidOpenTextDocumentParams params) {
-    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
-      this.workspaceManager.didOpen(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), params.getTextDocument().getText(), cancelIndicator);
-      return null;
+    final Function0<BuildManager.Buildable> _function = () -> {
+      return this.workspaceManager.didOpen(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), params.getTextDocument().getText());
     };
-    this.requestManager.<Object>runWrite(_function);
+    final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
+      return buildable.build(cancelIndicator);
+    };
+    this.requestManager.<BuildManager.Buildable, List<IResourceDescription.Delta>>runWrite(_function, _function_1);
   }
   
   @Override
   public void didChange(final DidChangeTextDocumentParams params) {
-    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
+    final Function0<BuildManager.Buildable> _function = () -> {
       final Function1<TextDocumentContentChangeEvent, TextEdit> _function_1 = (TextDocumentContentChangeEvent event) -> {
         Range _range = event.getRange();
         String _text = event.getText();
         return new TextEdit(_range, _text);
       };
-      this.workspaceManager.didChange(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(params.getContentChanges(), _function_1), cancelIndicator);
-      return null;
+      return this.workspaceManager.didChange(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(params.getContentChanges(), _function_1));
     };
-    this.requestManager.<Object>runWrite(_function);
+    final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
+      return buildable.build(cancelIndicator);
+    };
+    this.requestManager.<BuildManager.Buildable, List<IResourceDescription.Delta>>runWrite(_function, _function_1);
   }
   
   @Override
   public void didClose(final DidCloseTextDocumentParams params) {
-    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
-      this.workspaceManager.didClose(this._uriExtensions.toUri(params.getTextDocument().getUri()), cancelIndicator);
-      return null;
+    final Function0<BuildManager.Buildable> _function = () -> {
+      return this.workspaceManager.didClose(this._uriExtensions.toUri(params.getTextDocument().getUri()));
     };
-    this.requestManager.<Object>runWrite(_function);
+    final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
+      return buildable.build(cancelIndicator);
+    };
+    this.requestManager.<BuildManager.Buildable, List<IResourceDescription.Delta>>runWrite(_function, _function_1);
   }
   
   @Override
@@ -299,34 +355,43 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void didChangeWatchedFiles(final DidChangeWatchedFilesParams params) {
-    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
-      final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
-      final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
-      List<FileEvent> _changes = params.getChanges();
-      for (final FileEvent fileEvent : _changes) {
-        FileChangeType _type = fileEvent.getType();
-        boolean _tripleEquals = (_type == FileChangeType.Deleted);
-        if (_tripleEquals) {
-          URI _uri = this._uriExtensions.toUri(fileEvent.getUri());
-          deletedFiles.add(_uri);
-        } else {
-          URI _uri_1 = this._uriExtensions.toUri(fileEvent.getUri());
-          dirtyFiles.add(_uri_1);
+    final Function0<BuildManager.Buildable> _function = () -> {
+      BuildManager.Buildable _xblockexpression = null;
+      {
+        final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
+        final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
+        List<FileEvent> _changes = params.getChanges();
+        for (final FileEvent fileEvent : _changes) {
+          FileChangeType _type = fileEvent.getType();
+          boolean _tripleEquals = (_type == FileChangeType.Deleted);
+          if (_tripleEquals) {
+            URI _uri = this._uriExtensions.toUri(fileEvent.getUri());
+            deletedFiles.add(_uri);
+          } else {
+            URI _uri_1 = this._uriExtensions.toUri(fileEvent.getUri());
+            dirtyFiles.add(_uri_1);
+          }
         }
+        _xblockexpression = this.workspaceManager.didChangeFiles(dirtyFiles, deletedFiles);
       }
-      this.workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
-      return null;
+      return _xblockexpression;
     };
-    this.requestManager.<Object>runWrite(_function);
+    final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
+      return buildable.build(cancelIndicator);
+    };
+    this.requestManager.<BuildManager.Buildable, List<IResourceDescription.Delta>>runWrite(_function, _function_1);
   }
   
   @Override
   public void didChangeConfiguration(final DidChangeConfigurationParams params) {
-    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
-      this.workspaceManager.refreshWorkspaceConfig(cancelIndicator);
+    final Function0<Object> _function = () -> {
+      this.workspaceManager.refreshWorkspaceConfig(CancelIndicator.NullImpl);
       return null;
     };
-    this.requestManager.<Object>runWrite(_function);
+    final Function2<CancelIndicator, Object, Object> _function_1 = (CancelIndicator $0, Object $1) -> {
+      return null;
+    };
+    this.requestManager.<Object, Object>runWrite(_function, _function_1);
   }
   
   private WorkspaceResourceAccess resourceAccess;
@@ -513,13 +578,13 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     final Function1<CancelIndicator, Hover> _function = (CancelIndicator cancelIndicator) -> {
       final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
-      HoverService _get = null;
+      IHoverService _get = null;
       if (resourceServiceProvider!=null) {
-        _get=resourceServiceProvider.<HoverService>get(HoverService.class);
+        _get=resourceServiceProvider.<IHoverService>get(IHoverService.class);
       }
-      final HoverService hoverService = _get;
+      final IHoverService hoverService = _get;
       if ((hoverService == null)) {
-        return HoverService.EMPTY_HOVER;
+        return IHoverService.EMPTY_HOVER;
       }
       final Function2<Document, XtextResource, Hover> _function_1 = (Document document, XtextResource resource) -> {
         return hoverService.hover(document, resource, params, cancelIndicator);
@@ -578,17 +643,101 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public CompletableFuture<List<? extends Command>> codeAction(final CodeActionParams params) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    final Function1<CancelIndicator, List<? extends Command>> _function = (CancelIndicator cancelIndicator) -> {
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
+      final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      ICodeActionService _get = null;
+      if (serviceProvider!=null) {
+        _get=serviceProvider.<ICodeActionService>get(ICodeActionService.class);
+      }
+      final ICodeActionService service = _get;
+      if ((service == null)) {
+        return CollectionLiterals.<Command>emptyList();
+      }
+      final Function2<Document, XtextResource, List<? extends Command>> _function_1 = (Document doc, XtextResource resource) -> {
+        return service.getCodeActions(doc, resource, params, cancelIndicator);
+      };
+      return this.workspaceManager.<List<? extends Command>>doRead(uri, _function_1);
+    };
+    return this.requestManager.<List<? extends Command>>runRead(_function);
+  }
+  
+  private void installURI(final List<? extends CodeLens> codeLenses, final String uri) {
+    for (final CodeLens lens : codeLenses) {
+      Object _data = lens.getData();
+      boolean _tripleNotEquals = (_data != null);
+      if (_tripleNotEquals) {
+        lens.setData(CollectionLiterals.<Object>newArrayList(uri, lens.getData()));
+      } else {
+        lens.setData(uri);
+      }
+    }
+  }
+  
+  private URI uninstallURI(final CodeLens lens) {
+    URI result = null;
+    Object _data = lens.getData();
+    if ((_data instanceof String)) {
+      result = URI.createURI(lens.getData().toString());
+      lens.setData(null);
+    } else {
+      Object _data_1 = lens.getData();
+      if ((_data_1 instanceof List<?>)) {
+        Object _data_2 = lens.getData();
+        final List<?> l = ((List<?>) _data_2);
+        result = URI.createURI(IterableExtensions.head(l).toString());
+        lens.setData(l.get(1));
+      }
+    }
+    return result;
   }
   
   @Override
   public CompletableFuture<List<? extends CodeLens>> codeLens(final CodeLensParams params) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    final Function1<CancelIndicator, List<? extends CodeLens>> _function = (CancelIndicator cancelIndicator) -> {
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
+      final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      ICodeLensService _get = null;
+      if (resourceServiceProvider!=null) {
+        _get=resourceServiceProvider.<ICodeLensService>get(ICodeLensService.class);
+      }
+      final ICodeLensService codeLensService = _get;
+      if ((codeLensService == null)) {
+        return CollectionLiterals.<CodeLens>emptyList();
+      }
+      final Function2<Document, XtextResource, List<? extends CodeLens>> _function_1 = (Document document, XtextResource resource) -> {
+        final List<? extends CodeLens> result = codeLensService.computeCodeLenses(document, resource, params, cancelIndicator);
+        this.installURI(result, uri.toString());
+        return result;
+      };
+      return this.workspaceManager.<List<? extends CodeLens>>doRead(uri, _function_1);
+    };
+    return this.requestManager.<List<? extends CodeLens>>runRead(_function);
   }
   
   @Override
   public CompletableFuture<CodeLens> resolveCodeLens(final CodeLens unresolved) {
-    return CompletableFuture.<CodeLens>completedFuture(unresolved);
+    final URI uri = this.uninstallURI(unresolved);
+    if ((uri == null)) {
+      return CompletableFuture.<CodeLens>completedFuture(unresolved);
+    }
+    final Function1<CancelIndicator, CodeLens> _function = (CancelIndicator cancelIndicator) -> {
+      final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      ICodeLensResolver _get = null;
+      if (resourceServiceProvider!=null) {
+        _get=resourceServiceProvider.<ICodeLensResolver>get(ICodeLensResolver.class);
+      }
+      final ICodeLensResolver resolver = _get;
+      if ((resolver == null)) {
+        return unresolved;
+      }
+      final Function2<Document, XtextResource, CodeLens> _function_1 = (Document document, XtextResource resource) -> {
+        final CodeLens result = resolver.resolveCodeLens(document, resource, unresolved, cancelIndicator);
+        return result;
+      };
+      return this.workspaceManager.<CodeLens>doRead(uri, _function_1);
+    };
+    return this.requestManager.<CodeLens>runRead(_function);
   }
   
   @Override
@@ -820,4 +969,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   private final static Logger LOG = Logger.getLogger(LanguageServerImpl.class);
+  
+  @Pure
+  public RequestManager getRequestManager() {
+    return this.requestManager;
+  }
 }

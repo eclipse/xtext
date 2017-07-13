@@ -409,7 +409,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   
   protected void generateActivator() {
     if (((this.projectConfig.getEclipsePlugin().getSrcGen() != null) && (!this.languageConfigs.isEmpty()))) {
-      this.templates.createEclipsePluginActivator(this.languageConfigs).writeTo(this.projectConfig.getEclipsePlugin().getSrcGen());
+      this.templates.createEclipsePluginActivator(this.projectConfig, this.languageConfigs).writeTo(this.projectConfig.getEclipsePlugin().getSrcGen());
     }
   }
   

@@ -46,6 +46,7 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
  * Templates for generating the common language infrastructure.
@@ -1512,9 +1513,12 @@ public class XtextGeneratorTemplates {
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("return ");
+        TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.core.runtime.Platform");
+        _builder.append(_typeRef_2, "\t\t");
+        _builder.append(".getBundle(");
         TypeReference _eclipsePluginActivator = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator();
         _builder.append(_eclipsePluginActivator, "\t\t");
-        _builder.append(".getInstance().getBundle();");
+        _builder.append(".PLUGIN_ID);");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
@@ -1530,21 +1534,25 @@ public class XtextGeneratorTemplates {
         _builder.append(" getInjector() {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("return ");
         TypeReference _eclipsePluginActivator_1 = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator();
         _builder.append(_eclipsePluginActivator_1, "\t\t");
-        _builder.append(".getInstance().getInjector(");
+        _builder.append(" activator = ");
         TypeReference _eclipsePluginActivator_2 = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator();
         _builder.append(_eclipsePluginActivator_2, "\t\t");
+        _builder.append(".getInstance();");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("return activator != null ? activator.getInjector(");
+        TypeReference _eclipsePluginActivator_3 = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator();
+        _builder.append(_eclipsePluginActivator_3, "\t\t");
         _builder.append(".");
         String _replaceAll = langConfig.getGrammar().getName().toUpperCase().replaceAll("\\.", "_");
         _builder.append(_replaceAll, "\t\t");
-        _builder.append(");");
+        _builder.append(") : null;");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
-        _builder.append("\t");
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
@@ -1554,7 +1562,7 @@ public class XtextGeneratorTemplates {
     return file;
   }
   
-  public JavaFileAccess createEclipsePluginActivator(final List<? extends IXtextGeneratorLanguage> langConfigs) {
+  public JavaFileAccess createEclipsePluginActivator(final IXtextProjectConfig projectConfig, final List<? extends IXtextGeneratorLanguage> langConfigs) {
     final TypeReference activator = this.naming.getEclipsePluginActivator();
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(activator);
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -1586,6 +1594,12 @@ public class XtextGeneratorTemplates {
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public static final String PLUGIN_ID = \"");
+        String _name = projectConfig.getEclipsePlugin().getName();
+        _builder.append(_name, "\t");
+        _builder.append("\";");
+        _builder.newLineIfNotEmpty();
         {
           for(final IXtextGeneratorLanguage lang : langConfigs) {
             _builder.append("\t");
@@ -1593,8 +1607,8 @@ public class XtextGeneratorTemplates {
             String _replaceAll = lang.getGrammar().getName().toUpperCase().replaceAll("\\.", "_");
             _builder.append(_replaceAll, "\t");
             _builder.append(" = \"");
-            String _name = lang.getGrammar().getName();
-            _builder.append(_name, "\t");
+            String _name_1 = lang.getGrammar().getName();
+            _builder.append(_name_1, "\t");
             _builder.append("\";");
             _builder.newLineIfNotEmpty();
           }
@@ -1853,6 +1867,8 @@ public class XtextGeneratorTemplates {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.newLine();

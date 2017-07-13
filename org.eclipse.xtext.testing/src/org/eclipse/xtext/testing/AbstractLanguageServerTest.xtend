@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.testing
 
-import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Inject
 import java.io.File
@@ -18,8 +17,13 @@ import java.nio.file.Paths
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CompletableFuture
+import org.eclipse.lsp4j.CodeActionContext
+import org.eclipse.lsp4j.CodeActionParams
+import org.eclipse.lsp4j.CodeLens
+import org.eclipse.lsp4j.CodeLensParams
 import org.eclipse.lsp4j.ColoringInformation
 import org.eclipse.lsp4j.ColoringParams
+import org.eclipse.lsp4j.Command
 import org.eclipse.lsp4j.CompletionItem
 import org.eclipse.lsp4j.CompletionList
 import org.eclipse.lsp4j.Diagnostic
@@ -48,8 +52,10 @@ import org.eclipse.lsp4j.TextDocumentIdentifier
 import org.eclipse.lsp4j.TextDocumentItem
 import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.TextEdit
+import org.eclipse.lsp4j.WorkspaceEdit
 import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
+import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
 import org.eclipse.lsp4j.services.LanguageClientExtensions
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -60,14 +66,14 @@ import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.LanguageServerImpl
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.UriExtensions
-import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.Files
-import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-import org.eclipse.lsp4j.jsonrpc.messages.Either
+import org.eclipse.xtext.util.Modules2
+import com.google.inject.Module
+import org.eclipse.xtext.ide.server.concurrent.RequestManager
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -80,25 +86,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 	@Before
 	def void setup() {
-		val module = Modules2.mixin(new ServerModule, new AbstractModule() {
-
-			override protected configure() {
-				bind(RequestManager).toInstance(new RequestManager() {
-
-					override <V> runWrite((CancelIndicator)=>V writeRequest) {
-						return CompletableFuture.completedFuture(writeRequest.apply [ false ])
-					}
-
-					override <V> runRead((CancelIndicator)=>V readRequest) {
-						return CompletableFuture.completedFuture(readRequest.apply [ false ])
-					}
-
-				})
-			}
-
-		})
-
-		val injector = Guice.createInjector(module)
+		val injector = Guice.createInjector(getServerModule())
 		injector.injectMembers(this)
 
 		val resourceServiceProvider = resourceServerProviderRegistry.extensionToFactoryMap.get(fileExtension)
@@ -116,6 +104,33 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			Files.cleanFolder(root, null, true, false)
 		}
 		root.deleteOnExit
+	}
+	
+	protected def Module getServerModule() {
+		Modules2.mixin(new ServerModule, [
+			bind(RequestManager).toInstance(new RequestManager() {
+				
+				override <V> runRead((CancelIndicator)=>V request) {
+					val result = new CompletableFuture()
+					try {
+						result.complete(request.apply [ false ])
+					} catch (Throwable e) {
+						result.completeExceptionally(e)
+					}
+					return result
+				}
+				
+				override <U,V> runWrite(()=>U nonCancellable, (CancelIndicator, U)=>V request) {
+					val result = new CompletableFuture()
+					try {
+						result.complete(request.apply([ false ], nonCancellable.apply()))
+					} catch (Throwable e) {
+						result.completeExceptionally(e)
+					}
+					return result
+				}
+			})
+		])
 	}
 
 	@Inject
@@ -292,6 +307,73 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	
 	protected dispatch def String toExpectation(ColoringInformation it) {
 		return '''«range.toExpectation» -> [«styles.join(', ')»]''';
+	}
+	
+	protected dispatch def String toExpectation(CodeLens it) {
+		return command.title + " " +range.toExpectation
+	}
+	
+	@Accessors static class TestCodeLensConfiguration extends TextDocumentPositionConfiguration {
+		String expectedCodeLensItems = ''
+		(List<? extends CodeLens>)=>void assertCodeLenses = null
+	}
+	
+	protected def void testCodeLens((TestCodeLensConfiguration)=>void configurator) {
+		val extension configuration = new TestCodeLensConfiguration
+		configuration.filePath = 'MyModel.' + fileExtension
+		configurator.apply(configuration)
+		val filePath = initializeContext(configuration).uri
+		val codeLenses = languageServer.codeLens(new CodeLensParams=>[
+			textDocument = new TextDocumentIdentifier(filePath)
+		])
+		val result = codeLenses.get.map[languageServer.resolveCodeLens(it).get].toList
+
+		if (configuration.assertCodeLenses !== null) {
+			configuration.assertCodeLenses.apply(result)
+		} else {
+			assertEquals(expectedCodeLensItems, result.toExpectation)
+		}
+	}
+	
+		protected dispatch def String toExpectation(Command it) '''
+		command : «command»
+		title : «title»
+		args : 
+			«arguments.join(',')[toExpectation]»
+	'''
+	
+	protected dispatch def String toExpectation(WorkspaceEdit it) '''
+		changes :
+			«FOR entry : changes.entrySet»
+				«org.eclipse.emf.common.util.URI.createURI(entry.key).lastSegment» : «entry.value.toExpectation»
+			«ENDFOR» 
+		documentChanges : 
+			«documentChanges.toExpectation»
+	'''
+	
+	@Accessors static class TestCodeActionConfiguration extends TextDocumentPositionConfiguration {
+		String expectedCodeActions = ''
+		
+		(List<? extends Command>)=>void assertCodeActions= null
+	}
+	
+	protected def void testCodeAction((TestCodeActionConfiguration)=>void configurator) {
+		val extension configuration = new TestCodeActionConfiguration
+		configuration.filePath = 'MyModel.' + fileExtension
+		configurator.apply(configuration)
+		val filePath = initializeContext(configuration).uri
+		val codeLenses = languageServer.codeAction(new CodeActionParams=>[
+			textDocument = new TextDocumentIdentifier(filePath)
+			context = new CodeActionContext => [
+				diagnostics = this.diagnostics.get(filePath)
+			]
+		])
+
+		if (configuration.assertCodeActions !== null) {
+			configuration.assertCodeActions.apply(codeLenses.get)
+		} else {
+			assertEquals(configuration.expectedCodeActions, codeLenses.get.toExpectation)
+		}
 	}
 
 	protected def void testCompletion((TestCompletionConfiguration)=>void configurator) {
@@ -499,15 +581,19 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	}
 	
 	protected def Map<String, List<Diagnostic>> getDiagnostics() {
-		val result = <String, List<Diagnostic>>newHashMap
-		for (diagnostic : notifications.map[value].filter(PublishDiagnosticsParams)) {
-			result.put(diagnostic.uri, diagnostic.diagnostics)
-		}
-		return result 
+		languageServer.requestManager.runRead[
+			val result = <String, List<Diagnostic>>newHashMap
+			for (diagnostic : notifications.map[value].filter(PublishDiagnosticsParams)) {
+				result.put(diagnostic.uri, diagnostic.diagnostics)
+			}
+			return result 
+		].get
 	}
 	
 	protected def getColoringParams() {
-		return notifications.map[value].filter(ColoringParams).toMap([uri], [infos]);
+		languageServer.requestManager.runRead[		
+			return notifications.map[value].filter(ColoringParams).toMap([uri], [infos]);
+		].get
 	}
 }
 

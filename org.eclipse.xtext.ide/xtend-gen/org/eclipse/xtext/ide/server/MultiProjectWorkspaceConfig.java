@@ -41,10 +41,17 @@ public class MultiProjectWorkspaceConfig implements IWorkspaceConfig {
       ISourceFolder _findSourceFolderContaining = it.findSourceFolderContaining(member);
       return Boolean.valueOf((_findSourceFolderContaining != null));
     };
-    final Function1<IProjectConfig, Integer> _function_1 = (IProjectConfig it) -> {
-      return Integer.valueOf(it.getPath().segmentCount());
-    };
-    return IterableExtensions.<IProjectConfig, Integer>maxBy(IterableExtensions.<IProjectConfig>filter(this.name2config.values(), _function), _function_1);
+    final Iterable<IProjectConfig> candidates = IterableExtensions.<IProjectConfig>filter(this.name2config.values(), _function);
+    boolean _isEmpty = IterableExtensions.isEmpty(candidates);
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      final Function1<IProjectConfig, Integer> _function_1 = (IProjectConfig it) -> {
+        return Integer.valueOf(it.getPath().segmentCount());
+      };
+      return IterableExtensions.<IProjectConfig, Integer>maxBy(candidates, _function_1);
+    } else {
+      return null;
+    }
   }
   
   public MultiProjectWorkspaceConfig(final Map<String, IProjectConfig> name2config) {

@@ -16,6 +16,7 @@ import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
+import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
@@ -104,6 +105,11 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 	public ISemanticRegion getNextSemanticRegion() {
 		return next;
 	}
+	
+	@Override
+	public ISequentialRegion getNextSequentialRegion() {
+		return next;
+	}
 
 	@Override
 	public int getOffset() {
@@ -128,6 +134,11 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 
 	@Override
 	public ISemanticRegion getPreviousSemanticRegion() {
+		return previous;
+	}
+	
+	@Override
+	public ISequentialRegion getPreviousSequentialRegion() {
 		return previous;
 	}
 

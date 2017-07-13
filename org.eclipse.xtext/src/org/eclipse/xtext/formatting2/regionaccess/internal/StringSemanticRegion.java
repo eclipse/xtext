@@ -13,6 +13,7 @@ import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
+import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -50,6 +51,11 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 	public ISemanticRegion getNextSemanticRegion() {
 		return trailing != null ? trailing.getNextSemanticRegion() : null;
 	}
+	
+	@Override
+	public ISequentialRegion getNextSequentialRegion() {
+		return trailing;
+	}
 
 	@Override
 	public IHiddenRegion getPreviousHiddenRegion() {
@@ -59,6 +65,11 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 	@Override
 	public ISemanticRegion getPreviousSemanticRegion() {
 		return leading != null ? leading.getPreviousSemanticRegion() : null;
+	}
+	
+	@Override
+	public ISequentialRegion getPreviousSequentialRegion() {
+		return leading;
 	}
 
 	@Override
@@ -83,4 +94,5 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 	protected void setTrailingHiddenRegion(IHiddenRegion trailing) {
 		this.trailing = trailing;
 	}
+
 }

@@ -7,9 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
+import java.util.concurrent.ExecutionException
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams
 import org.eclipse.lsp4j.FileChangeType
 import org.eclipse.lsp4j.FileEvent
+import org.eclipse.lsp4j.TextDocumentIdentifier
+import org.eclipse.lsp4j.TextDocumentPositionParams
+import org.eclipse.lsp4j.jsonrpc.ResponseErrorException
+import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode
+import org.junit.Assert
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -67,6 +73,18 @@ class ServerTest extends AbstractTestLangLanguageServerTest {
     	assertTrue(diagnostics.values.join(','), diagnostics.values.forall[empty])
     }
     
-    
+    @Test
+    def void testMissingInitialize() {
+	    	try {
+		    	languageServer.definition(new TextDocumentPositionParams => [
+				textDocument = new TextDocumentIdentifier => [
+					uri = 'file:/home/test/workspace/mydoc.testlang'
+				]
+			]).get
+			Assert.fail("Expected a ResponseErrorException")
+		} catch (ExecutionException exception) {
+			Assert.assertEquals(ResponseErrorCode.serverNotInitialized.value, (exception.cause as ResponseErrorException).responseError.code)
+		}
+    }
     
 }

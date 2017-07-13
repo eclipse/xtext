@@ -106,7 +106,7 @@ class TypeReference {
 		this(getQualifiedName(clazz, resourceSet))
 	}
 	
-	new(QualifiedClazzName qualifiedClazzName) {
+	new(QualifiedClassName qualifiedClazzName) {
 		this(qualifiedClazzName.packageName, qualifiedClazzName.className, null)
 	}
 	
@@ -144,25 +144,25 @@ class TypeReference {
 			qualifiedName.substring(packageName.length + 1, qualifiedName.length)
 	}
 	
-	private static def QualifiedClazzName getQualifiedName(EClass clazz, ResourceSet resourceSet) {
+	private static def QualifiedClassName getQualifiedName(EClass clazz, ResourceSet resourceSet) {
 		if (clazz.EPackage.nsURI == 'http://www.eclipse.org/2008/Xtext') {
-			new QualifiedClazzName('org.eclipse.xtext', clazz.name)
+			new QualifiedClassName('org.eclipse.xtext', clazz.name)
 		} else if (clazz.EPackage.nsURI == 'http://www.eclipse.org/emf/2002/Ecore') {
 			if (clazz.instanceTypeName !== null) {
 				val itn = clazz.instanceTypeName;
-				new QualifiedClazzName(itn.substring(0, itn.lastIndexOf('.')),
+				new QualifiedClassName(itn.substring(0, itn.lastIndexOf('.')),
 					itn.substring(itn.lastIndexOf(".") + 1).replace("$", "."))
 			} else {
-				new QualifiedClazzName('org.eclipse.emf.ecore', clazz.name)
+				new QualifiedClassName('org.eclipse.emf.ecore', clazz.name)
 			}
 		} else {
-			new QualifiedClazzName(GenModelUtil2.getGenClass(clazz, resourceSet).genPackage.qualifiedPackageName,
+			new QualifiedClassName(GenModelUtil2.getGenClass(clazz, resourceSet).genPackage.qualifiedPackageName,
 				GenModelUtil2.getGenClass(clazz, resourceSet).interfaceName)
 		}
 	}
 
-	private static def QualifiedClazzName getQualifiedName(EPackage epackage, ResourceSet resourceSet) {
-		new QualifiedClazzName(GenModelUtil2.getGenPackage(epackage, resourceSet).qualifiedPackageName,
+	private static def QualifiedClassName getQualifiedName(EPackage epackage, ResourceSet resourceSet) {
+		new QualifiedClassName(GenModelUtil2.getGenPackage(epackage, resourceSet).qualifiedPackageName,
 			GenModelUtil2.getGenPackage(epackage, resourceSet).packageInterfaceName)
 	}
 	
@@ -191,7 +191,7 @@ class TypeReference {
 	}
 	
 	@FinalFieldsConstructor
-	static class QualifiedClazzName {
+	static class QualifiedClassName {
 		@Accessors(PUBLIC_GETTER)
 		val String packageName
 		@Accessors(PUBLIC_GETTER)

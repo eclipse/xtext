@@ -16,6 +16,7 @@ import java.io.OutputStream;
 import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIHandler;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -89,6 +90,7 @@ public class InMemoryURIHandler implements URIHandler {
   
   public final static String SCHEME = "inmemory";
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private Map<URI, InMemoryURIHandler.InMemFile> files = CollectionLiterals.<URI, InMemoryURIHandler.InMemFile>newHashMap();
   
   @Override
@@ -132,7 +134,7 @@ public class InMemoryURIHandler implements URIHandler {
   public void setAttributes(final URI uri, final Map<String, ?> attributes, final Map<?, ?> options) throws IOException {
   }
   
-  protected InMemoryURIHandler.InMemFile getInMemoryFile(final URI uri) {
+  public InMemoryURIHandler.InMemFile getInMemoryFile(final URI uri) {
     InMemoryURIHandler.InMemFile result = this.files.get(uri);
     if ((result == null)) {
       InMemoryURIHandler.InMemFile _inMemFile = new InMemoryURIHandler.InMemFile(uri);
@@ -140,5 +142,10 @@ public class InMemoryURIHandler implements URIHandler {
       this.files.put(uri, result);
     }
     return result;
+  }
+  
+  @Pure
+  public Map<URI, InMemoryURIHandler.InMemFile> getFiles() {
+    return this.files;
   }
 }

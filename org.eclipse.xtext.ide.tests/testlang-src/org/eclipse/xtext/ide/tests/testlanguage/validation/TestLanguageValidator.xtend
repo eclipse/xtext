@@ -7,6 +7,9 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.validation
 
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration
+import org.eclipse.xtext.validation.Check
 
 /**
  * This class contains custom validation rules. 
@@ -15,15 +18,15 @@ package org.eclipse.xtext.ide.tests.testlanguage.validation
  */
 class TestLanguageValidator extends AbstractTestLanguageValidator {
 	
-//	public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					TestLanguagePackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
+	public static val INVALID_NAME = 'invalidName'
+
+	@Check
+	def checkGreetingStartsWithCapital(TypeDeclaration type) {
+		if (!Character.isUpperCase(type.name.charAt(0))) {
+			warning('Name should start with a capital', 
+					TestLanguagePackage.Literals.TYPE_DECLARATION__NAME,
+					INVALID_NAME)
+		}
+	}
 	
 }
