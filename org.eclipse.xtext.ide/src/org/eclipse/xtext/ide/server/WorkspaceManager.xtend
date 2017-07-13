@@ -167,11 +167,11 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
     }
     
     def <T> T doRead(URI uri, (Document, XtextResource)=>T work) {
-    	val resourceURI = uri.trimFragment
-    	val projectMnr = getProjectManager(resourceURI)
+        val resourceURI = uri.trimFragment
+        val projectMnr = getProjectManager(resourceURI)
         val resource = projectMnr?.getResource(resourceURI) as XtextResource
         if (resource === null) {
-        	return work.apply(null, null)	
+            	return work.apply(null, null)
         }
         var doc = getDocument(resource)
         return work.apply(doc, projectMnr.getResource(resourceURI) as XtextResource)
