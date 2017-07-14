@@ -117,7 +117,8 @@ public class WorkspaceManager {
   protected void refreshWorkspaceConfig(final CancelIndicator cancelIndicator) {
     this.workspaceConfig = this.workspaceConfigFactory.getWorkspaceConfig(this.baseDir);
     final ArrayList<ProjectDescription> newProjects = CollectionLiterals.<ProjectDescription>newArrayList();
-    final HashSet<Set<String>> remainingProjectNames = CollectionLiterals.<Set<String>>newHashSet(this.projectName2ProjectManager.keySet());
+    Set<String> _keySet = this.projectName2ProjectManager.keySet();
+    final Set<String> remainingProjectNames = new HashSet<String>(_keySet);
     final Consumer<IProjectConfig> _function = (IProjectConfig projectConfig) -> {
       boolean _containsKey = this.projectName2ProjectManager.containsKey(projectConfig.getName());
       if (_containsKey) {
@@ -134,7 +135,7 @@ public class WorkspaceManager {
       }
     };
     this.workspaceConfig.getProjects().forEach(_function);
-    for (final Set<String> deletedProject : remainingProjectNames) {
+    for (final String deletedProject : remainingProjectNames) {
       {
         this.projectName2ProjectManager.remove(deletedProject);
         this.fullIndex.remove(deletedProject);
@@ -247,7 +248,11 @@ public class WorkspaceManager {
     if (_projectManager!=null) {
       _resourceSet=_projectManager.getResourceSet();
     }
-    return _resourceSet.getURIConverter().exists(uri, null);
+    final XtextResourceSet rs = _resourceSet;
+    if ((rs == null)) {
+      return false;
+    }
+    return rs.getURIConverter().exists(uri, null);
   }
   
   public <T extends Object> T doRead(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
