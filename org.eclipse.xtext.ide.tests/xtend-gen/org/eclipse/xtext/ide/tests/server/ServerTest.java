@@ -11,14 +11,21 @@ import java.util.Collections;
 import java.util.List;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
+import org.eclipse.lsp4j.DidOpenTextDocumentParams;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.TextDocumentItem;
+import org.eclipse.lsp4j.jsonrpc.ResponseErrorException;
+import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode;
 import org.eclipse.lsp4j.services.WorkspaceService;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -94,5 +101,31 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
       return Boolean.valueOf(it.isEmpty());
     };
     Assert.assertTrue(IterableExtensions.join(this.getDiagnostics().values(), ","), IterableExtensions.<List<Diagnostic>>forall(this.getDiagnostics().values(), _function));
+  }
+  
+  @Test
+  public void testMissingInitialize() {
+    try {
+      DidOpenTextDocumentParams _didOpenTextDocumentParams = new DidOpenTextDocumentParams();
+      final Procedure1<DidOpenTextDocumentParams> _function = (DidOpenTextDocumentParams it) -> {
+        TextDocumentItem _textDocumentItem = new TextDocumentItem();
+        final Procedure1<TextDocumentItem> _function_1 = (TextDocumentItem it_1) -> {
+          it_1.setUri("file:/home/test/workspace/mydoc.testlang");
+          it_1.setText("type Foo {}");
+        };
+        TextDocumentItem _doubleArrow = ObjectExtensions.<TextDocumentItem>operator_doubleArrow(_textDocumentItem, _function_1);
+        it.setTextDocument(_doubleArrow);
+      };
+      DidOpenTextDocumentParams _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParams>operator_doubleArrow(_didOpenTextDocumentParams, _function);
+      this.languageServer.didOpen(_doubleArrow);
+      Assert.fail("Expected a ResponseErrorException");
+    } catch (final Throwable _t) {
+      if (_t instanceof ResponseErrorException) {
+        final ResponseErrorException exception = (ResponseErrorException)_t;
+        Assert.assertEquals(ResponseErrorCode.serverNotInitialized.getValue(), exception.getResponseError().getCode());
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
 }

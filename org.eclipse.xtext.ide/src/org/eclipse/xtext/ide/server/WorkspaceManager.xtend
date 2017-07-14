@@ -16,6 +16,9 @@ import java.util.Map
 import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.lsp4j.TextEdit
+import org.eclipse.lsp4j.jsonrpc.ResponseErrorException
+import org.eclipse.lsp4j.jsonrpc.messages.ResponseError
+import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode
 import org.eclipse.xtext.ide.server.BuildManager.Buildable
 import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider
@@ -45,7 +48,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 
     URI baseDir
     (URI, Iterable<Issue>)=>void issueAcceptor
-    IWorkspaceConfig workspaceConfig
+    IWorkspaceConfig _workspaceConfig
     
     List<IBuildListener> buildListeners = newArrayList
     
@@ -84,7 +87,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
         refreshWorkspaceConfig(cancelIndicator)
     }
     
-    protected def refreshWorkspaceConfig(CancelIndicator cancelIndicator) {
+    protected def void refreshWorkspaceConfig(CancelIndicator cancelIndicator) {
         workspaceConfig = workspaceConfigFactory.getWorkspaceConfig(baseDir)
         val newProjects = newArrayList
         val Set<String> remainingProjectNames = new HashSet(projectName2ProjectManager.keySet)
@@ -106,8 +109,20 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
         val result = buildManager.doInitialBuild(newProjects, cancelIndicator)
         afterBuild(result)
     }
+    
+    protected def IWorkspaceConfig getWorkspaceConfig() {
+    	if (_workspaceConfig === null) {
+    		val error = new ResponseError(ResponseErrorCode.serverNotInitialized, "Workspace has not been initialized yet.", null)
+    		throw new ResponseErrorException(error)
+		}
+		return _workspaceConfig
+    }
+    
+    protected def void setWorkspaceConfig(IWorkspaceConfig workspaceConfig) {
+    	this._workspaceConfig = workspaceConfig
+    }
 	
-	protected def afterBuild(List<Delta> deltas) {
+	protected def void afterBuild(List<Delta> deltas) {
 		for (listener : buildListeners) {
 			listener.afterBuild(deltas)
 		}
@@ -130,9 +145,9 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
     	return new ChunkedResourceDescriptions(fullIndex)
     }
 
-    def URI getProjectBaseDir(URI candidate) {
-        val projectConfig = workspaceConfig.findProjectContaining(candidate)
-        projectConfig?.path
+    def URI getProjectBaseDir(URI uri) {
+        val projectConfig = workspaceConfig.findProjectContaining(uri)
+        return projectConfig?.path
     }
     
     def ProjectManager getProjectManager(URI uri) {
