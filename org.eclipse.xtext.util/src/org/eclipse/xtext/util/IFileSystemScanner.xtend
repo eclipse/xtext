@@ -36,8 +36,11 @@ interface IFileSystemScanner {
             val uri = URI.createURI(path.toUri.toString)
             acceptor.accept(uri)
             if (file.isDirectory) {
-                for (f : file.listFiles) {
-                    scanRec(f, acceptor)
+                val files = file.listFiles
+                if (files !== null) {
+                    for (f : files) {
+                        scanRec(f, acceptor)
+                    }
                 }
             }
         }
