@@ -71,7 +71,7 @@ public class WorkspaceManager {
   
   private Procedure2<? super URI, ? super Iterable<Issue>> issueAcceptor;
   
-  private IWorkspaceConfig workspaceConfig;
+  private IWorkspaceConfig _workspaceConfig;
   
   private List<ILanguageServerAccess.IBuildListener> buildListeners = CollectionLiterals.<ILanguageServerAccess.IBuildListener>newArrayList();
   
@@ -118,7 +118,7 @@ public class WorkspaceManager {
   }
   
   protected void refreshWorkspaceConfig(final CancelIndicator cancelIndicator) {
-    this.workspaceConfig = this.workspaceConfigFactory.getWorkspaceConfig(this.baseDir);
+    this.setWorkspaceConfig(this.workspaceConfigFactory.getWorkspaceConfig(this.baseDir));
     final ArrayList<ProjectDescription> newProjects = CollectionLiterals.<ProjectDescription>newArrayList();
     Set<String> _keySet = this.projectName2ProjectManager.keySet();
     final Set<String> remainingProjectNames = new HashSet<String>(_keySet);
@@ -137,7 +137,7 @@ public class WorkspaceManager {
         newProjects.add(projectDescription);
       }
     };
-    this.workspaceConfig.getProjects().forEach(_function);
+    this.getWorkspaceConfig().getProjects().forEach(_function);
     for (final String deletedProject : remainingProjectNames) {
       {
         this.projectName2ProjectManager.remove(deletedProject);
@@ -149,11 +149,15 @@ public class WorkspaceManager {
   }
   
   protected IWorkspaceConfig getWorkspaceConfig() {
-    if ((this.workspaceConfig == null)) {
+    if ((this._workspaceConfig == null)) {
       final ResponseError error = new ResponseError(ResponseErrorCode.serverNotInitialized, "Workspace has not been initialized yet.", null);
       throw new ResponseErrorException(error);
     }
-    return this.workspaceConfig;
+    return this._workspaceConfig;
+  }
+  
+  protected void setWorkspaceConfig(final IWorkspaceConfig workspaceConfig) {
+    this._workspaceConfig = workspaceConfig;
   }
   
   protected void afterBuild(final List<IResourceDescription.Delta> deltas) {

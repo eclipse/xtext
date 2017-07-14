@@ -48,7 +48,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 
     URI baseDir
     (URI, Iterable<Issue>)=>void issueAcceptor
-    IWorkspaceConfig workspaceConfig
+    IWorkspaceConfig _workspaceConfig
     
     List<IBuildListener> buildListeners = newArrayList
     
@@ -111,11 +111,15 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
     }
     
     protected def IWorkspaceConfig getWorkspaceConfig() {
-    	if (workspaceConfig === null) {
+    	if (_workspaceConfig === null) {
     		val error = new ResponseError(ResponseErrorCode.serverNotInitialized, "Workspace has not been initialized yet.", null)
     		throw new ResponseErrorException(error)
 		}
-		return workspaceConfig
+		return _workspaceConfig
+    }
+    
+    protected def void setWorkspaceConfig(IWorkspaceConfig workspaceConfig) {
+    	this._workspaceConfig = workspaceConfig
     }
 	
 	protected def void afterBuild(List<Delta> deltas) {
@@ -142,12 +146,12 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
     }
 
     def URI getProjectBaseDir(URI uri) {
-        val projectConfig = getWorkspaceConfig.findProjectContaining(uri)
+        val projectConfig = workspaceConfig.findProjectContaining(uri)
         return projectConfig?.path
     }
     
     def ProjectManager getProjectManager(URI uri) {
-        val projectConfig = getWorkspaceConfig.findProjectContaining(uri)
+        val projectConfig = workspaceConfig.findProjectContaining(uri)
         return projectName2ProjectManager.get(projectConfig?.name)
     }
     
