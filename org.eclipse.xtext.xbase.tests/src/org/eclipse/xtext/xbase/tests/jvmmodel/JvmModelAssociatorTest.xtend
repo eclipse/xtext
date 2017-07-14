@@ -15,7 +15,7 @@ import com.google.inject.MembersInjector
 import org.junit.Before
 import org.junit.After
 
-class JvmModelAssociaterTest extends AbstractJvmModelTest {
+class JvmModelAssociatorTest extends AbstractJvmModelTest {
 	
 	@Inject extension JvmTypesBuilder
 	@Inject MembersInjector<JvmModelAssociator> associatorInjector
