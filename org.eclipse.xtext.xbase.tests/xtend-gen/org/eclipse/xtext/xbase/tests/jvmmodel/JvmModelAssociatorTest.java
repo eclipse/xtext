@@ -32,7 +32,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class JvmModelAssociaterTest extends AbstractJvmModelTest {
+public class JvmModelAssociatorTest extends AbstractJvmModelTest {
   @Inject
   @Extension
   private JvmTypesBuilder _jvmTypesBuilder;
