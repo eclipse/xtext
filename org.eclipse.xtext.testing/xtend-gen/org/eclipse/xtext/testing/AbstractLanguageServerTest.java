@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+import org.eclipse.lsp4j.CodeLens;
+import org.eclipse.lsp4j.CodeLensParams;
 import org.eclipse.lsp4j.ColoringInformation;
 import org.eclipse.lsp4j.ColoringParams;
 import org.eclipse.lsp4j.CompletionItem;
@@ -83,6 +85,7 @@ import org.eclipse.xtext.testing.ReferenceTestConfiguration;
 import org.eclipse.xtext.testing.SignatureHelpConfiguration;
 import org.eclipse.xtext.testing.TestCompletionConfiguration;
 import org.eclipse.xtext.testing.TextDocumentConfiguration;
+import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
 import org.eclipse.xtext.testing.WorkspaceSymbolConfiguraiton;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
@@ -108,6 +111,31 @@ import org.junit.Before;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public abstract class AbstractLanguageServerTest implements Endpoint {
+  @Accessors
+  public static class TestCodeLensConfiguration extends TextDocumentPositionConfiguration {
+    private String expectedCodeLensItems = "";
+    
+    private Procedure1<? super List<? extends CodeLens>> assertCodeLenses = null;
+    
+    @Pure
+    public String getExpectedCodeLensItems() {
+      return this.expectedCodeLensItems;
+    }
+    
+    public void setExpectedCodeLensItems(final String expectedCodeLensItems) {
+      this.expectedCodeLensItems = expectedCodeLensItems;
+    }
+    
+    @Pure
+    public Procedure1<? super List<? extends CodeLens>> getAssertCodeLenses() {
+      return this.assertCodeLenses;
+    }
+    
+    public void setAssertCodeLenses(final Procedure1<? super List<? extends CodeLens>> assertCodeLenses) {
+      this.assertCodeLenses = assertCodeLenses;
+    }
+  }
+  
   @Accessors
   protected final String fileExtension;
   
@@ -561,6 +589,45 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return _builder.toString();
   }
   
+  protected String _toExpectation(final CodeLens it) {
+    String _title = it.getCommand().getTitle();
+    String _plus = (_title + " ");
+    String _expectation = this.toExpectation(it.getRange());
+    return (_plus + _expectation);
+  }
+  
+  protected void testCodeLens(final Procedure1<? super AbstractLanguageServerTest.TestCodeLensConfiguration> configurator) {
+    try {
+      @Extension
+      final AbstractLanguageServerTest.TestCodeLensConfiguration configuration = new AbstractLanguageServerTest.TestCodeLensConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      final String filePath = this.initializeContext(configuration).getUri();
+      CodeLensParams _codeLensParams = new CodeLensParams();
+      final Procedure1<CodeLensParams> _function = (CodeLensParams it) -> {
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(filePath);
+        it.setTextDocument(_textDocumentIdentifier);
+      };
+      CodeLensParams _doubleArrow = ObjectExtensions.<CodeLensParams>operator_doubleArrow(_codeLensParams, _function);
+      final CompletableFuture<List<? extends CodeLens>> codeLenses = this.languageServer.codeLens(_doubleArrow);
+      final Function1<CodeLens, CodeLens> _function_1 = (CodeLens it) -> {
+        try {
+          return this.languageServer.resolveCodeLens(it).get();
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      };
+      final List<CodeLens> result = IterableExtensions.<CodeLens>toList(ListExtensions.map(codeLenses.get(), _function_1));
+      if ((configuration.assertCodeLenses != null)) {
+        configuration.assertCodeLenses.apply(result);
+      } else {
+        this.assertEquals(configuration.expectedCodeLensItems, this.toExpectation(result));
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   protected void testCompletion(final Procedure1<? super TestCompletionConfiguration> configurator) {
     try {
       @Extension
@@ -944,6 +1011,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((Void)null);
     } else if (it instanceof Map) {
       return _toExpectation((Map<Object, Object>)it);
+    } else if (it instanceof CodeLens) {
+      return _toExpectation((CodeLens)it);
     } else if (it instanceof ColoringInformation) {
       return _toExpectation((ColoringInformation)it);
     } else if (it instanceof CompletionItem) {

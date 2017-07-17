@@ -132,7 +132,8 @@ public class WorkspaceManager {
         final Provider<Map<String, ResourceDescriptionsData>> _function_1 = () -> {
           return this.fullIndex;
         };
-        projectManager.initialize(projectDescription, projectConfig, this.issueAcceptor, this.openedDocumentsContentProvider, _function_1, cancelIndicator);
+        projectManager.initialize(projectDescription, projectConfig, this.issueAcceptor, 
+          this.openedDocumentsContentProvider, _function_1, cancelIndicator);
         this.projectName2ProjectManager.put(projectDescription.getName(), projectManager);
         newProjects.add(projectDescription);
       }
@@ -150,7 +151,8 @@ public class WorkspaceManager {
   
   protected IWorkspaceConfig getWorkspaceConfig() {
     if ((this._workspaceConfig == null)) {
-      final ResponseError error = new ResponseError(ResponseErrorCode.serverNotInitialized, "Workspace has not been initialized yet.", null);
+      final ResponseError error = new ResponseError(ResponseErrorCode.serverNotInitialized, 
+        "Workspace has not been initialized yet.", null);
       throw new ResponseErrorException(error);
     }
     return this._workspaceConfig;

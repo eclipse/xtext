@@ -17,6 +17,7 @@ import java.util.function.Function
 import org.eclipse.emf.common.util.URI
 import org.eclipse.lsp4j.CodeActionParams
 import org.eclipse.lsp4j.CodeLens
+import org.eclipse.lsp4j.CodeLensOptions
 import org.eclipse.lsp4j.CodeLensParams
 import org.eclipse.lsp4j.ColoringParams
 import org.eclipse.lsp4j.CompletionItem
@@ -63,12 +64,14 @@ import org.eclipse.lsp4j.services.TextDocumentService
 import org.eclipse.lsp4j.services.WorkspaceService
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
+import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver
+import org.eclipse.xtext.ide.server.codelens.ICodeLensService
 import org.eclipse.xtext.ide.server.coloring.IColoringService
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 import org.eclipse.xtext.ide.server.formatting.FormattingService
-import org.eclipse.xtext.ide.server.hover.HoverService
+import org.eclipse.xtext.ide.server.hover.IHoverService
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
@@ -100,6 +103,13 @@ import org.eclipse.xtext.validation.Issue
 		this.workspaceManager = manager
 		resourceAccess = new WorkspaceResourceAccess(workspaceManager)
 	}
+	
+	private def Iterable<? extends IResourceServiceProvider> getAllLanguages() {
+		this.languagesRegistry.extensionToFactoryMap.keySet.toList.sort.map[ext|
+			val synthUri = URI.createURI("synth:///file."+ext)
+			return synthUri.resourceServiceProvider
+		]
+	} 
 
 	override CompletableFuture<InitializeResult> initialize(InitializeParams params) {
 		if (this.params !== null) {
@@ -111,13 +121,20 @@ import org.eclipse.xtext.validation.Issue
 		}
 		this.params = params
 		val result = new InitializeResult
-		result.capabilities = new ServerCapabilities => [
+		var capabilities = new ServerCapabilities => [
 			hoverProvider = true
 			definitionProvider = true
 			referencesProvider = true
 			documentSymbolProvider = true
 			workspaceSymbolProvider = true
-            //TODO make this language specific
+			
+			// check if a language with code lens capability exists
+			if (allLanguages.exists[get(ICodeLensService)!==null]) {
+				codeLensProvider = new CodeLensOptions => [
+					resolveProvider = allLanguages.exists[get(ICodeLensResolver)!==null]
+				]
+			}
+			
             signatureHelpProvider = new SignatureHelpOptions(#['(', ','])
 			textDocumentSync = TextDocumentSyncKind.Incremental
 			completionProvider = new CompletionOptions => [
@@ -128,7 +145,11 @@ import org.eclipse.xtext.validation.Issue
 			documentRangeFormattingProvider = true
 			documentHighlightProvider = true
 		]
-
+		for (language : allLanguages) {
+			language.get(ICapabilitiesContributor)?.contribute(capabilities, params)
+		}
+		result.capabilities = capabilities
+		
 		requestManager.lockWrite [
 			workspaceManager.initialize(baseDir, [this.publishDiagnostics($0, $1)], CancelIndicator.NullImpl)
 			return null
@@ -362,9 +383,9 @@ import org.eclipse.xtext.validation.Issue
 		return requestManager.runRead[ cancelIndicator |
 			val uri = params.textDocument.uri.toUri
 			val resourceServiceProvider = uri.resourceServiceProvider
-			val hoverService = resourceServiceProvider?.get(HoverService)
+			val hoverService = resourceServiceProvider?.get(IHoverService)
 			if (hoverService === null)
-				return HoverService.EMPTY_HOVER
+				return IHoverService.EMPTY_HOVER
 
 			return workspaceManager.doRead(uri) [ document, resource |
 				hoverService.hover(document, resource, params, cancelIndicator)
@@ -409,13 +430,62 @@ import org.eclipse.xtext.validation.Issue
 	override codeAction(CodeActionParams params) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
-
+	
+	private def void installURI(List<? extends CodeLens> codeLenses, String uri) {
+		for (lens : codeLenses) {
+			if (lens.data !== null) {
+				lens.data = newArrayList(uri, lens.data)
+			} else {
+				lens.data = uri
+			}
+		}
+	}
+	
+	private def URI uninstallURI(CodeLens lens) {
+		var URI result = null
+		if (lens.data instanceof String) {
+			result = URI.createURI(lens.data.toString)
+			lens.data = null
+		} else if (lens.data instanceof List<?>) {
+			val l = lens.data as List<?>
+			result = URI.createURI(l.head.toString)
+			lens.data = l.get(1)
+		}
+		return result
+	}
+	
 	override codeLens(CodeLensParams params) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.runRead[ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val codeLensService = resourceServiceProvider?.get(ICodeLensService)
+			if (codeLensService === null)
+				return emptyList
+
+			return workspaceManager.doRead(uri) [ document, resource |
+				val result = codeLensService.computeCodeLenses(document, resource, params, cancelIndicator)
+				installURI(result, uri.toString)
+				return result
+			]
+		]
 	}
 
 	override resolveCodeLens(CodeLens unresolved) {
-		return CompletableFuture.completedFuture(unresolved)
+		val uri = uninstallURI(unresolved)
+		if (uri === null) {
+			return CompletableFuture.completedFuture(unresolved)
+		}
+		return requestManager.runRead[ cancelIndicator |
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val resolver = resourceServiceProvider?.get(ICodeLensResolver)
+			if (resolver === null)
+				return unresolved
+
+			return workspaceManager.doRead(uri) [ document, resource |
+				val result = resolver.resolveCodeLens(document, resource, unresolved, cancelIndicator)
+				return result
+			]
+		]
 	}
 
 	override formatting(DocumentFormattingParams params) {
