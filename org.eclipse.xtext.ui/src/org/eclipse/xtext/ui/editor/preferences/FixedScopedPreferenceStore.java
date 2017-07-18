@@ -18,6 +18,8 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.util.SafeRunnable;
 import org.osgi.service.prefs.BackingStoreException;
 
+import com.google.common.base.Objects;
+
 /**
  * Mainly copied from {@link org.eclipse.ui.preferences.ScopedPreferenceStore}.
  * It fixes the memory leak described in 
@@ -703,7 +705,7 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 			// removing a non-existing preference is a no-op so call the Core
 			// API directly
 			getStorePreferences().remove(name);
-			if (oldValue != defaultValue){
+			if (!Objects.equal(oldValue, defaultValue)) {
 				dirty = true;
 				firePropertyChangeEvent(name, oldValue, defaultValue);
 			}
