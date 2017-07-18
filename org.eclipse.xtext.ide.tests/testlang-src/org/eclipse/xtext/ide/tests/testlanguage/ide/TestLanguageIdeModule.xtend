@@ -8,6 +8,9 @@
 package org.eclipse.xtext.ide.tests.testlanguage.ide
 
 import org.eclipse.xtext.ide.server.ILanguageServerExtension
+import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver
+import org.eclipse.xtext.ide.tests.testlanguage.scoping.CodeLensProvider
+import org.eclipse.xtext.ide.server.codelens.ICodeLensService
 
 /**
  * Use this class to register ide components.
@@ -16,6 +19,14 @@ class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
 	
 	def Class<? extends ILanguageServerExtension> bindLanguageServerExtension() {
 		TestLangLSPExtension
+	}
+	
+	def Class<? extends ICodeLensResolver> bindICodeLensResolver() {
+		CodeLensProvider
+	}
+	
+	def Class<? extends ICodeLensService> bindICodeLensService() {
+		CodeLensProvider
 	}
 	
 }

@@ -67,6 +67,8 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
+import org.eclipse.lsp4j.CodeLens
+import org.eclipse.lsp4j.CodeLensParams
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -287,6 +289,32 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	
 	protected dispatch def String toExpectation(ColoringInformation it) {
 		return '''«range.toExpectation» -> [«styles.join(', ')»]''';
+	}
+	
+	protected dispatch def String toExpectation(CodeLens it) {
+		return command.title + " " +range.toExpectation
+	}
+	
+	@Accessors static class TestCodeLensConfiguration extends TextDocumentPositionConfiguration {
+		String expectedCodeLensItems = ''
+		(List<? extends CodeLens>)=>void assertCodeLenses = null
+	}
+	
+	protected def void testCodeLens((TestCodeLensConfiguration)=>void configurator) {
+		val extension configuration = new TestCodeLensConfiguration
+		configuration.filePath = 'MyModel.' + fileExtension
+		configurator.apply(configuration)
+		val filePath = initializeContext(configuration).uri
+		val codeLenses = languageServer.codeLens(new CodeLensParams=>[
+			textDocument = new TextDocumentIdentifier(filePath)
+		])
+		val result = codeLenses.get.map[languageServer.resolveCodeLens(it).get].toList
+
+		if (configuration.assertCodeLenses !== null) {
+			configuration.assertCodeLenses.apply(result)
+		} else {
+			assertEquals(expectedCodeLensItems, result.toExpectation)
+		}
 	}
 
 	protected def void testCompletion((TestCompletionConfiguration)=>void configurator) {

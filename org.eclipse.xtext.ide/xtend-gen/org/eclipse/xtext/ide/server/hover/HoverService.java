@@ -21,6 +21,7 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
 import org.eclipse.xtext.ide.server.hover.HoverContext;
+import org.eclipse.xtext.ide.server.hover.IHoverService;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
@@ -40,9 +41,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  */
 @Singleton
 @SuppressWarnings("all")
-public class HoverService {
-  public final static Hover EMPTY_HOVER = new Hover(Collections.<Either<String, MarkedString>>emptyList(), null);
-  
+public class HoverService implements IHoverService {
   @Inject
   @Extension
   private DocumentExtensions _documentExtensions;
@@ -59,6 +58,7 @@ public class HoverService {
   @Extension
   private IEObjectDocumentationProvider _iEObjectDocumentationProvider;
   
+  @Override
   public Hover hover(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator) {
     final int offset = document.getOffSet(params.getPosition());
     final HoverContext context = this.createContext(document, resource, offset);
@@ -96,15 +96,15 @@ public class HoverService {
   
   protected Hover hover(final HoverContext context) {
     if ((context == null)) {
-      return HoverService.EMPTY_HOVER;
+      return IHoverService.EMPTY_HOVER;
     }
     final List<Either<String, MarkedString>> contents = this.getContents(context);
     if ((contents == null)) {
-      return HoverService.EMPTY_HOVER;
+      return IHoverService.EMPTY_HOVER;
     }
     final Range range = this.getRange(context);
     if ((range == null)) {
-      return HoverService.EMPTY_HOVER;
+      return IHoverService.EMPTY_HOVER;
     }
     return new Hover(contents, range);
   }

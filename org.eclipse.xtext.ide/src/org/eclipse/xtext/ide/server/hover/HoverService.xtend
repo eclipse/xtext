@@ -36,9 +36,7 @@ import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
  * @since 2.11
  */
 @Singleton
-class HoverService {
-
-	public static val EMPTY_HOVER = new Hover(emptyList, null)
+class HoverService implements IHoverService {
 
 	@Inject
 	extension DocumentExtensions
@@ -52,7 +50,7 @@ class HoverService {
 	@Inject
 	extension IEObjectDocumentationProvider
 	
-	def Hover hover(
+	override Hover hover(
 		Document document, 
 		XtextResource resource, 
 		TextDocumentPositionParams params,

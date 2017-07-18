@@ -8,8 +8,11 @@
 package org.eclipse.xtext.ide.tests.testlanguage.ide;
 
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
+import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
+import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.AbstractTestLanguageIdeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension;
+import org.eclipse.xtext.ide.tests.testlanguage.scoping.CodeLensProvider;
 
 /**
  * Use this class to register ide components.
@@ -18,5 +21,13 @@ import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension;
 public class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
   public Class<? extends ILanguageServerExtension> bindLanguageServerExtension() {
     return TestLangLSPExtension.class;
+  }
+  
+  public Class<? extends ICodeLensResolver> bindICodeLensResolver() {
+    return CodeLensProvider.class;
+  }
+  
+  public Class<? extends ICodeLensService> bindICodeLensService() {
+    return CodeLensProvider.class;
   }
 }
