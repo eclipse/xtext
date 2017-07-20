@@ -366,11 +366,21 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		return false;
 	}
 
+	private boolean isInRequestedRange(int offset, int endOffset) {
+		Collection<ITextRegion> regions = request.getRegions();
+		if (regions.isEmpty())
+			return true;
+		for (org.eclipse.xtext.util.ITextRegion region : regions)
+			if (region.getOffset() <= offset && region.getOffset() + region.getLength() >= endOffset)
+				return true;
+		return false;
+	}
+
 	protected List<ITextReplacement> postProcess(IFormattableDocument document, List<ITextReplacement> replacements) {
 		List<ITextSegment> expected = Lists.newArrayList();
 		IHiddenRegion current = getTextRegionAccess().regionForRootEObject().getPreviousHiddenRegion();
 		while (current != null) {
-			if (current.isUndefined())
+			if (current.isUndefined() && isInRequestedRange(current.getOffset(), current.getEndOffset()))
 				expected.addAll(current.getMergedSpaces());
 			current = current.getNextHiddenRegion();
 		}
