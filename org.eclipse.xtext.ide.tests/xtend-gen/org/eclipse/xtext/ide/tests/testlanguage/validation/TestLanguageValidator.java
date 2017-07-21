@@ -7,7 +7,10 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.validation;
 
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
 import org.eclipse.xtext.ide.tests.testlanguage.validation.AbstractTestLanguageValidator;
+import org.eclipse.xtext.validation.Check;
 
 /**
  * This class contains custom validation rules.
@@ -16,4 +19,16 @@ import org.eclipse.xtext.ide.tests.testlanguage.validation.AbstractTestLanguageV
  */
 @SuppressWarnings("all")
 public class TestLanguageValidator extends AbstractTestLanguageValidator {
+  public final static String INVALID_NAME = "invalidName";
+  
+  @Check
+  public void checkGreetingStartsWithCapital(final TypeDeclaration type) {
+    boolean _isUpperCase = Character.isUpperCase(type.getName().charAt(0));
+    boolean _not = (!_isUpperCase);
+    if (_not) {
+      this.warning("Name should start with a capital", 
+        TestLanguagePackage.Literals.TYPE_DECLARATION__NAME, 
+        TestLanguageValidator.INVALID_NAME);
+    }
+  }
 }

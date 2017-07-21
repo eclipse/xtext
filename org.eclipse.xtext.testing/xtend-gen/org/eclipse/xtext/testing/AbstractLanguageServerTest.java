@@ -24,12 +24,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+import org.eclipse.lsp4j.CodeActionContext;
+import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.CodeLens;
 import org.eclipse.lsp4j.CodeLensParams;
 import org.eclipse.lsp4j.ColoringInformation;
 import org.eclipse.lsp4j.ColoringParams;
+import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionList;
 import org.eclipse.lsp4j.Diagnostic;
@@ -59,6 +63,7 @@ import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.TextDocumentItem;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
@@ -133,6 +138,31 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     
     public void setAssertCodeLenses(final Procedure1<? super List<? extends CodeLens>> assertCodeLenses) {
       this.assertCodeLenses = assertCodeLenses;
+    }
+  }
+  
+  @Accessors
+  public static class TestCodeActionConfiguration extends TextDocumentPositionConfiguration {
+    private String expectedCodeActions = "";
+    
+    private Procedure1<? super List<? extends Command>> assertCodeActions = null;
+    
+    @Pure
+    public String getExpectedCodeActions() {
+      return this.expectedCodeActions;
+    }
+    
+    public void setExpectedCodeActions(final String expectedCodeActions) {
+      this.expectedCodeActions = expectedCodeActions;
+    }
+    
+    @Pure
+    public Procedure1<? super List<? extends Command>> getAssertCodeActions() {
+      return this.assertCodeActions;
+    }
+    
+    public void setAssertCodeActions(final Procedure1<? super List<? extends Command>> assertCodeActions) {
+      this.assertCodeActions = assertCodeActions;
     }
   }
   
@@ -628,6 +658,83 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
+  protected String _toExpectation(final Command it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("command : ");
+    String _command = it.getCommand();
+    _builder.append(_command);
+    _builder.newLineIfNotEmpty();
+    _builder.append("title : ");
+    String _title = it.getTitle();
+    _builder.append(_title);
+    _builder.newLineIfNotEmpty();
+    _builder.append("args : ");
+    _builder.newLine();
+    _builder.append("\t");
+    final Function1<Object, CharSequence> _function = (Object it_1) -> {
+      return this.toExpectation(it_1);
+    };
+    String _join = IterableExtensions.<Object>join(it.getArguments(), ",", _function);
+    _builder.append(_join, "\t");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _toExpectation(final WorkspaceEdit it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("changes :");
+    _builder.newLine();
+    {
+      Set<Map.Entry<String, List<TextEdit>>> _entrySet = it.getChanges().entrySet();
+      for(final Map.Entry<String, List<TextEdit>> entry : _entrySet) {
+        _builder.append("\t");
+        String _lastSegment = org.eclipse.emf.common.util.URI.createURI(entry.getKey()).lastSegment();
+        _builder.append(_lastSegment, "\t");
+        _builder.append(" : ");
+        String _expectation = this.toExpectation(entry.getValue());
+        _builder.append(_expectation, "\t");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("documentChanges : ");
+    _builder.newLine();
+    _builder.append("\t");
+    String _expectation_1 = this.toExpectation(it.getDocumentChanges());
+    _builder.append(_expectation_1, "\t");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected void testCodeAction(final Procedure1<? super AbstractLanguageServerTest.TestCodeActionConfiguration> configurator) {
+    try {
+      @Extension
+      final AbstractLanguageServerTest.TestCodeActionConfiguration configuration = new AbstractLanguageServerTest.TestCodeActionConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      final String filePath = this.initializeContext(configuration).getUri();
+      CodeActionParams _codeActionParams = new CodeActionParams();
+      final Procedure1<CodeActionParams> _function = (CodeActionParams it) -> {
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(filePath);
+        it.setTextDocument(_textDocumentIdentifier);
+        CodeActionContext _codeActionContext = new CodeActionContext();
+        final Procedure1<CodeActionContext> _function_1 = (CodeActionContext it_1) -> {
+          it_1.setDiagnostics(this.getDiagnostics().get(filePath));
+        };
+        CodeActionContext _doubleArrow = ObjectExtensions.<CodeActionContext>operator_doubleArrow(_codeActionContext, _function_1);
+        it.setContext(_doubleArrow);
+      };
+      CodeActionParams _doubleArrow = ObjectExtensions.<CodeActionParams>operator_doubleArrow(_codeActionParams, _function);
+      final CompletableFuture<List<? extends Command>> codeLenses = this.languageServer.codeAction(_doubleArrow);
+      if ((configuration.assertCodeActions != null)) {
+        configuration.assertCodeActions.apply(codeLenses.get());
+      } else {
+        this.assertEquals(configuration.expectedCodeActions, this.toExpectation(codeLenses.get()));
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   protected void testCompletion(final Procedure1<? super TestCompletionConfiguration> configurator) {
     try {
       @Extension
@@ -1015,6 +1122,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((CodeLens)it);
     } else if (it instanceof ColoringInformation) {
       return _toExpectation((ColoringInformation)it);
+    } else if (it instanceof Command) {
+      return _toExpectation((Command)it);
     } else if (it instanceof CompletionItem) {
       return _toExpectation((CompletionItem)it);
     } else if (it instanceof DocumentHighlight) {
@@ -1033,6 +1142,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((SymbolInformation)it);
     } else if (it instanceof TextEdit) {
       return _toExpectation((TextEdit)it);
+    } else if (it instanceof WorkspaceEdit) {
+      return _toExpectation((WorkspaceEdit)it);
     } else if (it instanceof Either) {
       return _toExpectation((Either<?, ?>)it);
     } else {

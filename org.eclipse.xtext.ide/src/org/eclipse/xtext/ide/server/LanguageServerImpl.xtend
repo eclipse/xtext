@@ -82,6 +82,7 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -134,6 +135,9 @@ import org.eclipse.xtext.validation.Issue
 					resolveProvider = allLanguages.exists[get(ICodeLensResolver)!==null]
 				]
 			}
+			
+			// check if a language with code actions capability exists
+			codeActionProvider = allLanguages.exists[get(ICodeActionService)!==null] 
 			
             signatureHelpProvider = new SignatureHelpOptions(#['(', ','])
 			textDocumentSync = TextDocumentSyncKind.Incremental
@@ -428,7 +432,17 @@ import org.eclipse.xtext.validation.Issue
 	}
 
 	override codeAction(CodeActionParams params) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.runRead [ cancelIndicator |
+			val uri = params.textDocument.uri.toUri;
+			val serviceProvider = uri.resourceServiceProvider;
+			val service =  serviceProvider?.get(ICodeActionService);
+			if (service === null)
+				return emptyList
+			
+			return workspaceManager.doRead(uri) [doc, resource |
+				service.getCodeActions(doc, resource, params, cancelIndicator)
+			]
+		]
 	}
 	
 	private def void installURI(List<? extends CodeLens> codeLenses, String uri) {

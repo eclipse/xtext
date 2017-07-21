@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.ide.tests.testlanguage.scoping;
+package org.eclipse.xtext.ide.tests.testlanguage.ide.server;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class CodeLensProvider implements ICodeLensService, ICodeLensResolver {
+public class CodeLensService implements ICodeLensService, ICodeLensResolver {
   @Override
   public List<? extends CodeLens> computeCodeLenses(final Document document, final XtextResource resource, final CodeLensParams params, final CancelIndicator indicator) {
     CodeLens _codeLens = new CodeLens();
