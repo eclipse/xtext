@@ -8,6 +8,8 @@
 package org.eclipse.xtext.ide.server;
 
 import com.google.inject.Singleton;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,26 +24,38 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 @SuppressWarnings("all")
 public class UriExtensions {
   public URI toUri(final String pathWithScheme) {
-    final java.net.URI javaNetUri = java.net.URI.create(pathWithScheme);
-    final String path = this.toPath(javaNetUri);
-    return URI.createURI(path);
+    String path = URI.createURI(pathWithScheme).path();
+    return URI.createURI(this.toPath(path));
   }
   
   public String toPath(final URI uri) {
-    return this.toPath(java.net.URI.create(uri.toString()));
+    return uri.toString();
   }
   
   public String toPath(final java.net.URI uri) {
+    return this.toPath(uri.getPath());
+  }
+  
+  /**
+   * We need to check if current path represents directory in file system
+   * and need to add trailing slash if path represents directory.
+   */
+  private String toPath(final String uri) {
     try {
-      final Path path = Paths.get(uri);
-      return path.toUri().toString();
-    } catch (final Throwable _t) {
-      if (_t instanceof FileSystemNotFoundException) {
-        final FileSystemNotFoundException e = (FileSystemNotFoundException)_t;
-        return uri.toString();
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+      try {
+        final Path path = Paths.get(uri);
+        return URLDecoder.decode(path.toUri().toString(), StandardCharsets.UTF_8.name());
+      } catch (final Throwable _t) {
+        if (_t instanceof FileSystemNotFoundException) {
+          final FileSystemNotFoundException e = (FileSystemNotFoundException)_t;
+          return uri;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
 }
+

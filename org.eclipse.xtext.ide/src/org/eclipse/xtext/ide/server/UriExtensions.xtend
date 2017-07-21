@@ -11,6 +11,8 @@ import com.google.inject.Singleton
 import java.nio.file.FileSystemNotFoundException
 import java.nio.file.Paths
 import org.eclipse.emf.common.util.URI
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -20,21 +22,31 @@ import org.eclipse.emf.common.util.URI
 class UriExtensions {
 
 	def URI toUri(String pathWithScheme) {
-		val javaNetUri = java.net.URI.create(pathWithScheme);
-		val path = javaNetUri.toPath
-		return URI.createURI(path)
+		// URI is used to get path of the uri without scheme
+		var path = URI.createURI(pathWithScheme).path
+		return URI.createURI(path.toPath)
 	}
 
 	def String toPath(URI uri) {
-		return java.net.URI.create(uri.toString).toPath
+		return uri.toString
 	}
 
 	def String toPath(java.net.URI uri) {
+		return uri.path.toPath
+	}
+
+	/**
+	 * We need to check if current path represents directory in file system
+	 * and need to add trailing slash if path represents directory.
+	 */
+	private def toPath(String uri) {
 		try {
 			val path = Paths.get(uri)
-			return path.toUri.toString
+			// On Linux Paths.get returns encoded URI (e.x. cyrillic)
+			return URLDecoder.decode(path.toUri.toString, StandardCharsets.UTF_8.name);
 		} catch (FileSystemNotFoundException e) {
-			return uri.toString
+			return uri
 		}
 	}
 }
+
