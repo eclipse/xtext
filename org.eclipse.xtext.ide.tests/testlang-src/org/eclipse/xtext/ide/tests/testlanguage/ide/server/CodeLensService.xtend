@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ide.tests.testlanguage.scoping
+package org.eclipse.xtext.ide.tests.testlanguage.ide.server
 
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver
@@ -20,7 +20,7 @@ import org.eclipse.lsp4j.Position
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class CodeLensProvider implements ICodeLensService, ICodeLensResolver {
+class CodeLensService implements ICodeLensService, ICodeLensResolver {
 	
 	override computeCodeLenses(Document document, XtextResource resource, CodeLensParams params, CancelIndicator indicator) {
 		return #[new CodeLens() => [

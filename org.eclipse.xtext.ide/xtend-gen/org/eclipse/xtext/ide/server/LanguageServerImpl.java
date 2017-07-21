@@ -89,6 +89,7 @@ import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
 import org.eclipse.xtext.ide.server.coloring.IColoringService;
@@ -217,15 +218,20 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         CodeLensOptions _doubleArrow = ObjectExtensions.<CodeLensOptions>operator_doubleArrow(_codeLensOptions, _function_2);
         it.setCodeLensProvider(_doubleArrow);
       }
+      final Function1<IResourceServiceProvider, Boolean> _function_3 = (IResourceServiceProvider it_1) -> {
+        ICodeActionService _get = it_1.<ICodeActionService>get(ICodeActionService.class);
+        return Boolean.valueOf((_get != null));
+      };
+      it.setCodeActionProvider(Boolean.valueOf(IterableExtensions.exists(this.getAllLanguages(), _function_3)));
       SignatureHelpOptions _signatureHelpOptions = new SignatureHelpOptions(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("(", ",")));
       it.setSignatureHelpProvider(_signatureHelpOptions);
       it.setTextDocumentSync(TextDocumentSyncKind.Incremental);
       CompletionOptions _completionOptions = new CompletionOptions();
-      final Procedure1<CompletionOptions> _function_3 = (CompletionOptions it_1) -> {
+      final Procedure1<CompletionOptions> _function_4 = (CompletionOptions it_1) -> {
         it_1.setResolveProvider(Boolean.valueOf(false));
         it_1.setTriggerCharacters(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(".")));
       };
-      CompletionOptions _doubleArrow_1 = ObjectExtensions.<CompletionOptions>operator_doubleArrow(_completionOptions, _function_3);
+      CompletionOptions _doubleArrow_1 = ObjectExtensions.<CompletionOptions>operator_doubleArrow(_completionOptions, _function_4);
       it.setCompletionProvider(_doubleArrow_1);
       it.setDocumentFormattingProvider(Boolean.valueOf(true));
       it.setDocumentRangeFormattingProvider(Boolean.valueOf(true));
@@ -638,7 +644,23 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public CompletableFuture<List<? extends Command>> codeAction(final CodeActionParams params) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    final Function1<CancelIndicator, List<? extends Command>> _function = (CancelIndicator cancelIndicator) -> {
+      final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
+      final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      ICodeActionService _get = null;
+      if (serviceProvider!=null) {
+        _get=serviceProvider.<ICodeActionService>get(ICodeActionService.class);
+      }
+      final ICodeActionService service = _get;
+      if ((service == null)) {
+        return CollectionLiterals.<Command>emptyList();
+      }
+      final Function2<Document, XtextResource, List<? extends Command>> _function_1 = (Document doc, XtextResource resource) -> {
+        return service.getCodeActions(doc, resource, params, cancelIndicator);
+      };
+      return this.workspaceManager.<List<? extends Command>>doRead(uri, _function_1);
+    };
+    return this.requestManager.<List<? extends Command>>runRead(_function);
   }
   
   private void installURI(final List<? extends CodeLens> codeLenses, final String uri) {

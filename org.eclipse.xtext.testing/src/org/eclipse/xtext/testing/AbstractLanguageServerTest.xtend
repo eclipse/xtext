@@ -17,8 +17,13 @@ import java.nio.file.Paths
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CompletableFuture
+import org.eclipse.lsp4j.CodeActionContext
+import org.eclipse.lsp4j.CodeActionParams
+import org.eclipse.lsp4j.CodeLens
+import org.eclipse.lsp4j.CodeLensParams
 import org.eclipse.lsp4j.ColoringInformation
 import org.eclipse.lsp4j.ColoringParams
+import org.eclipse.lsp4j.Command
 import org.eclipse.lsp4j.CompletionItem
 import org.eclipse.lsp4j.CompletionList
 import org.eclipse.lsp4j.Diagnostic
@@ -47,6 +52,7 @@ import org.eclipse.lsp4j.TextDocumentIdentifier
 import org.eclipse.lsp4j.TextDocumentItem
 import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.TextEdit
+import org.eclipse.lsp4j.WorkspaceEdit
 import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
 import org.eclipse.lsp4j.jsonrpc.messages.Either
@@ -67,8 +73,6 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-import org.eclipse.lsp4j.CodeLens
-import org.eclipse.lsp4j.CodeLensParams
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -314,6 +318,47 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			configuration.assertCodeLenses.apply(result)
 		} else {
 			assertEquals(expectedCodeLensItems, result.toExpectation)
+		}
+	}
+	
+		protected dispatch def String toExpectation(Command it) '''
+		command : «command»
+		title : «title»
+		args : 
+			«arguments.join(',')[toExpectation]»
+	'''
+	
+	protected dispatch def String toExpectation(WorkspaceEdit it) '''
+		changes :
+			«FOR entry : changes.entrySet»
+				«org.eclipse.emf.common.util.URI.createURI(entry.key).lastSegment» : «entry.value.toExpectation»
+			«ENDFOR» 
+		documentChanges : 
+			«documentChanges.toExpectation»
+	'''
+	
+	@Accessors static class TestCodeActionConfiguration extends TextDocumentPositionConfiguration {
+		String expectedCodeActions = ''
+		
+		(List<? extends Command>)=>void assertCodeActions= null
+	}
+	
+	protected def void testCodeAction((TestCodeActionConfiguration)=>void configurator) {
+		val extension configuration = new TestCodeActionConfiguration
+		configuration.filePath = 'MyModel.' + fileExtension
+		configurator.apply(configuration)
+		val filePath = initializeContext(configuration).uri
+		val codeLenses = languageServer.codeAction(new CodeActionParams=>[
+			textDocument = new TextDocumentIdentifier(filePath)
+			context = new CodeActionContext => [
+				diagnostics = this.diagnostics.get(filePath)
+			]
+		])
+
+		if (configuration.assertCodeActions !== null) {
+			configuration.assertCodeActions.apply(codeLenses.get)
+		} else {
+			assertEquals(configuration.expectedCodeActions, codeLenses.get.toExpectation)
 		}
 	}
 

@@ -8,11 +8,13 @@
 package org.eclipse.xtext.ide.tests.testlanguage.ide;
 
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.AbstractTestLanguageIdeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension;
-import org.eclipse.xtext.ide.tests.testlanguage.scoping.CodeLensProvider;
+import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeActionService;
+import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeLensService;
 
 /**
  * Use this class to register ide components.
@@ -24,10 +26,14 @@ public class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
   }
   
   public Class<? extends ICodeLensResolver> bindICodeLensResolver() {
-    return CodeLensProvider.class;
+    return CodeLensService.class;
   }
   
   public Class<? extends ICodeLensService> bindICodeLensService() {
-    return CodeLensProvider.class;
+    return CodeLensService.class;
+  }
+  
+  public Class<? extends ICodeActionService> bindICodeActionService() {
+    return CodeActionService.class;
   }
 }

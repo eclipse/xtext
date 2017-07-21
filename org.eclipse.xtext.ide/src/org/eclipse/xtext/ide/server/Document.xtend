@@ -10,6 +10,7 @@ package org.eclipse.xtext.ide.server
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.lsp4j.Range
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -64,6 +65,12 @@ import org.eclipse.xtend.lib.annotations.Data
             }
         }
         return new Position(line, column)
+    }
+    
+    def String getSubstring(Range range) {
+    		val start = getOffSet(range.start)
+    		val end = getOffSet(range.end)
+    		return this.contents.substring(start, end)
     }
 
     def Document applyChanges(Iterable<? extends TextEdit> changes) {
