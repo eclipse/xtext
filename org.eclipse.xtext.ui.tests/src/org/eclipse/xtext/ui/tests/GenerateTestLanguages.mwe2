@@ -142,6 +142,10 @@ Workflow {
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/GH341TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = { 
 			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/BacktrackingContentAssistTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsWithConversionTimeout {
 				backtrack=true
