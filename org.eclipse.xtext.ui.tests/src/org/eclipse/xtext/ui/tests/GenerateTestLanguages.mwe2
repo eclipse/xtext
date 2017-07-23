@@ -29,6 +29,7 @@ Workflow {
 					manifest = {
 						merge = false
 					}
+					pluginXml = {}
 				}
 				runtimeTest = {
 					enabled = true
@@ -42,18 +43,23 @@ Workflow {
 				genericIde = {
 					enabled = true
 					root = runtimeProject
+					name = projectName
 					src = "${runtimeProject}/src"
 					srcGen = "${runtimeProject}/src-gen"
+					pluginXml = {}
 				}
 				eclipsePlugin = {
 					enabled = true
 					root = runtimeProject
+					name = projectName
 					src = "${runtimeProject}/src"
 					srcGen = "${runtimeProject}/src-gen"
+					pluginXml = {}
 				}
 				eclipsePluginTest = {
 					enabled = true
 					root = runtimeProject
+					name = projectName
 					src = "${runtimeProject}/src"
 					srcGen = "${runtimeProject}/src-gen"
 				}
