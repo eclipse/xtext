@@ -5,7 +5,7 @@ package org.eclipse.xtext.ui.tests.linking.ui.tests;
 
 import com.google.inject.Injector;
 import org.eclipse.xtext.testing.IInjectorProvider;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 
 public class ImportUriUiTestLanguageUiInjectorProvider implements IInjectorProvider {
 

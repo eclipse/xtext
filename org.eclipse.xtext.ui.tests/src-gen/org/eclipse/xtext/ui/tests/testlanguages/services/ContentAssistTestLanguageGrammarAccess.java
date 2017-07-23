@@ -31,16 +31,13 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cRulesAbstractRuleParserRuleCall_1_0 = (RuleCall)cRulesAssignment_1.eContents().get(0);
 		private final Keyword cEndKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Start:
-		//	"abstract rules"
-		//	rules+=AbstractRule+
-		//	"end";
+		//Start: /* SuppressWarnings[all] */ "abstract rules" rules+=AbstractRule+ "end";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"abstract rules" rules+=AbstractRule+ "end"
+		///* SuppressWarnings[all] */ "abstract rules" rules+=AbstractRule+ "end"
 		public Group getGroup() { return cGroup; }
 		
-		//"abstract rules"
+		///* SuppressWarnings[all] */ "abstract rules"
 		public Keyword getAbstractRulesKeyword_0() { return cAbstractRulesKeyword_0; }
 		
 		//rules+=AbstractRule+
@@ -219,10 +216,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	
-	//Start:
-	//	"abstract rules"
-	//	rules+=AbstractRule+
-	//	"end";
+	//Start: /* SuppressWarnings[all] */ "abstract rules" rules+=AbstractRule+ "end";
 	public StartElements getStartAccess() {
 		return pStart;
 	}

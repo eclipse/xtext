@@ -429,7 +429,7 @@ public class Bug303200TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ';' | LT
+	 *     LT | ';'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     expression=PostfixExpression (ambiguity) (rule end)

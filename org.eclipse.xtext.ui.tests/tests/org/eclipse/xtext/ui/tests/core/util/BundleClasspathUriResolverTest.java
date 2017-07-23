@@ -3,7 +3,7 @@ package org.eclipse.xtext.ui.tests.core.util;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.util.BundleClasspathUriResolver;
 import org.junit.Before;
 import org.junit.Test;

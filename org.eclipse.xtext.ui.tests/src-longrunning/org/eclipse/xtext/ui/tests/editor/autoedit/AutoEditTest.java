@@ -79,7 +79,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	}
 
 	protected IProject createPluginProject(String name) throws CoreException {
-		Injector injector = org.eclipse.xtext.ui.tests.ui.internal.TestsActivator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage");
+		Injector injector = org.eclipse.xtext.ui.tests.internal.TestsActivator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.setProjectName(name);

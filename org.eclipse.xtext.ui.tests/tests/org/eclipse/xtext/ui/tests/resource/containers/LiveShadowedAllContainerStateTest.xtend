@@ -16,7 +16,7 @@ import org.eclipse.xtext.resource.containers.IAllContainersState
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.resource.XtextLiveScopeResourceSetProvider
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator
+import org.eclipse.xtext.ui.tests.internal.TestsActivator
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.Before

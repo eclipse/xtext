@@ -65,7 +65,7 @@ public class DatatypeRuleTestLanguageSemanticSequencer extends AbstractDelegatin
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DatatypeRuleTestPackage.Literals.COMPOSITE_TYPE_ENTRY__DATA_TYPE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCompositeTypeEntryAccess().getDataTypeTypeTypeIdParserRuleCall_0_1(), semanticObject.getDataType());
+		feeder.accept(grammarAccess.getCompositeTypeEntryAccess().getDataTypeTypeTypeIdParserRuleCall_0_1(), semanticObject.eGet(DatatypeRuleTestPackage.Literals.COMPOSITE_TYPE_ENTRY__DATA_TYPE, false));
 		feeder.finish();
 	}
 	

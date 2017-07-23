@@ -163,7 +163,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'1.1' (child+=Child1_1
 		//	| child+=Child1_2
 		//	| child+=Child1_3)
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'1.1' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3) 'next'
@@ -172,7 +172,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'1.1'
 		public Keyword getDigitOneFullStopDigitOneKeyword_0() { return cDigitOneFullStopDigitOneKeyword_0; }
 		
-		//(child+=Child1_1 | child+=Child1_2 | child+=Child1_3)
+		//child+=Child1_1 | child+=Child1_2 | child+=Child1_3
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child1_1
@@ -213,7 +213,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'1.2' (child+=Child1_1
 		//	| child+=Child1_2
 		//	| child+=Child1_3)+
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'1.2' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)+ 'next'
@@ -265,7 +265,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'1.3' (child+=Child1_1
 		//	| child+=Child1_2
 		//	| child+=Child1_3)*
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario1} '1.3' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)* 'next'
@@ -320,7 +320,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'1.4' (child+=Child1_1
 		//	| child+=Child1_2
 		//	| child+=Child1_3)?
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario1} '1.4' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)? 'next'
@@ -374,7 +374,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Child1_1 Child1:
 		//	name=ID ':' (bool?='bool' 'keyword')?
 		//	enumType=EnumType // this is not ok
-		//	'child1' 'end'
+		//	'child1' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID ':' (bool?='bool' 'keyword')? enumType=EnumType // this is not ok
@@ -433,7 +433,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Child1_2 Child1:
 		//	name=ID ':' (bool?='bool' 'keyword')?
 		//	enumType=EnumType // this is not ok
-		//	'child2' 'end'
+		//	'child2' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID ':' (bool?='bool' 'keyword')? enumType=EnumType // this is not ok
@@ -492,7 +492,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Child1_3 Child1:
 		//	name=ID ':' (bool?='bool' 'keyword')?
 		//	enumType=EnumType // this is not ok
-		//	'child3' 'end'
+		//	'child3' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID ':' (bool?='bool' 'keyword')? enumType=EnumType // this is not ok
@@ -550,7 +550,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'2.1' (child+=Child2_1
 		//	| child+=Child2_2
 		//	| child+=Child2_3)
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'2.1' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3) 'next'
@@ -559,7 +559,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'2.1'
 		public Keyword getDigitTwoFullStopDigitOneKeyword_0() { return cDigitTwoFullStopDigitOneKeyword_0; }
 		
-		//(child+=Child2_1 | child+=Child2_2 | child+=Child2_3)
+		//child+=Child2_1 | child+=Child2_2 | child+=Child2_3
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child2_1
@@ -600,7 +600,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'2.2' (child+=Child2_1
 		//	| child+=Child2_2
 		//	| child+=Child2_3)+
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'2.2' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)+ 'next'
@@ -650,7 +650,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'2.3' (child+=Child2_4
 		//	| child+=Child2_5
 		//	| child+=Child2_6)
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'2.3' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6) 'next'
@@ -659,7 +659,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'2.3'
 		public Keyword getDigitTwoFullStopDigitThreeKeyword_0() { return cDigitTwoFullStopDigitThreeKeyword_0; }
 		
-		//(child+=Child2_4 | child+=Child2_5 | child+=Child2_6)
+		//child+=Child2_4 | child+=Child2_5 | child+=Child2_6
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child2_4
@@ -700,7 +700,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'2.4' (child+=Child2_4
 		//	| child+=Child2_5
 		//	| child+=Child2_6)+
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'2.4' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)+ 'next'
@@ -752,7 +752,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'2.5' (child+=Child2_1
 		//	| child+=Child2_2
 		//	| child+=Child2_3)?
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario2} '2.5' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)? 'next'
@@ -807,7 +807,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'2.6' (child+=Child2_1
 		//	| child+=Child2_2
 		//	| child+=Child2_3)*
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario2} '2.6' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)* 'next'
@@ -862,7 +862,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'2.7' (child+=Child2_4
 		//	| child+=Child2_5
 		//	| child+=Child2_6)?
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario2} '2.7' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)? 'next'
@@ -917,7 +917,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'2.8' (child+=Child2_4
 		//	| child+=Child2_5
 		//	| child+=Child2_6)*
-		//	'next'
+		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario2} '2.8' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)* 'next'
@@ -973,7 +973,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Child2_1 Child2:
 		//	name=ID ':' (bool?='bool' 'keyword')?
 		//	string=('a' | 'b')
-		//	'child1' 'end'
+		//	'child1' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID ':' (bool?='bool' 'keyword')? string=('a' | 'b') 'child1' 'end'
@@ -1038,7 +1038,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Child2_2 Child2:
 		//	name=ID ':' (bool?='bool' 'keyword')?
 		//	string=('a' | 'b')
-		//	'child2' 'end'
+		//	'child2' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID ':' (bool?='bool' 'keyword')? string=('a' | 'b') 'child2' 'end'
@@ -1103,7 +1103,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Child2_3 Child2:
 		//	name=ID ':' (bool?='bool' 'keyword')?
 		//	string=('a' | 'b')
-		//	'child3' 'end'
+		//	'child3' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID ':' (bool?='bool' 'keyword')? string=('a' | 'b') 'child3' 'end'
@@ -1168,7 +1168,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Child2_4 Child2:
 		//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-		//	'child1' 'end'
+		//	'child1' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b') 'child1' 'end'
@@ -1195,7 +1195,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'keyword'
 		public Keyword getKeywordKeyword_2_1() { return cKeywordKeyword_2_1; }
 		
-		//(string='a' | string='b')
+		//string='a' | string='b'
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
 		//string='a'
@@ -1236,7 +1236,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Child2_5 Child2:
 		//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-		//	'child2' 'end'
+		//	'child2' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b') 'child2' 'end'
@@ -1263,7 +1263,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'keyword'
 		public Keyword getKeywordKeyword_2_1() { return cKeywordKeyword_2_1; }
 		
-		//(string='a' | string='b')
+		//string='a' | string='b'
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
 		//string='a'
@@ -1304,7 +1304,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Child2_6 Child2:
 		//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-		//	'child3' 'end'
+		//	'child3' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b') 'child3' 'end'
@@ -1331,7 +1331,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'keyword'
 		public Keyword getKeywordKeyword_2_1() { return cKeywordKeyword_2_1; }
 		
-		//(string='a' | string='b')
+		//string='a' | string='b'
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
 		//string='a'
@@ -1491,7 +1491,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'1.1' (child+=Child1_1
 	//	| child+=Child1_2
 	//	| child+=Child1_3)
-	//	'next'
+	//	'next';
 	public Scenario1_1Elements getScenario1_1Access() {
 		return pScenario1_1;
 	}
@@ -1504,7 +1504,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'1.2' (child+=Child1_1
 	//	| child+=Child1_2
 	//	| child+=Child1_3)+
-	//	'next'
+	//	'next';
 	public Scenario1_2Elements getScenario1_2Access() {
 		return pScenario1_2;
 	}
@@ -1518,7 +1518,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'1.3' (child+=Child1_1
 	//	| child+=Child1_2
 	//	| child+=Child1_3)*
-	//	'next'
+	//	'next';
 	public Scenario1_3Elements getScenario1_3Access() {
 		return pScenario1_3;
 	}
@@ -1532,7 +1532,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'1.4' (child+=Child1_1
 	//	| child+=Child1_2
 	//	| child+=Child1_3)?
-	//	'next'
+	//	'next';
 	public Scenario1_4Elements getScenario1_4Access() {
 		return pScenario1_4;
 	}
@@ -1544,7 +1544,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child1_1 Child1:
 	//	name=ID ':' (bool?='bool' 'keyword')?
 	//	enumType=EnumType // this is not ok
-	//	'child1' 'end'
+	//	'child1' 'end';
 	public Child1_1Elements getChild1_1Access() {
 		return pChild1_1;
 	}
@@ -1556,7 +1556,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child1_2 Child1:
 	//	name=ID ':' (bool?='bool' 'keyword')?
 	//	enumType=EnumType // this is not ok
-	//	'child2' 'end'
+	//	'child2' 'end';
 	public Child1_2Elements getChild1_2Access() {
 		return pChild1_2;
 	}
@@ -1568,7 +1568,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child1_3 Child1:
 	//	name=ID ':' (bool?='bool' 'keyword')?
 	//	enumType=EnumType // this is not ok
-	//	'child3' 'end'
+	//	'child3' 'end';
 	public Child1_3Elements getChild1_3Access() {
 		return pChild1_3;
 	}
@@ -1591,7 +1591,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'2.1' (child+=Child2_1
 	//	| child+=Child2_2
 	//	| child+=Child2_3)
-	//	'next'
+	//	'next';
 	public Scenario2_1Elements getScenario2_1Access() {
 		return pScenario2_1;
 	}
@@ -1604,7 +1604,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'2.2' (child+=Child2_1
 	//	| child+=Child2_2
 	//	| child+=Child2_3)+
-	//	'next'
+	//	'next';
 	public Scenario2_2Elements getScenario2_2Access() {
 		return pScenario2_2;
 	}
@@ -1617,7 +1617,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'2.3' (child+=Child2_4
 	//	| child+=Child2_5
 	//	| child+=Child2_6)
-	//	'next'
+	//	'next';
 	public Scenario2_3Elements getScenario2_3Access() {
 		return pScenario2_3;
 	}
@@ -1630,7 +1630,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'2.4' (child+=Child2_4
 	//	| child+=Child2_5
 	//	| child+=Child2_6)+
-	//	'next'
+	//	'next';
 	public Scenario2_4Elements getScenario2_4Access() {
 		return pScenario2_4;
 	}
@@ -1644,7 +1644,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'2.5' (child+=Child2_1
 	//	| child+=Child2_2
 	//	| child+=Child2_3)?
-	//	'next'
+	//	'next';
 	public Scenario2_5Elements getScenario2_5Access() {
 		return pScenario2_5;
 	}
@@ -1658,7 +1658,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'2.6' (child+=Child2_1
 	//	| child+=Child2_2
 	//	| child+=Child2_3)*
-	//	'next'
+	//	'next';
 	public Scenario2_6Elements getScenario2_6Access() {
 		return pScenario2_6;
 	}
@@ -1672,7 +1672,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'2.7' (child+=Child2_4
 	//	| child+=Child2_5
 	//	| child+=Child2_6)?
-	//	'next'
+	//	'next';
 	public Scenario2_7Elements getScenario2_7Access() {
 		return pScenario2_7;
 	}
@@ -1686,7 +1686,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	'2.8' (child+=Child2_4
 	//	| child+=Child2_5
 	//	| child+=Child2_6)*
-	//	'next'
+	//	'next';
 	public Scenario2_8Elements getScenario2_8Access() {
 		return pScenario2_8;
 	}
@@ -1698,7 +1698,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child2_1 Child2:
 	//	name=ID ':' (bool?='bool' 'keyword')?
 	//	string=('a' | 'b')
-	//	'child1' 'end'
+	//	'child1' 'end';
 	public Child2_1Elements getChild2_1Access() {
 		return pChild2_1;
 	}
@@ -1710,7 +1710,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child2_2 Child2:
 	//	name=ID ':' (bool?='bool' 'keyword')?
 	//	string=('a' | 'b')
-	//	'child2' 'end'
+	//	'child2' 'end';
 	public Child2_2Elements getChild2_2Access() {
 		return pChild2_2;
 	}
@@ -1722,7 +1722,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child2_3 Child2:
 	//	name=ID ':' (bool?='bool' 'keyword')?
 	//	string=('a' | 'b')
-	//	'child3' 'end'
+	//	'child3' 'end';
 	public Child2_3Elements getChild2_3Access() {
 		return pChild2_3;
 	}
@@ -1733,7 +1733,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	//Child2_4 Child2:
 	//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-	//	'child1' 'end'
+	//	'child1' 'end';
 	public Child2_4Elements getChild2_4Access() {
 		return pChild2_4;
 	}
@@ -1744,7 +1744,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	//Child2_5 Child2:
 	//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-	//	'child2' 'end'
+	//	'child2' 'end';
 	public Child2_5Elements getChild2_5Access() {
 		return pChild2_5;
 	}
@@ -1755,7 +1755,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	//Child2_6 Child2:
 	//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-	//	'child3' 'end'
+	//	'child3' 'end';
 	public Child2_6Elements getChild2_6Access() {
 		return pChild2_6;
 	}

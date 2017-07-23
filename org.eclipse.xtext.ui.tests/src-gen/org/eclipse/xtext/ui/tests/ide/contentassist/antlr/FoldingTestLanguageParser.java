@@ -4,14 +4,10 @@
 package org.eclipse.xtext.ui.tests.ide.contentassist.antlr;
 
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ui.tests.ide.contentassist.antlr.internal.InternalFoldingTestLanguageParser;
 import org.eclipse.xtext.ui.tests.services.FoldingTestLanguageGrammarAccess;
 
@@ -44,18 +40,7 @@ public class FoldingTestLanguageParser extends AbstractContentAssistParser {
 		}
 		return nameMappings.get(element);
 	}
-
-	@Override
-	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
-		try {
-			InternalFoldingTestLanguageParser typedParser = (InternalFoldingTestLanguageParser) parser;
-			typedParser.entryRuleFoldingModel();
-			return typedParser.getFollowElements();
-		} catch(RecognitionException ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
+			
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };

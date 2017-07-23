@@ -451,7 +451,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cEntriesConcreteWhereEntryParserRuleCall_1_1_1_0 = (RuleCall)cEntriesAssignment_1_1_1.eContents().get(0);
 		
 		//AndWhereEntry WhereEntry:
-		//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?
+		//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?
@@ -490,7 +490,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ConcreteWhereEntry WhereEntry:
 		//	ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry |
-		//	SubselectWhereEntry
+		//	SubselectWhereEntry;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry | SubselectWhereEntry
@@ -522,7 +522,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ParWhereEntry WhereEntry:
-		//	"(" WhereEntry ")"
+		//	"(" WhereEntry ")";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"(" WhereEntry ")"
@@ -876,7 +876,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//BooleanOperator
 		public RuleCall getOperatorBooleanOperatorEnumRuleCall_3_0() { return cOperatorBooleanOperatorEnumRuleCall_3_0; }
 		
-		//(isTrue?="true" | "false")
+		//isTrue?="true" | "false"
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//isTrue?="true"
@@ -1433,7 +1433,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//AndWhereEntry WhereEntry:
-	//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?
+	//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?;
 	public AndWhereEntryElements getAndWhereEntryAccess() {
 		return pAndWhereEntry;
 	}
@@ -1444,7 +1444,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	//ConcreteWhereEntry WhereEntry:
 	//	ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry |
-	//	SubselectWhereEntry
+	//	SubselectWhereEntry;
 	public ConcreteWhereEntryElements getConcreteWhereEntryAccess() {
 		return pConcreteWhereEntry;
 	}
@@ -1454,7 +1454,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//ParWhereEntry WhereEntry:
-	//	"(" WhereEntry ")"
+	//	"(" WhereEntry ")";
 	public ParWhereEntryElements getParWhereEntryAccess() {
 		return pParWhereEntry;
 	}

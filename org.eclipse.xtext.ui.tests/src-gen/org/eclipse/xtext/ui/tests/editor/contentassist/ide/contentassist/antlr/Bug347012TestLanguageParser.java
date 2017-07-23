@@ -4,14 +4,10 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr.internal.InternalBug347012TestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug347012TestLanguageGrammarAccess;
 
@@ -76,18 +72,7 @@ public class Bug347012TestLanguageParser extends AbstractContentAssistParser {
 		}
 		return nameMappings.get(element);
 	}
-
-	@Override
-	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
-		try {
-			InternalBug347012TestLanguageParser typedParser = (InternalBug347012TestLanguageParser) parser;
-			typedParser.entryRuleMyProgram();
-			return typedParser.getFollowElements();
-		} catch(RecognitionException ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
+			
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS" };

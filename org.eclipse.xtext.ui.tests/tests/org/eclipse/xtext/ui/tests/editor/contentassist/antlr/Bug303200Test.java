@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguageRunt
 import org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr.Bug303200TestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug303200TestLanguageUiModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.Test;
 

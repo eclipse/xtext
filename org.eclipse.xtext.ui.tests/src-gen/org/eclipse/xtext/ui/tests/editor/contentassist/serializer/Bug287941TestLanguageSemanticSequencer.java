@@ -133,8 +133,8 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.ALIAS_WHERE_ENTRY__RIGHT_ALIAS));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAliasWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
-		feeder.accept(grammarAccess.getAliasWhereEntryAccess().getRightAliasFromEntryIDTerminalRuleCall_2_0_1(), semanticObject.getRightAlias());
+		feeder.accept(grammarAccess.getAliasWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.ALIAS_WHERE_ENTRY__ALIAS, false));
+		feeder.accept(grammarAccess.getAliasWhereEntryAccess().getRightAliasFromEntryIDTerminalRuleCall_2_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.ALIAS_WHERE_ENTRY__RIGHT_ALIAS, false));
 		feeder.finish();
 	}
 	
@@ -202,8 +202,8 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.DOUBLE_WHERE_ENTRY__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDoubleWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
-		feeder.accept(grammarAccess.getDoubleWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.getAttribute());
+		feeder.accept(grammarAccess.getDoubleWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS, false));
+		feeder.accept(grammarAccess.getDoubleWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE, false));
 		feeder.accept(grammarAccess.getDoubleWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0(), semanticObject.getOperator());
 		feeder.accept(grammarAccess.getDoubleWhereEntryAccess().getValueSIGNED_DOUBLETerminalRuleCall_4_0(), semanticObject.getValue());
 		feeder.finish();
@@ -280,8 +280,8 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.LONG_WHERE_ENTRY__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getLongWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
-		feeder.accept(grammarAccess.getLongWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.getAttribute());
+		feeder.accept(grammarAccess.getLongWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS, false));
+		feeder.accept(grammarAccess.getLongWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE, false));
 		feeder.accept(grammarAccess.getLongWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0(), semanticObject.getOperator());
 		feeder.accept(grammarAccess.getLongWhereEntryAccess().getValueSINGED_LONGTerminalRuleCall_4_0(), semanticObject.getValue());
 		feeder.finish();
@@ -335,8 +335,8 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__OPERATOR));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNullWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
-		feeder.accept(grammarAccess.getNullWhereEntryAccess().getFeatureEStructuralFeatureIDTerminalRuleCall_2_0_1(), semanticObject.getFeature());
+		feeder.accept(grammarAccess.getNullWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__ALIAS, false));
+		feeder.accept(grammarAccess.getNullWhereEntryAccess().getFeatureEStructuralFeatureIDTerminalRuleCall_2_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__FEATURE, false));
 		feeder.accept(grammarAccess.getNullWhereEntryAccess().getOperatorBooleanOperatorEnumRuleCall_3_0(), semanticObject.getOperator());
 		feeder.finish();
 	}
@@ -365,9 +365,9 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__RIGHT_ALIAS));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getReferenceAliasWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
-		feeder.accept(grammarAccess.getReferenceAliasWhereEntryAccess().getReferenceEReferenceIDTerminalRuleCall_2_0_1(), semanticObject.getReference());
-		feeder.accept(grammarAccess.getReferenceAliasWhereEntryAccess().getRightAliasFromEntryIDTerminalRuleCall_4_0_1(), semanticObject.getRightAlias());
+		feeder.accept(grammarAccess.getReferenceAliasWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__ALIAS, false));
+		feeder.accept(grammarAccess.getReferenceAliasWhereEntryAccess().getReferenceEReferenceIDTerminalRuleCall_2_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__REFERENCE, false));
+		feeder.accept(grammarAccess.getReferenceAliasWhereEntryAccess().getRightAliasFromEntryIDTerminalRuleCall_4_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__RIGHT_ALIAS, false));
 		feeder.finish();
 	}
 	
@@ -435,8 +435,8 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.STRING_ATTRIBUTE_WHERE_ENTRY__PATTERN));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getStringAttributeWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
-		feeder.accept(grammarAccess.getStringAttributeWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.getAttribute());
+		feeder.accept(grammarAccess.getStringAttributeWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS, false));
+		feeder.accept(grammarAccess.getStringAttributeWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE, false));
 		feeder.accept(grammarAccess.getStringAttributeWhereEntryAccess().getOperatorStringOperatorEnumRuleCall_3_0(), semanticObject.getOperator());
 		feeder.accept(grammarAccess.getStringAttributeWhereEntryAccess().getPatternSTRINGTerminalRuleCall_4_0(), semanticObject.getPattern());
 		feeder.finish();
@@ -489,11 +489,11 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__RIGHT_ATTRIBUTE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
-		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.getAttribute());
+		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS, false));
+		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE, false));
 		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0(), semanticObject.getOperator());
-		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getRightAliasFromEntryIDTerminalRuleCall_4_0_1(), semanticObject.getRightAlias());
-		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getRightAttributeEAttributeIDTerminalRuleCall_6_0_1(), semanticObject.getRightAttribute());
+		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getRightAliasFromEntryIDTerminalRuleCall_4_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__RIGHT_ALIAS, false));
+		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getRightAttributeEAttributeIDTerminalRuleCall_6_0_1(), semanticObject.eGet(Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__RIGHT_ATTRIBUTE, false));
 		feeder.finish();
 	}
 	

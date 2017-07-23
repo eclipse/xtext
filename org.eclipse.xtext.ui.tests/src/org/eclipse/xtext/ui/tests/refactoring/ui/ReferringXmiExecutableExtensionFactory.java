@@ -12,7 +12,7 @@ import static com.google.inject.util.Modules.*;
 
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.eclipse.xtext.ui.resource.generic.EmfUiModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.refactoring.ReferringXmiResourceModule;
 import org.osgi.framework.Bundle;
 

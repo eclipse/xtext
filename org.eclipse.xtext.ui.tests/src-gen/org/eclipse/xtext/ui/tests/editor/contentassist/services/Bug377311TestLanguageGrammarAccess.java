@@ -128,7 +128,7 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getChildAccess().getRule();
 	}
 	
-	//terminal WS:
+	//@ Override terminal WS:
 	//	' ' | '\t'+;
 	public TerminalRule getWSRule() {
 		return tWS;

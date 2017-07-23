@@ -30,7 +30,7 @@ public class KeywordsUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 		private final Assignment cThirdAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
 		private final Keyword cThirdBarKeyword_2_0 = (Keyword)cThirdAssignment_2.eContents().get(0);
 		private final Assignment cForthAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
-		private final Keyword cForthReverseSolidusKeyword_3_0 = (Keyword)cForthAssignment_3.eContents().get(0);
+		private final Keyword cForthBackslashKeyword_3_0 = (Keyword)cForthAssignment_3.eContents().get(0);
 		private final Assignment cFifthAssignment_4 = (Assignment)cAlternatives.eContents().get(4);
 		private final Keyword cFifthAKeyword_4_0 = (Keyword)cFifthAssignment_4.eContents().get(0);
 		private final Assignment cSixthAssignment_5 = (Assignment)cAlternatives.eContents().get(5);
@@ -71,7 +71,7 @@ public class KeywordsUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 		public Assignment getForthAssignment_3() { return cForthAssignment_3; }
 		
 		//"\\"
-		public Keyword getForthReverseSolidusKeyword_3_0() { return cForthReverseSolidusKeyword_3_0; }
+		public Keyword getForthBackslashKeyword_3_0() { return cForthBackslashKeyword_3_0; }
 		
 		//fifth?="\"a\""
 		public Assignment getFifthAssignment_4() { return cFifthAssignment_4; }

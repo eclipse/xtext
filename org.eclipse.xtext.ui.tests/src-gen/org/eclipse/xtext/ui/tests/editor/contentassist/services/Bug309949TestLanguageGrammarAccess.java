@@ -177,12 +177,12 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 		
-		//("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+ "}" |
+		//"#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+ "}" |
 		//"#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+
 		//"}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{" errors+=Error_3+
 		//operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" | "#4+" name=ID "{"
 		//errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5* operations+=Operation_5* "}" | "#5+"
-		//name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}")
+		//name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}"
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"#1*" "{" errors+=Error_1* operations+=Operation_1* "}"
@@ -478,7 +478,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Error_1 Error:
 		//	annotations+=Annotation*
-		//	"error" name=ID
+		//	"error" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//annotations+=Annotation* "error" name=ID
@@ -510,7 +510,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Operation_1 Operation:
 		//	annotations+=Annotation*
-		//	"operation" name=ID
+		//	"operation" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//annotations+=Annotation* "operation" name=ID
@@ -542,7 +542,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Error_2 Error:
 		//	annotations+=Annotation+
-		//	"error" name=ID
+		//	"error" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//annotations+=Annotation+ "error" name=ID
@@ -574,7 +574,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Operation_2 Operation:
 		//	annotations+=Annotation+
-		//	"operation" name=ID
+		//	"operation" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//annotations+=Annotation+ "operation" name=ID
@@ -606,7 +606,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Error_3 Error:
 		//	annotations+=Annotation?
-		//	"error" name=ID
+		//	"error" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//annotations+=Annotation? "error" name=ID
@@ -638,7 +638,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Operation_3 Operation:
 		//	annotations+=Annotation?
-		//	"operation" name=ID
+		//	"operation" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//annotations+=Annotation? "operation" name=ID
@@ -669,7 +669,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Error_4 Error:
-		//	annotations+=Annotation "error" name=ID
+		//	annotations+=Annotation "error" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//annotations+=Annotation "error" name=ID
@@ -700,7 +700,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Operation_4 Operation:
-		//	annotations+=Annotation "operation" name=ID
+		//	annotations+=Annotation "operation" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//annotations+=Annotation "operation" name=ID
@@ -729,7 +729,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Error_5 Error:
-		//	"error" name=ID
+		//	"error" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"error" name=ID
@@ -752,7 +752,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Operation_5 Operation:
-		//	"operation" name=ID
+		//	"operation" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"operation" name=ID
@@ -906,7 +906,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	//Error_1 Error:
 	//	annotations+=Annotation*
-	//	"error" name=ID
+	//	"error" name=ID;
 	public Error_1Elements getError_1Access() {
 		return pError_1;
 	}
@@ -917,7 +917,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	//Operation_1 Operation:
 	//	annotations+=Annotation*
-	//	"operation" name=ID
+	//	"operation" name=ID;
 	public Operation_1Elements getOperation_1Access() {
 		return pOperation_1;
 	}
@@ -928,7 +928,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	//Error_2 Error:
 	//	annotations+=Annotation+
-	//	"error" name=ID
+	//	"error" name=ID;
 	public Error_2Elements getError_2Access() {
 		return pError_2;
 	}
@@ -939,7 +939,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	//Operation_2 Operation:
 	//	annotations+=Annotation+
-	//	"operation" name=ID
+	//	"operation" name=ID;
 	public Operation_2Elements getOperation_2Access() {
 		return pOperation_2;
 	}
@@ -950,7 +950,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	//Error_3 Error:
 	//	annotations+=Annotation?
-	//	"error" name=ID
+	//	"error" name=ID;
 	public Error_3Elements getError_3Access() {
 		return pError_3;
 	}
@@ -961,7 +961,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	//Operation_3 Operation:
 	//	annotations+=Annotation?
-	//	"operation" name=ID
+	//	"operation" name=ID;
 	public Operation_3Elements getOperation_3Access() {
 		return pOperation_3;
 	}
@@ -971,7 +971,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//Error_4 Error:
-	//	annotations+=Annotation "error" name=ID
+	//	annotations+=Annotation "error" name=ID;
 	public Error_4Elements getError_4Access() {
 		return pError_4;
 	}
@@ -981,7 +981,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//Operation_4 Operation:
-	//	annotations+=Annotation "operation" name=ID
+	//	annotations+=Annotation "operation" name=ID;
 	public Operation_4Elements getOperation_4Access() {
 		return pOperation_4;
 	}
@@ -991,7 +991,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//Error_5 Error:
-	//	"error" name=ID
+	//	"error" name=ID;
 	public Error_5Elements getError_5Access() {
 		return pError_5;
 	}
@@ -1001,7 +1001,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//Operation_5 Operation:
-	//	"operation" name=ID
+	//	"operation" name=ID;
 	public Operation_5Elements getOperation_5Access() {
 		return pOperation_5;
 	}

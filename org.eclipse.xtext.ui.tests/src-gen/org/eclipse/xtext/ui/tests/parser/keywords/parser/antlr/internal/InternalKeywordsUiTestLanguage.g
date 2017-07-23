@@ -125,7 +125,7 @@ ruleModel returns [EObject current=null]
 			(
 				lv_forth_3_0='\\'
 				{
-					newLeafNode(lv_forth_3_0, grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0());
+					newLeafNode(lv_forth_3_0, grammarAccess.getModelAccess().getForthBackslashKeyword_3_0());
 				}
 				{
 					if ($current==null) {

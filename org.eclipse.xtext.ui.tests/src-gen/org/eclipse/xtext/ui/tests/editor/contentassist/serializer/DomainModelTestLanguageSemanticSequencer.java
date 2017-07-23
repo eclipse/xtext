@@ -76,7 +76,7 @@ public class DomainModelTestLanguageSemanticSequencer extends AbstractDelegating
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getAttributeAccess().getTypeDataTypeIDTerminalRuleCall_3_0_1(), semanticObject.getType());
+		feeder.accept(grammarAccess.getAttributeAccess().getTypeDataTypeIDTerminalRuleCall_3_0_1(), semanticObject.eGet(DomainModelTestPackage.Literals.ATTRIBUTE__TYPE, false));
 		feeder.finish();
 	}
 	
@@ -160,7 +160,7 @@ public class DomainModelTestLanguageSemanticSequencer extends AbstractDelegating
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getReferenceAccess().getTypeClassIDTerminalRuleCall_3_0_1(), semanticObject.getType());
+		feeder.accept(grammarAccess.getReferenceAccess().getTypeClassIDTerminalRuleCall_3_0_1(), semanticObject.eGet(DomainModelTestPackage.Literals.REFERENCE__TYPE, false));
 		feeder.finish();
 	}
 	

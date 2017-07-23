@@ -64,7 +64,7 @@ public class Bug291022TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug291022TestLanguagePackage.Literals.ATTRIBUTE__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAttributeAccess().getFeatureModelElementIDTerminalRuleCall_0_0_1(), semanticObject.getFeature());
+		feeder.accept(grammarAccess.getAttributeAccess().getFeatureModelElementIDTerminalRuleCall_0_0_1(), semanticObject.eGet(Bug291022TestLanguagePackage.Literals.ATTRIBUTE__FEATURE, false));
 		feeder.accept(grammarAccess.getAttributeAccess().getValueSTRINGTerminalRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}

@@ -31,7 +31,7 @@ Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.core.expressions;bundle-version="3.4.0",
  org.eclipse.xtext.ui.testing,
  org.eclipse.xtext.common.types.ui;resolution:=optional
-Bundle-Activator: org.eclipse.xtext.ui.tests.ui.internal.TestsActivator
+Bundle-Activator: org.eclipse.xtext.ui.tests.internal.TestsActivator
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse Xtext
 Import-Package: org.apache.log4j;version="1.2.15",

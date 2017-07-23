@@ -712,7 +712,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//TypeExp
 		public RuleCall getTypeTypeExpParserRuleCall_3_0() { return cTypeTypeExpParserRuleCall_3_0; }
 		
-		//((init=Init der=Der?)? | der=Der init=Init?)
+		//(init=Init der=Der?)? | der=Der init=Init?
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//(init=Init der=Der?)?
@@ -989,7 +989,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//NavigationExp Expression:
 		//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
 		//	op=('^^' | '^') messageName=Identifier
-		//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
+		//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
@@ -1286,7 +1286,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//(('e' | 'E') ('+' | '-')? INT)?
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//('e' | 'E')
+		//'e' | 'E'
 		public Alternatives getAlternatives_2_0() { return cAlternatives_2_0; }
 		
 		//'e'
@@ -1921,7 +1921,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//{BooleanLiteralExp}
 		public Action getBooleanLiteralExpAction_0() { return cBooleanLiteralExpAction_0; }
 		
-		//(isTrue?='true' | 'false')
+		//isTrue?='true' | 'false'
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//isTrue?='true'
@@ -2005,7 +2005,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
 		//implies Expression:
-		//	xor ({InfixExp.source=current} op='implies' argument=(xor | LetExp))*
+		//	xor ({InfixExp.source=current} op='implies' argument=(xor | LetExp))*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//xor ({InfixExp.source=current} op='implies' argument=(xor | LetExp))*
@@ -2052,7 +2052,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
 		//xor Expression:
-		//	or ({InfixExp.source=current} op='xor' argument=(or | LetExp))*
+		//	or ({InfixExp.source=current} op='xor' argument=(or | LetExp))*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//or ({InfixExp.source=current} op='xor' argument=(or | LetExp))*
@@ -2099,7 +2099,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
 		//or Expression:
-		//	and ({InfixExp.source=current} op='or' argument=(and | LetExp))*
+		//	and ({InfixExp.source=current} op='or' argument=(and | LetExp))*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//and ({InfixExp.source=current} op='or' argument=(and | LetExp))*
@@ -2146,7 +2146,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
 		//and Expression:
-		//	equality ({InfixExp.source=current} op='and' argument=(equality | LetExp))*
+		//	equality ({InfixExp.source=current} op='and' argument=(equality | LetExp))*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//equality ({InfixExp.source=current} op='and' argument=(equality | LetExp))*
@@ -2195,7 +2195,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
 		//equality Expression:
-		//	relational ({InfixExp.source=current} op=('=' | '<>') argument=(relational | LetExp))*
+		//	relational ({InfixExp.source=current} op=('=' | '<>') argument=(relational | LetExp))*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//relational ({InfixExp.source=current} op=('=' | '<>') argument=(relational | LetExp))*
@@ -2252,7 +2252,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
 		//relational Expression:
-		//	additive ({InfixExp.source=current} op=('>' | '<' | '>=' | '<=') argument=(additive | LetExp))*
+		//	additive ({InfixExp.source=current} op=('>' | '<' | '>=' | '<=') argument=(additive | LetExp))*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//additive ({InfixExp.source=current} op=('>' | '<' | '>=' | '<=') argument=(additive | LetExp))*
@@ -2313,7 +2313,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
 		//additive Expression:
-		//	multiplicative ({InfixExp.source=current} op=('+' | '-') argument=(multiplicative | LetExp))*
+		//	multiplicative ({InfixExp.source=current} op=('+' | '-') argument=(multiplicative | LetExp))*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//multiplicative ({InfixExp.source=current} op=('+' | '-') argument=(multiplicative | LetExp))*
@@ -2368,7 +2368,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
 		//multiplicative Expression:
-		//	unary ({InfixExp.source=current} op=('*' | '/') argument=(unary | LetExp))*
+		//	unary ({InfixExp.source=current} op=('*' | '/') argument=(unary | LetExp))*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//unary ({InfixExp.source=current} op=('*' | '/') argument=(unary | LetExp))*
@@ -2422,7 +2422,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		
 		//unary Expression:
 		//	NavigationExp
-		//	| {PrefixExp} op=('-' | 'not') source=unary
+		//	| {PrefixExp} op=('-' | 'not') source=unary;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//NavigationExp | {PrefixExp} op=('-' | 'not') source=unary
@@ -2484,7 +2484,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| PreExp
 		//	| TypeExp
 		//	| IfExp
-		//	| '(' {NestedExp} source=Expression ')'
+		//	| '(' {NestedExp} source=Expression ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//RoundBracketExp | SquareBracketExp | SelfExp | PrimitiveLiteralExp | TupleLiteralExp | CollectionLiteralExp | PreExp |
@@ -2548,7 +2548,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	RoundBracketExp
 		//	| SquareBracketExp
 		//	| PreExp
-		//	| NameExp
+		//	| NameExp;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//RoundBracketExp | SquareBracketExp | PreExp | NameExp
@@ -3567,7 +3567,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//NavigationExp Expression:
 	//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
 	//	op=('^^' | '^') messageName=Identifier
-	//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
+	//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 	public NavigationExpElements getNavigationExpAccess() {
 		return pNavigationExp;
 	}
@@ -3865,7 +3865,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 	
 	//implies Expression:
-	//	xor ({InfixExp.source=current} op='implies' argument=(xor | LetExp))*
+	//	xor ({InfixExp.source=current} op='implies' argument=(xor | LetExp))*;
 	public ImpliesElements getImpliesAccess() {
 		return pImplies;
 	}
@@ -3875,7 +3875,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 	
 	//xor Expression:
-	//	or ({InfixExp.source=current} op='xor' argument=(or | LetExp))*
+	//	or ({InfixExp.source=current} op='xor' argument=(or | LetExp))*;
 	public XorElements getXorAccess() {
 		return pXor;
 	}
@@ -3885,7 +3885,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 	
 	//or Expression:
-	//	and ({InfixExp.source=current} op='or' argument=(and | LetExp))*
+	//	and ({InfixExp.source=current} op='or' argument=(and | LetExp))*;
 	public OrElements getOrAccess() {
 		return pOr;
 	}
@@ -3895,7 +3895,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 	
 	//and Expression:
-	//	equality ({InfixExp.source=current} op='and' argument=(equality | LetExp))*
+	//	equality ({InfixExp.source=current} op='and' argument=(equality | LetExp))*;
 	public AndElements getAndAccess() {
 		return pAnd;
 	}
@@ -3905,7 +3905,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 	
 	//equality Expression:
-	//	relational ({InfixExp.source=current} op=('=' | '<>') argument=(relational | LetExp))*
+	//	relational ({InfixExp.source=current} op=('=' | '<>') argument=(relational | LetExp))*;
 	public EqualityElements getEqualityAccess() {
 		return pEquality;
 	}
@@ -3915,7 +3915,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 	
 	//relational Expression:
-	//	additive ({InfixExp.source=current} op=('>' | '<' | '>=' | '<=') argument=(additive | LetExp))*
+	//	additive ({InfixExp.source=current} op=('>' | '<' | '>=' | '<=') argument=(additive | LetExp))*;
 	public RelationalElements getRelationalAccess() {
 		return pRelational;
 	}
@@ -3925,7 +3925,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 	
 	//additive Expression:
-	//	multiplicative ({InfixExp.source=current} op=('+' | '-') argument=(multiplicative | LetExp))*
+	//	multiplicative ({InfixExp.source=current} op=('+' | '-') argument=(multiplicative | LetExp))*;
 	public AdditiveElements getAdditiveAccess() {
 		return pAdditive;
 	}
@@ -3935,7 +3935,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 	
 	//multiplicative Expression:
-	//	unary ({InfixExp.source=current} op=('*' | '/') argument=(unary | LetExp))*
+	//	unary ({InfixExp.source=current} op=('*' | '/') argument=(unary | LetExp))*;
 	public MultiplicativeElements getMultiplicativeAccess() {
 		return pMultiplicative;
 	}
@@ -3946,7 +3946,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	
 	//unary Expression:
 	//	NavigationExp
-	//	| {PrefixExp} op=('-' | 'not') source=unary
+	//	| {PrefixExp} op=('-' | 'not') source=unary;
 	public UnaryElements getUnaryAccess() {
 		return pUnary;
 	}
@@ -3965,7 +3965,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//	| PreExp
 	//	| TypeExp
 	//	| IfExp
-	//	| '(' {NestedExp} source=Expression ')'
+	//	| '(' {NestedExp} source=Expression ')';
 	public SubNavigationExpElements getSubNavigationExpAccess() {
 		return pSubNavigationExp;
 	}
@@ -3978,7 +3978,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//	RoundBracketExp
 	//	| SquareBracketExp
 	//	| PreExp
-	//	| NameExp
+	//	| NameExp;
 	public SubNavigatingExpElements getSubNavigatingExpAccess() {
 		return pSubNavigatingExp;
 	}
