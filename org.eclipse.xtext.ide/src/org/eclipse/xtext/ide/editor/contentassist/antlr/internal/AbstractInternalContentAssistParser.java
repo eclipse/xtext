@@ -594,6 +594,22 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 	
 	@Override
+	public void reportError(RecognitionException e) {
+		if (strict) {
+			if ( state.errorRecovery ) {
+				return;
+			}
+			if (e.index != input.size()) {
+				// don't count errors at EOF in strict mode
+				state.syntaxErrors++; 	
+			}
+			state.errorRecovery = true;			
+		} else {
+			super.reportError(e);
+		}
+	}
+	
+	@Override
 	public void announceConsume() {
 		if (marked <= 0)
 			localTrace.clear();
