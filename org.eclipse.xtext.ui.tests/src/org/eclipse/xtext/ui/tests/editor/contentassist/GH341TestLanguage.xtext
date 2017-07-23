@@ -11,9 +11,9 @@ grammar org.eclipse.xtext.ui.tests.editor.contentassist.GH341TestLanguage
 generate gh341TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2012/gh341TestLanguage"
 
 Model:
-	elements+=(Works | Broken)*;
+	elements+=(Works | Broken | Third)*;
 
-Element: Works | Broken;
+Element: Works | Broken | Third;
 
 Works:
 	"works" name=ID (ids+=ID ("." ids+=ID)* ";")* (refs+=[Works|ID] ("." refs+=[Works|ID])* "X" ";")*;
@@ -21,5 +21,10 @@ Works:
 Broken:
 	"broken" name=ID Fragment (refs+=[Broken|ID] ("." refs+=[Broken|ID])* "X" ";")*;
 
+Third:
+	DEFINE STREAM name=ID
+;
+fragment STREAM: 'stream';
+fragment DEFINE: 'define';
 fragment Fragment *:
 	(ids+=ID ("." ids+=ID)* ";")*;
