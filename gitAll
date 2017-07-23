@@ -1,0 +1,12 @@
+#!/bin/bash
+
+p=`pwd`
+cat locations.properties | cut -d "=" -f2- | while read -r line
+do
+	directory=$(echo $line | tr -d '\r')
+	echo $directory
+	cd $directory
+	git "$@"
+	cd $p
+done 
+
