@@ -372,17 +372,25 @@ ruleThird returns [EObject current=null]
 }:
 	(
 		{
+			if ($current==null) {
+				$current = createModelElement(grammarAccess.getThirdRule());
+			}
 			newCompositeNode(grammarAccess.getThirdAccess().getDEFINEParserRuleCall_0());
 		}
-		ruleDEFINE
+		this_DEFINE_0=ruleDEFINE[$current]
 		{
+			$current = $this_DEFINE_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		{
+			if ($current==null) {
+				$current = createModelElement(grammarAccess.getThirdRule());
+			}
 			newCompositeNode(grammarAccess.getThirdAccess().getSTREAMParserRuleCall_1());
 		}
-		ruleSTREAM
+		this_STREAM_1=ruleSTREAM[$current]
 		{
+			$current = $this_STREAM_1.current;
 			afterParserOrEnumRuleCall();
 		}
 		(
@@ -408,33 +416,31 @@ ruleThird returns [EObject current=null]
 
 
 // Rule STREAM
-ruleSTREAM returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+ruleSTREAM[EObject in_current]  returns [EObject current=in_current]
 @init {
 	enterRule();
 }
 @after {
 	leaveRule();
 }:
-	kw='stream'
+	otherlv_0='stream'
 	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getSTREAMAccess().getStreamKeyword());
+		newLeafNode(otherlv_0, grammarAccess.getSTREAMAccess().getStreamKeyword());
 	}
 ;
 
 
 // Rule DEFINE
-ruleDEFINE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+ruleDEFINE[EObject in_current]  returns [EObject current=in_current]
 @init {
 	enterRule();
 }
 @after {
 	leaveRule();
 }:
-	kw='define'
+	otherlv_0='define'
 	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getDEFINEAccess().getDefineKeyword());
+		newLeafNode(otherlv_0, grammarAccess.getDEFINEAccess().getDefineKeyword());
 	}
 ;
 

@@ -872,49 +872,61 @@ public class InternalGH341TestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleThird"
-    // InternalGH341TestLanguage.g:366:1: ruleThird returns [EObject current=null] : ( ruleDEFINE ruleSTREAM ( (lv_name_2_0= RULE_ID ) ) ) ;
+    // InternalGH341TestLanguage.g:366:1: ruleThird returns [EObject current=null] : (this_DEFINE_0= ruleDEFINE[$current] this_STREAM_1= ruleSTREAM[$current] ( (lv_name_2_0= RULE_ID ) ) ) ;
     public final EObject ruleThird() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_2_0=null;
+        EObject this_DEFINE_0 = null;
+
+        EObject this_STREAM_1 = null;
+
 
 
         	enterRule();
 
         try {
-            // InternalGH341TestLanguage.g:372:2: ( ( ruleDEFINE ruleSTREAM ( (lv_name_2_0= RULE_ID ) ) ) )
-            // InternalGH341TestLanguage.g:373:2: ( ruleDEFINE ruleSTREAM ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalGH341TestLanguage.g:372:2: ( (this_DEFINE_0= ruleDEFINE[$current] this_STREAM_1= ruleSTREAM[$current] ( (lv_name_2_0= RULE_ID ) ) ) )
+            // InternalGH341TestLanguage.g:373:2: (this_DEFINE_0= ruleDEFINE[$current] this_STREAM_1= ruleSTREAM[$current] ( (lv_name_2_0= RULE_ID ) ) )
             {
-            // InternalGH341TestLanguage.g:373:2: ( ruleDEFINE ruleSTREAM ( (lv_name_2_0= RULE_ID ) ) )
-            // InternalGH341TestLanguage.g:374:3: ruleDEFINE ruleSTREAM ( (lv_name_2_0= RULE_ID ) )
+            // InternalGH341TestLanguage.g:373:2: (this_DEFINE_0= ruleDEFINE[$current] this_STREAM_1= ruleSTREAM[$current] ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalGH341TestLanguage.g:374:3: this_DEFINE_0= ruleDEFINE[$current] this_STREAM_1= ruleSTREAM[$current] ( (lv_name_2_0= RULE_ID ) )
             {
 
+            			if (current==null) {
+            				current = createModelElement(grammarAccess.getThirdRule());
+            			}
             			newCompositeNode(grammarAccess.getThirdAccess().getDEFINEParserRuleCall_0());
             		
             pushFollow(FollowSets000.FOLLOW_9);
-            ruleDEFINE();
+            this_DEFINE_0=ruleDEFINE(current);
 
             state._fsp--;
 
 
+            			current = this_DEFINE_0;
             			afterParserOrEnumRuleCall();
             		
 
+            			if (current==null) {
+            				current = createModelElement(grammarAccess.getThirdRule());
+            			}
             			newCompositeNode(grammarAccess.getThirdAccess().getSTREAMParserRuleCall_1());
             		
             pushFollow(FollowSets000.FOLLOW_4);
-            ruleSTREAM();
+            this_STREAM_1=ruleSTREAM(current);
 
             state._fsp--;
 
 
+            			current = this_STREAM_1;
             			afterParserOrEnumRuleCall();
             		
-            // InternalGH341TestLanguage.g:388:3: ( (lv_name_2_0= RULE_ID ) )
-            // InternalGH341TestLanguage.g:389:4: (lv_name_2_0= RULE_ID )
+            // InternalGH341TestLanguage.g:396:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalGH341TestLanguage.g:397:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalGH341TestLanguage.g:389:4: (lv_name_2_0= RULE_ID )
-            // InternalGH341TestLanguage.g:390:5: lv_name_2_0= RULE_ID
+            // InternalGH341TestLanguage.g:397:4: (lv_name_2_0= RULE_ID )
+            // InternalGH341TestLanguage.g:398:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -959,23 +971,22 @@ public class InternalGH341TestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleSTREAM"
-    // InternalGH341TestLanguage.g:411:1: ruleSTREAM returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'stream' ;
-    public final AntlrDatatypeRuleToken ruleSTREAM() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+    // InternalGH341TestLanguage.g:419:1: ruleSTREAM[EObject in_current] returns [EObject current=in_current] : otherlv_0= 'stream' ;
+    public final EObject ruleSTREAM(EObject in_current) throws RecognitionException {
+        EObject current = in_current;
 
-        Token kw=null;
+        Token otherlv_0=null;
 
 
         	enterRule();
 
         try {
-            // InternalGH341TestLanguage.g:417:2: (kw= 'stream' )
-            // InternalGH341TestLanguage.g:418:2: kw= 'stream'
+            // InternalGH341TestLanguage.g:425:2: (otherlv_0= 'stream' )
+            // InternalGH341TestLanguage.g:426:2: otherlv_0= 'stream'
             {
-            kw=(Token)match(input,16,FollowSets000.FOLLOW_2); 
+            otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-            		current.merge(kw);
-            		newLeafNode(kw, grammarAccess.getSTREAMAccess().getStreamKeyword());
+            		newLeafNode(otherlv_0, grammarAccess.getSTREAMAccess().getStreamKeyword());
             	
 
             }
@@ -997,23 +1008,22 @@ public class InternalGH341TestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleDEFINE"
-    // InternalGH341TestLanguage.g:427:1: ruleDEFINE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'define' ;
-    public final AntlrDatatypeRuleToken ruleDEFINE() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+    // InternalGH341TestLanguage.g:434:1: ruleDEFINE[EObject in_current] returns [EObject current=in_current] : otherlv_0= 'define' ;
+    public final EObject ruleDEFINE(EObject in_current) throws RecognitionException {
+        EObject current = in_current;
 
-        Token kw=null;
+        Token otherlv_0=null;
 
 
         	enterRule();
 
         try {
-            // InternalGH341TestLanguage.g:433:2: (kw= 'define' )
-            // InternalGH341TestLanguage.g:434:2: kw= 'define'
+            // InternalGH341TestLanguage.g:440:2: (otherlv_0= 'define' )
+            // InternalGH341TestLanguage.g:441:2: otherlv_0= 'define'
             {
-            kw=(Token)match(input,17,FollowSets000.FOLLOW_2); 
+            otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_2); 
 
-            		current.merge(kw);
-            		newLeafNode(kw, grammarAccess.getDEFINEAccess().getDefineKeyword());
+            		newLeafNode(otherlv_0, grammarAccess.getDEFINEAccess().getDefineKeyword());
             	
 
             }
@@ -1035,7 +1045,7 @@ public class InternalGH341TestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleFragment"
-    // InternalGH341TestLanguage.g:443:1: ruleFragment[EObject in_current] returns [EObject current=in_current] : ( ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';' )* ;
+    // InternalGH341TestLanguage.g:449:1: ruleFragment[EObject in_current] returns [EObject current=in_current] : ( ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';' )* ;
     public final EObject ruleFragment(EObject in_current) throws RecognitionException {
         EObject current = in_current;
 
@@ -1048,23 +1058,23 @@ public class InternalGH341TestLanguageParser extends AbstractInternalAntlrParser
         	enterRule();
 
         try {
-            // InternalGH341TestLanguage.g:449:2: ( ( ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';' )* )
-            // InternalGH341TestLanguage.g:450:2: ( ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';' )*
+            // InternalGH341TestLanguage.g:455:2: ( ( ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';' )* )
+            // InternalGH341TestLanguage.g:456:2: ( ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';' )*
             {
-            // InternalGH341TestLanguage.g:450:2: ( ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';' )*
+            // InternalGH341TestLanguage.g:456:2: ( ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';' )*
             loop10:
             do {
                 int alt10=2;
                 alt10 = dfa10.predict(input);
                 switch (alt10) {
             	case 1 :
-            	    // InternalGH341TestLanguage.g:451:3: ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';'
+            	    // InternalGH341TestLanguage.g:457:3: ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';'
             	    {
-            	    // InternalGH341TestLanguage.g:451:3: ( (lv_ids_0_0= RULE_ID ) )
-            	    // InternalGH341TestLanguage.g:452:4: (lv_ids_0_0= RULE_ID )
+            	    // InternalGH341TestLanguage.g:457:3: ( (lv_ids_0_0= RULE_ID ) )
+            	    // InternalGH341TestLanguage.g:458:4: (lv_ids_0_0= RULE_ID )
             	    {
-            	    // InternalGH341TestLanguage.g:452:4: (lv_ids_0_0= RULE_ID )
-            	    // InternalGH341TestLanguage.g:453:5: lv_ids_0_0= RULE_ID
+            	    // InternalGH341TestLanguage.g:458:4: (lv_ids_0_0= RULE_ID )
+            	    // InternalGH341TestLanguage.g:459:5: lv_ids_0_0= RULE_ID
             	    {
             	    lv_ids_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
@@ -1086,7 +1096,7 @@ public class InternalGH341TestLanguageParser extends AbstractInternalAntlrParser
 
             	    }
 
-            	    // InternalGH341TestLanguage.g:469:3: (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )*
+            	    // InternalGH341TestLanguage.g:475:3: (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )*
             	    loop9:
             	    do {
             	        int alt9=2;
@@ -1099,17 +1109,17 @@ public class InternalGH341TestLanguageParser extends AbstractInternalAntlrParser
 
             	        switch (alt9) {
             	    	case 1 :
-            	    	    // InternalGH341TestLanguage.g:470:4: otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) )
+            	    	    // InternalGH341TestLanguage.g:476:4: otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) )
             	    	    {
             	    	    otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
             	    	    				newLeafNode(otherlv_1, grammarAccess.getFragmentAccess().getFullStopKeyword_1_0());
             	    	    			
-            	    	    // InternalGH341TestLanguage.g:474:4: ( (lv_ids_2_0= RULE_ID ) )
-            	    	    // InternalGH341TestLanguage.g:475:5: (lv_ids_2_0= RULE_ID )
+            	    	    // InternalGH341TestLanguage.g:480:4: ( (lv_ids_2_0= RULE_ID ) )
+            	    	    // InternalGH341TestLanguage.g:481:5: (lv_ids_2_0= RULE_ID )
             	    	    {
-            	    	    // InternalGH341TestLanguage.g:475:5: (lv_ids_2_0= RULE_ID )
-            	    	    // InternalGH341TestLanguage.g:476:6: lv_ids_2_0= RULE_ID
+            	    	    // InternalGH341TestLanguage.g:481:5: (lv_ids_2_0= RULE_ID )
+            	    	    // InternalGH341TestLanguage.g:482:6: lv_ids_2_0= RULE_ID
             	    	    {
             	    	    lv_ids_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
@@ -1231,7 +1241,7 @@ public class InternalGH341TestLanguageParser extends AbstractInternalAntlrParser
             this.transition = dfa_7;
         }
         public String getDescription() {
-            return "()* loopback of 450:2: ( ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';' )*";
+            return "()* loopback of 456:2: ( ( (lv_ids_0_0= RULE_ID ) ) (otherlv_1= '.' ( (lv_ids_2_0= RULE_ID ) ) )* otherlv_3= ';' )*";
         }
     }
  

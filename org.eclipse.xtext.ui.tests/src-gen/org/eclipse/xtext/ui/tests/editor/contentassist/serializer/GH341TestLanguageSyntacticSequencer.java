@@ -26,30 +26,9 @@ public class GH341TestLanguageSyntacticSequencer extends AbstractSyntacticSequen
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getDEFINERule())
-			return getDEFINEToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getSTREAMRule())
-			return getSTREAMToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
-	/**
-	 * fragment DEFINE: 'define';
-	 */
-	protected String getDEFINEToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "define";
-	}
-	
-	/**
-	 * fragment STREAM: 'stream';
-	 */
-	protected String getSTREAMToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "stream";
-	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
