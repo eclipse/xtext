@@ -24,7 +24,7 @@ Broken:
 Third:
 	DEFINE STREAM name=ID
 ;
-fragment STREAM: 'stream';
-fragment DEFINE: 'define';
+fragment STREAM*: 'stream';
+fragment DEFINE*: 'define';
 fragment Fragment *:
 	(ids+=ID ("." ids+=ID)* ";")*;
