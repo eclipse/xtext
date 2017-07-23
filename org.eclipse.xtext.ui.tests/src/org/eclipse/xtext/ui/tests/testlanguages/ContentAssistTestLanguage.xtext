@@ -10,6 +10,7 @@ grammar org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage with 
 generate contentAssistTestLanguage "http://www.eclipse.org/2008/xtext/ui/common/tests/ContentAssist"
 
 Start :
+    /* SuppressWarnings[all] */
     "abstract rules"
     	(rules += AbstractRule)+
     "end"
