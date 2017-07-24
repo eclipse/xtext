@@ -19,6 +19,7 @@ import org.eclipse.xtext.validation.Check
 class TestLanguageValidator extends AbstractTestLanguageValidator {
 	
 	public static val INVALID_NAME = 'invalidName'
+	public static val UNSORTED_MEMBERS = 'unsorted_members'
 
 	@Check
 	def checkGreetingStartsWithCapital(TypeDeclaration type) {
@@ -26,6 +27,17 @@ class TestLanguageValidator extends AbstractTestLanguageValidator {
 			warning('Name should start with a capital', 
 					TestLanguagePackage.Literals.TYPE_DECLARATION__NAME,
 					INVALID_NAME)
+		}
+	}
+	
+	@Check
+	def checkMembersAreSorted(TypeDeclaration type) {
+		if (type.members.sortBy[name] != type.members) {
+			warning(
+				'Members should be in alphabetic order.',
+				TestLanguagePackage.Literals.TYPE_DECLARATION__NAME,
+				UNSORTED_MEMBERS
+			)
 		}
 	}
 	

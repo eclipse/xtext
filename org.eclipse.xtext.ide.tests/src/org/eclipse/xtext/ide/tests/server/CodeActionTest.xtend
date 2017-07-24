@@ -13,7 +13,7 @@ import org.junit.Test
  * @author Sven Efftinge - Initial contribution and API
  */
 class CodeActionTest extends AbstractTestLangLanguageServerTest {
-	
+
 	@Test
 	def void testCodeAction() {
 		testCodeAction [
@@ -32,5 +32,31 @@ class CodeActionTest extends AbstractTestLangLanguageServerTest {
 			'''
 		]
 	}
-	
+
+	@Test
+	def void testSemanticCodeAction() {
+		testCodeAction [
+			model = '''
+				type Foo {
+					String ccc
+					String aaa
+				}
+				type String {}
+			'''
+			expectedCodeActions = '''
+				command : my.textedit.command
+				title : Sort Members
+				args : 
+				    changes :
+				        MyModel.testlang : 
+				            String aaa
+				             [[0, 10] .. [1, 1]]
+				        
+				         [[1, 11] .. [3, 0]]
+				    documentChanges : 
+			'''
+		]
+
+	}
+
 }
