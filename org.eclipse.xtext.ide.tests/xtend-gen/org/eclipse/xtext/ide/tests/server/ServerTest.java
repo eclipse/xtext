@@ -9,12 +9,13 @@ package org.eclipse.xtext.ide.tests.server;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
-import org.eclipse.lsp4j.DidOpenTextDocumentParams;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
-import org.eclipse.lsp4j.TextDocumentItem;
+import org.eclipse.lsp4j.TextDocumentIdentifier;
+import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException;
 import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode;
 import org.eclipse.lsp4j.services.WorkspaceService;
@@ -106,26 +107,30 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
   @Test
   public void testMissingInitialize() {
     try {
-      DidOpenTextDocumentParams _didOpenTextDocumentParams = new DidOpenTextDocumentParams();
-      final Procedure1<DidOpenTextDocumentParams> _function = (DidOpenTextDocumentParams it) -> {
-        TextDocumentItem _textDocumentItem = new TextDocumentItem();
-        final Procedure1<TextDocumentItem> _function_1 = (TextDocumentItem it_1) -> {
-          it_1.setUri("file:/home/test/workspace/mydoc.testlang");
-          it_1.setText("type Foo {}");
+      try {
+        TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
+        final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+          TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier();
+          final Procedure1<TextDocumentIdentifier> _function_1 = (TextDocumentIdentifier it_1) -> {
+            it_1.setUri("file:/home/test/workspace/mydoc.testlang");
+          };
+          TextDocumentIdentifier _doubleArrow = ObjectExtensions.<TextDocumentIdentifier>operator_doubleArrow(_textDocumentIdentifier, _function_1);
+          it.setTextDocument(_doubleArrow);
         };
-        TextDocumentItem _doubleArrow = ObjectExtensions.<TextDocumentItem>operator_doubleArrow(_textDocumentItem, _function_1);
-        it.setTextDocument(_doubleArrow);
-      };
-      DidOpenTextDocumentParams _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParams>operator_doubleArrow(_didOpenTextDocumentParams, _function);
-      this.languageServer.didOpen(_doubleArrow);
-      Assert.fail("Expected a ResponseErrorException");
-    } catch (final Throwable _t) {
-      if (_t instanceof ResponseErrorException) {
-        final ResponseErrorException exception = (ResponseErrorException)_t;
-        Assert.assertEquals(ResponseErrorCode.serverNotInitialized.getValue(), exception.getResponseError().getCode());
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+        TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+        this.languageServer.definition(_doubleArrow).get();
+        Assert.fail("Expected a ResponseErrorException");
+      } catch (final Throwable _t) {
+        if (_t instanceof ExecutionException) {
+          final ExecutionException exception = (ExecutionException)_t;
+          Throwable _cause = exception.getCause();
+          Assert.assertEquals(ResponseErrorCode.serverNotInitialized.getValue(), ((ResponseErrorException) _cause).getResponseError().getCode());
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
 }

@@ -14,21 +14,20 @@ import java.io.File
 import java.io.FileWriter
 import java.util.List
 import java.util.Map
-import java.util.concurrent.CompletableFuture
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.diagnostics.Diagnostic
 import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory
 import org.eclipse.xtext.ide.server.MultiProjectWorkspaceConfigFactory
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.WorkspaceManager
-import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.validation.Issue
 import org.junit.Before
 import org.junit.Test
+
 import static org.junit.Assert.*
-import org.eclipse.xtext.diagnostics.Diagnostic
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -72,17 +71,6 @@ class MultiProjectTest {
         val injector = Guice.createInjector(Modules2.mixin(new ServerModule, new AbstractModule() {
             override protected configure() {
                 bind(IWorkspaceConfigFactory).to(MultiProjectWorkspaceConfigFactory)
-                bind(RequestManager).toInstance(new RequestManager() {
-
-						override <V> runWrite((CancelIndicator)=>V writeRequest) {
-							return CompletableFuture.completedFuture(writeRequest.apply([false]))
-						}
-						
-						override <V> runRead((CancelIndicator)=>V readRequest) {
-							return CompletableFuture.completedFuture(readRequest.apply([false]))
-						}
-						
-                })
             }
         }))
         injector.injectMembers(this)

@@ -66,11 +66,8 @@ import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.LanguageServerImpl
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.UriExtensions
-import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.Files
-import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
 
@@ -85,21 +82,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 	@Before
 	def void setup() {
-		val module = Modules2.mixin(new ServerModule, [
-			bind(RequestManager).toInstance(new RequestManager() {
-	
-				override <V> runWrite((CancelIndicator)=>V writeRequest) {
-					return CompletableFuture.completedFuture(writeRequest.apply [ false ])
-				}
-	
-				override <V> runRead((CancelIndicator)=>V readRequest) {
-					return CompletableFuture.completedFuture(readRequest.apply [ false ])
-				}
-	
-			})
-		])
-
-		val injector = Guice.createInjector(module)
+		val injector = Guice.createInjector(getServerModule())
 		injector.injectMembers(this)
 
 		val resourceServiceProvider = resourceServerProviderRegistry.extensionToFactoryMap.get(fileExtension)
@@ -117,6 +100,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			Files.cleanFolder(root, null, true, false)
 		}
 		root.deleteOnExit
+	}
+	
+	protected def ServerModule getServerModule() {
+		new ServerModule
 	}
 
 	@Inject
@@ -567,15 +554,19 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	}
 	
 	protected def Map<String, List<Diagnostic>> getDiagnostics() {
-		val result = <String, List<Diagnostic>>newHashMap
-		for (diagnostic : notifications.map[value].filter(PublishDiagnosticsParams)) {
-			result.put(diagnostic.uri, diagnostic.diagnostics)
-		}
-		return result 
+		languageServer.requestManager.runRead[
+			val result = <String, List<Diagnostic>>newHashMap
+			for (diagnostic : notifications.map[value].filter(PublishDiagnosticsParams)) {
+				result.put(diagnostic.uri, diagnostic.diagnostics)
+			}
+			return result 
+		].get
 	}
 	
 	protected def getColoringParams() {
-		return notifications.map[value].filter(ColoringParams).toMap([uri], [infos]);
+		languageServer.requestManager.runRead[		
+			return notifications.map[value].filter(ColoringParams).toMap([uri], [infos]);
+		].get
 	}
 }
 

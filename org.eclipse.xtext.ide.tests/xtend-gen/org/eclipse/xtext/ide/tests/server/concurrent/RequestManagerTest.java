@@ -9,14 +9,16 @@ package org.eclipse.xtext.ide.tests.server.concurrent;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
-import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -62,13 +64,18 @@ public class RequestManagerTest {
   @Test(timeout = 1000)
   public void testRunReadConcurrent() {
     final Function1<CancelIndicator, Integer> _function = (CancelIndicator it) -> {
-      int _xblockexpression = (int) 0;
-      {
-        while ((this.sharedState.get() == 0)) {
+      try {
+        int _xblockexpression = (int) 0;
+        {
+          while ((this.sharedState.get() == 0)) {
+            Thread.sleep(10);
+          }
+          _xblockexpression = this.sharedState.incrementAndGet();
         }
-        _xblockexpression = this.sharedState.incrementAndGet();
+        return Integer.valueOf(_xblockexpression);
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
-      return Integer.valueOf(_xblockexpression);
     };
     final CompletableFuture<Integer> future = this.requestManager.<Integer>runRead(_function);
     final Function1<CancelIndicator, Integer> _function_1 = (CancelIndicator it) -> {
@@ -82,14 +89,17 @@ public class RequestManagerTest {
   @Test(timeout = 1000)
   public void testRunReadAfterWrite() {
     try {
-      final Function1<CancelIndicator, Integer> _function = (CancelIndicator it) -> {
+      final Function0<Object> _function = () -> {
+        return null;
+      };
+      final Function2<CancelIndicator, Object, Integer> _function_1 = (CancelIndicator $0, Object $1) -> {
         return Integer.valueOf(this.sharedState.incrementAndGet());
       };
-      this.requestManager.<Integer>runWrite(_function);
-      final Function1<CancelIndicator, Integer> _function_1 = (CancelIndicator it) -> {
+      this.requestManager.<Object, Integer>runWrite(_function, _function_1);
+      final Function1<CancelIndicator, Integer> _function_2 = (CancelIndicator it) -> {
         return Integer.valueOf(this.sharedState.get());
       };
-      final CompletableFuture<Integer> future = this.requestManager.<Integer>runRead(_function_1);
+      final CompletableFuture<Integer> future = this.requestManager.<Integer>runRead(_function_2);
       Assert.assertEquals(1, (future.get()).intValue());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -98,20 +108,29 @@ public class RequestManagerTest {
   
   @Test(timeout = 1000)
   public void testRunWrite() {
-    final Function1<CancelIndicator, Integer> _function = (CancelIndicator it) -> {
+    final Function0<Object> _function = () -> {
+      return null;
+    };
+    final Function2<CancelIndicator, Object, Integer> _function_1 = (CancelIndicator $0, Object $1) -> {
       return Integer.valueOf(this.sharedState.incrementAndGet());
     };
-    this.requestManager.<Integer>runWrite(_function).join();
+    this.requestManager.<Object, Integer>runWrite(_function, _function_1).join();
     Assert.assertEquals(1, this.sharedState.get());
   }
   
   @Test(timeout = 1000)
   public void testRunWriteAfterWrite() {
-    final Function1<CancelIndicator, Integer> _function = (CancelIndicator it) -> {
+    final Function0<Object> _function = () -> {
+      return null;
+    };
+    final Function2<CancelIndicator, Object, Integer> _function_1 = (CancelIndicator $0, Object $1) -> {
       return Integer.valueOf(this.sharedState.incrementAndGet());
     };
-    this.requestManager.<Integer>runWrite(_function);
-    final Function1<CancelIndicator, Integer> _function_1 = (CancelIndicator it) -> {
+    this.requestManager.<Object, Integer>runWrite(_function, _function_1);
+    final Function0<Object> _function_2 = () -> {
+      return null;
+    };
+    final Function2<CancelIndicator, Object, Integer> _function_3 = (CancelIndicator $0, Object $1) -> {
       Integer _xifexpression = null;
       int _get = this.sharedState.get();
       boolean _notEquals = (_get != 0);
@@ -121,7 +140,7 @@ public class RequestManagerTest {
       }
       return _xifexpression;
     };
-    this.requestManager.<Integer>runWrite(_function_1).join();
+    this.requestManager.<Object, Integer>runWrite(_function_2, _function_3).join();
     Assert.assertEquals(2, this.sharedState.get());
   }
   
@@ -130,53 +149,49 @@ public class RequestManagerTest {
     final Function1<CancelIndicator, Integer> _function = (CancelIndicator it) -> {
       return Integer.valueOf(this.sharedState.incrementAndGet());
     };
-    this.requestManager.<Integer>runRead(_function);
-    final Function1<CancelIndicator, Integer> _function_1 = (CancelIndicator it) -> {
+    final CompletableFuture<Integer> previsousRead = this.requestManager.<Integer>runRead(_function);
+    final Function0<Object> _function_1 = () -> {
+      return null;
+    };
+    final Function2<CancelIndicator, Object, Integer> _function_2 = (CancelIndicator $0, Object $1) -> {
       int _xblockexpression = (int) 0;
       {
-        while ((this.sharedState.get() == 0)) {
+        while (((this.sharedState.get() == 0) && (!previsousRead.isCancelled()))) {
         }
         _xblockexpression = this.sharedState.incrementAndGet();
       }
       return Integer.valueOf(_xblockexpression);
     };
-    this.requestManager.<Integer>runWrite(_function_1).join();
+    this.requestManager.<Object, Integer>runWrite(_function_1, _function_2).join();
     Assert.assertEquals(2, this.sharedState.get());
   }
   
   @Test(timeout = 1000)
   public void testCancelRead() {
     try {
-      final Function1<CancelIndicator, Integer> _function = (CancelIndicator cancelIndicator) -> {
+      final AtomicBoolean isCanceled = new AtomicBoolean(false);
+      final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
         try {
-          this.sharedState.incrementAndGet();
-          while ((!cancelIndicator.isCanceled())) {
+          try {
+            this.sharedState.incrementAndGet();
+            while ((!cancelIndicator.isCanceled())) {
+              Thread.sleep(10);
+            }
+          } finally {
+            isCanceled.set(true);
           }
-          return Integer.valueOf(this.sharedState.get());
-        } catch (final Throwable _t) {
-          if (_t instanceof CancellationException) {
-            final CancellationException e = (CancellationException)_t;
-            return Integer.valueOf(this.sharedState.incrementAndGet());
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
+          return null;
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
-      final CompletableFuture<Integer> future = this.requestManager.<Integer>runRead(_function);
+      final CompletableFuture<Object> future = this.requestManager.<Object>runRead(_function);
       while ((this.sharedState.get() == 0)) {
         Thread.sleep(10);
       }
       future.cancel(true);
-      try {
-        future.get();
-        Assert.fail("cancellation exception expected");
-      } catch (final Throwable _t) {
-        if (_t instanceof CancellationException) {
-          final CancellationException e = (CancellationException)_t;
-          Assert.assertEquals(1, this.sharedState.get());
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
+      while ((!isCanceled.get())) {
+        Thread.sleep(10);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
