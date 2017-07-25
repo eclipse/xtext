@@ -61,7 +61,7 @@ class RequestManager {
 					toCancel += cancelIndicator
 					cancelIndicator.checkCanceled
 					result.complete(request.apply(cancelIndicator))
-				} catch (Exception e) {
+				} catch (Throwable e) {
 					result.completeExceptionally(e)
 				} finally {
 					toCancel -= cancelIndicator
@@ -91,7 +91,7 @@ class RequestManager {
 				toCancel += cancelIndicator
 				cancelIndicator.checkCanceled
 				result.complete(request.apply(cancelIndicator, intermediateResult))
-			} catch (Exception e) {
+			} catch (Throwable e) {
 				result.completeExceptionally(e)
 			} finally {
 				toCancel -= cancelIndicator

@@ -126,7 +126,7 @@ public class RequestManagerTest {
     final Function2<CancelIndicator, Object, Integer> _function_1 = (CancelIndicator $0, Object $1) -> {
       return Integer.valueOf(this.sharedState.incrementAndGet());
     };
-    this.requestManager.<Object, Integer>runWrite(_function, _function_1);
+    this.requestManager.<Object, Integer>runWrite(_function, _function_1).join();
     final Function0<Object> _function_2 = () -> {
       return null;
     };

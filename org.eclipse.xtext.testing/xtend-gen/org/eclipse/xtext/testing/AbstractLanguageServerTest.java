@@ -9,9 +9,12 @@ package org.eclipse.xtext.testing;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URI;
@@ -74,6 +77,7 @@ import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.UriExtensions;
+import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.testing.DefinitionTestConfiguration;
 import org.eclipse.xtext.testing.DocumentHighlightConfiguration;
@@ -90,11 +94,14 @@ import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
 import org.eclipse.xtext.testing.WorkspaceSymbolConfiguraiton;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -189,8 +196,51 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
-  protected ServerModule getServerModule() {
-    return new ServerModule();
+  protected Module getServerModule() {
+    ServerModule _serverModule = new ServerModule();
+    final Module _function = (Binder it) -> {
+      AnnotatedBindingBuilder<RequestManager> _bind = it.<RequestManager>bind(RequestManager.class);
+      _bind.toInstance(new RequestManager() {
+        @Override
+        public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> request) {
+          final CompletableFuture<V> result = new CompletableFuture<V>();
+          try {
+            final CancelIndicator _function = () -> {
+              return false;
+            };
+            result.complete(request.apply(_function));
+          } catch (final Throwable _t) {
+            if (_t instanceof Throwable) {
+              final Throwable e = (Throwable)_t;
+              result.completeExceptionally(e);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
+          }
+          return result;
+        }
+        
+        @Override
+        public <U extends Object, V extends Object> CompletableFuture<V> runWrite(final Function0<? extends U> nonCancellable, final Function2<? super CancelIndicator, ? super U, ? extends V> request) {
+          final CompletableFuture<V> result = new CompletableFuture<V>();
+          try {
+            final CancelIndicator _function = () -> {
+              return false;
+            };
+            result.complete(request.apply(_function, nonCancellable.apply()));
+          } catch (final Throwable _t) {
+            if (_t instanceof Throwable) {
+              final Throwable e = (Throwable)_t;
+              result.completeExceptionally(e);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
+          }
+          return result;
+        }
+      });
+    };
+    return Modules2.mixin(_serverModule, _function);
   }
   
   @Inject
