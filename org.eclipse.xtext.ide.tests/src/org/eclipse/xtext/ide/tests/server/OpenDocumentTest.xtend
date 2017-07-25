@@ -79,15 +79,15 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
         assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
         
         languageServer.didChange(new DidChangeTextDocumentParams => [
-        	textDocument = new VersionedTextDocumentIdentifier => [
-        		uri = firstFile
-        		version = 2
-        	]
-        	contentChanges = #[
-        		new TextDocumentContentChangeEvent => [
-					range = new Range(new Position(1, 4), new Position(1, 15))
-					text = "Test"
-        		]
+	        	textDocument = new VersionedTextDocumentIdentifier => [
+	        		uri = firstFile
+	        		version = 2
+	        	]
+	        	contentChanges = #[
+	        		new TextDocumentContentChangeEvent => [
+						range = new Range(new Position(1, 4), new Position(1, 15))
+						text = "Test"
+	        		]
 			]
 		])
         assertNull(diagnostics.get(firstFile).head)

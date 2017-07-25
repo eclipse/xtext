@@ -9,12 +9,9 @@ package org.eclipse.xtext.testing;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Module;
-import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URI;
@@ -77,7 +74,6 @@ import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.UriExtensions;
-import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.testing.DefinitionTestConfiguration;
 import org.eclipse.xtext.testing.DocumentHighlightConfiguration;
@@ -94,7 +90,6 @@ import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
 import org.eclipse.xtext.testing.WorkspaceSymbolConfiguraiton;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
-import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -172,29 +167,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   @Before
   public void setup() {
     try {
-      ServerModule _serverModule = new ServerModule();
-      final Module _function = (Binder it) -> {
-        AnnotatedBindingBuilder<RequestManager> _bind = it.<RequestManager>bind(RequestManager.class);
-        _bind.toInstance(new RequestManager() {
-          @Override
-          public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
-            final CancelIndicator _function = () -> {
-              return false;
-            };
-            return CompletableFuture.<V>completedFuture(writeRequest.apply(_function));
-          }
-          
-          @Override
-          public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
-            final CancelIndicator _function = () -> {
-              return false;
-            };
-            return CompletableFuture.<V>completedFuture(readRequest.apply(_function));
-          }
-        });
-      };
-      final Module module = Modules2.mixin(_serverModule, _function);
-      final Injector injector = Guice.createInjector(module);
+      final Injector injector = Guice.createInjector(this.getServerModule());
       injector.injectMembers(this);
       final Object resourceServiceProvider = this.resourceServerProviderRegistry.getExtensionToFactoryMap().get(this.fileExtension);
       if ((resourceServiceProvider instanceof IResourceServiceProvider)) {
@@ -214,6 +187,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected ServerModule getServerModule() {
+    return new ServerModule();
   }
   
   @Inject
@@ -1081,28 +1058,42 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   }
   
   protected Map<String, List<Diagnostic>> getDiagnostics() {
-    final HashMap<String, List<Diagnostic>> result = CollectionLiterals.<String, List<Diagnostic>>newHashMap();
-    final Function1<Pair<String, Object>, Object> _function = (Pair<String, Object> it) -> {
-      return it.getValue();
-    };
-    Iterable<PublishDiagnosticsParams> _filter = Iterables.<PublishDiagnosticsParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function), PublishDiagnosticsParams.class);
-    for (final PublishDiagnosticsParams diagnostic : _filter) {
-      result.put(diagnostic.getUri(), diagnostic.getDiagnostics());
+    try {
+      final Function1<CancelIndicator, HashMap<String, List<Diagnostic>>> _function = (CancelIndicator it) -> {
+        final HashMap<String, List<Diagnostic>> result = CollectionLiterals.<String, List<Diagnostic>>newHashMap();
+        final Function1<Pair<String, Object>, Object> _function_1 = (Pair<String, Object> it_1) -> {
+          return it_1.getValue();
+        };
+        Iterable<PublishDiagnosticsParams> _filter = Iterables.<PublishDiagnosticsParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function_1), PublishDiagnosticsParams.class);
+        for (final PublishDiagnosticsParams diagnostic : _filter) {
+          result.put(diagnostic.getUri(), diagnostic.getDiagnostics());
+        }
+        return result;
+      };
+      return this.languageServer.getRequestManager().<HashMap<String, List<Diagnostic>>>runRead(_function).get();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return result;
   }
   
   protected Map<String, List<? extends ColoringInformation>> getColoringParams() {
-    final Function1<Pair<String, Object>, Object> _function = (Pair<String, Object> it) -> {
-      return it.getValue();
-    };
-    final Function1<ColoringParams, String> _function_1 = (ColoringParams it) -> {
-      return it.getUri();
-    };
-    final Function1<ColoringParams, List<? extends ColoringInformation>> _function_2 = (ColoringParams it) -> {
-      return it.getInfos();
-    };
-    return IterableExtensions.<ColoringParams, String, List<? extends ColoringInformation>>toMap(Iterables.<ColoringParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function), ColoringParams.class), _function_1, _function_2);
+    try {
+      final Function1<CancelIndicator, Map<String, List<? extends ColoringInformation>>> _function = (CancelIndicator it) -> {
+        final Function1<Pair<String, Object>, Object> _function_1 = (Pair<String, Object> it_1) -> {
+          return it_1.getValue();
+        };
+        final Function1<ColoringParams, String> _function_2 = (ColoringParams it_1) -> {
+          return it_1.getUri();
+        };
+        final Function1<ColoringParams, List<? extends ColoringInformation>> _function_3 = (ColoringParams it_1) -> {
+          return it_1.getInfos();
+        };
+        return IterableExtensions.<ColoringParams, String, List<? extends ColoringInformation>>toMap(Iterables.<ColoringParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function_1), ColoringParams.class), _function_2, _function_3);
+      };
+      return this.languageServer.getRequestManager().<Map<String, List<? extends ColoringInformation>>>runRead(_function).get();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected String toExpectation(final Object it) {

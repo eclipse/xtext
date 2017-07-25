@@ -11,13 +11,11 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Diagnostic;
@@ -25,14 +23,12 @@ import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.MultiProjectWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
-import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -94,24 +90,6 @@ public class MultiProjectTest {
       @Override
       protected void configure() {
         this.<IWorkspaceConfigFactory>bind(IWorkspaceConfigFactory.class).to(MultiProjectWorkspaceConfigFactory.class);
-        AnnotatedBindingBuilder<RequestManager> _bind = this.<RequestManager>bind(RequestManager.class);
-        _bind.toInstance(new RequestManager() {
-          @Override
-          public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
-            final CancelIndicator _function = () -> {
-              return false;
-            };
-            return CompletableFuture.<V>completedFuture(writeRequest.apply(_function));
-          }
-          
-          @Override
-          public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
-            final CancelIndicator _function = () -> {
-              return false;
-            };
-            return CompletableFuture.<V>completedFuture(readRequest.apply(_function));
-          }
-        });
       }
     }));
     injector.injectMembers(this);

@@ -80,6 +80,8 @@ import org.eclipse.lsp4j.services.LanguageClientExtensions;
 import org.eclipse.lsp4j.services.LanguageServer;
 import org.eclipse.lsp4j.services.TextDocumentService;
 import org.eclipse.lsp4j.services.WorkspaceService;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ide.server.BuildManager;
@@ -120,6 +122,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -150,6 +153,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   @Inject
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private RequestManager requestManager;
   
   @Inject
@@ -246,6 +250,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
     }
     result.setCapabilities(capabilities);
+    this.access.addBuildListener(this);
     final Function0<Object> _function_1 = () -> {
       final Procedure2<URI, Iterable<Issue>> _function_2 = (URI $0, Iterable<Issue> $1) -> {
         this.publishDiagnostics($0, $1);
@@ -253,9 +258,13 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       this.workspaceManager.initialize(baseDir, _function_2, CancelIndicator.NullImpl);
       return null;
     };
-    this.requestManager.<Object>lockWrite(_function_1);
-    this.access.addBuildListener(this);
-    return CompletableFuture.<InitializeResult>completedFuture(result);
+    final Function2<CancelIndicator, Object, Object> _function_2 = (CancelIndicator $0, Object $1) -> {
+      return null;
+    };
+    final Function<Object, InitializeResult> _function_3 = (Object it) -> {
+      return result;
+    };
+    return this.requestManager.<Object, Object>runWrite(_function_1, _function_2).<InitializeResult>thenApply(_function_3);
   }
   
   @Deprecated
@@ -304,21 +313,17 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void didOpen(final DidOpenTextDocumentParams params) {
-    this.requestManager.cancel();
     final Function0<BuildManager.Buildable> _function = () -> {
       return this.workspaceManager.didOpen(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), params.getTextDocument().getText());
     };
-    final BuildManager.Buildable buildable = this.requestManager.<BuildManager.Buildable>lockWrite(_function);
-    this.requestManager.<List<IResourceDescription.Delta>>runWrite(new Function1<CancelIndicator, List<IResourceDescription.Delta>>() {
-        public List<IResourceDescription.Delta> apply(CancelIndicator p) {
-          return buildable.build(p);
-        }
-    });
+    final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
+      return buildable.build(cancelIndicator);
+    };
+    this.requestManager.<BuildManager.Buildable, List<IResourceDescription.Delta>>runWrite(_function, _function_1);
   }
   
   @Override
   public void didChange(final DidChangeTextDocumentParams params) {
-    this.requestManager.cancel();
     final Function0<BuildManager.Buildable> _function = () -> {
       final Function1<TextDocumentContentChangeEvent, TextEdit> _function_1 = (TextDocumentContentChangeEvent event) -> {
         Range _range = event.getRange();
@@ -327,26 +332,21 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       };
       return this.workspaceManager.didChange(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(params.getContentChanges(), _function_1));
     };
-    final BuildManager.Buildable buildable = this.requestManager.<BuildManager.Buildable>lockWrite(_function);
-    this.requestManager.<List<IResourceDescription.Delta>>runWrite(new Function1<CancelIndicator, List<IResourceDescription.Delta>>() {
-        public List<IResourceDescription.Delta> apply(CancelIndicator p) {
-          return buildable.build(p);
-        }
-    });
+    final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
+      return buildable.build(cancelIndicator);
+    };
+    this.requestManager.<BuildManager.Buildable, List<IResourceDescription.Delta>>runWrite(_function, _function_1);
   }
   
   @Override
   public void didClose(final DidCloseTextDocumentParams params) {
-    this.requestManager.cancel();
     final Function0<BuildManager.Buildable> _function = () -> {
       return this.workspaceManager.didClose(this._uriExtensions.toUri(params.getTextDocument().getUri()));
     };
-    final BuildManager.Buildable buildable = this.requestManager.<BuildManager.Buildable>lockWrite(_function);
-    this.requestManager.<List<IResourceDescription.Delta>>runWrite(new Function1<CancelIndicator, List<IResourceDescription.Delta>>() {
-        public List<IResourceDescription.Delta> apply(CancelIndicator p) {
-          return buildable.build(p);
-        }
-    });
+    final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
+      return buildable.build(cancelIndicator);
+    };
+    this.requestManager.<BuildManager.Buildable, List<IResourceDescription.Delta>>runWrite(_function, _function_1);
   }
   
   @Override
@@ -355,7 +355,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void didChangeWatchedFiles(final DidChangeWatchedFilesParams params) {
-    this.requestManager.cancel();
     final Function0<BuildManager.Buildable> _function = () -> {
       BuildManager.Buildable _xblockexpression = null;
       {
@@ -377,22 +376,22 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       return _xblockexpression;
     };
-    final BuildManager.Buildable buildable = this.requestManager.<BuildManager.Buildable>lockWrite(_function);
-    this.requestManager.<List<IResourceDescription.Delta>>runWrite(new Function1<CancelIndicator, List<IResourceDescription.Delta>>() {
-        public List<IResourceDescription.Delta> apply(CancelIndicator p) {
-          return buildable.build(p);
-        }
-    });
+    final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
+      return buildable.build(cancelIndicator);
+    };
+    this.requestManager.<BuildManager.Buildable, List<IResourceDescription.Delta>>runWrite(_function, _function_1);
   }
   
   @Override
   public void didChangeConfiguration(final DidChangeConfigurationParams params) {
-    this.requestManager.cancel();
     final Function0<Object> _function = () -> {
       this.workspaceManager.refreshWorkspaceConfig(CancelIndicator.NullImpl);
       return null;
     };
-    this.requestManager.<Object>lockWrite(_function);
+    final Function2<CancelIndicator, Object, Object> _function_1 = (CancelIndicator $0, Object $1) -> {
+      return null;
+    };
+    this.requestManager.<Object, Object>runWrite(_function, _function_1);
   }
   
   private WorkspaceResourceAccess resourceAccess;
@@ -970,4 +969,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   private final static Logger LOG = Logger.getLogger(LanguageServerImpl.class);
+  
+  @Pure
+  public RequestManager getRequestManager() {
+    return this.requestManager;
+  }
 }

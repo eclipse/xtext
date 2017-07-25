@@ -83,6 +83,7 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -90,7 +91,7 @@ import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
  */
 @Log class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider, IBuildListener {
 
-	@Inject RequestManager requestManager
+	@Inject @Accessors(PUBLIC_GETTER) RequestManager requestManager
 	@Inject WorkspaceSymbolService workspaceSymbolService
 	@Inject extension UriExtensions
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
@@ -154,14 +155,12 @@ import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
 		}
 		result.capabilities = capabilities
 		
-		requestManager.lockWrite [
+		access.addBuildListener(this);
+		
+		return requestManager.runWrite([
 			workspaceManager.initialize(baseDir, [this.publishDiagnostics($0, $1)], CancelIndicator.NullImpl)
 			return null
-		]
-
-		access.addBuildListener(this);
-
-		return CompletableFuture.completedFuture(result)
+		], []).thenApply [result]
 	}
 	
 	@Deprecated
@@ -201,29 +200,29 @@ import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
 	// end notification callbacks
 	// file/content change events
 	override didOpen(DidOpenTextDocumentParams params) {
-		requestManager.cancel
-		val buildable = requestManager.lockWrite [
+		requestManager.runWrite([
 			workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text)
-		]
-		requestManager.runWrite(buildable)
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 
 	override didChange(DidChangeTextDocumentParams params) {
-		requestManager.cancel
-		val buildable = requestManager.lockWrite [ 
+		requestManager.runWrite([ 
 			workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
 				new TextEdit(event.range, event.text)
 			])
-		]
-		requestManager.runWrite(buildable)
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 
 	override didClose(DidCloseTextDocumentParams params) {
-		requestManager.cancel
-		val buildable = requestManager.lockWrite [
+		requestManager.runWrite([
 			workspaceManager.didClose(params.textDocument.uri.toUri)
-		]
-		requestManager.runWrite(buildable)
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 
 	override didSave(DidSaveTextDocumentParams params) {
@@ -232,8 +231,7 @@ import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
 	}
 
 	override didChangeWatchedFiles(DidChangeWatchedFilesParams params) {
-		requestManager.cancel
-		val buildable = requestManager.lockWrite [
+		requestManager.runWrite([
 			val dirtyFiles = newArrayList
 			val deletedFiles = newArrayList
 			for (fileEvent : params.changes) {
@@ -244,16 +242,16 @@ import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
 				}
 			}
 			workspaceManager.didChangeFiles(dirtyFiles, deletedFiles)
-		]
-		requestManager.runWrite(buildable)
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 	
 	override didChangeConfiguration(DidChangeConfigurationParams params) {
-		requestManager.cancel
-        requestManager.lockWrite [
+		requestManager.runWrite([
             workspaceManager.refreshWorkspaceConfig(CancelIndicator.NullImpl)
             return null
-        ]
+        ], [])
     }
 
 	// end file/content change events
