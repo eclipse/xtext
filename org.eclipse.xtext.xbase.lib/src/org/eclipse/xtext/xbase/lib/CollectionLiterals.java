@@ -29,6 +29,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.primitives.Ints;
 
 /**
  * This is an extension library for {@link java.util.Collection collections}.
@@ -213,9 +214,12 @@ import com.google.common.collect.Sets;
 	 */
 	@Pure
 	public static <K, V> HashMap<K, V> newHashMap(Pair<? extends K, ? extends V>... initial) {
-		HashMap<K, V> result = Maps.newHashMapWithExpectedSize(initial.length);
-		putAll(result, initial);
-		return result;
+		if (initial.length > 0) {
+			HashMap<K, V> result = new HashMap<K, V>(capacity(initial.length));
+			putAll(result, initial);
+			return result;
+		}
+		return new HashMap<K, V>();
 	}
 
 	/**
@@ -231,9 +235,21 @@ import com.google.common.collect.Sets;
 	 */
 	@Pure
 	public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(Pair<? extends K, ? extends V>... initial) {
-		LinkedHashMap<K, V> result = new LinkedHashMap<K, V>(initial.length);
-		putAll(result, initial);
-		return result;
+		if (initial.length > 0) {
+			LinkedHashMap<K, V> result = new LinkedHashMap<K, V>(capacity(initial.length));
+			putAll(result, initial);
+			return result;
+		}
+		return new LinkedHashMap<K, V>();
+	}
+	
+	private static int capacity(int initialSize) {
+		if (initialSize < 3)
+			return initialSize + 1;
+		else if (initialSize < Ints.MAX_POWER_OF_TWO)
+			return initialSize + initialSize / 3;
+		else
+			return Integer.MAX_VALUE;
 	}
 
 	/**
