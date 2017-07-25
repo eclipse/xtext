@@ -70,6 +70,10 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.Files
 import org.junit.Assert
 import org.junit.Before
+import org.eclipse.xtext.util.Modules2
+import com.google.inject.Module
+import org.eclipse.xtext.ide.server.concurrent.RequestManager
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -102,8 +106,31 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		root.deleteOnExit
 	}
 	
-	protected def ServerModule getServerModule() {
-		new ServerModule
+	protected def Module getServerModule() {
+		Modules2.mixin(new ServerModule, [
+			bind(RequestManager).toInstance(new RequestManager() {
+				
+				override <V> runRead((CancelIndicator)=>V request) {
+					val result = new CompletableFuture()
+					try {
+						result.complete(request.apply [ false ])
+					} catch (Throwable e) {
+						result.completeExceptionally(e)
+					}
+					return result
+				}
+				
+				override <U,V> runWrite(()=>U nonCancellable, (CancelIndicator, U)=>V request) {
+					val result = new CompletableFuture()
+					try {
+						result.complete(request.apply([ false ], nonCancellable.apply()))
+					} catch (Throwable e) {
+						result.completeExceptionally(e)
+					}
+					return result
+				}
+			})
+		])
 	}
 
 	@Inject

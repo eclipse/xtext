@@ -79,8 +79,8 @@ public class RequestManager {
             }
             _xtrycatchfinallyexpression = _xblockexpression_1;
           } catch (final Throwable _t) {
-            if (_t instanceof Exception) {
-              final Exception e = (Exception)_t;
+            if (_t instanceof Throwable) {
+              final Throwable e = (Throwable)_t;
               _xtrycatchfinallyexpression = result.completeExceptionally(e);
             } else {
               throw Exceptions.sneakyThrow(_t);
@@ -123,8 +123,8 @@ public class RequestManager {
           }
           _xtrycatchfinallyexpression = _xblockexpression_1;
         } catch (final Throwable _t) {
-          if (_t instanceof Exception) {
-            final Exception e = (Exception)_t;
+          if (_t instanceof Throwable) {
+            final Throwable e = (Throwable)_t;
             _xtrycatchfinallyexpression = result.completeExceptionally(e);
           } else {
             throw Exceptions.sneakyThrow(_t);

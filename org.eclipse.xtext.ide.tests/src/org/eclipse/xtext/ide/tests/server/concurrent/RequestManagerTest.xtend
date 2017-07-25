@@ -87,7 +87,7 @@ class RequestManagerTest {
 	def void testRunWriteAfterWrite() {
 		requestManager.runWrite([], [
 			sharedState.incrementAndGet
-		])
+		]).join
 		requestManager.runWrite([], [
 			if (sharedState.get != 0)
 				sharedState.incrementAndGet as Integer
