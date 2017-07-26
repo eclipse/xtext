@@ -17,6 +17,7 @@ import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtext.common.types.JvmOperation;
 
 @SuppressWarnings("all")
 public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implements MutableMethodDeclaration {
@@ -67,6 +68,10 @@ public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl im
   public void setAbstract(final boolean isAbstract) {
     this.checkMutable();
     this.getDelegate().setAbstract(isAbstract);
+    if (isAbstract) {
+      JvmOperation _delegate = this.getDelegate();
+      _delegate.setDefault(false);
+    }
   }
   
   @Override
@@ -79,6 +84,10 @@ public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl im
   public void setStatic(final boolean isStatic) {
     this.checkMutable();
     this.getDelegate().setStatic(isStatic);
+    if (isStatic) {
+      JvmOperation _delegate = this.getDelegate();
+      _delegate.setDefault(false);
+    }
   }
   
   @Override
@@ -91,5 +100,11 @@ public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl im
   public void setDefault(final boolean isDefault) {
     this.checkMutable();
     this.getDelegate().setDefault(isDefault);
+    if (isDefault) {
+      JvmOperation _delegate = this.getDelegate();
+      _delegate.setAbstract(false);
+      JvmOperation _delegate_1 = this.getDelegate();
+      _delegate_1.setStatic(false);
+    }
   }
 }

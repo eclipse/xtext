@@ -24,6 +24,7 @@ import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper.Result;
@@ -79,6 +80,14 @@ public class XtendCompilerTester {
 		} catch (IOException e) {
 			Exceptions.sneakyThrow(e);
 		}
+	}
+
+	/**
+	 * @since 2.13
+	 */
+	public void assertCompilesTo(CharSequence source, final CharSequence expected, JavaVersion javaVersion) {
+		compilationTestHelper.setJavaVersion(javaVersion);
+		assertCompilesTo(source, expected);
 	}
 
 	public void compile(CharSequence source, final IAcceptor<CompilationResult> acceptor) {
