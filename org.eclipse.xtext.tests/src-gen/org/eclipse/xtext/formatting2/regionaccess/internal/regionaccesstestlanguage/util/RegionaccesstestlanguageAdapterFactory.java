@@ -25,6 +25,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Unassigned;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.ValueList;
 
 /**
  * <!-- begin-user-doc -->
@@ -133,6 +134,11 @@ public class RegionaccesstestlanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseMixed(Mixed object)
       {
         return createMixedAdapter();
+      }
+      @Override
+      public Adapter caseValueList(ValueList object)
+      {
+        return createValueListAdapter();
       }
       @Override
       public Adapter caseRootAction(RootAction object)
@@ -312,6 +318,21 @@ public class RegionaccesstestlanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMixedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.ValueList <em>Value List</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.ValueList
+   * @generated
+   */
+  public Adapter createValueListAdapter()
   {
     return null;
   }
