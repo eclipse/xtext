@@ -10,7 +10,7 @@ package org.eclipse.xtext.formatting2.regionaccess;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IEObjectRegion extends ISequentialRegion, IAstRegion {
+public interface IEObjectRegion extends IAstRegion {
 	ISemanticRegionsFinder getAllRegionsFor();
 
 	Iterable<ISemanticRegion> getAllSemanticRegions();
