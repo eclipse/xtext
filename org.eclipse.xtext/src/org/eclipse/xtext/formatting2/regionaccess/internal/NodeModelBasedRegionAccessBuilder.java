@@ -235,4 +235,24 @@ public class NodeModelBasedRegionAccessBuilder {
 		this.resource = resource;
 		return this;
 	}
+
+	protected NodeHiddenRegion getFirstHidden() {
+		return firstHidden;
+	}
+
+	protected void setFirstHidden(NodeHiddenRegion firstHidden) {
+		this.firstHidden = firstHidden;
+	}
+
+	protected NodeHiddenRegion getLastHidden() {
+		return lastHidden;
+	}
+
+	protected void setLastHidden(NodeHiddenRegion lastHidden) {
+		this.lastHidden = lastHidden;
+	}
+
+	protected List<NodeEObjectRegion> getStack() {
+		return stack;
+	}
 }
