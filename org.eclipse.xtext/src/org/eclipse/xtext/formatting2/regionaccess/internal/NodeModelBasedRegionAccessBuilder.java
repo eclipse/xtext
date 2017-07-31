@@ -8,6 +8,7 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EDataType;
