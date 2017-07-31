@@ -400,10 +400,6 @@ class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return XtendContentAssistFactory
 	}
 
-	override Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
-		return XbaseResourceForEditorInputFactory
-	}
-
 	def Class<? extends IContextInformationProvider> bindIContextInformationProvider() {
 		return ParameterContextInformationProvider
 	}
