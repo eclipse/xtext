@@ -134,6 +134,7 @@ import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
+import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
@@ -164,6 +165,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.ui.contentassist.ParameterContextInformationProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
+import org.eclipse.xtext.xbase.ui.editor.XbaseResourceForEditorInputFactory;
 import org.eclipse.xtext.xbase.ui.editor.actions.IClipboardActionFactory;
 import org.eclipse.xtext.xbase.ui.editor.actions.ImportsAwareClipboardAction;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
@@ -433,6 +435,11 @@ public class XtendUiModule extends AbstractXtendUiModule {
   @Override
   public Class<? extends IContentAssistantFactory> bindIContentAssistantFactory() {
     return XtendContentAssistFactory.class;
+  }
+  
+  @Override
+  public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
+    return XbaseResourceForEditorInputFactory.class;
   }
   
   public Class<? extends IContextInformationProvider> bindIContextInformationProvider() {
