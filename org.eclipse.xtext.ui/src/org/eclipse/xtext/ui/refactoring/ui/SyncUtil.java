@@ -171,7 +171,7 @@ public class SyncUtil {
 	}
 
 	public void yieldToQueuedDisplayJobs(IProgressMonitor monitor) {
-		yieldToQueuedDisplayJobs(monitor, 5000);
+		yieldToQueuedDisplayJobs(monitor, 50000);
 	}
 
 	public void yieldToQueuedDisplayJobs(IProgressMonitor monitor, int maxJobsToYieldTo) {

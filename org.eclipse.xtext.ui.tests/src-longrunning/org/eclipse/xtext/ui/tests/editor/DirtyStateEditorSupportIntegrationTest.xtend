@@ -63,6 +63,7 @@ class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 		styledText.setFocus
 		waitForReconciler(editor)
 		yieldToQueuedDisplayJobs(new NullProgressMonitor)
+		Thread.sleep(20)
 		assertTrue(events.empty)
 	}
 
@@ -115,6 +116,14 @@ class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 			keyCode = k
 		]
 		myDisplay.post(event)
+		
+		yieldToQueuedDisplayJobs(new NullProgressMonitor)
+		val event2 = new Event => [
+			type = SWT.KeyUp
+			character = c
+			keyCode = k
+		]
+		myDisplay.post(event2)
 		var maxTries = 10
 		while(maxTries-- > 0) {
 			if(editor.document.get != textBefore) {

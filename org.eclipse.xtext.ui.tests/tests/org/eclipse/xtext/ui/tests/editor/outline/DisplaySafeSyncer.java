@@ -35,11 +35,16 @@ public class DisplaySafeSyncer {
 				return;
 			}
 			waitTime += 10;
-			if (Display.getCurrent() != null)
-				Display.getCurrent().readAndDispatch();
+			if (Display.getCurrent() != null) {
+				while(Display.getCurrent().readAndDispatch()) {
+					// work the event loop
+				}
+				
+			}
 		}
 		throw new TimeoutException("Timeout in Syncer (timeout " + timeout + " ms)");
 	}
+	
 
 	public void signal() {
 		if (latch != null)
