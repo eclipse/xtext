@@ -27,8 +27,10 @@ def doGenerateInProject(File file) {
     }
     def prefsFile = new File(file, '.settings/org.eclipse.buildship.core.prefs')
     if (forceGeneration||!prefsFile.exists()) {
+        prefsFile = new File(file, '.settings/org.eclipse.buildship.core.prefs')
+        def pathRelative = relativePath(rootDir, file)
         logger.quiet("generating buildship prefs for " + file.path)
-        prefsFile.text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir="+rootDir.absolutePath.replace('\\','/')+"\nproject.path=\\:"+file.name+"\n"
+        prefsFile.text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir="+pathRelative.toFile().toString().replace('\\','/')+"\nproject.path=\\:"+file.name+"\n"
     }       
     file.listFiles().each { File fx -> 
         if (fx.isDirectory() && new File(fx, "build.gradle").exists()) {
@@ -36,11 +38,19 @@ def doGenerateInProject(File file) {
                 new File(fx, '.settings').mkdir();
             }
             prefsFile = new File(fx, '.settings/org.eclipse.buildship.core.prefs')
+            def pathRelative = relativePath(rootDir, fx)
             if (forceGeneration||!prefsFile.exists()) {
                 logger.quiet("generating buildship prefs for " + fx.path)
-                prefsFile.text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir="+rootDir.absolutePath.replace('\\','/')+"\nproject.path=\\:"+fx.name+"\n"
+                prefsFile.text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir="+pathRelative.toFile().toString().replace('\\','/')+"\nproject.path=\\:"+fx.name+"\n"
             }
         }
 
     }
+}
+
+def relativePath(File rootDir, File fx) {
+    def pathAbsolute = java.nio.file.Paths.get(rootDir.absolutePath);
+    def pathBase = java.nio.file.Paths.get(fx.absolutePath);
+    def pathRelative = pathBase.relativize(pathAbsolute);
+    return pathRelative;
 }
