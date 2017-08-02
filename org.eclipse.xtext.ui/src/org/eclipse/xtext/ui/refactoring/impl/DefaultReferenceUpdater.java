@@ -13,6 +13,7 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -76,7 +77,7 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 			} else {
 				Iterable<IReferenceDescription> referenceDescriptions = resource2references.get(referringResourceURI);
 				processReferringResource(referringResource, referenceDescriptions, elementRenameArguments,
-						updateAcceptor);
+						updateAcceptor, progress);
 			}
 			progress.worked(1);
 		}
@@ -87,9 +88,12 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 	 */
 	protected void processReferringResource(Resource referringResource,
 			Iterable<IReferenceDescription> referenceDescriptions, ElementRenameArguments elementRenameArguments,
-			IRefactoringUpdateAcceptor updateAcceptor) {
+			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
 		((XtextResource) referringResource).getCache().clear(referringResource);
 		for (IReferenceDescription referenceDescription : referenceDescriptions) {
+			if (monitor.isCanceled()) {
+				throw new OperationCanceledException();
+			}
 			createReferenceUpdate(referenceDescription, referringResource.getURI(), elementRenameArguments,
 					referringResource.getResourceSet(), updateAcceptor);
 		}
