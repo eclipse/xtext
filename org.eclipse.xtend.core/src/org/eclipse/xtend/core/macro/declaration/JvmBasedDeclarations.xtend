@@ -1028,6 +1028,9 @@ class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implement
 	override setAbstract(boolean isAbstract) {
 		checkMutable
 		delegate.setAbstract(isAbstract)
+		if (isAbstract) {
+			delegate.^default = false
+		}
 	}
 	
 	override setFinal(boolean isFinal) {
@@ -1042,6 +1045,9 @@ class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implement
 	override setStatic(boolean isStatic) {
 		checkMutable
 		delegate.setStatic(isStatic)
+		if (isStatic) {
+			delegate.^default = false
+		}
 	}
 	
 	override setSynchronized(boolean isSynchronized) {
@@ -1052,6 +1058,10 @@ class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implement
 	override setDefault(boolean isDefault) {
 		checkMutable
 		delegate.setDefault(isDefault)
+		if (isDefault) {
+			delegate.abstract = false
+			delegate.static = false
+		}
 	}
 	
 }
