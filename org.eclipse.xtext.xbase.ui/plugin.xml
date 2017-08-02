@@ -49,22 +49,26 @@
    <extension point="org.eclipse.ui.commands">
     <command
 			description="%OpenTypeHierarchyCommand_description"
+			categoryId="org.eclipse.ui.category.navigate"
 			id="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
 			name="%OpenTypeHierarchyCommand_name">
 		</command>
 		<command
 			description="%OpenCallHierarchyCommand_description"
 			id="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy"
+			categoryId="org.eclipse.ui.category.navigate"
 			name="%OpenCallHierarchyCommand_name">
 		</command>
    <!-- extract local variable refactoring -->
       <command
               id="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
               name="%ExtractLocalVariableRefactoring_name"
+              categoryId="org.eclipse.xtext.ui.category.refactoring"
               description="%ExtractLocalVariableRefactoring_description">
       </command>
       <command
             id="org.eclipse.xtext.xbase.ui.organizeImports"
+            categoryId="org.eclipse.jdt.ui.category.source"
             name="Organize Imports">
             description="Organize Imports"
       </command>

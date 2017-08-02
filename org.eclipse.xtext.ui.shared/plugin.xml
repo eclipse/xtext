@@ -132,6 +132,7 @@
       </command>
       <command
             description="%OpenSourceFileCommand.description"
+            categoryId="org.eclipse.ui.category.navigate"
             id="org.eclipse.xtext.ui.shared.OpenSourceFileCommand"
             name="%OpenSourceFileCommand.name">
       </command>
