@@ -20,7 +20,6 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
@@ -38,12 +37,6 @@ import com.google.common.collect.Lists;
 public class XtendParallelBuilderParticipant extends ParallelBuilderParticipant {
 
 	private final static Logger logger = Logger.getLogger(XtendParallelBuilderParticipant.class);
-	
-	@Override
-	protected boolean shouldGenerate(Resource resource, IBuildContext context) {
-		// also create in case of errors
-		return true;
-	}
 	
 	@Override
 	protected Map<OutputConfiguration, Iterable<IMarker>> getGeneratorMarkers(IProject builtProject,

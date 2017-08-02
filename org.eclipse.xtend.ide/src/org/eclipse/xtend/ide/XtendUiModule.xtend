@@ -164,6 +164,7 @@ import com.google.inject.Binder
 import com.google.inject.name.Names
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater
 import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater
+import org.eclipse.xtext.generator.IShouldGenerate
 
 /** 
  * Use this class to register components to be used within the IDE.
@@ -522,8 +523,13 @@ class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	def Class<? extends ASTParserFactory> bindASTParserFactory() {
 		return EclipseASTParserFactory
 	}
-	
+
 	def Class<? extends SyntaxColoringPreferencePage> bindSyntaxColoringPreferencePage() {
 		return XtendSyntaxColoringPreferencePage
 	}
+
+	override bindIShouldGenerate() {
+		IShouldGenerate.Always
+	}
+
 }
