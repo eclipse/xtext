@@ -332,14 +332,13 @@ public class IterableExtensions {
 	 * Effectively a combination of {@link #map(Iterable, Function1)} and {@link #flatten(Iterable)} is performed.
 	 * </p>
 	 * <p>
-	 * The returned iterable's iterator supports {@code remove()} if the provided iterator does. After a successful
-	 * {@code remove()} call, {@code original} no longer contains the corresponding element.
+	 * The returned iterable's iterator <i>does not support {@code remove()}</i> in contrast to {@link #map(Iterable, Function1)}.
 	 * </p>
 	 * 
 	 * @param original
 	 *            the original iterable. May not be <code>null</code>.
 	 * @param transformation
-	 *            the transformation. May not be <code>null</code>.
+	 *            the transformation. May not be <code>null</code> and must not yield <code>null</code>.
 	 * @return an iterable that provides the result of the transformation. Never <code>null</code>.
 	 * 
 	 * @since 2.13
