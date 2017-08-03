@@ -236,4 +236,29 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 		}
 	}
 
+	@Test public void testMap () {
+		ArrayList<String> list = newArrayList("foo", "bar");
+		
+		final Functions.Function1<String, String> function = new Functions.Function1<String, String>() {
+			@Override
+			public String apply(String p) {
+				return "Hello "+p;
+			}
+		};
+		
+		assertEquals(newArrayList("Hello foo", "Hello bar"), newArrayList(IterableExtensions.map(list, function)));
+	}
+
+	@Test public void testFlatMap () {
+		ArrayList<String> list = newArrayList("foo", "bar");
+		
+		final Functions.Function1<String, Iterable<String>> function = new Functions.Function1<String, Iterable<String>>() {
+			@Override
+			public Iterable<String> apply(String p) {
+				return newArrayList("Hello", p);
+			}
+		};
+		
+		assertEquals(newArrayList("Hello", "foo", "Hello", "bar"), newArrayList(IterableExtensions.flatMap(list, function)));
+	}
 }
