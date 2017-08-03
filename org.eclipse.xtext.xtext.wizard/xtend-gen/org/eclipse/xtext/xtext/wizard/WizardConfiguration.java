@@ -26,6 +26,7 @@ import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
+import org.eclipse.xtext.xtext.wizard.LanguageServer;
 import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
@@ -63,6 +64,8 @@ public class WizardConfiguration {
   private boolean needsGradleWrapper = true;
   
   private JavaVersion javaVersion = JavaVersion.JAVA8;
+  
+  private LanguageServer languageServer = LanguageServer.NONE;
   
   private final LanguageDescriptor language = new LanguageDescriptor();
   
@@ -208,6 +211,15 @@ public class WizardConfiguration {
   
   public void setJavaVersion(final JavaVersion javaVersion) {
     this.javaVersion = javaVersion;
+  }
+  
+  @Pure
+  public LanguageServer getLanguageServer() {
+    return this.languageServer;
+  }
+  
+  public void setLanguageServer(final LanguageServer languageServer) {
+    this.languageServer = languageServer;
   }
   
   @Pure

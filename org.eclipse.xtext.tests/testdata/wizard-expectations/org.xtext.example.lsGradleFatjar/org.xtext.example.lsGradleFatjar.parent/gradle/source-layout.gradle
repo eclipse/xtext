@@ -1,0 +1,46 @@
+if (name.endsWith(".tests")) {
+	sourceSets {
+		main {
+			java.srcDirs = []
+			resources.srcDirs = []
+		}
+		test {
+			java.srcDirs = ['src', 'src-gen']
+			resources.srcDirs = ['src', 'src-gen']
+			xtendOutputDir = 'xtend-gen'
+		}
+	}
+} else {
+	sourceSets {
+		main {
+			java.srcDirs = ['src', 'src-gen']
+			resources.srcDirs = ['src', 'src-gen']
+			xtendOutputDir = 'xtend-gen'
+		}
+		test {
+			java.srcDirs = []
+			resources.srcDirs = []
+		}
+	}
+}
+
+sourceSets.all {
+	resources.exclude '**/*.g', '**/*.mwe2', '**/*.xtend', '**/*._trace'
+}
+
+jar {
+	from('model') {
+		into('model')
+	}
+	manifest {
+		attributes 'Bundle-SymbolicName': project.name
+	}
+}
+
+plugins.withId('war') {
+	webAppDirName = "WebRoot"
+}
+
+plugins.withId('org.xtext.idea-plugin') {
+	assembleSandbox.metaInf.from('META-INF')
+}

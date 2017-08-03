@@ -28,6 +28,7 @@ import org.junit.Test
 import org.junit.rules.TemporaryFolder
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.xtext.wizard.LanguageServer
 
 class CliWizardIntegrationTest {
 
@@ -129,6 +130,84 @@ class CliWizardIntegrationTest {
 			intellijProject.enabled = true
 			p2Project.enabled = true
 			lineDelimiter = "\n"
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.lsMavenFatjar"
+			preferredBuildSystem = BuildSystem.MAVEN
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = false
+			uiProject.enabled = false
+			uiProject.testProject.enabled = false
+			ideProject.enabled = true
+			webProject.enabled = false
+			lineDelimiter = "\n"
+			languageServer = LanguageServer.FATJAR
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.lsMavenTychoFatjar"
+			preferredBuildSystem = BuildSystem.MAVEN
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = false
+			uiProject.enabled = true
+			uiProject.testProject.enabled = false
+			ideProject.enabled = true
+			webProject.enabled = false
+			lineDelimiter = "\n"
+			languageServer = LanguageServer.FATJAR
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.lsGradleFatjar"
+			preferredBuildSystem = BuildSystem.GRADLE
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = false
+			uiProject.enabled = false
+			uiProject.testProject.enabled = false
+			ideProject.enabled = true
+			webProject.enabled = false
+			lineDelimiter = "\n"
+			languageServer = LanguageServer.FATJAR
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.lsMavenApp"
+			preferredBuildSystem = BuildSystem.MAVEN
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = false
+			uiProject.enabled = false
+			uiProject.testProject.enabled = false
+			ideProject.enabled = true
+			webProject.enabled = false
+			lineDelimiter = "\n"
+			languageServer = LanguageServer.APP
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.lsMavenTychoApp"
+			preferredBuildSystem = BuildSystem.MAVEN
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = false
+			uiProject.enabled = true
+			uiProject.testProject.enabled = false
+			ideProject.enabled = true
+			webProject.enabled = false
+			lineDelimiter = "\n"
+			languageServer = LanguageServer.APP
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.lsGradleApp"
+			preferredBuildSystem = BuildSystem.GRADLE
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = false
+			uiProject.enabled = false
+			uiProject.testProject.enabled = false
+			ideProject.enabled = true
+			webProject.enabled = false
+			lineDelimiter = "\n"
+			languageServer = LanguageServer.APP
 		]
 	]
 

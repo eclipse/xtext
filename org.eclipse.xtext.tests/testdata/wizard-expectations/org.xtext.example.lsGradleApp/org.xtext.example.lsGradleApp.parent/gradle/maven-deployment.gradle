@@ -1,0 +1,11 @@
+//see https://docs.gradle.org/current/userguide/maven_plugin.html
+apply plugin: 'maven'
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: "file://${buildDir}/localRepo")
+			snapshotRepository(url: "file://${buildDir}/localRepo")
+		}
+	}
+}
