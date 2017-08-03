@@ -171,7 +171,6 @@ public class SerializerScopeProvider implements IScopeProvider, IFeatureNames {
 		}
 		if (feature.getSimpleName().startsWith("get") || feature.getSimpleName().startsWith("is")) {
 			List<IEObjectDescription> result = Lists.newArrayListWithCapacity(2);
-			result.add(EObjectDescription.create(name, feature));
 			if (feature.getSimpleName().startsWith("get")) {
 				String propertyName = Strings.toFirstLower(feature.getSimpleName().substring(3));
 				result.add(EObjectDescription.create(propertyName, feature));
@@ -179,6 +178,7 @@ public class SerializerScopeProvider implements IScopeProvider, IFeatureNames {
 				String propertyName = Strings.toFirstLower(feature.getSimpleName().substring(2));
 				result.add(EObjectDescription.create(propertyName, feature));
 			}
+			result.add(EObjectDescription.create(name, feature));
 			return new SimpleScope(result);
 		}
 		return new SingletonScope(EObjectDescription.create(name, feature), IScope.NULLSCOPE);

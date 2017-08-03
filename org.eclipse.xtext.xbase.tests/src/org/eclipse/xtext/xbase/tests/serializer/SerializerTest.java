@@ -9,8 +9,11 @@ package org.eclipse.xtext.xbase.tests.serializer;
 
 import javax.inject.Inject;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -18,6 +21,7 @@ import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -76,6 +80,33 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		
 		XInstanceOfExpression parsedExpression = parseHelper.parse(string);
 		assertTrue(EcoreUtil.equals(instanceOfExpression, parsedExpression));
+	}
+	
+	@Test public void testSerialize_ExtrasIssue164() throws Exception {
+		DerivedStateAwareResource resource = (DerivedStateAwareResource) newResource("org.eclipse.xtext.xbase.tests.serializer.SerializerTest.Demo.demo");
+		XMemberFeatureCall call = (XMemberFeatureCall) resource.getContents().get(0);
+		ISerializer serializer = get(ISerializer.class);
+		call.eAdapters().clear();
+		String string = serializer.serialize(call);
+		assertEquals("org.eclipse.xtext.xbase.tests.serializer.SerializerTest.Demo.demo", string);
+	}
+	
+	@Test public void testSerialize_ExtrasIssue164_02() throws Exception {
+		DerivedStateAwareResource resource = (DerivedStateAwareResource) newResource("org.eclipse.xtext.xbase.tests.serializer.SerializerTest.Demo.getDemo2(1)");
+		XMemberFeatureCall call = (XMemberFeatureCall) resource.getContents().get(0);
+		ISerializer serializer = get(ISerializer.class);
+		call.eAdapters().clear();
+		String string = serializer.serialize(call);
+		assertEquals("org.eclipse.xtext.xbase.tests.serializer.SerializerTest.Demo.getDemo2(1)", string);
+	}
+	
+	public static class Demo {
+		public static String getDemo() {
+			return "Demo";
+		}
+		public static String getDemo2(int value) {
+			return "Demo";
+		}
 	}
 
 }
