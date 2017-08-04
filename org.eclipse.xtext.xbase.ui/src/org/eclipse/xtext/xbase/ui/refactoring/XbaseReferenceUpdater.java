@@ -225,16 +225,16 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	@Override
 	protected void processReferringResource(Resource referringResource,
 			Iterable<IReferenceDescription> referenceDescriptions, ElementRenameArguments elementRenameArguments,
-			IRefactoringUpdateAcceptor updateAcceptor) {
+			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
 		ImportAwareUpdateAcceptor importAwareUpdateAcceptor = createUpdateAcceptor(referringResource, updateAcceptor);
 		
 		Iterable<IReferenceDescription> importTypeReferences = getImportTypeReferences(referenceDescriptions);
-		super.processReferringResource(referringResource, importTypeReferences, elementRenameArguments, importAwareUpdateAcceptor);
+		super.processReferringResource(referringResource, importTypeReferences, elementRenameArguments, importAwareUpdateAcceptor, monitor);
 		
 		importAwareUpdateAcceptor.getImportSection().update();
 		
 		Iterable<IReferenceDescription> notImportTypeReferences = getNotImportTypeReferences(referenceDescriptions);
-		super.processReferringResource(referringResource, notImportTypeReferences, elementRenameArguments, importAwareUpdateAcceptor);
+		super.processReferringResource(referringResource, notImportTypeReferences, elementRenameArguments, importAwareUpdateAcceptor, monitor);
 		
 		List<ReplaceRegion> importChanges = importAwareUpdateAcceptor.getImportSection().rewrite();
 		TextEdit importChangeEdit = replaceConverter.convertToTextEdit(importChanges);
