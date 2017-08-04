@@ -32,6 +32,7 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage.Literals.*
 import static org.junit.Assert.*
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguageFactory
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -237,6 +238,11 @@ class SemanticRegionFinderTest {
 		val expected = "(b); ((b) + c); (a + ((b) + c) + d)"
 		assertEquals(expected, actual1)
 		assertEquals(expected, actual2)
+	}
+
+	@Test(expected=IllegalArgumentException) def void regionForExternalObject() {
+		val expr = '''5 (foo)'''.parseAs(Expression)
+		expr.toAccess.regionForEObject(RegionaccesstestlanguageFactory.eINSTANCE.createExpression)
 	}
 
 	def private String pairsToString(Iterable<Pair<ISemanticRegion, ISemanticRegion>> pairs) {
