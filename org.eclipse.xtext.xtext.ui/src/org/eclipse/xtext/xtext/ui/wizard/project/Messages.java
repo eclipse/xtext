@@ -36,6 +36,8 @@ public class Messages extends NLS {
 	public static String AdvancedNewProjectPage_projEclipseP2;
 	public static String AdvancedNewProjectPage_projIde;
 	public static String AdvancedNewProjectPage_projIde_description;
+	public static String AdvancedNewProjectPage_languageServer;
+	public static String AdvancedNewProjectPage_languageServer_description;
 	public static String AdvancedNewProjectPage_projIdea;
 	public static String AdvancedNewProjectPage_projWeb;
 	public static String AdvancedNewProjectPage_srcLayout;
