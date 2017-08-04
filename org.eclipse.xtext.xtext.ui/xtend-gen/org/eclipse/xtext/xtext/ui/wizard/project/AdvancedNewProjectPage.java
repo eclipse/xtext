@@ -525,6 +525,17 @@ public class AdvancedNewProjectPage extends WizardPage {
     return ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
   }
   
+  protected Button Radio(final Composite composite, final Procedure1<? super Button> config) {
+    Button _button = new Button(composite, SWT.RADIO);
+    final Procedure1<Button> _function = (Button it) -> {
+      it.setFont(it.getParent().getFont());
+      GridData _gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
+      it.setLayoutData(_gridData);
+      config.apply(it);
+    };
+    return ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
+  }
+  
   protected Combo DropDown(final Composite parent, final Procedure1<? super Combo> config) {
     Combo _combo = new Combo(parent, SWT.READ_ONLY);
     final Procedure1<Combo> _function = (Combo it) -> {

@@ -347,6 +347,14 @@ class AdvancedNewProjectPage extends WizardPage {
 		]
 	}
 
+	def protected Radio(Composite composite, (Button)=>void config) {
+		new Button(composite, SWT.RADIO) => [
+			font = parent.font
+			layoutData = new GridData(SWT.FILL, SWT.CENTER, true, false)
+			config.apply(it)
+		]
+	}
+
 	def protected DropDown(Composite parent, (Combo)=>void config) {
 		new Combo(parent, SWT.READ_ONLY) => [
 			font = parent.font
