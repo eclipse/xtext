@@ -364,10 +364,16 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			doCreateContexts(lastCompleteNodeBeforeDatatype, datatypeNode, prefix, currentModel, followElements);
 		}
 		
+		/**
+		 * @since 2.13
+		 */
 		protected String getInputToParse(INode node) throws BadLocationException {
 			return getInputToParse(node.getOffset());
 		}
 		
+		/**
+		 * @since 2.13
+		 */
 		protected String getInputToParse(int offset) throws BadLocationException {
 			return completionPrefixProvider.getInputToParse(viewer.getDocument().get(), offset, completionOffset);
 		}
