@@ -40,6 +40,9 @@ public class LeafNodeFinder {
 		return null;
 	}
 	
+	/**
+	 * @since 2.13
+	 */
 	protected boolean matchesSearchCriteria(INode object) {
 		if (leading) {
 			if (object.getTotalOffset() < offset && object.getTotalLength() + object.getTotalOffset() >= offset) {
@@ -53,6 +56,9 @@ public class LeafNodeFinder {
 		return object.getTotalOffset() == offset && object.getTotalLength() == 0;
 	}
 	
+	/**
+	 * @since 2.13
+	 */
 	protected ILeafNode searchInChildren(ICompositeNode object) {
 		Iterator<ILeafNode> leafNodes = object.getLeafNodes().iterator();
 		ILeafNode result = null;

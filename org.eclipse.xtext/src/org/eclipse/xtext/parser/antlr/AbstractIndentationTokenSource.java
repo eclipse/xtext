@@ -53,6 +53,9 @@ public abstract class AbstractIndentationTokenSource extends AbstractSplittingTo
 	 */
 	protected abstract boolean shouldSplitTokenImpl(Token token);
 
+	/**
+	 * @since 2.13
+	 */
 	protected void doSplitEofToken(Token token, ITokenAcceptor result) {
 		if (shouldEmitPendingEndTokens()) {
 			while(indentationStack.size() > 1) {
@@ -117,6 +120,9 @@ public abstract class AbstractIndentationTokenSource extends AbstractSplittingTo
 		}
 	}
 
+	/**
+	 * @since 2.13
+	 */
 	protected void handleRemainingText(Token token, String text, int indentation, ITokenAcceptor result) {
 		CommonToken trailingToken = createToken((CommonToken) token, text, null, null, nextOffset, null, null);
 		if (indentation > currentIndentation) {
