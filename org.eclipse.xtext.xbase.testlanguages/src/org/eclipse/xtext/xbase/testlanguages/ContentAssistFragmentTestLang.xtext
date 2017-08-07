@@ -10,6 +10,7 @@ ContentAssistFragmentTestLanguageRoot:
 // To test bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434
 // we need to override one of the Xbase's rules
 // even if we don't change its syntax
+@Override 
 XVariableDeclaration returns XVariableDeclaration:
 	{XVariableDeclaration}
 	(writeable?='var'|'val') (=>(type=JvmTypeReference name=ValidID) | name=ValidID) ('=' right=XExpression)?;
