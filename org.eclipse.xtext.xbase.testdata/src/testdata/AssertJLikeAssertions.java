@@ -8,8 +8,6 @@
 
 package testdata;
 
-import org.junit.Assert;
-
 import com.google.common.base.Objects;
 
 public class AssertJLikeAssertions {
