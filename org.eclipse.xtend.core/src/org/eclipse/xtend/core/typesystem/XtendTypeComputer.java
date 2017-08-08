@@ -138,7 +138,8 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		thenState.withExpectation(charSequence).computeTypes(thenExpression);
 		for(RichStringElseIf elseIf: object.getElseIfs()) {
 			state.withExpectation(booleanType).computeTypes(elseIf.getIf());
-			state.withExpectation(charSequence).computeTypes(elseIf.getThen());
+			ITypeComputationState elseState = reassignCheckedType(elseIf.getIf(), elseIf.getThen(), state);
+			elseState.withExpectation(charSequence).computeTypes(elseIf.getThen());
 		}
 		state.withExpectation(charSequence).computeTypes(object.getElse());
 		state.acceptActualType(charSequence);
