@@ -26,7 +26,6 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -41,7 +40,7 @@ import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
-import org.eclipse.xtext.ui.generator.trace.TraceForStorageProvider;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.generator.trace.TraceMarkers;
 import org.eclipse.xtext.ui.resource.ProjectByResourceProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
@@ -89,11 +88,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	private TraceMarkers traceMarkers;
 
 	@Inject
-	private TraceForStorageProvider fileBasedTraceInformation;
+	private ITraceForStorageProvider fileBasedTraceInformation;
 
-	@Inject
-	private IWorkspace workspace;
-	
 	@Inject
 	private ProjectByResourceProvider projectProvider;
 	

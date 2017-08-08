@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.trace;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificTraceProvider;
 
@@ -19,6 +20,20 @@ import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificTraceProvider
  * @since 2.9
  */
 public interface ITraceForStorageProvider extends IPlatformSpecificTraceProvider<IStorage, IEclipseTrace> {
+	/**
+	 * @since 2.13
+	 */
+	default IFile getTraceFile(IFile generatedFile) {
+		return null;
+	}
+
+	/**
+	 * @since 2.13
+	 */
+	default boolean isTraceFile(IStorage storage) {
+		return false;
+	}
+	
 	
 	class Null extends org.eclipse.xtext.generator.trace.internal.NoTraces<IStorage, IEclipseTrace> implements ITraceForStorageProvider {
 	}
