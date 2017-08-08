@@ -14,10 +14,10 @@ import org.eclipse.lsp4j.TextDocumentItem
 import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.junit.Test
 
-class InMemoryWorkspaceTest extends AbstractTestLangLanguageServerTest {
+class UnknownProjectConfigTest extends AbstractTestLangLanguageServerTest {
 	
 	@Test
-	def void testCompletionWithInmemoryScheme() {
+	def void testCompletionWithInmemoryScheme_01() {
 		initialize[rootUri = null]
 		val inmemoryUri = 'inmemory:/mydoc.testlang'
 		languageServer.didOpen(new DidOpenTextDocumentParams => [
@@ -32,8 +32,38 @@ class InMemoryWorkspaceTest extends AbstractTestLangLanguageServerTest {
 	}
 	
 	@Test
-	def void testCompletionWithFileScheme() {
+	def void testCompletionWithInmemoryScheme_02() {
+		initialize
+		val inmemoryUri = 'inmemory:/mydoc.testlang'
+		languageServer.didOpen(new DidOpenTextDocumentParams => [
+			textDocument = new TextDocumentItem => [
+				uri = inmemoryUri
+				text = '''
+					type Foo {}
+				'''
+			]
+		])
+		checkCompletion(inmemoryUri)
+	}
+	
+	@Test
+	def void testCompletionWithFileScheme_01() {
 		initialize[rootUri = null]
+		val fileUri = 'file:/home/test/workspace/mydoc.testlang'
+		languageServer.didOpen(new DidOpenTextDocumentParams => [
+			textDocument = new TextDocumentItem => [
+				uri = fileUri
+				text = '''
+					type Foo {}
+				'''
+			]
+		])
+		checkCompletion(fileUri)
+	}
+
+	@Test
+	def void testCompletionWithFileScheme_02() {
+		initialize
 		val fileUri = 'file:/home/test/workspace/mydoc.testlang'
 		languageServer.didOpen(new DidOpenTextDocumentParams => [
 			textDocument = new TextDocumentItem => [

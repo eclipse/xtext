@@ -8,17 +8,10 @@
 package org.eclipse.xtext.ide.server;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
-import org.eclipse.xtext.ide.server.MultiProjectWorkspaceConfig;
-import org.eclipse.xtext.ide.server.RootSourceFolderProjectConfig;
-import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.workspace.IProjectConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
-import org.eclipse.xtext.workspace.InMemoryProjectConfig;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.ide.server.ProjectWorkspaceConfigFactory;
+import org.eclipse.xtext.workspace.FileProjectConfig;
+import org.eclipse.xtext.workspace.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -28,40 +21,29 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  * @since 2.11
  */
 @SuppressWarnings("all")
-public class MultiProjectWorkspaceConfigFactory implements IWorkspaceConfigFactory {
+public class MultiProjectWorkspaceConfigFactory extends ProjectWorkspaceConfigFactory {
   @Override
-  public IWorkspaceConfig getWorkspaceConfig(final URI workspaceBaseURI) {
-    if ((workspaceBaseURI == null)) {
-      final InMemoryProjectConfig projectConfig = new InMemoryProjectConfig();
-      return projectConfig.getWorkspaceConfig();
-    } else {
-      String _fileString = workspaceBaseURI.toFileString();
-      final File baseFile = new File(_fileString);
-      boolean _isDirectory = baseFile.isDirectory();
-      if (_isDirectory) {
-        final HashMap<String, IProjectConfig> name2config = CollectionLiterals.<String, IProjectConfig>newHashMap();
-        final MultiProjectWorkspaceConfig result = new MultiProjectWorkspaceConfig(name2config);
-        final IAcceptor<IProjectConfig> _function = (IProjectConfig it) -> {
-          name2config.put(it.getName(), it);
-        };
-        final IAcceptor<IProjectConfig> acceptor = _function;
-        final Function1<File, Boolean> _function_1 = (File it) -> {
-          return Boolean.valueOf(it.isDirectory());
-        };
-        final Consumer<File> _function_2 = (File it) -> {
-          this.addProjectConfigs(URI.createFileURI(it.getAbsolutePath()), result, acceptor);
-        };
-        IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(baseFile.listFiles())), _function_1).forEach(_function_2);
-        return result;
+  public void findProjects(final WorkspaceConfig workspaceConfig, final URI uri) {
+    if ((uri == null)) {
+      return;
+    }
+    String _fileString = uri.toFileString();
+    final File baseFile = new File(_fileString);
+    boolean _isDirectory = baseFile.isDirectory();
+    boolean _not = (!_isDirectory);
+    if (_not) {
+      return;
+    }
+    final Function1<File, Boolean> _function = (File it) -> {
+      return Boolean.valueOf(it.isDirectory());
+    };
+    Iterable<File> _filter = IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(baseFile.listFiles())), _function);
+    for (final File file : _filter) {
+      {
+        final FileProjectConfig project = new FileProjectConfig(file, workspaceConfig);
+        project.addSourceFolder(".");
+        workspaceConfig.addProject(project);
       }
     }
-    return null;
-  }
-  
-  public void addProjectConfigs(final URI projectBaseURI, final IWorkspaceConfig workspaceConfig, final IAcceptor<IProjectConfig> acceptor) {
-    URI _appendSegment = projectBaseURI.appendSegment("");
-    String _lastSegment = projectBaseURI.lastSegment();
-    RootSourceFolderProjectConfig _rootSourceFolderProjectConfig = new RootSourceFolderProjectConfig(_appendSegment, _lastSegment, workspaceConfig);
-    acceptor.accept(_rootSourceFolderProjectConfig);
   }
 }

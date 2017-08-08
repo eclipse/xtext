@@ -26,9 +26,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class InMemoryWorkspaceTest extends AbstractTestLangLanguageServerTest {
+public class UnknownProjectConfigTest extends AbstractTestLangLanguageServerTest {
   @Test
-  public void testCompletionWithInmemoryScheme() {
+  public void testCompletionWithInmemoryScheme_01() {
     final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
       it.setRootUri(null);
     };
@@ -53,7 +53,29 @@ public class InMemoryWorkspaceTest extends AbstractTestLangLanguageServerTest {
   }
   
   @Test
-  public void testCompletionWithFileScheme() {
+  public void testCompletionWithInmemoryScheme_02() {
+    this.initialize();
+    final String inmemoryUri = "inmemory:/mydoc.testlang";
+    DidOpenTextDocumentParams _didOpenTextDocumentParams = new DidOpenTextDocumentParams();
+    final Procedure1<DidOpenTextDocumentParams> _function = (DidOpenTextDocumentParams it) -> {
+      TextDocumentItem _textDocumentItem = new TextDocumentItem();
+      final Procedure1<TextDocumentItem> _function_1 = (TextDocumentItem it_1) -> {
+        it_1.setUri(inmemoryUri);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("type Foo {}");
+        _builder.newLine();
+        it_1.setText(_builder.toString());
+      };
+      TextDocumentItem _doubleArrow = ObjectExtensions.<TextDocumentItem>operator_doubleArrow(_textDocumentItem, _function_1);
+      it.setTextDocument(_doubleArrow);
+    };
+    DidOpenTextDocumentParams _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParams>operator_doubleArrow(_didOpenTextDocumentParams, _function);
+    this.languageServer.didOpen(_doubleArrow);
+    this.checkCompletion(inmemoryUri);
+  }
+  
+  @Test
+  public void testCompletionWithFileScheme_01() {
     final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
       it.setRootUri(null);
     };
@@ -73,6 +95,28 @@ public class InMemoryWorkspaceTest extends AbstractTestLangLanguageServerTest {
       it.setTextDocument(_doubleArrow);
     };
     DidOpenTextDocumentParams _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParams>operator_doubleArrow(_didOpenTextDocumentParams, _function_1);
+    this.languageServer.didOpen(_doubleArrow);
+    this.checkCompletion(fileUri);
+  }
+  
+  @Test
+  public void testCompletionWithFileScheme_02() {
+    this.initialize();
+    final String fileUri = "file:/home/test/workspace/mydoc.testlang";
+    DidOpenTextDocumentParams _didOpenTextDocumentParams = new DidOpenTextDocumentParams();
+    final Procedure1<DidOpenTextDocumentParams> _function = (DidOpenTextDocumentParams it) -> {
+      TextDocumentItem _textDocumentItem = new TextDocumentItem();
+      final Procedure1<TextDocumentItem> _function_1 = (TextDocumentItem it_1) -> {
+        it_1.setUri(fileUri);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("type Foo {}");
+        _builder.newLine();
+        it_1.setText(_builder.toString());
+      };
+      TextDocumentItem _doubleArrow = ObjectExtensions.<TextDocumentItem>operator_doubleArrow(_textDocumentItem, _function_1);
+      it.setTextDocument(_doubleArrow);
+    };
+    DidOpenTextDocumentParams _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParams>operator_doubleArrow(_didOpenTextDocumentParams, _function);
     this.languageServer.didOpen(_doubleArrow);
     this.checkCompletion(fileUri);
   }

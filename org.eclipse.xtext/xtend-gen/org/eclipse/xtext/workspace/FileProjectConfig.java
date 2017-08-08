@@ -11,16 +11,19 @@ import com.google.common.base.Objects;
 import java.io.File;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.FileSourceFolder;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
-import org.eclipse.xtext.workspace.SingleProjectWorkspaceConfig;
+import org.eclipse.xtext.workspace.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
+@Accessors
 @SuppressWarnings("all")
 public class FileProjectConfig implements IProjectConfig {
   private final URI path;
@@ -29,21 +32,47 @@ public class FileProjectConfig implements IProjectConfig {
   
   private final Set<FileSourceFolder> sourceFolders = CollectionLiterals.<FileSourceFolder>newHashSet();
   
+  private final IWorkspaceConfig workspaceConfig;
+  
   public FileProjectConfig(final URI path) {
-    this(path, path.lastSegment());
+    this(path, ((IWorkspaceConfig) null));
   }
   
   public FileProjectConfig(final URI path, final String name) {
-    this.path = path;
-    this.name = name;
+    this(path, name, ((IWorkspaceConfig) null));
   }
   
   public FileProjectConfig(final File root, final String name) {
-    this(UriUtil.createFolderURI(root), name);
+    this(root, name, ((IWorkspaceConfig) null));
   }
   
   public FileProjectConfig(final File root) {
-    this(UriUtil.createFolderURI(root), root.getName());
+    this(root, ((IWorkspaceConfig) null));
+  }
+  
+  public FileProjectConfig(final URI path, final IWorkspaceConfig workspaceConfig) {
+    this(path, path.lastSegment(), workspaceConfig);
+  }
+  
+  public FileProjectConfig(final URI path, final String name, final IWorkspaceConfig workspaceConfig) {
+    this.path = path;
+    this.name = name;
+    IWorkspaceConfig _elvis = null;
+    if (workspaceConfig != null) {
+      _elvis = workspaceConfig;
+    } else {
+      WorkspaceConfig _workspaceConfig = new WorkspaceConfig(this);
+      _elvis = _workspaceConfig;
+    }
+    this.workspaceConfig = _elvis;
+  }
+  
+  public FileProjectConfig(final File root, final String name, final IWorkspaceConfig workspaceConfig) {
+    this(UriUtil.createFolderURI(root), name, workspaceConfig);
+  }
+  
+  public FileProjectConfig(final File root, final IWorkspaceConfig workspaceConfig) {
+    this(UriUtil.createFolderURI(root), root.getName(), workspaceConfig);
   }
   
   public FileSourceFolder addSourceFolder(final String relativePath) {
@@ -62,21 +91,6 @@ public class FileProjectConfig implements IProjectConfig {
       return Boolean.valueOf(UriUtil.isPrefixOf(source.getPath(), member));
     };
     return IterableExtensions.<FileSourceFolder>findFirst(this.sourceFolders, _function);
-  }
-  
-  @Override
-  public String getName() {
-    return this.name;
-  }
-  
-  @Override
-  public URI getPath() {
-    return this.path;
-  }
-  
-  @Override
-  public Set<FileSourceFolder> getSourceFolders() {
-    return this.sourceFolders;
   }
   
   @Override
@@ -103,8 +117,23 @@ public class FileProjectConfig implements IProjectConfig {
     return _builder.toString();
   }
   
-  @Override
+  @Pure
+  public URI getPath() {
+    return this.path;
+  }
+  
+  @Pure
+  public String getName() {
+    return this.name;
+  }
+  
+  @Pure
+  public Set<FileSourceFolder> getSourceFolders() {
+    return this.sourceFolders;
+  }
+  
+  @Pure
   public IWorkspaceConfig getWorkspaceConfig() {
-    return new SingleProjectWorkspaceConfig(this);
+    return this.workspaceConfig;
   }
 }

@@ -9,18 +9,17 @@ package org.eclipse.xtext.ide.server
 
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.workspace.FileProjectConfig
-import org.eclipse.xtext.workspace.FileSourceFolder
 import org.eclipse.xtext.workspace.IWorkspaceConfig
-import org.eclipse.xtext.workspace.InMemoryProjectConfig
+import org.eclipse.xtext.workspace.WorkspaceConfig
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.11
  */
 interface IWorkspaceConfigFactory {
-    
-    def IWorkspaceConfig getWorkspaceConfig(URI workspaceBaseURI)
-    
+
+	def IWorkspaceConfig getWorkspaceConfig(URI workspaceBaseURI)
+
 }
 
 /**
@@ -30,16 +29,20 @@ interface IWorkspaceConfigFactory {
  * @since 2.11
  */
 class ProjectWorkspaceConfigFactory implements IWorkspaceConfigFactory {
-    
-    override getWorkspaceConfig(URI workspaceBaseURI) {
-    	if (workspaceBaseURI === null) {
-			val projectConfig = new InMemoryProjectConfig
-			return projectConfig.workspaceConfig
-    	} else {
-	        val projectConfig = new FileProjectConfig(workspaceBaseURI)
-	        projectConfig.sourceFolders += new FileSourceFolder(projectConfig, '.')
-	        return projectConfig.workspaceConfig
-        }
-    }
-    
+
+	override getWorkspaceConfig(URI workspaceBaseURI) {
+		val workspaceConfig = new WorkspaceConfig
+		workspaceConfig.findProjects(workspaceBaseURI)
+		return workspaceConfig
+	}
+
+	def void findProjects(WorkspaceConfig workspaceConfig, URI uri) {
+		if (uri !== null) {
+			val project = new FileProjectConfig(uri, workspaceConfig)
+			project.addSourceFolder('.')
+			workspaceConfig.addProject(project)
+		}
+	}
+
 }
+
