@@ -307,9 +307,10 @@ public class IterableExtensions {
 	 * Returns an iterable that performs the given {@code transformation} for each element of {@code original} when
 	 * requested. The mapping is done lazily. That is, subsequent iterations of the elements in the iterable will
 	 * repeatedly apply the transformation.
-	 * 
+	 * <p>
 	 * The returned iterable's iterator supports {@code remove()} if the provided iterator does. After a successful
 	 * {@code remove()} call, {@code original} no longer contains the corresponding element.
+	 * </p>
 	 * 
 	 * @param original
 	 *            the original iterable. May not be <code>null</code>.
@@ -323,12 +324,38 @@ public class IterableExtensions {
 	}
 
 	/**
+	 * Returns an iterable that performs the given {@code transformation} for each element of {@code original} when
+	 * requested. The mapping is done lazily. That is, subsequent iterations of the elements in the iterable will
+	 * repeatedly apply the transformation.
+	 * <p>
+	 * The transformation maps each element to an iterable, and all resulting iterables are combined to a single iterable.
+	 * Effectively a combination of {@link #map(Iterable, Function1)} and {@link #flatten(Iterable)} is performed.
+	 * </p>
+	 * <p>
+	 * The returned iterable's iterator <i>does not support {@code remove()}</i> in contrast to {@link #map(Iterable, Function1)}.
+	 * </p>
+	 * 
+	 * @param original
+	 *            the original iterable. May not be <code>null</code>.
+	 * @param transformation
+	 *            the transformation. May not be <code>null</code> and must not yield <code>null</code>.
+	 * @return an iterable that provides the result of the transformation. Never <code>null</code>.
+	 * 
+	 * @since 2.13
+	 */
+	@Pure
+	public static <T, R> Iterable<R> flatMap(Iterable<T> original, Function1<? super T, ? extends Iterable<R>> transformation) {
+		return flatten(map(original, transformation));
+	}
+
+	/**
 	 * Combines multiple iterables into a single iterable. The returned iterable has an iterator that traverses the
 	 * elements of each iterable in {@code inputs}. The input iterators are not polled until necessary.
 	 * 
 	 * <p>
 	 * The returned iterable's iterator supports {@code remove()} when the corresponding input iterator supports it. The
 	 * methods of the returned iterable may throw {@code NullPointerException} if any of the input iterators are null.
+	 * </p>
 	 * 
 	 * @param inputs
 	 *            the to be flattened iterables. May not be <code>null</code>.

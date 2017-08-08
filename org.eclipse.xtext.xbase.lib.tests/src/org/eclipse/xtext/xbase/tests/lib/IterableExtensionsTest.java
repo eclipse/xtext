@@ -28,6 +28,7 @@ import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Karsten Thoms - testMap, testFlatMap
  */
 public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<Integer>> {
 
@@ -236,4 +237,47 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 		}
 	}
 
+	@Test public void testMap () {
+		ArrayList<String> list = newArrayList("foo", "bar");
+		
+		final Functions.Function1<String, String> function = new Functions.Function1<String, String>() {
+			@Override
+			public String apply(String p) {
+				return "Hello "+p;
+			}
+		};
+		
+		assertEquals(newArrayList("Hello foo", "Hello bar"), newArrayList(IterableExtensions.map(list, function)));
+	
+		// test that the returned iterator supports remove on the underyling list
+		// therefore we need a function that maps to the same object contained in the list
+		final Functions.Function1<String, String> functionForRemove = new Functions.Function1<String, String>() {
+			@Override
+			public String apply(String p) {
+				return "foo".equals(p) ? p : "Hello "+p;
+			}
+		};
+
+		assertTrue(list.contains("foo"));
+		assertEquals(2, list.size());
+		assertEquals(newArrayList("foo", "Hello bar"), newArrayList(IterableExtensions.map(list, functionForRemove)));
+		Iterator<String> iterator = IterableExtensions.map(list, functionForRemove).iterator();
+		iterator.next();
+		iterator.remove();
+		
+		assertTrue(!list.contains("foo"));
+		assertEquals(1, list.size());
+	}
+
+	@Test public void testFlatMap () {
+		ArrayList<String> list = newArrayList("foo", "bar");
+		
+		final Functions.Function1<String, Iterable<String>> function = new Functions.Function1<String, Iterable<String>>() {
+			@Override
+			public Iterable<String> apply(String p) {
+				return newArrayList("Hello", p);
+			}
+		};
+		assertEquals(newArrayList("Hello", "foo", "Hello", "bar"), newArrayList(IterableExtensions.flatMap(list, function)));
+	}
 }

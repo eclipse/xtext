@@ -371,6 +371,47 @@ import com.google.common.collect.Sets;
 	}
 
 	/**
+	 * Returns an iterable that performs the given {@code transformation} for each element of {@code original} when
+	 * requested. The mapping is done lazily. That is, subsequent iterations of the elements in the iterable will
+	 * repeatedly apply the transformation.
+	 * <p>
+	 * The transformation maps each element to an iterable, and all resulting iterables are combined to a single iterable.
+	 * Effectively a combination of {@link #map(Iterable, Function1)} and {@link #flatten(Iterable)} is performed.
+	 * </p>
+	 * <p>
+	 * The returned iterable's iterator <i>does not support {@code remove()}</i> in contrast to {@link #map(Iterable, Function1)}.
+	 * </p>
+	 * 
+	 * @param original
+	 *            the original iterable. May not be <code>null</code>.
+	 * @param transformation
+	 *            the transformation. May not be <code>null</code> and must not yield <code>null</code>.
+	 * @return an iterable that provides the result of the transformation. Never <code>null</code>.
+	 * 
+	 * @since 2.13
+	 */
+	@Pure
+	public static <T, R> Iterator<R> flatMap(Iterator<T> original, Function1<? super T, ? extends Iterator<R>> transformation) {
+		return flatten(map(original, transformation));
+	}
+
+
+	/**
+	 * Combines multiple iterators into a single iterator. The returned iterator traverses the
+	 * elements of each iterator in {@code inputs}. The input iterators are not polled until necessary.
+	 * 
+	 * @param inputs
+	 *            the to be flattened iterators. May not be <code>null</code>.
+	 * @return an iterator that provides the concatenated values of the input elements. Never <code>null</code>.
+	 * 
+	 * @since 2.13
+	 */
+	@Inline(value="$2.$3concat($1)", imported=Iterators.class)
+	public static <T> Iterator<T> flatten(Iterator<? extends Iterator<? extends T>> inputs) {
+		return Iterators.concat(inputs);
+	}
+
+	/**
 	 * Applies {@code procedure} for each element of the given iterator.
 	 * 
 	 * @param iterator

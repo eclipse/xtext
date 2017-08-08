@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -27,6 +28,7 @@ import com.google.common.collect.Iterators;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Karsten Thoms - testMap, testFlatMap
  */
 public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<Integer>> {
 	
@@ -353,5 +355,50 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		} catch (NullPointerException e) {
 			// expected NPE
 		}
+	}
+
+	@Test public void testMap () {
+		ArrayList<String> list = newArrayList("foo", "bar");
+		
+		final Functions.Function1<String, String> function = new Functions.Function1<String, String>() {
+			@Override
+			public String apply(String p) {
+				return "Hello "+p;
+			}
+		};
+		
+		assertEquals(newArrayList("Hello foo", "Hello bar"), newArrayList(IteratorExtensions.map(list.iterator(), function)));
+
+	
+		// test that the returned iterator supports remove on the underyling list
+		// therefore we need a function that maps to the same object contained in the list
+		final Functions.Function1<String, String> functionForRemove = new Functions.Function1<String, String>() {
+			@Override
+			public String apply(String p) {
+				return "foo".equals(p) ? p : "Hello "+p;
+			}
+		};
+
+		assertTrue(list.contains("foo"));
+		assertEquals(2, list.size());
+		assertEquals(newArrayList("foo", "Hello bar"), newArrayList(IteratorExtensions.map(list.iterator(), functionForRemove)));
+		Iterator<String> iterator = IteratorExtensions.map(list.iterator(), functionForRemove);
+		iterator.next();
+		iterator.remove();
+		
+		assertTrue(!list.contains("foo"));
+		assertEquals(1, list.size());
+	}
+
+	@Test public void testFlatMap () {
+		ArrayList<String> list = newArrayList("foo", "bar");
+		
+		final Functions.Function1<String, Iterator<String>> function = new Functions.Function1<String, Iterator<String>>() {
+			@Override
+			public Iterator<String> apply(String p) {
+				return newArrayList("Hello", p).iterator();
+			}
+		};
+		assertEquals(newArrayList("Hello", "foo", "Hello", "bar"), newArrayList(IteratorExtensions.flatMap(list.iterator(), function)));
 	}
 }
