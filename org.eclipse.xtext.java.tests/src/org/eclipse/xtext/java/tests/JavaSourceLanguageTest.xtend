@@ -85,6 +85,24 @@ class JavaSourceLanguageTest {
         Assert.assertSame(annotation, annotationRef.annotation)
     }
 
+    @Test def void testClassShadowing() {
+    	    val rs = resourceSet('org/eclipse/xtext/java/tests/MySuperClass2.java' -> '''
+            package org.eclipse.xtext.java.tests;
+            public class MySuperClass2 {
+                public void doSomething() {
+                    
+                }
+            }
+        ''', 'org/eclipse/xtext/java/tests/MySubClass2.java' -> '''
+            package org.eclipse.xtext.java.tests;
+            public class MySubClass2 extends MySuperClass2 {
+            }
+        ''')
+        val superResource = rs.resources.findFirst[URI.toString.endsWith('MySuperClass2.java')]
+        val clazz = superResource.contents.head as JvmGenericType
+        Assert.assertNotNull(clazz.declaredOperations.head)
+    }
+
     @Inject Provider<XtextResourceSet> resourceSetProvider
     @Inject IResourceDescription.Manager resourceDesriptionManager
     @Inject IJvmTypeProvider.Factory typeProviderFactory

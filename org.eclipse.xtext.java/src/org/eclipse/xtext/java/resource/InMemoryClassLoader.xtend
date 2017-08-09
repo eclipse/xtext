@@ -24,6 +24,25 @@ class InMemoryClassLoader extends ClassLoader {
 		}
 	}
 
+	override getResource(String path) {
+		if (path.endsWith(".class")) {
+			val className = pathToClassName(path)
+			val bytes = classMap.get(className)
+			if (bytes !== null) {
+				return new URL("in-memory", null, -1, path, [
+					new URLConnection(it) {
+						override void connect() {}
+
+						override InputStream getInputStream() {
+							return new ByteArrayInputStream(bytes)
+						}
+					}
+				])
+			}
+		}
+		super.getResource(path)
+	}
+
 	override protected findResource(String path) {
 		if (path.endsWith(".class")) {
 			val className = pathToClassName(path)

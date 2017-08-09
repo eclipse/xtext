@@ -29,6 +29,42 @@ public class InMemoryClassLoader extends ClassLoader {
   }
   
   @Override
+  public URL getResource(final String path) {
+    try {
+      URL _xblockexpression = null;
+      {
+        boolean _endsWith = path.endsWith(".class");
+        if (_endsWith) {
+          final String className = this.pathToClassName(path);
+          final byte[] bytes = this.classMap.get(className);
+          if ((bytes != null)) {
+            final URLStreamHandler _function = new URLStreamHandler() {
+              @Override
+              protected URLConnection openConnection(final URL it) throws IOException {
+                return new URLConnection(it) {
+                  @Override
+                  public void connect() {
+                  }
+                  
+                  @Override
+                  public InputStream getInputStream() {
+                    return new ByteArrayInputStream(bytes);
+                  }
+                };
+              }
+            };
+            return new URL("in-memory", null, (-1), path, _function);
+          }
+        }
+        _xblockexpression = super.getResource(path);
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
   protected URL findResource(final String path) {
     try {
       boolean _endsWith = path.endsWith(".class");

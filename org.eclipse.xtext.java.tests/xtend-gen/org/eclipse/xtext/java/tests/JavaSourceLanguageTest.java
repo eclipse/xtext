@@ -176,6 +176,42 @@ public class JavaSourceLanguageTest {
     Assert.assertSame(annotation, annotationRef.getAnnotation());
   }
   
+  @Test
+  public void testClassShadowing() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package org.eclipse.xtext.java.tests;");
+    _builder.newLine();
+    _builder.append("public class MySuperClass2 {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public void doSomething() {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("org/eclipse/xtext/java/tests/MySuperClass2.java", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package org.eclipse.xtext.java.tests;");
+    _builder_1.newLine();
+    _builder_1.append("public class MySubClass2 extends MySuperClass2 {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("org/eclipse/xtext/java/tests/MySubClass2.java", _builder_1.toString());
+    final XtextResourceSet rs = this.resourceSet(_mappedTo, _mappedTo_1);
+    final Function1<Resource, Boolean> _function = (Resource it) -> {
+      return Boolean.valueOf(it.getURI().toString().endsWith("MySuperClass2.java"));
+    };
+    final Resource superResource = IterableExtensions.<Resource>findFirst(rs.getResources(), _function);
+    EObject _head = IterableExtensions.<EObject>head(superResource.getContents());
+    final JvmGenericType clazz = ((JvmGenericType) _head);
+    Assert.assertNotNull(IterableExtensions.<JvmOperation>head(clazz.getDeclaredOperations()));
+  }
+  
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
   
