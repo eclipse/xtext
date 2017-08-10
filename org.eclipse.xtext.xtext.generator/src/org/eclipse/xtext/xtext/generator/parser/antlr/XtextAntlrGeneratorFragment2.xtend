@@ -50,6 +50,7 @@ import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import com.google.common.collect.Iterables
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
@@ -301,6 +302,8 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	def JavaFileAccess generateContentAssistParser() {
 		val extension naming = contentAssistNaming
 		val file = fileFactory.createGeneratedJavaFile(grammar.parserClass)
+		val elements = (grammar.allAlternatives + grammar.allGroups + grammar.allAssignments + grammar.allUnorderedGroups).filter(AbstractElement)
+		val partitions = Iterables.partition(elements, 1500)
 		file.content = '''
 			public class «grammar.parserClass.simpleName» extends «grammar.getParserSuperClass(partialParsing)» {
 			
@@ -328,11 +331,26 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 					if (nameMappings == null) {
 						nameMappings = new «HashMap»<«AbstractElement», String>() {
 							private static final long serialVersionUID = 1L;
-							{
-								«FOR element : (grammar.allAlternatives + grammar.allGroups + grammar.allAssignments + grammar.allUnorderedGroups).filter(AbstractElement)»
-									put(grammarAccess.«element.grammarElementAccess», "«element.containingRule.contentAssistRuleName»__«element.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
+							«IF partitions.size > 1»
+								{
+									«FOR partition : partitions.indexed»
+										fillMap«partition.key»();
+									«ENDFOR»
+								}
+								«FOR partition : partitions.indexed»
+									private void fillMap«partition.key»() {
+										«FOR element : partition.value»
+											put(grammarAccess.«element.grammarElementAccess», "«element.containingRule.contentAssistRuleName»__«element.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
+										«ENDFOR»
+									}
 								«ENDFOR»
-							}
+							«ELSE»
+								{
+									«FOR element : elements»
+										put(grammarAccess.«element.grammarElementAccess», "«element.containingRule.contentAssistRuleName»__«element.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
+									«ENDFOR»
+								}
+							«ENDIF»
 						};
 					}
 					return nameMappings.get(element);
