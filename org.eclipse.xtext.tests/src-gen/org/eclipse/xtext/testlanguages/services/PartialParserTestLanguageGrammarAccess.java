@@ -220,16 +220,13 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cAbstractChildrenAbstractChildParserRuleCall_2_0 = (RuleCall)cAbstractChildrenAssignment_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//AbstractChildren:
-		//	'abstract children' '{'
-		//	abstractChildren+=AbstractChild+
-		//	'}';
+		//AbstractChildren: /* SuppressWarnings[SpacesInKeyword] */ 'abstract children' '{' abstractChildren+=AbstractChild+ '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'abstract children' '{' abstractChildren+=AbstractChild+ '}'
+		///* SuppressWarnings[SpacesInKeyword] */ 'abstract children' '{' abstractChildren+=AbstractChild+ '}'
 		public Group getGroup() { return cGroup; }
 		
-		//'abstract children'
+		///* SuppressWarnings[SpacesInKeyword] */ 'abstract children'
 		public Keyword getAbstractChildrenKeyword_0() { return cAbstractChildrenKeyword_0; }
 		
 		//'{'
@@ -492,10 +489,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return getChildAccess().getRule();
 	}
 	
-	//AbstractChildren:
-	//	'abstract children' '{'
-	//	abstractChildren+=AbstractChild+
-	//	'}';
+	//AbstractChildren: /* SuppressWarnings[SpacesInKeyword] */ 'abstract children' '{' abstractChildren+=AbstractChild+ '}';
 	public AbstractChildrenElements getAbstractChildrenAccess() {
 		return pAbstractChildren;
 	}
