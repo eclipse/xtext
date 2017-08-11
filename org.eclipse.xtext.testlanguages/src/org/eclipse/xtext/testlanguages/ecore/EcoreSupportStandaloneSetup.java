@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.tests.ecore;
+package org.eclipse.xtext.testlanguages.ecore;
 
 /**
  * Can be used to cause a side effect in workflow. As soon as this bean
