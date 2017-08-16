@@ -197,4 +197,22 @@
            type="org.eclipse.ui.IEditorPart">
      </propertyTester>
   </extension>
+   <extension
+       point="org.eclipse.ltk.core.refactoring.moveParticipants">
+    <moveParticipant
+          class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.participant.XtextMoveResourceParticipant"
+          id="org.eclipse.xtext.ui.shared.refactoring.moveResourceParticipant"
+          name="Xtext Move Resource Participant">
+       <enablement></enablement>
+    </moveParticipant>
+   </extension>
+   <extension
+         point="org.eclipse.ltk.core.refactoring.renameParticipants">
+      <renameParticipant
+      	  class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.participant.XtextRenameResourceParticipant"
+          id="org.eclipse.xtext.ui.shared.refactoring.renameResourceParticipant"
+          name="Xtext Rename Resource Participant">
+       <enablement></enablement>
+      </renameParticipant>
+   </extension>
 </plugin>
