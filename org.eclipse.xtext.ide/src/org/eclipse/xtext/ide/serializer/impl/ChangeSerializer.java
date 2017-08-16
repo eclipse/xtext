@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.serializer.impl;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -88,7 +90,8 @@ public class ChangeSerializer implements IChangeSerializer {
 						run.run();
 					}
 					ChangeDescription recording = rec.endRecording();
-					ResourceSetRecording tree = changeTreeProvider.createChangeTree(rs, recording);
+					ResourceSetRecording tree = changeTreeProvider.createChangeTree(rs, Collections.emptyList(),
+							recording);
 					ResourceRecording recordedResource = tree.getRecordedResource(resource);
 					serializer.serializeChanges(recordedResource, rewriter);
 				}
@@ -120,8 +123,8 @@ public class ChangeSerializer implements IChangeSerializer {
 		}
 		ITextRegionAccessDiff rewritten = rewriter.create();
 		List<ITextReplacement> rep = formatter.format(rewritten);
-		URI uri = rec.getResource().getURI();
-		TextDocumentChange change = new TextDocumentChange(rewritten, uri, rep);
+		URI oldUri = rec.getSnapshot().getURI();
+		TextDocumentChange change = new TextDocumentChange(rewritten, oldUri, rep);
 		changeAcceptor.accept(change);
 	}
 
@@ -143,9 +146,12 @@ public class ChangeSerializer implements IChangeSerializer {
 			loaded.put(resource.getResource(), references);
 		}
 		ChangeDescription recording = recorder.endRecording();
-		ResourceSetRecording tree = changeTreeProvider.createChangeTree(resourceSet, recording);
+		Collection<IResourceSnapshot> snapshots = recorder.getSnapshots();
+		ResourceSetRecording tree = changeTreeProvider.createChangeTree(resourceSet, snapshots, recording);
 		for (ResourceRecording l : tree.getRecordedResources()) {
-			applyChange(l, loaded.get(l.getResource()), changeAcceptor);
+			Resource resource = l.getResource();
+			ReferenceUpdaterContext context = loaded.get(resource);
+			applyChange(l, context, changeAcceptor);
 		}
 		if (updateRelatedFiles && updateCrossReferences) {
 			List<RelatedResource> related = relatedResourcesProvider.getRelatedResources(deltas.getSnapshots());

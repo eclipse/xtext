@@ -21,6 +21,7 @@ import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.Assert
+import org.eclipse.emf.common.util.URI
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -174,6 +175,24 @@ class ChangeSerializerTest {
 			#1 root2 { ref <15:5|newroot> }
 			--------------------------------------------------------------------------------
 			15 5 "root1" -> "newroot"
+		'''
+	}
+	
+	@Test
+	def void testResourceURIChange() {
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/f.pstl" -> '''#1 root { }'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents("inmemory:/f.pstl", Node)
+
+		val serializer = serializerProvider.get()
+		serializer.beginRecordChanges(model.eResource)
+		model.eResource.URI = URI.createURI("inmemory:/x.pstl")
+		serializer.endRecordChangesToTextDocuments === '''
+			----- renamed inmemory:/f.pstl to inmemory:/x.pstl (syntax: <offset|text>) -----
+			(no changes)
+			--------------------------------------------------------------------------------
 		'''
 	}
 

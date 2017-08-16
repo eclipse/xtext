@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.serializer.impl;
 
+import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.change.ChangeDescription;
@@ -27,21 +28,13 @@ import com.google.inject.Inject;
  */
 public class SerializerChangeRecorder {
 
-	protected <T> T getLanguageService(Resource resource, Class<T> clazz) {
-		if (resource instanceof XtextResource) {
-			return ((XtextResource) resource).getResourceServiceProvider().get(clazz);
-		}
-		return IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(resource.getURI()).get(clazz);
-	}
-
 	private Map<Resource, IResourceSnapshot> changes = Maps.newHashMap();
+
+	@Inject
+	private EObjectDescriptionDeltaProvider deltaProvider;
 
 	private ChangeRecorder recorder = null;
 	private ResourceSet resourceSet = null;
-
-	public ResourceSet getResourceSet() {
-		return resourceSet;
-	}
 
 	public IResourceSnapshot beginRecording(Resource resource) {
 		EcoreUtil.resolveAll(resource);
@@ -59,16 +52,28 @@ public class SerializerChangeRecorder {
 		return snapshot;
 	}
 
-	@Inject
-	private EObjectDescriptionDeltaProvider deltaProvider;
+	public ChangeDescription endRecording() {
+		ChangeDescription recording = recorder.endRecording();
+		return recording;
+	}
 
 	public Deltas getDeltas() {
 		return deltaProvider.getDelta(changes.values());
 	}
 
-	public ChangeDescription endRecording() {
-		ChangeDescription recording = recorder.endRecording();
-		return recording;
+	protected <T> T getLanguageService(Resource resource, Class<T> clazz) {
+		if (resource instanceof XtextResource) {
+			return ((XtextResource) resource).getResourceServiceProvider().get(clazz);
+		}
+		return IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(resource.getURI()).get(clazz);
+	}
+
+	public ResourceSet getResourceSet() {
+		return resourceSet;
+	}
+
+	public Collection<IResourceSnapshot> getSnapshots() {
+		return changes.values();
 	}
 
 }

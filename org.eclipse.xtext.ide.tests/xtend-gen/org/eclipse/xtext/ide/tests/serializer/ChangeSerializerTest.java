@@ -11,6 +11,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -262,5 +264,29 @@ public class ChangeSerializerTest {
     _builder_2.append("15 5 \"root1\" -> \"newroot\"");
     _builder_2.newLine();
     this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_2);
+  }
+  
+  @Test
+  public void testResourceURIChange() {
+    final InMemoryURIHandler fs = new InMemoryURIHandler();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#1 root { }");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/f.pstl", _builder.toString());
+    this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
+    final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
+    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/f.pstl", Node.class);
+    final ChangeSerializer serializer = this.serializerProvider.get();
+    serializer.beginRecordChanges(model.eResource());
+    Resource _eResource = model.eResource();
+    _eResource.setURI(URI.createURI("inmemory:/x.pstl"));
+    Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("----- renamed inmemory:/f.pstl to inmemory:/x.pstl (syntax: <offset|text>) -----");
+    _builder_1.newLine();
+    _builder_1.append("(no changes)");
+    _builder_1.newLine();
+    _builder_1.append("--------------------------------------------------------------------------------");
+    _builder_1.newLine();
+    this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_1);
   }
 }

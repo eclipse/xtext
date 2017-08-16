@@ -107,11 +107,13 @@ public class EObjectSnapshotProvider {
 		protected final Map<EObject, IEObjectSnapshot> objects;
 		protected final ITextRegionAccess regions;
 		protected final Resource resource;
+		protected final URI uri;
 
 		public ResourceSnapshot(EObjectSnapshotProvider strategy, Resource resource) {
 			this.resource = resource;
 			this.regions = strategy.getTextRegionAccess(resource);
 			this.objects = strategy.createEObjectSnapshots(resource);
+			this.uri = resource.getURI();
 		}
 
 		@Override
@@ -127,6 +129,11 @@ public class EObjectSnapshotProvider {
 		@Override
 		public Resource getResource() {
 			return resource;
+		}
+
+		@Override
+		public URI getURI() {
+			return uri;
 		}
 
 	}

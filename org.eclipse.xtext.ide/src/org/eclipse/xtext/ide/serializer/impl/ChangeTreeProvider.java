@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.serializer.impl;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.change.ResourceChange;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.ide.serializer.hooks.IResourceSnapshot;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
@@ -69,18 +71,13 @@ public class ChangeTreeProvider {
 		private final Resource resource;
 		private ResourceChange resourceChange;
 		private final ResourceSetRecording resourceSetRecording;
-
 		private final Set<EObjectChange> roots = Sets.newLinkedHashSet();
 
-		public ResourceRecording(ResourceSetRecording rsRecording, Resource resource) {
-			this(rsRecording, resource, null);
-		}
+		private IResourceSnapshot snapshot;
 
-		public ResourceRecording(ResourceSetRecording rsRecording, Resource resource, ResourceChange resourceChange) {
-			super();
+		public ResourceRecording(ResourceSetRecording rsRecording, Resource resource) {
 			this.resourceSetRecording = rsRecording;
 			this.resource = resource;
-			this.resourceChange = resourceChange;
 		}
 
 		public List<EObjectChange> getAllEObjectRecordings() {
@@ -109,6 +106,10 @@ public class ChangeTreeProvider {
 
 		public List<EObjectChange> getRootEObjectRecordings() {
 			return ImmutableList.copyOf(roots);
+		}
+
+		public IResourceSnapshot getSnapshot() {
+			return snapshot;
 		}
 
 	}
@@ -147,15 +148,30 @@ public class ChangeTreeProvider {
 
 	}
 
-	public ResourceSetRecording createChangeTree(ResourceSet resourceSet, ChangeDescription desc) {
+	public ResourceSetRecording createChangeTree(ResourceSet resourceSet, Collection<IResourceSnapshot> snapshots,
+			ChangeDescription desc) {
 		ResourceSetRecording rs = new ResourceSetRecording(resourceSet);
 		Map<Resource, ResourceRecording> result = Maps.newLinkedHashMap();
 		Map<EObject, EObjectChange> objectChanges = Maps.newLinkedHashMap();
+		for (IResourceSnapshot snap : snapshots) {
+			Resource resource = snap.getResource();
+			ResourceRecording recording = new ResourceRecording(rs, resource);
+			recording.snapshot = snap;
+			result.put(resource, recording);
+		}
+		for (ResourceChange rc : desc.getResourceChanges()) {
+			Resource resource = rc.getResource();
+			ResourceRecording recording = result.get(resource);
+			if (recording == null) {
+				recording = new ResourceRecording(rs, resource);
+				result.put(resource, recording);
+			}
+			recording.resourceChange = rc;
+		}
 		for (Entry<EObject, EList<FeatureChange>> e : desc.getObjectChanges().entrySet()) {
 			EList<FeatureChange> featureChange = e.getValue();
 			EObject object = e.getKey();
 			objectChanges.put(object, new EObjectChange(object, featureChange));
-
 		}
 		for (EObjectChange change : Lists.newArrayList(objectChanges.values())) {
 			EObjectChange current = change;

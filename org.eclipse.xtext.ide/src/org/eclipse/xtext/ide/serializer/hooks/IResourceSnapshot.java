@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.serializer.hooks;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
@@ -26,5 +27,7 @@ public interface IResourceSnapshot {
 	ITextRegionAccess getRegions();
 
 	Resource getResource();
+
+	URI getURI();
 
 }
