@@ -315,7 +315,9 @@ public class FormattableDocumentTest {
             };
             it_1.setOnAutowrap(_function_1);
             final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_2) -> {
-              it_2.setSpace("@\n");
+              String _property = System.getProperty("line.separator");
+              String _plus = ("@" + _property);
+              it_2.setSpace(_plus);
             };
             document.append(regions.regionFor(model).keyword("kw2"), _function_2);
           };

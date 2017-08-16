@@ -166,7 +166,7 @@ class FormattableDocumentTest {
 					onAutowrap = [ region, wrapped, extension doc |
 						model.regionFor.keyword("kw1").append[space = "!"]
 					]
-					model.regionFor.keyword("kw2").append[space = "@\n"]
+					model.regionFor.keyword("kw2").append[space = "@"+System.getProperty("line.separator")]
 				]
 			]
 			expectation = '''
