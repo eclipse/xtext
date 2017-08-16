@@ -25,6 +25,7 @@ import java.util.function.Function;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.lsp4j.ClientCapabilities;
 import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.CodeLens;
 import org.eclipse.lsp4j.CodeLensOptions;
@@ -48,6 +49,9 @@ import org.eclipse.lsp4j.DocumentHighlight;
 import org.eclipse.lsp4j.DocumentOnTypeFormattingParams;
 import org.eclipse.lsp4j.DocumentRangeFormattingParams;
 import org.eclipse.lsp4j.DocumentSymbolParams;
+import org.eclipse.lsp4j.ExecuteCommandCapabilities;
+import org.eclipse.lsp4j.ExecuteCommandOptions;
+import org.eclipse.lsp4j.ExecuteCommandParams;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
 import org.eclipse.lsp4j.Hover;
@@ -67,6 +71,7 @@ import org.eclipse.lsp4j.TextDocumentContentChangeEvent;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.TextDocumentSyncKind;
 import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.WorkspaceClientCapabilities;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
@@ -95,6 +100,7 @@ import org.eclipse.xtext.ide.server.codeActions.ICodeActionService;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
 import org.eclipse.xtext.ide.server.coloring.IColoringService;
+import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
@@ -166,6 +172,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Inject
   @Extension
   private IResourceServiceProvider.Registry languagesRegistry;
+  
+  @Inject
+  private ExecutableCommandRegistry commandRegistry;
   
   private WorkspaceManager workspaceManager;
   
@@ -240,6 +249,25 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       it.setDocumentFormattingProvider(Boolean.valueOf(true));
       it.setDocumentRangeFormattingProvider(Boolean.valueOf(true));
       it.setDocumentHighlightProvider(Boolean.valueOf(true));
+      ClientCapabilities _capabilities = params.getCapabilities();
+      WorkspaceClientCapabilities _workspace = null;
+      if (_capabilities!=null) {
+        _workspace=_capabilities.getWorkspace();
+      }
+      ExecuteCommandCapabilities _executeCommand = null;
+      if (_workspace!=null) {
+        _executeCommand=_workspace.getExecuteCommand();
+      }
+      boolean _tripleNotEquals = (_executeCommand != null);
+      if (_tripleNotEquals) {
+        this.commandRegistry.initialize(this.getAllLanguages(), params.getCapabilities(), this.client);
+        ExecuteCommandOptions _executeCommandOptions = new ExecuteCommandOptions();
+        final Procedure1<ExecuteCommandOptions> _function_5 = (ExecuteCommandOptions it_1) -> {
+          it_1.setCommands(this.commandRegistry.getCommands());
+        };
+        ExecuteCommandOptions _doubleArrow_2 = ObjectExtensions.<ExecuteCommandOptions>operator_doubleArrow(_executeCommandOptions, _function_5);
+        it.setExecuteCommandProvider(_doubleArrow_2);
+      }
     };
     ServerCapabilities capabilities = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
     Iterable<? extends IResourceServiceProvider> _allLanguages = this.getAllLanguages();
@@ -780,6 +808,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       return this.workspaceManager.<List<? extends TextEdit>>doRead(uri, _function_1);
     };
     return this.requestManager.<List<? extends TextEdit>>runRead(_function);
+  }
+  
+  @Override
+  public CompletableFuture<Object> executeCommand(final ExecuteCommandParams params) {
+    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
+      return this.commandRegistry.executeCommand(params, this.access, cancelIndicator);
+    };
+    return this.requestManager.<Object>runRead(_function);
   }
   
   @Override

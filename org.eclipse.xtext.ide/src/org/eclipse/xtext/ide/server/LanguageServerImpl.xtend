@@ -62,8 +62,10 @@ import org.eclipse.lsp4j.services.LanguageClientExtensions
 import org.eclipse.lsp4j.services.LanguageServer
 import org.eclipse.lsp4j.services.TextDocumentService
 import org.eclipse.lsp4j.services.WorkspaceService
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService
 import org.eclipse.xtext.ide.server.coloring.IColoringService
@@ -82,8 +84,9 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
-import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.lsp4j.ExecuteCommandOptions
+import org.eclipse.lsp4j.ExecuteCommandParams
+import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -95,7 +98,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 	@Inject WorkspaceSymbolService workspaceSymbolService
 	@Inject extension UriExtensions
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
-
+	@Inject ExecutableCommandRegistry commandRegistry
+	
 	// injected below
 	WorkspaceManager workspaceManager
 	InitializeParams params
@@ -149,6 +153,14 @@ import org.eclipse.xtend.lib.annotations.Accessors
 			documentFormattingProvider = true
 			documentRangeFormattingProvider = true
 			documentHighlightProvider = true
+			
+			// register execute command capability
+			if (params.capabilities?.workspace?.executeCommand !== null) {
+				this.commandRegistry.initialize(allLanguages, params.capabilities, client)
+				executeCommandProvider = new ExecuteCommandOptions => [
+					commands = this.commandRegistry.getCommands()
+				]
+			}
 		]
 		for (language : allLanguages) {
 			language.get(ICapabilitiesContributor)?.contribute(capabilities, params)
@@ -525,6 +537,12 @@ import org.eclipse.xtend.lib.annotations.Accessors
 			return workspaceManager.doRead(uri) [ document, resource |
 				formatterService.format(document, resource, params, cancelIndicator)
 			]  
+		]
+	}
+	
+	override executeCommand(ExecuteCommandParams params) {
+		return requestManager.runRead[ cancelIndicator |
+			this.commandRegistry.executeCommand(params, this.access, cancelIndicator)
 		]
 	}
 
