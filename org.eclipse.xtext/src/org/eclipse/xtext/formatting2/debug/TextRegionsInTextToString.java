@@ -66,7 +66,8 @@ public class TextRegionsInTextToString {
 		ITextRegionAccess access = getTextRegionAccess();
 		if (access != null) {
 			ITextSegment impactRegion = TextRegions.merge(this.items);
-			List<ILineRegion> expandToLines = TextRegions.expandToLines(impactRegion, getLeadingLines(), getTrailingLines());
+			List<ILineRegion> expandToLines = TextRegions.expandToLines(impactRegion, getLeadingLines(),
+					getTrailingLines());
 			return TextRegions.merge(expandToLines);
 		}
 		return null;
@@ -127,7 +128,7 @@ public class TextRegionsInTextToString {
 			ITextRegionAccess access = getTextRegionAccess();
 			ITextSegment frame = getFrame();
 			if (access == null || frame == null)
-				return "(null)";
+				return box(title, "(no changes)");
 			StringBuilder builder = new StringBuilder();
 			String vizualized = access.getRewriter().renderToString(frame, items);
 			builder.append(box(title, vizualized));
