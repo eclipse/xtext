@@ -7,29 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.refactoring
 
-import java.util.List
-import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtend.lib.annotations.Data
-
 /**
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  */
-interface XtextMoveStrategy {
+interface XtextMoveResourceStrategy {
+	
 	def void applyMove(XtextMoveArguments arguments, RefactoringIssueAcceptor issues)
 }
 
-@Data
-class XtextMoveArguments {
-	ResourceSet resourceSet
-	// TODO pass error reporting facility
-	List<ResourceMove> moves
-}
-
-@Data
-class ResourceMove {
-	URI oldURI
-	URI newURI
-}
 

@@ -10,21 +10,30 @@ package org.eclipse.xtext.ide.refactoring;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.ide.refactoring.ResourceMove;
+import org.eclipse.xtext.ide.refactoring.ResourceURIChange;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * The arguments passed to a {@link XtextMoveResourceStrategy}.
+ * 
+ * In the resourceSet the refactoring is already applied, i.e. all
+ * moved resources already have the new URI.
+ * 
+ * @author koehnlein - Initial contribution and API
+ * @since 2.13
+ */
 @Data
 @SuppressWarnings("all")
 public class XtextMoveArguments {
   private final ResourceSet resourceSet;
   
-  private final List<ResourceMove> moves;
+  private final List<ResourceURIChange> changes;
   
-  public XtextMoveArguments(final ResourceSet resourceSet, final List<ResourceMove> moves) {
+  public XtextMoveArguments(final ResourceSet resourceSet, final List<ResourceURIChange> changes) {
     super();
     this.resourceSet = resourceSet;
-    this.moves = moves;
+    this.changes = changes;
   }
   
   @Override
@@ -33,7 +42,7 @@ public class XtextMoveArguments {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.resourceSet== null) ? 0 : this.resourceSet.hashCode());
-    result = prime * result + ((this.moves== null) ? 0 : this.moves.hashCode());
+    result = prime * result + ((this.changes== null) ? 0 : this.changes.hashCode());
     return result;
   }
   
@@ -52,10 +61,10 @@ public class XtextMoveArguments {
         return false;
     } else if (!this.resourceSet.equals(other.resourceSet))
       return false;
-    if (this.moves == null) {
-      if (other.moves != null)
+    if (this.changes == null) {
+      if (other.changes != null)
         return false;
-    } else if (!this.moves.equals(other.moves))
+    } else if (!this.changes.equals(other.changes))
       return false;
     return true;
   }
@@ -65,7 +74,7 @@ public class XtextMoveArguments {
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
     b.add("resourceSet", this.resourceSet);
-    b.add("moves", this.moves);
+    b.add("changes", this.changes);
     return b.toString();
   }
   
@@ -75,7 +84,7 @@ public class XtextMoveArguments {
   }
   
   @Pure
-  public List<ResourceMove> getMoves() {
-    return this.moves;
+  public List<ResourceURIChange> getChanges() {
+    return this.changes;
   }
 }

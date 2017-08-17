@@ -12,14 +12,20 @@ import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * URIs can also refer to folders and non-Xtext resources.
+ * 
+ * @author koehnlein - Initial contribution and API
+ * @since 2.13
+ */
 @Data
 @SuppressWarnings("all")
-public class ResourceMove {
+public class ResourceURIChange {
   private final URI oldURI;
   
   private final URI newURI;
   
-  public ResourceMove(final URI oldURI, final URI newURI) {
+  public ResourceURIChange(final URI oldURI, final URI newURI) {
     super();
     this.oldURI = oldURI;
     this.newURI = newURI;
@@ -44,7 +50,7 @@ public class ResourceMove {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    ResourceMove other = (ResourceMove) obj;
+    ResourceURIChange other = (ResourceURIChange) obj;
     if (this.oldURI == null) {
       if (other.oldURI != null)
         return false;

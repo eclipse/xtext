@@ -15,6 +15,6 @@ import org.eclipse.xtext.ide.refactoring.XtextMoveArguments;
  * @since 2.13
  */
 @SuppressWarnings("all")
-public interface XtextMoveStrategy {
+public interface XtextMoveResourceStrategy {
   public abstract void applyMove(final XtextMoveArguments arguments, final RefactoringIssueAcceptor issues);
 }

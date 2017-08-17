@@ -54,6 +54,9 @@ public class ChangeSerializer implements IChangeSerializer {
 
 	@Override
 	public ITextRegionDiffBuilder beginRecordChanges(Resource resource) {
+		ITextRegionDiffBuilder existingBuilder = builders.get(resource);
+		if (existingBuilder != null) 
+			return existingBuilder;
 		IResourceSnapshot snapshot = recorder.beginRecording(resource);
 		ITextRegionDiffBuilder result = new StringBasedTextRegionAccessDiffBuilder(snapshot.getRegions());
 		builders.put(resource, result);
