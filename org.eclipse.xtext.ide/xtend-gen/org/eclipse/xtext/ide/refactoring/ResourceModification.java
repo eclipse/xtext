@@ -7,13 +7,12 @@
  */
 package org.eclipse.xtext.ide.refactoring;
 
-import org.eclipse.xtext.ide.refactoring.MoveResourceContext;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * @author koehnlein - Initial contribution and API
- * @since 2.13
  */
 @SuppressWarnings("all")
-public interface XtextMoveResourceStrategy {
-  public abstract void applyMove(final MoveResourceContext context);
+public interface ResourceModification {
+  public abstract void modify(final Resource resource);
 }

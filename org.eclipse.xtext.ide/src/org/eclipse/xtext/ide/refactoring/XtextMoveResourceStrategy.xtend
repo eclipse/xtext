@@ -13,7 +13,5 @@ package org.eclipse.xtext.ide.refactoring
  */
 interface XtextMoveResourceStrategy {
 	
-	def void applyMove(XtextMoveArguments arguments, RefactoringIssueAcceptor issues)
+	def void applyMove(MoveResourceContext context)
 }
-
-
