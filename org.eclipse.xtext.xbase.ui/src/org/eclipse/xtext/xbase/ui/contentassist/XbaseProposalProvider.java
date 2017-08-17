@@ -596,7 +596,11 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		String prefix = contentAssistContext.getPrefix();
 		if (prefix.length() > 0) {
 			if (!Character.isJavaIdentifierStart(prefix.charAt(0))) {
-				return;
+				if (prefix.length() > 1) {
+					if (prefix.charAt(0) == '^' && !Character.isJavaIdentifierStart(prefix.charAt(1))) {
+						return;
+					}
+				}
 			}
 		}
 		
