@@ -10,6 +10,7 @@ package org.eclipse.xtext.ide.serializer.impl;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ide.serializer.hooks.IEObjectSnapshot;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.ide.serializer.hooks.IResourceSnapshot;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -55,8 +57,19 @@ public class RelatedResourcesProvider {
 				}
 			}
 		}
+		Set<URI> added = Sets.newHashSet();
+		Set<URI> removed = Sets.newHashSet();
 		for (IResourceSnapshot res : snapshots) {
-			result.remove(res.getResource().getURI());
+			URI oldUri = res.getURI();
+			URI newUri = res.getResource().getURI();
+			if (!oldUri.equals(newUri)) {
+				added.add(newUri);
+				removed.add(oldUri);
+			}
+		}
+		removed.removeAll(added);
+		for (URI uri : removed) {
+			result.remove(uri);
 		}
 		return ImmutableList.copyOf(result.values());
 	}
