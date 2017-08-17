@@ -68,7 +68,7 @@ public class AbstractNewXtendElementWizard extends NewElementWizard {
 					try {
 						editor = IDE.openEditor(JavaPlugin.getActivePage(), (IFile) resource);
 						if (editor instanceof ITextEditor) {
-							((ITextEditor) editor).selectAndReveal(size -2, -1);
+							((ITextEditor) editor).selectAndReveal(size -2, 0);
 						}
 					} catch (PartInitException e) {
 						throw new RuntimeException(e);
