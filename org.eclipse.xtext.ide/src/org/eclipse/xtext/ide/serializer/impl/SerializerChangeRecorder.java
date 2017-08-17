@@ -57,8 +57,8 @@ public class SerializerChangeRecorder {
 		return recording;
 	}
 
-	public Deltas getDeltas() {
-		return deltaProvider.getDelta(changes.values());
+	public Deltas getDeltas(ChangeSerializer serializer) {
+		return deltaProvider.getDelta(serializer, changes.values());
 	}
 
 	protected <T> T getLanguageService(Resource resource, Class<T> clazz) {

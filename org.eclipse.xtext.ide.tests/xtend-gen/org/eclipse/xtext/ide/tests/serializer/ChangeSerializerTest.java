@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ide.tests.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -16,8 +15,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
-import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer;
 import org.eclipse.xtext.ide.tests.serializer.ChangeSerializerTestHelper;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryValue;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Node;
@@ -45,9 +44,6 @@ public class ChangeSerializerTest {
   private PartialSerializationTestLanguageFactory fac = PartialSerializationTestLanguageFactory.eINSTANCE;
   
   @Inject
-  private Provider<ChangeSerializer> serializerProvider;
-  
-  @Inject
   @Extension
   private ChangeSerializerTestHelper _changeSerializerTestHelper;
   
@@ -60,7 +56,7 @@ public class ChangeSerializerTest {
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final MandatoryValue model = this._changeSerializerTestHelper.<MandatoryValue>contents(rs, "inmemory:/file1.pstl", MandatoryValue.class);
-    final ChangeSerializer serializer = this.serializerProvider.get();
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     serializer.beginRecordChanges(model.eResource());
     model.setName("bar");
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
@@ -85,7 +81,7 @@ public class ChangeSerializerTest {
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
-    final ChangeSerializer serializer = this.serializerProvider.get();
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     serializer.beginRecordChanges(model.eResource());
     Node _get = model.getChildren().get(0);
     _get.setName("bazz4");
@@ -115,7 +111,7 @@ public class ChangeSerializerTest {
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
-    final ChangeSerializer serializer = this.serializerProvider.get();
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     serializer.beginRecordChanges(model.eResource());
     EList<Node> _children = model.getChildren().get(0).getChildren();
     Node _createNode = this.fac.createNode();
@@ -146,7 +142,7 @@ public class ChangeSerializerTest {
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
-    final ChangeSerializer serializer = this.serializerProvider.get();
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     serializer.beginRecordChanges(model.eResource());
     EList<Node> _children = model.getChildren().get(0).getChildren();
     Node _createNode = this.fac.createNode();
@@ -184,7 +180,7 @@ public class ChangeSerializerTest {
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
-    final ChangeSerializer serializer = this.serializerProvider.get();
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     serializer.beginRecordChanges(model.eResource());
     EcoreUtil.remove(model.getChildren().get(0).getChildren().get(0));
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
@@ -209,7 +205,7 @@ public class ChangeSerializerTest {
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
-    final ChangeSerializer serializer = this.serializerProvider.get();
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     serializer.beginRecordChanges(model.eResource());
     Node _get = model.getChildren().get(0);
     _get.setName("bazz4");
@@ -241,7 +237,7 @@ public class ChangeSerializerTest {
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo_1);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
-    final ChangeSerializer serializer = this.serializerProvider.get();
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     serializer.beginRecordChanges(model.eResource());
     model.setName("newroot");
     Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
@@ -275,7 +271,7 @@ public class ChangeSerializerTest {
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/f.pstl", Node.class);
-    final ChangeSerializer serializer = this.serializerProvider.get();
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     serializer.beginRecordChanges(model.eResource());
     Resource _eResource = model.eResource();
     _eResource.setURI(URI.createURI("inmemory:/x.pstl"));

@@ -8,9 +8,8 @@
 package org.eclipse.xtext.ide.tests.serializer
 
 import com.google.inject.Inject
-import com.google.inject.Provider
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryValue
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Node
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguageFactory
@@ -18,10 +17,9 @@ import org.eclipse.xtext.ide.tests.testlanguage.tests.PartialSerializationTestLa
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.InMemoryURIHandler
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.Assert
-import org.eclipse.emf.common.util.URI
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -32,7 +30,6 @@ class ChangeSerializerTest {
 
 	extension PartialSerializationTestLanguageFactory fac = PartialSerializationTestLanguageFactory.eINSTANCE
 
-	@Inject Provider<ChangeSerializer> serializerProvider
 	@Inject extension ChangeSerializerTestHelper
 
 	@Test
@@ -43,7 +40,7 @@ class ChangeSerializerTest {
 		val rs = fs.createResourceSet
 		val model = rs.contents("inmemory:/file1.pstl", MandatoryValue)
 
-		val serializer = serializerProvider.get()
+		val serializer = newChangeSerializer()
 		serializer.beginRecordChanges(model.eResource)
 		model.name = "bar"
 		serializer.endRecordChangesToTextDocuments === '''
@@ -62,7 +59,7 @@ class ChangeSerializerTest {
 		val rs = fs.createResourceSet
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
-		val serializer = serializerProvider.get()
+		val serializer = newChangeSerializer()
 		serializer.beginRecordChanges(model.eResource)
 		model.children.get(0).name = "bazz4"
 		model.children.get(1).name = "bazz5"
@@ -83,7 +80,7 @@ class ChangeSerializerTest {
 		val rs = fs.createResourceSet
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
-		val serializer = serializerProvider.get()
+		val serializer = newChangeSerializer()
 		serializer.beginRecordChanges(model.eResource)
 		model.children.get(0).children += createNode => [name = "bazz"]
 		serializer.endRecordChangesToTextDocuments === '''
@@ -102,7 +99,7 @@ class ChangeSerializerTest {
 		val rs = fs.createResourceSet
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
-		val serializer = serializerProvider.get()
+		val serializer = newChangeSerializer()
 		serializer.beginRecordChanges(model.eResource)
 		model.children.get(0).children += createNode => [name = "bazz1"]
 		model.children.get(0).children += createNode => [name = "bazz2"]
@@ -122,7 +119,7 @@ class ChangeSerializerTest {
 		val rs = fs.createResourceSet
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
-		val serializer = serializerProvider.get()
+		val serializer = newChangeSerializer()
 		serializer.beginRecordChanges(model.eResource)
 		EcoreUtil.remove(model.children.get(0).children.get(0))
 		serializer.endRecordChangesToTextDocuments === '''
@@ -141,7 +138,7 @@ class ChangeSerializerTest {
 		val rs = fs.createResourceSet
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
-		val serializer = serializerProvider.get()
+		val serializer = newChangeSerializer()
 		serializer.beginRecordChanges(model.eResource)
 		model.children.get(0).name = "bazz4"
 		serializer.endRecordChangesToTextDocuments === '''
@@ -162,7 +159,7 @@ class ChangeSerializerTest {
 		val rs = fs.createResourceSet
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
-		val serializer = serializerProvider.get()
+		val serializer = newChangeSerializer()
 		serializer.beginRecordChanges(model.eResource)
 		model.name = "newroot"
 		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
@@ -186,7 +183,7 @@ class ChangeSerializerTest {
 		val rs = fs.createResourceSet
 		val model = rs.contents("inmemory:/f.pstl", Node)
 
-		val serializer = serializerProvider.get()
+		val serializer = newChangeSerializer()
 		serializer.beginRecordChanges(model.eResource)
 		model.eResource.URI = URI.createURI("inmemory:/x.pstl")
 		serializer.endRecordChangesToTextDocuments === '''

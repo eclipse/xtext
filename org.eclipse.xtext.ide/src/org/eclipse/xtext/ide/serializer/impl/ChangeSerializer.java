@@ -62,7 +62,7 @@ public class ChangeSerializer implements IChangeSerializer {
 
 	@Override
 	public void endRecordChanges(IAcceptor<IEmfResourceChange> changeAcceptor) {
-		Deltas deltas = recorder.getDeltas();
+		Deltas deltas = recorder.getDeltas(this);
 		List<RecordedResourceUpdater> primary = Lists.newArrayList();
 		for (IResourceSnapshot resource : deltas.getSnapshots()) {
 			Resource res = resource.getResource();

@@ -18,6 +18,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange
 import org.eclipse.xtext.ide.serializer.debug.TextDocumentChangeToString
+import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer
 import org.eclipse.xtext.ide.serializer.impl.TextDocumentChange
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.XtextResource
@@ -28,6 +29,7 @@ import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.util.CollectionBasedAcceptor
 import org.junit.Assert
+import com.google.inject.Guice
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -84,5 +86,9 @@ class ChangeSerializerTestHelper {
 		val list = newArrayList()
 		ser.endRecordChanges(CollectionBasedAcceptor.of(list))
 		return list
+	}
+	
+	def IChangeSerializer newChangeSerializer() {
+		Guice.createInjector().getInstance(ChangeSerializer)
 	}
 }

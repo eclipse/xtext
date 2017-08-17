@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.tests.serializer;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
+import com.google.inject.Guice;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.debug.TextDocumentChangeToString;
+import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer;
 import org.eclipse.xtext.ide.serializer.impl.TextDocumentChange;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
@@ -104,5 +106,9 @@ public class ChangeSerializerTestHelper {
     final ArrayList<IEmfResourceChange> list = CollectionLiterals.<IEmfResourceChange>newArrayList();
     ser.endRecordChanges(CollectionBasedAcceptor.<IEmfResourceChange>of(list));
     return list;
+  }
+  
+  public IChangeSerializer newChangeSerializer() {
+    return Guice.createInjector().<ChangeSerializer>getInstance(ChangeSerializer.class);
   }
 }

@@ -25,7 +25,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -41,15 +40,15 @@ public class EObjectDescriptionDeltaProvider {
 			super();
 			this.object = object;
 		}
-		
+
 		public List<IEObjectDescription> getDescriptions() {
 			return descriptions;
 		}
-		
+
 		public IEObjectSnapshot getSnapshot() {
 			return snapshot;
 		}
-		
+
 		public EObject getObject() {
 			return object;
 		}
@@ -87,9 +86,6 @@ public class EObjectDescriptionDeltaProvider {
 		}
 	}
 
-	@Inject
-	private IEObjectDescriptionProvider descProvider;
-
 	protected Delta createDelta(EObject object, IEObjectSnapshot snapshot, List<IEObjectDescription> descriptions) {
 		Delta delta = new Delta(object);
 		delta.descriptions = descriptions;
@@ -124,14 +120,15 @@ public class EObjectDescriptionDeltaProvider {
 		return null;
 	}
 
-	public Deltas getDelta(Collection<IResourceSnapshot> snapshots) {
+	public Deltas getDelta(ChangeSerializer serializer, Collection<IResourceSnapshot> snapshots) {
 		Map<EObject, IEObjectSnapshot> old = Maps.newHashMap();
 		Map<EObject, Group> groups = Maps.newHashMap();
 		for (IResourceSnapshot rs : snapshots) {
 			old.putAll(rs.getObjects());
 		}
 		for (IResourceSnapshot rs : snapshots) {
-			Iterable<IEObjectDescription> descriptions = descProvider.getEObjectDescriptions(rs.getResource());
+			IEObjectDescriptionProvider p = serializer.getService(rs.getResource(), IEObjectDescriptionProvider.class);
+			Iterable<IEObjectDescription> descriptions = p.getEObjectDescriptions(rs.getResource());
 			for (IEObjectDescription desc : descriptions) {
 				EObject obj = EcoreUtil.resolve(desc.getEObjectOrProxy(), rs.getResource());
 				Group delta = groups.get(obj);
