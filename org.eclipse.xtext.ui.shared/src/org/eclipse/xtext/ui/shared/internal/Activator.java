@@ -30,6 +30,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 import org.osgi.framework.Constants;
+import org.osgi.framework.Version;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Binder;
@@ -126,12 +127,16 @@ public class Activator extends Plugin {
 				(bundle) -> msg.append("- "+getBundleInfo(bundle) + "\n")
 			);
 
-		if (bundleXtextRuntime.getVersion().compareTo(bundleXtextUiShared.getVersion()) > 0) {
+		if (compareVersionIgnoringQualifier(bundleXtextRuntime.getVersion(), bundleXtextUiShared.getVersion()) > 0) {
 			msg.append("Runtime bundle is NEWER than UI bundles! Please make sure that both bundles are installed with the same version!\n");
 		}
 		throw new CoreException(new Status(IStatus.ERROR, getBundle().getSymbolicName(), msg.toString(), t));
 	}
-	
+
+	private int compareVersionIgnoringQualifier(Version v1, Version v2) {
+		return new Version(v1.getMajor(), v1.getMinor(), v1.getMicro()).compareTo(new Version(v2.getMajor(), v2.getMinor(), v2.getMicro()));
+	}
+
 	private String getBundleInfo (Bundle bundle) {
 		String state = null;
 		switch (bundle.getState()) {
