@@ -1,0 +1,86 @@
+/*******************************************************************************
+ * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ide.serializer.impl;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.emf.ecore.change.ChangeDescription;
+import org.eclipse.emf.ecore.change.util.ChangeRecorder;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccessDiff;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
+import org.eclipse.xtext.formatting2.regionaccess.internal.StringBasedTextRegionAccessDiffBuilder;
+import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
+import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdater;
+import org.eclipse.xtext.ide.serializer.hooks.IUpdatableReference;
+import org.eclipse.xtext.ide.serializer.impl.ChangeTreeProvider.ResourceRecording;
+import org.eclipse.xtext.ide.serializer.impl.ChangeTreeProvider.ResourceSetRecording;
+import org.eclipse.xtext.ide.serializer.impl.EObjectDescriptionDeltaProvider.Deltas;
+import org.eclipse.xtext.ide.serializer.impl.RelatedResourcesProvider.RelatedResource;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.IAcceptor;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
+public class RelatedXtextResourceUpdater {
+
+	@Inject
+	private ChangeTreeProvider changeTreeProvider;
+
+	@Inject
+	private RegionDiffFormatter formatter;
+
+	@Inject
+	private IReferenceUpdater referenceUpdater;
+
+	@Inject
+	private PartialSerializer serializer;
+
+	@Inject
+	private Provider<TextRegionAccessBuilder> textRegionBuilderProvider;
+
+	public void applyChange(Deltas delt, XtextResource res, RelatedResource refs, IAcceptor<IEmfResourceChange> acc) {
+		if (!referenceUpdater.isAffected(delt, refs)) {
+			return;
+		}
+		ITextRegionAccess base = textRegionBuilderProvider.get().forNodeModel(res).create();
+		ITextRegionDiffBuilder rewriter = new StringBasedTextRegionAccessDiffBuilder(base);
+		ReferenceUpdaterContext context = new ReferenceUpdaterContext(delt, rewriter);
+		referenceUpdater.update(context);
+		if (!context.getModifications().isEmpty()) {
+			ChangeRecorder rec = new ChangeRecorder(res);
+			for (Runnable run : context.getModifications()) {
+				run.run();
+			}
+			ChangeDescription recording = rec.endRecording();
+			ResourceSet rs = res.getResourceSet();
+			ResourceSetRecording tree = changeTreeProvider.createChangeTree(rs, Collections.emptyList(), recording);
+			ResourceRecording recordedResource = tree.getRecordedResource(res);
+			serializer.serializeChanges(recordedResource, rewriter);
+		}
+		for (IUpdatableReference upd : context.getUpdatableReferences()) {
+			referenceUpdater.updateReference(rewriter, upd);
+		}
+		ITextRegionAccessDiff rewritten = rewriter.create();
+		List<ITextReplacement> rep = formatter.format(rewritten);
+		TextDocumentChange change = new TextDocumentChange(rewritten, refs.getUri(), rep);
+		acc.accept(change);
+	}
+
+	public IReferenceUpdater getReferenceUpdater() {
+		return referenceUpdater;
+	}
+}
