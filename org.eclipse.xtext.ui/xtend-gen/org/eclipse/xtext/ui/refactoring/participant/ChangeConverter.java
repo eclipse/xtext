@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.refactoring.participant;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
+import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.core.resources.IContainer;
@@ -28,12 +29,16 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange;
+import org.eclipse.xtext.ui.refactoring.participant.ReplaceFileContentChange;
 import org.eclipse.xtext.ui.refactoring.participant.ResourceURIConverter;
+import org.eclipse.xtext.ui.refactoring.participant.TryWithResource;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 
 /**
  * Converts {@link IEmfResourceChange}s to LTK {@link Change}s.
@@ -79,16 +84,28 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     }
   }
   
-  protected void _doConvert(final IEmfResourceChange change) {
-    this.handleUriChange(change);
-  }
-  
-  protected void _doConvert(final ITextDocumentChange change) {
+  protected void doConvert(final IEmfResourceChange change) {
     this.handleReplacements(change);
     this.handleUriChange(change);
   }
   
-  protected void handleReplacements(final ITextDocumentChange change) {
+  protected void _handleReplacements(final IEmfResourceChange change) {
+    final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    final Procedure0 _function = () -> {
+      try {
+        change.getResource().save(outputStream, null);
+        final byte[] newContent = outputStream.toByteArray();
+        IFile _file = this._resourceURIConverter.toFile(change.getResource().getURI());
+        final ReplaceFileContentChange ltkChange = new ReplaceFileContentChange(_file, newContent);
+        this.addChange(ltkChange);
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
+      }
+    };
+    TryWithResource.tryWith(outputStream, _function);
+  }
+  
+  protected void _handleReplacements(final ITextDocumentChange change) {
     int _size = change.getReplacements().size();
     boolean _greaterThan = (_size > 0);
     if (_greaterThan) {
@@ -146,12 +163,12 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     }
   }
   
-  protected void doConvert(final IEmfResourceChange change) {
+  protected void handleReplacements(final IEmfResourceChange change) {
     if (change instanceof ITextDocumentChange) {
-      _doConvert((ITextDocumentChange)change);
+      _handleReplacements((ITextDocumentChange)change);
       return;
     } else if (change != null) {
-      _doConvert(change);
+      _handleReplacements(change);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +

@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.refactoring.participant
 
 import com.google.common.base.Predicate
 import com.google.inject.Inject
+import java.io.ByteArrayOutputStream
 import org.eclipse.ltk.core.refactoring.Change
 import org.eclipse.ltk.core.refactoring.CompositeChange
 import org.eclipse.ltk.core.refactoring.TextFileChange
@@ -20,6 +21,8 @@ import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange
 import org.eclipse.xtext.util.IAcceptor
+
+import static org.eclipse.xtext.ui.refactoring.participant.TryWithResource.*
 
 /**
  * Converts {@link IEmfResourceChange}s to LTK {@link Change}s.
@@ -52,17 +55,22 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 			return currentChange
 	}
 
-	protected def dispatch void doConvert(IEmfResourceChange change) {
-		// TODO: content changes
-		handleUriChange(change)
-	}
-
-	protected def dispatch void doConvert(ITextDocumentChange change) {
+	protected def void doConvert(IEmfResourceChange change) {
 		handleReplacements(change)
 		handleUriChange(change)
 	}
+
+	protected def dispatch void handleReplacements(IEmfResourceChange change) {
+		val outputStream = new ByteArrayOutputStream
+		tryWith(outputStream) [
+			change.resource.save(outputStream, null)
+			val newContent = outputStream.toByteArray
+			val ltkChange = new ReplaceFileContentChange(change.resource.URI.toFile, newContent) 
+			addChange(ltkChange)
+		]
+	}
 	
-	protected def void handleReplacements(ITextDocumentChange change) {
+	protected def dispatch void handleReplacements(ITextDocumentChange change) {
 		if(change.replacements.size > 0) {
 			val textEdits = change.replacements.map[ replacement |
 				new ReplaceEdit(replacement.offset, replacement.length, replacement.replacementText)
