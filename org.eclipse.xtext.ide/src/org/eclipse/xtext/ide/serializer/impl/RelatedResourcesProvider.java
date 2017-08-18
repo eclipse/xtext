@@ -65,6 +65,8 @@ public class RelatedResourcesProvider {
 			if (!oldUri.equals(newUri)) {
 				added.add(newUri);
 				removed.add(oldUri);
+			} else {
+				result.remove(newUri);
 			}
 		}
 		removed.removeAll(added);
