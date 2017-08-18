@@ -92,17 +92,12 @@ public class StringBasedTextRegionAccessDiffAppender {
 			appendHiddenRegion(true);
 		}
 		EObject semanticElement = source.getSemanticElement();
-		AbstractEObjectRegion region = access.regionForEObject(semanticElement);
-		if (region == null) {
-			IEObjectRegion region2 = source.getEObjectRegion();
-			region = new StringEObjectRegion(access, region2.getGrammarElement(), semanticElement);
-			access.add(region);
-		}
+		AbstractEObjectRegion region = getOrCreateEObjectRegion(semanticElement, source.getEObjectRegion());
 		int offset = access.append(text);
 		AbstractElement grammar = (AbstractElement) source.getGrammarElement();
 		StringHiddenRegion previous = (StringHiddenRegion) this.last;
 		StringSemanticRegion result = new StringSemanticRegion(access, region, grammar, offset, text.length());
-		region.getSemanticRegions().add(result);
+		region.addChild(result);
 		previous.setNext(result);
 		result.setLeadingHiddenRegion(previous);
 		this.last = result;
@@ -193,16 +188,7 @@ public class StringBasedTextRegionAccessDiffAppender {
 			EObject eobj = sem.getSemanticElement();
 			IHiddenRegion nextHiddenRegion = sem.getNextHiddenRegion();
 			while (eobj != null) {
-				AbstractEObjectRegion eobjRegion = access.regionForEObject(eobj);
-				if (eobjRegion == null) {
-					IEObjectRegion original = access.getOriginalTextRegionAccess().regionForEObject(eobj);
-					if (original != null) {
-						eobjRegion = new StringEObjectRegion(access, original.getGrammarElement(), eobj);
-						access.add(eobjRegion);
-					} else {
-						throw new IllegalStateException();
-					}
-				}
+				AbstractEObjectRegion eobjRegion = getOrCreateEObjectRegion(eobj, null);
 				if (eobjRegion.getNextHiddenRegion() != null) {
 					break;
 				}
@@ -235,6 +221,24 @@ public class StringBasedTextRegionAccessDiffAppender {
 				current = next;
 			}
 		}
+	}
+
+	protected AbstractEObjectRegion getOrCreateEObjectRegion(EObject eobj, IEObjectRegion original) {
+		AbstractEObjectRegion eobjRegion = access.regionForEObject(eobj);
+		if (eobjRegion == null) {
+			if (original == null) {
+				original = access.getOriginalTextRegionAccess().regionForEObject(eobj);
+			}
+			if (original != null) {
+				eobjRegion = new StringEObjectRegion(access, original.getGrammarElement(), eobj);
+				access.add(eobjRegion);
+				AbstractEObjectRegion parent = getOrCreateEObjectRegion(eobj.eContainer(), null);
+				if (parent != null) {
+					parent.addChild(eobjRegion);
+				}
+			}
+		}
+		return eobjRegion;
 	}
 
 }

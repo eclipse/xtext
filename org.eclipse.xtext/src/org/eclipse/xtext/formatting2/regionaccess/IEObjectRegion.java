@@ -15,6 +15,8 @@ public interface IEObjectRegion extends IAstRegion {
 
 	Iterable<ISemanticRegion> getAllSemanticRegions();
 
+	Iterable<IAstRegion> getAstRegions();
+
 	ISemanticRegionsFinder getRegionFor();
 
 	Iterable<ISemanticRegion> getSemanticRegions();
