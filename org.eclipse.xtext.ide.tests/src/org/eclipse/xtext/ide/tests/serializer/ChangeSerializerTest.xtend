@@ -31,6 +31,12 @@ class ChangeSerializerTest {
 	extension PartialSerializationTestLanguageFactory fac = PartialSerializationTestLanguageFactory.eINSTANCE
 
 	@Inject extension ChangeSerializerTestHelper
+	
+	@Test
+	def void testNoop() {
+		val serializer = newChangeSerializer()
+		serializer.endRecordChangesToTextDocuments === ""
+	}
 
 	@Test
 	def void testSimple() {

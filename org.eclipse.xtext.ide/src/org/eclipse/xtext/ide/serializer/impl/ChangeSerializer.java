@@ -55,7 +55,7 @@ public class ChangeSerializer implements IChangeSerializer {
 	@Override
 	public ITextRegionDiffBuilder beginRecordChanges(Resource resource) {
 		ITextRegionDiffBuilder existingBuilder = builders.get(resource);
-		if (existingBuilder != null) 
+		if (existingBuilder != null)
 			return existingBuilder;
 		IResourceSnapshot snapshot = recorder.beginRecording(resource);
 		ITextRegionDiffBuilder result = new StringBasedTextRegionAccessDiffBuilder(snapshot.getRegions());
@@ -65,6 +65,9 @@ public class ChangeSerializer implements IChangeSerializer {
 
 	@Override
 	public void endRecordChanges(IAcceptor<IEmfResourceChange> changeAcceptor) {
+		if (builders.isEmpty()) {
+			return;
+		}
 		Deltas deltas = recorder.getDeltas(this);
 		List<RecordedResourceUpdater> primary = Lists.newArrayList();
 		for (IResourceSnapshot resource : deltas.getSnapshots()) {

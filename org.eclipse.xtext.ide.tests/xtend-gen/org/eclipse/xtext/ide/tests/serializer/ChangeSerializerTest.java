@@ -48,6 +48,13 @@ public class ChangeSerializerTest {
   private ChangeSerializerTestHelper _changeSerializerTestHelper;
   
   @Test
+  public void testNoop() {
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
+    Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
+    this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, "");
+  }
+  
+  @Test
   public void testSimple() {
     final InMemoryURIHandler fs = new InMemoryURIHandler();
     StringConcatenation _builder = new StringConcatenation();
