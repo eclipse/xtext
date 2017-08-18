@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.refactoring
 
-import com.google.inject.Inject
 import java.util.List
+import java.util.Map
+import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -16,10 +17,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
-import org.eclipse.xtext.resource.IResourceServiceProvider
-import java.util.Map
+
 import static org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity.*
-import org.apache.log4j.Logger
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -36,9 +35,6 @@ class MoveResourceContext {
 
 	val IChangeSerializer changeSerializer
 	val ResourceSet resourceSet
-
-	val IResourceServiceProvider.Registry resourceServiceProviderRegistry
-
 	val Map<Resource, ResourceModification> modifications = newHashMap
 
 	def addModification(URI uri, ResourceModification modification) {
@@ -61,20 +57,6 @@ class MoveResourceContext {
 				LOG.error(t)
 			}
 		]
-	}
-
-	def isXtextResource(URI uri) {
-		resourceServiceProviderRegistry.getResourceServiceProvider(uri) !== null
-	}
-
-	static class Factory {
-		@Inject IResourceServiceProvider.Registry resourceServiceProviderRegistry
-
-		def MoveResourceContext create(List<ResourceURIChange> fileChanges, List<ResourceURIChange> folderChanges,
-			RefactoringIssueAcceptor issues, IChangeSerializer changeSerializer, ResourceSet resourceSet) {
-			new MoveResourceContext(fileChanges, folderChanges, issues, changeSerializer, resourceSet,
-				resourceServiceProviderRegistry)
-		}
 	}
 }
 

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ide.refactoring;
 
-import com.google.inject.Inject;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.refactoring.ResourceModification;
 import org.eclipse.xtext.ide.refactoring.ResourceURIChange;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -34,16 +32,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class MoveResourceContext {
-  public static class Factory {
-    @Inject
-    private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
-    
-    public MoveResourceContext create(final List<ResourceURIChange> fileChanges, final List<ResourceURIChange> folderChanges, final RefactoringIssueAcceptor issues, final IChangeSerializer changeSerializer, final ResourceSet resourceSet) {
-      return new MoveResourceContext(fileChanges, folderChanges, issues, changeSerializer, resourceSet, 
-        this.resourceServiceProviderRegistry);
-    }
-  }
-  
   private final static Logger LOG = Logger.getLogger(MoveResourceContext.class);
   
   @Accessors(AccessorType.PUBLIC_GETTER)
@@ -58,8 +46,6 @@ public class MoveResourceContext {
   private final IChangeSerializer changeSerializer;
   
   private final ResourceSet resourceSet;
-  
-  private final IResourceServiceProvider.Registry resourceServiceProviderRegistry;
   
   private final Map<Resource, ResourceModification> modifications = CollectionLiterals.<Resource, ResourceModification>newHashMap();
   
@@ -117,19 +103,13 @@ public class MoveResourceContext {
     this.modifications.entrySet().forEach(_function);
   }
   
-  public boolean isXtextResource(final URI uri) {
-    IResourceServiceProvider _resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(uri);
-    return (_resourceServiceProvider != null);
-  }
-  
-  public MoveResourceContext(final List<ResourceURIChange> fileChanges, final List<ResourceURIChange> folderChanges, final RefactoringIssueAcceptor issueAcceptor, final IChangeSerializer changeSerializer, final ResourceSet resourceSet, final IResourceServiceProvider.Registry resourceServiceProviderRegistry) {
+  public MoveResourceContext(final List<ResourceURIChange> fileChanges, final List<ResourceURIChange> folderChanges, final RefactoringIssueAcceptor issueAcceptor, final IChangeSerializer changeSerializer, final ResourceSet resourceSet) {
     super();
     this.fileChanges = fileChanges;
     this.folderChanges = folderChanges;
     this.issueAcceptor = issueAcceptor;
     this.changeSerializer = changeSerializer;
     this.resourceSet = resourceSet;
-    this.resourceServiceProviderRegistry = resourceServiceProviderRegistry;
   }
   
   @Pure
