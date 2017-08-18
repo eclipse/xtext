@@ -28,7 +28,7 @@ import com.google.inject.Inject;
  */
 public class SerializerChangeRecorder {
 
-	private Map<Resource, IResourceSnapshot> changes = Maps.newHashMap();
+	private Map<Resource, IResourceSnapshot> changes = Maps.newLinkedHashMap();
 
 	@Inject
 	private EObjectDescriptionDeltaProvider deltaProvider;
