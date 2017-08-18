@@ -17,8 +17,7 @@ Require-Bundle: org.eclipse.xtext,
  org.antlr.runtime,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
- org.eclipse.xtext.testing,
- org.eclipse.xtext.xbase.testing
+ org.eclipse.xtext.testing
 Import-Package: org.apache.log4j;version="1.2.15",
  org.hamcrest.core,
  org.junit;version="4.5.0",
