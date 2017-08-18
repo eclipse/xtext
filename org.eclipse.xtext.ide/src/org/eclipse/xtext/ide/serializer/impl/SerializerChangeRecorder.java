@@ -54,6 +54,7 @@ public class SerializerChangeRecorder {
 
 	public ChangeDescription endRecording() {
 		ChangeDescription recording = recorder.endRecording();
+		recorder.dispose();
 		return recording;
 	}
 

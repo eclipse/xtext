@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.change.ChangeKind;
 import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.change.ListChange;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
@@ -73,6 +75,8 @@ import com.google.inject.name.Named;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class PartialSerializer {
+	@Inject
+	private InsertionPointFinder insertionPointFinder;
 
 	protected static class DeleteRegionStrategy implements SerializationStrategy {
 		private final IAstRegion region;
@@ -419,10 +423,25 @@ public class PartialSerializer {
 		if (!assignment.isMany()) {
 			return null;
 		}
-		// ListTransient listTransient = transientValues.isListTransient(owner, feature);
 		List<IAstRegion> originals = findRegions(ownerRegion, change);
+		EList<ListChange> listChanges = change.getListChanges();
+		if (listChanges.isEmpty() && originals.isEmpty()) {
+			ISerializationContext ctx = getSerializationContext(owner);
+			AbstractElement ins = assignment.getGrammarElement();
+			IHiddenRegion insertAt = insertionPointFinder.findInsertionPoint(ctx, ownerRegion, ins);
+			if (insertAt == null) {
+				return null;
+			}
+			for (Object value : (List<?>) owner.eGet(feature)) {
+				EObject obj = (EObject) value;
+				ISerializationContext context = getSerializationContext(obj);
+				result.add(new SerializeRecursiveStrategy(insertAt, obj, context));
+			}
+			return result;
+		}
+		// ListTransient listTransient = transientValues.isListTransient(owner, feature);
 		List<Object> modifying = Lists.newArrayList(((List<?>) owner.eGet(feature)));
-		for (ListChange lc : change.getListChanges()) {
+		for (ListChange lc : listChanges) {
 			ChangeKind kind = lc.getKind();
 			if (kind == ADD_LITERAL) {
 				IAstRegion region = originals.get(lc.getIndex());

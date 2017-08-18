@@ -16,6 +16,7 @@ import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryValue
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Node
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalChild
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalChildList
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalValue
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguageFactory
 import org.eclipse.xtext.ide.tests.testlanguage.tests.PartialSerializationTestLanguageInjectorProvider
@@ -225,7 +226,123 @@ class PartialSerializerTest {
 			19 1  H " "                  Whitespace:TerminalRule'WS'
 		'''
 	}
-
+	
+	@Test
+	def void testOptionalChildListInsertIntoEmpty() {
+		recordDiff(OptionalChildList, "#13") [
+			children += createMandatoryValue => [name = "foo"]
+		] === '''
+			0 0   H
+			      B OptionalChildList    Model
+			0 3    S "#13"                Model:'#13'
+			3 0 1  H
+			       B MandatoryValue'foo'  MandatoryValue path:OptionalChildList/children[0]
+			3 3 1   S "foo"                MandatoryValue:name=ID
+			       E MandatoryValue'foo'  MandatoryValue path:OptionalChildList/children[0]
+			      E OptionalChildList    Model
+			6 0 1 H
+			------------ diff 1 ------------
+			3 0  H
+		'''
+	}
+	
+	@Test
+	def void testOptionalChildListInsertIntoEmpty2() {
+		recordDiff(OptionalChildList, "#13") [
+			children += createMandatoryValue => [name = "foo"]
+			children += createMandatoryValue => [name = "bar"]
+		] === '''
+			0 0   H
+			      B OptionalChildList    Model
+			0 3    S "#13"                Model:'#13'
+			3 0 1  H
+			       B MandatoryValue'foo'  MandatoryValue path:OptionalChildList/children[0]
+			3 3 1   S "foo"                MandatoryValue:name=ID
+			       E MandatoryValue'foo'  MandatoryValue path:OptionalChildList/children[0]
+			6 0 1  H
+			       B MandatoryValue'bar'  MandatoryValue path:OptionalChildList/children[1]
+			6 3 1   S "bar"                MandatoryValue:name=ID
+			       E MandatoryValue'bar'  MandatoryValue path:OptionalChildList/children[1]
+			      E OptionalChildList    Model
+			9 0 1 H
+			------------ diff 1 ------------
+			3 0  H
+		'''
+	}
+	
+	@Test
+	def void testOptionalChildListInsertIntoFirst() {
+		recordDiff(OptionalChildList, "#13 x2") [
+			children.add(0, createMandatoryValue => [name = "x1"]) 
+		] === '''
+			0 0   H
+			      B OptionalChildList    Model
+			0 3    S "#13"                Model:'#13'
+			3 1 1  H " "                  Whitespace:TerminalRule'WS'
+			       B MandatoryValue'x1'   MandatoryValue path:OptionalChildList/children[0]
+			4 2 1   S "x1"                 MandatoryValue:name=ID
+			       E MandatoryValue'x1'   MandatoryValue path:OptionalChildList/children[0]
+			6 0 1  H
+			       B MandatoryValue'x2'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[1]
+			6 2     S "x2"                 MandatoryValue:name=ID
+			       E MandatoryValue'x2'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[1]
+			      E OptionalChildList    Model
+			8 0   H
+			------------ diff 1 ------------
+			3 1 H " "                  Whitespace:TerminalRule'WS'
+		'''
+	}
+	
+	@Test
+	def void testOptionalChildListInsertIntoMiddle() {
+		recordDiff(OptionalChildList, "#13 x1 x3") [
+			children.add(1, createMandatoryValue => [name = "x2"]) 
+		] === '''
+			0 0   H
+			       B OptionalChildList    Model
+			 0 3    S "#13"                Model:'#13'
+			 3 1    H " "                  Whitespace:TerminalRule'WS'
+			        B MandatoryValue'x1'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			 4 2     S "x1"                 MandatoryValue:name=ID
+			        E MandatoryValue'x1'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			 6 1 1  H " "                  Whitespace:TerminalRule'WS'
+			        B MandatoryValue'x2'   MandatoryValue path:OptionalChildList/children[1]
+			 7 2 1   S "x2"                 MandatoryValue:name=ID
+			        E MandatoryValue'x2'   MandatoryValue path:OptionalChildList/children[1]
+			 9 0 1  H
+			        B MandatoryValue'x3'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[2]
+			 9 2     S "x3"                 MandatoryValue:name=ID
+			        E MandatoryValue'x3'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[2]
+			       E OptionalChildList    Model
+			11 0   H
+			------------ diff 1 ------------
+			 6 1  H " "                  Whitespace:TerminalRule'WS'
+		'''
+	}
+	
+	@Test
+	def void testOptionalChildListInsertIntoEnd() {
+		recordDiff(OptionalChildList, "#13 x1") [
+			children += createMandatoryValue => [name = "x2"] 
+		] === '''
+			0 0   H
+			      B OptionalChildList    Model
+			0 3    S "#13"                Model:'#13'
+			3 1    H " "                  Whitespace:TerminalRule'WS'
+			       B MandatoryValue'x1'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			4 2     S "x1"                 MandatoryValue:name=ID
+			       E MandatoryValue'x1'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			6 0 1  H
+			       B MandatoryValue'x2'   MandatoryValue path:OptionalChildList/children[1]
+			6 2 1   S "x2"                 MandatoryValue:name=ID
+			       E MandatoryValue'x2'   MandatoryValue path:OptionalChildList/children[1]
+			      E OptionalChildList    Model
+			8 0 1 H
+			------------ diff 1 ------------
+			6 0   H
+		'''
+	}
+	
 	def private <T extends EObject> ITextRegionAccess recordDiff(Class<T> modelType, CharSequence modelText,
 		(T)=>void modification) {
 		val fs = new InMemoryURIHandler()

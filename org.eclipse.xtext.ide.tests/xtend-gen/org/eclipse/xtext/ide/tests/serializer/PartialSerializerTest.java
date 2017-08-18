@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.tests.serializer;
 
 import com.google.inject.Inject;
 import javax.inject.Provider;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryValue;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Node;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalChild;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalChildList;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalValue;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguageFactory;
 import org.eclipse.xtext.ide.tests.testlanguage.tests.PartialSerializationTestLanguageInjectorProvider;
@@ -422,6 +424,281 @@ public class PartialSerializerTest {
     _builder.append("18 1  S \";\"                  Node:\';\'");
     _builder.newLine();
     _builder.append("19 1  H \" \"                  Whitespace:TerminalRule\'WS\'");
+    _builder.newLine();
+    this._changeSerializerTestHelper.operator_tripleEquals(_recordDiff, _builder);
+  }
+  
+  @Test
+  public void testOptionalChildListInsertIntoEmpty() {
+    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+      EList<MandatoryValue> _children = it.getChildren();
+      MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
+      final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
+        it_1.setName("foo");
+      };
+      MandatoryValue _doubleArrow = ObjectExtensions.<MandatoryValue>operator_doubleArrow(_createMandatoryValue, _function_1);
+      _children.add(_doubleArrow);
+    };
+    ITextRegionAccess _recordDiff = this.<OptionalChildList>recordDiff(OptionalChildList.class, "#13", _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("0 0   H");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("B OptionalChildList    Model");
+    _builder.newLine();
+    _builder.append("0 3    S \"#13\"                Model:\'#13\'");
+    _builder.newLine();
+    _builder.append("3 0 1  H");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("B MandatoryValue\'foo\'  MandatoryValue path:OptionalChildList/children[0]");
+    _builder.newLine();
+    _builder.append("3 3 1   S \"foo\"                MandatoryValue:name=ID");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("E MandatoryValue\'foo\'  MandatoryValue path:OptionalChildList/children[0]");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("E OptionalChildList    Model");
+    _builder.newLine();
+    _builder.append("6 0 1 H");
+    _builder.newLine();
+    _builder.append("------------ diff 1 ------------");
+    _builder.newLine();
+    _builder.append("3 0  H");
+    _builder.newLine();
+    this._changeSerializerTestHelper.operator_tripleEquals(_recordDiff, _builder);
+  }
+  
+  @Test
+  public void testOptionalChildListInsertIntoEmpty2() {
+    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+      EList<MandatoryValue> _children = it.getChildren();
+      MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
+      final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
+        it_1.setName("foo");
+      };
+      MandatoryValue _doubleArrow = ObjectExtensions.<MandatoryValue>operator_doubleArrow(_createMandatoryValue, _function_1);
+      _children.add(_doubleArrow);
+      EList<MandatoryValue> _children_1 = it.getChildren();
+      MandatoryValue _createMandatoryValue_1 = this.fac.createMandatoryValue();
+      final Procedure1<MandatoryValue> _function_2 = (MandatoryValue it_1) -> {
+        it_1.setName("bar");
+      };
+      MandatoryValue _doubleArrow_1 = ObjectExtensions.<MandatoryValue>operator_doubleArrow(_createMandatoryValue_1, _function_2);
+      _children_1.add(_doubleArrow_1);
+    };
+    ITextRegionAccess _recordDiff = this.<OptionalChildList>recordDiff(OptionalChildList.class, "#13", _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("0 0   H");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("B OptionalChildList    Model");
+    _builder.newLine();
+    _builder.append("0 3    S \"#13\"                Model:\'#13\'");
+    _builder.newLine();
+    _builder.append("3 0 1  H");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("B MandatoryValue\'foo\'  MandatoryValue path:OptionalChildList/children[0]");
+    _builder.newLine();
+    _builder.append("3 3 1   S \"foo\"                MandatoryValue:name=ID");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("E MandatoryValue\'foo\'  MandatoryValue path:OptionalChildList/children[0]");
+    _builder.newLine();
+    _builder.append("6 0 1  H");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("B MandatoryValue\'bar\'  MandatoryValue path:OptionalChildList/children[1]");
+    _builder.newLine();
+    _builder.append("6 3 1   S \"bar\"                MandatoryValue:name=ID");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("E MandatoryValue\'bar\'  MandatoryValue path:OptionalChildList/children[1]");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("E OptionalChildList    Model");
+    _builder.newLine();
+    _builder.append("9 0 1 H");
+    _builder.newLine();
+    _builder.append("------------ diff 1 ------------");
+    _builder.newLine();
+    _builder.append("3 0  H");
+    _builder.newLine();
+    this._changeSerializerTestHelper.operator_tripleEquals(_recordDiff, _builder);
+  }
+  
+  @Test
+  public void testOptionalChildListInsertIntoFirst() {
+    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+      EList<MandatoryValue> _children = it.getChildren();
+      MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
+      final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
+        it_1.setName("x1");
+      };
+      MandatoryValue _doubleArrow = ObjectExtensions.<MandatoryValue>operator_doubleArrow(_createMandatoryValue, _function_1);
+      _children.add(0, _doubleArrow);
+    };
+    ITextRegionAccess _recordDiff = this.<OptionalChildList>recordDiff(OptionalChildList.class, "#13 x2", _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("0 0   H");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("B OptionalChildList    Model");
+    _builder.newLine();
+    _builder.append("0 3    S \"#13\"                Model:\'#13\'");
+    _builder.newLine();
+    _builder.append("3 1 1  H \" \"                  Whitespace:TerminalRule\'WS\'");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("B MandatoryValue\'x1\'   MandatoryValue path:OptionalChildList/children[0]");
+    _builder.newLine();
+    _builder.append("4 2 1   S \"x1\"                 MandatoryValue:name=ID");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("E MandatoryValue\'x1\'   MandatoryValue path:OptionalChildList/children[0]");
+    _builder.newLine();
+    _builder.append("6 0 1  H");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("B MandatoryValue\'x2\'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[1]");
+    _builder.newLine();
+    _builder.append("6 2     S \"x2\"                 MandatoryValue:name=ID");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("E MandatoryValue\'x2\'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[1]");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("E OptionalChildList    Model");
+    _builder.newLine();
+    _builder.append("8 0   H");
+    _builder.newLine();
+    _builder.append("------------ diff 1 ------------");
+    _builder.newLine();
+    _builder.append("3 1 H \" \"                  Whitespace:TerminalRule\'WS\'");
+    _builder.newLine();
+    this._changeSerializerTestHelper.operator_tripleEquals(_recordDiff, _builder);
+  }
+  
+  @Test
+  public void testOptionalChildListInsertIntoMiddle() {
+    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+      EList<MandatoryValue> _children = it.getChildren();
+      MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
+      final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
+        it_1.setName("x2");
+      };
+      MandatoryValue _doubleArrow = ObjectExtensions.<MandatoryValue>operator_doubleArrow(_createMandatoryValue, _function_1);
+      _children.add(1, _doubleArrow);
+    };
+    ITextRegionAccess _recordDiff = this.<OptionalChildList>recordDiff(OptionalChildList.class, "#13 x1 x3", _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("0 0   H");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("B OptionalChildList    Model");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("0 3    S \"#13\"                Model:\'#13\'");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("3 1    H \" \"                  Whitespace:TerminalRule\'WS\'");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("B MandatoryValue\'x1\'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("4 2     S \"x1\"                 MandatoryValue:name=ID");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("E MandatoryValue\'x1\'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("6 1 1  H \" \"                  Whitespace:TerminalRule\'WS\'");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("B MandatoryValue\'x2\'   MandatoryValue path:OptionalChildList/children[1]");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("7 2 1   S \"x2\"                 MandatoryValue:name=ID");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("E MandatoryValue\'x2\'   MandatoryValue path:OptionalChildList/children[1]");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("9 0 1  H");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("B MandatoryValue\'x3\'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[2]");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("9 2     S \"x3\"                 MandatoryValue:name=ID");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("E MandatoryValue\'x3\'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[2]");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("E OptionalChildList    Model");
+    _builder.newLine();
+    _builder.append("11 0   H");
+    _builder.newLine();
+    _builder.append("------------ diff 1 ------------");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("6 1  H \" \"                  Whitespace:TerminalRule\'WS\'");
+    _builder.newLine();
+    this._changeSerializerTestHelper.operator_tripleEquals(_recordDiff, _builder);
+  }
+  
+  @Test
+  public void testOptionalChildListInsertIntoEnd() {
+    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+      EList<MandatoryValue> _children = it.getChildren();
+      MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
+      final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
+        it_1.setName("x2");
+      };
+      MandatoryValue _doubleArrow = ObjectExtensions.<MandatoryValue>operator_doubleArrow(_createMandatoryValue, _function_1);
+      _children.add(_doubleArrow);
+    };
+    ITextRegionAccess _recordDiff = this.<OptionalChildList>recordDiff(OptionalChildList.class, "#13 x1", _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("0 0   H");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("B OptionalChildList    Model");
+    _builder.newLine();
+    _builder.append("0 3    S \"#13\"                Model:\'#13\'");
+    _builder.newLine();
+    _builder.append("3 1    H \" \"                  Whitespace:TerminalRule\'WS\'");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("B MandatoryValue\'x1\'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]");
+    _builder.newLine();
+    _builder.append("4 2     S \"x1\"                 MandatoryValue:name=ID");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("E MandatoryValue\'x1\'   OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]");
+    _builder.newLine();
+    _builder.append("6 0 1  H");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("B MandatoryValue\'x2\'   MandatoryValue path:OptionalChildList/children[1]");
+    _builder.newLine();
+    _builder.append("6 2 1   S \"x2\"                 MandatoryValue:name=ID");
+    _builder.newLine();
+    _builder.append("       ");
+    _builder.append("E MandatoryValue\'x2\'   MandatoryValue path:OptionalChildList/children[1]");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("E OptionalChildList    Model");
+    _builder.newLine();
+    _builder.append("8 0 1 H");
+    _builder.newLine();
+    _builder.append("------------ diff 1 ------------");
+    _builder.newLine();
+    _builder.append("6 0   H");
     _builder.newLine();
     this._changeSerializerTestHelper.operator_tripleEquals(_recordDiff, _builder);
   }
