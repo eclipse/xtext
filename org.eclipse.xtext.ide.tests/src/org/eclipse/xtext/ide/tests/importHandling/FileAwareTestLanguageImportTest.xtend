@@ -56,14 +56,14 @@ class FileAwareTestLanguageImportTest {
 		model.name = "newpackage"
 		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
 		serializer.endRecordChangesToTextDocuments === '''
-			---------------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ----------------
+			-------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ---------
 			package <8:4|newpackage>
 			
 			element Foo {
 			}
 			--------------------------------------------------------------------------------
 			8 4 "pkg1" -> "newpackage"
-			---------------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ----------------
+			-------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ---------
 			package pkg2
 			
 			import <21:8|newpackage.Foo>
@@ -101,24 +101,23 @@ class FileAwareTestLanguageImportTest {
 		model.name = "newpackage"
 		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
 		serializer.endRecordChangesToTextDocuments === '''
-			---------------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ----------------
+			-------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ---------
 			package <8:4|newpackage>
 			
 			element Foo {
 			}
 			--------------------------------------------------------------------------------
 			8 4 "pkg1" -> "newpackage"
-			---------------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ----------------
-			<0:39|package pkg1
+			-------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ---------
+			package pkg1<12:2|
 			
 			import newpackage.Foo
 			
-			element Bar {
+			>element Bar {
 				ref Foo
 			}
-			>
 			--------------------------------------------------------------------------------
-			0 39 "package pkg1\n\nele..." -> "package pkg1\n\nimp..."
+			12 2 "\n\n" -> "\n\nimport newpacka..."
 		'''
 	}
 	
@@ -149,14 +148,14 @@ class FileAwareTestLanguageImportTest {
 		model.name = "pkg1"
 		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
 		serializer.endRecordChangesToTextDocuments === '''
-			---------------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ----------------
+			-------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ---------
 			package <8:5|pkg1>
 			
 			element Foo {
 			}
 			--------------------------------------------------------------------------------
 			8 5 "other" -> "pkg1"
-			---------------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ----------------
+			-------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ---------
 			package pkg1<12:20|
 			
 			>element Bar {

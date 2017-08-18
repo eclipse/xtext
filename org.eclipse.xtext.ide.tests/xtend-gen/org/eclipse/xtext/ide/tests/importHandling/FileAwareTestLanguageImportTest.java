@@ -77,7 +77,7 @@ public class FileAwareTestLanguageImportTest {
     Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._importTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("---------------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ----------------");
+    _builder_2.append("-------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ---------");
     _builder_2.newLine();
     _builder_2.append("package <8:4|newpackage>");
     _builder_2.newLine();
@@ -90,7 +90,7 @@ public class FileAwareTestLanguageImportTest {
     _builder_2.newLine();
     _builder_2.append("8 4 \"pkg1\" -> \"newpackage\"");
     _builder_2.newLine();
-    _builder_2.append("---------------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ----------------");
+    _builder_2.append("-------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ---------");
     _builder_2.newLine();
     _builder_2.append("package pkg2");
     _builder_2.newLine();
@@ -146,7 +146,7 @@ public class FileAwareTestLanguageImportTest {
     Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._importTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("---------------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ----------------");
+    _builder_2.append("-------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ---------");
     _builder_2.newLine();
     _builder_2.append("package <8:4|newpackage>");
     _builder_2.newLine();
@@ -159,26 +159,24 @@ public class FileAwareTestLanguageImportTest {
     _builder_2.newLine();
     _builder_2.append("8 4 \"pkg1\" -> \"newpackage\"");
     _builder_2.newLine();
-    _builder_2.append("---------------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ----------------");
+    _builder_2.append("-------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ---------");
     _builder_2.newLine();
-    _builder_2.append("<0:39|package pkg1");
+    _builder_2.append("package pkg1<12:2|");
     _builder_2.newLine();
     _builder_2.newLine();
     _builder_2.append("import newpackage.Foo");
     _builder_2.newLine();
     _builder_2.newLine();
-    _builder_2.append("element Bar {");
+    _builder_2.append(">element Bar {");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("ref Foo");
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    _builder_2.append(">");
-    _builder_2.newLine();
     _builder_2.append("--------------------------------------------------------------------------------");
     _builder_2.newLine();
-    _builder_2.append("0 39 \"package pkg1\\n\\nele...\" -> \"package pkg1\\n\\nimp...\"");
+    _builder_2.append("12 2 \"\\n\\n\" -> \"\\n\\nimport newpacka...\"");
     _builder_2.newLine();
     this._importTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_2);
   }
@@ -220,7 +218,7 @@ public class FileAwareTestLanguageImportTest {
     Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._importTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("---------------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ----------------");
+    _builder_2.append("-------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ---------");
     _builder_2.newLine();
     _builder_2.append("package <8:5|pkg1>");
     _builder_2.newLine();
@@ -233,7 +231,7 @@ public class FileAwareTestLanguageImportTest {
     _builder_2.newLine();
     _builder_2.append("8 5 \"other\" -> \"pkg1\"");
     _builder_2.newLine();
-    _builder_2.append("---------------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ----------------");
+    _builder_2.append("-------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ---------");
     _builder_2.newLine();
     _builder_2.append("package pkg1<12:20|");
     _builder_2.newLine();
