@@ -11,6 +11,7 @@ import com.google.inject.Inject;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -42,6 +43,8 @@ public class MoveResourceContext {
         this.resourceServiceProviderRegistry);
     }
   }
+  
+  private final static Logger LOG = Logger.getLogger(MoveResourceContext.class);
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final List<ResourceURIChange> fileChanges;
@@ -79,6 +82,7 @@ public class MoveResourceContext {
         }
         String _plus = ("Error loading resource " + _string);
         this.issueAcceptor.add(RefactoringIssueAcceptor.Severity.ERROR, _plus, t);
+        MoveResourceContext.LOG.error(t);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -104,6 +108,7 @@ public class MoveResourceContext {
           }
           String _plus = ("Error executing modification on resource " + _string);
           this.issueAcceptor.add(RefactoringIssueAcceptor.Severity.ERROR, _plus, t);
+          MoveResourceContext.LOG.error(t);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }

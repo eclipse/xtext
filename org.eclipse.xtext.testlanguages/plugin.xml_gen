@@ -19,4 +19,10 @@
 			class = "org.eclipse.xtext.testlanguages.xtextgrammar.xtextGrammarTest.XtextGrammarTestPackage"
 			genModel = "model/generated/XtextGrammarTestLanguage.genmodel" />
 	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "http://www.eclipse.org/xtext/testlanguage/FileAware"
+			class = "org.eclipse.xtext.testlanguages.fileAware.fileAware.FileAwarePackage"
+			genModel = "model/generated/FileAwareTestLanguage.genmodel" />
+	</extension>
 </plugin>

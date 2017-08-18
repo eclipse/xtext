@@ -19,6 +19,7 @@ import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import java.util.Map
 import static org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity.*
+import org.apache.log4j.Logger
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -26,6 +27,8 @@ import static org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severit
  */
 @FinalFieldsConstructor
 class MoveResourceContext {
+	
+	static val LOG = Logger.getLogger(MoveResourceContext)
 
 	@Accessors(PUBLIC_GETTER) val List<ResourceURIChange> fileChanges
 	@Accessors(PUBLIC_GETTER) val List<ResourceURIChange> folderChanges
@@ -45,6 +48,7 @@ class MoveResourceContext {
 			modifications.put(resource, modification)
 		} catch (Throwable t) {
 			issueAcceptor.add(ERROR, 'Error loading resource ' + uri?.toString, t)
+			LOG.error(t)
 		}
 	}
 
@@ -54,6 +58,7 @@ class MoveResourceContext {
 				value.modify(key)
 			} catch (Throwable t) {
 				issueAcceptor.add(ERROR, 'Error executing modification on resource ' + key?.URI?.toString, t)
+				LOG.error(t)
 			}
 		]
 	}
