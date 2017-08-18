@@ -30,6 +30,8 @@ import com.google.inject.Inject;
  */
 public class RecordedResourceUpdater {
 
+	private Deltas deltas;
+
 	private ITextRegionDiffBuilder document;
 
 	@Inject
@@ -45,32 +47,26 @@ public class RecordedResourceUpdater {
 
 	private IResourceSnapshot snapshot;
 
-	private Deltas deltas;
+	private List<IUpdatableReference> updatableReferences;
 
-	private ReferenceUpdaterContext ctx;
-
-	public IResourceSnapshot getSnapshot() {
-		return snapshot;
+	public void applyChange(ResourceRecording rec, IAcceptor<IEmfResourceChange> changeAcceptor) {
+		partialSerializer.serializeChanges(rec, document);
+		for (IUpdatableReference upd : updatableReferences) {
+			referenceUpdater.updateReference(document, upd);
+		}
+		ITextRegionAccessDiff rewritten = document.create();
+		List<ITextReplacement> rep = formatter.format(rewritten);
+		URI oldUri = rec.getSnapshot().getURI();
+		TextDocumentChange change = new TextDocumentChange(rewritten, oldUri, rep);
+		changeAcceptor.accept(change);
 	}
 
 	public Resource getResource() {
 		return snapshot.getResource();
 	}
 
-	public void applyChange(ResourceRecording rec, IAcceptor<IEmfResourceChange> changeAcceptor) {
-		ITextRegionDiffBuilder rewriter = ctx.getModifyableDocument();
-		partialSerializer.serializeChanges(rec, rewriter);
-		for (Runnable run : ctx.getModifications()) {
-			run.run();
-		}
-		for (IUpdatableReference upd : ctx.getUpdatableReferences()) {
-			referenceUpdater.updateReference(rewriter, upd);
-		}
-		ITextRegionAccessDiff rewritten = rewriter.create();
-		List<ITextReplacement> rep = formatter.format(rewritten);
-		URI oldUri = rec.getSnapshot().getURI();
-		TextDocumentChange change = new TextDocumentChange(rewritten, oldUri, rep);
-		changeAcceptor.accept(change);
+	public IResourceSnapshot getSnapshot() {
+		return snapshot;
 	}
 
 	public void init(IChangeSerializer ser, Deltas deltas, IResourceSnapshot snap, ITextRegionDiffBuilder doc) {
@@ -81,10 +77,14 @@ public class RecordedResourceUpdater {
 	}
 
 	public void updateReferences() {
-		ctx = new ReferenceUpdaterContext(deltas, document);
+		ReferenceUpdaterContext ctx = new ReferenceUpdaterContext(deltas, document);
 		if (serializer.isUpdateCrossReferences()) {
 			referenceUpdater.update(ctx);
+			for (Runnable run : ctx.getModifications()) {
+				run.run();
+			}
 		}
+		this.updatableReferences = ctx.getUpdatableReferences();
 	}
 
 }

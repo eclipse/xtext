@@ -165,5 +165,45 @@ class FileAwareTestLanguageImportTest {
 			12 20 "\n\nimport other.Foo\n\n" -> "\n\n"
 		'''
 	}
+	
+	@Test
+	def void testNestedPackage() {
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/foo/X.fileawaretestlanguage" -> '''
+			package foo 
+			element X {}
+		'''
+		fs += "inmemory:/foo/bar/Y.fileawaretestlanguage" -> '''
+			package foo.bar 
+			element Y { ref foo.X }
+		'''
+
+		val rs = fs.createResourceSet
+		val model1 = rs.contents("inmemory:/foo/X.fileawaretestlanguage", PackageDeclaration)
+		val model2 = rs.contents("inmemory:/foo/bar/Y.fileawaretestlanguage", PackageDeclaration)
+
+		val serializer = serializerProvider.get()
+		serializer.beginRecordChanges(model1.eResource)
+		serializer.beginRecordChanges(model2.eResource)
+		model1.name = "foo2"
+		model2.name = "foo2.bar"
+		serializer.endRecordChangesToTextDocuments === '''
+			-------- inmemory:/foo/X.fileawaretestlanguage (syntax: <offset|text>) ---------
+			package <8:3|foo2> 
+			element X {}
+			--------------------------------------------------------------------------------
+			8 3 "foo" -> "foo2"
+			------ inmemory:/foo/bar/Y.fileawaretestlanguage (syntax: <offset|text>) -------
+			package <8:7|foo2.bar><15:2|
+			
+			import foo2.X
+			
+			>element Y { ref <33:5|X> }
+			--------------------------------------------------------------------------------
+			 8 7 "foo.bar" -> "foo2.bar"
+			15 2 " \n" -> "\n\nimport foo2.X\n\n"
+			33 5 "foo.X" -> "X"
+		'''
+	}
 
 }

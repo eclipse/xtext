@@ -249,4 +249,63 @@ public class FileAwareTestLanguageImportTest {
     _builder_2.newLine();
     this._importTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_2);
   }
+  
+  @Test
+  public void testNestedPackage() {
+    final InMemoryURIHandler fs = new InMemoryURIHandler();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo ");
+    _builder.newLine();
+    _builder.append("element X {}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/foo/X.fileawaretestlanguage", _builder.toString());
+    this._importTestHelper.operator_add(fs, _mappedTo);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo.bar ");
+    _builder_1.newLine();
+    _builder_1.append("element Y { ref foo.X }");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("inmemory:/foo/bar/Y.fileawaretestlanguage", _builder_1.toString());
+    this._importTestHelper.operator_add(fs, _mappedTo_1);
+    final ResourceSet rs = this._importTestHelper.createResourceSet(fs);
+    final PackageDeclaration model1 = this._importTestHelper.<PackageDeclaration>contents(rs, "inmemory:/foo/X.fileawaretestlanguage", PackageDeclaration.class);
+    final PackageDeclaration model2 = this._importTestHelper.<PackageDeclaration>contents(rs, "inmemory:/foo/bar/Y.fileawaretestlanguage", PackageDeclaration.class);
+    final ChangeSerializer serializer = this.serializerProvider.get();
+    serializer.beginRecordChanges(model1.eResource());
+    serializer.beginRecordChanges(model2.eResource());
+    model1.setName("foo2");
+    model2.setName("foo2.bar");
+    Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._importTestHelper.endRecordChangesToTextDocuments(serializer);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("-------- inmemory:/foo/X.fileawaretestlanguage (syntax: <offset|text>) ---------");
+    _builder_2.newLine();
+    _builder_2.append("package <8:3|foo2> ");
+    _builder_2.newLine();
+    _builder_2.append("element X {}");
+    _builder_2.newLine();
+    _builder_2.append("--------------------------------------------------------------------------------");
+    _builder_2.newLine();
+    _builder_2.append("8 3 \"foo\" -> \"foo2\"");
+    _builder_2.newLine();
+    _builder_2.append("------ inmemory:/foo/bar/Y.fileawaretestlanguage (syntax: <offset|text>) -------");
+    _builder_2.newLine();
+    _builder_2.append("package <8:7|foo2.bar><15:2|");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("import foo2.X");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append(">element Y { ref <33:5|X> }");
+    _builder_2.newLine();
+    _builder_2.append("--------------------------------------------------------------------------------");
+    _builder_2.newLine();
+    _builder_2.append(" ");
+    _builder_2.append("8 7 \"foo.bar\" -> \"foo2.bar\"");
+    _builder_2.newLine();
+    _builder_2.append("15 2 \" \\n\" -> \"\\n\\nimport foo2.X\\n\\n\"");
+    _builder_2.newLine();
+    _builder_2.append("33 5 \"foo.X\" -> \"X\"");
+    _builder_2.newLine();
+    this._importTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_2);
+  }
 }
