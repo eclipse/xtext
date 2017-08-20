@@ -59,14 +59,14 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 	protected static class RemoveRewriteAction extends RewriteAction {
 		private boolean delete;
 
-		public RemoveRewriteAction(ISequentialRegion originalFirst, ISequentialRegion originalLast, boolean delete) {
+		public RemoveRewriteAction(IHiddenRegion originalFirst, IHiddenRegion originalLast, boolean delete) {
 			super(originalFirst, originalLast);
 			this.delete = delete;
 		}
 
 		@Override
 		public SequentialRegionDiff apply(StringBasedTextRegionAccessDiffAppender appender) {
-			return appender.copySurroundingHidden(originalFirst, originalLast, delete);
+			return appender.copySurroundingHidden((IHiddenRegion) originalFirst, (IHiddenRegion) originalLast, delete);
 		}
 
 	}
@@ -91,8 +91,8 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 	}
 
 	public abstract static class RewriteAction implements Comparable<RewriteAction> {
-		protected final ISequentialRegion originalFirst;
-		protected final ISequentialRegion originalLast;
+		protected ISequentialRegion originalFirst;
+		protected ISequentialRegion originalLast;
 
 		public RewriteAction(ISequentialRegion originalFirst, ISequentialRegion originalLast) {
 			super();
@@ -192,7 +192,7 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 		StringBasedTextRegionAccessDiff result = new StringBasedTextRegionAccessDiff(original);
 		StringBasedTextRegionAccessDiffAppender appender = new StringBasedTextRegionAccessDiffAppender(result);
 		for (RewriteAction next : rewrites) {
-			if (!last.equals(next.originalFirst)) {
+			if (!next.originalFirst.equals(last) && !next.originalFirst.equals(last.getPreviousSequentialRegion())) {
 				appender.copyAndAppend(last, next.originalFirst.getPreviousSequentialRegion());
 			}
 			SequentialRegionDiff rewrite = next.apply(appender);
@@ -232,7 +232,7 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 
 	@Override
 	public void move(IHiddenRegion insertAt, IHiddenRegion substituteFirst, IHiddenRegion substituteLast) {
-		rewrites.add(new RemoveRewriteAction(substituteFirst, substituteLast, false));
+		remove(substituteFirst, substituteLast, false);
 		replace(insertAt, insertAt, substituteFirst, substituteLast);
 	}
 
@@ -240,7 +240,21 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 	public void remove(IHiddenRegion first, IHiddenRegion last) {
 		checkOriginal(first);
 		checkOriginal(last);
-		rewrites.add(new RemoveRewriteAction(first, last, true));
+		remove(first, last, true);
+	}
+
+	protected void remove(IHiddenRegion first, IHiddenRegion last, boolean del) {
+		for (RewriteAction rw : rewrites) {
+			if (rw.originalFirst == last) {
+				rw.originalFirst = first;
+				return;
+			}
+			if (rw.originalLast == first) {
+				rw.originalLast = last;
+				return;
+			}
+		}
+		rewrites.add(new RemoveRewriteAction(first, last, del));
 	}
 
 	@Override

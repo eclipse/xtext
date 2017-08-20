@@ -145,7 +145,7 @@ public class StringBasedTextRegionAccessDiffAppender {
 		}
 	}
 
-	public SequentialRegionDiff copySurroundingHidden(ISequentialRegion originalFirst, ISequentialRegion originalLast,
+	public SequentialRegionDiff copySurroundingHidden(IHiddenRegion originalFirst, IHiddenRegion originalLast,
 			boolean delete) {
 		boolean firstHidden = originalFirst instanceof IHiddenRegion;
 		boolean lastHidden = originalLast instanceof IHiddenRegion;

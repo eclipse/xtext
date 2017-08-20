@@ -9,9 +9,9 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import java.util.List;
 
-import org.eclipse.xtext.formatting2.regionaccess.ITextSegmentDiff;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccessDiff;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegmentDiff;
 
 import com.google.common.collect.Lists;
 
@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 public class StringBasedTextRegionAccessDiff extends StringBasedRegionAccess implements ITextRegionAccessDiff {
 
 	private final List<ITextSegmentDiff> diffs = Lists.newArrayList();
+
 	private final ITextRegionAccess original;
 
 	protected StringBasedTextRegionAccessDiff(ITextRegionAccess original) {

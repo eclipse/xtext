@@ -135,6 +135,26 @@ class ChangeSerializerTest {
 			18 7 " foo1; " -> "  "
 		'''
 	}
+	
+	@Test
+	def void testDeleteTwoChildren() {
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/file1.pstl" -> '''#1 root { child1; child2; }'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents("inmemory:/file1.pstl", Node)
+
+		val serializer = newChangeSerializer()
+		serializer.beginRecordChanges(model.eResource)
+		EcoreUtil.remove(model.children.get(1))
+		EcoreUtil.remove(model.children.get(0))
+		serializer.endRecordChangesToTextDocuments === '''
+			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
+			#1 root {<9:17|  >}
+			--------------------------------------------------------------------------------
+			9 17 " child1; child2; " -> "  "
+		'''
+	}
 
 	@Test
 	def void testRenameLocal() {
