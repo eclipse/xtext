@@ -24,7 +24,6 @@ import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed;
-import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguageFactory;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
 import org.eclipse.xtext.formatting2.regionaccess.internal.services.RegionAccessTestLanguageGrammarAccess;
@@ -353,14 +352,6 @@ public class SemanticRegionFinderTest {
     final String expected = "(b); ((b) + c); (a + ((b) + c) + d)";
     Assert.assertEquals(expected, actual1);
     Assert.assertEquals(expected, actual2);
-  }
-  
-  @Test(expected = IllegalArgumentException.class)
-  public void regionForExternalObject() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("5 (foo)");
-    final Expression expr = this.<Expression>parseAs(_builder, Expression.class);
-    this.toAccess(expr).regionForEObject(RegionaccesstestlanguageFactory.eINSTANCE.createExpression());
   }
   
   private String pairsToString(final Iterable<Pair<ISemanticRegion, ISemanticRegion>> pairs) {

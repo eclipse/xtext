@@ -240,11 +240,6 @@ class SemanticRegionFinderTest {
 		assertEquals(expected, actual2)
 	}
 
-	@Test(expected=IllegalArgumentException) def void regionForExternalObject() {
-		val expr = '''5 (foo)'''.parseAs(Expression)
-		expr.toAccess.regionForEObject(RegionaccesstestlanguageFactory.eINSTANCE.createExpression)
-	}
-
 	def private String pairsToString(Iterable<Pair<ISemanticRegion, ISemanticRegion>> pairs) {
 		pairs.map[key.merge(value).text].join("; ")
 	}

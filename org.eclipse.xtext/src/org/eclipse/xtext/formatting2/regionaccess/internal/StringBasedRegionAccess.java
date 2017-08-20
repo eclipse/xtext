@@ -57,11 +57,7 @@ public class StringBasedRegionAccess extends AbstractRegionAccess {
 
 	@Override
 	public AbstractEObjectRegion regionForEObject(EObject obj) {
-		AbstractEObjectRegion region = eObjectToTokens.get(obj);
-		if (region == null && obj != null && obj.eResource() != resource) {
-			throw new IllegalArgumentException("ITextRegionAccess.regionForEObject may not be called for resource external EObjects.");
-		}
-		return region;
+		return eObjectToTokens.get(obj);
 	}
 
 	@Override
