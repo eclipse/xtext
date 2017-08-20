@@ -164,6 +164,9 @@ public class EObjectSnapshotProvider {
 					continue;
 				}
 				EObject target = resource.getEObject(targetURI.fragment());
+				if (target == null || target.eIsProxy()) {
+					continue;
+				}
 				EObjectSnapshot snapshot = getOrCreate(result, target);
 				ReferenceSnapshot rd = new ReferenceSnapshot(ref.getSourceEObjectUri(), snapshot, ref.getEReference(),
 						ref.getIndexInList(), ref.getContainerEObjectURI());

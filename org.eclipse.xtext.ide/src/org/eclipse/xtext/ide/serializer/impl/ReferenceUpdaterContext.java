@@ -21,6 +21,7 @@ import org.eclipse.xtext.ide.serializer.hooks.IUpdatableReference;
 import org.eclipse.xtext.ide.serializer.impl.EObjectDescriptionDeltaProvider.Deltas;
 import org.eclipse.xtext.resource.XtextResource;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
 /**
@@ -48,10 +49,6 @@ public class ReferenceUpdaterContext implements IReferenceUpdaterContext {
 		return handler;
 	}
 
-	public List<IUpdatableReference> getUpdatableReferences() {
-		return references;
-	}
-
 	@Override
 	public ITextRegionDiffBuilder getModifyableDocument() {
 		return this.diffBuilder;
@@ -60,6 +57,10 @@ public class ReferenceUpdaterContext implements IReferenceUpdaterContext {
 	@Override
 	public XtextResource getResource() {
 		return diffBuilder.getOriginalTextRegionAccess().getResource();
+	}
+
+	public List<IUpdatableReference> getUpdatableReferences() {
+		return references;
 	}
 
 	@Override
@@ -73,8 +74,7 @@ public class ReferenceUpdaterContext implements IReferenceUpdaterContext {
 		ISemanticRegion region = objectRegion.getRegionFor().feature(reference);
 		EObject target = (EObject) owner.eGet(reference);
 		CrossReference crossref = GrammarUtil.containingCrossReference(region.getGrammarElement());
-		references.add(new UpdatableReference(owner, reference, -1, target, crossref, region));
-
+		updateReference(owner, reference, -1, region, target, crossref);
 	}
 
 	@Override
@@ -84,6 +84,17 @@ public class ReferenceUpdaterContext implements IReferenceUpdaterContext {
 		ISemanticRegion region = regions.get(index);
 		EObject target = (EObject) ((List<?>) owner.eGet(reference)).get(index);
 		CrossReference crossref = GrammarUtil.containingCrossReference(region.getGrammarElement());
+		updateReference(owner, reference, index, region, target, crossref);
+	}
+
+	private void updateReference(EObject owner, EReference reference, int index, ISemanticRegion region, EObject target,
+			CrossReference crossref) {
+		Preconditions.checkNotNull(owner);
+		Preconditions.checkNotNull(reference);
+		Preconditions.checkArgument(!reference.isContainment());
+		if (region == null || target == null || target.eIsProxy() || crossref == null) {
+			return;
+		}
 		references.add(new UpdatableReference(owner, reference, index, target, crossref, region));
 	}
 
