@@ -55,7 +55,7 @@ class RegionAccessBuilderTest {
 		'''
 	}
 	
-	@Test def void testMultiWhitespace() {
+	@Test def void testMultiWhitespace1() {
 		'''
 			1 /**/ foo
 		'''.toString.trim === '''
@@ -65,6 +65,24 @@ class RegionAccessBuilderTest {
 			 1    H " "        Whitespace:TerminalRule'WS'
 			        "/**/"     Comment:TerminalRule'ML_COMMENT'
 			   6    " "        Whitespace:TerminalRule'WS'
+			 7 3  S "foo"      Simple:name=ID
+			     E Simple'foo' Root
+			10 0 H
+		'''
+	}
+	
+	@Test def void testMultiWhitespace2() {
+		'''
+			1
+			/**/
+			foo
+		'''.toString.trim === '''
+			 0 0 H
+			     B Simple'foo' Root
+			 0 1  S "1"        Simple:'1'
+			 1    H "\n"       Whitespace:TerminalRule'WS'
+			        "/**/"     Comment:TerminalRule'ML_COMMENT'
+			   6    "\n"       Whitespace:TerminalRule'WS'
 			 7 3  S "foo"      Simple:name=ID
 			     E Simple'foo' Root
 			10 0 H
@@ -669,12 +687,24 @@ class RegionAccessBuilderTest {
 		val access2 = obj.serializeToRegions
 		assertToStringDoesNotCrash(access1)
 		assertToStringDoesNotCrash(access2)
+		assertLinesAreConsistent(access1)
+		assertLinesAreConsistent(access2)
 		
 		val tra1 = new TextRegionAccessToString().withRegionAccess(access1).cfg() + "\n"
 		val tra2 = new TextRegionAccessToString().withRegionAccess(access2).cfg() + "\n"
 		
 		Assert.assertEquals(exp.toPlatformLineSeparator, tra1.toPlatformLineSeparator)
 		Assert.assertEquals(exp.toPlatformLineSeparator, tra2.toPlatformLineSeparator)
+	}
+	
+	private def assertLinesAreConsistent(ITextRegionAccess access) {
+		val lines = access.regionForDocument.lineRegions.map[offset +":" + length].toSet
+		val text = access.regionForDocument.text
+		for(var i = 0; i < text.length; i++) {
+			val line = access.regionForLineAtOffset(i)
+			val lineStr = line.offset + ":" + line.length
+			Assert.assertTrue(lines.contains(lineStr))
+		}
 	}
 
 	private def assertToStringDoesNotCrash(ITextRegionAccess access) {

@@ -8,12 +8,14 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import com.google.inject.Inject;
+import java.util.Set;
 import javax.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ILineRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
@@ -29,6 +31,9 @@ import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,7 +85,7 @@ public class RegionAccessBuilderTest {
   }
   
   @Test
-  public void testMultiWhitespace() {
+  public void testMultiWhitespace1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("1 /**/ foo");
     _builder.newLine();
@@ -103,6 +108,46 @@ public class RegionAccessBuilderTest {
     _builder_1.newLine();
     _builder_1.append("   ");
     _builder_1.append("6    \" \"        Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("7 3  S \"foo\"      Simple:name=ID");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("E Simple\'foo\' Root");
+    _builder_1.newLine();
+    _builder_1.append("10 0 H");
+    _builder_1.newLine();
+    this.operator_tripleEquals(_trim, _builder_1);
+  }
+  
+  @Test
+  public void testMultiWhitespace2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("1");
+    _builder.newLine();
+    _builder.append("/**/");
+    _builder.newLine();
+    _builder.append("foo");
+    _builder.newLine();
+    String _trim = _builder.toString().trim();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(" ");
+    _builder_1.append("0 0 H");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("B Simple\'foo\' Root");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("0 1  S \"1\"        Simple:\'1\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("1    H \"\\n\"       Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("\"/**/\"     Comment:TerminalRule\'ML_COMMENT\'");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("6    \"\\n\"       Whitespace:TerminalRule\'WS\'");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("7 3  S \"foo\"      Simple:name=ID");
@@ -1439,6 +1484,8 @@ public class RegionAccessBuilderTest {
       final ITextRegionAccess access2 = this.serializer.serializeToRegions(obj);
       this.assertToStringDoesNotCrash(access1);
       this.assertToStringDoesNotCrash(access2);
+      this.assertLinesAreConsistent(access1);
+      this.assertLinesAreConsistent(access2);
       TextRegionAccessToString _cfg = this.cfg(new TextRegionAccessToString().withRegionAccess(access1));
       final String tra1 = (_cfg + "\n");
       TextRegionAccessToString _cfg_1 = this.cfg(new TextRegionAccessToString().withRegionAccess(access2));
@@ -1447,6 +1494,27 @@ public class RegionAccessBuilderTest {
       Assert.assertEquals(Strings.toPlatformLineSeparator(exp), Strings.toPlatformLineSeparator(tra2));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void assertLinesAreConsistent(final ITextRegionAccess access) {
+    final Function1<ILineRegion, String> _function = (ILineRegion it) -> {
+      int _offset = it.getOffset();
+      String _plus = (Integer.valueOf(_offset) + ":");
+      int _length = it.getLength();
+      return (_plus + Integer.valueOf(_length));
+    };
+    final Set<String> lines = IterableExtensions.<String>toSet(ListExtensions.<ILineRegion, String>map(access.regionForDocument().getLineRegions(), _function));
+    final String text = access.regionForDocument().getText();
+    for (int i = 0; (i < text.length()); i++) {
+      {
+        final ILineRegion line = access.regionForLineAtOffset(i);
+        int _offset = line.getOffset();
+        String _plus = (Integer.valueOf(_offset) + ":");
+        int _length = line.getLength();
+        final String lineStr = (_plus + Integer.valueOf(_length));
+        Assert.assertTrue(lines.contains(lineStr));
+      }
     }
   }
   
