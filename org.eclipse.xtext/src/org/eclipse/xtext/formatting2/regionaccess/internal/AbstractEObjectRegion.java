@@ -38,7 +38,7 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 		this.access = access;
 	}
 
-	protected void addChild(IAstRegion astRegion) {
+	public void addChild(IAstRegion astRegion) {
 		this.children.add(astRegion);
 	}
 
