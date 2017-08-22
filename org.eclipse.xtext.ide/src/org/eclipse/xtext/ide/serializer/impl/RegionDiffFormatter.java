@@ -10,7 +10,9 @@ package org.eclipse.xtext.ide.serializer.impl;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.FormatterRequest;
+import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegmentDiff;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
@@ -29,23 +31,30 @@ import com.google.inject.Provider;
  */
 public class RegionDiffFormatter {
 
-	@Inject
-	private IFormatter2 formatter;
+	public final static class NullFormatter extends AbstractFormatter2 {
+		@Override
+		public void format(Object obj, IFormattableDocument document) {
+		}
+	}
+
+	@Inject(optional = true)
+	private Provider<IFormatter2> formatter;
+
 	@Inject
 	private Provider<FormatterRequest> formatterRequest;
 
-	public List<ITextReplacement> format(ITextRegionAccess regions) {
-		if (regions instanceof ITextRegionAccessDiff) {
-			ITextRegionAccessDiff diff = (ITextRegionAccessDiff) regions;
-			FormatterRequest request = createFormatterRequest(diff);
-			List<ITextReplacement> replacements = formatter.format(request);
-			List<ITextReplacement> merged = mergeReplacements(diff, replacements);
-			return merged;
-		} else {
-			FormatterRequest request = createFormatterRequest(regions);
-			List<ITextReplacement> replacements = formatter.format(request);
-			return replacements;
+	@Inject
+	private Provider<NullFormatter> nullFormatter;
+
+	protected Collection<ITextRegion> collectRegionsToFormat(ITextRegionAccessDiff regions) {
+		List<ITextRegion> result = Lists.newArrayList();
+		for (ITextSegmentDiff diff : regions.getRegionDifferences()) {
+			int offset = diff.getModifiedFirstRegion().getOffset();
+			int length = diff.getModifiedLastRegion().getEndOffset() - offset;
+			ITextSegment region = regions.regionForOffset(offset, length);
+			result.add(region);
 		}
+		return result;
 	}
 
 	protected FormatterRequest createFormatterRequest(ITextRegionAccess rewritten) {
@@ -61,15 +70,26 @@ public class RegionDiffFormatter {
 		return request;
 	}
 
-	protected Collection<ITextRegion> collectRegionsToFormat(ITextRegionAccessDiff regions) {
-		List<ITextRegion> result = Lists.newArrayList();
-		for (ITextSegmentDiff diff : regions.getRegionDifferences()) {
-			int offset = diff.getModifiedFirstRegion().getOffset();
-			int length = diff.getModifiedLastRegion().getEndOffset() - offset;
-			ITextSegment region = regions.regionForOffset(offset, length);
-			result.add(region);
+	public List<ITextReplacement> format(ITextRegionAccess regions) {
+		IFormatter2 fmt = getFormatter();
+		if (regions instanceof ITextRegionAccessDiff) {
+			ITextRegionAccessDiff diff = (ITextRegionAccessDiff) regions;
+			FormatterRequest request = createFormatterRequest(diff);
+			List<ITextReplacement> replacements = fmt.format(request);
+			List<ITextReplacement> merged = mergeReplacements(diff, replacements);
+			return merged;
+		} else {
+			FormatterRequest request = createFormatterRequest(regions);
+			List<ITextReplacement> replacements = fmt.format(request);
+			return replacements;
 		}
-		return result;
+	}
+
+	protected IFormatter2 getFormatter() {
+		if (formatter != null) {
+			return formatter.get();
+		}
+		return nullFormatter.get();
 	}
 
 	protected List<ITextReplacement> mergeReplacements(ITextRegionAccessDiff regions, List<ITextReplacement> rep) {
