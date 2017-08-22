@@ -35,10 +35,10 @@ import org.eclipse.xtext.util.internal.Log
 	
 	LanguageClient client
 	
-	def void initialize(Iterable<? extends IResourceServiceProvider> allLanguages, ClientCapabilities capabilites, LanguageClient client) {
+	def void initialize(Iterable<? extends IResourceServiceProvider> allLanguages, ClientCapabilities capabilities, LanguageClient client) {
 		this.client = client
 		registeredCommands = HashMultimap.create
-		val hasDynamicRegistration = capabilites.workspace.executeCommand.dynamicRegistration
+		val boolean hasDynamicRegistration = capabilities.workspace?.executeCommand?.dynamicRegistration ?: false
 		for (lang : allLanguages) {
 			val service = lang.get(IExecutableCommandService)
 			if (service !== null) {

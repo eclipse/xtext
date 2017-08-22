@@ -15,12 +15,14 @@ import java.util.List;
 import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.eclipse.lsp4j.ClientCapabilities;
+import org.eclipse.lsp4j.ExecuteCommandCapabilities;
 import org.eclipse.lsp4j.ExecuteCommandOptions;
 import org.eclipse.lsp4j.ExecuteCommandParams;
 import org.eclipse.lsp4j.Registration;
 import org.eclipse.lsp4j.RegistrationParams;
 import org.eclipse.lsp4j.Unregistration;
 import org.eclipse.lsp4j.UnregistrationParams;
+import org.eclipse.lsp4j.WorkspaceClientCapabilities;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
@@ -47,10 +49,25 @@ public class ExecutableCommandRegistry {
   
   private LanguageClient client;
   
-  public void initialize(final Iterable<? extends IResourceServiceProvider> allLanguages, final ClientCapabilities capabilites, final LanguageClient client) {
+  public void initialize(final Iterable<? extends IResourceServiceProvider> allLanguages, final ClientCapabilities capabilities, final LanguageClient client) {
     this.client = client;
     this.registeredCommands = HashMultimap.<String, IExecutableCommandService>create();
-    final Boolean hasDynamicRegistration = capabilites.getWorkspace().getExecuteCommand().getDynamicRegistration();
+    Boolean _elvis = null;
+    WorkspaceClientCapabilities _workspace = capabilities.getWorkspace();
+    ExecuteCommandCapabilities _executeCommand = null;
+    if (_workspace!=null) {
+      _executeCommand=_workspace.getExecuteCommand();
+    }
+    Boolean _dynamicRegistration = null;
+    if (_executeCommand!=null) {
+      _dynamicRegistration=_executeCommand.getDynamicRegistration();
+    }
+    if (_dynamicRegistration != null) {
+      _elvis = _dynamicRegistration;
+    } else {
+      _elvis = Boolean.valueOf(false);
+    }
+    final boolean hasDynamicRegistration = (boolean) _elvis;
     for (final IResourceServiceProvider lang : allLanguages) {
       {
         final IExecutableCommandService service = lang.<IExecutableCommandService>get(IExecutableCommandService.class);
@@ -59,7 +76,7 @@ public class ExecutableCommandRegistry {
           for (final String c : commands) {
             this.registeredCommands.put(c, service);
           }
-          if ((hasDynamicRegistration).booleanValue()) {
+          if (hasDynamicRegistration) {
             final Function1<String, IDisposable> _function = (String command) -> {
               return this.register(command, service);
             };
