@@ -7,30 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.serializer.impl;
 
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.impl.EObjectDescriptionDeltaProvider.Deltas;
 import org.eclipse.xtext.util.IAcceptor;
 
-import com.google.inject.Inject;
-
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class RelatedEmfResourceUpdater extends RelatedResourceUpdater {
+public abstract class ResourceUpdater {
 
-	@Inject
-	private ResourceLifecycleManager lifecycleManager;
+	public abstract void applyChange(Deltas deltas, IAcceptor<IEmfResourceChange> changeAcceptor);
 
-	@Override
-	public void unload() {
-	}
-
-	@Override
-	public void applyChange(Deltas deltas, IAcceptor<IEmfResourceChange> changeAcceptor) {
-		Resource res = lifecycleManager.openAndApplyReferences(getResourceSet(), getResource());
-		EmfResourceChange change = new EmfResourceChange(res, res.getURI());
-		changeAcceptor.accept(change);
-	}
+	public abstract void unload();
 
 }

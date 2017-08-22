@@ -7,21 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.serializer.impl;
 
-import java.util.Collection;
+import static java.util.stream.Collectors.*;
+
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
-import org.eclipse.xtext.formatting2.regionaccess.internal.StringBasedTextRegionAccessDiffBuilder;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.hooks.IResourceSnapshot;
-import org.eclipse.xtext.ide.serializer.impl.ChangeTreeProvider.ResourceRecording;
-import org.eclipse.xtext.ide.serializer.impl.ChangeTreeProvider.ResourceSetRecording;
 import org.eclipse.xtext.ide.serializer.impl.EObjectDescriptionDeltaProvider.Deltas;
 import org.eclipse.xtext.ide.serializer.impl.RelatedResourcesProvider.RelatedResource;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -37,62 +35,90 @@ import com.google.inject.Inject;
  */
 public class ChangeSerializer implements IChangeSerializer {
 
-	private Map<Resource, ITextRegionDiffBuilder> builders = Maps.newHashMap();
-
 	@Inject
-	private ChangeTreeProvider changeTreeProvider;
-
-	@Inject
-	private SerializerChangeRecorder recorder;
+	private EObjectDescriptionDeltaProvider deltaProvider;
 
 	@Inject
 	private RelatedResourcesProvider relatedResourcesProvider;
+
+	private ResourceSet resourceSet = null;
 
 	private boolean updateCrossReferences = true;
 
 	private boolean updateRelatedFiles = true;
 
+	private Map<Resource, RecordingResourceUpdater> updaters = Maps.newLinkedHashMap();
+
 	@Override
-	public ITextRegionDiffBuilder beginRecordChanges(Resource resource) {
-		ITextRegionDiffBuilder existingBuilder = builders.get(resource);
-		if (existingBuilder != null)
-			return existingBuilder;
-		IResourceSnapshot snapshot = recorder.beginRecording(resource);
-		ITextRegionDiffBuilder result = new StringBasedTextRegionAccessDiffBuilder(snapshot.getRegions());
-		builders.put(resource, result);
-		return result;
+	public void beginRecordChanges(Resource resource) {
+		RecordingResourceUpdater updater = updaters.get(resource);
+		if (updater != null) {
+			return;
+		}
+		if (resourceSet == null) {
+			resourceSet = resource.getResourceSet();
+		} else {
+			if (resource.getResourceSet() != resourceSet) {
+				throw new IllegalStateException("Wrong ResourceSet.");
+			}
+		}
+		updater = createResourceUpdater(resource);
+		updaters.put(resource, updater);
+	}
+
+	protected RelatedResourceUpdater createResourceUpdater(RelatedResource relatedResource) {
+		URI uri = relatedResource.getUri();
+		IGrammarAccess grammar = getService(uri, IGrammarAccess.class);
+		RelatedResourceUpdater updater;
+		if (grammar != null) {
+			updater = getService(uri, RelatedXtextResourceUpdater.class);
+		} else {
+			updater = getService(uri, RelatedEmfResourceUpdater.class);
+		}
+		updater.init(this, resourceSet, relatedResource);
+		return updater;
+	}
+
+	protected RecordingResourceUpdater createResourceUpdater(Resource resource) {
+		if (resource instanceof XtextResource) {
+			RecordingXtextResourceUpdater updater = getService(resource, RecordingXtextResourceUpdater.class);
+			updater.beginRecording(this, (XtextResource) resource);
+			return updater;
+		} else {
+			throw new UnsupportedOperationException();
+		}
 	}
 
 	@Override
 	public void endRecordChanges(IAcceptor<IEmfResourceChange> changeAcceptor) {
-		if (builders.isEmpty()) {
+		if (updaters.isEmpty()) {
 			return;
 		}
-		Deltas deltas = recorder.getDeltas(this);
-		List<RecordedResourceUpdater> primary = Lists.newArrayList();
-		for (IResourceSnapshot resource : deltas.getSnapshots()) {
-			Resource res = resource.getResource();
-			RecordedResourceUpdater updater = getService(res, RecordedResourceUpdater.class);
-			updater.init(this, deltas, resource, builders.get(res));
-			primary.add(updater);
-		}
-		for (RecordedResourceUpdater updater : primary) {
-			updater.updateReferences();
-		}
-		ResourceSet resourceSet = recorder.getResourceSet();
-		ChangeDescription recording = recorder.endRecording();
-		Collection<IResourceSnapshot> snapshots = recorder.getSnapshots();
-		ResourceSetRecording tree = changeTreeProvider.createChangeTree(resourceSet, snapshots, recording);
-		for (RecordedResourceUpdater updater : primary) {
-			ResourceRecording record = tree.getRecordedResource(updater.getResource());
-			updater.applyChange(record, changeAcceptor);
-		}
+		List<IResourceSnapshot> snapshots = getSnapshots();
+		Deltas deltas = deltaProvider.getDelta(this, snapshots);
+		List<ResourceUpdater> updaters = Lists.newArrayList(this.updaters.values());
 		if (updateRelatedFiles && updateCrossReferences) {
 			List<RelatedResource> related = relatedResourcesProvider.getRelatedResources(deltas.getSnapshots());
 			for (RelatedResource ref : related) {
-				updateRelated(deltas, resourceSet, ref, changeAcceptor);
+				RelatedResourceUpdater updater = createResourceUpdater(ref);
+				updaters.add(updater);
 			}
 		}
+		for (ResourceUpdater updater : updaters) {
+			updater.applyChange(deltas, changeAcceptor);
+		}
+		for (ResourceUpdater updater : updaters) {
+			updater.unload();
+		}
+	}
+
+	@Override
+	public ITextRegionDiffBuilder getModifyableDocument(Resource resource) {
+		RecordingResourceUpdater updater = this.updaters.get(resource);
+		if (updater instanceof RecordingXtextResourceUpdater) {
+			return ((RecordingXtextResourceUpdater) updater).getDocument();
+		}
+		return null;
 	}
 
 	protected <T> T getService(Resource resource, Class<T> clazz) {
@@ -104,6 +130,10 @@ public class ChangeSerializer implements IChangeSerializer {
 
 	protected <T> T getService(URI uri, Class<T> clazz) {
 		return IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri).get(clazz);
+	}
+
+	protected List<IResourceSnapshot> getSnapshots() {
+		return updaters.values().stream().map(u -> u.getSnapshot()).collect(toList());
 	}
 
 	@Override
@@ -124,24 +154,6 @@ public class ChangeSerializer implements IChangeSerializer {
 	@Override
 	public void setUpdateRelatedFiles(boolean value) {
 		this.updateRelatedFiles = value;
-	}
-
-	protected void updateRelated(Deltas delt, ResourceSet rs, RelatedResource r, IAcceptor<IEmfResourceChange> acc) {
-		URI uri = r.getUri();
-		ResourceLifecycleManager lifecycleManager = getService(uri, ResourceLifecycleManager.class);
-		Resource resource = lifecycleManager.openAndApplyReferences(rs, r);
-		try {
-			if (resource instanceof XtextResource) {
-				XtextResource xtextResource = (XtextResource) resource;
-				RelatedXtextResourceUpdater updater = getService(uri, RelatedXtextResourceUpdater.class);
-				updater.applyChange(delt, xtextResource, r, acc);
-			} else {
-				RelatedEmfResourceUpdater updater = getService(uri, RelatedEmfResourceUpdater.class);
-				updater.applyChange(delt, resource, r, acc);
-			}
-		} finally {
-			lifecycleManager.close(resource);
-		}
 	}
 
 }

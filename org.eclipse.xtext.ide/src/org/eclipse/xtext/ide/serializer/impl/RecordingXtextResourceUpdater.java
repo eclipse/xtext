@@ -7,20 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.serializer.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.change.ChangeDescription;
+import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccessDiff;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.internal.StringBasedTextRegionAccessDiffBuilder;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdater;
 import org.eclipse.xtext.ide.serializer.hooks.IResourceSnapshot;
 import org.eclipse.xtext.ide.serializer.hooks.IUpdatableReference;
 import org.eclipse.xtext.ide.serializer.impl.ChangeTreeProvider.ResourceRecording;
+import org.eclipse.xtext.ide.serializer.impl.ChangeTreeProvider.ResourceSetRecording;
 import org.eclipse.xtext.ide.serializer.impl.EObjectDescriptionDeltaProvider.Deltas;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.inject.Inject;
@@ -28,9 +35,10 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class RecordedResourceUpdater {
+public class RecordingXtextResourceUpdater extends RecordingResourceUpdater {
 
-	private Deltas deltas;
+	@Inject
+	private ChangeTreeProvider changeTreeProvider;
 
 	private ITextRegionDiffBuilder document;
 
@@ -40,6 +48,8 @@ public class RecordedResourceUpdater {
 	@Inject
 	private PartialSerializer partialSerializer;
 
+	private ChangeRecorder recorder;
+
 	@Inject
 	private IReferenceUpdater referenceUpdater;
 
@@ -47,36 +57,11 @@ public class RecordedResourceUpdater {
 
 	private IResourceSnapshot snapshot;
 
-	private List<IUpdatableReference> updatableReferences;
+	@Inject
+	private EObjectSnapshotProvider snapshotProvider;
 
-	public void applyChange(ResourceRecording rec, IAcceptor<IEmfResourceChange> changeAcceptor) {
-		partialSerializer.serializeChanges(rec, document);
-		for (IUpdatableReference upd : updatableReferences) {
-			referenceUpdater.updateReference(document, upd);
-		}
-		ITextRegionAccessDiff rewritten = document.create();
-		List<ITextReplacement> rep = formatter.format(rewritten);
-		URI oldUri = rec.getSnapshot().getURI();
-		TextDocumentChange change = new TextDocumentChange(rewritten, oldUri, rep);
-		changeAcceptor.accept(change);
-	}
-
-	public Resource getResource() {
-		return snapshot.getResource();
-	}
-
-	public IResourceSnapshot getSnapshot() {
-		return snapshot;
-	}
-
-	public void init(IChangeSerializer ser, Deltas deltas, IResourceSnapshot snap, ITextRegionDiffBuilder doc) {
-		this.serializer = ser;
-		this.deltas = deltas;
-		this.snapshot = snap;
-		this.document = doc;
-	}
-
-	public void updateReferences() {
+	@Override
+	public void applyChange(Deltas deltas, IAcceptor<IEmfResourceChange> changeAcceptor) {
 		ReferenceUpdaterContext ctx = new ReferenceUpdaterContext(deltas, document);
 		if (serializer.isUpdateCrossReferences()) {
 			referenceUpdater.update(ctx);
@@ -84,7 +69,48 @@ public class RecordedResourceUpdater {
 				run.run();
 			}
 		}
-		this.updatableReferences = ctx.getUpdatableReferences();
+		ChangeDescription recording = recorder.endRecording();
+		Resource resource = snapshot.getResource();
+		ResourceSet rs = resource.getResourceSet();
+		List<IResourceSnapshot> snapshots = Collections.singletonList(snapshot);
+		ResourceSetRecording tree = changeTreeProvider.createChangeTree(rs, snapshots, recording);
+		ResourceRecording recordedResource = tree.getRecordedResource(resource);
+		List<IUpdatableReference> updatableReferences = ctx.getUpdatableReferences();
+		partialSerializer.serializeChanges(recordedResource, document);
+		for (IUpdatableReference upd : updatableReferences) {
+			referenceUpdater.updateReference(document, upd);
+		}
+		ITextRegionAccessDiff rewritten = document.create();
+		List<ITextReplacement> rep = formatter.format(rewritten);
+		URI oldUri = snapshot.getURI();
+		TextDocumentChange change = new TextDocumentChange(rewritten, oldUri, rep);
+		changeAcceptor.accept(change);
+	}
+
+	public ITextRegionDiffBuilder beginRecording(IChangeSerializer serializer, XtextResource resource) {
+		this.serializer = serializer;
+		this.snapshot = snapshotProvider.createResourceSnapshot(resource);
+		this.document = new StringBasedTextRegionAccessDiffBuilder(this.snapshot.getRegions());
+		this.recorder = new ChangeRecorder(resource);
+		return this.document;
+	}
+
+	public ITextRegionDiffBuilder getDocument() {
+		return document;
+	}
+
+	@Override
+	public Resource getResource() {
+		return snapshot.getResource();
+	}
+
+	@Override
+	public IResourceSnapshot getSnapshot() {
+		return snapshot;
+	}
+
+	@Override
+	public void unload() {
 	}
 
 }

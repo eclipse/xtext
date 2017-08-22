@@ -39,15 +39,17 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(ChangeSerializer.class)
 public interface IChangeSerializer {
 
-	ITextRegionDiffBuilder beginRecordChanges(Resource resource);
+	void beginRecordChanges(Resource resource);
 
 	void endRecordChanges(IAcceptor<IEmfResourceChange> changeAcceptor);
 
-	void setUpdateCrossReferences(boolean value);
-
-	void setUpdateRelatedFiles(boolean value);
+	ITextRegionDiffBuilder getModifyableDocument(Resource resource);
 
 	boolean isUpdateCrossReferences();
 
 	boolean isUpdateRelatedFiles();
+
+	void setUpdateCrossReferences(boolean value);
+
+	void setUpdateRelatedFiles(boolean value);
 }

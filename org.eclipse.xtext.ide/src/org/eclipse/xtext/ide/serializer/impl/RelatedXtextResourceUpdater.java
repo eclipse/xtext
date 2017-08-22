@@ -25,7 +25,6 @@ import org.eclipse.xtext.ide.serializer.hooks.IUpdatableReference;
 import org.eclipse.xtext.ide.serializer.impl.ChangeTreeProvider.ResourceRecording;
 import org.eclipse.xtext.ide.serializer.impl.ChangeTreeProvider.ResourceSetRecording;
 import org.eclipse.xtext.ide.serializer.impl.EObjectDescriptionDeltaProvider.Deltas;
-import org.eclipse.xtext.ide.serializer.impl.RelatedResourcesProvider.RelatedResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 
@@ -35,7 +34,7 @@ import com.google.inject.Provider;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class RelatedXtextResourceUpdater {
+public class RelatedXtextResourceUpdater extends RelatedResourceUpdater {
 
 	@Inject
 	private ChangeTreeProvider changeTreeProvider;
@@ -52,13 +51,18 @@ public class RelatedXtextResourceUpdater {
 	@Inject
 	private Provider<TextRegionAccessBuilder> textRegionBuilderProvider;
 
-	public void applyChange(Deltas delt, XtextResource res, RelatedResource refs, IAcceptor<IEmfResourceChange> acc) {
-		if (!referenceUpdater.isAffected(delt, refs)) {
+	@Inject
+	private ResourceLifecycleManager lifecycleManager;
+
+	@Override
+	public void applyChange(Deltas deltas, IAcceptor<IEmfResourceChange> changeAcceptor) {
+		XtextResource res = (XtextResource) lifecycleManager.openAndApplyReferences(getResourceSet(), getResource());
+		if (!referenceUpdater.isAffected(deltas, getResource())) {
 			return;
 		}
 		ITextRegionAccess base = textRegionBuilderProvider.get().forNodeModel(res).create();
 		ITextRegionDiffBuilder rewriter = new StringBasedTextRegionAccessDiffBuilder(base);
-		ReferenceUpdaterContext context = new ReferenceUpdaterContext(delt, rewriter);
+		ReferenceUpdaterContext context = new ReferenceUpdaterContext(deltas, rewriter);
 		referenceUpdater.update(context);
 		if (!context.getModifications().isEmpty()) {
 			ChangeRecorder rec = new ChangeRecorder(res);
@@ -76,11 +80,12 @@ public class RelatedXtextResourceUpdater {
 		}
 		ITextRegionAccessDiff rewritten = rewriter.create();
 		List<ITextReplacement> rep = formatter.format(rewritten);
-		TextDocumentChange change = new TextDocumentChange(rewritten, refs.getUri(), rep);
-		acc.accept(change);
+		TextDocumentChange change = new TextDocumentChange(rewritten, getResource().getUri(), rep);
+		changeAcceptor.accept(change);
+
 	}
 
-	public IReferenceUpdater getReferenceUpdater() {
-		return referenceUpdater;
+	@Override
+	public void unload() {
 	}
 }
