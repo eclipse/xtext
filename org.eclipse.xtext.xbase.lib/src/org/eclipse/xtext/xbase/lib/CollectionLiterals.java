@@ -27,7 +27,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.primitives.Ints;
 
@@ -136,7 +135,9 @@ import com.google.common.primitives.Ints;
 	 */
 	@Pure
 	public static <T> ArrayList<T> newArrayList(T... initial) {
-		return Lists.newArrayList(initial);
+		if (initial.length > 0)
+			return Lists.newArrayList(initial);
+		return new ArrayList<T>();
 	}
 
 	/**
@@ -151,7 +152,7 @@ import com.google.common.primitives.Ints;
 	public static <T> LinkedList<T> newLinkedList(T... initial) {
 		if (initial.length > 0)
 			return Lists.newLinkedList(Arrays.asList(initial));
-		return Lists.newLinkedList();
+		return new LinkedList<T>();
 	}
 
 	/**
@@ -164,7 +165,9 @@ import com.google.common.primitives.Ints;
 	 */
 	@Pure
 	public static <T> HashSet<T> newHashSet(T... initial) {
-		return Sets.newHashSet(initial);
+		if (initial.length > 0)
+			return Sets.newHashSet(initial);
+		return new HashSet<T>();
 	}
 
 	/**
@@ -179,7 +182,7 @@ import com.google.common.primitives.Ints;
 	public static <T> LinkedHashSet<T> newLinkedHashSet(T... initial) {
 		if (initial.length > 0)
 			return Sets.newLinkedHashSet(Arrays.asList(initial));
-		return Sets.newLinkedHashSet();
+		return new LinkedHashSet<T>();
 	}
 
 	/**
@@ -268,7 +271,7 @@ import com.google.common.primitives.Ints;
 	 */
 	@Pure
 	public static <K, V> TreeMap<K, V> newTreeMap(Comparator<? super K> comparator, Pair<? extends K, ? extends V>... initial) {
-		TreeMap<K, V> result = Maps.newTreeMap(comparator);
+		TreeMap<K, V> result = new TreeMap<K, V>(comparator);
 		putAll(result, initial);
 		return result;
 	}
