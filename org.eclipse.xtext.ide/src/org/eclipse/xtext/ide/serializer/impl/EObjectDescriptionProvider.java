@@ -126,6 +126,7 @@ public class EObjectDescriptionProvider implements IEObjectDescriptionProvider {
 					return name.skipFirst(candCount);
 				}
 			}
+			container = container.eContainer();
 		}
 		return name;
 	}
