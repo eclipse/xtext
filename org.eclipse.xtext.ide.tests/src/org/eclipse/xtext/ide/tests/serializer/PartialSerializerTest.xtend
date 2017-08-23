@@ -25,6 +25,7 @@ import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -321,7 +322,7 @@ class PartialSerializerTest {
 	}
 	
 	@Test
-	def void testOptionalChildListInsertIntoEnd() {
+	def void testOptionalChildListInsertIntoEndOne() {
 		recordDiff(OptionalChildList, "#13 x1") [
 			children += createMandatoryValue => [name = "x2"] 
 		] === '''
@@ -340,6 +341,182 @@ class PartialSerializerTest {
 			8 0 1 H
 			------------ diff 1 ------------
 			6 0   H
+		'''
+	}
+	
+	@Test
+	def void testOptionalChildListInsertIntoEndTwo() {
+		recordDiff(OptionalChildList, "#13 a") [
+			children += createMandatoryValue => [name = "b"] 
+			children += createMandatoryValue => [name = "c"] 
+		] === '''
+			0 0   H
+			      B OptionalChildList    Model
+			0 3    S "#13"                Model:'#13'
+			3 1    H " "                  Whitespace:TerminalRule'WS'
+			       B MandatoryValue'a'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			4 1     S "a"                  MandatoryValue:name=ID
+			       E MandatoryValue'a'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			5 0 1  H
+			       B MandatoryValue'b'    MandatoryValue path:OptionalChildList/children[1]
+			5 1 1   S "b"                  MandatoryValue:name=ID
+			       E MandatoryValue'b'    MandatoryValue path:OptionalChildList/children[1]
+			6 0 1  H
+			       B MandatoryValue'c'    MandatoryValue path:OptionalChildList/children[2]
+			6 1 1   S "c"                  MandatoryValue:name=ID
+			       E MandatoryValue'c'    MandatoryValue path:OptionalChildList/children[2]
+			      E OptionalChildList    Model
+			7 0 1 H
+			------------ diff 1 ------------
+			5 0   H
+		'''
+	}
+	
+	@Test
+	def void testOptionalChildListInsertIntoEndThree() {
+		recordDiff(OptionalChildList, "#13 a") [
+			children += createMandatoryValue => [name = "b"] 
+			children += createMandatoryValue => [name = "c"] 
+			children += createMandatoryValue => [name = "d"] 
+		] === '''
+			0 0   H
+			      B OptionalChildList    Model
+			0 3    S "#13"                Model:'#13'
+			3 1    H " "                  Whitespace:TerminalRule'WS'
+			       B MandatoryValue'a'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			4 1     S "a"                  MandatoryValue:name=ID
+			       E MandatoryValue'a'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			5 0 1  H
+			       B MandatoryValue'b'    MandatoryValue path:OptionalChildList/children[1]
+			5 1 1   S "b"                  MandatoryValue:name=ID
+			       E MandatoryValue'b'    MandatoryValue path:OptionalChildList/children[1]
+			6 0 1  H
+			       B MandatoryValue'c'    MandatoryValue path:OptionalChildList/children[2]
+			6 1 1   S "c"                  MandatoryValue:name=ID
+			       E MandatoryValue'c'    MandatoryValue path:OptionalChildList/children[2]
+			7 0 1  H
+			       B MandatoryValue'd'    MandatoryValue path:OptionalChildList/children[3]
+			7 1 1   S "d"                  MandatoryValue:name=ID
+			       E MandatoryValue'd'    MandatoryValue path:OptionalChildList/children[3]
+			      E OptionalChildList    Model
+			8 0 1 H
+			------------ diff 1 ------------
+			5 0   H
+		'''
+	}
+	
+	@Test
+	def void testOptionalChildRemoveListAllOne() {
+		recordDiff(OptionalChildList, "#13 x1") [
+			EcoreUtil.remove(children.get(0)) 
+		] === '''
+			0 0   H
+			      B OptionalChildList    Model
+			0 3    S "#13"                Model:'#13'
+			      E OptionalChildList    Model
+			3 1 1 H " "                  Whitespace:TerminalRule'WS'
+			------------ diff 1 ------------
+			3 1  H " "                  Whitespace:TerminalRule'WS'
+			4 2  S "x1"                 MandatoryValue:name=ID
+			6 0  H
+		'''
+	}
+	
+	@Test
+	def void testOptionalChildRemoveListAllTwo() {
+		recordDiff(OptionalChildList, "#13 a b") [
+			EcoreUtil.remove(children.get(1)) 
+			EcoreUtil.remove(children.get(0)) 
+		] === '''
+			0 0   H
+			      B OptionalChildList    Model
+			0 3    S "#13"                Model:'#13'
+			      E OptionalChildList    Model
+			3 1 1 H " "                  Whitespace:TerminalRule'WS'
+			------------ diff 1 ------------
+			3 1  H " "                  Whitespace:TerminalRule'WS'
+			4 1  S "a"                  MandatoryValue:name=ID
+			5 1  H " "                  Whitespace:TerminalRule'WS'
+			6 1  S "b"                  MandatoryValue:name=ID
+			7 0  H
+		'''
+	}
+	
+	@Test
+	def void testOptionalChildRemoveListFirstTwo() {
+		recordDiff(OptionalChildList, "#13 a b c") [
+			EcoreUtil.remove(children.get(1)) 
+			EcoreUtil.remove(children.get(0)) 
+		] === '''
+			0 0   H
+			      B OptionalChildList    Model
+			0 3    S "#13"                Model:'#13'
+			3   1  H " "                  Whitespace:TerminalRule'WS'
+			  2    " "                  Whitespace:TerminalRule'WS'
+			       B MandatoryValue'c'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			5 1     S "c"                  MandatoryValue:name=ID
+			       E MandatoryValue'c'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			      E OptionalChildList    Model
+			6 0   H
+			------------ diff 1 ------------
+			3 1 H " "                  Whitespace:TerminalRule'WS'
+			4 1 S "a"                  MandatoryValue:name=ID
+			5 1 H " "                  Whitespace:TerminalRule'WS'
+			6 1 S "b"                  MandatoryValue:name=ID
+			7 1 H " "                  Whitespace:TerminalRule'WS'
+		'''
+	}
+	
+	@Test
+	def void testOptionalChildRemoveListLastTwo() {
+		recordDiff(OptionalChildList, "#13 a b c") [
+			EcoreUtil.remove(children.get(2)) 
+			EcoreUtil.remove(children.get(1)) 
+		] === '''
+			0 0   H
+			      B OptionalChildList    Model
+			0 3    S "#13"                Model:'#13'
+			3 1    H " "                  Whitespace:TerminalRule'WS'
+			       B MandatoryValue'a'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			4 1     S "a"                  MandatoryValue:name=ID
+			       E MandatoryValue'a'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			      E OptionalChildList    Model
+			5 1 1 H " "                  Whitespace:TerminalRule'WS'
+			------------ diff 1 ------------
+			5 1   H " "                  Whitespace:TerminalRule'WS'
+			6 1   S "b"                  MandatoryValue:name=ID
+			7 1   H " "                  Whitespace:TerminalRule'WS'
+			8 1   S "c"                  MandatoryValue:name=ID
+			9 0   H
+		'''
+	}
+	
+	@Test
+	def void testOptionalChildRemoveListMiddleTwo() {
+		recordDiff(OptionalChildList, "#13 a b c d") [
+			EcoreUtil.remove(children.get(2)) 
+			EcoreUtil.remove(children.get(1)) 
+		] === '''
+			0 0   H
+			      B OptionalChildList    Model
+			0 3    S "#13"                Model:'#13'
+			3 1    H " "                  Whitespace:TerminalRule'WS'
+			       B MandatoryValue'a'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			4 1     S "a"                  MandatoryValue:name=ID
+			       E MandatoryValue'a'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[0]
+			5   1  H " "                  Whitespace:TerminalRule'WS'
+			  2    " "                  Whitespace:TerminalRule'WS'
+			       B MandatoryValue'd'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[1]
+			7 1     S "d"                  MandatoryValue:name=ID
+			       E MandatoryValue'd'    OptionalChildList:children+=MandatoryValue path:OptionalChildList/children[1]
+			      E OptionalChildList    Model
+			8 0   H
+			------------ diff 1 ------------
+			5 1  H " "                  Whitespace:TerminalRule'WS'
+			6 1  S "b"                  MandatoryValue:name=ID
+			7 1  H " "                  Whitespace:TerminalRule'WS'
+			8 1  S "c"                  MandatoryValue:name=ID
+			9 1  H " "                  Whitespace:TerminalRule'WS'
 		'''
 	}
 	
