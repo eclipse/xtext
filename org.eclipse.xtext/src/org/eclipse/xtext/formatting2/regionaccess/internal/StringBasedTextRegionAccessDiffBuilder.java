@@ -154,29 +154,36 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 		this.original = base;
 	}
 
-	protected void addRewrite(RewriteAction action) {
-		if (rewrites.isEmpty()) {
-			rewrites.add(action);
-			return;
-		}
-		RewriteAction previous = rewrites.get(rewrites.size() - 1);
-		StringBasedTextRegionAccessDiffBuilder.MultiInsertionRewriteAction comp = null;
-		if (previous instanceof StringBasedTextRegionAccessDiffBuilder.SequenceRewriteAction) {
-			StringBasedTextRegionAccessDiffBuilder.SequenceRewriteAction prev = (StringBasedTextRegionAccessDiffBuilder.SequenceRewriteAction) previous;
-			if (prev.originalFirst == action.originalFirst && prev.originalLast == action.originalLast) {
-				comp = new MultiInsertionRewriteAction(prev.originalFirst, action.originalFirst);
-				comp.delegates.add(prev);
-				rewrites.set(rewrites.size() - 1, comp);
+	protected void addInsert(RewriteAction action) {
+		int i = getActionAt(action.originalFirst, action.originalLast);
+		if (i >= 0) {
+			RewriteAction existing = rewrites.get(i);
+			MultiInsertionRewriteAction comp = null;
+			if (existing instanceof MultiInsertionRewriteAction) {
+				comp = (MultiInsertionRewriteAction) existing;
+			} else {
+				comp = new MultiInsertionRewriteAction(action.originalFirst, action.originalFirst);
+				comp.delegates.add(existing);
+				rewrites.set(i, comp);
 			}
-		}
-		if (previous instanceof StringBasedTextRegionAccessDiffBuilder.MultiInsertionRewriteAction) {
-			comp = (StringBasedTextRegionAccessDiffBuilder.MultiInsertionRewriteAction) previous;
-		}
-		if (comp != null) {
 			comp.delegates.add(action);
 		} else {
 			rewrites.add(action);
 		}
+	}
+
+	protected void addRemoveAction(IHiddenRegion first, IHiddenRegion last, boolean del) {
+		for (RewriteAction rw : rewrites) {
+			if (rw.originalFirst == last) {
+				rw.originalFirst = first;
+				return;
+			}
+			if (rw.originalLast == first) {
+				rw.originalLast = last;
+				return;
+			}
+		}
+		rewrites.add(new RemoveRewriteAction(first, last, del));
 	}
 
 	protected void checkOriginal(ITextSegment segment) {
@@ -208,6 +215,16 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 		return result;
 	}
 
+	protected int getActionAt(ISequentialRegion first, ISequentialRegion last) {
+		for (int i = 0; i < rewrites.size(); i++) {
+			RewriteAction a = rewrites.get(i);
+			if (a.originalFirst == first && a.originalLast == last) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	@Override
 	public ITextRegionAccess getOriginalTextRegionAccess() {
 		return original;
@@ -232,7 +249,7 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 
 	@Override
 	public void move(IHiddenRegion insertAt, IHiddenRegion substituteFirst, IHiddenRegion substituteLast) {
-		remove(substituteFirst, substituteLast, false);
+		addRemoveAction(substituteFirst, substituteLast, false);
 		replace(insertAt, insertAt, substituteFirst, substituteLast);
 	}
 
@@ -240,21 +257,7 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 	public void remove(IHiddenRegion first, IHiddenRegion last) {
 		checkOriginal(first);
 		checkOriginal(last);
-		remove(first, last, true);
-	}
-
-	protected void remove(IHiddenRegion first, IHiddenRegion last, boolean del) {
-		for (RewriteAction rw : rewrites) {
-			if (rw.originalFirst == last) {
-				rw.originalFirst = first;
-				return;
-			}
-			if (rw.originalLast == first) {
-				rw.originalLast = last;
-				return;
-			}
-		}
-		rewrites.add(new RemoveRewriteAction(first, last, del));
+		addRemoveAction(first, last, true);
 	}
 
 	@Override
@@ -267,7 +270,7 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 			IHiddenRegion modifiedLast) {
 		checkOriginal(originalFirst);
 		checkOriginal(originalLast);
-		addRewrite(new ReplaceRewriteAction(originalFirst, originalLast, modifiedFirst, modifiedLast));
+		addInsert(new ReplaceRewriteAction(originalFirst, originalLast, modifiedFirst, modifiedLast));
 	}
 
 	@Override
@@ -284,7 +287,15 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 	public void replace(ISemanticRegion region, String newText) {
 		Preconditions.checkNotNull(newText);
 		checkOriginal(region);
-		addRewrite(new TextRewriteAction(region, newText));
+		int i = getActionAt(region, region);
+		if (i >= 0) {
+			RewriteAction existing = rewrites.get(i);
+			if (existing instanceof TextRewriteAction) {
+				((TextRewriteAction) existing).text = newText;
+				return;
+			}
+		}
+		rewrites.add(new TextRewriteAction(region, newText));
 	}
 
 	@Override
@@ -293,7 +304,7 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 		checkOriginal(originalFirst);
 		checkOriginal(originalLast);
 		TextRegionAccessBuildingSequencer sequenceAcceptor = new TextRegionAccessBuildingSequencer();
-		addRewrite(new SequenceRewriteAction(originalFirst, originalLast, sequenceAcceptor));
+		addInsert(new SequenceRewriteAction(originalFirst, originalLast, sequenceAcceptor));
 		return sequenceAcceptor.withRoot(ctx, root);
 	}
 

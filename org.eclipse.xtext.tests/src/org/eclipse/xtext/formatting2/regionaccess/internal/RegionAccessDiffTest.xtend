@@ -18,6 +18,7 @@ import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.ValueList
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -179,6 +180,59 @@ class RegionAccessDiffTest {
 			12  5  H "/*2*/"    Comment:TerminalRule'ML_COMMENT'
 			17  3  S "foo"      Delegate:name=ID
 			20  5  H "/*3*/"    Comment:TerminalRule'ML_COMMENT'
+		'''
+	}
+	
+	@Test def void testInsertInsertReplace() {
+		val access = '''
+			8 a
+		'''.toTextRegionAccess
+		access.modify [
+			val extension ext = access.extensions
+			val rootObj = access.regionForRootEObject.semanticElement as ValueList
+			val a = rootObj.regionFor.keyword("8").nextSemanticRegion
+			replace(a.nextHiddenRegion, a.nextHiddenRegion, a.previousHiddenRegion, a.nextHiddenRegion)
+			replace(a.nextHiddenRegion, a.nextHiddenRegion, a.previousHiddenRegion, a.nextHiddenRegion)
+			replace(a, "new")
+		] === '''
+			0 0   H
+			      B ValueList'[a]' Root
+			0 1    S "8"        Root:'8'
+			1 1    H " "        Whitespace:TerminalRule'WS'
+			2 3 1  S "new"      ValueList:name+=ID
+			5 0 2  H
+			5 1 2  S "a"        ValueList:name+=ID
+			6 0 2  H
+			6 1 2  S "a"        ValueList:name+=ID
+			      E ValueList'[a]' Root
+			7 0 2 H
+			------------ diff 1 ------------
+			2 1 S "a"        ValueList:name+=ID
+			------------ diff 2 ------------
+			3 0  H
+		'''
+	}
+	
+	@Test def void testInsertReplaceReplace() {
+		val access = '''
+			8 a
+		'''.toTextRegionAccess
+		access.modify [
+			val extension ext = access.extensions
+			val rootObj = access.regionForRootEObject.semanticElement as ValueList
+			val a = rootObj.regionFor.keyword("8").nextSemanticRegion
+			replace(a, "b")
+			replace(a, "c")
+		] === '''
+			0 0   H
+			      B ValueList'[a]' Root
+			0 1    S "8"        Root:'8'
+			1 1    H " "        Whitespace:TerminalRule'WS'
+			2 1 1  S "c"        ValueList:name+=ID
+			      E ValueList'[a]' Root
+			3 0   H
+			------------ diff 1 ------------
+			2 1 S "a"        ValueList:name+=ID
 		'''
 	}
 

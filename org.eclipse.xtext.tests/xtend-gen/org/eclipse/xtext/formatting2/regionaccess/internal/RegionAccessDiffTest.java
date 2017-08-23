@@ -20,6 +20,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegation;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedUnassigned;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.ValueList;
 import org.eclipse.xtext.formatting2.regionaccess.internal.tests.RegionAccessTestLanguageInjectorProvider;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.testing.InjectWith;
@@ -329,6 +330,99 @@ public class RegionAccessDiffTest {
     _builder_1.append("17  3  S \"foo\"      Delegate:name=ID");
     _builder_1.newLine();
     _builder_1.append("20  5  H \"/*3*/\"    Comment:TerminalRule\'ML_COMMENT\'");
+    _builder_1.newLine();
+    this._regionAccessTestHelper.operator_tripleEquals(_modify, _builder_1);
+  }
+  
+  @Test
+  public void testInsertInsertReplace() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("8 a");
+    _builder.newLine();
+    final ITextRegionAccess access = this._regionAccessTestHelper.toTextRegionAccess(_builder);
+    final Procedure1<ITextRegionDiffBuilder> _function = (ITextRegionDiffBuilder it) -> {
+      @Extension
+      final ITextRegionExtensions ext = access.getExtensions();
+      EObject _semanticElement = access.regionForRootEObject().getSemanticElement();
+      final ValueList rootObj = ((ValueList) _semanticElement);
+      final ISemanticRegion a = ext.regionFor(rootObj).keyword("8").getNextSemanticRegion();
+      it.replace(a.getNextHiddenRegion(), a.getNextHiddenRegion(), a.getPreviousHiddenRegion(), a.getNextHiddenRegion());
+      it.replace(a.getNextHiddenRegion(), a.getNextHiddenRegion(), a.getPreviousHiddenRegion(), a.getNextHiddenRegion());
+      it.replace(a, "new");
+    };
+    ITextRegionAccess _modify = this._regionAccessTestHelper.modify(access, _function);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("0 0   H");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("B ValueList\'[a]\' Root");
+    _builder_1.newLine();
+    _builder_1.append("0 1    S \"8\"        Root:\'8\'");
+    _builder_1.newLine();
+    _builder_1.append("1 1    H \" \"        Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("2 3 1  S \"new\"      ValueList:name+=ID");
+    _builder_1.newLine();
+    _builder_1.append("5 0 2  H");
+    _builder_1.newLine();
+    _builder_1.append("5 1 2  S \"a\"        ValueList:name+=ID");
+    _builder_1.newLine();
+    _builder_1.append("6 0 2  H");
+    _builder_1.newLine();
+    _builder_1.append("6 1 2  S \"a\"        ValueList:name+=ID");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("E ValueList\'[a]\' Root");
+    _builder_1.newLine();
+    _builder_1.append("7 0 2 H");
+    _builder_1.newLine();
+    _builder_1.append("------------ diff 1 ------------");
+    _builder_1.newLine();
+    _builder_1.append("2 1 S \"a\"        ValueList:name+=ID");
+    _builder_1.newLine();
+    _builder_1.append("------------ diff 2 ------------");
+    _builder_1.newLine();
+    _builder_1.append("3 0  H");
+    _builder_1.newLine();
+    this._regionAccessTestHelper.operator_tripleEquals(_modify, _builder_1);
+  }
+  
+  @Test
+  public void testInsertReplaceReplace() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("8 a");
+    _builder.newLine();
+    final ITextRegionAccess access = this._regionAccessTestHelper.toTextRegionAccess(_builder);
+    final Procedure1<ITextRegionDiffBuilder> _function = (ITextRegionDiffBuilder it) -> {
+      @Extension
+      final ITextRegionExtensions ext = access.getExtensions();
+      EObject _semanticElement = access.regionForRootEObject().getSemanticElement();
+      final ValueList rootObj = ((ValueList) _semanticElement);
+      final ISemanticRegion a = ext.regionFor(rootObj).keyword("8").getNextSemanticRegion();
+      it.replace(a, "b");
+      it.replace(a, "c");
+    };
+    ITextRegionAccess _modify = this._regionAccessTestHelper.modify(access, _function);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("0 0   H");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("B ValueList\'[a]\' Root");
+    _builder_1.newLine();
+    _builder_1.append("0 1    S \"8\"        Root:\'8\'");
+    _builder_1.newLine();
+    _builder_1.append("1 1    H \" \"        Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("2 1 1  S \"c\"        ValueList:name+=ID");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("E ValueList\'[a]\' Root");
+    _builder_1.newLine();
+    _builder_1.append("3 0   H");
+    _builder_1.newLine();
+    _builder_1.append("------------ diff 1 ------------");
+    _builder_1.newLine();
+    _builder_1.append("2 1 S \"a\"        ValueList:name+=ID");
     _builder_1.newLine();
     this._regionAccessTestHelper.operator_tripleEquals(_modify, _builder_1);
   }
