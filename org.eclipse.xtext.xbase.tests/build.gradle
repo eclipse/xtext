@@ -6,6 +6,7 @@ dependencies {
 	compile project(':org.eclipse.xtext.xbase.testing')
 	compile project(':org.eclipse.xtext.xbase.testlanguages')
 	compile project(':org.eclipse.xtext.xbase.testdata')
+	compile project(':org.eclipse.xtext.xbase.ide')
 
 	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
 	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt"
