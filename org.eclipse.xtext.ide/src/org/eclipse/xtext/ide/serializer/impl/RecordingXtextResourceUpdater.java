@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccessDiff;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
@@ -91,6 +92,7 @@ public class RecordingXtextResourceUpdater extends RecordingResourceUpdater {
 		this.serializer = serializer;
 		this.snapshot = snapshotProvider.createResourceSnapshot(resource);
 		this.document = new StringBasedTextRegionAccessDiffBuilder(this.snapshot.getRegions());
+		EcoreUtil.resolveAll(resource);
 		this.recorder = new ChangeRecorder(resource);
 		return this.document;
 	}
