@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ide.serializer.impl;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.ide.serializer.hooks.IEObjectSnapshot;
 import org.eclipse.xtext.ide.serializer.hooks.IReferenceSnapshot;
 import org.eclipse.xtext.ide.serializer.hooks.IResourceSnapshot;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -39,6 +41,16 @@ public class RelatedResourcesProvider {
 
 		public URI getUri() {
 			return uri;
+		}
+		
+		@Override
+		public String toString() {
+			List<String> out = Lists.newArrayList();
+			for(IReferenceSnapshot s: outgoingReferences) {
+				out.add(s.toString());
+			}
+			Collections.sort(out);
+			return getClass().getSimpleName() +" " + uri + "\n" + Joiner.on("\n").join(out);
 		}
 	}
 

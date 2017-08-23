@@ -10,6 +10,7 @@ package org.eclipse.xtext.ide.serializer.impl;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
@@ -100,6 +102,23 @@ public class EObjectDescriptionProvider implements IEObjectDescriptionProvider {
 				return new String[0];
 			}
 			return userData.keySet().toArray(new String[userData.size()]);
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder result = new StringBuilder();
+			result.append(IEObjectDescription.class.getSimpleName() + " " + qualifiedName);
+			if (simpleName != null && !simpleName.equals(qualifiedName)) {
+				result.append(" name:" + simpleName);
+			}
+			if (userData != null && !userData.isEmpty()) {
+				List<String> items = Lists.newArrayList();
+				for (Entry<String, String> e : userData.entrySet()) {
+					items.add(e.getKey() + ": " + e.getValue());
+				}
+				result.append(" userData=[" + Joiner.on(", ").join(items) + "]");
+			}
+			return result.toString();
 		}
 
 	}

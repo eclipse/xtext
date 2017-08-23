@@ -38,4 +38,9 @@ public abstract class RelatedResourceUpdater extends ResourceUpdater {
 		this.resource = resource;
 	}
 
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " " + resource;
+	}
+
 }

@@ -112,5 +112,21 @@ public class RecordingXtextResourceUpdater extends RecordingResourceUpdater {
 	@Override
 	public void unload() {
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder(getClass().getSimpleName());
+		URI oldURI = getSnapshot().getURI();
+		URI newURI = getResource().getURI();
+		if (oldURI.equals(newURI)) {
+			result.append(" " + oldURI);
+		} else {
+			result.append(" " + oldURI + " -> " + newURI);
+		}
+		if(document != null) {
+			result.append("\n"+document);
+		}
+		return result.toString();
+	}
 
 }

@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 
 /**
@@ -306,6 +308,16 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 		TextRegionAccessBuildingSequencer sequenceAcceptor = new TextRegionAccessBuildingSequencer();
 		addInsert(new SequenceRewriteAction(originalFirst, originalLast, sequenceAcceptor));
 		return sequenceAcceptor.withRoot(ctx, root);
+	}
+	
+	@Override
+	public String toString() {
+		try {
+			StringBasedTextRegionAccessDiff regions = create();
+			return new TextRegionAccessToString().withRegionAccess(regions).toString();
+		} catch (Throwable t) {
+			return t.getMessage() + "\n" + Throwables.getStackTraceAsString(t);
+		}
 	}
 
 }

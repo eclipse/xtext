@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.serializer.impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.XtextResource;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -62,6 +64,22 @@ public class EObjectSnapshotProvider {
 		@Override
 		public EObject getObject() {
 			return object;
+		}
+		
+		@Override
+		public String toString() {
+			List<String> result = Lists.newArrayList();
+			for (IEObjectDescription desc : descriptions) {
+				result.add(desc.toString());
+			}
+			for (IReferenceSnapshot ref : incomingReferences) {
+				EReference eRef = ref.getEReference();
+				String cls = eRef.getEContainingClass().getName();
+				String refString = cls + "." + eRef.getName() + ":" + eRef.getEReferenceType().getName();
+				result.add("<- " + refString +" @ "+ref.getSourceEObjectUri());
+			}
+			Collections.sort(result);
+			return Joiner.on("\n").join(result);
 		}
 	}
 
@@ -101,6 +119,22 @@ public class EObjectSnapshotProvider {
 		public IEObjectSnapshot getTarget() {
 			return targetEObject;
 		}
+		
+		@Override
+		public String toString() {
+			String cls = eReference.getEContainingClass().getName();
+			String ref = cls + "." + eReference.getName() + ":" + eReference.getEReferenceType().getName();
+			String target;
+			List<IEObjectDescription> descs = targetEObject.getDescriptions();
+			if (descs.size() == 0) {
+				target = EcoreUtil.getURI(targetEObject.getObject()).toString();
+			} else if (descs.size() == 1) {
+				target = descs.get(0).toString();
+			} else {
+				target = "[" + Joiner.on(", ").join(descs) + "]";
+			}
+			return ref + " @ " + sourceEObjectUri + " -> " + target;
+		}
 	}
 
 	public static class ResourceSnapshot implements IResourceSnapshot {
@@ -134,6 +168,21 @@ public class EObjectSnapshotProvider {
 		@Override
 		public URI getURI() {
 			return uri;
+		}
+
+		@Override
+		public String toString() {
+			List<String> result = Lists.newArrayList();
+			result.add(getClass().getSimpleName() + ": " + uri);
+			for (IEObjectSnapshot obj : objects.values()) {
+				String value = obj.toString();
+				if (value.contains("\n")) {
+					result.add("{\n  " + value.replace("\n", "\n  ") + "\n}");
+				} else {
+					result.add(value);
+				}
+			}
+			return Joiner.on("\n").join(result);
 		}
 
 	}
