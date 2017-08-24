@@ -693,8 +693,8 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 		List<Annotation> annotations = getAnnotations(lineNumber, offset);
 		if (annotations != null) {
 			for (Annotation annotation : annotations) {
-				if (annotation.getText() != null) {
-					Position position = getAnnotationModel().getPosition(annotation);
+				Position position = getAnnotationModel().getPosition(annotation);
+				if (annotation.getText() != null && position != null) {
 					final QuickAssistInvocationContext invocationContext = new QuickAssistInvocationContext(sourceViewer, position.getOffset(), position.getLength(), true);
 					CompletionProposalRunnable runnable = new CompletionProposalRunnable(invocationContext);	
 					// Note: the resolutions have to be retrieved from the UI thread, otherwise
