@@ -23,6 +23,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import com.google.inject.name.Names
 
 class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 
@@ -85,6 +86,13 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 				// overrides binding from org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
 				.addTypeToType(IQualifiedNameProvider.typeRef,
 						'org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider'.typeRef)
+		if (!grammar.usesXImportSection) {
+			bindingFactory.addConfiguredBinding("RewritableImportSectionEnablement", '''
+					binder.bind(«Boolean».TYPE)
+						.annotatedWith(«Names».named(«new TypeReference('org.eclipse.xtext.xbase.imports','RewritableImportSection.Factory')».REWRITABLEIMPORTSECTION_ENABLEMENT))
+						.toInstance(«Boolean».FALSE);
+				''')
+		}
 		if (useInferredJvmModel) {
 			bindingFactory
 				.addTypeToType(ILocationInFileProvider.typeRef,
