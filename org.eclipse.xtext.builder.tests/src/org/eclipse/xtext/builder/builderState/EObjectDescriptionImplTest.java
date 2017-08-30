@@ -36,4 +36,17 @@ public class EObjectDescriptionImplTest extends AbstractXtextTests {
 		assertEquals("does.not.matter#myFragment", objectDescription.getEObjectURI().toString());
 	}
 	
+	@Test public void testContainerAndFragmentChange() {
+		EObjectDescriptionImpl objectDescription = (EObjectDescriptionImpl) BuilderStateFactory.eINSTANCE.createEObjectDescription();
+		objectDescription.setFragment("myFragment");
+		ResourceDescriptionImpl resourceDescription = (ResourceDescriptionImpl) BuilderStateFactory.eINSTANCE.createResourceDescription();
+		resourceDescription.getExportedObjects().add(objectDescription);
+		resourceDescription.setURI(URI.createURI("some.uri"));
+		assertEquals(URI.createURI("some.uri#myFragment"), objectDescription.getEObjectURI());
+		resourceDescription.setURI(URI.createURI("some2.uri"));
+		assertEquals(URI.createURI("some2.uri#myFragment"), objectDescription.getEObjectURI());
+		objectDescription.setFragment("newFragment");
+		assertEquals(URI.createURI("some2.uri#newFragment"), objectDescription.getEObjectURI());
+	}
+	
 }
