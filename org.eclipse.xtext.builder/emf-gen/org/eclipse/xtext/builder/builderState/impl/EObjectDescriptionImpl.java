@@ -157,11 +157,16 @@ public class EObjectDescriptionImpl extends org.eclipse.emf.ecore.impl.MinimalEO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFragment(String newFragment) {
+	public void setFragmentGen(String newFragment) {
 		String oldFragment = fragment;
 		fragment = newFragment;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.EOBJECT_DESCRIPTION__FRAGMENT, oldFragment, fragment));
+	}
+
+	public void setFragment(String newFragment) {
+		setFragmentGen(newFragment);
+		eObjectURI = null;
 	}
 
 	/**
@@ -232,12 +237,17 @@ public class EObjectDescriptionImpl extends org.eclipse.emf.ecore.impl.MinimalEO
 		return userData != null && ((InternalEList.Unsettable<?>)userData).isSet();
 	}
 
+	private URI eObjectURI;
+
 	@Override
 	public URI getEObjectURI() {
 		EObject container = eContainer();
 		if (container instanceof IResourceDescription) {
-			URI result = ((IResourceDescription) container).getURI().appendFragment(getFragment());
-			return result;
+			URI resourceURI = ((IResourceDescription) container).getURI();
+			if (eObjectURI == null || !eObjectURI.trimFragment().equals(resourceURI)) {
+				eObjectURI = resourceURI.appendFragment(getFragment());
+			}
+			return eObjectURI;
 		}
 		return null;
 	}
