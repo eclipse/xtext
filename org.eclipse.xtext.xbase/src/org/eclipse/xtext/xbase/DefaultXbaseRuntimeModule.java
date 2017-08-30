@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase;
 import org.eclipse.xtext.common.types.DefaultCommonTypesRuntimeModule;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.debug.IStratumBreakpointSupport;
+import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelTargetURICollector;
 import org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper;
 import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
 import org.eclipse.xtext.xbase.parser.TokenSequencePreservingPartialParsingHelper;
@@ -222,6 +224,13 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	 */
 	public Class<? extends NodeModelBuilder> bindNodeModelBuilder() {
 		return LookAheadPreservingNodeModelBuilder.class;
+	}
+	
+	/**
+	 * @since 2.13
+	 */
+	public Class<? extends TargetURICollector> bindTargetURICollector() {
+		return JvmModelTargetURICollector.class;
 	}
 	
 }
