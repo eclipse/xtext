@@ -61,7 +61,6 @@ import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.findReferences.ReferenceFinder;
-import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
@@ -99,7 +98,6 @@ import org.eclipse.xtext.xbase.imports.ImportedTypesCollector;
 import org.eclipse.xtext.xbase.imports.TypeUsageCollector;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
-import org.eclipse.xtext.xbase.jvmmodel.JvmModelTargetURICollector;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageFacade;
 import org.eclipse.xtext.xbase.scoping.batch.ConstructorScopes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
@@ -163,10 +161,6 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
   
   public Class<? extends IOutputConfigurationProvider> bindIOutputConfigurationProvider() {
     return XtendOutputConfigurationProvider.class;
-  }
-  
-  public Class<? extends TargetURICollector> bindTargetURICollector() {
-    return JvmModelTargetURICollector.class;
   }
   
   public Class<? extends ReferenceFinder> bindReferenceFinder() {
