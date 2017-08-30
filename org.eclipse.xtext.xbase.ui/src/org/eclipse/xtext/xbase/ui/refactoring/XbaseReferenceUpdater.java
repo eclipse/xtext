@@ -338,7 +338,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	 * @return the currently imported type containing the newTargetType and the element's name relative to that import.
 	 */
 	protected Pair<JvmDeclaredType, QualifiedName> getImportedTypeAndRelativeName(JvmType newTargetType, RewritableImportSection section) {
-		if (!(newTargetType instanceof JvmDeclaredType)) {
+		if (!(newTargetType instanceof JvmDeclaredType) || !section.isEnabled()) {
 			return null;
 		}
 		JvmDeclaredType importedType = (JvmDeclaredType) newTargetType;
