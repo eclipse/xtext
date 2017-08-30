@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.imports;
 
-import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Iterables.isEmpty;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
-import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.util.Strings.isEmpty;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -43,6 +44,7 @@ import org.eclipse.xtext.xtype.XtypeFactory;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * Model of an import section that can be changed.
@@ -52,6 +54,13 @@ import com.google.inject.Inject;
 public class RewritableImportSection {
 
 	public static class Factory {
+		
+		public static final String REWRITABLEIMPORTSECTION_ENABLEMENT = "RewritableImportSection_Enablement";
+		
+		@Inject(optional = true)
+		@Named(REWRITABLEIMPORTSECTION_ENABLEMENT)
+		private boolean enabled = true;
+		
 		@Inject
 		private IImportsConfiguration importsConfiguration;
 
@@ -67,12 +76,14 @@ public class RewritableImportSection {
 		public RewritableImportSection parse(XtextResource resource) {
 			RewritableImportSection rewritableImportSection = new RewritableImportSection(resource, importsConfiguration,
 					importsConfiguration.getImportSection(resource), getLineSeparator(resource), regionUtil, nameValueConverter);
+			rewritableImportSection.setEnabled(enabled);
 			return rewritableImportSection;
 		}
 
 		public RewritableImportSection createNewEmpty(XtextResource resource) {
 			RewritableImportSection rewritableImportSection = new RewritableImportSection(resource, importsConfiguration, null, getLineSeparator(resource), regionUtil, nameValueConverter);
 			rewritableImportSection.setSort(true);
+			rewritableImportSection.setEnabled(enabled);
 			return rewritableImportSection;
 		}
 
@@ -108,6 +119,8 @@ public class RewritableImportSection {
 	private ITextRegion importRegion;
 
 	private IImportsConfiguration importsConfiguration;
+
+	private boolean enabled = true;
 
 	public RewritableImportSection(XtextResource resource, IImportsConfiguration importsConfiguration, XImportSection originalImportSection,
 			String lineSeparator, ImportSectionRegionUtil regionUtil, IValueConverter<String> nameConverter) {
@@ -603,5 +616,13 @@ public class RewritableImportSection {
 			}
 		}
 		return false;
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 }
