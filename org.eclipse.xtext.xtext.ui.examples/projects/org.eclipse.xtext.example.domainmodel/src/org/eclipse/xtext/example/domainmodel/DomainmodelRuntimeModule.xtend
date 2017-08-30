@@ -7,9 +7,7 @@
  */
 package org.eclipse.xtext.example.domainmodel
 
-import org.eclipse.xtext.findReferences.TargetURICollector
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade
-import org.eclipse.xtext.xbase.jvmmodel.JvmModelTargetURICollector
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageFacade
 
 /**
@@ -18,9 +16,5 @@ import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageFacade
 class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
 	def Class<? extends IResourceStorageFacade> bindResourceStorageFacade() {
 		return BatchLinkableResourceStorageFacade
-	}
-
-	def Class<? extends TargetURICollector> bindTargetURICollector() {
-		return JvmModelTargetURICollector
 	}
 }
