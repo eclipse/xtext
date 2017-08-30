@@ -40,13 +40,16 @@ public class IndentationAwareCompletionPrefixProvider extends CompletionPrefixPr
 	 */
 	@Override
 	public String getInputToParse(String completeInput, int offset, int completionOffset) {
-		for(; offset < completionOffset && offset < completeInput.length(); offset++) {
-			char c = completeInput.charAt(offset);
-			if (!(c == '\n' || c == '\r' || c == ' ' || c == '\t' || c == '\f')) {
-				break;
-			}
+		int fixedOffset = includeRightSideWhitespace(completeInput, offset, Math.min(completeInput.length(), completionOffset));
+		return super.getInputToParse(completeInput, fixedOffset, completionOffset);
+	}
+	
+	protected int includeRightSideWhitespace(String input, int startOffset, int max) {
+		int result = startOffset;
+		while(result < max && Character.isWhitespace(input.charAt(result))) {
+			result++;
 		}
-		return super.getInputToParse(completeInput, offset, completionOffset);
+		return result;
 	}
 	
 	@Override
