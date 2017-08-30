@@ -651,16 +651,19 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	}
 
 	protected void updateStatusLine() {
-		final ITextSelection selection = (ITextSelection) getSelectionProvider().getSelection();
-		final Annotation annotation = getAnnotation(selection.getOffset(), selection.getLength());
-		String message = null;
-		if (annotation != null) {
-			updateMarkerViews(annotation);
-			if (isProblemMarkerAnnotation(annotation)) {
-				message = annotation.getText();
+		ISelectionProvider selectionProvider = getSelectionProvider();
+		if (selectionProvider != null) {
+			final ITextSelection selection = (ITextSelection) selectionProvider.getSelection();
+			final Annotation annotation = getAnnotation(selection.getOffset(), selection.getLength());
+			String message = null;
+			if (annotation != null) {
+				updateMarkerViews(annotation);
+				if (isProblemMarkerAnnotation(annotation)) {
+					message = annotation.getText();
+				}
 			}
+			setStatusLineMessage(message);
 		}
-		setStatusLineMessage(message);
 	}
 
 	@Override
