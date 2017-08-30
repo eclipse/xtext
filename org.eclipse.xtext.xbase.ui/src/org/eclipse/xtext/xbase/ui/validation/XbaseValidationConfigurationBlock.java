@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.validation.XbaseSeverityConverter;
 import com.google.inject.Inject;
 
 /**
- * Default ConfigurationBlock for Xbase Langauges.<br>
+ * Default ConfigurationBlock for Xbase Languages.<br>
  * Clients may override {@link #fillSettingsPage(Composite, int, int)}<br>
  * If {@link #fillSettingsPage(Composite, int, int)} is reused, clients may participate<br>
  * to the section creation in {@link #fillRestrictedApiSection(ComboBoxBuilder)} and/or
