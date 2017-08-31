@@ -5,7 +5,7 @@
      ====================================================================== -->
 <project name="project" default="gen_eclipse_help">
 
-	<property name="website" location="../../xtext-main/xtext-website"/>
+	<property name="website" location="../../xtext/xtext-website"/>
 	<property name="destination" location="contents"/>
 	<property name="ruby.version" value="2.3.0"/>
 	<property name="jekyll" location="${user.home}/.rvm/gems/ruby-${ruby.version}/bin/jekyll"/>

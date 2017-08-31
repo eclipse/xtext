@@ -91,7 +91,7 @@
 		</topic>
 		<topic href="contents/303_runtime_concepts.html" label="Language Implementation">
 			<topic href="contents/303_runtime_concepts.html#code-generation" label="Code Generation">
-				<topic href="contents/303_runtime_concepts.html#igenerator" label="IGenerator">
+				<topic href="contents/303_runtime_concepts.html#igenerator2" label="IGenerator2">
 				</topic>
 				<topic href="contents/303_runtime_concepts.html#output-configurations" label="Output Configurations">
 				</topic>
@@ -222,6 +222,20 @@
 				<topic href="contents/306_mwe2.html#mwe2-boolean-literals" label="Boolean Literals">
 				</topic>
 				<topic href="contents/306_mwe2.html#mwe2-references" label="References">
+				</topic>
+			</topic>
+		</topic>
+		<topic href="contents/307_special_languages.html" label="Typical Language Configurations">
+			<topic href="contents/307_special_languages.html#case-insensitive-languages" label="Case Insensitive Languages">
+			</topic>
+			<topic href="contents/307_special_languages.html#whitespace-aware-languages" label="Whitespace-Aware Languages">
+			</topic>
+			<topic href="contents/307_special_languages.html#java-independent-languages" label="Languages Independent of JDT">
+			</topic>
+			<topic href="contents/307_special_languages.html#expressions" label="Parsing Expressions with Xtext">
+				<topic href="contents/307_special_languages.html#construction-of-an-ast" label="Construction of an AST">
+				</topic>
+				<topic href="contents/307_special_languages.html#associativity" label="Associativity">
 				</topic>
 			</topic>
 		</topic>

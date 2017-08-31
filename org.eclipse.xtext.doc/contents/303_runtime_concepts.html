@@ -27,28 +27,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Once you have a language you probably want to do something with it. There are two options, you can either write an interpreter that inspects the AST and does something based on that or you translate your language to another programming language or configuration files. In this section we’re going to show how to implement a code generator for an Xtext-based language.</p>
 
-<h3 id="igenerator">IGenerator</h3>
+<h3 id="igenerator2">IGenerator2</h3>
 
-<p>If you go with the default MWE workflow for your language and you haven’t used Xbase, you are provided with a callback stub that implements <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java">IGenerator</a>. It has one method that is called from the builder infrastructure whenever a DSL file has changed or should be translated otherwise. The two parameters passed in to this method are:</p>
+<p>If you go with the default MWE workflow for your language and you haven’t used Xbase, you are provided with a callback stub that implements <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator2.java">IGenerator2</a> by extending the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/generator/AbstractGenerator.java">AbstractGenerator</a> base class. It has one method that is called from the builder infrastructure whenever a DSL file has changed or should be translated otherwise. The three parameters passed in to this method are:</p>
 
 <ul>
   <li>The resource to be processed</li>
-  <li>An instance of <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java">IFileSystemAccess</a></li>
+  <li>An instance of <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess2.java">IFileSystemAccess2</a></li>
+  <li>An instance of <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGeneratorContext.java">IGeneratorContext</a></li>
 </ul>
 
-<p>The <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java">IFileSystemAccess</a> API abstracts over the different file systems the code generator may run over. When the code generator is triggered within the incremental build infrastructure in Eclipse the underlying file system is the one provided by Eclipse, and when the code generator is executed outside Eclipse, say in a headless build, it is <code>java.io.File</code>.</p>
+<p>The <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess2.java">IFileSystemAccess2</a> API abstracts over the different file systems the code generator may run over. When the code generator is triggered within the incremental build infrastructure in Eclipse the underlying file system is the one provided by Eclipse, and when the code generator is executed outside Eclipse, say in a headless build, it is <code>java.io.File</code>.</p>
 
 <p>A very simple implementation of a code generator for the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext">state machine example</a> could be the following:</p>
 
-<pre><code class="language-xtend">class StatemachineGenerator implements IGenerator {
-
-    override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+<pre><code class="language-xtend">class StatemachineGenerator extends AbstractGenerator {
+    
+    override doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         fsa.generateFile("relative/path/AllTheStates.txt", '''
             «FOR state : resource.allContents.filter(State).toIterable»
                 State «state.name»
             «ENDFOR»
         ''')
     }
+    
 }
 </code></pre>
 
