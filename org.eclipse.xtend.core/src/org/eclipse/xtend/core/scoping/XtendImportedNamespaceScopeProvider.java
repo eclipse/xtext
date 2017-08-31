@@ -37,7 +37,6 @@ import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -57,6 +56,7 @@ import org.eclipse.xtext.xbase.scoping.batch.ConstructorTypeScopeWrapper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
+
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -80,9 +80,6 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 	
 	@Inject
 	private IResourceScopeCache resourceScopeCache;
-	
-	@Inject
-	private CompilerPhases compilerPhases;
 	
 	@Inject 
 	private IXtendJvmAssociations associations;
@@ -353,9 +350,12 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 	@Override
 	protected ISelectable internalGetAllDescriptions(final Resource resource) {
 		List<IEObjectDescription> descriptions = Lists.newArrayList();
-		for(EObject content: resource.getContents()) {
+		for (EObject content: resource.getContents()) {
 			if (content instanceof JvmDeclaredType) {
-				doGetAllDescriptions((JvmDeclaredType) content, descriptions);
+				JvmDeclaredType type = (JvmDeclaredType) content;
+				if (!Strings.isEmpty(type.getIdentifier())) {
+					doGetAllDescriptions(type, descriptions);
+				}
 			}
 		}
 		return new MultimapBasedSelectable(descriptions);

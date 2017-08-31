@@ -77,7 +77,11 @@ public class KnownTypesScope extends AbstractKnownTypesScope {
 	 * If we know java.util.Map$Entry exists and we query for the FQN, we assume things are valid.
 	 */
 	protected JvmType getExactMatch(JvmType type, int index, QualifiedName name) {
-		QualifiedName typeName = QualifiedName.create(Strings.split(type.getQualifiedName(), '.'));
+		String qn = type.getQualifiedName();
+		if (Strings.isEmpty(qn)) {
+			return null;
+		}
+		QualifiedName typeName = QualifiedName.create(Strings.split(qn, '.'));
 		if (name.equals(typeName)) {
 			return type;
 		}
