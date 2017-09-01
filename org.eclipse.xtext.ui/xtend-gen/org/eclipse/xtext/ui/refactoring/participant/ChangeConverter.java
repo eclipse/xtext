@@ -85,8 +85,8 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
   }
   
   protected void doConvert(final IEmfResourceChange change) {
-    this.handleReplacements(change);
     this.handleUriChange(change);
+    this.handleReplacements(change);
   }
   
   protected void _handleReplacements(final IEmfResourceChange change) {

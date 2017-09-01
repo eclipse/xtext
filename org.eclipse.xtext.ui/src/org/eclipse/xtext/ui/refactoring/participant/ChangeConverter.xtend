@@ -56,8 +56,8 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	}
 
 	protected def void doConvert(IEmfResourceChange change) {
-		handleReplacements(change)
 		handleUriChange(change)
+		handleReplacements(change)
 	}
 
 	protected def dispatch void handleReplacements(IEmfResourceChange change) {
