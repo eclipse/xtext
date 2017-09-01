@@ -3,6 +3,8 @@
  */
 package org.eclipse.xtend.ide
 
+import com.google.inject.Binder
+import com.google.inject.name.Names
 import org.eclipse.jface.text.rules.ITokenScanner
 import org.eclipse.jface.text.source.IAnnotationHover
 import org.eclipse.jface.viewers.ILabelProvider
@@ -43,6 +45,7 @@ import org.eclipse.xtend.ide.editor.RichStringAwareSourceViewer
 import org.eclipse.xtend.ide.editor.RichStringAwareToggleCommentAction
 import org.eclipse.xtend.ide.editor.SingleLineCommentHelper
 import org.eclipse.xtend.ide.editor.XtendDoubleClickStrategyProvider
+import org.eclipse.xtend.ide.editor.XtendEditor
 import org.eclipse.xtend.ide.editor.XtendFoldingRegionProvider
 import org.eclipse.xtend.ide.editor.XtendNatureAddingEditorCallback
 import org.eclipse.xtend.ide.editor.XtendSourceViewerConfiguration
@@ -66,6 +69,7 @@ import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider
 import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution
 import org.eclipse.xtend.ide.outline.SwitchOutlineModeContribution
+import org.eclipse.xtend.ide.outline.XtendOutlineModes
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeFactory
 import org.eclipse.xtend.ide.outline.XtendOutlinePage
@@ -76,11 +80,13 @@ import org.eclipse.xtend.ide.refactoring.XtendDependentElementsCalculator
 import org.eclipse.xtend.ide.refactoring.XtendExpressionUtil
 import org.eclipse.xtend.ide.refactoring.XtendJdtRenameParticipantProcessor
 import org.eclipse.xtend.ide.refactoring.XtendRefactoringPreferences
+import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater
 import org.eclipse.xtend.ide.refactoring.XtendRenameContextFactory
 import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategyProvider
 import org.eclipse.xtend.ide.validator.XtendResourceValidator
+import org.eclipse.xtend.ide.validator.XtendUIValidator
 import org.eclipse.xtend.ide.validator.preferences.XtendValidatorConfigurationBlock
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2
@@ -91,6 +97,7 @@ import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRename
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
+import org.eclipse.xtext.generator.IShouldGenerate
 import org.eclipse.xtext.ide.LexerIdeBindings
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
@@ -123,6 +130,7 @@ import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
+import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper
@@ -145,6 +153,7 @@ import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction
 import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider
 import org.eclipse.xtext.ui.generator.trace.TraceForStorageProvider
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator
+import org.eclipse.xtext.ui.refactoring.IReferenceUpdater
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory
@@ -153,23 +162,18 @@ import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.validation.IssueSeveritiesProvider
 import org.eclipse.xtext.xbase.ui.contentassist.ParameterContextInformationProvider
-import org.eclipse.xtext.xbase.ui.editor.XbaseEditor
 import org.eclipse.xtext.xbase.ui.editor.actions.IClipboardActionFactory
 import org.eclipse.xtext.xbase.ui.editor.actions.ImportsAwareClipboardAction
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
 import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider
-import com.google.inject.Binder
-import com.google.inject.name.Names
-import org.eclipse.xtext.ui.refactoring.IReferenceUpdater
-import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater
-import org.eclipse.xtext.generator.IShouldGenerate
+import org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator
 
 /** 
  * Use this class to register components to be used within the IDE.
  */
-class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
+class XtendUiModule extends AbstractXtendUiModule {
 
 	new(AbstractUIPlugin plugin) {
 		super(plugin)
@@ -190,8 +194,8 @@ class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		OverrideIndicatorRulerAction)
 	}
 
-	override void configureHyperlinkLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider).annotatedWith(org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider).to(
+	override void configureHyperlinkLabelProvider(Binder binder) {
+		binder.bind(ILabelProvider).annotatedWith(HyperlinkLabelProvider).to(
 			HyperLinkingLabelProvider)
 	}
 
@@ -314,7 +318,7 @@ class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return XtendRenameStrategy
 	}
 
-	override java.lang.Class<? extends IDependentElementsCalculator> bindIDependentElementsCalculator() {
+	override Class<? extends IDependentElementsCalculator> bindIDependentElementsCalculator() {
 		return XtendDependentElementsCalculator
 	}
 
@@ -341,8 +345,8 @@ class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return XtendHoverDocumentationProvider
 	}
 
-	override Class<? extends org.eclipse.xtext.ui.editor.XtextEditor> bindXtextEditor() {
-		return XbaseEditor
+	override Class<? extends XtextEditor> bindXtextEditor() {
+		return XtendEditor
 	}
 
 	override Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
@@ -362,8 +366,8 @@ class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 			ShowSyntheticMembersContribution)
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding(eager=true) override Class<? extends org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator> bindXbaseUIValidator() {
-		return org.eclipse.xtend.ide.validator.XtendUIValidator
+	@SingletonBinding(eager=true) override Class<? extends XbaseUIValidator> bindXbaseUIValidator() {
+		return XtendUIValidator
 	}
 
 	@SingletonBinding(eager=true) def Class<? extends JavaProjectPreferencesInitializer> bindJavaProjectPreferencesInitializer() {
@@ -469,7 +473,7 @@ class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	}
 
 	def Class<? extends IOutlineTreeProvider.ModeAware> bindIOutlineTreeProvider_ModeAware() {
-		return org.eclipse.xtend.ide.outline.XtendOutlineModes
+		return XtendOutlineModes
 	}
 
 	def void configureSwitchOutlineModeContribution(Binder binder) {
@@ -480,7 +484,7 @@ class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		binder.bind(IQuickOutlineContribution).annotatedWith(Names.named("SwitchQuickOutlineModeContribution")).to(SwitchOutlineModeContribution)
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding(eager=true) def Class<? extends IResourceChangeRegistry> bindResourceChangeRegistry() {
+	@SingletonBinding(eager=true) def Class<? extends IResourceChangeRegistry> bindResourceChangeRegistry() {
 		return UIResourceChangeRegistry
 	}
 

@@ -48,6 +48,7 @@ import org.eclipse.xtend.ide.editor.RichStringAwareSourceViewer;
 import org.eclipse.xtend.ide.editor.RichStringAwareToggleCommentAction;
 import org.eclipse.xtend.ide.editor.SingleLineCommentHelper;
 import org.eclipse.xtend.ide.editor.XtendDoubleClickStrategyProvider;
+import org.eclipse.xtend.ide.editor.XtendEditor;
 import org.eclipse.xtend.ide.editor.XtendFoldingRegionProvider;
 import org.eclipse.xtend.ide.editor.XtendNatureAddingEditorCallback;
 import org.eclipse.xtend.ide.editor.XtendSourceViewerConfiguration;
@@ -164,7 +165,6 @@ import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.ui.contentassist.ParameterContextInformationProvider;
-import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.editor.actions.IClipboardActionFactory;
 import org.eclipse.xtext.xbase.ui.editor.actions.ImportsAwareClipboardAction;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
@@ -374,7 +374,7 @@ public class XtendUiModule extends AbstractXtendUiModule {
   
   @Override
   public Class<? extends XtextEditor> bindXtextEditor() {
-    return XbaseEditor.class;
+    return XtendEditor.class;
   }
   
   @Override

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -62,6 +62,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.internal.editors.text.EditorsPlugin;
+import org.eclipse.ui.part.IShowInTarget;
+import org.eclipse.ui.part.ShowInContext;
 import org.eclipse.ui.progress.UIJob;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
@@ -95,9 +97,10 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
+ * @author Karsten Thoms - Bug 434688, 505760
  */
 @SuppressWarnings("restriction")
-public class DerivedSourceView extends AbstractSourceView implements IResourceChangeListener {
+public class DerivedSourceView extends AbstractSourceView implements IResourceChangeListener, IShowInTarget {
 	protected static final int VERTICAL_RULER_WIDTH = 12;
 	protected static final int OVERVIEW_RULER_WIDTH = 12;
 	private static final String SEARCH_ANNOTATION_TYPE = "org.eclipse.search.results"; //$NON-NLS-1$
@@ -445,5 +448,10 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		}
 	}
 
+	@Override
+	public boolean show(ShowInContext context) {
+		selectionChanged(getSite().getPage().getActiveEditor(), context.getSelection());
+		return true;
+	}
 
 }
