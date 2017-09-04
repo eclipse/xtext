@@ -9,42 +9,62 @@ package org.eclipse.xtext.ui.editor.contentassist
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.util.ArrayList
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.swt.graphics.Image
+import org.eclipse.xtext.Assignment
+import org.eclipse.xtext.Keyword
+import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext.Builder
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
-import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalAcceptor
+import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
+import org.eclipse.xtext.resource.IEObjectDescription
+import org.eclipse.xtext.ui.editor.contentassist.AbstractContentProposalProvider.NullSafeCompletionProposalAcceptor
 import org.eclipse.xtext.util.TextRegion
 
 /**
  * @author Titouan Vervack - Initial contribution and API
  * 
- * @since 2.12
+ * @since 2.13
  */
-abstract class UiToIdeContentProposalProvider extends AbstractContentProposalProvider {
-
+class UiToIdeContentProposalProvider extends AbstractContentProposalProvider {
+    
 	@Inject IdeContentProposalProvider ideProvider
 	@Inject Provider<Builder> builderProvider
-	@Inject Provider<IdeContentProposalAcceptor> acceptorProvider
-
+    
 	override createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val ideAcceptor = acceptorProvider.get()
+		val entries = new ArrayList<Pair<ContentAssistEntry, Integer>>
+        val ideAcceptor = new IIdeContentProposalAcceptor {
+            override accept(ContentAssistEntry entry, int priority) {
+                entries += entry -> priority
+            }
+            override canAcceptMoreProposals() {
+                entries.size < maxProposals
+            }
+        }
 		ideProvider.createProposals(#[context.getIdeContext], ideAcceptor)
 		val uiAcceptor = new NullSafeCompletionProposalAcceptor(acceptor)
 
-		val entries = ideAcceptor.entries
-		entries.forEach [ entry, idx |
-			val priority = computePriority(entries, idx)
-			// createCompletionProposal calls isValidProposal
-			val proposal = createCompletionProposal(entry.proposal, new StyledString(entry.label ?: entry.proposal),
-				getImage(entry), priority, entry.prefix, context)
+		entries.forEach [ p, idx |
+            val entry = p.key
+			val proposal = doCreateProposal(entry.proposal, entry.displayString, entry.image, p.value, context)
 			uiAcceptor.accept(proposal)
 		]
 	}
-
-	protected def int computePriority(Iterable<ContentAssistEntry> entries, int index) {
-		entries.size - index
+    
+    override completeAssignment(Assignment object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+    }
+    
+    override completeKeyword(Keyword object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+    }
+    
+    override completeRuleCall(RuleCall object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+    }
+	
+	protected def int getMaxProposals() {
+		1000
 	}
 
 	private def org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext getIdeContext(ContentAssistContext c) {
@@ -67,6 +87,21 @@ abstract class UiToIdeContentProposalProvider extends AbstractContentProposalPro
 		}
 		return builder.toContext()
 	}
+    
+    protected def StyledString getDisplayString(ContentAssistEntry entry) {
+        val result = new StyledString(entry.label ?: entry.proposal)
+        if (!entry.description.nullOrEmpty)
+            result.append(new StyledString(' \u2013 ' + entry.description, StyledString.QUALIFIER_STYLER))
+        return result
+    }
 
-	abstract protected def Image getImage(ContentAssistEntry entry)
+    protected def Image getImage(ContentAssistEntry entry) {
+        switch source: entry.source {
+            IEObjectDescription:
+                getImage(source)
+            EObject:
+                getImage(source)
+        }
+    }
+    
 }
