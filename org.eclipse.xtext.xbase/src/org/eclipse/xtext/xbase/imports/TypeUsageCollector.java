@@ -357,13 +357,17 @@ public class TypeUsageCollector {
 					IScope scope = scopeProvider.getScope(element, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 					IEObjectDescription singleElement = scope.getSingleElement(QualifiedName.create(docTypeText));
 					ITextRegion textRegion = new TextRegion(docTypeReference.getOffset(), docTypeReference.getLength());
-					JvmType referencedType = null;
+					JvmType jvmType = null;
 					if (singleElement != null) {
-						referencedType = (JvmType) singleElement.getEObjectOrProxy();
+						jvmType = (JvmType) singleElement.getEObjectOrProxy();
 					}
-					if(referencedType instanceof JvmDeclaredType && !referencedType.eIsProxy()) {
-						JvmDeclaredType casted = (JvmDeclaredType) referencedType;
-						typeUsages.addTypeUsage(casted, casted, textRegion, currentThisType);
+					if(jvmType instanceof JvmDeclaredType && !jvmType.eIsProxy()) {
+						PreferredType preferredType = findPreferredType((JvmDeclaredType) jvmType, docTypeText);
+						if (preferredType.referencedType != null) {
+							acceptType(preferredType.referencedType, preferredType.usedType, textRegion);
+						} else {
+							typeUsages.addUnresolved(docTypeText, "", textRegion, currentThisType);
+						}
 					} else {
 						typeUsages.addUnresolved(docTypeText, "", textRegion, currentThisType);
 					}
