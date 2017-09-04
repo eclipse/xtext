@@ -1248,6 +1248,58 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
   
+  @Test
+  public void testInnerClasses_18() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package p");
+    _builder.newLine();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/** @see Bar$XYZ */");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz(Bar.XYZ x) {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("interface Bar {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class XYZ {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package p");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Test {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("/** @see Bar.XYZ */");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def baz(Bar.XYZ x) {}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("interface Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("class XYZ {}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
+  }
+  
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=448728
    */
