@@ -42,6 +42,24 @@ public interface IndentationAwareTestLanguageFactory extends EFactory
   TreeNode createTreeNode();
 
   /**
+   * Returns a new object of class '<em>Other Tree Node</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Other Tree Node</em>'.
+   * @generated
+   */
+  OtherTreeNode createOtherTreeNode();
+
+  /**
+   * Returns a new object of class '<em>Child List</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Child List</em>'.
+   * @generated
+   */
+  ChildList createChildList();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

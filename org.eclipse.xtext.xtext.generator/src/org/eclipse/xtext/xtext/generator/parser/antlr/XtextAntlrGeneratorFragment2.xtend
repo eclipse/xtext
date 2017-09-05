@@ -87,7 +87,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		if (combinedGrammar.isSet)
 			combinedGrammar.get
 		else
-			!options.backtrackLexer && !options.ignoreCase && !grammar.allTerminalRules.exists[isSyntheticTerminalRule]
+			!options.backtrackLexer && !options.ignoreCase && !hasSyntheticTerminalRule
 	}
 
 	override protected doGenerate() {
@@ -104,13 +104,17 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		generateProductionParser().writeTo(projectConfig.runtime.srcGen)
 		generateAntlrTokenFileProvider().writeTo(projectConfig.runtime.srcGen)
 		generateContentAssistParser().writeTo(projectConfig.genericIde.srcGen)
-		if (grammar.allTerminalRules.exists[ isSyntheticTerminalRule ]) {
+		if (hasSyntheticTerminalRule()) {
 			generateProductionTokenSource().writeTo(projectConfig.runtime.src)
 			generateContentAssistTokenSource().writeTo(projectConfig.genericIde.src)
 		}
 		addRuntimeBindingsAndImports()
 		addIdeBindingsAndImports()
 		addUiBindingsAndImports()
+	}
+	
+	protected def boolean hasSyntheticTerminalRule() {
+		grammar.allTerminalRules.exists[ isSyntheticTerminalRule ]
 	}
 	
 	def void setLookaheadThreshold(String lookaheadThreshold) {
@@ -195,7 +199,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 					tokenStream.setInitialHiddenTokens(«FOR hidden : grammar.initialHiddenTokens SEPARATOR ", "»"«hidden»"«ENDFOR»);
 				}
 				
-				«IF grammar.allTerminalRules.exists[isSyntheticTerminalRule]»
+				«IF hasSyntheticTerminalRule»
 					@Override
 					protected «TokenSource» createLexer(«CharStream» stream) {
 						return new «grammar.tokenSourceClass»(super.createLexer(stream));
@@ -319,7 +323,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 					return result;
 				}
 			
-				«IF grammar.allTerminalRules.exists[isSyntheticTerminalRule]»
+				«IF hasSyntheticTerminalRule»
 					@Override
 					protected «TokenSource» createLexer(«CharStream» stream) {
 						return new «grammar.tokenSourceClass»(super.createLexer(stream));
@@ -503,6 +507,12 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				"org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory".typeRef
 			)
 		}
+		if (hasSyntheticTerminalRule) {
+			ideBindings.addTypeToType(
+				"org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider".typeRef, 
+				"org.eclipse.xtext.ide.editor.contentassist.IndentationAwareCompletionPrefixProvider".typeRef
+			)
+		}
 		ideBindings.contributeTo(language.ideGenModule)
 	}
 	
@@ -553,6 +563,13 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			.addConfiguredBinding("ContentAssistLexerProvider", '''
 				binder.bind(«caLexerClass».class).toProvider(«LexerProvider».create(«caLexerClass».class));
 			''')
+			
+		if (hasSyntheticTerminalRule) {
+			uiBindings.addTypeToType(
+				"org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider".typeRef, 
+				"org.eclipse.xtext.ide.editor.contentassist.IndentationAwareCompletionPrefixProvider".typeRef
+			)
+		}
 		uiBindings.contributeTo(language.eclipsePluginGenModule)
 	}
 

@@ -52,7 +52,8 @@ public abstract class ProposalConflictHelper implements IProposalConflictHelper 
 
 	public boolean existsConflict(INode lastCompleteNode, int offset, String proposal, ContentAssistContext context) {
 		String lastCompleteText = lastCompleteNode.getText();
-		lastCompleteText = lastCompleteText.substring(0, offset - lastCompleteNode.getTotalOffset());
+		int endOffset = offset - lastCompleteNode.getTotalOffset();
+		lastCompleteText = lastCompleteText.substring(0, Math.max(endOffset, 0));
 		if (Strings.isEmpty(lastCompleteText))
 			return false;
 		return existsConflict(lastCompleteText, proposal, context);

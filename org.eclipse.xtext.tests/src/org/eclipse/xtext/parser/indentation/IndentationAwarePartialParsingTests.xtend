@@ -12,12 +12,17 @@ import org.eclipse.xtext.testing.smoketest.XtextSmokeTestRunner
 import org.eclipse.xtext.testing.smoketest.processors.PartialParsingProcessor
 import org.junit.runner.RunWith
 import org.junit.runners.Suite.SuiteClasses
+import org.junit.runners.Suite
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @RunWith(XtextSmokeTestRunner)
 @ProcessedBy(value = PartialParsingProcessor, processInParallel = true)
-@SuiteClasses(IndentationAwareLanguageTest)
-class IndentationAwarePartialParsingTest {
+class IndentationAwarePartialParsingTests extends IndentationAwareLanguageSuite {
+}
+
+@RunWith(Suite)
+@SuiteClasses(IndentationAwareLanguageTest, NodeModelTest)
+class IndentationAwareLanguageSuite {
 }

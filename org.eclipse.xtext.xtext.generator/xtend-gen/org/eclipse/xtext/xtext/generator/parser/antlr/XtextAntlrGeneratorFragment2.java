@@ -133,9 +133,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     if (_isSet) {
       _xifexpression = this.combinedGrammar.get();
     } else {
-      _xifexpression = (((!this.getOptions().isBacktrackLexer()) && (!this.getOptions().isIgnoreCase())) && (!IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(this.getGrammar()), ((Function1<TerminalRule, Boolean>) (TerminalRule it) -> {
-        return Boolean.valueOf(this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
-      }))));
+      _xifexpression = (((!this.getOptions().isBacktrackLexer()) && (!this.getOptions().isIgnoreCase())) && (!this.hasSyntheticTerminalRule()));
     }
     return _xifexpression;
   }
@@ -160,17 +158,21 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     this.generateProductionParser().writeTo(this.getProjectConfig().getRuntime().getSrcGen());
     this.generateAntlrTokenFileProvider().writeTo(this.getProjectConfig().getRuntime().getSrcGen());
     this.generateContentAssistParser().writeTo(this.getProjectConfig().getGenericIde().getSrcGen());
-    final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
-      return Boolean.valueOf(this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
-    };
-    boolean _exists = IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(this.getGrammar()), _function);
-    if (_exists) {
+    boolean _hasSyntheticTerminalRule = this.hasSyntheticTerminalRule();
+    if (_hasSyntheticTerminalRule) {
       this.generateProductionTokenSource().writeTo(this.getProjectConfig().getRuntime().getSrc());
       this.generateContentAssistTokenSource().writeTo(this.getProjectConfig().getGenericIde().getSrc());
     }
     this.addRuntimeBindingsAndImports();
     this.addIdeBindingsAndImports();
     this.addUiBindingsAndImports();
+  }
+  
+  protected boolean hasSyntheticTerminalRule() {
+    final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
+      return Boolean.valueOf(this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
+    };
+    return IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(this.getGrammar()), _function);
   }
   
   public void setLookaheadThreshold(final String lookaheadThreshold) {
@@ -315,11 +317,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.append("\t");
           _builder.newLine();
           {
-            final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
-              return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
-            };
-            boolean _exists = IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(XtextAntlrGeneratorFragment2.this.getGrammar()), _function);
-            if (_exists) {
+            boolean _hasSyntheticTerminalRule = XtextAntlrGeneratorFragment2.this.hasSyntheticTerminalRule();
+            if (_hasSyntheticTerminalRule) {
               _builder.append("\t");
               _builder.append("@Override");
               _builder.newLine();
@@ -726,11 +725,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.newLine();
           _builder.newLine();
           {
-            final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
-              return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
-            };
-            boolean _exists = IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(XtextAntlrGeneratorFragment2.this.getGrammar()), _function);
-            if (_exists) {
+            boolean _hasSyntheticTerminalRule = XtextAntlrGeneratorFragment2.this.hasSyntheticTerminalRule();
+            if (_hasSyntheticTerminalRule) {
               _builder.append("\t");
               _builder.append("@Override");
               _builder.newLine();
@@ -1245,6 +1241,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory"), 
         TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory"));
     }
+    boolean _hasSyntheticTerminalRule = this.hasSyntheticTerminalRule();
+    if (_hasSyntheticTerminalRule) {
+      ideBindings.addTypeToType(
+        TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider"), 
+        TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.IndentationAwareCompletionPrefixProvider"));
+    }
     ideBindings.contributeTo(this.getLanguage().getIdeGenModule());
   }
   
@@ -1358,6 +1360,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       }
     };
     final GuiceModuleAccess.BindingFactory uiBindings = _addTypeToType_1.addConfiguredBinding("ContentAssistLexerProvider", _client_3);
+    boolean _hasSyntheticTerminalRule = this.hasSyntheticTerminalRule();
+    if (_hasSyntheticTerminalRule) {
+      uiBindings.addTypeToType(
+        TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider"), 
+        TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.IndentationAwareCompletionPrefixProvider"));
+    }
     uiBindings.contributeTo(this.getLanguage().getEclipsePluginGenModule());
   }
   

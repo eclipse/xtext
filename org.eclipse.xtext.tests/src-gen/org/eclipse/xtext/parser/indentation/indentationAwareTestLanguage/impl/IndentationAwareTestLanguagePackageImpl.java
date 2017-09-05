@@ -7,12 +7,13 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.ChildList;
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.IndentationAwareTestLanguageFactory;
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.IndentationAwareTestLanguagePackage;
+import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.OtherTreeNode;
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree;
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.TreeNode;
 
@@ -37,6 +38,20 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * @generated
    */
   private EClass treeNodeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass otherTreeNodeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass childListEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -86,9 +101,6 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
 
     isInited = true;
 
-    // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
-
     // Create package meta-data objects
     theIndentationAwareTestLanguagePackage.createPackageContents();
 
@@ -129,6 +141,16 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getTree_MoreNodes()
+  {
+    return (EReference)treeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getTreeNode()
   {
     return treeNodeEClass;
@@ -152,6 +174,56 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
   public EReference getTreeNode_Children()
   {
     return (EReference)treeNodeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOtherTreeNode()
+  {
+    return otherTreeNodeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getOtherTreeNode_Name()
+  {
+    return (EAttribute)otherTreeNodeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getOtherTreeNode_ChildList()
+  {
+    return (EReference)otherTreeNodeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getChildList()
+  {
+    return childListEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getChildList_Children()
+  {
+    return (EReference)childListEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -186,10 +258,18 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
     // Create classes and their features
     treeEClass = createEClass(TREE);
     createEReference(treeEClass, TREE__NODES);
+    createEReference(treeEClass, TREE__MORE_NODES);
 
     treeNodeEClass = createEClass(TREE_NODE);
     createEAttribute(treeNodeEClass, TREE_NODE__NAME);
     createEReference(treeNodeEClass, TREE_NODE__CHILDREN);
+
+    otherTreeNodeEClass = createEClass(OTHER_TREE_NODE);
+    createEAttribute(otherTreeNodeEClass, OTHER_TREE_NODE__NAME);
+    createEReference(otherTreeNodeEClass, OTHER_TREE_NODE__CHILD_LIST);
+
+    childListEClass = createEClass(CHILD_LIST);
+    createEReference(childListEClass, CHILD_LIST__CHILDREN);
   }
 
   /**
@@ -216,9 +296,6 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
-    // Obtain other dependent packages
-    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
-
     // Create type parameters
 
     // Set bounds for type parameters
@@ -228,10 +305,18 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
     // Initialize classes and features; add operations and parameters
     initEClass(treeEClass, Tree.class, "Tree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTree_Nodes(), this.getTreeNode(), null, "nodes", null, 0, -1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTree_MoreNodes(), this.getOtherTreeNode(), null, "moreNodes", null, 0, -1, Tree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(treeNodeEClass, TreeNode.class, "TreeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTreeNode_Name(), theEcorePackage.getEString(), "name", null, 0, 1, TreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTreeNode_Name(), ecorePackage.getEString(), "name", null, 0, 1, TreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTreeNode_Children(), this.getTreeNode(), null, "children", null, 0, -1, TreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(otherTreeNodeEClass, OtherTreeNode.class, "OtherTreeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getOtherTreeNode_Name(), ecorePackage.getEString(), "name", null, 0, 1, OtherTreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOtherTreeNode_ChildList(), this.getChildList(), null, "childList", null, 0, 1, OtherTreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(childListEClass, ChildList.class, "ChildList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getChildList_Children(), this.getOtherTreeNode(), null, "children", null, 0, -1, ChildList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);
