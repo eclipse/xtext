@@ -26,6 +26,7 @@ public class IllegalFlakyConfigTest {
 	@Rule
 	public TestRule verifier = new TestRule() {
 
+		@Override
 		public Statement apply(final Statement base, Description description) {
 			return new Statement() {
 				

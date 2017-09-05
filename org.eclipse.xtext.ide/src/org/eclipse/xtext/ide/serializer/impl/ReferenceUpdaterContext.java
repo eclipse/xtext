@@ -59,6 +59,7 @@ public class ReferenceUpdaterContext implements IReferenceUpdaterContext {
 		return diffBuilder.getOriginalTextRegionAccess().getResource();
 	}
 
+	@Override
 	public List<IUpdatableReference> getUpdatableReferences() {
 		return references;
 	}

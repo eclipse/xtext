@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public interface ITextDocumentChange extends IEmfResourceChange {
 
+	@Override
 	XtextResource getResource();
 
 	List<ITextReplacement> getReplacements();

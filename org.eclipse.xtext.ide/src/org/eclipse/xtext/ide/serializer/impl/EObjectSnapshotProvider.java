@@ -100,22 +100,27 @@ public class EObjectSnapshotProvider {
 			this.containerEObjectURI = containerEObjectURI;
 		}
 
+		@Override
 		public URI getContainerEObjectURI() {
 			return containerEObjectURI;
 		}
 
+		@Override
 		public EReference getEReference() {
 			return eReference;
 		}
 
+		@Override
 		public int getIndexInList() {
 			return indexInList;
 		}
 
+		@Override
 		public URI getSourceEObjectUri() {
 			return sourceEObjectUri;
 		}
 
+		@Override
 		public IEObjectSnapshot getTarget() {
 			return targetEObject;
 		}

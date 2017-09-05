@@ -42,6 +42,7 @@ public class XtextRunnerTest {
 	public static class MyInjectorProvider implements IRegistryConfigurator, IInjectorProvider {
 
 		
+		@Override
 		public Injector getInjector() {
 			injectorCreated = true;
 			
@@ -49,6 +50,7 @@ public class XtextRunnerTest {
 			
 			return Guice.createInjector(new Module(){
 
+				@Override
 				public void configure(Binder binder) {
 					binder.bind(Boolean.class).toInstance(Boolean.TRUE);
 				}
@@ -56,11 +58,13 @@ public class XtextRunnerTest {
 			});
 		}
 
+		@Override
 		public void setupRegistry() {
 			registrySaved = true;
 			assertFalse(injectorCreated);
 		}
 
+		@Override
 		public void restoreRegistry() {
 			assertTrue(registrySaved);
 			registryRestored = true;
