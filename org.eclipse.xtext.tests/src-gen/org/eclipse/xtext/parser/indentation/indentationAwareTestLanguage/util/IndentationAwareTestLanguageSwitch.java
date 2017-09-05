@@ -87,6 +87,20 @@ public class IndentationAwareTestLanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case IndentationAwareTestLanguagePackage.OTHER_TREE_NODE:
+      {
+        OtherTreeNode otherTreeNode = (OtherTreeNode)theEObject;
+        T result = caseOtherTreeNode(otherTreeNode);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case IndentationAwareTestLanguagePackage.CHILD_LIST:
+      {
+        ChildList childList = (ChildList)theEObject;
+        T result = caseChildList(childList);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -119,6 +133,38 @@ public class IndentationAwareTestLanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseTreeNode(TreeNode object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Other Tree Node</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Other Tree Node</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOtherTreeNode(OtherTreeNode object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Child List</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Child List</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseChildList(ChildList object)
   {
     return null;
   }

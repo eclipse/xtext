@@ -44,7 +44,7 @@ class BuildManager {
     }
 
     def List<IResourceDescription.Delta> doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
-    	return submit(dirtyFiles, deletedFiles).build(cancelIndicator)
+    		return submit(dirtyFiles, deletedFiles).build(cancelIndicator)
     }
     
     protected def void queue(Set<URI> files, Collection<URI> toRemove, Collection<URI> toAdd) {

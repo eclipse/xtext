@@ -33,7 +33,7 @@ Workflow {
 		registerGeneratedEPackage = "org.eclipse.emf.ecore.EcorePackage"
 	}
 	
-	bean = tests.ecore.EcoreSupportStandaloneSetup {}
+	bean = testlanguages.ecore.EcoreSupport {}
 	
 
 	component = DirectoryCleaner {

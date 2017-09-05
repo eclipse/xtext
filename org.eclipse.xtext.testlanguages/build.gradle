@@ -4,6 +4,7 @@ dependencies {
 	compile project(':org.eclipse.xtext')
 	compile project(':org.eclipse.xtext.testing')
 	compile "org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore"
+	compile "org.eclipse.emf:org.eclipse.emf.mwe2.runtime:$versions.emfMwe2"
 }
 
 // Include the mwe2 and xtext files from the main source set when executing the workflow

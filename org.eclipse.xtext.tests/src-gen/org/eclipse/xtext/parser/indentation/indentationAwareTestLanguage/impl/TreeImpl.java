@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.IndentationAwareTestLanguagePackage;
+import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.OtherTreeNode;
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree;
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.TreeNode;
 
@@ -30,6 +31,7 @@ import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.TreeNod
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.impl.TreeImpl#getNodes <em>Nodes</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.impl.TreeImpl#getMoreNodes <em>More Nodes</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,6 +47,16 @@ public class TreeImpl extends MinimalEObjectImpl.Container implements Tree
    * @ordered
    */
   protected EList<TreeNode> nodes;
+
+  /**
+   * The cached value of the '{@link #getMoreNodes() <em>More Nodes</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMoreNodes()
+   * @generated
+   * @ordered
+   */
+  protected EList<OtherTreeNode> moreNodes;
 
   /**
    * <!-- begin-user-doc -->
@@ -86,6 +98,20 @@ public class TreeImpl extends MinimalEObjectImpl.Container implements Tree
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<OtherTreeNode> getMoreNodes()
+  {
+    if (moreNodes == null)
+    {
+      moreNodes = new EObjectContainmentEList<OtherTreeNode>(OtherTreeNode.class, this, IndentationAwareTestLanguagePackage.TREE__MORE_NODES);
+    }
+    return moreNodes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -93,6 +119,8 @@ public class TreeImpl extends MinimalEObjectImpl.Container implements Tree
     {
       case IndentationAwareTestLanguagePackage.TREE__NODES:
         return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
+      case IndentationAwareTestLanguagePackage.TREE__MORE_NODES:
+        return ((InternalEList<?>)getMoreNodes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -109,6 +137,8 @@ public class TreeImpl extends MinimalEObjectImpl.Container implements Tree
     {
       case IndentationAwareTestLanguagePackage.TREE__NODES:
         return getNodes();
+      case IndentationAwareTestLanguagePackage.TREE__MORE_NODES:
+        return getMoreNodes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -128,6 +158,10 @@ public class TreeImpl extends MinimalEObjectImpl.Container implements Tree
         getNodes().clear();
         getNodes().addAll((Collection<? extends TreeNode>)newValue);
         return;
+      case IndentationAwareTestLanguagePackage.TREE__MORE_NODES:
+        getMoreNodes().clear();
+        getMoreNodes().addAll((Collection<? extends OtherTreeNode>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -145,6 +179,9 @@ public class TreeImpl extends MinimalEObjectImpl.Container implements Tree
       case IndentationAwareTestLanguagePackage.TREE__NODES:
         getNodes().clear();
         return;
+      case IndentationAwareTestLanguagePackage.TREE__MORE_NODES:
+        getMoreNodes().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -161,6 +198,8 @@ public class TreeImpl extends MinimalEObjectImpl.Container implements Tree
     {
       case IndentationAwareTestLanguagePackage.TREE__NODES:
         return nodes != null && !nodes.isEmpty();
+      case IndentationAwareTestLanguagePackage.TREE__MORE_NODES:
+        return moreNodes != null && !moreNodes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

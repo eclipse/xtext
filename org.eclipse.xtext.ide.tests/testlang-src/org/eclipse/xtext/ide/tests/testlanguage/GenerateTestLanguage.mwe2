@@ -66,6 +66,20 @@ Workflow {
 			}
 		}
 		language = StandardLanguage {
+			name = "org.eclipse.xtext.ide.tests.testlanguage.IndentationAwareUiTestLanguage"
+			fileExtensions = "indentationAwareUiTestLang"
+
+			serializer = {
+				generateStub = false
+			}
+			validator = {
+				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+			junitSupport = {
+				generateStub = false
+			}
+		}
+		language = StandardLanguage {
 			name = "org.eclipse.xtext.ide.tests.testlanguage.PartialContentAssistTestLanguage"
 			fileExtensions = "partialcontentassisttestlang"
 			serializer = {
@@ -79,6 +93,26 @@ Workflow {
 			}
 			parserGenerator = {
 				partialParsing = true
+			}
+		}
+		language = StandardLanguage {
+			referencedResource = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
+			name = "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage"
+			fileExtensions = "pstl"
+			serializer = {
+				generateStub = false
+			}
+			validator = {
+			// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+			junitSupport = {
+				generateStub = false
+			}
+			parserGenerator = {
+				partialParsing = true
+			}
+			formatter = {
+				generateStub = true
 			}
 		}
 	}

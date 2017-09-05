@@ -38,6 +38,7 @@ import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
+import org.eclipse.xtext.xtext.wizard.LanguageServer;
 import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
@@ -259,6 +260,114 @@ public class CliWizardIntegrationTest {
     P2RepositoryProject _p2Project = it.getP2Project();
     _p2Project.setEnabled(true);
     it.setLineDelimiter("\n");
+  })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
+    it.setBaseName("org.xtext.example.lsMavenFatjar");
+    it.setPreferredBuildSystem(BuildSystem.MAVEN);
+    it.setSourceLayout(SourceLayout.PLAIN);
+    it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
+    _testProject.setEnabled(false);
+    UiProjectDescriptor _uiProject = it.getUiProject();
+    _uiProject.setEnabled(false);
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
+    _testProject_1.setEnabled(false);
+    IdeProjectDescriptor _ideProject = it.getIdeProject();
+    _ideProject.setEnabled(true);
+    WebProjectDescriptor _webProject = it.getWebProject();
+    _webProject.setEnabled(false);
+    it.setLineDelimiter("\n");
+    it.setLanguageServer(LanguageServer.FATJAR);
+  })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
+    it.setBaseName("org.xtext.example.lsMavenTychoFatjar");
+    it.setPreferredBuildSystem(BuildSystem.MAVEN);
+    it.setSourceLayout(SourceLayout.PLAIN);
+    it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
+    _testProject.setEnabled(false);
+    UiProjectDescriptor _uiProject = it.getUiProject();
+    _uiProject.setEnabled(true);
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
+    _testProject_1.setEnabled(false);
+    IdeProjectDescriptor _ideProject = it.getIdeProject();
+    _ideProject.setEnabled(true);
+    WebProjectDescriptor _webProject = it.getWebProject();
+    _webProject.setEnabled(false);
+    it.setLineDelimiter("\n");
+    it.setLanguageServer(LanguageServer.FATJAR);
+  })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
+    it.setBaseName("org.xtext.example.lsGradleFatjar");
+    it.setPreferredBuildSystem(BuildSystem.GRADLE);
+    it.setSourceLayout(SourceLayout.PLAIN);
+    it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
+    _testProject.setEnabled(false);
+    UiProjectDescriptor _uiProject = it.getUiProject();
+    _uiProject.setEnabled(false);
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
+    _testProject_1.setEnabled(false);
+    IdeProjectDescriptor _ideProject = it.getIdeProject();
+    _ideProject.setEnabled(true);
+    WebProjectDescriptor _webProject = it.getWebProject();
+    _webProject.setEnabled(false);
+    it.setLineDelimiter("\n");
+    it.setLanguageServer(LanguageServer.FATJAR);
+  })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
+    it.setBaseName("org.xtext.example.lsMavenApp");
+    it.setPreferredBuildSystem(BuildSystem.MAVEN);
+    it.setSourceLayout(SourceLayout.PLAIN);
+    it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
+    _testProject.setEnabled(false);
+    UiProjectDescriptor _uiProject = it.getUiProject();
+    _uiProject.setEnabled(false);
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
+    _testProject_1.setEnabled(false);
+    IdeProjectDescriptor _ideProject = it.getIdeProject();
+    _ideProject.setEnabled(true);
+    WebProjectDescriptor _webProject = it.getWebProject();
+    _webProject.setEnabled(false);
+    it.setLineDelimiter("\n");
+    it.setLanguageServer(LanguageServer.APP);
+  })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
+    it.setBaseName("org.xtext.example.lsMavenTychoApp");
+    it.setPreferredBuildSystem(BuildSystem.MAVEN);
+    it.setSourceLayout(SourceLayout.PLAIN);
+    it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
+    _testProject.setEnabled(false);
+    UiProjectDescriptor _uiProject = it.getUiProject();
+    _uiProject.setEnabled(true);
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
+    _testProject_1.setEnabled(false);
+    IdeProjectDescriptor _ideProject = it.getIdeProject();
+    _ideProject.setEnabled(true);
+    WebProjectDescriptor _webProject = it.getWebProject();
+    _webProject.setEnabled(false);
+    it.setLineDelimiter("\n");
+    it.setLanguageServer(LanguageServer.APP);
+  })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
+    it.setBaseName("org.xtext.example.lsGradleApp");
+    it.setPreferredBuildSystem(BuildSystem.GRADLE);
+    it.setSourceLayout(SourceLayout.PLAIN);
+    it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
+    _testProject.setEnabled(false);
+    UiProjectDescriptor _uiProject = it.getUiProject();
+    _uiProject.setEnabled(false);
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
+    _testProject_1.setEnabled(false);
+    IdeProjectDescriptor _ideProject = it.getIdeProject();
+    _ideProject.setEnabled(true);
+    WebProjectDescriptor _webProject = it.getWebProject();
+    _webProject.setEnabled(false);
+    it.setLineDelimiter("\n");
+    it.setLanguageServer(LanguageServer.APP);
   }))));
   
   private static WizardConfiguration newProjectConfig() {

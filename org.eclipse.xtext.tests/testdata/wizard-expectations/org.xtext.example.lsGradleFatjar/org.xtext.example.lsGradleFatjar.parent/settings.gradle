@@ -1,0 +1,2 @@
+include 'org.xtext.example.lsGradleFatjar'
+include 'org.xtext.example.lsGradleFatjar.ide'

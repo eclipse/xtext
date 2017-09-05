@@ -105,6 +105,15 @@ public interface RegionaccesstestlanguageFactory extends EFactory
   Mixed createMixed();
 
   /**
+   * Returns a new object of class '<em>Value List</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Value List</em>'.
+   * @generated
+   */
+  ValueList createValueList();
+
+  /**
    * Returns a new object of class '<em>Root Action</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

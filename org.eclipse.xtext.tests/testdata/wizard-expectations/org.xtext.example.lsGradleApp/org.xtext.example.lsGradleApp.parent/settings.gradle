@@ -1,0 +1,2 @@
+include 'org.xtext.example.lsGradleApp'
+include 'org.xtext.example.lsGradleApp.ide'

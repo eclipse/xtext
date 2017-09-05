@@ -30,11 +30,11 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext.Builder;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
-import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -80,6 +80,12 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 	
 	@Inject
 	protected FollowElementComputer followElementComputer;
+	
+	/**
+	 * @since 2.13
+	 */
+	@Inject
+	protected CompletionPrefixProvider completionPrefixProvider;
 	
 	protected XtextResource resource;
 
@@ -216,7 +222,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 
 	protected void handleLastCompleteNodeIsAtEndOfDatatypeNode() {
 		String prefix = getPrefix(lastCompleteNode);
-		String completeInput = document.substring(0, lastCompleteNode.getOffset());
+		String completeInput = getInputToParse(lastCompleteNode);
 		INode previousNode = getLastCompleteNodeByOffset(rootNode, lastCompleteNode.getOffset());
 		EObject previousModel = previousNode.getSemanticElement();
 		INode currentDatatypeNode = getContainingDatatypeRuleNode(currentNode);
@@ -229,6 +235,20 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 		}
 	}
 
+	/**
+	 * @since 2.13
+	 */
+	protected String getInputToParse(INode node) {
+		return getInputToParse(document, node.getOffset());
+	}
+	
+	/**
+	 * @since 2.13
+	 */
+	protected String getInputToParse(String completeInput, int offset) {
+		return completionPrefixProvider.getInputToParse(completeInput, offset, completionOffset);
+	}
+
 	protected void handleLastCompleteNodeHasNoGrammarElement(List<Builder> contextBuilderToCheck, EObject previousModel) {
 		List<ContentAssistContext> newContexts = Lists.transform(contextBuilderToCheck, this);
 		boolean wasValid = isLikelyToBeValidProposal(lastCompleteNode, newContexts);
@@ -239,7 +259,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 
 	protected void handleLastCompleteNodeAsPartOfDatatypeNode() {
 		String prefix = getPrefix(datatypeNode);
-		String completeInput = document.substring(0, datatypeNode.getOffset());
+		String completeInput = getInputToParse(datatypeNode);
 		Collection<FollowElement> followElements = parser.getFollowElements(completeInput, false);
 		INode lastCompleteNodeBeforeDatatype = getLastCompleteNodeByOffset(rootNode, datatypeNode.getTotalOffset());
 		doCreateContexts(lastCompleteNodeBeforeDatatype, datatypeNode, prefix, currentModel, followElements);
@@ -274,7 +294,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 			}
 		}
 		String prefix = "";
-		String completeInput = document.substring(0, completionOffset);
+		String completeInput = getInputToParse(document, completionOffset);
 		Collection<FollowElement> followElements = parser.getFollowElements(completeInput, strict);
 		doCreateContexts(lastCompleteNode, currentNode, prefix, previousModel, followElements);
 	}
@@ -477,19 +497,6 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 	}
 	
 	protected INode getLastCompleteNodeByOffset(INode node, int offsetPosition) {
-		BidiTreeIterator<INode> iterator = node.getRootNode().getAsTreeIterable().iterator();
-		INode result = node;
-		while (iterator.hasNext()) {
-			INode candidate = iterator.next();
-			if (candidate.getOffset() >= offsetPosition ) {
-				break;
-			} else if ((candidate instanceof ILeafNode) &&
-					   (candidate.getGrammarElement() == null ||
-							   candidate.getGrammarElement() instanceof AbstractElement ||
-							   candidate.getGrammarElement() instanceof ParserRule)) {
-				result = candidate;
-			}
-		}
-		return result;
+		return completionPrefixProvider.getLastCompleteNodeByOffset(node, offsetPosition, completionOffset);
 	}
 }

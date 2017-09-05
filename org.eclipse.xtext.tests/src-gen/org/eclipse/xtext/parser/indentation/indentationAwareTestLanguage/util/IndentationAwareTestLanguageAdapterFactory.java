@@ -86,6 +86,16 @@ public class IndentationAwareTestLanguageAdapterFactory extends AdapterFactoryIm
         return createTreeNodeAdapter();
       }
       @Override
+      public Adapter caseOtherTreeNode(OtherTreeNode object)
+      {
+        return createOtherTreeNodeAdapter();
+      }
+      @Override
+      public Adapter caseChildList(ChildList object)
+      {
+        return createChildListAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -133,6 +143,36 @@ public class IndentationAwareTestLanguageAdapterFactory extends AdapterFactoryIm
    * @generated
    */
   public Adapter createTreeNodeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.OtherTreeNode <em>Other Tree Node</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.OtherTreeNode
+   * @generated
+   */
+  public Adapter createOtherTreeNodeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.ChildList <em>Child List</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.ChildList
+   * @generated
+   */
+  public Adapter createChildListAdapter()
   {
     return null;
   }

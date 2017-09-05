@@ -23,6 +23,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Unassigned;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.ValueList;
 
 /**
  * <!-- begin-user-doc -->
@@ -156,6 +157,14 @@ public class RegionaccesstestlanguageSwitch<T> extends Switch<T>
         Mixed mixed = (Mixed)theEObject;
         T result = caseMixed(mixed);
         if (result == null) result = caseRoot(mixed);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RegionaccesstestlanguagePackage.VALUE_LIST:
+      {
+        ValueList valueList = (ValueList)theEObject;
+        T result = caseValueList(valueList);
+        if (result == null) result = caseRoot(valueList);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -347,6 +356,22 @@ public class RegionaccesstestlanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMixed(Mixed object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Value List</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Value List</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseValueList(ValueList object)
   {
     return null;
   }

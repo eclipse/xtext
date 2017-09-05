@@ -15,7 +15,7 @@ import org.eclipse.xtext.RuleCall;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IAstRegion {
+public interface IAstRegion extends ISequentialRegion {
 
 	/**
 	 * @return The grammar element used to parse this semantic region. Can be an {@link RuleCall}, {@link CrossReference}, or

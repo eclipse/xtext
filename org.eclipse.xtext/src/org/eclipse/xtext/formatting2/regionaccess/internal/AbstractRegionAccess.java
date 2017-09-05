@@ -131,7 +131,7 @@ public abstract class AbstractRegionAccess implements ITextRegionAccess, ITextRe
 		int start = text.lastIndexOf('\n', offset) + 1;
 		if (start < 0)
 			start = 0;
-		int end = text.indexOf('\n', offset);
+		int end = text.indexOf('\n', offset + 1);
 		if (end > 0) {
 			if (text.charAt(end - 1) == '\r')
 				end = end - 1;

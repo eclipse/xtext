@@ -62,8 +62,10 @@ import org.eclipse.lsp4j.services.LanguageClientExtensions
 import org.eclipse.lsp4j.services.LanguageServer
 import org.eclipse.lsp4j.services.TextDocumentService
 import org.eclipse.lsp4j.services.WorkspaceService
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService
 import org.eclipse.xtext.ide.server.coloring.IColoringService
@@ -82,6 +84,9 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.lsp4j.ExecuteCommandOptions
+import org.eclipse.lsp4j.ExecuteCommandParams
+import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -89,11 +94,12 @@ import org.eclipse.xtext.validation.Issue
  */
 @Log class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider, IBuildListener {
 
-	@Inject RequestManager requestManager
+	@Inject @Accessors(PUBLIC_GETTER) RequestManager requestManager
 	@Inject WorkspaceSymbolService workspaceSymbolService
 	@Inject extension UriExtensions
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
-
+	@Inject ExecutableCommandRegistry commandRegistry
+	
 	// injected below
 	WorkspaceManager workspaceManager
 	InitializeParams params
@@ -135,6 +141,9 @@ import org.eclipse.xtext.validation.Issue
 				]
 			}
 			
+			// check if a language with code actions capability exists
+			codeActionProvider = allLanguages.exists[get(ICodeActionService)!==null] 
+			
             signatureHelpProvider = new SignatureHelpOptions(#['(', ','])
 			textDocumentSync = TextDocumentSyncKind.Incremental
 			completionProvider = new CompletionOptions => [
@@ -144,20 +153,26 @@ import org.eclipse.xtext.validation.Issue
 			documentFormattingProvider = true
 			documentRangeFormattingProvider = true
 			documentHighlightProvider = true
+			
+			// register execute command capability
+			if (params.capabilities?.workspace?.executeCommand !== null) {
+				this.commandRegistry.initialize(allLanguages, params.capabilities, client)
+				executeCommandProvider = new ExecuteCommandOptions => [
+					commands = this.commandRegistry.getCommands()
+				]
+			}
 		]
 		for (language : allLanguages) {
 			language.get(ICapabilitiesContributor)?.contribute(capabilities, params)
 		}
 		result.capabilities = capabilities
 		
-		requestManager.lockWrite [
+		access.addBuildListener(this);
+		
+		return requestManager.runWrite([
 			workspaceManager.initialize(baseDir, [this.publishDiagnostics($0, $1)], CancelIndicator.NullImpl)
 			return null
-		]
-
-		access.addBuildListener(this);
-
-		return CompletableFuture.completedFuture(result)
+		], []).thenApply [result]
 	}
 	
 	@Deprecated
@@ -197,29 +212,29 @@ import org.eclipse.xtext.validation.Issue
 	// end notification callbacks
 	// file/content change events
 	override didOpen(DidOpenTextDocumentParams params) {
-		requestManager.cancel
-		val buildable = requestManager.lockWrite [
+		requestManager.runWrite([
 			workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text)
-		]
-		requestManager.runWrite(buildable)
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 
 	override didChange(DidChangeTextDocumentParams params) {
-		requestManager.cancel
-		val buildable = requestManager.lockWrite [ 
+		requestManager.runWrite([ 
 			workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
 				new TextEdit(event.range, event.text)
 			])
-		]
-		requestManager.runWrite(buildable)
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 
 	override didClose(DidCloseTextDocumentParams params) {
-		requestManager.cancel
-		val buildable = requestManager.lockWrite [
+		requestManager.runWrite([
 			workspaceManager.didClose(params.textDocument.uri.toUri)
-		]
-		requestManager.runWrite(buildable)
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 
 	override didSave(DidSaveTextDocumentParams params) {
@@ -228,8 +243,7 @@ import org.eclipse.xtext.validation.Issue
 	}
 
 	override didChangeWatchedFiles(DidChangeWatchedFilesParams params) {
-		requestManager.cancel
-		val buildable = requestManager.lockWrite [
+		requestManager.runWrite([
 			val dirtyFiles = newArrayList
 			val deletedFiles = newArrayList
 			for (fileEvent : params.changes) {
@@ -240,16 +254,16 @@ import org.eclipse.xtext.validation.Issue
 				}
 			}
 			workspaceManager.didChangeFiles(dirtyFiles, deletedFiles)
-		]
-		requestManager.runWrite(buildable)
+		], [cancelIndicator , buildable | 
+			buildable.build(cancelIndicator)
+		])
 	}
 	
 	override didChangeConfiguration(DidChangeConfigurationParams params) {
-		requestManager.cancel
-        requestManager.lockWrite [
+		requestManager.runWrite([
             workspaceManager.refreshWorkspaceConfig(CancelIndicator.NullImpl)
             return null
-        ]
+        ], [])
     }
 
 	// end file/content change events
@@ -428,7 +442,17 @@ import org.eclipse.xtext.validation.Issue
 	}
 
 	override codeAction(CodeActionParams params) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.runRead [ cancelIndicator |
+			val uri = params.textDocument.uri.toUri;
+			val serviceProvider = uri.resourceServiceProvider;
+			val service =  serviceProvider?.get(ICodeActionService);
+			if (service === null)
+				return emptyList
+			
+			return workspaceManager.doRead(uri) [doc, resource |
+				service.getCodeActions(doc, resource, params, cancelIndicator)
+			]
+		]
 	}
 	
 	private def void installURI(List<? extends CodeLens> codeLenses, String uri) {
@@ -513,6 +537,12 @@ import org.eclipse.xtext.validation.Issue
 			return workspaceManager.doRead(uri) [ document, resource |
 				formatterService.format(document, resource, params, cancelIndicator)
 			]  
+		]
+	}
+	
+	override executeCommand(ExecuteCommandParams params) {
+		return requestManager.runRead[ cancelIndicator |
+			this.commandRegistry.executeCommand(params, this.access, cancelIndicator)
 		]
 	}
 

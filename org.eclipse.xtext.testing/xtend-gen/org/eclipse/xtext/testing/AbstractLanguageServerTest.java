@@ -24,12 +24,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+import org.eclipse.lsp4j.CodeActionContext;
+import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.CodeLens;
 import org.eclipse.lsp4j.CodeLensParams;
 import org.eclipse.lsp4j.ColoringInformation;
 import org.eclipse.lsp4j.ColoringParams;
+import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionList;
 import org.eclipse.lsp4j.Diagnostic;
@@ -59,6 +63,7 @@ import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.TextDocumentItem;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
@@ -94,7 +99,9 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -137,34 +144,37 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   }
   
   @Accessors
+  public static class TestCodeActionConfiguration extends TextDocumentPositionConfiguration {
+    private String expectedCodeActions = "";
+    
+    private Procedure1<? super List<? extends Command>> assertCodeActions = null;
+    
+    @Pure
+    public String getExpectedCodeActions() {
+      return this.expectedCodeActions;
+    }
+    
+    public void setExpectedCodeActions(final String expectedCodeActions) {
+      this.expectedCodeActions = expectedCodeActions;
+    }
+    
+    @Pure
+    public Procedure1<? super List<? extends Command>> getAssertCodeActions() {
+      return this.assertCodeActions;
+    }
+    
+    public void setAssertCodeActions(final Procedure1<? super List<? extends Command>> assertCodeActions) {
+      this.assertCodeActions = assertCodeActions;
+    }
+  }
+  
+  @Accessors
   protected final String fileExtension;
   
   @Before
   public void setup() {
     try {
-      ServerModule _serverModule = new ServerModule();
-      final Module _function = (Binder it) -> {
-        AnnotatedBindingBuilder<RequestManager> _bind = it.<RequestManager>bind(RequestManager.class);
-        _bind.toInstance(new RequestManager() {
-          @Override
-          public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
-            final CancelIndicator _function = () -> {
-              return false;
-            };
-            return CompletableFuture.<V>completedFuture(writeRequest.apply(_function));
-          }
-          
-          @Override
-          public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
-            final CancelIndicator _function = () -> {
-              return false;
-            };
-            return CompletableFuture.<V>completedFuture(readRequest.apply(_function));
-          }
-        });
-      };
-      final Module module = Modules2.mixin(_serverModule, _function);
-      final Injector injector = Guice.createInjector(module);
+      final Injector injector = Guice.createInjector(this.getServerModule());
       injector.injectMembers(this);
       final Object resourceServiceProvider = this.resourceServerProviderRegistry.getExtensionToFactoryMap().get(this.fileExtension);
       if ((resourceServiceProvider instanceof IResourceServiceProvider)) {
@@ -184,6 +194,53 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected Module getServerModule() {
+    ServerModule _serverModule = new ServerModule();
+    final Module _function = (Binder it) -> {
+      AnnotatedBindingBuilder<RequestManager> _bind = it.<RequestManager>bind(RequestManager.class);
+      _bind.toInstance(new RequestManager() {
+        @Override
+        public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> request) {
+          final CompletableFuture<V> result = new CompletableFuture<V>();
+          try {
+            final CancelIndicator _function = () -> {
+              return false;
+            };
+            result.complete(request.apply(_function));
+          } catch (final Throwable _t) {
+            if (_t instanceof Throwable) {
+              final Throwable e = (Throwable)_t;
+              result.completeExceptionally(e);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
+          }
+          return result;
+        }
+        
+        @Override
+        public <U extends Object, V extends Object> CompletableFuture<V> runWrite(final Function0<? extends U> nonCancellable, final Function2<? super CancelIndicator, ? super U, ? extends V> request) {
+          final CompletableFuture<V> result = new CompletableFuture<V>();
+          try {
+            final CancelIndicator _function = () -> {
+              return false;
+            };
+            result.complete(request.apply(_function, nonCancellable.apply()));
+          } catch (final Throwable _t) {
+            if (_t instanceof Throwable) {
+              final Throwable e = (Throwable)_t;
+              result.completeExceptionally(e);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
+          }
+          return result;
+        }
+      });
+    };
+    return Modules2.mixin(_serverModule, _function);
   }
   
   @Inject
@@ -628,6 +685,83 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
+  protected String _toExpectation(final Command it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("command : ");
+    String _command = it.getCommand();
+    _builder.append(_command);
+    _builder.newLineIfNotEmpty();
+    _builder.append("title : ");
+    String _title = it.getTitle();
+    _builder.append(_title);
+    _builder.newLineIfNotEmpty();
+    _builder.append("args : ");
+    _builder.newLine();
+    _builder.append("\t");
+    final Function1<Object, CharSequence> _function = (Object it_1) -> {
+      return this.toExpectation(it_1);
+    };
+    String _join = IterableExtensions.<Object>join(it.getArguments(), ",", _function);
+    _builder.append(_join, "\t");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _toExpectation(final WorkspaceEdit it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("changes :");
+    _builder.newLine();
+    {
+      Set<Map.Entry<String, List<TextEdit>>> _entrySet = it.getChanges().entrySet();
+      for(final Map.Entry<String, List<TextEdit>> entry : _entrySet) {
+        _builder.append("\t");
+        String _lastSegment = org.eclipse.emf.common.util.URI.createURI(entry.getKey()).lastSegment();
+        _builder.append(_lastSegment, "\t");
+        _builder.append(" : ");
+        String _expectation = this.toExpectation(entry.getValue());
+        _builder.append(_expectation, "\t");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("documentChanges : ");
+    _builder.newLine();
+    _builder.append("\t");
+    String _expectation_1 = this.toExpectation(it.getDocumentChanges());
+    _builder.append(_expectation_1, "\t");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected void testCodeAction(final Procedure1<? super AbstractLanguageServerTest.TestCodeActionConfiguration> configurator) {
+    try {
+      @Extension
+      final AbstractLanguageServerTest.TestCodeActionConfiguration configuration = new AbstractLanguageServerTest.TestCodeActionConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      final String filePath = this.initializeContext(configuration).getUri();
+      CodeActionParams _codeActionParams = new CodeActionParams();
+      final Procedure1<CodeActionParams> _function = (CodeActionParams it) -> {
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(filePath);
+        it.setTextDocument(_textDocumentIdentifier);
+        CodeActionContext _codeActionContext = new CodeActionContext();
+        final Procedure1<CodeActionContext> _function_1 = (CodeActionContext it_1) -> {
+          it_1.setDiagnostics(this.getDiagnostics().get(filePath));
+        };
+        CodeActionContext _doubleArrow = ObjectExtensions.<CodeActionContext>operator_doubleArrow(_codeActionContext, _function_1);
+        it.setContext(_doubleArrow);
+      };
+      CodeActionParams _doubleArrow = ObjectExtensions.<CodeActionParams>operator_doubleArrow(_codeActionParams, _function);
+      final CompletableFuture<List<? extends Command>> codeLenses = this.languageServer.codeAction(_doubleArrow);
+      if ((configuration.assertCodeActions != null)) {
+        configuration.assertCodeActions.apply(codeLenses.get());
+      } else {
+        this.assertEquals(configuration.expectedCodeActions, this.toExpectation(codeLenses.get()));
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   protected void testCompletion(final Procedure1<? super TestCompletionConfiguration> configurator) {
     try {
       @Extension
@@ -974,28 +1108,42 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   }
   
   protected Map<String, List<Diagnostic>> getDiagnostics() {
-    final HashMap<String, List<Diagnostic>> result = CollectionLiterals.<String, List<Diagnostic>>newHashMap();
-    final Function1<Pair<String, Object>, Object> _function = (Pair<String, Object> it) -> {
-      return it.getValue();
-    };
-    Iterable<PublishDiagnosticsParams> _filter = Iterables.<PublishDiagnosticsParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function), PublishDiagnosticsParams.class);
-    for (final PublishDiagnosticsParams diagnostic : _filter) {
-      result.put(diagnostic.getUri(), diagnostic.getDiagnostics());
+    try {
+      final Function1<CancelIndicator, HashMap<String, List<Diagnostic>>> _function = (CancelIndicator it) -> {
+        final HashMap<String, List<Diagnostic>> result = CollectionLiterals.<String, List<Diagnostic>>newHashMap();
+        final Function1<Pair<String, Object>, Object> _function_1 = (Pair<String, Object> it_1) -> {
+          return it_1.getValue();
+        };
+        Iterable<PublishDiagnosticsParams> _filter = Iterables.<PublishDiagnosticsParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function_1), PublishDiagnosticsParams.class);
+        for (final PublishDiagnosticsParams diagnostic : _filter) {
+          result.put(diagnostic.getUri(), diagnostic.getDiagnostics());
+        }
+        return result;
+      };
+      return this.languageServer.getRequestManager().<HashMap<String, List<Diagnostic>>>runRead(_function).get();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return result;
   }
   
   protected Map<String, List<? extends ColoringInformation>> getColoringParams() {
-    final Function1<Pair<String, Object>, Object> _function = (Pair<String, Object> it) -> {
-      return it.getValue();
-    };
-    final Function1<ColoringParams, String> _function_1 = (ColoringParams it) -> {
-      return it.getUri();
-    };
-    final Function1<ColoringParams, List<? extends ColoringInformation>> _function_2 = (ColoringParams it) -> {
-      return it.getInfos();
-    };
-    return IterableExtensions.<ColoringParams, String, List<? extends ColoringInformation>>toMap(Iterables.<ColoringParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function), ColoringParams.class), _function_1, _function_2);
+    try {
+      final Function1<CancelIndicator, Map<String, List<? extends ColoringInformation>>> _function = (CancelIndicator it) -> {
+        final Function1<Pair<String, Object>, Object> _function_1 = (Pair<String, Object> it_1) -> {
+          return it_1.getValue();
+        };
+        final Function1<ColoringParams, String> _function_2 = (ColoringParams it_1) -> {
+          return it_1.getUri();
+        };
+        final Function1<ColoringParams, List<? extends ColoringInformation>> _function_3 = (ColoringParams it_1) -> {
+          return it_1.getInfos();
+        };
+        return IterableExtensions.<ColoringParams, String, List<? extends ColoringInformation>>toMap(Iterables.<ColoringParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function_1), ColoringParams.class), _function_2, _function_3);
+      };
+      return this.languageServer.getRequestManager().<Map<String, List<? extends ColoringInformation>>>runRead(_function).get();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected String toExpectation(final Object it) {
@@ -1015,6 +1163,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((CodeLens)it);
     } else if (it instanceof ColoringInformation) {
       return _toExpectation((ColoringInformation)it);
+    } else if (it instanceof Command) {
+      return _toExpectation((Command)it);
     } else if (it instanceof CompletionItem) {
       return _toExpectation((CompletionItem)it);
     } else if (it instanceof DocumentHighlight) {
@@ -1033,6 +1183,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((SymbolInformation)it);
     } else if (it instanceof TextEdit) {
       return _toExpectation((TextEdit)it);
+    } else if (it instanceof WorkspaceEdit) {
+      return _toExpectation((WorkspaceEdit)it);
     } else if (it instanceof Either) {
       return _toExpectation((Either<?, ?>)it);
     } else {

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EDataType;
@@ -47,7 +48,7 @@ public class NodeModelBasedRegionAccessBuilder {
 			newHidden.setPrevious(newSemantic);
 			newSemantic.setLeadingHiddenRegion(lastHidden);
 			lastHidden.setNext(newSemantic);
-			eObjectTokens.getSemanticRegions().add(newSemantic);
+			eObjectTokens.addChild(newSemantic);
 			newSemantic.setEObjectTokens(eObjectTokens);
 			lastHidden = newHidden;
 		}
@@ -84,7 +85,7 @@ public class NodeModelBasedRegionAccessBuilder {
 		NodeModelBasedRegionAccess access = (NodeModelBasedRegionAccess) regionAccess;
 		ICompositeNode rootNode = resource.getParseResult().getRootNode();
 		process(rootNode, access);
-		return ImmutableMap.<EObject, AbstractEObjectRegion> copyOf(this.eObjToTokens);
+		return ImmutableMap.<EObject, AbstractEObjectRegion>copyOf(this.eObjToTokens);
 	}
 
 	protected XtextResource getXtextResource() {
@@ -96,7 +97,8 @@ public class NodeModelBasedRegionAccessBuilder {
 			return true;
 		} else if (node instanceof ICompositeNode) {
 			EObject element = node.getGrammarElement();
-			return GrammarUtil.isDatatypeRuleCall(element) || element instanceof CrossReference || GrammarUtil.isEnumRuleCall(element);
+			return GrammarUtil.isDatatypeRuleCall(element) || element instanceof CrossReference
+					|| GrammarUtil.isEnumRuleCall(element);
 		}
 		return false;
 	}
@@ -167,8 +169,8 @@ public class NodeModelBasedRegionAccessBuilder {
 						Assignment assignment2 = GrammarUtil.containingAssignment(grammarElement2);
 						if (assignment2 != null && feature.equals(assignment2.getFeature()))
 							return grammarElement2;
-						//						if (child.hasDirectSemanticElement() && child.getSemanticElement() != obj)
-						//							break;
+						// if (child.hasDirectSemanticElement() && child.getSemanticElement() != obj)
+						// break;
 						child = ((ICompositeNode) child).getFirstChild();
 					}
 				}
@@ -184,8 +186,12 @@ public class NodeModelBasedRegionAccessBuilder {
 		NodeEObjectRegion tokens = stack.peek();
 		boolean creator = isEObjectRoot(node);
 		if (creator || tokens == null) {
-			tokens = new NodeEObjectRegion(access, node);
+			tokens = createTokens(access, node);
 			tokens.setLeadingHiddenRegion(lastHidden);
+			NodeEObjectRegion parent = stack.peek();
+			if (parent != null) {
+				parent.addChild(tokens);
+			}
 			stack.push(tokens);
 		}
 		if (tokens.getSemanticElement() == null) {
@@ -234,5 +240,25 @@ public class NodeModelBasedRegionAccessBuilder {
 	public NodeModelBasedRegionAccessBuilder withResource(XtextResource resource) {
 		this.resource = resource;
 		return this;
+	}
+
+	protected NodeHiddenRegion getFirstHidden() {
+		return firstHidden;
+	}
+
+	protected void setFirstHidden(NodeHiddenRegion firstHidden) {
+		this.firstHidden = firstHidden;
+	}
+
+	protected NodeHiddenRegion getLastHidden() {
+		return lastHidden;
+	}
+
+	protected void setLastHidden(NodeHiddenRegion lastHidden) {
+		this.lastHidden = lastHidden;
+	}
+
+	protected List<NodeEObjectRegion> getStack() {
+		return stack;
 	}
 }

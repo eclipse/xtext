@@ -11,6 +11,7 @@ generate indentationAwareTestLanguage "http://www.eclipse.org/2015/tmf/xtext/ind
  
 Tree: {Tree}
 	nodes+=TreeNode*
+	moreNodes+=OtherTreeNode*
 ;
 
 TreeNode:
@@ -18,6 +19,17 @@ TreeNode:
 	(INDENT
 		children+=TreeNode*
 	DEDENT)?
+;
+
+OtherTreeNode:
+	name=STRING
+	childList = ChildList?
+;
+
+ChildList: {ChildList}
+	INDENT
+		children+=OtherTreeNode+
+	DEDENT
 ;
 
 @Override 

@@ -181,6 +181,21 @@ ruleRoot returns [EObject current=null]
 				)
 			)
 		)
+		    |
+		(
+			otherlv_12='8'
+			{
+				newLeafNode(otherlv_12, grammarAccess.getRootAccess().getDigitEightKeyword_7_0());
+			}
+			{
+				newCompositeNode(grammarAccess.getRootAccess().getValueListParserRuleCall_7_1());
+			}
+			this_ValueList_13=ruleValueList
+			{
+				$current = $this_ValueList_13.current;
+				afterParserOrEnumRuleCall();
+			}
+		)
 	)
 ;
 
@@ -900,6 +915,50 @@ ruleFragment[EObject in_current]  returns [EObject current=in_current]
 				afterParserOrEnumRuleCall();
 			}
 		)
+	)
+;
+
+// Entry rule entryRuleValueList
+entryRuleValueList returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getValueListRule()); }
+	iv_ruleValueList=ruleValueList
+	{ $current=$iv_ruleValueList.current; }
+	EOF;
+
+// Rule ValueList
+ruleValueList returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getValueListAccess().getValueListAction_0(),
+					$current);
+			}
+		)
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getValueListAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getValueListRule());
+					}
+					addWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)*
 	)
 ;
 

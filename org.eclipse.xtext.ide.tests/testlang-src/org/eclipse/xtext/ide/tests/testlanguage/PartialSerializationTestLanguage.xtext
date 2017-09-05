@@ -1,0 +1,73 @@
+/*
+ * Copyright (c) 2016 TypeFox GmbH (http://www.typefox.io) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
+grammar org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage
+with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+generate partialSerializationTestLanguage
+"http://www.eclipse.org/xtext/ide/tests/testlanguage/PartialSerializationTestLanguage"
+
+Model:
+	"#1" Node | 
+	"#2" MandatoryValue | 
+	"#3" OptionalValue |
+	"#4" MandatoryChild |
+	"#5" OptionalChild |
+	"#10" ManyOptionalValues |
+	"#11" ManyMandatoryValues |
+	"#12" MandatoryChildList |
+	"#13" OptionalChildList |
+//	"#14" Imports |
+	"#20" clazz+=EClassDecl+ |
+	"#21" EClassRef
+;
+
+MandatoryValue:
+	name=ID;
+
+OptionalValue:
+	{OptionalValue} "kw1"? name=ID? "kw2"?;
+
+ManyOptionalValues:
+	{ManyValues} name+=ID*;
+
+ManyMandatoryValues:
+	name+=ID+;
+
+MandatoryChild:
+	child=MandatoryValue;
+
+OptionalChild:
+	{OptionalChild} child=MandatoryValue?;
+
+MandatoryChildList:
+	children+=MandatoryValue+;
+
+OptionalChildList:
+	{OptionalChildList} children+=MandatoryValue*;
+	
+Import:
+	"import" importedNamespace=QualifiedName;
+	
+//Imports:
+//	{ManyReferences} imports+=Import* "refs" refs+=[ecore::EObject|QualifiedName]*;
+
+Node:
+	{Node} imports+=Import*
+	name=ID? ("refs" refs+=[Node|QualifiedName]*)?
+	("{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}" | ";");
+
+QualifiedName:
+	ID ("." ID)*;
+	
+EClassDecl returns ecore::EClass:
+	name=ID;
+	
+EClassRef:
+	ref=[ecore::EClass|QualifiedName];

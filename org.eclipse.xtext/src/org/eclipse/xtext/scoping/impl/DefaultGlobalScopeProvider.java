@@ -69,7 +69,7 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		List<IContainer> result = null;
 		result = cache.get(cacheKey);
 		if (result == null) {
-			result = containerManager.getVisibleContainers(description,	resourceDescriptions);
+			result = containerManager.getVisibleContainers(description, resourceDescriptions);
 			// SZ: I'ld like this dependency to be moved to the implementation of the
 			// container manager, but it is not aware of a CacheAdapter
 			if (resourceDescriptions instanceof IResourceDescription.Event.Source) {

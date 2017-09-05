@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.generator.xbase;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Names;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -114,6 +115,33 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   protected void contributeRuntimeGuiceBindings() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory().addTypeToType(TypeReference.typeRef(IQualifiedNameProvider.class), 
       TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider"));
+    boolean _usesXImportSection = this._xbaseUsageDetector.usesXImportSection(this.getGrammar());
+    boolean _not = (!_usesXImportSection);
+    if (_not) {
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("binder.bind(");
+          _builder.append(Boolean.class);
+          _builder.append(".TYPE)");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(".annotatedWith(");
+          _builder.append(Names.class, "\t");
+          _builder.append(".named(");
+          TypeReference _typeReference = new TypeReference("org.eclipse.xtext.xbase.imports", "RewritableImportSection.Factory");
+          _builder.append(_typeReference, "\t");
+          _builder.append(".REWRITABLEIMPORTSECTION_ENABLEMENT))");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(".toInstance(");
+          _builder.append(Boolean.class, "\t");
+          _builder.append(".FALSE);");
+          _builder.newLineIfNotEmpty();
+        }
+      };
+      bindingFactory.addConfiguredBinding("RewritableImportSectionEnablement", _client);
+    }
     if (this.useInferredJvmModel) {
       bindingFactory.addTypeToType(TypeReference.typeRef(ILocationInFileProvider.class), 
         TypeReference.typeRef("org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider")).addTypeToType(TypeReference.typeRef(IGlobalScopeProvider.class), 

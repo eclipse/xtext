@@ -3,5 +3,6 @@ description = 'Platform-independent language support.'
 
 dependencies {
 	compile project(':org.eclipse.xtext')
+	compile "org.eclipse.emf:org.eclipse.emf.ecore.change:$versions.emfChange"
 	compile "org.eclipse.lsp4j:org.eclipse.lsp4j:$versions.lsp4j"
 }

@@ -47,14 +47,17 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cActionKeyword_6_1_1 = (Keyword)cGroup_6_1.eContents().get(1);
 		private final Assignment cMixedAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
 		private final RuleCall cMixedMixedParserRuleCall_6_2_0 = (RuleCall)cMixedAssignment_6_2.eContents().get(0);
+		private final Group cGroup_7 = (Group)cAlternatives.eContents().get(7);
+		private final Keyword cDigitEightKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final RuleCall cValueListParserRuleCall_7_1 = (RuleCall)cGroup_7.eContents().get(1);
 		
 		//Root:
 		//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
-		//	mixed=Mixed;
+		//	mixed=Mixed | "8" ValueList;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
-		//mixed=Mixed
+		//mixed=Mixed | "8" ValueList
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Simple
@@ -107,6 +110,15 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//Mixed
 		public RuleCall getMixedMixedParserRuleCall_6_2_0() { return cMixedMixedParserRuleCall_6_2_0; }
+		
+		//"8" ValueList
+		public Group getGroup_7() { return cGroup_7; }
+		
+		//"8"
+		public Keyword getDigitEightKeyword_7_0() { return cDigitEightKeyword_7_0; }
+		
+		//ValueList
+		public RuleCall getValueListParserRuleCall_7_1() { return cValueListParserRuleCall_7_1; }
 	}
 	public class SimpleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Simple");
@@ -556,6 +568,29 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Fragment
 		public RuleCall getFragmentParserRuleCall_2_1() { return cFragmentParserRuleCall_2_1; }
 	}
+	public class ValueListElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.ValueList");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cValueListAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//ValueList:
+		//	{ValueList} name+=ID*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{ValueList} name+=ID*
+		public Group getGroup() { return cGroup; }
+		
+		//{ValueList}
+		public Action getValueListAction_0() { return cValueListAction_0; }
+		
+		//name+=ID*
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+	}
 	
 	public class EnumElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Enum");
@@ -599,6 +634,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	private final DatatypeElements pDatatype;
 	private final FragmentElements pFragment;
 	private final EnumElements eEnum;
+	private final ValueListElements pValueList;
 	
 	private final Grammar grammar;
 	
@@ -623,6 +659,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		this.pDatatype = new DatatypeElements();
 		this.pFragment = new FragmentElements();
 		this.eEnum = new EnumElements();
+		this.pValueList = new ValueListElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -654,7 +691,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	
 	//Root:
 	//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
-	//	mixed=Mixed;
+	//	mixed=Mixed | "8" ValueList;
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
@@ -793,6 +830,16 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	
 	public EnumRule getEnumRule() {
 		return getEnumAccess().getRule();
+	}
+	
+	//ValueList:
+	//	{ValueList} name+=ID*;
+	public ValueListElements getValueListAccess() {
+		return pValueList;
+	}
+	
+	public ParserRule getValueListRule() {
+		return getValueListAccess().getRule();
 	}
 	
 	//terminal ID:

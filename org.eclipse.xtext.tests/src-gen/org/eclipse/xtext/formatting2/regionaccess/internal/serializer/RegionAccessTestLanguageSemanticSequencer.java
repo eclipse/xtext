@@ -21,6 +21,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.ValueList;
 import org.eclipse.xtext.formatting2.regionaccess.internal.services.RegionAccessTestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
@@ -73,6 +74,9 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 				return; 
 			case RegionaccesstestlanguagePackage.SIMPLE:
 				sequence_Simple(context, (Simple) semanticObject); 
+				return; 
+			case RegionaccesstestlanguagePackage.VALUE_LIST:
+				sequence_ValueList(context, (ValueList) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -279,6 +283,19 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSimpleAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Root returns ValueList
+	 *     ValueList returns ValueList
+	 *
+	 * Constraint:
+	 *     name+=ID*
+	 */
+	protected void sequence_ValueList(ISerializationContext context, ValueList semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

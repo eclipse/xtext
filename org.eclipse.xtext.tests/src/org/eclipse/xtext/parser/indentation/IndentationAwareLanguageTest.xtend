@@ -10,6 +10,7 @@ package org.eclipse.xtext.parser.indentation
 import com.google.inject.Inject
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker
+import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.OtherTreeNode
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.TreeNode
 import org.eclipse.xtext.parser.indentation.tests.IndentationAwareTestLanguageInjectorProvider
@@ -64,6 +65,71 @@ class IndentationAwareLanguageTest {
 		assertEquals(2, tree.nodes.size)
 		assertEquals('first', tree.nodes.head.name)
 		assertEquals('second', tree.nodes.last.name)
+	}
+	
+	@Test
+	def void testIgnoreEmptyLines_1() {
+		val tree = '''
+			first
+				
+			second
+		'''.parse
+		assertNotNull(tree)
+		assertEquals(2, tree.nodes.size)
+		assertEquals('first', tree.nodes.head.name)
+		assertEquals(0, tree.nodes.head.children.size)
+		assertEquals('second', tree.nodes.last.name)
+	}
+	
+	@Test
+	def void testIgnoreEmptyLines_2() {
+		val tree = '''
+			"first"
+				
+			"second"
+		'''.parse
+		assertNotNull(tree)
+		assertEquals(2, tree.moreNodes.size)
+		assertEquals('first', tree.moreNodes.head.name)
+		assertNull(tree.moreNodes.head.childList)
+		assertEquals('second', tree.moreNodes.last.name)
+	}
+	
+	@Test
+	def void testIgnoreEmptyLines_3() {
+		val tree = 'first\n\t'.parse
+		assertNotNull(tree)
+		assertEquals(1, tree.nodes.size)
+		assertEquals('first', tree.nodes.head.name)
+		assertEquals(0, tree.nodes.head.children.size)
+	}
+	
+	@Test
+	def void testIgnoreEmptyLines_4() {
+		val tree = '"first"\n\t'.parse
+		assertNotNull(tree)
+		assertEquals(1, tree.moreNodes.size)
+		assertEquals('first', tree.moreNodes.head.name)
+		assertNull(tree.moreNodes.head.childList)
+	}
+	
+	@Test
+	def void testIgnoreEmptyLines_5() {
+		val tree = 'first\n\t\tabc\n\t'.parse
+		assertNotNull(tree)
+		assertEquals(1, tree.nodes.size)
+		assertEquals('first', tree.nodes.head.name)
+		assertEquals(1, tree.nodes.head.children.size)
+	}
+	
+	@Test
+	def void testIgnoreEmptyLines_6() {
+		val tree = '"first"\n\t\t"abc"\n\t'.parse
+		assertNotNull(tree)
+		assertEquals(1, tree.moreNodes.size)
+		assertEquals('first', tree.moreNodes.head.name)
+		assertNotNull(tree.moreNodes.head.childList)
+		assertEquals(1, tree.moreNodes.head.childList.children.size)
 	}
 	
 	@Test
@@ -214,6 +280,52 @@ class IndentationAwareLanguageTest {
 		'''.toString.assertEquals(tree.asText)
 	}
 	
+	@Test
+	def void testTree_06() {
+		val tree = '''
+			"a"
+			"b"
+		'''.parseAndValidate
+		'''
+			a
+			b
+		'''.toString.assertEquals(tree.asText)
+	}
+	
+	@Test
+	def void testTree_07() {
+		val tree = '''
+			"a"
+				
+			"b"
+					
+		'''.parseAndValidate
+		'''
+			a
+			b
+		'''.toString.assertEquals(tree.asText)
+	}
+	
+	@Test
+	def void testTree_08() {
+		val tree = '''
+			"a"
+				"1"
+				"2"
+			"b"
+					"3"
+		'''.parseAndValidate
+		'''
+			a
+				>
+					1
+					2
+			b
+				>
+					3
+		'''.toString.assertEquals(tree.asText)
+	}
+	
 	private def parseAndValidate(CharSequence s) {
 		val result = s.parse
 		result.assertNoIssues
@@ -227,6 +339,9 @@ class IndentationAwareLanguageTest {
 		«FOR node: tree.nodes»
 			«node.asText»
 		«ENDFOR»
+		«FOR node: tree.moreNodes»
+			«node.asText»
+		«ENDFOR»
 	'''
 	
 	private def StringConcatenation asText(TreeNode treeNode) '''
@@ -234,6 +349,16 @@ class IndentationAwareLanguageTest {
 			«FOR node: treeNode.children»
 				«node.asText»
 			«ENDFOR»
+	'''
+	
+	private def StringConcatenation asText(OtherTreeNode treeNode) '''
+		«treeNode.name»
+			«IF treeNode.childList !== null»
+				>
+					«FOR node: treeNode.childList.children»
+						«node.asText»
+					«ENDFOR»
+			«ENDIF»
 	'''
 	
 }

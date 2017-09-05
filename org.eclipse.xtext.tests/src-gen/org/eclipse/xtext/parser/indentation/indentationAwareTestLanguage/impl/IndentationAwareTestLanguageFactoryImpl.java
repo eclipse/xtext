@@ -67,6 +67,8 @@ public class IndentationAwareTestLanguageFactoryImpl extends EFactoryImpl implem
     {
       case IndentationAwareTestLanguagePackage.TREE: return createTree();
       case IndentationAwareTestLanguagePackage.TREE_NODE: return createTreeNode();
+      case IndentationAwareTestLanguagePackage.OTHER_TREE_NODE: return createOtherTreeNode();
+      case IndentationAwareTestLanguagePackage.CHILD_LIST: return createChildList();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -92,6 +94,28 @@ public class IndentationAwareTestLanguageFactoryImpl extends EFactoryImpl implem
   {
     TreeNodeImpl treeNode = new TreeNodeImpl();
     return treeNode;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OtherTreeNode createOtherTreeNode()
+  {
+    OtherTreeNodeImpl otherTreeNode = new OtherTreeNodeImpl();
+    return otherTreeNode;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ChildList createChildList()
+  {
+    ChildListImpl childList = new ChildListImpl();
+    return childList;
   }
 
   /**

@@ -58,7 +58,7 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 	}
 	
 	/**
-	 * terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+	 * terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	 */
 	protected String getIDToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
@@ -91,8 +91,8 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     'recursion'*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) '6' ('(' ('unassigned' (ID | Datatype))?)+ 'fragment' (ambiguity) 'child' mixed=Mixed
-	 *     (rule start) '6' ('(' ('unassigned' (ID | Datatype))?)+ 'fragment' (ambiguity) fragName=ID
+	 *     (rule start) '6' ('(' ('unassigned' (Datatype | ID))?)+ 'fragment' (ambiguity) 'child' mixed=Mixed
+	 *     (rule start) '6' ('(' ('unassigned' (Datatype | ID))?)+ 'fragment' (ambiguity) fragName=ID
 	 *     (rule start) ('(' ('unassigned' (ID | Datatype))?)+ 'fragment' (ambiguity) 'child' mixed=Mixed
 	 *     (rule start) ('(' ('unassigned' (ID | Datatype))?)+ 'fragment' (ambiguity) fragName=ID
 	 */
@@ -102,7 +102,7 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ('(' ('unassigned' (ID | Datatype))?)*
+	 *     ('(' ('unassigned' (Datatype | ID))?)*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '6' (ambiguity) {AssignedAction.child=}
@@ -114,7 +114,7 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ('(' ('unassigned' (ID | Datatype))?)+
+	 *     ('(' ('unassigned' (Datatype | ID))?)+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '6' (ambiguity) ')' (rule start)

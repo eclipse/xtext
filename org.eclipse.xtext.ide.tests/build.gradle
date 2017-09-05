@@ -7,15 +7,22 @@ dependencies {
 	compile project(':org.eclipse.xtext.testlanguages.ide')
 	compile "junit:junit:$versions.junit"
 	compile "org.eclipse.lsp4j:org.eclipse.lsp4j:$versions.lsp4j"
+	compile "org.eclipse.emf:org.eclipse.emf.ecore.change:$versions.emfChange"
 }
 
 sourceSets.test.java {
 	srcDir 'testlang-src'
 	srcDir 'testlang-src-gen'
+	srcDir 'suites'
 }
+
 sourceSets.test.resources {
 	srcDir 'testlang-src'
 	srcDir 'testlang-src-gen'
+}
+
+test {   
+   exclude '**/*Suite.class'
 }
 
 task generateTestLanguages(type: XtextGeneratorTask) {

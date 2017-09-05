@@ -9,11 +9,17 @@ Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr,
  org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal,
  org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.lexer,
- org.eclipse.xtext.testlanguages.noJdt.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.testlanguages.fileAware.ide,
+ org.eclipse.xtext.testlanguages.fileAware.ide.contentassist.antlr,
+ org.eclipse.xtext.testlanguages.fileAware.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.testlanguages.fileAware.ide.refactoring,
+ org.eclipse.xtext.testlanguages.fileAware.ide.tests,
  org.eclipse.xtext.testlanguages.noJdt.ide.contentassist.antlr,
- org.eclipse.xtext.testlanguages.xtextgrammar.ide.contentassist.antlr.internal,
- org.eclipse.xtext.testlanguages.xtextgrammar.ide.contentassist.antlr
+ org.eclipse.xtext.testlanguages.noJdt.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.testlanguages.xtextgrammar.ide.contentassist.antlr,
+ org.eclipse.xtext.testlanguages.xtextgrammar.ide.contentassist.antlr.internal
 Require-Bundle: org.eclipse.xtext.ide;visibility:=reexport,
  org.eclipse.xtext.testlanguages,
- org.antlr.runtime
+ org.antlr.runtime,
+ org.eclipse.xtend.lib;bundle-version="2.13.0"
 

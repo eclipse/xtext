@@ -7,7 +7,16 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.validation;
 
+import com.google.common.base.Objects;
+import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
 import org.eclipse.xtext.ide.tests.testlanguage.validation.AbstractTestLanguageValidator;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * This class contains custom validation rules.
@@ -16,4 +25,34 @@ import org.eclipse.xtext.ide.tests.testlanguage.validation.AbstractTestLanguageV
  */
 @SuppressWarnings("all")
 public class TestLanguageValidator extends AbstractTestLanguageValidator {
+  public final static String INVALID_NAME = "invalidName";
+  
+  public final static String UNSORTED_MEMBERS = "unsorted_members";
+  
+  @Check
+  public void checkGreetingStartsWithCapital(final TypeDeclaration type) {
+    boolean _isUpperCase = Character.isUpperCase(type.getName().charAt(0));
+    boolean _not = (!_isUpperCase);
+    if (_not) {
+      this.warning("Name should start with a capital", 
+        TestLanguagePackage.Literals.TYPE_DECLARATION__NAME, 
+        TestLanguageValidator.INVALID_NAME);
+    }
+  }
+  
+  @Check
+  public void checkMembersAreSorted(final TypeDeclaration type) {
+    final Function1<Member, String> _function = (Member it) -> {
+      return it.getName();
+    };
+    List<Member> _sortBy = IterableExtensions.<Member, String>sortBy(type.getMembers(), _function);
+    EList<Member> _members = type.getMembers();
+    boolean _notEquals = (!Objects.equal(_sortBy, _members));
+    if (_notEquals) {
+      this.warning(
+        "Members should be in alphabetic order.", 
+        TestLanguagePackage.Literals.TYPE_DECLARATION__NAME, 
+        TestLanguageValidator.UNSORTED_MEMBERS);
+    }
+  }
 }

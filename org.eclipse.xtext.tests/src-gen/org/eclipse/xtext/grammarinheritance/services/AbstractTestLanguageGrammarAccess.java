@@ -97,7 +97,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//OverridableParserRule2 mm::AType:
+		///* SuppressWarnings[SpacesInKeyword] */ OverridableParserRule2 mm::AType:
 		//	'other element' name=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -246,7 +246,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getOverridableParserRuleAccess().getRule();
 	}
 	
-	//OverridableParserRule2 mm::AType:
+	///* SuppressWarnings[SpacesInKeyword] */ OverridableParserRule2 mm::AType:
 	//	'other element' name=STRING;
 	public OverridableParserRule2Elements getOverridableParserRule2Access() {
 		return pOverridableParserRule2;

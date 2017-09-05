@@ -31,7 +31,7 @@ Workflow {
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext/org/eclipse/xtext/Xtext.genmodel"
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel"
 	}
-	bean = tests.ecore.EcoreSupportStandaloneSetup {}
+	bean = testlanguages.ecore.EcoreSupport {}
 	
 	component = DirectoryCleaner {
 		directory="${runtimeProject}/src-gen/org/eclipse/xtext/metamodelreferencing/tests"

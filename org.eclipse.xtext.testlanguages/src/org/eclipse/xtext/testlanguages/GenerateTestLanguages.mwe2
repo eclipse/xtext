@@ -45,5 +45,6 @@ Workflow {
 		language = @backtracking.ExBeeLangTestLanguage {}
 		language = @noJdt.NoJdtTestLanguage {}
 		language = @xtextgrammar.XtextGrammarTestLanguage {}
+		language = @fileAware.FileAwareTestLanguage {}
 	}
 }

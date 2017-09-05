@@ -12,7 +12,7 @@ with org.eclipse.xtext.common.Terminals
 generate regionaccesstestlanguage "http://formatter2/regionaccesstestlanguage"
 
 Root:
-	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")? mixed=Mixed;
+	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")? mixed=Mixed | "8" ValueList;
 
 Simple:
 	"1" name=ID;
@@ -58,3 +58,7 @@ fragment Fragment returns Mixed:
 
 enum Enum:
 	lit1 | lit2;
+	
+ValueList:
+	{ValueList} name+=ID*
+;

@@ -392,6 +392,43 @@ public interface RegionaccesstestlanguagePackage extends EPackage
   int MIXED_FEATURE_COUNT = ROOT_FEATURE_COUNT + 6;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ValueListImpl <em>Value List</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ValueListImpl
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getValueList()
+   * @generated
+   */
+  int VALUE_LIST = 9;
+
+  /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE_LIST__MIXED = ROOT__MIXED;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE_LIST__NAME = ROOT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Value List</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE_LIST_FEATURE_COUNT = ROOT_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RootActionImpl <em>Root Action</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -399,7 +436,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getRootAction()
    * @generated
    */
-  int ROOT_ACTION = 9;
+  int ROOT_ACTION = 10;
 
   /**
    * The feature id for the '<em><b>Mixed</b></em>' containment reference.
@@ -427,7 +464,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAdd()
    * @generated
    */
-  int ADD = 10;
+  int ADD = 11;
 
   /**
    * The feature id for the '<em><b>Mixed</b></em>' containment reference.
@@ -473,7 +510,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getNamed()
    * @generated
    */
-  int NAMED = 11;
+  int NAMED = 12;
 
   /**
    * The feature id for the '<em><b>Mixed</b></em>' containment reference.
@@ -510,7 +547,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAction()
    * @generated
    */
-  int ACTION = 12;
+  int ACTION = 13;
 
   /**
    * The feature id for the '<em><b>Mixed</b></em>' containment reference.
@@ -592,7 +629,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAssignedAction()
    * @generated
    */
-  int ASSIGNED_ACTION = 13;
+  int ASSIGNED_ACTION = 14;
 
   /**
    * The feature id for the '<em><b>Mixed</b></em>' containment reference.
@@ -692,7 +729,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getEnum()
    * @generated
    */
-  int ENUM = 14;
+  int ENUM = 15;
 
 
   /**
@@ -905,6 +942,27 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @generated
    */
   EAttribute getMixed_FragName();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.ValueList <em>Value List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Value List</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.ValueList
+   * @generated
+   */
+  EClass getValueList();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.ValueList#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Name</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.ValueList#getName()
+   * @see #getValueList()
+   * @generated
+   */
+  EAttribute getValueList_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction <em>Root Action</em>}'.
@@ -1221,6 +1279,24 @@ public interface RegionaccesstestlanguagePackage extends EPackage
      * @generated
      */
     EAttribute MIXED__FRAG_NAME = eINSTANCE.getMixed_FragName();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ValueListImpl <em>Value List</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.ValueListImpl
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getValueList()
+     * @generated
+     */
+    EClass VALUE_LIST = eINSTANCE.getValueList();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VALUE_LIST__NAME = eINSTANCE.getValueList_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RootActionImpl <em>Root Action</em>}' class.

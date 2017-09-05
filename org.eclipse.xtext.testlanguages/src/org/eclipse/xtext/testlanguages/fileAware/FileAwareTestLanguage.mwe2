@@ -1,0 +1,21 @@
+module org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage
+
+import org.eclipse.xtext.testlanguages.fragments.*
+
+org.eclipse.xtext.xtext.generator.StandardLanguage {
+	
+	name = "org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage"
+
+	serializer = {
+		generateStub = false
+	}
+
+	formatter = {
+		generateXtendStub = true
+		generateStub = true
+	}
+	
+	junitSupport = {
+		generateStub = false
+	}
+}

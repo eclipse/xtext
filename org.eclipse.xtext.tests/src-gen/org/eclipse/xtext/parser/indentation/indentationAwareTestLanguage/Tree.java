@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree#getNodes <em>Nodes</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree#getMoreNodes <em>More Nodes</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.IndentationAwareTestLanguagePackage#getTree()
@@ -40,5 +41,21 @@ public interface Tree extends EObject
    * @generated
    */
   EList<TreeNode> getNodes();
+
+  /**
+   * Returns the value of the '<em><b>More Nodes</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.OtherTreeNode}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>More Nodes</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>More Nodes</em>' containment reference list.
+   * @see org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.IndentationAwareTestLanguagePackage#getTree_MoreNodes()
+   * @model containment="true"
+   * @generated
+   */
+  EList<OtherTreeNode> getMoreNodes();
 
 } // Tree
