@@ -219,7 +219,7 @@ public class TypeUsageCollector {
 					}
 				} 
 			} else if ((next instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) next).isOperation())
-					|| (next instanceof XAssignment && !contains(currentThisType.getAllFeatures(), ((XAssignment) next).getFeature()))) {
+					|| (next instanceof XAssignment && currentThisType != null && !contains(currentThisType.getAllFeatures(), ((XAssignment) next).getFeature()))) {
 				collectStaticImportsFrom((XAbstractFeatureCall) next, indexedAmbiguousCandidates.get(next));
 			} else {
 				Set<EObject> elements = associations.getJvmElements(next);
