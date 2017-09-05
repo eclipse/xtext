@@ -26,6 +26,8 @@
  *     The document; if not specified, the global document is used.
  * enableContentAssistService = true {Boolean}
  *     Whether content assist should be enabled.
+ * enableCors = true {Boolean}
+ *     Whether CORS should be enabled for service request.
  * enableFormattingAction = false {Boolean}
  *     Whether the formatting action should be bound to the standard keystroke ctrl+shift+s / cmd+shift+f.
  * enableFormattingService = true {Boolean}

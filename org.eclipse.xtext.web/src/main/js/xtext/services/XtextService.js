@@ -164,7 +164,11 @@ define(['jquery'], function(jQuery) {
 	XtextService.prototype.sendRequest = function(editorContext, settings, needsSession) {
 		var self = this;
 		self.setState('started');
-		
+		var corsEnabled = editorContext._editor.options['enableCors'];
+		if(corsEnabled !== undefined && corsEnabled) {
+			settings.crossDomain = true;
+			settings.xhrFields = {withCredentials: true};
+		} 
 		var onSuccess = settings.success;
 		settings.success = function(result) {
 			var accepted = true;
