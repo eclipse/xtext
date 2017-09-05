@@ -34,7 +34,6 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.tasks.Priority;
 import org.eclipse.xtext.tasks.TaskTag;
-import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
 import org.eclipse.xtext.ui.editor.tasks.dialogfields.DialogField;
 import org.eclipse.xtext.ui.editor.tasks.dialogfields.IDialogFieldListener;
 import org.eclipse.xtext.ui.editor.tasks.dialogfields.IListAdapter;
