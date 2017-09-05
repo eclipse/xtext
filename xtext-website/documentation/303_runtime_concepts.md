@@ -14,27 +14,29 @@ All code examples in this chapter are given in the Xtend language, as it is much
 
 Once you have a language you probably want to do something with it. There are two options, you can either write an interpreter that inspects the AST and does something based on that or you translate your language to another programming language or configuration files. In this section we're going to show how to implement a code generator for an Xtext-based language.
 
-### IGenerator
+### IGenerator2
 
-If you go with the default MWE workflow for your language and you haven't used Xbase, you are provided with a callback stub that implements [IGenerator]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java). It has one method that is called from the builder infrastructure whenever a DSL file has changed or should be translated otherwise. The two parameters passed in to this method are:
+If you go with the default MWE workflow for your language and you haven't used Xbase, you are provided with a callback stub that implements [IGenerator2]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator2.java) by extending the [AbstractGenerator]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/generator/AbstractGenerator.java) base class. It has one method that is called from the builder infrastructure whenever a DSL file has changed or should be translated otherwise. The three parameters passed in to this method are:
 
 *   The resource to be processed
-*   An instance of [IFileSystemAccess]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java)
+*   An instance of [IFileSystemAccess2]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess2.java)
+*   An instance of [IGeneratorContext]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGeneratorContext.java)
 
-The [IFileSystemAccess]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java) API abstracts over the different file systems the code generator may run over. When the code generator is triggered within the incremental build infrastructure in Eclipse the underlying file system is the one provided by Eclipse, and when the code generator is executed outside Eclipse, say in a headless build, it is `java.io.File`.
+The [IFileSystemAccess2]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess2.java) API abstracts over the different file systems the code generator may run over. When the code generator is triggered within the incremental build infrastructure in Eclipse the underlying file system is the one provided by Eclipse, and when the code generator is executed outside Eclipse, say in a headless build, it is `java.io.File`.
 
 A very simple implementation of a code generator for the [state machine example]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext) could be the following:
 
 ```xtend
-class StatemachineGenerator implements IGenerator {
-
-    override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+class StatemachineGenerator extends AbstractGenerator {
+    
+    override doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         fsa.generateFile("relative/path/AllTheStates.txt", '''
             «FOR state : resource.allContents.filter(State).toIterable»
                 State «state.name»
             «ENDFOR»
         ''')
     }
+    
 }
 ```
 
