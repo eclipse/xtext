@@ -646,6 +646,31 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			}
 		''', false)
 	}
+
+	@Test def testInnerClasses_18() {
+		'''
+			package p
+			class Test {
+				/** @see Bar$XYZ */
+				def baz(Bar.XYZ x) {}
+			
+				interface Bar {
+					class XYZ {}
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			package p
+			
+			class Test {
+				/** @see Bar.XYZ */
+				def baz(Bar.XYZ x) {}
+			
+				interface Bar {
+					class XYZ {}
+				}
+			}
+		''', false)
+	}
 	
 	/**https://bugs.eclipse.org/bugs/show_bug.cgi?id=448728 */
 	@Test def testBug448728() {
