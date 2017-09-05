@@ -9,10 +9,8 @@ package org.eclipse.xtext.xbase.tests.serializer;
 
 import javax.inject.Inject;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.testing.util.ParseHelper;

@@ -18,8 +18,10 @@ public class RuntimeInjectorProvider extends PureXbaseInjectorProvider {
 	@Override
 	protected Injector internalCreateInjector() {
 		return new PureXbaseStandaloneSetup() {
+			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(new org.eclipse.xtext.purexbase.PureXbaseRuntimeModule() {
+					@Override
 					public ClassLoader bindClassLoaderToInstance() {
 						return RuntimeInjectorProvider.class.getClassLoader();
 					}

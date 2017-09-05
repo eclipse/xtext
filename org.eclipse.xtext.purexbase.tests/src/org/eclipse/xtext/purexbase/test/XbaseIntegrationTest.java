@@ -29,10 +29,12 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	
 	@Inject private CompilationTestHelper helper;
 
+	@Override
 	protected Object invokeXbaseExpression(String expression) throws Exception {
 		final Object[] result = new Object[1];
 		final InvocationTargetException[] exception = new InvocationTargetException[1];
 		helper.compile(expression, new IAcceptor<CompilationTestHelper.Result>() {
+			@Override
 			public void accept(Result t) {
 				try {
 					final Class<?> compiledClass = t.getCompiledClass();
@@ -78,6 +80,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	/**
 	 * @since 2.5
 	 */
+	@Override
 	@Test public void testIfExpression_06() throws Exception {
 		assertEvaluatesTo(0, 
 				"if (Boolean.FALSE) return 1");
@@ -86,6 +89,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	/**
 	 * @since 2.5
 	 */
+	@Override
 	@Test public void testIfExpression_07() throws Exception {
 		assertEvaluatesTo(0l, 
 				"if (Boolean.FALSE) return 1L");
