@@ -46,3 +46,9 @@ configurations {
 		exclude module: 'cglib'
 	}
 }
+
+if (findProperty('ignoreTestFailures') == 'true') {
+	tasks.withType(Test) {
+		ignoreFailures = true
+	}
+}
