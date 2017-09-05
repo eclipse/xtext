@@ -3,7 +3,6 @@
  */
 package org.eclipse.xtext.testlanguages.fileAware;
 
-import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdater;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;

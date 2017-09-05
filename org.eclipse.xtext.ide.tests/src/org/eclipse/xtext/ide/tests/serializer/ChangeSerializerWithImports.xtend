@@ -9,18 +9,15 @@ package org.eclipse.xtext.ide.tests.serializer
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer
-import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryValue
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Node
-import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguageFactory
 import org.eclipse.xtext.ide.tests.testlanguage.tests.PartialSerializationTestLanguageInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.InMemoryURIHandler
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.Assert
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -28,8 +25,6 @@ import org.junit.Assert
 @RunWith(XtextRunner)
 @InjectWith(PartialSerializationTestLanguageInjectorProvider)
 class ChangeSerializerWithImports {
-
-	extension PartialSerializationTestLanguageFactory fac = PartialSerializationTestLanguageFactory.eINSTANCE
 
 	@Inject Provider<ChangeSerializer> serializerProvider
 	@Inject extension ChangeSerializerTestHelper

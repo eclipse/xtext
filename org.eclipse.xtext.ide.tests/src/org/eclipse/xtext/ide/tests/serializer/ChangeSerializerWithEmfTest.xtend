@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.EClassRef
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Model
-import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguageFactory
 import org.eclipse.xtext.ide.tests.testlanguage.tests.PartialSerializationTestLanguageInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
@@ -30,8 +29,6 @@ import org.junit.runner.RunWith
 @RunWith(XtextRunner)
 @InjectWith(PartialSerializationTestLanguageInjectorProviderWithEmf)
 class ChangeSerializerWithEmfTest {
-
-	extension PartialSerializationTestLanguageFactory fac = PartialSerializationTestLanguageFactory.eINSTANCE
 
 	@Inject Provider<ChangeSerializer> serializerProvider
 	@Inject extension ChangeSerializerTestHelper

@@ -8,19 +8,14 @@
 package org.eclipse.xtext.ide.tests.testlanguage.ide.serializer
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdaterContext
+import org.eclipse.xtext.ide.serializer.impl.ReferenceUpdater
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Import
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Node
-import org.eclipse.xtext.naming.QualifiedName
-import org.eclipse.xtext.naming.IQualifiedNameConverter
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguageFactory
-import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdater
-import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdaterContext
-import org.eclipse.xtext.ide.serializer.impl.EObjectDescriptionDeltaProvider.Deltas
-import org.eclipse.xtext.ide.serializer.impl.RelatedResourcesProvider.RelatedResource
-import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder
-import org.eclipse.xtext.ide.serializer.hooks.IUpdatableReference
-import org.eclipse.xtext.ide.serializer.impl.ReferenceUpdater
+import org.eclipse.xtext.naming.IQualifiedNameConverter
+import org.eclipse.xtext.naming.QualifiedName
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

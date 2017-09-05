@@ -16,7 +16,6 @@ import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer;
 import org.eclipse.xtext.ide.tests.serializer.ChangeSerializerTestHelper;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Node;
-import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguageFactory;
 import org.eclipse.xtext.ide.tests.testlanguage.tests.PartialSerializationTestLanguageInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -34,9 +33,6 @@ import org.junit.runner.RunWith;
 @InjectWith(PartialSerializationTestLanguageInjectorProvider.class)
 @SuppressWarnings("all")
 public class ChangeSerializerWithImports {
-  @Extension
-  private PartialSerializationTestLanguageFactory fac = PartialSerializationTestLanguageFactory.eINSTANCE;
-  
   @Inject
   private Provider<ChangeSerializer> serializerProvider;
   

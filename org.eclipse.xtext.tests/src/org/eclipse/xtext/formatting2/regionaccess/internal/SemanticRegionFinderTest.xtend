@@ -32,7 +32,6 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage.Literals.*
 import static org.junit.Assert.*
-import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguageFactory
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
