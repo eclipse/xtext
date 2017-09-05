@@ -17,6 +17,8 @@ import org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguageRun
 import org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageUiModule;
+import org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguageRuntimeModule;
+import org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguageRuntimeModule;
@@ -31,11 +33,13 @@ import org.osgi.framework.BundleContext;
  */
 public class TestlanguagesActivator extends AbstractUIPlugin {
 
+	public static final String PLUGIN_ID = "org.eclipse.xtext.testlanguages.ui";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_BEELANGTESTLANGUAGE = "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_SIMPLEBEELANGTESTLANGUAGE = "org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_EXBEELANGTESTLANGUAGE = "org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NOJDT_NOJDTTESTLANGUAGE = "org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_XTEXTGRAMMAR_XTEXTGRAMMARTESTLANGUAGE = "org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguage";
+	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_FILEAWARE_FILEAWARETESTLANGUAGE = "org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage";
 	
 	private static final Logger logger = Logger.getLogger(TestlanguagesActivator.class);
 	
@@ -100,6 +104,9 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_XTEXTGRAMMAR_XTEXTGRAMMARTESTLANGUAGE.equals(grammar)) {
 			return new XtextGrammarTestLanguageRuntimeModule();
 		}
+		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_FILEAWARE_FILEAWARETESTLANGUAGE.equals(grammar)) {
+			return new FileAwareTestLanguageRuntimeModule();
+		}
 		throw new IllegalArgumentException(grammar);
 	}
 	
@@ -119,11 +126,15 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_XTEXTGRAMMAR_XTEXTGRAMMARTESTLANGUAGE.equals(grammar)) {
 			return new XtextGrammarTestLanguageUiModule(this);
 		}
+		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_FILEAWARE_FILEAWARETESTLANGUAGE.equals(grammar)) {
+			return new FileAwareTestLanguageUiModule(this);
+		}
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
+	
 	
 }

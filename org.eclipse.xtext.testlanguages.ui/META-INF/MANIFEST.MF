@@ -21,7 +21,10 @@ Require-Bundle: org.eclipse.xtext.testlanguages;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.core.runtime,
  org.eclipse.ui.workbench;resolution:=optional,
- org.eclipse.xtext.testing;bundle-version="2.11.0"
+ org.eclipse.xtext.testing;bundle-version="2.11.0",
+ org.eclipse.xtext.junit4,
+ org.eclipse.xtext.xbase.testing,
+ org.eclipse.xtext.xbase.junit
 Import-Package: org.apache.log4j;version="1.2.15",
  org.hamcrest.core,
  org.junit;version="4.5.0",
@@ -42,5 +45,8 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking.ui,
  org.eclipse.xtext.testlanguages.xtextgrammar.ui,
  org.eclipse.xtext.testlanguages.xtextgrammar.ui.contentassist,
  org.eclipse.xtext.testlanguages.xtextgrammar.ui.quickfix,
- org.eclipse.xtext.testlanguages.xtextgrammar.ui.tests
+ org.eclipse.xtext.testlanguages.xtextgrammar.ui.tests;x-internal=true,
+ org.eclipse.xtext.testlanguages.fileAware.ui.quickfix,
+ org.eclipse.xtext.testlanguages.fileAware.ui.contentassist,
+ org.eclipse.xtext.testlanguages.fileAware.ui.tests;x-internal=true
 Bundle-Activator: org.eclipse.xtext.testlanguages.ui.internal.TestlanguagesActivator

@@ -55,6 +55,9 @@ public class ExportToFileAction extends Action {
 			fileDialog.setFilterExtensions(new String[] { "*.png" });
 			fileDialog.setText("Choose diagram file");
 			String fileName = fileDialog.open();
+			if (fileName == null) {
+				return;
+			}
 			Dimension preferredSize = contents.getPreferredSize();
 			Image image = new Image(Display.getDefault(), preferredSize.width + 2 * PADDING, preferredSize.height + 2
 					* PADDING);

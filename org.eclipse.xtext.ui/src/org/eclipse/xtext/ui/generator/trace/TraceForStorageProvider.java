@@ -180,12 +180,14 @@ public class TraceForStorageProvider extends AbstractTraceForURIProvider<IFile, 
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public IFile getTraceFile(IFile generatedFile) {
 		String originLastSegment = generatedFile.getFullPath().lastSegment();
 		IFile traceFile = generatedFile.getParent().getFile(new Path(getTraceFileNameProvider().getTraceFromJava(originLastSegment)));
 		return traceFile;
 	}
 
+	@Override
 	public boolean isTraceFile(IStorage storage) {
 		if (!(storage instanceof IFile)) {
 			return false;

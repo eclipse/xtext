@@ -84,6 +84,7 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
       this.syncUtil.waitForReconciler(this.editor);
       NullProgressMonitor _nullProgressMonitor_3 = new NullProgressMonitor();
       this.syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor_3);
+      Thread.sleep(20);
       Assert.assertTrue(this.events.isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -144,6 +145,16 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
       };
       final Event event = ObjectExtensions.<Event>operator_doubleArrow(_event, _function);
       this.myDisplay.post(event);
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      this.syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor);
+      Event _event_1 = new Event();
+      final Procedure1<Event> _function_1 = (Event it) -> {
+        it.type = SWT.KeyUp;
+        it.character = c;
+        it.keyCode = k;
+      };
+      final Event event2 = ObjectExtensions.<Event>operator_doubleArrow(_event_1, _function_1);
+      this.myDisplay.post(event2);
       int maxTries = 10;
       while ((maxTries-- > 0)) {
         {
@@ -154,8 +165,8 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
             return;
           }
           Thread.sleep(10);
-          NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-          this.syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor);
+          NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+          this.syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor_1);
         }
       }
       Assert.fail("Document didn\'t change on keystroke");

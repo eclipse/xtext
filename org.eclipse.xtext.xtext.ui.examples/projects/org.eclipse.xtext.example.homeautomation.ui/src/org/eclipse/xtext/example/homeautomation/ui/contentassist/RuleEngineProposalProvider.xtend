@@ -10,8 +10,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope
 
 /**
- * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
- * on how to customize the content assistant.
+ * Exemplary overrides of default Xbase proposals. Does the same as the super implementation.
  */
 class RuleEngineProposalProvider extends AbstractRuleEngineProposalProvider {
 

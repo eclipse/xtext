@@ -225,16 +225,16 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	@Override
 	protected void processReferringResource(Resource referringResource,
 			Iterable<IReferenceDescription> referenceDescriptions, ElementRenameArguments elementRenameArguments,
-			IRefactoringUpdateAcceptor updateAcceptor) {
+			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
 		ImportAwareUpdateAcceptor importAwareUpdateAcceptor = createUpdateAcceptor(referringResource, updateAcceptor);
 		
 		Iterable<IReferenceDescription> importTypeReferences = getImportTypeReferences(referenceDescriptions);
-		super.processReferringResource(referringResource, importTypeReferences, elementRenameArguments, importAwareUpdateAcceptor);
+		super.processReferringResource(referringResource, importTypeReferences, elementRenameArguments, importAwareUpdateAcceptor, monitor);
 		
 		importAwareUpdateAcceptor.getImportSection().update();
 		
 		Iterable<IReferenceDescription> notImportTypeReferences = getNotImportTypeReferences(referenceDescriptions);
-		super.processReferringResource(referringResource, notImportTypeReferences, elementRenameArguments, importAwareUpdateAcceptor);
+		super.processReferringResource(referringResource, notImportTypeReferences, elementRenameArguments, importAwareUpdateAcceptor, monitor);
 		
 		List<ReplaceRegion> importChanges = importAwareUpdateAcceptor.getImportSection().rewrite();
 		TextEdit importChangeEdit = replaceConverter.convertToTextEdit(importChanges);
@@ -338,7 +338,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	 * @return the currently imported type containing the newTargetType and the element's name relative to that import.
 	 */
 	protected Pair<JvmDeclaredType, QualifiedName> getImportedTypeAndRelativeName(JvmType newTargetType, RewritableImportSection section) {
-		if (!(newTargetType instanceof JvmDeclaredType)) {
+		if (!(newTargetType instanceof JvmDeclaredType) || !section.isEnabled()) {
 			return null;
 		}
 		JvmDeclaredType importedType = (JvmDeclaredType) newTargetType;

@@ -265,6 +265,7 @@
 	<extension
 		point="org.eclipse.ui.commands">
 		<command
+			categoryId="org.eclipse.ui.category.navigate"
 			description="Open the quick outline."
 			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
 			name="%QuickOutline">

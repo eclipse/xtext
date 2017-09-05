@@ -115,6 +115,7 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 			this.position= position;
 			this.viewer= textViewer;
 			// DIFF: not part of AbstractAnnotationHover(1)
+			Assert.isNotNull(proposals);
 			this.proposals = proposals;
 		}
 
@@ -590,8 +591,8 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 	// DIFF: added this Runnable to execute quickAssistProposals to retrieve proposal list (3)
 	
 	private final class CompletionProposalRunnable implements Runnable {
-		
-		public ICompletionProposal[] proposals = null;
+		private final ICompletionProposal[] NO_PROPOSALS = new ICompletionProposal[0];
+		ICompletionProposal[] proposals = NO_PROPOSALS;
 		IQuickAssistInvocationContext invocationContext;
 		
 		public CompletionProposalRunnable(IQuickAssistInvocationContext invocationContext) {
@@ -600,7 +601,8 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 
 		@Override
 		public void run() {
-			proposals = quickAssistProcessor.computeQuickAssistProposals(invocationContext);
+			ICompletionProposal[] p = quickAssistProcessor.computeQuickAssistProposals(invocationContext);
+			proposals = p != null ? p : NO_PROPOSALS;
 		}
 	}
 	

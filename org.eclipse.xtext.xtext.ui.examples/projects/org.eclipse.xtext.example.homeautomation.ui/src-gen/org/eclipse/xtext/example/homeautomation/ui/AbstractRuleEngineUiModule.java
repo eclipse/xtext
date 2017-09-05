@@ -35,6 +35,8 @@ import org.eclipse.xtext.example.homeautomation.ui.outline.RuleEngineOutlineTree
 import org.eclipse.xtext.example.homeautomation.ui.quickfix.RuleEngineQuickfixProvider;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider;
+import org.eclipse.xtext.ide.editor.contentassist.IndentationAwareCompletionPrefixProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
@@ -175,6 +177,11 @@ public abstract class AbstractRuleEngineUiModule extends DefaultXbaseUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
 		binder.bind(InternalRuleEngineLexer.class).toProvider(LexerProvider.create(InternalRuleEngineLexer.class));
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends CompletionPrefixProvider> bindCompletionPrefixProvider() {
+		return IndentationAwareCompletionPrefixProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2

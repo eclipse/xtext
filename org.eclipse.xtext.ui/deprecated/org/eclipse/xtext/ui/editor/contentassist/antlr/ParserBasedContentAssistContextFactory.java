@@ -47,7 +47,7 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.ide.LexerIdeBindings;
-import org.eclipse.xtext.nodemodel.BidiTreeIterator;
+import org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -146,6 +146,12 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		 */
 		@Inject
 		protected ITokenDefProvider tokenDefProvider;
+		
+		/**
+		 * @since 2.13
+		 */
+		@Inject
+		protected CompletionPrefixProvider completionPrefixProvider;
 		
 		/**
 		 * @since 2.5
@@ -329,7 +335,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 		protected void handleLastCompleteNodeIsAtEndOfDatatypeNode() throws BadLocationException {
 			String prefix = getPrefix(lastCompleteNode);
-			String completeInput = viewer.getDocument().get(0, lastCompleteNode.getOffset());
+			String completeInput = getInputToParse(lastCompleteNode);
 			INode previousNode = getLastCompleteNodeByOffset(rootNode, lastCompleteNode.getOffset());
 			EObject previousModel = previousNode.getSemanticElement();
 			INode currentDatatypeNode = getContainingDatatypeRuleNode(currentNode);
@@ -352,10 +358,24 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 		protected void handleLastCompleteNodeAsPartOfDatatypeNode() throws BadLocationException {
 			String prefix = getPrefix(datatypeNode);
-			String completeInput = viewer.getDocument().get(0, datatypeNode.getOffset());
+			String completeInput = getInputToParse(datatypeNode);
 			Collection<FollowElement> followElements = parser.getFollowElements(completeInput, false);
 			INode lastCompleteNodeBeforeDatatype = getLastCompleteNodeByOffset(rootNode, datatypeNode.getTotalOffset());
 			doCreateContexts(lastCompleteNodeBeforeDatatype, datatypeNode, prefix, currentModel, followElements);
+		}
+		
+		/**
+		 * @since 2.13
+		 */
+		protected String getInputToParse(INode node) throws BadLocationException {
+			return getInputToParse(node.getOffset());
+		}
+		
+		/**
+		 * @since 2.13
+		 */
+		protected String getInputToParse(int offset) throws BadLocationException {
+			return completionPrefixProvider.getInputToParse(viewer.getDocument().get(), offset, completionOffset);
 		}
 		
 		protected boolean isLikelyToBeValidProposal(INode lastCompleteNode, Iterable<ContentAssistContext> contexts) {
@@ -387,7 +407,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				}
 			}
 			String prefix = "";
-			String completeInput = viewer.getDocument().get(0, completionOffset);
+			String completeInput = getInputToParse(completionOffset);
 			Collection<FollowElement> followElements = parser.getFollowElements(completeInput, strict);
 			doCreateContexts(lastCompleteNode, currentNode, prefix, previousModel, followElements);
 		}
@@ -706,20 +726,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 		
 		protected INode getLastCompleteNodeByOffset(INode node, int offsetPosition) {
-			BidiTreeIterator<INode> iterator = node.getRootNode().getAsTreeIterable().iterator();
-			INode result = node;
-			while (iterator.hasNext()) {
-				INode candidate = iterator.next();
-				if (candidate.getOffset() >= offsetPosition ) {
-					break;
-				} else if ((candidate instanceof ILeafNode) &&
-						   (candidate.getGrammarElement() == null ||
-								   candidate.getGrammarElement() instanceof AbstractElement ||
-								   candidate.getGrammarElement() instanceof ParserRule)) {
-					result = candidate;
-				}
-			}
-			return result;
+			return completionPrefixProvider.getLastCompleteNodeByOffset(node, offsetPosition, completionOffset);
 		}
 	}
 	
@@ -791,53 +798,9 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 	}
 
-	public static class LeafNodeFinder {
-		private final int offset;
-		private final boolean leading;
-		
+	public static class LeafNodeFinder extends org.eclipse.xtext.ide.editor.contentassist.antlr.LeafNodeFinder {
 		public LeafNodeFinder(int offset, boolean leading) {
-			this.offset = offset;
-			this.leading = leading;
-		}
-		
-		public ILeafNode searchIn(INode node) {
-			if (node instanceof ICompositeNode) {
-				return caseCompositeNode((ICompositeNode) node);
-			} else {
-				return caseLeafNode((ILeafNode) node);
-			}
-		}
-		
-		public ILeafNode caseCompositeNode(ICompositeNode object) {
-			if (leading) {
-				if (object.getTotalOffset() < offset && object.getTotalLength() + object.getTotalOffset() >= offset) {
-					for (INode node: object.getChildren()) {
-						ILeafNode result = searchIn(node);
-						if (result != null)
-							return result;
-					}
-				}
-			} else {
-				if (object.getTotalOffset() <= offset && object.getTotalLength() + object.getTotalOffset() > offset) {
-					for (INode node: object.getChildren()) {
-						ILeafNode result = searchIn(node);
-						if (result != null)
-							return result;
-					}
-				}
-			}
-			return null;
-		}
-		
-		public ILeafNode caseLeafNode(ILeafNode object) {
-			if (leading) {
-				if (object.getTotalOffset() < offset && object.getTotalLength() + object.getTotalOffset() >= offset)
-					return object;
-			} else {
-				if (object.getTotalOffset() <= offset && object.getTotalLength() + object.getTotalOffset() > offset)
-					return object;
-			}
-			return null;
+			super(offset, leading);
 		}
 	}
 

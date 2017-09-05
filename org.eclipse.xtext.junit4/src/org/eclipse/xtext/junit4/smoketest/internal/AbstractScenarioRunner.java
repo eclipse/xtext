@@ -59,6 +59,7 @@ public abstract class AbstractScenarioRunner extends XtextRunner {
 		}
 	}
 
+	@Override
 	protected boolean isIgnored(final FrameworkMethod method) {
 		if (method.getAnnotation(Ignore.class) != null) {
 			return true;
