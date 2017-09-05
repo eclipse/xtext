@@ -55,3 +55,9 @@ sourceSets.main.compileClasspath += configurations.optional
 sourceSets.test.compileClasspath += configurations.optional
 sourceSets.test.runtimeClasspath += configurations.optional
 javadoc.classpath += configurations.optional
+
+if (findProperty('ignoreTestFailures') == 'true') {
+	tasks.withType(Test) {
+		ignoreFailures = true
+	}
+}
