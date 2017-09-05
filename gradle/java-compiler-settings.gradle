@@ -31,3 +31,9 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 	classifier = 'javadoc'
 	from javadoc.destinationDir
 }
+
+if (findProperty('ignoreTestFailures') == 'true') {
+	tasks.withType(Test) {
+		ignoreFailures = true
+	}
+}
