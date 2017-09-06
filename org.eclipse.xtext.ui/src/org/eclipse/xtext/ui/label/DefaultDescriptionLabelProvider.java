@@ -32,7 +32,7 @@ public class DefaultDescriptionLabelProvider extends DeclarativeLabelProvider {
 	private DefaultEditorImageUtil imageUtil;
 
 	public Object image(IEObjectDescription element) {
-		return image(element.getEClass());
+		return doGetImage(element.getEClass());
 	}
 
 	public Object image(IResourceDescription element) {
