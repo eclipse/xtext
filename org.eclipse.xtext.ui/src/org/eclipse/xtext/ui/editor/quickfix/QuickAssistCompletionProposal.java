@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.quickfix;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.Position;
@@ -23,6 +24,8 @@ public class QuickAssistCompletionProposal implements ICompletionProposal, IComp
 	private Image image;
 
 	public QuickAssistCompletionProposal(Position pos, IssueResolution resolution, Image image) {
+		Assert.isNotNull(pos);
+		Assert.isNotNull(resolution);
 		this.pos = pos;
 		this.resolution = resolution;
 		this.image = image;

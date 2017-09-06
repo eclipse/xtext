@@ -145,10 +145,10 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 				}
 			} else {
 				final Issue issue = issueUtil.getIssueFromAnnotation(annotation);
-				if (issue != null) {
+				Position pos = annotationModel.getPosition(annotation);
+				if (issue != null && pos != null) {
 					Iterable<IssueResolution> resolutions = getResolutions(issue, xtextDocument);
 					if (resolutions.iterator().hasNext()) {
-						Position pos = annotationModel.getPosition(annotation);
 						for (IssueResolution resolution : resolutions) {
 							result.add(create(pos, resolution));
 						}
