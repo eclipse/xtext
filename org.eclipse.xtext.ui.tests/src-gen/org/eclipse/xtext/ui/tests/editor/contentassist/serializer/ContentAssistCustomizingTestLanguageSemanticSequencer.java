@@ -73,7 +73,7 @@ public class ContentAssistCustomizingTestLanguageSemanticSequencer extends Abstr
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContentAssistCustomizingTestPackage.Literals.TYPE_REF__TYPE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTypeRefAccess().getTypeTypeFQNParserRuleCall_0_1(), semanticObject.getType());
+		feeder.accept(grammarAccess.getTypeRefAccess().getTypeTypeFQNParserRuleCall_0_1(), semanticObject.eGet(ContentAssistCustomizingTestPackage.Literals.TYPE_REF__TYPE, false));
 		feeder.finish();
 	}
 	

@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;

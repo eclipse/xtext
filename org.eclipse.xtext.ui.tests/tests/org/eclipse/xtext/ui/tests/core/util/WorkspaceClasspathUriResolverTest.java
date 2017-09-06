@@ -6,7 +6,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.testing.util.PluginUtil;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.util.WorkspaceClasspathUriResolver;
 import org.junit.Before;
 import org.junit.Test;

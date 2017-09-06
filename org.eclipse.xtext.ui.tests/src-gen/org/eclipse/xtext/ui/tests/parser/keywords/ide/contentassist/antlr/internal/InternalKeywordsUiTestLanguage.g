@@ -194,13 +194,13 @@ rule__Model__ForthAssignment_3
 	}
 :
 	(
-		{ before(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
+		{ before(grammarAccess.getModelAccess().getForthBackslashKeyword_3_0()); }
 		(
-			{ before(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
+			{ before(grammarAccess.getModelAccess().getForthBackslashKeyword_3_0()); }
 			'\\'
-			{ after(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
+			{ after(grammarAccess.getModelAccess().getForthBackslashKeyword_3_0()); }
 		)
-		{ after(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
+		{ after(grammarAccess.getModelAccess().getForthBackslashKeyword_3_0()); }
 	)
 ;
 finally {

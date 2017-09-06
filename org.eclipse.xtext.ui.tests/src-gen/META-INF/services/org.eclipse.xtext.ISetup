@@ -16,6 +16,7 @@ org.eclipse.xtext.ui.tests.editor.contentassist.ide.Bug348199TestLanguageIdeSetu
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.Bug360834TestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.Bug347012TestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.Bug381381TestLanguageIdeSetup
+org.eclipse.xtext.ui.tests.editor.contentassist.ide.GH341TestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.BacktrackingContentAssistTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.ContentAssistContextTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.ContentAssistCustomizingTestLanguageIdeSetup

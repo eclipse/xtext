@@ -20,7 +20,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;

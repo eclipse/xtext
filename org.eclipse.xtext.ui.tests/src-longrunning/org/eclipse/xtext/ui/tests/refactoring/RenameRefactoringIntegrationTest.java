@@ -42,7 +42,7 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
 import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringFactory;
 import org.eclipse.xtext.ui.tests.refactoring.resource.RefactoringTestLanguageFragmentProvider;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Test;
 
@@ -96,7 +96,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 
 	@Override
 	protected String getEditorId() {
-		return "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage";
+		return TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_REFACTORING_REFACTORINGTESTLANGUAGE;
 	}
 
 	@Test public void testFileFileRename() throws Exception {

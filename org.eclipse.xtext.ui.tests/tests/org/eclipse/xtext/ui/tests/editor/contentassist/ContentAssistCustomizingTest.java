@@ -33,7 +33,7 @@ import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.ContentAssistCustomizingTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistCustomizingTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.ContentAssistCustomizingTestLanguageProposalProvider;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.Test;
 

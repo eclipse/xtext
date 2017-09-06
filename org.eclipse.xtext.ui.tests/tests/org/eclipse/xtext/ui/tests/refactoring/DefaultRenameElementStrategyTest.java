@@ -26,7 +26,7 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 import org.junit.Test;
 

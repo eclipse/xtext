@@ -25,7 +25,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.foo.File;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Test;
 

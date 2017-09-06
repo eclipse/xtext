@@ -32,7 +32,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.foo.File;
 import org.eclipse.xtext.ui.tests.foo.Stuff;
 import org.eclipse.xtext.util.StringInputStream;

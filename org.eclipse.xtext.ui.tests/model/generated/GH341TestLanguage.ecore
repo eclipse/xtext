@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gh341TestLanguage" nsURI="http://www.eclipse.org/xtext/ui/common/tests/2012/gh341TestLanguage"
+    nsPrefix="gh341TestLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//Element" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Works" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ids" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refs" unique="false" upperBound="-1"
+        eType="#//Works"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Broken" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ids" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refs" unique="false" upperBound="-1"
+        eType="#//Broken"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Third" eSuperTypes="#//Element"/>
+</ecore:EPackage>

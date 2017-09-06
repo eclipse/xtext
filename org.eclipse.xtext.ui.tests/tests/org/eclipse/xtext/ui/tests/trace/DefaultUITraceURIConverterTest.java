@@ -17,7 +17,7 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.junit.AfterClass;

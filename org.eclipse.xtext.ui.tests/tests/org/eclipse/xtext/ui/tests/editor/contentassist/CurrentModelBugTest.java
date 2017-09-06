@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DomainModelTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.DomainModelTestLanguageProposalProvider;

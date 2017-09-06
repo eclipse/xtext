@@ -15,7 +15,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;

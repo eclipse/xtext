@@ -17,7 +17,7 @@ import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.ui.tasks.TaskMarkerContributor
 import org.eclipse.xtext.ui.tasks.TaskMarkerTypeProvider
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator
+import org.eclipse.xtext.ui.tests.internal.TestsActivator
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

@@ -20,7 +20,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTes
 import org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr.LookAheadContentAssistTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.LookAheadContentAssistTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.LookAheadContentAssistTestLanguageUiModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.Test;
 

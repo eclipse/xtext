@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IFilter;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Model;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestFactory;
 import org.junit.Test;

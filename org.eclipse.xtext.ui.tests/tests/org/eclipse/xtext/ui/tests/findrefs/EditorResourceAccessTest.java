@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.EditorResourceAccess;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Test;

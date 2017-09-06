@@ -4,8 +4,9 @@
 package org.eclipse.xtext.ui.tests.testlanguages.ui;
 
 import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.osgi.framework.Bundle;
 
 /**
@@ -16,12 +17,13 @@ public class ReferenceGrammarUiTestLanguageExecutableExtensionFactory extends Ab
 
 	@Override
 	protected Bundle getBundle() {
-		return TestsActivator.getInstance().getBundle();
+		return Platform.getBundle(TestsActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGES_REFERENCEGRAMMARUITESTLANGUAGE);
+		TestsActivator activator = TestsActivator.getInstance();
+		return activator != null ? activator.getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGES_REFERENCEGRAMMARUITESTLANGUAGE) : null;
 	}
-	
+
 }

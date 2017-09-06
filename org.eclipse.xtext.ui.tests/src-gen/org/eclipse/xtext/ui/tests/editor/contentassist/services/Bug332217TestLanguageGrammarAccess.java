@@ -165,7 +165,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		////   ObjectReference:
 		////     object=[PropertyPathPart] ('.' tail=ObjectReference)?;
 		//NestedObjectReference ObjectReference:
-		//	'.' object=[PropertyPathPart] tail=NestedObjectReference?
+		//	'.' object=[PropertyPathPart] tail=NestedObjectReference?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'.' object=[PropertyPathPart] tail=NestedObjectReference?
@@ -226,7 +226,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cScalarExpressionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//ImageExpression ScalarExpression:
-		//	ScalarExpression
+		//	ScalarExpression;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ScalarExpression
@@ -557,7 +557,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//(('title:' title=ScalarExpression)? & ('titleImage:' titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?)
+		//('title:' title=ScalarExpression)? & ('titleImage:' titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 		
 		//('title:' title=ScalarExpression)?
@@ -745,8 +745,8 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//(('text:' text=ScalarExpression)? & ('details:' details=ScalarExpression)? & ('image:' image=ScalarExpression)? &
-		//('action:' action=ViewAction)? & ('accessory:' accessory=CellAccessory)?)
+		//('text:' text=ScalarExpression)? & ('details:' details=ScalarExpression)? & ('image:' image=ScalarExpression)? &
+		//('action:' action=ViewAction)? & ('accessory:' accessory=CellAccessory)?
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 		
 		//('text:' text=ScalarExpression)?
@@ -1210,7 +1210,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	////   ObjectReference:
 	////     object=[PropertyPathPart] ('.' tail=ObjectReference)?;
 	//NestedObjectReference ObjectReference:
-	//	'.' object=[PropertyPathPart] tail=NestedObjectReference?
+	//	'.' object=[PropertyPathPart] tail=NestedObjectReference?;
 	public NestedObjectReferenceElements getNestedObjectReferenceAccess() {
 		return pNestedObjectReference;
 	}
@@ -1231,7 +1231,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//ImageExpression ScalarExpression:
-	//	ScalarExpression
+	//	ScalarExpression;
 	public ImageExpressionElements getImageExpressionAccess() {
 		return pImageExpression;
 	}

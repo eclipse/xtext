@@ -65,7 +65,7 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContentAssistTestLanguagePackage.Literals.ABSTRACT_RULE_CALL__RULE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAbstractRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_0_1(), semanticObject.getRule());
+		feeder.accept(grammarAccess.getAbstractRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_0_1(), semanticObject.eGet(ContentAssistTestLanguagePackage.Literals.ABSTRACT_RULE_CALL__RULE, false));
 		feeder.finish();
 	}
 	

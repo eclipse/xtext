@@ -18,7 +18,7 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.TestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.foo.File;
 import org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageStandaloneSetup;
