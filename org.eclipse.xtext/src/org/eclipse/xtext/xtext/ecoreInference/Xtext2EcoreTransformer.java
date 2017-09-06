@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.print.attribute.standard.Media;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -28,6 +30,7 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -1016,12 +1019,18 @@ public class Xtext2EcoreTransformer {
 
 		EClassifier classifier = generatedEPackage.getEClassifier(classifierName);
 		if (classifier == null) {
-			if (GrammarUtil.containingParserRule(typeRef) != null)
+			if (GrammarUtil.containingParserRule(typeRef) != null) {
 				classifier = EcoreFactory.eINSTANCE.createEClass();
-			else if (GrammarUtil.containingEnumRule(typeRef) != null)
+			} else if (GrammarUtil.containingEnumRule(typeRef) != null) {
 				classifier = EcoreFactory.eINSTANCE.createEEnum();
-			else
-				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot create datatype " + classifierName, typeRef);
+			} else {
+				for (AbstractMetamodelDeclaration mmd : grammar.getMetamodelDeclarations()) {
+					if (mmd instanceof ReferencedMetamodel && mmd.getEPackage() != null && mmd.getEPackage().getNsURI().equals(EcorePackage.eNS_URI)) {
+						throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot create datatype " + classifierName, typeRef);
+					}
+				}
+				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot create datatype " + classifierName + ". Make sure you have imported '"+EcorePackage.eNS_URI+"'", typeRef);
+			}
 			classifier.setName(classifierName);
 			generatedEPackage.getEClassifiers().add(classifier);
 			typeRef.setClassifier(classifier);

@@ -28,7 +28,12 @@ public class TestErrorAcceptor extends Assert implements ErrorAcceptor {
 
 				@Override
 				public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-					return "toString".equals(method.getName()) ? "ANY_EOBJECT" : null;
+					if ("toString".equals(method.getName())) {
+						return "ANY_EOBJECT";
+					} else if ("equals".equals(method.getName()) && args.length == 1) {
+						return args[0] instanceof EObject;
+					}
+					return null;
 				}
 			});
 
