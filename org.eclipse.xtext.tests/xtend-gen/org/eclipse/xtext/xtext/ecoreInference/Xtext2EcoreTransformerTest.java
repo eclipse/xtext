@@ -2897,7 +2897,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
       _builder.newLine();
       String grammar = _builder.toString();
       this.errorAcceptorMock.acceptError(TransformationErrorCode.NoSuchTypeAvailable, 
-        "Cannot create datatype BAR. Make sure you have imported \'http://www.eclipse.org/emf/2002/Ecore\'", TestErrorAcceptor.ANY_EOBJECT);
+        "Cannot create datatype BAR. If this is supposed to return EString, make sure you have imported \'http://www.eclipse.org/emf/2002/Ecore\'", TestErrorAcceptor.ANY_EOBJECT);
       this.getEPackageFromGrammar(grammar, 1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
