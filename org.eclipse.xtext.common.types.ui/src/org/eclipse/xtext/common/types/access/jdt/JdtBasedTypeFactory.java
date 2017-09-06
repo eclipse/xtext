@@ -312,15 +312,26 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 		if (jdtType.getDeclaringType() != null)
 			throw new IllegalArgumentException("Cannot create type from non-toplevel-type: '"
 					+ jdtType.getFullyQualifiedName() + "'.");
-		IBinding binding = resolveBindings(jdtType, javaProject);
+		IBinding binding = null;
+		IllegalArgumentException cause = null;
+		try {
+			binding = resolveBindings(jdtType, javaProject);
+		} catch (IllegalArgumentException e) {
+			// might be caused by missing source content in ASTNode#setSourceRange
+			cause = e;
+		}
 		if (binding == null) {
 			IJavaProject fallbackProject = jdtType.getJavaProject();
 			// fallback to the project of the given jdtType if it is different from the explicitly given project
 			if (!fallbackProject.equals(javaProject)) {
-				binding = resolveBindings(jdtType, fallbackProject);
+				try {
+					binding = resolveBindings(jdtType, fallbackProject);
+				} catch (IllegalArgumentException e) {
+					cause = e;
+				}
 				if (binding == null) {
 					throw new IllegalStateException("Could not create binding for '" + jdtType.getFullyQualifiedName() + 
-							"' in context of projects '" + javaProject.getElementName() + "' and '" + fallbackProject.getElementName() + "'.");
+							"' in context of projects '" + javaProject.getElementName() + "' and '" + fallbackProject.getElementName() + "'.", cause);
 				}
 			} else {
 				throw new IllegalStateException("Could not create binding for '" + jdtType.getFullyQualifiedName() + "' in context of project '" + javaProject.getElementName() + "'.");
