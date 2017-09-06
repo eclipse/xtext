@@ -25,6 +25,8 @@ import java.util.Set;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jdt.internal.ui.actions.ActionMessages;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension3;
@@ -35,9 +37,11 @@ import org.eclipse.jface.text.ITextViewerExtension5;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.swt.SWTError;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.dnd.ByteArrayTransfer;
 import org.eclipse.swt.dnd.Clipboard;
+import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.RTFTransfer;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
@@ -163,8 +167,19 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 							datas.add(entry.getKey());
 							dataTypes.add(entry.getValue());
 						}
-						clipboard.setContents(datas.toArray(), dataTypes.toArray(new Transfer[] {}));
-						return Boolean.TRUE;
+						try {
+							clipboard.setContents(datas.toArray(), dataTypes.toArray(new Transfer[] {}));
+							return Boolean.TRUE;
+						} catch (SWTError e) {
+							if (e.code != DND.ERROR_CANNOT_SET_CLIPBOARD) {
+								throw e;
+							}
+							if (MessageDialog.openQuestion(getShell(), ActionMessages.CopyQualifiedNameAction_ErrorTitle, ActionMessages.CopyQualifiedNameAction_ErrorDescription)) {
+								clipboard.setContents(datas.toArray(), dataTypes.toArray(new Transfer[] {}));
+								return Boolean.TRUE;
+							}
+							return Boolean.FALSE;
+						}
 					}
 				});
 			}
