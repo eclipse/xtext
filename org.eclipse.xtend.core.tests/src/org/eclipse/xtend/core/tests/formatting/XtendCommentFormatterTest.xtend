@@ -310,4 +310,16 @@ class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
 			}
 		''')
 	}
+	
+	@Ignore("see https://github.com/eclipse/xtext-xtend/issues/77")
+	@Test def formatSLCommentAfterCode() {
+		assertFormatted('''
+			class bar {
+				def method() { // comment
+				
+					val i = 0
+				}
+			}
+		''')
+	}
 }
