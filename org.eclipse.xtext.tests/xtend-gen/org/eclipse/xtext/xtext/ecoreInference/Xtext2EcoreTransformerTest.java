@@ -43,6 +43,7 @@ import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.tests.TestErrorAcceptor;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.XtextLinker;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfos;
@@ -2870,5 +2871,36 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClass clazzB = ((EClass) _type_1);
     EStructuralFeature featureB_a = this.<EStructuralFeature>feature(clazzB, "a");
     Assert.assertEquals("Model", featureB_a.getEType().getName());
+  }
+  
+  @Test
+  public void testIssue91() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("grammar test.Test");
+      _builder.newLine();
+      _builder.append("generate test \'http://test\'");
+      _builder.newLine();
+      _builder.append("Foo:");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("bar = BAR");
+      _builder.newLine();
+      _builder.append(";");
+      _builder.newLine();
+      _builder.append("terminal BAR:");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("\'bar\'");
+      _builder.newLine();
+      _builder.append(";");
+      _builder.newLine();
+      String grammar = _builder.toString();
+      this.errorAcceptorMock.acceptError(TransformationErrorCode.NoSuchTypeAvailable, 
+        "Cannot create datatype BAR. Make sure you have imported \'http://www.eclipse.org/emf/2002/Ecore\'", TestErrorAcceptor.ANY_EOBJECT);
+      this.getEPackageFromGrammar(grammar, 1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

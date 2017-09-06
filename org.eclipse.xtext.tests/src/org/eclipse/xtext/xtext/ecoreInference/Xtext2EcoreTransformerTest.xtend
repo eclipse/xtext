@@ -2123,5 +2123,21 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		var featureB_a = clazzB.feature("a")
 		assertEquals("Model", featureB_a.EType.name)
 	}
+	
+	@Test def void testIssue91() {
+		var String grammar = '''
+		grammar test.Test
+		generate test 'http://test'
+		Foo:
+			bar = BAR
+		;
+		terminal BAR:
+			'bar'
+		;
+		'''
+		errorAcceptorMock.acceptError(TransformationErrorCode.NoSuchTypeAvailable,
+			"Cannot create datatype BAR. Make sure you have imported 'http://www.eclipse.org/emf/2002/Ecore'", TestErrorAcceptor.ANY_EOBJECT)
+		getEPackageFromGrammar(grammar, 1)
+	}
 
 }
