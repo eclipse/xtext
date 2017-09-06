@@ -814,7 +814,11 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     if (type!=null) {
       _identifier=type.getIdentifier();
     }
-    final String result = _identifier;
+    String _replace = null;
+    if (_identifier!=null) {
+      _replace=_identifier.replace("$", ".");
+    }
+    final String result = _replace;
     if (result != null) {
       switch (result) {
         case "java.lang.Class":
