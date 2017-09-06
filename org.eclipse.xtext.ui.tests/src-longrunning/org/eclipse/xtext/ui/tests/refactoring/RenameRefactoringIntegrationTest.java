@@ -96,7 +96,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 
 	@Override
 	protected String getEditorId() {
-		return "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage";
+		return TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_REFACTORING_REFACTORINGTESTLANGUAGE;
 	}
 
 	@Test public void testFileFileRename() throws Exception {

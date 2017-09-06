@@ -15,6 +15,35 @@
 		</super>
 	</extension>
 	<!-- End Custom Marker -->
+	
+	<!-- Begin ResourceServiceProvider for referring_xmi -->
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"
+			type="referring_xmi">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+		<resourceServiceProvider
+			class="org.eclipse.xtext.ui.tests.refactoring.ui.ReferringXmiExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			uriExtension="referring_xmi">
+		</resourceServiceProvider>
+	</extension>
+	<!-- End ResourceServiceProvider for referring_xmi -->
+	
+	<!-- Begin Multipage Editor -->
+	<extension
+		point="org.eclipse.ui.editors">
+		<editor
+			name="Sample Multi-page Editor"
+			extensions="testlanguage"
+			icon="icons/editor.gif"
+			class="org.eclipse.xtext.ui.tests.editor.mpe.MultiPageEditor"
+			id="org.eclipse.xtext.ui.tests.mpe.MultiPageEditor">
+		</editor>
+	</extension>
+	<!-- End Multipage Editor -->
 
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package 
