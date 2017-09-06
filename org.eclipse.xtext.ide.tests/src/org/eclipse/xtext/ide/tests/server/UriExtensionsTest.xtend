@@ -7,43 +7,51 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
+import javax.inject.Inject
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.ide.server.UriExtensions
+import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageIdeInjectorProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Test
+import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import java.io.File
 
-class UriExtensionsTest extends AbstractTestLangLanguageServerTest {
+@RunWith(XtextRunner)
+@InjectWith(TestLanguageIdeInjectorProvider)
+class UriExtensionsTest {
+
+	@Inject
+	extension UriExtensions;
+
 	@Test
-	def void testFilesWithSpaces() {
-		initialize
-
-		val fileURI = 'Foo Bar.testlang'.virtualFile
-		fileURI.open('''
-			type FooBar {
-			}
-		''')
-
-		diagnostics.get(fileURI).forEach [
-			println("err: " + it.message)
-		]
-
-		assertTrue(diagnostics.get(fileURI).empty)
+	def void testConversion() {
+		assertEquals("file:///dir/name.ext", "file:///dir/name.ext".toUri.toPath)
 	}
 
 	@Test
-	def void testFilesWithCyrillic() {
-		initialize
+	def void testFileUriConversion() {
+		assertEquals("file:///dir/name.ext", URI.createFileURI("/dir/name.ext").toPath)
+	}
 
-		val fileURI = "\u0424\u0443 \u0411\u0430\u0440.testlang".virtualFile
-		fileURI.open('''
-			type FooBar {
-			}
-		''')
+	@Test
+	def void testFilesWithSpaces() {
+		assertEquals("file:///dir/Foo Bar.testlang", "file:///dir/Foo Bar.testlang".toUri.toPath)
+	}
 
-		diagnostics.get(fileURI).forEach [
-			println("err: " + it.message)
-		]
+	@Test
+	def void testFilesWithCyrillicSymbols() {
+		assertEquals("file:///dir/\u0424\u0443 \u0411\u0430\u0440.testlang",
+			"file:///dir/\u0424\u0443 \u0411\u0430\u0440.testlang".toUri.toPath)
+	}
 
-		assertTrue(diagnostics.get(fileURI).empty)
+	@Test
+	def void testFolderIsPrefix() {
+		var directory = new File("./test-data/test-project")
+		var uri = URI.createFileURI(directory.absolutePath).toPath.toUri
+		assertTrue(uri.isPrefix)
 	}
 }
 

@@ -29,7 +29,7 @@ public class UriExtensions {
   }
   
   public String toPath(final URI uri) {
-    return uri.toString();
+    return URI.createURI(this.toPath(uri.path())).toString();
   }
   
   public String toPath(final java.net.URI uri) {

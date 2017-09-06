@@ -28,7 +28,7 @@ class UriExtensions {
 	}
 
 	def String toPath(URI uri) {
-		return uri.toString
+		return URI.createURI(uri.path.toPath).toString
 	}
 
 	def String toPath(java.net.URI uri) {
