@@ -529,4 +529,26 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
+  
+  @Ignore("see https://github.com/eclipse/xtext-xtend/issues/77")
+  @Test
+  public void formatSLCommentAfterCode() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def method() { // comment");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val i = 0");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
 }
