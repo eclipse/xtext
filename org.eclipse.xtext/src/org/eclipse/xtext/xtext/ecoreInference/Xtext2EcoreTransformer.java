@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.print.attribute.standard.Media;
-
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -1029,7 +1027,7 @@ public class Xtext2EcoreTransformer {
 						throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot create datatype " + classifierName, typeRef);
 					}
 				}
-				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot create datatype " + classifierName + ". Make sure you have imported '"+EcorePackage.eNS_URI+"'", typeRef);
+				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot create datatype " + classifierName + ". If this is supposed to return EString, make sure you have imported '"+EcorePackage.eNS_URI+"'", typeRef);
 			}
 			classifier.setName(classifierName);
 			generatedEPackage.getEClassifiers().add(classifier);
