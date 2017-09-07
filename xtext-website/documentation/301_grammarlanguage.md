@@ -107,6 +107,8 @@ It's almost in any case recommended to use [data type rules](#datatype-rules) in
 Each terminal rule returns an atomic value (an [EDataType]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java)). By default, it's assumed that an instance of `ecore::EString`) should be returned. However, if you want to provide a different type you can specify it. For instance, the rule *INT* is defined as:
 
 ```xtext
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+//...
 terminal INT returns ecore::EInt: 
     ('0'..'9')+;
 ```
