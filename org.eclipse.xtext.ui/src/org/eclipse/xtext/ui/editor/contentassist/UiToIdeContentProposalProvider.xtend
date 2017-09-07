@@ -25,6 +25,9 @@ import org.eclipse.xtext.ui.editor.contentassist.AbstractContentProposalProvider
 import org.eclipse.xtext.util.TextRegion
 
 /**
+ * Delegates to the generic IDE content proposal provider. Use this Implementation to share the same content assist
+ * code between Eclipse and other editors for your DSL.
+ * 
  * @author Titouan Vervack - Initial contribution and API
  * 
  * @since 2.13
@@ -53,15 +56,6 @@ class UiToIdeContentProposalProvider extends AbstractContentProposalProvider {
 			uiAcceptor.accept(proposal)
 		]
 	}
-    
-    override completeAssignment(Assignment object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-    }
-    
-    override completeKeyword(Keyword object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-    }
-    
-    override completeRuleCall(RuleCall object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-    }
 	
 	protected def int getMaxProposals() {
 		1000
@@ -102,6 +96,24 @@ class UiToIdeContentProposalProvider extends AbstractContentProposalProvider {
             EObject:
                 getImage(source)
         }
+    }
+    
+    /**
+     * This method does nothing and should not be used.
+     */
+    override final completeAssignment(Assignment object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+    }
+    
+    /**
+     * This method does nothing and should not be used.
+     */
+    override final completeKeyword(Keyword object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+    }
+    
+    /**
+     * This method does nothing and should not be used.
+     */
+    override final completeRuleCall(RuleCall object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
     }
     
 }

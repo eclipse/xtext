@@ -36,6 +36,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
+ * Delegates to the generic IDE content proposal provider. Use this Implementation to share the same content assist
+ * code between Eclipse and other editors for your DSL.
+ * 
  * @author Titouan Vervack - Initial contribution and API
  * 
  * @since 2.13
@@ -74,18 +77,6 @@ public class UiToIdeContentProposalProvider extends AbstractContentProposalProvi
       uiAcceptor.accept(proposal);
     };
     IterableExtensions.<Pair<ContentAssistEntry, Integer>>forEach(entries, _function);
-  }
-  
-  @Override
-  public void completeAssignment(final Assignment object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-  }
-  
-  @Override
-  public void completeKeyword(final Keyword object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-  }
-  
-  @Override
-  public void completeRuleCall(final RuleCall object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
   }
   
   protected int getMaxProposals() {
@@ -144,5 +135,26 @@ public class UiToIdeContentProposalProvider extends AbstractContentProposalProvi
       }
     }
     return _switchResult;
+  }
+  
+  /**
+   * This method does nothing and should not be used.
+   */
+  @Override
+  public final void completeAssignment(final Assignment object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  }
+  
+  /**
+   * This method does nothing and should not be used.
+   */
+  @Override
+  public final void completeKeyword(final Keyword object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  }
+  
+  /**
+   * This method does nothing and should not be used.
+   */
+  @Override
+  public final void completeRuleCall(final RuleCall object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
   }
 }
