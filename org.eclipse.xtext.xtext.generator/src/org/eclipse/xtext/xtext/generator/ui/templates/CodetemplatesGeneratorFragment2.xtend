@@ -32,6 +32,14 @@ import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
  * @author Christian Schneider - Initial contribution and API
  */
 class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
+	
+	public static class Disabled extends CodetemplatesGeneratorFragment2 {
+		
+		override void generate() {
+			// no nothing
+		}
+		
+	}
 
 	@Inject
 	ContentAssistGrammarNaming caNaming

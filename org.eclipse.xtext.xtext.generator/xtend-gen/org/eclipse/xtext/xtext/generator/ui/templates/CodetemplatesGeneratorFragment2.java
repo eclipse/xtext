@@ -40,6 +40,12 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming
  */
 @SuppressWarnings("all")
 public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
+  public static class Disabled extends CodetemplatesGeneratorFragment2 {
+    @Override
+    public void generate() {
+    }
+  }
+  
   @Inject
   private ContentAssistGrammarNaming caNaming;
   
