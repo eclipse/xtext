@@ -3,26 +3,29 @@
  */
 package org.eclipse.xtext.ui.codetemplates.ui.internal;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.util.Modules2;
-import org.osgi.framework.BundleContext;
-
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import java.util.Collections;
+import java.util.Map;
+import org.apache.log4j.Logger;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.codetemplates.CodetemplatesRuntimeModule;
+import org.eclipse.xtext.ui.codetemplates.SingleCodetemplateRuntimeModule;
+import org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesUiModule;
+import org.eclipse.xtext.ui.codetemplates.ui.SingleCodetemplateUiModule;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.util.Modules2;
+import org.osgi.framework.BundleContext;
 
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
 public class CodetemplatesActivator extends AbstractUIPlugin {
-	
+
+	public static final String PLUGIN_ID = "org.eclipse.xtext.ui.codetemplates.ui";
 	public static final String ORG_ECLIPSE_XTEXT_UI_CODETEMPLATES_CODETEMPLATES = "org.eclipse.xtext.ui.codetemplates.Codetemplates";
 	public static final String ORG_ECLIPSE_XTEXT_UI_CODETEMPLATES_SINGLECODETEMPLATE = "org.eclipse.xtext.ui.codetemplates.SingleCodetemplate";
 	
@@ -72,31 +75,30 @@ public class CodetemplatesActivator extends AbstractUIPlugin {
 			throw new RuntimeException("Failed to create injector for " + language, e);
 		}
 	}
-
+	
 	protected Module getRuntimeModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_UI_CODETEMPLATES_CODETEMPLATES.equals(grammar)) {
-			return new org.eclipse.xtext.ui.codetemplates.CodetemplatesRuntimeModule();
+			return new CodetemplatesRuntimeModule();
 		}
 		if (ORG_ECLIPSE_XTEXT_UI_CODETEMPLATES_SINGLECODETEMPLATE.equals(grammar)) {
-			return new org.eclipse.xtext.ui.codetemplates.SingleCodetemplateRuntimeModule();
+			return new SingleCodetemplateRuntimeModule();
 		}
-		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getUiModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_UI_CODETEMPLATES_CODETEMPLATES.equals(grammar)) {
-			return new org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesUiModule(this);
+			return new CodetemplatesUiModule(this);
 		}
 		if (ORG_ECLIPSE_XTEXT_UI_CODETEMPLATES_SINGLECODETEMPLATE.equals(grammar)) {
-			return new org.eclipse.xtext.ui.codetemplates.ui.SingleCodetemplateUiModule(this);
+			return new SingleCodetemplateUiModule(this);
 		}
-		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
+	
 	
 }

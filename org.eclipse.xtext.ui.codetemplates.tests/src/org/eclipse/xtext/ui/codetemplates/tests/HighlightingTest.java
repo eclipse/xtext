@@ -9,13 +9,13 @@ package org.eclipse.xtext.ui.codetemplates.tests;
 
 import java.util.Collection;
 
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.codetemplates.CodetemplatesUiInjectorProvider;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.SemanticHighlighter;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplatesHighlightingConfiguration;
 import org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplateResourceProvider;
+import org.eclipse.xtext.ui.codetemplates.ui.tests.CodetemplatesUiInjectorProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.CancelIndicator;

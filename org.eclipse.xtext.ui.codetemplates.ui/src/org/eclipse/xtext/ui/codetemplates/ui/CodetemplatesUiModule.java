@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TokenToAttributeMapper
 import org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration;
 import org.eclipse.xtext.ui.codetemplates.ui.scoping.SyntheticResourceAwareScopeProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.validation.TemplateValidator;
-import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesJavaValidator;
+import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesValidator;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
@@ -66,7 +66,7 @@ public class CodetemplatesUiModule extends org.eclipse.xtext.ui.codetemplates.ui
 	}
 
 	@SingletonBinding(eager = true)
-	public Class<? extends CodetemplatesJavaValidator> bindTemplatesJavaValidator() {
+	public Class<? extends CodetemplatesValidator> bindTemplatesJavaValidator() {
 		return TemplateValidator.class;
 	}
 

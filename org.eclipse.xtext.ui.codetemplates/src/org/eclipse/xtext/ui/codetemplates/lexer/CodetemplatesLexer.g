@@ -7,7 +7,7 @@ options {
 @header {
 package org.eclipse.xtext.ui.codetemplates.lexer;
 
-// Use our own Lexer superclass by means of import. 
+// Use our own Lexer superclass by means of import2. 
 import org.eclipse.xtext.parser.antlr.Lexer;
 }
 

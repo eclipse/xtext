@@ -17,7 +17,7 @@ import com.google.inject.Inject;
  */
 public class TemplatesLanguageConfiguration {
 
-	@Inject 
+	@Inject
 	private IDialogSettings dialogSettings;
 	
 	@Inject

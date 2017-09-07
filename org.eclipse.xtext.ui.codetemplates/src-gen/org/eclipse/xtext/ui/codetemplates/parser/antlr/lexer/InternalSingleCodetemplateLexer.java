@@ -12,23 +12,23 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalSingleCodetemplateLexer extends Lexer {
-    public static final int RULE_ID=16;
-    public static final int DollarSign=9;
-    public static final int RightParenthesis=11;
-    public static final int RULE_ANY_OTHER=19;
+    public static final int DollarSignDollarSign=6;
+    public static final int DollarSignLeftCurlyBracket=7;
+    public static final int Templates=4;
+    public static final int RULE_STRING=17;
+    public static final int Comma=12;
     public static final int LeftParenthesis=10;
     public static final int Colon=14;
-    public static final int EOF=-1;
-    public static final int For=5;
-    public static final int FullStop=13;
-    public static final int DollarSignLeftCurlyBracket=7;
-    public static final int RULE_STRING=17;
-    public static final int DollarSignDollarSign=6;
-    public static final int Templates=4;
-    public static final int RULE_WS=18;
-    public static final int Comma=12;
-    public static final int GreaterThanSignGreaterThanSign=8;
     public static final int RightCurlyBracket=15;
+    public static final int EOF=-1;
+    public static final int FullStop=13;
+    public static final int RULE_ID=16;
+    public static final int RULE_WS=18;
+    public static final int For=5;
+    public static final int RightParenthesis=11;
+    public static final int RULE_ANY_OTHER=19;
+    public static final int GreaterThanSignGreaterThanSign=8;
+    public static final int DollarSign=9;
 
     // delegates
     // delegators
@@ -48,8 +48,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = Templates;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:19:11: ( 'templates' )
-            // InternalSingleCodetemplateLexer.g:19:13: 'templates'
+            // InternalSingleCodetemplateLexer.g:14:11: ( 'templates' )
+            // InternalSingleCodetemplateLexer.g:14:13: 'templates'
             {
             match("templates"); 
 
@@ -69,8 +69,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = For;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:21:5: ( 'for' )
-            // InternalSingleCodetemplateLexer.g:21:7: 'for'
+            // InternalSingleCodetemplateLexer.g:16:5: ( 'for' )
+            // InternalSingleCodetemplateLexer.g:16:7: 'for'
             {
             match("for"); 
 
@@ -90,8 +90,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = DollarSignDollarSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:23:22: ( '$$' )
-            // InternalSingleCodetemplateLexer.g:23:24: '$$'
+            // InternalSingleCodetemplateLexer.g:18:22: ( '$$' )
+            // InternalSingleCodetemplateLexer.g:18:24: '$$'
             {
             match("$$"); 
 
@@ -111,8 +111,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = DollarSignLeftCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:25:28: ( '${' )
-            // InternalSingleCodetemplateLexer.g:25:30: '${'
+            // InternalSingleCodetemplateLexer.g:20:28: ( '${' )
+            // InternalSingleCodetemplateLexer.g:20:30: '${'
             {
             match("${"); 
 
@@ -132,8 +132,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = GreaterThanSignGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:27:32: ( '>>' )
-            // InternalSingleCodetemplateLexer.g:27:34: '>>'
+            // InternalSingleCodetemplateLexer.g:22:32: ( '>>' )
+            // InternalSingleCodetemplateLexer.g:22:34: '>>'
             {
             match(">>"); 
 
@@ -153,8 +153,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = DollarSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:29:12: ( '$' )
-            // InternalSingleCodetemplateLexer.g:29:14: '$'
+            // InternalSingleCodetemplateLexer.g:24:12: ( '$' )
+            // InternalSingleCodetemplateLexer.g:24:14: '$'
             {
             match('$'); 
 
@@ -173,8 +173,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = LeftParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:31:17: ( '(' )
-            // InternalSingleCodetemplateLexer.g:31:19: '('
+            // InternalSingleCodetemplateLexer.g:26:17: ( '(' )
+            // InternalSingleCodetemplateLexer.g:26:19: '('
             {
             match('('); 
 
@@ -193,8 +193,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = RightParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:33:18: ( ')' )
-            // InternalSingleCodetemplateLexer.g:33:20: ')'
+            // InternalSingleCodetemplateLexer.g:28:18: ( ')' )
+            // InternalSingleCodetemplateLexer.g:28:20: ')'
             {
             match(')'); 
 
@@ -213,8 +213,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = Comma;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:35:7: ( ',' )
-            // InternalSingleCodetemplateLexer.g:35:9: ','
+            // InternalSingleCodetemplateLexer.g:30:7: ( ',' )
+            // InternalSingleCodetemplateLexer.g:30:9: ','
             {
             match(','); 
 
@@ -233,8 +233,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = FullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:37:10: ( '.' )
-            // InternalSingleCodetemplateLexer.g:37:12: '.'
+            // InternalSingleCodetemplateLexer.g:32:10: ( '.' )
+            // InternalSingleCodetemplateLexer.g:32:12: '.'
             {
             match('.'); 
 
@@ -253,8 +253,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = Colon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:39:7: ( ':' )
-            // InternalSingleCodetemplateLexer.g:39:9: ':'
+            // InternalSingleCodetemplateLexer.g:34:7: ( ':' )
+            // InternalSingleCodetemplateLexer.g:34:9: ':'
             {
             match(':'); 
 
@@ -273,8 +273,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = RightCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:41:19: ( '}' )
-            // InternalSingleCodetemplateLexer.g:41:21: '}'
+            // InternalSingleCodetemplateLexer.g:36:19: ( '}' )
+            // InternalSingleCodetemplateLexer.g:36:21: '}'
             {
             match('}'); 
 
@@ -293,10 +293,10 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:45:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalSingleCodetemplateLexer.g:45:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSingleCodetemplateLexer.g:38:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalSingleCodetemplateLexer.g:38:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalSingleCodetemplateLexer.g:45:11: ( '^' )?
+            // InternalSingleCodetemplateLexer.g:38:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -305,7 +305,7 @@ public class InternalSingleCodetemplateLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalSingleCodetemplateLexer.g:45:11: '^'
+                    // InternalSingleCodetemplateLexer.g:38:11: '^'
                     {
                     match('^'); 
 
@@ -323,7 +323,7 @@ public class InternalSingleCodetemplateLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalSingleCodetemplateLexer.g:45:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSingleCodetemplateLexer.g:38:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -372,11 +372,11 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:47:13: ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // InternalSingleCodetemplateLexer.g:47:15: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // InternalSingleCodetemplateLexer.g:40:13: ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalSingleCodetemplateLexer.g:40:15: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\''); 
-            // InternalSingleCodetemplateLexer.g:47:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // InternalSingleCodetemplateLexer.g:40:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop3:
             do {
                 int alt3=3;
@@ -392,7 +392,7 @@ public class InternalSingleCodetemplateLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalSingleCodetemplateLexer.g:47:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+            	    // InternalSingleCodetemplateLexer.g:40:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -408,7 +408,7 @@ public class InternalSingleCodetemplateLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalSingleCodetemplateLexer.g:47:62: ~ ( ( '\\\\' | '\\'' ) )
+            	    // InternalSingleCodetemplateLexer.g:40:62: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -445,10 +445,10 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:49:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalSingleCodetemplateLexer.g:49:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSingleCodetemplateLexer.g:42:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalSingleCodetemplateLexer.g:42:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalSingleCodetemplateLexer.g:49:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSingleCodetemplateLexer.g:42:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt4=0;
             loop4:
             do {
@@ -502,8 +502,8 @@ public class InternalSingleCodetemplateLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSingleCodetemplateLexer.g:51:16: ( . )
-            // InternalSingleCodetemplateLexer.g:51:18: .
+            // InternalSingleCodetemplateLexer.g:44:16: ( . )
+            // InternalSingleCodetemplateLexer.g:44:18: .
             {
             matchAny(); 
 
