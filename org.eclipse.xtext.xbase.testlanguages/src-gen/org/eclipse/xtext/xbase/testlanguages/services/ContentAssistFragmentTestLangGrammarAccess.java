@@ -61,10 +61,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractGrammarE
 		private final Assignment cRightAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cRightXExpressionParserRuleCall_3_1_0 = (RuleCall)cRightAssignment_3_1.eContents().get(0);
 		
-		//// To test bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434
-		//// we need to override one of the Xbase's rules
-		//// even if we don't change its syntax
-		//XVariableDeclaration:
+		//@ Override XVariableDeclaration:
 		//	{XVariableDeclaration} (writeable?='var' | 'val') (=> (type=JvmTypeReference name=ValidID) | name=ValidID) ('='
 		//	right=XExpression)?;
 		@Override public ParserRule getRule() { return rule; }
@@ -190,10 +187,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractGrammarE
 		return getContentAssistFragmentTestLanguageRootAccess().getRule();
 	}
 	
-	//// To test bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434
-	//// we need to override one of the Xbase's rules
-	//// even if we don't change its syntax
-	//XVariableDeclaration:
+	//@ Override XVariableDeclaration:
 	//	{XVariableDeclaration} (writeable?='var' | 'val') (=> (type=JvmTypeReference name=ValidID) | name=ValidID) ('='
 	//	right=XExpression)?;
 	public XVariableDeclarationElements getXVariableDeclarationAccess() {
@@ -849,7 +843,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractGrammarE
 		return getXCatchClauseAccess().getRule();
 	}
 	
-	//QualifiedName:
+	//@ Override QualifiedName:
 	//	ValidID (=> '.' ValidID)*;
 	public XbaseGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
 		return gaXbase.getQualifiedNameAccess();
@@ -870,7 +864,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractGrammarE
 	}
 	
 	///**
-	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
+	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes,
 	// * which makes downstream grammars break on classloading, when a rule is removed.
 	// */ StaticQualifier:
 	//	(ValidID '::')+;

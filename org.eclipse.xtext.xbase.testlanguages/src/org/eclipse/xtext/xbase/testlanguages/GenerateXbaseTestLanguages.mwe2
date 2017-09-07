@@ -4,6 +4,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.xtext.generator.*
 
 var rootPath = ".."
+var generateEclipse = false
 
 Workflow {
 	bean = StandaloneSetup {
@@ -20,6 +21,23 @@ Workflow {
 					enabled = true
 					root = "${rootPath}/org.eclipse.xtext.xbase.testlanguages"
 				}
+				
+				genericIde = {
+					enabled = true
+					root = "${rootPath}/org.eclipse.xtext.xbase.testlanguages.ide"
+				}
+				
+				eclipsePlugin = {
+					enabled = generateEclipse
+					root = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.xbase.testlanguages.ui"
+				}
+				
+				eclipsePluginTest= {
+					enabled = generateEclipse
+					root = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.xbase.ui.tests"
+				}
+				
+				createEclipseMetaData = true
 			}
 			code = {
 				encoding = 'ISO-8859-1'
@@ -61,6 +79,12 @@ Workflow {
     		}
     		fragment = types.TypesGeneratorFragment2 {}
     		fragment = xbase.XbaseGeneratorFragment2 {}
+    		fragment = ConditionalXtextGeneratorFragment {
+    			enabled = generateEclipse
+    			fragment = ui.contentAssist.ContentAssistFragment2 {
+    				generateXtendStub = true
+    			}
+    		}
     	}
 
     	language = {
@@ -92,6 +116,13 @@ Workflow {
     		}
     		fragment = types.TypesGeneratorFragment2 {}
     		fragment = xbase.XbaseGeneratorFragment2 {}
+    		
+    		fragment = ConditionalXtextGeneratorFragment {
+    			enabled = generateEclipse
+    			fragment = ui.contentAssist.ContentAssistFragment2 {
+    				generateXtendStub = true
+    			}
+    		}
     	}
     	
     	language = {
@@ -124,6 +155,13 @@ Workflow {
     		}
     		fragment = types.TypesGeneratorFragment2 {}
     		fragment = xbase.XbaseGeneratorFragment2 {}
+    		
+    		fragment = ConditionalXtextGeneratorFragment {
+    			enabled = generateEclipse
+    			fragment = ui.contentAssist.ContentAssistFragment2 {
+    				generateXtendStub = true
+    			}
+    		}
     	}
     }
 }

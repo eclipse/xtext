@@ -84,6 +84,12 @@
 	<bundle id="org.eclipse.xtext.xbase.testlanguages.source" version="2.13.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.testlanguages.ide" version="2.13.0.qualifier">
+		<category name="xtext-extras"/>
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.testlanguages.ide.source" version="2.13.0.qualifier">
+		<category name="xtext-extras"/>
+	</bundle>
 	<bundle id="org.eclipse.xtext.xbase.tests" version="2.13.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
