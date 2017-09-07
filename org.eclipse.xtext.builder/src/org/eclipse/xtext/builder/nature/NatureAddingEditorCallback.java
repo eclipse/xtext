@@ -22,7 +22,7 @@ import com.google.inject.Inject;
 public class NatureAddingEditorCallback extends IXtextEditorCallback.NullImpl {
 	private static final String ADD_XTEXT_NATURE = "add_xtext_nature";
 	@Inject
-	private ToggleXtextNatureAction toggleNature;
+	private ToggleXtextNatureCommand toggleNature;
 
 	private @Inject DontAskAgainDialogs dialogs;
 
