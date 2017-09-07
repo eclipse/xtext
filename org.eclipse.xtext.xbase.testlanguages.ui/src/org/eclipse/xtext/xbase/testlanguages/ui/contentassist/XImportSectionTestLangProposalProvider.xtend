@@ -3,8 +3,6 @@
  */
 package org.eclipse.xtext.xbase.testlanguages.ui.contentassist
 
-import org.eclipse.xtext.xbase.testlanguages.ui.contentassist.AbstractXImportSectionTestLangProposalProvider
-
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.

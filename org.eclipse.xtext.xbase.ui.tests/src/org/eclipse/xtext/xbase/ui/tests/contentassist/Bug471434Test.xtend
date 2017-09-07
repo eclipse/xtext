@@ -10,10 +10,9 @@ package org.eclipse.xtext.xbase.ui.tests.contentassist
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest
-import org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLangUiInjectorProvider
+import org.eclipse.xtext.xbase.testlanguages.ui.tests.ContentAssistFragmentTestLangUiInjectorProvider
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.testing.IInjectorProvider
 
 /**
  * Test the content assist to make sure we inherit the default XbaseProposalProvider
@@ -24,12 +23,8 @@ import org.eclipse.xtext.testing.IInjectorProvider
  * @author Lorenzo Bettini - Initial contribution and API
  */
 @RunWith(typeof(XtextRunner))
-@InjectWith(typeof(ContentAssistFragmentTestLangUiInjectorProviderAdapter))
+@InjectWith(typeof(ContentAssistFragmentTestLangUiInjectorProvider))
 class Bug471434Test extends AbstractContentAssistTest {
-	
-	static class ContentAssistFragmentTestLangUiInjectorProviderAdapter extends ContentAssistFragmentTestLangUiInjectorProvider implements IInjectorProvider {
-		
-	}
 
 	@Test def void testVariableRightWithPrefix() throws Exception {
 		newBuilder.append('''
