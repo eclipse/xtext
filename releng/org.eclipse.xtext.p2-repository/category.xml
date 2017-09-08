@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.eclipse.xtext.docs_2.13.0.qualifier.jar" id="org.eclipse.xtext.docs" version="2.13.0.qualifier"><category name="Xtext"/></feature>
    <bundle id="org.eclipse.xtext.activities" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.activities.source" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.builder" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
@@ -52,6 +51,5 @@
    <bundle id="org.eclipse.xtext.xtext.ui.examples.source" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xtext.ui.graph" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.xtext.ui.graph.source" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
-   <bundle id="org.eclipse.xtext.license.feature.group" version="0.0.0"><category name="Xtext"/></bundle>
    <category-def name="Xtext" label="Xtext"/>
 </site>
