@@ -71,47 +71,47 @@
 				</visibleWhen>
 			</command>
 		</menuContribution>
-   </extension>
-  <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            adaptable="true"
-            id="org.eclipse.xtext.builder.addNature"
-            objectClass="org.eclipse.core.resources.IProject">
-         <action
-               class="org.eclipse.xtext.builder.nature.ToggleXtextNatureAction"
-               id="org.eclipse.xtext.builder.action.AddXtextNatureAction"
-               label="%XtextNatureAddAction.label"
-               menubarPath="org.eclipse.ui.projectConfigure/additions"
-               >
-         </action>
-         <visibility>
-         	<not>
-	            <objectState
-    	              name="nature"
-        	          value="org.eclipse.xtext.ui.shared.xtextNature">
-            	</objectState>
-            </not>
-         </visibility>
-      </objectContribution>
-      <objectContribution
-            adaptable="true"
-            id="org.eclipse.xtext.builder.removeNature"
-            objectClass="org.eclipse.core.resources.IProject">
-         <action
-               class="org.eclipse.xtext.builder.nature.ToggleXtextNatureAction"
-               id="org.eclipse.xtext.builder.action.RemoveXtextNatureAction"
-               label="%XtextNatureRemoveAction.label"
-               menubarPath="org.eclipse.ui.projectConfigure/additions"
-               >
-         </action>
-         <visibility>
-               <objectState
-    	              name="nature"
-        	          value="org.eclipse.xtext.ui.shared.xtextNature">
-            	</objectState>
-         </visibility>
-      </objectContribution>
+        <menuContribution
+            locationURI="popup:org.eclipse.ui.projectConfigure?after=additions">
+         <command
+               commandId="org.eclipse.xtext.ui.shared.AddXtextNatureCommand"
+               style="push">
+            <visibleWhen>
+                <iterate
+                        operator="or"
+                        ifEmpty="false">
+                    <adapt
+                        type="org.eclipse.core.resources.IProject">
+                        <not>
+                            <test
+                                forcePluginActivation="true"
+                                property="org.eclipse.core.resources.projectNature"
+                                value="org.eclipse.xtext.ui.shared.xtextNature">
+                            </test>
+                        </not>
+                    </adapt>
+                </iterate>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.eclipse.xtext.ui.shared.RemoveXtextNatureCommand"
+               style="push">
+            <visibleWhen>
+                <iterate
+                        operator="or"
+                        ifEmpty="false">
+                    <adapt
+                        type="org.eclipse.core.resources.IProject">
+	                        <test
+	                            forcePluginActivation="true"
+	                            property="org.eclipse.core.resources.projectNature"
+	                            value="org.eclipse.xtext.ui.shared.xtextNature">
+	                        </test>
+                    </adapt>
+                </iterate>
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
    <extension
         point="org.eclipse.ui.ide.projectNatureImages">
@@ -136,6 +136,16 @@
             id="org.eclipse.xtext.ui.shared.OpenSourceFileCommand"
             name="%OpenSourceFileCommand.name">
       </command>
+     <command
+           categoryId="org.eclipse.ui.category.project"
+           id="org.eclipse.xtext.ui.shared.AddXtextNatureCommand"
+           name="%XtextNatureAddCommand.label">
+     </command>
+     <command
+           categoryId="org.eclipse.ui.category.project"
+           id="org.eclipse.xtext.ui.shared.RemoveXtextNatureCommand"
+           name="%XtextNatureRemoveCommand.label">
+     </command>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
@@ -155,6 +165,44 @@
       <handler
             class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.shared.internal.OpenSourceFileHandler"
             commandId="org.eclipse.xtext.ui.shared.OpenSourceFileCommand">
+      </handler>
+      <handler
+             class="org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand"
+             commandId="org.eclipse.xtext.ui.shared.AddXtextNatureCommand">
+         <activeWhen>
+            <iterate
+                    operator="or"
+                    ifEmpty="false">
+                <adapt
+                    type="org.eclipse.core.resources.IProject">
+                    <not>
+                        <test
+                                forcePluginActivation="true"
+                                property="org.eclipse.core.resources.projectNature"
+                                value="org.eclipse.xtext.ui.shared.xtextNature">
+                        </test>
+                    </not>
+                </adapt>
+            </iterate>
+         </activeWhen>
+      </handler>
+      <handler
+             class="org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand"
+             commandId="org.eclipse.xtext.ui.shared.RemoveXtextNatureCommand">
+         <activeWhen>
+            <iterate
+                    operator="or"
+                    ifEmpty="false">
+                <adapt
+                    type="org.eclipse.core.resources.IProject">
+                        <test
+                                forcePluginActivation="true"
+                                property="org.eclipse.core.resources.projectNature"
+                                value="org.eclipse.xtext.ui.shared.xtextNature">
+                        </test>
+                </adapt>
+            </iterate>
+         </activeWhen>
       </handler>
    </extension>
  	<extension point="org.eclipse.search.searchResultViewPages">

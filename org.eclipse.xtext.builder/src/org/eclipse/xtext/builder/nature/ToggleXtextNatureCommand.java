@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,38 +10,35 @@ package org.eclipse.xtext.builder.nature;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IObjectActionDelegate;
-import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * @author Christian Dietrich - Initial contribution and API
  * 
- * @deprecated replaced by {@link ToggleXtextNatureCommand}
+ * @since 2.13
  */
-@Deprecated
-public class ToggleXtextNatureAction implements IObjectActionDelegate {
+public class ToggleXtextNatureCommand extends AbstractHandler {
 	
-	private static final Logger log = Logger.getLogger(ToggleXtextNatureAction.class);
-
-	private ISelection selection;
+	private static final Logger log = Logger.getLogger(ToggleXtextNatureCommand.class);
 
 	@Override
-	public void run(IAction action) {
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		ISelection selection = HandlerUtil.getCurrentSelection(event);
 		if (selection instanceof IStructuredSelection) {
 			for (Iterator<?> it = ((IStructuredSelection) selection).iterator(); it.hasNext();) {
 				Object element = it.next();
 				IProject project = null;
-				if (element instanceof IProject) {
-					project = (IProject) element;
-				} else if (element instanceof IAdaptable) {
+				if (element instanceof IAdaptable) {
 					project = (IProject) ((IAdaptable) element).getAdapter(IProject.class);
 				}
 				if (project != null) {
@@ -49,17 +46,9 @@ public class ToggleXtextNatureAction implements IObjectActionDelegate {
 				}
 			}
 		}
+		return null;
 	}
-
-	@Override
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = selection;
-	}
-
-	@Override
-	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-	}
-
+	
 	public void toggleNature(IProject project) {
 		try {
 			IProjectDescription description = project.getDescription();
@@ -87,7 +76,7 @@ public class ToggleXtextNatureAction implements IObjectActionDelegate {
 			log.error("Error toggling Xtext nature", e);
 		}
 	}
-
+	
 	public boolean hasNature(IProject project) {
 		return XtextProjectHelper.hasNature(project);
 	}

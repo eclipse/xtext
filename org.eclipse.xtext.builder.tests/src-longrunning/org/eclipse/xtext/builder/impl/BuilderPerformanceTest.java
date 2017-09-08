@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
+import org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
@@ -250,7 +250,7 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 
 	private void toggleNature(IJavaProject javaProject1) {
 		long before = System.currentTimeMillis();
-		new ToggleXtextNatureAction().toggleNature(javaProject1.getProject());
+		new ToggleXtextNatureCommand().toggleNature(javaProject1.getProject());
 		waitForBuild();
 		System.out.println("Toggle Nature - Took " + (System.currentTimeMillis() - before) +"ms");
 	}
