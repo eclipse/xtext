@@ -14,20 +14,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.ui.editor.contentassist.AbstractCompletionProposalFactory;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
+import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -44,12 +45,16 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  * @since 2.13
  */
 @SuppressWarnings("all")
-public class UiToIdeContentProposalProvider extends AbstractContentProposalProvider {
+public class UiToIdeContentProposalProvider extends AbstractCompletionProposalFactory implements IContentProposalProvider {
   @Inject
   private IdeContentProposalProvider ideProvider;
   
   @Inject
   private Provider<ContentAssistContext.Builder> builderProvider;
+  
+  @Inject
+  @ContentProposalLabelProvider
+  private ILabelProvider labelProvider;
   
   @Override
   public void createProposals(final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
@@ -140,23 +145,21 @@ public class UiToIdeContentProposalProvider extends AbstractContentProposalProvi
   }
   
   /**
-   * This method does nothing and should not be used.
+   * Returns the image for the label of the given element.
+   * @param description the {@link IEObjectDescription} for which to provide the label image
+   * @return the image used to label the element, or <code>null</code> if there is no image for the given object
+   * @noreference This method is not intended to be referenced by clients.
    */
-  @Override
-  public final void completeAssignment(final Assignment object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  protected Image getImage(final IEObjectDescription description) {
+    return this.getImage(description.getEObjectOrProxy());
   }
   
   /**
-   * This method does nothing and should not be used.
+   * Returns the image for the label of the given element.
+   * @param eObject the element for which to provide the label image
+   * @return the image used to label the element, or <code>null</code> if there is no image for the given object
    */
-  @Override
-  public final void completeKeyword(final Keyword object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-  }
-  
-  /**
-   * This method does nothing and should not be used.
-   */
-  @Override
-  public final void completeRuleCall(final RuleCall object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  protected Image getImage(final EObject eObject) {
+    return this.labelProvider.getImage(eObject);
   }
 }

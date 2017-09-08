@@ -11,11 +11,9 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.ArrayList
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.jface.viewers.ILabelProvider
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.swt.graphics.Image
-import org.eclipse.xtext.Assignment
-import org.eclipse.xtext.Keyword
-import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext.Builder
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor
@@ -32,10 +30,13 @@ import org.eclipse.xtext.util.TextRegion
  * 
  * @since 2.13
  */
-class UiToIdeContentProposalProvider extends AbstractContentProposalProvider {
+class UiToIdeContentProposalProvider extends AbstractCompletionProposalFactory implements IContentProposalProvider {
     
 	@Inject IdeContentProposalProvider ideProvider
 	@Inject Provider<Builder> builderProvider
+	@Inject
+	@ContentProposalLabelProvider
+	private ILabelProvider labelProvider;
     
 	override createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val entries = new ArrayList<Pair<ContentAssistEntry, Integer>>
@@ -99,22 +100,22 @@ class UiToIdeContentProposalProvider extends AbstractContentProposalProvider {
         }
     }
     
-    /**
-     * This method does nothing and should not be used.
-     */
-    override final completeAssignment(Assignment object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-    }
-    
-    /**
-     * This method does nothing and should not be used.
-     */
-    override final completeKeyword(Keyword object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-    }
-    
-    /**
-     * This method does nothing and should not be used.
-     */
-    override final completeRuleCall(RuleCall object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-    }
+	/** 
+	 * Returns the image for the label of the given element.
+	 * @param description the {@link IEObjectDescription} for which to provide the label image
+	 * @return the image used to label the element, or <code>null</code> if there is no image for the given object
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	def protected Image getImage(IEObjectDescription description) {
+		return getImage(description.getEObjectOrProxy()) 
+	}
+	/** 
+	 * Returns the image for the label of the given element.
+	 * @param eObject the element for which to provide the label image
+	 * @return the image used to label the element, or <code>null</code> if there is no image for the given object
+	 */
+	def protected Image getImage(EObject eObject) {
+		return labelProvider.getImage(eObject) 
+	}
     
 }
