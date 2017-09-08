@@ -3,33 +3,38 @@
  */
 package org.eclipse.xtext.xbase.testlanguages.ui.internal;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.util.Modules2;
-import org.osgi.framework.BundleContext;
-
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import java.util.Collections;
+import java.util.Map;
+import org.apache.log4j.Logger;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLangRuntimeModule;
+import org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLangRuntimeModule;
+import org.eclipse.xtext.xbase.testlanguages.bug462047.Bug462047LangRuntimeModule;
+import org.eclipse.xtext.xbase.testlanguages.bug462047.ui.Bug462047LangUiModule;
+import org.eclipse.xtext.xbase.testlanguages.ui.ContentAssistFragmentTestLangUiModule;
+import org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangUiModule;
+import org.osgi.framework.BundleContext;
 
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
-public class XImportSectionTestLangActivator extends AbstractUIPlugin {
-	
+public class TestlanguagesActivator extends AbstractUIPlugin {
+
+	public static final String PLUGIN_ID = "org.eclipse.xtext.xbase.testlanguages.ui";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_XIMPORTSECTIONTESTLANG = "org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_CONTENTASSISTFRAGMENTTESTLANG = "org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLang";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_BUG462047_BUG462047LANG = "org.eclipse.xtext.xbase.testlanguages.bug462047.Bug462047Lang";
 	
-	private static final Logger logger = Logger.getLogger(XImportSectionTestLangActivator.class);
+	private static final Logger logger = Logger.getLogger(TestlanguagesActivator.class);
 	
-	private static XImportSectionTestLangActivator INSTANCE;
+	private static TestlanguagesActivator INSTANCE;
 	
 	private Map<String, Injector> injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
 	
@@ -46,7 +51,7 @@ public class XImportSectionTestLangActivator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 	
-	public static XImportSectionTestLangActivator getInstance() {
+	public static TestlanguagesActivator getInstance() {
 		return INSTANCE;
 	}
 	
@@ -73,37 +78,36 @@ public class XImportSectionTestLangActivator extends AbstractUIPlugin {
 			throw new RuntimeException("Failed to create injector for " + language, e);
 		}
 	}
-
+	
 	protected Module getRuntimeModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_XIMPORTSECTIONTESTLANG.equals(grammar)) {
-			return new org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLangRuntimeModule();
+			return new XImportSectionTestLangRuntimeModule();
 		}
 		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_CONTENTASSISTFRAGMENTTESTLANG.equals(grammar)) {
-			return new org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLangRuntimeModule();
+			return new ContentAssistFragmentTestLangRuntimeModule();
 		}
 		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_BUG462047_BUG462047LANG.equals(grammar)) {
-			return new org.eclipse.xtext.xbase.testlanguages.bug462047.Bug462047LangRuntimeModule();
+			return new Bug462047LangRuntimeModule();
 		}
-		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getUiModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_XIMPORTSECTIONTESTLANG.equals(grammar)) {
-			return new org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangUiModule(this);
+			return new XImportSectionTestLangUiModule(this);
 		}
 		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_CONTENTASSISTFRAGMENTTESTLANG.equals(grammar)) {
-			return new org.eclipse.xtext.xbase.testlanguages.ui.ContentAssistFragmentTestLangUiModule(this);
+			return new ContentAssistFragmentTestLangUiModule(this);
 		}
 		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_BUG462047_BUG462047LANG.equals(grammar)) {
-			return new org.eclipse.xtext.xbase.testlanguages.bug462047.ui.Bug462047LangUiModule(this);
+			return new Bug462047LangUiModule(this);
 		}
-		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
+	
 	
 }

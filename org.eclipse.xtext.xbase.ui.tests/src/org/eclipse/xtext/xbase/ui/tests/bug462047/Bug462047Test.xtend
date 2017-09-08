@@ -22,25 +22,20 @@ import org.eclipse.xtext.ui.testing.AbstractEditorTest
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource
-import org.eclipse.xtext.xbase.testlanguages.bug462047.Bug462047LangUiInjectorProvider
+import org.eclipse.xtext.xbase.testlanguages.bug462047.ui.tests.Bug462047LangUiInjectorProvider
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase
 import org.junit.After
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.testing.IInjectorProvider
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @RunWith(XtextRunner)
-@InjectWith(Bug462047LangUiInjectorProviderAdapter)
+@InjectWith(Bug462047LangUiInjectorProvider)
 class Bug462047Test extends AbstractEditorTest {
-	
-	static class Bug462047LangUiInjectorProviderAdapter extends Bug462047LangUiInjectorProvider implements IInjectorProvider {
-		
-	}
 	
 	@BeforeClass
 	def static void setupTargetPlatform() {
