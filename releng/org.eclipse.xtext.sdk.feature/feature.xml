@@ -7,7 +7,7 @@
       plugin="org.eclipse.xtext"
       image="modeling32.png"
       license-feature="org.eclipse.xtext.license"
-      license-feature-version="2.6.0.qualifier">
+      license-feature-version="2.13.0.qualifier">
 
    <description>
       %description

@@ -64,7 +64,7 @@
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<unit id="org.eclipse.xtext.docs.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.doc" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.activities" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.activities.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.builder" version="0.0.0"/>
