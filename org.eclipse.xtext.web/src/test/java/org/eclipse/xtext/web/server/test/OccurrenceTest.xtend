@@ -26,7 +26,7 @@ class OccurrenceTest extends AbstractWebServerTest {
 	}
 	
 	def protected assertOccurrences(CharSequence resourceContent, CharSequence expectation) {
-		assertEquals(expectation.toString.trim, resourceContent.occurrences.toString.trim)
+		assertEquals(expectation.toString.trim, resourceContent.toString.normalizeLineSeparator.occurrences.toString.trim)
 	}
 	
 	@Test 

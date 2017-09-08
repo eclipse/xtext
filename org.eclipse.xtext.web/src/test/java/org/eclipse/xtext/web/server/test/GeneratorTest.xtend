@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.server.test
 
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.formatting.ILineSeparatorInformation
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
@@ -15,7 +16,7 @@ import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine
 import org.eclipse.xtext.web.server.generator.GeneratorResult
 import org.eclipse.xtext.web.server.generator.GeneratorService
-import org.eclipse.xtext.web.server.test.GeneratorTest.Generator
+import org.eclipse.xtext.web.server.test.AbstractWebServerTest.TestLineSeparatorInformation
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -47,6 +48,9 @@ class GeneratorTest extends AbstractWebServerTest {
 		new StatemachineRuntimeModule {
 			override bindIGenerator2() {
 				Generator
+			}
+			def Class<? extends ILineSeparatorInformation> bindILineSeparatorInformation() {
+				TestLineSeparatorInformation
 			}
 		}
 	}

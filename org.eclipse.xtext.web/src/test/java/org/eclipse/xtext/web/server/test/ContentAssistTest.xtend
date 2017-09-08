@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.test
 
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineIdeModule
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineTemplateProposalProvider
 import org.eclipse.xtext.web.server.ServiceConflictResult
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
 import org.junit.Test
@@ -15,6 +17,23 @@ import static org.hamcrest.core.IsInstanceOf.*
 import static org.junit.Assert.*
 
 class ContentAssistTest extends AbstractWebServerTest {
+	
+	override protected getIdeModule() {
+		new StatemachineIdeModule() {
+				def Class<? extends StatemachineTemplateProposalProvider> bindStatemachineTemplateProposalProvider() {
+				StatemachineTemplateProposalProvider2
+			}
+
+		}
+	}
+	
+	static class StatemachineTemplateProposalProvider2 extends StatemachineTemplateProposalProvider {
+		
+		override protected getLineDelimiter() {
+			"\n"
+		}
+		
+	}
 	
 	protected def assertContentAssistResult(CharSequence resourceContent, CharSequence expectedResult) {
 		var contentString = resourceContent.toString
@@ -120,7 +139,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 		'''
 			state foo end
 				|
-		'''.assertContentAssistResult('''
+		'''.toString.normalizeLineSeparator.assertContentAssistResult('''
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (

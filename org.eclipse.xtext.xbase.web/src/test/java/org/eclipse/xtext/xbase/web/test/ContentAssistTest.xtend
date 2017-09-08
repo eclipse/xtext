@@ -10,12 +10,10 @@ package org.eclipse.xtext.xbase.web.test
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
 import org.junit.Test
 
-import static org.junit.Assert.*
-
 class ContentAssistTest extends AbstractXbaseWebTest {
 	
 	protected def assertContentAssistResult(CharSequence resourceContent, CharSequence expectedResult) {
-		var contentString = resourceContent.toString
+		var contentString = resourceContent.toString.normalizeLineSeparator
 		val cursorOffset = contentString.indexOf('|')
 		if (cursorOffset >= 0) {
 			contentString = contentString.substring(0, cursorOffset) + contentString.substring(cursorOffset + 1)
