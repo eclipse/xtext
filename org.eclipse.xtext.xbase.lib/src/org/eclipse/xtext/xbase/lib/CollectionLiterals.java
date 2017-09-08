@@ -126,6 +126,16 @@ import com.google.common.primitives.Ints;
 	}
 
 	/**
+	 * Creates an empty mutable {@link ArrayList} instance.
+	 * 
+	 * @return a new {@link ArrayList}
+	 */
+	@Pure
+	public static <T> ArrayList<T> newArrayList() {
+		return new ArrayList<T>();
+	}
+
+	/**
 	 * Creates a mutable {@link ArrayList} instance containing the given initial elements.
 	 * 
 	 * @param initial
@@ -137,7 +147,17 @@ import com.google.common.primitives.Ints;
 	public static <T> ArrayList<T> newArrayList(T... initial) {
 		if (initial.length > 0)
 			return Lists.newArrayList(initial);
-		return new ArrayList<T>();
+		return newArrayList();
+	}
+
+	/**
+	 * Creates an empty mutable {@link LinkedList} instance.
+	 * 
+	 * @return a new {@link LinkedList}
+	 */
+	@Pure
+	public static <T> LinkedList<T> newLinkedList() {
+		return new LinkedList<T>();
 	}
 
 	/**
@@ -152,7 +172,17 @@ import com.google.common.primitives.Ints;
 	public static <T> LinkedList<T> newLinkedList(T... initial) {
 		if (initial.length > 0)
 			return Lists.newLinkedList(Arrays.asList(initial));
-		return new LinkedList<T>();
+		return newLinkedList();
+	}
+
+	/**
+	 * Creates an empty mutable {@link HashSet} instance.
+	 * 
+	 * @return a new {@link HashSet}
+	 */
+	@Pure
+	public static <T> HashSet<T> newHashSet() {
+		return new HashSet<T>();
 	}
 
 	/**
@@ -167,7 +197,17 @@ import com.google.common.primitives.Ints;
 	public static <T> HashSet<T> newHashSet(T... initial) {
 		if (initial.length > 0)
 			return Sets.newHashSet(initial);
-		return new HashSet<T>();
+		return newHashSet();
+	}
+
+	/**
+	 * Creates an empty mutable {@link LinkedHashSet} instance.
+	 * 
+	 * @return a new {@link LinkedHashSet}
+	 */
+	@Pure
+	public static <T> LinkedHashSet<T> newLinkedHashSet() {
+		return new LinkedHashSet<T>();
 	}
 
 	/**
@@ -182,7 +222,20 @@ import com.google.common.primitives.Ints;
 	public static <T> LinkedHashSet<T> newLinkedHashSet(T... initial) {
 		if (initial.length > 0)
 			return Sets.newLinkedHashSet(Arrays.asList(initial));
-		return new LinkedHashSet<T>();
+		return newLinkedHashSet();
+	}
+
+	/**
+	 * Creates an empty mutable {@link TreeSet} instance.
+	 * 
+	 * @param comparator
+	 *            the comparator that should be used. May be <code>null</code> which indicates that the natural ordering
+	 *            of the items should be used.
+	 * @return a new {@link TreeSet}
+	 */
+	@Pure
+	public static <T> TreeSet<T> newTreeSet(Comparator<? super T> comparator) {
+		return new TreeSet<T>(comparator);
 	}
 
 	/**
@@ -205,6 +258,16 @@ import com.google.common.primitives.Ints;
 	}
 
 	/**
+	 * Creates an empty mutable {@link HashMap} instance.
+	 * 
+	 * @return a new {@link HashMap}
+	 */
+	@Pure
+	public static <K, V> HashMap<K, V> newHashMap() {
+		return new HashMap<K, V>();
+	}
+
+	/**
 	 * Creates a mutable {@link HashMap} instance containing the given initial entries. Repeated occurrences of a keys
 	 * will cause an {@link IllegalArgumentException}.
 	 * 
@@ -222,7 +285,17 @@ import com.google.common.primitives.Ints;
 			putAll(result, initial);
 			return result;
 		}
-		return new HashMap<K, V>();
+		return newHashMap();
+	}
+
+	/**
+	 * Creates an empty mutable {@link LinkedHashMap} instance.
+	 * 
+	 * @return a new {@link LinkedHashMap}
+	 */
+	@Pure
+	public static <K, V> LinkedHashMap<K, V> newLinkedHashMap() {
+		return new LinkedHashMap<K, V>();
 	}
 
 	/**
@@ -243,7 +316,7 @@ import com.google.common.primitives.Ints;
 			putAll(result, initial);
 			return result;
 		}
-		return new LinkedHashMap<K, V>();
+		return newLinkedHashMap();
 	}
 	
 	private static int capacity(int initialSize) {
@@ -253,6 +326,19 @@ import com.google.common.primitives.Ints;
 			return initialSize + initialSize / 3;
 		else
 			return Integer.MAX_VALUE;
+	}
+
+	/**
+	 * Creates an empty mutable {@link TreeMap} instance.
+	 * 
+	 * @param comparator
+	 *            the comparator that should be used. May be <code>null</code> which indicates that the natural ordering
+	 *            of the keys should be used.
+	 * @return a new {@link TreeMap}
+	 */
+	@Pure
+	public static <K, V> TreeMap<K, V> newTreeMap(Comparator<? super K> comparator) {
+		return new TreeMap<K, V>(comparator);
 	}
 
 	/**
