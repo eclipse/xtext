@@ -23,6 +23,9 @@ import org.eclipse.xtext.ide.serializer.ITextDocumentChange
 import org.eclipse.xtext.util.IAcceptor
 
 import static org.eclipse.xtext.ui.refactoring.participant.TryWithResource.*
+import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity
+import org.eclipse.core.resources.IFile
+import org.eclipse.core.resources.IWorkspace
 
 /**
  * Converts {@link IEmfResourceChange}s to LTK {@link Change}s.
@@ -63,19 +66,26 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	protected def dispatch void handleReplacements(IEmfResourceChange change) {
 		val outputStream = new ByteArrayOutputStream
 		tryWith(outputStream) [
+			val file = change.resource.URI.toFile
+			if (!file.canWrite) 
+				issues.add(Severity.ERROR, '''Affected file '«file.fullPath»' is read-only''')
+			file.checkDerived
 			change.resource.save(outputStream, null)
 			val newContent = outputStream.toByteArray
-			val ltkChange = new ReplaceFileContentChange(change.resource.URI.toFile, newContent) 
+			val ltkChange = new ReplaceFileContentChange(file, newContent) 
 			addChange(ltkChange)
 		]
 	}
 	
 	protected def dispatch void handleReplacements(ITextDocumentChange change) {
 		if(change.replacements.size > 0) {
+			val file = change.newURI.toFile
+			if (!file.canWrite) 
+				issues.add(Severity.FATAL, '''Affected file '«file.fullPath»' is read-only''')
+			file.checkDerived
 			val textEdits = change.replacements.map[ replacement |
 				new ReplaceEdit(replacement.offset, replacement.length, replacement.replacementText)
 			]
-			val file = change.newURI.toFile
 			val textEdit = new MultiTextEdit()
 			textEdit.addChildren(textEdits)
 			val textFileChange = new TextFileChange(change.oldURI.lastSegment, file)
@@ -89,9 +99,12 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	protected def void handleUriChange(IEmfResourceChange change) {
 		if(change.newURI != change.oldURI) {
 			if(change.newURI.lastSegment == change.oldURI.lastSegment) { 
+				val oldFile = change.oldURI.toFile
+				if (!oldFile.canWrite) 
+					issues.add(Severity.FATAL, '''Cannot move read-only file '«oldFile.fullPath»'«»''')
+				oldFile.checkDerived
 				val newFile = change.newURI.toFile
 				val newContainer = newFile.parent
-				val oldFile = change.oldURI.toFile
 				val ltkChange = new MoveResourceChange(oldFile, newContainer)
 				addChange(ltkChange)
 			} else if(change.newURI.trimSegments(1) == change.oldURI.trimSegments(1)) {
@@ -104,5 +117,15 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	protected def void addChange(Change change) {
 		if(changeFilter.apply(change))
 			currentChange.add(change)
+	}
+	
+	protected def boolean canWrite(IFile file) {
+		return file.workspace.validateEdit(#[file], IWorkspace.VALIDATE_PROMPT).isOK
+	}
+	
+	protected def checkDerived(IFile file) {
+		if (file.derived) {
+			issues.add(Severity.WARNING, '''Affected file '«file.fullPath»' is derived''')
+		}
 	}
 }
