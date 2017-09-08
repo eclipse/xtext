@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -25,6 +26,7 @@ import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
@@ -93,10 +95,21 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     final Procedure0 _function = () -> {
       try {
+        final IFile file = this._resourceURIConverter.toFile(change.getResource().getURI());
+        boolean _canWrite = this.canWrite(file);
+        boolean _not = (!_canWrite);
+        if (_not) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Affected file \'");
+          IPath _fullPath = file.getFullPath();
+          _builder.append(_fullPath);
+          _builder.append("\' is read-only");
+          this.issues.add(RefactoringIssueAcceptor.Severity.ERROR, _builder.toString());
+        }
+        this.checkDerived(file);
         change.getResource().save(outputStream, null);
         final byte[] newContent = outputStream.toByteArray();
-        IFile _file = this._resourceURIConverter.toFile(change.getResource().getURI());
-        final ReplaceFileContentChange ltkChange = new ReplaceFileContentChange(_file, newContent);
+        final ReplaceFileContentChange ltkChange = new ReplaceFileContentChange(file, newContent);
         this.addChange(ltkChange);
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
@@ -109,6 +122,18 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     int _size = change.getReplacements().size();
     boolean _greaterThan = (_size > 0);
     if (_greaterThan) {
+      final IFile file = this._resourceURIConverter.toFile(change.getNewURI());
+      boolean _canWrite = this.canWrite(file);
+      boolean _not = (!_canWrite);
+      if (_not) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Affected file \'");
+        IPath _fullPath = file.getFullPath();
+        _builder.append(_fullPath);
+        _builder.append("\' is read-only");
+        this.issues.add(RefactoringIssueAcceptor.Severity.FATAL, _builder.toString());
+      }
+      this.checkDerived(file);
       final Function1<ITextReplacement, ReplaceEdit> _function = (ITextReplacement replacement) -> {
         int _offset = replacement.getOffset();
         int _length = replacement.getLength();
@@ -116,7 +141,6 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
         return new ReplaceEdit(_offset, _length, _replacementText);
       };
       final List<ReplaceEdit> textEdits = ListExtensions.<ITextReplacement, ReplaceEdit>map(change.getReplacements(), _function);
-      final IFile file = this._resourceURIConverter.toFile(change.getNewURI());
       final MultiTextEdit textEdit = new MultiTextEdit();
       textEdit.addChildren(((TextEdit[])Conversions.unwrapArray(textEdits, TextEdit.class)));
       String _lastSegment = change.getOldURI().lastSegment();
@@ -137,9 +161,20 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
       String _lastSegment_1 = change.getOldURI().lastSegment();
       boolean _equals = Objects.equal(_lastSegment, _lastSegment_1);
       if (_equals) {
+        final IFile oldFile = this._resourceURIConverter.toFile(change.getOldURI());
+        boolean _canWrite = this.canWrite(oldFile);
+        boolean _not = (!_canWrite);
+        if (_not) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Cannot move read-only file \'");
+          IPath _fullPath = oldFile.getFullPath();
+          _builder.append(_fullPath);
+          _builder.append("\'");
+          this.issues.add(RefactoringIssueAcceptor.Severity.FATAL, _builder.toString());
+        }
+        this.checkDerived(oldFile);
         final IFile newFile = this._resourceURIConverter.toFile(change.getNewURI());
         final IContainer newContainer = newFile.getParent();
-        final IFile oldFile = this._resourceURIConverter.toFile(change.getOldURI());
         final MoveResourceChange ltkChange = new MoveResourceChange(oldFile, newContainer);
         this.addChange(ltkChange);
       } else {
@@ -147,9 +182,9 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
         URI _trimSegments_1 = change.getOldURI().trimSegments(1);
         boolean _equals_1 = Objects.equal(_trimSegments, _trimSegments_1);
         if (_equals_1) {
-          IPath _fullPath = this._resourceURIConverter.toFile(change.getOldURI()).getFullPath();
+          IPath _fullPath_1 = this._resourceURIConverter.toFile(change.getOldURI()).getFullPath();
           String _lastSegment_2 = change.getNewURI().lastSegment();
-          final RenameResourceChange ltkChange_1 = new RenameResourceChange(_fullPath, _lastSegment_2);
+          final RenameResourceChange ltkChange_1 = new RenameResourceChange(_fullPath_1, _lastSegment_2);
           this.addChange(ltkChange_1);
         }
       }
@@ -160,6 +195,22 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     boolean _apply = this.changeFilter.apply(change);
     if (_apply) {
       this.currentChange.add(change);
+    }
+  }
+  
+  protected boolean canWrite(final IFile file) {
+    return file.getWorkspace().validateEdit(new IFile[] { file }, IWorkspace.VALIDATE_PROMPT).isOK();
+  }
+  
+  protected void checkDerived(final IFile file) {
+    boolean _isDerived = file.isDerived();
+    if (_isDerived) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Affected file \'");
+      IPath _fullPath = file.getFullPath();
+      _builder.append(_fullPath);
+      _builder.append("\' is derived");
+      this.issues.add(RefactoringIssueAcceptor.Severity.WARNING, _builder.toString());
     }
   }
   
