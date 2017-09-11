@@ -81,14 +81,14 @@ public class ResourceRelocationProcessor {
   
   private IProject project;
   
-  public Change createChange(final String name, final IProgressMonitor pm) throws CoreException, OperationCanceledException {
+  public Change createChange(final String name, final ResourceRelocationContext.ChangeType type, final IProgressMonitor pm) throws CoreException, OperationCanceledException {
     boolean _isEmpty = this.uriChanges.isEmpty();
     if (_isEmpty) {
       return null;
     }
     final ResourceSet resourceSet = this.resourceSetProvider.get(this.project);
     this.liveScopeResourceSetInitializer.initialize(resourceSet);
-    final ResourceRelocationContext context = new ResourceRelocationContext(this.uriChanges, this.issues, this.changeSerializer, resourceSet);
+    final ResourceRelocationContext context = new ResourceRelocationContext(type, this.uriChanges, this.issues, this.changeSerializer, resourceSet);
     this.executeParticipants(context);
     final Predicate<Change> _function = (Change it) -> {
       return ((!((it instanceof MoveResourceChange) || (it instanceof RenameResourceChange))) || (!this.excludedResources.contains(it.getModifiedElement())));
@@ -102,7 +102,7 @@ public class ResourceRelocationProcessor {
     this.executor.executeParticipants(this.strategyRegistry.getStrategies(), context);
   }
   
-  public void addChangedResource(final IResource resource, final IPath fromPath, final IPath toPath, final ResourceRelocationChange.Type type) {
+  public void addChangedResource(final IResource resource, final IPath fromPath, final IPath toPath) {
     try {
       if ((this.project == null)) {
         this.project = resource.getProject();
@@ -113,14 +113,14 @@ public class ResourceRelocationProcessor {
         final URI newURI = this._resourceURIConverter.toURI(toPath.append(resource.getFullPath().removeFirstSegments(fromPath.segmentCount())));
         this.excludedResources.add(resource);
         if ((resource instanceof IFile)) {
-          final ResourceRelocationChange uriChange = new ResourceRelocationChange(oldURI, newURI, type, true);
+          final ResourceRelocationChange uriChange = new ResourceRelocationChange(oldURI, newURI, true);
           this.uriChanges.add(uriChange);
         } else {
           if ((resource instanceof IContainer)) {
-            final ResourceRelocationChange uriChange_1 = new ResourceRelocationChange(oldURI, newURI, type, false);
+            final ResourceRelocationChange uriChange_1 = new ResourceRelocationChange(oldURI, newURI, false);
             this.uriChanges.add(uriChange_1);
             final Consumer<IResource> _function = (IResource member) -> {
-              this.addChangedResource(member, fromPath, toPath, type);
+              this.addChangedResource(member, fromPath, toPath);
             };
             ((List<IResource>)Conversions.doWrapArray(((IContainer)resource).members())).forEach(_function);
           }

@@ -18,7 +18,7 @@ import org.eclipse.ltk.core.refactoring.participants.ISharableParticipant
 import org.eclipse.ltk.core.refactoring.participants.RefactoringArguments
 import org.eclipse.ltk.core.refactoring.participants.RenameArguments
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant
-import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange
+import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext.ChangeType
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -31,7 +31,7 @@ class XtextRenameResourceParticipant extends RenameParticipant implements IShara
 	Change change
 	
 	override checkConditions(IProgressMonitor pm, CheckConditionsContext context) throws OperationCanceledException {
-		change = processor.createChange(name, pm)
+		change = processor.createChange(name, ChangeType.RENAME, pm)
 		return processor.issues.refactoringStatus
 	}
 
@@ -53,7 +53,7 @@ class XtextRenameResourceParticipant extends RenameParticipant implements IShara
 			if (element instanceof IResource) {
 				val oldPath = element.fullPath
 				val newPath = oldPath.removeLastSegments(1).append(arguments.newName)
-				processor.addChangedResource(element, oldPath, newPath, ResourceRelocationChange.Type.RENAME)
+				processor.addChangedResource(element, oldPath, newPath)
 			}
 		}
 	}

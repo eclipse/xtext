@@ -20,7 +20,7 @@ import org.eclipse.ltk.core.refactoring.participants.ISharableParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringArguments;
 import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
-import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange;
+import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext;
 import org.eclipse.xtext.ui.refactoring.participant.ResourceRelocationProcessor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
@@ -38,7 +38,7 @@ public class XtextRenameResourceParticipant extends RenameParticipant implements
   @Override
   public RefactoringStatus checkConditions(final IProgressMonitor pm, final CheckConditionsContext context) throws OperationCanceledException {
     try {
-      this.change = this.processor.createChange(this.getName(), pm);
+      this.change = this.processor.createChange(this.getName(), ResourceRelocationContext.ChangeType.RENAME, pm);
       return this.processor.getIssues().getRefactoringStatus();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -71,7 +71,7 @@ public class XtextRenameResourceParticipant extends RenameParticipant implements
       if ((element instanceof IResource)) {
         final IPath oldPath = ((IResource)element).getFullPath();
         final IPath newPath = oldPath.removeLastSegments(1).append(((RenameArguments)arguments).getNewName());
-        this.processor.addChangedResource(((IResource)element), oldPath, newPath, ResourceRelocationChange.Type.RENAME);
+        this.processor.addChangedResource(((IResource)element), oldPath, newPath);
       }
     }
   }

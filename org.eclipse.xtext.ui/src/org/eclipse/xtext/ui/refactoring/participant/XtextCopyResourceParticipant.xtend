@@ -20,7 +20,7 @@ import org.eclipse.ltk.core.refactoring.participants.CopyArguments
 import org.eclipse.ltk.core.refactoring.participants.CopyParticipant
 import org.eclipse.ltk.core.refactoring.participants.ISharableParticipant
 import org.eclipse.ltk.core.refactoring.participants.RefactoringArguments
-import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange
+import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext.ChangeType
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -32,7 +32,7 @@ class XtextCopyResourceParticipant extends CopyParticipant implements ISharableP
 	Change change
 	
 	override checkConditions(IProgressMonitor pm, CheckConditionsContext context) throws OperationCanceledException {
-		change = processor.createChange(name, pm)
+		change = processor.createChange(name, ChangeType.COPY, pm)
 		return processor.issues.refactoringStatus
 	}
 
@@ -58,7 +58,7 @@ class XtextCopyResourceParticipant extends CopyParticipant implements ISharableP
 						IFolder: destination.getFile(element.name)
 						IProject: destination.getFile(element.name)
 					}
-					processor.addChangedResource(element, element.fullPath, destinationFile.fullPath, ResourceRelocationChange.Type.COPY)
+					processor.addChangedResource(element, element.fullPath, destinationFile.fullPath)
 				}
 			}
 		}

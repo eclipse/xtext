@@ -27,6 +27,7 @@ import org.eclipse.xtext.ui.resource.LiveScopeResourceSetInitializer
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationStrategyExecutor
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange
+import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext.ChangeType
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -49,13 +50,13 @@ class ResourceRelocationProcessor {
 	
 	IProject project // TODO: multi-project move
 
-	def createChange(String name, 
+	def createChange(String name, ChangeType type,  
 					IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		if (uriChanges.empty)
 			return null
 		val resourceSet = resourceSetProvider.get(project)
 		liveScopeResourceSetInitializer.initialize(resourceSet)
-		val context = new ResourceRelocationContext(uriChanges,issues, changeSerializer, resourceSet)
+		val context = new ResourceRelocationContext(type, uriChanges,issues, changeSerializer, resourceSet)
 		executeParticipants(context)
 		changeConverter.initialize(name, [
 			(!(it instanceof MoveResourceChange || it instanceof RenameResourceChange) 
@@ -69,7 +70,7 @@ class ResourceRelocationProcessor {
 		executor.executeParticipants(strategyRegistry.strategies, context)
 	}
 	
-	def void addChangedResource(IResource resource, IPath fromPath, IPath toPath, ResourceRelocationChange.Type type) {
+	def void addChangedResource(IResource resource, IPath fromPath, IPath toPath) {
 		if (project === null)
 			project = resource.project
 
@@ -78,13 +79,13 @@ class ResourceRelocationProcessor {
 			val newURI = toPath.append(resource.fullPath.removeFirstSegments(fromPath.segmentCount)).toURI
 			excludedResources.add(resource)
 			if (resource instanceof IFile) {
-				val uriChange = new ResourceRelocationChange(oldURI, newURI, type, true)
+				val uriChange = new ResourceRelocationChange(oldURI, newURI, true)
 				uriChanges += uriChange
 			} else if (resource instanceof IContainer) {
-				val uriChange = new ResourceRelocationChange(oldURI, newURI, type, false)
+				val uriChange = new ResourceRelocationChange(oldURI, newURI, false)
 				uriChanges += uriChange
 				resource.members.forEach [ member |
-					addChangedResource(member, fromPath, toPath, type)
+					addChangedResource(member, fromPath, toPath)
 				]
 			}
 		}

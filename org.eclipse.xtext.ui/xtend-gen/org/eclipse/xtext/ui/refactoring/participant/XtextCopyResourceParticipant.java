@@ -22,7 +22,7 @@ import org.eclipse.ltk.core.refactoring.participants.CopyArguments;
 import org.eclipse.ltk.core.refactoring.participants.CopyParticipant;
 import org.eclipse.ltk.core.refactoring.participants.ISharableParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringArguments;
-import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange;
+import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext;
 import org.eclipse.xtext.ui.refactoring.participant.ResourceRelocationProcessor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
@@ -39,7 +39,7 @@ public class XtextCopyResourceParticipant extends CopyParticipant implements ISh
   @Override
   public RefactoringStatus checkConditions(final IProgressMonitor pm, final CheckConditionsContext context) throws OperationCanceledException {
     try {
-      this.change = this.processor.createChange(this.getName(), pm);
+      this.change = this.processor.createChange(this.getName(), ResourceRelocationContext.ChangeType.COPY, pm);
       return this.processor.getIssues().getRefactoringStatus();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -85,7 +85,7 @@ public class XtextCopyResourceParticipant extends CopyParticipant implements ISh
             }
           }
           final IFile destinationFile = _switchResult;
-          this.processor.addChangedResource(((IResource)element), ((IResource)element).getFullPath(), destinationFile.getFullPath(), ResourceRelocationChange.Type.COPY);
+          this.processor.addChangedResource(((IResource)element), ((IResource)element).getFullPath(), destinationFile.getFullPath());
         }
       }
     }
