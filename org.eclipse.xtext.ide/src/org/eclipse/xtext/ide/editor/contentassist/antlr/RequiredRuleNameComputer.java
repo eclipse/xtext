@@ -40,6 +40,9 @@ public class RequiredRuleNameComputer {
 
 	private static final String[][] EMPTY_ARRAY = new String[0][];
 
+	/**
+	 * A parameter configuration for a parameterized rule in the current stack of the parser.
+	 */
 	public static abstract class Param {
 		public String ruleName;
 		public List<Integer> paramStack;
@@ -66,6 +69,10 @@ public class RequiredRuleNameComputer {
 	@Inject
 	private RuleNames ruleNames;
 
+	/**
+	 * Returns the names of parser rules that should be called in order to obtain the follow elements for the parser
+	 * call stack described by the given param.
+	 */
 	public String[][] getRequiredRuleNames(Param param) {
 		if (isFiltered(param)) {
 			return EMPTY_ARRAY;
@@ -119,6 +126,14 @@ public class RequiredRuleNameComputer {
 		return result;
 	}
 
+	/**
+	 * Returns true if the grammar element that is associated with the given param is filtered due to guard conditions
+	 * of parameterized rules in the current call stack.
+	 * 
+	 * If the grammar element is the only element contained in a group, its container is checked, too.
+	 * 
+	 * @see #isFiltered(AbstractElement, Param)
+	 */
 	protected boolean isFiltered(Param param) {
 		AbstractElement elementToParse = param.elementToParse;
 		while (elementToParse != null) {
@@ -143,6 +158,9 @@ public class RequiredRuleNameComputer {
 		return null;
 	}
 
+	/**
+	 * Returns true if the given candidate is a group that is filtered due to rule parameters in the current call graph.
+	 */
 	protected boolean isFiltered(AbstractElement canddiate, Param param) {
 		if (canddiate instanceof Group) {
 			Group group = (Group) canddiate;
