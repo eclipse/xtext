@@ -7,11 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.refactoring
 
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.lib.annotations.Data
+
 /**
+ * URIs can also refer to folders and non-Xtext resources.
+ * 
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  */
-interface XtextMoveResourceStrategy {
+@Data
+class ResourceRelocationChange {
+	URI fromURI
+	URI toURI
+	Type type 
+	boolean isFile
 	
-	def void applyMove(MoveResourceContext context)
+	enum Type {
+		COPY, MOVE, RENAME
+	}
 }

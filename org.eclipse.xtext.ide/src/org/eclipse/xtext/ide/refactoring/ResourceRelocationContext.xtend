@@ -7,12 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.refactoring
 
-import org.eclipse.emf.ecore.resource.Resource
+import java.util.List
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.ide.serializer.IChangeSerializer
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-interface ResourceModification {
-	
-	def void modify(Resource resource)
+@FinalFieldsConstructor
+@Accessors(PUBLIC_GETTER)
+class ResourceRelocationContext {
+
+	val List<ResourceRelocationChange> changes
+	val RefactoringIssueAcceptor issueAcceptor
+
+	val IChangeSerializer changeSerializer
+	val ResourceSet resourceSet
 }
