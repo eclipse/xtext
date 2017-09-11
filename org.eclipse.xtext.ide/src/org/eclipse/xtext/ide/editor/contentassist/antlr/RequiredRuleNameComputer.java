@@ -80,40 +80,60 @@ public class RequiredRuleNameComputer {
 		AbstractElement elementToParse = param.elementToParse;
 		String ruleName = param.ruleName;
 		if (ruleName == null) {
-			if (elementToParse instanceof RuleCall) {
-				RuleCall call = (RuleCall) elementToParse;
-				if (call.getRule() instanceof ParserRule) {
-					String antlrRuleName = ruleNames.getAntlrRuleName(call.getRule());
-					if (!call.getArguments().isEmpty()) {
-						Set<Parameter> context = param.getAssignedParametes();
-						Set<Parameter> arguments = getAssignedArguments(call, context);
-						int config = getParameterConfig(arguments);
-						antlrRuleName = ruleNames.getAntlrRuleName(call.getRule(), config);
-					}
-					return new String[][] { { antlrRuleName } };
-				}
-			}
-			return EMPTY_ARRAY;
+			return getRequiredRuleNames(param, elementToParse);
 		}
-		String adjustedRuleName = adjustRuleName(ruleName, param);
+		return getAdjustedRequiredRuleNames(param, elementToParse, ruleName);
+	}
+
+	protected String[][] getAdjustedRequiredRuleNames(Param param, AbstractElement elementToParse,
+			String originalRuleName) {
+		String adjustedRuleName = adjustRuleName(originalRuleName, param);
 		if (!(GrammarUtil.isOptionalCardinality(elementToParse)
 				|| GrammarUtil.isOneOrMoreCardinality(elementToParse))) {
 			return new String[][] { { adjustedRuleName } };
 		}
-		if ((elementToParse.eContainer() instanceof Group)) {
-			List<AbstractElement> tokens = getFilteredElements(((Group) elementToParse.eContainer()).getElements(),
-					param);
-			int idx = tokens.indexOf(elementToParse) + 1;
-			if (idx != tokens.size()) {
-				String secondRule = param.getBaseRuleName((AbstractElement) elementToParse.eContainer());
-				secondRule = secondRule.substring(0, secondRule.lastIndexOf('_') + 1) + idx;
-				String adjustedSecondRule = adjustRuleName(secondRule, param);
-				if (GrammarUtil.isMultipleCardinality(elementToParse))
-					return new String[][] { { adjustedRuleName }, { adjustedRuleName, adjustedSecondRule } };
-				return new String[][] { { adjustedRuleName, adjustedSecondRule } };
+		EObject container = elementToParse.eContainer();
+		if (container instanceof Group) {
+			Group group = (Group) container;
+			List<AbstractElement> filteredElements = getFilteredElements(group.getElements(), param);
+			int idx = filteredElements.indexOf(elementToParse) + 1;
+			if (idx != filteredElements.size()) {
+				String adjustedSecondRule = getAdjustedSecondRule(param, group, idx);
+				return getRuleNamesInGroup(param, elementToParse, adjustedRuleName, adjustedSecondRule);
 			}
 		}
 		return new String[][] { { adjustedRuleName } };
+	}
+
+	protected String getAdjustedSecondRule(Param param, Group group, int idx) {
+		String secondRule = param.getBaseRuleName(group);
+		secondRule = secondRule.substring(0, secondRule.lastIndexOf('_') + 1) + idx;
+		String adjustedSecondRule = adjustRuleName(secondRule, param);
+		return adjustedSecondRule;
+	}
+
+	protected String[][] getRuleNamesInGroup(Param param, AbstractElement elementToParse, String adjustedFirstRule,
+			String adjustedSecondRule) {
+		if (GrammarUtil.isMultipleCardinality(elementToParse))
+			return new String[][] { { adjustedFirstRule }, { adjustedFirstRule, adjustedSecondRule } };
+		return new String[][] { { adjustedFirstRule, adjustedSecondRule } };
+	}
+
+	protected String[][] getRequiredRuleNames(Param param, AbstractElement elementToParse) {
+		if (elementToParse instanceof RuleCall) {
+			RuleCall call = (RuleCall) elementToParse;
+			if (call.getRule() instanceof ParserRule) {
+				String antlrRuleName = ruleNames.getAntlrRuleName(call.getRule());
+				if (!call.getArguments().isEmpty()) {
+					Set<Parameter> context = param.getAssignedParametes();
+					Set<Parameter> arguments = getAssignedArguments(call, context);
+					int config = getParameterConfig(arguments);
+					antlrRuleName = ruleNames.getAntlrRuleName(call.getRule(), config);
+				}
+				return new String[][] { { antlrRuleName } };
+			}
+		}
+		return EMPTY_ARRAY;
 	}
 
 	protected List<AbstractElement> getFilteredElements(List<AbstractElement> elements, Param param) {
