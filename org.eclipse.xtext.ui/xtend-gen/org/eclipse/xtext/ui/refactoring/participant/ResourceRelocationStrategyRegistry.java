@@ -7,13 +7,12 @@
  */
 package org.eclipse.xtext.ui.refactoring.participant;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.xtext.ide.refactoring.XtextMoveResourceStrategy;
+import org.eclipse.xtext.ide.refactoring.IResourceRelocationStrategy;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
@@ -22,41 +21,39 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  * @since 2.13
  */
 @SuppressWarnings("all")
-public class XtextMoveResourceStrategyRegistry {
-  private static Logger LOG = Logger.getLogger(XtextMoveResourceStrategyRegistry.class);
+public class ResourceRelocationStrategyRegistry {
+  private static Logger LOG = Logger.getLogger(ResourceRelocationStrategyRegistry.class);
   
-  private List<XtextMoveResourceStrategy> strategies;
+  private final static String EXTENSION_POINT_ID = "org.eclipse.xtext.ui.resourceRelocationStrategy";
   
-  public List<? extends XtextMoveResourceStrategy> getStrategies() {
-    List<? extends XtextMoveResourceStrategy> _elvis = null;
+  private List<IResourceRelocationStrategy> strategies;
+  
+  public List<? extends IResourceRelocationStrategy> getStrategies() {
+    List<? extends IResourceRelocationStrategy> _elvis = null;
     if (this.strategies != null) {
       _elvis = this.strategies;
     } else {
-      ArrayList<XtextMoveResourceStrategy> _xblockexpression = null;
+      List<IResourceRelocationStrategy> _xblockexpression = null;
       {
-        final IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(this.getExtensionPointID());
-        final ArrayList<XtextMoveResourceStrategy> strategies = CollectionLiterals.<XtextMoveResourceStrategy>newArrayList();
+        final IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(ResourceRelocationStrategyRegistry.EXTENSION_POINT_ID);
+        this.strategies = CollectionLiterals.<IResourceRelocationStrategy>newArrayList();
         for (final IConfigurationElement configurationElement : configurationElements) {
           try {
             Object _createExecutableExtension = configurationElement.createExecutableExtension("class");
-            strategies.add(((XtextMoveResourceStrategy) _createExecutableExtension));
+            this.strategies.add(((IResourceRelocationStrategy) _createExecutableExtension));
           } catch (final Throwable _t) {
             if (_t instanceof CoreException) {
               final CoreException e = (CoreException)_t;
-              XtextMoveResourceStrategyRegistry.LOG.error("Error instantiating participant strategy", e);
+              ResourceRelocationStrategyRegistry.LOG.error("Error instantiating participant strategy", e);
             } else {
               throw Exceptions.sneakyThrow(_t);
             }
           }
         }
-        _xblockexpression = strategies;
+        _xblockexpression = this.strategies;
       }
       _elvis = _xblockexpression;
     }
     return _elvis;
-  }
-  
-  protected String getExtensionPointID() {
-    return "org.eclipse.xtext.ui.resourceMoveStrategy";
   }
 }

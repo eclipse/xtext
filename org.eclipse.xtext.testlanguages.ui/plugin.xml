@@ -2088,9 +2088,9 @@
 		</markerResolutionGenerator>
 	</extension>
 	<extension
-         point="org.eclipse.xtext.ui.resourceMoveStrategy">
+         point="org.eclipse.xtext.ui.resourceRelocationStrategy">
       <strategy
-            class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.testlanguages.fileAware.ide.refactoring.FileAwareTestLanguageMoveResourceStrategy">
+            class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.testlanguages.fileAware.ide.refactoring.FileAwareTestLanguageResourceRelocationStrategy">
       </strategy>
      </extension>
 </plugin>

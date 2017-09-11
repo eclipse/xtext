@@ -8,28 +8,29 @@
 package org.eclipse.xtext.ui.refactoring.participant;
 
 import com.google.inject.Inject;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
+import org.eclipse.ltk.core.refactoring.participants.CopyArguments;
+import org.eclipse.ltk.core.refactoring.participants.CopyParticipant;
 import org.eclipse.ltk.core.refactoring.participants.ISharableParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringArguments;
-import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
-import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange;
 import org.eclipse.xtext.ui.refactoring.participant.ResourceRelocationProcessor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
  * @author koehnlein - Initial contribution and API
- * @since 2.13
  */
 @SuppressWarnings("all")
-public class XtextRenameResourceParticipant extends RenameParticipant implements ISharableParticipant {
+public class XtextCopyResourceParticipant extends CopyParticipant implements ISharableParticipant {
   @Inject
   private ResourceRelocationProcessor processor;
   
@@ -52,7 +53,7 @@ public class XtextRenameResourceParticipant extends RenameParticipant implements
   
   @Override
   public String getName() {
-    return "Xtext rename resource participant";
+    return "Xtext copy resource participant";
   }
   
   @Override
@@ -67,11 +68,25 @@ public class XtextRenameResourceParticipant extends RenameParticipant implements
   
   @Override
   public void addElement(final Object element, final RefactoringArguments arguments) {
-    if ((arguments instanceof RenameArguments)) {
+    if ((arguments instanceof CopyArguments)) {
       if ((element instanceof IResource)) {
-        final IPath oldPath = ((IResource)element).getFullPath();
-        final IPath newPath = oldPath.removeLastSegments(1).append(((RenameArguments)arguments).getNewName());
-        this.processor.addChangedResource(((IResource)element), oldPath, newPath, ResourceRelocationChange.Type.RENAME);
+        final Object destination = ((CopyArguments)arguments).getDestination();
+        if (((destination instanceof IFolder) || (destination instanceof IProject))) {
+          IFile _switchResult = null;
+          boolean _matched = false;
+          if (destination instanceof IFolder) {
+            _matched=true;
+            _switchResult = ((IFolder)destination).getFile(((IResource)element).getName());
+          }
+          if (!_matched) {
+            if (destination instanceof IProject) {
+              _matched=true;
+              _switchResult = ((IProject)destination).getFile(((IResource)element).getName());
+            }
+          }
+          final IFile destinationFile = _switchResult;
+          this.processor.addChangedResource(((IResource)element), ((IResource)element).getFullPath(), destinationFile.getFullPath(), ResourceRelocationChange.Type.COPY);
+        }
       }
     }
   }

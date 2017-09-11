@@ -27,14 +27,14 @@ import org.eclipse.ltk.core.refactoring.resource.MoveResourceChange;
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.ide.refactoring.MoveResourceContext;
-import org.eclipse.xtext.ide.refactoring.ResourceURIChange;
-import org.eclipse.xtext.ide.refactoring.XtextMoveResourceStrategy;
+import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange;
+import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext;
+import org.eclipse.xtext.ide.refactoring.ResourceRelocationStrategyExecutor;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ui.refactoring.participant.ChangeConverter;
 import org.eclipse.xtext.ui.refactoring.participant.LtkIssueAcceptor;
+import org.eclipse.xtext.ui.refactoring.participant.ResourceRelocationStrategyRegistry;
 import org.eclipse.xtext.ui.refactoring.participant.ResourceURIConverter;
-import org.eclipse.xtext.ui.refactoring.participant.XtextMoveResourceStrategyRegistry;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.LiveScopeResourceSetInitializer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -48,7 +48,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @since 2.13
  */
 @SuppressWarnings("all")
-public class XtextMoveResourceProcessor {
+public class ResourceRelocationProcessor {
   @Inject
   private IResourceSetProvider resourceSetProvider;
   
@@ -67,25 +67,29 @@ public class XtextMoveResourceProcessor {
   private IChangeSerializer changeSerializer;
   
   @Inject
-  private XtextMoveResourceStrategyRegistry strategyRegistry;
+  private ResourceRelocationStrategyRegistry strategyRegistry;
   
   @Inject
   private ChangeConverter changeConverter;
   
-  private List<ResourceURIChange> folderUriChanges = CollectionLiterals.<ResourceURIChange>newArrayList();
+  @Inject
+  private ResourceRelocationStrategyExecutor executor;
   
-  private List<ResourceURIChange> fileUriChanges = CollectionLiterals.<ResourceURIChange>newArrayList();
+  private List<ResourceRelocationChange> uriChanges = CollectionLiterals.<ResourceRelocationChange>newArrayList();
   
   private Set<IResource> excludedResources = CollectionLiterals.<IResource>newHashSet();
   
-  public Change createChange(final String name, final IProject project, final IProgressMonitor pm) throws CoreException, OperationCanceledException {
-    if ((this.folderUriChanges.isEmpty() && this.fileUriChanges.isEmpty())) {
+  private IProject project;
+  
+  public Change createChange(final String name, final IProgressMonitor pm) throws CoreException, OperationCanceledException {
+    boolean _isEmpty = this.uriChanges.isEmpty();
+    if (_isEmpty) {
       return null;
     }
-    final ResourceSet resourceSet = this.resourceSetProvider.get(project);
+    final ResourceSet resourceSet = this.resourceSetProvider.get(this.project);
     this.liveScopeResourceSetInitializer.initialize(resourceSet);
-    final MoveResourceContext moveContext = new MoveResourceContext(this.fileUriChanges, this.folderUriChanges, this.issues, this.changeSerializer, resourceSet);
-    this.applyMoveStrategies(moveContext);
+    final ResourceRelocationContext context = new ResourceRelocationContext(this.uriChanges, this.issues, this.changeSerializer, resourceSet);
+    this.executeParticipants(context);
     final Predicate<Change> _function = (Change it) -> {
       return ((!((it instanceof MoveResourceChange) || (it instanceof RenameResourceChange))) || (!this.excludedResources.contains(it.getModifiedElement())));
     };
@@ -94,29 +98,29 @@ public class XtextMoveResourceProcessor {
     return this.changeConverter.getChange();
   }
   
-  protected void applyMoveStrategies(final MoveResourceContext context) {
-    final Consumer<XtextMoveResourceStrategy> _function = (XtextMoveResourceStrategy it) -> {
-      it.applyMove(context);
-    };
-    this.strategyRegistry.getStrategies().forEach(_function);
-    context.executeModifications();
+  protected void executeParticipants(final ResourceRelocationContext context) {
+    this.executor.executeParticipants(this.strategyRegistry.getStrategies(), context);
   }
   
-  public void addMovedResource(final IResource resource, final IPath oldPath, final IPath newPath) {
+  public void addChangedResource(final IResource resource, final IPath fromPath, final IPath toPath, final ResourceRelocationChange.Type type) {
     try {
-      boolean _isPrefixOf = oldPath.isPrefixOf(resource.getFullPath());
+      if ((this.project == null)) {
+        this.project = resource.getProject();
+      }
+      boolean _isPrefixOf = fromPath.isPrefixOf(resource.getFullPath());
       if (_isPrefixOf) {
         final URI oldURI = this._resourceURIConverter.toURI(resource);
-        final URI newURI = this._resourceURIConverter.toURI(newPath.append(resource.getFullPath().removeFirstSegments(oldPath.segmentCount())));
-        final ResourceURIChange uriChange = new ResourceURIChange(oldURI, newURI);
+        final URI newURI = this._resourceURIConverter.toURI(toPath.append(resource.getFullPath().removeFirstSegments(fromPath.segmentCount())));
         this.excludedResources.add(resource);
         if ((resource instanceof IFile)) {
-          this.fileUriChanges.add(uriChange);
+          final ResourceRelocationChange uriChange = new ResourceRelocationChange(oldURI, newURI, type, true);
+          this.uriChanges.add(uriChange);
         } else {
           if ((resource instanceof IContainer)) {
-            this.folderUriChanges.add(uriChange);
+            final ResourceRelocationChange uriChange_1 = new ResourceRelocationChange(oldURI, newURI, type, false);
+            this.uriChanges.add(uriChange_1);
             final Consumer<IResource> _function = (IResource member) -> {
-              this.addMovedResource(member, oldPath, newPath);
+              this.addChangedResource(member, fromPath, toPath, type);
             };
             ((List<IResource>)Conversions.doWrapArray(((IContainer)resource).members())).forEach(_function);
           }

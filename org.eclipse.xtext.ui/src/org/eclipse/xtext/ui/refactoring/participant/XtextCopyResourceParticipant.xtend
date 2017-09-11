@@ -16,21 +16,20 @@ import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.ltk.core.refactoring.Change
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext
+import org.eclipse.ltk.core.refactoring.participants.CopyArguments
+import org.eclipse.ltk.core.refactoring.participants.CopyParticipant
 import org.eclipse.ltk.core.refactoring.participants.ISharableParticipant
-import org.eclipse.ltk.core.refactoring.participants.MoveArguments
-import org.eclipse.ltk.core.refactoring.participants.MoveParticipant
 import org.eclipse.ltk.core.refactoring.participants.RefactoringArguments
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange
 
 /**
  * @author koehnlein - Initial contribution and API
- * @since 2.13
  */
-class XtextMoveResourceParticipant extends MoveParticipant implements ISharableParticipant {
-
+class XtextCopyResourceParticipant extends CopyParticipant implements ISharableParticipant {
+	
 	@Inject ResourceRelocationProcessor processor
 	
-	Change change 
+	Change change
 	
 	override checkConditions(IProgressMonitor pm, CheckConditionsContext context) throws OperationCanceledException {
 		change = processor.createChange(name, pm)
@@ -38,20 +37,20 @@ class XtextMoveResourceParticipant extends MoveParticipant implements ISharableP
 	}
 
 	override createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		return change
+		return change 
 	}
 
 	override getName() {
-		'Xtext move resource participant'
+		'Xtext copy resource participant'
 	}
 
 	override protected initialize(Object element) {
 		addElement(element, arguments)
 		true
 	}
-
+	
 	override addElement(Object element, RefactoringArguments arguments) {
-		if (arguments instanceof MoveArguments) {
+		if (arguments instanceof CopyArguments) {
 			if (element instanceof IResource) {
 				val destination = arguments.destination
 				if (destination instanceof IFolder || destination instanceof IProject) {
@@ -59,7 +58,7 @@ class XtextMoveResourceParticipant extends MoveParticipant implements ISharableP
 						IFolder: destination.getFile(element.name)
 						IProject: destination.getFile(element.name)
 					}
-					processor.addChangedResource(element, element.fullPath, destinationFile.fullPath, ResourceRelocationChange.Type.MOVE)
+					processor.addChangedResource(element, element.fullPath, destinationFile.fullPath, ResourceRelocationChange.Type.COPY)
 				}
 			}
 		}

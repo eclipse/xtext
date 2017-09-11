@@ -21,40 +21,42 @@ import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.ltk.core.refactoring.resource.MoveResourceChange
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.ide.refactoring.MoveResourceContext
-import org.eclipse.xtext.ide.refactoring.ResourceURIChange
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.ui.resource.LiveScopeResourceSetInitializer
+import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext
+import org.eclipse.xtext.ide.refactoring.ResourceRelocationStrategyExecutor
+import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange
 
 /**
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  */
-class XtextMoveResourceProcessor {
+class ResourceRelocationProcessor {
 
 	@Inject IResourceSetProvider resourceSetProvider
 	@Inject LiveScopeResourceSetInitializer liveScopeResourceSetInitializer
 	@Accessors(PACKAGE_GETTER) @Inject LtkIssueAcceptor issues
 	@Inject extension ResourceURIConverter
 	@Inject IChangeSerializer changeSerializer
-	@Inject XtextMoveResourceStrategyRegistry strategyRegistry
+	@Inject ResourceRelocationStrategyRegistry strategyRegistry
 	@Inject ChangeConverter changeConverter
+	@Inject ResourceRelocationStrategyExecutor executor
 
-	List<ResourceURIChange> folderUriChanges = newArrayList()
-	List<ResourceURIChange> fileUriChanges = newArrayList()
+	List<ResourceRelocationChange> uriChanges = newArrayList()
 	
 	Set<IResource> excludedResources = newHashSet()
+	
+	IProject project // TODO: multi-project move
 
 	def createChange(String name, 
-					IProject project,
 					IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		if (folderUriChanges.empty && fileUriChanges.empty)
+		if (uriChanges.empty)
 			return null
 		val resourceSet = resourceSetProvider.get(project)
 		liveScopeResourceSetInitializer.initialize(resourceSet)
-		val moveContext = new MoveResourceContext(fileUriChanges, folderUriChanges, issues, changeSerializer, resourceSet)
-		applyMoveStrategies(moveContext)
+		val context = new ResourceRelocationContext(uriChanges,issues, changeSerializer, resourceSet)
+		executeParticipants(context)
 		changeConverter.initialize(name, [
 			(!(it instanceof MoveResourceChange || it instanceof RenameResourceChange) 
 				|| !excludedResources.contains(modifiedElement))
@@ -63,23 +65,26 @@ class XtextMoveResourceProcessor {
 		return changeConverter.change
 	}
 
-	protected def void applyMoveStrategies(MoveResourceContext context) {
-		strategyRegistry.strategies.forEach[applyMove(context)]
-		context.executeModifications
+	protected def void executeParticipants(ResourceRelocationContext context) {
+		executor.executeParticipants(strategyRegistry.strategies, context)
 	}
 	
-	def void addMovedResource(IResource resource, IPath oldPath, IPath newPath) {
-		if (oldPath.isPrefixOf(resource.fullPath)) {
+	def void addChangedResource(IResource resource, IPath fromPath, IPath toPath, ResourceRelocationChange.Type type) {
+		if (project === null)
+			project = resource.project
+
+		if (fromPath.isPrefixOf(resource.fullPath)) {
 			val oldURI = resource.toURI
-			val newURI = newPath.append(resource.fullPath.removeFirstSegments(oldPath.segmentCount)).toURI
-			val uriChange = new ResourceURIChange(oldURI, newURI)
+			val newURI = toPath.append(resource.fullPath.removeFirstSegments(fromPath.segmentCount)).toURI
 			excludedResources.add(resource)
 			if (resource instanceof IFile) {
-				fileUriChanges += uriChange
+				val uriChange = new ResourceRelocationChange(oldURI, newURI, type, true)
+				uriChanges += uriChange
 			} else if (resource instanceof IContainer) {
-				folderUriChanges += uriChange
+				val uriChange = new ResourceRelocationChange(oldURI, newURI, type, false)
+				uriChanges += uriChange
 				resource.members.forEach [ member |
-					addMovedResource(member, oldPath, newPath)
+					addChangedResource(member, fromPath, toPath, type)
 				]
 			}
 		}

@@ -3,7 +3,7 @@
 <schema targetNamespace="org.eclipse.xtext.ui" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.xtext.ui" id="resourceMoveStrategy" name="Xtext Resource Move Strategy"/>
+         <meta.schema plugin="org.eclipse.xtext.ui" id="resourceRelocationStrategy" name="Xtext Resource Relocation Strategy"/>
       </appInfo>
       <documentation>
          [Enter description of this extension point.]
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ide.refactoring.XtextMoveResourceStrategy"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ide.refactoring.IResourceRelocationStrategy"/>
                </appInfo>
             </annotation>
          </attribute>

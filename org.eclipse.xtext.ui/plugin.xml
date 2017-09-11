@@ -2,7 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension-point id="searchFilter" name="Xtext EObject Search Filter" schema="schema/searchFilter.exsd"/>
-   <extension-point id="resourceMoveStrategy" name="Xtext Move Strategy" schema="schema/resourceMoveStrategy.exsd"/>
+   <extension-point id="resourceRelocationStrategy" name="Xtext ResoureRelocation Strategy" schema="schema/resourceRelocationStrategy.exsd"/>
    <extension point="org.eclipse.ui.keywords">
       <keyword
             id="org.eclipse.xtext.ui.keyword.editor"

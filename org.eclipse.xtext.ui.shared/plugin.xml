@@ -263,4 +263,13 @@
        <enablement></enablement>
       </renameParticipant>
    </extension>
+   <extension
+         point="org.eclipse.ltk.core.refactoring.copyParticipants">
+      <copyParticipant
+      	  class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.participant.XtextCopyResourceParticipant"
+          id="org.eclipse.xtext.ui.shared.refactoring.copyResourceParticipant"
+          name="Xtext Copy Resource Participant">
+       <enablement></enablement>
+      </copyParticipant>
+   </extension>
 </plugin>

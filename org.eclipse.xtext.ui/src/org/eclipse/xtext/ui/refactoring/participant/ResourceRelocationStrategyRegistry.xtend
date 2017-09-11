@@ -11,25 +11,27 @@ import java.util.List
 import org.apache.log4j.Logger
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.Platform
-import org.eclipse.xtext.ide.refactoring.XtextMoveResourceStrategy
+import org.eclipse.xtext.ide.refactoring.IResourceRelocationStrategy
 
 /**
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  */
-class XtextMoveResourceStrategyRegistry {
+class ResourceRelocationStrategyRegistry {
 	
-	static Logger LOG = Logger.getLogger(XtextMoveResourceStrategyRegistry)
+	static Logger LOG = Logger.getLogger(ResourceRelocationStrategyRegistry)
 	
-	private List<XtextMoveResourceStrategy> strategies
+	static val EXTENSION_POINT_ID = 'org.eclipse.xtext.ui.resourceRelocationStrategy'
 	
-	def List<? extends XtextMoveResourceStrategy> getStrategies() {
+	private List<IResourceRelocationStrategy> strategies
+	
+	def List<? extends IResourceRelocationStrategy> getStrategies() {
 		return strategies ?: {
-			val configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(extensionPointID);
-			val strategies= <XtextMoveResourceStrategy>newArrayList
+			val configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSION_POINT_ID);
+			strategies = <IResourceRelocationStrategy>newArrayList
 			for (configurationElement : configurationElements) {
 				try {
-					strategies += configurationElement.createExecutableExtension('class') as XtextMoveResourceStrategy
+					strategies += configurationElement.createExecutableExtension('class') as IResourceRelocationStrategy
 				} catch (CoreException e) {
 					LOG.error("Error instantiating participant strategy", e);
 				}
@@ -38,8 +40,5 @@ class XtextMoveResourceStrategyRegistry {
 		}
 	}
 	
-	def  protected getExtensionPointID() {
-		'org.eclipse.xtext.ui.resourceMoveStrategy'
-	}
 }
 
