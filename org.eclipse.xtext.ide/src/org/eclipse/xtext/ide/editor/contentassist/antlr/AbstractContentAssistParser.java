@@ -17,10 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.antlr.runtime.ANTLRStringStream;
-import org.antlr.runtime.BaseRecognizer;
 import org.antlr.runtime.CharStream;
-import org.antlr.runtime.RecognizerSharedState;
-import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -31,7 +28,6 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ide.LexerIdeBindings;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.InfiniteRecursion;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
@@ -39,7 +35,6 @@ import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistP
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.xtext.RuleNames;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -103,22 +98,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 					AbstractInternalContentAssistParser parser = createParser();
 					parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 					parser.getUnorderedGroupHelper().initializeWith(parser);
-					final Iterator<LookAheadTerminal> iter = element.getLookAheadTerminals().iterator();
-					ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(new TokenSource(){
-						@Override
-						public Token nextToken() {
-							if (iter.hasNext()) {
-								LookAheadTerminal lookAhead = iter.next();
-								return lookAhead.getToken();
-							}
-							return Token.EOF_TOKEN;
-						}
-						@Override
-						public String getSourceName() {
-							return "LookAheadTerminalTokenSource";
-						}
-					}, parser);
-					parser.setTokenStream(tokens);
+					ObservableXtextTokenStream tokens = setTokensFromFollowElement(parser, element);
 					tokens.setListener(parser);
 					parser.getGrammarElements().addAll(element.getTrace());
 					parser.getGrammarElements().add(elementToParse);
@@ -127,60 +107,8 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 					parser.getParamStack().addAll(element.getParamStack());
 					if (elementToParse instanceof UnorderedGroup && element.getGrammarElement() == elementToParse) {
 						UnorderedGroup group = (UnorderedGroup) elementToParse;
-						final IUnorderedGroupHelper helper = parser.getUnorderedGroupHelper();
-						helper.enter(group);
-						for(AbstractElement consumed: element.getHandledUnorderedGroupElements()) {
-							parser.before(consumed);
-							helper.select(group, group.getElements().indexOf(consumed));
-							helper.returnFromSelection(group);
-							parser.after(consumed);
-						}
-						parser.setUnorderedGroupHelper(new IUnorderedGroupHelper() {
-
-							boolean first = true;
-							@Override
-							public void initializeWith(BaseRecognizer recognizer) {
-								helper.initializeWith(recognizer);
-							}
-
-							@Override
-							public void enter(UnorderedGroup group) {
-								if (!first)
-									helper.enter(group);
-								first = false;
-							}
-
-							@Override
-							public void leave(UnorderedGroup group) {
-								helper.leave(group);
-							}
-
-							@Override
-							public boolean canSelect(UnorderedGroup group, int index) {
-								return helper.canSelect(group, index);
-							}
-
-							@Override
-							public void select(UnorderedGroup group, int index) {
-								helper.select(group, index);
-							}
-
-							@Override
-							public void returnFromSelection(UnorderedGroup group) {
-								helper.returnFromSelection(group);
-							}
-
-							@Override
-							public boolean canLeave(UnorderedGroup group) {
-								return helper.canLeave(group);
-							}
-
-							@Override
-							public UnorderedGroupState snapShot(UnorderedGroup... groups) {
-								return helper.snapShot(groups);
-							}
-							
-						});
+						IUnorderedGroupHelper helper = getInitializedUnorderedGroupHelper(element, parser, group);
+						parser.setUnorderedGroupHelper(wrapUnorderedGroupHelper(helper));
 					}
 					Collection<FollowElement> elements = getFollowElements(parser, elementToParse, ruleNames, i);
 					result.addAll(elements);
@@ -189,7 +117,44 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		}
 		return result;
 	}
+
+	/**
+	 * @since 2.13
+	 */
+	protected ObservableXtextTokenStream setTokensFromFollowElement(AbstractInternalContentAssistParser parser,
+			FollowElement element) {
+		final Iterator<LookAheadTerminal> iter = element.getLookAheadTerminals().iterator();
+		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(new LookAheadBasedTokenSource(iter), parser);
+		parser.setTokenStream(tokens);
+		return tokens;
+	}
+
+	/**
+	 * @since 2.13
+	 */
+	protected IUnorderedGroupHelper getInitializedUnorderedGroupHelper(FollowElement element,
+			AbstractInternalContentAssistParser parser, UnorderedGroup group) {
+		final IUnorderedGroupHelper helper = parser.getUnorderedGroupHelper();
+		helper.enter(group);
+		for(AbstractElement consumed: element.getHandledUnorderedGroupElements()) {
+			parser.before(consumed);
+			helper.select(group, group.getElements().indexOf(consumed));
+			helper.returnFromSelection(group);
+			parser.after(consumed);
+		}
+		return helper;
+	}
+
+	/**
+	 * @since 2.13
+	 */
+	protected UnorderedGroupHelperDelegate wrapUnorderedGroupHelper(final IUnorderedGroupHelper helper) {
+		return new UnorderedGroupHelperDelegate(helper);
+	}
 	
+	/**
+	 * @since 2.13
+	 */
 	protected AbstractElement unwrapSingleElementGroups(AbstractElement elementToParse) {
 		if (elementToParse instanceof Group) {
 			List<AbstractElement> elements = ((Group) elementToParse).getElements();
@@ -200,98 +165,28 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		return elementToParse;
 	}
 	
-	private RecognizerSharedState getParserState(AbstractInternalContentAssistParser parser) {
-		return parser.getInternalRecognizerSharedState();
-	}
-	
-	private Collection<FollowElement> getFollowElements(
+	/**
+	 * @since 2.13
+	 */
+	protected Collection<FollowElement> getFollowElements(
 			final AbstractInternalContentAssistParser parser,
 			final AbstractElement elementToParse, 
-			String[] ruleNames, int startIndex) {
+			String[] ruleNames, 
+			final int startIndex) {
 		try {
-			final boolean[] wasEof = new boolean[] { false };
-			final boolean[] announcedEofWithLA = new boolean[] { false };
-			final boolean[] consumedSomething = new boolean[] { true };
-			final boolean[] wasRecovering = new boolean[] { false };
-			final RecognizerSharedState parserState = getParserState(parser);
-			ObservableXtextTokenStream stream = (ObservableXtextTokenStream) parser.getTokenStream();
-			stream.setListener(new StreamListener() {
-				
-				@Override
-				public void announceEof(int lookAhead) {
-					if (!wasRecovering[0]) {
-						parser.announceEof(lookAhead);
-						if (lookAhead > 1)
-							announcedEofWithLA[0] = true;
-					}
-					if (parser.isDFAPrediction()) {
-						int lastGrammarElement = parser.getGrammarElements().size() - 1;
-						if (elementToParse instanceof UnorderedGroup && parser.getGrammarElements().get(lastGrammarElement) == elementToParse) {
-							IUnorderedGroupHelper helper = parser.getUnorderedGroupHelper();
-							if (!helper.canLeave((UnorderedGroup) elementToParse)) {
-								wasEof[0] = true;		
-							}
-						}
-					} else {
-						wasEof[0] = true;
-					}
-				}
-				
-				@Override
-				public void announceConsume() {
-					parser.announceConsume();
-					if (!wasRecovering[0])
-						consumedSomething[0] = true;
-				}
-
-				@Override
-				public void announceMark(int marker) {
-					parser.announceMark(marker);
-				}
-
-				@Override
-				public void announceRewind(int marker) {
-					parser.announceRewind(marker);
-				}
-			});
-			parser.setRecoveryListener(new AbstractInternalContentAssistParser.RecoveryListener() {
-				
-				private int startedErrorRecoveryAt;
-
-				@Override
-				public void endErrorRecovery() {
-					if (!wasEof[0] && !parserState.failed && startedErrorRecoveryAt == parser.input.index()) {
-						wasRecovering[0] = false;
-					}
-				}
-				
-				@Override
-				public void beginErrorRecovery() {
-					startedErrorRecoveryAt = parser.input.index();
-					wasRecovering[0] = true;
-				}
-			});
+			EofListener listener = createEofListener(parser, elementToParse);
 			int i = startIndex;
 			Collection<FollowElement> result = null;
-			while(i < ruleNames.length && !wasEof[0] && consumedSomething[0]) {
-				consumedSomething[0] = false;
-				announcedEofWithLA[0] = false;
-				wasRecovering[0] = false;
-				Method method = parser.getClass().getMethod(ruleNames[i]);
-				method.setAccessible(true);
-				try {
-					method.invoke(parser);
-				} catch(InvocationTargetException targetException) {
-					if (!(targetException.getCause() instanceof InfiniteRecursion))
-						throw targetException;
-				}
-				result = parser.getFollowElements();
+			while(i < ruleNames.length && !listener.wasEof && listener.consumedSomething) {
+				listener.reset();
+				String ruleName = ruleNames[i];
+				result = getFollowElements(parser, ruleName, true);
 				if (i == ruleNames.length - 1 && !GrammarUtil.isMultipleCardinality(elementToParse)) {
-					if (consumedSomething[0] || announcedEofWithLA[0])
+					if (listener.consumedSomething || listener.announcedEofWithLA)
 						return result;
 					return Collections.emptyList();
 				}
-				if (!wasEof[0] && ruleNames.length != 1)
+				if (!listener.wasEof && ruleNames.length != 1)
 					i++;
 				if (ruleNames.length > 2)
 					throw new IllegalArgumentException("The following lines assume that we have at most two rules to call.");
@@ -303,7 +198,41 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		}
 	}
 
-	private String[][] getRequiredRuleNames(String ruleName, List<Integer> paramStack, AbstractElement elementToParse) {
+	/**
+	 * @since 2.13
+	 */
+	protected EofListener createEofListener(final AbstractInternalContentAssistParser parser,
+			final AbstractElement elementToParse) {
+		return new EofListener(parser, elementToParse);
+	}
+
+	/**
+	 * @since 2.13
+	 */
+	protected Set<FollowElement> getFollowElements(final AbstractInternalContentAssistParser parser, String ruleName, boolean swallowInfiniteRecursion)
+			throws Exception {
+		Method method = parser.getClass().getMethod(ruleName);
+		method.setAccessible(true);
+		try {
+			method.invoke(parser);
+		} catch(InvocationTargetException targetException) {
+			Throwable cause = targetException.getCause();
+			if (cause instanceof InfiniteRecursion) {
+				if (swallowInfiniteRecursion) {
+					return parser.getFollowElements();
+				} else {
+					throw (InfiniteRecursion) cause;
+				}
+			}
+			throw targetException;
+		}
+		return parser.getFollowElements();
+	}
+
+	/**
+	 * @since 2.13
+	 */
+	protected String[][] getRequiredRuleNames(String ruleName, List<Integer> paramStack, AbstractElement elementToParse) {
 		return requiredRuleNameComputer.getRequiredRuleNames(new RequiredRuleNameComputer.Param(ruleName, paramStack, elementToParse) {
 			@Override
 			public String getBaseRuleName(AbstractElement element) {
@@ -312,7 +241,10 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		});
 	}
 
-	private Collection<AbstractElement> getElementsToParse(FollowElement element) {
+	/**
+	 * @since 2.13
+	 */
+	protected Collection<AbstractElement> getElementsToParse(FollowElement element) {
 		AbstractElement root = element.getGrammarElement();
 		if (root instanceof UnorderedGroup) {
 			List<AbstractElement> handled = element.getHandledUnorderedGroupElements();
@@ -329,8 +261,11 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		return getElementsToParse(root);
 	}
 
-	private Collection<AbstractElement> getElementsToParse(AbstractElement root) {
-		if (root instanceof Alternatives/* || root instanceof UnorderedGroup*/)
+	/**
+	 * @since 2.13
+	 */
+	protected Collection<AbstractElement> getElementsToParse(AbstractElement root) {
+		if (root instanceof Alternatives)
 			return ((CompoundElement) root).getElements();
 		return Collections.singleton(root);
 	}
@@ -351,26 +286,10 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser, String ruleName) {
 		try {
-			Preconditions.checkNotNull(ruleName);
-			Method method = parser.getClass().getMethod(ruleName);
-			method.setAccessible(true);
-			try {
-				method.invoke(parser);
-			} catch (InvocationTargetException targetException) {
-				if ((targetException.getCause() instanceof InfiniteRecursion)) {
-					throw (InfiniteRecursion) targetException.getCause();
-				}
-				throw new RuntimeException(targetException);
-			}
-			Set<FollowElement> result = parser.getFollowElements();
-			return result;
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException(e);
-		} catch (NoSuchMethodException e) {
-			throw new RuntimeException(e);
-		} catch (SecurityException e) {
+			return getFollowElements(parser, ruleName, false);
+		} catch (InfiniteRecursion e) {
+			throw e;
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -410,5 +329,12 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	
 	public RequiredRuleNameComputer getRequiredRuleNameComputer() {
 		return requiredRuleNameComputer;
+	}
+	
+	/**
+	 * @since 2.13
+	 */
+	protected RuleNames getRuleNames() {
+		return ruleNames;
 	}
 }
