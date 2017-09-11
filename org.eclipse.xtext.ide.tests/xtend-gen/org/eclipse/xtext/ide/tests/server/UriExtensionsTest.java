@@ -55,4 +55,3 @@ public class UriExtensionsTest {
     Assert.assertTrue(uri.isPrefix());
   }
 }
-
