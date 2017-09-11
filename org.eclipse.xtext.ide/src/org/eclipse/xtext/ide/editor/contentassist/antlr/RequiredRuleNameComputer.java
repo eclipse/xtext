@@ -27,12 +27,10 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * Computes the Antlr method names that need to be invoked to continue the
- * follow element computation for content proposals. It is used if a previous
- * round produced follow elements with a lookahead bigger than 1. The result
- * of {@link #getRequiredRuleNames(Param)} is the list of methods that need
- * need to be invoked to force the parser in one or the other direction at the
- * current decision point.
+ * Computes the Antlr method names that need to be invoked to continue the follow element computation for content
+ * proposals. It is used if a previous round produced follow elements with a lookahead bigger than 1. The result of
+ * {@link #getRequiredRuleNames(Param)} is the list of methods that need need to be invoked to force the parser in one
+ * or the other direction at the current decision point.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.9
@@ -48,26 +46,26 @@ public class RequiredRuleNameComputer {
 		public AbstractElement elementToParse;
 
 		private Set<Parameter> assignedParameters;
-		
+
 		protected Param(String ruleName, List<Integer> paramStack, AbstractElement elementToParse) {
 			this.ruleName = ruleName;
 			this.paramStack = paramStack;
 			this.elementToParse = elementToParse;
 		}
-		
+
 		public Set<Parameter> getAssignedParametes() {
 			if (assignedParameters == null) {
 				return assignedParameters = getAssignedParameters(elementToParse, paramStack);
 			}
 			return assignedParameters;
 		}
-		
+
 		public abstract String getBaseRuleName(AbstractElement element);
 	}
-	
+
 	@Inject
 	private RuleNames ruleNames;
-	
+
 	public String[][] getRequiredRuleNames(Param param) {
 		if (isFiltered(param)) {
 			return EMPTY_ARRAY;
@@ -85,33 +83,35 @@ public class RequiredRuleNameComputer {
 						int config = getParameterConfig(arguments);
 						antlrRuleName = ruleNames.getAntlrRuleName(call.getRule(), config);
 					}
-					return new String[][] {{ antlrRuleName }};
+					return new String[][] { { antlrRuleName } };
 				}
 			}
 			return EMPTY_ARRAY;
 		}
 		String adjustedRuleName = adjustRuleName(ruleName, param);
-		if (!(GrammarUtil.isOptionalCardinality(elementToParse) || GrammarUtil.isOneOrMoreCardinality(elementToParse))) {
-			return new String[][] {{ adjustedRuleName }};
+		if (!(GrammarUtil.isOptionalCardinality(elementToParse)
+				|| GrammarUtil.isOneOrMoreCardinality(elementToParse))) {
+			return new String[][] { { adjustedRuleName } };
 		}
 		if ((elementToParse.eContainer() instanceof Group)) {
-			List<AbstractElement> tokens = getFilteredElements(((Group) elementToParse.eContainer()).getElements(), param);
+			List<AbstractElement> tokens = getFilteredElements(((Group) elementToParse.eContainer()).getElements(),
+					param);
 			int idx = tokens.indexOf(elementToParse) + 1;
 			if (idx != tokens.size()) {
 				String secondRule = param.getBaseRuleName((AbstractElement) elementToParse.eContainer());
-  				secondRule = secondRule.substring(0, secondRule.lastIndexOf('_') + 1) + idx;
+				secondRule = secondRule.substring(0, secondRule.lastIndexOf('_') + 1) + idx;
 				String adjustedSecondRule = adjustRuleName(secondRule, param);
 				if (GrammarUtil.isMultipleCardinality(elementToParse))
-					return new String[][] {{ adjustedRuleName }, {adjustedRuleName, adjustedSecondRule }};
-				return new String[][] { {adjustedRuleName, adjustedSecondRule} };
+					return new String[][] { { adjustedRuleName }, { adjustedRuleName, adjustedSecondRule } };
+				return new String[][] { { adjustedRuleName, adjustedSecondRule } };
 			}
 		}
-		return new String[][] {{ adjustedRuleName }};
+		return new String[][] { { adjustedRuleName } };
 	}
 
 	protected List<AbstractElement> getFilteredElements(List<AbstractElement> elements, Param param) {
 		List<AbstractElement> result = Lists.newArrayListWithExpectedSize(elements.size());
-		for(AbstractElement element: elements) {
+		for (AbstractElement element : elements) {
 			if (!isFiltered(element, param)) {
 				result.add(element);
 			}
@@ -165,7 +165,7 @@ public class RequiredRuleNameComputer {
 			String antlrRuleName = ruleNames.getAntlrRuleName(containingRule);
 			int len = antlrRuleName.length();
 			if (antlrRuleName.startsWith("rule")) {
-				len+=2; // rule__XYZ instead of ruleXYZ
+				len += 2; // rule__XYZ instead of ruleXYZ
 			}
 			int config = getParameterConfig(context);
 			String result = ruleNames.getAntlrRuleName(containingRule, config) + ruleName.substring(len);
@@ -173,7 +173,7 @@ public class RequiredRuleNameComputer {
 		}
 		return ruleName;
 	}
-	
+
 	/**
 	 * @noreference This method is not intended to be referenced by clients.
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
@@ -181,5 +181,5 @@ public class RequiredRuleNameComputer {
 	protected RuleNames getRuleNames() {
 		return ruleNames;
 	}
-	
+
 }
