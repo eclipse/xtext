@@ -10,67 +10,79 @@ package org.eclipse.xtext.ui.editor.contentassist;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.util.ArrayList;
 import java.util.Collections;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
-import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalAcceptor;
+import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractContentProposalProvider;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
+ * Delegates to the generic IDE content proposal provider. Use this Implementation to share the same content assist
+ * code between Eclipse and other editors for your DSL.
+ * 
  * @author Titouan Vervack - Initial contribution and API
  * 
- * @since 2.12
+ * @since 2.13
  */
 @SuppressWarnings("all")
-public abstract class UiToIdeContentProposalProvider extends AbstractContentProposalProvider {
+public class UiToIdeContentProposalProvider extends AbstractContentProposalProvider {
   @Inject
   private IdeContentProposalProvider ideProvider;
   
   @Inject
   private Provider<ContentAssistContext.Builder> builderProvider;
   
-  @Inject
-  private Provider<IdeContentProposalAcceptor> acceptorProvider;
-  
   @Override
   public void createProposals(final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final IdeContentProposalAcceptor ideAcceptor = this.acceptorProvider.get();
+    final ArrayList<Pair<ContentAssistEntry, Integer>> entries = new ArrayList<Pair<ContentAssistEntry, Integer>>();
+    final IIdeContentProposalAcceptor ideAcceptor = new IIdeContentProposalAcceptor() {
+      @Override
+      public void accept(final ContentAssistEntry entry, final int priority) {
+        if ((entry != null)) {
+          Pair<ContentAssistEntry, Integer> _mappedTo = Pair.<ContentAssistEntry, Integer>of(entry, Integer.valueOf(priority));
+          entries.add(_mappedTo);
+        }
+      }
+      
+      @Override
+      public boolean canAcceptMoreProposals() {
+        int _size = entries.size();
+        int _maxProposals = UiToIdeContentProposalProvider.this.getMaxProposals();
+        return (_size < _maxProposals);
+      }
+    };
     ContentAssistContext _ideContext = this.getIdeContext(context);
     this.ideProvider.createProposals(Collections.<ContentAssistContext>unmodifiableList(CollectionLiterals.<ContentAssistContext>newArrayList(_ideContext)), ideAcceptor);
     final AbstractContentProposalProvider.NullSafeCompletionProposalAcceptor uiAcceptor = new AbstractContentProposalProvider.NullSafeCompletionProposalAcceptor(acceptor);
-    final Iterable<ContentAssistEntry> entries = ideAcceptor.getEntries();
-    final Procedure2<ContentAssistEntry, Integer> _function = (ContentAssistEntry entry, Integer idx) -> {
-      final int priority = this.computePriority(entries, (idx).intValue());
-      String _elvis = null;
-      String _label = entry.getLabel();
-      if (_label != null) {
-        _elvis = _label;
-      } else {
-        String _proposal = entry.getProposal();
-        _elvis = _proposal;
-      }
-      StyledString _styledString = new StyledString(_elvis);
-      final ICompletionProposal proposal = this.createCompletionProposal(entry.getProposal(), _styledString, 
-        this.getImage(entry), priority, entry.getPrefix(), context);
+    final Procedure2<Pair<ContentAssistEntry, Integer>, Integer> _function = (Pair<ContentAssistEntry, Integer> p, Integer idx) -> {
+      final ContentAssistEntry entry = p.getKey();
+      final ConfigurableCompletionProposal proposal = this.doCreateProposal(entry.getProposal(), this.getDisplayString(entry), this.getImage(entry), (p.getValue()).intValue(), context);
       uiAcceptor.accept(proposal);
     };
-    IterableExtensions.<ContentAssistEntry>forEach(entries, _function);
+    IterableExtensions.<Pair<ContentAssistEntry, Integer>>forEach(entries, _function);
   }
   
-  protected int computePriority(final Iterable<ContentAssistEntry> entries, final int index) {
-    int _size = IterableExtensions.size(entries);
-    return (_size - index);
+  protected int getMaxProposals() {
+    return 1000;
   }
   
   private ContentAssistContext getIdeContext(final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext c) {
@@ -88,5 +100,63 @@ public abstract class UiToIdeContentProposalProvider extends AbstractContentProp
     return builder.toContext();
   }
   
-  protected abstract Image getImage(final ContentAssistEntry entry);
+  protected StyledString getDisplayString(final ContentAssistEntry entry) {
+    String _elvis = null;
+    String _label = entry.getLabel();
+    if (_label != null) {
+      _elvis = _label;
+    } else {
+      String _proposal = entry.getProposal();
+      _elvis = _proposal;
+    }
+    final StyledString result = new StyledString(_elvis);
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(entry.getDescription());
+    boolean _not = (!_isNullOrEmpty);
+    if (_not) {
+      String _description = entry.getDescription();
+      String _plus = (" \u2013 " + _description);
+      StyledString _styledString = new StyledString(_plus, StyledString.QUALIFIER_STYLER);
+      result.append(_styledString);
+    }
+    return result;
+  }
+  
+  protected Image getImage(final ContentAssistEntry entry) {
+    Image _switchResult = null;
+    Object _source = entry.getSource();
+    final Object source = _source;
+    boolean _matched = false;
+    if (source instanceof IEObjectDescription) {
+      _matched=true;
+      _switchResult = this.getImage(((IEObjectDescription)source));
+    }
+    if (!_matched) {
+      if (source instanceof EObject) {
+        _matched=true;
+        _switchResult = this.getImage(((EObject)source));
+      }
+    }
+    return _switchResult;
+  }
+  
+  /**
+   * This method does nothing and should not be used.
+   */
+  @Override
+  public final void completeAssignment(final Assignment object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  }
+  
+  /**
+   * This method does nothing and should not be used.
+   */
+  @Override
+  public final void completeKeyword(final Keyword object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  }
+  
+  /**
+   * This method does nothing and should not be used.
+   */
+  @Override
+  public final void completeRuleCall(final RuleCall object, final org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  }
 }
