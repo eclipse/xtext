@@ -27,6 +27,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ide.LexerIdeBindings;
@@ -94,6 +95,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			throw new IllegalArgumentException("lookahead may not be less than or equal to 1");
 		Collection<FollowElement> result = new ArrayList<FollowElement>();
 		for(AbstractElement elementToParse: getElementsToParse(element)) {
+			elementToParse = unwrapSingleElementGroups(elementToParse);
 			String ruleName = getRuleName(elementToParse);
 			String[][] allRuleNames = getRequiredRuleNames(ruleName, element.getParamStack(), elementToParse);
 			for (String[] ruleNames: allRuleNames) {
@@ -186,6 +188,16 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			}
 		}
 		return result;
+	}
+	
+	protected AbstractElement unwrapSingleElementGroups(AbstractElement elementToParse) {
+		if (elementToParse instanceof Group) {
+			List<AbstractElement> elements = ((Group) elementToParse).getElements();
+			if (elements.size() == 1) {
+				return unwrapSingleElementGroups(elements.get(0));
+			}
+		}
+		return elementToParse;
 	}
 	
 	private RecognizerSharedState getParserState(AbstractInternalContentAssistParser parser) {

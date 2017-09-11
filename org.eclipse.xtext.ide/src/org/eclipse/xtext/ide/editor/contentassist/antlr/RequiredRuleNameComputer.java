@@ -12,6 +12,7 @@ import static org.eclipse.xtext.xtext.ParameterConfigHelper.*;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -105,9 +106,9 @@ public class RequiredRuleNameComputer {
 				return new String[][] { {adjustedRuleName, adjustedSecondRule} };
 			}
 		}
-		return new String[][] {{ ruleName }};
+		return new String[][] {{ adjustedRuleName }};
 	}
-	
+
 	protected List<AbstractElement> getFilteredElements(List<AbstractElement> elements, Param param) {
 		List<AbstractElement> result = Lists.newArrayListWithExpectedSize(elements.size());
 		for(AbstractElement element: elements) {
@@ -119,9 +120,29 @@ public class RequiredRuleNameComputer {
 	}
 
 	protected boolean isFiltered(Param param) {
-		return isFiltered(param.elementToParse, param);
+		AbstractElement elementToParse = param.elementToParse;
+		while (elementToParse != null) {
+			if (isFiltered(elementToParse, param)) {
+				return true;
+			}
+			elementToParse = getEnclosingSingleElementGroup(elementToParse);
+		}
+		return false;
 	}
-	
+
+	/**
+	 * Return the containing group if it contains exactly one element.
+	 */
+	protected AbstractElement getEnclosingSingleElementGroup(AbstractElement elementToParse) {
+		EObject container = elementToParse.eContainer();
+		if (container instanceof Group) {
+			if (((Group) container).getElements().size() == 1) {
+				return (AbstractElement) container;
+			}
+		}
+		return null;
+	}
+
 	protected boolean isFiltered(AbstractElement canddiate, Param param) {
 		if (canddiate instanceof Group) {
 			Group group = (Group) canddiate;
