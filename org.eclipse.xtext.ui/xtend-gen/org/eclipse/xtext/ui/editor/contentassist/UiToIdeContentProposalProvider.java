@@ -57,8 +57,10 @@ public class UiToIdeContentProposalProvider extends AbstractContentProposalProvi
     final IIdeContentProposalAcceptor ideAcceptor = new IIdeContentProposalAcceptor() {
       @Override
       public void accept(final ContentAssistEntry entry, final int priority) {
-        Pair<ContentAssistEntry, Integer> _mappedTo = Pair.<ContentAssistEntry, Integer>of(entry, Integer.valueOf(priority));
-        entries.add(_mappedTo);
+        if ((entry != null)) {
+          Pair<ContentAssistEntry, Integer> _mappedTo = Pair.<ContentAssistEntry, Integer>of(entry, Integer.valueOf(priority));
+          entries.add(_mappedTo);
+        }
       }
       
       @Override

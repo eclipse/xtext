@@ -41,7 +41,8 @@ class UiToIdeContentProposalProvider extends AbstractContentProposalProvider {
 		val entries = new ArrayList<Pair<ContentAssistEntry, Integer>>
         val ideAcceptor = new IIdeContentProposalAcceptor {
             override accept(ContentAssistEntry entry, int priority) {
-                entries += entry -> priority
+                if (entry !== null)
+                    entries += entry -> priority
             }
             override canAcceptMoreProposals() {
                 entries.size < maxProposals
