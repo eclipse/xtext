@@ -20,10 +20,5 @@ import org.eclipse.xtend.lib.annotations.Data
 class ResourceRelocationChange {
 	URI fromURI
 	URI toURI
-	Type type 
 	boolean isFile
-	
-	enum Type {
-		COPY, MOVE, RENAME
-	}
 }

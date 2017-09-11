@@ -24,6 +24,16 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors(AccessorType.PUBLIC_GETTER)
 @SuppressWarnings("all")
 public class ResourceRelocationContext {
+  public enum ChangeType {
+    COPY,
+    
+    MOVE,
+    
+    RENAME;
+  }
+  
+  private final ResourceRelocationContext.ChangeType changeType;
+  
   private final List<ResourceRelocationChange> changes;
   
   private final RefactoringIssueAcceptor issueAcceptor;
@@ -32,12 +42,18 @@ public class ResourceRelocationContext {
   
   private final ResourceSet resourceSet;
   
-  public ResourceRelocationContext(final List<ResourceRelocationChange> changes, final RefactoringIssueAcceptor issueAcceptor, final IChangeSerializer changeSerializer, final ResourceSet resourceSet) {
+  public ResourceRelocationContext(final ResourceRelocationContext.ChangeType changeType, final List<ResourceRelocationChange> changes, final RefactoringIssueAcceptor issueAcceptor, final IChangeSerializer changeSerializer, final ResourceSet resourceSet) {
     super();
+    this.changeType = changeType;
     this.changes = changes;
     this.issueAcceptor = issueAcceptor;
     this.changeSerializer = changeSerializer;
     this.resourceSet = resourceSet;
+  }
+  
+  @Pure
+  public ResourceRelocationContext.ChangeType getChangeType() {
+    return this.changeType;
   }
   
   @Pure

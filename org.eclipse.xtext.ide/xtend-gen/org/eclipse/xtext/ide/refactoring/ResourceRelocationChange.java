@@ -21,27 +21,16 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @Data
 @SuppressWarnings("all")
 public class ResourceRelocationChange {
-  public enum Type {
-    COPY,
-    
-    MOVE,
-    
-    RENAME;
-  }
-  
   private final URI fromURI;
   
   private final URI toURI;
   
-  private final ResourceRelocationChange.Type type;
-  
   private final boolean isFile;
   
-  public ResourceRelocationChange(final URI fromURI, final URI toURI, final ResourceRelocationChange.Type type, final boolean isFile) {
+  public ResourceRelocationChange(final URI fromURI, final URI toURI, final boolean isFile) {
     super();
     this.fromURI = fromURI;
     this.toURI = toURI;
-    this.type = type;
     this.isFile = isFile;
   }
   
@@ -52,7 +41,6 @@ public class ResourceRelocationChange {
     int result = 1;
     result = prime * result + ((this.fromURI== null) ? 0 : this.fromURI.hashCode());
     result = prime * result + ((this.toURI== null) ? 0 : this.toURI.hashCode());
-    result = prime * result + ((this.type== null) ? 0 : this.type.hashCode());
     result = prime * result + (this.isFile ? 1231 : 1237);
     return result;
   }
@@ -77,11 +65,6 @@ public class ResourceRelocationChange {
         return false;
     } else if (!this.toURI.equals(other.toURI))
       return false;
-    if (this.type == null) {
-      if (other.type != null)
-        return false;
-    } else if (!this.type.equals(other.type))
-      return false;
     if (other.isFile != this.isFile)
       return false;
     return true;
@@ -93,7 +76,6 @@ public class ResourceRelocationChange {
     ToStringBuilder b = new ToStringBuilder(this);
     b.add("fromURI", this.fromURI);
     b.add("toURI", this.toURI);
-    b.add("type", this.type);
     b.add("isFile", this.isFile);
     return b.toString();
   }
@@ -106,11 +88,6 @@ public class ResourceRelocationChange {
   @Pure
   public URI getToURI() {
     return this.toURI;
-  }
-  
-  @Pure
-  public ResourceRelocationChange.Type getType() {
-    return this.type;
   }
   
   @Pure

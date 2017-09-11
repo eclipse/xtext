@@ -20,9 +20,15 @@ import org.eclipse.xtext.ide.serializer.IChangeSerializer
 @Accessors(PUBLIC_GETTER)
 class ResourceRelocationContext {
 
+	val ChangeType changeType 
 	val List<ResourceRelocationChange> changes
 	val RefactoringIssueAcceptor issueAcceptor
 
 	val IChangeSerializer changeSerializer
 	val ResourceSet resourceSet
+	
+	
+	enum ChangeType {
+		COPY, MOVE, RENAME
+	}
 }

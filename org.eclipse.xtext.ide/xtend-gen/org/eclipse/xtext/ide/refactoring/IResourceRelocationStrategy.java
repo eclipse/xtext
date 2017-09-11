@@ -8,13 +8,14 @@
 package org.eclipse.xtext.ide.refactoring;
 
 import com.google.inject.Inject;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.util.function.Consumer;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * Allows a language to execute side-effects when the URI of a resource changes.
@@ -42,61 +43,59 @@ public interface IResourceRelocationStrategy {
     @Inject
     private IResourceServiceProvider resourceServiceProvider;
     
-    @Override
     public boolean canHandle(final ResourceRelocationChange change) {
       return this.resourceServiceProvider.canHandle(change.getFromURI());
     }
     
     @Override
-    public Resource loadAndWatchResource(final ResourceRelocationChange change, final ResourceRelocationContext context) {
-      final Resource fromResource = context.getResourceSet().getResource(change.getFromURI(), true);
-      ResourceRelocationChange.Type _type = change.getType();
-      boolean _tripleEquals = (_type == ResourceRelocationChange.Type.COPY);
-      if (_tripleEquals) {
-        final Resource copy = context.getResourceSet().createResource(change.getToURI());
-        return copy;
-      } else {
-        context.getChangeSerializer().beginRecordChanges(fromResource);
-        return fromResource;
-      }
+    public void loadAndWatchResources(final ResourceRelocationContext context) {
+      final Function1<ResourceRelocationChange, Boolean> _function = (ResourceRelocationChange it) -> {
+        return Boolean.valueOf((it.isFile() && this.canHandle(it)));
+      };
+      final Consumer<ResourceRelocationChange> _function_1 = (ResourceRelocationChange change) -> {
+        final Resource fromResource = context.getResourceSet().getResource(change.getFromURI(), true);
+        ResourceRelocationContext.ChangeType _changeType = context.getChangeType();
+        boolean _tripleEquals = (_changeType == ResourceRelocationContext.ChangeType.COPY);
+        if (_tripleEquals) {
+          final Resource copy = context.getResourceSet().getResource(change.getFromURI(), true);
+          EcoreUtil2.resolveAll(copy);
+          copy.setURI(change.getToURI());
+          context.getChangeSerializer().beginRecordChanges(copy);
+        } else {
+          context.getChangeSerializer().beginRecordChanges(fromResource);
+        }
+      };
+      IterableExtensions.<ResourceRelocationChange>filter(context.getChanges(), _function).forEach(_function_1);
     }
     
     @Override
-    public void applyChange(final ResourceRelocationChange change, final Resource resource, final ResourceRelocationContext context) {
-      try {
-        final Resource fromResource = context.getResourceSet().getResource(change.getFromURI(), false);
-        ResourceRelocationChange.Type _type = change.getType();
-        if (_type != null) {
-          switch (_type) {
-            case COPY:
-              final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-              fromResource.save(buffer, null);
-              final Resource copy = context.getResourceSet().getResource(change.getToURI(), false);
-              byte[] _byteArray = buffer.toByteArray();
-              ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
-              copy.load(_byteArrayInputStream, null);
-              context.getChangeSerializer().beginRecordChanges(copy);
-              break;
+    public void applyChange(final ResourceRelocationContext context) {
+      final Function1<ResourceRelocationChange, Boolean> _function = (ResourceRelocationChange it) -> {
+        return Boolean.valueOf((it.isFile() && this.canHandle(it)));
+      };
+      final Consumer<ResourceRelocationChange> _function_1 = (ResourceRelocationChange change) -> {
+        ResourceRelocationContext.ChangeType _changeType = context.getChangeType();
+        if (_changeType != null) {
+          switch (_changeType) {
             case MOVE:
             case RENAME:
-              context.getChangeSerializer().beginRecordChanges(fromResource);
+              final Resource fromResource = context.getResourceSet().getResource(change.getFromURI(), false);
               fromResource.setURI(change.getToURI());
+              break;
+            case COPY:
               break;
             default:
               break;
           }
         }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
+      };
+      IterableExtensions.<ResourceRelocationChange>filter(context.getChanges(), _function).forEach(_function_1);
     }
   }
   
-  public abstract boolean canHandle(final ResourceRelocationChange change);
+  public abstract void loadAndWatchResources(final ResourceRelocationContext context);
   
-  public abstract Resource loadAndWatchResource(final ResourceRelocationChange change, final ResourceRelocationContext context);
+  public abstract void applyChange(final ResourceRelocationContext context);
   
-  public abstract void applyChange(final ResourceRelocationChange change, final Resource resource, final ResourceRelocationContext context);
-  
-  public abstract void applySideEffects(final ResourceRelocationChange change, final Resource resource, final ResourceRelocationContext context);
+  public abstract void applySideEffects(final ResourceRelocationContext context);
 }

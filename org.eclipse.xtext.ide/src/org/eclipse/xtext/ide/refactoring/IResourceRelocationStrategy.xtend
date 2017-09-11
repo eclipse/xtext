@@ -7,11 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.refactoring
 
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
 import com.google.inject.Inject
 import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.EcoreUtil2
 
 /**
  * Allows a language to execute side-effects when the URI of a resource changes.
@@ -32,13 +30,11 @@ import org.eclipse.emf.ecore.resource.Resource
  */
 interface IResourceRelocationStrategy {
 
-	def boolean canHandle(ResourceRelocationChange change)
-
-	def Resource loadAndWatchResource(ResourceRelocationChange change, ResourceRelocationContext context) 
+	def void loadAndWatchResources(ResourceRelocationContext context) 
 	
-	def void applyChange(ResourceRelocationChange change, Resource resource, ResourceRelocationContext context)
+	def void applyChange(ResourceRelocationContext context)
 
-	def void applySideEffects(ResourceRelocationChange change, Resource resource, ResourceRelocationContext context)
+	def void applySideEffects(ResourceRelocationContext context)
 	
 	/** 
 	 * Clients should extend this class to register side-effects on resource relocation changes.
@@ -47,37 +43,35 @@ interface IResourceRelocationStrategy {
 		
 		@Inject IResourceServiceProvider resourceServiceProvider
 		
-		override boolean canHandle(ResourceRelocationChange change) {
+		def boolean canHandle(ResourceRelocationChange change) {
 			resourceServiceProvider.canHandle(change.fromURI)
 		}
 		
-		override Resource loadAndWatchResource(ResourceRelocationChange change, ResourceRelocationContext context) {
-			val fromResource = context.resourceSet.getResource(change.fromURI, true)
-			if (change.type === ResourceRelocationChange.Type.COPY) {
-				val copy = context.resourceSet.createResource(change.toURI)
-				return copy
-			} else {
-				context.changeSerializer.beginRecordChanges(fromResource)
-				return fromResource
-			}
+		override void loadAndWatchResources(ResourceRelocationContext context) {
+			context.changes.filter[ isFile && canHandle ].forEach [ change | 
+				val fromResource = context.resourceSet.getResource(change.fromURI, true)
+				if (context.changeType === ResourceRelocationContext.ChangeType.COPY) {
+					val copy = context.resourceSet.getResource(change.fromURI, true)
+					EcoreUtil2.resolveAll(copy)
+					copy.URI = change.toURI
+					context.changeSerializer.beginRecordChanges(copy)
+				} else {
+					context.changeSerializer.beginRecordChanges(fromResource)
+				}
+			]
 		}
 		
-		override void applyChange(ResourceRelocationChange change, Resource resource, ResourceRelocationContext context) {
-			val fromResource = context.resourceSet.getResource(change.fromURI, false)
-			switch change.type {
-				case COPY: {
-					val buffer = new ByteArrayOutputStream
-					fromResource.save(buffer, null)
-					val copy = context.resourceSet.getResource(change.toURI, false)
-					copy.load(new ByteArrayInputStream(buffer.toByteArray), null)
-					context.changeSerializer.beginRecordChanges(copy)
+		override void applyChange(ResourceRelocationContext context) {
+			context.changes.filter[ isFile && canHandle ].forEach[ change | 
+				switch context.changeType {
+					case MOVE,
+					case RENAME: {
+						val fromResource = context.resourceSet.getResource(change.fromURI, false)
+						fromResource.URI = change.toURI
+					}
+					case COPY: {}
 				}
-				case MOVE,
-				case RENAME: {
-					context.changeSerializer.beginRecordChanges(fromResource)
-					fromResource.URI = change.toURI
-				}
-			}
+			]
 		}
 	}
 }
