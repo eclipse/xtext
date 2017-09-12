@@ -256,7 +256,7 @@ class UriExtensionsTest {
 		var directory = new File("./test-data/test-project")
 		assertTrue(directory.exists)
 		assertTrue(directory.directory)
-		var uri = createEmfFileURI(directory.canonicalPath).toPath.toUri
+		var uri = createEmfFileURI(directory.absolutePath).toPath.toUri
 		assertTrue(uri.isPrefix)
 	}
 	
@@ -265,7 +265,7 @@ class UriExtensionsTest {
 		var directory = new File("./test-data/test-project")
 		assertTrue(directory.exists)
 		assertTrue(directory.directory)
-		var uri = createEmfFileURI(directory.canonicalPath + "/").toPath.toUri
+		var uri = createEmfFileURI(directory.absolutePath + "/").toPath.toUri
 		assertTrue(uri.isPrefix)
 	}
 	
@@ -275,7 +275,7 @@ class UriExtensionsTest {
 		assertTrue(directory.exists)
 		assertTrue(directory.directory)
 		assertTrue(CharMatcher.WHITESPACE.matchesAnyOf(directory.name));
-		var uri = createEmfFileURI(directory.canonicalPath).toPath.toUri
+		var uri = createEmfFileURI(directory.absolutePath).toPath.toUri
 		assertTrue(uri.isPrefix)
 	}
 

@@ -231,44 +231,32 @@ public class UriExtensionsTest {
   
   @Test
   public void testFolderIsPrefix() {
-    try {
-      File directory = new File("./test-data/test-project");
-      Assert.assertTrue(directory.exists());
-      Assert.assertTrue(directory.isDirectory());
-      org.eclipse.emf.common.util.URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(this.createEmfFileURI(directory.getCanonicalPath())));
-      Assert.assertTrue(uri.isPrefix());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    File directory = new File("./test-data/test-project");
+    Assert.assertTrue(directory.exists());
+    Assert.assertTrue(directory.isDirectory());
+    org.eclipse.emf.common.util.URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(this.createEmfFileURI(directory.getAbsolutePath())));
+    Assert.assertTrue(uri.isPrefix());
   }
   
   @Test
   public void testFolderIsPrefixWithExplicitSuffix() {
-    try {
-      File directory = new File("./test-data/test-project");
-      Assert.assertTrue(directory.exists());
-      Assert.assertTrue(directory.isDirectory());
-      String _canonicalPath = directory.getCanonicalPath();
-      String _plus = (_canonicalPath + "/");
-      org.eclipse.emf.common.util.URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(this.createEmfFileURI(_plus)));
-      Assert.assertTrue(uri.isPrefix());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    File directory = new File("./test-data/test-project");
+    Assert.assertTrue(directory.exists());
+    Assert.assertTrue(directory.isDirectory());
+    String _absolutePath = directory.getAbsolutePath();
+    String _plus = (_absolutePath + "/");
+    org.eclipse.emf.common.util.URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(this.createEmfFileURI(_plus)));
+    Assert.assertTrue(uri.isPrefix());
   }
   
   @Test
   public void testFolderIsPrefixWithWhitespace() {
-    try {
-      File directory = this.createTempDir("some name with whitespaces").toFile();
-      Assert.assertTrue(directory.exists());
-      Assert.assertTrue(directory.isDirectory());
-      Assert.assertTrue(CharMatcher.WHITESPACE.matchesAnyOf(directory.getName()));
-      org.eclipse.emf.common.util.URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(this.createEmfFileURI(directory.getCanonicalPath())));
-      Assert.assertTrue(uri.isPrefix());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    File directory = this.createTempDir("some name with whitespaces").toFile();
+    Assert.assertTrue(directory.exists());
+    Assert.assertTrue(directory.isDirectory());
+    Assert.assertTrue(CharMatcher.WHITESPACE.matchesAnyOf(directory.getName()));
+    org.eclipse.emf.common.util.URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(this.createEmfFileURI(directory.getAbsolutePath())));
+    Assert.assertTrue(uri.isPrefix());
   }
   
   private org.eclipse.emf.common.util.URI createEmfURI(final String uri) {
