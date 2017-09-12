@@ -235,5 +235,37 @@ class RegionAccessDiffTest {
 			2 1 S "a"        ValueList:name+=ID
 		'''
 	}
+	
+	@Test def void testInsertBeforeComment() {
+		val access = '''
+			8
+			/**/
+			a b
+		'''.toTextRegionAccess
+		access.modify [
+			val extension ext = access.extensions
+			val rootObj = access.regionForRootEObject.semanticElement as ValueList
+			val a = rootObj.regionFor.keyword("8").nextSemanticRegion
+			val b = a.nextSemanticRegion
+			replace(a.previousHiddenRegion, a.previousHiddenRegion, b.previousHiddenRegion, b.nextHiddenRegion)
+		] === '''
+			 0 0   H
+			       B ValueList'[a, b]' Root
+			 0 1    S "8"        Root:'8'
+			 1 1 1  H "\n"       Whitespace:TerminalRule'WS'
+			 2 1 1  S "b"        ValueList:name+=ID
+			 3   1  H "/**/"     Comment:TerminalRule'ML_COMMENT'
+			   5    "\n"       Whitespace:TerminalRule'WS'
+			 8 1    S "a"        ValueList:name+=ID
+			 9 1    H " "        Whitespace:TerminalRule'WS'
+			10 1    S "b"        ValueList:name+=ID
+			       E ValueList'[a, b]' Root
+			11 0   H
+			------------ diff 1 ------------
+			 1   H "\n"       Whitespace:TerminalRule'WS'
+			       "/**/"     Comment:TerminalRule'ML_COMMENT'
+			   6   "\n"       Whitespace:TerminalRule'WS'
+		'''
+	}
 
 }

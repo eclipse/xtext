@@ -96,6 +96,31 @@ class ChangeSerializerTest {
 			24 1 " " -> " bazz; "
 		'''
 	}
+	
+	@Test
+	def void testInsertBeforeComment() {
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/file1.pstl" -> '''
+			#1 root {
+				/**/ 
+				child1;
+			}
+		'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents("inmemory:/file1.pstl", Node)
+
+		val serializer = newChangeSerializer()
+		serializer.beginRecordChanges(model.eResource)
+		model.children.add(0, createNode => [name = "bazz"])
+		serializer.endRecordChangesToTextDocuments === '''
+			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
+			#1 root {<9:9| bazz; /**/ >child1;
+			}
+			--------------------------------------------------------------------------------
+			9 9 "\n	/**/ \n	" -> " bazz; /**/ "
+		'''
+	}
 
 	@Test
 	def void testInsertTwoChild() {
