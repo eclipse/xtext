@@ -13,18 +13,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
-import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ide.LexerIdeBindings;
@@ -43,17 +38,11 @@ import com.google.inject.name.Named;
 /**
  * @since 2.9
  */
-public abstract class AbstractContentAssistParser implements IContentAssistParser, IPartialEditingContentAssistParser {
+public abstract class AbstractContentAssistParser extends BaseContentAssistParser implements IContentAssistParser, IPartialEditingContentAssistParser {
 
 	@Inject
 	@Named(LexerIdeBindings.CONTENT_ASSIST)
 	private Provider<Lexer> lexerProvider;
-	
-	@Inject
-	private Provider<IUnorderedGroupHelper> unorderedGroupHelper;
-	
-	@Inject
-	private RequiredRuleNameComputer requiredRuleNameComputer;
 	
 	@Inject
 	private RuleNames ruleNames;
@@ -74,10 +63,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		return entryRule;
 	}
 	
-	protected TokenSource createTokenSource(String input) {
-		return createLexer(new ANTLRStringStream(input));
-	}
-	
+	@Override
 	protected TokenSource createLexer(CharStream stream) {
 		Lexer lexer = lexerProvider.get();
 		lexer.setCharStream(stream);
@@ -96,7 +82,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			for (String[] ruleNames: allRuleNames) {
 				for(int i = 0; i < ruleNames.length; i++) {
 					AbstractInternalContentAssistParser parser = createParser();
-					parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
+					parser.setUnorderedGroupHelper(createUnorderedGroupHelper());
 					parser.getUnorderedGroupHelper().initializeWith(parser);
 					ObservableXtextTokenStream tokens = setTokensFromFollowElement(parser, element);
 					tokens.setListener(parser);
@@ -108,7 +94,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 					if (elementToParse instanceof UnorderedGroup && element.getGrammarElement() == elementToParse) {
 						UnorderedGroup group = (UnorderedGroup) elementToParse;
 						IUnorderedGroupHelper helper = getInitializedUnorderedGroupHelper(element, parser, group);
-						parser.setUnorderedGroupHelper(wrapUnorderedGroupHelper(helper));
+						parser.setUnorderedGroupHelper(ignoreFirstEntrance(helper));
 					}
 					Collection<FollowElement> elements = getFollowElements(parser, elementToParse, ruleNames, i);
 					result.addAll(elements);
@@ -145,26 +131,6 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		return helper;
 	}
 
-	/**
-	 * @since 2.13
-	 */
-	protected UnorderedGroupHelperDelegate wrapUnorderedGroupHelper(final IUnorderedGroupHelper helper) {
-		return new UnorderedGroupHelperDelegate(helper);
-	}
-	
-	/**
-	 * @since 2.13
-	 */
-	protected AbstractElement unwrapSingleElementGroups(AbstractElement elementToParse) {
-		if (elementToParse instanceof Group) {
-			List<AbstractElement> elements = ((Group) elementToParse).getElements();
-			if (elements.size() == 1) {
-				return unwrapSingleElementGroups(elements.get(0));
-			}
-		}
-		return elementToParse;
-	}
-	
 	/**
 	 * @since 2.13
 	 */
@@ -232,45 +198,9 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	/**
 	 * @since 2.13
 	 */
-	protected String[][] getRequiredRuleNames(String ruleName, List<Integer> paramStack, AbstractElement elementToParse) {
-		return requiredRuleNameComputer.getRequiredRuleNames(new RequiredRuleNameComputer.Param(ruleName, paramStack, elementToParse) {
-			@Override
-			public String getBaseRuleName(AbstractElement element) {
-				return getRuleName(element);
-			}
-		});
-	}
-
-	/**
-	 * @since 2.13
-	 */
 	protected Collection<AbstractElement> getElementsToParse(FollowElement element) {
-		AbstractElement root = element.getGrammarElement();
-		if (root instanceof UnorderedGroup) {
-			List<AbstractElement> handled = element.getHandledUnorderedGroupElements();
-			if (handled.isEmpty())
-				return ((CompoundElement) root).getElements();
-			List<AbstractElement> result = Lists.newArrayList(root);
-			for(AbstractElement child: ((UnorderedGroup) root).getElements()) {
-				if (!handled.contains(child)) {
-					result.add(child);
-				}
-			}
-			return result;
-		}
-		return getElementsToParse(root);
+		return getElementsToParse(element.getGrammarElement(), element.getHandledUnorderedGroupElements());
 	}
-
-	/**
-	 * @since 2.13
-	 */
-	protected Collection<AbstractElement> getElementsToParse(AbstractElement root) {
-		if (root instanceof Alternatives)
-			return ((CompoundElement) root).getElements();
-		return Collections.singleton(root);
-	}
-
-	protected abstract String getRuleName(AbstractElement element);
 
 	protected abstract AbstractInternalContentAssistParser createParser();
 
@@ -304,7 +234,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);
 		tokens.setInitialHiddenTokens(getInitialHiddenTokens());
 		parser.setTokenStream(tokens);
-		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
+		IUnorderedGroupHelper helper = createUnorderedGroupHelper();
 		parser.setUnorderedGroupHelper(helper);
 		helper.initializeWith(parser);
 		tokens.setListener(parser);
@@ -315,22 +245,6 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		}
 	}
 
-	public void setUnorderedGroupHelper(Provider<IUnorderedGroupHelper> unorderedGroupHelper) {
-		this.unorderedGroupHelper = unorderedGroupHelper;
-	}
-
-	public Provider<IUnorderedGroupHelper> getUnorderedGroupHelper() {
-		return unorderedGroupHelper;
-	}
-	
-	public void setRequiredRuleNameComputer(RequiredRuleNameComputer requiredRuleNameComputer) {
-		this.requiredRuleNameComputer = requiredRuleNameComputer;
-	}
-	
-	public RequiredRuleNameComputer getRequiredRuleNameComputer() {
-		return requiredRuleNameComputer;
-	}
-	
 	/**
 	 * @since 2.13
 	 */

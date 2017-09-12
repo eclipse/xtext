@@ -55,7 +55,7 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 			ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);
 			tokens.setInitialHiddenTokens(getInitialHiddenTokens());
 			parser.setTokenStream(tokens);
-			IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
+			IUnorderedGroupHelper helper = createUnorderedGroupHelper();
 			parser.setUnorderedGroupHelper(helper);
 			helper.initializeWith(parser);
 			tokens.setListener(parser);

@@ -12,14 +12,22 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 
 /**
+ * A wrapper for an existing {@link IUnorderedGroupHelper} that ignores the first
+ * invocation of {@link #enter(UnorderedGroup)}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.13
  */
-public class UnorderedGroupHelperDelegate implements IUnorderedGroupHelper {
+public class IgnoreFirstEntranceUnorderedGroupHelper implements IUnorderedGroupHelper {
 	private final IUnorderedGroupHelper helper;
 	boolean first = true;
 
-	protected UnorderedGroupHelperDelegate(IUnorderedGroupHelper helper) {
+	/**
+	 * Protected contructor to allow to override this type. 
+	 * 
+	 * @see BaseContentAssistParser#ignoreFirstEntrance(IUnorderedGroupHelper)
+	 */
+	protected IgnoreFirstEntranceUnorderedGroupHelper(IUnorderedGroupHelper helper) {
 		this.helper = helper;
 	}
 
