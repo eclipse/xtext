@@ -45,30 +45,33 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 	protected List<ITextSegment> collectAlternatingSpaceAndComments(boolean includeComments) {
 		List<IHiddenRegionPart> parts = getParts();
 		if (parts.isEmpty()) {
-			return Collections.<ITextSegment> singletonList(this);
+			return Collections.<ITextSegment>singletonList(this);
 		} else {
-			ITextSegment last = null;
+			ITextSegment lastWhitespace = null;
 			List<ITextSegment> result = Lists.newArrayList();
 			for (IHiddenRegionPart part : parts) {
 				if (part instanceof IWhitespace) {
-					if (last == null || last instanceof IComment) {
+					if (lastWhitespace == null) {
 						result.add(part);
+						lastWhitespace = part;
 					} else {
-						int mergedLength = last.getLength() + part.getLength();
-						result.set(result.size() - 1, new TextSegment(access, last.getOffset(), mergedLength));
+						int mergedLength = lastWhitespace.getLength() + part.getLength();
+						lastWhitespace = new TextSegment(access, lastWhitespace.getOffset(), mergedLength);
+						result.set(result.size() - 1, lastWhitespace);
 					}
 				} else if (part instanceof IComment) {
-					if (last == null || last instanceof IComment) {
+					if (lastWhitespace == null) {
 						result.add(new TextSegment(access, part.getOffset(), 0));
+					} else {
+						lastWhitespace = null;
 					}
-					if (includeComments)
+					if (includeComments) {
 						result.add(part);
+					}
 				}
-				if (!result.isEmpty())
-					last = result.get(result.size() - 1);
 			}
-			if (last instanceof IComment) {
-				result.add(new TextSegment(access, last.getOffset() + last.getLength(), 0));
+			if (lastWhitespace == null) {
+				result.add(new TextSegment(access, getEndOffset(), 0));
 			}
 			return ImmutableList.copyOf(result);
 		}

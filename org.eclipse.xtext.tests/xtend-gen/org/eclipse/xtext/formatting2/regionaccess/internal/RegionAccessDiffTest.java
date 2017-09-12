@@ -426,4 +426,73 @@ public class RegionAccessDiffTest {
     _builder_1.newLine();
     this._regionAccessTestHelper.operator_tripleEquals(_modify, _builder_1);
   }
+  
+  @Test
+  public void testInsertBeforeComment() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("8");
+    _builder.newLine();
+    _builder.append("/**/");
+    _builder.newLine();
+    _builder.append("a b");
+    _builder.newLine();
+    final ITextRegionAccess access = this._regionAccessTestHelper.toTextRegionAccess(_builder);
+    final Procedure1<ITextRegionDiffBuilder> _function = (ITextRegionDiffBuilder it) -> {
+      @Extension
+      final ITextRegionExtensions ext = access.getExtensions();
+      EObject _semanticElement = access.regionForRootEObject().getSemanticElement();
+      final ValueList rootObj = ((ValueList) _semanticElement);
+      final ISemanticRegion a = ext.regionFor(rootObj).keyword("8").getNextSemanticRegion();
+      final ISemanticRegion b = a.getNextSemanticRegion();
+      it.replace(a.getPreviousHiddenRegion(), a.getPreviousHiddenRegion(), b.getPreviousHiddenRegion(), b.getNextHiddenRegion());
+    };
+    ITextRegionAccess _modify = this._regionAccessTestHelper.modify(access, _function);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(" ");
+    _builder_1.append("0 0   H");
+    _builder_1.newLine();
+    _builder_1.append("       ");
+    _builder_1.append("B ValueList\'[a, b]\' Root");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("0 1    S \"8\"        Root:\'8\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("1 1 1  H \"\\n\"       Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("2 1 1  S \"b\"        ValueList:name+=ID");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("3   1  H \"/**/\"     Comment:TerminalRule\'ML_COMMENT\'");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("5    \"\\n\"       Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("8 1    S \"a\"        ValueList:name+=ID");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("9 1    H \" \"        Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("10 1    S \"b\"        ValueList:name+=ID");
+    _builder_1.newLine();
+    _builder_1.append("       ");
+    _builder_1.append("E ValueList\'[a, b]\' Root");
+    _builder_1.newLine();
+    _builder_1.append("11 0   H");
+    _builder_1.newLine();
+    _builder_1.append("------------ diff 1 ------------");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("1   H \"\\n\"       Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("       ");
+    _builder_1.append("\"/**/\"     Comment:TerminalRule\'ML_COMMENT\'");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("6   \"\\n\"       Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    this._regionAccessTestHelper.operator_tripleEquals(_modify, _builder_1);
+  }
 }

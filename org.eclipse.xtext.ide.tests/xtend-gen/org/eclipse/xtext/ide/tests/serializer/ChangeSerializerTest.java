@@ -141,6 +141,48 @@ public class ChangeSerializerTest {
   }
   
   @Test
+  public void testInsertBeforeComment() {
+    final InMemoryURIHandler fs = new InMemoryURIHandler();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#1 root {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/**/ ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("child1;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
+    this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
+    final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
+    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
+    serializer.beginRecordChanges(model.eResource());
+    EList<Node> _children = model.getChildren();
+    Node _createNode = this.fac.createNode();
+    final Procedure1<Node> _function = (Node it) -> {
+      it.setName("bazz");
+    };
+    Node _doubleArrow = ObjectExtensions.<Node>operator_doubleArrow(_createNode, _function);
+    _children.add(0, _doubleArrow);
+    Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
+    _builder_1.newLine();
+    _builder_1.append("#1 root {<9:9| bazz; /**/ >child1;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("--------------------------------------------------------------------------------");
+    _builder_1.newLine();
+    _builder_1.append("9 9 \"\\n\t/**/ \\n\t\" -> \" bazz; /**/ \"");
+    _builder_1.newLine();
+    this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_1);
+  }
+  
+  @Test
   public void testInsertTwoChild() {
     final InMemoryURIHandler fs = new InMemoryURIHandler();
     StringConcatenation _builder = new StringConcatenation();
