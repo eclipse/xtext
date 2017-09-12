@@ -13,21 +13,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 
-import org.antlr.runtime.ANTLRStringStream;
-import org.antlr.runtime.BaseRecognizer;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ide.LexerIdeBindings;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.RequiredRuleNameComputer;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.BaseContentAssistParser;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
@@ -40,27 +35,18 @@ import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
+ * This class if effectively deprecated and clients should use the equivalent from
+ * the ide package instead.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractContentAssistParser implements IContentAssistParser {
+public abstract class AbstractContentAssistParser extends BaseContentAssistParser implements IContentAssistParser {
 
 	@Inject
 	@Named(LexerIdeBindings.CONTENT_ASSIST)
 	private Provider<Lexer> lexerProvider;
 	
-	@Inject
-	private Provider<IUnorderedGroupHelper> unorderedGroupHelper;
-	
-	@Inject
-	private RequiredRuleNameComputer requiredRuleNameComputer;
-	
-	/**
-	 * @since 2.7
-	 */
-	protected TokenSource createTokenSource(String input) {
-		return createLexer(new ANTLRStringStream(input));
-	}
-	
+	@Override
 	protected TokenSource createLexer(CharStream stream) {
 		Lexer lexer = lexerProvider.get();
 		lexer.setCharStream(stream);
@@ -73,12 +59,13 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			throw new IllegalArgumentException("lookahead may not be less than or equal to 1");
 		Collection<FollowElement> result = new ArrayList<FollowElement>();
 		for(AbstractElement elementToParse: getElementsToParse(element)) {
+			elementToParse = unwrapSingleElementGroups(elementToParse);
 			String ruleName = getRuleName(elementToParse);
 			String[][] allRuleNames = getRequiredRuleNames(ruleName, element.getParamStack(), elementToParse);
 			for (String[] ruleNames: allRuleNames) {
 				for(int i = 0; i < ruleNames.length; i++) {
 					AbstractInternalContentAssistParser parser = createParser();
-					parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
+					parser.setUnorderedGroupHelper(createUnorderedGroupHelper());
 					parser.getUnorderedGroupHelper().initializeWith(parser);
 					final Iterator<LookAheadTerminal> iter = element.getLookAheadTerminals().iterator();
 					ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(new TokenSource(){
@@ -112,52 +99,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 							helper.returnFromSelection(group);
 							parser.after(consumed);
 						}
-						parser.setUnorderedGroupHelper(new IUnorderedGroupHelper() {
-
-							boolean first = true;
-							@Override
-							public void initializeWith(BaseRecognizer recognizer) {
-								helper.initializeWith(recognizer);
-							}
-
-							@Override
-							public void enter(UnorderedGroup group) {
-								if (!first)
-									helper.enter(group);
-								first = false;
-							}
-
-							@Override
-							public void leave(UnorderedGroup group) {
-								helper.leave(group);
-							}
-
-							@Override
-							public boolean canSelect(UnorderedGroup group, int index) {
-								return helper.canSelect(group, index);
-							}
-
-							@Override
-							public void select(UnorderedGroup group, int index) {
-								helper.select(group, index);
-							}
-
-							@Override
-							public void returnFromSelection(UnorderedGroup group) {
-								helper.returnFromSelection(group);
-							}
-
-							@Override
-							public boolean canLeave(UnorderedGroup group) {
-								return helper.canLeave(group);
-							}
-
-							@Override
-							public UnorderedGroupState snapShot(UnorderedGroup... groups) {
-								return helper.snapShot(groups);
-							}
-							
-						});
+						parser.setUnorderedGroupHelper(ignoreFirstEntrance(helper));
 					}
 					Collection<FollowElement> elements = getFollowElements(parser, elementToParse, ruleNames, i);
 					result.addAll(elements);
@@ -165,6 +107,10 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			}
 		}
 		return result;
+	}
+	
+	protected Collection<AbstractElement> getElementsToParse(FollowElement element) {
+		return getElementsToParse(element.getGrammarElement(), element.getHandledUnorderedGroupElements());
 	}
 	
 	private RecognizerSharedState getParserState(AbstractInternalContentAssistParser parser) {
@@ -270,40 +216,6 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		}
 	}
 	
-	private String[][] getRequiredRuleNames(String ruleName, List<Integer> paramStack, AbstractElement elementToParse) {
-		return requiredRuleNameComputer.getRequiredRuleNames(new RequiredRuleNameComputer.Param(ruleName, paramStack, elementToParse) {
-			@Override
-			public String getBaseRuleName(AbstractElement element) {
-				return getRuleName(element);
-			}
-		});
-	}
-
-	private Collection<AbstractElement> getElementsToParse(FollowElement element) {
-		AbstractElement root = element.getGrammarElement();
-		if (root instanceof UnorderedGroup) {
-			List<AbstractElement> handled = element.getHandledUnorderedGroupElements();
-			if (handled.isEmpty())
-				return ((CompoundElement) root).getElements();
-			List<AbstractElement> result = Lists.newArrayList(root);
-			for(AbstractElement child: ((UnorderedGroup) root).getElements()) {
-				if (!handled.contains(child)) {
-					result.add(child);
-				}
-			}
-			return result;
-		}
-		return getElementsToParse(root);
-	}
-
-	private Collection<AbstractElement> getElementsToParse(AbstractElement root) {
-		if (root instanceof Alternatives/* || root instanceof UnorderedGroup*/)
-			return ((CompoundElement) root).getElements();
-		return Collections.singleton(root);
-	}
-
-	protected abstract String getRuleName(AbstractElement element);
-		
 	protected abstract AbstractInternalContentAssistParser createParser();
 	
 	protected abstract Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser);
@@ -318,7 +230,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);
 		tokens.setInitialHiddenTokens(getInitialHiddenTokens());
 		parser.setTokenStream(tokens);
-		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
+		IUnorderedGroupHelper helper = createUnorderedGroupHelper();
 		parser.setUnorderedGroupHelper(helper);
 		helper.initializeWith(parser);
 		tokens.setListener(parser);
@@ -329,29 +241,4 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		}
 	}
 
-	public void setUnorderedGroupHelper(Provider<IUnorderedGroupHelper> unorderedGroupHelper) {
-		this.unorderedGroupHelper = unorderedGroupHelper;
-	}
-
-	public Provider<IUnorderedGroupHelper> getUnorderedGroupHelper() {
-		return unorderedGroupHelper;
-	}
-	
-	/**
-	 * @since 2.9
-	 * @noreference This method is not intended to be referenced by clients.
-	 * @nooverride This method is not intended to be re-implemented or extended by clients.
-	 */
-	public void setRequiredRuleNameComputer(RequiredRuleNameComputer requiredRuleNameComputer) {
-		this.requiredRuleNameComputer = requiredRuleNameComputer;
-	}
-	
-	/**
-	 * @since 2.9
-	 * @noreference This method is not intended to be referenced by clients.
-	 * @nooverride This method is not intended to be re-implemented or extended by clients.
-	 */
-	public RequiredRuleNameComputer getRequiredRuleNameComputer() {
-		return requiredRuleNameComputer;
-	}
 }
