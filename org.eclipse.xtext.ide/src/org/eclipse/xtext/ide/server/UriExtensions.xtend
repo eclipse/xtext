@@ -7,18 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server
 
-import com.google.common.collect.ImmutableList
 import com.google.inject.Singleton
-import java.io.FileNotFoundException
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
-import java.nio.file.Files
-import java.nio.file.Paths
+import java.util.regex.Pattern
 import org.eclipse.emf.common.util.URI
-
-import static java.nio.file.LinkOption.NOFOLLOW_LINKS
-
-import static extension com.google.common.base.Preconditions.checkNotNull
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -27,57 +18,32 @@ import static extension com.google.common.base.Preconditions.checkNotNull
 @Singleton
 class UriExtensions {
 
-	static val ESCAPED_FILE_SCHEME = URLEncoder.encode("file:", StandardCharsets.UTF_8.name);
+	/**
+	 * Pattern for the {@code file:/} scheme. 
+	 */
+	static val FILE_SCHEME_1_PATTERN = Pattern.compile('^file:\\/[^\\/].*');
+	
+	/**
+	 * Pattern for the {@code file://} scheme. 
+	 */
+	static val FILE_SCHEME_2_PATTERN = Pattern.compile('^file:\\/\\/[^\\/].*');
 
 	/**
-	 * Converts any non-{@code null} arguments, representing a URI as a string, into a EMF based URI where the following
-	 * rules apply:
+	 * Converts a URI (given as a string) into an EMF URI.
+	 * 
 	 * <p>
-	 * <ul>
-	 * <li>If the argument has a {@code file} scheme:
-	 * <ul>
-	 * <li>and the {@code host} is not set (e.g.: {@code localhost} can be omitted) then it returns with a EMF URI with the
-	 * following form: {@code file:///path/to/resource}.</li>
-	 * <li>and the {@code host} is set (e.g.: {@code localhost} can be omitted) then drops the URI host and returns with a 
-	 * EMF URI with the following form: {@code file:///path/to/resource}.</li>
-	 * <li>if the URI starts with two forward-slashes ({@code file://path/to/resource}), the method will treat it with a URI
-	 * with {@code localhost} scheme and will omit it, producing the {@code file:///path/to/resource} result.</li>
-	 * </ul>
-	 * <li>If the has any other scheme then it will return with EMF URI {@link URI#createURI(String) created} from the
-	 * argument.</li>
-	 * <li>This method takes care of the encoding and the URI path escaping.</li>
-	 * </ul>
-	 * </p>
+	 * If the argument URI has a {@code file} scheme, it makes sure that the {@code file} scheme
+	 * is followed by three forward-slashes. Leaves other schemes untouched. 
 	 */
 	def URI toUri(String pathWithScheme) {
-		// This will take care of the encoding.
-		val uri = URI.createURI(pathWithScheme.checkNotNull('pathWithScheme'));
-		if (uri.file) {
-			val segments = uri.toSegments;
-			val prefix = try {
-				Files.isDirectory(Paths.get(uri.toFileString), NOFOLLOW_LINKS);
-			} catch (FileNotFoundException e) {
-				false;
-			}
-			return URI.createURI('''file:///«segments.join('/')»«IF prefix»/«ENDIF»''');
-		}
-		return uri;
+		return URI.createURI(pathWithScheme.adjustURI);
 	}
 
 	/**
 	 * Converts the EMF URI argument into a string path.
-	 * <p>
-	 * If the argument is a URI with {@link URI#isFile() file} scheme, then the produced result value will always have this
-	 * form {@code file:///path/to/resource, otherwise it returns with the string representation
-	 * of the argument.
 	 */
 	def String toPath(URI uri) {
-		if (uri.file) {
-			val segments = uri.toSegments;
-			val path = segments.join('/');
-			return '''file:///«path»''';
-		}
-		return uri.toString;
+		return uri.toString.adjustURI;
 	}
 
 	/**
@@ -87,40 +53,18 @@ class UriExtensions {
 		return URI.createURI(uri.toString).toPath;
 	}
 
-	private def toSegments(URI it) {
-		val builder = ImmutableList.builder;
-		if (!host.nullOrEmpty && host != 'localhost') {
-			builder.add(host);
-		}
-		builder.addAll(segments.drop(segmentsToDrop));
-		return builder.build;
-	}
-
 	/**
-	 * Calculates how many segments should be dropped.
-	 * 
-	 * <p>
-	 * EMF file URI cannot interpret {@code file:///} scheme and will be parsed differently. 
-	 * 
-	 * <p>
-	 * Handles different file URI cases, such as:
-	 * <ul>
-	 * <li>URI is created as URI#createURI('file://foo'),</li>
-	 * <li>URI is created as URI#createURI('file:///foo'),</li>
-	 * <li>URI is created as URI#createFileURI('file://foo') and</li>
-	 * <li>URI is created as URI#createFileURI('file://foo').</li>
-	 * </ul>
-	 * Does nothing and returns with 0, when the URI is not a file URI.
+	 * Ensures that the {@code file} URI scheme is followed by three (forward) slashes.
+	 * Returns with the argument if the URI does not start with a {@code file} scheme. 
 	 */
-	private def getSegmentsToDrop(URI it) {
-		if (scheme === null && file && segments.head == ESCAPED_FILE_SCHEME) {
-			var toDrop = 1;
-			while (segment(toDrop).nullOrEmpty) {
-				toDrop++;
-			}
-			return toDrop;
+	private def adjustURI(String uri) {
+		return if (FILE_SCHEME_1_PATTERN.matcher(uri).matches) {
+			uri.replaceFirst('file:/', 'file:///');
+		} else if (FILE_SCHEME_2_PATTERN.matcher(uri).matches) {
+			uri.replaceFirst('file://', 'file:///');
+		} else {
+			uri;
 		}
-		return 0;
 	}
 
 }

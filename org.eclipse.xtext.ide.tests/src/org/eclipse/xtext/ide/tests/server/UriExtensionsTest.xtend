@@ -83,29 +83,13 @@ class UriExtensionsTest {
 	@Test
 	def void test_toUri_07() {
 		assertEquals(
-			createURI('file:///path/to/resource'),
-			'file://localhost/path/to/resource'.toUri
-		);
-	}
-
-	@Test
-	def void test_toUri_08() {
-		assertEquals(
-			createURI('file:///dir/\u0424\u0443 \u0411\u0430\u0440'),
-			'file://localhost/dir/\u0424\u0443 \u0411\u0430\u0440'.toUri
-		);
-	}
-
-	@Test
-	def void test_toUri_09() {
-		assertEquals(
 			createURI('something:/path/to/resource'),
 			'something:/path/to/resource'.toUri
 		);
 	}
 
 	@Test
-	def void test_toUri_10() {
+	def void test_toUri_08() {
 		assertEquals(
 			createURI('something://path/to/resource'),
 			'something://path/to/resource'.toUri
@@ -113,7 +97,7 @@ class UriExtensionsTest {
 	}
 
 	@Test
-	def void test_toUri_11() {
+	def void test_toUri_09() {
 		assertEquals(
 			createURI('something:/dir/\u0424\u0443 \u0411\u0430\u0440'),
 			'something:/dir/\u0424\u0443 \u0411\u0430\u0440'.toUri
@@ -121,7 +105,7 @@ class UriExtensionsTest {
 	}
 
 	@Test
-	def void test_toUri_12() {
+	def void test_toUri_10() {
 		assertEquals(
 			createURI('something://dir/\u0424\u0443 \u0411\u0430\u0440'),
 			'something://dir/\u0424\u0443 \u0411\u0430\u0440'.toUri
@@ -129,7 +113,7 @@ class UriExtensionsTest {
 	}
 
 	@Test
-	def void test_toUri_13() {
+	def void test_toUri_11() {
 		assertEquals(
 			createURI('something:/path with whitespaces/to/resource'),
 			'something:/path with whitespaces/to/resource'.toUri
@@ -137,7 +121,7 @@ class UriExtensionsTest {
 	}
 
 	@Test
-	def void test_toUri_14() {
+	def void test_toUri_12() {
 		assertEquals(
 			createURI('something://path with whitespaces/to/resource'),
 			'something://path with whitespaces/to/resource'.toUri
@@ -176,16 +160,9 @@ class UriExtensionsTest {
 		);
 	}
 
-	@Test
-	def void test_toPath_05() {
-		assertEquals(
-			'file:///path/to/resource',
-			URI.create('file://localhost/path/to/resource').toPath
-		);
-	}
 
 	@Test
-	def void test_toPath_06() {
+	def void test_toPath_05() {
 		assertEquals(
 			'file:///path/to/resource/',
 			URI.create('file://path/to/resource/').toPath
@@ -193,7 +170,7 @@ class UriExtensionsTest {
 	}
 
 	@Test
-	def void test_toPath_07() {
+	def void test_toPath_06() {
 		assertEquals(
 			'file:///path/to/resource/',
 			URI.create('file:///path/to/resource/').toPath
@@ -258,15 +235,6 @@ class UriExtensionsTest {
 		var directory = new File("./test-data/test-project")
 		assertTrue(directory.exists)
 		assertTrue(directory.directory)
-		var uri = createFileURI(directory.absolutePath).toPath.toUri
-		assertTrue(uri.isPrefix)
-	}
-	
-	@Test
-	def void testFolderIsPrefixWithExplicitSuffix() {
-		var directory = new File("./test-data/test-project")
-		assertTrue(directory.exists)
-		assertTrue(directory.directory)
 		var uri = createFileURI(directory.absolutePath + "/").toPath.toUri
 		assertTrue(uri.isPrefix)
 	}
@@ -277,7 +245,7 @@ class UriExtensionsTest {
 		assertTrue(directory.exists)
 		assertTrue(directory.directory)
 		assertTrue(CharMatcher.WHITESPACE.matchesAnyOf(directory.name));
-		var uri = createFileURI(directory.absolutePath).toPath.toUri
+		var uri = createFileURI(directory.absolutePath + "/").toPath.toUri
 		assertTrue(uri.isPrefix)
 	}
 
