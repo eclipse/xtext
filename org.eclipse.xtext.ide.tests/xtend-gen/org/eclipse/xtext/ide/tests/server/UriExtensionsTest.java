@@ -9,11 +9,11 @@ package org.eclipse.xtext.ide.tests.server;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.StandardSystemProperty;
+import com.google.inject.Inject;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.inject.Inject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageIdeInjectorProvider;
