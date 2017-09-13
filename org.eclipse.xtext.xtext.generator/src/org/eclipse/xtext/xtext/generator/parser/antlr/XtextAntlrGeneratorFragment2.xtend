@@ -13,7 +13,6 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.google.inject.name.Names
 import java.io.InputStream
-import java.util.HashMap
 import java.util.List
 import java.util.Map
 import java.util.Set
@@ -60,6 +59,7 @@ import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import org.eclipse.xtext.Alternatives
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
@@ -354,6 +354,14 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				public void setGrammarAccess(«grammar.grammarAccess» grammarAccess) {
 					this.grammarAccess = grammarAccess;
 				}
+				
+				public NameMappings getNameMappings() {
+					return nameMappings;
+				}
+				
+				public void setNameMappings(NameMappings nameMappings) {
+					this.nameMappings = nameMappings;
+				}
 			}
 		'''
 		return file
@@ -387,7 +395,6 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 						
 					«ENDFOR»
 				«ENDIF»
-				
 				private final «Map»<«AbstractElement», «String»> mappings;
 				
 				@«Inject»
@@ -416,36 +423,6 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			
 			@«Inject»
 			private NameMappings nameMappings;
-			
-			@Override
-			protected String getRuleName(«AbstractElement» element) {
-				if (nameMappings == null) {
-					nameMappings = new «HashMap»<«AbstractElement», String>() {
-						private static final long serialVersionUID = 1L;
-						«IF partitions.size > 1»
-							{
-								«FOR partition : partitions.indexed»
-									fillMap«partition.key»();
-								«ENDFOR»
-							}
-							«FOR partition : partitions.indexed»
-								private void fillMap«partition.key»() {
-									«FOR element : partition.value»
-										put(grammarAccess.«element.grammarElementAccess», "«element.containingRule.contentAssistRuleName»__«element.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
-									«ENDFOR»
-								}
-							«ENDFOR»
-						«ELSE»
-							{
-								«FOR element : elements»
-									put(grammarAccess.«element.grammarElementAccess», "«element.containingRule.contentAssistRuleName»__«element.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
-								«ENDFOR»
-							}
-						«ENDIF»
-					};
-				}
-				return nameMappings.get(element);
-			}
 		'''
 	}
 	
