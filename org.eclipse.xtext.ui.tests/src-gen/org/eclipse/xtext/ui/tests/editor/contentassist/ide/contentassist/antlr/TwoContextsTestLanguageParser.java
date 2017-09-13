@@ -3,8 +3,9 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
-import java.util.HashMap;
+import com.google.inject.Singleton;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -13,10 +14,36 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.TwoContextsTestL
 
 public class TwoContextsTestLanguageParser extends AbstractContentAssistParser {
 
+	@Singleton
+	public static final class NameMappings {
+		
+		private final Map<AbstractElement, String> mappings;
+		
+		@Inject
+		public NameMappings(TwoContextsTestLanguageGrammarAccess grammarAccess) {
+			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
+			init(builder, grammarAccess);
+			this.mappings = builder.build();
+		}
+		
+		public String getRuleName(AbstractElement element) {
+			return mappings.get(element);
+		}
+		
+		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, TwoContextsTestLanguageGrammarAccess grammarAccess) {
+			builder.put(grammarAccess.getAnElementAccess().getGroup(), "rule__AnElement__Group__0");
+			builder.put(grammarAccess.getAnElementAccess().getGroup_1(), "rule__AnElement__Group_1__0");
+			builder.put(grammarAccess.getMainModelAccess().getElementsAssignment(), "rule__MainModel__ElementsAssignment");
+			builder.put(grammarAccess.getAnElementAccess().getNameAssignment_0(), "rule__AnElement__NameAssignment_0");
+			builder.put(grammarAccess.getAnElementAccess().getReferredAssignment_1_1(), "rule__AnElement__ReferredAssignment_1_1");
+		}
+	}
+	
+	@Inject
+	private NameMappings nameMappings;
+
 	@Inject
 	private TwoContextsTestLanguageGrammarAccess grammarAccess;
-
-	private Map<AbstractElement, String> nameMappings;
 
 	@Override
 	protected InternalTwoContextsTestLanguageParser createParser() {
@@ -27,21 +54,9 @@ public class TwoContextsTestLanguageParser extends AbstractContentAssistParser {
 
 	@Override
 	protected String getRuleName(AbstractElement element) {
-		if (nameMappings == null) {
-			nameMappings = new HashMap<AbstractElement, String>() {
-				private static final long serialVersionUID = 1L;
-				{
-					put(grammarAccess.getAnElementAccess().getGroup(), "rule__AnElement__Group__0");
-					put(grammarAccess.getAnElementAccess().getGroup_1(), "rule__AnElement__Group_1__0");
-					put(grammarAccess.getMainModelAccess().getElementsAssignment(), "rule__MainModel__ElementsAssignment");
-					put(grammarAccess.getAnElementAccess().getNameAssignment_0(), "rule__AnElement__NameAssignment_0");
-					put(grammarAccess.getAnElementAccess().getReferredAssignment_1_1(), "rule__AnElement__ReferredAssignment_1_1");
-				}
-			};
-		}
-		return nameMappings.get(element);
+		return nameMappings.getRuleName(element);
 	}
-			
+
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };
@@ -53,5 +68,13 @@ public class TwoContextsTestLanguageParser extends AbstractContentAssistParser {
 
 	public void setGrammarAccess(TwoContextsTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public NameMappings getNameMappings() {
+		return nameMappings;
+	}
+	
+	public void setNameMappings(NameMappings nameMappings) {
+		this.nameMappings = nameMappings;
 	}
 }

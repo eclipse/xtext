@@ -1014,6 +1014,39 @@ ruleScenario5 returns [EObject current=null]
 				)
 			)
 		)
+		    |
+		(
+			(
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getScenario5Access().getScenarioAction_3_0(),
+						$current);
+				}
+			)
+			otherlv_7='scenario5'
+			{
+				newLeafNode(otherlv_7, grammarAccess.getScenario5Access().getScenario5Keyword_3_1());
+			}
+			otherlv_8='fragment'
+			{
+				newLeafNode(otherlv_8, grammarAccess.getScenario5Access().getFragmentKeyword_3_2());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getScenario5Rule());
+				}
+				newCompositeNode(grammarAccess.getScenario5Access().getScenario5BodyParserRuleCall_3_3());
+			}
+			this_Scenario5Body_9=ruleScenario5Body[$current]
+			{
+				$current = $this_Scenario5Body_9.current;
+				afterParserOrEnumRuleCall();
+			}
+			otherlv_10='trailing'
+			{
+				newLeafNode(otherlv_10, grammarAccess.getScenario5Access().getTrailingKeyword_3_4());
+			}
+		)
 	)
 ;
 
@@ -1112,7 +1145,72 @@ norm1_Scenario5 returns [EObject current=null]
 				)
 			)
 		)
+		    |
+		(
+			(
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getScenario5Access().getScenarioAction_3_0(),
+						$current);
+				}
+			)
+			otherlv_10='scenario5'
+			{
+				newLeafNode(otherlv_10, grammarAccess.getScenario5Access().getScenario5Keyword_3_1());
+			}
+			otherlv_11='fragment'
+			{
+				newLeafNode(otherlv_11, grammarAccess.getScenario5Access().getFragmentKeyword_3_2());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getScenario5Rule());
+				}
+				newCompositeNode(grammarAccess.getScenario5Access().getScenario5BodyParserRuleCall_3_3());
+			}
+			this_Scenario5Body_12=norm1_Scenario5Body[$current]
+			{
+				$current = $this_Scenario5Body_12.current;
+				afterParserOrEnumRuleCall();
+			}
+			otherlv_13='trailing'
+			{
+				newLeafNode(otherlv_13, grammarAccess.getScenario5Access().getTrailingKeyword_3_4());
+			}
+		)
 	)
+;
+
+
+// Rule Scenario5Body
+ruleScenario5Body[EObject in_current]  returns [EObject current=in_current]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='fragment'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getScenario5BodyAccess().getFragmentKeyword_1_0());
+		}
+	)?
+;
+
+
+// Rule Scenario5Body
+norm1_Scenario5Body[EObject in_current]  returns [EObject current=in_current]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	otherlv_0='include'
+	{
+		newLeafNode(otherlv_0, grammarAccess.getScenario5BodyAccess().getIncludeKeyword_0_0());
+	}
 ;
 
 // Entry rule entryRuleIdOrKeyword

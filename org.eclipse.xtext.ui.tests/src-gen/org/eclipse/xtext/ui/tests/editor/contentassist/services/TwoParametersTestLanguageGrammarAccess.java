@@ -494,15 +494,22 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cFirstIdOrKeywordParserRuleCall_2_3_0 = (RuleCall)cFirstAssignment_2_3.eContents().get(0);
 		private final Assignment cSecondAssignment_2_4 = (Assignment)cGroup_2.eContents().get(4);
 		private final RuleCall cSecondIdOrKeywordParserRuleCall_2_4_0 = (RuleCall)cSecondAssignment_2_4.eContents().get(0);
+		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
+		private final Action cScenarioAction_3_0 = (Action)cGroup_3.eContents().get(0);
+		private final Keyword cScenario5Keyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Keyword cFragmentKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final RuleCall cScenario5BodyParserRuleCall_3_3 = (RuleCall)cGroup_3.eContents().get(3);
+		private final Keyword cTrailingKeyword_3_4 = (Keyword)cGroup_3.eContents().get(4);
 		
 		//Scenario10 <A, B Scenario:
 		//	<A & B> {Scenario} 'include'
 		//	| {Scenario} 'trailing'
-		//	| {Scenario} 'scenario5' (<A & B> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false>;
+		//	| {Scenario} 'scenario5' (<A & B> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false> | {Scenario}
+		//	'scenario5' 'fragment' Scenario5Body<A & B> 'trailing';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//<A & B> {Scenario} 'include' | {Scenario} 'trailing' | {Scenario} 'scenario5' (<A & B> 'include')?
-		//first=IdOrKeyword<true> second=IdOrKeyword<false>
+		//first=IdOrKeyword<true> second=IdOrKeyword<false> | {Scenario} 'scenario5' 'fragment' Scenario5Body<A & B> 'trailing'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//<A & B> {Scenario} 'include'
@@ -549,6 +556,24 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//IdOrKeyword<false>
 		public RuleCall getSecondIdOrKeywordParserRuleCall_2_4_0() { return cSecondIdOrKeywordParserRuleCall_2_4_0; }
+		
+		//{Scenario} 'scenario5' 'fragment' Scenario5Body<A & B> 'trailing'
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//{Scenario}
+		public Action getScenarioAction_3_0() { return cScenarioAction_3_0; }
+		
+		//'scenario5'
+		public Keyword getScenario5Keyword_3_1() { return cScenario5Keyword_3_1; }
+		
+		//'fragment'
+		public Keyword getFragmentKeyword_3_2() { return cFragmentKeyword_3_2; }
+		
+		//Scenario5Body<A & B>
+		public RuleCall getScenario5BodyParserRuleCall_3_3() { return cScenario5BodyParserRuleCall_3_3; }
+		
+		//'trailing'
+		public Keyword getTrailingKeyword_3_4() { return cTrailingKeyword_3_4; }
 	}
 	public class IdOrKeyword2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.TwoParametersTestLanguage.IdOrKeyword2");
@@ -700,7 +725,8 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Scenario10 <A, B Scenario:
 	//	<A & B> {Scenario} 'include'
 	//	| {Scenario} 'trailing'
-	//	| {Scenario} 'scenario5' (<A & B> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false>;
+	//	| {Scenario} 'scenario5' (<A & B> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false> | {Scenario}
+	//	'scenario5' 'fragment' Scenario5Body<A & B> 'trailing';
 	public Scenario10Elements getScenario10Access() {
 		return pScenario10;
 	}
@@ -764,13 +790,25 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Scenario5 <Include Scenario:
 	//	<Include> {Scenario} 'include'
 	//	| {Scenario} 'trailing'
-	//	| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false>;
+	//	| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false> | {Scenario}
+	//	'scenario5' 'fragment' Scenario5Body<Include> 'trailing';
 	public ParametersTestLanguageGrammarAccess.Scenario5Elements getScenario5Access() {
 		return gaParametersTestLanguage.getScenario5Access();
 	}
 	
 	public ParserRule getScenario5Rule() {
 		return getScenario5Access().getRule();
+	}
+	
+	//fragment Scenario5Body <Include> *:
+	//	<Include> 'include'
+	//	| <!Include> 'fragment'?;
+	public ParametersTestLanguageGrammarAccess.Scenario5BodyElements getScenario5BodyAccess() {
+		return gaParametersTestLanguage.getScenario5BodyAccess();
+	}
+	
+	public ParserRule getScenario5BodyRule() {
+		return getScenario5BodyAccess().getRule();
 	}
 	
 	//IdOrKeyword <Keyword>:

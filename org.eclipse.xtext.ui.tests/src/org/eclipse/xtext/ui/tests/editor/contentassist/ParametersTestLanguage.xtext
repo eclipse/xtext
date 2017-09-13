@@ -53,8 +53,8 @@ Scenario5<Include> returns Scenario:
 ;
 
 fragment Scenario5Body <Include>*:
-		<Include> first=IdOrKeyword<Include>
-	|	<!Include> first=IdOrKeyword<Include>?
+		<Include> 'include'
+	|	<!Include> 'fragment'?
 ;
 
 IdOrKeyword<Keyword>:

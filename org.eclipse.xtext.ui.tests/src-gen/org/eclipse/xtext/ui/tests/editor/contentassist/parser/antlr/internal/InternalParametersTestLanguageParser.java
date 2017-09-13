@@ -22,7 +22,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalParametersTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'#2'", "'#3'", "'#4'", "'#5'", "'#6'", "'#7'", "'#8'", "'#9'", "'trailing'", "'#10'", "'#11'", "'#12'", "'#13'", "'#14'", "'scenario3'", "'scenario4'", "'scenario5'", "'include'", "'keyword'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'#2'", "'#3'", "'#4'", "'#5'", "'#6'", "'#7'", "'#8'", "'#9'", "'trailing'", "'#10'", "'#11'", "'#12'", "'#13'", "'#14'", "'scenario3'", "'scenario4'", "'scenario5'", "'fragment'", "'include'", "'keyword'"
     };
     public static final int RULE_STRING=6;
     public static final int RULE_SL_COMMENT=8;
@@ -37,6 +37,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
     public static final int T__14=14;
     public static final int EOF=-1;
     public static final int T__30=30;
+    public static final int T__31=31;
     public static final int RULE_ID=4;
     public static final int RULE_WS=9;
     public static final int RULE_ANY_OTHER=10;
@@ -671,14 +672,14 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
-                    if ( (LA2_0==30) ) {
+                    if ( (LA2_0==31) ) {
                         int LA2_1 = input.LA(2);
 
-                        if ( (LA2_1==27) && (synpred3_InternalParametersTestLanguage())) {
-                            alt2=1;
-                        }
-                        else if ( (LA2_1==EOF||LA2_1==20) ) {
+                        if ( (LA2_1==EOF||LA2_1==20) ) {
                             alt2=2;
+                        }
+                        else if ( (LA2_1==27) && (synpred3_InternalParametersTestLanguage())) {
+                            alt2=1;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return current;}
@@ -849,17 +850,17 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
-                    if ( (LA4_0==30) && (synpred4_InternalParametersTestLanguage())) {
+                    if ( (LA4_0==31) && (synpred4_InternalParametersTestLanguage())) {
                         alt4=1;
                     }
                     else if ( (LA4_0==RULE_ID) ) {
                         int LA4_2 = input.LA(2);
 
-                        if ( (LA4_2==EOF||LA4_2==20) ) {
-                            alt4=2;
-                        }
-                        else if ( (LA4_2==27) && (synpred4_InternalParametersTestLanguage())) {
+                        if ( (LA4_2==27) && (synpred4_InternalParametersTestLanguage())) {
                             alt4=1;
+                        }
+                        else if ( (LA4_2==EOF||LA4_2==20) ) {
+                            alt4=2;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return current;}
@@ -1016,11 +1017,11 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     if ( (LA6_0==RULE_ID) ) {
                         int LA6_1 = input.LA(2);
 
-                        if ( (LA6_1==27) && (synpred5_InternalParametersTestLanguage())) {
-                            alt6=1;
-                        }
-                        else if ( (LA6_1==EOF||LA6_1==20) ) {
+                        if ( (LA6_1==EOF||LA6_1==20) ) {
                             alt6=2;
+                        }
+                        else if ( (LA6_1==27) && (synpred5_InternalParametersTestLanguage())) {
+                            alt6=1;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return current;}
@@ -1030,7 +1031,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                             throw nvae;
                         }
                     }
-                    else if ( (LA6_0==30) ) {
+                    else if ( (LA6_0==31) ) {
                         alt6=2;
                     }
                     else {
@@ -1180,11 +1181,11 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     if ( (LA8_0==RULE_ID) ) {
                         int LA8_1 = input.LA(2);
 
-                        if ( (LA8_1==27) && (synpred6_InternalParametersTestLanguage())) {
-                            alt8=1;
-                        }
-                        else if ( (LA8_1==EOF||LA8_1==20) ) {
+                        if ( (LA8_1==EOF||LA8_1==20) ) {
                             alt8=2;
+                        }
+                        else if ( (LA8_1==27) && (synpred6_InternalParametersTestLanguage())) {
+                            alt8=1;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return current;}
@@ -1998,7 +1999,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
             int alt11=2;
             int LA11_0 = input.LA(1);
 
-            if ( (LA11_0==30) && (synpred8_InternalParametersTestLanguage())) {
+            if ( (LA11_0==31) && (synpred8_InternalParametersTestLanguage())) {
                 alt11=1;
             }
             else if ( (LA11_0==RULE_ID) && (synpred8_InternalParametersTestLanguage())) {
@@ -2361,33 +2362,52 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "ruleScenario5"
-    // InternalParametersTestLanguage.g:944:1: ruleScenario5 returns [EObject current=null] : ( ( () otherlv_1= 'trailing' ) | ( () otherlv_3= 'scenario5' ( (lv_first_4_0= norm1_IdOrKeyword ) ) ( (lv_second_5_0= ruleIdOrKeyword ) ) ) ) ;
+    // InternalParametersTestLanguage.g:944:1: ruleScenario5 returns [EObject current=null] : ( ( () otherlv_1= 'trailing' ) | ( () otherlv_3= 'scenario5' ( (lv_first_4_0= norm1_IdOrKeyword ) ) ( (lv_second_5_0= ruleIdOrKeyword ) ) ) | ( () otherlv_7= 'scenario5' otherlv_8= 'fragment' this_Scenario5Body_9= ruleScenario5Body[$current] otherlv_10= 'trailing' ) ) ;
     public final EObject ruleScenario5() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token otherlv_3=null;
+        Token otherlv_7=null;
+        Token otherlv_8=null;
+        Token otherlv_10=null;
         AntlrDatatypeRuleToken lv_first_4_0 = null;
 
         AntlrDatatypeRuleToken lv_second_5_0 = null;
+
+        EObject this_Scenario5Body_9 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalParametersTestLanguage.g:950:2: ( ( ( () otherlv_1= 'trailing' ) | ( () otherlv_3= 'scenario5' ( (lv_first_4_0= norm1_IdOrKeyword ) ) ( (lv_second_5_0= ruleIdOrKeyword ) ) ) ) )
-            // InternalParametersTestLanguage.g:951:2: ( ( () otherlv_1= 'trailing' ) | ( () otherlv_3= 'scenario5' ( (lv_first_4_0= norm1_IdOrKeyword ) ) ( (lv_second_5_0= ruleIdOrKeyword ) ) ) )
+            // InternalParametersTestLanguage.g:950:2: ( ( ( () otherlv_1= 'trailing' ) | ( () otherlv_3= 'scenario5' ( (lv_first_4_0= norm1_IdOrKeyword ) ) ( (lv_second_5_0= ruleIdOrKeyword ) ) ) | ( () otherlv_7= 'scenario5' otherlv_8= 'fragment' this_Scenario5Body_9= ruleScenario5Body[$current] otherlv_10= 'trailing' ) ) )
+            // InternalParametersTestLanguage.g:951:2: ( ( () otherlv_1= 'trailing' ) | ( () otherlv_3= 'scenario5' ( (lv_first_4_0= norm1_IdOrKeyword ) ) ( (lv_second_5_0= ruleIdOrKeyword ) ) ) | ( () otherlv_7= 'scenario5' otherlv_8= 'fragment' this_Scenario5Body_9= ruleScenario5Body[$current] otherlv_10= 'trailing' ) )
             {
-            // InternalParametersTestLanguage.g:951:2: ( ( () otherlv_1= 'trailing' ) | ( () otherlv_3= 'scenario5' ( (lv_first_4_0= norm1_IdOrKeyword ) ) ( (lv_second_5_0= ruleIdOrKeyword ) ) ) )
-            int alt12=2;
+            // InternalParametersTestLanguage.g:951:2: ( ( () otherlv_1= 'trailing' ) | ( () otherlv_3= 'scenario5' ( (lv_first_4_0= norm1_IdOrKeyword ) ) ( (lv_second_5_0= ruleIdOrKeyword ) ) ) | ( () otherlv_7= 'scenario5' otherlv_8= 'fragment' this_Scenario5Body_9= ruleScenario5Body[$current] otherlv_10= 'trailing' ) )
+            int alt12=3;
             int LA12_0 = input.LA(1);
 
             if ( (LA12_0==20) ) {
                 alt12=1;
             }
             else if ( (LA12_0==28) ) {
-                alt12=2;
+                int LA12_2 = input.LA(2);
+
+                if ( (LA12_2==29) ) {
+                    alt12=3;
+                }
+                else if ( (LA12_2==RULE_ID||LA12_2==31) ) {
+                    alt12=2;
+                }
+                else {
+                    if (state.backtracking>0) {state.failed=true; return current;}
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 12, 2, input);
+
+                    throw nvae;
+                }
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
@@ -2529,6 +2549,68 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
                     }
                     break;
+                case 3 :
+                    // InternalParametersTestLanguage.g:1018:3: ( () otherlv_7= 'scenario5' otherlv_8= 'fragment' this_Scenario5Body_9= ruleScenario5Body[$current] otherlv_10= 'trailing' )
+                    {
+                    // InternalParametersTestLanguage.g:1018:3: ( () otherlv_7= 'scenario5' otherlv_8= 'fragment' this_Scenario5Body_9= ruleScenario5Body[$current] otherlv_10= 'trailing' )
+                    // InternalParametersTestLanguage.g:1019:4: () otherlv_7= 'scenario5' otherlv_8= 'fragment' this_Scenario5Body_9= ruleScenario5Body[$current] otherlv_10= 'trailing'
+                    {
+                    // InternalParametersTestLanguage.g:1019:4: ()
+                    // InternalParametersTestLanguage.g:1020:5: 
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      					current = forceCreateModelElement(
+                      						grammarAccess.getScenario5Access().getScenarioAction_3_0(),
+                      						current);
+                      				
+                    }
+
+                    }
+
+                    otherlv_7=(Token)match(input,28,FollowSets000.FOLLOW_11); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_7, grammarAccess.getScenario5Access().getScenario5Keyword_3_1());
+                      			
+                    }
+                    otherlv_8=(Token)match(input,29,FollowSets000.FOLLOW_12); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_8, grammarAccess.getScenario5Access().getFragmentKeyword_3_2());
+                      			
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      				if (current==null) {
+                      					current = createModelElement(grammarAccess.getScenario5Rule());
+                      				}
+                      				newCompositeNode(grammarAccess.getScenario5Access().getScenario5BodyParserRuleCall_3_3());
+                      			
+                    }
+                    pushFollow(FollowSets000.FOLLOW_13);
+                    this_Scenario5Body_9=ruleScenario5Body(current);
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = this_Scenario5Body_9;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
+                    otherlv_10=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_10, grammarAccess.getScenario5Access().getTrailingKeyword_3_4());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
 
             }
 
@@ -2554,7 +2636,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "norm1_Scenario5"
-    // InternalParametersTestLanguage.g:1022:1: norm1_Scenario5 returns [EObject current=null] : ( ( () otherlv_1= 'include' ) | ( () otherlv_3= 'trailing' ) | ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) ) ) ;
+    // InternalParametersTestLanguage.g:1055:1: norm1_Scenario5 returns [EObject current=null] : ( ( () otherlv_1= 'include' ) | ( () otherlv_3= 'trailing' ) | ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) ) | ( () otherlv_10= 'scenario5' otherlv_11= 'fragment' this_Scenario5Body_12= norm1_Scenario5Body[$current] otherlv_13= 'trailing' ) ) ;
     public final EObject norm1_Scenario5() throws RecognitionException {
         EObject current = null;
 
@@ -2562,22 +2644,27 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
         Token otherlv_3=null;
         Token otherlv_5=null;
         Token otherlv_6=null;
+        Token otherlv_10=null;
+        Token otherlv_11=null;
+        Token otherlv_13=null;
         AntlrDatatypeRuleToken lv_first_7_0 = null;
 
         AntlrDatatypeRuleToken lv_second_8_0 = null;
+
+        EObject this_Scenario5Body_12 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalParametersTestLanguage.g:1028:2: ( ( ( () otherlv_1= 'include' ) | ( () otherlv_3= 'trailing' ) | ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) ) ) )
-            // InternalParametersTestLanguage.g:1029:2: ( ( () otherlv_1= 'include' ) | ( () otherlv_3= 'trailing' ) | ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) ) )
+            // InternalParametersTestLanguage.g:1061:2: ( ( ( () otherlv_1= 'include' ) | ( () otherlv_3= 'trailing' ) | ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) ) | ( () otherlv_10= 'scenario5' otherlv_11= 'fragment' this_Scenario5Body_12= norm1_Scenario5Body[$current] otherlv_13= 'trailing' ) ) )
+            // InternalParametersTestLanguage.g:1062:2: ( ( () otherlv_1= 'include' ) | ( () otherlv_3= 'trailing' ) | ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) ) | ( () otherlv_10= 'scenario5' otherlv_11= 'fragment' this_Scenario5Body_12= norm1_Scenario5Body[$current] otherlv_13= 'trailing' ) )
             {
-            // InternalParametersTestLanguage.g:1029:2: ( ( () otherlv_1= 'include' ) | ( () otherlv_3= 'trailing' ) | ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) ) )
-            int alt14=3;
+            // InternalParametersTestLanguage.g:1062:2: ( ( () otherlv_1= 'include' ) | ( () otherlv_3= 'trailing' ) | ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) ) | ( () otherlv_10= 'scenario5' otherlv_11= 'fragment' this_Scenario5Body_12= norm1_Scenario5Body[$current] otherlv_13= 'trailing' ) )
+            int alt14=4;
             switch ( input.LA(1) ) {
-            case 29:
+            case 30:
                 {
                 alt14=1;
                 }
@@ -2589,7 +2676,21 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                 break;
             case 28:
                 {
-                alt14=3;
+                int LA14_3 = input.LA(2);
+
+                if ( (LA14_3==29) ) {
+                    alt14=4;
+                }
+                else if ( (LA14_3==RULE_ID||(LA14_3>=30 && LA14_3<=31)) ) {
+                    alt14=3;
+                }
+                else {
+                    if (state.backtracking>0) {state.failed=true; return current;}
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 14, 3, input);
+
+                    throw nvae;
+                }
                 }
                 break;
             default:
@@ -2602,13 +2703,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
             switch (alt14) {
                 case 1 :
-                    // InternalParametersTestLanguage.g:1030:3: ( () otherlv_1= 'include' )
+                    // InternalParametersTestLanguage.g:1063:3: ( () otherlv_1= 'include' )
                     {
-                    // InternalParametersTestLanguage.g:1030:3: ( () otherlv_1= 'include' )
-                    // InternalParametersTestLanguage.g:1031:4: () otherlv_1= 'include'
+                    // InternalParametersTestLanguage.g:1063:3: ( () otherlv_1= 'include' )
+                    // InternalParametersTestLanguage.g:1064:4: () otherlv_1= 'include'
                     {
-                    // InternalParametersTestLanguage.g:1031:4: ()
-                    // InternalParametersTestLanguage.g:1032:5: 
+                    // InternalParametersTestLanguage.g:1064:4: ()
+                    // InternalParametersTestLanguage.g:1065:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2620,7 +2721,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
                     }
 
-                    otherlv_1=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,30,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_1, grammarAccess.getScenario5Access().getIncludeKeyword_0_1());
@@ -2633,13 +2734,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 2 :
-                    // InternalParametersTestLanguage.g:1044:3: ( () otherlv_3= 'trailing' )
+                    // InternalParametersTestLanguage.g:1077:3: ( () otherlv_3= 'trailing' )
                     {
-                    // InternalParametersTestLanguage.g:1044:3: ( () otherlv_3= 'trailing' )
-                    // InternalParametersTestLanguage.g:1045:4: () otherlv_3= 'trailing'
+                    // InternalParametersTestLanguage.g:1077:3: ( () otherlv_3= 'trailing' )
+                    // InternalParametersTestLanguage.g:1078:4: () otherlv_3= 'trailing'
                     {
-                    // InternalParametersTestLanguage.g:1045:4: ()
-                    // InternalParametersTestLanguage.g:1046:5: 
+                    // InternalParametersTestLanguage.g:1078:4: ()
+                    // InternalParametersTestLanguage.g:1079:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2664,13 +2765,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 3 :
-                    // InternalParametersTestLanguage.g:1058:3: ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) )
+                    // InternalParametersTestLanguage.g:1091:3: ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) )
                     {
-                    // InternalParametersTestLanguage.g:1058:3: ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) )
-                    // InternalParametersTestLanguage.g:1059:4: () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) )
+                    // InternalParametersTestLanguage.g:1091:3: ( () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) ) )
+                    // InternalParametersTestLanguage.g:1092:4: () otherlv_5= 'scenario5' (otherlv_6= 'include' )? ( (lv_first_7_0= norm1_IdOrKeyword ) ) ( (lv_second_8_0= ruleIdOrKeyword ) )
                     {
-                    // InternalParametersTestLanguage.g:1059:4: ()
-                    // InternalParametersTestLanguage.g:1060:5: 
+                    // InternalParametersTestLanguage.g:1092:4: ()
+                    // InternalParametersTestLanguage.g:1093:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2682,24 +2783,24 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
                     }
 
-                    otherlv_5=(Token)match(input,28,FollowSets000.FOLLOW_11); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,28,FollowSets000.FOLLOW_14); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_5, grammarAccess.getScenario5Access().getScenario5Keyword_2_1());
                       			
                     }
-                    // InternalParametersTestLanguage.g:1070:4: (otherlv_6= 'include' )?
+                    // InternalParametersTestLanguage.g:1103:4: (otherlv_6= 'include' )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
-                    if ( (LA13_0==29) ) {
+                    if ( (LA13_0==30) ) {
                         alt13=1;
                     }
                     switch (alt13) {
                         case 1 :
-                            // InternalParametersTestLanguage.g:1071:5: otherlv_6= 'include'
+                            // InternalParametersTestLanguage.g:1104:5: otherlv_6= 'include'
                             {
-                            otherlv_6=(Token)match(input,29,FollowSets000.FOLLOW_4); if (state.failed) return current;
+                            otherlv_6=(Token)match(input,30,FollowSets000.FOLLOW_4); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               					newLeafNode(otherlv_6, grammarAccess.getScenario5Access().getIncludeKeyword_2_2_0());
@@ -2711,11 +2812,11 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
                     }
 
-                    // InternalParametersTestLanguage.g:1076:4: ( (lv_first_7_0= norm1_IdOrKeyword ) )
-                    // InternalParametersTestLanguage.g:1077:5: (lv_first_7_0= norm1_IdOrKeyword )
+                    // InternalParametersTestLanguage.g:1109:4: ( (lv_first_7_0= norm1_IdOrKeyword ) )
+                    // InternalParametersTestLanguage.g:1110:5: (lv_first_7_0= norm1_IdOrKeyword )
                     {
-                    // InternalParametersTestLanguage.g:1077:5: (lv_first_7_0= norm1_IdOrKeyword )
-                    // InternalParametersTestLanguage.g:1078:6: lv_first_7_0= norm1_IdOrKeyword
+                    // InternalParametersTestLanguage.g:1110:5: (lv_first_7_0= norm1_IdOrKeyword )
+                    // InternalParametersTestLanguage.g:1111:6: lv_first_7_0= norm1_IdOrKeyword
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2746,11 +2847,11 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
                     }
 
-                    // InternalParametersTestLanguage.g:1095:4: ( (lv_second_8_0= ruleIdOrKeyword ) )
-                    // InternalParametersTestLanguage.g:1096:5: (lv_second_8_0= ruleIdOrKeyword )
+                    // InternalParametersTestLanguage.g:1128:4: ( (lv_second_8_0= ruleIdOrKeyword ) )
+                    // InternalParametersTestLanguage.g:1129:5: (lv_second_8_0= ruleIdOrKeyword )
                     {
-                    // InternalParametersTestLanguage.g:1096:5: (lv_second_8_0= ruleIdOrKeyword )
-                    // InternalParametersTestLanguage.g:1097:6: lv_second_8_0= ruleIdOrKeyword
+                    // InternalParametersTestLanguage.g:1129:5: (lv_second_8_0= ruleIdOrKeyword )
+                    // InternalParametersTestLanguage.g:1130:6: lv_second_8_0= ruleIdOrKeyword
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2787,6 +2888,68 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
                     }
                     break;
+                case 4 :
+                    // InternalParametersTestLanguage.g:1149:3: ( () otherlv_10= 'scenario5' otherlv_11= 'fragment' this_Scenario5Body_12= norm1_Scenario5Body[$current] otherlv_13= 'trailing' )
+                    {
+                    // InternalParametersTestLanguage.g:1149:3: ( () otherlv_10= 'scenario5' otherlv_11= 'fragment' this_Scenario5Body_12= norm1_Scenario5Body[$current] otherlv_13= 'trailing' )
+                    // InternalParametersTestLanguage.g:1150:4: () otherlv_10= 'scenario5' otherlv_11= 'fragment' this_Scenario5Body_12= norm1_Scenario5Body[$current] otherlv_13= 'trailing'
+                    {
+                    // InternalParametersTestLanguage.g:1150:4: ()
+                    // InternalParametersTestLanguage.g:1151:5: 
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      					current = forceCreateModelElement(
+                      						grammarAccess.getScenario5Access().getScenarioAction_3_0(),
+                      						current);
+                      				
+                    }
+
+                    }
+
+                    otherlv_10=(Token)match(input,28,FollowSets000.FOLLOW_11); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_10, grammarAccess.getScenario5Access().getScenario5Keyword_3_1());
+                      			
+                    }
+                    otherlv_11=(Token)match(input,29,FollowSets000.FOLLOW_15); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_11, grammarAccess.getScenario5Access().getFragmentKeyword_3_2());
+                      			
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      				if (current==null) {
+                      					current = createModelElement(grammarAccess.getScenario5Rule());
+                      				}
+                      				newCompositeNode(grammarAccess.getScenario5Access().getScenario5BodyParserRuleCall_3_3());
+                      			
+                    }
+                    pushFollow(FollowSets000.FOLLOW_13);
+                    this_Scenario5Body_12=norm1_Scenario5Body(current);
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = this_Scenario5Body_12;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
+                    otherlv_13=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_13, grammarAccess.getScenario5Access().getTrailingKeyword_3_4());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
 
             }
 
@@ -2811,8 +2974,107 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
     // $ANTLR end "norm1_Scenario5"
 
 
+    // $ANTLR start "ruleScenario5Body"
+    // InternalParametersTestLanguage.g:1186:1: ruleScenario5Body[EObject in_current] returns [EObject current=in_current] : (otherlv_0= 'fragment' )? ;
+    public final EObject ruleScenario5Body(EObject in_current) throws RecognitionException {
+        EObject current = in_current;
+
+        Token otherlv_0=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalParametersTestLanguage.g:1192:2: ( (otherlv_0= 'fragment' )? )
+            // InternalParametersTestLanguage.g:1193:2: (otherlv_0= 'fragment' )?
+            {
+            // InternalParametersTestLanguage.g:1193:2: (otherlv_0= 'fragment' )?
+            int alt15=2;
+            int LA15_0 = input.LA(1);
+
+            if ( (LA15_0==29) ) {
+                alt15=1;
+            }
+            switch (alt15) {
+                case 1 :
+                    // InternalParametersTestLanguage.g:1194:3: otherlv_0= 'fragment'
+                    {
+                    otherlv_0=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			newLeafNode(otherlv_0, grammarAccess.getScenario5BodyAccess().getFragmentKeyword_1_0());
+                      		
+                    }
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleScenario5Body"
+
+
+    // $ANTLR start "norm1_Scenario5Body"
+    // InternalParametersTestLanguage.g:1203:1: norm1_Scenario5Body[EObject in_current] returns [EObject current=in_current] : otherlv_0= 'include' ;
+    public final EObject norm1_Scenario5Body(EObject in_current) throws RecognitionException {
+        EObject current = in_current;
+
+        Token otherlv_0=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalParametersTestLanguage.g:1209:2: (otherlv_0= 'include' )
+            // InternalParametersTestLanguage.g:1210:2: otherlv_0= 'include'
+            {
+            otherlv_0=(Token)match(input,30,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              		newLeafNode(otherlv_0, grammarAccess.getScenario5BodyAccess().getIncludeKeyword_0_0());
+              	
+            }
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "norm1_Scenario5Body"
+
+
     // $ANTLR start "entryRuleIdOrKeyword"
-    // InternalParametersTestLanguage.g:1119:1: entryRuleIdOrKeyword returns [String current=null] : iv_ruleIdOrKeyword= ruleIdOrKeyword EOF ;
+    // InternalParametersTestLanguage.g:1217:1: entryRuleIdOrKeyword returns [String current=null] : iv_ruleIdOrKeyword= ruleIdOrKeyword EOF ;
     public final String entryRuleIdOrKeyword() throws RecognitionException {
         String current = null;
 
@@ -2820,8 +3082,8 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
         try {
-            // InternalParametersTestLanguage.g:1119:51: (iv_ruleIdOrKeyword= ruleIdOrKeyword EOF )
-            // InternalParametersTestLanguage.g:1120:2: iv_ruleIdOrKeyword= ruleIdOrKeyword EOF
+            // InternalParametersTestLanguage.g:1217:51: (iv_ruleIdOrKeyword= ruleIdOrKeyword EOF )
+            // InternalParametersTestLanguage.g:1218:2: iv_ruleIdOrKeyword= ruleIdOrKeyword EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIdOrKeywordRule()); 
@@ -2852,7 +3114,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "ruleIdOrKeyword"
-    // InternalParametersTestLanguage.g:1126:1: ruleIdOrKeyword returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    // InternalParametersTestLanguage.g:1224:1: ruleIdOrKeyword returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
     public final AntlrDatatypeRuleToken ruleIdOrKeyword() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2862,8 +3124,8 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
         	enterRule();
 
         try {
-            // InternalParametersTestLanguage.g:1132:2: (this_ID_0= RULE_ID )
-            // InternalParametersTestLanguage.g:1133:2: this_ID_0= RULE_ID
+            // InternalParametersTestLanguage.g:1230:2: (this_ID_0= RULE_ID )
+            // InternalParametersTestLanguage.g:1231:2: this_ID_0= RULE_ID
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -2898,7 +3160,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "norm1_IdOrKeyword"
-    // InternalParametersTestLanguage.g:1144:1: norm1_IdOrKeyword returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'keyword' | this_ID_1= RULE_ID ) ;
+    // InternalParametersTestLanguage.g:1242:1: norm1_IdOrKeyword returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'keyword' | this_ID_1= RULE_ID ) ;
     public final AntlrDatatypeRuleToken norm1_IdOrKeyword() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2909,31 +3171,31 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
         	enterRule();
 
         try {
-            // InternalParametersTestLanguage.g:1150:2: ( (kw= 'keyword' | this_ID_1= RULE_ID ) )
-            // InternalParametersTestLanguage.g:1151:2: (kw= 'keyword' | this_ID_1= RULE_ID )
+            // InternalParametersTestLanguage.g:1248:2: ( (kw= 'keyword' | this_ID_1= RULE_ID ) )
+            // InternalParametersTestLanguage.g:1249:2: (kw= 'keyword' | this_ID_1= RULE_ID )
             {
-            // InternalParametersTestLanguage.g:1151:2: (kw= 'keyword' | this_ID_1= RULE_ID )
-            int alt15=2;
-            int LA15_0 = input.LA(1);
+            // InternalParametersTestLanguage.g:1249:2: (kw= 'keyword' | this_ID_1= RULE_ID )
+            int alt16=2;
+            int LA16_0 = input.LA(1);
 
-            if ( (LA15_0==30) ) {
-                alt15=1;
+            if ( (LA16_0==31) ) {
+                alt16=1;
             }
-            else if ( (LA15_0==RULE_ID) ) {
-                alt15=2;
+            else if ( (LA16_0==RULE_ID) ) {
+                alt16=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 15, 0, input);
+                    new NoViableAltException("", 16, 0, input);
 
                 throw nvae;
             }
-            switch (alt15) {
+            switch (alt16) {
                 case 1 :
-                    // InternalParametersTestLanguage.g:1152:3: kw= 'keyword'
+                    // InternalParametersTestLanguage.g:1250:3: kw= 'keyword'
                     {
-                    kw=(Token)match(input,30,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    kw=(Token)match(input,31,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			current.merge(kw);
@@ -2944,7 +3206,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 2 :
-                    // InternalParametersTestLanguage.g:1158:3: this_ID_1= RULE_ID
+                    // InternalParametersTestLanguage.g:1256:3: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3398,14 +3660,18 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
         public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000040000010L});
-        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000044000010L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000080000010L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000084000010L});
         public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000004000010L});
         public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000100002L});
         public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000010100000L});
-        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000030100000L});
+        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000050100000L});
         public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000008000000L});
-        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000060000010L});
+        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000020000000L});
+        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000020100000L});
+        public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x00000000C0000010L});
+        public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000040000000L});
     }
 
 

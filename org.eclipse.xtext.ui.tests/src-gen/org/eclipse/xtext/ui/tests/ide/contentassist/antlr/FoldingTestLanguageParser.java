@@ -3,8 +3,9 @@
  */
 package org.eclipse.xtext.ui.tests.ide.contentassist.antlr;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
-import java.util.HashMap;
+import com.google.inject.Singleton;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -13,10 +14,35 @@ import org.eclipse.xtext.ui.tests.services.FoldingTestLanguageGrammarAccess;
 
 public class FoldingTestLanguageParser extends AbstractContentAssistParser {
 
+	@Singleton
+	public static final class NameMappings {
+		
+		private final Map<AbstractElement, String> mappings;
+		
+		@Inject
+		public NameMappings(FoldingTestLanguageGrammarAccess grammarAccess) {
+			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
+			init(builder, grammarAccess);
+			this.mappings = builder.build();
+		}
+		
+		public String getRuleName(AbstractElement element) {
+			return mappings.get(element);
+		}
+		
+		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, FoldingTestLanguageGrammarAccess grammarAccess) {
+			builder.put(grammarAccess.getElementAccess().getGroup(), "rule__Element__Group__0");
+			builder.put(grammarAccess.getFoldingModelAccess().getElementsAssignment(), "rule__FoldingModel__ElementsAssignment");
+			builder.put(grammarAccess.getElementAccess().getNameAssignment_1(), "rule__Element__NameAssignment_1");
+			builder.put(grammarAccess.getElementAccess().getSubelementsAssignment_2(), "rule__Element__SubelementsAssignment_2");
+		}
+	}
+	
+	@Inject
+	private NameMappings nameMappings;
+
 	@Inject
 	private FoldingTestLanguageGrammarAccess grammarAccess;
-
-	private Map<AbstractElement, String> nameMappings;
 
 	@Override
 	protected InternalFoldingTestLanguageParser createParser() {
@@ -27,20 +53,9 @@ public class FoldingTestLanguageParser extends AbstractContentAssistParser {
 
 	@Override
 	protected String getRuleName(AbstractElement element) {
-		if (nameMappings == null) {
-			nameMappings = new HashMap<AbstractElement, String>() {
-				private static final long serialVersionUID = 1L;
-				{
-					put(grammarAccess.getElementAccess().getGroup(), "rule__Element__Group__0");
-					put(grammarAccess.getFoldingModelAccess().getElementsAssignment(), "rule__FoldingModel__ElementsAssignment");
-					put(grammarAccess.getElementAccess().getNameAssignment_1(), "rule__Element__NameAssignment_1");
-					put(grammarAccess.getElementAccess().getSubelementsAssignment_2(), "rule__Element__SubelementsAssignment_2");
-				}
-			};
-		}
-		return nameMappings.get(element);
+		return nameMappings.getRuleName(element);
 	}
-			
+
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };
@@ -52,5 +67,13 @@ public class FoldingTestLanguageParser extends AbstractContentAssistParser {
 
 	public void setGrammarAccess(FoldingTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public NameMappings getNameMappings() {
+		return nameMappings;
+	}
+	
+	public void setNameMappings(NameMappings nameMappings) {
+		this.nameMappings = nameMappings;
 	}
 }

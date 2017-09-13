@@ -173,13 +173,25 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	//Scenario5 <Include Scenario:
 	//	<Include> {Scenario} 'include'
 	//	| {Scenario} 'trailing'
-	//	| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false>;
+	//	| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false> | {Scenario}
+	//	'scenario5' 'fragment' Scenario5Body<Include> 'trailing';
 	public ParametersTestLanguageGrammarAccess.Scenario5Elements getScenario5Access() {
 		return gaParametersTestLanguage.getScenario5Access();
 	}
 	
 	public ParserRule getScenario5Rule() {
 		return getScenario5Access().getRule();
+	}
+	
+	//fragment Scenario5Body <Include> *:
+	//	<Include> 'include'
+	//	| <!Include> 'fragment'?;
+	public ParametersTestLanguageGrammarAccess.Scenario5BodyElements getScenario5BodyAccess() {
+		return gaParametersTestLanguage.getScenario5BodyAccess();
+	}
+	
+	public ParserRule getScenario5BodyRule() {
+		return getScenario5BodyAccess().getRule();
 	}
 	
 	//IdOrKeyword <Keyword>:

@@ -3,8 +3,9 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
-import java.util.HashMap;
+import com.google.inject.Singleton;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -13,10 +14,34 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug377311TestLan
 
 public class Bug377311TestLanguageParser extends AbstractContentAssistParser {
 
+	@Singleton
+	public static final class NameMappings {
+		
+		private final Map<AbstractElement, String> mappings;
+		
+		@Inject
+		public NameMappings(Bug377311TestLanguageGrammarAccess grammarAccess) {
+			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
+			init(builder, grammarAccess);
+			this.mappings = builder.build();
+		}
+		
+		public String getRuleName(AbstractElement element) {
+			return mappings.get(element);
+		}
+		
+		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, Bug377311TestLanguageGrammarAccess grammarAccess) {
+			builder.put(grammarAccess.getChildAccess().getGroup(), "rule__Child__Group__0");
+			builder.put(grammarAccess.getRootAccess().getChildsAssignment(), "rule__Root__ChildsAssignment");
+			builder.put(grammarAccess.getChildAccess().getNameAssignment_1(), "rule__Child__NameAssignment_1");
+		}
+	}
+	
+	@Inject
+	private NameMappings nameMappings;
+
 	@Inject
 	private Bug377311TestLanguageGrammarAccess grammarAccess;
-
-	private Map<AbstractElement, String> nameMappings;
 
 	@Override
 	protected InternalBug377311TestLanguageParser createParser() {
@@ -27,19 +52,9 @@ public class Bug377311TestLanguageParser extends AbstractContentAssistParser {
 
 	@Override
 	protected String getRuleName(AbstractElement element) {
-		if (nameMappings == null) {
-			nameMappings = new HashMap<AbstractElement, String>() {
-				private static final long serialVersionUID = 1L;
-				{
-					put(grammarAccess.getChildAccess().getGroup(), "rule__Child__Group__0");
-					put(grammarAccess.getRootAccess().getChildsAssignment(), "rule__Root__ChildsAssignment");
-					put(grammarAccess.getChildAccess().getNameAssignment_1(), "rule__Child__NameAssignment_1");
-				}
-			};
-		}
-		return nameMappings.get(element);
+		return nameMappings.getRuleName(element);
 	}
-			
+
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_NEWLINE" };
@@ -51,5 +66,13 @@ public class Bug377311TestLanguageParser extends AbstractContentAssistParser {
 
 	public void setGrammarAccess(Bug377311TestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public NameMappings getNameMappings() {
+		return nameMappings;
+	}
+	
+	public void setNameMappings(NameMappings nameMappings) {
+		this.nameMappings = nameMappings;
 	}
 }
