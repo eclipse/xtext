@@ -10,11 +10,11 @@ package org.eclipse.xtext.ide.tests.server;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.StandardSystemProperty;
 import java.io.File;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.inject.Inject;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageIdeInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
@@ -36,98 +36,98 @@ public class UriExtensionsTest {
   @Test
   public void test_toUri01() {
     Assert.assertEquals(
-      this.createEmfURI("file:///path/to/resource"), 
+      URI.createURI("file:///path/to/resource"), 
       this._uriExtensions.toUri("file://path/to/resource"));
   }
   
   @Test
   public void test_toUri_02() {
     Assert.assertEquals(
-      this.createEmfURI("file:///path/to/resource"), 
+      URI.createURI("file:///path/to/resource"), 
       this._uriExtensions.toUri("file:///path/to/resource"));
   }
   
   @Test
   public void test_toUri03() {
     Assert.assertEquals(
-      this.createEmfURI("file:///path with whitespaces/to/resource"), 
+      URI.createURI("file:///path with whitespaces/to/resource"), 
       this._uriExtensions.toUri("file://path with whitespaces/to/resource"));
   }
   
   @Test
   public void test_toUri_04() {
     Assert.assertEquals(
-      this.createEmfURI("file:///path with whitespaces/to/resource"), 
+      URI.createURI("file:///path with whitespaces/to/resource"), 
       this._uriExtensions.toUri("file:///path with whitespaces/to/resource"));
   }
   
   @Test
   public void test_toUri_05() {
     Assert.assertEquals(
-      this.createEmfURI("file:///dir/\u0424\u0443 \u0411\u0430\u0440"), 
+      URI.createURI("file:///dir/\u0424\u0443 \u0411\u0430\u0440"), 
       this._uriExtensions.toUri("file:///dir/\u0424\u0443 \u0411\u0430\u0440"));
   }
   
   @Test
   public void test_toUri_06() {
     Assert.assertEquals(
-      this.createEmfURI("file:///dir/\u0424\u0443 \u0411\u0430\u0440"), 
+      URI.createURI("file:///dir/\u0424\u0443 \u0411\u0430\u0440"), 
       this._uriExtensions.toUri("file://dir/\u0424\u0443 \u0411\u0430\u0440"));
   }
   
   @Test
   public void test_toUri_07() {
     Assert.assertEquals(
-      this.createEmfURI("file:///path/to/resource"), 
+      URI.createURI("file:///path/to/resource"), 
       this._uriExtensions.toUri("file://localhost/path/to/resource"));
   }
   
   @Test
   public void test_toUri_08() {
     Assert.assertEquals(
-      this.createEmfURI("file:///dir/\u0424\u0443 \u0411\u0430\u0440"), 
+      URI.createURI("file:///dir/\u0424\u0443 \u0411\u0430\u0440"), 
       this._uriExtensions.toUri("file://localhost/dir/\u0424\u0443 \u0411\u0430\u0440"));
   }
   
   @Test
   public void test_toUri_09() {
     Assert.assertEquals(
-      this.createEmfURI("something:/path/to/resource"), 
+      URI.createURI("something:/path/to/resource"), 
       this._uriExtensions.toUri("something:/path/to/resource"));
   }
   
   @Test
   public void test_toUri_10() {
     Assert.assertEquals(
-      this.createEmfURI("something://path/to/resource"), 
+      URI.createURI("something://path/to/resource"), 
       this._uriExtensions.toUri("something://path/to/resource"));
   }
   
   @Test
   public void test_toUri_11() {
     Assert.assertEquals(
-      this.createEmfURI("something:/dir/\u0424\u0443 \u0411\u0430\u0440"), 
+      URI.createURI("something:/dir/\u0424\u0443 \u0411\u0430\u0440"), 
       this._uriExtensions.toUri("something:/dir/\u0424\u0443 \u0411\u0430\u0440"));
   }
   
   @Test
   public void test_toUri_12() {
     Assert.assertEquals(
-      this.createEmfURI("something://dir/\u0424\u0443 \u0411\u0430\u0440"), 
+      URI.createURI("something://dir/\u0424\u0443 \u0411\u0430\u0440"), 
       this._uriExtensions.toUri("something://dir/\u0424\u0443 \u0411\u0430\u0440"));
   }
   
   @Test
   public void test_toUri_13() {
     Assert.assertEquals(
-      this.createEmfURI("something:/path with whitespaces/to/resource"), 
+      URI.createURI("something:/path with whitespaces/to/resource"), 
       this._uriExtensions.toUri("something:/path with whitespaces/to/resource"));
   }
   
   @Test
   public void test_toUri_14() {
     Assert.assertEquals(
-      this.createEmfURI("something://path with whitespaces/to/resource"), 
+      URI.createURI("something://path with whitespaces/to/resource"), 
       this._uriExtensions.toUri("something://path with whitespaces/to/resource"));
   }
   
@@ -135,77 +135,77 @@ public class UriExtensionsTest {
   public void test_toPath_01() {
     Assert.assertEquals(
       "file:///path/to/resource", 
-      this._uriExtensions.toPath(URI.create("file:///path/to/resource")));
+      this._uriExtensions.toPath(java.net.URI.create("file:///path/to/resource")));
   }
   
   @Test
   public void test_toPath_02() {
     Assert.assertEquals(
       "file:///path/to/resource", 
-      this._uriExtensions.toPath(URI.create("file://path/to/resource")));
+      this._uriExtensions.toPath(java.net.URI.create("file://path/to/resource")));
   }
   
   @Test
   public void test_toPath_03() {
     Assert.assertEquals(
       "file:///dir/\u0424\u0443%20\u0411\u0430\u0440", 
-      this._uriExtensions.toPath(URI.create("file:///dir/\u0424\u0443%20\u0411\u0430\u0440")));
+      this._uriExtensions.toPath(java.net.URI.create("file:///dir/\u0424\u0443%20\u0411\u0430\u0440")));
   }
   
   @Test
   public void test_toPath_04() {
     Assert.assertEquals(
       "file:///dir/\u0424\u0443%20\u0411\u0430\u0440", 
-      this._uriExtensions.toPath(URI.create("file://dir/\u0424\u0443%20\u0411\u0430\u0440")));
+      this._uriExtensions.toPath(java.net.URI.create("file://dir/\u0424\u0443%20\u0411\u0430\u0440")));
   }
   
   @Test
   public void test_toPath_05() {
     Assert.assertEquals(
       "file:///path/to/resource", 
-      this._uriExtensions.toPath(URI.create("file://localhost/path/to/resource")));
+      this._uriExtensions.toPath(java.net.URI.create("file://localhost/path/to/resource")));
   }
   
   @Test
   public void test_toPath_06() {
     Assert.assertEquals(
       "file:///path/to/resource/", 
-      this._uriExtensions.toPath(URI.create("file://path/to/resource/")));
+      this._uriExtensions.toPath(java.net.URI.create("file://path/to/resource/")));
   }
   
   @Test
   public void test_toPath_07() {
     Assert.assertEquals(
       "file:///path/to/resource/", 
-      this._uriExtensions.toPath(URI.create("file:///path/to/resource/")));
+      this._uriExtensions.toPath(java.net.URI.create("file:///path/to/resource/")));
   }
   
   @Test
   public void test_symmetric_01() {
     Assert.assertEquals(
-      this.createEmfURI("file:///path/to/resource"), 
-      this._uriExtensions.toUri(this._uriExtensions.toPath(URI.create("file:///path/to/resource"))));
+      URI.createURI("file:///path/to/resource"), 
+      this._uriExtensions.toUri(this._uriExtensions.toPath(java.net.URI.create("file:///path/to/resource"))));
   }
   
   @Test
   public void test_symmetric_02() {
     Assert.assertEquals(
-      this.createEmfURI("file:///path/to/resource"), 
-      this._uriExtensions.toUri(this._uriExtensions.toPath(URI.create("file://path/to/resource"))));
+      URI.createURI("file:///path/to/resource"), 
+      this._uriExtensions.toUri(this._uriExtensions.toPath(java.net.URI.create("file://path/to/resource"))));
   }
   
   @Test
   public void test_symmetric_03() {
     Assert.assertEquals(
-      this.createEmfURI("something:/path/to/resource"), 
-      this._uriExtensions.toUri(this._uriExtensions.toPath(URI.create("something:/path/to/resource"))));
+      URI.createURI("something:/path/to/resource"), 
+      this._uriExtensions.toUri(this._uriExtensions.toPath(java.net.URI.create("something:/path/to/resource"))));
   }
   
   @Test
   public void test_symmetric_04() {
     Assert.assertEquals(
-      this.createEmfURI("something://path/to/resource"), 
-      this._uriExtensions.toUri(this._uriExtensions.toPath(URI.create("something://path/to/resource"))));
+      URI.createURI("something://path/to/resource"), 
+      this._uriExtensions.toUri(this._uriExtensions.toPath(java.net.URI.create("something://path/to/resource"))));
   }
   
   @Test
@@ -215,7 +215,7 @@ public class UriExtensionsTest {
   
   @Test
   public void testFileUriConversion() {
-    Assert.assertEquals("file:///dir/name.ext", this._uriExtensions.toPath(this.createEmfFileURI("/dir/name.ext")));
+    Assert.assertEquals("file:///dir/name.ext", this._uriExtensions.toPath(URI.createFileURI("/dir/name.ext")));
   }
   
   @Test
@@ -234,7 +234,7 @@ public class UriExtensionsTest {
     File directory = new File("./test-data/test-project");
     Assert.assertTrue(directory.exists());
     Assert.assertTrue(directory.isDirectory());
-    org.eclipse.emf.common.util.URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(this.createEmfFileURI(directory.getAbsolutePath())));
+    URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(URI.createFileURI(directory.getAbsolutePath())));
     Assert.assertTrue(uri.isPrefix());
   }
   
@@ -245,7 +245,7 @@ public class UriExtensionsTest {
     Assert.assertTrue(directory.isDirectory());
     String _absolutePath = directory.getAbsolutePath();
     String _plus = (_absolutePath + "/");
-    org.eclipse.emf.common.util.URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(this.createEmfFileURI(_plus)));
+    URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(URI.createFileURI(_plus)));
     Assert.assertTrue(uri.isPrefix());
   }
   
@@ -255,16 +255,8 @@ public class UriExtensionsTest {
     Assert.assertTrue(directory.exists());
     Assert.assertTrue(directory.isDirectory());
     Assert.assertTrue(CharMatcher.WHITESPACE.matchesAnyOf(directory.getName()));
-    org.eclipse.emf.common.util.URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(this.createEmfFileURI(directory.getAbsolutePath())));
+    URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(URI.createFileURI(directory.getAbsolutePath())));
     Assert.assertTrue(uri.isPrefix());
-  }
-  
-  private org.eclipse.emf.common.util.URI createEmfURI(final String uri) {
-    return org.eclipse.emf.common.util.URI.createURI(uri);
-  }
-  
-  private org.eclipse.emf.common.util.URI createEmfFileURI(final String uri) {
-    return org.eclipse.emf.common.util.URI.createFileURI(uri);
   }
   
   private Path createTempDir(final String prefix) {
