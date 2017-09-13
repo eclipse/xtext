@@ -79,7 +79,7 @@ public class DocumentExtensions {
     if ((range == null)) {
       return null;
     }
-    final String uri = this._uriExtensions.toPath(resource.getURI());
+    final String uri = this._uriExtensions.toUriString(resource.getURI());
     return new Location(uri, range);
   }
   

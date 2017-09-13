@@ -159,7 +159,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	protected def InitializeResult initialize((InitializeParams)=>void initializer) {
 		val params = new InitializeParams => [
 			processId = 1
-			rootUri = root.toURI.normalize.toPath
+			rootUri = root.toURI.normalize.toUriString
 		]
 		initializer?.apply(params)
 		return languageServer.initialize(params).get
@@ -206,12 +206,12 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		writer.write(contents.toString)
 		writer.close
 
-		return file.toURI.normalize.toPath
+		return file.toURI.normalize.toUriString
 	}
 
 	def String getVirtualFile(String path) {
 		val file = new File(root, path)
-		return file.toURI.normalize.toPath
+		return file.toURI.normalize.toUriString
 	}
 
 	protected def dispatch String toExpectation(List<?> elements) '''

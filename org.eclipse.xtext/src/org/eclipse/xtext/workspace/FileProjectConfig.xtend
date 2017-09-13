@@ -44,7 +44,7 @@ class FileProjectConfig implements IProjectConfig {
 	}
 	
 	new (URI path, String name, IWorkspaceConfig workspaceConfig) {
-		this.path = path
+		this.path = UriUtil.toFolderURI(path)
 		this.name = name
 		this.workspaceConfig = workspaceConfig ?: new WorkspaceConfig(this)
 	}

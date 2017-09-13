@@ -286,7 +286,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       InitializeParams _initializeParams = new InitializeParams();
       final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
         it.setProcessId(Integer.valueOf(1));
-        it.setRootUri(this._uriExtensions.toPath(this.root.toURI().normalize()));
+        it.setRootUri(this._uriExtensions.toUriString(this.root.toURI().normalize()));
       };
       final InitializeParams params = ObjectExtensions.<InitializeParams>operator_doubleArrow(_initializeParams, _function);
       if (initializer!=null) {
@@ -355,7 +355,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final FileWriter writer = new FileWriter(file);
       writer.write(contents.toString());
       writer.close();
-      return this._uriExtensions.toPath(file.toURI().normalize());
+      return this._uriExtensions.toUriString(file.toURI().normalize());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -363,7 +363,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   
   public String getVirtualFile(final String path) {
     final File file = new File(this.root, path);
-    return this._uriExtensions.toPath(file.toURI().normalize());
+    return this._uriExtensions.toUriString(file.toURI().normalize());
   }
   
   protected String _toExpectation(final List<?> elements) {

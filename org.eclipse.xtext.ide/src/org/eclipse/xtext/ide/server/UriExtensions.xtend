@@ -8,10 +8,11 @@
 package org.eclipse.xtext.ide.server
 
 import com.google.inject.Singleton
-import java.util.regex.Pattern
 import org.eclipse.emf.common.util.URI
 
 /**
+ * Normalizes file uris without authorities (<code>file:/path...</code>) to contain an empty authority (i.e. starts with three slashes:<code>file:///path...</code>).
+ * 
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
@@ -19,52 +20,54 @@ import org.eclipse.emf.common.util.URI
 class UriExtensions {
 
 	/**
-	 * Pattern for the {@code file:/} scheme. 
+	 * returns a URI with empty authority, if absent and has file scheme.
 	 */
-	static val FILE_SCHEME_1_PATTERN = Pattern.compile('^file:\\/[^\\/].*');
+	def URI toUri(String stringUri) {
+		val uri = URI.createURI(stringUri);
+		return uri.withEmptyAuthority
+	}
 	
 	/**
-	 * Pattern for the {@code file://} scheme. 
+	 * returns the string representation of the given URI (with empty authority, if absent and has file scheme).
 	 */
-	static val FILE_SCHEME_2_PATTERN = Pattern.compile('^file:\\/\\/[^\\/].*');
-
-	/**
-	 * Converts a URI (given as a string) into an EMF URI.
-	 * 
-	 * <p>
-	 * If the argument URI has a {@code file} scheme, it makes sure that the {@code file} scheme
-	 * is followed by three forward-slashes. Leaves other schemes untouched. 
-	 */
-	def URI toUri(String pathWithScheme) {
-		return URI.createURI(pathWithScheme.adjustURI);
+	def String toUriString(URI uri) {
+		return uri.withEmptyAuthority.toString
 	}
 
 	/**
-	 * Converts the EMF URI argument into a string path.
+	 * converts a java.net.URI into a string representation with empty authority, if absent and has file scheme.
 	 */
-	def String toPath(URI uri) {
-		return uri.toString.adjustURI;
+	def String toUriString(java.net.URI uri) {
+		return toUriString(URI.createURI(uri.normalize.toString))
 	}
-
+	
 	/**
-	 * Converts the {@code java.net} URI argument into a string path.
+	 * converts the file URIs with an absent authority to one with an empty 
 	 */
-	def String toPath(java.net.URI uri) {
-		return URI.createURI(uri.toString).toPath;
-	}
-
-	/**
-	 * Ensures that the {@code file} URI scheme is followed by three (forward) slashes.
-	 * Returns with the argument if the URI does not start with a {@code file} scheme. 
-	 */
-	private def adjustURI(String uri) {
-		return if (FILE_SCHEME_1_PATTERN.matcher(uri).matches) {
-			uri.replaceFirst('file:/', 'file:///');
-		} else if (FILE_SCHEME_2_PATTERN.matcher(uri).matches) {
-			uri.replaceFirst('file://', 'file:///');
+	def URI withEmptyAuthority(URI uri) {
+		if (uri.isFile && uri.authority === null) {		
+			URI.createHierarchicalURI(uri.scheme, "", uri.device, uri.segments, uri.query, uri.fragment)
 		} else {
-			uri;
+			uri
 		}
 	}
+	 
+	/**
+	 * @deprecated use #toUriString(URI)
+	 */
+	@Deprecated()
+	def String toPath(URI uri) {
+		return toUriString(uri)
+	}
 
+	/**
+	 * @deprecated use toUriString(URI)
+	 */
+	@Deprecated() 
+	def String toPath(java.net.URI uri) {
+		return toUriString(uri)
+	}
+	
+	
+	
 }

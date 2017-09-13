@@ -36,7 +36,7 @@ public class UriExtensionsTest {
   @Test
   public void test_toUri01() {
     Assert.assertEquals(
-      URI.createURI("file:///path/to/resource"), 
+      URI.createURI("file://path/to/resource"), 
       this._uriExtensions.toUri("file://path/to/resource"));
   }
   
@@ -50,7 +50,7 @@ public class UriExtensionsTest {
   @Test
   public void test_toUri03() {
     Assert.assertEquals(
-      URI.createURI("file:///path with whitespaces/to/resource"), 
+      URI.createURI("file://path with whitespaces/to/resource"), 
       this._uriExtensions.toUri("file://path with whitespaces/to/resource"));
   }
   
@@ -71,7 +71,7 @@ public class UriExtensionsTest {
   @Test
   public void test_toUri_06() {
     Assert.assertEquals(
-      URI.createURI("file:///dir/\u0424\u0443 \u0411\u0430\u0440"), 
+      URI.createURI("file://dir/\u0424\u0443 \u0411\u0430\u0440"), 
       this._uriExtensions.toUri("file://dir/\u0424\u0443 \u0411\u0430\u0440"));
   }
   
@@ -118,94 +118,101 @@ public class UriExtensionsTest {
   }
   
   @Test
-  public void test_toPath_01() {
+  public void test_toUriString_01() {
     Assert.assertEquals(
       "file:///path/to/resource", 
-      this._uriExtensions.toPath(java.net.URI.create("file:///path/to/resource")));
+      this._uriExtensions.toUriString(java.net.URI.create("file:///path/to/resource")));
   }
   
   @Test
-  public void test_toPath_02() {
+  public void test_toUriString_02() {
     Assert.assertEquals(
-      "file:///path/to/resource", 
-      this._uriExtensions.toPath(java.net.URI.create("file://path/to/resource")));
+      "file://path/to/resource", 
+      this._uriExtensions.toUriString(java.net.URI.create("file://path/to/resource")));
   }
   
   @Test
-  public void test_toPath_03() {
-    Assert.assertEquals(
-      "file:///dir/\u0424\u0443%20\u0411\u0430\u0440", 
-      this._uriExtensions.toPath(java.net.URI.create("file:///dir/\u0424\u0443%20\u0411\u0430\u0440")));
-  }
-  
-  @Test
-  public void test_toPath_04() {
+  public void test_toUriString_03() {
     Assert.assertEquals(
       "file:///dir/\u0424\u0443%20\u0411\u0430\u0440", 
-      this._uriExtensions.toPath(java.net.URI.create("file://dir/\u0424\u0443%20\u0411\u0430\u0440")));
+      this._uriExtensions.toUriString(java.net.URI.create("file:/dir/\u0424\u0443%20\u0411\u0430\u0440")));
   }
   
   @Test
-  public void test_toPath_05() {
+  public void test_toUriString_04() {
     Assert.assertEquals(
-      "file:///path/to/resource/", 
-      this._uriExtensions.toPath(java.net.URI.create("file://path/to/resource/")));
+      "file://dir/\u0424\u0443%20\u0411\u0430\u0440", 
+      this._uriExtensions.toUriString(java.net.URI.create("file://dir/\u0424\u0443%20\u0411\u0430\u0440")));
   }
   
   @Test
-  public void test_toPath_06() {
+  public void test_toUriString_05() {
+    Assert.assertEquals(
+      "file://path/to/resource/", 
+      this._uriExtensions.toUriString(java.net.URI.create("file://path/to/resource/")));
+  }
+  
+  @Test
+  public void test_toUriString_06() {
     Assert.assertEquals(
       "file:///path/to/resource/", 
-      this._uriExtensions.toPath(java.net.URI.create("file:///path/to/resource/")));
+      this._uriExtensions.toUriString(java.net.URI.create("file:/path/to/resource/")));
+  }
+  
+  @Test
+  public void test_toUriString_07() {
+    Assert.assertEquals(
+      "file:///path/to/resource/", 
+      this._uriExtensions.toUriString(java.net.URI.create("file:///path/to/resource/")));
   }
   
   @Test
   public void test_symmetric_01() {
     Assert.assertEquals(
       URI.createURI("file:///path/to/resource"), 
-      this._uriExtensions.toUri(this._uriExtensions.toPath(java.net.URI.create("file:///path/to/resource"))));
+      this._uriExtensions.toUri(this._uriExtensions.toUriString(java.net.URI.create("file:///path/to/resource"))));
   }
   
   @Test
   public void test_symmetric_02() {
     Assert.assertEquals(
-      URI.createURI("file:///path/to/resource"), 
-      this._uriExtensions.toUri(this._uriExtensions.toPath(java.net.URI.create("file://path/to/resource"))));
+      URI.createURI("file://path/to/resource"), 
+      this._uriExtensions.toUri(this._uriExtensions.toUriString(java.net.URI.create("file://path/to/resource"))));
   }
   
   @Test
   public void test_symmetric_03() {
     Assert.assertEquals(
       URI.createURI("something:/path/to/resource"), 
-      this._uriExtensions.toUri(this._uriExtensions.toPath(java.net.URI.create("something:/path/to/resource"))));
+      this._uriExtensions.toUri(this._uriExtensions.toUriString(java.net.URI.create("something:/path/to/resource"))));
   }
   
   @Test
   public void test_symmetric_04() {
     Assert.assertEquals(
       URI.createURI("something://path/to/resource"), 
-      this._uriExtensions.toUri(this._uriExtensions.toPath(java.net.URI.create("something://path/to/resource"))));
+      this._uriExtensions.toUri(this._uriExtensions.toUriString(java.net.URI.create("something://path/to/resource"))));
   }
   
   @Test
   public void testConversion() {
-    Assert.assertEquals("file:///dir/name.ext", this._uriExtensions.toPath(this._uriExtensions.toUri("file:///dir/name.ext")));
+    Assert.assertEquals("file:///dir/name.ext", this._uriExtensions.toUriString(this._uriExtensions.toUri("file:///dir/name.ext")));
   }
   
   @Test
   public void testFileUriConversion() {
-    Assert.assertEquals("file:///dir/name.ext", this._uriExtensions.toPath(URI.createFileURI("/dir/name.ext")));
+    Assert.assertEquals("file:///dir/name.ext", this._uriExtensions.toUriString(URI.createFileURI("/dir/name.ext")));
   }
   
   @Test
   public void testFilesWithSpaces() {
-    Assert.assertEquals("file:///dir/Foo Bar.testlang", this._uriExtensions.toPath(this._uriExtensions.toUri("file:///dir/Foo Bar.testlang")));
+    Assert.assertEquals("file:///dir/Foo Bar.testlang", this._uriExtensions.toUriString(this._uriExtensions.toUri("file:///dir/Foo Bar.testlang")));
   }
   
   @Test
   public void testFilesWithCyrillicSymbols() {
     Assert.assertEquals("file:///dir/\u0424\u0443 \u0411\u0430\u0440.testlang", 
-      this._uriExtensions.toPath(this._uriExtensions.toUri("file:///dir/\u0424\u0443 \u0411\u0430\u0440.testlang")));
+      this._uriExtensions.toUriString(this._uriExtensions.toUri("file:///dir/\u0424\u0443 \u0411\u0430\u0440.testlang")));
   }
   
   @Test
@@ -215,7 +222,7 @@ public class UriExtensionsTest {
     Assert.assertTrue(directory.isDirectory());
     String _absolutePath = directory.getAbsolutePath();
     String _plus = (_absolutePath + "/");
-    URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(URI.createFileURI(_plus)));
+    URI uri = this._uriExtensions.toUri(this._uriExtensions.toUriString(URI.createFileURI(_plus)));
     Assert.assertTrue(uri.isPrefix());
   }
   
@@ -227,7 +234,7 @@ public class UriExtensionsTest {
     Assert.assertTrue(CharMatcher.WHITESPACE.matchesAnyOf(directory.getName()));
     String _absolutePath = directory.getAbsolutePath();
     String _plus = (_absolutePath + "/");
-    URI uri = this._uriExtensions.toUri(this._uriExtensions.toPath(URI.createFileURI(_plus)));
+    URI uri = this._uriExtensions.toUri(this._uriExtensions.toUriString(URI.createFileURI(_plus)));
     Assert.assertTrue(uri.isPrefix());
   }
   
