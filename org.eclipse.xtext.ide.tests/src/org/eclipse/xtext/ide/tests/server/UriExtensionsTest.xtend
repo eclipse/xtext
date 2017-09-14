@@ -224,7 +224,8 @@ class UriExtensionsTest {
 
 	@Test
 	def void testFileUriConversion() {
-		assertEquals("file:///dir/name.ext", createFileURI("/dir/name.ext").toUriString)
+		val expected = Paths.get(new File('.').canonicalPath).resolve('dir').resolve('name.ext').toUri.toString;
+		assertEquals(expected, createFileURI(new File('dir/name.ext').absolutePath).toUriString)
 	}
 
 	@Test

@@ -201,7 +201,12 @@ public class UriExtensionsTest {
   
   @Test
   public void testFileUriConversion() {
-    Assert.assertEquals("file:///dir/name.ext", this._uriExtensions.toUriString(URI.createFileURI("/dir/name.ext")));
+    try {
+      final String expected = Paths.get(new File(".").getCanonicalPath()).resolve("dir").resolve("name.ext").toUri().toString();
+      Assert.assertEquals(expected, this._uriExtensions.toUriString(URI.createFileURI(new File("dir/name.ext").getAbsolutePath())));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
