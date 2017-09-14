@@ -20,7 +20,7 @@ import org.eclipse.xtext.ui.codetemplates.ui.internal.CodetemplatesActivator;
 import org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry;
 import org.eclipse.xtext.ui.codetemplates.ui.scoping.SyntheticResourceAwareScopeProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.validation.TemplateValidator;
-import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesJavaValidator;
+import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesValidator;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
@@ -71,7 +71,7 @@ public class SingleCodetemplateUiModule extends org.eclipse.xtext.ui.codetemplat
 	}
 	
 	@SingletonBinding(eager=true)	
-	public Class<? extends CodetemplatesJavaValidator> bindTemplatesJavaValidator() {
+	public Class<? extends CodetemplatesValidator> bindTemplatesJavaValidator() {
 		return TemplateValidator.class;
 	}
 	
@@ -85,6 +85,7 @@ public class SingleCodetemplateUiModule extends org.eclipse.xtext.ui.codetemplat
 		return SingleTemplateProposalConflictHelper.class;
 	}
 	
+	@Override
 	public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 		return SingleCodetemplateProposalProvider.class;
 	}

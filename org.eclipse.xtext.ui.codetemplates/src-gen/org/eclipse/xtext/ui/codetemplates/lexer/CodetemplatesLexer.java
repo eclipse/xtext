@@ -1,6 +1,6 @@
 package org.eclipse.xtext.ui.codetemplates.lexer;
 
-// Use our own Lexer superclass by means of import. 
+// Use our own Lexer superclass by means of import2. 
 import org.eclipse.xtext.parser.antlr.Lexer;
 
 
@@ -11,25 +11,25 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class CodetemplatesLexer extends Lexer {
-    public static final int RULE_ID=18;
-    public static final int DollarSign=11;
-    public static final int ReverseSolidusLessThanSignLessThanSign=5;
-    public static final int RightParenthesis=13;
-    public static final int LessThanSignLessThanSign=9;
-    public static final int RULE_ANY_OTHER=21;
+    public static final int DollarSignDollarSign=7;
+    public static final int DollarSignLeftCurlyBracket=8;
+    public static final int Templates=4;
+    public static final int RULE_STRING=19;
+    public static final int Comma=14;
     public static final int LeftParenthesis=12;
     public static final int Colon=16;
-    public static final int EOF=-1;
-    public static final int For=6;
-    public static final int FullStop=15;
-    public static final int DollarSignLeftCurlyBracket=8;
-    public static final int RULE_STRING=19;
-    public static final int DollarSignDollarSign=7;
-    public static final int Templates=4;
-    public static final int RULE_WS=20;
-    public static final int Comma=14;
-    public static final int GreaterThanSignGreaterThanSign=10;
     public static final int RightCurlyBracket=17;
+    public static final int EOF=-1;
+    public static final int FullStop=15;
+    public static final int ReverseSolidusLessThanSignLessThanSign=5;
+    public static final int RULE_ID=18;
+    public static final int RULE_WS=20;
+    public static final int For=6;
+    public static final int RightParenthesis=13;
+    public static final int RULE_ANY_OTHER=21;
+    public static final int GreaterThanSignGreaterThanSign=10;
+    public static final int DollarSign=11;
+    public static final int LessThanSignLessThanSign=9;
 
       private boolean literal = false;
       private boolean templateVariable = false;
@@ -766,8 +766,8 @@ public class CodetemplatesLexer extends Lexer {
         "\5\1\10\1\6\1\7\6\uffff\1\20\1\21\2\uffff\1\11\1\12\1\13\1\14\1"+
         "\15\1\16\3\uffff\1\3\5\uffff\1\1";
     static final String DFA5_specialS =
-        "\1\7\5\uffff\1\0\10\uffff\1\1\13\uffff\1\10\1\3\1\4\1\5\1\6\1\2"+
-        "\13\uffff\1\12\6\uffff\1\11\1\uffff}>";
+        "\1\7\5\uffff\1\6\10\uffff\1\5\13\uffff\1\12\1\0\1\1\1\2\1\3\1\4"+
+        "\13\uffff\1\11\6\uffff\1\10\1\uffff}>";
     static final String[] DFA5_transitionS = {
             "\11\21\2\20\2\21\1\20\22\21\1\20\3\21\1\4\2\21\1\17\1\7\1\10"+
             "\2\21\1\11\1\21\1\12\13\21\1\13\1\21\1\5\1\21\1\6\2\21\32\16"+
@@ -864,51 +864,6 @@ public class CodetemplatesLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA5_6 = input.LA(1);
-
-                         
-                        int index5_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (LA5_6=='>') && ((!literal || templateVariable))) {s = 26;}
-
-                        else s = 17;
-
-                         
-                        input.seek(index5_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA5_15 = input.LA(1);
-
-                         
-                        int index5_15 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((LA5_15>='\u0000' && LA5_15<='\uFFFF')) && ((!literal || templateVariable))) {s = 33;}
-
-                        else s = 17;
-
-                         
-                        input.seek(index5_15);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA5_32 = input.LA(1);
-
-                         
-                        int index5_32 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((!literal || templateVariable)) ) {s = 42;}
-
-                        else if ( (true) ) {s = 17;}
-
-                         
-                        input.seek(index5_32);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
                         int LA5_28 = input.LA(1);
 
                          
@@ -923,7 +878,7 @@ public class CodetemplatesLexer extends Lexer {
                         input.seek(index5_28);
                         if ( s>=0 ) return s;
                         break;
-                    case 4 : 
+                    case 1 : 
                         int LA5_29 = input.LA(1);
 
                          
@@ -938,7 +893,7 @@ public class CodetemplatesLexer extends Lexer {
                         input.seek(index5_29);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
+                    case 2 : 
                         int LA5_30 = input.LA(1);
 
                          
@@ -953,7 +908,7 @@ public class CodetemplatesLexer extends Lexer {
                         input.seek(index5_30);
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 3 : 
                         int LA5_31 = input.LA(1);
 
                          
@@ -966,6 +921,51 @@ public class CodetemplatesLexer extends Lexer {
 
                          
                         input.seek(index5_31);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA5_32 = input.LA(1);
+
+                         
+                        int index5_32 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((!literal || templateVariable)) ) {s = 42;}
+
+                        else if ( (true) ) {s = 17;}
+
+                         
+                        input.seek(index5_32);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA5_15 = input.LA(1);
+
+                         
+                        int index5_15 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((LA5_15>='\u0000' && LA5_15<='\uFFFF')) && ((!literal || templateVariable))) {s = 33;}
+
+                        else s = 17;
+
+                         
+                        input.seek(index5_15);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA5_6 = input.LA(1);
+
+                         
+                        int index5_6 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (LA5_6=='>') && ((!literal || templateVariable))) {s = 26;}
+
+                        else s = 17;
+
+                         
+                        input.seek(index5_6);
                         if ( s>=0 ) return s;
                         break;
                     case 7 : 
@@ -1009,21 +1009,6 @@ public class CodetemplatesLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 8 : 
-                        int LA5_27 = input.LA(1);
-
-                         
-                        int index5_27 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((!literal || templateVariable)) ) {s = 37;}
-
-                        else if ( (true) ) {s = 17;}
-
-                         
-                        input.seek(index5_27);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 9 : 
                         int LA5_51 = input.LA(1);
 
                          
@@ -1038,7 +1023,7 @@ public class CodetemplatesLexer extends Lexer {
                         input.seek(index5_51);
                         if ( s>=0 ) return s;
                         break;
-                    case 10 : 
+                    case 9 : 
                         int LA5_44 = input.LA(1);
 
                          
@@ -1051,6 +1036,21 @@ public class CodetemplatesLexer extends Lexer {
 
                          
                         input.seek(index5_44);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 10 : 
+                        int LA5_27 = input.LA(1);
+
+                         
+                        int index5_27 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((!literal || templateVariable)) ) {s = 37;}
+
+                        else if ( (true) ) {s = 17;}
+
+                         
+                        input.seek(index5_27);
                         if ( s>=0 ) return s;
                         break;
             }

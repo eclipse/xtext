@@ -31,6 +31,8 @@
    <bundle id="org.eclipse.xtext.ui.source" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.codetemplates" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.codetemplates.source" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtext.ui.codetemplates.ide" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtext.ui.codetemplates.ide.source" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.codetemplates.ui" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.codetemplates.ui.source" version="2.13.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.ecore" version="2.13.0.qualifier"><category name="Xtext"/></bundle>

@@ -4,36 +4,37 @@
 package org.eclipse.xtext.ui.codetemplates.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.ui.codetemplates.parser.antlr.internal.InternalCodetemplatesParser;
 import org.eclipse.xtext.ui.codetemplates.services.CodetemplatesGrammarAccess;
 
-public class CodetemplatesParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class CodetemplatesParser extends AbstractAntlrParser {
+
 	@Inject
 	private CodetemplatesGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.ui.codetemplates.parser.antlr.internal.InternalCodetemplatesParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.codetemplates.parser.antlr.internal.InternalCodetemplatesParser(stream, getGrammarAccess());
+	protected InternalCodetemplatesParser createParser(XtextTokenStream stream) {
+		return new InternalCodetemplatesParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Codetemplates";
 	}
-	
+
 	public CodetemplatesGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(CodetemplatesGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

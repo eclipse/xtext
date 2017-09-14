@@ -3,12 +3,11 @@
  */
 package org.eclipse.xtext.ui.codetemplates.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.xtext.ui.codetemplates.ui.internal.CodetemplatesActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.xtext.ui.codetemplates.ui.internal.CodetemplatesActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -18,12 +17,13 @@ public class SingleCodetemplateExecutableExtensionFactory extends AbstractGuiceA
 
 	@Override
 	protected Bundle getBundle() {
-		return CodetemplatesActivator.getInstance().getBundle();
+		return Platform.getBundle(CodetemplatesActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return CodetemplatesActivator.getInstance().getInjector(CodetemplatesActivator.ORG_ECLIPSE_XTEXT_UI_CODETEMPLATES_SINGLECODETEMPLATE);
+		CodetemplatesActivator activator = CodetemplatesActivator.getInstance();
+		return activator != null ? activator.getInjector(CodetemplatesActivator.ORG_ECLIPSE_XTEXT_UI_CODETEMPLATES_SINGLECODETEMPLATE) : null;
 	}
-	
+
 }

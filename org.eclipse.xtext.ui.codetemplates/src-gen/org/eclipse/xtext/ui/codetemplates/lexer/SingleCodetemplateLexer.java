@@ -1,6 +1,6 @@
 package org.eclipse.xtext.ui.codetemplates.lexer;
 
-// Use our own Lexer superclass by means of import. 
+// Use our own Lexer superclass by means of import4. 
 import org.eclipse.xtext.parser.antlr.Lexer;
 
 
@@ -11,23 +11,23 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class SingleCodetemplateLexer extends Lexer {
-    public static final int RULE_ID=16;
-    public static final int DollarSign=9;
-    public static final int RightParenthesis=11;
-    public static final int RULE_ANY_OTHER=19;
+    public static final int DollarSignDollarSign=6;
+    public static final int DollarSignLeftCurlyBracket=7;
+    public static final int Templates=4;
+    public static final int RULE_STRING=17;
+    public static final int Comma=12;
     public static final int LeftParenthesis=10;
     public static final int Colon=14;
-    public static final int EOF=-1;
-    public static final int For=5;
-    public static final int FullStop=13;
-    public static final int DollarSignLeftCurlyBracket=7;
-    public static final int RULE_STRING=17;
-    public static final int DollarSignDollarSign=6;
-    public static final int Templates=4;
-    public static final int RULE_WS=18;
-    public static final int Comma=12;
-    public static final int GreaterThanSignGreaterThanSign=8;
     public static final int RightCurlyBracket=15;
+    public static final int EOF=-1;
+    public static final int FullStop=13;
+    public static final int RULE_ID=16;
+    public static final int RULE_WS=18;
+    public static final int For=5;
+    public static final int RightParenthesis=11;
+    public static final int RULE_ANY_OTHER=19;
+    public static final int GreaterThanSignGreaterThanSign=8;
+    public static final int DollarSign=9;
 
       private boolean literal = false;
       private boolean templateVariable = false;
@@ -707,8 +707,8 @@ public class SingleCodetemplateLexer extends Lexer {
         "\6\1\5\6\uffff\1\16\1\17\2\uffff\1\7\1\10\1\11\1\12\1\13\1\14\3"+
         "\uffff\1\2\5\uffff\1\1";
     static final String DFA5_specialS =
-        "\1\0\3\uffff\1\2\10\uffff\1\1\11\uffff\1\10\1\7\1\6\1\4\1\5\1\3"+
-        "\13\uffff\1\11\6\uffff\1\12\1\uffff}>";
+        "\1\12\3\uffff\1\11\10\uffff\1\0\11\uffff\1\3\1\4\1\5\1\6\1\7\1\10"+
+        "\13\uffff\1\2\6\uffff\1\1\1\uffff}>";
     static final String[] DFA5_transitionS = {
             "\11\17\2\16\2\17\1\16\22\17\1\16\3\17\1\3\2\17\1\15\1\5\1\6"+
             "\2\17\1\7\1\17\1\10\13\17\1\11\3\17\1\4\2\17\32\14\3\17\1\13"+
@@ -800,6 +800,156 @@ public class SingleCodetemplateLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA5_13 = input.LA(1);
+
+                         
+                        int index5_13 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((LA5_13>='\u0000' && LA5_13<='\uFFFF')) && ((!literal || templateVariable))) {s = 29;}
+
+                        else s = 15;
+
+                         
+                        input.seek(index5_13);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA5_47 = input.LA(1);
+
+                         
+                        int index5_47 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((!literal || templateVariable)) ) {s = 48;}
+
+                        else if ( (true) ) {s = 17;}
+
+                         
+                        input.seek(index5_47);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA5_40 = input.LA(1);
+
+                         
+                        int index5_40 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((!literal || templateVariable)) ) {s = 42;}
+
+                        else if ( (true) ) {s = 17;}
+
+                         
+                        input.seek(index5_40);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA5_23 = input.LA(1);
+
+                         
+                        int index5_23 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((!literal || templateVariable)) ) {s = 33;}
+
+                        else if ( (true) ) {s = 15;}
+
+                         
+                        input.seek(index5_23);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA5_24 = input.LA(1);
+
+                         
+                        int index5_24 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((!literal || templateVariable)) ) {s = 34;}
+
+                        else if ( (true) ) {s = 15;}
+
+                         
+                        input.seek(index5_24);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA5_25 = input.LA(1);
+
+                         
+                        int index5_25 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((!literal || templateVariable)) ) {s = 35;}
+
+                        else if ( (true) ) {s = 15;}
+
+                         
+                        input.seek(index5_25);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA5_26 = input.LA(1);
+
+                         
+                        int index5_26 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((!literal || templateVariable)) ) {s = 36;}
+
+                        else if ( (true) ) {s = 15;}
+
+                         
+                        input.seek(index5_26);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 7 : 
+                        int LA5_27 = input.LA(1);
+
+                         
+                        int index5_27 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((!literal || templateVariable)) ) {s = 37;}
+
+                        else if ( (true) ) {s = 15;}
+
+                         
+                        input.seek(index5_27);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 8 : 
+                        int LA5_28 = input.LA(1);
+
+                         
+                        int index5_28 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ((!literal || templateVariable)) ) {s = 38;}
+
+                        else if ( (true) ) {s = 15;}
+
+                         
+                        input.seek(index5_28);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 9 : 
+                        int LA5_4 = input.LA(1);
+
+                         
+                        int index5_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (LA5_4=='>') && ((!literal || templateVariable))) {s = 22;}
+
+                        else s = 15;
+
+                         
+                        input.seek(index5_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 10 : 
                         int LA5_0 = input.LA(1);
 
                         s = -1;
@@ -833,156 +983,6 @@ public class SingleCodetemplateLexer extends Lexer {
 
                         else if ( ((LA5_0>='\u0000' && LA5_0<='\b')||(LA5_0>='\u000B' && LA5_0<='\f')||(LA5_0>='\u000E' && LA5_0<='\u001F')||(LA5_0>='!' && LA5_0<='#')||(LA5_0>='%' && LA5_0<='&')||(LA5_0>='*' && LA5_0<='+')||LA5_0=='-'||(LA5_0>='/' && LA5_0<='9')||(LA5_0>=';' && LA5_0<='=')||(LA5_0>='?' && LA5_0<='@')||(LA5_0>='[' && LA5_0<=']')||LA5_0=='`'||(LA5_0>='{' && LA5_0<='|')||(LA5_0>='~' && LA5_0<='\uFFFF')) ) {s = 15;}
 
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA5_13 = input.LA(1);
-
-                         
-                        int index5_13 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((LA5_13>='\u0000' && LA5_13<='\uFFFF')) && ((!literal || templateVariable))) {s = 29;}
-
-                        else s = 15;
-
-                         
-                        input.seek(index5_13);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA5_4 = input.LA(1);
-
-                         
-                        int index5_4 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (LA5_4=='>') && ((!literal || templateVariable))) {s = 22;}
-
-                        else s = 15;
-
-                         
-                        input.seek(index5_4);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA5_28 = input.LA(1);
-
-                         
-                        int index5_28 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((!literal || templateVariable)) ) {s = 38;}
-
-                        else if ( (true) ) {s = 15;}
-
-                         
-                        input.seek(index5_28);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
-                        int LA5_26 = input.LA(1);
-
-                         
-                        int index5_26 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((!literal || templateVariable)) ) {s = 36;}
-
-                        else if ( (true) ) {s = 15;}
-
-                         
-                        input.seek(index5_26);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
-                        int LA5_27 = input.LA(1);
-
-                         
-                        int index5_27 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((!literal || templateVariable)) ) {s = 37;}
-
-                        else if ( (true) ) {s = 15;}
-
-                         
-                        input.seek(index5_27);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
-                        int LA5_25 = input.LA(1);
-
-                         
-                        int index5_25 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((!literal || templateVariable)) ) {s = 35;}
-
-                        else if ( (true) ) {s = 15;}
-
-                         
-                        input.seek(index5_25);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 7 : 
-                        int LA5_24 = input.LA(1);
-
-                         
-                        int index5_24 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((!literal || templateVariable)) ) {s = 34;}
-
-                        else if ( (true) ) {s = 15;}
-
-                         
-                        input.seek(index5_24);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 8 : 
-                        int LA5_23 = input.LA(1);
-
-                         
-                        int index5_23 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((!literal || templateVariable)) ) {s = 33;}
-
-                        else if ( (true) ) {s = 15;}
-
-                         
-                        input.seek(index5_23);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 9 : 
-                        int LA5_40 = input.LA(1);
-
-                         
-                        int index5_40 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((!literal || templateVariable)) ) {s = 42;}
-
-                        else if ( (true) ) {s = 17;}
-
-                         
-                        input.seek(index5_40);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 10 : 
-                        int LA5_47 = input.LA(1);
-
-                         
-                        int index5_47 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ((!literal || templateVariable)) ) {s = 48;}
-
-                        else if ( (true) ) {s = 17;}
-
-                         
-                        input.seek(index5_47);
                         if ( s>=0 ) return s;
                         break;
             }
