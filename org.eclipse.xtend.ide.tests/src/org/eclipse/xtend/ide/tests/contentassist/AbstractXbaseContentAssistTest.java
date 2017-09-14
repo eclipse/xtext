@@ -136,46 +136,54 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	protected static String[] KEYWORDS_AND_STATICS = {
-		"if", 
-		"while", "for", "do",
-		"true", "false",
-		"typeof",
-		"try",
-		"switch",
-		"new",
-		"throw",
-		"return",
-		"null",
-		// Collection Literals
-		"emptyList",
-		"emptySet",
-		"emptyMap",
-		"newArrayOfSize()",
-		"newBooleanArrayOfSize()", 
-		"newByteArrayOfSize()", 
-		"newShortArrayOfSize()",
-		"newCharArrayOfSize()", 
-		"newIntArrayOfSize()", 
-		"newLongArrayOfSize()", 
-		"newFloatArrayOfSize()", 
-		"newDoubleArrayOfSize()", 
-		"newImmutableList()",
-		"newImmutableSet()",
-		"newImmutableMap()",
-		"newArrayList()",
-		"newLinkedList()",
-		"newHashSet()",
-		"newLinkedHashSet()",
-		"newTreeSet()",
-		"newHashMap()",
-		"newLinkedHashMap()",
-		"newTreeMap()",
-		// InputOutput,
-		"print()",
-		"println",
-		"println()",
-		"synchronized"
-	};
+			"if", 
+			"while", "for", "do",
+			"true", "false",
+			"typeof",
+			"try",
+			"switch",
+			"new",
+			"throw",
+			"return",
+			"null",
+			// Collection Literals
+			"emptyList",
+			"emptySet",
+			"emptyMap",
+			"newArrayOfSize()",
+			"newBooleanArrayOfSize()", 
+			"newByteArrayOfSize()", 
+			"newShortArrayOfSize()",
+			"newCharArrayOfSize()", 
+			"newIntArrayOfSize()", 
+			"newLongArrayOfSize()", 
+			"newFloatArrayOfSize()", 
+			"newDoubleArrayOfSize()", 
+			"newImmutableList()",
+			"newImmutableSet()",
+			"newImmutableMap()",
+			"newArrayList",
+			"newArrayList()",
+			"newLinkedList",
+			"newLinkedList()",
+			"newHashSet",
+			"newHashSet()",
+			"newLinkedHashSet",
+			"newLinkedHashSet()",
+			"newTreeSet()",
+			"newTreeSet()",
+			"newHashMap()",
+			"newHashMap",
+			"newLinkedHashMap()",
+			"newLinkedHashMap",
+			"newTreeMap()",
+			"newTreeMap()",
+			// InputOutput,
+			"print()",
+			"println",
+			"println()",
+			"synchronized"
+		};
 	
 	protected static String[] STRING_OPERATORS = {
 		"===", "!==", "==", "!=",
@@ -673,7 +681,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testCamelCase_01() throws Exception {
-		newBuilder().append("newLLis").assertText("newLinkedList()");
+		newBuilder().append("newLLis").assertText("newLinkedList", "newLinkedList()");
 	}
 	
 	@Test public void testCamelCase_02() throws Exception {
