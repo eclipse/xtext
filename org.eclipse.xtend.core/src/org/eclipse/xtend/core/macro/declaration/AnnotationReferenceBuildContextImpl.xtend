@@ -486,7 +486,7 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 	}
 	
 	protected def getAnnotationValueTypeName(JvmType type) {
-		switch result: type?.identifier {
+		switch result: type?.identifier?.replace("$", ".") {
 			case 'java.lang.Class': TypeReference.name
 			case 'java.lang.Class[]': TypeReference.name + "[]"
 			default: result
