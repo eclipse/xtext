@@ -16,11 +16,11 @@ import org.junit.Test;
 public class Bug364966Test extends AbstractXtendContentAssistBugTest {
 
 	@Test public void testFieldInitializer_01() throws Exception {
-		newBuilder().append("String s = newArrayLis").assertText("newArrayList()");
+		newBuilder().append("String s = newArrayLis").assertText("newArrayList","newArrayList()");
 	}
 	
 	@Test public void testFieldInitializer_02() throws Exception {
-		newBuilder().append("static String s = newArrayLis").assertText("newArrayList()");
+		newBuilder().append("static String s = newArrayLis").assertText("newArrayList","newArrayList()");
 	}
 	
 	@Test public void testFieldInitializer_03() throws Exception {
