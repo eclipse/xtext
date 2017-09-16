@@ -38,7 +38,14 @@ class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
 	def void testStaticMethod() {
 		val operation = 'newArrayList'.toOperation
 		assertEquals('ArrayList<Object>', operation.resolvedReturnType.simpleName)
-		assertEquals('newArrayList(Object[])', operation.simpleSignature)
+		assertEquals('newArrayList()', operation.simpleSignature)
+	}
+	
+	@Test
+	def void testStaticMethod_02() {
+		val operation = 'newImmutableList'.toOperation
+		assertEquals('List<Object>', operation.resolvedReturnType.simpleName)
+		assertEquals('newImmutableList(Object[])', operation.simpleSignature)
 	}
 	
 	@Test
