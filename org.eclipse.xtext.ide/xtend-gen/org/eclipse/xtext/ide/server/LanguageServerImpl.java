@@ -430,10 +430,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     PublishDiagnosticsParams _publishDiagnosticsParams = new PublishDiagnosticsParams();
     final Procedure1<PublishDiagnosticsParams> _function = (PublishDiagnosticsParams it) -> {
       it.setUri(this._uriExtensions.toUriString(uri));
-      final Function1<Issue, Diagnostic> _function_1 = (Issue it_1) -> {
+      final Function1<Issue, Boolean> _function_1 = (Issue it_1) -> {
+        Severity _severity = it_1.getSeverity();
+        return Boolean.valueOf((_severity != Severity.IGNORE));
+      };
+      final Function1<Issue, Diagnostic> _function_2 = (Issue it_1) -> {
         return this.toDiagnostic(it_1);
       };
-      it.setDiagnostics(IterableExtensions.<Diagnostic>toList(IterableExtensions.map(issues, _function_1)));
+      it.setDiagnostics(IterableExtensions.<Diagnostic>toList(IterableExtensions.map(IterableExtensions.filter(issues, _function_1), _function_2)));
     };
     final PublishDiagnosticsParams diagnostics = ObjectExtensions.<PublishDiagnosticsParams>operator_doubleArrow(_publishDiagnosticsParams, _function);
     this.client.publishDiagnostics(diagnostics);
