@@ -27,6 +27,10 @@ import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable
 import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder
 import org.eclipse.xtext.util.Wrapper
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import org.eclipse.xtext.ui.editor.model.IXtextDocument
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * Creates quickfixes using {@link ICodeBuilder}s.
@@ -62,6 +66,17 @@ class CodeBuilderQuickfix {
 		builder.ownerSource instanceof XtendClass
 	}
 	
+	def protected int getTypeIndentation(XtextResource resource, IXtextDocument document, XtendTypeDeclaration xtendClass) {
+		val object = resource.getEObject(EcoreUtil.getURI(xtendClass).fragment)
+		if (object !== null) {
+			val node = NodeModelUtils.findActualNodeFor(object)
+			if (node !== null) {
+				return appendableFactory.getIndentationLevelAtOffset(node.offset, document, resource);
+			}
+		}
+		return 0
+	}
+	
 	def protected IModification getXtendModification(ICodeBuilder.Xtend builder) {
 		[
 			val xtendClass = builder.xtendType
@@ -75,8 +90,9 @@ class CodeBuilderQuickfix {
 			val appendable = document.readOnly [ resource |
 				var offset = builder.getInsertOffset(resource)
 				wrapper.set(offset)
+				val typeIndentation = getTypeIndentation(resource, document, xtendClass)
 				appendableFactory.create(document, resource, offset, 0, new OptionalParameters => [
-					baseIndentationLevel = builder.indentationLevel
+					baseIndentationLevel = builder.indentationLevel + typeIndentation
 					ensureEmptyLinesAround = true
 				])				
 			] 
