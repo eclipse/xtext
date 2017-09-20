@@ -128,6 +128,155 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Inject
 	private SyntaxFilteredScopes syntaxFilteredScopes;
 	
+	protected class XbaseProposalCreator extends DefaultProposalCreator {
+		
+		private ContentAssistContext contentAssistContext;
+		private String ruleName;
+		
+		public XbaseProposalCreator(ContentAssistContext contentAssistContext, String ruleName,
+				IQualifiedNameConverter qualifiedNameConverter) {
+			super(contentAssistContext, ruleName, qualifiedNameConverter);
+			this.contentAssistContext = contentAssistContext;
+			this.ruleName = ruleName;
+		}
+		
+		private Map<QualifiedName, ParameterData> simpleNameToParameterList = Maps.newHashMap();
+		
+		@Override
+		public ICompletionProposal apply(final IEObjectDescription candidate) {
+			IEObjectDescription myCandidate = candidate;
+			ContentAssistContext myContentAssistContext = contentAssistContext;
+			if (myCandidate instanceof MultiNameDescription) {
+				final MultiNameDescription multiNamed = (MultiNameDescription) candidate;
+				myCandidate = multiNamed.getDelegate();
+				myContentAssistContext = myContentAssistContext.copy().setMatcher(new PrefixMatcher() {
+					@Override
+					public boolean isCandidateMatchingPrefix(String name, String prefix) {
+						PrefixMatcher delegateMatcher = contentAssistContext.getMatcher();
+						if (delegateMatcher.isCandidateMatchingPrefix(name, prefix))
+							return true;
+						IQualifiedNameConverter converter = getQualifiedNameConverter();
+						String unconvertedName = converter.toString(candidate.getName());
+						if (!unconvertedName.equals(name) && delegateMatcher.isCandidateMatchingPrefix(unconvertedName, prefix))
+							return true;
+						for(QualifiedName otherName: multiNamed.getOtherNames()) {
+							String alternative = converter.toString(otherName);
+							if (delegateMatcher.isCandidateMatchingPrefix(alternative, prefix))
+								return true;
+							String convertedAlternative = valueConverter != null ? valueConverter.toString(alternative) : getValueConverter().toString(alternative, ruleName);
+							if (!convertedAlternative.equals(alternative) &&
+									delegateMatcher.isCandidateMatchingPrefix(convertedAlternative, prefix)) {
+								return true;
+							}
+						}
+						return false;
+					}
+				}).toContext();
+			}
+			if (myCandidate instanceof IIdentifiableElementDescription && (isIdRule(ruleName))) {
+				ICompletionProposal result = null;
+				String proposal = getQualifiedNameConverter().toString(myCandidate.getName());
+				if (valueConverter != null) {
+					try {
+						proposal = getValueConverter().toString(proposal, ruleName);
+					} catch (ValueConverterException e) {
+						log.debug(e.getMessage(), e);
+						return null;
+					}
+				} else if (ruleName != null) {
+					try {
+						proposal = getValueConverter().toString(proposal, ruleName);
+					} catch (ValueConverterException e) {
+						log.debug(e.getMessage(), e);
+						return null;
+					}
+				}
+				ProposalBracketInfo bracketInfo = getProposalBracketInfo(myCandidate, contentAssistContext);
+				proposal += bracketInfo.brackets;
+				int insignificantParameters = 0;
+				if(myCandidate instanceof IIdentifiableElementDescription) {
+					IIdentifiableElementDescription casted = (IIdentifiableElementDescription) myCandidate;
+					insignificantParameters = casted.getNumberOfIrrelevantParameters();
+				}
+				LightweightTypeReferenceFactory converter = getTypeConverter(contentAssistContext.getResource());
+				EObject objectOrProxy = myCandidate.getEObjectOrProxy();
+				StyledString displayString;
+				if (objectOrProxy instanceof JvmFeature) {
+					if (bracketInfo.brackets.startsWith(" =")) {
+						displayString = getStyledDisplayString((JvmFeature)objectOrProxy,
+								false, insignificantParameters,
+								getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
+								getQualifiedNameConverter().toString(myCandidate.getName()) + bracketInfo.brackets,
+								converter);
+					} else {
+						displayString = getStyledDisplayString((JvmFeature)objectOrProxy,
+								!isEmpty(bracketInfo.brackets), insignificantParameters,
+								getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
+								getQualifiedNameConverter().toString(myCandidate.getName()),
+								converter);
+					}
+				} else {
+					displayString = getStyledDisplayString(objectOrProxy,
+							getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
+							getQualifiedNameConverter().toString(myCandidate.getName()));
+				}
+				result = createCompletionProposal(proposal, displayString, null, myContentAssistContext);
+				if (result instanceof ConfigurableCompletionProposal) {
+					ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
+					casted.setAdditionalData(DESCRIPTION_KEY, myCandidate);
+					casted.setAdditionalProposalInfo(objectOrProxy);
+					casted.setHover(getHover());
+					int offset = casted.getReplacementOffset() + proposal.length();
+					casted.setCursorPosition(casted.getCursorPosition() + bracketInfo.caretOffset);
+					if (bracketInfo.selectionOffset != 0) {
+						offset += bracketInfo.selectionOffset;
+						casted.setSelectionStart(offset);
+						casted.setSelectionLength(bracketInfo.selectionLength);
+						casted.setAutoInsertable(false);
+						casted.setSimpleLinkedMode(myContentAssistContext.getViewer(), '\t', '\n', '\r');
+					}
+					if (objectOrProxy instanceof JvmExecutable) {
+						final JvmExecutable executable = (JvmExecutable) objectOrProxy;
+						StyledString parameterList = new StyledString();
+						appendParameters(parameterList, executable, insignificantParameters, converter);
+						// TODO how should we display overloaded methods were one variant does not take arguments? -> empty parentheses? '<no args>' ?
+						if (parameterList.length() > 0) {
+							ParameterData parameterData = simpleNameToParameterList.get(myCandidate.getName());
+							if (parameterData == null) {
+								parameterData = new ParameterData();
+								simpleNameToParameterList.put(myCandidate.getName(), parameterData);
+							}
+							parameterData.addOverloaded(parameterList.toString(), executable.isVarArgs());
+							IContextInformation contextInformation = new ParameterContextInformation(parameterData, displayString.toString(), offset, offset);
+							casted.setContextInformation(contextInformation);
+						}
+						// If the user types 'is' as a prefix for boolean properties, we want to keep that after applying the proposal
+						if (executable.getSimpleName().startsWith("is") && executable.getSimpleName().length() > 2 && executable.getParameters().size() - insignificantParameters == 0) {
+							((ConfigurableCompletionProposal) result).setTextApplier(new ConfigurableCompletionProposal.IReplacementTextApplier() {
+								@Override
+								public void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException {
+									String replacementString = proposal.getReplacementString();
+									if (proposal.getReplacementLength() >= 2) {
+										String is = document.get(proposal.getReplacementOffset(), 2);
+										if ("is".equals(is)) {
+											replacementString = getValueConverter().toString(executable.getSimpleName(), ruleName);
+										}
+									}
+									proposal.setCursorPosition(replacementString.length());
+									document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(), replacementString);
+								}
+							});
+						}
+					}
+				}
+				getPriorityHelper().adjustCrossReferencePriority(result, myContentAssistContext.getPrefix());
+				return result;
+			}
+			return super.apply(candidate);
+		}
+
+	}
+	
 	@Override
 	public String getNextCategory() {
 		return getXbaseCrossReferenceProposalCreator().getNextCategory();
@@ -721,143 +870,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Override
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(final String ruleName,
 			final ContentAssistContext contentAssistContext) {
-		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
-			
-			private Map<QualifiedName, ParameterData> simpleNameToParameterList = Maps.newHashMap();
-			
-			@Override
-			public ICompletionProposal apply(final IEObjectDescription candidate) {
-				IEObjectDescription myCandidate = candidate;
-				ContentAssistContext myContentAssistContext = contentAssistContext;
-				if (myCandidate instanceof MultiNameDescription) {
-					final MultiNameDescription multiNamed = (MultiNameDescription) candidate;
-					myCandidate = multiNamed.getDelegate();
-					myContentAssistContext = myContentAssistContext.copy().setMatcher(new PrefixMatcher() {
-						@Override
-						public boolean isCandidateMatchingPrefix(String name, String prefix) {
-							PrefixMatcher delegateMatcher = contentAssistContext.getMatcher();
-							if (delegateMatcher.isCandidateMatchingPrefix(name, prefix))
-								return true;
-							IQualifiedNameConverter converter = getQualifiedNameConverter();
-							String unconvertedName = converter.toString(candidate.getName());
-							if (!unconvertedName.equals(name) && delegateMatcher.isCandidateMatchingPrefix(unconvertedName, prefix))
-								return true;
-							for(QualifiedName otherName: multiNamed.getOtherNames()) {
-								String alternative = converter.toString(otherName);
-								if (delegateMatcher.isCandidateMatchingPrefix(alternative, prefix))
-									return true;
-								String convertedAlternative = valueConverter != null ? valueConverter.toString(alternative) : getValueConverter().toString(alternative, ruleName);
-								if (!convertedAlternative.equals(alternative) &&
-										delegateMatcher.isCandidateMatchingPrefix(convertedAlternative, prefix)) {
-									return true;
-								}
-							}
-							return false;
-						}
-					}).toContext();
-				}
-				if (myCandidate instanceof IIdentifiableElementDescription && (isIdRule(ruleName))) {
-					ICompletionProposal result = null;
-					String proposal = getQualifiedNameConverter().toString(myCandidate.getName());
-					if (valueConverter != null) {
-						try {
-							proposal = getValueConverter().toString(proposal, ruleName);
-						} catch (ValueConverterException e) {
-							log.debug(e.getMessage(), e);
-							return null;
-						}
-					} else if (ruleName != null) {
-						try {
-							proposal = getValueConverter().toString(proposal, ruleName);
-						} catch (ValueConverterException e) {
-							log.debug(e.getMessage(), e);
-							return null;
-						}
-					}
-					ProposalBracketInfo bracketInfo = getProposalBracketInfo(myCandidate, contentAssistContext);
-					proposal += bracketInfo.brackets;
-					int insignificantParameters = 0;
-					if(myCandidate instanceof IIdentifiableElementDescription) {
-						IIdentifiableElementDescription casted = (IIdentifiableElementDescription) myCandidate;
-						insignificantParameters = casted.getNumberOfIrrelevantParameters();
-					}
-					LightweightTypeReferenceFactory converter = getTypeConverter(contentAssistContext.getResource());
-					EObject objectOrProxy = myCandidate.getEObjectOrProxy();
-					StyledString displayString;
-					if (objectOrProxy instanceof JvmFeature) {
-						if (bracketInfo.brackets.startsWith(" =")) {
-							displayString = getStyledDisplayString((JvmFeature)objectOrProxy,
-									false, insignificantParameters,
-									getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
-									getQualifiedNameConverter().toString(myCandidate.getName()) + bracketInfo.brackets,
-									converter);
-						} else {
-							displayString = getStyledDisplayString((JvmFeature)objectOrProxy,
-									!isEmpty(bracketInfo.brackets), insignificantParameters,
-									getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
-									getQualifiedNameConverter().toString(myCandidate.getName()),
-									converter);
-						}
-					} else {
-						displayString = getStyledDisplayString(objectOrProxy,
-								getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
-								getQualifiedNameConverter().toString(myCandidate.getName()));
-					}
-					result = createCompletionProposal(proposal, displayString, null, myContentAssistContext);
-					if (result instanceof ConfigurableCompletionProposal) {
-						ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
-						casted.setAdditionalData(DESCRIPTION_KEY, myCandidate);
-						casted.setAdditionalProposalInfo(objectOrProxy);
-						casted.setHover(getHover());
-						int offset = casted.getReplacementOffset() + proposal.length();
-						casted.setCursorPosition(casted.getCursorPosition() + bracketInfo.caretOffset);
-						if (bracketInfo.selectionOffset != 0) {
-							offset += bracketInfo.selectionOffset;
-							casted.setSelectionStart(offset);
-							casted.setSelectionLength(bracketInfo.selectionLength);
-							casted.setAutoInsertable(false);
-							casted.setSimpleLinkedMode(myContentAssistContext.getViewer(), '\t', '\n', '\r');
-						}
-						if (objectOrProxy instanceof JvmExecutable) {
-							final JvmExecutable executable = (JvmExecutable) objectOrProxy;
-							StyledString parameterList = new StyledString();
-							appendParameters(parameterList, executable, insignificantParameters, converter);
-							// TODO how should we display overloaded methods were one variant does not take arguments? -> empty parentheses? '<no args>' ?
-							if (parameterList.length() > 0) {
-								ParameterData parameterData = simpleNameToParameterList.get(myCandidate.getName());
-								if (parameterData == null) {
-									parameterData = new ParameterData();
-									simpleNameToParameterList.put(myCandidate.getName(), parameterData);
-								}
-								parameterData.addOverloaded(parameterList.toString(), executable.isVarArgs());
-								IContextInformation contextInformation = new ParameterContextInformation(parameterData, displayString.toString(), offset, offset);
-								casted.setContextInformation(contextInformation);
-							}
-							// If the user types 'is' as a prefix for boolean properties, we want to keep that after applying the proposal
-							if (executable.getSimpleName().startsWith("is") && executable.getSimpleName().length() > 2 && executable.getParameters().size() - insignificantParameters == 0) {
-								((ConfigurableCompletionProposal) result).setTextApplier(new ConfigurableCompletionProposal.IReplacementTextApplier() {
-									@Override
-									public void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException {
-										String replacementString = proposal.getReplacementString();
-										if (proposal.getReplacementLength() >= 2) {
-											String is = document.get(proposal.getReplacementOffset(), 2);
-											if ("is".equals(is)) {
-												replacementString = getValueConverter().toString(executable.getSimpleName(), ruleName);
-											}
-										}
-										proposal.setCursorPosition(replacementString.length());
-										document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(), replacementString);
-									}
-								});
-							}
-						}
-					}
-					getPriorityHelper().adjustCrossReferencePriority(result, myContentAssistContext.getPrefix());
-					return result;
-				}
-				return super.apply(candidate);
-			}
-		};
+		return new XbaseProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter());
 	}
 	
 	protected static class ProposalBracketInfo {
