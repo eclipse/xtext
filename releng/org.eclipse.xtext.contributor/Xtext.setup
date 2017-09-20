@@ -291,8 +291,6 @@
     <requirement
         name="org.eclipse.m2e.feature.feature.group"/>
     <requirement
-        name="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
-    <requirement
         name="org.jboss.tools.m2e.jdt.feature.feature.group"/>
     <requirement
         name="org.eclipse.buildship.feature.group"/>
@@ -303,8 +301,6 @@
         name="org.eclipse.wst.jsdt.feature.feature.group"/>
     <requirement
         name="org.sonatype.tycho.m2e.feature.feature.group"/>
-    <repository
-        url="http://download.eclipse.org/modeling/emft/b3/updates-4.4/"/>
     <repository
         url="${p2.m2e.connector.jdt}"/>
     <repository
