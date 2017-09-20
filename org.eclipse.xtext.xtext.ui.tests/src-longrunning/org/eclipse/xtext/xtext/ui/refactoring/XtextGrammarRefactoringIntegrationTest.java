@@ -48,7 +48,6 @@ import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -194,10 +193,8 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		assertEquals(REFACTOREDCLASSIFIERNAME, eType.getName());
 	}
 
-	//FIXME https://github.com/eclipse/xtext-eclipse/issues/17
 	@Test
 	@Flaky(trials=10)
-	@Ignore("https://github.com/eclipse/xtext-eclipse/issues/17")
 	public void testRefactorXtextGrammarWithGeneratedClassifierAndModelWithRefToClassifier() throws Exception {
 		ResourceSet rs = resourceSetProvider.get();
 		EcoreFactory eInstance = EcoreFactory.eINSTANCE;
