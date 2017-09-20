@@ -251,8 +251,8 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testFinalVsNative() {
-		function('''native final def foo() ''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
-		function('''final native def foo() ''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		function('''native final def int foo() ''').assertNoErrors
+		function('''final native def int foo() ''').assertNoErrors
 	}
 	
 	@Test def void testFinalVsNoBody() {
