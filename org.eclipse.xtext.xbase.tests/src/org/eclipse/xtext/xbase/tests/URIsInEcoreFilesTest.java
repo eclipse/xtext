@@ -7,6 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+
 import org.junit.Test;
 
 /**
@@ -36,6 +41,15 @@ public class URIsInEcoreFilesTest extends AbstractPortableURIsTest {
 
 	@Test public void testCommonTypesGenModel() {
 		doTestResource("org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel", "types");
+	}
+	
+	@Override
+	protected Object getClasspathURIContext() {
+		try {
+			return new URLClassLoader(new URL[] {new File("../org.eclipse.xtext.xbase").toURI().toURL(), new File("../org.eclipse.xtext.common.types").toURI().toURL()}, getClass().getClassLoader());
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 }
