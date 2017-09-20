@@ -2043,12 +2043,13 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		if(method.getDeclaringType() instanceof XtendClass) {
 			methodModifierValidator.checkModifiers(method, "method " + method.getName());
 			int abstractIndex = method.getModifiers().indexOf("abstract");
+			int nativeIndex = method.getModifiers().indexOf("native");
 			if (method.getExpression() != null) {
 				if (abstractIndex != -1) {
 					error("Method " + method.getName() + " with a body cannot be abstract", XTEND_MEMBER__MODIFIERS, abstractIndex, INVALID_MODIFIER);
 				} else if (method.isNative()) 
 					error("Native methods do not specify a body", XTEND_FUNCTION__NAME, -1, INVALID_MODIFIER);
-			} else {
+			} else if (nativeIndex == -1) {
 				int finalIndex = method.getModifiers().indexOf("final");
 				if(finalIndex != -1) 
 					error("Abstract method " + method.getName() + " cannot be final", XTEND_MEMBER__MODIFIERS, finalIndex, INVALID_MODIFIER);

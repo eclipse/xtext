@@ -678,11 +678,11 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
   public void testFinalVsNative() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("native final def foo() ");
-      this._validationTestHelper.assertError(this.function(_builder.toString()), XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      _builder.append("native final def int foo() ");
+      this._validationTestHelper.assertNoErrors(this.function(_builder.toString()));
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("final native def foo() ");
-      this._validationTestHelper.assertError(this.function(_builder_1.toString()), XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      _builder_1.append("final native def int foo() ");
+      this._validationTestHelper.assertNoErrors(this.function(_builder_1.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
