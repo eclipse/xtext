@@ -81,7 +81,7 @@ public class RefactoringCrossReferenceSerializer {
 					badNames.add(desc.getName().toString());
 				}
 			}
-			if (bestRefText == null) {
+			if (bestRefText == null && !badNames.isEmpty()) {
 				status.add(WARNING,
 						"Misconfigured language: New reference text has invalid syntax. Following names are in the scope: " + IterableExtensions.join(badNames, ", "), owner, linkTextRegion);
 			}
