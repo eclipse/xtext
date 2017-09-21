@@ -62,11 +62,6 @@ public class EncodingTest extends AbstractXtextTests {
 		assertEquals(Charset.defaultCharset().name(), resource.getEncoding());
 	}
 	
-	@Test public void testSetup() {
-		assertFalse(Arrays.equals(utfBytes, isoBytes));
-		assertTrue(Charset.defaultCharset().name().equals(UTF_8) || Charset.defaultCharset().name().equals(ISO_8859_1));
-	}
-	
 	@Test public void testUtfBytesWithIsoOptions() throws Exception {
 		XtextResource resource = createXtextResource();
 		try {
