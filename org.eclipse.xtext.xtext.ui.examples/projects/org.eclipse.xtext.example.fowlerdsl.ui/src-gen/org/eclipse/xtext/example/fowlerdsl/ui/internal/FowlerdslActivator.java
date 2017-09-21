@@ -3,31 +3,32 @@
  */
 package org.eclipse.xtext.example.fowlerdsl.ui.internal;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.util.Modules2;
-import org.osgi.framework.BundleContext;
-
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import java.util.Collections;
+import java.util.Map;
+import org.apache.log4j.Logger;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.example.fowlerdsl.StatemachineRuntimeModule;
+import org.eclipse.xtext.example.fowlerdsl.ui.StatemachineUiModule;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.util.Modules2;
+import org.osgi.framework.BundleContext;
 
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
-public class StatemachineActivator extends AbstractUIPlugin {
-	
+public class FowlerdslActivator extends AbstractUIPlugin {
+
+	public static final String PLUGIN_ID = "org.eclipse.xtext.example.fowlerdsl.ui";
 	public static final String ORG_ECLIPSE_XTEXT_EXAMPLE_FOWLERDSL_STATEMACHINE = "org.eclipse.xtext.example.fowlerdsl.Statemachine";
 	
-	private static final Logger logger = Logger.getLogger(StatemachineActivator.class);
+	private static final Logger logger = Logger.getLogger(FowlerdslActivator.class);
 	
-	private static StatemachineActivator INSTANCE;
+	private static FowlerdslActivator INSTANCE;
 	
 	private Map<String, Injector> injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
 	
@@ -44,7 +45,7 @@ public class StatemachineActivator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 	
-	public static StatemachineActivator getInstance() {
+	public static FowlerdslActivator getInstance() {
 		return INSTANCE;
 	}
 	
@@ -71,25 +72,24 @@ public class StatemachineActivator extends AbstractUIPlugin {
 			throw new RuntimeException("Failed to create injector for " + language, e);
 		}
 	}
-
+	
 	protected Module getRuntimeModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_EXAMPLE_FOWLERDSL_STATEMACHINE.equals(grammar)) {
-			return new org.eclipse.xtext.example.fowlerdsl.StatemachineRuntimeModule();
+			return new StatemachineRuntimeModule();
 		}
-		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getUiModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_EXAMPLE_FOWLERDSL_STATEMACHINE.equals(grammar)) {
-			return new org.eclipse.xtext.example.fowlerdsl.ui.StatemachineUiModule(this);
+			return new StatemachineUiModule(this);
 		}
-		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
+	
 	
 }

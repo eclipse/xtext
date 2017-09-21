@@ -3,12 +3,11 @@
  */
 package org.eclipse.xtext.example.fowlerdsl.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.xtext.example.fowlerdsl.ui.internal.FowlerdslActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.xtext.example.fowlerdsl.ui.internal.StatemachineActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -18,12 +17,13 @@ public class StatemachineExecutableExtensionFactory extends AbstractGuiceAwareEx
 
 	@Override
 	protected Bundle getBundle() {
-		return StatemachineActivator.getInstance().getBundle();
+		return Platform.getBundle(FowlerdslActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return StatemachineActivator.getInstance().getInjector(StatemachineActivator.ORG_ECLIPSE_XTEXT_EXAMPLE_FOWLERDSL_STATEMACHINE);
+		FowlerdslActivator activator = FowlerdslActivator.getInstance();
+		return activator != null ? activator.getInjector(FowlerdslActivator.ORG_ECLIPSE_XTEXT_EXAMPLE_FOWLERDSL_STATEMACHINE) : null;
 	}
-	
+
 }
