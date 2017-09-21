@@ -6,13 +6,15 @@ package org.eclipse.xtext.example.fowlerdsl.validation;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 
-public class AbstractStatemachineValidator extends org.eclipse.xtext.validation.AbstractDeclarativeValidator {
-
+public abstract class AbstractStatemachineValidator extends AbstractDeclarativeValidator {
+	
 	@Override
 	protected List<EPackage> getEPackages() {
-	    List<EPackage> result = new ArrayList<EPackage>();
-	    result.add(org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage.eINSTANCE);
+		List<EPackage> result = new ArrayList<EPackage>();
+		result.add(org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage.eINSTANCE);
 		return result;
 	}
+	
 }
