@@ -1,7 +1,7 @@
 package org.eclipse.xtext.builder.tests.validation;
  
 
-public class BuilderTestLanguageJavaValidator extends AbstractBuilderTestLanguageJavaValidator {
+public class BuilderTestLanguageValidator extends AbstractBuilderTestLanguageValidator {
 
 //	@Check
 //	public void checkTypeNameStartsWithCapital(Type type) {

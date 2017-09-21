@@ -4,36 +4,37 @@
 package org.eclipse.xtext.builder.tests.parser.antlr;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.builder.tests.parser.antlr.internal.InternalBuilderTestLanguageParser;
 import org.eclipse.xtext.builder.tests.services.BuilderTestLanguageGrammarAccess;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class BuilderTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class BuilderTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private BuilderTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.builder.tests.parser.antlr.internal.InternalBuilderTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.builder.tests.parser.antlr.internal.InternalBuilderTestLanguageParser(stream, getGrammarAccess());
+	protected InternalBuilderTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalBuilderTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "NamedElement";
 	}
-	
+
 	public BuilderTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(BuilderTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }
