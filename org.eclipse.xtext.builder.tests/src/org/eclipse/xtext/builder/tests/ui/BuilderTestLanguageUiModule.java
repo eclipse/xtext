@@ -26,10 +26,12 @@ public class BuilderTestLanguageUiModule extends org.eclipse.xtext.builder.tests
 		return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;
 	}
 	
-	public Class<? extends IXtextBuilderParticipant> bindBuilderParticipant() {
+	@Override
+	public Class<? extends IXtextBuilderParticipant> bindIXtextBuilderParticipant() {
 		return DelegatingBuilderParticipant.class;
 	}
 
+	@Override
 	public void configureBuilderPreferenceStoreInitializer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class);
 	}

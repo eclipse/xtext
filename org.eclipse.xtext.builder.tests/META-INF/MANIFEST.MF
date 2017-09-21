@@ -6,7 +6,7 @@ Bundle-Version: 2.13.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.generator;resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.xtext.generator;resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.builder,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore;bundle-version="2.10.2",
@@ -32,12 +32,15 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.testlanguages.ide,
  org.eclipse.xtext.testlanguages.ui,
  org.eclipse.xtext.testing,
- org.eclipse.xtext.ui.testing
+ org.eclipse.xtext.ui.testing,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.compare
 Import-Package: org.apache.log4j;version="1.2.15",
  org.hamcrest.core;version="1.1.0",
  org.junit;version="4.5.0",
  org.junit.runner;version="4.5.0"
-Bundle-Activator: org.eclipse.xtext.builder.tests.Activator
+Bundle-Activator: org.eclipse.xtext.builder.tests.internal.TestsActivator
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.builder.tests,
  org.eclipse.xtext.builder.tests.builderTestLanguage,
@@ -47,7 +50,11 @@ Export-Package: org.eclipse.xtext.builder.tests,
  org.eclipse.xtext.builder.tests.parser.antlr.internal,
  org.eclipse.xtext.builder.tests.services,
  org.eclipse.xtext.builder.tests.ui.contentassist,
- org.eclipse.xtext.builder.tests.ui.contentassist.antlr,
  org.eclipse.xtext.builder.tests.validation,
- org.eclipse.xtext.builder.tests.serializer
+ org.eclipse.xtext.builder.tests.serializer,
+ org.eclipse.xtext.builder.tests.scoping,
+ org.eclipse.xtext.builder.tests.ide.contentassist.antlr,
+ org.eclipse.xtext.builder.tests.ui.quickfix,
+ org.eclipse.xtext.builder.tests.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.builder.tests.internal
 
