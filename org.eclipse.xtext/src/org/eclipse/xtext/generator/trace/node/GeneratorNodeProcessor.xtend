@@ -125,7 +125,7 @@ class GeneratorNodeProcessor {
 	protected def dispatch void doProcess(TraceNode node, Context ctx) {
 		if (node._hasContent(ctx)) {
 			val beforeRegion = ctx.currentRegion
-			val newRegion = new CompletableTraceRegion(false, node.sourceLocation, beforeRegion)
+			val newRegion = new CompletableTraceRegion(node.useForDebugging, node.sourceLocation, beforeRegion)
 			val offset = ctx.contentLength
 			val startLineNumber = ctx.currentLineNumber
 			try {

@@ -48,7 +48,7 @@ public class GeneratorNodeTest {
     _builder.append("dedented");
     this.assertEquals(_builder.toString(), result.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("CompletableTraceRegion [myOffset=0, myLength=44] associations={");
+    _builder_1.append("CompletableTraceRegion [myOffset=0, myLength=44, useForDebugging=false] associations={");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("LocationData [TextRegionWithLineInformation [0:100][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
@@ -56,7 +56,7 @@ public class GeneratorNodeTest {
     _builder_1.append("} nestedRegions={");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("CompletableTraceRegion [myOffset=14, myLength=21] associations={");
+    _builder_1.append("CompletableTraceRegion [myOffset=14, myLength=21, useForDebugging=false] associations={");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("LocationData [TextRegionWithLineInformation [1:99][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
@@ -105,7 +105,7 @@ public class GeneratorNodeTest {
     final GeneratorNodeProcessor.Result result = processor.process(node);
     this.assertEquals(this.someCodeGen_noTrace(2).toString(), result.toString());
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("CompletableTraceRegion [myOffset=0, myLength=80] associations={");
+    _builder.append("CompletableTraceRegion [myOffset=0, myLength=80, useForDebugging=false] associations={");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("LocationData [TextRegionWithLineInformation [0:100][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
@@ -113,7 +113,7 @@ public class GeneratorNodeTest {
     _builder.append("} nestedRegions={");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("CompletableTraceRegion [myOffset=7, myLength=5] associations={");
+    _builder.append("CompletableTraceRegion [myOffset=7, myLength=5, useForDebugging=false] associations={");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
@@ -122,7 +122,7 @@ public class GeneratorNodeTest {
     _builder.append("}");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("CompletableTraceRegion [myOffset=28, myLength=5] associations={");
+    _builder.append("CompletableTraceRegion [myOffset=28, myLength=5, useForDebugging=false] associations={");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
@@ -131,7 +131,7 @@ public class GeneratorNodeTest {
     _builder.append("}");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("CompletableTraceRegion [myOffset=47, myLength=5] associations={");
+    _builder.append("CompletableTraceRegion [myOffset=47, myLength=5, useForDebugging=false] associations={");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("LocationData [TextRegionWithLineInformation [11:89][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");
@@ -140,7 +140,7 @@ public class GeneratorNodeTest {
     _builder.append("}");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("CompletableTraceRegion [myOffset=68, myLength=5] associations={");
+    _builder.append("CompletableTraceRegion [myOffset=68, myLength=5, useForDebugging=false] associations={");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]");

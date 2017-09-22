@@ -111,8 +111,39 @@ public class TracedAccessorsProcessor extends AbstractClassProcessor {
                 it.setBody(_client);
               };
               annotatedClass.addMethod(this.tracerName(getter), _function_5);
+              final Procedure1<MutableMethodDeclaration> _function_6 = (MutableMethodDeclaration it) -> {
+                it.setReturnType(context.newTypeReference(IGeneratorNode.class));
+                it.addParameter("target", t);
+                it.addParameter("useForDebugging", context.newTypeReference(Boolean.TYPE));
+                StringConcatenationClient _client = new StringConcatenationClient() {
+                  @Override
+                  protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                    _builder.append(EStructuralFeature.class);
+                    _builder.append(" feature = target.eClass().getEStructuralFeature(\"");
+                    String _featureName = TracedAccessorsProcessor.this.featureName(getter);
+                    _builder.append(_featureName);
+                    _builder.append("\");");
+                    _builder.newLineIfNotEmpty();
+                    _builder.append(ILocationData.class);
+                    _builder.append(" location = this.location(target, feature, -1);");
+                    _builder.newLineIfNotEmpty();
+                    _builder.append(CompositeGeneratorNode.class);
+                    _builder.append(" trace = this.trace(location, useForDebugging);");
+                    _builder.newLineIfNotEmpty();
+                    _builder.append("this.append(trace, target.");
+                    String _simpleName = getter.getDeclaration().getSimpleName();
+                    _builder.append(_simpleName);
+                    _builder.append("());");
+                    _builder.newLineIfNotEmpty();
+                    _builder.append("return trace;");
+                    _builder.newLine();
+                  }
+                };
+                it.setBody(_client);
+              };
+              annotatedClass.addMethod(this.tracerName(getter), _function_6);
             }
-            final Procedure1<MutableMethodDeclaration> _function_6 = (MutableMethodDeclaration it) -> {
+            final Procedure1<MutableMethodDeclaration> _function_7 = (MutableMethodDeclaration it) -> {
               it.setReturnType(context.newTypeReference(IGeneratorNode.class));
               it.addParameter("target", t);
               final TypeReference stringProvider = context.newTypeReference(Function.class, rt, context.getString());
@@ -143,7 +174,7 @@ public class TracedAccessorsProcessor extends AbstractClassProcessor {
               };
               it.setBody(_client);
             };
-            annotatedClass.addMethod(this.tracerName(getter), _function_6);
+            annotatedClass.addMethod(this.tracerName(getter), _function_7);
           }
         }
       }

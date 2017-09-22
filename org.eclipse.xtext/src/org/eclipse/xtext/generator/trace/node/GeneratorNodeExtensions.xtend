@@ -29,10 +29,29 @@ class GeneratorNodeExtensions {
 	}
 	
 	/**
+	 * @return a root trace node for the given location
+	 */
+	def CompositeGeneratorNode trace(ILocationData data, boolean useForDebugging) {
+		val result =  new TraceNode(data)
+		result.useForDebugging = useForDebugging
+		return result
+	}
+	
+	/**
 	 * @return a trace node for the given location, appended as a child on the given parent
 	 */
 	def CompositeGeneratorNode trace(CompositeGeneratorNode parent, ILocationData data) {
 		val result =  new TraceNode(data)
+		parent.children += result
+		return result
+	}
+	
+	/**
+	 * @return a trace node for the given location, appended as a child on the given parent
+	 */
+	def CompositeGeneratorNode trace(CompositeGeneratorNode parent, ILocationData data, boolean useForDebugging) {
+		val result =  new TraceNode(data)
+		result.useForDebugging = useForDebugging
 		parent.children += result
 		return result
 	}
