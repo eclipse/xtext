@@ -24,6 +24,10 @@
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<branch_url_segment>master</branch_url_segment>
 	</properties>
+
+	<modules>
+		<module>../org.eclipse.xtext.maven.plugin</module>
+	</modules>
 	
 	<build>
 		<extensions>
