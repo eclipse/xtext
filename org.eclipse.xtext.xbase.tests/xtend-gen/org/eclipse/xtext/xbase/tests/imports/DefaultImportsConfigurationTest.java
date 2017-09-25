@@ -47,7 +47,7 @@ public class DefaultImportsConfigurationTest {
       _builder.newLine();
       _builder.append("import java.util.Set");
       _builder.newLine();
-      final ImportSectionTestLanguageRoot root = this._parseHelper.parse(_builder);
+      final ImportSectionTestLanguageRoot root = this._parseHelper.parse(_builder.toString().replaceAll("\r\n", "\n"));
       Resource _eResource = root.eResource();
       Assert.assertEquals(19, this.importsConfiguration.getImportSectionOffset(((XtextResource) _eResource)));
     } catch (Throwable _e) {

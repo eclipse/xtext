@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.compiler;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -19,6 +20,11 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class CompilerTest extends AbstractOutputComparingCompilerTests {
+	
+	@Override
+	protected FakeTreeAppendable createAppendable() {
+		return new FakeTreeAppendable();
+	}
 	
 	@Inject
 	private IGeneratorConfigProvider generatorConfigProvider;
