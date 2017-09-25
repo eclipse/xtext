@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class TracedProcessor extends AbstractMethodProcessor {
   @Override
   public void doTransform(final MutableMethodDeclaration annotatedMethod, @Extension final TransformationContext context) {
+    final boolean useForDebugging = annotatedMethod.findAnnotation(context.findTypeGlobally(Traced.class)).getBooleanValue("useForDebugging");
     final TypeReference traceSugar = context.newTypeReference(TracingSugar.class);
     final TypeReference templateClient = context.newTypeReference(StringConcatenationClient.class);
     final TypeReference nodeType = context.newTypeReference(IGeneratorNode.class);
@@ -95,7 +96,9 @@ public class TracedProcessor extends AbstractMethodProcessor {
         _builder.append(" _traceNode = this.");
         String _simpleName_2 = field.getSimpleName();
         _builder.append(_simpleName_2);
-        _builder.append(".trace(_location);");
+        _builder.append(".trace(_location, ");
+        _builder.append(useForDebugging);
+        _builder.append(");");
         _builder.newLineIfNotEmpty();
         _builder.append("this.");
         String _simpleName_3 = field.getSimpleName();

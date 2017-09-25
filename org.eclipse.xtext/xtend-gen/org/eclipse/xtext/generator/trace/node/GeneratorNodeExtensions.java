@@ -39,10 +39,30 @@ public class GeneratorNodeExtensions {
   }
   
   /**
+   * @return a root trace node for the given location
+   */
+  public CompositeGeneratorNode trace(final ILocationData data, final boolean useForDebugging) {
+    final TraceNode result = new TraceNode(data);
+    result.setUseForDebugging(useForDebugging);
+    return result;
+  }
+  
+  /**
    * @return a trace node for the given location, appended as a child on the given parent
    */
   public CompositeGeneratorNode trace(final CompositeGeneratorNode parent, final ILocationData data) {
     final TraceNode result = new TraceNode(data);
+    List<IGeneratorNode> _children = parent.getChildren();
+    _children.add(result);
+    return result;
+  }
+  
+  /**
+   * @return a trace node for the given location, appended as a child on the given parent
+   */
+  public CompositeGeneratorNode trace(final CompositeGeneratorNode parent, final ILocationData data, final boolean useForDebugging) {
+    final TraceNode result = new TraceNode(data);
+    result.setUseForDebugging(useForDebugging);
     List<IGeneratorNode> _children = parent.getChildren();
     _children.add(result);
     return result;

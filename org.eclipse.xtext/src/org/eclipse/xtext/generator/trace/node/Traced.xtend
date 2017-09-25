@@ -22,11 +22,13 @@ import org.eclipse.xtext.generator.trace.ILocationData
 @Active(TracedProcessor)
 annotation Traced {
 	String tracingSugarFieldName = '_traceExtensions' 
+	boolean useForDebugging = false
 }
 
 class TracedProcessor extends AbstractMethodProcessor {
 	
 	override doTransform(MutableMethodDeclaration annotatedMethod, extension TransformationContext context) {
+		val useForDebugging = annotatedMethod.findAnnotation(Traced.findTypeGlobally).getBooleanValue("useForDebugging")
 		val traceSugar = TracingSugar.newTypeReference
 		val templateClient = StringConcatenationClient.newTypeReference
 		val nodeType = IGeneratorNode.newTypeReference
@@ -55,7 +57,7 @@ class TracedProcessor extends AbstractMethodProcessor {
 		annotatedMethod.returnType = nodeType
 		annotatedMethod.body = '''
 			«ILocationData» _location = this.«field.simpleName».location(«traceParam.simpleName»);
-			«CompositeGeneratorNode» _traceNode = this.«field.simpleName».trace(_location);
+			«CompositeGeneratorNode» _traceNode = this.«field.simpleName».trace(_location, «useForDebugging»);
 			this.«field.simpleName».appendTemplate(_traceNode, _«annotatedMethod.simpleName»(«annotatedMethod.parameters.join(',')[simpleName]»));
 			return _traceNode;
 		'''

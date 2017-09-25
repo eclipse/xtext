@@ -52,6 +52,18 @@ class TracedAccessorsProcessor extends AbstractClassProcessor {
 								return trace;
 							'''
 						]
+						annotatedClass.addMethod(getter.tracerName) [
+							returnType = IGeneratorNode.newTypeReference()
+							addParameter('target', t)
+							addParameter('useForDebugging', Boolean.TYPE.newTypeReference())
+							body = '''
+								«EStructuralFeature» feature = target.eClass().getEStructuralFeature("«getter.featureName»");
+								«ILocationData» location = this.location(target, feature, -1);
+								«CompositeGeneratorNode» trace = this.trace(location, useForDebugging);
+								this.append(trace, target.«getter.declaration.simpleName»());
+								return trace;
+							'''
+						]
 					} 
 					annotatedClass.addMethod(getter.tracerName) [
 						returnType = IGeneratorNode.newTypeReference
