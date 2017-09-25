@@ -36,7 +36,7 @@ class DefaultImportsConfigurationTest {
 			// hello
 			some token
 			import java.util.Set
-		'''.parse
+		'''.toString.replaceAll("\r\n","\n").parse
 		
 		assertEquals(19, importsConfiguration.getImportSectionOffset(root.eResource as XtextResource))
 	}

@@ -11,6 +11,7 @@ import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -61,7 +62,7 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 			GeneratorConfig generatorConfig, boolean resolve) throws Exception {
 		XExpression model = expression(xbaseCode.toString(), resolve);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
-		FakeTreeAppendable tracing = new FakeTreeAppendable();
+		FakeTreeAppendable tracing = createAppendable();
 		tracing.setGeneratorConfig(generatorConfig);
 		LightweightTypeReference returnType = typeResolver.resolveTypes(model).getReturnType(model);
 		if (returnType == null) {
@@ -74,11 +75,15 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 	protected void assertCompilesToStatement(final CharSequence expectedJavaCode, final CharSequence xbaseCode) throws Exception {
 		XExpression model = expression(xbaseCode.toString(),true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
-		ITreeAppendable tracing = new FakeTreeAppendable();
+		ITreeAppendable tracing = createAppendable();
 		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, model);
 		LightweightTypeReference voidRef = owner.newReferenceTo(Void.TYPE);
 		compiler.compile(model, tracing, voidRef);
 		assertEquals(expectedJavaCode, tracing.getContent());
+	}
+
+	protected FakeTreeAppendable createAppendable() {
+		return new FakeTreeAppendable(new ImportManager(false), "  ", System.getProperty("line.separator"));
 	}
 	
 	protected void compilesTo(final CharSequence xbaseCode, final CharSequence result) throws Exception {
