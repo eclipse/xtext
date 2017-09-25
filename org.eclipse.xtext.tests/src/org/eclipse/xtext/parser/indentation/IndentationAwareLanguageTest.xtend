@@ -32,13 +32,17 @@ import static extension org.junit.Assert.*
 class IndentationAwareLanguageTest {
 
 	@Inject
-	extension ParseHelper<Tree> parseHelper
+	ParseHelper<Tree> parseHelper
 	
 	@Inject
 	extension ValidationTestHelper validationTestHelper
 	
 	@Inject
 	extension InvariantChecker invariantChecker
+	
+	def Tree parse(CharSequence seq) {
+		parseHelper.parse(seq.toString.replaceAll("\r\n","\n"))
+	}
 	
 	@Test
 	def void testEmptyTree() {

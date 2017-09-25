@@ -21,10 +21,9 @@ import org.eclipse.xtext.parser.indentation.tests.IndentationAwareTestLanguageIn
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import static extension org.junit.Assert.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,6 +31,10 @@ import static extension org.junit.Assert.*
 @RunWith(XtextRunner)
 @InjectWith(IndentationAwareTestLanguageInjectorProvider)
 class NodeModelTest {
+	
+	def static public void assertEquals(Object expected, Object actual) {
+		Assert.assertEquals(expected.toString.replaceAll("\r\n","\n"), actual.toString.replaceAll("\r\n","\n"))
+	}
 
 	@Inject	ParseHelper<Tree> parseHelper
 	
@@ -401,7 +404,7 @@ class NodeModelTest {
 //	}
 	
 	private def getRootNode(CharSequence seq) {
-		val model = parseHelper.parse(seq);
+		val model = parseHelper.parse(seq.toString.replaceAll("\r\n","\n"));
 		val result = NodeModelUtils.getNode(model).rootNode
 		result.checkInvariant
 		return result
