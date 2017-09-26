@@ -276,6 +276,15 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 				</activeWhen>
 			</handler>
 		</extension>
+		<extension point="org.eclipse.core.contenttype.contentTypes">
+			<content-type
+				base-type="org.eclipse.core.runtime.text"
+				file-extensions="«language.fileExtensions.join(",")»"
+				id="«name».contenttype"
+				name="«it.simpleName» File"
+				priority="normal">
+			</content-type>
+		</extension>
 	'''
 	
 }
