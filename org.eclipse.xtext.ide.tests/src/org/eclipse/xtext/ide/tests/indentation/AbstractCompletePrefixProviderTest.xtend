@@ -888,7 +888,7 @@ abstract class AbstractCompletePrefixProviderTest {
 	}
 	
 	protected def void assertLastCompleteNode(CharSequence model, String expectation) {
-		val modelAsString = model.toString
+		val modelAsString = model.toString.replaceAll("\r\n","\n")
 		modelAsString.assertLastCompleteNode(expectation);
 		val withStringLiterals = modelAsString.replaceAll("(\\w+(<\\|>\\w+)?)", "\"$1\"")
 		val expectationWithLiterals = expectation.replaceAll("ID:(\\w+)", "STRING:\"$1\"");

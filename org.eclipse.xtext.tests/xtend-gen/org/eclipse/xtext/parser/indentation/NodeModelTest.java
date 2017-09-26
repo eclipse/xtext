@@ -39,6 +39,10 @@ import org.junit.runner.RunWith;
 @InjectWith(IndentationAwareTestLanguageInjectorProvider.class)
 @SuppressWarnings("all")
 public class NodeModelTest {
+  public static void assertEquals(final Object expected, final Object actual) {
+    Assert.assertEquals(expected.toString().replaceAll("\r\n", "\n"), actual.toString().replaceAll("\r\n", "\n"));
+  }
+  
   @Inject
   private ParseHelper<Tree> parseHelper;
   
@@ -49,7 +53,7 @@ public class NodeModelTest {
   @Test
   public void testEmptyTree() {
     final ICompositeNode tree = this.getRootNode("");
-    Assert.assertEquals("", this.asText(tree));
+    NodeModelTest.assertEquals("", this.asText(tree));
   }
   
   @Test
@@ -58,7 +62,7 @@ public class NodeModelTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("[ID:root]");
     _builder.newLine();
-    Assert.assertEquals(_builder.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -76,7 +80,7 @@ public class NodeModelTest {
     _builder_1.newLine();
     _builder_1.append("]");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder_1.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -95,7 +99,7 @@ public class NodeModelTest {
     _builder_1.newLine();
     _builder_1.append("][DEDENT:]");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder_1.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -112,7 +116,7 @@ public class NodeModelTest {
     _builder_1.newLine();
     _builder_1.append("\\t][INDENT:][ID:child][DEDENT:]");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder_1.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -136,7 +140,7 @@ public class NodeModelTest {
     _builder_1.newLine();
     _builder_1.append("][DEDENT:]");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder_1.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -165,7 +169,7 @@ public class NodeModelTest {
     _builder_1.newLine();
     _builder_1.append("][DEDENT:]");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder_1.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -196,7 +200,7 @@ public class NodeModelTest {
     _builder_1.newLine();
     _builder_1.append("][DEDENT:][DEDENT:]");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder_1.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -225,7 +229,7 @@ public class NodeModelTest {
     _builder_1.newLine();
     _builder_1.append("][DEDENT:][-WS:      ][INDENT:][ID:s6][DEDENT:][DEDENT:]");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder_1.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -247,7 +251,7 @@ public class NodeModelTest {
     _builder_1.newLine();
     _builder_1.append("]");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder_1.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -269,7 +273,7 @@ public class NodeModelTest {
     _builder_1.newLine();
     _builder_1.append("]");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder_1.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -280,7 +284,7 @@ public class NodeModelTest {
     _builder.newLine();
     _builder.append("\\t]");
     _builder.newLine();
-    Assert.assertEquals(_builder.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -293,7 +297,7 @@ public class NodeModelTest {
     _builder.newLine();
     _builder.append("][DEDENT:][-WS:\\t]");
     _builder.newLine();
-    Assert.assertEquals(_builder.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -308,7 +312,7 @@ public class NodeModelTest {
     _builder.newLine();
     _builder.append("]");
     _builder.newLine();
-    Assert.assertEquals(_builder.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -323,7 +327,7 @@ public class NodeModelTest {
     _builder.newLine();
     _builder.append("]");
     _builder.newLine();
-    Assert.assertEquals(_builder.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder.toString().trim(), this.asText(tree));
   }
   
   @Test
@@ -336,12 +340,12 @@ public class NodeModelTest {
     _builder.newLine();
     _builder.append("\\t ][DEDENT:]");
     _builder.newLine();
-    Assert.assertEquals(_builder.toString().trim(), this.asText(tree));
+    NodeModelTest.assertEquals(_builder.toString().trim(), this.asText(tree));
   }
   
   private ICompositeNode getRootNode(final CharSequence seq) {
     try {
-      final Tree model = this.parseHelper.parse(seq);
+      final Tree model = this.parseHelper.parse(seq.toString().replaceAll("\r\n", "\n"));
       final ICompositeNode result = NodeModelUtils.getNode(model).getRootNode();
       this.invariantChecker.checkInvariant(result);
       return result;

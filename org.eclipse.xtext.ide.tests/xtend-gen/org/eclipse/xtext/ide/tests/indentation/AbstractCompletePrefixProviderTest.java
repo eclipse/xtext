@@ -1693,7 +1693,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   protected void assertLastCompleteNode(final CharSequence model, final String expectation) {
-    final String modelAsString = model.toString();
+    final String modelAsString = model.toString().replaceAll("\r\n", "\n");
     this.assertLastCompleteNode(modelAsString, expectation);
     final String withStringLiterals = modelAsString.replaceAll("(\\w+(<\\|>\\w+)?)", "\"$1\"");
     final String expectationWithLiterals = expectation.replaceAll("ID:(\\w+)", "STRING:\"$1\"");
