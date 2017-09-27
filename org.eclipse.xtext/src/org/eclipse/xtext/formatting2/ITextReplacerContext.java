@@ -45,6 +45,11 @@ public interface ITextReplacerContext {
 
 	Iterable<ITextReplacement> getLocalReplacements();
 
+	/**
+	 * @since 2.13
+	 */
+	Iterable<ITextReplacement> getLocalReplacementsReverse();
+
 	String getNewLinesString(int count);
 
 	ITextReplacerContext getPreviousContext();

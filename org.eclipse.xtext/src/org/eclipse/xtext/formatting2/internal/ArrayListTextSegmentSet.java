@@ -139,6 +139,25 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 		};
 	}
 
+	@Override
+	public Iterable<T> reverseIterable() {
+		return new Iterable<T>() {
+			@Override
+			public Iterator<T> iterator() {
+				return new AbstractIterator<T>() {
+					private int index = contents.size() - 1;
+
+					@Override
+					protected T computeNext() {
+						if (index < 0)
+							return endOfData();
+						return contents.get(index--);
+					}
+				};
+			}
+		};
+	}
+
 	protected void replaceExistingEntry(T segment, int index, IMerger<T> merger)
 			throws ConflictingRegionsException, RegionTraceMissingException {
 		T existing = contents.get(index);

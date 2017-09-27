@@ -4,6 +4,7 @@ import static java.lang.String.*;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
@@ -102,9 +103,9 @@ public class TextReplacerContext implements ITextReplacerContext {
 		ITextReplacerContext current = this;
 		int count = 0;
 		while (current != null) {
-			List<ITextReplacement> localReplacements = Lists.newArrayList(current.getLocalReplacements());
-			for (int i = localReplacements.size() - 1; i >= 0; i--) {
-				ITextReplacement rep = localReplacements.get(i);
+			Iterator<ITextReplacement> localReplacements = current.getLocalReplacementsReverse().iterator();
+			while (localReplacements.hasNext()) {
+				ITextReplacement rep = localReplacements.next();
 				int endOffset = rep.getEndOffset();
 				if (endOffset > lastOffset) {
 					// System.out.println("error");
@@ -136,6 +137,14 @@ public class TextReplacerContext implements ITextReplacerContext {
 	public Iterable<ITextReplacement> getLocalReplacements() {
 		if (replacements != null)
 			return replacements;
+		else
+			return Collections.<ITextReplacement>emptyList();
+	}
+
+	@Override
+	public Iterable<ITextReplacement> getLocalReplacementsReverse() {
+		if (replacements != null)
+			return replacements.reverseIterable();
 		else
 			return Collections.<ITextReplacement>emptyList();
 	}
