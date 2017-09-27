@@ -171,6 +171,15 @@
             </activeWhen>
         </handler>
     </extension>   
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="xbase"
+			id="org.eclipse.xtext.purexbase.PureXbase.contenttype"
+			name="PureXbase File"
+			priority="normal">
+		</content-type>
+	</extension>
 
 <!-- adding resource factories -->
 

@@ -204,6 +204,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="beelangtestlanguage"
+			id="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.contenttype"
+			name="BeeLangTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -503,6 +512,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="simplebeelangtestlanguage"
+			id="org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage.contenttype"
+			name="SimpleBeeLangTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -804,6 +822,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="exbeelangtestlanguage"
+			id="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage.contenttype"
+			name="ExBeeLangTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -1103,6 +1130,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="nojdt"
+			id="org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage.contenttype"
+			name="NoJdtTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -1510,6 +1546,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="xtextgrammar"
+			id="org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguage.contenttype"
+			name="XtextGrammarTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -1887,6 +1932,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="fileawaretestlanguage"
+			id="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.contenttype"
+			name="FileAwareTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
