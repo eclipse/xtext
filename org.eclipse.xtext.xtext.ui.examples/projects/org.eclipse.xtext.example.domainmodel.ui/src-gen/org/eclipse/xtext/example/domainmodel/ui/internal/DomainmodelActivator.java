@@ -23,6 +23,7 @@ import org.osgi.framework.BundleContext;
  */
 public class DomainmodelActivator extends AbstractUIPlugin {
 
+	public static final String PLUGIN_ID = "org.eclipse.xtext.example.domainmodel.ui";
 	public static final String ORG_ECLIPSE_XTEXT_EXAMPLE_DOMAINMODEL_DOMAINMODEL = "org.eclipse.xtext.example.domainmodel.Domainmodel";
 	
 	private static final Logger logger = Logger.getLogger(DomainmodelActivator.class);
@@ -89,5 +90,6 @@ public class DomainmodelActivator extends AbstractUIPlugin {
 	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
+	
 	
 }

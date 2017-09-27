@@ -27,6 +27,7 @@ import org.osgi.framework.BundleContext;
  */
 public class ArithmeticsActivator extends AbstractUIPlugin {
 
+	public static final String PLUGIN_ID = "org.eclipse.xtext.example.arithmetics.ui";
 	public static final String ORG_ECLIPSE_XTEXT_EXAMPLE_ARITHMETICS_ARITHMETICS = "org.eclipse.xtext.example.arithmetics.Arithmetics";
 	
 	private static final Logger logger = Logger.getLogger(ArithmeticsActivator.class);
@@ -93,5 +94,6 @@ public class ArithmeticsActivator extends AbstractUIPlugin {
 	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
+	
 	
 }
