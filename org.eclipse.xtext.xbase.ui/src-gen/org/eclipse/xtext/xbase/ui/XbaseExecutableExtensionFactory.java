@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ui;
 
 import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.eclipse.xtext.xbase.ui.internal.XbaseActivator;
 import org.osgi.framework.Bundle;
@@ -20,12 +21,13 @@ public class XbaseExecutableExtensionFactory extends AbstractGuiceAwareExecutabl
 
 	@Override
 	protected Bundle getBundle() {
-		return XbaseActivator.getInstance().getBundle();
+		return Platform.getBundle(XbaseActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return XbaseActivator.getInstance().getInjector(XbaseActivator.ORG_ECLIPSE_XTEXT_XBASE_XBASE);
+		XbaseActivator activator = XbaseActivator.getInstance();
+		return activator != null ? activator.getInjector(XbaseActivator.ORG_ECLIPSE_XTEXT_XBASE_XBASE) : null;
 	}
-	
+
 }
