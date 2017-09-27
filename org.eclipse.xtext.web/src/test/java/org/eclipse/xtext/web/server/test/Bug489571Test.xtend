@@ -1,9 +1,10 @@
 package org.eclipse.xtext.web.server.test
 
 import org.eclipse.xtext.formatting.IIndentationInformation
+import org.eclipse.xtext.formatting.ILineSeparatorInformation
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.server.formatting.FormattingResult
-import org.eclipse.xtext.web.server.test.Bug489571Test.Bug489571IndentationInformation
+import org.eclipse.xtext.web.server.test.AbstractWebServerTest.TestLineSeparatorInformation
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -15,6 +16,10 @@ class Bug489571Test extends AbstractWebServerTest {
 			def Class<? extends IIndentationInformation> bindIIndentationInformation() {
 				Bug489571IndentationInformation
 			}
+			def Class<? extends ILineSeparatorInformation> bindILineSeparatorInformation() {
+				TestLineSeparatorInformation
+			}
+			
 		}
 	}
 

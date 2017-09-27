@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.test
 
+import org.eclipse.xtext.formatting.ILineSeparatorInformation
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.server.formatting.FormattingResult
+import org.eclipse.xtext.web.server.test.AbstractWebServerTest.TestLineSeparatorInformation
 import org.eclipse.xtext.web.server.test.languages.formatting.StatemachineFormatter
 import org.junit.Test
 
@@ -24,9 +26,12 @@ class Formatting1Test extends AbstractWebServerTest {
 			override bindIFormatter() {
 				StatemachineFormatter
 			}
+			def Class<? extends ILineSeparatorInformation> bindILineSeparatorInformation() {
+				TestLineSeparatorInformation
+			}
 		}
 	}
-	
+
 	@Test def testFormatFile() {
 		val file = createFile('/* bla */ output signal x state foo set x = true end')
 		val format = getService(#{'serviceType' -> 'format', 'resource' -> file.name})

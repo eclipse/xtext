@@ -15,6 +15,7 @@ import java.io.FileWriter
 import java.util.HashMap
 import java.util.Map
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.formatting.ILineSeparatorInformation
 import org.eclipse.xtext.util.DisposableRegistry
 import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
@@ -26,9 +27,26 @@ import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule
 import org.junit.After
+import org.junit.Assert
 import org.junit.Before
 
 abstract class AbstractWebServerTest {
+	
+	static class TestLineSeparatorInformation implements ILineSeparatorInformation {
+		
+		override getLineSeparator() {
+			"\n"
+		}
+		
+	}
+	
+	protected def normalizeLineSeparator(String value) {
+		value.replace("\r\n","\n")
+	}
+
+	def public void assertEquals(CharSequence expected, CharSequence actual) {
+		Assert.assertEquals(expected.toString.normalizeLineSeparator, actual.toString.toString.normalizeLineSeparator)
+	}
 	
 	static class TestResourceBaseProvider implements IResourceBaseProvider {
 		val testFiles = new HashMap<String, URI>
@@ -42,8 +60,7 @@ abstract class AbstractWebServerTest {
 		override protected internalCreateInjector() {
 			new StatemachineStandaloneSetup {
 				override createInjector() {
-					val ideModule = new StatemachineIdeModule
-					val webModule = new StatemachineWebModule
+					val webModule = getWebModule()
 					webModule.resourceBaseProvider = resourceBaseProvider
 					return Guice.createInjector(Modules2.mixin(runtimeModule, ideModule, webModule))
 				}
@@ -57,8 +74,20 @@ abstract class AbstractWebServerTest {
 	
 	@Inject XtextServiceDispatcher dispatcher
 	
+	protected def Module getIdeModule() {
+		new StatemachineIdeModule
+	}
+	
+	protected def StatemachineWebModule getWebModule() {
+		new StatemachineWebModule
+	}
+	
 	protected def Module getRuntimeModule() {
-		new StatemachineRuntimeModule
+		new StatemachineRuntimeModule() {
+			def Class<? extends ILineSeparatorInformation> bindILineSeparatorInformation() {
+				TestLineSeparatorInformation
+			}
+		}
 	}
 	
 	@Before

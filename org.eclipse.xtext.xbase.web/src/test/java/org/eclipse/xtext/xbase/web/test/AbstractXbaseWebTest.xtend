@@ -27,6 +27,7 @@ import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.xbase.web.test.languages.EntitiesWebModule
 import org.junit.After
 import org.junit.Before
+import org.junit.Assert
 
 abstract class AbstractXbaseWebTest {
 	
@@ -36,6 +37,14 @@ abstract class AbstractXbaseWebTest {
 		override getFileURI(String resourceId) {
 			testFiles.get(resourceId)
 		}
+	}
+	
+	protected def normalizeLineSeparator(String value) {
+		value.replace("\r\n","\n")
+	}
+	
+	def public void assertEquals(CharSequence expected, CharSequence actual) {
+		Assert.assertEquals(expected.toString.normalizeLineSeparator, actual.toString.toString.normalizeLineSeparator)
 	}
 	
 	val injectorProvider = new EntitiesInjectorProvider {
