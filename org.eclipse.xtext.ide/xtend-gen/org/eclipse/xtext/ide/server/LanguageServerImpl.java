@@ -180,6 +180,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   private InitializeParams params;
   
+  private boolean hasShutdownBeenCalled = false;
+  
   @Inject
   public void setWorkspaceManager(final WorkspaceManager manager) {
     this.workspaceManager = manager;
@@ -321,10 +323,16 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void exit() {
+    if (this.hasShutdownBeenCalled) {
+      System.exit(0);
+    } else {
+      System.exit(1);
+    }
   }
   
   @Override
   public CompletableFuture<Object> shutdown() {
+    this.hasShutdownBeenCalled = true;
     Object _object = new Object();
     return CompletableFuture.<Object>completedFuture(_object);
   }
