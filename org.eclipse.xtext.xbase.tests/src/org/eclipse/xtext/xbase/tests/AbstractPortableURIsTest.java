@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
@@ -52,7 +51,7 @@ public abstract class AbstractPortableURIsTest extends URIHandlerImpl.PlatformSc
 		GlobalRegistries.initializeDefaults();
 	}
 
-	private ResourceSet resourceSet;
+	private XtextResourceSet resourceSet;
 	private GlobalStateMemento globalStateMemento;
 
 	@Before
@@ -71,6 +70,11 @@ public abstract class AbstractPortableURIsTest extends URIHandlerImpl.PlatformSc
 		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.xbase/", false), URI.createURI("classpath:/"));
 		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.common.types/", false), URI.createURI("classpath:/"));
 		resourceSet.getLoadOptions().put(XMLResource.OPTION_URI_HANDLER, this);
+		resourceSet.setClasspathURIContext(getClasspathURIContext());
+	}
+	
+	protected Object getClasspathURIContext() {
+		return null;
 	}
 	
 	@After
