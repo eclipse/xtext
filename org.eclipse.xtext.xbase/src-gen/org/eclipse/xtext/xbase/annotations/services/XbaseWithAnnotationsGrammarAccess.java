@@ -1127,7 +1127,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		return getXCatchClauseAccess().getRule();
 	}
 	
-	//QualifiedName:
+	//@ Override QualifiedName:
 	//	ValidID (=> '.' ValidID)*;
 	public XbaseGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
 		return gaXbase.getQualifiedNameAccess();
@@ -1148,7 +1148,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	///**
-	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
+	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes,
 	// * which makes downstream grammars break on classloading, when a rule is removed.
 	// */ StaticQualifier:
 	//	(ValidID '::')+;

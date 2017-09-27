@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.annotations.serializer.XbaseWithAnnotationsSyntac
 import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsValidator;
+import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
@@ -173,6 +174,13 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return XbaseQualifiedNameProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public void configureRewritableImportSectionEnablement(Binder binder) {
+		binder.bind(Boolean.TYPE)
+			.annotatedWith(Names.named(RewritableImportSection.Factory.REWRITABLEIMPORTSECTION_ENABLEMENT))
+			.toInstance(Boolean.FALSE);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
