@@ -22,6 +22,7 @@ import org.osgi.framework.BundleContext;
  */
 public class HomeautomationActivator extends AbstractUIPlugin {
 
+	public static final String PLUGIN_ID = "org.eclipse.xtext.example.homeautomation.ui";
 	public static final String ORG_ECLIPSE_XTEXT_EXAMPLE_HOMEAUTOMATION_RULEENGINE = "org.eclipse.xtext.example.homeautomation.RuleEngine";
 	
 	private static final Logger logger = Logger.getLogger(HomeautomationActivator.class);
@@ -88,5 +89,6 @@ public class HomeautomationActivator extends AbstractUIPlugin {
 	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
+	
 	
 }

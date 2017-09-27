@@ -657,7 +657,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		return tNUMBER;
 	}
 	
-	//terminal INT returns ecore::EInt:
+	//@ Override terminal INT returns ecore::EInt:
 	//	'this one has been deactivated';
 	public TerminalRule getINTRule() {
 		return tINT;
