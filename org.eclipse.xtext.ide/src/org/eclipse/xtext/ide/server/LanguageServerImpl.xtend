@@ -105,6 +105,8 @@ import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 	WorkspaceManager workspaceManager
 	InitializeParams params
 	
+	boolean hasShutdownBeenCalled = false;
+	
 	@Inject
 	def void setWorkspaceManager(WorkspaceManager manager) {
 		this.workspaceManager = manager
@@ -196,9 +198,15 @@ import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 	}
 
 	override exit() {
+		if(this.hasShutdownBeenCalled) {
+			System.exit(0);
+		} else {
+			System.exit(1);
+		}
 	}
 
 	override CompletableFuture<Object> shutdown() {
+		this.hasShutdownBeenCalled = true;
 		return CompletableFuture.completedFuture(new Object());
 	}
 
