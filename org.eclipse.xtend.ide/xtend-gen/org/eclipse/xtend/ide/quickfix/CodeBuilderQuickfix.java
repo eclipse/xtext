@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.quickfix;
 import com.google.inject.Inject;
 import java.util.function.Consumer;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IMember;
@@ -23,6 +24,8 @@ import org.eclipse.xtend.ide.codebuilder.JavaFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaMethodBuilder;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHyperlink;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -104,6 +107,17 @@ public class CodeBuilderQuickfix {
     return (_ownerSource instanceof XtendClass);
   }
   
+  protected int getTypeIndentation(final XtextResource resource, final IXtextDocument document, final XtendTypeDeclaration xtendClass) {
+    final EObject object = resource.getEObject(EcoreUtil.getURI(xtendClass).fragment());
+    if ((object != null)) {
+      final ICompositeNode node = NodeModelUtils.findActualNodeFor(object);
+      if ((node != null)) {
+        return this.appendableFactory.getIndentationLevelAtOffset(node.getOffset(), document, resource);
+      }
+    }
+    return 0;
+  }
+  
   protected IModification getXtendModification(final ICodeBuilder.Xtend builder) {
     final IModification _function = (IModificationContext it) -> {
       final XtendTypeDeclaration xtendClass = builder.getXtendType();
@@ -119,9 +133,12 @@ public class CodeBuilderQuickfix {
         {
           int offset = builder.getInsertOffset(resource);
           wrapper.set(Integer.valueOf(offset));
+          final int typeIndentation = this.getTypeIndentation(resource, document, xtendClass);
           DocumentSourceAppender.Factory.OptionalParameters _optionalParameters = new DocumentSourceAppender.Factory.OptionalParameters();
           final Procedure1<DocumentSourceAppender.Factory.OptionalParameters> _function_2 = (DocumentSourceAppender.Factory.OptionalParameters it_1) -> {
-            it_1.baseIndentationLevel = builder.getIndentationLevel();
+            int _indentationLevel = builder.getIndentationLevel();
+            int _plus = (_indentationLevel + typeIndentation);
+            it_1.baseIndentationLevel = _plus;
             it_1.ensureEmptyLinesAround = true;
           };
           DocumentSourceAppender.Factory.OptionalParameters _doubleArrow = ObjectExtensions.<DocumentSourceAppender.Factory.OptionalParameters>operator_doubleArrow(_optionalParameters, _function_2);

@@ -357,6 +357,61 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test 
+	def void missingMember_02() {
+		create('Foo.xtend', '''
+			class Foo {
+				static class Bar {
+					def foo() {
+						bar|
+					}
+				}
+			}
+		''')
+		.assertFeatureCallLinkingIssue
+		.assertResolutionLabels("Create field 'bar'", "Create local variable 'bar'", "Create method 'bar()'", "Create method 'getBar()'")
+		.assertModelAfterQuickfix("Create field 'bar'", '''
+			class Foo {
+				static class Bar {
+					
+					Object bar
+					
+					def foo() {
+						bar
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingMember_03() {
+		create('Foo.xtend', '''
+			class Foo {
+				private static class Bar {
+			
+					new() {
+							bar| = 0
+					}
+				}
+			}
+		''')
+		.assertFeatureCallLinkingIssue
+		.assertResolutionLabels("Create field 'bar'", "Create local variable 'bar'", "Create method 'setBar(int)'")
+		.assertModelAfterQuickfix("Create field 'bar'", '''
+			class Foo {
+				private static class Bar {
+			
+					int bar
+					
+					new() {
+							bar = 0
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test 
 	def void missingMethod() {
 		create('Foo.xtend', '''
 			class Foo {

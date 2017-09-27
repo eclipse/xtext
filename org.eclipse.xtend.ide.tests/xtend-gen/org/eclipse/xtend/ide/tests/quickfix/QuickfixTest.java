@@ -610,6 +610,112 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void missingMember_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class Bar {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("bar|");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertFeatureCallLinkingIssue().assertResolutionLabels("Create field \'bar\'", "Create local variable \'bar\'", "Create method \'bar()\'", "Create method \'getBar()\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("static class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Object bar");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("def foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("bar");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix("Create field \'bar\'", _builder_1);
+  }
+  
+  @Test
+  public void missingMember_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private static class Bar {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("bar| = 0");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertFeatureCallLinkingIssue().assertResolutionLabels("Create field \'bar\'", "Create local variable \'bar\'", "Create method \'setBar(int)\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("private static class Bar {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("int bar");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("new() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t\t");
+    _builder_1.append("bar = 0");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix("Create field \'bar\'", _builder_1);
+  }
+  
+  @Test
   public void missingMethod() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
