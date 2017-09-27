@@ -77,6 +77,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	
 	private static final String PRIMITIVES = URIHelperConstants.PRIMITIVES_URI.segment(0);
 
+	private static final boolean SKIP_SECONDARY_TYPES = Boolean.getBoolean("xtext.skipSecondaryTypes");
+	
 	private final IJavaProject javaProject;
 
 	private final TypeURIHelper typeUriHelper;
@@ -319,7 +321,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		
 		// fast operation first: try to find top level types
 		IType type = findPrimaryType(packageName, typeName);
-		if (type == null) {
+		if (type == null && !SKIP_SECONDARY_TYPES) {
 			// no luck, try again - this time look for secondary types
 			type = findSecondaryType(Strings.emptyIfNull(packageName), typeName);
 		}
