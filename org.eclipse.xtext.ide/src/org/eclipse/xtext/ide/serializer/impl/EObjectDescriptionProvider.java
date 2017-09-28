@@ -46,9 +46,9 @@ public class EObjectDescriptionProvider implements IEObjectDescriptionProvider {
 		private final QualifiedName simpleName;
 		private final Map<String, String> userData;
 
-		public SimpleNameDescription(QualifiedName qName, IEObjectDescription source) {
+		public SimpleNameDescription(QualifiedName qName, EObject resolvedObject, IEObjectDescription source) {
 			this.simpleName = qName;
-			this.object = source.getEObjectOrProxy();
+			this.object = resolvedObject;
 			this.qualifiedName = source.getQualifiedName();
 			Preconditions.checkArgument(!this.object.eIsProxy());
 			Preconditions.checkNotNull(this.simpleName);
@@ -171,9 +171,9 @@ public class EObjectDescriptionProvider implements IEObjectDescriptionProvider {
 			}
 		}
 		List<IEObjectDescription> result = Lists.newArrayList();
-		for (IEObjectDescription desc : map.values()) {
-			QualifiedName name = computeSimpleName(map, desc);
-			SimpleNameDescription copy = new SimpleNameDescription(name, desc);
+		for (Map.Entry<EObject, IEObjectDescription> entry : map.entries()) {
+			QualifiedName name = computeSimpleName(map, entry.getValue());
+			SimpleNameDescription copy = new SimpleNameDescription(name, entry.getKey(), entry.getValue());
 			result.add(copy);
 		}
 
