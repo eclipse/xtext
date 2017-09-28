@@ -23,6 +23,7 @@ import org.osgi.framework.BundleContext;
  */
 public class PurexbaseActivator extends AbstractUIPlugin {
 
+	public static final String PLUGIN_ID = "org.eclipse.xtext.purexbase.ui";
 	public static final String ORG_ECLIPSE_XTEXT_PUREXBASE_PUREXBASE = "org.eclipse.xtext.purexbase.PureXbase";
 	
 	private static final Logger logger = Logger.getLogger(PurexbaseActivator.class);
@@ -89,5 +90,6 @@ public class PurexbaseActivator extends AbstractUIPlugin {
 	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
+	
 	
 }

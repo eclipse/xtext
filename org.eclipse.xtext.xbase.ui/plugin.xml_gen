@@ -204,6 +204,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="___xtype"
+			id="org.eclipse.xtext.xbase.Xtype.contenttype"
+			name="Xtype File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<extension
 		point="org.eclipse.ui.editors">
 		<editor
@@ -407,6 +416,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="___xbase"
+			id="org.eclipse.xtext.xbase.Xbase.contenttype"
+			name="Xbase File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -790,6 +808,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="___xbasewithannotations"
+			id="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations.contenttype"
+			name="XbaseWithAnnotations File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
