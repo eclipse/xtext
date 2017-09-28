@@ -88,6 +88,8 @@ import org.eclipse.xtext.validation.Issue
 import org.eclipse.lsp4j.ExecuteCommandOptions
 import org.eclipse.lsp4j.ExecuteCommandParams
 import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
+import org.eclipse.xtext.ide.server.rename.IRenameService
+import org.eclipse.lsp4j.WorkspaceEdit
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -164,6 +166,7 @@ import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 					commands = this.commandRegistry.getCommands()
 				]
 			}
+			renameProvider = true 
 		]
 		for (language : allLanguages) {
 			language.get(ICapabilitiesContributor)?.contribute(capabilities, params)
@@ -560,7 +563,14 @@ import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 	}
 
 	override rename(RenameParams params) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.runRead[ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val renameService = resourceServiceProvider?.get(IRenameService)
+			if (renameService === null)
+				return new WorkspaceEdit
+			renameService.rename(workspaceManager, params, cancelIndicator)
+		]
 	}
 	
 	override notify(String method, Object parameter) {

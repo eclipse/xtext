@@ -335,7 +335,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		}
 	}
 	
-		protected dispatch def String toExpectation(Command it) '''
+	protected dispatch def String toExpectation(Command it) '''
 		command : «command»
 		title : «title»
 		args : 

@@ -106,15 +106,19 @@ class ProjectManager {
         ]
     }
 
+	public def XtextResourceSet createNewResourceSet(ResourceDescriptionsData newIndex) {
+		resourceSetProvider.get => [
+            projectDescription.attachToEmfObject(it)
+            ProjectConfigAdapter.install(it, projectConfig)
+            val index = new ChunkedResourceDescriptions(indexProvider.get, it)
+            index.setContainer(projectDescription.name, newIndex)
+            externalContentSupport.configureResourceSet(it, openedDocumentsContentProvider)
+        ]		
+	}
+
     protected def XtextResourceSet createFreshResourceSet(ResourceDescriptionsData newIndex) {
         if (this.resourceSet === null) {
-            this.resourceSet = resourceSetProvider.get => [
-                projectDescription.attachToEmfObject(it)
-                ProjectConfigAdapter.install(it, projectConfig)
-                val index = new ChunkedResourceDescriptions(indexProvider.get, it)
-                index.setContainer(projectDescription.name, newIndex)
-                externalContentSupport.configureResourceSet(it, openedDocumentsContentProvider)
-            ]
+            this.resourceSet = createNewResourceSet(newIndex)
         } else {
             val resDescs = ChunkedResourceDescriptions.findInEmfObject(this.resourceSet);
             // update index with possible upstream changes

@@ -10,10 +10,10 @@ package org.eclipse.xtext.ide.refactoring;
 import com.google.inject.Inject;
 import java.util.function.Consumer;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -53,16 +53,20 @@ public interface IResourceRelocationStrategy {
         return Boolean.valueOf((it.isFile() && this.canHandle(it)));
       };
       final Consumer<ResourceRelocationChange> _function_1 = (ResourceRelocationChange change) -> {
-        final Resource fromResource = context.getResourceSet().getResource(change.getFromURI(), true);
-        ResourceRelocationContext.ChangeType _changeType = context.getChangeType();
-        boolean _tripleEquals = (_changeType == ResourceRelocationContext.ChangeType.COPY);
-        if (_tripleEquals) {
-          final Resource copy = context.getResourceSet().getResource(change.getFromURI(), true);
-          EcoreUtil2.resolveAll(copy);
-          copy.setURI(change.getToURI());
-          context.getChangeSerializer().beginRecordChanges(copy);
-        } else {
-          context.getChangeSerializer().beginRecordChanges(fromResource);
+        try {
+          ResourceRelocationContext.ChangeType _changeType = context.getChangeType();
+          boolean _tripleEquals = (_changeType == ResourceRelocationContext.ChangeType.COPY);
+          if (_tripleEquals) {
+            final Resource fromResource = context.getResourceSet().createResource(change.getFromURI());
+            fromResource.load(context.getResourceSet().getURIConverter().createInputStream(change.getFromURI()), null);
+            fromResource.setURI(change.getToURI());
+            context.getChangeSerializer().beginRecordChanges(fromResource);
+          } else {
+            final Resource fromResource_1 = context.getResourceSet().getResource(change.getFromURI(), true);
+            context.getChangeSerializer().beginRecordChanges(fromResource_1);
+          }
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       IterableExtensions.<ResourceRelocationChange>filter(context.getChanges(), _function).forEach(_function_1);

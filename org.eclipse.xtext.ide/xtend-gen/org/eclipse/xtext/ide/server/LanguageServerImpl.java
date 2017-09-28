@@ -107,6 +107,7 @@ import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
 import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.IHoverService;
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
+import org.eclipse.xtext.ide.server.rename.IRenameService;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
@@ -270,6 +271,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         ExecuteCommandOptions _doubleArrow_2 = ObjectExtensions.<ExecuteCommandOptions>operator_doubleArrow(_executeCommandOptions, _function_5);
         it.setExecuteCommandProvider(_doubleArrow_2);
       }
+      it.setRenameProvider(Boolean.valueOf(true));
     };
     ServerCapabilities capabilities = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
     Iterable<? extends IResourceServiceProvider> _allLanguages = this.getAllLanguages();
@@ -837,7 +839,24 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public CompletableFuture<WorkspaceEdit> rename(final RenameParams params) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    final Function1<CancelIndicator, WorkspaceEdit> _function = (CancelIndicator cancelIndicator) -> {
+      WorkspaceEdit _xblockexpression = null;
+      {
+        final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
+        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+        IRenameService _get = null;
+        if (resourceServiceProvider!=null) {
+          _get=resourceServiceProvider.<IRenameService>get(IRenameService.class);
+        }
+        final IRenameService renameService = _get;
+        if ((renameService == null)) {
+          return new WorkspaceEdit();
+        }
+        _xblockexpression = renameService.rename(this.workspaceManager, params, cancelIndicator);
+      }
+      return _xblockexpression;
+    };
+    return this.requestManager.<WorkspaceEdit>runRead(_function);
   }
   
   @Override
