@@ -27,6 +27,7 @@ import org.osgi.framework.BundleContext;
  */
 public class XtendActivator extends AbstractUIPlugin {
 
+	public static final String PLUGIN_ID = "org.eclipse.xtend.ide";
 	public static final String ORG_ECLIPSE_XTEND_CORE_XTEND = "org.eclipse.xtend.core.Xtend";
 	
 	private static final Logger logger = Logger.getLogger(XtendActivator.class);
@@ -93,5 +94,6 @@ public class XtendActivator extends AbstractUIPlugin {
 	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
+	
 	
 }
