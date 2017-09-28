@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide;
 
 import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
@@ -20,12 +21,13 @@ public class XtendExecutableExtensionFactory extends AbstractGuiceAwareExecutabl
 
 	@Override
 	protected Bundle getBundle() {
-		return XtendActivator.getInstance().getBundle();
+		return Platform.getBundle(XtendActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return XtendActivator.getInstance().getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND);
+		XtendActivator activator = XtendActivator.getInstance();
+		return activator != null ? activator.getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND) : null;
 	}
-	
+
 }
