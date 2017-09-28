@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.rename2;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.name.Named;
 import java.util.Collections;
 import org.apache.log4j.Logger;
@@ -16,21 +17,26 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
+import org.eclipse.ltk.core.refactoring.participants.ParticipantManager;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringParticipant;
+import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 import org.eclipse.ltk.core.refactoring.participants.SharableParticipants;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.ide.refactoring.IRenameNameValidator;
 import org.eclipse.xtext.ide.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.refactoring.RenameChange;
 import org.eclipse.xtext.ide.refactoring.RenameContext;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
 import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
 import org.eclipse.xtext.ui.refactoring.participant.ChangeConverter;
@@ -54,6 +60,9 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
   private String languageName;
   
   @Inject
+  private IRenameNameValidator nameValidator;
+  
+  @Inject
   private IResourceSetProvider resourceSetProvider;
   
   @Inject
@@ -63,7 +72,7 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
   private ProjectUtil projectUtil;
   
   @Inject
-  private LtkIssueAcceptor status;
+  private Provider<LtkIssueAcceptor> statusProvider;
   
   @Inject
   private IChangeSerializer changeSerializer;
@@ -77,37 +86,62 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
   @Accessors({ AccessorType.PUBLIC_GETTER, AccessorType.PUBLIC_SETTER })
   private String newName;
   
+  private IRenameElementContext renameElementContext;
+  
   private IProject project;
   
-  private URI targetElementURI;
+  private ResourceSet resourceSet;
+  
+  private EObject target;
+  
+  private String originalName;
+  
+  private LtkIssueAcceptor status;
+  
+  @Override
+  public boolean initialize(final IRenameElementContext renameElementContext) {
+    this.renameElementContext = renameElementContext;
+    this.status = this.statusProvider.get();
+    this.project = this.projectUtil.getProject(renameElementContext.getTargetElementURI().trimFragment());
+    if ((this.project == null)) {
+      URI _targetElementURI = renameElementContext.getTargetElementURI();
+      String _string = null;
+      if (_targetElementURI!=null) {
+        _string=_targetElementURI.toString();
+      }
+      String _plus = ("Cannot determine project from targetURI " + _string);
+      this.status.add(RefactoringIssueAcceptor.Severity.ERROR, _plus, 
+        renameElementContext.getTargetElementURI());
+    }
+    this.resourceSet = this.resourceSetProvider.get(this.project);
+    this.liveScopeResourceSetInitializer.initialize(this.resourceSet);
+    final EObject target = this.resourceSet.getEObject(renameElementContext.getTargetElementURI(), true);
+    if ((target == null)) {
+      this.status.add(RefactoringIssueAcceptor.Severity.ERROR, 
+        "Rename target does not exist", 
+        renameElementContext.getTargetElementURI());
+    } else {
+      this.originalName = this.renameStrategy.getCurrentName(target);
+    }
+    return true;
+  }
   
   @Override
   public RefactoringStatus checkInitialConditions(final IProgressMonitor pm) throws CoreException, OperationCanceledException {
-    this.project = this.projectUtil.getProject(this.targetElementURI.trimFragment());
-    if ((this.project == null)) {
-      String _string = null;
-      if (this.targetElementURI!=null) {
-        _string=this.targetElementURI.toString();
-      }
-      String _plus = ("Cannot determine project from targetURI " + _string);
-      this.status.add(RefactoringIssueAcceptor.Severity.ERROR, _plus, this.targetElementURI);
-    }
     return this.status.getRefactoringStatus();
   }
   
   @Override
   public RefactoringStatus checkFinalConditions(final IProgressMonitor pm, final CheckConditionsContext context) throws CoreException, OperationCanceledException {
-    final ResourceSet resourceSet = this.resourceSetProvider.get(this.project);
-    this.liveScopeResourceSetInitializer.initialize(resourceSet);
-    final RenameChange change = new RenameChange(this.newName, this.targetElementURI);
-    final RenameContext renameContext = new RenameContext(Collections.<RenameChange>unmodifiableList(CollectionLiterals.<RenameChange>newArrayList(change)), resourceSet, this.changeSerializer, this.status);
+    URI _targetElementURI = this.renameElementContext.getTargetElementURI();
+    final RenameChange change = new RenameChange(this.newName, _targetElementURI);
+    final RenameContext renameContext = new RenameContext(Collections.<RenameChange>unmodifiableList(CollectionLiterals.<RenameChange>newArrayList(change)), this.resourceSet, this.changeSerializer, this.status);
     this.renameStrategy.loadAndWatchResources(renameContext);
     this.renameStrategy.applyRename(renameContext);
     this.renameStrategy.applySideEffects(renameContext);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rename ");
-    String _originalName = this.getOriginalName();
-    _builder.append(_originalName);
+    _builder.append(this.originalName);
     _builder.append(" to ");
     _builder.append(this.newName);
     this.changeConverter.initialize(_builder.toString(), null, this.status);
@@ -122,7 +156,8 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
   
   @Override
   public Object[] getElements() {
-    return new Object[] { this.targetElementURI };
+    URI _targetElementURI = this.renameElementContext.getTargetElementURI();
+    return new Object[] { _targetElementURI };
   }
   
   @Override
@@ -142,23 +177,22 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
   
   @Override
   public RefactoringParticipant[] loadParticipants(final RefactoringStatus status, final SharableParticipants sharedParticipants) throws CoreException {
-    return null;
+    RenameArguments _renameArguments = new RenameArguments(this.newName, true);
+    return ParticipantManager.loadRenameParticipants(status, this, 
+      this.renameElementContext, _renameArguments, 
+      new String[] { XtextProjectHelper.NATURE_ID }, sharedParticipants);
   }
   
   @Override
   public String getOriginalName() {
-    return "foo";
-  }
-  
-  @Override
-  public boolean initialize(final IRenameElementContext renameElementContext) {
-    this.targetElementURI = renameElementContext.getTargetElementURI();
-    return true;
+    return this.originalName;
   }
   
   @Override
   public RefactoringStatus validateNewName(final String newName) {
-    return this.status.getRefactoringStatus();
+    final LtkIssueAcceptor nameStatus = this.statusProvider.get();
+    this.nameValidator.validate(this.target, newName, nameStatus);
+    return nameStatus.getRefactoringStatus();
   }
   
   @Pure
