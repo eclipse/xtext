@@ -1,0 +1,37 @@
+/*
+ * Configuration of source sets, dependencies, and tasks for running MWE2 workflows.
+ */
+
+sourceSets {
+	mwe2 {}
+}
+
+eclipse.classpath.plusConfigurations += [configurations.mwe2Runtime]
+
+dependencies {
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
+	mwe2Compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
+	mwe2Compile "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"
+	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
+}
+
+if (findProperty('compileXtend') == 'true') {
+	generateMwe2Xtext.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
+}
+
+class XtextGeneratorTask extends JavaExec {
+	XtextGeneratorTask() {
+		group = 'Build'
+		main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+		classpath = project.sourceSets.mwe2.runtimeClasspath
+	}
+	def setWorkflow(File workflowFile) {
+		args = [workflowFile.path, "-p", "rootPath=${project.rootDir}", "-p", "askBeforeDownload=false"]
+		inputs.file workflowFile
+		description "Execute the MWE2 workflow ${workflowFile.name}"
+	}
+}
+
+ext.XtextGeneratorTask = XtextGeneratorTask
