@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @Data
 @SuppressWarnings("all")

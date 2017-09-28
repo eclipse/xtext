@@ -25,6 +25,7 @@ import static org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severit
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 class RenameService implements IRenameService {
 	

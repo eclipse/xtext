@@ -25,6 +25,7 @@ import org.eclipse.xtext.util.IAcceptor
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 

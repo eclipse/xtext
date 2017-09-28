@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @ImplementedBy(IRenameStrategy.Impl.class)
 @SuppressWarnings("all")

@@ -15,6 +15,7 @@ import org.eclipse.xtext.ide.serializer.IChangeSerializer
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @FinalFieldsConstructor
 @Accessors(PUBLIC_GETTER)

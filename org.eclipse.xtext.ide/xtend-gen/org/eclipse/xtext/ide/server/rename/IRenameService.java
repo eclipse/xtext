@@ -16,6 +16,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @ImplementedBy(RenameService.class)
 @SuppressWarnings("all")

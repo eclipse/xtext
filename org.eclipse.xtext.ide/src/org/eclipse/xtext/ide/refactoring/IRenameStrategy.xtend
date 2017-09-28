@@ -24,6 +24,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @ImplementedBy(IRenameStrategy.Impl)
 interface IRenameStrategy {
@@ -74,6 +75,7 @@ interface IRenameStrategy {
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @FinalFieldsConstructor
 @Accessors(PUBLIC_GETTER)
@@ -86,6 +88,7 @@ class RenameContext {
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @Data
 class RenameChange {

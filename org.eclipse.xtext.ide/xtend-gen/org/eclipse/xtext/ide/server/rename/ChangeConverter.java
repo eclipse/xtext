@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @SuppressWarnings("all")
 public class ChangeConverter implements IAcceptor<IEmfResourceChange> {

@@ -21,6 +21,7 @@ import org.eclipse.xtext.util.ITextRegion
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 class ServerRefactoringIssueAcceptor implements RefactoringIssueAcceptor {
 	

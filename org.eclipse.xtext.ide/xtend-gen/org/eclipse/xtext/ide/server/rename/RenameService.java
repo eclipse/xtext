@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @SuppressWarnings("all")
 public class RenameService implements IRenameService {
