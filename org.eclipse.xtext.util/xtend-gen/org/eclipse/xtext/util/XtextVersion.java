@@ -50,7 +50,7 @@ public class XtextVersion {
    * @noreference
    */
   public String getMweVersion() {
-    return "2.9.0.201605261059";
+    return "2.9.1.201705291010";
   }
   
   public String getAntlrGeneratorVersion() {
