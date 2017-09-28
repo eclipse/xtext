@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.refactoring.participant;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
@@ -20,17 +21,25 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
+import org.eclipse.ltk.core.refactoring.TextChange;
 import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.ltk.core.refactoring.resource.MoveResourceChange;
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange;
+import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange;
 import org.eclipse.xtext.ui.refactoring.participant.ReplaceFileContentChange;
 import org.eclipse.xtext.ui.refactoring.participant.ResourceURIConverter;
 import org.eclipse.xtext.ui.refactoring.participant.TryWithResource;
@@ -39,8 +48,11 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * Converts {@link IEmfResourceChange}s to LTK {@link Change}s.
@@ -59,6 +71,9 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
   @Inject
   @Extension
   private ResourceURIConverter _resourceURIConverter;
+  
+  @Inject(optional = true)
+  private IWorkbench workbench;
   
   public Predicate<Change> initialize(final String name, final Predicate<Change> changeFilter, final RefactoringIssueAcceptor issues) {
     Predicate<Change> _xblockexpression = null;
@@ -143,12 +158,23 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
       final List<ReplaceEdit> textEdits = ListExtensions.<ITextReplacement, ReplaceEdit>map(change.getReplacements(), _function);
       final MultiTextEdit textEdit = new MultiTextEdit();
       textEdit.addChildren(((TextEdit[])Conversions.unwrapArray(textEdits, TextEdit.class)));
-      String _lastSegment = change.getOldURI().lastSegment();
-      final TextFileChange textFileChange = new TextFileChange(_lastSegment, file);
-      textFileChange.setSaveMode(TextFileChange.FORCE_SAVE);
-      textFileChange.setEdit(textEdit);
-      textFileChange.setTextType(change.getOldURI().fileExtension());
-      this.addChange(textFileChange);
+      final ITextEditor openEditor = this.findOpenEditor(file);
+      TextChange _xifexpression = null;
+      if ((openEditor == null)) {
+        String _lastSegment = change.getOldURI().lastSegment();
+        TextFileChange _textFileChange = new TextFileChange(_lastSegment, file);
+        final Procedure1<TextFileChange> _function_1 = (TextFileChange it) -> {
+          it.setSaveMode(TextFileChange.FORCE_SAVE);
+        };
+        _xifexpression = ObjectExtensions.<TextFileChange>operator_doubleArrow(_textFileChange, _function_1);
+      } else {
+        String _name = this.currentChange.getName();
+        _xifexpression = new EditorDocumentChange(_name, openEditor, false);
+      }
+      final TextChange ltkChange = _xifexpression;
+      ltkChange.setEdit(textEdit);
+      ltkChange.setTextType(change.getOldURI().fileExtension());
+      this.addChange(ltkChange);
     }
   }
   
@@ -192,8 +218,7 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
   }
   
   protected void addChange(final Change change) {
-    boolean _apply = this.changeFilter.apply(change);
-    if (_apply) {
+    if (((this.changeFilter == null) || this.changeFilter.apply(change))) {
       this.currentChange.add(change);
     }
   }
@@ -212,6 +237,18 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
       _builder.append("\' is derived");
       this.issues.add(RefactoringIssueAcceptor.Severity.WARNING, _builder.toString());
     }
+  }
+  
+  protected ITextEditor findOpenEditor(final IFile file) {
+    final FileEditorInput editorInput = new FileEditorInput(file);
+    final Function1<IEditorReference, IEditorPart> _function = (IEditorReference it) -> {
+      return it.getEditor(false);
+    };
+    final Function1<ITextEditor, Boolean> _function_1 = (ITextEditor it) -> {
+      IEditorInput _editorInput = it.getEditorInput();
+      return Boolean.valueOf(Objects.equal(_editorInput, editorInput));
+    };
+    return IterableExtensions.<ITextEditor>findFirst(Iterables.<ITextEditor>filter(ListExtensions.<IEditorReference, IEditorPart>map(((List<IEditorReference>)Conversions.doWrapArray(this.workbench.getActiveWorkbenchWindow().getActivePage().getEditorReferences())), _function), ITextEditor.class), _function_1);
   }
   
   protected void handleReplacements(final IEmfResourceChange change) {

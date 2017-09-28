@@ -4,6 +4,8 @@
 package org.eclipse.xtext.testlanguages.fileAware.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
+import org.eclipse.xtext.ui.refactoring.rename2.RenameElementProcessor2;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
@@ -12,5 +14,9 @@ public class FileAwareTestLanguageUiModule extends AbstractFileAwareTestLanguage
 
 	public FileAwareTestLanguageUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+	
+	public Class<? extends AbstractRenameProcessor> bindAbstractRenameProcessor() {
+		return RenameElementProcessor2.class;
 	}
 }

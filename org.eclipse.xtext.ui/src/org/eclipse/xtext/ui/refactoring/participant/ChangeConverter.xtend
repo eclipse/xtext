@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.refactoring.participant
 import com.google.common.base.Predicate
 import com.google.inject.Inject
 import java.io.ByteArrayOutputStream
+import org.eclipse.core.resources.IFile
+import org.eclipse.core.resources.IWorkspace
 import org.eclipse.ltk.core.refactoring.Change
 import org.eclipse.ltk.core.refactoring.CompositeChange
 import org.eclipse.ltk.core.refactoring.TextFileChange
@@ -17,15 +19,17 @@ import org.eclipse.ltk.core.refactoring.resource.MoveResourceChange
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange
 import org.eclipse.text.edits.MultiTextEdit
 import org.eclipse.text.edits.ReplaceEdit
+import org.eclipse.ui.IWorkbench
+import org.eclipse.ui.part.FileEditorInput
+import org.eclipse.ui.texteditor.ITextEditor
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor
+import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange
+import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange
 import org.eclipse.xtext.util.IAcceptor
 
 import static org.eclipse.xtext.ui.refactoring.participant.TryWithResource.*
-import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity
-import org.eclipse.core.resources.IFile
-import org.eclipse.core.resources.IWorkspace
 
 /**
  * Converts {@link IEmfResourceChange}s to LTK {@link Change}s.
@@ -40,6 +44,7 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	Predicate<Change> changeFilter
 	
 	@Inject extension ResourceURIConverter
+	@Inject(optional=true) IWorkbench workbench
 
 	def initialize(String name, Predicate<Change> changeFilter, RefactoringIssueAcceptor issues) {
 		currentChange = new CompositeChange(name)
@@ -88,11 +93,16 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 			]
 			val textEdit = new MultiTextEdit()
 			textEdit.addChildren(textEdits)
-			val textFileChange = new TextFileChange(change.oldURI.lastSegment, file)
-			textFileChange.setSaveMode(TextFileChange.FORCE_SAVE)
-			textFileChange.setEdit(textEdit)
-			textFileChange.setTextType(change.oldURI.fileExtension)
-			addChange(textFileChange)
+			val openEditor = file.findOpenEditor
+			val ltkChange = if(openEditor === null) 
+					new TextFileChange(change.oldURI.lastSegment, file) => [
+						saveMode = TextFileChange.FORCE_SAVE
+					]
+				else 
+					new EditorDocumentChange(currentChange.name, openEditor, false)
+			ltkChange.edit = textEdit
+			ltkChange.textType = change.oldURI.fileExtension
+			addChange(ltkChange)
 		}
 	}
 	
@@ -115,7 +125,7 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	}
 	
 	protected def void addChange(Change change) {
-		if(changeFilter.apply(change))
+		if(changeFilter === null || changeFilter.apply(change))
 			currentChange.add(change)
 	}
 	
@@ -127,5 +137,16 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 		if (file.derived) {
 			issues.add(Severity.WARNING, '''Affected file '«file.fullPath»' is derived''')
 		}
+	}
+	
+	protected def ITextEditor findOpenEditor(IFile file) {
+		val editorInput = new FileEditorInput(file)
+		return workbench	
+			.activeWorkbenchWindow
+			.activePage
+			.editorReferences
+			.map[ getEditor(false) ]
+			.filter(ITextEditor)
+			.findFirst[ it.editorInput == editorInput ]
 	}
 }
