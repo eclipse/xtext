@@ -110,7 +110,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("<unit id=\"org.eclipse.xtend.typesystem.emf\" version=\"0.0.0\"/>");
     _builder.newLine();
-    _builder.append("<repository location=\"http://download.eclipse.org/releases/oxygen/201706281000/\"/>");
+    _builder.append("<repository location=\"http://download.eclipse.org/releases/oxygen/201709271000\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
@@ -118,7 +118,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("<unit id=\"org.eclipse.emf.mwe2.launcher.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
-    _builder.append("<repository location=\"http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/\"/>");
+    _builder.append("<repository location=\"http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.1/\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
