@@ -27,7 +27,7 @@ class XtextVersion {
 	 * @noreference
 	 */
 	def getMweVersion() {
-		'2.9.0.201605261059'
+		'2.9.1.201705291010'
 	}
 
 	def getAntlrGeneratorVersion() {

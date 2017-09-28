@@ -12,7 +12,7 @@ configurations {
 }
 
 dependencies {
-	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:2.9.0.201605261059"
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:2.9.1.201705291010"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:xtext-antlr-generator:[2.1.1, 3)"
