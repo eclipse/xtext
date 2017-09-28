@@ -17,5 +17,6 @@ org.eclipse.xtext.xtext.generator.StandardLanguage {
 	
 	junitSupport = {
 		generateStub = false
+		skipXbaseTestingPackage = true
 	}
 }
