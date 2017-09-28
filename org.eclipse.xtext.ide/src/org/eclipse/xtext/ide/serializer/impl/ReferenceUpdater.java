@@ -78,8 +78,10 @@ public class ReferenceUpdater implements IReferenceUpdater {
 	}
 
 	protected boolean needsUpdating(Deltas deltas, EObject source, EObject target) {
-		Delta sourceDelta = deltas.findContainingDelta(source);
 		Delta targetDelta = deltas.findContainingDelta(target);
+		if (targetDelta.getObject() == target)
+			return true;
+		Delta sourceDelta = deltas.findContainingDelta(source);
 		return !Objects.equal(sourceDelta, targetDelta);
 	}
 
@@ -115,7 +117,7 @@ public class ReferenceUpdater implements IReferenceUpdater {
 
 	@Override
 	public void updateReference(ITextRegionDiffBuilder rewriter, IUpdatableReference upd) {
-		IUpdatableReference updatable = (IUpdatableReference) upd;
+		IUpdatableReference updatable = upd;
 		if (rewriter.isModified(updatable.getReferenceRegion())) {
 			return;
 		}
