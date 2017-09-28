@@ -11,6 +11,7 @@ import com.google.inject.ImplementedBy
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -34,6 +35,8 @@ interface IRenameStrategy {
 	def void applyRename(RenameContext context)
 	
 	def void applySideEffects(RenameContext context)
+	
+	def String getCurrentName(EObject element)
 	
 	class Impl implements IRenameStrategy {
 		
@@ -61,11 +64,19 @@ interface IRenameStrategy {
 		}
 		
 		protected def void doRename(EObject target, RenameChange change, RenameContext context) {
-			val nameAttribute = target.eClass.EAllAttributes.filter[name == 'name' && EType == EcorePackage.Literals.ESTRING].head
+			val nameAttribute = getNameEAttribute(target)
 			if (nameAttribute !== null)
 				target.eSet(nameAttribute, change.newName)
 			else
 				context.issues.add(Severity.WARNING, 'Element of class ' + target.eClass.name + ' cannot be renamed.')
+		}
+		
+		protected def EAttribute getNameEAttribute(EObject target) {
+			target.eClass.EAllAttributes.filter[name == 'name' && EType == EcorePackage.Literals.ESTRING].head
+		}
+
+		override getCurrentName(EObject element) {
+			element.eGet(element.nameEAttribute).toString
 		}
 
 		override applySideEffects(RenameContext context) {

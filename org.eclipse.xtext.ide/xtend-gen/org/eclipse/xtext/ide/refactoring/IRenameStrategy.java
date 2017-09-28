@@ -66,10 +66,7 @@ public interface IRenameStrategy {
     }
     
     protected void doRename(final EObject target, final RenameChange change, final RenameContext context) {
-      final Function1<EAttribute, Boolean> _function = (EAttribute it) -> {
-        return Boolean.valueOf((Objects.equal(it.getName(), "name") && Objects.equal(it.getEType(), EcorePackage.Literals.ESTRING)));
-      };
-      final EAttribute nameAttribute = IterableExtensions.<EAttribute>head(IterableExtensions.<EAttribute>filter(target.eClass().getEAllAttributes(), _function));
+      final EAttribute nameAttribute = this.getNameEAttribute(target);
       if ((nameAttribute != null)) {
         target.eSet(nameAttribute, change.getNewName());
       } else {
@@ -78,6 +75,18 @@ public interface IRenameStrategy {
         String _plus_1 = (_plus + " cannot be renamed.");
         context.getIssues().add(RefactoringIssueAcceptor.Severity.WARNING, _plus_1);
       }
+    }
+    
+    protected EAttribute getNameEAttribute(final EObject target) {
+      final Function1<EAttribute, Boolean> _function = (EAttribute it) -> {
+        return Boolean.valueOf((Objects.equal(it.getName(), "name") && Objects.equal(it.getEType(), EcorePackage.Literals.ESTRING)));
+      };
+      return IterableExtensions.<EAttribute>head(IterableExtensions.<EAttribute>filter(target.eClass().getEAllAttributes(), _function));
+    }
+    
+    @Override
+    public String getCurrentName(final EObject element) {
+      return element.eGet(this.getNameEAttribute(element)).toString();
     }
     
     @Override
@@ -90,4 +99,6 @@ public interface IRenameStrategy {
   public abstract void applyRename(final RenameContext context);
   
   public abstract void applySideEffects(final RenameContext context);
+  
+  public abstract String getCurrentName(final EObject element);
 }
