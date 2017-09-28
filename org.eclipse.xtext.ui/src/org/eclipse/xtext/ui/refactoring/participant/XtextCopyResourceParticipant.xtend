@@ -24,6 +24,7 @@ import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext.ChangeType
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 class XtextCopyResourceParticipant extends CopyParticipant implements ISharableParticipant {
 	

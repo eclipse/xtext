@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @SuppressWarnings("all")
 public class XtextCopyResourceParticipant extends CopyParticipant implements ISharableParticipant {

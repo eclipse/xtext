@@ -22,6 +22,7 @@ import static org.eclipse.xtext.ui.refactoring.participant.TryWithResource.*
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @FinalFieldsConstructor
 class ReplaceFileContentChange extends ResourceChange {

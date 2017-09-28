@@ -36,6 +36,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 class RenameElementProcessor2 extends AbstractRenameProcessor {
 	

@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @since 2.13
  */
 @SuppressWarnings("all")
 public class RenameElementProcessor2 extends AbstractRenameProcessor {
