@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.refactoring
 
 import com.google.inject.Inject
 import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.EcoreUtil2
 
 /**
  * Allows a language to execute side-effects when the URI of a resource changes.
@@ -49,13 +48,13 @@ interface IResourceRelocationStrategy {
 		
 		override void loadAndWatchResources(ResourceRelocationContext context) {
 			context.changes.filter[ isFile && canHandle ].forEach [ change | 
-				val fromResource = context.resourceSet.getResource(change.fromURI, true)
 				if (context.changeType === ResourceRelocationContext.ChangeType.COPY) {
-					val copy = context.resourceSet.getResource(change.fromURI, true)
-					EcoreUtil2.resolveAll(copy)
-					copy.URI = change.toURI
-					context.changeSerializer.beginRecordChanges(copy)
+					val fromResource = context.resourceSet.createResource(change.fromURI)
+					fromResource.load(context.resourceSet.URIConverter.createInputStream(change.fromURI), null)
+					fromResource.URI = change.toURI
+					context.changeSerializer.beginRecordChanges(fromResource)
 				} else {
+					val fromResource = context.resourceSet.getResource(change.fromURI, true)
 					context.changeSerializer.beginRecordChanges(fromResource)
 				}
 			]
