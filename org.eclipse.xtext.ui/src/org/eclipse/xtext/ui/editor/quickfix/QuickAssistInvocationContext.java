@@ -49,7 +49,7 @@ public class QuickAssistInvocationContext extends TextInvocationContext {
 			return true;
 		}
 		StyledText textWidget = getSourceViewer().getTextWidget();
-		if (!textWidget.isFocusControl()) {
+		if (textWidget != null && !textWidget.isFocusControl()) {
 			return wasCancelled = true;
 		}
 		return false;
