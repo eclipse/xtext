@@ -121,7 +121,7 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
         "Rename target does not exist", 
         renameElementContext.getTargetElementURI());
     } else {
-      this.originalName = this.renameStrategy.getCurrentName(target);
+      this.originalName = "";
     }
     return true;
   }

@@ -114,7 +114,7 @@ public class ResourceRelocationProcessor {
         if (_t instanceof Throwable) {
           final Throwable t = (Throwable)_t;
           this.issues.add(RefactoringIssueAcceptor.Severity.ERROR, "Error applying resource changes", t);
-          ResourceRelocationProcessor.LOG.error(t);
+          ResourceRelocationProcessor.LOG.error(t.getMessage(), t);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }

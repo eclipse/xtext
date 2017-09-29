@@ -77,7 +77,7 @@ class ResourceRelocationProcessor {
 				applyChange(context)			
 			} catch (Throwable t) {
 				issues.add(ERROR, 'Error applying resource changes', t)
-				LOG.error(t)
+				LOG.error(t.message, t)
 			}
 		]
 	}
