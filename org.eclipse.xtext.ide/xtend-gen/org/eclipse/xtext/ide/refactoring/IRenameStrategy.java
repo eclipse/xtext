@@ -14,23 +14,29 @@ import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.refactoring.RenameChange;
 import org.eclipse.xtext.ide.refactoring.RenameContext;
+import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
+ * Called to rename an element in the {@link IChangeSerializer} based refactoring.
+ * 
+ * Clients may extend the {@link DefaultImpl} to customize the behavior or implement
+ * this interface directly.
+ * 
+ * Changes are usually performed in the The {@link RenameContext}
+ * 
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  */
-@ImplementedBy(IRenameStrategy.Impl.class)
+@ImplementedBy(IRenameStrategy.DefaultImpl.class)
 @SuppressWarnings("all")
 public interface IRenameStrategy {
-  public static class Impl implements IRenameStrategy {
+  public static class DefaultImpl implements IRenameStrategy {
     @Inject
     private IResourceServiceProvider resourceServiceProvider;
     
@@ -39,28 +45,15 @@ public interface IRenameStrategy {
     }
     
     @Override
-    public void loadAndWatchResources(final RenameContext context) {
-      final Function1<RenameChange, Boolean> _function = (RenameChange it) -> {
-        return Boolean.valueOf(this.canHandle(it));
-      };
-      final Consumer<RenameChange> _function_1 = (RenameChange change) -> {
-        final Resource targetResource = context.getResourceSet().getResource(change.getTargetURI().trimFragment(), true);
-        EcoreUtil.resolveAll(targetResource);
-        context.getChangeSerializer().beginRecordChanges(targetResource);
-      };
-      IterableExtensions.filter(context.getChanges(), _function).forEach(_function_1);
-    }
-    
-    @Override
     public void applyRename(final RenameContext context) {
       final Function1<RenameChange, Boolean> _function = (RenameChange it) -> {
         return Boolean.valueOf(this.canHandle(it));
       };
       final Consumer<RenameChange> _function_1 = (RenameChange change) -> {
-        final EObject target = context.getResourceSet().getEObject(change.getTargetURI(), false);
-        if ((target instanceof EObject)) {
-          this.doRename(target, change, context);
-        }
+        final IChangeSerializer.IModification<EObject> _function_2 = (EObject it) -> {
+          this.doRename(it, change, context);
+        };
+        context.addModification(change, _function_2);
       };
       IterableExtensions.filter(context.getChanges(), _function).forEach(_function_1);
     }
@@ -88,17 +81,9 @@ public interface IRenameStrategy {
     public String getCurrentName(final EObject element) {
       return element.eGet(this.getNameEAttribute(element)).toString();
     }
-    
-    @Override
-    public void applySideEffects(final RenameContext context) {
-    }
   }
   
-  public abstract void loadAndWatchResources(final RenameContext context);
-  
   public abstract void applyRename(final RenameContext context);
-  
-  public abstract void applySideEffects(final RenameContext context);
   
   public abstract String getCurrentName(final EObject element);
 }

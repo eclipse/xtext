@@ -84,7 +84,7 @@ class ChangeSerializerTestHelper {
 
 	def Collection<IEmfResourceChange> endRecordChangesToTextDocuments(IChangeSerializer ser) {
 		val list = newArrayList()
-		ser.endRecordChanges(CollectionBasedAcceptor.of(list))
+		ser.applyModifications(CollectionBasedAcceptor.of(list))
 		return list
 	}
 	

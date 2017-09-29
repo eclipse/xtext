@@ -40,9 +40,10 @@ class ChangeSerializerWithImports {
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
 		val serializer = serializerProvider.get()
-		serializer.beginRecordChanges(model.eResource)
-		model.children.get(0).name = "newchild"
-		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
+		serializer.addModification(model.eResource) [
+			model.children.get(0).name = "newchild"
+			Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
 			#1 root1 { <11:6|newchild>; }

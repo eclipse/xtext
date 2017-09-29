@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ide.tests.serializer
 
 import com.google.inject.Inject
-import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryValue
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Node
@@ -20,6 +19,7 @@ import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -47,8 +47,9 @@ class ChangeSerializerTest {
 		val model = rs.contents("inmemory:/file1.pstl", MandatoryValue)
 
 		val serializer = newChangeSerializer()
-		serializer.beginRecordChanges(model.eResource)
-		model.name = "bar"
+		serializer.addModification(model.eResource) [
+			model.name = "bar"
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
 			#2 <3:3|bar>
@@ -66,9 +67,10 @@ class ChangeSerializerTest {
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
-		serializer.beginRecordChanges(model.eResource)
-		model.children.get(0).name = "bazz4"
-		model.children.get(1).name = "bazz5"
+		serializer.addModification(model.eResource) [
+			model.children.get(0).name = "bazz4"
+			model.children.get(1).name = "bazz5"
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
 			#1 root { <10:4|bazz4>; <16:4|bazz5>; }
@@ -87,8 +89,9 @@ class ChangeSerializerTest {
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
-		serializer.beginRecordChanges(model.eResource)
-		model.children.get(0).children += createNode => [name = "bazz"]
+		serializer.addModification(model.eResource) [
+			model.children.get(0).children += createNode => [name = "bazz"]
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
 			#1 root { child1 { foo1;<24:1| bazz; >} }
@@ -111,8 +114,9 @@ class ChangeSerializerTest {
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
-		serializer.beginRecordChanges(model.eResource)
-		model.children.add(0, createNode => [name = "bazz"])
+		serializer.addModification(model.eResource) [
+			model.children.add(0, createNode => [name = "bazz"])
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
 			#1 root {<9:9| bazz; /**/ >child1;
@@ -131,9 +135,10 @@ class ChangeSerializerTest {
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
-		serializer.beginRecordChanges(model.eResource)
-		model.children.get(0).children += createNode => [name = "bazz1"]
-		model.children.get(0).children += createNode => [name = "bazz2"]
+		serializer.addModification(model.eResource) [
+			model.children.get(0).children += createNode => [name = "bazz1"]
+			model.children.get(0).children += createNode => [name = "bazz2"]
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
 			#1 root { child1 { foo1;<24:1| bazz1; bazz2; >} }
@@ -151,8 +156,9 @@ class ChangeSerializerTest {
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
-		serializer.beginRecordChanges(model.eResource)
-		EcoreUtil.remove(model.children.get(0).children.get(0))
+		serializer.addModification(model.eResource) [
+			EcoreUtil.remove(model.children.get(0).children.get(0))
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
 			#1 root { child1 {<18:7|  >} }
@@ -170,9 +176,10 @@ class ChangeSerializerTest {
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
-		serializer.beginRecordChanges(model.eResource)
-		EcoreUtil.remove(model.children.get(1))
-		EcoreUtil.remove(model.children.get(0))
+		serializer.addModification(model.eResource) [
+			EcoreUtil.remove(model.children.get(1))
+			EcoreUtil.remove(model.children.get(0))
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
 			#1 root {<9:17|  >}
@@ -190,8 +197,9 @@ class ChangeSerializerTest {
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
-		serializer.beginRecordChanges(model.eResource)
-		model.children.get(0).name = "bazz4"
+		serializer.addModification(model.eResource) [
+			model.children.get(0).name = "bazz4"
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
 			#1 root { <10:4|bazz4>; foo2 { ref <27:4|bazz4> } }
@@ -211,8 +219,9 @@ class ChangeSerializerTest {
 		val model = rs.contents("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
-		serializer.beginRecordChanges(model.eResource)
-		model.name = "newroot"
+		serializer.addModification(model.eResource) [
+			model.name = "newroot"
+		]
 		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
@@ -235,8 +244,9 @@ class ChangeSerializerTest {
 		val model = rs.contents("inmemory:/f.pstl", Node)
 
 		val serializer = newChangeSerializer()
-		serializer.beginRecordChanges(model.eResource)
-		model.eResource.URI = URI.createURI("inmemory:/x.pstl")
+		serializer.addModification(model.eResource) [
+			model.eResource.URI = org.eclipse.emf.common.util.URI.createURI("inmemory:/x.pstl")
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----- renamed inmemory:/f.pstl to inmemory:/x.pstl (syntax: <offset|text>) -----
 			(no changes)

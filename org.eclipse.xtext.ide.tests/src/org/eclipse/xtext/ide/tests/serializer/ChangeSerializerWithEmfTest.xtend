@@ -50,8 +50,9 @@ class ChangeSerializerWithEmfTest {
 		val model = rs.contents("inmemory:/file1.pstl", EClassRef)
 
 		val serializer = serializerProvider.get()
-		serializer.beginRecordChanges(model.eResource)
-		model.ref = model.ref.EPackage.EClassifiers.get(1) as EClass
+		serializer.addModification(model) [
+			model.ref = model.ref.EPackage.EClassifiers.get(1) as EClass
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
 			#21 <4:18|MyPackage.MyClass2>
@@ -76,10 +77,11 @@ class ChangeSerializerWithEmfTest {
 		val model = rs.contents("inmemory:/file1.pstl", Model)
 
 		val serializer = serializerProvider.get()
-		serializer.beginRecordChanges(model.eResource)
-		model.clazz.get(0).name = "ChangedName"
-		model.clazz.add(0, EcoreFactory.eINSTANCE.createEClass => [name = "NewName"])
-		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
+		serializer.addModification(model.eResource) [
+			model.clazz.get(0).name = "ChangedName"
+			model.clazz.add(0, EcoreFactory.eINSTANCE.createEClass => [name = "NewName"])
+			Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
 			#20<3:1| NewName ><4:9| ChangedName>

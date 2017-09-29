@@ -57,11 +57,9 @@ class RenameService implements IRenameService {
 				val change = new RenameChange(renameParams.newName, EcoreUtil.getURI(element))
 				val changeSerializer = changeSerializerProvider.get
 				val context = new RenameContext(#[change], resourceSet, changeSerializer, issueAcceptor)
-				renameStrategy.loadAndWatchResources(context)
 				renameStrategy.applyRename(context)
-				renameStrategy.applySideEffects(context)
 				val changeConverter = converterFactory.create(workspaceManager, workspaceEdit)
-				changeSerializer.endRecordChanges(changeConverter)
+				changeSerializer.applyModifications(changeConverter)
 			} else {
 				issueAcceptor.add(FATAL, 'Loaded resource is not an XtextResource', resource.URI)
 			}

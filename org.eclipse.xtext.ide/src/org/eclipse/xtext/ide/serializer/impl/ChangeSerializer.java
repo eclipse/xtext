@@ -12,7 +12,9 @@ import static java.util.stream.Collectors.*;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.IGrammarAccess;
@@ -26,8 +28,10 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
@@ -49,8 +53,33 @@ public class ChangeSerializer implements IChangeSerializer {
 
 	private Map<Resource, RecordingResourceUpdater> updaters = Maps.newLinkedHashMap();
 
+	private Multimap<Notifier, IModification<? extends Notifier>> modifications = LinkedHashMultimap.create();
+
 	@Override
-	public void beginRecordChanges(Resource resource) {
+	public <T extends Notifier> void addModification(T context, IModification<T> modification) {
+		modifications.put(context, modification);
+	}
+	
+	@Override
+	public void applyModifications(IAcceptor<IEmfResourceChange> changeAcceptor) {
+		for (Notifier context: modifications.keySet()) {
+			if (context instanceof EObject) 
+				beginRecordChanges(((EObject)context).eResource());
+			else if (context instanceof Resource) 
+				beginRecordChanges((Resource) context);
+			else if (context instanceof ResourceSet)
+				((ResourceSet) context).getResources().forEach(this::beginRecordChanges);
+		}
+		for (Map.Entry<Notifier, IModification<? extends Notifier>> entry: modifications.entries()) 
+			apply(entry.getKey(), entry.getValue());
+		endRecordChanges(changeAcceptor);
+	}
+	
+	protected <T extends Notifier> void apply(Notifier context, IModification<T> modification) {
+		modification.modify((T) context);
+	}
+	
+	protected void beginRecordChanges(Resource resource) {
 		RecordingResourceUpdater updater = updaters.get(resource);
 		if (updater != null) {
 			return;
@@ -89,8 +118,7 @@ public class ChangeSerializer implements IChangeSerializer {
 		}
 	}
 
-	@Override
-	public void endRecordChanges(IAcceptor<IEmfResourceChange> changeAcceptor) {
+	protected void endRecordChanges(IAcceptor<IEmfResourceChange> changeAcceptor) {
 		if (updaters.isEmpty()) {
 			return;
 		}

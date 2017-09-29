@@ -92,11 +92,9 @@ public class RenameService implements IRenameService {
           final RenameChange change = new RenameChange(_newName, _uRI);
           final IChangeSerializer changeSerializer = this.changeSerializerProvider.get();
           final RenameContext context = new RenameContext(Collections.<RenameChange>unmodifiableList(CollectionLiterals.<RenameChange>newArrayList(change)), resourceSet, changeSerializer, issueAcceptor);
-          this.renameStrategy.loadAndWatchResources(context);
           this.renameStrategy.applyRename(context);
-          this.renameStrategy.applySideEffects(context);
           final ChangeConverter changeConverter = this.converterFactory.create(workspaceManager, workspaceEdit);
-          changeSerializer.endRecordChanges(changeConverter);
+          changeSerializer.applyModifications(changeConverter);
         } else {
           issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL, "Loaded resource is not an XtextResource", resource.getURI());
         }

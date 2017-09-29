@@ -14,8 +14,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer;
 import org.eclipse.xtext.ide.tests.serializer.ChangeSerializerTestHelper;
@@ -75,9 +77,11 @@ public class ChangeSerializerWithEmfTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final EClassRef model = this._changeSerializerTestHelper.<EClassRef>contents(rs, "inmemory:/file1.pstl", EClassRef.class);
     final ChangeSerializer serializer = this.serializerProvider.get();
-    serializer.beginRecordChanges(model.eResource());
-    EClassifier _get = model.getRef().getEPackage().getEClassifiers().get(1);
-    model.setRef(((EClass) _get));
+    final IChangeSerializer.IModification<EClassRef> _function = (EClassRef it) -> {
+      EClassifier _get = model.getRef().getEPackage().getEClassifiers().get(1);
+      model.setRef(((EClass) _get));
+    };
+    serializer.<EClassRef>addModification(model, _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
@@ -116,17 +120,19 @@ public class ChangeSerializerWithEmfTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Model model = this._changeSerializerTestHelper.<Model>contents(rs, "inmemory:/file1.pstl", Model.class);
     final ChangeSerializer serializer = this.serializerProvider.get();
-    serializer.beginRecordChanges(model.eResource());
-    EClass _get = model.getClazz().get(0);
-    _get.setName("ChangedName");
-    EList<EClass> _clazz = model.getClazz();
-    EClass _createEClass = EcoreFactory.eINSTANCE.createEClass();
-    final Procedure1<EClass> _function = (EClass it) -> {
-      it.setName("NewName");
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      EClass _get = model.getClazz().get(0);
+      _get.setName("ChangedName");
+      EList<EClass> _clazz = model.getClazz();
+      EClass _createEClass = EcoreFactory.eINSTANCE.createEClass();
+      final Procedure1<EClass> _function_1 = (EClass it_1) -> {
+        it_1.setName("NewName");
+      };
+      EClass _doubleArrow = ObjectExtensions.<EClass>operator_doubleArrow(_createEClass, _function_1);
+      _clazz.add(0, _doubleArrow);
+      Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
     };
-    EClass _doubleArrow = ObjectExtensions.<EClass>operator_doubleArrow(_createEClass, _function);
-    _clazz.add(0, _doubleArrow);
-    Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
+    serializer.<Resource>addModification(model.eResource(), _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");

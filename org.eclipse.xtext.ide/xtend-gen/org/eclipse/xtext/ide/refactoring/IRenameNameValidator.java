@@ -49,10 +49,7 @@ public interface IRenameNameValidator {
           final ValueConverterException e = (ValueConverterException)_t;
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("Illegal name: ");
-          String _message = null;
-          if (e!=null) {
-            _message=e.getMessage();
-          }
+          String _message = e.getMessage();
           _builder_1.append(_message);
           issues.add(RefactoringIssueAcceptor.Severity.FATAL, _builder_1.toString());
         } else {

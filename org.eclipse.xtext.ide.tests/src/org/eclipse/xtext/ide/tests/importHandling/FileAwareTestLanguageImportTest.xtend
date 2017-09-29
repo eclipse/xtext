@@ -52,8 +52,7 @@ class FileAwareTestLanguageImportTest {
 		val model = rs.contents("inmemory:/file1.fileawaretestlanguage", PackageDeclaration)
 
 		val serializer = serializerProvider.get()
-		serializer.beginRecordChanges(model.eResource)
-		model.name = "newpackage"
+		serializer.addModification(model, [model.name = "newpackage"])
 		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
 		serializer.endRecordChangesToTextDocuments === '''
 			-------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ---------
@@ -97,8 +96,7 @@ class FileAwareTestLanguageImportTest {
 		val model = rs.contents("inmemory:/file1.fileawaretestlanguage", PackageDeclaration)
 
 		val serializer = serializerProvider.get()
-		serializer.beginRecordChanges(model.eResource)
-		model.name = "newpackage"
+		serializer.addModification(model, [model.name = "newpackage"])
 		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
 		serializer.endRecordChangesToTextDocuments === '''
 			-------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ---------
@@ -144,8 +142,7 @@ class FileAwareTestLanguageImportTest {
 		val model = rs.contents("inmemory:/file1.fileawaretestlanguage", PackageDeclaration)
 
 		val serializer = serializerProvider.get()
-		serializer.beginRecordChanges(model.eResource)
-		model.name = "pkg1"
+		serializer.addModification(model, [model.name = "pkg1"])
 		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
 		serializer.endRecordChangesToTextDocuments === '''
 			-------- inmemory:/file1.fileawaretestlanguage (syntax: <offset|text>) ---------
@@ -183,10 +180,13 @@ class FileAwareTestLanguageImportTest {
 		val model2 = rs.contents("inmemory:/foo/bar/Y.fileawaretestlanguage", PackageDeclaration)
 
 		val serializer = serializerProvider.get()
-		serializer.beginRecordChanges(model1.eResource)
-		serializer.beginRecordChanges(model2.eResource)
-		model1.name = "foo2"
-		model2.name = "foo2.bar"
+		serializer.addModification(model1) [
+			name = "foo2"
+		]
+		serializer.addModification(model2) [
+			model2.name = "foo2.bar"
+			model2.name = "foo2.bar"
+		]
 		serializer.endRecordChangesToTextDocuments === '''
 			-------- inmemory:/foo/X.fileawaretestlanguage (syntax: <offset|text>) ---------
 			package <8:3|foo2> 

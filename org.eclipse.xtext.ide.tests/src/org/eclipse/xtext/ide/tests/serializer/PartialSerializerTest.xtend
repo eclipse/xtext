@@ -26,6 +26,7 @@ import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.ide.serializer.IChangeSerializer
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -521,7 +522,7 @@ class PartialSerializerTest {
 	}
 	
 	def private <T extends EObject> ITextRegionAccess recordDiff(Class<T> modelType, CharSequence modelText,
-		(T)=>void modification) {
+		IChangeSerializer.IModification<T> modification) {
 		val fs = new InMemoryURIHandler()
 		fs += "inmemory:/file1.pstl" -> modelText.toString
 
@@ -529,8 +530,7 @@ class PartialSerializerTest {
 		val model = rs.contents("inmemory:/file1.pstl", modelType)
 
 		val serializer = serializerProvider.get()
-		serializer.beginRecordChanges(model.eResource)
-		modification.apply(model)
+		serializer.addModification(model, modification)
 		return serializer.endRecordChangesToTextRegions
 	}
 

@@ -37,7 +37,7 @@ interface IRenameNameValidator {
 					issues.add(ERROR, '''Illegal name: '«newName»'. Consider using '«text»' instead.''')
 				}
 			} catch (ValueConverterException e) {
-				issues.add(FATAL, '''Illegal name: «e?.message»''')
+				issues.add(FATAL, '''Illegal name: «e.message»''')
 			}
 		}
 

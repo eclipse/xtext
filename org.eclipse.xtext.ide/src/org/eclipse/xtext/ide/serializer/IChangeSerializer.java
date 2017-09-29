@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.serializer;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
@@ -20,10 +21,11 @@ import com.google.inject.ImplementedBy;
 /**
  * Converts changes from EMF models to the smallest possible text changes.
  * 
- * The ChangeSerializer records changes that are being made to EMF models between the calls of
- * {@link #beginRecordChanges(Resource)} and {@link #endRecordChanges(IAcceptor)}. The result of the recording are
- * {@link ITextDocumentChange}s which the describe the changes as {@link ITextReplacement}s. The TextReplacements may
- * then be applied to an editor's contents or to a persisted file.
+ * The ChangeSerializer records changes in modifications that are added using 
+ * {@link #addModification(T,IModification<T>)}. All corresponding 
+ * {@link ITextDocumentChange}s can be retrieved in the end by calling 
+ * {@link #applyModifications(IAcceptor)}. They contain {@link ITextReplacement}
+ * which may then be applied to an editor's contents or to a persisted file.
  * 
  * In contrast to {@link ISerializer}, the ChangeSerializer aims to produce the smallest text changes possible, can
  * handle changes that span multiple files, and is able to update cross references in related files.
@@ -39,10 +41,10 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(ChangeSerializer.class)
 public interface IChangeSerializer {
 
-	void beginRecordChanges(Resource resource);
-
-	void endRecordChanges(IAcceptor<IEmfResourceChange> changeAcceptor);
-
+	<T extends Notifier> void addModification(T context,  IModification<T> modification);
+	   
+	void applyModifications(IAcceptor<IEmfResourceChange>  acceptor);
+	   
 	ITextRegionDiffBuilder getModifyableDocument(Resource resource);
 
 	boolean isUpdateCrossReferences();
@@ -52,4 +54,8 @@ public interface IChangeSerializer {
 	void setUpdateCrossReferences(boolean value);
 
 	void setUpdateRelatedFiles(boolean value);
+	
+	interface IModification<T extends Notifier> {
+		void modify(T context);
+	}
 }

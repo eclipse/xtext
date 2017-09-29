@@ -79,7 +79,7 @@ public class ReferenceUpdater implements IReferenceUpdater {
 
 	protected boolean needsUpdating(Deltas deltas, EObject source, EObject target) {
 		Delta targetDelta = deltas.findContainingDelta(target);
-		if (targetDelta.getObject() == target)
+		if (targetDelta != null && targetDelta.getObject() == target)
 			return true;
 		Delta sourceDelta = deltas.findContainingDelta(source);
 		return !Objects.equal(sourceDelta, targetDelta);

@@ -104,7 +104,7 @@ public class ImportTestHelper {
   
   public Collection<IEmfResourceChange> endRecordChangesToTextDocuments(final IChangeSerializer ser) {
     final ArrayList<IEmfResourceChange> list = CollectionLiterals.<IEmfResourceChange>newArrayList();
-    ser.endRecordChanges(CollectionBasedAcceptor.<IEmfResourceChange>of(list));
+    ser.applyModifications(CollectionBasedAcceptor.<IEmfResourceChange>of(list));
     return list;
   }
 }

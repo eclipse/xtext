@@ -9,36 +9,32 @@ package org.eclipse.xtext.ide.refactoring
 
 import com.google.inject.ImplementedBy
 import com.google.inject.Inject
-import java.util.List
-import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EcorePackage
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity
-import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.ide.serializer.IChangeSerializer
 
 /**
+ * Called to rename an element in the {@link IChangeSerializer} based refactoring.
+ * 
+ * Clients may extend the {@link DefaultImpl} to customize the behavior or implement 
+ * this interface directly.
+ * 
+ * Changes are usually performed in the The {@link RenameContext} 
+ * 
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  */
-@ImplementedBy(IRenameStrategy.Impl)
+@ImplementedBy(IRenameStrategy.DefaultImpl)
 interface IRenameStrategy {
 
-	def void loadAndWatchResources(RenameContext context)
-	 
 	def void applyRename(RenameContext context)
-	
-	def void applySideEffects(RenameContext context)
 	
 	def String getCurrentName(EObject element)
 	
-	class Impl implements IRenameStrategy {
+	class DefaultImpl implements IRenameStrategy {
 		
 		@Inject IResourceServiceProvider resourceServiceProvider
 		
@@ -46,20 +42,9 @@ interface IRenameStrategy {
 			resourceServiceProvider.canHandle(change.targetURI)
 		}
 		
-		override void loadAndWatchResources(RenameContext context) {
-			context.changes.filter[ canHandle ].forEach [ change | 
-				val targetResource = context.resourceSet.getResource(change.targetURI.trimFragment, true)
-				EcoreUtil.resolveAll(targetResource)
-				context.changeSerializer.beginRecordChanges(targetResource)
-			]
-		}
-		
 		override applyRename(RenameContext context) {
 			context.changes.filter[ canHandle ].forEach [ change |
-				val target = context.resourceSet.getEObject(change.targetURI, false)
-				if (target instanceof EObject) {
-					doRename(target, change, context)
-				}
+				context.addModification(change) [ doRename(change, context) ]
 			]
 		}
 		
@@ -78,31 +63,7 @@ interface IRenameStrategy {
 		override getCurrentName(EObject element) {
 			element.eGet(element.nameEAttribute).toString
 		}
-
-		override applySideEffects(RenameContext context) {
-		}
 	}
 }
 
-/**
- * @author koehnlein - Initial contribution and API
- * @since 2.13
- */
-@FinalFieldsConstructor
-@Accessors(PUBLIC_GETTER)
-class RenameContext {
-	val List<? extends RenameChange> changes
-	val ResourceSet resourceSet
-	val IChangeSerializer changeSerializer
-	val RefactoringIssueAcceptor issues
-}
 
-/**
- * @author koehnlein - Initial contribution and API
- * @since 2.13
- */
-@Data
-class RenameChange {
-	String newName
-	URI targetURI
-}

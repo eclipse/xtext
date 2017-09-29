@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer;
 import org.eclipse.xtext.ide.tests.serializer.ChangeSerializerTestHelper;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryChild;
@@ -54,7 +55,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testMandatoryValueChange() {
-    final Procedure1<MandatoryValue> _function = (MandatoryValue it) -> {
+    final IChangeSerializer.IModification<MandatoryValue> _function = (MandatoryValue it) -> {
       it.setName("bar");
     };
     ITextRegionAccess _recordDiff = this.<MandatoryValue>recordDiff(MandatoryValue.class, "#2 foo", _function);
@@ -84,7 +85,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalValueInsert() {
-    final Procedure1<OptionalValue> _function = (OptionalValue it) -> {
+    final IChangeSerializer.IModification<OptionalValue> _function = (OptionalValue it) -> {
       it.setName("foo");
     };
     ITextRegionAccess _recordDiff = this.<OptionalValue>recordDiff(OptionalValue.class, "#3", _function);
@@ -118,7 +119,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalValueChange() {
-    final Procedure1<OptionalValue> _function = (OptionalValue it) -> {
+    final IChangeSerializer.IModification<OptionalValue> _function = (OptionalValue it) -> {
       it.setName("baz");
     };
     ITextRegionAccess _recordDiff = this.<OptionalValue>recordDiff(OptionalValue.class, "#3 foo", _function);
@@ -148,7 +149,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalValueRemove() {
-    final Procedure1<OptionalValue> _function = (OptionalValue it) -> {
+    final IChangeSerializer.IModification<OptionalValue> _function = (OptionalValue it) -> {
       it.setName(null);
     };
     ITextRegionAccess _recordDiff = this.<OptionalValue>recordDiff(OptionalValue.class, "#3 foo", _function);
@@ -178,7 +179,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testMandatoryChildChange() {
-    final Procedure1<MandatoryChild> _function = (MandatoryChild it) -> {
+    final IChangeSerializer.IModification<MandatoryChild> _function = (MandatoryChild it) -> {
       MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
       final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
         it_1.setName("baz");
@@ -223,7 +224,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildInsert() {
-    final Procedure1<OptionalChild> _function = (OptionalChild it) -> {
+    final IChangeSerializer.IModification<OptionalChild> _function = (OptionalChild it) -> {
       MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
       final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
         it_1.setName("baz");
@@ -268,7 +269,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildChange() {
-    final Procedure1<OptionalChild> _function = (OptionalChild it) -> {
+    final IChangeSerializer.IModification<OptionalChild> _function = (OptionalChild it) -> {
       MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
       final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
         it_1.setName("baz");
@@ -313,7 +314,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildRemove() {
-    final Procedure1<OptionalChild> _function = (OptionalChild it) -> {
+    final IChangeSerializer.IModification<OptionalChild> _function = (OptionalChild it) -> {
       it.setChild(null);
     };
     ITextRegionAccess _recordDiff = this.<OptionalChild>recordDiff(OptionalChild.class, "#5 foo", _function);
@@ -343,7 +344,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testMoveInList1() {
-    final Procedure1<Node> _function = (Node it) -> {
+    final IChangeSerializer.IModification<Node> _function = (Node it) -> {
       it.getChildren().move(0, 1);
     };
     ITextRegionAccess _recordDiff = this.<Node>recordDiff(Node.class, "#1 root { Foo; Bar; }", _function);
@@ -431,7 +432,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildListInsertIntoEmpty() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EList<MandatoryValue> _children = it.getChildren();
       MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
       final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
@@ -473,7 +474,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildListInsertIntoEmpty2() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EList<MandatoryValue> _children = it.getChildren();
       MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
       final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
@@ -532,7 +533,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildListInsertIntoFirst() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EList<MandatoryValue> _children = it.getChildren();
       MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
       final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
@@ -584,7 +585,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildListInsertIntoMiddle() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EList<MandatoryValue> _children = it.getChildren();
       MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
       final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
@@ -654,7 +655,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildListInsertIntoEndOne() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EList<MandatoryValue> _children = it.getChildren();
       MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
       final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
@@ -706,7 +707,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildListInsertIntoEndTwo() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EList<MandatoryValue> _children = it.getChildren();
       MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
       final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
@@ -775,7 +776,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildListInsertIntoEndThree() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EList<MandatoryValue> _children = it.getChildren();
       MandatoryValue _createMandatoryValue = this.fac.createMandatoryValue();
       final Procedure1<MandatoryValue> _function_1 = (MandatoryValue it_1) -> {
@@ -861,7 +862,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildRemoveListAllOne() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EcoreUtil.remove(it.getChildren().get(0));
     };
     ITextRegionAccess _recordDiff = this.<OptionalChildList>recordDiff(OptionalChildList.class, "#13 x1", _function);
@@ -891,7 +892,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildRemoveListAllTwo() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EcoreUtil.remove(it.getChildren().get(1));
       EcoreUtil.remove(it.getChildren().get(0));
     };
@@ -926,7 +927,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildRemoveListFirstTwo() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EcoreUtil.remove(it.getChildren().get(1));
       EcoreUtil.remove(it.getChildren().get(0));
     };
@@ -974,7 +975,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildRemoveListLastTwo() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EcoreUtil.remove(it.getChildren().get(2));
       EcoreUtil.remove(it.getChildren().get(1));
     };
@@ -1019,7 +1020,7 @@ public class PartialSerializerTest {
   
   @Test
   public void testOptionalChildRemoveListMiddleTwo() {
-    final Procedure1<OptionalChildList> _function = (OptionalChildList it) -> {
+    final IChangeSerializer.IModification<OptionalChildList> _function = (OptionalChildList it) -> {
       EcoreUtil.remove(it.getChildren().get(2));
       EcoreUtil.remove(it.getChildren().get(1));
     };
@@ -1075,7 +1076,7 @@ public class PartialSerializerTest {
     this._changeSerializerTestHelper.operator_tripleEquals(_recordDiff, _builder);
   }
   
-  private <T extends EObject> ITextRegionAccess recordDiff(final Class<T> modelType, final CharSequence modelText, final Procedure1<? super T> modification) {
+  private <T extends EObject> ITextRegionAccess recordDiff(final Class<T> modelType, final CharSequence modelText, final IChangeSerializer.IModification<T> modification) {
     final InMemoryURIHandler fs = new InMemoryURIHandler();
     String _string = modelText.toString();
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _string);
@@ -1083,8 +1084,7 @@ public class PartialSerializerTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final T model = this._changeSerializerTestHelper.<T>contents(rs, "inmemory:/file1.pstl", modelType);
     final ChangeSerializer serializer = this.serializerProvider.get();
-    serializer.beginRecordChanges(model.eResource());
-    modification.apply(model);
+    serializer.<T>addModification(model, modification);
     return this._changeSerializerTestHelper.endRecordChangesToTextRegions(serializer);
   }
 }
