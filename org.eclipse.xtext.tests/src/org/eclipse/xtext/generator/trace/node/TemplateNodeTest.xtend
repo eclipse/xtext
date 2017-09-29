@@ -77,6 +77,33 @@ class TemplateNodeTest {
 		''')
 	}
 	
+	@Test def void testSeparatorLoopWithWhitespace() {
+		val strings = #['a', 'b', 'c']
+		assertEquals('''
+			«FOR s : strings SEPARATOR ', '»«s» «s»«ENDFOR»
+		''')
+	}
+	
+	@Test def void testSeparatorLoopWithWhitespace2() {
+		val strings = #['a', 'b', 'c']
+		assertEquals('''
+			«FOR s : strings SEPARATOR ','»
+				«s» «s»
+			«ENDFOR»
+		''')
+	}
+
+	@Test def void testSeparatorLoopWithWhitespace3() {
+		val strings = #['a', 'b', 'c']
+		assertEquals('''
+			«FOR s : strings SEPARATOR ','»
+				
+				«s» 
+				
+			«ENDFOR»
+		''')
+	}
+	
 	@Test def void testIndentedIf() {
 		val condition = true
 		val string = 'foo'
@@ -95,6 +122,8 @@ class TemplateNodeTest {
 				«FOR s : list»	«s»«ENDFOR»
 		''')
 	}
+	
+
 	
 	@Test def void testIndentedTemplate() {
 		val StringConcatenationClient template = '''
