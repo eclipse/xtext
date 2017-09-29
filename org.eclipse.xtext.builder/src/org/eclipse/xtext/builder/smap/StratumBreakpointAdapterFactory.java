@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.debug.core.IJavaStratumLineBreakpoint;
-import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
@@ -74,7 +73,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 	private XbaseBreakpointUtil breakpointUtil;
 
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes"})
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		if (adaptableObject instanceof XtextEditor) {
 			return this;
@@ -120,9 +119,8 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 					result.types = getClassNamePattern(state);
 					result.lang = provider.get(LanguageInfo.class);
 					result.sourceUri = state.getURI();
-					if (editorInput instanceof IClassFileEditorInput) {
-						IClassFile classFile = ((IClassFileEditorInput) editorInput).getClassFile();
-						result.classHandle = classFile.getHandleIdentifier();
+					if (editorInput.getAdapter(IClassFile.class) != null) {
+						result.classHandle = ((IClassFile)editorInput.getAdapter(IClassFile.class)).getHandleIdentifier();
 					}
 					return result;
 				}

@@ -18,7 +18,6 @@ import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IMember;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
@@ -66,8 +65,8 @@ public class XbaseBreakpointUtil {
 				if (underlyingResource != null)
 					return underlyingResource;
 			}
-		} else if (input instanceof IClassFileEditorInput) {
-			IClassFile classFile = ((IClassFileEditorInput) input).getClassFile();
+		} else if (input.getAdapter(IClassFile.class) != null) {
+			IClassFile classFile = (IClassFile) input.getAdapter(IClassFile.class);
 			return getBreakpointResource(classFile.findPrimaryType());
 		}
 		return ResourcesPlugin.getWorkspace().getRoot();
@@ -100,11 +99,8 @@ public class XbaseBreakpointUtil {
 				logger.error("Error finding breakpoint URI", e);
 				return null;
 			}
-		} else if (input instanceof IClassFileEditorInput) {
-			IClassFile classFile = ((IClassFileEditorInput) input).getClassFile();
-			if (classFile == null) {
-				return null;
-			}
+		} else if (input.getAdapter(IClassFile.class) != null) {
+			IClassFile classFile = (IClassFile) input.getAdapter(IClassFile.class);
 			ITrace traceToSource = traceForTypeRootProvider.getTraceToSource(classFile);
 			if (traceToSource == null)
 				return null;
