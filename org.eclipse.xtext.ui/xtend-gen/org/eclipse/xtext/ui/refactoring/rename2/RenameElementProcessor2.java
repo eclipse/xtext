@@ -136,16 +136,14 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
     URI _targetElementURI = this.renameElementContext.getTargetElementURI();
     final RenameChange change = new RenameChange(this.newName, _targetElementURI);
     final RenameContext renameContext = new RenameContext(Collections.<RenameChange>unmodifiableList(CollectionLiterals.<RenameChange>newArrayList(change)), this.resourceSet, this.changeSerializer, this.status);
-    this.renameStrategy.loadAndWatchResources(renameContext);
     this.renameStrategy.applyRename(renameContext);
-    this.renameStrategy.applySideEffects(renameContext);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rename ");
     _builder.append(this.originalName);
     _builder.append(" to ");
     _builder.append(this.newName);
     this.changeConverter.initialize(_builder.toString(), null, this.status);
-    this.changeSerializer.endRecordChanges(this.changeConverter);
+    this.changeSerializer.applyModifications(this.changeConverter);
     return this.status.getRefactoringStatus();
   }
   

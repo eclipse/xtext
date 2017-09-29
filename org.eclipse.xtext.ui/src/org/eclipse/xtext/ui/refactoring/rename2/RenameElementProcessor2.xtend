@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.rename2
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import com.google.inject.name.Named
 import org.apache.log4j.Logger
 import org.eclipse.core.resources.IProject
@@ -38,7 +39,6 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.ui.resource.LiveScopeResourceSetInitializer
 
 import static org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity.*
-import com.google.inject.Provider
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -95,11 +95,9 @@ class RenameElementProcessor2 extends AbstractRenameProcessor {
 	override checkFinalConditions(IProgressMonitor pm, CheckConditionsContext context) throws CoreException, OperationCanceledException {
 		val change = new RenameChange(newName, renameElementContext.targetElementURI)
 		val renameContext = new RenameContext(#[change], resourceSet, changeSerializer, status)
-		renameStrategy.loadAndWatchResources(renameContext)
 		renameStrategy.applyRename(renameContext)
-		renameStrategy.applySideEffects(renameContext)
 		changeConverter.initialize('''Rename «originalName» to «newName»''', null, status)
-		changeSerializer.endRecordChanges(changeConverter)
+		changeSerializer.applyModifications(changeConverter)
 		return status.refactoringStatus
 	}
 	

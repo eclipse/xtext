@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -27,9 +28,10 @@ import org.eclipse.ltk.core.refactoring.resource.MoveResourceChange;
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.ide.refactoring.IResourceRelocationStrategy;
+import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext;
-import org.eclipse.xtext.ide.refactoring.ResourceRelocationStrategyExecutor;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ui.refactoring.participant.ChangeConverter;
 import org.eclipse.xtext.ui.refactoring.participant.LtkIssueAcceptor;
@@ -49,6 +51,8 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class ResourceRelocationProcessor {
+  private final static Logger LOG = Logger.getLogger(ResourceRelocationProcessor.class);
+  
   @Inject
   private IResourceSetProvider resourceSetProvider;
   
@@ -72,9 +76,6 @@ public class ResourceRelocationProcessor {
   @Inject
   private ChangeConverter changeConverter;
   
-  @Inject
-  private ResourceRelocationStrategyExecutor executor;
-  
   private List<ResourceRelocationChange> uriChanges = CollectionLiterals.<ResourceRelocationChange>newArrayList();
   
   private Set<IResource> excludedResources = CollectionLiterals.<IResource>newHashSet();
@@ -94,12 +95,32 @@ public class ResourceRelocationProcessor {
       return ((!((it instanceof MoveResourceChange) || (it instanceof RenameResourceChange))) || (!this.excludedResources.contains(it.getModifiedElement())));
     };
     this.changeConverter.initialize(name, _function, this.issues);
-    this.changeSerializer.endRecordChanges(this.changeConverter);
+    this.changeSerializer.applyModifications(this.changeConverter);
     return this.changeConverter.getChange();
   }
   
   protected void executeParticipants(final ResourceRelocationContext context) {
-    this.executor.executeParticipants(this.strategyRegistry.getStrategies(), context);
+    final List<? extends IResourceRelocationStrategy> strategies = this.strategyRegistry.getStrategies();
+    ResourceRelocationContext.ChangeType _changeType = context.getChangeType();
+    boolean _tripleEquals = (_changeType == ResourceRelocationContext.ChangeType.COPY);
+    if (_tripleEquals) {
+      IChangeSerializer _changeSerializer = context.getChangeSerializer();
+      _changeSerializer.setUpdateRelatedFiles(false);
+    }
+    final Consumer<IResourceRelocationStrategy> _function = (IResourceRelocationStrategy it) -> {
+      try {
+        it.applyChange(context);
+      } catch (final Throwable _t) {
+        if (_t instanceof Throwable) {
+          final Throwable t = (Throwable)_t;
+          this.issues.add(RefactoringIssueAcceptor.Severity.ERROR, "Error applying resource changes", t);
+          ResourceRelocationProcessor.LOG.error(t);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    };
+    strategies.forEach(_function);
   }
   
   public void addChangedResource(final IResource resource, final IPath fromPath, final IPath toPath) {
