@@ -53,7 +53,7 @@ class ResourceRelocationContext {
 	 *  
 	 * @param change the change to execute
 	 */
-	def Resource loadAndWatchResource(ResourceRelocationChange change) {
+	protected def Resource loadAndWatchResource(ResourceRelocationChange change) {
 		val resource = switch changeType {
 			case MOVE,
 			case RENAME: {

@@ -76,14 +76,7 @@ public interface IRenameStrategy {
       };
       return IterableExtensions.<EAttribute>head(IterableExtensions.<EAttribute>filter(target.eClass().getEAllAttributes(), _function));
     }
-    
-    @Override
-    public String getCurrentName(final EObject element) {
-      return element.eGet(this.getNameEAttribute(element)).toString();
-    }
   }
   
   public abstract void applyRename(final RenameContext context);
-  
-  public abstract String getCurrentName(final EObject element);
 }

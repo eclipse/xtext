@@ -63,7 +63,7 @@ public class ResourceRelocationContext {
    * 
    * @param change the change to execute
    */
-  public Resource loadAndWatchResource(final ResourceRelocationChange change) {
+  protected Resource loadAndWatchResource(final ResourceRelocationChange change) {
     try {
       Resource _switchResult = null;
       final ResourceRelocationContext.ChangeType changeType = this.changeType;

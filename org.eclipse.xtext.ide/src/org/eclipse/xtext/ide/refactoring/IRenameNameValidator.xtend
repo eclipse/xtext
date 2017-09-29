@@ -31,11 +31,7 @@ interface IRenameNameValidator {
 
 		override validate(EObject target, String newName, RefactoringIssueAcceptor issues) {
 			try {
-				var String value = getNameAsValue(newName)
-				var String text = getNameAsText(value)
-				if (!equal(text, newName)) {
-					issues.add(ERROR, '''Illegal name: '«newName»'. Consider using '«text»' instead.''')
-				}
+				getNameAsValue(newName)
 			} catch (ValueConverterException e) {
 				issues.add(FATAL, '''Illegal name: «e.message»''')
 			}

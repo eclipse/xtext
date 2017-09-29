@@ -14,7 +14,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
@@ -31,27 +30,15 @@ public interface IRenameNameValidator {
     @Override
     public void validate(final EObject target, final String newName, final RefactoringIssueAcceptor issues) {
       try {
-        String value = this.getNameAsValue(newName);
-        String text = this.getNameAsText(value);
-        boolean _equal = Strings.equal(text, newName);
-        boolean _not = (!_equal);
-        if (_not) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Illegal name: \'");
-          _builder.append(newName);
-          _builder.append("\'. Consider using \'");
-          _builder.append(text);
-          _builder.append("\' instead.");
-          issues.add(RefactoringIssueAcceptor.Severity.ERROR, _builder.toString());
-        }
+        this.getNameAsValue(newName);
       } catch (final Throwable _t) {
         if (_t instanceof ValueConverterException) {
           final ValueConverterException e = (ValueConverterException)_t;
-          StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append("Illegal name: ");
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Illegal name: ");
           String _message = e.getMessage();
-          _builder_1.append(_message);
-          issues.add(RefactoringIssueAcceptor.Severity.FATAL, _builder_1.toString());
+          _builder.append(_message);
+          issues.add(RefactoringIssueAcceptor.Severity.FATAL, _builder.toString());
         } else {
           throw Exceptions.sneakyThrow(_t);
         }

@@ -32,8 +32,6 @@ interface IRenameStrategy {
 
 	def void applyRename(RenameContext context)
 	
-	def String getCurrentName(EObject element)
-	
 	class DefaultImpl implements IRenameStrategy {
 		
 		@Inject IResourceServiceProvider resourceServiceProvider
@@ -58,10 +56,6 @@ interface IRenameStrategy {
 		
 		protected def EAttribute getNameEAttribute(EObject target) {
 			target.eClass.EAllAttributes.filter[name == 'name' && EType == EcorePackage.Literals.ESTRING].head
-		}
-
-		override getCurrentName(EObject element) {
-			element.eGet(element.nameEAttribute).toString
 		}
 	}
 }
