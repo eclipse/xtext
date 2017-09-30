@@ -8,6 +8,7 @@
 package org.eclipse.xtext.resource.persistence
 
 import com.google.common.io.CharStreams
+import java.io.BufferedInputStream
 import java.io.DataInputStream
 import java.io.IOException
 import java.io.InputStream
@@ -51,14 +52,14 @@ import org.eclipse.xtext.parser.ParseResult
 	 */
 	protected def void loadEntries(StorageAwareResource resource, ZipInputStream zipIn) throws IOException {
 		zipIn.nextEntry
-		readContents(resource, zipIn)
+		readContents(resource, new BufferedInputStream(zipIn))
 
 		zipIn.nextEntry
-		readResourceDescription(resource, zipIn)
+		readResourceDescription(resource, new BufferedInputStream(zipIn))
 
 		if (storeNodeModel) {
 			zipIn.nextEntry
-			readNodeModel(resource, zipIn)
+			readNodeModel(resource, new BufferedInputStream(zipIn))
 		}
 	}
 	
