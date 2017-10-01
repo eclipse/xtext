@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
 @InjectWith(FileAwareTestLanguageUiInjectorProvider.class)
 @RunWith(XtextRunner.class)
 @SuppressWarnings("all")
-public class AbstractResourceRelocationTest {
+public abstract class AbstractResourceRelocationTest {
   protected IProject project;
   
   @Before

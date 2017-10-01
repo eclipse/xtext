@@ -31,7 +31,7 @@ import static org.junit.Assert.*
  */
 @InjectWith(FileAwareTestLanguageUiInjectorProvider)
 @RunWith(XtextRunner)
-class AbstractResourceRelocationTest {
+abstract class AbstractResourceRelocationTest {
 	
 	protected IProject project
 	
