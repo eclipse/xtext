@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables
 import java.util.regex.Pattern
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtend2.lib.StringConcatenationClient.TargetStringConcatenation
+import com.google.common.collect.Lists
 
 /**
  * A template node applies a {@link StringConcatenationClient} to compute its children.
@@ -85,12 +86,17 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 	}
 
 	override appendImmediate(Object object, String indentation) {
+		val removed = Lists.newArrayList
 		for (var i = currentParent.children.size - 1; i >= 0; i--) {
 			val node = currentParent.children.get(i)
-			if (node instanceof TextNode) {
-				if (!node.text.hasContent) {
-					currentParent.children.remove(i)					
-				}
+			if (node instanceof TextNode && !(node as TextNode).text.hasContent) {
+				removed += currentParent.children.remove(i)
+			} else if (node instanceof NewLineNode) {
+				removed += currentParent.children.remove(i)
+			} else {
+				append(object, indentation)
+				removed.reverse.forEach[append(it, indentation)]
+				return
 			}
 		}
 		append(object, indentation)

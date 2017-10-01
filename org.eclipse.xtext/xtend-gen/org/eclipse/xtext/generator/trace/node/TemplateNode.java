@@ -9,15 +9,19 @@ package org.eclipse.xtext.generator.trace.node;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.generator.trace.node.CompositeGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.GeneratorNodeExtensions;
 import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
 import org.eclipse.xtext.generator.trace.node.IndentNode;
+import org.eclipse.xtext.generator.trace.node.NewLineNode;
 import org.eclipse.xtext.generator.trace.node.TextNode;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -126,14 +130,24 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
   
   @Override
   public void appendImmediate(final Object object, final String indentation) {
+    final ArrayList<IGeneratorNode> removed = Lists.<IGeneratorNode>newArrayList();
     for (int i = (this.currentParent.getChildren().size() - 1); (i >= 0); i--) {
       {
         final IGeneratorNode node = this.currentParent.getChildren().get(i);
-        if ((node instanceof TextNode)) {
-          boolean _hasContent = TemplateNode.hasContent(((TextNode)node).getText());
-          boolean _not = (!_hasContent);
-          if (_not) {
-            this.currentParent.getChildren().remove(i);
+        if (((node instanceof TextNode) && (!TemplateNode.hasContent(((TextNode) node).getText())))) {
+          IGeneratorNode _remove = this.currentParent.getChildren().remove(i);
+          removed.add(_remove);
+        } else {
+          if ((node instanceof NewLineNode)) {
+            IGeneratorNode _remove_1 = this.currentParent.getChildren().remove(i);
+            removed.add(_remove_1);
+          } else {
+            this.append(object, indentation);
+            final Consumer<IGeneratorNode> _function = (IGeneratorNode it) -> {
+              this.append(it, indentation);
+            };
+            ListExtensions.<IGeneratorNode>reverse(removed).forEach(_function);
+            return;
           }
         }
       }
