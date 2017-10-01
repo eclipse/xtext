@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.resource
 
 import com.google.common.collect.Sets
+import java.io.BufferedInputStream
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.util.Map
@@ -57,7 +58,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 			]) 
 		
 		stream.nextEntry
-		val objIn = new ObjectInputStream(stream)
+		val objIn = new ObjectInputStream(new BufferedInputStream(stream))
 		val logicalMap = objIn.readObject as Map<String,String>
 		logicalMap.entrySet.forEach [
 			adapter.logicalContainerMap.put(resource.getEObject(key), resource.getEObject(value) as JvmIdentifiableElement)
