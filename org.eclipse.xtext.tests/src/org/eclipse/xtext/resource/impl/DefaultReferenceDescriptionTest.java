@@ -41,6 +41,7 @@ import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
@@ -225,6 +226,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 	}
 	
 	/** @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=330812 */
+	@Ignore("FIXME https://github.com/eclipse/xtext-core/issues/488")
 	@Test public void testLazyLinkingProxyReferences() {
 		URI resourceUri = URI.createPlatformResourceURI("test.ecore", true);
 		LazyURIEncoder lazyURIEncoder = new LazyURIEncoder();
