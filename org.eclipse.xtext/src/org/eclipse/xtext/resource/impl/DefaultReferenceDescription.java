@@ -25,8 +25,8 @@ public class DefaultReferenceDescription implements IReferenceDescription {
 	private URI containerEObjectURI;
 
 	public DefaultReferenceDescription(EObject from, EObject to, EReference eReference, int i, URI containerEObjectURI) {
-		this.sourceEObjectUri = EcoreUtil2.getPlatformResourceOrNormalizedURI(from);
-		this.targetEObjectUri = EcoreUtil2.getPlatformResourceOrNormalizedURI(to);
+		this.sourceEObjectUri = EcoreUtil2.getFragmentPathURI(from);
+		this.targetEObjectUri = EcoreUtil2.getFragmentPathURI(to);
 		this.eReference = eReference;
 		this.indexInList = i;
 		this.containerEObjectURI = containerEObjectURI;
