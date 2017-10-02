@@ -275,7 +275,8 @@
     <requirement
         name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
     <requirement
-        name="org.eclipse.epp.mpc.feature.group"/>
+        name="org.eclipse.epp.mpc.feature.group"
+        optional="true"/>
     <requirement
         name="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
     <requirement
@@ -693,6 +694,29 @@
             optional="true"/>
         <requirement
             name="org.eclipse.draw2d.sdk.feature.group"/>
+        <repositoryList
+            name="Photon">
+          <repository
+              url="${xtext.nightly.composite}"/>
+          <repository
+              url="${mwe2.update.site}"/>
+          <repository
+              url="${antlr-gen.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.7"/>
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+          <repository
+              url="${emf.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/eclipse/updates/4.8/"/>
+          <repository
+              url="${draw2d.p2.repository}"/>
+        </repositoryList>
         <repositoryList
             name="Oxygen">
           <repository
