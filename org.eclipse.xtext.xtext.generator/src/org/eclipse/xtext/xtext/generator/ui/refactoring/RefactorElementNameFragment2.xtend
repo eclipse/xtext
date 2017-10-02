@@ -89,7 +89,7 @@ class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment {
 			uiBindings
 				.addTypeToType(
 						"org.eclipse.xtext.ide.refactoring.IRenameStrategy2".typeRef, 
-						"org.eclipse.xtext.ide.refactoring.IRenameStrategy2$DefaultImpl".typeRef)
+						new TypeReference("org.eclipse.xtext.ide.refactoring", "IRenameStrategy2.DefaultImpl"))
 
 				.addTypeToType(
 						"org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor".typeRef, 
@@ -196,7 +196,7 @@ class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment {
 				'org.eclipse.xtext.ide.server.rename.RenameService'.typeRef)
 			ideBindings.addTypeToType(
 				'org.eclipse.xtext.ide.refactoring.IRenameStrategy2'.typeRef,
-				'org.eclipse.xtext.ide.refactoring.IRenameStrategy2$DefaultImpl'.typeRef)
+				new TypeReference('org.eclipse.xtext.ide.refactoring', 'IRenameStrategy2.DefaultImpl'))
 			ideBindings.contributeTo(language.ideGenModule)
 		}
 	}

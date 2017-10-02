@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -30,7 +29,6 @@ public class TypeReferenceTest {
   }
   
   @Test
-  @Ignore("FIXME https://github.com/eclipse/xtext-core/issues/487")
   public void testUnderscopresAnd$() {
     final TypeReference ref = TypeReference.typeRef("E_$tring");
     Assert.assertEquals("", ref.getPackageName());
@@ -38,7 +36,6 @@ public class TypeReferenceTest {
   }
   
   @Test
-  @Ignore("FIXME https://github.com/eclipse/xtext-core/issues/487")
   public void testUnderscopresAnd$02() {
     final TypeReference ref = TypeReference.typeRef("$.$._$.E_$tring");
     Assert.assertEquals("$.$._$", ref.getPackageName());

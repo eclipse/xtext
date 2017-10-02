@@ -30,7 +30,7 @@ class TypeReference {
 	static def TypeReference typeRef(String name, TypeReference... arguments) {
 		new TypeReference(name, arguments)
 	}
-	
+
 	/**
 	 * @deprecated this method is available for backwards compatibility reasons
 	 */
@@ -75,7 +75,7 @@ class TypeReference {
 		if (className === null)
 			throw new IllegalArgumentException('Invalid class name: ' + className)
 		this.packageName = packageName
-		this.simpleNames = className.split('(\\.|\\$)')
+		this.simpleNames = className.split('\\.')
 		this.typeArguments = arguments ?: Collections.emptyList
 	}
 	
