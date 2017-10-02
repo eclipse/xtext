@@ -14,7 +14,6 @@ import org.eclipse.xtext.conversion.IValueConverterService
 import org.eclipse.xtext.conversion.ValueConverterException
 
 import static org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity.*
-import static org.eclipse.xtext.util.Strings.equal
 
 /**
  * @author koehnlein - Initial contribution and API

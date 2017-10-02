@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ide.refactoring;
 
 import com.google.common.base.Objects;
-import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EAttribute;
@@ -33,10 +32,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  */
-@ImplementedBy(IRenameStrategy.DefaultImpl.class)
 @SuppressWarnings("all")
-public interface IRenameStrategy {
-  public static class DefaultImpl implements IRenameStrategy {
+public interface IRenameStrategy2 {
+  public static class DefaultImpl implements IRenameStrategy2 {
     @Inject
     private IResourceServiceProvider resourceServiceProvider;
     

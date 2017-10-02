@@ -110,7 +110,7 @@ public class TypeReference {
       throw new IllegalArgumentException(("Invalid class name: " + className));
     }
     this.packageName = packageName;
-    this.simpleNames = ((List<String>)Conversions.doWrapArray(className.split("\\.")));
+    this.simpleNames = ((List<String>)Conversions.doWrapArray(className.split("(\\.|\\$)")));
     List<TypeReference> _elvis = null;
     if (arguments != null) {
       _elvis = arguments;

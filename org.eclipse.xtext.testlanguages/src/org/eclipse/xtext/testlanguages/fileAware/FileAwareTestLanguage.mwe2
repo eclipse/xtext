@@ -19,4 +19,8 @@ org.eclipse.xtext.xtext.generator.StandardLanguage {
 		generateStub = false
 		skipXbaseTestingPackage = true
 	}
+	
+	renameRefactoring = {
+		useChangeSerializer = true
+	} 
 }

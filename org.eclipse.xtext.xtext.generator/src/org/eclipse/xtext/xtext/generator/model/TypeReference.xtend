@@ -75,7 +75,7 @@ class TypeReference {
 		if (className === null)
 			throw new IllegalArgumentException('Invalid class name: ' + className)
 		this.packageName = packageName
-		this.simpleNames = className.split('\\.')
+		this.simpleNames = className.split('(\\.|\\$)')
 		this.typeArguments = arguments ?: Collections.emptyList
 	}
 	
