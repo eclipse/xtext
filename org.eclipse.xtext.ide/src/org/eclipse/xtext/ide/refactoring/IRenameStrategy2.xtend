@@ -7,14 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.refactoring
 
-import com.google.inject.ImplementedBy
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity
-import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
+import org.eclipse.xtext.resource.IResourceServiceProvider
 
 /**
  * Called to rename an element in the {@link IChangeSerializer} based refactoring.
@@ -27,12 +26,11 @@ import org.eclipse.xtext.ide.serializer.IChangeSerializer
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  */
-@ImplementedBy(IRenameStrategy.DefaultImpl)
-interface IRenameStrategy {
+interface IRenameStrategy2 {
 
 	def void applyRename(RenameContext context)
 	
-	class DefaultImpl implements IRenameStrategy {
+	class DefaultImpl implements IRenameStrategy2 {
 		
 		@Inject IResourceServiceProvider resourceServiceProvider
 		

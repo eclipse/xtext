@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.lsp4j.RenameParams;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ide.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ide.refactoring.IRenameStrategy2;
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.refactoring.RenameChange;
 import org.eclipse.xtext.ide.refactoring.RenameContext;
@@ -48,7 +48,7 @@ public class RenameService implements IRenameService {
   private EObjectAtOffsetHelper _eObjectAtOffsetHelper;
   
   @Inject
-  private IRenameStrategy renameStrategy;
+  private IRenameStrategy2 renameStrategy;
   
   @Inject
   private ChangeConverter.Factory converterFactory;

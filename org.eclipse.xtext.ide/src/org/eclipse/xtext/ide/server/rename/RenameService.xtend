@@ -12,7 +12,6 @@ import com.google.inject.Provider
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.lsp4j.RenameParams
 import org.eclipse.lsp4j.WorkspaceEdit
-import org.eclipse.xtext.ide.refactoring.IRenameStrategy
 import org.eclipse.xtext.ide.refactoring.RenameChange
 import org.eclipse.xtext.ide.refactoring.RenameContext
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
@@ -22,6 +21,7 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import static org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity.*
+import org.eclipse.xtext.ide.refactoring.IRenameStrategy2
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -31,7 +31,7 @@ class RenameService implements IRenameService {
 	
 	@Inject extension EObjectAtOffsetHelper
 	
-	@Inject IRenameStrategy renameStrategy 
+	@Inject IRenameStrategy2 renameStrategy 
 	
 	@Inject ChangeConverter.Factory converterFactory
 	
