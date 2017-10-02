@@ -15,6 +15,7 @@ import org.junit.Test
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.junit.Ignore
 
 class TypeReferenceTest {
 	
@@ -29,6 +30,7 @@ class TypeReferenceTest {
 	}
 	
 	@Test
+	@Ignore("FIXME https://github.com/eclipse/xtext-core/issues/487")
 	def void testUnderscopresAnd$() {
 		val ref = "E_$tring".typeRef
 		assertEquals("", ref.packageName)
@@ -36,6 +38,7 @@ class TypeReferenceTest {
 	}
 	
 	@Test
+	@Ignore("FIXME https://github.com/eclipse/xtext-core/issues/487")
 	def void testUnderscopresAnd$02() {
 		val ref = "$.$._$.E_$tring".typeRef
 		assertEquals("$.$._$", ref.packageName)
