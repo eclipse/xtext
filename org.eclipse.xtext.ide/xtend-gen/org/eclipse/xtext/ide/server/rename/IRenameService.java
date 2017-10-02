@@ -7,18 +7,15 @@
  */
 package org.eclipse.xtext.ide.server.rename;
 
-import com.google.inject.ImplementedBy;
 import org.eclipse.lsp4j.RenameParams;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
-import org.eclipse.xtext.ide.server.rename.RenameService;
 import org.eclipse.xtext.util.CancelIndicator;
 
 /**
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  */
-@ImplementedBy(RenameService.class)
 @SuppressWarnings("all")
 public interface IRenameService {
   public abstract WorkspaceEdit rename(final WorkspaceManager workspaceManager, final RenameParams renameParams, final CancelIndicator cancelIndicator);

@@ -158,7 +158,8 @@ import org.eclipse.lsp4j.WorkspaceEdit
 			documentFormattingProvider = true
 			documentRangeFormattingProvider = true
 			documentHighlightProvider = true
-			
+			renameProvider = allLanguages.exists[get(IRenameService)!==null]
+
 			// register execute command capability
 			if (params.capabilities?.workspace?.executeCommand !== null) {
 				this.commandRegistry.initialize(allLanguages, params.capabilities, client)
@@ -166,7 +167,6 @@ import org.eclipse.lsp4j.WorkspaceEdit
 					commands = this.commandRegistry.getCommands()
 				]
 			}
-			renameProvider = true 
 		]
 		for (language : allLanguages) {
 			language.get(ICapabilitiesContributor)?.contribute(capabilities, params)

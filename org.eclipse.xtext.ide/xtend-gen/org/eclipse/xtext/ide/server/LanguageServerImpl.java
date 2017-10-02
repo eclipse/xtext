@@ -252,6 +252,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       it.setDocumentFormattingProvider(Boolean.valueOf(true));
       it.setDocumentRangeFormattingProvider(Boolean.valueOf(true));
       it.setDocumentHighlightProvider(Boolean.valueOf(true));
+      final Function1<IResourceServiceProvider, Boolean> _function_5 = (IResourceServiceProvider it_1) -> {
+        IRenameService _get = it_1.<IRenameService>get(IRenameService.class);
+        return Boolean.valueOf((_get != null));
+      };
+      it.setRenameProvider(Boolean.valueOf(IterableExtensions.exists(this.getAllLanguages(), _function_5)));
       ClientCapabilities _capabilities = params.getCapabilities();
       WorkspaceClientCapabilities _workspace = null;
       if (_capabilities!=null) {
@@ -265,13 +270,12 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       if (_tripleNotEquals) {
         this.commandRegistry.initialize(this.getAllLanguages(), params.getCapabilities(), this.client);
         ExecuteCommandOptions _executeCommandOptions = new ExecuteCommandOptions();
-        final Procedure1<ExecuteCommandOptions> _function_5 = (ExecuteCommandOptions it_1) -> {
+        final Procedure1<ExecuteCommandOptions> _function_6 = (ExecuteCommandOptions it_1) -> {
           it_1.setCommands(this.commandRegistry.getCommands());
         };
-        ExecuteCommandOptions _doubleArrow_2 = ObjectExtensions.<ExecuteCommandOptions>operator_doubleArrow(_executeCommandOptions, _function_5);
+        ExecuteCommandOptions _doubleArrow_2 = ObjectExtensions.<ExecuteCommandOptions>operator_doubleArrow(_executeCommandOptions, _function_6);
         it.setExecuteCommandProvider(_doubleArrow_2);
       }
-      it.setRenameProvider(Boolean.valueOf(true));
     };
     ServerCapabilities capabilities = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
     Iterable<? extends IResourceServiceProvider> _allLanguages = this.getAllLanguages();
