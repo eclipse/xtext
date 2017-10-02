@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.ui.refactoring.participant;
+package org.eclipse.xtext.ui.refactoring2.participant;
 
 import com.google.inject.Inject;
 import org.eclipse.core.resources.IFile;
@@ -23,7 +23,7 @@ import org.eclipse.ltk.core.refactoring.participants.MoveArguments;
 import org.eclipse.ltk.core.refactoring.participants.MoveParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringArguments;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext;
-import org.eclipse.xtext.ui.refactoring.participant.ResourceRelocationProcessor;
+import org.eclipse.xtext.ui.refactoring2.participant.ResourceRelocationProcessor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**

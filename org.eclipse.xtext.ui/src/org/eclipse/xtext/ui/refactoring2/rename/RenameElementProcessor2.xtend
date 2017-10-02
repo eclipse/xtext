@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.refactoring.rename2
+package org.eclipse.xtext.ui.refactoring2.rename
 
 import com.google.inject.Inject
 import com.google.inject.Provider
@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.ltk.core.refactoring.Change
 import org.eclipse.ltk.core.refactoring.RefactoringStatus
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext
 import org.eclipse.ltk.core.refactoring.participants.ParticipantManager
@@ -25,20 +26,19 @@ import org.eclipse.ltk.core.refactoring.participants.SharableParticipants
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ide.refactoring.IRenameNameValidator
-import org.eclipse.xtext.ide.refactoring.IRenameStrategy
 import org.eclipse.xtext.ide.refactoring.RenameChange
 import org.eclipse.xtext.ide.refactoring.RenameContext
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor
 import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil
-import org.eclipse.xtext.ui.refactoring.participant.ChangeConverter
-import org.eclipse.xtext.ui.refactoring.participant.LtkIssueAcceptor
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext
-import org.eclipse.xtext.ui.resource.IResourceSetProvider
-import org.eclipse.xtext.ui.resource.LiveScopeResourceSetInitializer
+import org.eclipse.xtext.ui.refactoring2.ChangeConverter
+import org.eclipse.xtext.ui.refactoring2.LtkIssueAcceptor
 
 import static org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity.*
+import org.eclipse.xtext.ide.refactoring.IRenameStrategy2
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -51,13 +51,13 @@ class RenameElementProcessor2 extends AbstractRenameProcessor {
 	@Inject@Named(Constants.LANGUAGE_NAME) String languageName;
 
 	@Inject IRenameNameValidator nameValidator 
-	@Inject IResourceSetProvider resourceSetProvider
-	@Inject LiveScopeResourceSetInitializer liveScopeResourceSetInitializer
+	@Inject RefactoringResourceSetProvider resourceSetProvider
+	@Inject ISimpleNameProvider simpleNameProvider
 	@Inject ProjectUtil projectUtil
 	@Inject Provider<LtkIssueAcceptor> statusProvider
 	@Inject IChangeSerializer changeSerializer
-	@Inject IRenameStrategy renameStrategy
-	@Inject ChangeConverter changeConverter
+	@Inject IRenameStrategy2 renameStrategy
+	@Inject ChangeConverter.Factory changeConverterFactory
 	
 	@Accessors(PUBLIC_GETTER, PUBLIC_SETTER) String newName
 	
@@ -68,6 +68,8 @@ class RenameElementProcessor2 extends AbstractRenameProcessor {
 	String originalName
 	LtkIssueAcceptor status 
 	
+	Change change
+	
 	override initialize(IRenameElementContext renameElementContext) {
 		this.renameElementContext = renameElementContext
 		status = statusProvider.get
@@ -77,14 +79,13 @@ class RenameElementProcessor2 extends AbstractRenameProcessor {
 				'Cannot determine project from targetURI ' + renameElementContext.targetElementURI?.toString, 
 				renameElementContext.targetElementURI)
 		resourceSet = resourceSetProvider.get(project)
-		liveScopeResourceSetInitializer.initialize(resourceSet)
 		val target = resourceSet.getEObject(renameElementContext.targetElementURI, true)
 		if (target === null) 
 			status.add(ERROR, 
 				'Rename target does not exist', 
 				renameElementContext.targetElementURI)
 		else
-			originalName = ''//renameStrategy.getCurrentName(target)
+			originalName = simpleNameProvider.getSimpleName(target)
 		return true
 	}
 	
@@ -96,13 +97,14 @@ class RenameElementProcessor2 extends AbstractRenameProcessor {
 		val change = new RenameChange(newName, renameElementContext.targetElementURI)
 		val renameContext = new RenameContext(#[change], resourceSet, changeSerializer, status)
 		renameStrategy.applyRename(renameContext)
-		changeConverter.initialize('''Rename «originalName» to «newName»''', null, status)
+		val changeConverter = changeConverterFactory.create('''Rename «originalName» to «newName»''', null, status)
 		changeSerializer.applyModifications(changeConverter)
+		this.change = changeConverter.change
 		return status.refactoringStatus
 	}
 	
 	override createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		return changeConverter.change
+		return change
 	}
 	
 	override getElements() {
