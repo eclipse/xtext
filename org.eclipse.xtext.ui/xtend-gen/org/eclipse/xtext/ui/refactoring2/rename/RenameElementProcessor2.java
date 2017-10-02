@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.ui.refactoring.rename2;
+package org.eclipse.xtext.ui.refactoring2.rename;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -31,7 +31,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ide.refactoring.IRenameNameValidator;
-import org.eclipse.xtext.ide.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ide.refactoring.IRenameStrategy2;
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.refactoring.RenameChange;
 import org.eclipse.xtext.ide.refactoring.RenameContext;
@@ -39,11 +39,11 @@ import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
 import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
-import org.eclipse.xtext.ui.refactoring.participant.ChangeConverter;
-import org.eclipse.xtext.ui.refactoring.participant.LtkIssueAcceptor;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.resource.IResourceSetProvider;
-import org.eclipse.xtext.ui.resource.LiveScopeResourceSetInitializer;
+import org.eclipse.xtext.ui.refactoring2.ChangeConverter;
+import org.eclipse.xtext.ui.refactoring2.LtkIssueAcceptor;
+import org.eclipse.xtext.ui.refactoring2.rename.ISimpleNameProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -63,10 +63,10 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
   private IRenameNameValidator nameValidator;
   
   @Inject
-  private IResourceSetProvider resourceSetProvider;
+  private RefactoringResourceSetProvider resourceSetProvider;
   
   @Inject
-  private LiveScopeResourceSetInitializer liveScopeResourceSetInitializer;
+  private ISimpleNameProvider simpleNameProvider;
   
   @Inject
   private ProjectUtil projectUtil;
@@ -78,10 +78,10 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
   private IChangeSerializer changeSerializer;
   
   @Inject
-  private IRenameStrategy renameStrategy;
+  private IRenameStrategy2 renameStrategy;
   
   @Inject
-  private ChangeConverter changeConverter;
+  private ChangeConverter.Factory changeConverterFactory;
   
   @Accessors({ AccessorType.PUBLIC_GETTER, AccessorType.PUBLIC_SETTER })
   private String newName;
@@ -97,6 +97,8 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
   private String originalName;
   
   private LtkIssueAcceptor status;
+  
+  private Change change;
   
   @Override
   public boolean initialize(final IRenameElementContext renameElementContext) {
@@ -114,14 +116,13 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
         renameElementContext.getTargetElementURI());
     }
     this.resourceSet = this.resourceSetProvider.get(this.project);
-    this.liveScopeResourceSetInitializer.initialize(this.resourceSet);
     final EObject target = this.resourceSet.getEObject(renameElementContext.getTargetElementURI(), true);
     if ((target == null)) {
       this.status.add(RefactoringIssueAcceptor.Severity.ERROR, 
         "Rename target does not exist", 
         renameElementContext.getTargetElementURI());
     } else {
-      this.originalName = "";
+      this.originalName = this.simpleNameProvider.getSimpleName(target);
     }
     return true;
   }
@@ -142,14 +143,15 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
     _builder.append(this.originalName);
     _builder.append(" to ");
     _builder.append(this.newName);
-    this.changeConverter.initialize(_builder.toString(), null, this.status);
-    this.changeSerializer.applyModifications(this.changeConverter);
+    final ChangeConverter changeConverter = this.changeConverterFactory.create(_builder.toString(), null, this.status);
+    this.changeSerializer.applyModifications(changeConverter);
+    this.change = changeConverter.getChange();
     return this.status.getRefactoringStatus();
   }
   
   @Override
   public Change createChange(final IProgressMonitor pm) throws CoreException, OperationCanceledException {
-    return this.changeConverter.getChange();
+    return this.change;
   }
   
   @Override

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.refactoring.participant
+package org.eclipse.xtext.ui.refactoring2.participant
 
 import com.google.inject.Inject
 import java.util.List
@@ -26,8 +26,12 @@ import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext.ChangeType
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
+import org.eclipse.xtext.ui.refactoring2.ChangeConverter
+import org.eclipse.xtext.ui.refactoring2.LtkIssueAcceptor
+import org.eclipse.xtext.ui.refactoring2.ResourceURIConverter
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.ui.resource.LiveScopeResourceSetInitializer
+
 import static org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity.*
 
 /**
@@ -44,7 +48,7 @@ class ResourceRelocationProcessor {
 	@Inject extension ResourceURIConverter
 	@Inject IChangeSerializer changeSerializer
 	@Inject ResourceRelocationStrategyRegistry strategyRegistry
-	@Inject ChangeConverter changeConverter
+	@Inject ChangeConverter.Factory changeConverterFactory
 
 	List<ResourceRelocationChange> uriChanges = newArrayList()
 	
@@ -60,7 +64,7 @@ class ResourceRelocationProcessor {
 		liveScopeResourceSetInitializer.initialize(resourceSet)
 		val context = new ResourceRelocationContext(type, uriChanges, issues, changeSerializer, resourceSet)
 		executeParticipants(context)
-		changeConverter.initialize(name, [
+		val changeConverter = changeConverterFactory.create(name, [
 			(!(it instanceof MoveResourceChange || it instanceof RenameResourceChange) 
 				|| !excludedResources.contains(modifiedElement))
 		], issues)

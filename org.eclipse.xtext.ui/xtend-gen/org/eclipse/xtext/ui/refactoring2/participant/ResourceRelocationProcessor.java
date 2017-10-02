@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.ui.refactoring.participant;
+package org.eclipse.xtext.ui.refactoring2.participant;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -33,10 +33,10 @@ import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
-import org.eclipse.xtext.ui.refactoring.participant.ChangeConverter;
-import org.eclipse.xtext.ui.refactoring.participant.LtkIssueAcceptor;
-import org.eclipse.xtext.ui.refactoring.participant.ResourceRelocationStrategyRegistry;
-import org.eclipse.xtext.ui.refactoring.participant.ResourceURIConverter;
+import org.eclipse.xtext.ui.refactoring2.ChangeConverter;
+import org.eclipse.xtext.ui.refactoring2.LtkIssueAcceptor;
+import org.eclipse.xtext.ui.refactoring2.ResourceURIConverter;
+import org.eclipse.xtext.ui.refactoring2.participant.ResourceRelocationStrategyRegistry;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.LiveScopeResourceSetInitializer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -74,7 +74,7 @@ public class ResourceRelocationProcessor {
   private ResourceRelocationStrategyRegistry strategyRegistry;
   
   @Inject
-  private ChangeConverter changeConverter;
+  private ChangeConverter.Factory changeConverterFactory;
   
   private List<ResourceRelocationChange> uriChanges = CollectionLiterals.<ResourceRelocationChange>newArrayList();
   
@@ -94,9 +94,9 @@ public class ResourceRelocationProcessor {
     final Predicate<Change> _function = (Change it) -> {
       return ((!((it instanceof MoveResourceChange) || (it instanceof RenameResourceChange))) || (!this.excludedResources.contains(it.getModifiedElement())));
     };
-    this.changeConverter.initialize(name, _function, this.issues);
-    this.changeSerializer.applyModifications(this.changeConverter);
-    return this.changeConverter.getChange();
+    final ChangeConverter changeConverter = this.changeConverterFactory.create(name, _function, this.issues);
+    this.changeSerializer.applyModifications(changeConverter);
+    return changeConverter.getChange();
   }
   
   protected void executeParticipants(final ResourceRelocationContext context) {

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.refactoring.participant
+package org.eclipse.xtext.ui.refactoring2
 
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity

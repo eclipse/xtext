@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.refactoring.participant
+package org.eclipse.xtext.ui.refactoring2
 
 import com.google.common.base.Predicate
 import com.google.inject.Inject
@@ -29,7 +29,7 @@ import org.eclipse.xtext.ide.serializer.ITextDocumentChange
 import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange
 import org.eclipse.xtext.util.IAcceptor
 
-import static org.eclipse.xtext.ui.refactoring.participant.TryWithResource.*
+import static org.eclipse.xtext.ui.refactoring2.TryWithResource.*
 
 /**
  * Converts {@link IEmfResourceChange}s to LTK {@link Change}s.
@@ -39,18 +39,30 @@ import static org.eclipse.xtext.ui.refactoring.participant.TryWithResource.*
  */
 class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	
+	static class Factory {
+		@Inject ResourceURIConverter resourceURIConverter
+		@Inject(optional=true) IWorkbench workbench
+		
+		def create(String name, Predicate<Change> changeFilter, RefactoringIssueAcceptor issues) {
+			new ChangeConverter(name, changeFilter, issues, resourceURIConverter, workbench)
+		}
+	}
+
 	CompositeChange currentChange 
 	RefactoringIssueAcceptor issues
 	Predicate<Change> changeFilter
 	
-	@Inject extension ResourceURIConverter
-	@Inject(optional=true) IWorkbench workbench
-
-	def initialize(String name, Predicate<Change> changeFilter, RefactoringIssueAcceptor issues) {
+	extension ResourceURIConverter resourceUriConverter
+	IWorkbench workbench
+	
+	protected new(String name, Predicate<Change> changeFilter, RefactoringIssueAcceptor issues, ResourceURIConverter uriConverter, IWorkbench workbench) {
 		currentChange = new CompositeChange(name)
 		this.issues = issues
 		this.changeFilter = changeFilter
+		this.resourceUriConverter = uriConverter
+		this.workbench = workbench
 	}
+
 	
 	override accept(IEmfResourceChange emfResourceChange) {
 		doConvert(emfResourceChange)

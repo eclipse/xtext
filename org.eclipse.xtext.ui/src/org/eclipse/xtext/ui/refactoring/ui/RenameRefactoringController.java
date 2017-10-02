@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ILinkedPositionGroupCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyException;
+import org.eclipse.xtext.ui.refactoring2.rename.ISimpleNameProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -221,14 +222,14 @@ public class RenameRefactoringController {
 		return xtextEditor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
 			@Override
 			public String exec(XtextResource state) throws Exception {
-				try {
-					EObject targetElement = state.getResourceSet().getEObject(renameElementContext.getTargetElementURI(),
+				EObject targetElement = state.getResourceSet().getEObject(renameElementContext.getTargetElementURI(),
 						false);
-					if (targetElement == null) {
-						return null;
-					}
-					IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(targetElement,
-							IRenameStrategy.Provider.class);
+				if (targetElement == null) {
+					return null;
+				}
+				IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(targetElement,
+						IRenameStrategy.Provider.class);
+				try {
 					if (strategyProvider != null) {
 						IRenameStrategy strategy = strategyProvider.get(targetElement, renameElementContext);
 						if (strategy != null)
@@ -237,7 +238,11 @@ public class RenameRefactoringController {
 				} catch(NoSuchStrategyException e) {
 					// null
 				}
-				return null;
+				ISimpleNameProvider simpleNameProvider = globalServiceProvider.findService(targetElement, ISimpleNameProvider.class);
+				if (simpleNameProvider != null)
+					return simpleNameProvider.getSimpleName(targetElement);
+				else
+					return null;
 			}
 		});
 	}

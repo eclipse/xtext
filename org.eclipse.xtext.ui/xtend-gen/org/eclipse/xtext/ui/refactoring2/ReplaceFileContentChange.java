@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.ui.refactoring.participant;
+package org.eclipse.xtext.ui.refactoring2;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -22,7 +22,7 @@ import org.eclipse.ltk.core.refactoring.resource.ResourceChange;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ui.refactoring.participant.TryWithResource;
+import org.eclipse.xtext.ui.refactoring2.TryWithResource;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pure;

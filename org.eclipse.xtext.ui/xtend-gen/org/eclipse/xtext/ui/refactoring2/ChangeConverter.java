@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.ui.refactoring.participant;
+package org.eclipse.xtext.ui.refactoring2;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
@@ -40,9 +40,9 @@ import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange;
 import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange;
-import org.eclipse.xtext.ui.refactoring.participant.ReplaceFileContentChange;
-import org.eclipse.xtext.ui.refactoring.participant.ResourceURIConverter;
-import org.eclipse.xtext.ui.refactoring.participant.TryWithResource;
+import org.eclipse.xtext.ui.refactoring2.ReplaceFileContentChange;
+import org.eclipse.xtext.ui.refactoring2.ResourceURIConverter;
+import org.eclipse.xtext.ui.refactoring2.TryWithResource;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -62,28 +62,36 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
+  public static class Factory {
+    @Inject
+    private ResourceURIConverter resourceURIConverter;
+    
+    @Inject(optional = true)
+    private IWorkbench workbench;
+    
+    public ChangeConverter create(final String name, final Predicate<Change> changeFilter, final RefactoringIssueAcceptor issues) {
+      return new ChangeConverter(name, changeFilter, issues, this.resourceURIConverter, this.workbench);
+    }
+  }
+  
   private CompositeChange currentChange;
   
   private RefactoringIssueAcceptor issues;
   
   private Predicate<Change> changeFilter;
   
-  @Inject
   @Extension
-  private ResourceURIConverter _resourceURIConverter;
+  private ResourceURIConverter resourceUriConverter;
   
-  @Inject(optional = true)
   private IWorkbench workbench;
   
-  public Predicate<Change> initialize(final String name, final Predicate<Change> changeFilter, final RefactoringIssueAcceptor issues) {
-    Predicate<Change> _xblockexpression = null;
-    {
-      CompositeChange _compositeChange = new CompositeChange(name);
-      this.currentChange = _compositeChange;
-      this.issues = issues;
-      _xblockexpression = this.changeFilter = changeFilter;
-    }
-    return _xblockexpression;
+  protected ChangeConverter(final String name, final Predicate<Change> changeFilter, final RefactoringIssueAcceptor issues, final ResourceURIConverter uriConverter, final IWorkbench workbench) {
+    CompositeChange _compositeChange = new CompositeChange(name);
+    this.currentChange = _compositeChange;
+    this.issues = issues;
+    this.changeFilter = changeFilter;
+    this.resourceUriConverter = uriConverter;
+    this.workbench = workbench;
   }
   
   @Override
@@ -110,7 +118,7 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     final Procedure0 _function = () -> {
       try {
-        final IFile file = this._resourceURIConverter.toFile(change.getResource().getURI());
+        final IFile file = this.resourceUriConverter.toFile(change.getResource().getURI());
         boolean _canWrite = this.canWrite(file);
         boolean _not = (!_canWrite);
         if (_not) {
@@ -137,7 +145,7 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     int _size = change.getReplacements().size();
     boolean _greaterThan = (_size > 0);
     if (_greaterThan) {
-      final IFile file = this._resourceURIConverter.toFile(change.getNewURI());
+      final IFile file = this.resourceUriConverter.toFile(change.getNewURI());
       boolean _canWrite = this.canWrite(file);
       boolean _not = (!_canWrite);
       if (_not) {
@@ -187,7 +195,7 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
       String _lastSegment_1 = change.getOldURI().lastSegment();
       boolean _equals = Objects.equal(_lastSegment, _lastSegment_1);
       if (_equals) {
-        final IFile oldFile = this._resourceURIConverter.toFile(change.getOldURI());
+        final IFile oldFile = this.resourceUriConverter.toFile(change.getOldURI());
         boolean _canWrite = this.canWrite(oldFile);
         boolean _not = (!_canWrite);
         if (_not) {
@@ -199,7 +207,7 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
           this.issues.add(RefactoringIssueAcceptor.Severity.FATAL, _builder.toString());
         }
         this.checkDerived(oldFile);
-        final IFile newFile = this._resourceURIConverter.toFile(change.getNewURI());
+        final IFile newFile = this.resourceUriConverter.toFile(change.getNewURI());
         final IContainer newContainer = newFile.getParent();
         final MoveResourceChange ltkChange = new MoveResourceChange(oldFile, newContainer);
         this.addChange(ltkChange);
@@ -208,7 +216,7 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
         URI _trimSegments_1 = change.getOldURI().trimSegments(1);
         boolean _equals_1 = Objects.equal(_trimSegments, _trimSegments_1);
         if (_equals_1) {
-          IPath _fullPath_1 = this._resourceURIConverter.toFile(change.getOldURI()).getFullPath();
+          IPath _fullPath_1 = this.resourceUriConverter.toFile(change.getOldURI()).getFullPath();
           String _lastSegment_2 = change.getNewURI().lastSegment();
           final RenameResourceChange ltkChange_1 = new RenameResourceChange(_fullPath_1, _lastSegment_2);
           this.addChange(ltkChange_1);

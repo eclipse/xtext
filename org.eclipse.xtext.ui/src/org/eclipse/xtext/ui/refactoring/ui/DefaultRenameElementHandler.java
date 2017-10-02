@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.xtext.ide.refactoring.IRenameStrategy2;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyException;
+import org.eclipse.xtext.ui.refactoring2.rename.ISimpleNameProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -130,7 +132,14 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 				IRenameStrategy.Provider renameStrategyProvider = globalServiceProvider.findService(targetElement,
 						IRenameStrategy.Provider.class);
 				try {
-					return renameStrategyProvider.get(targetElement, renameElementContext) != null;
+					if (renameStrategyProvider.get(targetElement, renameElementContext) != null) {
+						return true;
+					} else {
+						IRenameStrategy2 strategy2 = globalServiceProvider.findService(targetElement, IRenameStrategy2.class); 
+						ISimpleNameProvider simpleNameProvider = globalServiceProvider.findService(targetElement, ISimpleNameProvider.class); 
+						return strategy2 != null && simpleNameProvider.canRename(targetElement);
+					}
+						
 				} catch (NoSuchStrategyException e) {
 					MessageDialog.openInformation(Display.getCurrent().getActiveShell(), "Cannot rename element",
 							e.getMessage());
