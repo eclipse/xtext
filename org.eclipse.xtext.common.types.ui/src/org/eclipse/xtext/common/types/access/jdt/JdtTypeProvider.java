@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -42,6 +43,7 @@ import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.internal.compiler.env.AccessRuleSet;
 import org.eclipse.jdt.internal.compiler.util.ObjectVector;
 import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
+import org.eclipse.jdt.internal.core.JavaModel;
 import org.eclipse.jdt.internal.core.JavaModelManager;
 import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.jdt.internal.core.NameLookup;
@@ -511,7 +513,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	}
 
 	/**
-	 * @see JavaProject#computePackageFragmentRoots(IClasspathEntry, ObjectVector, HashSet, IClasspathEntry, boolean, java.util.Map)
+	 * @see JavaProject computePackageFragmentRoots(IClasspathEntry, ObjectVector, HashSet, IClasspathEntry, boolean, boolean, java.util.Map)
 	 */
 	private void collectSourcePackageFragmentRoots(JavaProject javaProject, HashSet<String> rootIDs, IClasspathEntry referringEntry, ObjectVector result) throws JavaModelException {
 		if (referringEntry == null){
@@ -538,13 +540,19 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 					}
 					break;
 				case IClasspathEntry.CPE_SOURCE:
-					javaProject.computePackageFragmentRoots(
-							entry,
-							result,
-							rootIDs,
-							referringEntry,
-							true,
-							null);
+					// inlined from org.eclipse.jdt.internal.core.JavaProject
+					// .computePackageFragmentRoots(IClasspathEntry, ObjectVector, HashSet, IClasspathEntry, boolean, boolean, Map)
+					IPath projectPath = javaProject.getProject().getFullPath();
+					IPath entryPath = entry.getPath();
+					if (projectPath.isPrefixOf(entryPath)){
+						Object target = JavaModel.getTarget(entryPath, true/*check existency*/);
+						if (target != null) {
+							if (target instanceof IFolder || target instanceof IProject){
+								IPackageFragmentRoot root = javaProject.getPackageFragmentRoot((IResource)target);
+								result.add(root);
+							}
+						}
+					}
 					break;
 			}
 		}
