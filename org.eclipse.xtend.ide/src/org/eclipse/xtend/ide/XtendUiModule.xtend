@@ -46,6 +46,7 @@ import org.eclipse.xtend.ide.editor.RichStringAwareToggleCommentAction
 import org.eclipse.xtend.ide.editor.SingleLineCommentHelper
 import org.eclipse.xtend.ide.editor.XtendDoubleClickStrategyProvider
 import org.eclipse.xtend.ide.editor.XtendEditor
+import org.eclipse.xtend.ide.editor.XtendEditorErrorTickUpdater
 import org.eclipse.xtend.ide.editor.XtendFoldingRegionProvider
 import org.eclipse.xtend.ide.editor.XtendNatureAddingEditorCallback
 import org.eclipse.xtend.ide.editor.XtendSourceViewerConfiguration
@@ -534,6 +535,11 @@ class XtendUiModule extends AbstractXtendUiModule {
 
 	override bindIShouldGenerate() {
 		IShouldGenerate.Always
+	}
+
+	override void configureXtextEditorErrorTickUpdater(Binder binder) {
+		binder.bind(IXtextEditorCallback).annotatedWith(Names.named("IXtextEditorCallBack")).to(
+			XtendEditorErrorTickUpdater)
 	}
 
 }
