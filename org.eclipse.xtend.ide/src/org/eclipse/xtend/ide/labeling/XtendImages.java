@@ -54,6 +54,10 @@ public class XtendImages extends XbaseImages2 {
 	public ImageDescriptor forFile() {
 		return imageHelper.getImageDescriptor("xtend.gif");
 	}
+
+	public ImageDescriptor forReadonly() {
+		return imageHelper.getImageDescriptor("xtend_readonly_editor.png");
+	}
 	
 	@Override
 	protected Point imagesSize() {
