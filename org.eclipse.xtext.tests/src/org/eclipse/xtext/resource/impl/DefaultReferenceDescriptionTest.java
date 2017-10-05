@@ -41,7 +41,6 @@ import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.StringInputStream;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
