@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.quickfix;
 
 import java.util.List;
 
+import org.eclipse.xtext.ui.editor.model.edit.IContextFreeModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
@@ -60,6 +61,21 @@ public class IssueResolutionAcceptor {
 				modificationWrapper, relevance));
 	}
 
+	/**
+	 * @since 2.13
+	 */
+	public void accept(Issue issue, String label, String description, String image, IContextFreeModification modification) {
+		accept(issue, label, description, image, modification, 0);
+	}
+
+	/**
+	 * @since 2.13
+	 */
+	public void accept(Issue issue, String label, String description, String image, IContextFreeModification modification, int relevance) {
+		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
+				new IContextFreeModification.Wrapper(issue.getUriToProblem(), modification), relevance));
+	}
+	
 	public List<IssueResolution> getIssueResolutions() {
 		return issueResolutions;
 	}

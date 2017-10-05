@@ -70,6 +70,7 @@ import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.ui.editor.quickfix.MultiFix;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -153,17 +154,14 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 		});
 	}
 
-	@Fix(EMPTY_ENUM_LITERAL)
+	@MultiFix(EMPTY_ENUM_LITERAL)
 	public void fixEmptyEnumLiteral(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Fix empty enum literal", "Fix empty enum literal", NULL_QUICKFIX_IMAGE,
-				new ISemanticModification() {
-					@Override
-					public void apply(final EObject element, IModificationContext context) {
-						EnumLiteralDeclaration enumLiteralDeclaration = (EnumLiteralDeclaration) element;
-						Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
-						keyword.setValue(enumLiteralDeclaration.getEnumLiteral().getName().toLowerCase());
-						enumLiteralDeclaration.setLiteral(keyword);
-					}
+				(EObject element) -> {
+					EnumLiteralDeclaration enumLiteralDeclaration = (EnumLiteralDeclaration) element;
+					Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
+					keyword.setValue(enumLiteralDeclaration.getEnumLiteral().getName().toLowerCase());
+					enumLiteralDeclaration.setLiteral(keyword);
 				});
 	}
 

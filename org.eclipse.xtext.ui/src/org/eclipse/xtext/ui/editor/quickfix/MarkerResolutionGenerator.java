@@ -2,6 +2,7 @@ package org.eclipse.xtext.ui.editor.quickfix;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.ui.editor.model.edit.IContextFreeModification;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
 
@@ -51,7 +53,10 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 
 	@Inject 
 	private IWorkbench workbench;
-	
+
+	@Inject
+	private WorkbenchMarkerResolutionAdapterFactory adapterFactory;
+
 	public IssueUtil getIssueUtil() {
 		return issueUtil;
 	}
@@ -88,19 +93,28 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		if(!languageResourceHelper.isLanguageResource(marker.getResource())) {
 			return emptyResult;
 		}
-		XtextEditor editor = getEditor(marker.getResource());
-		if(editor == null)
-			return emptyResult;
-		
-		IAnnotationModel annotationModel = editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
-		if(annotationModel != null && !isMarkerStillValid(marker, annotationModel))
-			return emptyResult;
-		
 		Issue issue = getIssueUtil().createIssue(marker);
-		if(issue == null)
+		if (issue == null)
 			return emptyResult;
-		final Iterable<IssueResolution> resolutions = getResolutions(issue, editor.getDocument());
-		return getAdaptedResolutions(Lists.newArrayList(resolutions));
+		Iterable<IssueResolution> resolutions = getResolutionProvider().getResolutions(issue);
+		boolean isMultiFix = StreamSupport.stream(resolutions.spliterator(), false)
+				.allMatch((res) -> res.getModification() instanceof IContextFreeModification.Wrapper);
+		if (isMultiFix) {
+			// TODO report a warning if there is a mixup between context and no context modifications
+			return getAdaptedWorkbenchResolutions(Lists.newArrayList(resolutions), marker);
+		}
+		if (findEditor(marker.getResource()) != null) {
+			XtextEditor editor = getEditor(marker.getResource());
+			if (editor == null)
+				return emptyResult;
+
+			IAnnotationModel annotationModel = editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
+			if (annotationModel != null && !isMarkerStillValid(marker, annotationModel))
+				return emptyResult;
+
+			return getAdaptedResolutions(Lists.newArrayList(getResolutions(issue, editor.getDocument())));
+		}
+		return getAdaptedResolutions(Lists.newArrayList(getResolutionProvider().getResolutions(issue)));
 	}
 
 	public boolean isMarkerStillValid(final IMarker marker, final IAnnotationModel annotationModel) {
@@ -199,7 +213,15 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		IMarkerResolution[] result = new IMarkerResolution[resolutions.size()];
 		for(int i=0; i<resolutions.size(); i++)
 			result[i] = new ResolutionAdapter(resolutions.get(i));
-		
+
+		return result;
+	}
+
+	protected IMarkerResolution[] getAdaptedWorkbenchResolutions(List<IssueResolution> resolutions, IMarker marker) {
+		IMarkerResolution[] result = new IMarkerResolution[resolutions.size()];
+		for (int i = 0; i < resolutions.size(); i++) {
+			result[i] = adapterFactory.create(marker, resolutions.get(i));
+		}
 		return result;
 	}
 

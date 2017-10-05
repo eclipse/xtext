@@ -44,7 +44,12 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 						return true;
 					}
 				}
-				return false;
+				MultiFix annotation = input.getAnnotation(MultiFix.class);
+ 				boolean result = annotation != null && issueCode.equals(annotation.value())
+ 						&& input.getParameterTypes().length == 2 && Void.TYPE == input.getReturnType()
+ 						&& input.getParameterTypes()[0].isAssignableFrom(Issue.class)
+ 						&& input.getParameterTypes()[1].isAssignableFrom(IssueResolutionAcceptor.class);
+				return result;
 			}
 		};
 	}

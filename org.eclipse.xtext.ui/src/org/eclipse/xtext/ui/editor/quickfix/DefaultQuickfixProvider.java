@@ -35,6 +35,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.IContextFreeModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
@@ -343,6 +344,18 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 				ISemanticModification semanticModification, int relevance) {
 			manager.checkCanceled(monitor);
 			delegate.accept(issue, label, description, image, semanticModification, relevance);
+		}
+		
+		@Override
+		public void accept(Issue issue, String label, String description, String image, IContextFreeModification modification) {
+			manager.checkCanceled(monitor);
+			delegate.accept(issue, label, description, image, modification);
+		}
+		
+		@Override
+		public void accept(Issue issue, String label, String description, String image, IContextFreeModification modification, int relevance) {
+			manager.checkCanceled(monitor);
+			delegate.accept(issue, label, description, image, modification, relevance);
 		}
 		
 		@Override
