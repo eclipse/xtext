@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,9 +26,10 @@ public class EofListener implements StreamListener, AbstractInternalContentAssis
 	public boolean consumedSomething = true;
 	public boolean wasRecovering = false;
 	
+	public int startedErrorRecoveryAt;
+	
 	private final AbstractInternalContentAssistParser parser;
 	private final AbstractElement elementToParse;
-	private int startedErrorRecoveryAt;
 
 	protected EofListener(AbstractInternalContentAssistParser parser, AbstractElement elementToParse) {
 		this.parser = parser;
@@ -99,4 +100,17 @@ public class EofListener implements StreamListener, AbstractInternalContentAssis
 		announcedEofWithLA = false;
 		wasRecovering = false;
 	}
+	
+	protected AbstractElement getElementToParse() {
+		return elementToParse;
+	}
+	
+	protected AbstractInternalContentAssistParser getParser() {
+		return parser;
+	}
+	
+	protected RecognizerSharedState getParserState() {
+		return parserState;
+	}
+	
 }

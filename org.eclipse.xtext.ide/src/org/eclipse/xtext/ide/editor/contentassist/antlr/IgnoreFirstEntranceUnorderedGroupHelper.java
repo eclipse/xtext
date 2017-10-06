@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,6 +11,8 @@ import org.antlr.runtime.BaseRecognizer;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 
+import com.google.common.base.Preconditions;
+
 /**
  * A wrapper for an existing {@link IUnorderedGroupHelper} that ignores the first
  * invocation of {@link #enter(UnorderedGroup)}.
@@ -20,7 +22,7 @@ import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
  */
 public class IgnoreFirstEntranceUnorderedGroupHelper implements IUnorderedGroupHelper {
 	private final IUnorderedGroupHelper helper;
-	boolean first = true;
+	protected boolean first = true;
 
 	/**
 	 * Protected contructor to allow to override this type. 
@@ -28,7 +30,7 @@ public class IgnoreFirstEntranceUnorderedGroupHelper implements IUnorderedGroupH
 	 * @see BaseContentAssistParser#ignoreFirstEntrance(IUnorderedGroupHelper)
 	 */
 	protected IgnoreFirstEntranceUnorderedGroupHelper(IUnorderedGroupHelper helper) {
-		this.helper = helper;
+		this.helper = Preconditions.checkNotNull(helper, "helper may not be null");
 	}
 
 	@Override
@@ -71,5 +73,9 @@ public class IgnoreFirstEntranceUnorderedGroupHelper implements IUnorderedGroupH
 	@Override
 	public UnorderedGroupState snapShot(UnorderedGroup... groups) {
 		return helper.snapShot(groups);
+	}
+	
+	protected IUnorderedGroupHelper getHelper() {
+		return helper;
 	}
 }
