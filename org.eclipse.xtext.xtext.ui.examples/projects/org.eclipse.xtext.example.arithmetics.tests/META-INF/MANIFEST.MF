@@ -7,7 +7,7 @@ Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.tests; singleton:=tru
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.arithmetics,
  org.junit;bundle-version="4.7.0",
- org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.13.0",
  org.eclipse.xtext.testing,
  org.eclipse.xtext.xbase.testing
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
