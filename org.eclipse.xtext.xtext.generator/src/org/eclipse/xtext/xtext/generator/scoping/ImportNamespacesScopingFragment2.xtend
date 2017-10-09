@@ -93,7 +93,7 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 			if (projectConfig.runtime.manifest !== null) {
 				projectConfig.runtime.manifest.exportedPackages += grammar.scopeProviderClass.packageName
 				if (generateXtendStub)
-					projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
+					projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib;bundle-version="'+projectConfig.runtime.xbaseLibVersionLowerBound+'"'
 			}
 		}
 	}

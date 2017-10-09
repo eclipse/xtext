@@ -33,7 +33,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 			])
 			
 			if (generateXtendStub) {
-				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtend.lib'
+				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtend.lib;bundle-version="'+projectConfig.runtime.xtendLibVersionLowerBound+'"'
 			}
 			
 			projectConfig.runtime.manifest.importedPackages.add('org.apache.log4j')
@@ -45,7 +45,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 			])
 			
 			if (generateXtendStub) {
-				projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtend.lib'
+				projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtend.lib;bundle-version="'+projectConfig.runtime.xtendLibVersionLowerBound+'"'
 			}
 			
 			projectConfig.eclipsePlugin.manifest.importedPackages.add('org.apache.log4j')

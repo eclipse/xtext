@@ -65,7 +65,7 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		
 		if (projectConfig.runtime.manifest !== null) {
 			projectConfig.runtime.manifest.requiredBundles.addAll(#[
-				'org.eclipse.xtext.xbase', 'org.eclipse.xtext.xbase.lib'
+				'org.eclipse.xtext.xbase', 'org.eclipse.xtext.xbase.lib;bundle-version="'+projectConfig.runtime.xbaseLibVersionLowerBound+'"'
 			])
 			if ((generateXtendInferrer || useInferredJvmModel) && !skipExportedPackage) {
 				projectConfig.runtime.manifest.exportedPackages += jvmModelInferrer.packageName

@@ -97,7 +97,7 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 				.addTypeToType(IGenerator2.typeRef, language.grammar.generatorStub)
 				.contributeTo(language.runtimeGenModule)
 			if (projectConfig.runtime.manifest !== null)
-				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
+				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib;bundle-version="'+projectConfig.runtime.xbaseLibVersionLowerBound+'"'
 
 			if (generateXtendStub) {
 				doGenerateXtendStubFile

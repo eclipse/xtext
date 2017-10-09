@@ -136,7 +136,10 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
         boolean _isGenerateXtendStub_1 = this.isGenerateXtendStub();
         if (_isGenerateXtendStub_1) {
           Set<String> _requiredBundles = this.getProjectConfig().getRuntime().getManifest().getRequiredBundles();
-          _requiredBundles.add("org.eclipse.xtext.xbase.lib");
+          String _xbaseLibVersionLowerBound = this.getProjectConfig().getRuntime().getXbaseLibVersionLowerBound();
+          String _plus = ("org.eclipse.xtext.xbase.lib;bundle-version=\"" + _xbaseLibVersionLowerBound);
+          String _plus_1 = (_plus + "\"");
+          _requiredBundles.add(_plus_1);
         }
       }
     }

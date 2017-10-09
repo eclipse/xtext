@@ -90,13 +90,15 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     if (_tripleNotEquals) {
       ManifestAccess _manifest_1 = this.getProjectConfig().getRuntimeTest().getManifest();
       final Procedure1<ManifestAccess> _function = (ManifestAccess it) -> {
-        CollectionExtensions.<String>addAll(it.getRequiredBundles(), 
-          this.getTestingPackage(), 
-          this.getXbaseTestingPackage(), 
-          "org.eclipse.xtext.xbase.lib");
+        String _testingPackage = this.getTestingPackage();
+        String _xbaseTestingPackage = this.getXbaseTestingPackage();
+        String _xbaseLibVersionLowerBound = this.getProjectConfig().getRuntime().getXbaseLibVersionLowerBound();
+        String _plus = ("org.eclipse.xtext.xbase.lib;bundle-version=\"" + _xbaseLibVersionLowerBound);
+        String _plus_1 = (_plus + "\"");
+        CollectionExtensions.<String>addAll(it.getRequiredBundles(), _testingPackage, _xbaseTestingPackage, _plus_1);
         String _runtimeTestBasePackage = this._xtextGeneratorNaming.getRuntimeTestBasePackage(this.getGrammar());
-        String _plus = (_runtimeTestBasePackage + ";x-internal=true");
-        it.getExportedPackages().add(_plus);
+        String _plus_2 = (_runtimeTestBasePackage + ";x-internal=true");
+        it.getExportedPackages().add(_plus_2);
       };
       ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_1, _function);
     }
