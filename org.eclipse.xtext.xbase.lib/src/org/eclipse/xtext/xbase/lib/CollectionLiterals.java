@@ -129,6 +129,8 @@ import com.google.common.primitives.Ints;
 	 * Creates an empty mutable {@link ArrayList} instance.
 	 * 
 	 * @return a new {@link ArrayList}
+	 * 
+	 * @since 2.13
 	 */
 	@Pure
 	public static <T> ArrayList<T> newArrayList() {
@@ -154,6 +156,8 @@ import com.google.common.primitives.Ints;
 	 * Creates an empty mutable {@link LinkedList} instance.
 	 * 
 	 * @return a new {@link LinkedList}
+	 * 
+	 * @since 2.13
 	 */
 	@Pure
 	public static <T> LinkedList<T> newLinkedList() {
@@ -179,6 +183,8 @@ import com.google.common.primitives.Ints;
 	 * Creates an empty mutable {@link HashSet} instance.
 	 * 
 	 * @return a new {@link HashSet}
+	 * 
+	 * @since 2.13
 	 */
 	@Pure
 	public static <T> HashSet<T> newHashSet() {
@@ -204,6 +210,8 @@ import com.google.common.primitives.Ints;
 	 * Creates an empty mutable {@link LinkedHashSet} instance.
 	 * 
 	 * @return a new {@link LinkedHashSet}
+	 * 
+	 * @since 2.13
 	 */
 	@Pure
 	public static <T> LinkedHashSet<T> newLinkedHashSet() {
@@ -232,6 +240,8 @@ import com.google.common.primitives.Ints;
 	 *            the comparator that should be used. May be <code>null</code> which indicates that the natural ordering
 	 *            of the items should be used.
 	 * @return a new {@link TreeSet}
+	 * 
+	 * @since 2.13
 	 */
 	@Pure
 	public static <T> TreeSet<T> newTreeSet(Comparator<? super T> comparator) {
@@ -261,6 +271,8 @@ import com.google.common.primitives.Ints;
 	 * Creates an empty mutable {@link HashMap} instance.
 	 * 
 	 * @return a new {@link HashMap}
+	 * 
+	 * @since 2.13
 	 */
 	@Pure
 	public static <K, V> HashMap<K, V> newHashMap() {
@@ -292,6 +304,8 @@ import com.google.common.primitives.Ints;
 	 * Creates an empty mutable {@link LinkedHashMap} instance.
 	 * 
 	 * @return a new {@link LinkedHashMap}
+	 * 
+	 * @since 2.13
 	 */
 	@Pure
 	public static <K, V> LinkedHashMap<K, V> newLinkedHashMap() {
@@ -335,6 +349,8 @@ import com.google.common.primitives.Ints;
 	 *            the comparator that should be used. May be <code>null</code> which indicates that the natural ordering
 	 *            of the keys should be used.
 	 * @return a new {@link TreeMap}
+	 * 
+	 * @since 2.13
 	 */
 	@Pure
 	public static <K, V> TreeMap<K, V> newTreeMap(Comparator<? super K> comparator) {
