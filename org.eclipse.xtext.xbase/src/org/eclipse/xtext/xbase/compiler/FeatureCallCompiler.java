@@ -573,6 +573,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
+	private static boolean isConstantExpression(JvmAnnotationReference reference) {
+		for (final JvmAnnotationValue annotationValue: reference.getValues()) {
+			if ("constantExpression".equals(annotationValue.getValueName())) {
+				return ((JvmBooleanAnnotationValue) annotationValue).getValues().get(0).booleanValue();
+			}
+		}
+		return false;
+	}
+
 	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, ITreeAppendable b, boolean isExpressionContext) {
 		if (call instanceof XAssignment) {
 			assignmentToJavaExpression((XAssignment) call, b, isExpressionContext);
@@ -580,10 +589,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (needMultiAssignment(call)) {
 				appendLeftOperand(call, b, isExpressionContext).append(" = ");
 			}
-			boolean hasReceiver = appendReceiver(call, b, isExpressionContext);
-			if (hasReceiver) {
-				b.append(".");
-				b = appendTypeArguments(call, b);
+			final JvmAnnotationReference annotationRef = this.expressionHelper.findInlineAnnotation(call);
+			if (annotationRef == null || !isConstantExpression(annotationRef)) {
+				boolean hasReceiver = appendReceiver(call, b, isExpressionContext);
+				if (hasReceiver) {
+					b.append(".");
+					b = appendTypeArguments(call, b);
+				}
 			}
 			appendFeatureCall(call, b);
 		}
