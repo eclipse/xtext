@@ -53,6 +53,34 @@
       defaultValue="Luna"
       storageURI="scope://Workspace"
       label="Target Platform">
+  <annotation
+      source="http://www.eclipse.org/oomph/setup/GlobalVariable"/>
+  <choice value="Photon"
+      label="Eclipse Photon- 4.8"/>
+  <choice value="Photon - Staging"
+      label="Eclipse Photon- 4.8 (Staging)"/>
+  <choice value="Oxygen"
+      label="Eclipse Oxygen - 4.7"/>
+  <choice value="Oxygen - Staging"
+      label="Eclipse Oxygen - 4.7 (Staging)"/>
+  <choice value="Neon"
+      label="Eclipse Neon - 4.6"/>
+  <choice value="Mars"
+      label="Eclipse Mars - 4.5"/>
+  <choice value="Luna"
+      label="Eclipse Luna - 4.4"/>
+  <choice value="Kepler"
+      label="Eclipse Kepler - 4.3"/>
+  <choice value="Juno"
+      label="Eclipse Juno - 4.2"/>
+  <choice value="Indigo"
+      label="Eclipse Indigo - 3.7"/>
+  <choice value="Helios"
+      label="Eclipse Helios - 3.6"/>
+  <choice value="Galileo"
+      label="Eclipse Galileo - 3.5"/>
+  <choice value="None"
+      label="None"/>
     <description>Choose the compatibility level of the target platform</description>
   </setupTask>
   <setupTask
@@ -718,6 +746,29 @@
               url="${draw2d.p2.repository}"/>
         </repositoryList>
         <repositoryList
+            name="Photon - Staging">
+          <repository
+              url="${xtext.nightly.composite}"/>
+          <repository
+              url="${mwe2.update.site}"/>
+          <repository
+              url="${antlr-gen.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.7"/>
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+          <repository
+              url="${emf.update.site}"/>
+          <repository
+              url="${draw2d.p2.repository}"/>
+          <repository
+              url="http://download.eclipse.org/staging/photon/"/>
+        </repositoryList>
+        <repositoryList
             name="Oxygen">
           <repository
               url="${xtext.nightly.composite}"/>
@@ -739,6 +790,29 @@
               url="http://download.eclipse.org/eclipse/updates/4.7/"/>
           <repository
               url="${draw2d.p2.repository}"/>
+        </repositoryList>
+        <repositoryList
+            name="Oxygen - Staging">
+          <repository
+              url="${xtext.nightly.composite}"/>
+          <repository
+              url="${mwe2.update.site}"/>
+          <repository
+              url="${antlr-gen.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.7"/>
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+          <repository
+              url="${emf.update.site}"/>
+          <repository
+              url="${draw2d.p2.repository}"/>
+          <repository
+              url="http://download.eclipse.org/staging/oxygen/"/>
         </repositoryList>
         <repositoryList
             name="Neon">
