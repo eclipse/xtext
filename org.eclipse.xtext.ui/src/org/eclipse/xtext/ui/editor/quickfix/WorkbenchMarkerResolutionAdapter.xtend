@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.refactoring2.ChangeConverter
 import org.eclipse.xtext.ui.refactoring2.LtkIssueAcceptor
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.ui.util.IssueUtil
+import org.eclipse.core.runtime.OperationCanceledException
 
 /**
  *  MarkerResolution which extends WorkbenchMarkerResolution and can be applied on multiple markers.
@@ -58,7 +59,7 @@ class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution {
 			override protected execute(
 				IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
 				monitor.beginTask("Applying resolutions", markers.size)
-				markers.collectResolutions.forEach [
+				collectResolutions(monitor, markers).forEach [
 					monitor.taskName = "Applying resolution"
 					run(it.key, it.value, monitor)
 					monitor.internalWorked(1)
@@ -76,8 +77,13 @@ class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution {
 		run(resolutionData.key, resolutionData.value, new NullProgressMonitor)
 	}
 
-	def collectResolutions(IMarker... markers) {
-		markers.map[marker|marker.resolution].filterNull.toList
+	def collectResolutions(IProgressMonitor monitor, IMarker... markers) {
+		markers.map [ marker |
+			if (monitor.isCanceled) {
+				throw new OperationCanceledException()
+			}
+			marker.resolution
+		].filterNull.toList
 	}
 
 	def resolution(IMarker marker) {

@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -101,7 +102,7 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
             WorkbenchMarkerResolutionAdapter.this.run(it.getKey(), it.getValue(), monitor);
             monitor.internalWorked(1);
           };
-          WorkbenchMarkerResolutionAdapter.this.collectResolutions(markers).forEach(_function);
+          WorkbenchMarkerResolutionAdapter.this.collectResolutions(monitor, markers).forEach(_function);
           monitor.done();
         }
       }.run(monitor);
@@ -122,9 +123,17 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
     this.run(resolutionData.getKey(), resolutionData.getValue(), _nullProgressMonitor);
   }
   
-  public List<Pair<EObject, IssueResolution>> collectResolutions(final IMarker... markers) {
+  public List<Pair<EObject, IssueResolution>> collectResolutions(final IProgressMonitor monitor, final IMarker... markers) {
     final Function1<IMarker, Pair<EObject, IssueResolution>> _function = (IMarker marker) -> {
-      return this.resolution(marker);
+      Pair<EObject, IssueResolution> _xblockexpression = null;
+      {
+        boolean _isCanceled = monitor.isCanceled();
+        if (_isCanceled) {
+          throw new OperationCanceledException();
+        }
+        _xblockexpression = this.resolution(marker);
+      }
+      return _xblockexpression;
     };
     return IterableExtensions.<Pair<EObject, IssueResolution>>toList(IterableExtensions.<Pair<EObject, IssueResolution>>filterNull(ListExtensions.<IMarker, Pair<EObject, IssueResolution>>map(((List<IMarker>)Conversions.doWrapArray(markers)), _function)));
   }
