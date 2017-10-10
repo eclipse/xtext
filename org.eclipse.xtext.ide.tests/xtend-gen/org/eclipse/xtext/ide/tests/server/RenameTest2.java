@@ -14,7 +14,6 @@ import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.AbstractLanguageServerTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -65,7 +64,6 @@ public class RenameTest2 extends AbstractLanguageServerTest {
   }
   
   @Test
-  @Ignore
   public void testRenameContainer() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -105,10 +103,10 @@ public class RenameTest2 extends AbstractLanguageServerTest {
       _builder_1.append("Foo.fileawaretestlanguage : Baz [[2, 8] .. [2, 11]]");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("Baz [[3, 9] .. [3, 12]]");
+      _builder_1.append("Bar [[5, 5] .. [5, 16]]");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("Baz [[3, 6] .. [3, 9]]");
+      _builder_1.append("Bar [[6, 5] .. [6, 12]]");
       _builder_1.newLine();
       _builder_1.append("documentChanges : ");
       _builder_1.newLine();

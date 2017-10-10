@@ -12,7 +12,6 @@ import org.eclipse.lsp4j.RenameParams
 import org.eclipse.lsp4j.TextDocumentIdentifier
 import org.eclipse.xtext.testing.AbstractLanguageServerTest
 import org.junit.Test
-import org.junit.Ignore
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -45,7 +44,7 @@ class RenameTest2 extends AbstractLanguageServerTest {
         '''.toString, toExpectation(workspaceEdit))
 	}
 	
-	@Test@Ignore
+	@Test
 	def void testRenameContainer() {
 		val model = '''
 			package foo
@@ -66,8 +65,8 @@ class RenameTest2 extends AbstractLanguageServerTest {
         assertEquals('''
 			changes :
 			    Foo.fileawaretestlanguage : Baz [[2, 8] .. [2, 11]]
-			    Baz [[3, 9] .. [3, 12]]
-			    Baz [[3, 6] .. [3, 9]]
+			    Bar [[5, 5] .. [5, 16]]
+			    Bar [[6, 5] .. [6, 12]]
 			documentChanges : 
         '''.toString, toExpectation(workspaceEdit))
 	}

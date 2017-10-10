@@ -58,7 +58,7 @@ public class PartialSerializationTestLanguageReferenceUpdater extends ReferenceU
     List<IUpdatableReference> _updatableReferences = context.getUpdatableReferences();
     for (final IUpdatableReference target : _updatableReferences) {
       {
-        final EObjectDescriptionDeltaProvider.Delta delta = context.getEObjectDescriptionDeltas().findContainingDelta(target.getTargetEObject());
+        final EObjectDescriptionDeltaProvider.Delta delta = this.findContainingDelta(context.getEObjectDescriptionDeltas(), target.getTargetEObject());
         if ((delta != null)) {
           final QualifiedName original = IterableExtensions.<IEObjectDescription>head(delta.getSnapshot().getDescriptions()).getQualifiedName();
           final QualifiedName modified = IterableExtensions.<IEObjectDescription>head(delta.getDescriptions()).getQualifiedName();

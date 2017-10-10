@@ -20,7 +20,7 @@ class FileAwareTestLanguageReferenceUpdater extends ReferenceUpdater {
 		val pkgName = names.getFullyQualifiedName(pkg)
 		val actual = pkg.imports.toMap[element]
 		val targets = context.updatableReferences.map[targetEObject].filter(Element)
-		val expected = targets.filter[names.getFullyQualifiedName(it).skipLast(1) != pkgName].toSet
+		val expected = targets.filter[!names.getFullyQualifiedName(it).startsWith(pkgName)].toSet
 		val toAdd = expected.filter[!actual.containsKey(it)].toSet
 		val toDelete = actual.filter[!expected.contains($0)]
 		if (!toAdd.isEmpty || !toDelete.isEmpty) {

@@ -236,6 +236,72 @@ class ChangeSerializerTest {
 	}
 	
 	@Test
+	def void testRenameFqn1() {
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/file1.pstl" -> '''
+			#1 r {
+				X refs a1.a2 X.a1.a2 r.X.a1.a2 { a1 { a2 refs a2 { a3 { ref a3 } } } }
+				Y refs b1.b2 Y.b1.b2 r.Y.b1.b2 { b1 { b2 { ref b2 } } }
+			}
+		'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents("inmemory:/file1.pstl", Node)
+
+		val serializer = newChangeSerializer()
+		serializer.addModification(model.eResource) [
+			model.children.head.children.head.children.head.name = "b"
+		]
+		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
+		serializer.endRecordChangesToTextDocuments === '''
+			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
+			#1 r {
+				X refs <15:5|a1.b> <21:7|a1.b> <29:9|a1.b> { a1 { <46:2|b> refs <54:2|b> { a3 { ref a3 } } } }
+				Y refs b1.b2 Y.b1.b2 r.Y.b1.b2 { b1 { b2 { ref b2 } } }
+			}
+			--------------------------------------------------------------------------------
+			15 5 "a1.a2" -> "a1.b"
+			21 7 "X.a1.a2" -> "a1.b"
+			29 9 "r.X.a1.a2" -> "a1.b"
+			46 2 "a2" -> "b"
+			54 2 "a2" -> "b"
+		'''
+	}
+	
+	@Test
+	def void testRenameFqn1ValueConversion() {
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/file1.pstl" -> '''
+			#1 r {
+				X refs ^a1.^a2 ^X.^a1.^a2 ^r.^X.^a1.^a2 { a1 { a2 refs ^a2 { a3 { ref ^a3 } } } }
+				Y refs ^b1.^b2 ^Y.^b1.^b2 ^r.^Y.^b1.^b2 { b1 { b2 { ref b2 } } }
+			}
+		'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents("inmemory:/file1.pstl", Node)
+
+		val serializer = newChangeSerializer()
+		serializer.addModification(model.eResource) [
+			model.children.head.children.head.children.head.name = "b"
+		]
+		Assert.assertEquals(1, model.eResource.resourceSet.resources.size)
+		serializer.endRecordChangesToTextDocuments === '''
+			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
+			#1 r {
+				X refs <15:7|a1.b> <23:10|a1.b> <34:13|a1.b> { a1 { <55:2|b> refs <63:3|b> { a3 { ref ^a3 } } } }
+				Y refs ^b1.^b2 ^Y.^b1.^b2 ^r.^Y.^b1.^b2 { b1 { b2 { ref b2 } } }
+			}
+			--------------------------------------------------------------------------------
+			15  7 "^a1.^a2" -> "a1.b"
+			23 10 "^X.^a1.^a2" -> "a1.b"
+			34 13 "^r.^X.^a1.^a2" -> "a1.b"
+			55  2 "a2" -> "b"
+			63  3 "^a2" -> "b"
+		'''
+	}
+	
+	@Test
 	def void testResourceURIChange() {
 		val fs = new InMemoryURIHandler()
 		fs += "inmemory:/f.pstl" -> '''#1 root { }'''

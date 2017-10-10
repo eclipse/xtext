@@ -9,11 +9,12 @@ package org.eclipse.xtext.ide.tests.testlanguage
 
 import com.google.inject.Binder
 import com.google.inject.name.Names
+import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdater
+import org.eclipse.xtext.ide.tests.testlanguage.ide.serializer.PartialSerializationTestLanguageReferenceUpdater
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
-import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdater
-import org.eclipse.xtext.ide.tests.testlanguage.ide.serializer.PartialSerializationTestLanguageReferenceUpdater
+import org.eclipse.xtext.ide.tests.testlanguage.scoping.PartialSerializationTestLanguageValueConverter
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -28,4 +29,9 @@ class PartialSerializationTestLanguageRuntimeModule extends AbstractPartialSeria
 	def Class<? extends IReferenceUpdater> bindCleanupStrategy() {
 		return PartialSerializationTestLanguageReferenceUpdater
 	}
+	
+	override bindIValueConverterService() {
+		PartialSerializationTestLanguageValueConverter
+	}
+	
 }
