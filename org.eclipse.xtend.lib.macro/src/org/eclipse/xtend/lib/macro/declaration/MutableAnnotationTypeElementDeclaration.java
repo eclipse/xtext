@@ -30,6 +30,8 @@ public interface MutableAnnotationTypeElementDeclaration extends MutableMemberDe
 	 * it will be automatically detached from it.
 	 * 
 	 * @param value the expression to set as the default value of this annotation property
+	 * 
+	 * @since 2.12
 	 */
 	void setDefaultValueExpression(Expression value);
 	
@@ -42,6 +44,8 @@ public interface MutableAnnotationTypeElementDeclaration extends MutableMemberDe
 	 * 
 	 * @param compilationStrategy the compilation strategy, must not be <code>null</code>
 	 * @exception IllegalArgumentException if <code>compilationStrategy</code> is <code>null</code>
+	 * 
+	 * @since 2.12
 	 */
 	void setDefaultValueExpression(CompilationStrategy compilationStrategy);
 	
@@ -54,12 +58,16 @@ public interface MutableAnnotationTypeElementDeclaration extends MutableMemberDe
 	 * 
 	 * @param compilationTemplate the compilation strategy, must not be <code>null</code>
 	 * @exception IllegalArgumentException if <code>compilationStrategy</code> is <code>null</code>
+	 * 
+	 * @since 2.12
 	 */
 	void setDefaultValueExpression(StringConcatenationClient compilationTemplate);
 	
 	/**
 	 * @param type the type of this annotation property, must be not <code>null</code>
 	 * @exception IllegalArgumentException if the <code>type</code> is <code>null</code>
+	 * 
+	 * @since 2.12
 	 */
 	void setType(TypeReference type);
 	
