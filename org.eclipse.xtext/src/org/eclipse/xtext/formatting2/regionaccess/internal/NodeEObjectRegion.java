@@ -23,4 +23,5 @@ public class NodeEObjectRegion extends AbstractEObjectRegion {
 	public INode getNode() {
 		return node;
 	}
+
 }

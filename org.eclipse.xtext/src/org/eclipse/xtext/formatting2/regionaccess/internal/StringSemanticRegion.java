@@ -8,7 +8,10 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
@@ -22,6 +25,7 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 
 	private final AbstractEObjectRegion eObjectRegion;
 	private final AbstractElement grammarElement;
+	protected int indexInFeature = -2;
 	private IHiddenRegion leading;
 	private IHiddenRegion trailing;
 
@@ -30,6 +34,20 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 		super(regionAccess, offset, length);
 		this.eObjectRegion = semanticElement;
 		this.grammarElement = grammarElement;
+	}
+
+	@Override
+	public EStructuralFeature getContainingFeature() {
+		Assignment assignment = GrammarUtil.containingAssignment(getGrammarElement());
+		if (assignment != null) {
+			return getSemanticElement().eClass().getEStructuralFeature(assignment.getFeature());
+		}
+		return null;
+	}
+
+	@Override
+	public IEObjectRegion getContainingRegion() {
+		return eObjectRegion;
 	}
 
 	@Override
@@ -43,6 +61,19 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 	}
 
 	@Override
+	public int getIndexInContainingFeature() {
+		if (indexInFeature < -1) {
+			EStructuralFeature feature = getContainingFeature();
+			if (feature != null && feature.isMany()) {
+				((AbstractEObjectRegion) eObjectRegion).initChildrenFeatureIndexes();
+			} else {
+				indexInFeature = -1;
+			}
+		}
+		return indexInFeature;
+	}
+
+	@Override
 	public IHiddenRegion getNextHiddenRegion() {
 		return trailing;
 	}
@@ -51,7 +82,7 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 	public ISemanticRegion getNextSemanticRegion() {
 		return trailing != null ? trailing.getNextSemanticRegion() : null;
 	}
-	
+
 	@Override
 	public ISequentialRegion getNextSequentialRegion() {
 		return trailing;
@@ -66,7 +97,7 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 	public ISemanticRegion getPreviousSemanticRegion() {
 		return leading != null ? leading.getPreviousSemanticRegion() : null;
 	}
-	
+
 	@Override
 	public ISequentialRegion getPreviousSequentialRegion() {
 		return leading;
