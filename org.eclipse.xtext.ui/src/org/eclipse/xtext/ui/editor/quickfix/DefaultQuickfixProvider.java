@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.quickfix;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -356,6 +357,18 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 		public void accept(Issue issue, String label, String description, String image, IContextFreeModification modification, int relevance) {
 			manager.checkCanceled(monitor);
 			delegate.accept(issue, label, description, image, modification, relevance);
+		}
+		
+		@Override
+		public void accept(Issue issue, String label, String description, String image,  Consumer<FixContext> initializer) {
+			manager.checkCanceled(monitor);
+			delegate.accept(issue, label, description, image, initializer);
+		}
+		
+		@Override
+		public void accept(Issue issue, String label, String description, String image,  Consumer<FixContext> initializer, int relevance) {
+			manager.checkCanceled(monitor);
+			delegate.accept(issue, label, description, image, initializer, relevance);
 		}
 		
 		@Override

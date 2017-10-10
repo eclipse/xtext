@@ -42,6 +42,8 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -94,14 +96,12 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
         @Override
         protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
           monitor.beginTask("Applying resolutions", ((List<IMarker>)Conversions.doWrapArray(markers)).size());
-          final Consumer<IMarker> _function = (IMarker it) -> {
-            String _name = it.getResource().getName();
-            String _plus = ("Applying resolution for: " + _name);
-            monitor.setTaskName(_plus);
-            WorkbenchMarkerResolutionAdapter.this.run(it, monitor);
+          final Consumer<Pair<EObject, IssueResolution>> _function = (Pair<EObject, IssueResolution> it) -> {
+            monitor.setTaskName("Applying resolution");
+            WorkbenchMarkerResolutionAdapter.this.run(it.getKey(), it.getValue(), monitor);
             monitor.internalWorked(1);
           };
-          ((List<IMarker>)Conversions.doWrapArray(markers)).forEach(_function);
+          WorkbenchMarkerResolutionAdapter.this.collectResolutions(markers).forEach(_function);
           monitor.done();
         }
       }.run(monitor);
@@ -110,12 +110,6 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
     }
   }
   
-  @Inject
-  private ChangeConverter.Factory converterFactory;
-  
-  @Inject
-  private LtkIssueAcceptor issueAcceptor;
-  
   @Override
   public void run(final IMarker marker) {
     boolean _exists = marker.exists();
@@ -123,45 +117,67 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
     if (_not) {
       return;
     }
+    final Pair<EObject, IssueResolution> resolutionData = this.resolution(marker);
     NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-    this.run(marker, _nullProgressMonitor);
+    this.run(resolutionData.getKey(), resolutionData.getValue(), _nullProgressMonitor);
   }
   
-  public void run(final IMarker marker, final IProgressMonitor monitor) {
-    try {
-      final URI uri = this.issueUtil.getUriToProblem(marker);
-      final Resource resource = this.resSetProvider.get(marker.getResource().getProject()).getResource(uri.trimFragment(), true);
-      final EObject targetObject = resource.getEObject(uri.fragment());
-      if ((targetObject != null)) {
-        final Issue issue = this.issueUtil.createIssue(marker);
-        final Function1<IssueResolution, Boolean> _function = (IssueResolution it) -> {
-          return Boolean.valueOf(this.isSameResolution(it, this.primaryResolution));
-        };
-        final IssueResolution resolution = IterableExtensions.<IssueResolution>head(IterableExtensions.<IssueResolution>filter(this.resolutionsGenerator.getResolutionProvider().getResolutions(issue), _function));
-        if ((resolution == null)) {
-          String _code = issue.getCode();
-          String _plus = ("Resolution missing for " + _code);
-          WorkbenchMarkerResolutionAdapter.LOG.warn(_plus);
-          return;
-        }
-        final ChangeSerializer serializer = this.serializerProvider.get();
-        final ChangeConverter converter = this.converterFactory.create(issue.getCode(), null, this.issueAcceptor);
-        final IChangeSerializer.IModification<EObject> _function_1 = (EObject it) -> {
-          IModification _modification = resolution.getModification();
-          ((IContextFreeModification.Wrapper) _modification).apply(targetObject);
-        };
-        serializer.<EObject>addModification(targetObject, _function_1);
-        serializer.applyModifications(converter);
-        final Change ltkChange = converter.getChange();
-        ltkChange.initializeValidationData(monitor);
-        new PerformChangeOperation(ltkChange).run(monitor);
-        String _code_1 = issue.getCode();
-        String _plus_1 = ("Resolution applied for " + _code_1);
-        String _plus_2 = (_plus_1 + " in ");
-        URI _uriToProblem = issue.getUriToProblem();
-        String _plus_3 = (_plus_2 + _uriToProblem);
-        WorkbenchMarkerResolutionAdapter.LOG.debug(_plus_3);
+  public List<Pair<EObject, IssueResolution>> collectResolutions(final IMarker... markers) {
+    final Function1<IMarker, Pair<EObject, IssueResolution>> _function = (IMarker marker) -> {
+      return this.resolution(marker);
+    };
+    return IterableExtensions.<Pair<EObject, IssueResolution>>toList(IterableExtensions.<Pair<EObject, IssueResolution>>filterNull(ListExtensions.<IMarker, Pair<EObject, IssueResolution>>map(((List<IMarker>)Conversions.doWrapArray(markers)), _function)));
+  }
+  
+  public Pair<EObject, IssueResolution> resolution(final IMarker marker) {
+    final URI uri = this.issueUtil.getUriToProblem(marker);
+    final Resource resource = this.resSetProvider.get(marker.getResource().getProject()).getResource(uri.trimFragment(), true);
+    final EObject targetObject = resource.getEObject(uri.fragment());
+    if ((targetObject != null)) {
+      final Issue issue = this.issueUtil.createIssue(marker);
+      final Function1<IssueResolution, Boolean> _function = (IssueResolution it) -> {
+        return Boolean.valueOf(this.isSameResolution(it, this.primaryResolution));
+      };
+      final IssueResolution resolution = IterableExtensions.<IssueResolution>head(IterableExtensions.<IssueResolution>filter(this.resolutionsGenerator.getResolutionProvider().getResolutions(issue), _function));
+      if ((resolution == null)) {
+        String _code = issue.getCode();
+        String _plus = ("Resolution missing for " + _code);
+        WorkbenchMarkerResolutionAdapter.LOG.warn(_plus);
       }
+      IModification _modification = resolution.getModification();
+      if ((_modification instanceof IContextFreeModification.PreInitializedModification)) {
+        IModification _modification_1 = resolution.getModification();
+        ((IContextFreeModification.PreInitializedModification) _modification_1).init(targetObject);
+      }
+      return Pair.<EObject, IssueResolution>of(targetObject, resolution);
+    }
+    return null;
+  }
+  
+  @Inject
+  private ChangeConverter.Factory converterFactory;
+  
+  @Inject
+  private LtkIssueAcceptor issueAcceptor;
+  
+  public void run(final EObject targetObject, final IssueResolution resolution, final IProgressMonitor monitor) {
+    try {
+      final ChangeSerializer serializer = this.serializerProvider.get();
+      final ChangeConverter converter = this.converterFactory.create(resolution.getLabel(), null, this.issueAcceptor);
+      final IChangeSerializer.IModification<EObject> _function = (EObject it) -> {
+        IModification _modification = resolution.getModification();
+        ((IContextFreeModification) _modification).apply(targetObject);
+      };
+      serializer.<EObject>addModification(targetObject, _function);
+      serializer.applyModifications(converter);
+      final Change ltkChange = converter.getChange();
+      ltkChange.initializeValidationData(monitor);
+      new PerformChangeOperation(ltkChange).run(monitor);
+      String _label = resolution.getLabel();
+      String _plus = ("Resolution applied for " + _label);
+      String _plus_1 = (_plus + " in ");
+      String _plus_2 = (_plus_1 + targetObject);
+      WorkbenchMarkerResolutionAdapter.LOG.debug(_plus_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

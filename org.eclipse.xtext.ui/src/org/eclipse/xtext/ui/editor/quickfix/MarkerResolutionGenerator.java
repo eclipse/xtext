@@ -98,7 +98,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 			return emptyResult;
 		Iterable<IssueResolution> resolutions = getResolutionProvider().getResolutions(issue);
 		boolean isMultiFix = StreamSupport.stream(resolutions.spliterator(), false)
-				.allMatch((res) -> res.getModification() instanceof IContextFreeModification.Wrapper);
+				.allMatch((res) -> res.getModification() instanceof IContextFreeModification);
 		if (isMultiFix) {
 			// TODO report a warning if there is a mixup between context and no context modifications
 			return getAdaptedWorkbenchResolutions(Lists.newArrayList(resolutions), marker);

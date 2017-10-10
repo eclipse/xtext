@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.quickfix;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.eclipse.xtext.ui.editor.model.edit.IContextFreeModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
@@ -62,6 +63,9 @@ public class IssueResolutionAcceptor {
 	}
 
 	/**
+	 * Use as for a multi-quickfix methods.<br>
+	 * This method will be called multiple times if more than one issue was selected to fix.
+	 * 
 	 * @since 2.13
 	 */
 	public void accept(Issue issue, String label, String description, String image, IContextFreeModification modification) {
@@ -69,11 +73,35 @@ public class IssueResolutionAcceptor {
 	}
 
 	/**
+	 * Use as for a multi-quickfix methods.<br>
+	 * This method will be called multiple times if more than one issue was selected to fix.
+	 * 
 	 * @since 2.13
 	 */
 	public void accept(Issue issue, String label, String description, String image, IContextFreeModification modification, int relevance) {
 		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
 				new IContextFreeModification.Wrapper(issue.getUriToProblem(), modification), relevance));
+	}
+	
+	/**
+	 * Use as for a multi-quickfix methods.<br>
+	 * This method will be called multiple times if more than one issue was selected to fix.
+	 * 
+	 * @since 2.13
+	 */
+	public void accept(Issue issue, String label, String description, String image, Consumer<FixContext> initializer) {
+		accept(issue, label, description, image, initializer, 0);
+	}
+	
+	/**
+	 * Use as for a multi-quickfix methods.<br>
+	 * This method will be called multiple times if more than one issue was selected to fix.
+	 * 
+	 * @since 2.13
+	 */
+	public void accept(Issue issue, String label, String description, String image, Consumer<FixContext> initializer, int relevance) {
+		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
+				new IContextFreeModification.PreInitializedModification(issue.getUriToProblem(), initializer), relevance));
 	}
 	
 	public List<IssueResolution> getIssueResolutions() {
