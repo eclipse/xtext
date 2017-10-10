@@ -59,26 +59,26 @@ public class ChangeSerializer implements IChangeSerializer {
 	public <T extends Notifier> void addModification(T context, IModification<T> modification) {
 		modifications.put(context, modification);
 	}
-	
+
 	@Override
 	public void applyModifications(IAcceptor<IEmfResourceChange> changeAcceptor) {
-		for (Notifier context: modifications.keySet()) {
-			if (context instanceof EObject) 
-				beginRecordChanges(((EObject)context).eResource());
-			else if (context instanceof Resource) 
+		for (Notifier context : modifications.keySet()) {
+			if (context instanceof EObject)
+				beginRecordChanges(((EObject) context).eResource());
+			else if (context instanceof Resource)
 				beginRecordChanges((Resource) context);
 			else if (context instanceof ResourceSet)
 				((ResourceSet) context).getResources().forEach(this::beginRecordChanges);
 		}
-		for (Map.Entry<Notifier, IModification<? extends Notifier>> entry: modifications.entries()) 
+		for (Map.Entry<Notifier, IModification<? extends Notifier>> entry : modifications.entries())
 			apply(entry.getKey(), entry.getValue());
 		endRecordChanges(changeAcceptor);
 	}
-	
+
 	protected <T extends Notifier> void apply(Notifier context, IModification<T> modification) {
 		modification.modify((T) context);
 	}
-	
+
 	protected void beginRecordChanges(Resource resource) {
 		RecordingResourceUpdater updater = updaters.get(resource);
 		if (updater != null) {
@@ -138,6 +138,12 @@ public class ChangeSerializer implements IChangeSerializer {
 		for (ResourceUpdater updater : updaters) {
 			updater.unload();
 		}
+	}
+
+	protected void resetState() {
+		modifications.clear();
+		updaters.clear();
+		resourceSet = null;
 	}
 
 	@Override

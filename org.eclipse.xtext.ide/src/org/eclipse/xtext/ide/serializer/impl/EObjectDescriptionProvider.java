@@ -158,16 +158,18 @@ public class EObjectDescriptionProvider implements IEObjectDescriptionProvider {
 			EObject object = EcoreUtil.resolve(desc.getEObjectOrProxy(), resource);
 			map.put(object, desc);
 		}
-		TreeIterator<EObject> it = EcoreUtil2.eAll(resource.getContents().get(0));
-		while (it.hasNext()) {
-			EObject next = it.next();
-			if (map.containsKey(next)) {
-				continue;
-			}
-			QualifiedName name = qualifiedNameProvider.getFullyQualifiedName(next);
-			if (name != null) {
-				IEObjectDescription desc = EObjectDescription.create(name, next);
-				map.put(next, desc);
+		if (!resource.getContents().isEmpty()) {
+			TreeIterator<EObject> it = EcoreUtil2.eAll(resource.getContents().get(0));
+			while (it.hasNext()) {
+				EObject next = it.next();
+				if (map.containsKey(next)) {
+					continue;
+				}
+				QualifiedName name = qualifiedNameProvider.getFullyQualifiedName(next);
+				if (name != null) {
+					IEObjectDescription desc = EObjectDescription.create(name, next);
+					map.put(next, desc);
+				}
 			}
 		}
 		List<IEObjectDescription> result = Lists.newArrayList();
@@ -176,7 +178,6 @@ public class EObjectDescriptionProvider implements IEObjectDescriptionProvider {
 			SimpleNameDescription copy = new SimpleNameDescription(name, entry.getKey(), entry.getValue());
 			result.add(copy);
 		}
-
 		return result;
 	}
 
