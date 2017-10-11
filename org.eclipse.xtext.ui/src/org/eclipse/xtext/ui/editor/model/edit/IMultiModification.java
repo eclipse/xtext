@@ -32,7 +32,7 @@ public interface IMultiModification {
 
 		public void init(EObject element) {
 			context = new MultiModificationContext(element);
-			modification.apply(context);
+			modification.apply(context.getElement(), context);
 		}
 
 		public MultiModificationContext getContext() {

@@ -15,20 +15,20 @@ import org.eclipse.xtext.validation.Issue;
 public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfixProvider {
 
 	public static final String SEMANTIC_FIX_ID = "Semantic Fix ID";
-	
+
 	@Fix(SEMANTIC_FIX_ID)
 	public void rename(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, SEMANTIC_FIX_ID, SEMANTIC_FIX_ID, null, new ISemanticModification() {
 			@Override
 			public void apply(EObject element, IModificationContext context) {
-				((Element)element).setName("Bor");
+				((Element) element).setName("Bor");
 			}
 		});
 	}
 
 	@Fix(QuickfixCrossrefTestLanguageValidator.MULTIFIXABLE_ISSUE)
 	public void addDocumentation(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.acceptMulti(issue, "Multi fix", "Multi fix", null, (IMultiModificationContext ctx) -> {
+		acceptor.acceptMulti(issue, "Multi fix", "Multi fix", null, (EObject element, IMultiModificationContext ctx) -> {
 			EObject toModify = ctx.getElement();
 			// do other things here
 			ctx.setModification(toModify, (obj) -> {
@@ -39,8 +39,6 @@ public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfi
 
 	@Fix(QuickfixCrossrefTestLanguageValidator.MULTIFIXABLE_ISSUE_2)
 	public void addDocumentation2(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.acceptMulti(issue, "Multi fix 2", "Multi fix 2", null, (EObject obj) -> {
-			((Element) obj).setDoc("Even Better documentation");
-		});
+		acceptor.acceptMulti(issue, "Multi fix 2", "Multi fix 2", null, eObj -> ((Element) eObj).setDoc("Even Better documentation"));
 	}
 }

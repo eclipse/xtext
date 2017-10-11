@@ -7,10 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model.edit;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * @since 2.13
  * @author Dennis Huebner - Initial contribution and API
  */
 public interface IMultiModificationWithContext {
-	void apply(IMultiModificationContext context);
+	
+	/**
+	 *	@param element the element to provide a QuickFix for. Could also be requested using {@link IMultiModificationContext#getElement()}
+	 *	@param context add modification to this context using {@link IMultiModificationContext#setModification(EObject, IMultiModification)}
+	 */
+	void apply(EObject element, IMultiModificationContext context);
 }
