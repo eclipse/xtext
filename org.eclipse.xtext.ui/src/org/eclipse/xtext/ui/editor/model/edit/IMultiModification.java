@@ -7,33 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model.edit;
 
-import java.util.function.Consumer;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.quickfix.FixContext;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @since 2.13
  * @author Dennis Huebner - Initial contribution and API
  */
-public interface IContextFreeModification {
+public interface IMultiModification {
 
-	public class PreInitializedModification implements IModification, IContextFreeModification {
-		private Consumer<FixContext> initializer;
-		private FixContext context;
+	void apply(EObject element);
+
+	public class PreInitializedModification implements IModification, IMultiModification {
+		private IMultiModificationWithContext modification;
+		private MultiModificationContext context;
 		private URI uriToProblem;
 
-		public PreInitializedModification(URI uri, Consumer<FixContext> initializer) {
+		public PreInitializedModification(URI uri, IMultiModificationWithContext modification) {
 			this.uriToProblem = uri;
-			this.initializer = initializer;
+			this.modification = modification;
 		}
 
 		public void init(EObject element) {
-			context = new FixContext(element);
-			initializer.accept(context);
+			context = new MultiModificationContext(element);
+			modification.apply(context);
 		}
 
 		@Override
@@ -64,11 +63,11 @@ public interface IContextFreeModification {
 
 	}
 
-	static class Wrapper implements IModification, IContextFreeModification {
-		private final IContextFreeModification modification;
+	static class Wrapper implements IModification, IMultiModification {
+		private final IMultiModification modification;
 		private final URI uriToProblem;
 
-		public Wrapper(URI uriToProblem, IContextFreeModification modification) {
+		public Wrapper(URI uriToProblem, IMultiModification modification) {
 			this.uriToProblem = uriToProblem;
 			this.modification = modification;
 		}
@@ -93,5 +92,4 @@ public interface IContextFreeModification {
 
 	}
 
-	void apply(EObject element);
 }

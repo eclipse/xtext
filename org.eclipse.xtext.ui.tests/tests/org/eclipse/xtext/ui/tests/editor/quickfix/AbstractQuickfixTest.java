@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.quickfix;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaProject;
@@ -35,14 +36,19 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 
 	protected XtextEditor newXtextEditor(String projectName, String modelFile, String model) throws CoreException, PartInitException {
 		IJavaProject javaProject = JavaProjectSetupUtil.createJavaProject(projectName);
-		IFile file = javaProject.getProject().getFile(modelFile);
+		IFile file = createFile(modelFile, model, javaProject.getProject());
+		XtextEditor xtextEditor = (XtextEditor) IDE.openEditor(getActivePage(), file);
+		return xtextEditor;
+	}
+
+	protected IFile createFile(String modelFile, String model, IProject project) throws CoreException {
+		IFile file = project.getFile(modelFile);
 		if (file.exists()) {
 			file.delete(true, null);
 		}
 		file.create(new StringInputStream(model), true, null);
 		file.refreshLocal(IResource.DEPTH_ONE, null);
-		XtextEditor xtextEditor = (XtextEditor) IDE.openEditor(getActivePage(), file);
-		return xtextEditor;
+		return file;
 	}
 
 	protected Injector getInjector() {

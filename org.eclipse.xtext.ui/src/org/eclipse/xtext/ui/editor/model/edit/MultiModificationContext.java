@@ -5,28 +5,29 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.quickfix;
+package org.eclipse.xtext.ui.editor.model.edit;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.ui.editor.model.edit.IContextFreeModification;
 
 /**
  * @since 2.13
  * @author Dennis Huebner - Initial contribution and API
  */
-public class FixContext {
+public class MultiModificationContext implements IMultiModificationContext {
 	private EObject element;
-	private IContextFreeModification modification;
+	private IMultiModification modification;
 	private EObject toModify;
 
-	public FixContext(EObject element) {
+	public MultiModificationContext(EObject element) {
 		this.element = element;
 	}
 
+	@Override
 	public EObject getElement() {
 		return this.element;
 	}
 
+	@Override
 	public void applyModification() {
 		if (modification == null) {
 			throw new IllegalStateException("Call setModification() before applying the modification");
@@ -34,7 +35,8 @@ public class FixContext {
 		modification.apply(toModify);
 	}
 
-	public void setModification(EObject toModify, IContextFreeModification modification) {
+	@Override
+	public void setModification(EObject toModify, IMultiModification modification) {
 		this.toModify = toModify;
 		this.modification = modification;
 	}

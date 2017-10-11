@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor.quickfix;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -36,9 +35,10 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.edit.IContextFreeModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
+import org.eclipse.xtext.ui.editor.model.edit.IMultiModificationWithContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -348,27 +348,27 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 		}
 		
 		@Override
-		public void accept(Issue issue, String label, String description, String image, IContextFreeModification modification) {
+		public void acceptMulti(Issue issue, String label, String description, String image, IMultiModification modification) {
 			manager.checkCanceled(monitor);
-			delegate.accept(issue, label, description, image, modification);
+			delegate.acceptMulti(issue, label, description, image, modification);
 		}
 		
 		@Override
-		public void accept(Issue issue, String label, String description, String image, IContextFreeModification modification, int relevance) {
+		public void acceptMulti(Issue issue, String label, String description, String image, IMultiModification modification, int relevance) {
 			manager.checkCanceled(monitor);
-			delegate.accept(issue, label, description, image, modification, relevance);
+			delegate.acceptMulti(issue, label, description, image, modification, relevance);
 		}
 		
 		@Override
-		public void accept(Issue issue, String label, String description, String image,  Consumer<FixContext> initializer) {
+		public void acceptMulti(Issue issue, String label, String description, String image, IMultiModificationWithContext modification) {
 			manager.checkCanceled(monitor);
-			delegate.accept(issue, label, description, image, initializer);
+			delegate.acceptMulti(issue, label, description, image, modification);
 		}
 		
 		@Override
-		public void accept(Issue issue, String label, String description, String image,  Consumer<FixContext> initializer, int relevance) {
+		public void acceptMulti(Issue issue, String label, String description, String image, IMultiModificationWithContext modification, int relevance) {
 			manager.checkCanceled(monitor);
-			delegate.accept(issue, label, description, image, initializer, relevance);
+			delegate.acceptMulti(issue, label, description, image, modification, relevance);
 		}
 		
 		@Override

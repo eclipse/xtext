@@ -16,8 +16,10 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
  */
 public class QuickfixCrossrefTestLanguageValidator extends AbstractQuickfixCrossrefTestLanguageValidator {
 	
-public static final String TRIGGER_VALIDATION_ISSUE = "triggerValidationIssue";
-	
+	public static final String TRIGGER_VALIDATION_ISSUE = "triggerValidationIssue";
+	public static final String MULTIFIXABLE_ISSUE = "multiFixableIssue";
+	public static final String MULTIFIXABLE_ISSUE_2 = "multiFixableIssue2";
+		
 	public static final String ISSUE_DATA_0 = "data0";
 	
 	public static final String ISSUE_DATA_1 = "data1";
@@ -34,5 +36,21 @@ public static final String TRIGGER_VALIDATION_ISSUE = "triggerValidationIssue";
 					ISSUE_DATA_0, 
 					ISSUE_DATA_1);
 		}
-	}	
+	}
+
+	@Check(CheckType.FAST)
+	public void checkDocumentation(Element element) {
+		if (element.getDoc().equals("no doc")) {
+			warning(MULTIFIXABLE_ISSUE, element, QuickfixCrossrefPackage.Literals.ELEMENT__DOC,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, MULTIFIXABLE_ISSUE);
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkDocumentation2(Element element) {
+		if (element.getDoc().equals("bad doc")) {
+			warning(MULTIFIXABLE_ISSUE_2, element, QuickfixCrossrefPackage.Literals.ELEMENT__DOC,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, MULTIFIXABLE_ISSUE_2);
+		}
+	}
 }

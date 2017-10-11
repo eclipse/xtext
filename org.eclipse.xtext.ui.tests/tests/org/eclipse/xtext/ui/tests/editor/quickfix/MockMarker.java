@@ -45,7 +45,7 @@ final class MockMarker implements IMarker {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object getAdapter(Class adapter) {
 		return null;
 	}

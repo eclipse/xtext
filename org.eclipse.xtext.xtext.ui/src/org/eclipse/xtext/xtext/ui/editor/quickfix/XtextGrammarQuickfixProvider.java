@@ -155,7 +155,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(EMPTY_ENUM_LITERAL)
 	public void fixEmptyEnumLiteral(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Fix empty enum literal", "Fix empty enum literal", NULL_QUICKFIX_IMAGE,
+		acceptor.acceptMulti(issue, "Fix empty enum literal", "Fix empty enum literal", NULL_QUICKFIX_IMAGE,
 				(EObject element) -> {
 					EnumLiteralDeclaration enumLiteralDeclaration = (EnumLiteralDeclaration) element;
 					Keyword keyword = XtextFactory.eINSTANCE.createKeyword();

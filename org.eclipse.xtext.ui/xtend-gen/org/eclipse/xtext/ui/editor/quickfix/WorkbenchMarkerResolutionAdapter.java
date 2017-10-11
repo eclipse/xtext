@@ -11,10 +11,14 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -22,6 +26,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.PerformChangeOperation;
 import org.eclipse.swt.graphics.Image;
@@ -30,8 +35,8 @@ import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer;
-import org.eclipse.xtext.ui.editor.model.edit.IContextFreeModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
+import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator;
 import org.eclipse.xtext.ui.refactoring2.ChangeConverter;
@@ -39,6 +44,7 @@ import org.eclipse.xtext.ui.refactoring2.LtkIssueAcceptor;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -91,18 +97,39 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
   }
   
   @Override
+  public void run(final IMarker marker) {
+    boolean _exists = marker.exists();
+    boolean _not = (!_exists);
+    if (_not) {
+      return;
+    }
+    NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+    this.run(new IMarker[] { marker }, _nullProgressMonitor);
+  }
+  
+  @Override
   public void run(final IMarker[] markers, final IProgressMonitor monitor) {
     try {
       new WorkspaceModifyOperation() {
         @Override
         protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
           monitor.beginTask("Applying resolutions", ((List<IMarker>)Conversions.doWrapArray(markers)).size());
-          final Consumer<Pair<EObject, IssueResolution>> _function = (Pair<EObject, IssueResolution> it) -> {
+          final ChangeSerializer serializer = WorkbenchMarkerResolutionAdapter.this.serializerProvider.get();
+          final ChangeConverter converter = WorkbenchMarkerResolutionAdapter.this.converterFactory.create(WorkbenchMarkerResolutionAdapter.this.primaryResolution.getLabel(), null, WorkbenchMarkerResolutionAdapter.this.issueAcceptor);
+          final Function1<IMarker, IProject> _function = (IMarker it) -> {
+            return it.getResource().getProject();
+          };
+          final Map<IProject, List<IMarker>> grouped = IterableExtensions.<IProject, IMarker>groupBy(((Iterable<? extends IMarker>)Conversions.doWrapArray(markers)), _function);
+          final Consumer<Pair<EObject, IssueResolution>> _function_1 = (Pair<EObject, IssueResolution> it) -> {
             monitor.setTaskName("Applying resolution");
-            WorkbenchMarkerResolutionAdapter.this.run(it.getKey(), it.getValue(), monitor);
+            WorkbenchMarkerResolutionAdapter.this.run(it.getKey(), it.getValue(), serializer, monitor);
             monitor.internalWorked(1);
           };
-          WorkbenchMarkerResolutionAdapter.this.collectResolutions(monitor, markers).forEach(_function);
+          WorkbenchMarkerResolutionAdapter.this.collectResolutions(monitor, grouped).forEach(_function_1);
+          serializer.applyModifications(converter);
+          final Change ltkChange = converter.getChange();
+          ltkChange.initializeValidationData(monitor);
+          new PerformChangeOperation(ltkChange).run(monitor);
           monitor.done();
         }
       }.run(monitor);
@@ -111,36 +138,26 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
     }
   }
   
-  @Override
-  public void run(final IMarker marker) {
-    boolean _exists = marker.exists();
-    boolean _not = (!_exists);
-    if (_not) {
-      return;
-    }
-    final Pair<EObject, IssueResolution> resolutionData = this.resolution(marker);
-    NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-    this.run(resolutionData.getKey(), resolutionData.getValue(), _nullProgressMonitor);
-  }
-  
-  public List<Pair<EObject, IssueResolution>> collectResolutions(final IProgressMonitor monitor, final IMarker... markers) {
-    final Function1<IMarker, Pair<EObject, IssueResolution>> _function = (IMarker marker) -> {
-      Pair<EObject, IssueResolution> _xblockexpression = null;
-      {
+  public List<Pair<EObject, IssueResolution>> collectResolutions(final IProgressMonitor monitor, final Map<IProject, List<IMarker>> markersByProject) {
+    final ArrayList<Pair<EObject, IssueResolution>> result = CollectionLiterals.<Pair<EObject, IssueResolution>>newArrayList();
+    final BiConsumer<IProject, List<IMarker>> _function = (IProject proj, List<IMarker> markers) -> {
+      final ResourceSet resSet = this.resSetProvider.get(proj);
+      final Function1<IMarker, Pair<EObject, IssueResolution>> _function_1 = (IMarker marker) -> {
         boolean _isCanceled = monitor.isCanceled();
         if (_isCanceled) {
           throw new OperationCanceledException();
         }
-        _xblockexpression = this.resolution(marker);
-      }
-      return _xblockexpression;
+        return this.resolution(marker, resSet);
+      };
+      result.addAll(IterableExtensions.<Pair<EObject, IssueResolution>>toList(IterableExtensions.<Pair<EObject, IssueResolution>>filterNull(ListExtensions.<IMarker, Pair<EObject, IssueResolution>>map(markers, _function_1))));
     };
-    return IterableExtensions.<Pair<EObject, IssueResolution>>toList(IterableExtensions.<Pair<EObject, IssueResolution>>filterNull(ListExtensions.<IMarker, Pair<EObject, IssueResolution>>map(((List<IMarker>)Conversions.doWrapArray(markers)), _function)));
+    markersByProject.forEach(_function);
+    return result;
   }
   
-  public Pair<EObject, IssueResolution> resolution(final IMarker marker) {
+  public Pair<EObject, IssueResolution> resolution(final IMarker marker, final ResourceSet resSet) {
     final URI uri = this.issueUtil.getUriToProblem(marker);
-    final Resource resource = this.resSetProvider.get(marker.getResource().getProject()).getResource(uri.trimFragment(), true);
+    final Resource resource = resSet.getResource(uri.trimFragment(), true);
     final EObject targetObject = resource.getEObject(uri.fragment());
     if ((targetObject != null)) {
       final Issue issue = this.issueUtil.createIssue(marker);
@@ -154,9 +171,9 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
         WorkbenchMarkerResolutionAdapter.LOG.warn(_plus);
       }
       IModification _modification = resolution.getModification();
-      if ((_modification instanceof IContextFreeModification.PreInitializedModification)) {
+      if ((_modification instanceof IMultiModification.PreInitializedModification)) {
         IModification _modification_1 = resolution.getModification();
-        ((IContextFreeModification.PreInitializedModification) _modification_1).init(targetObject);
+        ((IMultiModification.PreInitializedModification) _modification_1).init(targetObject);
       }
       return Pair.<EObject, IssueResolution>of(targetObject, resolution);
     }
@@ -169,27 +186,17 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
   @Inject
   private LtkIssueAcceptor issueAcceptor;
   
-  public void run(final EObject targetObject, final IssueResolution resolution, final IProgressMonitor monitor) {
-    try {
-      final ChangeSerializer serializer = this.serializerProvider.get();
-      final ChangeConverter converter = this.converterFactory.create(resolution.getLabel(), null, this.issueAcceptor);
-      final IChangeSerializer.IModification<EObject> _function = (EObject it) -> {
-        IModification _modification = resolution.getModification();
-        ((IContextFreeModification) _modification).apply(targetObject);
-      };
-      serializer.<EObject>addModification(targetObject, _function);
-      serializer.applyModifications(converter);
-      final Change ltkChange = converter.getChange();
-      ltkChange.initializeValidationData(monitor);
-      new PerformChangeOperation(ltkChange).run(monitor);
-      String _label = resolution.getLabel();
-      String _plus = ("Resolution applied for " + _label);
-      String _plus_1 = (_plus + " in ");
-      String _plus_2 = (_plus_1 + targetObject);
-      WorkbenchMarkerResolutionAdapter.LOG.debug(_plus_2);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void run(final EObject targetObject, final IssueResolution resolution, final IChangeSerializer serializer, final IProgressMonitor monitor) {
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      IModification _modification = resolution.getModification();
+      ((IMultiModification) _modification).apply(targetObject);
+    };
+    serializer.<Resource>addModification(targetObject.eResource(), _function);
+    String _label = resolution.getLabel();
+    String _plus = ("Resolution applied for " + _label);
+    String _plus_1 = (_plus + " in ");
+    String _plus_2 = (_plus_1 + targetObject);
+    WorkbenchMarkerResolutionAdapter.LOG.debug(_plus_2);
   }
   
   @Override

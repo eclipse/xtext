@@ -26,7 +26,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
-import org.eclipse.xtext.ui.editor.model.edit.IContextFreeModification;
+import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
 
@@ -98,7 +98,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 			return emptyResult;
 		Iterable<IssueResolution> resolutions = getResolutionProvider().getResolutions(issue);
 		boolean isMultiFix = StreamSupport.stream(resolutions.spliterator(), false)
-				.allMatch((res) -> res.getModification() instanceof IContextFreeModification);
+				.allMatch((res) -> res.getModification() instanceof IMultiModification);
 		if (isMultiFix) {
 			// TODO report a warning if there is a mixup between context and no context modifications
 			return getAdaptedWorkbenchResolutions(Lists.newArrayList(resolutions), marker);
