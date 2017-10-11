@@ -147,7 +147,7 @@ public class ResourceRenameTest extends AbstractResourceRelocationTest {
     _builder_1.append("element Y {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("ref X");
+    _builder_1.append("ref bar.X");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

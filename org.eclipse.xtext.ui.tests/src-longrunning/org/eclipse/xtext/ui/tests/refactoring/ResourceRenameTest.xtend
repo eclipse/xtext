@@ -95,7 +95,7 @@ class ResourceRenameTest extends AbstractResourceRelocationTest {
 		val y = file('foo/Y.fileawaretestlanguage', '''
 			package foo
 			element Y {
-				ref X
+				ref bar.X
 			}
 		''')	
 		performRename(x.parent, 'baz')
