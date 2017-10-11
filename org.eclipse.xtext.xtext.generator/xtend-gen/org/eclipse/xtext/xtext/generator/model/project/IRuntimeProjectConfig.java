@@ -20,4 +20,14 @@ public interface IRuntimeProjectConfig extends IBundleProjectConfig {
   public abstract IXtextGeneratorFileSystemAccess getEcoreModel();
   
   public abstract String getEcoreModelFolder();
+  
+  /**
+   * @since 2.13
+   */
+  public abstract String getXbaseLibVersionLowerBound();
+  
+  /**
+   * @since 2.13
+   */
+  public abstract String getXtendLibVersionLowerBound();
 }

@@ -121,7 +121,10 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
       boolean _tripleNotEquals = (_manifest != null);
       if (_tripleNotEquals) {
         Set<String> _requiredBundles = this.getProjectConfig().getRuntime().getManifest().getRequiredBundles();
-        _requiredBundles.add("org.eclipse.xtext.xbase.lib");
+        String _xbaseLibVersionLowerBound = this.getProjectConfig().getRuntime().getXbaseLibVersionLowerBound();
+        String _plus = ("org.eclipse.xtext.xbase.lib;bundle-version=\"" + _xbaseLibVersionLowerBound);
+        String _plus_1 = (_plus + "\"");
+        _requiredBundles.add(_plus_1);
       }
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
       if (_isGenerateXtendStub) {

@@ -50,7 +50,10 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
       if (_isGenerateXtendStub) {
         Set<String> _requiredBundles = this.getProjectConfig().getRuntime().getManifest().getRequiredBundles();
-        _requiredBundles.add("org.eclipse.xtend.lib");
+        String _xtendLibVersionLowerBound = this.getProjectConfig().getRuntime().getXtendLibVersionLowerBound();
+        String _plus = ("org.eclipse.xtend.lib;bundle-version=\"" + _xtendLibVersionLowerBound);
+        String _plus_1 = (_plus + "\"");
+        _requiredBundles.add(_plus_1);
       }
       this.getProjectConfig().getRuntime().getManifest().getImportedPackages().add("org.apache.log4j");
     }
@@ -62,7 +65,10 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
       boolean _isGenerateXtendStub_1 = this.isGenerateXtendStub();
       if (_isGenerateXtendStub_1) {
         Set<String> _requiredBundles_1 = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
-        _requiredBundles_1.add("org.eclipse.xtend.lib");
+        String _xtendLibVersionLowerBound_1 = this.getProjectConfig().getRuntime().getXtendLibVersionLowerBound();
+        String _plus_2 = ("org.eclipse.xtend.lib;bundle-version=\"" + _xtendLibVersionLowerBound_1);
+        String _plus_3 = (_plus_2 + "\"");
+        _requiredBundles_1.add(_plus_3);
       }
       this.getProjectConfig().getEclipsePlugin().getManifest().getImportedPackages().add("org.apache.log4j");
     }

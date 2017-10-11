@@ -205,7 +205,10 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       String _serializerBasePackage = this.getSerializerBasePackage(this.getGrammar());
       _exportedPackages.add(_serializerBasePackage);
       Set<String> _requiredBundles = this.getProjectConfig().getRuntime().getManifest().getRequiredBundles();
-      _requiredBundles.add("org.eclipse.xtext.xbase.lib");
+      String _xbaseLibVersionLowerBound = this.getProjectConfig().getRuntime().getXbaseLibVersionLowerBound();
+      String _plus = ("org.eclipse.xtext.xbase.lib;bundle-version=\"" + _xbaseLibVersionLowerBound);
+      String _plus_1 = (_plus + "\"");
+      _requiredBundles.add(_plus_1);
     }
     this.generateAbstractSemanticSequencer();
     this.generateAbstractSyntacticSequencer();
