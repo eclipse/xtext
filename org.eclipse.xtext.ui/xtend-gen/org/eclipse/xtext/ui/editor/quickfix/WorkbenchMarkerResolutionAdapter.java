@@ -37,6 +37,7 @@ import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
+import org.eclipse.xtext.ui.editor.model.edit.MultiModification;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator;
 import org.eclipse.xtext.ui.refactoring2.ChangeConverter;
@@ -178,9 +179,9 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
         WorkbenchMarkerResolutionAdapter.LOG.warn(_plus);
       }
       IModification _modification = resolution.getModification();
-      if ((_modification instanceof IMultiModification.PreInitializedModification)) {
+      if ((_modification instanceof MultiModification)) {
         IModification _modification_1 = resolution.getModification();
-        ((IMultiModification.PreInitializedModification) _modification_1).init(targetObject);
+        ((MultiModification) _modification_1).init(targetObject);
       }
       return Pair.<EObject, IssueResolution>of(targetObject, resolution);
     }
@@ -196,10 +197,10 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
   public void run(final EObject targetObject, final IssueResolution resolution, final IChangeSerializer serializer, final IProgressMonitor monitor) {
     IModification _modification = resolution.getModification();
     final IMultiModification modification = ((IMultiModification) _modification);
-    if ((modification instanceof IMultiModification.PreInitializedModification)) {
-      final EObject target = ((IMultiModification.PreInitializedModification)modification).getContext().getModificatioTarget();
+    if ((modification instanceof MultiModification)) {
+      final EObject target = ((MultiModification)modification).getContext().getModificatioTarget();
       final IChangeSerializer.IModification<EObject> _function = (EObject it) -> {
-        ((IMultiModification.PreInitializedModification)modification).apply(targetObject);
+        ((MultiModification)modification).apply(targetObject);
       };
       serializer.<EObject>addModification(target, _function);
     } else {

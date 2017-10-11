@@ -28,20 +28,16 @@ public class MultiModificationContext implements IMultiModificationContext {
 	}
 
 	@Override
-	public void applyModification() {
-		if (modification == null) {
-			throw new IllegalStateException("Call setModification() before applying the modification");
-		}
-		modification.apply(toModify);
-	}
-
-	@Override
-	public void setModification(EObject toModify, IMultiModification modification) {
+	public void addModification(EObject toModify, IMultiModification modification) {
 		this.toModify = toModify;
 		this.modification = modification;
 	}
 
 	public EObject getModificatioTarget() {
 		return toModify;
+	}
+
+	public IMultiModification getModification() {
+		return modification;
 	}
 }

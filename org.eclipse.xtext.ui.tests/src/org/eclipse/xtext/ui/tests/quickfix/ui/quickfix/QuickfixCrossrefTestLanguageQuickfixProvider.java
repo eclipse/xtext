@@ -3,7 +3,6 @@ package org.eclipse.xtext.ui.tests.quickfix.ui.quickfix;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
-import org.eclipse.xtext.ui.editor.model.edit.IMultiModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
@@ -28,10 +27,10 @@ public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfi
 
 	@Fix(QuickfixCrossrefTestLanguageValidator.MULTIFIXABLE_ISSUE)
 	public void addDocumentation(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.acceptMulti(issue, "Multi fix", "Multi fix", null, (EObject element, IMultiModificationContext ctx) -> {
+		acceptor.acceptMulti(issue, "Multi fix", "Multi fix", null, (element, ctx) -> {
 			EObject toModify = ctx.getElement();
 			// do other things here
-			ctx.setModification(toModify, (obj) -> {
+			ctx.addModification(toModify, (obj) -> {
 				((Element) obj).setDoc("Better documentation");
 			});
 		});

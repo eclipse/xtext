@@ -14,6 +14,7 @@ import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
 import org.eclipse.xtext.ui.editor.model.edit.IMultiModificationWithContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.MultiModification;
 import org.eclipse.xtext.ui.editor.model.edit.SemanticModificationWrapper;
 import org.eclipse.xtext.validation.Issue;
 
@@ -80,7 +81,7 @@ public class IssueResolutionAcceptor {
 	 */
 	public void acceptMulti(Issue issue, String label, String description, String image, IMultiModification modification, int relevance) {
 		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
-				new IMultiModification.Wrapper(issue.getUriToProblem(), modification), relevance));
+				new MultiModification.Wrapper(issue.getUriToProblem(), modification), relevance));
 	}
 	
 	/**
@@ -101,7 +102,7 @@ public class IssueResolutionAcceptor {
 	 */
 	public void acceptMulti(Issue issue, String label, String description, String image, IMultiModificationWithContext modification, int relevance) {
 		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
-				new IMultiModification.PreInitializedModification(issue.getUriToProblem(), modification), relevance));
+				new MultiModification(issue.getUriToProblem(), modification), relevance));
 	}
 	
 	public List<IssueResolution> getIssueResolutions() {

@@ -29,7 +29,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer
 import org.eclipse.xtext.ui.editor.model.edit.IMultiModification
-import org.eclipse.xtext.ui.editor.model.edit.IMultiModification.PreInitializedModification
+import org.eclipse.xtext.ui.editor.model.edit.MultiModification
 import org.eclipse.xtext.ui.refactoring2.ChangeConverter
 import org.eclipse.xtext.ui.refactoring2.LtkIssueAcceptor
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
@@ -116,8 +116,8 @@ class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution {
 			if (resolution === null) {
 				LOG.warn("Resolution missing for " + issue.code)
 			}
-			if (resolution.modification instanceof PreInitializedModification) {
-				(resolution.modification as PreInitializedModification).init(targetObject)
+			if (resolution.modification instanceof MultiModification) {
+				(resolution.modification as MultiModification).init(targetObject)
 			}
 			return targetObject -> resolution
 		}
@@ -128,7 +128,7 @@ class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution {
 
 	def run(EObject targetObject, IssueResolution resolution, IChangeSerializer serializer, IProgressMonitor monitor) {
 		val modification = resolution.modification as IMultiModification
-		if (modification instanceof PreInitializedModification) {
+		if (modification instanceof MultiModification) {
 			val target = modification.context.modificatioTarget
 			serializer.addModification(target) [
 				modification.apply(targetObject)

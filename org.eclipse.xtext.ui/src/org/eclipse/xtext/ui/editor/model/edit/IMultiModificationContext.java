@@ -14,10 +14,8 @@ import org.eclipse.emf.ecore.EObject;
  * @author dhuebner - Initial contribution and API
  */
 public interface IMultiModificationContext {
-	
+
 	public EObject getElement();
 
-	public void applyModification();
-
-	public void setModification(EObject toModify, IMultiModification modification);
+	public void addModification(EObject toModify, IMultiModification modification);
 }

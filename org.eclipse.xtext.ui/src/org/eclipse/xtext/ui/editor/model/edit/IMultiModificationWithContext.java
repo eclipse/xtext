@@ -17,7 +17,7 @@ public interface IMultiModificationWithContext {
 	
 	/**
 	 *	@param element the element to provide a QuickFix for. Could also be requested using {@link IMultiModificationContext#getElement()}
-	 *	@param context add modification to this context using {@link IMultiModificationContext#setModification(EObject, IMultiModification)}
+	 *	@param context add modification to this context using {@link IMultiModificationContext#addModification(EObject, IMultiModification)}
 	 */
 	void apply(EObject element, IMultiModificationContext context);
 }
