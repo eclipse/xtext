@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.model.edit;
 import org.eclipse.emf.ecore.EObject;
 
 /**
+ * @since 2.13
  * @author dhuebner - Initial contribution and API
  */
 public interface IMultiModificationContext {
