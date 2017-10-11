@@ -88,7 +88,8 @@ class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution {
 		}.run(monitor)
 	}
 
-	def List<Pair<EObject, IssueResolution>> collectResolutions(IProgressMonitor monitor, Map<IProject, List<IMarker>> markersByProject) {
+	def List<Pair<EObject, IssueResolution>> collectResolutions(IProgressMonitor monitor,
+		Map<IProject, List<IMarker>> markersByProject) {
 		val result = newArrayList
 		markersByProject.forEach [ proj, markers |
 			val resSet = resSetProvider.get(proj)
@@ -125,11 +126,17 @@ class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution {
 	@Inject LtkIssueAcceptor issueAcceptor
 
 	def run(EObject targetObject, IssueResolution resolution, IChangeSerializer serializer, IProgressMonitor monitor) {
-		serializer.addModification(targetObject.eResource) [
-			// TODO for multi with ctx get the toModify object
-			(resolution.modification as IMultiModification).apply(targetObject)
-		]
-
+		val modification = resolution.modification as IMultiModification
+		if (modification instanceof PreInitializedModification) {
+			val target = modification.context.modificatioTarget
+			serializer.addModification(target) [
+				modification.apply(targetObject)
+			]
+		} else {
+			serializer.addModification(targetObject.eResource) [
+				modification.apply(targetObject)
+			]
+		}
 		LOG.debug("Resolution applied for " + resolution.label + " in " + targetObject)
 	}
 

@@ -40,4 +40,8 @@ public class MultiModificationContext implements IMultiModificationContext {
 		this.toModify = toModify;
 		this.modification = modification;
 	}
+
+	public EObject getModificatioTarget() {
+		return toModify;
+	}
 }

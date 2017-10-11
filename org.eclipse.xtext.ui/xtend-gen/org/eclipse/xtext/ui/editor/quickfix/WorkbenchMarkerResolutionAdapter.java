@@ -187,11 +187,20 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
   private LtkIssueAcceptor issueAcceptor;
   
   public void run(final EObject targetObject, final IssueResolution resolution, final IChangeSerializer serializer, final IProgressMonitor monitor) {
-    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
-      IModification _modification = resolution.getModification();
-      ((IMultiModification) _modification).apply(targetObject);
-    };
-    serializer.<Resource>addModification(targetObject.eResource(), _function);
+    IModification _modification = resolution.getModification();
+    final IMultiModification modification = ((IMultiModification) _modification);
+    if ((modification instanceof IMultiModification.PreInitializedModification)) {
+      final EObject target = ((IMultiModification.PreInitializedModification)modification).getContext().getModificatioTarget();
+      final IChangeSerializer.IModification<EObject> _function = (EObject it) -> {
+        ((IMultiModification.PreInitializedModification)modification).apply(targetObject);
+      };
+      serializer.<EObject>addModification(target, _function);
+    } else {
+      final IChangeSerializer.IModification<Resource> _function_1 = (Resource it) -> {
+        modification.apply(targetObject);
+      };
+      serializer.<Resource>addModification(targetObject.eResource(), _function_1);
+    }
     String _label = resolution.getLabel();
     String _plus = ("Resolution applied for " + _label);
     String _plus_1 = (_plus + " in ");

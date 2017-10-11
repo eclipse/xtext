@@ -35,6 +35,10 @@ public interface IMultiModification {
 			modification.apply(context);
 		}
 
+		public MultiModificationContext getContext() {
+			return context;
+		}
+
 		@Override
 		public void apply(IModificationContext ctx) throws Exception {
 			// TODO should throw an unsupported operation exception
