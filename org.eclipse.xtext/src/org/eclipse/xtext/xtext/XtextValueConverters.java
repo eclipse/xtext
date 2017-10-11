@@ -40,16 +40,27 @@ public class XtextValueConverters extends DefaultTerminalConverters {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
 			protected String internalToValue(String string, INode node) throws ValueConverterException {
-				StringBuilder result = new StringBuilder();
-				for(ILeafNode leaf: node.getLeafNodes()) {
-					if (!leaf.isHidden()) {
-						if (leaf.getGrammarElement() instanceof Keyword)
-							result.append(leaf.getText());
-						else
-							result.append(ID().toValue(leaf.getText(), leaf));
+				if (node != null) {
+					StringBuilder result = new StringBuilder();
+					for (ILeafNode leaf : node.getLeafNodes()) {
+						if (!leaf.isHidden()) {
+							if (leaf.getGrammarElement() instanceof Keyword)
+								result.append(leaf.getText());
+							else
+								result.append(ID().toValue(leaf.getText(), leaf));
+						}
 					}
+					return result.toString();
+				} else {
+					String[] splitted = string.split("\\.");
+					StringBuilder result = new StringBuilder(string.length());
+					for (int i = 0; i < splitted.length; i++) {
+						if (i != 0)
+							result.append('.');
+						result.append(ID().toValue(splitted[i], null));
+					}
+					return result.toString();
 				}
-				return result.toString();
 			}
 
 			@Override
