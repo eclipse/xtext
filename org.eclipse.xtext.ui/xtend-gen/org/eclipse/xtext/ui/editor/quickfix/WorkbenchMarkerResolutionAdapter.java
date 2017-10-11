@@ -11,7 +11,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -114,22 +114,29 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
         @Override
         protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
           monitor.beginTask("Applying resolutions", ((List<IMarker>)Conversions.doWrapArray(markers)).size());
-          final ChangeSerializer serializer = WorkbenchMarkerResolutionAdapter.this.serializerProvider.get();
-          final ChangeConverter converter = WorkbenchMarkerResolutionAdapter.this.converterFactory.create(WorkbenchMarkerResolutionAdapter.this.primaryResolution.getLabel(), null, WorkbenchMarkerResolutionAdapter.this.issueAcceptor);
           final Function1<IMarker, IProject> _function = (IMarker it) -> {
             return it.getResource().getProject();
           };
           final Map<IProject, List<IMarker>> grouped = IterableExtensions.<IProject, IMarker>groupBy(((Iterable<? extends IMarker>)Conversions.doWrapArray(markers)), _function);
-          final Consumer<Pair<EObject, IssueResolution>> _function_1 = (Pair<EObject, IssueResolution> it) -> {
-            monitor.setTaskName("Applying resolution");
-            WorkbenchMarkerResolutionAdapter.this.run(it.getKey(), it.getValue(), serializer, monitor);
-            monitor.internalWorked(1);
+          final BiConsumer<IProject, List<Pair<EObject, IssueResolution>>> _function_1 = (IProject proj, List<Pair<EObject, IssueResolution>> resolutions) -> {
+            try {
+              final ChangeSerializer serializer = WorkbenchMarkerResolutionAdapter.this.serializerProvider.get();
+              final ChangeConverter converter = WorkbenchMarkerResolutionAdapter.this.converterFactory.create(WorkbenchMarkerResolutionAdapter.this.primaryResolution.getLabel(), null, WorkbenchMarkerResolutionAdapter.this.issueAcceptor);
+              monitor.setTaskName("Applying resolution");
+              final Consumer<Pair<EObject, IssueResolution>> _function_2 = (Pair<EObject, IssueResolution> it) -> {
+                WorkbenchMarkerResolutionAdapter.this.run(it.getKey(), it.getValue(), serializer, monitor);
+              };
+              resolutions.forEach(_function_2);
+              monitor.internalWorked(1);
+              serializer.applyModifications(converter);
+              final Change ltkChange = converter.getChange();
+              ltkChange.initializeValidationData(monitor);
+              new PerformChangeOperation(ltkChange).run(monitor);
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
           };
           WorkbenchMarkerResolutionAdapter.this.collectResolutions(monitor, grouped).forEach(_function_1);
-          serializer.applyModifications(converter);
-          final Change ltkChange = converter.getChange();
-          ltkChange.initializeValidationData(monitor);
-          new PerformChangeOperation(ltkChange).run(monitor);
           monitor.done();
         }
       }.run(monitor);
@@ -138,8 +145,8 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
     }
   }
   
-  public List<Pair<EObject, IssueResolution>> collectResolutions(final IProgressMonitor monitor, final Map<IProject, List<IMarker>> markersByProject) {
-    final ArrayList<Pair<EObject, IssueResolution>> result = CollectionLiterals.<Pair<EObject, IssueResolution>>newArrayList();
+  public LinkedHashMap<IProject, List<Pair<EObject, IssueResolution>>> collectResolutions(final IProgressMonitor monitor, final Map<IProject, List<IMarker>> markersByProject) {
+    final LinkedHashMap<IProject, List<Pair<EObject, IssueResolution>>> result = CollectionLiterals.<IProject, List<Pair<EObject, IssueResolution>>>newLinkedHashMap();
     final BiConsumer<IProject, List<IMarker>> _function = (IProject proj, List<IMarker> markers) -> {
       final ResourceSet resSet = this.resSetProvider.get(proj);
       final Function1<IMarker, Pair<EObject, IssueResolution>> _function_1 = (IMarker marker) -> {
@@ -149,7 +156,7 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
         }
         return this.resolution(marker, resSet);
       };
-      result.addAll(IterableExtensions.<Pair<EObject, IssueResolution>>toList(IterableExtensions.<Pair<EObject, IssueResolution>>filterNull(ListExtensions.<IMarker, Pair<EObject, IssueResolution>>map(markers, _function_1))));
+      result.put(proj, IterableExtensions.<Pair<EObject, IssueResolution>>toList(IterableExtensions.<Pair<EObject, IssueResolution>>filterNull(ListExtensions.<IMarker, Pair<EObject, IssueResolution>>map(markers, _function_1))));
     };
     markersByProject.forEach(_function);
     return result;

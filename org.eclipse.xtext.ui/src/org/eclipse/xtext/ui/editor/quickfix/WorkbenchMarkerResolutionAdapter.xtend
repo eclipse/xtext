@@ -71,29 +71,30 @@ class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution {
 			override protected execute(
 				IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
 				monitor.beginTask("Applying resolutions", markers.size)
-				val serializer = serializerProvider.get()
-				val converter = converterFactory.create(primaryResolution.label, null, issueAcceptor)
 				val grouped = markers.groupBy[resource.project]
-				collectResolutions(monitor, grouped).forEach [
+				collectResolutions(monitor, grouped).forEach [ proj, resolutions |
+					val serializer = serializerProvider.get()
+					val converter = converterFactory.create(primaryResolution.label, null, issueAcceptor)
 					monitor.taskName = "Applying resolution"
-					run(it.key, it.value, serializer, monitor)
+					resolutions.forEach [
+						run(it.key, it.value, serializer, monitor)
+					]
 					monitor.internalWorked(1)
+					serializer.applyModifications(converter)
+					val ltkChange = converter.change
+					ltkChange.initializeValidationData(monitor)
+					new PerformChangeOperation(ltkChange).run(monitor)
 				]
-				serializer.applyModifications(converter)
-				val ltkChange = converter.change
-				ltkChange.initializeValidationData(monitor)
-				new PerformChangeOperation(ltkChange).run(monitor)
 				monitor.done
 			}
 		}.run(monitor)
 	}
 
-	def List<Pair<EObject, IssueResolution>> collectResolutions(IProgressMonitor monitor,
-		Map<IProject, List<IMarker>> markersByProject) {
-		val result = newArrayList
+	def collectResolutions(IProgressMonitor monitor, Map<IProject, List<IMarker>> markersByProject) {
+		val result = newLinkedHashMap
 		markersByProject.forEach [ proj, markers |
 			val resSet = resSetProvider.get(proj)
-			result.addAll(markers.map [ marker |
+			result.put(proj, markers.map [ marker |
 				if (monitor.isCanceled) {
 					throw new OperationCanceledException()
 				}
