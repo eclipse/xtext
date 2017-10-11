@@ -536,7 +536,9 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 					stream = URIConverter.INSTANCE.createOutputStream(toEmfUri(casted.getURI()));
 					stream.write(bytes, 0, byteBuffer.limit());
 					URIInfo info = (URIInfo) getElementInfo(element);
-					info.synchronizationStamp = getModificationStamp(element);
+					if (info != null) {
+						info.synchronizationStamp = getModificationStamp(element);
+					}
 				} finally {
 					monitor.done();
 				}
