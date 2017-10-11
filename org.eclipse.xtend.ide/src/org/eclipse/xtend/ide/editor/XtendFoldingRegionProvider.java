@@ -26,6 +26,7 @@ import org.eclipse.xtext.ui.editor.folding.IFoldingRegionAcceptor;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionAcceptorExtension;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.ui.editor.FoldingPreferences;
 
 import com.google.inject.Inject;
@@ -33,6 +34,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
+ * @author Christian Dietrich
  */
 public class XtendFoldingRegionProvider extends DefaultFoldingRegionProvider {
 	
@@ -57,7 +59,11 @@ public class XtendFoldingRegionProvider extends DefaultFoldingRegionProvider {
 				|| clazz == XtendPackage.Literals.XTEND_ANNOTATION_TYPE
 				|| clazz == XtendPackage.Literals.ANONYMOUS_CLASS
 				|| clazz == XtendPackage.Literals.XTEND_FUNCTION 
-				|| clazz == XtendPackage.Literals.XTEND_CONSTRUCTOR;
+				|| clazz == XtendPackage.Literals.XTEND_CONSTRUCTOR
+				|| clazz == XbasePackage.Literals.XCLOSURE
+				|| clazz == XbasePackage.Literals.XSET_LITERAL
+				|| clazz == XbasePackage.Literals.XLIST_LITERAL
+				|| clazz == XtendPackage.Literals.RICH_STRING;
 	}
 	
 	@Override
