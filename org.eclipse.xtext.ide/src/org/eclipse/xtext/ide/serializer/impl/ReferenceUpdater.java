@@ -82,12 +82,18 @@ public class ReferenceUpdater implements IReferenceUpdater {
 			List<?> targets = (List<?>) value;
 			int i = current.getIndexInContainingFeature();
 			EObject t = (EObject) targets.get(i);
-			return new UpdatableReference(owner, ref, i, t, crossRef, current);
+			if (t != null && !t.eIsProxy()) {
+				return new UpdatableReference(owner, ref, i, t, crossRef, current);
+			}
 		} else if (value instanceof EObject) {
-			return new UpdatableReference(owner, ref, -1, (EObject) value, crossRef, current);
+			EObject t = (EObject) value;
+			if (!t.eIsProxy()) {
+				return new UpdatableReference(owner, ref, -1, t, crossRef, current);
+			}
 		} else {
 			throw new IllegalStateException();
 		}
+		return null;
 	}
 
 	public Delta findContainingDelta(Deltas deltas, EObject obj) {
@@ -169,7 +175,7 @@ public class ReferenceUpdater implements IReferenceUpdater {
 			EStructuralFeature feature = current.getContainingFeature();
 			if (feature instanceof EReference && !((EReference) feature).isContainment()) {
 				IUpdatableReference updatable = createUpdatableReference(current);
-				if (needsUpdating(context, updatable)) {
+				if (updatable != null && needsUpdating(context, updatable)) {
 					context.updateReference(updatable);
 				}
 			}
@@ -191,6 +197,8 @@ public class ReferenceUpdater implements IReferenceUpdater {
 			return;
 		}
 		String newName = findValidName(updatable, scope);
-		rewriter.replace(region, newName);
+		if (newName != null) {
+			rewriter.replace(region, newName);
+		}
 	}
 }
