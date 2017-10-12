@@ -166,7 +166,7 @@ public class ProcessorInstanceForJvmTypeProvider {
             Iterables.<URL>addAll(urls, ((Iterable<? extends URL>)Conversions.doWrapArray(_uRLs_1)));
           }
           ClassLoader _classLoader = TransformationContext.class.getClassLoader();
-          final FilteringClassLoader filtered = new FilteringClassLoader(_classLoader, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib", "org.eclipse.xtend2.lib", "com.google.guava")));
+          final FilteringClassLoader filtered = new FilteringClassLoader(_classLoader, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib", "org.eclipse.xtend2.lib", "com.google.common")));
           _xblockexpression = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), filtered);
         }
         _xifexpression = _xblockexpression;

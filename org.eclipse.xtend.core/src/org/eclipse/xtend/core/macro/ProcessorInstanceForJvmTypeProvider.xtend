@@ -95,7 +95,7 @@ class ProcessorInstanceForJvmTypeProvider {
 						urls += bootClassloader.URLs
 					}
 					// TODO check this list
-					val filtered = new FilteringClassLoader(TransformationContext.classLoader, #["org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib", "org.eclipse.xtend2.lib", "com.google.guava"])
+					val filtered = new FilteringClassLoader(TransformationContext.classLoader, #["org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib", "org.eclipse.xtend2.lib", "com.google.common"])
 					new URLClassLoader(urls, filtered)
 				} else {
 					jvmTypeLoader

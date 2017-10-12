@@ -7,11 +7,11 @@
  */
 package org.eclipse.xtend.core.macro;
 
+import com.google.common.collect.ImmutableList;
 import java.net.URL;
 import java.util.List;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
@@ -29,11 +29,17 @@ public class FilteringClassLoader extends ClassLoader {
   
   public FilteringClassLoader(final ClassLoader parent, final List<String> includes) {
     super(parent);
-    this.includes = includes;
     final Function1<String, String> _function = (String it) -> {
+      return (it + Character.valueOf(FilteringClassLoader.DOT));
+    };
+    this.includes = ImmutableList.<String>copyOf(ListExtensions.<String, String>map(includes, _function));
+    final Function1<String, String> _function_1 = (String it) -> {
       return it.replace(FilteringClassLoader.DOT, FilteringClassLoader.SLASH);
     };
-    this.resourceIncludes = ListExtensions.<String, String>map(includes, _function);
+    final Function1<String, String> _function_2 = (String it) -> {
+      return (it + Character.valueOf(FilteringClassLoader.SLASH));
+    };
+    this.resourceIncludes = ImmutableList.<String>copyOf(ListExtensions.<String, String>map(ListExtensions.<String, String>map(includes, _function_1), _function_2));
   }
   
   @Override
@@ -83,16 +89,30 @@ public class FilteringClassLoader extends ClassLoader {
   }
   
   private boolean isValidClass(final String name) {
-    final Function1<String, Boolean> _function = (String it) -> {
-      return Boolean.valueOf(name.startsWith((it + Character.valueOf(FilteringClassLoader.DOT))));
-    };
-    return IterableExtensions.<String>exists(this.includes, _function);
+    boolean _xblockexpression = false;
+    {
+      for (final String it : this.includes) {
+        boolean _startsWith = name.startsWith(it);
+        if (_startsWith) {
+          return true;
+        }
+      }
+      _xblockexpression = false;
+    }
+    return _xblockexpression;
   }
   
   private boolean isValidResource(final String name) {
-    final Function1<String, Boolean> _function = (String it) -> {
-      return Boolean.valueOf(name.startsWith((it + Character.valueOf(FilteringClassLoader.SLASH))));
-    };
-    return IterableExtensions.<String>exists(this.resourceIncludes, _function);
+    boolean _xblockexpression = false;
+    {
+      for (final String it : this.resourceIncludes) {
+        boolean _startsWith = name.startsWith(it);
+        if (_startsWith) {
+          return true;
+        }
+      }
+      _xblockexpression = false;
+    }
+    return _xblockexpression;
   }
 }
