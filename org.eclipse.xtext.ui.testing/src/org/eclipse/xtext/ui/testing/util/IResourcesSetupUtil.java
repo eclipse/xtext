@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -331,6 +332,18 @@ public class IResourcesSetupUtil {
 	
 	public static void waitForBuild() {
 		waitForBuild(null);
+	}
+	
+	public static void setAutobuild(boolean enable) {
+		IWorkspaceDescription description = ResourcesPlugin.getWorkspace().getDescription();
+		if (description.isAutoBuilding() != enable) {
+			description.setAutoBuilding(enable);
+			try {
+				ResourcesPlugin.getWorkspace().setDescription(description);
+			} catch (CoreException e) {
+				Exceptions.sneakyThrow(e);
+			}
+		}
 	}
 	
 	public static void waitForBuild(IProgressMonitor monitor) {

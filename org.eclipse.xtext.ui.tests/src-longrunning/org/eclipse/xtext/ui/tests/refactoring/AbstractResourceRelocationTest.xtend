@@ -37,6 +37,7 @@ abstract class AbstractResourceRelocationTest {
 	
 	@Before
 	def void setup() {
+		autobuild = false
 		project = createProject('test')
 		addNature(project, XtextProjectHelper.NATURE_ID)
 		addBuilder(project, XtextProjectHelper.BUILDER_ID)
@@ -45,6 +46,7 @@ abstract class AbstractResourceRelocationTest {
 	@After
 	def void teardown() {
 		project.delete(true, true, new NullProgressMonitor)
+		autobuild = true
 	}
 	
 	protected def file(String name, CharSequence content) {
@@ -80,6 +82,7 @@ abstract class AbstractResourceRelocationTest {
 		val change = refactoring.createChange(new NullProgressMonitor)
 		change.perform(new NullProgressMonitor)
 		project.refreshLocal(IResource.DEPTH_INFINITE, null)
+		project.build(IncrementalProjectBuilder.FULL_BUILD, null)
 	}
 	
 }

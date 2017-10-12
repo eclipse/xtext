@@ -42,6 +42,7 @@ public abstract class AbstractResourceRelocationTest {
   @Before
   public void setup() {
     try {
+      IResourcesSetupUtil.setAutobuild(false);
       this.project = IResourcesSetupUtil.createProject("test");
       IResourcesSetupUtil.addNature(this.project, XtextProjectHelper.NATURE_ID);
       IResourcesSetupUtil.addBuilder(this.project, XtextProjectHelper.BUILDER_ID);
@@ -55,6 +56,7 @@ public abstract class AbstractResourceRelocationTest {
     try {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       this.project.delete(true, true, _nullProgressMonitor);
+      IResourcesSetupUtil.setAutobuild(true);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -118,6 +120,7 @@ public abstract class AbstractResourceRelocationTest {
       NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
       change.perform(_nullProgressMonitor_2);
       this.project.refreshLocal(IResource.DEPTH_INFINITE, null);
+      this.project.build(IncrementalProjectBuilder.FULL_BUILD, null);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
