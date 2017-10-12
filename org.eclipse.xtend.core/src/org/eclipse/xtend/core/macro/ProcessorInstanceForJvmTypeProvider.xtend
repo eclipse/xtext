@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.macro
 import com.google.inject.Singleton
 import java.io.Closeable
 import java.io.IOException
+import java.net.URL
 import java.net.URLClassLoader
 import org.apache.log4j.Logger
 import org.eclipse.emf.common.notify.Notifier
@@ -20,7 +21,6 @@ import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.internal.AlternateJdkLoader
-import java.net.URL
 
 @Singleton
 class ProcessorInstanceForJvmTypeProvider {
@@ -94,7 +94,9 @@ class ProcessorInstanceForJvmTypeProvider {
 					if (bootClassloader instanceof AlternateJdkLoader) {
 						urls += bootClassloader.URLs
 					}
-					new URLClassLoader(urls, TransformationContext.classLoader)
+					// TODO check this list
+					val filtered = new FilteringClassLoader(TransformationContext.classLoader, #["org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib", "org.eclipse.xtend2.lib", "com.google.guava"])
+					new URLClassLoader(urls, filtered)
 				} else {
 					jvmTypeLoader
 				}

@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Collections;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -22,6 +23,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.core.macro.FilteringClassLoader;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtext.common.types.JvmType;
@@ -164,7 +166,8 @@ public class ProcessorInstanceForJvmTypeProvider {
             Iterables.<URL>addAll(urls, ((Iterable<? extends URL>)Conversions.doWrapArray(_uRLs_1)));
           }
           ClassLoader _classLoader = TransformationContext.class.getClassLoader();
-          _xblockexpression = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
+          final FilteringClassLoader filtered = new FilteringClassLoader(_classLoader, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib", "org.eclipse.xtend2.lib", "com.google.guava")));
+          _xblockexpression = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), filtered);
         }
         _xifexpression = _xblockexpression;
       } else {
