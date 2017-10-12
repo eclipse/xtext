@@ -144,7 +144,7 @@ public abstract class AbstractScopeResourceDescriptionsTest {
 	}
 
 	protected void assertLiveModelScopeLocal(boolean enabled) throws IOException {
-		final URI resourceURI = URI.createPlatformResourceURI("test/test." + fileExt.getPrimaryFileExtension(), true);
+		final URI resourceURI = URI.createPlatformResourceURI("test/assertLiveModelScopeLocal." + fileExt.getPrimaryFileExtension(), true);
 		Resource resource = resourceSet.createResource(resourceURI);
 		resource.load(new StringInputStream("stuff foo"), null);
 		Stuff stuffFoo = ((File) resource.getContents().get(0)).getStuff().get(0);
@@ -165,6 +165,7 @@ public abstract class AbstractScopeResourceDescriptionsTest {
 		IProject project = createProject("test");
 		addNature(project, XtextProjectHelper.NATURE_ID);
 		resourceSet = createResourceSet(workspace.getRoot().getProject("test"));
+		waitForBuild();
 	}
 
 	protected abstract ResourceSet createResourceSet(IProject project);
