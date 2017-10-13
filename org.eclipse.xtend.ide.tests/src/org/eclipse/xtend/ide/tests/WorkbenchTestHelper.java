@@ -293,16 +293,7 @@ public class WorkbenchTestHelper extends Assert {
 		if (javaVersion == null) {
 			return JREContainerProvider.PREFERRED_BREE;
 		} else {
-			switch (javaVersion) {
-				case JAVA8:
-					return "JavaSE-1.8";
-				case JAVA7:
-					return "JavaSE-1.7";
-				case JAVA6:
-					return "JavaSE-1.6";
-				default:
-					return "J2SE-1.5";
-			}
+			return javaVersion.getBree();
 		}
 	}
 	
