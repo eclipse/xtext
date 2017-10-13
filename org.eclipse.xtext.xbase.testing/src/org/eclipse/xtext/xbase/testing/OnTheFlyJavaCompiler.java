@@ -375,16 +375,7 @@ public class OnTheFlyJavaCompiler {
 			GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
 			javaVersion = generatorConfig.getJavaSourceVersion();
 		}
-		switch (javaVersion) {
-			case JAVA8:
-				return "-1.8";
-			case JAVA7:
-				return "-1.7";
-			case JAVA6:
-				return "-1.6";
-			default:
-				return "-1.5";
-		}
+		return javaVersion.getComplianceLevelArg();
 	}
 
 	protected Main getMain() {
