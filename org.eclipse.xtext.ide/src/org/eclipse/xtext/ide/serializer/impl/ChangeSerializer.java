@@ -11,7 +11,11 @@ import static java.util.stream.Collectors.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -27,11 +31,12 @@ import org.eclipse.xtext.ide.serializer.impl.RelatedResourcesProvider.RelatedRes
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -51,30 +56,50 @@ public class ChangeSerializer implements IChangeSerializer {
 
 	private boolean updateRelatedFiles = true;
 
+	private IProgressMonitor monitor = new NullProgressMonitor();
+
 	private Map<Resource, RecordingResourceUpdater> updaters = Maps.newLinkedHashMap();
 
-	private Multimap<Notifier, IModification<? extends Notifier>> modifications = LinkedHashMultimap.create();
+	private List<Pair<Notifier, IModification<? extends Notifier>>> modifications = Lists.newArrayList();
 
 	@Override
 	public <T extends Notifier> void addModification(T context, IModification<T> modification) {
-		modifications.put(context, modification);
+		modifications.add(Tuples.create(context, modification));
 	}
 
 	@Override
 	public void applyModifications(IAcceptor<IEmfResourceChange> changeAcceptor) {
-		for (Notifier context : modifications.keySet()) {
+		monitor.setTaskName("Preparing Text Changes...");
+		Set<Resource> resources = Sets.newLinkedHashSet();
+		for (Pair<Notifier, IModification<? extends Notifier>> p : modifications) {
+			Notifier context = p.getFirst();
 			if (context instanceof EObject)
-				beginRecordChanges(((EObject) context).eResource());
+				resources.add(((EObject) context).eResource());
 			else if (context instanceof Resource)
-				beginRecordChanges((Resource) context);
-			else if (context instanceof ResourceSet)
-				((ResourceSet) context).getResources().forEach(this::beginRecordChanges);
+				resources.add((Resource) context);
+			else if (context instanceof ResourceSet) {
+				throw new IllegalStateException("Not supported");
+			}
 		}
-		for (Map.Entry<Notifier, IModification<? extends Notifier>> entry : modifications.entries())
-			apply(entry.getKey(), entry.getValue());
+		for (Resource res : resources) {
+			// TODO: use the exact context
+			beginRecordChanges(res);
+		}
+		checkCanceled();
+		for (Pair<Notifier, IModification<? extends Notifier>> entry : modifications) {
+			apply(entry.getFirst(), entry.getSecond());
+		}
+		checkCanceled();
 		endRecordChanges(changeAcceptor);
 	}
 
+	protected void checkCanceled() {
+		if (monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
 	protected <T extends Notifier> void apply(Notifier context, IModification<T> modification) {
 		modification.modify((T) context);
 	}
@@ -132,8 +157,11 @@ public class ChangeSerializer implements IChangeSerializer {
 				updaters.add(updater);
 			}
 		}
+		monitor.beginTask("Creating Text Chnges...", updaters.size());
 		for (ResourceUpdater updater : updaters) {
 			updater.applyChange(deltas, changeAcceptor);
+			monitor.worked(1);
+			checkCanceled();
 		}
 		for (ResourceUpdater updater : updaters) {
 			updater.unload();
@@ -188,6 +216,11 @@ public class ChangeSerializer implements IChangeSerializer {
 	@Override
 	public void setUpdateRelatedFiles(boolean value) {
 		this.updateRelatedFiles = value;
+	}
+
+	@Override
+	public void setProgressMonitor(IProgressMonitor monitor) {
+		this.monitor = monitor;
 	}
 
 }
