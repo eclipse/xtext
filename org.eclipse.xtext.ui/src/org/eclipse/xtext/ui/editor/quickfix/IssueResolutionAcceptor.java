@@ -9,12 +9,14 @@ package org.eclipse.xtext.ui.editor.quickfix;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ui.editor.model.edit.CompositeModificationWrapper;
+import org.eclipse.xtext.ui.editor.model.edit.ICompositeModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
-import org.eclipse.xtext.ui.editor.model.edit.IMultiModificationWithContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
-import org.eclipse.xtext.ui.editor.model.edit.MultiModification;
+import org.eclipse.xtext.ui.editor.model.edit.MultiModificationWrapper;
 import org.eclipse.xtext.ui.editor.model.edit.SemanticModificationWrapper;
 import org.eclipse.xtext.validation.Issue;
 
@@ -67,9 +69,38 @@ public class IssueResolutionAcceptor {
 	 * Use as for a multi-quickfix methods.<br>
 	 * This method will be called multiple times if more than one issue was selected to fix.
 	 * 
+	 * @see IMultiModification
+	 * 
 	 * @since 2.13
 	 */
-	public void acceptMulti(Issue issue, String label, String description, String image, IMultiModification modification) {
+	public <T extends EObject> void acceptMulti(Issue issue, String label, String description, String image,
+			IMultiModification<T> modification) {
+		acceptMulti(issue, label, description, image, modification, 0);
+	}
+	
+	/**
+	 * Use as for a multi-quickfix methods.<br>
+	 * This method will be called multiple times if more than one issue was selected to fix.
+	 * 
+	 * @see IMultiModification
+	 * 
+	 * @since 2.13
+	 */
+	public <T extends EObject> void acceptMulti(Issue issue, String label, String description, String image,
+			IMultiModification<T> modification, int relevance) {
+		MultiModificationWrapper wrapper = new MultiModificationWrapper(issue, modification);
+		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue), wrapper, relevance));
+	}
+
+	/**
+	 * Use as for a multi-quickfix methods.<br>
+	 * This method will be called multiple times if more than one issue was selected to fix.
+	 * 
+	 * @see ICompositeModification
+	 * 
+	 * @since 2.13
+	 */
+	public  <T extends EObject> void acceptMulti(Issue issue, String label, String description, String image, ICompositeModification<T> modification) {
 		acceptMulti(issue, label, description, image, modification, 0);
 	}
 
@@ -77,34 +108,16 @@ public class IssueResolutionAcceptor {
 	 * Use as for a multi-quickfix methods.<br>
 	 * This method will be called multiple times if more than one issue was selected to fix.
 	 * 
-	 * @since 2.13
-	 */
-	public void acceptMulti(Issue issue, String label, String description, String image, IMultiModification modification, int relevance) {
-		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
-				new MultiModification.Wrapper(issue.getUriToProblem(), modification), relevance));
-	}
-	
-	/**
-	 * Use as for a multi-quickfix methods.<br>
-	 * This method will be called multiple times if more than one issue was selected to fix.
+	 * @see ICompositeModification
 	 * 
 	 * @since 2.13
 	 */
-	public void acceptMulti(Issue issue, String label, String description, String image, IMultiModificationWithContext modification) {
-		acceptMulti(issue, label, description, image, modification, 0);
+	public <T extends EObject> void acceptMulti(Issue issue, String label, String description, String image, ICompositeModification<T> modification,
+			int relevance) {
+		CompositeModificationWrapper wrapper = new CompositeModificationWrapper(issue, modification);
+		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue), wrapper, relevance));
 	}
-	
-	/**
-	 * Use as for a multi-quickfix methods.<br>
-	 * This method will be called multiple times if more than one issue was selected to fix.
-	 * 
-	 * @since 2.13
-	 */
-	public void acceptMulti(Issue issue, String label, String description, String image, IMultiModificationWithContext modification, int relevance) {
-		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
-				new MultiModification(issue.getUriToProblem(), modification), relevance));
-	}
-	
+
 	public List<IssueResolution> getIssueResolutions() {
 		return issueResolutions;
 	}

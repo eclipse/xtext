@@ -2,7 +2,6 @@ package org.eclipse.xtext.ui.editor.quickfix;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -26,7 +25,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
-import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
+import org.eclipse.xtext.ui.editor.model.edit.BatchModification.IBatchableModification;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
 
@@ -55,7 +54,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	private IWorkbench workbench;
 
 	@Inject
-	private WorkbenchMarkerResolutionAdapterFactory adapterFactory;
+	private WorkbenchMarkerResolutionAdapter.Factory adapterFactory;
 
 	public IssueUtil getIssueUtil() {
 		return issueUtil;
@@ -96,9 +95,8 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		Issue issue = getIssueUtil().createIssue(marker);
 		if (issue == null)
 			return emptyResult;
-		Iterable<IssueResolution> resolutions = getResolutionProvider().getResolutions(issue);
-		boolean isMultiFix = StreamSupport.stream(resolutions.spliterator(), false)
-				.allMatch((res) -> res.getModification() instanceof IMultiModification);
+		List<IssueResolution> resolutions = getResolutionProvider().getResolutions(issue);
+		boolean isMultiFix = resolutions.stream().allMatch(e -> e.getModification() instanceof IBatchableModification);
 		if (isMultiFix) {
 			// TODO report a warning if there is a mixup between context and no context modifications
 			return getAdaptedWorkbenchResolutions(Lists.newArrayList(resolutions), marker);

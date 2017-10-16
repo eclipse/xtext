@@ -35,10 +35,10 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.ICompositeModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
-import org.eclipse.xtext.ui.editor.model.edit.IMultiModificationWithContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -348,25 +348,25 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 		}
 		
 		@Override
-		public void acceptMulti(Issue issue, String label, String description, String image, IMultiModification modification) {
+		public <T extends EObject> void acceptMulti(Issue issue, String label, String description, String image, ICompositeModification<T> modification) {
 			manager.checkCanceled(monitor);
 			delegate.acceptMulti(issue, label, description, image, modification);
 		}
 		
 		@Override
-		public void acceptMulti(Issue issue, String label, String description, String image, IMultiModification modification, int relevance) {
+		public <T extends EObject> void acceptMulti(Issue issue, String label, String description, String image, ICompositeModification<T> modification, int relevance) {
 			manager.checkCanceled(monitor);
 			delegate.acceptMulti(issue, label, description, image, modification, relevance);
 		}
 		
 		@Override
-		public void acceptMulti(Issue issue, String label, String description, String image, IMultiModificationWithContext modification) {
+		public <T extends EObject>void acceptMulti(Issue issue, String label, String description, String image, IMultiModification<T> modification) {
 			manager.checkCanceled(monitor);
 			delegate.acceptMulti(issue, label, description, image, modification);
 		}
 		
 		@Override
-		public void acceptMulti(Issue issue, String label, String description, String image, IMultiModificationWithContext modification, int relevance) {
+		public <T extends EObject> void acceptMulti(Issue issue, String label, String description, String image, IMultiModification<T> modification, int relevance) {
 			manager.checkCanceled(monitor);
 			delegate.acceptMulti(issue, label, description, image, modification, relevance);
 		}

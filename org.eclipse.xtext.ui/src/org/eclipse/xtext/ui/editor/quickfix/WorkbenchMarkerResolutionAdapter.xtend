@@ -9,31 +9,19 @@ package org.eclipse.xtext.ui.editor.quickfix
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.lang.reflect.InvocationTargetException
-import java.util.List
-import java.util.Map
 import org.apache.log4j.Logger
 import org.eclipse.core.resources.IMarker
-import org.eclipse.core.resources.IProject
-import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.ltk.core.refactoring.PerformChangeOperation
 import org.eclipse.swt.graphics.Image
-import org.eclipse.ui.actions.WorkspaceModifyOperation
+import org.eclipse.ui.IMarkerResolution
 import org.eclipse.ui.views.markers.WorkbenchMarkerResolution
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.ide.serializer.IChangeSerializer
-import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer
-import org.eclipse.xtext.ui.editor.model.edit.IMultiModification
-import org.eclipse.xtext.ui.editor.model.edit.MultiModification
-import org.eclipse.xtext.ui.refactoring2.ChangeConverter
-import org.eclipse.xtext.ui.refactoring2.LtkIssueAcceptor
-import org.eclipse.xtext.ui.resource.IResourceSetProvider
+import org.eclipse.xtext.ui.editor.model.edit.BatchModification
+import org.eclipse.xtext.ui.editor.model.edit.BatchModification.IBatchableModification
 import org.eclipse.xtext.ui.util.IssueUtil
+import org.eclipse.core.runtime.SubMonitor
 
 /**
  *  MarkerResolution which extends WorkbenchMarkerResolution and can be applied on multiple markers.
@@ -43,10 +31,22 @@ import org.eclipse.xtext.ui.util.IssueUtil
  */
 class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution {
 
+	static class Factory {
+		@Inject
+		Provider<WorkbenchMarkerResolutionAdapter> provider
+
+		def IMarkerResolution create(IMarker marker, IssueResolution resolution) {
+			val resolutionFix = provider.get()
+			resolutionFix.primaryResolution = resolution
+			resolutionFix.primaryMarker = marker
+			return resolutionFix
+		}
+
+	}
+
 	@Inject MarkerResolutionGenerator resolutionsGenerator
 	@Inject IssueUtil issueUtil
-	@Inject IResourceSetProvider resSetProvider
-	@Inject Provider<ChangeSerializer> serializerProvider
+	@Inject Provider<BatchModification> batchModificationProvider
 	private final static Logger LOG = Logger.getLogger(WorkbenchMarkerResolutionAdapter);
 	@Accessors IssueResolution primaryResolution
 	@Accessors IMarker primaryMarker
@@ -66,79 +66,41 @@ class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution {
 		run(#[marker], new NullProgressMonitor)
 	}
 
-	override run(IMarker[] markers, IProgressMonitor monitor) {
-		new WorkspaceModifyOperation() {
-			override protected execute(
-				IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
-				monitor.beginTask("Applying resolutions", markers.size)
-				val grouped = markers.groupBy[resource.project]
-				collectResolutions(monitor, grouped).forEach [ proj, resolutions |
-					val serializer = serializerProvider.get()
-					val converter = converterFactory.create(primaryResolution.label, null, issueAcceptor)
-					monitor.taskName = "Applying resolution"
-					resolutions.forEach [
-						run(it.key, it.value, serializer, monitor)
-					]
-					monitor.internalWorked(1)
-					serializer.applyModifications(converter)
-					val ltkChange = converter.change
-					ltkChange.initializeValidationData(monitor)
-					new PerformChangeOperation(ltkChange).run(monitor)
-				]
-				monitor.done
-			}
-		}.run(monitor)
+	override run(IMarker[] markers, IProgressMonitor progressMonitor) {
+		val markersByProject = markers.groupBy[resource.project]
+		val monitor = SubMonitor.convert(progressMonitor)
+		monitor.beginTask("Applying resolutions", markersByProject.size)
+		for (g : markersByProject.entrySet) {
+			val batch = batchModificationProvider.get
+			batch.project = g.key
+			val markersInProject = g.value
+			val resolutions = markersInProject.map[resolution].filterNull.toList
+			monitor.cancelIfNeeded
+			val modifications = resolutions.map[modification].filter(IBatchableModification)
+			monitor.cancelIfNeeded
+			batch.apply(modifications, monitor.newChild(1))
+			monitor.cancelIfNeeded
+		}
+		monitor.done
 	}
 
-	def collectResolutions(IProgressMonitor monitor, Map<IProject, List<IMarker>> markersByProject) {
-		val result = newLinkedHashMap
-		markersByProject.forEach [ proj, markers |
-			val resSet = resSetProvider.get(proj)
-			result.put(proj, markers.map [ marker |
-				if (monitor.isCanceled) {
-					throw new OperationCanceledException()
-				}
-				return marker.resolution(resSet)
-			].filterNull.toList)
-		]
-		return result
-	}
-
-	def resolution(IMarker marker, ResourceSet resSet) {
-		val uri = issueUtil.getUriToProblem(marker)
-		val resource = resSet.getResource(uri.trimFragment, true)
-		val targetObject = resource.getEObject(uri.fragment)
-		if (targetObject !== null) {
-			val issue = issueUtil.createIssue(marker)
-			val resolution = resolutionsGenerator.resolutionProvider.getResolutions(issue).filter [
-				isSameResolution(primaryResolution)
-			].head
-			if (resolution === null) {
-				LOG.warn("Resolution missing for " + issue.code)
-			}
-			if (resolution.modification instanceof MultiModification) {
-				(resolution.modification as MultiModification).init(targetObject)
-			}
-			return targetObject -> resolution
+	def protected cancelIfNeeded(IProgressMonitor monitor) {
+		if (monitor.isCanceled) {
+			throw new OperationCanceledException()
 		}
 	}
 
-	@Inject ChangeConverter.Factory converterFactory
-	@Inject LtkIssueAcceptor issueAcceptor
-
-	def run(EObject targetObject, IssueResolution resolution, IChangeSerializer serializer, IProgressMonitor monitor) {
-		val modification = resolution.modification as IMultiModification
-		if (modification instanceof MultiModification) {
-			val target = modification.context.modificatioTarget
-			serializer.addModification(target) [
-				modification.apply(targetObject)
-			]
-		} else {
-			serializer.addModification(targetObject.eResource) [
-				modification.apply(targetObject)
-			]
+	def resolution(IMarker marker) {
+		if (!marker.exists) {
+			return null;
 		}
-		LOG.debug("Resolution applied for " + resolution.label + " in " + targetObject)
+		val issue = issueUtil.createIssue(marker)
+		val resolutions = resolutionsGenerator.resolutionProvider.getResolutions(issue)
+		val resolution = resolutions.filter[isSameResolution(primaryResolution)].head
+		if (resolution === null) {
+			LOG.warn("Resolution missing for " + issue.code)
+		}
+		return resolution
 	}
 
 	override String getDescription() {

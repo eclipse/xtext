@@ -334,9 +334,14 @@ public class IResourcesSetupUtil {
 		waitForBuild(null);
 	}
 	
-	public static void setAutobuild(boolean enable) {
+	public static boolean isAutobuild(boolean enable) {
+		return ResourcesPlugin.getWorkspace().getDescription().isAutoBuilding();
+	}
+
+	public static boolean setAutobuild(boolean enable) {
 		IWorkspaceDescription description = ResourcesPlugin.getWorkspace().getDescription();
-		if (description.isAutoBuilding() != enable) {
+		boolean oldValue = description.isAutoBuilding();
+		if (oldValue != enable) {
 			description.setAutoBuilding(enable);
 			try {
 				ResourcesPlugin.getWorkspace().setDescription(description);
@@ -344,6 +349,7 @@ public class IResourcesSetupUtil {
 				Exceptions.sneakyThrow(e);
 			}
 		}
+		return oldValue;
 	}
 	
 	public static void waitForBuild(IProgressMonitor monitor) {
