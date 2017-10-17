@@ -175,7 +175,7 @@ public class ChangeSerializer implements IChangeSerializer {
 	}
 
 	@Override
-	public ITextRegionDiffBuilder getModifyableDocument(Resource resource) {
+	public ITextRegionDiffBuilder getModifiableDocument(Resource resource) {
 		RecordingResourceUpdater updater = this.updaters.get(resource);
 		if (updater instanceof RecordingXtextResourceUpdater) {
 			return ((RecordingXtextResourceUpdater) updater).getDocument();

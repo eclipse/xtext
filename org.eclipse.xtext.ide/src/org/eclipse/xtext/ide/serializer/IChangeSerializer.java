@@ -52,7 +52,7 @@ public interface IChangeSerializer {
 
 	void applyModifications(IAcceptor<IEmfResourceChange> acceptor);
 
-	ITextRegionDiffBuilder getModifyableDocument(Resource resource);
+	ITextRegionDiffBuilder getModifiableDocument(Resource resource);
 
 	/**
 	 * @see #setUpdateCrossReferences(boolean)
