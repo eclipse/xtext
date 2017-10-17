@@ -27,6 +27,7 @@ import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor.Severity
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange
 import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange
+import org.eclipse.xtext.ui.util.DisplayRunnableWithResult
 import org.eclipse.xtext.util.IAcceptor
 
 import static org.eclipse.xtext.ui.refactoring2.TryWithResource.*
@@ -152,13 +153,17 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	}
 	
 	protected def ITextEditor findOpenEditor(IFile file) {
-		val editorInput = new FileEditorInput(file)
-		return workbench	
-			.activeWorkbenchWindow
-			.activePage
-			.editorReferences
-			.map[ getEditor(false) ]
-			.filter(ITextEditor)
-			.findFirst[ it.editorInput == editorInput ]
+		new DisplayRunnableWithResult<ITextEditor>() {
+			override protected run() throws Exception {
+				val editorInput = new FileEditorInput(file)
+				return workbench	
+					.activeWorkbenchWindow
+					.activePage
+					.editorReferences
+					.map[ getEditor(false) ]
+					.filter(ITextEditor)
+					.findFirst[ it.editorInput == editorInput ]
+			}
+		}.syncExec()
 	}
 }
