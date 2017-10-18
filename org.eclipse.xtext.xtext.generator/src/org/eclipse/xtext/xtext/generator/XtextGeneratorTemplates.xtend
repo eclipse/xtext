@@ -589,7 +589,7 @@ class XtextGeneratorTemplates {
 					}
 				}
 				
-				protected Module getRuntimeModule(String grammar) {
+				protected «Module» getRuntimeModule(String grammar) {
 					«FOR lang : langConfigs»
 						if («lang.grammar.name.toUpperCase.replaceAll('\\.', '_')».equals(grammar)) {
 							return new «getRuntimeModule(lang.grammar)»();
