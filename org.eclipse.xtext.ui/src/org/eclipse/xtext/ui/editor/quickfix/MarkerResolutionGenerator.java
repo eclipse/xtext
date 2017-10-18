@@ -84,38 +84,40 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	public IMarkerResolution[] getResolutions(IMarker marker) {
 		final IMarkerResolution[] emptyResult = new IMarkerResolution[0];
 		try {
-			if(!marker.isSubtypeOf(MarkerTypes.ANY_VALIDATION))
+			if (!marker.isSubtypeOf(MarkerTypes.ANY_VALIDATION))
 				return emptyResult;
 		} catch (CoreException e) {
 			return emptyResult;
 		}
-		if(!languageResourceHelper.isLanguageResource(marker.getResource())) {
+		if (!languageResourceHelper.isLanguageResource(marker.getResource())) {
 			return emptyResult;
+		}
+		XtextEditor editor = findEditor(marker.getResource());
+		if (editor != null) {
+			IAnnotationModel annotationModel = editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
+			if (annotationModel != null && !isMarkerStillValid(marker, annotationModel))
+				return emptyResult;
 		}
 		Issue issue = getIssueUtil().createIssue(marker);
 		if (issue == null)
 			return emptyResult;
+
 		List<IssueResolution> resolutions = getResolutionProvider().getResolutions(issue);
-		boolean isMultiFix = resolutions.stream().allMatch(e -> e.getModification() instanceof IBatchableModification);
-		if (isMultiFix) {
-			// TODO report a warning if there is a mixup between context and no context modifications
-			return getAdaptedWorkbenchResolutions(Lists.newArrayList(resolutions), marker);
+		List<IMarkerResolution> result = Lists.newArrayList();
+		List<IssueResolution> remaining = Lists.newArrayList();
+		for (IssueResolution resolution : resolutions) {
+			if (resolution.getModification() instanceof IBatchableModification) {
+				result.add(adapterFactory.create(marker, resolution));
+			} else {
+				remaining.add(resolution);
+			}
 		}
-		if (findEditor(marker.getResource()) != null) {
-			XtextEditor editor = getEditor(marker.getResource());
-			if (editor == null)
-				return emptyResult;
-
-			IAnnotationModel annotationModel = editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
-			if (annotationModel != null && !isMarkerStillValid(marker, annotationModel))
-				return emptyResult;
-
-			return getAdaptedResolutions(Lists.newArrayList(getResolutions(issue, editor.getDocument())));
-		}
-		return getAdaptedResolutions(Lists.newArrayList(getResolutionProvider().getResolutions(issue)));
+		result.addAll(Lists.newArrayList(getAdaptedResolutions(remaining)));
+		return result.toArray(new IMarkerResolution[result.size()]);
 	}
 
 	public boolean isMarkerStillValid(final IMarker marker, final IAnnotationModel annotationModel) {
+		@SuppressWarnings("unchecked")
 		Iterator<Annotation> iterator = annotationModel.getAnnotationIterator();
 		return Iterators.any(iterator, new Predicate<Annotation>() {
 
@@ -135,6 +137,8 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		});
 	}
 
+	// handled by org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext.getXtextDocument(URI)
+	@Deprecated
 	public IXtextDocument getXtextDocument(IResource resource) {
 		IXtextDocument result = XtextDocumentUtil.get(resource);
 		if(result == null) {
@@ -150,6 +154,8 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		return XtextDocumentUtil.get(resource);
 	}
 	
+	// handled by org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext.getXtextDocument(URI)
+	@Deprecated
 	public XtextEditor getEditor(IResource resource) {
 		XtextEditor result = findEditor(resource);
 		if(result == null) {
@@ -214,13 +220,4 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 
 		return result;
 	}
-
-	protected IMarkerResolution[] getAdaptedWorkbenchResolutions(List<IssueResolution> resolutions, IMarker marker) {
-		IMarkerResolution[] result = new IMarkerResolution[resolutions.size()];
-		for (int i = 0; i < resolutions.size(); i++) {
-			result[i] = adapterFactory.create(marker, resolutions.get(i));
-		}
-		return result;
-	}
-
 }

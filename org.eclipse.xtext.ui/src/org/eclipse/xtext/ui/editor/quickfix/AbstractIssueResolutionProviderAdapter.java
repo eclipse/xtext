@@ -37,7 +37,8 @@ public abstract class AbstractIssueResolutionProviderAdapter {
 	protected IssueResolutionProvider getResolutionProvider() {
 		return resolutionProvider;
 	}
-	// TODO XtextDocument is not used. Remove/Deprecate?
+	
+	@Deprecated
 	public Iterable<IssueResolution> getResolutions(final Issue issue, final IXtextDocument document) {
 		Iterable<IssueResolution> result = resolutionProvider.getResolutions(issue);
 		return result;
