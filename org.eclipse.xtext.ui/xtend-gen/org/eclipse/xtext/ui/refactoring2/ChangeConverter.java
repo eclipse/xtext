@@ -111,8 +111,8 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
   }
   
   protected void doConvert(final IEmfResourceChange change) {
-    this.handleUriChange(change);
     this.handleReplacements(change);
+    this.handleUriChange(change);
   }
   
   protected void _handleReplacements(final IEmfResourceChange change) {
@@ -146,7 +146,7 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     int _size = change.getReplacements().size();
     boolean _greaterThan = (_size > 0);
     if (_greaterThan) {
-      final IFile file = this.resourceUriConverter.toFile(change.getNewURI());
+      final IFile file = this.resourceUriConverter.toFile(change.getOldURI());
       boolean _canWrite = this.canWrite(file);
       boolean _not = (!_canWrite);
       if (_not) {

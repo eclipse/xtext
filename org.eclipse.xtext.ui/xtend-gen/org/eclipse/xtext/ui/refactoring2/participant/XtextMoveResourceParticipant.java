@@ -49,6 +49,11 @@ public class XtextMoveResourceParticipant extends MoveParticipant implements ISh
   
   @Override
   public Change createChange(final IProgressMonitor pm) throws CoreException, OperationCanceledException {
+    return null;
+  }
+  
+  @Override
+  public Change createPreChange(final IProgressMonitor pm) throws CoreException, OperationCanceledException {
     return this.change;
   }
   

@@ -38,6 +38,10 @@ class XtextMoveResourceParticipant extends MoveParticipant implements ISharableP
 	}
 
 	override createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
+		return null
+	}
+	
+	override createPreChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		return change
 	}
 

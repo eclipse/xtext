@@ -47,6 +47,11 @@ public class XtextRenameResourceParticipant extends RenameParticipant implements
   
   @Override
   public Change createChange(final IProgressMonitor pm) throws CoreException, OperationCanceledException {
+    return null;
+  }
+  
+  @Override
+  public Change createPreChange(final IProgressMonitor pm) throws CoreException, OperationCanceledException {
     return this.change;
   }
   

@@ -77,8 +77,8 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	}
 
 	protected def void doConvert(IEmfResourceChange change) {
-		handleUriChange(change)
 		handleReplacements(change)
+		handleUriChange(change)
 	}
 
 	protected def dispatch void handleReplacements(IEmfResourceChange change) {
@@ -97,7 +97,7 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	
 	protected def dispatch void handleReplacements(ITextDocumentChange change) {
 		if(change.replacements.size > 0) {
-			val file = change.newURI.toFile
+			val file = change.oldURI.toFile
 			if (!file.canWrite) 
 				issues.add(Severity.FATAL, '''Affected file '«file.fullPath»' is read-only''')
 			file.checkDerived

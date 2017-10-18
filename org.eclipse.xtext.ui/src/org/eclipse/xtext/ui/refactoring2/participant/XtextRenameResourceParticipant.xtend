@@ -36,7 +36,11 @@ class XtextRenameResourceParticipant extends RenameParticipant implements IShara
 	}
 
 	override createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		return change 
+		return null 
+	}
+	
+	override createPreChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
+		return change
 	}
 
 	override getName() {
