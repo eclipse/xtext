@@ -144,8 +144,10 @@ public class BatchModification {
 			throw new OperationCanceledException();
 		}
 		Change change = converter.getChange();
-		change.initializeValidationData(monitor);
-		new PerformChangeOperation(change).run(monitor);
+		if (change != null) {
+			change.initializeValidationData(monitor);
+			new PerformChangeOperation(change).run(monitor);
+		}
 	}
 
 	public IXtextDocument getDocument() {
