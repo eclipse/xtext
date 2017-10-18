@@ -54,11 +54,11 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 	}
 
 	@Override
-	public AbstractElement getGrammarElement() {
+	public EObject getGrammarElement() {
 		EObject element = super.getGrammarElement();
 		if (element instanceof CrossReference)
 			return ((CrossReference) element).getTerminal();
-		return element instanceof AbstractElement ? (AbstractElement) element : null;
+		return element;
 	}
 
 	@Override

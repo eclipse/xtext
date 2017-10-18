@@ -94,7 +94,7 @@ public class StringBasedTextRegionAccessDiffAppender {
 		EObject semanticElement = source.getSemanticElement();
 		AbstractEObjectRegion region = getOrCreateEObjectRegion(semanticElement, source.getEObjectRegion());
 		int offset = access.append(text);
-		AbstractElement grammar = (AbstractElement) source.getGrammarElement();
+		EObject grammar = source.getGrammarElement();
 		StringHiddenRegion previous = (StringHiddenRegion) this.last;
 		StringSemanticRegion result = new StringSemanticRegion(access, region, grammar, offset, text.length());
 		region.addChild(result);

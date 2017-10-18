@@ -24,13 +24,13 @@ import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 public class StringSemanticRegion extends StringRegion implements ISemanticRegion {
 
 	private final AbstractEObjectRegion eObjectRegion;
-	private final AbstractElement grammarElement;
+	private final EObject grammarElement;
 	protected int indexInFeature = -2;
 	private IHiddenRegion leading;
 	private IHiddenRegion trailing;
 
 	protected StringSemanticRegion(StringBasedRegionAccess regionAccess, AbstractEObjectRegion semanticElement,
-			AbstractElement grammarElement, int offset, int length) {
+			EObject grammarElement, int offset, int length) {
 		super(regionAccess, offset, length);
 		this.eObjectRegion = semanticElement;
 		this.grammarElement = grammarElement;
@@ -56,7 +56,7 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 	}
 
 	@Override
-	public AbstractElement getGrammarElement() {
+	public EObject getGrammarElement() {
 		return grammarElement;
 	}
 
