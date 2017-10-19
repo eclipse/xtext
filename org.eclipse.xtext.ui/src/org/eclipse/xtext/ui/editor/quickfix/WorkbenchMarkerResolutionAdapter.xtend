@@ -52,7 +52,7 @@ class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution {
 	@Accessors IMarker primaryMarker
 
 	override findOtherMarkers(IMarker[] markers) {
-		markers.filter[issueUtil.getCode(primaryMarker) == issueUtil.getCode(it)]
+		markers.filter[it != primaryMarker && issueUtil.getCode(primaryMarker) == issueUtil.getCode(it)]
 	}
 
 	override String getLabel() {

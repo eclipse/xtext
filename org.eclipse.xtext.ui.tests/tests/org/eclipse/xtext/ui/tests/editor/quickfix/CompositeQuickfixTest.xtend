@@ -36,11 +36,11 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 
 		applyQuickfixOnMultipleMarkers(markers)
 		assertContentsAndMarkers(resource, '''
-			"Even Better documentation"
+			"not bad doc"
 			Foo { ref Bor }
-			"Even Better documentation"
+			"not bad doc"
 			Bor { }
-			---------------------------
+			---------------
 			(no markers found)
 		''')
 	}
@@ -66,11 +66,11 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 		val firstMarker = markers.sortBy[it.getAttribute(IMarker.CHAR_START) as Integer].head
 		applyQuickfixOnSingleMarkers(firstMarker)
 		assertContentsAndMarkers(resource, '''
-			"Even Better documentation"
+			"not bad doc"
 			Foo { ref Bor }
 			<0<"bad doc">0>
 			Bor { }
-			---------------------------
+			---------------
 			0: message=multiFixableIssue2
 		''')
 	}
@@ -87,7 +87,7 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 		assertEquals('''Multi fix 2'''.toString, proposals.map[displayString].join("\n"))
 		proposals.head.apply(editor.document)
 		assertEquals('''
-			"Even Better documentation"
+			"not bad doc"
 			Foo { ref Bor }
 			"bad doc"
 			Bor { }

@@ -50,13 +50,14 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
-	
+
 	private static boolean WAS_AUTOBUILD;
 
 	@BeforeClass
@@ -152,13 +153,16 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 
 	protected void applyQuickfixOnMultipleMarkers(IMarker[] markers) {
 		MarkerResolutionGenerator generator = getInjector().getInstance(MarkerResolutionGenerator.class);
-		IMarkerResolution[] resolutions = generator.getResolutions(markers[0]);
+		IMarker primaryMarker = markers[0];
+		IMarkerResolution[] resolutions = generator.getResolutions(primaryMarker);
 		Assert.assertEquals(1, resolutions.length);
 		assertTrue(resolutions[0] instanceof WorkbenchMarkerResolutionAdapter);
 		WorkbenchMarkerResolutionAdapter resolution = (WorkbenchMarkerResolutionAdapter) resolutions[0];
-		IMarker[] others = resolution.findOtherMarkers(markers);
-		assertEquals(markers.length, others.length);
-		resolution.run(others, new NullProgressMonitor());
+		List<IMarker> others = Lists.newArrayList(resolution.findOtherMarkers(markers));
+		assertFalse(others.contains(primaryMarker));
+		assertEquals(markers.length - 1, others.size());
+		others.add(primaryMarker);
+		resolution.run(others.toArray(new IMarker[others.size()]), new NullProgressMonitor());
 	}
 
 	protected void applyQuickfixOnSingleMarkers(IMarker marker) {

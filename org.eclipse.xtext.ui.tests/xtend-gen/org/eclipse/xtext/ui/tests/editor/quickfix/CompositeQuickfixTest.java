@@ -60,15 +60,15 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     this.assertContentsAndMarkers(resource, markers, _builder_1);
     this.applyQuickfixOnMultipleMarkers(markers);
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("\"Even Better documentation\"");
+    _builder_2.append("\"not bad doc\"");
     _builder_2.newLine();
     _builder_2.append("Foo { ref Bor }");
     _builder_2.newLine();
-    _builder_2.append("\"Even Better documentation\"");
+    _builder_2.append("\"not bad doc\"");
     _builder_2.newLine();
     _builder_2.append("Bor { }");
     _builder_2.newLine();
-    _builder_2.append("---------------------------");
+    _builder_2.append("---------------");
     _builder_2.newLine();
     _builder_2.append("(no markers found)");
     _builder_2.newLine();
@@ -116,7 +116,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     final IMarker firstMarker = IterableExtensions.<IMarker>head(IterableExtensions.<IMarker, Integer>sortBy(((Iterable<IMarker>)Conversions.doWrapArray(markers)), _function));
     this.applyQuickfixOnSingleMarkers(firstMarker);
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("\"Even Better documentation\"");
+    _builder_2.append("\"not bad doc\"");
     _builder_2.newLine();
     _builder_2.append("Foo { ref Bor }");
     _builder_2.newLine();
@@ -124,7 +124,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder_2.newLine();
     _builder_2.append("Bor { }");
     _builder_2.newLine();
-    _builder_2.append("---------------------------");
+    _builder_2.append("---------------");
     _builder_2.newLine();
     _builder_2.append("0: message=multiFixableIssue2");
     _builder_2.newLine();
@@ -153,7 +153,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     Assert.assertEquals(_builder_1.toString(), IterableExtensions.join(ListExtensions.<ICompletionProposal, String>map(((List<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function), "\n"));
     IterableExtensions.<ICompletionProposal>head(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals))).apply(editor.getDocument());
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("\"Even Better documentation\"");
+    _builder_2.append("\"not bad doc\"");
     _builder_2.newLine();
     _builder_2.append("Foo { ref Bor }");
     _builder_2.newLine();

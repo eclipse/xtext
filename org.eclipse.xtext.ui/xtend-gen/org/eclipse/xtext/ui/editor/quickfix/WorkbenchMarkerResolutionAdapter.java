@@ -77,9 +77,7 @@ public class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution 
   @Override
   public IMarker[] findOtherMarkers(final IMarker[] markers) {
     final Function1<IMarker, Boolean> _function = (IMarker it) -> {
-      String _code = this.issueUtil.getCode(this.primaryMarker);
-      String _code_1 = this.issueUtil.getCode(it);
-      return Boolean.valueOf(Objects.equal(_code, _code_1));
+      return Boolean.valueOf(((!Objects.equal(it, this.primaryMarker)) && Objects.equal(this.issueUtil.getCode(this.primaryMarker), this.issueUtil.getCode(it))));
     };
     return ((IMarker[])Conversions.unwrapArray(IterableExtensions.<IMarker>filter(((Iterable<IMarker>)Conversions.doWrapArray(markers)), _function), IMarker.class));
   }

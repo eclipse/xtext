@@ -1,11 +1,8 @@
 
 package org.eclipse.xtext.ui.tests.quickfix.ui.quickfix;
 
-import static com.google.common.collect.Lists.*;
-
 import java.util.List;
 
-import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.editor.model.edit.ICompositeModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
@@ -14,7 +11,6 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element;
-import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main;
 import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefFactory;
 import org.eclipse.xtext.ui.tests.quickfix.validation.QuickfixCrossrefTestLanguageValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -46,7 +42,7 @@ public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfi
 	@Fix(QuickfixCrossrefTestLanguageValidator.MULTIFIXABLE_ISSUE_2)
 	public void addDocumentation2(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.acceptMulti(issue, "Multi fix 2", "Multi fix 2", null, (Element eObj) -> {
-			eObj.setDoc("Even Better documentation");
+			eObj.setDoc("not " + eObj.getDoc());
 		});
 	}
 
