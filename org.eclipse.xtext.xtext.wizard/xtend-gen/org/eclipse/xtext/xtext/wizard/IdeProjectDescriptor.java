@@ -1032,6 +1032,14 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t\t\t\t");
+          _builder.append("<repositoryLayout>flat</repositoryLayout>");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("\t\t\t\t");
+          _builder.append("<useWildcardClassPath>true</useWildcardClassPath>");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("\t\t\t\t");
           _builder.append("<!-- uncomment to enable remote debugging");
           _builder.newLine();
           _builder.append("\t\t");

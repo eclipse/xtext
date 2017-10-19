@@ -289,6 +289,8 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 										</goals>
 										<configuration>
 											<assembleDirectory>${project.build.directory}/languageserver</assembleDirectory>
+											<repositoryLayout>flat</repositoryLayout>
+											<useWildcardClassPath>true</useWildcardClassPath>
 											<!-- uncomment to enable remote debugging
 											<extraJvmArguments>-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</extraJvmArguments>
 											-->
