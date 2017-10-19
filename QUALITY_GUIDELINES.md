@@ -7,7 +7,8 @@ This page lists criteria that code, commits and pull requests should fulfill.
  4. Commits must be reviewable by a human. Do not re-format code that's otherwise not changed. Make sure commits don't become too large.
  5. Avoid putting generated source code and hand-written source code in the same commit, except for small changes. 
  6. Changes must have unit tests
- 7. Good changes are the ones that do not cause, or even minimize future effort, e.g. bugfixes and follow-up feature requests. 
+ 7. Good changes are the ones that do not cause, or even minimize future effort, e.g. bugfixes and follow-up feature requests.
+ 8. (Xtext Committers Only) PRs with peer reviews are required for changes to existing code, any change to xtext-core and new features, except for trivial changes (typo, docs).
 
 ## Source Code
  1. Readable and understandable source code is good source code.
