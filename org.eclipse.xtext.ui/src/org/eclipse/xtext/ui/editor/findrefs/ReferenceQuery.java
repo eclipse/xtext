@@ -12,11 +12,13 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Throwables;
 import com.google.inject.Inject;
 
 /**
@@ -75,7 +77,15 @@ public class ReferenceQuery implements ISearchQuery {
 	@Override
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
 		searchResult.reset();
-		finder.findAllReferences(targetURIs, localContextProvider, searchResult, monitor);
+		try {
+			finder.findAllReferences(targetURIs, localContextProvider, searchResult, monitor);
+		} catch (WrappedException e) {
+			Throwable rootCause = Throwables.getRootCause(e);
+			if (rootCause instanceof OperationCanceledException) {
+				throw (OperationCanceledException) rootCause;
+			}
+			throw e;
+		}
 		searchResult.finish();
 		return (monitor.isCanceled()) ? Status.CANCEL_STATUS : Status.OK_STATUS;
 	}
