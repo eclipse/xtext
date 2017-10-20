@@ -284,6 +284,8 @@ The following functions are available, provided that the respective services are
    The document; if not specified, the global document is used.
  * `enableContentAssistService`
    Whether content assist should be enabled (default: `true`).
+ * `enableCors`
+   Whether CORS should be enabled for service request (default: `false`).
  * `enableFormattingAction`
    Whether the formatting action should be bound to the standard keystroke <kbd>Ctrl</kbd>+<kbd>⇧</kbd>+<kbd>F</kbd> (<kbd>Ctrl</kbd>+<kbd>⇧</kbd>+<kbd>S</kbd> on CodeMirror) / <kbd>⌘</kbd>+<kbd>⇧</kbd>+<kbd>F</kbd> (default: `false`).
  * `enableFormattingService`
