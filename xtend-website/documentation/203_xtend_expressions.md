@@ -604,7 +604,7 @@ textField.addActionListener([ e |
 ])
 ```
 
-You do not need to speficy the argument names. If you leave them out, a single argument is named `it`. If the lambda has more arguments, the implicit names are `$1,$2,...,$n` depending on the number of arguments of course. Here's an example with a single argument named `it`. In this case `actionCommand` is equivalent to `it.actionCommand`.
+You do not need to specify the argument names. If you leave them out, a single argument is named `it`. If the lambda has more arguments, the implicit names are `$1,$2,...,$n` depending on the number of arguments of course. Here's an example with a single argument named `it`. In this case `actionCommand` is equivalent to `it.actionCommand`.
 
 ```xtend
 textField.addActionListener([
