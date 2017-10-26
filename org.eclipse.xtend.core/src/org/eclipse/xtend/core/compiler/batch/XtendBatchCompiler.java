@@ -1,12 +1,20 @@
 package org.eclipse.xtend.core.compiler.batch;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Iterables.addAll;
+import static com.google.common.collect.Iterables.concat;
+import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Iterables.isEmpty;
+import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Lists.transform;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.util.Strings.concat;
+import static org.eclipse.xtext.util.Strings.isEmpty;
 
 import java.io.CharArrayWriter;
 import java.io.Closeable;
@@ -486,7 +494,15 @@ public class XtendBatchCompiler {
 			}
 			// install a fresh type provider for the second phase, so we clear all previously cached classes and misses.
 			installJvmTypeProvider(resourceSet, classDirectory, false);
-			EcoreUtil.resolveAll(resourceSet);
+			List<Resource> toBeResolved = new ArrayList<>(resourceSet.getResources().size());
+			for (Resource resource : resourceSet.getResources()) {
+				if (isSourceFile(resource)) {
+					toBeResolved.add(resource);
+				}
+			}
+			for(Resource resource : toBeResolved) {
+				EcoreUtil.resolveAll(resource);
+			}
 			List<Issue> issues = validate(resourceSet);
 			Iterable<Issue> errors = Iterables.filter(issues, SeverityFilter.ERROR);
 			Iterable<Issue> warnings = Iterables.filter(issues, SeverityFilter.WARNING);
