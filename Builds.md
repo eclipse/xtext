@@ -133,12 +133,12 @@ Build jobs for releases must be executed in proper order on the build server, i.
 2. xtext-core
    * Create release branch.
    * Set `version` property in `gradle/versions.gradle` to the release version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * Set `xtext_bootstrap` property in `gradle/versions.gradle` to the used Xtend compiler version.
    * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
 3. xtext-extras
    * Create release branch.
    * Set `version` property in `gradle/versions.gradle` to the release version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * Set `xtext_bootstrap` property in `gradle/versions.gradle` to the used Xtend compiler version.
    * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
 4. xtext-eclipse
    * Replace all occurrences of `job/master` according to the release branch name.
