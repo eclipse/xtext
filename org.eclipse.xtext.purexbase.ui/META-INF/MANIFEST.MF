@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Pure Xbase UI
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.13.0.qualifier
+Bundle-Version: 2.14.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.purexbase;visibility:=reexport,
@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.xtext.purexbase;visibility:=reexport,
  org.eclipse.jdt.core;bundle-version="3.6.0",
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare;bundle-version="3.4.0",
- org.eclipse.xtext.xbase.lib;bundle-version="2.13.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.jdt.debug.ui;bundle-version="3.5.2",
  org.eclipse.xtend.lib;resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15",
