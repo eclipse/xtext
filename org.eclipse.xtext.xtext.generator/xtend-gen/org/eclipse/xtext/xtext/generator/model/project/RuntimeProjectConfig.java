@@ -73,7 +73,7 @@ public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntim
   
   @Override
   public String getXbaseLibVersionLowerBound() {
-    return "2.13.0";
+    return "2.14.0";
   }
   
   @Override
