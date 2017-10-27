@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Builder Tests
 Bundle-SymbolicName: org.eclipse.xtext.builder.tests;singleton:=true
-Bundle-Version: 2.13.0.qualifier
+Bundle-Version: 2.14.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtext,
@@ -34,7 +34,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.ui.testing,
  org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.xtext.xbase.lib;bundle-version="2.13.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.compare
 Import-Package: org.apache.log4j;version="1.2.15",
  org.hamcrest.core;version="1.1.0",
