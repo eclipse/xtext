@@ -53,7 +53,7 @@ class RuntimeProjectConfig extends BundleProjectConfig implements IRuntimeProjec
 	}
 	
 	override getXbaseLibVersionLowerBound() {
-		"2.13.0"
+		"2.14.0"
 	}
 
 	override getXtendLibVersionLowerBound() {

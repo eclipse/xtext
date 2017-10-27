@@ -2,13 +2,13 @@
  * Base project version and versions of common dependencies.
  */
 
-version = '2.13.0-SNAPSHOT'
+version = '2.14.0-SNAPSHOT'
 
 ext.versions = [
 	'xtext': version,
-	'xtext_bootstrap': '2.11.0',
+	'xtext_bootstrap': '2.13.0',
 	'gradle_plugins': '0.1.0',
-	'xtext_gradle_plugin': '1.0.18',
+	'xtext_gradle_plugin': '1.0.19',
 	'lsp4j': '[0.3.0,0.4)',
 	'log4j': '1.2.16',
 	'equinoxCommon' : '3.8.0',
