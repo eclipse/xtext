@@ -278,6 +278,8 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	 */
 	protected void registerAnnotationInfoProcessor(ElementInfo info) {
 		XtextDocument doc = (XtextDocument) info.fDocument;
+		if (doc == null) return;
+
 		if(info.fModel != null) {
 			AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(doc, info.fModel,
 				issueResolutionProvider);
