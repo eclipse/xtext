@@ -35,7 +35,7 @@ public @interface TestAnnotation  {
 	Class<? extends CharSequence> charSequenceClass();
 	Class<?>[] classArray();
 	
-	static final Object NOT_A_CONSTANT = new Object();
+	static final Object STATIC_FIELD = new Object();
 	
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
