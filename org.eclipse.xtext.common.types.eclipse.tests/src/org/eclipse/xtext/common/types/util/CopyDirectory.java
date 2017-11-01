@@ -20,7 +20,7 @@ import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
 
 /**
- * Copies the entire directory tree from {@link #sourcePath} to {@link #targetPath}. The contents of the target directory is erased before
+ * Copies a file or a directory tree from {@link #sourcePath} to {@link #targetPath}. The target is erased before
  * the copy operation starts.
  */
 public class CopyDirectory extends SimpleFileVisitor<Path> implements IWorkflowComponent {
@@ -37,11 +37,7 @@ public class CopyDirectory extends SimpleFileVisitor<Path> implements IWorkflowC
 
 	@Override
 	public FileVisitResult preVisitDirectory(final Path dir, final BasicFileAttributes attrs) throws IOException {
-		if (internalSourcePath == null) {
-			internalSourcePath = dir;
-		} else {
-			Files.createDirectories(internalTargetPath.resolve(internalSourcePath.relativize(dir)));
-		}
+		Files.createDirectories(internalTargetPath.resolve(internalSourcePath.relativize(dir)));
 		return FileVisitResult.CONTINUE;
 	}
 
@@ -53,12 +49,19 @@ public class CopyDirectory extends SimpleFileVisitor<Path> implements IWorkflowC
 
 	@Override
 	public void invoke(IWorkflowContext ctx) {
-		File sourceDir = new File(sourcePath);
-		File targetDir = new File(targetPath);
+		File sourceFileOrDir = new File(sourcePath);
+		File targetFileOrDir = new File(targetPath);
 		try {
-			org.eclipse.xtext.util.Files.sweepFolder(targetDir);
-			internalTargetPath = targetDir.toPath();
-			Files.walkFileTree(sourceDir.toPath(), this);
+			if (targetFileOrDir.exists()) {
+				if (targetFileOrDir.isDirectory()) {
+					org.eclipse.xtext.util.Files.sweepFolder(targetFileOrDir);	
+				} else {
+					targetFileOrDir.delete();
+				}
+			}
+			internalTargetPath = targetFileOrDir.toPath();
+			internalSourcePath = sourceFileOrDir.toPath();
+			Files.walkFileTree(internalSourcePath, this);
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		} finally {
