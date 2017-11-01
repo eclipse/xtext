@@ -479,19 +479,15 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 		//
 		JvmGenericType jvmGenericType;
 		JvmDeclaredType result;
-		boolean hasFields;
 		if (typeBinding.isAnnotation()) {
 			jvmGenericType = null;
 			result = TypesFactory.eINSTANCE.createJvmAnnotationType();
-			hasFields = false;
 		} else if (typeBinding.isEnum()) {
 			jvmGenericType = null;
 			result = TypesFactory.eINSTANCE.createJvmEnumerationType();
-			hasFields = true;
 		} else {
 			result = jvmGenericType = TypesFactory.eINSTANCE.createJvmGenericType();
 			jvmGenericType.setInterface(typeBinding.isInterface());
-			hasFields = true;
 		}
 
 		// Populate the information computed from the modifiers.
@@ -524,11 +520,7 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 		fqn.append('.');
 		createMethods(typeBinding, handleIdentifier, path, fqn, result);
 		
-		// If there fields allowed, traverse them.
-		//
-		if (hasFields) {
-			createFields(typeBinding, fqn, result);
-		}
+		createFields(typeBinding, fqn, result);
 
 		// Set the super types.
 		//
