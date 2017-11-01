@@ -367,6 +367,7 @@ public class ReflectionTypeFactory implements ITypeFactory<Class<?>, JvmDeclared
 		setTypeModifiers(clazz, result);
 		createNestedTypes(clazz, result);
 		createMethods(clazz, result);
+		createFields(clazz, result);
 		setSuperTypes(clazz, result);
 		createAnnotationValues(clazz, result);
 		return result;
