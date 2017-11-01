@@ -226,7 +226,6 @@ public abstract class AbstractTypeProviderTest extends Assert {
 
 	protected void assertMembers(String typeName, Set<String> memberNames) {
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
-		System.out.println(type.getMembers());
 		assertEquals(memberNames.size(), type.getMembers().size());
 		for (org.eclipse.xtext.common.types.JvmMember member : type.getMembers()) {
 			assertTrue(member.getIdentifier(), member instanceof JvmOperation);
@@ -793,7 +792,9 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(15, methodCount);
 		int innerTypesCount = TestAnnotation.class.getDeclaredClasses().length;
 		assertEquals(2, innerTypesCount);
-		assertEquals(methodCount + innerTypesCount, type.getMembers().size());
+		int fieldCount = TestAnnotation.class.getDeclaredFields().length;
+		assertEquals(1, fieldCount);
+		assertEquals(fieldCount + methodCount + innerTypesCount, type.getMembers().size());
 	}
 
 	@Test
