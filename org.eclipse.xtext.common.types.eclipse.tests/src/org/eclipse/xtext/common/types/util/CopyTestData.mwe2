@@ -8,6 +8,8 @@
 module org.eclipse.xtext.common.types.util.CopyTestData
 
 var path
+var ideaPath
+var xbasePath
 var binPath = "${path}/bin"
 var packagePath = "org/eclipse/xtext/common/types/testSetups"
 var srcPath = "${path}/testdata/${packagePath}"
@@ -20,5 +22,13 @@ Workflow {
 		binPath = binPath
 		packagePath = packagePath
 		targetDir = srcPath
+	}
+	component = CopyDirectory {
+		sourcePath = "${path}/testdata"
+		targetPath = "${ideaPath}/testdata"
+	}
+	component = CopyDirectory {
+		sourcePath = "${path}/testdata/org/eclipse/xtext/common/types/testSetups"
+		targetPath = "${xbasePath}/src/org/eclipse/xtext/common/types/testSetups"
 	}
 }
