@@ -37,7 +37,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
   
   @BeforeClass
   public static void createTestProject() throws Exception {
-    TargetPlatformUtil.setTargetPlatform();
+    TargetPlatformUtil.setTargetPlatform(AbstractXbaseContentAssistBugTest.class);
     AbstractXbaseContentAssistBugTest.staticProject = AbstractXbaseUITestCase.createPluginProject(AbstractXbaseContentAssistBugTest.class.getName());
   }
   

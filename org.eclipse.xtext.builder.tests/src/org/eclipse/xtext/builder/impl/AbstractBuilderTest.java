@@ -36,7 +36,7 @@ public abstract class AbstractBuilderTest extends Assert implements IResourceDes
 
 	@BeforeClass
 	public static void setupTargetPlatform() throws Exception {
-		TargetPlatformUtil.setTargetPlatform();
+		TargetPlatformUtil.setTargetPlatform(AbstractBuilderTest.class);
 	}
 
 	@Before
