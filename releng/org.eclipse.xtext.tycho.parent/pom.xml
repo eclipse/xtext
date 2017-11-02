@@ -17,7 +17,24 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<sign.skip>true</sign.skip>
+
+		<target-platform-artifactId>org.eclipse.xtext.target</target-platform-artifactId>
 	</properties>
+
+	<profiles>
+		<profile>
+			<id>usePhotonTarget</id>
+			<properties>
+				<target-platform-artifactId>org.eclipse.xtext.photon.target</target-platform-artifactId>
+			</properties>
+		</profile>
+		<profile>
+			<id>useOxygenTarget</id>
+			<properties>
+				<target-platform-artifactId>org.eclipse.xtext.oxygen.target</target-platform-artifactId>
+			</properties>
+		</profile>
+	</profiles>
 	
 	<pluginRepositories>
 		<pluginRepository>
@@ -77,7 +94,7 @@
 					<target>
 						<artifact>
 							<groupId>org.eclipse.xtext</groupId>
-							<artifactId>org.eclipse.xtext.target</artifactId>
+							<artifactId>${target-platform-artifactId}</artifactId>
 							<version>${project.parent.version}</version>
 						</artifact>
 					</target>

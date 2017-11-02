@@ -16,6 +16,8 @@
 
 	<modules>
 		<module>org.eclipse.xtext.target</module>
+		<module>org.eclipse.xtext.oxygen.target</module>
+		<module>org.eclipse.xtext.photon.target</module>
 		<module>org.eclipse.xtext.tycho.parent</module>
 		<module>org.eclipse.xtext.tycho.plugin.parent</module>
 		<module>org.eclipse.xtext.tycho.feature.parent</module>
