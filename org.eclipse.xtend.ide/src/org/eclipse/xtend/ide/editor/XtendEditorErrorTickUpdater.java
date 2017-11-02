@@ -32,7 +32,7 @@ public class XtendEditorErrorTickUpdater extends XtextEditorErrorTickUpdater {
 	
 	@Override
 	protected void updateEditorImage(XtextEditor xtextEditor) {
-		if (!xtextEditor.isEditable()) {
+		if (xtextEditor != null && !xtextEditor.isEditable()) {
 			Severity severity = getSeverity(xtextEditor);
 			if (severity != null && severity != Severity.INFO) {
 				ImageDescriptor descriptor = severity == Severity.ERROR ? XtextPluginImages.DESC_OVR_ERROR
