@@ -75,7 +75,7 @@ class JdtBasedProcessorProviderTest {
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
-				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject", "libProject"))
+				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject", "libProject"))
 		userProject.newSource("client/A.xtend", '''
 			package client
 			
@@ -106,7 +106,7 @@ class JdtBasedProcessorProviderTest {
 		libProject.project.addExportedPackages("mylib")
 		
 		val macroProject = JavaCore.create(createPluginProject("macroProject", "com.google.inject", "org.eclipse.xtend.lib",
-				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "libProject"))
+				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "libProject"))
 		macroProject.newSource("annotation/MyAA.xtend", '''
 			package annotation
 			
@@ -131,7 +131,7 @@ class JdtBasedProcessorProviderTest {
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
-				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
 		userProject.newSource("client/A.xtend", '''
 			package client
 			

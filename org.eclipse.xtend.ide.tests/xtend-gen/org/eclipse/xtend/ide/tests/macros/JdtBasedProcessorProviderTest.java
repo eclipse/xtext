@@ -108,7 +108,7 @@ public class JdtBasedProcessorProviderTest {
       IResourcesSetupUtil.waitForBuild();
       final IJavaProject userProject = JavaCore.create(
         WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-          "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject", "libProject"));
+          "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject", "libProject"));
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package client");
       _builder_2.newLine();
@@ -155,7 +155,7 @@ public class JdtBasedProcessorProviderTest {
       this.newSource(libProject, "mylib/Lib.xtend", _builder.toString());
       WorkbenchTestHelper.addExportedPackages(libProject.getProject(), "mylib");
       final IJavaProject macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject("macroProject", "com.google.inject", "org.eclipse.xtend.lib", 
-        "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "libProject"));
+        "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "libProject"));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package annotation");
       _builder_1.newLine();
@@ -196,7 +196,7 @@ public class JdtBasedProcessorProviderTest {
       IResourcesSetupUtil.waitForBuild();
       final IJavaProject userProject = JavaCore.create(
         WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-          "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
+          "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package client");
       _builder_2.newLine();

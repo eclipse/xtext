@@ -86,7 +86,7 @@ public class MoreActiveAnnotationsTest {
       }
       final IJavaProject userProject = JavaCore.create(
         WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-          "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
+          "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package client");
       _builder_1.newLine();
@@ -174,7 +174,7 @@ public class MoreActiveAnnotationsTest {
       }
       final IJavaProject userProject = JavaCore.create(
         WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-          "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
+          "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package client");
       _builder_2.newLine();
@@ -269,7 +269,7 @@ public class MoreActiveAnnotationsTest {
       }
       final IJavaProject userProject = JavaCore.create(
         WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-          "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
+          "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package client");
       _builder_2.newLine();
@@ -404,7 +404,7 @@ public class MoreActiveAnnotationsTest {
       }
       final IJavaProject userProject = JavaCore.create(
         WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-          "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
+          "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("package client");
       _builder_3.newLine();
@@ -564,7 +564,7 @@ public class MoreActiveAnnotationsTest {
       IResourcesSetupUtil.waitForBuild();
       final IJavaProject userProject = JavaCore.create(
         WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
-          "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
+          "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package client");
       _builder_1.newLine();
