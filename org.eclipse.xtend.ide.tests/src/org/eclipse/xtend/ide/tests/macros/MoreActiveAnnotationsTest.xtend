@@ -63,7 +63,7 @@ class MoreActiveAnnotationsTest {
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
-				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
 		userProject.newSource("client/UserCode.xtend", '''
 			package client
 			@annotation.DItemMini
@@ -112,7 +112,7 @@ class MoreActiveAnnotationsTest {
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
-				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
 		userProject.newSource("client/UserCode.xtend", '''
 			package client
 			
@@ -165,7 +165,7 @@ class MoreActiveAnnotationsTest {
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
-				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
 		userProject.newSource("client/UserCode.xtend", '''
 			package client
 			
@@ -240,7 +240,7 @@ class MoreActiveAnnotationsTest {
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
-				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
 		
 		userProject.newSource("client/UserCode.xtend", '''
 			package client
@@ -313,7 +313,7 @@ class MoreActiveAnnotationsTest {
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
-				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
 		userProject.newSource("client/A.xtend", '''
 			package client
 			
