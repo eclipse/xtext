@@ -47,7 +47,7 @@ public class Bug462047Test extends AbstractEditorTest {
   @BeforeClass
   public static void setupTargetPlatform() {
     try {
-      TargetPlatformUtil.setTargetPlatform();
+      TargetPlatformUtil.setTargetPlatform(Bug462047Test.class);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

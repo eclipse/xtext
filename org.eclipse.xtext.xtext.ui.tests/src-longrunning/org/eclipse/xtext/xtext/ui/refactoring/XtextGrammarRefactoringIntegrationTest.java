@@ -83,7 +83,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	
 	@BeforeClass
 	public static void setupTargetPlatform() throws Exception {
-		TargetPlatformUtil.setTargetPlatform();
+		TargetPlatformUtil.setTargetPlatform(XtextGrammarRefactoringIntegrationTest.class);
 	}
 	
 	@Rule

@@ -20,14 +20,14 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
-import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xtext.ui.Activator;
@@ -62,7 +62,7 @@ public class XtextContentAssistTest extends AbstractXtextTests implements Resour
 	
 	@BeforeClass
 	public static void setupTargetPlatform() throws Exception {
-		TargetPlatformUtil.setTargetPlatform();
+		TargetPlatformUtil.setTargetPlatform(XtextContentAssistTest.class);
 	}
 
 	@Before

@@ -36,7 +36,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistTest {
 	
 	@BeforeClass
 	public static void createTestProject() throws Exception {
-		TargetPlatformUtil.setTargetPlatform();
+		TargetPlatformUtil.setTargetPlatform(ContentAssistTest.class);
 		staticProject = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
 		doInitFeatures(JavaCore.create(staticProject));
 	}
