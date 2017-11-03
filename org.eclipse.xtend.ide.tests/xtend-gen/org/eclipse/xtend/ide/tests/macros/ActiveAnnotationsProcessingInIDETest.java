@@ -185,7 +185,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   @BeforeClass
   public static void createProjects() {
     try {
-      TargetPlatformUtil.setTargetPlatform();
+      TargetPlatformUtil.setTargetPlatform(ActiveAnnotationsProcessingInIDETest.class);
       ActiveAnnotationsProcessingInIDETest.macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject("macroProject"));
       ActiveAnnotationsProcessingInIDETest.userProject = JavaCore.create(
         WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
