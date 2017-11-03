@@ -45,7 +45,7 @@ abstract class AbstractRefactoringSwtBotTest {
 	
 	@BeforeClass
 	static def void initialize() {
-		TargetPlatformUtil.setTargetPlatform
+		TargetPlatformUtil.setTargetPlatform(AbstractRefactoringSwtBotTest)
 		cleanWorkspace
 		bot = new SWTWorkbenchBot
 		UIThreadRunnable.syncExec(new VoidResult() {

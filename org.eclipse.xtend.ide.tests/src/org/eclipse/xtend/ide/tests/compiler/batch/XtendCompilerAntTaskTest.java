@@ -36,7 +36,7 @@ public class XtendCompilerAntTaskTest {
 	
 	@BeforeClass
 	public static void setupTargetPlaform() throws Exception {
-		TargetPlatformUtil.setTargetPlatform();
+		TargetPlatformUtil.setTargetPlatform(XtendCompilerAntTaskTest.class);
 	}
 
 	@Before

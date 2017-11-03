@@ -47,7 +47,7 @@ public abstract class AbstractRefactoringSwtBotTest {
   @BeforeClass
   public static void initialize() {
     try {
-      TargetPlatformUtil.setTargetPlatform();
+      TargetPlatformUtil.setTargetPlatform(AbstractRefactoringSwtBotTest.class);
       IResourcesSetupUtil.cleanWorkspace();
       SWTWorkbenchBot _sWTWorkbenchBot = new SWTWorkbenchBot();
       AbstractRefactoringSwtBotTest.bot = _sWTWorkbenchBot;

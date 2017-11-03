@@ -45,7 +45,7 @@ public abstract class AbstractXtendUITestCase extends Assert {
 
 	@BeforeClass
 	public static void setUpProject() throws Exception {
-		TargetPlatformUtil.setTargetPlatform();
+		TargetPlatformUtil.setTargetPlatform(AbstractXtendTestCase.class);
 		IResourcesSetupUtil.cleanWorkspace();
 		WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
 	}
