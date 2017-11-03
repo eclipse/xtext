@@ -429,7 +429,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	}
 
 
-	private boolean isRelevantAnnotationTarget(final XtendAnnotationTarget annotationTarget) {
+	protected boolean isRelevantAnnotationTarget(final XtendAnnotationTarget annotationTarget) {
 		return any(targetInfos.keySet(), new Predicate<Class<?>>() {
 			@Override
 			public boolean apply(Class<?> input) {
