@@ -61,7 +61,7 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 		while (off < end - 1) {
 			aChar = in[off++];
 			if (aChar == '\\') {
-				if (off < end) {
+				if (off < end - 1) {
 					aChar = in[off++];
 					switch (aChar) {
 						case 'u':
@@ -153,7 +153,6 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 						errorIndex = off - 1;
 						errorLength = 1;
 					}
-					out[outLen++] = aChar;
 				}
 			} else {
 				out[outLen++] = aChar;
