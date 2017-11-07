@@ -60,7 +60,7 @@ class RenameTest extends AbstractTestLangLanguageServerTest {
 			changes :
 				MyType1.testlang : Tescht [[0, 5] .. [0, 9]]
 				Tescht [[1, 4] .. [1, 8]]
-				MyType2.testlang : Test [[1, 4] .. [1, 8]]
+				MyType2.testlang : Tescht [[1, 4] .. [1, 8]]
 			documentChanges : 
         '''.toString, toExpectation(workspaceEdit))			
 	}
