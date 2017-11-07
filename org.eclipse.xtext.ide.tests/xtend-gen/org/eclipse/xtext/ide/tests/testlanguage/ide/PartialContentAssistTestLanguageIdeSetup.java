@@ -12,6 +12,7 @@ import com.google.inject.Injector;
 import org.eclipse.xtext.ide.tests.testlanguage.PartialContentAssistTestLanguageRuntimeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.PartialContentAssistTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.PartialContentAssistTestLanguageIdeModule;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -22,6 +23,6 @@ public class PartialContentAssistTestLanguageIdeSetup extends PartialContentAssi
   public Injector createInjector() {
     PartialContentAssistTestLanguageRuntimeModule _partialContentAssistTestLanguageRuntimeModule = new PartialContentAssistTestLanguageRuntimeModule();
     PartialContentAssistTestLanguageIdeModule _partialContentAssistTestLanguageIdeModule = new PartialContentAssistTestLanguageIdeModule();
-    return Guice.createInjector(_partialContentAssistTestLanguageRuntimeModule, _partialContentAssistTestLanguageIdeModule);
+    return Guice.createInjector(Modules2.mixin(_partialContentAssistTestLanguageRuntimeModule, _partialContentAssistTestLanguageIdeModule));
   }
 }
