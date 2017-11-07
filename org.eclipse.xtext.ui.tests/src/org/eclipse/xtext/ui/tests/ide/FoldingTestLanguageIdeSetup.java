@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.FoldingTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.FoldingTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class FoldingTestLanguageIdeSetup extends FoldingTestLanguageStandaloneSe
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new FoldingTestLanguageRuntimeModule(), new FoldingTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new FoldingTestLanguageRuntimeModule(), new FoldingTestLanguageIdeModule()));
 	}
 }

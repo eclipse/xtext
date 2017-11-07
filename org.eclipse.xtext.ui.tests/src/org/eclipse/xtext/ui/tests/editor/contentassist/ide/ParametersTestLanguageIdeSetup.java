@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class ParametersTestLanguageIdeSetup extends ParametersTestLanguageStanda
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new ParametersTestLanguageRuntimeModule(), new ParametersTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new ParametersTestLanguageRuntimeModule(), new ParametersTestLanguageIdeModule()));
 	}
 }

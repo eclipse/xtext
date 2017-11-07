@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class LookAheadContentAssistTestLanguageIdeSetup extends LookAheadContent
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new LookAheadContentAssistTestLanguageRuntimeModule(), new LookAheadContentAssistTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new LookAheadContentAssistTestLanguageRuntimeModule(), new LookAheadContentAssistTestLanguageIdeModule()));
 	}
 }

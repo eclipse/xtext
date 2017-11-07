@@ -8,6 +8,7 @@ import com.google.inject.Injector;
 import org.eclipse.xtext.example.homeautomation.RuleEngineRuntimeModule;
 import org.eclipse.xtext.example.homeautomation.RuleEngineStandaloneSetup;
 import org.eclipse.xtext.example.homeautomation.ide.RuleEngineIdeModule;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -18,6 +19,6 @@ public class RuleEngineIdeSetup extends RuleEngineStandaloneSetup {
   public Injector createInjector() {
     RuleEngineRuntimeModule _ruleEngineRuntimeModule = new RuleEngineRuntimeModule();
     RuleEngineIdeModule _ruleEngineIdeModule = new RuleEngineIdeModule();
-    return Guice.createInjector(_ruleEngineRuntimeModule, _ruleEngineIdeModule);
+    return Guice.createInjector(Modules2.mixin(_ruleEngineRuntimeModule, _ruleEngineIdeModule));
   }
 }

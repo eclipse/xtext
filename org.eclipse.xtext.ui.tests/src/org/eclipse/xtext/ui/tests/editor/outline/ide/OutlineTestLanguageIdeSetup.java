@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class OutlineTestLanguageIdeSetup extends OutlineTestLanguageStandaloneSe
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new OutlineTestLanguageRuntimeModule(), new OutlineTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new OutlineTestLanguageRuntimeModule(), new OutlineTestLanguageIdeModule()));
 	}
 }

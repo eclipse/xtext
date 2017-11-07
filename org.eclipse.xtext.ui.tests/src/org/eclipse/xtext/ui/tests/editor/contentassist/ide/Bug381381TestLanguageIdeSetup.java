@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class Bug381381TestLanguageIdeSetup extends Bug381381TestLanguageStandalo
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new Bug381381TestLanguageRuntimeModule(), new Bug381381TestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new Bug381381TestLanguageRuntimeModule(), new Bug381381TestLanguageIdeModule()));
 	}
 }
