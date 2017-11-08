@@ -153,6 +153,7 @@ public class XtextFormatter extends AbstractDeclarativeFormatter {
 		AnnotationElements a = g.getAnnotationAccess();
 		cfg.setNoSpace().between(a.getCommercialAtKeyword_0(), a.getNameAssignment_1());
 		cfg.setLinewrap().after(g.getAnnotationRule());
+		cfg.setLinewrap(2).before(g.getAnnotationRule());
 
 		//saveDebugGraphvizDiagram("XtextFormatting.dot");
 	}
