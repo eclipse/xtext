@@ -13,6 +13,7 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.AbstractTokenWithCardinalityElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ActionElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.AnnotationElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.AssignmentElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.CharacterRangeElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.CrossReferenceElements;
@@ -147,6 +148,11 @@ public class XtextFormatter extends AbstractDeclarativeFormatter {
 		cfg.setNoSpace().around(naa.getCalledByNameAssignment_0_1());
 		cfg.setNoSpace().around(naa.getValueAssignment_1());
 		cfg.setNoSpace().around(naa.getParameterAssignment_0_0());
+		
+		// @Override
+		AnnotationElements a = g.getAnnotationAccess();
+		cfg.setNoSpace().between(a.getCommercialAtKeyword_0(), a.getNameAssignment_1());
+		cfg.setLinewrap().after(g.getAnnotationRule());
 
 		//saveDebugGraphvizDiagram("XtextFormatting.dot");
 	}

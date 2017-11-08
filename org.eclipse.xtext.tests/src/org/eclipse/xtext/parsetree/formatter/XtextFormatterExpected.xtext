@@ -43,3 +43,7 @@ terminal STRING2:
 
 terminal ML_COMMENT2:
 	'/*'->'*/';
+
+@Override
+terminal ID:
+	super;
