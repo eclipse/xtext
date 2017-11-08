@@ -17,15 +17,7 @@ import org.eclipse.emf.common.util.URI
  * @since 2.11
  */
 @Singleton
-class UriExtensions {
-
-	/**
-	 * returns a URI with empty authority, if absent and has file scheme.
-	 */
-	def URI toUri(String stringUri) {
-		val uri = URI.createURI(stringUri);
-		return uri.withEmptyAuthority
-	}
+class UriExtensions extends org.eclipse.xtext.util.UriExtensions {
 	
 	/**
 	 * returns the string representation of the given URI (with empty authority, if absent and has file scheme).
@@ -41,17 +33,6 @@ class UriExtensions {
 		return toUriString(URI.createURI(uri.normalize.toString))
 	}
 	
-	/**
-	 * converts the file URIs with an absent authority to one with an empty 
-	 */
-	def URI withEmptyAuthority(URI uri) {
-		if (uri.isFile && uri.authority === null) {		
-			URI.createHierarchicalURI(uri.scheme, "", uri.device, uri.segments, uri.query, uri.fragment)
-		} else {
-			uri
-		}
-	}
-	 
 	/**
 	 * @deprecated use #toUriString(URI)
 	 */

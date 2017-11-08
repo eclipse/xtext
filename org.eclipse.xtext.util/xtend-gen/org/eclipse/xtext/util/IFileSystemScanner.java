@@ -8,11 +8,14 @@
 package org.eclipse.xtext.util;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.Inject;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.UriExtensions;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -22,6 +25,10 @@ import org.eclipse.xtext.util.IAcceptor;
 @SuppressWarnings("all")
 public interface IFileSystemScanner {
   public static class JavaIoFileSystemScanner implements IFileSystemScanner {
+    @Inject
+    @Extension
+    private UriExtensions _uriExtensions;
+    
     @Override
     public void scan(final URI root, final IAcceptor<URI> acceptor) {
       String _fileString = root.toFileString();
@@ -31,7 +38,7 @@ public interface IFileSystemScanner {
     
     public void scanRec(final File file, final IAcceptor<URI> acceptor) {
       final Path path = Paths.get(file.getAbsoluteFile().toURI());
-      final URI uri = URI.createURI(path.toUri().toString());
+      final URI uri = this._uriExtensions.toUri(path.toUri().toString());
       acceptor.accept(uri);
       boolean _isDirectory = file.isDirectory();
       if (_isDirectory) {

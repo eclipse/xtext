@@ -51,28 +51,28 @@ public class UriExtensionsTest {
   public void test_toUri03() {
     Assert.assertEquals(
       URI.createURI("file://path with whitespaces/to/resource"), 
-      this._uriExtensions.toUri("file://path with whitespaces/to/resource"));
+      this._uriExtensions.toUri("file://path%20with%20whitespaces/to/resource"));
   }
   
   @Test
   public void test_toUri_04() {
     Assert.assertEquals(
       URI.createURI("file:///path with whitespaces/to/resource"), 
-      this._uriExtensions.toUri("file:///path with whitespaces/to/resource"));
+      this._uriExtensions.toUri("file:///path%20with%20whitespaces/to/resource"));
   }
   
   @Test
   public void test_toUri_05() {
     Assert.assertEquals(
       URI.createURI("file:///dir/\u0424\u0443 \u0411\u0430\u0440"), 
-      this._uriExtensions.toUri("file:///dir/\u0424\u0443 \u0411\u0430\u0440"));
+      this._uriExtensions.toUri("file:///dir/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80"));
   }
   
   @Test
   public void test_toUri_06() {
     Assert.assertEquals(
       URI.createURI("file://dir/\u0424\u0443 \u0411\u0430\u0440"), 
-      this._uriExtensions.toUri("file://dir/\u0424\u0443 \u0411\u0430\u0440"));
+      this._uriExtensions.toUri("file://dir/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80"));
   }
   
   @Test
@@ -93,28 +93,42 @@ public class UriExtensionsTest {
   public void test_toUri_09() {
     Assert.assertEquals(
       URI.createURI("something:/dir/\u0424\u0443 \u0411\u0430\u0440"), 
-      this._uriExtensions.toUri("something:/dir/\u0424\u0443 \u0411\u0430\u0440"));
+      this._uriExtensions.toUri("something:/dir/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80"));
   }
   
   @Test
   public void test_toUri_10() {
     Assert.assertEquals(
       URI.createURI("something://dir/\u0424\u0443 \u0411\u0430\u0440"), 
-      this._uriExtensions.toUri("something://dir/\u0424\u0443 \u0411\u0430\u0440"));
+      this._uriExtensions.toUri("something://dir/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80"));
   }
   
   @Test
   public void test_toUri_11() {
     Assert.assertEquals(
       URI.createURI("something:/path with whitespaces/to/resource"), 
-      this._uriExtensions.toUri("something:/path with whitespaces/to/resource"));
+      this._uriExtensions.toUri("something:/path%20with%20whitespaces/to/resource"));
   }
   
   @Test
   public void test_toUri_12() {
     Assert.assertEquals(
       URI.createURI("something://path with whitespaces/to/resource"), 
-      this._uriExtensions.toUri("something://path with whitespaces/to/resource"));
+      this._uriExtensions.toUri("something://path%20with%20whitespaces/to/resource"));
+  }
+  
+  @Test
+  public void test_toUri_13() {
+    Assert.assertEquals(
+      URI.createURI("file:///c:/Users/dietrich/git/MyDSL_Imports/mydsl/workspace/src/something.mydsl"), 
+      this._uriExtensions.toUri("file:///c%3A/Users/dietrich/git/MyDSL_Imports/mydsl/workspace/src/something.mydsl"));
+  }
+  
+  @Test
+  public void test_toUri_14() {
+    Assert.assertEquals(
+      URI.createURI("file:///c:/Users/dietrich/\u0424\u0443 \u0411\u0430\u0440.mydsl"), 
+      this._uriExtensions.toUri("file:///c%3A/Users/dietrich/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80.mydsl"));
   }
   
   @Test
@@ -211,13 +225,13 @@ public class UriExtensionsTest {
   
   @Test
   public void testFilesWithSpaces() {
-    Assert.assertEquals("file:///dir/Foo Bar.testlang", this._uriExtensions.toUriString(this._uriExtensions.toUri("file:///dir/Foo Bar.testlang")));
+    Assert.assertEquals("file:///dir/Foo Bar.testlang", this._uriExtensions.toUriString(this._uriExtensions.toUri("file:///dir/Foo%20Bar.testlang")));
   }
   
   @Test
   public void testFilesWithCyrillicSymbols() {
     Assert.assertEquals("file:///dir/\u0424\u0443 \u0411\u0430\u0440.testlang", 
-      this._uriExtensions.toUriString(this._uriExtensions.toUri("file:///dir/\u0424\u0443 \u0411\u0430\u0440.testlang")));
+      this._uriExtensions.toUriString(this._uriExtensions.toUri("file:///dir/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80.testlang")));
   }
   
   @Test

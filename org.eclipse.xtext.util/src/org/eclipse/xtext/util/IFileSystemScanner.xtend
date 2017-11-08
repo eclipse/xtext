@@ -8,6 +8,7 @@
 package org.eclipse.xtext.util
 
 import com.google.inject.ImplementedBy
+import com.google.inject.Inject
 import java.io.File
 import java.nio.file.Paths
 import org.eclipse.emf.common.util.URI
@@ -22,6 +23,8 @@ interface IFileSystemScanner {
     def void scan(URI root, IAcceptor<URI> acceptor)
     
     static class JavaIoFileSystemScanner implements IFileSystemScanner {
+    	
+        @Inject extension UriExtensions
         
         override scan(URI root, IAcceptor<URI> acceptor) {
             val file = new File(root.toFileString)
@@ -33,7 +36,7 @@ interface IFileSystemScanner {
             // e.g. file:///Users/x/y/z
             // or file:///C:/x/y/z
             val path = Paths.get(file.absoluteFile.toURI)
-            val uri = URI.createURI(path.toUri.toString)
+            val uri = path.toUri.toString.toUri
             acceptor.accept(uri)
             if (file.isDirectory) {
                 val files = file.listFiles

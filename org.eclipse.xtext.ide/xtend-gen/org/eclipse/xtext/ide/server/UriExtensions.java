@@ -18,15 +18,7 @@ import org.eclipse.emf.common.util.URI;
  */
 @Singleton
 @SuppressWarnings("all")
-public class UriExtensions {
-  /**
-   * returns a URI with empty authority, if absent and has file scheme.
-   */
-  public URI toUri(final String stringUri) {
-    final URI uri = URI.createURI(stringUri);
-    return this.withEmptyAuthority(uri);
-  }
-  
+public class UriExtensions extends org.eclipse.xtext.util.UriExtensions {
   /**
    * returns the string representation of the given URI (with empty authority, if absent and has file scheme).
    */
@@ -39,19 +31,6 @@ public class UriExtensions {
    */
   public String toUriString(final java.net.URI uri) {
     return this.toUriString(URI.createURI(uri.normalize().toString()));
-  }
-  
-  /**
-   * converts the file URIs with an absent authority to one with an empty
-   */
-  public URI withEmptyAuthority(final URI uri) {
-    URI _xifexpression = null;
-    if ((uri.isFile() && (uri.authority() == null))) {
-      _xifexpression = URI.createHierarchicalURI(uri.scheme(), "", uri.device(), uri.segments(), uri.query(), uri.fragment());
-    } else {
-      _xifexpression = uri;
-    }
-    return _xifexpression;
   }
   
   /**
