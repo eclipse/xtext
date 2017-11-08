@@ -270,7 +270,7 @@ public class TypeReference {
         {
           final GenClass genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
           final String packageName = genClass.getGenPackage().getInterfacePackageName();
-          String _interfaceName = GenModelUtil2.getGenClass(clazz, resourceSet).getInterfaceName();
+          String _interfaceName = genClass.getInterfaceName();
           _xblockexpression_1 = new TypeReference.QualifiedClassName(packageName, _interfaceName);
         }
         _xifexpression_1 = _xblockexpression_1;
@@ -292,7 +292,7 @@ public class TypeReference {
         _xifexpression = genPackage.getReflectionPackageName();
       }
       final String packageName = _xifexpression;
-      String _packageInterfaceName = GenModelUtil2.getGenPackage(epackage, resourceSet).getPackageInterfaceName();
+      String _packageInterfaceName = genPackage.getPackageInterfaceName();
       _xblockexpression = new TypeReference.QualifiedClassName(packageName, _packageInterfaceName);
     }
     return _xblockexpression;

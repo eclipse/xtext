@@ -159,7 +159,7 @@ class TypeReference {
 			val genClass = GenModelUtil2.getGenClass(clazz, resourceSet)
 			val packageName = genClass.genPackage.getInterfacePackageName();
 			new QualifiedClassName(packageName,
-				GenModelUtil2.getGenClass(clazz, resourceSet).interfaceName)
+				genClass.interfaceName)
 		}
 	}
 
@@ -167,7 +167,7 @@ class TypeReference {
 		val genPackage = GenModelUtil2.getGenPackage(epackage, resourceSet)
 		val packageName = if (genPackage.getGenModel().isSuppressEMFMetaData()) genPackage.getQualifiedPackageClassName() else genPackage.getReflectionPackageName()
 		new QualifiedClassName(packageName,
-			GenModelUtil2.getGenPackage(epackage, resourceSet).packageInterfaceName)
+			genPackage.packageInterfaceName)
 	}
 	
 	override toString() {
