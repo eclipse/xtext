@@ -156,13 +156,17 @@ class TypeReference {
 				new QualifiedClassName('org.eclipse.emf.ecore', clazz.name)
 			}
 		} else {
-			new QualifiedClassName(GenModelUtil2.getGenClass(clazz, resourceSet).genPackage.qualifiedPackageName,
+			val genClass = GenModelUtil2.getGenClass(clazz, resourceSet)
+			val packageName = genClass.genPackage.getInterfacePackageName();
+			new QualifiedClassName(packageName,
 				GenModelUtil2.getGenClass(clazz, resourceSet).interfaceName)
 		}
 	}
 
 	private static def QualifiedClassName getQualifiedName(EPackage epackage, ResourceSet resourceSet) {
-		new QualifiedClassName(GenModelUtil2.getGenPackage(epackage, resourceSet).qualifiedPackageName,
+		val genPackage = GenModelUtil2.getGenPackage(epackage, resourceSet)
+		val packageName = if (genPackage.getGenModel().isSuppressEMFMetaData()) genPackage.getQualifiedPackageClassName() else genPackage.getReflectionPackageName()
+		new QualifiedClassName(packageName,
 			GenModelUtil2.getGenPackage(epackage, resourceSet).packageInterfaceName)
 	}
 	
