@@ -38,7 +38,7 @@ public interface IFileSystemScanner {
     
     public void scanRec(final File file, final IAcceptor<URI> acceptor) {
       final Path path = Paths.get(file.getAbsoluteFile().toURI());
-      final URI uri = this._uriExtensions.toUri(path.toUri().toString());
+      final URI uri = this._uriExtensions.toEmfUri(path.toUri());
       acceptor.accept(uri);
       boolean _isDirectory = file.isDirectory();
       if (_isDirectory) {

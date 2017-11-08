@@ -20,6 +20,13 @@ class UriExtensions {
 	 */
 	def URI toUri(String stringUri) {
 		val netUri = new java.net.URI(stringUri)
+		return netUri.toEmfUri
+	}
+	
+	/**
+	 * returns a URI with empty authority, if absent and has file scheme.
+	 */
+	def URI toEmfUri(java.net.URI netUri) {
 		val decoded = '''«netUri.scheme»:«netUri.schemeSpecificPart»'''.toString
 		val uri = URI.createURI(decoded);
 		val result = uri.withEmptyAuthority

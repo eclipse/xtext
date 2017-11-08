@@ -36,7 +36,7 @@ interface IFileSystemScanner {
             // e.g. file:///Users/x/y/z
             // or file:///C:/x/y/z
             val path = Paths.get(file.absoluteFile.toURI)
-            val uri = path.toUri.toString.toUri
+            val uri = path.toUri.toEmfUri
             acceptor.accept(uri)
             if (file.isDirectory) {
                 val files = file.listFiles

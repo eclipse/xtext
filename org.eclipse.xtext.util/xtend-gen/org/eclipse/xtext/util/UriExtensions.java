@@ -22,24 +22,31 @@ public class UriExtensions {
    */
   public URI toUri(final String stringUri) {
     try {
-      URI _xblockexpression = null;
-      {
-        final java.net.URI netUri = new java.net.URI(stringUri);
-        StringConcatenation _builder = new StringConcatenation();
-        String _scheme = netUri.getScheme();
-        _builder.append(_scheme);
-        _builder.append(":");
-        String _schemeSpecificPart = netUri.getSchemeSpecificPart();
-        _builder.append(_schemeSpecificPart);
-        final String decoded = _builder.toString();
-        final URI uri = URI.createURI(decoded);
-        final URI result = this.withEmptyAuthority(uri);
-        _xblockexpression = result;
-      }
-      return _xblockexpression;
+      final java.net.URI netUri = new java.net.URI(stringUri);
+      return this.toEmfUri(netUri);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  /**
+   * returns a URI with empty authority, if absent and has file scheme.
+   */
+  public URI toEmfUri(final java.net.URI netUri) {
+    URI _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      String _scheme = netUri.getScheme();
+      _builder.append(_scheme);
+      _builder.append(":");
+      String _schemeSpecificPart = netUri.getSchemeSpecificPart();
+      _builder.append(_schemeSpecificPart);
+      final String decoded = _builder.toString();
+      final URI uri = URI.createURI(decoded);
+      final URI result = this.withEmptyAuthority(uri);
+      _xblockexpression = result;
+    }
+    return _xblockexpression;
   }
   
   /**
