@@ -31,6 +31,7 @@ import org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
 import org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 import org.eclipse.xtext.xtext.generator.ui.outline.QuickOutlineFragment2
 import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2
+import org.eclipse.xtext.xtext.generator.ui.projectWizard.TemplateProjectWizardFragment
 import org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
 import org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
 import org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
@@ -116,6 +117,8 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	
 	SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2
 	
+	TemplateProjectWizardFragment newTemplateProjectWizardForEclipse = new TemplateProjectWizardFragment
+	
 	new() {
 		try {
 			class.classLoader.loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule")
@@ -171,6 +174,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 		fragments += ideaPlugin
 		fragments += webSupport
 		fragments += newProjectWizardForEclipse
+		fragments += newTemplateProjectWizardForEclipse
 		fragments
 	}
 	

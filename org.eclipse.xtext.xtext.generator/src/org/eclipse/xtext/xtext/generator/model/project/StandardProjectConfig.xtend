@@ -63,6 +63,8 @@ class StandardProjectConfig extends XtextProjectConfig {
 				src = computeSrc
 			if (srcGenPath === null)
 				srcGen = computeSrcGen
+			if (iconsPath === null)
+				icons = computeIcons
 			if (it instanceof BundleProjectConfig) {
 				if (createEclipseMetaData) {
 					if (manifest === null)
@@ -129,6 +131,10 @@ class StandardProjectConfig extends XtextProjectConfig {
 
 	protected def computeSourceSet(SubProjectConfig project) {
 		if(testProjects.contains(project)) 'test' else 'main'
+	}
+	
+	protected def computeIcons(SubProjectConfig project) {
+		project.rootPath + '/' + 'icons'
 	}
 
 }

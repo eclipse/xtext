@@ -29,4 +29,6 @@ interface ISubProjectConfig extends IGuiceAwareGeneratorComponent {
 	
 	def IXtextGeneratorFileSystemAccess getSrcGen()
 	
+	def IXtextGeneratorFileSystemAccess getIcons()
+	
 }

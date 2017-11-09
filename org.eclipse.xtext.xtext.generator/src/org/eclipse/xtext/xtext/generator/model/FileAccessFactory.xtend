@@ -57,4 +57,15 @@ class FileAccessFactory {
 	def GeneratedJavaFileAccess createGeneratedJavaFile(TypeReference typeRef) {
 		new GeneratedJavaFileAccess(typeRef, codeConfig)
 	}
+	
+	def BinaryFileAccess createBinaryFile() {
+		new BinaryFileAccess()
+	}
+	
+	def BinaryFileAccess createBinaryFile(String path) {
+		val result = createBinaryFile()
+		result.path = path
+		return result
+	}
+	
 }

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator.model;
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.model.BinaryFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
@@ -62,5 +63,15 @@ public class FileAccessFactory {
   
   public GeneratedJavaFileAccess createGeneratedJavaFile(final TypeReference typeRef) {
     return new GeneratedJavaFileAccess(typeRef, this.codeConfig);
+  }
+  
+  public BinaryFileAccess createBinaryFile() {
+    return new BinaryFileAccess();
+  }
+  
+  public BinaryFileAccess createBinaryFile(final String path) {
+    final BinaryFileAccess result = this.createBinaryFile();
+    result.setPath(path);
+    return result;
   }
 }
