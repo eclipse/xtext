@@ -74,7 +74,7 @@ class ProcessorInstanceForJvmTypeProvider {
 		}
 	}
 	
-	def protected getClassLoader(EObject ctx) {
+	def public getClassLoader(EObject ctx) {
 		val resourceSet = ctx.eResource.resourceSet
 		val adapter = resourceSet.eAdapters.filter(ProcessorClassloaderAdapter).head
 		if (adapter !== null) {
