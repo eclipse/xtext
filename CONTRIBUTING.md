@@ -35,6 +35,8 @@ All committers should feel responsible to read incoming issues. When you read a 
 * If you are not familiar enough with the topic of the issue, you might find someone who is and delegate the action.
 
 ## Set up your Eclipse Workspace
+Before starting the setup process, make sure that you have both an [Eclipse](https://accounts.eclipse.org/user/register) and and a [GitHub](https://github.com/join) account. Also make sure that you have _disabled_ [two factor authorisation](https://github.com/settings/security) on GitHub during the setup process, as the [installer currently cannot handle that](https://bugs.eclipse.org/bugs/show_bug.cgi?id=426144).
+
 1. Download and start the [Eclipse Installer](https://wiki.eclipse.org/Eclipse_Oomph_Installer).
 2. On the initial page, click on the *Switch to Advanced Mode* button in the top right.
 3. On the *Product* page, select *Eclipse IDE for Eclipse Committers*.
