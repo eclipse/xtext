@@ -40,8 +40,10 @@ All committers should feel responsible to read incoming issues. When you read a 
 3. On the *Product* page, select *Eclipse IDE for Eclipse Committers*.
 4. On the *Projects* page, expand the *Xtext* node.
 5. Below the *Xtext* node there is a subproject entry for each module. Select those you would like to install. If in doubt, select all of them.
-6. Choose your preferred installation settings on the *Variables* page. Enter credentials for your Bugzilla and GitHub account.
+6. Choose your preferred installation settings on the *Variables* page. Enter credentials for your Eclipse and GitHub account.
 7. Finish the wizard, drink a cup of coffee, and watch how your Xtext development environment is assembled.
+
+When you run your freshly installed Eclipse IDE for the first time it will clone the relevant repositories and automatically set up your workspace with a number of projects.
 
 ## Contribute via Fork
 All you need is a [GitHub](https://github.com/) account.
