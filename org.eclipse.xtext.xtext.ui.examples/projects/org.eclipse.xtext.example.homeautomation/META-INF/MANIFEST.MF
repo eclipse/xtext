@@ -12,10 +12,10 @@ Require-Bundle: org.eclipse.xtext,
  org.objectweb.asm;bundle-version="[5.0.1,7.0.0)";resolution:=optional,
  org.eclipse.xtext.util,
  org.antlr.runtime,
- org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib;bundle-version="2.14.0",
  org.eclipse.emf.common,
  org.eclipse.xtext.common.types,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.homeautomation.ruleEngine.util,
  org.eclipse.xtext.example.homeautomation.ruleEngine,
