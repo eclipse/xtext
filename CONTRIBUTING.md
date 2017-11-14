@@ -53,9 +53,10 @@ All you need is a [GitHub](https://github.com/) account.
  1. Make sure there is a GitHub issue for what you want to work on.
  2. Announce in the comments section that you want to work on the issue. Also describe the solution you want to implement. To improve the chances for your contribution to be accepted, you'll want to wait for the feedback of the committers.
  3. Implement your change. Take care to follow the [quality guidelines](QUALITY_GUIDELINES.md) to improve chances of accepting it by a committer.
- 4. Run the Maven/Gradle build locally to see if everything compiles and all tests pass.
- 5. Push your changes to your forked repository. It is recommended to create a separate branch, this will make it easier to include the feedback from committers and update your changes.
- 6. Create a [pull request](https://help.github.com/articles/using-pull-requests/).
+ 4. [Sign off](https://git-scm.com/docs/git-commit#git-commit--s) your commits using the same email address you are using for your Eclipse account.
+ 5. Run the Maven/Gradle build locally to see if everything compiles and all tests pass.
+ 6. Push your changes to your forked repository. It is recommended to create a separate branch, this will make it easier to include the feedback from committers and update your changes.
+ 7. Create a [pull request](https://help.github.com/articles/using-pull-requests/).
 
 ## Contributing for Committers
 You're a committer if you have write-access to the Xtext git-repositories.
@@ -64,10 +65,11 @@ You're a committer if you have write-access to the Xtext git-repositories.
  2. Assign the issue to yourself.
  3. Create a local git branch.
  4. Implement your change. Take care to follow the [quality guidelines](QUALITY_GUIDELINES.md).
- 5. Push the branch into the repository.
- 6. [Jenkins](http://services.typefox.io/open-source/jenkins/) will automatically create a job for your branch and build it.
- 7. If, and only if, all tests have passed, create a pull request and ask somebody who is familiar with the code you modified to review it.
- 8. If the reviewer approves, merge.
+ 5. [Sign off](https://git-scm.com/docs/git-commit#git-commit--s) your commits using the same email address you are using for your Eclipse account.
+ 6. Push the branch into the repository.
+ 7. [Jenkins](http://services.typefox.io/open-source/jenkins/) will automatically create a job for your branch and build it.
+ 8. If, and only if, all tests have passed, create a pull request and ask somebody who is familiar with the code you modified to review it.
+ 9. If the reviewer approves, merge.
 
 ## Create a release locally
  1. Run the Maven / Gradle build locally.
