@@ -134,7 +134,7 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	 * @since 2.3
 	 */
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	public Object getAdapter(Class adapter) {
 		if (IReconciler.class.isAssignableFrom(adapter)) {
 			return fReconciler;

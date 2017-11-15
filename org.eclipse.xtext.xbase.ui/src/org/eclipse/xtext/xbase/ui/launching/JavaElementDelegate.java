@@ -86,7 +86,7 @@ public class JavaElementDelegate implements IAdaptable {
 		this.resource = resource;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public Object getAdapter(Class adapter) {
 		if (IJavaElement.class.equals(adapter)) {
