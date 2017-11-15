@@ -31,7 +31,7 @@ class RenameIssue520Test extends AbstractTestLangLanguageServerTest {
 				Foo ref
 			}
         '''
-        val file2 = 'foo/Bar.testlang'.writeFile(model2)
+        'foo/Bar.testlang'.writeFile(model2)
         initialize
         
         val params = new RenameParams(new TextDocumentIdentifier(file), new Position(0, 6), 'FooNeu')
