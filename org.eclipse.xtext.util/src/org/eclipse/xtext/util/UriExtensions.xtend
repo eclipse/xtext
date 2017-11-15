@@ -33,6 +33,9 @@ class UriExtensions {
 		result
 	}
 	
+	/**
+	 * converts a java.net.URI to a decoded string
+	 */
 	def String toDecodedString(java.net.URI uri) {
 		val scheme = uri.getScheme();
 		val part = uri.getSchemeSpecificPart();

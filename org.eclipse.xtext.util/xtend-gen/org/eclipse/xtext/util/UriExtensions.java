@@ -42,6 +42,9 @@ public class UriExtensions {
     return _xblockexpression;
   }
   
+  /**
+   * converts a java.net.URI to a decoded string
+   */
   public String toDecodedString(final java.net.URI uri) {
     final String scheme = uri.getScheme();
     final String part = uri.getSchemeSpecificPart();
