@@ -412,12 +412,18 @@
             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="xtend">
     </viewer>
+    <contentTypeBinding 
+    			contentTypeId="org.eclipse.xtend.core.Xtend.contenttype"
+    			contentViewerId="org.eclipse.xtend.core.Xtend.compare.contentViewers"/>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="org.eclipse.xtend.core.Xtend.compare.contentMergeViewers"
             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="xtend" label="Xtend Compare">
      </viewer>
+     <contentTypeBinding 
+      		contentTypeId="org.eclipse.xtend.core.Xtend.contenttype"
+      		contentMergeViewerId="org.eclipse.xtend.core.Xtend.compare.contentMergeViewers"/>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="org.eclipse.xtend.core.Xtend.editors.documentProviders"
