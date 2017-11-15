@@ -335,7 +335,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		return null;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public Object getAdapter(Class adapter) {
 		if (IContentOutlinePage.class.isAssignableFrom(adapter)) {
