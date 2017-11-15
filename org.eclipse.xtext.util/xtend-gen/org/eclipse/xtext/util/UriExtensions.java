@@ -8,7 +8,6 @@
 package org.eclipse.xtext.util;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
@@ -35,18 +34,21 @@ public class UriExtensions {
   public URI toEmfUri(final java.net.URI netUri) {
     URI _xblockexpression = null;
     {
-      StringConcatenation _builder = new StringConcatenation();
-      String _scheme = netUri.getScheme();
-      _builder.append(_scheme);
-      _builder.append(":");
-      String _schemeSpecificPart = netUri.getSchemeSpecificPart();
-      _builder.append(_schemeSpecificPart);
-      final String decoded = _builder.toString();
+      final String decoded = this.toDecodedString(netUri);
       final URI uri = URI.createURI(decoded);
       final URI result = this.withEmptyAuthority(uri);
       _xblockexpression = result;
     }
     return _xblockexpression;
+  }
+  
+  public String toDecodedString(final java.net.URI uri) {
+    final String scheme = uri.getScheme();
+    final String part = uri.getSchemeSpecificPart();
+    if ((scheme == null)) {
+      return part;
+    }
+    return ((scheme + ":") + part);
   }
   
   /**
