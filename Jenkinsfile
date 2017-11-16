@@ -14,7 +14,7 @@ node {
 	stage('Maven Build') {
 		def mvnHome = tool 'M3'
 		wrap([$class:'Xvnc', useXauthority: true]) {
-			sh "${mvnHome}/bin/mvn --batch-mode -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=.m2/repository clean install"
+			sh "${mvnHome}/bin/mvn --batch-mode -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean install"
 		}
 		step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
 	}
