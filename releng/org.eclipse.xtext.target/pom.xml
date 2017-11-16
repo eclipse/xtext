@@ -12,4 +12,36 @@
 
 	<packaging>eclipse-target-definition</packaging>
 	<artifactId>org.eclipse.xtext.target</artifactId>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>${project.artifactId}-oxygen.target</file>
+									<type>target</type>
+									<classifier>oxygen</classifier>
+								</artifact>
+								<artifact>
+									<file>${project.artifactId}-photon.target</file>
+									<type>target</type>
+									<classifier>photon</classifier>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
