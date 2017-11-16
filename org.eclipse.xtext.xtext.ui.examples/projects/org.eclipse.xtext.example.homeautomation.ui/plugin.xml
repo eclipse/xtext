@@ -556,12 +556,18 @@
 			class="org.eclipse.xtext.example.homeautomation.ui.RuleEngineExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="rules">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.example.homeautomation.RuleEngine.contenttype"
+			contentMergeViewerId="org.eclipse.xtext.example.homeautomation.RuleEngine.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="org.eclipse.xtext.example.homeautomation.RuleEngine.compare.contentMergeViewers"
 			class="org.eclipse.xtext.example.homeautomation.ui.RuleEngineExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="rules" label="RuleEngine Compare">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.example.homeautomation.RuleEngine.contenttype"
+			contentMergeViewerId="org.eclipse.xtext.example.homeautomation.RuleEngine.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="org.eclipse.xtext.example.homeautomation.RuleEngine.editors.documentProviders"

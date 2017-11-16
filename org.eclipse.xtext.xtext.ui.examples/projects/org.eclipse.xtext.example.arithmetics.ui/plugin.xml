@@ -398,12 +398,18 @@
 			class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="calc">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.example.arithmetics.Arithmetics.contenttype"
+			contentViewerId="org.eclipse.xtext.example.arithmetics.Arithmetics.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="org.eclipse.xtext.example.arithmetics.Arithmetics.compare.contentMergeViewers"
 			class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="calc" label="Arithmetics Compare">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.example.arithmetics.Arithmetics.contenttype"
+			contentMergeViewerId="org.eclipse.xtext.example.arithmetics.Arithmetics.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="org.eclipse.xtext.example.arithmetics.Arithmetics.editors.documentProviders"
