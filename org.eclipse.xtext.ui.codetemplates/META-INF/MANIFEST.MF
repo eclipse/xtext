@@ -22,7 +22,7 @@ Import-Package: com.ibm.icu.text;version="4.0.0";resolution:=optional,
  org.apache.commons.logging,
  org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.xtext.ui.codetemplates;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
+Export-Package: org.eclipse.xtext.ui.codetemplates;x-friends:="org.eclipse.xtext.ui.codetemplates.ide,org.eclipse.xtext.ui.codetemplates.ui",
  org.eclipse.xtext.ui.codetemplates.conversion;x-internal:=true,
  org.eclipse.xtext.ui.codetemplates.formatting;x-internal:=true,
  org.eclipse.xtext.ui.codetemplates.generator;x-internal:=true,
@@ -33,7 +33,7 @@ Export-Package: org.eclipse.xtext.ui.codetemplates;x-friends:="org.eclipse.xtext
  org.eclipse.xtext.ui.codetemplates.parser.antlr.internal;x-internal:=true,
  org.eclipse.xtext.ui.codetemplates.parser.antlr.lexer;x-internal:=true,
  org.eclipse.xtext.ui.codetemplates.scoping;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
- org.eclipse.xtext.ui.codetemplates.services;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
+ org.eclipse.xtext.ui.codetemplates.services;x-friends:="org.eclipse.xtext.ui.codetemplates.ide,org.eclipse.xtext.ui.codetemplates.ui",
  org.eclipse.xtext.ui.codetemplates.templates;x-friends:="org.eclipse.xtext.ui.codetemplates.ui,org.eclipse.xtext.xbase.ui",
  org.eclipse.xtext.ui.codetemplates.templates.impl;x-internal:=true,
  org.eclipse.xtext.ui.codetemplates.templates.util;x-internal:=true,
