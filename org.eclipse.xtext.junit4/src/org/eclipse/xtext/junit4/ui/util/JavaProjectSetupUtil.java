@@ -96,6 +96,7 @@ public class JavaProjectSetupUtil {
 		}
 	}
 	
+	@SafeVarargs
 	public static InputStream jarInputStream(Pair<String, InputStream> ...entries) {
 		try {
 			ByteArrayOutputStream out2 = new ByteArrayOutputStream();
@@ -337,6 +338,7 @@ public class JavaProjectSetupUtil {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static void makeJava5Compliant(IJavaProject javaProject) {
 		Map<String, String> options= javaProject.getOptions(false);
 		options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);

@@ -61,6 +61,7 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	/**
 	 * copied from org.eclipse.jdt.internal.ui.javaeditor.JavaSourceViewer.prependTextPresentationListener(ITextPresentationListener)
 	 */
+	@SuppressWarnings("unchecked")
 	public void prependTextPresentationListener(ITextPresentationListener listener) {
 		Assert.isNotNull(listener);
 
@@ -79,6 +80,7 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	 *
 	 * @param cmd the widget command translated into a text event sent to all text listeners
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void updateTextListeners(WidgetCommand cmd) {
 		if (cmd.event == null && cmd.length == 0 && cmd.start == 0 && cmd.text == null) {

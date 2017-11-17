@@ -781,6 +781,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		buffer.append("</dt>"); //$NON-NLS-1$
 	}
 
+	@SuppressWarnings("unchecked")
 	public Javadoc getJavaDoc() {
 		if (context == null || context.eResource() == null || context.eResource().getResourceSet() == null)
 			return null;
