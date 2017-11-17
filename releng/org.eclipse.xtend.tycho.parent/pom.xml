@@ -18,20 +18,20 @@
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<sign.skip>true</sign.skip>
 
-		<target-platform-artifactId>org.eclipse.xtend.target</target-platform-artifactId>
+		<target-platform-classifier></target-platform-classifier>
 	</properties>
 
 	<profiles>
 		<profile>
 			<id>usePhotonTarget</id>
 			<properties>
-				<target-platform-artifactId>org.eclipse.xtend.photon.target</target-platform-artifactId>
+				<target-platform-classifier>-photon</target-platform-classifier>
 			</properties>
 		</profile>
 		<profile>
 			<id>useOxygenTarget</id>
 			<properties>
-				<target-platform-artifactId>org.eclipse.xtend.oxygen.target</target-platform-artifactId>
+				<target-platform-classifier>-oxygen</target-platform-classifier>
 			</properties>
 		</profile>
 	</profiles>
@@ -65,18 +65,14 @@
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-versions-plugin</artifactId>
-				<version>${tycho-version}</version>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
 					<target>
 						<artifact>
 							<groupId>org.eclipse.xtend</groupId>
-							<artifactId>${target-platform-artifactId}</artifactId>
+							<artifactId>org.eclipse.xtend.target</artifactId>
+							<classifier>org.eclipse.xtend.target${target-platform-classifier}</classifier>
 							<version>${project.parent.version}</version>
 						</artifact>
 					</target>
@@ -225,5 +221,19 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-versions-plugin</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>
