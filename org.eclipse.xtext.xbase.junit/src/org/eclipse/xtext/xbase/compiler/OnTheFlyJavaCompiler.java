@@ -296,6 +296,7 @@ public class OnTheFlyJavaCompiler {
 		parent.mkdirs();
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Pair<String, String> createFullCode(String statementCode,
 			Type returnType, Pair<Type, String>... params) {
 		String className = "_$GeneratedClass";
@@ -394,6 +395,7 @@ public class OnTheFlyJavaCompiler {
 				errorStream)), false /* systemExit */, null /* options */, null);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Object internalCreateFunction(String code, Type returnType,
 			Pair<Type, String>... params) {
 		Pair<String, String> fullCode = createFullCode(code, returnType, params);

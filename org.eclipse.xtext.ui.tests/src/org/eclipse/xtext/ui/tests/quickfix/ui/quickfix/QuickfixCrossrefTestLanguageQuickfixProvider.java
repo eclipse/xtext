@@ -46,11 +46,11 @@ public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfi
 		});
 	}
 
+	@SuppressWarnings("unchecked")
 	@Fix(QuickfixCrossrefTestLanguageValidator.BAD_NAME_IN_SUBELEMENTS)
 	public void fixBadNames(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.acceptMulti(issue, "Fix Bad Names", "Fix Bad Names", null, (Element main, ICompositeModificationContext<Element> ctx) -> {
 			ctx.addModification(main.eContainer(), c -> {
-				@SuppressWarnings("unchecked")
 				List<Element> siblings = (List<Element>) main.eContainer().eGet(main.eContainmentFeature());
 				int index = siblings.indexOf(main);
 				Element newEle = QuickfixCrossrefFactory.eINSTANCE.createElement();
