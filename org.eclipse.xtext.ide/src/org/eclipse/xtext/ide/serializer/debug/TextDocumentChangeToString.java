@@ -64,6 +64,7 @@ public class TextDocumentChangeToString {
 			if (c instanceof ITextDocumentChange) {
 				ITextDocumentChange change = (ITextDocumentChange) c;
 				TextRegionsToString textRegionsToString = new TextRegionsToString();
+				textRegionsToString.setIgnoreCarriageReturnInQuotes(true);
 				textRegionsToString.addAllReplacements(change.getReplacements());
 				textRegionsToString.setTitle(title);
 				result.add(textRegionsToString.toString());

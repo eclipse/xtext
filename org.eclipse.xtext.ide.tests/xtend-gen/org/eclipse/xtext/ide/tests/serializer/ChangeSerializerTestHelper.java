@@ -34,6 +34,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.testing.util.InMemoryURIHandler;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.CollectionBasedAcceptor;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -54,17 +55,17 @@ public class ChangeSerializerTestHelper {
   
   public void operator_tripleEquals(final Collection<IEmfResourceChange> actual, final CharSequence expected) {
     final String actualString = new TextDocumentChangeToString().add(actual).toString();
-    Assert.assertEquals(expected.toString().trim(), actualString.trim());
+    Assert.assertEquals(Strings.toPlatformLineSeparator(expected).trim(), Strings.toPlatformLineSeparator(actualString).trim());
   }
   
   public void operator_tripleEquals(final ITextRegionAccess actual, final CharSequence expected) {
     final String actualString = new TextRegionAccessToString().withRegionAccess(actual).hideColumnExplanation().toString();
-    Assert.assertEquals(expected.toString().trim(), actualString.trim());
+    Assert.assertEquals(Strings.toPlatformLineSeparator(expected).trim(), Strings.toPlatformLineSeparator(actualString).trim());
   }
   
   public void operator_add(final InMemoryURIHandler handler, final Pair<String, String> file) {
     final InMemoryURIHandler.InMemFile f = handler.getInMemoryFile(URI.createURI(file.getKey()));
-    f.setContents(file.getValue().getBytes());
+    f.setContents(Strings.toUnixLineSeparator(file.getValue()).getBytes());
     f.setExists(true);
   }
   
