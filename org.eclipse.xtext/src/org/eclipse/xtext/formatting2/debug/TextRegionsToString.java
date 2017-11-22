@@ -86,7 +86,9 @@ public class TextRegionsToString {
 				result.add("\\n");
 				break;
 			case '\r':
-				if (!ignoreCarriageReturnInQuotes) {
+				if (ignoreCarriageReturnInQuotes) {
+					max = Math.min(max+1, string.length());
+				} else {
 					result.add("\\r");
 				}
 				break;
