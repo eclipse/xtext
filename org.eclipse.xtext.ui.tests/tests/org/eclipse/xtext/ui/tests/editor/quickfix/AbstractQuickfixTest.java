@@ -105,7 +105,12 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 			return null;
 		}
 	}
-
+	
+	protected ICompletionProposal[] computeQuickAssistProposals(XtextEditor editor, String text) {
+		int idx = editor.getDocument().get().indexOf(text);
+		return computeQuickAssistProposals(editor, idx);
+	}
+	
 	protected ICompletionProposal[] computeQuickAssistProposals(XtextEditor editor, int offset) {
 		XtextSourceViewer sourceViewer = (XtextSourceViewer) editor.getInternalSourceViewer();
 		XtextReconciler reconciler = (XtextReconciler) sourceViewer.getAdapter(IReconciler.class);
@@ -146,7 +151,7 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 	}
 
 	protected void assertContentsAndMarkers(IFile file, IMarker[] markers, CharSequence expectation) {
-		String actual = new AnnotatedTextToString().withFile(file).withMarkersFromFile().toString().trim();
+		String actual = new AnnotatedTextToString().withFile(file).withMarkers(markers).toString().trim();
 		String exp = expectation.toString().trim();
 		Assert.assertEquals(exp, actual);
 	}
