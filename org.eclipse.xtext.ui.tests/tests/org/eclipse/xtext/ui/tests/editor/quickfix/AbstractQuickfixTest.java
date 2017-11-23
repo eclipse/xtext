@@ -146,7 +146,7 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 	}
 
 	protected void assertContentsAndMarkers(IFile file, IMarker[] markers, CharSequence expectation) {
-		String actual = new AnnotatedTextToString().withFile(file).withMarkersFromFile().toString().trim();
+		String actual = new AnnotatedTextToString().withFile(file).withMarkers(markers).toString().trim();
 		String exp = expectation.toString().trim();
 		Assert.assertEquals(exp, actual);
 	}
