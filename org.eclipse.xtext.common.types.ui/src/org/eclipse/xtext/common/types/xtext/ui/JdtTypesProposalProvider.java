@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +23,6 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.core.WorkingCopyOwner;
 import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
@@ -243,13 +241,9 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			return new IntersectingJavaSearchScope(); // empty intersection
 		}
 		try {
-			// Method is available in JDT 3.6 or better
-			// more than twice as fast as the older alternative
-			Method method = SearchEngine.class.getMethod("createStrictHierarchyScope", IJavaProject.class, IType.class, Boolean.TYPE, Boolean.TYPE, WorkingCopyOwner.class);
-			method.setAccessible(true);
-			IJavaSearchScope result = (IJavaSearchScope) method.invoke(null, project, type, Boolean.TRUE, Boolean.TRUE, null);
+			IJavaSearchScope result = SearchEngine.createStrictHierarchyScope(project, type, Boolean.TRUE, Boolean.TRUE, null);
 			return result;
-		} catch (Exception e) {
+		} catch (JavaModelException e) {
 			final Collection<JvmType> superTypes = superTypeCollector.collect(superType);
 			for(JvmType collectedSuperType: superTypes) {
 				superTypeNames.add(collectedSuperType.getIdentifier());
