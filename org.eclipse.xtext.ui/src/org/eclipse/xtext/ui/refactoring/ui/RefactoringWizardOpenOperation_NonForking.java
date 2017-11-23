@@ -2,7 +2,6 @@ package org.eclipse.xtext.ui.refactoring.ui;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
@@ -17,6 +16,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.IWizardContainer;
 import org.eclipse.ltk.core.refactoring.CheckConditionsOperation;
 import org.eclipse.ltk.core.refactoring.Refactoring;
+import org.eclipse.ltk.core.refactoring.RefactoringContext;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.internal.ui.refactoring.ExceptionHandler;
 import org.eclipse.ltk.internal.ui.refactoring.RefactoringUIMessages;
@@ -129,29 +129,10 @@ public class RefactoringWizardOpenOperation_NonForking {
 		return result[0];
 	}
 
-	/**
-	 * Only applicable for Eclipse >= 3.7, therefore reflective
-	 */
 	private void disposeRefactoringContext(RefactoringWizard wizard) {
-		try {
-			Field refactoringContextField = getPrivateField(wizard.getClass(), "fRefactoringContext");
-			if (refactoringContextField == null) {
-				return;
-			}
-			refactoringContextField.setAccessible(true);
-			Object refactoringContext = refactoringContextField.get(wizard);
-			if(refactoringContext != null) {
-				Method disposeMethod = refactoringContext.getClass().getMethod("dispose");
-				disposeMethod.invoke(refactoringContext);
-			}
-		} catch (NoSuchFieldException e) {
-			// ignore
-		} catch (IllegalAccessException e) {
-			// ignore
-		} catch (NoSuchMethodException e) {
-			// ignore
-		} catch (InvocationTargetException e) {
-			// ignore
+		RefactoringContext refactoringContext = wizard.getRefactoringContext();
+		if(refactoringContext != null) {
+			refactoringContext.dispose();
 		}
 	}
 
@@ -194,25 +175,8 @@ public class RefactoringWizardOpenOperation_NonForking {
 		return result;
 	}
 
-	/**
-	 * Copied from {@link RefactoringWizard} as the original is package private.
-	 * Once again reflection is used because of getWizardFlags() did not exist back in Galileo.
-	 */
 	protected boolean needsWizardBasedUserInterface(RefactoringWizard wizard) {
-		try {
-			Field flagsField = getPrivateField(wizard.getClass(), "fFlags");
-			flagsField.setAccessible(true);
-			return ((Integer) flagsField.get(wizard) & RefactoringWizard.WIZARD_BASED_USER_INTERFACE) != 0;
-		} catch (NoSuchFieldException e) {
-			// ignore
-		} catch (SecurityException e) {
-			// ignore
-		} catch (IllegalArgumentException e) {
-			// ignore
-		} catch (IllegalAccessException e) {
-			// ignore
-		}
-		return true;
+		return (wizard.getWizardFlags() & RefactoringWizard.WIZARD_BASED_USER_INTERFACE) != 0;
 	}
 	
 	protected Field getPrivateField(Class<?> clazz, String name) throws NoSuchFieldException, SecurityException {
