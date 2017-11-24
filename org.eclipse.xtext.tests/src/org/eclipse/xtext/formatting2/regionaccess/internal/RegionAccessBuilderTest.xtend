@@ -76,7 +76,7 @@ class RegionAccessBuilderTest {
 			1
 			/**/
 			foo
-		'''.toString.trim === '''
+		'''.toString.trim.toUnixLineSeparator === '''
 			 0 0 H
 			     B Simple'foo' Root
 			 0 1  S "1"        Simple:'1'
