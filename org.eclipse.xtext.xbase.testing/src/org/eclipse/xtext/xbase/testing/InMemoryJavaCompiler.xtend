@@ -157,6 +157,7 @@ class InMemoryJavaCompiler {
 			case JAVA6: return ClassFileConstants.JDK1_6
 			case JAVA7: return ClassFileConstants.JDK1_7
 			case JAVA8: return ((ClassFileConstants.MAJOR_VERSION_1_7 + 1) << 16) + ClassFileConstants.MINOR_VERSION_0 // ClassFileConstants.JDK1_8
+			case JAVA9: return ((ClassFileConstants.MAJOR_VERSION_1_7 + 2) << 16) + ClassFileConstants.MINOR_VERSION_0 // ClassFileConstants.JDK1_9
 		}
 	}
 	
