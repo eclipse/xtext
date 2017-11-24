@@ -18,8 +18,8 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtend.core.tests.util.LineDelimiters
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.junit.Ignore
@@ -3146,7 +3146,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 		
 	def void assertGeneratedCode(Pair<String, String> macroFile, Pair<String, String> clientFile, String... compiledClientFiles) {
 		assertProcessing(macroFile, clientFile) [
-			val clientFilesAsSet = compiledClientFiles.map[LineDelimiters.toUnix(it)].toSet
+			val clientFilesAsSet = compiledClientFiles.map[Strings.toUnixLineSeparator(it)].toSet
 			assertEquals(clientFilesAsSet.size, compiledClientFiles.length)
 			val resource = it.xtendFile.eResource
 			val jvmTypes = resource.contents.tail

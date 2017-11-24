@@ -15,7 +15,6 @@ import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl;
-import org.eclipse.xtend.core.tests.util.LineDelimiters;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -46,6 +45,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -5715,7 +5715,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
   public void assertGeneratedCode(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final String... compiledClientFiles) {
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
       final Function1<String, String> _function_1 = (String it_1) -> {
-        return LineDelimiters.toUnix(it_1);
+        return Strings.toUnixLineSeparator(it_1);
       };
       final Set<String> clientFilesAsSet = IterableExtensions.<String>toSet(ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(compiledClientFiles)), _function_1));
       Assert.assertEquals(clientFilesAsSet.size(), compiledClientFiles.length);
