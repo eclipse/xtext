@@ -12,7 +12,7 @@ import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 import org.junit.Test
 
-import static org.eclipse.xtend.core.tests.util.LineDelimiters.*
+import static org.eclipse.xtext.util.Strings.*
 
 class ToStringCompilerTest extends AbstractXtendCompilerTest {
 	@Inject
@@ -31,7 +31,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 		'''.compile [
 			val instance = compiledClass.newInstance
 			
-			assertEquals(toUnix('''
+			assertEquals(toUnixLineSeparator('''
 				Foo [
 				  a = 1
 				]'''), instance.toString)
@@ -51,7 +51,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 		'''.compile [
 			val instance = compiledClass.newInstance
 			
-			assertEquals(toUnix('''Foo [a = 1]'''), instance.toString)
+			assertEquals(toUnixLineSeparator('''Foo [a = 1]'''), instance.toString)
 		]
 	}
 	
@@ -68,7 +68,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 		'''.compile [
 			val instance = compiledClass.newInstance
 			
-			assertEquals(toUnix('''Foo [1]'''), instance.toString)
+			assertEquals(toUnixLineSeparator('''Foo [1]'''), instance.toString)
 		]
 	}
 	@Test
@@ -98,7 +98,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 		'''.compile [
 			val instance = compiledClass.newInstance
 			
-			assertEquals(toUnix('''
+			assertEquals(toUnixLineSeparator('''
 				Foo [
 				]'''), instance.toString)
 		]

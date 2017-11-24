@@ -9,10 +9,10 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
-import org.eclipse.xtend.core.tests.util.LineDelimiters;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -58,7 +58,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
           _builder_1.append("a = 1");
           _builder_1.newLine();
           _builder_1.append("]");
-          Assert.assertEquals(LineDelimiters.toUnix(_builder_1.toString()), instance.toString());
+          Assert.assertEquals(Strings.toUnixLineSeparator(_builder_1), instance.toString());
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -96,7 +96,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
           final Object instance = it.getCompiledClass().newInstance();
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("Foo [a = 1]");
-          Assert.assertEquals(LineDelimiters.toUnix(_builder_1.toString()), instance.toString());
+          Assert.assertEquals(Strings.toUnixLineSeparator(_builder_1), instance.toString());
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -134,7 +134,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
           final Object instance = it.getCompiledClass().newInstance();
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("Foo [1]");
-          Assert.assertEquals(LineDelimiters.toUnix(_builder_1.toString()), instance.toString());
+          Assert.assertEquals(Strings.toUnixLineSeparator(_builder_1), instance.toString());
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -201,7 +201,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
           _builder_1.append("Foo [");
           _builder_1.newLine();
           _builder_1.append("]");
-          Assert.assertEquals(LineDelimiters.toUnix(_builder_1.toString()), instance.toString());
+          Assert.assertEquals(Strings.toUnixLineSeparator(_builder_1), instance.toString());
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }

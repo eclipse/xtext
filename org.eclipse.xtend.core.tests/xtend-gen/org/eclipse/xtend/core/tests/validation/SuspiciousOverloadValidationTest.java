@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.tests.util.LineDelimiters;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -70,7 +70,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     final AbstractDiagnostic singleError = ((AbstractDiagnostic) _head);
     Assert.assertEquals(singleError.getMessage(), IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, singleError.getCode());
     final Function1<String, String> _function = (String it) -> {
-      return LineDelimiters.toUnix(it);
+      return Strings.toUnixLineSeparator(it);
     };
     final Consumer<String> _function_1 = (String it) -> {
       final String message = singleError.getMessage();
@@ -102,7 +102,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     final AbstractDiagnostic singleError = ((AbstractDiagnostic) _head);
     Assert.assertEquals(singleError.getMessage(), IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, singleError.getCode());
     final Function1<String, String> _function = (String it) -> {
-      return LineDelimiters.toUnix(it);
+      return Strings.toUnixLineSeparator(it);
     };
     final Consumer<String> _function_1 = (String it) -> {
       final String message = singleError.getMessage();
