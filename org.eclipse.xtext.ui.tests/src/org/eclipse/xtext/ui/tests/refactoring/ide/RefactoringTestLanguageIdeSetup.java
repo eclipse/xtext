@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class RefactoringTestLanguageIdeSetup extends RefactoringTestLanguageStan
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new RefactoringTestLanguageRuntimeModule(), new RefactoringTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new RefactoringTestLanguageRuntimeModule(), new RefactoringTestLanguageIdeModule()));
 	}
 }

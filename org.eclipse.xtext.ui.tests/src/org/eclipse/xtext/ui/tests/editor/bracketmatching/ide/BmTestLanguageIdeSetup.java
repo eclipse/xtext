@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class BmTestLanguageIdeSetup extends BmTestLanguageStandaloneSetup {
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new BmTestLanguageRuntimeModule(), new BmTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new BmTestLanguageRuntimeModule(), new BmTestLanguageIdeModule()));
 	}
 }

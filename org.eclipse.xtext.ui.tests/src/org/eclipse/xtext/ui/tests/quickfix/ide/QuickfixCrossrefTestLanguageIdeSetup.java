@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class QuickfixCrossrefTestLanguageIdeSetup extends QuickfixCrossrefTestLa
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new QuickfixCrossrefTestLanguageRuntimeModule(), new QuickfixCrossrefTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new QuickfixCrossrefTestLanguageRuntimeModule(), new QuickfixCrossrefTestLanguageIdeModule()));
 	}
 }

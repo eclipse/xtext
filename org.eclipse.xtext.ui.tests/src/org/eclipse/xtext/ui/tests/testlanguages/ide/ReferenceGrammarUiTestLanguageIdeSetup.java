@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class ReferenceGrammarUiTestLanguageIdeSetup extends ReferenceGrammarUiTe
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new ReferenceGrammarUiTestLanguageRuntimeModule(), new ReferenceGrammarUiTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new ReferenceGrammarUiTestLanguageRuntimeModule(), new ReferenceGrammarUiTestLanguageIdeModule()));
 	}
 }

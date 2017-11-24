@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class ContentAssistCustomizingTestLanguageIdeSetup extends ContentAssistC
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new ContentAssistCustomizingTestLanguageRuntimeModule(), new ContentAssistCustomizingTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new ContentAssistCustomizingTestLanguageRuntimeModule(), new ContentAssistCustomizingTestLanguageIdeModule()));
 	}
 }
