@@ -20,6 +20,7 @@ import org.eclipse.xtend.ide.common.contentassist.antlr.PartialXtendContentAssis
 import org.eclipse.xtend.ide.common.contentassist.antlr.XtendParser;
 import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.ide.contentassist.XtendProposalProvider;
+import org.eclipse.xtend.ide.editor.XtendEditor;
 import org.eclipse.xtend.ide.outline.XtendOutlineTreeProvider;
 import org.eclipse.xtend.ide.quickfix.XtendQuickfixProvider;
 import org.eclipse.xtext.builder.BuilderParticipant;
@@ -98,7 +99,6 @@ import org.eclipse.xtext.xbase.annotations.ui.DefaultXbaseWithAnnotationsUiModul
 import org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider;
-import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler;
 import org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler;
@@ -132,7 +132,7 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Class<? extends XtextEditor> bindXtextEditor() {
-		return XbaseEditor.class;
+		return XtendEditor.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment

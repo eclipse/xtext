@@ -346,10 +346,6 @@ class XtendUiModule extends AbstractXtendUiModule {
 		return XtendHoverDocumentationProvider
 	}
 
-	override Class<? extends XtextEditor> bindXtextEditor() {
-		return XtendEditor
-	}
-
 	override Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
 		return TemplateProposalProvider
 	}
