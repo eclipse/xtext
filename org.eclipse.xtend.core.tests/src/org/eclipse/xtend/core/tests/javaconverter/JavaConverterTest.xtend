@@ -33,6 +33,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
+import static extension org.eclipse.xtext.util.Strings.*
 import org.eclipse.xtend2.lib.StringConcatenation
 
 class JavaConverterTest extends AbstractXtendTestCase {
@@ -747,7 +748,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			Foo(int i, int j) {
 				this(i++, j);
 			}
-		}''')
+		}'''.toUnixLineSeparator)
 
 		var String xtendCode = conversionResult.getXtendCode()
 		assertFalse(xtendCode.isEmpty())
@@ -1033,7 +1034,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testRichStringCase1() throws Exception {
-		assertEquals("int i=0\nString richTxt='''int i=«i».'''", toXtendClassBodyDeclr(
+		assertEquals("int i=0"+newLine+"String richTxt='''int i=«i».'''", toXtendClassBodyDeclr(
 				'''
 			private int i = 0;
 			private String richTxt = "int "+"i="+i+".";
@@ -1473,7 +1474,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				final List<String> values, values2=null, values3;
 				values = new ArrayList<String>();
 			}
-		}''')
+		}'''.toUnixLineSeparator)
 
 		var String xtendCode = conversionResult.getXtendCode()
 		assertFalse(xtendCode.isEmpty())

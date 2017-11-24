@@ -17,6 +17,8 @@ import org.eclipse.xtext.tasks.Task
 import org.eclipse.xtext.tasks.TaskTag
 import org.junit.Test
 
+import static extension org.eclipse.xtext.util.Strings.*
+
 /** 
  * @author Christian Dietrich - Initial contribution and API
  */
@@ -39,7 +41,7 @@ class XtendTaskFinderTest extends AbstractXtendTestCase {
 				«"'''"»
 			}
 		}
-		'''
+		'''.toString.toUnixLineSeparator
 		val file = file(contents)
 		
 		file.eResource.assertContainsTasks(#[

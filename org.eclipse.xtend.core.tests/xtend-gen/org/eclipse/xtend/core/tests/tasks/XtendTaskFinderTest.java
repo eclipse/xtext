@@ -18,6 +18,7 @@ import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.tasks.Priority;
 import org.eclipse.xtext.tasks.Task;
 import org.eclipse.xtext.tasks.TaskTag;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
@@ -72,7 +73,7 @@ public class XtendTaskFinderTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final String contents = _builder.toString();
+      final String contents = Strings.toUnixLineSeparator(_builder.toString());
       final XtendFile file = this.file(contents);
       Task _task = new Task();
       final Procedure1<Task> _function = (Task it) -> {
