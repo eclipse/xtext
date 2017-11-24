@@ -755,8 +755,11 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       _builder_2.append(":org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory\"");
       _builder_2.newLineIfNotEmpty();
       _builder_2.append("\t\t");
-      _builder_2.append("adaptableType=\"org.eclipse.xtext.ui.editor.XtextEditor\">");
-      _builder_2.newLine();
+      _builder_2.append("adaptableType=\"");
+      String _name = this._xtextGeneratorNaming.getEclipsePluginEditor(this.getGrammar()).getName();
+      _builder_2.append(_name, "\t\t");
+      _builder_2.append("\">");
+      _builder_2.newLineIfNotEmpty();
       _builder_2.append("\t\t");
       _builder_2.append("<adapter type=\"org.eclipse.debug.ui.actions.IToggleBreakpointsTarget\"/>");
       _builder_2.newLine();
