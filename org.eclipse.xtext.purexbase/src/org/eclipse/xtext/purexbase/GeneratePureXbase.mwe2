@@ -59,6 +59,10 @@ Workflow {
 			formatter = {
 				generateStub = true
 			}
+			
+			editor = {
+				generateStub = false
+			}
 		}
 	}
 }
