@@ -130,7 +130,7 @@ public class ProcessorInstanceForJvmTypeProvider {
     }
   }
   
-  protected ClassLoader getClassLoader(final EObject ctx) {
+  public ClassLoader getClassLoader(final EObject ctx) {
     final ResourceSet resourceSet = ctx.eResource().getResourceSet();
     final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(resourceSet.eAdapters(), ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class));
     if ((adapter != null)) {
