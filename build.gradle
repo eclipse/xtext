@@ -1,5 +1,5 @@
 /*
- * Root project for xtext-xtend. This Gradle build is required for the Xtend IDEA plugin,
+ * Root project for xtext-xtend. This Gradle build is required for the Xtend Gradle plugin,
  * so it build only the bundles that are necessary for this plugin. The other bundles
  * are built with Tycho.
  */
