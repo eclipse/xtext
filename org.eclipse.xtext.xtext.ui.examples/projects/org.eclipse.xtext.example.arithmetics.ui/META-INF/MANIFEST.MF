@@ -21,5 +21,6 @@ Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.arithmetics.ui.internal,
  org.eclipse.xtext.example.arithmetics.ui.quickfix,
- org.eclipse.xtext.example.arithmetics.ui.contentassist
+ org.eclipse.xtext.example.arithmetics.ui.contentassist,
+ org.eclipse.xtext.example.arithmetics.ui.editor
 Bundle-Activator: org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator
