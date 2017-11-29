@@ -38,6 +38,7 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.ui.editor.EditorFragment2
 
 /**
  * This specialization of the {@link XtextGeneratorLanguage} adds all the standard generator fragments
@@ -116,6 +117,8 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	
 	SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2
 	
+	EditorFragment2 editor = new EditorFragment2
+	
 	new() {
 		try {
 			class.classLoader.loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule")
@@ -171,6 +174,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 		fragments += ideaPlugin
 		fragments += webSupport
 		fragments += newProjectWizardForEclipse
+		fragments += editor
 		fragments
 	}
 	

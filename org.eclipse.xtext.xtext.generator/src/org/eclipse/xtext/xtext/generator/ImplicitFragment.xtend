@@ -58,10 +58,15 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 		val StringConcatenationClient expression = '''«'org.eclipse.xtext.ui.shared.Access'.typeRef».getJavaProjectsState()'''
 		val bindingFactory = new GuiceModuleAccess.BindingFactory()
 			.addTypeToProviderInstance(IAllContainersState.typeRef, expression)
+		
+		if (isGenerateStub) {
+			bindingFactory.addTypeToType(grammar.eclipsePluginDefaultEditor, grammar.eclipsePluginEditor)
+		} else if (inheritsXbase(grammar)) {
+			bindingFactory.addTypeToType(grammar.eclipsePluginDefaultEditor, grammar.eclipsePluginXbaseEditor)
+		}
+		
 		if (inheritsXbase(grammar)) {
-			bindingFactory.addTypeToType('org.eclipse.xtext.ui.editor.XtextEditor'.typeRef,
-					'org.eclipse.xtext.xbase.ui.editor.XbaseEditor'.typeRef)
-				.addTypeToType('org.eclipse.xtext.ui.editor.model.XtextDocumentProvider'.typeRef,
+			bindingFactory.addTypeToType('org.eclipse.xtext.ui.editor.model.XtextDocumentProvider'.typeRef,
 					'org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider'.typeRef)
 				.addTypeToType('org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler'.typeRef,
 					'org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler'.typeRef)

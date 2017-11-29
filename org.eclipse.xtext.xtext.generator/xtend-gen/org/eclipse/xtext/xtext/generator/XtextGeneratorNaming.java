@@ -137,6 +137,22 @@ public class XtextGeneratorNaming {
     return new TypeReference(_eclipsePluginBasePackage, _plus);
   }
   
+  public TypeReference getEclipsePluginEditor(final Grammar grammar) {
+    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
+    String _plus = (_eclipsePluginBasePackage + ".editor");
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus_1 = (_simpleName + "Editor");
+    return new TypeReference(_plus, _plus_1);
+  }
+  
+  public TypeReference getEclipsePluginXbaseEditor(final Grammar grammar) {
+    return new TypeReference("org.eclipse.xtext.xbase.ui.editor.XbaseEditor");
+  }
+  
+  public TypeReference getEclipsePluginDefaultEditor(final Grammar grammar) {
+    return new TypeReference("org.eclipse.xtext.ui.editor.XtextEditor");
+  }
+  
   /**
    * @return name for the eclipsePlugin Activator or <code>null</code> if eclipsePlugin has no name
    */

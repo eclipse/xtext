@@ -20,6 +20,7 @@ import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
+import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
@@ -356,7 +357,7 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		projectConfig.eclipsePlugin.pluginXml.entries += '''
 			<extension point="org.eclipse.core.runtime.adapters">
 				<factory class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
-					adaptableType="org.eclipse.xtext.ui.editor.XtextEditor">
+					adaptableType="«grammar.eclipsePluginEditor.name»">
 					<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
 				</factory> 
 			</extension>
