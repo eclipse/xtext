@@ -8,12 +8,16 @@
 package org.eclipse.xtext.naming;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DeclarativeQualifiedNameConverterTest extends Assert {
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test public void testQualifiedNameConverter() throws Exception {
 		IQualifiedNameConverter qualifiedNameConverter = new IQualifiedNameConverter.DefaultImpl() {
@@ -25,13 +29,50 @@ public class DeclarativeQualifiedNameConverterTest extends Assert {
 		QualifiedName qn = QualifiedName.create("foo", "bar", "baz");
 		assertEquals("foo!bar!baz", qualifiedNameConverter.toString(qn));
 		assertEquals(qn, qualifiedNameConverter.toQualifiedName("foo!bar!baz"));
-		try {
-			qualifiedNameConverter.toQualifiedName(null);
-			fail("Exception expected");
-		} catch(IllegalArgumentException e) {}
-		try {
-			qualifiedNameConverter.toQualifiedName("");
-			fail("Exception expected");
-		} catch(IllegalArgumentException e) {}
+	
+		
+		qualifiedNameConverter = new IQualifiedNameConverter.DefaultImpl() {
+			@Override
+			public String getDelimiter() {
+				return " ";
+			}
+		};
+		assertEquals("foo bar baz", qualifiedNameConverter.toString(qn));
+		assertEquals(qn, qualifiedNameConverter.toQualifiedName("foo bar baz"));
+		
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Qualified name cannot be null");
+		qualifiedNameConverter.toQualifiedName(null);
+		
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Qualified name cannot be empty");
+		qualifiedNameConverter.toQualifiedName("");
 	}
+
+	@Test public void testQualifiedNameConverter_emptyDelimiter() throws Exception {
+		IQualifiedNameConverter qualifiedNameConverter = new IQualifiedNameConverter.DefaultImpl() {
+			@Override
+			public String getDelimiter() {
+				return "";
+			}
+		};
+
+		QualifiedName qn = QualifiedName.create("foo", "bar", "baz");
+		assertEquals("foobarbaz", qualifiedNameConverter.toString(qn));
+		assertEquals(QualifiedName.create("foobarbaz"), qualifiedNameConverter.toQualifiedName("foobarbaz"));
+	}
+
+	@Test public void testQualifiedNameConverter_nullDelimiter() throws Exception {
+		IQualifiedNameConverter qualifiedNameConverter = new IQualifiedNameConverter.DefaultImpl() {
+			@Override
+			public String getDelimiter() {
+				return null;
+			}
+		};
+		QualifiedName qn = QualifiedName.create("foo", "bar", "baz");
+		assertEquals("foonullbarnullbaz", qualifiedNameConverter.toString(qn));
+		assertEquals(QualifiedName.create("foobarbaz"), qualifiedNameConverter.toQualifiedName("foobarbaz"));
+		
+	}
+
 }
