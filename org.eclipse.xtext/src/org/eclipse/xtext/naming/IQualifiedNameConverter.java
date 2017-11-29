@@ -44,7 +44,7 @@ public interface IQualifiedNameConverter {
 				throw new IllegalArgumentException("Qualified name cannot be null");
 			return qualifiedName.toString(getDelimiter());
 		}
-		
+
 		/**
 		 * Splits the given string into segments and returns them as a {@link QualifiedName}.
 		 * 
@@ -59,9 +59,10 @@ public interface IQualifiedNameConverter {
 				throw new IllegalArgumentException("Qualified name cannot be empty");
 			if (Strings.isEmpty(getDelimiter()))
 				return QualifiedName.create(qualifiedNameAsString);
-			List<String> segs = getDelimiter().length() == 1 ? Strings.split(qualifiedNameAsString, getDelimiter()
-					.charAt(0)) : Strings.split(qualifiedNameAsString, getDelimiter());
-		    return QualifiedName.create(segs);
+			List<String> segs = getDelimiter().length() == 1
+					? Strings.split(qualifiedNameAsString, getDelimiter().charAt(0))
+					: Strings.split(qualifiedNameAsString, getDelimiter());
+			return QualifiedName.create(segs);
 		}
 
 		public String getDelimiter() {
