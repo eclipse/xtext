@@ -4,7 +4,7 @@
 
 ## How To Build
 
-### Core Module and IDEA Support
+### Core Module
 
 Check out and run `./gradlew build`.
 
