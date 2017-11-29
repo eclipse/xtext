@@ -28,7 +28,7 @@ public class FeatureScopeTracker implements IFeatureScopeTracker {
 
 	private final Map<EObject, EnumMap<IExpressionScope.Anchor, ExpressionScope>> featureScopeSessions;
 	
-	protected FeatureScopeTracker() {
+	public FeatureScopeTracker() {
 		featureScopeSessions = Maps.newHashMapWithExpectedSize(256);
 	}
 	
