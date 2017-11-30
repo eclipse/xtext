@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.xtext.examples"
+      id="org.eclipse.xtext.docs"
       label="%featureName"
       version="2.14.0.qualifier"
       provider-name="%providerName"
@@ -8,7 +8,7 @@
       license-feature-version="2.14.0.qualifier">
 
    <description>
-      %description
+      Xtext documentation
    </description>
 
    <copyright>
@@ -22,16 +22,8 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    <license url="http://www.eclipse.org/legal/epl-v10.html">
       %license
    </license>
-   <includes
-         id="org.eclipse.xtext.runtime"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.xtext.ui"
-         version="0.0.0"/>
-
    <plugin
-         id="org.eclipse.xtext.xtext.ui.examples"
+         id="org.eclipse.xtext.doc"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
