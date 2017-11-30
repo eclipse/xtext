@@ -7,15 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation;
 
-import java.util.Map;
-
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.google.inject.Singleton;
 
 /**
@@ -39,20 +35,7 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final String COMPILER_PB_DEPRECATION = JDT_CORE_PLUGIN_ID + ".compiler.problem.deprecation"; //$NON-NLS-1$
 	public static final String COMPILER_PB_STATIC_ACCESS_RECEIVER = JDT_CORE_PLUGIN_ID + ".compiler.problem.staticAccessReceiver"; //$NON-NLS-1$
 
-	private Map<String, PreferenceKey> issueCodes;
-
-	public XbaseConfigurableIssueCodes() {
-		final Map<String, PreferenceKey> map = Maps.newLinkedHashMap();
-		initialize(new IAcceptor<PreferenceKey>() {
-
-			@Override
-			public void accept(PreferenceKey prefKey) {
-				map.put(prefKey.getId(), prefKey);
-			}
-		});
-		this.issueCodes = ImmutableMap.copyOf(map);
-	}
-
+	@Override
 	protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
 		iAcceptor.accept(create(IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, SeverityConverter.SEVERITY_WARNING));
 		iAcceptor.accept(createDelegate(IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER, COMPILER_PB_STATIC_ACCESS_RECEIVER));
@@ -97,10 +80,6 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		return SeverityConverter.SEVERITY_IGNORE;
 	}
 
-	protected final PreferenceKey create(String id, String defaultValue) {
-		return new PreferenceKey(id, defaultValue);
-	}
-
 	protected PreferenceKey createDelegate(String id, String delegationKey) {
 		return createDelegate(id, delegationKey, SeverityConverter.SEVERITY_WARNING);
 	}
@@ -110,8 +89,4 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		return create(id, encodedDelegation);
 	}
 
-	@Override
-	public Map<String, PreferenceKey> getConfigurableIssueCodes() {
-		return issueCodes;
-	}
 }
