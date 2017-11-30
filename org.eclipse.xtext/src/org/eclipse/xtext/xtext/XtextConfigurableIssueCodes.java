@@ -7,15 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import java.util.Map;
-
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.google.inject.Singleton;
 
 /**
@@ -47,20 +43,8 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	
 	public static final String EXPLICIT_OVERRIDE_MISSING = ISSUE_CODE_PREFIX + "ExplicitOverrideMissing";
 	public static final String EXPLICIT_OVERRIDE_INVALID = ISSUE_CODE_PREFIX + "ExplicitOverrideInvalid";
-	
-	private Map<String, PreferenceKey> issueCodes;
 
-	public XtextConfigurableIssueCodes() {
-		final Map<String, PreferenceKey> map = Maps.newLinkedHashMap();
-		initialize(new IAcceptor<PreferenceKey>() {
-			@Override
-			public void accept(PreferenceKey prefKey) {
-				map.put(prefKey.getId(), prefKey);
-			}
-		});
-		this.issueCodes = ImmutableMap.copyOf(map);
-	}
-
+	@Override
 	protected void initialize(IAcceptor<PreferenceKey> acceptor) {
 		acceptor.accept(create(INVALID_ACTION_USAGE, SeverityConverter.SEVERITY_ERROR));
 		acceptor.accept(create(EMPTY_ENUM_LITERAL, SeverityConverter.SEVERITY_ERROR));
@@ -78,15 +62,6 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		acceptor.accept(create(DUPLICATE_ENUM_LITERAL, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(BIDIRECTIONAL_REFERENCE, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(DISCOURAGED_RULE_NAME, SeverityConverter.SEVERITY_WARNING));
-	}
-
-	protected final PreferenceKey create(String id, String defaultValue) {
-		return new PreferenceKey(id, defaultValue);
-	}
-
-	@Override
-	public final Map<String, PreferenceKey> getConfigurableIssueCodes() {
-		return issueCodes;
 	}
 	
 }
