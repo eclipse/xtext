@@ -1,9 +1,11 @@
 #!/bin/bash
 
-cat <(cat locations.properties | head -n 1 | sed 's/xtext-lib/xtext-eclipse/') <(cat locations.properties) | cut -d "=" -f2- | while read -r line
+cat <(cat locations.properties | head -n 1 | sed 's/xtext-[^/]*/xtext-eclipse/') <(cat locations.properties | head -n 1 | sed 's/xtext-[^/]*/xtext-maven/') <(cat locations.properties) | cut -d "=" -f2- | while read -r line
 do
 	directory=$(echo $line | tr -d '\r')
+	echo "Processing $directory"
 	pushd $directory && git "$@"
-	popd
+	popd &> /dev/null
+	echo
 done 
 
