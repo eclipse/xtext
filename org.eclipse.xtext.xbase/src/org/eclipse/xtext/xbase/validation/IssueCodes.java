@@ -11,7 +11,7 @@ package org.eclipse.xtext.xbase.validation;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Stéphane Galland - Add the "deprecation" warning.
  */
-public class IssueCodes {
+public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	
 	protected static final String ISSUE_CODE_PREFIX = "org.eclipse.xtext.xbase.validation.IssueCodes.";
 
@@ -136,11 +136,7 @@ public class IssueCodes {
 	public static final String INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL = ISSUE_CODE_PREFIX + "invalid_type_arguments_on_type_literal";
 
 	public static final String OPERATION_WITHOUT_PARENTHESES = ISSUE_CODE_PREFIX + "operation_without_parentheses";
-	/**
-	 * IssueCode to control DerivedResourceMarkerCopier
-	 */
-	// @see org.eclipse.xtext.builder.smap.DerivedResourceMarkerCopier
-	public static final String COPY_JAVA_PROBLEMS = "org.eclipse.xtext.builder.copyJavaProblems";
+
 	/**
 	 * A deprecated feature is used.
 	 */
