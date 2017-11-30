@@ -12,7 +12,7 @@ do
 		git show-branch "$1" &> /dev/null
 		if [[ $? = 0 ]]
 		then
-			echo "Redirecting job configuration in $upstream to $1"
+			echo "Redirecting maven repositories in $upstream to $1"
 # if there exists a local branch in the repository
 			popd > /dev/null
 			cat <(cat locations.properties | head -n 1 | sed 's/xtext-[^/]*/xtext-eclipse/') <(cat locations.properties) | cut -d "=" -f2- | while read -r repo
@@ -49,7 +49,7 @@ do
 		git show-branch "$1" &> /dev/null
 		if [[ $? = 0 ]]
 		then
-			echo "Redirecting job configuration in $targets to $1"
+			echo "Redirecting target platforms in $targets to $1"
 # if there exists a local branch in the repository
 			popd > /dev/null
 			cat <(cat locations.properties | head -n 1 | sed 's/xtext-[^/]*/xtext-eclipse/') <(cat locations.properties) | cut -d "=" -f2- | while read -r repo
@@ -68,7 +68,6 @@ do
 							git show-branch "$1" &> /dev/null
 							if [[ $? = 0 ]]
 							then
-								echo "Updated target platform URIs"
 								sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/master/lastStableBuild/artifact/build/p2-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastStableBuild/artifact/build/p2-repository/%" $targets/*.target
 							fi
 						fi
