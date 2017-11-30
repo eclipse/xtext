@@ -12,8 +12,14 @@ name() {
 	echo $1 | sed 's/^.*\/\(xtext-[^/]*\)\/.*$/\1/'
 }
 
+branchname=${1:-master}
+
 isBranch() {
-	git show-branch "$1" &> /dev/null
+	git show-branch "$branchname" &> /dev/null
+}
+
+isMaster() {
+	test $branchname != master && isBranch
 }
 
 changeDir() {
@@ -31,9 +37,9 @@ do
 	if [[ -e $upstream ]]
 	then
 		changeDir $directory
-		if isBranch "$1"
+		if isBranch
 		then
-			echo "Redirecting maven repositories in $upstream to $1"
+			echo "Redirecting maven repositories in $upstream to $branchname"
 			dropDir
 			allDirectories | while read -r repo
 			do
@@ -44,13 +50,7 @@ do
 					if changeDir $repository
 					then
 						sed -i '' "s%'http://services.typefox.io/open-source/jenkins/job/$logicalname/job/[^/]*/lastSuccessfulBuild/artifact/build/maven-repository/'%jenkinsPipelineRepo('$logicalname')%" $upstream
-						if [[ $1 != master ]]
-						then
-							if isBranch "$1"
-							then
-								sed -i '' "s%jenkinsPipelineRepo('$logicalname')%'http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastSuccessfulBuild/artifact/build/maven-repository/'%" $upstream
-							fi
-						fi
+						isMaster ||	sed -i '' "s%jenkinsPipelineRepo('$logicalname')%'http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastSuccessfulBuild/artifact/build/maven-repository/'%" $upstream
 						dropDir
 					fi
 				fi
@@ -63,9 +63,9 @@ do
 	if [[ -d $targets ]]
 	then
 		changeDir $directory
-		if isBranch "$1"
+		if isBranch
 		then
-			echo "Redirecting target platforms in $targets to $1"
+			echo "Redirecting target platforms in $targets to $branchname"
 			dropDir
 			allDirectories | while read -r repo
 			do
@@ -76,13 +76,7 @@ do
 					if changeDir $repository
 					then
 						sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/[^/]*/lastStableBuild/artifact/build/p2-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/master/lastStableBuild/artifact/build/p2-repository/%" $targets/*.target
-						if [[ $1 != master ]]
-						then
-							if isBranch "$1"
-							then
-								sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/master/lastStableBuild/artifact/build/p2-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastStableBuild/artifact/build/p2-repository/%" $targets/*.target
-							fi
-						fi
+						isMaster ||	sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/master/lastStableBuild/artifact/build/p2-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastStableBuild/artifact/build/p2-repository/%" $targets/*.target
 						dropDir
 					fi
 				fi
@@ -94,12 +88,12 @@ do
 	if [[ -d $directory ]]
 	then
 		changeDir $directory
-		if isBranch "$1"
+		if isBranch
 		then
 			dropDir
 			find $directory -name pom.xml -type f -path '*.maven.parent/*' -print | while read -r pom
 			do
-				echo "Redirecting parent pom.xml files in $pom to $1"
+				echo "Redirecting parent pom.xml files in $pom to $branchname"
 				allDirectories | while read -r repo
 				do
 					repository=$(toDir $repo)
@@ -109,13 +103,7 @@ do
 						if changeDir $repository
 						then
 							sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/[^/]*/lastStableBuild/artifact/build/maven-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/\${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/%" $pom
-							if [[ $1 != master ]]
-							then
-								if isBranch "$1"
-								then
-									sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/\${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastStableBuild/artifact/build/maven-repository/%" $pom
-								fi
-							fi
+							isMaster ||	sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/\${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastStableBuild/artifact/build/maven-repository/%" $pom
 							dropDir
 						fi
 					fi
