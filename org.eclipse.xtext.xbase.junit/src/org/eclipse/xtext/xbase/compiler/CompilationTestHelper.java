@@ -245,6 +245,7 @@ public class CompilationTestHelper {
 	 * @return a ResourceSet, containing the given resources.
 	 * @throws IOException if the resource loading fails 
 	 */
+	@SuppressWarnings("unchecked")
 	public ResourceSet resourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = resourceSetProvider.get();
 		result.setClasspathURIContext(classpathUriContext);
@@ -290,6 +291,7 @@ public class CompilationTestHelper {
 	/**
 	 * same as {@link #resourceSet(Pair...)} but without actually loading the created resources.
 	 */
+	@SuppressWarnings("unchecked")
 	public ResourceSet unLoadedResourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = resourceSetProvider.get();
 		for (Pair<String, ? extends CharSequence> entry : resources) {

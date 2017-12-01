@@ -102,9 +102,10 @@ public class RenameElementWizard extends RefactoringWizard {
 			if(Strings.isEmpty(text)) {
 				setPageComplete(false);
 			} else {
-				if(equal(renameProcessor.getOriginalName(), text)) 
+				if(equal(renameProcessor.getOriginalName(), text)) {
+					setErrorMessage(null);
 					setPageComplete(false);
-				else {
+				} else {
 					RefactoringStatus status = renameProcessor.validateNewName(text);
 					setPageComplete(status);
 				}

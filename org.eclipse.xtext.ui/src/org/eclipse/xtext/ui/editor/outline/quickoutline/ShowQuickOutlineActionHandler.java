@@ -40,7 +40,9 @@ public class ShowQuickOutlineActionHandler extends AbstractHandler {
 					final QuickOutlinePopup quickOutlinePopup = createPopup(xtextEditor.getEditorSite().getShell());
 					quickOutlinePopup.setEditor(xtextEditor);
 					quickOutlinePopup.setInput(document);
-					quickOutlinePopup.setEvent((Event) event.getTrigger());
+					if (event.getTrigger() != null) {
+						quickOutlinePopup.setEvent((Event) event.getTrigger());
+					}
 					quickOutlinePopup.open();
 				}
 			});

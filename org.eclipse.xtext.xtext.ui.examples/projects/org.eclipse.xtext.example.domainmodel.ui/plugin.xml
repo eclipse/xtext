@@ -205,6 +205,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="dmodel"
+			id="org.eclipse.xtext.example.domainmodel.Domainmodel.contenttype"
+			name="Domainmodel File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -475,7 +484,7 @@
 	</extension>
 	<extension point="org.eclipse.core.runtime.adapters">
 		<factory class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
-			adaptableType="org.eclipse.xtext.ui.editor.XtextEditor">
+			adaptableType="org.eclipse.xtext.example.domainmodel.ui.editor.DomainmodelEditor">
 			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
 		</factory> 
 	</extension>
@@ -569,12 +578,18 @@
 			class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="dmodel">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.example.domainmodel.Domainmodel.contenttype"
+			contentViewerId="org.eclipse.xtext.example.domainmodel.Domainmodel.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="org.eclipse.xtext.example.domainmodel.Domainmodel.compare.contentMergeViewers"
 			class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="dmodel" label="Domainmodel Compare">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.example.domainmodel.Domainmodel.contenttype"
+			contentMergeViewerId="org.eclipse.xtext.example.domainmodel.Domainmodel.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="org.eclipse.xtext.example.domainmodel.Domainmodel.editors.documentProviders"

@@ -31,6 +31,7 @@ import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -158,7 +159,7 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 			@Override
 			public void accept(EObject source, URI sourceURI, EReference eReference, int index, EObject targetOrProxy,
 					URI targetURI) {
-				referenceDescriptions.add(new DefaultReferenceDescription(sourceURI, targetURI, eReference, index, null));
+				referenceDescriptions.add(new DefaultReferenceDescription(EcoreUtil2.getFragmentPathURI(source), targetURI, eReference, index, null));
 			}
 		};
 		if (monitor.isCanceled()) {

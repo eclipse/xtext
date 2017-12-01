@@ -4,18 +4,21 @@
 package org.eclipse.xtext.ui.codetemplates.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 /**
- * Represents a generated, default implementation of superclass {@link org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider}.
+ * Represents a generated, default implementation of superclass {@link AbstractJavaBasedContentProposalProvider}.
  * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
  * with a more concrete subtype. 
  */
-@SuppressWarnings("all")
-public class AbstractCodetemplatesProposalProvider extends org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider {
-		
+public abstract class AbstractCodetemplatesProposalProvider extends AbstractJavaBasedContentProposalProvider {
+
 	public void completeCodetemplates_Language(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		lookupCrossReference(((CrossReference)assignment.getTerminal()), context, acceptor);
 	}
@@ -62,7 +65,7 @@ public class AbstractCodetemplatesProposalProvider extends org.eclipse.xtext.ui.
 	public void completeDollar_Escaped(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
-    
+
 	public void complete_Codetemplates(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}

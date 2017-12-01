@@ -14,7 +14,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
-import org.eclipse.xtext.builder.tests.Activator;
+import org.eclipse.xtext.builder.tests.internal.TestsActivator;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.RuntimeIOException;
@@ -37,8 +37,8 @@ public class EclipseResourceFileSystemAccess2Test extends Assert {
 	@Before
 	public void setUp () throws Exception {
 		project = IResourcesSetupUtil.createProject("test");
-		Injector injector = Activator.getInstance().getInjector(
-				Activator.ORG_ECLIPSE_XTEXT_BUILDER_TESTS_BUILDERTESTLANGUAGE);
+		Injector injector = TestsActivator.getInstance().getInjector(
+				TestsActivator.ORG_ECLIPSE_XTEXT_BUILDER_TESTS_BUILDERTESTLANGUAGE);
 		fsa = injector.getInstance(EclipseResourceFileSystemAccess2.class);
 		fsa.setProject(project);
 		fsa.setOutputPath("src-gen");

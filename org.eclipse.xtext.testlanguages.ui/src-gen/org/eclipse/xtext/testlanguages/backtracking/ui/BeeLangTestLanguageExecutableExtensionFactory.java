@@ -4,6 +4,7 @@
 package org.eclipse.xtext.testlanguages.backtracking.ui;
 
 import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.testlanguages.ui.internal.TestlanguagesActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
@@ -16,12 +17,13 @@ public class BeeLangTestLanguageExecutableExtensionFactory extends AbstractGuice
 
 	@Override
 	protected Bundle getBundle() {
-		return TestlanguagesActivator.getInstance().getBundle();
+		return Platform.getBundle(TestlanguagesActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return TestlanguagesActivator.getInstance().getInjector(TestlanguagesActivator.ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_BEELANGTESTLANGUAGE);
+		TestlanguagesActivator activator = TestlanguagesActivator.getInstance();
+		return activator != null ? activator.getInjector(TestlanguagesActivator.ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_BEELANGTESTLANGUAGE) : null;
 	}
-	
+
 }

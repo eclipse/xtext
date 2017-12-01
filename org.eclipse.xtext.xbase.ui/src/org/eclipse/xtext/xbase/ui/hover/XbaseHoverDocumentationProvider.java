@@ -22,7 +22,6 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -68,7 +67,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.ui.containers.JavaProjectsStateHelper;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.util.Strings;
@@ -783,6 +781,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		buffer.append("</dt>"); //$NON-NLS-1$
 	}
 
+	@SuppressWarnings("unchecked")
 	public Javadoc getJavaDoc() {
 		if (context == null || context.eResource() == null || context.eResource().getResourceSet() == null)
 			return null;

@@ -196,7 +196,8 @@ public class RuleEngineGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
-		//@ Override XBlockExpression xbase::XExpression:
+		//@Override
+		//XBlockExpression xbase::XExpression:
 		//	{xbase::XBlockExpression} BEGIN (expressions+=XExpressionOrVarDeclaration ';'?)*
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
@@ -259,7 +260,8 @@ public class RuleEngineGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDefaultXExpressionParserRuleCall_5_2_0 = (RuleCall)cDefaultAssignment_5_2.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_6 = (RuleCall)cGroup.eContents().get(6);
 		
-		//@ Override XSwitchExpression xbase::XExpression:
+		//@Override
+		//XSwitchExpression xbase::XExpression:
 		//	{xbase::XSwitchExpression}
 		//	'switch' (=> ('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
 		//	| => (declaredParam=JvmFormalParameter ':')? switch=XExpression) BEGIN
@@ -482,7 +484,8 @@ public class RuleEngineGrammarAccess extends AbstractGrammarElementFinder {
 		return getRuleAccess().getRule();
 	}
 	
-	//@ Override XBlockExpression xbase::XExpression:
+	//@Override
+	//XBlockExpression xbase::XExpression:
 	//	{xbase::XBlockExpression} BEGIN (expressions+=XExpressionOrVarDeclaration ';'?)*
 	//	END;
 	public XBlockExpressionElements getXBlockExpressionAccess() {
@@ -493,7 +496,8 @@ public class RuleEngineGrammarAccess extends AbstractGrammarElementFinder {
 		return getXBlockExpressionAccess().getRule();
 	}
 	
-	//@ Override XSwitchExpression xbase::XExpression:
+	//@Override
+	//XSwitchExpression xbase::XExpression:
 	//	{xbase::XSwitchExpression}
 	//	'switch' (=> ('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
 	//	| => (declaredParam=JvmFormalParameter ':')? switch=XExpression) BEGIN
@@ -1149,7 +1153,8 @@ public class RuleEngineGrammarAccess extends AbstractGrammarElementFinder {
 		return getXCatchClauseAccess().getRule();
 	}
 	
-	//@ Override QualifiedName:
+	//@Override
+	//QualifiedName:
 	//	ValidID (=> '.' ValidID)*;
 	public XbaseGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
 		return gaXbase.getQualifiedNameAccess();
@@ -1170,7 +1175,7 @@ public class RuleEngineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	///**
-	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
+	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes,
 	// * which makes downstream grammars break on classloading, when a rule is removed.
 	// */ StaticQualifier:
 	//	(ValidID '::')+;

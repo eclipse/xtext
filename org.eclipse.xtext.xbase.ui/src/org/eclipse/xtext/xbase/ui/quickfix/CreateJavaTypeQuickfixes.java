@@ -185,16 +185,18 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		try {
 			if(javaProject != null) {
 				IPackageFragment contextPackageFragment = javaProject.findPackageFragment(new Path(path));
-				IPackageFragmentRoot root = (IPackageFragmentRoot) contextPackageFragment
-						.getAncestor(IJavaElement.PACKAGE_FRAGMENT_ROOT);
-				IPackageFragment packageFragment;
-				if(!isEmpty(packageName)) {
-					packageFragment = root.getPackageFragment(packageName);
-				} else {
-					packageFragment = contextPackageFragment;
+				if (contextPackageFragment != null) {
+					IPackageFragmentRoot root = (IPackageFragmentRoot) contextPackageFragment
+							.getAncestor(IJavaElement.PACKAGE_FRAGMENT_ROOT);
+					IPackageFragment packageFragment;
+					if(!isEmpty(packageName)) {
+						packageFragment = root.getPackageFragment(packageName);
+					} else {
+						packageFragment = contextPackageFragment;
+					}
+					page.setPackageFragment(packageFragment, true);
+					page.setPackageFragmentRoot(root, true);
 				}
-				page.setPackageFragment(packageFragment, true);
-				page.setPackageFragmentRoot(root, true);
 			}
 		} catch (JavaModelException e) {
 			LOG.error("Could not find package for " + path, e);

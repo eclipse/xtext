@@ -38,6 +38,7 @@ public abstract class AbstractIssueResolutionProviderAdapter {
 		return resolutionProvider;
 	}
 	
+	@Deprecated
 	public Iterable<IssueResolution> getResolutions(final Issue issue, final IXtextDocument document) {
 		Iterable<IssueResolution> result = resolutionProvider.getResolutions(issue);
 		return result;

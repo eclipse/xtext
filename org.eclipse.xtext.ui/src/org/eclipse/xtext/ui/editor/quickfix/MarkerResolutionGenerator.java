@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.ui.editor.model.edit.BatchModification.IBatchableModification;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
 
@@ -51,7 +52,10 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 
 	@Inject 
 	private IWorkbench workbench;
-	
+
+	@Inject
+	private WorkbenchMarkerResolutionAdapter.Factory adapterFactory;
+
 	public IssueUtil getIssueUtil() {
 		return issueUtil;
 	}
@@ -80,30 +84,40 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	public IMarkerResolution[] getResolutions(IMarker marker) {
 		final IMarkerResolution[] emptyResult = new IMarkerResolution[0];
 		try {
-			if(!marker.isSubtypeOf(MarkerTypes.ANY_VALIDATION))
+			if (!marker.isSubtypeOf(MarkerTypes.ANY_VALIDATION))
 				return emptyResult;
 		} catch (CoreException e) {
 			return emptyResult;
 		}
-		if(!languageResourceHelper.isLanguageResource(marker.getResource())) {
+		if (!languageResourceHelper.isLanguageResource(marker.getResource())) {
 			return emptyResult;
 		}
-		XtextEditor editor = getEditor(marker.getResource());
-		if(editor == null)
-			return emptyResult;
-		
-		IAnnotationModel annotationModel = editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
-		if(annotationModel != null && !isMarkerStillValid(marker, annotationModel))
-			return emptyResult;
-		
+		XtextEditor editor = findEditor(marker.getResource());
+		if (editor != null) {
+			IAnnotationModel annotationModel = editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
+			if (annotationModel != null && !isMarkerStillValid(marker, annotationModel))
+				return emptyResult;
+		}
 		Issue issue = getIssueUtil().createIssue(marker);
-		if(issue == null)
+		if (issue == null)
 			return emptyResult;
-		final Iterable<IssueResolution> resolutions = getResolutions(issue, editor.getDocument());
-		return getAdaptedResolutions(Lists.newArrayList(resolutions));
+
+		List<IssueResolution> resolutions = getResolutionProvider().getResolutions(issue);
+		List<IMarkerResolution> result = Lists.newArrayList();
+		List<IssueResolution> remaining = Lists.newArrayList();
+		for (IssueResolution resolution : resolutions) {
+			if (resolution.getModification() instanceof IBatchableModification) {
+				result.add(adapterFactory.create(marker, resolution));
+			} else {
+				remaining.add(resolution);
+			}
+		}
+		result.addAll(Lists.newArrayList(getAdaptedResolutions(remaining)));
+		return result.toArray(new IMarkerResolution[result.size()]);
 	}
 
 	public boolean isMarkerStillValid(final IMarker marker, final IAnnotationModel annotationModel) {
+		@SuppressWarnings("unchecked")
 		Iterator<Annotation> iterator = annotationModel.getAnnotationIterator();
 		return Iterators.any(iterator, new Predicate<Annotation>() {
 
@@ -123,6 +137,8 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		});
 	}
 
+	// handled by org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext.getXtextDocument(URI)
+	@Deprecated
 	public IXtextDocument getXtextDocument(IResource resource) {
 		IXtextDocument result = XtextDocumentUtil.get(resource);
 		if(result == null) {
@@ -138,6 +154,8 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		return XtextDocumentUtil.get(resource);
 	}
 	
+	// handled by org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext.getXtextDocument(URI)
+	@Deprecated
 	public XtextEditor getEditor(IResource resource) {
 		XtextEditor result = findEditor(resource);
 		if(result == null) {
@@ -199,8 +217,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		IMarkerResolution[] result = new IMarkerResolution[resolutions.size()];
 		for(int i=0; i<resolutions.size(); i++)
 			result[i] = new ResolutionAdapter(resolutions.get(i));
-		
+
 		return result;
 	}
-
 }

@@ -15,6 +15,7 @@ public class GenericType2<T extends Number> {
 	
 	private T[] array;
 	
+	@SafeVarargs
 	public GenericType2(T... values) {
 		this.array = values;
 	}

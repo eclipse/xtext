@@ -15,10 +15,10 @@ import java.util.List;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.intro.IIntroManager;
-import org.eclipse.xtext.builder.tests.Activator;
-import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
+import org.eclipse.xtext.builder.tests.internal.TestsActivator;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -36,7 +36,7 @@ public abstract class AbstractBuilderTest extends Assert implements IResourceDes
 
 	@BeforeClass
 	public static void setupTargetPlatform() throws Exception {
-		TargetPlatformUtil.setTargetPlatform();
+		TargetPlatformUtil.setTargetPlatform(AbstractBuilderTest.class);
 	}
 
 	@Before
@@ -77,7 +77,7 @@ public abstract class AbstractBuilderTest extends Assert implements IResourceDes
 	}
 	
 	public <T> T getInstance(Class<T> type) {
-		Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.builder.tests.BuilderTestLanguage");
+		Injector injector = TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_BUILDER_TESTS_BUILDERTESTLANGUAGE);
 		return injector.getInstance(type);
 	}
 }

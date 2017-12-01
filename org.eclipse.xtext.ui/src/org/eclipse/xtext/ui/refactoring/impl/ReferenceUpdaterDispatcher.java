@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -122,7 +123,7 @@ public class ReferenceUpdaterDispatcher {
 		@Override
 		public void accept(EObject source, URI sourceURI, EReference eReference, int index, EObject targetOrProxy,
 				URI targetURI) {
-			accept(new DefaultReferenceDescription(sourceURI, targetURI, eReference, index, null));
+			accept(new DefaultReferenceDescription(EcoreUtil2.getFragmentPathURI(source), targetURI, eReference, index, null));
 		}
 
 		protected void handleNoReferenceUpdater(URI sourceResourceURI, StatusWrapper status) {

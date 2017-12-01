@@ -204,6 +204,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="beelangtestlanguage"
+			id="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.contenttype"
+			name="BeeLangTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -503,6 +512,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="simplebeelangtestlanguage"
+			id="org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage.contenttype"
+			name="SimpleBeeLangTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -804,6 +822,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="exbeelangtestlanguage"
+			id="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage.contenttype"
+			name="ExBeeLangTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -1104,6 +1131,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="nojdt"
+			id="org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage.contenttype"
+			name="NoJdtTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -1288,12 +1324,18 @@
 			class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="nojdt">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage.contenttype"
+			contentViewerId="org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage.compare.contentMergeViewers"
 			class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="nojdt" label="NoJdtTestLanguage Compare">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage.contenttype"
+			contentMergeViewerId="org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage.editors.documentProviders"
@@ -1509,6 +1551,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="xtextgrammar"
+			id="org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguage.contenttype"
+			name="XtextGrammarTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -1888,6 +1939,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="fileawaretestlanguage"
+			id="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.contenttype"
+			name="FileAwareTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -1923,6 +1983,54 @@
 			point="org.eclipse.core.resources.markers">
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
+	</extension>
+	<extension point="org.eclipse.xtext.builder.participant">
+		<participant
+			class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			fileExtensions="fileawaretestlanguage"/>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage"
+			class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.compiler.preferencePage"
+			name="Compiler">
+			<keywordReference id="org.eclipse.xtext.testlanguages.fileAware.ui.keyword_FileAwareTestLanguage"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.ui.propertyPages">
+		<page
+			category="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage"
+			class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.compiler.propertyPage"
+			name="Compiler">
+			<keywordReference id="org.eclipse.xtext.testlanguages.fileAware.ui.keyword_FileAwareTestLanguage"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			<command
+				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+				id="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.OpenGeneratedCode"
+				style="push">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
+			<activeWhen>
+				<reference definitionId="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.Editor.opened" />
+			</activeWhen>
+		</handler>
 	</extension>
 	<!-- Quick Outline -->
 	<extension
@@ -1985,10 +2093,68 @@
 			</attribute>
 		</markerResolutionGenerator>
 	</extension>
+	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			<command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+				style="push">
+				<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage"
+			class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+			id="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.refactoring"
+			name="Refactoring">
+			<keywordReference id="org.eclipse.xtext.testlanguages.fileAware.ui.keyword_FileAwareTestLanguage"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.compare.contentViewers">
+		<viewer id="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.compare.contentViewers"
+			class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="fileawaretestlanguage">
+		</viewer>
+	</extension>
+	<extension point="org.eclipse.compare.contentMergeViewers">
+		<viewer id="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.compare.contentMergeViewers"
+			class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="fileawaretestlanguage" label="FileAwareTestLanguage Compare">
+		</viewer>
+	</extension>
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider id="org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage.editors.documentProviders"
+			class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+			extensions="fileawaretestlanguage">
+		</provider>
+	</extension>
+	<extension point="org.eclipse.team.core.fileTypes">
+		<fileTypes
+			extension="fileawaretestlanguage"
+			type="text">
+		</fileTypes>
+	</extension>
 	<extension
-         point="org.eclipse.xtext.ui.resourceMoveStrategy">
+         point="org.eclipse.xtext.ui.resourceRelocationStrategy">
       <strategy
-            class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.testlanguages.fileAware.ide.refactoring.FileAwareTestLanguageMoveResourceStrategy">
+            class="org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageExecutableExtensionFactory:org.eclipse.xtext.testlanguages.fileAware.ide.refactoring.FileAwareTestLanguageResourceRelocationStrategy">
       </strategy>
      </extension>
 </plugin>

@@ -40,6 +40,7 @@ import org.eclipse.xtext.testlanguages.noJdt.ui.labeling.NoJdtTestLanguageLabelP
 import org.eclipse.xtext.testlanguages.noJdt.ui.outline.NoJdtTestLanguageOutlineTreeProvider;
 import org.eclipse.xtext.testlanguages.noJdt.ui.quickfix.NoJdtTestLanguageQuickfixProvider;
 import org.eclipse.xtext.ui.DefaultUiModule;
+import org.eclipse.xtext.ui.UIBindings;
 import org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator;
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory;
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialEditingContentAssistContextFactory;
@@ -222,6 +223,13 @@ public abstract class AbstractNoJdtTestLanguageUiModule extends DefaultUiModule 
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
+	public void configureIPreferenceStoreInitializer(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class)
+			.annotatedWith(Names.named("RefactoringPreferences"))
+			.to(RefactoringPreferences.Initializer.class);
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
 	public Class<? extends IRenameStrategy> bindIRenameStrategy() {
 		return DefaultRenameStrategy.class;
 	}
@@ -229,13 +237,6 @@ public abstract class AbstractNoJdtTestLanguageUiModule extends DefaultUiModule 
 	// contributed by org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
 	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
 		return DefaultReferenceUpdater.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
-	public void configureIPreferenceStoreInitializer(Binder binder) {
-		binder.bind(IPreferenceStoreInitializer.class)
-			.annotatedWith(Names.named("RefactoringPreferences"))
-			.to(RefactoringPreferences.Initializer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
@@ -282,6 +283,11 @@ public abstract class AbstractNoJdtTestLanguageUiModule extends DefaultUiModule 
 	// contributed by org.eclipse.xtext.xtext.generator.ui.compare.CompareFragment2
 	public Class<? extends IViewerCreator> bindIViewerCreator() {
 		return DefaultViewerCreator.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ui.compare.CompareFragment2
+	public void configureCompareViewerTitle(Binder binder) {
+		binder.bind(String.class).annotatedWith(Names.named(UIBindings.COMPARE_VIEWER_TITLE)).toInstance("NoJdtTestLanguage Compare");
 	}
 	
 }

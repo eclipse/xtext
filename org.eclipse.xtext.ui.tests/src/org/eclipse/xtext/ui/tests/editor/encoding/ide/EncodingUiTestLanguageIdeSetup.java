@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class EncodingUiTestLanguageIdeSetup extends EncodingUiTestLanguageStanda
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new EncodingUiTestLanguageRuntimeModule(), new EncodingUiTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new EncodingUiTestLanguageRuntimeModule(), new EncodingUiTestLanguageIdeModule()));
 	}
 }

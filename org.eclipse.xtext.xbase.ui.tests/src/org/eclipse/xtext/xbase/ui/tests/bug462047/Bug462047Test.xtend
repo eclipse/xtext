@@ -39,7 +39,7 @@ class Bug462047Test extends AbstractEditorTest {
 	
 	@BeforeClass
 	def static void setupTargetPlatform() {
-		TargetPlatformUtil.setTargetPlatform();
+		TargetPlatformUtil.setTargetPlatform(Bug462047Test);
 	}
 	
 	IProject project

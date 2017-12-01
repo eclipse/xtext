@@ -109,6 +109,8 @@ public class XbaseBuilderPreferenceAccess {
 	}
 	
 	public JavaVersion fromCompilerSourceLevel(String compilerSource) {
+		if ("9".equals(compilerSource))
+			return JavaVersion.JAVA9;
 		if ("1.8".equals(compilerSource))
 			return JavaVersion.JAVA8;
 		else if ("1.7".equals(compilerSource))

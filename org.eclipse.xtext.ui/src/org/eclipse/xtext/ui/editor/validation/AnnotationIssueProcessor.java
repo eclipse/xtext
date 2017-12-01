@@ -101,6 +101,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	protected List<Annotation> getAnnotationsToRemove(IProgressMonitor monitor) {
 		if (monitor.isCanceled() || annotationModel == null) {
 			return Lists.newArrayList();

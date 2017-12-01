@@ -10,8 +10,8 @@ package org.eclipse.xtext.builder.impl;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
-import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
+import org.eclipse.xtext.builder.tests.internal.TestsActivator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -28,7 +28,7 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		IXtextBuilderParticipant instance = Activator.getInstance()
+		IXtextBuilderParticipant instance = TestsActivator.getInstance()
 				.getInjector("org.eclipse.xtext.builder.tests.BuilderTestLanguage")
 				.getInstance(IXtextBuilderParticipant.class);
 		participant = (DelegatingBuilderParticipant) instance;

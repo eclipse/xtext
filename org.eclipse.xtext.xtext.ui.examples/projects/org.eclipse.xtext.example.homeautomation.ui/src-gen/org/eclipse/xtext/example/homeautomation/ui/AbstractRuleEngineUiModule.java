@@ -29,6 +29,7 @@ import org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr.PartialR
 import org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr.RuleEngineParser;
 import org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr.lexer.InternalRuleEngineLexer;
 import org.eclipse.xtext.example.homeautomation.ui.contentassist.RuleEngineProposalProvider;
+import org.eclipse.xtext.example.homeautomation.ui.editor.RuleEngineEditor;
 import org.eclipse.xtext.example.homeautomation.ui.labeling.RuleEngineDescriptionLabelProvider;
 import org.eclipse.xtext.example.homeautomation.ui.labeling.RuleEngineLabelProvider;
 import org.eclipse.xtext.example.homeautomation.ui.outline.RuleEngineOutlineTreeProvider;
@@ -93,7 +94,6 @@ import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule;
 import org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider;
-import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceQueryExecutor;
@@ -125,7 +125,7 @@ public abstract class AbstractRuleEngineUiModule extends DefaultXbaseUiModule {
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Class<? extends XtextEditor> bindXtextEditor() {
-		return XbaseEditor.class;
+		return RuleEngineEditor.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment

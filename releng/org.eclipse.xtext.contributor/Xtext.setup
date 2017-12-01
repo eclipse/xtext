@@ -53,42 +53,115 @@
       defaultValue="Luna"
       storageURI="scope://Workspace"
       label="Target Platform">
+    <annotation
+        source="http://www.eclipse.org/oomph/setup/GlobalVariable"/>
+    <choice
+        value="Photon"
+        label="Eclipse Photon- 4.8"/>
+    <choice
+        value="Photon - Staging"
+        label="Eclipse Photon- 4.8 (Staging)"/>
+    <choice
+        value="Oxygen"
+        label="Eclipse Oxygen - 4.7"/>
+    <choice
+        value="Oxygen - Staging"
+        label="Eclipse Oxygen - 4.7 (Staging)"/>
+    <choice
+        value="Neon"
+        label="Eclipse Neon - 4.6"/>
+    <choice
+        value="Mars"
+        label="Eclipse Mars - 4.5"/>
+    <choice
+        value="Luna"
+        label="Eclipse Luna - 4.4"/>
     <description>Choose the compatibility level of the target platform</description>
   </setupTask>
   <setupTask
       xsi:type="setup:VariableTask"
-      name="xtext.nightly.composite"
-      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/"/>
+      name="version.mwe2"
+      value="2.9.0"/>
   <setupTask
       xsi:type="setup:VariableTask"
-      name="mwe2.update.site"
-      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/"/>
+      name="p2.xtext.releases"
+      value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases"/>
   <setupTask
       xsi:type="setup:VariableTask"
-      name="emf.update.site"
-      value="http://download.eclipse.org/modeling/emf/emf/updates/2.12/"/>
+      name="p2.xtext.milestones"
+      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones"/>
   <setupTask
       xsi:type="setup:VariableTask"
-      name="antlr-gen.update.site"
-      value="http://download.itemis.com/updates/releases/2.1.1/"/>
+      name="p2.xtext.latest"
+      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="p2.xtext"
+      value="${p2.xtext.latest}"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="p2.xtext.orbit"
+      value="http://download.eclipse.org/tools/orbit/downloads/drops/R20170919201930/repository"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="p2.mwe2"
+      value="http://download.eclipse.org/modeling/emft/mwe/updates/releases/${version.mwe2}"
+      label=""/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="p2.emf"
+      value="http://download.eclipse.org/modeling/emf/emf/updates/2.12"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="p2.lsp4j"
+      value="http://download.eclipse.org/lsp4j/updates/releases/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
-      name="draw2d.p2.repository"
-      value="http://download.eclipse.org/tools/gef/updates/legacy/releases/"/>
+      name="p2.gef"
+      value="http://download.eclipse.org/tools/gef/updates/releases"/>
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
-      name="buildship.p2.repository"
-      value="http://download.eclipse.org/buildship/updates/e46/releases/2.x/"/>
+      name="p2.xpand"
+      value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/xpand/R201406030414"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="p2.antlr-gen"
+      value="http://download.itemis.com/updates/releases/2.1.1"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      type="URI"
+      name="p2.draw2d"
+      value="http://download.eclipse.org/tools/gef/updates/legacy/releases"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      type="URI"
+      name="p2.buildship"
+      value="http://download.eclipse.org/buildship/updates/e47/releases/2.x"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="p2.m2e"
+      value="http://download.eclipse.org/technology/m2e/releases"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.m2e.connector.jdt"
-      value="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler/"/>
+      value="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.m2e.connector.tycho"
-      value="http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.9.0/N/LATEST/"/>
+      value="http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.9.0/N/LATEST"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="p2.webtools"
+      value="http://download.eclipse.org/webtools/repository/luna/">
+    <description>required by m2e</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      type="URI"
+      name="p2.swtbot"
+      value="http://download.eclipse.org/technology/swtbot/releases/latest"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="github.user.password"
@@ -96,6 +169,14 @@
       name="github.user.password"
       label="Github user password">
     <description>Github user password</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      id="jenkins.url"
+      type="URI"
+      name="jenkins.url"
+      value="http://services.typefox.io/open-source/jenkins">
+    <description>Base URL of Jenkins build server</description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
@@ -275,15 +356,16 @@
     <requirement
         name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
     <requirement
-        name="org.eclipse.epp.mpc.feature.group"/>
+        name="org.eclipse.epp.mpc.feature.group"
+        optional="true"/>
     <requirement
         name="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
     <requirement
         name="org.eclipse.pde.feature.group"/>
     <repository
-        url="${xtext.nightly.composite}"/>
+        url="${p2.xtext}"/>
     <repository
-        url="${mwe2.update.site}"/>
+        url="${p2.mwe2}"/>
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
@@ -291,26 +373,17 @@
     <requirement
         name="org.eclipse.m2e.feature.feature.group"/>
     <requirement
-        name="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
-    <requirement
         name="org.jboss.tools.m2e.jdt.feature.feature.group"/>
     <requirement
         name="org.eclipse.buildship.feature.group"/>
-    <requirement
-        name="edu.umd.cs.findbugs.plugin.eclipse.feature.group"
-        optional="true"/>
     <requirement
         name="org.eclipse.wst.jsdt.feature.feature.group"/>
     <requirement
         name="org.sonatype.tycho.m2e.feature.feature.group"/>
     <repository
-        url="http://download.eclipse.org/modeling/emft/b3/updates-4.4/"/>
-    <repository
         url="${p2.m2e.connector.jdt}"/>
     <repository
-        url="${buildship.p2.repository}"/>
-    <repository
-        url="http://findbugs.cs.umd.edu/eclipse"/>
+        url="${p2.buildship}"/>
     <repository
         url="${p2.m2e.connector.tycho}"/>
   </setupTask>
@@ -344,7 +417,7 @@
       id="git.clone.xtext.umbrella"
       remoteURI="eclipse/xtext-umbrella"
       pushURI=""
-      checkoutBranch="${xtext.git.branch}">
+      checkoutBranch="master">
     <annotation
         source="http://www.eclipse.org/oomph/setup/InducedChoices">
       <detail
@@ -446,26 +519,18 @@
               project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.17/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
     <stream
         name="master"/>
     <stream
-        name="maintenance">
+        name="maintenance_2.11">
       <setupTask
           xsi:type="setup:VariableTask"
-          name="xtext.git.branch"
-          value="maintenance"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="xtext.nightly.composite"
-          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="emf.update.site"
-          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+          name="p2.xtext"
+          value="${p2.xtext.releases}/2.11.0"/>
     </stream>
     <description>Provide the core grammar infrastructure, core framework and Language Server support</description>
   </project>
@@ -533,26 +598,18 @@
               project="org.eclipse.xtext.xbase.lib"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.17/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
     <stream
         name="master"/>
     <stream
-        name="maintenance">
+        name="maintenance_2.11">
       <setupTask
           xsi:type="setup:VariableTask"
-          name="xtext.git.branch"
-          value="maintenance"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="xtext.nightly.composite"
-          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="emf.update.site"
-          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+          name="p2.xtext"
+          value="${p2.xtext.releases}/2.11.0"/>
     </stream>
     <description>Libraries for Xbase and Xtend</description>
   </project>
@@ -618,26 +675,18 @@
               project="org.eclipse.xtext.xbase"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.17/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
     <stream
         name="master"/>
     <stream
-        name="maintenance">
+        name="maintenance_2.11">
       <setupTask
           xsi:type="setup:VariableTask"
-          name="xtext.git.branch"
-          value="maintenance"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="xtext.nightly.composite"
-          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="emf.update.site"
-          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+          name="p2.xtext"
+          value="${p2.xtext.releases}/2.11.0"/>
     </stream>
     <description>Additional editor-independent features, mostly Java support</description>
   </project>
@@ -697,200 +746,233 @@
             optional="true"/>
         <requirement
             name="org.eclipse.draw2d.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.xtend"/>
+        <requirement
+            name="org.eclipse.xtend.typesystem.emf"/>
+        <requirement
+            name="org.eclipse.xpand"
+            filter=""/>
+        <requirement
+            name="org.eclipse.lsp4j.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.m2e.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.buildship.feature.group"/>
+        <requirement
+            name="org.eclipse.jem.util"/>
+        <requirement
+            name="org.eclipse.wst.sse.core"/>
+        <requirement
+            name="org.eclipse.wst.xml.ui"/>
+        <repositoryList
+            name="Photon">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.8"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.xtext.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.lsp4j}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+          <repository
+              url="${p2.lsp4j}"/>
+        </repositoryList>
+        <repositoryList
+            name="Photon - Staging">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.8"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.xtext.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="http://download.eclipse.org/staging/photon/"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+          <repository
+              url="${p2.lsp4j}"/>
+        </repositoryList>
         <repositoryList
             name="Oxygen">
           <repository
-              url="${xtext.nightly.composite}"/>
+              url="${p2.xtext}"/>
           <repository
-              url="${mwe2.update.site}"/>
+              url="${p2.mwe2}"/>
           <repository
-              url="${antlr-gen.update.site}"/>
+              url="${p2.antlr-gen}"/>
           <repository
-              url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+              url="${p2.gef}"/>
           <repository
-              url="http://download.eclipse.org/technology/m2e/releases/1.7"/>
+              url="${p2.m2e}/1.8"/>
           <repository
-              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+              url="${p2.swtbot}"/>
           <repository
-              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+              url="${p2.xtext.orbit}"/>
           <repository
-              url="${emf.update.site}"/>
+              url="${p2.emf}"/>
           <repository
-              url="http://download.eclipse.org/eclipse/updates/4.7/"/>
+              url="${p2.draw2d}"/>
           <repository
-              url="${draw2d.p2.repository}"/>
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+          <repository
+              url="${p2.lsp4j}"/>
+        </repositoryList>
+        <repositoryList
+            name="Oxygen - Staging">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.8"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.xtext.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="http://download.eclipse.org/staging/oxygen/"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+          <repository
+              url="${p2.lsp4j}"/>
         </repositoryList>
         <repositoryList
             name="Neon">
           <repository
-              url="${xtext.nightly.composite}"/>
+              url="${p2.xtext}"/>
           <repository
-              url="${mwe2.update.site}"/>
+              url="${p2.mwe2}"/>
           <repository
-              url="${antlr-gen.update.site}"/>
+              url="${p2.antlr-gen}"/>
           <repository
-              url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+              url="${p2.gef}"/>
           <repository
-              url="http://download.eclipse.org/technology/m2e/releases/1.7"/>
+              url="${p2.m2e}/1.7"/>
           <repository
-              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+              url="${p2.swtbot}"/>
           <repository
-              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+              url="${p2.xtext.orbit}"/>
           <repository
-              url="${emf.update.site}"/>
+              url="${p2.emf}"/>
           <repository
-              url="http://download.eclipse.org/eclipse/updates/4.6/"/>
+              url="${p2.draw2d}"/>
           <repository
-              url="${draw2d.p2.repository}"/>
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+          <repository
+              url="${p2.lsp4j}"/>
         </repositoryList>
         <repositoryList
             name="Mars">
           <repository
-              url="${xtext.nightly.composite}"/>
+              url="${p2.xtext}"/>
           <repository
-              url="${mwe2.update.site}"/>
+              url="${p2.mwe2}"/>
           <repository
-              url="${antlr-gen.update.site}"/>
+              url="${p2.antlr-gen}"/>
           <repository
-              url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+              url="${p2.gef}"/>
           <repository
-              url="http://download.eclipse.org/technology/m2e/releases/1.6/"/>
+              url="${p2.m2e}/1.6"/>
           <repository
-              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+              url="${p2.swtbot}"/>
           <repository
-              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+              url="${p2.xtext.orbit}"/>
           <repository
-              url="${emf.update.site}"/>
+              url="${p2.emf}"/>
           <repository
-              url="http://download.eclipse.org/eclipse/updates/4.5/"/>
+              url="${p2.draw2d}"/>
           <repository
-              url="${draw2d.p2.repository}"/>
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+          <repository
+              url="${p2.lsp4j}"/>
         </repositoryList>
         <repositoryList
             name="Luna">
           <repository
-              url="${xtext.nightly.composite}"/>
+              url="${p2.xtext}"/>
           <repository
-              url="${mwe2.update.site}"/>
+              url="${p2.mwe2}"/>
           <repository
-              url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+              url="${p2.gef}"/>
           <repository
-              url="http://download.eclipse.org/technology/m2e/releases/1.5/"/>
+              url="${p2.m2e}/1.5"/>
           <repository
-              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+              url="${p2.swtbot}"/>
           <repository
-              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+              url="${p2.xtext.orbit}"/>
           <repository
-              url="${emf.update.site}"/>
+              url="${p2.emf}"/>
           <repository
-              url="${antlr-gen.update.site}"/>
+              url="${p2.antlr-gen}"/>
           <repository
-              url="http://download.eclipse.org/eclipse/updates/4.4/"/>
+              url="${p2.draw2d}"/>
           <repository
-              url="${draw2d.p2.repository}"/>
-        </repositoryList>
-        <repositoryList
-            name="Kepler">
+              url="${p2.xpand}"/>
           <repository
-              url="${xtext.nightly.composite}"/>
+              url="${p2.buildship}"/>
           <repository
-              url="${mwe2.update.site}"/>
+              url="${p2.webtools}"/>
           <repository
-              url="http://download.eclipse.org/technology/m2e/releases/1.4/"/>
-          <repository
-              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-          <repository
-              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-          <repository
-              url="${emf.update.site}"/>
-          <repository
-              url="${draw2d.p2.repository}"/>
-          <repository
-              url="${antlr-gen.update.site}"/>
-          <repository
-              url="http://download.eclipse.org/eclipse/updates/4.3-P-builds/"/>
-        </repositoryList>
-        <repositoryList
-            name="Juno">
-          <repository
-              url="${xtext.nightly.composite}"/>
-          <repository
-              url="${mwe2.update.site}"/>
-          <repository
-              url="http://download.eclipse.org/technology/m2e/releases/1.3/"/>
-          <repository
-              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-          <repository
-              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-          <repository
-              url="${emf.update.site}"/>
-          <repository
-              url="${draw2d.p2.repository}"/>
-          <repository
-              url="${antlr-gen.update.site}"/>
-          <repository
-              url="http://download.eclipse.org/eclipse/updates/4.2/"/>
-        </repositoryList>
-        <repositoryList
-            name="Indigo">
-          <repository
-              url="${xtext.nightly.composite}"/>
-          <repository
-              url="${mwe2.update.site}"/>
-          <repository
-              url="http://download.eclipse.org/technology/m2e/releases/1.2/"/>
-          <repository
-              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-          <repository
-              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-          <repository
-              url="${emf.update.site}"/>
-          <repository
-              url="${draw2d.p2.repository}"/>
-          <repository
-              url="${antlr-gen.update.site}"/>
-          <repository
-              url="http://download.eclipse.org/eclipse/updates/3.7/"/>
-        </repositoryList>
-        <repositoryList
-            name="Helios">
-          <repository
-              url="${xtext.nightly.composite}"/>
-          <repository
-              url="${mwe2.update.site}"/>
-          <repository
-              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-          <repository
-              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-          <repository
-              url="${emf.update.site}"/>
-          <repository
-              url="${draw2d.p2.repository}"/>
-          <repository
-              url="${antlr-gen.update.site}"/>
-          <repository
-              url="http://download.eclipse.org/eclipse/updates/3.6/"/>
-          <repository
-              url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
-        </repositoryList>
-      </targlet>
-      <targlet
-          name="Xtext Tools"
-          activeRepositoryList="Oldest Helios">
-        <requirement
-            name="org.eclipse.m2e.feature.feature.group"/>
-        <requirement
-            name="org.eclipse.jem.util"/>
-        <requirement
-            name="org.eclipse.buildship.feature.group"/>
-        <repositoryList
-            name="Oldest Helios">
-          <repository
-              url="http://download.eclipse.org/webtools/downloads/drops/R3.2.3/R-3.2.3-20110217214612/repository"/>
-          <repository
-              url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
-          <repository
-              url="${buildship.p2.repository}"/>
+              url="${p2.lsp4j}"/>
         </repositoryList>
       </targlet>
       <description>Target platform</description>
@@ -913,7 +995,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.17/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2 //@projects[name='eclipse']/@setupTasks.4/@workingSets.1"/>
+              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -925,7 +1007,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.17/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2"/>
+              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.FeatureNature"/>
@@ -940,7 +1022,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.17/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.example\..*"/>
@@ -955,19 +1037,11 @@
     <stream
         name="master"/>
     <stream
-        name="maintenance">
+        name="maintenance_2.11">
       <setupTask
           xsi:type="setup:VariableTask"
-          name="xtext.git.branch"
-          value="maintenance"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="xtext.nightly.composite"
-          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="emf.update.site"
-          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+          name="p2.xtext"
+          value="${p2.xtext.releases}/2.11.0"/>
     </stream>
     <description>Plug-ins for Eclipse</description>
   </project>
@@ -1035,26 +1109,18 @@
               project="org.eclipse.xtext.core.idea.tests"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.17/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
     <stream
         name="master"/>
     <stream
-        name="maintenance">
+        name="maintenance_2.11">
       <setupTask
           xsi:type="setup:VariableTask"
-          name="xtext.git.branch"
-          value="maintenance"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="xtext.nightly.composite"
-          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="emf.update.site"
-          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+          name="p2.xtext"
+          value="${p2.xtext.releases}/2.11.0"/>
     </stream>
     <description>Plug-ins for IntelliJ IDEA</description>
   </project>
@@ -1122,26 +1188,18 @@
               project="org.eclipse.xtext.web"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.17/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
     <stream
         name="master"/>
     <stream
-        name="maintenance">
+        name="maintenance_2.11">
       <setupTask
           xsi:type="setup:VariableTask"
-          name="xtext.git.branch"
-          value="maintenance"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="xtext.nightly.composite"
-          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="emf.update.site"
-          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+          name="p2.xtext"
+          value="${p2.xtext.releases}/2.11.0"/>
     </stream>
     <description>Support for Orion, Ace and CodeMirror</description>
   </project>
@@ -1193,26 +1251,18 @@
               project="org.eclipse.xtext.maven.plugin"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.17/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
     <stream
         name="master"/>
     <stream
-        name="maintenance">
+        name="maintenance_2.11">
       <setupTask
           xsi:type="setup:VariableTask"
-          name="xtext.git.branch"
-          value="maintenance"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="xtext.nightly.composite"
-          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="emf.update.site"
-          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+          name="p2.xtext"
+          value="${p2.xtext.releases}/2.11.0"/>
     </stream>
     <description>Support for Maven</description>
   </project>
@@ -1275,14 +1325,21 @@
       <requirement
           name="org.eclipse.swtbot.generator.feature.feature.group"/>
       <repository
-          url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          url="${p2.swtbot}"/>
       <description>UI testing framework</description>
     </setupTask>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.xtext.xtend.location}"
-          locateNestedProjects="true"/>
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NotPredicate">
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern=".*\.idea.*"/>
+        </predicate>
+      </sourceLocator>
       <description>Maven Dependencies</description>
     </setupTask>
     <setupTask
@@ -1296,7 +1353,7 @@
               project="org.eclipse.xtend.core"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.17/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1313,26 +1370,245 @@
         <repositoryList
             name="SWTBot">
           <repository
-              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.xtext.orbit}"/>
+        </repositoryList>
+      </targlet>
+      <targlet
+          name="Xtend Target Platform"
+          activeRepositoryList="${eclipse.target.platform}">
+        <requirement
+            name="org.eclipse.platform.feature.group"/>
+        <requirement
+            name="org.eclipse.jdt.feature.group"/>
+        <requirement
+            name="org.eclipse.pde.feature.group"/>
+        <requirement
+            name="org.eclipse.emf.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.emf.mwe2.launcher.feature.group"/>
+        <requirement
+            name="org.junit"
+            versionRange="[4.12.0,4.13.0)"/>
+        <requirement
+            name="org.eclipse.m2e.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.buildship.feature.group"/>
+        <requirement
+            name="org.eclipse.xtext.xbase.lib.feature.group"
+            versionRange="2.13.0"/>
+        <requirement
+            name="org.eclipse.xtext.testing"/>
+        <requirement
+            name="org.eclipse.xtext.xbase.testing"/>
+        <requirement
+            name="org.eclipse.xtext.ui.testing"/>
+        <repositoryList
+            name="Photon">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.8"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.xtext.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+        </repositoryList>
+        <repositoryList
+            name="Photon - Staging">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.8"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.xtext.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="http://download.eclipse.org/staging/photon/"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+        </repositoryList>
+        <repositoryList
+            name="Oxygen">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.8"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.xtext.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+        </repositoryList>
+        <repositoryList
+            name="Oxygen - Staging">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.8"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.xtext.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="http://download.eclipse.org/staging/oxygen/"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+        </repositoryList>
+        <repositoryList
+            name="Neon">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.7"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.xtext.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+        </repositoryList>
+        <repositoryList
+            name="Mars">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.6"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.xtext.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+        </repositoryList>
+        <repositoryList
+            name="Luna">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.5"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.xtext.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
         </repositoryList>
       </targlet>
     </setupTask>
     <stream
         name="master"/>
     <stream
-        name="maintenance">
+        name="maintenance_2.11">
       <setupTask
           xsi:type="setup:VariableTask"
-          name="xtext.git.branch"
-          value="maintenance"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="xtext.nightly.composite"
-          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="emf.update.site"
-          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+          name="p2.xtext"
+          value="${p2.xtext.releases}/2.11.0"/>
     </stream>
     <description>The Xtend language</description>
   </project>
@@ -1345,8 +1621,6 @@
         licenseConfirmationDisabled="true">
       <requirement
           name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.builds.feature.group"/>
       <requirement
           name="org.eclipse.mylyn.context_feature.feature.group"/>
       <requirement
@@ -1873,6 +2147,77 @@
       </setupTask>
     </stream>
     <description>Add Mylyn integration and Bugzilla/GitHub issues</description>
+  </project>
+  <project name="build"
+      label="Xtext Build Tasks">
+    <setupTask
+        xsi:type="mylyn:MylynBuildsTask"
+        id="build.xtext-core"
+        serverURL="${jenkins.url}/job/xtext-core/">
+      <buildPlan
+          name="${xtext.git.branch}"/>
+      <description>xtext-core Jenkins Build Job</description>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynBuildsTask"
+        id="build.xtext-lib"
+        serverURL="${jenkins.url}/job/xtext-lib/">
+      <buildPlan
+          name="${xtext.git.branch}"/>
+      <description>xtext-lib Jenkins Build Job</description>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynBuildsTask"
+        id="build.xtext-extras"
+        serverURL="${jenkins.url}/job/xtext-extras/">
+      <buildPlan
+          name="${xtext.git.branch}"/>
+      <description>xtext-extras Jenkins Build Job</description>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynBuildsTask"
+        id="build.xtext-eclipse"
+        serverURL="${jenkins.url}/job/xtext-eclipse/">
+      <buildPlan
+          name="${xtext.git.branch}"/>
+      <description>xtext-eclipse Jenkins Build Job</description>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynBuildsTask"
+        id="build.xtext-idea"
+        serverURL="${jenkins.url}/job/xtext-idea/">
+      <buildPlan
+          name="${xtext.git.branch}"/>
+      <description>xtext-idea Jenkins Build Job</description>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynBuildsTask"
+        id="build.xtext-web"
+        serverURL="${jenkins.url}/job/xtext-web/"
+        userID="">
+      <buildPlan
+          name="${xtext.git.branch}"/>
+      <description>xtext-web Jenkins Build Job</description>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynBuildsTask"
+        id="build.xtext-maven"
+        serverURL="${jenkins.url}/job/xtext-maven/">
+      <buildPlan
+          name="${xtext.git.branch}"/>
+      <description>xtext-maven Jenkins Build Job</description>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynBuildsTask"
+        id="build.xtext-xtend"
+        serverURL="${jenkins.url}/job/xtext-xtend/">
+      <buildPlan
+          name="${xtext.git.branch}"/>
+      <description>xtext-xtend Jenkins Build Job</description>
+    </setupTask>
+    <stream
+        name="master"/>
+    <description>Adds the Mylyn Build Integration feature and populates the &quot;Builds&quot; view with the Xtext related Jenkins build jobs</description>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"

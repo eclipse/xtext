@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Version: 2.14.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.ui.codetemplates.ide
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.xtext.ide,
+ org.eclipse.xtext.ui.codetemplates,
+ org.antlr.runtime
+Export-Package: org.eclipse.xtext.ui.codetemplates.ide,
+ org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr,
+ org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr.lexer,
+ org.eclipse.xtext.ui.codetemplates.ui.contentassist,
+ org.eclipse.xtext.ui.codetemplates.ui.highlighting
+

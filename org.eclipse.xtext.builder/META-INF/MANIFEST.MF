@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.builder;singleton:=true
-Bundle-Version: 2.13.0.qualifier
+Bundle-Version: 2.14.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -38,13 +38,11 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.common.types.ui;resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.launching;bundle-version="3.5.200";resolution:=optional;x-installation:=greedy,
  org.eclipse.ui.forms;bundle-version="3.4.1";resolution:=optional;x-installation:=greedy,
- org.eclipse.jdt.ui;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.xbase.lib;visibility:=reexport,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0";visibility:=reexport,
  org.eclipse.emf.ecore.editor;bundle-version="2.10.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.debug.core;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.debug.ui;bundle-version="3.6.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.jdt.debug;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.jdt.debug.ui;bundle-version="3.5.2";resolution:=optional,
  org.eclipse.xtend.lib,
  org.eclipse.ui.console;bundle-version="3.5.0",
  org.eclipse.xtext.smap

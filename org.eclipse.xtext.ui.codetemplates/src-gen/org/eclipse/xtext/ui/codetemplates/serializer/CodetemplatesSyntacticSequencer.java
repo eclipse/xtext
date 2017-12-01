@@ -48,7 +48,7 @@ public class CodetemplatesSyntacticSequencer extends AbstractSyntacticSequencer 
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getWSRule())
+		if (ruleCall.getRule() == grammarAccess.getWSRule())
 			return getWSToken(semanticObject, ruleCall, node);
 		return "";
 	}
@@ -68,25 +68,25 @@ public class CodetemplatesSyntacticSequencer extends AbstractSyntacticSequencer 
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_TemplateBodyWithQuotes_WSTerminalRuleCall_0_q.equals(syntax))
+			if (match_TemplateBodyWithQuotes_WSTerminalRuleCall_0_q.equals(syntax))
 				emit_TemplateBodyWithQuotes_WSTerminalRuleCall_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Variable_WSTerminalRuleCall_1_a.equals(syntax))
+			else if (match_Variable_WSTerminalRuleCall_1_a.equals(syntax))
 				emit_Variable_WSTerminalRuleCall_1_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Variable_WSTerminalRuleCall_2_1_0_1_a.equals(syntax))
+			else if (match_Variable_WSTerminalRuleCall_2_1_0_1_a.equals(syntax))
 				emit_Variable_WSTerminalRuleCall_2_1_0_1_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Variable_WSTerminalRuleCall_2_1_2_a.equals(syntax))
+			else if (match_Variable_WSTerminalRuleCall_2_1_2_a.equals(syntax))
 				emit_Variable_WSTerminalRuleCall_2_1_2_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Variable_WSTerminalRuleCall_2_1_4_0_a.equals(syntax))
+			else if (match_Variable_WSTerminalRuleCall_2_1_4_0_a.equals(syntax))
 				emit_Variable_WSTerminalRuleCall_2_1_4_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Variable_WSTerminalRuleCall_2_1_4_2_a.equals(syntax))
+			else if (match_Variable_WSTerminalRuleCall_2_1_4_2_a.equals(syntax))
 				emit_Variable_WSTerminalRuleCall_2_1_4_2_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Variable_WSTerminalRuleCall_2_1_4_3_1_0_a.equals(syntax))
+			else if (match_Variable_WSTerminalRuleCall_2_1_4_3_1_0_a.equals(syntax))
 				emit_Variable_WSTerminalRuleCall_2_1_4_3_1_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Variable_WSTerminalRuleCall_2_1_4_3_1_2_a.equals(syntax))
+			else if (match_Variable_WSTerminalRuleCall_2_1_4_3_1_2_a.equals(syntax))
 				emit_Variable_WSTerminalRuleCall_2_1_4_3_1_2_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Variable_WSTerminalRuleCall_2_1_4_3_2_a.equals(syntax))
+			else if (match_Variable_WSTerminalRuleCall_2_1_4_3_2_a.equals(syntax))
 				emit_Variable_WSTerminalRuleCall_2_1_4_3_2_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Variable_WSTerminalRuleCall_3_a.equals(syntax))
+			else if (match_Variable_WSTerminalRuleCall_3_a.equals(syntax))
 				emit_Variable_WSTerminalRuleCall_3_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

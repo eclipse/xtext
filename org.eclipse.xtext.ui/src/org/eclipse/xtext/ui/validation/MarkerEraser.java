@@ -52,7 +52,7 @@ public class MarkerEraser {
 	 * @see CheckMode#shouldCheck(CheckType)
 	 * @see MarkerTypes#forCheckType(CheckType)
 	 */
-	public final void deleteMarkers(final IFile file, final CheckMode checkMode, final IProgressMonitor monitor)
+	public void deleteMarkers(final IFile file, final CheckMode checkMode, final IProgressMonitor monitor)
 			throws CoreException {
 		for (CheckType chkType : CheckType.values()) {
 			if (checkMode.shouldCheck(chkType)) {

@@ -171,6 +171,15 @@
             </activeWhen>
         </handler>
     </extension>   
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="xbase"
+			id="org.eclipse.xtext.purexbase.PureXbase.contenttype"
+			name="PureXbase File"
+			priority="normal">
+		</content-type>
+	</extension>
 
 <!-- adding resource factories -->
 
@@ -495,16 +504,23 @@
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.eclipse.xtext.purexbase.PureXbase.compare.contentViewers"
-            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="xbase">
+      class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+      extensions="xbase">
     </viewer>
+    <contentTypeBinding
+      contentTypeId="org.eclipse.xtext.purexbase.PureXbase.contenttype"
+      contentViewerId="org.eclipse.xtext.purexbase.PureXbase.compare.contentViewers" />
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="org.eclipse.xtext.purexbase.PureXbase.compare.contentMergeViewers"
-            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="xbase" label="PureXbase Compare">
-     </viewer>
+      class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+      extensions="xbase" label="PureXbase Compare">
+    </viewer>
+    <contentTypeBinding
+      contentTypeId="org.eclipse.xtext.purexbase.PureXbase.contenttype"
+      contentMergeViewerId="org.eclipse.xtext.purexbase.PureXbase.compare.contentMergeViewers" />
   </extension>
+  
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="org.eclipse.xtext.purexbase.PureXbase.editors.documentProviders"
             class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"

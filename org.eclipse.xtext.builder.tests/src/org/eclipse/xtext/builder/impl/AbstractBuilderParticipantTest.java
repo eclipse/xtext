@@ -22,15 +22,15 @@ import org.eclipse.xtext.builder.BuilderParticipant;
 import org.eclipse.xtext.builder.DerivedResourceCleanerJob;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
-import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
+import org.eclipse.xtext.builder.tests.internal.TestsActivator;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfigurationProvider;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.inject.Injector;
@@ -52,8 +52,8 @@ public abstract class AbstractBuilderParticipantTest extends AbstractBuilderTest
 	}
 
 	protected Injector getInjector() {
-		final Injector injector = Activator.getInstance().getInjector(
-				"org.eclipse.xtext.builder.tests.BuilderTestLanguage");
+		final Injector injector = TestsActivator.getInstance().getInjector(
+				TestsActivator.ORG_ECLIPSE_XTEXT_BUILDER_TESTS_BUILDERTESTLANGUAGE);
 		return injector;
 	}
 

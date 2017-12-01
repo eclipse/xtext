@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Domainmodel Example - UI Tests
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.13.0.qualifier
+Bundle-Version: 2.14.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ui.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.domainmodel.ui,
@@ -12,7 +12,9 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel.ui,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.jdt.core,
  org.eclipse.xtext.xbase.testing,
- org.eclipse.xtext.ui.testing
+ org.eclipse.xtext.ui.testing,
+ org.eclipse.xtext.junit4,
+ org.eclipse.xtext.xbase.junit
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.domainmodel.ui.tests;x-internal=true
 Import-Package: org.hamcrest.core,

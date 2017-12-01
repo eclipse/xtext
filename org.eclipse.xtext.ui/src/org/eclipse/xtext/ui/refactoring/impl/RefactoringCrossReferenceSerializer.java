@@ -6,13 +6,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
-
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.inject.Inject;
 
@@ -67,6 +69,7 @@ public class RefactoringCrossReferenceSerializer {
 
 			Iterable<IEObjectDescription> descriptionsForCrossRef = scope.getElements(target);
 			String bestRefText = null;
+			List<String> badNames = new ArrayList<String>();
 			for (IEObjectDescription desc : descriptionsForCrossRef) {
 				try {
 					String unconvertedRefText = qualifiedNameConverter.toString(desc.getName());
@@ -74,9 +77,13 @@ public class RefactoringCrossReferenceSerializer {
 					if (refTextEvaluator.isValid(desc) && (bestRefText == null || refTextEvaluator.isBetterThan(convertedRefText, bestRefText)))
 						bestRefText = convertedRefText;
 				} catch (ValueConverterException e) {
-					status.add(RefactoringStatus.WARNING,
-							"Misconfigured language: New reference text has invalid syntax.", owner, linkTextRegion);
+					// this is a problem only if we don't find any matching value
+					badNames.add(desc.getName().toString());
 				}
+			}
+			if (bestRefText == null && !badNames.isEmpty()) {
+				status.add(WARNING,
+						"Misconfigured language: New reference text has invalid syntax. Following names are in the scope: " + IterableExtensions.join(badNames, ", "), owner, linkTextRegion);
 			}
 			return bestRefText;
 

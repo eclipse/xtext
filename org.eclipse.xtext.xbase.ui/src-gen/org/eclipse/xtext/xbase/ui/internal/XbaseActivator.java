@@ -31,6 +31,7 @@ import org.osgi.framework.BundleContext;
  */
 public class XbaseActivator extends AbstractUIPlugin {
 
+	public static final String PLUGIN_ID = "org.eclipse.xtext.xbase.ui";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_XTYPE = "org.eclipse.xtext.xbase.Xtype";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_XBASE = "org.eclipse.xtext.xbase.Xbase";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_ANNOTATIONS_XBASEWITHANNOTATIONS = "org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations";
@@ -111,5 +112,6 @@ public class XbaseActivator extends AbstractUIPlugin {
 	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
+	
 	
 }

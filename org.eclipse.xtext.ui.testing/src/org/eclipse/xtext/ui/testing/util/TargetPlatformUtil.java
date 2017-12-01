@@ -23,6 +23,7 @@ import org.eclipse.pde.core.target.ITargetPlatformService;
 import org.eclipse.pde.core.target.LoadTargetDefinitionJob;
 import org.eclipse.pde.internal.core.target.TargetPlatformService;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 /**
  * @author dietrich - Initial contribution and API
@@ -31,7 +32,21 @@ import org.osgi.framework.Bundle;
  */
 public class TargetPlatformUtil {
 	
+	/**
+	 * @deprecated use {@link #setTargetPlatform(Class)} instead.
+	 */
+	@Deprecated
 	public static void setTargetPlatform() throws Exception {
+		setTargetPlatform(TargetPlatformUtil.class);
+	}
+	
+	/**
+	 * Sets the target platform for tests (to be used in tycho mainly)
+	 * @param context any class of the test bundle to be able to determine the test bundle
+	 * @since 2.14
+	 */
+	public static void setTargetPlatform(Class<?> context) throws Exception {
+		Bundle currentBundle = FrameworkUtil.getBundle(context);
 		ITargetPlatformService tpService = TargetPlatformService.getDefault();
 		ITargetDefinition targetDef = tpService.newTarget();
 		targetDef.setName("Tycho platform");
@@ -39,6 +54,15 @@ public class TargetPlatformUtil {
 		List<ITargetLocation> bundleContainers = new ArrayList<ITargetLocation>();
 		Set<File> dirs = new HashSet<File>();
 		for (Bundle bundle : bundles) {
+			if (bundle.equals(currentBundle)) {
+				// we skip the current bundle, otherwise the folder for the target platform
+				// will include the absolute directory of the maven parent project
+				// since the projects are nested in the parent project the result
+				// would be that Java packages of our project will be available twice
+				// and Java won't be able to find our classes leading in compilation
+				// errors during our tests.
+				continue;
+			}
 			EquinoxBundle bundleImpl = (EquinoxBundle) bundle;
 			Generation generation = (Generation) bundleImpl.getModule().getCurrentRevision().getRevisionInfo();
 			File file = generation.getBundleFile().getBaseFile();

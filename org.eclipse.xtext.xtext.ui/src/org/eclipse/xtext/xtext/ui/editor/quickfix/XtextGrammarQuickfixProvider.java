@@ -155,15 +155,12 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(EMPTY_ENUM_LITERAL)
 	public void fixEmptyEnumLiteral(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Fix empty enum literal", "Fix empty enum literal", NULL_QUICKFIX_IMAGE,
-				new ISemanticModification() {
-					@Override
-					public void apply(final EObject element, IModificationContext context) {
-						EnumLiteralDeclaration enumLiteralDeclaration = (EnumLiteralDeclaration) element;
-						Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
-						keyword.setValue(enumLiteralDeclaration.getEnumLiteral().getName().toLowerCase());
-						enumLiteralDeclaration.setLiteral(keyword);
-					}
+		acceptor.acceptMulti(issue, "Fix empty enum literal", "Fix empty enum literal", NULL_QUICKFIX_IMAGE,
+				(EObject element) -> {
+					EnumLiteralDeclaration enumLiteralDeclaration = (EnumLiteralDeclaration) element;
+					Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
+					keyword.setValue(enumLiteralDeclaration.getEnumLiteral().getName().toLowerCase());
+					enumLiteralDeclaration.setLiteral(keyword);
 				});
 	}
 

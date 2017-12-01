@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.codetemplates.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.codetemplates.services.CodetemplatesGrammarAccess;
 import org.eclipse.xtext.ui.codetemplates.templates.Codetemplate;
@@ -32,8 +30,13 @@ public class CodetemplatesSemanticSequencer extends AbstractDelegatingSemanticSe
 	private CodetemplatesGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == TemplatesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == TemplatesPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case TemplatesPackage.CODETEMPLATE:
 				sequence_Codetemplate(context, (Codetemplate) semanticObject); 
 				return; 
@@ -53,69 +56,102 @@ public class CodetemplatesSemanticSequencer extends AbstractDelegatingSemanticSe
 				sequence_Variable(context, (Variable) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Codetemplate returns Codetemplate
+	 *
 	 * Constraint:
 	 *     (name=ValidID id=ID description=STRING (context=[AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes)
 	 */
-	protected void sequence_Codetemplate(EObject context, Codetemplate semanticObject) {
+	protected void sequence_Codetemplate(ISerializationContext context, Codetemplate semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Codetemplates returns Codetemplates
+	 *
 	 * Constraint:
 	 *     (language=[Grammar|FQN] templates+=Codetemplate*)
 	 */
-	protected void sequence_Codetemplates(EObject context, Codetemplates semanticObject) {
+	protected void sequence_Codetemplates(ISerializationContext context, Codetemplates semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     TemplatePart returns Dollar
+	 *     VariableOrDollar returns Dollar
+	 *     Dollar returns Dollar
+	 *
 	 * Constraint:
-	 *     (escaped?='$$'?)
+	 *     escaped?='$$'?
 	 */
-	protected void sequence_Dollar(EObject context, Dollar semanticObject) {
+	protected void sequence_Dollar(ISerializationContext context, Dollar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     TemplatePart returns Literal
+	 *     Literal returns Literal
+	 *
 	 * Constraint:
 	 *     value=LiteralValue
 	 */
-	protected void sequence_Literal(EObject context, Literal semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, TemplatesPackage.Literals.LITERAL__VALUE) == ValueTransient.YES)
+	protected void sequence_Literal(ISerializationContext context, Literal semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TemplatesPackage.Literals.LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TemplatesPackage.Literals.LITERAL__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLiteralAccess().getValueLiteralValueParserRuleCall_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     TemplateBodyWithQuotes returns TemplateBody
+	 *     TemplateBody returns TemplateBody
+	 *
 	 * Constraint:
 	 *     (parts+=Literal? (parts+=VariableOrDollar parts+=Literal?)*)
 	 */
-	protected void sequence_TemplateBody(EObject context, TemplateBody semanticObject) {
+	protected void sequence_TemplateBody(ISerializationContext context, TemplateBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     TemplatePart returns Variable
+	 *     VariableOrDollar returns Variable
+	 *     Variable returns Variable
+	 *
 	 * Constraint:
 	 *     (
 	 *         name=ValidID | 
-	 *         (name=ValidID? type=ValidID (expectingParameters?='(' ((parameters+=STRING | parameters+=FQN) (parameters+=STRING | parameters+=FQN)*)?)?)
+	 *         (
+	 *             name=ValidID? 
+	 *             type=ValidID 
+	 *             (
+	 *                 expectingParameters?='(' | 
+	 *                 (expectingParameters?='(' (parameters+=STRING | parameters+=FQN) parameters+=STRING? (parameters+=FQN? parameters+=STRING?)*)
+	 *             )?
+	 *         )
 	 *     )
 	 */
-	protected void sequence_Variable(EObject context, Variable semanticObject) {
+	protected void sequence_Variable(ISerializationContext context, Variable semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

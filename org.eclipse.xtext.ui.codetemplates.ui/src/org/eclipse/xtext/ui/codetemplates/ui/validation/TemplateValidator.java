@@ -29,7 +29,7 @@ import org.eclipse.xtext.ui.codetemplates.templates.Variable;
 import org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry;
 import org.eclipse.xtext.ui.codetemplates.ui.resolvers.IInspectableTemplateVariableResolver;
 import org.eclipse.xtext.ui.codetemplates.ui.resolvers.InspectableTemplateVariableResolverRegistry;
-import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesJavaValidator;
+import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesValidator;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
@@ -40,7 +40,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TemplateValidator extends CodetemplatesJavaValidator {
+public class TemplateValidator extends CodetemplatesValidator {
 
 	@Inject
 	private InspectableTemplateVariableResolverRegistry registry;

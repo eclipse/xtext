@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.ui.debug;
 import org.apache.log4j.Logger;
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.debug.core.IJavaStratumLineBreakpoint;
 import org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory;
 
@@ -18,6 +19,9 @@ public class XbaseBreakpointPropertyTester extends PropertyTester {
 
 	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
+		if (Platform.getBundle("org.eclipse.jdt.debug") == null) {
+			return false;
+		}
 		if (receiver instanceof IJavaStratumLineBreakpoint) {
 			IJavaStratumLineBreakpoint breakpoint = (IJavaStratumLineBreakpoint) receiver;
 			try {

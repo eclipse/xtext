@@ -792,7 +792,9 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(15, methodCount);
 		int innerTypesCount = TestAnnotation.class.getDeclaredClasses().length;
 		assertEquals(2, innerTypesCount);
-		assertEquals(methodCount + innerTypesCount, type.getMembers().size());
+		int fieldCount = TestAnnotation.class.getDeclaredFields().length;
+		assertEquals(1, fieldCount);
+		assertEquals(fieldCount + methodCount + innerTypesCount, type.getMembers().size());
 	}
 
 	@Test

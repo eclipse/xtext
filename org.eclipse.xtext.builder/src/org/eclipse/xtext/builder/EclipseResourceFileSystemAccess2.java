@@ -39,6 +39,7 @@ import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
+import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.generator.trace.TraceMarkers;
@@ -417,41 +418,45 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	protected void updateTraceInformation(IFile traceFile, CharSequence contents, boolean derived)
 			throws CoreException, IOException {
 		if (contents instanceof ITraceRegionProvider) {
-			AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
-			if (sourceTraces == null) {
-				sourceTraces = HashMultimap.create();
-			}
-			IPath tracePath = traceFile.getFullPath();
-			Iterator<AbstractTraceRegion> iterator = traceRegion.treeIterator();
-			while (iterator.hasNext()) {
-				AbstractTraceRegion region = iterator.next();
-				for (ILocationData location : region.getAssociatedLocations()) {
-					SourceRelativeURI path = location.getSrcRelativePath();
-					if (path != null) {
-						sourceTraces.put(path, tracePath);
+			try {
+				AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
+				if (sourceTraces == null) {
+					sourceTraces = HashMultimap.create();
+				}
+				IPath tracePath = traceFile.getFullPath();
+				Iterator<AbstractTraceRegion> iterator = traceRegion.treeIterator();
+				while (iterator.hasNext()) {
+					AbstractTraceRegion region = iterator.next();
+					for (ILocationData location : region.getAssociatedLocations()) {
+						SourceRelativeURI path = location.getSrcRelativePath();
+						if (path != null) {
+							sourceTraces.put(path, tracePath);
+						}
 					}
 				}
-			}
-			class AccessibleOutputStream extends ByteArrayOutputStream {
-				byte[] internalBuffer() {
-					return buf;
+				class AccessibleOutputStream extends ByteArrayOutputStream {
+					byte[] internalBuffer() {
+						return buf;
+					}
+	
+					int internalLength() {
+						return count;
+					}
 				}
-
-				int internalLength() {
-					return count;
+				AccessibleOutputStream data = new AccessibleOutputStream();
+				traceSerializer.writeTraceRegionTo(traceRegion, data);
+				// avoid copying the byte array
+				InputStream input = new ByteArrayInputStream(data.internalBuffer(), 0, data.internalLength());
+				if (traceFile.exists()) {
+					traceFile.setContents(input, true, false, monitor);
+				} else {
+					traceFile.create(input, true, monitor);
 				}
+				setDerived(traceFile, derived);
+				return;
+			} catch (TraceNotFoundException e) {
+				// ok
 			}
-			AccessibleOutputStream data = new AccessibleOutputStream();
-			traceSerializer.writeTraceRegionTo(traceRegion, data);
-			// avoid copying the byte array
-			InputStream input = new ByteArrayInputStream(data.internalBuffer(), 0, data.internalLength());
-			if (traceFile.exists()) {
-				traceFile.setContents(input, true, false, monitor);
-			} else {
-				traceFile.create(input, true, monitor);
-			}
-			setDerived(traceFile, derived);
-			return;
 		}
 		if (traceFile.exists()) {
 			traceFile.delete(IResource.FORCE, monitor);

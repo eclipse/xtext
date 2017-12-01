@@ -2,10 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Fowler DSL Example - UI
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.13.0.qualifier
+Bundle-Version: 2.14.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.fowlerdsl;visibility:=reexport,
+ org.eclipse.xtext.example.fowlerdsl.ide,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors;bundle-version="3.6.0",
  org.eclipse.ui.ide;bundle-version="3.6.0",
@@ -16,12 +17,12 @@ Require-Bundle: org.eclipse.xtext.example.fowlerdsl;visibility:=reexport,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare;bundle-version="2.1.0",
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtend.lib;resolution:=optional
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.fowlerdsl.ui.quickfix,
  org.eclipse.xtext.example.fowlerdsl.ui.contentassist,
- org.eclipse.xtext.example.fowlerdsl.ui.contentassist.antlr,
  org.eclipse.xtext.example.fowlerdsl.ui.internal,
- org.eclipse.xtext.example.fowlerdsl.ui.contentassist.antlr.internal
-Bundle-Activator: org.eclipse.xtext.example.fowlerdsl.ui.internal.StatemachineActivator
+ org.eclipse.xtext.example.fowlerdsl.ui.editor
+Bundle-Activator: org.eclipse.xtext.example.fowlerdsl.ui.internal.FowlerdslActivator

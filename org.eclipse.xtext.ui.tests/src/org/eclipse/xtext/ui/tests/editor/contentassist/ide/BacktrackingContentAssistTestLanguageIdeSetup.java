@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class BacktrackingContentAssistTestLanguageIdeSetup extends BacktrackingC
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new BacktrackingContentAssistTestLanguageRuntimeModule(), new BacktrackingContentAssistTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new BacktrackingContentAssistTestLanguageRuntimeModule(), new BacktrackingContentAssistTestLanguageIdeModule()));
 	}
 }

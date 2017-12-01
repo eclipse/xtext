@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class UnorderedGroupsTestLanguageIdeSetup extends UnorderedGroupsTestLang
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new UnorderedGroupsTestLanguageRuntimeModule(), new UnorderedGroupsTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new UnorderedGroupsTestLanguageRuntimeModule(), new UnorderedGroupsTestLanguageIdeModule()));
 	}
 }

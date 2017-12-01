@@ -14,27 +14,33 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.junit4.internal.InternalBuilderTest;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
+import org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
@@ -45,6 +51,7 @@ import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.junit.Test;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -65,6 +72,9 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 	private static final String GRAMMAR_WITH_EMPTY_ENUM_LITERAL = Strings.concat("\n", Arrays.asList(
 			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
 			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;", "enum ABCD: A|B|C=''|D;"));
+	private static final String GRAMMAR_WITH_SEVERAL_EMPTY_ENUM_LITERAL = Strings.concat("\n", Arrays.asList(
+			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
+			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;", "enum ABCD: A|B|C=''|D;", "enum B: B='';"));
 	private static final String GRAMMAR_WITH_INVALID_ACTION_IN_UOG = Strings.concat("\n", Arrays.asList(
 			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
 			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;",
@@ -88,6 +98,12 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 	public void testFixEmptyEnumLiteral() throws Exception {
 		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_EMPTY_ENUM_LITERAL);
 		assertAndApplySingleResolution(xtextEditor, EMPTY_ENUM_LITERAL, 1, "Fix empty enum literal");
+	}
+	
+	@Test
+	public void testFixAllEmptyEnumLiteral() throws Exception {
+		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_SEVERAL_EMPTY_ENUM_LITERAL);
+		assertAndApplyAllResolutions(xtextEditor, EMPTY_ENUM_LITERAL, 1, 2, "Fix empty enum literal");
 	}
 
 	@Test
@@ -124,6 +140,40 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 			// because the "save changed resource dialog" waits for user input.
 			xtextEditor.doSave(new NullProgressMonitor());
 		}
+	}
+	protected void assertAndApplyAllResolutions(XtextEditor xtextEditor, String issueCode, int issueDataCount, int issueCount,
+			String resolutionLabel) throws CoreException {
+		final Injector injector = createInjector();
+		InternalBuilderTest.setAutoBuild(true);
+		if (xtextEditor.isDirty()) {
+			xtextEditor.doSave(new NullProgressMonitor());
+		}
+		InternalBuilderTest.fullBuild();
+
+		IXtextDocument document = xtextEditor.getDocument();
+		List<Issue> issues = getIssues(document);
+		assertFalse("Document has no issues, but should.", issues.isEmpty());
+
+		issues.iterator().forEachRemaining((issue) -> {
+			assertEquals(issueCode, issue.getCode());
+			assertNotNull(issue.getData());
+			assertEquals(issueDataCount, issue.getData().length);
+		});
+		IResource resource = xtextEditor.getResource();
+		IMarker[] problems = resource.findMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_INFINITE);
+		assertEquals("Resource should have " + issueCount + " error marker.", issueCount, problems.length);
+
+		MarkerResolutionGenerator instance = injector.getInstance(MarkerResolutionGenerator.class);
+		List<IMarkerResolution> resolutions = Lists.newArrayList(instance.getResolutions(problems[0]));
+		assertEquals(1, resolutions.size());
+		IMarkerResolution resolution = resolutions.iterator().next();
+		assertTrue(resolution instanceof WorkbenchMarkerResolution);
+		WorkbenchMarkerResolution workbenchResolution = (WorkbenchMarkerResolution) resolution;
+		workbenchResolution.run(workbenchResolution.findOtherMarkers(problems), new NullProgressMonitor());
+		InternalBuilderTest.cleanBuild();
+		problems = resource.findMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_INFINITE);
+		assertEquals("Resource should have no error marker.", 0, problems.length);
+
 	}
 
 	protected XtextEditor newXtextEditor(String projectName, String modelFile, String model) throws CoreException,

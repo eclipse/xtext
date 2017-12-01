@@ -2,19 +2,18 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Fowler DSL Example - Runtime
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.13.0.qualifier
+Bundle-Version: 2.14.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;visibility:=reexport,
- org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
- org.eclipse.xtext.util,
- org.eclipse.emf.ecore;bundle-version="2.10.2",
- org.eclipse.emf.common;bundle-version="2.10.1",
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.antlr.runtime,
- org.eclipse.xtext.common.types,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
- org.eclipse.xtext.xbase.lib,
- org.eclipse.equinox.common
+ org.eclipse.xtext.util,
+ org.eclipse.xtend.lib;bundle-version="2.14.0",
+ org.eclipse.emf.common
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.fowlerdsl,

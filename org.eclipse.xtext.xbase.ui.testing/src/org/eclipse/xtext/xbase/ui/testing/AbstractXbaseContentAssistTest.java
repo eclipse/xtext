@@ -165,13 +165,21 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		"newImmutableList()",
 		"newImmutableSet()",
 		"newImmutableMap()",
+		"newArrayList",
 		"newArrayList()",
+		"newLinkedList",
 		"newLinkedList()",
+		"newHashSet",
 		"newHashSet()",
+		"newLinkedHashSet",
 		"newLinkedHashSet()",
 		"newTreeSet()",
+		"newTreeSet()",
 		"newHashMap()",
+		"newHashMap",
 		"newLinkedHashMap()",
+		"newLinkedHashMap",
+		"newTreeMap()",
 		"newTreeMap()",
 		// InputOutput,
 		"print()",
@@ -676,7 +684,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testCamelCase_01() throws Exception {
-		newBuilder().append("newLLis").assertText("newLinkedList()");
+		newBuilder().append("newLLis").assertText("newLinkedList","newLinkedList()");
 	}
 	
 	@Test public void testCamelCase_02() throws Exception {

@@ -7,10 +7,9 @@ package org.eclipse.xtext.xbase.compiler;
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newHashMap;
-import static java.util.Collections.singletonMap;
+import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
+import static java.util.Collections.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -32,10 +31,7 @@ import java.util.Map.Entry;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.jdt.core.compiler.CompilationProgress;
-import org.eclipse.jdt.internal.compiler.batch.FileSystem;
 import org.eclipse.jdt.internal.compiler.batch.Main;
-import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.JavaVersion;
@@ -117,100 +113,8 @@ public class OnTheFlyJavaCompiler {
 		}
 	}
 
-	/**
-	 * @noextend This class is not intended to be subclassed by clients.
-	 * @noreference This class is not intended to be referenced by clients.
-	 * @noinstantiate This class is not intended to be instantiated by clients. 
-	 */
-	static class PatchedFileSystem extends FileSystem {
-
-		private FileSystem delegate;
-
-		public PatchedFileSystem(FileSystem delegate) {
-			super(new String[0], new String[0], "ISO-8859-1");
-			this.delegate = delegate;
-		}
-
-		@Override
-		public void cleanup() {
-			// DO nothing. the original implmentaion closes zips and sets the
-			// references to null
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			return delegate.equals(obj);
-		}
-
-		@Override
-		public NameEnvironmentAnswer findType(char[] typeName,
-				char[][] packageName) {
-			return delegate.findType(typeName, packageName);
-		}
-
-		@Override
-		public NameEnvironmentAnswer findType(char[][] compoundName) {
-			return delegate.findType(compoundName);
-		}
-
-		@Override
-		public NameEnvironmentAnswer findType(char[][] compoundName,
-				boolean asBinaryOnly) {
-			return delegate.findType(compoundName, asBinaryOnly);
-		}
-
-		@Override
-		public char[][][] findTypeNames(char[][] packageName) {
-			return delegate.findTypeNames(packageName);
-		}
-
-		public FileSystem getDelegate() {
-			return delegate;
-		}
-
-		@Override
-		public int hashCode() {
-			return delegate.hashCode();
-		}
-
-		@Override
-		public boolean isPackage(char[][] compoundName, char[] packageName) {
-			return delegate.isPackage(compoundName, packageName);
-		}
-
-		@Override
-		public String toString() {
-			return delegate.toString();
-		}
-
-	}
-
-	/**
-	 * HACK - reuse the classpath, since it is super expensive to reopen and
-	 * scan the zips.
-	 * 
-	 * @author Sven Efftinge - Initial contribution and API
-	 */
-	static class PatchedMain extends Main {
-
-		@SuppressWarnings("rawtypes")
-		public PatchedMain(PrintWriter outWriter, PrintWriter errWriter,
-				boolean systemExitWhenFinished, Map customDefaultOptions,
-				CompilationProgress compilationProgress) {
-			super(outWriter, errWriter, systemExitWhenFinished,
-					customDefaultOptions, compilationProgress);
-		}
-
-		@Override
-		public FileSystem getLibraryAccess() {
-			if (fileSystem == null) {
-				fileSystem = new PatchedFileSystem(super.getLibraryAccess());
-			}
-			return fileSystem;
-		}
-
-	}
 	
+
 	public static class ClassPathAssembler {
 		
 		@Inject
@@ -230,8 +134,6 @@ public class OnTheFlyJavaCompiler {
 			return parentClassLoader;
 		}
 	}
-
-	private static PatchedFileSystem fileSystem;
 
 	private List<String> classpath = newArrayList();
 
@@ -295,10 +197,7 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	public void clearClassPath() {
-		if (fileSystem != null && fileSystem.getDelegate() != null)
-			fileSystem.getDelegate().cleanup();
 		classpath.clear();
-		fileSystem = null;
 	}
 
 	protected boolean compile(String arguments) {
@@ -397,6 +296,7 @@ public class OnTheFlyJavaCompiler {
 		parent.mkdirs();
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Pair<String, String> createFullCode(String statementCode,
 			Type returnType, Pair<Type, String>... params) {
 		String className = "_$GeneratedClass";
@@ -477,24 +377,16 @@ public class OnTheFlyJavaCompiler {
 			GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
 			javaVersion = generatorConfig.getJavaSourceVersion();
 		}
-		switch (javaVersion) {
-			case JAVA8:
-				return "-1.8";
-			case JAVA7:
-				return "-1.7";
-			case JAVA6:
-				return "-1.6";
-			default:
-				return "-1.5";
-		}
+		return javaVersion.getComplianceLevelArg();
 	}
 
 	protected Main getMain() {
-		return new PatchedMain(new PrintWriter(new OutputStreamWriter(
+		return new Main(new PrintWriter(new OutputStreamWriter(
 				System.out)), new PrintWriter(new OutputStreamWriter(
 				errorStream)), false /* systemExit */, null /* options */, null);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Object internalCreateFunction(String code, Type returnType,
 			Pair<Type, String>... params) {
 		Pair<String, String> fullCode = createFullCode(code, returnType, params);

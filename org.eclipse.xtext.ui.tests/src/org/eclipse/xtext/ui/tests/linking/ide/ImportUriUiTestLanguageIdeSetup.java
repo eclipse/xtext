@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class ImportUriUiTestLanguageIdeSetup extends ImportUriUiTestLanguageStan
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new ImportUriUiTestLanguageRuntimeModule(), new ImportUriUiTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new ImportUriUiTestLanguageRuntimeModule(), new ImportUriUiTestLanguageIdeModule()));
 	}
 }

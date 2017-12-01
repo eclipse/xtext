@@ -31,6 +31,7 @@ import org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.Domainmodel
 import org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.PartialDomainmodelContentAssistParser;
 import org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.internal.InternalDomainmodelLexer;
 import org.eclipse.xtext.example.domainmodel.ui.contentassist.DomainmodelProposalProvider;
+import org.eclipse.xtext.example.domainmodel.ui.editor.DomainmodelEditor;
 import org.eclipse.xtext.example.domainmodel.ui.labeling.DomainmodelDescriptionLabelProvider;
 import org.eclipse.xtext.example.domainmodel.ui.labeling.DomainmodelLabelProvider;
 import org.eclipse.xtext.example.domainmodel.ui.outline.DomainmodelOutlineTreeProvider;
@@ -96,7 +97,6 @@ import org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule;
 import org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider;
-import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler;
 import org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler;
@@ -128,7 +128,7 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Class<? extends XtextEditor> bindXtextEditor() {
-		return XbaseEditor.class;
+		return DomainmodelEditor.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment

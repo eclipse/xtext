@@ -254,6 +254,7 @@ public class XtextReconciler extends Job implements IReconciler {
 					((IXtextDocument) textViewer.getDocument()).removeXtextDocumentContentObserver(documentListener);
 				}
 			}
+			cancel();
 		}
 	}
 
