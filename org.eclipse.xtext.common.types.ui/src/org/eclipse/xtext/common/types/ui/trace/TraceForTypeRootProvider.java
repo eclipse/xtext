@@ -33,6 +33,7 @@ import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
+import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
 import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
@@ -208,7 +209,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 			@Override
 			public AbstractTraceRegion getTraceRegion() {
 				if (javaSimpleFileName == null)
-					return null;
+					throw new TraceNotFoundException();
 				String traceSimpleFileName = traceFileNameProvider.getTraceFromJava(javaSimpleFileName);
 				SourceRelativeURI traceURI = getPathInFragmentRoot(classFile, traceSimpleFileName);
 				try {
@@ -222,7 +223,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 				} catch (IOException e) {
 					log.error("Error finding trace region", e);
 				}
-				return null;
+				throw new TraceNotFoundException();
 			}
 		}
 
