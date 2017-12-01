@@ -123,17 +123,20 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 		try {
 			if (contents instanceof ITraceRegionProvider) {
 				String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile);
-				File traceFile = getFile(traceFileName, outputConfigName);
-				OutputStream out = new BufferedOutputStream(new FileOutputStream(traceFile));
+				OutputStream out = null;
 				try {
 					AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
+					File traceFile = getFile(traceFileName, outputConfigName);
+					out = new BufferedOutputStream(new FileOutputStream(traceFile));
 					traceSerializer.writeTraceRegionTo(traceRegion, out);
 					if(callBack != null) 
 						callBack.fileAdded(traceFile);
 				} catch (TraceNotFoundException e) {
 					// ok
 				}finally {
-					out.close();
+					if (out != null) {
+						out.close();
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {
