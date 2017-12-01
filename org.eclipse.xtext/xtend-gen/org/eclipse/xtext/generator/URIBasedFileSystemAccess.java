@@ -24,6 +24,7 @@ import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
+import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
@@ -132,11 +133,19 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
       if ((this.isGenerateTraces() && (contents instanceof ITraceRegionProvider))) {
         String traceFileName = this.traceFileNameProvider.getTraceFromJava(generatedFile);
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
-        this.traceRegionSerializer.writeTraceRegionTo(traceRegion, out);
-        byte[] _byteArray = out.toByteArray();
-        ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
-        this.generateFile(traceFileName, outputConfigName, _byteArrayInputStream);
+        try {
+          AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
+          this.traceRegionSerializer.writeTraceRegionTo(traceRegion, out);
+          byte[] _byteArray = out.toByteArray();
+          ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
+          this.generateFile(traceFileName, outputConfigName, _byteArrayInputStream);
+        } catch (final Throwable _t) {
+          if (_t instanceof TraceNotFoundException) {
+            final TraceNotFoundException e = (TraceNotFoundException)_t;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
+import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -129,7 +130,9 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 					traceSerializer.writeTraceRegionTo(traceRegion, out);
 					if(callBack != null) 
 						callBack.fileAdded(traceFile);
-				} finally {
+				} catch (TraceNotFoundException e) {
+					// ok
+				}finally {
 					out.close();
 				}
 			}
