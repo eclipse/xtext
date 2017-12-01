@@ -133,7 +133,7 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 					val IResource library = projectToUse.workspaceRoot.findMember(path)
 					url = if (library !== null) {
 						val locationUri = library.locationURI
-						if (EFS.SCHEME_FILE == locationUri) {
+						if (EFS.SCHEME_FILE == locationUri?.scheme) {
 							library.rawLocationURI?.toURL
 						} else {
 							//TODO we should support non default file systems as well

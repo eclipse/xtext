@@ -177,7 +177,11 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
                 {
                   final java.net.URI locationUri = library.getLocationURI();
                   URL _xifexpression_1 = null;
-                  boolean _equals = Objects.equal(EFS.SCHEME_FILE, locationUri);
+                  String _scheme = null;
+                  if (locationUri!=null) {
+                    _scheme=locationUri.getScheme();
+                  }
+                  boolean _equals = Objects.equal(EFS.SCHEME_FILE, _scheme);
                   if (_equals) {
                     java.net.URI _rawLocationURI = library.getRawLocationURI();
                     URL _uRL_1 = null;
