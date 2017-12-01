@@ -122,10 +122,10 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 	protected void generateTrace(String generatedFile, String outputConfigName, CharSequence contents) {
 		try {
 			if (contents instanceof ITraceRegionProvider) {
-				String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile);
 				OutputStream out = null;
 				try {
 					AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
+					String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile);
 					File traceFile = getFile(traceFileName, outputConfigName);
 					out = new BufferedOutputStream(new FileOutputStream(traceFile));
 					traceSerializer.writeTraceRegionTo(traceRegion, out);
