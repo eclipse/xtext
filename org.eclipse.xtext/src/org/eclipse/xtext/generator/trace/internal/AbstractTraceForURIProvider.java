@@ -205,7 +205,11 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 			
 			@Override
 			public AbstractTraceRegion getTraceRegion() {
-				return cachedTraces.getTraceRegion(persistedTrace);
+				AbstractTraceRegion traceRegion = cachedTraces.getTraceRegion(persistedTrace);
+				if (traceRegion == null) {
+					throw new TraceNotFoundException();
+				}
+				return traceRegion;
 			}
 		});
 		return result;

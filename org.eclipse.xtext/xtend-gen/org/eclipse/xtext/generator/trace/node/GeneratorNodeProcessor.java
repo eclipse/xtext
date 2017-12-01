@@ -51,6 +51,9 @@ public class GeneratorNodeProcessor {
     
     @Override
     public AbstractTraceRegion getTraceRegion() throws TraceNotFoundException {
+      if ((this.traceRegion == null)) {
+        throw new TraceNotFoundException();
+      }
       return this.traceRegion;
     }
     
