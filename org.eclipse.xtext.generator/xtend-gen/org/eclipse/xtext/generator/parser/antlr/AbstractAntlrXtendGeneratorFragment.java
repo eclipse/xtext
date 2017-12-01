@@ -9,7 +9,6 @@ package org.eclipse.xtext.generator.parser.antlr;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
-import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.util.List;
 import org.eclipse.xpand2.XpandExecutionContext;
@@ -26,8 +25,8 @@ import org.eclipse.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment;
  */
 @SuppressWarnings("all")
 public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrGeneratorFragment {
-  protected Module createModule(final Grammar grammar) {
-    final Module _function = (Binder binder) -> {
+  protected com.google.inject.Module createModule(final Grammar grammar) {
+    final com.google.inject.Module _function = (Binder binder) -> {
       binder.<Grammar>bind(Grammar.class).toInstance(grammar);
       binder.<Naming>bind(Naming.class).toInstance(this.getNaming());
       AnnotatedBindingBuilder<IGrammarAccess> _bind = binder.<IGrammarAccess>bind(IGrammarAccess.class);
