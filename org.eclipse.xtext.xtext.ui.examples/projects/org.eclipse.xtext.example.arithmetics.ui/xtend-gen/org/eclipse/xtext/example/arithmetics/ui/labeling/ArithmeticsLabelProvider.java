@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -28,7 +27,7 @@ public class ArithmeticsLabelProvider extends DefaultEObjectLabelProvider {
     super(delegate);
   }
   
-  public String text(final Module ele) {
+  public String text(final org.eclipse.xtext.example.arithmetics.arithmetics.Module ele) {
     return ele.getName();
   }
   
@@ -41,7 +40,7 @@ public class ArithmeticsLabelProvider extends DefaultEObjectLabelProvider {
     return (_name + _join);
   }
   
-  public String image(final Module ele) {
+  public String image(final org.eclipse.xtext.example.arithmetics.arithmetics.Module ele) {
     return "home_nav.gif";
   }
 }

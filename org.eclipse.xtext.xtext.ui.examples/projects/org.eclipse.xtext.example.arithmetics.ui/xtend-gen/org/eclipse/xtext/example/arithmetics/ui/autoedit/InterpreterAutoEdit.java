@@ -15,7 +15,6 @@ import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.interpreter.Calculator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -77,7 +76,7 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
     boolean _isEmpty = state.getContents().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      Module m = IterableExtensions.<Module>head(Iterables.<Module>filter(state.getContents(), Module.class));
+      org.eclipse.xtext.example.arithmetics.arithmetics.Module m = IterableExtensions.<org.eclipse.xtext.example.arithmetics.arithmetics.Module>head(Iterables.<org.eclipse.xtext.example.arithmetics.arithmetics.Module>filter(state.getContents(), org.eclipse.xtext.example.arithmetics.arithmetics.Module.class));
       Iterable<Evaluation> _filter = Iterables.<Evaluation>filter(m.getStatements(), Evaluation.class);
       for (final Evaluation evaluation : _filter) {
         {
