@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -56,7 +57,9 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -570,6 +573,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
+	private static boolean isConstantExpression(JvmAnnotationReference reference) {
+		for (final JvmAnnotationValue annotationValue: reference.getValues()) {
+			if ("constantExpression".equals(annotationValue.getValueName())) {
+				return ((JvmBooleanAnnotationValue) annotationValue).getValues().get(0).booleanValue();
+			}
+		}
+		return false;
+	}
+
 	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, ITreeAppendable b, boolean isExpressionContext) {
 		if (call instanceof XAssignment) {
 			assignmentToJavaExpression((XAssignment) call, b, isExpressionContext);
@@ -577,10 +589,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (needMultiAssignment(call)) {
 				appendLeftOperand(call, b, isExpressionContext).append(" = ");
 			}
-			boolean hasReceiver = appendReceiver(call, b, isExpressionContext);
-			if (hasReceiver) {
-				b.append(".");
-				b = appendTypeArguments(call, b);
+			final JvmAnnotationReference annotationRef = this.expressionHelper.findInlineAnnotation(call);
+			if (annotationRef == null || !isConstantExpression(annotationRef)) {
+				boolean hasReceiver = appendReceiver(call, b, isExpressionContext);
+				if (hasReceiver) {
+					b.append(".");
+					b = appendTypeArguments(call, b);
+				}
 			}
 			appendFeatureCall(call, b);
 		}
@@ -948,11 +963,38 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		String formatString = null;
 		List<JvmTypeReference> importedTypes = Lists.newArrayListWithCapacity(2);
 		for(JvmAnnotationValue annotationValue: inlineAnnotation.getValues()) {
-			if ("value".equals(annotationValue.getValueName())) {
-				formatString = ((JvmStringAnnotationValue)annotationValue).getValues().get(0);
+			if ("value".equals(annotationValue.getValueName()) || null == annotationValue.getValueName()) {
+				if (annotationValue instanceof JvmStringAnnotationValue) {
+					formatString = ((JvmStringAnnotationValue)annotationValue).getValues().get(0);
+				} else if (annotationValue instanceof JvmCustomAnnotationValue) {
+					JvmCustomAnnotationValue customAnnotationValue = (JvmCustomAnnotationValue) annotationValue;
+					if (customAnnotationValue.getValues().size() == 1) {
+						if (customAnnotationValue.getValues().get(0) instanceof XStringLiteral) {
+							formatString = ((XStringLiteral)customAnnotationValue.getValues().get(0)).getValue();
+						}
+					}
+				}
+				
 			} else if ("imported".equals(annotationValue.getValueName())) {
-				JvmTypeAnnotationValue typeAnnotationValue = (JvmTypeAnnotationValue) annotationValue;
-				importedTypes.addAll(typeAnnotationValue.getValues());
+				if (annotationValue instanceof JvmTypeAnnotationValue) {					
+					JvmTypeAnnotationValue typeAnnotationValue = (JvmTypeAnnotationValue) annotationValue;
+					importedTypes.addAll(typeAnnotationValue.getValues());
+				} else if (annotationValue instanceof JvmCustomAnnotationValue) {					
+					JvmCustomAnnotationValue customAnnotationValue = (JvmCustomAnnotationValue) annotationValue;
+					if (customAnnotationValue.getValues().size() == 1) {
+						if (customAnnotationValue.getValues().get(0) instanceof XListLiteral) {
+							EList<XExpression> elements = ((XListLiteral)customAnnotationValue.getValues().get(0)).getElements();
+							for (XExpression e : elements) {
+								LightweightTypeReference lightweightType = getLightweightType(e);
+								if (lightweightType != null && lightweightType.isType(Class.class)) {
+									importedTypes.add(lightweightType.toTypeReference());
+								}
+							}
+						}
+					}
+				} else {
+					throw new IllegalStateException("Unhandled 'imported' AnnotationValue type " + annotationValue.getClass());
+				}
 			}
 		}
 		if (formatString == null)

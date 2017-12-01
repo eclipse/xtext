@@ -202,6 +202,13 @@ class JavaDerivedStateComputer {
                     ClassFileConstants.JDK1_7
                 }
             }
+            case JAVA9: {
+                try {
+                    ClassFileConstants.getField('JDK1_9').getLong(null)
+                } catch (NoSuchFieldException e) {
+                    ClassFileConstants.JDK1_7
+                }
+            }
         }
     }
 	

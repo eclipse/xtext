@@ -1558,6 +1558,32 @@ public class XbaseValidator extends AbstractXbaseValidator {
 			}
 		}
 	}
+	@Check
+	public void checkTypeGuardsOrderWithGenerics(XSwitchExpression expression) {
+		if (isIgnored(IssueCodes.UNREACHABLE_CASE)) {
+			return;
+		}
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), expression);
+		List<LightweightTypeReference> previousTypeReferences = new ArrayList<LightweightTypeReference>();
+		for (XCasePart casePart : expression.getCases()) {
+			JvmTypeReference typeGuard = casePart.getTypeGuard();
+			if (typeGuard == null) {
+				continue;
+			}
+			LightweightTypeReference typeReference = owner.toLightweightTypeReference(typeGuard);
+			LightweightTypeReference actualType = typeReference.getRawTypeReference();
+			if (actualType == null || typeReference == actualType) {
+				continue;
+			}
+			if (isHandled(actualType, previousTypeReferences)) {
+				addIssue("Unreachable code: The case can never match. It is already handled by a previous condition (with the same type erasure).", typeGuard, IssueCodes.UNREACHABLE_CASE);
+				continue;
+			}
+			if (casePart.getCase() == null) {
+				previousTypeReferences.add(actualType);
+			}
+		}
+	}
 	
 	@Check
 	public void checkInstanceOfOrder(XIfExpression expression) {

@@ -50,7 +50,14 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
   public void testStaticMethod() {
     final InvokedResolvedOperation operation = this.toOperation("newArrayList");
     Assert.assertEquals("ArrayList<Object>", operation.getResolvedReturnType().getSimpleName());
-    Assert.assertEquals("newArrayList(Object[])", operation.getSimpleSignature());
+    Assert.assertEquals("newArrayList()", operation.getSimpleSignature());
+  }
+  
+  @Test
+  public void testStaticMethod_02() {
+    final InvokedResolvedOperation operation = this.toOperation("newImmutableList");
+    Assert.assertEquals("List<Object>", operation.getResolvedReturnType().getSimpleName());
+    Assert.assertEquals("newImmutableList(Object[])", operation.getSimpleSignature());
   }
   
   @Test

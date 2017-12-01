@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.resource;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -99,7 +100,8 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
       }
       final JvmModelAssociator.Adapter adapter = _elvis;
       stream.getNextEntry();
-      final ObjectInputStream objIn = new ObjectInputStream(stream);
+      BufferedInputStream _bufferedInputStream = new BufferedInputStream(stream);
+      final ObjectInputStream objIn = new ObjectInputStream(_bufferedInputStream);
       Object _readObject = objIn.readObject();
       final Map<String, String> logicalMap = ((Map<String, String>) _readObject);
       final Consumer<Map.Entry<String, String>> _function_1 = (Map.Entry<String, String> it) -> {

@@ -3,13 +3,14 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xbase Generic IDE Services
 Bundle-Vendor: Eclipse Xtext
 Bundle-SymbolicName: org.eclipse.xtext.xbase.ide;singleton:=true
-Bundle-Version: 2.13.0.qualifier
+Bundle-Version: 2.14.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase;visibility:=reexport,
- org.eclipse.xtext.xbase.lib,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)"
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.objectweb.asm;bundle-version="[5.0.1,7.0.0)",
+ org.antlr.runtime
 Export-Package: org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr;x-friends:="org.eclipse.xtext.xbase.ui",
  org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal;x-friends:="org.eclipse.xtext.xbase.ui",
  org.eclipse.xtext.xbase.ide,
@@ -18,3 +19,4 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr;x-fr
  org.eclipse.xtext.xbase.ide.contentassist.antlr.internal;x-friends:="org.eclipse.xtext.xbase.ui",
  org.eclipse.xtext.xbase.ide.highlighting;x-friends:="org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide,org.eclipse.xtend.ide.common",
  org.eclipse.xtext.xbase.ide.types;x-friends:="org.eclipse.xtext.xbase.ui"
+

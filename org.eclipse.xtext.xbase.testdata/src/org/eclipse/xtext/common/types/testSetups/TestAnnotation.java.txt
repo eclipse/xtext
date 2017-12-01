@@ -35,6 +35,8 @@ public @interface TestAnnotation  {
 	Class<? extends CharSequence> charSequenceClass();
 	Class<?>[] classArray();
 	
+	static final Object STATIC_FIELD = new Object();
+	
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 	@interface NestedAnnotation {

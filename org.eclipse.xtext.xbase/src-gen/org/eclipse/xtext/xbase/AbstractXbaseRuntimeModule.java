@@ -46,6 +46,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatter;
+import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.parser.antlr.XbaseAntlrTokenFileProvider;
 import org.eclipse.xtext.xbase.parser.antlr.XbaseParser;
 import org.eclipse.xtext.xbase.parser.antlr.internal.InternalXbaseLexer;
@@ -173,6 +174,13 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return XbaseQualifiedNameProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public void configureRewritableImportSectionEnablement(Binder binder) {
+		binder.bind(Boolean.TYPE)
+			.annotatedWith(Names.named(RewritableImportSection.Factory.REWRITABLEIMPORTSECTION_ENABLEMENT))
+			.toInstance(Boolean.FALSE);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2

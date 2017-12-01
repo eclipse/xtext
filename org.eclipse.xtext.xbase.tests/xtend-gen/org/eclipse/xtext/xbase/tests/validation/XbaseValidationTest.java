@@ -795,6 +795,75 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testUnreachableCase_6() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch new java.util.ArrayList<String> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.util.List<Integer>: \"list of integers\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.util.List<String>: \"list of strings\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("default: \"something else\"");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableCase_7() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch new java.util.ArrayList<String> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.util.List<Integer>: \"list of integers\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.util.Set<String>: \"set of strings\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("default: \"something else\"");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this.expression(_builder));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableCase_8() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch new java.util.ArrayList<String> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.util.List: \"list of integers\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.util.List<String>: \"list of strings\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("default: \"something else\"");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this.expression(_builder), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testUnreachableCatchClause() {
     try {
       StringConcatenation _builder = new StringConcatenation();

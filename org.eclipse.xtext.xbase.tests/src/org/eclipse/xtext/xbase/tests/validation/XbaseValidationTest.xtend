@@ -354,6 +354,37 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertNoErrors
 	}
 	
+	@Test def void testUnreachableCase_6() {
+		'''
+			switch new java.util.ArrayList<String> {
+				java.util.List<Integer>: "list of integers"
+				java.util.List<String>: "list of strings"
+				default: "something else"
+			}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE)
+	}
+	
+	@Test def void testUnreachableCase_7() {
+		'''
+			switch new java.util.ArrayList<String> {
+				java.util.List<Integer>: "list of integers"
+				java.util.Set<String>: "set of strings"
+				default: "something else"
+			}
+		'''.expression.assertNoErrors
+	}
+	
+		
+	@Test def void testUnreachableCase_8() {
+		'''
+			switch new java.util.ArrayList<String> {
+				java.util.List: "list of integers"
+				java.util.List<String>: "list of strings"
+				default: "something else"
+			}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE)
+	}
+	
 	@Test def void testUnreachableCatchClause() {
 		'''
 			try {
