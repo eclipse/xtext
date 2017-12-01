@@ -15,8 +15,6 @@ import org.junit.Test
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration
-import org.junit.Before
-import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester
 import org.eclipse.xtext.util.JavaVersion
 
 /**
