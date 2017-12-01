@@ -2742,7 +2742,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cBEFOREKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Keyword cSEPARATORKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		
-		//@ Override ValidID:
+		//@Override
+		//ValidID:
 		//	ID | 'create' | 'annotation' | 'AFTER' | 'BEFORE' | 'SEPARATOR';
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -2773,7 +2774,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInnerVarIDParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Keyword cExtensionKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
-		//@ Override FeatureCallID:
+		//@Override
+		//FeatureCallID:
 		//	InnerVarID | 'extension';
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -3014,7 +3016,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cRightAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cRightXExpressionParserRuleCall_2_1_0 = (RuleCall)cRightAssignment_2_1.eContents().get(0);
 		
-		//@ Override XVariableDeclaration xbase::XExpression:
+		//@Override
+		//XVariableDeclaration xbase::XExpression:
 		//	=> ({XtendVariableDeclaration} ((writeable?='var' | 'val') extension?='extension'? | extension?='extension'
 		//	(writeable?='var' | 'val'))) (=> (type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ('=' right=XExpression)?;
 		@Override public ParserRule getRule() { return rule; }
@@ -3131,7 +3134,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMembersMemberParserRuleCall_1_1_0 = (RuleCall)cMembersAssignment_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
-		//@ Override XConstructorCall xbase::XExpression:
+		//@Override
+		//XConstructorCall xbase::XExpression:
 		//	XbaseConstructorCall (=> ({AnonymousClass.constructorCall=current} '{') members+=Member* '}')?;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -3315,7 +3319,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameInnerVarIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		//@ Override JvmFormalParameter XtendFormalParameter:
+		//@Override
+		//JvmFormalParameter XtendFormalParameter:
 		//	extension?='extension'? parameterType=JvmTypeReference? name=InnerVarID;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -3350,7 +3355,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameInnerVarIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		//@ Override FullJvmFormalParameter XtendFormalParameter:
+		//@Override
+		//FullJvmFormalParameter XtendFormalParameter:
 		//	extension?='extension'? parameterType=JvmTypeReference name=InnerVarID;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -3381,7 +3387,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSimpleStringLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRichStringParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//@ Override XStringLiteral xbase::XExpression:
+		//@Override
+		//XStringLiteral xbase::XExpression:
 		//	SimpleStringLiteral | RichString;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -3428,7 +3435,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDefaultXExpressionParserRuleCall_5_2_0 = (RuleCall)cDefaultAssignment_5_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//@ Override XSwitchExpression xbase::XExpression:
+		//@Override
+		//XSwitchExpression xbase::XExpression:
 		//	{xbase::XSwitchExpression}
 		//	'switch' (=> ('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
 		//	| => (declaredParam=JvmFormalParameter ':')? switch=XExpressionOrSimpleConstructorCall) '{'
@@ -4471,7 +4479,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getCreateExtensionInfoAccess().getRule();
 	}
 	
-	//@ Override ValidID:
+	//@Override
+	//ValidID:
 	//	ID | 'create' | 'annotation' | 'AFTER' | 'BEFORE' | 'SEPARATOR';
 	public ValidIDElements getValidIDAccess() {
 		return pValidID;
@@ -4481,7 +4490,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getValidIDAccess().getRule();
 	}
 	
-	//@ Override FeatureCallID:
+	//@Override
+	//FeatureCallID:
 	//	InnerVarID | 'extension';
 	public FeatureCallIDElements getFeatureCallIDAccess() {
 		return pFeatureCallID;
@@ -4515,7 +4525,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getParameterAccess().getRule();
 	}
 	
-	//@ Override XVariableDeclaration xbase::XExpression:
+	//@Override
+	//XVariableDeclaration xbase::XExpression:
 	//	=> ({XtendVariableDeclaration} ((writeable?='var' | 'val') extension?='extension'? | extension?='extension'
 	//	(writeable?='var' | 'val'))) (=> (type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ('=' right=XExpression)?;
 	public XVariableDeclarationElements getXVariableDeclarationAccess() {
@@ -4526,7 +4537,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getXVariableDeclarationAccess().getRule();
 	}
 	
-	//@ Override XConstructorCall xbase::XExpression:
+	//@Override
+	//XConstructorCall xbase::XExpression:
 	//	XbaseConstructorCall (=> ({AnonymousClass.constructorCall=current} '{') members+=Member* '}')?;
 	public XConstructorCallElements getXConstructorCallAccess() {
 		return pXConstructorCall;
@@ -4551,7 +4563,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getXbaseConstructorCallAccess().getRule();
 	}
 	
-	//@ Override JvmFormalParameter XtendFormalParameter:
+	//@Override
+	//JvmFormalParameter XtendFormalParameter:
 	//	extension?='extension'? parameterType=JvmTypeReference? name=InnerVarID;
 	public JvmFormalParameterElements getJvmFormalParameterAccess() {
 		return pJvmFormalParameter;
@@ -4561,7 +4574,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getJvmFormalParameterAccess().getRule();
 	}
 	
-	//@ Override FullJvmFormalParameter XtendFormalParameter:
+	//@Override
+	//FullJvmFormalParameter XtendFormalParameter:
 	//	extension?='extension'? parameterType=JvmTypeReference name=InnerVarID;
 	public FullJvmFormalParameterElements getFullJvmFormalParameterAccess() {
 		return pFullJvmFormalParameter;
@@ -4571,7 +4585,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getFullJvmFormalParameterAccess().getRule();
 	}
 	
-	//@ Override XStringLiteral xbase::XExpression:
+	//@Override
+	//XStringLiteral xbase::XExpression:
 	//	SimpleStringLiteral | RichString;
 	public XStringLiteralElements getXStringLiteralAccess() {
 		return pXStringLiteral;
@@ -4581,7 +4596,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getXStringLiteralAccess().getRule();
 	}
 	
-	//@ Override XSwitchExpression xbase::XExpression:
+	//@Override
+	//XSwitchExpression xbase::XExpression:
 	//	{xbase::XSwitchExpression}
 	//	'switch' (=> ('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
 	//	| => (declaredParam=JvmFormalParameter ':')? switch=XExpressionOrSimpleConstructorCall) '{'
@@ -4727,7 +4743,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getRichStringElseIfAccess().getRule();
 	}
 	
-	//@ Override terminal ID:
+	//@Override
+	//terminal ID:
 	//	'^'? (IDENTIFIER_START | UNICODE_ESCAPE) (IDENTIFIER_PART | UNICODE_ESCAPE)*;
 	public TerminalRule getIDRule() {
 		return tID;
@@ -5875,7 +5892,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getXCatchClauseAccess().getRule();
 	}
 	
-	//@ Override QualifiedName:
+	//@Override
+	//QualifiedName:
 	//	super::ValidID (=> '.' super::ValidID)*;
 	public XbaseGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
 		return gaXbase.getQualifiedNameAccess();

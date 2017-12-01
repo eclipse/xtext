@@ -303,7 +303,8 @@ import org.junit.Before
 
 	def getEditorContents(IJavaElement javaElement) {
 		val editor = JavaUI.openInEditor(javaElement)
-		val text = (editor.getAdapter(IRewriteTarget) as IRewriteTarget).document.get
+		val Object adapter = editor.getAdapter(IRewriteTarget)
+		val text = (adapter as IRewriteTarget).document.get
 		editor.closeEditor(false)
 		return text
 	}
