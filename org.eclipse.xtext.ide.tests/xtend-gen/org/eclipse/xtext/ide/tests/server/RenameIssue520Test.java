@@ -42,7 +42,7 @@ public class RenameIssue520Test extends AbstractTestLangLanguageServerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       final String model2 = _builder_1.toString();
-      final String file2 = this.writeFile("foo/Bar.testlang", model2);
+      this.writeFile("foo/Bar.testlang", model2);
       this.initialize();
       TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(file);
       Position _position = new Position(0, 6);
