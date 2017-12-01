@@ -19,7 +19,7 @@ isBranch() {
 }
 
 isMaster() {
-	test $branchname != master && isBranch
+	test $branchname = master
 }
 
 changeDir() {
