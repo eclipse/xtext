@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.ResourceSetContext
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.core.filesystem.EFS
 
 @Log
 class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
@@ -131,7 +132,13 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 					// thus we load it as a resource and take the raw path to find the location in the file system
 					val IResource library = projectToUse.workspaceRoot.findMember(path)
 					url = if (library !== null) {
-						library.rawLocationURI.toURL
+						val locationUri = library.locationURI
+						if (EFS.SCHEME_FILE == locationUri?.scheme) {
+							library.rawLocationURI?.toURL
+						} else {
+							//TODO we should support non default file systems as well
+							null
+						}
 					} else {
 						// otherwise we use the path itself
 						path.toFile().toURI().toURL()
