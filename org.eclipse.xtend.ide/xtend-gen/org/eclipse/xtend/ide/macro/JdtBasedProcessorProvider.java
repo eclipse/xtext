@@ -7,12 +7,14 @@
  */
 package org.eclipse.xtend.ide.macro;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.apache.log4j.Logger;
+import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
@@ -171,7 +173,24 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               final IResource library = this.getWorkspaceRoot(projectToUse).findMember(path_3);
               URL _xifexpression = null;
               if ((library != null)) {
-                _xifexpression = library.getRawLocationURI().toURL();
+                URL _xblockexpression = null;
+                {
+                  final java.net.URI locationUri = library.getLocationURI();
+                  URL _xifexpression_1 = null;
+                  boolean _equals = Objects.equal(EFS.SCHEME_FILE, locationUri);
+                  if (_equals) {
+                    java.net.URI _rawLocationURI = library.getRawLocationURI();
+                    URL _uRL_1 = null;
+                    if (_rawLocationURI!=null) {
+                      _uRL_1=_rawLocationURI.toURL();
+                    }
+                    _xifexpression_1 = _uRL_1;
+                  } else {
+                    _xifexpression_1 = null;
+                  }
+                  _xblockexpression = _xifexpression_1;
+                }
+                _xifexpression = _xblockexpression;
               } else {
                 _xifexpression = path_3.toFile().toURI().toURL();
               }
