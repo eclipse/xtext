@@ -92,9 +92,9 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	
 	protected def void generateTrace(String generatedFile, String outputConfigName, CharSequence contents) {
 		if (isGenerateTraces && contents instanceof ITraceRegionProvider) {
-			var String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile)
 			try {
 				var AbstractTraceRegion traceRegion = (contents as ITraceRegionProvider).getTraceRegion()
+				var String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile)
 				val out = new ByteArrayOutputStream()
 				traceRegionSerializer.writeTraceRegionTo(traceRegion, out)
 				generateFile(traceFileName, outputConfigName, new ByteArrayInputStream(out.toByteArray))

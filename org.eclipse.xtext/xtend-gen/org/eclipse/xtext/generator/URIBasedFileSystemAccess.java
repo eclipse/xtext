@@ -131,9 +131,9 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   protected void generateTrace(final String generatedFile, final String outputConfigName, final CharSequence contents) {
     try {
       if ((this.isGenerateTraces() && (contents instanceof ITraceRegionProvider))) {
-        String traceFileName = this.traceFileNameProvider.getTraceFromJava(generatedFile);
         try {
           AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
+          String traceFileName = this.traceFileNameProvider.getTraceFromJava(generatedFile);
           final ByteArrayOutputStream out = new ByteArrayOutputStream();
           this.traceRegionSerializer.writeTraceRegionTo(traceRegion, out);
           byte[] _byteArray = out.toByteArray();
