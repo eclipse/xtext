@@ -50,7 +50,7 @@ do
 					if changeDir $repository
 					then
 						sed -i '' "s%'http://services.typefox.io/open-source/jenkins/job/$logicalname/job/[^/]*/lastSuccessfulBuild/artifact/build/maven-repository/'%jenkinsPipelineRepo('$logicalname')%" $upstream
-						isMaster ||	sed -i '' "s%jenkinsPipelineRepo('$logicalname')%'http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastSuccessfulBuild/artifact/build/maven-repository/'%" $upstream
+						isMaster ||	isBranch && sed -i '' "s%jenkinsPipelineRepo('$logicalname')%'http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastSuccessfulBuild/artifact/build/maven-repository/'%" $upstream
 						dropDir
 					fi
 				fi
@@ -76,7 +76,7 @@ do
 					if changeDir $repository
 					then
 						sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/[^/]*/lastStableBuild/artifact/build/p2-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/master/lastStableBuild/artifact/build/p2-repository/%" $targets/*.target
-						isMaster ||	sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/master/lastStableBuild/artifact/build/p2-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastStableBuild/artifact/build/p2-repository/%" $targets/*.target
+						isMaster ||	isBranch && sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/master/lastStableBuild/artifact/build/p2-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastStableBuild/artifact/build/p2-repository/%" $targets/*.target
 						dropDir
 					fi
 				fi
@@ -103,7 +103,7 @@ do
 						if changeDir $repository
 						then
 							sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/[^/]*/lastStableBuild/artifact/build/maven-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/\${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/%" $pom
-							isMaster ||	sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/\${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastStableBuild/artifact/build/maven-repository/%" $pom
+							isMaster ||	isBranch && sed -i '' "s%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/\${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/%http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$1/lastStableBuild/artifact/build/maven-repository/%" $pom
 							dropDir
 						fi
 					fi
