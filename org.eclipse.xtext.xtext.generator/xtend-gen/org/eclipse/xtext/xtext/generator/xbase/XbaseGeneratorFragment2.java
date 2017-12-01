@@ -92,8 +92,11 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     ManifestAccess _manifest = this.getProjectConfig().getRuntime().getManifest();
     boolean _tripleNotEquals_1 = (_manifest != null);
     if (_tripleNotEquals_1) {
+      String _xbaseLibVersionLowerBound = this.getProjectConfig().getRuntime().getXbaseLibVersionLowerBound();
+      String _plus = ("org.eclipse.xtext.xbase.lib;bundle-version=\"" + _xbaseLibVersionLowerBound);
+      String _plus_1 = (_plus + "\"");
       this.getProjectConfig().getRuntime().getManifest().getRequiredBundles().addAll(
-        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.xbase", "org.eclipse.xtext.xbase.lib")));
+        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.xbase", _plus_1)));
       if (((this.generateXtendInferrer || this.useInferredJvmModel) && (!this.skipExportedPackage))) {
         Set<String> _exportedPackages = this.getProjectConfig().getRuntime().getManifest().getExportedPackages();
         String _packageName = this.getJvmModelInferrer().getPackageName();
@@ -752,8 +755,11 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       _builder_2.append(":org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory\"");
       _builder_2.newLineIfNotEmpty();
       _builder_2.append("\t\t");
-      _builder_2.append("adaptableType=\"org.eclipse.xtext.ui.editor.XtextEditor\">");
-      _builder_2.newLine();
+      _builder_2.append("adaptableType=\"");
+      String _name = this._xtextGeneratorNaming.getEclipsePluginEditor(this.getGrammar()).getName();
+      _builder_2.append(_name, "\t\t");
+      _builder_2.append("\">");
+      _builder_2.newLineIfNotEmpty();
       _builder_2.append("\t\t");
       _builder_2.append("<adapter type=\"org.eclipse.debug.ui.actions.IToggleBreakpointsTarget\"/>");
       _builder_2.newLine();

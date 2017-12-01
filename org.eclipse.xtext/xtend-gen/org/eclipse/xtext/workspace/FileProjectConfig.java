@@ -55,7 +55,7 @@ public class FileProjectConfig implements IProjectConfig {
   }
   
   public FileProjectConfig(final URI path, final String name, final IWorkspaceConfig workspaceConfig) {
-    this.path = path;
+    this.path = UriUtil.toFolderURI(path);
     this.name = name;
     IWorkspaceConfig _elvis = null;
     if (workspaceConfig != null) {

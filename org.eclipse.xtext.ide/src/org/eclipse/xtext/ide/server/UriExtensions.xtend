@@ -8,45 +8,47 @@
 package org.eclipse.xtext.ide.server
 
 import com.google.inject.Singleton
-import java.nio.file.FileSystemNotFoundException
-import java.nio.file.Paths
 import org.eclipse.emf.common.util.URI
-import java.net.URLDecoder
-import java.nio.charset.StandardCharsets
 
 /**
+ * Normalizes file uris without authorities (<code>file:/path...</code>) to contain an empty authority (i.e. starts with three slashes:<code>file:///path...</code>).
+ * 
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
 @Singleton
-class UriExtensions {
-
-	def URI toUri(String pathWithScheme) {
-		// URI is used to get path of the uri without scheme
-		var path = URI.createURI(pathWithScheme).path
-		return URI.createURI(path.toPath)
-	}
-
-	def String toPath(URI uri) {
-		return URI.createURI(uri.path.toPath).toString
-	}
-
-	def String toPath(java.net.URI uri) {
-		return uri.path.toPath
+class UriExtensions extends org.eclipse.xtext.util.UriExtensions {
+	
+	/**
+	 * returns the string representation of the given URI (with empty authority, if absent and has file scheme).
+	 */
+	def String toUriString(URI uri) {
+		return uri.withEmptyAuthority.toString
 	}
 
 	/**
-	 * We need to check if current path represents directory in file system
-	 * and need to add trailing slash if path represents directory.
+	 * converts a java.net.URI into a string representation with empty authority, if absent and has file scheme.
 	 */
-	private def toPath(String uri) {
-		try {
-			val path = Paths.get(uri)
-			// On Linux Paths.get returns encoded URI (e.x. cyrillic)
-			return URLDecoder.decode(path.toUri.toString, StandardCharsets.UTF_8.name);
-		} catch (FileSystemNotFoundException e) {
-			return uri
-		}
+	def String toUriString(java.net.URI uri) {
+		return toUriString(URI.createURI(uri.normalize.toString))
 	}
-}
+	
+	/**
+	 * @deprecated use #toUriString(URI)
+	 */
+	@Deprecated()
+	def String toPath(URI uri) {
+		return toUriString(uri)
+	}
 
+	/**
+	 * @deprecated use toUriString(URI)
+	 */
+	@Deprecated() 
+	def String toPath(java.net.URI uri) {
+		return toUriString(uri)
+	}
+	
+	
+	
+}

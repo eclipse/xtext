@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext IDE Core
 Bundle-SymbolicName: org.eclipse.xtext.ide;singleton:=true
-Bundle-Version: 2.13.0.qualifier
+Bundle-Version: 2.14.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse Xtext
@@ -10,8 +10,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtend.lib,
  org.eclipse.core.runtime;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.equinox.common;bundle-version="3.5.0",
- org.eclipse.lsp4j;bundle-version="[0.2.0,0.3.0)";resolution:=optional,
- org.eclipse.lsp4j.jsonrpc;bundle-version="[0.2.0,0.3.0)";resolution:=optional,
+ org.eclipse.lsp4j;bundle-version="[0.3.0,0.4.0)";resolution:=optional,
+ org.eclipse.lsp4j.jsonrpc;bundle-version="[0.3.0,0.4.0)";resolution:=optional,
  org.eclipse.emf.ecore.change;bundle-version="[2.10.0,3)"
 Import-Package: org.apache.log4j;version="1.2.15"
 Export-Package: org.eclipse.xtext.ide;x-friends:="org.eclipse.xtend.ide",
@@ -35,13 +35,17 @@ Export-Package: org.eclipse.xtext.ide;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtext.ide.serializer.hooks;x-friends:="org.eclipse.xtext.testing",
  org.eclipse.xtext.ide.serializer.impl;x-friends:="org.eclipse.xtext.testing",
  org.eclipse.xtext.ide.server,
+ org.eclipse.xtext.ide.server.codeActions;x-internal:=true,
+ org.eclipse.xtext.ide.server.codelens;x-internal:=true,
  org.eclipse.xtext.ide.server.coloring,
+ org.eclipse.xtext.ide.server.commands,
  org.eclipse.xtext.ide.server.concurrent,
  org.eclipse.xtext.ide.server.contentassist,
  org.eclipse.xtext.ide.server.findReferences,
  org.eclipse.xtext.ide.server.formatting,
  org.eclipse.xtext.ide.server.hover,
  org.eclipse.xtext.ide.server.occurrences,
+ org.eclipse.xtext.ide.server.rename;x-internal:=true,
  org.eclipse.xtext.ide.server.signatureHelp,
  org.eclipse.xtext.ide.server.symbol,
  org.eclipse.xtext.ide.util

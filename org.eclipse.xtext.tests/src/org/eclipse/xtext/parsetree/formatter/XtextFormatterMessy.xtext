@@ -41,4 +41,7 @@ terminal STRING2	:
 			"'" ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|"'") )* "'"
 		; 
 terminal ML_COMMENT2	: '/*' -> '*/';
+
+
+@ Override terminal ID : super;
  

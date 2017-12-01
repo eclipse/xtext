@@ -24,4 +24,6 @@ class TraceNode extends CompositeGeneratorNode {
 		this.sourceLocation = sourceLocation
 	}
 	
+	boolean useForDebugging
+	
 }

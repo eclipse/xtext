@@ -10,7 +10,6 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
@@ -94,7 +93,7 @@ public class StringBasedTextRegionAccessDiffAppender {
 		EObject semanticElement = source.getSemanticElement();
 		AbstractEObjectRegion region = getOrCreateEObjectRegion(semanticElement, source.getEObjectRegion());
 		int offset = access.append(text);
-		AbstractElement grammar = (AbstractElement) source.getGrammarElement();
+		EObject grammar = source.getGrammarElement();
 		StringHiddenRegion previous = (StringHiddenRegion) this.last;
 		StringSemanticRegion result = new StringSemanticRegion(access, region, grammar, offset, text.length());
 		region.addChild(result);

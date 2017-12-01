@@ -9,9 +9,11 @@ package org.eclipse.xtext.ide.tests.testlanguage;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdater;
 import org.eclipse.xtext.ide.tests.testlanguage.AbstractPartialSerializationTestLanguageRuntimeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.serializer.PartialSerializationTestLanguageReferenceUpdater;
+import org.eclipse.xtext.ide.tests.testlanguage.scoping.PartialSerializationTestLanguageValueConverter;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
@@ -29,5 +31,10 @@ public class PartialSerializationTestLanguageRuntimeModule extends AbstractParti
   
   public Class<? extends IReferenceUpdater> bindCleanupStrategy() {
     return PartialSerializationTestLanguageReferenceUpdater.class;
+  }
+  
+  @Override
+  public Class<? extends IValueConverterService> bindIValueConverterService() {
+    return PartialSerializationTestLanguageValueConverter.class;
   }
 }

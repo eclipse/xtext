@@ -16,7 +16,7 @@ node {
 		def mvnHome = tool 'M3'
 		env.M2_HOME = "${mvnHome}"
 		dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
-		sh "${mvnHome}/bin/mvn -f releng --batch-mode --update-snapshots -Dmaven.repo.local=.m2/repository clean install"
+		sh "${mvnHome}/bin/mvn -f releng --batch-mode --update-snapshots -Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean install"
 	}
 	
 	archive 'build/**'

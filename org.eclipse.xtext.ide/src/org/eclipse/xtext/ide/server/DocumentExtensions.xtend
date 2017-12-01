@@ -65,7 +65,7 @@ class DocumentExtensions {
 		if (range === null) {
 			return null
 		}
-		val uri = resource.URI.toPath
+		val uri = resource.URI.toUriString
 		return new Location(uri, range)
 	}
 

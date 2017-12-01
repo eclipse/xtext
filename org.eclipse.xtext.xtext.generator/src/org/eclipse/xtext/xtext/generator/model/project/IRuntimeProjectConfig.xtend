@@ -20,4 +20,14 @@ interface IRuntimeProjectConfig extends IBundleProjectConfig {
 	
 	def String getEcoreModelFolder()
 	
+	/**
+	 * @since 2.13
+	 */
+	def String getXbaseLibVersionLowerBound()
+	
+	/**
+	 * @since 2.13
+	 */
+	def String getXtendLibVersionLowerBound()
+	
 }

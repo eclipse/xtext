@@ -10,8 +10,10 @@ package org.eclipse.xtext.ide.tests.serializer;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collection;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer;
 import org.eclipse.xtext.ide.tests.serializer.ChangeSerializerTestHelper;
@@ -54,10 +56,12 @@ public class ChangeSerializerWithImports {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
     final ChangeSerializer serializer = this.serializerProvider.get();
-    serializer.beginRecordChanges(model.eResource());
-    Node _get = model.getChildren().get(0);
-    _get.setName("newchild");
-    Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      Node _get = model.getChildren().get(0);
+      _get.setName("newchild");
+      Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
+    };
+    serializer.<Resource>addModification(model.eResource(), _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");

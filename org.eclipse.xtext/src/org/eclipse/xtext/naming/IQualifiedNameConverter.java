@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Singleton;
 
@@ -44,7 +45,7 @@ public interface IQualifiedNameConverter {
 				throw new IllegalArgumentException("Qualified name cannot be null");
 			return qualifiedName.toString(getDelimiter());
 		}
-		
+
 		/**
 		 * Splits the given string into segments and returns them as a {@link QualifiedName}.
 		 * 
@@ -53,15 +54,15 @@ public interface IQualifiedNameConverter {
 		 */
 		@Override
 		public QualifiedName toQualifiedName(String qualifiedNameAsString) {
-			if (qualifiedNameAsString == null)
-				throw new IllegalArgumentException("Qualified name cannot be null");
-			if (qualifiedNameAsString.equals(""))
-				throw new IllegalArgumentException("Qualified name cannot be empty");
-			if (Strings.isEmpty(getDelimiter()))
+			Preconditions.checkArgument(qualifiedNameAsString != null, "Qualified name cannot be null");
+			Preconditions.checkArgument(!qualifiedNameAsString.isEmpty(), "Qualified name cannot be empty");
+			String delimiter = getDelimiter();
+			if (Strings.isEmpty(delimiter))
 				return QualifiedName.create(qualifiedNameAsString);
-			List<String> segs = getDelimiter().length() == 1 ? Strings.split(qualifiedNameAsString, getDelimiter()
-					.charAt(0)) : Strings.split(qualifiedNameAsString, getDelimiter());
-		    return QualifiedName.create(segs);
+			List<String> segs = delimiter.length() == 1
+					? Strings.split(qualifiedNameAsString, delimiter.charAt(0))
+					: Strings.split(qualifiedNameAsString, delimiter);
+			return QualifiedName.create(segs);
 		}
 
 		public String getDelimiter() {

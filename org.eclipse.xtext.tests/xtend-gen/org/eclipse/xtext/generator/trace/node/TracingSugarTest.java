@@ -68,6 +68,14 @@ public class TracingSugarTest {
       return trace;
     }
     
+    public IGeneratorNode _name(final Property target, final boolean useForDebugging) {
+      EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
+      ILocationData location = this.location(target, feature, -1);
+      CompositeGeneratorNode trace = this.trace(location, useForDebugging);
+      this.append(trace, target.getName());
+      return trace;
+    }
+    
     public IGeneratorNode _name(final Property target, final Function<String, String> stringProvider) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -92,6 +100,14 @@ public class TracingSugarTest {
       return trace;
     }
     
+    public IGeneratorNode _name(final Type target, final boolean useForDebugging) {
+      EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
+      ILocationData location = this.location(target, feature, -1);
+      CompositeGeneratorNode trace = this.trace(location, useForDebugging);
+      this.append(trace, target.getName());
+      return trace;
+    }
+    
     public IGeneratorNode _name(final Type target, final Function<String, String> stringProvider) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -112,6 +128,14 @@ public class TracingSugarTest {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
       CompositeGeneratorNode trace = this.trace(location);
+      this.append(trace, target.getName());
+      return trace;
+    }
+    
+    public IGeneratorNode _name(final UnresolvedProxyProperty target, final boolean useForDebugging) {
+      EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
+      ILocationData location = this.location(target, feature, -1);
+      CompositeGeneratorNode trace = this.trace(location, useForDebugging);
       this.append(trace, target.getName());
       return trace;
     }
@@ -174,7 +198,7 @@ public class TracingSugarTest {
       Assert.assertEquals(LineDelimiters.toUnix(_builder_1.toString()), generated.toString());
       final AbstractTraceRegion trace = ((ITraceRegionProvider) generated).getTraceRegion();
       StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("CompletableTraceRegion [myOffset=0, myLength=55] associations={");
+      _builder_2.append("CompletableTraceRegion [myOffset=0, myLength=55, useForDebugging=false] associations={");
       _builder_2.newLine();
       _builder_2.append("  ");
       _builder_2.append("LocationData [TextRegionWithLineInformation [0:41][lineNumber=0, endLineNumber=3]][path=__synthetic0.lazylinkingtestlanguage]");
@@ -182,7 +206,7 @@ public class TracingSugarTest {
       _builder_2.append("} nestedRegions={");
       _builder_2.newLine();
       _builder_2.append("  ");
-      _builder_2.append("CompletableTraceRegion [myOffset=0, myLength=17] associations={");
+      _builder_2.append("CompletableTraceRegion [myOffset=0, myLength=17, useForDebugging=false] associations={");
       _builder_2.newLine();
       _builder_2.append("    ");
       _builder_2.append("LocationData [TextRegionWithLineInformation [0:14][lineNumber=0, endLineNumber=0]][path=__synthetic0.lazylinkingtestlanguage]");
@@ -191,7 +215,7 @@ public class TracingSugarTest {
       _builder_2.append("} nestedRegions={");
       _builder_2.newLine();
       _builder_2.append("    ");
-      _builder_2.append("CompletableTraceRegion [myOffset=6, myLength=6] associations={");
+      _builder_2.append("CompletableTraceRegion [myOffset=6, myLength=6, useForDebugging=false] associations={");
       _builder_2.newLine();
       _builder_2.append("      ");
       _builder_2.append("LocationData [TextRegionWithLineInformation [5:6][lineNumber=0, endLineNumber=0]][path=__synthetic0.lazylinkingtestlanguage]");
@@ -203,7 +227,7 @@ public class TracingSugarTest {
       _builder_2.append("}");
       _builder_2.newLine();
       _builder_2.append("  ");
-      _builder_2.append("CompletableTraceRegion [myOffset=17, myLength=38] associations={");
+      _builder_2.append("CompletableTraceRegion [myOffset=17, myLength=38, useForDebugging=false] associations={");
       _builder_2.newLine();
       _builder_2.append("    ");
       _builder_2.append("LocationData [TextRegionWithLineInformation [15:26][lineNumber=1, endLineNumber=3]][path=__synthetic0.lazylinkingtestlanguage]");
@@ -212,7 +236,7 @@ public class TracingSugarTest {
       _builder_2.append("} nestedRegions={");
       _builder_2.newLine();
       _builder_2.append("    ");
-      _builder_2.append("CompletableTraceRegion [myOffset=23, myLength=3] associations={");
+      _builder_2.append("CompletableTraceRegion [myOffset=23, myLength=3, useForDebugging=false] associations={");
       _builder_2.newLine();
       _builder_2.append("      ");
       _builder_2.append("LocationData [TextRegionWithLineInformation [20:3][lineNumber=1, endLineNumber=1]][path=__synthetic0.lazylinkingtestlanguage]");
@@ -221,7 +245,7 @@ public class TracingSugarTest {
       _builder_2.append("}");
       _builder_2.newLine();
       _builder_2.append("    ");
-      _builder_2.append("CompletableTraceRegion [myOffset=30, myLength=24] associations={");
+      _builder_2.append("CompletableTraceRegion [myOffset=30, myLength=24, useForDebugging=false] associations={");
       _builder_2.newLine();
       _builder_2.append("      ");
       _builder_2.append("LocationData [TextRegionWithLineInformation [27:12][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]");
@@ -230,7 +254,7 @@ public class TracingSugarTest {
       _builder_2.append("} nestedRegions={");
       _builder_2.newLine();
       _builder_2.append("      ");
-      _builder_2.append("CompletableTraceRegion [myOffset=39, myLength=4] associations={");
+      _builder_2.append("CompletableTraceRegion [myOffset=39, myLength=4, useForDebugging=false] associations={");
       _builder_2.newLine();
       _builder_2.append("        ");
       _builder_2.append("LocationData [TextRegionWithLineInformation [34:4][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]");
@@ -239,7 +263,263 @@ public class TracingSugarTest {
       _builder_2.append("}");
       _builder_2.newLine();
       _builder_2.append("      ");
-      _builder_2.append("CompletableTraceRegion [myOffset=46, myLength=6] associations={");
+      _builder_2.append("CompletableTraceRegion [myOffset=46, myLength=6, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("        ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [27:6][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      Assert.assertEquals(LineDelimiters.toUnix(_builder_2.toString()), trace.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCodeGenerationWithDebug() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type String {}");
+      _builder.newLine();
+      _builder.append("type Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("String name;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final Model root = this.parseHelper.parse(LineDelimiters.toUnix(_builder.toString()));
+      final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          {
+            EList<Type> _types = root.getTypes();
+            for(final Type t : _types) {
+              IGeneratorNode __generateTypeWithDebugging = TracingSugarTest.this._generateTypeWithDebugging(t);
+              _builder.append(__generateTypeWithDebugging);
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      };
+      this._myExtensions.generateTracedFile(fsa, "foo/bar.txt", root, _client);
+      final CharSequence generated = fsa.getTextFiles().get((IFileSystemAccess.DEFAULT_OUTPUT + "foo/bar.txt"));
+      StringConcatenation _builder_1 = new StringConcatenation();
+      {
+        EList<Type> _types = root.getTypes();
+        for(final Type t : _types) {
+          CharSequence _generateTypeWithDebugging = this.generateTypeWithDebugging(t);
+          _builder_1.append(_generateTypeWithDebugging);
+          _builder_1.newLineIfNotEmpty();
+        }
+      }
+      Assert.assertEquals(LineDelimiters.toUnix(_builder_1.toString()), generated.toString());
+      final AbstractTraceRegion trace = ((ITraceRegionProvider) generated).getTraceRegion();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("CompletableTraceRegion [myOffset=0, myLength=55, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [0:41][lineNumber=0, endLineNumber=3]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("} nestedRegions={");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("CompletableTraceRegion [myOffset=0, myLength=17, useForDebugging=true] associations={");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [0:14][lineNumber=0, endLineNumber=0]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("} nestedRegions={");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("CompletableTraceRegion [myOffset=6, myLength=6, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [5:6][lineNumber=0, endLineNumber=0]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("CompletableTraceRegion [myOffset=17, myLength=38, useForDebugging=true] associations={");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [15:26][lineNumber=1, endLineNumber=3]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("} nestedRegions={");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("CompletableTraceRegion [myOffset=23, myLength=3, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [20:3][lineNumber=1, endLineNumber=1]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("CompletableTraceRegion [myOffset=30, myLength=24, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [27:12][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("} nestedRegions={");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("CompletableTraceRegion [myOffset=39, myLength=4, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("        ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [34:4][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("CompletableTraceRegion [myOffset=46, myLength=6, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("        ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [27:6][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      Assert.assertEquals(LineDelimiters.toUnix(_builder_2.toString()), trace.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCodeGenerationWithDebug_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type String {}");
+      _builder.newLine();
+      _builder.append("type Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("String name;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final Model root = this.parseHelper.parse(LineDelimiters.toUnix(_builder.toString()));
+      final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          {
+            EList<Type> _types = root.getTypes();
+            for(final Type t : _types) {
+              IGeneratorNode __generateTypeWithDebugging02 = TracingSugarTest.this._generateTypeWithDebugging02(t);
+              _builder.append(__generateTypeWithDebugging02);
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      };
+      this._myExtensions.generateTracedFile(fsa, "foo/bar.txt", root, _client);
+      final CharSequence generated = fsa.getTextFiles().get((IFileSystemAccess.DEFAULT_OUTPUT + "foo/bar.txt"));
+      StringConcatenation _builder_1 = new StringConcatenation();
+      {
+        EList<Type> _types = root.getTypes();
+        for(final Type t : _types) {
+          CharSequence _generateTypeWithDebugging = this.generateTypeWithDebugging(t);
+          _builder_1.append(_generateTypeWithDebugging);
+          _builder_1.newLineIfNotEmpty();
+        }
+      }
+      Assert.assertEquals(LineDelimiters.toUnix(_builder_1.toString()), generated.toString());
+      final AbstractTraceRegion trace = ((ITraceRegionProvider) generated).getTraceRegion();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("CompletableTraceRegion [myOffset=0, myLength=55, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [0:41][lineNumber=0, endLineNumber=3]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("} nestedRegions={");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("CompletableTraceRegion [myOffset=0, myLength=17, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [0:14][lineNumber=0, endLineNumber=0]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("} nestedRegions={");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("CompletableTraceRegion [myOffset=6, myLength=6, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [5:6][lineNumber=0, endLineNumber=0]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("CompletableTraceRegion [myOffset=17, myLength=38, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [15:26][lineNumber=1, endLineNumber=3]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("} nestedRegions={");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("CompletableTraceRegion [myOffset=23, myLength=3, useForDebugging=false] associations={");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [20:3][lineNumber=1, endLineNumber=1]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("CompletableTraceRegion [myOffset=30, myLength=24, useForDebugging=true] associations={");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [27:12][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("    ");
+      _builder_2.append("} nestedRegions={");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("CompletableTraceRegion [myOffset=39, myLength=4, useForDebugging=true] associations={");
+      _builder_2.newLine();
+      _builder_2.append("        ");
+      _builder_2.append("LocationData [TextRegionWithLineInformation [34:4][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("      ");
+      _builder_2.append("CompletableTraceRegion [myOffset=46, myLength=6, useForDebugging=false] associations={");
       _builder_2.newLine();
       _builder_2.append("        ");
       _builder_2.append("LocationData [TextRegionWithLineInformation [27:6][lineNumber=2, endLineNumber=2]][path=__synthetic0.lazylinkingtestlanguage]");
@@ -263,20 +543,65 @@ public class TracingSugarTest {
   @Traced
   public IGeneratorNode _generateType(final Type it) {
     ILocationData _location = this._myExtensions.location(it);
-    CompositeGeneratorNode _traceNode = this._myExtensions.trace(_location);
+    CompositeGeneratorNode _traceNode = this._myExtensions.trace(_location, false);
     this._myExtensions.appendTemplate(_traceNode, __generateType(it));
+    return _traceNode;
+  }
+  
+  @Traced(useForDebugging = true)
+  public IGeneratorNode _generateTypeWithDebugging(final Type it) {
+    ILocationData _location = this._myExtensions.location(it);
+    CompositeGeneratorNode _traceNode = this._myExtensions.trace(_location, true);
+    this._myExtensions.appendTemplate(_traceNode, __generateTypeWithDebugging(it));
+    return _traceNode;
+  }
+  
+  @Traced
+  public IGeneratorNode _generateTypeWithDebugging02(final Type it) {
+    ILocationData _location = this._myExtensions.location(it);
+    CompositeGeneratorNode _traceNode = this._myExtensions.trace(_location, false);
+    this._myExtensions.appendTemplate(_traceNode, __generateTypeWithDebugging02(it));
     return _traceNode;
   }
   
   @Traced
   public IGeneratorNode _generateProperty(final Property it) {
     ILocationData _location = this._myExtensions.location(it);
-    CompositeGeneratorNode _traceNode = this._myExtensions.trace(_location);
+    CompositeGeneratorNode _traceNode = this._myExtensions.trace(_location, false);
     this._myExtensions.appendTemplate(_traceNode, __generateProperty(it));
     return _traceNode;
   }
   
+  @Traced(useForDebugging = true)
+  public IGeneratorNode _generatePropertyWithDebugging(final Property it) {
+    ILocationData _location = this._myExtensions.location(it);
+    CompositeGeneratorNode _traceNode = this._myExtensions.trace(_location, true);
+    this._myExtensions.appendTemplate(_traceNode, __generatePropertyWithDebugging(it));
+    return _traceNode;
+  }
+  
   public CharSequence generateType(final Type it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Class ");
+    String _name = it.getName();
+    _builder.append(_name);
+    _builder.append(" {");
+    _builder.newLineIfNotEmpty();
+    {
+      EList<Property> _properties = it.getProperties();
+      for(final Property p : _properties) {
+        _builder.append("\t");
+        CharSequence _generateProperty = this.generateProperty(p);
+        _builder.append(_generateProperty, "\t");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence generateTypeWithDebugging(final Type it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Class ");
     String _name = it.getName();
@@ -334,12 +659,81 @@ public class TracingSugarTest {
     return _client;
   }
   
+  public StringConcatenationClient __generateTypeWithDebugging(final Type it) {
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("Class ");
+        IGeneratorNode __name = TracingSugarTest.this._myExtensions._name(it);
+        _builder.append(__name);
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<Property> _properties = it.getProperties();
+          for(final Property p : _properties) {
+            _builder.append("\t");
+            IGeneratorNode __generateProperty = TracingSugarTest.this._generateProperty(p);
+            _builder.append(__generateProperty, "\t");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    return _client;
+  }
+  
+  public StringConcatenationClient __generateTypeWithDebugging02(final Type it) {
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("Class ");
+        IGeneratorNode __name = TracingSugarTest.this._myExtensions._name(it);
+        _builder.append(__name);
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<Property> _properties = it.getProperties();
+          for(final Property p : _properties) {
+            _builder.append("\t");
+            IGeneratorNode __generatePropertyWithDebugging = TracingSugarTest.this._generatePropertyWithDebugging(p);
+            _builder.append(__generatePropertyWithDebugging, "\t");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    return _client;
+  }
+  
   public StringConcatenationClient __generateProperty(final Property it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("Property ");
         IGeneratorNode __name = TracingSugarTest.this._myExtensions._name(it);
+        _builder.append(__name);
+        _builder.append(" : ");
+        final Function1<Type, String> _function = (Type it_1) -> {
+          return it_1.getName();
+        };
+        IGeneratorNode __type = TracingSugarTest.this._myExtensions._type(it, _function);
+        _builder.append(__type);
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    return _client;
+  }
+  
+  public StringConcatenationClient __generatePropertyWithDebugging(final Property it) {
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("Property ");
+        IGeneratorNode __name = TracingSugarTest.this._myExtensions._name(it, true);
         _builder.append(__name);
         _builder.append(" : ");
         final Function1<Type, String> _function = (Type it_1) -> {

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.resource.persistence;
 
 import com.google.common.io.CharStreams;
+import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,12 +63,15 @@ public class ResourceStorageLoadable {
    */
   protected void loadEntries(final StorageAwareResource resource, final ZipInputStream zipIn) throws IOException {
     zipIn.getNextEntry();
-    this.readContents(resource, zipIn);
+    BufferedInputStream _bufferedInputStream = new BufferedInputStream(zipIn);
+    this.readContents(resource, _bufferedInputStream);
     zipIn.getNextEntry();
-    this.readResourceDescription(resource, zipIn);
+    BufferedInputStream _bufferedInputStream_1 = new BufferedInputStream(zipIn);
+    this.readResourceDescription(resource, _bufferedInputStream_1);
     if (this.storeNodeModel) {
       zipIn.getNextEntry();
-      this.readNodeModel(resource, zipIn);
+      BufferedInputStream _bufferedInputStream_2 = new BufferedInputStream(zipIn);
+      this.readNodeModel(resource, _bufferedInputStream_2);
     }
   }
   

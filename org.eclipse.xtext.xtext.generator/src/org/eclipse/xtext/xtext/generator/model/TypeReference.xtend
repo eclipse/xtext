@@ -30,7 +30,7 @@ class TypeReference {
 	static def TypeReference typeRef(String name, TypeReference... arguments) {
 		new TypeReference(name, arguments)
 	}
-	
+
 	/**
 	 * @deprecated this method is available for backwards compatibility reasons
 	 */
@@ -156,14 +156,18 @@ class TypeReference {
 				new QualifiedClassName('org.eclipse.emf.ecore', clazz.name)
 			}
 		} else {
-			new QualifiedClassName(GenModelUtil2.getGenClass(clazz, resourceSet).genPackage.qualifiedPackageName,
-				GenModelUtil2.getGenClass(clazz, resourceSet).interfaceName)
+			val genClass = GenModelUtil2.getGenClass(clazz, resourceSet)
+			val packageName = genClass.genPackage.getInterfacePackageName();
+			new QualifiedClassName(packageName,
+				genClass.interfaceName)
 		}
 	}
 
 	private static def QualifiedClassName getQualifiedName(EPackage epackage, ResourceSet resourceSet) {
-		new QualifiedClassName(GenModelUtil2.getGenPackage(epackage, resourceSet).qualifiedPackageName,
-			GenModelUtil2.getGenPackage(epackage, resourceSet).packageInterfaceName)
+		val genPackage = GenModelUtil2.getGenPackage(epackage, resourceSet)
+		val packageName = if (genPackage.getGenModel().isSuppressEMFMetaData()) genPackage.getQualifiedPackageClassName() else genPackage.getReflectionPackageName()
+		new QualifiedClassName(packageName,
+			genPackage.packageInterfaceName)
 	}
 	
 	override toString() {

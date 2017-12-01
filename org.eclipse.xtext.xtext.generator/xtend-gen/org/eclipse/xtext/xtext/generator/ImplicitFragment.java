@@ -50,7 +50,10 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
       if (_isGenerateXtendStub) {
         Set<String> _requiredBundles = this.getProjectConfig().getRuntime().getManifest().getRequiredBundles();
-        _requiredBundles.add("org.eclipse.xtend.lib");
+        String _xtendLibVersionLowerBound = this.getProjectConfig().getRuntime().getXtendLibVersionLowerBound();
+        String _plus = ("org.eclipse.xtend.lib;bundle-version=\"" + _xtendLibVersionLowerBound);
+        String _plus_1 = (_plus + "\"");
+        _requiredBundles.add(_plus_1);
       }
       this.getProjectConfig().getRuntime().getManifest().getImportedPackages().add("org.apache.log4j");
     }
@@ -62,7 +65,10 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
       boolean _isGenerateXtendStub_1 = this.isGenerateXtendStub();
       if (_isGenerateXtendStub_1) {
         Set<String> _requiredBundles_1 = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
-        _requiredBundles_1.add("org.eclipse.xtend.lib");
+        String _xtendLibVersionLowerBound_1 = this.getProjectConfig().getRuntime().getXtendLibVersionLowerBound();
+        String _plus_2 = ("org.eclipse.xtend.lib;bundle-version=\"" + _xtendLibVersionLowerBound_1);
+        String _plus_3 = (_plus_2 + "\"");
+        _requiredBundles_1.add(_plus_3);
       }
       this.getProjectConfig().getEclipsePlugin().getManifest().getImportedPackages().add("org.apache.log4j");
     }
@@ -83,10 +89,18 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     };
     final StringConcatenationClient expression = _client;
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory().addTypeToProviderInstance(TypeReference.typeRef(IAllContainersState.class), expression);
-    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
-    if (_inheritsXbase) {
-      bindingFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ui.editor.XtextEditor"), 
-        TypeReference.typeRef("org.eclipse.xtext.xbase.ui.editor.XbaseEditor")).addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"), 
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
+      bindingFactory.addTypeToType(this.naming.getEclipsePluginDefaultEditor(this.getGrammar()), this.naming.getEclipsePluginEditor(this.getGrammar()));
+    } else {
+      boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
+      if (_inheritsXbase) {
+        bindingFactory.addTypeToType(this.naming.getEclipsePluginDefaultEditor(this.getGrammar()), this.naming.getEclipsePluginXbaseEditor(this.getGrammar()));
+      }
+    }
+    boolean _inheritsXbase_1 = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
+    if (_inheritsXbase_1) {
+      bindingFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"), 
         TypeReference.typeRef("org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider")).addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"), 
         TypeReference.typeRef("org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler"));
     }
@@ -832,6 +846,40 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("</handler>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    _builder.append("<extension point=\"org.eclipse.core.contenttype.contentTypes\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<content-type");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("base-type=\"org.eclipse.core.runtime.text\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("file-extensions=\"");
+    String _join_1 = IterableExtensions.join(this.getLanguage().getFileExtensions(), ",");
+    _builder.append(_join_1, "\t\t");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("id=\"");
+    String _name_24 = it.getName();
+    _builder.append(_name_24, "\t\t");
+    _builder.append(".contenttype\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("name=\"");
+    String _simpleName_9 = GrammarUtil.getSimpleName(it);
+    _builder.append(_simpleName_9, "\t\t");
+    _builder.append(" File\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("priority=\"normal\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</content-type>");
     _builder.newLine();
     _builder.append("</extension>");
     _builder.newLine();

@@ -105,6 +105,13 @@ public class Strings {
 	public static String toPlatformLineSeparator(CharSequence cs) {
 		return cs.toString().replaceAll("\r?\n", Strings.newLine());
 	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public static String toUnixLineSeparator(CharSequence cs) {
+		return cs.toString().replaceAll("\r?\n", "\n");
+	}
 
 	public static String toFirstLower(String s) {
 		if (s == null || s.length() == 0 || Character.isLowerCase(s.charAt(0)))

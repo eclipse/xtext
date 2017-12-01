@@ -26,6 +26,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.InMemoryURIHandler;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -64,8 +65,10 @@ public class ChangeSerializerTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final MandatoryValue model = this._changeSerializerTestHelper.<MandatoryValue>contents(rs, "inmemory:/file1.pstl", MandatoryValue.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
-    serializer.beginRecordChanges(model.eResource());
-    model.setName("bar");
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      model.setName("bar");
+    };
+    serializer.<Resource>addModification(model.eResource(), _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
@@ -89,11 +92,13 @@ public class ChangeSerializerTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
-    serializer.beginRecordChanges(model.eResource());
-    Node _get = model.getChildren().get(0);
-    _get.setName("bazz4");
-    Node _get_1 = model.getChildren().get(1);
-    _get_1.setName("bazz5");
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      Node _get = model.getChildren().get(0);
+      _get.setName("bazz4");
+      Node _get_1 = model.getChildren().get(1);
+      _get_1.setName("bazz5");
+    };
+    serializer.<Resource>addModification(model.eResource(), _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
@@ -119,14 +124,16 @@ public class ChangeSerializerTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
-    serializer.beginRecordChanges(model.eResource());
-    EList<Node> _children = model.getChildren().get(0).getChildren();
-    Node _createNode = this.fac.createNode();
-    final Procedure1<Node> _function = (Node it) -> {
-      it.setName("bazz");
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      EList<Node> _children = model.getChildren().get(0).getChildren();
+      Node _createNode = this.fac.createNode();
+      final Procedure1<Node> _function_1 = (Node it_1) -> {
+        it_1.setName("bazz");
+      };
+      Node _doubleArrow = ObjectExtensions.<Node>operator_doubleArrow(_createNode, _function_1);
+      _children.add(_doubleArrow);
     };
-    Node _doubleArrow = ObjectExtensions.<Node>operator_doubleArrow(_createNode, _function);
-    _children.add(_doubleArrow);
+    serializer.<Resource>addModification(model.eResource(), _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
@@ -159,14 +166,16 @@ public class ChangeSerializerTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
-    serializer.beginRecordChanges(model.eResource());
-    EList<Node> _children = model.getChildren();
-    Node _createNode = this.fac.createNode();
-    final Procedure1<Node> _function = (Node it) -> {
-      it.setName("bazz");
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      EList<Node> _children = model.getChildren();
+      Node _createNode = this.fac.createNode();
+      final Procedure1<Node> _function_1 = (Node it_1) -> {
+        it_1.setName("bazz");
+      };
+      Node _doubleArrow = ObjectExtensions.<Node>operator_doubleArrow(_createNode, _function_1);
+      _children.add(0, _doubleArrow);
     };
-    Node _doubleArrow = ObjectExtensions.<Node>operator_doubleArrow(_createNode, _function);
-    _children.add(0, _doubleArrow);
+    serializer.<Resource>addModification(model.eResource(), _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
@@ -192,21 +201,23 @@ public class ChangeSerializerTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
-    serializer.beginRecordChanges(model.eResource());
-    EList<Node> _children = model.getChildren().get(0).getChildren();
-    Node _createNode = this.fac.createNode();
-    final Procedure1<Node> _function = (Node it) -> {
-      it.setName("bazz1");
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      EList<Node> _children = model.getChildren().get(0).getChildren();
+      Node _createNode = this.fac.createNode();
+      final Procedure1<Node> _function_1 = (Node it_1) -> {
+        it_1.setName("bazz1");
+      };
+      Node _doubleArrow = ObjectExtensions.<Node>operator_doubleArrow(_createNode, _function_1);
+      _children.add(_doubleArrow);
+      EList<Node> _children_1 = model.getChildren().get(0).getChildren();
+      Node _createNode_1 = this.fac.createNode();
+      final Procedure1<Node> _function_2 = (Node it_1) -> {
+        it_1.setName("bazz2");
+      };
+      Node _doubleArrow_1 = ObjectExtensions.<Node>operator_doubleArrow(_createNode_1, _function_2);
+      _children_1.add(_doubleArrow_1);
     };
-    Node _doubleArrow = ObjectExtensions.<Node>operator_doubleArrow(_createNode, _function);
-    _children.add(_doubleArrow);
-    EList<Node> _children_1 = model.getChildren().get(0).getChildren();
-    Node _createNode_1 = this.fac.createNode();
-    final Procedure1<Node> _function_1 = (Node it) -> {
-      it.setName("bazz2");
-    };
-    Node _doubleArrow_1 = ObjectExtensions.<Node>operator_doubleArrow(_createNode_1, _function_1);
-    _children_1.add(_doubleArrow_1);
+    serializer.<Resource>addModification(model.eResource(), _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
@@ -230,8 +241,10 @@ public class ChangeSerializerTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
-    serializer.beginRecordChanges(model.eResource());
-    EcoreUtil.remove(model.getChildren().get(0).getChildren().get(0));
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      EcoreUtil.remove(model.getChildren().get(0).getChildren().get(0));
+    };
+    serializer.<Resource>addModification(model.eResource(), _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
@@ -255,9 +268,11 @@ public class ChangeSerializerTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
-    serializer.beginRecordChanges(model.eResource());
-    EcoreUtil.remove(model.getChildren().get(1));
-    EcoreUtil.remove(model.getChildren().get(0));
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      EcoreUtil.remove(model.getChildren().get(1));
+      EcoreUtil.remove(model.getChildren().get(0));
+    };
+    serializer.<Resource>addModification(model.eResource(), _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
@@ -281,9 +296,11 @@ public class ChangeSerializerTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
-    serializer.beginRecordChanges(model.eResource());
-    Node _get = model.getChildren().get(0);
-    _get.setName("bazz4");
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      Node _get = model.getChildren().get(0);
+      _get.setName("bazz4");
+    };
+    serializer.<Resource>addModification(model.eResource(), _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
@@ -313,8 +330,10 @@ public class ChangeSerializerTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
-    serializer.beginRecordChanges(model.eResource());
-    model.setName("newroot");
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      model.setName("newroot");
+    };
+    serializer.<Resource>addModification(model.eResource(), _function);
     Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_2 = new StringConcatenation();
@@ -338,6 +357,114 @@ public class ChangeSerializerTest {
   }
   
   @Test
+  public void testRenameFqn1() {
+    final InMemoryURIHandler fs = new InMemoryURIHandler();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#1 r {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("X refs a1.a2 X.a1.a2 r.X.a1.a2 { a1 { a2 refs a2 { a3 { ref a3 } } } }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Y refs b1.b2 Y.b1.b2 r.Y.b1.b2 { b1 { b2 { ref b2 } } }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
+    this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
+    final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
+    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      Node _head = IterableExtensions.<Node>head(IterableExtensions.<Node>head(IterableExtensions.<Node>head(model.getChildren()).getChildren()).getChildren());
+      _head.setName("b");
+    };
+    serializer.<Resource>addModification(model.eResource(), _function);
+    Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
+    Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
+    _builder_1.newLine();
+    _builder_1.append("#1 r {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("X refs <15:5|a1.b> <21:7|a1.b> <29:9|a1.b> { a1 { <46:2|b> refs <54:2|b> { a3 { ref a3 } } } }");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("Y refs b1.b2 Y.b1.b2 r.Y.b1.b2 { b1 { b2 { ref b2 } } }");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("--------------------------------------------------------------------------------");
+    _builder_1.newLine();
+    _builder_1.append("15 5 \"a1.a2\" -> \"a1.b\"");
+    _builder_1.newLine();
+    _builder_1.append("21 7 \"X.a1.a2\" -> \"a1.b\"");
+    _builder_1.newLine();
+    _builder_1.append("29 9 \"r.X.a1.a2\" -> \"a1.b\"");
+    _builder_1.newLine();
+    _builder_1.append("46 2 \"a2\" -> \"b\"");
+    _builder_1.newLine();
+    _builder_1.append("54 2 \"a2\" -> \"b\"");
+    _builder_1.newLine();
+    this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_1);
+  }
+  
+  @Test
+  public void testRenameFqn1ValueConversion() {
+    final InMemoryURIHandler fs = new InMemoryURIHandler();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#1 r {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("X refs ^a1.^a2 ^X.^a1.^a2 ^r.^X.^a1.^a2 { a1 { a2 refs ^a2 { a3 { ref ^a3 } } } }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Y refs ^b1.^b2 ^Y.^b1.^b2 ^r.^Y.^b1.^b2 { b1 { b2 { ref b2 } } }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
+    this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
+    final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
+    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      Node _head = IterableExtensions.<Node>head(IterableExtensions.<Node>head(IterableExtensions.<Node>head(model.getChildren()).getChildren()).getChildren());
+      _head.setName("b");
+    };
+    serializer.<Resource>addModification(model.eResource(), _function);
+    Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
+    Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
+    _builder_1.newLine();
+    _builder_1.append("#1 r {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("X refs <15:7|a1.b> <23:10|a1.b> <34:13|a1.b> { a1 { <55:2|b> refs <63:3|b> { a3 { ref ^a3 } } } }");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("Y refs ^b1.^b2 ^Y.^b1.^b2 ^r.^Y.^b1.^b2 { b1 { b2 { ref b2 } } }");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("--------------------------------------------------------------------------------");
+    _builder_1.newLine();
+    _builder_1.append("15  7 \"^a1.^a2\" -> \"a1.b\"");
+    _builder_1.newLine();
+    _builder_1.append("23 10 \"^X.^a1.^a2\" -> \"a1.b\"");
+    _builder_1.newLine();
+    _builder_1.append("34 13 \"^r.^X.^a1.^a2\" -> \"a1.b\"");
+    _builder_1.newLine();
+    _builder_1.append("55  2 \"a2\" -> \"b\"");
+    _builder_1.newLine();
+    _builder_1.append("63  3 \"^a2\" -> \"b\"");
+    _builder_1.newLine();
+    this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_1);
+  }
+  
+  @Test
   public void testResourceURIChange() {
     final InMemoryURIHandler fs = new InMemoryURIHandler();
     StringConcatenation _builder = new StringConcatenation();
@@ -347,9 +474,11 @@ public class ChangeSerializerTest {
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
     final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/f.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
-    serializer.beginRecordChanges(model.eResource());
-    Resource _eResource = model.eResource();
-    _eResource.setURI(URI.createURI("inmemory:/x.pstl"));
+    final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
+      Resource _eResource = model.eResource();
+      _eResource.setURI(URI.createURI("inmemory:/x.pstl"));
+    };
+    serializer.<Resource>addModification(model.eResource(), _function);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----- renamed inmemory:/f.pstl to inmemory:/x.pstl (syntax: <offset|text>) -----");

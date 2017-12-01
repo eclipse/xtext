@@ -13,22 +13,20 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
- * URIs can also refer to folders and non-Xtext resources.
- * 
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  */
 @Data
 @SuppressWarnings("all")
-public class ResourceURIChange {
-  private final URI oldURI;
+public class RenameChange {
+  private final String newName;
   
-  private final URI newURI;
+  private final URI targetURI;
   
-  public ResourceURIChange(final URI oldURI, final URI newURI) {
+  public RenameChange(final String newName, final URI targetURI) {
     super();
-    this.oldURI = oldURI;
-    this.newURI = newURI;
+    this.newName = newName;
+    this.targetURI = targetURI;
   }
   
   @Override
@@ -36,8 +34,8 @@ public class ResourceURIChange {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this.oldURI== null) ? 0 : this.oldURI.hashCode());
-    result = prime * result + ((this.newURI== null) ? 0 : this.newURI.hashCode());
+    result = prime * result + ((this.newName== null) ? 0 : this.newName.hashCode());
+    result = prime * result + ((this.targetURI== null) ? 0 : this.targetURI.hashCode());
     return result;
   }
   
@@ -50,16 +48,16 @@ public class ResourceURIChange {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    ResourceURIChange other = (ResourceURIChange) obj;
-    if (this.oldURI == null) {
-      if (other.oldURI != null)
+    RenameChange other = (RenameChange) obj;
+    if (this.newName == null) {
+      if (other.newName != null)
         return false;
-    } else if (!this.oldURI.equals(other.oldURI))
+    } else if (!this.newName.equals(other.newName))
       return false;
-    if (this.newURI == null) {
-      if (other.newURI != null)
+    if (this.targetURI == null) {
+      if (other.targetURI != null)
         return false;
-    } else if (!this.newURI.equals(other.newURI))
+    } else if (!this.targetURI.equals(other.targetURI))
       return false;
     return true;
   }
@@ -68,18 +66,18 @@ public class ResourceURIChange {
   @Pure
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
-    b.add("oldURI", this.oldURI);
-    b.add("newURI", this.newURI);
+    b.add("newName", this.newName);
+    b.add("targetURI", this.targetURI);
     return b.toString();
   }
   
   @Pure
-  public URI getOldURI() {
-    return this.oldURI;
+  public String getNewName() {
+    return this.newName;
   }
   
   @Pure
-  public URI getNewURI() {
-    return this.newURI;
+  public URI getTargetURI() {
+    return this.targetURI;
   }
 }

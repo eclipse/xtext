@@ -254,10 +254,8 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 													<exclude>profile.list</exclude>
 													<exclude>**/*._trace</exclude>
 													<exclude>**/*.g</exclude>
-													<exclude>**/*.tokens</exclude>
 													<exclude>**/*.mwe2</exclude>
 													<exclude>**/*.xtext</exclude>
-													<exclude>**/*.xtextbin</exclude>
 												</excludes>
 											</filter>
 										</filters>
@@ -289,6 +287,8 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 										</goals>
 										<configuration>
 											<assembleDirectory>${project.build.directory}/languageserver</assembleDirectory>
+											<repositoryLayout>flat</repositoryLayout>
+											<useWildcardClassPath>true</useWildcardClassPath>
 											<!-- uncomment to enable remote debugging
 											<extraJvmArguments>-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</extraJvmArguments>
 											-->

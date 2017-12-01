@@ -105,7 +105,7 @@ public class CodeActionService implements ICodeActionService {
   }
   
   private Command fixUnsortedMembers(final Diagnostic d, final Document doc, final XtextResource res, final CodeActionParams params) {
-    final Procedure1<XtextResource> _function = (XtextResource copiedResource) -> {
+    final IChangeSerializer.IModification<Resource> _function = (Resource copiedResource) -> {
       final Model model = IterableExtensions.<Model>head(Iterables.<Model>filter(copiedResource.getContents(), Model.class));
       EList<TypeDeclaration> _types = model.getTypes();
       for (final TypeDeclaration type : _types) {
@@ -129,17 +129,16 @@ public class CodeActionService implements ICodeActionService {
     return ObjectExtensions.<Command>operator_doubleArrow(_command, _function_1);
   }
   
-  private WorkspaceEdit recordWorkspaceEdit(final Document doc, final XtextResource resource, final Procedure1<? super XtextResource> mod) {
+  private WorkspaceEdit recordWorkspaceEdit(final Document doc, final XtextResource resource, final IChangeSerializer.IModification<Resource> mod) {
     try {
       final XtextResourceSet rs = new XtextResourceSet();
       final Resource copy = rs.createResource(resource.getURI());
       String _text = resource.getParseResult().getRootNode().getText();
       StringInputStream _stringInputStream = new StringInputStream(_text);
       copy.load(_stringInputStream, CollectionLiterals.<Object, Object>emptyMap());
-      this.serializer.beginRecordChanges(copy);
-      mod.apply(((XtextResource) copy));
+      this.serializer.<Resource>addModification(copy, mod);
       final ArrayList<IEmfResourceChange> documentchanges = CollectionLiterals.<IEmfResourceChange>newArrayList();
-      this.serializer.endRecordChanges(CollectionBasedAcceptor.<IEmfResourceChange>of(documentchanges));
+      this.serializer.applyModifications(CollectionBasedAcceptor.<IEmfResourceChange>of(documentchanges));
       WorkspaceEdit _workspaceEdit = new WorkspaceEdit();
       final Procedure1<WorkspaceEdit> _function = (WorkspaceEdit it) -> {
         Iterable<ITextDocumentChange> _filter = Iterables.<ITextDocumentChange>filter(documentchanges, ITextDocumentChange.class);

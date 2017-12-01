@@ -8,6 +8,7 @@
 package org.eclipse.xtext.formatting2.regionaccess;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -18,8 +19,8 @@ import org.eclipse.xtext.RuleCall;
 public interface IAstRegion extends ISequentialRegion {
 
 	/**
-	 * @return The grammar element used to parse this semantic region. Can be an {@link RuleCall}, {@link CrossReference}, or
-	 *         {@link Keyword}.
+	 * @return The grammar element used to parse this semantic region. Can be an {@link RuleCall},
+	 *         {@link CrossReference}, or {@link Keyword}.
 	 */
 	EObject getGrammarElement();
 
@@ -27,4 +28,19 @@ public interface IAstRegion extends ISequentialRegion {
 	 * The AST-Element represented by this IEObjectRegion.
 	 */
 	EObject getSemanticElement();
+
+	/**
+	 * @since 2.13
+	 */
+	IEObjectRegion getContainingRegion();
+
+	/**
+	 * @since 2.13
+	 */
+	EStructuralFeature getContainingFeature();
+
+	/**
+	 * @since 2.13
+	 */
+	int getIndexInContainingFeature();
 }

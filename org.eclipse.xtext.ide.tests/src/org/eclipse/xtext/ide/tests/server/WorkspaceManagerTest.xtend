@@ -62,7 +62,7 @@ class WorkspaceManagerTest {
             Files.cleanFolder(root, null, true, false)
         }
         root.deleteOnExit
-        workspaceManger.initialize(URI.createFileURI(root.absolutePath).toPath.toUri, [diagnostics.put($0, $1.toList)], null)
+        workspaceManger.initialize(URI.createFileURI(root.absolutePath).withEmptyAuthority, [diagnostics.put($0, $1.toList)], null)
     }
 
     protected Map<URI, List<Issue>> diagnostics = newHashMap()

@@ -19,32 +19,41 @@ public enum JavaVersion {
 	 * Java 5 language enhancements: generics, simplified for-loop, autoboxing and unboxing, enums, varargs, static
 	 * import, annotations.
 	 */
-	JAVA5("Java 5", "1.5", "J2SE-1.5"),
+	JAVA5("Java 5", "1.5", "J2SE-1.5", "-1.5"),
 
 	/**
 	 * Java 6 language enhancements: Override annotations for implemented methods.
 	 */
-	JAVA6("Java 6", "1.6", "JavaSE-1.6"),
+	JAVA6("Java 6", "1.6", "JavaSE-1.6", "-1.6"),
 
 	/**
 	 * Java 7 language enhancements: extended numeric literals, switch over strings, type inference, try-with-resources,
 	 * catch multiple exceptions.
 	 */
-	JAVA7("Java 7", "1.7", "JavaSE-1.7"),
+	JAVA7("Java 7", "1.7", "JavaSE-1.7", "-1.7"),
 
 	/**
 	 * Java 8 language enhancements: lambda expressions, better type inference, more flexible annotations.
 	 */
-	JAVA8("Java 8", "1.8", "JavaSE-1.8");
+	JAVA8("Java 8", "1.8", "JavaSE-1.8", "-1.8")
+	,
+
+	/**
+	 * Java 9 language enhancements: mainly modules.
+	 */
+	JAVA9("Java 9", "9", "JavaSE-9", "-1.9")
+	;
 
 	private final String label;
 	private final String qualifier;
 	private final String bree;
+	private String complianceLevelArg;
 
-	JavaVersion(String label, String qualifier, String bree) {
+	JavaVersion(String label, String qualifier, String bree, String complianceLevelArg) {
 		this.label = label;
 		this.qualifier = qualifier;
 		this.bree = bree;
+		this.complianceLevelArg = complianceLevelArg;
 	}
 
 	public static JavaVersion fromQualifier(String qualifier) {
@@ -60,6 +69,13 @@ public enum JavaVersion {
 				return version;
 		}
 		return null;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public String getComplianceLevelArg() {
+		return complianceLevelArg;
 	}
 	
 	public String getLabel() {

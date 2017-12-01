@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.xtext.xtext.generator;singleton:=true
-Bundle-Version: 2.13.0.qualifier
+Bundle-Version: 2.14.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Name: Xtext Generator 2
 Bundle-Vendor: Eclipse Xtext
@@ -31,9 +31,12 @@ Export-Package: org.eclipse.xtext.xtext.generator,
  org.eclipse.xtext.xtext.generator.grammarAccess;x-internal:=true,
  org.eclipse.xtext.xtext.generator.idea;x-internal:=true,
  org.eclipse.xtext.xtext.generator.idea.parser.antlr;x-internal:=true,
+ org.eclipse.xtext.xtext.generator.junit;x-internal:=true,
  org.eclipse.xtext.xtext.generator.model;x-internal:=true,
+ org.eclipse.xtext.xtext.generator.model.annotations;x-internal:=true,
  org.eclipse.xtext.xtext.generator.model.project,
  org.eclipse.xtext.xtext.generator.parser.antlr;x-internal:=true,
+ org.eclipse.xtext.xtext.generator.parser.antlr.postProcessing;x-internal:=true,
  org.eclipse.xtext.xtext.generator.parser.antlr.splitting;x-friends:="org.eclipse.xtext.generator,org.eclipse.xtext.eclipse.tests",
  org.eclipse.xtext.xtext.generator.parser.antlr.splitting.internal;x-friends:="org.eclipse.xtext.eclipse.tests",
  org.eclipse.xtext.xtext.generator.parser.antlr.splitting.parser.antlr;x-internal:=true,
@@ -48,10 +51,13 @@ Export-Package: org.eclipse.xtext.xtext.generator,
  org.eclipse.xtext.xtext.generator.types;x-internal:=true,
  org.eclipse.xtext.xtext.generator.ui.compare;x-internal:=true,
  org.eclipse.xtext.xtext.generator.ui.contentAssist;x-internal:=true,
+ org.eclipse.xtext.xtext.generator.ui.editor;x-internal:=true,
  org.eclipse.xtext.xtext.generator.ui.labeling;x-internal:=true,
  org.eclipse.xtext.xtext.generator.ui.outline;x-internal:=true,
+ org.eclipse.xtext.xtext.generator.ui.projectWizard;x-internal:=true,
  org.eclipse.xtext.xtext.generator.ui.quickfix;x-internal:=true,
  org.eclipse.xtext.xtext.generator.ui.refactoring;x-internal:=true,
+ org.eclipse.xtext.xtext.generator.ui.tasks;x-internal:=true,
  org.eclipse.xtext.xtext.generator.ui.templates;x-internal:=true,
  org.eclipse.xtext.xtext.generator.util;x-internal:=true,
  org.eclipse.xtext.xtext.generator.validation;x-internal:=true,

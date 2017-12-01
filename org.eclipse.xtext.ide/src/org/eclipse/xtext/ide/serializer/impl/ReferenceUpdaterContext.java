@@ -9,19 +9,12 @@ package org.eclipse.xtext.ide.serializer.impl;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
 import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdaterContext;
 import org.eclipse.xtext.ide.serializer.hooks.IUpdatableReference;
 import org.eclipse.xtext.ide.serializer.impl.EObjectDescriptionDeltaProvider.Deltas;
 import org.eclipse.xtext.resource.XtextResource;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
 /**
@@ -70,33 +63,8 @@ public class ReferenceUpdaterContext implements IReferenceUpdaterContext {
 	}
 
 	@Override
-	public void updateReference(EObject owner, EReference reference) {
-		IEObjectRegion objectRegion = diffBuilder.getOriginalTextRegionAccess().regionForEObject(owner);
-		ISemanticRegion region = objectRegion.getRegionFor().feature(reference);
-		EObject target = (EObject) owner.eGet(reference);
-		CrossReference crossref = GrammarUtil.containingCrossReference(region.getGrammarElement());
-		updateReference(owner, reference, -1, region, target, crossref);
-	}
-
-	@Override
-	public void updateReference(EObject owner, EReference reference, int index) {
-		IEObjectRegion objectRegion = diffBuilder.getOriginalTextRegionAccess().regionForEObject(owner);
-		List<ISemanticRegion> regions = objectRegion.getRegionFor().features(reference);
-		ISemanticRegion region = regions.get(index);
-		EObject target = (EObject) ((List<?>) owner.eGet(reference)).get(index);
-		CrossReference crossref = GrammarUtil.containingCrossReference(region.getGrammarElement());
-		updateReference(owner, reference, index, region, target, crossref);
-	}
-
-	private void updateReference(EObject owner, EReference reference, int index, ISemanticRegion region, EObject target,
-			CrossReference crossref) {
-		Preconditions.checkNotNull(owner);
-		Preconditions.checkNotNull(reference);
-		Preconditions.checkArgument(!reference.isContainment());
-		if (region == null || target == null || target.eIsProxy() || crossref == null) {
-			return;
-		}
-		references.add(new UpdatableReference(owner, reference, index, target, crossref, region));
+	public void updateReference(IUpdatableReference updatableReference) {
+		references.add(updatableReference);
 	}
 
 }

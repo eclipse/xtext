@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.tests.testlanguage.ide.server
 
 import com.google.inject.Inject
 import org.eclipse.emf.common.util.ECollections
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.lsp4j.CodeActionParams
 import org.eclipse.lsp4j.Command
 import org.eclipse.lsp4j.Diagnostic
@@ -16,6 +17,7 @@ import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.WorkspaceEdit
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
+import org.eclipse.xtext.ide.serializer.IEmfResourceChange
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange
 import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
@@ -27,7 +29,6 @@ import org.eclipse.xtext.util.CollectionBasedAcceptor
 import org.eclipse.xtext.util.StringInputStream
 
 import static org.eclipse.xtext.ide.tests.testlanguage.validation.TestLanguageValidator.*
-import org.eclipse.xtext.ide.serializer.IEmfResourceChange
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -78,14 +79,13 @@ class CodeActionService implements ICodeActionService {
 		]
 	}
 
-	def private WorkspaceEdit recordWorkspaceEdit(Document doc, XtextResource resource, (XtextResource)=>void mod) {
+	def private WorkspaceEdit recordWorkspaceEdit(Document doc, XtextResource resource, IChangeSerializer.IModification<Resource> mod) {
 		val rs = new XtextResourceSet()
 		val copy = rs.createResource(resource.URI)
 		copy.load(new StringInputStream(resource.parseResult.rootNode.text), emptyMap)
-		serializer.beginRecordChanges(copy)
-		mod.apply(copy as XtextResource)
+		serializer.addModification(copy, mod)
 		val documentchanges = <IEmfResourceChange>newArrayList()
-		serializer.endRecordChanges(CollectionBasedAcceptor.of(documentchanges))
+		serializer.applyModifications(CollectionBasedAcceptor.of(documentchanges))
 		return new WorkspaceEdit => [
 			for (documentchange : documentchanges.filter(ITextDocumentChange)) {
 				val edits = documentchange.replacements.map [ replacement |

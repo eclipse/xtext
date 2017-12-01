@@ -45,6 +45,8 @@ import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
@@ -52,6 +54,7 @@ public class Serializer implements ISerializer {
 
 	@Override
 	public String serialize(EObject obj) {
+		checkNotNull(obj, "obj must not be null.");
 		return serialize(obj, SaveOptions.defaultOptions());
 	}
 
@@ -130,6 +133,7 @@ public class Serializer implements ISerializer {
 	}
 
 	public ITextRegionAccess serializeToRegions(EObject obj) {
+		checkNotNull(obj, "obj must not be null.");
 		ISerializationContext context = getIContext(obj);
 		TextRegionAccessBuilder builder = textRegionBuilderProvider.get();
 		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
@@ -168,6 +172,8 @@ public class Serializer implements ISerializer {
 
 	@Override
 	public String serialize(EObject obj, SaveOptions options) {
+		checkNotNull(obj, "obj must not be null.");
+		checkNotNull(options, "options must not be null.");
 		try {
 			if (formatter2Provider != null) {
 				StringBuilder builder = new StringBuilder();
@@ -185,6 +191,9 @@ public class Serializer implements ISerializer {
 
 	@Override
 	public void serialize(EObject obj, Writer writer, SaveOptions options) throws IOException {
+		checkNotNull(obj, "obj must not be null.");
+		checkNotNull(writer, "writer must not be null.");
+		checkNotNull(options, "options must not be null.");
 		if (formatter2Provider != null) {
 			serialize(obj, (Appendable) writer, options);
 			writer.flush();

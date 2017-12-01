@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -45,7 +46,7 @@ public class ReferenceAcceptor implements IReferenceFinder.Acceptor {
       this.computeExportedObjectsMap(source);
       this.currentResource = source.eResource();
     }
-    this.accept(this.createReferenceDescription(sourceURI, targetURI, eReference, index, this.findExportedContainer(source)));
+    this.accept(this.createReferenceDescription(EcoreUtil2.getFragmentPathURI(source), targetURI, eReference, index, this.findExportedContainer(source)));
   }
   
   protected void computeExportedObjectsMap(final EObject source) {

@@ -33,7 +33,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 			])
 			
 			if (generateXtendStub) {
-				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtend.lib'
+				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtend.lib;bundle-version="'+projectConfig.runtime.xtendLibVersionLowerBound+'"'
 			}
 			
 			projectConfig.runtime.manifest.importedPackages.add('org.apache.log4j')
@@ -45,7 +45,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 			])
 			
 			if (generateXtendStub) {
-				projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtend.lib'
+				projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtend.lib;bundle-version="'+projectConfig.runtime.xtendLibVersionLowerBound+'"'
 			}
 			
 			projectConfig.eclipsePlugin.manifest.importedPackages.add('org.apache.log4j')
@@ -58,10 +58,15 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 		val StringConcatenationClient expression = '''«'org.eclipse.xtext.ui.shared.Access'.typeRef».getJavaProjectsState()'''
 		val bindingFactory = new GuiceModuleAccess.BindingFactory()
 			.addTypeToProviderInstance(IAllContainersState.typeRef, expression)
+		
+		if (isGenerateStub) {
+			bindingFactory.addTypeToType(grammar.eclipsePluginDefaultEditor, grammar.eclipsePluginEditor)
+		} else if (inheritsXbase(grammar)) {
+			bindingFactory.addTypeToType(grammar.eclipsePluginDefaultEditor, grammar.eclipsePluginXbaseEditor)
+		}
+		
 		if (inheritsXbase(grammar)) {
-			bindingFactory.addTypeToType('org.eclipse.xtext.ui.editor.XtextEditor'.typeRef,
-					'org.eclipse.xtext.xbase.ui.editor.XbaseEditor'.typeRef)
-				.addTypeToType('org.eclipse.xtext.ui.editor.model.XtextDocumentProvider'.typeRef,
+			bindingFactory.addTypeToType('org.eclipse.xtext.ui.editor.model.XtextDocumentProvider'.typeRef,
 					'org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider'.typeRef)
 				.addTypeToType('org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler'.typeRef,
 					'org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler'.typeRef)
@@ -275,6 +280,15 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 					</reference>
 				</activeWhen>
 			</handler>
+		</extension>
+		<extension point="org.eclipse.core.contenttype.contentTypes">
+			<content-type
+				base-type="org.eclipse.core.runtime.text"
+				file-extensions="«language.fileExtensions.join(",")»"
+				id="«name».contenttype"
+				name="«it.simpleName» File"
+				priority="normal">
+			</content-type>
 		</extension>
 	'''
 	

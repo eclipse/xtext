@@ -51,5 +51,13 @@ class RuntimeProjectConfig extends BundleProjectConfig implements IRuntimeProjec
 			ecoreModel.initialize(injector)
 		}
 	}
+	
+	override getXbaseLibVersionLowerBound() {
+		"2.14.0"
+	}
+
+	override getXtendLibVersionLowerBound() {
+		return getXbaseLibVersionLowerBound()
+	}
 
 }

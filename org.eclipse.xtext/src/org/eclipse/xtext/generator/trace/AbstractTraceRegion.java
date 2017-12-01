@@ -512,7 +512,7 @@ public abstract class AbstractTraceRegion {
 			associatedText = "";
 		else
 			associatedText = " associations={\n  " + Joiner.on("\n").join(associated).replace("\n", "\n  ") + "\n}";
-		return getClass().getSimpleName() + " [myOffset=" + getMyOffset() + ", myLength=" + getMyLength() + "]"
+		return getClass().getSimpleName() + " [myOffset=" + getMyOffset() + ", myLength=" + getMyLength() + ", useForDebugging="+isUseForDebugging()+"]"
 				+ associatedText + nestedText;
 	}
 

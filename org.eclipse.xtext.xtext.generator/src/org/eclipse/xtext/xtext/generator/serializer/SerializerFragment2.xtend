@@ -135,7 +135,7 @@ import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 		
 		if (projectConfig.runtime.manifest !== null) {
 			projectConfig.runtime.manifest.exportedPackages += grammar.serializerBasePackage
-			projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
+			projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib;bundle-version="'+projectConfig.runtime.xbaseLibVersionLowerBound+'"'
 		}
 		
 		generateAbstractSemanticSequencer()

@@ -55,7 +55,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 				requiredBundles.addAll(
 					testingPackage,
 					xbaseTestingPackage,
-					"org.eclipse.xtext.xbase.lib"
+					'org.eclipse.xtext.xbase.lib;bundle-version="'+projectConfig.runtime.xbaseLibVersionLowerBound+'"'
 				)
 				exportedPackages.add(grammar.runtimeTestBasePackage+";x-internal=true")
 			]

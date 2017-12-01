@@ -12,6 +12,7 @@ import com.google.inject.Provider;
 import java.util.Collection;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer;
 import org.eclipse.xtext.ide.tests.importHandling.ImportTestHelper;
@@ -72,8 +73,10 @@ public class FileAwareTestLanguageImportTest {
     final ResourceSet rs = this._importTestHelper.createResourceSet(fs);
     final PackageDeclaration model = this._importTestHelper.<PackageDeclaration>contents(rs, "inmemory:/file1.fileawaretestlanguage", PackageDeclaration.class);
     final ChangeSerializer serializer = this.serializerProvider.get();
-    serializer.beginRecordChanges(model.eResource());
-    model.setName("newpackage");
+    final IChangeSerializer.IModification<PackageDeclaration> _function = (PackageDeclaration it) -> {
+      model.setName("newpackage");
+    };
+    serializer.<PackageDeclaration>addModification(model, _function);
     Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._importTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_2 = new StringConcatenation();
@@ -141,8 +144,10 @@ public class FileAwareTestLanguageImportTest {
     final ResourceSet rs = this._importTestHelper.createResourceSet(fs);
     final PackageDeclaration model = this._importTestHelper.<PackageDeclaration>contents(rs, "inmemory:/file1.fileawaretestlanguage", PackageDeclaration.class);
     final ChangeSerializer serializer = this.serializerProvider.get();
-    serializer.beginRecordChanges(model.eResource());
-    model.setName("newpackage");
+    final IChangeSerializer.IModification<PackageDeclaration> _function = (PackageDeclaration it) -> {
+      model.setName("newpackage");
+    };
+    serializer.<PackageDeclaration>addModification(model, _function);
     Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._importTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_2 = new StringConcatenation();
@@ -213,8 +218,10 @@ public class FileAwareTestLanguageImportTest {
     final ResourceSet rs = this._importTestHelper.createResourceSet(fs);
     final PackageDeclaration model = this._importTestHelper.<PackageDeclaration>contents(rs, "inmemory:/file1.fileawaretestlanguage", PackageDeclaration.class);
     final ChangeSerializer serializer = this.serializerProvider.get();
-    serializer.beginRecordChanges(model.eResource());
-    model.setName("pkg1");
+    final IChangeSerializer.IModification<PackageDeclaration> _function = (PackageDeclaration it) -> {
+      model.setName("pkg1");
+    };
+    serializer.<PackageDeclaration>addModification(model, _function);
     Assert.assertEquals(1, model.eResource().getResourceSet().getResources().size());
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._importTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_2 = new StringConcatenation();
@@ -271,10 +278,15 @@ public class FileAwareTestLanguageImportTest {
     final PackageDeclaration model1 = this._importTestHelper.<PackageDeclaration>contents(rs, "inmemory:/foo/X.fileawaretestlanguage", PackageDeclaration.class);
     final PackageDeclaration model2 = this._importTestHelper.<PackageDeclaration>contents(rs, "inmemory:/foo/bar/Y.fileawaretestlanguage", PackageDeclaration.class);
     final ChangeSerializer serializer = this.serializerProvider.get();
-    serializer.beginRecordChanges(model1.eResource());
-    serializer.beginRecordChanges(model2.eResource());
-    model1.setName("foo2");
-    model2.setName("foo2.bar");
+    final IChangeSerializer.IModification<PackageDeclaration> _function = (PackageDeclaration it) -> {
+      it.setName("foo2");
+    };
+    serializer.<PackageDeclaration>addModification(model1, _function);
+    final IChangeSerializer.IModification<PackageDeclaration> _function_1 = (PackageDeclaration it) -> {
+      model2.setName("foo2.bar");
+      model2.setName("foo2.bar");
+    };
+    serializer.<PackageDeclaration>addModification(model2, _function_1);
     Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._importTestHelper.endRecordChangesToTextDocuments(serializer);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("-------- inmemory:/foo/X.fileawaretestlanguage (syntax: <offset|text>) ---------");

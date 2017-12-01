@@ -132,4 +132,15 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
         close(fileURI);
         assertFalse(diagnostics.get(referencingFileURI).empty)
     }
+
+    @Test
+    def void testInMemory_GH_456() {
+        initialize
+        val uri = 'inmemory:/foo/bar.testlang';
+        open(uri, '''
+            type Foo { }
+        ''');
+        assertNotNull('''Diagnostics could be empty but never null.''', diagnostics.get(uri));
+    }
+
 }

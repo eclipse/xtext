@@ -37,10 +37,10 @@ class GeneratorNodeTest {
 			  indented2
 			dedented'''.toString, result.toString)
 		assertEquals('''
-			CompletableTraceRegion [myOffset=0, myLength=44] associations={
+			CompletableTraceRegion [myOffset=0, myLength=44, useForDebugging=false] associations={
 			  LocationData [TextRegionWithLineInformation [0:100][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			} nestedRegions={
-			  CompletableTraceRegion [myOffset=14, myLength=21] associations={
+			  CompletableTraceRegion [myOffset=14, myLength=21, useForDebugging=false] associations={
 			    LocationData [TextRegionWithLineInformation [1:99][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			  }
 			}'''.toString, result.traceRegion.toString)
@@ -73,19 +73,19 @@ class GeneratorNodeTest {
 		val result = processor.process(node)
 		assertEquals(someCodeGen_noTrace(2).toString, result.toString)
 		assertEquals('''
-			CompletableTraceRegion [myOffset=0, myLength=80] associations={
+			CompletableTraceRegion [myOffset=0, myLength=80, useForDebugging=false] associations={
 			  LocationData [TextRegionWithLineInformation [0:100][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			} nestedRegions={
-			  CompletableTraceRegion [myOffset=7, myLength=5] associations={
+			  CompletableTraceRegion [myOffset=7, myLength=5, useForDebugging=false] associations={
 			    LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			  }
-			  CompletableTraceRegion [myOffset=28, myLength=5] associations={
+			  CompletableTraceRegion [myOffset=28, myLength=5, useForDebugging=false] associations={
 			    LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			  }
-			  CompletableTraceRegion [myOffset=47, myLength=5] associations={
+			  CompletableTraceRegion [myOffset=47, myLength=5, useForDebugging=false] associations={
 			    LocationData [TextRegionWithLineInformation [11:89][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			  }
-			  CompletableTraceRegion [myOffset=68, myLength=5] associations={
+			  CompletableTraceRegion [myOffset=68, myLength=5, useForDebugging=false] associations={
 			    LocationData [TextRegionWithLineInformation [10:90][lineNumber=0, endLineNumber=0]][path=foo/mymodel.dsl]
 			  }
 			}'''.toString, result.traceRegion.toString)

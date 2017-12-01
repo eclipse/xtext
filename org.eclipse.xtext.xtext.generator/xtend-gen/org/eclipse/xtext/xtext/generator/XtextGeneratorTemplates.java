@@ -1791,8 +1791,10 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("protected Module getRuntimeModule(String grammar) {");
-        _builder.newLine();
+        _builder.append("protected ");
+        _builder.append(Module.class, "\t");
+        _builder.append(" getRuntimeModule(String grammar) {");
+        _builder.newLineIfNotEmpty();
         {
           for(final IXtextGeneratorLanguage lang_1 : langConfigs) {
             _builder.append("\t\t");

@@ -107,6 +107,7 @@ import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
 import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.IHoverService;
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
+import org.eclipse.xtext.ide.server.rename.IRenameService;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
@@ -180,6 +181,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   private InitializeParams params;
   
+  private boolean hasShutdownBeenCalled = false;
+  
   @Inject
   public void setWorkspaceManager(final WorkspaceManager manager) {
     this.workspaceManager = manager;
@@ -249,6 +252,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       it.setDocumentFormattingProvider(Boolean.valueOf(true));
       it.setDocumentRangeFormattingProvider(Boolean.valueOf(true));
       it.setDocumentHighlightProvider(Boolean.valueOf(true));
+      final Function1<IResourceServiceProvider, Boolean> _function_5 = (IResourceServiceProvider it_1) -> {
+        IRenameService _get = it_1.<IRenameService>get(IRenameService.class);
+        return Boolean.valueOf((_get != null));
+      };
+      it.setRenameProvider(Boolean.valueOf(IterableExtensions.exists(this.getAllLanguages(), _function_5)));
       ClientCapabilities _capabilities = params.getCapabilities();
       WorkspaceClientCapabilities _workspace = null;
       if (_capabilities!=null) {
@@ -262,10 +270,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       if (_tripleNotEquals) {
         this.commandRegistry.initialize(this.getAllLanguages(), params.getCapabilities(), this.client);
         ExecuteCommandOptions _executeCommandOptions = new ExecuteCommandOptions();
-        final Procedure1<ExecuteCommandOptions> _function_5 = (ExecuteCommandOptions it_1) -> {
+        final Procedure1<ExecuteCommandOptions> _function_6 = (ExecuteCommandOptions it_1) -> {
           it_1.setCommands(this.commandRegistry.getCommands());
         };
-        ExecuteCommandOptions _doubleArrow_2 = ObjectExtensions.<ExecuteCommandOptions>operator_doubleArrow(_executeCommandOptions, _function_5);
+        ExecuteCommandOptions _doubleArrow_2 = ObjectExtensions.<ExecuteCommandOptions>operator_doubleArrow(_executeCommandOptions, _function_6);
         it.setExecuteCommandProvider(_doubleArrow_2);
       }
     };
@@ -300,7 +308,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     String _rootPath = params.getRootPath();
     boolean _tripleNotEquals = (_rootPath != null);
     if (_tripleNotEquals) {
-      return this._uriExtensions.toUri(this._uriExtensions.toPath(URI.createFileURI(params.getRootPath())));
+      return this._uriExtensions.toUri(this._uriExtensions.toUriString(URI.createFileURI(params.getRootPath())));
     }
     return null;
   }
@@ -321,10 +329,16 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void exit() {
+    if (this.hasShutdownBeenCalled) {
+      System.exit(0);
+    } else {
+      System.exit(1);
+    }
   }
   
   @Override
   public CompletableFuture<Object> shutdown() {
+    this.hasShutdownBeenCalled = true;
     Object _object = new Object();
     return CompletableFuture.<Object>completedFuture(_object);
   }
@@ -429,11 +443,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   private void publishDiagnostics(final URI uri, final Iterable<? extends Issue> issues) {
     PublishDiagnosticsParams _publishDiagnosticsParams = new PublishDiagnosticsParams();
     final Procedure1<PublishDiagnosticsParams> _function = (PublishDiagnosticsParams it) -> {
-      it.setUri(this._uriExtensions.toPath(uri));
-      final Function1<Issue, Diagnostic> _function_1 = (Issue it_1) -> {
+      it.setUri(this._uriExtensions.toUriString(uri));
+      final Function1<Issue, Boolean> _function_1 = (Issue it_1) -> {
+        Severity _severity = it_1.getSeverity();
+        return Boolean.valueOf((_severity != Severity.IGNORE));
+      };
+      final Function1<Issue, Diagnostic> _function_2 = (Issue it_1) -> {
         return this.toDiagnostic(it_1);
       };
-      it.setDiagnostics(IterableExtensions.<Diagnostic>toList(IterableExtensions.map(issues, _function_1)));
+      it.setDiagnostics(IterableExtensions.<Diagnostic>toList(IterableExtensions.map(IterableExtensions.filter(issues, _function_1), _function_2)));
     };
     final PublishDiagnosticsParams diagnostics = ObjectExtensions.<PublishDiagnosticsParams>operator_doubleArrow(_publishDiagnosticsParams, _function);
     this.client.publishDiagnostics(diagnostics);
@@ -825,7 +843,24 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public CompletableFuture<WorkspaceEdit> rename(final RenameParams params) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    final Function1<CancelIndicator, WorkspaceEdit> _function = (CancelIndicator cancelIndicator) -> {
+      WorkspaceEdit _xblockexpression = null;
+      {
+        final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
+        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+        IRenameService _get = null;
+        if (resourceServiceProvider!=null) {
+          _get=resourceServiceProvider.<IRenameService>get(IRenameService.class);
+        }
+        final IRenameService renameService = _get;
+        if ((renameService == null)) {
+          return new WorkspaceEdit();
+        }
+        _xblockexpression = renameService.rename(this.workspaceManager, params, cancelIndicator);
+      }
+      return _xblockexpression;
+    };
+    return this.requestManager.<WorkspaceEdit>runRead(_function);
   }
   
   @Override

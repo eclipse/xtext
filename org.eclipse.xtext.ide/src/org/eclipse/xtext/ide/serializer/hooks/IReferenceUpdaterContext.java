@@ -9,8 +9,6 @@ package org.eclipse.xtext.ide.serializer.hooks;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
 import org.eclipse.xtext.ide.serializer.impl.EObjectDescriptionDeltaProvider.Deltas;
 import org.eclipse.xtext.resource.XtextResource;
@@ -33,7 +31,5 @@ public interface IReferenceUpdaterContext {
 
 	void modifyModel(Runnable runnable);
 
-	void updateReference(EObject owner, EReference reference);
-
-	void updateReference(EObject owner, EReference reference, int index);
+	void updateReference(IUpdatableReference updatableReference);
 }

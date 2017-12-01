@@ -129,7 +129,7 @@ public class RegionAccessBuilderTest {
     _builder.newLine();
     _builder.append("foo");
     _builder.newLine();
-    String _trim = _builder.toString().trim();
+    String _unixLineSeparator = Strings.toUnixLineSeparator(_builder.toString().trim());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0 0 H");
@@ -157,7 +157,7 @@ public class RegionAccessBuilderTest {
     _builder_1.newLine();
     _builder_1.append("10 0 H");
     _builder_1.newLine();
-    this.operator_tripleEquals(_trim, _builder_1);
+    this.operator_tripleEquals(_unixLineSeparator, _builder_1);
   }
   
   @Test

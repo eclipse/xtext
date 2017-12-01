@@ -89,8 +89,8 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 				generateXtendProposalProviderStub
 
 				if (projectConfig.eclipsePlugin.manifest !== null) {
-					projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.xbase.lib"
-					projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtend.lib;resolution:=optional"
+					projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib;bundle-version="'+projectConfig.runtime.xbaseLibVersionLowerBound+'"'
+					projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtend.lib;resolution:=optional'
 				}
 			} else {
 				generateJavaProposalProviderStub

@@ -17,6 +17,7 @@ import org.eclipse.xtext.resource.IReferenceDescription
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription
 import org.eclipse.xtext.util.IAcceptor
+import org.eclipse.xtext.EcoreUtil2
 
 /**
  * For local references, populates an {@link IReferenceDescription} that knows its exported container URI.
@@ -45,7 +46,7 @@ class ReferenceAcceptor implements IReferenceFinder.Acceptor {
 			computeExportedObjectsMap(source)
 			currentResource = source.eResource()
 		}
-		accept(createReferenceDescription(sourceURI, targetURI, eReference, index, findExportedContainer(source)))
+		accept(createReferenceDescription(EcoreUtil2.getFragmentPathURI(source), targetURI, eReference, index, findExportedContainer(source)))
 	}
 
 	protected def void computeExportedObjectsMap(EObject source) {

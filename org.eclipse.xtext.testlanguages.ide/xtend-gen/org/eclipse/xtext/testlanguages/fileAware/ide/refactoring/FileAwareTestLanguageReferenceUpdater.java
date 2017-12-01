@@ -1,6 +1,5 @@
 package org.eclipse.xtext.testlanguages.fileAware.ide.refactoring;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Map;
 import java.util.Set;
@@ -50,8 +49,8 @@ public class FileAwareTestLanguageReferenceUpdater extends ReferenceUpdater {
     };
     final Iterable<Element> targets = Iterables.<Element>filter(ListExtensions.<IUpdatableReference, EObject>map(context.getUpdatableReferences(), _function_1), Element.class);
     final Function1<Element, Boolean> _function_2 = (Element it) -> {
-      QualifiedName _skipLast = this.names.getFullyQualifiedName(it).skipLast(1);
-      return Boolean.valueOf((!Objects.equal(_skipLast, pkgName)));
+      boolean _startsWith = this.names.getFullyQualifiedName(it).startsWith(pkgName);
+      return Boolean.valueOf((!_startsWith));
     };
     final Set<Element> expected = IterableExtensions.<Element>toSet(IterableExtensions.<Element>filter(targets, _function_2));
     final Function1<Element, Boolean> _function_3 = (Element it) -> {

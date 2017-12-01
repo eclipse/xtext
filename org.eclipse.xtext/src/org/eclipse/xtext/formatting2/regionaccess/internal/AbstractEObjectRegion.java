@@ -7,9 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
+import java.util.Arrays;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.formatting2.regionaccess.IAstRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
@@ -29,7 +35,9 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 	private final ITextRegionAccess access;
 	private final List<IAstRegion> children = Lists.newArrayList();
 	private EObject grammarElement;
+	private int indexInFeature = -2;
 	private IHiddenRegion nextHidden;
+	private IEObjectRegion parent;
 	private IHiddenRegion previousHidden;
 	private EObject semanticElement;
 
@@ -39,6 +47,9 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 	}
 
 	public void addChild(IAstRegion astRegion) {
+		if (astRegion instanceof AbstractEObjectRegion) {
+			((AbstractEObjectRegion) astRegion).parent = this;
+		}
 		this.children.add(astRegion);
 	}
 
@@ -60,8 +71,43 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 	}
 
 	@Override
+	public EStructuralFeature getContainingFeature() {
+		String feature = null;
+		if (grammarElement instanceof Action) {
+			feature = ((Action) grammarElement).getFeature();
+		} else {
+			Assignment assignment = GrammarUtil.containingAssignment(getGrammarElement());
+			if (assignment != null) {
+				feature = assignment.getFeature();
+			}
+		}
+		if (feature == null) {
+			return null;
+		}
+		return semanticElement.eClass().getEStructuralFeature(feature);
+	}
+
+	@Override
+	public IEObjectRegion getContainingRegion() {
+		return parent;
+	}
+
+	@Override
 	public EObject getGrammarElement() {
 		return grammarElement;
+	}
+
+	@Override
+	public int getIndexInContainingFeature() {
+		if (indexInFeature < -1) {
+			EStructuralFeature feature = getContainingFeature();
+			if (feature != null && feature.isMany()) {
+				((AbstractEObjectRegion) parent).initChildrenFeatureIndexes();
+			} else {
+				indexInFeature = -1;
+			}
+		}
+		return indexInFeature;
 	}
 
 	public IHiddenRegion getLeadingHiddenRegion() {
@@ -140,6 +186,26 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 	@Override
 	public ISemanticRegionFinder immediatelyPreceding() {
 		return new SemanticRegionMatcher(getPreviousSemanticRegion());
+	}
+
+	protected void initChildrenFeatureIndexes() {
+		EClass clazz = semanticElement.eClass();
+		int[] indices = new int[clazz.getFeatureCount()];
+		Arrays.fill(indices, 0);
+		for (IAstRegion ele : children) {
+			EStructuralFeature feat = ele.getContainingFeature();
+			if (feat != null && feat.isMany()) {
+				int id = clazz.getFeatureID(feat);
+				if (ele instanceof AbstractEObjectRegion) {
+					((AbstractEObjectRegion) ele).indexInFeature = indices[id];
+				} else if (ele instanceof NodeSemanticRegion) {
+					((NodeSemanticRegion) ele).indexInFeature = indices[id];
+				} else if (ele instanceof StringSemanticRegion) {
+					((StringSemanticRegion) ele).indexInFeature = indices[id];
+				}
+				indices[id]++;
+			}
+		}
 	}
 
 	protected void setGrammarElement(EObject grammarElement) {

@@ -26,6 +26,8 @@ public class TraceNode extends CompositeGeneratorNode {
     this.sourceLocation = sourceLocation;
   }
   
+  private boolean useForDebugging;
+  
   @Pure
   public ILocationData getSourceLocation() {
     return this.sourceLocation;
@@ -33,5 +35,14 @@ public class TraceNode extends CompositeGeneratorNode {
   
   public void setSourceLocation(final ILocationData sourceLocation) {
     this.sourceLocation = sourceLocation;
+  }
+  
+  @Pure
+  public boolean isUseForDebugging() {
+    return this.useForDebugging;
+  }
+  
+  public void setUseForDebugging(final boolean useForDebugging) {
+    this.useForDebugging = useForDebugging;
   }
 }

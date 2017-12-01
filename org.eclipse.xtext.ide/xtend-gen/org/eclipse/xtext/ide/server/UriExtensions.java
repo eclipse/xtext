@@ -8,53 +8,44 @@
 package org.eclipse.xtext.ide.server;
 
 import com.google.inject.Singleton;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystemNotFoundException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
+ * Normalizes file uris without authorities (<code>file:/path...</code>) to contain an empty authority (i.e. starts with three slashes:<code>file:///path...</code>).
+ * 
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
 @Singleton
 @SuppressWarnings("all")
-public class UriExtensions {
-  public URI toUri(final String pathWithScheme) {
-    String path = URI.createURI(pathWithScheme).path();
-    return URI.createURI(this.toPath(path));
-  }
-  
-  public String toPath(final URI uri) {
-    return URI.createURI(this.toPath(uri.path())).toString();
-  }
-  
-  public String toPath(final java.net.URI uri) {
-    return this.toPath(uri.getPath());
+public class UriExtensions extends org.eclipse.xtext.util.UriExtensions {
+  /**
+   * returns the string representation of the given URI (with empty authority, if absent and has file scheme).
+   */
+  public String toUriString(final URI uri) {
+    return this.withEmptyAuthority(uri).toString();
   }
   
   /**
-   * We need to check if current path represents directory in file system
-   * and need to add trailing slash if path represents directory.
+   * converts a java.net.URI into a string representation with empty authority, if absent and has file scheme.
    */
-  private String toPath(final String uri) {
-    try {
-      try {
-        final Path path = Paths.get(uri);
-        return URLDecoder.decode(path.toUri().toString(), StandardCharsets.UTF_8.name());
-      } catch (final Throwable _t) {
-        if (_t instanceof FileSystemNotFoundException) {
-          final FileSystemNotFoundException e = (FileSystemNotFoundException)_t;
-          return uri;
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public String toUriString(final java.net.URI uri) {
+    return this.toUriString(URI.createURI(uri.normalize().toString()));
+  }
+  
+  /**
+   * @deprecated use #toUriString(URI)
+   */
+  @Deprecated
+  public String toPath(final URI uri) {
+    return this.toUriString(uri);
+  }
+  
+  /**
+   * @deprecated use toUriString(URI)
+   */
+  @Deprecated
+  public String toPath(final java.net.URI uri) {
+    return this.toUriString(uri);
   }
 }

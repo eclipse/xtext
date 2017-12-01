@@ -93,7 +93,7 @@ public class WorkspaceManagerTest {
       final Procedure2<URI, Iterable<Issue>> _function = (URI $0, Iterable<Issue> $1) -> {
         this.diagnostics.put($0, IterableExtensions.<Issue>toList($1));
       };
-      this.workspaceManger.initialize(this.uriExtensions.toUri(this.uriExtensions.toPath(URI.createFileURI(this.root.getAbsolutePath()))), _function, null);
+      this.workspaceManger.initialize(this.uriExtensions.withEmptyAuthority(URI.createFileURI(this.root.getAbsolutePath())), _function, null);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

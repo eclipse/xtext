@@ -5,15 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.ide.refactoring;
+package org.eclipse.xtext.ide.server.rename;
 
-import org.eclipse.xtext.ide.refactoring.MoveResourceContext;
+import org.eclipse.lsp4j.RenameParams;
+import org.eclipse.lsp4j.WorkspaceEdit;
+import org.eclipse.xtext.ide.server.WorkspaceManager;
+import org.eclipse.xtext.util.CancelIndicator;
 
 /**
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  */
 @SuppressWarnings("all")
-public interface XtextMoveResourceStrategy {
-  public abstract void applyMove(final MoveResourceContext context);
+public interface IRenameService {
+  public abstract WorkspaceEdit rename(final WorkspaceManager workspaceManager, final RenameParams renameParams, final CancelIndicator cancelIndicator);
 }

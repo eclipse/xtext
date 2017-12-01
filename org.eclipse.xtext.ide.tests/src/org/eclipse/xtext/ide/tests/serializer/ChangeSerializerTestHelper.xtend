@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ide.tests.serializer
 
 import com.google.common.base.Preconditions
+
 import com.google.inject.Inject
 import java.util.Collection
 import org.eclipse.emf.common.util.URI
@@ -30,6 +31,7 @@ import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.util.CollectionBasedAcceptor
 import org.junit.Assert
 import com.google.inject.Guice
+import static extension org.eclipse.xtext.util.Strings.*
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -40,17 +42,17 @@ class ChangeSerializerTestHelper {
 
 	def void ===(Collection<IEmfResourceChange> actual, CharSequence expected) {
 		val actualString = new TextDocumentChangeToString().add(actual).toString
-		Assert.assertEquals(expected.toString.trim, actualString.trim)
+		Assert.assertEquals(expected.toPlatformLineSeparator.trim, actualString.toPlatformLineSeparator.trim)
 	}
 
 	def void ===(ITextRegionAccess actual, CharSequence expected) {
 		val actualString = new TextRegionAccessToString().withRegionAccess(actual).hideColumnExplanation().toString
-		Assert.assertEquals(expected.toString.trim, actualString.trim)
+		Assert.assertEquals(expected.toPlatformLineSeparator.trim, actualString.toPlatformLineSeparator.trim)
 	}
 
 	def void +=(InMemoryURIHandler handler, Pair<String, String> file) {
 		val f = handler.getInMemoryFile(URI.createURI(file.key))
-		f.contents = file.value.bytes
+		f.contents = file.value.toUnixLineSeparator.bytes
 		f.exists = true
 	}
 
@@ -84,7 +86,7 @@ class ChangeSerializerTestHelper {
 
 	def Collection<IEmfResourceChange> endRecordChangesToTextDocuments(IChangeSerializer ser) {
 		val list = newArrayList()
-		ser.endRecordChanges(CollectionBasedAcceptor.of(list))
+		ser.applyModifications(CollectionBasedAcceptor.of(list))
 		return list
 	}
 	

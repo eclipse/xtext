@@ -348,8 +348,9 @@ public class GeneratorNodeProcessor {
     boolean __hasContent = this._hasContent(node, ctx);
     if (__hasContent) {
       final AbstractTraceRegion beforeRegion = ctx.currentRegion;
+      boolean _isUseForDebugging = node.isUseForDebugging();
       ILocationData _sourceLocation = node.getSourceLocation();
-      final GeneratorNodeProcessor.CompletableTraceRegion newRegion = new GeneratorNodeProcessor.CompletableTraceRegion(false, _sourceLocation, beforeRegion);
+      final GeneratorNodeProcessor.CompletableTraceRegion newRegion = new GeneratorNodeProcessor.CompletableTraceRegion(_isUseForDebugging, _sourceLocation, beforeRegion);
       final int offset = ctx.contentLength();
       final int startLineNumber = ctx.currentLineNumber();
       try {

@@ -65,7 +65,7 @@ public class EObjectSnapshotProvider {
 		public EObject getObject() {
 			return object;
 		}
-		
+
 		@Override
 		public String toString() {
 			List<String> result = Lists.newArrayList();
@@ -76,7 +76,7 @@ public class EObjectSnapshotProvider {
 				EReference eRef = ref.getEReference();
 				String cls = eRef.getEContainingClass().getName();
 				String refString = cls + "." + eRef.getName() + ":" + eRef.getEReferenceType().getName();
-				result.add("<- " + refString +" @ "+ref.getSourceEObjectUri());
+				result.add("<- " + refString + " @ " + ref.getSourceEObjectUri());
 			}
 			Collections.sort(result);
 			return Joiner.on("\n").join(result);
@@ -124,7 +124,7 @@ public class EObjectSnapshotProvider {
 		public IEObjectSnapshot getTarget() {
 			return targetEObject;
 		}
-		
+
 		@Override
 		public String toString() {
 			String cls = eReference.getEContainingClass().getName();
@@ -214,6 +214,11 @@ public class EObjectSnapshotProvider {
 		for (IResourceDescription desc : descriptions.getAllResourceDescriptions()) {
 			for (IReferenceDescription ref : desc.getReferenceDescriptions()) {
 				URI targetURI = ref.getTargetEObjectUri();
+				URI sourceEObjectUri = ref.getSourceEObjectUri();
+				EReference reference = ref.getEReference();
+				if (targetURI == null || sourceEObjectUri == null || reference == null) {
+					continue;
+				}
 				if (!uri.equals(targetURI.trimFragment())) {
 					continue;
 				}
@@ -222,7 +227,7 @@ public class EObjectSnapshotProvider {
 					continue;
 				}
 				EObjectSnapshot snapshot = getOrCreate(result, target);
-				ReferenceSnapshot rd = new ReferenceSnapshot(ref.getSourceEObjectUri(), snapshot, ref.getEReference(),
+				ReferenceSnapshot rd = new ReferenceSnapshot(sourceEObjectUri, snapshot, reference,
 						ref.getIndexInList(), ref.getContainerEObjectURI());
 				snapshot.incomingReferences.add(rd);
 			}

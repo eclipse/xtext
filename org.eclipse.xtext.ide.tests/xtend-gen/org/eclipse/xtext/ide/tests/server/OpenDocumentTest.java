@@ -156,4 +156,17 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     this.close(fileURI);
     Assert.assertFalse(this.getDiagnostics().get(referencingFileURI).isEmpty());
   }
+  
+  @Test
+  public void testInMemory_GH_456() {
+    this.initialize();
+    final String uri = "inmemory:/foo/bar.testlang";
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("type Foo { }");
+    _builder.newLine();
+    this.open(uri, _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Diagnostics could be empty but never null.");
+    Assert.assertNotNull(_builder_1.toString(), this.getDiagnostics().get(uri));
+  }
 }

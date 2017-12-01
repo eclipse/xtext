@@ -71,6 +71,16 @@ public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntim
     }
   }
   
+  @Override
+  public String getXbaseLibVersionLowerBound() {
+    return "2.14.0";
+  }
+  
+  @Override
+  public String getXtendLibVersionLowerBound() {
+    return this.getXbaseLibVersionLowerBound();
+  }
+  
   @Pure
   public String getEcoreModelPath() {
     return this.ecoreModelPath;

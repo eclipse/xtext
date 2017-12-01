@@ -11,6 +11,8 @@ import com.google.common.base.Objects;
 import com.google.common.base.Splitter;
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -264,9 +266,14 @@ public class TypeReference {
         }
         _xifexpression_1 = _xifexpression_2;
       } else {
-        String _qualifiedPackageName = GenModelUtil2.getGenClass(clazz, resourceSet).getGenPackage().getQualifiedPackageName();
-        String _interfaceName = GenModelUtil2.getGenClass(clazz, resourceSet).getInterfaceName();
-        _xifexpression_1 = new TypeReference.QualifiedClassName(_qualifiedPackageName, _interfaceName);
+        TypeReference.QualifiedClassName _xblockexpression_1 = null;
+        {
+          final GenClass genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
+          final String packageName = genClass.getGenPackage().getInterfacePackageName();
+          String _interfaceName = genClass.getInterfaceName();
+          _xblockexpression_1 = new TypeReference.QualifiedClassName(packageName, _interfaceName);
+        }
+        _xifexpression_1 = _xblockexpression_1;
       }
       _xifexpression = _xifexpression_1;
     }
@@ -274,9 +281,21 @@ public class TypeReference {
   }
   
   private static TypeReference.QualifiedClassName getQualifiedName(final EPackage epackage, final ResourceSet resourceSet) {
-    String _qualifiedPackageName = GenModelUtil2.getGenPackage(epackage, resourceSet).getQualifiedPackageName();
-    String _packageInterfaceName = GenModelUtil2.getGenPackage(epackage, resourceSet).getPackageInterfaceName();
-    return new TypeReference.QualifiedClassName(_qualifiedPackageName, _packageInterfaceName);
+    TypeReference.QualifiedClassName _xblockexpression = null;
+    {
+      final GenPackage genPackage = GenModelUtil2.getGenPackage(epackage, resourceSet);
+      String _xifexpression = null;
+      boolean _isSuppressEMFMetaData = genPackage.getGenModel().isSuppressEMFMetaData();
+      if (_isSuppressEMFMetaData) {
+        _xifexpression = genPackage.getQualifiedPackageClassName();
+      } else {
+        _xifexpression = genPackage.getReflectionPackageName();
+      }
+      final String packageName = _xifexpression;
+      String _packageInterfaceName = genPackage.getPackageInterfaceName();
+      _xblockexpression = new TypeReference.QualifiedClassName(packageName, _packageInterfaceName);
+    }
+    return _xblockexpression;
   }
   
   @Override

@@ -48,12 +48,18 @@ class CompareFragment2 extends AbstractXtextGeneratorFragment {
 					class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 					extensions="«language.fileExtensions.join(",")»">
 				</viewer>
+				<contentTypeBinding
+					contentTypeId="«grammar.name».contenttype"
+					contentViewerId="«grammar.name».compare.contentViewers" />
 			</extension>
 			<extension point="org.eclipse.compare.contentMergeViewers">
 				<viewer id="«grammar.name».compare.contentMergeViewers"
 					class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 					extensions="«language.fileExtensions.join(",")»" label="«grammar.simpleName» Compare">
 				</viewer>
+				<contentTypeBinding
+					contentTypeId="«grammar.name».contenttype"
+					contentMergeViewerId="«grammar.name».compare.contentMergeViewers" />
 			</extension>
 			<extension point="org.eclipse.ui.editors.documentProviders">
 				<provider id="«grammar.name».editors.documentProviders"

@@ -97,6 +97,11 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 
 	public abstract Iterator<T> iteratorAfter(T segment);
 
+	/**
+	 * @since 2.13
+	 */
+	public abstract Iterable<T> reverseIterable();
+
 	@Override
 	public String toString() {
 		TextRegionsToString toString = new TextRegionsToString();

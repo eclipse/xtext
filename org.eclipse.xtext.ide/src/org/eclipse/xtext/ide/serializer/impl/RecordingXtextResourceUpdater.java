@@ -63,6 +63,8 @@ public class RecordingXtextResourceUpdater extends RecordingResourceUpdater {
 
 	@Override
 	public void applyChange(Deltas deltas, IAcceptor<IEmfResourceChange> changeAcceptor) {
+		Resource resource = snapshot.getResource();
+		ResourceSet rs = resource.getResourceSet();
 		ReferenceUpdaterContext ctx = new ReferenceUpdaterContext(deltas, document);
 		if (serializer.isUpdateCrossReferences()) {
 			referenceUpdater.update(ctx);
@@ -71,13 +73,13 @@ public class RecordingXtextResourceUpdater extends RecordingResourceUpdater {
 			}
 		}
 		ChangeDescription recording = recorder.endRecording();
-		Resource resource = snapshot.getResource();
-		ResourceSet rs = resource.getResourceSet();
-		List<IResourceSnapshot> snapshots = Collections.singletonList(snapshot);
-		ResourceSetRecording tree = changeTreeProvider.createChangeTree(rs, snapshots, recording);
-		ResourceRecording recordedResource = tree.getRecordedResource(resource);
+		if (recording != null) {
+			List<IResourceSnapshot> snapshots = Collections.singletonList(snapshot);
+			ResourceSetRecording tree = changeTreeProvider.createChangeTree(rs, snapshots, recording);
+			ResourceRecording recordedResource = tree.getRecordedResource(resource);
+			partialSerializer.serializeChanges(recordedResource, document);
+		}
 		List<IUpdatableReference> updatableReferences = ctx.getUpdatableReferences();
-		partialSerializer.serializeChanges(recordedResource, document);
 		for (IUpdatableReference upd : updatableReferences) {
 			referenceUpdater.updateReference(document, upd);
 		}
@@ -114,7 +116,7 @@ public class RecordingXtextResourceUpdater extends RecordingResourceUpdater {
 	@Override
 	public void unload() {
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder(getClass().getSimpleName());
@@ -125,8 +127,8 @@ public class RecordingXtextResourceUpdater extends RecordingResourceUpdater {
 		} else {
 			result.append(" " + oldURI + " -> " + newURI);
 		}
-		if(document != null) {
-			result.append("\n"+document);
+		if (document != null) {
+			result.append("\n" + document);
 		}
 		return result.toString();
 	}

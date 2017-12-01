@@ -99,6 +99,18 @@ class XtextGeneratorNaming {
 		new TypeReference(grammar.eclipsePluginBasePackage, getSimpleName(grammar) + 'ExecutableExtensionFactory')
 	}
 	
+	def getEclipsePluginEditor(Grammar grammar) {
+		new TypeReference(grammar.eclipsePluginBasePackage + '.editor', getSimpleName(grammar) + 'Editor')
+	}
+	
+	def getEclipsePluginXbaseEditor(Grammar grammar) {
+		new TypeReference('org.eclipse.xtext.xbase.ui.editor.XbaseEditor')
+	}
+	
+	def getEclipsePluginDefaultEditor(Grammar grammar) {
+		new TypeReference('org.eclipse.xtext.ui.editor.XtextEditor')
+	}
+	
 	/**
 	 * @return name for the eclipsePlugin Activator or <code>null</code> if eclipsePlugin has no name
 	 */

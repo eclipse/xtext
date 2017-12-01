@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -34,45 +35,118 @@ public class EObjectDescriptionDeltaProvider {
 	public static class Delta {
 		private List<IEObjectDescription> descriptions = Lists.newArrayList();
 		private final EObject object;
+		private boolean qualifiedNameChanged;
+		private boolean simpleNameAndUserDataChanged;
 		private IEObjectSnapshot snapshot;
 
-		public Delta(EObject object) {
+		public Delta(EObject object, IEObjectSnapshot snapshot, List<IEObjectDescription> descriptions) {
 			super();
 			this.object = object;
+			this.snapshot = snapshot;
+			this.descriptions = descriptions;
+			this.simpleNameAndUserDataChanged = !forAll(this::isSimpleNameAndUserdataEqual);
+			this.qualifiedNameChanged = !forAll(this::isQualifiedNameEqual);
+		}
+
+		protected boolean forAll(BiFunction<IEObjectDescription, IEObjectDescription, Boolean> comparator) {
+			if (snapshot == null) {
+				return false;
+			}
+			List<IEObjectDescription> snap = snapshot.getDescriptions();
+			if (snap == null && descriptions == null) {
+				return true;
+			}
+			if (snap == null || descriptions == null) {
+				return false;
+			}
+			int size = descriptions.size();
+			if (size == 0 && snap.isEmpty()) {
+				return true;
+			}
+			if (size != snap.size()) {
+				return false;
+			}
+			if (size == 1) {
+				return comparator.apply(snap.get(0), descriptions.get(0));
+			}
+			Set<IEObjectDescription> candidates = Sets.newHashSet(snap);
+			FOR: for (IEObjectDescription d : descriptions) {
+				Iterator<IEObjectDescription> it = candidates.iterator();
+				while (it.hasNext()) {
+					IEObjectDescription s = it.next();
+					if (comparator.apply(d, s)) {
+						it.remove();
+						continue FOR;
+					}
+				}
+				return false;
+			}
+			return true;
 		}
 
 		public List<IEObjectDescription> getDescriptions() {
 			return descriptions;
 		}
 
+		public EObject getObject() {
+			return object;
+		}
+
 		public IEObjectSnapshot getSnapshot() {
 			return snapshot;
 		}
 
-		public EObject getObject() {
-			return object;
+		public boolean hasQualifiedNameChanged() {
+			return qualifiedNameChanged;
+		}
+
+		public boolean hasSimpleNameOrUserdataChanged() {
+			return simpleNameAndUserDataChanged;
+		}
+
+		protected boolean isQualifiedNameEqual(IEObjectDescription desc1, IEObjectDescription desc2) {
+			return desc1.getQualifiedName().equals(desc2.getQualifiedName());
+		}
+
+		protected boolean isSimpleNameAndUserdataEqual(IEObjectDescription oldDesc, IEObjectDescription newDesc) {
+			if (!oldDesc.getName().equals(newDesc.getName())) {
+				return false;
+			}
+			if (!isUserDataEqual(oldDesc, newDesc)) {
+				return false;
+			}
+			return true;
+		}
+
+		protected boolean isUserDataEqual(IEObjectDescription oldObj, IEObjectDescription newObj) {
+			String[] oldKeys = oldObj.getUserDataKeys();
+			String[] newKeys = newObj.getUserDataKeys();
+			if (oldKeys.length != newKeys.length)
+				return false;
+			for (String key : oldKeys) {
+				if (!Arrays.contains(newKeys, key))
+					return false;
+				String oldValue = oldObj.getUserData(key);
+				String newValue = newObj.getUserData(key);
+				if (!Objects.equal(oldValue, newValue))
+					return false;
+			}
+			return true;
 		}
 	}
 
 	public static class Deltas {
-		private Collection<IResourceSnapshot> snapshots;
 		private final Map<EObject, Delta> deltas = Maps.newLinkedHashMap();
+		private Collection<IResourceSnapshot> snapshots;
+
+		public Delta getDelta(EObject obj) {
+			return deltas.get(obj);
+		}
 
 		public Collection<IResourceSnapshot> getSnapshots() {
 			return snapshots;
 		}
 
-		public Delta findContainingDelta(EObject obj) {
-			EObject current = obj;
-			while (current != null) {
-				Delta delta = deltas.get(current);
-				if (delta != null) {
-					return delta;
-				}
-				current = current.eContainer();
-			}
-			return null;
-		}
 	}
 
 	public static class Group {
@@ -87,37 +161,7 @@ public class EObjectDescriptionDeltaProvider {
 	}
 
 	protected Delta createDelta(EObject object, IEObjectSnapshot snapshot, List<IEObjectDescription> descriptions) {
-		Delta delta = new Delta(object);
-		delta.descriptions = descriptions;
-		delta.snapshot = snapshot;
-		if (snapshot == null || snapshot.getDescriptions() == null || delta.descriptions == null) {
-			return delta;
-		}
-		if (delta.descriptions.size() != snapshot.getDescriptions().size()) {
-			return delta;
-		}
-		if (delta.snapshot.getDescriptions().size() == 1 && delta.descriptions.size() == 1) {
-			if (!simpleNameAndUserDataEquals(delta.snapshot.getDescriptions().get(0), delta.descriptions.get(0))) {
-				return delta;
-			}
-			return null;
-		}
-		Set<IEObjectDescription> remaining = Sets.newHashSet(snapshot.getDescriptions());
-		FOR: for (IEObjectDescription desc : descriptions) {
-			Iterator<IEObjectDescription> it = remaining.iterator();
-			while (it.hasNext()) {
-				IEObjectDescription next = it.next();
-				if (simpleNameAndUserDataEquals(desc, next)) {
-					it.remove();
-					continue FOR;
-				}
-			}
-			return null;
-		}
-		if (remaining.isEmpty()) {
-			return delta;
-		}
-		return null;
+		return new Delta(object, snapshot, descriptions);
 	}
 
 	public Deltas getDelta(ChangeSerializer serializer, Collection<IResourceSnapshot> snapshots) {
@@ -144,37 +188,11 @@ public class EObjectDescriptionDeltaProvider {
 		result.snapshots = snapshots;
 		for (Group g : groups.values()) {
 			Delta delta = createDelta(g.object, g.snapshot, g.descriptions);
-			if (delta != null) {
+			if (delta.hasQualifiedNameChanged() || delta.hasSimpleNameOrUserdataChanged()) {
 				result.deltas.put(delta.object, delta);
 			}
 		}
 		return result;
-	}
-
-	protected boolean simpleNameAndUserDataEquals(IEObjectDescription oldDesc, IEObjectDescription newDesc) {
-		if (!oldDesc.getName().equals(newDesc.getName())) {
-			return false;
-		}
-		if (!userDataEuqals(oldDesc, newDesc)) {
-			return false;
-		}
-		return true;
-	}
-
-	protected boolean userDataEuqals(IEObjectDescription oldObj, IEObjectDescription newObj) {
-		String[] oldKeys = oldObj.getUserDataKeys();
-		String[] newKeys = newObj.getUserDataKeys();
-		if (oldKeys.length != newKeys.length)
-			return false;
-		for (String key : oldKeys) {
-			if (!Arrays.contains(newKeys, key))
-				return false;
-			String oldValue = oldObj.getUserData(key);
-			String newValue = newObj.getUserData(key);
-			if (!Objects.equal(oldValue, newValue))
-				return false;
-		}
-		return true;
 	}
 
 }

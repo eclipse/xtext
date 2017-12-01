@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server
 
+import static org.eclipse.xtext.diagnostics.Severity.*
 import com.google.common.collect.LinkedListMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Inject
@@ -87,6 +88,8 @@ import org.eclipse.xtext.validation.Issue
 import org.eclipse.lsp4j.ExecuteCommandOptions
 import org.eclipse.lsp4j.ExecuteCommandParams
 import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
+import org.eclipse.xtext.ide.server.rename.IRenameService
+import org.eclipse.lsp4j.WorkspaceEdit
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -103,6 +106,8 @@ import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 	// injected below
 	WorkspaceManager workspaceManager
 	InitializeParams params
+	
+	boolean hasShutdownBeenCalled = false;
 	
 	@Inject
 	def void setWorkspaceManager(WorkspaceManager manager) {
@@ -153,7 +158,8 @@ import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 			documentFormattingProvider = true
 			documentRangeFormattingProvider = true
 			documentHighlightProvider = true
-			
+			renameProvider = allLanguages.exists[get(IRenameService)!==null]
+
 			// register execute command capability
 			if (params.capabilities?.workspace?.executeCommand !== null) {
 				this.commandRegistry.initialize(allLanguages, params.capabilities, client)
@@ -178,7 +184,7 @@ import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 	@Deprecated
 	private def URI deprecatedToBaseDir(InitializeParams params) {
 		if (params.rootPath !== null) {
-			return URI.createFileURI(params.rootPath).toPath.toUri
+			return URI.createFileURI(params.rootPath).toUriString.toUri
 		}
 		return null
 	}
@@ -195,9 +201,15 @@ import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 	}
 
 	override exit() {
+		if(this.hasShutdownBeenCalled) {
+			System.exit(0);
+		} else {
+			System.exit(1);
+		}
 	}
 
 	override CompletableFuture<Object> shutdown() {
+		this.hasShutdownBeenCalled = true;
 		return CompletableFuture.completedFuture(new Object());
 	}
 
@@ -274,8 +286,8 @@ import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 
 	private def void publishDiagnostics(URI uri, Iterable<? extends Issue> issues) {
 		val diagnostics = new PublishDiagnosticsParams => [
-			it.uri = toPath(uri)
-			it.diagnostics = issues.map[toDiagnostic].toList
+			it.uri = toUriString(uri)
+			it.diagnostics = issues.filter[severity !== IGNORE].map[toDiagnostic].toList
 		]
 		client.publishDiagnostics(diagnostics)
 	}
@@ -551,7 +563,14 @@ import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 	}
 
 	override rename(RenameParams params) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.runRead[ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val renameService = resourceServiceProvider?.get(IRenameService)
+			if (renameService === null)
+				return new WorkspaceEdit
+			renameService.rename(workspaceManager, params, cancelIndicator)
+		]
 	}
 	
 	override notify(String method, Object parameter) {

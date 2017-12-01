@@ -173,6 +173,82 @@ public class TemplateNodeTest {
   }
   
   @Test
+  public void testSeparatorLoopWithWhitespace() {
+    final List<String> strings = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "b", "c"));
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          boolean _hasElements = false;
+          for(final String s : strings) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(", ", "");
+            }
+            _builder.append(s);
+            _builder.append(" ");
+            _builder.append(s);
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    this.assertEquals(_client);
+  }
+  
+  @Test
+  public void testSeparatorLoopWithWhitespace2() {
+    final List<String> strings = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "b", "c"));
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          boolean _hasElements = false;
+          for(final String s : strings) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(",", "");
+            }
+            _builder.append(s);
+            _builder.append(" ");
+            _builder.append(s);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    };
+    this.assertEquals(_client);
+  }
+  
+  @Test
+  public void testSeparatorLoopWithWhitespace3() {
+    final List<String> strings = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "b", "c"));
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          boolean _hasElements = false;
+          for(final String s : strings) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(",", "");
+            }
+            _builder.newLine();
+            _builder.append(s);
+            _builder.append(" ");
+            _builder.newLineIfNotEmpty();
+            _builder.newLine();
+          }
+        }
+      }
+    };
+    this.assertEquals(_client);
+  }
+  
+  @Test
   public void testIndentedIf() {
     final boolean condition = true;
     final String string = "foo";

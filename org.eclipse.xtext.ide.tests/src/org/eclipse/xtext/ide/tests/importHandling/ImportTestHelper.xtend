@@ -28,6 +28,7 @@ import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.util.CollectionBasedAcceptor
 import org.junit.Assert
+import static extension org.eclipse.xtext.util.Strings.*
 
 /**
  * TODO: de-duplicate with /xtext-core/org.eclipse.xtext.ide.tests/src/org/eclipse/xtext/ide/tests/serializer/ChangeSerializerTestHelper.xtend
@@ -40,7 +41,7 @@ class ImportTestHelper {
 
 	def void ===(Collection<IEmfResourceChange> actual, CharSequence expected) {
 		val actualString = new TextDocumentChangeToString().add(actual).toString
-		Assert.assertEquals(expected.toString.trim, actualString.trim)
+		Assert.assertEquals(expected.toPlatformLineSeparator.trim, actualString.toPlatformLineSeparator.trim)
 	}
 
 	def void ===(ITextRegionAccess actual, CharSequence expected) {
@@ -50,7 +51,7 @@ class ImportTestHelper {
 
 	def void +=(InMemoryURIHandler handler, Pair<String, String> file) {
 		val f = handler.getInMemoryFile(URI.createURI(file.key))
-		f.contents = file.value.bytes
+		f.contents = file.value.toUnixLineSeparator.bytes
 		f.exists = true
 	}
 
@@ -84,7 +85,7 @@ class ImportTestHelper {
 
 	def Collection<IEmfResourceChange> endRecordChangesToTextDocuments(IChangeSerializer ser) {
 		val list = newArrayList()
-		ser.endRecordChanges(CollectionBasedAcceptor.of(list))
+		ser.applyModifications(CollectionBasedAcceptor.of(list))
 		return list
 	}
 }

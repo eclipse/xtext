@@ -141,19 +141,22 @@ public class ProjectManager {
     return ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function);
   }
   
+  public XtextResourceSet createNewResourceSet(final ResourceDescriptionsData newIndex) {
+    XtextResourceSet _get = this.resourceSetProvider.get();
+    final Procedure1<XtextResourceSet> _function = (XtextResourceSet it) -> {
+      this.projectDescription.attachToEmfObject(it);
+      ProjectConfigAdapter.install(it, this.projectConfig);
+      Map<String, ResourceDescriptionsData> _get_1 = this.indexProvider.get();
+      final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_get_1, it);
+      index.setContainer(this.projectDescription.getName(), newIndex);
+      this.externalContentSupport.configureResourceSet(it, this.openedDocumentsContentProvider);
+    };
+    return ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
+  }
+  
   protected XtextResourceSet createFreshResourceSet(final ResourceDescriptionsData newIndex) {
     if ((this.resourceSet == null)) {
-      XtextResourceSet _get = this.resourceSetProvider.get();
-      final Procedure1<XtextResourceSet> _function = (XtextResourceSet it) -> {
-        this.projectDescription.attachToEmfObject(it);
-        ProjectConfigAdapter.install(it, this.projectConfig);
-        Map<String, ResourceDescriptionsData> _get_1 = this.indexProvider.get();
-        final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_get_1, it);
-        index.setContainer(this.projectDescription.getName(), newIndex);
-        this.externalContentSupport.configureResourceSet(it, this.openedDocumentsContentProvider);
-      };
-      XtextResourceSet _doubleArrow = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
-      this.resourceSet = _doubleArrow;
+      this.resourceSet = this.createNewResourceSet(newIndex);
     } else {
       final ChunkedResourceDescriptions resDescs = ChunkedResourceDescriptions.findInEmfObject(this.resourceSet);
       Set<Map.Entry<String, ResourceDescriptionsData>> _entrySet = this.indexProvider.get().entrySet();

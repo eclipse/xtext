@@ -13,6 +13,8 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.ide.serializer.hooks.IUpdatableReference;
 
+import com.google.common.base.Preconditions;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
@@ -27,6 +29,12 @@ public class UpdatableReference implements IUpdatableReference {
 	public UpdatableReference(EObject owner, EReference reference, int index, EObject target, CrossReference crossref,
 			ISemanticRegion region) {
 		super();
+		Preconditions.checkNotNull(owner);
+		Preconditions.checkNotNull(reference);
+		Preconditions.checkArgument(!reference.isContainment());
+		Preconditions.checkNotNull(target);
+		Preconditions.checkNotNull(crossref);
+		Preconditions.checkNotNull(region);
 		this.owner = owner;
 		this.reference = reference;
 		this.index = index;

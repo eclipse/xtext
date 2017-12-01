@@ -127,7 +127,10 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         boolean _tripleNotEquals_2 = (_manifest_1 != null);
         if (_tripleNotEquals_2) {
           Set<String> _requiredBundles_1 = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
-          _requiredBundles_1.add("org.eclipse.xtext.xbase.lib");
+          String _xbaseLibVersionLowerBound = this.getProjectConfig().getRuntime().getXbaseLibVersionLowerBound();
+          String _plus = ("org.eclipse.xtext.xbase.lib;bundle-version=\"" + _xbaseLibVersionLowerBound);
+          String _plus_1 = (_plus + "\"");
+          _requiredBundles_1.add(_plus_1);
           Set<String> _requiredBundles_2 = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
           _requiredBundles_2.add("org.eclipse.xtend.lib;resolution:=optional");
         }
