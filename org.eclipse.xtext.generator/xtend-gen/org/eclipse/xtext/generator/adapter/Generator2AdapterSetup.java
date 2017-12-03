@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator.adapter;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -47,11 +46,11 @@ public class Generator2AdapterSetup {
   private Injector injector;
   
   @Accessors(AccessorType.PUBLIC_SETTER)
-  private Module additionalGeneratorBindings = ((Module) (Binder it) -> {
+  private com.google.inject.Module additionalGeneratorBindings = ((com.google.inject.Module) (Binder it) -> {
   });
   
   @Accessors(AccessorType.PUBLIC_SETTER)
-  private Module additionalLanguageBindings = ((Module) (Binder it) -> {
+  private com.google.inject.Module additionalLanguageBindings = ((com.google.inject.Module) (Binder it) -> {
   });
   
   public Generator2AdapterSetup(final LanguageConfig languageConfig, final XpandExecutionContext xpandContext, final Naming naming) {
@@ -87,7 +86,7 @@ public class Generator2AdapterSetup {
     generatorModule.getProject().initialize(generatorInjector);
     generatorModule.getCode().initialize(generatorInjector);
     final IXtextGeneratorLanguage language = this.createLanguage(generatorInjector);
-    final Module _function_1 = (Binder it) -> {
+    final com.google.inject.Module _function_1 = (Binder it) -> {
       it.<IXtextGeneratorLanguage>bind(IXtextGeneratorLanguage.class).toInstance(language);
       it.<Grammar>bind(Grammar.class).toInstance(language.getGrammar());
       AnnotatedBindingBuilder<XtextGeneratorNaming> _bind = it.<XtextGeneratorNaming>bind(XtextGeneratorNaming.class);
@@ -95,7 +94,7 @@ public class Generator2AdapterSetup {
       _bind.toInstance(_namingAdapter);
       it.install(this.additionalLanguageBindings);
     };
-    final Module languageModule = _function_1;
+    final com.google.inject.Module languageModule = _function_1;
     return generatorInjector.createChildInjector(languageModule);
   }
   
@@ -166,11 +165,11 @@ public class Generator2AdapterSetup {
     return ObjectExtensions.<XtextGeneratorLanguage>operator_doubleArrow(_xtextGeneratorLanguage, _function);
   }
   
-  public void setAdditionalGeneratorBindings(final Module additionalGeneratorBindings) {
+  public void setAdditionalGeneratorBindings(final com.google.inject.Module additionalGeneratorBindings) {
     this.additionalGeneratorBindings = additionalGeneratorBindings;
   }
   
-  public void setAdditionalLanguageBindings(final Module additionalLanguageBindings) {
+  public void setAdditionalLanguageBindings(final com.google.inject.Module additionalLanguageBindings) {
     this.additionalLanguageBindings = additionalLanguageBindings;
   }
 }

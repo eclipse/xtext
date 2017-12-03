@@ -9,7 +9,6 @@ package org.eclipse.xtext.generator.serializer;
 
 import com.google.inject.Binder;
 import com.google.inject.Inject;
-import com.google.inject.Module;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Names;
 import java.util.Collections;
@@ -128,7 +127,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     Naming _naming = this.getNaming();
     Generator2AdapterSetup _generator2AdapterSetup = new Generator2AdapterSetup(config, ctx, _naming);
     this.adapterSetup = _generator2AdapterSetup;
-    final Module _function = (Binder it) -> {
+    final com.google.inject.Module _function = (Binder it) -> {
       it.<org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector>bind(org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector.class).toInstance(this.syntheticTerminalDetector);
     };
     this.adapterSetup.setAdditionalLanguageBindings(_function);
