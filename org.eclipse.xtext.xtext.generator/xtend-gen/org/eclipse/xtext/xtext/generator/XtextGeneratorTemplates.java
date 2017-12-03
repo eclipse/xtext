@@ -12,7 +12,6 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
@@ -1748,19 +1747,19 @@ public class XtextGeneratorTemplates {
         _builder.append("try {");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append(Module.class, "\t\t\t");
+        _builder.append(com.google.inject.Module.class, "\t\t\t");
         _builder.append(" runtimeModule = getRuntimeModule(language);");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
-        _builder.append(Module.class, "\t\t\t");
+        _builder.append(com.google.inject.Module.class, "\t\t\t");
         _builder.append(" sharedStateModule = getSharedStateModule();");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
-        _builder.append(Module.class, "\t\t\t");
+        _builder.append(com.google.inject.Module.class, "\t\t\t");
         _builder.append(" uiModule = getUiModule(language);");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
-        _builder.append(Module.class, "\t\t\t");
+        _builder.append(com.google.inject.Module.class, "\t\t\t");
         _builder.append(" mergedModule = ");
         _builder.append(Modules2.class, "\t\t\t");
         _builder.append(".mixin(runtimeModule, sharedStateModule, uiModule);");
@@ -1792,7 +1791,7 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("protected ");
-        _builder.append(Module.class, "\t");
+        _builder.append(com.google.inject.Module.class, "\t");
         _builder.append(" getRuntimeModule(String grammar) {");
         _builder.newLineIfNotEmpty();
         {
@@ -1825,7 +1824,7 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("protected ");
-        _builder.append(Module.class, "\t");
+        _builder.append(com.google.inject.Module.class, "\t");
         _builder.append(" getUiModule(String grammar) {");
         _builder.newLineIfNotEmpty();
         {
@@ -1858,7 +1857,7 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("protected ");
-        _builder.append(Module.class, "\t");
+        _builder.append(com.google.inject.Module.class, "\t");
         _builder.append(" getSharedStateModule() {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
