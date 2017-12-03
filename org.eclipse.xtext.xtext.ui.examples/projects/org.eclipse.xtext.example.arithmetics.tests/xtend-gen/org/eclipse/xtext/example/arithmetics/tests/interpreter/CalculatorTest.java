@@ -12,7 +12,6 @@ import com.google.inject.Inject;
 import java.math.BigDecimal;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
 import org.eclipse.xtext.example.arithmetics.interpreter.Calculator;
 import org.eclipse.xtext.example.arithmetics.tests.ArithmeticsInjectorProvider;
@@ -30,7 +29,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class CalculatorTest {
   @Inject
-  private ParseHelper<Module> parseHelper;
+  private ParseHelper<org.eclipse.xtext.example.arithmetics.arithmetics.Module> parseHelper;
   
   @Inject
   private Calculator calculator;
@@ -62,7 +61,7 @@ public class CalculatorTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("module test ");
     _builder.append(expression);
-    final Module module = this.parseHelper.parse(_builder);
+    final org.eclipse.xtext.example.arithmetics.arithmetics.Module module = this.parseHelper.parse(_builder);
     BigDecimal result = this.calculator.evaluate(IterableExtensions.<Expression>head(Iterables.<Expression>filter(IterableExtensions.<Statement>head(module.getStatements()).eContents(), Expression.class)));
     Assert.assertEquals(expected, result.doubleValue(), 0.0001);
   }

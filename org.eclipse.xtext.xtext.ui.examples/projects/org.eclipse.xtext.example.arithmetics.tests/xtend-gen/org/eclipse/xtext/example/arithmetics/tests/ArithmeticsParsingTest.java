@@ -9,7 +9,6 @@ package org.eclipse.xtext.example.arithmetics.tests;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.tests.ArithmeticsInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -26,7 +25,7 @@ import org.junit.runner.RunWith;
 public class ArithmeticsParsingTest {
   @Inject
   @Extension
-  private ParseHelper<Module> parseHelper;
+  private ParseHelper<org.eclipse.xtext.example.arithmetics.arithmetics.Module> parseHelper;
   
   @Inject
   @Extension

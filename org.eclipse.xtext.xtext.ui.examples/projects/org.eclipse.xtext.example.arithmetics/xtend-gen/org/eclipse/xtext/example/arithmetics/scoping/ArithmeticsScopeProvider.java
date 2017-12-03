@@ -16,7 +16,6 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
 import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
@@ -36,7 +35,7 @@ public class ArithmeticsScopeProvider extends AbstractGlobalScopeDelegatingScope
     if ((reference == ArithmeticsPackage.Literals.IMPORT__MODULE)) {
       return super.getGlobalScope(context.eResource(), reference);
     }
-    final Module module = EcoreUtil2.<Module>getContainerOfType(context, Module.class);
+    final org.eclipse.xtext.example.arithmetics.arithmetics.Module module = EcoreUtil2.<org.eclipse.xtext.example.arithmetics.arithmetics.Module>getContainerOfType(context, org.eclipse.xtext.example.arithmetics.arithmetics.Module.class);
     IScope result = IScope.NULLSCOPE;
     EList<Import> _imports = module.getImports();
     for (final Import import_ : _imports) {
@@ -50,7 +49,7 @@ public class ArithmeticsScopeProvider extends AbstractGlobalScopeDelegatingScope
     return this.getDefinitionScope(context, reference, result);
   }
   
-  public IScope getModuleScope(final EObject context, final EReference reference, final Module module, final IScope parent) {
+  public IScope getModuleScope(final EObject context, final EReference reference, final org.eclipse.xtext.example.arithmetics.arithmetics.Module module, final IScope parent) {
     final Iterable<Definition> allDefinitions = Iterables.<Definition>filter(module.getStatements(), Definition.class);
     if ((context instanceof FunctionCall)) {
       final Function1<Definition, Boolean> _function = (Definition it) -> {
