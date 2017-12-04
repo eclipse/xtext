@@ -215,8 +215,8 @@ class XbaseFormatter extends XtypeFormatter {
 	def dispatch void format(XFeatureCall expr, extension IFormattableDocument format) {
 		formatFeatureCallTypeParameters(expr, format)
 		if (expr.explicitOperationCall) {
-			val open = expr.regionFor.keyword("(").prepend[noSpace]
-			val close = expr.regionFor.keyword(")")
+			val open = expr.regionFor.keyword(grammar.XFeatureCallAccess.explicitOperationCallLeftParenthesisKeyword_3_0_0).prepend[noSpace]
+			val close = expr.regionFor.keyword(grammar.XFeatureCallAccess.rightParenthesisKeyword_3_2)
 			formatFeatureCallParams(expr.featureCallArguments, open, close, format)
 		} else
 			for (arg : expr.featureCallArguments)
@@ -243,8 +243,8 @@ class XbaseFormatter extends XtypeFormatter {
 				val autowrapLength = Math.min(entry.region.length, feature.length * 2)
 				operator.prepend[noSpace].append[noSpace; autowrap(autowrapLength) onAutowrap = indentOnce]
 				if (call.explicitOperationCall) {
-					val open = call.regionFor.keyword("(").prepend[noSpace]
-					val close = call.regionFor.keyword(")")
+					val open = call.regionFor.keyword(grammar.XMemberFeatureCallAccess.explicitOperationCallLeftParenthesisKeyword_1_1_3_0_0).prepend[noSpace]
+					val close = call.regionFor.keyword(grammar.XMemberFeatureCallAccess.rightParenthesisKeyword_1_1_3_2)
 					formatFeatureCallParams(call.memberCallArguments, open, close, format)
 				} else if (!call.memberCallArguments.empty) {
 					formatBuilderWithLeadingGap(call.memberCallArguments.builder, format)

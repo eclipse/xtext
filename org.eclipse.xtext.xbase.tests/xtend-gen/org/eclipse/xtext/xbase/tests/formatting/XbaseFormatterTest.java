@@ -2791,4 +2791,38 @@ public class XbaseFormatterTest {
     };
     this._xbaseFormatterTester.assertFormattedExpression(_function);
   }
+  
+  @Test
+  public void testFeatureCallWithParentheses() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("val it = \"xxxx\"");
+      _builder.newLine();
+      _builder.append("val j = true && (startsWith(\"x\"))");
+      _builder.newLine();
+      it.setExpectation(_builder);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("val it = \"xxxx\"");
+      _builder_1.newLine();
+      _builder_1.append("val j = true&&(startsWith(\"x\"))");
+      _builder_1.newLine();
+      it.setToBeFormatted(_builder_1);
+    };
+    this._xbaseFormatterTester.assertFormattedExpression(_function);
+  }
+  
+  @Test
+  public void testMemberFeatureCallWithParentheses() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("val j = true && (class.startsWith(\"Hugo\"))");
+      _builder.newLine();
+      it.setExpectation(_builder);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("val j = true&&(class.startsWith(\"Hugo\"))");
+      _builder_1.newLine();
+      it.setToBeFormatted(_builder_1);
+    };
+    this._xbaseFormatterTester.assertFormattedExpression(_function);
+  }
 }

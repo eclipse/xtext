@@ -1718,4 +1718,28 @@ class XbaseFormatterTest {
 			'''
 		]
 	}
+	
+	@Test def void testFeatureCallWithParentheses() {
+		assertFormattedExpression [
+			expectation = '''
+				val it = "xxxx"
+				val j = true && (startsWith("x"))
+			'''
+			toBeFormatted = '''
+				val it = "xxxx"
+				val j = true&&(startsWith("x"))
+			'''
+		]
+	}
+	
+	@Test def void testMemberFeatureCallWithParentheses() {
+		assertFormattedExpression [
+			expectation = '''
+				val j = true && (class.startsWith("Hugo"))
+			'''
+			toBeFormatted = '''
+				val j = true&&(class.startsWith("Hugo"))
+			'''
+		]
+	}	
 }
