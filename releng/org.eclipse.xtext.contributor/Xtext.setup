@@ -1332,14 +1332,7 @@
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.xtext.xtend.location}"
-          locateNestedProjects="true">
-        <predicate
-            xsi:type="predicates:NotPredicate">
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*\.idea.*"/>
-        </predicate>
-      </sourceLocator>
+          locateNestedProjects="true"/>
       <description>Maven Dependencies</description>
     </setupTask>
     <setupTask
