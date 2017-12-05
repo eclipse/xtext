@@ -157,7 +157,7 @@ public class ChangeSerializer implements IChangeSerializer {
 				updaters.add(updater);
 			}
 		}
-		monitor.beginTask("Creating Text Chnges...", updaters.size());
+		monitor.beginTask("Creating Text Changes...", updaters.size());
 		for (ResourceUpdater updater : updaters) {
 			updater.applyChange(deltas, changeAcceptor);
 			monitor.worked(1);

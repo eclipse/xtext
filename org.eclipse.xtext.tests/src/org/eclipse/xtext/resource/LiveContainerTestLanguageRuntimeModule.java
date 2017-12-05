@@ -3,9 +3,15 @@
  */
 package org.eclipse.xtext.resource;
 
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
+import org.eclipse.xtext.workspace.ProjectConfigProvider;
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class LiveContainerTestLanguageRuntimeModule extends org.eclipse.xtext.resource.AbstractLiveContainerTestLanguageRuntimeModule {
 
+	public Class<? extends IProjectConfigProvider> bindIProjectConfigProvider() {
+		return ProjectConfigProvider.class;
+	}
 }

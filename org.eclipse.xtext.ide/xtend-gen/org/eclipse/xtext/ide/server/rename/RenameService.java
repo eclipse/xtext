@@ -32,6 +32,7 @@ import org.eclipse.xtext.ide.server.rename.ServerRefactoringIssueAcceptor;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -72,12 +73,13 @@ public class RenameService implements IRenameService {
       final Function2<Document, XtextResource, WorkspaceEdit> _function = (Document document, XtextResource resource) -> {
         final ProjectManager projectManager = workspaceManager.getProjectManager(uri);
         final XtextResourceSet resourceSet = projectManager.createNewResourceSet(projectManager.getIndexState().getResourceDescriptions());
+        resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.LIVE_SCOPE, Boolean.valueOf(true));
         final int offset = document.getOffSet(renameParams.getPosition());
         final WorkspaceEdit workspaceEdit = new WorkspaceEdit();
         final Resource xtextResource = resourceSet.getResource(resource.getURI(), true);
         if ((xtextResource instanceof XtextResource)) {
           final EObject element = this._eObjectAtOffsetHelper.resolveElementAt(((XtextResource)xtextResource), offset);
-          if ((element == null)) {
+          if (((element == null) || element.eIsProxy())) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("No element found at position line:");
             int _line = renameParams.getPosition().getLine();
@@ -86,15 +88,16 @@ public class RenameService implements IRenameService {
             int _character = renameParams.getPosition().getCharacter();
             _builder.append(_character);
             issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL, _builder.toString());
+          } else {
+            String _newName = renameParams.getNewName();
+            URI _uRI = EcoreUtil.getURI(element);
+            final RenameChange change = new RenameChange(_newName, _uRI);
+            final IChangeSerializer changeSerializer = this.changeSerializerProvider.get();
+            final RenameContext context = new RenameContext(Collections.<RenameChange>unmodifiableList(CollectionLiterals.<RenameChange>newArrayList(change)), resourceSet, changeSerializer, issueAcceptor);
+            this.renameStrategy.applyRename(context);
+            final ChangeConverter changeConverter = this.converterFactory.create(workspaceManager, workspaceEdit);
+            changeSerializer.applyModifications(changeConverter);
           }
-          String _newName = renameParams.getNewName();
-          URI _uRI = EcoreUtil.getURI(element);
-          final RenameChange change = new RenameChange(_newName, _uRI);
-          final IChangeSerializer changeSerializer = this.changeSerializerProvider.get();
-          final RenameContext context = new RenameContext(Collections.<RenameChange>unmodifiableList(CollectionLiterals.<RenameChange>newArrayList(change)), resourceSet, changeSerializer, issueAcceptor);
-          this.renameStrategy.applyRename(context);
-          final ChangeConverter changeConverter = this.converterFactory.create(workspaceManager, workspaceEdit);
-          changeSerializer.applyModifications(changeConverter);
         } else {
           issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL, "Loaded resource is not an XtextResource", resource.getURI());
         }

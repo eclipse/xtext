@@ -7,6 +7,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -15,6 +16,6 @@ public class NoJdtTestLanguageIdeSetup extends NoJdtTestLanguageStandaloneSetup 
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new NoJdtTestLanguageRuntimeModule(), new NoJdtTestLanguageIdeModule());
+		return Guice.createInjector(Modules2.mixin(new NoJdtTestLanguageRuntimeModule(), new NoJdtTestLanguageIdeModule()));
 	}
 }
