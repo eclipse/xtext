@@ -153,16 +153,7 @@ public class LiveShadowedChunkedContainerTest {
       Assert.assertTrue(this.barContainer.hasResourceDescription(this.barURI));
       Assert.assertFalse(this.barContainer.hasResourceDescription(this.fooURI));
       Assert.assertEquals(this.barURI, this.barContainer.getResourceDescription(this.barURI).getURI());
-      IResourceDescriptions _globalDescriptions = this.liveShadowedChunkedResourceDescriptions.getGlobalDescriptions();
-      final Function1<IEObjectDescription, String> _function_6 = (IEObjectDescription it) -> {
-        return it.getQualifiedName().toString();
-      };
-      Assert.assertEquals("foo", IterableExtensions.join(IterableExtensions.<IEObjectDescription, String>map(((ChunkedResourceDescriptions) _globalDescriptions).getContainer("foo").getExportedObjects(), _function_6), ","));
-      IResourceDescriptions _globalDescriptions_1 = this.liveShadowedChunkedResourceDescriptions.getGlobalDescriptions();
-      final Function1<IEObjectDescription, String> _function_7 = (IEObjectDescription it) -> {
-        return it.getQualifiedName().toString();
-      };
-      Assert.assertEquals("bar", IterableExtensions.join(IterableExtensions.<IEObjectDescription, String>map(((ChunkedResourceDescriptions) _globalDescriptions_1).getContainer("bar").getExportedObjects(), _function_7), ","));
+      this.assertGlobalDescriptionsAreUnaffected();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -180,6 +171,7 @@ public class LiveShadowedChunkedContainerTest {
       Assert.assertEquals("baz,foo", IterableExtensions.join(IterableExtensions.<String>sort(IterableExtensions.<IEObjectDescription, String>map(this.fooContainer.getExportedObjects(), _function)), ","));
       Assert.assertEquals(1, IterableExtensions.size(this.barContainer.getResourceDescriptions()));
       Assert.assertEquals(1, this.barContainer.getResourceDescriptionCount());
+      this.assertGlobalDescriptionsAreUnaffected();
       this.rs1.getResources().remove(bazResource);
       Assert.assertEquals(1, IterableExtensions.size(this.fooContainer.getResourceDescriptions()));
       Assert.assertEquals(1, this.fooContainer.getResourceDescriptionCount());
@@ -189,6 +181,7 @@ public class LiveShadowedChunkedContainerTest {
       Assert.assertEquals("foo", IterableExtensions.join(IterableExtensions.<String>sort(IterableExtensions.<IEObjectDescription, String>map(this.fooContainer.getExportedObjects(), _function_1)), ","));
       Assert.assertEquals(1, IterableExtensions.size(this.barContainer.getResourceDescriptions()));
       Assert.assertEquals(1, this.barContainer.getResourceDescriptionCount());
+      this.assertGlobalDescriptionsAreUnaffected();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -208,6 +201,7 @@ public class LiveShadowedChunkedContainerTest {
       Assert.assertEquals(oldURI, IterableExtensions.<IEObjectDescription>head(this.fooContainer.getExportedObjects(LiveContainerTestLanguagePackage.Literals.MODEL, QualifiedName.create("baz"), false)).getEObjectURI().trimFragment());
       Assert.assertEquals(1, IterableExtensions.size(this.barContainer.getResourceDescriptions()));
       Assert.assertEquals(1, this.barContainer.getResourceDescriptionCount());
+      this.assertGlobalDescriptionsAreUnaffected();
       final URI newURI = URI.createURI(bazResource.getURI().toString().replace("/foo/", "/bar/"));
       bazResource.setURI(newURI);
       Assert.assertEquals(1, IterableExtensions.size(this.fooContainer.getResourceDescriptions()));
@@ -225,6 +219,7 @@ public class LiveShadowedChunkedContainerTest {
       Assert.assertEquals(2, IterableExtensions.size(this.barContainer.getResourceDescriptions()));
       Assert.assertEquals(2, this.barContainer.getResourceDescriptionCount());
       Assert.assertEquals(newURI, IterableExtensions.<IEObjectDescription>head(this.barContainer.getExportedObjects(LiveContainerTestLanguagePackage.Literals.MODEL, QualifiedName.create("baz"), false)).getEObjectURI().trimFragment());
+      this.assertGlobalDescriptionsAreUnaffected();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -256,6 +251,7 @@ public class LiveShadowedChunkedContainerTest {
       };
       Assert.assertEquals("baz", IterableExtensions.join(IterableExtensions.<String>sort(IterableExtensions.<IEObjectDescription, String>map(bazContainer.getExportedObjects(), _function_2)), ","));
       Assert.assertEquals(newURI, IterableExtensions.<IEObjectDescription>head(bazContainer.getExportedObjects(LiveContainerTestLanguagePackage.Literals.MODEL, QualifiedName.create("baz"), false)).getEObjectURI().trimFragment());
+      this.assertGlobalDescriptionsAreUnaffected();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -274,9 +270,23 @@ public class LiveShadowedChunkedContainerTest {
       Assert.assertEquals(0, IterableExtensions.size(this.fooContainer.getExportedObjects()));
       Assert.assertEquals(1, IterableExtensions.size(this.barContainer.getResourceDescriptions()));
       Assert.assertEquals(1, this.barContainer.getResourceDescriptionCount());
+      this.assertGlobalDescriptionsAreUnaffected();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private void assertGlobalDescriptionsAreUnaffected() {
+    IResourceDescriptions _globalDescriptions = this.liveShadowedChunkedResourceDescriptions.getGlobalDescriptions();
+    final Function1<IEObjectDescription, String> _function = (IEObjectDescription it) -> {
+      return it.getQualifiedName().toString();
+    };
+    Assert.assertEquals("foo", IterableExtensions.join(IterableExtensions.<IEObjectDescription, String>map(((ChunkedResourceDescriptions) _globalDescriptions).getContainer("foo").getExportedObjects(), _function), ","));
+    IResourceDescriptions _globalDescriptions_1 = this.liveShadowedChunkedResourceDescriptions.getGlobalDescriptions();
+    final Function1<IEObjectDescription, String> _function_1 = (IEObjectDescription it) -> {
+      return it.getQualifiedName().toString();
+    };
+    Assert.assertEquals("bar", IterableExtensions.join(IterableExtensions.<IEObjectDescription, String>map(((ChunkedResourceDescriptions) _globalDescriptions_1).getContainer("bar").getExportedObjects(), _function_1), ","));
   }
   
   private ResourceDescriptionsData createResourceDescriptionData(final Resource... resources) {

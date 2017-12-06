@@ -107,9 +107,7 @@ class LiveShadowedChunkedContainerTest {
 		assertTrue(barContainer.hasResourceDescription(barURI))
 		assertFalse(barContainer.hasResourceDescription(fooURI))
 		assertEquals(barURI, barContainer.getResourceDescription(barURI).URI)
-		
-		assertEquals('foo', (liveShadowedChunkedResourceDescriptions.globalDescriptions as ChunkedResourceDescriptions).getContainer('foo').getExportedObjects.map[qualifiedName.toString].join(','))
-		assertEquals('bar', (liveShadowedChunkedResourceDescriptions.globalDescriptions as ChunkedResourceDescriptions).getContainer('bar').getExportedObjects.map[qualifiedName.toString].join(','))
+		assertGlobalDescriptionsAreUnaffected()
 	}
 	
 	@Test 
@@ -120,12 +118,14 @@ class LiveShadowedChunkedContainerTest {
 		assertEquals('baz,foo', fooContainer.exportedObjects.map[qualifiedName.toString].sort.join(','))
 		assertEquals(1, barContainer.resourceDescriptions.size)
 		assertEquals(1, barContainer.resourceDescriptionCount)
+		assertGlobalDescriptionsAreUnaffected()
 		rs1.resources.remove(bazResource)
 		assertEquals(1, fooContainer.resourceDescriptions.size)
 		assertEquals(1, fooContainer.resourceDescriptionCount)
 		assertEquals('foo', fooContainer.exportedObjects.map[qualifiedName.toString].sort.join(','))
 		assertEquals(1, barContainer.resourceDescriptions.size)
 		assertEquals(1, barContainer.resourceDescriptionCount)
+		assertGlobalDescriptionsAreUnaffected()
 	}
 	
 	@Test 
@@ -138,6 +138,7 @@ class LiveShadowedChunkedContainerTest {
 		assertEquals(oldURI, fooContainer.getExportedObjects(MODEL, QualifiedName.create('baz'), false).head.EObjectURI.trimFragment)
 		assertEquals(1, barContainer.resourceDescriptions.size)
 		assertEquals(1, barContainer.resourceDescriptionCount)
+		assertGlobalDescriptionsAreUnaffected()
 		val newURI = URI.createURI(bazResource.URI.toString().replace('/foo/', '/bar/'))
 		bazResource.URI = newURI
 		assertEquals(1, fooContainer.resourceDescriptions.size)
@@ -149,6 +150,7 @@ class LiveShadowedChunkedContainerTest {
 		assertEquals(2, barContainer.resourceDescriptions.size)
 		assertEquals(2, barContainer.resourceDescriptionCount)
 		assertEquals(newURI, barContainer.getExportedObjects(MODEL, QualifiedName.create('baz'), false).head.EObjectURI.trimFragment)
+		assertGlobalDescriptionsAreUnaffected()
 	}
 	
 	@Test 
@@ -167,6 +169,7 @@ class LiveShadowedChunkedContainerTest {
 		assertEquals(1, bazContainer.resourceDescriptionCount)
 		assertEquals('baz', bazContainer.exportedObjects.map[qualifiedName.toString].sort.join(','))
 		assertEquals(newURI, bazContainer.getExportedObjects(MODEL, QualifiedName.create('baz'), false).head.EObjectURI.trimFragment)
+		assertGlobalDescriptionsAreUnaffected()
 	}
 	
 	@Test
@@ -178,7 +181,14 @@ class LiveShadowedChunkedContainerTest {
 		assertEquals(0, fooContainer.exportedObjects.size)
 		assertEquals(1, barContainer.resourceDescriptions.size)
 		assertEquals(1, barContainer.resourceDescriptionCount)
+		assertGlobalDescriptionsAreUnaffected()
 	}
+	
+	private def void assertGlobalDescriptionsAreUnaffected() {
+		assertEquals('foo', (liveShadowedChunkedResourceDescriptions.globalDescriptions as ChunkedResourceDescriptions).getContainer('foo').getExportedObjects.map[qualifiedName.toString].join(','))
+		assertEquals('bar', (liveShadowedChunkedResourceDescriptions.globalDescriptions as ChunkedResourceDescriptions).getContainer('bar').getExportedObjects.map[qualifiedName.toString].join(','))
+	}
+	
 	
 	private def createResourceDescriptionData(Resource... resources) {
 		new ResourceDescriptionsData(resources.map[
