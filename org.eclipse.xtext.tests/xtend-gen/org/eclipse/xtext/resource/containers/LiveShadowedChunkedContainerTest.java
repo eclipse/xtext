@@ -65,6 +65,8 @@ public class LiveShadowedChunkedContainerTest {
   @Inject
   private Provider<LiveShadowedChunkedResourceDescriptions> provider;
   
+  private WorkspaceConfig workspaceConfig;
+  
   private ProjectConfig fooProject;
   
   private ProjectConfig barProject;
@@ -79,13 +81,16 @@ public class LiveShadowedChunkedContainerTest {
   
   private LiveShadowedChunkedContainer barContainer;
   
+  private LiveShadowedChunkedResourceDescriptions liveShadowedChunkedResourceDescriptions;
+  
   @Before
   public void setUp() {
     try {
-      final WorkspaceConfig workspaceConfig = new WorkspaceConfig();
-      ProjectConfig _projectConfig = new ProjectConfig("foo", workspaceConfig);
+      WorkspaceConfig _workspaceConfig = new WorkspaceConfig();
+      this.workspaceConfig = _workspaceConfig;
+      ProjectConfig _projectConfig = new ProjectConfig("foo", this.workspaceConfig);
       this.fooProject = _projectConfig;
-      ProjectConfig _projectConfig_1 = new ProjectConfig("bar", workspaceConfig);
+      ProjectConfig _projectConfig_1 = new ProjectConfig("bar", this.workspaceConfig);
       this.barProject = _projectConfig_1;
       final XtextResourceSet rs0 = this.resourceSetProvider.get();
       this.fooURI = IterableExtensions.<SourceFolder>head(this.fooProject.getSourceFolders()).getPath().trimSegments(1).appendSegment("foo.livecontainertestlanguage");
@@ -98,11 +103,11 @@ public class LiveShadowedChunkedContainerTest {
       this.rs1 = this.resourceSetProvider.get();
       new ChunkedResourceDescriptions(chunks, this.rs1);
       ProjectConfigAdapter.install(this.rs1, this.fooProject);
-      final LiveShadowedChunkedResourceDescriptions liveShadowedChunkedResourceDescriptions = this.provider.get();
-      liveShadowedChunkedResourceDescriptions.setContext(this.rs1);
-      LiveShadowedChunkedContainer _liveShadowedChunkedContainer = new LiveShadowedChunkedContainer(liveShadowedChunkedResourceDescriptions, "foo");
+      this.liveShadowedChunkedResourceDescriptions = this.provider.get();
+      this.liveShadowedChunkedResourceDescriptions.setContext(this.rs1);
+      LiveShadowedChunkedContainer _liveShadowedChunkedContainer = new LiveShadowedChunkedContainer(this.liveShadowedChunkedResourceDescriptions, "foo");
       this.fooContainer = _liveShadowedChunkedContainer;
-      LiveShadowedChunkedContainer _liveShadowedChunkedContainer_1 = new LiveShadowedChunkedContainer(liveShadowedChunkedResourceDescriptions, "bar");
+      LiveShadowedChunkedContainer _liveShadowedChunkedContainer_1 = new LiveShadowedChunkedContainer(this.liveShadowedChunkedResourceDescriptions, "bar");
       this.barContainer = _liveShadowedChunkedContainer_1;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -153,9 +158,9 @@ public class LiveShadowedChunkedContainerTest {
   }
   
   @Test
-  public void testAddResource() {
+  public void testAddRemoveResource() {
     try {
-      this._parseHelper.parse("baz", IterableExtensions.<SourceFolder>head(this.fooProject.getSourceFolders()).getPath().trimSegments(1).appendSegment("baz.livecontainertestlanguage"), this.rs1);
+      final Resource bazResource = this._parseHelper.parse("baz", IterableExtensions.<SourceFolder>head(this.fooProject.getSourceFolders()).getPath().trimSegments(1).appendSegment("baz.livecontainertestlanguage"), this.rs1).eResource();
       Assert.assertEquals(2, IterableExtensions.size(this.fooContainer.getResourceDescriptions()));
       Assert.assertEquals(2, this.fooContainer.getResourceDescriptionCount());
       final Function1<IEObjectDescription, String> _function = (IEObjectDescription it) -> {
@@ -164,6 +169,82 @@ public class LiveShadowedChunkedContainerTest {
       Assert.assertEquals("baz,foo", IterableExtensions.join(IterableExtensions.<String>sort(IterableExtensions.<IEObjectDescription, String>map(this.fooContainer.getExportedObjects(), _function)), ","));
       Assert.assertEquals(1, IterableExtensions.size(this.barContainer.getResourceDescriptions()));
       Assert.assertEquals(1, this.barContainer.getResourceDescriptionCount());
+      this.rs1.getResources().remove(bazResource);
+      Assert.assertEquals(1, IterableExtensions.size(this.fooContainer.getResourceDescriptions()));
+      Assert.assertEquals(1, this.fooContainer.getResourceDescriptionCount());
+      final Function1<IEObjectDescription, String> _function_1 = (IEObjectDescription it) -> {
+        return it.getQualifiedName().toString();
+      };
+      Assert.assertEquals("foo", IterableExtensions.join(IterableExtensions.<String>sort(IterableExtensions.<IEObjectDescription, String>map(this.fooContainer.getExportedObjects(), _function_1)), ","));
+      Assert.assertEquals(1, IterableExtensions.size(this.barContainer.getResourceDescriptions()));
+      Assert.assertEquals(1, this.barContainer.getResourceDescriptionCount());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testMoveResourceBetweenContainers() {
+    try {
+      final URI oldURI = IterableExtensions.<SourceFolder>head(this.fooProject.getSourceFolders()).getPath().trimSegments(1).appendSegment("baz.livecontainertestlanguage");
+      final Resource bazResource = this._parseHelper.parse("baz", oldURI, this.rs1).eResource();
+      Assert.assertEquals(2, IterableExtensions.size(this.fooContainer.getResourceDescriptions()));
+      Assert.assertEquals(2, this.fooContainer.getResourceDescriptionCount());
+      final Function1<IEObjectDescription, String> _function = (IEObjectDescription it) -> {
+        return it.getQualifiedName().toString();
+      };
+      Assert.assertEquals("baz,foo", IterableExtensions.join(IterableExtensions.<String>sort(IterableExtensions.<IEObjectDescription, String>map(this.fooContainer.getExportedObjects(), _function)), ","));
+      Assert.assertEquals(oldURI, IterableExtensions.<IEObjectDescription>head(this.fooContainer.getExportedObjects(LiveContainerTestLanguagePackage.Literals.MODEL, QualifiedName.create("baz"), false)).getEObjectURI().trimFragment());
+      Assert.assertEquals(1, IterableExtensions.size(this.barContainer.getResourceDescriptions()));
+      Assert.assertEquals(1, this.barContainer.getResourceDescriptionCount());
+      final URI newURI = URI.createURI(bazResource.getURI().toString().replace("/foo/", "/bar/"));
+      bazResource.setURI(newURI);
+      Assert.assertEquals(1, IterableExtensions.size(this.fooContainer.getResourceDescriptions()));
+      Assert.assertEquals(1, this.fooContainer.getResourceDescriptionCount());
+      final Function1<IEObjectDescription, String> _function_1 = (IEObjectDescription it) -> {
+        return it.getQualifiedName().toString();
+      };
+      Assert.assertEquals("foo", IterableExtensions.join(IterableExtensions.<String>sort(IterableExtensions.<IEObjectDescription, String>map(this.fooContainer.getExportedObjects(), _function_1)), ","));
+      Assert.assertEquals(1, IterableExtensions.size(this.fooContainer.getResourceDescriptions()));
+      Assert.assertEquals(1, this.fooContainer.getResourceDescriptionCount());
+      final Function1<IEObjectDescription, String> _function_2 = (IEObjectDescription it) -> {
+        return it.getQualifiedName().toString();
+      };
+      Assert.assertEquals("bar,baz", IterableExtensions.join(IterableExtensions.<String>sort(IterableExtensions.<IEObjectDescription, String>map(this.barContainer.getExportedObjects(), _function_2)), ","));
+      Assert.assertEquals(2, IterableExtensions.size(this.barContainer.getResourceDescriptions()));
+      Assert.assertEquals(2, this.barContainer.getResourceDescriptionCount());
+      Assert.assertEquals(newURI, IterableExtensions.<IEObjectDescription>head(this.barContainer.getExportedObjects(LiveContainerTestLanguagePackage.Literals.MODEL, QualifiedName.create("baz"), false)).getEObjectURI().trimFragment());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAddToNewContainer() {
+    try {
+      final ProjectConfig bazProject = new ProjectConfig("baz", this.workspaceConfig);
+      final URI newURI = IterableExtensions.<SourceFolder>head(bazProject.getSourceFolders()).getPath().trimSegments(1).appendSegment("baz.livecontainertestlanguage");
+      this._parseHelper.parse("baz", newURI, this.rs1);
+      final LiveShadowedChunkedContainer bazContainer = new LiveShadowedChunkedContainer(this.liveShadowedChunkedResourceDescriptions, "baz");
+      Assert.assertEquals(1, IterableExtensions.size(this.fooContainer.getResourceDescriptions()));
+      Assert.assertEquals(1, this.fooContainer.getResourceDescriptionCount());
+      final Function1<IEObjectDescription, String> _function = (IEObjectDescription it) -> {
+        return it.getQualifiedName().toString();
+      };
+      Assert.assertEquals("foo", IterableExtensions.join(IterableExtensions.<String>sort(IterableExtensions.<IEObjectDescription, String>map(this.fooContainer.getExportedObjects(), _function)), ","));
+      Assert.assertEquals(1, IterableExtensions.size(this.barContainer.getResourceDescriptions()));
+      Assert.assertEquals(1, this.barContainer.getResourceDescriptionCount());
+      final Function1<IEObjectDescription, String> _function_1 = (IEObjectDescription it) -> {
+        return it.getQualifiedName().toString();
+      };
+      Assert.assertEquals("bar", IterableExtensions.join(IterableExtensions.<String>sort(IterableExtensions.<IEObjectDescription, String>map(this.barContainer.getExportedObjects(), _function_1)), ","));
+      Assert.assertEquals(1, IterableExtensions.size(bazContainer.getResourceDescriptions()));
+      Assert.assertEquals(1, bazContainer.getResourceDescriptionCount());
+      final Function1<IEObjectDescription, String> _function_2 = (IEObjectDescription it) -> {
+        return it.getQualifiedName().toString();
+      };
+      Assert.assertEquals("baz", IterableExtensions.join(IterableExtensions.<String>sort(IterableExtensions.<IEObjectDescription, String>map(bazContainer.getExportedObjects(), _function_2)), ","));
+      Assert.assertEquals(newURI, IterableExtensions.<IEObjectDescription>head(bazContainer.getExportedObjects(LiveContainerTestLanguagePackage.Literals.MODEL, QualifiedName.create("baz"), false)).getEObjectURI().trimFragment());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

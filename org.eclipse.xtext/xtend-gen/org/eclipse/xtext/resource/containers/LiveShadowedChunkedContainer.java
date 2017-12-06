@@ -9,6 +9,7 @@ package org.eclipse.xtext.resource.containers;
 
 import com.google.common.annotations.Beta;
 import com.google.common.collect.Iterables;
+import java.util.Collections;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -65,7 +67,15 @@ public class LiveShadowedChunkedContainer implements IContainer {
   }
   
   protected ResourceDescriptionsData getChunk() {
-    return this.getChunkedResourceDescriptions().getContainer(this.containerName);
+    ResourceDescriptionsData _elvis = null;
+    ResourceDescriptionsData _container = this.getChunkedResourceDescriptions().getContainer(this.containerName);
+    if (_container != null) {
+      _elvis = _container;
+    } else {
+      ResourceDescriptionsData _resourceDescriptionsData = new ResourceDescriptionsData(Collections.<IResourceDescription>unmodifiableList(CollectionLiterals.<IResourceDescription>newArrayList()));
+      _elvis = _resourceDescriptionsData;
+    }
+    return _elvis;
   }
   
   protected Iterable<IResourceDescription> getContainedLocalDescriptions() {

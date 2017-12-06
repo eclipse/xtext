@@ -52,6 +52,7 @@ class LiveShadowedChunkedContainerTest {
 	@Inject IResourceDescription.Manager resourceDescriptionManager
 	@Inject Provider<LiveShadowedChunkedResourceDescriptions> provider
 	
+	WorkspaceConfig workspaceConfig
 	ProjectConfig fooProject
 	ProjectConfig barProject
 	
@@ -63,9 +64,11 @@ class LiveShadowedChunkedContainerTest {
 	LiveShadowedChunkedContainer fooContainer
 	LiveShadowedChunkedContainer barContainer
 	
+	LiveShadowedChunkedResourceDescriptions liveShadowedChunkedResourceDescriptions
+	
 	@Before
 	def void setUp() {
-		val workspaceConfig = new WorkspaceConfig()
+		workspaceConfig = new WorkspaceConfig()
 		fooProject = new ProjectConfig('foo', workspaceConfig)
 		barProject = new ProjectConfig('bar', workspaceConfig)
 		val rs0 = resourceSetProvider.get
@@ -78,7 +81,7 @@ class LiveShadowedChunkedContainerTest {
 		rs1 = resourceSetProvider.get
 		new ChunkedResourceDescriptions(chunks, rs1)
 		ProjectConfigAdapter.install(rs1, fooProject)
-		val liveShadowedChunkedResourceDescriptions = provider.get
+		liveShadowedChunkedResourceDescriptions = provider.get
 		liveShadowedChunkedResourceDescriptions.context = rs1
 		fooContainer = new LiveShadowedChunkedContainer(liveShadowedChunkedResourceDescriptions, 'foo')
 		barContainer = new LiveShadowedChunkedContainer(liveShadowedChunkedResourceDescriptions, 'bar')
@@ -107,13 +110,60 @@ class LiveShadowedChunkedContainerTest {
 	}
 	
 	@Test 
-	def testAddResource() {
-		'baz'.parse(fooProject.sourceFolders.head.path.trimSegments(1).appendSegment('baz.livecontainertestlanguage'), rs1)
+	def testAddRemoveResource() {
+		val bazResource = 'baz'.parse(fooProject.sourceFolders.head.path.trimSegments(1).appendSegment('baz.livecontainertestlanguage'), rs1).eResource
 		assertEquals(2, fooContainer.resourceDescriptions.size)
 		assertEquals(2, fooContainer.resourceDescriptionCount)
 		assertEquals('baz,foo', fooContainer.exportedObjects.map[qualifiedName.toString].sort.join(','))
 		assertEquals(1, barContainer.resourceDescriptions.size)
 		assertEquals(1, barContainer.resourceDescriptionCount)
+		rs1.resources.remove(bazResource)
+		assertEquals(1, fooContainer.resourceDescriptions.size)
+		assertEquals(1, fooContainer.resourceDescriptionCount)
+		assertEquals('foo', fooContainer.exportedObjects.map[qualifiedName.toString].sort.join(','))
+		assertEquals(1, barContainer.resourceDescriptions.size)
+		assertEquals(1, barContainer.resourceDescriptionCount)
+	}
+	
+	@Test 
+	def testMoveResourceBetweenContainers() {
+		val oldURI = fooProject.sourceFolders.head.path.trimSegments(1).appendSegment('baz.livecontainertestlanguage')
+		val bazResource = 'baz'.parse(oldURI, rs1).eResource
+		assertEquals(2, fooContainer.resourceDescriptions.size)
+		assertEquals(2, fooContainer.resourceDescriptionCount)
+		assertEquals('baz,foo', fooContainer.exportedObjects.map[qualifiedName.toString].sort.join(','))
+		assertEquals(oldURI, fooContainer.getExportedObjects(MODEL, QualifiedName.create('baz'), false).head.EObjectURI.trimFragment)
+		assertEquals(1, barContainer.resourceDescriptions.size)
+		assertEquals(1, barContainer.resourceDescriptionCount)
+		val newURI = URI.createURI(bazResource.URI.toString().replace('/foo/', '/bar/'))
+		bazResource.URI = newURI
+		assertEquals(1, fooContainer.resourceDescriptions.size)
+		assertEquals(1, fooContainer.resourceDescriptionCount)
+		assertEquals('foo', fooContainer.exportedObjects.map[qualifiedName.toString].sort.join(','))
+		assertEquals(1, fooContainer.resourceDescriptions.size)
+		assertEquals(1, fooContainer.resourceDescriptionCount)
+		assertEquals('bar,baz', barContainer.exportedObjects.map[qualifiedName.toString].sort.join(','))
+		assertEquals(2, barContainer.resourceDescriptions.size)
+		assertEquals(2, barContainer.resourceDescriptionCount)
+		assertEquals(newURI, barContainer.getExportedObjects(MODEL, QualifiedName.create('baz'), false).head.EObjectURI.trimFragment)
+	}
+	
+	@Test 
+	def testAddToNewContainer() {
+		val bazProject = new ProjectConfig('baz', workspaceConfig)
+		val newURI = bazProject.sourceFolders.head.path.trimSegments(1).appendSegment('baz.livecontainertestlanguage')
+		'baz'.parse(newURI, rs1)
+		val bazContainer = new LiveShadowedChunkedContainer(liveShadowedChunkedResourceDescriptions, 'baz')
+		assertEquals(1, fooContainer.resourceDescriptions.size)
+		assertEquals(1, fooContainer.resourceDescriptionCount)
+		assertEquals('foo', fooContainer.exportedObjects.map[qualifiedName.toString].sort.join(','))
+		assertEquals(1, barContainer.resourceDescriptions.size)
+		assertEquals(1, barContainer.resourceDescriptionCount)
+		assertEquals('bar', barContainer.exportedObjects.map[qualifiedName.toString].sort.join(','))
+		assertEquals(1, bazContainer.resourceDescriptions.size)
+		assertEquals(1, bazContainer.resourceDescriptionCount)
+		assertEquals('baz', bazContainer.exportedObjects.map[qualifiedName.toString].sort.join(','))
+		assertEquals(newURI, bazContainer.getExportedObjects(MODEL, QualifiedName.create('baz'), false).head.EObjectURI.trimFragment)
 	}
 	
 	@Test
