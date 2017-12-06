@@ -15,8 +15,8 @@ import org.eclipse.swt.widgets.Shell;
 import com.google.inject.Inject;
 
 /**
- * A utility class to ask use questions and remember his decision.<br>
- * The settings a stored in {@link IDialogSettings} of your language UIPlugin.
+ * A utility class to ask a user questions and remember his decision.<br>
+ * The settings are stored in {@link IDialogSettings} of your language UIPlugin.
  * 
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.8
@@ -57,18 +57,18 @@ public class DontAskAgainDialogs {
 	}
 
 	/**
-	 * Opens a {@link MessageDialogWithToggle} and stores the answer, if use activate the corresponding checkbox.
+	 * Opens a {@link MessageDialogWithToggle} and stores the answer, if user activated the corresponding checkbox.
 	 *
 	 * @param question
 	 *            The question to ask.
 	 * @param dialogTitle
 	 *            Title
 	 * @param storeKey
-	 *            the key used to store the decision in {@link IDialogSettings}, also used to read them
+	 *            The key used to store the decision in {@link IDialogSettings}, also used to read the
 	 *            {@link #getUserDecision(String)}
 	 * @param shell
 	 *            the parent {@link Shell} of the dialog
-	 * @return User answer one of {@link IDialogConstants#YES_ID}, {@link IDialogConstants#NO_ID} or
+	 * @return User answer, one of {@link IDialogConstants#YES_ID}, {@link IDialogConstants#NO_ID} or
 	 *         {@link IDialogConstants#CANCEL_ID}
 	 */
 	public int askUser(String question, String dialogTitle, String storeKey, Shell shell) {
@@ -88,7 +88,7 @@ public class DontAskAgainDialogs {
 
 	/**
 	 * Rewrites the {@link #DONT_ASK_AGAIN_DIALOG_PREFIX} section in {@link IDialogSettings} for the current language.<br>
-	 * All the user decisions will be reseted.
+	 * All the user decisions will be reset.
 	 */
 	public void forgetAllUserDecisions() {
 		dialogSettings.addNewSection(DONT_ASK_AGAIN_DIALOG_PREFIX);
