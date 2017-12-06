@@ -1233,7 +1233,8 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return tNL;
 	}
 	
-	//@ Override terminal WS:
+	//@Override
+	//terminal WS:
 	//	' ' | '\t';
 	public TerminalRule getWSRule() {
 		return tWS;

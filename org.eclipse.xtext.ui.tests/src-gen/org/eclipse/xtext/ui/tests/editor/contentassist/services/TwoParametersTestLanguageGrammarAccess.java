@@ -107,7 +107,8 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Assignment cScenarioAssignment_1_13_1 = (Assignment)cGroup_1_13.eContents().get(1);
 		private final RuleCall cScenarioScenario10ParserRuleCall_1_13_1_0 = (RuleCall)cScenarioAssignment_1_13_1.eContents().get(0);
 		
-		//@ Override ParserRuleParameters:
+		//@Override
+		//ParserRuleParameters:
 		//	{ParserRuleParameters} ('#1' scenario=Scenario6<true,true> | '#2' scenario=Scenario6<false,false> | '#3'
 		//	scenario=Scenario7<true,true> | '#4' scenario=Scenario7<false,true> | => ('#5' scenario=Scenario7<true,true>) | =>
 		//	('#6' scenario=Scenario7<false,false>) | '#7' scenario=Scenario8<true,true> | '#8' scenario=Scenario8<false,true> |
@@ -662,7 +663,8 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	
-	//@ Override ParserRuleParameters:
+	//@Override
+	//ParserRuleParameters:
 	//	{ParserRuleParameters} ('#1' scenario=Scenario6<true,true> | '#2' scenario=Scenario6<false,false> | '#3'
 	//	scenario=Scenario7<true,true> | '#4' scenario=Scenario7<false,true> | => ('#5' scenario=Scenario7<true,true>) | =>
 	//	('#6' scenario=Scenario7<false,false>) | '#7' scenario=Scenario8<true,true> | '#8' scenario=Scenario8<false,true> |

@@ -215,6 +215,12 @@
 	</extension>
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package 
+			uri = "http://www.eclipse.org/2017/tmf/xtext/parameterizedExpressions"
+			class = "org.eclipse.xtext.ui.tests.editor.contentassist.parameterizedExpressionsTestLanguage.ParameterizedExpressionsTestLanguagePackage"
+			genModel = "model/generated/ParameterizedExpressionsTestLanguage.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
 			uri = "http://www.eclipse.org/2010/tmf/xtext/outline/OutlineTest"
 			class = "org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestPackage"
 			genModel = "model/generated/OutlineTestLanguage.genmodel" />
@@ -494,6 +500,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="importuriuitestlanguage"
+			id="org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage.contenttype"
+			name="ImportUriUiTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -710,6 +725,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="twocontextstestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage.contenttype"
+			name="TwoContextsTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -928,6 +952,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug286935testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage.contenttype"
+			name="Bug286935TestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -1144,6 +1177,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug287941testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.contenttype"
+			name="Bug287941TestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -1362,6 +1404,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug288734testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.contenttype"
+			name="Bug288734TestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -1578,6 +1629,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug288760testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.contenttype"
+			name="Bug288760TestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -1796,6 +1856,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug289187testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.contenttype"
+			name="Bug289187TestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -2012,6 +2081,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug291022testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage.contenttype"
+			name="Bug291022TestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -2230,6 +2308,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug303200testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.contenttype"
+			name="Bug303200TestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -2446,6 +2533,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug304681testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage.contenttype"
+			name="Bug304681TestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -2664,6 +2760,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug307519testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.contenttype"
+			name="Bug307519TestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -2880,6 +2985,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug309949testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.contenttype"
+			name="Bug309949TestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -3098,6 +3212,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug332217testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.contenttype"
+			name="Bug332217TestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -3314,6 +3437,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug348427testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.contenttype"
+			name="Bug348427TestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -3532,6 +3664,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug348199testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.contenttype"
+			name="Bug348199TestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -3748,6 +3889,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug360834testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.contenttype"
+			name="Bug360834TestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -3966,6 +4116,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug347012testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.contenttype"
+			name="Bug347012TestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -4182,6 +4341,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug381381testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.contenttype"
+			name="Bug381381TestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -4400,6 +4568,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="gh341testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.GH341TestLanguage.contenttype"
+			name="GH341TestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -4616,6 +4793,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="backtrackingcontentassisttestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.contenttype"
+			name="BacktrackingContentAssistTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -4834,6 +5020,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="contentassistcontexttestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.contenttype"
+			name="ContentAssistContextTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -5050,6 +5245,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="contentassistcustomizingtestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage.contenttype"
+			name="ContentAssistCustomizingTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -5268,6 +5472,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="crossreferenceproposaltestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage.contenttype"
+			name="CrossReferenceProposalTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -5484,6 +5697,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="datatyperuletestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.contenttype"
+			name="DatatypeRuleTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -5702,6 +5924,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="lookaheadcontentassisttestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.contenttype"
+			name="LookAheadContentAssistTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -5918,6 +6149,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="domainmodeltestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.contenttype"
+			name="DomainModelTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -6136,6 +6376,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="unorderedgroupstestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.contenttype"
+			name="UnorderedGroupsTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -6352,6 +6601,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="parameterstestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguage.contenttype"
+			name="ParametersTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -6570,6 +6828,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="parameterstestlanguageex"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguageEx.contenttype"
+			name="ParametersTestLanguageEx File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -6787,6 +7054,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="twoparameterstestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.TwoParametersTestLanguage.contenttype"
+			name="TwoParametersTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -6799,6 +7075,232 @@
 		<resourceServiceProvider
 			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoParametersTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
 			uriExtension="twoparameterstestlanguage">
+		</resourceServiceProvider>
+	</extension>
+	<extension
+		point="org.eclipse.ui.editors">
+		<editor
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="parameterizedexpressionstestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage"
+			name="ParameterizedExpressionsTestLanguage Editor">
+		</editor>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+			commandId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.validate">
+		<activeWhen>
+			<reference
+					definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.Editor.opened">
+			</reference>
+		</activeWhen>
+		</handler>
+		<!-- copy qualified name -->
+		<handler
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+			<activeWhen>
+				<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.Editor.opened" />
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+			<activeWhen>
+				<and>
+					<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.XtextEditor.opened" />
+					<iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.expressions.definitions">
+		<definition id="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.Editor.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+		<definition id="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.XtextEditor.opened">
+			<and>
+				<reference definitionId="isXtextEditorActive"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+	</extension>
+	<extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage"
+			name="ParameterizedExpressionsTestLanguage">
+			<keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_ParameterizedExpressionsTestLanguage"/>
+		</page>
+		<page
+			category="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage"
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.coloring"
+			name="Syntax Coloring">
+			<keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_ParameterizedExpressionsTestLanguage"/>
+		</page>
+		<page
+			category="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage"
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.templates"
+			name="Templates">
+			<keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_ParameterizedExpressionsTestLanguage"/>
+		</page>
+	</extension>
+	<extension
+			point="org.eclipse.ui.propertyPages">
+		<page
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage"
+			name="ParameterizedExpressionsTestLanguage">
+			<keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_ParameterizedExpressionsTestLanguage"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_ParameterizedExpressionsTestLanguage"
+			label="ParameterizedExpressionsTestLanguage"/>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+	<command
+			description="Trigger expensive validation"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.validate"
+			name="Validate">
+	</command>
+	<!-- copy qualified name -->
+	<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+	</command>
+	<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+	</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			 <command
+				 commandId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.validate"
+				 style="push"
+				 tooltip="Trigger expensive validation">
+			<visibleWhen checkEnabled="false">
+				<reference
+					definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.Editor.opened">
+				</reference>
+			</visibleWhen>
+		</command>
+		</menuContribution>
+		<!-- copy qualified name -->
+		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="menu:edit?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<and>
+						<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+			commandId="org.eclipse.xtext.ui.editor.FindReferences">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="parameterizedexpressionstestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.contenttype"
+			name="ParameterizedExpressionsTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
+	<!-- adding resource factories -->
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="parameterizedexpressionstestlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+		<resourceServiceProvider
+			class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			uriExtension="parameterizedexpressionstestlanguage">
 		</resourceServiceProvider>
 	</extension>
 	<extension
@@ -7003,6 +7505,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="outlinetestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage.contenttype"
+			name="OutlineTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -7221,6 +7732,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="keywordsuitestlanguage"
+			id="org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage.contenttype"
+			name="KeywordsUiTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -7437,6 +7957,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="contentassisttestlanguage"
+			id="org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage.contenttype"
+			name="ContentAssistTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -7655,6 +8184,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="referencegrammaruitestlanguage"
+			id="org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage.contenttype"
+			name="ReferenceGrammarUiTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -7871,6 +8409,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="encodinguitestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.contenttype"
+			name="EncodingUiTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -8089,6 +8636,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="enumrulesuitestlanguage"
+			id="org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage.contenttype"
+			name="EnumRulesUiTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -8305,6 +8861,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="testlanguage"
+			id="org.eclipse.xtext.ui.tests.TestLanguage.contenttype"
+			name="TestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -8545,6 +9110,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="foldingtestlanguage"
+			id="org.eclipse.xtext.ui.tests.FoldingTestLanguage.contenttype"
+			name="FoldingTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -8784,6 +9358,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bmtestlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage.contenttype"
+			name="BmTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -9022,6 +9605,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="quickfixcrossreftestlanguage"
+			id="org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.contenttype"
+			name="QuickfixCrossrefTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -9289,6 +9881,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="refactoringtestlanguage"
+			id="org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.contenttype"
+			name="RefactoringTestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension
@@ -9563,6 +10164,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="referringtestlanguage"
+			id="org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage.contenttype"
+			name="ReferringTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -9835,6 +10445,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="bug377311testlanguage"
+			id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.contenttype"
+			name="Bug377311TestLanguage File"
+			priority="normal">
+		</content-type>
 	</extension>
 	<!-- adding resource factories -->
 	<extension

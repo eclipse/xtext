@@ -6,7 +6,6 @@ package org.eclipse.xtext.ui.tests.internal;
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import java.util.Collections;
 import java.util.Map;
 import org.apache.log4j.Logger;
@@ -41,6 +40,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguageR
 import org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.GH341TestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguageRuntimeModule;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguageExRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguageRuntimeModule;
@@ -71,6 +71,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DatatypeRuleTestLangua
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DomainModelTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.GH341TestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.LookAheadContentAssistTestLanguageUiModule;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParameterizedExpressionsTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParametersTestLanguageExUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ParametersTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoContextsTestLanguageUiModule;
@@ -138,6 +139,7 @@ public class TestsActivator extends AbstractUIPlugin {
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_PARAMETERSTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_PARAMETERSTESTLANGUAGEEX = "org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguageEx";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_TWOPARAMETERSTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.TwoParametersTestLanguage";
+	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_PARAMETERIZEDEXPRESSIONSTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_OUTLINE_OUTLINETESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_PARSER_KEYWORDS_KEYWORDSUITESTLANGUAGE = "org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGES_CONTENTASSISTTESTLANGUAGE = "org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage";
@@ -187,10 +189,10 @@ public class TestsActivator extends AbstractUIPlugin {
 	
 	protected Injector createInjector(String language) {
 		try {
-			Module runtimeModule = getRuntimeModule(language);
-			Module sharedStateModule = getSharedStateModule();
-			Module uiModule = getUiModule(language);
-			Module mergedModule = Modules2.mixin(runtimeModule, sharedStateModule, uiModule);
+			com.google.inject.Module runtimeModule = getRuntimeModule(language);
+			com.google.inject.Module sharedStateModule = getSharedStateModule();
+			com.google.inject.Module uiModule = getUiModule(language);
+			com.google.inject.Module mergedModule = Modules2.mixin(runtimeModule, sharedStateModule, uiModule);
 			return Guice.createInjector(mergedModule);
 		} catch (Exception e) {
 			logger.error("Failed to create injector for " + language);
@@ -199,7 +201,7 @@ public class TestsActivator extends AbstractUIPlugin {
 		}
 	}
 	
-	protected Module getRuntimeModule(String grammar) {
+	protected com.google.inject.Module getRuntimeModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_LINKING_IMPORTURIUITESTLANGUAGE.equals(grammar)) {
 			return new ImportUriUiTestLanguageRuntimeModule();
 		}
@@ -290,6 +292,9 @@ public class TestsActivator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_TWOPARAMETERSTESTLANGUAGE.equals(grammar)) {
 			return new TwoParametersTestLanguageRuntimeModule();
 		}
+		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_PARAMETERIZEDEXPRESSIONSTESTLANGUAGE.equals(grammar)) {
+			return new ParameterizedExpressionsTestLanguageRuntimeModule();
+		}
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_OUTLINE_OUTLINETESTLANGUAGE.equals(grammar)) {
 			return new OutlineTestLanguageRuntimeModule();
 		}
@@ -332,7 +337,7 @@ public class TestsActivator extends AbstractUIPlugin {
 		throw new IllegalArgumentException(grammar);
 	}
 	
-	protected Module getUiModule(String grammar) {
+	protected com.google.inject.Module getUiModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_LINKING_IMPORTURIUITESTLANGUAGE.equals(grammar)) {
 			return new ImportUriUiTestLanguageUiModule(this);
 		}
@@ -423,6 +428,9 @@ public class TestsActivator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_TWOPARAMETERSTESTLANGUAGE.equals(grammar)) {
 			return new TwoParametersTestLanguageUiModule(this);
 		}
+		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_PARAMETERIZEDEXPRESSIONSTESTLANGUAGE.equals(grammar)) {
+			return new ParameterizedExpressionsTestLanguageUiModule(this);
+		}
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_OUTLINE_OUTLINETESTLANGUAGE.equals(grammar)) {
 			return new OutlineTestLanguageUiModule(this);
 		}
@@ -465,7 +473,7 @@ public class TestsActivator extends AbstractUIPlugin {
 		throw new IllegalArgumentException(grammar);
 	}
 	
-	protected Module getSharedStateModule() {
+	protected com.google.inject.Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
 	
