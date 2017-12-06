@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.LiveContainerTestLanguageInjectorProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.containers.LiveShadowedChunkedContainer;
@@ -152,6 +153,16 @@ public class LiveShadowedChunkedContainerTest {
       Assert.assertTrue(this.barContainer.hasResourceDescription(this.barURI));
       Assert.assertFalse(this.barContainer.hasResourceDescription(this.fooURI));
       Assert.assertEquals(this.barURI, this.barContainer.getResourceDescription(this.barURI).getURI());
+      IResourceDescriptions _globalDescriptions = this.liveShadowedChunkedResourceDescriptions.getGlobalDescriptions();
+      final Function1<IEObjectDescription, String> _function_6 = (IEObjectDescription it) -> {
+        return it.getQualifiedName().toString();
+      };
+      Assert.assertEquals("foo", IterableExtensions.join(IterableExtensions.<IEObjectDescription, String>map(((ChunkedResourceDescriptions) _globalDescriptions).getContainer("foo").getExportedObjects(), _function_6), ","));
+      IResourceDescriptions _globalDescriptions_1 = this.liveShadowedChunkedResourceDescriptions.getGlobalDescriptions();
+      final Function1<IEObjectDescription, String> _function_7 = (IEObjectDescription it) -> {
+        return it.getQualifiedName().toString();
+      };
+      Assert.assertEquals("bar", IterableExtensions.join(IterableExtensions.<IEObjectDescription, String>map(((ChunkedResourceDescriptions) _globalDescriptions_1).getContainer("bar").getExportedObjects(), _function_7), ","));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

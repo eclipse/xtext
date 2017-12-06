@@ -107,6 +107,9 @@ class LiveShadowedChunkedContainerTest {
 		assertTrue(barContainer.hasResourceDescription(barURI))
 		assertFalse(barContainer.hasResourceDescription(fooURI))
 		assertEquals(barURI, barContainer.getResourceDescription(barURI).URI)
+		
+		assertEquals('foo', (liveShadowedChunkedResourceDescriptions.globalDescriptions as ChunkedResourceDescriptions).getContainer('foo').getExportedObjects.map[qualifiedName.toString].join(','))
+		assertEquals('bar', (liveShadowedChunkedResourceDescriptions.globalDescriptions as ChunkedResourceDescriptions).getContainer('bar').getExportedObjects.map[qualifiedName.toString].join(','))
 	}
 	
 	@Test 
