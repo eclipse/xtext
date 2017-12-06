@@ -19,6 +19,7 @@ import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.LiveShadowedChunkedResourceDescriptions
 import org.eclipse.xtext.workspace.IProjectConfig
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -50,7 +51,7 @@ class LiveShadowedChunkedContainer implements IContainer {
 	}
 	
 	protected def getChunk() {
-		chunkedResourceDescriptions.getContainer(containerName) 
+		chunkedResourceDescriptions.getContainer(containerName) ?: new ResourceDescriptionsData(#[])
 	}
 	
 	protected def getContainedLocalDescriptions() {
