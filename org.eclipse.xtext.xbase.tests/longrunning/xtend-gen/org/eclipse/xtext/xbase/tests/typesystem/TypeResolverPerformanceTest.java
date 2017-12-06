@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import java.util.concurrent.TimeUnit;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.tests.typesystem.BatchTypeResolverTest;
@@ -24,7 +25,7 @@ import org.junit.rules.Timeout;
 @SuppressWarnings("all")
 public class TypeResolverPerformanceTest extends BatchTypeResolverTest {
   @Rule
-  public final Timeout timeout = new Timeout(100);
+  public final Timeout timeout = new Timeout(100, TimeUnit.MILLISECONDS);
   
   @Override
   public LightweightTypeReference resolvesTo(final String expression, final String type) {
