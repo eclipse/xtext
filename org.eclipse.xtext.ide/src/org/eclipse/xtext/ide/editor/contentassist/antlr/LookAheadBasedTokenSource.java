@@ -14,7 +14,7 @@ import org.antlr.runtime.TokenSource;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.13
+ * @since 2.14
  */
 public class LookAheadBasedTokenSource implements TokenSource {
 	private final Iterator<LookAheadTerminal> iter;

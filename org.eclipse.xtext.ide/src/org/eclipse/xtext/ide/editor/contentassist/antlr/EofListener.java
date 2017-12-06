@@ -16,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.13
+ * @since 2.14
  */
 public class EofListener implements StreamListener, AbstractInternalContentAssistParser.RecoveryListener {
 	public final RecognizerSharedState parserState;

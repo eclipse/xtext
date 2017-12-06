@@ -30,7 +30,7 @@ import com.google.inject.Provider;
  * equivalent in the xtext.ui bundle.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.13
+ * @since 2.14
  */
 public abstract class BaseContentAssistParser {
 	
