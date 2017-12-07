@@ -9,6 +9,7 @@ package org.eclipse.xtext.testlanguages.xtextgrammar.ide;
 
 import org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.xtextgrammar.tests.XtextGrammarTestLanguageInjectorProvider;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -23,7 +24,7 @@ public class XtextGrammarTestLanguageIdeInjectorProvider extends XtextGrammarTes
 		return new XtextGrammarTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(createRuntimeModule(), createIdeModule());
+				return Guice.createInjector(Modules2.mixin(createRuntimeModule(), createIdeModule()));
 			}
 
 			private XtextGrammarTestLanguageIdeModule createIdeModule() {

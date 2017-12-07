@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.tests.testlanguage;
 
 import org.eclipse.xtext.ide.tests.testlanguage.ide.PartialContentAssistTestLanguageIdeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.tests.PartialContentAssistTestLanguageInjectorProvider;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -23,7 +24,7 @@ public class PartialContentAssistTestLanguageIdeInjectorProvider
 		return new TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(createRuntimeModule(), new PartialContentAssistTestLanguageIdeModule());
+				return Guice.createInjector(Modules2.mixin(createRuntimeModule(), new PartialContentAssistTestLanguageIdeModule()));
 			}
 		}.createInjectorAndDoEMFRegistration();
 	}

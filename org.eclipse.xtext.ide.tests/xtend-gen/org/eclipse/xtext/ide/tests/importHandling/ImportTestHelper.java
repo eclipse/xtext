@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.ide.serializer.impl.TextDocumentChange;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.testing.util.InMemoryURIHandler;
@@ -90,6 +92,8 @@ public class ImportTestHelper {
     r.getLoadOptions().put(ResourceDescriptionsProvider.LIVE_SCOPE, Boolean.TRUE);
     r.getURIConverter().getURIHandlers().add(0, fs);
     ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(r, data);
+    Pair<String, ResourceDescriptionsData> _mappedTo = Pair.<String, ResourceDescriptionsData>of("egal", data);
+    new ChunkedResourceDescriptions(Collections.<String, ResourceDescriptionsData>unmodifiableMap(CollectionLiterals.<String, ResourceDescriptionsData>newHashMap(_mappedTo)), r);
     return r;
   }
   
