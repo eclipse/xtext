@@ -10,7 +10,7 @@
 		<relativePath>../org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
 
-	<packaging>eclipse-target-definition</packaging>
+	<packaging>pom</packaging>
 	<artifactId>org.eclipse.xtext.target</artifactId>
 
 	<build>
@@ -27,6 +27,11 @@
 						</goals>
 						<configuration>
 							<artifacts>
+								<artifact>
+									<file>${project.artifactId}-luna.target</file>
+									<type>target</type>
+									<classifier>luna</classifier>
+								</artifact>
 								<artifact>
 									<file>${project.artifactId}-oxygen.target</file>
 									<type>target</type>

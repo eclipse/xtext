@@ -15,9 +15,9 @@ node {
 		def mvnHome = tool 'M3'
 		def targetProfile = ""
 		if ("oxygen" == params.target_platform) {
-			targetProfile = "-PuseOxygenTarget"
+			targetProfile = "-P-luna,+oxygen"
 		} else if ("photon" == params.target_platform) {
-			targetProfile = "-PusePhotonTarget"
+			targetProfile = "-P-luna,+photon"
 		}
 		wrap([$class:'Xvnc', useXauthority: true]) {
 			sh "${mvnHome}/bin/mvn --batch-mode -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn ${targetProfile} clean install"
