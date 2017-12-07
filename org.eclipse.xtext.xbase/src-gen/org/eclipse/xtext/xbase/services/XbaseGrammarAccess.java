@@ -3185,7 +3185,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cValidIDParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//@ Override QualifiedName:
+		//@Override
+		//QualifiedName:
 		//	ValidID (=> '.' ValidID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -4104,7 +4105,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getXCatchClauseAccess().getRule();
 	}
 	
-	//@ Override QualifiedName:
+	//@Override
+	//QualifiedName:
 	//	ValidID (=> '.' ValidID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;

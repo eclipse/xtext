@@ -1127,7 +1127,8 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		return getXCatchClauseAccess().getRule();
 	}
 	
-	//@ Override QualifiedName:
+	//@Override
+	//QualifiedName:
 	//	ValidID (=> '.' ValidID)*;
 	public XbaseGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
 		return gaXbase.getQualifiedNameAccess();
