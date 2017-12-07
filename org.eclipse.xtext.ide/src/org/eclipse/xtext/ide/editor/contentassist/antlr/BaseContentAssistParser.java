@@ -33,7 +33,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ide.LexerIdeBindings;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.BaseInternalContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.InfiniteRecursion;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
