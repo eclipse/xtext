@@ -68,6 +68,11 @@ public abstract class AbstractInternalContentAssistParser extends BaseInternalCo
 	protected abstract class StreamAdapter extends BaseInternalContentAssistParser<FollowElement, LookAheadTerminal>.StreamAdapter implements ObservableXtextTokenStream.StreamListener {
 	}
 	
+	@Override
+	protected InfiniteRecursion infiniteRecursion() {
+		return new InfiniteRecursion();
+	}
+	
 	protected StreamAdapter delegate(BaseInternalContentAssistParser<FollowElement, LookAheadTerminal>.StreamAdapter delegate) {
 		return new StreamAdapter() {
 
@@ -147,9 +152,17 @@ public abstract class AbstractInternalContentAssistParser extends BaseInternalCo
 	public RecoveryListener getRecoveryListener() {
 		return (RecoveryListener) super.getRecoveryListener();
 	}
+	
+	@Override
+	public void setRecoveryListener(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.BaseInternalContentAssistParser.RecoveryListener recoveryListener) {
+		if (!(recoveryListener instanceof RecoveryListener)) {
+			throw new IllegalArgumentException(String.valueOf(recoveryListener));
+		}
+		super.setRecoveryListener(recoveryListener);
+	}
 
 	public void setRecoveryListener(RecoveryListener recoveryListener) {
-		this.recoveryListener = recoveryListener;
+		super.setRecoveryListener(recoveryListener);
 	}
 
 }

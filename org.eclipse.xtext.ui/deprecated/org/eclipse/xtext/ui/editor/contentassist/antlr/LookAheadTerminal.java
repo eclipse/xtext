@@ -9,16 +9,18 @@ package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
 import org.antlr.runtime.Token;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.ILookAheadTerminal;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class LookAheadTerminal {
+public abstract class LookAheadTerminal implements ILookAheadTerminal {
 
 	private Token token;
 	
 	public abstract boolean matches(AbstractElement element);
 	
+	@Override
 	public Token getToken() {
 		return token;
 	}
