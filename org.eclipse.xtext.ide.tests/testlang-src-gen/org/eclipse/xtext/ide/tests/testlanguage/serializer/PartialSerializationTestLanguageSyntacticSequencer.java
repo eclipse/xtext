@@ -71,17 +71,15 @@ public class PartialSerializationTestLanguageSyntacticSequencer extends Abstract
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '#1' (ambiguity) '{' 'ref' ref=[Node|QualifiedName]
 	 *     (rule start) '#1' (ambiguity) '{' children+=Node
-	 *     (rule start) '#1' (ambiguity) (';' | ('{' '}')) (rule start)
+	 *     (rule start) '#1' (ambiguity) (('{' '}') | ';') (rule start)
 	 *     (rule start) (ambiguity) '{' 'ref' ref=[Node|QualifiedName]
 	 *     (rule start) (ambiguity) '{' children+=Node
 	 *     (rule start) (ambiguity) (('{' '}') | ';') (rule start)
 	 *     imports+=Import (ambiguity) '{' 'ref' ref=[Node|QualifiedName]
 	 *     imports+=Import (ambiguity) '{' children+=Node
-	 *     imports+=Import (ambiguity) (';' | ('{' '}')) (rule end)
 	 *     imports+=Import (ambiguity) (('{' '}') | ';') (rule end)
 	 *     name=ID (ambiguity) '{' 'ref' ref=[Node|QualifiedName]
 	 *     name=ID (ambiguity) '{' children+=Node
-	 *     name=ID (ambiguity) (';' | ('{' '}')) (rule end)
 	 *     name=ID (ambiguity) (('{' '}') | ';') (rule end)
 	 */
 	protected void emit_Node_RefsKeyword_3_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -90,7 +88,7 @@ public class PartialSerializationTestLanguageSyntacticSequencer extends Abstract
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ';' | ('{' '}')
+	 *     ('{' '}') | ';'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '#1' 'refs'? (ambiguity) (rule start)

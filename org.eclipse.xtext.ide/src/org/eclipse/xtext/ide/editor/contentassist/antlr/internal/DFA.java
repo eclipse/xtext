@@ -29,8 +29,8 @@ public class DFA extends org.antlr.runtime.DFA {
 		}
 	}
 	
-	protected AbstractInternalContentAssistParser getRecognizer() {
-		return (AbstractInternalContentAssistParser) recognizer;
+	protected BaseInternalContentAssistParser<?, ?> getRecognizer() {
+		return (BaseInternalContentAssistParser<?, ?>) recognizer;
 	}
 	
 	protected IUnorderedGroupHelper getUnorderedGroupHelper() {
