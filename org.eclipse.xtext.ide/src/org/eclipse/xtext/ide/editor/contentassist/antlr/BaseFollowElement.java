@@ -50,16 +50,10 @@ public class BaseFollowElement<LATerminal> {
 		this.lookAhead = lookAhead;
 	}
 	
-	/**
-	 * @since 2.9
-	 */
 	public List<Integer> getParamStack() {
 		return paramStack;
 	}
 	
-	/**
-	 * @since 2.9
-	 */
 	public void setParamStack(List<Integer> paramStack) {
 		this.paramStack = paramStack;
 	}
