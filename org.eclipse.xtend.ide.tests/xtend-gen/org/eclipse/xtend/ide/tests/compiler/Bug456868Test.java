@@ -14,7 +14,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
+import org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -33,7 +33,7 @@ public class Bug456868Test extends AbstractXtendUITestCase {
   private XtendLibClasspathAdder libAdder;
   
   @Inject
-  private ToggleXtextNatureAction natureAdder;
+  private ToggleXtextNatureCommand natureAdder;
   
   private IJavaProject project;
   

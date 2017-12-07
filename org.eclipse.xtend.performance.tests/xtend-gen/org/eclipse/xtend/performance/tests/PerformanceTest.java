@@ -21,7 +21,7 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.StopwatchRule;
 import org.eclipse.xtend.performance.tests.PerformanceTestProjectSetup;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
+import org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
@@ -92,7 +92,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
     final IJavaProject downStreamProject = PerformanceTestProjectSetup.createJavaProject("performance.test.project.downstream", 
       new String[] { JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature" });
     JavaProjectSetupUtil.addProjectReference(downStreamProject, project);
-    new ToggleXtextNatureAction().toggleNature(downStreamProject.getProject());
+    new ToggleXtextNatureCommand().toggleNature(downStreamProject.getProject());
     final IFolder sourceFolder = JavaProjectSetupUtil.addSourceFolder(downStreamProject, "src");
     JavaProjectSetupUtil.addSourceFolder(downStreamProject, "xtend-gen");
     sourceFolder.getFolder("foo").create(true, true, null);

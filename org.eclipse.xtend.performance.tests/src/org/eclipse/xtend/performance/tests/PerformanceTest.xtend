@@ -11,7 +11,13 @@ import org.eclipse.core.resources.IMarker
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.IncrementalProjectBuilder
 import org.eclipse.core.runtime.CoreException
+import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
+import org.eclipse.xtend.ide.tests.StopwatchRule
+import org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
+import org.eclipse.xtext.util.StringInputStream
+import org.eclipse.xtext.util.internal.Stopwatches
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Rule
@@ -20,12 +26,6 @@ import org.junit.Test
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
-import org.eclipse.xtext.util.StringInputStream
-import org.eclipse.xtext.util.internal.Stopwatches
-import org.eclipse.jdt.core.JavaCore
-import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction
-import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
-import org.eclipse.xtend.ide.tests.StopwatchRule
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -76,7 +76,7 @@ class PerformanceTest extends AbstractXtendUITestCase {
 		val downStreamProject = PerformanceTestProjectSetup::createJavaProject("performance.test.project.downstream", 
 						#[JavaCore::NATURE_ID, "org.eclipse.pde.PluginNature"]);
 		JavaProjectSetupUtil::addProjectReference(downStreamProject, project);
-		new ToggleXtextNatureAction().toggleNature(downStreamProject.getProject());
+		new ToggleXtextNatureCommand().toggleNature(downStreamProject.getProject());
 		val sourceFolder = JavaProjectSetupUtil::addSourceFolder(downStreamProject, "src");
 		JavaProjectSetupUtil::addSourceFolder(downStreamProject, "xtend-gen");
 		sourceFolder.getFolder("foo").create(true,true,null)
