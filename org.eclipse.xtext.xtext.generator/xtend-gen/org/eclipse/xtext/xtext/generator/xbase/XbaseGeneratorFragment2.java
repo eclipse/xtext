@@ -28,10 +28,13 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
+import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
+import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
@@ -79,6 +82,11 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     if (_not) {
       return;
     }
+    boolean _equals = this._xtextGeneratorNaming.getEclipsePluginEditor(this.getGrammar()).equals(this._xtextGeneratorNaming.getEclipsePluginXbaseEditor(this.getGrammar()));
+    boolean _not_1 = (!_equals);
+    if (_not_1) {
+      this.contributeEditorStub();
+    }
     this.contributeRuntimeGuiceBindings();
     this.contributeEclipsePluginGuiceBindings();
     PluginXmlAccess _pluginXml = this.getProjectConfig().getEclipsePlugin().getPluginXml();
@@ -113,6 +121,59 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     _ideGenModule.setSuperClass(TypeReference.typeRef("org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule"));
     GuiceModuleAccess _webGenModule = this.getLanguage().getWebGenModule();
     _webGenModule.setSuperClass(TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule"));
+  }
+  
+  protected boolean contributeEditorStub() {
+    boolean _xblockexpression = false;
+    {
+      IBundleProjectConfig _eclipsePlugin = this.getProjectConfig().getEclipsePlugin();
+      IXtextGeneratorFileSystemAccess _srcGen = null;
+      if (_eclipsePlugin!=null) {
+        _srcGen=_eclipsePlugin.getSrcGen();
+      }
+      boolean _tripleNotEquals = (_srcGen != null);
+      if (_tripleNotEquals) {
+        final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(this._xtextGeneratorNaming.getEclipsePluginEditor(this.getGrammar()));
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("/**");
+            _builder.newLine();
+            _builder.append(" ");
+            _builder.append("* This class was generated. Customizations should only happen in a newly");
+            _builder.newLine();
+            _builder.append(" ");
+            _builder.append("* introduced subclass.");
+            _builder.newLine();
+            _builder.append(" ");
+            _builder.append("*/");
+            _builder.newLine();
+            _builder.append("public class ");
+            String _simpleName = XbaseGeneratorFragment2.this._xtextGeneratorNaming.getEclipsePluginEditor(XbaseGeneratorFragment2.this.getGrammar()).getSimpleName();
+            _builder.append(_simpleName);
+            _builder.append(" extends ");
+            TypeReference _eclipsePluginXbaseEditor = XbaseGeneratorFragment2.this._xtextGeneratorNaming.getEclipsePluginXbaseEditor(XbaseGeneratorFragment2.this.getGrammar());
+            _builder.append(_eclipsePluginXbaseEditor);
+            _builder.append(" {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("}");
+            _builder.newLine();
+          }
+        };
+        file.setContent(_client);
+        file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrcGen());
+      }
+      boolean _xifexpression = false;
+      ManifestAccess _manifest = this.getProjectConfig().getEclipsePlugin().getManifest();
+      boolean _tripleNotEquals_1 = (_manifest != null);
+      if (_tripleNotEquals_1) {
+        Set<String> _exportedPackages = this.getProjectConfig().getEclipsePlugin().getManifest().getExportedPackages();
+        String _packageName = this._xtextGeneratorNaming.getEclipsePluginEditor(this.getGrammar()).getPackageName();
+        _xifexpression = _exportedPackages.add(_packageName);
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
   }
   
   protected void contributeRuntimeGuiceBindings() {
@@ -238,6 +299,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       bindingFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes"), 
         TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection"));
     }
+    bindingFactory.addTypeToType(this._xtextGeneratorNaming.getEclipsePluginXbaseEditor(this.getGrammar()), this._xtextGeneratorNaming.getEclipsePluginEditor(this.getGrammar()));
     bindingFactory.contributeTo(this.getLanguage().getEclipsePluginGenModule());
     boolean _inheritsXbaseWithAnnotations = this._xbaseUsageDetector.inheritsXbaseWithAnnotations(this.getLanguage().getGrammar());
     if (_inheritsXbaseWithAnnotations) {

@@ -56,6 +56,10 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		if (!grammar.inheritsXbase)
 			return;
 		
+		if (!grammar.eclipsePluginEditor.equals(grammar.eclipsePluginXbaseEditor)) {
+			contributeEditorStub()
+		}
+		
 		contributeRuntimeGuiceBindings()
 		contributeEclipsePluginGuiceBindings()
 		if (projectConfig.eclipsePlugin.pluginXml !== null)
@@ -79,6 +83,27 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		
 		language.ideGenModule.superClass = 'org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule'.typeRef
 		language.webGenModule.superClass = 'org.eclipse.xtext.xbase.web.DefaultXbaseWebModule'.typeRef
+	}
+	
+	protected def  contributeEditorStub() {
+		if (projectConfig.eclipsePlugin?.srcGen !== null) {
+			val file = fileAccessFactory.createGeneratedJavaFile(grammar.eclipsePluginEditor)
+			
+			file.content = '''
+				/**
+				 * This class was generated. Customizations should only happen in a newly
+				 * introduced subclass.
+				 */
+				public class «grammar.eclipsePluginEditor.simpleName» extends «grammar.eclipsePluginXbaseEditor» {
+				}
+			'''
+			file.writeTo(projectConfig.eclipsePlugin.srcGen)
+		}
+		
+
+		if (projectConfig.eclipsePlugin.manifest !== null) {
+			projectConfig.eclipsePlugin.manifest.exportedPackages += grammar.eclipsePluginEditor.packageName
+		}
 	}
 	
 	protected def contributeRuntimeGuiceBindings() {
@@ -185,6 +210,8 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 				.addTypeToType('org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes'.typeRef,
 						'org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection'.typeRef)
 		}
+		bindingFactory.addTypeToType(grammar.eclipsePluginXbaseEditor, grammar.eclipsePluginEditor)
+		
 		bindingFactory.contributeTo(language.eclipsePluginGenModule)
 		
 		if (language.grammar.inheritsXbaseWithAnnotations)
