@@ -29,6 +29,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.BaseFollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.ILookAheadTerminal;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ObservableXtextTokenStream;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
@@ -41,7 +42,7 @@ import com.google.common.collect.Multimap;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.14
  */
-public abstract class BaseInternalContentAssistParser<FollowElement extends BaseFollowElement<LookAheadTerminal>, LookAheadTerminal>
+public abstract class BaseInternalContentAssistParser<FollowElement extends BaseFollowElement<LookAheadTerminal>, LookAheadTerminal extends ILookAheadTerminal>
 		extends Parser implements ObservableXtextTokenStream.StreamListener, ITokenDefProvider {
 
 	public interface RecoveryListener {
@@ -50,7 +51,7 @@ public abstract class BaseInternalContentAssistParser<FollowElement extends Base
 		void endErrorRecovery();
 	}
 
-	public interface IFollowElementFactory<FollowElement extends BaseFollowElement<LookAheadTerminal>, LookAheadTerminal> {
+	public interface IFollowElementFactory<FollowElement extends BaseFollowElement<LookAheadTerminal>, LookAheadTerminal extends ILookAheadTerminal> {
 		FollowElement createFollowElement(AbstractElement current, int lookAhead);
 	}
 
@@ -118,13 +119,17 @@ public abstract class BaseInternalContentAssistParser<FollowElement extends Base
 					List<EObject> secondRun = traceAfterFirstOccurrence.subList(secondIdx,
 							traceAfterFirstOccurrence.size());
 					if (firstRun.equals(secondRun)) {
-						throw new InfiniteRecursion();
+						throw infiniteRecursion();
 					}
 				}
 			}
 		}
 		grammarElements.add(grammarElement);
 		localTrace.add(grammarElement);
+	}
+
+	protected InfiniteRecursion infiniteRecursion() {
+		return new InfiniteRecursion();
 	}
 
 	public void before(EObject grammarElement, int paramConfig) {
@@ -630,4 +635,6 @@ public abstract class BaseInternalContentAssistParser<FollowElement extends Base
 		}
 		return result;
 	}
+	
+	
 }

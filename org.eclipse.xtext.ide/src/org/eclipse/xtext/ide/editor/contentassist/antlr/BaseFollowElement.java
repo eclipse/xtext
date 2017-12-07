@@ -16,7 +16,7 @@ import org.eclipse.xtext.AbstractElement;
  * 
  * @since 2.14
  */
-public class BaseFollowElement<LATerminal> {
+public class BaseFollowElement<LATerminal extends ILookAheadTerminal> {
 
 	private AbstractElement currentGrammarElement;
 	private List<AbstractElement> trace;

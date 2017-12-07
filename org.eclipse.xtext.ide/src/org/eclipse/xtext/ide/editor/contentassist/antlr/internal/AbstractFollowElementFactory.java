@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.BaseFollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.ILookAheadTerminal;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -24,7 +25,7 @@ import com.google.common.collect.Lists;
  * 
  * @since 2.14
  */
-public abstract class AbstractFollowElementFactory<FollowElement extends BaseFollowElement<LookAheadTerminal>, LookAheadTerminal> {
+public abstract class AbstractFollowElementFactory<FollowElement extends BaseFollowElement<LookAheadTerminal>, LookAheadTerminal extends ILookAheadTerminal> {
 	
 	private static final Logger logger = Logger.getLogger(AbstractFollowElementFactory.class);
 	
