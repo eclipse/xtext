@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
-import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction
+import org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand
 import org.junit.After
 import org.junit.Test
 
@@ -30,7 +30,7 @@ class Bug456868Test extends AbstractXtendUITestCase {
 	XtendLibClasspathAdder libAdder;
 	
 	@Inject
-	ToggleXtextNatureAction natureAdder
+	ToggleXtextNatureCommand natureAdder
 	
 	IJavaProject project
 

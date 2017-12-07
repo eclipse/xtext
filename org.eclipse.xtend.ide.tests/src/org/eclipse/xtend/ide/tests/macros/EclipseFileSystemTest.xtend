@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.tests.macros
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.Set
-import org.eclipse.core.internal.resources.ProjectDescription
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl
@@ -84,10 +83,10 @@ class EclipseFileSystemTest extends JavaIoFileSystemTest {
 	}
 
 	@Test def void testGetURIForImportedProject() {
-		val root = ResourcesPlugin.workspace.root
+		val ws = ResourcesPlugin.workspace
+		val root = ws.root
 
-		val description = new ProjectDescription()
-		description.name = "bar"
+		val description = ws.newProjectDescription("bar")
 		description.location = root.location.append('foo/bar')
 
 		val project = root.getProject('bar')

@@ -10,7 +10,7 @@ package org.eclipse.xtend.ide.editor;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
+import org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -30,7 +30,7 @@ public class XtendNatureAddingEditorCallback extends IXtextEditorCallback.NullIm
 	private UriValidator uriValidator;
 
 	@Inject
-	private ToggleXtextNatureAction toggleNature;
+	private ToggleXtextNatureCommand toggleNature;
 
 	@Override
 	public void afterCreatePartControl(XtextEditor editor) {

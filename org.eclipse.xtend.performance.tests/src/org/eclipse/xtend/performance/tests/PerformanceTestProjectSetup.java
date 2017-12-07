@@ -33,7 +33,7 @@ import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
+import org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.Strings;
@@ -54,7 +54,7 @@ public class PerformanceTestProjectSetup {
 						"org.eclipse.pde.PluginNature"
 				}
 		);
-		new ToggleXtextNatureAction().toggleNature(testProject.getProject());
+		new ToggleXtextNatureCommand().toggleNature(testProject.getProject());
 		IFolder sourceFolder = JavaProjectSetupUtil.addSourceFolder(testProject, "src");
 		JavaProjectSetupUtil.addSourceFolder(testProject, "xtend-gen");
 
