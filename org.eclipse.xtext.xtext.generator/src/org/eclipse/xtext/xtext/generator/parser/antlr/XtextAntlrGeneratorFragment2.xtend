@@ -366,12 +366,18 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		return file
 	}
 	
+	/**
+	 * @since 2.14
+	 */
 	protected def StringConcatenationClient initNameMappings(List<AbstractElement> partition) '''
 		«FOR element : partition»
 			builder.put(grammarAccess.«element.originalElement.grammarElementAccess», "«element.originalElement.containingRule.contentAssistRuleName»__«element.originalElement.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
 		«ENDFOR»
 	'''
-		
+	
+	/**
+	 * @since 2.14
+	 */
 	protected def StringConcatenationClient initNameMappings(Grammar it) {
 		val RuleFilter filter = new RuleFilter();
 		filter.discardUnreachableRules = options.skipUnusedRules

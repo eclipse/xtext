@@ -841,6 +841,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     return file;
   }
   
+  /**
+   * @since 2.14
+   */
   protected StringConcatenationClient initNameMappings(final List<AbstractElement> partition) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -870,6 +873,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     return _client;
   }
   
+  /**
+   * @since 2.14
+   */
   protected StringConcatenationClient initNameMappings(final Grammar it) {
     StringConcatenationClient _xblockexpression = null;
     {

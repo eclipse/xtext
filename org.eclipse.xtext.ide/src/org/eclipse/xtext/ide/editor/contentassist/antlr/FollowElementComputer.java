@@ -166,6 +166,9 @@ public class FollowElementComputer {
 		}
 	}
 
+	/**
+	 * @since 2.14
+	 */
 	protected int setParamConfigAndUpdateOffset(FollowElementCalculator calculator, List<Integer> paramStack, int paramIndex, AbstractElement abstractElement) {
 		if (paramIndex >= 0) {
 			calculator.setParameterConfig(paramStack.get(paramIndex));
@@ -181,6 +184,9 @@ public class FollowElementComputer {
 		return paramIndex;
 	}
 
+	/**
+	 * @since 2.14
+	 */
 	protected int computeParamStackOffset(List<AbstractElement> currentState, List<Integer> paramStack) {
 		int paramIndex = paramStack.size() - 1;
 		if (!paramStack.isEmpty()) {

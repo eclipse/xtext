@@ -105,7 +105,7 @@ public abstract class AbstractContentAssistParser extends BaseContentAssistParse
 	}
 
 	/**
-	 * @since 2.13
+	 * @since 2.14
 	 */
 	protected ObservableXtextTokenStream setTokensFromFollowElement(AbstractInternalContentAssistParser parser,
 			FollowElement element) {
@@ -116,7 +116,7 @@ public abstract class AbstractContentAssistParser extends BaseContentAssistParse
 	}
 
 	/**
-	 * @since 2.13
+	 * @since 2.14
 	 */
 	protected IUnorderedGroupHelper getInitializedUnorderedGroupHelper(FollowElement element,
 			AbstractInternalContentAssistParser parser, UnorderedGroup group) {
@@ -132,7 +132,7 @@ public abstract class AbstractContentAssistParser extends BaseContentAssistParse
 	}
 
 	/**
-	 * @since 2.13
+	 * @since 2.14
 	 */
 	protected Collection<FollowElement> getFollowElements(
 			final AbstractInternalContentAssistParser parser,
@@ -165,7 +165,7 @@ public abstract class AbstractContentAssistParser extends BaseContentAssistParse
 	}
 
 	/**
-	 * @since 2.13
+	 * @since 2.14
 	 */
 	protected EofListener createEofListener(final AbstractInternalContentAssistParser parser,
 			final AbstractElement elementToParse) {
@@ -173,7 +173,7 @@ public abstract class AbstractContentAssistParser extends BaseContentAssistParse
 	}
 
 	/**
-	 * @since 2.13
+	 * @since 2.14
 	 */
 	protected Set<FollowElement> getFollowElements(final AbstractInternalContentAssistParser parser, String ruleName, boolean swallowInfiniteRecursion)
 			throws Exception {
@@ -196,7 +196,7 @@ public abstract class AbstractContentAssistParser extends BaseContentAssistParse
 	}
 
 	/**
-	 * @since 2.13
+	 * @since 2.14
 	 */
 	protected Collection<AbstractElement> getElementsToParse(FollowElement element) {
 		return getElementsToParse(element.getGrammarElement(), element.getHandledUnorderedGroupElements());
@@ -246,7 +246,7 @@ public abstract class AbstractContentAssistParser extends BaseContentAssistParse
 	}
 
 	/**
-	 * @since 2.13
+	 * @since 2.14
 	 */
 	protected RuleNames getRuleNames() {
 		return ruleNames;

@@ -85,6 +85,9 @@ public class RequiredRuleNameComputer {
 		return getAdjustedRequiredRuleNames(param, elementToParse, ruleName);
 	}
 
+	/**
+	 * @since 2.14
+	 */
 	protected String[][] getAdjustedRequiredRuleNames(Param param, AbstractElement elementToParse,
 			String originalRuleName) {
 		String adjustedRuleName = adjustRuleName(originalRuleName, param);
@@ -105,6 +108,9 @@ public class RequiredRuleNameComputer {
 		return new String[][] { { adjustedRuleName } };
 	}
 
+	/**
+	 * @since 2.14
+	 */
 	protected String getAdjustedSecondRule(Param param, Group group, int idx) {
 		String secondRule = param.getBaseRuleName(group);
 		secondRule = secondRule.substring(0, secondRule.lastIndexOf('_') + 1) + idx;
@@ -112,6 +118,9 @@ public class RequiredRuleNameComputer {
 		return adjustedSecondRule;
 	}
 
+	/**
+	 * @since 2.14
+	 */
 	protected String[][] getRuleNamesInGroup(Param param, AbstractElement elementToParse, String adjustedFirstRule,
 			String adjustedSecondRule) {
 		if (GrammarUtil.isMultipleCardinality(elementToParse))
@@ -119,6 +128,9 @@ public class RequiredRuleNameComputer {
 		return new String[][] { { adjustedFirstRule, adjustedSecondRule } };
 	}
 
+	/**
+	 * @since 2.14
+	 */
 	protected String[][] getRequiredRuleNames(Param param, AbstractElement elementToParse) {
 		if (elementToParse instanceof RuleCall) {
 			RuleCall call = (RuleCall) elementToParse;
@@ -167,6 +179,8 @@ public class RequiredRuleNameComputer {
 
 	/**
 	 * Return the containing group if it contains exactly one element.
+	 * 
+	 * @since 2.14
 	 */
 	protected AbstractElement getEnclosingSingleElementGroup(AbstractElement elementToParse) {
 		EObject container = elementToParse.eContainer();
