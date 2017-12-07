@@ -22,12 +22,14 @@ import org.eclipse.xtext.ide.serializer.impl.TextDocumentChange
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.util.CollectionBasedAcceptor
 import org.junit.Assert
+
 import static extension org.eclipse.xtext.util.Strings.*
 
 /**
@@ -70,6 +72,7 @@ class ImportTestHelper {
 		r.getLoadOptions().put(ResourceDescriptionsProvider.LIVE_SCOPE, Boolean.TRUE);
 		r.getURIConverter.getURIHandlers.add(0, fs)
 		ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(r, data)
+		new ChunkedResourceDescriptions(#{"egal"->data}, r)
 		return r;
 	}
 
