@@ -7,16 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr
 
+import com.google.common.collect.ImmutableMap
+import com.google.common.collect.Lists
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import com.google.inject.name.Names
 import java.io.InputStream
-import java.util.HashMap
+import java.util.List
 import java.util.Map
+import java.util.Set
 import org.antlr.runtime.CharStream
 import org.antlr.runtime.Token
 import org.antlr.runtime.TokenSource
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.AbstractElement
+import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.Group
 import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter
 import org.eclipse.xtext.conversion.impl.IgnoreCaseIDValueConverter
@@ -37,6 +43,9 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer
 import org.eclipse.xtext.parsetree.reconstr.impl.IgnoreCaseKeywordSerializer
 import org.eclipse.xtext.serializer.tokens.IKeywordSerializer
+import org.eclipse.xtext.xtext.FlattenedGrammarAccess
+import org.eclipse.xtext.xtext.RuleFilter
+import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -50,7 +59,6 @@ import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
-import com.google.common.collect.Iterables
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
@@ -306,15 +314,13 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	def JavaFileAccess generateContentAssistParser() {
 		val extension naming = contentAssistNaming
 		val file = fileFactory.createGeneratedJavaFile(grammar.parserClass)
-		val elements = (grammar.allAlternatives + grammar.allGroups + grammar.allAssignments + grammar.allUnorderedGroups).filter(AbstractElement)
-		val partitions = Iterables.partition(elements, 1500)
 		file.content = '''
 			public class «grammar.parserClass.simpleName» extends «grammar.getParserSuperClass(partialParsing)» {
 			
+				«grammar.initNameMappings()»
+			
 				@«Inject»
 				private «grammar.grammarAccess» grammarAccess;
-			
-				private «Map»<«AbstractElement», String> nameMappings;
 			
 				@Override
 				protected «grammar.internalParserClass» createParser() {
@@ -332,34 +338,9 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				«ENDIF»
 				@Override
 				protected String getRuleName(«AbstractElement» element) {
-					if (nameMappings == null) {
-						nameMappings = new «HashMap»<«AbstractElement», String>() {
-							private static final long serialVersionUID = 1L;
-							«IF partitions.size > 1»
-								{
-									«FOR partition : partitions.indexed»
-										fillMap«partition.key»();
-									«ENDFOR»
-								}
-								«FOR partition : partitions.indexed»
-									private void fillMap«partition.key»() {
-										«FOR element : partition.value»
-											put(grammarAccess.«element.grammarElementAccess», "«element.containingRule.contentAssistRuleName»__«element.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
-										«ENDFOR»
-									}
-								«ENDFOR»
-							«ELSE»
-								{
-									«FOR element : elements»
-										put(grammarAccess.«element.grammarElementAccess», "«element.containingRule.contentAssistRuleName»__«element.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
-									«ENDFOR»
-								}
-							«ENDIF»
-						};
-					}
-					return nameMappings.get(element);
+					return nameMappings.getRuleName(element);
 				}
-						
+			
 				@Override
 				protected String[] getInitialHiddenTokens() {
 					return new String[] { «FOR hidden : grammar.initialHiddenTokens SEPARATOR ", "»"«hidden»"«ENDFOR» };
@@ -372,9 +353,82 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				public void setGrammarAccess(«grammar.grammarAccess» grammarAccess) {
 					this.grammarAccess = grammarAccess;
 				}
+				
+				public NameMappings getNameMappings() {
+					return nameMappings;
+				}
+				
+				public void setNameMappings(NameMappings nameMappings) {
+					this.nameMappings = nameMappings;
+				}
 			}
 		'''
-		file
+		return file
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	protected def StringConcatenationClient initNameMappings(List<AbstractElement> partition) '''
+		«FOR element : partition»
+			builder.put(grammarAccess.«element.originalElement.grammarElementAccess», "«element.originalElement.containingRule.contentAssistRuleName»__«element.originalElement.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
+		«ENDFOR»
+	'''
+	
+	/**
+	 * @since 2.14
+	 */
+	protected def StringConcatenationClient initNameMappings(Grammar it) {
+		val RuleFilter filter = new RuleFilter();
+		filter.discardUnreachableRules = options.skipUnusedRules
+		val RuleNames ruleNames = RuleNames.getRuleNames(it, true);
+		val Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
+		val Set<AbstractElement> seenElements = newHashSet
+		val elements = (flattened.allAlternatives + flattened.allGroups + flattened.allAssignments + flattened.allUnorderedGroups).filter(AbstractElement).filter[seenElements.add(originalElement)].toList
+		val partitions = Lists.partition(elements, 2500)
+		'''
+			@«Singleton»
+			public static final class NameMappings {
+				
+				«IF partitions.size > 1»
+					«FOR partition : partitions.indexed»
+						private static final class Init«partition.key» {
+							private static void doInit(«ImmutableMap».Builder<«AbstractElement», «String»> builder, «grammar.grammarAccess» grammarAccess) {
+								«partition.value.initNameMappings»
+							}
+						}
+						
+					«ENDFOR»
+				«ENDIF»
+				private final «Map»<«AbstractElement», «String»> mappings;
+				
+				@«Inject»
+				public NameMappings(«grammar.grammarAccess» grammarAccess) {
+					«ImmutableMap».Builder<«AbstractElement», «String»> builder = «ImmutableMap».builder();
+					init(builder, grammarAccess);
+					this.mappings = builder.build();
+				}
+				
+				public «String» getRuleName(«AbstractElement» element) {
+					return mappings.get(element);
+				}
+				
+				private static void init(«ImmutableMap».Builder<«AbstractElement», «String»> builder, «grammar.grammarAccess» grammarAccess) {
+					«IF partitions.size > 1»
+						«FOR partition : partitions.indexed»
+							Init«partition.key».doInit(builder, grammarAccess);
+						«ENDFOR»
+					«ELSE»
+						«FOR partition : partitions»
+							«partition.initNameMappings»
+						«ENDFOR»
+					«ENDIF»
+				}
+			}
+			
+			@«Inject»
+			private NameMappings nameMappings;
+		'''
 	}
 	
 	def JavaFileAccess generateContentAssistTokenSource() {

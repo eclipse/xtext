@@ -8,14 +8,16 @@
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -60,6 +62,9 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xtext.FlattenedGrammarAccess;
+import org.eclipse.xtext.xtext.RuleFilter;
+import org.eclipse.xtext.xtext.RuleNames;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -653,288 +658,406 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   }
   
   public JavaFileAccess generateContentAssistParser() {
-    GeneratedJavaFileAccess _xblockexpression = null;
+    @Extension
+    final ContentAssistGrammarNaming naming = this.contentAssistNaming;
+    final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(naming.getParserClass(this.getGrammar()));
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("public class ");
+        String _simpleName = naming.getParserClass(XtextAntlrGeneratorFragment2.this.getGrammar()).getSimpleName();
+        _builder.append(_simpleName);
+        _builder.append(" extends ");
+        TypeReference _parserSuperClass = naming.getParserSuperClass(XtextAntlrGeneratorFragment2.this.getGrammar(), XtextAntlrGeneratorFragment2.this.partialParsing);
+        _builder.append(_parserSuperClass);
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        StringConcatenationClient _initNameMappings = XtextAntlrGeneratorFragment2.this.initNameMappings(XtextAntlrGeneratorFragment2.this.getGrammar());
+        _builder.append(_initNameMappings, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@");
+        _builder.append(Inject.class, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("private ");
+        TypeReference _grammarAccess = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(XtextAntlrGeneratorFragment2.this.getGrammar());
+        _builder.append(_grammarAccess, "\t");
+        _builder.append(" grammarAccess;");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected ");
+        TypeReference _internalParserClass = naming.getInternalParserClass(XtextAntlrGeneratorFragment2.this.getGrammar());
+        _builder.append(_internalParserClass, "\t");
+        _builder.append(" createParser() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        TypeReference _internalParserClass_1 = naming.getInternalParserClass(XtextAntlrGeneratorFragment2.this.getGrammar());
+        _builder.append(_internalParserClass_1, "\t\t");
+        _builder.append(" result = new ");
+        TypeReference _internalParserClass_2 = naming.getInternalParserClass(XtextAntlrGeneratorFragment2.this.getGrammar());
+        _builder.append(_internalParserClass_2, "\t\t");
+        _builder.append("(null);");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("result.setGrammarAccess(grammarAccess);");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("return result;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        {
+          boolean _hasSyntheticTerminalRule = XtextAntlrGeneratorFragment2.this.hasSyntheticTerminalRule();
+          if (_hasSyntheticTerminalRule) {
+            _builder.append("\t");
+            _builder.append("@Override");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("protected ");
+            _builder.append(TokenSource.class, "\t");
+            _builder.append(" createLexer(");
+            _builder.append(CharStream.class, "\t");
+            _builder.append(" stream) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("return new ");
+            TypeReference _tokenSourceClass = naming.getTokenSourceClass(XtextAntlrGeneratorFragment2.this.getGrammar());
+            _builder.append(_tokenSourceClass, "\t\t");
+            _builder.append("(super.createLexer(stream));");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected String getRuleName(");
+        _builder.append(AbstractElement.class, "\t");
+        _builder.append(" element) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("return nameMappings.getRuleName(element);");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected String[] getInitialHiddenTokens() {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("return new String[] { ");
+        {
+          List<String> _initialHiddenTokens = XtextAntlrGeneratorFragment2.this.grammarUtil.initialHiddenTokens(XtextAntlrGeneratorFragment2.this.getGrammar());
+          boolean _hasElements = false;
+          for(final String hidden : _initialHiddenTokens) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(", ", "\t\t");
+            }
+            _builder.append("\"");
+            _builder.append(hidden, "\t\t");
+            _builder.append("\"");
+          }
+        }
+        _builder.append(" };");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public ");
+        TypeReference _grammarAccess_1 = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(XtextAntlrGeneratorFragment2.this.getGrammar());
+        _builder.append(_grammarAccess_1, "\t");
+        _builder.append(" getGrammarAccess() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("return this.grammarAccess;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public void setGrammarAccess(");
+        TypeReference _grammarAccess_2 = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(XtextAntlrGeneratorFragment2.this.getGrammar());
+        _builder.append(_grammarAccess_2, "\t");
+        _builder.append(" grammarAccess) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("this.grammarAccess = grammarAccess;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public NameMappings getNameMappings() {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("return nameMappings;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public void setNameMappings(NameMappings nameMappings) {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("this.nameMappings = nameMappings;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    file.setContent(_client);
+    return file;
+  }
+  
+  /**
+   * @since 2.14
+   */
+  protected StringConcatenationClient initNameMappings(final List<AbstractElement> partition) {
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          for(final AbstractElement element : partition) {
+            _builder.append("builder.put(grammarAccess.");
+            String _grammarElementAccess = XtextAntlrGeneratorFragment2.this.grammarUtil.grammarElementAccess(AntlrGrammarGenUtil.<AbstractElement>getOriginalElement(element));
+            _builder.append(_grammarElementAccess);
+            _builder.append(", \"");
+            String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(GrammarUtil.containingRule(AntlrGrammarGenUtil.<AbstractElement>getOriginalElement(element)));
+            _builder.append(_contentAssistRuleName);
+            _builder.append("__");
+            String _gaElementIdentifier = XtextAntlrGeneratorFragment2.this.grammarUtil.gaElementIdentifier(AntlrGrammarGenUtil.<AbstractElement>getOriginalElement(element));
+            _builder.append(_gaElementIdentifier);
+            {
+              if ((element instanceof Group)) {
+                _builder.append("__0");
+              }
+            }
+            _builder.append("\");");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    };
+    return _client;
+  }
+  
+  /**
+   * @since 2.14
+   */
+  protected StringConcatenationClient initNameMappings(final Grammar it) {
+    StringConcatenationClient _xblockexpression = null;
     {
-      @Extension
-      final ContentAssistGrammarNaming naming = this.contentAssistNaming;
-      final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(naming.getParserClass(this.getGrammar()));
-      Collection<? extends AbstractElement> _allAlternatives = GrammarUtil.getAllAlternatives(this.getGrammar());
-      Collection<? extends AbstractElement> _allGroups = GrammarUtil.getAllGroups(this.getGrammar());
+      final RuleFilter filter = new RuleFilter();
+      filter.setDiscardUnreachableRules(this.getOptions().isSkipUnusedRules());
+      final RuleNames ruleNames = RuleNames.getRuleNames(it, true);
+      final Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
+      final Set<AbstractElement> seenElements = CollectionLiterals.<AbstractElement>newHashSet();
+      Collection<? extends AbstractElement> _allAlternatives = GrammarUtil.getAllAlternatives(flattened);
+      Collection<? extends AbstractElement> _allGroups = GrammarUtil.getAllGroups(flattened);
       Iterable<AbstractElement> _plus = Iterables.<AbstractElement>concat(_allAlternatives, _allGroups);
-      Collection<? extends AbstractElement> _allAssignments = GrammarUtil.getAllAssignments(this.getGrammar());
+      Collection<? extends AbstractElement> _allAssignments = GrammarUtil.getAllAssignments(flattened);
       Iterable<AbstractElement> _plus_1 = Iterables.<AbstractElement>concat(_plus, _allAssignments);
-      Collection<? extends AbstractElement> _allUnorderedGroups = GrammarUtil.getAllUnorderedGroups(this.getGrammar());
-      final Iterable<AbstractElement> elements = Iterables.<AbstractElement>filter(Iterables.<AbstractElement>concat(_plus_1, _allUnorderedGroups), AbstractElement.class);
-      final Iterable<List<AbstractElement>> partitions = Iterables.<AbstractElement>partition(elements, 1500);
+      Collection<? extends AbstractElement> _allUnorderedGroups = GrammarUtil.getAllUnorderedGroups(flattened);
+      final Function1<AbstractElement, Boolean> _function = (AbstractElement it_1) -> {
+        return Boolean.valueOf(seenElements.add(AntlrGrammarGenUtil.<AbstractElement>getOriginalElement(it_1)));
+      };
+      final List<AbstractElement> elements = IterableExtensions.<AbstractElement>toList(IterableExtensions.<AbstractElement>filter(Iterables.<AbstractElement>filter(Iterables.<AbstractElement>concat(_plus_1, _allUnorderedGroups), AbstractElement.class), _function));
+      final List<List<AbstractElement>> partitions = Lists.<AbstractElement>partition(elements, 2500);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("public class ");
-          String _simpleName = naming.getParserClass(XtextAntlrGeneratorFragment2.this.getGrammar()).getSimpleName();
-          _builder.append(_simpleName);
-          _builder.append(" extends ");
-          TypeReference _parserSuperClass = naming.getParserSuperClass(XtextAntlrGeneratorFragment2.this.getGrammar(), XtextAntlrGeneratorFragment2.this.partialParsing);
-          _builder.append(_parserSuperClass);
-          _builder.append(" {");
+          _builder.append("@");
+          _builder.append(Singleton.class);
           _builder.newLineIfNotEmpty();
+          _builder.append("public static final class NameMappings {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.newLine();
+          {
+            int _size = partitions.size();
+            boolean _greaterThan = (_size > 1);
+            if (_greaterThan) {
+              {
+                Iterable<Pair<Integer, List<AbstractElement>>> _indexed = IterableExtensions.<List<AbstractElement>>indexed(partitions);
+                for(final Pair<Integer, List<AbstractElement>> partition : _indexed) {
+                  _builder.append("\t");
+                  _builder.append("private static final class Init");
+                  Integer _key = partition.getKey();
+                  _builder.append(_key, "\t");
+                  _builder.append(" {");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("private static void doInit(");
+                  _builder.append(ImmutableMap.class, "\t\t");
+                  _builder.append(".Builder<");
+                  _builder.append(AbstractElement.class, "\t\t");
+                  _builder.append(", ");
+                  _builder.append(String.class, "\t\t");
+                  _builder.append("> builder, ");
+                  TypeReference _grammarAccess = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(XtextAntlrGeneratorFragment2.this.getGrammar());
+                  _builder.append(_grammarAccess, "\t\t");
+                  _builder.append(" grammarAccess) {");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  StringConcatenationClient _initNameMappings = XtextAntlrGeneratorFragment2.this.initNameMappings(partition.getValue());
+                  _builder.append(_initNameMappings, "\t\t\t");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("}");
+                  _builder.newLine();
+                  _builder.append("\t");
+                  _builder.append("}");
+                  _builder.newLine();
+                  _builder.append("\t");
+                  _builder.newLine();
+                }
+              }
+            }
+          }
+          _builder.append("\t");
+          _builder.append("private final ");
+          _builder.append(Map.class, "\t");
+          _builder.append("<");
+          _builder.append(AbstractElement.class, "\t");
+          _builder.append(", ");
+          _builder.append(String.class, "\t");
+          _builder.append("> mappings;");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("@");
           _builder.append(Inject.class, "\t");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          _builder.append("private ");
-          TypeReference _grammarAccess = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(XtextAntlrGeneratorFragment2.this.getGrammar());
-          _builder.append(_grammarAccess, "\t");
-          _builder.append(" grammarAccess;");
-          _builder.newLineIfNotEmpty();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("private ");
-          _builder.append(Map.class, "\t");
-          _builder.append("<");
-          _builder.append(AbstractElement.class, "\t");
-          _builder.append(", String> nameMappings;");
-          _builder.newLineIfNotEmpty();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected ");
-          TypeReference _internalParserClass = naming.getInternalParserClass(XtextAntlrGeneratorFragment2.this.getGrammar());
-          _builder.append(_internalParserClass, "\t");
-          _builder.append(" createParser() {");
+          _builder.append("public NameMappings(");
+          TypeReference _grammarAccess_1 = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(XtextAntlrGeneratorFragment2.this.getGrammar());
+          _builder.append(_grammarAccess_1, "\t");
+          _builder.append(" grammarAccess) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
-          TypeReference _internalParserClass_1 = naming.getInternalParserClass(XtextAntlrGeneratorFragment2.this.getGrammar());
-          _builder.append(_internalParserClass_1, "\t\t");
-          _builder.append(" result = new ");
-          TypeReference _internalParserClass_2 = naming.getInternalParserClass(XtextAntlrGeneratorFragment2.this.getGrammar());
-          _builder.append(_internalParserClass_2, "\t\t");
-          _builder.append("(null);");
+          _builder.append(ImmutableMap.class, "\t\t");
+          _builder.append(".Builder<");
+          _builder.append(AbstractElement.class, "\t\t");
+          _builder.append(", ");
+          _builder.append(String.class, "\t\t");
+          _builder.append("> builder = ");
+          _builder.append(ImmutableMap.class, "\t\t");
+          _builder.append(".builder();");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
-          _builder.append("result.setGrammarAccess(grammarAccess);");
+          _builder.append("init(builder, grammarAccess);");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("return result;");
+          _builder.append("this.mappings = builder.build();");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
-          _builder.newLine();
-          {
-            boolean _hasSyntheticTerminalRule = XtextAntlrGeneratorFragment2.this.hasSyntheticTerminalRule();
-            if (_hasSyntheticTerminalRule) {
-              _builder.append("\t");
-              _builder.append("@Override");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("protected ");
-              _builder.append(TokenSource.class, "\t");
-              _builder.append(" createLexer(");
-              _builder.append(CharStream.class, "\t");
-              _builder.append(" stream) {");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("return new ");
-              TypeReference _tokenSourceClass = naming.getTokenSourceClass(XtextAntlrGeneratorFragment2.this.getGrammar());
-              _builder.append(_tokenSourceClass, "\t\t");
-              _builder.append("(super.createLexer(stream));");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append("}");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.newLine();
-            }
-          }
           _builder.append("\t");
-          _builder.append("@Override");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("protected String getRuleName(");
+          _builder.append("public ");
+          _builder.append(String.class, "\t");
+          _builder.append(" getRuleName(");
           _builder.append(AbstractElement.class, "\t");
           _builder.append(" element) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
-          _builder.append("if (nameMappings == null) {");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("nameMappings = new ");
-          _builder.append(HashMap.class, "\t\t\t");
-          _builder.append("<");
-          _builder.append(AbstractElement.class, "\t\t\t");
-          _builder.append(", String>() {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t\t\t");
-          _builder.append("private static final long serialVersionUID = 1L;");
-          _builder.newLine();
-          {
-            int _size = IterableExtensions.size(partitions);
-            boolean _greaterThan = (_size > 1);
-            if (_greaterThan) {
-              _builder.append("\t\t\t\t");
-              _builder.append("{");
-              _builder.newLine();
-              {
-                Iterable<Pair<Integer, List<AbstractElement>>> _indexed = IterableExtensions.<List<AbstractElement>>indexed(partitions);
-                for(final Pair<Integer, List<AbstractElement>> partition : _indexed) {
-                  _builder.append("\t\t\t\t");
-                  _builder.append("\t");
-                  _builder.append("fillMap");
-                  Integer _key = partition.getKey();
-                  _builder.append(_key, "\t\t\t\t\t");
-                  _builder.append("();");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-              _builder.append("\t\t\t\t");
-              _builder.append("}");
-              _builder.newLine();
-              {
-                Iterable<Pair<Integer, List<AbstractElement>>> _indexed_1 = IterableExtensions.<List<AbstractElement>>indexed(partitions);
-                for(final Pair<Integer, List<AbstractElement>> partition_1 : _indexed_1) {
-                  _builder.append("\t\t\t\t");
-                  _builder.append("private void fillMap");
-                  Integer _key_1 = partition_1.getKey();
-                  _builder.append(_key_1, "\t\t\t\t");
-                  _builder.append("() {");
-                  _builder.newLineIfNotEmpty();
-                  {
-                    List<AbstractElement> _value = partition_1.getValue();
-                    for(final AbstractElement element : _value) {
-                      _builder.append("\t\t\t\t");
-                      _builder.append("\t");
-                      _builder.append("put(grammarAccess.");
-                      String _grammarElementAccess = XtextAntlrGeneratorFragment2.this.grammarUtil.grammarElementAccess(element);
-                      _builder.append(_grammarElementAccess, "\t\t\t\t\t");
-                      _builder.append(", \"");
-                      String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(GrammarUtil.containingRule(element));
-                      _builder.append(_contentAssistRuleName, "\t\t\t\t\t");
-                      _builder.append("__");
-                      String _gaElementIdentifier = XtextAntlrGeneratorFragment2.this.grammarUtil.gaElementIdentifier(element);
-                      _builder.append(_gaElementIdentifier, "\t\t\t\t\t");
-                      {
-                        if ((element instanceof Group)) {
-                          _builder.append("__0");
-                        }
-                      }
-                      _builder.append("\");");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                  _builder.append("\t\t\t\t");
-                  _builder.append("}");
-                  _builder.newLine();
-                }
-              }
-            } else {
-              _builder.append("\t\t\t\t");
-              _builder.append("{");
-              _builder.newLine();
-              {
-                for(final AbstractElement element_1 : elements) {
-                  _builder.append("\t\t\t\t");
-                  _builder.append("\t");
-                  _builder.append("put(grammarAccess.");
-                  String _grammarElementAccess_1 = XtextAntlrGeneratorFragment2.this.grammarUtil.grammarElementAccess(element_1);
-                  _builder.append(_grammarElementAccess_1, "\t\t\t\t\t");
-                  _builder.append(", \"");
-                  String _contentAssistRuleName_1 = AntlrGrammarGenUtil.getContentAssistRuleName(GrammarUtil.containingRule(element_1));
-                  _builder.append(_contentAssistRuleName_1, "\t\t\t\t\t");
-                  _builder.append("__");
-                  String _gaElementIdentifier_1 = XtextAntlrGeneratorFragment2.this.grammarUtil.gaElementIdentifier(element_1);
-                  _builder.append(_gaElementIdentifier_1, "\t\t\t\t\t");
-                  {
-                    if ((element_1 instanceof Group)) {
-                      _builder.append("__0");
-                    }
-                  }
-                  _builder.append("\");");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-              _builder.append("\t\t\t\t");
-              _builder.append("}");
-              _builder.newLine();
-            }
-          }
-          _builder.append("\t\t\t");
-          _builder.append("};");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("return nameMappings.get(element);");
+          _builder.append("return mappings.get(element);");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
-          _builder.append("\t\t\t");
+          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected String[] getInitialHiddenTokens() {");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("return new String[] { ");
-          {
-            List<String> _initialHiddenTokens = XtextAntlrGeneratorFragment2.this.grammarUtil.initialHiddenTokens(XtextAntlrGeneratorFragment2.this.getGrammar());
-            boolean _hasElements = false;
-            for(final String hidden : _initialHiddenTokens) {
-              if (!_hasElements) {
-                _hasElements = true;
-              } else {
-                _builder.appendImmediate(", ", "\t\t");
-              }
-              _builder.append("\"");
-              _builder.append(hidden, "\t\t");
-              _builder.append("\"");
-            }
-          }
-          _builder.append(" };");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("public ");
-          TypeReference _grammarAccess_1 = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(XtextAntlrGeneratorFragment2.this.getGrammar());
-          _builder.append(_grammarAccess_1, "\t");
-          _builder.append(" getGrammarAccess() {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("return this.grammarAccess;");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("public void setGrammarAccess(");
+          _builder.append("private static void init(");
+          _builder.append(ImmutableMap.class, "\t");
+          _builder.append(".Builder<");
+          _builder.append(AbstractElement.class, "\t");
+          _builder.append(", ");
+          _builder.append(String.class, "\t");
+          _builder.append("> builder, ");
           TypeReference _grammarAccess_2 = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(XtextAntlrGeneratorFragment2.this.getGrammar());
           _builder.append(_grammarAccess_2, "\t");
           _builder.append(" grammarAccess) {");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("this.grammarAccess = grammarAccess;");
-          _builder.newLine();
+          {
+            int _size_1 = partitions.size();
+            boolean _greaterThan_1 = (_size_1 > 1);
+            if (_greaterThan_1) {
+              {
+                Iterable<Pair<Integer, List<AbstractElement>>> _indexed_1 = IterableExtensions.<List<AbstractElement>>indexed(partitions);
+                for(final Pair<Integer, List<AbstractElement>> partition_1 : _indexed_1) {
+                  _builder.append("\t\t");
+                  _builder.append("Init");
+                  Integer _key_1 = partition_1.getKey();
+                  _builder.append(_key_1, "\t\t");
+                  _builder.append(".doInit(builder, grammarAccess);");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            } else {
+              {
+                for(final List<AbstractElement> partition_2 : partitions) {
+                  _builder.append("\t\t");
+                  StringConcatenationClient _initNameMappings_1 = XtextAntlrGeneratorFragment2.this.initNameMappings(partition_2);
+                  _builder.append(_initNameMappings_1, "\t\t");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
+          }
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
           _builder.append("}");
           _builder.newLine();
+          _builder.newLine();
+          _builder.append("@");
+          _builder.append(Inject.class);
+          _builder.newLineIfNotEmpty();
+          _builder.append("private NameMappings nameMappings;");
+          _builder.newLine();
         }
       };
-      file.setContent(_client);
-      _xblockexpression = file;
+      _xblockexpression = _client;
     }
     return _xblockexpression;
   }
