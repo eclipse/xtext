@@ -22,7 +22,8 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguageEx.ParserRuleParameters");
 		private final RuleCall cParserRuleParametersParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//@ Override ParserRuleParameters:
+		//@Override
+		//ParserRuleParameters:
 		//	super::ParserRuleParameters;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -33,7 +34,8 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguageEx.Scenario1");
 		private final RuleCall cScenario1ParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//@ Override Scenario1 <Param Scenario:
+		//@Override
+		//Scenario1 <Param Scenario:
 		//	super::Scenario1<Param>;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -93,7 +95,8 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	}
 
 	
-	//@ Override ParserRuleParameters:
+	//@Override
+	//ParserRuleParameters:
 	//	super::ParserRuleParameters;
 	public ParserRuleParametersElements getParserRuleParametersAccess() {
 		return pParserRuleParameters;
@@ -103,7 +106,8 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 		return getParserRuleParametersAccess().getRule();
 	}
 	
-	//@ Override Scenario1 <Param Scenario:
+	//@Override
+	//Scenario1 <Param Scenario:
 	//	super::Scenario1<Param>;
 	public Scenario1Elements getScenario1Access() {
 		return pScenario1;
@@ -173,13 +177,25 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	//Scenario5 <Include Scenario:
 	//	<Include> {Scenario} 'include'
 	//	| {Scenario} 'trailing'
-	//	| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false>;
+	//	| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false> | {Scenario}
+	//	'scenario5' 'fragment' Scenario5Body<Include> 'trailing';
 	public ParametersTestLanguageGrammarAccess.Scenario5Elements getScenario5Access() {
 		return gaParametersTestLanguage.getScenario5Access();
 	}
 	
 	public ParserRule getScenario5Rule() {
 		return getScenario5Access().getRule();
+	}
+	
+	//fragment Scenario5Body <Include> *:
+	//	<Include> 'include'
+	//	| <!Include> 'fragment'?;
+	public ParametersTestLanguageGrammarAccess.Scenario5BodyElements getScenario5BodyAccess() {
+		return gaParametersTestLanguage.getScenario5BodyAccess();
+	}
+	
+	public ParserRule getScenario5BodyRule() {
+		return getScenario5BodyAccess().getRule();
 	}
 	
 	//IdOrKeyword <Keyword>:

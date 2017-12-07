@@ -109,7 +109,11 @@ public abstract class AbstractParametersContentAssistTest extends AbstractConten
 	}
 	
 	@Test public void test_13b() throws Exception {
-		newBuilder().append("#13 scenario5 ").assertText(Strings.EMPTY_ARRAY);
+		newBuilder().append("#13 scenario5 ").assertText("fragment");
+	}
+	
+	@Test public void test_13c() throws Exception {
+		newBuilder().append("#13 scenario5 fragment ").assertText("trailing", "fragment");
 	}
 	
 	@Test public void test_14a() throws Exception {
@@ -117,6 +121,18 @@ public abstract class AbstractParametersContentAssistTest extends AbstractConten
 	}
 	
 	@Test public void test_14b() throws Exception {
-		newBuilder().append("#14 scenario5 ").assertText("include");
+		newBuilder().append("#14 scenario5 ").assertText("include", "fragment");
+	}
+	
+	@Test public void test_14c() throws Exception {
+		newBuilder().append("#14 scenario5 fragment ").assertText("include");
+	}
+	
+	@Test public void test_14d() throws Exception {
+		newBuilder().append("#14 scenario5 incl").assertText("include");
+	}
+	
+	@Test public void test_14e() throws Exception {
+		newBuilder().append("#14 scenario5 fragment incl").assertText("include");
 	}
 }

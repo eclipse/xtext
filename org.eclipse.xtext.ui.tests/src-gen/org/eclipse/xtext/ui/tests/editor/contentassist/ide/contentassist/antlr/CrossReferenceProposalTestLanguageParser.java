@@ -3,8 +3,9 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
-import java.util.HashMap;
+import com.google.inject.Singleton;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -13,10 +14,36 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.CrossReferencePr
 
 public class CrossReferenceProposalTestLanguageParser extends AbstractContentAssistParser {
 
+	@Singleton
+	public static final class NameMappings {
+		
+		private final Map<AbstractElement, String> mappings;
+		
+		@Inject
+		public NameMappings(CrossReferenceProposalTestLanguageGrammarAccess grammarAccess) {
+			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
+			init(builder, grammarAccess);
+			this.mappings = builder.build();
+		}
+		
+		public String getRuleName(AbstractElement element) {
+			return mappings.get(element);
+		}
+		
+		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, CrossReferenceProposalTestLanguageGrammarAccess grammarAccess) {
+			builder.put(grammarAccess.getClassAccess().getGroup(), "rule__Class__Group__0");
+			builder.put(grammarAccess.getClassAccess().getGroup_0(), "rule__Class__Group_0__0");
+			builder.put(grammarAccess.getModelAccess().getElementsAssignment(), "rule__Model__ElementsAssignment");
+			builder.put(grammarAccess.getClassAccess().getSuperClassAssignment_0_0(), "rule__Class__SuperClassAssignment_0_0");
+			builder.put(grammarAccess.getClassAccess().getNameAssignment_1(), "rule__Class__NameAssignment_1");
+		}
+	}
+	
+	@Inject
+	private NameMappings nameMappings;
+
 	@Inject
 	private CrossReferenceProposalTestLanguageGrammarAccess grammarAccess;
-
-	private Map<AbstractElement, String> nameMappings;
 
 	@Override
 	protected InternalCrossReferenceProposalTestLanguageParser createParser() {
@@ -27,21 +54,9 @@ public class CrossReferenceProposalTestLanguageParser extends AbstractContentAss
 
 	@Override
 	protected String getRuleName(AbstractElement element) {
-		if (nameMappings == null) {
-			nameMappings = new HashMap<AbstractElement, String>() {
-				private static final long serialVersionUID = 1L;
-				{
-					put(grammarAccess.getClassAccess().getGroup(), "rule__Class__Group__0");
-					put(grammarAccess.getClassAccess().getGroup_0(), "rule__Class__Group_0__0");
-					put(grammarAccess.getModelAccess().getElementsAssignment(), "rule__Model__ElementsAssignment");
-					put(grammarAccess.getClassAccess().getSuperClassAssignment_0_0(), "rule__Class__SuperClassAssignment_0_0");
-					put(grammarAccess.getClassAccess().getNameAssignment_1(), "rule__Class__NameAssignment_1");
-				}
-			};
-		}
-		return nameMappings.get(element);
+		return nameMappings.getRuleName(element);
 	}
-			
+
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };
@@ -53,5 +68,13 @@ public class CrossReferenceProposalTestLanguageParser extends AbstractContentAss
 
 	public void setGrammarAccess(CrossReferenceProposalTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public NameMappings getNameMappings() {
+		return nameMappings;
+	}
+	
+	public void setNameMappings(NameMappings nameMappings) {
+		this.nameMappings = nameMappings;
 	}
 }

@@ -51,6 +51,7 @@ Scenario10<A, B> returns Scenario:
 	  <A & B> {Scenario} 'include'
 	| {Scenario} 'trailing'
 	| {Scenario} 'scenario5' (<A & B> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false>
+	| {Scenario} 'scenario5' 'fragment' Scenario5Body<A & B> 'trailing'
 ;
 
 IdOrKeyword2<A, B, C>:

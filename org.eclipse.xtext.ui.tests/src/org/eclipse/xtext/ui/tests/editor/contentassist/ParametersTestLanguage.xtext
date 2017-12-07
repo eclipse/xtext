@@ -49,6 +49,12 @@ Scenario5<Include> returns Scenario:
 	  <Include> {Scenario} 'include'
 	| {Scenario} 'trailing'
 	| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false>
+	| {Scenario} 'scenario5' 'fragment' Scenario5Body<Include> 'trailing'
+;
+
+fragment Scenario5Body <Include>*:
+		<Include> 'include'
+	|	<!Include> 'fragment'?
 ;
 
 IdOrKeyword<Keyword>:

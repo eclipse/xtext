@@ -28,6 +28,7 @@ org.eclipse.xtext.ui.tests.editor.contentassist.ide.UnorderedGroupsTestLanguageI
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.ParametersTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.ParametersTestLanguageExIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.TwoParametersTestLanguageIdeSetup
+org.eclipse.xtext.ui.tests.editor.contentassist.ide.ParameterizedExpressionsTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.outline.ide.OutlineTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.parser.keywords.ide.KeywordsUiTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.testlanguages.ide.ContentAssistTestLanguageIdeSetup

@@ -48,6 +48,7 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -81,6 +82,8 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 /**
+ * This class is effetively deprecated. It is strongly recommend to use the {@link ContentAssistContextFactory} instead.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
@@ -480,12 +483,6 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				}
 			};
 			for(FollowElement element: followElements) {
-				List<Integer> paramStack = element.getParamStack();
-				if (!paramStack.isEmpty()) {
-					calculator.parameterConfig = paramStack.get(paramStack.size() - 1);
-				} else {
-					calculator.parameterConfig = 0;
-				}
 				computeFollowElements(calculator, element);
 			}
 		}
@@ -501,7 +498,10 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			if (!visited.put(element.getLookAhead(), currentState))
 				return;
 			if (element.getLookAhead() <= 1) {
+				List<Integer> paramStack = element.getParamStack();
+				int paramIndex = computeParamStackOffset(currentState, paramStack);
 				for(AbstractElement abstractElement: currentState) {
+					paramIndex = updateParameterConfig(calculator, paramStack, paramIndex, abstractElement);
 					Assignment ass = EcoreUtil2.getContainerOfType(abstractElement, Assignment.class);
 					if (ass != null)
 						calculator.doSwitch(ass);
@@ -580,6 +580,37 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				}
 			}
 			return false;
+		}
+		
+		protected int updateParameterConfig(FollowElementCalculator calculator, List<Integer> paramStack, int paramIndex,
+				AbstractElement abstractElement) {
+			if (paramIndex >= 0) {
+				calculator.parameterConfig = paramStack.get(paramIndex);	
+			} else {
+				calculator.parameterConfig = 0;
+			}
+			if (abstractElement instanceof RuleCall) {
+				RuleCall call = (RuleCall) abstractElement;
+				if (!call.getArguments().isEmpty()) {
+					paramIndex++;
+				}
+			}
+			return paramIndex;
+		}
+
+		protected int computeParamStackOffset(List<AbstractElement> currentState, List<Integer> paramStack) {
+			int paramIndex = paramStack.size() - 1;
+			if (!paramStack.isEmpty()) {
+				for(AbstractElement abstractElement: currentState) {
+					if (abstractElement instanceof RuleCall) {
+						RuleCall call = (RuleCall) abstractElement;
+						if (!call.getArguments().isEmpty()) {
+							paramIndex--;
+						}
+					}
+				}
+			}
+			return paramIndex;
 		}
 
 		public INode getContainingDatatypeRuleNode(INode node) {

@@ -3,8 +3,9 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
-import java.util.HashMap;
+import com.google.inject.Singleton;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -13,10 +14,43 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug288760TestLan
 
 public class Bug288760TestLanguageParser extends AbstractContentAssistParser {
 
+	@Singleton
+	public static final class NameMappings {
+		
+		private final Map<AbstractElement, String> mappings;
+		
+		@Inject
+		public NameMappings(Bug288760TestLanguageGrammarAccess grammarAccess) {
+			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
+			init(builder, grammarAccess);
+			this.mappings = builder.build();
+		}
+		
+		public String getRuleName(AbstractElement element) {
+			return mappings.get(element);
+		}
+		
+		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, Bug288760TestLanguageGrammarAccess grammarAccess) {
+			builder.put(grammarAccess.getWorkflowElementAccess().getAlternatives(), "rule__WorkflowElement__Alternatives");
+			builder.put(grammarAccess.getWorkflowElementAccess().getGroup_0(), "rule__WorkflowElement__Group_0__0");
+			builder.put(grammarAccess.getWorkflowElementAccess().getGroup_1(), "rule__WorkflowElement__Group_1__0");
+			builder.put(grammarAccess.getAttributeAccess().getGroup(), "rule__Attribute__Group__0");
+			builder.put(grammarAccess.getWorkflowElementAccess().getNameAssignment_0_0(), "rule__WorkflowElement__NameAssignment_0_0");
+			builder.put(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_0_1(), "rule__WorkflowElement__AttributesAssignment_0_1");
+			builder.put(grammarAccess.getWorkflowElementAccess().getNameAssignment_1_0(), "rule__WorkflowElement__NameAssignment_1_0");
+			builder.put(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_1_1(), "rule__WorkflowElement__AttributesAssignment_1_1");
+			builder.put(grammarAccess.getWorkflowElementAccess().getChildrenAssignment_1_3(), "rule__WorkflowElement__ChildrenAssignment_1_3");
+			builder.put(grammarAccess.getWorkflowElementAccess().getEndAssignment_1_4(), "rule__WorkflowElement__EndAssignment_1_4");
+			builder.put(grammarAccess.getAttributeAccess().getNameAssignment_0(), "rule__Attribute__NameAssignment_0");
+			builder.put(grammarAccess.getAttributeAccess().getValueAssignment_2(), "rule__Attribute__ValueAssignment_2");
+		}
+	}
+	
+	@Inject
+	private NameMappings nameMappings;
+
 	@Inject
 	private Bug288760TestLanguageGrammarAccess grammarAccess;
-
-	private Map<AbstractElement, String> nameMappings;
 
 	@Override
 	protected InternalBug288760TestLanguageParser createParser() {
@@ -27,28 +61,9 @@ public class Bug288760TestLanguageParser extends AbstractContentAssistParser {
 
 	@Override
 	protected String getRuleName(AbstractElement element) {
-		if (nameMappings == null) {
-			nameMappings = new HashMap<AbstractElement, String>() {
-				private static final long serialVersionUID = 1L;
-				{
-					put(grammarAccess.getWorkflowElementAccess().getAlternatives(), "rule__WorkflowElement__Alternatives");
-					put(grammarAccess.getWorkflowElementAccess().getGroup_0(), "rule__WorkflowElement__Group_0__0");
-					put(grammarAccess.getWorkflowElementAccess().getGroup_1(), "rule__WorkflowElement__Group_1__0");
-					put(grammarAccess.getAttributeAccess().getGroup(), "rule__Attribute__Group__0");
-					put(grammarAccess.getWorkflowElementAccess().getNameAssignment_0_0(), "rule__WorkflowElement__NameAssignment_0_0");
-					put(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_0_1(), "rule__WorkflowElement__AttributesAssignment_0_1");
-					put(grammarAccess.getWorkflowElementAccess().getNameAssignment_1_0(), "rule__WorkflowElement__NameAssignment_1_0");
-					put(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_1_1(), "rule__WorkflowElement__AttributesAssignment_1_1");
-					put(grammarAccess.getWorkflowElementAccess().getChildrenAssignment_1_3(), "rule__WorkflowElement__ChildrenAssignment_1_3");
-					put(grammarAccess.getWorkflowElementAccess().getEndAssignment_1_4(), "rule__WorkflowElement__EndAssignment_1_4");
-					put(grammarAccess.getAttributeAccess().getNameAssignment_0(), "rule__Attribute__NameAssignment_0");
-					put(grammarAccess.getAttributeAccess().getValueAssignment_2(), "rule__Attribute__ValueAssignment_2");
-				}
-			};
-		}
-		return nameMappings.get(element);
+		return nameMappings.getRuleName(element);
 	}
-			
+
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT" };
@@ -60,5 +75,13 @@ public class Bug288760TestLanguageParser extends AbstractContentAssistParser {
 
 	public void setGrammarAccess(Bug288760TestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public NameMappings getNameMappings() {
+		return nameMappings;
+	}
+	
+	public void setNameMappings(NameMappings nameMappings) {
+		this.nameMappings = nameMappings;
 	}
 }

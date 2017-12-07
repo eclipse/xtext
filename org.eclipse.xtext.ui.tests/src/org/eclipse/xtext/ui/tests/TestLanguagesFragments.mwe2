@@ -19,6 +19,7 @@ var memoize = false
 var emfRuntimeVersion = "2.9"
 
 CompositeGeneratorFragment2 {
+	
 	fragment = ecore.EMFGeneratorFragment2 auto-inject {}
 	fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 	fragment = resourceFactory.ResourceFactoryFragment2 {}

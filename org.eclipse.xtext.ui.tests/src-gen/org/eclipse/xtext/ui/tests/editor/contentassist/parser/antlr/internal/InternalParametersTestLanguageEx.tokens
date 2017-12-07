@@ -12,8 +12,9 @@
 '#7'=17
 '#8'=18
 '#9'=19
-'include'=29
-'keyword'=30
+'fragment'=29
+'include'=30
+'keyword'=31
 'scenario3'=26
 'scenario4'=27
 'scenario5'=28
@@ -45,3 +46,4 @@ T__27=27
 T__28=28
 T__29=29
 T__30=30
+T__31=31
