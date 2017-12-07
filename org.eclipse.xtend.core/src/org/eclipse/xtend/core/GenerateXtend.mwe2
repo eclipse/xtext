@@ -19,6 +19,7 @@ var rootPath = ".."
 var baseName = "org.eclipse.xtend"
 var runtimeProjectName = "org.eclipse.xtend.core"
 var projectPath = "${rootPath}/${runtimeProjectName}"
+var ideaRoot = "${rootPath}/../xtext-idea/org.eclipse.xtend.idea"
 
 var file.extensions = "xtend"
 
@@ -57,7 +58,7 @@ Workflow {
 				ideaPlugin = {
 					enabled = true
 					name = "org.eclipse.xtend.idea" 
-					root = "${rootPath}/../xtext-idea/org.eclipse.xtend.idea"
+					root = ideaRoot
 				}
 				createEclipseMetaData = true
 			}
