@@ -8,9 +8,15 @@
 package org.eclipse.xtext.ide;
 
 import com.google.inject.Binder;
+import com.google.inject.name.Names;
 import java.util.concurrent.ExecutorService;
 import org.eclipse.xtext.ide.ExecutorServiceProvider;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.LiveShadowedChunkedResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
+import org.eclipse.xtext.workspace.ProjectConfigProvider;
 
 /**
  * Default Guice bindings for the generic IDE features of Xtext.
@@ -19,5 +25,13 @@ import org.eclipse.xtext.service.AbstractGenericModule;
 public class DefaultIdeModule extends AbstractGenericModule {
   public void configureExecutorService(final Binder binder) {
     binder.<ExecutorService>bind(ExecutorService.class).toProvider(ExecutorServiceProvider.class);
+  }
+  
+  public void configureIResourceDescriptionsLiveScope(final Binder binder) {
+    binder.<IResourceDescriptions>bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(LiveShadowedChunkedResourceDescriptions.class);
+  }
+  
+  public Class<? extends IProjectConfigProvider> bindIProjectConfigProvider() {
+    return ProjectConfigProvider.class;
   }
 }

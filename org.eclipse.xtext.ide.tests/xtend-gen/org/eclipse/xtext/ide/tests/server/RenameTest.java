@@ -84,7 +84,7 @@ public class RenameTest extends AbstractTestLangLanguageServerTest {
       _builder.append("Tescht [[1, 4] .. [1, 8]]");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("MyType2.testlang : Test [[1, 4] .. [1, 8]]");
+      _builder.append("MyType2.testlang : Tescht [[1, 4] .. [1, 8]]");
       _builder.newLine();
       _builder.append("documentChanges : ");
       _builder.newLine();

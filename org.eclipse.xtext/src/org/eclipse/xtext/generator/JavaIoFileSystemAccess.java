@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
+import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -121,16 +122,21 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 	protected void generateTrace(String generatedFile, String outputConfigName, CharSequence contents) {
 		try {
 			if (contents instanceof ITraceRegionProvider) {
-				String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile);
-				File traceFile = getFile(traceFileName, outputConfigName);
-				OutputStream out = new BufferedOutputStream(new FileOutputStream(traceFile));
+				OutputStream out = null;
 				try {
 					AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
+					String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile);
+					File traceFile = getFile(traceFileName, outputConfigName);
+					out = new BufferedOutputStream(new FileOutputStream(traceFile));
 					traceSerializer.writeTraceRegionTo(traceRegion, out);
 					if(callBack != null) 
 						callBack.fileAdded(traceFile);
-				} finally {
-					out.close();
+				} catch (TraceNotFoundException e) {
+					// ok
+				}finally {
+					if (out != null) {
+						out.close();
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {

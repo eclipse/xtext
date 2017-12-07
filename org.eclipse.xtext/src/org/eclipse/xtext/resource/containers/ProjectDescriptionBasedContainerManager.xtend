@@ -12,6 +12,7 @@ import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
+import org.eclipse.xtext.resource.impl.LiveShadowedChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
@@ -25,38 +26,50 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 class ProjectDescriptionBasedContainerManager implements IContainer.Manager {
 	
 	public def boolean shouldUseProjectDescriptionBasedContainers(IResourceDescriptions resourceDescriptions) {
-		if (resourceDescriptions instanceof ChunkedResourceDescriptions) {
-			if (ProjectDescription.findInEmfObject(resourceDescriptions.resourceSet) !== null) {
-				return true
-			}
-		}
-		return false 
+		val chunkedResourceDescriptions = resourceDescriptions.chunkedResourceDescriptions
+		return chunkedResourceDescriptions !== null 
+			&& chunkedResourceDescriptions.resourceSet !== null
+			&& ProjectDescription.findInEmfObject(chunkedResourceDescriptions.resourceSet) !== null 
 	}
 	
 	override getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
-		if (resourceDescriptions instanceof ChunkedResourceDescriptions) {
-			val resourceSet = resourceDescriptions.resourceSet
-			val projectDescription = ProjectDescription.findInEmfObject(resourceSet)
-			val container = resourceDescriptions.getContainer(projectDescription.name)
-			return new ResourceDescriptionsBasedContainer(container)
-		}
-		throw new IllegalArgumentException("expected "+ChunkedResourceDescriptions.name)
+		val chunkedResourceDescriptions = resourceDescriptions.chunkedResourceDescriptions
+		if (chunkedResourceDescriptions === null)
+			throw new IllegalArgumentException("expected "+ChunkedResourceDescriptions.name)
+		
+		val resourceSet = chunkedResourceDescriptions.resourceSet
+		val projectDescription = ProjectDescription.findInEmfObject(resourceSet)
+		val container = createContainer(resourceDescriptions, chunkedResourceDescriptions, projectDescription.name)
+		return container
 	}
 	
 	override getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
-		if (resourceDescriptions instanceof ChunkedResourceDescriptions) {
-			val resourceSet = resourceDescriptions.resourceSet
-			val projectDescription = ProjectDescription.findInEmfObject(resourceSet)
-			val allContainers = <IContainer>newArrayList
-			val container = resourceDescriptions.getContainer(projectDescription.name) ?: new ResourceDescriptionsData(emptySet)
-			allContainers.add(new ResourceDescriptionsBasedContainer(container))
-			for (name : projectDescription.dependencies) {
-				val containerDep = resourceDescriptions.getContainer(name) ?: new ResourceDescriptionsData(emptySet)
-				allContainers.add(new ResourceDescriptionsBasedContainer(containerDep))
-			}
-			return allContainers
+		val chunkedResourceDescriptions = resourceDescriptions.chunkedResourceDescriptions
+		if (chunkedResourceDescriptions === null)
+			throw new IllegalArgumentException("expected "+ChunkedResourceDescriptions.name)
+		val resourceSet = chunkedResourceDescriptions.resourceSet
+		val projectDescription = ProjectDescription.findInEmfObject(resourceSet)
+		val allContainers = <IContainer>newArrayList
+		allContainers.add(createContainer(resourceDescriptions, chunkedResourceDescriptions, projectDescription.name))
+		for (name : projectDescription.dependencies) {
+			allContainers.add(createContainer(resourceDescriptions, chunkedResourceDescriptions, name))
 		}
-		throw new IllegalArgumentException("expected "+ChunkedResourceDescriptions.name)
+		return allContainers
+	
 	}
 	
+	protected def ChunkedResourceDescriptions getChunkedResourceDescriptions(IResourceDescriptions resourceDescriptions) {
+		switch resourceDescriptions {
+			ChunkedResourceDescriptions: resourceDescriptions
+			LiveShadowedChunkedResourceDescriptions: resourceDescriptions.globalDescriptions.chunkedResourceDescriptions
+			default: null
+		}
+	}
+	
+	protected def createContainer(IResourceDescriptions resourceDescriptions, ChunkedResourceDescriptions chunkedResourceDescriptions, String projectName) {
+		if(resourceDescriptions instanceof LiveShadowedChunkedResourceDescriptions) 
+			new LiveShadowedChunkedContainer(resourceDescriptions, projectName)
+		else
+			new ResourceDescriptionsBasedContainer(chunkedResourceDescriptions.getContainer(projectName) ?: new ResourceDescriptionsData(emptySet))
+	}
 }

@@ -15,7 +15,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.containers.LiveShadowedChunkedContainer;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
+import org.eclipse.xtext.resource.impl.LiveShadowedChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
@@ -30,37 +32,69 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 @SuppressWarnings("all")
 public class ProjectDescriptionBasedContainerManager implements IContainer.Manager {
   public boolean shouldUseProjectDescriptionBasedContainers(final IResourceDescriptions resourceDescriptions) {
-    if ((resourceDescriptions instanceof ChunkedResourceDescriptions)) {
-      ProjectDescription _findInEmfObject = ProjectDescription.findInEmfObject(((ChunkedResourceDescriptions)resourceDescriptions).getResourceSet());
-      boolean _tripleNotEquals = (_findInEmfObject != null);
-      if (_tripleNotEquals) {
-        return true;
-      }
-    }
-    return false;
+    final ChunkedResourceDescriptions chunkedResourceDescriptions = this.getChunkedResourceDescriptions(resourceDescriptions);
+    return (((chunkedResourceDescriptions != null) && (chunkedResourceDescriptions.getResourceSet() != null)) && (ProjectDescription.findInEmfObject(chunkedResourceDescriptions.getResourceSet()) != null));
   }
   
   @Override
   public IContainer getContainer(final IResourceDescription desc, final IResourceDescriptions resourceDescriptions) {
-    if ((resourceDescriptions instanceof ChunkedResourceDescriptions)) {
-      final ResourceSet resourceSet = ((ChunkedResourceDescriptions)resourceDescriptions).getResourceSet();
-      final ProjectDescription projectDescription = ProjectDescription.findInEmfObject(resourceSet);
-      final ResourceDescriptionsData container = ((ChunkedResourceDescriptions)resourceDescriptions).getContainer(projectDescription.getName());
-      return new ResourceDescriptionsBasedContainer(container);
+    final ChunkedResourceDescriptions chunkedResourceDescriptions = this.getChunkedResourceDescriptions(resourceDescriptions);
+    if ((chunkedResourceDescriptions == null)) {
+      String _name = ChunkedResourceDescriptions.class.getName();
+      String _plus = ("expected " + _name);
+      throw new IllegalArgumentException(_plus);
     }
-    String _name = ChunkedResourceDescriptions.class.getName();
-    String _plus = ("expected " + _name);
-    throw new IllegalArgumentException(_plus);
+    final ResourceSet resourceSet = chunkedResourceDescriptions.getResourceSet();
+    final ProjectDescription projectDescription = ProjectDescription.findInEmfObject(resourceSet);
+    final IContainer container = this.createContainer(resourceDescriptions, chunkedResourceDescriptions, projectDescription.getName());
+    return container;
   }
   
   @Override
   public List<IContainer> getVisibleContainers(final IResourceDescription desc, final IResourceDescriptions resourceDescriptions) {
-    if ((resourceDescriptions instanceof ChunkedResourceDescriptions)) {
-      final ResourceSet resourceSet = ((ChunkedResourceDescriptions)resourceDescriptions).getResourceSet();
-      final ProjectDescription projectDescription = ProjectDescription.findInEmfObject(resourceSet);
-      final ArrayList<IContainer> allContainers = CollectionLiterals.<IContainer>newArrayList();
+    final ChunkedResourceDescriptions chunkedResourceDescriptions = this.getChunkedResourceDescriptions(resourceDescriptions);
+    if ((chunkedResourceDescriptions == null)) {
+      String _name = ChunkedResourceDescriptions.class.getName();
+      String _plus = ("expected " + _name);
+      throw new IllegalArgumentException(_plus);
+    }
+    final ResourceSet resourceSet = chunkedResourceDescriptions.getResourceSet();
+    final ProjectDescription projectDescription = ProjectDescription.findInEmfObject(resourceSet);
+    final ArrayList<IContainer> allContainers = CollectionLiterals.<IContainer>newArrayList();
+    allContainers.add(this.createContainer(resourceDescriptions, chunkedResourceDescriptions, projectDescription.getName()));
+    List<String> _dependencies = projectDescription.getDependencies();
+    for (final String name : _dependencies) {
+      allContainers.add(this.createContainer(resourceDescriptions, chunkedResourceDescriptions, name));
+    }
+    return allContainers;
+  }
+  
+  protected ChunkedResourceDescriptions getChunkedResourceDescriptions(final IResourceDescriptions resourceDescriptions) {
+    ChunkedResourceDescriptions _switchResult = null;
+    boolean _matched = false;
+    if (resourceDescriptions instanceof ChunkedResourceDescriptions) {
+      _matched=true;
+      _switchResult = ((ChunkedResourceDescriptions)resourceDescriptions);
+    }
+    if (!_matched) {
+      if (resourceDescriptions instanceof LiveShadowedChunkedResourceDescriptions) {
+        _matched=true;
+        _switchResult = this.getChunkedResourceDescriptions(((LiveShadowedChunkedResourceDescriptions)resourceDescriptions).getGlobalDescriptions());
+      }
+    }
+    if (!_matched) {
+      _switchResult = null;
+    }
+    return _switchResult;
+  }
+  
+  protected IContainer createContainer(final IResourceDescriptions resourceDescriptions, final ChunkedResourceDescriptions chunkedResourceDescriptions, final String projectName) {
+    IContainer _xifexpression = null;
+    if ((resourceDescriptions instanceof LiveShadowedChunkedResourceDescriptions)) {
+      _xifexpression = new LiveShadowedChunkedContainer(((LiveShadowedChunkedResourceDescriptions)resourceDescriptions), projectName);
+    } else {
       ResourceDescriptionsData _elvis = null;
-      ResourceDescriptionsData _container = ((ChunkedResourceDescriptions)resourceDescriptions).getContainer(projectDescription.getName());
+      ResourceDescriptionsData _container = chunkedResourceDescriptions.getContainer(projectName);
       if (_container != null) {
         _elvis = _container;
       } else {
@@ -68,30 +102,8 @@ public class ProjectDescriptionBasedContainerManager implements IContainer.Manag
         ResourceDescriptionsData _resourceDescriptionsData = new ResourceDescriptionsData(_emptySet);
         _elvis = _resourceDescriptionsData;
       }
-      final ResourceDescriptionsData container = _elvis;
-      ResourceDescriptionsBasedContainer _resourceDescriptionsBasedContainer = new ResourceDescriptionsBasedContainer(container);
-      allContainers.add(_resourceDescriptionsBasedContainer);
-      List<String> _dependencies = projectDescription.getDependencies();
-      for (final String name : _dependencies) {
-        {
-          ResourceDescriptionsData _elvis_1 = null;
-          ResourceDescriptionsData _container_1 = ((ChunkedResourceDescriptions)resourceDescriptions).getContainer(name);
-          if (_container_1 != null) {
-            _elvis_1 = _container_1;
-          } else {
-            Set<IResourceDescription> _emptySet_1 = CollectionLiterals.<IResourceDescription>emptySet();
-            ResourceDescriptionsData _resourceDescriptionsData_1 = new ResourceDescriptionsData(_emptySet_1);
-            _elvis_1 = _resourceDescriptionsData_1;
-          }
-          final ResourceDescriptionsData containerDep = _elvis_1;
-          ResourceDescriptionsBasedContainer _resourceDescriptionsBasedContainer_1 = new ResourceDescriptionsBasedContainer(containerDep);
-          allContainers.add(_resourceDescriptionsBasedContainer_1);
-        }
-      }
-      return allContainers;
+      _xifexpression = new ResourceDescriptionsBasedContainer(_elvis);
     }
-    String _name = ChunkedResourceDescriptions.class.getName();
-    String _plus = ("expected " + _name);
-    throw new IllegalArgumentException(_plus);
+    return _xifexpression;
   }
 }

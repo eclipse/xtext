@@ -22,12 +22,14 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.ISelectable;
+import org.eclipse.xtext.resource.IShadowedResourceDescriptions;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -40,18 +42,21 @@ import com.google.inject.Inject;
  * 
  * @since 2.1
  */
-public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDescriptions {
+public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDescriptions implements IShadowedResourceDescriptions {
 	
 	@Inject
 	private ResourceSetBasedResourceDescriptions localDescriptions;
 
 	@Inject
-	private IResourceDescriptions globalDescriptions;
+	private Provider<IResourceDescriptions> globalDescriptionsProvider;
 
+	private IResourceDescriptions globalDescriptions;
+	
 	@Override
 	public void setContext(Notifier ctx) {
 		localDescriptions.setContext(ctx);
 		localDescriptions.setData(null);
+		globalDescriptions = globalDescriptionsProvider.get();
 		if(globalDescriptions instanceof IResourceDescriptions.IContextAware)
 			((IResourceDescriptions.IContextAware) globalDescriptions).setContext(ctx);
 	}
@@ -183,6 +188,12 @@ public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDe
 	 */
 	public void setLocalDescriptions(ResourceSetBasedResourceDescriptions localDescriptions) {
 		this.localDescriptions = localDescriptions;
+	}
+
+	@Override
+	public boolean isShadowed(EClass type, QualifiedName name, boolean ignoreCase) {
+		return !Iterables.isEmpty(localDescriptions.getExportedObjects(type, name, ignoreCase))
+				&& !Iterables.isEmpty(globalDescriptions.getExportedObjects(type, name, ignoreCase));
 	}
 
 }

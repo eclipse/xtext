@@ -454,8 +454,32 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 				return ambiguousSyntax;
 			Nfa<ISynState> nfa = getAmbiguousNfa();
 			NfaToProduction prod = new NfaToProduction();
-			ambiguousSyntax = prod.nfaToGrammar(nfa, new GetGrammarElement(), new GrammarAliasFactory());
+			Grammar grammar = getGrammar(nfa);
+			GrammarElementDeclarationOrder order = GrammarElementDeclarationOrder.get(grammar);
+			ambiguousSyntax = prod.nfaToGrammar(nfa, new GetGrammarElement(), order, new GrammarAliasFactory());
 			return ambiguousSyntax;
+		}
+		
+		/**
+		 * Extracts the grammar from this transition or the NFA if this transition does not point to an
+		 * {@link AbstractElement}.
+		 */
+		private Grammar getGrammar(Nfa<ISynState> nfa) {
+			AbstractElement grammarElement = getGrammarElement();
+			if (grammarElement == null) {
+				grammarElement = nfa.getStart().getGrammarElement();
+				if (grammarElement == null) {
+					grammarElement = nfa.getStop().getGrammarElement();
+					if (grammarElement == null) {
+						Iterator<ISynState> iter = nfa.getStart().getFollowers().iterator();
+						while (grammarElement == null && iter.hasNext()) {
+							grammarElement = iter.next().getGrammarElement();
+						}
+					}
+				}
+			}
+			Grammar grammar = GrammarUtil.getGrammar(grammarElement);
+			return grammar;
 		}
 
 		@Override

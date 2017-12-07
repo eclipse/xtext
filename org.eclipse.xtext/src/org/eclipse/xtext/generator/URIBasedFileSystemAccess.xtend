@@ -10,6 +10,9 @@ package org.eclipse.xtext.generator
 import com.google.common.io.ByteStreams
 import com.google.common.io.CharStreams
 import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileNotFoundException
 import java.io.InputStream
 import java.io.InputStreamReader
 import org.eclipse.emf.common.util.URI
@@ -21,9 +24,7 @@ import org.eclipse.xtext.generator.trace.TraceFileNameProvider
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.util.RuntimeIOException
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileNotFoundException
+import org.eclipse.xtext.generator.trace.TraceNotFoundException
 
 /**
  * A file system access implementation that is based on EMF URIs and URIConverter
@@ -91,11 +92,15 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	
 	protected def void generateTrace(String generatedFile, String outputConfigName, CharSequence contents) {
 		if (isGenerateTraces && contents instanceof ITraceRegionProvider) {
-			var String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile)
-			val out = new ByteArrayOutputStream()
-			var AbstractTraceRegion traceRegion = (contents as ITraceRegionProvider).getTraceRegion()
-			traceRegionSerializer.writeTraceRegionTo(traceRegion, out)
-			generateFile(traceFileName, outputConfigName, new ByteArrayInputStream(out.toByteArray))
+			try {
+				var AbstractTraceRegion traceRegion = (contents as ITraceRegionProvider).getTraceRegion()
+				var String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile)
+				val out = new ByteArrayOutputStream()
+				traceRegionSerializer.writeTraceRegionTo(traceRegion, out)
+				generateFile(traceFileName, outputConfigName, new ByteArrayInputStream(out.toByteArray))
+			} catch (TraceNotFoundException e) {
+				// ok
+			}
 		}
 	}
 	
