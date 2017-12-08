@@ -7,11 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.BaseContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.EofListener;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.BaseInternalContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * This class if effectively deprecated and clients should use the equivalent from
@@ -21,6 +29,17 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternal
  */
 public abstract class AbstractContentAssistParser extends BaseContentAssistParser<FollowElement, LookAheadTerminal, AbstractInternalContentAssistParser> implements IContentAssistParser {
 
+	@Inject
+	@Named(LexerIdeBindings.CONTENT_ASSIST)
+	private Provider<Lexer> lexerProvider;
+	
+	@Override
+	protected TokenSource createLexer(CharStream stream) {
+		Lexer lexer = lexerProvider.get();
+		lexer.setCharStream(stream);
+		return lexer;
+	}
+	
 	/**
 	 * @since 2.14
 	 */
