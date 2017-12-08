@@ -536,7 +536,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   @Test
   public void testStringLiteralCase() throws Exception {
-    XtendClass xtendClazz = this.toValidXtendClass("class TestStringLiteral { \r\n\t\t\t\tString withLineWrap=\"string with wrap\\n\";\r\n\t\t\t\tString str2 = new String(\"\\1\\2\\3\");\r\n\t\t\t}");
+    XtendClass xtendClazz = this.toValidXtendClass("class TestStringLiteral { \n\t\t\t\tString withLineWrap=\"string with wrap\\n\";\n\t\t\t\tString str2 = new String(\"\\1\\2\\3\");\n\t\t\t}");
     XtendField xtendMember = this.field(xtendClazz, 0);
     Assert.assertEquals("withLineWrap", xtendMember.getName());
     XExpression _initialValue = xtendMember.getInitialValue();
@@ -644,19 +644,19 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   @Test
   public void testSimpleAssigmentCase() throws Exception {
-    XtendClass xtendClazz = this.toValidXtendClass("class TestAssiment {  \r\n\t\t\t\tvoid doStuff() {\r\n\t\t\t\t\tString x = null;\r\n\t\t\t\t\tx = new String();\r\n\t\t\t\t}\r\n\t\t\t}");
+    XtendClass xtendClazz = this.toValidXtendClass("class TestAssiment {  \n\t\t\t\tvoid doStuff() {\n\t\t\t\t\tString x = null;\n\t\t\t\t\tx = new String();\n\t\t\t\t}\n\t\t\t}");
     Assert.assertNotNull(xtendClazz);
   }
   
   @Test
   public void testMultiDeclaration() throws Exception {
-    XtendClass xtendClazz = this.toValidXtendClass("class Test { \r\n\t\t\t\tint i,j=0;\r\n\t\t\t\tvoid doStuff() {\r\n\t\t\t\t\tString x,y = null;\r\n\t\t\t\t}\r\n\t\t\t}");
+    XtendClass xtendClazz = this.toValidXtendClass("class Test { \n\t\t\t\tint i,j=0;\n\t\t\t\tvoid doStuff() {\n\t\t\t\t\tString x,y = null;\n\t\t\t\t}\n\t\t\t}");
     Assert.assertNotNull(xtendClazz);
   }
   
   @Test
   public void testAssertCase() throws Exception {
-    XtendClass xtendClazz = this.toValidXtendClass("class Test {  \r\n\t\t\t\tvoid doStuff() {\r\n\t\t\t\t\tString x = null;\r\n\t\t\t\t\tassert(x!=null);\r\n\t\t\t\t}\r\n\t\t\t}");
+    XtendClass xtendClazz = this.toValidXtendClass("class Test {  \n\t\t\t\tvoid doStuff() {\n\t\t\t\t\tString x = null;\n\t\t\t\t\tassert(x!=null);\n\t\t\t\t}\n\t\t\t}");
     Assert.assertNotNull(xtendClazz);
   }
   
@@ -1317,26 +1317,26 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   @Test
   public void testEnumCase1() throws Exception {
-    XtendClass enum_ = this.toValidXtendClass("public class MyClazz{\r\n\t \t\t\tenum MyEnum { NEW }\r\n\t\t\t}");
+    XtendClass enum_ = this.toValidXtendClass("public class MyClazz{\n\t \t\t\tenum MyEnum { NEW }\n\t\t\t}");
     XtendMember _get = enum_.getMembers().get(0);
     Assert.assertEquals(JvmVisibility.DEFAULT, ((XtendEnum) _get).getVisibility());
   }
   
   @Test
   public void testEnumNotSupportedCase() throws Exception {
-    JavaConverter.ConversionResult enum_ = this.j2x.toXtend("MyEnum", "public enum MyEnum {\r\n\t\t\t\tNEW(1), OLD(2);\r\n\t\t\t\tprivate MyEnum(int value) {}\r\n\t\t\t}\r\n\t\t\t");
+    JavaConverter.ConversionResult enum_ = this.j2x.toXtend("MyEnum", "public enum MyEnum {\n\t\t\t\tNEW(1), OLD(2);\n\t\t\t\tprivate MyEnum(int value) {}\n\t\t\t}\n\t\t\t");
     Assert.assertEquals(3, IterableExtensions.size(enum_.getProblems()));
   }
   
   @Test
   public void testEnumNotSupportedCase2() throws Exception {
-    JavaConverter.ConversionResult enum_ = this.j2x.toXtend("MyEnum", "public enum MyEnum  implements Enumerator {\r\n\t\t\t\tNEW\r\n\t\t\t}\r\n\t\t\t");
+    JavaConverter.ConversionResult enum_ = this.j2x.toXtend("MyEnum", "public enum MyEnum  implements Enumerator {\n\t\t\t\tNEW\n\t\t\t}\n\t\t\t");
     Assert.assertEquals(1, IterableExtensions.size(enum_.getProblems()));
   }
   
   @Test
   public void testEnumNotSupportedCase3() throws Exception {
-    JavaConverter.ConversionResult enum_ = this.j2x.toXtend("MyClazz", "public class MyClazz{\r\n\t \t\t\tenum MyEnum implements Enumerator{ NEW }\r\n\t\t\t}\r\n\t\t\t");
+    JavaConverter.ConversionResult enum_ = this.j2x.toXtend("MyClazz", "public class MyClazz{\n\t \t\t\tenum MyEnum implements Enumerator{ NEW }\n\t\t\t}\n\t\t\t");
     Assert.assertEquals(1, IterableExtensions.size(enum_.getProblems()));
   }
   
@@ -1760,7 +1760,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("+ \".xtexterror\";");
     _builder.newLine();
     Assert.assertEquals(
-      "public String someVar=\".\"\r\npublic String loadingURI=\'\'\'classpath:/«(\'\'\'«someVar»LoadingResourceWithError\'\'\').replace(Character.valueOf(\'.\').charValue, Character.valueOf(\'/\').charValue)».xtexterror\'\'\'", 
+      "public String someVar=\".\"\npublic String loadingURI=\'\'\'classpath:/«(\'\'\'«someVar»LoadingResourceWithError\'\'\').replace(Character.valueOf(\'.\').charValue, Character.valueOf(\'/\').charValue)».xtexterror\'\'\'", 
       this.toXtendClassBodyDeclr(_builder));
   }
   
@@ -1803,7 +1803,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   @Test
   public void testRichStringSpecialCase4() throws Exception {
-    XtendInterface interfaze = this.toValidXtendInterface("interface Z {\r\n\t\t\t\tString CONSTANT_VAL = \"SOMEVALUE\" + \"ADDITION\";\r\n\t\t\t\tString CONSTANT_VAL2 = \"SOMEVALUE\" + CONSTANT_VAL;\r\n\t\t\t}");
+    XtendInterface interfaze = this.toValidXtendInterface("interface Z {\n\t\t\t\tString CONSTANT_VAL = \"SOMEVALUE\" + \"ADDITION\";\n\t\t\t\tString CONSTANT_VAL2 = \"SOMEVALUE\" + CONSTANT_VAL;\n\t\t\t}");
     Assert.assertNotNull(interfaze);
     XtendField xtendMember = this.field(interfaze, 0);
     Assert.assertEquals("CONSTANT_VAL", xtendMember.getName());
