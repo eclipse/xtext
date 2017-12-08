@@ -3053,4 +3053,55 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 			}
 		}
 	}
+	
+	@Test public void testDeprecation_01() throws Exception {
+		XtendFile file = file(
+			"package demo\n" +
+			"import testdata.DeprecatedClass\n" +
+			"class Demo extends DeprecatedClass {}"
+		);
+		helper.assertWarning(file, XIMPORT_DECLARATION, DEPRECATED_MEMBER_REFERENCE);
+	}
+	
+	@Test public void testDeprecation_02() throws Exception {
+		XtendFile file = file(
+				"package demo\n" +
+						"import testdata.DeprecatedClass\n" +
+						"class Demo extends DeprecatedClass {}\n" + 
+						"class Other {}"
+				);
+		helper.assertWarning(file, XIMPORT_DECLARATION, DEPRECATED_MEMBER_REFERENCE);
+	}
+	
+	@Test public void testDeprecation_03() throws Exception {
+		XtendFile file = file(
+				"package demo\n" +
+						"import testdata.DeprecatedClass\n" +
+						"@Deprecated\n" +
+						"class Demo extends DeprecatedClass {}"
+				);
+		helper.assertNoWarnings(file, XIMPORT_DECLARATION, DEPRECATED_MEMBER_REFERENCE);
+	}
+	
+	@Test public void testDeprecation_04() throws Exception {
+		XtendFile file = file(
+				"package demo\n" +
+						"import testdata.DeprecatedClass\n" +
+						"@Deprecated\n" +
+						"class Demo extends DeprecatedClass {}\n" + 
+						"class Other {}"
+				);
+		helper.assertNoWarnings(file, XIMPORT_DECLARATION, DEPRECATED_MEMBER_REFERENCE);
+	}
+	
+	@Test public void testDeprecation_05() throws Exception {
+		XtendFile file = file(
+				"package demo\n" +
+						"import testdata.DeprecatedClass\n" +
+						"class Demo extends DeprecatedClass {}\n" + 
+						"@Deprecated\n" +
+						"class Other {}"
+				);
+		helper.assertNoWarnings(file, XIMPORT_DECLARATION, DEPRECATED_MEMBER_REFERENCE);
+	}
 }

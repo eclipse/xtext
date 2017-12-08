@@ -63,6 +63,7 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -83,6 +84,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.AnnotationLookup;
+import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -140,6 +142,7 @@ import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder.Acceptor;
 import org.eclipse.xtext.xbase.validation.ProxyAwareUIStrings;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -2124,4 +2127,27 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	protected boolean isLocalClassSemantics(EObject object) {
 		return super.isLocalClassSemantics(object) || (object instanceof XtendMember && !(object instanceof AnonymousClass));
 	}
+	
+	@Override
+	public void checkDeprecated(XImportDeclaration decl) {
+		XtendFile file = EcoreUtil2.getContainerOfType(decl, XtendFile.class);
+		if (file != null) {
+			for (XtendTypeDeclaration t : file.getXtendTypes()) {
+				
+				for (EObject e : jvmModelAssociations.getJvmElements(t)) {
+					if  (e instanceof JvmAnnotationTarget) {
+						if (DeprecationUtil.isDeprecated((JvmAnnotationTarget) e)) {
+							return;
+						}
+					}
+				}
+				
+				if (hasAnnotation(t, Deprecated.class)) {
+					return;
+				}
+			}
+		}
+		super.checkDeprecated(decl);
+	}
+
 }
