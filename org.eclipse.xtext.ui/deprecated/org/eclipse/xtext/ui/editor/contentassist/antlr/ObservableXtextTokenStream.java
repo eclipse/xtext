@@ -7,26 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
-import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ObservableXtextTokenStream extends XtextTokenStream {
+public class ObservableXtextTokenStream extends org.eclipse.xtext.ide.editor.contentassist.antlr.ObservableXtextTokenStream {
 
-	public interface StreamListener {
-		void announceEof(int lookAhead);
-		void announceConsume();
-		void announceMark(int marker);
-		void announceRewind(int marker);
+	public interface StreamListener extends org.eclipse.xtext.ide.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener {
 	}
-	
-	private StreamListener listener;
-	
-	private boolean attemptedToConsumePastEof = false;
 	
 	public ObservableXtextTokenStream() {
 		super();
@@ -39,54 +29,22 @@ public class ObservableXtextTokenStream extends XtextTokenStream {
 	public ObservableXtextTokenStream(TokenSource tokenSource, ITokenDefProvider tokenDefProvider) {
 		super(tokenSource, tokenDefProvider);
 	}
-
-	@Override
-	public int LA(int i) {
-		Token lookaheadToken = LT(i);
-		int result = lookaheadToken.getType();
-		if (result == Token.EOF && getListener() != null)
-			getListener().announceEof(i);
-		return result;
-	}
 	
 	@Override
-	public int mark() {
-		int result = super.mark();
-		if (getListener() != null)
-			getListener().announceMark(result);
-		return result;
-	}
-	
-	@Override
-	public void rewind(int marker) {
-		if (marker != tokens.size())
-			attemptedToConsumePastEof = false;
-		if (getListener() != null)
-			getListener().announceRewind(marker);
-		super.rewind(marker);
-	}
-	
-	@Override
-	public void consume() {
-		if (getListener() != null) {
-			if (getFirstMarker() == -1 && getCurrentLookAhead() <= 1 && p >= tokens.size()) {
-				if (!attemptedToConsumePastEof) {
-					attemptedToConsumePastEof = true;
-					getListener().announceConsume();
-				}
-			} else {
-				getListener().announceConsume();
-			}
+	public void setListener(org.eclipse.xtext.ide.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener listener) {
+		if (!(listener instanceof StreamListener)) {
+			throw new IllegalArgumentException();
 		}
-		super.consume();
+		super.setListener(listener);
 	}
 
 	public void setListener(StreamListener listener) {
-		this.listener = listener;
+		super.setListener(listener);
 	}
 
+	@Override
 	public StreamListener getListener() {
-		return listener;
+		return (StreamListener) super.getListener();
 	}
 
 }
