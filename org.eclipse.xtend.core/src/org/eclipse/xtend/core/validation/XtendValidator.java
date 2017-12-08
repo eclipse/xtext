@@ -140,6 +140,7 @@ import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder.Acceptor;
 import org.eclipse.xtext.xbase.validation.ProxyAwareUIStrings;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -2124,4 +2125,18 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	protected boolean isLocalClassSemantics(EObject object) {
 		return super.isLocalClassSemantics(object) || (object instanceof XtendMember && !(object instanceof AnonymousClass));
 	}
+	
+	@Override
+	public void checkDeprecated(XImportDeclaration decl) {
+		XtendFile file = EcoreUtil2.getContainerOfType(decl, XtendFile.class);
+		if (file != null) {
+			for (XtendTypeDeclaration t : file.getXtendTypes()) {
+				if (hasAnnotation(t, Deprecated.class)) {
+					return;
+				}
+			}
+		}
+		super.checkDeprecated(decl);
+	}
+
 }
