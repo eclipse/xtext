@@ -13,6 +13,7 @@ import com.google.common.collect.Iterators;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 import java.io.InputStream;
@@ -1342,7 +1343,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           _builder.append("();");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
-          _builder.append(com.google.inject.Module.class, "\t\t");
+          _builder.append(Module.class, "\t\t");
           _builder.append(" mergedModule = ");
           _builder.append(Modules2.class, "\t\t");
           _builder.append(".mixin(runtimeModule, ideaModule);");

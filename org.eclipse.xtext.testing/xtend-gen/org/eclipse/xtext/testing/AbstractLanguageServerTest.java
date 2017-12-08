@@ -13,6 +13,7 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.io.File;
 import java.io.FileWriter;
@@ -195,9 +196,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
-  protected com.google.inject.Module getServerModule() {
+  protected Module getServerModule() {
     ServerModule _serverModule = new ServerModule();
-    final com.google.inject.Module _function = (Binder it) -> {
+    final Module _function = (Binder it) -> {
       AnnotatedBindingBuilder<RequestManager> _bind = it.<RequestManager>bind(RequestManager.class);
       _bind.toInstance(new RequestManager() {
         @Override

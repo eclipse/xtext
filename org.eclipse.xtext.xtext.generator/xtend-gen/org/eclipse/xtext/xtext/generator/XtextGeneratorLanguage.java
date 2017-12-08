@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.Binder;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.Provider;
 import java.io.File;
 import java.util.ArrayList;
@@ -98,7 +99,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   private ResourceSet resourceSet;
   
   @Accessors
-  private com.google.inject.Module guiceModule = ((com.google.inject.Module) (Binder it) -> {
+  private Module guiceModule = ((Module) (Binder it) -> {
   });
   
   @Accessors
@@ -419,11 +420,11 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   @Pure
-  public com.google.inject.Module getGuiceModule() {
+  public Module getGuiceModule() {
     return this.guiceModule;
   }
   
-  public void setGuiceModule(final com.google.inject.Module guiceModule) {
+  public void setGuiceModule(final Module guiceModule) {
     this.guiceModule = guiceModule;
   }
   
