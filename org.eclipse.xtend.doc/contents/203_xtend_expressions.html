@@ -719,7 +719,7 @@ textField.addActionListener([ ActionEvent e |
 ])
 </code></pre>
 
-<p>You do not need to speficy the argument names. If you leave them out, a single argument is named <code>it</code>. If the lambda has more arguments, the implicit names are <code>$1,$2,...,$n</code> depending on the number of arguments of course. Here’s an example with a single argument named <code>it</code>. In this case <code>actionCommand</code> is equivalent to <code>it.actionCommand</code>.</p>
+<p>You do not need to specify the argument names. If you leave them out, a single argument is named <code>it</code>. If the lambda has more arguments, the implicit names are <code>$1,$2,...,$n</code> depending on the number of arguments of course. Here’s an example with a single argument named <code>it</code>. In this case <code>actionCommand</code> is equivalent to <code>it.actionCommand</code>.</p>
 
 <pre><code class="language-xtend">textField.addActionListener([
   textField.text = "The command '" + actionCommand + "' happened!"
