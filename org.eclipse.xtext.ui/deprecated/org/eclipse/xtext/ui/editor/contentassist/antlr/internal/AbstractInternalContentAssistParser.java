@@ -25,10 +25,11 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStrea
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractInternalContentAssistParser extends BaseInternalContentAssistParser<FollowElement, LookAheadTerminal> implements
-		ObservableXtextTokenStream.StreamListener {
+public abstract class AbstractInternalContentAssistParser extends BaseInternalContentAssistParser<FollowElement, LookAheadTerminal>
+		implements ObservableXtextTokenStream.StreamListener {
 
-	protected class DefaultFollowElementFactory extends AbstractFollowElementFactory<FollowElement, LookAheadTerminal> implements IFollowElementFactory {
+	protected class DefaultFollowElementFactory extends AbstractFollowElementFactory<FollowElement, LookAheadTerminal>
+			implements IFollowElementFactory {
 
 		protected DefaultFollowElementFactory() {
 			super(AbstractInternalContentAssistParser.this);
@@ -43,36 +44,37 @@ public abstract class AbstractInternalContentAssistParser extends BaseInternalCo
 		protected LookAheadTerminal doCreateLookAheadTerminal(Token token) {
 			return createLookAheadTerminal(token);
 		}
-		
+
 	}
 
 	public interface RecoveryListener extends BaseInternalContentAssistParser.RecoveryListener {
 	}
-	
+
 	interface IFollowElementFactory extends BaseInternalContentAssistParser.IFollowElementFactory<FollowElement, LookAheadTerminal> {
 	}
-	
+
 	public AbstractInternalContentAssistParser(TokenStream input, RecognizerSharedState state) {
 		super(input, state);
 	}
-	
+
 	public AbstractInternalContentAssistParser(TokenStream input) {
 		super(input);
 	}
-	
+
 	@Override
 	protected DefaultFollowElementFactory newFollowElementFactory() {
 		return new DefaultFollowElementFactory();
 	}
-	
-	protected abstract class StreamAdapter extends BaseInternalContentAssistParser<FollowElement, LookAheadTerminal>.StreamAdapter implements ObservableXtextTokenStream.StreamListener {
+
+	protected abstract class StreamAdapter extends BaseInternalContentAssistParser<FollowElement, LookAheadTerminal>.StreamAdapter
+			implements ObservableXtextTokenStream.StreamListener {
 	}
-	
+
 	@Override
 	protected InfiniteRecursion infiniteRecursion() {
 		return new InfiniteRecursion();
 	}
-	
+
 	protected StreamAdapter delegate(BaseInternalContentAssistParser<FollowElement, LookAheadTerminal>.StreamAdapter delegate) {
 		return new StreamAdapter() {
 
@@ -122,7 +124,7 @@ public abstract class AbstractInternalContentAssistParser extends BaseInternalCo
 	protected StreamAdapter createMismatchStrategy() {
 		return delegate(super.createMismatchStrategy());
 	}
-	
+
 	@Override
 	public LookAheadTerminal createLookAheadTerminal(Token token) {
 		Grammar grammar = getGrammar();
@@ -152,9 +154,10 @@ public abstract class AbstractInternalContentAssistParser extends BaseInternalCo
 	public RecoveryListener getRecoveryListener() {
 		return (RecoveryListener) super.getRecoveryListener();
 	}
-	
+
 	@Override
-	public void setRecoveryListener(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.BaseInternalContentAssistParser.RecoveryListener recoveryListener) {
+	public void setRecoveryListener(
+			org.eclipse.xtext.ide.editor.contentassist.antlr.internal.BaseInternalContentAssistParser.RecoveryListener recoveryListener) {
 		if (!(recoveryListener instanceof RecoveryListener)) {
 			throw new IllegalArgumentException(String.valueOf(recoveryListener));
 		}

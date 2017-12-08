@@ -22,24 +22,24 @@ import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
- * This class if effectively deprecated and clients should use the equivalent from
- * the ide package instead.
+ * This class if effectively deprecated and clients should use the equivalent from the ide package instead.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractContentAssistParser extends BaseContentAssistParser<FollowElement, LookAheadTerminal, AbstractInternalContentAssistParser> implements IContentAssistParser {
+public abstract class AbstractContentAssistParser extends
+		BaseContentAssistParser<FollowElement, LookAheadTerminal, AbstractInternalContentAssistParser> implements IContentAssistParser {
 
 	@Inject
 	@Named(LexerIdeBindings.CONTENT_ASSIST)
 	private Provider<Lexer> lexerProvider;
-	
+
 	@Override
 	protected TokenSource createLexer(CharStream stream) {
 		Lexer lexer = lexerProvider.get();
 		lexer.setCharStream(stream);
 		return lexer;
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */
@@ -48,16 +48,15 @@ public abstract class AbstractContentAssistParser extends BaseContentAssistParse
 		protected MyEofListener(BaseInternalContentAssistParser<?, ?> parser, AbstractElement elementToParse) {
 			super(parser, elementToParse);
 		}
-		
+
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */
 	@Override
-	protected MyEofListener createEofListener(final AbstractInternalContentAssistParser parser,
-			final AbstractElement elementToParse) {
+	protected MyEofListener createEofListener(final AbstractInternalContentAssistParser parser, final AbstractElement elementToParse) {
 		return new MyEofListener(parser, elementToParse);
 	}
-	
+
 }
