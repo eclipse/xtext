@@ -32,10 +32,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
-import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.BaseInternalContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.InfiniteRecursion;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -47,7 +45,6 @@ import org.eclipse.xtext.xtext.RuleNames;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.name.Named;
 
 /**
  * Abstract base type for the {@link AbstractContentAssistParser} and the deprecated
@@ -57,10 +54,6 @@ import com.google.inject.name.Named;
  * @since 2.14
  */
 public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATerminal>, LATerminal extends ILookAheadTerminal,	InternalParser extends BaseInternalContentAssistParser<FE	, LATerminal>> {
-	
-	@Inject
-	@Named(LexerIdeBindings.CONTENT_ASSIST)
-	private Provider<Lexer> lexerProvider;
 	
 	@Inject
 	private Provider<IUnorderedGroupHelper> unorderedGroupHelper;
@@ -80,11 +73,10 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 		return createLexer(new ANTLRStringStream(input));
 	}
 	
-	protected TokenSource createLexer(CharStream stream) {
-		Lexer lexer = lexerProvider.get();
-		lexer.setCharStream(stream);
-		return lexer;
-	}
+	/**
+	 * Create a token source for the given input based on the bound lexer.
+	 */
+	protected abstract TokenSource createLexer(CharStream stream);
 	
 	public Collection<FE> getFollowElements(FE element) {
 		if (element.getLookAhead() <= 1)
