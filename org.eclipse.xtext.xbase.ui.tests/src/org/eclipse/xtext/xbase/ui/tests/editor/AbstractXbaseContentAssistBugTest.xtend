@@ -35,7 +35,7 @@ class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase implemen
 	@BeforeClass
 	def static void createTestProject() throws Exception {
 		TargetPlatformUtil.setTargetPlatform(AbstractXbaseContentAssistBugTest)
-		staticProject = AbstractXbaseUITestCase::createPluginProject(typeof(AbstractXbaseContentAssistBugTest).name);
+		staticProject = AbstractXbaseUITestCase::createPluginProject(AbstractXbaseContentAssistBugTest.name);
 	}
 	
 	@AfterClass
