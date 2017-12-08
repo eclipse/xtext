@@ -29,7 +29,6 @@ import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
@@ -50,6 +49,7 @@ import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.XbaseWithAnnotationsParser;
 import org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsLexer;
 import org.eclipse.xtext.xbase.annotations.ui.contentassist.XbaseWithAnnotationsProposalProvider;
+import org.eclipse.xtext.xbase.annotations.ui.editor.XbaseWithAnnotationsEditor;
 import org.eclipse.xtext.xbase.annotations.ui.outline.XbaseWithAnnotationsOutlineTreeProvider;
 import org.eclipse.xtext.xbase.annotations.ui.quickfix.XbaseWithAnnotationsQuickfixProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider;
@@ -74,11 +74,6 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Provider<? extends IAllContainersState> provideIAllContainersState() {
 		return Access.getJavaProjectsState();
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
-	public Class<? extends XtextEditor> bindXtextEditor() {
-		return XbaseEditor.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
@@ -145,6 +140,11 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 	public Class<? extends JavaTypeQuickfixes> bindJavaTypeQuickfixes() {
 		return JavaTypeQuickfixesNoImportSection.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public Class<? extends XbaseEditor> bindXbaseEditor() {
+		return XbaseWithAnnotationsEditor.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2

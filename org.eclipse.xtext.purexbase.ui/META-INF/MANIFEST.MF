@@ -32,5 +32,6 @@ Export-Package: org.eclipse.xtext.purexbase.ui,
  org.eclipse.xtext.purexbase.ui.internal,
  org.eclipse.xtext.purexbase.ui.labeling,
  org.eclipse.xtext.purexbase.ui.outline,
- org.eclipse.xtext.purexbase.ui.quickfix
+ org.eclipse.xtext.purexbase.ui.quickfix,
+ org.eclipse.xtext.purexbase.ui.editor
 Bundle-Activator: org.eclipse.xtext.purexbase.ui.internal.PurexbaseActivator

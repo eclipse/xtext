@@ -67,5 +67,6 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
  org.eclipse.xtext.xbase.ui.refactoring;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtext.xbase.ui.syntaxcoloring;x-internal:=true,
  org.eclipse.xtext.xbase.ui.templates;x-friends:="org.eclipse.xtend.ide",
- org.eclipse.xtext.xbase.ui.validation;x-friends:="org.eclipse.xtend.ide"
+ org.eclipse.xtext.xbase.ui.validation;x-friends:="org.eclipse.xtend.ide",
+ org.eclipse.xtext.xbase.annotations.ui.editor
 Bundle-Localization: plugin

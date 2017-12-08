@@ -27,7 +27,6 @@ import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.Arithmetics
 import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.PartialArithmeticsContentAssistParser;
 import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.internal.InternalArithmeticsLexer;
 import org.eclipse.xtext.example.arithmetics.ui.contentassist.ArithmeticsProposalProvider;
-import org.eclipse.xtext.example.arithmetics.ui.editor.ArithmeticsEditor;
 import org.eclipse.xtext.example.arithmetics.ui.labeling.ArithmeticsDescriptionLabelProvider;
 import org.eclipse.xtext.example.arithmetics.ui.labeling.ArithmeticsLabelProvider;
 import org.eclipse.xtext.example.arithmetics.ui.outline.ArithmeticsOutlineTreeProvider;
@@ -56,7 +55,6 @@ import org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry;
 import org.eclipse.xtext.ui.compare.DefaultViewerCreator;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
@@ -96,11 +94,6 @@ public abstract class AbstractArithmeticsUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Provider<? extends IAllContainersState> provideIAllContainersState() {
 		return Access.getJavaProjectsState();
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
-	public Class<? extends XtextEditor> bindXtextEditor() {
-		return ArithmeticsEditor.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
