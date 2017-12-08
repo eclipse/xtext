@@ -7,530 +7,116 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.contentassist.antlr.internal;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.antlr.runtime.BitSet;
-import org.antlr.runtime.DFA;
-import org.antlr.runtime.FailedPredicateException;
-import org.antlr.runtime.IntStream;
-import org.antlr.runtime.Parser;
-import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
-import org.apache.log4j.Logger;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.LookAheadTerminal;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.LookAheadTerminalRuleCall;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.LookaheadKeyword;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ObservableXtextTokenStream;
-import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.parser.antlr.TokenTool;
 
-import com.google.common.collect.Iterators;
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-
-/*
- * Initially copied from org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser
- */
 /**
  * @since 2.9
  */
-public abstract class AbstractInternalContentAssistParser extends Parser implements
-		ObservableXtextTokenStream.StreamListener, ITokenDefProvider {
+public abstract class AbstractInternalContentAssistParser extends BaseInternalContentAssistParser<FollowElement, LookAheadTerminal> implements
+		ObservableXtextTokenStream.StreamListener {
 
-	private static final Logger logger = Logger.getLogger(AbstractInternalContentAssistParser.class);
-	
-	protected class DefaultFollowElementFactory implements IFollowElementFactory {
-		@Override
-		public FollowElement createFollowElement(AbstractElement current, int lookAhead) {
-			if (logger.isDebugEnabled())
-				logger.debug("Creating FollowElement for: " + current);
-			FollowElement result = new FollowElement();
-			result.setLookAhead(lookAhead);
-			if (lookAhead != 1) {
-				int from = input.index();
-				int to = input.size();
-				if (marked > 0) {
-					from = firstMarker;
-				}
-				List<LookAheadTerminal> lookAheadTerminals = Lists.newArrayListWithExpectedSize(to - from);
-				for (int tokenIndex = from; tokenIndex < to; tokenIndex++) {
-					Token token = input.get(tokenIndex);
-					
-					if (token != null) {
-						LookAheadTerminal lookAheadTerminal = createLookAheadTerminal(token);
-						lookAheadTerminals.add(lookAheadTerminal);
-					}
-				}
-				result.setLookAheadTerminals(lookAheadTerminals);
-				result.setLookAhead(lookAheadTerminals.size() + 1);
-			}
-			result.setGrammarElement(current);
-			result.setTrace(Lists.newArrayList(Iterators.filter(grammarElements.iterator(), AbstractElement.class)));
-			result.setLocalTrace(Lists.newArrayList(Iterators.filter(localTrace.iterator(), AbstractElement.class)));
-			result.setParamStack(Lists.newArrayList(paramStack));
-			if (current instanceof UnorderedGroup) {
-				if (indexToHandledElements != null) {
-					int index = grammarElements.lastIndexOf(current);
-					List<AbstractElement> alreadyHandled = Lists.newArrayList(Iterators.filter(indexToHandledElements.get(index).iterator(), AbstractElement.class));
-					result.setHandledUnorderedGroupElements(alreadyHandled);
-				} else {
-					result.setHandledUnorderedGroupElements(Collections.<AbstractElement>emptyList());
-				}
-			}
-			if (logger.isDebugEnabled()) {
-				logger.debug("FollowElement is: " + current);
-				logger.debug("==================================");
-			}
-			return result;
+	protected class DefaultFollowElementFactory extends AbstractFollowElementFactory<FollowElement, LookAheadTerminal> implements IFollowElementFactory {
+
+		protected DefaultFollowElementFactory() {
+			super(AbstractInternalContentAssistParser.this);
 		}
+
+		@Override
+		protected FollowElement doCreateElement() {
+			return new FollowElement();
+		}
+
+		@Override
+		protected LookAheadTerminal doCreateLookAheadTerminal(Token token) {
+			return createLookAheadTerminal(token);
+		}
+		
 	}
 
-	public interface RecoveryListener {
-		void beginErrorRecovery();
-		void endErrorRecovery();
+	public interface RecoveryListener extends BaseInternalContentAssistParser.RecoveryListener {
 	}
 	
-	interface IFollowElementFactory {
-		FollowElement createFollowElement(AbstractElement current, int lookAhead);
+	interface IFollowElementFactory extends BaseInternalContentAssistParser.IFollowElementFactory<FollowElement, LookAheadTerminal> {
 	}
 	
-	protected final List<EObject> grammarElements;
-	protected final List<EObject> localTrace;
-	protected final List<Integer> paramStack;
-	protected final List<Integer> grammarElementsWithParams;
-	protected int stackSize;
-	protected final Set<FollowElement> followElements;
-	protected ObservableXtextTokenStream.StreamListener delegate;
-	protected List<TerminalRule> terminalRules;
-	protected boolean mismatch;
-	protected RecoveryListener recoveryListener;
-	protected int lookAheadAddOn;
-	protected int marked = 0;
-	protected boolean resyncing = false;
-	protected boolean strict = false;
-	protected int wasErrorCount = -1;
-	protected int predictionLevel = 0;
-	protected int currentMarker;
-	protected int firstMarker;
-	protected boolean inMismatchIsUnwantedToken = false;
-	protected boolean failedPredicateAtEOF = false;
-	protected Multimap<Integer, AbstractElement> indexToHandledElements;
-	protected IUnorderedGroupHelper unorderedGroupHelper;
-	protected IFollowElementFactory followElementFactory = new DefaultFollowElementFactory();
-
 	public AbstractInternalContentAssistParser(TokenStream input, RecognizerSharedState state) {
 		super(input, state);
-		this.grammarElements = new ArrayList<EObject>();
-		this.localTrace = new ArrayList<EObject>();
-		this.paramStack = new ArrayList<Integer>();
-		this.grammarElementsWithParams = new ArrayList<Integer>();
-		this.followElements = new LinkedHashSetWithoutNull<FollowElement>();
 	}
 	
 	public AbstractInternalContentAssistParser(TokenStream input) {
 		super(input);
-		this.grammarElements = new ArrayList<EObject>();
-		this.localTrace = new ArrayList<EObject>();
-		this.followElements = new LinkedHashSetWithoutNull<FollowElement>();
-		this.paramStack = new ArrayList<Integer>();
-		this.grammarElementsWithParams = new ArrayList<Integer>();
 	}
 	
-	/**
-	 * When experiencing slow content assist, try to reduce the threshold.
-	 */
-	protected int getLookaheadThreshold() {
-		return Integer.MAX_VALUE;
-	}
-
-	public void before(EObject grammarElement) {
-		if (input.size() == input.index()) {
-			int idx = localTrace.indexOf(grammarElement);
-			// due to error recovery inconveniences we have to add some grammarElements
-			// twice immediately after each other
-			if (idx >= 0 && idx != localTrace.size() - 1) {
-				List<EObject> traceAfterFirstOccurrence = localTrace.subList(idx + 1, localTrace.size());
-				int secondIdx = traceAfterFirstOccurrence.indexOf(grammarElement);
-				if (secondIdx >= 0 && secondIdx != traceAfterFirstOccurrence.size() - 1) {
-					List<EObject> firstRun = localTrace.subList(idx, idx + 1 + secondIdx);
-					List<EObject> secondRun = traceAfterFirstOccurrence.subList(secondIdx, traceAfterFirstOccurrence.size());
-					if (firstRun.equals(secondRun)) {
-						throw new InfiniteRecursion();
-					}
-				}
-			}
-		}
-		grammarElements.add(grammarElement);
-		localTrace.add(grammarElement);
-	}
-
-	public void before(EObject grammarElement, int paramConfig) {
-		before(grammarElement);
-		paramStack.add(paramConfig);
-		grammarElementsWithParams.add(stackSize);
+	@Override
+	protected DefaultFollowElementFactory newFollowElementFactory() {
+		return new DefaultFollowElementFactory();
 	}
 	
-	public void after(EObject grammarElement, int paramConfig) {
-		int old = removeLast(paramStack);
-		if (old != paramConfig) {
-			throw new IllegalStateException(paramConfig + "!=" + old);
-		}
-		removeLast(grammarElementsWithParams);
-		after(grammarElement);
+	protected abstract class StreamAdapter extends BaseInternalContentAssistParser<FollowElement, LookAheadTerminal>.StreamAdapter {
 	}
+	
+	protected StreamAdapter delegate(BaseInternalContentAssistParser<FollowElement, LookAheadTerminal>.StreamAdapter delegate) {
+		return new StreamAdapter() {
 
-	public void after(EObject grammarElement) {
-		EObject foundGrammarElement = removeLast(grammarElements);
-		if (grammarElement != foundGrammarElement)
-			throw new IllegalStateException("expected element: '" + grammarElement + "', but was: '"
-					+ foundGrammarElement + "'");
-		if (grammarElement instanceof UnorderedGroup && indexToHandledElements != null) {
-			indexToHandledElements.removeAll(grammarElements.size());
-		} else if (!grammarElements.isEmpty()) {
-			int index = grammarElements.size() - 1;
-			if (grammarElements.get(index) instanceof UnorderedGroup) {
-				if (indexToHandledElements == null) {
-					indexToHandledElements = LinkedHashMultimap.create();
-				}
-				indexToHandledElements.put(index, (AbstractElement) grammarElement);
+			@Override
+			public void announceEof(int lookAhead) {
+				delegate.announceEof(lookAhead);
 			}
-		}
+
+			@Override
+			public void announceConsume() {
+				delegate.announceConsume();
+			}
+
+			@Override
+			public void announceMark(int marker) {
+				delegate.announceMark(marker);
+			}
+
+			@Override
+			public void announceRewind(int marker) {
+				delegate.announceRewind(marker);
+			}
+		};
 	}
 
 	@Override
-	public void recover(IntStream stream, RecognitionException ex) {
-		if (recoveryListener != null)
-			recoveryListener.beginErrorRecovery();
-		removeUnexpectedElements();
-		if (ex instanceof FailedPredicateException && ex.token.getType() == Token.EOF) {
-			failedPredicateAtEOF = true;
-		}
-		super.recover(stream, ex);
-		if (recoveryListener != null)
-			recoveryListener.endErrorRecovery();
-	}
-
-	private void removeUnexpectedElements() {
-		int dropParamAt = -1;
-		if (!grammarElementsWithParams.isEmpty()) {
-			dropParamAt = getLast(grammarElementsWithParams);
-		}
-		while (stackSize < grammarElements.size()) {
-			removeLast(grammarElements);
-			if (dropParamAt == grammarElements.size()) {
-				removeLast(paramStack);
-				removeLast(grammarElementsWithParams);
-				if (!grammarElementsWithParams.isEmpty()) {
-					dropParamAt = getLast(grammarElementsWithParams);
-				}
-			}
-		}
-	}
-	
-	private <T> T getLast(List<T> list) {
-		return list.get(list.size() - 1);
-	}
-	
-	private <T> T removeLast(List<T> list) {
-		return list.remove(list.size() - 1);
-	}
-
-	@Override
-	public void emitErrorMessage(String msg) {
-		// don't call super, since it would do a plain vanilla
-		// System.err.println(msg);
-	}
-	
-	/**
-	 * @nooverride This method is not intended to be re-implemented or extended by clients.
-	 * @noreference This method is not intended to be referenced by clients.
-	 */
-	public RecognizerSharedState getInternalRecognizerSharedState() {
-		return state;
-	}
-
-	protected abstract Grammar getGrammar();
-
-	protected int keepStackSize() {
-		int result = stackSize;
-		stackSize = grammarElements.size();
-		return result;
-	}
-
-	protected void restoreStackSize(int stackSize) {
-		if (!isBacktracking()) {
-			removeUnexpectedElements();
-			this.stackSize = stackSize;
-		}
-	}
-
-	
-	protected boolean isBacktracking() {
-		return state.backtracking != 0;
-	}
-	
-	protected abstract class StreamAdapter implements ObservableXtextTokenStream.StreamListener {
-		@Override
-		public void announceConsume() {
-			AbstractInternalContentAssistParser.this.announceConsume();
-		}
-		
-		@Override
-		public void announceMark(int marker) {
-			AbstractInternalContentAssistParser.this.announceMark(marker);
-		}
-		
-		@Override
-		public void announceRewind(int marker) {
-			AbstractInternalContentAssistParser.this.announceRewind(marker);
-		}
-	}
-
-	protected void selectEofStrategy(int lookAhead) {
-		if (mismatch || !state.errorRecovery) {
-			selectEofStrategy();
-		} else if (strict && lookAhead == 1) {
-			delegate = createNoOpStrategy();
-			if (predictionLevel > 0) {
-				delegate = createPredictionStrategy();
-			}
-		} else {
-			selectEofStrategy();
-		}
-	}
-	
-	protected void selectEofStrategy() throws UnsupportedOperationException {
-		if (mismatch) {
-			delegate = createMismatchStrategy();
-		} else if (!state.errorRecovery) {
-			if (marked > 0 && state.syntaxErrors > 0 && state.lastErrorIndex >= firstMarker) {
-				delegate = createNoOpStrategy();
-				return;
-			} else {
-				delegate = createNotErrorRecoveryStrategy();
-			}
-		} else {
-			delegate = createErrorRecoveryStrategy();
-		}
-		if (predictionLevel > 0) {
-			delegate = createPredictionStrategy();
-		}
-	}
-	
 	protected StreamAdapter createNoOpStrategy() {
-		return new StreamAdapter() {
-			@Override
-			public void announceEof(int lookAhead) {
-			}
-		};
+		return delegate(super.createNoOpStrategy());
 	}
 
+	@Override
 	protected StreamAdapter createPredictionStrategy() {
-		return new StreamAdapter() {
-
-			private AbstractElement lastAddedElement;
-			private AbstractElement globalLastAddedElement;
-			private int lastKnownSyntaxErrors = Integer.MAX_VALUE;
-			private boolean wasMismatch = false;
-			private ObservableXtextTokenStream.StreamListener privateDelegate = delegate;
-			private IFollowElementFactory followElementFactory;
-			private AbstractElement recovered;
-			{
-				followElementFactory = AbstractInternalContentAssistParser.this.followElementFactory;
-				AbstractInternalContentAssistParser.this.followElementFactory = new IFollowElementFactory() {
-					
-					@Override
-					public FollowElement createFollowElement(AbstractElement current, int lookAhead) {
-						if (lastKnownSyntaxErrors == Integer.MAX_VALUE || state.lastErrorIndex < 0) {
-							FollowElement result = followElementFactory.createFollowElement(current, lookAhead);
-							if (result != null) {
-								globalLastAddedElement = result.getGrammarElement();
-								if (lookAhead > 1 && isBacktracking() && lastKnownSyntaxErrors == Integer.MAX_VALUE) {
-									lastKnownSyntaxErrors = state.syntaxErrors;
-								}
-							}
-							return result;
-						}
-						return null;
-					}
-				};
-			}
-
-			@Override
-			public void announceEof(int lookAhead) {
-				try {
-					if (predictionLevel == 0) {
-						if (!wasMismatch && (!state.errorRecovery || !resyncing)) {
-							AbstractElement current = getCurrentGrammarElement();
-							if (current != null
-									&& (lastAddedElement == null || 
-										!EcoreUtil.isAncestor(current, lastAddedElement))) {
-								if (state.errorRecovery) {
-									if (!failedPredicateAtEOF && (globalLastAddedElement != current && (globalLastAddedElement == null 
-											|| GrammarUtil.isOptionalCardinality(globalLastAddedElement)
-											|| GrammarUtil.isOneOrMoreCardinality(globalLastAddedElement)))) {
-										createAndAddFollowElement(current, lookAhead);
-									} 
-								} else {
-									if (globalLastAddedElement != current && state.syntaxErrors <= lastKnownSyntaxErrors)
-										createAndAddFollowElement(current, lookAhead);
-								}
-							}
-						}
-						if (mismatch && !wasMismatch && !failedPredicateAtEOF) {
-							AbstractElement current = getCurrentGrammarElement();
-							if (recovered == null || recovered == current) {
-								if (current != null
-										&& (lastAddedElement == null || 
-											!EcoreUtil.isAncestor(current, lastAddedElement))) {
-									createAndAddFollowElement(current, lookAhead);
-								}
-							}
-						} 
-					} else {
-						if (globalLastAddedElement != getCurrentGrammarElement())
-							privateDelegate.announceEof(lookAhead);
-					}
-				} finally {
-					wasMismatch |= mismatch;
-					if (getCurrentGrammarElement() != null && getCurrentGrammarElement() != globalLastAddedElement) {
-						if (state.errorRecovery && recovered == null) {
-							recovered = getCurrentGrammarElement();
-						}
-					}
-				}
-			}
-
-			protected void createAndAddFollowElement(AbstractElement current, int lookAhead) {
-				if (marked > 0)
-					lookAhead+=lookAheadAddOn;
-				FollowElement followElement = followElementFactory.createFollowElement(current, lookAhead);
-				if (followElement != null) {
-					followElements.add(followElement);
-					lastAddedElement = current;
-					globalLastAddedElement = current;
-				}
-			}
-
-		};
+		return delegate(super.createPredictionStrategy());
 	}
 
+	@Override
 	protected StreamAdapter createErrorRecoveryStrategy() {
-		return new StreamAdapter() {
-
-			private AbstractElement lastAddedElement;
-
-			@Override
-			public void announceEof(int lookAhead) {
-				AbstractElement current = getCurrentGrammarElement();
-				if (current != null
-						&& (lastAddedElement == null || 
-							!EcoreUtil.isAncestor(current, lastAddedElement))) {
-					if (marked > 0)
-						lookAhead+=lookAheadAddOn;
-					followElements.add(createFollowElement(current, lookAhead));
-					lastAddedElement = current;
-				}
-			}
-
-		};
+		return delegate(super.createErrorRecoveryStrategy());
 	}
 
+	@Override
 	protected StreamAdapter createNotErrorRecoveryStrategy() {
-		return new StreamAdapter() {
-
-			@Override
-			public void announceEof(int lookAhead) {
-				if (!state.errorRecovery && !mismatch && ((!isBacktracking() || marked > 0) || wasErrorCount <= 0)) {
-					AbstractElement current = getCurrentGrammarElement();
-					if (current != null) {
-						if (marked > 0)
-							lookAhead+=lookAheadAddOn;
-						if (lookAhead <= getLookaheadThreshold())
-							followElements.add(createFollowElement(current, lookAhead));
-					}
-				}
-			}
-
-		};
+		return delegate(super.createNotErrorRecoveryStrategy());
 	}
 
+	@Override
 	protected StreamAdapter createMismatchStrategy() {
-		return new StreamAdapter() {
-
-			private boolean wasErrorRecovery = false;
-			
-			@Override
-			public void announceEof(int lookAhead) {
-				wasErrorRecovery = wasErrorRecovery || state.errorRecovery;
-				if (!wasErrorRecovery && !mismatch) {
-					AbstractElement current = getCurrentGrammarElement();
-					if (current != null) {
-						if (marked > 0)
-							lookAhead+=lookAheadAddOn;
-						followElements.add(createFollowElement(current, lookAhead));
-					}
-				}
-			}
-		};
+		return delegate(super.createMismatchStrategy());
 	}
 	
 	@Override
-	public void beginResync() {
-		resyncing = true;
-	}
-
-	@Override
-	public void endResync() {
-		resyncing = false;
-	}
-	
-	@Override
-	protected Object recoverFromMismatchedToken(IntStream input, int ttype, BitSet follow) throws RecognitionException {
-		try {
-			mismatch = true;
-			return super.recoverFromMismatchedToken(input, ttype, follow);
-		}
-		finally {
-			mismatch = false;
-		}
-	}
-	
-	@Override
-	public boolean mismatchIsMissingToken(IntStream input, BitSet follow) {
-		return false;
-	}
-	
-	protected AbstractElement getCurrentGrammarElement() {
-		for (int i = grammarElements.size() - 1; i >= 0; i--) {
-			EObject result = grammarElements.get(i);
-			if (result instanceof AbstractElement)
-				return (AbstractElement) result;
-		}
-		return null;
-	}
-
-	protected FollowElement createFollowElement(AbstractElement current, int lookAhead) {
-		return followElementFactory.createFollowElement(current, lookAhead);
-	}
-
 	public LookAheadTerminal createLookAheadTerminal(Token token) {
 		Grammar grammar = getGrammar();
 		String tokenName = getTokenNames()[token.getType()];
@@ -556,181 +142,12 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 
 	@Override
-	public void announceEof(int lookAhead) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("Reached Eof with LA " + lookAhead);
-			logger.debug("Internal parser state is: ");
-			logger.debug("  current: " + getCurrentGrammarElement());
-			logger.debug("  failed: " + state.failed);
-			logger.debug("  errorRecovery: " + state.errorRecovery);
-			logger.debug("  resyncing: " + resyncing);
-			logger.debug("  marked: " + marked);
-			logger.debug("  firstMarker: " + firstMarker);
-			logger.debug("  currentMarker: " + currentMarker);
-			logger.debug("  lookAheadAddOn: " + lookAheadAddOn);
-			logger.debug("  params: " + paramStack);
-			logger.debug("  predictionLevel: " + predictionLevel);
-			logger.debug("  stackSize: " + stackSize);
-			logger.debug("  backtracking: " + state.backtracking);
-			logger.debug("  syntaxErrors: " + state.syntaxErrors);
-			logger.debug("  token: " + state.token);
-			logger.debug("==================================");
-		}
-		if (delegate == null) {
-			selectEofStrategy(lookAhead);
-			if (strict) {
-				wasErrorCount = state.syntaxErrors;
-			}
-		}
-		if (inMismatchIsUnwantedToken)
-			return;
-		if (grammarElements.isEmpty() || delegate == null)
-			return;
-		if (strict) {
-			if (wasErrorCount != state.syntaxErrors)
-				return;
-		}
-		delegate.announceEof(lookAhead);
-	}
-	
-	@Override
-	public void reportError(RecognitionException e) {
-		if (strict) {
-			if ( state.errorRecovery ) {
-				return;
-			}
-			if (e.index != input.size()) {
-				// don't count errors at EOF in strict mode
-				state.syntaxErrors++; 	
-			}
-			state.errorRecovery = true;			
-		} else {
-			super.reportError(e);
-		}
-	}
-	
-	@Override
-	public void announceConsume() {
-		if (marked <= 0)
-			localTrace.clear();
-		else
-			lookAheadAddOn++;
-	}
-	
-	@Override
-	public boolean mismatchIsUnwantedToken(IntStream input, int ttype) {
-		try {
-			inMismatchIsUnwantedToken = true;
-			boolean result = super.mismatchIsUnwantedToken(input, ttype);
-			return result;
-		} finally {
-			inMismatchIsUnwantedToken = false;
-		}
-	}
-	
-	@Override
-	public void announceRewind(int marker) {
-		int useLookAhead = -1;
-		if (marker != 0 && delegate == null && strict && predictionLevel != 0 && lookAheadAddOn > 0 && state.syntaxErrors == 0
-				&& input.index() == input.size()
-				&& marker + lookAheadAddOn <= input.size()
-				&& isBacktracking()) {
-			useLookAhead = lookAheadAddOn;
-			delegate = createNotErrorRecoveryStrategy();
-			wasErrorCount = state.syntaxErrors;
-		}
-		currentMarker = marker;
-		lookAheadAddOn = currentMarker - firstMarker;
-		if (useLookAhead != -1 && useLookAhead + firstMarker >= input.index()) {
-			announceEof(useLookAhead);
-		}
-		marked --;
-	}
-	
-	@Override
-	public void announceMark(int marker) {
-		if (marked <= 0) {
-			marked++;
-			lookAheadAddOn = 0;
-			currentMarker = marker;
-			firstMarker = marker;
-		} else {
-			marked++;
-			currentMarker = marker;
-		}
-	}
-	
-	public void beginDFAPrediction() {
-		predictionLevel++;
-	}
-	
-	public boolean isDFAPrediction() {
-		return predictionLevel != 0;
-	}
-	
-	public void endDFAPrediction() {
-		predictionLevel--;
-	}
-
-	public Set<FollowElement> getFollowElements() {
-		if (logger.isDebugEnabled()) {
-			logger.debug("getFollowElements()");
-		}
-		return followElements;
-	}
-	
-	@Override
-	public Map<Integer, String> getTokenDefMap() {
-		String[] names = getTokenNames();
-		Map<Integer, String> result = Maps.newHashMapWithExpectedSize(names.length - Token.MIN_TOKEN_TYPE);
-		for (int i = Token.MIN_TOKEN_TYPE; i < names.length; i++) {
-			result.put(i, getValueForTokenName(names[i]));
-		}
-		return result;
-	}
-	
-	protected String getValueForTokenName(String tokenName) {
-		return tokenName;
-	}
-		
-	public List<EObject> getGrammarElements() {
-		return grammarElements;
-	}
-
-	public List<EObject> getLocalTrace() {
-		return localTrace;
-	}
-	
-	public List<Integer> getParamStack() {
-		return paramStack;
-	}
-	
 	public RecoveryListener getRecoveryListener() {
-		return recoveryListener;
+		return (RecoveryListener) super.getRecoveryListener();
 	}
 
 	public void setRecoveryListener(RecoveryListener recoveryListener) {
 		this.recoveryListener = recoveryListener;
 	}
 
-	public void setUnorderedGroupHelper(IUnorderedGroupHelper unorderedGroupHelper) {
-		this.unorderedGroupHelper = unorderedGroupHelper;
-	}
-
-	public IUnorderedGroupHelper getUnorderedGroupHelper() {
-		return unorderedGroupHelper;
-	}
-	
-	public void setStrict(boolean strict) {
-		this.strict = strict;
-	}
-	
-	protected static short[][] unpackEncodedStringArray(String[] arr) {
-		int numStates = arr.length;
-		short[][] result = new short[numStates][];
-		for (int i = 0; i < numStates; i++) {
-			result[i] = DFA.unpackEncodedString(arr[i]);
-		}
-		return result;
-	}
 }

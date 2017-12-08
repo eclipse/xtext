@@ -17,16 +17,16 @@ import org.antlr.runtime.TokenSource;
  * @since 2.14
  */
 public class LookAheadBasedTokenSource implements TokenSource {
-	private final Iterator<LookAheadTerminal> iter;
+	private final Iterator<? extends ILookAheadTerminal> iter;
 
-	protected LookAheadBasedTokenSource(Iterator<LookAheadTerminal> iter) {
+	protected LookAheadBasedTokenSource(Iterator<? extends ILookAheadTerminal> iter) {
 		this.iter = iter;
 	}
 
 	@Override
 	public Token nextToken() {
 		if (iter.hasNext()) {
-			LookAheadTerminal lookAhead = iter.next();
+			ILookAheadTerminal lookAhead = iter.next();
 			return lookAhead.getToken();
 		}
 		return Token.EOF_TOKEN;

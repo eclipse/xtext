@@ -12,6 +12,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.BaseInternalContentAssistParser;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 
 /**
@@ -28,10 +29,10 @@ public class EofListener implements StreamListener, AbstractInternalContentAssis
 	
 	public int startedErrorRecoveryAt;
 	
-	private final AbstractInternalContentAssistParser parser;
+	private final BaseInternalContentAssistParser<?, ?> parser;
 	private final AbstractElement elementToParse;
 
-	protected EofListener(AbstractInternalContentAssistParser parser, AbstractElement elementToParse) {
+	protected EofListener(BaseInternalContentAssistParser<?, ?> parser, AbstractElement elementToParse) {
 		this.parser = parser;
 		this.elementToParse = elementToParse;
 		this.parserState = parser.getInternalRecognizerSharedState();
@@ -39,7 +40,7 @@ public class EofListener implements StreamListener, AbstractInternalContentAssis
 		registerAsListenerAt(parser);
 	}
 
-	protected void registerAsListenerAt(AbstractInternalContentAssistParser parser) {
+	protected void registerAsListenerAt(BaseInternalContentAssistParser<?, ?> parser) {
 		ObservableXtextTokenStream stream = (ObservableXtextTokenStream) parser.getTokenStream();
 		stream.setListener(this);
 		parser.setRecoveryListener(this);
@@ -105,7 +106,7 @@ public class EofListener implements StreamListener, AbstractInternalContentAssis
 		return elementToParse;
 	}
 	
-	protected AbstractInternalContentAssistParser getParser() {
+	protected BaseInternalContentAssistParser<?, ?> getParser() {
 		return parser;
 	}
 	

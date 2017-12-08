@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Module;
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -47,7 +48,7 @@ public class ServerLauncher {
     ServerLauncher.launch(_name, args, _serverModule);
   }
   
-  public static void launch(final String prefix, final String[] args, final com.google.inject.Module... modules) {
+  public static void launch(final String prefix, final String[] args, final Module... modules) {
     final LaunchArgs launchArgs = ServerLauncher.createLaunchArgs(prefix, args);
     final ServerLauncher launcher = Guice.createInjector(modules).<ServerLauncher>getInstance(ServerLauncher.class);
     launcher.start(launchArgs);
