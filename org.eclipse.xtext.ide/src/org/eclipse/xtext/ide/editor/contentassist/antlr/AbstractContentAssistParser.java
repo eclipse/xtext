@@ -21,17 +21,19 @@ import com.google.inject.name.Named;
 /**
  * @since 2.9
  */
-public abstract class AbstractContentAssistParser extends BaseContentAssistParser<FollowElement, LookAheadTerminal, AbstractInternalContentAssistParser> implements IContentAssistParser, IPartialEditingContentAssistParser {
+public abstract class AbstractContentAssistParser
+		extends BaseContentAssistParser<FollowElement, LookAheadTerminal, AbstractInternalContentAssistParser>
+		implements IContentAssistParser, IPartialEditingContentAssistParser {
 
 	@Inject
 	@Named(LexerIdeBindings.CONTENT_ASSIST)
 	private Provider<Lexer> lexerProvider;
-	
+
 	@Override
 	protected TokenSource createLexer(CharStream stream) {
 		Lexer lexer = lexerProvider.get();
 		lexer.setCharStream(stream);
 		return lexer;
 	}
-	
+
 }

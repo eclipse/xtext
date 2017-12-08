@@ -47,47 +47,46 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- * Abstract base type for the {@link AbstractContentAssistParser} and the deprecated
- * equivalent in the xtext.ui bundle.
+ * Abstract base type for the {@link AbstractContentAssistParser} and the deprecated equivalent in the xtext.ui bundle.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.14
  */
-public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATerminal>, LATerminal extends ILookAheadTerminal,	InternalParser extends BaseInternalContentAssistParser<FE	, LATerminal>> {
-	
+public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATerminal>, LATerminal extends ILookAheadTerminal, InternalParser extends BaseInternalContentAssistParser<FE, LATerminal>> {
+
 	@Inject
 	private Provider<IUnorderedGroupHelper> unorderedGroupHelper;
-	
+
 	@Inject
 	private RequiredRuleNameComputer requiredRuleNameComputer;
-	
+
 	@Inject
 	private RuleNames ruleNames;
-	
+
 	private AbstractRule entryRule;
-	
+
 	/**
 	 * Create a token source for the given input based on the bound lexer.
 	 */
 	protected TokenSource createTokenSource(String input) {
 		return createLexer(new ANTLRStringStream(input));
 	}
-	
+
 	/**
 	 * Create a token source for the given input based on the bound lexer.
 	 */
 	protected abstract TokenSource createLexer(CharStream stream);
-	
+
 	public Collection<FE> getFollowElements(FE element) {
 		if (element.getLookAhead() <= 1)
 			throw new IllegalArgumentException("lookahead may not be less than or equal to 1");
 		Collection<FE> result = new ArrayList<FE>();
-		for(AbstractElement elementToParse: getElementsToParse(element)) {
+		for (AbstractElement elementToParse : getElementsToParse(element)) {
 			elementToParse = unwrapSingleElementGroups(elementToParse);
 			String ruleName = getRuleName(elementToParse);
 			String[][] allRuleNames = getRequiredRuleNames(ruleName, element.getParamStack(), elementToParse);
-			for (String[] ruleNames: allRuleNames) {
-				for(int i = 0; i < ruleNames.length; i++) {
+			for (String[] ruleNames : allRuleNames) {
+				for (int i = 0; i < ruleNames.length; i++) {
 					InternalParser parser = createParser();
 					parser.setUnorderedGroupHelper(createUnorderedGroupHelper());
 					parser.getUnorderedGroupHelper().initializeWith(parser);
@@ -110,34 +109,30 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 		}
 		return result;
 	}
-	
+
 	protected abstract InternalParser createParser();
-	
+
 	/**
 	 * @since 2.14
 	 */
-	protected ObservableXtextTokenStream setTokensFromFollowElement(InternalParser parser,
-			FE element) {
+	protected ObservableXtextTokenStream setTokensFromFollowElement(InternalParser parser, FE element) {
 		final Iterator<LATerminal> iter = element.getLookAheadTerminals().iterator();
 		LookAheadBasedTokenSource tokenSource = new LookAheadBasedTokenSource(iter);
 		ObservableXtextTokenStream tokens = createObservableTokenStream(tokenSource, parser);
 		parser.setTokenStream(tokens);
 		return tokens;
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */
-	protected Collection<FE> getFollowElements(
-			final InternalParser parser,
-			final AbstractElement elementToParse, 
-			String[] ruleNames, 
-			final int startIndex) {
+	protected Collection<FE> getFollowElements(final InternalParser parser, final AbstractElement elementToParse,
+			String[] ruleNames, final int startIndex) {
 		try {
 			EofListener listener = createEofListener(parser, elementToParse);
 			int i = startIndex;
 			Collection<FE> result = null;
-			while(i < ruleNames.length && !listener.wasEof && listener.consumedSomething) {
+			while (i < ruleNames.length && !listener.wasEof && listener.consumedSomething) {
 				listener.reset();
 				String ruleName = ruleNames[i];
 				result = getFollowElements(parser, ruleName, true);
@@ -149,23 +144,22 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 				if (!listener.wasEof && ruleNames.length != 1)
 					i++;
 				if (ruleNames.length > 2)
-					throw new IllegalArgumentException("The following lines assume that we have at most two rules to call.");
+					throw new IllegalArgumentException(
+							"The following lines assume that we have at most two rules to call.");
 			}
 			return result;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */
-	protected EofListener createEofListener(final InternalParser parser,
-			final AbstractElement elementToParse) {
+	protected EofListener createEofListener(final InternalParser parser, final AbstractElement elementToParse) {
 		return new EofListener(parser, elementToParse);
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */
@@ -175,7 +169,7 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 		method.setAccessible(true);
 		try {
 			method.invoke(parser);
-		} catch(InvocationTargetException targetException) {
+		} catch (InvocationTargetException targetException) {
 			Throwable cause = targetException.getCause();
 			if (cause instanceof InfiniteRecursion) {
 				if (swallowInfiniteRecursion) {
@@ -188,7 +182,7 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 		}
 		return parser.getFollowElements();
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */
@@ -203,15 +197,15 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 			InternalParser parser) {
 		return new ObservableXtextTokenStream(tokenSource, parser);
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */
-	protected IUnorderedGroupHelper getInitializedUnorderedGroupHelper(FE element,
-			InternalParser parser, UnorderedGroup group) {
+	protected IUnorderedGroupHelper getInitializedUnorderedGroupHelper(FE element, InternalParser parser,
+			UnorderedGroup group) {
 		final IUnorderedGroupHelper helper = parser.getUnorderedGroupHelper();
 		helper.enter(group);
-		for(AbstractElement consumed: element.getHandledUnorderedGroupElements()) {
+		for (AbstractElement consumed : element.getHandledUnorderedGroupElements()) {
 			parser.before(consumed);
 			helper.select(group, group.getElements().indexOf(consumed));
 			helper.returnFromSelection(group);
@@ -219,7 +213,7 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 		}
 		return helper;
 	}
-	
+
 	@Inject
 	private void initEntryRule(IGrammarAccess grammar) {
 		initializeFor(grammar.getGrammar().getRules().get(0));
@@ -228,17 +222,16 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 	public void initializeFor(AbstractRule rule) {
 		this.entryRule = rule;
 	}
-	
+
 	public AbstractRule getEntryRule() {
 		return entryRule;
 	}
-	
+
 	protected Collection<FE> getFollowElements(InternalParser parser) {
 		return getFollowElements(parser, entryRule);
 	}
 
-	protected Collection<FE> getFollowElements(InternalParser parser,
-			AbstractRule rule) {
+	protected Collection<FE> getFollowElements(InternalParser parser, AbstractRule rule) {
 		String ruleName = ruleNames.getAntlrRuleName(rule);
 		return getFollowElements(parser, ruleName);
 	}
@@ -252,9 +245,9 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	protected abstract String[] getInitialHiddenTokens();
-	
+
 	public Collection<FE> getFollowElements(String input, boolean strict) {
 		TokenSource tokenSource = createTokenSource(input);
 		InternalParser parser = createParser();
@@ -268,14 +261,14 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 		tokens.setListener(parser);
 		try {
 			return Lists.newArrayList(getFollowElements(parser));
-		} catch(InfiniteRecursion infinite) {
+		} catch (InfiniteRecursion infinite) {
 			return Lists.newArrayList(parser.getFollowElements());
 		}
 	}
-	
+
 	/**
-	 * Returns the elementToParse or the innermost element if the elementToParse is 
-	 * a (parameterized) group that contains only a single element.
+	 * Returns the elementToParse or the innermost element if the elementToParse is a (parameterized) group that
+	 * contains only a single element.
 	 */
 	protected AbstractElement unwrapSingleElementGroups(AbstractElement elementToParse) {
 		if (elementToParse instanceof Group) {
@@ -286,18 +279,19 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 		}
 		return elementToParse;
 	}
-	
+
 	/**
-	 * Returns the root element or its alternative branches if it is an {@link Alternatives} or an {@link UnorderedGroup}.
-	 * In case of an {@link UnorderedGroup} the result contains only the elements that are not yet processed up to the
-	 * relevant cursor position.
+	 * Returns the root element or its alternative branches if it is an {@link Alternatives} or an
+	 * {@link UnorderedGroup}. In case of an {@link UnorderedGroup} the result contains only the elements that are not
+	 * yet processed up to the relevant cursor position.
 	 */
-	protected Collection<AbstractElement> getElementsToParse(AbstractElement root, List<AbstractElement> handledUnorderedGroupElements) {
+	protected Collection<AbstractElement> getElementsToParse(AbstractElement root,
+			List<AbstractElement> handledUnorderedGroupElements) {
 		if (root instanceof UnorderedGroup) {
 			if (handledUnorderedGroupElements.isEmpty())
 				return ((CompoundElement) root).getElements();
 			List<AbstractElement> result = Lists.newArrayList(root);
-			for(AbstractElement child: ((UnorderedGroup) root).getElements()) {
+			for (AbstractElement child : ((UnorderedGroup) root).getElements()) {
 				if (!handledUnorderedGroupElements.contains(child)) {
 					result.add(child);
 				}
@@ -306,14 +300,14 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 		}
 		return getElementsToParse(root);
 	}
-	
+
 	/**
 	 * Factory method for the {@link IgnoreFirstEntranceUnorderedGroupHelper}.
 	 */
 	protected IUnorderedGroupHelper ignoreFirstEntrance(final IUnorderedGroupHelper helper) {
 		return new IgnoreFirstEntranceUnorderedGroupHelper(helper);
 	}
-	
+
 	/**
 	 * Return the element itself or its components if it is an {@link Alternatives}.
 	 */
@@ -322,25 +316,27 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 			return ((CompoundElement) root).getElements();
 		return Collections.singleton(root);
 	}
-	
-	protected String[][] getRequiredRuleNames(String ruleName, List<Integer> paramStack, AbstractElement elementToParse) {
-		return requiredRuleNameComputer.getRequiredRuleNames(new RequiredRuleNameComputer.Param(ruleName, paramStack, elementToParse) {
-			@Override
-			public String getBaseRuleName(AbstractElement element) {
-				return getRuleName(element);
-			}
-		});
+
+	protected String[][] getRequiredRuleNames(String ruleName, List<Integer> paramStack,
+			AbstractElement elementToParse) {
+		return requiredRuleNameComputer
+				.getRequiredRuleNames(new RequiredRuleNameComputer.Param(ruleName, paramStack, elementToParse) {
+					@Override
+					public String getBaseRuleName(AbstractElement element) {
+						return getRuleName(element);
+					}
+				});
 	}
-	
+
 	protected abstract String getRuleName(AbstractElement element);
-	
+
 	/**
 	 * Creates a new {@link IUnorderedGroupHelper} that is not yet initialized.
 	 */
 	protected IUnorderedGroupHelper createUnorderedGroupHelper() {
 		return getUnorderedGroupHelper().get();
 	}
-	
+
 	/**
 	 * Public for testing purpose.
 	 */
@@ -354,29 +350,30 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 	public Provider<IUnorderedGroupHelper> getUnorderedGroupHelper() {
 		return unorderedGroupHelper;
 	}
-	
+
 	/**
 	 * Public for testing purpose.
 	 */
 	public void setRequiredRuleNameComputer(RequiredRuleNameComputer requiredRuleNameComputer) {
 		this.requiredRuleNameComputer = requiredRuleNameComputer;
 	}
-	
+
 	/**
 	 * Public for testing purpose.
 	 */
 	public RequiredRuleNameComputer getRequiredRuleNameComputer() {
 		return requiredRuleNameComputer;
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */
 	protected RuleNames getRuleNames() {
 		return ruleNames;
 	}
-	
-	public Collection<FE> getFollowElements(IParseResult parseResult, EntryPointFinder entryPointFinder, int offset, boolean strict) {
+
+	public Collection<FE> getFollowElements(IParseResult parseResult, EntryPointFinder entryPointFinder, int offset,
+			boolean strict) {
 		ICompositeNode entryPoint = entryPointFinder.findEntryPoint(parseResult, offset);
 		if (entryPoint != null) {
 			String parseMe = getTextToParse(parseResult, entryPoint, offset);
@@ -465,14 +462,14 @@ public abstract class BaseContentAssistParser<FE extends BaseFollowElement<LATer
 
 	/**
 	 * Returns a syntactically correct replacement for nodes whose real content does not need to be parsed.
+	 * 
 	 * @return the replacement or <code>null</code>
 	 */
 	protected String getReplacement(ICompositeNode node) {
 		return null;
 	}
 
-	protected Collection<FE> getFollowElements(InternalParser parser,
-			AbstractElement entryPoint) {
+	protected Collection<FE> getFollowElements(InternalParser parser, AbstractElement entryPoint) {
 		String ruleName = getRuleName(entryPoint);
 		if (ruleName == null) {
 			if (entryPoint instanceof RuleCall) {
