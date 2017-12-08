@@ -89,17 +89,8 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     };
     final StringConcatenationClient expression = _client;
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory().addTypeToProviderInstance(TypeReference.typeRef(IAllContainersState.class), expression);
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (_isGenerateStub) {
-      bindingFactory.addTypeToType(this.naming.getEclipsePluginDefaultEditor(this.getGrammar()), this.naming.getEclipsePluginEditor(this.getGrammar()));
-    } else {
-      boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
-      if (_inheritsXbase) {
-        bindingFactory.addTypeToType(this.naming.getEclipsePluginDefaultEditor(this.getGrammar()), this.naming.getEclipsePluginXbaseEditor(this.getGrammar()));
-      }
-    }
-    boolean _inheritsXbase_1 = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
-    if (_inheritsXbase_1) {
+    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
+    if (_inheritsXbase) {
       bindingFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"), 
         TypeReference.typeRef("org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider")).addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"), 
         TypeReference.typeRef("org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler"));

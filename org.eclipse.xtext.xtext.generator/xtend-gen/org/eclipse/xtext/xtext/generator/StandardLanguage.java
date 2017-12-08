@@ -36,7 +36,6 @@ import org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2;
 import org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ui.compare.CompareFragment2;
 import org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2;
-import org.eclipse.xtext.xtext.generator.ui.editor.EditorFragment2;
 import org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.outline.QuickOutlineFragment2;
@@ -127,8 +126,6 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2();
   
-  private EditorFragment2 editor = new EditorFragment2();
-  
   public StandardLanguage() {
     try {
       this.getClass().getClassLoader().loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule");
@@ -212,7 +209,6 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       this.operator_add(fragments, this.ideaPlugin);
       this.operator_add(fragments, this.webSupport);
       this.operator_add(fragments, this.newProjectWizardForEclipse);
-      this.operator_add(fragments, this.editor);
       _xblockexpression = fragments;
     }
     return _xblockexpression;
@@ -467,15 +463,6 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   public void setNewProjectWizardForEclipse(final SimpleProjectWizardFragment2 newProjectWizardForEclipse) {
     this.newProjectWizardForEclipse = newProjectWizardForEclipse;
-  }
-  
-  @Pure
-  protected EditorFragment2 getEditor() {
-    return this.editor;
-  }
-  
-  public void setEditor(final EditorFragment2 editor) {
-    this.editor = editor;
   }
   
   private final static Logger LOG = Logger.getLogger(StandardLanguage.class);

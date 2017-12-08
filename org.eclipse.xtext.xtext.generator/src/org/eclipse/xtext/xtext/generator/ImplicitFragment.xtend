@@ -59,12 +59,6 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory()
 			.addTypeToProviderInstance(IAllContainersState.typeRef, expression)
 		
-		if (isGenerateStub) {
-			bindingFactory.addTypeToType(grammar.eclipsePluginDefaultEditor, grammar.eclipsePluginEditor)
-		} else if (inheritsXbase(grammar)) {
-			bindingFactory.addTypeToType(grammar.eclipsePluginDefaultEditor, grammar.eclipsePluginXbaseEditor)
-		}
-		
 		if (inheritsXbase(grammar)) {
 			bindingFactory.addTypeToType('org.eclipse.xtext.ui.editor.model.XtextDocumentProvider'.typeRef,
 					'org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider'.typeRef)
