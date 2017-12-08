@@ -115,7 +115,9 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 <p>Each terminal rule returns an atomic value (an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">EDataType</a>). By default, it’s assumed that an instance of <code>ecore::EString</code>) should be returned. However, if you want to provide a different type you can specify it. For instance, the rule <em>INT</em> is defined as:</p>
 
-<pre><code class="language-xtext">terminal INT returns ecore::EInt: 
+<pre><code class="language-xtext">import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+//...
+terminal INT returns ecore::EInt: 
     ('0'..'9')+;
 </code></pre>
 
