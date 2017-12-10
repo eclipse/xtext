@@ -164,7 +164,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cINTKeyword = (Keyword)rule.eContents().get(1);
 		
 		//INT0 INT:
-		//	'INT'
+		//	'INT' /* TODO: implement this rule and an appropriate IValueConverter */;
 		@Override public ParserRule getRule() { return rule; }
 
 		//'INT'
@@ -182,7 +182,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//Concrete0_Impl Concrete0:
 		//	{Concrete0}
 		//	'Concrete0'
-		//	name=EString
+		//	name=EString;
 		@Override public ParserRule getRule() { return rule; }
 
 		//{Concrete0} 'Concrete0' name=EString
@@ -232,7 +232,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//Concrete1_Impl Concrete1:
 		//	{Concrete1}
 		//	'Concrete1'
-		//	name=EString
+		//	name=EString;
 		@Override public ParserRule getRule() { return rule; }
 
 		//{Concrete1} 'Concrete1' name=EString
@@ -372,7 +372,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//INT0 INT:
-	//	'INT'
+	//	'INT' /* TODO: implement this rule and an appropriate IValueConverter */;
 	public INT0Elements getINT0Access() {
 		return pINT0;
 	}
@@ -384,7 +384,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	//Concrete0_Impl Concrete0:
 	//	{Concrete0}
 	//	'Concrete0'
-	//	name=EString
+	//	name=EString;
 	public Concrete0_ImplElements getConcrete0_ImplAccess() {
 		return pConcrete0_Impl;
 	}
@@ -406,7 +406,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	//Concrete1_Impl Concrete1:
 	//	{Concrete1}
 	//	'Concrete1'
-	//	name=EString
+	//	name=EString;
 	public Concrete1_ImplElements getConcrete1_ImplAccess() {
 		return pConcrete1_Impl;
 	}
@@ -447,7 +447,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
