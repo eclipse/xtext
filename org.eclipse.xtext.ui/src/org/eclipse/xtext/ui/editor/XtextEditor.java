@@ -270,6 +270,11 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		if (log.isDebugEnabled())
 			log.debug("init:" + input);
+		if (!input.exists()) {
+			// Set site to prevent issues when disposing this editor
+			setSite(site);
+			throw new PartInitException("Input doesn't exist");
+		}
 
 		// do document provider setup
 		setDocumentProvider(documentProvider.get());
