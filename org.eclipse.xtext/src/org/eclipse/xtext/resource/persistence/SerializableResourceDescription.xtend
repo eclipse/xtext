@@ -188,7 +188,7 @@ interface SerializableEObjectDescriptionProvider {
 	
 	override writeExternal(ObjectOutput out) throws IOException {
 		out.writeURI(eObjectURI)
-		out.writeURI(EcoreUtil.getURI(eClass))
+		out.writeEcoreElement(eClass)
 		out.writeQualifiedName(qualifiedName)
 		out.writeObject(userData)
 	}
@@ -238,7 +238,7 @@ interface SerializableEObjectDescriptionProvider {
 /**
  * @since 2.8
  */
-package class SerializationExtensions {
+class SerializationExtensions {
 	
 	def static <T extends ENamedElement> T readEcoreElement(ObjectInput in) throws IOException {
 		val uri = in.readURI

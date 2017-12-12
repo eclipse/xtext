@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  * @since 2.8
  */
 @SuppressWarnings("all")
-class SerializationExtensions {
+public class SerializationExtensions {
   public static <T extends ENamedElement> T readEcoreElement(final ObjectInput in) throws IOException {
     final URI uri = SerializationExtensions.readURI(in);
     final EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(uri.trimFragment().toString());
