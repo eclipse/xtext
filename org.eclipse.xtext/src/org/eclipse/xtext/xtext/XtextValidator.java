@@ -1255,7 +1255,14 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		final boolean isOverride =
 				rule.getAnnotations().stream().anyMatch(e -> AnnotationNames.OVERRIDE.equals(e.getName()));
 		
-		for (Grammar g : GrammarUtil.getGrammar(rule).getUsedGrammars()) {
+		final List<Grammar> superGrammars = GrammarUtil.getGrammar(rule).getUsedGrammars();
+		
+		if (isOverride && superGrammars.isEmpty()) {
+			error("This grammar has no super grammar and therefore cannot override any rules.", rule,
+					XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_INVALID);
+		}
+		
+		for (Grammar g : superGrammars) {
 			final AbstractRule r = GrammarUtil.findRuleForName(g, rule.getName());
 			
 			if (r != null) {
