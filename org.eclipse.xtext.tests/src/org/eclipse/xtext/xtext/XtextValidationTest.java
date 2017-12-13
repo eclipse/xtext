@@ -170,6 +170,19 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals(issues.toString(), 0, issues.size());
 	}
 	
+	@Test public void testExplicitOverride05() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar\n" +
+				"import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore" +
+				"@Override\n" +
+				"terminal ID: ('a'..'z'|'A'..'Z'|'_');");
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		List<Diagnostic> issues = diag.getChildren();
+		assertEquals(issues.toString(), 1, issues.size());
+		assertEquals("This grammar has no super grammar and therefore cannot override any rules.", issues.get(0).getMessage());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
 	
 	@Test public void testMissingArgument() throws Exception {
 		XtextResource resource = getResourceFromString(
