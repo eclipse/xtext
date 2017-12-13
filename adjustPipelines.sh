@@ -1,7 +1,8 @@
 #!/bin/bash
 
 allDirectories() {
-	cat <(cat locations.properties | head -n 1 | sed 's/xtext-[^/]*/xtext-eclipse/') <(cat locations.properties | head -n 1 | sed 's/xtext-[^/]*/xtext-maven/') <(cat locations.properties) | cut -d "=" -f2- 
+	# the rev trick obvuscates the code but seems to be a good way to replace only the last match with sed
+	cat <(cat locations.properties | head -n 1 | rev | sed 's/[^/]*-txetx/allerbmu-txetx/' | rev) <(cat locations.properties | head -n 1 | rev | sed 's/[^/]*-txetx/espilce-txetx/' | rev) <(cat locations.properties | head -n 1 | rev | sed 's/[^/]*-txetx/nevam-txetx/' | rev) <(cat locations.properties) | cut -d "=" -f2-
 }
 
 toDir() {
