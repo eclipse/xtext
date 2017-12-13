@@ -10,6 +10,7 @@ dependencies {
 
 	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
 	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt"
+	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.tool:$versions.jdtCompilerTool"
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	compile "junit:junit:$versions.junit"
 }

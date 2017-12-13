@@ -9,6 +9,7 @@ dependencies {
 	compile "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"
 	optional "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
 	optional "org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt"
+    optional "org.eclipse.jdt:org.eclipse.jdt.compiler.tool:$versions.jdtCompilerTool"
 }
 
 sourceSets.main.java.srcDir 'packrat'
