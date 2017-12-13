@@ -60,17 +60,17 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 						<dependency>
 							<groupId>org.ow2.asm</groupId>
 							<artifactId>asm</artifactId>
-							<version>5.0.1</version>
+							<version>6.0</version>
 						</dependency>
 						<dependency>
 							<groupId>org.ow2.asm</groupId>
 							<artifactId>asm-commons</artifactId>
-							<version>5.0.1</version>
+							<version>6.0</version>
 						</dependency>
 						<dependency>
 							<groupId>org.ow2.asm</groupId>
 							<artifactId>asm-tree</artifactId>
-							<version>5.0.1</version>
+							<version>6.0</version>
 						</dependency>
 					</dependencies>
 				«ENDIF»
