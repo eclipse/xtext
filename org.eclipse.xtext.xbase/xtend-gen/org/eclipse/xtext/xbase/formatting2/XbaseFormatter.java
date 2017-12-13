@@ -417,8 +417,8 @@ public class XbaseFormatter extends XtypeFormatter {
       final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
         it.noSpace();
       };
-      final ISemanticRegion open = format.prepend(this.textRegionExtensions.regionFor(expr).keyword("("), _function);
-      final ISemanticRegion close = this.textRegionExtensions.regionFor(expr).keyword(")");
+      final ISemanticRegion open = format.prepend(this.textRegionExtensions.regionFor(expr).keyword(this.grammar.getXFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_3_0_0()), _function);
+      final ISemanticRegion close = this.textRegionExtensions.regionFor(expr).keyword(this.grammar.getXFeatureCallAccess().getRightParenthesisKeyword_3_2());
       this.formatFeatureCallParams(expr.getFeatureCallArguments(), open, close, format);
     } else {
       EList<XExpression> _featureCallArguments = expr.getFeatureCallArguments();
@@ -486,8 +486,8 @@ public class XbaseFormatter extends XtypeFormatter {
             final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
               it.noSpace();
             };
-            final ISemanticRegion open = format.prepend(this.textRegionExtensions.regionFor(call).keyword("("), _function_2);
-            final ISemanticRegion close = this.textRegionExtensions.regionFor(call).keyword(")");
+            final ISemanticRegion open = format.prepend(this.textRegionExtensions.regionFor(call).keyword(this.grammar.getXMemberFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0()), _function_2);
+            final ISemanticRegion close = this.textRegionExtensions.regionFor(call).keyword(this.grammar.getXMemberFeatureCallAccess().getRightParenthesisKeyword_1_1_3_2());
             this.formatFeatureCallParams(call.getMemberCallArguments(), open, close, format);
           } else {
             boolean _isEmpty = call.getMemberCallArguments().isEmpty();
