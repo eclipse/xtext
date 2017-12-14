@@ -16,3 +16,4 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
 Export-Package: org.eclipse.xtext.builder.standalone;x-internal:=true,
  org.eclipse.xtext.builder.standalone.compiler;x-internal:=true,
  org.eclipse.xtext.builder.standalone.incremental;x-internal:=true
+Automatic-Module-Name: org.eclipse.xtext.builder.standalone

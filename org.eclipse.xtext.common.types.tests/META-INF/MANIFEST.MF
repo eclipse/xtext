@@ -49,3 +49,4 @@ Import-Package: org.apache.log4j,
  org.junit;version="4.5.0",
  org.junit.runner;version="4.5.0",
  org.junit.runners;version="4.5.0"
+Automatic-Module-Name: org.eclipse.xtext.common.types.tests

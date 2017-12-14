@@ -16,4 +16,4 @@ Export-Package: org.eclipse.xtext.xbase.testlanguages.bug462047.ide,
  org.eclipse.xtext.xbase.testlanguages.ide,
  org.eclipse.xtext.xbase.testlanguages.ide.contentassist.antlr,
  org.eclipse.xtext.xbase.testlanguages.ide.contentassist.antlr.internal
-
+Automatic-Module-Name: org.eclipse.xtext.xbase.testlanguages.ide
