@@ -1330,7 +1330,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
-              _builder.append("<version>2.5.5</version>");
+              _builder.append("<version>3.1.0</version>");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
@@ -1513,13 +1513,13 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   
   public CharSequence jarDescriptor() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<assembly xmlns=\"http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3\" ");
+    _builder.append("<assembly xmlns=\"http://maven.apache.org/ASSEMBLY/2.0.0\" ");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("xsi:schemaLocation=\"http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3 http://maven.apache.org/xsd/assembly-1.1.3.xsd\">");
+    _builder.append("xsi:schemaLocation=\"http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd\">");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<id>jar-with-ecore-model</id>");

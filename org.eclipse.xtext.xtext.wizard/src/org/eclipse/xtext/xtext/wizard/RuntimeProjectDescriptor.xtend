@@ -476,7 +476,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							«IF isPlainMavenBuild»
 								<plugin>
 									<artifactId>maven-assembly-plugin</artifactId>
-									<version>2.5.5</version>
+									<version>3.1.0</version>
 									<configuration>
 										<descriptors>
 											<descriptor>jar-with-ecore-model.xml</descriptor>
@@ -536,9 +536,9 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	def jarDescriptor() '''
-		<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3" 
+		<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0" 
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3 http://maven.apache.org/xsd/assembly-1.1.3.xsd">
+			xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
 			<id>jar-with-ecore-model</id>
 			<formats>
 				<format>jar</format>

@@ -223,7 +223,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
       _builder.append("<artifactId>maven-war-plugin</artifactId>");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("<version>2.6</version>");
+      _builder.append("<version>3.2.0</version>");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("<configuration>");
