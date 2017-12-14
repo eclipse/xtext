@@ -34,3 +34,4 @@ Export-Package: org.eclipse.xtext.example.domainmodel.ui.contentassist,
  org.eclipse.xtext.example.domainmodel.ui.search,
  org.eclipse.xtext.example.domainmodel.ui.editor
 Bundle-Activator: org.eclipse.xtext.example.domainmodel.ui.internal.DomainmodelActivator
+Automatic-Module-Name: org.eclipse.xtext.example.domainmodel.ui

@@ -57,4 +57,5 @@ Export-Package: org.eclipse.xtext.builder.tests,
  org.eclipse.xtext.builder.tests.ui.quickfix,
  org.eclipse.xtext.builder.tests.ide.contentassist.antlr.internal,
  org.eclipse.xtext.builder.tests.internal
+Automatic-Module-Name: org.eclipse.xtext.builder.tests
 

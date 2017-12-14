@@ -39,4 +39,5 @@ Export-Package: org.eclipse.xtext.ui.codetemplates;x-friends:="org.eclipse.xtext
  org.eclipse.xtext.ui.codetemplates.templates.util;x-internal:=true,
  org.eclipse.xtext.ui.codetemplates.validation;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
  org.eclipse.xtext.ui.codetemplates.serializer
+Automatic-Module-Name: org.eclipse.xtext.ui.codetemplates
 

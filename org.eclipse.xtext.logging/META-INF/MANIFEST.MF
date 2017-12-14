@@ -10,3 +10,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.eclipse.core.runtime;bundle-version="3.6.0",
  org.osgi.framework;version="1.5.0"
 Export-Package: org.eclipse.xtext.logging;x-internal:=true
+Automatic-Module-Name: org.eclipse.xtext.logging

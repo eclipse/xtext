@@ -13,4 +13,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr,
  org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr.internal,
  org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr.lexer
+Automatic-Module-Name: org.eclipse.xtext.example.homeautomation.ide
 

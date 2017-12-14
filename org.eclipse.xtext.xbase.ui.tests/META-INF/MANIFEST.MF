@@ -31,3 +31,4 @@ Import-Package: org.apache.log4j;version="1.2.15",
  org.junit;version="4.5.0",
  org.junit.runner;version="4.5.0",
  org.junit.runners;version="4.5.0"
+Automatic-Module-Name: org.eclipse.xtext.xbase.ui.tests

@@ -43,3 +43,4 @@ Export-Package: org.eclipse.xtext.xtext.ui.ecore2xtext,
  org.eclipse.xtext.xtext.ui.ecore2xtext.ui.contentassist,
  org.eclipse.xtext.xtext.ui.ecore2xtext.serializer
 Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.eclipse.xtext.xtext.ui.tests

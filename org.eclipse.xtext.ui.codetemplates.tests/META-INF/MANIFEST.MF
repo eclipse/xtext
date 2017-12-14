@@ -28,3 +28,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.ui.codetemplates.tests;x-internal=true,
  org.eclipse.xtext.ui.codetemplates.ui.tests;x-internal=true
 Bundle-Vendor: %providerName
+Automatic-Module-Name: org.eclipse.xtext.ui.codetemplates.tests

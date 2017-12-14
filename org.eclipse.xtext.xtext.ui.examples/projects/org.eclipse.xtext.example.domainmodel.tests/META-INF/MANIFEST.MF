@@ -19,3 +19,4 @@ Import-Package: org.hamcrest.core,
  org.junit.runners;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",
  org.junit.runner.notification;version="4.5.0"
+Automatic-Module-Name: org.eclipse.xtext.example.domainmodel.tests

@@ -35,3 +35,4 @@ Export-Package: org.eclipse.xtext.purexbase.ui,
  org.eclipse.xtext.purexbase.ui.quickfix,
  org.eclipse.xtext.purexbase.ui.editor
 Bundle-Activator: org.eclipse.xtext.purexbase.ui.internal.PurexbaseActivator
+Automatic-Module-Name: org.eclipse.xtext.purexbase.ui

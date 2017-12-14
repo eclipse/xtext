@@ -9,3 +9,4 @@ Require-Bundle: org.junit,
  com.google.inject;bundle-version="3.0.0",
  org.eclipse.xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: org.eclipse.xtext.junit4.tests

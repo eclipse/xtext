@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.xtext.generator
 Export-Package: org.eclipse.xtext.idea.generator,
  org.eclipse.xtext.idea.generator.parser.antlr
+Automatic-Module-Name: org.eclipse.xtext.idea.generator

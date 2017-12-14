@@ -30,3 +30,4 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.codegen.ecore;bundle-version="2.10.2";resolution:=optional,
  org.eclipse.pde.core;resolution:=optional,
  org.eclipse.xtext.common.types.ui;resolution:=optional
+Automatic-Module-Name: org.eclipse.xtext.ui.testing

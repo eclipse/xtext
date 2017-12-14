@@ -231,4 +231,5 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.testlanguages.ui.contentassist,
  org.eclipse.xtext.ui.tests.ui.contentassist,
  org.eclipse.xtext.ui.tests.validation
+Automatic-Module-Name: org.eclipse.xtext.ui.tests
 

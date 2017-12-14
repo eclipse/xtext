@@ -15,4 +15,5 @@ Export-Package: org.eclipse.xtext.ui.codetemplates.ide,
  org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr.lexer,
  org.eclipse.xtext.ui.codetemplates.ui.contentassist,
  org.eclipse.xtext.ui.codetemplates.ui.highlighting
+Automatic-Module-Name: org.eclipse.xtext.ui.codetemplates.ide
 

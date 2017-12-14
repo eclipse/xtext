@@ -23,3 +23,4 @@ Export-Package: org.eclipse.xtext.example.arithmetics.ui.internal,
  org.eclipse.xtext.example.arithmetics.ui.quickfix,
  org.eclipse.xtext.example.arithmetics.ui.contentassist
 Bundle-Activator: org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator
+Automatic-Module-Name: org.eclipse.xtext.example.arithmetics.ui

@@ -27,3 +27,4 @@ Export-Package: org.eclipse.xtext.example.homeautomation.ui.contentassist,
  org.eclipse.xtext.example.homeautomation.ui.internal,
  org.eclipse.xtext.example.homeautomation.ui.editor
 Bundle-Activator: org.eclipse.xtext.example.homeautomation.ui.internal.HomeautomationActivator
+Automatic-Module-Name: org.eclipse.xtext.example.homeautomation.ui

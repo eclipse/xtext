@@ -12,4 +12,5 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.internal,
  org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr
+Automatic-Module-Name: org.eclipse.xtext.example.domainmodel.ide
 

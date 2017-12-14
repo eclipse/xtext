@@ -31,3 +31,4 @@ Export-Package: org.eclipse.xtext.example.homeautomation.ruleEngine.util,
  org.eclipse.xtext.example.homeautomation.services,
  org.eclipse.xtext.example.homeautomation.formatting2
 Import-Package: org.apache.log4j
+Automatic-Module-Name: org.eclipse.xtext.example.homeautomation

@@ -13,3 +13,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: org.eclipse.xtext.xtext.ui.examples;x-internal:=true
+Automatic-Module-Name: org.eclipse.xtext.xtext.ui.examples
