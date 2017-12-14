@@ -9,3 +9,4 @@ Require-Bundle: org.xtext.example.eclipsePluginP2,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: org.xtext.example.eclipsePluginP2.ide

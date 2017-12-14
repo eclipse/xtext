@@ -610,3 +610,4 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.xtextTest,
  org.eclipse.xtext.xtextTest.impl,
  org.eclipse.xtext.xtextTest.util
+Automatic-Module-Name: org.eclipse.xtext.tests

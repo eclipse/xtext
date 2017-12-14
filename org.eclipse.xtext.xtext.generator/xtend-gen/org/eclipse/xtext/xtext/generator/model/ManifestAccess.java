@@ -244,6 +244,15 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.append("Automatic-Module-Name: ");
+    String _elvis_1 = null;
+    if (this.symbolicName != null) {
+      _elvis_1 = this.symbolicName;
+    } else {
+      _elvis_1 = this.bundleName;
+    }
+    _builder.append(_elvis_1);
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
   

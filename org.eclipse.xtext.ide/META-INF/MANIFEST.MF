@@ -49,3 +49,4 @@ Export-Package: org.eclipse.xtext.ide;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtext.ide.server.signatureHelp,
  org.eclipse.xtext.ide.server.symbol,
  org.eclipse.xtext.ide.util
+Automatic-Module-Name: org.eclipse.xtext.ide

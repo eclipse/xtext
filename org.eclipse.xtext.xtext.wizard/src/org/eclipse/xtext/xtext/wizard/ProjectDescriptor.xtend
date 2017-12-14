@@ -114,6 +114,7 @@ abstract class ProjectDescriptor {
 		«manifestEntry("Require-Bundle", requiredBundles)»
 		«manifestEntry("Import-Package", importedPackages)»
 		Bundle-RequiredExecutionEnvironment: «bree»
+		Automatic-Module-Name: «name»
 	'''
 	
 	

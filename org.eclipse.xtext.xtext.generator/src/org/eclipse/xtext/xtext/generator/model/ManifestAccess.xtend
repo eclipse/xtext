@@ -124,6 +124,7 @@ class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorCompo
 		«IF activator !== null»
 			Bundle-Activator: «activator»
 		«ENDIF»
+		Automatic-Module-Name: «symbolicName ?: bundleName»
 	'''
 	
 	override void writeTo(IFileSystemAccess2 fileSystemAccess) {
