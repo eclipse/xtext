@@ -19,7 +19,7 @@ import com.google.inject.name.Named;
 public class AbstractMultiLineCommentProvider {
 
 	public final static String RULE = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.ruleName";
-	public final static String WS_RULE = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.ruleName";
+	public final static String WS_RULE = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.wsRuleName";
 	public final static String START_TAG = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.startTag";
 	public final static String END_TAG = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.endTag";
 	public final static String LINE_PREFIX = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.linePrefix";
