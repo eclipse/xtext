@@ -21,4 +21,5 @@ Export-Package: extract,
  lazy,
  observables
 Bundle-Vendor: Eclipse Xtext
+Automatic-Module-Name: xtend-annotation-examples
 

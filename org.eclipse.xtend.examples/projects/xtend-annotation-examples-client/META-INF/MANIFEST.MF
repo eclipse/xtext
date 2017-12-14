@@ -9,4 +9,5 @@ Require-Bundle: org.eclipse.xtend.lib,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  xtend-annotation-examples;bundle-version="2.4.3"
 Bundle-Vendor: Eclipse Xtext
+Automatic-Module-Name: xtend-annotation-examples-client
 
