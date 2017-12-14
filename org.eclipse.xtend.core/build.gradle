@@ -6,6 +6,7 @@ dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
 	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
 	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt"
+	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.tool:$versions.jdtCompilerTool"
 	optional "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:$versions.xtext"
 	optional "org.apache.ant:ant:$versions.ant"
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
