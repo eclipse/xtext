@@ -30,17 +30,17 @@
 								<artifact>
 									<file>${project.artifactId}-luna.target</file>
 									<type>target</type>
-									<classifier>luna</classifier>
+									<classifier>${project.artifactId}-luna</classifier>
 								</artifact>
 								<artifact>
 									<file>${project.artifactId}-oxygen.target</file>
 									<type>target</type>
-									<classifier>oxygen</classifier>
+									<classifier>${project.artifactId}-oxygen</classifier>
 								</artifact>
 								<artifact>
 									<file>${project.artifactId}-photon.target</file>
 									<type>target</type>
-									<classifier>photon</classifier>
+									<classifier>${project.artifactId}-photon</classifier>
 								</artifact>
 							</artifacts>
 						</configuration>
