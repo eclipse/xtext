@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.outline.quickoutline;
 
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * Matches a given {@link String} against a prefix pattern. The matching algorithm
@@ -60,7 +61,11 @@ public class StringMatcher {
 	}
 	
 	public boolean match(String text) {
-		return getPattern().matcher(text).find();
+		try {
+			return getPattern().matcher(text).find();
+		} catch (PatternSyntaxException e) {
+			return false;
+		}
 	}
 
 }
