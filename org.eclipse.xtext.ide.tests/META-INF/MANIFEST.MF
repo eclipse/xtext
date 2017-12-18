@@ -17,3 +17,4 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.testlanguages,
  org.eclipse.xtext.testlanguages.ide
 Import-Package: org.apache.log4j;version="1.2.15"
+Automatic-Module-Name: org.eclipse.xtext.ide.tests

@@ -210,6 +210,10 @@ public abstract class ProjectDescriptor {
     String _bree = this.getBree();
     _builder.append(_bree);
     _builder.newLineIfNotEmpty();
+    _builder.append("Automatic-Module-Name: ");
+    String _name_2 = this.getName();
+    _builder.append(_name_2);
+    _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   

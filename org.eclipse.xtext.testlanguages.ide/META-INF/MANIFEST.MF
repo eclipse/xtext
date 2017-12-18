@@ -23,3 +23,4 @@ Require-Bundle: org.eclipse.xtext.ide;visibility:=reexport,
  org.antlr.runtime,
  org.eclipse.xtend.lib;bundle-version="2.14.0"
 
+Automatic-Module-Name: org.eclipse.xtext.testlanguages.ide

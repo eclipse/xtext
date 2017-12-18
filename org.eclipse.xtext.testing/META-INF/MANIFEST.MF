@@ -24,3 +24,4 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
 Import-Package: org.apache.log4j;version="1.2.15",
  org.apache.log4j.spi;version="1.2.15"
 Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.eclipse.xtext.testing

@@ -77,3 +77,4 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking,
  org.eclipse.xtext.testlanguages.fileAware.generator,
  org.eclipse.xtext.testlanguages.fileAware.tests;x-internal=true
 
+Automatic-Module-Name: org.eclipse.xtext.testlanguages

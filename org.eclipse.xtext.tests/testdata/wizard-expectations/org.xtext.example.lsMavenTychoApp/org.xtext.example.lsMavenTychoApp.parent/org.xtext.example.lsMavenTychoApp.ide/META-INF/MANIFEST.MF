@@ -9,3 +9,4 @@ Require-Bundle: org.xtext.example.lsMavenTychoApp,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: org.xtext.example.lsMavenTychoApp.ide

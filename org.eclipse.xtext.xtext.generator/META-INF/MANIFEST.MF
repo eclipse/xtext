@@ -63,3 +63,4 @@ Export-Package: org.eclipse.xtext.xtext.generator,
  org.eclipse.xtext.xtext.generator.validation;x-internal:=true,
  org.eclipse.xtext.xtext.generator.web;x-internal:=true,
  org.eclipse.xtext.xtext.generator.xbase;x-internal:=true
+Automatic-Module-Name: org.eclipse.xtext.xtext.generator
