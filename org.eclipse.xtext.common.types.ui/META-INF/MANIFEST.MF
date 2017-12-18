@@ -37,3 +37,4 @@ Export-Package: org.eclipse.xtext.common.types.access.jdt,
  org.eclipse.xtext.common.types.util.jdt,
  org.eclipse.xtext.common.types.xtext.ui
 Bundle-Localization: plugin
+Automatic-Module-Name: org.eclipse.xtext.common.types.ui

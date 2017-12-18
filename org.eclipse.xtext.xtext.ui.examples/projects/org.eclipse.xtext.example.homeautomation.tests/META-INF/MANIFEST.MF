@@ -20,3 +20,4 @@ Import-Package: org.junit.runners;version="4.5.0",
  org.junit.runner.notification;version="4.5.0",
  org.junit;version="4.5.0",
  org.junit.runner;version="4.5.0"
+Automatic-Module-Name: org.eclipse.xtext.example.homeautomation.tests

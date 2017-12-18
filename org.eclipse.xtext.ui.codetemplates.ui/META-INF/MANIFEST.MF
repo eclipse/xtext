@@ -40,3 +40,4 @@ Export-Package: org.eclipse.xtext.ui.codetemplates.ui;x-friends:="org.eclipse.xt
  org.eclipse.xtext.ui.codetemplates.ui.scoping;x-friends:="org.eclipse.xtext.xtext.ui.tests",
  org.eclipse.xtext.ui.codetemplates.ui.validation;x-friends:="org.eclipse.xtext.xtext.ui.tests"
 Bundle-Activator: org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator
+Automatic-Module-Name: org.eclipse.xtext.ui.codetemplates.ui

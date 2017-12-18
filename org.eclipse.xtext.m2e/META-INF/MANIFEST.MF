@@ -17,3 +17,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.m2e;x-internal:=true
 Import-Package: org.apache.maven.plugin;provider=m2e;resolution:=optional,
  org.apache.maven.project;provider=m2e;resolution:=optional
+Automatic-Module-Name: org.eclipse.xtext.m2e

@@ -49,3 +49,4 @@ Require-Bundle: org.eclipse.xtext,
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-Activator: org.eclipse.xtext.builder.internal.Activator
+Automatic-Module-Name: org.eclipse.xtext.builder

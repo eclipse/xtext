@@ -28,3 +28,4 @@ Export-Package: org.eclipse.xtext.example.arithmetics,
  org.eclipse.xtext.example.arithmetics.services,
  org.eclipse.xtext.example.arithmetics.validation
 Import-Package: org.apache.log4j
+Automatic-Module-Name: org.eclipse.xtext.example.arithmetics

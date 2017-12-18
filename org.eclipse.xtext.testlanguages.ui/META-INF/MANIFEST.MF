@@ -50,3 +50,4 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking.ui,
  org.eclipse.xtext.testlanguages.fileAware.ui.contentassist,
  org.eclipse.xtext.testlanguages.fileAware.ui.tests;x-internal=true
 Bundle-Activator: org.eclipse.xtext.testlanguages.ui.internal.TestlanguagesActivator
+Automatic-Module-Name: org.eclipse.xtext.testlanguages.ui

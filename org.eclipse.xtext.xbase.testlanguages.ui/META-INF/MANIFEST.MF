@@ -38,3 +38,4 @@ Export-Package: org.eclipse.xtext.xbase.testlanguages.ui,
  org.eclipse.xtext.xbase.testlanguages.ui.quickfix,
  org.eclipse.xtext.xbase.testlanguages.bug462047.ui.contentassist
 Bundle-Activator: org.eclipse.xtext.xbase.testlanguages.ui.internal.TestlanguagesActivator
+Automatic-Module-Name: org.eclipse.xtext.xbase.testlanguages.ui

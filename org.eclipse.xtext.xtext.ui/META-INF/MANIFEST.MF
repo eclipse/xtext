@@ -51,3 +51,4 @@ Export-Package: org.eclipse.xtext.ui.editor.hierarchy;x-friends:="org.eclipse.xt
  org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;x-friends:="org.eclipse.xtext.xtext.ui.tests",
  org.eclipse.xtext.xtext.ui.wizard.project;x-friends:="org.eclipse.xtext.xtext.ui.tests"
 Import-Package: org.apache.log4j;version="1.2.15"
+Automatic-Module-Name: org.eclipse.xtext.xtext.ui

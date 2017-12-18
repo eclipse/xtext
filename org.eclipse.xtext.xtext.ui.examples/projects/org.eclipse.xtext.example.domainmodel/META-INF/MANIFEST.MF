@@ -30,3 +30,4 @@ Export-Package: org.eclipse.xtext.example.domainmodel.serializer,
  org.eclipse.xtext.example.domainmodel.jvmmodel,
  org.eclipse.xtext.example.domainmodel.formatting2
 Import-Package: org.apache.log4j
+Automatic-Module-Name: org.eclipse.xtext.example.domainmodel

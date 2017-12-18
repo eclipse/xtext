@@ -17,3 +17,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.15"
 Export-Package: org.eclipse.xtext.ui.ecore
+Automatic-Module-Name: org.eclipse.xtext.ui.ecore

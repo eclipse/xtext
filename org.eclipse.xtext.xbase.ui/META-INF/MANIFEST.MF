@@ -70,3 +70,4 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
  org.eclipse.xtext.xbase.ui.validation;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtext.xbase.annotations.ui.editor
 Bundle-Localization: plugin
+Automatic-Module-Name: org.eclipse.xtext.xbase.ui
