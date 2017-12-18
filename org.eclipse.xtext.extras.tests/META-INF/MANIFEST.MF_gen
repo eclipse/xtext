@@ -29,5 +29,5 @@ Require-Bundle: org.antlr.runtime,
  org.eclipse.emf.ecore,
  org.eclipse.xtext,
  org.eclipse.xtext.util,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
 Import-Package: org.apache.log4j

@@ -85,7 +85,8 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.purexbase.PureXbase.FeatureCallID");
 		private final RuleCall cValidIDParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//@ Override FeatureCallID:
+		//@Override
+		//FeatureCallID:
 		//	ValidID;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -167,7 +168,8 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getSpecialBlockExpressionAccess().getRule();
 	}
 	
-	//@ Override FeatureCallID:
+	//@Override
+	//FeatureCallID:
 	//	ValidID;
 	public FeatureCallIDElements getFeatureCallIDAccess() {
 		return pFeatureCallID;
@@ -823,7 +825,8 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getXCatchClauseAccess().getRule();
 	}
 	
-	//@ Override QualifiedName:
+	//@Override
+	//QualifiedName:
 	//	ValidID (=> '.' ValidID)*;
 	public XbaseGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
 		return gaXbase.getQualifiedNameAccess();
