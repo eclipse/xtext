@@ -9,7 +9,9 @@
 package org.eclipse.xtext.ui.editor.validation;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +20,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.Issue;
@@ -38,34 +42,50 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 	private final ImmutableList<String> markerIds;
 
 	private MarkerCreator markerCreator;
-
 	private final MarkerTypeProvider markerTypeProvider;
+	private IAnnotationModel annotationModel;
 
 	/**
-	 * @deprecated use {@link AddMarkersOperation#AddMarkersOperation(IResource, List, Set, boolean, MarkerCreator, MarkerTypeProvider)} instead
+	 * @deprecated use
+	 *             {@link AddMarkersOperation#AddMarkersOperation(IResource, List, Set, boolean, IAnnotationModel, MarkerCreator, MarkerTypeProvider)}
+	 *             instead
 	 */
 	@Deprecated
-	public AddMarkersOperation(IResource resource, List<Issue> issues, String markerId,
-			boolean deleteMarkers, MarkerCreator markerCreator) {
+	public AddMarkersOperation(IResource resource, List<Issue> issues, String markerId, boolean deleteMarkers,
+			MarkerCreator markerCreator) {
 		this(resource, issues, Collections.singleton(markerId), deleteMarkers, markerCreator);
 	}
-	
+
 	/**
-	 * @deprecated use {@link AddMarkersOperation#AddMarkersOperation(IResource, List, Set, boolean, MarkerCreator, MarkerTypeProvider)} instead
+	 * @deprecated use
+	 *             {@link AddMarkersOperation#AddMarkersOperation(IResource, List, Set, boolean, IAnnotationModel, MarkerCreator, MarkerTypeProvider)}
+	 *             instead
 	 */
 	@Deprecated
-	public AddMarkersOperation(IResource resource, List<Issue> issues, Set<String> markerIds,
-			boolean deleteMarkers, MarkerCreator markerCreator) {
+	public AddMarkersOperation(IResource resource, List<Issue> issues, Set<String> markerIds, boolean deleteMarkers,
+			MarkerCreator markerCreator) {
 		this(resource, issues, markerIds, deleteMarkers, markerCreator, new MarkerTypeProvider());
 	}
-	
+
 	/**
-	 * @since 2.3
+	 * @deprecated use
+	 *             {@link AddMarkersOperation#AddMarkersOperation(IResource, List, Set, boolean, IAnnotationModel, MarkerCreator, MarkerTypeProvider)}
+	 *             instead
 	 */
-	public AddMarkersOperation(IResource resource, List<Issue> issues, Set<String> markerIds,
-			boolean deleteMarkers, MarkerCreator markerCreator, MarkerTypeProvider markerTypeProvider) {
+	@Deprecated
+	public AddMarkersOperation(IResource resource, List<Issue> issues, Set<String> markerIds, boolean deleteMarkers,
+			MarkerCreator markerCreator, MarkerTypeProvider markerTypeProvider) {
+		this(resource, issues, markerIds, deleteMarkers, null, markerCreator, markerTypeProvider);
+	}
+
+	/**
+	 * @since 2.14
+	 */
+	public AddMarkersOperation(IResource resource, List<Issue> issues, Set<String> markerIds, boolean deleteMarkers,
+			IAnnotationModel annotationModel, MarkerCreator markerCreator, MarkerTypeProvider markerTypeProvider) {
 		super(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(resource));
 		this.issues = issues;
+		this.annotationModel = annotationModel;
 		this.markerTypeProvider = markerTypeProvider;
 		this.markerIds = ImmutableList.copyOf(markerIds);
 		this.resource = resource;
@@ -74,7 +94,7 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 	}
 
 	/**
-	 * @return the first markerID if any. 
+	 * @return the first markerID if any.
 	 * @deprecated use {@link #getMarkerIds()} instead.
 	 */
 	@Deprecated
@@ -87,16 +107,16 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 	public ImmutableList<String> getMarkerIds() {
 		return markerIds;
 	}
-	
+
 	@Override
-	protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
-			InterruptedException {
+	protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
 		if (!resource.exists())
 			return;
 		if (deleteMarkers) {
-			for(String markerId: getMarkerIds()) {
-				resource.deleteMarkers(markerId, true, IResource.DEPTH_INFINITE);	
+			for (String markerId : getMarkerIds()) {
+				resource.deleteMarkers(markerId, true, IResource.DEPTH_INFINITE);
 			}
+			deleteAnnotations(); // delete annotations set by Xtext validator independently from resource markers
 		}
 		if (!issues.isEmpty()) {
 			// update
@@ -104,6 +124,23 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 				if (monitor.isCanceled())
 					throw new InterruptedException();
 				markerCreator.createMarker(issue, resource, markerTypeProvider.getMarkerType(issue));
+			}
+		}
+	}
+
+	private void deleteAnnotations() {
+		if (annotationModel != null) {
+			@SuppressWarnings("unchecked")
+			Iterator<Annotation> iterator = annotationModel.getAnnotationIterator();
+			List<Annotation> toRemove = new ArrayList<>();
+			while (iterator.hasNext()) {
+				Annotation next = iterator.next();
+				if (next instanceof XtextAnnotation && !next.isMarkedDeleted()) {
+					toRemove.add(next);
+				}
+			}
+			for (Annotation next : toRemove) {
+				annotationModel.removeAnnotation(next);
 			}
 		}
 	}
