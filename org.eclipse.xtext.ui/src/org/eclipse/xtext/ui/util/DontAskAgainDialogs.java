@@ -13,7 +13,7 @@ import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.swt.widgets.Shell;
 
 /**
- * A utility class to ask a user questions, trough a dialog, and remember his decision.<br>
+ * A utility class to ask a user questions, through a dialog, and remember his decision.<br>
  * The settings are stored in {@link IDialogSettings} of your language UIPlugin.
  * 
  * @author Dennis Huebner - Initial contribution and API

@@ -47,7 +47,6 @@ public class DontAskAgainPreferences {
 	 * Returns whether the "Don't Ask Again" question should be asked again.
 	 *
 	 * @return Whether to show the question again or not
-	 * @since 2.14
 	 */
 	public boolean shouldAskAgain(String key) {
 		return getUserDecision(key) != MessageDialogWithToggle.NEVER;
@@ -57,7 +56,6 @@ public class DontAskAgainPreferences {
 	 * Saves the user's preference to never ask a certain question again.
 	 *
 	 * @param key The unique identifier of the question never to ask again.
-	 * @since 2.14
 	 */
 	protected void neverAskAgain(String key) {
 		storeUserDecision(key, MessageDialogWithToggle.NEVER);
