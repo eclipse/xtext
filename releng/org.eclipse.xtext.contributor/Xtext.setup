@@ -80,24 +80,25 @@
   </setupTask>
   <setupTask
       xsi:type="setup:VariableTask"
-      name="version.mwe2"
-      value="2.9.0"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="p2.xtext.releases"
-      value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="p2.xtext.milestones"
-      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="p2.xtext.latest"
-      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest"/>
+      name="xtext.version"
+      defaultValue="latest"
+      label="Xtext Version">
+    <choice
+        value="latest"
+        label="Latest Successful Build"/>
+    <choice
+        value="milestones"
+        label="Latest Milestone"/>
+    <choice
+        value="releases"
+        label="Latest Release"/>
+  </setupTask>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.xtext"
-      value="${p2.xtext.latest}"/>
+      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/${xtext.version}"
+      defaultValue=""
+      label="Xtext p2 Respository URL"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.xtext.orbit"
@@ -105,7 +106,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"
-      value="http://download.eclipse.org/modeling/emft/mwe/updates/releases/${version.mwe2}"
+      value="${p2.xtext}"
       label=""/>
   <setupTask
       xsi:type="setup:VariableTask"
@@ -124,7 +125,7 @@
       xsi:type="setup:VariableTask"
       type="URI"
       name="p2.xpand"
-      value="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/xpand/R201406030414"/>
+      value="${p2.xtext}"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.antlr-gen"
@@ -519,7 +520,7 @@
               project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -598,7 +599,7 @@
               project="org.eclipse.xtext.xbase.lib"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -675,7 +676,7 @@
               project="org.eclipse.xtext.xbase"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -765,6 +766,10 @@
             name="org.eclipse.wst.sse.core"/>
         <requirement
             name="org.eclipse.wst.xml.ui"/>
+        <requirement
+            name="org.eclipse.xtext.sdk.feature.group"/>
+        <requirement
+            name="*"/>
         <repositoryList
             name="Photon">
           <repository
@@ -995,7 +1000,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -1007,7 +1012,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.FeatureNature"/>
@@ -1022,7 +1027,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.example\..*"/>
@@ -1109,7 +1114,7 @@
               project="org.eclipse.xtext.core.idea.tests"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1188,7 +1193,7 @@
               project="org.eclipse.xtext.web"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1251,7 +1256,7 @@
               project="org.eclipse.xtext.maven.plugin"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1346,7 +1351,7 @@
               project="org.eclipse.xtend.core"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
