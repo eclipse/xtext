@@ -39,6 +39,10 @@ public abstract class AbstractContentAssistParser extends
 		lexer.setCharStream(stream);
 		return lexer;
 	}
+	
+	/* Abstract override is necessary to be backwards compatible due to generic signature in super class */
+	@Override
+	protected abstract AbstractInternalContentAssistParser createParser();
 
 	/**
 	 * @since 2.14
