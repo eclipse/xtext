@@ -99,7 +99,8 @@ public class NoParametersTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cScenarioScenario2_FalseParserRuleCall_1_11_1_1_0_0 = (RuleCall)cScenarioAssignment_1_11_1_1_0.eContents().get(0);
 		private final Keyword cKeywordKeyword_1_11_1_1_1 = (Keyword)cGroup_1_11_1_1.eContents().get(1);
 		
-		//@ Override ParserRuleParameters:
+		//@Override
+		//ParserRuleParameters:
 		//	{ParserRuleParameters} ('#1' scenario=Scenario1_True
 		//	| '#2' scenario=Scenario1_False
 		//	| '#3' scenario=Scenario2_True
@@ -602,7 +603,8 @@ public class NoParametersTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	
-	//@ Override ParserRuleParameters:
+	//@Override
+	//ParserRuleParameters:
 	//	{ParserRuleParameters} ('#1' scenario=Scenario1_True
 	//	| '#2' scenario=Scenario1_False
 	//	| '#3' scenario=Scenario2_True

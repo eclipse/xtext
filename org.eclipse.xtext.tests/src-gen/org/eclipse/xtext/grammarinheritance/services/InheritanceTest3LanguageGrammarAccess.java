@@ -27,7 +27,8 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.InheritanceTest3Language.Model");
 		private final RuleCall cModelParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//@ Override Model:
+		//@Override
+		//Model:
 		//	super::Model;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -54,7 +55,8 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		private final Assignment cNameAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
 		private final RuleCall cNameSTRINGTerminalRuleCall_3_2_0 = (RuleCall)cNameAssignment_3_2.eContents().get(0);
 		
-		//@ Override Element:
+		//@Override
+		//Element:
 		//	super::Element
 		//	| {Element} "element" name=super::ID
 		//	| {Element} "element" name=Terminals::ID
@@ -176,7 +178,8 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	
-	//@ Override Model:
+	//@Override
+	//Model:
 	//	super::Model;
 	public ModelElements getModelAccess() {
 		return pModel;
@@ -186,7 +189,8 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		return getModelAccess().getRule();
 	}
 	
-	//@ Override Element:
+	//@Override
+	//Element:
 	//	super::Element
 	//	| {Element} "element" name=super::ID
 	//	| {Element} "element" name=Terminals::ID
@@ -199,13 +203,15 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		return getElementAccess().getRule();
 	}
 	
-	//@ Override terminal ID:
+	//@Override
+	//terminal ID:
 	//	'id';
 	public TerminalRule getIDRule() {
 		return tID;
 	}
 	
-	//@ Override Model:
+	//@Override
+	//Model:
 	//	"model" name=super::ID "{"
 	//	elements+=super::Element*
 	//	"}";
@@ -227,7 +233,8 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		return getInheritanceTestLanguageElementAccess().getRule();
 	}
 	
-	//@ Override terminal ID:
+	//@Override
+	//terminal ID:
 	//	'a'..'z'+;
 	public TerminalRule getInheritanceTestLanguageIDRule() {
 		return gaInheritanceTestLanguage.getIDRule();

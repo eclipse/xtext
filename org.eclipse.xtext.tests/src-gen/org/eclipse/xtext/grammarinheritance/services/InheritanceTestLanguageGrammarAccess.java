@@ -32,7 +32,8 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cElementsElementParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//@ Override Model:
+		//@Override
+		//Model:
 		//	"model" name=ID "{"
 		//	elements+=Element*
 		//	"}";
@@ -140,7 +141,8 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	
-	//@ Override Model:
+	//@Override
+	//Model:
 	//	"model" name=ID "{"
 	//	elements+=Element*
 	//	"}";
@@ -162,7 +164,8 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getElementAccess().getRule();
 	}
 	
-	//@ Override terminal ID:
+	//@Override
+	//terminal ID:
 	//	'a'..'z'+;
 	public TerminalRule getIDRule() {
 		return tID;

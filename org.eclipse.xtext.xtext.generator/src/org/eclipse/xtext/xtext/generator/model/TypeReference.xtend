@@ -156,10 +156,16 @@ class TypeReference {
 				new QualifiedClassName('org.eclipse.emf.ecore', clazz.name)
 			}
 		} else {
-			val genClass = GenModelUtil2.getGenClass(clazz, resourceSet)
-			val packageName = genClass.genPackage.getInterfacePackageName();
-			new QualifiedClassName(packageName,
-				genClass.interfaceName)
+			if (clazz.instanceTypeName !== null) {
+				val itn = clazz.instanceTypeName;
+				new QualifiedClassName(itn.substring(0, itn.lastIndexOf('.')),
+					itn.substring(itn.lastIndexOf(".") + 1).replace("$", "."))
+			} else {
+				val genClass = GenModelUtil2.getGenClass(clazz, resourceSet)
+				val packageName = genClass.genPackage.getInterfacePackageName();
+				new QualifiedClassName(packageName,
+					genClass.interfaceName)
+			}
 		}
 	}
 

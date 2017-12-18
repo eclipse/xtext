@@ -59,7 +59,7 @@ public class SerializationErrorTestLanguageSemanticSequencer extends AbstractDel
 	 *     Indent returns Indent
 	 *
 	 * Constraint:
-	 *     ((req=TwoRequired? opt=TwoOptions indent+=Indent+) | (req=TwoRequired? indent+=Indent+) | indent+=Indent+)?
+	 *     ((((req=TwoRequired opt=TwoOptions) | opt=TwoOptions)? indent+=Indent+) | indent+=Indent+)?
 	 */
 	protected void sequence_Indent(ISerializationContext context, Indent semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

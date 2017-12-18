@@ -256,7 +256,8 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		return getChildListAccess().getRule();
 	}
 	
-	//@ Override terminal SL_COMMENT:
+	//@Override
+	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')*;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;

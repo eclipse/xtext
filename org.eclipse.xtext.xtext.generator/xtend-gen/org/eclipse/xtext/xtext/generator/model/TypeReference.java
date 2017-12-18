@@ -266,14 +266,31 @@ public class TypeReference {
         }
         _xifexpression_1 = _xifexpression_2;
       } else {
-        TypeReference.QualifiedClassName _xblockexpression_1 = null;
-        {
-          final GenClass genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
-          final String packageName = genClass.getGenPackage().getInterfacePackageName();
-          String _interfaceName = genClass.getInterfaceName();
-          _xblockexpression_1 = new TypeReference.QualifiedClassName(packageName, _interfaceName);
+        TypeReference.QualifiedClassName _xifexpression_3 = null;
+        String _instanceTypeName_1 = clazz.getInstanceTypeName();
+        boolean _tripleNotEquals_1 = (_instanceTypeName_1 != null);
+        if (_tripleNotEquals_1) {
+          TypeReference.QualifiedClassName _xblockexpression_1 = null;
+          {
+            final String itn = clazz.getInstanceTypeName();
+            String _substring = itn.substring(0, itn.lastIndexOf("."));
+            int _lastIndexOf = itn.lastIndexOf(".");
+            int _plus = (_lastIndexOf + 1);
+            String _replace = itn.substring(_plus).replace("$", ".");
+            _xblockexpression_1 = new TypeReference.QualifiedClassName(_substring, _replace);
+          }
+          _xifexpression_3 = _xblockexpression_1;
+        } else {
+          TypeReference.QualifiedClassName _xblockexpression_2 = null;
+          {
+            final GenClass genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
+            final String packageName = genClass.getGenPackage().getInterfacePackageName();
+            String _interfaceName = genClass.getInterfaceName();
+            _xblockexpression_2 = new TypeReference.QualifiedClassName(packageName, _interfaceName);
+          }
+          _xifexpression_3 = _xblockexpression_2;
         }
-        _xifexpression_1 = _xblockexpression_1;
+        _xifexpression_1 = _xifexpression_3;
       }
       _xifexpression = _xifexpression_1;
     }
