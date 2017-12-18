@@ -7,3 +7,4 @@ Bundle-Version: 2.14.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.eclipse.xtend.lib
 Require-Bundle: org.eclipse.xtend.lib
+Automatic-Module-Name: org.eclipse.xtend.lib.gwt

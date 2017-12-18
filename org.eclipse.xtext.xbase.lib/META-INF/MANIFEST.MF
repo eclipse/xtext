@@ -10,3 +10,4 @@ Export-Package: org.eclipse.xtend2.lib;version="2.14.0",
  org.eclipse.xtext.xbase.lib.util;version="2.14.0"
 Require-Bundle: com.google.guava;bundle-version="[14.0.0,22.0.0)";visibility:=reexport
 Bundle-Vendor: Eclipse Xtext
+Automatic-Module-Name: org.eclipse.xtext.xbase.lib

@@ -9,3 +9,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: com.google.guava;bundle-version="[14.0.0,22.0.0)"
 Bundle-Vendor: %Vendor-Name
 
+Automatic-Module-Name: org.eclipse.xtext.xbase.lib.gwt
