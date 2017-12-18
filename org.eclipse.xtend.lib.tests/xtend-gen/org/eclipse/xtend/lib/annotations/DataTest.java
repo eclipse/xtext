@@ -82,6 +82,12 @@ public class DataTest {
     _builder.append("foo = false");
     _builder.newLine();
     _builder.append("]");
-    Assert.assertEquals(_builder.toString(), new DataTest.MyDataClass("foo").toString());
+    Assert.assertEquals(DataTest.toUnix(_builder.toString()), new DataTest.MyDataClass("foo").toString());
+  }
+  
+  public static String toUnix(final String s) {
+    StringConcatenation result = new StringConcatenation("\n");
+    result.append(s);
+    return result.toString();
   }
 }
