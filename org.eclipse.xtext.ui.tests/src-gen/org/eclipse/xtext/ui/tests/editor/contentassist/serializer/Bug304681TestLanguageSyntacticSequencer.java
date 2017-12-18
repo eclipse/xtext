@@ -106,7 +106,7 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 
 	/**
 	 * Ambiguous syntax:
-	 *     ';' | ('{' '}')
+	 *     ('{' '}') | ';'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
@@ -335,7 +335,7 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ';' | ('{' '}')
+	 *     ('{' '}') | ';'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
@@ -346,7 +346,7 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ';' | ('{' '}')
+	 *     ('{' '}') | ';'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)

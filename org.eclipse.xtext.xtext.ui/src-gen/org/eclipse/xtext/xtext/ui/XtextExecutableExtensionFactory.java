@@ -4,6 +4,7 @@
 package org.eclipse.xtext.xtext.ui;
 
 import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.eclipse.xtext.xtext.ui.internal.Activator;
 import org.osgi.framework.Bundle;
@@ -16,12 +17,13 @@ public class XtextExecutableExtensionFactory extends AbstractGuiceAwareExecutabl
 
 	@Override
 	protected Bundle getBundle() {
-		return Activator.getInstance().getBundle();
+		return Platform.getBundle(Activator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return Activator.getInstance().getInjector(Activator.ORG_ECLIPSE_XTEXT_XTEXT);
+		Activator activator = Activator.getInstance();
+		return activator != null ? activator.getInjector(Activator.ORG_ECLIPSE_XTEXT_XTEXT) : null;
 	}
-	
+
 }

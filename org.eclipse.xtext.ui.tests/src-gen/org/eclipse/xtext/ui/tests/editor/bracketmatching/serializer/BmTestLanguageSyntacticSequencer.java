@@ -59,7 +59,7 @@ public class BmTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) '(' element+=Expression
 	 *     (rule start) (ambiguity) 'begin' element+=Expression
-	 *     (rule start) (ambiguity) (('begin' 'end') | ('(' ')')) (rule start)
+	 *     (rule start) (ambiguity) (('(' ')') | ('begin' 'end')) (rule start)
 	 *     (rule start) (ambiguity) value=VALUE
 	 */
 	protected void emit_Expression_LeftSquareBracketKeyword_2_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -68,7 +68,7 @@ public class BmTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	
 	/**
 	 * Ambiguous syntax:
-	 *     ('begin' 'end') | ('(' ')')
+	 *     ('(' ')') | ('begin' 'end')
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '['* (ambiguity) (rule start)
