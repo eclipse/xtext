@@ -194,7 +194,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   /**
-   * @deprecated Use {@link CodeConfig#isPreferXtendStubs(boolean)} instead
+   * @deprecated Use {@link CodeConfig#isPreferXtendStubs()} instead
    */
   @Deprecated
   @Override

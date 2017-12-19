@@ -15,7 +15,7 @@ package org.eclipse.xtext.ide.refactoring
  * would make sense is Java, where the package name and the name of the first 
  * public top-level class must match the resource's path.
  * 
- * Clients usually call {@link ResourceRelocationContext.addModification()} to 
+ * Clients usually call {@link ResourceRelocationContext#addModification} to 
  * register their side effects. This way it is ensured that the resource is 
  * properly loaded and watched for changes.
  * 

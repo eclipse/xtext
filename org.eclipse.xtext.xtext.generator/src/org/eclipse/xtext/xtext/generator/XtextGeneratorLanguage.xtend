@@ -159,7 +159,7 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	}
 	
 	/**
-	 * @deprecated Use {@link CodeConfig#isPreferXtendStubs(boolean)} instead
+	 * @deprecated Use {@link CodeConfig#isPreferXtendStubs()} instead
 	 */
 	@Deprecated
 	override isGenerateXtendStubs() {
