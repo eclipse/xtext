@@ -25,7 +25,7 @@ import com.google.inject.ImplementedBy;
  * Converts changes from EMF models to the smallest possible text changes.
  * 
  * The ChangeSerializer records changes in modifications that are added using
- * {@link #addModification(T,IModification<T>)}. All corresponding {@link ITextDocumentChange}s can be retrieved in the
+ * {@link #addModification(Notifier, IModification) addModification(T, IModification&lt;T&gt;)}. All corresponding {@link ITextDocumentChange}s can be retrieved in the
  * end by calling {@link #applyModifications(IAcceptor)}. They contain {@link ITextReplacement} which may then be
  * applied to an editor's contents or to a persisted file.
  * 

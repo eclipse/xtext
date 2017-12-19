@@ -58,7 +58,7 @@ public class ResourceRelocationContext {
   
   /**
    * Loads and watches the respective resource and applies the relocation change.
-   * Clients may usually rather call {@link #addModification()} to register their
+   * Clients may usually rather call {@link #addModification} to register their
    * side-effects.
    * 
    * @param change the change to execute

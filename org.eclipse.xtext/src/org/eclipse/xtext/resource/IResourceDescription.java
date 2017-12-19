@@ -163,9 +163,9 @@ public interface IResourceDescription extends ISelectable {
 
 			/**
 			 * Add a listener to the event source. Listeners will not be added twice. Subsequent calls to
-			 * {@link #addListener(Listener)} will not affect the number of events that the listener receives.
-			 * {@link #removeListener(Listener)} will remove the listener immediately independently from the number of
-			 * invocations of {@link #addListener(Listener)} for the given listener.
+			 * {@link #addListener} will not affect the number of events that the listener receives.
+			 * {@link #removeListener} will remove the listener immediately independently from the number of
+			 * invocations of {@link #addListener} for the given listener.
 			 * 
 			 * @param listener
 			 *            the listener to be registered. May not be <code>null</code>.
@@ -173,9 +173,9 @@ public interface IResourceDescription extends ISelectable {
 			void addListener(Listener listener);
 
 			/**
-			 * Immediately removes a registered listener from the source. However if {@link #removeListener(Listener)}
+			 * Immediately removes a registered listener from the source. However if {@link #removeListener}
 			 * is called during a notification, the removed listener will still receive the event. If the listener has
-			 * not been registered before, the {@link #removeListener(Listener)} does nothing.
+			 * not been registered before, the {@link #removeListener} does nothing.
 			 * 
 			 * @param listener
 			 *            the listener to be removed. May not be <code>null</code>.
