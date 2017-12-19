@@ -23,15 +23,24 @@
 
 	<profiles>
 		<profile>
-			<id>usePhotonTarget</id>
+			<id>photon</id>
 			<properties>
-				<target-platform-classifier>-photon</target-platform-classifier>
+				<target-platform-classifier>org.eclipse.xtext.target-photon</target-platform-classifier>
 			</properties>
 		</profile>
 		<profile>
-			<id>useOxygenTarget</id>
+			<id>oxygen</id>
 			<properties>
-				<target-platform-classifier>-oxygen</target-platform-classifier>
+				<target-platform-classifier>org.eclipse.xtext.target-oxygen</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>luna</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<target-platform-classifier>org.eclipse.xtext.target-luna</target-platform-classifier>
 			</properties>
 		</profile>
 	</profiles>
@@ -85,7 +94,7 @@
 						<artifact>
 							<groupId>org.eclipse.xtext</groupId>
 							<artifactId>org.eclipse.xtext.target</artifactId>
-							<classifier>org.eclipse.xtext.target${target-platform-classifier}</classifier>
+							<classifier>${target-platform-classifier}</classifier>
 							<version>${project.parent.version}</version>
 						</artifact>
 					</target>
