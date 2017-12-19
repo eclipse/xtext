@@ -1,6 +1,9 @@
 node {
 	properties([
-		[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']]
+		[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']],
+		parameters([
+			choice(choices: 'luna\noxygen\nphoton', description: 'Which Target Platform should be used?', name: 'target_platform')
+		])
 	])
 	
 	stage('Checkout') {
@@ -23,8 +26,14 @@ node {
 	}
 	
 	stage('Maven Tycho Build') {
+		def targetProfile = "-Pluna"
+		if ("oxygen" == params.target_platform) {
+			targetProfile = "-Poxygen"
+		} else if ("photon" == params.target_platform) {
+			targetProfile = "-Pphoton"
+		}
 		wrap([$class:'Xvnc', useXauthority: true]) {
-			sh "${mvnHome}/bin/mvn -f tycho-pom.xml --batch-mode -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=${workspace}/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean install"
+			sh "${mvnHome}/bin/mvn -f tycho-pom.xml --batch-mode -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=${workspace}/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn ${targetProfile} clean install"
 		}
 		step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
 	}
