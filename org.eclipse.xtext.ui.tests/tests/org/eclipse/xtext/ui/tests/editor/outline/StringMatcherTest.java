@@ -80,4 +80,9 @@ public class StringMatcherTest extends Assert {
 		assertTrue(matcher.match("block([{some more text}])"));
 	}
 	
+	@Test public void testBug528817() {
+		StringMatcher matcher = createStringMatcher("keyw\\");
+		assertFalse(matcher.match("egal"));
+	}
+
 }
