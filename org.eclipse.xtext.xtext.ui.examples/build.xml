@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ====================================================================== 
-     May 25, 2010 10:34:57 AM                                                        
+     May 25, 2010 10:34:57 AM
 
-	 This ant script creates a zip file for each of Xtext's example projects. 
-	 If the examples would not be zipped the resulting file namens would be too long to be 
-	 handled my MS Windows. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=301858
-                   
-     Moritz Eysholdt                                                                
+     This ant script creates a zip file for each of Xtext's example projects.
+     If the examples would not be zipped the resulting file namens would be too long to be
+     handled my MS Windows. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=301858
+
+     Moritz Eysholdt - Initial Contribution
+     Karsten Thoms -issue#501
      ====================================================================== -->
 <project name="project" default="zip_all_examples">
 
@@ -15,10 +16,11 @@
 
 	<macrodef name="zip_example">
 		<attribute name="name" default="default" />
+		<attribute name="subdir" default="default" />
 		<attribute name="target" default="${target_xtext}" />
 		<sequential>
 			<delete file="@{target}/@{name}.zip" />
-			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin,bin/**,**/*._trace,**/*.smap,.antlr-generator*.jar"  />
+			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{subdir}/@{name}" excludes="bin,bin/**,target/**,**/*._trace,**/*.smap,.antlr-generator*.jar,plugin.xml_gen" />
 		</sequential>
 	</macrodef>
 	
@@ -48,24 +50,24 @@
 
 	<target name="zip_all_examples">
 		<!-- run task "generate_self" to compose the list below -->
-		<zip_example name="org.eclipse.xtext.example.arithmetics" />
-		<zip_example name="org.eclipse.xtext.example.arithmetics.tests" />
-		<zip_example name="org.eclipse.xtext.example.arithmetics.ide" />
-		<zip_example name="org.eclipse.xtext.example.arithmetics.ui" />
-		<zip_example name="org.eclipse.xtext.example.arithmetics.ui.tests" />
-		<zip_example name="org.eclipse.xtext.example.domainmodel" />
-		<zip_example name="org.eclipse.xtext.example.domainmodel.ide" />
-		<zip_example name="org.eclipse.xtext.example.domainmodel.tests" />
-		<zip_example name="org.eclipse.xtext.example.domainmodel.ui" />
-		<zip_example name="org.eclipse.xtext.example.domainmodel.ui.tests" />
-		<zip_example name="org.eclipse.xtext.example.fowlerdsl" />
-		<zip_example name="org.eclipse.xtext.example.fowlerdsl.ide" />
-		<zip_example name="org.eclipse.xtext.example.fowlerdsl.ui" />
-		<zip_example name="org.eclipse.xtext.example.homeautomation" />
-		<zip_example name="org.eclipse.xtext.example.homeautomation.tests" />
-		<zip_example name="org.eclipse.xtext.example.homeautomation.ide" />
-		<zip_example name="org.eclipse.xtext.example.homeautomation.ui" />
-		<zip_example name="xbase.tutorial" />
+		<zip_example subdir="arithmetics"    name="org.eclipse.xtext.example.arithmetics" />
+		<zip_example subdir="arithmetics"    name="org.eclipse.xtext.example.arithmetics.tests" />
+		<zip_example subdir="arithmetics"    name="org.eclipse.xtext.example.arithmetics.ide" />
+		<zip_example subdir="arithmetics"    name="org.eclipse.xtext.example.arithmetics.ui" />
+		<zip_example subdir="arithmetics"    name="org.eclipse.xtext.example.arithmetics.ui.tests" />
+		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel" />
+		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel.ide" />
+		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel.tests" />
+		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel.ui" />
+		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel.ui.tests" />
+		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl" />
+		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl.ide" />
+		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl.ui" />
+		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation" />
+		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.tests" />
+		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.ide" />
+		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.ui" />
+		<zip_example subdir="."              name="xbase.tutorial" />
 	</target>
 
 	<target name="generate_self">
