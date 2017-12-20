@@ -99,7 +99,14 @@ public abstract class AbstractScopeResourceDescriptionsTest {
 			assertTrue(enabled);
 		} catch (Throwable t) {
 			assertFalse(enabled);
-			if (!(Throwables.getRootCause(t) instanceof org.eclipse.core.internal.resources.ResourceException))
+			boolean isResourceException = false;
+			for (Throwable tx : Throwables.getCausalChain(t)) {
+				if (tx instanceof org.eclipse.core.internal.resources.ResourceException) {
+					isResourceException = true;
+					break;
+				}
+			}
+			if (!isResourceException)
 				Throwables.propagate(t);
 		} finally {
 			dirtyStateManager.discardDirtyState(mockDirtyResource);
