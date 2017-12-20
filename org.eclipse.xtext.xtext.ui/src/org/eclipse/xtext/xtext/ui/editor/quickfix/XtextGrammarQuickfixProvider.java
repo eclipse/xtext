@@ -42,9 +42,13 @@ import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.text.edits.InsertEdit;
+import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
@@ -74,6 +78,7 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xtext.RuleWithoutInstantiationInspector;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 
 import com.google.common.base.CaseFormat;
@@ -474,4 +479,40 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 			}
 		});
 	}
+
+	@Fix(RuleWithoutInstantiationInspector.ISSUE_CODE)
+	public void addAction(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Add actions to ensure object creation", "Inserts the missing actions to ensure object creation.", null,
+				new ISemanticModification() {
+					@Override
+					public void apply(EObject element, IModificationContext context) throws Exception {
+						ParserRule rule = (ParserRule) element;
+						MultiTextEdit textEdit = new MultiTextEdit();
+						applyToNode(rule.getAlternatives(), "{" + rule.getName() + "} ", textEdit);
+						textEdit.apply(context.getXtextDocument());
+					}
+
+					// recursive algorithm to add action to each alternative rule that is not yet instantiated
+					private void applyToNode(AbstractElement node, String actionText, MultiTextEdit textEdit) throws BadLocationException {
+						// reuse logic that generates the warning to analyze if we have to introduce an action
+						Boolean isInstantiated = new RuleWithoutInstantiationInspector(null).doSwitch(node);
+						if (isInstantiated == null || isInstantiated) {
+							// rule is already instantiated completely, nothing to do
+							return;
+						}
+						if (node instanceof Alternatives) {
+							// there are multiple alternatives, some not instantiated, we have to handle each one separately
+							Alternatives alternatives = (Alternatives) node;
+							for (AbstractElement alternativeChild : alternatives.getElements()) {
+								applyToNode(alternativeChild, actionText, textEdit);
+							}
+						} else {
+							// rule without instantiation, add instantiation
+							int offset = NodeModelUtils.findActualNodeFor(node).getOffset();
+							textEdit.addChild(new InsertEdit(offset, actionText));
+						}
+					}
+				});
+	}
+
 }

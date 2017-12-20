@@ -8,8 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.quickfix;
 
+import static java.util.Arrays.*;
 import static org.eclipse.xtext.xtext.XtextConfigurableIssueCodes.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,6 +49,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xtext.RuleWithoutInstantiationInspector;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.junit.Test;
@@ -57,68 +60,123 @@ import com.google.inject.Injector;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @author Arne Deutsch - New test cases for fixAddAction and some refactoring
  */
 @SuppressWarnings("restriction")
 public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 
 	private static final String PROJECT_NAME = "org.eclipse.xtext.ui.editor.quickfix";
 	private static final String MODEL_FILE = "XtextGrammarQuickfixProviderTest.xtext";
-	private static final String GRAMMAR_WITH_MISSING_RULE = Strings.concat("\n", Arrays.asList(
-			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
-			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: elements+=AbstractElement;"));
-	private static final String GRAMMAR_WITH_INVALID_MM_NAME = Strings.concat("\n", Arrays.asList(
-			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
-			"generate MYDSL \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;"));
-	private static final String GRAMMAR_WITH_EMPTY_ENUM_LITERAL = Strings.concat("\n", Arrays.asList(
-			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
-			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;", "enum ABCD: A|B|C=''|D;"));
-	private static final String GRAMMAR_WITH_SEVERAL_EMPTY_ENUM_LITERAL = Strings.concat("\n", Arrays.asList(
-			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
-			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;", "enum ABCD: A|B|C=''|D;", "enum B: B='';"));
-	private static final String GRAMMAR_WITH_INVALID_ACTION_IN_UOG = Strings.concat("\n", Arrays.asList(
-			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
-			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;",
-			"Modifier: {Modifier} static?='static' & final?='final';"));
 
 	@Test
 	public void testFixMissingRule() throws Exception {
-		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_MISSING_RULE);
-		assertAndApplySingleResolution(xtextEditor, XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE, 1,
-				"Create rule 'AbstractElement'", false);
+		assertAndApplySingleResolution(editorForGrammar("Model: elements+=AbstractElement;"),
+				XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE, 1, "Create rule 'AbstractElement'", false);
 	}
 
 	@Test
 	public void testFixInvalidMetaModelName() throws Exception {
-		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_INVALID_MM_NAME);
-		assertAndApplySingleResolution(xtextEditor, INVALID_METAMODEL_NAME, 1,
-				"Fix metamodel name 'MYDSL'");
+		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE,
+				Strings.concat("\n", Arrays.asList("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
+						"generate MYDSL \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;")));
+		assertAndApplySingleResolution(xtextEditor, INVALID_METAMODEL_NAME, 1, "Fix metamodel name 'MYDSL'");
 	}
 
 	@Test
 	public void testFixEmptyEnumLiteral() throws Exception {
-		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_EMPTY_ENUM_LITERAL);
-		assertAndApplySingleResolution(xtextEditor, EMPTY_ENUM_LITERAL, 1, "Fix empty enum literal");
+		assertAndApplySingleResolution(editorForGrammar("Model: a=ID;", "enum ABCD: A|B|C=''|D;"), EMPTY_ENUM_LITERAL, 1,
+				"Fix empty enum literal");
 	}
-	
+
 	@Test
 	public void testFixAllEmptyEnumLiteral() throws Exception {
-		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_SEVERAL_EMPTY_ENUM_LITERAL);
-		assertAndApplyAllResolutions(xtextEditor, EMPTY_ENUM_LITERAL, 1, 2, "Fix empty enum literal");
+		assertAndApplyAllResolutions(editorForGrammar("Model: a=ID;", "enum ABCD: A|B|C=''|D;", "enum B: B='';"), EMPTY_ENUM_LITERAL, 1, 2,
+				"Fix empty enum literal");
 	}
 
 	@Test
 	public void testFixInvalidAction() throws Exception {
-		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_INVALID_ACTION_IN_UOG);
-		assertAndApplySingleResolution(xtextEditor, INVALID_ACTION_USAGE, 0, "Fix invalid action usage");
+		assertAndApplySingleResolution(editorForGrammar("Model: a=ID;", "Modifier: {Modifier} static?='static' & final?='final';"),
+				INVALID_ACTION_USAGE, 0, "Fix invalid action usage");
 	}
 
-	protected void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount,
-			String resolutionLabel) {
+	@Test
+	public void fixAddActionToAlternativeToken() throws Exception {
+		assertCleanAfterResolution(RuleWithoutInstantiationInspector.ISSUE_CODE, "Add actions to ensure object creation",
+				asList("Model: greetings+=Greeting*;", "Greeting: name=ID | 'A';"));
+	}
+
+	@Test
+	public void fixAddActionToAlternativeTokenList() throws Exception {
+		assertCleanAfterResolution(RuleWithoutInstantiationInspector.ISSUE_CODE, "Add actions to ensure object creation",
+				asList("Model: greetings+=Greeting*;", "Greeting: name=ID | 'A' 'B';"));
+	}
+
+	@Test
+	public void fixAddActionToAlternativeUnassignedRule() throws Exception {
+		assertCleanAfterResolution(RuleWithoutInstantiationInspector.ISSUE_CODE, "Add actions to ensure object creation",
+				asList("Model: greetings+=Greeting*;", "Greeting: name=ID | INT;"));
+	}
+
+	@Test
+	public void fixAddActionToOptionalAssignment() throws Exception {
+		assertCleanAfterResolution(RuleWithoutInstantiationInspector.ISSUE_CODE, "Add actions to ensure object creation",
+				asList("Model: greetings+=Greeting*;", "Greeting: name=ID?;"));
+	}
+
+	@Test
+	public void fixAddActionToAlternativeOptionalAssignment() throws Exception {
+		assertCleanAfterResolution(RuleWithoutInstantiationInspector.ISSUE_CODE, "Add actions to ensure object creation",
+				asList("Model: greetings+=Greeting*;", "Greeting: name=ID | id=INT?;"));
+	}
+
+	@Test
+	public void fixAddActionToAlternativeTokenWhereasOneHasAlreadyAnAction() throws Exception {
+		assertCleanAfterResolution(RuleWithoutInstantiationInspector.ISSUE_CODE, "Add actions to ensure object creation",
+				asList("Model: greetings+=Greeting*;", "Greeting: {Greeting} 'A' | 'B';"));
+	}
+
+	@Test
+	public void fixAddActionToMultipleMissingActions() throws Exception {
+		assertCleanAfterResolution(RuleWithoutInstantiationInspector.ISSUE_CODE, "Add actions to ensure object creation",
+				asList("Model: greetings+=Greeting*;", "Greeting: name=ID | 'A' | {Greeting} 'B' | id=INT?;"));
+	}
+
+	@Test
+	public void fixAddActionToComplexDeeplyNested() throws Exception {
+		assertCleanAfterResolution(RuleWithoutInstantiationInspector.ISSUE_CODE, "Add actions to ensure object creation",
+				asList("Model: greetings+=Greeting*;", "Greeting: (name=ID | 'A')? ('B' | id=INT?);"));
+	}
+
+	@Test
+	public void fixAddActionToMultipleMissingActionsDeeplyNestedAlternative() throws Exception {
+		assertCleanAfterResolution(RuleWithoutInstantiationInspector.ISSUE_CODE, "Add actions to ensure object creation",
+				asList("Model: greetings+=Greeting*;", "Greeting: (name=ID | 'A') | ('B' | id=INT?);"));
+	}
+
+	private void assertCleanAfterResolution(String issueCode, String resolutionLabel, List<String> grammarBodyContent)
+			throws PartInitException, CoreException {
+		assertAndApplySingleResolution(editorForGrammar(grammarBodyContent.toArray(new String[0])), issueCode, 0, resolutionLabel);
+	}
+
+	private XtextEditor editorForGrammar(String... bodyContent) throws PartInitException, CoreException {
+		return newXtextEditor(PROJECT_NAME, MODEL_FILE, grammar(bodyContent));
+	}
+
+	private String grammar(String... bodyContent) {
+		List<String> list = new ArrayList<>();
+		list.add("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
+		list.add("generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"");
+		list.addAll(Arrays.asList(bodyContent));
+		return Strings.concat("\n", list);
+	}
+
+	protected void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount, String resolutionLabel) {
 		assertAndApplySingleResolution(xtextEditor, issueCode, issueDataCount, resolutionLabel, true);
 	}
 
-	protected void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount,
-			String resolutionLabel, boolean isCleanAfterApply) {
+	protected void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount, String resolutionLabel,
+			boolean isCleanAfterApply) {
 		IssueResolutionProvider quickfixProvider = createInjector().getInstance(IssueResolutionProvider.class);
 		IXtextDocument document = xtextEditor.getDocument();
 		List<Issue> issues = getIssues(document);
@@ -141,6 +199,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 			xtextEditor.doSave(new NullProgressMonitor());
 		}
 	}
+
 	protected void assertAndApplyAllResolutions(XtextEditor xtextEditor, String issueCode, int issueDataCount, int issueCount,
 			String resolutionLabel) throws CoreException {
 		final Injector injector = createInjector();
@@ -176,8 +235,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 
 	}
 
-	protected XtextEditor newXtextEditor(String projectName, String modelFile, String model) throws CoreException,
-			PartInitException {
+	protected XtextEditor newXtextEditor(String projectName, String modelFile, String model) throws CoreException, PartInitException {
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 		IProject project = JavaProjectSetupUtil.createSimpleProject(PROJECT_NAME);
 		IResourcesSetupUtil.addNature(project, XtextProjectHelper.NATURE_ID);
@@ -202,8 +260,8 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 	}
 
 	public Injector createInjector() {
-		return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(), new org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal(
-				Activator.getDefault()), new SharedStateModule()));
+		return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(),
+				new org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal(Activator.getDefault()), new SharedStateModule()));
 	}
 
 	protected IWorkbenchPage getActivePage() {
