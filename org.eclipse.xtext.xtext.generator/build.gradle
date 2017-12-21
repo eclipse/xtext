@@ -8,5 +8,5 @@ dependencies {
 	compile "org.eclipse.emf:org.eclipse.emf.mwe.utils:$versions.emfMwe"
 	compile "org.eclipse.emf:org.eclipse.emf.mwe2.lib:$versions.emfMwe2"
 	compile "com.ibm.icu:icu4j:$versions.icu"
-	optional "org.eclipse.jdt:org.eclipse.jdt.core:3.10.0"
+	optional "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
 }
