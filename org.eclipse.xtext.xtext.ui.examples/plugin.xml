@@ -40,6 +40,7 @@
 			<projectDescriptor name="org.eclipse.xtext.example.domainmodel.tests" contentURI="contents/org.eclipse.xtext.example.domainmodel.tests.zip" description="A test suite for the language."/>
 			<projectDescriptor name="org.eclipse.xtext.example.domainmodel.ui" contentURI="contents/org.eclipse.xtext.example.domainmodel.ui.zip" description="A smart editor for the language."/>
 			<projectDescriptor name="org.eclipse.xtext.example.domainmodel.ui.tests" contentURI="contents/org.eclipse.xtext.example.domainmodel.ui.tests.zip" description="Plugin Tests."/>
+			<projectDescriptor name="org.eclipse.xtext.example.domainmodel.releng" contentURI="contents/org.eclipse.xtext.example.domainmodel.releng.zip" description="Release Engineering: Maven Parent, Target Platform Definition."/>
 			<fileToOpen location="org.eclipse.xtext.example.domainmodel/src/org/eclipse/xtext/example/domainmodel/Domainmodel.xtext"/>
 			<fileToOpen location="org.eclipse.xtext.example.domainmodel/src/org/eclipse/xtext/example/domainmodel/jvmmodel/DomainmodelJvmModelInferrer.xtend"/>
 			<fileToOpen location="org.eclipse.xtext.example.domainmodel/src/org/eclipse/xtext/example/domainmodel/validation/DomainmodelJavaValidator.java"/>
