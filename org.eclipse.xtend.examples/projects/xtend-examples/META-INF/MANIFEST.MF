@@ -8,3 +8,4 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.xtend.lib,
  org.junit;bundle-version="4.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: xtend-examples

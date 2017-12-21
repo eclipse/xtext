@@ -12,3 +12,4 @@ Export-Package: org.eclipse.xtend.core.tests.internal;x-internal:=true,
  org.eclipse.xtend.ide.tests.data.highlighting,
  org.eclipse.xtend.ide.tests.data.quickfix
 Import-Package: org.junit;version="4.5.0"
+Automatic-Module-Name: org.eclipse.xtend.ide.tests.data
