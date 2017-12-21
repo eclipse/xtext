@@ -45,3 +45,4 @@ Require-Bundle: org.antlr.runtime,
  org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j
 Bundle-Vendor: Eclipse Xtext
+Automatic-Module-Name: org.eclipse.xtext.extras.tests

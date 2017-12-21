@@ -56,4 +56,4 @@ Export-Package: org.eclipse.xtext.xbase.testlanguages,
  org.eclipse.xtext.xbase.testlanguages.bug462047.jvmmodel,
  org.eclipse.xtext.xbase.testlanguages.tests;x-internal=true,
  org.eclipse.xtext.xbase.testlanguages.bug462047.tests;x-internal=true
-
+Automatic-Module-Name: org.eclipse.xtext.xbase.testlanguages

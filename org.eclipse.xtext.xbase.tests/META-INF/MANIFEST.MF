@@ -25,3 +25,4 @@ Import-Package: javax.inject;version="1.0.0",
  org.junit.rules;version="4.7.0",
  org.junit.runner;version="4.7.0",
  org.junit.runners;version="4.7.0"
+Automatic-Module-Name: org.eclipse.xtext.xbase.tests
