@@ -61,7 +61,7 @@ public enum JavaVersion {
 	public static JavaVersion fromQualifier(String qualifier) {
 		JavaVersion[] values = JavaVersion.values();
 		// iterate backwards since it's a fair assumption that we'll use a more recent java version
-		for(int i = values.length - 1; i >= 0; i++) {
+		for(int i = values.length - 1; i >= 0; i--) {
 			JavaVersion candidate = values[i];
 			if (Arrays.contains(candidate.qualifiers, qualifier))
 				return candidate;
