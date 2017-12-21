@@ -210,7 +210,7 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 				.addTypeToType('org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes'.typeRef,
 						'org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection'.typeRef)
 		}
-		bindingFactory.addTypeToType(grammar.eclipsePluginXbaseEditor, grammar.eclipsePluginEditor)
+		bindingFactory.addTypeToType(grammar.eclipsePluginDefaultEditor, grammar.eclipsePluginEditor)
 		
 		bindingFactory.contributeTo(language.eclipsePluginGenModule)
 		
