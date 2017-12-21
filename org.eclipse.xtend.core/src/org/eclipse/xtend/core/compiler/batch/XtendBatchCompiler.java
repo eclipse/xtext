@@ -331,9 +331,9 @@ public class XtendBatchCompiler {
 		if(javaVersion == null) {
 			List<String> qualifiers = Lists.newArrayList();
 			for (JavaVersion version : JavaVersion.values())
-				qualifiers.add(version.getQualifier());
+				qualifiers.addAll(version.getAllQualifiers());
 			
-			throw new RuntimeException("Unknown Java Version Qualifier:" + javaSourceVersion + ". Valid values are:" + Joiner.on(", ").join(qualifiers));
+			throw new IllegalArgumentException("Unknown Java Version Qualifier: '" + javaSourceVersion + "'. Valid values are: '" + Joiner.on(", ").join(qualifiers) + "'");
 		}
 		generatorConfig.setJavaSourceVersion(javaVersion);
 	}
