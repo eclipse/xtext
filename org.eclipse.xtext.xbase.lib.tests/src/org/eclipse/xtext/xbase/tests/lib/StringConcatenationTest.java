@@ -147,7 +147,7 @@ public class StringConcatenationTest {
 
     @Test
     public void testNoindentConcat() {
-        final StringConcatenation c = new StringConcatenation();
+        final StringConcatenation c = new StringConcatenation("\n");
         c.append("a\n");
         c.append("b\r");
         c.append("c\n");
@@ -156,7 +156,7 @@ public class StringConcatenationTest {
 
     @Test
     public void testIndentConcat() {
-        final StringConcatenation c = new StringConcatenation();
+        final StringConcatenation c = new StringConcatenation("\n");
         c.append("a\n", " ");
         c.append("b\r", "  ");
         c.append("c\nd", "   ");
@@ -165,7 +165,7 @@ public class StringConcatenationTest {
 
     @Test
     public void testMaskedIndentConcat() {
-        final StringConcatenation c = new StringConcatenation();
+        final StringConcatenation c = new StringConcatenation("\n");
         c.append((Object)"a\n", " ");
         c.append((Object)"b\r", "  ");
         c.append((Object)"c\nd", "   ");
@@ -174,7 +174,7 @@ public class StringConcatenationTest {
 
     @Test
     public void testObjectIndentConcat() {
-        final StringConcatenation c = new StringConcatenation();
+        final StringConcatenation c = new StringConcatenation("\n");
         c.append(new StringObject("a\n"), " ");
         c.append(new StringObject("b\r"), "  ");
         c.append(new StringObject("c\nd"), "   ");
@@ -183,7 +183,7 @@ public class StringConcatenationTest {
 
     @Test
     public void testNewLine() {
-        final StringConcatenation c = new StringConcatenation();
+        final StringConcatenation c = new StringConcatenation("\n");
         c.newLine();
         c.append("a");
         c.newLine();
@@ -192,7 +192,7 @@ public class StringConcatenationTest {
 
     @Test
     public void testNewLineIfNotEmpty() {
-        final StringConcatenation c = new StringConcatenation();
+        final StringConcatenation c = new StringConcatenation("\n");
         c.newLineIfNotEmpty();
         c.append("a");
         c.newLineIfNotEmpty();
@@ -224,11 +224,11 @@ public class StringConcatenationTest {
 
     @Test
     public void testAppendConcat() {
-        final StringConcatenation toAppend = new StringConcatenation();
+        final StringConcatenation toAppend = new StringConcatenation("\n");
         toAppend.append("a\n");
         toAppend.append("b");
 
-        final StringConcatenation c = new StringConcatenation();
+        final StringConcatenation c = new StringConcatenation("\n");
         c.append(toAppend);
         assertEquals("a\nb", c.toString());
     }
@@ -253,22 +253,22 @@ public class StringConcatenationTest {
 
     @Test
     public void testAppendMaskedConcat() {
-        final StringConcatenation toAppend = new StringConcatenation();
+        final StringConcatenation toAppend = new StringConcatenation("\n");
         toAppend.append("a\n");
         toAppend.append("b");
 
-        final StringConcatenation c = new StringConcatenation();
+        final StringConcatenation c = new StringConcatenation("\n");
         c.append((Object)toAppend);
         assertEquals("a\nb", c.toString());
     }
 
     @Test
     public void testAppendMaskedIndentConcat() {
-        final StringConcatenation toAppend = new StringConcatenation();
+        final StringConcatenation toAppend = new StringConcatenation("\n");
         toAppend.append("a\n");
         toAppend.append("b");
 
-        final StringConcatenation c = new StringConcatenation();
+        final StringConcatenation c = new StringConcatenation("\n");
         c.append((Object)toAppend, " ");
         assertEquals("a\n b", c.toString());
     }
@@ -282,7 +282,7 @@ public class StringConcatenationTest {
 
     @Test
     public void testAppendImmediateComplex() {
-        final StringConcatenation c = new StringConcatenation();
+        final StringConcatenation c = new StringConcatenation("\n");
         c.append("a\n");
         c.append(" b   ");
         c.newLineIfNotEmpty();
