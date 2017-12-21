@@ -299,7 +299,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       bindingFactory.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes"), 
         TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection"));
     }
-    bindingFactory.addTypeToType(this._xtextGeneratorNaming.getEclipsePluginXbaseEditor(this.getGrammar()), this._xtextGeneratorNaming.getEclipsePluginEditor(this.getGrammar()));
+    bindingFactory.addTypeToType(this._xtextGeneratorNaming.getEclipsePluginDefaultEditor(this.getGrammar()), this._xtextGeneratorNaming.getEclipsePluginEditor(this.getGrammar()));
     bindingFactory.contributeTo(this.getLanguage().getEclipsePluginGenModule());
     boolean _inheritsXbaseWithAnnotations = this._xbaseUsageDetector.inheritsXbaseWithAnnotations(this.getLanguage().getGrammar());
     if (_inheritsXbaseWithAnnotations) {
