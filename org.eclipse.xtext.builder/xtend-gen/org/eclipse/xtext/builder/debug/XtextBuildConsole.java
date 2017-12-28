@@ -11,6 +11,7 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.inject.Singleton;
 import java.io.PrintStream;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleFactory;
@@ -18,6 +19,7 @@ import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.IOConsole;
 import org.eclipse.ui.console.IOConsoleOutputStream;
 import org.eclipse.xtext.builder.debug.IBuildLogger;
+import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -74,7 +76,8 @@ public class XtextBuildConsole extends IOConsole {
   private final PrintStream out;
   
   public XtextBuildConsole() {
-    super("Xtext Build", "xtextBuildConsole", null, true);
+    super("Xtext Build", "xtextBuildConsole", 
+      ImageDescriptor.createFromURL(Activator.getDefault().getBundle().getEntry("icons/console.png")), true);
     IOConsoleOutputStream _newOutputStream = this.newOutputStream();
     PrintStream _printStream = new PrintStream(_newOutputStream, true);
     this.out = _printStream;

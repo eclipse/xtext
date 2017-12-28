@@ -70,6 +70,7 @@
         point="org.eclipse.ui.console.consoleFactories">
      <consoleFactory
            class="org.eclipse.xtext.builder.debug.XtextBuildConsole$Factory"
+           icon="icons/console.png"
            label="Xtext Build">
      </consoleFactory>
   </extension>

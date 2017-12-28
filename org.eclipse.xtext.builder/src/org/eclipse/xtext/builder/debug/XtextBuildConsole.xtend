@@ -14,6 +14,11 @@ import org.eclipse.ui.console.IOConsole
 
 import static extension com.google.common.base.Throwables.*
 import com.google.inject.Singleton
+import org.eclipse.jface.resource.ImageDescriptor
+import org.eclipse.core.runtime.FileLocator
+import org.eclipse.core.runtime.Platform
+import org.eclipse.core.runtime.Path
+import org.eclipse.xtext.builder.internal.Activator
 
 /** 
  * @author Jan Koehnlein - Initial contribution and API
@@ -24,7 +29,8 @@ class XtextBuildConsole extends IOConsole {
 	val PrintStream out
 
 	new() {
-		super("Xtext Build", "xtextBuildConsole", null, true)
+		super("Xtext Build", "xtextBuildConsole",
+			ImageDescriptor.createFromURL(Activator.^default.bundle.getEntry("icons/console.png")), true)
 		this.out = new PrintStream(newOutputStream(), true)
 	}
 
