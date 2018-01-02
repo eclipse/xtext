@@ -12,16 +12,14 @@ import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.swt.widgets.Shell;
 
-import com.google.inject.Inject;
-
 /**
- * A utility class to ask a user questions and remember his decision.<br>
+ * A utility class to ask a user questions, through a dialog, and remember his decision.<br>
  * The settings are stored in {@link IDialogSettings} of your language UIPlugin.
  * 
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.8
  */
-public class DontAskAgainDialogs {
+public class DontAskAgainDialogs extends DontAskAgainPreferences {
 	/**
 	 * A section id that holds the "don't ask me again" dialog settings.
 	 * <p>
@@ -35,27 +33,11 @@ public class DontAskAgainDialogs {
 	 */
 	public static final String DONT_ASK_AGAIN_DIALOG_PREFIX = "dont_ask_again_dialog";
 
-	private @Inject IDialogSettings dialogSettings;
-
-	/**
-	 * Returns the stored user answer to the question identified with the passed key.
-	 * 
-	 * @param key
-	 *            unique identifier . Represents the key to use when storing or reading the setting.
-	 * 
-	 * @return User decision for the corresponding question. Value is one of type <code>String</code> and is one of
-	 *         {@link org.eclipse.jface.dialogs.MessageDialogWithToggle#ALWAYS},
-	 *         {@link org.eclipse.jface.dialogs.MessageDialogWithToggle#NEVER} or (default)
-	 *         {@link org.eclipse.jface.dialogs.MessageDialogWithToggle#PROMPT}. Never <code>null</code>
-	 */
-	public String getUserDecision(String key) {
-		String userDecision = getDontAskAgainDialogSettings().get(key);
-		if (userDecision == null) {
-			userDecision = MessageDialogWithToggle.PROMPT;
-		}
-		return userDecision;
+	@Override
+	protected String getPrefix() {
+		return DONT_ASK_AGAIN_DIALOG_PREFIX;
 	}
-
+	
 	/**
 	 * Opens a {@link MessageDialogWithToggle} and stores the answer, if user activated the corresponding checkbox.
 	 *
@@ -78,31 +60,11 @@ public class DontAskAgainDialogs {
 		int userAnswer = dialogWithToggle.getReturnCode();
 		if (rememberDecision) {
 			if (userAnswer == IDialogConstants.NO_ID) {
-				storeUserDecision(storeKey, MessageDialogWithToggle.NEVER);
+				neverAskAgain(storeKey);
 			} else if (userAnswer == IDialogConstants.YES_ID) {
 				storeUserDecision(storeKey, MessageDialogWithToggle.ALWAYS);
 			}
 		}
 		return userAnswer;
-	}
-
-	/**
-	 * Rewrites the {@link #DONT_ASK_AGAIN_DIALOG_PREFIX} section in {@link IDialogSettings} for the current language.<br>
-	 * All the user decisions will be reset.
-	 */
-	public void forgetAllUserDecisions() {
-		dialogSettings.addNewSection(DONT_ASK_AGAIN_DIALOG_PREFIX);
-	}
-
-	private IDialogSettings getDontAskAgainDialogSettings() {
-		IDialogSettings section = dialogSettings.getSection(DONT_ASK_AGAIN_DIALOG_PREFIX);
-		if (section == null) {
-			return dialogSettings.addNewSection(DONT_ASK_AGAIN_DIALOG_PREFIX);
-		}
-		return section;
-	}
-
-	private void storeUserDecision(String key, String value) {
-		getDontAskAgainDialogSettings().put(key, value);
 	}
 }
