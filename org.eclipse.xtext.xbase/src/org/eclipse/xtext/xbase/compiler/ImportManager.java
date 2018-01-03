@@ -34,6 +34,7 @@ import com.google.common.collect.Sets;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Stephane Galland - Add protected accessors to fields.
  */
 public class ImportManager {
 
@@ -66,8 +67,8 @@ public class ImportManager {
 		this.organizeImports = organizeImports;
 		this.innerTypeSeparator = innerTypeSeparator;
 		if (thisType != null) {
-			thisTypeSimpleNames.add(thisType.getSimpleName());
-			thisTypeQualifiedNames.add(thisType.getQualifiedName(innerTypeSeparator));
+			getThisTypeSimpleNames().add(thisType.getSimpleName());
+			getThisTypeQualifiedNames().add(thisType.getQualifiedName(innerTypeSeparator));
 			thisCollidesWithJavaLang |= CodeGenUtil2.isJavaLangType(thisType.getSimpleName());
 			registerSimpleNamesOfInnerClasses(thisType, new LinkedHashSet<JvmType>());
 		}
@@ -78,8 +79,8 @@ public class ImportManager {
 			return;
 		List<JvmDeclaredType> nested = EcoreUtil2.typeSelect(thisType.getMembers(), JvmDeclaredType.class);
 		for (JvmDeclaredType jvmDeclaredType : nested) {
-			thisTypeSimpleNames.add(jvmDeclaredType.getSimpleName());
-			thisTypeQualifiedNames.add(jvmDeclaredType.getQualifiedName(innerTypeSeparator));
+			getThisTypeSimpleNames().add(jvmDeclaredType.getSimpleName());
+			getThisTypeQualifiedNames().add(jvmDeclaredType.getQualifiedName(getInnerTypeSeparator()));
 			thisCollidesWithJavaLang |= CodeGenUtil2.isJavaLangType(jvmDeclaredType.getSimpleName());
 		}
 		for (JvmTypeReference superType: thisType.getSuperTypes()) {
@@ -107,12 +108,12 @@ public class ImportManager {
 
 	public void appendType(final JvmType type, StringBuilder builder) {
 		if (type instanceof JvmPrimitiveType || type instanceof JvmVoid || type instanceof JvmTypeParameter) {
-			builder.append(type.getQualifiedName(innerTypeSeparator));
+			builder.append(type.getQualifiedName(getInnerTypeSeparator()));
 		} else if (type instanceof JvmArrayType) {
 			appendType(((JvmArrayType) type).getComponentType(), builder);
 			builder.append("[]");
 		} else {
-			final String qualifiedName = type.getQualifiedName(innerTypeSeparator);
+			final String qualifiedName = type.getQualifiedName(getInnerTypeSeparator());
 			String nameToImport = qualifiedName;
 			String shortName = type.getSimpleName();
 			String outerShortName = shortName;
@@ -123,11 +124,11 @@ public class ImportManager {
 				}
 				if (type != outerContainer) {
 					outerShortName = outerContainer.getSimpleName();
-					if(!thisTypeQualifiedNames.contains(outerContainer.getQualifiedName(innerTypeSeparator)) && thisTypeSimpleNames.contains(outerShortName)) {
+					if(!getThisTypeQualifiedNames().contains(outerContainer.getQualifiedName(getInnerTypeSeparator())) && getThisTypeSimpleNames().contains(outerShortName)) {
 						outerShortName = qualifiedName;
 						shortName = qualifiedName;
 					} else {
-						nameToImport = outerContainer.getQualifiedName(innerTypeSeparator);
+						nameToImport = outerContainer.getQualifiedName(getInnerTypeSeparator());
 						shortName = outerShortName + qualifiedName.substring(nameToImport.length());
 					}
 				}
@@ -158,7 +159,7 @@ public class ImportManager {
 				}
 				if (type != outerContainer) {
 					outerShortName =  outerContainer.getSimpleName();
-					if(!thisTypeQualifiedNames.contains(outerContainer.getCanonicalName()) && thisTypeSimpleNames.contains(outerShortName)) {
+					if(!getThisTypeQualifiedNames().contains(outerContainer.getCanonicalName()) && getThisTypeSimpleNames().contains(outerShortName)) {
 						outerShortName = qualifiedName;
 						shortName = qualifiedName;
 					} else {
@@ -181,43 +182,85 @@ public class ImportManager {
 		} else if (needsQualifiedName(namespaceImport, shortName)) {
 			builder.append(qualifiedName);
 		} else {
-			if (imports.containsKey(outerShortName)) {
-				if (namespaceImport.equals(imports.get(outerShortName))) {
+			final Map<String, String> imps = internalGetImports();
+			if (imps.containsKey(outerShortName)) {
+				if (namespaceImport.equals(imps.get(outerShortName))) {
 					builder.append(shortName);
 				} else {
 					builder.append(qualifiedName);
 				}
 			} else {
-				imports.put(outerShortName, namespaceImport);
+				imps.put(outerShortName, namespaceImport);
 				builder.append(shortName);
 			}
 		}
 	}
 
 	protected boolean allowsSimpleName(String qualifiedName, String simpleName) {
-		return thisTypeQualifiedNames.contains(qualifiedName) || ((!thisCollidesWithJavaLang || !thisTypeSimpleNames.contains(simpleName)) && JAVA_LANG_PACK.matcher(qualifiedName).matches())
+		return getThisTypeQualifiedNames().contains(qualifiedName) || ((!thisCollidesWithJavaLang || !getThisTypeSimpleNames().contains(simpleName)) && JAVA_LANG_PACK.matcher(qualifiedName).matches())
 				|| equal(qualifiedName, simpleName);
 	}
 
 	protected boolean needsQualifiedName(String qualifiedName, String simpleName) {
-		return !organizeImports || (thisTypeSimpleNames.contains(simpleName) && !thisTypeQualifiedNames.contains(qualifiedName))
+		return !organizeImports || (getThisTypeSimpleNames().contains(simpleName) && !getThisTypeQualifiedNames().contains(qualifiedName))
 				|| CodeGenUtil2.isJavaLangType(simpleName);
 	}
 
 	public boolean addImportFor(JvmType type) {
-		final String qualifiedName = type.getQualifiedName(innerTypeSeparator);
+		final String qualifiedName = type.getQualifiedName(getInnerTypeSeparator());
 		final String simpleName = type.getSimpleName();
-		if (!allowsSimpleName(qualifiedName, simpleName) && !needsQualifiedName(qualifiedName, simpleName) && !imports.containsKey(simpleName)) {
-			imports.put(simpleName, qualifiedName);
+		final Map<String, String> imps = internalGetImports();
+		if (!allowsSimpleName(qualifiedName, simpleName) && !needsQualifiedName(qualifiedName, simpleName) && !imps.containsKey(simpleName)) {
+			imps.put(simpleName, qualifiedName);
 			return true;
 		}
 		return false;
 	}
 
 	public List<String> getImports() {
-		ArrayList<String> result = newArrayList(newLinkedHashSet(imports.values()));
+		ArrayList<String> result = newArrayList(newLinkedHashSet(internalGetImports().values()));
 		Collections.sort(result);
 		return result;
 	}
 	
+	/**
+	 * Replies the internal set that contains the qualified names of "this" type.
+	 *
+	 * @return the internal set.
+	 * @since 2.14
+	 */
+	protected final Set<String> getThisTypeQualifiedNames() {
+		return this.thisTypeQualifiedNames;
+	}
+
+	/**
+	 * Replies the internal set that contains the simple names of "this" type.
+	 *
+	 * @return the internal set.
+	 * @since 2.14
+	 */
+	protected final Set<String> getThisTypeSimpleNames() {
+		return this.thisTypeSimpleNames;
+	}
+
+	/**
+	 * Replies the internal import data structure.
+	 *
+	 * @return the internal import data structure.
+	 * @since 2.14
+	 */
+	protected final Map<String, String> internalGetImports() {
+		return this.imports;
+	}
+
+	/**
+	 * Replies the separator that is used for separating the enclosing type and the inner type names.
+	 *
+	 * @return the inner type separator.
+	 * @since 2.14
+	 */
+	protected final char getInnerTypeSeparator() {
+		return this.innerTypeSeparator;
+	}
+
 }
