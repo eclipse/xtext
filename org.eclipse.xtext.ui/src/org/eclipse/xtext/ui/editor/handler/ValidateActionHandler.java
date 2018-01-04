@@ -50,7 +50,7 @@ public class ValidateActionHandler extends AbstractHandler {
 			IXtextDocument xtextDocument = xtextEditor.getDocument();
 			IResource resource = xtextEditor.getResource();
 			if(resource != null)
-				issueProcessor = new MarkerIssueProcessor(resource, markerCreator, markerTypeProvider);
+				issueProcessor = new MarkerIssueProcessor(resource, xtextEditor.getInternalSourceViewer().getAnnotationModel(), markerCreator, markerTypeProvider);
 			else
 				issueProcessor = new AnnotationIssueProcessor(xtextDocument, xtextEditor.getInternalSourceViewer().getAnnotationModel(), issueResolutionProvider);
 			ValidationJob validationJob = new ValidationJob(resourceValidator, xtextDocument, issueProcessor,

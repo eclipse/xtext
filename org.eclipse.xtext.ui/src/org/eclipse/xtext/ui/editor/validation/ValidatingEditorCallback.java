@@ -21,13 +21,13 @@ import com.google.inject.Inject;
  * @author Michael Clay
  */
 public class ValidatingEditorCallback extends IXtextEditorCallback.NullImpl {
-	
+
 	@Inject
 	private IResourceValidator resourceValidator;
-	
-	@Inject 
+
+	@Inject
 	private MarkerCreator markerCreator;
-	
+
 	@Inject
 	private MarkerTypeProvider markerTypeProvider;
 	@Inject
@@ -54,9 +54,11 @@ public class ValidatingEditorCallback extends IXtextEditorCallback.NullImpl {
 	private ValidationJob newValidationJob(XtextEditor editor) {
 		IValidationIssueProcessor issueProcessor;
 		if (editor.getResource() == null) {
-			issueProcessor = new AnnotationIssueProcessor(editor.getDocument(), editor.getInternalSourceViewer().getAnnotationModel(), issueResolutionProvider);
+			issueProcessor = new AnnotationIssueProcessor(editor.getDocument(), editor.getInternalSourceViewer().getAnnotationModel(),
+					issueResolutionProvider);
 		} else {
-			issueProcessor = new MarkerIssueProcessor(editor.getResource(), markerCreator, markerTypeProvider);
+			issueProcessor = new MarkerIssueProcessor(editor.getResource(), editor.getInternalSourceViewer().getAnnotationModel(),
+					markerCreator, markerTypeProvider);
 		}
 		ValidationJob validationJob = new ValidationJob(resourceValidator, editor.getDocument(), issueProcessor, CheckMode.NORMAL_AND_FAST);
 		return validationJob;
