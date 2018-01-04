@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
+import java.util.Collection;
+
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractElement;
@@ -43,6 +45,12 @@ public abstract class AbstractContentAssistParser extends
 	/* Abstract override is necessary to be backwards compatible due to generic signature in super class */
 	@Override
 	protected abstract AbstractInternalContentAssistParser createParser();
+	
+	/* Delegating override is necessary to avoid synthetic method signatures in subtypes and thereby preserve binary compatibility in edge-cases */
+	@Override
+	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
+		return super.getFollowElements(parser);
+	}
 
 	/**
 	 * @since 2.14
