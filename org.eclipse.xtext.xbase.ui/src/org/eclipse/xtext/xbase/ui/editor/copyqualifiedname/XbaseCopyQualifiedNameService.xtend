@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.ui.editor.copyqualifiedname.DefaultCopyQualifiedNameService
+import org.eclipse.xtext.naming.DefaultCopyQualifiedNameService
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XExpression

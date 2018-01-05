@@ -11,6 +11,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.ICopyQualifiedNameService;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.util.ClipboardUtil;
 
@@ -34,7 +35,7 @@ public abstract class AbstractCopyQualifiedNameHandler extends AbstractHandler {
 	protected abstract String getQualifiedName(ExecutionEvent event);
 
 	protected String getQualifiedName(EObject selectedElement) {
-		CopyQualifiedNameService copyQualifiedNameService = getCopyQualifiedNameService(selectedElement);
+		ICopyQualifiedNameService copyQualifiedNameService = getCopyQualifiedNameService(selectedElement);
 		if (copyQualifiedNameService == null) {
 			return null;
 		}
@@ -42,14 +43,14 @@ public abstract class AbstractCopyQualifiedNameHandler extends AbstractHandler {
 	}
 
 	protected String getQualifiedName(EObject selectedElement, EObject context) {
-		CopyQualifiedNameService copyQualifiedNameService = getCopyQualifiedNameService(selectedElement);
+		ICopyQualifiedNameService copyQualifiedNameService = getCopyQualifiedNameService(selectedElement);
 		if (copyQualifiedNameService == null) {
 			return null;
 		}
 		return copyQualifiedNameService.getQualifiedName(selectedElement, context);
 	}
 
-	protected CopyQualifiedNameService getCopyQualifiedNameService(EObject selectedElement) {
+	protected ICopyQualifiedNameService getCopyQualifiedNameService(EObject selectedElement) {
 		if (selectedElement == null) {
 			return null;
 		}
@@ -57,7 +58,7 @@ public abstract class AbstractCopyQualifiedNameHandler extends AbstractHandler {
 		if (resourceServiceProvider == null) {
 			return null;
 		}
-		return resourceServiceProvider.get(CopyQualifiedNameService.class);
+		return resourceServiceProvider.get(ICopyQualifiedNameService.class);
 	}
 
 }

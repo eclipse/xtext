@@ -7,67 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.copyqualifiedname
 
-import com.google.inject.Inject
-import java.util.List
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.naming.IQualifiedNameConverter
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.xtext.naming.QualifiedName
-
 /**
  * @author Anton Kosyakov - Initial contribution and API
+ * @author Arne Deutsch - Deprecated class by moving base class to core
  * @since 2.4
+ * @deprecated Use org.eclipse.xtext.naming.DefaultCopyQualifiedNameService instead
  */
-class DefaultCopyQualifiedNameService implements CopyQualifiedNameService {
-
-	@Inject
-	IQualifiedNameProvider qualifiedNameProvider
-
-	@Inject
-	IQualifiedNameConverter qualifiedNameConverter
-
-	def dispatch getQualifiedName(EObject it, EObject context) {
-		toFullyQualifiedName
-	}
-
-	def dispatch getQualifiedName(EObject it, Void context) {
-		toFullyQualifiedName
-	}
-
-	def protected dispatch getQualifiedName(Void it, EObject context) {
-		null
-	}
-
-	def protected dispatch getQualifiedName(Void it, Void context) {
-		null
-	}
-
-	def protected <T> toQualifiedNames(List<T> it, (T)=>String toQualifiedNameFunction) {
-		if (it === null || size == 0) {
-			return ""
-		}
-		'''«FOR element : it SEPARATOR ', '»«toQualifiedNameFunction.apply(element)»«ENDFOR»'''
-	}
-
-	def protected toFullyQualifiedName(EObject it) {
-		if (eIsProxy) {
-			return null
-		}
-		toString(fullyQualifiedName)
-	}
-
-	def protected getFullyQualifiedName(EObject it) {
-		if (it === null) {
-			return null
-		}
-		qualifiedNameProvider.getFullyQualifiedName(it)
-	}
-
-	def protected toString(EObject it, QualifiedName fullyQualifiedName) {
-		if (fullyQualifiedName === null) {
-			return null
-		}
-		qualifiedNameConverter.toString(fullyQualifiedName)
-	}
-
+@Deprecated
+class DefaultCopyQualifiedNameService extends org.eclipse.xtext.naming.DefaultCopyQualifiedNameService implements CopyQualifiedNameService {
 }
