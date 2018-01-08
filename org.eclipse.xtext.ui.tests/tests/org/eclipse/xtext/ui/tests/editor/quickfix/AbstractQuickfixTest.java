@@ -20,8 +20,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.quickassist.IQuickAssistProcessor;
 import org.eclipse.jface.text.quickassist.QuickAssistAssistant;
-import org.eclipse.jface.text.reconciler.IReconciler;
-import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.TextInvocationContext;
 import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
@@ -35,7 +33,6 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator;
 import org.eclipse.xtext.ui.editor.quickfix.WorkbenchMarkerResolutionAdapter;
-import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
 import org.eclipse.xtext.ui.testing.util.AnnotatedTextToString;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
@@ -112,10 +109,8 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 	}
 	
 	protected ICompletionProposal[] computeQuickAssistProposals(XtextEditor editor, int offset) {
+		IResourcesSetupUtil.waitForBuild();
 		XtextSourceViewer sourceViewer = (XtextSourceViewer) editor.getInternalSourceViewer();
-		XtextReconciler reconciler = (XtextReconciler) sourceViewer.getAdapter(IReconciler.class);
-		IReconcilingStrategyExtension reconcilingStrategyExtension = (IReconcilingStrategyExtension) reconciler.getReconcilingStrategy("");
-		reconcilingStrategyExtension.initialReconcile();
 		QuickAssistAssistant quickAssistAssistant = (QuickAssistAssistant) sourceViewer.getQuickAssistAssistant();
 		IQuickAssistProcessor quickAssistProcessor = quickAssistAssistant.getQuickAssistProcessor();
 		ICompletionProposal[] quickAssistProposals = quickAssistProcessor
