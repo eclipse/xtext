@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.util.JavaVersion
 
 abstract class TestProjectDescriptor extends ProjectDescriptor {
 	@Accessors val ProjectDescriptor testedProject
@@ -53,6 +54,10 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 			maven.scope = Scope.TESTCOMPILE
 		]
 		return deps
+	}
+	
+	def isAtLeastJava9() {
+		config.javaVersion.isAtLeast(JavaVersion.JAVA9)
 	}
 	
 	override pom() {
