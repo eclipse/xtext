@@ -136,6 +136,89 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
+	@Test def void testBug420984_EmptyCatch() throws Exception {
+		'''
+			try {
+				println("")
+			} catch (RuntimeException e) {
+			}
+		'''.compilesTo('''
+			String _xtrycatchfinallyexpression = null;
+			try {
+			  _xtrycatchfinallyexpression = org.eclipse.xtext.xbase.lib.InputOutput.<String>println("");
+			} catch (final Throwable _t) {
+			  if (_t instanceof RuntimeException) {
+			    _xtrycatchfinallyexpression = null;
+			  } else {
+			    throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_t);
+			  }
+			}
+			return _xtrycatchfinallyexpression;
+		''')
+	}
+	
+	@Test def void testBug420984_EmptyCatchWithoutReturnType() throws Exception {
+		'''
+			try {
+			  println("")
+			} catch (RuntimeException e) {
+			}
+		'''.compilesToStatement('''
+		try {
+		  org.eclipse.xtext.xbase.lib.InputOutput.<String>println("");
+		} catch (final Throwable _t) {
+		  if (_t instanceof RuntimeException) {
+		  } else {
+		    throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_t);
+		  }
+		}''')
+	}
+	
+	@Test def void testBug420984_CatchWithoutReference() throws Exception {
+		'''
+			try {
+				println("")
+			} catch (RuntimeException e) {
+				println("")
+			}
+		'''.compilesTo('''
+			String _xtrycatchfinallyexpression = null;
+			try {
+			  _xtrycatchfinallyexpression = org.eclipse.xtext.xbase.lib.InputOutput.<String>println("");
+			} catch (final Throwable _t) {
+			  if (_t instanceof RuntimeException) {
+			    _xtrycatchfinallyexpression = org.eclipse.xtext.xbase.lib.InputOutput.<String>println("");
+			  } else {
+			    throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_t);
+			  }
+			}
+			return _xtrycatchfinallyexpression;
+		''')
+	}
+	
+	@Test def void testBug420984_CatchWithReference() throws Exception {
+		'''
+			try {
+				println("")
+			} catch (RuntimeException e) {
+				println(e)
+			}
+		'''.compilesTo('''
+			java.io.Serializable _xtrycatchfinallyexpression = null;
+			try {
+			  _xtrycatchfinallyexpression = org.eclipse.xtext.xbase.lib.InputOutput.<String>println("");
+			} catch (final Throwable _t) {
+			  if (_t instanceof RuntimeException) {
+			    final RuntimeException e = (RuntimeException)_t;
+			    _xtrycatchfinallyexpression = org.eclipse.xtext.xbase.lib.InputOutput.<RuntimeException>println(e);
+			  } else {
+			    throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_t);
+			  }
+			}
+			return _xtrycatchfinallyexpression;
+		''')
+	}
+	
 	@Test def void testBug371321_2() throws Exception {
 		'''
 			for (assert : 'foo'.toCharArray) {
