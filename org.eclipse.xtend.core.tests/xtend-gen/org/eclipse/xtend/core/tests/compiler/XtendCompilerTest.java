@@ -5601,9 +5601,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("if (_t instanceof IOException) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("final IOException e = (IOException)_t;");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Object _xblockexpression = null;");
     _builder_1.newLine();
     _builder_1.append("        ");
@@ -5704,9 +5701,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (_t instanceof IOException) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("final IOException e = (IOException)_t;");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_xtrycatchfinallyexpression = null;");
@@ -5835,9 +5829,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (_t instanceof IOException) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("final IOException o = (IOException)_t;");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_xtrycatchfinallyexpression = Collections.<File>emptyList();");

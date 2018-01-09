@@ -662,7 +662,6 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			      _xtrycatchfinallyexpression = ListExtensions.<String, File>map(CollectionLiterals.<String>newArrayList("file1.ext"), _function);
 			    } catch (final Throwable _t) {
 			      if (_t instanceof IOException) {
-			        final IOException o = (IOException)_t;
 			        _xtrycatchfinallyexpression = Collections.<File>emptyList();
 			      } else {
 			        throw Exceptions.sneakyThrow(_t);
