@@ -84,7 +84,7 @@ class AnnotatedTextToString {
 			lastOffset = offset
 		}
 		result.append(cnt.substring(lastOffset, cnt.length))
-		val maxLineLenght = result.toString.replace("\t", "    ").split("\n").map[length].max
+		val maxLineLenght = result.toString.replace("\t", "    ").split("\r?\n").map[length].max
 		if (result.substring(result.length - 1, result.length) != "\n") {
 			result.append("\n")
 		}
