@@ -42,6 +42,7 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
@@ -153,7 +154,7 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 	protected void assertContentsAndMarkers(IFile file, IMarker[] markers, CharSequence expectation) {
 		String actual = new AnnotatedTextToString().withFile(file).withMarkers(markers).toString().trim();
 		String exp = expectation.toString().trim();
-		Assert.assertEquals(exp, actual);
+		Assert.assertEquals(Strings.toUnixLineSeparator(exp), Strings.toUnixLineSeparator(actual));
 	}
 
 	protected void applyQuickfixOnMultipleMarkers(IMarker[] markers) {

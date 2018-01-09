@@ -162,7 +162,7 @@ public class AnnotatedTextToString {
     final Function1<String, Integer> _function_3 = (String it) -> {
       return Integer.valueOf(it.length());
     };
-    final Integer maxLineLenght = IterableExtensions.<Integer>max(ListExtensions.<String, Integer>map(((List<String>)Conversions.doWrapArray(result.toString().replace("\t", "    ").split("\n"))), _function_3));
+    final Integer maxLineLenght = IterableExtensions.<Integer>max(ListExtensions.<String, Integer>map(((List<String>)Conversions.doWrapArray(result.toString().replace("\t", "    ").split("\r?\n"))), _function_3));
     int _length = result.length();
     int _minus = (_length - 1);
     String _substring = result.substring(_minus, result.length());
