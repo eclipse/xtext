@@ -1009,7 +1009,7 @@
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.tycho.parent"/>
+              project="xtext-umbrella"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
               excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
