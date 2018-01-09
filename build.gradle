@@ -42,6 +42,6 @@ subprojects {
 
 task clean(type: Delete) {
 	group 'Build'
-	description 'Deletes the local repositories'
+	description 'Deletes the local repositories.'
 	delete 'build'
 }

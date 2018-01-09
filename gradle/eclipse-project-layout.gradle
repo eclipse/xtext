@@ -1,3 +1,4 @@
+import org.apache.tools.ant.filters.*
 /*
  * Since we use the Eclipse Style layout where sources and resources live in the same
  * folders, we need to make some adjustments to Gradle's defaults.
@@ -31,11 +32,45 @@ sourceSets {
 jar {
 	from ('.') {
 		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**', 'plugin.properties'
+		exclude 'about.mappings'
+	}
+	from ('.') {
+		include 'about.mappings'
+		filter(ReplaceTokens, tokens: ['build': getBuildId()])
 	}
 	if (isTestProject) {
 		from sourceSets.test.output
 	}
 }
+
+/**
+ * Computes the build type from the project version.
+ * When property 'upstreamBranch' has been set the build type is 'I'.
+ *
+ * @return I,M,R (Integration, Milestone, Release)
+ */
+def String getBuildType () {
+	if (hasProperty('upstreamBranch')) {
+		return 'I'
+	}
+	
+	def versionSplit = version.split('\\.')
+	if (version.endsWith('SNAPSHOT'))
+		return 'I'
+	else if (versionSplit.length == 4)
+		return 'M'
+	else
+		return 'R'
+}
+
+/**
+ * Computes a build identifier as a combination of the build type
+ * (Integration,Milestone/Release) and the build timestamp.
+ */
+def getBuildId () {
+	return getBuildType()+buildTime
+}
+
 
 sourcesJar {
 	from ('.') {
