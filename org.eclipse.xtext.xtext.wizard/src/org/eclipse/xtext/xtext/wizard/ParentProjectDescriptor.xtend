@@ -219,7 +219,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					<maven.compiler.target>«javaVersion»</maven.compiler.target>
 					«IF config.needsTychoBuild»
 						<!-- Tycho settings -->
-						<tycho-version>1.0.0</tycho-version>
+						<tycho-version>1.1.0</tycho-version>
 						<!-- Define overridable properties for tycho-surefire-plugin -->
 						<platformSystemProperties></platformSystemProperties>
 						<moduleProperties></moduleProperties>

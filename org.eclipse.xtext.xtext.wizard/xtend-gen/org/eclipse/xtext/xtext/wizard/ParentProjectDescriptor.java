@@ -605,7 +605,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("<!-- Tycho settings -->");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("<tycho-version>1.0.0</tycho-version>");
+          _builder.append("<tycho-version>1.1.0</tycho-version>");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("<!-- Define overridable properties for tycho-surefire-plugin -->");
