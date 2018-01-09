@@ -29,6 +29,7 @@ import org.junit.rules.TemporaryFolder
 
 import static org.junit.Assert.*
 import org.eclipse.xtext.xtext.wizard.LanguageServer
+import org.eclipse.xtext.util.JavaVersion
 
 class CliWizardIntegrationTest {
 
@@ -69,6 +70,19 @@ class CliWizardIntegrationTest {
 			ideProject.enabled = true
 			webProject.enabled = true
 			lineDelimiter = "\n"
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.mavenTychoJ9"
+			preferredBuildSystem = BuildSystem.MAVEN
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = true
+			uiProject.enabled = true
+			uiProject.testProject.enabled = true
+			ideProject.enabled = true
+			webProject.enabled = true
+			lineDelimiter = "\n"
+			javaVersion = JavaVersion.JAVA9
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.gradle"
