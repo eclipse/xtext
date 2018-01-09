@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.util.JavaVersion
 
 abstract class TestProjectDescriptor extends ProjectDescriptor {
 	@Accessors val ProjectDescriptor testedProject
@@ -55,10 +56,19 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 		return deps
 	}
 	
+	def isAtLeastJava9() {
+		config.javaVersion.isAtLeast(JavaVersion.JAVA9)
+	}
+	
 	override pom() {
 		super.pom => [
 			packaging = if(isEclipsePluginProject) "eclipse-test-plugin" else "jar"
 			buildSection = '''
+				«IF isEclipsePluginProject && needsUiHarness && isAtLeastJava9»
+					<properties>
+						<tycho.testArgLine>--add-modules=ALL-SYSTEM</tycho.testArgLine>
+					</properties>
+				«ENDIF»
 				<build>
 					«IF !isEclipsePluginProject && config.sourceLayout == SourceLayout.PLAIN»
 						<testSourceDirectory>«Outlet.TEST_JAVA.sourceFolder»</testSourceDirectory>
@@ -155,7 +165,7 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 								</os>
 							</activation>
 							<properties>
-								<tycho.testArgLine>-XstartOnFirstThread</tycho.testArgLine>
+								<tycho.testArgLine>-XstartOnFirstThread«IF isAtLeastJava9» --add-modules=ALL-SYSTEM«ENDIF»</tycho.testArgLine>
 							</properties>
 						</profile>
 					</profiles>
