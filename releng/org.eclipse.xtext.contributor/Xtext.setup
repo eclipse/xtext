@@ -1037,7 +1037,7 @@
     <setupTask
         xsi:type="setup:EclipseIniTask"
         option="-Doomph.redirection.xtext"
-        value="=https://raw.githubusercontent.com/eclipse/xtext-eclipse/${xtext.git.branch}/->${git.clone.xtext.eclipse.location|uri}/"
+        value="=https://raw.githubusercontent.com/eclipse/xtext-eclipse/master/releng/org.eclipse.xtext.contributor/Xtext.setup->${git.clone.xtext.eclipse.location|uri}/releng/org.eclipse.xtext.contributor/Xtext.setup"
         vm="true"/>
     <stream
         name="master"/>
