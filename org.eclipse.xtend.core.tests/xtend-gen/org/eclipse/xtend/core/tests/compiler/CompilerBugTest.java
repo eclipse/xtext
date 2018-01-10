@@ -5134,9 +5134,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("if (_t instanceof Exception) {");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("final Exception e = (Exception)_t;");
-    _builder_1.newLine();
-    _builder_1.append("          ");
     _builder_1.append("return \"string\";");
     _builder_1.newLine();
     _builder_1.append("        ");
@@ -6674,9 +6671,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (_t instanceof Exception) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("final Exception e = (Exception)_t;");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("Integer.parseInt(\"1\");");

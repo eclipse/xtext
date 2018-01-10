@@ -1486,9 +1486,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("if (_t instanceof IOException) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("final IOException o = (IOException)_t;");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("_xtrycatchfinallyexpression = Collections.<File>emptyList();");
     _builder_1.newLine();
     _builder_1.append("      ");

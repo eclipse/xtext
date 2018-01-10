@@ -830,7 +830,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      _xtrycatchfinallyexpression = _function;
 			    } catch (final Throwable _t) {
 			      if (_t instanceof Exception) {
-			        final Exception e = (Exception)_t;
 			        _xtrycatchfinallyexpression = (Iterable<Object>)Conversions.doWrapArray(CollectionLiterals.<String>newArrayList("").toArray());
 			      } else {
 			        throw Exceptions.sneakyThrow(_t);

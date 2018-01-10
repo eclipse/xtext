@@ -1959,7 +1959,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			                _xtrycatchfinallyexpression = s.substring(1).length();
 			              } catch (final Throwable _t) {
 			                if (_t instanceof Exception) {
-			                  final Exception e = (Exception)_t;
 			                  _xtrycatchfinallyexpression = (-1);
 			                } else {
 			                  throw Exceptions.sneakyThrow(_t);

@@ -2399,7 +2399,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      _xtrycatchfinallyexpression = "foo";
 			    } catch (final Throwable _t) {
 			      if (_t instanceof IOException) {
-			        final IOException e = (IOException)_t;
 			        Object _xblockexpression = null;
 			        {
 			          InputOutput.<String>println("sideeffect");
@@ -2443,7 +2442,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      _xtrycatchfinallyexpression = "foo";
 			    } catch (final Throwable _t) {
 			      if (_t instanceof IOException) {
-			        final IOException e = (IOException)_t;
 			        _xtrycatchfinallyexpression = null;
 			      } else {
 			        throw Exceptions.sneakyThrow(_t);
@@ -2498,7 +2496,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      _xtrycatchfinallyexpression = ListExtensions.<String, File>map(CollectionLiterals.<String>newArrayList("file1.ext"), _function);
 			    } catch (final Throwable _t) {
 			      if (_t instanceof IOException) {
-			        final IOException o = (IOException)_t;
 			        _xtrycatchfinallyexpression = Collections.<File>emptyList();
 			      } else {
 			        throw Exceptions.sneakyThrow(_t);

@@ -320,6 +320,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 						[ extension Object o | 
 							try {
 							} catch(extension Throwable t) {
+								println(t)
 							} 
 						].apply(null)
 					}
@@ -329,6 +330,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			import org.eclipse.xtext.xbase.lib.Exceptions;
 			import org.eclipse.xtext.xbase.lib.Extension;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.InputOutput;
 			import org.eclipse.xtext.xbase.lib.IntegerRange;
 			
 			@SuppressWarnings("all")
@@ -338,15 +340,15 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    final Double d = Double.valueOf(1.0);
 			    IntegerRange _upTo = new IntegerRange(1, 1);
 			    for (@Extension final Integer j : _upTo) {
-			      final Function1<Object, Object> _function = new Function1<Object, Object>() {
-			        public Object apply(@Extension final Object o) {
-			          Object _xtrycatchfinallyexpression = null;
+			      final Function1<Object, Throwable> _function = new Function1<Object, Throwable>() {
+			        public Throwable apply(@Extension final Object o) {
+			          Throwable _xtrycatchfinallyexpression = null;
 			          try {
 			            _xtrycatchfinallyexpression = null;
 			          } catch (final Throwable _t) {
 			            if (_t instanceof Throwable) {
 			              @Extension final Throwable t = (Throwable)_t;
-			              _xtrycatchfinallyexpression = null;
+			              _xtrycatchfinallyexpression = InputOutput.<Throwable>println(t);
 			            } else {
 			              throw Exceptions.sneakyThrow(_t);
 			            }

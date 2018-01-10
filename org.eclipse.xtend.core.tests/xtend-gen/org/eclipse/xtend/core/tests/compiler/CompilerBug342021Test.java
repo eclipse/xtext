@@ -2024,9 +2024,6 @@ public class CompilerBug342021Test extends AbstractXtendCompilerTest {
     _builder_1.append("if (_t instanceof Exception) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("final Exception e = (Exception)_t;");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("_xtrycatchfinallyexpression = (Iterable<Object>)Conversions.doWrapArray(CollectionLiterals.<String>newArrayList(\"\").toArray());");
     _builder_1.newLine();
     _builder_1.append("      ");

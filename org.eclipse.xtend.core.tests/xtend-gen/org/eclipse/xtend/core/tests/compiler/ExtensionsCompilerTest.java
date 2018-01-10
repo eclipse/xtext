@@ -684,6 +684,9 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("\t\t\t\t");
     _builder.append("} catch(extension Throwable t) {");
     _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("println(t)");
+    _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("} ");
     _builder.newLine();
@@ -704,6 +707,8 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Extension;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.IntegerRange;");
     _builder_1.newLine();
@@ -728,13 +733,13 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("for (@Extension final Integer j : _upTo) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("final Function1<Object, Object> _function = new Function1<Object, Object>() {");
+    _builder_1.append("final Function1<Object, Throwable> _function = new Function1<Object, Throwable>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("public Object apply(@Extension final Object o) {");
+    _builder_1.append("public Throwable apply(@Extension final Object o) {");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("Object _xtrycatchfinallyexpression = null;");
+    _builder_1.append("Throwable _xtrycatchfinallyexpression = null;");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("try {");
@@ -752,7 +757,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("@Extension final Throwable t = (Throwable)_t;");
     _builder_1.newLine();
     _builder_1.append("              ");
-    _builder_1.append("_xtrycatchfinallyexpression = null;");
+    _builder_1.append("_xtrycatchfinallyexpression = InputOutput.<Throwable>println(t);");
     _builder_1.newLine();
     _builder_1.append("            ");
     _builder_1.append("} else {");

@@ -2265,7 +2265,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			        return "string";
 			      } catch (final Throwable _t) {
 			        if (_t instanceof Exception) {
-			          final Exception e = (Exception)_t;
 			          return "string";
 			        } else {
 			          throw Exceptions.sneakyThrow(_t);
@@ -2938,7 +2937,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      this.voidObjectReturned();
 			    } catch (final Throwable _t) {
 			      if (_t instanceof Exception) {
-			        final Exception e = (Exception)_t;
 			        Integer.parseInt("1");
 			      } else {
 			        throw Exceptions.sneakyThrow(_t);
