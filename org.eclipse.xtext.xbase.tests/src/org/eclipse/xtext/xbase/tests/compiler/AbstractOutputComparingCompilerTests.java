@@ -116,4 +116,8 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 		assertCompilesTo(result, xbaseCode, generatorConfig);
 	}
 	
+	protected void compilesToStatement(final CharSequence xbaseCode, final CharSequence result) throws Exception {
+		assertCompilesToStatement(System.lineSeparator() + result.toString(), xbaseCode.toString());
+	}
 }
+

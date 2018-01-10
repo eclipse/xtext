@@ -259,6 +259,183 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
   }
   
   @Test
+  public void testBug420984_EmptyCatch() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"\")");
+    _builder.newLine();
+    _builder.append("} catch (RuntimeException e) {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("String _xtrycatchfinallyexpression = null;");
+    _builder_1.newLine();
+    _builder_1.append("try {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("_xtrycatchfinallyexpression = org.eclipse.xtext.xbase.lib.InputOutput.<String>println(\"\");");
+    _builder_1.newLine();
+    _builder_1.append("} catch (final Throwable _t) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("if (_t instanceof RuntimeException) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("_xtrycatchfinallyexpression = null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_t);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("return _xtrycatchfinallyexpression;");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug420984_EmptyCatchWithoutReturnType() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("println(\"\")");
+    _builder.newLine();
+    _builder.append("} catch (RuntimeException e) {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("try {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("org.eclipse.xtext.xbase.lib.InputOutput.<String>println(\"\");");
+    _builder_1.newLine();
+    _builder_1.append("} catch (final Throwable _t) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("if (_t instanceof RuntimeException) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_t);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    this.compilesToStatement(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug420984_CatchWithoutReference() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"\")");
+    _builder.newLine();
+    _builder.append("} catch (RuntimeException e) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("String _xtrycatchfinallyexpression = null;");
+    _builder_1.newLine();
+    _builder_1.append("try {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("_xtrycatchfinallyexpression = org.eclipse.xtext.xbase.lib.InputOutput.<String>println(\"\");");
+    _builder_1.newLine();
+    _builder_1.append("} catch (final Throwable _t) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("if (_t instanceof RuntimeException) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("_xtrycatchfinallyexpression = org.eclipse.xtext.xbase.lib.InputOutput.<String>println(\"\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_t);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("return _xtrycatchfinallyexpression;");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug420984_CatchWithReference() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\"\")");
+    _builder.newLine();
+    _builder.append("} catch (RuntimeException e) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(e)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("java.io.Serializable _xtrycatchfinallyexpression = null;");
+    _builder_1.newLine();
+    _builder_1.append("try {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("_xtrycatchfinallyexpression = org.eclipse.xtext.xbase.lib.InputOutput.<String>println(\"\");");
+    _builder_1.newLine();
+    _builder_1.append("} catch (final Throwable _t) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("if (_t instanceof RuntimeException) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final RuntimeException e = (RuntimeException)_t;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("_xtrycatchfinallyexpression = org.eclipse.xtext.xbase.lib.InputOutput.<RuntimeException>println(e);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_t);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("return _xtrycatchfinallyexpression;");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug371321_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("for (assert : \'foo\'.toCharArray) {");

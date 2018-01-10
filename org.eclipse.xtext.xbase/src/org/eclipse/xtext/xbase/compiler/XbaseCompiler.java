@@ -89,6 +89,7 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.util.XSwitchExpressionCompilationState;
 import org.eclipse.xtext.xbase.util.XSwitchExpressions;
+import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -522,11 +523,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		appendable.append(") ").append("{");
 		appendable.increaseIndentation();
 		ITreeAppendable withDebugging = appendable.trace(catchClause, true);
-		ITreeAppendable parameterAppendable = withDebugging.trace(catchClause.getDeclaredParam());
-		appendCatchClauseParameter(catchClause, type, name, parameterAppendable.newLine());
-		withDebugging.append(" = (");
-		serialize(type, catchClause, withDebugging);
-		withDebugging.append(")").append(parentVariable).append(";");
+		if (!XbaseUsageCrossReferencer.find(catchClause.getDeclaredParam(), catchClause.getExpression()).isEmpty()) {
+			ITreeAppendable parameterAppendable = withDebugging.trace(catchClause.getDeclaredParam());
+			appendCatchClauseParameter(catchClause, type, name, parameterAppendable.newLine());
+			withDebugging.append(" = (");
+			serialize(type, catchClause, withDebugging);
+			withDebugging.append(")").append(parentVariable).append(";");
+		}
 		final boolean canBeReferenced = parentIsReferenced && ! isPrimitiveVoid(catchClause.getExpression());
 		internalToJavaStatement(catchClause.getExpression(), withDebugging, canBeReferenced);
 		if (canBeReferenced) {
