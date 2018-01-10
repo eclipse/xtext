@@ -28,6 +28,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -47,6 +48,7 @@ import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.EcoreUtil2;
@@ -55,6 +57,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -488,8 +491,21 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 					public void apply(EObject element, IModificationContext context) throws Exception {
 						ParserRule rule = (ParserRule) element;
 						MultiTextEdit textEdit = new MultiTextEdit();
-						applyToNode(rule.getAlternatives(), "{" + rule.getName() + "} ", textEdit);
+						applyToNode(rule.getAlternatives(), "{" + calculateActionName(rule) + "} ", textEdit);
 						textEdit.apply(context.getXtextDocument());
+					}
+
+					// algorithm to calculate the name of the action to call, including possible alias
+					private String calculateActionName(ParserRule rule) {
+						String actionName = rule.getName(); // rule name is default
+						TypeRef type = rule.getType();
+						EClassifier classifier = type.getClassifier();
+						if (classifier != null) { // if there is a classifier use that instead
+							AbstractMetamodelDeclaration metamodel = type.getMetamodel();
+							String alias = metamodel.getAlias(); // include alias:: if an alias for the grammar is used
+							actionName = (alias == null ? "" : (alias + "::")) + classifier.getName();
+						}
+						return actionName;
 					}
 
 					// recursive algorithm to add action to each alternative rule that is not yet instantiated

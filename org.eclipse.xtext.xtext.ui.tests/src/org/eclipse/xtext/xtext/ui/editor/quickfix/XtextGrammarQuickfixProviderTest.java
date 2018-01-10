@@ -76,9 +76,12 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 
 	@Test
 	public void testFixInvalidMetaModelName() throws Exception {
-		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE,
-				Strings.concat("\n", Arrays.asList("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
-						"generate MYDSL \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;")));
+		String model = Strings.concat("\n", Arrays.asList("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
+				"generate MYDSL \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;"));
+		IProject project = newProject();
+		IFile file = newModelFileInProject(project, MODEL_FILE, model);
+		XtextEditor xtextEditor = (XtextEditor) IDE.openEditor(getActivePage(), file);
+		xtextEditor.getDocument().set(model);
 		assertAndApplySingleResolution(xtextEditor, INVALID_METAMODEL_NAME, 1, "Fix metamodel name 'MYDSL'");
 	}
 
@@ -154,28 +157,36 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 				asList("Model: greetings+=Greeting*;", "Greeting: (name=ID | 'A') | ('B' | id=INT?);"));
 	}
 
+	@Test
+	public void fixAddActionForRuleWithReturnsExpression() throws Exception {
+		assertCleanAfterResolution(RuleWithoutInstantiationInspector.ISSUE_CODE, "Add actions to ensure object creation",
+				asList("Model: greetings+=Greeting*;", "Greeting returns Test: name=ID | 'A';"));
+	}
+
+	@Test
+	public void fixAddActionForGrammarWithAlias() throws Exception {
+		String model = Strings.concat("\n",
+				Arrays.asList("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
+						"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\" as my",
+						"Model returns my::Greeting: greetings+=Greeting*;", "Greeting returns my::Greeting: 'Hello' name=ID? '!';"));
+		IProject project = newProject();
+		IFile file = newModelFileInProject(project, MODEL_FILE, model);
+		XtextEditor xtextEditor = (XtextEditor) IDE.openEditor(getActivePage(), file);
+		xtextEditor.getDocument().set(model);
+		assertAndApplySingleResolution(xtextEditor, RuleWithoutInstantiationInspector.ISSUE_CODE, 0,
+				"Add actions to ensure object creation");
+	}
+
 	private void assertCleanAfterResolution(String issueCode, String resolutionLabel, List<String> grammarBodyContent)
 			throws PartInitException, CoreException {
 		assertAndApplySingleResolution(editorForGrammar(grammarBodyContent.toArray(new String[0])), issueCode, 0, resolutionLabel);
 	}
 
-	private XtextEditor editorForGrammar(String... bodyContent) throws PartInitException, CoreException {
-		return newXtextEditor(PROJECT_NAME, MODEL_FILE, grammar(bodyContent));
-	}
-
-	private String grammar(String... bodyContent) {
-		List<String> list = new ArrayList<>();
-		list.add("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
-		list.add("generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"");
-		list.addAll(Arrays.asList(bodyContent));
-		return Strings.concat("\n", list);
-	}
-
-	protected void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount, String resolutionLabel) {
+	private void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount, String resolutionLabel) {
 		assertAndApplySingleResolution(xtextEditor, issueCode, issueDataCount, resolutionLabel, true);
 	}
 
-	protected void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount, String resolutionLabel,
+	private void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount, String resolutionLabel,
 			boolean isCleanAfterApply) {
 		IssueResolutionProvider quickfixProvider = createInjector().getInstance(IssueResolutionProvider.class);
 		IXtextDocument document = xtextEditor.getDocument();
@@ -200,7 +211,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 		}
 	}
 
-	protected void assertAndApplyAllResolutions(XtextEditor xtextEditor, String issueCode, int issueDataCount, int issueCount,
+	private void assertAndApplyAllResolutions(XtextEditor xtextEditor, String issueCode, int issueDataCount, int issueCount,
 			String resolutionLabel) throws CoreException {
 		final Injector injector = createInjector();
 		InternalBuilderTest.setAutoBuild(true);
@@ -235,22 +246,41 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 
 	}
 
-	protected XtextEditor newXtextEditor(String projectName, String modelFile, String model) throws CoreException, PartInitException {
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
-		IProject project = JavaProjectSetupUtil.createSimpleProject(PROJECT_NAME);
-		IResourcesSetupUtil.addNature(project, XtextProjectHelper.NATURE_ID);
-		IFile file = project.getProject().getFile(modelFile);
-		if (file.exists()) {
-			file.delete(true, null);
-		}
-		file.create(new StringInputStream(model), true, null);
-		file.refreshLocal(IResource.DEPTH_ONE, null);
+	private XtextEditor editorForGrammar(String... bodyContent) throws PartInitException, CoreException {
+		String model = grammarGeneratingModel(bodyContent);
+		IProject project = newProject();
+		IFile file = newModelFileInProject(project, MODEL_FILE, model);
 		XtextEditor xtextEditor = (XtextEditor) IDE.openEditor(getActivePage(), file);
 		xtextEditor.getDocument().set(model);
 		return xtextEditor;
 	}
 
-	protected List<Issue> getIssues(IXtextDocument document) {
+	private String grammarGeneratingModel(String... bodyContent) {
+		List<String> list = new ArrayList<>();
+		list.add("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
+		list.add("generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"");
+		list.addAll(Arrays.asList(bodyContent));
+		return Strings.concat("\n", list);
+	}
+
+	private IProject newProject() throws CoreException {
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
+		IProject project = JavaProjectSetupUtil.createSimpleProject(PROJECT_NAME);
+		IResourcesSetupUtil.addNature(project, XtextProjectHelper.NATURE_ID);
+		return project;
+	}
+
+	private IFile newModelFileInProject(IProject project, String modelFile, String model) throws CoreException {
+		IFile file = project.getFile(modelFile);
+		if (file.exists()) {
+			file.delete(true, null);
+		}
+		file.create(new StringInputStream(model), true, null);
+		file.refreshLocal(IResource.DEPTH_ONE, null);
+		return file;
+	}
+
+	private List<Issue> getIssues(IXtextDocument document) {
 		return document.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
 			@Override
 			public List<Issue> exec(XtextResource state) throws Exception {
@@ -259,20 +289,20 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 		});
 	}
 
-	public Injector createInjector() {
+	private Injector createInjector() {
 		return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(),
 				new org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal(Activator.getDefault()), new SharedStateModule()));
 	}
 
-	protected IWorkbenchPage getActivePage() {
+	private IWorkbenchPage getActivePage() {
 		return getWorkbenchWindow().getActivePage();
 	}
 
-	protected IWorkbenchWindow getWorkbenchWindow() {
+	private IWorkbenchWindow getWorkbenchWindow() {
 		return getWorkbench().getActiveWorkbenchWindow();
 	}
 
-	protected IWorkbench getWorkbench() {
+	private IWorkbench getWorkbench() {
 		return PlatformUI.getWorkbench();
 	}
 }
