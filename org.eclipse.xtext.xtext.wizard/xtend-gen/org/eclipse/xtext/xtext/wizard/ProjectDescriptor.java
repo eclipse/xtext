@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -290,6 +291,10 @@ public abstract class ProjectDescriptor {
   
   public Object getActivatorClassName() {
     return null;
+  }
+  
+  protected boolean isAtLeastJava9() {
+    return this.config.getJavaVersion().isAtLeast(JavaVersion.JAVA9);
   }
   
   public GradleBuildFile buildGradle() {

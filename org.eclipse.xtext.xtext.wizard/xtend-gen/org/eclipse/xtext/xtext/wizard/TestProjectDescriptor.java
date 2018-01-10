@@ -14,7 +14,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -95,10 +94,6 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
     ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
     deps.add(_doubleArrow);
     return deps;
-  }
-  
-  public boolean isAtLeastJava9() {
-    return this.getConfig().getJavaVersion().isAtLeast(JavaVersion.JAVA9);
   }
   
   @Override
