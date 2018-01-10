@@ -515,7 +515,6 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		installSelectionChangedListener();
 		initializeDirtyStateSupport();
 		callback.afterCreatePartControl(this);
-		forceReconcile();
 	}
 
 	protected ProjectionSupport installProjectionSupport(ProjectionViewer projectionViewer) {
