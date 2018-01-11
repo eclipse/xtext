@@ -19,8 +19,8 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.naming.ICopyQualifiedNameService;
 import org.eclipse.xtext.testing.util.ParseHelper;
-import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -45,7 +45,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
   private ParseHelper<XtendFile> parseHelper;
   
   @Inject
-  private CopyQualifiedNameService copyQualifiedNameService;
+  private ICopyQualifiedNameService copyQualifiedNameService;
   
   @Test
   public void testJvmOperation() {
