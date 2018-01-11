@@ -109,6 +109,17 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       }
       it.setPackaging(_xifexpression);
       StringConcatenation _builder = new StringConcatenation();
+      {
+        if (((this.isEclipsePluginProject() && this.needsUiHarness()) && this.isAtLeastJava9())) {
+          _builder.append("<properties>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<tycho.testArgLine>--add-modules=ALL-SYSTEM</tycho.testArgLine>");
+          _builder.newLine();
+          _builder.append("</properties>");
+          _builder.newLine();
+        }
+      }
       _builder.append("<build>");
       _builder.newLine();
       {
@@ -453,8 +464,15 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         _builder_1.append("<properties>");
         _builder_1.newLine();
         _builder_1.append("\t\t\t");
-        _builder_1.append("<tycho.testArgLine>-XstartOnFirstThread</tycho.testArgLine>");
-        _builder_1.newLine();
+        _builder_1.append("<tycho.testArgLine>-XstartOnFirstThread");
+        {
+          boolean _isAtLeastJava9 = this.isAtLeastJava9();
+          if (_isAtLeastJava9) {
+            _builder_1.append(" --add-modules=ALL-SYSTEM");
+          }
+        }
+        _builder_1.append("</tycho.testArgLine>");
+        _builder_1.newLineIfNotEmpty();
         _builder_1.append("\t\t");
         _builder_1.append("</properties>");
         _builder_1.newLine();

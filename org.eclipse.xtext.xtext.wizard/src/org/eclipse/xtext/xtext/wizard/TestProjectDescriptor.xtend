@@ -59,6 +59,11 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 		super.pom => [
 			packaging = if(isEclipsePluginProject) "eclipse-test-plugin" else "jar"
 			buildSection = '''
+				«IF isEclipsePluginProject && needsUiHarness && isAtLeastJava9»
+					<properties>
+						<tycho.testArgLine>--add-modules=ALL-SYSTEM</tycho.testArgLine>
+					</properties>
+				«ENDIF»
 				<build>
 					«IF !isEclipsePluginProject && config.sourceLayout == SourceLayout.PLAIN»
 						<testSourceDirectory>«Outlet.TEST_JAVA.sourceFolder»</testSourceDirectory>
@@ -155,7 +160,7 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 								</os>
 							</activation>
 							<properties>
-								<tycho.testArgLine>-XstartOnFirstThread</tycho.testArgLine>
+								<tycho.testArgLine>-XstartOnFirstThread«IF isAtLeastJava9» --add-modules=ALL-SYSTEM«ENDIF»</tycho.testArgLine>
 							</properties>
 						</profile>
 					</profiles>

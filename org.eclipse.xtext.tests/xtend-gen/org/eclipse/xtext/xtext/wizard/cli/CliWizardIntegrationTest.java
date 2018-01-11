@@ -22,6 +22,7 @@ import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.tests.LineDelimiters;
 import org.eclipse.xtext.util.Files;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -173,6 +174,24 @@ public class CliWizardIntegrationTest {
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(true);
     it.setLineDelimiter("\n");
+  })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
+    it.setBaseName("org.xtext.example.mavenTychoJ9");
+    it.setPreferredBuildSystem(BuildSystem.MAVEN);
+    it.setSourceLayout(SourceLayout.PLAIN);
+    it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+    TestProjectDescriptor _testProject = it.getRuntimeProject().getTestProject();
+    _testProject.setEnabled(true);
+    UiProjectDescriptor _uiProject = it.getUiProject();
+    _uiProject.setEnabled(true);
+    TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
+    _testProject_1.setEnabled(true);
+    IdeProjectDescriptor _ideProject = it.getIdeProject();
+    _ideProject.setEnabled(true);
+    WebProjectDescriptor _webProject = it.getWebProject();
+    _webProject.setEnabled(true);
+    it.setLineDelimiter("\n");
+    it.setJavaVersion(JavaVersion.JAVA9);
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
     it.setBaseName("org.xtext.example.gradle");

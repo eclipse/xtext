@@ -13,6 +13,7 @@ import java.util.List
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.util.JavaVersion
 
 @FinalFieldsConstructor
 @Accessors
@@ -150,6 +151,10 @@ abstract class ProjectDescriptor {
 	
 	def getActivatorClassName() {
 		null
+	}
+
+	protected def isAtLeastJava9() {
+		config.javaVersion.isAtLeast(JavaVersion.JAVA9)
 	}
 
 	def GradleBuildFile buildGradle() {
