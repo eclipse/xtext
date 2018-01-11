@@ -106,6 +106,7 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.linking.ILinker
+import org.eclipse.xtext.naming.ICopyQualifiedNameService
 import org.eclipse.xtext.parser.antlr.LexerProvider
 import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter
@@ -122,7 +123,6 @@ import org.eclipse.xtext.ui.editor.contentassist.IContextInformationProvider
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher
-import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider
 import org.eclipse.xtext.ui.editor.findrefs.DelegatingReferenceFinder
@@ -423,7 +423,7 @@ class XtendUiModule extends AbstractXtendUiModule {
 		return EclipseFileSystemSupportImpl
 	}
 
-	override Class<? extends CopyQualifiedNameService> bindCopyQualifiedNameService() {
+	override Class<? extends ICopyQualifiedNameService> bindICopyQualifiedNameService() {
 		return XtendCopyQualifiedNameService
 	}
 
