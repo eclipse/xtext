@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.copyqualifiedname
 
-import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.naming.ICopyQualifiedNameService
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  * @since 2.4
+ * @deprecated Use org.eclipse.xtext.naming.ICopyQualifiedNameService instead
  */
-interface CopyQualifiedNameService {
-
-	def abstract String getQualifiedName(EObject selectedElement, EObject context)
+@Deprecated
+interface CopyQualifiedNameService extends ICopyQualifiedNameService {
 
 }

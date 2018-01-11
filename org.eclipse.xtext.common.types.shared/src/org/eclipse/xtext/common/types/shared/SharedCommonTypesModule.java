@@ -20,13 +20,14 @@ import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRename
 import org.eclipse.xtext.common.types.xtext.JvmIdentifiableQualifiedNameProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHoverDocumentationProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider;
+import org.eclipse.xtext.naming.DefaultCopyQualifiedNameService;
+import org.eclipse.xtext.naming.ICopyQualifiedNameService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
-import org.eclipse.xtext.ui.editor.copyqualifiedname.DefaultCopyQualifiedNameService;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
@@ -55,7 +56,9 @@ public class SharedCommonTypesModule implements Module {
 		binder.bindConstant().annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).to("java");
 		
 		binder.bind(IQualifiedNameProvider.class).to(JvmIdentifiableQualifiedNameProvider.class);
-		binder.bind(CopyQualifiedNameService.class).to(DefaultCopyQualifiedNameService.class);
+		binder.bind(CopyQualifiedNameService.class)
+				.to(org.eclipse.xtext.ui.editor.copyqualifiedname.DefaultCopyQualifiedNameService.class);
+		binder.bind(ICopyQualifiedNameService.class).to(DefaultCopyQualifiedNameService.class);
 		binder.bind(IJvmTypeProvider.Factory.class).to(JdtTypeProviderFactory.class);
 		binder.bind(IRenameRefactoringProvider.class).to(DefaultRenameRefactoringProvider.class);
 		binder.bind(AbstractRenameProcessor.class).to(JvmMemberRenameProcessor.class);
