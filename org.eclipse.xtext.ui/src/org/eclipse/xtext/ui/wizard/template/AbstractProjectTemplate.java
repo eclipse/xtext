@@ -14,6 +14,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.xtext.ui.util.ProjectFactory;
+import org.eclipse.xtext.ui.wizard.IProjectInfo;
 
 /**
  * A template definition for a project, used by the new project wizard. Defines the UI (label, description, icon, variables) on how to
@@ -31,6 +33,8 @@ public abstract class AbstractProjectTemplate {
 
 	protected List<ProjectVariable> variables = new ArrayList<>();
 
+	private IProjectInfo projectInfo;
+	
 	/**
 	 * Create a new text variable with associated text field and add it to the "variables" list.
 	 */
@@ -97,9 +101,23 @@ public abstract class AbstractProjectTemplate {
 	}
 
 	/**
-	 * Subclasses have to override. Generate all the files to be created when the wizard is finished.
+	 * Subclasses have to override. Generate all the projects to be created when the wizard is finished.
+	 * @param generator The generator to supply {@link org.eclipse.xtext.ui.util.ProjectFactory}'s to create projects from.
 	 */
-	public abstract void generateFiles(IProjectFileGenerator generator);
+	public abstract void generateProjects(IProjectGenerator generator);
+
+	protected ProjectFactory addFile(ProjectFactory project, CharSequence fileName, CharSequence contents) {
+		project.addContributor(new TextFileContributor(fileName, contents));
+		return project;
+	}
+	
+	protected IProjectInfo getProjectInfo() {
+		return projectInfo;
+	}
+	
+	protected void setProjectInfo(IProjectInfo projectInfo) {
+		this.projectInfo = projectInfo;
+	}
 
 	/**
 	 * Subclasses should override to validate the variables. If everything is ok {@link Status#OK_STATUS} should be returned. Otherwise an

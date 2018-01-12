@@ -22,9 +22,9 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
  * <li>Generate "Messages.java" for i18n</li>
  * </ol>
  * 
- * The generated files for i18n contain the "label" and "description" of all the project templates. These are read
- * by reflection at runtime. The files may be extended manually by the user to externalize more strings. The generator
- * then merges its own changes into the existing files.
+ * The generated files for i18n contain the "label" and "description" of all the project templates. The files may be
+ * extended manually by the user to externalize more strings. The generator then merges its own changes into the
+ * existing files.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
@@ -94,8 +94,8 @@ class ProjectTemplateProcessor extends AbstractClassProcessor {
 		contents += '''
 				
 				static {
-					// initialize resource bundle
-					NLS.initializeMessages(BUNDLE_NAME, Messages.class);
+				// initialize resource bundle
+				NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 				}
 			
 				private Messages() {

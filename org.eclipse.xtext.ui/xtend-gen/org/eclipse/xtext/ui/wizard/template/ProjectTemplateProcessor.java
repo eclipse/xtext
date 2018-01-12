@@ -28,9 +28,9 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * <li>Generate "Messages.java" for i18n</li>
  * </ol>
  * 
- * The generated files for i18n contain the "label" and "description" of all the project templates. These are read
- * by reflection at runtime. The files may be extended manually by the user to externalize more strings. The generator
- * then merges its own changes into the existing files.
+ * The generated files for i18n contain the "label" and "description" of all the project templates. The files may be
+ * extended manually by the user to externalize more strings. The generator then merges its own changes into the
+ * existing files.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
@@ -137,10 +137,10 @@ public class ProjectTemplateProcessor extends AbstractClassProcessor {
     _builder_2.append("\t");
     _builder_2.append("static {");
     _builder_2.newLine();
-    _builder_2.append("\t\t");
+    _builder_2.append("\t");
     _builder_2.append("// initialize resource bundle");
     _builder_2.newLine();
-    _builder_2.append("\t\t");
+    _builder_2.append("\t");
     _builder_2.append("NLS.initializeMessages(BUNDLE_NAME, Messages.class);");
     _builder_2.newLine();
     _builder_2.append("\t");
