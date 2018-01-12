@@ -148,11 +148,13 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 		val file = fileAccessFactory.createXtendFile(initialContentsClass)
 		
 		file.content = '''
-		import org.eclipse.core.runtime.Status;
-		import org.eclipse.xtext.ui.wizard.template.IProjectFileGenerator
+		import org.eclipse.core.runtime.Status
+		import org.eclipse.xtext.ui.util.ProjectFactory
+		import org.eclipse.xtext.ui.wizard.IProjectInfo
+		import org.eclipse.xtext.ui.wizard.template.IProjectGenerator
 		import org.eclipse.xtext.ui.wizard.template.IProjectTemplateProvider
 		import org.eclipse.xtext.ui.wizard.template.ProjectTemplate
-
+		
 		import static org.eclipse.core.runtime.IStatus.*
 
 		/**
@@ -209,14 +211,14 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 					new Status(ERROR, "Wizard", "'" + path + "' is not a valid package name")
 			}
 		
-			override generateFiles(IProjectFileGenerator generator) {
-				generator.generate(«quotes»src/«openVar»path«closeVar»/Model.«language.fileExtensions.get(0)»«quotes»,
+			override generateProjects(IProjectGenerator generator) {
+				generator.generate(new ProjectFactory().addFile(«quotes»src/«openVar»path«closeVar»/Model.«language.fileExtensions.get(0)»«quotes»,
 					«quotes»
 						/*
 						 * This is an example model
 						 */
 						Hello «openVar»name«closeVar»!
-					«quotes»)
+					«quotes»))
 			}
 		}
 		'''
@@ -362,14 +364,17 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 		val file = fileAccessFactory.createGeneratedJavaFile(genClass)
 		file.content =
 		'''
+		import java.util.List;
+		
+		import javax.inject.Inject;
+		
+		import org.eclipse.jface.wizard.IWizardPage;
 		import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;
 		import org.eclipse.xtext.ui.wizard.IProjectCreator;
-		import javax.inject.Inject;
-		import java.util.List;
-		import org.eclipse.jface.wizard.IWizardPage;
+		import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
+		import org.eclipse.xtext.ui.wizard.template.AbstractProjectTemplate;
 		import org.eclipse.xtext.ui.wizard.template.NewProjectWizardTemplateParameterPage;
 		import org.eclipse.xtext.ui.wizard.template.NewProjectWizardTemplateSelectionPage;
-		import org.eclipse.xtext.ui.wizard.template.AbstractProjectTemplate;
 		import org.eclipse.xtext.ui.wizard.template.ProjectTemplateLabelProvider;
 		import org.eclipse.xtext.ui.wizard.template.ProjectVariable;
 		
@@ -422,7 +427,7 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 			 */
 			@Override
 			protected IExtendedProjectInfo getProjectInfo() {
-				«projectInfoClass.simpleName» projectInfo = new «projectInfoClass.simpleName»(templatePage.getSelectedTemplate());
+				«projectInfoClass.simpleName» projectInfo = new «projectInfoClass.simpleName»(templatePage == null ? null : templatePage.getSelectedTemplate());
 				projectInfo.setProjectName(mainPage.getProjectName());
 				if (!mainPage.useDefaults()) {
 					projectInfo.setLocationPath(mainPage.getLocationPath());
@@ -440,7 +445,7 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 					if (variables.isEmpty())
 						return null;
 					NewProjectWizardTemplateParameterPage parameterPage = new NewProjectWizardTemplateParameterPage(
-							selectedTemplate);
+							selectedTemplate, getProjectInfo());
 					parameterPage.setWizard(this);
 					templateParameterPage = parameterPage;
 					parameterPage.setTitle("«grammar.simpleName» Project");

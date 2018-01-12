@@ -280,9 +280,13 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("import org.eclipse.core.runtime.Status;");
+        _builder.append("import org.eclipse.core.runtime.Status");
         _builder.newLine();
-        _builder.append("import org.eclipse.xtext.ui.wizard.template.IProjectFileGenerator");
+        _builder.append("import org.eclipse.xtext.ui.util.ProjectFactory");
+        _builder.newLine();
+        _builder.append("import org.eclipse.xtext.ui.wizard.IProjectInfo");
+        _builder.newLine();
+        _builder.append("import org.eclipse.xtext.ui.wizard.template.IProjectGenerator");
         _builder.newLine();
         _builder.append("import org.eclipse.xtext.ui.wizard.template.IProjectTemplateProvider");
         _builder.newLine();
@@ -471,10 +475,10 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
         _builder.newLine();
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("override generateFiles(IProjectFileGenerator generator) {");
+        _builder.append("override generateProjects(IProjectGenerator generator) {");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("generator.generate(");
+        _builder.append("generator.generate(new ProjectFactory().addFile(");
         _builder.append(quotes, "\t\t");
         _builder.append("src/");
         _builder.append(openVar, "\t\t");
@@ -507,7 +511,7 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
         _builder.append(quotes, "\t\t\t");
-        _builder.append(")");
+        _builder.append("))");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
@@ -851,21 +855,25 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("import java.util.List;");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("import javax.inject.Inject;");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("import org.eclipse.jface.wizard.IWizardPage;");
+        _builder.newLine();
         _builder.append("import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;");
         _builder.newLine();
         _builder.append("import org.eclipse.xtext.ui.wizard.IProjectCreator;");
         _builder.newLine();
-        _builder.append("import javax.inject.Inject;");
+        _builder.append("import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;");
         _builder.newLine();
-        _builder.append("import java.util.List;");
-        _builder.newLine();
-        _builder.append("import org.eclipse.jface.wizard.IWizardPage;");
+        _builder.append("import org.eclipse.xtext.ui.wizard.template.AbstractProjectTemplate;");
         _builder.newLine();
         _builder.append("import org.eclipse.xtext.ui.wizard.template.NewProjectWizardTemplateParameterPage;");
         _builder.newLine();
         _builder.append("import org.eclipse.xtext.ui.wizard.template.NewProjectWizardTemplateSelectionPage;");
-        _builder.newLine();
-        _builder.append("import org.eclipse.xtext.ui.wizard.template.AbstractProjectTemplate;");
         _builder.newLine();
         _builder.append("import org.eclipse.xtext.ui.wizard.template.ProjectTemplateLabelProvider;");
         _builder.newLine();
@@ -1044,7 +1052,7 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
         _builder.append(" projectInfo = new ");
         String _simpleName_8 = projectInfoClass.getSimpleName();
         _builder.append(_simpleName_8, "\t\t");
-        _builder.append("(templatePage.getSelectedTemplate());");
+        _builder.append("(templatePage == null ? null : templatePage.getSelectedTemplate());");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("projectInfo.setProjectName(mainPage.getProjectName());");
@@ -1096,7 +1104,7 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
         _builder.append("NewProjectWizardTemplateParameterPage parameterPage = new NewProjectWizardTemplateParameterPage(");
         _builder.newLine();
         _builder.append("\t\t\t\t\t");
-        _builder.append("selectedTemplate);");
+        _builder.append("selectedTemplate, getProjectInfo());");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("parameterPage.setWizard(this);");
