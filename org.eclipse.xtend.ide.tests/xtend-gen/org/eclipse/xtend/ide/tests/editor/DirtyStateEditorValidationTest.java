@@ -24,7 +24,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
@@ -164,7 +163,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile file = this.helper.createFileImpl("projectB/src/otherpack/OtherClass.xtend", _builder_1.toString());
-      IResourcesSetupUtil.reallyWaitForAutoBuild();
+      this._syncUtil.waitForBuild(null);
       final IMarker[] markers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       int _length = markers.length;
       boolean _greaterThan = (_length > 0);

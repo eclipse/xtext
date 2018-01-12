@@ -22,7 +22,6 @@ import org.junit.After
 import org.junit.Test
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -96,7 +95,7 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		IResourcesSetupUtil.reallyWaitForAutoBuild
+		waitForBuild(null)
 		val markers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
 		if (markers.length > 0) {
 			fail(markers.map[getAttribute(IMarker.MESSAGE)].join('\n'))
