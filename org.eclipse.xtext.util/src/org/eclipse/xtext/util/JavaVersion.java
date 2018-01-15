@@ -46,6 +46,12 @@ public enum JavaVersion {
 	JAVA9("Java 9", new String[] {"9", "1.9"}, "JavaSE-9", "-1.9")
 	;
 
+	//	 if you introduce a new JavaVersion don't forget to adapt
+	//	 - org.eclipse.xtext.xbase.testing.InMemoryJavaCompiler.toClassFmt(JavaVersion)
+	//	 - org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler.toClassFmt(JavaVersion)
+	//	 - org.eclipse.xtext.java.resource.JavaDerivedStateComputer.toJdtVersion(JavaVersion)
+	//	 - org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider.getTargetJavaVersion(XbaseGeneratorConfigurationState, Module)
+
 	private final String label;
 	private final String[] qualifiers;
 	private final String bree;
