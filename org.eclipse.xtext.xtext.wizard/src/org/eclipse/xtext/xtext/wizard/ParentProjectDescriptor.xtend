@@ -339,7 +339,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<configuration>
 									<filesets>
 										<fileset>
-											«FOR dir : #[Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN].toSet.map[sourceFolder]»
+											«FOR dir : #[Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN].map[sourceFolder].toSet»
 												<directory>${basedir}/«dir»</directory>
 												<includes>
 													<include>**/*</include>
