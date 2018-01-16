@@ -35,7 +35,6 @@ public class AnnotationValueValidator extends ConstantExpressionValidator {
       }
     } catch (final Throwable _t) {
       if (_t instanceof NotResolvedFeatureException) {
-        final NotResolvedFeatureException e = (NotResolvedFeatureException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

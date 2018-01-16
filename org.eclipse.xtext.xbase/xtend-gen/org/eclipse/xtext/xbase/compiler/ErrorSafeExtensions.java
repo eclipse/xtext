@@ -113,7 +113,6 @@ public class ErrorSafeExtensions {
           body.apply(element, currentAppendable);
         } catch (final Throwable _t) {
           if (_t instanceof Exception) {
-            final Exception ignoreMe = (Exception)_t;
           } else {
             throw Exceptions.sneakyThrow(_t);
           }
@@ -186,7 +185,6 @@ public class ErrorSafeExtensions {
           this._typeReferenceSerializer.serialize(typeRef, typeRef.eContainer(), errorChild);
         } catch (final Throwable _t) {
           if (_t instanceof Exception) {
-            final Exception ignoreMe = (Exception)_t;
           } else {
             throw Exceptions.sneakyThrow(_t);
           }

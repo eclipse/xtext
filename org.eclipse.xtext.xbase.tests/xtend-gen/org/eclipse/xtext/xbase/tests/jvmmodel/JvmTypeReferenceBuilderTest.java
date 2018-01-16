@@ -69,7 +69,6 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
-        final IllegalArgumentException e = (IllegalArgumentException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -83,7 +82,6 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
-        final IllegalArgumentException e = (IllegalArgumentException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

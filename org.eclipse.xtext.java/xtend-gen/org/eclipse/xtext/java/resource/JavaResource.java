@@ -245,7 +245,6 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
             }
           } catch (final Throwable _t) {
             if (_t instanceof IndexedJvmTypeAccess.UnknownNestedTypeException) {
-              final IndexedJvmTypeAccess.UnknownNestedTypeException e = (IndexedJvmTypeAccess.UnknownNestedTypeException)_t;
               return proxy;
             } else {
               throw Exceptions.sneakyThrow(_t);

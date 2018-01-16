@@ -296,7 +296,6 @@ public class JavaDerivedStateComputer {
         CompilerOptions.class.getField("originalSourceLevel").setLong(compilerOptions, targetLevel);
       } catch (final Throwable _t) {
         if (_t instanceof NoSuchFieldException) {
-          final NoSuchFieldException e = (NoSuchFieldException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -306,7 +305,6 @@ public class JavaDerivedStateComputer {
         CompilerOptions.class.getField("originalComplianceLevel").setLong(compilerOptions, targetLevel);
       } catch (final Throwable _t_1) {
         if (_t_1 instanceof NoSuchFieldException) {
-          final NoSuchFieldException e_1 = (NoSuchFieldException)_t_1;
         } else {
           throw Exceptions.sneakyThrow(_t_1);
         }
@@ -337,7 +335,6 @@ public class JavaDerivedStateComputer {
               _xtrycatchfinallyexpression = ClassFileConstants.class.getField("JDK1_8").getLong(null);
             } catch (final Throwable _t) {
               if (_t instanceof NoSuchFieldException) {
-                final NoSuchFieldException e = (NoSuchFieldException)_t;
                 _xtrycatchfinallyexpression = ClassFileConstants.JDK1_7;
               } else {
                 throw Exceptions.sneakyThrow(_t);
@@ -351,7 +348,6 @@ public class JavaDerivedStateComputer {
               _xtrycatchfinallyexpression_1 = ClassFileConstants.class.getField("JDK1_9").getLong(null);
             } catch (final Throwable _t_1) {
               if (_t_1 instanceof NoSuchFieldException) {
-                final NoSuchFieldException e_1 = (NoSuchFieldException)_t_1;
                 _xtrycatchfinallyexpression_1 = ClassFileConstants.JDK1_7;
               } else {
                 throw Exceptions.sneakyThrow(_t_1);

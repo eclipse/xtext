@@ -272,7 +272,6 @@ public class InMemoryJavaCompiler {
         CompilerOptions.class.getField("originalSourceLevel").setLong(this.compilerOptions, jdkVersion);
       } catch (final Throwable _t) {
         if (_t instanceof NoSuchFieldException) {
-          final NoSuchFieldException e = (NoSuchFieldException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -292,7 +291,6 @@ public class InMemoryJavaCompiler {
         CompilerOptions.class.getField("originalComplianceLevel").setLong(this.compilerOptions, jdkVersion);
       } catch (final Throwable _t) {
         if (_t instanceof NoSuchFieldException) {
-          final NoSuchFieldException e = (NoSuchFieldException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }

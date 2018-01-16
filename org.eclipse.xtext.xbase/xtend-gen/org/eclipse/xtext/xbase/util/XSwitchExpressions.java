@@ -141,7 +141,6 @@ public class XSwitchExpressions {
       return true;
     } catch (final Throwable _t) {
       if (_t instanceof ConstantExpressionEvaluationException) {
-        final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
         return false;
       } else {
         throw Exceptions.sneakyThrow(_t);

@@ -97,7 +97,6 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
           _xtrycatchfinallyexpression = _xifexpression;
         } catch (final Throwable _t) {
           if (_t instanceof IOException) {
-            final IOException exception = (IOException)_t;
             _xtrycatchfinallyexpression = null;
           } else {
             throw Exceptions.sneakyThrow(_t);
@@ -156,7 +155,6 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
           _xtrycatchfinallyexpression = _xifexpression;
         } catch (final Throwable _t) {
           if (_t instanceof IOException) {
-            final IOException exception = (IOException)_t;
             _xtrycatchfinallyexpression = null;
           } else {
             throw Exceptions.sneakyThrow(_t);

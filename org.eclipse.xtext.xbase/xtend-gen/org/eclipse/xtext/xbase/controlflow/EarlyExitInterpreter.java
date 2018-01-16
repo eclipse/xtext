@@ -24,7 +24,6 @@ public class EarlyExitInterpreter extends SwitchConstantExpressionsInterpreter {
       return Objects.equal(value, constant);
     } catch (final Throwable _t) {
       if (_t instanceof ConstantExpressionEvaluationException) {
-        final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
         return false;
       } else {
         throw Exceptions.sneakyThrow(_t);

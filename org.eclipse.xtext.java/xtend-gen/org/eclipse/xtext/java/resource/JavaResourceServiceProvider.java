@@ -31,7 +31,6 @@ public class JavaResourceServiceProvider implements IResourceServiceProvider {
       return this.injector.<T>getInstance(t);
     } catch (final Throwable _t) {
       if (_t instanceof ConfigurationException) {
-        final ConfigurationException e = (ConfigurationException)_t;
         return null;
       } else {
         throw Exceptions.sneakyThrow(_t);

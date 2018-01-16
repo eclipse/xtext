@@ -699,7 +699,6 @@ public class JvmModelGenerator implements IGenerator {
           appendable.append(" ");
         } catch (final Throwable _t) {
           if (_t instanceof Exception) {
-            final Exception ignoreMe = (Exception)_t;
           } else {
             throw Exceptions.sneakyThrow(_t);
           }

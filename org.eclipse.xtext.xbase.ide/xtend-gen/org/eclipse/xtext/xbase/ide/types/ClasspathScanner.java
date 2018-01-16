@@ -212,7 +212,6 @@ public class ClasspathScanner {
                 descriptorCollections.add(_descriptors);
               } catch (final Throwable _t) {
                 if (_t instanceof URISyntaxException) {
-                  final URISyntaxException exception = (URISyntaxException)_t;
                 } else {
                   throw Exceptions.sneakyThrow(_t);
                 }
@@ -241,7 +240,6 @@ public class ClasspathScanner {
         }
       } catch (final Throwable _t_1) {
         if (_t_1 instanceof IOException) {
-          final IOException exception_1 = (IOException)_t_1;
           return Collections.<ITypeDescriptor>emptyList();
         } else {
           throw Exceptions.sneakyThrow(_t_1);
