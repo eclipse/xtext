@@ -120,7 +120,6 @@ public class PortableURIsTest extends AbstractXtextTests {
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalStateException) {
-        final IllegalStateException e = (IllegalStateException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
