@@ -51,7 +51,6 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
       return null;
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
-        final IllegalArgumentException e = (IllegalArgumentException)_t;
         return null;
       } else {
         throw Exceptions.sneakyThrow(_t);

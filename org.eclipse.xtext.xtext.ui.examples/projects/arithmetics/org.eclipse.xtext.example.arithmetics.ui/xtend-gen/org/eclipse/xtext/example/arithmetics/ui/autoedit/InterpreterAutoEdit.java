@@ -48,7 +48,6 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
           }
         } catch (final Throwable _t) {
           if (_t instanceof BadLocationException) {
-            final BadLocationException e = (BadLocationException)_t;
           } else {
             throw Exceptions.sneakyThrow(_t);
           }
