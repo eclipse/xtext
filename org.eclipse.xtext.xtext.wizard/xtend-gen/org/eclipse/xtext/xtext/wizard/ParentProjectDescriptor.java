@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
@@ -1097,8 +1098,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         final Function1<Outlet, String> _function_2 = (Outlet it_1) -> {
           return this.sourceFolder(it_1);
         };
-        Iterable<String> _map = IterableExtensions.<Outlet, String>map(IterableExtensions.<Outlet>toSet(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN))), _function_2);
-        for(final String dir : _map) {
+        Set<String> _set = IterableExtensions.<String>toSet(ListExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN)), _function_2));
+        for(final String dir : _set) {
           _builder.append("\t\t\t\t\t\t\t");
           _builder.append("<directory>${basedir}/");
           _builder.append(dir, "\t\t\t\t\t\t\t");
