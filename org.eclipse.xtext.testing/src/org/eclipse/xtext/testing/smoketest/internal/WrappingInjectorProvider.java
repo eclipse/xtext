@@ -45,8 +45,14 @@ public class WrappingInjectorProvider implements IInjectorProvider, IRegistryCon
 		this.delegate = delegate;
 		stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		this.injector = createInjector();
+		if (delegate instanceof IRegistryConfigurator) {
+			((IRegistryConfigurator) delegate).setupRegistry();
+		}
 		registerFactory(injector);
 		stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
+		if (delegate instanceof IRegistryConfigurator) {
+			((IRegistryConfigurator) delegate).restoreRegistry();
+		}
 	}
 	
 	private void registerFactory(Injector injector) {
