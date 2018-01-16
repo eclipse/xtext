@@ -99,7 +99,6 @@ public class ResourceURICollector {
       }
     } catch (final Throwable _t) {
       if (_t instanceof ZipException) {
-        final ZipException e = (ZipException)_t;
         String _absolutePath = file.getAbsolutePath();
         String _plus_1 = ("Could not open Jar file " + _absolutePath);
         String _plus_2 = (_plus_1 + ".");

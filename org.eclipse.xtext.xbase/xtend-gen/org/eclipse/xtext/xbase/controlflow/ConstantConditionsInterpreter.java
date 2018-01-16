@@ -89,10 +89,8 @@ public class ConstantConditionsInterpreter {
       return null;
     } catch (final Throwable _t) {
       if (_t instanceof ConstantExpressionEvaluationException) {
-        final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
         return null;
       } else if (_t instanceof IllegalArgumentException) {
-        final IllegalArgumentException e_1 = (IllegalArgumentException)_t;
         return null;
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -349,7 +347,6 @@ public class ConstantConditionsInterpreter {
             return new EvaluationResult(result, _isCompileTimeConstant);
           } catch (final Throwable _t) {
             if (_t instanceof ConstantExpressionEvaluationException) {
-              final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
               return EvaluationResult.NOT_A_CONSTANT;
             } else {
               throw Exceptions.sneakyThrow(_t);
@@ -461,7 +458,6 @@ public class ConstantConditionsInterpreter {
         return new EvaluationResult(value, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
       } catch (final Throwable _t) {
         if (_t instanceof ConstantExpressionEvaluationException) {
-          final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
           return EvaluationResult.NOT_A_CONSTANT;
         } else {
           throw Exceptions.sneakyThrow(_t);

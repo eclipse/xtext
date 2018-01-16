@@ -37,7 +37,6 @@ public class TypeResolutionCancelTest extends AbstractXbaseTestCase {
         Assert.fail("Type resolution should have been canceled");
       } catch (final Throwable _t) {
         if (_t instanceof OperationCanceledError) {
-          final OperationCanceledError e = (OperationCanceledError)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -58,7 +57,6 @@ public class TypeResolutionCancelTest extends AbstractXbaseTestCase {
         this.resolver.resolveTypes(exp, _function);
       } catch (final Throwable _t) {
         if (_t instanceof OperationCanceledError) {
-          final OperationCanceledError e = (OperationCanceledError)_t;
           Assert.fail("Type resolution should not have been canceled");
         } else {
           throw Exceptions.sneakyThrow(_t);
