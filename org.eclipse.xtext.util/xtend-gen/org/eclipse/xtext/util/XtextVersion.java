@@ -101,7 +101,6 @@ public class XtextVersion {
       return manifest.getMainAttributes().getValue("Maven-Version");
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
-        final Exception e = (Exception)_t;
         return null;
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -112,7 +111,6 @@ public class XtextVersion {
           is.close();
         } catch (final Throwable _t_1) {
           if (_t_1 instanceof IOException) {
-            final IOException e_1 = (IOException)_t_1;
           } else {
             throw Exceptions.sneakyThrow(_t_1);
           }

@@ -97,7 +97,6 @@ public class SemanticRegionFinderTest {
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalStateException) {
-        final IllegalStateException e = (IllegalStateException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -107,7 +106,6 @@ public class SemanticRegionFinderTest {
       Assert.fail();
     } catch (final Throwable _t_1) {
       if (_t_1 instanceof IllegalStateException) {
-        final IllegalStateException e_1 = (IllegalStateException)_t_1;
       } else {
         throw Exceptions.sneakyThrow(_t_1);
       }
@@ -235,7 +233,6 @@ public class SemanticRegionFinderTest {
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalStateException) {
-        final IllegalStateException e = (IllegalStateException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -245,7 +242,6 @@ public class SemanticRegionFinderTest {
       Assert.fail();
     } catch (final Throwable _t_1) {
       if (_t_1 instanceof IllegalStateException) {
-        final IllegalStateException e_1 = (IllegalStateException)_t_1;
       } else {
         throw Exceptions.sneakyThrow(_t_1);
       }
@@ -263,7 +259,6 @@ public class SemanticRegionFinderTest {
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalStateException) {
-        final IllegalStateException e = (IllegalStateException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -273,7 +268,6 @@ public class SemanticRegionFinderTest {
       Assert.fail();
     } catch (final Throwable _t_1) {
       if (_t_1 instanceof IllegalStateException) {
-        final IllegalStateException e_1 = (IllegalStateException)_t_1;
       } else {
         throw Exceptions.sneakyThrow(_t_1);
       }

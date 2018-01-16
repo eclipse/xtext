@@ -141,7 +141,6 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
           this.generateFile(traceFileName, outputConfigName, _byteArrayInputStream);
         } catch (final Throwable _t) {
           if (_t instanceof TraceNotFoundException) {
-            final TraceNotFoundException e = (TraceNotFoundException)_t;
           } else {
             throw Exceptions.sneakyThrow(_t);
           }

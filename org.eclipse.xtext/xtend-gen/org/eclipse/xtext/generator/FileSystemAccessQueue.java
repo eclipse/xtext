@@ -47,7 +47,6 @@ public class FileSystemAccessQueue extends AdapterImpl {
       return request;
     } catch (final Throwable _t) {
       if (_t instanceof InterruptedException) {
-        final InterruptedException e = (InterruptedException)_t;
         throw new OperationCanceledException();
       } else {
         throw Exceptions.sneakyThrow(_t);

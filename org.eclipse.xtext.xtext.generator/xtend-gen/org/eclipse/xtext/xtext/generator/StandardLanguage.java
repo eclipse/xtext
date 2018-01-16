@@ -132,7 +132,6 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       this.addReferencedResource("platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel");
     } catch (final Throwable _t) {
       if (_t instanceof ClassNotFoundException) {
-        final ClassNotFoundException e = (ClassNotFoundException)_t;
         StandardLanguage.LOG.info("Skipping registration of Xbase genmodel. Xbase is not on the classpath.");
       } else {
         throw Exceptions.sneakyThrow(_t);

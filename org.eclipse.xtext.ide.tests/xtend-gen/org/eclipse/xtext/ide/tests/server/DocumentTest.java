@@ -44,7 +44,6 @@ public class DocumentTest {
         Assert.fail();
       } catch (final Throwable _t) {
         if (_t instanceof IndexOutOfBoundsException) {
-          final IndexOutOfBoundsException e = (IndexOutOfBoundsException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -68,7 +67,6 @@ public class DocumentTest {
         Assert.fail();
       } catch (final Throwable _t) {
         if (_t instanceof IndexOutOfBoundsException) {
-          final IndexOutOfBoundsException e = (IndexOutOfBoundsException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }

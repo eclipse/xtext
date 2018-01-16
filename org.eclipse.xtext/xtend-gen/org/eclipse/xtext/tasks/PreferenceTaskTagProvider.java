@@ -65,7 +65,6 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
             _xtrycatchfinallyexpression = Priority.valueOf(prios.get((i).intValue()));
           } catch (final Throwable _t) {
             if (_t instanceof IllegalArgumentException) {
-              final IllegalArgumentException e = (IllegalArgumentException)_t;
               _xtrycatchfinallyexpression = Priority.NORMAL;
             } else {
               throw Exceptions.sneakyThrow(_t);

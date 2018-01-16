@@ -68,7 +68,6 @@ public class StorageAwareResource extends LazyLinkingResource {
         return;
       } catch (final Throwable _t) {
         if (_t instanceof IOException) {
-          final IOException e = (IOException)_t;
           this.contents.clear();
           this.eAdapters.clear();
           this.unload();
