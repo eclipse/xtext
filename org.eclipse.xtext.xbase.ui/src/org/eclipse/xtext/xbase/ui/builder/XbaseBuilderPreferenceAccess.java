@@ -109,17 +109,10 @@ public class XbaseBuilderPreferenceAccess {
 	}
 	
 	public JavaVersion fromCompilerSourceLevel(String compilerSource) {
-		if ("9".equals(compilerSource))
-			return JavaVersion.JAVA9;
-		if ("1.8".equals(compilerSource))
-			return JavaVersion.JAVA8;
-		else if ("1.7".equals(compilerSource))
-			return JavaVersion.JAVA7;
-		else if ("1.6".equals(compilerSource))
-			return JavaVersion.JAVA6;
-		else
-			// Versions lower than 1.5 are not supported
-			return JavaVersion.JAVA5;
+		JavaVersion javaVersion = JavaVersion.fromQualifier(compilerSource);
+		if (javaVersion == null)
+			javaVersion = JavaVersion.JAVA5;
+		return javaVersion;
 	}
 
 }
