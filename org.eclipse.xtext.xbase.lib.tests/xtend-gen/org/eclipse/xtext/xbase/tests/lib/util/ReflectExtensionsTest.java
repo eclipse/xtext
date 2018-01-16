@@ -33,7 +33,6 @@ public class ReflectExtensionsTest {
         Assert.fail();
       } catch (final Throwable _t) {
         if (_t instanceof NoSuchMethodException) {
-          final NoSuchMethodException e = (NoSuchMethodException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -52,7 +51,6 @@ public class ReflectExtensionsTest {
         Assert.fail();
       } catch (final Throwable _t) {
         if (_t instanceof NoSuchMethodException) {
-          final NoSuchMethodException e = (NoSuchMethodException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -71,7 +69,6 @@ public class ReflectExtensionsTest {
         Assert.fail();
       } catch (final Throwable _t) {
         if (_t instanceof IllegalStateException) {
-          final IllegalStateException e = (IllegalStateException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -127,7 +124,6 @@ public class ReflectExtensionsTest {
         Assert.fail();
       } catch (final Throwable _t) {
         if (_t instanceof NoSuchFieldException) {
-          final NoSuchFieldException e = (NoSuchFieldException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -167,7 +163,6 @@ public class ReflectExtensionsTest {
         Assert.fail();
       } catch (final Throwable _t) {
         if (_t instanceof NoSuchFieldException) {
-          final NoSuchFieldException e = (NoSuchFieldException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
