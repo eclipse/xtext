@@ -53,7 +53,6 @@ public class FilteringClassLoader extends ClassLoader {
       return _loadClass;
     } catch (final Throwable _t) {
       if (_t instanceof ClassNotFoundException) {
-        final ClassNotFoundException ignored = (ClassNotFoundException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

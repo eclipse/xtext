@@ -183,7 +183,6 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
       Assert.fail("Expected exception");
     } catch (final Throwable _t) {
       if (_t instanceof IndexOutOfBoundsException) {
-        final IndexOutOfBoundsException expected = (IndexOutOfBoundsException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -193,7 +192,6 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
       Assert.fail("Expected exception");
     } catch (final Throwable _t_1) {
       if (_t_1 instanceof IndexOutOfBoundsException) {
-        final IndexOutOfBoundsException expected_1 = (IndexOutOfBoundsException)_t_1;
       } else {
         throw Exceptions.sneakyThrow(_t_1);
       }
@@ -222,7 +220,6 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
       Assert.fail("Expected exception");
     } catch (final Throwable _t) {
       if (_t instanceof IndexOutOfBoundsException) {
-        final IndexOutOfBoundsException expected = (IndexOutOfBoundsException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -232,7 +229,6 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
       Assert.fail("Expected exception");
     } catch (final Throwable _t_1) {
       if (_t_1 instanceof IndexOutOfBoundsException) {
-        final IndexOutOfBoundsException expected_1 = (IndexOutOfBoundsException)_t_1;
       } else {
         throw Exceptions.sneakyThrow(_t_1);
       }

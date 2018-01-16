@@ -26,7 +26,6 @@ public class ConsoleHyperlinking implements IPatternMatchListenerDelegate {
       this.console.addHyperlink(link, offset, length);
     } catch (final Throwable _t) {
       if (_t instanceof BadLocationException) {
-        final BadLocationException e = (BadLocationException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

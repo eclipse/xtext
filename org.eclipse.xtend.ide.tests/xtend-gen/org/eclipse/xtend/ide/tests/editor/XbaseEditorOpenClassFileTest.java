@@ -532,7 +532,6 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       }
     } catch (final Throwable _t) {
       if (_t instanceof ClassNotFoundException) {
-        final ClassNotFoundException e = (ClassNotFoundException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

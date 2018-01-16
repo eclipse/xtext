@@ -602,7 +602,6 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       throw new UnresolvableFeatureException(((("Unresolvable feature " + featureName) + " on ") + receiver), it);
     } catch (final Throwable _t) {
       if (_t instanceof UnresolvableFeatureException) {
-        final UnresolvableFeatureException e = (UnresolvableFeatureException)_t;
         final String typeName = this.getFullName(it);
         final JvmType type = this.findTypeByName(it, typeName);
         if ((type != null)) {

@@ -58,7 +58,6 @@ public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoE
         c.text = convertedText.toString();
       } catch (final Throwable _t) {
         if (_t instanceof BadLocationException) {
-          final BadLocationException e = (BadLocationException)_t;
           super.customizeDocumentCommand(d, c);
         } else {
           throw Exceptions.sneakyThrow(_t);

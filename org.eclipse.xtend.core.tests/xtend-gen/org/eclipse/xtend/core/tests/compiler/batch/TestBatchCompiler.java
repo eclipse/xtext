@@ -132,7 +132,6 @@ public class TestBatchCompiler {
       TestBatchCompiler.abfalleimer.forEach(_function);
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
-        final Exception e = (Exception)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -661,7 +660,6 @@ public class TestBatchCompiler {
         return (_waitFor == 0);
       } catch (final Throwable _t) {
         if (_t instanceof IOException) {
-          final IOException ioe = (IOException)_t;
           return false;
         } else {
           throw Exceptions.sneakyThrow(_t);

@@ -123,7 +123,6 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       Assert.fail("Null value not detected.");
     } catch (final Throwable _t) {
       if (_t instanceof ValueConverterException) {
-        final ValueConverterException e = (ValueConverterException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -137,7 +136,6 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       Assert.fail("Empty value not detected.");
     } catch (final Throwable _t) {
       if (_t instanceof ValueConverterException) {
-        final ValueConverterException e = (ValueConverterException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -151,7 +149,6 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       Assert.fail("invalid char not detected..");
     } catch (final Throwable _t) {
       if (_t instanceof ValueConverterException) {
-        final ValueConverterException e = (ValueConverterException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -165,7 +162,6 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       Assert.fail("Empty value not detected.");
     } catch (final Throwable _t) {
       if (_t instanceof ValueConverterException) {
-        final ValueConverterException e = (ValueConverterException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -179,7 +175,6 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       Assert.fail("Empty value not detected.");
     } catch (final Throwable _t) {
       if (_t instanceof ValueConverterException) {
-        final ValueConverterException e = (ValueConverterException)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
