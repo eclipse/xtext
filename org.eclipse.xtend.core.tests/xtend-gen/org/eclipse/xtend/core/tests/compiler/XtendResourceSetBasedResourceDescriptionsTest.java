@@ -102,7 +102,6 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
             Assert.fail("expected exception");
           } catch (final Throwable _t) {
             if (_t instanceof IllegalStateException) {
-              final IllegalStateException e = (IllegalStateException)_t;
             } else {
               throw Exceptions.sneakyThrow(_t);
             }

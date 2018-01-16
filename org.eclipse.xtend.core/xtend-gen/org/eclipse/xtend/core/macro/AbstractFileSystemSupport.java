@@ -180,7 +180,6 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       contentChanged = (newByte != oldByte);
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
-        final IOException e = (IOException)_t;
         contentChanged = true;
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -191,7 +190,6 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
           oldContent.close();
         } catch (final Throwable _t_1) {
           if (_t_1 instanceof IOException) {
-            final IOException e_1 = (IOException)_t_1;
           } else {
             throw Exceptions.sneakyThrow(_t_1);
           }

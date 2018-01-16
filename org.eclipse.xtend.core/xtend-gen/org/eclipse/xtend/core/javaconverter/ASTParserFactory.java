@@ -120,7 +120,6 @@ public class ASTParserFactory {
       JavaCore.setComplianceOptions(javaVersion, options);
     } catch (final Throwable _t) {
       if (_t instanceof IllegalArgumentException) {
-        final IllegalArgumentException e = (IllegalArgumentException)_t;
         parser = ASTParser.newParser(ASTParserFactory.asJLS(this.minParserApiLevel));
         JavaCore.setComplianceOptions(this.minParserApiLevel, options);
       } else {

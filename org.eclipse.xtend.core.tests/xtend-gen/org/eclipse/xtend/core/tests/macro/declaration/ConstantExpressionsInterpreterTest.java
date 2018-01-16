@@ -114,7 +114,6 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
         Assert.fail("exception expected");
       } catch (final Throwable _t) {
         if (_t instanceof ConstantExpressionEvaluationException) {
-          final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -212,7 +211,6 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
         Assert.fail("Exception expected");
       } catch (final Throwable _t) {
         if (_t instanceof ConstantExpressionEvaluationException) {
-          final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }

@@ -423,7 +423,6 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
       EcoreUtil2.findCrossReferences(anonymousClass, CollectionLiterals.<JvmDeclaredType>newImmutableSet(localType), _function);
     } catch (final Throwable _t) {
       if (_t instanceof XtendGenerator.StopCollecting) {
-        final XtendGenerator.StopCollecting e = (XtendGenerator.StopCollecting)_t;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

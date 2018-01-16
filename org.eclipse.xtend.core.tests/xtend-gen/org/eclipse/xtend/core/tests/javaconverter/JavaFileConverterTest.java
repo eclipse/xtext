@@ -178,7 +178,6 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
           this.file(result.getXtendCode(), true);
         } catch (final Throwable _t) {
           if (_t instanceof AssertionError) {
-            final AssertionError error = (AssertionError)_t;
             result = j2x.useRobustSyntax().toXtend(unitName, javaCode);
           } else {
             throw Exceptions.sneakyThrow(_t);

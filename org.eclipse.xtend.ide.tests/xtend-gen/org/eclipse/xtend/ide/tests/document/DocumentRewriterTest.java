@@ -486,7 +486,6 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
-        final Exception exc = (Exception)_t;
         _xtrycatchfinallyexpression = null;
       } else {
         throw Exceptions.sneakyThrow(_t);

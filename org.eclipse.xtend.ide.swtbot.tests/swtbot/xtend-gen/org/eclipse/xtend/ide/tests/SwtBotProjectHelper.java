@@ -287,7 +287,6 @@ public class SwtBotProjectHelper {
         }
       } catch (final Throwable _t) {
         if (_t instanceof WidgetNotFoundException) {
-          final WidgetNotFoundException exc = (WidgetNotFoundException)_t;
           final Consumer<IResource> _function = (IResource it_1) -> {
             try {
               it_1.delete(true, null);

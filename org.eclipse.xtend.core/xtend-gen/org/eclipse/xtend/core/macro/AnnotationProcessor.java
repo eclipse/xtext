@@ -291,7 +291,6 @@ public class AnnotationProcessor {
         runnable.run();
       } catch (final Throwable _t) {
         if (_t instanceof CancellationException) {
-          final CancellationException e = (CancellationException)_t;
           _xtrycatchfinallyexpression = null;
         } else {
           throw Exceptions.sneakyThrow(_t);
