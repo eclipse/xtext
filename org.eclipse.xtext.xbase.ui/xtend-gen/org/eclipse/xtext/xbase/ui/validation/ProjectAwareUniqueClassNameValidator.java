@@ -93,7 +93,6 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
         return this.doCheckUniqueInProject(name, type);
       } catch (final Throwable _t) {
         if (_t instanceof JavaModelException) {
-          final JavaModelException e = (JavaModelException)_t;
           return true;
         } else {
           throw Exceptions.sneakyThrow(_t);
@@ -235,7 +234,6 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
       return true;
     } catch (final Throwable _t) {
       if (_t instanceof OperationCanceledException) {
-        final OperationCanceledException oce = (OperationCanceledException)_t;
         return false;
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -275,7 +273,6 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
       return false;
     } catch (final Throwable _t) {
       if (_t instanceof CoreException) {
-        final CoreException e = (CoreException)_t;
         return false;
       } else {
         throw Exceptions.sneakyThrow(_t);
