@@ -6,7 +6,7 @@ package org.eclipse.xtext.xbase.ui
 import com.google.inject.Binder
 import org.eclipse.jface.viewers.ILabelProvider
 import org.eclipse.ui.plugin.AbstractUIPlugin
-import org.eclipse.xtext.naming.ICopyQualifiedNameService
+import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration
 import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider
@@ -46,10 +46,11 @@ import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider
 	}
 
 	override void configureResourceUIServiceLabelProvider(Binder binder) {
-		binder.bind(ILabelProvider).annotatedWith(ResourceServiceDescriptionLabelProvider).to(XbaseDescriptionLabelProvider)
+		binder.bind(ILabelProvider).annotatedWith(ResourceServiceDescriptionLabelProvider).to(
+			XbaseDescriptionLabelProvider)
 	}
 
-	override Class<? extends ICopyQualifiedNameService> bindICopyQualifiedNameService() {
+	override Class<? extends CopyQualifiedNameService> bindCopyQualifiedNameService() {
 		return XbaseCopyQualifiedNameService
 	}
 
