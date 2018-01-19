@@ -15,6 +15,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;
 
 /**
  * Page in the new project wizard to display a list with project templates. User get some description text and can select a template. In a
@@ -29,9 +30,10 @@ public class NewProjectWizardTemplateParameterPage extends WizardPage implements
 
 	private boolean inUserAction = true;
 
-	public NewProjectWizardTemplateParameterPage(AbstractProjectTemplate projectTemplate) {
+	public NewProjectWizardTemplateParameterPage(AbstractProjectTemplate projectTemplate, IExtendedProjectInfo projectInfo) {
 		super("NewProjectWizardTemplateParameterPage");
 		this.projectTemplate = projectTemplate;
+		this.projectTemplate.setProjectInfo(projectInfo);
 	}
 
 	@Override

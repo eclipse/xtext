@@ -66,6 +66,14 @@ public class ProjectFactory {
 
 	private List<IProjectFactoryContributor> earlyContributors;
 
+	public void setWorkbench(IWorkbench workbench) {
+		this.workbench = workbench;
+	}
+	
+	public void setWorkspace(IWorkspace workspace) {
+		this.workspace = workspace;
+	}
+	
 	public ProjectFactory addBuilderIds(String... builderIds) {
 		if (this.builderIds == null)
 			this.builderIds = Lists.newArrayList();

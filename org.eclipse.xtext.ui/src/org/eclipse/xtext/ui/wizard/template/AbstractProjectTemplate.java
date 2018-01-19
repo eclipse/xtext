@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.xtext.ui.util.ProjectFactory;
-import org.eclipse.xtext.ui.wizard.IProjectInfo;
+import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;
 
 /**
  * A template definition for a project, used by the new project wizard. Defines the UI (label, description, icon, variables) on how to
@@ -33,8 +33,8 @@ public abstract class AbstractProjectTemplate {
 
 	protected List<ProjectVariable> variables = new ArrayList<>();
 
-	private IProjectInfo projectInfo;
-	
+	private IExtendedProjectInfo projectInfo;
+
 	/**
 	 * Create a new text variable with associated text field and add it to the "variables" list.
 	 */
@@ -102,7 +102,9 @@ public abstract class AbstractProjectTemplate {
 
 	/**
 	 * Subclasses have to override. Generate all the projects to be created when the wizard is finished.
-	 * @param generator The generator to supply {@link org.eclipse.xtext.ui.util.ProjectFactory}'s to create projects from.
+	 * 
+	 * @param generator
+	 *            The generator to supply {@link org.eclipse.xtext.ui.util.ProjectFactory}'s to create projects from.
 	 */
 	public abstract void generateProjects(IProjectGenerator generator);
 
@@ -110,12 +112,12 @@ public abstract class AbstractProjectTemplate {
 		project.addContributor(new TextFileContributor(fileName, contents));
 		return project;
 	}
-	
-	protected IProjectInfo getProjectInfo() {
+
+	protected IExtendedProjectInfo getProjectInfo() {
 		return projectInfo;
 	}
-	
-	protected void setProjectInfo(IProjectInfo projectInfo) {
+
+	void setProjectInfo(IExtendedProjectInfo projectInfo) {
 		this.projectInfo = projectInfo;
 	}
 
