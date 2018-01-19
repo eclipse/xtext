@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2017, 2018 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -149,15 +149,14 @@ public class RequestManagerTest {
     final Function1<CancelIndicator, Integer> _function = (CancelIndicator it) -> {
       return Integer.valueOf(this.sharedState.incrementAndGet());
     };
-    final CompletableFuture<Integer> previsousRead = this.requestManager.<Integer>runRead(_function);
+    this.requestManager.<Integer>runRead(_function);
     final Function0<Object> _function_1 = () -> {
       return null;
     };
     final Function2<CancelIndicator, Object, Integer> _function_2 = (CancelIndicator $0, Object $1) -> {
       int _xblockexpression = (int) 0;
       {
-        while (((this.sharedState.get() == 0) && (!previsousRead.isCancelled()))) {
-        }
+        Assert.assertEquals(1, this.sharedState.get());
         _xblockexpression = this.sharedState.incrementAndGet();
       }
       return Integer.valueOf(_xblockexpression);

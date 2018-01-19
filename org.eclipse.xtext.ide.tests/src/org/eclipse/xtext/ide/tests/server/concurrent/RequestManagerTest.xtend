@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2017, 2018 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -97,12 +97,11 @@ class RequestManagerTest {
 
 	@Test(timeout = 1000)
 	def void testRunWriteAfterRead() {
-		val previsousRead = requestManager.runRead [
+		requestManager.runRead [
 			sharedState.incrementAndGet
 		]
 		requestManager.runWrite([], [
-			while (sharedState.get == 0 && !previsousRead.cancelled) {
-			}
+			assertEquals (1, sharedState.get)
 			sharedState.incrementAndGet
 		]).join
 		assertEquals(2, sharedState.get)
@@ -113,16 +112,16 @@ class RequestManagerTest {
 		val isCanceled = new AtomicBoolean(false)
 		val future = requestManager.runRead [ cancelIndicator |
 			try {
-				sharedState.incrementAndGet			
+				sharedState.incrementAndGet
 				while (!cancelIndicator.isCanceled) {
 					Thread.sleep(10)
 				}
-			} finally {					
+			} finally {
 				isCanceled.set(true)
 			}
 			return null
 		]
-		while (sharedState.get === 0) {			
+		while (sharedState.get === 0) {
 			Thread.sleep(10)
 		}
 		future.cancel(true)
