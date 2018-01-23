@@ -35,6 +35,7 @@ import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
@@ -111,15 +112,19 @@ import com.google.common.collect.Lists;
  * </p>
  * 
  * <pre>
- * 	def dispatch void format(Entity entity, extension IFormattableDocument document) {
- * 		entity.regionForFeature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
- * 		entity.regionForKeyword("{").append[newLine; increaseIndentation]
- * 		for (Feature feature : entity.features) {
- * 			format(feature, document);
- * 			feature.append[newLine]
- * 		}
- * 		entity.regionForKeyword("}").prepend[decreaseIndentation]
- * 	}
+	def dispatch void format(Entity entity, extension IFormattableDocument document) {
+		val open = entity.regionFor.keyword("{")
+		val close = entity.regionFor.keyword("}")
+		entity.regionFor.feature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
+		entity.superType.surround[oneSpace]
+		open.append[newLine]
+		interior(open, close)[indent]
+		format(entity.getSuperType(), document);
+		for (Feature feature : entity.features) {
+			feature.format
+			feature.append[setNewLines(1, 1, 2)]
+		}
+	}
  * </pre>
  * 
  * <p>
@@ -131,9 +136,9 @@ import com.google.common.collect.Lists;
  * </p>
  * 
  * <p>
- * The methods {@code regionForFeature()} and {@code regionForKeyword} are extension methods: {link
- * ITextRegionAccess#regionForFeature(EObject, EStructuralFeature)} and {link
- * ITextRegionAccess#regionForKeyword(EObject, String)}. They return an {@link ISemanticRegion}.
+ * The method calls {@code regionFor.feature()} and {@code regionFor.keyword()} are using extension methods: {@link
+ * ITextRegionExtensions#regionFor(EObject)} and {@link
+ * ISemanticRegionFinder#keyword(String)} respectively {@link ISemanticRegionFinder#feature(EStructuralFeature)}. They return an {@link ISemanticRegion}.
  * </p>
  * 
  * <p>
