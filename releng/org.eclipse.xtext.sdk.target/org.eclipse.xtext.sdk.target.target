@@ -149,10 +149,21 @@
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="http://download.eclipse.org/tools/orbit/R-builds/R20170516192513/repository/"/>
+		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20180119201206/repository/"/>
 		<unit id="com.google.gson" version="2.7.0.v20170129-0911"/>
 		<unit id="com.google.gson.source" version="2.7.0.v20170129-0911"/>
-		<unit id="org.junit" version="0.0.0"/>
+		<unit id="org.junit" version="4.12.0.v201504281640"/>
+		<unit id="org.junit.source" version="4.12.0.v201504281640"/>
+		<unit id="org.objectweb.asm" version="6.0.0.v20170929-1901"/>
+		<unit id="org.objectweb.asm.analysis" version="6.0.0.v20170929-1901"/>
+		<unit id="org.objectweb.asm.tree" version="6.0.0.v20170929-1901"/>
+		<unit id="org.objectweb.asm.util" version="6.0.0.v20170929-1901"/>
+		<unit id="org.objectweb.asm.xml" version="6.0.0.v20170929-1901"/>
+		<unit id="org.objectweb.asm.source" version="6.0.0.v20170929-1901"/>
+		<unit id="org.objectweb.asm.analysis.source" version="6.0.0.v20170929-1901"/>
+		<unit id="org.objectweb.asm.tree.source" version="6.0.0.v20170929-1901"/>
+		<unit id="org.objectweb.asm.util.source" version="6.0.0.v20170929-1901"/>
+		<unit id="org.objectweb.asm.xml.source" version="6.0.0.v20170929-1901"/>
 	</location>
 </locations>
 </target>

@@ -6,5 +6,17 @@
 	<feature id="org.eclipse.xtend.sdk" version="2.14.0.qualifier">
 		<category name="Xtext"/>
 	</feature>
+	<bundle id="org.junit" version="0.0.0"></bundle>
+	<bundle id="org.junit.source" version="0.0.0"></bundle>
+	<bundle id="org.objectweb.asm" version="6.0.0.qualifier"></bundle>
+	<bundle id="org.objectweb.asm.analysis" version="6.0.0.qualifier"></bundle>
+	<bundle id="org.objectweb.asm.tree" version="6.0.0.qualifier"></bundle>
+	<bundle id="org.objectweb.asm.util" version="6.0.0.qualifier"></bundle>
+	<bundle id="org.objectweb.asm.xml" version="6.0.0.qualifier"></bundle>
+	<bundle id="org.objectweb.asm.source" version="6.0.0.qualifier"></bundle>
+	<bundle id="org.objectweb.asm.analysis.source" version="6.0.0.qualifier"></bundle>
+	<bundle id="org.objectweb.asm.tree.source" version="6.0.0.qualifier"></bundle>
+	<bundle id="org.objectweb.asm.util.source" version="6.0.0.qualifier"></bundle>
+	<bundle id="org.objectweb.asm.xml.source" version="6.0.0.qualifier"></bundle>
 	<category-def name="Xtext" label="Xtext"/>
 </site>
