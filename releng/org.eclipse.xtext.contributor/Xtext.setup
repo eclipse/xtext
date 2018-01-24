@@ -111,7 +111,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.emf"
-      value="http://download.eclipse.org/modeling/emf/emf/updates/2.12"/>
+      value="http://download.eclipse.org/modeling/emf/emf/builds/release/latest"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.lsp4j"

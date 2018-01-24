@@ -33,8 +33,8 @@
     <bundles name="com.google.guava" versionRange="[12.0.0,13.0.0)"/>
     <bundles name="com.google.guava.source" versionRange="[12.0.0,13.0.0)"/>
   </repositories>
-  <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/2.12milestones/">
-    <features name="org.eclipse.emf.feature.group" versionRange="2.11.0"/>
+  <repositories location="http://download.eclipse.org/modeling/emf/emf/builds/release/latest">
+    <features name="org.eclipse.emf.feature.group"/>
     <features name="org.eclipse.emf.source.feature.group"/>
   </repositories>
   <repositories location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1/">
