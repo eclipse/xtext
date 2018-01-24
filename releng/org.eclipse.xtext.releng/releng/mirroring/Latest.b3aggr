@@ -21,9 +21,9 @@
       <repositories location="http://download.eclipse.org/technology/m2e/releases/1.4/1.4.1.20140328-1905/">
         <bundles name="org.eclipse.m2e.core"/>
       </repositories>
-      <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/nightly/">
-        <features name="org.eclipse.emf.feature.group" versionRange="2.12.0"/>
-        <features name="org.eclipse.emf.source.feature.group" versionRange="2.12.0"/>
+      <repositories location="http://download.eclipse.org/modeling/emf/emf/builds/nightly/latest">
+        <features name="org.eclipse.emf.feature.group"/>
+        <features name="org.eclipse.emf.source.feature.group"/>
       </repositories>
     </contributions>
   </validationSets>
