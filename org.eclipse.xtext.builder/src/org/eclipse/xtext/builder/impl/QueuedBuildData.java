@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -179,12 +178,12 @@ public class QueuedBuildData {
 		}
 	}
 
-	private LinkedList<URI> uris;
-	private LinkedList<URI> urisCopy;
+	private LinkedHashSetQueue<URI> uris;
+	private LinkedHashSetQueue<URI> urisCopy;
 	private Collection<IResourceDescription.Delta> deltas;
 	private Collection<IResourceDescription.Delta> deltasCopy;
-	private Map<String, LinkedList<URI>> projectNameToChangedResource;
-	private Map<String, LinkedList<URI>> projectNameToChangedResourceCopy;
+	private Map<String, LinkedHashSetQueue<URI>> projectNameToChangedResource;
+	private Map<String, LinkedHashSetQueue<URI>> projectNameToChangedResourceCopy;
 
 	private IQueuedBuildDataContribution contribution = new NullContribution();
 	private final IStorage2UriMapper mapper;
@@ -225,7 +224,7 @@ public class QueuedBuildData {
 	}
 
 	public void reset() {
-		uris = Lists.newLinkedList();
+		uris = new LinkedHashSetQueue<>();
 		deltas = Lists.newArrayList();
 		projectNameToChangedResource = Maps.newHashMap();
 		contribution.reset();
@@ -277,19 +276,17 @@ public class QueuedBuildData {
 			IProject project = pair.getSecond();
 			if (XtextProjectHelper.hasNature(project) && XtextProjectHelper.hasBuilder(project)) {
 				String projectName = project.getName();
-				LinkedList<URI> list = projectNameToChangedResource.get(projectName);
+				LinkedHashSetQueue<URI> list = projectNameToChangedResource.get(projectName);
 				if (list == null) {
-					list = Lists.newLinkedList();
+					list = new LinkedHashSetQueue<>();
 					projectNameToChangedResource.put(projectName, list);
 				}
-				if (!list.contains(uri))
-					list.add(uri);
+				list.add(uri);
 				associatedWithProject = true;
 			}
 		}
 		if (!associatedWithProject) {
-			if (!uris.contains(uri))
-				this.uris.add(uri);
+			this.uris.add(uri);
 		}
 	}
 
@@ -307,7 +304,7 @@ public class QueuedBuildData {
 	}
 
 	public Queue<URI> getQueue(String projectName) {
-		final LinkedList<URI> list = projectNameToChangedResource.get(projectName);
+		final LinkedHashSetQueue<URI> list = projectNameToChangedResource.get(projectName);
 		if (list == null)
 			return uris;
 		return new AbstractQueue<URI>() {
@@ -349,8 +346,8 @@ public class QueuedBuildData {
 
 	public void createCheckpoint() {
 		deltasCopy = new ArrayList<Delta>(deltas);
-		urisCopy = new LinkedList<URI>(uris);
-		projectNameToChangedResourceCopy = new HashMap<String, LinkedList<URI>>(projectNameToChangedResource);
+		urisCopy = new LinkedHashSetQueue<URI>(uris);
+		projectNameToChangedResourceCopy = new HashMap<String, LinkedHashSetQueue<URI>>(projectNameToChangedResource);
 		contribution.createCheckpoint();
 	}
 
