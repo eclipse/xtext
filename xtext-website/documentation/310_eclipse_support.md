@@ -6,7 +6,7 @@ part: Reference Documentation
 
 # {{page.title}} {#ide-concepts}
 
-For the following part we will refer to the [state machine example]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext) to describe the different aspects of Xtext's UI features.
+For the following part we will refer to the [state machine example]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/projects/fowlerdsl/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext) to describe the different aspects of Xtext's UI features.
 
 ## Label Provider {#label-provider}
 
