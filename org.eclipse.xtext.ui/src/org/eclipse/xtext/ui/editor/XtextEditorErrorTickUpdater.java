@@ -18,6 +18,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModelListener;
+import org.eclipse.jface.text.source.ISourceViewer
 import org.eclipse.jface.viewers.DecorationOverlayIcon;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.swt.graphics.Image;
@@ -82,7 +83,10 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	protected void updateImageAndRegisterListener() {
 		defaultImage = editor.getDefaultImage();
 		updateEditorImage(editor);
-		annotationModel = editor.getInternalSourceViewer().getAnnotationModel();
+		ISourceViewer sourceViewer = editor.getInternalSourceViewer();
+		if (sourceViewer == null) return;
+
+		annotationModel = sourceViewer.getAnnotationModel();
 		if (annotationModel != null)
 			annotationModel.addAnnotationModelListener(this);
 	}
