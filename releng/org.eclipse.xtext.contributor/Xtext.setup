@@ -50,7 +50,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Luna"
+      defaultValue="Oxygen"
       storageURI="scope://Workspace"
       label="Target Platform">
     <annotation
@@ -59,14 +59,11 @@
         value="Photon"
         label="Eclipse Photon- 4.8"/>
     <choice
-        value="Photon - Staging"
-        label="Eclipse Photon- 4.8 (Staging)"/>
+        value="Photon - Integration"
+        label="Eclipse Photon- 4.8 (Integration)"/>
     <choice
         value="Oxygen"
         label="Eclipse Oxygen - 4.7"/>
-    <choice
-        value="Oxygen - Staging"
-        label="Eclipse Oxygen - 4.7 (Staging)"/>
     <choice
         value="Neon"
         label="Eclipse Neon - 4.6"/>
@@ -101,8 +98,8 @@
       label="Xtext p2 Respository URL"/>
   <setupTask
       xsi:type="setup:VariableTask"
-      name="p2.xtext.orbit"
-      value="http://download.eclipse.org/tools/orbit/downloads/drops/R20170919201930/repository"/>
+      name="p2.orbit"
+      value="http://download.eclipse.org/tools/orbit/downloads/drops/S20180119201206/repository"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"
@@ -769,6 +766,12 @@
         <requirement
             name="org.eclipse.xtext.sdk.feature.group"/>
         <requirement
+            name="org.objectweb.asm"
+            versionRange="[6.0.0,7.0.0)"/>
+        <requirement
+            name="org.objectweb.asm.tree"
+            versionRange="[6.0.0,7.0.0)"/>
+        <requirement
             name="*"/>
         <repositoryList
             name="Photon">
@@ -785,7 +788,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
@@ -802,7 +805,7 @@
               url="${p2.lsp4j}"/>
         </repositoryList>
         <repositoryList
-            name="Photon - Staging">
+            name="Photon - Integration">
           <repository
               url="${p2.xtext}"/>
           <repository
@@ -816,13 +819,13 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
               url="${p2.draw2d}"/>
           <repository
-              url="http://download.eclipse.org/staging/photon/"/>
+              url="http://download.eclipse.org/eclipse/updates/4.8-I-builds"/>
           <repository
               url="${p2.xpand}"/>
           <repository
@@ -847,42 +850,11 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
               url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-        </repositoryList>
-        <repositoryList
-            name="Oxygen - Staging">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.8"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.xtext.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="http://download.eclipse.org/staging/oxygen/"/>
           <repository
               url="${p2.xpand}"/>
           <repository
@@ -907,7 +879,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
@@ -936,7 +908,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
@@ -963,7 +935,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
@@ -1370,7 +1342,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
         </repositoryList>
       </targlet>
       <targlet
@@ -1419,7 +1391,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
@@ -1446,7 +1418,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
@@ -1475,7 +1447,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
@@ -1502,7 +1474,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
@@ -1531,7 +1503,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
@@ -1558,7 +1530,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
@@ -1583,7 +1555,7 @@
           <repository
               url="${p2.swtbot}"/>
           <repository
-              url="${p2.xtext.orbit}"/>
+              url="${p2.orbit}"/>
           <repository
               url="${p2.emf}"/>
           <repository
