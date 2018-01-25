@@ -81,5 +81,15 @@ public class LinkedHashSetQueue<T> extends AbstractQueue<T> {
 	public boolean isEmpty() {
 		return data.isEmpty();
 	}
+	
+	@Override
+	public boolean contains(Object o) {
+		return data.contains(o);
+	}
+	
+	@Override
+	public boolean containsAll(Collection<?> c) {
+		return data.containsAll(c);
+	}
 
 }
