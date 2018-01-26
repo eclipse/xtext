@@ -53,6 +53,7 @@ import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider.IParserErrorContext;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider.IUnorderedGroupErrorContext;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider.IValueConverterErrorContext;
+import org.eclipse.xtext.service.AllRulesCache;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.ImmutableList;
@@ -235,6 +236,10 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	 * @since 2.11
 	 */
 	protected Map<String, AbstractRule> createAllRules(Grammar grammar) {
+		AllRulesCache cache = AllRulesCache.findInEmfObject(grammar);
+		if (cache != null) {
+			return cache.getAllRules();
+		}
 		Map<String, AbstractRule> allRules = Maps.newHashMap();
 		for (AbstractRule rule: GrammarUtil.allRules(grammar)) {
 			if(rule instanceof TerminalRule)

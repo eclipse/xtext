@@ -69,6 +69,10 @@ public class GrammarProvider {
 						} else
 							throw e;
 					}
+					if (grammar != null) {
+						AllRulesCache cache = new AllRulesCache(grammar);
+						cache.attachToEmfObject(grammar);
+					}
 				}
 			}
 		}
