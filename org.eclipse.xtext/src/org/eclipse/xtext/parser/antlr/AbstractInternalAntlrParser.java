@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.antlr.runtime.BitSet;
 import org.antlr.runtime.CommonToken;
@@ -201,6 +202,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	private static final Logger logger = Logger.getLogger(AbstractInternalAntlrParser.class);
 	
+	private static final ConcurrentHashMap<Grammar, Map<String, AbstractRule>> allRulesCache = new ConcurrentHashMap<>();
+	
 	private ICompositeNode currentNode;
 
 	private INode lastConsumedNode;
@@ -235,13 +238,18 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	 * @since 2.11
 	 */
 	protected Map<String, AbstractRule> createAllRules(Grammar grammar) {
-		Map<String, AbstractRule> allRules = Maps.newHashMap();
+		Map<String, AbstractRule> allRules = allRulesCache.get(grammar);
+		if (allRules != null) {
+			return allRules;
+		}
+		allRules = Maps.newHashMap();
 		for (AbstractRule rule: GrammarUtil.allRules(grammar)) {
 			if(rule instanceof TerminalRule)
 				allRules.put(rule.getName().toUpperCase(), rule);
 			else
 				allRules.put(rule.getName(), rule);
 		}
+		allRulesCache.putIfAbsent(grammar, allRules);
 		return allRules;
 	}
 
