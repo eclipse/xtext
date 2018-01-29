@@ -13,6 +13,7 @@ import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.ui.util.ResourceUtil.*;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -103,8 +104,11 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	private IShouldGenerate shouldGenerate;
 
 	private EclipseOutputConfigurationProvider outputConfigurationProvider;
+
 	private BuilderPreferenceAccess builderPreferenceAccess;
-	
+
+	private final Map<String, Map<String, OutputConfiguration>> outputConfigurationCache = new HashMap<>();
+
 	/**
 	 * @since 2.7
 	 */
@@ -259,6 +263,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			doBuild(deltas, outputConfigurations, generatorMarkers, context, access, subMonitor.newChild(2));
 
 		} finally {
+			outputConfigurationCache.clear();
 			task.stop();
 		}
 	}
@@ -635,14 +640,20 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	}
 
 	protected Map<String, OutputConfiguration> getOutputConfigurations(IBuildContext context) {
-		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations(context
-				.getBuiltProject());
-		return uniqueIndex(configurations, new Function<OutputConfiguration, String>() {
+		IProject builtProject = context.getBuiltProject();
+		Map<String, OutputConfiguration> result = outputConfigurationCache.get(builtProject.getName());
+		if (result != null) {
+			return result;
+		}
+		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations(builtProject);
+		result = uniqueIndex(configurations, new Function<OutputConfiguration, String>() {
 			@Override
 			public String apply(OutputConfiguration from) {
 				return from.getName();
 			}
 		});
+		outputConfigurationCache.put(builtProject.getName(), result);
+		return result;
 	}
 	
 	/**
