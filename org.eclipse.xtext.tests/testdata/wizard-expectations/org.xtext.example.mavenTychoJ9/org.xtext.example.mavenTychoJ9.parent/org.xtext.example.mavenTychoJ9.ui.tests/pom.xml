@@ -49,17 +49,4 @@
 		</plugins>
 	</build>
 
-	<profiles>
-		<profile>
-			<id>testing-on-mac</id>
-			<activation>
-				<os>
-					<family>mac</family>
-				</os>
-			</activation>
-			<properties>
-				<tycho.testArgLine>-XstartOnFirstThread --add-modules=ALL-SYSTEM</tycho.testArgLine>
-			</properties>
-		</profile>
-	</profiles>
 </project>

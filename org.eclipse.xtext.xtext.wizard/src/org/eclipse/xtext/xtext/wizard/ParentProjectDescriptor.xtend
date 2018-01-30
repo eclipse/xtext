@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -213,13 +213,19 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			packaging = "pom"
 			buildSection = '''
 				<properties>
-					«IF config.needsTychoBuild»
-						<tycho-version>1.0.0</tycho-version>
-					«ENDIF»
 					<xtextVersion>«config.xtextVersion»</xtextVersion>
 					<project.build.sourceEncoding>«config.encoding»</project.build.sourceEncoding>
 					<maven.compiler.source>«javaVersion»</maven.compiler.source>
 					<maven.compiler.target>«javaVersion»</maven.compiler.target>
+					«IF config.needsTychoBuild»
+						<!-- Tycho settings -->
+						<tycho-version>1.0.0</tycho-version>
+						<!-- Define overridable properties for tycho-surefire-plugin -->
+						<platformSystemProperties></platformSystemProperties>
+						<moduleProperties></moduleProperties>
+						<systemProperties></systemProperties>
+						<tycho.testArgLine></tycho.testArgLine>
+					«ENDIF»
 				</properties>
 				<modules>
 					«FOR p : config.enabledProjects.filter[it != this && partOfMavenBuild]»
@@ -446,19 +452,32 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								</configuration>
 							</plugin>
 							«IF config.needsTychoBuild»
-							<plugin>
-								<!-- 
-									Can be removed after first generator execution
-									https://bugs.eclipse.org/bugs/show_bug.cgi?id=480097
-								-->
-								<groupId>org.eclipse.tycho</groupId>
-								<artifactId>tycho-compiler-plugin</artifactId>
-								<version>${tycho-version}</version>
-								<configuration>
-									<compilerArgument>-err:-forbidden</compilerArgument>
-									<useProjectSettings>false</useProjectSettings>
-								</configuration>
-							</plugin>
+								<plugin>
+									<!-- 
+										Can be removed after first generator execution
+										https://bugs.eclipse.org/bugs/show_bug.cgi?id=480097
+									-->
+									<groupId>org.eclipse.tycho</groupId>
+									<artifactId>tycho-compiler-plugin</artifactId>
+									<version>${tycho-version}</version>
+									<configuration>
+										<compilerArgument>-err:-forbidden</compilerArgument>
+										<useProjectSettings>false</useProjectSettings>
+									</configuration>
+								</plugin>
+								<!-- to skip running (and compiling) tests use commandline flag: -Dmaven.test.skip
+									To skip tests, but still compile them, use: -DskipTests
+									To allow all tests in a pom to pass/fail, use commandline flag: -fae (fail
+									at end) -->
+								<plugin>
+									<groupId>org.eclipse.tycho</groupId>
+									<artifactId>tycho-surefire-plugin</artifactId>
+									<version>${tychoVersion}</version>
+									<configuration>
+										<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY AUTOFORMATTING -->
+										<argLine>${tycho.testArgLine} ${platformSystemProperties} ${systemProperties} ${moduleProperties}</argLine>
+									</configuration>
+								</plugin>
 							«ENDIF»
 						</plugins>
 					</pluginManagement>
@@ -505,6 +524,29 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						</pluginRepository>
 					«ENDIF»
 				</pluginRepositories>
+				<profiles>
+					<profile>
+						<id>macos</id>
+						<activation>
+							<os>
+								<family>mac</family>
+							</os>
+						</activation>
+						<properties>
+							<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY AUTOFORMATTING -->
+							<platformSystemProperties>-XstartOnFirstThread</platformSystemProperties>
+						</properties>
+					</profile>
+					<profile>
+						<id>jdk9-or-newer</id>
+						<activation>
+							<jdk>[9,)</jdk>
+						</activation>
+						<properties>
+							<moduleProperties>--add-modules=ALL-SYSTEM</moduleProperties>
+						</properties>
+					</profile>
+				</profiles>
 			'''
 		]
 	}

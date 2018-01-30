@@ -149,23 +149,6 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 					</plugins>
 				</build>
 			'''
-			if (isEclipsePluginProject && needsUiHarness) {
-				profileSection = '''
-					<profiles>
-						<profile>
-							<id>testing-on-mac</id>
-							<activation>
-								<os>
-									<family>mac</family>
-								</os>
-							</activation>
-							<properties>
-								<tycho.testArgLine>-XstartOnFirstThread«IF isAtLeastJava9» --add-modules=ALL-SYSTEM«ENDIF»</tycho.testArgLine>
-							</properties>
-						</profile>
-					</profiles>
-				'''
-			}
 		]
 	}
 	

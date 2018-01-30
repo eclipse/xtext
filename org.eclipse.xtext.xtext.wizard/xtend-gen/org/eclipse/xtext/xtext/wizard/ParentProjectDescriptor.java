@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -574,14 +574,6 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<properties>");
       _builder.newLine();
-      {
-        boolean _needsTychoBuild = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild) {
-          _builder.append("\t");
-          _builder.append("<tycho-version>1.0.0</tycho-version>");
-          _builder.newLine();
-        }
-      }
       _builder.append("\t");
       _builder.append("<xtextVersion>");
       XtextVersion _xtextVersion = this.getConfig().getXtextVersion();
@@ -606,6 +598,32 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append(_javaVersion_1, "\t");
       _builder.append("</maven.compiler.target>");
       _builder.newLineIfNotEmpty();
+      {
+        boolean _needsTychoBuild = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild) {
+          _builder.append("\t");
+          _builder.append("<!-- Tycho settings -->");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<tycho-version>1.0.0</tycho-version>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<!-- Define overridable properties for tycho-surefire-plugin -->");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<platformSystemProperties></platformSystemProperties>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<moduleProperties></moduleProperties>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<systemProperties></systemProperties>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<tycho.testArgLine></tycho.testArgLine>");
+          _builder.newLine();
+        }
+      }
       _builder.append("</properties>");
       _builder.newLine();
       _builder.append("<modules>");
@@ -1506,6 +1524,55 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("\t\t\t");
           _builder.append("</plugin>");
           _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("<!-- to skip running (and compiling) tests use commandline flag: -Dmaven.test.skip");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("To skip tests, but still compile them, use: -DskipTests");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("To allow all tests in a pom to pass/fail, use commandline flag: -fae (fail");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("at end) -->");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("<plugin>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("<groupId>org.eclipse.tycho</groupId>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("<artifactId>tycho-surefire-plugin</artifactId>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("<version>${tychoVersion}</version>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("<configuration>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY AUTOFORMATTING -->");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<argLine>${tycho.testArgLine} ${platformSystemProperties} ${systemProperties} ${moduleProperties}</argLine>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("</configuration>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("</plugin>");
+          _builder.newLine();
         }
       }
       _builder.append("\t\t");
@@ -1643,6 +1710,73 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         }
       }
       _builder.append("</pluginRepositories>");
+      _builder.newLine();
+      _builder.append("<profiles>");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("<profile>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("<id>macos</id>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("<activation>");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("<os>");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("<family>mac</family>");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("</os>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("</activation>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("<properties>");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY AUTOFORMATTING -->");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("<platformSystemProperties>-XstartOnFirstThread</platformSystemProperties>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("</properties>");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("</profile>");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("<profile>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("<id>jdk9-or-newer</id>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("<activation>");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("<jdk>[9,)</jdk>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("</activation>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("<properties>");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("<moduleProperties>--add-modules=ALL-SYSTEM</moduleProperties>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("</properties>");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("</profile>");
+      _builder.newLine();
+      _builder.append("</profiles>");
       _builder.newLine();
       it.setBuildSection(_builder.toString());
     };

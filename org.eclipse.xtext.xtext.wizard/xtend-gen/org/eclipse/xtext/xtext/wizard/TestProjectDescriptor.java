@@ -435,54 +435,6 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       _builder.append("</build>");
       _builder.newLine();
       it.setBuildSection(_builder.toString());
-      if ((this.isEclipsePluginProject() && this.needsUiHarness())) {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("<profiles>");
-        _builder_1.newLine();
-        _builder_1.append("\t");
-        _builder_1.append("<profile>");
-        _builder_1.newLine();
-        _builder_1.append("\t\t");
-        _builder_1.append("<id>testing-on-mac</id>");
-        _builder_1.newLine();
-        _builder_1.append("\t\t");
-        _builder_1.append("<activation>");
-        _builder_1.newLine();
-        _builder_1.append("\t\t\t");
-        _builder_1.append("<os>");
-        _builder_1.newLine();
-        _builder_1.append("\t\t\t\t");
-        _builder_1.append("<family>mac</family>");
-        _builder_1.newLine();
-        _builder_1.append("\t\t\t");
-        _builder_1.append("</os>");
-        _builder_1.newLine();
-        _builder_1.append("\t\t");
-        _builder_1.append("</activation>");
-        _builder_1.newLine();
-        _builder_1.append("\t\t");
-        _builder_1.append("<properties>");
-        _builder_1.newLine();
-        _builder_1.append("\t\t\t");
-        _builder_1.append("<tycho.testArgLine>-XstartOnFirstThread");
-        {
-          boolean _isAtLeastJava9 = this.isAtLeastJava9();
-          if (_isAtLeastJava9) {
-            _builder_1.append(" --add-modules=ALL-SYSTEM");
-          }
-        }
-        _builder_1.append("</tycho.testArgLine>");
-        _builder_1.newLineIfNotEmpty();
-        _builder_1.append("\t\t");
-        _builder_1.append("</properties>");
-        _builder_1.newLine();
-        _builder_1.append("\t");
-        _builder_1.append("</profile>");
-        _builder_1.newLine();
-        _builder_1.append("</profiles>");
-        _builder_1.newLine();
-        it.setProfileSection(_builder_1.toString());
-      }
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }
