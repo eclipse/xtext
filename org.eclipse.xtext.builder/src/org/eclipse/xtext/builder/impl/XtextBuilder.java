@@ -28,6 +28,7 @@ import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
@@ -299,6 +300,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			progress.worked(1);
 		}
 		resourceSet.eSetDeliver(false);
+		for (Resource resource : resourceSet.getResources()) {
+			resource.eSetDeliver(false);
+		}
 		resourceSet.getResources().clear();
 		resourceSet.eAdapters().clear();
 	}
