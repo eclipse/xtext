@@ -404,7 +404,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 	 * @since 2.14
 	 */
 	public Class<? extends ICopyQualifiedNameService> bindICopyQualifiedNameService() {
-		return DefaultCopyQualifiedNameService.class;
+		return org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService.class;
 	}
 
 	/**

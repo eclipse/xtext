@@ -27,7 +27,6 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
-import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
@@ -54,10 +53,8 @@ public class SharedCommonTypesModule implements Module {
 		binder.bind(IResourceServiceProvider.class).to(SharedCommonTypesResourceServiceProvider.class);
 		binder.bind(IResourceSetProvider.class).to(XtextResourceSetProvider.class);
 		binder.bindConstant().annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).to("java");
-		
+
 		binder.bind(IQualifiedNameProvider.class).to(JvmIdentifiableQualifiedNameProvider.class);
-		binder.bind(CopyQualifiedNameService.class)
-				.to(org.eclipse.xtext.ui.editor.copyqualifiedname.DefaultCopyQualifiedNameService.class);
 		binder.bind(ICopyQualifiedNameService.class).to(DefaultCopyQualifiedNameService.class);
 		binder.bind(IJvmTypeProvider.Factory.class).to(JdtTypeProviderFactory.class);
 		binder.bind(IRenameRefactoringProvider.class).to(DefaultRenameRefactoringProvider.class);
@@ -65,14 +62,19 @@ public class SharedCommonTypesModule implements Module {
 		binder.bind(IRenameStrategy.Provider.class).to(JvmMemberRenameStrategy.Provider.class);
 		binder.bind(RefactoringResourceSetProvider.class).to(JvmRefactoringResourceSetProvider.class);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("Java");
-		
-		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(LiveShadowedResourceDescriptions.class);
-		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(CurrentDescriptions.ResourceSetAware.class);
-		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(IBuilderState.class);
-		
+
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE))
+				.to(LiveShadowedResourceDescriptions.class);
+		binder.bind(IResourceDescriptions.class)
+				.annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE))
+				.to(CurrentDescriptions.ResourceSetAware.class);
+		binder.bind(IResourceDescriptions.class)
+				.annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS))
+				.to(IBuilderState.class);
+
 		binder.bind(IWorkspaceRoot.class).toInstance(ResourcesPlugin.getWorkspace().getRoot());
 		binder.bind(ITraceForStorageProvider.class).to(TraceForStorageProvider.class);
-		
+
 		binder.bind(IReferenceUpdater.class).to(NullReferenceUpdater.class);
 	}
 
