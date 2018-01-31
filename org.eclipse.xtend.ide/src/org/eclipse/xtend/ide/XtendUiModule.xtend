@@ -169,6 +169,7 @@ import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringP
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
 import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider
 import org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator
+import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService
 
 /** 
  * Use this class to register components to be used within the IDE.
@@ -423,7 +424,7 @@ class XtendUiModule extends AbstractXtendUiModule {
 		return EclipseFileSystemSupportImpl
 	}
 
-	override Class<? extends ICopyQualifiedNameService> bindICopyQualifiedNameService() {
+	override Class<? extends CopyQualifiedNameService> bindCopyQualifiedNameService() {
 		return XtendCopyQualifiedNameService
 	}
 
