@@ -134,7 +134,9 @@ public class SyncUtil {
 			});
 			// reconciling schedules both, validation and dirty state
 			Job validationJob = ((XtextDocument)editor.getDocument()).getValidationJob();
-			validationJob.join();
+			if (validationJob != null) {
+				validationJob.join();
+			}
 			editor.getDirtyStateEditorSupport().waitForUpdateEditorJob();
 		} catch (OperationCanceledException e) {
 		} catch (OperationCanceledError e) {
