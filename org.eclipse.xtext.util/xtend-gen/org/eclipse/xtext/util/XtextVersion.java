@@ -1,5 +1,6 @@
 package org.eclipse.xtext.util;
 
+import com.google.common.base.Objects;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -98,7 +99,18 @@ public class XtextVersion {
       final URL url = new URL(_plus);
       is = url.openStream();
       final Manifest manifest = new Manifest(is);
-      return manifest.getMainAttributes().getValue("Maven-Version");
+      String version = manifest.getMainAttributes().getValue("Maven-Version");
+      boolean _equals = Objects.equal("unspecified", version);
+      if (_equals) {
+        version = manifest.getMainAttributes().getValue("Bundle-Version");
+        boolean _endsWith = version.endsWith(".qualifier");
+        if (_endsWith) {
+          return version.replace(".qualifier", "-SNAPSHOT");
+        } else {
+          return version.substring(0, version.lastIndexOf("."));
+        }
+      }
+      return version;
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         return null;

@@ -9,6 +9,10 @@ package org.eclipse.xtext.util;
 
 import static org.junit.Assert.*;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.jar.Manifest;
+
 import org.junit.Test;
 
 /**
@@ -46,6 +50,21 @@ public class XtextVersionTests {
 		assertFalse(version.isSnapshot());
 		assertFalse(version.isStable());
 		
+	}
+	
+	@Test
+	public void test_getCurrent () throws IOException {
+		XtextVersion current = XtextVersion.getCurrent();
+		try (FileInputStream fis = new FileInputStream("META-INF/MANIFEST.MF")) {
+			assertNotNull(current);
+			Manifest manifest = new Manifest(fis);
+			String bundleVersion = manifest.getMainAttributes().getValue("Bundle-Version");
+			assertNotNull(current);
+			// in development Bundle-Version will have suffix .qualifier
+			if (bundleVersion.endsWith(".qualifier")) {
+				assertEquals(bundleVersion.replace(".qualifier", "-SNAPSHOT"), current.getVersion());
+			}
+		}
 	}
 
 }
