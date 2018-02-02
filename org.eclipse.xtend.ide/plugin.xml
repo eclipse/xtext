@@ -1512,6 +1512,36 @@
            		 </visibleWhen>
             </command>
        </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=org.eclipse.jdt.ui.refactoring.menu">
+         <command
+               commandId="org.eclipse.xtend.ide.convertJavaCode"
+               label="Convert to Xtend"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="or">
+                     <or>
+                        <adapt
+                              type="org.eclipse.jdt.core.IPackageFragment">
+                        </adapt>
+                        <adapt
+                              type="org.eclipse.jdt.core.IPackageFragmentRoot">
+                        </adapt>
+                        <adapt
+                              type="org.eclipse.jdt.core.ICompilationUnit">
+                        </adapt>
+                     </or>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
        <menuContribution
             locationURI="menu:navigate?after=open.ext4">
          <command commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
