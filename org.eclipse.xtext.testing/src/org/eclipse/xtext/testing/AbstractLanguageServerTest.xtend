@@ -504,8 +504,8 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		}
 	}
 
-	protected def void testSymbol((WorkspaceSymbolConfiguraiton)=>void configurator) {
-		val extension configuration = new WorkspaceSymbolConfiguraiton
+	protected def void testSymbol((WorkspaceSymbolConfiguration)=>void configurator) {
+		val extension configuration = new WorkspaceSymbolConfiguration
 		configuration.filePath = 'MyModel.' + fileExtension
 		configurator.apply(configuration)
 
@@ -645,7 +645,7 @@ class ReferenceTestConfiguration extends TextDocumentPositionConfiguration {
 }
 
 @Accessors
-class WorkspaceSymbolConfiguraiton extends TextDocumentConfiguration {
+class WorkspaceSymbolConfiguration extends TextDocumentConfiguration {
 	String query = ''
 	String expectedSymbols = ''
 	(List<? extends SymbolInformation>)=>void assertSymbols = null

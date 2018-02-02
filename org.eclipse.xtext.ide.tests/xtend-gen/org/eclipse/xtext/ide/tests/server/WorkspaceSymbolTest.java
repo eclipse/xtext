@@ -9,7 +9,7 @@ package org.eclipse.xtext.ide.tests.server;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
-import org.eclipse.xtext.testing.WorkspaceSymbolConfiguraiton;
+import org.eclipse.xtext.testing.WorkspaceSymbolConfiguration;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ import org.junit.Test;
 public class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
   @Test
   public void testSymbol_01() {
-    final Procedure1<WorkspaceSymbolConfiguraiton> _function = (WorkspaceSymbolConfiguraiton it) -> {
+    final Procedure1<WorkspaceSymbolConfiguration> _function = (WorkspaceSymbolConfiguration it) -> {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type Foo {");
       _builder.newLine();
@@ -86,7 +86,7 @@ public class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
   
   @Test
   public void testSymbol_02() {
-    final Procedure1<WorkspaceSymbolConfiguraiton> _function = (WorkspaceSymbolConfiguraiton it) -> {
+    final Procedure1<WorkspaceSymbolConfiguration> _function = (WorkspaceSymbolConfiguration it) -> {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type Foo {");
       _builder.newLine();

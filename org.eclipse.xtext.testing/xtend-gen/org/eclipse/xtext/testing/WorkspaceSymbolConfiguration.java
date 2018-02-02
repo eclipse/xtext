@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
-public class WorkspaceSymbolConfiguraiton extends TextDocumentConfiguration {
+public class WorkspaceSymbolConfiguration extends TextDocumentConfiguration {
   private String query = "";
   
   private String expectedSymbols = "";
