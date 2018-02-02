@@ -72,7 +72,18 @@ class XtextVersion {
 			val url = new URL(Plugin.INSTANCE.baseURL + 'META-INF/MANIFEST.MF')
 			is = url.openStream()
 			val manifest = new Manifest(is)
-			return manifest.getMainAttributes().getValue('Maven-Version')
+			var version = manifest.getMainAttributes().getValue('Maven-Version')
+			// in dev mode, Maven-Version has the static value 'unspecified'
+			// during a Gradle build that version gets replaced
+			if ('unspecified' == version) {
+				version = manifest.getMainAttributes().getValue('Bundle-Version')
+				if (version.endsWith(".qualifier")) {
+					return version.replace(".qualifier","-SNAPSHOT")
+				} else {
+					// strip off build qualifier
+					return version.substring(0, version.lastIndexOf('.'))
+				}
+			}
 		} catch (Exception e) {
 			return null;
 		} finally {
