@@ -7,18 +7,15 @@
  */
 package org.eclipse.xtext.builder.debug
 
+import com.google.inject.Singleton
 import java.io.PrintStream
+import org.eclipse.jface.resource.ImageDescriptor
 import org.eclipse.ui.console.ConsolePlugin
 import org.eclipse.ui.console.IConsoleFactory
 import org.eclipse.ui.console.IOConsole
+import org.eclipse.xtext.builder.internal.Activator
 
 import static extension com.google.common.base.Throwables.*
-import com.google.inject.Singleton
-import org.eclipse.jface.resource.ImageDescriptor
-import org.eclipse.core.runtime.FileLocator
-import org.eclipse.core.runtime.Platform
-import org.eclipse.core.runtime.Path
-import org.eclipse.xtext.builder.internal.Activator
 
 /** 
  * @author Jan Koehnlein - Initial contribution and API
