@@ -90,7 +90,7 @@ import org.eclipse.xtext.testing.SignatureHelpConfiguration;
 import org.eclipse.xtext.testing.TestCompletionConfiguration;
 import org.eclipse.xtext.testing.TextDocumentConfiguration;
 import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
-import org.eclipse.xtext.testing.WorkspaceSymbolConfiguraiton;
+import org.eclipse.xtext.testing.WorkspaceSymbolConfiguration;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Modules2;
@@ -984,10 +984,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
-  protected void testSymbol(final Procedure1<? super WorkspaceSymbolConfiguraiton> configurator) {
+  protected void testSymbol(final Procedure1<? super WorkspaceSymbolConfiguration> configurator) {
     try {
       @Extension
-      final WorkspaceSymbolConfiguraiton configuration = new WorkspaceSymbolConfiguraiton();
+      final WorkspaceSymbolConfiguration configuration = new WorkspaceSymbolConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
       this.initializeContext(configuration);
