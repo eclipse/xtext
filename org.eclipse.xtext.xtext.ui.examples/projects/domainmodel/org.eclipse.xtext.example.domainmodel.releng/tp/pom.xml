@@ -10,7 +10,7 @@
 	</parent>
 
 	<packaging>pom</packaging>
-	<artifactId>org.eclipse.xtext.example.domainmodel.targetplatform</artifactId>
+	<artifactId>org.eclipse.xtext.example.domainmodel.tp</artifactId>
 
 	<build>
 		<plugins>
@@ -27,8 +27,14 @@
 						<configuration>
 							<artifacts>
 								<artifact>
-									<file>${project.artifactId}.target</file>
+									<file>domainmodel-oxygen.target</file>
 									<type>target</type>
+									<classifier>domainmodel-oxygen</classifier>
+								</artifact>
+								<artifact>
+									<file>domainmodel-photon.target</file>
+									<type>target</type>
+									<classifier>domainmodel-photon</classifier>
 								</artifact>
 							</artifacts>
 						</configuration>

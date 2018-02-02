@@ -14,8 +14,9 @@
 		<!-- Tycho settings -->
 		<tycho-version>1.0.0</tycho-version>
 		<targetplatform.groupId>${project.groupId}</targetplatform.groupId>
-		<targetplatform.artifactId>${project.groupId}.targetplatform</targetplatform.artifactId>
+		<targetplatform.artifactId>${project.groupId}.tp</targetplatform.artifactId>
 		<targetplatform.version>${project.version}</targetplatform.version>
+		<targetplatform.classifier>domainmodel-oxygen</targetplatform.classifier>
 		<!-- Define overridable properties for tycho-surefire-plugin -->
 		<platformSystemProperties></platformSystemProperties>
 		<moduleProperties></moduleProperties>
@@ -23,7 +24,7 @@
 		<tycho.testArgLine></tycho.testArgLine>
 	</properties>
 	<modules>
-		<module>targetplatform</module>
+		<module>tp</module>
 		<module>../org.eclipse.xtext.example.domainmodel</module>
 		<module>../org.eclipse.xtext.example.domainmodel.ide</module>
 		<module>../org.eclipse.xtext.example.domainmodel.ui</module>
@@ -45,9 +46,10 @@
 				<configuration>
 					<target>
 						<artifact>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.targetplatform</artifactId>
-							<version>${project.version}</version>
+							<groupId>org.eclipse.xtext.example.domainmodel</groupId>
+							<artifactId>${targetplatform.artifactId}</artifactId>
+							<version>${targetplatform.version}</version>
+							<classifier>${targetplatform.classifier}</classifier>
 						</artifact>
 					</target>
 					<environments>
