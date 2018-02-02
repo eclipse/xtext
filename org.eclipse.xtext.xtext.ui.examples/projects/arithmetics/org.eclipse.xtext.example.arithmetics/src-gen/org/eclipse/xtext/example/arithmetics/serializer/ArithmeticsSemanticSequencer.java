@@ -22,7 +22,6 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
 import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Minus;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Multi;
 import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Plus;
@@ -68,7 +67,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 				sequence_Addition(context, (Minus) semanticObject); 
 				return; 
 			case ArithmeticsPackage.MODULE:
-				sequence_Module(context, (Module) semanticObject); 
+				sequence_Module(context, (org.eclipse.xtext.example.arithmetics.arithmetics.Module) semanticObject); 
 				return; 
 			case ArithmeticsPackage.MULTI:
 				sequence_Multiplication(context, (Multi) semanticObject); 
@@ -217,7 +216,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 * Constraint:
 	 *     (name=ID imports+=Import* statements+=Statement*)
 	 */
-	protected void sequence_Module(ISerializationContext context, Module semanticObject) {
+	protected void sequence_Module(ISerializationContext context, org.eclipse.xtext.example.arithmetics.arithmetics.Module semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
