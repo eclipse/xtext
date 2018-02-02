@@ -110,6 +110,7 @@ public class XtextVersion {
           return version.substring(0, version.lastIndexOf("."));
         }
       }
+      return version;
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         return null;
@@ -128,7 +129,6 @@ public class XtextVersion {
         }
       }
     }
-    return null;
   }
   
   public XtextVersion(final String version) {

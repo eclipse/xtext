@@ -84,6 +84,7 @@ class XtextVersion {
 					return version.substring(0, version.lastIndexOf('.'))
 				}
 			}
+			return version
 		} catch (Exception e) {
 			return null;
 		} finally {
