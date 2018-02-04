@@ -17,7 +17,7 @@ public class Messages extends NLS {
 	public static String MarkOccurrenceActionContributor_description;
 	public static String MarkOccurrenceActionContributor_text;
 	public static String MarkOccurrenceActionContributor_toolTipText;
-	public static String OccurrenceMarker_MarkOccurenceJob_title;
+	public static String OccurrenceMarker_MarkOccurrenceJob_title;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
