@@ -104,7 +104,7 @@ public class OccurrenceMarker {
 		private ITextSelection initialSelection;
 
 		public MarkOccurrenceJob() {
-			super(Messages.OccurrenceMarker_MarkOccurenceJob_title);
+			super(Messages.OccurrenceMarker_MarkOccurrenceJob_title);
 		}
 
 		public void initialize(XtextEditor editor, ITextSelection selection, boolean isMarkOccurrences) {
