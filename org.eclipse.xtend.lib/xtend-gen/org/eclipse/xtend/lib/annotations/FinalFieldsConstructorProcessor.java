@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
@@ -57,11 +58,8 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     }
     
     public Iterable<? extends MutableFieldDeclaration> getFinalFields(final MutableTypeDeclaration it) {
-      final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
-        @Override
-        public Boolean apply(final MutableFieldDeclaration it) {
-          return Boolean.valueOf(((((!it.isStatic()) && (it.isFinal() == true)) && (it.getInitializer() == null)) && Util.this.context.isThePrimaryGeneratedJavaElement(it)));
-        }
+      final Function1<MutableFieldDeclaration, Boolean> _function = (MutableFieldDeclaration it_1) -> {
+        return Boolean.valueOf(((((!it_1.isStatic()) && (it_1.isFinal() == true)) && (it_1.getInitializer() == null)) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
       };
       return IterableExtensions.filter(it.getDeclaredFields(), _function);
     }
@@ -74,18 +72,12 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       boolean _xblockexpression = false;
       {
         final ArrayList<TypeReference> expectedTypes = this.getFinalFieldsConstructorArgumentTypes(cls);
-        final Function1<MutableConstructorDeclaration, Boolean> _function = new Function1<MutableConstructorDeclaration, Boolean>() {
-          @Override
-          public Boolean apply(final MutableConstructorDeclaration it) {
-            final Function1<MutableParameterDeclaration, TypeReference> _function = new Function1<MutableParameterDeclaration, TypeReference>() {
-              @Override
-              public TypeReference apply(final MutableParameterDeclaration it) {
-                return it.getType();
-              }
-            };
-            List<TypeReference> _list = IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getParameters(), _function));
-            return Boolean.valueOf(Objects.equal(_list, expectedTypes));
-          }
+        final Function1<MutableConstructorDeclaration, Boolean> _function = (MutableConstructorDeclaration it) -> {
+          final Function1<MutableParameterDeclaration, TypeReference> _function_1 = (MutableParameterDeclaration it_1) -> {
+            return it_1.getType();
+          };
+          List<TypeReference> _list = IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getParameters(), _function_1));
+          return Boolean.valueOf(Objects.equal(_list, expectedTypes));
         };
         _xblockexpression = IterableExtensions.exists(cls.getDeclaredConstructors(), _function);
       }
@@ -99,20 +91,14 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
         ResolvedConstructor _superConstructor = this.getSuperConstructor(cls);
         boolean _tripleNotEquals = (_superConstructor != null);
         if (_tripleNotEquals) {
-          final Function1<ResolvedParameter, TypeReference> _function = new Function1<ResolvedParameter, TypeReference>() {
-            @Override
-            public TypeReference apply(final ResolvedParameter it) {
-              return it.getResolvedType();
-            }
+          final Function1<ResolvedParameter, TypeReference> _function = (ResolvedParameter it) -> {
+            return it.getResolvedType();
           };
           Iterable<TypeReference> _map = IterableExtensions.map(this.getSuperConstructor(cls).getResolvedParameters(), _function);
           Iterables.<TypeReference>addAll(types, _map);
         }
-        final Function1<MutableFieldDeclaration, TypeReference> _function_1 = new Function1<MutableFieldDeclaration, TypeReference>() {
-          @Override
-          public TypeReference apply(final MutableFieldDeclaration it) {
-            return it.getType();
-          }
+        final Function1<MutableFieldDeclaration, TypeReference> _function_1 = (MutableFieldDeclaration it) -> {
+          return it.getType();
         };
         Iterable<TypeReference> _map_1 = IterableExtensions.map(this.getFinalFields(cls), _function_1);
         Iterables.<TypeReference>addAll(types, _map_1);
@@ -144,12 +130,9 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
         this.context.addError(it, this.getConstructorAlreadyExistsMessage(it));
         return;
       }
-      final Procedure1<MutableConstructorDeclaration> _function = new Procedure1<MutableConstructorDeclaration>() {
-        @Override
-        public void apply(final MutableConstructorDeclaration it) {
-          Util.this.context.setPrimarySourceElement(it, Util.this.context.getPrimarySourceElement(it.getDeclaringType()));
-          Util.this.makeFinalFieldsConstructor(it);
-        }
+      final Procedure1<MutableConstructorDeclaration> _function = (MutableConstructorDeclaration it_1) -> {
+        this.context.setPrimarySourceElement(it_1, this.context.getPrimarySourceElement(it_1.getDeclaringType()));
+        this.makeFinalFieldsConstructor(it_1);
       };
       it.addConstructor(_function);
     }
@@ -190,32 +173,23 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
         _elvis = Collections.<ResolvedParameter>unmodifiableList(CollectionLiterals.<ResolvedParameter>newArrayList());
       }
       final Iterable<? extends ResolvedParameter> superParameters = _elvis;
-      final Procedure1<ResolvedParameter> _function = new Procedure1<ResolvedParameter>() {
-        @Override
-        public void apply(final ResolvedParameter p) {
-          it.addParameter(p.getDeclaration().getSimpleName(), p.getResolvedType());
-        }
+      final Consumer<ResolvedParameter> _function = (ResolvedParameter p) -> {
+        it.addParameter(p.getDeclaration().getSimpleName(), p.getResolvedType());
       };
-      IterableExtensions.forEach(superParameters, _function);
+      superParameters.forEach(_function);
       final HashMap<MutableFieldDeclaration, MutableParameterDeclaration> fieldToParameter = CollectionLiterals.<MutableFieldDeclaration, MutableParameterDeclaration>newHashMap();
-      final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
-        @Override
-        public void apply(final MutableFieldDeclaration p) {
-          p.markAsInitializedBy(it);
-          final MutableParameterDeclaration param = it.addParameter(p.getSimpleName(), Util.this.orObject(p.getType()));
-          fieldToParameter.put(p, param);
-        }
+      final Consumer<MutableFieldDeclaration> _function_1 = (MutableFieldDeclaration p) -> {
+        p.markAsInitializedBy(it);
+        final MutableParameterDeclaration param = it.addParameter(p.getSimpleName(), this.orObject(p.getType()));
+        fieldToParameter.put(p, param);
       };
-      IterableExtensions.forEach(this.getFinalFields(it.getDeclaringType()), _function_1);
+      this.getFinalFields(it.getDeclaringType()).forEach(_function_1);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("super(");
-          final Function1<ResolvedParameter, CharSequence> _function = new Function1<ResolvedParameter, CharSequence>() {
-            @Override
-            public CharSequence apply(final ResolvedParameter it) {
-              return it.getDeclaration().getSimpleName();
-            }
+          final Function1<ResolvedParameter, CharSequence> _function = (ResolvedParameter it_1) -> {
+            return it_1.getDeclaration().getSimpleName();
           };
           String _join = IterableExtensions.join(superParameters, ", ", _function);
           _builder.append(_join);
@@ -263,13 +237,10 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
   
   @Override
   public void doTransform(final List<? extends MutableTypeParameterDeclarator> elements, @Extension final TransformationContext context) {
-    final Procedure1<MutableTypeParameterDeclarator> _function = new Procedure1<MutableTypeParameterDeclarator>() {
-      @Override
-      public void apply(final MutableTypeParameterDeclarator it) {
-        FinalFieldsConstructorProcessor.this.transform(it, context);
-      }
+    final Consumer<MutableTypeParameterDeclarator> _function = (MutableTypeParameterDeclarator it) -> {
+      this.transform(it, context);
     };
-    IterableExtensions.forEach(elements, _function);
+    elements.forEach(_function);
   }
   
   protected void _transform(final MutableClassDeclaration it, @Extension final TransformationContext context) {

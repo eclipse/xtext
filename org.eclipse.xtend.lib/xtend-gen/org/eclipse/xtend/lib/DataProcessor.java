@@ -1,5 +1,6 @@
 package org.eclipse.xtend.lib;
 
+import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.AccessorsProcessor;
 import org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructorProcessor;
@@ -44,46 +45,37 @@ public class DataProcessor extends AbstractClassProcessor {
     }
     
     public Iterable<? extends FieldDeclaration> getDataFields(final ClassDeclaration it) {
-      final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
-        @Override
-        public Boolean apply(final FieldDeclaration it) {
-          return Boolean.valueOf(((!it.isStatic()) && Util.this.context.isThePrimaryGeneratedJavaElement(it)));
-        }
+      final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration it_1) -> {
+        return Boolean.valueOf(((!it_1.isStatic()) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
       };
       return IterableExtensions.filter(it.getDeclaredFields(), _function);
     }
     
     public Iterable<? extends MutableFieldDeclaration> getDataFields(final MutableClassDeclaration it) {
-      final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
-        @Override
-        public Boolean apply(final MutableFieldDeclaration it) {
-          return Boolean.valueOf(((!it.isStatic()) && Util.this.context.isThePrimaryGeneratedJavaElement(it)));
-        }
+      final Function1<MutableFieldDeclaration, Boolean> _function = (MutableFieldDeclaration it_1) -> {
+        return Boolean.valueOf(((!it_1.isStatic()) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
       };
       return IterableExtensions.filter(it.getDeclaredFields(), _function);
     }
     
     public void addDataToString(final MutableClassDeclaration cls) {
-      final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
-        @Override
-        public void apply(final MutableMethodDeclaration it) {
-          Util.this.context.setPrimarySourceElement(it, Util.this.context.getPrimarySourceElement(cls));
-          it.setReturnType(Util.this.context.getString());
-          it.addAnnotation(Util.this.context.newAnnotationReference(Override.class));
-          it.addAnnotation(Util.this.context.newAnnotationReference(Pure.class));
-          StringConcatenationClient _client = new StringConcatenationClient() {
-            @Override
-            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("String result = new ");
-              _builder.append(ToStringHelper.class);
-              _builder.append("().toString(this);");
-              _builder.newLineIfNotEmpty();
-              _builder.append("return result;");
-              _builder.newLine();
-            }
-          };
-          it.setBody(_client);
-        }
+      final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
+        this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
+        it.setReturnType(this.context.getString());
+        it.addAnnotation(this.context.newAnnotationReference(Override.class));
+        it.addAnnotation(this.context.newAnnotationReference(Pure.class));
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("String result = new ");
+            _builder.append(ToStringHelper.class);
+            _builder.append("().toString(this);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("return result;");
+            _builder.newLine();
+          }
+        };
+        it.setBody(_client);
       };
       cls.addMethod("toString", _function);
     }
@@ -101,13 +93,10 @@ public class DataProcessor extends AbstractClassProcessor {
     final ToStringProcessor.Util toStringUtil = new ToStringProcessor.Util(context);
     @Extension
     final FinalFieldsConstructorProcessor.Util requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context);
-    final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration it) {
-        it.setFinal(true);
-      }
+    final Consumer<MutableFieldDeclaration> _function = (MutableFieldDeclaration it_1) -> {
+      it_1.setFinal(true);
     };
-    IterableExtensions.forEach(util.getDataFields(it), _function);
+    util.getDataFields(it).forEach(_function);
     boolean _needsFinalFieldConstructor = requiredArgsUtil.needsFinalFieldConstructor(it);
     if (_needsFinalFieldConstructor) {
       requiredArgsUtil.addFinalFieldsConstructor(it);
@@ -127,18 +116,15 @@ public class DataProcessor extends AbstractClassProcessor {
     if (_not_2) {
       util.addDataToString(it);
     }
-    final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration it) {
-        boolean _shouldAddGetter = getterUtil.shouldAddGetter(it);
-        if (_shouldAddGetter) {
-          getterUtil.addGetter(it, Visibility.PUBLIC);
-        }
-        String _firstLower = StringExtensions.toFirstLower(it.getSimpleName());
-        String _plus = ("_" + _firstLower);
-        it.setSimpleName(_plus);
+    final Consumer<MutableFieldDeclaration> _function_1 = (MutableFieldDeclaration it_1) -> {
+      boolean _shouldAddGetter = getterUtil.shouldAddGetter(it_1);
+      if (_shouldAddGetter) {
+        getterUtil.addGetter(it_1, Visibility.PUBLIC);
       }
+      String _firstLower = StringExtensions.toFirstLower(it_1.getSimpleName());
+      String _plus = ("_" + _firstLower);
+      it_1.setSimpleName(_plus);
     };
-    IterableExtensions.forEach(util.getDataFields(it), _function_1);
+    util.getDataFields(it).forEach(_function_1);
   }
 }

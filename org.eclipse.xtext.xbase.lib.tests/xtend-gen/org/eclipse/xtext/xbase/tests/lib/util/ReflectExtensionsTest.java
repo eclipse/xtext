@@ -81,11 +81,8 @@ public class ReflectExtensionsTest {
   @Test
   public void testInvokeWithNull() {
     try {
-      final Function1<String, String> _function = new Function1<String, String>() {
-        @Override
-        public String apply(final String x) {
-          return x;
-        }
+      final Function1<String, String> _function = (String x) -> {
+        return x;
       };
       final Function1<String, String> x = _function;
       Assert.assertNull(this.ext.invoke(x, "apply", null));
