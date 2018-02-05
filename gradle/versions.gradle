@@ -6,8 +6,8 @@ version = '2.14.0-SNAPSHOT'
 
 ext.versions = [
 	'gradle_plugins': '0.1.0',
-	'xtext_gradle_plugin': '1.0.20',
-	'guava': '[14.0,19)',
+	'xtext_gradle_plugin': '1.0.21',
+	'guava': '[14.0,22)',
 	'guice': '3.0',
-	'gwt': '2.7.0'
+	'gwt': '2.8.0'
 ]
