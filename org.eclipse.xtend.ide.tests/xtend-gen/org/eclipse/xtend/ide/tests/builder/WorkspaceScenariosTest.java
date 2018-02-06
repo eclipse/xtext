@@ -57,7 +57,7 @@ public class WorkspaceScenariosTest {
   @BeforeClass
   public static void setupTargetPlatform() {
     try {
-      TargetPlatformUtil.setTargetPlatform();
+      TargetPlatformUtil.setTargetPlatform(WorkspaceScenariosTest.class);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

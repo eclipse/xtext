@@ -46,7 +46,7 @@ class WorkspaceScenariosTest {
 	
 	@BeforeClass
 	def static void setupTargetPlatform() {
-		TargetPlatformUtil.setTargetPlatform
+		TargetPlatformUtil.setTargetPlatform(WorkspaceScenariosTest)
 	}
 	
 	@Inject

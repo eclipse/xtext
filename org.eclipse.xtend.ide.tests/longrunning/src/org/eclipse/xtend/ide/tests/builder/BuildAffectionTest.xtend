@@ -49,7 +49,7 @@ class BuildAffectionTest {
 	 
 	@BeforeClass 
 	def static void setUpProject() throws Exception {
-		TargetPlatformUtil.setTargetPlatform
+		TargetPlatformUtil.setTargetPlatform(BuildAffectionTest)
 		cleanWorkspace();
 		// disable auto build
 		val workspace = ResourcesPlugin.workspace
