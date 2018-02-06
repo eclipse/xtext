@@ -57,7 +57,7 @@ public class BuildAffectionTest {
   
   @BeforeClass
   public static void setUpProject() throws Exception {
-    TargetPlatformUtil.setTargetPlatform();
+    TargetPlatformUtil.setTargetPlatform(BuildAffectionTest.class);
     IResourcesSetupUtil.cleanWorkspace();
     final IWorkspace workspace = ResourcesPlugin.getWorkspace();
     final IWorkspaceDescription description = workspace.getDescription();
