@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,10 +22,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaModelMarker;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IRegion;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.BuildContext;
 import org.eclipse.jdt.core.compiler.CompilationParticipant;
-import org.eclipse.jdt.internal.core.Region;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -33,8 +33,8 @@ import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
-import org.eclipse.xtext.smap.TraceAsSmapInstaller;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.smap.TraceAsSmapInstaller;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.generator.trace.AbstractEclipseTrace;
 import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
@@ -185,7 +185,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	}
 
 	protected List<IFile> findGeneratedJavaClassFiles(IJavaElement element) {
-		Region region = new Region();
+		IRegion region = JavaCore.newRegion();
 		region.add(element);
 		List<IFile> result = Lists.newLinkedList();
 		for (IResource res : JavaCore.getGeneratedResources(region, false))
