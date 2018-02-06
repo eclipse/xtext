@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Xtext 2.14.0 Release Notes
+title:  Xtend 2.14.0 Release Notes
 date:   TBA
 categories: releasenotes
 ---
@@ -15,9 +15,6 @@ TODO: Describe
 
 TODO: Describe
 
-## Xbase.Lib requires Java 8
-
-With Xtext 2.14 xbase.lib requires Java 8 at runtime.
 
 ## Fixed Issues
 
