@@ -23,11 +23,30 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
-/**
+/** Helper for loading images from plugins.
+ *
+ * <p>
+ * This helper enables to find the images within the current plugin and other
+ * plugins. In case the image is located within another plugin than the current
+ * one, the image's name should be qualifed with the plugin's identifier:
+ * {@code platform:/plugin/<plugin_identifier>/<image_name>.<image_filename_extension>}.
+ * The image name must not contains a dot character.
+ * For example, the following name corresponds to the image with the name
+ * {@code "mypicture.png"} within the plugin with the identifier
+ * {@code "org.myorganization.myplugin"}.
+ * <pre><code>platform:/plugin/org.myorganization.myplugin/mypicture.png</code></pre>
+ * </p>
+ *
  * @author Sebastian Zarnekow
+ * @author Stephane Galland - Add function for searching the images within plugins.
  */
 @Singleton
 public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, SynchronousBundleListener {
+
+	private static final String PLATFORM_URL_PREFIX = "platform:/plugin/";
+
+	private static final String PLATFORM_URL_SEPARATOR = "/";
+
 	private Map<ImageDescriptor, Image> registry = Maps.newHashMapWithExpectedSize(10);
 
 	@Inject
@@ -89,6 +108,10 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 
 	@Override
 	public Image getImage(String imageName) {
+		final ImageDescriptor descriptor = findImage(imageName);
+		if (descriptor != null) {
+			return descriptor.createImage();
+		}
 		String imgname = imageName == null ? defaultImage : imageName;
 		if (imgname != null) {
 			Image result = null;
@@ -117,6 +140,10 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 	 */
 	@Override
 	public ImageDescriptor getImageDescriptor(String imageName) {
+		final ImageDescriptor descriptor = findImage(imageName);
+		if (descriptor != null) {
+			return descriptor;
+		}
 		String imgname = imageName == null ? defaultImage : imageName;
 		if (imgname != null) {
 			URL imgUrl = getPlugin().getBundle().getEntry(getPathSuffix() + imgname);
@@ -182,6 +209,37 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 				&& event.getBundle().getBundleId() == getPlugin().getBundle().getBundleId()) {
 			dispose();
 		}
+	}
+
+	/** Find the descriptor of the image with the given id.
+	 *
+	 * The name given as argument should be the name of the image to be found
+	 * qualified by the identifier of the plugin in which the image is located:
+	 * {@code platform:/plugin/<plugin_identifier>/<image_name>.<image_filename_extension>}.
+	 * The image name must not contain a dot character.
+	 *
+	 * For example, the following name corresponds to the image with the name
+	 * {@code "mypicture.png"} within the plugin with the identifier
+	 * {@code "org.myorganization.myplugin"}.
+	 *
+	 * <pre><code>platform:/plugin/org.myorganization.myplugin/mypicture.png</code></pre>
+	 *
+	 * @param name the identifier of the image. It may be qualified with the plugin's id.
+	 * @return the descriptor.
+	 * @since 2.14
+	 */
+	protected ImageDescriptor findImage(String name) {
+		if (name != null && name.startsWith(PLATFORM_URL_PREFIX)) {
+			final int index = name.indexOf(PLATFORM_URL_SEPARATOR, PLATFORM_URL_PREFIX.length());
+			if (index >= 0) {
+				final String pluginId = name.substring(
+					PLATFORM_URL_PREFIX.length(), index);
+				final String imageId = name.substring(index + 1);
+				return AbstractUIPlugin.imageDescriptorFromPlugin(pluginId,
+							getPathSuffix() + imageId);
+			}
+		}
+		return null;
 	}
 
 }
