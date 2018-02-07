@@ -3,14 +3,18 @@
 <target name="org.eclipse.xtext.extras.target" sequenceNumber="0">
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
-			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.10.0/"/>
+			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.13.0"/>
 			<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
-			<repository location="http://download.eclipse.org/releases/luna/201502271000/"/>
+			<repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.1"/>
+			<unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="0.0.0"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+			<repository location="http://download.eclipse.org/releases/luna/201502271000"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+			<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20170919201930/repository"/>
 			<unit id="org.junit" version="0.0.0"/>
 		</location>
 	</locations>
