@@ -8,19 +8,23 @@ apply plugin: 'io.typefox.gradle.p2gen'
 group = 'org.eclipse.xtext'
 
 p2gen {
-	tychoVersion '1.0.0'
+	tychoVersion '1.1.0'
 	
 	exclude 'org.eclipse.xtext.xtext.bootstrap'
 
 	dependencies {
-		repositoryUrl "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.10.0/"
+		repositoryUrl 'http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.13.0'
 		feature 'org.eclipse.xtext.sdk'
 	}
 	dependencies {
-		repositoryUrl 'http://download.eclipse.org/releases/luna/201502271000/'
+		repositoryUrl 'http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.1'
+		feature 'org.eclipse.emf.mwe2.language.sdk'
 	}
 	dependencies {
-		repositoryUrl 'http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/'
+		repositoryUrl 'http://download.eclipse.org/releases/luna/201502271000'
+	}
+	dependencies {
+		repositoryUrl 'http://download.eclipse.org/tools/orbit/downloads/drops/R20170919201930/repository'
 		bundle 'org.junit'
 		includeSource true
 	}
