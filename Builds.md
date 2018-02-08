@@ -78,9 +78,9 @@ The actual build job description is written in a [Jenkinsfile](https://jenkins.i
 
 The build artifacts of each project are made available as a Maven repository, a p2 repository, or both. The build jobs of downstream projects are configured to consume the build artifacts of the projects they depend on. Gradle and Maven plug-in builds pick up their dependencies from the Maven repositories generated for their upstream projects, while Tycho builds use the p2 repositories.
 
-### Hudson
+### Jenkins
 
-The actual publishing is done on a [Hudson build server](https://hudson.eclipse.org/xtext/) by two build jobs: [xtext-snapshots](https://hudson.eclipse.org/xtext/job/xtext-snapshots/) for nightly snapshots and [xtext-release](https://hudson.eclipse.org/xtext/job/xtext-release/) for milestones and releases. Both employ the [publishing](https://github.com/TypeFox/publishing) project, which does the following:
+The actual publishing is done on a [Jenkins build server](https://ci.eclipse.org/xtext) by two build jobs: [xtext-snapshots](https://ci.eclipse.org/xtext/job/xtext-snapshots/) for nightly snapshots and [xtext-release](https://ci.eclipse.org/xtext/xtext/job/xtext-release/) for milestones and releases. Both employ the [publishing](https://github.com/TypeFox/publishing) project, which does the following:
 
 1. Download Maven artifacts with a specified version from the repositories that are made available by the various Jenkins build jobs as described above.
 2. [Sign the jar files](https://wiki.eclipse.org/JAR_Signing) with the remote service of the Eclipse Foundation.
@@ -164,7 +164,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
 9. xtext-umbrella
    * Replace all occurrences of `job/master` according to the release branch name.
    * Update the name of the zipped p2 repository  according to the release version in `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml` (`tofile` property).
-10. Once all previous builds are successful, trigger the build job https://hudson.eclipse.org/xtext/job/xtext-release/ with the release version and branch name as parameters.
+10. Once all previous builds are successful, trigger the build job https://ci.eclipse.org/xtext/job/xtext-release/ with the release version and branch name as parameters.
 11. Ask @dhuebner to publish the Eclipse and Maven artifacts.
 
 ### Lifting the Version Number
