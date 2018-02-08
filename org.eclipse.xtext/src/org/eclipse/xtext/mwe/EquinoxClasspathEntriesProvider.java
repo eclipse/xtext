@@ -7,15 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.mwe;
 
+import java.util.Collections;
+
 /**
  * @author svenefftinge - Initial contribution and API
  */
 public class EquinoxClasspathEntriesProvider implements IClasspathEntriesProvider {
-
 	@Override
 	public Iterable<String> getAllPathes(ClassLoader classloader) {
-		
-		return null;
+		return Collections.emptyList();
 	}
 	
 }
