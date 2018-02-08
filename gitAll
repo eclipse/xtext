@@ -5,7 +5,7 @@ cat <(cat locations.properties | head -n 1 | rev | sed 's/[^/]*-txetx/allerbmu-t
 do
 	directory=$(echo $line | tr -d '\r')
 	echo "Processing $directory"
-	pushd $directory && git "$@"
+	pushd $directory &> /dev/null && git "$@"
 	popd &> /dev/null
 	echo
 done 
