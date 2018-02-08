@@ -11,3 +11,4 @@ dependencies {
 }
 
 sourceSets.main.java.srcDir 'testdata'
+sourceSets.main.java.srcDir 'deprecated'
