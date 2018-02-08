@@ -9,3 +9,5 @@ dependencies {
 	optional "org.eclipse.emf:org.eclipse.emf.codegen:$versions.emfEcore"
 	optional "org.eclipse.emf:org.eclipse.emf.codegen.ecore:$versions.emfEcore"
 }
+
+sourceSets.main.java.srcDir 'deprecated'
