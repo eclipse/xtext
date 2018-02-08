@@ -12,5 +12,3 @@ jar {
 		include 'about_org.eclipse.xtext.xbase.lib.html'
 	}
 }
-
-sourceSets.main.java.srcDir 'deprecated'
