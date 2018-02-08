@@ -97,6 +97,7 @@ public class ShowHierarchyTest extends AbstractEditorTest {
 		return editor;
 	}
 	
+	@SuppressWarnings("cast")
 	private TestingTypeHierarchyHandler invokeTestingHandler(XtextEditor xtextEditor, String commandID) throws Exception {
 		IHandlerService handlerService = (IHandlerService) xtextEditor.getSite().getService(IHandlerService.class);
 		final ICommandService commandService = (ICommandService) xtextEditor.getSite()
