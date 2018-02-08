@@ -9,5 +9,6 @@
 			<attribute name="ignore_optional_problems" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="deprecated"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
