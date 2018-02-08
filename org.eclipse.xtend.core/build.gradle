@@ -27,6 +27,7 @@ sourceSets {
 
 // Include the mwe2 and xtext files from the main source set when executing the workflow
 sourceSets.mwe2.runtimeClasspath += processResources.outputs.files
+sourceSets.main.java.srcDir 'deprecated'
 
 task generateXtend(type: XtextGeneratorTask) {
 	workflow = file('src/org/eclipse/xtend/core/GenerateXtend.mwe2')
