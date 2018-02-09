@@ -149,7 +149,7 @@ class AnnotationProcessor {
 		}
 		
 		def stop() {
-			pool.shutdownNow()
+			pool.shutdown()
 		}
 	
 		def monitorUntil(ActiveAnnotationContext ctx, CancelIndicator cancelIndicator, ()=>boolean isFinished) {

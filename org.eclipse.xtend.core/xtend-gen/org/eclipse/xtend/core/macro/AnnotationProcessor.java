@@ -62,8 +62,8 @@ public class AnnotationProcessor {
       return Executors.newCachedThreadPool();
     }
     
-    public List<Runnable> stop() {
-      return this.pool.shutdownNow();
+    public void stop() {
+      this.pool.shutdown();
     }
     
     public Future<?> monitorUntil(final ActiveAnnotationContext ctx, final CancelIndicator cancelIndicator, final Function0<? extends Boolean> isFinished) {
