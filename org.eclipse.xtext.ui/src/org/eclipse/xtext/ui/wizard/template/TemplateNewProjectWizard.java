@@ -21,6 +21,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ui.util.FileOpener;
 import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
@@ -29,18 +30,20 @@ import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import com.google.inject.Inject;
 
 /**
+ * A wizard to create new projects based on project templates contributed by the "projectTemplate" extension point.
+ * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-public abstract class TemplateNewProjectWizard extends Wizard implements INewWizard {
+public class TemplateNewProjectWizard extends Wizard implements INewWizard {
 
 	private static final Logger logger = Logger.getLogger(TemplateNewProjectWizard.class);
 
 	protected IStructuredSelection selection;
 
-	private WizardNewProjectCreationPage mainPage;
-	private NewProjectWizardTemplateSelectionPage templatePage;
-	private NewProjectWizardTemplateParameterPage templateParameterPage;
+	protected WizardNewProjectCreationPage mainPage;
+	protected NewProjectWizardTemplateSelectionPage templatePage;
+	protected NewProjectWizardTemplateParameterPage templateParameterPage;
 
 	@Inject
 	private ProjectTemplateLabelProvider labelProvider;
@@ -48,12 +51,14 @@ public abstract class TemplateNewProjectWizard extends Wizard implements INewWiz
 	private FileOpener fileOpener;
 	@Inject
 	private IProjectCreator projectCreator;
+	@Inject
+	private IGrammarAccess grammarAccess;
 
 	private IWorkbench workbench;
 
 	public TemplateNewProjectWizard() {
 		setNeedsProgressMonitor(true);
-		setWindowTitle("New Template Project");
+		setWindowTitle(Messages.TemplateNewProjectWizard_title);
 	}
 
 	/**
@@ -62,13 +67,15 @@ public abstract class TemplateNewProjectWizard extends Wizard implements INewWiz
 	 */
 	@Override
 	public void addPages() {
-		mainPage = createMainPage("basicNewProjectPage");
-		mainPage.setTitle(getGrammarName() + " Project");
-		mainPage.setDescription("Create a new " + getGrammarName() + " project.");
+		mainPage = createMainPage("basicNewProjectPage"); //$NON-NLS-1$
+		mainPage.setTitle(getGrammarName() + Messages.TemplateNewProjectWizard_title_suffix);
+		mainPage.setDescription(Messages.TemplateNewProjectWizard_create_new_prefix + getGrammarName()
+				+ Messages.TemplateNewProjectWizard_create_new_suffix);
 		addPage(mainPage);
-		templatePage = createTemplatePage("templateNewProjectPage");
-		templatePage.setTitle(getGrammarName() + " Project");
-		templatePage.setDescription("Create a new " + getGrammarName() + " project.");
+		templatePage = createTemplatePage("templateNewProjectPage"); //$NON-NLS-1$
+		templatePage.setTitle(getGrammarName() + Messages.TemplateNewProjectWizard_title_suffix);
+		templatePage.setDescription(Messages.TemplateNewProjectWizard_create_new_prefix + getGrammarName()
+				+ Messages.TemplateNewProjectWizard_create_new_suffix);
 		addPage(templatePage);
 	}
 
@@ -80,15 +87,21 @@ public abstract class TemplateNewProjectWizard extends Wizard implements INewWiz
 		return new NewProjectWizardTemplateSelectionPage(pageName, getGrammarName(), labelProvider);
 	}
 
-	protected abstract String getGrammarName();
+	protected String getGrammarName() {
+		return grammarAccess.getGrammar().getName();
+	}
 
 	protected IExtendedProjectInfo getProjectInfo() {
-		TemplateProjectInfo projectInfo = new TemplateProjectInfo(templatePage == null ? null : templatePage.getSelectedTemplate());
+		TemplateProjectInfo projectInfo = createProjectInfo();
 		projectInfo.setProjectName(mainPage.getProjectName());
 		if (!mainPage.useDefaults()) {
 			projectInfo.setLocationPath(mainPage.getLocationPath());
 		}
 		return projectInfo;
+	}
+
+	protected TemplateProjectInfo createProjectInfo() {
+		return new TemplateProjectInfo(templatePage == null ? null : templatePage.getSelectedTemplate());
 	}
 
 	@Override
@@ -113,7 +126,7 @@ public abstract class TemplateNewProjectWizard extends Wizard implements INewWiz
 		} catch (InvocationTargetException e) {
 			logger.error(e.getMessage(), e);
 			Throwable realException = e.getTargetException();
-			MessageDialog.openError(getShell(), "Error", realException.getMessage());
+			MessageDialog.openError(getShell(), "Error", realException.getMessage()); //$NON-NLS-1$
 			return false;
 		}
 		return true;
@@ -160,8 +173,9 @@ public abstract class TemplateNewProjectWizard extends Wizard implements INewWiz
 					getProjectInfo());
 			parameterPage.setWizard(this);
 			templateParameterPage = parameterPage;
-			parameterPage.setTitle(getGrammarName() + " Project");
-			parameterPage.setDescription("Create a new " + getGrammarName() + " project.");
+			parameterPage.setTitle(getGrammarName() + Messages.TemplateNewProjectWizard_title_suffix);
+			parameterPage.setDescription(Messages.TemplateNewProjectWizard_create_new_prefix + getGrammarName()
+					+ Messages.TemplateNewProjectWizard_create_new_suffix);
 			return parameterPage;
 		}
 		return super.getNextPage(page);

@@ -40,10 +40,10 @@ import org.eclipse.ui.forms.widgets.FormText;
  */
 public class NewProjectWizardTemplateSelectionPage extends WizardPage {
 
-	private static final String PROJECT_TEMPLATE_PROVIDER_EXTENSION_POINT_ID = "org.eclipse.xtext.ui.projectTemplate";
-	private static final String PROJECT_TEMPLATE_PROVIDER_ID = "projectTemplateProvider";
-	private static final String PROJECT_TEMPLATE_PROVIDER_GRAMMAR_NAME_ATTRIBUTE = "grammarName";
-	private static final String PROJECT_TEMPLATE_PROVIDER_GRAMMAR_CLASS_ATTRIBUTE = "class";
+	private static final String PROJECT_TEMPLATE_PROVIDER_EXTENSION_POINT_ID = "org.eclipse.xtext.ui.projectTemplate"; //$NON-NLS-1$
+	private static final String PROJECT_TEMPLATE_PROVIDER_ID = "projectTemplateProvider"; //$NON-NLS-1$
+	private static final String PROJECT_TEMPLATE_PROVIDER_GRAMMAR_NAME_ATTRIBUTE = "grammarName"; //$NON-NLS-1$
+	private static final String PROJECT_TEMPLATE_PROVIDER_GRAMMAR_CLASS_ATTRIBUTE = "class"; //$NON-NLS-1$
 
 	private static final Logger logger = Logger.getLogger(NewProjectWizardTemplateSelectionPage.class);
 
@@ -64,7 +64,7 @@ public class NewProjectWizardTemplateSelectionPage extends WizardPage {
 		main.setLayout(new GridLayout(1, false));
 
 		Label availableTemplatesLabel = new Label(main, SWT.NONE);
-		availableTemplatesLabel.setText("Available Templates:");
+		availableTemplatesLabel.setText(Messages.NewProjectWizardTemplateSelectionPage_available_templates);
 		availableTemplatesLabel.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, true, false));
 
 		SashForm sash = new SashForm(main, SWT.HORIZONTAL);
@@ -78,7 +78,7 @@ public class NewProjectWizardTemplateSelectionPage extends WizardPage {
 		templateTable.setInput(loadTemplatesFromExtensionPoint());
 
 		FormText text = new FormText(sash, SWT.BORDER);
-		text.setText("", false, false);
+		text.setText("", false, false); //$NON-NLS-1$
 		text.setBackground(templateTable.getTable().getBackground());
 
 		templateTable.addSelectionChangedListener(new ISelectionChangedListener() {
@@ -91,7 +91,7 @@ public class NewProjectWizardTemplateSelectionPage extends WizardPage {
 					if (element instanceof AbstractProjectTemplate) {
 						selectedTemplate = (AbstractProjectTemplate) element;
 						setPageComplete(true);
-						String content = "<form>" + selectedTemplate.getDescription() + "</form>";
+						String content = "<form>" + selectedTemplate.getDescription() + "</form>"; //$NON-NLS-1$ //$NON-NLS-2$
 						try {
 							text.setText(content, true, true);
 						} catch (Exception e) {
@@ -99,12 +99,12 @@ public class NewProjectWizardTemplateSelectionPage extends WizardPage {
 						}
 					} else {
 						selectedTemplate = null;
-						text.setText("", false, false);
+						text.setText("", false, false); //$NON-NLS-1$
 						setPageComplete(false);
 					}
 				} else {
 					selectedTemplate = null;
-					text.setText("", false, false);
+					text.setText("", false, false); //$NON-NLS-1$
 					setPageComplete(false);
 				}
 			}
@@ -126,7 +126,7 @@ public class NewProjectWizardTemplateSelectionPage extends WizardPage {
 							.createExecutableExtension(PROJECT_TEMPLATE_PROVIDER_GRAMMAR_CLASS_ATTRIBUTE);
 					result.addAll(Arrays.asList(provider.getProjectTemplates()));
 				} catch (CoreException e) {
-					logger.error("Can not instantiate '" + element.getAttribute(PROJECT_TEMPLATE_PROVIDER_GRAMMAR_CLASS_ATTRIBUTE) + "'",
+					logger.error("Can not instantiate '" + element.getAttribute(PROJECT_TEMPLATE_PROVIDER_GRAMMAR_CLASS_ATTRIBUTE) + "'", //$NON-NLS-1$ //$NON-NLS-2$
 							e);
 				}
 			}

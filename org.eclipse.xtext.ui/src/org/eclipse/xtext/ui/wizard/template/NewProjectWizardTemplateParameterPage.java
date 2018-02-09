@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.wizard.template;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.dialogs.IMessageProvider;
+import org.eclipse.jface.fieldassist.ControlDecoration;
+import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -31,7 +33,7 @@ public class NewProjectWizardTemplateParameterPage extends WizardPage implements
 	private boolean inUserAction = true;
 
 	public NewProjectWizardTemplateParameterPage(AbstractProjectTemplate projectTemplate, IExtendedProjectInfo projectInfo) {
-		super("NewProjectWizardTemplateParameterPage");
+		super("NewProjectWizardTemplateParameterPage"); //$NON-NLS-1$
 		this.projectTemplate = projectTemplate;
 		this.projectTemplate.setProjectInfo(projectInfo);
 	}
@@ -48,11 +50,24 @@ public class NewProjectWizardTemplateParameterPage extends WizardPage implements
 		main.setLayout(new GridLayout(2, false));
 		setControl(main);
 		for (ProjectVariable variable : projectTemplate.getVariables()) {
-			Label label = new Label(main, SWT.NONE);
-			label.setText(variable.getLabel());
-			label.setToolTipText(variable.getDescription());
-			label.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
-			variable.createWidget(this);
+			Composite varParent = variable.getContainer() == null ? main : variable.getContainer().getWidget();
+			if (variable.isLabeled()) {
+				Label label = new Label(varParent, SWT.NONE);
+				label.setText(variable.getLabel());
+				label.setToolTipText(variable.getDescription());
+				label.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
+				variable.createWidget(this, varParent);
+				variable.getWidget().setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+			} else {
+				variable.createWidget(this, varParent);
+				variable.getWidget().setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+			}
+			if (variable.getDescription() != null) {
+				ControlDecoration decorator = new ControlDecoration(variable.getWidget(), SWT.RIGHT | SWT.TOP);
+				decorator.setDescriptionText(variable.getDescription());
+				decorator.setImage(
+						FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION).getImage());
+			}
 		}
 		update();
 	}

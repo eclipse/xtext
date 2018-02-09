@@ -7,8 +7,11 @@
  */
 package org.eclipse.xtext.ui.wizard.template;
 
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.ui.wizard.template.ContainerProjectVariable;
 import org.eclipse.xtext.ui.wizard.template.IParameterPage;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -30,22 +33,32 @@ public abstract class ProjectVariable {
   @Accessors
   private boolean enabled;
   
-  ProjectVariable(final String label, final String description) {
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private ContainerProjectVariable container;
+  
+  ProjectVariable(final String label, final String description, final ContainerProjectVariable container) {
     this.label = label;
     this.description = description;
     this.enabled = true;
+    this.container = container;
   }
   
   /**
    * Subclasses should override and create a widget representing the variable in UI. A reference to the widget should
    * be maintained.
    */
-  public abstract void createWidget(final IParameterPage parameterPage);
+  public abstract void createWidget(final IParameterPage parameterPage, final Composite parent);
   
   /**
    * Subclasses should override to refresh the UI widget with data set to the variable in the meantime.
    */
   public abstract void refresh();
+  
+  public abstract Control getWidget();
+  
+  public boolean isLabeled() {
+    return true;
+  }
   
   @Pure
   public String getLabel() {
@@ -64,5 +77,10 @@ public abstract class ProjectVariable {
   
   public void setEnabled(final boolean enabled) {
     this.enabled = enabled;
+  }
+  
+  @Pure
+  public ContainerProjectVariable getContainer() {
+    return this.container;
   }
 }

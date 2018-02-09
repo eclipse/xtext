@@ -10,10 +10,11 @@ package org.eclipse.xtext.ui.wizard.template;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.ui.wizard.template.ContainerProjectVariable;
 import org.eclipse.xtext.ui.wizard.template.IParameterPage;
 import org.eclipse.xtext.ui.wizard.template.ProjectVariable;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -25,18 +26,15 @@ public class StringProjectVariable extends ProjectVariable {
   
   private Text text;
   
-  public StringProjectVariable(final String label, final String defaultValue, final String description) {
-    super(label, description);
+  public StringProjectVariable(final String label, final String defaultValue, final String description, final ContainerProjectVariable container) {
+    super(label, description, container);
     this.value = defaultValue;
   }
   
   @Override
-  public void createWidget(final IParameterPage parameterPage) {
-    Composite _control = parameterPage.getControl();
-    Text _text = new Text(_control, (SWT.SINGLE | SWT.BORDER));
+  public void createWidget(final IParameterPage parameterPage, final Composite parent) {
+    Text _text = new Text(parent, (SWT.SINGLE | SWT.BORDER));
     this.text = _text;
-    GridData _gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
-    this.text.setLayoutData(_gridData);
     this.text.setText(this.getValue());
     this.text.setToolTipText(this.getDescription());
     final ModifyListener _function = (ModifyEvent it) -> {
@@ -59,6 +57,11 @@ public class StringProjectVariable extends ProjectVariable {
     if (_not) {
       this.text.setText(this.getValue());
     }
+  }
+  
+  @Override
+  public Control getWidget() {
+    return this.text;
   }
   
   @Override

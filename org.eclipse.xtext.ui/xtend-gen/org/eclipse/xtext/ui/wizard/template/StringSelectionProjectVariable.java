@@ -10,11 +10,12 @@ package org.eclipse.xtext.ui.wizard.template;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.ui.wizard.template.ContainerProjectVariable;
 import org.eclipse.xtext.ui.wizard.template.IParameterPage;
 import org.eclipse.xtext.ui.wizard.template.ProjectVariable;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -29,8 +30,8 @@ public class StringSelectionProjectVariable extends ProjectVariable {
   
   private Combo combo;
   
-  public StringSelectionProjectVariable(final String label, final String[] possibleValues, final String description) {
-    super(label, description);
+  public StringSelectionProjectVariable(final String label, final String[] possibleValues, final String description, final ContainerProjectVariable container) {
+    super(label, description, container);
     this.possibleValues = possibleValues;
     this.value = possibleValues[0];
   }
@@ -40,12 +41,9 @@ public class StringSelectionProjectVariable extends ProjectVariable {
   }
   
   @Override
-  public void createWidget(final IParameterPage parameterPage) {
-    Composite _control = parameterPage.getControl();
-    Combo _combo = new Combo(_control, SWT.READ_ONLY);
+  public void createWidget(final IParameterPage parameterPage, final Composite parent) {
+    Combo _combo = new Combo(parent, SWT.READ_ONLY);
     this.combo = _combo;
-    GridData _gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
-    this.combo.setLayoutData(_gridData);
     this.combo.setItems(this.getPossibleValues());
     this.combo.setText(this.getValue());
     this.combo.setToolTipText(this.getDescription());
@@ -71,6 +69,11 @@ public class StringSelectionProjectVariable extends ProjectVariable {
     if (_not) {
       this.combo.setText(this.getValue());
     }
+  }
+  
+  @Override
+  public Control getWidget() {
+    return this.combo;
   }
   
   @Override

@@ -5,10 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.wizard.template;
+package org.eclipse.xtext.ui.util;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 
 /**
  * Simple {@link IProjectFactoryContributor} that gets a file name and text contents and creates a new text file based on this content.

@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.wizard.template
 
+import java.util.HashMap
+import java.util.List
+import java.util.Map
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.CodeGenerationContext
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.file.Path
 
 /**
  * Generate some code to simplify implementation of project templates.
@@ -31,6 +35,19 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
  */
 class ProjectTemplateProcessor extends AbstractClassProcessor {
 
+	Map<Path, String> propertyContentMap // need to make sure to read the files only once
+	String actualPropertyContents // content from currently active "messages.properties" file
+
+	override doGenerateCode(List<? extends ClassDeclaration> annotatedSourceElements,
+		extension CodeGenerationContext context) {
+		buildFileMaps(annotatedSourceElements, context)
+		for (ClassDeclaration annotatedClass : annotatedSourceElements) {
+			actualPropertyContents = propertyContentMap.get(annotatedClass.messagesProperties)
+			doGenerateCode(annotatedClass, context);
+		}
+		saveFileMaps(annotatedSourceElements, context)
+	}
+
 	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
 		annotatedClass.extendedClass = AbstractProjectTemplate.newTypeReference // extend AbstractProjectTemplate
 	}
@@ -45,30 +62,23 @@ class ProjectTemplateProcessor extends AbstractClassProcessor {
 		val annotation = annotatedClass.findAnnotation(context.findTypeGlobally(ProjectTemplate))
 		val label = replaceNewlines(annotation.getStringValue("label"))
 		val description = replaceNewlines(annotation.getStringValue("description"))
-		val propertyFile = annotatedClass.compilationUnit.filePath.parent.append("messages.properties")
-		var propertyContents = ""
-		if (propertyFile.exists) {
-			propertyContents = propertyFile.contents.toString
-		}
-		if (propertyContents.length > 0 && !propertyContents.endsWith(System.lineSeparator)) {
-			propertyContents += System.lineSeparator
-		}
 		val labelLineStart = annotatedClass.simpleName + "_Label="
 		val labelLine = labelLineStart + label
-		if (propertyContents.contains(labelLineStart)) {
-			propertyContents = propertyContents.replaceFirst("^(?m)" + labelLineStart + ".*$", labelLine)
+		if (actualPropertyContents.contains(labelLineStart)) {
+			actualPropertyContents = actualPropertyContents.replaceFirst("(?m)^" + labelLineStart + ".*$", labelLine)
 		} else {
-			propertyContents += labelLine + System.lineSeparator
+			actualPropertyContents += labelLine + System.lineSeparator
 		}
 		val descriptionLineStart = annotatedClass.simpleName + "_Description="
 		val descriptionLine = descriptionLineStart + description
-		if (propertyContents.contains(descriptionLineStart)) {
-			propertyContents = propertyContents.replaceFirst("^(?m)" + descriptionLineStart + ".*$", descriptionLine)
+		if (actualPropertyContents.contains(descriptionLineStart)) {
+			actualPropertyContents = actualPropertyContents.replaceFirst("(?m)^" + descriptionLineStart + ".*$",
+				descriptionLine)
 		} else {
-			propertyContents += descriptionLine + System.lineSeparator
+			actualPropertyContents += descriptionLine + System.lineSeparator
 		}
-		propertyFile.contents = propertyContents
-		return propertyContents
+		propertyContentMap.put(annotatedClass.messagesProperties, actualPropertyContents)
+		return actualPropertyContents
 	}
 
 	// generate a "Messages.java" out of the given content from "messages.properties"
@@ -106,5 +116,36 @@ class ProjectTemplateProcessor extends AbstractClassProcessor {
 	}
 
 	private def String replaceNewlines(String input) { input.replaceAll("(\r?\n)+", " ") }
+
+	protected def void buildFileMaps(List<? extends ClassDeclaration> annotatedSourceElements,
+		extension CodeGenerationContext context) {
+		propertyContentMap = new HashMap
+		for (ClassDeclaration annotatedClass : annotatedSourceElements) {
+			val propertyFile = annotatedClass.messagesProperties
+			if (!propertyContentMap.containsKey(propertyFile)) {
+				if (propertyFile.exists) {
+					var propertyContents = propertyFile.contents.toString
+					if (propertyContents.length > 0 && !propertyContents.endsWith(System.lineSeparator)) {
+						propertyContents += System.lineSeparator
+					}
+					propertyContentMap.put(propertyFile, propertyContents)
+				} else {
+					propertyContentMap.put(propertyFile, "")
+				}
+			}
+		}
+	}
+
+	protected def void saveFileMaps(List<? extends ClassDeclaration> annotatedSourceElements,
+		extension CodeGenerationContext context) {
+		for (ClassDeclaration annotatedClass : annotatedSourceElements) {
+			actualPropertyContents = propertyContentMap.get(annotatedClass.messagesProperties)
+			annotatedClass.messagesProperties.contents = actualPropertyContents
+		}
+	}
+
+	private def Path getMessagesProperties(ClassDeclaration annotatedClass) {
+		annotatedClass.compilationUnit.filePath.parent.append("messages.properties")
+	}
 
 }

@@ -7,6 +7,9 @@
  */
 package org.eclipse.xtext.ui.wizard.template;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.CodeGenerationContext;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -37,6 +40,22 @@ import org.eclipse.xtext.xbase.lib.Extension;
  */
 @SuppressWarnings("all")
 public class ProjectTemplateProcessor extends AbstractClassProcessor {
+  private Map<Path, String> propertyContentMap;
+  
+  private String actualPropertyContents;
+  
+  @Override
+  public void doGenerateCode(final List<? extends ClassDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
+    this.buildFileMaps(annotatedSourceElements, context);
+    for (final ClassDeclaration annotatedClass : annotatedSourceElements) {
+      {
+        this.actualPropertyContents = this.propertyContentMap.get(this.getMessagesProperties(annotatedClass));
+        this.doGenerateCode(annotatedClass, context);
+      }
+    }
+    this.saveFileMaps(annotatedSourceElements, context);
+  }
+  
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     annotatedClass.setExtendedClass(context.newTypeReference(AbstractProjectTemplate.class));
@@ -52,43 +71,32 @@ public class ProjectTemplateProcessor extends AbstractClassProcessor {
     final AnnotationReference annotation = annotatedClass.findAnnotation(context.findTypeGlobally(ProjectTemplate.class));
     final String label = this.replaceNewlines(annotation.getStringValue("label"));
     final String description = this.replaceNewlines(annotation.getStringValue("description"));
-    final Path propertyFile = annotatedClass.getCompilationUnit().getFilePath().getParent().append("messages.properties");
-    String propertyContents = "";
-    boolean _exists = context.exists(propertyFile);
-    if (_exists) {
-      propertyContents = context.getContents(propertyFile).toString();
-    }
-    if (((propertyContents.length() > 0) && (!propertyContents.endsWith(System.lineSeparator())))) {
-      String _propertyContents = propertyContents;
-      String _lineSeparator = System.lineSeparator();
-      propertyContents = (_propertyContents + _lineSeparator);
-    }
     String _simpleName = annotatedClass.getSimpleName();
     final String labelLineStart = (_simpleName + "_Label=");
     final String labelLine = (labelLineStart + label);
-    boolean _contains = propertyContents.contains(labelLineStart);
+    boolean _contains = this.actualPropertyContents.contains(labelLineStart);
     if (_contains) {
-      propertyContents = propertyContents.replaceFirst((("^(?m)" + labelLineStart) + ".*$"), labelLine);
+      this.actualPropertyContents = this.actualPropertyContents.replaceFirst((("(?m)^" + labelLineStart) + ".*$"), labelLine);
     } else {
-      String _propertyContents_1 = propertyContents;
-      String _lineSeparator_1 = System.lineSeparator();
-      String _plus = (labelLine + _lineSeparator_1);
-      propertyContents = (_propertyContents_1 + _plus);
+      String _actualPropertyContents = this.actualPropertyContents;
+      String _lineSeparator = System.lineSeparator();
+      String _plus = (labelLine + _lineSeparator);
+      this.actualPropertyContents = (_actualPropertyContents + _plus);
     }
     String _simpleName_1 = annotatedClass.getSimpleName();
     final String descriptionLineStart = (_simpleName_1 + "_Description=");
     final String descriptionLine = (descriptionLineStart + description);
-    boolean _contains_1 = propertyContents.contains(descriptionLineStart);
+    boolean _contains_1 = this.actualPropertyContents.contains(descriptionLineStart);
     if (_contains_1) {
-      propertyContents = propertyContents.replaceFirst((("^(?m)" + descriptionLineStart) + ".*$"), descriptionLine);
+      this.actualPropertyContents = this.actualPropertyContents.replaceFirst((("(?m)^" + descriptionLineStart) + ".*$"), descriptionLine);
     } else {
-      String _propertyContents_2 = propertyContents;
-      String _lineSeparator_2 = System.lineSeparator();
-      String _plus_1 = (descriptionLine + _lineSeparator_2);
-      propertyContents = (_propertyContents_2 + _plus_1);
+      String _actualPropertyContents_1 = this.actualPropertyContents;
+      String _lineSeparator_1 = System.lineSeparator();
+      String _plus_1 = (descriptionLine + _lineSeparator_1);
+      this.actualPropertyContents = (_actualPropertyContents_1 + _plus_1);
     }
-    context.setContents(propertyFile, propertyContents);
-    return propertyContents;
+    this.propertyContentMap.put(this.getMessagesProperties(annotatedClass), this.actualPropertyContents);
+    return this.actualPropertyContents;
   }
   
   private void generateMessagesClass(final String propertyContents, final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
@@ -161,5 +169,45 @@ public class ProjectTemplateProcessor extends AbstractClassProcessor {
   
   private String replaceNewlines(final String input) {
     return input.replaceAll("(\r?\n)+", " ");
+  }
+  
+  protected void buildFileMaps(final List<? extends ClassDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
+    HashMap<Path, String> _hashMap = new HashMap<Path, String>();
+    this.propertyContentMap = _hashMap;
+    for (final ClassDeclaration annotatedClass : annotatedSourceElements) {
+      {
+        final Path propertyFile = this.getMessagesProperties(annotatedClass);
+        boolean _containsKey = this.propertyContentMap.containsKey(propertyFile);
+        boolean _not = (!_containsKey);
+        if (_not) {
+          boolean _exists = context.exists(propertyFile);
+          if (_exists) {
+            String propertyContents = context.getContents(propertyFile).toString();
+            if (((propertyContents.length() > 0) && (!propertyContents.endsWith(System.lineSeparator())))) {
+              String _propertyContents = propertyContents;
+              String _lineSeparator = System.lineSeparator();
+              propertyContents = (_propertyContents + _lineSeparator);
+            }
+            this.propertyContentMap.put(propertyFile, propertyContents);
+          } else {
+            this.propertyContentMap.put(propertyFile, "");
+          }
+        }
+      }
+    }
+  }
+  
+  protected void saveFileMaps(final List<? extends ClassDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
+    for (final ClassDeclaration annotatedClass : annotatedSourceElements) {
+      {
+        this.actualPropertyContents = this.propertyContentMap.get(this.getMessagesProperties(annotatedClass));
+        Path _messagesProperties = this.getMessagesProperties(annotatedClass);
+        context.setContents(_messagesProperties, this.actualPropertyContents);
+      }
+    }
+  }
+  
+  private Path getMessagesProperties(final ClassDeclaration annotatedClass) {
+    return annotatedClass.getCompilationUnit().getFilePath().getParent().append("messages.properties");
   }
 }

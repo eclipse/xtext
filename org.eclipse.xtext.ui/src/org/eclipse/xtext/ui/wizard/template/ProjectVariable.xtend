@@ -10,11 +10,14 @@ package org.eclipse.xtext.ui.wizard.template;
 import org.eclipse.swt.SWT
 import org.eclipse.swt.events.SelectionAdapter
 import org.eclipse.swt.events.SelectionEvent
-import org.eclipse.swt.layout.GridData
 import org.eclipse.swt.widgets.Button
 import org.eclipse.swt.widgets.Combo
+import org.eclipse.swt.widgets.Composite
+import org.eclipse.swt.widgets.Control
+import org.eclipse.swt.widgets.Group
 import org.eclipse.swt.widgets.Text
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.swt.layout.GridLayout
 
 /**
  * Part of a project template the variable defines the UI for the user to configure the generated files.
@@ -28,23 +31,39 @@ public abstract class ProjectVariable {
 	@Accessors(PUBLIC_GETTER) private final String label
 	@Accessors(PUBLIC_GETTER) private final String description
 	@Accessors private var boolean enabled
+	@Accessors(PUBLIC_GETTER) private ContainerProjectVariable container
 
-	package new(String label, String description) {
+	package new(String label, String description, ContainerProjectVariable container) {
 		this.label = label
 		this.description = description
 		this.enabled = true
+		this.container = container
 	}
-	
+
 	/**
 	 * Subclasses should override and create a widget representing the variable in UI. A reference to the widget should
 	 * be maintained.
 	 */
-	def void createWidget(IParameterPage parameterPage);
+	def void createWidget(IParameterPage parameterPage, Composite parent);
 
 	/**
 	 * Subclasses should override to refresh the UI widget with data set to the variable in the meantime.
 	 */
 	def void refresh();
+
+	def Control getWidget()
+	
+	def boolean isLabeled() { true }
+
+}
+
+public abstract class ContainerProjectVariable extends ProjectVariable {
+
+	new(String label, String description, ContainerProjectVariable container) {
+		super(label, description, container)
+	}
+	
+	override Composite getWidget();
 
 }
 
@@ -53,16 +72,16 @@ public class BooleanProjectVariable extends ProjectVariable {
 	@Accessors(PUBLIC_SETTER) boolean value
 	Button checkbox
 
-	new(String label, boolean defaultValue, String description) {
-		super(label, description)
+	new(String label, boolean defaultValue, String description, ContainerProjectVariable container) {
+		super(label, description, container)
 		value = defaultValue
 	}
 
 	def getValue() { value }
 
-	override void createWidget(IParameterPage parameterPage) {
-		checkbox = new Button(parameterPage.control, SWT.CHECK)
-		checkbox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false))
+	override void createWidget(IParameterPage parameterPage, Composite parent) {
+		checkbox = new Button(parent, SWT.CHECK)
+		checkbox.setText(label)
 		checkbox.setSelection(getValue())
 		checkbox.setToolTipText(description)
 		checkbox.addSelectionListener(new SelectionAdapter() {
@@ -79,6 +98,10 @@ public class BooleanProjectVariable extends ProjectVariable {
 		if (checkbox.getSelection() != getValue())
 			checkbox.setSelection(getValue())
 	}
+	
+	override isLabeled() { false }
+	
+	override getWidget() { checkbox }
 
 	override String toString() { value.toString }
 
@@ -89,14 +112,13 @@ public class StringProjectVariable extends ProjectVariable {
 	@Accessors String value
 	Text text
 
-	new(String label, String defaultValue, String description) {
-		super(label, description)
+	new(String label, String defaultValue, String description, ContainerProjectVariable container) {
+		super(label, description, container)
 		value = defaultValue
 	}
-	
-	override createWidget(IParameterPage parameterPage) {
-		text = new Text(parameterPage.control, SWT.SINGLE.bitwiseOr(SWT.BORDER))
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false))
+
+	override createWidget(IParameterPage parameterPage, Composite parent) {
+		text = new Text(parent, SWT.SINGLE.bitwiseOr(SWT.BORDER))
 		text.setText(getValue())
 		text.setToolTipText(description)
 		text.addModifyListener([
@@ -112,6 +134,8 @@ public class StringProjectVariable extends ProjectVariable {
 			text.setText(getValue())
 	}
 
+	override getWidget() { text }
+
 	override String toString() { value }
 
 }
@@ -122,17 +146,16 @@ public class StringSelectionProjectVariable extends ProjectVariable {
 	@Accessors String value
 	Combo combo
 
-	new(String label, String[] possibleValues, String description) {
-		super(label, description)
+	new(String label, String[] possibleValues, String description, ContainerProjectVariable container) {
+		super(label, description, container)
 		this.possibleValues = possibleValues
 		this.value = possibleValues.get(0)
 	}
 
 	def String[] getPossibleValues() { possibleValues }
 
-	override createWidget(IParameterPage parameterPage) {
-		combo = new Combo(parameterPage.control, SWT.READ_ONLY)
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false))
+	override createWidget(IParameterPage parameterPage, Composite parent) {
+		combo = new Combo(parent, SWT.READ_ONLY)
 		combo.setItems(getPossibleValues())
 		combo.setText(getValue())
 		combo.setToolTipText(description)
@@ -150,7 +173,36 @@ public class StringSelectionProjectVariable extends ProjectVariable {
 		if (!combo.getText().equals(getValue()))
 			combo.setText(getValue())
 	}
+	
+	override getWidget() { combo }
 
 	override String toString() { value }
+
+}
+
+public class GroupProjectVariable extends ContainerProjectVariable {
+
+	Group group
+
+	new(String label, String description, ContainerProjectVariable container) {
+		super(label, description, container)
+	}
+
+	def String[] getPossibleValues() { possibleValues }
+
+	override createWidget(IParameterPage parameterPage, Composite parent) {
+		group = new Group(parent, SWT.READ_ONLY)
+		group.setLayout(new GridLayout(2, false))
+		group.setText(label)
+		group.setToolTipText(description)
+	}
+
+	override refresh() {}
+	
+	override getWidget() { group }
+	
+	override isLabeled() { false }
+
+	override String toString() { label }
 
 }
